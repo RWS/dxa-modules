@@ -2,6 +2,7 @@ package com.sdl.webapp.smarttarget;
 
 import com.sdl.webapp.common.api.model.MvcData;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,7 +19,8 @@ public class SmartTargetRegionMvcData implements MvcData {
     private String actionName = "Region";
     private String areaName = "Core";
     private String viewName;
-    private Map<String,String> metadata = new HashMap<>();
+    private Map<String,String> metadata = Collections.emptyMap();
+    private Map<String,String> routeValues = Collections.emptyMap();
 
     public SmartTargetRegionMvcData(String regionName) {
         this.viewName = regionName;
@@ -61,7 +63,7 @@ public class SmartTargetRegionMvcData implements MvcData {
 
     @Override
     public Map<String, String> getRouteValues() {
-        return null;
+        return this.routeValues;
     }
 
     @Override
