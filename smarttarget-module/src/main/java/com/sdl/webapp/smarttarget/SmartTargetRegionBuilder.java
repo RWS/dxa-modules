@@ -86,21 +86,22 @@ public class SmartTargetRegionBuilder implements RegionBuilder {
 
     private void populateSmartTargetRegions(Page page, Map<String,Region> regions, Localization localization) throws ContentProviderException {
 
-        String[] smartTargetRegionNames = this.getSmartTargetRegionNames(page);
+        List<SmartTargetRegionConfig> smartTargetRegionConfigList = this.getSmartTargetRegionConfiguration(page);
+        if ( smartTargetRegionConfigList == null ) return;
 
-        for (String smartTargetRegionName : smartTargetRegionNames) {
+
+        for (SmartTargetRegionConfig regionConfig : smartTargetRegionConfigList) {
             SmartTargetRegion stRegion = new SmartTargetRegion();
-            stRegion.setName(smartTargetRegionName);
-            stRegion.setMvcData(new SmartTargetRegionMvcData(smartTargetRegionName));
-            regions.put(smartTargetRegionName, stRegion);
-            XpmRegion xpmRegion = xpmRegionConfig.getXpmRegion(smartTargetRegionName, localization);
+            stRegion.setName(regionConfig.getRegionName());
+            stRegion.setMvcData(new SmartTargetRegionMvcData(regionConfig.getRegionName()));
+            regions.put(regionConfig.getRegionName(), stRegion);
+            XpmRegion xpmRegion = xpmRegionConfig.getXpmRegion(regionConfig.getRegionName(), localization);
             try {
 
                 List<SmartTargetComponentPresentation> stComponentPresentations =
                     this.smartTargetService.query(page.getId(),
-                                                  smartTargetRegionName,
-                                                  this.getComponentTemplates(xpmRegion),
-                                                  1); // TODO: Specify max items!! Where is that configured in TRI???
+                                                  regionConfig,
+                                                  this.getComponentTemplates(xpmRegion));
 
                 if ( stComponentPresentations.size() > 0 ) {
                     stRegion.setContainsSmartTargetContent(true);
@@ -114,17 +115,21 @@ public class SmartTargetRegionBuilder implements RegionBuilder {
 
             }
             catch ( SmartTargetException e  ) {
-                LOG.error("Could not populate SmartTarget region '" + smartTargetRegionName + "'", e);
+                LOG.error("Could not populate SmartTarget region '" + regionConfig.getRegionName() + "'", e);
             }
         }
 
     }
 
-    private String[] getSmartTargetRegionNames(Page page) {
-        String smartTargetRegionNamesConfig = page.getMvcData().getMetadata().get("smartTargetRegionNames");
-        if ( smartTargetRegionNamesConfig == null ) return new String[0];
-        LOG.debug("SmartTarget region names: " + smartTargetRegionNamesConfig);
-        return smartTargetRegionNamesConfig.split(",[w]*");
+    private List<SmartTargetRegionConfig> getSmartTargetRegionConfiguration(Page page) {
+        List<Map<String,String>> smartTargetRegionConfig = (List<Map<String,String>>) page.getMvcData().getMetadata().get("smartTargetRegions");
+        if ( smartTargetRegionConfig == null ) return null;
+
+        List<SmartTargetRegionConfig> configList = new ArrayList<>();
+        for ( Map<String,String> regionConfig : smartTargetRegionConfig ) {
+            configList.add(new SmartTargetRegionConfig(regionConfig));
+        }
+        return configList;
     }
 
     private List<String> getComponentTemplates(XpmRegion xpmRegion) {

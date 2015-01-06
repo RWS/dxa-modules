@@ -41,20 +41,21 @@ public class SmartTargetService {
 
     static private Log log = LogFactory.getLog(SmartTargetService.class);
 
+
+    // TODO: Will this work really for default scope??
     @Autowired
     private HttpServletRequest httpRequest;
 
-    // TODO: How to handle configuration to the different services???
 
     private AnalyticsManager analyticsManager = null;
 
-    private int queryTimeout = 10000; // TODO: Have this configurable
-
-    static final int DEFAULT_MAX_ITEMS = 3;
+    private int queryTimeout = 10000; // TODO: Read from smarttarget_conf.xml
 
     private boolean experimentAutomaticSelectionEnabled = false;
 
     static DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+
+    private boolean defaultAllowDublicatesValue;
 
     public SmartTargetService() {
     }
@@ -63,25 +64,30 @@ public class SmartTargetService {
     public void initialize() {
         // TODO: Read from config
         this.experimentAutomaticSelectionEnabled =true;
+
+        // TODO: Read expermient automatic selection from config??
+        //ConfigurationUtility.getConfiguration("/Configuration/SmartTarget/");
+
+        this.defaultAllowDublicatesValue = ConfigurationUtility.getDefaultAllowDuplicates().booleanValue();
+
+
+
     }
 
     public List<SmartTargetComponentPresentation> query(String pageId,
-                                             String regionName,
-                                             List<String> componentTemplates,
-                                             int maxItems) throws SmartTargetException {
+                                                        SmartTargetRegionConfig regionConfig,
+                                                        List<String> componentTemplates) throws SmartTargetException {
 
         List<SmartTargetComponentPresentation> componentPresentations;
 
         // TODO: Add support for pagewide promotions so they are not duplicated
-
-        if ( maxItems == -1 ) maxItems = DEFAULT_MAX_ITEMS;
 
         String publicationId = this.getPublicationId(componentTemplates);
         // TODO: Is the creation of query instance costly?
         TimeoutQueryRunner queryRunner = new TimeoutQueryRunner(Integer.toString(this.queryTimeout));
         String queryString = this.buildQueryString(publicationId);
         log.info("Query:" + queryString);
-        String triggers = this.getTriggers(pageId, regionName, publicationId);
+        String triggers = this.getTriggers(pageId, regionConfig.getRegionName(), publicationId);
         log.info("Triggers: " + triggers);
 
         ResultSet rs = queryRunner.executeQuery(queryString, null, triggers, publicationId);
@@ -89,9 +95,9 @@ public class SmartTargetService {
         if ( rs != null ) {
             componentPresentations = this.processPromotions(rs.getPromotions(),
                                                             componentTemplates,
-                                                            maxItems,
+                                                            regionConfig.getMaxItems(),
                                                             publicationId,
-                                                            regionName);
+                                                            regionConfig.getRegionName());
         }
         else {
             componentPresentations = new ArrayList<>();
@@ -100,6 +106,7 @@ public class SmartTargetService {
         return componentPresentations;
     }
 
+    // TODO: How to handle this one to process tracking links???
     public String postProcessExperimentComponentPresentation(String renderedComponentPresentation,
                                                              ExperimentDimensions experimentDimensions)
             throws SmartTargetException {
@@ -166,10 +173,10 @@ public class SmartTargetService {
     }
 
     private List<SmartTargetComponentPresentation> processPromotions(List<Promotion> promotions,
-                                                          List<String> componentTemplates,
-                                                          int maxItems,
-                                                          String publicationId,
-                                                          String regionName) throws SmartTargetException {
+                                                                     List<String> componentTemplates,
+                                                                     int maxItems,
+                                                                     String publicationId,
+                                                                     String regionName) throws SmartTargetException {
 
         List<SmartTargetComponentPresentation> componentPresentations = new ArrayList<>();
         Map<String, ExperimentCookie> existingExperimentCookies = CookieProcessor.getExperimentCookies(this.httpRequest);

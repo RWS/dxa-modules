@@ -19,7 +19,7 @@ public class SmartTargetRegionMvcData implements MvcData {
     private String actionName = "Region";
     private String areaName = "Core";
     private String viewName;
-    private Map<String,String> metadata = Collections.emptyMap();
+    private Map<String,Object> metadata = Collections.emptyMap();
     private Map<String,String> routeValues = Collections.emptyMap();
 
     public SmartTargetRegionMvcData(String regionName) {
@@ -67,7 +67,7 @@ public class SmartTargetRegionMvcData implements MvcData {
     }
 
     @Override
-    public Map<String, String> getMetadata() {
+    public Map<String, Object> getMetadata() {
         return metadata;
     }
 }
