@@ -1,5 +1,7 @@
 package com.sdl.webapp.smarttarget;
 
+import com.sdl.webapp.common.api.WebRequestContext;
+import com.sdl.webapp.common.api.model.entity.smarttarget.PromoBanner;
 import com.tridion.ambientdata.AmbientDataContext;
 import com.tridion.ambientdata.claimstore.ClaimStore;
 import com.tridion.smarttarget.SmartTargetException;
@@ -46,6 +48,9 @@ public class SmartTargetService {
     @Autowired
     private HttpServletRequest httpRequest;
 
+    @Autowired
+    private WebRequestContext webRequestContext;
+
 
     private AnalyticsManager analyticsManager = null;
 
@@ -55,7 +60,7 @@ public class SmartTargetService {
 
     static DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
 
-    private boolean defaultAllowDublicatesValue;
+    private boolean defaultAllowDuplicatesValue;
 
     public SmartTargetService() {
     }
@@ -68,15 +73,13 @@ public class SmartTargetService {
         // TODO: Read expermient automatic selection from config??
         //ConfigurationUtility.getConfiguration("/Configuration/SmartTarget/");
 
-        this.defaultAllowDublicatesValue = ConfigurationUtility.getDefaultAllowDuplicates().booleanValue();
-
-
+        this.defaultAllowDuplicatesValue = ConfigurationUtility.getDefaultAllowDuplicates().booleanValue();
 
     }
 
-    public List<SmartTargetComponentPresentation> query(String pageId,
-                                                        SmartTargetRegionConfig regionConfig,
-                                                        List<String> componentTemplates) throws SmartTargetException {
+    public SmartTargetQueryResult query(String pageId,
+                                        SmartTargetRegionConfig regionConfig,
+                                        List<String> componentTemplates) throws SmartTargetException {
 
         List<SmartTargetComponentPresentation> componentPresentations;
 
@@ -86,10 +89,11 @@ public class SmartTargetService {
         // TODO: Is the creation of query instance costly?
         TimeoutQueryRunner queryRunner = new TimeoutQueryRunner(Integer.toString(this.queryTimeout));
         String queryString = this.buildQueryString(publicationId);
-        log.info("Query:" + queryString);
+        log.debug("Query:" + queryString);
         String triggers = this.getTriggers(pageId, regionConfig.getRegionName(), publicationId);
-        log.info("Triggers: " + triggers);
+        log.debug("Triggers: " + triggers);
 
+        SmartTargetQueryResult queryResult = new SmartTargetQueryResult();
         ResultSet rs = queryRunner.executeQuery(queryString, null, triggers, publicationId);
 
         if ( rs != null ) {
@@ -98,15 +102,23 @@ public class SmartTargetService {
                                                             regionConfig.getMaxItems(),
                                                             publicationId,
                                                             regionConfig.getRegionName());
+
+            if ( this.webRequestContext.isPreview() ) {
+                filterPromotionList(rs.getPromotions(), componentPresentations);
+                String xpmMarkup = ResultSetImpl.getExperienceManagerMarkup(regionConfig.getRegionName(), regionConfig.getMaxItems(), rs.getPromotions());
+                queryResult.setXpmMarkup(xpmMarkup);
+                log.debug("XPM Markup: " + xpmMarkup);
+            }
         }
         else {
             componentPresentations = new ArrayList<>();
         }
+        queryResult.setComponentPresentations(componentPresentations);
 
-        return componentPresentations;
+        return queryResult;
     }
 
-    // TODO: How to handle this one to process tracking links???
+    // TODO: Refactor so it can be used in a markup decorator
     public String postProcessExperimentComponentPresentation(String renderedComponentPresentation,
                                                              ExperimentDimensions experimentDimensions)
             throws SmartTargetException {
@@ -172,6 +184,36 @@ public class SmartTargetService {
         return this.analyticsManager;
     }
 
+    private void filterPromotionList(List<Promotion> promotions, List<SmartTargetComponentPresentation> promotionCPs) throws SmartTargetException {
+        for ( Promotion promotion : promotions ) {
+            ArrayList<Item> excludedPromoItems = new ArrayList<>();
+            for ( Item promoItem : promotion.getItems() ) {
+                if ( isPromotionItemIncluded(promoItem.getComponentUriAsString(), promoItem.getTemplateUriAsString(), promotionCPs) ) {
+                    promoItem.setVisible(true);
+                }
+                else {
+                    excludedPromoItems.add(promoItem);
+                }
+            }
+            for ( Item excludedItem : excludedPromoItems ) {
+                promotion.getItems().remove(excludedItem);
+            }
+            if ( promotion.getItems().size() > 0 ) {
+                promotion.setVisible(true);
+            }
+        }
+    }
+
+    private boolean isPromotionItemIncluded(String componentTcmUri, String templateTcmUri, List<SmartTargetComponentPresentation> promotionCPs) {
+
+        for ( SmartTargetComponentPresentation promotionCP : promotionCPs ) {
+            if ( promotionCP.getComponentUri().equals(componentTcmUri) && promotionCP.getTemplateUri().equals(templateTcmUri) ) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private List<SmartTargetComponentPresentation> processPromotions(List<Promotion> promotions,
                                                                      List<String> componentTemplates,
                                                                      int maxItems,
@@ -212,7 +254,6 @@ public class SmartTargetService {
                 experimentDimensions.setPublicationTargetId(experiment.getPublicationTargetId());
                 experimentDimensions.setChosenVariant(variant);
 
-
                 int currentIndex = 0;
                 for (Item item : promotion.getItems() ) {
                     if ( currentIndex++ == variant && componentTemplates.contains(item.getTemplateUriAsString()) ) {
@@ -224,16 +265,25 @@ public class SmartTargetService {
                         this.getAnalyticsManager().trackView(experimentDimensions,
                                 AnalyticsMetaData.fromRequest(this.httpRequest,
                                         this.httpRequest.getSession()));
-                        SmartTargetComponentPresentation cp = new SmartTargetComponentPresentation(item.getComponentUriAsString(), item.getTemplateUriAsString(),promotion.getPromotionId());
+                        SmartTargetComponentPresentation cp =
+                                new SmartTargetComponentPresentation(item.getComponentUriAsString(),
+                                                                     item.getTemplateUriAsString(),
+                                                                     promotion.getPromotionId(),
+                                                                     regionName);
                         cp.setExperiment(true);
                         cp.setExperimentDimensions(experimentDimensions);
                         if ( newExperimentCookie != null ) {
                             cp.setAdditionalMarkup(this.getExperimentCookieMarkup(newExperimentCookie));
                         }
                         componentPresentations.add(cp);
+
                     }
                     else if ( componentTemplates.contains(item.getTemplateUriAsString()) ) {
-                        SmartTargetComponentPresentation cp = new SmartTargetComponentPresentation(item.getComponentUriAsString(), item.getTemplateUriAsString(),promotion.getPromotionId());
+                        SmartTargetComponentPresentation cp =
+                                new SmartTargetComponentPresentation(item.getComponentUriAsString(),
+                                                                     item.getTemplateUriAsString(),
+                                                                     promotion.getPromotionId(),
+                                                                     regionName);
                         cp.setExperiment(true);
                         cp.setVisible(false);
                         cp.setExperimentDimensions(experimentDimensions);
@@ -245,7 +295,11 @@ public class SmartTargetService {
 
                 for (Item item : promotion.getItems()) {
                     if ( componentTemplates.contains(item.getTemplateUriAsString()) ) {
-                        SmartTargetComponentPresentation cp = new SmartTargetComponentPresentation(item.getComponentUriAsString(), item.getTemplateUriAsString(),promotion.getPromotionId());
+                        SmartTargetComponentPresentation cp =
+                                new SmartTargetComponentPresentation(item.getComponentUriAsString(),
+                                                                     item.getTemplateUriAsString(),
+                                                                     promotion.getPromotionId(),
+                                                                     regionName);
                         componentPresentations.add(cp);
                     }
                 }
