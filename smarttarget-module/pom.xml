@@ -110,6 +110,12 @@
             <artifactId>javax.servlet-api</artifactId>
         </dependency>
 
+        <!-- JSTL -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+        </dependency>
+
         <!-- Commons Logging -->
         <dependency>
             <groupId>commons-logging</groupId>
