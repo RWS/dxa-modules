@@ -9,6 +9,7 @@ import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.api.model.Entity;
 import com.sdl.webapp.common.api.model.Page;
 import com.sdl.webapp.common.api.model.Region;
+import com.sdl.webapp.common.api.model.entity.AbstractEntity;
 import com.sdl.webapp.common.api.model.region.RegionImpl;
 import com.sdl.webapp.tridion.xpm.ComponentType;
 import com.sdl.webapp.tridion.xpm.XpmRegion;
@@ -69,11 +70,11 @@ public class SmartTargetRegionBuilder implements RegionBuilder {
 
                 if ( region instanceof SmartTargetRegion ) {
                     SmartTargetRegion stRegion = (SmartTargetRegion) region;
-                    if ( stRegion.containsSmartTargetContent() == false )
-                    // If no data populated from SmartTarget -> Add fallback content to the region
-                    //
-                    region.addEntity(entity);
-
+                    if ( stRegion.containsSmartTargetContent() == false ) {
+                        // If no data populated from SmartTarget -> Add fallback content to the region
+                        //
+                        region.addEntity(entity);
+                    }
                 }
                 else {
                     region.addEntity(entity);
@@ -98,18 +99,21 @@ public class SmartTargetRegionBuilder implements RegionBuilder {
             XpmRegion xpmRegion = xpmRegionConfig.getXpmRegion(regionConfig.getRegionName(), localization);
             try {
 
-                List<SmartTargetComponentPresentation> stComponentPresentations =
+                SmartTargetQueryResult queryResult =
                     this.smartTargetService.query(page.getId(),
                                                   regionConfig,
                                                   this.getComponentTemplates(xpmRegion));
 
-                if ( stComponentPresentations.size() > 0 ) {
+                stRegion.setXpmMarkup(queryResult.getXpmMarkup());
+                if ( queryResult.getComponentPresentations().size() > 0 ) {
                     stRegion.setContainsSmartTargetContent(true);
                 }
-                for ( SmartTargetComponentPresentation stComponentPresentation : stComponentPresentations ) {
+                for ( SmartTargetComponentPresentation stComponentPresentation : queryResult.getComponentPresentations() ) {
                     Entity entity = contentProvider.getEntityModel(stComponentPresentation.getComponentUri(),
                                                                    stComponentPresentation.getTemplateUri(),
                                                                    localization);
+
+                    this.enrichEntityWithSmartTargetData(entity, stComponentPresentation);
                     stRegion.addEntity(entity);
                 }
 
@@ -119,6 +123,16 @@ public class SmartTargetRegionBuilder implements RegionBuilder {
             }
         }
 
+    }
+
+    private void enrichEntityWithSmartTargetData(Entity entity, SmartTargetComponentPresentation stComponentPresentation) {
+        if ( entity instanceof AbstractEntity ) {
+            HashMap<String, String> entityData = new HashMap<>();
+            entityData.putAll(entity.getEntityData());
+            entityData.put("PromotionID", stComponentPresentation.getPromotionId());
+            entityData.put("RegionID", stComponentPresentation.getRegionName());
+            ((AbstractEntity) entity).setEntityData(entityData);
+        }
     }
 
     private List<SmartTargetRegionConfig> getSmartTargetRegionConfiguration(Page page) {
