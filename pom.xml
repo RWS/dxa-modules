@@ -134,7 +134,7 @@
             <dependency>
                 <groupId>com.tridion</groupId>
                 <artifactId>cd_core</artifactId>
-                <version>${tridion-cd-version}-NOLICENSE</version>
+                <version>${tridion-cd-version}</version>
             </dependency>
             <dependency>
                 <groupId>com.tridion</groupId>
