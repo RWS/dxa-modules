@@ -17,11 +17,13 @@
         <c:set var="imageAspect" value="3.3"/>
     </c:otherwise>
 </c:choose>
+
 <div ${markup.entity(entity)}>
-    <xpm:entity entity="${entity}"/>
     <div class="row">
         <a href="${entity.link.url}" title="${entity.link.alternateText}" ${markup.property(entity, "link")}>
+            <%--
             <xpm:property entity="${entity}" property="link"/>
+            --%>
             <div class="col-sm-12">
                 <div class="hero">
                     <c:choose>
