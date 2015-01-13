@@ -8,14 +8,16 @@ import com.sdl.webapp.common.markup.MarkupDecorator;
 import com.sdl.webapp.common.markup.html.HtmlCommentNode;
 import com.sdl.webapp.common.markup.html.HtmlNode;
 import com.sdl.webapp.common.markup.html.HtmlTextNode;
+import com.sdl.webapp.common.markup.html.ParsableHtmlNode;
 import com.sdl.webapp.common.markup.html.builders.HtmlBuilders;
+import com.sdl.webapp.smarttarget.SmartTargetComponentPresentation;
 import com.sdl.webapp.smarttarget.SmartTargetRegion;
 import com.sdl.webapp.smarttarget.SmartTargetService;
 
 import java.util.Map;
 
 /**
- * SmartTargetPromotionXpmMarkup
+ * SmartTarget Promotion XPM Markup
  *
  * @author nic
  */
@@ -33,20 +35,29 @@ public class SmartTargetPromotionXpmMarkup implements MarkupDecorator {
     @Override
     public HtmlNode process(HtmlNode markup, ViewModel model, WebRequestContext webRequestContext) {
 
-        if ( model instanceof Entity) {
-            Entity entity = (Entity) model;
+        // TODO: Are we having several items per promotion at anytime? Now is the assumption that one ST promo = one content presentation
 
-            if ( entity.getEntityData().get("PromotionID") != null ) {
-
-                markup = HtmlBuilders.span()
-                        .withContent(this.buildXpmMarkup(entity))
-                        .withContent(markup).build();
+        if ( webRequestContext.isPreview() ) {
+            if (model instanceof Entity) {
+                Entity entity = (Entity) model;
+                final Map<String, String> entityData = entity.getEntityData();
+                final String promotionId = entityData.get("PromotionID");
+                if ( promotionId != null) {
+                    final String regionId = entityData.get("RegionID");
+                    final boolean isExperiment = Boolean.parseBoolean(entity.getEntityData().get("IsExperiment"));
+                    if ( isExperiment ) {
+                        SmartTargetComponentPresentation stComponentPresentation = this.smartTargetService.getSavedPromotion(promotionId);
+                        String processedHtml = this.smartTargetService.postProcessExperimentComponentPresentation(stComponentPresentation, markup.toHtml());
+                        if ( processedHtml != null ) {
+                            markup = new ParsableHtmlNode(processedHtml);
+                        }
+                    }
+                    markup = HtmlBuilders.span()
+                            .withContent(this.buildXpmMarkup(promotionId, regionId))
+                            .withContent(markup).build();
+                }
             }
         }
-
-        // TODO: Generate analytics tracking keys
-        // TODO: Here we need to get the whole process the whole body of the component presentation - how to do that???
-
         return markup;
     }
 
@@ -55,14 +66,7 @@ public class SmartTargetPromotionXpmMarkup implements MarkupDecorator {
         return 2;
     }
 
-    private HtmlNode buildXpmMarkup(Entity entity) {
-        final Map<String, String> entityData = entity.getEntityData();
-
-        final String promotionId = entityData.get("PromotionID");
-        if (Strings.isNullOrEmpty(promotionId)) {
-            return null;
-        }
-        final String regionId = entityData.get("RegionID");
+    private HtmlNode buildXpmMarkup(String promotionId, String regionId) {
         return new HtmlCommentNode(String.format(PROMOTION_PATTERN, promotionId, regionId));
     }
 }

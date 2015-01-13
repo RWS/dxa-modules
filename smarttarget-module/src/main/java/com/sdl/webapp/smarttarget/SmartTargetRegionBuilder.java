@@ -131,6 +131,7 @@ public class SmartTargetRegionBuilder implements RegionBuilder {
             entityData.putAll(entity.getEntityData());
             entityData.put("PromotionID", stComponentPresentation.getPromotionId());
             entityData.put("RegionID", stComponentPresentation.getRegionName());
+            entityData.put("IsExperiment", Boolean.toString(stComponentPresentation.isExperiment()));
             ((AbstractEntity) entity).setEntityData(entityData);
         }
     }
