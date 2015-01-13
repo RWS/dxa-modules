@@ -20,19 +20,21 @@ public class SmartTargetRegionXpmMarkup implements MarkupDecorator {
     @Override
     public HtmlNode process(HtmlNode markup, ViewModel model, WebRequestContext webRequestContext) {
 
-        if ( model instanceof SmartTargetRegion )  {
-            SmartTargetRegion stRegion = (SmartTargetRegion) model;
+        if ( webRequestContext.isPreview() ) {
+            if (model instanceof SmartTargetRegion) {
+                SmartTargetRegion stRegion = (SmartTargetRegion) model;
 
-            markup  =
-                    HtmlBuilders.span()
-                            .withLiteralContent(stRegion.getXpmMarkup())
-                            .withContent(markup).build();
+                markup =
+                        HtmlBuilders.span()
+                                .withLiteralContent(stRegion.getXpmMarkup())
+                                .withContent(markup).build();
 
-            /* NEEDED???
-            markup = HtmlBuilders.span()
-                    .withLiteralContent("<!-- Start Promotion Region: {\"RegionID\": \"" + stRegion.getName() + "\"} -->")
-                    .withContent(markup).build();
-                    */
+                /* NEEDED???
+                markup = HtmlBuilders.span()
+                        .withLiteralContent("<!-- Start Promotion Region: {\"RegionID\": \"" + stRegion.getName() + "\"} -->")
+                        .withContent(markup).build();
+                        */
+            }
         }
         return markup;
     }
