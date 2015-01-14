@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>smarttarget-local-analytics-provider</artifactId>
+
+    <parent>
+        <artifactId>tri-modules</artifactId>
+        <groupId>com.sdl</groupId>
+        <version>1.0-SNAPSHOT</version>
+	<relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <properties>
+        <!-- Tridion Reference Implementation (TRI) -->
+        <tri-version>1.0-SNAPSHOT</tri-version>
+
+        <!-- Tridion Content Delivery (CD) -->
+        <tridion-cd-version>7.1.0</tridion-cd-version>
+        <!-- SDL Smart Target -->
+        <smarttarget-version>2.1.0</smarttarget-version>
+   </properties>
+
+    <dependencies>
+
+        <!-- SmartTarget -->
+        <dependency>
+            <groupId>com.tridion</groupId>
+            <artifactId>smarttarget_core</artifactId>
+            <version>${smarttarget-version}</version>
+        </dependency>
+
+        <!-- Commons Logging -->
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.1.3</version>
+        </dependency>
+
+    </dependencies>
+</project>
