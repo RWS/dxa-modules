@@ -101,7 +101,8 @@ public class SmartTargetService {
                                                             componentTemplates,
                                                             regionConfig.getMaxItems(),
                                                             publicationId,
-                                                            regionConfig.getRegionName());
+                                                            regionConfig.getRegionName(),
+                                                            pageId);
 
             if ( this.webRequestContext.isPreview() ) {
                 updateVisibilityState(rs.getPromotions(), componentPresentations);
@@ -243,7 +244,8 @@ public class SmartTargetService {
                                                                      List<String> componentTemplates,
                                                                      int maxItems,
                                                                      String publicationId,
-                                                                     String regionName) throws SmartTargetException {
+                                                                     String regionName,
+                                                                     String pageId) throws SmartTargetException {
 
         List<SmartTargetComponentPresentation> componentPresentations = new ArrayList<>();
         Map<String, ExperimentCookie> existingExperimentCookies = CookieProcessor.getExperimentCookies(this.httpRequest);
@@ -287,7 +289,7 @@ public class SmartTargetService {
                         experimentDimensions.setComponentId(item.getComponentUriAsString());
                         experimentDimensions.setComponentTemplateId(item.getTemplateUriAsString());
                         experimentDimensions.setPublicationId(publicationId);
-                        experimentDimensions.setPageId((String) httpRequest.getAttribute("pageId"));
+                        experimentDimensions.setPageId(pageId);
                         experimentDimensions.setRegion(regionName);
                         this.getAnalyticsManager().trackView(experimentDimensions,
                                 AnalyticsMetaData.fromRequest(this.httpRequest,
