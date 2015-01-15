@@ -7,7 +7,8 @@ call mvn -q install:install-file -DgroupId=com.tridion -DartifactId=smarttarget_
 call mvn -q install:install-file -DgroupId=com.tridion -DartifactId=smarttarget_entitymodel -Dversion=2.1.0 -Dpackaging=jar -Dfile=smarttarget_entitymodel-2.1.0.jar
 call mvn -q install:install-file -DgroupId=com.tridion -DartifactId=smarttarget_cartridge -Dversion=2.1.0 -Dpackaging=jar -Dfile=smarttarget_cartridge-2.1.0.jar
 call mvn -q install:install-file -DgroupId=com.tridion -DartifactId=smarttarget_odata_cartridge -Dversion=2.1.0 -Dpackaging=jar -Dfile=smarttarget_odata_cartridge_2.1.0.jar
-call mvn -q install:install-file -DgroupId=com.tridion -DartifactId=smarttarget_api_webservice -Dversion=2.1.0 -Dpackaging=jar -Dfile=smarttarget_api_webservice-2.1.0.jar
-call mvn -q install:install-file -DgroupId=com.tridion -DartifactId=session_cartridge -Dversion=2.1.0 -Dpackaging=jar -Dfile=session_cartridge-2.1.0.jar
+call mvn -q install:install-file -DgroupId=com.tridion -DartifactId=smarttarget_api_webservice -Dversion=2.1.0 -Dpackaging=jar -Dfile=smarttarget_api_webservice_2.1.0.jar
+call mvn -q install:install-file -DgroupId=com.tridion -DartifactId=session_cartridge -Dversion=2.1.0 -Dpackaging=jar -Dfile=session_cartridge_2.1.0.jar
 
 echo Finished
+pause
