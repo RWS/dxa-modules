@@ -11,6 +11,7 @@
 
     <modules>
         <module>smarttarget-module</module>
+        <module>smarttarget-local-analytics-provider</module>
     </modules>
 
     <properties>
