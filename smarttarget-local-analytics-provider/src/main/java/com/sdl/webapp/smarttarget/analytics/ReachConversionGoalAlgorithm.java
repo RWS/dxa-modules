@@ -14,6 +14,8 @@ public class ReachConversionGoalAlgorithm implements ExperimentWinnerAlgorithm {
     private int goal;
 
     public ReachConversionGoalAlgorithm(AnalyticsConfiguration configuration) {
+
+        // TODO: Use reach a certain % level instead????
         this.goal = Integer.parseInt(configuration.getAnalyticsProperty("ConversionGoal", "1000"));
     }
 

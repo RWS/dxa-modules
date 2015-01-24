@@ -24,39 +24,29 @@ import java.util.*;
  */
 public class LocalAnalyticsManager extends AnalyticsManager {
 
-    // TODO: Aggregate the data here so it will not take that much space, basically just a view/conversion counter
-    // TODO: Make a async DB writer (using HSQL)
-
     static private Log log = LogFactory.getLog(LocalAnalyticsManager.class);
 
-    private static ArrayList<TrackedExperiment> views = new ArrayList<>();
-    private static ArrayList<TrackedExperiment> conversions = new ArrayList<>();
-    private Class<?> experimentWinnerAlgorithm;
-
-
-    static class TrackedExperiment {
-        Date date;
-        ExperimentDimensions experimentDimensions;
-
-        TrackedExperiment(ExperimentDimensions experimentDimensions) {
-            this.experimentDimensions = experimentDimensions;
-            this.date = new Date();
-        }
-    }
-
-    enum ExperimentType {
-        VIEW,
-        CONVERSION
-    }
+    // Static members to minimize the creation of new worker threads+repositories for each time
+    //
+    private static Class<?> experimentWinnerAlgorithm;
+    private static AnalyticsResultWorker resultWorker;
+    private static AnalyticsResultRepository resultRepository;
 
     public LocalAnalyticsManager() throws SmartTargetException {
-        String algorithmClassName = this.getConfiguration().getAnalyticsProperty("ExperimentWinnerAlgorithmClassName");
 
-        try {
-            this.experimentWinnerAlgorithm = Class.forName(algorithmClassName);
-        }
-        catch ( ClassNotFoundException e ) {
-            throw new SmartTargetException("Could not load experiment winner algorithm with class name: " + algorithmClassName, e);
+        synchronized ( LocalAnalyticsManager.class ) {
+            if (experimentWinnerAlgorithm == null) {
+                String algorithmClassName = this.getConfiguration().getAnalyticsProperty("ExperimentWinnerAlgorithmClassName");
+
+                try {
+                    experimentWinnerAlgorithm = Class.forName(algorithmClassName);
+                } catch (ClassNotFoundException e) {
+                    throw new SmartTargetException("Could not load experiment winner algorithm with class name: " + algorithmClassName, e);
+                }
+
+                resultRepository = new AnalyticsResultRepository(this.getConfiguration());
+                resultWorker = new AnalyticsResultWorker(this, resultRepository, this.getConfiguration());
+            }
         }
     }
 
@@ -73,25 +63,15 @@ public class LocalAnalyticsManager extends AnalyticsManager {
     @Override
     public void trackView(ExperimentDimensions experimentDimensions, Map<String, String> metadata) {
 
-        // TODO: Store per experiment ID here???
-        System.out.println("Track view: " + experimentDimensions);
-
-        /*
-        if ( views.size() == 0 ) {
-            // Create a dummy null reference
-            //                                                                              ‘
-
-
-        }
-        */
-
-        views.add(new TrackedExperiment(experimentDimensions));
+        log.debug("Track view: " + experimentDimensions);
+        // TODO: Stop tracking after a winner has been selected????
+        this.resultWorker.submitTracking(new TrackedExperiment(experimentDimensions, ExperimentType.VIEW));
     }
 
     @Override
     public void trackConversion(ExperimentDimensions experimentDimensions, Map<String, String> metadata) {
-        System.out.println("Track conversion: " + experimentDimensions);
-        conversions.add(new TrackedExperiment(experimentDimensions));
+        log.debug("Track conversion: " + experimentDimensions);
+        this.resultWorker.submitTracking(new TrackedExperiment(experimentDimensions, ExperimentType.CONVERSION));
     }
 
     @Override
@@ -106,53 +86,65 @@ public class LocalAnalyticsManager extends AnalyticsManager {
 
         log.debug("Getting analytics results...");
         log.debug("Statistics Filters: " + statisticsFilters);
-        log.debug("Dimensions: " + experimentDimensions);
-        log.debug("Time Dimensions: " + timeDimensions);
 
+        // TODO: Check winner here instead???
+
+        List<AggregatedTracking> trackings = this.resultRepository.getTrackingResults(statisticsFilters);
 
         SimpleAnalyticsResults results = new SimpleAnalyticsResults();
 
-
-
-        for ( TrackedExperiment trackedExperiment : views ) {
-            this.addAnalyticsResultsRow(results, trackedExperiment, experimentDimensions, timeDimensions, ExperimentType.VIEW);
-        }
-        for ( TrackedExperiment trackedExperiment : conversions ) {
-            this.addAnalyticsResultsRow(results, trackedExperiment, experimentDimensions, timeDimensions, ExperimentType.CONVERSION);
+        for ( AggregatedTracking tracking : trackings ) {
+            this.addAnalyticsResultsRow(results, tracking, experimentDimensions, timeDimensions);
         }
 
-        log.debug("Returning result: " + results);
 
         return results;
     }
 
+
     private void addAnalyticsResultsRow(AnalyticsResults results,
-                                        TrackedExperiment trackedExperiment,
+                                        AggregatedTracking tracking,
                                         StatisticsExperimentDimensions experimentDimensions,
-                                        StatisticsTimeDimensions timeDimensions,
-                                        ExperimentType type)
+                                        StatisticsTimeDimensions timeDimensions)
             throws SmartTargetException
     {
 
-        // TODO: Do filter on experiment ID here!!!
-        // Filter contains ExperimentId, PublicationTargetId & PublicationId
-
         AnalyticsResultsRow row = new AnalyticsResultsRow();
+        if ( experimentDimensions.isPerExperimentId() ) {
+            row.getExperimentDimensions().setExperimentId(tracking.getExperimentId());
+        }
+        if ( experimentDimensions.isPerPublicationTargetId() ) {
+            String publicationTargetTcmUri = TcmUtils.buildPublicationTargetTcmUri(tracking.getPublicationTargetId());
+            row.getExperimentDimensions().setPublicationTargetId(publicationTargetTcmUri);
+        }
+        if ( experimentDimensions.isPerPublicationId() ) {
+            String publicationTcmUri = TcmUtils.buildPublicationTcmUri(tracking.getPublicationId());
+            row.getExperimentDimensions().setPublicationId(publicationTcmUri);
+        }
+        if (experimentDimensions.isPerChosenVariant()) {
+            row.getExperimentDimensions().setChosenVariant(Integer.toString(tracking.getChosenVariant()));
+        }
+        if (experimentDimensions.isPerComponentId()) {
+            String componentTcmUri = TcmUtils.buildComponentTcmUri(tracking.getPublicationId(), tracking.getComponentId());
+            row.getExperimentDimensions().setComponentId(componentTcmUri);
+        }
+        if (experimentDimensions.isPerComponentTemplateId()) {
+            String componentTemplateTcmUri = TcmUtils.buildComponentTemplateTcmUri(tracking.getPublicationId(), tracking.getComponentTemplateId());
+            row.getExperimentDimensions().setComponentTemplateId(componentTemplateTcmUri);
+        }
+        if (experimentDimensions.isPerPageId()) {
+            String pageTcmUri = TcmUtils.buildPageTcmUri(tracking.getPublicationId(), tracking.getPageId());
+            row.getExperimentDimensions().setPageId(pageTcmUri);
+        }
+        if (experimentDimensions.isPerRegion()) {
+            row.getExperimentDimensions().setRegion(tracking.getRegion());
+        }
 
-        ExperimentDimensions dimensions = trackedExperiment.experimentDimensions;
-        if (experimentDimensions.isPerExperimentId()) row.getExperimentDimensions().setExperimentId(dimensions.getExperimentId());
-        if (experimentDimensions.isPerPublicationTargetId()) row.getExperimentDimensions().setPublicationTargetId(dimensions.getPublicationTargetId());
-        if (experimentDimensions.isPerPublicationId()) row.getExperimentDimensions().setPublicationId(dimensions.getPublicationId());
-        if (experimentDimensions.isPerPageId()) row.getExperimentDimensions().setPageId(dimensions.getPageId());
-        if (experimentDimensions.isPerRegion()) row.getExperimentDimensions().setRegion(dimensions.getRegion());
-        if (experimentDimensions.isPerComponentId()) row.getExperimentDimensions().setComponentId(dimensions.getComponentId());
-        if (experimentDimensions.isPerComponentTemplateId()) row.getExperimentDimensions().setComponentTemplateId(dimensions.getComponentTemplateId());
-        if (experimentDimensions.isPerChosenVariant()) row.getExperimentDimensions().setChosenVariant(Integer.toString(dimensions.getChosenVariant()));
         if (!row.getExperimentDimensions().isValid()) return;
 
 
         Calendar cal = Calendar.getInstance();
-        cal.setTime(trackedExperiment.date);
+        cal.setTime(tracking.getDate());
 
         if (timeDimensions.isPerYear()) row.getTimeDimensions().setYear(cal.get(Calendar.YEAR));
         if (timeDimensions.isPerMonth()) row.getTimeDimensions().setMonth(cal.get(Calendar.MONTH));
@@ -166,25 +158,20 @@ public class LocalAnalyticsManager extends AnalyticsManager {
         }
         AnalyticsResultsRow existingRow = results.getExistingRowWithSameDimensions(row);
         if (existingRow != null) {
-            System.out.println("Using an existing row...");
             row = existingRow;
         }
         else {
-            System.out.println("Creating a new row...");
             results.getRows().add(row);
         }
 
-        if ( type == ExperimentType.CONVERSION ) {
+        if ( tracking.getType() == ExperimentType.CONVERSION ) {
             row.setVariantConversions(row.getVariantConversions()+1);
-            System.out.println("Conversion count: " + row.getVariantConversions());
         }
         else {
             row.setVariantViews(row.getVariantViews()+1);
-            System.out.println("Views count: " + row.getVariantViews());
         }
     }
 
-    @Override
     public void calculateWinner(Variants variants) throws SmartTargetException {
 
         try {
