@@ -3,12 +3,9 @@ package com.sdl.webapp.smarttarget.markup;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.model.ViewModel;
 import com.sdl.webapp.common.markup.MarkupDecorator;
-import com.sdl.webapp.common.markup.html.HtmlElement;
 import com.sdl.webapp.common.markup.html.HtmlNode;
-import com.sdl.webapp.common.markup.html.HtmlTextNode;
 import com.sdl.webapp.common.markup.html.builders.HtmlBuilders;
-import com.sdl.webapp.common.markup.html.builders.SimpleElementBuilder;
-import com.sdl.webapp.smarttarget.SmartTargetRegion;
+import com.sdl.webapp.smarttarget.model.SmartTargetRegion;
 
 /**
  * SmartTarget Region XPM Markup

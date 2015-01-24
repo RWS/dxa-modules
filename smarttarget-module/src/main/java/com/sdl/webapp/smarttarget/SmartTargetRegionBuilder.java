@@ -11,6 +11,10 @@ import com.sdl.webapp.common.api.model.Page;
 import com.sdl.webapp.common.api.model.Region;
 import com.sdl.webapp.common.api.model.entity.AbstractEntity;
 import com.sdl.webapp.common.api.model.region.RegionImpl;
+import com.sdl.webapp.smarttarget.model.SmartTargetComponentPresentation;
+import com.sdl.webapp.smarttarget.model.SmartTargetQueryResult;
+import com.sdl.webapp.smarttarget.model.SmartTargetRegion;
+import com.sdl.webapp.smarttarget.model.SmartTargetRegionMvcData;
 import com.sdl.webapp.tridion.xpm.ComponentType;
 import com.sdl.webapp.tridion.xpm.XpmRegion;
 import com.sdl.webapp.tridion.xpm.XpmRegionConfig;
@@ -68,7 +72,7 @@ public class SmartTargetRegionBuilder implements RegionBuilder {
                     regions.put(regionName, region);
                 }
 
-                if ( region instanceof SmartTargetRegion ) {
+                if ( region instanceof SmartTargetRegion) {
                     SmartTargetRegion stRegion = (SmartTargetRegion) region;
                     if ( stRegion.containsSmartTargetContent() == false ) {
                         // If no data populated from SmartTarget -> Add fallback content to the region

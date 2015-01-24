@@ -1,4 +1,4 @@
-package com.sdl.webapp.common.api.model.entity.smarttarget;
+package com.sdl.webapp.smarttarget.model;
 
 import com.sdl.webapp.common.api.mapping.annotations.SemanticEntity;
 import com.sdl.webapp.common.api.mapping.annotations.SemanticProperty;
@@ -9,7 +9,8 @@ import com.sdl.webapp.common.api.model.entity.MediaItem;
 import static com.sdl.webapp.common.api.mapping.config.SemanticVocabulary.SDL_CORE;
 
 /**
- * PromoBanner
+ * Promo Banner
+ * - Simple banner which can be used in SmartTarget promotions.
  *
  * @author nic
  */

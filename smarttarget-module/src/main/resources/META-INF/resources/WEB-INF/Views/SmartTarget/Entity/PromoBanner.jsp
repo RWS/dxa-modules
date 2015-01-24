@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="xpm" uri="http://www.sdl.com/tridion-xpm" %>
 <%@ taglib prefix="tri" uri="http://www.sdl.com/tridion-reference-impl" %>
-<jsp:useBean id="entity" type="com.sdl.webapp.common.api.model.entity.smarttarget.PromoBanner" scope="request"/>
+<jsp:useBean id="entity" type="com.sdl.webapp.smarttarget.model.PromoBanner" scope="request"/>
 <jsp:useBean id="markup" type="com.sdl.webapp.common.markup.Markup" scope="request"/>
 <jsp:useBean id="screenWidth" type="com.sdl.webapp.common.api.ScreenWidth" scope="request"/>
 <%-- Example promo banner  --%>

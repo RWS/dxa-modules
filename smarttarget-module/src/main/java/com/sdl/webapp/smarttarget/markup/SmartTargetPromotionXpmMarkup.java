@@ -1,17 +1,14 @@
 package com.sdl.webapp.smarttarget.markup;
 
-import com.google.common.base.Strings;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.model.Entity;
 import com.sdl.webapp.common.api.model.ViewModel;
 import com.sdl.webapp.common.markup.MarkupDecorator;
 import com.sdl.webapp.common.markup.html.HtmlCommentNode;
 import com.sdl.webapp.common.markup.html.HtmlNode;
-import com.sdl.webapp.common.markup.html.HtmlTextNode;
 import com.sdl.webapp.common.markup.html.ParsableHtmlNode;
 import com.sdl.webapp.common.markup.html.builders.HtmlBuilders;
-import com.sdl.webapp.smarttarget.SmartTargetComponentPresentation;
-import com.sdl.webapp.smarttarget.SmartTargetRegion;
+import com.sdl.webapp.smarttarget.model.SmartTargetComponentPresentation;
 import com.sdl.webapp.smarttarget.SmartTargetService;
 
 import java.util.Map;

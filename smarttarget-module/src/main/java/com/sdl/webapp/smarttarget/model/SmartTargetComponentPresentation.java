@@ -1,4 +1,4 @@
-package com.sdl.webapp.smarttarget;
+package com.sdl.webapp.smarttarget.model;
 
 import com.tridion.smarttarget.analytics.tracking.ExperimentDimensions;
 

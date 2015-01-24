@@ -1,8 +1,8 @@
-package com.sdl.webapp.common.api.model.entity.smarttarget;
+package com.sdl.webapp.smarttarget;
 
 import com.sdl.webapp.common.api.mapping.SemanticMappingRegistry;
 import com.sdl.webapp.common.api.model.ViewModelRegistry;
-import com.sdl.webapp.common.api.model.entity.AbstractEntity;
+import com.sdl.webapp.smarttarget.model.PromoBanner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,15 +19,11 @@ public class SmartTargetModuleInitializer {
     @Autowired
     private ViewModelRegistry viewModelRegistry;
 
-    //@Autowired SemanticMappingRegistry semanticMappingRegistry;
+    @Autowired SemanticMappingRegistry semanticMappingRegistry;
 
     @PostConstruct
     public void initializeModels() {
-
         this.viewModelRegistry.registerViewEntityClass("SmartTarget:PromoBanner", PromoBanner.class);
-
-        // TODO: Why can we not register other entities into the semantic mapping registry...???
-        //semanticMappingRegistry.registerEntities(AbstractEntity.class.getPackage().getName());
-
+        semanticMappingRegistry.registerEntity(PromoBanner.class);
     }
 }

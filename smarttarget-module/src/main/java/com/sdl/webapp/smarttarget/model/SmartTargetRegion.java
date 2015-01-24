@@ -1,4 +1,4 @@
-package com.sdl.webapp.smarttarget;
+package com.sdl.webapp.smarttarget.model;
 
 import com.sdl.webapp.common.api.model.region.RegionImpl;
 
