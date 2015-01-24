@@ -95,7 +95,7 @@ public class SmartTargetRegionBuilder implements RegionBuilder {
             SmartTargetRegion stRegion = new SmartTargetRegion();
             stRegion.setName(regionConfig.getRegionName());
             stRegion.setMvcData(new SmartTargetRegionMvcData(regionConfig.getRegionName()));
-            regions.put(regionConfig.getRegionName(), stRegion);
+
             XpmRegion xpmRegion = xpmRegionConfig.getXpmRegion(regionConfig.getRegionName(), localization);
             try {
 
@@ -115,6 +115,7 @@ public class SmartTargetRegionBuilder implements RegionBuilder {
 
                     this.enrichEntityWithSmartTargetData(entity, stComponentPresentation);
                     stRegion.addEntity(entity);
+                    regions.put(regionConfig.getRegionName(), stRegion);
                 }
 
             }
