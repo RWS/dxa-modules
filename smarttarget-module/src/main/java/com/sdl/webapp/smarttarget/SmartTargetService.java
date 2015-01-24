@@ -4,6 +4,7 @@ import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.util.TcmUtils;
 import com.tridion.ambientdata.AmbientDataContext;
 import com.tridion.ambientdata.claimstore.ClaimStore;
+import com.tridion.configuration.Configuration;
 import com.tridion.smarttarget.SmartTargetException;
 import com.tridion.smarttarget.analytics.AnalyticsManager;
 import com.tridion.smarttarget.analytics.results.AnalyticsResults;
@@ -59,19 +60,16 @@ public class SmartTargetService {
 
     private boolean defaultAllowDuplicatesValue;  // TODO: Or should the region builder manage this instead???
 
+    private Map<String, Integer> cachedWinners = new WeakHashMap<>();
+
     public SmartTargetService() {
     }
 
     @PostConstruct
     public void initialize() {
-        // TODO: Read from config
-        this.experimentAutomaticSelectionEnabled =true;
-
-        // TODO: Read expermient automatic selection from config??
-        //ConfigurationUtility.getConfiguration("/Configuration/SmartTarget/");
-
+        Configuration config = ConfigurationUtility.getConfiguration("/Configuration/SmartTarget");
+        this.experimentAutomaticSelectionEnabled = config.getBooleanValue("ExperimentAutomaticSelection", false);
         this.defaultAllowDuplicatesValue = ConfigurationUtility.getDefaultAllowDuplicates().booleanValue();
-
     }
 
     public SmartTargetQueryResult query(String pageId,
@@ -163,6 +161,8 @@ public class SmartTargetService {
 
     protected String getPublicationId(List<String> componentTemplates) throws SmartTargetException
     {
+
+        // TODO: Will this function work for blueprinted promotions??
         if ( componentTemplates == null || componentTemplates.size() == 0 )
         {
             throw new SmartTargetException("No expected component templates defined!");
@@ -257,7 +257,7 @@ public class SmartTargetService {
             {
                 Experiment experiment = (Experiment) promotion;
                 ExperimentCookie newExperimentCookie = null;
-                int variant = this.experimentAutomaticSelectionEnabled ? this.calculateWinner(experiment) : -1;
+                int variant = this.experimentAutomaticSelectionEnabled ? this.calculateWinner(experiment, publicationId) : -1;
                 if ( variant == -1 ) {
                     ExperimentCookie experimentCookie = existingExperimentCookies.get(experiment.getPromotionId());
                     if (experimentCookie == null) {
@@ -341,11 +341,16 @@ public class SmartTargetService {
     }
 
 
-    private int calculateWinner(Experiment experiment) throws SmartTargetException {
+    private int calculateWinner(Experiment experiment, String publicationId) throws SmartTargetException {
+
+        String cacheKey = experiment.getPromotionId() + ":" + experiment.getPublicationTargetId() + ":" + publicationId;
+        Integer winner = this.cachedWinners.get(cacheKey);
+        if ( winner != null ) {
+            return winner;
+        }
 
         StatisticsExperimentDimensions statisticalDimensions = new StatisticsExperimentDimensions();
         statisticalDimensions.setPerChosenVariant(true);
-        statisticalDimensions.setPerPublicationId(true);
 
         StatisticsFilters filters = new StatisticsFilters();
         SimpleStatisticsFilter filter = new SimpleStatisticsFilter();
@@ -357,6 +362,11 @@ public class SmartTargetService {
         filter.setName("PublicationTargetId");
         filter.setOperator(StatisticsFilterOperator.Equals);
         filter.setOperand(experiment.getPublicationTargetId());
+        filters.add(filter);
+        filter = new SimpleStatisticsFilter();
+        filter.setName("PublicationId");
+        filter.setOperator(StatisticsFilterOperator.Equals);
+        filter.setOperand(publicationId);
         filters.add(filter);
 
         AnalyticsManager analyticsManager = this.getAnalyticsManager();
@@ -382,6 +392,7 @@ public class SmartTargetService {
         for ( Variant variant : variants ) {
             if ( variant.isWinner() ) {
                 log.debug("The winner is: " + variant.getIndex());
+                this.cachedWinners.put(cacheKey, variant.getIndex());
                 return variant.getIndex();
             }
         }
