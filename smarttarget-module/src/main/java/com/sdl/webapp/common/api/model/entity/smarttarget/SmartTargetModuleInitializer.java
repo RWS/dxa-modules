@@ -9,12 +9,12 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 
 /**
- * ModelInitializer
+ * Smart Target Module Initializer
  *
  * @author nic
  */
 @Component
-public class ModelInitializer {
+public class SmartTargetModuleInitializer {
 
     @Autowired
     private ViewModelRegistry viewModelRegistry;
