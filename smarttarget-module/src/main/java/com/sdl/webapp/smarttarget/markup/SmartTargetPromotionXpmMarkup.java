@@ -33,6 +33,9 @@ public class SmartTargetPromotionXpmMarkup implements MarkupDecorator {
     public HtmlNode process(HtmlNode markup, ViewModel model, WebRequestContext webRequestContext) {
 
         // TODO: Are we having several items per promotion at anytime? Now is the assumption that one ST promo = one content presentation
+        // Do some analyze of the code or use some kind of marker to be able to see if there is a content already in this promotion.
+        // For example add a marker element to the tree so the decorator can find where the previous component presentation are in the promotion.
+        //
 
         if ( webRequestContext.isPreview() ) {
             if (model instanceof Entity) {

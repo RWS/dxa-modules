@@ -12,10 +12,9 @@ import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.util.ClassUtils;
 
 import javax.sql.DataSource;
-import java.sql.Driver;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.*;
+import java.util.Date;
 
 /**
  * AnalyticsResultRepository
@@ -38,7 +37,7 @@ public class AnalyticsResultRepository {
     static final String INSERT_TRACKING_RESULT_SQL =
             "INSERT INTO TRACKING_RESULT " +
                     "(EXP_ID, PUBLICATION_ID, PUB_TARGET_ID, COMPONENT_ID, COMPONENT_TEMPLATE_ID, PAGE_ID, REGION, TRACKING_DATE, CHOSEN_VARIANT, TRACKING_TYPE, TRACKING_COUNT) " +
-                    "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+                    "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
     static final String QUERY_TRACKING_RESULTS_WITH_FILTER_SQL = "SELECT * FROM TRACKING_RESULT ";
     static final String QUERY_TRACKING_RESULTS = "SELECT * FROM TRACKING_RESULT WHERE EXP_ID=? AND PUBLICATION_ID=? AND PUBLICATION_TARGET_ID=?";
 

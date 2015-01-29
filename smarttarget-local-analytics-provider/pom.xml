@@ -53,5 +53,13 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Microsoft SQL Server JDBC driver (only used for unit tests -->
+        <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>sqljdbc4</artifactId>
+            <version>${sqljdbc4-version}</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 </project>

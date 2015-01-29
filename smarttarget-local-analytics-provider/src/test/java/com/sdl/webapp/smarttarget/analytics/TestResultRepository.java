@@ -13,10 +13,15 @@ import java.util.List;
  */
 public class TestResultRepository {
 
+    /*
     static final String REPOSITORY_JDBC_URL = "jdbc:hsqldb:/Users/nic/Develop/Projects/SDL/TRI/db/trackingdb;user=sa;password=";
     static final String REPOSITORY_DRIVER_CLASSNAME = "org.hsqldb.jdbcDriver";
+    */
 
-    @Test
+    static final String REPOSITORY_JDBC_URL = "jdbc:sqlserver://tridiondev:1433;databaseName=Tridion_Broker;user=TridionBrokerUser;password=sdltridion";
+    static final String REPOSITORY_DRIVER_CLASSNAME = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+
+    //@Test
     public void testWriteToDB() throws Exception {
 
         AnalyticsResultRepository repository = new AnalyticsResultRepository(REPOSITORY_JDBC_URL, REPOSITORY_DRIVER_CLASSNAME);
@@ -43,7 +48,7 @@ public class TestResultRepository {
         }
     }
 
-    @Test
+    //@Test
     public void testWriteThroughWorker() throws Exception {
 
         AnalyticsResultRepository repository = new AnalyticsResultRepository(REPOSITORY_JDBC_URL, REPOSITORY_DRIVER_CLASSNAME);

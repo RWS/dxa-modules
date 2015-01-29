@@ -88,15 +88,17 @@ public class LocalAnalyticsManager extends AnalyticsManager {
         log.debug("Statistics Filters: " + statisticsFilters);
 
         // TODO: Check winner here instead???
+        // TODO: Check why this method sometimes returns null
 
         List<AggregatedTracking> trackings = this.resultRepository.getTrackingResults(statisticsFilters);
 
         SimpleAnalyticsResults results = new SimpleAnalyticsResults();
 
-        for ( AggregatedTracking tracking : trackings ) {
-            this.addAnalyticsResultsRow(results, tracking, experimentDimensions, timeDimensions);
+        if ( trackings != null ) {
+            for (AggregatedTracking tracking : trackings) {
+                this.addAnalyticsResultsRow(results, tracking, experimentDimensions, timeDimensions);
+            }
         }
-
 
         return results;
     }
