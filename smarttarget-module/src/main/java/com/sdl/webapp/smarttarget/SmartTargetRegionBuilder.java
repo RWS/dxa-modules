@@ -22,6 +22,7 @@ import com.tridion.smarttarget.SmartTargetException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,6 +47,9 @@ public class SmartTargetRegionBuilder implements RegionBuilder {
     @Autowired
     private ContentProvider contentProvider;
 
+    @Value("${smarttarget.enabled}")
+    private boolean enabled = true;
+
 
     @Override
     public Map<String, Region> buildRegions(Page page,
@@ -55,7 +59,9 @@ public class SmartTargetRegionBuilder implements RegionBuilder {
 
         Map<String,Region> regions = new HashMap<>();
 
-        this.populateSmartTargetRegions(page, regions, localization);
+        if ( this.enabled ) {
+            this.populateSmartTargetRegions(page, regions, localization);
+        }
 
         for (Object source : sourceList) {
             final Entity entity = callback.buildEntity(source, localization);
