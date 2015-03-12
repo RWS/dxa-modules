@@ -11,10 +11,7 @@ import com.sdl.webapp.common.api.model.Page;
 import com.sdl.webapp.common.api.model.Region;
 import com.sdl.webapp.common.api.model.entity.AbstractEntity;
 import com.sdl.webapp.common.api.model.region.RegionImpl;
-import com.sdl.webapp.smarttarget.model.SmartTargetComponentPresentation;
-import com.sdl.webapp.smarttarget.model.SmartTargetQueryResult;
-import com.sdl.webapp.smarttarget.model.SmartTargetRegion;
-import com.sdl.webapp.smarttarget.model.SmartTargetRegionMvcData;
+import com.sdl.webapp.smarttarget.model.*;
 import com.sdl.webapp.tridion.xpm.ComponentType;
 import com.sdl.webapp.tridion.xpm.XpmRegion;
 import com.sdl.webapp.tridion.xpm.XpmRegionConfig;
@@ -100,13 +97,13 @@ public class SmartTargetRegionBuilder implements RegionBuilder {
         List<SmartTargetRegionConfig> smartTargetRegionConfigList = this.getSmartTargetRegionConfiguration(page);
         if ( smartTargetRegionConfigList == null ) return;
 
-
         for (SmartTargetRegionConfig regionConfig : smartTargetRegionConfigList) {
             SmartTargetRegion stRegion = new SmartTargetRegion();
             stRegion.setName(regionConfig.getRegionName());
             stRegion.setMvcData(new SmartTargetRegionMvcData(regionConfig.getRegionName()));
 
             XpmRegion xpmRegion = xpmRegionConfig.getXpmRegion(regionConfig.getRegionName(), localization);
+            SmartTargetPromotion currentPromotion = null;
             try {
 
                 SmartTargetQueryResult queryResult =
@@ -124,9 +121,18 @@ public class SmartTargetRegionBuilder implements RegionBuilder {
                                                                    localization);
 
                     this.enrichEntityWithSmartTargetData(entity, stComponentPresentation);
-                    stRegion.addEntity(entity);
-                    regions.put(regionConfig.getRegionName(), stRegion);
+
+                    if ( currentPromotion == null || !currentPromotion.getId().equals(stComponentPresentation.getPromotionId()) )  {
+                        currentPromotion = new SmartTargetPromotion(stComponentPresentation.getRegionName(), stComponentPresentation.getPromotionId(), stComponentPresentation.isExperiment());
+                        stRegion.addEntity(currentPromotion);
+
+                    }
+                    currentPromotion.addItem(entity);
+
+                    //stRegion.addEntity(entity);
+
                 }
+                regions.put(regionConfig.getRegionName(), stRegion);
 
             }
             catch ( SmartTargetException e  ) {

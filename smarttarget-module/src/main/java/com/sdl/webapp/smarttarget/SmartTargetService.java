@@ -147,12 +147,12 @@ public class SmartTargetService {
         savedResults.add(queryResult);
     }
 
-    public SmartTargetComponentPresentation getSavedPromotion(String promotionId) {
+    public SmartTargetComponentPresentation getSavedPromotionItem(String promotionId, String entityId) {
         List<SmartTargetQueryResult> savedResults = (List<SmartTargetQueryResult>) this.httpRequest.getAttribute("smartTargetQueryResults");
         if ( savedResults != null ) {
             for ( SmartTargetQueryResult queryResult : savedResults ) {
                 for ( SmartTargetComponentPresentation stComponentPresentation : queryResult.getComponentPresentations() ) {
-                    if ( stComponentPresentation.getPromotionId().equals(promotionId) ) {
+                    if ( stComponentPresentation.getPromotionId().equals(promotionId) && stComponentPresentation.getComponentUri().contains("-" + entityId + "-") ) {
                         return stComponentPresentation;
                     }
                 }
@@ -307,6 +307,7 @@ public class SmartTargetService {
                             cp.setAdditionalMarkup(this.getExperimentCookieMarkup(newExperimentCookie));
                         }
                         componentPresentations.add(cp);
+                        if ( componentPresentations.size() >= maxItems ) {  break; }
 
                     }
                 }
@@ -321,11 +322,12 @@ public class SmartTargetService {
                                                                      promotion.getPromotionId(),
                                                                      regionName);
                         componentPresentations.add(cp);
+                        if ( componentPresentations.size() >= maxItems ) {  break; }
                     }
                 }
             }
 
-            if ( componentPresentations.size() >= maxItems ) {  break; }
+
 
         }
 

@@ -10,6 +10,7 @@ import com.sdl.webapp.common.markup.html.ParsableHtmlNode;
 import com.sdl.webapp.common.markup.html.builders.HtmlBuilders;
 import com.sdl.webapp.smarttarget.model.SmartTargetComponentPresentation;
 import com.sdl.webapp.smarttarget.SmartTargetService;
+import com.sdl.webapp.smarttarget.model.SmartTargetPromotion;
 
 import java.util.Map;
 
@@ -32,29 +33,32 @@ public class SmartTargetPromotionXpmMarkup implements MarkupDecorator {
     @Override
     public HtmlNode process(HtmlNode markup, ViewModel model, WebRequestContext webRequestContext) {
 
-        // TODO: Are we having several items per promotion at anytime? Now is the assumption that one ST promo = one content presentation
-        // Do some analyze of the code or use some kind of marker to be able to see if there is a content already in this promotion.
-        // For example add a marker element to the tree so the decorator can find where the previous component presentation are in the promotion.
-        //
-
         if ( webRequestContext.isPreview() ) {
-            if (model instanceof Entity) {
+            if ( model instanceof SmartTargetPromotion ) { //if (model instanceof Entity) {
+
+                SmartTargetPromotion promotion = (SmartTargetPromotion) model;
+
+                markup = HtmlBuilders.span()
+                        .withContent(this.buildXpmMarkup(promotion.getId(), promotion.getMvcData().getRegionName()))
+                        .withContent(markup).build();
+
+            }
+            else if ( model instanceof Entity ) {
+
                 Entity entity = (Entity) model;
                 final Map<String, String> entityData = entity.getEntityData();
                 final String promotionId = entityData.get("PromotionID");
                 if ( promotionId != null) {
-                    final String regionId = entityData.get("RegionID");
                     final boolean isExperiment = Boolean.parseBoolean(entity.getEntityData().get("IsExperiment"));
                     if ( isExperiment ) {
-                        SmartTargetComponentPresentation stComponentPresentation = this.smartTargetService.getSavedPromotion(promotionId);
-                        String processedHtml = this.smartTargetService.postProcessExperimentComponentPresentation(stComponentPresentation, markup.toHtml());
-                        if ( processedHtml != null ) {
-                            markup = new ParsableHtmlNode(processedHtml);
+                        SmartTargetComponentPresentation stComponentPresentation = this.smartTargetService.getSavedPromotionItem(promotionId, entity.getId());
+                        if ( stComponentPresentation != null ) {
+                            String processedHtml = this.smartTargetService.postProcessExperimentComponentPresentation(stComponentPresentation, markup.toHtml());
+                            if (processedHtml != null) {
+                                markup = new ParsableHtmlNode(processedHtml);
+                            }
                         }
                     }
-                    markup = HtmlBuilders.span()
-                            .withContent(this.buildXpmMarkup(promotionId, regionId))
-                            .withContent(markup).build();
                 }
             }
         }
