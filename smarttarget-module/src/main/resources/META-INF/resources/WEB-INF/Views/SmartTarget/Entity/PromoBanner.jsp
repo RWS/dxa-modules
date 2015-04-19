@@ -21,15 +21,11 @@
 <div ${markup.entity(entity)}>
     <div class="row">
         <a href="${entity.link.url}" title="${entity.link.alternateText}" ${markup.property(entity, "link")}>
-            <%--
-            <xpm:property entity="${entity}" property="link"/>
-            --%>
             <div class="col-sm-12">
                 <div class="hero">
                     <c:choose>
                         <c:when test="${not empty entity.media}" >
                                 <span ${markup.property(entity, "media")}>
-                                    <xpm:property entity="${entity}" property="media"/>
                                     <tri:media media="${entity.media}" widthFactor="100%" aspect="${imageAspect}"/>
                                 </span>
                         </c:when>
@@ -39,11 +35,9 @@
                     </c:choose>
                     <div class="overlay overlay-tl ribbon">
                         <h1 style="margin-bottom: 16px;" ${markup.property(entity, "headline")}>
-                            <xpm:property entity="${entity}" property="headline"/>
                             ${entity.headline}
                         </h1>
                         <div class="content" ${markup.property(entity, "content")}>
-                            <xpm:property entity="${entity}" property="content"/>
                             ${entity.content}
                         </div>
                     </div>
