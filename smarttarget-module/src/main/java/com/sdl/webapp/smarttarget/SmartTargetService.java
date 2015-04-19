@@ -326,8 +326,7 @@ public class SmartTargetService {
                     }
                 }
             }
-
-
+            if ( componentPresentations.size() >= maxItems ) {  break; }
 
         }
 
