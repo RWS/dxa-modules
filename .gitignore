@@ -3,5 +3,4 @@ bin
 *.user
 *.suo
 packages/
-mod/
-Site/
+_references

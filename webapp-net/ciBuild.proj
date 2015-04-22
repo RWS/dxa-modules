@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.5">
+
+  <UsingTask TaskName="MSBuild.ExtensionPack.Web.WebClient" AssemblyFile="_tools\MSBuild.ExtensionPack.dll" />
+  <UsingTask TaskName="MSBuild.ExtensionPack.FileSystem.File" AssemblyFile="_tools\MSBuild.ExtensionPack.dll"/>
+
+  <PropertyGroup>
+    <!-- Input parameters -->
+    <Version Condition="'$(VERSION)' == ''">0.0.0.0</Version>
+    <Version Condition="'$(VERSION)' != ''">$(VERSION)</Version>
+    <BuildConfiguration>Release</BuildConfiguration>
+    <DxaBuildType>Dev</DxaBuildType>
+    <CdTestDeployFolder>\\saintjohn01.ams.dev\C$\inetpub\wwwroot\GitVersion</CdTestDeployFolder>
+
+    <ProjectDirectory>$(MSBuildProjectDirectory)</ProjectDirectory>
+    <ReferencesDir>$(ProjectDirectory)\_references</ReferencesDir>
+
+    <!-- Jenkins URLs -->
+    <JenkinsUrl>http://masterbuild01.ams.dev:8080/hudson</JenkinsUrl>
+    <DxaFrameworkArtifactsUrl>$(JenkinsUrl)/job/DXA%20$(DxaBuildType)%20CI%20Web%20App%20.NET/lastSuccessfulBuild/artifact/Site/bin</DxaFrameworkArtifactsUrl>
+
+    <!--Tools-->
+    <MsBuildExe>C:\Program Files (x86)\MSBuild\12.0\Bin\MSBuild.exe</MsBuildExe>
+  </PropertyGroup>
+
+
+  <!-- =============================================================================================================================================  -->
+  <Target Name="Build">
+    <Message Text="Start build..." Importance="high" />
+        
+    <CallTarget Targets="PrepareBuild"/>
+    <CallTarget Targets="PackageBuild"/>
+  </Target>
+
+  <!-- =============================================================================================================================================  -->
+  <Target Name="PrepareBuild">
+    <Message Text="Preparing build..." Importance="high" />
+
+    <!--Update all NuGet packages for Modules.sln -->
+    <Exec Command="_tools\RestorePackages Modules.sln" WorkingDirectory="$(ProjectDirectory)" /> 
+
+    <CallTarget Targets="UpdateDxaFrameworkReferences" />
+  </Target>
+
+  <!-- =============================================================================================================================================  -->
+  <Target Name="UpdateDxaFrameworkReferences">
+    <Message Text="Downloading latest DXA $(DxaBuildType) framework references from Jenkins..." />
+
+    <ItemGroup>
+      <AssemblyToDownload Include="Sdl.Web.Mvc.dll" />
+      <AssemblyToDownload Include="Sdl.Web.Common.dll" />
+      <AssemblyToDownload Include="Sdl.Web.Tridion.dll" />
+    </ItemGroup>
+
+    <!-- Make sure we can override assemblies - remove ReadOnly attribute -->
+    <MSBuild.ExtensionPack.FileSystem.File 
+      TaskAction="RemoveAttributes" 
+      Files="@(AssemblyToDownload->'$(ReferencesDir)\%(Filename)%(Extension)')" 
+      />
+
+    <MSBuild.ExtensionPack.Web.WebClient 
+      TaskAction="DownloadFile" 
+      Url="$(DxaFrameworkArtifactsUrl)/%(Filename)%(Extension)" 
+      FileName="@(AssemblyToDownload->'$(ReferencesDir)\%(Filename)%(Extension)')" 
+      />
+  </Target>
+
+    <!-- =============================================================================================================================================  -->
+    <Target Name="PackageBuild">
+      <Message Text="Running build commands..." Importance="high" />
+
+      <MSBuild 
+        Projects="$(ProjectDirectory)\Modules.sln" 
+        Properties="Configuration=$(BuildConfiguration);Platform=Any CPU;AsmVersion=$(Version);FileVersion=$(Version)" 
+        Targets="Build" 
+        StopOnFirstFailure="true" 
+        />
+    </Target>
+
+</Project>
