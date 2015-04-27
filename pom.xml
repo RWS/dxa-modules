@@ -12,6 +12,10 @@
     <modules>
         <module>smarttarget-module</module>
         <module>smarttarget-local-analytics-provider</module>
+        <module>ecommerce-module</module>
+        <module>demandware-ecommerce-module</module>
+        <module>adf-delegate-module</module>
+        <module>geolocation-module</module>
     </modules>
 
     <properties>
