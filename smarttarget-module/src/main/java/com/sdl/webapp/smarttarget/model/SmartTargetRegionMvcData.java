@@ -18,12 +18,12 @@ public class SmartTargetRegionMvcData implements MvcData {
     private String controllerName = "Region";
     private String actionName = "Region";
     private String areaName = "Core";
-    private String viewName;
+    private String regionName;
     private Map<String,Object> metadata = Collections.emptyMap();
     private Map<String,String> routeValues = Collections.emptyMap();
 
     public SmartTargetRegionMvcData(String regionName) {
-        this.viewName = regionName;
+        this.regionName = regionName;
     }
 
     @Override
@@ -48,7 +48,7 @@ public class SmartTargetRegionMvcData implements MvcData {
 
     @Override
     public String getViewName() {
-        return this.viewName;
+        return this.regionName;
     }
 
     @Override
@@ -58,7 +58,7 @@ public class SmartTargetRegionMvcData implements MvcData {
 
     @Override
     public String getRegionName() {
-        return null;
+        return this.regionName;
     }
 
     @Override
