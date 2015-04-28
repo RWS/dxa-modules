@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3B09C55C-6D2B-4F7A-BD94-1B948023D3AD}</ProjectGuid>
+    <ProjectGuid>{8FEFFF4C-0AE2-452F-89B1-36F7D2944032}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sdl.Web.Modules.GoogleAnalytics</RootNamespace>
-    <AssemblyName>Sdl.Web.Modules.GoogleAnalytics</AssemblyName>
+    <RootNamespace>Sdl.Web.Modules.Search</RootNamespace>
+    <AssemblyName>Sdl.Web.Modules.Search</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -29,42 +29,64 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Tridion71Release|AnyCPU'">
+    <OutputPath>bin\Tridion71Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Tridion71Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Tridion71Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
-      <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
     <Reference Include="Sdl.Web.Common">
-      <HintPath>..\..\_references\Sdl.Web.Common.dll</HintPath>
+      <HintPath>..\_references\Sdl.Web.Common.dll</HintPath>
     </Reference>
     <Reference Include="Sdl.Web.Mvc">
-      <HintPath>..\..\_references\Sdl.Web.Mvc.dll</HintPath>
+      <HintPath>..\_references\Sdl.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="SI4T.Query">
+      <HintPath>..\packages\SI4T.Query.1.0.2\lib\net40\SI4T.Query.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.1.2\lib\net45\System.Web.Helpers.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.1.2\lib\net45\System.Web.Helpers.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Mvc, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
-      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.1.2\lib\net45\System.Web.Mvc.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.1.2\lib\net45\System.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.1.2\lib\net45\System.Web.Razor.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.1.2\lib\net45\System.Web.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.1.2\lib\net45\System.Web.WebPages.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.1.2\lib\net45\System.Web.WebPages.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.1.2\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.1.2\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.1.2\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.1.2\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -73,21 +95,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GoogleAnalyticsAreaRegistration.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ISearchProvider.cs" />
     <Compile Include="Properties\VersionInfo.cs" />
+    <Compile Include="SearchController.cs" />
+    <Compile Include="Solr\SolrProvider.cs" />
+    <Compile Include="Models\SearchConfiguration.cs" />
+    <Compile Include="Models\SearchQuery.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SearchAreaRegistration.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Areas\GoogleAnalytics\Views\Entity\GoogleAnalytics.cshtml" />
-    <None Include="Areas\GoogleAnalytics\Views\web.config" />
+    <None Include="Areas\Search\Views\Entity\SearchBox.cshtml" />
+    <None Include="Areas\Search\Views\Search\Partials\Pager.cshtml" />
+    <None Include="Areas\Search\Views\Search\SearchResults.cshtml" />
+    <None Include="Areas\Search\Views\web.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="AfterBuild">
-  </Target>
-  -->
   <Target Name="BeforeBuild">
     <WriteLinesToFile Condition=" '$(AsmVersion)' != '' " File="Properties\VersionInfo.cs" Overwrite="True" Lines="[assembly: System.Reflection.AssemblyVersion(&quot;$(AsmVersion)&quot;)]  // Generated by build%0a[assembly: System.Reflection.AssemblyInformationalVersion(&quot;$(AsmVersion)&quot;)]  // Generated by build" />
     <WriteLinesToFile Condition=" '$(FileVersion)' != '' " File="Properties\VersionInfo.cs" Overwrite="False" Lines="[assembly: System.Reflection.AssemblyFileVersion(&quot;$(FileVersion)&quot;)]  // Generated by build" />

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdl.Web.Modules.Search", "Search\Sdl.Web.Modules.Search\Sdl.Web.Modules.Search.csproj", "{8FEFFF4C-0AE2-452F-89B1-36F7D2944032}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdl.Web.Modules.Search", "Search\Sdl.Web.Modules.Search.csproj", "{8FEFFF4C-0AE2-452F-89B1-36F7D2944032}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdl.Web.Modules.GoogleAnalytics", "GoogleAnalytics\Sdl.Web.Modules.GoogleAnalytics\Sdl.Web.Modules.GoogleAnalytics.csproj", "{3B09C55C-6D2B-4F7A-BD94-1B948023D3AD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdl.Web.Modules.GoogleAnalytics", "GoogleAnalytics\Sdl.Web.Modules.GoogleAnalytics.csproj", "{3B09C55C-6D2B-4F7A-BD94-1B948023D3AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
