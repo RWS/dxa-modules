@@ -30,6 +30,7 @@
         
     <CallTarget Targets="PrepareBuild"/>
     <CallTarget Targets="PackageBuild"/>
+    <!--NOTE: not calling target DeployModules here; should be called separately by Jenkins build if needed. -->
   </Target>
 
   <!-- =============================================================================================================================================  -->
@@ -65,16 +66,41 @@
       />
   </Target>
 
-    <!-- =============================================================================================================================================  -->
-    <Target Name="PackageBuild">
-      <Message Text="Running build commands..." Importance="high" />
+  <!-- =============================================================================================================================================  -->
+  <Target Name="PackageBuild">
+    <Message Text="Running build commands..." Importance="high" />
 
-      <MSBuild 
-        Projects="$(ProjectDirectory)\Modules.sln" 
-        Properties="Configuration=$(BuildConfiguration);Platform=Any CPU;AsmVersion=$(Version);FileVersion=$(Version)" 
-        Targets="Build" 
-        StopOnFirstFailure="true" 
-        />
-    </Target>
+    <MSBuild 
+      Projects="$(ProjectDirectory)\Modules.sln" 
+      Properties="Configuration=$(BuildConfiguration);Platform=Any CPU;AsmVersion=$(Version);FileVersion=$(Version)" 
+      Targets="Build" 
+      StopOnFirstFailure="true" 
+      />
+  </Target>
+
+  <!-- =============================================================================================================================================  -->
+  <ItemGroup>
+    <ModulePath
+      Include="$([System.IO.Directory]::GetDirectories(&quot;$(ProjectDirectory)&quot;))"
+      Exclude="$(ProjectDirectory)\_references;$(ProjectDirectory)\_tools;$(ProjectDirectory)\packages"
+      />
+  </ItemGroup>
+
+  <!--Note: this target gets executed for each Module -->
+  <Target Name="DeployModules" Inputs="@ModulePath" Outputs="%(ModulePath.Identity)">
+    <PropertyGroup>
+      <ModuleName>$([System.IO.Path]::GetFilename(&quot;%(ModulePath.Identity)&quot;))</ModuleName>
+    </PropertyGroup>
+
+    <Message Text="Deploying module '$(ModuleName)' to '$(CdTestDeployFolder)'..." />
+
+    <ItemGroup>
+      <AreaFiles Include="%(ModulePath.Identity)\Areas\**\*" />
+      <BinFiles Include="%(ModulePath.Identity)\bin\$(BuildConfiguration)\**\*" />
+    </ItemGroup>
+
+    <Copy SourceFiles="@(AreaFiles)" DestinationFolder="$(CdTestDeployFolder)\Areas\%(RecursiveDir)" />
+    <Copy SourceFiles="@(BinFiles)" DestinationFolder="$(CdTestDeployFolder)\bin\%(RecursiveDir)" />
+  </Target>
 
 </Project>
