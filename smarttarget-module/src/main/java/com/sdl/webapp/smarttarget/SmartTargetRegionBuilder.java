@@ -103,7 +103,6 @@ public class SmartTargetRegionBuilder implements RegionBuilder {
             stRegion.setMvcData(new SmartTargetRegionMvcData(regionConfig.getRegionName()));
 
             XpmRegion xpmRegion = xpmRegionConfig.getXpmRegion(regionConfig.getRegionName(), localization);
-            SmartTargetPromotion currentPromotion = null;
             try {
 
                 SmartTargetQueryResult queryResult =
@@ -121,15 +120,7 @@ public class SmartTargetRegionBuilder implements RegionBuilder {
                                                                    localization);
 
                     this.enrichEntityWithSmartTargetData(entity, stComponentPresentation);
-
-                    if ( currentPromotion == null || !currentPromotion.getId().equals(stComponentPresentation.getPromotionId()) )  {
-                        currentPromotion = new SmartTargetPromotion(stComponentPresentation.getRegionName(), stComponentPresentation.getPromotionId(), stComponentPresentation.isExperiment());
-                        stRegion.addEntity(currentPromotion);
-
-                    }
-                    currentPromotion.addItem(entity);
-
-                    //stRegion.addEntity(entity);
+                    stRegion.addEntity(entity);
 
                 }
                 regions.put(regionConfig.getRegionName(), stRegion);

@@ -10,7 +10,6 @@ import com.sdl.webapp.common.markup.html.ParsableHtmlNode;
 import com.sdl.webapp.common.markup.html.builders.HtmlBuilders;
 import com.sdl.webapp.smarttarget.model.SmartTargetComponentPresentation;
 import com.sdl.webapp.smarttarget.SmartTargetService;
-import com.sdl.webapp.smarttarget.model.SmartTargetPromotion;
 
 import java.util.Map;
 
@@ -34,21 +33,20 @@ public class SmartTargetPromotionXpmMarkup implements MarkupDecorator {
     public HtmlNode process(HtmlNode markup, ViewModel model, WebRequestContext webRequestContext) {
 
         if ( webRequestContext.isPreview() ) {
-            if ( model instanceof SmartTargetPromotion ) { //if (model instanceof Entity) {
 
-                SmartTargetPromotion promotion = (SmartTargetPromotion) model;
-
-                markup = HtmlBuilders.span()
-                        .withContent(this.buildXpmMarkup(promotion.getId(), promotion.getMvcData().getRegionName()))
-                        .withContent(markup).build();
-
-            }
-            else if ( model instanceof Entity ) {
+            if ( model instanceof Entity ) {
 
                 Entity entity = (Entity) model;
                 final Map<String, String> entityData = entity.getEntityData();
                 final String promotionId = entityData.get("PromotionID");
+
                 if ( promotionId != null) {
+
+                    SmartTargetComponentPresentation promotion = smartTargetService.getSavedPromotionItem(promotionId, entity.getId());
+                    markup = HtmlBuilders.span()
+                            .withContent(this.buildXpmMarkup(promotion.getPromotionId(), promotion.getRegionName()))
+                            .withContent(markup).build();
+
                     final boolean isExperiment = Boolean.parseBoolean(entity.getEntityData().get("IsExperiment"));
                     if ( isExperiment ) {
                         SmartTargetComponentPresentation stComponentPresentation = this.smartTargetService.getSavedPromotionItem(promotionId, entity.getId());
