@@ -27,13 +27,13 @@
 
         <dependency>
             <groupId>com.sdl</groupId>
-            <artifactId>webapp-common-api</artifactId>
+            <artifactId>common-api</artifactId>
             <version>${tri-version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.sdl</groupId>
-            <artifactId>webapp-tridion</artifactId>
+            <artifactId>tridion-provider</artifactId>
             <version>${tri-version}</version>
         </dependency>
 

@@ -7,7 +7,6 @@ import com.sdl.webapp.common.api.model.entity.EclItem;
 import com.sdl.webapp.common.controller.AbstractController;
 import com.sdl.webapp.ecommerce.ECommerceException;
 import com.sdl.webapp.ecommerce.ProductCatalog;
-import com.sdl.webapp.ecommerce.cart.ShoppingCartHelper;
 import com.sdl.webapp.ecommerce.model.Product;
 import com.sdl.webapp.ecommerce.model.entity.ProductContent;
 import org.slf4j.Logger;

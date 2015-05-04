@@ -28,27 +28,12 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/system/mvc/ECommerce/Cart")
 public class CartController extends AbstractController {
 
-    //@Autowired
-    //private ContentResolver contentResolver;
-
-    //@Autowired
-    //private WebRequestContext webRequestContext;
-
     @RequestMapping(method = RequestMethod.GET, value = "Cart/{regionName}/{entityId}")
     public String handleGetEntity(HttpServletRequest request, @PathVariable String regionName,
                                   @PathVariable String entityId) throws ContentProviderException {
 
 
         Entity cartWidget = this.getEntityFromRequest(request, regionName, entityId);
-
-        System.out.println("CART WIDGET: " + cartWidget);
-
-        /*
-        String showBasketUrl = this.contentResolver.resolveLink("tcm:0-" + cartWidget.getId(),
-                                                                this.webRequestContext.getLocalization().getId());
-        request.setAttribute("showCartUrl", showBasketUrl);
-        */
-
 
         ShoppingCart cart = ShoppingCartHelper.instance();
 

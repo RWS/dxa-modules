@@ -35,7 +35,7 @@
         <!-- Tridion Reference Implementation (TRI) -->
         <dependency>
             <groupId>com.sdl</groupId>
-            <artifactId>webapp-common-api</artifactId>
+            <artifactId>common-api</artifactId>
             <version>${tri-version}</version>
         </dependency>
 
