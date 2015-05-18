@@ -1,0 +1,16 @@
+#context-profile-label {
+    position: absolute;
+    /*
+    top: 0px;
+    left: 0px;
+    */
+    opacity: 0.8;
+    font-size: 20px;
+}
+
+.context-profile-button {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    opacity: 0.8;
+}
