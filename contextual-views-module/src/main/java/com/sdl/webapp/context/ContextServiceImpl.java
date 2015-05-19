@@ -42,11 +42,6 @@ public class ContextServiceImpl implements ContextService {
 
     private ExpressionEngine expressionEngine = new JexlContextExpressionEngine();
 
-    // TODO: Add the possibility to override the context profile resolve via a request parameter
-
-    // TODO: Store the ContextProfile on the request
-
-
     @PostConstruct
     public void initialize() throws IOException {
 
