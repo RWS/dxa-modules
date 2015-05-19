@@ -2,8 +2,6 @@ package com.sdl.webapp.context;
 
 import com.sdl.webapp.common.api.model.MvcData;
 import com.sdl.webapp.common.controller.ViewResolver;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.URL;
@@ -13,18 +11,27 @@ import java.net.URL;
  *
  * @author nic
  */
-@Component
 public class ContextualViewResolver implements ViewResolver {
 
-    @Autowired
     private ContextService contextService;
+
+    // TODO: Have the template suffix configurable
+
+    public ContextualViewResolver(ContextService contextService) {
+        this.contextService = contextService;
+    }
 
     @Override
     public String resolveView(MvcData mvcData, String viewType, HttpServletRequest request) {
 
+        String viewBaseDir = mvcData.getAreaName() +  "/" + viewType;
+        return this.resolveView(viewBaseDir, mvcData.getViewName(), mvcData, request);
+    }
+
+    public String resolveView(String viewBaseDir, String viewName, MvcData mvcData, HttpServletRequest request) {
+
         ContextProfile contextProfile = this.contextService.getContextProfile();
 
-        String viewBaseDir = mvcData.getAreaName() +  "/" + viewType + "/";
         String resolvedView = null;
 
         ContextProfile currentContextProfile = contextProfile;
@@ -32,9 +39,9 @@ public class ContextualViewResolver implements ViewResolver {
 
             try {
 
-                URL resource = request.getServletContext().getResource("/WEB-INF/Views/" + viewBaseDir + currentContextProfile.getName() + "/" + mvcData.getViewName() + ".jsp");
+                URL resource = request.getServletContext().getResource("/WEB-INF/Views/" + viewBaseDir + "/" + currentContextProfile.getName() + "/" + viewName + ".jsp");
                 if ( resource != null ) {
-                    resolvedView = viewBaseDir + currentContextProfile.getName() + "/" + mvcData.getViewName();
+                    resolvedView = viewBaseDir + "/" + currentContextProfile.getName() + "/" + viewName;
                     mvcData.getMetadata().put("ViewContextProfile", currentContextProfile);
                     break;
                 }
@@ -47,7 +54,7 @@ public class ContextualViewResolver implements ViewResolver {
 
             // Fallback to default view
             //
-            resolvedView = viewBaseDir + mvcData.getViewName();
+            resolvedView = viewBaseDir + "/" + viewName;
         }
 
         return resolvedView;
