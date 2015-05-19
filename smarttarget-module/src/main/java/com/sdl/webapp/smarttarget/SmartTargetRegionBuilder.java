@@ -35,18 +35,19 @@ public class SmartTargetRegionBuilder implements RegionBuilder {
 
     private static final Logger LOG = LoggerFactory.getLogger(SmartTargetRegionBuilder.class);
 
-    @Autowired
-    private XpmRegionConfig xpmRegionConfig;
-
-    @Autowired
     private SmartTargetService smartTargetService;
 
-    @Autowired
+    private XpmRegionConfig xpmRegionConfig;
+
     private ContentProvider contentProvider;
 
-    @Value("${smarttarget.enabled}")
-    private boolean enabled = true;
-
+    public SmartTargetRegionBuilder(SmartTargetService smartTargetService,
+                                    XpmRegionConfig xpmRegionConfig,
+                                    ContentProvider contentProvider) {
+        this.smartTargetService = smartTargetService;
+        this.xpmRegionConfig = xpmRegionConfig;
+        this.contentProvider = contentProvider;
+    }
 
     @Override
     public Map<String, Region> buildRegions(Page page,
@@ -56,9 +57,7 @@ public class SmartTargetRegionBuilder implements RegionBuilder {
 
         Map<String,Region> regions = new HashMap<>();
 
-        if ( this.enabled ) {
-            this.populateSmartTargetRegions(page, regions, localization);
-        }
+        this.populateSmartTargetRegions(page, regions, localization);
 
         for (Object source : sourceList) {
             final Entity entity = callback.buildEntity(source, localization);
