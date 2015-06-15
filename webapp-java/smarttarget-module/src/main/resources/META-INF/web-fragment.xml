@@ -1,0 +1,19 @@
+<web-fragment>
+
+    <!--
+    ===========================================
+         SMARTTARGET EXPERIMENT TRACKING
+    ===========================================
+    -->
+
+    <servlet>
+        <servlet-name>SmartTarget Experiment Tracking</servlet-name>
+        <servlet-class>com.tridion.smarttarget.analytics.tracking.TrackingRedirect</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SmartTarget Experiment Tracking</servlet-name>
+        <url-pattern>/redirect/*</url-pattern>
+    </servlet-mapping>
+
+</web-fragment>
