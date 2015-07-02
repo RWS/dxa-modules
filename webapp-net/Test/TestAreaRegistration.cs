@@ -18,6 +18,7 @@ namespace Sdl.Web.Modules.Test
         {
             // Page Views
             RegisterViewModel("TestPage1", typeof(PageModel), "Page");
+            RegisterViewModel("TestPage2", typeof(PageModel), "Page");
 
             // Region Views
             RegisterViewModel("TestRegion1", typeof(RegionModel), "Region");
