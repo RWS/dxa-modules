@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdl.Web.Modules.Search", "S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdl.Web.Modules.GoogleAnalytics", "GoogleAnalytics\Sdl.Web.Modules.GoogleAnalytics.csproj", "{3B09C55C-6D2B-4F7A-BD94-1B948023D3AD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdl.Web.Modules.Test", "Test\Sdl.Web.Modules.Test.csproj", "{40A64979-0221-4D96-9055-F723D11CA703}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{3B09C55C-6D2B-4F7A-BD94-1B948023D3AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B09C55C-6D2B-4F7A-BD94-1B948023D3AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B09C55C-6D2B-4F7A-BD94-1B948023D3AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40A64979-0221-4D96-9055-F723D11CA703}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40A64979-0221-4D96-9055-F723D11CA703}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40A64979-0221-4D96-9055-F723D11CA703}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40A64979-0221-4D96-9055-F723D11CA703}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
