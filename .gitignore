@@ -1,6 +1,8 @@
-obj
-bin
+obj/
+bin/
 *.user
 *.suo
 packages/
-_references
+_references/
+.idea/
+*.iml
