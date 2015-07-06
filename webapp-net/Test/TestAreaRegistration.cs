@@ -21,6 +21,7 @@ namespace Sdl.Web.Modules.Test
 
             // Region Views
             RegisterViewModel("TestRegion1", typeof(RegionModel), "Region");
+            RegisterViewModel("CustomRegionModelTest", typeof(CustomRegionModel), "Region");
 
             // Entity Views
             RegisterViewModel("TestEntity1", typeof(TestEntityModel1));
