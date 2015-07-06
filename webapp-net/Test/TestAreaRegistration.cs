@@ -22,12 +22,9 @@ namespace Sdl.Web.Modules.Test
 
             // Region Views
             RegisterViewModel("TestRegion1", typeof(RegionModel), "Region");
-<<<<<<< HEAD
             RegisterViewModel("CustomRegionModelTest", typeof(CustomRegionModel), "Region");
-=======
             RegisterViewModel("TestRegion2", typeof(RegionModel), "Region");
             RegisterViewModel("TestRegion3", typeof(RegionModel), "Region");
->>>>>>> 3623c9b34d3698b86de072345872b98b0e47b625
 
             // Entity Views
             RegisterViewModel("TestEntity1", typeof(TestEntityModel1));

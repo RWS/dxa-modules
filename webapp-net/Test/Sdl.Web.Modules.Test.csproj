@@ -88,12 +88,9 @@
     <None Include="Areas\Test\Views\Entity\TestEntity1.cshtml" />
     <None Include="Areas\Test\Views\Page\TestPage2.cshtml" />
     <None Include="Areas\Test\Views\Page\TestPage1.cshtml" />
-<<<<<<< HEAD
     <None Include="Areas\Test\Views\Region\CustomRegionModelTest.cshtml" />
-=======
     <None Include="Areas\Test\Views\Region\TestRegion3.cshtml" />
     <None Include="Areas\Test\Views\Region\TestRegion2.cshtml" />
->>>>>>> 3623c9b34d3698b86de072345872b98b0e47b625
     <None Include="Areas\Test\Views\Region\TestRegion1.cshtml" />
     <None Include="Areas\Test\Views\web.config" />
     <None Include="packages.config">
