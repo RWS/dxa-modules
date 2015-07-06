@@ -1,4 +1,4 @@
-﻿@model TestEntityModel3
+﻿@model TestEntityModel1
 <div class="entity" @Html.DxaEntityMarkup()>
     <h5>Rendered @Model with Entity View "Test:TestEntity3"</h5>
     <p>Text value of DxaEntityMarkup() @Html.DxaEntityMarkup()</p>
@@ -6,6 +6,10 @@
         <tr >
             <td>TestProperty1</td>
             <td @Html.DxaPropertyMarkup(() => Model.TestProperty1)>@Model.TestProperty1</td>
+        </tr>
+        <tr>
+            <td>TestProperty2</td>
+            <td @Html.DxaPropertyMarkup(() => Model.TestProperty2)>TODO</td>
         </tr>
     </table>
 </div>

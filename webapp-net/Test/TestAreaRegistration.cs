@@ -27,12 +27,12 @@ namespace Sdl.Web.Modules.Test
 
             // Entity Views
             RegisterViewModel("TestEntity1", typeof(TestEntityModel1));
-            RegisterViewModel("TestEntity1", typeof(TestEntityModel2));
-            RegisterViewModel("TestEntity1", typeof(TestEntityModel3));
+            RegisterViewModel("TestEntity1", typeof(TestEntityModel1));
+            RegisterViewModel("TestEntity1", typeof(TestEntityModel1));
 
             // Entity Models without associated View
-            // RegisterViewModel(typeof(TestEntityModel2));
-            // RegisterViewModel(typeof(TestEntityModel3));
+            RegisterViewModel(typeof(TestEntityModel2));
+            RegisterViewModel(typeof(TestEntityModel3));
         }
     }
 }
