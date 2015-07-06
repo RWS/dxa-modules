@@ -22,13 +22,17 @@ namespace Sdl.Web.Modules.Test
 
             // Region Views
             RegisterViewModel("TestRegion1", typeof(RegionModel), "Region");
+            RegisterViewModel("TestRegion2", typeof(RegionModel), "Region");
+            RegisterViewModel("TestRegion3", typeof(RegionModel), "Region");
 
             // Entity Views
             RegisterViewModel("TestEntity1", typeof(TestEntityModel1));
+            RegisterViewModel("TestEntity1", typeof(TestEntityModel2));
+            RegisterViewModel("TestEntity1", typeof(TestEntityModel3));
 
             // Entity Models without associated View
-            RegisterViewModel(typeof(TestEntityModel2));
-            RegisterViewModel(typeof(TestEntityModel3));
+            // RegisterViewModel(typeof(TestEntityModel2));
+            // RegisterViewModel(typeof(TestEntityModel3));
         }
     }
 }
