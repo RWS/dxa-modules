@@ -25,11 +25,12 @@ namespace Sdl.Web.Modules.Test
             RegisterViewModel("CustomRegionModelTest", typeof(CustomRegionModel), "Region");
             RegisterViewModel("TestRegion2", typeof(RegionModel), "Region");
             RegisterViewModel("TestRegion3", typeof(RegionModel), "Region");
+            RegisterViewModel("TestRegionMarkup", typeof(RegionModel), "Region");
 
             // Entity Views
             RegisterViewModel("TestEntity1", typeof(TestEntityModel1));
-            RegisterViewModel("TestEntity1", typeof(TestEntityModel1));
-            RegisterViewModel("TestEntity1", typeof(TestEntityModel1));
+            RegisterViewModel("TestEntity2", typeof(TestEntityModel1));
+            RegisterViewModel("TestEntity3", typeof(TestEntityModel1));
 
             // Entity Models without associated View
             RegisterViewModel(typeof(TestEntityModel2));

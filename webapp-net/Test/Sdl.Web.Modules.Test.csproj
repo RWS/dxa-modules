@@ -89,6 +89,7 @@
     <None Include="Areas\Test\Views\Page\TestPage2.cshtml" />
     <None Include="Areas\Test\Views\Page\TestPage1.cshtml" />
     <None Include="Areas\Test\Views\Region\CustomRegionModelTest.cshtml" />
+    <None Include="Areas\Test\Views\Region\TestRegionMarkup.cshtml" />
     <None Include="Areas\Test\Views\Region\TestRegion3.cshtml" />
     <None Include="Areas\Test\Views\Region\TestRegion2.cshtml" />
     <None Include="Areas\Test\Views\Region\TestRegion1.cshtml" />
