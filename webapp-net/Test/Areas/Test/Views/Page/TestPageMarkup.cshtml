@@ -1,7 +1,6 @@
 ﻿@model PageModel
 <html>
     <head>
-        <a href="~/areas/test/views/page/testpage3.cshtml">~/areas/test/views/page/testpage3.cshtml</a>
         <title>@Model.Title</title>
         <style>
             .region { border: solid; }
@@ -15,6 +14,11 @@
         <h2>TestRegionMarkup render</h2>
         <div>
             @Html.DxaRegion("TestRegionMarkup")
+        </div>
+
+        <h2>TestRegionEntity render</h2>
+        <div>
+            @Html.DxaRegion("TestRegionEntity")
         </div>
 
         <!-- Epilogue -->

@@ -1,6 +1,5 @@
 ﻿@model RegionModel
 @Html.DxaRegionMarkup()
-@Html.DxaRegionMarkup(Model.Regions["TestRegion1"])
 <div class="region" @Html.DxaRegionMarkup()>
     <h3>Rendered @Model with Region View "Test:TestRegionMarkup"</h3>
     
@@ -15,8 +14,6 @@
     <h4>Entities</h4>
     <div>
         @Html.DxaEntities()
-    
-        @Html.DxaEntity(Model.Entities[0])
     </div>
 
 

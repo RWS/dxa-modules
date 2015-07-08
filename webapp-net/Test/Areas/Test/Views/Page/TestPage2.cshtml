@@ -11,9 +11,14 @@
     <body>
         <h2>Rendered @Model with Page View "Test:TestPage2"</h2>
         
-        <h2>All Regions</h2>
+        <h2>All Regions, default container size</h2>
         <div>
             @Html.DxaRegions()
+        </div>
+
+        <h2>All Regions, container size 0</h2>
+        <div>
+            @Html.DxaRegions(containerSize: 0)
         </div>
 
         <h2>All Regions, container size 1</h2>
@@ -36,7 +41,7 @@
             @Html.DxaRegions(exclude: "TestRegion1,TestRegion2")
         </div>
 
-        <h2>Region #1 excluded + non-existing</h2>
+        <h2>Region #1 excluded + non-existing region excluded</h2>
         <div>
             @Html.DxaRegions(exclude: "TestRegion1,TestRegionNONE")
         </div>
@@ -53,34 +58,14 @@
             @Html.DxaRegion("")
         </div>
 
-        <h2>Region - TestRegion2</h2>
+        <h2>Region - TestRegion2, containerSize default</h2>
         <div>
             @Html.DxaRegion("TestRegion2")
         </div>
-        
-        <h2>Region - TestRegion2, emptyview - TestRegion3</h2>
-        <div>
-            @Html.DxaRegion("TestRegion2", emptyViewName: "Test:TestRegion3")
-        </div>
 
-        <h2>Region - TestRegion2, emptyview - TestRegionNONE</h2>
+        <h2>Region - TestRegion2, containerSize 0</h2>
         <div>
-            @Html.DxaRegion("TestRegion2", emptyViewName: "Test:TestRegionNONE")
-        </div>
-
-        <h2>Region - TestRegionNONE</h2>
-        <div>
-            @Html.DxaRegion("TestRegionNONE")
-        </div>
-
-        <h2>Region - TestRegionNONE, emptyview - TestRegion3</h2>
-        <div>
-            @Html.DxaRegion("TestRegionNONE", emptyViewName: "Test:TestRegion3")
-        </div>
-
-        <h2>Region - TestRegionNONE, emptyview - TestRegionNONE</h2>
-        <div>
-            @Html.DxaRegion("TestRegionNONE", emptyViewName: "Test:TestRegionNONE")
+            @Html.DxaRegion("TestRegion2", containerSize: 0)
         </div>
 
         <h2>Region - TestRegion2, containerSize 1</h2>
@@ -96,6 +81,31 @@
         <h2>Region - TestRegion2, containerSize -100</h2>
         <div>
             @Html.DxaRegion("TestRegion2", containerSize: -100)
+        </div>
+        
+        <h2>Region - TestRegion2, emptyview - TestRegion3</h2>
+        <div>
+            @Html.DxaRegion("TestRegion2", emptyViewName: "Test:TestRegion3")
+        </div>
+
+        <h2>Region - TestRegion2, emptyview - TestRegionNONE</h2>
+        <div>
+            @Html.DxaRegion("TestRegion2", emptyViewName: "Test:TestRegionNONE")
+        </div>
+
+        <h2>nonexisting Region - TestRegionNONE</h2>
+        <div>
+            @Html.DxaRegion("TestRegionNONE")
+        </div>
+
+        <h2>nonexisting Region - TestRegionNONE, emptyview - TestRegion3</h2>
+        <div>
+            @Html.DxaRegion("TestRegionNONE", emptyViewName: "Test:TestRegion3")
+        </div>
+
+        <h2>nonexisting Region - TestRegionNONE, emptyview - TestRegionNONE</h2>
+        <div>
+            @Html.DxaRegion("TestRegionNONE", emptyViewName: "Test:TestRegionNONE")
         </div>
 
         <!-- Epilogue -->
