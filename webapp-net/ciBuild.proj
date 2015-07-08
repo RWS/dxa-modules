@@ -50,7 +50,6 @@
     <ItemGroup>
       <AssemblyToDownload Include="Sdl.Web.Mvc.dll" />
       <AssemblyToDownload Include="Sdl.Web.Common.dll" />
-      <AssemblyToDownload Include="Sdl.Web.Tridion.dll" />
     </ItemGroup>
 
     <!-- Make sure we can override assemblies - remove ReadOnly attribute -->
