@@ -87,10 +87,13 @@
     <None Include="Areas\Test\Views\Entity\TestEntity3.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestEntity2.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestEntity1.cshtml" />
+    <None Include="Areas\Test\Views\Page\TestPageMarkup.cshtml" />
     <None Include="Areas\Test\Views\Page\CustomPageModelTest.cshtml" />
     <None Include="Areas\Test\Views\Page\TestPage2.cshtml" />
     <None Include="Areas\Test\Views\Page\TestPage1.cshtml" />
     <None Include="Areas\Test\Views\Region\CustomRegionModelTest.cshtml" />
+    <None Include="Areas\Test\Views\Region\TestRegionEntity.cshtml" />
+    <None Include="Areas\Test\Views\Region\TestRegionMarkup.cshtml" />
     <None Include="Areas\Test\Views\Region\TestRegion3.cshtml" />
     <None Include="Areas\Test\Views\Region\TestRegion2.cshtml" />
     <None Include="Areas\Test\Views\Region\TestRegion1.cshtml" />
