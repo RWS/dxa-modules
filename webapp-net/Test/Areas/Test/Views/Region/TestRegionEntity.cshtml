@@ -27,20 +27,28 @@
 
         <h5>All entities, container size -100</h5>
         @Html.DxaEntities(containerSize: -100)
+
+        <hr />
         
-        <h5>Single entity, container size default</h5>
+        <h5>TestEntity1, container size default</h5>
         @Html.DxaEntity(Model.Entities[0])
 
-        <h5>Single entity - container size, container size 0</h5>
+        <h5>TestEntity2, container size default</h5>
+        @Html.DxaEntity(Model.Entities[1])
+
+        <h5>TestEntity3, container size default</h5>
+        @Html.DxaEntity(Model.Entities[2])
+
+        <h5>TestEntity1 - container size, container size 0</h5>
         @Html.DxaEntity(Model.Entities[0], containerSize: 0)
 
-        <h5>Single entity - container size, container size 1</h5>
+        <h5>TestEntity1 - container size, container size 1</h5>
         @Html.DxaEntity(Model.Entities[0], containerSize: 1)
 
-        <h5>Single entity - container size, container size 100</h5>
+        <h5>TestEntity1 - container size, container size 100</h5>
         @Html.DxaEntity(Model.Entities[0], containerSize: 100)
 
-        <h5>Single entity - container size, container size -100</h5>
+        <h5>TestEntity1 - container size, container size -100</h5>
         @Html.DxaEntity(Model.Entities[0], containerSize: -100)
     </div>
 

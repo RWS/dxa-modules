@@ -11,8 +11,13 @@
     }
     <p>TestRegion2 Container size - @ViewBag.ContainerSize</p>
 
-    <h4>Entities</h4>
+    <h4>Entities with inerited containerSize</h4>
     <div>
         @Html.DxaEntities()
+    </div>
+
+    <p>Entities with custom containerSize</p>
+    <div>
+        @Html.DxaEntities(containerSize: 1)
     </div>
 </div>

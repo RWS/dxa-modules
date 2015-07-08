@@ -6,6 +6,9 @@
         <tr >
             <td>TestProperty1</td>
             <td @Html.DxaPropertyMarkup(() => Model.TestProperty1)>@Model.TestProperty1</td>
+            <td>@Html.DxaPropertyMarkup(() => Model.TestProperty1)</td>
+            <td @Html.DxaPropertyMarkup(Model.Entities[0], "TestProperty1")>PropertyName passed</td>
+            <td>@Html.DxaPropertyMarkup(Model.Entities[0], "TestProperty1")</td>
         </tr>
         <tr>
             <td>TestProperty2</td>

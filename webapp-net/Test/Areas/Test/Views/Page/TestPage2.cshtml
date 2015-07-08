@@ -108,6 +108,38 @@
             @Html.DxaRegion("TestRegionNONE", emptyViewName: "Test:TestRegionNONE")
         </div>
 
+        <hr>
+
+        <h2>Region (model) - TestRegion2, containerSize default</h2>
+        <div>
+            @Html.DxaRegion(Model.Regions["TestRegion2"])
+        </div>
+
+        <h2>Region (model) - Non-existing region</h2>
+        <div>
+            @Html.DxaRegion(Model.Regions["TestRegionNONE"])
+        </div>
+
+        <h2>Region (model) - TestRegion2, containerSize 0</h2>
+        <div>
+            @Html.DxaRegion(Model.Regions["TestRegion2"], containerSize: 0)
+        </div>
+
+        <h2>Region (model) - TestRegion2, containerSize 1</h2>
+        <div>
+            @Html.DxaRegion(Model.Regions["TestRegion2"], containerSize: 1)
+        </div>
+
+        <h2>Region (model) - TestRegion2, containerSize 100</h2>
+        <div>
+            @Html.DxaRegion(Model.Regions["TestRegion2"], containerSize: 100)
+        </div>
+
+        <h2>Region (model) - TestRegion2, containerSize -100</h2>
+        <div>
+            @Html.DxaRegion(Model.Regions["TestRegion2"], containerSize: -100)
+        </div>
+
         <!-- Epilogue -->
         <script src="@Url.VersionedContent("/assets/scripts/main.js")"></script>
         @if (WebRequestContext.IsPreview)
