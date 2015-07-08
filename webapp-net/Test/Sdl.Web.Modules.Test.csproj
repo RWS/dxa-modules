@@ -75,6 +75,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\CustomPageModel.cs" />
     <Compile Include="Models\CustomRegionModel.cs" />
     <Compile Include="Models\TestEntityModel2.cs" />
     <Compile Include="Models\TestEntityModel1.cs" />
@@ -86,6 +87,7 @@
     <None Include="Areas\Test\Views\Entity\TestEntity3.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestEntity2.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestEntity1.cshtml" />
+    <None Include="Areas\Test\Views\Page\CustomPageModelTest.cshtml" />
     <None Include="Areas\Test\Views\Page\TestPage2.cshtml" />
     <None Include="Areas\Test\Views\Page\TestPage1.cshtml" />
     <None Include="Areas\Test\Views\Region\CustomRegionModelTest.cshtml" />
