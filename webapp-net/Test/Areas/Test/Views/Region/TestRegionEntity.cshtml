@@ -45,8 +45,10 @@
         <h5>C539413 - TestEntity1 - container size, container size -100</h5>
         @Html.DxaEntity(Model.Entities[0], containerSize: -100)
 
-        <h5>C513198 - TestEntity1 - TestProperty1</h5>
+        <h5>C513198, C513697 - TestEntity1 - TestProperty1</h5>
+        <div @Html.DxaPropertyMarkup(Model.Entities[0], "TestProperty1")>
         @Html.DxaPropertyMarkup(Model.Entities[0], "TestProperty1")
+        </div>
     </div>
 
 
