@@ -1,0 +1,56 @@
+﻿@model RegionModel
+@Html.DxaRegionMarkup()
+<div class="region" @Html.DxaRegionMarkup()>
+    <h3>Rendered @Model with Region View "Test:TestRegionEntity"</h3>
+    
+    @if (Model.Regions.Count > 0)
+    {
+        <h4>Nested Regions</h4>
+        <div>
+            @Html.DxaRegions()
+        </div>
+    }
+
+    <h4>Entities</h4>
+    <div>
+        <h5>All entities, container size default</h5>
+        @Html.DxaEntities()
+
+        <h5>All entities, container size 0</h5>
+        @Html.DxaEntities(containerSize: 0)
+
+        <h5>All entities, container size 1</h5>
+        @Html.DxaEntities(containerSize: 1)
+
+        <h5>All entities, container size 100</h5>
+        @Html.DxaEntities(containerSize: 100)
+
+        <h5>All entities, container size -100</h5>
+        @Html.DxaEntities(containerSize: -100)
+
+        <hr />
+        
+        <h5>TestEntity1, container size default</h5>
+        @Html.DxaEntity(Model.Entities[0])
+
+        <h5>TestEntity2, container size default</h5>
+        @Html.DxaEntity(Model.Entities[1])
+
+        <h5>TestEntity3, container size default</h5>
+        @Html.DxaEntity(Model.Entities[2])
+
+        <h5>TestEntity1 - container size, container size 0</h5>
+        @Html.DxaEntity(Model.Entities[0], containerSize: 0)
+
+        <h5>TestEntity1 - container size, container size 1</h5>
+        @Html.DxaEntity(Model.Entities[0], containerSize: 1)
+
+        <h5>TestEntity1 - container size, container size 100</h5>
+        @Html.DxaEntity(Model.Entities[0], containerSize: 100)
+
+        <h5>TestEntity1 - container size, container size -100</h5>
+        @Html.DxaEntity(Model.Entities[0], containerSize: -100)
+    </div>
+
+
+</div>
