@@ -21,6 +21,7 @@ namespace Sdl.Web.Modules.Test
             RegisterViewModel("TestPage2", typeof(PageModel), "Page");
             RegisterViewModel("TestPageMarkup", typeof(PageModel), "Page");
             RegisterViewModel("CustomPageModelTest", typeof(CustomPageModel), "Page");
+            RegisterViewModel("TestPageCSS", typeof(PageModel), "Page");
 
             // Region Views
             RegisterViewModel("TestRegion1", typeof(RegionModel), "Region");
@@ -34,6 +35,8 @@ namespace Sdl.Web.Modules.Test
             RegisterViewModel("TestEntity1", typeof(TestEntityModel1));
             RegisterViewModel("TestEntity2", typeof(TestEntityModel1));
             RegisterViewModel("TestEntity3", typeof(TestEntityModel1));
+            RegisterViewModel("TestEntityCSSEmpty", typeof(TestEntityModel1));
+            RegisterViewModel("TestEntityCSSFill", typeof(TestEntityModel1));
 
             // Entity Models without associated View
             RegisterViewModel(typeof(TestEntityModel2));

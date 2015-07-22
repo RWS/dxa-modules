@@ -84,9 +84,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Areas\Test\Views\Entity\TestEntityCSSFill.cshtml" />
+    <None Include="Areas\Test\Views\Entity\TestEntityCSSEmpty.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestEntity3.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestEntity2.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestEntity1.cshtml" />
+    <None Include="Areas\Test\Views\Page\TestPageCSS.cshtml" />
     <None Include="Areas\Test\Views\Page\TestPageMarkup.cshtml" />
     <None Include="Areas\Test\Views\Page\CustomPageModelTest.cshtml" />
     <None Include="Areas\Test\Views\Page\TestPage2.cshtml" />
