@@ -152,6 +152,8 @@ namespace Sdl.Web.Tridion.Templates
                             //    mimeTypeNode.InnerText = GetExternalContentLibraryMimeType(eclUri);
                             //    Logger.Debug(String.Format("ECL mimetype: {0}", mimeTypeNode.InnerText));
                             //}
+
+                            // TODO: this should all be moved to DD4T Publish binaries for component TBB and expose additional information about the ECL item (including external metadata)
                         }
                     }            
                 }
