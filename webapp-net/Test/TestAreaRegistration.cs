@@ -22,6 +22,9 @@ namespace Sdl.Web.Modules.Test
             RegisterViewModel("TestPageMarkup", typeof(PageModel), "Page");
             RegisterViewModel("CustomPageModelTest", typeof(CustomPageModel), "Page");
             RegisterViewModel("TestPageCSS", typeof(PageModel), "Page");
+            RegisterViewModel("TestPageCSSMultID", typeof(PageModel), "Page");
+            RegisterViewModel("TestPageCSSNoParams", typeof(PageModel), "Page");
+            RegisterViewModel("TestPageCSSWithID", typeof(PageModel), "Page");
 
             // Region Views
             RegisterViewModel("TestRegion1", typeof(RegionModel), "Region");

@@ -90,6 +90,9 @@
     <None Include="Areas\Test\Views\Entity\TestEntity3.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestEntity2.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestEntity1.cshtml" />
+    <None Include="Areas\Test\Views\Page\TestPageCSSMultID.cshtml" />
+    <None Include="Areas\Test\Views\Page\TestPageCSSWithID.cshtml" />
+    <None Include="Areas\Test\Views\Page\TestPageCSSNoParams.cshtml" />
     <None Include="Areas\Test\Views\Page\TestPageCSS.cshtml" />
     <None Include="Areas\Test\Views\Page\TestPageMarkup.cshtml" />
     <None Include="Areas\Test\Views\Page\CustomPageModelTest.cshtml" />
