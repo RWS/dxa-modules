@@ -142,10 +142,36 @@ namespace Sdl.Web.Tridion.Templates
                             Logger.Debug(String.Format("ECL URI: {0}", eclUri));
                             Logger.Debug(String.Format("ECL template fragment: {0}", GetExternalContentLibraryHtmlFragment(eclUri)));
                             urlNode.InnerText = directLink;
+
+                            // Media Manager doesn't specify a mimetype for its distributions, which is a shame, so lets keep it the default ECL mimetype
+                            // we can find a mimetype in the external metadata for the asset, but there could be multiple assets in a distribution
+                            // plus Media Manager will actually change the mimetype depending on what device is requesting the video, so it should remain unknown at this point
+                            //XmlNode mimeTypeNode = multimediaComponentElement.SelectSingleNode("Multimedia/MimeType");
+                            //if (mimeTypeNode != null)
+                            //{
+                            //    mimeTypeNode.InnerText = GetExternalContentLibraryMimeType(eclUri);
+                            //    Logger.Debug(String.Format("ECL mimetype: {0}", mimeTypeNode.InnerText));
+                            //}
                         }
                     }            
                 }
             }
+        }
+
+        private string GetExternalContentLibraryMimeType(IEclUri eclUri)
+        {
+            if (_eclSession == null)
+            {
+                _eclSession = SessionFactory.CreateEclSession(Engine.GetSession());
+            }
+
+            if (eclUri == null || eclUri.IsNullUri)
+            {
+                throw new ArgumentException(string.Format("The URI {0} is not an External Content Library stub Component", eclUri));
+            }
+
+            var item = _eclSession.GetContentLibrary(eclUri).GetItem(eclUri) as IContentLibraryMultimediaItem;
+            return item == null ? null : item.MimeType;
         }
 
         private string GetExternalContentLibraryHtmlFragment(IEclUri eclUri)
