@@ -1,0 +1,13 @@
+﻿@model MediaManagerVideo
+@if (Model.IsEmbedded)
+{
+    <div id="@Model.MvcData.HtmlId" class="embed-video @Model.MvcData.HtmlClasses">
+        @Html.Raw(Model.ToHtml())
+    </div>
+}
+else
+{
+    <div id="@Model.MvcData.HtmlId" class="video @Model.MvcData.HtmlClasses" @Html.DxaEntityMarkup()>
+        @Html.Raw(Model.ToHtml())
+    </div>
+}
