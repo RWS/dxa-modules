@@ -1,11 +1,12 @@
-﻿using System;
-using System.Xml;
+﻿using Newtonsoft.Json;
 using Sdl.Web.Tridion.Common;
+using System;
+using System.Xml;
+using Tridion.ContentManager;
 using Tridion.ContentManager.ContentManagement;
 using Tridion.ContentManager.Templating;
 using Tridion.ContentManager.Templating.Assembly;
-using Tridion.ExternalContentLibrary.Templating.V2;
-using Newtonsoft.Json;
+using Tridion.ExternalContentLibrary.V2;
 
 namespace Sdl.Web.Tridion.Templates
 {
@@ -18,20 +19,13 @@ namespace Sdl.Web.Tridion.Templates
     /// </remarks>
     [TcmTemplateTitle("Resolve External Content Library Items")]
     [TcmTemplateParameterSchema("resource:Sdl.Web.Tridion.Resources.ResolveEclItemsParameters.xsd")]
-    public class ResolveEclItems : TemplateBase
+    public class ResolveEclItems : TemplateBase, IDisposable
     {
-        private ExternalContentLibraryFunctionSource _eclFunctions;
-
-        protected void Init(Engine engine, Package package)
-        {
-            Initialize(engine, package);
-            _eclFunctions = new ExternalContentLibraryFunctionSource();
-            _eclFunctions.Initialize(engine, package);
-        }
+        private IEclSession _eclSession;
 
         public override void Transform(Engine engine, Package package)
         {
-            Init(engine, package);
+            Initialize(engine, package);
             Component comp = GetComponent();
             if (IsPageTemplate() || comp == null)
             {
@@ -67,6 +61,15 @@ namespace Sdl.Web.Tridion.Templates
                     package.Remove(outputItem);
                     package.PushItem(Package.OutputName, package.CreateStringItem(ContentType.Text, json));
                 }
+            }
+        }
+
+        public void Dispose()
+        {
+            if (_eclSession != null)
+            {
+                _eclSession.Dispose();
+                _eclSession = null;
             }
         }
 
@@ -113,25 +116,93 @@ namespace Sdl.Web.Tridion.Templates
         {
             Logger.Debug(String.Format("Multimedia Component XML [{0}]", multimediaComponentElement.OuterXml));
 
-            string tcmUri = multimediaComponentElement.SelectSingleNode("Id").IfNotNull(i => i.InnerText);
-            if (!String.IsNullOrEmpty(tcmUri))
+            XmlNode idNode = multimediaComponentElement.SelectSingleNode("Id");
+            if (idNode != null)
             {
-                Logger.Debug(String.Format("Multimedia Component Id: {0}", tcmUri));
-                XmlNode urlNode = multimediaComponentElement.SelectSingleNode("Multimedia/Url");
-                if (urlNode != null)
+                string tcmUri = idNode.InnerText;
+                if (!String.IsNullOrEmpty(tcmUri))
                 {
-                    if (_eclFunctions.IsExternalContentLibraryComponent(tcmUri))
+                    Logger.Debug(String.Format("Multimedia Component Id: {0}", tcmUri));
+                    XmlNode urlNode = multimediaComponentElement.SelectSingleNode("Multimedia/Url");
+                    if (urlNode != null)
                     {
-                        // TODO: should we consider using the template fragment somehow?
-                        // TODO: direct link could be null, then content is available and we should add a binary to the package and publish that
-                        // in case of the latter, shouldn't this be handled in the DD4T Publish binaries for component TBB? 
-                        string directLink = _eclFunctions.GetExternalContentLibraryDirectLink(tcmUri);
-                        Logger.Debug(String.Format("ECL Component direct link: {0}", directLink));
-                        Logger.Debug(String.Format("ECL Component template fragment: {0}", _eclFunctions.GetExternalContentLibraryHtmlFragment(tcmUri)));
-                        urlNode.InnerText = directLink;
-                    }
+                        IEclUri eclUri = TryGetEclUriFromTcmUri(tcmUri);
+                        if (eclUri != null)
+                        {
+                            // we can add an ECLURI element, but DD4T will not copy it to the Page output, so we can't use this right now
+                            //XmlElement eclUriElement = multimediaComponentElement.OwnerDocument.CreateElement("EclUri");
+                            //eclUriElement.InnerText = eclUri.ToString();
+                            //multimediaComponentElement.AppendChild(eclUriElement);
+
+                            // TODO: should we consider using the template fragment somehow?
+                            // TODO: direct link could be null, then content is available and we should add a binary to the package and publish that
+                            // in case of the latter, shouldn't this be handled in the DD4T Publish binaries for component TBB? 
+                            string directLink = GetExternalContentLibraryDirectLink(eclUri);
+                            Logger.Debug(String.Format("ECL direct link: {0}", directLink));
+                            Logger.Debug(String.Format("ECL URI: {0}", eclUri));
+                            Logger.Debug(String.Format("ECL template fragment: {0}", GetExternalContentLibraryHtmlFragment(eclUri)));
+                            urlNode.InnerText = directLink;
+                        }
+                    }            
                 }
             }
+        }
+
+        private string GetExternalContentLibraryHtmlFragment(IEclUri eclUri)
+        {
+            if (_eclSession == null)
+            {
+                _eclSession = SessionFactory.CreateEclSession(Engine.GetSession());
+            }
+
+            if (eclUri == null || eclUri.IsNullUri)
+            {
+                throw new ArgumentException(string.Format("The URI {0} is not an External Content Library stub Component", eclUri));
+            }
+
+            var item = _eclSession.GetContentLibrary(eclUri).GetItem(eclUri) as IContentLibraryMultimediaItem;
+            return item == null ? null : item.GetTemplateFragment(null);
+        }
+
+        private string GetExternalContentLibraryDirectLink(IEclUri eclUri)
+        {
+            if (_eclSession == null)
+            {
+                _eclSession = SessionFactory.CreateEclSession(Engine.GetSession());
+            }
+
+            if (eclUri == null || eclUri.IsNullUri)
+            {
+                throw new ArgumentException(string.Format("The URI {0} is not an External Content Library stub Component", eclUri));
+            }
+
+            var item = _eclSession.GetContentLibrary(eclUri).GetItem(eclUri) as IContentLibraryMultimediaItem;
+            return item == null ? null : item.GetDirectLinkToPublished(null);
+        }
+
+        private IEclUri TryGetEclUriFromTcmUri(string tcmUri)
+        {
+            if (!TcmUri.IsValid(tcmUri))
+            {
+                Logger.Warning("Can not determine if the URI '{0}' represents an External Content Library stub Component as it is not a valid TCM URI");
+                return null;
+            }
+
+            TcmUri uri = new TcmUri(tcmUri);
+            if (uri.IsUriNull)
+            {
+                Logger.Debug("TryGetEclUriFromTcmUri called with a NULL TCM URI - this will always resolve to null");
+                return null;
+
+            }
+
+            if (_eclSession == null)
+            {
+                _eclSession = SessionFactory.CreateEclSession(Engine.GetSession());
+            }
+
+            IEclUri eclUri = _eclSession.TryGetEclUriFromTcmUri(uri.ToString());
+            return eclUri;
         }
     }
 }
