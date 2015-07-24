@@ -53,7 +53,7 @@
     <Message Text="Uploading assembly to TCM..." Importance="high" />
 
 	<!-- upload merged TBB to CMS -->
-    <Exec Command="_tools\TcmUploadAssembly.exe _tools\config.xml /folder:tcm:2-2453-2 $(EclSolutionDir)\bin\Debug\Sdl.Web.Tridion.Templates.Ecl.merged.dll" WorkingDirectory="$(ProjectDirectory)" /> 
+    <Exec Command='_tools\TcmUploadAssembly.exe _tools\config.xml /folder:tcm:2-2453-2 "$(EclSolutionDir)\bin\Debug\Sdl.Web.Tridion.Templates.Ecl.merged.dll"' WorkingDirectory="$(ProjectDirectory)" /> 
   </Target>
 
 </Project>
