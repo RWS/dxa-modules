@@ -1,8 +1,8 @@
 <#
 .Synopsis
-   Deploys Search Module to web application
+   Deploys Search module to web application
 .DESCRIPTION
-   Deploys Search Module to web application
+   Deploys Search module to web application
 .EXAMPLE
    & '.\web-install.ps1' -distDestination "c:\inetpub\wwwroot\mysite" 
 .INPUTS
@@ -17,18 +17,17 @@
    The functionality that best describes this cmdlet
 #>
 
-[CmdletBinding( SupportsShouldProcess=$true, 
-                PositionalBinding=$false)]
+[CmdletBinding( SupportsShouldProcess=$true, PositionalBinding=$false)]
 Param(
-    # Path to the root folder of TRI web site.
-    [string]$distDestination = "C:\inetpub\wwwroot\TestStaging"
+    [Parameter(Mandatory=$true, HelpMessage="File system path of the root folder of DXA Website")]
+    [string]$distDestination
 )
 
 #Terminate script on first occurred exception
 $ErrorActionPreference = "Stop"
 
 #Process 'WhatIf' and 'Confirm' options
-if (!($pscmdlet.ShouldProcess("System", "Deploy web application"))) { return }
+if (!($pscmdlet.ShouldProcess("System", "Deploy Search module in web application"))) { return }
 
 #Initialization
 $IsInteractiveMode = !((gwmi -Class Win32_Process -Filter "ProcessID=$PID").commandline -match "-NonInteractive") -and !$NonInteractive
@@ -40,8 +39,8 @@ $distSource = $distSource.TrimEnd("\")
 $distDestination = $distDestination.TrimEnd("\")
 
 #Copy files
-Copy-Item $distSource\Site\* $distDestination -Recurse -Force
-Write-Output ("Copied views and DLLs for search module")
+Copy-Item $distSource\* $distDestination -Recurse -Force
+Write-Output ("Copied views and DLLs for Search module")
 
 ##Unity.config
 function AddAssemblyOrNamespaceToUnityConfig ($type, $name) {
@@ -88,4 +87,4 @@ AddAssemblyOrNamespaceToUnityConfig "namespace" "Sdl.Web.Modules.Search"
 AddAssemblyOrNamespaceToUnityConfig "namespace" "Sdl.Web.Modules.Search.Solr"
 AddTypeToUnityConfig "ISearchProvider" "SolrProvider"
 
-Write-Output ("Updated 'Unity.config' file for search module")
+Write-Output ("Updated 'Unity.config' file for Search module")
