@@ -1,7 +1,6 @@
 ﻿@model RegionModel
-C513799 - @Html.DxaRegionMarkup()
 <div class="region" @Html.DxaRegionMarkup()>
-    <h3>Rendered @Model with Region View "Test:TestRegionMarkup"</h3>
+    <h3>Rendered @Model with Region View "Test:TestPageInclude"</h3>
     
     @if (Model.Regions.Count > 0)
     {
@@ -13,8 +12,6 @@ C513799 - @Html.DxaRegionMarkup()
 
     <h4>Entities</h4>
     <div>
-        C513195, C513825 - @Html.DxaEntities()
+        @Html.DxaEntities()
     </div>
-
-
 </div>
