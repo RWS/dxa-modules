@@ -58,8 +58,14 @@ namespace Sdl.Web.Modules.MediaManager.Models
         public override string ToHtml(string widthFactor, double aspect = 0, string cssClass = null, int containerSize = 0)
         {
             string htmlTagName = IsEmbedded ? "span" : "div";
+            string classAttribute = String.Empty;
 
-            return string.Format("<{2} id=\"{1}\" class=\"embed-video\"></{2}><script src=\"{0}&trgt={1}\"></script>", ScriptUrl, Guid, htmlTagName);
+            if (!String.IsNullOrEmpty(cssClass))
+            {
+                classAttribute = String.Format(" class=\"{0}\"", cssClass);
+            }
+
+            return string.Format("<{2} id=\"{1}\"{3}></{2}><script src=\"{0}&trgt={1}\"></script>", ScriptUrl, Guid, htmlTagName, classAttribute);
         }
     }
 }
