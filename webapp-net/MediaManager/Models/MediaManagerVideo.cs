@@ -65,7 +65,7 @@ namespace Sdl.Web.Modules.MediaManager.Models
                 classAttribute = String.Format(" class=\"{0}\"", cssClass);
             }
 
-            return string.Format("<{2} id=\"{1}\"{3}></{2}><script src=\"{0}&trgt={1}\"></script>", ScriptUrl, Guid, htmlTagName, classAttribute);
+            return string.Format("<{2} id=\"{1}\"{3}></{2}><script src=\"{0}&trgt={1}&responsive=true\"></script>", ScriptUrl, Guid, htmlTagName, classAttribute);
         }
     }
 }

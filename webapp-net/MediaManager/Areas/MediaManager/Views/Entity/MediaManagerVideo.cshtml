@@ -10,6 +10,6 @@ else
     <div id="@Model.MvcData.HtmlId" class="video @Model.MvcData.HtmlClasses" @Html.DxaEntityMarkup()>
         @* it is possible to use @Html.Raw(Model.ToHtml()) here like in the embedded example, now we use the model properties directly to produce a media manager video embed script *@
         <div id="@Model.Guid"></div>
-        <script src="@Model.ScriptUrl&trgt=@Model.Guid"></script>
+        <script src="@Model.ScriptUrl&trgt=@Model.Guid&responsive=true"></script>
     </div>
 }
