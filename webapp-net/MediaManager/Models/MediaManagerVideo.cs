@@ -1,21 +1,13 @@
 ﻿using System;
+using System.Xml;
 using Sdl.Web.Common.Models;
 
 namespace Sdl.Web.Modules.MediaManager.Models
 {
     [SemanticEntity(SchemaOrgVocabulary, "VideoObject", Prefix = "s", Public = true)]
     [SemanticEntity(CoreVocabulary, "ExternalContentLibraryStubSchemamm", Prefix = "ecl")]
-    public class MediaManagerVideo : MediaItem
+    public class MediaManagerVideo : EclItem
     {
-        /// <summary>
-        /// Indicates whether the video is embedded or not
-        /// </summary>
-        public bool IsEmbedded
-        {
-            get;
-            set;
-        }
-
         /// <summary>
         /// Media Manager distribution GUID
         /// </summary>
@@ -66,6 +58,18 @@ namespace Sdl.Web.Modules.MediaManager.Models
             }
 
             return string.Format("<{2} id=\"{1}\"{3}></{2}><script src=\"{0}&trgt={1}&responsive=true\"></script>", ScriptUrl, Guid, htmlTagName, classAttribute);
+        }
+
+        /// <summary>
+        /// Read additional properties from XHTML element, and set view name in MvcData.
+        /// </summary>
+        /// <param name="xhtmlElement">XHTML element</param>
+        public override void ReadFromXhtmlElement(XmlElement xhtmlElement)
+        {
+            // initialize base
+            base.ReadFromXhtmlElement(xhtmlElement);
+
+            MvcData = new MvcData("MediaManager:Entity:MediaManagerVideo");
         }
     }
 }

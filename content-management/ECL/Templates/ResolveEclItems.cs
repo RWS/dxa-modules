@@ -1,8 +1,8 @@
-﻿//using System.Text.RegularExpressions;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Sdl.Web.Tridion.Common;
 using System;
 using System.Xml;
+using Tridion;
 using Tridion.ContentManager;
 using Tridion.ContentManager.ContentManagement;
 using Tridion.ContentManager.Templating;
@@ -22,10 +22,6 @@ namespace Sdl.Web.Tridion.Templates
     [TcmTemplateParameterSchema("resource:Sdl.Web.Tridion.Resources.ResolveEclItemsParameters.xsd")]
     public class ResolveEclItems : TemplateBase, IDisposable
     {
-        //private const string LinkPattern = @"xlink:href=""(tcm\:\d+\-\d+)""";
-        private const string XlinkNamespace = "http://www.w3.org/1999/xlink";
-        private const string XhtmlNamespace = "http://www.w3.org/1999/xhtml";
-
         private IEclSession _eclSession;
 
         public override void Transform(Engine engine, Package package)
@@ -116,13 +112,6 @@ namespace Sdl.Web.Tridion.Templates
             XmlNodeList rtfElements = xmlDocument.SelectNodes("//*[FieldType=2]/Values");
             foreach (XmlElement rtfElement in rtfElements)
             {
-                //MatchCollection matches = Regex.Matches(rtfElement.InnerText, LinkPattern);
-                //Logger.Debug(String.Format("Resolving {0} External Content Library reference(s) in RTF field", matches.Count));
-                //foreach (Match match in matches)
-                //{
-                //    string uri = match.Groups[1].Value;
-                //}
-
                 ResolveXhtmlEclReference(rtfElement, ref containsEclReferences);
             }
 
@@ -136,7 +125,7 @@ namespace Sdl.Web.Tridion.Templates
 
             XmlDocument xhtml = new XmlDocument();
             XmlNamespaceManager nsmgr = new XmlNamespaceManager(xhtml.NameTable);
-            nsmgr.AddNamespace("xlink", XlinkNamespace);
+            nsmgr.AddNamespace(Constants.XlinkPrefix, Constants.XlinkNamespace);
             xhtml.LoadXml(String.Format("<root>{0}</root>", rtfElement.InnerText));
 
             // locate linked components
@@ -159,9 +148,10 @@ namespace Sdl.Web.Tridion.Templates
                                 IEclUri eclUri = TryGetEclUriFromTcmUri(tcmUri);
                                 if (eclUri != null)
                                 {
-                                    // update href to ECL URI (for XPM?)
-                                    //uriNode.InnerText = eclUri.ToString();
+                                    // add ecl uri attribute
+                                    link.SetAttribute("data-eclUri", eclUri.ToString());
 
+                                    // replace url with ecl directlink
                                     string directLink = GetExternalContentLibraryDirectLink(eclUri);
                                     Logger.Debug(String.Format("ECL direct link: {0}", directLink));
                                     Logger.Debug(String.Format("ECL URI: {0}", eclUri));
@@ -177,15 +167,8 @@ namespace Sdl.Web.Tridion.Templates
 
             Logger.Debug(String.Format("Updated XHTML [{0}]", xhtml.DocumentElement.InnerXml));
             // write changes back in original element
-            string xmlns = String.Format(" xmlns=\"{0}\"", XhtmlNamespace);
+            string xmlns = String.Format(" xmlns=\"{0}\"", Constants.XhtmlNamespace);
             rtfElement.InnerText = xhtml.DocumentElement.InnerXml.Replace(xmlns, String.Empty);
-        }
-
-        private static string Escape(string input)
-        {
-            // escape angle brackets and remove xhtml namespace
-            string xmlns = String.Format(" xmlns=\"{0}\"", XhtmlNamespace);
-            return input.Replace("<", "&lt;").Replace(">", "&gt;").Replace(xmlns, String.Empty);
         }
 
         private void ResolveEclReference(XmlElement multimediaComponentElement)
