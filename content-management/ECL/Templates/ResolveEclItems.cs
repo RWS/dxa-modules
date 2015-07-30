@@ -159,9 +159,10 @@ namespace Sdl.Web.Tridion.Templates
                                 IEclUri eclUri = TryGetEclUriFromTcmUri(tcmUri);
                                 if (eclUri != null)
                                 {
-                                    // update href to ECL URI (for XPM?)
-                                    //uriNode.InnerText = eclUri.ToString();
+                                    // add ecl uri attribute
+                                    link.SetAttribute("data-eclUri", eclUri.ToString());
 
+                                    // replace url with ecl directlink
                                     string directLink = GetExternalContentLibraryDirectLink(eclUri);
                                     Logger.Debug(String.Format("ECL direct link: {0}", directLink));
                                     Logger.Debug(String.Format("ECL URI: {0}", eclUri));
@@ -179,13 +180,6 @@ namespace Sdl.Web.Tridion.Templates
             // write changes back in original element
             string xmlns = String.Format(" xmlns=\"{0}\"", XhtmlNamespace);
             rtfElement.InnerText = xhtml.DocumentElement.InnerXml.Replace(xmlns, String.Empty);
-        }
-
-        private static string Escape(string input)
-        {
-            // escape angle brackets and remove xhtml namespace
-            string xmlns = String.Format(" xmlns=\"{0}\"", XhtmlNamespace);
-            return input.Replace("<", "&lt;").Replace(">", "&gt;").Replace(xmlns, String.Empty);
         }
 
         private void ResolveEclReference(XmlElement multimediaComponentElement)
