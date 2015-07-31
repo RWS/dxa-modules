@@ -17,14 +17,14 @@
    The functionality that best describes this cmdlet
 #>
 
-[CmdletBinding( SupportsShouldProcess=$true, 
-                PositionalBinding=$false)]
+[CmdletBinding( SupportsShouldProcess=$true, PositionalBinding=$false)]
 param (
     [ValidateSet("module-and-permissions", "module-only", "permissions-only")]
     [string]$importType = "module-and-permissions",
 
-    # Set this to your cms url
-    [string]$cmsUrl = "http://localhost/",
+    # Enter your cms url
+    [Parameter(Mandatory=$true, HelpMessage="URL of the CMS you want to import in")]
+    [string]$cmsUrl,
 
     # If you are importing into existing publications, update these to map to your target publication titles
     [string]$masterPublication = "100 Master",
@@ -38,6 +38,12 @@ param (
 
 #Terminate script on first occurred exception
 $ErrorActionPreference = "Stop"
+
+#Process 'WhatIf' and 'Confirm' options
+if (!($pscmdlet.ShouldProcess("System", "Import Search Module into CMS"))) { return }
+
+#Initialization
+$IsInteractiveMode = !((gwmi -Class Win32_Process -Filter "ProcessID=$PID").commandline -match "-NonInteractive") -and !$NonInteractive
 
 # Thanks to Dominic Cronin: http://www.indivirtual.nl/blog/sdl-tridions-importexport-api-end-content-porter/
 function Invoke-InitImportExport ($distSource, $tempFolder) {
