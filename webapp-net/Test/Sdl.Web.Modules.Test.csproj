@@ -80,6 +80,7 @@
     <Compile Include="Models\TestEntityModel2.cs" />
     <Compile Include="Models\TestEntityModel1.cs" />
     <Compile Include="Models\TestEntityModel3.cs" />
+    <Compile Include="Properties\VersionInfo.cs" />
     <Compile Include="TestAreaRegistration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
