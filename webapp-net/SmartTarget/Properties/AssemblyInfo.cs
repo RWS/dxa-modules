@@ -1,15 +1,14 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SDL.Web.Modules.SmartTarget")]
+[assembly: AssemblyTitle("Sdl.Web.Modules.SmartTarget")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("SDL.Web.Modules.SmartTarget")]
+[assembly: AssemblyProduct("Sdl.Web.Modules.SmartTarget")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("492157de-3114-48e5-9a23-965d5fe4da74")]
+[assembly: Guid("cb134b1b-ca6a-4184-86f3-ecf2e92ce03b")]
 
 // Version information for an assembly consists of the following four values:
 //

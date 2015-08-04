@@ -1,11 +1,13 @@
-﻿using Sdl.Web.Modules.SmartTarget.Models;
-using System.Collections.Generic;
-using System.Web;
+﻿using System.Collections.Generic;
+using Sdl.Web.Modules.SmartTarget.Models;
 using Tridion.ContentDelivery.AmbientData;
 using Tridion.SmartTarget.Analytics;
 using Tridion.SmartTarget.Query;
 using Tridion.SmartTarget.Query.Builder;
 using Tridion.SmartTarget.Utils;
+using System.Web;
+using Sdl.Web.Common.Configuration;
+using System.Linq;
 
 namespace Sdl.Web.Modules.SmartTarget.SmartTargetQuery
 {
@@ -16,14 +18,14 @@ namespace Sdl.Web.Modules.SmartTarget.SmartTargetQuery
         /// </summary>
         /// <param name="regionConfigList"></param>
         /// <returns></returns>
-        public static List<SmartTargetQueryResult> GetPagePromotions(List<SmartTargetRegionConfig> regionConfigList)
+        public static List<SmartTargetQueryResult> GetPagePromotions(List<SmartTargetRegionConfig> regionConfigList, Localization localization)
         {
             List<SmartTargetQueryResult> queryResults = new List<SmartTargetQueryResult>();
 
             List<string> itemsAlreadyOnPage = new List<string>();
             foreach (SmartTargetRegionConfig regionConfig in regionConfigList)
             {
-                SmartTargetQueryResult queryResult = GetRegionPromotions(regionConfig, itemsAlreadyOnPage);
+                SmartTargetQueryResult queryResult = GetRegionPromotions(regionConfig, itemsAlreadyOnPage, localization);
                 queryResults.Add(queryResult);
             }
 
@@ -36,15 +38,15 @@ namespace Sdl.Web.Modules.SmartTarget.SmartTargetQuery
         /// <param name="regionConfig"></param>
         /// <param name="itemsAlreadyOnPage"></param>
         /// <returns></returns>
-        public static SmartTargetQueryResult GetRegionPromotions(SmartTargetRegionConfig regionConfig, List<string> itemsAlreadyOnPage)
+        public static SmartTargetQueryResult GetRegionPromotions(SmartTargetRegionConfig regionConfig, List<string> itemsAlreadyOnPage, Localization localization)
         {
             SmartTargetQueryResult queryResult = new SmartTargetQueryResult();
             queryResult.RegionName = regionConfig.RegionName;
 
             TcmUri pageUri = new TcmUri(regionConfig.PageId);
             TcmUri publicationUri = new TcmUri(0, pageUri.PublicationId, 1);
-
-            //TODO; via TRI??
+            
+            //TODO; should this been done through DXA??
             ClaimStore claimStore = AmbientDataContext.CurrentClaimStore;
             string triggers = AmbientDataHelper.GetTriggers(claimStore);
 
@@ -63,7 +65,7 @@ namespace Sdl.Web.Modules.SmartTarget.SmartTargetQuery
 
             if (fredHopperResultset.Promotions.Count > 0)
             {
-                queryResult.Promotions = ProcessRegionPromotions(fredHopperResultset.Promotions, publicationUri, pageUri, regionConfig.RegionName, regionConfig.MaxItems, regionConfig.AllowDuplicates, itemsAlreadyOnPage);
+                queryResult.Promotions = ProcessRegionPromotions(fredHopperResultset.Promotions, publicationUri, pageUri, regionConfig.RegionName, regionConfig.MaxItems, regionConfig.AllowDuplicates, itemsAlreadyOnPage, localization);
                 queryResult.HasSmartTargetContent = true;
             }
 
@@ -84,7 +86,7 @@ namespace Sdl.Web.Modules.SmartTarget.SmartTargetQuery
         /// <param name="allowDuplicates"></param>
         /// <param name="itemsAlreadyOnPage"></param>
         /// <returns></returns>
-        private static List<SmartTargetPromotion> ProcessRegionPromotions(List<Promotion> promotions, TcmUri publicationUri, TcmUri pageUri, string region, int maxItems, bool allowDuplicates, List<string> itemsAlreadyOnPage)
+        private static List<SmartTargetPromotion> ProcessRegionPromotions(List<Promotion> promotions, TcmUri publicationUri, TcmUri pageUri, string region, int maxItems, bool allowDuplicates, List<string> itemsAlreadyOnPage, Localization localization)
         {
             List<string> itemsOutputInRegion = new List<string>();
             ExperimentCookies newExperimentCookies = new ExperimentCookies();
@@ -95,9 +97,10 @@ namespace Sdl.Web.Modules.SmartTarget.SmartTargetQuery
             ResultSet.FilterPromotions(promotions, region, maxItems, allowDuplicates, itemsOutputInRegion, itemsAlreadyOnPage, ref existingExperimentCookies, ref newExperimentCookies, out experimentDimensions);
 
             List<SmartTargetPromotion> smartTargetPromotions = new List<SmartTargetPromotion>();
-            foreach (Promotion promotion in promotions)
+            foreach (Promotion promotion in promotions.Where(promo => promo.Visible))
             {
-                SmartTargetExperiment smartTargetPromotion = new SmartTargetExperiment();
+                SmartTargetPromotion smartTargetPromotion = (promotion is Experiment) ? new SmartTargetExperiment() : new SmartTargetPromotion();
+                smartTargetPromotion.MvcData = new Common.Models.MvcData("SmartTarget:Entity:Promotion"); // TODO: make "configurable" ?
 
                 if (experimentDimensions != null && experimentDimensions.ExperimentId.Equals(promotion.PromotionId))
                 {
@@ -117,20 +120,19 @@ namespace Sdl.Web.Modules.SmartTarget.SmartTargetQuery
                 smartTargetPromotion.RegionName = promotion.Region;
                 smartTargetPromotion.Title = promotion.Title;
                 smartTargetPromotion.Slogan = promotion.Slogan;
-                smartTargetPromotion.IsVisible = promotion.Visible;
 
                 List<SmartTargetItem> smartTargetPromotionItems = new List<SmartTargetItem>();
 
-                foreach (Item item in promotion.Items)
+                foreach (Item item in promotion.Items.Where(item => item.Visible))
                 {
-                    SmartTargetItem smartTargetItem = new SmartTargetItem
+                    SmartTargetItem smartTargetItem = new SmartTargetItem(localization)
                     {
                         PromotionId = item.PromotionId,
                         RegionName = item.Region,
                         ComponentUri = item.ComponentUriAsString,
-                        TemplateUri = item.TemplateUriAsString,
-                        IsVisible = item.Visible
+                        TemplateUri = item.TemplateUriAsString
                     };
+
                     smartTargetPromotionItems.Add(smartTargetItem);
                 }
 

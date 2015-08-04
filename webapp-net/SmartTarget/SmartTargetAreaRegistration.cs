@@ -1,5 +1,5 @@
-﻿using Sdl.Web.Modules.SmartTarget.Models;
-using Sdl.Web.Mvc.Configuration;
+﻿using Sdl.Web.Mvc.Configuration;
+using Sdl.Web.Modules.SmartTarget.Models;
 
 namespace Sdl.Web.Modules.SmartTarget
 {

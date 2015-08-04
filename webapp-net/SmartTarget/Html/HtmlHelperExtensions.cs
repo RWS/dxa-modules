@@ -26,65 +26,57 @@ namespace Sdl.Web.Modules.SmartTarget.Html
         /// <param name="region"></param>
         /// <param name="siteEditTag"></param>
         /// <returns></returns>
-        public static MvcHtmlString DxaSmartTargetQuery(this HtmlHelper htmlHelper, RegionModel region, string siteEditTag = _defaultSiteEditTag)
+        public static MvcHtmlString DxaSmartTargetQuery(this HtmlHelper htmlHelper, SmartTargetRegion region, string siteEditTag = _defaultSiteEditTag)
         {
-            var siteEditOpenTag = string.Format("<{0}>", siteEditTag);
-            var siteEditCloseTag = string.Format("</{0}>", siteEditTag);
-
+            string siteEditOpenTag = string.Format("<{0}>", siteEditTag);
+            string siteEditCloseTag = string.Format("</{0}>", siteEditTag);
+            
             if (region is SmartTargetRegion)
             {
                 SmartTargetRegion smartTargetRegion = region as SmartTargetRegion;
 
                 StringBuilder xmpMarkup = new StringBuilder();
                 bool isPreview = WebRequestContext.IsPreview;
-
-                if (isPreview)
-                {
-                    xmpMarkup.AppendLine(siteEditOpenTag);
-                    xmpMarkup.AppendLine(smartTargetRegion.XpmMarkup);
-                }
-
+                
+                
                 foreach (EntityModel item in smartTargetRegion.Entities)
                 {
                     if (item is SmartTargetPromotion)
                     {
                         SmartTargetPromotion promotion = (SmartTargetPromotion)item;
-
-                        if (promotion.IsVisible)
+                        
+                        if (isPreview)
                         {
-                            if (isPreview)
-                            {
-                                xmpMarkup.AppendLine(siteEditOpenTag);
-                                xmpMarkup.AppendLine(promotion.XpmMarkup);
-                            }
-
-                            foreach (SmartTargetItem promotionItem in promotion.Items)
-                            {
-                                if (promotionItem.IsVisible)
-                                {
-                                    string renderedContent = Mvc.Html.HtmlHelperExtensions.DxaEntity(htmlHelper, promotionItem.Entity).ToHtmlString();
-
-                                    if (promotion is SmartTargetExperiment)
-                                    {
-                                        SmartTargetExperiment experiment = promotion as SmartTargetExperiment;
-                                        //string renderedContentWithTrackedLinks = SmartTargetAnalytics.AddTrackingToLinks(renderedContent, experiment);
-                                        xmpMarkup.AppendLine(renderedContent);
-
-                                        //SmartTargetAnalytics.TrackView(experiment);
-                                        //SmartTargetAnalytics.SaveExperimentCookies(experiment);
-                                    }
-                                    else
-                                    {
-                                        xmpMarkup.AppendLine(renderedContent);
-                                    }
-                                }
-                            }
-
-                            if (isPreview)
-                            {
-                                xmpMarkup.AppendLine(siteEditCloseTag);
-                            }
+                            xmpMarkup.AppendLine(siteEditOpenTag);
+                            xmpMarkup.AppendLine(promotion.GetXpmMarkup(WebRequestContext.Localization));
                         }
+
+                        foreach (SmartTargetItem promotionItem in promotion.Items)
+                        {
+                                
+                                string renderedContent = Mvc.Html.HtmlHelperExtensions.DxaEntity(htmlHelper, promotionItem.Entity).ToHtmlString();
+
+                                if (promotion is SmartTargetExperiment)
+                                {
+                                    SmartTargetExperiment experiment = promotion as SmartTargetExperiment;
+                                    //string renderedContentWithTrackedLinks = SmartTargetAnalytics.AddTrackingToLinks(renderedContent, experiment);
+                                    xmpMarkup.AppendLine(renderedContent);
+
+                                    //SmartTargetAnalytics.TrackView(experiment);
+                                    //SmartTargetAnalytics.SaveExperimentCookies(experiment);
+                                }
+                                else
+                                {
+                                    xmpMarkup.AppendLine(renderedContent);
+                                }
+                                
+                        }
+
+                        if (isPreview)
+                        {
+                            xmpMarkup.AppendLine(siteEditCloseTag);
+                        }
+                        
                     }
                     else
                     {
@@ -93,17 +85,12 @@ namespace Sdl.Web.Modules.SmartTarget.Html
                         xmpMarkup.AppendLine(Mvc.Html.HtmlHelperExtensions.DxaEntity(htmlHelper, item).ToHtmlString());
                     }
                 }
-
-                if (isPreview)
-                {
-                    xmpMarkup.AppendLine(siteEditCloseTag);
-                }
-
+                
                 return MvcHtmlString.Create(xmpMarkup.ToString());
             }
 
             Log.Debug("Region '{0}' is no SmartTargetRegion region.", region.Name);
-            return MvcHtmlString.Create("");
+            return null;
         }
     }
 }

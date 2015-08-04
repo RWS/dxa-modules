@@ -47,7 +47,7 @@ namespace Sdl.Web.Modules.SmartTarget.Utils
         {
             view = null;
             module = SiteConfiguration.GetDefaultModuleName(); // default module
-
+            
             if (!string.IsNullOrEmpty(regionName))
             {
                 // split region view on colon, use first part as area (module) name

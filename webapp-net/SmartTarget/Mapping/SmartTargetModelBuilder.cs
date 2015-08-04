@@ -8,12 +8,12 @@ using Sdl.Web.Modules.SmartTarget.Utils;
 using Sdl.Web.Tridion.Mapping;
 using System;
 using System.Collections.Generic;
-using Tridion.SmartTarget.Utils;
+using System.Linq;
 using IPage = DD4T.ContentModel.IPage;
 
 namespace Sdl.Web.Modules.SmartTarget.Mapping
 {
-    public class SmartTargetModelBuilder : DefaultModelBuilder
+    public class SmartTargetModelBuilder : IModelBuilder
     {
         /// <summary>
         /// 
@@ -22,66 +22,50 @@ namespace Sdl.Web.Modules.SmartTarget.Mapping
         /// <param name="page"></param>
         /// <param name="includes"></param>
         /// <param name="localization"></param>
-        public override void BuildPageModel(ref PageModel pageModel, IPage page, IEnumerable<IPage> includes, Localization localization)
+        public void BuildPageModel(ref PageModel pageModel, IPage page, IEnumerable<IPage> includes, Localization localization)
         {
-            Log.Debug("Extending DefaultModelBuilder in Pipeline with SmartTargetModelBuilder");
-
-            if (pageModel != null)
+            using (new Tracer(pageModel, page, includes, localization))
             {
+                if (pageModel == null || !pageModel.Regions.OfType<SmartTargetRegion>().Any())
+                {
+                    return;
+                }
+                
                 Dictionary<string, string> moduleMap;
                 List<SmartTargetRegionConfig> regionConfigList;
 
                 if (TryGetSmartTargetRegionConfiguration(page, out moduleMap, out regionConfigList))
                 {
-                    List<SmartTargetQueryResult> smartTargetQueryResults = SmartTargetQuery.SmartTargetQuery.GetPagePromotions(regionConfigList);
+                    List<SmartTargetQueryResult> smartTargetQueryResults = SmartTargetQuery.SmartTargetQuery.GetPagePromotions(regionConfigList, localization);
+
                     foreach (SmartTargetQueryResult smartTargetQueryResult in smartTargetQueryResults)
                     {
-                        Log.Debug("Found query result for '{0}'", smartTargetQueryResult.RegionName);
+                        SmartTargetRegion region = pageModel.Regions[smartTargetQueryResult.RegionName] as SmartTargetRegion;
 
-                        SmartTargetRegion region = new SmartTargetRegion(smartTargetQueryResult.RegionName)
+                        if (region != null)
                         {
-                            MvcData = new MvcData
-                            {
-                                AreaName = moduleMap[smartTargetQueryResult.RegionName],
-                                ViewName = smartTargetQueryResult.RegionName,
-                                ControllerName = SiteConfiguration.GetRegionController(),
-                                ControllerAreaName = SiteConfiguration.GetDefaultModuleName(),
-                                ActionName = SiteConfiguration.GetRegionAction()
-                            },
+                            region.XpmMarkup = smartTargetQueryResult.XpmMarkup;
 
-                            XpmMarkup = smartTargetQueryResult.XpmMarkup,
-                            HasSmartTargetContent = smartTargetQueryResult.HasSmartTargetContent
-                        };
-
-                        if (region.HasSmartTargetContent)
-                        {
-                            foreach (SmartTargetPromotion promotion in smartTargetQueryResult.Promotions)
+                            if (smartTargetQueryResult.HasSmartTargetContent)
                             {
-                                RetrievePromotionEntities(promotion, localization);
-                                region.Entities.Add(promotion);
-                            }
-                        }
-                        else
-                        {
-                            RegionModel fallbackContent = pageModel.Regions.ContainsKey(region.Name) ? pageModel.Regions[region.Name] : null;
+                                if (!region.HasSmartTargetContent)
+                                {
+                                    region.Entities.Clear(); // Discard any fallback content coming from CM
+                                }
 
-                            if (fallbackContent != null)
-                            {
-                                foreach (EntityModel promotion in fallbackContent.Entities)
+                                region.HasSmartTargetContent = true;
+
+                                foreach (SmartTargetPromotion promotion in smartTargetQueryResult.Promotions)
                                 {
                                     region.Entities.Add(promotion);
                                 }
                             }
-                        }
-
-                        // Update of the Regions is required, therefore remove the old region and add the updated version.
-                        pageModel.Regions.Remove(pageModel.Regions[region.Name]);
-                        pageModel.Regions.Add(region);
+                        }                        
                     }
                 }
             }
         }
-
+        
         /// <summary>
         /// 
         /// </summary>
@@ -95,15 +79,16 @@ namespace Sdl.Web.Modules.SmartTarget.Mapping
             regionConfigList = new List<SmartTargetRegionConfig>();
 
             IPage page = sourceEntity as IPage;
-            if (page != null && page.PageTemplate.MetadataFields.ContainsKey("smartTargetRegions"))
+            //Maybe check for ModuleName in the metadata
+            if (page != null && page.PageTemplate.MetadataFields.ContainsKey("regions"))
             {
-                foreach (IFieldSet smartTargetRegion in page.PageTemplate.MetadataFields["smartTargetRegions"].EmbeddedValues)
+                foreach (IFieldSet smartTargetRegion in page.PageTemplate.MetadataFields["regions"].EmbeddedValues)
                 {
                     string module;
                     string regionName;
 
                     //Region name is a mandatory field; write directly
-                    SmartTargetUtils.DetermineRegionViewNameAndModule(smartTargetRegion["regionName"].Value, out module, out regionName);
+                    SmartTargetUtils.DetermineRegionViewNameAndModule(smartTargetRegion["view"].Value, out module, out regionName);
                     moduleMap[regionName] = module;
 
                     //Max items is a mandatory field; write directly
@@ -134,22 +119,12 @@ namespace Sdl.Web.Modules.SmartTarget.Mapping
             return false;
         }
 
-        private void RetrievePromotionEntities(SmartTargetPromotion promotion, Localization localization)
+        public void BuildEntityModel(ref EntityModel entityModel, IComponentPresentation cp, Localization localization)
         {
-            foreach (SmartTargetItem promotionItem in promotion.Items)
-            {
-                if (promotionItem.IsVisible)
-                {
-                    TcmUri componentUri = new TcmUri(promotionItem.ComponentUri);
-                    TcmUri templateUri = new TcmUri(promotionItem.TemplateUri);
-                    EntityModel entitymodel = SiteConfiguration.ContentProvider.GetEntityModel(string.Format("{0}-{1}", componentUri.ItemId, templateUri.ItemId), localization);
+        }
 
-                    if (entitymodel.Id != null)
-                    {
-                        promotionItem.Entity = entitymodel;
-                    }
-                }
-            }
+        public void BuildEntityModel(ref EntityModel entityModel, IComponent component, Type baseModelType, Localization localization)
+        {
         }
     }
 }

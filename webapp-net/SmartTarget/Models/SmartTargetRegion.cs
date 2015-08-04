@@ -1,9 +1,11 @@
-﻿using Sdl.Web.Common.Models;
+﻿using Sdl.Web.Common.Configuration;
+using Sdl.Web.Common.Models;
 
 namespace Sdl.Web.Modules.SmartTarget.Models
 {
     public class SmartTargetRegion : RegionModel
     {
+        
         public SmartTargetRegion(string name) : base(name)
         {
         }
@@ -15,5 +17,10 @@ namespace Sdl.Web.Modules.SmartTarget.Models
         public bool HasSmartTargetContent { get; set; }
 
         public string XpmMarkup { get; set; }
+
+        public override string GetXpmMarkup(Localization localization)
+        {
+            return XpmMarkup;
+        }
     }
 }

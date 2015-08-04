@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{492157DE-3114-48E5-9A23-965D5FE4DA74}</ProjectGuid>
+    <ProjectGuid>{CB134B1B-CA6A-4184-86F3-ECF2E92CE03B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SDL.Web.Modules.SmartTarget</RootNamespace>
-    <AssemblyName>SDL.Web.Modules.SmartTarget</AssemblyName>
+    <RootNamespace>Sdl.Web.Modules.SmartTarget</RootNamespace>
+    <AssemblyName>Sdl.Web.Modules.SmartTarget</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,12 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DD4T.ContentModel">
+      <HintPath>..\_references\dd4t-update\DD4T.ContentModel.dll</HintPath>
+    </Reference>
     <Reference Include="DD4T.ContentModel.Contracts">
-      <HintPath>..\_references\DD4T.ContentModel.Contracts.dll</HintPath>
+      <HintPath>..\_references\dd4t-update\DD4T.ContentModel.Contracts.dll</HintPath>
     </Reference>
-    <Reference Include="Sdl.Web.Tridion">
-      <HintPath>..\_references\Sdl.Web.Tridion.dll</HintPath>
-    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc">
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.1.2\lib\net45\System.Web.Mvc.dll</HintPath>
@@ -56,47 +58,62 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.1.2\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="Tridion.ContentDelivery.AmbientData">
-      <HintPath>..\_references\Tridion.ContentDelivery.AmbientData.dll</HintPath>
-    </Reference>
-    <Reference Include="Tridion.SmartTarget">
-      <HintPath>..\_references\st-2014-sp1\Tridion.SmartTarget.dll</HintPath>
-    </Reference>
-    <Reference Include="Sdl.Web.Common">
-      <HintPath>..\_references\Sdl.Web.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Sdl.Web.Mvc">
-      <HintPath>..\_references\Sdl.Web.Mvc.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="Tridion.ContentDelivery, Version=7.1.0.165, Culture=neutral, PublicKeyToken=ddfc895746e5ee6b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_references\2013-sp1\Tridion.ContentDelivery.dll</HintPath>
+    </Reference>
+    <Reference Include="Tridion.ContentDelivery.AmbientData">
+      <HintPath>..\_references\2013-sp1\Tridion.ContentDelivery.AmbientData.dll</HintPath>
+    </Reference>
+    <Reference Include="Tridion.SmartTarget">
+      <HintPath>..\_references\st-2014-sp1\Tridion.SmartTarget.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-    <Compile Include="SmartTargetAreaRegistration.cs" />
-    <Compile Include="SmartTargetQuery\SmartTargetQueryResults.cs" />
-    <Compile Include="SmartTargetQuery\SmartTargetQuery.cs" />
-    <Compile Include="Utils\SmartTargetUtils.cs" />
-    <None Include="Areas\SmartTarget\Views\Web.config" />
-    <None Include="Areas\SmartTarget\Views\Region\Example2.cshtml" />
-    <None Include="Areas\SmartTarget\Views\Region\Example1.cshtml" />
     <Compile Include="Html\HtmlHelperExtensions.cs" />
     <Compile Include="Mapping\SmartTargetModelBuilder.cs" />
-    <Compile Include="Models\SmartTargetRegionConfig.cs" />
+    <Compile Include="SmartTargetQuery\SmartTargetQuery.cs" />
+    <Compile Include="SmartTargetQuery\SmartTargetQueryResult.cs" />
+    <Compile Include="SmartTargetAreaRegistration.cs" />
+    <Compile Include="Utils\SmartTargetUtils.cs" />
+    <None Include="Areas\SmartTarget\Views\Entity\Promotion.cshtml" />
+    <None Include="Areas\SmartTarget\Views\Region\Example1.cshtml" />
+    <None Include="Areas\SmartTarget\Views\Web.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <Compile Include="Models\SmartTargetExperiment.cs" />
+    <Compile Include="Models\SmartTargetItem.cs" />
     <Compile Include="Models\SmartTargetPromotion.cs" />
     <Compile Include="Models\SmartTargetRegion.cs" />
-    <Compile Include="Models\SmartTargetItem.cs" />
-    <Compile Include="Models\SmartTargetExperiment.cs" />
-    <Content Include="todo.txt" />
+    <Compile Include="Models\SmartTargetRegionConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Sdl.Web.Common\Sdl.Web.Common.csproj">
+      <Project>{21c08f9a-24c2-481a-95c3-a255be9771a7}</Project>
+      <Name>Sdl.Web.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sdl.Web.Mvc\Sdl.Web.Mvc.csproj">
+      <Project>{923b2009-9a0b-4425-88a5-bf7af25c8f8b}</Project>
+      <Name>Sdl.Web.Mvc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sdl.Web.Tridion\Sdl.Web.Tridion.csproj">
+      <Project>{ae4651df-a42f-4863-a0e1-870eacf3d072}</Project>
+      <Name>Sdl.Web.Tridion</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy "$(TargetPath)" "$(SolutionDir)\Site\bin\" /Y
+xcopy "$(ProjectDir)\Areas\*" "$(SolutionDir)\Site\Areas\" /Y /s</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
