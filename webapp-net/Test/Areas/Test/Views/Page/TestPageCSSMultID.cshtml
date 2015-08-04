@@ -8,12 +8,11 @@
             td { border: solid thin; }
         </style>
     </head>
-    <body id="@Model.MvcData.HtmlId" class="@Model.MvcData.HtmlClasses">
-        <h1 id="@Model.MvcData.HtmlId" class="@Model.MvcData.HtmlClasses">Rendered @Model with Page View "Test:TestPageCSS"</h1>
+    <body class="@Model.HtmlClasses">
+        <h1 class="@Model.HtmlClasses">Rendered @Model with Page View "Test:TestPageCSS"</h1>
 
         <p>
-            ID = @Model.MvcData.HtmlId <br>
-            Classes = @Model.MvcData.HtmlClasses
+            Classes = @Model.HtmlClasses
         </p> 
         
         <h2>Regions</h2>

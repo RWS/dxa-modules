@@ -1,9 +1,9 @@
 ﻿@model Sdl.Web.Modules.Search.SearchQuery<Teaser>
-<div class='rich-text' @Markup.Entity(Model)>
+<div class="rich-text @Model.HtmlClasses" @Markup.Entity(Model)>
     @if (Model.Headline != null)
     {
-        <div class='page-header page-header-top'>
-            <h1 class='h3' @Markup.Property(Model, "Headline")>@Model.Headline</h1>
+        <div class="page-header page-header-top">
+            <h1 class="h3" @Markup.Property(Model, "Headline")>@Model.Headline</h1>
         </div>
     }
     @if (Model.Total > 0)
