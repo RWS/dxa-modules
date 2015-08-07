@@ -2,7 +2,7 @@ Add the SmartTargetModelBuilder to the modelBuilderPipeline in web.config of the
 
   <modelBuilderPipeline>
     <add type="Sdl.Web.Tridion.Mapping.DefaultModelBuilder, Sdl.Web.Tridion"/>
-    <!-- Customization for SmartTarget -->
+    <!-- SmartTarget module -->
     <add type="Sdl.Web.Modules.SmartTarget.Mapping.SmartTargetModelBuilder, Sdl.Web.Modules.SmartTarget" />
   </modelBuilderPipeline>
   
