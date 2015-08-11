@@ -2,6 +2,7 @@
 using Sdl.Web.Tridion.Common;
 using System;
 using System.Xml;
+using Tridion;
 using Tridion.ContentManager;
 using Tridion.ContentManager.ContentManagement;
 using Tridion.ContentManager.Templating;
@@ -100,16 +101,74 @@ namespace Sdl.Web.Tridion.Templates
             bool containsEclReferences = false;
 
             XmlNodeList multimediaComponentElements = xmlDocument.SelectNodes("//Multimedia[MimeType='application/externalcontentlibrary']/..");
-
             Logger.Debug(String.Format("Resolving {0} External Content Library reference(s)", multimediaComponentElements.Count));
-
             foreach (XmlElement multimediaComponentElement in multimediaComponentElements)
             {
                 ResolveEclReference(multimediaComponentElement);
                 containsEclReferences = true;
             }
 
+            // also resolve RTF fields
+            XmlNodeList rtfElements = xmlDocument.SelectNodes("//*[FieldType=2]/Values");
+            foreach (XmlElement rtfElement in rtfElements)
+            {
+                ResolveXhtmlEclReference(rtfElement, ref containsEclReferences);
+            }
+
             return containsEclReferences;
+        }
+
+        // TODO: merge ECL handling with ResolveEclReference(XmlElement) or split it out to a separate method since now we duplicate code
+        private void ResolveXhtmlEclReference(XmlElement rtfElement, ref bool containsEclReferences)
+        {
+            Logger.Debug(String.Format("RTF XHTML [{0}]", rtfElement.InnerText));
+
+            XmlDocument xhtml = new XmlDocument();
+            XmlNamespaceManager nsmgr = new XmlNamespaceManager(xhtml.NameTable);
+            nsmgr.AddNamespace(Constants.XlinkPrefix, Constants.XlinkNamespace);
+            xhtml.LoadXml(String.Format("<root>{0}</root>", rtfElement.InnerText));
+
+            // locate linked components
+            XmlNodeList linkElements = xhtml.SelectNodes("//*[@xlink:href[starts-with(string(.),'tcm:')]]", nsmgr); 
+            Logger.Debug(String.Format("Resolving {0} External Content Library reference(s) in RTF field", linkElements.Count));
+            foreach (XmlElement link in linkElements)
+            {
+                XmlNode uriNode = link.Attributes["xlink:href"];
+                if (uriNode != null)
+                {
+                    string tcmUri = uriNode.InnerText;
+                    if (!string.IsNullOrEmpty(tcmUri))
+                    {
+                        Logger.Debug(String.Format("Multimedia Component link: {0}", tcmUri));
+                        XmlNode urlNode = link.Attributes["src"];
+                        if (urlNode != null)
+                        {
+                            if (!string.IsNullOrEmpty(tcmUri))
+                            {
+                                IEclUri eclUri = TryGetEclUriFromTcmUri(tcmUri);
+                                if (eclUri != null)
+                                {
+                                    // add ecl uri attribute
+                                    link.SetAttribute("data-eclUri", eclUri.ToString());
+
+                                    // replace url with ecl directlink
+                                    string directLink = GetExternalContentLibraryDirectLink(eclUri);
+                                    Logger.Debug(String.Format("ECL direct link: {0}", directLink));
+                                    Logger.Debug(String.Format("ECL URI: {0}", eclUri));
+                                    urlNode.InnerText = directLink;
+
+                                    containsEclReferences = true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            Logger.Debug(String.Format("Updated XHTML [{0}]", xhtml.DocumentElement.InnerXml));
+            // write changes back in original element
+            string xmlns = String.Format(" xmlns=\"{0}\"", Constants.XhtmlNamespace);
+            rtfElement.InnerText = xhtml.DocumentElement.InnerXml.Replace(xmlns, String.Empty);
         }
 
         private void ResolveEclReference(XmlElement multimediaComponentElement)

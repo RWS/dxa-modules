@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Sdl.Web.Modules.GoogleAnalytics")]
-[assembly: AssemblyDescription("SDL Tridion Reference Implementation Google Analytics Module Assembly")]
+[assembly: AssemblyDescription("SDL DXA Google Analytics Module")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("SDL Tridion B.V.")]
-[assembly: AssemblyProduct("SDL Tridion Reference Implementation")]
-[assembly: AssemblyCopyright("Copyright © 2014 SDL Tridion Development Lab B.V.")]
+[assembly: AssemblyCompany("SDL Group")]
+[assembly: AssemblyProduct("SDL Digital Experience Accelerator")]
+[assembly: AssemblyCopyright("Copyright © 2014-2015 SDL Group")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
