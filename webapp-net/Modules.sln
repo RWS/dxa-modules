@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdl.Web.Modules.Search", "Search\Sdl.Web.Modules.Search.csproj", "{8FEFFF4C-0AE2-452F-89B1-36F7D2944032}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdl.Web.Modules.Test", "Test\Sdl.Web.Modules.Test.csproj", "{40A64979-0221-4D96-9055-F723D11CA703}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdl.Web.Modules.MediaManager", "MediaManager\Sdl.Web.Modules.MediaManager.csproj", "{709998A6-7E5F-4619-9D70-18A6AB6EB8FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDL.Web.Modules.SmartTarget", "SmartTarget\SDL.Web.Modules.SmartTarget.csproj", "{492157DE-3114-48E5-9A23-965D5FE4DA74}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{709998A6-7E5F-4619-9D70-18A6AB6EB8FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{709998A6-7E5F-4619-9D70-18A6AB6EB8FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{709998A6-7E5F-4619-9D70-18A6AB6EB8FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{492157DE-3114-48E5-9A23-965D5FE4DA74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{492157DE-3114-48E5-9A23-965D5FE4DA74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{492157DE-3114-48E5-9A23-965D5FE4DA74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{492157DE-3114-48E5-9A23-965D5FE4DA74}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
