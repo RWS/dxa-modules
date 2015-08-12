@@ -1,0 +1,10 @@
+﻿@model SmartTargetPromotion
+
+@* Experiment-view *@
+<span @Html.DxaEntityMarkup()>
+    @foreach (SmartTargetItem item in Model.Items)
+    {
+        @Html.DxaEntity(item.Entity)
+    }
+</span>
+
