@@ -6,7 +6,7 @@ namespace Sdl.Web.Modules.SmartTarget.Models
 {
     public class SmartTargetItem
     {
-        private Localization _localization;
+        private readonly Localization _localization;
 
         public string RegionName { get; set; }
 

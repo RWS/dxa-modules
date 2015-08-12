@@ -13,9 +13,11 @@ namespace Sdl.Web.Modules.SmartTarget.Models
         public SmartTargetRegion(string name, string qualifiedViewName) : base(name, qualifiedViewName)
         {
         }
-
+        
         public bool HasSmartTargetContent { get; set; }
 
+        public int MaxItems { get; set; }
+        
         public string XpmMarkup { get; set; }
 
         public override string GetXpmMarkup(Localization localization)

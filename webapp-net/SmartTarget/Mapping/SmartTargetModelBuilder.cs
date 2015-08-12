@@ -3,12 +3,11 @@ using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Logging;
 using Sdl.Web.Common.Models;
 using Sdl.Web.Modules.SmartTarget.Models;
-using Sdl.Web.Modules.SmartTarget.SmartTargetQuery;
-using Sdl.Web.Modules.SmartTarget.Utils;
 using Sdl.Web.Tridion.Mapping;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Sdl.Web.Modules.SmartTarget.Utils;
 using IPage = DD4T.ContentModel.IPage;
 
 namespace Sdl.Web.Modules.SmartTarget.Mapping
@@ -16,7 +15,7 @@ namespace Sdl.Web.Modules.SmartTarget.Mapping
     public class SmartTargetModelBuilder : IModelBuilder
     {
         /// <summary>
-        /// 
+        /// Update page and regions with proper SmartTarget content
         /// </summary>
         /// <param name="pageModel"></param>
         /// <param name="page"></param>
@@ -31,94 +30,36 @@ namespace Sdl.Web.Modules.SmartTarget.Mapping
                     return;
                 }
                 
-                Dictionary<string, string> moduleMap;
-                List<SmartTargetRegionConfig> regionConfigList;
-
-                if (TryGetSmartTargetRegionConfiguration(page, out moduleMap, out regionConfigList))
+                // pageModel does not contain maxItems of the region metadata fields
+                // check if we have a page so we can poppulate these fields, if not return;
+                if (page == null || !page.PageTemplate.MetadataFields.ContainsKey("regions"))
                 {
-                    List<SmartTargetQueryResult> smartTargetQueryResults = SmartTargetQuery.SmartTargetQuery.GetPagePromotions(regionConfigList, localization);
+                    return;
+                }
 
-                    foreach (SmartTargetQueryResult smartTargetQueryResult in smartTargetQueryResults)
+                string allowDuplicationOnSamePage = page.PageTemplate.MetadataFields.ContainsKey("allowDuplicationOnSamePage") ? page.PageTemplate.MetadataFields["allowDuplicationOnSamePage"].Value : "";
+                SmartTargetPageModel smartTargetPageModel = new SmartTargetPageModel(pageModel)
+                {
+                    AllowDuplicates = SmartTargetUtils.ParseAllowDuplicatesOnSamePage(allowDuplicationOnSamePage, localization)
+                };
+                
+                // read custom metadata on the region, place these information into the SmartTargetPageModel
+                foreach (IFieldSet smartTargetRegionField in page.PageTemplate.MetadataFields["regions"].EmbeddedValues)
+                {
+                    string regionName = SmartTargetUtils.DetermineRegionName(smartTargetRegionField["view"].Value);
+                    SmartTargetRegion smartTargetRegion = smartTargetPageModel.Regions[regionName] as SmartTargetRegion;
+
+                    if (smartTargetRegion != null)
                     {
-                        SmartTargetRegion region = pageModel.Regions[smartTargetQueryResult.RegionName] as SmartTargetRegion;
-
-                        if (region != null)
-                        {
-                            region.XpmMarkup = smartTargetQueryResult.XpmMarkup;
-
-                            if (smartTargetQueryResult.HasSmartTargetContent)
-                            {
-                                if (!region.HasSmartTargetContent)
-                                {
-                                    region.Entities.Clear(); // Discard any fallback content coming from CM
-                                }
-
-                                region.HasSmartTargetContent = true;
-
-                                foreach (SmartTargetPromotion promotion in smartTargetQueryResult.Promotions)
-                                {
-                                    region.Entities.Add(promotion);
-                                }
-                            }
-                        }                        
+                        int maxItems = smartTargetRegionField.ContainsKey("maxItems") ? Convert.ToInt32(smartTargetRegionField["maxItems"].Value) : 0;
+                        smartTargetRegion.MaxItems = maxItems;
                     }
                 }
+                
+                SmartTargetQuery.SmartTargetQuery.SetPageRegionEntities(smartTargetPageModel, localization);
             }
         }
         
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sourceEntity"></param>
-        /// <param name="moduleMap"></param>
-        /// <param name="regionConfigList"></param>
-        /// <returns></returns>
-        private bool TryGetSmartTargetRegionConfiguration(object sourceEntity, out Dictionary<string, string> moduleMap, out List<SmartTargetRegionConfig> regionConfigList)
-        {
-            moduleMap = new Dictionary<string, string>();
-            regionConfigList = new List<SmartTargetRegionConfig>();
-
-            IPage page = sourceEntity as IPage;
-            //Maybe check for ModuleName in the metadata
-            if (page != null && page.PageTemplate.MetadataFields.ContainsKey("regions"))
-            {
-                foreach (IFieldSet smartTargetRegion in page.PageTemplate.MetadataFields["regions"].EmbeddedValues)
-                {
-                    string module;
-                    string regionName;
-
-                    //Region name is a mandatory field; write directly
-                    SmartTargetUtils.DetermineRegionViewNameAndModule(smartTargetRegion["view"].Value, out module, out regionName);
-                    moduleMap[regionName] = module;
-
-                    //Max items is a mandatory field; write directly
-                    int maxItems = 0;
-                    maxItems = Convert.ToInt32(smartTargetRegion["maxItems"].Value);
-
-                    //Allow duplicates is an optional field, (Questionable if you want to have the option because of configuration).
-                    bool allowDuplicates = SmartTargetUtils.DefaultAllowDuplicates;
-                    if (smartTargetRegion.ContainsKey("allowDuplicates"))
-                    {
-                        allowDuplicates = SmartTargetUtils.Parse(smartTargetRegion["allowDuplicates"].Value);
-                    }
-
-                    SmartTargetRegionConfig regionConfig = new SmartTargetRegionConfig
-                    {
-                        PageId = page.Id,
-                        RegionName = regionName,
-                        MaxItems = maxItems,
-                        AllowDuplicates = allowDuplicates
-                    };
-
-                    regionConfigList.Add(regionConfig);
-                }
-
-                return true;
-            }
-
-            return false;
-        }
-
         public void BuildEntityModel(ref EntityModel entityModel, IComponentPresentation cp, Localization localization)
         {
         }

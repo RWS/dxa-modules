@@ -1,13 +1,12 @@
 ﻿using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Models;
-using System;
 using System.Collections.Generic;
 
 namespace Sdl.Web.Modules.SmartTarget.Models
 {
     public class SmartTargetPromotion : EntityModel
     {
-        private const string _xpmMarkupFormat = "<!-- Start Promotion: {{ \"PromotionID\": \"{0}\", \"RegionID\" : \"{1}\"}} -->";
+        private const string XpmMarkupFormat = "<!-- Start Promotion: {{ \"PromotionID\": \"{0}\", \"RegionID\" : \"{1}\"}} -->";
 
         public string RegionName { get; set; }
 
@@ -21,7 +20,7 @@ namespace Sdl.Web.Modules.SmartTarget.Models
 
         public override string GetXpmMarkup(Localization localization)
         {
-            return string.Format(_xpmMarkupFormat, PromotionId, RegionName);
+            return string.Format(XpmMarkupFormat, PromotionId, RegionName);
         }
     }
 }

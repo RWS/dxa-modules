@@ -1,68 +1,45 @@
-﻿using Sdl.Web.Common.Configuration;
-using System;
-using Tridion.SmartTarget.Utils;
+﻿using System;
+using Sdl.Web.Common.Configuration;
 
 namespace Sdl.Web.Modules.SmartTarget.Utils
 {
     class SmartTargetUtils
     {
         /// <summary>
-        /// Reads the 'DefaultAllowDuplicates' option from the ConfigurationUtility
+        /// Validate parameters, if on Page Type is specified True or False return that, else use the core configuration setting.
         /// </summary>
-        public static bool DefaultAllowDuplicates
-        {
-            get
-            {
-                return ConfigurationUtility.DefaultAllowDuplicates;
-            }
-        }
-
-        /// <summary>
-        /// Validates the input parameter against 'Yes' and 'No' for configuration, 
-        /// else returns the value from configuration
-        /// </summary>
-        /// <param name="value"></param>
+        /// <param name="allowDuplicationOnSamePage"></param>
+        /// <param name="localization"></param>
         /// <returns></returns>
-        public static bool Parse(string value)
+        public static bool ParseAllowDuplicatesOnSamePage(string allowDuplicationOnSamePage, Localization localization)
         {
-            if ("No".Equals(value, StringComparison.OrdinalIgnoreCase))
+            if (String.IsNullOrEmpty(allowDuplicationOnSamePage) || "Use core configuration".Equals(allowDuplicationOnSamePage, StringComparison.OrdinalIgnoreCase))
             {
-                return false;
-            }
-            else if ("Yes".Equals(value, StringComparison.OrdinalIgnoreCase))
-            {
-                return true;
+                string value = String.IsNullOrEmpty(localization.GetConfigValue("smarttarget.allowDuplicationOnSamePageConfig")) 
+                    ? localization.GetConfigValue("smarttarget.allowDuplicationOnSamePageConfig") 
+                    : "true";
+                
+                return bool.Parse(value);
             }
 
-            return DefaultAllowDuplicates;
+            return Convert.ToBoolean(allowDuplicationOnSamePage);
         }
 
         /// <summary>
         /// Split out region view and module from region name
         /// </summary>
         /// <param name="regionName">The region name (can contain a module prefixed to it module:region)</param>
-        /// <param name="module">Returns the module name, will use default if no module name is prefixed, <see cref="SiteConfiguration.GetDefaultModuleName()"/></param>
-        /// <param name="view">Returns the view name</param>
-        public static void DetermineRegionViewNameAndModule(string regionName, out string module, out string view)
+        public static string DetermineRegionName(string regionName)
         {
-            view = null;
-            module = SiteConfiguration.GetDefaultModuleName(); // default module
-            
-            if (!string.IsNullOrEmpty(regionName))
+            if (String.IsNullOrEmpty(regionName))
             {
-                // split region view on colon, use first part as area (module) name
-                string[] regionViewParts = regionName.Split(':');
-
-                if (regionViewParts.Length > 1)
-                {
-                    module = regionViewParts[0].Trim();
-                    view = regionViewParts[1].Trim();
-                }
-                else
-                {
-                    view = regionViewParts[0].Trim();
-                }
+                return String.Empty;
             }
+
+            // split region view on colon, use first part as area (module) name
+            string[] regionViewParts = regionName.Split(':');
+
+            return regionViewParts.Length > 1 ? regionViewParts[1].Trim() : regionViewParts[0].Trim();
         }
     }
 }
