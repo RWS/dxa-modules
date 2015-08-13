@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<smarttarget>
+	<referrers>
+		<referrer name="Google">
+			<![CDATA[.*google\.(?:[a-z\.]+)/search\?.*?q=([^&]+).*]]>
+		</referrer>
+		<referrer name="Yahoo">
+			<![CDATA[.*yahoo\.(?:[a-z\.]+)/search\?.*?p=([^&]+).*]]>
+		</referrer>
+		<referrer name="Bing">
+			<![CDATA[.*bing\.(?:[a-z\.]+)/search\?.*?q=([^&]+).*]]>
+		</referrer>
+		<referrer name="Altavista">
+			<![CDATA[.*altavista\.(?:[a-z\.]+)/web/results\?.*?q=([^&]+).*]]>
+		</referrer>
+		<referrer name="local1">
+			<![CDATA[.*examplesite/search\.jsp\?q=([^&]+).*]]>
+		</referrer>
+	</referrers>
+</smarttarget>
