@@ -16,7 +16,8 @@ namespace Sdl.Web.Modules.SmartTarget.Models
 
         public string TemplateUri { get; set; }
         
-        public EntityModel Entity {
+        public EntityModel Entity 
+        {
             get
             {
                 TcmUri componentUri = new TcmUri(ComponentUri);
@@ -29,6 +30,5 @@ namespace Sdl.Web.Modules.SmartTarget.Models
         {
             _localization = localization;
         }
-
     }
 }
