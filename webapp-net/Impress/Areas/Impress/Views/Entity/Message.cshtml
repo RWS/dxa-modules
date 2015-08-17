@@ -1,4 +1,4 @@
 ﻿@model Sdl.Web.Modules.Impress.Models.Message
-<div @Markup.Entity(Model)>
-    <div @Markup.Property(Model, "Content")>@Html.Raw(Model.Content)</div>
+<div @Html.DxaEntityMarkup()>
+    <div @Html.DxaPropertyMarkup(() => Model.Content)>@Html.DxaRichText(Model.Content)</div>
 </div>

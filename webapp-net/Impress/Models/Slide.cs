@@ -4,7 +4,7 @@ namespace Sdl.Web.Modules.Impress.Models
 {
     public class Slide : EntityModel
     {
-        public string Content { get; set; }
+        public RichText Content { get; set; }
         public string StepTitle { get; set; }
         public int XCoordinate { get; set; }
         public int YCoordinate { get; set; }

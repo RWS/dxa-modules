@@ -1,9 +1,6 @@
 ﻿@model RegionModel
-<div class="hint" @Markup.Region(Model)>
-    @foreach (var item in Model.Items)
-    {
-        @ViewBag.Renderer.RenderEntity(item, Html)
-    }
+<div class="hint" @Html.DxaRegionMarkup()>
+    @Html.DxaEntities()
 </div>
 <script>
     if ("ontouchstart" in document.documentElement) {

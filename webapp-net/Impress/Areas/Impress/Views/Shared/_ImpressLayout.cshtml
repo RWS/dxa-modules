@@ -17,9 +17,6 @@
     @RenderBody()
     <script src="@Url.VersionedContent("/assets/scripts/impress.js")"></script>
     <script>setTimeout(function () { impress().init(); }, @if (WebRequestContext.IsPreview) {<text>500</text>}1);</script>
-    @if (ViewBag.Renderer != null)
-    {
-        @ViewBag.Renderer.RenderPageData(Model, Html)
-    }
+    @Html.DxaPageMarkup()
 </body>
 </html>
