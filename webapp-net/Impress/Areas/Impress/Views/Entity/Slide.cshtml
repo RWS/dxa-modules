@@ -1,4 +1,4 @@
 ﻿@model Sdl.Web.Modules.Impress.Models.Slide
-<div id="@Model.StepTitle" class="step slide" data-x="@Model.XCoordinate" data-y="@Model.YCoordinate" @Html.BgImgStyle(Model.BgImage) @Html.DxaEntityMarkup()>
+<div id="@Model.StepTitle" class="step slide @Model.HtmlClasses" data-x="@Model.XCoordinate" data-y="@Model.YCoordinate" @Html.BgImgStyle(Model.BgImage) @Html.DxaEntityMarkup()>
     <q @Html.DxaPropertyMarkup(() => Model.Content)>@Html.DxaRichText(Model.Content)</q>
 </div>
