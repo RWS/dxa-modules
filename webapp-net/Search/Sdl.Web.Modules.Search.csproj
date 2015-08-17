@@ -54,9 +54,11 @@
     </Reference>
     <Reference Include="Sdl.Web.Common">
       <HintPath>..\_references\Sdl.Web.Common.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Sdl.Web.Mvc">
       <HintPath>..\_references\Sdl.Web.Mvc.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="SI4T.Query">
       <HintPath>..\packages\SI4T.Query.1.0.2\lib\net40\SI4T.Query.dll</HintPath>
