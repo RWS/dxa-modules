@@ -1,0 +1,25 @@
+﻿@model PageModel
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1024" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>@Model.Title</title>
+    @foreach (var meta in Model.Meta)
+    {
+        <meta name="@meta.Key" content="@meta.Value">
+    }
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
+    <link rel="stylesheet" href="@Url.VersionedContent("/assets/css/impress.css")">
+</head>
+<body class="impress-not-supported">
+    @RenderBody()
+    <script src="@Url.VersionedContent("/assets/scripts/impress.js")"></script>
+    <script>setTimeout(function () { impress().init(); }, @if (WebRequestContext.IsPreview) {<text>500</text>}1);</script>
+    @if (ViewBag.Renderer != null)
+    {
+        @ViewBag.Renderer.RenderPageData(Model, Html)
+    }
+</body>
+</html>

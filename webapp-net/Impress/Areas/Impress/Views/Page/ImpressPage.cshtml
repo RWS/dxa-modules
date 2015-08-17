@@ -1,0 +1,16 @@
+﻿@model PageModel
+
+@if (Model.Regions.ContainsKey("Fallback"))
+{
+    @ViewBag.Renderer.RenderRegion(Model.Regions["Fallback"], Html)
+}
+
+@foreach (Region region in Model.Regions.Values)
+{
+    @ViewBag.Renderer.RenderRegion(region, Html, 0, new List<string> { "Fallback", "Hint" })
+}
+
+@if (Model.Regions.ContainsKey("Hint"))
+{
+    @ViewBag.Renderer.RenderRegion(Model.Regions["Hint"], Html)
+}

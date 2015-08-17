@@ -1,0 +1,7 @@
+﻿@model RegionModel
+<div class="fallback-message" @Markup.Region(Model)>
+    @foreach (var item in Model.Items)
+    {
+        @ViewBag.Renderer.RenderEntity(item, Html)
+    }
+</div>

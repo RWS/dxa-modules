@@ -1,0 +1,12 @@
+﻿@model RegionModel
+<div class="hint" @Markup.Region(Model)>
+    @foreach (var item in Model.Items)
+    {
+        @ViewBag.Renderer.RenderEntity(item, Html)
+    }
+</div>
+<script>
+    if ("ontouchstart" in document.documentElement) {
+        document.querySelector(".hint").innerHTML = "<p>@Html.Resource("impress.hint")</p>";
+    }
+</script>

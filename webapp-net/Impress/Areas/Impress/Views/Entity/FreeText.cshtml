@@ -1,0 +1,4 @@
+﻿@model Sdl.Web.Modules.Impress.Models.Slide
+<div id="@Model.StepTitle" class="step" data-x="@Model.XCoordinate" data-y="@Model.YCoordinate" data-z="@Model.ZCoordinate" data-rotate="@Model.Rotate" data-rotate-x="@Model.XRotate" data-rotate-y="@Model.YRotate" data-scale="@Model.Scale" @Html.BgImgStyle(Model.BgImage) @Markup.Entity(Model)>
+    <div @Markup.Property(Model, "Content")>@Html.Raw(Model.Content)</div>
+</div>
