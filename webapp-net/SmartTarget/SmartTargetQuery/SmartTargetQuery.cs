@@ -137,7 +137,6 @@ namespace Sdl.Web.Modules.SmartTarget.SmartTargetQuery
                     
                     List<SmartTargetItem> smartTargetPromotionItems = new List<SmartTargetItem>();
 
-                    // ReSharper disable once LoopCanBeConvertedToQuery
                     foreach (Item item in promotion.Items.Where(item => item.Visible))
                     {
                         SmartTargetItem smartTargetItem = new SmartTargetItem(localization)

@@ -1,11 +1,12 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Sdl.Web.Modules.MediaManager")]
-[assembly: AssemblyDescription("SDL DXA Media Manager Module")]
+[assembly: AssemblyTitle("Sdl.Web.Modules.Impress")]
+[assembly: AssemblyDescription("SDL DXA Impress Module")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("SDL Group")]
 [assembly: AssemblyProduct("SDL Digital Experience Accelerator")]
@@ -19,6 +20,6 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("2c7ab753-7f77-4088-a9ef-6227057344a8")]
+[assembly: Guid("58334c5f-751c-4281-a900-f58a08f0ef22")]
 
 // version information set in VersionInfo.cs so it can be updated by build server 

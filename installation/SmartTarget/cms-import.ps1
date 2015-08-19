@@ -17,14 +17,14 @@
    The functionality that best describes this cmdlet
 #>
 
-[CmdletBinding( SupportsShouldProcess=$true, 
-                PositionalBinding=$false)]
+[CmdletBinding( SupportsShouldProcess=$true, PositionalBinding=$false)]
 param (
     [ValidateSet("module-and-permissions", "module-only", "permissions-only")]
     [string]$importType = "module-and-permissions",
 
-    # Set this to your cms url
-    [string]$cmsUrl = "http://localhost/",
+    # Enter your cms url
+    [Parameter(Mandatory=$true, HelpMessage="URL of the CMS you want to import in")]
+    [string]$cmsUrl,
 
     # If you are importing into existing publications, update these to map to your target publication titles
     [string]$masterPublication = "100 Master",
@@ -38,6 +38,12 @@ param (
 
 #Terminate script on first occurred exception
 $ErrorActionPreference = "Stop"
+
+#Process 'WhatIf' and 'Confirm' options
+if (!($pscmdlet.ShouldProcess("System", "Import SmartTarget Module into CMS"))) { return }
+
+#Initialization
+$IsInteractiveMode = !((gwmi -Class Win32_Process -Filter "ProcessID=$PID").commandline -match "-NonInteractive") -and !$NonInteractive
 
 # Thanks to Dominic Cronin: http://www.indivirtual.nl/blog/sdl-tridions-importexport-api-end-content-porter/
 function Invoke-InitImportExport ($distSource, $tempFolder) {
@@ -153,7 +159,7 @@ function Get-Trustee($group) {
     return $null
 }
 
-# Thanks to Dominic Cronin: http://www.indivirtual.nl/blog/set-rights-permissions-using-sdl-tridion-core-service-api/
+# Thanks to Dominic Cronin: http://www.indivirtual.nl/blog/sdl-tridions-importexport-api-end-content-porter/
 function Set-RightsAndPermissions($trustee, $orgItem, $rights, $permissions) {
     # No need to localize, we exported from local items only
     #$autoLocalize = $true
@@ -314,59 +320,13 @@ function Invoke-Upload($mapping, $packageFullPath, $tempFolder) {
     }
 }
 
-function Add-ComponentToPage($sitePublication, $rootStructureGroup, $componentPath, $templatePath, $pagePath) {
-    $pageWebdavUrl = [string]::Format("/webdav/{0}/{1}/{2}.tpg", $sitePublication, $rootStructureGroup, $pagePath)
-    $componentWebdavUrl = [string]::Format("/webdav/{0}/Building Blocks/{1}.xml", $sitePublication, $componentPath)
-    $templateWebdavUrl = [string]::Format("/webdav/{0}/Building Blocks/{1}.tctcmp", $sitePublication, $templatePath)
-    Write-Output "Adding Component '$($componentWebdavUrl)' to Page '$($pageWebdavUrl)' ..."
-    Write-Verbose "Publication is '$sitePublication'"
-    Write-Verbose "Structure group is '$rootStructureGroup'"
-    Write-Verbose "Page Webdav Url is '$pageWebdavUrl'"
-    Write-Verbose "Component Webdav Url is '$componentWebdavUrl'"
-    Write-Verbose "Template Webdav Url is '$templateWebdavUrl'"
-    $page = $core.Read($pageWebdavUrl, $defaultReadOptions)
-    $cps = $page.ComponentPresentations
-    $component = $core.Read($componentWebdavUrl, $defaultReadOptions)
-    $template = $core.Read($templateWebdavUrl, $defaultReadOptions)
-    $notAdded = $true
-    Write-Verbose "Checking if Component '$($component.Id)' is already added to Page"
-    foreach ($c in $cps)
-    {
-        #CP already exists on page
-        if (($c.ComponentTemplate.IdRef -eq $template.Id) -and ($c.Component.IdRef -eq $component.Id))
-        {
-            Write-Verbose "Existing Component is found: Component ID ='$($component.Id)'; Template ID = '$($template.Id)'"
-            $notAdded = $false
-        }
-    }
-    if ($notAdded)
-    {
-        $cp = New-Object Tridion.ContentManager.CoreService.Client.ComponentPresentationData
-        $cp.Component = New-Object Tridion.ContentManager.CoreService.Client.LinkToComponentData
-        $cp.Component.IdRef = $component.Id
-        $cp.ComponentTemplate = New-Object Tridion.ContentManager.CoreService.Client.LinkToComponentTemplateData
-        $cp.ComponentTemplate.IdRef = $template.Id
-        $cps += $cp
-        $page = $core.CheckOut($page.Id, $false, $defaultReadOptions)
-        $page.ComponentPresentations = $cps
-        $page = $core.Save($page, $defaultReadOptions)
-        $page = $core.CheckIn($page.Id, $true, $null, $defaultReadOptions)
-        Write-Output "Done"
-    }
-    else
-    {
-        Write-Warning "Component already added to Page. Skipping this step."
-    }
-}
-
-
 #Process 'WhatIf' and 'Confirm' options
 if (!($pscmdlet.ShouldProcess("Tridion Content Manager", "Import the reference implementation"))) { return }
 
 $distSource = Join-Path (Split-Path $MyInvocation.MyCommand.Path) "\"
 
 #Create temp folder in %temp% location
-$tempFolder = Join-Path $env:ALLUSERSPROFILE "TRI\"
+$tempFolder = Join-Path $env:ALLUSERSPROFILE "DXA\"
 if (!(Test-Path $tempFolder)) {
     New-Item -ItemType Directory -Path $tempFolder | Out-Null
 }
@@ -399,7 +359,6 @@ $detailedMapping = (
 if ($importType -ne "permissions-only")
 {
     Invoke-Upload $detailedMapping $importPackageFullPath $tempFolder
-    Add-ComponentToPage $sitePublication $rootStructureGroup "Settings/SmartTarget/Site Manager/SmartTarget Configuration" "Modules/SmartTarget/Site Manager/Templates/SmartTarget [Links]"  "_System/include/Footer" 
 }
 
 #   NOTE - this should be executed last after importing all modules and does not work for mapped publications

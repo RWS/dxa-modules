@@ -1,0 +1,9 @@
+﻿@model RegionModel
+<div class="hint" @Html.DxaRegionMarkup()>
+    @Html.DxaEntities()
+</div>
+<script>
+    if ("ontouchstart" in document.documentElement) {
+        document.querySelector(".hint").innerHTML = "<p>@Html.Resource("impress.hint")</p>";
+    }
+</script>
