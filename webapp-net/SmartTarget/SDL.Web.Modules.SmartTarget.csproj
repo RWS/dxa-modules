@@ -104,7 +104,7 @@
     <None Include="Areas\SmartTarget\Views\Entity\Promotion.cshtml" />
     <None Include="Areas\SmartTarget\Views\Region\Example2.cshtml" />
     <None Include="Areas\SmartTarget\Views\Region\Example1.cshtml" />
-    <None Include="Areas\SmartTarget\Views\Web.config">
+    <None Include="Areas\SmartTarget\Views\web.config">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />

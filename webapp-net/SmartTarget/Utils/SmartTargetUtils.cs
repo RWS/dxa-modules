@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using Sdl.Web.Common.Configuration;
 
 namespace Sdl.Web.Modules.SmartTarget.Utils
 {
-    class SmartTargetUtils
+    public class SmartTargetUtils
     {
         /// <summary>
         /// Validate parameters, if on Page Type is specified True or False return that, else use the core configuration setting.
@@ -13,10 +14,10 @@ namespace Sdl.Web.Modules.SmartTarget.Utils
         /// <returns></returns>
         public static bool ParseAllowDuplicatesOnSamePage(string allowDuplicationOnSamePage, Localization localization)
         {
-            if (String.IsNullOrEmpty(allowDuplicationOnSamePage) || "Use core configuration".Equals(allowDuplicationOnSamePage, StringComparison.OrdinalIgnoreCase))
+            if (string.IsNullOrEmpty(allowDuplicationOnSamePage) || "Use core configuration".Equals(allowDuplicationOnSamePage, StringComparison.OrdinalIgnoreCase))
             {
-                string value = String.IsNullOrEmpty(localization.GetConfigValue("smarttarget.allowDuplicationOnSamePageConfig")) 
-                    ? localization.GetConfigValue("smarttarget.allowDuplicationOnSamePageConfig") 
+                string value = !string.IsNullOrEmpty(localization.GetConfigValue("smarttarget.allowDuplicationOnSamePageConfig"))
+                    ? localization.GetConfigValue("smarttarget.allowDuplicationOnSamePageConfig")
                     : "true";
                 
                 return bool.Parse(value);
@@ -28,12 +29,35 @@ namespace Sdl.Web.Modules.SmartTarget.Utils
         /// <summary>
         /// Split out region view and module from region name
         /// </summary>
+        /// <param name="regionResults">The regions that come back from the SmartTarget query as result</param>
+        public static List<string> SplitRegions(string regionResults)
+        {
+            List<string> listRegions = new List<string>();
+
+            if (string.IsNullOrEmpty(regionResults))
+            {
+                return listRegions;
+            }
+
+            // split regions on comma, and add them to the list
+            foreach (string region in regionResults.Split(','))
+            {
+                listRegions.Add(region);
+            }
+            
+            return listRegions;
+        }
+
+
+        /// <summary>
+        /// Split out region view and module from region name
+        /// </summary>
         /// <param name="regionName">The region name (can contain a module prefixed to it module:region)</param>
         public static string DetermineRegionName(string regionName)
         {
-            if (String.IsNullOrEmpty(regionName))
+            if (string.IsNullOrEmpty(regionName))
             {
-                return String.Empty;
+                return string.Empty;
             }
 
             // split region view on colon, use first part as area (module) name

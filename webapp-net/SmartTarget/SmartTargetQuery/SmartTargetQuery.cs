@@ -12,6 +12,7 @@ using Sdl.Web.Common.Models;
 using Tridion.SmartTarget.Analytics;
 using TcmUri = Tridion.SmartTarget.Utils.TcmUri;
 using System;
+using Sdl.Web.Modules.SmartTarget.Utils;
 
 namespace Sdl.Web.Modules.SmartTarget.SmartTargetQuery
 {
@@ -43,33 +44,40 @@ namespace Sdl.Web.Modules.SmartTarget.SmartTargetQuery
 
             foreach (SmartTargetPromotion smartTargetPromotion in smartTargetPromotions.Where(promotion => promotion.Items.Count > 0))
             {
-                SmartTargetRegion smartTargetRegion = (SmartTargetRegion) smartTargetPageModel.Regions[smartTargetPromotion.RegionName];
+                List<string> promotionRegions = SmartTargetUtils.SplitRegions(smartTargetPromotion.RegionName);
 
-                if (smartTargetRegion == null)
+                foreach (string promotionRegion in promotionRegions)
                 {
-                    throw new DxaException(String.Format("SmartTarget region '{0}', couldn't be found on the page", smartTargetPromotion.RegionName));
-                }
+                    SmartTargetRegion smartTargetRegion = (SmartTargetRegion) smartTargetPageModel.Regions[promotionRegion];
 
-                smartTargetRegion.XpmMarkup = ResultSet.GetExperienceManagerMarkup(smartTargetPromotion.RegionName, 10, resultSet.Promotions);
-                        
-                if (!smartTargetRegion.HasSmartTargetContent)
-                {
-                    // Discard any fallback content coming from Content Manager
-                    smartTargetRegion.Entities.Clear(); 
-                }
+                    if (smartTargetRegion == null)
+                    {
+                        throw new DxaException(string.Format("SmartTarget region '{0}', couldn't be found on the page",
+                            promotionRegion));
+                    }
 
-                smartTargetRegion.HasSmartTargetContent = true;
+                    smartTargetRegion.XpmMarkup = ResultSet.GetExperienceManagerMarkup(promotionRegion,
+                        smartTargetRegion.MaxItems, resultSet.Promotions);
 
-                foreach (SmartTargetItem smartTargetItem in smartTargetPromotion.Items)
-                {
-                    smartTargetRegion.Entities.Add(smartTargetItem.Entity);
+                    if (!smartTargetRegion.HasSmartTargetContent)
+                    {
+                        // Discard any fallback content coming from Content Manager
+                        smartTargetRegion.Entities.Clear();
+                    }
+
+                    smartTargetRegion.HasSmartTargetContent = true;
+
+                    foreach (SmartTargetItem smartTargetItem in smartTargetPromotion.Items)
+                    {
+                        smartTargetRegion.Entities.Add(smartTargetItem.Entity);
+                    }
                 }
             }
         }
 
         private static ResultSet SmartTargetQueryResultSet(SmartTargetPageModel smartTargetPageModel, Localization localization)
         {
-            TcmUri pageUri = new TcmUri(String.Format("tcm:{0}-{1}-64", localization.LocalizationId, smartTargetPageModel.Id));
+            TcmUri pageUri = new TcmUri(string.Format("tcm:{0}-{1}-64", localization.LocalizationId, smartTargetPageModel.Id));
             TcmUri publicationUri = new TcmUri(0, pageUri.PublicationId, 1);
 
             ClaimStore claimStore = AmbientDataContext.CurrentClaimStore;
