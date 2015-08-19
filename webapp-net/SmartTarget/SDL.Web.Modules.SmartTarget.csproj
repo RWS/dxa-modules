@@ -102,8 +102,9 @@
     <Compile Include="Utils\SmartTargetUtils.cs" />
     <None Include="Areas\SmartTarget\Views\Entity\Experiment.cshtml" />
     <None Include="Areas\SmartTarget\Views\Entity\Promotion.cshtml" />
+    <None Include="Areas\SmartTarget\Views\Region\Example2.cshtml" />
     <None Include="Areas\SmartTarget\Views\Region\Example1.cshtml" />
-    <None Include="Areas\SmartTarget\Views\web.config">
+    <None Include="Areas\SmartTarget\Views\Web.config">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
