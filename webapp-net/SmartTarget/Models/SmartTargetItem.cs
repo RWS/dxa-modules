@@ -1,33 +1,36 @@
 ﻿using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Models;
-using Sdl.Web.Tridion.ContentManager;
 
 namespace Sdl.Web.Modules.SmartTarget.Models
 {
     public class SmartTargetItem
     {
         private readonly Localization _localization;
+        private EntityModel _entity;
 
-        public string RegionName { get; set; }
+        public string EntityId { get; private set; }
 
-        public string PromotionId { get; set; }
-
-        public string ComponentUri { get; set; }
-
-        public string TemplateUri { get; set; }
-        
+        /// <summary>
+        /// Gets the Entity Model.
+        /// </summary>
+        /// <remarks>
+        /// The Entity Model is lazy loaded. That is: it is loaded only if this property is accessed.
+        /// </remarks>
         public EntityModel Entity 
         {
             get
             {
-                TcmUri componentUri = new TcmUri(ComponentUri);
-                TcmUri templateUri = new TcmUri(TemplateUri);
-                return SiteConfiguration.ContentProvider.GetEntityModel(string.Format("{0}-{1}", componentUri.ItemId, templateUri.ItemId), _localization);
+                if (_entity == null)
+                {
+                    _entity = SiteConfiguration.ContentProvider.GetEntityModel(EntityId, _localization);
+                }
+                return _entity;
             }
         }
 
-        public SmartTargetItem(Localization localization)
+        public SmartTargetItem(string entityId, Localization localization)
         {
+            EntityId = entityId;
             _localization = localization;
         }
     }

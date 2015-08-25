@@ -1,71 +1,214 @@
-﻿using DD4T.ContentModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using DD4T.ContentModel;
 using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Logging;
 using Sdl.Web.Common.Models;
 using Sdl.Web.Modules.SmartTarget.Models;
 using Sdl.Web.Tridion.Mapping;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Sdl.Web.Modules.SmartTarget.Utils;
+using Tridion.ContentDelivery.AmbientData;
+using Tridion.SmartTarget.Analytics;
+using Tridion.SmartTarget.Query;
+using Tridion.SmartTarget.Query.Builder;
+using Tridion.SmartTarget.Utils;
 using IPage = DD4T.ContentModel.IPage;
+using TcmUri = Tridion.SmartTarget.Utils.TcmUri;
 
 namespace Sdl.Web.Modules.SmartTarget.Mapping
 {
     public class SmartTargetModelBuilder : IModelBuilder
     {
+        private const string PromotionViewNameConfig = "smarttarget.smartTargetEntityPromotion";
+
+        #region IModelBuilder members
         /// <summary>
         /// Update page and regions with proper SmartTarget content
         /// </summary>
-        /// <param name="pageModel"></param>
-        /// <param name="page"></param>
-        /// <param name="includes"></param>
-        /// <param name="localization"></param>
         public void BuildPageModel(ref PageModel pageModel, IPage page, IEnumerable<IPage> includes, Localization localization)
         {
             using (new Tracer(pageModel, page, includes, localization))
             {
                 if (pageModel == null || !pageModel.Regions.OfType<SmartTargetRegion>().Any())
                 {
+                    Log.Debug("No SmartTarget Regions on Page.");
                     return;
                 }
                 
-                // pageModel does not contain maxItems of the region metadata fields
-                // check if we have a page so we can poppulate these fields, if not return;
-                if (page == null || !page.PageTemplate.MetadataFields.ContainsKey("regions"))
+                if (page == null || page.PageTemplate == null || page.PageTemplate.MetadataFields == null || !page.PageTemplate.MetadataFields.ContainsKey("regions"))
                 {
+                    Log.Debug("No Regions metadata found.");
                     return;
                 }
 
-                string allowDuplicationOnSamePage = page.PageTemplate.MetadataFields.ContainsKey("allowDuplicationOnSamePage") ? page.PageTemplate.MetadataFields["allowDuplicationOnSamePage"].Value : "";
+                // "Upgrade" the PageModel to a SmartTargetPageModel, so we can store AllowDuplicates in the Page Model.
                 SmartTargetPageModel smartTargetPageModel = new SmartTargetPageModel(pageModel)
                 {
-                    AllowDuplicates = SmartTargetUtils.ParseAllowDuplicatesOnSamePage(allowDuplicationOnSamePage, localization)
+                    AllowDuplicates = GetAllowDuplicatesOnSamePage(page.PageTemplate, localization)
                 };
+                pageModel = smartTargetPageModel;
                 
                 // read custom metadata on the region, place these information into the SmartTargetPageModel
                 foreach (IFieldSet smartTargetRegionField in page.PageTemplate.MetadataFields["regions"].EmbeddedValues)
                 {
-                    string regionName = SmartTargetUtils.DetermineRegionName(smartTargetRegionField["view"].Value);
+                    string regionName = new MvcData(smartTargetRegionField["view"].Value).ViewName;
                     SmartTargetRegion smartTargetRegion = smartTargetPageModel.Regions[regionName] as SmartTargetRegion;
-
                     if (smartTargetRegion != null)
                     {
-                        int maxItems = smartTargetRegionField.ContainsKey("maxItems") ? Convert.ToInt32(smartTargetRegionField["maxItems"].Value) : 0;
+                        int maxItems = smartTargetRegionField.ContainsKey("maxItems") ? Convert.ToInt32(smartTargetRegionField["maxItems"].Value) : 100;
                         smartTargetRegion.MaxItems = maxItems;
                     }
                 }
-                
-                SmartTargetQuery.SmartTargetQuery.SetPageRegionEntities(smartTargetPageModel, localization);
+
+                // Execute a ST Query for all SmartTargetRegions on the Page.
+                ResultSet resultSet = ExecuteSmartTargetQuery(smartTargetPageModel, localization);
+                Log.Debug("SmartTarget query returned {0} Promotions.", resultSet.Promotions.Count);
+                if (resultSet.Promotions.Count == 0)
+                {
+                    // No ST promotions for this Page; nothing to do.
+                    return;
+                }
+
+                string promotionViewName = localization.GetConfigValue(PromotionViewNameConfig);
+                if (String.IsNullOrEmpty(promotionViewName))
+                {
+                    Log.Warn("No View name for SmartTarget Promotions is configured on CM-side ({0})", PromotionViewNameConfig);
+                    promotionViewName = "SmartTarget:Entity:Promotion";
+                }
+                Log.Debug("Using Promotion View '{0}'", promotionViewName);
+
+                List<string> itemsAlreadyOnPage = new List<string>();
+                ExperimentCookies existingExperimentCookies = CookieProcessor.GetExperimentCookies(HttpContext.Current.Request); // TODO: we shouldn't access HttpContext in a Model Builder.
+            
+                // Filter the Promotions for each SmartTargetRegion
+                foreach (SmartTargetRegion smartTargetRegion in smartTargetPageModel.Regions.OfType<SmartTargetRegion>())
+                {
+                    string regionName = smartTargetRegion.Name;
+
+                    List<string> itemsOutputInRegion = new List<string>();
+                    ExperimentCookies newExperimentCookies = new ExperimentCookies();
+                    ExperimentDimensions experimentDimensions;
+
+                    List<Promotion> promotions = new List<Promotion>(resultSet.Promotions);
+                    ResultSet.FilterPromotions(promotions, regionName, smartTargetRegion.MaxItems, smartTargetPageModel.AllowDuplicates, itemsOutputInRegion,
+                            itemsAlreadyOnPage, ref existingExperimentCookies, ref newExperimentCookies,
+                            out experimentDimensions);
+
+                    // The SmartTarget API provides the entire XPM markup tag; put it in XpmMetadata[String.Empty]. See SmartTargetRegion.GetXpmMarkup.
+                    smartTargetRegion.XpmMetadata = new Dictionary<string, string>()
+                    {
+                        {String.Empty, ResultSet.GetExperienceManagerMarkup(smartTargetRegion.Name, smartTargetRegion.MaxItems, promotions)}
+                    };
+
+                    // Create SmartTargetPromotion Entity Models for visible Promotions in the current SmartTargetRegion.
+                    // It seems that ResultSet.FilterPromotions doesn't really filter on Region name, so we do post-filtering here.
+                    foreach (Promotion promotion in promotions.Where(promotion => promotion.Visible && promotion.Region.Contains(regionName)))
+                    {
+                        SmartTargetPromotion smartTargetPromotion = CreatePromotionEntity(promotion, promotionViewName, smartTargetRegion.Name, localization);
+
+                        if (!smartTargetRegion.HasSmartTargetContent)
+                        {
+                            // Discard any fallback content coming from Content Manager
+                            smartTargetRegion.Entities.Clear();
+                            smartTargetRegion.HasSmartTargetContent = true;
+                        }
+
+                        smartTargetRegion.Entities.Add(smartTargetPromotion);
+                    }
+                }
             }
         }
         
         public void BuildEntityModel(ref EntityModel entityModel, IComponentPresentation cp, Localization localization)
         {
+            // No post-processing of Entity Models needed
         }
 
         public void BuildEntityModel(ref EntityModel entityModel, IComponent component, Type baseModelType, Localization localization)
         {
+            // No post-processing of Entity Models needed
+        }
+        #endregion
+
+        protected virtual SmartTargetPromotion CreatePromotionEntity(Promotion promotion, string viewName, string regionName, Localization localization)
+        {
+            // TODO TSI-901: Create SmartTargetExperiment (subclass of SmartTargetPromotion) if promotion is Experiment.
+            return new SmartTargetPromotion
+            {
+                MvcData = new MvcData(viewName),
+                XpmMetadata = new Dictionary<string, string>
+                {
+                    {"PromotionID", promotion.PromotionId},
+                    {"RegionID", regionName}
+                },
+                Title = promotion.Title,
+                Slogan = promotion.Slogan,
+                // Create SmartTargetItem objects for visible ST Items.
+                Items = promotion.Items.Where(item => item.Visible).Select(item => CreateSmartTargetItem(item, localization)).ToList()
+            };
+        }
+
+        protected virtual SmartTargetItem CreateSmartTargetItem(Item item, Localization localization)
+        {
+            string entityId = String.Format("{0}-{1}", item.ComponentUri.ItemId, item.TemplateUri.ItemId);
+            return new SmartTargetItem(entityId, localization);
+        }
+
+        private static ResultSet ExecuteSmartTargetQuery(SmartTargetPageModel smartTargetPageModel, Localization localization)
+        {
+            using (new Tracer(smartTargetPageModel, localization))
+            {
+                TcmUri pageUri = new TcmUri(String.Format("tcm:{0}-{1}-64", localization.LocalizationId, smartTargetPageModel.Id));
+                TcmUri publicationUri = new TcmUri(0, pageUri.PublicationId, 1);
+
+                ClaimStore claimStore = AmbientDataContext.CurrentClaimStore;
+                string triggers = AmbientDataHelper.GetTriggers(claimStore);
+
+                QueryBuilder queryBuilder = new QueryBuilder();
+                queryBuilder.Parse(triggers);
+                queryBuilder.AddCriteria(new PublicationCriteria(publicationUri));
+                queryBuilder.AddCriteria(new PageCriteria(pageUri));
+
+                // Adding all the page regions to the query for having only 1 query a page
+                foreach (SmartTargetRegion region in smartTargetPageModel.Regions.OfType<SmartTargetRegion>())
+                {
+                    queryBuilder.AddCriteria(new RegionCriteria(region.Name));
+                }
+
+                return queryBuilder.Execute();
+            }
+        }
+
+
+        /// <summary>
+        /// Determines whether duplicate ST Items are allowed on this page.
+        /// </summary>
+        private static bool GetAllowDuplicatesOnSamePage(IPageTemplate pageTemplate, Localization localization)
+        {
+            const string allowDuplicatesFieldName = "allowDuplicationOnSamePage";
+            const string allowDuplicatesConfig = "smarttarget.allowDuplicationOnSamePageConfig";
+
+            string allowDuplicates;
+            if (pageTemplate != null && pageTemplate.MetadataFields != null && pageTemplate.MetadataFields.ContainsKey(allowDuplicatesFieldName))
+            {
+                allowDuplicates = pageTemplate.MetadataFields[allowDuplicatesFieldName].Value;
+            }
+            else
+            {
+                allowDuplicates = "true";
+            }
+
+            if (String.IsNullOrEmpty(allowDuplicates) || allowDuplicates.Equals("Use core configuration", StringComparison.OrdinalIgnoreCase))
+            {
+                allowDuplicates = localization.GetConfigValue(allowDuplicatesConfig);
+                if (String.IsNullOrEmpty(allowDuplicates))
+                {
+                    allowDuplicates = "true";
+                }
+            }
+
+            return Convert.ToBoolean(allowDuplicates);
         }
     }
 }

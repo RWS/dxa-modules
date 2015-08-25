@@ -97,10 +97,7 @@
   <ItemGroup>
     <Compile Include="Mapping\SmartTargetModelBuilder.cs" />
     <Compile Include="Models\SmartTargetPageModel.cs" />
-    <Compile Include="SmartTargetQuery\SmartTargetQuery.cs" />
     <Compile Include="SmartTargetAreaRegistration.cs" />
-    <Compile Include="Utils\SmartTargetUtils.cs" />
-    <None Include="Areas\SmartTarget\Views\Entity\Experiment.cshtml" />
     <None Include="Areas\SmartTarget\Views\Entity\Promotion.cshtml" />
     <None Include="Areas\SmartTarget\Views\Region\Example2.cshtml" />
     <None Include="Areas\SmartTarget\Views\Region\Example1.cshtml" />
@@ -108,7 +105,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
-    <Compile Include="Models\SmartTargetExperiment.cs" />
     <Compile Include="Models\SmartTargetItem.cs" />
     <Compile Include="Models\SmartTargetPromotion.cs" />
     <Compile Include="Models\SmartTargetRegion.cs" />
@@ -119,8 +115,13 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>REM copy lib and config dirs to output for cd-layout
-xcopy "$(SolutionDir)_references\st-2014-sp1\lib" "$(TargetDir)lib" /I /Y
-xcopy "$(SolutionDir)_references\st-2014-sp1\config" "$(TargetDir)config" /I /Y
+xcopy "$(ProjectDir)..\_references\st-2014-sp1\lib" "$(TargetDir)lib" /I /Y
+xcopy "$(ProjectDir)..\_references\st-2014-sp1\config" "$(TargetDir)config" /I /Y
+
+REM Deploy build artifacts to DXA Site (on development machines with DXA_SITE_DIR environment variable set)
+if defined DXA_SITE_DIR xcopy "$(TargetPath)" "%25DXA_SITE_DIR%25\bin" /Y
+if defined DXA_SITE_DIR xcopy "$(ProjectDir)Areas" "%25DXA_SITE_DIR%25\Areas" /S /I /Y
+if defined DXA_SITE_DIR xcopy "$(ProjectDir)..\_references\st-2014-sp1" "%25DXA_SITE_DIR%25\bin" /S /I /Y
 </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

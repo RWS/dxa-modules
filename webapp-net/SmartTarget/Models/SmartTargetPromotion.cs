@@ -1,4 +1,5 @@
-﻿using Sdl.Web.Common.Configuration;
+﻿using System;
+using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Models;
 using System.Collections.Generic;
 
@@ -8,10 +9,6 @@ namespace Sdl.Web.Modules.SmartTarget.Models
     {
         private const string XpmMarkupFormat = "<!-- Start Promotion: {{ \"PromotionID\": \"{0}\", \"RegionID\" : \"{1}\"}} -->";
 
-        public string RegionName { get; set; }
-
-        public string PromotionId { get; set; }
-
         public string Title { get; set; }
 
         public string Slogan { get; set; }
@@ -20,7 +17,7 @@ namespace Sdl.Web.Modules.SmartTarget.Models
 
         public override string GetXpmMarkup(Localization localization)
         {
-            return string.Format(XpmMarkupFormat, PromotionId, RegionName);
+            return (XpmMetadata == null) ? String.Empty : String.Format(XpmMarkupFormat, XpmMetadata["PromotionID"], XpmMetadata["RegionID"]);
         }
     }
 }
