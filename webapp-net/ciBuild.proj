@@ -10,7 +10,7 @@
     <Version Condition="'$(VERSION)' != ''">$(VERSION)</Version>
     <BuildConfiguration>Release</BuildConfiguration>
     <DxaBuildType>Dev</DxaBuildType>
-    <CdTestDeployFolder>\\saintjohn01.ams.dev\C$\inetpub\wwwroot\GitVersion</CdTestDeployFolder>
+    <CdTestDeployFolder>\\saintjohn03.ams.dev\c$\inetpub\wwwroot\7.1_gitversion</CdTestDeployFolder>
 
     <ProjectDirectory>$(MSBuildProjectDirectory)</ProjectDirectory>
     <ReferencesDir>$(ProjectDirectory)\_references</ReferencesDir>
