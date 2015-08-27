@@ -100,11 +100,14 @@ namespace Sdl.Web.Modules.SmartTarget.Mapping
                             itemsAlreadyOnPage, ref existingExperimentCookies, ref newExperimentCookies,
                             out experimentDimensions);
 
-                    // The SmartTarget API provides the entire XPM markup tag; put it in XpmMetadata[String.Empty]. See SmartTargetRegion.GetXpmMarkup.
-                    smartTargetRegion.XpmMetadata = new Dictionary<string, string>()
+                    if (localization.IsStaging)
                     {
-                        {String.Empty, ResultSet.GetExperienceManagerMarkup(smartTargetRegion.Name, smartTargetRegion.MaxItems, promotions)}
-                    };
+                        // The SmartTarget API provides the entire XPM markup tag; put it in XpmMetadata["Query"]. See SmartTargetRegion.GetStartQueryXpmMarkup.
+                        smartTargetRegion.XpmMetadata = new Dictionary<string, string>
+                        {
+                            {"Query", ResultSet.GetExperienceManagerMarkup(smartTargetRegion.Name, smartTargetRegion.MaxItems, promotions)}
+                        };
+                    }
 
                     // Create SmartTargetPromotion Entity Models for visible Promotions in the current SmartTargetRegion.
                     // It seems that ResultSet.FilterPromotions doesn't really filter on Region name, so we do post-filtering here.
