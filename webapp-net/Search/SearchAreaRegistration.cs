@@ -1,22 +1,21 @@
-﻿using Sdl.Web.Common.Models;
+﻿using Sdl.Web.Modules.Search.Models;
 using Sdl.Web.Mvc.Configuration;
 
 namespace Sdl.Web.Modules.Search
 {
-    public class SearchAreaRegistration : BaseAreaRegistration 
+    public class SearchAreaRegistration : BaseAreaRegistration
     {
-        public override string AreaName 
+        public override string AreaName
         {
-            get 
-            {
-                return "Search";
-            }
+            get { return "Search"; }
         }
 
         protected override void RegisterAllViewModels()
         {
-            RegisterViewModel("SearchBox", typeof(SearchConfiguration));
-            RegisterViewModel("SearchResults", typeof(SearchQuery<Teaser>), "Search");
+            // Search Entity Views
+            RegisterViewModel("SearchBox", typeof(SearchBox));
+            RegisterViewModel("SearchItem", typeof(SearchItem));
+            RegisterViewModel("SearchResults", typeof(SearchQuery<SearchItem>), "Search");
         }
     }
 }
