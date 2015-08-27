@@ -122,7 +122,8 @@ REM Deploy build artifacts to DXA Site (on development machines with DXA_SITE_DI
 if defined DXA_SITE_DIR (
 xcopy "$(TargetPath)" "%25DXA_SITE_DIR%25\bin" /Y
 xcopy "$(ProjectDir)Areas" "%25DXA_SITE_DIR%25\Areas" /S /I /Y
-xcopy "$(ProjectDir)..\_references\st-2014-sp1" "%25DXA_SITE_DIR%25\bin" /S /I /Y
+xcopy "$(ProjectDir)..\_references\st-2014-sp1" "%25DXA_SITE_DIR%25\bin" /I /Y
+xcopy "$(ProjectDir)..\_references\st-2014-sp1\lib" "%25DXA_SITE_DIR%25\bin\lib" /S /I /Y
 )</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
