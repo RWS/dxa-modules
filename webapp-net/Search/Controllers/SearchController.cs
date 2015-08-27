@@ -11,12 +11,28 @@ namespace Sdl.Web.Modules.Search.Controllers
 {
     public class SearchController : BaseEntityController
     {
+        protected ISearchProvider SearchProvider { get; private set; }
+
+        #region Constructors
+        /// <summary>
+        /// Parameterless constructor is used if no implementation type for <see cref="ISearchProvider"/> can be resolved.
+        /// </summary>
+        public SearchController()
+        {
+            SearchProvider = new SolrProvider();
+        }
+
+        /* TODO: as soon as we have this constructor, Unity wants to use it and throws an Exception if no ISearchProvider implementation is configured.
+        /// <summary>
+        /// Constructor that takes a <see cref="ISearchProvider"/> implementation (Dependency Injection).
+        /// </summary>
+        /// <param name="searchProvider">The <see cref="ISearchProvider"/> implementation</param>
         public SearchController(ISearchProvider searchProvider)
         {
             SearchProvider = searchProvider;
         }
-
-        public ISearchProvider SearchProvider { get; set; }
+        */
+        #endregion
 
         /// <summary>
         /// Enrich the SearchQuery View Model with request querystring parameters and populate the results using a configured Search Provider,.
