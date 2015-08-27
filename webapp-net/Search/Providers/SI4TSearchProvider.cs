@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Specialized;
 using System.Globalization;
+using System.Text.RegularExpressions;
 using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Logging;
 using Sdl.Web.Common.Models;
 using Sdl.Web.Modules.Search.Models;
-using Sdl.Web.Modules.Search.Utils;
 using SI4T.Query.Models;
 
 namespace Sdl.Web.Modules.Search.Providers
@@ -63,10 +63,12 @@ namespace Sdl.Web.Modules.Search.Providers
 
         protected virtual NameValueCollection SetupParameters(SearchQuery searchQuery, Localization localization, bool hl = true)
         {
+            string escapedQuery = Regex.Replace(searchQuery.QueryText, @"([\\&|+\-!(){}[\]^\""~*?:])", match => @"\" + match.Groups[1].Value);
+
             NameValueCollection result = new NameValueCollection
             {
                 {"fq", "publicationid:" + localization.LocalizationId},
-                {"q", SearchUtils.PrepareQuery(searchQuery.QueryText) },
+                {"q", escapedQuery },
                 {"start", searchQuery.Start.ToString(CultureInfo.InvariantCulture) },
                 {"rows", searchQuery.PageSize.ToString(CultureInfo.InvariantCulture) }
             };

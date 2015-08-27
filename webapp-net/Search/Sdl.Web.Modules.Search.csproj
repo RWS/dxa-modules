@@ -101,7 +101,6 @@
     <Compile Include="DxaSearchException.cs" />
     <Compile Include="Models\SearchItem.cs" />
     <Compile Include="Providers\SI4TSearchProvider.cs" />
-    <Compile Include="Utils\SearchUtils.cs" />
     <Compile Include="Providers\ISearchProvider.cs" />
     <Compile Include="Properties\VersionInfo.cs" />
     <Compile Include="Controllers\SearchController.cs" />
