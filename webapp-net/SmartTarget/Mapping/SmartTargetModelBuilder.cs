@@ -18,14 +18,24 @@ using TcmUri = Tridion.SmartTarget.Utils.TcmUri;
 
 namespace Sdl.Web.Modules.SmartTarget.Mapping
 {
+    /// <summary>
+    /// SmartTarget Model Builder.
+    /// </summary>
+    /// <remarks>
+    /// This Model Builder should be configured in the modelBuilderPipeline section in Web.config to run after the <see cref="DefaultModelBuilder"/>.
+    /// </remarks>
     public class SmartTargetModelBuilder : IModelBuilder
     {
         private const string PromotionViewNameConfig = "smarttarget.smartTargetEntityPromotion";
 
         #region IModelBuilder members
         /// <summary>
-        /// Update page and regions with proper SmartTarget content
+        /// Post-processes the Page Model constructed by the <see cref="DefaultModelBuilder"/>.
         /// </summary>
+        /// <remarks>
+        /// This implementation relies on the <see cref="DefaultModelBuilder"/> already having constructed Region Models of type <see cref="SmartTargetRegion"/>.
+        /// We "upgrade" the Page Model to type <see cref="SmartTargetPageModel"/> and populate the ST Regions <see cref="SmartTargetPromotion"/> Entities.
+        /// </remarks>
         public void BuildPageModel(ref PageModel pageModel, IPage page, IEnumerable<IPage> includes, Localization localization)
         {
             using (new Tracer(pageModel, page, includes, localization))
@@ -49,7 +59,7 @@ namespace Sdl.Web.Modules.SmartTarget.Mapping
                 };
                 pageModel = smartTargetPageModel;
                 
-                // read custom metadata on the region, place these information into the SmartTargetPageModel
+                // Set SmartTargetRegionModel.MaxItem based on the Region Metadata in the Page Template.
                 foreach (IFieldSet smartTargetRegionField in page.PageTemplate.MetadataFields["regions"].EmbeddedValues)
                 {
                     string regionName = new MvcData(smartTargetRegionField["view"].Value).ViewName;
@@ -64,11 +74,6 @@ namespace Sdl.Web.Modules.SmartTarget.Mapping
                 // Execute a ST Query for all SmartTargetRegions on the Page.
                 ResultSet resultSet = ExecuteSmartTargetQuery(smartTargetPageModel, localization);
                 Log.Debug("SmartTarget query returned {0} Promotions.", resultSet.Promotions.Count);
-                if (resultSet.Promotions.Count == 0)
-                {
-                    // No ST promotions for this Page; nothing to do.
-                    return;
-                }
 
                 string promotionViewName = localization.GetConfigValue(PromotionViewNameConfig);
                 if (String.IsNullOrEmpty(promotionViewName))
