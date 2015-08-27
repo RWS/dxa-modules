@@ -16,7 +16,7 @@
 
 		<IndexServer>
             <!-- On premise Url -->
-            <Url>http://fredhopper.host:8180/</Url>
+            <Url>http://localhost:8180/</Url>
             <!-- Hosted url -->
             <!--<Url>http://bm.prepublished.live1.fas.eu1.fredhopperservices.com/</Url>-->
             <Authentication>
@@ -28,7 +28,7 @@
 
 			<Deployment>
 				<!-- Specifies where the deployer extension will place the files to be picked up by Fredhopper -->
-				<Location>c:/fredhopper/indexer/data/fas-xml-incremental/catalog01</Location>
+				<Location>c:\fredhopper\staging-indexer\data\fas-xml-incremental\catalog01</Location>
 				<!-- Use this instead, if you have the SmartTarget Deployment WebService installed -->
 				<!--
 				<Location>http://localhost:8080/SmartTargetDeploymentWebService/SmartTargetDeploymentWebService?wsdl</Location>
@@ -49,7 +49,7 @@
 		
 		<QueryServer>
             <!-- On premise Url -->
-            <Url>http://fredhopper.host:8180/</Url>
+            <Url>http://localhost:8180/</Url>
             <!-- Hosted url -->
             <!--<Url>http://query.published.live1.fas.eu1.fredhopperservices.com/</Url>-->
             <Authentication>
