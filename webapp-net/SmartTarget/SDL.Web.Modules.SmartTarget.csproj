@@ -119,10 +119,11 @@ xcopy "$(ProjectDir)..\_references\st-2014-sp1\lib" "$(TargetDir)lib" /I /Y
 xcopy "$(ProjectDir)..\_references\st-2014-sp1\config" "$(TargetDir)config" /I /Y
 
 REM Deploy build artifacts to DXA Site (on development machines with DXA_SITE_DIR environment variable set)
-if defined DXA_SITE_DIR xcopy "$(TargetPath)" "%25DXA_SITE_DIR%25\bin" /Y
-if defined DXA_SITE_DIR xcopy "$(ProjectDir)Areas" "%25DXA_SITE_DIR%25\Areas" /S /I /Y
-if defined DXA_SITE_DIR xcopy "$(ProjectDir)..\_references\st-2014-sp1" "%25DXA_SITE_DIR%25\bin" /S /I /Y
-</PostBuildEvent>
+if defined DXA_SITE_DIR (
+xcopy "$(TargetPath)" "%25DXA_SITE_DIR%25\bin" /Y
+xcopy "$(ProjectDir)Areas" "%25DXA_SITE_DIR%25\Areas" /S /I /Y
+xcopy "$(ProjectDir)..\_references\st-2014-sp1" "%25DXA_SITE_DIR%25\bin" /S /I /Y
+)</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
