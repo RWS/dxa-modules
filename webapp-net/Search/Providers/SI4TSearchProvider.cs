@@ -35,7 +35,7 @@ namespace Sdl.Web.Modules.Search.Providers
 
                 foreach (SearchResult result in results.Items)
                 {
-                    searchQuery.SearchItems.Add(MapResult(result, resultType, searchQuery.SearchItemView));
+                    searchQuery.Results.Add(MapResult(result, resultType, searchQuery.SearchItemView));
                 }
             }
         }

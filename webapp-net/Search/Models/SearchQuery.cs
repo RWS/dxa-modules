@@ -4,57 +4,85 @@ using Sdl.Web.Common.Models;
 
 namespace Sdl.Web.Modules.Search.Models
 {
+    /// <summary>
+    /// Abstract base class for Search Query/Results.
+    /// </summary>
+    [SemanticEntity(Vocab = "http://schema.org", EntityName = "ItemList", Prefix = "s", Public = true)]
+    [SemanticDefaults(MapAllProperties = false)]
     public abstract class SearchQuery : EntityModel
     {
-        //Content from CMS
+        // Below properties are mapped to fields of the CMS "Search Query" Component.
+
+        /// <summary>
+        /// The headline to show above the search results (optional)
+        /// </summary>
+        [SemanticProperty("headline")]
         [SemanticProperty("s:headline")]
         public string Headline { get; set; }
 
-        //Content from CMS
-        public string SearchItemView { get; set; }
-
-        //Content from CMS, this way the fields are XPM enabled.
+        /// <summary>
+        /// The text to show above the search results if there were hits.
+        /// </summary>
+        [SemanticProperty("resultsText")]
         public string ResultsText { get; set; }
 
-        //Content from CMS, this way the fields are XPM enabled.
+        /// <summary>
+        /// The text to show if there were no hits.
+        /// </summary>
+        [SemanticProperty("noResultsText")]
         public string NoResultsText { get; set; }
 
-        //Webrequest queryText
-        public string QueryText { get; set; }
-
-        public int CurrentPage { get; set; }
-
-        //Content from CMS
+        /// <summary>
+        /// The number of items to show per result page.
+        /// </summary>
+        [SemanticProperty("pageSize")]
         public int PageSize { get; set; }
 
+        /// <summary>
+        /// The (qualified) name of the View used to render the search result entities.
+        /// </summary>
+        [SemanticProperty("searchItemView")]
+        public string SearchItemView { get; set; }
+
+
+        // Below properties are mapped (by the Search Controller) to query string parameters
+        public string QueryText { get; set; }
         public int Start { get; set; }
 
+        // Below properties reflect the search results (set by the Search Provider)
+        public int CurrentPage { get; set; }
         public int Total { get; set; }
-
         public bool HasMore { get; set; }
 
-        public IList<SearchItem> SearchItems { get; private set; }
+        [SemanticProperty("s:itemListElement")]
+        public IList<SearchItem> Results { get; private set; }
 
-
+        /// <summary>
+        /// Constructor
+        /// </summary>
         protected SearchQuery()
         {
-            CurrentPage = 1;
-            PageSize = 0;
-            SearchItems = new List<SearchItem>();
+            Results = new List<SearchItem>();
+
+            // Default values used in case this is not configured in CMS.
             SearchItemView = "Search:SearchItem";
+            PageSize = 10;
         }
     }
 
-
-    [SemanticEntity(Vocab = "http://schema.org", EntityName = "ItemList", Prefix = "s", Public = true)]
-    public class SearchQuery<T> : SearchQuery where T : SearchItem
+    /// <summary>
+    /// Represents a Search Query with strongly typed results.
+    /// </summary>
+    /// <typeparam name="TResult">The type of the <see cref="Results"/> (must be a subclass of <see cref="SearchItem"/>).</typeparam>
+    public class SearchQuery<TResult> : SearchQuery 
+        where TResult : SearchItem
     {
         [SemanticProperty("s:itemListElement")]
-        public new IList<T> SearchItems
+        public new IList<TResult> Results
         {
             get
             {
-                return base.SearchItems.Cast<T>().ToList();
+                return base.Results.Cast<TResult>().ToList();
             }
         }
 
