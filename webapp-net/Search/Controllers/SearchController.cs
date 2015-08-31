@@ -11,29 +11,6 @@ namespace Sdl.Web.Modules.Search.Controllers
 {
     public class SearchController : BaseEntityController
     {
-        protected ISearchProvider SearchProvider { get; private set; }
-
-        #region Constructors
-        /// <summary>
-        /// Parameterless constructor is used if no implementation type for <see cref="ISearchProvider"/> can be resolved.
-        /// </summary>
-        public SearchController()
-        {
-            SearchProvider = new SolrProvider();
-        }
-
-        /* TODO: as soon as we have this constructor, Unity wants to use it and throws an Exception if no ISearchProvider implementation is configured.
-        /// <summary>
-        /// Constructor that takes a <see cref="ISearchProvider"/> implementation (Dependency Injection).
-        /// </summary>
-        /// <param name="searchProvider">The <see cref="ISearchProvider"/> implementation</param>
-        public SearchController(ISearchProvider searchProvider)
-        {
-            SearchProvider = searchProvider;
-        }
-        */
-        #endregion
-
         /// <summary>
         /// Enrich the SearchQuery View Model with request querystring parameters and populate the results using a configured Search Provider,.
         /// </summary>
@@ -53,8 +30,9 @@ namespace Sdl.Web.Modules.Search.Controllers
                 searchQuery.QueryText = queryString["q"];
                 searchQuery.Start = queryString.AllKeys.Contains("start") ? Convert.ToInt32(queryString["start"]) : 1;
 
-                SearchProvider.ExecuteQuery(searchQuery, searchQuery.GetType().GetGenericArguments()[0],
-                    WebRequestContext.Localization);
+                ISearchProvider searchProvider = SearchProviderFactory.GetSearchProvider(WebRequestContext.Localization);
+                Type searchItemType = searchQuery.GetType().GetGenericArguments()[0];
+                searchProvider.ExecuteQuery(searchQuery, searchItemType, WebRequestContext.Localization);
 
                 return searchQuery;
             }

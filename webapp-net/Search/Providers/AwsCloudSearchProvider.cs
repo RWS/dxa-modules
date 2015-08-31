@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Specialized;
+﻿using System.Collections.Specialized;
 using Sdl.Web.Common.Logging;
 using SI4T.Query.Models;
 
@@ -11,8 +10,8 @@ namespace Sdl.Web.Modules.Search.Providers
         {
             using (new Tracer(searchIndexUrl, parameters))
             {
-                // TODO: Create SI4T.Query.CloudSearch.Connection
-                throw new NotImplementedException();
+                SI4T.Query.CloudSearch.Connection cloudSearchConnection = new SI4T.Query.CloudSearch.Connection(searchIndexUrl);
+                return cloudSearchConnection.ExecuteQuery(parameters);
             }
         }
     }
