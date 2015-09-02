@@ -1,0 +1,8 @@
+﻿@model SmartTargetRegion
+
+<div id="region-example1" @Html.DxaRegionMarkup()>
+    <div>
+        @Html.Raw(Model.GetStartQueryXpmMarkup())
+        @Html.DxaEntities()
+    </div>
+</div>
