@@ -35,9 +35,22 @@ Repositories
 The following repositories with source code are available:
 
  - https://github.com/sdl/dxa-content-management - Core Template Building Blocks
+ - https://github.com/sdl/dxa-html-design - Whitelabel HTML Design
  - https://github.com/sdl/dxa-modules - Modules
  - https://github.com/sdl/dxa-web-application-dotnet - .NET MVC web application
  - https://github.com/sdl/dxa-web-application-java - Java Spring MVC web application
+
+
+Branching model
+---------------
+
+We intend to follow Gitflow (http://nvie.com/posts/a-successful-git-branching-model/) with the following main branches:
+
+ - master - Stable 
+ - develop - Unstable
+ - release/x.y - Release version x.y
+
+Please submit your pull requests on develop. In the near future we intend to push our changes to develop and master from our internal repositories, so you can follow our development process.
 
 
 License

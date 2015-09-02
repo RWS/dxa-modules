@@ -2,3 +2,4 @@ The following files should be copied here from the build of the **web-applicatio
 
 - Sdl.Web.Common.dll
 - Sdl.Web.Mvc.dll
+- Sdl.Web.Tridion.dll
