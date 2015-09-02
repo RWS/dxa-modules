@@ -27,7 +27,7 @@ namespace Sdl.Web.Modules.Search.Providers
                 {
                     throw new DxaSearchException(String.Format("Error executing Search Query on URL '{0}': {1}", searchIndexUrl, results.ErrorDetail));
                 }
-                Log.Debug("Search Query '{0}' returned {1} results.", results.QueryText, results.Total);
+                Log.Debug("Search Query '{0}' returned {1} results.", results.QueryText ?? results.QueryUrl, results.Total);
 
                 searchQuery.Total = results.Total;
                 searchQuery.HasMore = results.Start + results.PageSize <= results.Total;
@@ -66,13 +66,13 @@ namespace Sdl.Web.Modules.Search.Providers
             // TODO: also needed for CloudSearch?
             string escapedQuery = Regex.Replace(searchQuery.QueryText, @"([\\&|+\-!(){}[\]^\""~*?:])", match => @"\" + match.Groups[1].Value);
 
-            return new NameValueCollection(searchQuery.QueryStringParameters)
-            {
-                {"fq", "publicationid:" + localization.LocalizationId},
-                {"q", escapedQuery },
-                {"start", searchQuery.Start.ToString(CultureInfo.InvariantCulture) },
-                {"rows", searchQuery.PageSize.ToString(CultureInfo.InvariantCulture) }
-            };
+            NameValueCollection result = new NameValueCollection(searchQuery.QueryStringParameters);
+            result["fq"] = "publicationid:" + localization.LocalizationId;
+            result["q"] = escapedQuery;
+            result["start"] = searchQuery.Start.ToString(CultureInfo.InvariantCulture);
+            result["rows"] = searchQuery.PageSize.ToString(CultureInfo.InvariantCulture);
+
+            return result;
         }
     }
 }
