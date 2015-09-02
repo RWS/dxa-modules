@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using Sdl.Web.Common.Models;
 
@@ -48,6 +49,7 @@ namespace Sdl.Web.Modules.Search.Models
         // Below properties are mapped (by the Search Controller) to query string parameters
         public string QueryText { get; set; }
         public int Start { get; set; }
+        public NameValueCollection QueryStringParameters { get; set; }
 
         // Below properties reflect the search results (set by the Search Provider)
         public int CurrentPage { get; set; }

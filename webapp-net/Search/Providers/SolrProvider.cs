@@ -1,5 +1,7 @@
 ﻿using System.Collections.Specialized;
+using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Logging;
+using Sdl.Web.Modules.Search.Models;
 using SI4T.Query.Models;
 
 namespace Sdl.Web.Modules.Search.Providers
@@ -13,6 +15,13 @@ namespace Sdl.Web.Modules.Search.Providers
                 SI4T.Query.Solr.Connection solrConnection = new SI4T.Query.Solr.Connection(searchIndexUrl);
                 return solrConnection.ExecuteQuery(parameters);
             }
+        }
+
+        protected override NameValueCollection SetupParameters(SearchQuery searchQuery, Localization localization)
+        {
+            NameValueCollection parameters = base.SetupParameters(searchQuery, localization);
+            parameters.Add("hl", "true");
+            return parameters;
         }
     }
 }

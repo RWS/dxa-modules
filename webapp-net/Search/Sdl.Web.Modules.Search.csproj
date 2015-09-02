@@ -105,7 +105,6 @@
     <Compile Include="Controllers\BaseEntityController.cs" />
     <Compile Include="DxaSearchException.cs" />
     <Compile Include="Models\SearchItem.cs" />
-    <Compile Include="Providers\SearchProviderFactory.cs" />
     <Compile Include="Providers\SI4TSearchProvider.cs" />
     <Compile Include="Providers\ISearchProvider.cs" />
     <Compile Include="Properties\VersionInfo.cs" />

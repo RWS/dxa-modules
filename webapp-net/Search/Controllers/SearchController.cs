@@ -11,6 +11,17 @@ namespace Sdl.Web.Modules.Search.Controllers
 {
     public class SearchController : BaseEntityController
     {
+        protected ISearchProvider SearchProvider { get; set; }
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="searchProvider">The Search Provider to use. Set using Dependency Injection (ISearchProvider interface must be defined in Unity.config)</param>
+        public SearchController(ISearchProvider searchProvider)
+        {
+            SearchProvider = searchProvider;
+        }
+
         /// <summary>
         /// Enrich the SearchQuery View Model with request querystring parameters and populate the results using a configured Search Provider,.
         /// </summary>
@@ -27,12 +38,14 @@ namespace Sdl.Web.Modules.Search.Controllers
                 }
 
                 NameValueCollection queryString = Request.QueryString;
+                // Map standard query string parameters
                 searchQuery.QueryText = queryString["q"];
                 searchQuery.Start = queryString.AllKeys.Contains("start") ? Convert.ToInt32(queryString["start"]) : 1;
+                // To allow the Serch Provider to use additional query string parameters:
+                searchQuery.QueryStringParameters = queryString;
 
-                ISearchProvider searchProvider = SearchProviderFactory.GetSearchProvider(WebRequestContext.Localization);
                 Type searchItemType = searchQuery.GetType().GetGenericArguments()[0];
-                searchProvider.ExecuteQuery(searchQuery, searchItemType, WebRequestContext.Localization);
+                SearchProvider.ExecuteQuery(searchQuery, searchItemType, WebRequestContext.Localization);
 
                 return searchQuery;
             }
