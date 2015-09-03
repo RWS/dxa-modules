@@ -150,8 +150,9 @@ namespace Sdl.Web.Tridion.Templates
                                 {
                                     // add ecl uri attribute
                                     link.SetAttribute("data-eclUri", eclUri.ToString());
-                                    link.SetAttribute("data-eclSubType", eclUri.SubType);
-                                    Logger.Debug(String.Format("ECL subtype: {0}", eclUri.SubType));
+                                    string displayType = GetExternalContentLibraryDisplayType(eclUri);
+                                    link.SetAttribute("data-eclDisplayType", displayType);
+                                    Logger.Debug(String.Format("ECL display type: {0}", displayType));
 
                                     // replace url with ecl directlink
                                     string directLink = GetExternalContentLibraryDirectLink(eclUri);
@@ -201,8 +202,9 @@ namespace Sdl.Web.Tridion.Templates
                             string directLink = GetExternalContentLibraryDirectLink(eclUri);
                             Logger.Debug(String.Format("ECL direct link: {0}", directLink));
                             Logger.Debug(String.Format("ECL URI: {0}", eclUri));
-                            Logger.Debug(String.Format("ECL subtype: {0}", eclUri.SubType));
+                            Logger.Debug(String.Format("ECL display type: {0}", GetExternalContentLibraryDisplayType(eclUri)));
                             Logger.Debug(String.Format("ECL template fragment: {0}", GetExternalContentLibraryHtmlFragment(eclUri)));
+
                             urlNode.InnerText = directLink;
 
                             // Media Manager doesn't specify a mimetype for its distributions, which is a shame, so lets keep it the default ECL mimetype
@@ -217,7 +219,7 @@ namespace Sdl.Web.Tridion.Templates
 
                             // TODO: this should all be moved to DD4T Publish binaries for component TBB and expose additional information about the ECL item (including external metadata)
                         }
-                    }            
+                    }
                 }
             }
         }
@@ -236,6 +238,22 @@ namespace Sdl.Web.Tridion.Templates
 
             var item = _eclSession.GetContentLibrary(eclUri).GetItem(eclUri) as IContentLibraryMultimediaItem;
             return item == null ? null : item.MimeType;
+        }
+
+        private string GetExternalContentLibraryDisplayType(IEclUri eclUri)
+        {
+            if (_eclSession == null)
+            {
+                _eclSession = SessionFactory.CreateEclSession(Engine.GetSession());
+            }
+
+            if (eclUri == null || eclUri.IsNullUri)
+            {
+                throw new ArgumentException(string.Format("The URI {0} is not an External Content Library stub Component", eclUri));
+            }
+
+            var item = _eclSession.GetContentLibrary(eclUri).GetItem(eclUri) as IContentLibraryMultimediaItem;
+            return item == null ? null : item.DisplayTypeId;
         }
 
         private string GetExternalContentLibraryHtmlFragment(IEclUri eclUri)
