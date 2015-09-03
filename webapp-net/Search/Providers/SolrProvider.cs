@@ -8,6 +8,13 @@ namespace Sdl.Web.Modules.Search.Providers
 {
     public class SolrProvider : SI4TSearchProvider
     {
+        protected override NameValueCollection SetupParameters(SearchQuery searchQuery, Localization localization)
+        {
+            NameValueCollection parameters = base.SetupParameters(searchQuery, localization);
+            parameters.Add("hl", "true");
+            return parameters;
+        }
+
         protected override SearchResults ExecuteQuery(string searchIndexUrl, NameValueCollection parameters)
         {
             using (new Tracer(searchIndexUrl, parameters))
@@ -15,13 +22,6 @@ namespace Sdl.Web.Modules.Search.Providers
                 SI4T.Query.Solr.Connection solrConnection = new SI4T.Query.Solr.Connection(searchIndexUrl);
                 return solrConnection.ExecuteQuery(parameters);
             }
-        }
-
-        protected override NameValueCollection SetupParameters(SearchQuery searchQuery, Localization localization)
-        {
-            NameValueCollection parameters = base.SetupParameters(searchQuery, localization);
-            parameters.Add("hl", "true");
-            return parameters;
         }
     }
 }
