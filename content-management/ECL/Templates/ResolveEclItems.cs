@@ -150,6 +150,8 @@ namespace Sdl.Web.Tridion.Templates
                                 {
                                     // add ecl uri attribute
                                     link.SetAttribute("data-eclUri", eclUri.ToString());
+                                    link.SetAttribute("data-eclSubType", eclUri.SubType);
+                                    Logger.Debug(String.Format("ECL subtype: {0}", eclUri.SubType));
 
                                     // replace url with ecl directlink
                                     string directLink = GetExternalContentLibraryDirectLink(eclUri);
@@ -199,6 +201,7 @@ namespace Sdl.Web.Tridion.Templates
                             string directLink = GetExternalContentLibraryDirectLink(eclUri);
                             Logger.Debug(String.Format("ECL direct link: {0}", directLink));
                             Logger.Debug(String.Format("ECL URI: {0}", eclUri));
+                            Logger.Debug(String.Format("ECL subtype: {0}", eclUri.SubType));
                             Logger.Debug(String.Format("ECL template fragment: {0}", GetExternalContentLibraryHtmlFragment(eclUri)));
                             urlNode.InnerText = directLink;
 
