@@ -197,14 +197,10 @@ namespace Sdl.Web.Modules.SmartTarget.Mapping
             const string allowDuplicatesFieldName = "allowDuplicationOnSamePage";
             const string allowDuplicatesConfig = "smarttarget.allowDuplicationOnSamePageConfig";
 
-            string allowDuplicates;
+            string allowDuplicates = null;
             if (pageTemplate != null && pageTemplate.MetadataFields != null && pageTemplate.MetadataFields.ContainsKey(allowDuplicatesFieldName))
             {
                 allowDuplicates = pageTemplate.MetadataFields[allowDuplicatesFieldName].Value;
-            }
-            else
-            {
-                allowDuplicates = "true";
             }
 
             if (String.IsNullOrEmpty(allowDuplicates) || allowDuplicates.Equals("Use core configuration", StringComparison.OrdinalIgnoreCase))
