@@ -148,16 +148,16 @@ namespace Sdl.Web.Tridion.Templates
                                 IEclUri eclUri = TryGetEclUriFromTcmUri(tcmUri);
                                 if (eclUri != null)
                                 {
-                                    // add ecl uri attribute
+                                    // add ecl uri and display type attributes
                                     link.SetAttribute("data-eclUri", eclUri.ToString());
                                     string displayType = GetExternalContentLibraryDisplayType(eclUri);
                                     link.SetAttribute("data-eclDisplayType", displayType);
-                                    Logger.Debug(String.Format("ECL display type: {0}", displayType));
 
                                     // replace url with ecl directlink
                                     string directLink = GetExternalContentLibraryDirectLink(eclUri);
                                     Logger.Debug(String.Format("ECL direct link: {0}", directLink));
                                     Logger.Debug(String.Format("ECL URI: {0}", eclUri));
+                                    Logger.Debug(String.Format("ECL display type: {0}", displayType));
                                     urlNode.InnerText = directLink;
 
                                     containsEclReferences = true;
