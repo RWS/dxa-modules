@@ -57,7 +57,9 @@ namespace Sdl.Web.Modules.MediaManager.Models
                 classAttribute = String.Format(" class=\"{0}\"", cssClass);
             }
 
-            return string.Format("<{2} id=\"{1}\"{3}></{2}><script src=\"{0}&trgt={1}&responsive=true\"></script>", ScriptUrl, Guid, htmlTagName, classAttribute);
+            // use a unique guid so we won't have conflicts with the same video on the page multiple times
+            string guid = System.Guid.NewGuid().ToString();
+            return string.Format("<{2} id=\"{1}\"{3}></{2}><script src=\"{0}&trgt={1}&responsive=true\"></script>", ScriptUrl, guid, htmlTagName, classAttribute);
         }
 
         /// <summary>

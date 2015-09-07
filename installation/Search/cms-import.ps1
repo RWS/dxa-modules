@@ -482,7 +482,7 @@ $detailedMapping = (
 if ($importType -ne "permissions-only")
 {
     Invoke-Upload $detailedMapping $importPackageFullPath $tempFolder
-    Add-ComponentToPage $sitePublication $rootStructureGroup "Modules Content/Search/Search Configuration" "Modules/Search/Site Manager/Templates/Search Box [Nav]"  "_System/include/Header" 
+    Add-ComponentToPage $sitePublication $rootStructureGroup "Modules Content/Search/Search Box Configuration" "Modules/Search/Site Manager/Templates/Search Box [Nav]"  "_System/include/Header" 
 	Add-TbbToTbb $masterPublication "Modules/Core/Developer/Core Template Building Blocks/Default Page Template Finish Actions" "Modules/Search/Developer/Search Template Building Blocks/Enable Search Indexing.tbbcmp"
 	Add-MetadataToItem $masterPublication ($rootStructureGroup + "/_System") "Modules/Search/Editor/Schemas/Search Indexing Metadata" "<Metadata xmlns=""http://www.sdl.com/web/schemas/search""><NoIndex>Yes</NoIndex></Metadata>"
 	Add-MetadataToItem $sitePublication ($rootStructureGroup + "/_Error Page Not Found.tpg") "Modules/Search/Editor/Schemas/Search Indexing Metadata" "<Metadata xmlns=""http://www.sdl.com/web/schemas/search""><NoIndex>Yes</NoIndex></Metadata>"
