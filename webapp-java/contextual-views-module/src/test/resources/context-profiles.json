@@ -1,9 +1,0 @@
-[
-  {"name" : "desktop", "expression" : "!device.mobile"},
-  {"name" : "mobile", "expression" : "device.mobile",
-    "children" : [
-      { "name" : "iphone", "expression" : "device.model == 'iPhone"},
-      { "name" : "android", "expression" : "device.model == 'Android"}
-    ]
-  }
-]
