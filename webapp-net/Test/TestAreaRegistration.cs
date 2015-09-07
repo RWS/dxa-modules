@@ -1,4 +1,5 @@
 ﻿using Sdl.Web.Common.Models;
+using Sdl.Web.Modules.SmartTarget.Models;
 using Sdl.Web.Modules.Test.Models;
 using Sdl.Web.Mvc.Configuration;
 
@@ -31,6 +32,7 @@ namespace Sdl.Web.Modules.Test
             RegisterViewModel("TestRegion3", typeof(RegionModel), "Region");
             RegisterViewModel("TestRegionMarkup", typeof(RegionModel), "Region");
             RegisterViewModel("TestRegionEntity", typeof(RegionModel), "Region");
+            RegisterViewModel("PromoRegionTest", typeof(SmartTargetRegion), "Region");
 
             // Entity Views
             RegisterViewModel("TestEntity1", typeof(TestEntityModel1));

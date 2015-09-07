@@ -1,0 +1,10 @@
+﻿@model SearchItem
+
+<a href="@Model.Url" class="list-group-item">
+    <h4 class="list-group-item-heading">@Model.Title</h4>
+
+    @if (!String.IsNullOrEmpty(Model.Summary))
+    {
+        <p class="list-group-item-text">@Model.Summary</p>
+    }
+</a>

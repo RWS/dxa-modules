@@ -83,8 +83,7 @@ function AddTypeToUnityConfig ($type, $mapTo) {
 
 
 AddAssemblyOrNamespaceToUnityConfig "assembly" "Sdl.Web.Modules.Search"
-AddAssemblyOrNamespaceToUnityConfig "namespace" "Sdl.Web.Modules.Search"
-AddAssemblyOrNamespaceToUnityConfig "namespace" "Sdl.Web.Modules.Search.Solr"
+AddAssemblyOrNamespaceToUnityConfig "namespace" "Sdl.Web.Modules.Search.Providers"
 AddTypeToUnityConfig "ISearchProvider" "SolrProvider"
 
 Write-Output ("Updated 'Unity.config' file for Search module")

@@ -45,6 +45,16 @@ if (!($pscmdlet.ShouldProcess("System", "Import ECL Module into CMS"))) { return
 #Initialization
 $IsInteractiveMode = !((gwmi -Class Win32_Process -Filter "ProcessID=$PID").commandline -match "-NonInteractive") -and !$NonInteractive
 
+# encode dots in publication names
+if ($masterPublication.Contains('.'))
+{
+    $masterPublication = $masterPublication.Replace(".", "%2E")
+}
+if ($sitePublication.Contains('.'))
+{
+    $sitePublication = $sitePublication.Replace(".", "%2E")
+}
+
 # Thanks to Dominic Cronin: http://www.indivirtual.nl/blog/sdl-tridions-importexport-api-end-content-porter/
 function Invoke-InitImportExport ($distSource, $tempFolder) {
     $localDllFolder = "$($distSource)..\..\ImportExport\"
@@ -320,6 +330,49 @@ function Invoke-Upload($mapping, $packageFullPath, $tempFolder) {
     }
 }
 
+function Add-TbbToTemplate($masterPublication, $templatePath, $tbbPath) {
+    $templateWebdavUrl = [string]::Format("/webdav/{0}/Building Blocks/{1}.tbbcmp", $masterPublication, $templatePath)
+    $tbbWebdavUrl = [string]::Format("/webdav/{0}/Building Blocks/{1}.tbbcs", $masterPublication, $tbbPath)
+
+    Write-Output "Adding TBB '$($tbbWebdavUrl)' to Compound TBB '$($templateWebdavUrl)' ..."
+
+    Write-Verbose "Publication is '$masterPublication'"
+    Write-Verbose "TBB Webdav Url is '$tbbWebdavUrl'"
+    Write-Verbose "Compound TBB Webdav Url is '$templateWebdavUrl'"
+
+    $template = $core.Read($templateWebdavUrl, $defaultReadOptions)
+    $tbb = $core.Read($tbbWebdavUrl, $defaultReadOptions)
+    $notAdded = $true
+    
+    Write-Verbose "Checking if TBB '$($tbb.Id)' is already added to Compound TBB..."
+    [xml]$content = $template.Content
+    $ns = New-Object System.Xml.XmlNamespaceManager($content.NameTable)
+    $ns.AddNamespace("ns", $content.DocumentElement.NamespaceURI)
+    $ns.AddNamespace("xlink", "http://www.w3.org/1999/xlink")
+
+    $existing = $content.SelectSingleNode("//ns:Template[@xlink:href='$($tbb.Id)']", $ns)
+	if ($existing -ne $null)
+	{
+		Write-Warning ("Compound TBB already contains " + $tbb.Title + " (" + $tbb.Id + "). Skipping this step.")
+	}
+	else
+    {
+        $item = $content.CreateElement("TemplateInvocation", $ns.LookupNamespace("ns"))
+        $ref = $content.CreateElement("Template", $ns.LookupNamespace("ns"))
+        $ref.SetAttribute("href", $ns.LookupNamespace("xlink"), $tbb.Id)
+        $ref.SetAttribute("title", $ns.LookupNamespace("xlink"), $tbb.Title)
+        $item.AppendChild($ref)
+        # no need to add template parameters as they are empty, so lets skip having to look up the parameters schema namespace and just ignore the entire element
+        #$params = $content.CreateElement("TemplateParameters", $ns.LookupNamespace("ns"))
+        $content.CompoundTemplate.AppendChild($item)
+        Write-Verbose $content.InnerXml
+        $template = $core.CheckOut($template.Id, $false, $defaultReadOptions)
+        $template.Content = $content.InnerXml
+        $template = $core.Save($template, $defaultReadOptions)
+        $template = $core.CheckIn($template.Id, $true, $null, $defaultReadOptions)
+    }
+}
+
 #Process 'WhatIf' and 'Confirm' options
 if (!($pscmdlet.ShouldProcess("Tridion Content Manager", "Import the reference implementation"))) { return }
 
@@ -359,6 +412,7 @@ $detailedMapping = (
 if ($importType -ne "permissions-only")
 {
     Invoke-Upload $detailedMapping $importPackageFullPath $tempFolder
+    Add-TbbToTemplate $masterPublication "Modules/Core/Developer/Core Template Building Blocks/Default Component Template Finish Actions" "Modules/ECL/Developer/ECL Template Building Blocks/Resolve External Content Library Items" 
 }
 
 #   NOTE - this should be executed last after importing all modules and does not work for mapped publications

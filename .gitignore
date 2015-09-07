@@ -6,3 +6,4 @@ packages/
 _references/
 .idea/
 *.iml
+.vs/
