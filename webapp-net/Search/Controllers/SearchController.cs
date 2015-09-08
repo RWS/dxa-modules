@@ -40,7 +40,7 @@ namespace Sdl.Web.Modules.Search.Controllers
                 NameValueCollection queryString = Request.QueryString;
                 // Map standard query string parameters
                 searchQuery.QueryText = queryString["q"];
-                searchQuery.Start = queryString.AllKeys.Contains("start") ? Convert.ToInt32(queryString["start"]) : 0;
+                searchQuery.Start = queryString.AllKeys.Contains("start") ? Convert.ToInt32(queryString["start"]) : 1;
                 // To allow the Serch Provider to use additional query string parameters:
                 searchQuery.QueryStringParameters = queryString;
 
