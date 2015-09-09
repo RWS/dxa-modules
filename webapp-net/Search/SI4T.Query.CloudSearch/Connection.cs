@@ -244,13 +244,14 @@ namespace SI4T.Query.CloudSearch
             }
 
             //hl.contiguous
-            int start = 0;
+            int start;
             if (!String.IsNullOrEmpty(parameters["start"]) && Int32.TryParse(parameters["start"], out start))
             {
-
-                request.Start = start;
+                // SI4T uses 1 based indexing, but CloudSearch/Solr use 0 based indexing
+                request.Start = (start == 0) ? 0 : start - 1;
                 parameters.Remove("start");
             }
+
 
             if (!String.IsNullOrEmpty(parameters["q.options"]))
             {
