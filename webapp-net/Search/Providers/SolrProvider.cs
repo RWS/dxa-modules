@@ -11,6 +11,7 @@ namespace Sdl.Web.Modules.Search.Providers
         protected override NameValueCollection SetupParameters(SearchQuery searchQuery, Localization localization)
         {
             NameValueCollection parameters = base.SetupParameters(searchQuery, localization);
+            parameters["hl"] = "true"; // We enable "highlighting" in order to get a Summary on indexed binary items.
             return parameters;
         }
 
