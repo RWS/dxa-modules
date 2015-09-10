@@ -75,7 +75,7 @@ Foreach ($storageElement in $config.SelectNodes("//Storage[@Type='persistence' a
    {
        $indexerElement = $config.CreateElement("Indexer")
        $indexerElement.SetAttribute("Class", "org.si4t.cloudsearch.CloudSearchIndexer")
-       $indexerElement.SetAttribute("documentdEndpoint", $indexerUrl)
+       $indexerElement.SetAttribute("documentEndpoint", $indexerUrl)
        $indexerElement.SetAttribute("authentication", "implicit")
        $indexerElement.SetAttribute("access_key_id", "")
        $indexerElement.SetAttribute("secret_access_key", "")
