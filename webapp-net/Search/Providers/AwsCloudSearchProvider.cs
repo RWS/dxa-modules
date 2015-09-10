@@ -11,7 +11,6 @@ namespace Sdl.Web.Modules.Search.Providers
         protected override NameValueCollection SetupParameters(SearchQuery searchQuery, Localization localization)
         {
             NameValueCollection result = base.SetupParameters(searchQuery, localization);
-            // TODO: Facets
             return result;
         }
 

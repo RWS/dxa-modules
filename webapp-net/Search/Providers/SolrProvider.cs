@@ -11,7 +11,6 @@ namespace Sdl.Web.Modules.Search.Providers
         protected override NameValueCollection SetupParameters(SearchQuery searchQuery, Localization localization)
         {
             NameValueCollection parameters = base.SetupParameters(searchQuery, localization);
-            parameters.Add("hl", "true");
             return parameters;
         }
 

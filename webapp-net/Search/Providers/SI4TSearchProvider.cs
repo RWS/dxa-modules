@@ -25,13 +25,13 @@ namespace Sdl.Web.Modules.Search.Providers
                 SearchResults results = ExecuteQuery(searchIndexUrl, parameters);
                 if (results.HasError)
                 {
-                    throw new DxaSearchException(String.Format("Error executing Search Query on URL '{0}': {1}", searchIndexUrl, results.ErrorDetail));
+                    Log.Error("Error executing Search Query on URL '{0}': {1}", results.QueryUrl ?? searchIndexUrl, results.ErrorDetail);
                 }
                 Log.Debug("Search Query '{0}' returned {1} results.", results.QueryText ?? results.QueryUrl, results.Total);
 
                 searchQuery.Total = results.Total;
-                searchQuery.HasMore = results.Start + results.PageSize <= results.Total;
-                searchQuery.CurrentPage = results.PageSize == 0 ? 1 : results.Start / results.PageSize + 1;
+                searchQuery.HasMore = searchQuery.Start + searchQuery.PageSize <= results.Total;
+                searchQuery.CurrentPage = ((searchQuery.Start - 1) / searchQuery.PageSize) + 1;
 
                 foreach (SearchResult result in results.Items)
                 {
@@ -63,12 +63,9 @@ namespace Sdl.Web.Modules.Search.Providers
 
         protected virtual NameValueCollection SetupParameters(SearchQuery searchQuery, Localization localization)
         {
-            // TODO: also needed for CloudSearch?
-            string escapedQuery = Regex.Replace(searchQuery.QueryText, @"([\\&|+\-!(){}[\]^\""~*?:])", match => @"\" + match.Groups[1].Value);
-
             NameValueCollection result = new NameValueCollection(searchQuery.QueryStringParameters);
             result["fq"] = "publicationid:" + localization.LocalizationId;
-            result["q"] = escapedQuery;
+            result["q"] = searchQuery.QueryText;
             result["start"] = searchQuery.Start.ToString(CultureInfo.InvariantCulture);
             result["rows"] = searchQuery.PageSize.ToString(CultureInfo.InvariantCulture);
 
