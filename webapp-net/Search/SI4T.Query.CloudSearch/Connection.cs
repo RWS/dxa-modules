@@ -213,6 +213,7 @@ namespace SI4T.Query.CloudSearch
                 QueryParser = QueryParser.Simple,
                 Query = parameters["q"],
                 FilterQuery = parameters["fq"],
+                QueryOptions = parameters["q.options"],
                 Start = Convert.ToInt32(start) - 1, // SI4T uses 1 based indexing, but CloudSearch uses 0 based.
                 Size = Convert.ToInt32(rows),
                 Sort = parameters["sort"],
