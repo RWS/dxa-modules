@@ -38,9 +38,9 @@
     <Message Text="Preparing build..." Importance="high" />
 
     <!--Update all NuGet packages for Modules.sln -->
-    <Exec Command="_tools\RestorePackages Modules.sln" WorkingDirectory="$(ProjectDirectory)" /> 
+    <Exec Command="_tools\RestorePackages Modules.sln" WorkingDirectory="$(ProjectDirectory)" />
 
-    <CallTarget Targets="UpdateDxaFrameworkReferences" />
+    <!--NOTE: not calling target UpdateDxaFrameworkReferences here; should be called separately by Jenkins build if needed. -->
   </Target>
 
   <!-- =============================================================================================================================================  -->
