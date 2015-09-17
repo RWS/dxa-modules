@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -56,7 +57,7 @@ namespace SI4T.Query.CloudSearch
                 SearchRequest request = BuildSearchRequest(parameters);
                 SearchResponse response = client.Search(request);
 
-                result.Items = response.Hits.Hit.Select(hit => CreateSearchResult(hit, null)).ToList();
+                result.Items = response.Hits.Hit.Select(hit => CreateSearchResult(hit)).ToList();
                 result.Facets = (
                         from f in response.Facets
                         select new Facet
@@ -198,101 +199,35 @@ namespace SI4T.Query.CloudSearch
 
         private SearchRequest BuildSearchRequest(NameValueCollection parameters)
         {
-            SearchRequest request = new SearchRequest();
-            
-            //"wt"
-            //"fl"
-            //"hl.fragsize - highlight
-
-            if (!String.IsNullOrEmpty(parameters["facet"]))
+            string start = parameters["start"] ?? "1";
+            string rows = parameters["rows"] ?? DefaultPageSize.ToString(CultureInfo.InvariantCulture);
+            string facet = parameters["facet"];
+            if (!String.IsNullOrEmpty(facet))
             {
-                string facets = string.Join(", ", Array.ConvertAll(parameters["facet"].Split(',').ToArray(), i => String.Format("\"{0}\":{{\"sort\":\"bucket\",\"size\":" + MaxNumberOfFacets +"}}", i.ToString())));
-                request.Facet = "{" + facets + "}";
-                parameters.Remove("facet");
+                string facets = string.Join(", ", Array.ConvertAll(facet.Split(',').ToArray(), i => String.Format("\"{0}\":{{\"sort\":\"bucket\",\"size\":" + MaxNumberOfFacets +"}}", i.ToString())));
+                facet = "{" + facets + "}";
             }            
 
-            if (!String.IsNullOrEmpty(parameters["fq"]))
+            return new SearchRequest
             {
-                string filters = string.Empty;
-                foreach(string filterString in parameters["fq"].Split(','))
-                {
-                    if(filterString.Contains(":"))
-                        filters += (String.Format(" {0}:'{1}'", filterString.Split(':')[0], filterString.Split(':')[1]));
-                }
-                request.FilterQuery = String.Format("(and{0})",filters);
-                parameters.Remove("fq");
-            }
-
-            if (!String.IsNullOrEmpty(parameters["rows"]))
-            {
-                request.Size = Convert.ToInt32(parameters["rows"]);
-                parameters.Remove("rows");
-            }
-            else
-            {
-                request.Size = this.DefaultPageSize;
-            }         
-            
-            if (!String.IsNullOrEmpty(parameters["sort"]))
-            {
-                request.Sort = HttpUtility.UrlDecode(parameters["sort"]);
-                parameters.Remove("sort");
-            }
-            else
-            {
-                //request.Sort = "title desc";
-            }
-
-            //hl.contiguous
-            int start = 0;
-            if (!String.IsNullOrEmpty(parameters["start"]) && Int32.TryParse(parameters["start"], out start))
-            {
-
-                request.Start = start;
-                parameters.Remove("start");
-            }
-
-            if (!String.IsNullOrEmpty(parameters["q.options"]))
-            {
-                request.QueryOptions = HttpUtility.UrlDecode(parameters["q.options"]);
-                parameters.Remove("q.options");
-            }
-
-            string searchText = HttpUtility.UrlDecode(parameters["q"]);
-            parameters.Remove("q");
-
-            //request.Highlight = searchText;
-            if (String.IsNullOrEmpty(searchText))
-            {
-                request.Query = "*:*";
-                request.QueryParser = QueryParser.Lucene;
-            }
-            else
-            {
-                if (!String.IsNullOrEmpty(parameters["q.parser"]) && parameters["q.parser"] == "simple")
-                {
-                    request.Query = searchText;
-                    request.QueryParser = QueryParser.Simple;
-                }
-                else
-                {
-                    request.Query = "(and (or '" + searchText + "' (prefix '" + searchText + "')) " + string.Join(" ", Array.ConvertAll(parameters.AllKeys, key => string.Format("(and {0}:'{1}')", HttpUtility.UrlEncode(key), HttpUtility.UrlEncode(parameters[key])))) + ")";
-                    request.QueryParser = QueryParser.Structured;
-                }
-            }
-
-            request.Query = HttpUtility.UrlDecode(request.Query);
-            
-            return request;
+                QueryParser = QueryParser.Simple,
+                Query = parameters["q"],
+                FilterQuery = parameters["fq"],
+                QueryOptions = parameters["q.options"],
+                Highlight = parameters["highlight"],
+                Start = Convert.ToInt32(start) - 1, // SI4T uses 1 based indexing, but CloudSearch uses 0 based.
+                Size = Convert.ToInt32(rows),
+                Sort = parameters["sort"],
+                Facet = facet
+            };
         }
 
         private AmazonCloudSearchDomainClient GetCloudSearchClient()
         {
-            //AWSCredentials credentials = new StoredProfileAWSCredentials("development");
             return new AmazonCloudSearchDomainClient(ServiceUrl); 
         }
 
-        private SI4T.Query.Models.SearchResult CreateSearchResult(Hit hit, XElement highlighting)
+        private SI4T.Query.Models.SearchResult CreateSearchResult(Hit hit)
         {
             SI4T.Query.Models.SearchResult result = new SI4T.Query.Models.SearchResult {Id = hit.Id};
 
@@ -331,10 +266,17 @@ namespace SI4T.Query.CloudSearch
                 }
             }
 
-            if (String.IsNullOrEmpty(result.Summary) && highlighting != null) //TODO: Make this work
+            if (String.IsNullOrEmpty(result.Summary) && hit.Highlights.ContainsKey("body"))
             {
-                string plainText = Regex.Replace(Regex.Replace(highlighting.Elements("lst").Where(a => a.Attribute("name").Value == result.Id).FirstOrDefault().Value, @"<[^>]*>", String.Empty), @"\s+", " ");
-                result.Summary = String.Format("...{0}...", plainText);
+                // If no summary field is present in the index, use the highlight fragment from the body field instead.
+                string autoSummary = hit.Highlights["body"];
+                if (autoSummary.Length > AutoSummarySize)
+                {
+                    // CloudSearch returns up to 10K of content and there doesn't seem to be a way to limit the size of the fragment in the Search Request.
+                    // Therefore we truncate it here if needed.
+                    autoSummary = autoSummary.Substring(0, AutoSummarySize) + "...";
+                }
+                result.Summary = autoSummary;
             }
 
             return result;

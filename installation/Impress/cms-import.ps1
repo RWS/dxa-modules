@@ -1,8 +1,8 @@
 ﻿<#
 .Synopsis
-   Import the Search Module into CMS
+   Import the Impress Module into CMS
 .DESCRIPTION
-   Import the Search Module into CMS
+   Import the Impress Module into CMS
 .EXAMPLE
    & .\cms-import.ps1 -cmsUrl "http://localhost:81/" 
 .INPUTS
@@ -40,10 +40,20 @@ param (
 $ErrorActionPreference = "Stop"
 
 #Process 'WhatIf' and 'Confirm' options
-if (!($pscmdlet.ShouldProcess("System", "Import Search Module into CMS"))) { return }
+if (!($pscmdlet.ShouldProcess("System", "Import Impress Module into CMS"))) { return }
 
 #Initialization
 $IsInteractiveMode = !((gwmi -Class Win32_Process -Filter "ProcessID=$PID").commandline -match "-NonInteractive") -and !$NonInteractive
+
+# encode dots in publication names
+if ($masterPublication.Contains('.'))
+{
+    $masterPublication = $masterPublication.Replace(".", "%2E")
+}
+if ($sitePublication.Contains('.'))
+{
+    $sitePublication = $sitePublication.Replace(".", "%2E")
+}
 
 # Thanks to Dominic Cronin: http://www.indivirtual.nl/blog/sdl-tridions-importexport-api-end-content-porter/
 function Invoke-InitImportExport ($distSource, $tempFolder) {
@@ -320,130 +330,8 @@ function Invoke-Upload($mapping, $packageFullPath, $tempFolder) {
     }
 }
 
-function Add-ComponentToPage($sitePublication, $rootStructureGroup, $componentPath, $templatePath, $pagePath) {
-    $pageWebdavUrl = [string]::Format("/webdav/{0}/{1}/{2}.tpg", $sitePublication, $rootStructureGroup, $pagePath)
-    $componentWebdavUrl = [string]::Format("/webdav/{0}/Building Blocks/{1}.xml", $sitePublication, $componentPath)
-    $templateWebdavUrl = [string]::Format("/webdav/{0}/Building Blocks/{1}.tctcmp", $sitePublication, $templatePath)
-    Write-Output "Adding Component '$($componentWebdavUrl)' to Page '$($pageWebdavUrl)' ..."
-    Write-Verbose "Publication is '$sitePublication'"
-    Write-Verbose "Structure group is '$rootStructureGroup'"
-    Write-Verbose "Page Webdav Url is '$pageWebdavUrl'"
-    Write-Verbose "Component Webdav Url is '$componentWebdavUrl'"
-    Write-Verbose "Template Webdav Url is '$templateWebdavUrl'"
-    $page = $core.Read($pageWebdavUrl, $defaultReadOptions)
-    $cps = $page.ComponentPresentations
-    $component = $core.Read($componentWebdavUrl, $defaultReadOptions)
-    $template = $core.Read($templateWebdavUrl, $defaultReadOptions)
-    $notAdded = $true
-    Write-Verbose "Checking if Component '$($component.Id)' is already added to Page"
-    foreach ($c in $cps)
-    {
-        #CP already exists on page
-        if (($c.ComponentTemplate.IdRef -eq $template.Id) -and ($c.Component.IdRef -eq $component.Id))
-        {
-            Write-Verbose "Existing Component is found: Component ID ='$($component.Id)'; Template ID = '$($template.Id)'"
-            $notAdded = $false
-        }
-    }
-    if ($notAdded)
-    {
-        $cp = New-Object Tridion.ContentManager.CoreService.Client.ComponentPresentationData
-        $cp.Component = New-Object Tridion.ContentManager.CoreService.Client.LinkToComponentData
-        $cp.Component.IdRef = $component.Id
-        $cp.ComponentTemplate = New-Object Tridion.ContentManager.CoreService.Client.LinkToComponentTemplateData
-        $cp.ComponentTemplate.IdRef = $template.Id
-        $cps += $cp
-        $page = $core.CheckOut($page.Id, $false, $defaultReadOptions)
-        $page.ComponentPresentations = $cps
-        $page = $core.Save($page, $defaultReadOptions)
-        $page = $core.CheckIn($page.Id, $true, $null, $defaultReadOptions)
-        Write-Output "Done"
-    }
-    else
-    {
-        Write-Warning "Component already added to Page. Skipping this step."
-    }
-}
-
-function Add-TbbToTbb($masterPublication, $targetTbbPath, $addedTbbPath) {
-    $targetTbbWebdavUrl = [string]::Format("/webdav/{0}/Building Blocks/{1}.tbbcmp", $masterPublication, $targetTbbPath)
-    $addedTbbWebdavUrl = [string]::Format("/webdav/{0}/Building Blocks/{1}", $masterPublication, $addedTbbPath)
-    Write-Output "Adding TBB '$($addedTbbWebdavUrl)' to TBB '$($targetTbbWebdavUrl)' ..."
-    Write-Verbose "Publication is '$masterPublication'"
-    $tbb = $core.Read($targetTbbWebdavUrl, $defaultReadOptions)
-    $content = $tbb.Content
-    $addedTbb = $core.Read($addedTbbWebdavUrl, $defaultReadOptions)
-    $notAdded = $true
-    Write-Verbose "Checking if TBB '$($addedTbb.Id)' is already added to Page"
-	if ($content.Contains($addedTbb.Id))
-    {      
-		Write-Verbose "TBB is already added in content: '$($content)'"
-        $notAdded = $false
-    }
-    if ($notAdded)
-    {
-        $tbb = $core.CheckOut($tbb.Id, $false, $defaultReadOptions)
-        if ($content.EndsWith("/>"))
-		{
-			$content = $content.Replace("/>", "></CompoundTemplate>")
-		}
-        $content = $content.Replace("</CompoundTemplate>","<TemplateInvocation><Template xlink:href=""!!!TBB!!!"" xmlns:xlink=""http://www.w3.org/1999/xlink""/></TemplateInvocation></CompoundTemplate>")   
-        $content = $content.Replace("!!!TBB!!!",$addedTbb.Id)   
-        $tbb.Content = $content
-        $tbb = $core.Save($tbb, $defaultReadOptions)
-        $tbb = $core.CheckIn($tbb.Id, $true, $null, $defaultReadOptions)
-        Write-Output "Done"
-    }
-    else
-    {
-        Write-Warning "TBB already added to TBB. Skipping this step."
-    }
-}
-
-function Add-MetadataToItem($sitePublication, $itemPath, $schemaPath, $metadata){
-
-    $itemWebdavUrl = [string]::Format("/webdav/{0}/{1}", $sitePublication, $itemPath)
-    $schemaWebdavUrl = [string]::Format("/webdav/{0}/Building Blocks/{1}.xsd", $sitePublication, $schemaPath)
-    Write-Output "Adding Metadata '$($schemaWebdavUrl)' to Item '$($itemWebdavUrl)' ..."
-    Write-Verbose "Publication is '$sitePublication'"
-    $item = $core.Read($itemWebdavUrl, $defaultReadOptions)
-    $schema = $core.Read($schemaWebdavUrl, $defaultReadOptions)
-    $notAdded = $false
-    $versionedItem = $true
-    Write-Verbose "Checking if metadata '$($schema.Id)' is already added to item"
-    if ($item.MetadataSchema.IdRef -eq "tcm:0-0-0")
-    {
-        $notAdded = $true
-    }
-    if ($notAdded)
-    {
-        if ($item.Id.EndsWith("-2") -Or $item.Id.EndsWith("-4"))
-        {
-            $versionedItem = $false
-        } 
-        if ($versionedItem)
-        {
-            $item = $core.CheckOut($item.Id, $false, $defaultReadOptions)
-        }
-        $item.MetadataSchema = New-Object Tridion.ContentManager.CoreService.Client.LinkToSchemaData
-        $item.MetadataSchema.IdRef = $schema.Id
-        $item.Metadata = $metadata
-        $item = $core.Save($item, $defaultReadOptions)
-        if ($versionedItem)
-        {
-            $item = $core.CheckIn($item.Id, $true, $null, $defaultReadOptions)
-        }
-        Write-Output "Done"
-    }
-    else
-    {
-        Write-Warning "MEtadata already added to Item. Skipping this step."
-    }
-}
-
-
 #Process 'WhatIf' and 'Confirm' options
-if (!($pscmdlet.ShouldProcess("Tridion Content Manager", "Import the reference implementation"))) { return }
+if (!($pscmdlet.ShouldProcess("Tridion Content Manager", "Import the Impress module to the CMS"))) { return }
 
 $distSource = Join-Path (Split-Path $MyInvocation.MyCommand.Path) "\"
 
@@ -458,7 +346,7 @@ Write-Verbose "Temp folder is '$tempFolder'"
 $distSource = $distSource.TrimEnd("\") + "\"
 $cmsUrl = $cmsUrl.TrimEnd("/") + "/"
 
-$importPackageFullPath = Join-Path $distSource  "module-Search.zip"
+$importPackageFullPath = Join-Path $distSource "module-ECL.zip"
 Write-Verbose "Import Package FullPath is '$importPackageFullPath'"
 
 $permissionsFullPath = Join-Path $distSource "permissions.xml"
@@ -478,14 +366,9 @@ $detailedMapping = (
     (New-Object Tridion.ContentManager.ImportExport.Packaging.V2013.Mapping2013("StructureGroup", "/webdav/400 Example Site/Home",("/webdav/" + $sitePublication + "/" + $rootStructureGroup)))
 )
 
-
 if ($importType -ne "permissions-only")
 {
     Invoke-Upload $detailedMapping $importPackageFullPath $tempFolder
-    Add-ComponentToPage $sitePublication $rootStructureGroup "Modules Content/Search/Search Box Configuration" "Modules/Search/Site Manager/Templates/Search Box [Nav]"  "_System/include/Header" 
-	Add-TbbToTbb $masterPublication "Modules/Core/Developer/Core Template Building Blocks/Default Page Template Finish Actions" "Modules/Search/Developer/Search Template Building Blocks/Enable Search Indexing.tbbcmp"
-	Add-MetadataToItem $masterPublication ($rootStructureGroup + "/_System") "Modules/Search/Editor/Schemas/Search Indexing Metadata" "<Metadata xmlns=""http://www.sdl.com/web/schemas/search""><NoIndex>Yes</NoIndex></Metadata>"
-	Add-MetadataToItem $sitePublication ($rootStructureGroup + "/_Error Page Not Found.tpg") "Modules/Search/Editor/Schemas/Search Indexing Metadata" "<Metadata xmlns=""http://www.sdl.com/web/schemas/search""><NoIndex>Yes</NoIndex></Metadata>"
 }
 
 #   NOTE - this should be executed last after importing all modules and does not work for mapped publications

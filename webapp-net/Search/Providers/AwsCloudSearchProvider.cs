@@ -1,4 +1,5 @@
 ﻿using System.Collections.Specialized;
+using System.Linq;
 using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Logging;
 using Sdl.Web.Modules.Search.Models;
@@ -11,7 +12,13 @@ namespace Sdl.Web.Modules.Search.Providers
         protected override NameValueCollection SetupParameters(SearchQuery searchQuery, Localization localization)
         {
             NameValueCollection result = base.SetupParameters(searchQuery, localization);
-            // TODO: Facets
+            if (!result.AllKeys.Contains("q.options"))
+            {
+                // By default, limit the search to body, summary and title fields.
+                result["q.options"] = "{ fields: ['body', 'summary', 'title'] }";
+            }
+            // We use the highlighting feature to autogenerate a Summary if no Summary is present in the search index.
+            result["highlight"] = "{ body: { format: \"text\", max_phrases: 2 } }";
             return result;
         }
 

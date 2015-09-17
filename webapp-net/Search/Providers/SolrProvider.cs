@@ -11,7 +11,8 @@ namespace Sdl.Web.Modules.Search.Providers
         protected override NameValueCollection SetupParameters(SearchQuery searchQuery, Localization localization)
         {
             NameValueCollection parameters = base.SetupParameters(searchQuery, localization);
-            parameters.Add("hl", "true");
+            // We use the highlighting feature to autogenerate a Summary if no Summary is present in the search index.
+            parameters["hl"] = "true";
             return parameters;
         }
 

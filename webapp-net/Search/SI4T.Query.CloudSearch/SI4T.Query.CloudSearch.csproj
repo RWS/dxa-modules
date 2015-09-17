@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0EB7F4A5-F588-4D32-BBCA-8828D779F526}</ProjectGuid>
+    <ProjectGuid>{490799B2-F577-4638-9644-8369BDBD56C4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SI4T.Query.CloudSearch</RootNamespace>
