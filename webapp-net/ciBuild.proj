@@ -13,7 +13,7 @@
     <CdTestDeployFolder>\\saintjohn03.ams.dev\c$\inetpub\wwwroot\7.1_gitversion</CdTestDeployFolder>
 
     <ProjectDirectory>$(MSBuildProjectDirectory)</ProjectDirectory>
-    <ReferencesDir>$(ProjectDirectory)\_references</ReferencesDir>
+    <ReferencesDir>$(ProjectDirectory)\_references\dxa-1.2</ReferencesDir>
 
     <!-- Jenkins URLs -->
     <JenkinsUrl>http://masterbuild01.ams.dev:8080/hudson</JenkinsUrl>
@@ -40,7 +40,7 @@
     <!--Update all NuGet packages for Modules.sln -->
     <Exec Command="_tools\RestorePackages Modules.sln" WorkingDirectory="$(ProjectDirectory)" />
 
-    <!--NOTE: not calling target UpdateDxaFrameworkReferences here; should be called separately by Jenkins build if needed. -->
+    <CallTarget Targets="UpdateDxaFrameworkReferences"/>
   </Target>
 
   <!-- =============================================================================================================================================  -->
@@ -50,6 +50,7 @@
     <ItemGroup>
       <AssemblyToDownload Include="Sdl.Web.Mvc.dll" />
       <AssemblyToDownload Include="Sdl.Web.Common.dll" />
+      <AssemblyToDownload Include="Sdl.Web.Tridion.dll" />
     </ItemGroup>
 
     <!-- Make sure we can override assemblies - remove ReadOnly attribute -->

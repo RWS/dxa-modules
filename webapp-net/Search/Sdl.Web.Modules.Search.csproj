@@ -49,11 +49,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Sdl.Web.Common">
-      <HintPath>..\_references\Sdl.Web.Common.dll</HintPath>
+      <HintPath>..\_references\dxa-1.1\Sdl.Web.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sdl.Web.Mvc">
-      <HintPath>..\_references\Sdl.Web.Mvc.dll</HintPath>
+      <HintPath>..\_references\dxa-1.1\Sdl.Web.Mvc.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="SI4T.Query, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
