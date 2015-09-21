@@ -21,6 +21,9 @@
 
     <!--Tools-->
     <MsBuildExe>C:\Program Files (x86)\MSBuild\12.0\Bin\MSBuild.exe</MsBuildExe>
+    <PowerShellx64 Condition="'$(PROCESSOR_ARCHITECTURE)' == 'x86' AND '$(PROCESSOR_ARCHITEW6432)' != ''">C:\Windows\Sysnative\WindowsPowerShell\v1.0\powershell.exe</PowerShellx64>
+    <PowerShellx64 Condition="'$(PROCESSOR_ARCHITECTURE)' == 'x86' AND '$(PROCESSOR_ARCHITEW6432)' == ''">C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</PowerShellx64>
+    <PowerShellx64 Condition="'$(PROCESSOR_ARCHITECTURE)' != 'x86'">C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</PowerShellx64>
   </PropertyGroup>
 
 
@@ -90,6 +93,7 @@
   <Target Name="DeployModules" Inputs="@ModulePath" Outputs="%(ModulePath.Identity)">
     <PropertyGroup>
       <ModuleName>$([System.IO.Path]::GetFilename(&quot;%(ModulePath.Identity)&quot;))</ModuleName>
+      <CiDeployScript>$(ProjectDirectory)\..\installation\$(ModuleName)\ci-deploy.ps1</CiDeployScript>
     </PropertyGroup>
 
     <Message Text="Deploying module '$(ModuleName)' to '$(CdTestDeployFolder)'..." />
@@ -101,6 +105,9 @@
 
     <Copy SourceFiles="@(AreaFiles)" DestinationFolder="$(CdTestDeployFolder)\Areas\%(RecursiveDir)" />
     <Copy SourceFiles="@(BinFiles)" DestinationFolder="$(CdTestDeployFolder)\bin\%(RecursiveDir)" />
+  
+    <!-- If there is a ci-deploy.ps1 PowerShell script for the module, run it: -->
+    <Exec Command="&quot;$(PowerShellx64)&quot; -file &quot;$(CiDeployScript)&quot; -distDestination &quot;$(CdTestDeployFolder)&quot;" Condition="Exists('$(CiDeployScript)')" />
   </Target>
 
 </Project>
