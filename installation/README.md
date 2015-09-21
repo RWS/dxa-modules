@@ -1,0 +1,2 @@
+For now, Module installation support scripts are maintained in a separate repo ("installation").
+Only Modules that need additional actions for CI Deployment should have a ci-deploy.ps1 PowerShell script here.
