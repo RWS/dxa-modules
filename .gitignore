@@ -1,0 +1,9 @@
+obj/
+bin/
+*.user
+*.suo
+packages/
+_references/
+.idea/
+*.iml
+.vs/
