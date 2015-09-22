@@ -6,10 +6,11 @@ using Sdl.Web.Common.Models;
 using Sdl.Web.Modules.Search.Models;
 using Sdl.Web.Modules.Search.Providers;
 using Sdl.Web.Mvc.Configuration;
+using Sdl.Web.Mvc.Controllers;
 
 namespace Sdl.Web.Modules.Search.Controllers
 {
-    public class SearchController : BaseEntityController
+    public class SearchController : EntityController
     {
         protected ISearchProvider SearchProvider { get; set; }
 
@@ -23,7 +24,7 @@ namespace Sdl.Web.Modules.Search.Controllers
         }
 
         /// <summary>
-        /// Enrich the SearchQuery View Model with request querystring parameters and populate the results using a configured Search Provider,.
+        /// Enrich the SearchQuery View Model with request querystring parameters and populate the results using a configured Search Provider.
         /// </summary>
         protected override ViewModel EnrichModel(ViewModel model)
         {
@@ -41,7 +42,7 @@ namespace Sdl.Web.Modules.Search.Controllers
                 // Map standard query string parameters
                 searchQuery.QueryText = queryString["q"];
                 searchQuery.Start = queryString.AllKeys.Contains("start") ? Convert.ToInt32(queryString["start"]) : 1;
-                // To allow the Serch Provider to use additional query string parameters:
+                // To allow the Search Provider to use additional query string parameters:
                 searchQuery.QueryStringParameters = queryString;
 
                 Type searchItemType = searchQuery.GetType().GetGenericArguments()[0];

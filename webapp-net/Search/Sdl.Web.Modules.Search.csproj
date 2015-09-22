@@ -49,11 +49,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Sdl.Web.Common">
-      <HintPath>..\_references\dxa-1.1\Sdl.Web.Common.dll</HintPath>
+      <HintPath>..\_references\dxa-1.2\Sdl.Web.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sdl.Web.Mvc">
-      <HintPath>..\_references\dxa-1.1\Sdl.Web.Mvc.dll</HintPath>
+      <HintPath>..\_references\dxa-1.2\Sdl.Web.Mvc.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="SI4T.Query, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
@@ -69,7 +69,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\BaseEntityController.cs" />
     <Compile Include="DxaSearchException.cs" />
     <Compile Include="Models\SearchItem.cs" />
     <Compile Include="Providers\SI4TSearchProvider.cs" />
