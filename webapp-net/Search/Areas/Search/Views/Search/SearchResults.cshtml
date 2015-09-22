@@ -1,0 +1,39 @@
+﻿@model SearchQuery
+
+<div class="rich-text @Model.HtmlClasses" @Html.DxaEntityMarkup()>
+    @if (!String.IsNullOrEmpty(Model.Headline))
+    {
+        <div class="page-header page-header-top">
+            <h1 class="h3" @Html.DxaPropertyMarkup(() => Model.Headline)>@Model.Headline</h1>
+        </div>
+    }
+
+    @if (Model.Total > 0)
+    {
+        if (!String.IsNullOrEmpty(Model.ResultsText))
+        {
+            <div @Html.DxaPropertyMarkup(() => Model.ResultsText)>
+                @Html.Raw(string.Format(Model.ResultsText, Html.Encode(Model.QueryText), Model.Total))
+            </div>
+        }
+        
+        @Html.Partial("Partials/Pager")
+
+        <div class="list-group">
+            @foreach (SearchItem item in Model.Results)
+            {
+                <div @Html.DxaPropertyMarkup(() => Model.Results)>
+                    @Html.DxaEntity(item)
+                </div>
+            }
+        </div>
+
+        @Html.Partial("Partials/Pager")
+    }
+    else if (!String.IsNullOrEmpty(Model.NoResultsText))
+    {
+        <div @Html.DxaPropertyMarkup(() => Model.NoResultsText)>
+            @Html.Raw(string.Format(Model.NoResultsText, Html.Encode(Model.QueryText)))
+        </div>
+    }
+</div>

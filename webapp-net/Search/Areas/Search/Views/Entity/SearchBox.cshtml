@@ -1,0 +1,7 @@
+﻿@model SearchBox
+
+<form class="navbar-form navbar-right @Model.HtmlClasses" action="@Model.ResultsLink" method="get">
+    <div class="form-group" @Html.DxaEntityMarkup()>
+        <input name="q" type="text" class="form-control" placeholder="@Model.SearchBoxPlaceholderText" value="@Request.QueryString["q"]">
+    </div>
+</form>
