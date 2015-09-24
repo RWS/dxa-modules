@@ -61,6 +61,7 @@
     <None Include="Areas\Test\Views\Entity\TestEntity3.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestEntity2.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestEntity1.cshtml" />
+    <None Include="Areas\Test\Views\Page\TestPageInferred.cshtml" />
     <None Include="Areas\Test\Views\Page\TestPageCSSNoParams.cshtml" />
     <None Include="Areas\Test\Views\Page\TestPageCSS.cshtml" />
     <None Include="Areas\Test\Views\Page\TestPageMarkup.cshtml" />
@@ -69,6 +70,7 @@
     <None Include="Areas\Test\Views\Page\TestPage1.cshtml" />
     <None Include="Areas\Test\Views\Region\CustomRegionModelTest.cshtml" />
     <None Include="Areas\Test\Views\Region\PromoRegionTest.cshtml" />
+    <None Include="Areas\Test\Views\Region\TestRegionInferred.cshtml" />
     <None Include="Areas\Test\Views\Region\TestRegionEntity.cshtml" />
     <None Include="Areas\Test\Views\Region\TestRegionMarkup.cshtml" />
     <None Include="Areas\Test\Views\Region\TestRegion3.cshtml" />
