@@ -1,4 +1,4 @@
-﻿@model PageModel
+﻿@model CustomPageModel
 <html>
     <head>
         <title>@Model.Title</title>
@@ -9,8 +9,16 @@
         </style>
     </head>
     <body>
-        <h1>Rendered @Model with Page View "Test:TestPageInferred"</h1>
+        <h1>Rendered @Model with Page View "Test:CustomPageModelInheritedController"</h1>
         
+        <h2>Custom Page Model properties</h2>
+        <table>
+            <tr>
+                <td>TestProperty1</td>
+                <td>@Model.TestProperty1</td>
+            </tr>
+        </table>
+
         <h2>Regions</h2>
         <div>
             @Html.DxaRegions()
