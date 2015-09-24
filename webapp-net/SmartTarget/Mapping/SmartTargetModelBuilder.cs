@@ -62,7 +62,17 @@ namespace Sdl.Web.Modules.SmartTarget.Mapping
                 // Set SmartTargetRegionModel.MaxItem based on the Region Metadata in the Page Template.
                 foreach (IFieldSet smartTargetRegionField in page.PageTemplate.MetadataFields["regions"].EmbeddedValues)
                 {
-                    string regionName = new MvcData(smartTargetRegionField["view"].Value).ViewName;
+                    string regionName;
+                    IField regionNameField;
+                    if (smartTargetRegionField.TryGetValue("name", out regionNameField) && !String.IsNullOrEmpty(regionNameField.Value))
+                    {
+                        regionName = regionNameField.Value;
+                    }
+                    else
+                    {
+                        regionName = new MvcData(smartTargetRegionField["view"].Value).ViewName;
+                    }
+
                     SmartTargetRegion smartTargetRegion = smartTargetPageModel.Regions[regionName] as SmartTargetRegion;
                     if (smartTargetRegion != null)
                     {
