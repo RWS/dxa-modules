@@ -40,17 +40,17 @@
     </Reference>
     <Reference Include="Sdl.Web.Common, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_references\dxa-1.1\Sdl.Web.Common.dll</HintPath>
+      <HintPath>..\_references\dxa-1.2\Sdl.Web.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sdl.Web.Mvc, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_references\dxa-1.1\Sdl.Web.Mvc.dll</HintPath>
+      <HintPath>..\_references\dxa-1.2\Sdl.Web.Mvc.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sdl.Web.Tridion, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_references\dxa-1.1\Sdl.Web.Tridion.dll</HintPath>
+      <HintPath>..\_references\dxa-1.2\Sdl.Web.Tridion.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
