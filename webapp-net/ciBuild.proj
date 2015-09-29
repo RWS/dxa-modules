@@ -13,7 +13,7 @@
     <CdTestDeployFolder>\\saintjohn03.ams.dev\c$\inetpub\wwwroot\7.1_gitversion</CdTestDeployFolder>
 
     <ProjectDirectory>$(MSBuildProjectDirectory)</ProjectDirectory>
-    <ReferencesDir>$(ProjectDirectory)\_references</ReferencesDir>
+    <ReferencesDir>$(ProjectDirectory)\_references\dxa-1.2</ReferencesDir>
 
     <!-- Jenkins URLs -->
     <JenkinsUrl>http://masterbuild01.ams.dev:8080/hudson</JenkinsUrl>
@@ -21,6 +21,9 @@
 
     <!--Tools-->
     <MsBuildExe>C:\Program Files (x86)\MSBuild\12.0\Bin\MSBuild.exe</MsBuildExe>
+    <PowerShellx64 Condition="'$(PROCESSOR_ARCHITECTURE)' == 'x86' AND '$(PROCESSOR_ARCHITEW6432)' != ''">C:\Windows\Sysnative\WindowsPowerShell\v1.0\powershell.exe</PowerShellx64>
+    <PowerShellx64 Condition="'$(PROCESSOR_ARCHITECTURE)' == 'x86' AND '$(PROCESSOR_ARCHITEW6432)' == ''">C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</PowerShellx64>
+    <PowerShellx64 Condition="'$(PROCESSOR_ARCHITECTURE)' != 'x86'">C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</PowerShellx64>
   </PropertyGroup>
 
 
@@ -40,7 +43,7 @@
     <!--Update all NuGet packages for Modules.sln -->
     <Exec Command="_tools\RestorePackages Modules.sln" WorkingDirectory="$(ProjectDirectory)" />
 
-    <!--NOTE: not calling target UpdateDxaFrameworkReferences here; should be called separately by Jenkins build if needed. -->
+    <CallTarget Targets="UpdateDxaFrameworkReferences"/>
   </Target>
 
   <!-- =============================================================================================================================================  -->
@@ -50,6 +53,7 @@
     <ItemGroup>
       <AssemblyToDownload Include="Sdl.Web.Mvc.dll" />
       <AssemblyToDownload Include="Sdl.Web.Common.dll" />
+      <AssemblyToDownload Include="Sdl.Web.Tridion.dll" />
     </ItemGroup>
 
     <!-- Make sure we can override assemblies - remove ReadOnly attribute -->
@@ -89,6 +93,7 @@
   <Target Name="DeployModules" Inputs="@ModulePath" Outputs="%(ModulePath.Identity)">
     <PropertyGroup>
       <ModuleName>$([System.IO.Path]::GetFilename(&quot;%(ModulePath.Identity)&quot;))</ModuleName>
+      <CiDeployScript>$(ProjectDirectory)\..\installation\$(ModuleName)\ci-deploy.ps1</CiDeployScript>
     </PropertyGroup>
 
     <Message Text="Deploying module '$(ModuleName)' to '$(CdTestDeployFolder)'..." />
@@ -100,6 +105,9 @@
 
     <Copy SourceFiles="@(AreaFiles)" DestinationFolder="$(CdTestDeployFolder)\Areas\%(RecursiveDir)" />
     <Copy SourceFiles="@(BinFiles)" DestinationFolder="$(CdTestDeployFolder)\bin\%(RecursiveDir)" />
+  
+    <!-- If there is a ci-deploy.ps1 PowerShell script for the module, run it: -->
+    <Exec Command="&quot;$(PowerShellx64)&quot; -file &quot;$(CiDeployScript)&quot; -distDestination &quot;$(CdTestDeployFolder)&quot;" Condition="Exists('$(CiDeployScript)')" />
   </Target>
 
 </Project>

@@ -15,10 +15,8 @@ namespace Sdl.Web.Modules.SmartTarget
 
         protected override void RegisterAllViewModels()
         {
-            // SmartTarget Entity Views
-            RegisterViewModel("Example1", typeof(SmartTargetRegion), "Region");
-            RegisterViewModel("Example2", typeof(SmartTargetRegion), "Region");
-
+            RegisterViewModel("SmartTargetRegion", typeof(SmartTargetRegion));
+            RegisterViewModel("Promotion", typeof(SmartTargetPromotion));
         }
     }
 }

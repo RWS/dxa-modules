@@ -24,6 +24,8 @@ namespace Sdl.Web.Modules.Test
             RegisterViewModel("CustomPageModelTest", typeof(CustomPageModel), "Page");
             RegisterViewModel("TestPageCSS", typeof(PageModel), "Page");
             RegisterViewModel("TestPageCSSNoParams", typeof(PageModel), "Page");
+            RegisterViewModel("TestPageInheritedController", typeof(PageModel));
+            RegisterViewModel("CustomPageModelInheritedController", typeof(CustomPageModel));
 
             // Region Views
             RegisterViewModel("TestRegion1", typeof(RegionModel), "Region");
@@ -32,6 +34,8 @@ namespace Sdl.Web.Modules.Test
             RegisterViewModel("TestRegion3", typeof(RegionModel), "Region");
             RegisterViewModel("TestRegionMarkup", typeof(RegionModel), "Region");
             RegisterViewModel("TestRegionEntity", typeof(RegionModel), "Region");
+            RegisterViewModel("TestRegionInheritedController", typeof(RegionModel));
+            RegisterViewModel("CustomRegionModelInheritedController", typeof(CustomRegionModel));
             RegisterViewModel("PromoRegionTest", typeof(SmartTargetRegion), "Region");
 
             // Entity Views
