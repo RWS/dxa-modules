@@ -40,17 +40,17 @@
     </Reference>
     <Reference Include="Sdl.Web.Common, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_references\Sdl.Web.Common.dll</HintPath>
+      <HintPath>..\_references\dxa-1.2\Sdl.Web.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sdl.Web.Mvc, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_references\Sdl.Web.Mvc.dll</HintPath>
+      <HintPath>..\_references\dxa-1.2\Sdl.Web.Mvc.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sdl.Web.Tridion, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_references\Sdl.Web.Tridion.dll</HintPath>
+      <HintPath>..\_references\dxa-1.2\Sdl.Web.Tridion.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -58,6 +58,14 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.1.2\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.1.2\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.1.2\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Tridion.ContentDelivery, Version=7.1.0.165, Culture=neutral, PublicKeyToken=ddfc895746e5ee6b, processorArchitecture=MSIL">
@@ -78,8 +86,7 @@
     <Compile Include="Models\SmartTargetPageModel.cs" />
     <Compile Include="SmartTargetAreaRegistration.cs" />
     <None Include="Areas\SmartTarget\Views\Entity\Promotion.cshtml" />
-    <None Include="Areas\SmartTarget\Views\Region\Example2.cshtml" />
-    <None Include="Areas\SmartTarget\Views\Region\Example1.cshtml" />
+    <None Include="Areas\SmartTarget\Views\Region\SmartTargetRegion.cshtml" />
     <None Include="Areas\SmartTarget\Views\web.config">
       <SubType>Designer</SubType>
     </None>
