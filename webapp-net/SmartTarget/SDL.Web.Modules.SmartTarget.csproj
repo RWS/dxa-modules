@@ -30,12 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DD4T.ContentModel">
-      <HintPath>..\_references\dd4t-update\DD4T.ContentModel.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="DD4T.ContentModel.Contracts">
-      <HintPath>..\_references\dd4t-update\DD4T.ContentModel.Contracts.dll</HintPath>
+      <HintPath>..\_references\dd4t-2.0-dxa\DD4T.ContentModel.Contracts.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sdl.Web.Common, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
