@@ -15,7 +15,8 @@ namespace Sdl.Web.Modules.MediaManager
 
         protected override void RegisterAllViewModels()
         {
-			RegisterViewModel("MediaManagerVideo", typeof(MediaManagerVideo));
-        }        
+            RegisterViewModel("html5dist", typeof(MediaManagerDistribution));
+            RegisterViewModel("imagedist", typeof(MediaManagerDistribution));
+        }
     }
 }
