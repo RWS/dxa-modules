@@ -17,6 +17,8 @@ namespace Sdl.Web.Modules.MediaManager
         {
             RegisterViewModel("html5dist", typeof(MediaManagerDistribution));
             RegisterViewModel("imagedist", typeof(MediaManagerDistribution));
+            RegisterViewModel("downloaddist", typeof(MediaManagerDistribution));
+            RegisterViewModel("audiodist", typeof(MediaManagerDistribution));
         }
     }
 }

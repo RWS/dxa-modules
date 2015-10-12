@@ -52,6 +52,19 @@ namespace Sdl.Web.Modules.MediaManager.Models
             }
         }
 
+        public override string GetIconClass()
+        {
+            // Try to get the MM Asset's MIME Type from ECL External Metadata
+            string assetMimeType = GetEclExternalMetadataValue("Program/Asset/MIMEType") as string;
+            if (assetMimeType == null)
+            {
+                return base.GetIconClass();
+            }
+
+            string fileType;
+            return FontAwesomeMimeTypeToIconClassMapping.TryGetValue(assetMimeType, out fileType) ? string.Format("fa-file-{0}-o", fileType) : "fa-file";
+        }
+
         /// <summary>
         /// Read additional properties from XHTML element, and set view name in MvcData.
         /// </summary>

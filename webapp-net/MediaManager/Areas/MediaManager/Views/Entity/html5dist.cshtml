@@ -2,7 +2,7 @@
 
 @if (Model.IsEmbedded)
 {
-    @Html.Media(Model, cssClass: "embed-video " + Model.HtmlClasses)
+    @Html.Media(Model, cssClass: "embed-video")
 }
 else
 {
@@ -10,7 +10,7 @@ else
     string guid = System.Guid.NewGuid().ToString();
 
     <div class="video @Model.HtmlClasses" @Html.DxaEntityMarkup()>
-        @* it is possible to use @Html.Media(Model) here like in the embedded example, now we use the model properties directly to produce a media manager video embed script *@
+        @* The Template Fragment provided by MM connector does not support responsive resizing. So instead of using Html.Media, we output the MM embed script directly here. *@
         <div id="@guid"></div>
         <script src="@Model.EmbedScriptUrl&trgt=@guid&responsive=true"></script>
     </div>

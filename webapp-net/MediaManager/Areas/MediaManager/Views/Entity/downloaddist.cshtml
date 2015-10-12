@@ -1,0 +1,18 @@
+﻿@model MediaManagerDistribution
+
+@* Note that MM connector does not provide a Template Fragment for Download Distributions, so we can't use Html.Media here *@
+<div class="@Model.HtmlClasses" @Html.DxaEntityMarkup()>
+    <div class="download-list">
+        <i class="fa @Model.GetIconClass()"></i>
+        <div>
+            <a href="@Model.Url">@Model.GetEclExternalMetadataValue("Program/Asset/Title")</a>
+            @{
+                string description = Model.GetEclExternalMetadataValue("Program/Asset/Description") as string;
+            }
+            @if (!string.IsNullOrEmpty(description))
+            {
+            <small>@description</small>
+            }
+        </div>
+    </div>
+</div>
