@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Sdl.Web.Modules.Test</RootNamespace>
     <AssemblyName>Sdl.Web.Modules.Test</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <MvcBuildViews>true</MvcBuildViews>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -48,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Models\CustomPageModel.cs" />
     <Compile Include="Models\CustomRegionModel.cs" />
+    <Compile Include="Models\TestEclEntityModel.cs" />
     <Compile Include="Models\TestEntityModel2.cs" />
     <Compile Include="Models\TestEntityModel1.cs" />
     <Compile Include="Models\TestEntityModel3.cs" />
@@ -56,6 +58,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Areas\Test\Views\Entity\TestEclEntity.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestEntityCSSFill.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestEntityCSSEmpty.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestEntity3.cshtml" />

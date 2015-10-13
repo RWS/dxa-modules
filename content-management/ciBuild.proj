@@ -13,7 +13,6 @@
 
     <ProjectDirectory>$(MSBuildProjectDirectory)</ProjectDirectory>
     <ReferencesDir>$(ProjectDirectory)\_references</ReferencesDir>
-    <EclSolutionDir>$(ProjectDirectory)\ECL</EclSolutionDir>
     <Si4tSolutionDir>$(ProjectDirectory)\SI4T</Si4tSolutionDir>
 
     <!--Tools-->
@@ -33,21 +32,12 @@
   <Target Name="PrepareBuild">
     <Message Text="Preparing build..." Importance="high" />
 
-    <!-- update all NuGet packages for Sdl.Web.Templating.Ecl.sln -->
-    <Exec Command="..\_tools\RestorePackages Sdl.Web.Templating.Ecl.sln" WorkingDirectory="$(EclSolutionDir)" /> 
   </Target>
 
   <!-- =============================================================================================================================================  -->
   <Target Name="PackageBuild">
     <Message Text="Running build commands..." Importance="high" />
 
-    <MSBuild 
-      Projects="$(EclSolutionDir)\Sdl.Web.Templating.Ecl.sln" 
-      Properties="Configuration=$(BuildConfiguration);Platform=Any CPU;AsmVersion=$(Version);FileVersion=$(Version)" 
-      Targets="Build" 
-      StopOnFirstFailure="true" 
-      />
-	  
     <MSBuild 
       Projects="$(Si4tSolutionDir)\SI4T.Templating.sln" 
       Properties="Configuration=$(BuildConfiguration);Platform=Any CPU" 
@@ -60,9 +50,6 @@
   <Target Name="TcmUpload">
     <Message Text="Uploading assemblies to TCM..." Importance="high" />
 
-	<!-- upload merged ECL TBB to CMS -->
-    <Exec Command='_tools\TcmUploadAssembly.exe _tools\config.xml /folder:tcm:2-2453-2 "$(EclSolutionDir)\bin\Debug\Sdl.Web.Tridion.Templates.Ecl.merged.dll"' WorkingDirectory="$(ProjectDirectory)" /> 
-	
 	<!-- upload SI4T TBB to CMS -->
     <Exec Command='_tools\TcmUploadAssembly.exe _tools\config.xml /folder:tcm:2-1425-2 "$(Si4TSolutionDir)\bin\Debug\SI4T.Templating.dll"' WorkingDirectory="$(ProjectDirectory)" /> 
   </Target>
