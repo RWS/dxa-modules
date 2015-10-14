@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Xml;
+using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Models;
 
 namespace Sdl.Web.Modules.MediaManager.Models
@@ -66,14 +67,15 @@ namespace Sdl.Web.Modules.MediaManager.Models
         }
 
         /// <summary>
-        /// Read additional properties from XHTML element, and set view name in MvcData.
+        /// Gets the default View.
         /// </summary>
-        /// <param name="xhtmlElement">XHTML element</param>
-        public override void ReadFromXhtmlElement(XmlElement xhtmlElement)
+        /// <param name="localization">The context Localization</param>
+        /// <remarks>
+        /// This makes it possible possible to render "embedded" MediaManagerDistribution Models using the Html.DxaEntity method.
+        /// </remarks>
+        public override MvcData GetDefaultView(Localization localization)
         {
-            base.ReadFromXhtmlElement(xhtmlElement);
-
-            MvcData = new MvcData("MediaManager:" + EclDisplayTypeId);
+            return new MvcData("MediaManager:" + EclDisplayTypeId);
         }
     }
 }
