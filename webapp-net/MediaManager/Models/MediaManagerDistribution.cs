@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Xml;
 using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Models;
@@ -76,6 +77,32 @@ namespace Sdl.Web.Modules.MediaManager.Models
         public override MvcData GetDefaultView(Localization localization)
         {
             return new MvcData("MediaManager:" + EclDisplayTypeId);
+        }
+
+        /// <summary>
+        /// Renders an HTML representation of the Media Manager Distribution.
+        /// </summary>
+        /// <param name="widthFactor">The factor to apply to the width - can be % (eg "100%") or absolute (eg "120").</param>
+        /// <param name="aspect">The aspect ratio to apply.</param>
+        /// <param name="cssClass">Optional CSS class name(s) to apply.</param>
+        /// <param name="containerSize">The size (in grid column units) of the containing element.</param>
+        /// <returns>The HTML representation.</returns>
+        /// <remarks>
+        /// This method is used by the <see cref="IRichTextFragment.ToHtml()"/> implementation and by the HtmlHelperExtensions.Media implementation.
+        /// </remarks>
+        public override string ToHtml(string widthFactor, double aspect = 0, string cssClass = null, int containerSize = 0)
+        {
+            if (EclDisplayTypeId == "imagedist")
+            {
+                // The ECL Template Fragment for MM Image Distribution doesn't allow us to control image sizing, so we create our own img tag here.
+                string widthAttr = string.IsNullOrEmpty(widthFactor) ? string.Empty : string.Format(" width=\"{0}\"", widthFactor);
+                string aspectAttr = (aspect == 0) ? string.Empty : string.Format(" data-aspect=\"{0}\"", aspect.ToString(CultureInfo.InvariantCulture));
+                string classAttr = string.IsNullOrEmpty(cssClass) ? string.Empty : string.Format(" class=\"{0}\"", cssClass);
+                return string.Format("<img src=\"{0}\"{1}{2}{3}>", Url, widthAttr, aspectAttr, classAttr);
+            }
+
+            // Let EclItem.ToHtml render the HTML based on the ECL Template Fragment.
+            return base.ToHtml(widthFactor, aspect, cssClass, containerSize);
         }
     }
 }
