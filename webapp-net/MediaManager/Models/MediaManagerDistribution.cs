@@ -92,17 +92,24 @@ namespace Sdl.Web.Modules.MediaManager.Models
         /// </remarks>
         public override string ToHtml(string widthFactor, double aspect = 0, string cssClass = null, int containerSize = 0)
         {
-            if (EclDisplayTypeId == "imagedist")
-            {
-                // The ECL Template Fragment for MM Image Distribution doesn't allow us to control image sizing, so we create our own img tag here.
-                string widthAttr = string.IsNullOrEmpty(widthFactor) ? string.Empty : string.Format(" width=\"{0}\"", widthFactor);
-                string aspectAttr = (aspect == 0) ? string.Empty : string.Format(" data-aspect=\"{0}\"", aspect.ToString(CultureInfo.InvariantCulture));
-                string classAttr = string.IsNullOrEmpty(cssClass) ? string.Empty : string.Format(" class=\"{0}\"", cssClass);
-                return string.Format("<img src=\"{0}\"{1}{2}{3}>", Url, widthAttr, aspectAttr, classAttr);
-            }
+            string classAttr = string.IsNullOrEmpty(cssClass) ? string.Empty : string.Format(" class=\"{0}\"", cssClass);
 
-            // Let EclItem.ToHtml render the HTML based on the ECL Template Fragment.
-            return base.ToHtml(widthFactor, aspect, cssClass, containerSize);
+            switch (EclDisplayTypeId)
+            {
+                case "html5dist":
+                    // The ECL Template Fragment for MM Video Distribution does not support responsive resizing (yet).
+                    return string.Format("<div{0}><div id=\"{1}\"></div><script src=\"{2}&trgt={1}&responsive=true\"></script></div>", classAttr, Guid.NewGuid(), EmbedScriptUrl);
+
+                case "imagedist":
+                    // The ECL Template Fragment for MM Image Distribution doesn't allow us to control image sizing, so we create our own img tag here.
+                    string widthAttr = string.IsNullOrEmpty(widthFactor) ? string.Empty : string.Format(" width=\"{0}\"", widthFactor);
+                    string aspectAttr = (aspect == 0) ? string.Empty : string.Format(" data-aspect=\"{0}\"", aspect.ToString(CultureInfo.InvariantCulture));
+                    return string.Format("<img src=\"{0}\"{1}{2}{3}>", Url, widthAttr, aspectAttr, classAttr);
+
+                default:
+                    // Let EclItem.ToHtml render the HTML based on the ECL Template Fragment.
+                    return base.ToHtml(widthFactor, aspect, cssClass, containerSize);
+            }
         }
     }
 }
