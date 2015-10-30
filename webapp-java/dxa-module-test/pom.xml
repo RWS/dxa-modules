@@ -5,55 +5,23 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.sdl.dxa.modules</groupId>
-		<artifactId>dxa-modules</artifactId>		
+        <artifactId>dxa-modules</artifactId>
         <version>1.2-SNAPSHOT</version>
     </parent>
 
     <artifactId>dxa-module-test</artifactId>
-    <groupId>com.sdl.dxa.modules</groupId>
-    <version>${parent.version}</version>
 
     <dependencies>
         <!-- SDL Digital Experience Accelerator -->
         <dependency>
             <groupId>com.sdl.dxa</groupId>
-            <artifactId>dxa-common-api</artifactId>
-            <version>${parent.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sdl.dxa</groupId>
             <artifactId>dxa-tridion-provider</artifactId>
-            <version>${parent.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sdl.dxa</groupId>
-            <artifactId>dxa-common-impl</artifactId>
-            <version>${parent.version}</version>
         </dependency>
 
-        <!-- Spring Framework -->
+        <!-- Necessary for Spring 3 to process @Configuration annotated classes -->
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-        </dependency>
-        <dependency>
-            <!-- Necessary for Spring 3 to process @Configuration annotated classes -->
             <groupId>cglib</groupId>
             <artifactId>cglib</artifactId>
-            <version>2.2.2</version>
-            <scope>runtime</scope>
         </dependency>
 
         <!-- Servlet API -->
@@ -72,14 +40,6 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -135,7 +95,6 @@
         <dependency>
             <groupId>jstl</groupId>
             <artifactId>jstl</artifactId>
-            <version>1.2</version>
         </dependency>
     </dependencies>
 </project>

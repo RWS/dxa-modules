@@ -5,80 +5,56 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.sdl.dxa.modules</groupId>
-		<artifactId>dxa-modules</artifactId>		
+        <artifactId>dxa-modules</artifactId>
         <version>1.2-SNAPSHOT</version>
     </parent>
 
     <artifactId>dxa-module-googleanalytics</artifactId>
-    <groupId>com.sdl.dxa.modules</groupId>
-    <version>${parent.version}</version>
 
     <dependencies>
-    <!-- SDL Digital Experience Accelerator -->
-    <dependency>
-        <groupId>com.sdl.dxa</groupId>
-        <artifactId>dxa-common-api</artifactId>
-        <version>${parent.version}</version>
-    </dependency>
-    <dependency>
-        <groupId>com.sdl.dxa</groupId>
-        <artifactId>dxa-tridion-provider</artifactId>
-        <version>${parent.version}</version>
-    </dependency>
-    <dependency>
-        <groupId>com.sdl.dxa</groupId>
-        <artifactId>dxa-common-impl</artifactId>
-        <version>${parent.version}</version>
-    </dependency>
+        <!-- SDL Digital Experience Accelerator -->
+        <dependency>
+            <groupId>com.sdl.dxa</groupId>
+            <artifactId>dxa-tridion-provider</artifactId>
+        </dependency>
 
-    <!-- Spring Framework -->
-    <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-web</artifactId>
-    </dependency>
-    <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-beans</artifactId>
-    </dependency>
-    <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-core</artifactId>
-    </dependency>
-    <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-context</artifactId>
-    </dependency>
-    <dependency>
+        <!-- Spring Framework -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+        </dependency>
+
         <!-- Necessary for Spring 3 to process @Configuration annotated classes -->
-        <groupId>cglib</groupId>
-        <artifactId>cglib</artifactId>
-        <version>2.2.2</version>
-        <scope>runtime</scope>
-    </dependency>
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+        </dependency>
 
-    <!-- Servlet API -->
-    <dependency>
-        <groupId>javax.servlet</groupId>
-        <artifactId>javax.servlet-api</artifactId>
-    </dependency>
+        <!-- Servlet API -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+        </dependency>
 
-    <!--JSP API -->
-    <dependency>
-        <groupId>javax.servlet.jsp</groupId>
-        <artifactId>javax.servlet.jsp-api</artifactId>
-    </dependency>
+        <!--JSP API -->
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>javax.servlet.jsp-api</artifactId>
+        </dependency>
 
+        <!-- Third-party libraries used by Tridion Content Delivery -->
+        <dependency>
+            <groupId>net.minidev</groupId>
+            <artifactId>json-smart</artifactId>
+        </dependency>
 
-    <!-- Third-party libraries used by Tridion Content Delivery -->
-    <dependency>
-        <groupId>net.minidev</groupId>
-        <artifactId>json-smart</artifactId>
-    </dependency>
-
-    <dependency>
-        <groupId>jstl</groupId>
-        <artifactId>jstl</artifactId>
-        <version>1.2</version>
-    </dependency>
-</dependencies>
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+        </dependency>
+    </dependencies>
 </project>
