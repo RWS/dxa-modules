@@ -2,8 +2,6 @@ package com.sdl.webapp.addon.controller;
 
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.content.ContentProviderException;
-import com.sdl.webapp.common.api.localization.Localization;
-import com.sdl.webapp.common.api.model.MvcData;
 import com.sdl.webapp.common.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

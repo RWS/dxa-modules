@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="dxa" uri="http://www.sdl.com/tridion-dxa" %> 
+<%@ taglib prefix="dxa" uri="http://www.sdl.com/tridion-dxa" %>
 <%@ taglib prefix="xpm" uri="http://www.sdl.com/tridion-xpm" %>
 <jsp:useBean id="pageModel" type="com.sdl.dxa.modules.test.model.CustomPageModelImpl" scope="request"/>
 <jsp:useBean id="markup" type="com.sdl.webapp.common.markup.Markup" scope="request"/>
@@ -29,7 +29,7 @@
 <body>
 
 
-<dxa:region name="Header" />
+<dxa:region name="Header"/>
 <main class="page-row page-row-expanded ${pageModel.htmlClasses}" role="main">
     <div class="container-fluid page-border">
         <%
@@ -48,18 +48,22 @@
 
         <div class="row">
             <% if (hasLeftBar) { %>
-                <div class="col-sm-12 col-md-3">
-                    <dxa:region name="Left-Navigation" containerSize="3"/>
-                    <dxa:region name="Left"  containerSize="3"/>
-                </div>
+            <div class="col-sm-12 col-md-3">
+                <dxa:region name="Left-Navigation" containerSize="3"/>
+                <dxa:region name="Left" containerSize="3"/>
+            </div>
             <% } %>
-            <div class="col-sm-12 col-md-<%= mainContainerSize %>"><dxa:regions exclude="Hero,Left,Left-Navigation,Header,Footer,Content-Tools" containerSize="${mainContainerSize}"/></div>
+            <div class="col-sm-12 col-md-<%= mainContainerSize %>"><dxa:regions
+                    exclude="Hero,Left,Left-Navigation,Header,Footer,Content-Tools"
+                    containerSize="${mainContainerSize}"/></div>
         </div>
     </div>
 </main>
-<dxa:region name="Footer" />
+<dxa:region name="Footer"/>
 <script src="${markup.versionedContent('/assets/scripts/main.js')}"></script>
-<xpm:if-enabled><script src="${markup.versionedContent('/assets/scripts/xpm.js')}"></script></xpm:if-enabled>
+<xpm:if-enabled>
+    <script src="${markup.versionedContent('/assets/scripts/xpm.js')}"></script>
+</xpm:if-enabled>
 <dxa:pluggableMarkup label="bottom-js"/>
 <xpm:page page="${pageModel}"/>
 </body>

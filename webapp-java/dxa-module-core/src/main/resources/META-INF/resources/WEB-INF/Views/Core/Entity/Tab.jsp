@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="dxa" uri="http://www.sdl.com/tridion-dxa" %> 
+<%@ taglib prefix="dxa" uri="http://www.sdl.com/tridion-dxa" %>
 <%@ taglib prefix="xpm" uri="http://www.sdl.com/tridion-xpm" %>
 
 <jsp:useBean id="entity" type="com.sdl.webapp.common.api.model.entity.ItemList" scope="request"/>
@@ -15,7 +15,7 @@
             <c:set var="panelId" value="${entity.id}"/>
             <div class="panel panel-default">
                 <div class="panel-body tab-container">
-                    <%-- Tab dropdown --%>
+                        <%-- Tab dropdown --%>
                     <div class="dropdown visible-xs">
                         <select class="tab-group form-control" data-toggle="tab">
                             <c:forEach var="element" items="${entity.itemListElements}" varStatus="status">
@@ -24,16 +24,17 @@
                             </c:forEach>
                         </select>
                     </div>
-                    <%-- Tab tips --%>
+                        <%-- Tab tips --%>
                     <ul class="tab-group nav nav-tabs hidden-xs">
                         <c:forEach var="element" items="${entity.itemListElements}" varStatus="status">
                             <li class="${status.index == 0 ? 'active' : ''}">
                                 <c:set var="ident" value="tab${panelId}_${status.index}"/>
-                                <a href="#${ident}" data-toggle="tab" ${markup.property(element, "headline")}>${element.headline}</a>
+                                <a href="#${ident}"
+                                   data-toggle="tab" ${markup.property(element, "headline")}>${element.headline}</a>
                             </li>
                         </c:forEach>
                     </ul>
-                    <%-- Tab panes --%>
+                        <%-- Tab panes --%>
                     <div class="tab-content">
                         <c:forEach var="element" items="${entity.itemListElements}" varStatus="status">
                             <c:set var="ident" value="tab${panelId}_${status.index}"/>

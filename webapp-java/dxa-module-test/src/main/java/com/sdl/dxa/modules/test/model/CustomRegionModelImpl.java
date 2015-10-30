@@ -4,7 +4,6 @@ import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.content.ContentProvider;
 import com.sdl.webapp.common.api.content.ContentProviderException;
 import com.sdl.webapp.common.api.localization.Localization;
-import com.sdl.webapp.common.api.model.RegionModel;
 import com.sdl.webapp.common.api.model.region.RegionModelImpl;
 import com.sdl.webapp.common.exceptions.DxaException;
 import com.sdl.webapp.common.util.ApplicationContextHolder;
@@ -35,18 +34,15 @@ public class CustomRegionModelImpl extends RegionModelImpl {
     }
 
     @Override
-    public boolean equals(Object obj)
-    {
-        if(obj instanceof CustomRegionModelImpl)
-        {
+    public boolean equals(Object obj) {
+        if (obj instanceof CustomRegionModelImpl) {
             return ((CustomRegionModelImpl) obj).getName().equals(this.getName());
         }
         return false;
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         return this.getName().hashCode();
     }
 }

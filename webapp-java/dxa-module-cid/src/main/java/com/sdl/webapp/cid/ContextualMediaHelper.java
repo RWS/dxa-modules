@@ -2,7 +2,6 @@ package com.sdl.webapp.cid;
 
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.impl.AbstractMediaHelper;
-import com.sdl.webapp.common.impl.GenericMediaHelper;
 
 /**
  * Contextual Media Helper.

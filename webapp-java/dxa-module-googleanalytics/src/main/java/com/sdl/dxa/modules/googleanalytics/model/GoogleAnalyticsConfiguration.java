@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import static com.sdl.webapp.common.api.mapping.config.SemanticVocabulary.SCHEMA_ORG;
 
 @SemanticEntity(entityName = "GoogleAnalyticsConfiguration", vocabulary = SCHEMA_ORG, prefix = "s", public_ = true)
-    public class GoogleAnalyticsConfiguration extends AbstractEntityModel {
+public class GoogleAnalyticsConfiguration extends AbstractEntityModel {
 
     private static final Logger LOG = LoggerFactory.getLogger(GoogleAnalyticsConfiguration.class);
 

@@ -2,7 +2,6 @@ package com.sdl.dxa.modules.search;
 
 import com.sdl.webapp.common.api.model.ViewModelRegistry;
 import com.sdl.webapp.common.api.model.entity.Link;
-import com.sdl.webapp.common.exceptions.DxaException;
 import com.sdl.webapp.common.impl.AbstractInitializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

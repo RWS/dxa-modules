@@ -1,8 +1,5 @@
-<%@ page import="com.sdl.webapp.common.impl.contextengine.DeviceClaims" %>
-<%@ page import="org.springframework.beans.BeanUtils" %>
-<%@ page import="java.util.Map" %>
-<%@ page import="java.beans.PropertyDescriptor" %>
 <%@ page import="com.sdl.webapp.common.impl.contextengine.BrowserClaims" %>
+<%@ page import="com.sdl.webapp.common.impl.contextengine.DeviceClaims" %>
 <%@ page import="com.sdl.webapp.common.impl.contextengine.OperatingSystemClaims" %>
 <%@ page import="java.util.Arrays" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
@@ -10,11 +7,11 @@
 <jsp:useBean id="contextengine" type="com.sdl.webapp.common.api.contextengine.ContextEngine" scope="request"/>
 
 <article class="rich-text ${entity.htmlClasses}" ${markup.entity(entity)}>
-<%
-    DeviceClaims claims = contextengine.getClaims(DeviceClaims.class);
-    BrowserClaims browserclaims = contextengine.getClaims(BrowserClaims.class);
-    OperatingSystemClaims operatingSystemClaims = contextengine.getClaims(OperatingSystemClaims.class);
-%>
+    <%
+        DeviceClaims claims = contextengine.getClaims(DeviceClaims.class);
+        BrowserClaims browserclaims = contextengine.getClaims(BrowserClaims.class);
+        OperatingSystemClaims operatingSystemClaims = contextengine.getClaims(OperatingSystemClaims.class);
+    %>
     <h2>Device claims</h2>
     getDisplayWidth : <%=claims.getDisplayWidth()%><br/>
     getDisplayHeight : <%=claims.getDisplayHeight()%><br/>

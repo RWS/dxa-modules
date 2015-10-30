@@ -92,15 +92,17 @@ public class SpringConfiguration extends WebMvcConfigurerAdapter {
     }
 
     @Bean(name = "rssFeedView")
-    public RssView rssFeedView(){
+    public RssView rssFeedView() {
         return new RssView(webRequestContext);
     }
 
     @Bean(name = "atomFeedView")
-    public AtomView atomFeedView(){
+    public AtomView atomFeedView() {
         return new AtomView(webRequestContext);
     }
 
     @Bean(name = "jsonFeedView")
-    public JsonView jsonFeedView(){ return new JsonView(webRequestContext); }
+    public JsonView jsonFeedView() {
+        return new JsonView(webRequestContext);
+    }
 }

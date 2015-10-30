@@ -19,7 +19,7 @@ import java.util.UUID;
 import static com.sdl.webapp.common.api.mapping.config.SemanticVocabulary.SCHEMA_ORG;
 
 @SemanticEntity(entityName = "VideoObject", vocabulary = SCHEMA_ORG, prefix = "s", public_ = true)
-    public class VimeoVideo extends MediaItem {
+public class VimeoVideo extends MediaItem {
 
     private static final Logger LOG = LoggerFactory.getLogger(VimeoVideo.class);
 
@@ -121,7 +121,7 @@ import static com.sdl.webapp.common.api.mapping.config.SemanticVocabulary.SCHEMA
 
         return String.format(
                 "<%s class=\"embed-video\"><img src=\"%s\" alt=\"%s\"><button type=\"button\" data-video=\"%s\" class=\"%s\"><i class=\"fa fa-play-circle\"></i></button></%s>",
-                htmlTagName, placeholderImageUrl, getHeadline(), getVimeoId(), (String) null, htmlTagName
+                htmlTagName, placeholderImageUrl, getHeadline(), getVimeoId(), null, htmlTagName
         );
     }
 

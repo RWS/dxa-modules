@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-
 /**
  * ContextualMediaHelperFactory
  *
@@ -25,7 +23,7 @@ public class ContextualMediaHelperFactory {
     @Autowired
     private WebRequestContext webRequestContext;
 
-//    @PostConstruct
+    //    @PostConstruct
     public void createMediaHelper() {
         MediaHelper contextualMediaHelper = new ContextualMediaHelper(this.webRequestContext);
         defaultImplementation.override(contextualMediaHelper);

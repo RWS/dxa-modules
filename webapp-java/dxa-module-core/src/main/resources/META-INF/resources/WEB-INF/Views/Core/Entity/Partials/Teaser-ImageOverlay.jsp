@@ -26,13 +26,14 @@
 </c:choose>
 <div ${markup.entity(item)}>
     <c:choose>
-        <c:when test="${not empty item.media}" >
+        <c:when test="${not empty item.media}">
             <span ${markup.property(item, "media")}>
                 <dxa:media media="${item.media}" widthFactor="100%" aspect="${imageAspect}"/>
             </span>
         </c:when>
         <c:otherwise>
-            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" width="100%">
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""
+                 width="100%">
         </c:otherwise>
     </c:choose>
     <c:if test="${not empty item.headline or not empty item.text}">
@@ -42,7 +43,7 @@
             </c:if>
             <c:if test="${not empty item.text}">
                 <div ${markup.property(item, "text")}>
-                	<dxa:richtext content="${item.text}"/>
+                    <dxa:richtext content="${item.text}"/>
                 </div>
             </c:if>
         </div>
@@ -50,8 +51,9 @@
     <c:if test="${not empty item.link.linkText}">
         <div class="carousel-caption">
             <p>
-                <a href="${item.link.url}" title="${item.link.alternateText}" class="btn btn-primary" ${markup.property(item, "link")}>
-                    ${item.link.linkText}
+                <a href="${item.link.url}" title="${item.link.alternateText}"
+                   class="btn btn-primary" ${markup.property(item, "link")}>
+                        ${item.link.linkText}
                 </a>
             </p>
         </div>

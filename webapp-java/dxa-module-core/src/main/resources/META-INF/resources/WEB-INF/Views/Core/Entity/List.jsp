@@ -34,7 +34,7 @@
     </ul>
     <c:if test="${not empty entity.link.url}">
         <p ${markup.property(entity.link, "url")}>
-            <%-- Explicit XPM property tag as the link text is editable not the link URL --%>
+                <%-- Explicit XPM property tag as the link text is editable not the link URL --%>
             <xpm:property entity="${entity.link}" property="linkText"/>
             <a href="${entity.link.url}" title="${entity.link.alternateText}">
                 <c:choose>

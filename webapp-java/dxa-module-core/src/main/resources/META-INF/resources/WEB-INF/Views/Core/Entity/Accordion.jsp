@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="dxa" uri="http://www.sdl.com/tridion-dxa" %> 
+<%@ taglib prefix="dxa" uri="http://www.sdl.com/tridion-dxa" %>
 <%@ taglib prefix="xpm" uri="http://www.sdl.com/tridion-xpm" %>
 
 <jsp:useBean id="entity" type="com.sdl.webapp.common.api.model.entity.ItemList" scope="request"/>
@@ -17,7 +17,8 @@
                 <c:forEach var="element" items="${entity.itemListElements}" varStatus="status">
                     <c:set var="collapseId" value="${entity.id}_${status.index}"/>
                     <div class="panel panel-default" ${markup.property(entity, "itemListElement", status.index)}>
-                        <div class="panel-heading" data-toggle="collapse" data-target="#${collapseId}" data-parent="#${accordionId}">
+                        <div class="panel-heading" data-toggle="collapse" data-target="#${collapseId}"
+                             data-parent="#${accordionId}">
                             <h4 class="panel-title" ${markup.property(element, "headline")}>${element.headline}</h4>
                         </div>
                         <div id="${collapseId}" class="panel-collapse collapse ${status.index == 0 ? 'in' : ''}">

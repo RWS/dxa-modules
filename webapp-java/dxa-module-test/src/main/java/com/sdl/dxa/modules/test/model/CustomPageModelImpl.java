@@ -15,8 +15,7 @@ public class CustomPageModelImpl extends PageModelImpl {
     @SemanticProperty("m:headline")
     private String headline;
 
-    public String getHeadline()
-    {
+    public String getHeadline() {
         return this.headline;
     }
 }
