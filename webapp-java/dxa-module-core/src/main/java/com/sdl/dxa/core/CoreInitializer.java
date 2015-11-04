@@ -1,6 +1,5 @@
 package com.sdl.dxa.core;
 
-import com.sdl.webapp.common.api.model.ViewModelRegistry;
 import com.sdl.webapp.common.api.model.entity.Article;
 import com.sdl.webapp.common.api.model.entity.Configuration;
 import com.sdl.webapp.common.api.model.entity.ContentList;
@@ -18,7 +17,6 @@ import com.sdl.webapp.common.api.model.entity.YouTubeVideo;
 import com.sdl.webapp.common.api.model.page.PageModelImpl;
 import com.sdl.webapp.common.api.model.region.RegionModelImpl;
 import com.sdl.webapp.common.impl.AbstractInitializer;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -26,11 +24,7 @@ import javax.annotation.PostConstruct;
 @Component
 public class CoreInitializer extends AbstractInitializer {
 
-    // todo Seems a bit fragmented to have the views in another module and the initialization part in another one...
-    @Autowired
-    public CoreInitializer(ViewModelRegistry viewModelRegistry) {
-        super(viewModelRegistry, "Core");
-    }
+    private static final String AREA_NAME = "Core";
 
     @PostConstruct
     public void registerViewModelEntityClasses() {
@@ -86,8 +80,11 @@ public class CoreInitializer extends AbstractInitializer {
         registerViewModel("Footer", RegionModelImpl.class);
         registerViewModel("Left Navigation", RegionModelImpl.class);
         registerViewModel("Content Tools", RegionModelImpl.class);
+    }
 
-
+    @Override
+    protected String getAreaName() {
+        return AREA_NAME;
     }
 }
 

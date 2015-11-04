@@ -13,12 +13,6 @@
     <artifactId>dxa-module-search</artifactId>
 
     <dependencies>
-        <!-- SDL Digital Experience Accelerator -->
-        <dependency>
-            <groupId>com.sdl.dxa</groupId>
-            <artifactId>dxa-tridion-provider</artifactId>
-        </dependency>
-
         <!-- Necessary for Spring 3 to process @Configuration annotated classes -->
         <dependency>
             <groupId>cglib</groupId>

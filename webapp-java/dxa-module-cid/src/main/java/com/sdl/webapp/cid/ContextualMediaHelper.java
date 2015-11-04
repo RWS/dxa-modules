@@ -1,16 +1,16 @@
 package com.sdl.webapp.cid;
 
 import com.sdl.webapp.common.api.WebRequestContext;
-import com.sdl.webapp.common.impl.AbstractMediaHelper;
+import com.sdl.webapp.common.impl.DefaultMediaHelper;
 
 /**
  * Contextual Media Helper.
  * Implementation of {@code MediaHelper} for when Contextual Image Delivery is used.
  */
-public class ContextualMediaHelper extends AbstractMediaHelper {
+public class ContextualMediaHelper extends DefaultMediaHelper {
 
     public ContextualMediaHelper(WebRequestContext webRequestContext) {
-        super(webRequestContext);
+//        super(webRequestContext);
     }
 
     @Override

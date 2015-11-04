@@ -27,7 +27,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = {"com.sdl.webapp.common.controller", "com.sdl.webapp"})
+@ComponentScan(basePackages = {"com.sdl.dxa.core", "com.sdl.webapp"})
 public class SpringConfiguration extends WebMvcConfigurerAdapter {
     private static final String VIEW_RESOLVER_PREFIX = "/WEB-INF/Views/";
     private static final String VIEW_RESOLVER_SUFFIX = ".jsp";

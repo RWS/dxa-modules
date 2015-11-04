@@ -12,12 +12,6 @@
     <artifactId>dxa-module-googleanalytics</artifactId>
 
     <dependencies>
-        <!-- SDL Digital Experience Accelerator -->
-        <dependency>
-            <groupId>com.sdl.dxa</groupId>
-            <artifactId>dxa-tridion-provider</artifactId>
-        </dependency>
-
         <!-- Spring Framework -->
         <dependency>
             <groupId>org.springframework</groupId>
