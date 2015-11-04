@@ -1,5 +1,6 @@
 package com.sdl.webapp.cid;
 
+import com.sdl.webapp.common.api.MediaHelper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import static org.junit.Assert.assertThat;
 public class ContextualMediaHelperTest {
 
     @Autowired
-    private ContextualMediaHelper mediaHelper;
+    private MediaHelper mediaHelper;
 
     @Test
     public void testGetResponsiveImageUrl() throws Exception {

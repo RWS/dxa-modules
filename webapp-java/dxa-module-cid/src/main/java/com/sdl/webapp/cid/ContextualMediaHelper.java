@@ -1,17 +1,17 @@
 package com.sdl.webapp.cid;
 
-import com.sdl.webapp.common.api.WebRequestContext;
-import com.sdl.webapp.common.impl.DefaultMediaHelper;
+import com.sdl.webapp.common.api.MediaHelper;
+import com.sdl.webapp.common.impl.GenericMediaHelper;
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Component;
 
 /**
  * Contextual Media Helper.
- * Implementation of {@code MediaHelper} for when Contextual Image Delivery is used.
+ * Implementation of {@link MediaHelper} for when Contextual Image Delivery is used.
  */
-public class ContextualMediaHelper extends DefaultMediaHelper {
-
-    public ContextualMediaHelper(WebRequestContext webRequestContext) {
-//        super(webRequestContext);
-    }
+@Component
+@Primary
+public class ContextualMediaHelper extends GenericMediaHelper {
 
     @Override
     public String getResponsiveImageUrl(String url, String widthFactor, double aspect, int containerSize) {
