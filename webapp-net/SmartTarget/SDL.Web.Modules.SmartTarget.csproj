@@ -82,6 +82,9 @@
     <Compile Include="Mapping\SmartTargetModelBuilder.cs" />
     <Compile Include="Models\SmartTargetPageModel.cs" />
     <Compile Include="SmartTargetAreaRegistration.cs" />
+    <Content Include="Areas\SmartTarget\Views\Entity\2-Column-Promotion.cshtml" />
+    <Content Include="Areas\SmartTarget\Views\Entity\3-Column-Promotion.cshtml" />
+    <Content Include="Areas\SmartTarget\Views\Entity\4-Column-Promotion.cshtml" />
     <None Include="Areas\SmartTarget\Views\Entity\Promotion.cshtml" />
     <Content Include="Areas\SmartTarget\Views\Region\2-Column.cshtml" />
     <Content Include="Areas\SmartTarget\Views\Region\3-Column.cshtml" />
