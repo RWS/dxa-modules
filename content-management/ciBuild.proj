@@ -25,7 +25,7 @@
         
     <CallTarget Targets="PrepareBuild"/>
     <CallTarget Targets="PackageBuild"/>
-    <CallTarget Targets="TcmUpload"/>
+    <!-- NOTE: TcmUpload is not called here; should be called separately from Jenkins (on Dev build)-->
   </Target>
 
   <!-- =============================================================================================================================================  -->

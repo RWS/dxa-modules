@@ -16,6 +16,10 @@ namespace Sdl.Web.Modules.SmartTarget
         protected override void RegisterAllViewModels()
         {
             RegisterViewModel("SmartTargetRegion", typeof(SmartTargetRegion));
+            RegisterViewModel("2-Column", typeof(SmartTargetRegion));
+            RegisterViewModel("3-Column", typeof(SmartTargetRegion));
+            RegisterViewModel("4-Column", typeof(SmartTargetRegion));
+
             RegisterViewModel("Promotion", typeof(SmartTargetPromotion));
         }
     }
