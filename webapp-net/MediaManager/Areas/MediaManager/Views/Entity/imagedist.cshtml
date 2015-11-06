@@ -1,0 +1,13 @@
+﻿@model MediaManagerDistribution
+
+@* NOTE: This View is mainly intended for MM Images embedded in Rich Text. When used for a stand-alone Entity, it provides very limited control over styling/sizing of the image. *@
+@if (Model.IsEmbedded)
+{
+    @Html.Media(Model)
+}
+else
+{
+    <div class="@Model.HtmlClasses" @Html.DxaEntityMarkup()>
+        @Html.Media(Model, "100%", 1)
+    </div>
+}

@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Sdl.Web.Modules.MediaManager</RootNamespace>
     <AssemblyName>Sdl.Web.Modules.MediaManager</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,32 +32,42 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Sdl.Web.Common">
-      <HintPath>..\_references\Sdl.Web.Common.dll</HintPath>
+      <HintPath>..\_references\dxa-1.2\Sdl.Web.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sdl.Web.Mvc">
-      <HintPath>..\_references\Sdl.Web.Mvc.dll</HintPath>
+      <HintPath>..\_references\dxa-1.2\Sdl.Web.Mvc.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>False</Private>
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.1.2\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.1.2\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MediaManagerAreaRegistration.cs" />
-    <Compile Include="Models\MediaManagerVideo.cs" />
+    <Compile Include="Models\MediaManagerDistribution.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\VersionInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Areas\MediaManager\Views\Entity\MediaManagerVideo.cshtml" />
+    <None Include="Areas\MediaManager\Views\Entity\html5dist.cshtml" />
+    <None Include="Areas\MediaManager\Views\Entity\downloaddist.cshtml" />
+    <None Include="Areas\MediaManager\Views\Entity\audiodist.cshtml" />
     <None Include="Areas\MediaManager\Views\web.config">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Areas\MediaManager\Views\Entity\imagedist.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
