@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Sdl.Web.Modules.SmartTarget</RootNamespace>
     <AssemblyName>Sdl.Web.Modules.SmartTarget</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,12 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DD4T.ContentModel">
-      <HintPath>..\_references\dd4t-update\DD4T.ContentModel.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="DD4T.ContentModel.Contracts">
-      <HintPath>..\_references\dd4t-update\DD4T.ContentModel.Contracts.dll</HintPath>
+      <HintPath>..\_references\dd4t-2.0-dxa\DD4T.ContentModel.Contracts.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sdl.Web.Common, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -85,7 +82,13 @@
     <Compile Include="Mapping\SmartTargetModelBuilder.cs" />
     <Compile Include="Models\SmartTargetPageModel.cs" />
     <Compile Include="SmartTargetAreaRegistration.cs" />
+    <Content Include="Areas\SmartTarget\Views\Entity\2-Column-Promotion.cshtml" />
+    <Content Include="Areas\SmartTarget\Views\Entity\3-Column-Promotion.cshtml" />
+    <Content Include="Areas\SmartTarget\Views\Entity\4-Column-Promotion.cshtml" />
     <None Include="Areas\SmartTarget\Views\Entity\Promotion.cshtml" />
+    <Content Include="Areas\SmartTarget\Views\Region\2-Column.cshtml" />
+    <Content Include="Areas\SmartTarget\Views\Region\3-Column.cshtml" />
+    <Content Include="Areas\SmartTarget\Views\Region\4-Column.cshtml" />
     <None Include="Areas\SmartTarget\Views\Region\SmartTargetRegion.cshtml" />
     <None Include="Areas\SmartTarget\Views\web.config">
       <SubType>Designer</SubType>

@@ -1,0 +1,29 @@
+﻿@model SmartTargetRegion
+<div @Html.DxaRegionMarkup()>
+    @Html.Raw(Model.GetStartQueryXpmMarkup())
+    @if (Model.HasSmartTargetContent)
+    {
+        // Model.Entities are ST Promotions. Render them with an appropriate View:
+        foreach (SmartTargetPromotion promo in Model.Entities)
+        {
+            @Html.DxaEntity(promo, "SmartTarget:3-Column-Promotion")
+        }
+    }
+    else
+    {
+        // Fallback content
+        //Small screens show 2 columns, so we need to make sure we break the row divs accordinly
+        int cols = WebRequestContext.ScreenWidth == ScreenWidth.Small ? 2 : 3;
+        for (int i = 0; i < Math.Ceiling(Model.Entities.Count / Convert.ToDouble(cols)); i++)
+        {
+            <div class="row">
+                @for (int j = 0; j < cols && (cols * i + j < Model.Entities.Count); j++)
+                {
+                    <div class="col-sm-6 col-md-4">
+                        @Html.DxaEntity(Model.Entities[cols * i + j], containerSize: 12 / cols)
+                    </div>
+                }
+            </div>
+        }
+    }
+</div>
