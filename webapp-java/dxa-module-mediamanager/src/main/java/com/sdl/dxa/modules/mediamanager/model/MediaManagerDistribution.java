@@ -5,7 +5,6 @@ import com.sdl.webapp.common.api.model.MvcData;
 import com.sdl.webapp.common.api.model.MvcDataImpl;
 import com.sdl.webapp.common.api.model.entity.EclItem;
 import com.sdl.webapp.common.exceptions.DxaException;
-import com.sdl.webapp.common.util.NestedStringMap;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -44,8 +43,15 @@ public class MediaManagerDistribution extends EclItem {
 
     @Override
     public String getMimeType() {
-        String mimeType = (String) new NestedStringMap(getExternalMetadata()).get("Program/Asset/MIMEType");
-        return mimeType == null ? super.getMimeType() : mimeType;
+        return (String) getFromExternalMetadataOrAlternative("Program/Asset/MIMEType", super.getMimeType());
+    }
+
+    public String getTitle() {
+        return (String) getFromExternalMetadataOrAlternative("Program/Asset/Title", getFileName());
+    }
+
+    public String getDescription() {
+        return (String) getFromExternalMetadataOrAlternative("Program/Asset/Description", null);
     }
 
     @Override
