@@ -105,15 +105,4 @@ public class MediaManagerDistributionTest {
         //then
         assertEquals(expected, embedScriptUrl);
     }
-
-    @Test
-    public void shouldGetIconClass() {
-        //given
-
-
-        //when
-
-        //then
-
-    }
 }
