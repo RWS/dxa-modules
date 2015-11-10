@@ -8,7 +8,6 @@ import com.sdl.webapp.common.api.mapping.views.AbstractInitializer;
 import com.sdl.webapp.common.api.mapping.views.RegisteredView;
 import com.sdl.webapp.common.api.mapping.views.RegisteredViews;
 import com.sdl.webapp.common.api.model.entity.Article;
-import com.sdl.webapp.common.api.model.entity.EclItemImpl;
 import com.sdl.webapp.common.api.model.region.RegionModelImpl;
 import org.springframework.stereotype.Component;
 
@@ -21,8 +20,7 @@ import org.springframework.stereotype.Component;
         @RegisteredView(viewName = "CustomPageMetadata", clazz = CustomPageModelImpl.class),
         @RegisteredView(viewName = "CustomRegion", clazz = CustomRegionModelImpl.class),
         @RegisteredView(viewName = "TestRegionView", clazz = RegionModelImpl.class),
-        @RegisteredView(viewName = "ExternalContentLibraryStubSchemaflickr", clazz = ExternalContentLibraryStubSchemaflickr.class),
-        @RegisteredView(viewName = "TestEclEntity", clazz = EclItemImpl.class)
+        @RegisteredView(viewName = "ExternalContentLibraryStubSchemaflickr", clazz = ExternalContentLibraryStubSchemaflickr.class)
 })
 public class TestModuleInitializer extends AbstractInitializer {
 
