@@ -13,11 +13,11 @@
 
     <name>${project.groupId}:${project.artifactId}</name>
     <description>DXA CID module</description>
-    <url>https://github.com/sdl/dxa-web-application-java</url>
+    <url>https://github.com/sdl/dxa-modules</url>
 
     <scm>
-        <url>https://github.com/sdl/dxa-web-application-java</url>
-        <connection>scm:git:https://github.com/sdl/dxa-web-application-java.git</connection>
+        <url>https://github.com/sdl/dxa-modules</url>
+        <connection>scm:git:https://github.com/sdl/dxa-modules.git</connection>
     </scm>
 
     <licenses>
