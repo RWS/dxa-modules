@@ -10,13 +10,11 @@ import com.sdl.webapp.common.api.model.region.RegionModelImpl;
 import com.sdl.webapp.common.impl.AbstractInitializer;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-
 @Component
 public class TestModuleInitializer extends AbstractInitializer {
 
-    @PostConstruct
-    public void initialize() {
+    @Override
+    protected boolean registerModule() {
         this.registerViewModel("VimeoVideo", VimeoVideo.class);
         this.registerViewModel("ShowClaims", Article.class);
         this.registerViewModel("ShowClaims", Article.class);
@@ -26,6 +24,7 @@ public class TestModuleInitializer extends AbstractInitializer {
         this.registerViewModel("TestRegionView", RegionModelImpl.class);
         this.registerViewModel("ExternalContentLibraryStubSchemaflickr", ExternalContentLibraryStubSchemaflickr.class);
         this.registerViewModel("TestEclEntity", EclItemImpl.class);
+        return true;
     }
 
     @Override

@@ -19,15 +19,13 @@ import com.sdl.webapp.common.api.model.region.RegionModelImpl;
 import com.sdl.webapp.common.impl.AbstractInitializer;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-
 @Component
 public class CoreInitializer extends AbstractInitializer {
 
     private static final String AREA_NAME = "Core";
 
-    @PostConstruct
-    public void registerViewModelEntityClasses() {
+    @Override
+    protected boolean registerModule() {
 
         registerViewModel("Article", Article.class);
         registerViewModel("Accordion", ItemList.class);
@@ -80,6 +78,8 @@ public class CoreInitializer extends AbstractInitializer {
         registerViewModel("Footer", RegionModelImpl.class);
         registerViewModel("Left Navigation", RegionModelImpl.class);
         registerViewModel("Content Tools", RegionModelImpl.class);
+
+        return true;
     }
 
     @Override

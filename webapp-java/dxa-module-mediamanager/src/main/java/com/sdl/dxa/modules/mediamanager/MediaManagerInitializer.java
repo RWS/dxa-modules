@@ -6,6 +6,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class MediaManagerInitializer extends AbstractInitializer {
     @Override
+    protected boolean registerModule() {
+        return true;
+    }
+
+    @Override
     protected String getAreaName() {
         return "MediaManager";
     }

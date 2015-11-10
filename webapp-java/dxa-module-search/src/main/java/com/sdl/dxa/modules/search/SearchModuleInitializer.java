@@ -4,17 +4,13 @@ import com.sdl.webapp.common.api.model.entity.Link;
 import com.sdl.webapp.common.impl.AbstractInitializer;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-
 @Component
 public class SearchModuleInitializer extends AbstractInitializer {
 
-    @PostConstruct
-    public void initialize() {
-        // TODO: Implement this for real, currently this is just a dummy implementation to avoid errors
-
+    @Override
+    protected boolean registerModule() {
         this.registerViewModel("SearchBox", Link.class);
-
+        return true;
     }
 
     @Override
