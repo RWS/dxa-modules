@@ -5,8 +5,9 @@ import com.sdl.webapp.common.api.model.MvcData;
 import com.sdl.webapp.common.api.model.MvcDataImpl;
 import com.sdl.webapp.common.api.model.entity.EclItem;
 import com.sdl.webapp.common.exceptions.DxaException;
+import com.sdl.webapp.common.markup.html.HtmlElement;
+import com.sdl.webapp.common.markup.html.builders.ImgElementBuilder;
 import org.springframework.util.CollectionUtils;
-import org.springframework.util.StringUtils;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.text.NumberFormat;
@@ -16,6 +17,10 @@ import java.util.Objects;
 import java.util.UUID;
 
 import static com.sdl.webapp.common.api.mapping.semantic.config.SemanticVocabulary.SDL_CORE;
+import static com.sdl.webapp.common.markup.html.builders.HtmlBuilders.div;
+import static com.sdl.webapp.common.markup.html.builders.HtmlBuilders.img;
+import static com.sdl.webapp.common.markup.html.builders.HtmlBuilders.script;
+import static java.lang.String.format;
 
 @SemanticEntity(entityName = "ExternalContentLibraryStubSchemamm", vocabulary = SDL_CORE, prefix = "s")
 public class MediaManagerDistribution extends EclItem {
@@ -56,25 +61,42 @@ public class MediaManagerDistribution extends EclItem {
 
     @Override
     public MvcData getMvcData() {
-        return new MvcDataImpl("MediaManager:" + getDisplayTypeId());
+        return new MvcDataImpl("MediaManager:" + getDisplayTypeId()).defaults(MvcDataImpl.Defaults.ENTITY);
     }
 
     @Override
-    public String toHtml(String widthFactor, double aspect, String cssClass, int containerSize) throws DxaException {
-        cssClass = StringUtils.isEmpty(cssClass) ? "" : String.format(" class=\"%s\"", cssClass);
-
-        final UUID uuid = UUID.randomUUID();
+    public HtmlElement toHtmlElement(String widthFactor, double aspect, String cssClass, int containerSize) throws DxaException {
         switch (getDisplayTypeId()) {
             case "html5dist":
-                return String.format("<div%s><div id=\"%s\"></div><script src=\"%s&trgt=%s&responsive=true\"></script></div>",
-                        cssClass, uuid, getEmbedScriptUrl(), uuid);
+                return getHtml5Dist(cssClass);
             case "imagedist":
-                String aspectAttr = aspect == 0.0 ? "" :
-                        String.format(" data-aspect=\"%s\"", NumberFormat.getNumberInstance(Locale.getDefault()).format(aspect));
-                widthFactor = StringUtils.isEmpty(widthFactor) ? "" : String.format(" width=\"%s\"", widthFactor);
-                return String.format("<img src=\"%s\"%s%s%s>", getUrl(), widthFactor, aspectAttr, cssClass);
+                return getImageDist(widthFactor, aspect, cssClass);
             default:
-                return super.toHtml(widthFactor, aspect, cssClass, containerSize);
+                return super.toHtmlElement(widthFactor, aspect, cssClass, containerSize);
         }
+    }
+
+    private HtmlElement getImageDist(String widthFactor, double aspect, String cssClass) {
+
+        final ImgElementBuilder elementBuilder = img().withSrc(getUrl())
+                .withClass(cssClass)
+                .withAttribute("width", widthFactor);
+        if (aspect != 0.0) {
+            elementBuilder.withAttribute("data-aspect", NumberFormat.getNumberInstance(Locale.getDefault()).format(aspect));
+        }
+
+        return elementBuilder.build();
+    }
+
+    private HtmlElement getHtml5Dist(String cssClass) {
+        final UUID uuid = UUID.randomUUID();
+        return div()
+                .withClass(cssClass)
+                .withNode(
+                        div().withId(uuid.toString()).build()
+                )
+                .withNode(
+                        script().withSrc(format("%s&trgt=%s&responsive=true", getEmbedScriptUrl(), uuid)).build()
+                ).build();
     }
 }
