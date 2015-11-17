@@ -65,14 +65,14 @@ public class MediaManagerDistribution extends EclItem {
     }
 
     @Override
-    public HtmlElement toHtmlElement(String widthFactor, double aspect, String cssClass, int containerSize) throws DxaException {
+    public HtmlElement toHtmlElement(String widthFactor, double aspect, String cssClass, int containerSize, String contextPath) throws DxaException {
         switch (getDisplayTypeId()) {
             case "html5dist":
                 return getHtml5Dist(cssClass);
             case "imagedist":
                 return getImageDist(widthFactor, aspect, cssClass);
             default:
-                return super.toHtmlElement(widthFactor, aspect, cssClass, containerSize);
+                return super.toHtmlElement(widthFactor, aspect, cssClass, containerSize, contextPath);
         }
     }
 
