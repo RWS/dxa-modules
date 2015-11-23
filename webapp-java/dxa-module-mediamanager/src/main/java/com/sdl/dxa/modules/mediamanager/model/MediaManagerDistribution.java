@@ -52,11 +52,20 @@ public class MediaManagerDistribution extends EclItem {
     }
 
     public String getTitle() {
-        return (String) getFromExternalMetadataOrAlternative("Program/Asset/Title", getFileName());
+        Object first = getFromExternalMetadataOrAlternative("Program/Asset/Title", null);
+        if (first == null) {
+            return (String) getFromExternalMetadataOrAlternative("Program/Title", super.getFileName());
+        }
+        return (String) first;
     }
 
     public String getDescription() {
         return (String) getFromExternalMetadataOrAlternative("Program/Asset/Description", null);
+    }
+
+    @Override
+    public String getFileName() {
+        return getTitle();
     }
 
     @Override
