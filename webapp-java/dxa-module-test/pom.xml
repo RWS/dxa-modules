@@ -16,8 +16,9 @@
     <url>https://github.com/sdl/dxa-modules</url>
 
     <scm>
-        <url>https://github.com/sdl/dxa-modules</url>
-        <connection>scm:git:https://github.com/sdl/dxa-modules.git</connection>
+        <url>git@github.com:sdl/dxa-modules</url>
+        <connection>scm:git:git@github.com:sdl/dxa-modules.git</connection>
+        <developerConnection>scm:git:git@github.com:sdl/dxa-modules.git</developerConnection>
     </scm>
 
     <licenses>
