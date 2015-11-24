@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.sdl.dxa.modules</groupId>
         <artifactId>dxa-modules</artifactId>
-        <version>1.2</version>
+        <version>1.3-SNAPSHOT</version>
     </parent>
 
     <artifactId>dxa-module-cid</artifactId>
@@ -17,7 +17,7 @@
         <url>git@github.com:sdl/dxa-modules</url>
         <connection>scm:git:git@github.com:sdl/dxa-modules.git</connection>
         <developerConnection>scm:git:git@github.com:sdl/dxa-modules.git</developerConnection>
-      <tag>DXA_1.2_Release</tag>
+      <tag>HEAD</tag>
   </scm>
 
     <licenses>
