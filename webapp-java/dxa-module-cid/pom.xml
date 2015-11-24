@@ -12,7 +12,7 @@
     <artifactId>dxa-module-cid</artifactId>
 
     <name>${project.groupId}:${project.artifactId}</name>
-    <description>DXA CID module</description>
+    <description>[DRAFT] DXA CID module</description>
     <url>https://github.com/sdl/dxa-web-application-java</url>
 
     <scm>

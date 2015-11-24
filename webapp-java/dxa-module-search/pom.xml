@@ -13,7 +13,7 @@
     <artifactId>dxa-module-search</artifactId>
 
     <name>${project.groupId}:${project.artifactId}</name>
-    <description>DXA Search module</description>
+    <description>[DRAFT] XA Search module</description>
     <url>https://github.com/sdl/dxa-web-application-java</url>
 
     <scm>
