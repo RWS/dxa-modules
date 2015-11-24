@@ -13,11 +13,12 @@
 
     <name>${project.groupId}:${project.artifactId}</name>
     <description>[DRAFT] DXA Google Analytics module</description>
-    <url>https://github.com/sdl/dxa-web-application-java</url>
+    <url>https://github.com/sdl/dxa-modules</url>
 
     <scm>
-        <url>https://github.com/sdl/dxa-web-application-java</url>
-        <connection>scm:git:https://github.com/sdl/dxa-web-application-java.git</connection>
+        <url>git@github.com:sdl/dxa-modules</url>
+        <connection>scm:git:git@github.com:sdl/dxa-modules.git</connection>
+        <developerConnection>scm:git:git@github.com:sdl/dxa-modules.git</developerConnection>
     </scm>
 
     <licenses>
