@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import static com.tridion.util.URIUtils.urlEncode;
+
 /**
  * Base class for Search Query/Results.
  */
@@ -54,12 +56,20 @@ public class SearchQuery extends AbstractEntityModel {
         return resultsText;
     }
 
+    public String formatResultsText() {
+        return String.format(resultsText, urlEncode(queryText), total);
+    }
+
     public void setResultsText(String resultsText) {
         this.resultsText = resultsText;
     }
 
     public String getNoResultsText() {
         return noResultsText;
+    }
+
+    public String formatNoResultsText() {
+        return String.format(noResultsText, urlEncode(queryText));
     }
 
     public void setNoResultsText(String noResultsText) {
@@ -136,6 +146,10 @@ public class SearchQuery extends AbstractEntityModel {
 
     public void setResults(List<SearchItem> results) {
         this.results = results;
+    }
+
+    public String pagerLink(int position) {
+        return String.format("?start=%d&q=%s", position, urlEncode(queryText));
     }
 
     @Override
