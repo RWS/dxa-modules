@@ -1,12 +1,18 @@
 package com.sdl.dxa.modules.search;
 
-public class DxaSearchException extends Exception {
+import com.sdl.webapp.common.exceptions.DxaException;
+
+public class DxaSearchException extends DxaException {
+
+    public DxaSearchException(String message, Exception innerException) {
+        super(message, innerException);
+    }
 
     public DxaSearchException(String message) {
         super(message);
     }
 
-    public DxaSearchException(String message, Throwable cause) {
-        super(message, cause);
+    public DxaSearchException(Throwable cause) {
+        super(cause);
     }
 }

@@ -1,8 +1,12 @@
 package com.sdl.dxa.modules.search.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.sdl.dxa.modules.search.serializer.FlatRichTextSerializer;
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticEntity;
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticProperty;
 import com.sdl.webapp.common.api.mapping.semantic.config.SemanticVocabulary;
+import com.sdl.webapp.common.api.model.RichText;
 import com.sdl.webapp.common.api.model.entity.AbstractEntityModel;
 
 import java.util.ArrayList;
@@ -10,7 +14,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import static com.sdl.webapp.common.util.StringUtils.convertFormatStringFromCM;
 import static com.tridion.util.URIUtils.urlEncode;
+import static org.springframework.util.StringUtils.isEmpty;
 
 /**
  * Base class for Search Query/Results.
@@ -21,9 +27,13 @@ public class SearchQuery extends AbstractEntityModel {
     @SemanticProperty("s:headline")
     private String headline;
 
-    private String resultsText;
+    @JsonProperty("ResultsText")
+    @JsonSerialize(using = FlatRichTextSerializer.class)
+    private RichText resultsText;
 
-    private String noResultsText;
+    @JsonProperty("NoResultsText")
+    @JsonSerialize(using = FlatRichTextSerializer.class)
+    private RichText noResultsText;
 
     private String searchItemView = "Search:SearchItem";
 
@@ -33,7 +43,7 @@ public class SearchQuery extends AbstractEntityModel {
     // todo refactor to separate data structure
     private String queryText;
     private int start;
-    private Map<String, String> queryStringParameters;
+    private Map<String, String[]> queryStringParameters;
 
     // Below properties reflect the search results (set by the Search Provider)
     // todo refactor to separate data structure
@@ -52,29 +62,30 @@ public class SearchQuery extends AbstractEntityModel {
         this.headline = headline;
     }
 
-    public String getResultsText() {
+    public RichText getResultsText() {
         return resultsText;
     }
 
-    public String formatResultsText() {
-        return String.format(resultsText, urlEncode(queryText), total);
-    }
-
-    public void setResultsText(String resultsText) {
+    public void setResultsText(RichText resultsText) {
         this.resultsText = resultsText;
     }
 
-    public String getNoResultsText() {
+    public RichText getNoResultsText() {
         return noResultsText;
     }
 
-    public String formatNoResultsText() {
-        return String.format(noResultsText, urlEncode(queryText));
-    }
-
-    public void setNoResultsText(String noResultsText) {
+    public void setNoResultsText(RichText noResultsText) {
         this.noResultsText = noResultsText;
     }
+
+    public String formatResultsText() {
+        return String.format(convertFormatStringFromCM(resultsText.toString()), isEmpty(queryText) ? "" : urlEncode(queryText), total);
+    }
+
+    public String formatNoResultsText() {
+        return String.format(convertFormatStringFromCM(noResultsText.toString()), isEmpty(queryText) ? "" : urlEncode(queryText));
+    }
+
 
     public String getSearchItemView() {
         return searchItemView;
@@ -108,11 +119,11 @@ public class SearchQuery extends AbstractEntityModel {
         this.start = start;
     }
 
-    public Map<String, String> getQueryStringParameters() {
+    public Map<String, String[]> getQueryStringParameters() {
         return queryStringParameters;
     }
 
-    public void setQueryStringParameters(Map<String, String> queryStringParameters) {
+    public void setQueryStringParameters(Map<String, String[]> queryStringParameters) {
         this.queryStringParameters = queryStringParameters;
     }
 
