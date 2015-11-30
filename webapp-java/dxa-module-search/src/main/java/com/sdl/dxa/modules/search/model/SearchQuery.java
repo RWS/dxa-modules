@@ -15,14 +15,14 @@ import java.util.Map;
 import java.util.Objects;
 
 import static com.sdl.webapp.common.util.StringUtils.convertFormatStringFromCM;
-import static com.tridion.util.URIUtils.urlEncode;
+import static com.tridion.util.URIUtils.urlDecode;
 import static org.springframework.util.StringUtils.isEmpty;
 
 /**
  * Base class for Search Query/Results.
  */
 @SemanticEntity(entityName = "ItemList", prefix = "s", vocabulary = SemanticVocabulary.SDL_CORE, public_ = true)
-public class SearchQuery extends AbstractEntityModel {
+public class SearchQuery<T extends SearchItem> extends AbstractEntityModel {
 
     @SemanticProperty("s:headline")
     private String headline;
@@ -35,24 +35,12 @@ public class SearchQuery extends AbstractEntityModel {
     @JsonSerialize(using = FlatRichTextSerializer.class)
     private RichText noResultsText;
 
-    private String searchItemView = "Search:SearchItem";
+    private QueryDetails queryDetails;
 
-    private int pageSize = 10;
-
-    // Below properties are mapped (by the Search Controller) to query string parameters
-    // todo refactor to separate data structure
-    private String queryText;
-    private int start;
-    private Map<String, String[]> queryStringParameters;
-
-    // Below properties reflect the search results (set by the Search Provider)
-    // todo refactor to separate data structure
-    private int currentPage;
-    private int total;
-    private boolean hasMore;
+    private PagerDetails pagerDetails;
 
     @SemanticProperty("s:itemListElement")
-    private List<SearchItem> results = new ArrayList<>();
+    private List<T> results = new ArrayList<>();
 
     public String getHeadline() {
         return headline;
@@ -79,89 +67,46 @@ public class SearchQuery extends AbstractEntityModel {
     }
 
     public String formatResultsText() {
-        return String.format(convertFormatStringFromCM(resultsText.toString()), isEmpty(queryText) ? "" : urlEncode(queryText), total);
+        return String.format(convertFormatStringFromCM(resultsText.toString()),
+                queryDetails.getQueryText(), pagerDetails.getTotal());
     }
 
     public String formatNoResultsText() {
-        return String.format(convertFormatStringFromCM(noResultsText.toString()), isEmpty(queryText) ? "" : urlEncode(queryText));
+        return String.format(convertFormatStringFromCM(noResultsText.toString()), queryDetails.getQueryText());
     }
 
-
-    public String getSearchItemView() {
-        return searchItemView;
+    public QueryDetails getQueryDetails() {
+        return queryDetails;
     }
 
-    public void setSearchItemView(String searchItemView) {
-        this.searchItemView = searchItemView;
+    public void setQueryDetails(QueryDetails queryDetails) {
+        this.queryDetails = queryDetails;
     }
 
-    public int getPageSize() {
-        return pageSize;
+    public PagerDetails getPagerDetails() {
+        return pagerDetails;
     }
 
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
+    public void setPagerDetails(PagerDetails pagerDetails) {
+        this.pagerDetails = pagerDetails;
     }
 
-    public String getQueryText() {
-        return queryText;
-    }
-
-    public void setQueryText(String queryText) {
-        this.queryText = queryText;
-    }
-
-    public int getStart() {
-        return start;
-    }
-
-    public void setStart(int start) {
-        this.start = start;
-    }
-
-    public Map<String, String[]> getQueryStringParameters() {
-        return queryStringParameters;
-    }
-
-    public void setQueryStringParameters(Map<String, String[]> queryStringParameters) {
-        this.queryStringParameters = queryStringParameters;
-    }
-
-    public int getCurrentPage() {
-        return currentPage;
-    }
-
-    public void setCurrentPage(int currentPage) {
-        this.currentPage = currentPage;
-    }
-
-    public int getTotal() {
-        return total;
-    }
-
-    public void setTotal(int total) {
-        this.total = total;
-    }
-
-    public boolean isHasMore() {
-        return hasMore;
-    }
-
-    public void setHasMore(boolean hasMore) {
-        this.hasMore = hasMore;
-    }
-
-    public List<SearchItem> getResults() {
+    public List<T> getResults() {
         return results;
     }
 
-    public void setResults(List<SearchItem> results) {
+    public void setResults(List<T> results) {
         this.results = results;
     }
 
     public String pagerLink(int position) {
-        return String.format("?start=%d&q=%s", position, urlEncode(queryText));
+        return String.format("?start=%d&q=%s", position, queryDetails.getQueryText());
     }
+
+//    @Override
+//    public MvcData getMvcData() {
+//        return new MvcDataImpl("Search:SearchResults");
+//    }
 
     @Override
     public boolean equals(Object o) {
@@ -169,40 +114,123 @@ public class SearchQuery extends AbstractEntityModel {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         SearchQuery that = (SearchQuery) o;
-        return pageSize == that.pageSize &&
-                start == that.start &&
-                currentPage == that.currentPage &&
-                total == that.total &&
-                hasMore == that.hasMore &&
-                Objects.equals(headline, that.headline) &&
+        return Objects.equals(headline, that.headline) &&
                 Objects.equals(resultsText, that.resultsText) &&
                 Objects.equals(noResultsText, that.noResultsText) &&
-                Objects.equals(searchItemView, that.searchItemView) &&
-                Objects.equals(queryText, that.queryText) &&
-                Objects.equals(queryStringParameters, that.queryStringParameters) &&
+                Objects.equals(queryDetails, that.queryDetails) &&
+                Objects.equals(pagerDetails, that.pagerDetails) &&
                 Objects.equals(results, that.results);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), headline, resultsText, noResultsText, searchItemView, pageSize, queryText, start, queryStringParameters, currentPage, total, hasMore, results);
+        return Objects.hash(super.hashCode(), headline, resultsText, noResultsText, queryDetails, pagerDetails, results);
     }
 
-    @Override
-    public String toString() {
-        return "SearchQuery{" +
-                "headline='" + headline + '\'' +
-                ", resultsText='" + resultsText + '\'' +
-                ", noResultsText='" + noResultsText + '\'' +
-                ", searchItemView='" + searchItemView + '\'' +
-                ", pageSize=" + pageSize +
-                ", queryText='" + queryText + '\'' +
-                ", start=" + start +
-                ", queryStringParameters=" + queryStringParameters +
-                ", currentPage=" + currentPage +
-                ", total=" + total +
-                ", hasMore=" + hasMore +
-                ", results=" + results +
-                '}';
+    /**
+     * Query details mapped by the Search Controller to query string parameters.
+     */
+    public static class QueryDetails {
+        private String queryText;
+        private Map<String, String[]> queryStringParameters;
+
+        public QueryDetails(String queryText, Map<String, String[]> queryStringParameters) {
+            this.queryText = queryText;
+            this.queryStringParameters = queryStringParameters;
+        }
+
+        public String getQueryText() {
+            return isEmpty(queryText) ? "" : urlDecode(queryText);
+        }
+
+        public void setQueryText(String queryText) {
+            this.queryText = queryText;
+        }
+
+        public Map<String, String[]> getQueryStringParameters() {
+            return queryStringParameters;
+        }
+
+        public void setQueryStringParameters(Map<String, String[]> queryStringParameters) {
+            this.queryStringParameters = queryStringParameters;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            QueryDetails that = (QueryDetails) o;
+            return Objects.equals(queryText, that.queryText) &&
+                    Objects.equals(queryStringParameters, that.queryStringParameters);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(queryText, queryStringParameters);
+        }
+    }
+
+    /**
+     * Reflects the current position of pager (set by the Search Provider).
+     */
+    public static class PagerDetails {
+        private int start;
+        private long total;
+        private int pageSize = 7;
+
+        public PagerDetails(int start) {
+            this.start = start;
+        }
+
+        public PagerDetails(int start, long total) {
+            this.start = start;
+            this.total = total;
+        }
+
+        public int getStart() {
+            return start;
+        }
+
+        public void setStart(int start) {
+            this.start = start;
+        }
+
+        public int getCurrentPage() {
+            return 1 + (getStart() - 1) / getPageSize();
+        }
+
+        public long getTotal() {
+            return total;
+        }
+
+        public void setTotal(long total) {
+            this.total = total;
+        }
+
+        public int getPageSize() {
+            return pageSize;
+        }
+
+        public void setPageSize(int pageSize) {
+            this.pageSize = pageSize;
+        }
+
+        public boolean hasMoreResults() {
+            return (getStart() + getPageSize()) <= getTotal();
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            PagerDetails that = (PagerDetails) o;
+            return start == that.start &&
+                    total == that.total;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(start, total);
+        }
     }
 }

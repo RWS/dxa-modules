@@ -11,7 +11,7 @@ public class SearchBox extends AbstractEntityModel {
     private String resultsLink;
 
     @JsonProperty("SearchBoxPlaceholderText")
-    private String placeholderText;
+    private String searchBoxPlaceholderText;
 
     public String getResultsLink() {
         return resultsLink;
@@ -21,12 +21,12 @@ public class SearchBox extends AbstractEntityModel {
         this.resultsLink = resultsLink;
     }
 
-    public String getPlaceholderText() {
-        return placeholderText;
+    public String getSearchBoxPlaceholderText() {
+        return searchBoxPlaceholderText;
     }
 
-    public void setPlaceholderText(String placeholderText) {
-        this.placeholderText = placeholderText;
+    public void setSearchBoxPlaceholderText(String searchBoxPlaceholderText) {
+        this.searchBoxPlaceholderText = searchBoxPlaceholderText;
     }
 
     @Override
@@ -36,19 +36,19 @@ public class SearchBox extends AbstractEntityModel {
         if (!super.equals(o)) return false;
         SearchBox searchBox = (SearchBox) o;
         return Objects.equals(resultsLink, searchBox.resultsLink) &&
-                Objects.equals(placeholderText, searchBox.placeholderText);
+                Objects.equals(searchBoxPlaceholderText, searchBox.searchBoxPlaceholderText);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), resultsLink, placeholderText);
+        return Objects.hash(super.hashCode(), resultsLink, searchBoxPlaceholderText);
     }
 
     @Override
     public String toString() {
         return "SearchBox{" +
                 "resultsLink='" + resultsLink + '\'' +
-                ", placeholderText='" + placeholderText + '\'' +
+                ", searchBoxPlaceholderText='" + searchBoxPlaceholderText + '\'' +
                 '}';
     }
 }

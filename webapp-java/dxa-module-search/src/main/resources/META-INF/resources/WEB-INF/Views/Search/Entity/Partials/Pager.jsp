@@ -3,27 +3,27 @@
 <jsp:useBean id="entity" type="com.sdl.dxa.modules.search.model.SearchQuery" scope="request"/>
 <jsp:useBean id="markup" type="com.sdl.webapp.common.markup.Markup" scope="request"/>
 
-<c:if test="${entity.total > entity.pageSize}">
+<c:if test="${entity.pagerDetails.total > entity.pagerDetails.pageSize}">
     <ul class="pagination">
-        <c:if test="${entity.start > 1}">
+        <c:if test="${entity.pagerDetails.start > 1}">
             <li>
-                <a href="${entity.pagerLink(entity.start - entity.pageSize)}"><i class="fa fa-angle-left"></i></a>
+                <a href="${entity.pagerLink(entity.pagerDetails.start - entity.pagerDetails.pageSize)}"><i class="fa fa-angle-left"></i></a>
             </li>
             <li>
-                <a href="${entity.pagerLink(entity.start - entity.pageSize)}">${entity.currentPage - 1}</a>
+                <a href="${entity.pagerLink(entity.pagerDetails.start - entity.pagerDetails.pageSize)}">${entity.pagerDetails.currentPage - 1}</a>
             </li>
         </c:if>
 
         <li class="active">
-            <a href="${entity.pagerLink(entity.start)}">${entity.currentPage}</a>
+            <a href="${entity.pagerLink(entity.pagerDetails.start)}">${entity.pagerDetails.currentPage}</a>
         </li>
 
-        <c:if test="${entity.hasMore}">
+        <c:if test="${entity.pagerDetails.hasMoreResults()}">
             <li>
-                <a href="${entity.pagerLink(entity.start + entity.pageSize)}">${entity.currentPage + 1}</a>
+                <a href="${entity.pagerLink(entity.pagerDetails.start + entity.pagerDetails.pageSize)}">${entity.pagerDetails.currentPage + 1}</a>
             </li>
             <li>
-                <a href="${entity.pagerLink(entity.start + entity.pageSize)}"><i class="fa fa-angle-right"></i></a>
+                <a href="${entity.pagerLink(entity.pagerDetails.start + entity.pagerDetails.pageSize)}"><i class="fa fa-angle-right"></i></a>
             </li>
         </c:if>
     </ul>

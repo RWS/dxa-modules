@@ -70,7 +70,7 @@ public class MediaManagerDistribution extends EclItem {
 
     @Override
     public MvcData getMvcData() {
-        return new MvcDataImpl("MediaManager:" + getDisplayTypeId()).defaults(MvcDataImpl.Defaults.ENTITY);
+        return new MvcDataImpl("MediaManager:" + getDisplayTypeId()).defaults(MvcDataImpl.Defaults.CORE_ENTITY);
     }
 
     @Override

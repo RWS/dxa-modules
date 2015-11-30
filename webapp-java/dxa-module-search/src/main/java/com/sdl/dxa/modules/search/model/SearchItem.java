@@ -1,7 +1,10 @@
 package com.sdl.dxa.modules.search.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sdl.webapp.common.api.model.MvcData;
+import com.sdl.webapp.common.api.model.MvcDataImpl;
 import com.sdl.webapp.common.api.model.entity.AbstractEntityModel;
+import org.apache.solr.client.solrj.beans.Field;
 
 import java.util.Map;
 import java.util.Objects;
@@ -11,9 +14,11 @@ import java.util.Objects;
  */
 public class SearchItem extends AbstractEntityModel {
 
+    @Field
     @JsonProperty("Title")
     private String title;
 
+    @Field
     @JsonProperty("Url")
     private String url;
 
@@ -22,6 +27,12 @@ public class SearchItem extends AbstractEntityModel {
 
     @JsonProperty("CustomFields")
     private Map<String, Object> customFields;
+
+    @Field
+    @Override
+    public void setId(String id) {
+        super.setId(id);
+    }
 
     public String getTitle() {
         return title;
@@ -53,6 +64,11 @@ public class SearchItem extends AbstractEntityModel {
 
     public void setCustomFields(Map<String, Object> customFields) {
         this.customFields = customFields;
+    }
+
+    @Override
+    public MvcData getMvcData() {
+        return new MvcDataImpl("Search:SearchItem").defaults(MvcDataImpl.Defaults.CORE_ENTITY);
     }
 
     @Override
