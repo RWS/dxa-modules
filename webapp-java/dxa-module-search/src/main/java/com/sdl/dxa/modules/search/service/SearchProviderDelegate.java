@@ -3,15 +3,17 @@ package com.sdl.dxa.modules.search.service;
 import com.sdl.dxa.modules.search.model.SearchItem;
 import com.sdl.dxa.modules.search.model.SearchQuery;
 import com.sdl.webapp.common.api.localization.Localization;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-public class AwsCloudSearchProvider implements SearchProvider {
+public class SearchProviderDelegate implements SearchProvider {
 
-    private static final Logger LOG = LoggerFactory.getLogger(SolrSearchProvider.class);
+    private SearchProvider searchProvider;
 
     @Override
     public <T extends SearchItem> void executeQuery(SearchQuery<T> searchQuery, Class<T> resultClazz, Localization localization) {
-        LOG.debug("We are in AwsCloudSearchProvider");
+        searchProvider.executeQuery(searchQuery, resultClazz, localization);
+    }
+
+    public void setSearchProvider(SearchProvider searchProvider) {
+        this.searchProvider = searchProvider;
     }
 }
