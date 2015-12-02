@@ -25,6 +25,11 @@ import static java.lang.String.format;
 @SemanticEntity(entityName = "ExternalContentLibraryStubSchemamm", vocabulary = SDL_CORE, prefix = "s")
 public class MediaManagerDistribution extends EclItem {
 
+    @Override
+    public void setUrl(String url) {
+        super.setUrl(url != null ? url.replaceAll("/\\?", "?") : null);
+    }
+
     public String getGlobalId() {
         final Map<String, Object> externalMetadata = getExternalMetadata();
         if (!CollectionUtils.isEmpty(externalMetadata) && externalMetadata.containsKey("GlobalId")) {
@@ -43,7 +48,7 @@ public class MediaManagerDistribution extends EclItem {
     }
 
     public String getEmbedScriptUrl() {
-        return UriComponentsBuilder.fromHttpUrl(getUrl()).path("/embed").build().encode().toString();
+        return UriComponentsBuilder.fromHttpUrl(getUrl()).pathSegment("embed").build().encode().toString();
     }
 
     @Override
