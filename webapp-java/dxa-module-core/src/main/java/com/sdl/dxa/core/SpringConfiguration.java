@@ -17,7 +17,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -49,14 +48,6 @@ public class SpringConfiguration extends WebMvcConfigurerAdapter {
         registry.addInterceptor(localizationResolverInterceptor());
         registry.addInterceptor(staticContentInterceptor());
         registry.addInterceptor(threadLocalInterceptor());
-    }
-
-    @Override
-    public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
-        // This is necessary to prevent "406 Not Acceptable" responses for certain types of files such as JavaScript,
-        // CSS and images.
-        // See http://docs.spring.io/spring-framework/docs/3.2.x/spring-framework-reference/html/mvc.html#mvc-config-content-negotiation
-        configurer.favorPathExtension(false).favorParameter(true);
     }
 
     @Bean
