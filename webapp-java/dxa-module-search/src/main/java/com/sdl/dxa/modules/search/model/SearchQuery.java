@@ -16,7 +16,7 @@ import java.util.Objects;
 
 import static com.sdl.webapp.common.util.StringUtils.convertFormatStringFromCM;
 import static com.tridion.util.URIUtils.urlDecode;
-import static org.springframework.util.StringUtils.isEmpty;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 /**
  * Base class for Search Query/Results.
