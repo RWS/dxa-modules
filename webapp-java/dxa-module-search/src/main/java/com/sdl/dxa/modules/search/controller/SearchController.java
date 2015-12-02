@@ -3,7 +3,7 @@ package com.sdl.dxa.modules.search.controller;
 import com.sdl.dxa.modules.search.DxaSearchException;
 import com.sdl.dxa.modules.search.model.SearchItem;
 import com.sdl.dxa.modules.search.model.SearchQuery;
-import com.sdl.dxa.modules.search.service.SearchProvider;
+import com.sdl.dxa.modules.search.provider.SearchProvider;
 import com.sdl.webapp.common.api.model.ViewModel;
 import com.sdl.webapp.common.controller.ControllerUtils;
 import com.sdl.webapp.common.controller.CoreAreaConstants;

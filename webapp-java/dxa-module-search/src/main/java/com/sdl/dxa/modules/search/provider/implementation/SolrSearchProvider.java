@@ -1,4 +1,4 @@
-package com.sdl.dxa.modules.search.service;
+package com.sdl.dxa.modules.search.provider.implementation;
 
 import com.sdl.dxa.modules.search.model.SearchItem;
 import com.sdl.dxa.modules.search.model.SearchQuery;
@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-public class SolrSearchProvider implements SearchProvider {
+public class SolrSearchProvider extends AbstractSearchProvider {
 
     private static final Logger LOG = LoggerFactory.getLogger(SolrSearchProvider.class);
 
@@ -70,7 +70,6 @@ public class SolrSearchProvider implements SearchProvider {
     }
 
     private SolrClient getClient(Localization localization) {
-        return new HttpSolrClient(
-                localization.getConfiguration("search." + (localization.isStaging() ? "staging" : "live") + "IndexConfig"));
+        return new HttpSolrClient(getServiceUrl(localization));
     }
 }

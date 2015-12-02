@@ -1,4 +1,4 @@
-package com.sdl.dxa.modules.search.service;
+package com.sdl.dxa.modules.search.provider;
 
 import com.sdl.dxa.modules.search.model.SearchItem;
 import com.sdl.dxa.modules.search.model.SearchQuery;

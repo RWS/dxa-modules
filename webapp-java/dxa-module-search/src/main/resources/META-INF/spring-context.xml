@@ -10,10 +10,14 @@
     <context:annotation-config/>
     <context:component-scan base-package="com.sdl.dxa.modules.search"/>
 
-    <bean id="solrProvider" class="com.sdl.dxa.modules.search.service.SolrSearchProvider"/>
-    <bean id="awsProvider" class="com.sdl.dxa.modules.search.service.AwsCloudSearchProvider"/>
-    <bean id="searchProvider" primary="true" class="com.sdl.dxa.modules.search.service.SearchProviderDelegate">
-        <property name="searchProvider" ref="solrProvider"/>
+    <bean id="solrProvider" class="com.sdl.dxa.modules.search.provider.implementation.SolrSearchProvider"/>
+    <bean id="awsProvider" class="com.sdl.dxa.modules.search.provider.implementation.AwsCloudSearchProvider"/>
+    <bean id="searchProvider" primary="true" class="com.sdl.dxa.modules.search.provider.SearchProviderDelegate">
+        <property name="searchProvider" ref="awsProvider"/>
+    </bean>
+    <bean id="awsCredentials" class="com.amazonaws.auth.BasicAWSCredentials">
+        <constructor-arg index="0" value="#{systemEnvironment['AWS_ACCESS_KEY_ID']}"/>
+        <constructor-arg index="1" value="#{systemEnvironment['AWS_SECRET_ACCESS_KEY']}"/>
     </bean>
 
 </beans>
