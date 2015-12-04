@@ -4,7 +4,6 @@
 <jsp:useBean id="entity" type="com.sdl.dxa.modules.search.model.SearchQuery" scope="request"/>
 <jsp:useBean id="markup" type="com.sdl.webapp.common.markup.Markup" scope="request"/>
 
-@model SearchQuery
 <div class="rich-text ${entity.htmlClasses}" ${markup.entity(entity)}>
     <c:if test="${not empty entity.headline}">
         <div class="page-header page-header-top">
