@@ -40,9 +40,14 @@ public class SearchController extends EntityController {
         }
 
         SearchQuery searchQuery = (SearchQuery) model;
-        searchQuery.setQueryDetails(new SearchQuery.QueryDetails(request.getParameter("q"), request.getParameterMap()));
+        String queryText = request.getParameter("q");
+        searchQuery.setQueryDetails(new SearchQuery.QueryDetails(queryText, request.getParameterMap()));
         String start = request.getParameter("start");
         searchQuery.setStart(isEmpty(start) ? 1 : Integer.parseInt(start));
+
+        if (isEmpty(queryText)) {
+            return searchQuery;
+        }
 
         searchProvider.executeQuery(searchQuery, SearchItem.class, getContext().getLocalization());
 
