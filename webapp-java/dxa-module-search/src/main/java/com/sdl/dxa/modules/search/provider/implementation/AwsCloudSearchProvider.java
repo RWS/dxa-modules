@@ -41,7 +41,7 @@ public class AwsCloudSearchProvider extends AbstractSearchProvider {
 
     @Override
     public <T extends SearchItem> void executeQuery(SearchQuery<T> searchQuery, Class<T> resultClazz, Localization localization) {
-        SearchRequest request = buildRequest(searchQuery);
+        SearchRequest request = buildRequest(searchQuery, localization);
         processResults(searchQuery, getClient(localization).search(request));
     }
 
@@ -58,11 +58,12 @@ public class AwsCloudSearchProvider extends AbstractSearchProvider {
         searchQuery.setTotal(result.getHits().getFound());
     }
 
-    private <T extends SearchItem> SearchRequest buildRequest(SearchQuery<T> searchQuery) {
+    private <T extends SearchItem> SearchRequest buildRequest(SearchQuery<T> searchQuery, Localization localization) {
         SearchRequest request = new SearchRequest();
         request.setQuery(searchQuery.getQueryDetails().getQueryText());
         request.setStart((long) (searchQuery.getStart() - 1));
         request.setSize((long) searchQuery.getPageSize());
+        request.setFilterQuery("publicationid:'" + localization.getId() + "'");
         request.putCustomQueryParameter("q.options", QUERY_OPTIONS);
         request.putCustomQueryParameter("highlight.body", HIGHLIGHT_SETTINGS);
         request.putCustomQueryParameter("highlight.summary", HIGHLIGHT_SETTINGS);
