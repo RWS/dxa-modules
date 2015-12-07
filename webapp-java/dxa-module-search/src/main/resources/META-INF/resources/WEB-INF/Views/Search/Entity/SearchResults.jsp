@@ -12,7 +12,7 @@
     </c:if>
 
     <c:choose>
-        <c:when test="${entity.pagerDetails.total > 0}">
+        <c:when test="${entity.total > 0}">
             <c:if test="${not empty entity.resultsText}">
                 <div ${markup.property(entity, "resultsText")}>
                     ${entity.formatResultsText()}

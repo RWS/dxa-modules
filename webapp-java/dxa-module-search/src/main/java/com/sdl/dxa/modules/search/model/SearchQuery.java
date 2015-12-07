@@ -37,10 +37,41 @@ public class SearchQuery<T extends SearchItem> extends AbstractEntityModel {
 
     private QueryDetails queryDetails;
 
-    private PagerDetails pagerDetails;
+    /*
+     * Reflects the current position of pager (set by the Search Provider).
+     */
+    @SemanticProperty("s:pageSize")
+    @JsonProperty("PageSize")
+    private int pageSize;
+    private int start;
+    private long total;
 
     @SemanticProperty("s:itemListElement")
     private List<T> results = new ArrayList<>();
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public int getStart() {
+        return start;
+    }
+
+    public void setStart(int start) {
+        this.start = start;
+    }
+
+    public long getTotal() {
+        return total;
+    }
+
+    public void setTotal(long total) {
+        this.total = total;
+    }
 
     public String getHeadline() {
         return headline;
@@ -68,7 +99,7 @@ public class SearchQuery<T extends SearchItem> extends AbstractEntityModel {
 
     public String formatResultsText() {
         return String.format(convertFormatStringFromCM(resultsText.toString()),
-                queryDetails.getQueryText(), pagerDetails.getTotal());
+                queryDetails.getQueryText(), getTotal());
     }
 
     public String formatNoResultsText() {
@@ -83,14 +114,6 @@ public class SearchQuery<T extends SearchItem> extends AbstractEntityModel {
         this.queryDetails = queryDetails;
     }
 
-    public PagerDetails getPagerDetails() {
-        return pagerDetails;
-    }
-
-    public void setPagerDetails(PagerDetails pagerDetails) {
-        this.pagerDetails = pagerDetails;
-    }
-
     public List<T> getResults() {
         return results;
     }
@@ -103,10 +126,13 @@ public class SearchQuery<T extends SearchItem> extends AbstractEntityModel {
         return String.format("?start=%d&q=%s", position, queryDetails.getQueryText());
     }
 
-//    @Override
-//    public MvcData getMvcData() {
-//        return new MvcDataImpl("Search:SearchResults");
-//    }
+    public int getCurrentPage() {
+        return 1 + (getStart() - 1) / getPageSize();
+    }
+
+    public boolean hasMoreResults() {
+        return (getStart() + getPageSize()) <= getTotal();
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -118,13 +144,12 @@ public class SearchQuery<T extends SearchItem> extends AbstractEntityModel {
                 Objects.equals(resultsText, that.resultsText) &&
                 Objects.equals(noResultsText, that.noResultsText) &&
                 Objects.equals(queryDetails, that.queryDetails) &&
-                Objects.equals(pagerDetails, that.pagerDetails) &&
                 Objects.equals(results, that.results);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), headline, resultsText, noResultsText, queryDetails, pagerDetails, results);
+        return Objects.hash(super.hashCode(), headline, resultsText, noResultsText, queryDetails, results);
     }
 
     /**
@@ -167,70 +192,6 @@ public class SearchQuery<T extends SearchItem> extends AbstractEntityModel {
         @Override
         public int hashCode() {
             return Objects.hash(queryText, queryStringParameters);
-        }
-    }
-
-    /**
-     * Reflects the current position of pager (set by the Search Provider).
-     */
-    public static class PagerDetails {
-        private int start;
-        private long total;
-        private int pageSize = 7;
-
-        public PagerDetails(int start) {
-            this.start = start;
-        }
-
-        public PagerDetails(int start, long total) {
-            this.start = start;
-            this.total = total;
-        }
-
-        public int getStart() {
-            return start;
-        }
-
-        public void setStart(int start) {
-            this.start = start;
-        }
-
-        public int getCurrentPage() {
-            return 1 + (getStart() - 1) / getPageSize();
-        }
-
-        public long getTotal() {
-            return total;
-        }
-
-        public void setTotal(long total) {
-            this.total = total;
-        }
-
-        public int getPageSize() {
-            return pageSize;
-        }
-
-        public void setPageSize(int pageSize) {
-            this.pageSize = pageSize;
-        }
-
-        public boolean hasMoreResults() {
-            return (getStart() + getPageSize()) <= getTotal();
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            PagerDetails that = (PagerDetails) o;
-            return start == that.start &&
-                    total == that.total;
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(start, total);
         }
     }
 }

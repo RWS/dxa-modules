@@ -55,15 +55,14 @@ public class AwsCloudSearchProvider extends AbstractSearchProvider {
         //noinspection unchecked
         searchQuery.setResults((List<T>) items);
 
-        SearchQuery.PagerDetails pagerDetails = searchQuery.getPagerDetails();
-        pagerDetails.setTotal(result.getHits().getFound());
+        searchQuery.setTotal(result.getHits().getFound());
     }
 
     private <T extends SearchItem> SearchRequest buildRequest(SearchQuery<T> searchQuery) {
         SearchRequest request = new SearchRequest();
         request.setQuery(searchQuery.getQueryDetails().getQueryText());
-        request.setStart((long) (searchQuery.getPagerDetails().getStart() - 1));
-        request.setSize((long) searchQuery.getPagerDetails().getPageSize());
+        request.setStart((long) (searchQuery.getStart() - 1));
+        request.setSize((long) searchQuery.getPageSize());
         request.putCustomQueryParameter("q.options", QUERY_OPTIONS);
         request.putCustomQueryParameter("highlight.body", HIGHLIGHT_SETTINGS);
         request.putCustomQueryParameter("highlight.summary", HIGHLIGHT_SETTINGS);

@@ -43,8 +43,7 @@ public class SolrSearchProvider extends AbstractSearchProvider {
             item.setSummary(summary != null ? summary : ("..." + getHightlights(highlights, "body") + "..."));
         }
 
-        SearchQuery.PagerDetails pagerDetails = searchQuery.getPagerDetails();
-        pagerDetails.setTotal(response.getResults().getNumFound());
+        searchQuery.setTotal(response.getResults().getNumFound());
     }
 
     private String getHightlights(Map<String, List<String>> map, String key) {
@@ -59,8 +58,8 @@ public class SolrSearchProvider extends AbstractSearchProvider {
         return new SolrQuery()
                     .setQuery(searchQuery.getQueryDetails().getQueryText())
                     .addFilterQuery("publicationid:" + localization.getId())
-                    .setStart(searchQuery.getPagerDetails().getStart() - 1)
-                    .setRows(searchQuery.getPagerDetails().getPageSize())
+                    .setStart(searchQuery.getStart() - 1)
+                    .setRows(searchQuery.getPageSize())
 
                     .setHighlight(true)
                     .setParam("hl.fl", "summary, body")
