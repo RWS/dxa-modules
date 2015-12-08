@@ -165,7 +165,7 @@ public class SearchQuery extends AbstractEntityModel {
         }
 
         public String getQueryText() {
-            return isEmpty(queryText) ? "an empty query" : urlDecode(queryText);
+            return isEmpty(queryText) ? "" : urlDecode(queryText);
         }
 
         public void setQueryText(String queryText) {
