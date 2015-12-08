@@ -82,5 +82,9 @@
             <groupId>jstl</groupId>
             <artifactId>jstl</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.sdl.dxa</groupId>
+            <artifactId>dxa-common-api</artifactId>
+        </dependency>
     </dependencies>
 </project>
