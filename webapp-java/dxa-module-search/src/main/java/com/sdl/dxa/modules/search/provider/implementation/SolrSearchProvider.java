@@ -20,7 +20,7 @@ public class SolrSearchProvider extends AbstractSearchProvider {
     private static final Logger LOG = LoggerFactory.getLogger(SolrSearchProvider.class);
 
     @Override
-    public <T extends SearchItem> void executeQuery(SearchQuery<T> searchQuery, Class<T> resultClazz, Localization localization) {
+    public void executeQuery(SearchQuery searchQuery, Localization localization) {
         SolrQuery query = buildQuery(searchQuery, localization);
 
         QueryResponse response;
@@ -31,13 +31,13 @@ public class SolrSearchProvider extends AbstractSearchProvider {
             return;
         }
 
-        processResults(searchQuery, resultClazz, response);
+        processResults(searchQuery, response);
     }
 
-    private <T extends SearchItem> void processResults(SearchQuery<T> searchQuery, Class<T> resultClazz, QueryResponse response) {
-        List<T> items = response.getBeans(resultClazz);
+    private void processResults(SearchQuery searchQuery, QueryResponse response) {
+        List<SearchItem> items = response.getBeans(SearchItem.class);
         searchQuery.setResults(items);
-        for (T item : items) {
+        for (SearchItem item : items) {
             Map<String, List<String>> highlights = response.getHighlighting().get(item.getId());
             String summary = getHightlights(highlights, "summary");
             item.setSummary(summary != null ? summary : ("..." + getHightlights(highlights, "body") + "..."));
@@ -54,7 +54,7 @@ public class SolrSearchProvider extends AbstractSearchProvider {
         return null;
     }
 
-    private <T extends SearchItem> SolrQuery buildQuery(SearchQuery<T> searchQuery, Localization localization) {
+    private <T extends SearchItem> SolrQuery buildQuery(SearchQuery searchQuery, Localization localization) {
         return new SolrQuery()
                     .setQuery(searchQuery.getQueryDetails().getQueryText())
                     .addFilterQuery("publicationid:" + localization.getId())

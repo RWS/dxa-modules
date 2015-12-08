@@ -22,7 +22,7 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
  * Base class for Search Query/Results.
  */
 @SemanticEntity(entityName = "ItemList", prefix = "s", vocabulary = SemanticVocabulary.SDL_CORE, public_ = true)
-public class SearchQuery<T extends SearchItem> extends AbstractEntityModel {
+public class SearchQuery extends AbstractEntityModel {
 
     @SemanticProperty("s:headline")
     private String headline;
@@ -47,7 +47,7 @@ public class SearchQuery<T extends SearchItem> extends AbstractEntityModel {
     private long total;
 
     @SemanticProperty("s:itemListElement")
-    private List<T> results = new ArrayList<>();
+    private List<SearchItem> results = new ArrayList<>();
 
     public int getPageSize() {
         return pageSize;
@@ -114,11 +114,11 @@ public class SearchQuery<T extends SearchItem> extends AbstractEntityModel {
         this.queryDetails = queryDetails;
     }
 
-    public List<T> getResults() {
+    public List<SearchItem> getResults() {
         return results;
     }
 
-    public void setResults(List<T> results) {
+    public void setResults(List<SearchItem> results) {
         this.results = results;
     }
 
