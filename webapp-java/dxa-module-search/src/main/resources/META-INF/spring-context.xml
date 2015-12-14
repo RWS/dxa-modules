@@ -13,7 +13,7 @@
     <bean id="solrProvider" class="com.sdl.dxa.modules.search.provider.implementation.SolrSearchProvider"/>
     <bean id="awsProvider" class="com.sdl.dxa.modules.search.provider.implementation.AwsCloudSearchProvider"/>
     <bean id="searchProvider" primary="true" class="com.sdl.dxa.modules.search.provider.SearchProviderDelegate">
-        <property name="searchProvider" ref="awsProvider"/>
+        <property name="searchProvider" ref="solrProvider"/>
     </bean>
     <bean id="awsCredentials" class="com.amazonaws.auth.BasicAWSCredentials">
         <constructor-arg index="0" value="#{systemEnvironment['AWS_ACCESS_KEY_ID']}"/>

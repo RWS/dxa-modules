@@ -46,24 +46,6 @@
     </developers>
 
     <dependencies>
-        <!-- Tridion Contextual Web Delivery (CWD) -->
-        <dependency>
-            <groupId>com.tridion</groupId>
-            <artifactId>cwd_cartridge</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.tridion</groupId>
-            <artifactId>cwd_engine</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.tridion</groupId>
-            <artifactId>cwd_resource</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.tridion</groupId>
-            <artifactId>cwd_image</artifactId>
-        </dependency>
-
         <!-- Spring Framework -->
         <dependency>
             <groupId>org.springframework</groupId>
