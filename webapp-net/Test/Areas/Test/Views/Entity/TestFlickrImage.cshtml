@@ -1,0 +1,23 @@
+﻿@model TestFlickrImageModel
+<div class="entity" @Html.DxaEntityMarkup()>
+    <h5>Rendered @Model with Entity View "Test:FlickrImage"</h5>
+    <table>
+        <tr >
+            <td>EclUri</td>
+            <td>@Model.EclUri</td>
+        </tr>
+        <tr>
+            <td>EclDisplayTypeId</td>
+            <td>@Model.EclDisplayTypeId</td>
+        </tr>
+        <tr>
+            <td>EclTemplateFragment</td>
+            <td>@Model.EclTemplateFragment</td>
+        </tr>
+        <tr>
+            <td>EclExternalMetadata</td>
+            <td>@Model.EclExternalMetadata</td>
+        </tr>
+    </table>
+    @Html.Media(Model)
+</div>
