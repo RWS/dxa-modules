@@ -1,4 +1,4 @@
-package com.sdl.webapp.addon.controller;
+package com.sdl.webapp.fredhopper.controller;
 
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.content.ContentProviderException;
