@@ -63,11 +63,6 @@
     </dependencyManagement>
 
     <dependencies>
-        <dependency>
-            <groupId>com.sdl.dxa</groupId>
-            <artifactId>dxa-common-api</artifactId>
-        </dependency>
-
         <!-- Necessary for Spring 3 to process @Configuration annotated classes -->
         <dependency>
             <groupId>cglib</groupId>
@@ -138,6 +133,7 @@
         <dependency>
             <groupId>org.apache.solr</groupId>
             <artifactId>solr-solrj</artifactId>
+            <version>5.3.1</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
