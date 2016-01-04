@@ -66,10 +66,9 @@ public class WebAppInitializer implements WebApplicationInitializer {
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
-        registerDispatcherServlet(servletContext);
+        setupSpringInfrastructure(servletContext);
         registerCharacterEncodingFilter(servletContext);
         registerHttpUploadServlet(servletContext);
-        registerContextLoaderListener(servletContext);
         registerAmbientDataServletFilter(servletContext);
         registerImageTransformerServlet(servletContext);
         registerPreviewSessionListener(servletContext);
@@ -85,16 +84,6 @@ public class WebAppInitializer implements WebApplicationInitializer {
         encodingFilter.setInitParameter("encoding", "UTF-8");
         encodingFilter.setInitParameter("forceEncoding", "true");
         encodingFilter.addMappingForUrlPatterns(null, false, "/*");
-    }
-
-
-    private void registerContextLoaderListener(ServletContext servletContext) {
-        LOG.debug("Initializing root application context");
-        XmlWebApplicationContext rootAppContext = new XmlWebApplicationContext();
-        rootAppContext.setConfigLocation(ROOT_APP_CONTEXT_CONFIG_LOCATION);
-
-        LOG.debug("Registering ContextLoaderListener");
-        servletContext.addListener(new ContextLoaderListener(rootAppContext));
     }
 
     private void registerAmbientDataServletFilter(ServletContext servletContext) {
@@ -148,12 +137,15 @@ public class WebAppInitializer implements WebApplicationInitializer {
         }
     }
 
-    private void registerDispatcherServlet(ServletContext servletContext) {
-        LOG.debug("Initializing servlet application context");
+    private void setupSpringInfrastructure(ServletContext servletContext) {
+        LOG.debug("Initializing Spring infrastructure...");
         AnnotationConfigWebApplicationContext servletAppContext = new AnnotationConfigWebApplicationContext();
         servletAppContext.register(SpringConfiguration.class);
 
-        LOG.debug("Registering DispatcherServlet");
+        LOG.debug("Registering Spring ContextLoaderListener");
+        servletContext.addListener(new ContextLoaderListener(servletAppContext));
+
+        LOG.debug("Registering Spring DispatcherServlet");
         ServletRegistration.Dynamic registration = servletContext.addServlet(DISPATCHER_SERVLET_NAME,
                 new DispatcherServlet(servletAppContext));
         registration.setLoadOnStartup(1);
