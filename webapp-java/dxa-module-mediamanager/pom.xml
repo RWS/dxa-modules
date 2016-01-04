@@ -56,6 +56,11 @@
             <groupId>com.sdl.dxa</groupId>
             <artifactId>dxa-common-api</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
