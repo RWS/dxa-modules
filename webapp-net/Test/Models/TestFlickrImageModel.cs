@@ -3,7 +3,7 @@ using System.Globalization;
 
 namespace Sdl.Web.Modules.Test.Models
 {
-    [SemanticEntity(Vocab = CoreVocabulary, EntityName = "TestFlickrImageModel", Prefix = "test", Public = true)]
+    [SemanticEntity(Vocab = CoreVocabulary, EntityName = "TestFlickrImage", Prefix = "test", Public = true)]
     public class TestFlickrImageModel : EclItem
     {
         [SemanticProperty("test:testProp1")]
