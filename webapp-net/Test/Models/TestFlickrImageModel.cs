@@ -1,5 +1,6 @@
 ﻿using Sdl.Web.Common.Models;
 using System.Globalization;
+using Sdl.Web.Common.Configuration;
 
 namespace Sdl.Web.Modules.Test.Models
 {
@@ -11,6 +12,11 @@ namespace Sdl.Web.Modules.Test.Models
         {
             get;
             set;
+        }
+
+        public override MvcData GetDefaultView(Localization localization)
+        {
+            return new MvcData("FlickrImage:" + EclDisplayTypeId);
         }
 
         public override string ToHtml(string widthFactor, double aspect = 0, string cssClass = null, int containerSize = 0)
