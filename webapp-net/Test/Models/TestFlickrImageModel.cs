@@ -16,7 +16,7 @@ namespace Sdl.Web.Modules.Test.Models
 
         public override MvcData GetDefaultView(Localization localization)
         {
-            return new MvcData("FlickrImage:" + EclDisplayTypeId);
+            return new MvcData("Test:TestFlickrImage");
         }
 
         public override string ToHtml(string widthFactor, double aspect = 0, string cssClass = null, int containerSize = 0)
