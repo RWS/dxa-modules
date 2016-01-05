@@ -43,7 +43,13 @@ namespace Sdl.Web.Modules.Search.Providers
 
         protected virtual string GetSearchIndexUrl(Localization localization)
         {
-            return localization.GetConfigValue("search." + (localization.IsStaging ? "staging" : "live") + "IndexConfig");
+            // First try the new search.queryURL setting provided by DXA 1.3 TBBs if the Search Query URL can be obtained from Topology Manager.
+            string result = localization.GetConfigValue("search.queryURL");
+            if (string.IsNullOrEmpty(result))
+            {
+                result = localization.GetConfigValue("search." + (localization.IsStaging ? "staging" : "live") + "IndexConfig");
+            }
+            return result;
         }
 
         protected abstract SearchResults ExecuteQuery(string searchIndexUrl, NameValueCollection parameters);
