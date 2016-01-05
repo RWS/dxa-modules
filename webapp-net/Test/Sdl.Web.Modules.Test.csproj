@@ -49,7 +49,6 @@
   <ItemGroup>
     <Compile Include="Models\CustomPageModel.cs" />
     <Compile Include="Models\CustomRegionModel.cs" />
-    <Compile Include="Models\TestFlickrImageCopyModel.cs" />
     <Compile Include="Models\TestFlickrImageModel.cs" />
     <Compile Include="Models\TestEclEntityModel.cs" />
     <Compile Include="Models\TestEntityWithEclLink.cs" />

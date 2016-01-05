@@ -51,7 +51,6 @@ namespace Sdl.Web.Modules.Test
             // Entity Models without associated View
             RegisterViewModel(typeof(TestEntityModel2));
             RegisterViewModel(typeof(TestEntityModel3));
-            RegisterViewModel(typeof(TestFlickrImageCopyModel));
         }
     }
 }
