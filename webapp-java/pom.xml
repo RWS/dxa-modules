@@ -62,6 +62,7 @@
         <java-version>1.7</java-version>
 
         <dxa.version>1.3-SNAPSHOT</dxa.version>
+        <jstl.version>1.2</jstl.version>
     </properties>
 
     <dependencyManagement>
@@ -72,14 +73,6 @@
                 <version>${dxa.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
-            </dependency>
-
-            <dependency>
-                <groupId>com.amazonaws</groupId>
-                <artifactId>aws-java-sdk-bom</artifactId>
-                <version>1.10.32</version>
-                <type>pom</type>
-                <scope>import</scope>
             </dependency>
 
             <!-- SDL Digital Experience Accelerator -->
@@ -102,7 +95,7 @@
             <dependency>
                 <groupId>jstl</groupId>
                 <artifactId>jstl</artifactId>
-                <version>1.2</version>
+                <version>${jstl.version}</version>
             </dependency>
 
         </dependencies>
@@ -157,6 +150,11 @@
     </dependencies>
 
     <build>
+        <pluginManagement>
+            <plugins>
+
+            </plugins>
+        </pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

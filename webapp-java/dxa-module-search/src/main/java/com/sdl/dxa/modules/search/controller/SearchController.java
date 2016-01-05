@@ -1,7 +1,6 @@
 package com.sdl.dxa.modules.search.controller;
 
 import com.sdl.dxa.modules.search.DxaSearchException;
-import com.sdl.dxa.modules.search.model.SearchItem;
 import com.sdl.dxa.modules.search.model.SearchQuery;
 import com.sdl.dxa.modules.search.provider.SearchProvider;
 import com.sdl.webapp.common.api.model.ViewModel;
@@ -49,7 +48,7 @@ public class SearchController extends EntityController {
             return searchQuery;
         }
 
-        searchProvider.executeQuery(searchQuery, SearchItem.class, getContext().getLocalization());
+        searchProvider.executeQuery(searchQuery, getContext().getLocalization());
 
         return searchQuery;
     }

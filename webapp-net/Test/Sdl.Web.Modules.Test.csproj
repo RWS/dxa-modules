@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Models\CustomPageModel.cs" />
     <Compile Include="Models\CustomRegionModel.cs" />
+    <Compile Include="Models\TestFlickrImageModel.cs" />
     <Compile Include="Models\TestEclEntityModel.cs" />
     <Compile Include="Models\TestEntityWithEclLink.cs" />
     <Compile Include="Models\TestEntityModel2.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Areas\Test\Views\Entity\TestFlickrImage.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestEclEntity.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestEntityWithEclLink.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestEntityCSSFill.cshtml" />

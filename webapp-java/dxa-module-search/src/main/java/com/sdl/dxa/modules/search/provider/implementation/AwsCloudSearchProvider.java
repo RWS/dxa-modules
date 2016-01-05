@@ -40,25 +40,25 @@ public class AwsCloudSearchProvider extends AbstractSearchProvider {
     private AWSCredentials awsCredentials;
 
     @Override
-    public <T extends SearchItem> void executeQuery(SearchQuery<T> searchQuery, Class<T> resultClazz, Localization localization) {
+    public void executeQuery(SearchQuery searchQuery, Localization localization) {
         SearchRequest request = buildRequest(searchQuery, localization);
         processResults(searchQuery, getClient(localization).search(request));
     }
 
-    private <T extends SearchItem> void processResults(SearchQuery<T> searchQuery, SearchResult result) {
+    private <T extends SearchItem> void processResults(SearchQuery searchQuery, SearchResult result) {
         List<Hit> list = result.getHits().getHit();
         List<SearchItem> items = new ArrayList<>(list.size());
         for (Hit hit : list) {
             items.add(convertToSearchItem(hit));
         }
 
-        //noinspection unchecked
-        searchQuery.setResults((List<T>) items);
+
+        searchQuery.setResults(items);
 
         searchQuery.setTotal(result.getHits().getFound());
     }
 
-    private <T extends SearchItem> SearchRequest buildRequest(SearchQuery<T> searchQuery, Localization localization) {
+    private SearchRequest buildRequest(SearchQuery searchQuery, Localization localization) {
         SearchRequest request = new SearchRequest();
         request.setQuery(searchQuery.getQueryDetails().getQueryText());
         request.setStart((long) (searchQuery.getStart() - 1));

@@ -46,6 +46,7 @@ namespace Sdl.Web.Modules.Test
             RegisterViewModel("TestEntityCSSNoParams", typeof(TestEntityModel1));
             RegisterViewModel("TestEclEntity", typeof(TestEclEntityModel));
             RegisterViewModel("TestEntityWithEclLink", typeof(TestEntityWithEclLink));
+            RegisterViewModel("TestFlickrImage", typeof(TestFlickrImageModel));
 
             // Entity Models without associated View
             RegisterViewModel(typeof(TestEntityModel2));

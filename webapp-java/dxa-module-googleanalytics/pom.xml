@@ -72,19 +72,9 @@
             <artifactId>javax.servlet.jsp-api</artifactId>
         </dependency>
 
-        <!-- Third-party libraries used by Tridion Content Delivery -->
-        <dependency>
-            <groupId>net.minidev</groupId>
-            <artifactId>json-smart</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>jstl</groupId>
             <artifactId>jstl</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.sdl.dxa</groupId>
-            <artifactId>dxa-common-api</artifactId>
         </dependency>
     </dependencies>
 </project>
