@@ -5,7 +5,7 @@ using Sdl.Web.Common.Configuration;
 namespace Sdl.Web.Modules.Test.Models
 {
     [SemanticEntity(CoreVocabulary, "ExternalContentLibraryStubSchemaflickr", Prefix = "test", Public = true)]
-    public class TestFlickrImageModel : EclItem
+    public class TestFlickrImageCopyModel : EclItem
     {
         [SemanticProperty("test:testProp1")]
         public string TestProperty1
