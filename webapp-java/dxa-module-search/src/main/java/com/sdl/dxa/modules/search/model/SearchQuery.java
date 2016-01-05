@@ -9,14 +9,15 @@ import com.sdl.webapp.common.api.mapping.semantic.config.SemanticVocabulary;
 import com.sdl.webapp.common.api.model.RichText;
 import com.sdl.webapp.common.api.model.entity.AbstractEntityModel;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
 import static com.sdl.webapp.common.util.StringUtils.convertFormatStringFromCM;
-import static com.tridion.util.URIUtils.urlDecode;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
+import static org.springframework.web.util.UriUtils.decode;
 
 /**
  * Base class for Search Query/Results.
@@ -165,7 +166,11 @@ public class SearchQuery extends AbstractEntityModel {
         }
 
         public String getQueryText() {
-            return isEmpty(queryText) ? "" : urlDecode(queryText);
+            try {
+                return isEmpty(queryText) ? "" : decode(queryText, "UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                throw new RuntimeException("Should never happen", e);
+            }
         }
 
         public void setQueryText(String queryText) {
