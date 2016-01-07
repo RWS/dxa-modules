@@ -11,9 +11,7 @@ import com.sdl.webapp.common.views.AtomView;
 import com.sdl.webapp.common.views.JsonView;
 import com.sdl.webapp.common.views.RssView;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.*;
 import org.springframework.core.Ordered;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ViewResolver;
@@ -26,8 +24,8 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
+@ImportResource({"classpath*:/META-INF/spring-context.xml"})
 @EnableWebMvc
-@ComponentScan(basePackages = {"com.sdl.dxa.core", "com.sdl.webapp"})
 public class SpringConfiguration extends WebMvcConfigurerAdapter {
     private static final String VIEW_RESOLVER_PREFIX = "/WEB-INF/Views/";
     private static final String VIEW_RESOLVER_SUFFIX = ".jsp";
