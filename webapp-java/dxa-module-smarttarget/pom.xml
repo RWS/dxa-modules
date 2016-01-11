@@ -44,4 +44,11 @@
             <timezone>UTC+1</timezone>
         </developer>
     </developers>
+
+    <dependencies>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+        </dependency>
+    </dependencies>
 </project>
