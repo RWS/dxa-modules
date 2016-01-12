@@ -8,19 +8,9 @@
 
 <div ${markup.entity(entity)}>
 
-    <c:forEach items="${entity.items}" var="current" varStatus="counter">
-
-        <c:if test="${counter.current % cols == 0}">
-            <div class="row">
-        </c:if>
-
-        <div class="col-sm-6 col-md-4">
-            <dxa:entity entity="${current}" containerSize="${12 / cols}"/>
-        </div>
-
-        <c:if test="${counter.current % cols != 0}">
-            </div>
-        </c:if>
-    </c:forEach>
+    <c:set var="loopItems" value="${entity.items}" scope="request"/>
+    <c:set var="loopCols" value="${cols}" scope="request"/>
+    <c:set var="loopCss" value="col-sm-6 col-md-3" scope="request"/>
+    <c:import url="Partials/Column-Loop.jsp"/>
 
 </div>

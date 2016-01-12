@@ -4,18 +4,10 @@
 <jsp:useBean id="markup" type="com.sdl.webapp.common.markup.Markup" scope="request"/>
 
 <div ${markup.entity(entity)}>
-    <c:forEach items="${entity.items}" var="current" varStatus="counter">
 
-        <c:if test="${counter.current % 2 == 0}">
-            <div class="row">
-        </c:if>
+    <c:set var="loopItems" value="${entity.items}" scope="request"/>
+    <c:set var="loopCols" value="2" scope="request"/>
+    <c:set var="loopCss" value="col-sm-6" scope="request"/>
+    <c:import url="Partials/Column-Loop.jsp"/>
 
-        <div class="col-sm-6">
-            <dxa:entity entity="${current}" containerSize="6"/>
-        </div>
-
-        <c:if test="${counter.current % 2 != 0}">
-            </div>
-        </c:if>
-    </c:forEach>
 </div>
