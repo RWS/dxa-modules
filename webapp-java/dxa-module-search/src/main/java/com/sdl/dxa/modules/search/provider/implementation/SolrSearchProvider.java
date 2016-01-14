@@ -10,11 +10,15 @@ import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+@Component
+@Profile("search.solr")
 public class SolrSearchProvider extends AbstractSearchProvider {
 
     private static final Logger LOG = LoggerFactory.getLogger(SolrSearchProvider.class);
