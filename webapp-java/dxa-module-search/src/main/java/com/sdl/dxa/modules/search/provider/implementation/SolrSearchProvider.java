@@ -43,14 +43,14 @@ public class SolrSearchProvider extends AbstractSearchProvider {
         searchQuery.setResults(items);
         for (SearchItem item : items) {
             Map<String, List<String>> highlights = response.getHighlighting().get(item.getId());
-            String summary = getHightlights(highlights, "summary");
-            item.setSummary(summary != null ? summary : ("..." + getHightlights(highlights, "body") + "..."));
+            String summary = getHighlights(highlights, "summary");
+            item.setSummary(summary != null ? summary : ("..." + getHighlights(highlights, "body") + "..."));
         }
 
         searchQuery.setTotal(response.getResults().getNumFound());
     }
 
-    private String getHightlights(Map<String, List<String>> map, String key) {
+    private String getHighlights(Map<String, List<String>> map, String key) {
         List<String> val = map.get(key);
         if (val != null) {
             return val.get(0);
