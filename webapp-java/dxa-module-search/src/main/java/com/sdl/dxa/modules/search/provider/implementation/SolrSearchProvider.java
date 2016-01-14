@@ -10,6 +10,7 @@ import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 @Component
+@Primary
 @Profile("search.solr")
 public class SolrSearchProvider extends AbstractSearchProvider {
 
@@ -58,7 +60,7 @@ public class SolrSearchProvider extends AbstractSearchProvider {
         return null;
     }
 
-    private <T extends SearchItem> SolrQuery buildQuery(SearchQuery searchQuery, Localization localization) {
+    private SolrQuery buildQuery(SearchQuery searchQuery, Localization localization) {
         return new SolrQuery()
                     .setQuery(searchQuery.getQueryDetails().getQueryText())
                     .addFilterQuery("publicationid:" + localization.getId())
