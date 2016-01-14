@@ -32,7 +32,7 @@
     <Message Text="Start build..." Importance="high" />
         
     <CallTarget Targets="PrepareBuild"/>
-    <CallTarget Targets="PackageBuild"/>
+    <CallTarget Targets="RunBuild"/>
     <!--NOTE: not calling target DeployModules here; should be called separately by Jenkins build if needed. -->
   </Target>
 
@@ -40,41 +40,16 @@
   <Target Name="PrepareBuild">
     <Message Text="Preparing build..." Importance="high" />
 
-    <!--Update all NuGet packages for Modules.sln -->
-    <Exec Command="_tools\RestorePackages Modules.sln" WorkingDirectory="$(ProjectDirectory)" />
-
-    <CallTarget Targets="UpdateDxaFrameworkReferences"/>
+    <!--Restore all NuGet packages for DxaModules.sln -->
+    <Exec Command="_tools\RestorePackages DxaModules.sln" WorkingDirectory="$(ProjectDirectory)" />
   </Target>
 
   <!-- =============================================================================================================================================  -->
-  <Target Name="UpdateDxaFrameworkReferences">
-    <Message Text="Downloading latest DXA $(DxaBuildType) framework references from Jenkins..." />
-
-    <ItemGroup>
-      <AssemblyToDownload Include="Sdl.Web.Mvc.dll" />
-      <AssemblyToDownload Include="Sdl.Web.Common.dll" />
-      <AssemblyToDownload Include="Sdl.Web.Tridion.dll" />
-    </ItemGroup>
-
-    <!-- Make sure we can override assemblies - remove ReadOnly attribute -->
-    <MSBuild.ExtensionPack.FileSystem.File 
-      TaskAction="RemoveAttributes" 
-      Files="@(AssemblyToDownload->'$(ReferencesDir)\%(Filename)%(Extension)')" 
-      />
-
-    <MSBuild.ExtensionPack.Web.WebClient 
-      TaskAction="DownloadFile" 
-      Url="$(DxaFrameworkArtifactsUrl)/%(Filename)%(Extension)" 
-      FileName="@(AssemblyToDownload->'$(ReferencesDir)\%(Filename)%(Extension)')" 
-      />
-  </Target>
-
-  <!-- =============================================================================================================================================  -->
-  <Target Name="PackageBuild">
+  <Target Name="RunBuild">
     <Message Text="Running build commands..." Importance="high" />
 
     <MSBuild 
-      Projects="$(ProjectDirectory)\Modules.sln" 
+      Projects="$(ProjectDirectory)\DxaModules.sln" 
       Properties="Configuration=$(BuildConfiguration);Platform=Any CPU;AsmVersion=$(Version);FileVersion=$(Version)" 
       Targets="Build" 
       StopOnFirstFailure="true" 
