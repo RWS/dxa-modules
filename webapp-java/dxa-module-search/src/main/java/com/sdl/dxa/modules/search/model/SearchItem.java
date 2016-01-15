@@ -2,8 +2,9 @@ package com.sdl.dxa.modules.search.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sdl.webapp.common.api.model.MvcData;
-import com.sdl.webapp.common.api.model.MvcDataImpl;
 import com.sdl.webapp.common.api.model.entity.AbstractEntityModel;
+import com.sdl.webapp.common.api.model.mvcdata.DefaultsMvcData;
+import com.sdl.webapp.common.api.model.mvcdata.MvcDataCreator;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.apache.solr.client.solrj.beans.Field;
@@ -39,6 +40,8 @@ public class SearchItem extends AbstractEntityModel {
 
     @Override
     public MvcData getMvcData() {
-        return new MvcDataImpl("Search:SearchItem").defaults(MvcDataImpl.Defaults.CORE_ENTITY);
+        return MvcDataCreator.creator()
+                .fromQualifiedName("Search:SearchItem")
+                .defaults(DefaultsMvcData.CORE_ENTITY).create();
     }
 }
