@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.Accessors;
 
 import java.util.Map;
 
@@ -16,9 +17,10 @@ public class SmartTargetPageModel extends AbstractPageModelImpl {
 
     @Getter
     @Setter
+    @Accessors(chain = true)
     private boolean allowDuplicates;
 
-    protected SmartTargetPageModel(PageModel pageModel) {
+    public SmartTargetPageModel(PageModel pageModel) {
         setTitle(pageModel.getTitle());
 
         setMvcData(pageModel.getMvcData());
