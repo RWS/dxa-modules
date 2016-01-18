@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
@@ -38,16 +39,14 @@ public class SearchController extends EntityController {
             throw new DxaSearchException("Unexpected View Model. Expecting type SearchQuery but was " + model);
         }
 
-        SearchQuery searchQuery = (SearchQuery) model;
         String queryText = request.getParameter("q");
-        searchQuery.setQueryDetails(new SearchQuery.QueryDetails(queryText, request.getParameterMap()));
-        String start = request.getParameter("start");
-        searchQuery.setStart(isEmpty(start) ? 1 : Integer.parseInt(start));
-
         if (isEmpty(queryText)) {
-            return searchQuery;
+            return model;
         }
+        Map<String, String[]> queryStringParameters = request.getParameterMap();
+        String start = request.getParameter("start");
 
+        SearchQuery searchQuery = searchProvider.buildSearchQuery(model, queryText, start, queryStringParameters);
         searchProvider.executeQuery(searchQuery, getContext().getLocalization());
 
         return searchQuery;

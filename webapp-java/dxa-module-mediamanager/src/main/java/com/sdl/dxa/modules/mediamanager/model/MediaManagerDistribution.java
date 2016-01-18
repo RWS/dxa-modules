@@ -2,8 +2,9 @@ package com.sdl.dxa.modules.mediamanager.model;
 
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticEntity;
 import com.sdl.webapp.common.api.model.MvcData;
-import com.sdl.webapp.common.api.model.MvcDataImpl;
 import com.sdl.webapp.common.api.model.entity.EclItem;
+import com.sdl.webapp.common.api.model.mvcdata.DefaultsMvcData;
+import com.sdl.webapp.common.api.model.mvcdata.MvcDataCreator;
 import com.sdl.webapp.common.exceptions.DxaException;
 import com.sdl.webapp.common.markup.html.HtmlElement;
 import com.sdl.webapp.common.markup.html.builders.ImgElementBuilder;
@@ -75,7 +76,10 @@ public class MediaManagerDistribution extends EclItem {
 
     @Override
     public MvcData getMvcData() {
-        return new MvcDataImpl("MediaManager:" + getDisplayTypeId()).defaults(MvcDataImpl.Defaults.CORE_ENTITY);
+        return MvcDataCreator.creator()
+                .fromQualifiedName("MediaManager:" + getDisplayTypeId())
+                .defaults(DefaultsMvcData.CORE_ENTITY)
+                .create();
     }
 
     @Override

@@ -11,6 +11,9 @@ import com.sdl.webapp.common.api.localization.Localization;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +21,9 @@ import java.util.Map;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
+@Component
+@Primary
+@Profile("search.aws")
 public class AwsCloudSearchProvider extends AbstractSearchProvider {
 
     private static final Logger LOG = LoggerFactory.getLogger(AwsCloudSearchProvider.class);
@@ -45,13 +51,12 @@ public class AwsCloudSearchProvider extends AbstractSearchProvider {
         processResults(searchQuery, getClient(localization).search(request));
     }
 
-    private <T extends SearchItem> void processResults(SearchQuery searchQuery, SearchResult result) {
+    private void processResults(SearchQuery searchQuery, SearchResult result) {
         List<Hit> list = result.getHits().getHit();
         List<SearchItem> items = new ArrayList<>(list.size());
         for (Hit hit : list) {
             items.add(convertToSearchItem(hit));
         }
-
 
         searchQuery.setResults(items);
 
