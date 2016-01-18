@@ -54,7 +54,6 @@
         <dependency>
             <groupId>com.sdl.dxa</groupId>
             <artifactId>dxa-tridion-provider</artifactId>
-            <version>1.3-SNAPSHOT</version>
         </dependency>
 
         <dependency>
