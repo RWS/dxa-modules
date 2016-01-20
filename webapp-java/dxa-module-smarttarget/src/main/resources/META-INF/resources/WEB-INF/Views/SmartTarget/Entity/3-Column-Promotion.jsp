@@ -1,6 +1,7 @@
 <%@ taglib prefix="dxa" uri="http://www.sdl.com/tridion-dxa" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:useBean id="entity" type="com.sdl.dxa.modules.smarttarget.model.SmartTargetPromotion" scope="request"/>
+<jsp:useBean id="entity" type="com.sdl.webapp.common.api.model.entity.smarttarget.SmartTargetPromotion"
+             scope="request"/>
 <jsp:useBean id="markup" type="com.sdl.webapp.common.markup.Markup" scope="request"/>
 <jsp:useBean id="context" type="com.sdl.webapp.common.api.WebRequestContext"/>
 

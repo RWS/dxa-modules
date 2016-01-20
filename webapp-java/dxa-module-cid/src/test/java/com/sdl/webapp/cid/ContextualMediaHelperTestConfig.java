@@ -5,7 +5,9 @@ import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.impl.WebRequestContextImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
+import org.springframework.mock.web.MockHttpServletRequest;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Spring configuration for {@code ContextualMediaHelperTest}.
@@ -41,5 +43,10 @@ public class ContextualMediaHelperTestConfig {
                 return 2048;
             }
         };
+    }
+
+    @Bean
+    public HttpServletRequest servletRequest() {
+        return new MockHttpServletRequest();
     }
 }
