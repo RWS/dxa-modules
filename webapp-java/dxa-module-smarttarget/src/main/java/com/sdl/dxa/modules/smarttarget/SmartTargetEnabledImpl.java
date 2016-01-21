@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 public class SmartTargetEnabledImpl implements AbstractSmartTargetPageBuilder.SmartTargetEnabled {
     @Override
     public boolean isEnabled() {
-        log.debug("Setting SmartTarget profile on");
         return true;
     }
 }
