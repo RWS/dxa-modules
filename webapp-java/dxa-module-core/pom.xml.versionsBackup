@@ -4,15 +4,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.sdl.dxa.modules</groupId>
         <artifactId>dxa-modules</artifactId>
-        <version>1.2.1-SNAPSHOT</version>
+        <groupId>com.sdl.dxa.modules</groupId>
+        <version>1.2-SNAPSHOT</version>
     </parent>
 
-    <artifactId>dxa-module-googleanalytics</artifactId>
+    <artifactId>dxa-module-core</artifactId>
 
     <name>${project.groupId}:${project.artifactId}</name>
-    <description>DXA Google Analytics module</description>
+    <description>DXA Core module</description>
     <url>https://github.com/sdl/dxa-web-application-java</url>
 
     <scm>
@@ -44,32 +44,30 @@
     </developers>
 
     <dependencies>
-        <!-- Spring Framework -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-        </dependency>
-
-        <!-- Necessary for Spring 3 to process @Configuration annotated classes -->
-        <dependency>
-            <groupId>cglib</groupId>
-            <artifactId>cglib</artifactId>
-        </dependency>
-
         <!-- Servlet API -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
         </dependency>
 
-        <!--JSP API -->
+        <!-- Spring Framework -->
         <dependency>
-            <groupId>javax.servlet.jsp</groupId>
-            <artifactId>javax.servlet.jsp-api</artifactId>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
+
+        <!-- Tridion Content Delivery -->
+        <dependency>
+            <groupId>com.tridion</groupId>
+            <artifactId>cd_ambient</artifactId>
         </dependency>
 
         <!-- Third-party libraries used by Tridion Content Delivery -->
@@ -77,10 +75,6 @@
             <groupId>net.minidev</groupId>
             <artifactId>json-smart</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>jstl</groupId>
-            <artifactId>jstl</artifactId>
-        </dependency>
     </dependencies>
+
 </project>

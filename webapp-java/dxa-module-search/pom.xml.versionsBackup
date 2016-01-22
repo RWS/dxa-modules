@@ -3,16 +3,17 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>com.sdl.dxa.modules</groupId>
         <artifactId>dxa-modules</artifactId>
-        <version>1.2.1-SNAPSHOT</version>
+        <version>1.2-SNAPSHOT</version>
     </parent>
 
-    <artifactId>dxa-module-cid</artifactId>
+    <artifactId>dxa-module-search</artifactId>
 
     <name>${project.groupId}:${project.artifactId}</name>
-    <description>DXA CID module</description>
+    <description>DXA Search module</description>
     <url>https://github.com/sdl/dxa-web-application-java</url>
 
     <scm>
@@ -44,90 +45,84 @@
     </developers>
 
     <dependencies>
-        <!-- Tridion Contextual Web Delivery (CWD) -->
+        <!-- Necessary for Spring 3 to process @Configuration annotated classes -->
         <dependency>
-            <groupId>com.tridion</groupId>
-            <artifactId>cwd_cartridge</artifactId>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
         </dependency>
+
+        <!-- Servlet API -->
         <dependency>
-            <groupId>com.tridion</groupId>
-            <artifactId>cwd_engine</artifactId>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
         </dependency>
+
+        <!--JSP API -->
         <dependency>
-            <groupId>com.tridion</groupId>
-            <artifactId>cwd_resource</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.tridion</groupId>
-            <artifactId>cwd_image</artifactId>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>javax.servlet.jsp-api</artifactId>
         </dependency>
 
         <!-- Spring Framework -->
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-orm</artifactId>
+            <artifactId>spring-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
         </dependency>
 
-        <!-- Ehcache -->
+        <!-- Google Guava -->
         <dependency>
-            <groupId>net.sf.ehcache</groupId>
-            <artifactId>ehcache</artifactId>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
         </dependency>
 
-        <!-- Apache Commons -->
+        <!-- Joda Time -->
         <dependency>
-            <groupId>commons-beanutils</groupId>
-            <artifactId>commons-beanutils</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>commons-configuration</groupId>
-            <artifactId>commons-configuration</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>commons-dbcp</groupId>
-            <artifactId>commons-dbcp</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-jexl</artifactId>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
         </dependency>
 
-        <!-- Apache HttpComponents -->
+        <!-- Jackson -->
         <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpcore</artifactId>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
         </dependency>
-
-        <!-- SnakeYAML -->
         <dependency>
-            <groupId>org.yaml</groupId>
-            <artifactId>snakeyaml</artifactId>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
         </dependency>
-
-        <!-- User agent string parser -->
         <dependency>
-            <groupId>ua_parser</groupId>
-            <artifactId>ua-parser</artifactId>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-joda</artifactId>
         </dependency>
 
-        <!-- Patricia Trie -->
+        <!-- Tridion Content Delivery -->
         <dependency>
-            <groupId>org.ardverk</groupId>
-            <artifactId>patricia-trie</artifactId>
+            <groupId>com.tridion</groupId>
+            <artifactId>cd_ambient</artifactId>
         </dependency>
 
-        <!-- Hibernate EHCache -->
+        <!-- Third-party libraries used by Tridion Content Delivery -->
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-ehcache</artifactId>
+            <groupId>net.minidev</groupId>
+            <artifactId>json-smart</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
         </dependency>
     </dependencies>
+
 </project>
