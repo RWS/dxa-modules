@@ -1,5 +1,6 @@
 package com.sdl.dxa.modules.search.provider.implementation;
 
+import com.google.common.base.Strings;
 import com.sdl.dxa.modules.search.model.SearchQuery;
 import com.sdl.dxa.modules.search.provider.SearchProvider;
 import com.sdl.webapp.common.api.localization.Localization;
@@ -21,6 +22,10 @@ public abstract class AbstractSearchProvider implements SearchProvider {
     }
 
     protected String getServiceUrl(Localization localization) {
-        return localization.getConfiguration("search." + (localization.isStaging() ? "staging" : "live") + "IndexConfig");
+        String queryUrl = localization.getConfiguration("search.queryURL");
+        if (Strings.isNullOrEmpty(queryUrl)) {
+            return localization.getConfiguration("search." + (localization.isStaging() ? "staging" : "live") + "IndexConfig");
+        }
+        return queryUrl;
     }
 }
