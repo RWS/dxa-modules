@@ -2,7 +2,9 @@ package com.sdl.webapp.cid;
 
 import com.sdl.webapp.common.api.MediaHelper;
 import com.sdl.webapp.common.api.WebRequestContext;
+import com.sdl.webapp.common.api.contextengine.ContextClaimsProvider;
 import com.sdl.webapp.common.impl.WebRequestContextImpl;
+import com.sdl.webapp.common.impl.contextengine.ContextEngineImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
 
 /**
  * Unit tests for {@code ContextualMediaHelper}.
@@ -52,8 +55,13 @@ public class ContextualMediaHelperTest {
     public static class ContextualMediaHelperTestConfig {
 
         @Bean
-        public MockContextEngine contextEngine() {
-            return new MockContextEngine(new MockContextClaimsProvider());
+        public ContextEngineImpl contextEngine() {
+            return mock(ContextEngineImpl.class);
+        }
+
+        @Bean
+        public ContextClaimsProvider contextClaimsProvider() {
+            return mock(ContextClaimsProvider.class);
         }
 
         @Bean
