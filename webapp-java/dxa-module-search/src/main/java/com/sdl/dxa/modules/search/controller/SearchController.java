@@ -4,8 +4,8 @@ import com.sdl.dxa.modules.search.DxaSearchException;
 import com.sdl.dxa.modules.search.model.SearchQuery;
 import com.sdl.dxa.modules.search.provider.SearchProvider;
 import com.sdl.webapp.common.api.model.ViewModel;
+import com.sdl.webapp.common.api.model.mvcdata.DefaultsMvcData;
 import com.sdl.webapp.common.controller.ControllerUtils;
-import com.sdl.webapp.common.controller.CoreAreaConstants;
 import com.sdl.webapp.common.controller.EntityController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,7 +26,7 @@ public class SearchController extends EntityController {
     private SearchProvider searchProvider;
 
     @Override
-    @RequestMapping(method = RequestMethod.GET, value = CoreAreaConstants.ENTITY_ACTION_NAME + "/{entityId}")
+    @RequestMapping(method = RequestMethod.GET, value = DefaultsMvcData.CoreAreaConstants.ENTITY_ACTION_NAME + "/{entityId}")
     public String handleGetEntity(HttpServletRequest request, @PathVariable String entityId) throws Exception {
         return super.handleGetEntity(request, entityId);
     }
