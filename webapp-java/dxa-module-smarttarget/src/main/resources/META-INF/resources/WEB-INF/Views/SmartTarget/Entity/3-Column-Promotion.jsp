@@ -3,9 +3,8 @@
 <jsp:useBean id="entity" type="com.sdl.webapp.common.api.model.entity.smarttarget.SmartTargetPromotion"
              scope="request"/>
 <jsp:useBean id="markup" type="com.sdl.webapp.common.markup.Markup" scope="request"/>
-<jsp:useBean id="context" type="com.sdl.webapp.common.api.WebRequestContext"/>
 
-<c:set var="cols" value="${context.screenWidth.getColsIfSmall(2, 3)}"/>
+<c:set var="cols" value="${markup.webRequestContext.screenWidth.getColsIfSmall(2, 3)}"/>
 
 <div ${markup.entity(entity)}>
 

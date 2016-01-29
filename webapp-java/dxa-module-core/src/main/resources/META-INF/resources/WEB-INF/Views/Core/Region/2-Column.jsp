@@ -1,6 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="com.sdl.webapp.common.api.model.EntityModel" %>
-<%@ page import="java.util.Iterator" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="dxa" uri="http://www.sdl.com/tridion-dxa" %>
 <%@ taglib prefix="xpm" uri="http://www.sdl.com/tridion-xpm" %>
@@ -9,25 +7,9 @@
 <jsp:useBean id="markup" type="com.sdl.webapp.common.markup.Markup" scope="request"/>
 
 <div ${markup.region(region)}>
-    <%
-        final int cols = 2;
-        final int rows = (int) Math.ceil(region.getEntities().size() / (double) cols);
-        final Iterator<EntityModel> iterator = region.getEntities().iterator();
-        for (int row = 0; row < rows; row++) {
-    %>
-    <div class="row">
-        <%
-            for (int col = 0; col < cols && iterator.hasNext(); col++) {
-                final EntityModel entity = iterator.next();
-        %>
-        <div class="col-sm-6">
-            <dxa:entity containerSize="6" entity="<%=entity%>"/>
-        </div>
-        <%
-            }
-        %>
-    </div>
-    <%
-        }
-    %>
+    <c:set var="loopItems" value="${region.entities}" scope="request"/>
+    <c:set var="loopCols" value="${2}" scope="request"/>
+    <c:set var="loopCss" value="col-sm-6" scope="request"/>
+
+    <c:import url="/WEB-INF/Views/Shared/Partials/Column-Loop.jsp"/>
 </div>

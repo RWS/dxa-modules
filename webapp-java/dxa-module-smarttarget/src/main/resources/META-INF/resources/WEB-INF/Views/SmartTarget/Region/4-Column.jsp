@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:useBean id="entity" type="com.sdl.webapp.common.api.model.entity.smarttarget.SmartTargetRegion" scope="request"/>
 <jsp:useBean id="markup" type="com.sdl.webapp.common.markup.Markup" scope="request"/>
-<jsp:useBean id="context" type="com.sdl.webapp.common.api.WebRequestContext"/>
 
 <div ${markup.entity(entity)}>
     <c:out value="${entity.startQueryXpmMarkup}"/>
@@ -15,7 +14,7 @@
         </c:when>
 
         <c:otherwise>
-            <c:set var="cols" value="${context.screenWidth.getColsIfSmall(2, 4)}"/>
+            <c:set var="cols" value="${markup.webRequestContext.screenWidth.getColsIfSmall(2, 4)}"/>
 
             <c:set var="loopItems" value="${entity.entities}" scope="request"/>
             <c:set var="loopCols" value="${cols}" scope="request"/>
