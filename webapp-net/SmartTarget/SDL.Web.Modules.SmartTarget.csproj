@@ -9,9 +9,11 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Sdl.Web.Modules.SmartTarget</RootNamespace>
     <AssemblyName>Sdl.Web.Modules.SmartTarget</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,23 +33,28 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DD4T.ContentModel.Contracts">
-      <HintPath>..\_references\dd4t-2.0-dxa\DD4T.ContentModel.Contracts.dll</HintPath>
+    <Reference Include="DD4T.ContentModel.Contracts, Version=2.0.7.0, Culture=neutral, PublicKeyToken=4450e3c7f68bf872, processorArchitecture=MSIL">
+      <HintPath>..\packages\DD4T.Model.2.0.7\lib\net45\DD4T.ContentModel.Contracts.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Sdl.Web.Common, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Sdl.Web.Common">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_references\dxa-1.2\Sdl.Web.Common.dll</HintPath>
+      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.3.0-sprint4\lib\net452\Sdl.Web.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Sdl.Web.Mvc, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Sdl.Web.Common.Models">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_references\dxa-1.2\Sdl.Web.Mvc.dll</HintPath>
+      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.3.0-sprint4\lib\net452\Sdl.Web.Common.Models.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Sdl.Web.Tridion, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Sdl.Web.Mvc">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_references\dxa-1.2\Sdl.Web.Tridion.dll</HintPath>
+      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.3.0-sprint4\lib\net452\Sdl.Web.Mvc.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Sdl.Web.Tridion">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.3.0-sprint4\lib\net452\Sdl.Web.Tridion.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -115,6 +122,13 @@ xcopy "$(ProjectDir)..\_references\st-2014-sp1" "%25DXA_SITE_DIR%25\bin" /I /Y
 xcopy "$(ProjectDir)..\_references\st-2014-sp1\lib" "%25DXA_SITE_DIR%25\bin\lib" /S /I /Y
 )</PostBuildEvent>
   </PropertyGroup>
+  <Import Project="..\packages\Sdl.Dxa.Framework.Web8.1.3.0-sprint4\build\net452\Sdl.Dxa.Framework.Web8.targets" Condition="Exists('..\packages\Sdl.Dxa.Framework.Web8.1.3.0-sprint4\build\net452\Sdl.Dxa.Framework.Web8.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Sdl.Dxa.Framework.Web8.1.3.0-sprint4\build\net452\Sdl.Dxa.Framework.Web8.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Sdl.Dxa.Framework.Web8.1.3.0-sprint4\build\net452\Sdl.Dxa.Framework.Web8.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

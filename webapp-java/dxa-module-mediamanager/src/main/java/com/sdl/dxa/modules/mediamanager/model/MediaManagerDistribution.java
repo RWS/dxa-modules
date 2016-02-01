@@ -2,8 +2,9 @@ package com.sdl.dxa.modules.mediamanager.model;
 
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticEntity;
 import com.sdl.webapp.common.api.model.MvcData;
-import com.sdl.webapp.common.api.model.MvcDataImpl;
 import com.sdl.webapp.common.api.model.entity.EclItem;
+import com.sdl.webapp.common.api.model.mvcdata.DefaultsMvcData;
+import com.sdl.webapp.common.api.model.mvcdata.MvcDataCreator;
 import com.sdl.webapp.common.exceptions.DxaException;
 import com.sdl.webapp.common.markup.html.HtmlElement;
 import com.sdl.webapp.common.markup.html.builders.ImgElementBuilder;
@@ -53,19 +54,19 @@ public class MediaManagerDistribution extends EclItem {
 
     @Override
     public String getMimeType() {
-        return (String) getFromExternalMetadataOrAlternative("Program/Asset/MIMEType", super.getMimeType());
+        return (String) getFromExternalMetadataOrAlternative(getExternalMetadata(), "Program/Asset/MIMEType", super.getMimeType());
     }
 
     public String getTitle() {
-        Object first = getFromExternalMetadataOrAlternative("Program/Asset/Title", null);
+        Object first = getFromExternalMetadataOrAlternative(getExternalMetadata(), "Program/Asset/Title", null);
         if (first == null) {
-            return (String) getFromExternalMetadataOrAlternative("Program/Title", super.getFileName());
+            return (String) getFromExternalMetadataOrAlternative(getExternalMetadata(), "Program/Title", super.getFileName());
         }
         return (String) first;
     }
 
     public String getDescription() {
-        return (String) getFromExternalMetadataOrAlternative("Program/Asset/Description", null);
+        return (String) getFromExternalMetadataOrAlternative(getExternalMetadata(), "Program/Asset/Description", null);
     }
 
     @Override
@@ -75,7 +76,10 @@ public class MediaManagerDistribution extends EclItem {
 
     @Override
     public MvcData getMvcData() {
-        return new MvcDataImpl("MediaManager:" + getDisplayTypeId()).defaults(MvcDataImpl.Defaults.CORE_ENTITY);
+        return MvcDataCreator.creator()
+                .fromQualifiedName("MediaManager:" + getDisplayTypeId())
+                .defaults(DefaultsMvcData.CORE_ENTITY)
+                .create();
     }
 
     @Override

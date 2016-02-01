@@ -4,8 +4,8 @@ import com.sdl.dxa.modules.search.DxaSearchException;
 import com.sdl.dxa.modules.search.model.SearchQuery;
 import com.sdl.dxa.modules.search.provider.SearchProvider;
 import com.sdl.webapp.common.api.model.ViewModel;
+import com.sdl.webapp.common.api.model.mvcdata.DefaultsMvcData;
 import com.sdl.webapp.common.controller.ControllerUtils;
-import com.sdl.webapp.common.controller.CoreAreaConstants;
 import com.sdl.webapp.common.controller.EntityController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
@@ -25,7 +26,7 @@ public class SearchController extends EntityController {
     private SearchProvider searchProvider;
 
     @Override
-    @RequestMapping(method = RequestMethod.GET, value = CoreAreaConstants.ENTITY_ACTION_NAME + "/{entityId}")
+    @RequestMapping(method = RequestMethod.GET, value = DefaultsMvcData.CoreAreaConstants.ENTITY_ACTION_NAME + "/{entityId}")
     public String handleGetEntity(HttpServletRequest request, @PathVariable String entityId) throws Exception {
         return super.handleGetEntity(request, entityId);
     }
@@ -38,16 +39,14 @@ public class SearchController extends EntityController {
             throw new DxaSearchException("Unexpected View Model. Expecting type SearchQuery but was " + model);
         }
 
-        SearchQuery searchQuery = (SearchQuery) model;
         String queryText = request.getParameter("q");
-        searchQuery.setQueryDetails(new SearchQuery.QueryDetails(queryText, request.getParameterMap()));
-        String start = request.getParameter("start");
-        searchQuery.setStart(isEmpty(start) ? 1 : Integer.parseInt(start));
-
         if (isEmpty(queryText)) {
-            return searchQuery;
+            return model;
         }
+        Map<String, String[]> queryStringParameters = request.getParameterMap();
+        String start = request.getParameter("start");
 
+        SearchQuery searchQuery = searchProvider.buildSearchQuery(model, queryText, start, queryStringParameters);
         searchProvider.executeQuery(searchQuery, getContext().getLocalization());
 
         return searchQuery;
