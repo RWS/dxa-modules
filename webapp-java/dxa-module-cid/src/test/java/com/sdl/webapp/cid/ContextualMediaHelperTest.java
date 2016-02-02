@@ -112,7 +112,7 @@ public class ContextualMediaHelperTest {
 
             @Override
             public String getCidHostname() {
-                return "testCid";
+                return "testCid/cid";
             }
         }
     }
