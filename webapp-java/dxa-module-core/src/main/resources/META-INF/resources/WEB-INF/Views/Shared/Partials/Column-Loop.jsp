@@ -7,11 +7,16 @@
         <div class="row">
     </c:if>
 
+    <c:if test="${(counter.index + 1) % requestScope.loopCols == 0}">
+        <%-- Fix for responsiveness on small screens --%>
+        <div class="clearfix visible-sm"></div>
+    </c:if>
+
     <div class="${requestScope.loopCss}">
         <dxa:entity entity="${item}" containerSize="${12 / requestScope.loopCols}"/>
     </div>
 
-    <c:if test="${(counter.index + 1)  % requestScope.loopCols == 0}">
+    <c:if test="${(counter.index + 1) % requestScope.loopCols == 0}">
         </div>
     </c:if>
 
