@@ -26,7 +26,7 @@ public class CidResponsiveMediaUrlBuilder extends MediaHelper.ResponsiveMediaUrl
 
         @Override
         public String buildInternal() {
-            return String.format("%s/cid/scale/%sx%s/%s%s",
+            return String.format("%s/scale/%sx%s/%s%s",
                     hostsNamesProvider.getCidHostname(),
                     getWidth(),
                     isZeroAspect() ? "" : getHeight(),
