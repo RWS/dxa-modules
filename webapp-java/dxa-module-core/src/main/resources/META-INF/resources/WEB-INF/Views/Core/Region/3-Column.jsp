@@ -10,7 +10,7 @@
 
     <c:set var="loopCols" value="${markup.webRequestContext.screenWidth.getColsIfSmall(2, 3)}" scope="request"/>
     <c:set var="loopItems" value="${region.entities}" scope="request"/>
-    <c:set var="loopCss" value="col-sm-6 col-md-4" scope="request"/>
+    <c:set var="loopCss" value="col-xs-12 col-sm-6 col-md-4 col-lg-4" scope="request"/>
 
     <c:import url="/WEB-INF/Views/Shared/Partials/Column-Loop.jsp"/>
 </div>

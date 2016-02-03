@@ -7,9 +7,9 @@
 <jsp:useBean id="markup" type="com.sdl.webapp.common.markup.Markup" scope="request"/>
 
 <div ${markup.region(region)}>
-    <c:set var="loopItems" value="${region.entities}" scope="request"/>
     <c:set var="loopCols" value="${2}" scope="request"/>
-    <c:set var="loopCss" value="col-sm-6" scope="request"/>
+    <c:set var="loopItems" value="${region.entities}" scope="request"/>
+    <c:set var="loopCss" value="col-xs-12 col-sm-6 col-md-6 col-lg-6" scope="request"/>
 
     <c:import url="/WEB-INF/Views/Shared/Partials/Column-Loop.jsp"/>
 </div>
