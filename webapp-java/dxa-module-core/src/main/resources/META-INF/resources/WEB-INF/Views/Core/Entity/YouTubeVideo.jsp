@@ -9,7 +9,7 @@
 
 <% pageContext.setAttribute("uuid", java.util.UUID.randomUUID().toString().replaceAll("-", "")); %>
 <c:choose>
-    <c:when test="${entity.isEmbedded}">
+    <c:when test="${entity.embedded}">
         <div class="embed-video ${entity.htmlClasses}">
             <img src="${mediaHelper.getResponsiveImageUrl(entity.url, "100%", 0.0, 0)}" alt="${entity.headline}">
             <button type="button" data-video="${entity.youTubeId}">

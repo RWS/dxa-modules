@@ -1,21 +1,20 @@
 package com.sdl.dxa.modules.search;
 
-import com.sdl.webapp.common.api.model.entity.Link;
-import com.sdl.webapp.common.impl.AbstractInitializer;
+import com.sdl.dxa.modules.search.model.SearchBox;
+import com.sdl.dxa.modules.search.model.SearchItem;
+import com.sdl.dxa.modules.search.model.SearchQuery;
+import com.sdl.webapp.common.api.mapping.views.AbstractInitializer;
+import com.sdl.webapp.common.api.mapping.views.RegisteredView;
+import com.sdl.webapp.common.api.mapping.views.RegisteredViews;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-
 @Component
+@RegisteredViews({
+        @RegisteredView(viewName = "SearchBox", clazz = SearchBox.class),
+        @RegisteredView(viewName = "SearchItem", clazz = SearchItem.class),
+        @RegisteredView(viewName = "SearchResults", clazz = SearchQuery.class, controllerName = "Search")
+})
 public class SearchModuleInitializer extends AbstractInitializer {
-
-    @PostConstruct
-    public void initialize() {
-        // TODO: Implement this for real, currently this is just a dummy implementation to avoid errors
-
-        this.registerViewModel("SearchBox", Link.class);
-
-    }
 
     @Override
     protected String getAreaName() {

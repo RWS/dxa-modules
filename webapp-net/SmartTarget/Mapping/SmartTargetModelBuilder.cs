@@ -113,7 +113,7 @@ namespace Sdl.Web.Modules.SmartTarget.Mapping
                     if (localization.IsStaging)
                     {
                         // The SmartTarget API provides the entire XPM markup tag; put it in XpmMetadata["Query"]. See SmartTargetRegion.GetStartQueryXpmMarkup.
-                        smartTargetRegion.XpmMetadata = new Dictionary<string, string>
+                        smartTargetRegion.XpmMetadata = new Dictionary<string, object>
                         {
                             {"Query", ResultSet.GetExperienceManagerMarkup(smartTargetRegion.Name, smartTargetRegion.MaxItems, promotions)}
                         };
@@ -155,7 +155,7 @@ namespace Sdl.Web.Modules.SmartTarget.Mapping
             return new SmartTargetPromotion
             {
                 MvcData = new MvcData(viewName),
-                XpmMetadata = new Dictionary<string, string>
+                XpmMetadata = new Dictionary<string, object>
                 {
                     {"PromotionID", promotion.PromotionId},
                     {"RegionID", regionName}

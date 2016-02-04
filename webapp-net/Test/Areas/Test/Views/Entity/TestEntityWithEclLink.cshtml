@@ -1,0 +1,7 @@
+﻿@model TestEntityWithEclLink
+<div class="entity" @Html.DxaEntityMarkup()>
+    <h5>Rendered @Model with Entity View "Test:TestEntityWithEclLink"</h5>
+    <div id="html-media" class="region">
+        @Html.Media(Model.EclLink)
+    </div>
+</div>

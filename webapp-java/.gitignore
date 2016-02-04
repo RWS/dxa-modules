@@ -1,4 +1,12 @@
+.classpath
+.project
+.checkstyle
 *.iml
+*.iws
 *.ipr
-.idea/
+.idea
+.settings/
 target/
+cd_licenses.xml
+.metadata/
+temp/
