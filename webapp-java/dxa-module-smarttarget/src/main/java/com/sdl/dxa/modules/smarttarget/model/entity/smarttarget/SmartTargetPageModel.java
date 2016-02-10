@@ -11,9 +11,6 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>SmartTargetPageModel class.</p>
- *
- * @author azarakovskiy
- * @version 1.3-SNAPSHOT
  */
 @EqualsAndHashCode(callSuper = true)
 @ToString

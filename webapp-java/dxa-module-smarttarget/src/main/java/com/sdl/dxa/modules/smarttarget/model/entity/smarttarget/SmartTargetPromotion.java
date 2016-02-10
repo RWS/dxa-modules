@@ -11,9 +11,6 @@ import java.util.Map;
 
 /**
  * <p>SmartTargetPromotion class.</p>
- *
- * @author azarakovskiy
- * @version 1.3-SNAPSHOT
  */
 @EqualsAndHashCode(callSuper = true)
 @Data

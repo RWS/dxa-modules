@@ -12,9 +12,6 @@ import java.util.Map;
 
 /**
  * <p>SmartTargetRegion class.</p>
- *
- * @author azarakovskiy
- * @version 1.3-SNAPSHOT
  */
 @EqualsAndHashCode(callSuper = true)
 @Data

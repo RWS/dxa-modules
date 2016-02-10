@@ -17,9 +17,6 @@ import lombok.extern.slf4j.Slf4j;
 @EqualsAndHashCode
 /**
  * <p>SmartTargetItem class.</p>
- *
- * @author azarakovskiy
- * @version 1.3-SNAPSHOT
  */
 @ToString
 @Slf4j

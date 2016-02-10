@@ -23,10 +23,7 @@ import static com.google.common.base.Strings.isNullOrEmpty;
 
 @Slf4j
 /**
- * <p>Abstract AbstractSmartTargetPageBuilder class.</p>
- *
- * @author azarakovskiy
- * @version 1.3-SNAPSHOT
+ * <p>Abstract AbstractSmartTargetPageBuilder class with common codebase for all versions of module.</p>
  */
 public abstract class AbstractSmartTargetPageBuilder implements PageBuilder {
 
