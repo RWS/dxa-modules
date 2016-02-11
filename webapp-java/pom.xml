@@ -57,6 +57,8 @@
         <module>dxa-module-search</module>
         <module>dxa-module-mediamanager</module>
         <module>dxa-module-smarttarget</module>
+        <module>dxa-module-smarttarget-2013sp1</module>
+        <module>dxa-module-smarttarget-web8</module>
     </modules>
 
     <properties>

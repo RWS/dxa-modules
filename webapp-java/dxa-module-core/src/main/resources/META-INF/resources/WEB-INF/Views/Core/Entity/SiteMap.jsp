@@ -16,7 +16,7 @@
             <div class="row">
         </c:if>
 
-        <div class="col-sm-6 col-md-4">
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
             <h2>
                 <a href="${item.url}" title="${item.title}">
                         ${item.title}

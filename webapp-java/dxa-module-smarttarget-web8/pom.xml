@@ -9,10 +9,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>dxa-module-smarttarget</artifactId>
+    <artifactId>dxa-module-smarttarget-web8</artifactId>
 
     <name>${project.groupId}:${project.artifactId}</name>
-    <description>DXA Smart Target module (abstract)</description>
+    <description>DXA Smart Target module for Tridion Web 8</description>
     <url>https://github.com/sdl/dxa-modules</url>
 
     <scm>
@@ -45,45 +45,25 @@
         </developer>
     </developers>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.sdl.dxa</groupId>
+                <artifactId>dxa-bom-web8</artifactId>
+                <version>${project.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
+            <groupId>com.sdl.dxa.modules</groupId>
+            <artifactId>dxa-module-smarttarget</artifactId>
+            <scope>compile</scope>
         </dependency>
 
-        <dependency>
-            <groupId>com.sdl.dxa</groupId>
-            <artifactId>dxa-tridion-provider</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.dd4t</groupId>
-            <artifactId>dd4t-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>commons-discovery</groupId>
-            <artifactId>commons-discovery</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>commons-httpclient</groupId>
-            <artifactId>commons-httpclient</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-        </dependency>
     </dependencies>
+
 </project>

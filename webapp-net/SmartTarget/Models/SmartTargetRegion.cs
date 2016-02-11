@@ -40,7 +40,7 @@ namespace Sdl.Web.Modules.SmartTarget.Models
         /// </remarks>
         public string GetStartQueryXpmMarkup()
         {
-            return (XpmMetadata == null) ? String.Empty : XpmMetadata["Query"];
+            return (XpmMetadata == null) ? String.Empty : (string) XpmMetadata["Query"];
         }
 
         /// <summary>
