@@ -50,16 +50,34 @@
         </developer>
     </developers>
 
+    <repositories>
+        <repository>
+            <id>local-project-repo</id>
+            <url>file:///${super.basedir}/local-project-repo</url>
+        </repository>
+    </repositories>
+
     <modules>
         <module>dxa-module-core</module>
         <module>dxa-module-cid</module>
         <module>dxa-module-googleanalytics</module>
         <module>dxa-module-search</module>
         <module>dxa-module-mediamanager</module>
-        <module>dxa-module-smarttarget</module>
     </modules>
 
+    <profiles>
+        <profile>
+            <id>indev</id>
+            <modules>
+                <module>dxa-module-smarttarget</module>
+                <module>dxa-module-smarttarget-2013sp1</module>
+                <module>dxa-module-smarttarget-web8</module>
+            </modules>
+        </profile>
+    </profiles>
+
     <properties>
+        <super.basedir>${project.basedir}</super.basedir>
         <dxa.version>1.3-SNAPSHOT</dxa.version>
         <jstl.version>1.2</jstl.version>
         <java-version>1.7</java-version>
@@ -69,7 +87,7 @@
         <dependencies>
             <dependency>
                 <groupId>com.sdl.dxa</groupId>
-                <artifactId>dxa-framework</artifactId>
+                <artifactId>dxa-bom-web8</artifactId>
                 <version>${dxa.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
