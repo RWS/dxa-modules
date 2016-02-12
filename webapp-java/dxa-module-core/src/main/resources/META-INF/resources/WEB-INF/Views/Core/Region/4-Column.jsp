@@ -5,5 +5,5 @@
 
 <div ${markup.region(region)}>
     <c:set scope="request" var="loopItems" value="${region.entities}"/>
-    <jsp:include page="/WEB-INF/Views/Shared/Partials/3-Column-Loop.jsp"/>
+    <jsp:include page="/WEB-INF/Views/Shared/Partials/4-Column-Loop.jsp"/>
 </div>
