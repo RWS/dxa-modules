@@ -45,10 +45,6 @@
         </developer>
     </developers>
 
-    <properties>
-        <super.basedir>${project.basedir}/..</super.basedir>
-    </properties>
-
     <dependencyManagement>
         <dependencies>
             <dependency>
