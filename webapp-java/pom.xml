@@ -78,7 +78,8 @@
     </profiles>
 
     <properties>
-        <dxa.version>1.3.1-SNAPSHOT</dxa.version>
+        <!-- Currently, we keep it in sync with DXA version -->
+        <dxa.version>${project.version}</dxa.version>
         <jstl.version>1.2</jstl.version>
         <java-version>1.7</java-version>
     </properties>
