@@ -1,7 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="com.sdl.webapp.common.api.ScreenWidth" %>
-<%@ page import="com.sdl.webapp.common.api.model.entity.SitemapItem" %>
-<%@ page import="java.util.Iterator" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="dxa" uri="http://www.sdl.com/tridion-dxa" %>
 <%@ taglib prefix="xpm" uri="http://www.sdl.com/tridion-xpm" %>
@@ -11,35 +8,32 @@
 <jsp:useBean id="screenWidth" type="com.sdl.webapp.common.api.ScreenWidth" scope="request"/>
 
 <div>
-    <%
-        final int cols = screenWidth == ScreenWidth.SMALL ? 2 : 3;
-        final int rows = (int) Math.ceil(entity.getItems().size() / (double) cols);
-        final Iterator<SitemapItem> iterator = entity.getItems().iterator();
-        for (int row = 0; row < rows; row++) {
-    %>
-    <div class="row">
-        <%
-            for (int col = 0; col < cols && iterator.hasNext(); col++) {
-                final SitemapItem item = iterator.next();
-        %>
-        <div class="col-sm-6 col-md-4">
-            <h2><a href="<%= item.getUrl() %>" title="<%= item.getTitle() %>"><%= item.getTitle() %>
-            </a></h2>
+    <c:set var="cols" value="${markup.webRequestContext.screenWidth.getColsIfSmall(2, 3)}" scope="request"/>
+
+    <c:forEach items="${entity.items}" var="item" varStatus="counter">
+
+        <c:if test="${counter.index % cols == 0}">
+            <div class="row">
+        </c:if>
+
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+            <h2>
+                <a href="${item.url}" title="${item.title}">
+                        ${item.title}
+                </a>
+            </h2>
             <ul class="list-unstyled">
-                <%
-                    for (SitemapItem link : item.getItems()) {
-                %>
-                <%= markup.siteMapList(link) %>
-                <%
-                    }
-                %>
+
+                <c:forEach items="${item.items}" var="link">
+                    ${markup.siteMapList(link)}
+                </c:forEach>
+
             </ul>
         </div>
-        <%
-            }
-        %>
-    </div>
-    <%
-        }
-    %>
+
+        <c:if test="${(counter.index + 1)  % cols == 0}">
+            </div>
+        </c:if>
+
+    </c:forEach>
 </div>

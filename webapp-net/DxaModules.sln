@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdl.Web.Modules.Search", "Search\Sdl.Web.Modules.Search.csproj", "{8FEFFF4C-0AE2-452F-89B1-36F7D2944032}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdl.Web.Modules.GoogleAnalytics", "GoogleAnalytics\Sdl.Web.Modules.GoogleAnalytics.csproj", "{3B09C55C-6D2B-4F7A-BD94-1B948023D3AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdl.Web.Modules.Test", "Test\Sdl.Web.Modules.Test.csproj", "{40A64979-0221-4D96-9055-F723D11CA703}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdl.Web.Modules.MediaManager", "MediaManager\Sdl.Web.Modules.MediaManager.csproj", "{709998A6-7E5F-4619-9D70-18A6AB6EB8FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdl.Web.Modules.SmartTarget", "SmartTarget\Sdl.Web.Modules.SmartTarget.csproj", "{492157DE-3114-48E5-9A23-965D5FE4DA74}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdl.Web.Modules.Impress", "Impress\Sdl.Web.Modules.Impress.csproj", "{4060565E-55F3-4C52-AF6F-6FC4868C27A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SI4T.Query.CloudSearch", "Search\SI4T.Query.CloudSearch\SI4T.Query.CloudSearch.csproj", "{490799B2-F577-4638-9644-8369BDBD56C4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8FEFFF4C-0AE2-452F-89B1-36F7D2944032}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FEFFF4C-0AE2-452F-89B1-36F7D2944032}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FEFFF4C-0AE2-452F-89B1-36F7D2944032}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FEFFF4C-0AE2-452F-89B1-36F7D2944032}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B09C55C-6D2B-4F7A-BD94-1B948023D3AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B09C55C-6D2B-4F7A-BD94-1B948023D3AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B09C55C-6D2B-4F7A-BD94-1B948023D3AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B09C55C-6D2B-4F7A-BD94-1B948023D3AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40A64979-0221-4D96-9055-F723D11CA703}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40A64979-0221-4D96-9055-F723D11CA703}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40A64979-0221-4D96-9055-F723D11CA703}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40A64979-0221-4D96-9055-F723D11CA703}.Release|Any CPU.Build.0 = Release|Any CPU
+		{709998A6-7E5F-4619-9D70-18A6AB6EB8FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{709998A6-7E5F-4619-9D70-18A6AB6EB8FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{709998A6-7E5F-4619-9D70-18A6AB6EB8FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{709998A6-7E5F-4619-9D70-18A6AB6EB8FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{492157DE-3114-48E5-9A23-965D5FE4DA74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{492157DE-3114-48E5-9A23-965D5FE4DA74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{492157DE-3114-48E5-9A23-965D5FE4DA74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{492157DE-3114-48E5-9A23-965D5FE4DA74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4060565E-55F3-4C52-AF6F-6FC4868C27A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4060565E-55F3-4C52-AF6F-6FC4868C27A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4060565E-55F3-4C52-AF6F-6FC4868C27A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4060565E-55F3-4C52-AF6F-6FC4868C27A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{490799B2-F577-4638-9644-8369BDBD56C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{490799B2-F577-4638-9644-8369BDBD56C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{490799B2-F577-4638-9644-8369BDBD56C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{490799B2-F577-4638-9644-8369BDBD56C4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

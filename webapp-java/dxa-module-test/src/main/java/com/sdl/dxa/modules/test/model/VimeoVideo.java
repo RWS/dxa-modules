@@ -2,9 +2,8 @@ package com.sdl.dxa.modules.test.model;
 
 import com.google.common.base.Strings;
 import com.sdl.webapp.common.api.MediaHelper;
-import com.sdl.webapp.common.api.mapping.annotations.SemanticEntity;
+import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticEntity;
 import com.sdl.webapp.common.api.model.MvcData;
-import com.sdl.webapp.common.api.model.MvcDataImpl;
 import com.sdl.webapp.common.api.model.entity.MediaItem;
 import com.sdl.webapp.common.markup.html.HtmlAttribute;
 import com.sdl.webapp.common.markup.html.HtmlElement;
@@ -16,7 +15,7 @@ import org.w3c.dom.Node;
 
 import java.util.UUID;
 
-import static com.sdl.webapp.common.api.mapping.config.SemanticVocabulary.SCHEMA_ORG;
+import static com.sdl.webapp.common.api.mapping.semantic.config.SemanticVocabulary.SCHEMA_ORG;
 
 @SemanticEntity(entityName = "VideoObject", vocabulary = SCHEMA_ORG, prefix = "s", public_ = true)
 public class VimeoVideo extends MediaItem {
@@ -103,38 +102,26 @@ public class VimeoVideo extends MediaItem {
     }
 
     @Override
-    public String toHtml(String widthFactor) {
-        return toHtml(widthFactor, 0, "", 0);
+    public HtmlElement toHtmlElement(String widthFactor) {
+        return toHtmlElement(widthFactor, 0, "", 0);
     }
 
     @Override
-    public String toHtml(String widthFactor, double aspect, String cssClass, int containerSize) {
-        if (Strings.isNullOrEmpty(getUrl())) {
-            return String.format(
-                    "<iframe src=\"https://player.vimeo.com/video/%s?version=3&enablejsapi=1\" id=\"video%s\" class=\"%s\"/>",
-                    this.getVimeoId(), UUID.randomUUID().toString().replaceAll("-", ""), null
-            );
-        }
-
-        String htmlTagName = this.getIsEmbedded() ? "span" : "div";
-        String placeholderImageUrl = Strings.isNullOrEmpty(getUrl()) ? null : this.mediaHelper.getResponsiveImageUrl(getUrl(), widthFactor, aspect, containerSize);
-
-        return String.format(
-                "<%s class=\"embed-video\"><img src=\"%s\" alt=\"%s\"><button type=\"button\" data-video=\"%s\" class=\"%s\"><i class=\"fa fa-play-circle\"></i></button></%s>",
-                htmlTagName, placeholderImageUrl, getHeadline(), getVimeoId(), null, htmlTagName
-        );
+    public HtmlElement toHtmlElement(String widthFactor, double aspect, String cssClass, int containerSize) {
+        return toHtmlElement(widthFactor, aspect, cssClass, containerSize, "");
     }
-
 
     @Override
     public HtmlElement toHtmlElement(String widthFactor, double aspect, String cssClass, int containerSize, String contextPath) {
-
         if (Strings.isNullOrEmpty(this.getVimeoId())) {
             LOG.warn("Skipping Vimeo video with empty Vimeo ID: {}", this);
             return null;
         }
 
-        return !Strings.isNullOrEmpty(this.getUrl()) ? getVimeoPlaceholder(widthFactor, aspect, cssClass, containerSize, contextPath) : getYouTubeEmbed(widthFactor, aspect, cssClass, containerSize, contextPath);
+        return !Strings.isNullOrEmpty(this.getUrl()) ?
+                getVimeoPlaceholder(widthFactor, aspect, cssClass, containerSize, contextPath) :
+                getYouTubeEmbed(widthFactor, aspect, cssClass, containerSize, contextPath);
+
     }
 
     private HtmlElement getVimeoPlaceholder(String widthFactor, double aspect, String cssClass, int containerSize, String contextPath) {
@@ -146,11 +133,11 @@ public class VimeoVideo extends MediaItem {
 
         return HtmlBuilders.div()
                 .withAttribute(CLASS_EMBED_VIDEO_ATTR)
-                .withContent(HtmlBuilders.img(contextPath + placeholderImageUrl).withAlt(this.getHeadline()).build())
-                .withContent(HtmlBuilders.button("button")
+                .withNode(HtmlBuilders.img(contextPath + placeholderImageUrl).withAlt(this.getHeadline()).build())
+                .withNode(HtmlBuilders.button("button")
                         .withAttribute("data-video", this.getVimeoId())
                         .withClass(cssClass)
-                        .withContent(PLAY_BUTTON_OVERLAY)
+                        .withNode(PLAY_BUTTON_OVERLAY)
                         .build())
                 .build();
     }

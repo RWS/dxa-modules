@@ -16,7 +16,7 @@
             <div class="panel-group responsive-accordion" id="${accordionId}">
                 <c:forEach var="element" items="${entity.itemListElements}" varStatus="status">
                     <c:set var="collapseId" value="${entity.id}_${status.index}"/>
-                    <div class="panel panel-default" ${markup.property(entity, "itemListElement", status.index)}>
+                    <div class="panel panel-default" ${markup.property(entity, "itemListElements", status.index)}>
                         <div class="panel-heading" data-toggle="collapse" data-target="#${collapseId}"
                              data-parent="#${accordionId}">
                             <h4 class="panel-title" ${markup.property(element, "headline")}>${element.headline}</h4>
