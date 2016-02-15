@@ -6,13 +6,13 @@
     <parent>
         <groupId>com.sdl.dxa.modules</groupId>
         <artifactId>dxa-modules</artifactId>
-        <version>1.3-SNAPSHOT</version>
+        <version>1.3.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>dxa-module-cid</artifactId>
 
-    <name>${project.groupId}:${project.artifactId}</name>
-    <description>[DRAFT] DXA CID module</description>
+    <name>DXA Modules - CID</name>
+    <description>Implementation of DXA CID module</description>
 
     <dependencies>
         <dependency>

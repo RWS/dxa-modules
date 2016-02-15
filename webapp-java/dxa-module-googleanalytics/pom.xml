@@ -5,13 +5,13 @@
     <parent>
         <groupId>com.sdl.dxa.modules</groupId>
         <artifactId>dxa-modules</artifactId>
-        <version>1.3-SNAPSHOT</version>
+        <version>1.3.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>dxa-module-googleanalytics</artifactId>
 
-    <name>${project.groupId}:${project.artifactId}</name>
-    <description>[DRAFT] DXA Google Analytics module</description>
+    <name>DXA Modules - Google Analytics</name>
+    <description>Implementation of DXA Google Analytics module</description>
 
     <dependencies>
         <!-- Spring Framework -->
