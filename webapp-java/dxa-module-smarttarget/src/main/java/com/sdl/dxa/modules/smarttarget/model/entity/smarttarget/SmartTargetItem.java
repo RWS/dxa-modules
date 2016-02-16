@@ -14,10 +14,10 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
-@EqualsAndHashCode
 /**
  * <p>SmartTargetItem class.</p>
  */
+@EqualsAndHashCode
 @ToString
 @Slf4j
 public class SmartTargetItem {
@@ -53,7 +53,7 @@ public class SmartTargetItem {
             try {
                 this.entity = contentProvider.getEntityModel(entityId, localization);
             } catch (ContentProviderException | DxaException e) {
-                log.warn("EntityModel not found for entity id" + entityId, e);
+                log.warn("EntityModel not found for entity id {}", entityId, e);
             }
         }
         return entity;
