@@ -7,7 +7,7 @@
 <jsp:useBean id="markup" type="com.sdl.webapp.common.markup.Markup" scope="request"/>
 
 <c:choose>
-    <c:when test="${entity.isEmbedded}">
+    <c:when test="${entity.embedded}">
         <dxa:media media="${entity}" cssClass="embed-video"/>
     </c:when>
     <c:otherwise>

@@ -8,7 +8,7 @@
 <%--This View is mainly intended for MM Images embedded in Rich Text.
 When used for a stand-alone Entity, it provides very limited control over styling/sizing of the image.--%>
 <c:choose>
-    <c:when test="${entity.isEmbedded}">
+    <c:when test="${entity.embedded}">
         <dxa:media media="${entity}"/>
     </c:when>
     <c:otherwise>
