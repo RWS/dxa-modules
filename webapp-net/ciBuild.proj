@@ -9,6 +9,7 @@
     <Version Condition="'$(VERSION)' == ''">0.0.0.0</Version>
     <Version Condition="'$(VERSION)' != ''">$(VERSION)</Version>
     <BuildConfiguration>Release</BuildConfiguration>
+    <IsPreRelease>true</IsPreRelease>
     <DxaBuildType>Dev</DxaBuildType>
     <CdTestDeployFolder>\\saintjohn03.ams.dev\c$\inetpub\wwwroot\7.1_gitversion</CdTestDeployFolder>
 
@@ -18,7 +19,7 @@
     <VersionMinor>$(Version.Split('.')[1])</VersionMinor>
     <VersionPatch>$(Version.Split('.')[2])</VersionPatch>
     <VersionBuild>$(Version.Split('.')[3])</VersionBuild>
-    <PreReleaseLabel>-alpha-$([System.DateTime]::Now.ToString("yyyyMMddHHmm"))</PreReleaseLabel>
+    <PreReleaseLabel Condition="'$(IsPreRelease)' == 'true'">-alpha-$([System.DateTime]::Now.ToString("yyyyMMddHHmm"))</PreReleaseLabel>
     <PackageVersion>$(VersionMajor).$(VersionMinor).$(VersionPatch)$(PreReleaseLabel)</PackageVersion>
 
       <!-- Jenkins URLs -->
