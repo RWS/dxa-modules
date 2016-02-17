@@ -13,9 +13,15 @@
     <CdTestDeployFolder>\\saintjohn03.ams.dev\c$\inetpub\wwwroot\7.1_gitversion</CdTestDeployFolder>
 
     <ProjectDirectory>$(MSBuildProjectDirectory)</ProjectDirectory>
-    <ReferencesDir>$(ProjectDirectory)\_references\dxa-1.2</ReferencesDir>
 
-    <!-- Jenkins URLs -->
+    <VersionMajor>$(Version.Split('.')[0])</VersionMajor>
+    <VersionMinor>$(Version.Split('.')[1])</VersionMinor>
+    <VersionPatch>$(Version.Split('.')[2])</VersionPatch>
+    <VersionBuild>$(Version.Split('.')[3])</VersionBuild>
+    <PreReleaseLabel>-alpha-$([System.DateTime]::Now.ToString("yyyyMMddHHmm"))</PreReleaseLabel>
+    <PackageVersion>$(VersionMajor).$(VersionMinor).$(VersionPatch)$(PreReleaseLabel)</PackageVersion>
+
+      <!-- Jenkins URLs -->
     <JenkinsUrl>http://masterbuild01.ams.dev:8080/hudson</JenkinsUrl>
     <DxaFrameworkArtifactsUrl>$(JenkinsUrl)/job/DXA%20$(DxaBuildType)%20CI%20Web%20App%20.NET/lastSuccessfulBuild/artifact/Site/bin</DxaFrameworkArtifactsUrl>
 
@@ -36,13 +42,23 @@
     <!--NOTE: not calling target DeployModules here; should be called separately by Jenkins build if needed. -->
   </Target>
 
-  <!-- =============================================================================================================================================  -->
-  <Target Name="PrepareBuild">
-    <Message Text="Preparing build..." Importance="high" />
+    <!-- =============================================================================================================================================  -->
+    <Target Name="PrepareBuild">
+        <Message Text="Preparing build..." Importance="high" />
 
-    <!--Restore all NuGet packages for DxaModules.sln -->
-    <Exec Command="_tools\RestorePackages DxaModules.sln" WorkingDirectory="$(ProjectDirectory)" />
-  </Target>
+        <Message Text="Restoring NuGet packages..."/>
+        <Exec Command="_tools\RestorePackages DxaModules.sln" WorkingDirectory="$(ProjectDirectory)" />
+
+        <ItemGroup>
+            <AssemblyInfo Include="[assembly: AssemblyVersion(&quot;$(VersionMajor).$(VersionMinor).$(VersionPatch).0&quot;)]" />
+            <AssemblyInfo Include="[assembly: AssemblyFileVersion(&quot;$(Version)&quot;)]" />
+            <AssemblyInfo Include="[assembly: AssemblyInformationalVersion(&quot;$(PackageVersion)&quot;)]" />
+            <AssemblyInfo Include="[assembly: AssemblyCopyright(&quot;Copyright © 2014-$([System.DateTime]::Now.ToString(&quot;yyyy&quot;)) SDL Group&quot;)]" />
+        </ItemGroup>
+
+        <Message Text="Updating CommonAssemblyInfo..."/>
+        <WriteLinesToFile File="$(ProjectDirectory)\CommonAssemblyInfo.cs" Overwrite="False" Lines="@(AssemblyInfo)" />
+    </Target>
 
   <!-- =============================================================================================================================================  -->
   <Target Name="RunBuild">
