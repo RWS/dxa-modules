@@ -1,5 +1,6 @@
 package com.sdl.dxa.modules.smarttarget.model.entity.smarttarget;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.api.model.MvcData;
@@ -20,7 +21,7 @@ public class SmartTargetRegion extends RegionModelImpl {
      * Indicates whether the Region has SmartTarget content (Promotions) or fallback content.
      */
     @JsonProperty("HasSmartTargetContent")
-    private boolean isWithSmartTargetContent;
+    private boolean isFallbackContentReplaced;
 
     /**
      * The maximum number of SmartTarget items to output in this Region.
@@ -77,6 +78,7 @@ public class SmartTargetRegion extends RegionModelImpl {
      *
      * @return the "Start Query" XPM markup if the site is a staging site or an empty string otherwise
      */
+    @JsonIgnore
     public String getStartQueryXpmMarkup() {
         Map<String, Object> xpmMetadata = this.getXpmMetadata();
         return String.valueOf(xpmMetadata != null && xpmMetadata.containsKey("Query") ? xpmMetadata.get("Query") : "");

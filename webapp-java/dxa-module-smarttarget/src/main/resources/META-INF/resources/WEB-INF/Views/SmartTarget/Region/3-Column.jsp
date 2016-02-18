@@ -5,8 +5,10 @@
 <jsp:useBean id="markup" type="com.sdl.webapp.common.markup.Markup" scope="request"/>
 
 <div ${markup.region(region)}>
+    ${region.startQueryXpmMarkup}
+
     <c:choose>
-        <c:when test="${region.withSmartTargetContent}">
+        <c:when test="${region.fallbackContentReplaced}">
             <c:forEach items="${region.entities}" var="promo">
                 <dxa:entity entity="${promo}" viewName="SmartTarget:3-Column-Promotion"/>
             </c:forEach>

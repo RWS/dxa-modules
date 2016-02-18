@@ -24,6 +24,7 @@ public class SmartTargetItem {
 
     private final Localization localization;
 
+    @JsonProperty("Entity")
     private EntityModel entity;
 
     @Setter(AccessLevel.PRIVATE)

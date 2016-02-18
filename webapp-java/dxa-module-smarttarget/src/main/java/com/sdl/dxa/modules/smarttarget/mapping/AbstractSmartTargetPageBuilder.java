@@ -126,12 +126,12 @@ public abstract class AbstractSmartTargetPageBuilder implements PageBuilder {
             }
 
             processMetadataForCurrentRegionModel(metadata, (SmartTargetRegion) stPageModel.getRegions().get(regionName));
-
-            String promotionViewName = getPromotionViewName(localization);
-            log.debug("Using promotion view name {}", promotionViewName);
-
-            processQueryAndPromotions(localization, stPageModel, promotionViewName);
         }
+
+        String promotionViewName = getPromotionViewName(localization);
+        log.debug("Using promotion view name {}", promotionViewName);
+
+        processQueryAndPromotions(localization, stPageModel, promotionViewName);
 
         return stPageModel;
     }

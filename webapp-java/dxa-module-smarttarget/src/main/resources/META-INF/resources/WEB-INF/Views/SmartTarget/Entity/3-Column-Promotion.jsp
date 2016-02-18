@@ -6,7 +6,7 @@
 
 <div ${markup.entity(entity)}>
 
-    <c:set var="loopItems" value="${entity.items}" scope="request"/>
+    <c:set var="loopItems" value="${entity.entityModels}" scope="request"/>
     <jsp:include page="../../Shared/Partials/3-Column-Loop.jsp"/>
 
 </div>

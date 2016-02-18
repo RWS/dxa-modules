@@ -1,11 +1,16 @@
 package com.sdl.dxa.modules.smarttarget.model.entity.smarttarget;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.Function;
+import com.google.common.collect.Collections2;
 import com.sdl.webapp.common.api.localization.Localization;
+import com.sdl.webapp.common.api.model.EntityModel;
 import com.sdl.webapp.common.api.model.entity.AbstractEntityModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +27,7 @@ public class SmartTargetPromotion extends AbstractEntityModel {
     @JsonProperty("Slogan")
     private String slogan;
 
+    @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
     @JsonProperty("Items")
     private List<SmartTargetItem> items;
 
@@ -37,5 +43,15 @@ public class SmartTargetPromotion extends AbstractEntityModel {
 
         return String.format("<!-- Start Promotion: {{ \"PromotionID\": \"%s\", \"RegionID\" : \"%s\"}} -->",
                 xpmMetadata.get("PromotionID"), xpmMetadata.get("RegionID"));
+    }
+
+    @JsonIgnore
+    public Collection<EntityModel> getEntityModels() {
+        return Collections2.transform(this.items, new Function<SmartTargetItem, EntityModel>() {
+            @Override
+            public EntityModel apply(SmartTargetItem smartTargetItem) {
+                return smartTargetItem.getEntity();
+            }
+        });
     }
 }

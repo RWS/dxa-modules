@@ -7,6 +7,7 @@
 
 <div ${markup.region(region)}>
     <div>
+        ${region.startQueryXpmMarkup}
         <dxa:entities/>
     </div>
 </div>

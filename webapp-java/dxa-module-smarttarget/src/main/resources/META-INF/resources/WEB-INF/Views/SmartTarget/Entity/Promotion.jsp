@@ -5,7 +5,7 @@
 <jsp:useBean id="markup" type="com.sdl.webapp.common.markup.Markup" scope="request"/>
 
 <div ${markup.entity(entity)}>
-    <c:forEach items="${entity.items}}" var="item">
+    <c:forEach items="${entity.entityModels}" var="item">
         <dxa:entity entity="${item}"/>
     </c:forEach>
 </div>

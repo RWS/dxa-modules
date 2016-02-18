@@ -1,14 +1,12 @@
 package com.sdl.dxa.modules.smarttarget.mapping;
 
-import com.google.common.base.Function;
-import com.google.common.base.Predicate;
 import com.sdl.dxa.modules.smarttarget.model.entity.smarttarget.SmartTargetItem;
 import com.sdl.dxa.modules.smarttarget.model.entity.smarttarget.SmartTargetPageModel;
 import com.sdl.dxa.modules.smarttarget.model.entity.smarttarget.SmartTargetPromotion;
 import com.sdl.dxa.modules.smarttarget.model.entity.smarttarget.SmartTargetRegion;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.localization.Localization;
-import com.sdl.webapp.common.api.model.mvcdata.MvcDataCreator;
+import com.sdl.webapp.common.api.model.mvcdata.DefaultsMvcData;
 import com.sdl.webapp.util.dd4t.TcmUtils;
 import com.tridion.ambientdata.AmbientDataContext;
 import com.tridion.ambientdata.claimstore.ClaimStore;
@@ -34,14 +32,12 @@ import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.google.common.collect.Collections2.filter;
-import static com.google.common.collect.Collections2.transform;
+import static com.sdl.webapp.common.api.model.mvcdata.MvcDataCreator.creator;
 
 @Component
 @Slf4j
@@ -49,58 +45,6 @@ public class SmartTargetPageBuilder extends AbstractSmartTargetPageBuilder {
 
     @Autowired
     private WebRequestContext webRequestContext;
-
-    private static void setXpmMetadataForStaging(Localization localization, final List<Promotion> promotions,
-                                                 final SmartTargetRegion smartTargetRegion, final String currentRegionName) {
-        if (localization.isStaging()) {
-            // The SmartTarget API provides the entire XPM markup tag; put it in XpmMetadata["Query"]
-            HashMap<String, Object> xpmMetadata = new HashMap<>(1);
-            xpmMetadata.put("Query", ResultSetImpl.getExperienceManagerMarkup(currentRegionName,
-                    smartTargetRegion.getMaxItems(), promotions));
-            smartTargetRegion.setXpmMetadata(xpmMetadata);
-        }
-    }
-
-    private static SmartTargetPromotion createPromotionEntity(final Promotion promotion, final String promotionViewName,
-                                                              final String regionName, final Localization localization) throws SmartTargetException {
-        SmartTargetPromotion smartTargetPromotion = new SmartTargetPromotion();
-        smartTargetPromotion.setMvcData(MvcDataCreator.creator()
-                .fromQualifiedName(promotionViewName)
-                .create());
-
-        HashMap<String, Object> xpmMetadata = new HashMap<>(2);
-        xpmMetadata.put("PromotionID", promotion.getPromotionId());
-        xpmMetadata.put("RegionID", regionName);
-
-        smartTargetPromotion.setXpmMetadata(xpmMetadata);
-
-        smartTargetPromotion.setTitle(promotion.getTitle());
-        smartTargetPromotion.setSlogan(promotion.getSlogan());
-
-
-        Collection<Item> filteredItems = filter(promotion.getItems(), new Predicate<Item>() {
-            @Override
-            public boolean apply(Item input) {
-                return input.isVisible();
-            }
-        });
-
-        smartTargetPromotion.setItems(new ArrayList<>(transform(filteredItems, new Function<Item, SmartTargetItem>() {
-            @Override
-            public SmartTargetItem apply(Item input) {
-                String id = null;
-                try {
-                    id = String.format("%s-%s", input.getComponentUri().getItemId(), input.getTemplateUri().getItemId());
-                } catch (SmartTargetException e) {
-                    log.error("Smart target exception", e);
-                    //todo do something more adequate
-                }
-                return new SmartTargetItem(id, localization);
-            }
-        })));
-
-        return smartTargetPromotion;
-    }
 
     @SneakyThrows(ParseException.class)
     private static ResultSet executeSmartTargetQuery(SmartTargetPageModel stPageModel) throws SmartTargetException {
@@ -111,11 +55,12 @@ public class SmartTargetPageBuilder extends AbstractSmartTargetPageBuilder {
         String triggers = AmbientDataHelper.getTriggers(claimStore);
 
         QueryBuilder queryBuilder = new QueryBuilder();
-        queryBuilder.setMaxItems(100);
         queryBuilder.parseQueryString(triggers);
-        queryBuilder.addCriteria(new PublicationCriteria(publicationUri))
+        queryBuilder
+                .addCriteria(new PublicationCriteria(publicationUri))
                 .addCriteria(new PageCriteria(pageUri));
 
+        // Adding all the page regions to the query for having only 1 query a page
         for (SmartTargetRegion region : stPageModel.getRegions().get(SmartTargetRegion.class)) {
             //noinspection ObjectAllocationInLoop
             queryBuilder.addCriteria(new RegionCriteria(region.getName()));
@@ -124,95 +69,148 @@ public class SmartTargetPageBuilder extends AbstractSmartTargetPageBuilder {
         return queryBuilder.execute();
     }
 
+    private static void clearFallbackContentIfNeeded(SmartTargetRegion smartTargetRegion) {
+        if (!smartTargetRegion.isFallbackContentReplaced()) {
+            // Discard any fallback content coming from Content Manager
+            smartTargetRegion.getEntities().clear();
+            // and the next time we shouldn't do it for this region because it already indeed has a ST content
+            smartTargetRegion.setFallbackContentReplaced(true);
+        }
+    }
+
+    private static boolean isNotPromotionToShow(SmartTargetRegion smartTargetRegion, Promotion promotion) {
+        return !promotion.isVisible() || !promotion.supportsRegion(smartTargetRegion.getName());
+    }
+
+    private static void setXpmMetadataForStaging(Localization localization, final List<Promotion> promotions,
+                                                 final SmartTargetRegion smartTargetRegion) {
+        if (localization.isStaging()) {
+            // The SmartTarget API provides the entire XPM markup tag; put it in XpmMetadata["Query"]
+            HashMap<String, Object> xpmMetadata = new HashMap<>(1);
+            String currentRegionName = smartTargetRegion.getName();
+
+            xpmMetadata.put("Query",
+                    ResultSetImpl.getExperienceManagerMarkup(currentRegionName, smartTargetRegion.getMaxItems(), promotions));
+            smartTargetRegion.setXpmMetadata(xpmMetadata);
+        }
+    }
+
+    private static boolean filterResultSet(SmartTargetPageModel stPageModel, List<Promotion> promotions, SmartTargetRegion smartTargetRegion,
+                                           Map<String, ExperimentCookie> existingExperimentCookies, List<String> itemsAlreadyOnPage) {
+
+        try {
+            ResultSetImpl.filterPromotions(promotions,
+                    smartTargetRegion.getName(),
+                    smartTargetRegion.getMaxItems(),
+                    stPageModel.isAllowDuplicates(),
+
+                    new ArrayList<String>(),
+
+                    itemsAlreadyOnPage,
+                    existingExperimentCookies,
+
+                    new HashMap<String, ExperimentCookie>(),
+                    new ExperimentDimensions());
+        } catch (SmartTargetException e) {
+            log.error("Smart target exception while filtering ResultSet from ST", e);
+            return false;
+        }
+        return true;
+    }
+
+    private static SmartTargetPromotion createPromotionEntity(final Promotion promotion, final String promotionViewName,
+                                                              final String regionName, final Localization localization) throws SmartTargetException {
+        SmartTargetPromotion smartTargetPromotion = new SmartTargetPromotion();
+        smartTargetPromotion.setMvcData(creator()
+                .defaults(DefaultsMvcData.CORE_ENTITY)
+                .mergeIn(creator().fromQualifiedName(promotionViewName).create())
+                .create());
+
+        Map<String, Object> xpmMetadata = new HashMap<>(2);
+        xpmMetadata.put("PromotionID", promotion.getPromotionId());
+        xpmMetadata.put("RegionID", regionName);
+
+        smartTargetPromotion.setXpmMetadata(xpmMetadata);
+
+        smartTargetPromotion.setTitle(promotion.getTitle());
+        smartTargetPromotion.setSlogan(promotion.getSlogan());
+
+        // filter items out and convert to SmartTargetItem
+        List<SmartTargetItem> smartTargetItems = new ArrayList<>(promotion.getItems().size());
+        for (Item item : promotion.getItems()) {
+            if (!item.isVisible()) {
+                continue;
+            }
+
+            String id = String.format("%s-%s", item.getComponentUri().getItemId(), item.getTemplateUri().getItemId());
+
+            //noinspection ObjectAllocationInLoop
+            smartTargetItems.add(new SmartTargetItem(id, localization));
+        }
+        smartTargetPromotion.setItems(smartTargetItems);
+
+        return smartTargetPromotion;
+    }
+
     @Override
     protected void processQueryAndPromotions(Localization localization, SmartTargetPageModel stPageModel, String promotionViewName) {
-        final ResultSet resultSet;
         try {
-            resultSet = executeSmartTargetQuery(stPageModel);
+            final ResultSet resultSet = executeSmartTargetQuery(stPageModel);
+
+            if (resultSet == null) {
+                log.warn("SmartTarget API returned null as a result for query. This can be because of timeout. Skipping processing promotions.");
+                return;
+            }
+
+            @NonNull final List<Promotion> promotions;
+            if (resultSet.getPromotions() == null) {
+                promotions = Collections.emptyList();
+            } else {
+                promotions = resultSet.getPromotions();
+            }
+
+            log.debug("SmartTarget query returned {} Promotions.", promotions.size());
+
+            // Filter the Promotions for each SmartTargetRegion
+            filterPromotionsForRegion(localization, stPageModel, promotions, promotionViewName);
+
         } catch (SmartTargetException e) {
             log.error("Smart target exception", e);
             //todo do something more adequate
-            return;
         }
-
-        if (resultSet == null) {
-            log.warn("SmartTarget API returned null as a result for query. This can be because of timeout. Skipping processing promotions.");
-            return;
-        }
-
-        @NonNull final List<Promotion> promotions = resultSet.getPromotions() == null ?
-                Collections.<Promotion>emptyList() : resultSet.getPromotions();
-        log.debug("SmartTarget query returned {} Promotions.", promotions.size());
-
-        // Filter the Promotions for each SmartTargetRegion
-        filterPromotionsForRegion(localization, stPageModel, promotions, promotionViewName);
     }
 
-    @SuppressWarnings({"ObjectAllocationInLoop", "CollectionWithoutInitialCapacity"})
     private void filterPromotionsForRegion(Localization localization, SmartTargetPageModel stPageModel,
-                                           final List<Promotion> promotions, String promotionViewName) {
+                                           final List<Promotion> promotions, String promotionViewName) throws SmartTargetException {
         // TODO: we shouldn't access ServletRequest in a Model Builder.
         Map<String, ExperimentCookie> existingExperimentCookies =
                 CookieProcessor.getExperimentCookies(webRequestContext.getServletRequest());
+        List<String> itemsAlreadyOnPage = new ArrayList<>();
 
         for (final SmartTargetRegion smartTargetRegion : stPageModel.getRegions().get(SmartTargetRegion.class)) {
             final String currentRegionName = smartTargetRegion.getName();
 
-            Map<String, ExperimentCookie> newExperimentCookies = new HashMap<>();
-            ExperimentDimensions experimentDimensions = new ExperimentDimensions();
-            List<String> itemsOutputInRegion = new ArrayList<>();
-            List<String> itemsAlreadyOnPage = new ArrayList<>();
-            try {
-                ResultSetImpl.filterPromotions(promotions,
-                        currentRegionName,
-                        smartTargetRegion.getMaxItems(),
-                        stPageModel.isAllowDuplicates(),
-                        itemsOutputInRegion,
-                        itemsAlreadyOnPage,
-                        existingExperimentCookies,
-                        newExperimentCookies,
-                        experimentDimensions);
-            } catch (SmartTargetException e) {
-                log.error("Smart target exception", e);
-                //todo do something more adequate
+            if (!filterResultSet(stPageModel, promotions, smartTargetRegion, existingExperimentCookies, itemsAlreadyOnPage)) {
                 continue;
             }
 
-            setXpmMetadataForStaging(localization, promotions, smartTargetRegion, currentRegionName);
+            setXpmMetadataForStaging(localization, promotions, smartTargetRegion);
 
             // Create SmartTargetPromotion Entity Models for visible Promotions in the current SmartTargetRegion.
             // It seems that ResultSet.FilterPromotions doesn't really filter on Region name, so we do post-filtering here.
-            for (Promotion promotion : filter(promotions, new PromotionVisiblePredicate(currentRegionName))) {
-                SmartTargetPromotion smartTargetPromotion;
-                try {
-                    smartTargetPromotion = createPromotionEntity(promotion, promotionViewName, currentRegionName, localization);
-                } catch (SmartTargetException e) {
-                    log.error("Smart target exception", e);
-                    //todo do something more adequate
+            for (Promotion promotion : promotions) {
+                if (isNotPromotionToShow(smartTargetRegion, promotion)) {
                     continue;
                 }
 
-                if (!smartTargetRegion.isWithSmartTargetContent()) {
-                    // Discard any fallback content coming from Content Manager
-                    smartTargetRegion.getEntities().clear();
-                    smartTargetRegion.setWithSmartTargetContent(true);
-                }
+                // if we found promotions in ST then we should filter fallback content out first
+                clearFallbackContentIfNeeded(smartTargetRegion);
+
+                SmartTargetPromotion smartTargetPromotion =
+                        createPromotionEntity(promotion, promotionViewName, currentRegionName, localization);
 
                 smartTargetRegion.addEntity(smartTargetPromotion);
             }
-        }
-    }
-
-    private static class PromotionVisiblePredicate implements Predicate<Promotion> {
-        private final String currentRegionName;
-
-        public PromotionVisiblePredicate(String currentRegionName) {
-            this.currentRegionName = currentRegionName;
-        }
-
-        @Override
-        public boolean apply(Promotion input) {
-            return input.isVisible() && input.supportsRegion(currentRegionName);
         }
     }
 }
