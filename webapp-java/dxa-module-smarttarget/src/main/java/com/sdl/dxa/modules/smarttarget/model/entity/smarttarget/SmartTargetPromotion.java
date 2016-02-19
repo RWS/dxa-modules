@@ -41,7 +41,7 @@ public class SmartTargetPromotion extends AbstractEntityModel {
             return "";
         }
 
-        return String.format("<!-- Start Promotion: {{ \"PromotionID\": \"%s\", \"RegionID\" : \"%s\"}} -->",
+        return String.format("<!-- Start Promotion: { \"PromotionID\": \"%s\", \"RegionID\" : \"%s\" } -->",
                 xpmMetadata.get("PromotionID"), xpmMetadata.get("RegionID"));
     }
 

@@ -23,7 +23,7 @@ public class SmartTargetRegionTest {
         String xpmMarkup = region.getXpmMarkup(null);
 
         //then
-        assertEquals("<!-- Start Promotion Region: {{ \"RegionID\": \"TestRegion\"}} -->", xpmMarkup);
+        assertEquals("<!-- Start Promotion Region: { \"RegionID\": \"TestRegion\" } -->", xpmMarkup);
     }
 
     @Test(expected = DxaException.class)

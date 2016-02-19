@@ -65,7 +65,7 @@ public class SmartTargetRegion extends RegionModelImpl {
      */
     @Override
     public String getXpmMarkup(Localization localization) {
-        return String.format("<!-- Start Promotion Region: {{ \"RegionID\": \"%s\"}} -->", this.getName());
+        return String.format("<!-- Start Promotion Region: { \"RegionID\": \"%s\" } -->", this.getName());
     }
 
     /**

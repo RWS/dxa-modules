@@ -31,7 +31,7 @@ public class SmartTargetPromotionTest {
         String xpmMarkup = promotion.getXpmMarkup(null);
 
         //then
-        assertEquals("<!-- Start Promotion: {{ \"PromotionID\": \"promoid\", \"RegionID\" : \"regionid\"}} -->", xpmMarkup);
+        assertEquals("<!-- Start Promotion: { \"PromotionID\": \"promoid\", \"RegionID\" : \"regionid\" } -->", xpmMarkup);
     }
 
     @Test
