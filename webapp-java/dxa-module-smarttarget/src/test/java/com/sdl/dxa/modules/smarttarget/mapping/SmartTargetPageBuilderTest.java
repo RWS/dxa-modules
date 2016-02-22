@@ -1,10 +1,8 @@
 package com.sdl.dxa.modules.smarttarget.mapping;
 
 import com.google.common.collect.ImmutableMap;
-import com.sdl.dxa.modules.smarttarget.model.entity.smarttarget.SmartTargetPageModel;
 import com.sdl.dxa.modules.smarttarget.model.entity.smarttarget.SmartTargetRegion;
 import com.sdl.webapp.common.api.content.ContentProviderException;
-import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.api.model.PageModel;
 import com.sdl.webapp.common.api.model.RegionModel;
 import com.sdl.webapp.common.api.model.page.PageModelImpl;
@@ -24,9 +22,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-public class AbstractSmartTargetPageBuilderTest {
+public class SmartTargetPageBuilderTest {
 
-    private AbstractSmartTargetPageBuilder builder = new SmartTargetBuilderImpl();
+    private SmartTargetPageBuilder builder = new SmartTargetPageBuilder();
 
     private static PageModel createPageModel(RegionModel... regionModels) throws DxaException {
         PageModel pageModel = new PageModelImpl();
@@ -106,13 +104,4 @@ public class AbstractSmartTargetPageBuilderTest {
         //lower is more priority
         assertTrue(pageBuilderOrder < builder.getOrder());
     }
-
-    private static class SmartTargetBuilderImpl extends AbstractSmartTargetPageBuilder {
-
-        @Override
-        protected void processQueryAndPromotions(Localization localization, SmartTargetPageModel stPageModel, String promotionViewName) {
-            throw new UnsupportedOperationException();
-        }
-    }
-
 }

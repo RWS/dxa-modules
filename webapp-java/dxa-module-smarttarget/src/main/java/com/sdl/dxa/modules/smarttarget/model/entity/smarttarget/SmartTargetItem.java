@@ -18,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
  * <p>SmartTargetItem class.</p>
  */
 @EqualsAndHashCode
-@ToString
+@ToString(doNotUseGetters = true)
 @Slf4j
 public class SmartTargetItem {
 

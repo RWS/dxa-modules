@@ -11,8 +11,86 @@
 
     <artifactId>dxa-module-smarttarget</artifactId>
 
-    <name>DXA Modules - SmartTarget Common</name>
-    <description>Common functionality for implementations of DXA SmartTarget module</description>
+    <name>DXA Modules - SmartTarget</name>
+    <description>Implementations of DXA SmartTarget module</description>
+
+    <profiles>
+        <profile>
+            <id>cd-7.1.0</id>
+            <properties>
+                <build.classifier>7.1.0</build.classifier>
+            </properties>
+            <dependencyManagement>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.sdl.dxa</groupId>
+                        <artifactId>dxa-bom-2013sp1</artifactId>
+                        <version>${project.version}</version>
+                        <scope>import</scope>
+                        <type>pom</type>
+                    </dependency>
+                </dependencies>
+            </dependencyManagement>
+            <dependencies>
+                <dependency>
+                    <groupId>com.tridion.smarttarget</groupId>
+                    <artifactId>session_cartridge</artifactId>
+                </dependency>
+                <dependency>
+                    <groupId>com.tridion.smarttarget</groupId>
+                    <artifactId>smarttarget_cartridge</artifactId>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>cd-8.1.0</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <build.classifier>8.1.0</build.classifier>
+            </properties>
+            <dependencyManagement>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.sdl.dxa</groupId>
+                        <artifactId>dxa-bom-web8</artifactId>
+                        <version>${project.version}</version>
+                        <scope>import</scope>
+                        <type>pom</type>
+                    </dependency>
+                </dependencies>
+            </dependencyManagement>
+            <dependencies>
+                <dependency>
+                    <groupId>net.sf.dozer</groupId>
+                    <artifactId>dozer</artifactId>
+                    <version>5.5.1</version>
+                </dependency>
+
+                <dependency>
+                    <groupId>com.sdl.web.experience</groupId>
+                    <artifactId>xo-client</artifactId>
+                    <version>8.1.0</version>
+                </dependency>
+                <dependency>
+                    <groupId>com.sdl.web.experience</groupId>
+                    <artifactId>xo-client-compatible</artifactId>
+                    <version>8.1.0</version>
+                </dependency>
+                <dependency>
+                    <groupId>com.sdl.web.experience</groupId>
+                    <artifactId>xo-model</artifactId>
+                    <version>8.1.0</version>
+                </dependency>
+
+                <dependency>
+                    <groupId>com.sdl.web</groupId>
+                    <artifactId>web-ambient-api</artifactId>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
 
     <dependencies>
         <dependency>
@@ -30,14 +108,32 @@
         </dependency>
 
         <dependency>
-            <groupId>org.dd4t</groupId>
-            <artifactId>dd4t-api</artifactId>
+            <groupId>com.tridion.smarttarget</groupId>
+            <artifactId>smarttarget_core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.tridion.smarttarget</groupId>
+            <artifactId>smarttarget_entitymodel</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.dd4t</groupId>
+            <artifactId>dd4t-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.dd4t</groupId>
             <artifactId>dd4t-core</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.tridion</groupId>
+            <artifactId>cd_core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.tridion</groupId>
+            <artifactId>cd_ambient</artifactId>
         </dependency>
 
         <dependency>
@@ -61,4 +157,16 @@
             <artifactId>commons-logging</artifactId>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <classifier>${build.classifier}</classifier>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
