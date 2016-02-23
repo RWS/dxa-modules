@@ -107,7 +107,7 @@
                                             find(parts.getAt(1..len))
                                         }
 
-                                        def parts = ['dxa-module-smarttarget', 'dxa-module-smarttarget-common', 'pom.xml']
+                                        def parts = ['webapp-java', 'dxa-module-smarttarget', 'dxa-module-smarttarget-common', 'pom.xml']
                                         String path = find(parts);
 
                                         /* Builds the second profile automatically if no profiles are specified */
