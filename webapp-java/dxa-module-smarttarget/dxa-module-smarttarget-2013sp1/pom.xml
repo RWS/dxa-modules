@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>dxa-module-smarttarget</artifactId>
+        <groupId>com.sdl.dxa.modules</groupId>
+        <version>1.3.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>dxa-module-smarttarget-2013sp1</artifactId>
+
+    <name>DXA Modules - SmartTarget 2013SP1</name>
+    <description>Dependency for SmartTarget Module for 2013SP1</description>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.sdl.dxa</groupId>
+                <artifactId>dxa-bom-2013sp1</artifactId>
+                <version>${project.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>com.tridion.smarttarget</groupId>
+            <artifactId>session_cartridge</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.tridion.smarttarget</groupId>
+            <artifactId>smarttarget_cartridge</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sdl.dxa.modules</groupId>
+            <artifactId>dxa-module-smarttarget-common</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>
