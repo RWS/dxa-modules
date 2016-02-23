@@ -94,12 +94,16 @@
 
                                         def find
                                         find = { List<String> parts ->
+                                            println "[DEBUG] Invoked find() with parts = ${parts}"
                                             String joined = new File('.').absolutePath + File.separator + parts.join(File.separator)
 
+                                            println "[DEBUG] Check if ${joined} exists or the last path part left"
                                             if (parts.size() == 1 || new File(joined).exists()) {
+                                                println "[DEBUG] Returning ${joined}"
                                                 return joined
                                             }
                                             int len = parts.size() - 1
+                                            println "[DEBUG] Size of path parts array ${len}"
                                             find(parts.getAt(1..len))
                                         }
 
