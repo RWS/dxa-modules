@@ -52,6 +52,7 @@
         <dependency>
             <groupId>com.sdl.dxa.modules</groupId>
             <artifactId>dxa-module-smarttarget-common</artifactId>
+            <classifier>8.1.0</classifier>
         </dependency>
     </dependencies>
 
