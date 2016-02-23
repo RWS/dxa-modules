@@ -89,18 +89,14 @@
                                 </goals>
                                 <configuration>
                                     <source><![CDATA[
-                                        println "[INFO] Auto-build for ST for 7.1.0 since neither cd-7.1.0 nor cd-8.1.0 were not explicitly set"
                                         println()
+                                        println "[INFO] Auto-build for ST for 7.1.0 since neither cd-7.1.0 nor cd-8.1.0 were not explicitly set"
 
                                         def find
                                         find = { List<String> parts ->
-                                            if (parts.size() < 2) {
-                                                return parts.get(0)
-                                            }
+                                            String joined = new File('.').absolutePath + File.separator + parts.join(File.separator)
 
-                                            String joined = './' + parts.join('/')
-
-                                            if (new File(joined).exists()) {
+                                            if (parts.size() == 1 || new File(joined).exists()) {
                                                 return joined
                                             }
                                             int len = parts.size() - 1
@@ -111,8 +107,9 @@
                                         String path = find(parts);
 
                                         /* Builds the second profile automatically if no profiles are specified */
-                                        groovy.lang.GString command = "cmd /c mvn install -f ${path} -Pcd-7.1.0"
-                                        println "Executing ${command}"
+                                        groovy.lang.GString command = "cmd /c mvn install -f \"${path}\" -Pcd-7.1.0"
+                                        println "[INFO] Executing ${command}"
+                                        println()
                                         command.execute().waitForProcessOutput(System.out, System.err)
                                         ]]></source>
                                 </configuration>
