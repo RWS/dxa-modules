@@ -10,49 +10,22 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>dxa-module-smarttarget</artifactId>
+    <packaging>pom</packaging>
 
-    <name>DXA Modules - SmartTarget Common</name>
-    <description>Common functionality for implementations of DXA SmartTarget module</description>
+    <name>DXA Modules - SmartTarget Parent</name>
+    <description>Implementations of DXA SmartTarget module</description>
 
-    <dependencies>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-        </dependency>
+    <modules>
+        <module>dxa-module-smarttarget-common</module>
+        <module>dxa-module-smarttarget-2013sp1</module>
+        <module>dxa-module-smarttarget-web8</module>
+    </modules>
 
-        <dependency>
-            <groupId>com.sdl.dxa</groupId>
-            <artifactId>dxa-tridion-provider</artifactId>
-        </dependency>
+    <repositories>
+        <repository>
+            <id>local-project-repo</id>
+            <url>file:///${project.basedir}/../../local-project-repo</url>
+        </repository>
+    </repositories>
 
-        <dependency>
-            <groupId>org.dd4t</groupId>
-            <artifactId>dd4t-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>commons-discovery</groupId>
-            <artifactId>commons-discovery</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>commons-httpclient</groupId>
-            <artifactId>commons-httpclient</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-        </dependency>
-    </dependencies>
 </project>
