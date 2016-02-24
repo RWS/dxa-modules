@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>dxa-module-smarttarget-2013sp1</artifactId>
+    <packaging>pom</packaging>
 
     <name>DXA Modules - SmartTarget 2013SP1</name>
     <description>Dependency for SmartTarget Module for 2013SP1</description>

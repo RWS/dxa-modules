@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>dxa-module-smarttarget-web8</artifactId>
+    <packaging>pom</packaging>
 
     <name>DXA Modules - SmartTarget Web 8</name>
     <description>Dependency for SmartTarget Module for Web 8</description>
