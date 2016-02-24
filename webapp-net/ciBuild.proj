@@ -61,17 +61,27 @@
         <WriteLinesToFile File="$(ProjectDirectory)\CommonAssemblyInfo.cs" Overwrite="False" Lines="@(AssemblyInfo)" />
     </Target>
 
-  <!-- =============================================================================================================================================  -->
-  <Target Name="RunBuild">
-    <Message Text="Running build commands..." Importance="high" />
+    <!-- =============================================================================================================================================  -->
+    <Target Name="RunBuild">
+        <Message Text="Running build commands..." Importance="high" />
 
-    <MSBuild 
-      Projects="$(ProjectDirectory)\DxaModules.sln" 
-      Properties="Configuration=$(BuildConfiguration);Platform=Any CPU;AsmVersion=$(Version);FileVersion=$(Version)" 
-      Targets="Build" 
-      StopOnFirstFailure="true" 
-      />
-  </Target>
+        <Message Text="Building all modules in '$(BuildConfiguration)' configuration..."/>
+        <MSBuild 
+            Projects="$(ProjectDirectory)\DxaModules.sln" 
+            Properties="Configuration=$(BuildConfiguration);Platform=Any CPU;AsmVersion=$(Version);FileVersion=$(Version)" 
+            Targets="Build" 
+            StopOnFirstFailure="true" 
+            />
+
+        <!--We only need to build ST Module in Release_7.1 configuration too, but it seems MSBuild doesn't want to build non-standard configs without a solution file.  -->
+        <Message Text="Building all modules in 'Release_7.1' configuration..."/>
+        <MSBuild
+            Projects="$(ProjectDirectory)\DxaModules.sln"
+            Properties="Configuration=Release_7.1;Platform=Any CPU;AsmVersion=$(Version);FileVersion=$(Version)"
+            Targets="Build"
+            StopOnFirstFailure="true"
+            />
+    </Target>
 
   <!-- =============================================================================================================================================  -->
   <ItemGroup>
