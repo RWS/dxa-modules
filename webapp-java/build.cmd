@@ -1,0 +1,25 @@
+@ECHO OFF
+
+REM Usage: build.cmd command
+REM command is passed to mvn as it is
+REM E.g. 'build.cmd clean install -Pcd-8.1.0' will be 'mvn -f project-name\pom.xml clean install -Pcd-8.1.0'
+
+echo Building DXA Modules...
+
+if "%*" == "" ( set command=clean install ) else ( set command=%* )
+
+call mvn -f dxa-module-cid\pom.xml %command% || exit /b %errorlevel%
+call mvn -f dxa-module-core\pom.xml %command% || exit /b %errorlevel%
+call mvn -f dxa-module-googleanalytics\pom.xml %command% || exit /b %errorlevel%
+call mvn -f dxa-module-mediamanager\pom.xml %command% || exit /b %errorlevel%
+call mvn -f dxa-module-search\pom.xml %command% || exit /b %errorlevel%
+call mvn -f dxa-module-smarttarget\pom.xml %command% || exit /b %errorlevel%
+
+echo We are done :)
+
+if "%*" == "" (
+	echo Press any key to continue...
+	pause > nul
+)
+
+@ECHO ON
