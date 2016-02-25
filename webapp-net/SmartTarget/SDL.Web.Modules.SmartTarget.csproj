@@ -145,16 +145,9 @@ xcopy "$(ProjectDir)Areas" "%25DXA_SITE_DIR%25\Areas" /S /I /Y
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Target Name="BeforeBuild" Condition="'$(Configuration)' == 'Release_7.1'">
-	<Message Text="Copying SmartTarget artifacts to output ($(TargetDir)) ..."/>
-
-	<ItemGroup>
-      <SmartTargetArtifacts Include="..\_references\st-2014-sp1\**\*.*" />
-    </ItemGroup>
-
-    <Copy SourceFiles="@(SmartTargetArtifacts)" DestinationFolder="$(TargetDir)\%(RecursiveDir)" />    
-  </Target>
 </Project>
