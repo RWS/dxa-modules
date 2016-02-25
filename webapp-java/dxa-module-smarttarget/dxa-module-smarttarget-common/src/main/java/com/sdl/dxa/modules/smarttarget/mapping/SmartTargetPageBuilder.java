@@ -142,7 +142,7 @@ public class SmartTargetPageBuilder implements PageBuilder {
         }
     }
 
-    private static boolean isNotPromotionToShow(SmartTargetRegion smartTargetRegion, Promotion promotion) {
+    private static boolean isPromotionToSkip(SmartTargetRegion smartTargetRegion, Promotion promotion) {
         return !promotion.isVisible() || !promotion.supportsRegion(smartTargetRegion.getName());
     }
 
@@ -298,7 +298,6 @@ public class SmartTargetPageBuilder implements PageBuilder {
 
         } catch (SmartTargetException e) {
             log.error("Smart target exception", e);
-            //todo do something more adequate
         }
     }
 
@@ -321,7 +320,7 @@ public class SmartTargetPageBuilder implements PageBuilder {
             // Create SmartTargetPromotion Entity Models for visible Promotions in the current SmartTargetRegion.
             // It seems that ResultSet.FilterPromotions doesn't really filter on Region name, so we do post-filtering here.
             for (Promotion promotion : promotions) {
-                if (isNotPromotionToShow(smartTargetRegion, promotion)) {
+                if (isPromotionToSkip(smartTargetRegion, promotion)) {
                     continue;
                 }
 
