@@ -49,7 +49,6 @@
         <dependency>
             <groupId>com.tridion.smarttarget</groupId>
             <artifactId>smarttarget_google-analytics</artifactId>
-            <version>web8</version>
         </dependency>
         <dependency>
             <groupId>com.google.api-client</groupId>
