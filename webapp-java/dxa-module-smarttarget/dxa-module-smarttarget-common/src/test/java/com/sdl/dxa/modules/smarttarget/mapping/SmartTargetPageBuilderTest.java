@@ -1,7 +1,7 @@
 package com.sdl.dxa.modules.smarttarget.mapping;
 
 import com.google.common.collect.ImmutableMap;
-import com.sdl.dxa.modules.smarttarget.model.entity.smarttarget.SmartTargetRegion;
+import com.sdl.dxa.modules.smarttarget.model.entity.SmartTargetRegion;
 import com.sdl.webapp.common.api.content.ContentProviderException;
 import com.sdl.webapp.common.api.model.PageModel;
 import com.sdl.webapp.common.api.model.RegionModel;

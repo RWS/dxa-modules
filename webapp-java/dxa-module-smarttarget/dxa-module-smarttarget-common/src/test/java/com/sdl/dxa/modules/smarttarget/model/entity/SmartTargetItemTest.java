@@ -1,10 +1,11 @@
-package com.sdl.dxa.modules.smarttarget.model.entity.smarttarget;
+package com.sdl.dxa.modules.smarttarget.model.entity;
 
 import com.sdl.webapp.common.api.content.ContentProvider;
 import com.sdl.webapp.common.api.content.ContentProviderException;
 import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.api.model.EntityModel;
 import com.sdl.webapp.common.api.model.entity.Article;
+import com.sdl.webapp.common.api.model.mvcdata.MvcDataImpl;
 import com.sdl.webapp.common.exceptions.DxaException;
 import com.sdl.webapp.common.util.ApplicationContextHolder;
 import org.junit.Test;
@@ -51,6 +52,8 @@ public class SmartTargetItemTest {
         //then
         assertEquals(expected, entity);
         assertEquals(expected, entity2);
+        assertEquals(SmartTargetItem.class, entity.getMvcData().getMetadata().get("clazz"));
+        assertEquals(SmartTargetItem.class, entity2.getMvcData().getMetadata().get("clazz"));
 
         verify(contentProvider, times(1)).getEntityModel(eq("qwe1"), any(Localization.class));
     }
@@ -64,6 +67,7 @@ public class SmartTargetItemTest {
         public EntityModel entityModel1() {
             Article article = new Article();
             article.setId("qwe1");
+            article.setMvcData(new MvcDataImpl.MvcDataImplBuilder().build());
             return article;
         }
 
@@ -72,6 +76,7 @@ public class SmartTargetItemTest {
         public EntityModel entityModel2() {
             Article article = new Article();
             article.setId("qwe2");
+            article.setMvcData(new MvcDataImpl.MvcDataImplBuilder().build());
             return article;
         }
 

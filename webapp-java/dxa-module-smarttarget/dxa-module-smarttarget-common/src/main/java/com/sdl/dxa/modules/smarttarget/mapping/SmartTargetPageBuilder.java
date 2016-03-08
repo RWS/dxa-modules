@@ -1,13 +1,15 @@
 package com.sdl.dxa.modules.smarttarget.mapping;
 
-import com.sdl.dxa.modules.smarttarget.model.entity.smarttarget.SmartTargetItem;
-import com.sdl.dxa.modules.smarttarget.model.entity.smarttarget.SmartTargetPageModel;
-import com.sdl.dxa.modules.smarttarget.model.entity.smarttarget.SmartTargetPromotion;
-import com.sdl.dxa.modules.smarttarget.model.entity.smarttarget.SmartTargetRegion;
+import com.sdl.dxa.modules.smarttarget.markup.TrackingMarkupDecorator;
+import com.sdl.dxa.modules.smarttarget.model.entity.SmartTargetItem;
+import com.sdl.dxa.modules.smarttarget.model.entity.SmartTargetPageModel;
+import com.sdl.dxa.modules.smarttarget.model.entity.SmartTargetPromotion;
+import com.sdl.dxa.modules.smarttarget.model.entity.SmartTargetRegion;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.content.ContentProvider;
 import com.sdl.webapp.common.api.content.ContentProviderException;
 import com.sdl.webapp.common.api.localization.Localization;
+import com.sdl.webapp.common.api.model.EntityModel;
 import com.sdl.webapp.common.api.model.PageModel;
 import com.sdl.webapp.common.api.model.mvcdata.DefaultsMvcData;
 import com.sdl.webapp.common.api.model.mvcdata.MvcDataCreator;
@@ -18,6 +20,7 @@ import com.tridion.ambientdata.AmbientDataContext;
 import com.tridion.ambientdata.claimstore.ClaimStore;
 import com.tridion.smarttarget.SmartTargetException;
 import com.tridion.smarttarget.analytics.tracking.ExperimentDimensions;
+import com.tridion.smarttarget.query.Experiment;
 import com.tridion.smarttarget.query.ExperimentCookie;
 import com.tridion.smarttarget.query.Item;
 import com.tridion.smarttarget.query.Promotion;
@@ -30,6 +33,7 @@ import com.tridion.smarttarget.query.builder.RegionCriteria;
 import com.tridion.smarttarget.utils.AmbientDataHelper;
 import com.tridion.smarttarget.utils.CookieProcessor;
 import com.tridion.smarttarget.utils.TcmUri;
+import lombok.Builder;
 import lombok.NonNull;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -61,6 +65,9 @@ public class SmartTargetPageBuilder implements PageBuilder {
 
     @Autowired
     private WebRequestContext webRequestContext;
+
+    @Autowired
+    private TrackingMarkupDecorator trackingMarkupDecorator;
 
     private static String getViewNameFromMetadata(Map<String, Field> metadata) {
         String regionName = FieldUtils.getStringValue(metadata.get("name"));
@@ -111,8 +118,7 @@ public class SmartTargetPageBuilder implements PageBuilder {
     }
 
     @SneakyThrows(ParseException.class)
-    private static ResultSet executeSmartTargetQuery(SmartTargetPageModel stPageModel) throws SmartTargetException {
-        TcmUri pageUri = new TcmUri(stPageModel.getId());
+    private static ResultSet executeSmartTargetQuery(SmartTargetPageModel stPageModel, final TcmUri pageUri) throws SmartTargetException {
         TcmUri publicationUri = new TcmUri(TcmUtils.buildPublicationTcmUri(pageUri.getPublicationId()));
 
         ClaimStore claimStore = AmbientDataContext.getCurrentClaimStore();
@@ -136,7 +142,7 @@ public class SmartTargetPageBuilder implements PageBuilder {
     private static void clearFallbackContentIfNeeded(SmartTargetRegion smartTargetRegion) {
         if (!smartTargetRegion.isFallbackContentReplaced()) {
             // Discard any fallback content coming from Content Manager
-            smartTargetRegion.getEntities().clear();
+            smartTargetRegion.setEntities(new ArrayList<EntityModel>());
             // and the next time we shouldn't do it for this region because it already indeed has a ST content
             smartTargetRegion.setFallbackContentReplaced(true);
         }
@@ -150,7 +156,7 @@ public class SmartTargetPageBuilder implements PageBuilder {
                                                  final SmartTargetRegion smartTargetRegion) {
         if (localization.isStaging()) {
             // The SmartTarget API provides the entire XPM markup tag; put it in XpmMetadata["Query"]
-            HashMap<String, Object> xpmMetadata = new HashMap<>(1);
+            Map<String, Object> xpmMetadata = new HashMap<>(1);
             String currentRegionName = smartTargetRegion.getName();
 
             xpmMetadata.put("Query",
@@ -159,9 +165,9 @@ public class SmartTargetPageBuilder implements PageBuilder {
         }
     }
 
-    private static boolean filterResultSet(SmartTargetPageModel stPageModel, List<Promotion> promotions, SmartTargetRegion smartTargetRegion,
-                                           Map<String, ExperimentCookie> existingExperimentCookies, List<String> itemsAlreadyOnPage) {
-
+    private static boolean filterResultSet(SmartTargetPageModel stPageModel, List<Promotion> promotions,
+                                           SmartTargetRegion smartTargetRegion, List<String> itemsAlreadyOnPage,
+                                           ExperimentDimensions experimentDimensions, ExperimentCookies experimentCookies) {
         try {
             ResultSetImpl.filterPromotions(promotions,
                     smartTargetRegion.getName(),
@@ -171,10 +177,10 @@ public class SmartTargetPageBuilder implements PageBuilder {
                     new ArrayList<String>(),
 
                     itemsAlreadyOnPage,
-                    existingExperimentCookies,
+                    experimentCookies.existingCookies,
+                    experimentCookies.newCookies,
 
-                    new HashMap<String, ExperimentCookie>(),
-                    new ExperimentDimensions());
+                    experimentDimensions);
         } catch (SmartTargetException e) {
             log.error("Smart target exception while filtering ResultSet from ST", e);
             return false;
@@ -182,8 +188,9 @@ public class SmartTargetPageBuilder implements PageBuilder {
         return true;
     }
 
-    private static SmartTargetPromotion createPromotionEntity(final Promotion promotion, final String promotionViewName,
-                                                              final String regionName, final Localization localization) throws SmartTargetException {
+    private SmartTargetPromotion createPromotionEntity(final Promotion promotion, final String promotionViewName,
+                                                       final String regionName, ExperimentDimensions experimentDimensions,
+                                                       final Localization localization) throws SmartTargetException {
         SmartTargetPromotion smartTargetPromotion = new SmartTargetPromotion();
         smartTargetPromotion.setMvcData(creator()
                 .defaults(DefaultsMvcData.CORE_ENTITY)
@@ -198,6 +205,7 @@ public class SmartTargetPageBuilder implements PageBuilder {
 
         smartTargetPromotion.setTitle(promotion.getTitle());
         smartTargetPromotion.setSlogan(promotion.getSlogan());
+        smartTargetPromotion.setId(promotion.getPromotionId());
 
         // filter items out and convert to SmartTargetItem
         List<SmartTargetItem> smartTargetItems = new ArrayList<>(promotion.getItems().size());
@@ -206,9 +214,14 @@ public class SmartTargetPageBuilder implements PageBuilder {
                 continue;
             }
 
-            String id = String.format("%s-%s", item.getComponentUri().getItemId(), item.getTemplateUri().getItemId());
+            int itemId = item.getComponentUri().getItemId();
+            String id = String.format("%s-%s", itemId, item.getTemplateUri().getItemId());
 
-            //noinspection ObjectAllocationInLoop
+            if (promotion instanceof Experiment) {
+                trackingMarkupDecorator.addExperimentDimensions(String.valueOf(itemId), experimentDimensions);
+            }
+
+//            noinspection ObjectAllocationInLoop
             smartTargetItems.add(new SmartTargetItem(id, localization));
         }
         smartTargetPromotion.setItems(smartTargetItems);
@@ -275,9 +288,12 @@ public class SmartTargetPageBuilder implements PageBuilder {
         return stPageModel;
     }
 
+    @SneakyThrows(ParseException.class)
     private void processQueryAndPromotions(Localization localization, SmartTargetPageModel stPageModel, String promotionViewName) {
         try {
-            final ResultSet resultSet = executeSmartTargetQuery(stPageModel);
+            TcmUri pageUri = new TcmUri(stPageModel.getId());
+
+            final ResultSet resultSet = executeSmartTargetQuery(stPageModel, pageUri);
 
             if (resultSet == null) {
                 log.warn("SmartTarget API returned null as a result for query. This can be because of timeout. Skipping processing promotions.");
@@ -294,24 +310,30 @@ public class SmartTargetPageBuilder implements PageBuilder {
             log.debug("SmartTarget query returned {} Promotions.", promotions.size());
 
             // Filter the Promotions for each SmartTargetRegion
-            filterPromotionsForRegion(localization, stPageModel, promotions, promotionViewName);
+            filterPromotionsForPage(localization, stPageModel, promotions, promotionViewName);
 
         } catch (SmartTargetException e) {
             log.error("Smart target exception", e);
         }
     }
 
-    private void filterPromotionsForRegion(Localization localization, SmartTargetPageModel stPageModel,
-                                           final List<Promotion> promotions, String promotionViewName) throws SmartTargetException {
+    private void filterPromotionsForPage(Localization localization, SmartTargetPageModel stPageModel,
+                                         final List<Promotion> promotions, String promotionViewName) throws SmartTargetException {
         // TODO: we shouldn't access ServletRequest in a Model Builder.
         Map<String, ExperimentCookie> existingExperimentCookies =
                 CookieProcessor.getExperimentCookies(webRequestContext.getServletRequest());
+        Map<String, ExperimentCookie> newExperimentCookies = new HashMap<>();
+
         List<String> itemsAlreadyOnPage = new ArrayList<>();
 
         for (final SmartTargetRegion smartTargetRegion : stPageModel.getRegions().get(SmartTargetRegion.class)) {
             final String currentRegionName = smartTargetRegion.getName();
 
-            if (!filterResultSet(stPageModel, promotions, smartTargetRegion, existingExperimentCookies, itemsAlreadyOnPage)) {
+            ExperimentDimensions experimentDimensions = getExperimentDimensions(localization, stPageModel, currentRegionName);
+
+            if (!filterResultSet(stPageModel, promotions, smartTargetRegion, itemsAlreadyOnPage, experimentDimensions,
+                    ExperimentCookies.builder().newCookies(newExperimentCookies)
+                            .existingCookies(existingExperimentCookies).build())) {
                 continue;
             }
 
@@ -327,11 +349,25 @@ public class SmartTargetPageBuilder implements PageBuilder {
                 // if we found promotions in ST then we should filter fallback content out first
                 clearFallbackContentIfNeeded(smartTargetRegion);
 
-                SmartTargetPromotion smartTargetPromotion =
-                        createPromotionEntity(promotion, promotionViewName, currentRegionName, localization);
-
-                smartTargetRegion.addEntity(smartTargetPromotion);
+                SmartTargetPromotion promotionEntity = createPromotionEntity(promotion, promotionViewName,
+                        currentRegionName, experimentDimensions, localization);
+                smartTargetRegion.addEntity(promotionEntity);
             }
         }
+
+        stPageModel.setNewExperimentCookies(newExperimentCookies);
+    }
+
+    private ExperimentDimensions getExperimentDimensions(Localization localization, SmartTargetPageModel stPageModel, String currentRegionName) {
+        ExperimentDimensions experimentDimensions = new ExperimentDimensions();
+        experimentDimensions.setPublicationId(TcmUtils.buildPublicationTcmUri(localization.getId()));
+        experimentDimensions.setPageId(stPageModel.getId());
+        experimentDimensions.setRegion(currentRegionName);
+        return experimentDimensions;
+    }
+
+    @Builder
+    private static class ExperimentCookies {
+        Map<String, ExperimentCookie> existingCookies, newCookies;
     }
 }

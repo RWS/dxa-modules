@@ -11,7 +11,9 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -28,6 +30,7 @@ import static org.mockito.Mockito.when;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = ContextualMediaHelperTest.ContextualMediaHelperTestConfig.class)
+@ActiveProfiles("test")
 public class ContextualMediaHelperTest {
 
     @Autowired
@@ -63,6 +66,7 @@ public class ContextualMediaHelperTest {
      * Spring configuration for {@code ContextualMediaHelperTest}.
      */
     @Configuration
+    @Profile("test")
     public static class ContextualMediaHelperTestConfig {
 
         @Bean
@@ -87,7 +91,11 @@ public class ContextualMediaHelperTest {
 
         @Bean
         public WebRequestContext webRequestContext() {
-            return new MockRequestContextImpl();
+            WebRequestContextImpl requestContext = mock(WebRequestContextImpl.class);
+            when(requestContext.getDisplayWidth()).thenReturn(1920);
+            when(requestContext.getPixelRatio()).thenReturn(1.0);
+            when(requestContext.getMaxMediaWidth()).thenReturn(2048);
+            return requestContext;
         }
 
         @Bean
@@ -96,23 +104,6 @@ public class ContextualMediaHelperTest {
             when(servletContext.getInitParameter(eq("cidUrl"))).thenReturn("testCid/cid");
 
             return new MockHttpServletRequest(servletContext);
-        }
-
-        private static class MockRequestContextImpl extends WebRequestContextImpl {
-            @Override
-            public int getDisplayWidth() {
-                return 1920;
-            }
-
-            @Override
-            public double getPixelRatio() {
-                return 1.0;
-            }
-
-            @Override
-            public int getMaxMediaWidth() {
-                return 2048;
-            }
         }
     }
 }

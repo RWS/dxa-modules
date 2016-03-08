@@ -1,4 +1,4 @@
-package com.sdl.dxa.modules.smarttarget.model.entity.smarttarget;
+package com.sdl.dxa.modules.smarttarget.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
