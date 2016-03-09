@@ -115,7 +115,7 @@
                                         String path = find(parts);
 
                                         /* Builds the second profile automatically if no profiles are specified */
-                                        groovy.lang.GString command = "${determineShell()}mvn install -f \"${path}\" -Pcd-7.1.0"
+                                        GString command = "${determineShell()}mvn install -f \"${path}\" -Pcd-7.1.0"
                                         println "[INFO] Executing ${command}"
                                         println()
                                         def proc = command.execute()
@@ -220,6 +220,37 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
         </dependency>
+
+        <!-- Experiment support -->
+        <dependency>
+            <groupId>com.tridion.smarttarget</groupId>
+            <artifactId>smarttarget_google-analytics</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.api-client</groupId>
+            <artifactId>google-api-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.apis</groupId>
+            <artifactId>google-api-services-analytics</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.http-client</groupId>
+            <artifactId>google-http-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.http-client</groupId>
+            <artifactId>google-http-client-jackson2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.oauth-client</groupId>
+            <artifactId>google-oauth-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.oauth-client</groupId>
+            <artifactId>google-oauth-client-java6</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
