@@ -42,7 +42,7 @@
     </developers>
 
     <properties>
-        <dxa.version>1.4.0-SNAPSHOT</dxa.version>
+        <dxa-bom.version>1.4.0-SNAPSHOT</dxa-bom.version>
         <java-version>1.7</java-version>
         <solr-solrj.version>5.3.1</solr-solrj.version>
         <aws-java-sdk.version>1.10.32</aws-java-sdk.version>
@@ -52,8 +52,8 @@
         <dependencies>
             <dependency>
                 <groupId>com.sdl.dxa</groupId>
-                <artifactId>dxa-bom-web8</artifactId>
-                <version>${dxa.version}</version>
+                <artifactId>dxa-bom</artifactId>
+                <version>${dxa-bom.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

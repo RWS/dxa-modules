@@ -3,6 +3,7 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <artifactId>dxa-module-smarttarget</artifactId>
         <groupId>com.sdl.dxa.modules</groupId>
@@ -14,24 +15,36 @@
     <name>DXA Modules - Experience Optimization module Common</name>
     <description>Common project and common implementation for Experience Optimization module</description>
 
+    <properties>
+        <dxa-bom.version>1.4.0-SNAPSHOT</dxa-bom.version>
+        <dxa-bom-2013sp1.version>1.4.0-SNAPSHOT</dxa-bom-2013sp1.version>
+        <dxa-bom-web8.version>1.4.0-SNAPSHOT</dxa-bom-web8.version>
+    </properties>
+
     <profiles>
         <profile>
-            <id>cd-7.1.0</id>
+            <id>2013sp1</id>
             <properties>
-                <build.classifier>7.1.0</build.classifier>
+                <build.classifier>2013sp1</build.classifier>
+                <java-version>1.7</java-version>
             </properties>
             <dependencyManagement>
                 <dependencies>
                     <dependency>
                         <groupId>com.sdl.dxa</groupId>
                         <artifactId>dxa-bom-2013sp1</artifactId>
-                        <version>${project.version}</version>
+                        <version>${dxa-bom-2013sp1.version}</version>
                         <scope>import</scope>
                         <type>pom</type>
                     </dependency>
                 </dependencies>
             </dependencyManagement>
             <dependencies>
+
+                <dependency>
+                    <groupId>com.tridion</groupId>
+                    <artifactId>cd_ambient</artifactId>
+                </dependency>
                 <dependency>
                     <groupId>com.tridion.smarttarget</groupId>
                     <artifactId>session_cartridge</artifactId>
@@ -44,19 +57,20 @@
         </profile>
 
         <profile>
-            <id>cd-8.1.0</id>
+            <id>web8</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <build.classifier>8.1.0</build.classifier>
+                <build.classifier>web8</build.classifier>
+                <java-version>1.8</java-version>
             </properties>
             <dependencyManagement>
                 <dependencies>
                     <dependency>
                         <groupId>com.sdl.dxa</groupId>
                         <artifactId>dxa-bom-web8</artifactId>
-                        <version>${project.version}</version>
+                        <version>${dxa-bom-web8.version}</version>
                         <scope>import</scope>
                         <type>pom</type>
                     </dependency>
@@ -66,6 +80,28 @@
                 <dependency>
                     <groupId>com.sdl.web</groupId>
                     <artifactId>web-ambient-api</artifactId>
+                </dependency>
+                <dependency>
+                    <groupId>com.sdl.web</groupId>
+                    <artifactId>web-ambient-client</artifactId>
+                </dependency>
+
+                <dependency>
+                    <groupId>net.sf.dozer</groupId>
+                    <artifactId>dozer</artifactId>
+                </dependency>
+
+                <dependency>
+                    <groupId>com.sdl.web.experience</groupId>
+                    <artifactId>xo-client</artifactId>
+                </dependency>
+                <dependency>
+                    <groupId>com.sdl.web.experience</groupId>
+                    <artifactId>xo-client-compatible</artifactId>
+                </dependency>
+                <dependency>
+                    <groupId>com.sdl.web.experience</groupId>
+                    <artifactId>xo-model</artifactId>
                 </dependency>
             </dependencies>
         </profile>
@@ -90,7 +126,7 @@
                                 <configuration>
                                     <source><![CDATA[
                                         println()
-                                        println "[INFO] Auto-build for ST for 7.1.0 since neither cd-7.1.0 nor cd-8.1.0 were not explicitly set"
+                                        println "[INFO] Auto-build for ST for 2013sp1 since neither profile 2013sp1 nor web8 were not explicitly set"
 
                                         def find
                                         find = { List<String> parts ->
@@ -115,7 +151,7 @@
                                         String path = find(parts);
 
                                         /* Builds the second profile automatically if no profiles are specified */
-                                        GString command = "${determineShell()}mvn install -f \"${path}\" -Pcd-7.1.0"
+                                        GString command = "${determineShell()}mvn install -f \"${path}\" -P2013sp1"
                                         println "[INFO] Executing ${command}"
                                         println()
                                         def proc = command.execute()
@@ -137,6 +173,18 @@
             </build>
         </profile>
     </profiles>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.sdl.dxa</groupId>
+                <artifactId>dxa-bom</artifactId>
+                <version>${dxa-bom.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
@@ -165,11 +213,6 @@
         <dependency>
             <groupId>com.tridion</groupId>
             <artifactId>cd_core</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.tridion</groupId>
-            <artifactId>cd_ambient</artifactId>
         </dependency>
 
         <dependency>
@@ -207,10 +250,10 @@
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
         </dependency>
-        <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>commons-logging</groupId>-->
+        <!--<artifactId>commons-logging</artifactId>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>com.google.guava</groupId>
@@ -251,23 +294,46 @@
             <artifactId>google-oauth-client-java6</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-library</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <classifier>${build.classifier}</classifier>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <source>${java-version}</source>
                     <target>${java-version}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.5</version>
+                <configuration>
+                    <classifier>${build.classifier}</classifier>
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                        </manifest>
+                    </archive>
                 </configuration>
             </plugin>
         </plugins>

@@ -2,7 +2,7 @@
 
 REM Usage: build.cmd command
 REM command is passed to mvn as it is
-REM E.g. 'build.cmd clean install -Pcd-8.1.0' will be 'mvn -f project-name\pom.xml clean install -Pcd-8.1.0'
+REM E.g. 'build.cmd clean install -Pweb8' will be 'mvn -f project-name\pom.xml clean install -Pweb8'
 
 echo Building DXA Modules...
 

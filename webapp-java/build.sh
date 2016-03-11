@@ -2,7 +2,7 @@
 
 # Usage: build.sh command
 # command is passed to mvn as it is
-# E.g. 'build.sh clean install -Pcd-8.1.0' will be 'mvn -f project-name/pom.xml clean install -Pcd-8.1.0'
+# E.g. 'build.sh clean install -Pweb8' will be 'mvn -f project-name/pom.xml clean install -Pweb8'
 
 echo "Building DXA Modules..."
 
