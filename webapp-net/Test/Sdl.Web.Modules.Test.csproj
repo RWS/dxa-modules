@@ -106,7 +106,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SmartTarget\SDL.Web.Modules.SmartTarget.csproj">
+    <ProjectReference Include="..\ExperienceOptimization\Sdl.Web.Modules.SmartTarget.csproj">
       <Project>{492157de-3114-48e5-9a23-965d5fe4da74}</Project>
       <Name>SDL.Web.Modules.SmartTarget</Name>
       <Private>False</Private>

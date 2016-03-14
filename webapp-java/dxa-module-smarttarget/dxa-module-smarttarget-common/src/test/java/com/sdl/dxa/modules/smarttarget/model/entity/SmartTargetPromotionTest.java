@@ -1,4 +1,4 @@
-package com.sdl.dxa.modules.smarttarget.model.entity.smarttarget;
+package com.sdl.dxa.modules.smarttarget.model.entity;
 
 import com.google.common.collect.ImmutableMap;
 import com.sdl.webapp.common.api.model.EntityModel;

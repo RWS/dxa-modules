@@ -1,4 +1,4 @@
-package com.sdl.dxa.modules.smarttarget.model.entity.smarttarget;
+package com.sdl.dxa.modules.smarttarget.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sdl.webapp.common.api.content.ContentProvider;
@@ -53,6 +53,7 @@ public class SmartTargetItem {
             ContentProvider contentProvider = ApplicationContextHolder.getContext().getBean(ContentProvider.class);
             try {
                 this.entity = contentProvider.getEntityModel(entityId, localization);
+                this.entity.getMvcData().addMetadataValue("clazz", getClass());
             } catch (ContentProviderException | DxaException e) {
                 log.warn("EntityModel not found for entity id {}", entityId, e);
             }
