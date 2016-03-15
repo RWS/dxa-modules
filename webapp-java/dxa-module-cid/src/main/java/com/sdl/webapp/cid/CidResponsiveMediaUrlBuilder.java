@@ -34,10 +34,8 @@ public class CidResponsiveMediaUrlBuilder extends MediaHelper.ResponsiveMediaUrl
         public String buildInternal() {
             String hostname = InetAddress.getLocalHost().getCanonicalHostName() + ':' + servletRequest.getServerPort();
 
-            String cidServiceUrl = servletRequest.getServletContext().getInitParameter("cidUrl");
-
-            return String.format("%s/scale/%sx%s/%s%s",
-                    cidServiceUrl,
+            //todo get /cid from properties
+            return String.format("/cid/scale/%sx%s/%s%s",
                     getWidth(),
                     isZeroAspect() ? "" : getHeight(),
                     hostname,
