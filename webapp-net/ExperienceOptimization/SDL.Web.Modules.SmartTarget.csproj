@@ -48,15 +48,17 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Sdl.Web.Common, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.4.0-alpha-201602251631\lib\net452\Sdl.Web.Common.dll</HintPath>
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Sdl.Web.Mvc, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.4.0-alpha-201602251631\lib\net452\Sdl.Web.Mvc.dll</HintPath>
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Sdl.Web.Tridion">
       <SpecificVersion>False</SpecificVersion>
@@ -77,15 +79,16 @@
     <Reference Include="System.Web.WebPages.Razor">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.1.2\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
       <Private>False</Private>
-    </Reference>   
+    </Reference>
   </ItemGroup>
   <ItemGroup Condition="'$(Configuration)' != 'Release_7.1'">
     <Reference Include="Tridion.ContentDelivery.AmbientData">
       <HintPath>..\packages\Sdl.Web.Delivery.8.1.1\lib\net45\Tridion.ContentDelivery.AmbientData.dll</HintPath>
       <Private>False</Private>
     </Reference>
-     <Reference Include="Tridion.ContentDelivery">
+    <Reference Include="Tridion.ContentDelivery">
       <HintPath>..\packages\Sdl.Web.Delivery.8.1.1\lib\net45\Tridion.ContentDelivery.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Tridion.SmartTarget">
       <HintPath>..\_references\xo-8.1\Tridion.SmartTarget.dll</HintPath>
