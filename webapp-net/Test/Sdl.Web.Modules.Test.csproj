@@ -48,12 +48,12 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Sdl.Web.Common, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.4.0-alpha-201602251631\lib\net452\Sdl.Web.Common.dll</HintPath>
+      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.4.0-alpha-201603171637\lib\net452\Sdl.Web.Common.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sdl.Web.Mvc, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.4.0-alpha-201602251631\lib\net452\Sdl.Web.Mvc.dll</HintPath>
+      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.4.0-alpha-201603171637\lib\net452\Sdl.Web.Mvc.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
     </Reference>
@@ -127,11 +127,11 @@ xcopy "$(TargetPath)" "%25DXA_SITE_DIR%25\bin" /Y
 xcopy "$(ProjectDir)Areas" "%25DXA_SITE_DIR%25\Areas" /S /I /Y
 )</PostBuildEvent>
   </PropertyGroup>
-  <Import Project="..\packages\Sdl.Dxa.Framework.Web8.1.4.0-alpha-201602251631\build\net452\Sdl.Dxa.Framework.Web8.targets" Condition="Exists('..\packages\Sdl.Dxa.Framework.Web8.1.4.0-alpha-201602251631\build\net452\Sdl.Dxa.Framework.Web8.targets')" />
+  <Import Project="..\packages\Sdl.Dxa.Framework.Web8.1.4.0-alpha-201603171637\build\net452\Sdl.Dxa.Framework.Web8.targets" Condition="Exists('..\packages\Sdl.Dxa.Framework.Web8.1.4.0-alpha-201603171637\build\net452\Sdl.Dxa.Framework.Web8.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Sdl.Dxa.Framework.Web8.1.4.0-alpha-201602251631\build\net452\Sdl.Dxa.Framework.Web8.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Sdl.Dxa.Framework.Web8.1.4.0-alpha-201602251631\build\net452\Sdl.Dxa.Framework.Web8.targets'))" />
+    <Error Condition="!Exists('..\packages\Sdl.Dxa.Framework.Web8.1.4.0-alpha-201603171637\build\net452\Sdl.Dxa.Framework.Web8.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Sdl.Dxa.Framework.Web8.1.4.0-alpha-201603171637\build\net452\Sdl.Dxa.Framework.Web8.targets'))" />
   </Target>
 </Project>
