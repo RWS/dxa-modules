@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using DD4T.ContentModel;
+using Sdl.Web.Common;
 using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Logging;
 using Sdl.Web.Common.Models;
@@ -93,18 +94,24 @@ namespace Sdl.Web.Modules.SmartTarget.Mapping
                 }
                 Log.Debug("Using Promotion View '{0}'", promotionViewName);
 
+                // TODO: we shouldn't access HttpContext in a Model Builder.
+                HttpContext httpContext = HttpContext.Current;
+                if (httpContext == null)
+                {
+                    throw new DxaException("HttpContext is not available.");
+                }
+
                 List<string> itemsAlreadyOnPage = new List<string>();
-                ExperimentCookies existingExperimentCookies = CookieProcessor.GetExperimentCookies(HttpContext.Current.Request); // TODO: we shouldn't access HttpContext in a Model Builder.
-            
+                ExperimentCookies existingExperimentCookies = CookieProcessor.GetExperimentCookies(httpContext.Request); 
+                ExperimentCookies newExperimentCookies = new ExperimentCookies();
+
                 // Filter the Promotions for each SmartTargetRegion
                 foreach (SmartTargetRegion smartTargetRegion in smartTargetPageModel.Regions.OfType<SmartTargetRegion>())
                 {
                     string regionName = smartTargetRegion.Name;
 
                     List<string> itemsOutputInRegion = new List<string>();
-                    ExperimentCookies newExperimentCookies = new ExperimentCookies();
                     ExperimentDimensions experimentDimensions;
-
                     List<Promotion> promotions = new List<Promotion>(resultSet.Promotions);
                     ResultSet.FilterPromotions(promotions, regionName, smartTargetRegion.MaxItems, smartTargetPageModel.AllowDuplicates, itemsOutputInRegion,
                             itemsAlreadyOnPage, ref existingExperimentCookies, ref newExperimentCookies,
@@ -134,6 +141,11 @@ namespace Sdl.Web.Modules.SmartTarget.Mapping
 
                         smartTargetRegion.Entities.Add(smartTargetPromotion);
                     }
+                }
+
+                if (newExperimentCookies.Count > 0)
+                {
+                    smartTargetPageModel.ExperimentCookies = newExperimentCookies;
                 }
             }
         }
