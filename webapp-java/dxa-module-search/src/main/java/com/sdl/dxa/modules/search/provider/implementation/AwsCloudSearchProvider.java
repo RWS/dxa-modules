@@ -45,13 +45,7 @@ public class AwsCloudSearchProvider extends AbstractSearchProvider {
     @Autowired
     private AWSCredentials awsCredentials;
 
-    @Override
-    public void executeQuery(SearchQuery searchQuery, Localization localization) {
-        SearchRequest request = buildRequest(searchQuery, localization);
-        processResults(searchQuery, getClient(localization).search(request));
-    }
-
-    private void processResults(SearchQuery searchQuery, SearchResult result) {
+    private static void processResults(SearchQuery searchQuery, SearchResult result) {
         List<Hit> list = result.getHits().getHit();
         List<SearchItem> items = new ArrayList<>(list.size());
         for (Hit hit : list) {
@@ -63,7 +57,7 @@ public class AwsCloudSearchProvider extends AbstractSearchProvider {
         searchQuery.setTotal(result.getHits().getFound());
     }
 
-    private SearchRequest buildRequest(SearchQuery searchQuery, Localization localization) {
+    private static SearchRequest buildRequest(SearchQuery searchQuery, Localization localization) {
         SearchRequest request = new SearchRequest();
         request.setQuery(searchQuery.getQueryDetails().getQueryText());
         request.setStart((long) (searchQuery.getStart() - 1));
@@ -76,7 +70,7 @@ public class AwsCloudSearchProvider extends AbstractSearchProvider {
         return request;
     }
 
-    private SearchItem convertToSearchItem(Hit hit) {
+    private static SearchItem convertToSearchItem(Hit hit) {
         SearchItem item = new SearchItem();
         String id = hit.getId();
         Map<String, String> highlights = hit.getHighlights();
@@ -88,6 +82,12 @@ public class AwsCloudSearchProvider extends AbstractSearchProvider {
         item.setUrl(hit.getFields().get("url").get(0));
 
         return item;
+    }
+
+    @Override
+    public void executeQuery(SearchQuery searchQuery, Localization localization) {
+        SearchRequest request = buildRequest(searchQuery, localization);
+        processResults(searchQuery, getClient(localization).search(request));
     }
 
     private AmazonCloudSearchDomainClient getClient(Localization localization) {
