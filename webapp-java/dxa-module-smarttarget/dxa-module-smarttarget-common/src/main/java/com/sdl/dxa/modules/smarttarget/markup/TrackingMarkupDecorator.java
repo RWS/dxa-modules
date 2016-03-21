@@ -48,8 +48,10 @@ public class TrackingMarkupDecorator implements MarkupDecorator {
         log.trace("Trying to add XO tracking markup, because model is an XO item");
 
         try {
+//          todo dxa2 remove suppress if Java 7 is no longer supported
+            @SuppressWarnings("RedundantTypeArguments")
             String processedMarkup = this.analyticsManager.addTrackingToLinks(markup.toHtml(),
-                    experimentDimensions.get(entityModel.getId()), Collections.emptyMap());
+                    experimentDimensions.get(entityModel.getId()), Collections.<String, String>emptyMap());
 
             markup = HtmlBuilders.empty()
                     .withPureHtmlContent(processedMarkup)
