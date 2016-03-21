@@ -10,6 +10,7 @@ import com.sdl.webapp.common.markup.html.builders.HtmlBuilders;
 import com.tridion.smarttarget.SmartTargetException;
 import com.tridion.smarttarget.analytics.AnalyticsManager;
 import com.tridion.smarttarget.analytics.tracking.ExperimentDimensions;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Collections;
@@ -22,6 +23,7 @@ public class TrackingMarkupDecorator implements MarkupDecorator {
 
     private Map<String, ExperimentDimensions> experimentDimensions = new HashMap<>();
 
+    @Setter
     private AnalyticsManager analyticsManager;
 
     public void addExperimentDimensions(String experimentId, ExperimentDimensions experimentDimensions) {
@@ -36,17 +38,18 @@ public class TrackingMarkupDecorator implements MarkupDecorator {
             return markup;
         }
 
+        if (this.analyticsManager == null) {
+            log.info("Analytics manager for XO markup decorator is not initialized. Do you have a proper configuration?");
+            return markup;
+        }
+
         EntityModel entityModel = (EntityModel) model;
 
         log.trace("Trying to add XO tracking markup, because model is an XO item");
 
         try {
-            if (this.analyticsManager == null) {
-                this.analyticsManager = AnalyticsManager.getConfiguredAnalyticsManager();
-            }
-
             String processedMarkup = this.analyticsManager.addTrackingToLinks(markup.toHtml(),
-                    experimentDimensions.get(entityModel.getId()), Collections.<String, String>emptyMap());
+                    experimentDimensions.get(entityModel.getId()), Collections.emptyMap());
 
             markup = HtmlBuilders.empty()
                     .withPureHtmlContent(processedMarkup)
