@@ -1,10 +1,8 @@
 package com.sdl.dxa.modules.smarttarget.markup;
 
-import com.google.common.collect.ImmutableMap;
-import com.sdl.dxa.modules.smarttarget.model.entity.SmartTargetItem;
-import com.sdl.webapp.common.api.model.entity.Article;
-import com.sdl.webapp.common.api.model.mvcdata.MvcDataImpl;
-import com.sdl.webapp.common.api.model.page.PageModelImpl;
+import com.sdl.dxa.modules.smarttarget.model.entity.SmartTargetExperiment;
+import com.sdl.dxa.modules.smarttarget.model.entity.SmartTargetPromotion;
+import com.sdl.webapp.common.markup.html.HtmlAttribute;
 import com.sdl.webapp.common.markup.html.HtmlElement;
 import com.sdl.webapp.common.markup.html.HtmlNode;
 import org.junit.Test;
@@ -21,9 +19,8 @@ public class TrackingMarkupDecoratorTest {
         //given
         TrackingMarkupDecorator decorator = new TrackingMarkupDecorator();
         decorator.setAnalyticsManager(null);
-        HtmlElement markup = new HtmlElement("span", true, Collections.emptyList(), Collections.emptyList());
-        Article model = new Article();
-        model.setMvcData(new MvcDataImpl.MvcDataImplBuilder().metadata(ImmutableMap.of("clazz", SmartTargetItem.class)).build());
+        HtmlElement markup = new HtmlElement("span", true, Collections.<HtmlAttribute>emptyList(), Collections.<HtmlNode>emptyList());
+        SmartTargetExperiment model = new SmartTargetExperiment(null);
 
         //when
         HtmlNode result = decorator.process(markup, model, null);
@@ -34,11 +31,10 @@ public class TrackingMarkupDecoratorTest {
     }
 
     @Test
-    public void shouldSkipProcessingIfModelMetadataDoesNotSayItIsSmartTargetItem() {
+    public void shouldSkipProcessingIfItIsNotSmartTargetExperiment() {
         TrackingMarkupDecorator decorator = new TrackingMarkupDecorator();
-        HtmlElement markup = new HtmlElement("span", true, Collections.emptyList(), Collections.emptyList());
-        Article model = new Article();
-        model.setMvcData(new MvcDataImpl.MvcDataImplBuilder().build());
+        HtmlElement markup = new HtmlElement("span", true, Collections.<HtmlAttribute>emptyList(), Collections.<HtmlNode>emptyList());
+        SmartTargetPromotion model = new SmartTargetPromotion();
 
         //when
         HtmlNode result = decorator.process(markup, model, null);
@@ -47,20 +43,4 @@ public class TrackingMarkupDecoratorTest {
         assertEquals(markup, result);
         assertSame(markup, result);
     }
-
-    @Test
-    public void shouldSkipProcessingIfModelIsNotAnEntityModel() {
-        TrackingMarkupDecorator decorator = new TrackingMarkupDecorator();
-        HtmlElement markup = new HtmlElement("span", true, Collections.emptyList(), Collections.emptyList());
-        PageModelImpl model = new PageModelImpl();
-        model.setMvcData(new MvcDataImpl.MvcDataImplBuilder().metadata(ImmutableMap.of("clazz", SmartTargetItem.class)).build());
-
-        //when
-        HtmlNode result = decorator.process(markup, model, null);
-
-        //then
-        assertEquals(markup, result);
-        assertSame(markup, result);
-    }
-
 }

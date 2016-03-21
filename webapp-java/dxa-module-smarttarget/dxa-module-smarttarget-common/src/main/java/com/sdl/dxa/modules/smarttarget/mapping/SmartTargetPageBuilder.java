@@ -1,6 +1,6 @@
 package com.sdl.dxa.modules.smarttarget.mapping;
 
-import com.sdl.dxa.modules.smarttarget.markup.TrackingMarkupDecorator;
+import com.sdl.dxa.modules.smarttarget.model.entity.SmartTargetExperiment;
 import com.sdl.dxa.modules.smarttarget.model.entity.SmartTargetItem;
 import com.sdl.dxa.modules.smarttarget.model.entity.SmartTargetPageModel;
 import com.sdl.dxa.modules.smarttarget.model.entity.SmartTargetPromotion;
@@ -65,9 +65,6 @@ public class SmartTargetPageBuilder implements PageBuilder {
 
     @Autowired
     private WebRequestContext webRequestContext;
-
-    @Autowired
-    private TrackingMarkupDecorator trackingMarkupDecorator;
 
     private static String getViewNameFromMetadata(Map<String, Field> metadata) {
         String regionName = FieldUtils.getStringValue(metadata.get("name"));
@@ -188,10 +185,13 @@ public class SmartTargetPageBuilder implements PageBuilder {
         return true;
     }
 
-    private SmartTargetPromotion createPromotionEntity(final Promotion promotion, final String promotionViewName,
-                                                       final String regionName, ExperimentDimensions experimentDimensions,
-                                                       final Localization localization) throws SmartTargetException {
-        SmartTargetPromotion smartTargetPromotion = new SmartTargetPromotion();
+    private static SmartTargetPromotion createPromotionEntity(final Promotion promotion, final String promotionViewName,
+                                                              final String regionName, ExperimentDimensions experimentDimensions,
+                                                              final Localization localization) throws SmartTargetException {
+
+        SmartTargetPromotion smartTargetPromotion = promotion instanceof Experiment ?
+                new SmartTargetExperiment(experimentDimensions) : new SmartTargetPromotion();
+
         smartTargetPromotion.setMvcData(creator()
                 .defaults(DefaultsMvcData.CORE_ENTITY)
                 .mergeIn(creator().fromQualifiedName(promotionViewName).create())
@@ -217,16 +217,20 @@ public class SmartTargetPageBuilder implements PageBuilder {
             int itemId = item.getComponentUri().getItemId();
             String id = String.format("%s-%s", itemId, item.getTemplateUri().getItemId());
 
-            if (promotion instanceof Experiment) {
-                trackingMarkupDecorator.addExperimentDimensions(String.valueOf(itemId), experimentDimensions);
-            }
-
 //            noinspection ObjectAllocationInLoop
             smartTargetItems.add(new SmartTargetItem(id, localization));
         }
         smartTargetPromotion.setItems(smartTargetItems);
 
         return smartTargetPromotion;
+    }
+
+    private static ExperimentDimensions getExperimentDimensions(Localization localization, SmartTargetPageModel stPageModel, String currentRegionName) {
+        ExperimentDimensions experimentDimensions = new ExperimentDimensions();
+        experimentDimensions.setPublicationId(TcmUtils.buildPublicationTcmUri(localization.getId()));
+        experimentDimensions.setPageId(stPageModel.getId());
+        experimentDimensions.setRegion(currentRegionName);
+        return experimentDimensions;
     }
 
     /**
@@ -356,14 +360,6 @@ public class SmartTargetPageBuilder implements PageBuilder {
         }
 
         stPageModel.setNewExperimentCookies(newExperimentCookies);
-    }
-
-    private ExperimentDimensions getExperimentDimensions(Localization localization, SmartTargetPageModel stPageModel, String currentRegionName) {
-        ExperimentDimensions experimentDimensions = new ExperimentDimensions();
-        experimentDimensions.setPublicationId(TcmUtils.buildPublicationTcmUri(localization.getId()));
-        experimentDimensions.setPageId(stPageModel.getId());
-        experimentDimensions.setRegion(currentRegionName);
-        return experimentDimensions;
     }
 
     @Builder

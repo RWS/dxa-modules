@@ -52,8 +52,6 @@ public class SmartTargetItemTest {
         //then
         assertEquals(expected, entity);
         assertEquals(expected, entity2);
-        assertEquals(SmartTargetItem.class, entity.getMvcData().getMetadata().get("clazz"));
-        assertEquals(SmartTargetItem.class, entity2.getMvcData().getMetadata().get("clazz"));
 
         verify(contentProvider, times(1)).getEntityModel(eq("qwe1"), any(Localization.class));
     }

@@ -53,7 +53,6 @@ public class SmartTargetItem {
             ContentProvider contentProvider = ApplicationContextHolder.getContext().getBean(ContentProvider.class);
             try {
                 this.entity = contentProvider.getEntityModel(entityId, localization);
-                this.entity.getMvcData().addMetadataValue("clazz", getClass());
             } catch (ContentProviderException | DxaException e) {
                 log.warn("EntityModel not found for entity id {}", entityId, e);
             }
