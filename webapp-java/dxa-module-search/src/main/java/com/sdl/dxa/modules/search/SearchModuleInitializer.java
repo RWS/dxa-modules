@@ -6,8 +6,8 @@ import com.sdl.dxa.modules.search.model.SearchItem;
 import com.sdl.dxa.modules.search.model.SearchQuery;
 import com.sdl.webapp.common.api.mapping.views.AbstractInitializer;
 import com.sdl.webapp.common.api.mapping.views.ModuleInfo;
-import com.sdl.webapp.common.api.mapping.views.RegisteredView;
-import com.sdl.webapp.common.api.mapping.views.RegisteredViews;
+import com.sdl.webapp.common.api.mapping.views.RegisteredModelView;
+import com.sdl.webapp.common.api.mapping.views.RegisteredModelViews;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -19,10 +19,10 @@ import org.springframework.stereotype.Component;
 @ComponentScan("com.sdl.dxa.modules.search")
 public class SearchModuleInitializer {
 
-    @RegisteredViews({
-            @RegisteredView(viewName = "SearchBox", clazz = SearchBox.class),
-            @RegisteredView(viewName = "SearchItem", clazz = SearchItem.class),
-            @RegisteredView(viewName = "SearchResults", clazz = SearchQuery.class, controllerName = "Search")
+    @RegisteredModelViews({
+            @RegisteredModelView(viewName = "SearchBox", modelClass = SearchBox.class),
+            @RegisteredModelView(viewName = "SearchItem", modelClass = SearchItem.class),
+            @RegisteredModelView(viewName = "SearchResults", modelClass = SearchQuery.class, controllerName = "Search")
     })
     @ModuleInfo(name = "Search Module", areaName = "Search", description = "Support for SOLR and AWS searches, " +
             "Spring profiles for activation should be set explicitly: search.solr, search.aws")

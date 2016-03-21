@@ -5,8 +5,8 @@ import com.sdl.dxa.modules.smarttarget.model.entity.SmartTargetPromotion;
 import com.sdl.dxa.modules.smarttarget.model.entity.SmartTargetRegion;
 import com.sdl.webapp.common.api.mapping.views.AbstractInitializer;
 import com.sdl.webapp.common.api.mapping.views.ModuleInfo;
-import com.sdl.webapp.common.api.mapping.views.RegisteredView;
-import com.sdl.webapp.common.api.mapping.views.RegisteredViews;
+import com.sdl.webapp.common.api.mapping.views.RegisteredModelView;
+import com.sdl.webapp.common.api.mapping.views.RegisteredModelViews;
 import com.sdl.webapp.common.markup.MarkupDecoratorRegistry;
 import com.tridion.smarttarget.SmartTargetException;
 import com.tridion.smarttarget.analytics.AnalyticsManager;
@@ -43,12 +43,12 @@ public class SmartTargetInitializer {
         return trackingMarkupDecorator;
     }
 
-    @RegisteredViews({
-            @RegisteredView(viewName = "SmartTargetRegion", clazz = SmartTargetRegion.class),
-            @RegisteredView(viewName = "2-Column", clazz = SmartTargetRegion.class),
-            @RegisteredView(viewName = "3-Column", clazz = SmartTargetRegion.class),
-            @RegisteredView(viewName = "4-Column", clazz = SmartTargetRegion.class),
-            @RegisteredView(viewName = "Promotion", clazz = SmartTargetPromotion.class)
+    @RegisteredModelViews({
+            @RegisteredModelView(viewName = "SmartTargetRegion", modelClass = SmartTargetRegion.class),
+            @RegisteredModelView(viewName = "2-Column", modelClass = SmartTargetRegion.class),
+            @RegisteredModelView(viewName = "3-Column", modelClass = SmartTargetRegion.class),
+            @RegisteredModelView(viewName = "4-Column", modelClass = SmartTargetRegion.class),
+            @RegisteredModelView(viewName = "Promotion", modelClass = SmartTargetPromotion.class)
     })
     @ModuleInfo(name = "Smart Target module", areaName = "SmartTarget", description = "Common implementation for 2013SP1 and Web8 ST modules")
     @Component
