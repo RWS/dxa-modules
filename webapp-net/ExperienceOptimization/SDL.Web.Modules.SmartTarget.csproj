@@ -109,8 +109,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Mapping\SmartTargetModelBuilder.cs" />
+    <Compile Include="Models\SmartTargetExperiment.cs" />
     <Compile Include="Models\SmartTargetPageModel.cs" />
     <Compile Include="SmartTargetAreaRegistration.cs" />
+    <Compile Include="ExperimentMarkupDecorator.cs" />
     <Content Include="Areas\SmartTarget\Views\Entity\2-Column-Promotion.cshtml" />
     <Content Include="Areas\SmartTarget\Views\Entity\3-Column-Promotion.cshtml" />
     <Content Include="Areas\SmartTarget\Views\Entity\4-Column-Promotion.cshtml" />

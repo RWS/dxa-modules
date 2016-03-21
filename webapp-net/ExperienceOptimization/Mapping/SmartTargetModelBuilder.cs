@@ -130,7 +130,7 @@ namespace Sdl.Web.Modules.SmartTarget.Mapping
                     // It seems that ResultSet.FilterPromotions doesn't really filter on Region name, so we do post-filtering here.
                     foreach (Promotion promotion in promotions.Where(promotion => promotion.Visible && promotion.Region.Contains(regionName)))
                     {
-                        SmartTargetPromotion smartTargetPromotion = CreatePromotionEntity(promotion, promotionViewName, smartTargetRegion.Name, localization);
+                        SmartTargetPromotion smartTargetPromotion = CreatePromotionEntity(promotion, promotionViewName, smartTargetRegion.Name, localization, experimentDimensions);
 
                         if (!smartTargetRegion.HasSmartTargetContent)
                         {
@@ -161,22 +161,22 @@ namespace Sdl.Web.Modules.SmartTarget.Mapping
         }
         #endregion
 
-        protected virtual SmartTargetPromotion CreatePromotionEntity(Promotion promotion, string viewName, string regionName, Localization localization)
+        protected virtual SmartTargetPromotion CreatePromotionEntity(Promotion promotion, string viewName, string regionName, Localization localization, ExperimentDimensions experimentDimensions)
         {
-            // TODO TSI-901: Create SmartTargetExperiment (subclass of SmartTargetPromotion) if promotion is Experiment.
-            return new SmartTargetPromotion
+            SmartTargetPromotion result = (promotion is Experiment) ? new SmartTargetExperiment(experimentDimensions) : new SmartTargetPromotion();
+
+            result.MvcData = new MvcData(viewName);
+            result.XpmMetadata = new Dictionary<string, object>
             {
-                MvcData = new MvcData(viewName),
-                XpmMetadata = new Dictionary<string, object>
-                {
-                    {"PromotionID", promotion.PromotionId},
-                    {"RegionID", regionName}
-                },
-                Title = promotion.Title,
-                Slogan = promotion.Slogan,
-                // Create SmartTargetItem objects for visible ST Items.
-                Items = promotion.Items.Where(item => item.Visible).Select(item => CreateSmartTargetItem(item, localization)).ToList()
+                {"PromotionID", promotion.PromotionId},
+                {"RegionID", regionName}
             };
+            result.Title = promotion.Title;
+            result.Slogan = promotion.Slogan;
+            // Create SmartTargetItem objects for visible ST Items.
+            result.Items = promotion.Items.Where(item => item.Visible).Select(item => CreateSmartTargetItem(item, localization)).ToList();
+
+            return result;
         }
 
         protected virtual SmartTargetItem CreateSmartTargetItem(Item item, Localization localization)
