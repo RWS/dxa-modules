@@ -12,6 +12,14 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 public abstract class AbstractSearchProvider implements SearchProvider {
 
+    static String getServiceUrl(Localization localization) {
+        String queryUrl = localization.getConfiguration("search.queryURL");
+        if (Strings.isNullOrEmpty(queryUrl)) {
+            return localization.getConfiguration("search." + (localization.isStaging() ? "staging" : "live") + "IndexConfig");
+        }
+        return queryUrl;
+    }
+
     @Override
     public SearchQuery buildSearchQuery(ViewModel model, String queryText, String start,
                                         Map<String, String[]> queryStringParameters) {
@@ -19,13 +27,5 @@ public abstract class AbstractSearchProvider implements SearchProvider {
         searchQuery.setQueryDetails(new SearchQuery.QueryDetails(queryText, queryStringParameters));
         searchQuery.setStart(isEmpty(start) ? 1 : Integer.parseInt(start));
         return searchQuery;
-    }
-
-    protected String getServiceUrl(Localization localization) {
-        String queryUrl = localization.getConfiguration("search.queryURL");
-        if (Strings.isNullOrEmpty(queryUrl)) {
-            return localization.getConfiguration("search." + (localization.isStaging() ? "staging" : "live") + "IndexConfig");
-        }
-        return queryUrl;
     }
 }

@@ -25,22 +25,7 @@ public class SolrSearchProvider extends AbstractSearchProvider {
 
     private static final Logger LOG = LoggerFactory.getLogger(SolrSearchProvider.class);
 
-    @Override
-    public void executeQuery(SearchQuery searchQuery, Localization localization) {
-        SolrQuery query = buildQuery(searchQuery, localization);
-
-        QueryResponse response;
-        try {
-            response = getClient(localization).query(query);
-        } catch (SolrServerException | IOException e) {
-            LOG.error("Something went wrong during querying SOLR instance, so no results", e);
-            return;
-        }
-
-        processResults(searchQuery, response);
-    }
-
-    private void processResults(SearchQuery searchQuery, QueryResponse response) {
+    private static void processResults(SearchQuery searchQuery, QueryResponse response) {
         List<SearchItem> items = response.getBeans(SearchItem.class);
         searchQuery.setResults(items);
         for (SearchItem item : items) {
@@ -52,7 +37,7 @@ public class SolrSearchProvider extends AbstractSearchProvider {
         searchQuery.setTotal(response.getResults().getNumFound());
     }
 
-    private String getHighlights(Map<String, List<String>> map, String key) {
+    private static String getHighlights(Map<String, List<String>> map, String key) {
         List<String> val = map.get(key);
         if (val != null) {
             return val.get(0);
@@ -60,7 +45,7 @@ public class SolrSearchProvider extends AbstractSearchProvider {
         return null;
     }
 
-    private SolrQuery buildQuery(SearchQuery searchQuery, Localization localization) {
+    private static SolrQuery buildQuery(SearchQuery searchQuery, Localization localization) {
         return new SolrQuery()
                     .setQuery(searchQuery.getQueryDetails().getQueryText())
                     .addFilterQuery("publicationid:" + localization.getId())
@@ -74,7 +59,22 @@ public class SolrSearchProvider extends AbstractSearchProvider {
                     .setParam("hl.simple.post", "*");
     }
 
-    private SolrClient getClient(Localization localization) {
+    private static SolrClient getClient(Localization localization) {
         return new HttpSolrClient(getServiceUrl(localization));
+    }
+
+    @Override
+    public void executeQuery(SearchQuery searchQuery, Localization localization) {
+        SolrQuery query = buildQuery(searchQuery, localization);
+
+        QueryResponse response;
+        try {
+            response = getClient(localization).query(query);
+        } catch (SolrServerException | IOException e) {
+            LOG.error("Something went wrong during querying SOLR instance, so no results", e);
+            return;
+        }
+
+        processResults(searchQuery, response);
     }
 }
