@@ -27,7 +27,6 @@ public class SmartTargetPromotion extends AbstractEntityModel {
     @JsonProperty("Slogan")
     private String slogan;
 
-    @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
     @JsonProperty("Items")
     private List<SmartTargetItem> items;
 
@@ -54,4 +53,5 @@ public class SmartTargetPromotion extends AbstractEntityModel {
             }
         });
     }
+
 }
