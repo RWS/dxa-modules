@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
 import java.util.Map;
 
 @Slf4j
@@ -16,7 +17,7 @@ import java.util.Map;
 public class Degrees51ClaimsProvider implements ContextClaimsProvider {
     @Override
     public Map<String, Object> getContextClaims(String aspectName) throws DxaException {
-        return null;
+        return Collections.emptyMap();
     }
 
     @Override
