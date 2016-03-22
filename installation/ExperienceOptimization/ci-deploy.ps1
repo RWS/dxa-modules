@@ -22,6 +22,58 @@ Param(
 $ErrorActionPreference = "Stop"
 
 # Update Web.config
+function Add-ExperimentTrackingHandler($configDoc)
+{
+    $experimentTrackingHandlerName = "ExperimentTrackingHandler"
+
+    $handlersElement = $configDoc.SelectSingleNode("/configuration/system.webServer/handlers")
+    $experimentTrackingHandlerElement = $handlersElement.SelectSingleNode("add[@name='$experimentTrackingHandlerName']")
+    if ($experimentTrackingHandlerElement)
+    {
+        Write-Host "'$experimentTrackingHandlerName' handler is already configured."    
+    }
+    else
+    {
+        $experimentTrackingHandlerElement = $configDoc.CreateElement("add")
+        $experimentTrackingHandlerElement.SetAttribute("name", "$experimentTrackingHandlerName")
+        $experimentTrackingHandlerElement.SetAttribute("type", "Tridion.SmartTarget.Analytics.TrackingRedirect")
+        $experimentTrackingHandlerElement.SetAttribute("path", "/redirect/*")
+        $experimentTrackingHandlerElement.SetAttribute("verb", "*")
+        $experimentTrackingHandlerElement.SetAttribute("resourceType", "Unspecified")
+        $handlersElement.AppendChild($experimentTrackingHandlerElement) | Out-Null
+        Write-Host "Added '$experimentTrackingHandlerName' handler."    
+    }
+}
+
+function Add-IgnoreUrl($ignoreUrl, $configDoc)
+{
+    $ignoreUrlsKey = "ignore-urls"
+
+    $appSettingsElement = $configDoc.configuration.appSettings
+    $ignoreUrlsElement = $appSettingsElement.SelectSingleNode("add[@key='$ignoreUrlsKey']")
+    if ($ignoreUrlsElement)
+    {
+        $ignoreUrls = $ignoreUrlsElement.GetAttribute("value")
+        if (($ignoreUrls -contains $ignoreUrl))
+        {
+            Write-Host "'$ignoreUrlsKey' app setting already contains '$ignoreUrl'."
+        }
+        else
+        {
+            $ignoreUrls += ";$ignoreUrl"
+            Write-Host "Set '$ignoreUrlsKey' app setting to '$ignoreUrls'."
+        }
+    }
+    else
+    {
+        $ignoreUrlsElement = $configDoc.CreateElement("add")
+        $ignoreUrlsElement.SetAttribute("key", "$ignoreUrlsKey")
+        $ignoreUrlsElement.SetAttribute("value", $ignoreUrl)
+        $appSettingsElement.AppendChild($ignoreUrlsElement) | Out-Null
+        Write-Host "Added '$ignoreUrlsKey' app setting with value '$ignoreUrl'."
+    }
+}
+
 function Add-ModelBuilder($modelBuilderType, $configDoc) 
 {
 
@@ -113,6 +165,8 @@ function Add-ExperienceOptimizationLogger($configDoc, $logPath, $logLevel)
 
 Write-Host "Updating Web.config ..."
 [xml] $webConfigDoc = Get-Content "$distDestination\Web.config"
+Add-IgnoreUrl "redirect" $webConfigDoc
+Add-ExperimentTrackingHandler $webConfigDoc
 Add-ModelBuilder "Sdl.Web.Modules.SmartTarget.Mapping.SmartTargetModelBuilder, Sdl.Web.Modules.SmartTarget" $webConfigDoc
 Add-ExperienceOptimizationLogger $webConfigDoc $logPath $logLevel
 $webConfigDoc.Save("$distDestination\Web.config")
