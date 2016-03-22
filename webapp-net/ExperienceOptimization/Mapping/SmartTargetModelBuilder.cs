@@ -117,6 +117,14 @@ namespace Sdl.Web.Modules.SmartTarget.Mapping
                             itemsAlreadyOnPage, ref existingExperimentCookies, ref newExperimentCookies,
                             out experimentDimensions);
 
+                    if (experimentDimensions != null)
+                    {
+                        // The SmartTarget API doesn't set all ExperimentDimensions properties, but they are required by the ExperimentTrackingHandler (see CRQ-1667).
+                        experimentDimensions.PublicationId = string.Format("tcm:0-{0}-1", localization.LocalizationId);
+                        experimentDimensions.PageId =  string.Format("tcm:{0}-{1}-64", localization.LocalizationId, smartTargetPageModel.Id);
+                        experimentDimensions.Region = smartTargetRegion.Name;
+                    }
+
                     if (localization.IsStaging)
                     {
                         // The SmartTarget API provides the entire XPM markup tag; put it in XpmMetadata["Query"]. See SmartTargetRegion.GetStartQueryXpmMarkup.
