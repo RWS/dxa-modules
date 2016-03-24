@@ -13,7 +13,9 @@ call mvn -f dxa-module-core\pom.xml %command% || exit /b %errorlevel%
 call mvn -f dxa-module-googleanalytics\pom.xml %command% || exit /b %errorlevel%
 call mvn -f dxa-module-mediamanager\pom.xml %command% || exit /b %errorlevel%
 call mvn -f dxa-module-search\pom.xml %command% || exit /b %errorlevel%
-call mvn -f dxa-module-smarttarget\pom.xml %command% || exit /b %errorlevel%
+call mvn -f dxa-module-smarttarget-abstract\pom.xml %command% || exit /b %errorlevel%
+call mvn -f dxa-module-smarttarget-2013sp1\pom.xml %command% || exit /b %errorlevel%
+call mvn -f dxa-module-smarttarget-web8\pom.xml %command% || exit /b %errorlevel%
 call mvn -f dxa-module-51degrees\pom.xml %command% || exit /b %errorlevel%
 
 echo We are done :)
