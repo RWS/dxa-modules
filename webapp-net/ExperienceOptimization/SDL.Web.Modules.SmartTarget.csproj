@@ -79,7 +79,7 @@
     <Reference Include="System.Web.WebPages.Razor">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.1.2\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
       <Private>False</Private>
-    </Reference>
+    </Reference>   
   </ItemGroup>
   <ItemGroup Condition="'$(Configuration)' != 'Release_7.1'">
     <Reference Include="Tridion.ContentDelivery.AmbientData">
@@ -90,8 +90,9 @@
       <HintPath>..\packages\Sdl.Web.Delivery.8.1.1\lib\net45\Tridion.ContentDelivery.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Tridion.SmartTarget">
-      <HintPath>..\_references\xo-8.1\Tridion.SmartTarget.dll</HintPath>
+    <Reference Include="Tridion.SmartTarget, Version=2.1.0.56, Culture=neutral, PublicKeyToken=ddfc895746e5ee6b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Sdl.Web.Experience.8.1.1\lib\net45\Tridion.SmartTarget.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup Condition="'$(Configuration)' == 'Release_7.1'">
