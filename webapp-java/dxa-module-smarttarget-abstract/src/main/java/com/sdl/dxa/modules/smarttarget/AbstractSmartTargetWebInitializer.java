@@ -9,7 +9,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
 @Slf4j
-abstract class AbstractSmartTargetWebInitializer implements WebApplicationInitializer {
+public abstract class AbstractSmartTargetWebInitializer implements WebApplicationInitializer {
     private String getRedirectUrl() {
         String mapping;
 

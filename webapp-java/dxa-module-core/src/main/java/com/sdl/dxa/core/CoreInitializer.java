@@ -24,6 +24,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 @org.springframework.context.annotation.Configuration
+//todo dxa2 move to com.sdl.dxa.modules.*
 @ComponentScan("com.sdl.dxa.core")
 public class CoreInitializer {
 
