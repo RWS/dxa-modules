@@ -17,6 +17,7 @@ import java.util.Map;
 public class Degrees51ClaimsProvider implements ContextClaimsProvider {
     @Override
     public Map<String, Object> getContextClaims(String aspectName) throws DxaException {
+        log.trace("51degrees.context.provider activated");
         return Collections.emptyMap();
     }
 
