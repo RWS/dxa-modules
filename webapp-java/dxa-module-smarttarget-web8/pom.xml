@@ -43,10 +43,6 @@
         </dependencies>
     </dependencyManagement>
     <dependencies>
-        <dependency>
-            <groupId>net.sf.dozer</groupId>
-            <artifactId>dozer</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -57,45 +53,16 @@
             <artifactId>javax.servlet-api</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.sdl.web</groupId>
-            <artifactId>xo-client</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.sdl.web</groupId>
-            <artifactId>xo-client-compatible</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.sdl.web</groupId>
-            <artifactId>xo-model</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>com.sdl.web</groupId>
-            <artifactId>web-ambient-api</artifactId>
+            <artifactId>cil</artifactId>
+            <type>pom</type>
         </dependency>
 
-        <dependency>
-            <groupId>com.sdl.web</groupId>
-            <artifactId>web-ambient-client</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.tridion.smarttarget</groupId>
-            <artifactId>smarttarget_core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.tridion.smarttarget</groupId>
-            <artifactId>smarttarget_entitymodel</artifactId>
-        </dependency>
         <dependency>
             <groupId>com.tridion.smarttarget</groupId>
             <artifactId>smarttarget_google-analytics</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.tridion</groupId>
-            <artifactId>cd_core</artifactId>
         </dependency>
 
         <dependency>
@@ -136,6 +103,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
                 <configuration>
                     <source>${java-version}</source>
                     <target>${java-version}</target>
