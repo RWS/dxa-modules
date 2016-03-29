@@ -20,7 +20,6 @@
 
     <properties>
         <dxa-bom.version>${project.version}</dxa-bom.version>
-        <dxa-bom-web8.version>${project.version}</dxa-bom-web8.version>
         <java-version>1.8</java-version>
     </properties>
 
@@ -30,13 +29,6 @@
                 <groupId>com.sdl.dxa</groupId>
                 <artifactId>dxa-bom</artifactId>
                 <version>${dxa-bom.version}</version>
-                <scope>import</scope>
-                <type>pom</type>
-            </dependency>
-            <dependency>
-                <groupId>com.sdl.dxa</groupId>
-                <artifactId>dxa-bom-web8</artifactId>
-                <version>${dxa-bom-web8.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
@@ -58,11 +50,6 @@
             <artifactId>cil</artifactId>
             <type>pom</type>
         </dependency>
-
-        <!--<dependency>-->
-        <!--<groupId>com.tridion.smarttarget</groupId>-->
-        <!--<artifactId>smarttarget_google-analytics</artifactId>-->
-        <!--</dependency>-->
 
         <dependency>
             <groupId>com.sdl.dxa.modules</groupId>
