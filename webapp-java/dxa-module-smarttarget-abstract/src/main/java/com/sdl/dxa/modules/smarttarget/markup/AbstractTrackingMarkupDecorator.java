@@ -8,7 +8,7 @@ import com.sdl.webapp.common.markup.html.builders.HtmlBuilders;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-abstract class AbstractTrackingMarkupDecorator implements MarkupDecorator {
+public abstract class AbstractTrackingMarkupDecorator implements MarkupDecorator {
 
     @Override
     public HtmlNode process(HtmlNode markup, ViewModel model, WebRequestContext webRequestContext) {
