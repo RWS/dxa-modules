@@ -61,8 +61,7 @@ task build << {
 
 def greet() {
     println """
-    Building DXA Framework and related projects...
-    WebApp is not built!
+    Building DXA Modules
     """
 }
 
