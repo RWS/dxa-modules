@@ -171,7 +171,8 @@ namespace Sdl.Web.Modules.SmartTarget.Mapping
 
         protected virtual SmartTargetPromotion CreatePromotionEntity(Promotion promotion, string viewName, string regionName, Localization localization, ExperimentDimensions experimentDimensions)
         {
-            SmartTargetPromotion result = (promotion is Experiment) ? new SmartTargetExperiment(experimentDimensions) : new SmartTargetPromotion();
+            // In ST 2014 SP1 the ResultSet.FilterPromotions API represents Experiments as type Promotion, so we're not testing on type Experiment here.
+            SmartTargetPromotion result = (experimentDimensions != null) ? new SmartTargetExperiment(experimentDimensions) : new SmartTargetPromotion();
 
             result.MvcData = new MvcData(viewName);
             result.XpmMetadata = new Dictionary<string, object>
