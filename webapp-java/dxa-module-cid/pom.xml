@@ -11,7 +11,7 @@
 
     <groupId>com.sdl.dxa.modules</groupId>
     <artifactId>dxa-module-cid</artifactId>
-    <version>1.4.0-SNAPSHOT</version>
+    <version>1.4.0</version>
 
     <name>DXA Modules - CID</name>
     <description>Implementation of DXA CID module</description>
@@ -44,7 +44,7 @@
 
     <properties>
         <java-version>1.7</java-version>
-        <dxa-bom.version>1.4.0-SNAPSHOT</dxa-bom.version>
+        <dxa-bom.version>1.4.0</dxa-bom.version>
     </properties>
 
     <dependencyManagement>
