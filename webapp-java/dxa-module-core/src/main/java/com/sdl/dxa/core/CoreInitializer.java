@@ -2,8 +2,8 @@ package com.sdl.dxa.core;
 
 import com.sdl.webapp.common.api.mapping.views.AbstractInitializer;
 import com.sdl.webapp.common.api.mapping.views.ModuleInfo;
-import com.sdl.webapp.common.api.mapping.views.RegisteredView;
-import com.sdl.webapp.common.api.mapping.views.RegisteredViews;
+import com.sdl.webapp.common.api.mapping.views.RegisteredViewModel;
+import com.sdl.webapp.common.api.mapping.views.RegisteredViewModels;
 import com.sdl.webapp.common.api.model.entity.Article;
 import com.sdl.webapp.common.api.model.entity.Configuration;
 import com.sdl.webapp.common.api.model.entity.ContentList;
@@ -24,58 +24,59 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 @org.springframework.context.annotation.Configuration
+//todo dxa2 move to com.sdl.dxa.modules.*
 @ComponentScan("com.sdl.dxa.core")
 public class CoreInitializer {
 
-    @RegisteredViews({
-            @RegisteredView(viewName = "Article", clazz = Article.class),
-            @RegisteredView(viewName = "Accordion", clazz = ItemList.class),
-            @RegisteredView(viewName = "Breadcrumb", clazz = NavigationLinks.class),
-            @RegisteredView(viewName = "Carousel", clazz = ItemList.class),
-            @RegisteredView(viewName = "CookieNotificationBar", clazz = Notification.class),
-            @RegisteredView(viewName = "Download", clazz = Download.class),
-            @RegisteredView(viewName = "FooterLinkGroup", clazz = LinkList.class),
-            @RegisteredView(viewName = "FooterLinks", clazz = LinkList.class),
-            @RegisteredView(viewName = "HeaderLinks", clazz = LinkList.class),
-            @RegisteredView(viewName = "HeaderLogo", clazz = Teaser.class),
-            @RegisteredView(viewName = "Image", clazz = Image.class),
-            @RegisteredView(viewName = "LeftNavigation", clazz = NavigationLinks.class),
-            @RegisteredView(viewName = "LanguageSelector", clazz = Configuration.class),
-            @RegisteredView(viewName = "List", clazz = ContentList.class),
-            @RegisteredView(viewName = "OldBrowserNotificationBar", clazz = Notification.class),
-            @RegisteredView(viewName = "PagedList", clazz = ContentList.class),
-            @RegisteredView(viewName = "Place", clazz = Place.class),
-            @RegisteredView(viewName = "SiteMap", clazz = SitemapItem.class),
-            @RegisteredView(viewName = "SiteMapXml", clazz = SitemapItem.class),
-            @RegisteredView(viewName = "SocialLinks", clazz = TagLinkList.class),
-            @RegisteredView(viewName = "SocialSharing", clazz = TagLinkList.class),
-            @RegisteredView(viewName = "Tab", clazz = ItemList.class),
-            @RegisteredView(viewName = "Teaser-ImageOverlay", clazz = Teaser.class),
-            @RegisteredView(viewName = "Teaser", clazz = Teaser.class),
-            @RegisteredView(viewName = "TeaserColored", clazz = Teaser.class),
-            @RegisteredView(viewName = "TeaserHero-ImageOverlay", clazz = Teaser.class),
-            @RegisteredView(viewName = "TeaserMap", clazz = Teaser.class),
-            @RegisteredView(viewName = "ThumbnailList", clazz = ContentList.class),
-            @RegisteredView(viewName = "TopNavigation", clazz = NavigationLinks.class),
-            @RegisteredView(viewName = "YouTubeVideo", clazz = YouTubeVideo.class),
-            @RegisteredView(viewName = "GeneralPage", clazz = PageModelImpl.class),
-            @RegisteredView(viewName = "IncludePage", clazz = PageModelImpl.class),
-            @RegisteredView(viewName = "RedirectPage", clazz = PageModelImpl.class),
-            @RegisteredView(viewName = "2-Column", clazz = RegionModelImpl.class),
-            @RegisteredView(viewName = "3-Column", clazz = RegionModelImpl.class),
-            @RegisteredView(viewName = "4-Column", clazz = RegionModelImpl.class),
-            @RegisteredView(viewName = "Hero", clazz = RegionModelImpl.class),
-            @RegisteredView(viewName = "Info", clazz = RegionModelImpl.class),
-            @RegisteredView(viewName = "Left", clazz = RegionModelImpl.class),
-            @RegisteredView(viewName = "Links", clazz = RegionModelImpl.class),
-            @RegisteredView(viewName = "Logo", clazz = RegionModelImpl.class),
-            @RegisteredView(viewName = "Main", clazz = RegionModelImpl.class),
-            @RegisteredView(viewName = "Nav", clazz = RegionModelImpl.class),
-            @RegisteredView(viewName = "Tools", clazz = RegionModelImpl.class),
-            @RegisteredView(viewName = "Header", clazz = RegionModelImpl.class),
-            @RegisteredView(viewName = "Footer", clazz = RegionModelImpl.class),
-            @RegisteredView(viewName = "Left Navigation", clazz = RegionModelImpl.class),
-            @RegisteredView(viewName = "Content Tools", clazz = RegionModelImpl.class)
+    @RegisteredViewModels({
+            @RegisteredViewModel(viewName = "Article", modelClass = Article.class),
+            @RegisteredViewModel(viewName = "Accordion", modelClass = ItemList.class),
+            @RegisteredViewModel(viewName = "Breadcrumb", modelClass = NavigationLinks.class),
+            @RegisteredViewModel(viewName = "Carousel", modelClass = ItemList.class),
+            @RegisteredViewModel(viewName = "CookieNotificationBar", modelClass = Notification.class),
+            @RegisteredViewModel(viewName = "Download", modelClass = Download.class),
+            @RegisteredViewModel(viewName = "FooterLinkGroup", modelClass = LinkList.class),
+            @RegisteredViewModel(viewName = "FooterLinks", modelClass = LinkList.class),
+            @RegisteredViewModel(viewName = "HeaderLinks", modelClass = LinkList.class),
+            @RegisteredViewModel(viewName = "HeaderLogo", modelClass = Teaser.class),
+            @RegisteredViewModel(viewName = "Image", modelClass = Image.class),
+            @RegisteredViewModel(viewName = "LeftNavigation", modelClass = NavigationLinks.class),
+            @RegisteredViewModel(viewName = "LanguageSelector", modelClass = Configuration.class),
+            @RegisteredViewModel(viewName = "List", modelClass = ContentList.class),
+            @RegisteredViewModel(viewName = "OldBrowserNotificationBar", modelClass = Notification.class),
+            @RegisteredViewModel(viewName = "PagedList", modelClass = ContentList.class),
+            @RegisteredViewModel(viewName = "Place", modelClass = Place.class),
+            @RegisteredViewModel(viewName = "SiteMap", modelClass = SitemapItem.class),
+            @RegisteredViewModel(viewName = "SiteMapXml", modelClass = SitemapItem.class),
+            @RegisteredViewModel(viewName = "SocialLinks", modelClass = TagLinkList.class),
+            @RegisteredViewModel(viewName = "SocialSharing", modelClass = TagLinkList.class),
+            @RegisteredViewModel(viewName = "Tab", modelClass = ItemList.class),
+            @RegisteredViewModel(viewName = "Teaser-ImageOverlay", modelClass = Teaser.class),
+            @RegisteredViewModel(viewName = "Teaser", modelClass = Teaser.class),
+            @RegisteredViewModel(viewName = "TeaserColored", modelClass = Teaser.class),
+            @RegisteredViewModel(viewName = "TeaserHero-ImageOverlay", modelClass = Teaser.class),
+            @RegisteredViewModel(viewName = "TeaserMap", modelClass = Teaser.class),
+            @RegisteredViewModel(viewName = "ThumbnailList", modelClass = ContentList.class),
+            @RegisteredViewModel(viewName = "TopNavigation", modelClass = NavigationLinks.class),
+            @RegisteredViewModel(viewName = "YouTubeVideo", modelClass = YouTubeVideo.class),
+            @RegisteredViewModel(viewName = "GeneralPage", modelClass = PageModelImpl.class),
+            @RegisteredViewModel(viewName = "IncludePage", modelClass = PageModelImpl.class),
+            @RegisteredViewModel(viewName = "RedirectPage", modelClass = PageModelImpl.class),
+            @RegisteredViewModel(viewName = "2-Column", modelClass = RegionModelImpl.class),
+            @RegisteredViewModel(viewName = "3-Column", modelClass = RegionModelImpl.class),
+            @RegisteredViewModel(viewName = "4-Column", modelClass = RegionModelImpl.class),
+            @RegisteredViewModel(viewName = "Hero", modelClass = RegionModelImpl.class),
+            @RegisteredViewModel(viewName = "Info", modelClass = RegionModelImpl.class),
+            @RegisteredViewModel(viewName = "Left", modelClass = RegionModelImpl.class),
+            @RegisteredViewModel(viewName = "Links", modelClass = RegionModelImpl.class),
+            @RegisteredViewModel(viewName = "Logo", modelClass = RegionModelImpl.class),
+            @RegisteredViewModel(viewName = "Main", modelClass = RegionModelImpl.class),
+            @RegisteredViewModel(viewName = "Nav", modelClass = RegionModelImpl.class),
+            @RegisteredViewModel(viewName = "Tools", modelClass = RegionModelImpl.class),
+            @RegisteredViewModel(viewName = "Header", modelClass = RegionModelImpl.class),
+            @RegisteredViewModel(viewName = "Footer", modelClass = RegionModelImpl.class),
+            @RegisteredViewModel(viewName = "Left Navigation", modelClass = RegionModelImpl.class),
+            @RegisteredViewModel(viewName = "Content Tools", modelClass = RegionModelImpl.class)
     })
     @Component
     @ModuleInfo(name = "Core module", areaName = "Core", description = "Core DXA module which contains basic views")

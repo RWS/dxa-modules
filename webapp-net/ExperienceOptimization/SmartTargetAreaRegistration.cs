@@ -21,6 +21,8 @@ namespace Sdl.Web.Modules.SmartTarget
             RegisterViewModel("4-Column", typeof(SmartTargetRegion));
 
             RegisterViewModel("Promotion", typeof(SmartTargetPromotion));
+
+            RegisterMarkupDecorator(typeof(ExperimentMarkupDecorator));
         }
     }
 }

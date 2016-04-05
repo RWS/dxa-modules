@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using DD4T.ContentModel;
+using Sdl.Web.Common;
 using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Logging;
 using Sdl.Web.Common.Models;
@@ -93,22 +94,36 @@ namespace Sdl.Web.Modules.SmartTarget.Mapping
                 }
                 Log.Debug("Using Promotion View '{0}'", promotionViewName);
 
+                // TODO: we shouldn't access HttpContext in a Model Builder.
+                HttpContext httpContext = HttpContext.Current;
+                if (httpContext == null)
+                {
+                    throw new DxaException("HttpContext is not available.");
+                }
+
                 List<string> itemsAlreadyOnPage = new List<string>();
-                ExperimentCookies existingExperimentCookies = CookieProcessor.GetExperimentCookies(HttpContext.Current.Request); // TODO: we shouldn't access HttpContext in a Model Builder.
-            
+                ExperimentCookies existingExperimentCookies = CookieProcessor.GetExperimentCookies(httpContext.Request); 
+                ExperimentCookies newExperimentCookies = new ExperimentCookies();
+
                 // Filter the Promotions for each SmartTargetRegion
                 foreach (SmartTargetRegion smartTargetRegion in smartTargetPageModel.Regions.OfType<SmartTargetRegion>())
                 {
                     string regionName = smartTargetRegion.Name;
 
                     List<string> itemsOutputInRegion = new List<string>();
-                    ExperimentCookies newExperimentCookies = new ExperimentCookies();
                     ExperimentDimensions experimentDimensions;
-
                     List<Promotion> promotions = new List<Promotion>(resultSet.Promotions);
                     ResultSet.FilterPromotions(promotions, regionName, smartTargetRegion.MaxItems, smartTargetPageModel.AllowDuplicates, itemsOutputInRegion,
                             itemsAlreadyOnPage, ref existingExperimentCookies, ref newExperimentCookies,
                             out experimentDimensions);
+
+                    if (experimentDimensions != null)
+                    {
+                        // The SmartTarget API doesn't set all ExperimentDimensions properties, but they are required by the ExperimentTrackingHandler (see CRQ-1667).
+                        experimentDimensions.PublicationId = string.Format("tcm:0-{0}-1", localization.LocalizationId);
+                        experimentDimensions.PageId =  string.Format("tcm:{0}-{1}-64", localization.LocalizationId, smartTargetPageModel.Id);
+                        experimentDimensions.Region = smartTargetRegion.Name;
+                    }
 
                     if (localization.IsStaging)
                     {
@@ -123,7 +138,7 @@ namespace Sdl.Web.Modules.SmartTarget.Mapping
                     // It seems that ResultSet.FilterPromotions doesn't really filter on Region name, so we do post-filtering here.
                     foreach (Promotion promotion in promotions.Where(promotion => promotion.Visible && promotion.Region.Contains(regionName)))
                     {
-                        SmartTargetPromotion smartTargetPromotion = CreatePromotionEntity(promotion, promotionViewName, smartTargetRegion.Name, localization);
+                        SmartTargetPromotion smartTargetPromotion = CreatePromotionEntity(promotion, promotionViewName, smartTargetRegion.Name, localization, experimentDimensions);
 
                         if (!smartTargetRegion.HasSmartTargetContent)
                         {
@@ -134,6 +149,11 @@ namespace Sdl.Web.Modules.SmartTarget.Mapping
 
                         smartTargetRegion.Entities.Add(smartTargetPromotion);
                     }
+                }
+
+                if (newExperimentCookies.Count > 0)
+                {
+                    smartTargetPageModel.ExperimentCookies = newExperimentCookies;
                 }
             }
         }
@@ -149,22 +169,23 @@ namespace Sdl.Web.Modules.SmartTarget.Mapping
         }
         #endregion
 
-        protected virtual SmartTargetPromotion CreatePromotionEntity(Promotion promotion, string viewName, string regionName, Localization localization)
+        protected virtual SmartTargetPromotion CreatePromotionEntity(Promotion promotion, string viewName, string regionName, Localization localization, ExperimentDimensions experimentDimensions)
         {
-            // TODO TSI-901: Create SmartTargetExperiment (subclass of SmartTargetPromotion) if promotion is Experiment.
-            return new SmartTargetPromotion
+            // In ST 2014 SP1 the ResultSet.FilterPromotions API represents Experiments as type Promotion, so we're not testing on type Experiment here.
+            SmartTargetPromotion result = (experimentDimensions != null) ? new SmartTargetExperiment(experimentDimensions) : new SmartTargetPromotion();
+
+            result.MvcData = new MvcData(viewName);
+            result.XpmMetadata = new Dictionary<string, object>
             {
-                MvcData = new MvcData(viewName),
-                XpmMetadata = new Dictionary<string, object>
-                {
-                    {"PromotionID", promotion.PromotionId},
-                    {"RegionID", regionName}
-                },
-                Title = promotion.Title,
-                Slogan = promotion.Slogan,
-                // Create SmartTargetItem objects for visible ST Items.
-                Items = promotion.Items.Where(item => item.Visible).Select(item => CreateSmartTargetItem(item, localization)).ToList()
+                {"PromotionID", promotion.PromotionId},
+                {"RegionID", regionName}
             };
+            result.Title = promotion.Title;
+            result.Slogan = promotion.Slogan;
+            // Create SmartTargetItem objects for visible ST Items.
+            result.Items = promotion.Items.Where(item => item.Visible).Select(item => CreateSmartTargetItem(item, localization)).ToList();
+
+            return result;
         }
 
         protected virtual SmartTargetItem CreateSmartTargetItem(Item item, Localization localization)

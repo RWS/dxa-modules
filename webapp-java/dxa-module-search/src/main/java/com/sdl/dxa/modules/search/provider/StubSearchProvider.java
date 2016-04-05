@@ -16,6 +16,12 @@ import java.util.Map;
 @Component
 public class StubSearchProvider implements SearchProvider {
 
+    @SneakyThrows(DxaException.class)
+    private static <T> T fail() {
+        throw new DxaException("Search Provider is not set. " +
+                "Please set one of these Spring profiles to enable search module: 'search.solr' or 'search.aws'");
+    }
+
     @Override
     public SearchQuery buildSearchQuery(ViewModel model, String queryText, String start, Map<String, String[]> queryStringParameters) {
         return fail();
@@ -24,11 +30,5 @@ public class StubSearchProvider implements SearchProvider {
     @Override
     public void executeQuery(SearchQuery searchQuery, Localization localization) {
         fail();
-    }
-
-    @SneakyThrows(DxaException.class)
-    private <T> T fail() {
-        throw new DxaException("Search Provider is not set. " +
-                "Please set one of these Spring profiles to enable search module: 'search.solr' or 'search.aws'");
     }
 }
