@@ -180,8 +180,7 @@ public class SmartTargetPageBuilder extends AbstractSmartTargetPageBuilder {
     private void filterPromotionsForPage(Localization localization, SmartTargetPageModel stPageModel,
                                          final List<Promotion> promotions, String promotionViewName) throws SmartTargetException {
 //        // TODO: we shouldn't access ServletRequest in a Model Builder.
-        Map<String, ExperimentCookie> existingExperimentCookies =
-                CookieProcessor.getExperimentCookies(webRequestContext.getServletRequest());
+        Map<String, ExperimentCookie> existingExperimentCookies = CookieProcessor.getExperimentCookies(httpServletRequest);
         Map<String, ExperimentCookie> newExperimentCookies = new HashMap<>();
 
         List<String> itemsAlreadyOnPage = new ArrayList<>();
