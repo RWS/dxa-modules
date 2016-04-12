@@ -18,7 +18,7 @@ public abstract class AbstractSmartTargetWebInitializer implements WebApplicatio
 
         if (mapping == null) {
             log.debug("Failed to get redirect link for XO tracking from XO configuration, fallback to DXA properties file");
-            mapping = InitializationUtils.loadDxaProperties("dxa.modules.xo.properties").getProperty("dxa.modules.xo.fallbackRedirectUrl");
+            mapping = InitializationUtils.loadDxaProperties().getProperty("dxa.modules.xo.fallbackRedirectUrl");
 
             if (mapping == null) {
                 log.debug("Failed to get redirect link for XO tracking from properties file, fallback to default value");

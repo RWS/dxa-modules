@@ -2,7 +2,6 @@ package com.sdl.dxa.modules.smarttarget.mapping;
 
 import com.sdl.dxa.modules.smarttarget.model.entity.AbstractSmartTargetPageModel;
 import com.sdl.dxa.modules.smarttarget.model.entity.SmartTargetRegion;
-import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.content.ContentProvider;
 import com.sdl.webapp.common.api.content.ContentProviderException;
 import com.sdl.webapp.common.api.localization.Localization;
@@ -19,6 +18,7 @@ import org.dd4t.contentmodel.Page;
 import org.dd4t.contentmodel.PageTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -35,7 +35,7 @@ public abstract class AbstractSmartTargetPageBuilder implements PageBuilder {
     private static final String PROMOTION_VIEW_NAME_CONFIG = "smarttarget.smartTargetEntityPromotion";
 
     @Autowired
-    protected WebRequestContext webRequestContext;
+    protected HttpServletRequest httpServletRequest;
 
     static void clearFallbackContentIfNeeded(SmartTargetRegion smartTargetRegion) {
         if (!smartTargetRegion.isFallbackContentReplaced()) {

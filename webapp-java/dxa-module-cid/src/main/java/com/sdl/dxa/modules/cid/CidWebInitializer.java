@@ -16,7 +16,7 @@ public class CidWebInitializer implements WebApplicationInitializer {
     public void onStartup(ServletContext servletContext) throws ServletException {
         log.debug("Trying to initialize servlet for CID module");
 
-        Properties properties = InitializationUtils.loadDxaProperties("dxa.modules.cid.properties");
+        Properties properties = InitializationUtils.loadDxaProperties();
 
         String className = properties.getProperty("dxa.modules.cid.className");
         Class<?> clazz = InitializationUtils.classForNameIfPresent(className);

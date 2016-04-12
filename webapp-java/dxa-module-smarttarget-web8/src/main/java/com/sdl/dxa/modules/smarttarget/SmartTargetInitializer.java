@@ -1,18 +1,31 @@
 package com.sdl.dxa.modules.smarttarget;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sdl.dxa.modules.smarttarget.markup.AbstractTrackingMarkupDecorator;
 import com.sdl.dxa.modules.smarttarget.markup.TrackingMarkupDecorator;
+import com.sdl.dxa.modules.smarttarget.model.json.ExperimentDimensionsMixin;
 import com.tridion.smarttarget.SmartTargetException;
 import com.tridion.smarttarget.analytics.AnalyticsManager;
+import com.tridion.smarttarget.analytics.tracking.ExperimentDimensions;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+
+import javax.annotation.PostConstruct;
 
 @Slf4j
 @Configuration
-@ComponentScan("com.sdl.dxa.modules.smarttarget")
 public class SmartTargetInitializer {
+
+    @Autowired
+    private ObjectMapper objectMapper;
+
+    @PostConstruct
+    public void experimentMixin() {
+        objectMapper.addMixInAnnotations(ExperimentDimensions.class, ExperimentDimensionsMixin.class);
+    }
+
     @Bean
     public AbstractTrackingMarkupDecorator trackingMarkupDecorator() {
         TrackingMarkupDecorator trackingMarkupDecorator = new TrackingMarkupDecorator();
