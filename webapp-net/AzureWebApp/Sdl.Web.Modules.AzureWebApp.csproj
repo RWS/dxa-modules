@@ -109,7 +109,11 @@
     <Compile Include="TopologyManager.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ApplicationInsights.config" />
+    <None Include="Log.config" />
     <None Include="packages.config" />
+    <None Include="Unity.config" />
+    <None Include="Web.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Sdl.Dxa.Framework.Web8.1.4.0\build\net452\Sdl.Dxa.Framework.Web8.targets" Condition="Exists('..\packages\Sdl.Dxa.Framework.Web8.1.4.0\build\net452\Sdl.Dxa.Framework.Web8.targets')" />
