@@ -3,6 +3,7 @@ package com.sdl.dxa.modules.degrees51.contextengine;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sdl.dxa.modules.degrees51.cloud.Endpoints;
 import com.sdl.dxa.modules.degrees51.cloud.MatchEntity;
+import com.sdl.dxa.modules.degrees51.mapping.Degrees51Mapper;
 import com.sdl.webapp.common.api.contextengine.ContextClaimsProvider;
 import com.sdl.webapp.common.exceptions.DxaException;
 import lombok.SneakyThrows;
@@ -35,6 +36,9 @@ public class Degrees51ClaimsProvider implements ContextClaimsProvider {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private Degrees51Mapper degrees51Mapper;
+
     private boolean disabled;
 
     @Override
@@ -42,8 +46,11 @@ public class Degrees51ClaimsProvider implements ContextClaimsProvider {
         log.trace("51degrees.context.provider activated");
 
         MatchEntity match = match();
+        log.trace("Loaded a match entity from 51degrees {}", match);
+        match.getValues().put("ScreenPixelsWidth", Collections.singletonList("1024"));
+        match.getValues().put("ScreenPixelsHeight", Collections.singletonList("640"));
 
-        return Collections.emptyMap();
+        return degrees51Mapper.map(match.getValues());
     }
 
     @Override
