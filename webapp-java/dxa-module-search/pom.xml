@@ -10,7 +10,7 @@
 
     <groupId>com.sdl.dxa.modules</groupId>
     <artifactId>dxa-module-search</artifactId>
-    <version>1.4.0</version>
+    <version>1.4.1-SNAPSHOT</version>
 
     <name>DXA Modules - Search</name>
     <description>Implementation of DXA Search module</description>
@@ -42,7 +42,7 @@
     </developers>
 
     <properties>
-        <dxa-bom.version>1.4.0</dxa-bom.version>
+        <dxa-bom.version>1.4.1-SNAPSHOT</dxa-bom.version>
         <java-version>1.7</java-version>
         <solr-solrj.version>5.3.1</solr-solrj.version>
         <aws-java-sdk.version>1.10.32</aws-java-sdk.version>
