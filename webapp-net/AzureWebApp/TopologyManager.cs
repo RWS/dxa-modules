@@ -1,10 +1,12 @@
 ﻿using System;
-using System.Linq;
+using System.Collections.Generic;
+using System.IO;
 using System.Net;
+using System.Text;
 using System.Web.Configuration;
+using Newtonsoft.Json;
 using Sdl.Web.Common;
 using Sdl.Web.Common.Logging;
-using Tridion.TopologyManager.Client;
 
 namespace Sdl.Web.Modules.AzureWebApp
 {
@@ -13,8 +15,9 @@ namespace Sdl.Web.Modules.AzureWebApp
     /// </summary>
     internal static class TopologyManager
     {
-        private static readonly TopologyManagerClient _topologyManagerClient;
-        private static readonly string _websiteId;
+        private static readonly string _ttmBaseUrl;
+        private static readonly string _ttmUserName;
+        private static readonly string _ttmPassword;
 
         /// <summary>
         /// Class constructor
@@ -23,16 +26,9 @@ namespace Sdl.Web.Modules.AzureWebApp
         {
             using (new Tracer())
             {
-                // NOTE: this is sensitive data which should not be stored (unencrypted) in Web.config, but in a separate config file which is *outside* the web app base.
-                string ttmUrl = GetConfigValue("ttm-url");
-                string ttmUserName = GetConfigValue("ttm-username");
-                string ttmPassword = GetConfigValue("ttm-password");
-                _websiteId = GetConfigValue("ttm-website-id");
-
-                _topologyManagerClient = new TopologyManagerClient(new Uri(ttmUrl))
-                {
-                    Credentials = new NetworkCredential(ttmUserName, ttmPassword)
-                };
+                _ttmBaseUrl = GetConfigValue("ttm-url");
+                _ttmUserName = GetConfigValue("ttm-username");
+                _ttmPassword = GetConfigValue("ttm-password");
             }
         }
 
@@ -41,7 +37,7 @@ namespace Sdl.Web.Modules.AzureWebApp
             string result = WebConfigurationManager.AppSettings[key];
             if (string.IsNullOrEmpty(result))
             {
-                throw new DxaException(string.Format("Required appSetting '{0}' is not configured.", key));
+                Log.Warn("appSetting '{0}' is not configured", key);
             }
             return result;
         }
@@ -50,22 +46,53 @@ namespace Sdl.Web.Modules.AzureWebApp
         {
             using (new Tracer(baseUrl))
             {
-                WebsiteData websiteData = _topologyManagerClient.Websites.Where(ws => ws.Id == _websiteId).FirstOrDefault();
-                if (websiteData == null)
+                if (string.IsNullOrEmpty(_ttmBaseUrl))
                 {
-                    throw new DxaException("Website not found in Topology Manager: " + _websiteId);
+                    throw new DxaException("Automatic Topology Manager registration is not enabled (ttm-url is not configured).");
                 }
-                if (websiteData.BaseUrls.Contains(baseUrl))
+
+                // We're using a very simple, "TTM Facade" REST webservice for registering the Website Base URL in Topology Manager.
+                string ttmFacadeUrl = _ttmBaseUrl + "/api/TtmFacade/RegisterWebsiteBaseUrl";
+                try
                 {
-                    Log.Warn("Website '{0}' already has Base URL '{1}'", _websiteId, baseUrl);
-                    return;
+                    WebRequest ttmFacadeRequest = WebRequest.CreateHttp(ttmFacadeUrl);
+                    if (string.IsNullOrEmpty(_ttmUserName))
+                    {
+                        Log.Info("Using anonymous access (ttm-username is not configured).");
+                    }
+                    else
+                    {
+                        ttmFacadeRequest.Credentials = new NetworkCredential(_ttmUserName, _ttmPassword);
+                    }
+                    ttmFacadeRequest.Method = "POST";
+                    ttmFacadeRequest.ContentType = "application/json";
+                    using (Stream requestContentStream = ttmFacadeRequest.GetRequestStream())
+                    {
+                        IDictionary<string, string> requestParams = new Dictionary<string, string>()
+                        {
+                            {"BaseUrl", baseUrl}
+                        };
+                        string requestBody = JsonConvert.SerializeObject(requestParams);
+                        byte[] requestBytes = Encoding.UTF8.GetBytes(requestBody);
+                        requestContentStream.Write(requestBytes, 0, requestBytes.Length);
+                    }
+
+                    WebResponse ttmFacadeResponse = ttmFacadeRequest.GetResponse();
+                    using (Stream responseStream = ttmFacadeResponse.GetResponseStream())
+                    {
+                        string responseBody = new StreamReader(responseStream).ReadToEnd();
+                        string returnValue = JsonConvert.DeserializeObject<string>(responseBody);
+                        if (!string.IsNullOrEmpty(returnValue))
+                        {
+                            throw new DxaException(returnValue);
+                        }
+                    }
+                    Log.Info("Successfully registered Base URL '{0}'", baseUrl);
                 }
-                websiteData.BaseUrls.Add(baseUrl);
-
-                _topologyManagerClient.UpdateObject(websiteData);
-                _topologyManagerClient.SaveChanges();
-
-                Log.Info("Registered Base URL '{0}' for Website '{1}'", baseUrl, _websiteId);
+                catch (Exception ex)
+                {
+                    throw new DxaException(string.Format("An error occured while communicating with '{0}'", ttmFacadeUrl), ex);
+                }
             }
         }
     }
