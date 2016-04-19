@@ -14,6 +14,7 @@ namespace Sdl.Web.Modules.AzureWebApp
 
         protected override void RegisterAllViewModels()
         {
+            // This Module doesn't define any Views (yet).
         }
     }
 

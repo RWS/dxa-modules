@@ -11,15 +11,15 @@
     </parent>
 
     <groupId>com.sdl.dxa.modules</groupId>
-    <version>1.4.0</version>
+    <version>1.5.0-SNAPSHOT</version>
     <artifactId>dxa-module-smarttarget-2013sp1</artifactId>
 
     <name>DXA Modules - Experience Optimization module 2013SP1</name>
     <description>Experience Optimization Module for 2013SP1</description>
 
     <properties>
-        <dxa-bom.version>1.4.0</dxa-bom.version>
-        <dxa-bom-2013sp1.version>1.4.0</dxa-bom-2013sp1.version>
+        <dxa-bom.version>1.5.0-SNAPSHOT</dxa-bom.version>
+        <dxa-bom-2013sp1.version>1.5.0-SNAPSHOT</dxa-bom-2013sp1.version>
         <java-version>1.7</java-version>
     </properties>
 
