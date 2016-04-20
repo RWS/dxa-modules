@@ -18,9 +18,7 @@ namespace Sdl.Web.Modules.Degrees51
 {
     public class Degrees51ContextClaimsProvider : IContextClaimsProvider
     {       
-        private IDictionary<string, object> _claims;     
         private IAspectMap[] _properties;
-        private Dictionary<string, string> _context;
         public Degrees51ContextClaimsProvider()
         {
             // add license key if available. you can also add the license key to a 
@@ -150,17 +148,14 @@ namespace Sdl.Web.Modules.Degrees51
 
         public IDictionary<string, object> GetContextClaims(string aspectName)
         {
-            if (_claims == null)
-            {
-                _claims = new Dictionary<string, object>();
-                // grab all the properties from the data set and map to context claims                  
-                foreach (IAspectMap x in _properties)
-                {
-                    AddAspectClaim(x.Aspect, x.Name, x.Value);
-                }
-            }         
-            return _claims;
-        }      
+            Dictionary<string, object> claims = new Dictionary<string, object>();
+            // grab all the properties from the data set and map to context claims                  
+            foreach (IAspectMap x in _properties)
+            {               
+                claims.Add(string.Format("{0}.{1}", x.Aspect, x.Name), x.Value);
+            }
+            return claims;
+        }
 
         public string GetDeviceFamily()
         {
@@ -169,22 +164,19 @@ namespace Sdl.Web.Modules.Degrees51
 
         private T GetContextProperty<T>(string propertyName)
         {
-            if (_context == null)
+            Dictionary<string, string> context = new Dictionary<string, string>();
+            //context=dpr~1|dw~1600|dh~900|bcd~24|bw~1600|bh~775|version~1|; 
+            HttpCookie cookie = HttpContext.Current.Request.Cookies["context"];
+            if (cookie != null)
             {
-                _context = new Dictionary<string, string>();
-                //context=dpr~1|dw~1600|dh~900|bcd~24|bw~1600|bh~775|version~1|; 
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["context"];
-                if (cookie != null)
+                string[] values = cookie.Value.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (string s in values)
                 {
-                    string[] values = cookie.Value.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
-                    foreach (string s in values)
-                    {
-                        string[] v = s.Split(new char[] { '~' }, StringSplitOptions.RemoveEmptyEntries);
-                        _context.Add(v[0], v[1]);                      
-                    }
+                    string[] v = s.Split(new char[] { '~' }, StringSplitOptions.RemoveEmptyEntries);
+                    context.Add(v[0], v[1]);
                 }
             }
-            return (T)TypeDescriptor.GetConverter(typeof(T)).ConvertFromInvariantString(_context[propertyName]);
+            return (T)TypeDescriptor.GetConverter(typeof(T)).ConvertFromInvariantString(context[propertyName]);
         }
 
         private T GetProperty<T>(string propertyName)
@@ -202,13 +194,7 @@ namespace Sdl.Web.Modules.Degrees51
                 return (T)((object)value.ToString());           
             return default(T);
         }
-
-        private void AddAspectClaim(string aspectName, string propertyName, object propertyValue)
-        {
-            string claimName = string.Format("{0}.{1}", aspectName, propertyName);
-            _claims.Add(claimName, propertyValue);
-        }
-
+      
         private interface IAspectMap
         {
             string Aspect { get; set; }
