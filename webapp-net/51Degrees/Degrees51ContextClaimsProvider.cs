@@ -19,7 +19,6 @@ namespace Sdl.Web.Modules.Degrees51
     public class Degrees51ContextClaimsProvider : IContextClaimsProvider
     {       
         private IDictionary<string, object> _claims;     
-        private Match _match;
         private IAspectMap[] _properties;
         private Dictionary<string, string> _context;
         public Degrees51ContextClaimsProvider()
@@ -150,36 +149,16 @@ namespace Sdl.Web.Modules.Degrees51
         }
 
         public IDictionary<string, object> GetContextClaims(string aspectName)
-        {                         
-            if(_claims == null)
-            {               
-                _claims = new Dictionary<string,object>();
-                string location = "UNDEFINED";
-                try
+        {
+            if (_claims == null)
+            {
+                _claims = new Dictionary<string, object>();
+                // grab all the properties from the data set and map to context claims                  
+                foreach (IAspectMap x in _properties)
                 {
-                    // get location of the dataset file. this is configurable so we can place it on
-                    // a UNC share like azure shared storage to reduce multiple instances having
-                    // to update and keep their own copy.
-                    location = WebConfigurationManager.AppSettings["51degrees.data.location"];
-                    if (string.IsNullOrEmpty(location))
-                    {
-                        location = Path.Combine(HttpContext.Current.Request.PhysicalApplicationPath, "App_Data\\51Degrees.dat");
-                    }
-                    // grab all the properties from the data set and map to context claims
-                    DataSet dataSet = StreamFactory.Create(location, false);
-                    Provider provider = new Provider(dataSet);
-                    _match = provider.Match(HttpContext.Current.Request.UserAgent);
-                    foreach (IAspectMap x in _properties)
-                    {
-                        AddAspectClaim(x.Aspect, x.Name, x.Value);
-                    }
+                    AddAspectClaim(x.Aspect, x.Name, x.Value);
                 }
-                catch(Exception ex)
-                {
-                    throw new DxaException(
-                        string.Format("An error occured while accessing properties from 51 degrees using dataset '{0}'", location), ex);       
-                }
-            }          
+            }         
             return _claims;
         }      
 
@@ -210,7 +189,8 @@ namespace Sdl.Web.Modules.Degrees51
 
         private T GetProperty<T>(string propertyName)
         {
-            var value = _match[propertyName];
+            var value = WebProvider.ActiveProvider.Match(
+                HttpContext.Current.Request.UserAgent)[propertyName];
             if (value == null) return default(T);           
             if (typeof(T) == typeof(bool))
                 return (T)((object)value.ToBool());
