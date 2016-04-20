@@ -140,7 +140,7 @@ namespace Sdl.Web.Modules.Degrees51
                    if (GetProperty<bool>("HasTrackpad")) h.Add("trackpad");
                    return h;
                }},
-               new AspectMap<string> { Aspect = "device", Name = "vendor", Build = ()=>GetProperty<string>("PlatformVender") },
+               new AspectMap<string> { Aspect = "device", Name = "vendor", Build = ()=>GetProperty<string>("PlatformVendor") },
                new AspectMap<string> { Aspect = "device", Name = "variant", Build = ()=>GetProperty<string>("DeviceType") },
                new AspectMap<string> { Aspect = "device", Name = "model", Build = ()=>GetProperty<string>("BrowserName") }
             };
