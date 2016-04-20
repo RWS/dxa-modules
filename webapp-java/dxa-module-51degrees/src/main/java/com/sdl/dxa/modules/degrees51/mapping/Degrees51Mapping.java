@@ -1,16 +1,17 @@
 package com.sdl.dxa.modules.degrees51.mapping;
 
+import fiftyone.mobile.detection.entities.Values;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import static com.sdl.dxa.modules.degrees51.mapping.Degrees51Mapping.Converters.TO_BOOLEAN;
 import static com.sdl.dxa.modules.degrees51.mapping.Degrees51Mapping.Converters.TO_INTEGER;
 
-@Getter
 @Slf4j
 enum Degrees51Mapping {
 
@@ -30,16 +31,13 @@ enum Degrees51Mapping {
         }
     }
 
+    @Getter
     private String key51degrees;
 
+    @Getter
     private String keyDxa;
 
     private Converter<?> converter;
-
-    Degrees51Mapping(String key51degrees, String keyDxa) {
-        this.key51degrees = key51degrees;
-        this.keyDxa = keyDxa;
-    }
 
     Degrees51Mapping(String key51degrees, String keyDxa, Converter<?> converter) {
         this.key51degrees = key51degrees;
@@ -47,66 +45,64 @@ enum Degrees51Mapping {
         this.converter = converter;
     }
 
-    static boolean isKnownKey(String key51degrees) {
-        boolean isKnownKey = fromString.containsKey(key51degrees);
-        //todo dxa2 do this with aspects
-        if (isKnownKey) {
-            log.debug("51degrees key '{}' has a known mapping", key51degrees);
-        } else {
-            log.trace("51degrees key '{}' has no mapping", key51degrees);
-        }
-        return isKnownKey;
+
+    Degrees51Mapping(String key51degrees, String keyDxa) {
+        this.key51degrees = key51degrees;
+        this.keyDxa = keyDxa;
     }
 
-    static Degrees51Mapping getByKey(String key51degrees) {
-        Degrees51Mapping mapping = fromString.get(key51degrees);
-        log.debug("Mapping 51Degrees key '{}' to ours '{}' with '{}' converter",
-                key51degrees, mapping.keyDxa, mapping.converter == null ? null : mapping.converter.getGenericType());
-        return mapping;
-    }
-
-    public Object convert(List<String> values) {
+    public Object convert(Values values) {
         Object converted;
-        String value = values.get(0);
+
+        String strValue = values.toString();
+
+        if (isUnknownValue(strValue)) {
+            log.warn("Value {} is unknown, returning null", key51degrees);
+            return null;
+        }
+
         if (converter != null) {
-            converted = converter.convert(value);
-            log.debug("Converted '{}' from 'String' to '{}' as '{}'", value, converted, converted.getClass());
+            converted = converter.convert(values);
+            log.debug("Converted '{}' to '{}' as '{}'", strValue, converted, converted.getClass());
         } else {
-            converted = value;
-            log.debug("No converter set, so returning as is '{}'", converted);
+            converted = strValue;
+            log.debug("No converter set, so returning as String '{}'", converted);
         }
 
         return converted;
     }
 
+    private boolean isUnknownValue(String strValue) {
+        return Objects.equals("Unknown", strValue);
+    }
+
     private abstract static class Converter<T> {
 
-        private final Class<T> type;
+        abstract T convertInternal(Values value) throws IOException;
 
-        Converter(Class<T> type) {
-            this.type = type;
-        }
-
-        abstract T convert(String value);
-
-        Class<T> getGenericType() {
-            return type;
+        T convert(Values values) {
+            try {
+                return convertInternal(values);
+            } catch (IOException e) {
+                log.error("Exception while converting", e);
+                return null;
+            }
         }
     }
 
     static class Converters {
 
-        static final Converter<Integer> TO_INTEGER = new Converter<Integer>(Integer.class) {
+        static final Converter<Integer> TO_INTEGER = new Converter<Integer>() {
             @Override
-            public Integer convert(String value) {
-                return Integer.parseInt(value);
+            Integer convertInternal(Values value) throws IOException {
+                return Double.valueOf(value.toDouble()).intValue();
             }
         };
 
-        static final Converter<Boolean> TO_BOOLEAN = new Converter<Boolean>(Boolean.class) {
+        static final Converter<Boolean> TO_BOOLEAN = new Converter<Boolean>() {
             @Override
-            Boolean convert(String value) {
-                return Boolean.parseBoolean(value);
+            Boolean convertInternal(Values value) throws IOException {
+                return value.toBool();
             }
         };
     }

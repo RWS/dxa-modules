@@ -3,7 +3,9 @@ package com.sdl.dxa.modules.degrees51.device;
 import com.sdl.webapp.common.exceptions.DxaException;
 import fiftyone.mobile.detection.AutoUpdate;
 import fiftyone.mobile.detection.AutoUpdateStatus;
-import lombok.Getter;
+import fiftyone.mobile.detection.Match;
+import fiftyone.mobile.detection.Provider;
+import fiftyone.mobile.detection.factories.StreamFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
@@ -15,9 +17,8 @@ import org.joda.time.DateTime;
 import org.joda.time.Weeks;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -30,31 +31,49 @@ import java.util.concurrent.TimeUnit;
 
 import static com.google.common.base.Strings.isNullOrEmpty;
 
-@Service
+@Component
 @Slf4j
-public class AutomaticDataUpdater {
+public class Degrees51DataProvider {
 
     @Value("${dxa.modules.51degrees.file.lite.url}")
-    private String degrees51LiteUrl;
+    private String degrees51DataLiteUrl;
 
     @Value("${dxa.modules.51degrees.file.lite.location}")
-    private String degrees51LiteFile;
+    private String liteFileLocation;
 
     @Value("${dxa.modules.51degrees.license}")
     private String licenseKey;
 
     @Value("${dxa.modules.51degrees.file.location}")
-    private String fileLocation;
+    private String dataFileLocation;
 
     @Value("${dxa.modules.51degrees.file.timeout.mins}")
     private long fileUpdateTimeoutMinutes;
 
-    @Getter
-    private boolean isReady = false;
+    private boolean isFallback = false;
 
-    @Scheduled(cron = "0 0/2 * * * ?")
-    @PostConstruct
-    public void update() {
+    private boolean isDataNotAvailable;
+
+    public Match match(String userAgent) {
+//        fileAccess.acquire();
+        try {
+            Provider provider = new Provider(StreamFactory.create(getFileName(), false));
+
+            return provider.match(userAgent);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private String getFileName() {
+        return isFallback ? liteFileLocation : dataFileLocation;
+    }
+
+    @Scheduled(cron = "0 0 0/6 * * ?")
+    //todo enable?
+//    @PostConstruct
+    private void update() {
         if (isNullOrEmpty(licenseKey)) {
             log.warn("Update of 51degrees data file failed, because license key is not set, fallback to Lite data file");
             updateLite();
@@ -68,12 +87,11 @@ public class AutomaticDataUpdater {
                 FutureTask<AutoUpdateStatus> futureTask = new FutureTask<>(new Callable<AutoUpdateStatus>() {
                     @Override
                     public AutoUpdateStatus call() throws Exception {
-                        return AutoUpdate.update(licenseKey, fileLocation);
+                        return AutoUpdate.update(licenseKey, dataFileLocation);
                     }
                 });
 
-                log.info("Update of 51degrees data file {} started...", fileLocation);
-                isReady = false;
+                log.info("Update of 51degrees data file {} started...", dataFileLocation);
 
                 AutoUpdateStatus status;
                 try {
@@ -84,9 +102,13 @@ public class AutomaticDataUpdater {
                     switch (status) {
                         case AUTO_UPDATE_SUCCESS:
                             log.info("51degrees data file has been updated");
+                            isFallback = false;
+                            isDataNotAvailable = false;
                             break;
                         case AUTO_UPDATE_NOT_NEEDED:
                             log.info("51degrees data file is up-to-date, update is not needed");
+                            isFallback = false;
+                            isDataNotAvailable = false;
                             break;
                         default:
                             log.error("There was a problem updating the data file: {}", status);
@@ -94,23 +116,31 @@ public class AutomaticDataUpdater {
                     }
                 } catch (Exception e) {
                     log.error("Exception while updating 51degrees data file.", e);
-                    return;
+                    updateLite();
                 }
 
-                isReady = true;
-                log.info("Update of 51degrees data file {} finished successfully...", fileLocation);
+//                fileAccess.release();
+                log.info("Update of 51degrees data file {} completed...", dataFileLocation);
             }
         });
     }
 
+    //    @SneakyThrows(InterruptedException.class)
     private void updateLite() {
-        File liteFile = new File(degrees51LiteFile);
+        if (true) {
+            //todo enable
+            log.info("Update Lite method is disabled!");
+            return;
+        }
 
+        File liteFile = new File(liteFileLocation);
+
+        isFallback = true;
         if (!liteFile.exists() || isOlderThanOneWeek(liteFile)) {
             log.info("51degrees lite file needs to be updated");
             CloseableHttpClient client = HttpClientBuilder.create().build();
             try {
-                CloseableHttpResponse response = client.execute(new HttpGet(degrees51LiteUrl));
+                CloseableHttpResponse response = client.execute(new HttpGet(degrees51DataLiteUrl));
                 HttpEntity entity = response.getEntity();
                 if (entity != null) {
                     InputStream inputStream = entity.getContent();
@@ -118,9 +148,11 @@ public class AutomaticDataUpdater {
                         IOUtils.copy(inputStream, writer);
                     }
                 }
+                isDataNotAvailable = false;
                 log.info("51degrees lite file is updated");
             } catch (IOException e) {
                 log.error("Exception while updating the 51degrees lite file, deleting", e);
+                isDataNotAvailable = true;
                 if (liteFile.exists()) {
                     if (!liteFile.delete()) {
                         log.error("Impossible to delete 51degrees Lite file after an exception");
