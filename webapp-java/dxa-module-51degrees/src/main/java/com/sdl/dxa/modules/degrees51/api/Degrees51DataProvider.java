@@ -1,4 +1,4 @@
-package com.sdl.dxa.modules.degrees51.device;
+package com.sdl.dxa.modules.degrees51.api;
 
 import com.sdl.webapp.common.exceptions.DxaException;
 import fiftyone.mobile.detection.AutoUpdate;
