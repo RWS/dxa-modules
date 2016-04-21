@@ -20,27 +20,7 @@ namespace Sdl.Web.Modules.Degrees51
     {       
         private IAspectMap[] _properties;
         public Degrees51ContextClaimsProvider()
-        {
-            // add license key if available. you can also add the license key to a 
-            // file with extension .lic and place it in your /bin folder (i.e. 51Degrees.lic)
-            try
-            {
-                string key = WebRequestContext.Localization.GetConfigValue("51degrees.licenseKey");
-                if (!string.IsNullOrEmpty(key))
-                {
-                    LicenceKey.AddKey(key);
-                }
-                else
-                {
-                    // no big deal if no license key
-                    Log.Warn("51degrees.licenseKey key has not been populated.");
-                }
-            }
-            catch(Exception ex)
-            {
-                Log.Error("An error occured when attempted to access the 51degrees.licenseKey configuration setting.", ex);
-            }
-              
+        {        
             // perform mapping of 51 degrees to context claims
             _properties = new IAspectMap[] 
             { 
@@ -148,6 +128,26 @@ namespace Sdl.Web.Modules.Degrees51
 
         public IDictionary<string, object> GetContextClaims(string aspectName)
         {
+            // add license key if available. you can also add the license key to a 
+            // file with extension .lic and place it in your /bin folder (i.e. 51Degrees.lic)
+            try
+            {
+                string key = WebRequestContext.Localization.GetConfigValue("51degrees.licenseKey");
+                if (!string.IsNullOrEmpty(key))
+                {                                      
+                    LicenceKey.AddKey(key);
+                }
+                else
+                {
+                    // no big deal if no license key
+                    Log.Warn("51degrees.licenseKey key has not been populated.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error("An error occured when attempted to access the 51degrees.licenseKey configuration setting.", ex);
+            }
+
             Dictionary<string, object> claims = new Dictionary<string, object>();
             // grab all the properties from the data set and map to context claims                  
             foreach (IAspectMap x in _properties)
@@ -181,17 +181,27 @@ namespace Sdl.Web.Modules.Degrees51
 
         private T GetProperty<T>(string propertyName)
         {
-            var value = WebProvider.ActiveProvider.Match(
-                HttpContext.Current.Request.UserAgent)[propertyName];
-            if (value == null) return default(T);           
-            if (typeof(T) == typeof(bool))
-                return (T)((object)value.ToBool());
-            if (typeof(T) == typeof(int))
-                return (T)((object)value.ToInt());
-            if (typeof(T) == typeof(double))
-                return (T)((object)value.ToDouble());
-            if (typeof(T) == typeof(string))
-                return (T)((object)value.ToString());           
+            if (!string.IsNullOrEmpty(propertyName))
+            {
+                try
+                {
+                    var value = WebProvider.ActiveProvider.Match(
+                        HttpContext.Current.Request.UserAgent)[propertyName];
+                    if (value == null) return default(T);
+                    if (typeof(T) == typeof(bool))
+                        return (T)((object)value.ToBool());
+                    if (typeof(T) == typeof(int))
+                        return (T)((object)value.ToInt());
+                    if (typeof(T) == typeof(double))
+                        return (T)((object)value.ToDouble());
+                    if (typeof(T) == typeof(string))
+                        return (T)((object)value.ToString());
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(string.Format("Failed to read property '{0}' from 51 Degrees.", propertyName), ex);
+                }
+            }
             return default(T);
         }
       
