@@ -1,6 +1,6 @@
 ﻿@model TestFlickrImageModel
 <div class="entity" @Html.DxaEntityMarkup()>
-    <h5>Rendered @Model with Entity View "Test:FlickrImage"</h5>
+    <h5>Rendered @Model with Entity View "Test:TestFlickrImage"</h5>
     <table>
         <tr >
             <td>EclUri</td>
@@ -17,6 +17,10 @@
         <tr>
             <td>EclExternalMetadata</td>
             <td>@Model.EclExternalMetadata</td>
+        </tr>
+        <tr>
+            <td>TestProperty1 (custom metadata field)</td>
+            <td>@Model.TestProperty1</td>
         </tr>
     </table>
     @Html.Media(Model)
