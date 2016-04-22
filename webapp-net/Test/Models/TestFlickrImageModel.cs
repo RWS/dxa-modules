@@ -29,6 +29,13 @@ namespace Sdl.Web.Modules.Test.Models
             set;
         }
 
+        [SemanticProperty("test:testProp4")]
+        public string TestProperty4
+        {
+            get;
+            set;
+        }
+
         public override MvcData GetDefaultView(Localization localization)
         {
             return new MvcData("Test:TestFlickrImage");
