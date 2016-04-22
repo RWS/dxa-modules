@@ -23,9 +23,8 @@ public abstract class Converter<T> extends Degrees51Processor<T> {
 
         Values values = match.getValues(mapping.getKey51degrees());
 
-        String strValue = values.toString();
-
-        if (isUnknownValue(strValue)) {
+        String strValue;
+        if (values == null || (strValue = values.toString()) == null || isUnknownValue(strValue)) {
             log.warn("Value {} is unknown, returning null", mapping.getKey51degrees());
             return null;
         }
