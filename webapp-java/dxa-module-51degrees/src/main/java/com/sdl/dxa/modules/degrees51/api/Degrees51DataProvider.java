@@ -28,7 +28,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.Semaphore;
 
 import static org.apache.commons.io.FileUtils.readFileToByteArray;
 import static org.joda.time.DateTime.now;
@@ -37,11 +36,11 @@ import static org.joda.time.DateTime.now;
 @Slf4j
 public class Degrees51DataProvider {
 
-    private static final Semaphore liteFileAccess = new Semaphore(1, true);
-
     private static final Map<String, String> fileNamesByLicense = new HashMap<>();
 
-    private static final Map<String, Date> fileNextUpdatesByNames = new HashMap<>();
+    private static final Map<String, DateTime> fileNextUpdatesByNames = new HashMap<>();
+
+    private static final Map<String, DateTime> fileDelaysByNames = new HashMap<>();
 
     private static final Map<String, Provider> dataProvidersByNames = new HashMap<>();
 
@@ -58,7 +57,10 @@ public class Degrees51DataProvider {
     private String dataFileLocationPattern;
 
     @Value("${dxa.modules.51degrees.file.timeout.mins}")
-    private long fileUpdateTimeoutMinutes;
+    private int fileUpdateTimeoutMinutes;
+
+    @Value("${dxa.modules.51degrees.file.reattempt.delay.mins}")
+    private int fileUpdateReattemptDelayMinutes;
 
     @Value("${dxa.modules.51degrees.license:#{null}}")
     private String preConfiguredLicenseKey;
@@ -102,10 +104,13 @@ public class Degrees51DataProvider {
         log.debug("Check if the 51degrees licenseKey is in properties");
         if (preConfiguredLicenseKey != null) {
             log.debug("The licenseKey key for 51degrees found in properties, pre-loading data file");
-            updateAndGiveFileName(preConfiguredLicenseKey);
+            if (null == updateAndGiveFileName(preConfiguredLicenseKey)) {
+                log.debug("Failed to pre-load data file for 51degrees, pre-loading Lite file");
+                updateLiteAndGiveFileName();
+            }
         } else {
             log.debug("The licenseKey key for 51degrees is not in properties, pre-loading Lite file");
-//            updateLiteAndGiveFileName();
+            updateLiteAndGiveFileName();
         }
     }
 
@@ -113,9 +118,18 @@ public class Degrees51DataProvider {
     private String updateAndGiveFileName(String licenseKey) {
         String fileName = getDataFileName(licenseKey);
 
-        if (!isUpdateNeeded(fileName)) {
+        if (!isUpdateNeeded(fileName, 0)) {
             log.info("51degrees data file is up-to-date, update is not needed");
             return fileName;
+        }
+
+        if (fileDelaysByNames.containsKey(fileName)) {
+            DateTime pauseUntil = fileDelaysByNames.get(fileName);
+            if (now().isBefore(pauseUntil)) {
+                log.info("File update for {} is paused until {}, cannot be updated now", fileName, pauseUntil);
+                return new File((fileName)).exists() ? fileName : null;
+            }
+            fileDelaysByNames.remove(fileName);
         }
 
         try {
@@ -128,6 +142,10 @@ public class Degrees51DataProvider {
                 case AUTO_UPDATE_NOT_NEEDED:
                     log.info("API: 51degrees data file is up-to-date, updateDataFile is not needed");
                     return fileName;
+                case AUTO_UPDATE_ERR_429_TOO_MANY_ATTEMPTS:
+                    log.warn("API: Too many attempts to update data file for 51degrees, pause for {} mins", fileUpdateReattemptDelayMinutes);
+                    memorize(fileDelaysByNames, fileName, now().plusMinutes(fileUpdateReattemptDelayMinutes));
+                    // no break or return here, falling to default block
                 default:
                     log.error("There was a problem updating the data file: {}", status);
                     throw new DxaException("There was a problem updating the data file: " + status);
@@ -193,7 +211,7 @@ public class Degrees51DataProvider {
 //    }
 
 
-    @Scheduled(cron = "0 0 4 ? * SAT")
+    @Scheduled(cron = "0 0 4 * * ?")
     private void updateLiteScheduled() {
         updateLiteAndGiveFileName();
     }
@@ -201,22 +219,20 @@ public class Degrees51DataProvider {
     private String updateLiteAndGiveFileName() {
         File liteFile = new File(liteFileLocation);
         try {
-            if (!isUpdateNeeded(liteFileLocation)) {
+            if (!isUpdateNeeded(liteFileLocation, 24)) {
                 log.debug("51degrees lite file doesn't need to be updated");
                 return liteFileLocation;
             }
 
             log.info("51degrees lite file needs to be updated");
-            liteFileAccess.acquire();
             if (!deleteDataFile(liteFileLocation)) {
                 throw new IOException("Could not delete Lite file, (access denied?)");
             }
             FileUtils.copyURLToFile(new URL(degrees51DataLiteUrl), liteFile);
-            liteFileAccess.release();
 
             log.info("51degrees lite file is updated");
             getAndSetNextUpdate(liteFileLocation);
-        } catch (IOException | InterruptedException e) {
+        } catch (IOException e) {
             log.error("Exception while updating the 51degrees lite file, deleting", e);
             FileUtils.deleteQuietly(liteFile);
             return null;
@@ -224,26 +240,27 @@ public class Degrees51DataProvider {
         return liteFileLocation;
     }
 
-    private boolean isUpdateNeeded(String fileName) throws IOException {
-        Date nextUpdateDate;
+    private boolean isUpdateNeeded(String fileName, int hoursPostpone) throws IOException {
+        DateTime nextUpdateDate;
         if (fileNextUpdatesByNames.containsKey(fileName)) {
             nextUpdateDate = fileNextUpdatesByNames.get(fileName);
         } else {
             File file = new File(fileName);
             if (!file.exists()) {
+                FileUtils.forceMkdir(file.getParentFile());
                 return true;
             }
 
             nextUpdateDate = getAndSetNextUpdate(fileName);
         }
-        return now().isAfter(new DateTime(nextUpdateDate));
+        return now().isAfter(new DateTime(nextUpdateDate).plusHours(hoursPostpone));
     }
 
-    private Date getAndSetNextUpdate(String fileName) throws IOException {
+    private DateTime getAndSetNextUpdate(String fileName) throws IOException {
         try (Dataset dataset = StreamFactory.create(readFileToByteArray(new File(fileName)))) {
             Date nextUpdate = dataset.nextUpdate;
             log.trace("Next expected updated for {} is {}", fileName, nextUpdate);
-            return memorize(fileNextUpdatesByNames, fileName, nextUpdate);
+            return memorize(fileNextUpdatesByNames, fileName, new DateTime(nextUpdate));
         }
     }
 
@@ -253,16 +270,8 @@ public class Degrees51DataProvider {
             dataProvidersByNames.remove(fileName);
             provider.dataSet.close();
         }
-        try {
-            File file = new File(fileName);
-            liteFileAccess.acquire();
-            return !file.exists() || FileUtils.deleteQuietly(file);
-        } catch (InterruptedException e) {
-            log.error("Exception deleting the file {}", fileName, e);
-        } finally {
-            liteFileAccess.release();
-        }
-        return false;
+        File file = new File(fileName);
+        return !file.exists() || FileUtils.deleteQuietly(file);
     }
 
     private <T> T memorize(Map<String, T> map, String key, T value) {
