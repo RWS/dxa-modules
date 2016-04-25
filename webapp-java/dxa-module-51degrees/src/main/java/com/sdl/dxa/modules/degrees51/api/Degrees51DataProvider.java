@@ -59,8 +59,8 @@ public class Degrees51DataProvider {
     @Value("${dxa.modules.51degrees.file.locationPattern}")
     private String dataFileLocationPattern;
 
-    @Value("${dxa.modules.51degrees.file.timeout.mins}")
-    private int fileUpdateTimeoutMinutes;
+    @Value("${dxa.modules.51degrees.file.lite.timeout.mins}")
+    private int fileLiteUpdateTimeoutMinutes;
 
     @Value("${dxa.modules.51degrees.file.reattempt.delay.mins}")
     private int fileUpdateReattemptDelayMinutes;
@@ -196,7 +196,9 @@ public class Degrees51DataProvider {
             if (!deleteDataFile(liteFileLocation)) {
                 throw new IOException("Could not delete Lite file, (access denied?)");
             }
-            FileUtils.copyURLToFile(new URL(degrees51DataLiteUrl), liteFile);
+            FileUtils.copyURLToFile(new URL(degrees51DataLiteUrl), liteFile,
+                    fileLiteUpdateTimeoutMinutes * 60 * 1000 / 2,
+                    fileLiteUpdateTimeoutMinutes * 60 * 1000);
 
             log.info("51degrees lite file is updated");
             getAndSetNextUpdate(liteFileLocation);
