@@ -28,6 +28,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.Semaphore;
 
 import static org.apache.commons.io.FileUtils.readFileToByteArray;
 import static org.joda.time.DateTime.now;
@@ -38,6 +40,8 @@ import static org.joda.time.DateTime.now;
 @Component
 @Slf4j
 public class Degrees51DataProvider {
+
+    private static final Semaphore liteFileWrite = new Semaphore(1);
 
     private static final Map<String, String> fileNamesByLicense = new HashMap<>();
 
@@ -193,16 +197,21 @@ public class Degrees51DataProvider {
             }
 
             log.info("51degrees lite file needs to be updated");
+
+            File temp = new File(liteFileLocation + UUID.randomUUID());
+            FileUtils.copyURLToFile(new URL(degrees51DataLiteUrl), temp,
+                    fileLiteUpdateTimeoutMinutes * 60 * 1000 / 2,
+                    fileLiteUpdateTimeoutMinutes * 60 * 1000);
+            liteFileWrite.acquire();
             if (!deleteDataFile(liteFileLocation)) {
                 throw new IOException("Could not delete Lite file, (access denied?)");
             }
-            FileUtils.copyURLToFile(new URL(degrees51DataLiteUrl), liteFile,
-                    fileLiteUpdateTimeoutMinutes * 60 * 1000 / 2,
-                    fileLiteUpdateTimeoutMinutes * 60 * 1000);
+            FileUtils.moveFile(temp, liteFile);
+            liteFileWrite.release();
 
             log.info("51degrees lite file is updated");
             getAndSetNextUpdate(liteFileLocation);
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
             log.error("Exception while updating the 51degrees lite file, deleting", e);
             FileUtils.deleteQuietly(liteFile);
             return null;
