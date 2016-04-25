@@ -32,6 +32,9 @@ import java.util.Map;
 import static org.apache.commons.io.FileUtils.readFileToByteArray;
 import static org.joda.time.DateTime.now;
 
+/**
+ * Provider for data from 51degrees. Also is responsible to keep data files up to date.
+ */
 @Component
 @Slf4j
 public class Degrees51DataProvider {
@@ -65,6 +68,12 @@ public class Degrees51DataProvider {
     @Value("${dxa.modules.51degrees.license:#{null}}")
     private String preConfiguredLicenseKey;
 
+    /**
+     * Tries to match user agent using 51degrees.
+     *
+     * @param userAgent user agent
+     * @return match result
+     */
     public Match match(String userAgent) {
         try {
             String fileName = getCurrentFileName();
@@ -74,7 +83,7 @@ public class Degrees51DataProvider {
 
             return provider.match(userAgent);
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("Exception while trying to match", e);
         }
         return null;
     }
@@ -169,47 +178,6 @@ public class Degrees51DataProvider {
         return memorize(fileNamesByLicense, licenseKey, String.format(dataFileLocationPattern,
                 String.format("%032x", new BigInteger(1, md.digest()))));
     }
-
-//    //    @Scheduled(cron = "0 0 0/6 * * ?")
-//    private void updateDataFile() {
-//        if (isNullOrEmpty(loadLicenseKey())) {
-//            log.warn("Update of 51degrees data file failed, because licenseKey key is not set, fallback to Lite data file");
-//            updateLiteAndGiveFileName();
-//            return;
-//        }
-//
-//        final ExecutorService executorService = Executors.newFixedThreadPool(2);
-//        executorService.execute(new Runnable() {
-//            @Override
-//            public void run() {
-//                FutureTask<AutoUpdateStatus> futureTask = new FutureTask<>(new Callable<AutoUpdateStatus>() {
-//                    @Override
-//                    public AutoUpdateStatus call() throws Exception {
-//                        return null;
-////                        return AutoUpdate.updateDataFile(loadLicenseKey(), dataFileLocationPattern);
-//                    }
-//                });
-//
-//                log.info("Update of 51degrees data file {} started...", dataFileLocationPattern);
-//
-//                AutoUpdateStatus status;
-//                try {
-//                    executorService.execute(futureTask);
-//                    status = futureTask.get(fileUpdateTimeoutMinutes, TimeUnit.MINUTES);
-//                    executorService.shutdown();
-//
-//
-//                } catch (Exception e) {
-//                    log.error("Exception while updating 51degrees data file.", e);
-//                    updateLiteAndGiveFileName();
-//                }
-//
-////                fileAccess.release();
-//                log.info("Update of 51degrees data file {} completed...", dataFileLocationPattern);
-//            }
-//        });
-//    }
-
 
     @Scheduled(cron = "0 0 4 * * ?")
     private void updateLiteScheduled() {
