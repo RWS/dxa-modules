@@ -6,12 +6,12 @@ import com.sdl.webapp.common.api.contextengine.ContextClaimsProvider;
 import com.sdl.webapp.common.exceptions.DxaException;
 import fiftyone.mobile.detection.Match;
 import lombok.extern.slf4j.Slf4j;
-import org.dd4t.core.util.HttpUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,11 +29,14 @@ public class Degrees51ClaimsProvider implements ContextClaimsProvider {
     @SuppressWarnings({"SpringJavaAutowiringInspection", "MismatchedQueryAndUpdateOfCollection"})
     private List<Degrees51Mapping> mappings;
 
+    @Autowired
+    private HttpServletRequest request;
+
     @Override
     public Map<String, Object> getContextClaims(String aspectName) throws DxaException {
         log.trace("51degrees.context.provider activated");
 
-        String userAgent = HttpUtils.getCurrentRequest().getHeader("user-agent");
+        String userAgent = request.getHeader("user-agent");
         log.trace("UserAgent is {}", userAgent);
 
         return map(degrees51DataProvider.match(userAgent));
