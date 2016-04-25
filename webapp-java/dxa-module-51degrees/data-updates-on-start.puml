@@ -1,0 +1,16 @@
+@startuml
+title 51Degrees Data Updates
+(*)  --> "App Started"
+if "license found in properties" then
+    --> [Yes] "pre-load data file"
+        if "failed to update" then
+            --> [Yes] "pre-load LITE file"
+        else
+            --> [No] "App Start complete"
+        endif
+else
+    --> [No] "pre-load LITE file"
+endif
+-->"App Start complete"
+-->(*)
+@enduml
