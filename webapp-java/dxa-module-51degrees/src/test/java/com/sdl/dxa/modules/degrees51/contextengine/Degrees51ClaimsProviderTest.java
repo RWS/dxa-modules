@@ -17,6 +17,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Objects;
@@ -125,6 +126,11 @@ public class Degrees51ClaimsProviderTest {
         @Bean
         public BeanFactoryPostProcessor beanFactoryPostProcessor() {
             return new Degrees51SpringContext().beanFactoryPostProcessor();
+        }
+
+        @Bean
+        public HttpServletRequest httpServletRequest() {
+            return mock(HttpServletRequest.class);
         }
     }
 
