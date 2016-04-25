@@ -1,4 +1,5 @@
-﻿using Sdl.Web.Common.Models;
+﻿using System;
+using Sdl.Web.Common.Models;
 using System.Globalization;
 using Sdl.Web.Common.Configuration;
 
@@ -9,6 +10,27 @@ namespace Sdl.Web.Modules.Test.Models
     {
         [SemanticProperty("test:testProp1")]
         public string TestProperty1
+        {
+            get;
+            set;
+        }
+
+        [SemanticProperty("test:testProp2")]
+        public double TestProperty2
+        {
+            get;
+            set;
+        }
+
+        [SemanticProperty("test:testProp3")]
+        public DateTime TestProperty3
+        {
+            get;
+            set;
+        }
+
+        [SemanticProperty("test:testProp4")]
+        public string TestProperty4
         {
             get;
             set;
