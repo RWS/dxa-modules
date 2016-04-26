@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Net;
+using System.Threading;
 using System.Web;
 using System.Web.Configuration;
 using FiftyOne.Foundation.Mobile.Detection;
@@ -18,9 +19,7 @@ using Sdl.Web.Mvc.Configuration;
 namespace Sdl.Web.Modules.Degrees51
 {
     public class Degrees51ContextClaimsProvider : IContextClaimsProvider
-    {       
-        public static readonly string LITE_URI = "https://github.com/51Degrees/dotNET-Device-Detection/blob/master/data/51Degrees-LiteV3.2.dat?raw=true";
-
+    {            
         private IAspectMap[] _properties;
         public Degrees51ContextClaimsProvider()
         {        
@@ -41,8 +40,8 @@ namespace Sdl.Web.Modules.Degrees51
                     string p = GetProperty<string>("DeviceType");
                     return p.Equals("desktop", StringComparison.InvariantCultureIgnoreCase);
                }},
-               new AspectMap<int> { Aspect = "browser", Name = "displayWidth", Build = ()=>GetContextProperty<int>("dw") },
-               new AspectMap<int> { Aspect = "browser", Name = "displayHeight", Build = ()=>GetContextProperty<int>("dh") },
+               new AspectMap<int> { Aspect = "browser", Name = "displayWidth", Build = ()=>GetContextProperty<int>("bw") },
+               new AspectMap<int> { Aspect = "browser", Name = "displayHeight", Build = ()=>GetContextProperty<int>("bh") },
                new AspectMap<int> { Aspect = "browser", Name = "displayColorDepth", Build = ()=>GetContextProperty<int>("bcd")},
                new AspectMap<bool> { Aspect = "browser", Name = "cookieSupport", Build = ()=>GetProperty<bool>("CookiesCapable") },
                new AspectMap<HashSet<string>> { Aspect = "browser", Name = "stylesheetSupport", Build = ()=> {
@@ -127,61 +126,35 @@ namespace Sdl.Web.Modules.Degrees51
                new AspectMap<string> { Aspect = "device", Name = "variant", Build = ()=>GetProperty<string>("DeviceType") },
                new AspectMap<string> { Aspect = "device", Name = "model", Build = ()=>GetProperty<string>("BrowserName") }
             };
-
-            CheckForInitialDownload();
         }
 
-        private void CheckForInitialDownload()
+        protected bool PerformUpdateRequest(string key)
+        {
+            if (HttpContext.Current != null)
+            {
+                int h = key.GetHashCode();
+                return !HttpContext.Current.Items.Contains(key.GetHashCode()) && (WebProvider.ActiveProvider == null || WebProvider.ActiveProvider.DataSet.Name == "Lite");
+            }
+            return false;
+        }
+     
+        public IDictionary<string, object> GetContextClaims(string aspectName)
         {
             try
             {
-                string liteUri = WebConfigurationManager.AppSettings["fiftyOneDegrees.lite.dataset"] ?? LITE_URI;
-                // we need to read the BinaryFilePath to find out where 51degree's is looking for its dataset but unfortunatly this is an
-                // internal property so we use reflection to get it.
-                var configSection = WebConfigurationManager.GetWebApplicationSection("fiftyOne/detection");
-                Type configSectionType = configSection.GetType();
-                System.Reflection.PropertyInfo info = configSectionType.GetProperty("BinaryFilePath", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
-                string path = (string)info.GetValue(configSection);
-                if(path.Contains("~"))
-                {
-                    // remap to physical path if required
-                    path = HttpContext.Current.Server.MapPath(path);                                      
-                }
-                FileInfo fileInfo = new FileInfo(path);
-
-                // check if dataset file exists
-                if (!fileInfo.Exists)
-                {
-                    if (!Directory.Exists(fileInfo.DirectoryName))
-                    {
-                        Directory.CreateDirectory(fileInfo.DirectoryName);
-                    }
-                    // we need to download the lite dataset at this point
-                    HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(liteUri);
-                    request.Method = "GET";
-                    HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                    using (FileStream fileStream = fileInfo.Create())
-                    {
-                        response.GetResponseStream().CopyTo(fileStream);
-                    }                   
-                }                
-            }
-            catch
-            {
-                // ignore this for now as its a just a hack
-            }           
-        }
-
-        public IDictionary<string, object> GetContextClaims(string aspectName)
-        {          
-            // add license key if available. you can also add the license key to a 
-            // file with extension .lic and place it in your /bin folder (i.e. 51Degrees.lic)
-            try
-            {
-                string key = WebRequestContext.Localization.GetConfigValue("51degrees.licenseKey");
+                string key = "4ETAAAA2H2GSABJABJAGACNAB2ASUT2QP8SG2EX5NNM5CNHRPF2U4C8EU54DHTBQAR73PPQGBSCNG9U9Z92GA2R3QLB2P";// WebRequestContext.Localization.GetConfigValue("51degrees.licenseKey");
                 if (!string.IsNullOrEmpty(key))
-                {                                      
+                {
+                    // add key to dynamic licences so the update thread can handle updating
                     LicenceKey.AddKey(key);
+                    if (PerformUpdateRequest(key))
+                    {
+                        HttpContext.Current.Items[key.GetHashCode()] = true;
+                        ThreadPool.QueueUserWorkItem(_ =>
+                        {
+                            LicenceKey.Activate(key);
+                        });
+                    }                  
                 }
                 else
                 {
@@ -189,21 +162,21 @@ namespace Sdl.Web.Modules.Degrees51
                     Log.Warn("51degrees.licenseKey key has not been populated.");
                 }
             }
-            catch (Exception ex)
-            {
+            catch(Exception ex)
+            {               
                 Log.Error("An error occured when attempted to access the 51degrees.licenseKey configuration setting.", ex);
             }
-
-            WebProvider.Refresh();
-
-            Dictionary<string, object> claims = new Dictionary<string, object>();
+            
             // grab all the properties from the data set and map to context claims                  
+            Dictionary<string, object> claims = new Dictionary<string, object>();
             foreach (IAspectMap x in _properties)
             {               
                 claims.Add(string.Format("{0}.{1}", x.Aspect, x.Name), x.Value);
             }
-            return claims;
+
+            return claims;            
         }
+                
 
         public string GetDeviceFamily()
         {
