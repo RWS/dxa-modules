@@ -142,7 +142,7 @@ namespace Sdl.Web.Modules.Degrees51
         {
             try
             {
-                string key = "4ETAAAA2H2GSABJABJAGACNAB2ASUT2QP8SG2EX5NNM5CNHRPF2U4C8EU54DHTBQAR73PPQGBSCNG9U9Z92GA2R3QLB2P";// WebRequestContext.Localization.GetConfigValue("51degrees.licenseKey");
+                string key = WebRequestContext.Localization.GetConfigValue("51degrees.licenseKey");
                 if (!string.IsNullOrEmpty(key))
                 {
                     // add key to dynamic licences so the update thread can handle updating
