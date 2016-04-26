@@ -255,7 +255,7 @@ namespace Sdl.Web.Modules.Degrees51
                         object v = null;
                         try
                         {
-                            Build();
+                            v = Build();
                         }
                         catch
                         {
