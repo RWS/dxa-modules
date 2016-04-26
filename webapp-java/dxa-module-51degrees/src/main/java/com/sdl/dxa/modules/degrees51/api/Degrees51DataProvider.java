@@ -98,12 +98,12 @@ public class Degrees51DataProvider {
         String fileName;
 
         String licenseKey = webRequestContext.getLocalization().getConfiguration("51degrees.licenseKey");
-        if (!isEmpty(licenseKey) && (fileName = updateAndGiveFileName(licenseKey)) != null) {
+        if (!isEmpty(licenseKey) && (fileName = updateAndGiveFileName(licenseKey, true)) != null) {
             log.debug("Using licenseKey key configured in CM");
             return fileName;
         }
 
-        if (!isEmpty(preConfiguredLicenseKey) && (fileName = updateAndGiveFileName(preConfiguredLicenseKey)) != null) {
+        if (!isEmpty(preConfiguredLicenseKey) && (fileName = updateAndGiveFileName(preConfiguredLicenseKey, true)) != null) {
             log.debug("Using licenseKey key configured in properties");
             return fileName;
         }
@@ -119,7 +119,7 @@ public class Degrees51DataProvider {
         log.debug("Check if the 51degrees licenseKey is in properties");
         if (preConfiguredLicenseKey != null) {
             log.debug("The licenseKey key for 51degrees found in properties, pre-loading data file");
-            if (null == updateAndGiveFileName(preConfiguredLicenseKey)) {
+            if (null == updateAndGiveFileName(preConfiguredLicenseKey, false)) {
                 log.debug("Failed to pre-load data file for 51degrees, pre-loading Lite file");
                 updateLiteAndGiveFileName();
             }
@@ -130,7 +130,7 @@ public class Degrees51DataProvider {
     }
 
     @SneakyThrows(IOException.class)
-    private String updateAndGiveFileName(final String licenseKey) {
+    private String updateAndGiveFileName(final String licenseKey, boolean isRequestPending) {
         final String fileName = getDataFileName(licenseKey);
 
         if (!isUpdateNeeded(fileName, 0)) {
@@ -148,7 +148,7 @@ public class Degrees51DataProvider {
             fileDelaysByNames.remove(fileName);
         }
 
-        if (!fileExists) {
+        if (!fileExists && isRequestPending) {
             log.info("File needs an update but we have a pending request. " +
                     "So we fallback to lite, set this file on pause, and update file in background");
             memorize(fileDelaysByNames, fileName, now().plusMinutes(fileUpdateReattemptDelayMinutes));
