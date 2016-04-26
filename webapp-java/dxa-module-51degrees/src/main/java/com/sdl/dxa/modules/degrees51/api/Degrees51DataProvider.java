@@ -32,6 +32,7 @@ import java.util.UUID;
 import java.util.concurrent.Semaphore;
 
 import static org.apache.commons.io.FileUtils.readFileToByteArray;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 import static org.joda.time.DateTime.now;
 
 /**
@@ -96,12 +97,12 @@ public class Degrees51DataProvider {
         String fileName;
 
         String licenseKey = webRequestContext.getLocalization().getConfiguration("51degrees.licenseKey");
-        if (licenseKey != null && (fileName = updateAndGiveFileName(licenseKey)) != null) {
+        if (!isEmpty(licenseKey) && (fileName = updateAndGiveFileName(licenseKey)) != null) {
             log.debug("Using licenseKey key configured in CM");
             return fileName;
         }
 
-        if (preConfiguredLicenseKey != null && (fileName = updateAndGiveFileName(preConfiguredLicenseKey)) != null) {
+        if (!isEmpty(preConfiguredLicenseKey) && (fileName = updateAndGiveFileName(preConfiguredLicenseKey)) != null) {
             log.debug("Using licenseKey key configured in properties");
             return fileName;
         }
@@ -202,12 +203,15 @@ public class Degrees51DataProvider {
             FileUtils.copyURLToFile(new URL(degrees51DataLiteUrl), temp,
                     fileLiteUpdateTimeoutMinutes * 60 * 1000 / 2,
                     fileLiteUpdateTimeoutMinutes * 60 * 1000);
-            liteFileWrite.acquire();
-            if (!deleteDataFile(liteFileLocation)) {
-                throw new IOException("Could not delete Lite file, (access denied?)");
+            try {
+                liteFileWrite.acquire();
+                if (!deleteDataFile(liteFileLocation)) {
+                    throw new IOException("Could not delete Lite file, (access denied?)");
+                }
+                FileUtils.moveFile(temp, liteFile);
+            } finally {
+                liteFileWrite.release();
             }
-            FileUtils.moveFile(temp, liteFile);
-            liteFileWrite.release();
 
             log.info("51degrees lite file is updated");
             getAndSetNextUpdate(liteFileLocation);

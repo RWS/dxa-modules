@@ -21,11 +21,11 @@ public abstract class Converter<T> extends Degrees51Processor<T> {
     T processInternal(Match match, Degrees51Mapping mapping) throws IOException {
         T converted;
 
-        Values values = match.getValues(mapping.getKey51degrees());
+        Values values = match.getValues(mapping.getKey());
 
         String strValue;
         if (values == null || (strValue = values.toString()) == null || isUnknownValue(strValue)) {
-            log.warn("Value {} is unknown, returning null", mapping.getKey51degrees());
+            log.warn("Value {} is unknown, returning null", mapping.getKey());
             return null;
         }
 

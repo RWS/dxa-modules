@@ -7,11 +7,11 @@ package com.sdl.dxa.modules.degrees51.api.mapping;
 public abstract class Degrees51Mapping {
 
     /**
-     * Optional property in 51degrees. May return <code>null</code>.
+     * Optional key/property in 51degrees or context. May return <code>null</code>.
      *
-     * @return key in 51degrees properties or <code>null</code> if there is no direct mapping
+     * @return key in 51degrees properties or context key or <code>null</code> if there is no direct mapping
      */
-    public abstract String getKey51degrees();
+    public abstract String getKey();
 
     /**
      * DXA mapping for {@link com.sdl.webapp.common.api.contextengine.ContextClaims}. Should never return <code>null</code>.
@@ -29,6 +29,6 @@ public abstract class Degrees51Mapping {
 
     @Override
     public String toString() {
-        return String.format("Degrees51Mapping: %s <> %s", getKey51degrees(), getKeyDxa());
+        return String.format("Degrees51Mapping: %s <> %s", getKey(), getKeyDxa());
     }
 }

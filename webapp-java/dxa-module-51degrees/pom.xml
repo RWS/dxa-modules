@@ -40,6 +40,7 @@
     <properties>
         <dxa-bom.version>1.4.1</dxa-bom.version>
         <java-version>1.7</java-version>
+        <device-detection.version>3.2.4.5</device-detection.version>
     </properties>
 
     <dependencyManagement>
@@ -74,7 +75,7 @@
         <dependency>
             <groupId>com.51degrees</groupId>
             <artifactId>device-detection-core</artifactId>
-            <version>3.2.2.20-beta</version>
+            <version>${device-detection.version}</version>
         </dependency>
 
         <!-- Necessary for Spring 3 to process @Configuration annotated classes -->

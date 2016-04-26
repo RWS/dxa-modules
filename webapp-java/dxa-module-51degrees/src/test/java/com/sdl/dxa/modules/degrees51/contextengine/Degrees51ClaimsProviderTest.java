@@ -3,6 +3,8 @@ package com.sdl.dxa.modules.degrees51.contextengine;
 import com.google.common.collect.ImmutableMap;
 import com.sdl.dxa.modules.degrees51.Degrees51SpringContext;
 import com.sdl.dxa.modules.degrees51.api.Degrees51DataProvider;
+import com.sdl.dxa.modules.degrees51.api.mapping.Extractors;
+import com.sdl.webapp.common.util.ApplicationContextHolder;
 import fiftyone.mobile.detection.Match;
 import fiftyone.mobile.detection.entities.Values;
 import org.junit.Test;
@@ -12,11 +14,13 @@ import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Map;
@@ -36,17 +40,23 @@ public class Degrees51ClaimsProviderTest {
     @Autowired
     private Degrees51ClaimsProvider degrees51ClaimsProvider;
 
+    @Autowired
+    private HttpServletRequest httpServletRequest;
+
     @Test
     public void shouldMapKnownPropertiesFrom51DegreesToOurModel() throws IOException {
         //given
+        ((MockHttpServletRequest) httpServletRequest).setCookies(
+                new Cookie("context", "dpr~1|dw~1025|dh~641|bcd~32|bw~1024|bh~640|version~1|"));
+
         Match match = mock(Match.class);
         //        mockMatch(match, "PlatformVendor", "Microsoft");
         mockMatch(match, "PlatformName", "Windows");
         mockMatch(match, "PlatformVersion", "8.1");
 
-        mockMatch(match, "ScreenPixelsHeight", "640");
-        mockMatch(match, "ScreenPixelsWidth", "1024");
-        mockMatch(match, "BitsPerPixel", "32");
+        mockMatch(match, "bh", "640"); // browser height from context
+        mockMatch(match, "bw", "1024"); // browser width from context
+        mockMatch(match, "bcd", "32"); // DisplayColorDepth width from context
         mockMatch(match, "CookiesCapable", "True");
         mockMatch(match, "BrowserVendor", "Google");
         mockMatch(match, "BrowserVersion", "42");
@@ -60,6 +70,8 @@ public class Degrees51ClaimsProviderTest {
         mockMatch(match, "DeviceType", "DeviceVariant");
 //        mockMatch(match, "BrowserName", "Nexus");
 //        mockMatch(match, "PlatformVersion", "8.1");
+        mockMatch(match, "dh", "641");
+        mockMatch(match, "dw", "1025");
 
 
         final Map<String, Object> expected =
@@ -68,9 +80,9 @@ public class Degrees51ClaimsProviderTest {
                         .put("os.model", "Windows")
                         .put("os.version", "8.1")
 
-                        .put("browser.displayHeight", 640)
-                        .put("browser.displayWidth", 1024)
-                        .put("browser.displayColorDepth", 32)
+                        .put("browser.displayHeight", 640) //from context
+                        .put("browser.displayWidth", 1024) //from context
+                        .put("browser.displayColorDepth", 32) //from context
                         .put("browser.cookieSupport", true)
                         .put("browser.vendor", "Google")
                         .put("browser.version", "42")
@@ -84,6 +96,8 @@ public class Degrees51ClaimsProviderTest {
                         .put("device.variant", "DeviceVariant")
 //                        .put("device.model", "Nexus")
 //                        .put("device.version", "5")
+                        .put("device.displayHeight", 641)
+                        .put("device.displayWidth", 1025)
                         .build();
 
         //when
@@ -130,7 +144,17 @@ public class Degrees51ClaimsProviderTest {
 
         @Bean
         public HttpServletRequest httpServletRequest() {
-            return mock(HttpServletRequest.class);
+            return new MockHttpServletRequest();
+        }
+
+        @Bean
+        public ApplicationContextHolder applicationContextHolder() {
+            return new ApplicationContextHolder();
+        }
+
+        @Bean
+        public Extractors.Helper helper() {
+            return new Extractors.Helper();
         }
     }
 
