@@ -29,6 +29,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 
 import static org.apache.commons.io.FileUtils.readFileToByteArray;
@@ -129,23 +130,41 @@ public class Degrees51DataProvider {
     }
 
     @SneakyThrows(IOException.class)
-    private String updateAndGiveFileName(String licenseKey) {
-        String fileName = getDataFileName(licenseKey);
+    private String updateAndGiveFileName(final String licenseKey) {
+        final String fileName = getDataFileName(licenseKey);
 
         if (!isUpdateNeeded(fileName, 0)) {
             log.info("51degrees data file is up-to-date, update is not needed");
             return fileName;
         }
 
+        boolean fileExists = new File((fileName)).exists();
         if (fileDelaysByNames.containsKey(fileName)) {
             DateTime pauseUntil = fileDelaysByNames.get(fileName);
             if (now().isBefore(pauseUntil)) {
                 log.info("File update for {} is paused until {}, cannot be updated now", fileName, pauseUntil);
-                return new File((fileName)).exists() ? fileName : null;
+                return fileExists ? fileName : null;
             }
             fileDelaysByNames.remove(fileName);
         }
 
+        if (!fileExists) {
+            log.info("File needs an update but we have a pending request. " +
+                    "So we fallback to lite, set this file on pause, and update file in background");
+            memorize(fileDelaysByNames, fileName, now().plusMinutes(fileUpdateReattemptDelayMinutes));
+            Executors.newSingleThreadExecutor().execute(new Runnable() {
+                @Override
+                public void run() {
+                    updateDataFile(licenseKey, fileName);
+                }
+            });
+            return null;
+        }
+
+        return updateDataFile(licenseKey, fileName);
+    }
+
+    private String updateDataFile(String licenseKey, String fileName) {
         try {
             AutoUpdateStatus status = AutoUpdate.update(licenseKey, fileName);
             switch (status) {
