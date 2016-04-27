@@ -68,6 +68,7 @@
     </Compile>
     <Compile Include="Degrees51AreaRegistration.cs" />
     <Compile Include="Degrees51ContextClaimsProvider.cs" />
+    <Compile Include="Degrees51PreloadClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
