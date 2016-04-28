@@ -25,9 +25,11 @@ namespace Sdl.Web.Modules.Degrees51
             }
         }
 
-        protected override void RegisterAllViewModels()
+        /// <summary>
+        /// Attempt to download the Lite dataset from 51Degrees if no dataset exists.
+        /// </summary>
+        public static void DownloadLite()
         {
-            // We use this as a hook to download the Lite dataset if it doesn't exist at Application_Start
             try
             {
                 string liteUri = WebConfigurationManager.AppSettings["fiftyOneDegrees.lite.dataset"] ?? LITE_URI;
@@ -65,6 +67,12 @@ namespace Sdl.Web.Modules.Degrees51
             {
                 // ignore this for now as its a just a hack
             }
+        }
+
+        protected override void RegisterAllViewModels()
+        {
+            // We use this as a hook to download the Lite dataset if it doesn't exist at Application_Start
+            DownloadLite();
         }
     }
 }
