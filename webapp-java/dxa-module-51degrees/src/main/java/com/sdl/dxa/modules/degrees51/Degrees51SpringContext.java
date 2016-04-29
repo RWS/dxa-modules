@@ -72,7 +72,7 @@ public class Degrees51SpringContext {
                     @Override
                     protected Set<String> extract(Match match, Degrees51Mapping mapping) {
                         Set<String> result = newHashSet();
-                        if (dummyMapping("DeviceType", TO_STRING).process(match).equalsIgnoreCase("desktop")) {
+                        if ("desktop".equalsIgnoreCase(dummyMapping("DeviceType", TO_STRING).process(match))) {
                             result.add("keyboard");
                             result.add("mouse");
                         }
