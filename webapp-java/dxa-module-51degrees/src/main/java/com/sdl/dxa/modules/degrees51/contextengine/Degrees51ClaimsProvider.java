@@ -50,7 +50,7 @@ public class Degrees51ClaimsProvider implements ContextClaimsProvider {
     Map<String, Object> map(Match match) {
         Map<String, Object> result = new HashMap<>();
         for (Degrees51Mapping mapping : mappings) {
-            result.put(mapping.getKeyDxa(), mapping.getProcessor().process(match, mapping));
+            result.put(mapping.getKeyDxa(), mapping.process(match));
         }
 
         return result;

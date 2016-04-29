@@ -46,7 +46,7 @@ public class ExtractorsTest {
         };
 
         //when
-        String result = (String) mapping.getProcessor().process(mock(Match.class), mapping);
+        String result = (String) mapping.process(mock(Match.class));
 
         //then
         assertEquals("Windows Chrome_Desktop49", result);
