@@ -19,7 +19,7 @@ public abstract class Extractor<T> extends Degrees51Processor<T> {
     @Override
     protected T processInternal(Match match, Degrees51Mapping mapping) throws IOException {
         T result = extract(match, mapping);
-        log.debug("Extracted value '{}' using mapping {} with extractor {}", result, mapping, this.getClass());
+        log.debug("Extracted value '{}' as class {} using mapping {}", result, result.getClass(), mapping);
         return result;
     }
 }
