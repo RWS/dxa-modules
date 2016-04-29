@@ -15,10 +15,10 @@ import java.util.Objects;
 @Slf4j
 public abstract class Converter<T> extends Degrees51Processor<T> {
 
-    abstract T convert(Values values) throws IOException;
+    protected abstract T convert(Values values) throws IOException;
 
     @Override
-    T processInternal(Match match, Degrees51Mapping mapping) throws IOException {
+    protected T processInternal(Match match, Degrees51Mapping mapping) throws IOException {
         T converted;
 
         Values values = match.getValues(mapping.getKey());
@@ -30,7 +30,7 @@ public abstract class Converter<T> extends Degrees51Processor<T> {
         }
 
         converted = convert(values);
-        log.debug("Converted '{}' to '{}' as '{}'", strValue, converted, converted.getClass());
+        log.debug("Converted '{}' to '{}' as '{}' using mapping {}", strValue, converted, converted.getClass(), mapping);
 
         return converted;
     }

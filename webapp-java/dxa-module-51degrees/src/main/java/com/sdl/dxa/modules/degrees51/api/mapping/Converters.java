@@ -14,8 +14,18 @@ public interface Converters {
      */
     Converter<Integer> TO_INTEGER = new Converter<Integer>() {
         @Override
-        Integer convert(Values value) throws IOException {
+        protected Integer convert(Values value) throws IOException {
             return Double.valueOf(value.toDouble()).intValue();
+        }
+    };
+
+    /**
+     * Tries to get a Double value.
+     */
+    Converter<Double> TO_DOUBLE = new Converter<Double>() {
+        @Override
+        protected Double convert(Values value) throws IOException {
+            return value.toDouble();
         }
     };
 
@@ -24,7 +34,7 @@ public interface Converters {
      */
     Converter<Boolean> TO_BOOLEAN = new Converter<Boolean>() {
         @Override
-        Boolean convert(Values value) throws IOException {
+        protected Boolean convert(Values value) throws IOException {
             return value.toBool();
         }
     };
@@ -34,7 +44,7 @@ public interface Converters {
      */
     Converter<String> TO_STRING = new Converter<String>() {
         @Override
-        String convert(Values value) throws IOException {
+        protected String convert(Values value) throws IOException {
             return value.toString();
         }
     };

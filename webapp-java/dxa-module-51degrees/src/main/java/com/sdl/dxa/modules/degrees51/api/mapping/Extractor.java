@@ -1,6 +1,7 @@
 package com.sdl.dxa.modules.degrees51.api.mapping;
 
 import fiftyone.mobile.detection.Match;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 
@@ -10,12 +11,15 @@ import java.io.IOException;
  *
  * @param <T> type of the expected value
  */
+@Slf4j
 public abstract class Extractor<T> extends Degrees51Processor<T> {
 
-    abstract T extract(Match match, Degrees51Mapping mapping);
+    protected abstract T extract(Match match, Degrees51Mapping mapping);
 
     @Override
-    T processInternal(Match match, Degrees51Mapping mapping) throws IOException {
-        return extract(match, mapping);
+    protected T processInternal(Match match, Degrees51Mapping mapping) throws IOException {
+        T result = extract(match, mapping);
+        log.debug("Extracted value '{}' using mapping {} with extractor {}", result, mapping, this.getClass());
+        return result;
     }
 }

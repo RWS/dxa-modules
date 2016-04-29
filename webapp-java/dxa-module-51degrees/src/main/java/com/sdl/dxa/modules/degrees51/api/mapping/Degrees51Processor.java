@@ -13,7 +13,7 @@ import java.io.IOException;
 @Slf4j
 public abstract class Degrees51Processor<T> {
 
-    abstract T processInternal(Match match, Degrees51Mapping mapping) throws IOException;
+    protected abstract T processInternal(Match match, Degrees51Mapping mapping) throws IOException;
 
     public T process(Match match, Degrees51Mapping mapping) {
         try {
