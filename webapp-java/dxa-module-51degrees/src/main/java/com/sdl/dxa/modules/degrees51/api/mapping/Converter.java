@@ -30,7 +30,8 @@ public abstract class Converter<T> extends Degrees51Processor<T> {
         }
 
         converted = convert(values);
-        log.debug("Converted '{}' to '{}' as '{}' using mapping {}", strValue, converted, converted.getClass(), mapping);
+        log.debug("Converted '{}' to '{}' as '{}' using mapping {}", strValue, converted, converted != null ?
+                converted.getClass() : null, mapping);
 
         return converted;
     }

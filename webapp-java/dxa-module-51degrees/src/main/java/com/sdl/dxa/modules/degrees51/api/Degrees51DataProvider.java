@@ -276,6 +276,7 @@ public class Degrees51DataProvider {
         return !file.exists() || FileUtils.deleteQuietly(file);
     }
 
+    //todo dxa2 use CacheUtils
     private <T> T memorize(Map<String, T> map, String key, T value) {
         map.put(key, value);
         return value;
