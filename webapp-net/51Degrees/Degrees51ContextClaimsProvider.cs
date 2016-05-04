@@ -18,6 +18,25 @@ using Sdl.Web.Mvc.Configuration;
 
 namespace Sdl.Web.Modules.Degrees51
 {
+    /// <summary>
+    /// 51 Degrees claim provider
+    /// 
+    /// Configuration:   
+    /// 
+    /// <configuration>
+    ///     <configSections>
+    ///         <sectionGroup name="fiftyOne" type="System.Configuration.ApplicationSettingsGroup">
+    ///             <section name="detection" type="FiftyOne.Foundation.Mobile.Detection.Configuration.DetectionSection, FiftyOne.Foundation" requirePermission="false" allowDefinition="Everywhere" restartOnExternalChanges="false" allowExeDefinition="MachineToApplication" />
+    ///         </sectionGroup>
+    ///     </configSections>
+    ///     ...
+    ///     ...
+    ///     <fiftyOne>
+    ///         <detection enabled="true" shareUsage="false" autoUpdate="true" binaryFilePath="~/App_Data/51Degrees.dat" />
+    ///     </fiftyOne>
+    ///
+    /// </configuration>
+    /// </summary>
     public class Degrees51ContextClaimsProvider : IContextClaimsProvider
     {            
         private IAspectMap[] _properties;
@@ -133,6 +152,10 @@ namespace Sdl.Web.Modules.Degrees51
             if (HttpContext.Current != null)
             {
                 int h = key.GetHashCode();
+                if(WebProvider.ActiveProvider!=null)
+                {
+                    Log.Info(string.Format("Current 51 Degrees DataSet name: '{0}'", WebProvider.ActiveProvider.DataSet.Name));
+                }
                 return !HttpContext.Current.Items.Contains(key.GetHashCode()) && (WebProvider.ActiveProvider == null || WebProvider.ActiveProvider.DataSet.Name == "Lite");
             }
             return false;
@@ -145,10 +168,13 @@ namespace Sdl.Web.Modules.Degrees51
                 string key = WebRequestContext.Localization.GetConfigValue("51degrees.licenseKey");
                 if (!string.IsNullOrEmpty(key))
                 {
+                    Log.Info("Found 51 Degrees licence key.");
+
                     // add key to dynamic licences so the update thread can handle updating
                     LicenceKey.AddKey(key);
                     if (PerformUpdateRequest(key))
                     {
+                        Log.Info("51 Degrees DataSet is out of date so requesting latest one with supplied licence key.");
                         HttpContext.Current.Items[key.GetHashCode()] = true;
                         ThreadPool.QueueUserWorkItem(_ =>
                         {
@@ -165,21 +191,27 @@ namespace Sdl.Web.Modules.Degrees51
             catch(Exception ex)
             {               
                 Log.Error("An error occured when attempted to access the 51degrees.licenseKey configuration setting.", ex);
+                if (WebProvider.ActiveProvider != null)
+                {
+                    Log.Info(string.Format("Current 51 Degrees DataSet name: '{0}'", WebProvider.ActiveProvider.DataSet.Name));
+                }
             }
             
             // grab all the properties from the data set and map to context claims                  
             Dictionary<string, object> claims = new Dictionary<string, object>();
             foreach (IAspectMap x in _properties)
-            {               
-                claims.Add(string.Format("{0}.{1}", x.Aspect, x.Name), x.Value);
+            {
+                object v = x.Value;
+                Log.Debug(string.Format("Context claim property {0}.{1} = {2}", x.Aspect, x.Name, v != null ? v.ToString() : "<NULL>"));
+                claims.Add(string.Format("{0}.{1}", x.Aspect, x.Name), v);
             }
 
             return claims;            
         }
                 
-
         public string GetDeviceFamily()
         {
+            // returning null will force the default implementation
             return null;
         }
 
@@ -254,7 +286,7 @@ namespace Sdl.Web.Modules.Degrees51
                     {
                         object v = null;
                         try
-                        {
+                        {                           
                             v = Build();
                         }
                         catch
