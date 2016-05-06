@@ -10,7 +10,7 @@
         <version>1.0.0</version>
     </parent>
 
-    <groupId>com.sdl.dxa</groupId>
+    <groupId>com.sdl.dxa.modules</groupId>
     <artifactId>dxa-module-example</artifactId>
     <version>1.5.0-SNAPSHOT</version>
 
@@ -47,6 +47,11 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
         </dependency>
     </dependencies>
 
