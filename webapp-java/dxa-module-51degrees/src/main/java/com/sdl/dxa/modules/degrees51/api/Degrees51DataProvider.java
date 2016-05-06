@@ -84,6 +84,11 @@ public class Degrees51DataProvider {
         try {
             String fileName = getCurrentFileName();
 
+            if (fileName == null) {
+                log.error("Filename is not resolved, problems with 51 degrees module");
+                return null;
+            }
+
             Provider provider = dataProvidersByNames.containsKey(fileName) ? dataProvidersByNames.get(fileName) :
                     memorize(dataProvidersByNames, fileName, new Provider(StreamFactory.create(readFileToByteArray(new File(fileName))), 32));
 
@@ -94,48 +99,60 @@ public class Degrees51DataProvider {
         return null;
     }
 
-    private String getCurrentFileName() {
-        String fileName;
-
-        String licenseKey = webRequestContext.getLocalization().getConfiguration("51degrees.licenseKey");
-        if (!isEmpty(licenseKey) && (fileName = updateAndGiveFileName(licenseKey, true)) != null) {
-            log.debug("Using licenseKey key configured in CM");
-            return fileName;
-        }
-
-        if (!isEmpty(preConfiguredLicenseKey) && (fileName = updateAndGiveFileName(preConfiguredLicenseKey, true)) != null) {
-            log.debug("Using licenseKey key configured in properties");
-            return fileName;
-        }
-
-        fileName = updateLiteAndGiveFileName();
-        log.debug("No licenseKey key found for 51degrees module, fallback to Lite");
-        return fileName;
-    }
-
     @PostConstruct
     private void onAppStart() {
 
         log.debug("Check if the 51degrees licenseKey is in properties");
         if (preConfiguredLicenseKey != null) {
             log.debug("The licenseKey key for 51degrees found in properties, pre-loading data file");
-            if (null == updateAndGiveFileName(preConfiguredLicenseKey, false)) {
+            if (!updateFile(preConfiguredLicenseKey, getDataFileName(preConfiguredLicenseKey), false)) {
                 log.debug("Failed to pre-load data file for 51degrees, pre-loading Lite file");
-                updateLiteAndGiveFileName();
+                updateLiteFile();
             }
         } else {
             log.debug("The licenseKey key for 51degrees is not in properties, pre-loading Lite file");
-            updateLiteAndGiveFileName();
+            updateLiteFile();
         }
     }
 
-    @SneakyThrows(IOException.class)
-    private String updateAndGiveFileName(final String licenseKey, boolean isRequestPending) {
-        final String fileName = getDataFileName(licenseKey);
+    @Scheduled(cron = "0 0 4 * * ?")
+    private void updateLiteScheduled() {
+        updateLiteFile();
+    }
 
+    private String getCurrentFileName() {
+        String fileName;
+
+        String licenseKey = webRequestContext.getLocalization().getConfiguration("51degrees.licenseKey");
+        if (!isEmpty(licenseKey)) {
+            fileName = getDataFileName(licenseKey);
+            if (updateFile(licenseKey, fileName, true)) {
+                log.debug("Using licenseKey key configured in CM");
+                return fileName;
+            }
+        }
+
+        if (!isEmpty(preConfiguredLicenseKey)) {
+            fileName = getDataFileName(preConfiguredLicenseKey);
+            if (updateFile(preConfiguredLicenseKey, fileName, true)) {
+                log.debug("Using licenseKey key configured in properties");
+                return fileName;
+            }
+        }
+
+        log.debug("No licenseKey key found for 51degrees module, fallback to Lite");
+        if (updateLiteFile()) {
+            return liteFileLocation;
+        }
+
+        return null;
+    }
+
+    @SneakyThrows(IOException.class)
+    private boolean updateFile(final String licenseKey, final String fileName, boolean isRequestPending) {
         if (!isUpdateNeeded(fileName, 0)) {
             log.info("51degrees data file is up-to-date, update is not needed");
-            return fileName;
+            return true;
         }
 
         boolean fileExists = new File((fileName)).exists();
@@ -143,7 +160,7 @@ public class Degrees51DataProvider {
             DateTime pauseUntil = fileDelaysByNames.get(fileName);
             if (now().isBefore(pauseUntil)) {
                 log.info("File update for {} is paused until {}, cannot be updated now", fileName, pauseUntil);
-                return fileExists ? fileName : null;
+                return fileExists;
             }
             fileDelaysByNames.remove(fileName);
         }
@@ -158,23 +175,23 @@ public class Degrees51DataProvider {
                     updateDataFile(licenseKey, fileName);
                 }
             });
-            return null;
+            return false;
         }
 
         return updateDataFile(licenseKey, fileName);
     }
 
-    private String updateDataFile(String licenseKey, String fileName) {
+    private boolean updateDataFile(String licenseKey, String fileName) {
         try {
             AutoUpdateStatus status = AutoUpdate.update(licenseKey, fileName);
             switch (status) {
                 case AUTO_UPDATE_SUCCESS:
                     log.info("API: 51degrees data file has been updated");
                     getAndSetNextUpdate(fileName);
-                    return fileName;
+                    return true;
                 case AUTO_UPDATE_NOT_NEEDED:
                     log.info("API: 51degrees data file is up-to-date, updateDataFile is not needed");
-                    return fileName;
+                    return true;
                 case AUTO_UPDATE_ERR_429_TOO_MANY_ATTEMPTS:
                     log.warn("API: Too many attempts to update data file for 51degrees, pause for {} mins", fileUpdateReattemptDelayMinutes);
                     memorize(fileDelaysByNames, fileName, now().plusMinutes(fileUpdateReattemptDelayMinutes));
@@ -185,7 +202,7 @@ public class Degrees51DataProvider {
             }
         } catch (Exception e) {
             log.error("Exception while updating 51degrees data file.", e);
-            return null;
+            return false;
         }
     }
 
@@ -203,17 +220,12 @@ public class Degrees51DataProvider {
                 String.format("%032x", new BigInteger(1, md.digest()))));
     }
 
-    @Scheduled(cron = "0 0 4 * * ?")
-    private void updateLiteScheduled() {
-        updateLiteAndGiveFileName();
-    }
-
-    private String updateLiteAndGiveFileName() {
+    private boolean updateLiteFile() {
         File liteFile = new File(liteFileLocation);
         try {
             if (!isUpdateNeeded(liteFileLocation, 24)) {
                 log.debug("51degrees lite file doesn't need to be updated");
-                return liteFileLocation;
+                return true;
             }
 
             log.info("51degrees lite file needs to be updated");
@@ -237,9 +249,9 @@ public class Degrees51DataProvider {
         } catch (IOException | InterruptedException e) {
             log.error("Exception while updating the 51degrees lite file, deleting", e);
             FileUtils.deleteQuietly(liteFile);
-            return null;
+            return false;
         }
-        return liteFileLocation;
+        return true;
     }
 
     private boolean isUpdateNeeded(String fileName, int hoursPostpone) throws IOException {
