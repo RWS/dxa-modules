@@ -42,6 +42,7 @@ task build << {
     def commandToExecute = getCommandToExecute()
 
     [
+            "dxa-bom-modules",
             "dxa-module-cid",
             "dxa-module-core",
             "dxa-module-googleanalytics",
