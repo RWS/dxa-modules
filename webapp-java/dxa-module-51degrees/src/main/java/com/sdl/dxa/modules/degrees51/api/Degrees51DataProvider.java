@@ -14,6 +14,7 @@ import org.apache.commons.io.FileUtils;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -41,6 +42,7 @@ import static org.joda.time.DateTime.now;
  */
 @Component
 @Slf4j
+@Profile("51degrees.context.provider")
 public class Degrees51DataProvider {
 
     private static final Semaphore liteFileWrite = new Semaphore(1);

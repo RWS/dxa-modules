@@ -11,6 +11,7 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.util.Set;
@@ -30,6 +31,7 @@ import static com.sdl.dxa.modules.degrees51.api.mapping.Extractors.justReturn;
 
 @Configuration
 @ComponentScan("com.sdl.dxa.modules.degrees51")
+@Profile("51degrees.context.provider")
 @EnableScheduling
 public class Degrees51SpringContext {
 
