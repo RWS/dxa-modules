@@ -51,7 +51,8 @@ task build << {
             "dxa-module-smarttarget-abstract",
             "dxa-module-smarttarget-2013sp1",
             "dxa-module-smarttarget-web8",
-            "dxa-module-51degrees"
+            "dxa-module-51degrees",
+            "dxa-module-example"
     ].each {
         try {
             runMaven(commandToExecute, findPath([it, "pom.xml"]))
