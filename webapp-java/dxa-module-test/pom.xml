@@ -11,10 +11,10 @@
     </parent>
 
     <groupId>com.sdl.dxa.modules</groupId>
-    <artifactId>dxa-module-example</artifactId>
+    <artifactId>dxa-module-test</artifactId>
     <version>1.5.0-SNAPSHOT</version>
 
-    <name>DXA Modules - Example reference implementation of DXA module</name>
+    <name>DXA Modules - Test/Example reference implementation of DXA module</name>
     <description>Example/reference/test implementation of DXA module</description>
 
     <properties>
