@@ -42,6 +42,7 @@ task build << {
     def commandToExecute = getCommandToExecute()
 
     [
+            "dxa-bom-modules",
             "dxa-module-cid",
             "dxa-module-core",
             "dxa-module-googleanalytics",
@@ -49,7 +50,8 @@ task build << {
             "dxa-module-search",
             "dxa-module-smarttarget-abstract",
             "dxa-module-smarttarget-2013sp1",
-            "dxa-module-smarttarget-web8"
+            "dxa-module-smarttarget-web8",
+            "dxa-module-51degrees"
     ].each {
         try {
             runMaven(commandToExecute, findPath([it, "pom.xml"]))

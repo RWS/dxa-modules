@@ -21,6 +21,7 @@
     <properties>
         <dxa-bom.version>${project.version}</dxa-bom.version>
         <java-version>1.8</java-version>
+        <dxa-module-smarttarget.version>${project.version}</dxa-module-smarttarget.version>
     </properties>
 
     <dependencyManagement>
@@ -54,6 +55,7 @@
         <dependency>
             <groupId>com.sdl.dxa.modules</groupId>
             <artifactId>dxa-module-smarttarget-abstract</artifactId>
+            <version>${dxa-module-smarttarget.version}</version>
         </dependency>
 
         <dependency>

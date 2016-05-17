@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
@@ -82,12 +82,15 @@ namespace Sdl.Web.Modules.AzureWebApp
                     {
                         string responseBody = new StreamReader(responseStream).ReadToEnd();
                         string returnValue = JsonConvert.DeserializeObject<string>(responseBody);
-                        if (!string.IsNullOrEmpty(returnValue))
+                        if (string.IsNullOrEmpty(returnValue))
                         {
-                            throw new DxaException(returnValue);
+                            Log.Info("Successfully registered Base URL '{0}'", baseUrl);
+                        }
+                        else
+                        {
+                            Log.Warn(returnValue);
                         }
                     }
-                    Log.Info("Successfully registered Base URL '{0}'", baseUrl);
                 }
                 catch (Exception ex)
                 {

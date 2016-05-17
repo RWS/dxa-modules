@@ -1,0 +1,56 @@
+@startuml
+title 51Degrees Data Update Check On Request
+(*)  --> "Application is working"
+--> "Http Request came"
+--> "getCurrentFile()"
+--> "check if license key is in Localization"
+if "license key is in Localization"
+    --> [YES] "choose data file"
+    --> === FC ===
+else
+    --> [NO] "license key is not in Localization"
+    --> "check if license key is in properties"
+    if "license key is in properties"
+        --> [YES] "choose data file"
+        --> === FC ===
+    else
+        --> [NO]"license key is in properties"
+        --> "choose LITE file"
+        --> === FC ===
+    endif
+endif
+
+=== FC === --> "File is chosen"
+--> "check if file needs update"
+if "update is needed" then
+    -right-> [YES] "update current file"
+    note right
+        actual update of LITE file
+            will happen next night;
+        update of real data file
+            happens immediately non-blocking
+    end note
+    if "update failed" then
+        -up-> [YES] "check if this is LITE"
+        if "this is LITE" then
+            --> [YES] "Fallback to DEFAULT values"
+            -->(*)
+        else
+            --> [NO] "Fallback"
+            note right
+                in the following order:
+                CM > Properties > LITE
+            end note
+            "Fallback" --> "Choose next"
+            --> === FC ===
+        endif
+    else
+        --> [NO] === RET ===
+    endif
+else
+    --> [NO] === RET ===
+endif
+
+=== RET === --> "Return file"
+-->(*)
+@enduml

@@ -40,6 +40,7 @@
     <properties>
         <dxa-bom.version>1.4.1</dxa-bom.version>
         <java-version>1.7</java-version>
+        <device-detection.version>3.2.4.5</device-detection.version>
     </properties>
 
     <dependencyManagement>
@@ -60,6 +61,23 @@
             <artifactId>dxa-common-api</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.51degrees</groupId>
+            <artifactId>device-detection-core</artifactId>
+            <version>${device-detection.version}</version>
+        </dependency>
+
         <!-- Necessary for Spring 3 to process @Configuration annotated classes -->
         <dependency>
             <groupId>cglib</groupId>
@@ -70,6 +88,10 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
         </dependency>
 
         <!-- Google Guava -->
@@ -91,6 +113,30 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-library</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
         </dependency>
     </dependencies>
 
