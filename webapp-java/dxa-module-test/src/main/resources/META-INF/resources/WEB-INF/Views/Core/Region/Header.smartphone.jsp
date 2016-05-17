@@ -6,6 +6,6 @@
 <jsp:useBean id="region" type="com.sdl.webapp.common.api.model.RegionModel" scope="request"/>
 <jsp:useBean id="markup" type="com.sdl.webapp.common.markup.Markup" scope="request"/>
 
+<!--Header smartphone view!-->
 <jsp:include page="/WEB-INF/Views/Core/Region/Header.jsp"/>
-
-<p>Header smartphone view!</p>
+<!--end Header smartphone view!-->

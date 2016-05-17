@@ -8,6 +8,6 @@
 <jsp:useBean id="markup" type="com.sdl.webapp.common.markup.Markup" scope="request"/>
 <jsp:useBean id="screenWidth" type="com.sdl.webapp.common.api.ScreenWidth" scope="request"/>
 
+<!--Article smartphone view!-->
 <jsp:include page="/WEB-INF/Views/Core/Entity/Article.jsp"/>
-
-<p>Article smartphone view!</p>
+<!--end Article smartphone view!-->
