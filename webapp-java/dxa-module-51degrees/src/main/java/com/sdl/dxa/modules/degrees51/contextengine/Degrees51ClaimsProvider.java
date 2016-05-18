@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,7 +40,8 @@ public class Degrees51ClaimsProvider implements ContextClaimsProvider {
         String userAgent = request.getHeader("user-agent");
         log.trace("UserAgent is {}", userAgent);
 
-        return map(degrees51DataProvider.match(userAgent));
+        Match match = degrees51DataProvider.match(userAgent);
+        return match != null ? map(match) : Collections.<String, Object>emptyMap();
     }
 
     @Override

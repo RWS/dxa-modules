@@ -107,19 +107,19 @@ public class Degrees51DataProvider {
         log.debug("Check if the 51degrees licenseKey is in properties");
         if (preConfiguredLicenseKey != null) {
             log.debug("The licenseKey key for 51degrees found in properties, pre-loading data file");
-            if (!updateFile(preConfiguredLicenseKey, getDataFileName(preConfiguredLicenseKey), false)) {
+            if (!updateFile(preConfiguredLicenseKey, getDataFileName(preConfiguredLicenseKey), RequestPending.OUTSIDE_REQUEST)) {
                 log.debug("Failed to pre-load data file for 51degrees, pre-loading Lite file");
-                updateLiteFile();
+                updateLiteFile(RequestPending.OUTSIDE_REQUEST);
             }
         } else {
             log.debug("The licenseKey key for 51degrees is not in properties, pre-loading Lite file");
-            updateLiteFile();
+            updateLiteFile(RequestPending.OUTSIDE_REQUEST);
         }
     }
 
     @Scheduled(cron = "0 0 4 * * ?")
     private void updateLiteScheduled() {
-        updateLiteFile();
+        updateLiteFile(RequestPending.OUTSIDE_REQUEST);
     }
 
     private String getCurrentFileName() {
@@ -128,7 +128,7 @@ public class Degrees51DataProvider {
         String licenseKey = webRequestContext.getLocalization().getConfiguration("51degrees.licenseKey");
         if (!isEmpty(licenseKey)) {
             fileName = getDataFileName(licenseKey);
-            if (updateFile(licenseKey, fileName, true)) {
+            if (false && updateFile(licenseKey, fileName, RequestPending.PENDING_REQUEST)) {
                 log.debug("Using licenseKey key configured in CM");
                 return fileName;
             }
@@ -136,102 +136,62 @@ public class Degrees51DataProvider {
 
         if (!isEmpty(preConfiguredLicenseKey)) {
             fileName = getDataFileName(preConfiguredLicenseKey);
-            if (updateFile(preConfiguredLicenseKey, fileName, true)) {
+            if (updateFile(preConfiguredLicenseKey, fileName, RequestPending.PENDING_REQUEST)) {
                 log.debug("Using licenseKey key configured in properties");
                 return fileName;
             }
         }
 
         log.debug("No licenseKey key found for 51degrees module, fallback to Lite");
-        if (updateLiteFile()) {
+        if (updateLiteFile(RequestPending.PENDING_REQUEST)) {
             return liteFileLocation;
         }
 
         return null;
     }
 
+    private boolean updateLiteFile(RequestPending requestPending) {
+        return updateFile(null, liteFileLocation, requestPending);
+    }
+
     @SneakyThrows(IOException.class)
-    private boolean updateFile(final String licenseKey, final String fileName, boolean isRequestPending) {
-        if (!isUpdateNeeded(fileName, 0)) {
-            log.info("51degrees data file is up-to-date, update is not needed");
+    private boolean updateFile(final String licenseKey, final String fileName, RequestPending requestPending) {
+        if (!isUpdateNeeded(fileName)) {
+            log.info("51degrees data file {} is up-to-date, update is not needed", fileName);
             return true;
         }
 
-        boolean fileExists = new File((fileName)).exists();
-        if (fileDelaysByNames.containsKey(fileName)) {
-            DateTime pauseUntil = fileDelaysByNames.get(fileName);
-            if (now().isBefore(pauseUntil)) {
-                log.info("File update for {} is paused until {}, cannot be updated now", fileName, pauseUntil);
-                return fileExists;
-            }
-            fileDelaysByNames.remove(fileName);
+        boolean fileExists = new File(fileName).exists();
+
+        if (isPaused(fileName)) {
+            return fileExists;
         }
 
-        if (!fileExists && isRequestPending) {
-            log.info("File needs an update but we have a pending request. " +
-                    "So we fallback to lite, set this file on pause, and update file in background");
+        if (!fileExists && requestPending == RequestPending.PENDING_REQUEST) {
+            log.info("File {} needs an update but we have a pending request. " +
+                    "So we fallback to the next option (lite or default), set this file on pause, and update file in background", fileName);
             memorize(fileDelaysByNames, fileName, now().plusMinutes(fileUpdateReattemptDelayMinutes));
             Executors.newSingleThreadExecutor().execute(new Runnable() {
                 @Override
                 public void run() {
-                    updateDataFile(licenseKey, fileName);
+                    if (licenseKey == null) {
+                        updateLiteFileInternal();
+                    } else {
+                        updateDataFileInternal(licenseKey, fileName);
+                    }
                 }
             });
             return false;
         }
 
-        return updateDataFile(licenseKey, fileName);
+        log.info("File {} needs an update", fileName);
+
+        return licenseKey == null ? updateLiteFileInternal() : updateDataFileInternal(licenseKey, fileName);
     }
 
-    private boolean updateDataFile(String licenseKey, String fileName) {
-        try {
-            AutoUpdateStatus status = AutoUpdate.update(licenseKey, fileName);
-            switch (status) {
-                case AUTO_UPDATE_SUCCESS:
-                    log.info("API: 51degrees data file has been updated");
-                    getAndSetNextUpdate(fileName);
-                    return true;
-                case AUTO_UPDATE_NOT_NEEDED:
-                    log.info("API: 51degrees data file is up-to-date, updateDataFile is not needed");
-                    return true;
-                case AUTO_UPDATE_ERR_429_TOO_MANY_ATTEMPTS:
-                    log.warn("API: Too many attempts to update data file for 51degrees, pause for {} mins", fileUpdateReattemptDelayMinutes);
-                    memorize(fileDelaysByNames, fileName, now().plusMinutes(fileUpdateReattemptDelayMinutes));
-                    // no break or return here, falling to default block
-                default:
-                    log.error("There was a problem updating the data file: {}", status);
-                    throw new DxaException("There was a problem updating the data file: " + status);
-            }
-        } catch (Exception e) {
-            log.error("Exception while updating 51degrees data file.", e);
-            return false;
-        }
-    }
-
-
-    @SneakyThrows({NoSuchAlgorithmException.class, UnsupportedEncodingException.class})
-    private String getDataFileName(String licenseKey) {
-        String fileName = fileNamesByLicense.get(licenseKey);
-        if (fileName != null) {
-            return fileName;
-        }
-
-        MessageDigest md = MessageDigest.getInstance("MD5");
-        md.update(licenseKey.getBytes("UTF-8"));
-        return memorize(fileNamesByLicense, licenseKey, String.format(dataFileLocationPattern,
-                String.format("%032x", new BigInteger(1, md.digest()))));
-    }
-
-    private boolean updateLiteFile() {
+    private boolean updateLiteFileInternal() {
         File liteFile = new File(liteFileLocation);
         try {
-            if (!isUpdateNeeded(liteFileLocation, 24)) {
-                log.debug("51degrees lite file doesn't need to be updated");
-                return true;
-            }
-
-            log.info("51degrees lite file needs to be updated");
-
             File temp = new File(liteFileLocation + UUID.randomUUID());
             FileUtils.copyURLToFile(new URL(degrees51DataLiteUrl), temp,
                     fileLiteUpdateTimeoutMinutes * 60 * 1000 / 2,
@@ -248,6 +208,7 @@ public class Degrees51DataProvider {
 
             log.info("51degrees lite file is updated");
             getAndSetNextUpdate(liteFileLocation);
+            memorize(fileDelaysByNames, liteFileLocation, now().plusMinutes(fileUpdateReattemptDelayMinutes));
         } catch (IOException | InterruptedException e) {
             log.error("Exception while updating the 51degrees lite file, deleting", e);
             FileUtils.deleteQuietly(liteFile);
@@ -256,7 +217,59 @@ public class Degrees51DataProvider {
         return true;
     }
 
-    private boolean isUpdateNeeded(String fileName, int hoursPostpone) throws IOException {
+    private boolean updateDataFileInternal(String licenseKey, String fileName) {
+        try {
+            AutoUpdateStatus status = AutoUpdate.update(licenseKey, fileName);
+            switch (status) {
+                case AUTO_UPDATE_SUCCESS:
+                    log.info("API: 51degrees data file has been updated");
+                    getAndSetNextUpdate(fileName);
+                    memorize(fileDelaysByNames, fileName, now().plusMinutes(fileUpdateReattemptDelayMinutes));
+                    return true;
+                case AUTO_UPDATE_NOT_NEEDED:
+                    log.info("API: 51degrees data file is up-to-date, updateDataFileInternal is not needed");
+                    memorize(fileDelaysByNames, fileName, now().plusMinutes(fileUpdateReattemptDelayMinutes));
+                    return true;
+                case AUTO_UPDATE_ERR_429_TOO_MANY_ATTEMPTS:
+                    log.warn("API: Too many attempts to update data file for 51degrees, pause for {} mins", fileUpdateReattemptDelayMinutes);
+                    memorize(fileDelaysByNames, fileName, now().plusMinutes(fileUpdateReattemptDelayMinutes));
+                    // no break or return here, falling to default block
+                default:
+                    log.error("There was a problem updating the data file: {}", status);
+                    throw new DxaException("There was a problem updating the data file: " + status);
+            }
+        } catch (Exception e) {
+            log.error("Exception while updating 51degrees data file.", e);
+            return false;
+        }
+    }
+
+    private boolean isPaused(String fileName) {
+        if (fileDelaysByNames.containsKey(fileName)) {
+            DateTime pauseUntil = fileDelaysByNames.get(fileName);
+            if (now().isBefore(pauseUntil)) {
+                log.info("File update for {} is paused until {}, cannot be updated now", fileName, pauseUntil);
+                return true;
+            }
+            fileDelaysByNames.remove(fileName);
+        }
+        return false;
+    }
+
+    @SneakyThrows({NoSuchAlgorithmException.class, UnsupportedEncodingException.class})
+    private String getDataFileName(String licenseKey) {
+        String fileName = fileNamesByLicense.get(licenseKey);
+        if (fileName != null) {
+            return fileName;
+        }
+
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        md.update(licenseKey.getBytes("UTF-8"));
+        return memorize(fileNamesByLicense, licenseKey, String.format(dataFileLocationPattern,
+                String.format("%032x", new BigInteger(1, md.digest()))));
+    }
+
+    private boolean isUpdateNeeded(String fileName) throws IOException {
         DateTime nextUpdateDate;
         if (fileNextUpdatesByNames.containsKey(fileName)) {
             nextUpdateDate = fileNextUpdatesByNames.get(fileName);
@@ -269,7 +282,7 @@ public class Degrees51DataProvider {
 
             nextUpdateDate = getAndSetNextUpdate(fileName);
         }
-        return now().isAfter(new DateTime(nextUpdateDate).plusHours(hoursPostpone));
+        return now().isAfter(nextUpdateDate);
     }
 
     private DateTime getAndSetNextUpdate(String fileName) throws IOException {
@@ -294,5 +307,9 @@ public class Degrees51DataProvider {
     private <T> T memorize(Map<String, T> map, String key, T value) {
         map.put(key, value);
         return value;
+    }
+
+    private enum RequestPending {
+        PENDING_REQUEST, OUTSIDE_REQUEST
     }
 }
