@@ -17,6 +17,7 @@ import static com.google.common.collect.Sets.newHashSet;
 import static com.sdl.dxa.modules.degrees51.api.mapping.Converters.TO_BOOLEAN;
 import static com.sdl.dxa.modules.degrees51.api.mapping.Degrees51Mapping.dummyMapping;
 import static com.sdl.webapp.common.util.ApplicationContextHolder.getContext;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 /**
  * List of predefined extractors used for 51degrees mapping.
@@ -140,7 +141,8 @@ public final class Extractors {
 
         String findInContextCookie(String key) {
             String contextCookie = getContextCookie();
-            if (contextCookie == null) {
+            if (isEmpty(contextCookie)) {
+                log.info("ContextCookie is null or empty, is it first request?");
                 return null;
             }
 
