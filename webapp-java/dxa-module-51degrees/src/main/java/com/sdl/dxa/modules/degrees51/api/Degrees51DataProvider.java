@@ -128,7 +128,7 @@ public class Degrees51DataProvider {
         String licenseKey = webRequestContext.getLocalization().getConfiguration("51degrees.licenseKey");
         if (!isEmpty(licenseKey)) {
             fileName = getDataFileName(licenseKey);
-            if (false && updateFile(licenseKey, fileName, RequestPending.PENDING_REQUEST)) {
+            if (updateFile(licenseKey, fileName, RequestPending.PENDING_REQUEST)) {
                 log.debug("Using licenseKey key configured in CM");
                 return fileName;
             }
