@@ -12,7 +12,7 @@
 
     <groupId>com.sdl.dxa.modules</groupId>
     <artifactId>dxa-module-51degrees</artifactId>
-    <version>1.4.1-SNAPSHOT</version>
+    <version>1.4.1</version>
 
     <name>DXA Modules - 51 Degrees</name>
     <description>Implementation of DXA 51Degrees module for device detection</description>
