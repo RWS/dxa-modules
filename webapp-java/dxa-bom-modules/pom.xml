@@ -52,7 +52,7 @@
         <dxa-module-mediamanager.version>${dxa-modules.version}</dxa-module-mediamanager.version>
         <dxa-module-search.version>${dxa-modules.version}</dxa-module-search.version>
         <dxa-module-smarttarget.version>${dxa-modules.version}</dxa-module-smarttarget.version>
-        <dxa-module-51degrees.version>1.4.0-SNAPSHOT</dxa-module-51degrees.version>
+        <dxa-module-51degrees.version>${dxa-modules.version}</dxa-module-51degrees.version>
         <dxa-module-example.version>${dxa-modules.version}</dxa-module-example.version>
     </properties>
 
