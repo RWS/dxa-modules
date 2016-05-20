@@ -23,8 +23,10 @@ you use the ZIP File schema. You should ideally name this component '<modulename
 		src\templates\pages
 		src\templates\partials
 		
-		To make sure all the scripts located in the src\system\assets\scripts folder are published correctly a template is used
+		To make sure all the scripts located in the src\system\assets\scripts folder are published correctly and individually a template is used
 		that will register the scripts. An example would look like the following:
+		
+		Create a file src\templates\pagea\mediamanager.hbs with the following contents:
 		
 		---
 		layout: src/templates/layouts/blank.hbs
@@ -49,6 +51,15 @@ you use the ZIP File schema. You should ideally name this component '<modulename
 			<!-- endbuild -->	
 		</body>
 		</html>
+		
+		if instead you wish to merge all the scripts into the main.js script then you can add a template to src\templates\partials\module-scripts-footer.hbs with 
+		the following contents:
+		
+		{{!-- example footer scripts --}}
+		<script src="/system/assets/scripts/html5player.js"></script>
+		<script src="/system/assets/scripts/carousel.js"></script>
+		<script src="/system/assets/scripts/resolutionOverlay.js"></script>
+		<script src="/system/assets/scripts/mmCustomEvents.js"></script>
 
 		
 2) Create a new component inside 100 Master/Building Blocks/Settings/<ModuleName>/Site Manager called '<ModuleName> HTML Design Configuration'.
