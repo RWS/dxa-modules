@@ -5,7 +5,8 @@ This file serves as a handy guide to creating html design configurations for DXA
 
 TODO: 
 This is an initial guide in creating and publishing html designs. More details will be added soon based on if you want 
-CSS, merged scripts or individual scripts published.
+CSS, merged scripts or individual scripts published. Also we should automate this process by automatically zipping the
+html-design artifacts and using Core Services to upload the design package.
 
 
 Manual creation of HTML designs and publishing within the CME:
