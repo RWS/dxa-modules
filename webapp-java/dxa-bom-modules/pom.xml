@@ -53,7 +53,7 @@
         <dxa-module-search.version>${dxa-modules.version}</dxa-module-search.version>
         <dxa-module-smarttarget.version>${dxa-modules.version}</dxa-module-smarttarget.version>
         <dxa-module-51degrees.version>${dxa-modules.version}</dxa-module-51degrees.version>
-        <dxa-module-example.version>${dxa-modules.version}</dxa-module-example.version>
+        <dxa-module-test.version>${dxa-modules.version}</dxa-module-test.version>
     </properties>
 
     <dependencyManagement>
@@ -114,8 +114,8 @@
             </dependency>
             <dependency>
                 <groupId>com.sdl.dxa.modules</groupId>
-                <artifactId>dxa-module-example</artifactId>
-                <version>${dxa-module-example.version}</version>
+                <artifactId>dxa-module-test</artifactId>
+                <version>${dxa-module-test.version}</version>
                 <scope>runtime</scope>
             </dependency>
         </dependencies>
