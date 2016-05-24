@@ -43,29 +43,30 @@ var SDL;
                             var id = distribution.id;
                             var asset = distribution.assetContainers[0].assets[0];
                             var qualityName = "";
-                            var qualities = new Array();
+                            var qualities = [
+								new Quality("smartphone", null, null),
+								new Quality("tablet", null, null),
+								new Quality("desktop", null, null),
+								new Quality("desktopHD", null, null)
+							];
                             asset.renditionGroups.forEach(function (renditionGroup) {
                                 renditionGroup.renditions.forEach(function (rendition) {
                                     switch (rendition.name) {
-                                        case 'Mobile 360p mp4':
-                                            qualityName = "smartphone";
-                                            var quality = new Quality(qualityName, rendition.url, rendition.name);
-                                            qualities.push(quality);
+                                        case 'Mobile 360p mp4':                                                                                       
+                                            qualities[0].url = rendition.url;
+											qualities[0].resolution = rendition.name;
                                             break;
                                         case 'Web':
-                                            qualityName = "tablet";
-                                            var quality = new Quality(qualityName, rendition.url, rendition.name);
-                                            qualities.push(quality);
+                                            qualities[1].url = rendition.url;
+											qualities[1].resolution = rendition.name;
                                             break;
                                         case 'HD 720p webm':
-                                            qualityName = "desktop";
-                                            var quality = new Quality(qualityName, rendition.url, rendition.name);
-                                            qualities.push(quality);
+                                            qualities[2].url = rendition.url;
+											qualities[2].resolution = rendition.name;
                                             break;
                                         case 'HD 1080p webm':
-                                            qualityName = "desktopHD";
-                                            var quality = new Quality(qualityName, rendition.url, rendition.name);
-                                            qualities.push(quality);
+                                            qualities[3].url = rendition.url;
+											qualities[3].resolution = rendition.name;
                                             break;
                                         default:
                                             break;
@@ -88,35 +89,29 @@ var SDL;
                             var resolutionAttribute = "data-resolution";
                             var source = document.createElement("source");
                             source.type = "video/mp4";
-                            switch (this.options.quality) {
-                                case "smartphone":
-                                    source.src = qualities[0].url;
-                                    video.setAttribute(resolutionAttribute, qualities[0].resolution);
+							qIndex = 0;
+							switch (this.options.quality) {
+							 case "smartphone":
+									qIndex = 0;
                                     break;
-                                case "tablet":
-                                    source.src = qualities[1].url;
-                                    source.type = "video/webm";
-                                    video.setAttribute(resolutionAttribute, qualities[1].resolution);
+                                case "tablet":     
+									qIndex = 1;
                                     break;
                                 case "desktop":
-                                    if (qualities["desktopHD"] != null) {
-                                        source.src = qualities[3].url;
-                                        video.setAttribute(resolutionAttribute, qualities[3].resolution);
-                                    } else {
-                                        source.src = qualities[2].url;
-                                        video.setAttribute(resolutionAttribute, qualities[2].resolution);
-                                    }
+                                    qIndex = 3;
                                     break;
                                 default:
-                                    if (qualities["desktopHD"] != null) {
-                                        source.src = qualities[3].url;
-                                        video.setAttribute(resolutionAttribute, qualities[3].resolution);
-                                    } else {
-                                        source.src = qualities[2].url;
-                                        video.setAttribute(resolutionAttribute, qualities[2].resolution);
-                                    }
+                                    qIndex = 3;
                                     break;
-                            }
+							}
+							for(;qIndex>0;qIndex--)
+							{
+								if(qualities[qIndex].url != null)
+									break;
+							}
+							if(qIndex === 1) source.type = "video/webm";
+							source.src = qualities[qIndex].url;
+                            video.setAttribute(resolutionAttribute, qualities[qIndex].resolution);							
                             video.appendChild(source);
                             // Add the subtitles
                             if (asset.enrichments.subtitles != null) {
