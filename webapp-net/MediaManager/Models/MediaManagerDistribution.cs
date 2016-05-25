@@ -9,6 +9,11 @@ namespace Sdl.Web.Modules.MediaManager.Models
     [SemanticEntity(CoreVocabulary, "ExternalContentLibraryStubSchemamm")]
     public class MediaManagerDistribution : EclItem
     {
+        public string ClientSideScript { get; set; }
+        public string VideoAutoplay { get; set; }
+        public string VideoSubtitles { get; set; }
+        public string VideoControls { get; set; }
+      
         /// <summary>
         /// Media Manager distribution GUID
         /// </summary>
@@ -65,6 +70,17 @@ namespace Sdl.Web.Modules.MediaManager.Models
 
             string fileType;
             return FontAwesomeMimeTypeToIconClassMapping.TryGetValue(assetMimeType, out fileType) ? string.Format("fa-file-{0}-o", fileType) : "fa-file";
+        }     
+
+        /// <summary>
+        /// Returns true if client side scripting is enabled
+        /// </summary>
+        public bool IsClientSideScriptEnabled
+        {
+            get
+            {
+                return ClientSideScript != null && ClientSideScript.Equals("Enabled", StringComparison.InvariantCultureIgnoreCase);
+            }
         }
 
         /// <summary>

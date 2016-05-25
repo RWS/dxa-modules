@@ -75,6 +75,9 @@
     <Compile Include="..\CommonAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Areas\MediaManager\Views\Entity\Partials\clientside-html5dist.tablet.cshtml" />
+    <None Include="Areas\MediaManager\Views\Entity\Partials\clientside-html5dist.smartphone.cshtml" />
+    <None Include="Areas\MediaManager\Views\Entity\Partials\clientside-html5dist.cshtml" />
     <None Include="Areas\MediaManager\Views\Entity\html5dist.cshtml" />
     <None Include="Areas\MediaManager\Views\Entity\downloaddist.cshtml" />
     <None Include="Areas\MediaManager\Views\Entity\audiodist.cshtml" />

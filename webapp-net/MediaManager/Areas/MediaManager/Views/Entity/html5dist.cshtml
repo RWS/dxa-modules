@@ -1,17 +1,25 @@
 ﻿@model MediaManagerDistribution
 
-@if (Model.IsEmbedded)
+@if (Model.IsClientSideScriptEnabled)
 {
-    @Html.Media(Model, cssClass: "embed-video")
+    // use partial view and let our display mode handle adding device family suffix
+    @Html.Partial("Partials/clientside-html5dist", Model);
 }
 else
-{
-    // use a unique guid so we won't have conflicts with the same video on the page multiple times
-    string guid = System.Guid.NewGuid().ToString();
+{ 
+    if (Model.IsEmbedded)
+    {
+        @Html.Media(Model, cssClass: "embed-video")
+    }
+    else
+    {
+        // use a unique guid so we won't have conflicts with the same video on the page multiple times
+        string guid = System.Guid.NewGuid().ToString();
 
-    <div class="video @Model.HtmlClasses" @Html.DxaEntityMarkup()>
-        @* The Template Fragment provided by MM connector does not support responsive resizing. So instead of using Html.Media, we output the MM embed script directly here. *@
-        <div id="@guid"></div>
-        <script src="@Model.EmbedScriptUrl&trgt=@guid&responsive=true"></script>
-    </div>
+        <div class="video @Model.HtmlClasses" @Html.DxaEntityMarkup()>
+            @* The Template Fragment provided by MM connector does not support responsive resizing. So instead of using Html.Media, we output the MM embed script directly here. *@
+            <div id="@guid"></div>
+            <script src="@Model.EmbedScriptUrl&trgt=@guid&responsive=true"></script>
+        </div>
+    }
 }
