@@ -5,9 +5,13 @@ SDL Digital Experience Accelerator Modules
 
 About
 -----
-The SDL Digital Experience Accelerator is a reference implementation of SDL Web 8 and SDL Tridion 2013 SP1 intended to help you create, design and publish an SDL Web/Tridion-based Web site quickly.
+The SDL Digital Experience Accelerator (DXA) is a reference implementation of SDL Web 8 and SDL Tridion 2013 SP1 intended to help you create, design and publish an SDL Web/Tridion-based website quickly.
 
-You can find more details and a download of the entire release on https://community.sdl.com/developers/tridion_developer/m/mediagallery/852
+It is available for .NET and Java Web Applications and has a modular architecture consisting of a Framework and example web application providing core functionality and separate Modules for additional, optional functionality.
+
+This repository contains the source code of all the DXA Modules maintained by SDL. 
+The Module distibutions (including CM-side items and installation support) are downloadable from the [SDL Community site](https://community.sdl.com/developers/tridion_developer/m/mediagallery/) 
+(latest version) or the [Releases in GitHub](https://github.com/sdl/dxa-modules/releases) (all versions)
 
 
 Support
@@ -17,21 +21,14 @@ The SDL Digital Experience Accelerator is intended as a toolkit to help the SDL 
 If you encounter problems, reach out to the community: http://tridion.stackexchange.com/
 
 
-Sources
--------
-
-This repository contains the full source of all the 1.1 DXA modules released by SDL, the modules themselves (packed and ready for installation) will be downloadable from the SDL Community site.
-
 
 Documentation
 -------------
-
-Documentation can be found online in the SDL doc portal, you can find details about this in the download on the SDL Community site.
+Documentation for most of the SDL DXA Modules can be found online in the SDL documentation portal: http://docs.sdl.com/sdldxa
 
 
 Repositories
 ------------
-
 The following repositories with source code are available:
 
  - https://github.com/sdl/dxa-content-management - Core Template Building Blocks
@@ -46,18 +43,20 @@ Branches and Contributions
 
 We are using the following branching strategy:
 
- - master - Represents the latest stable version. This may be an pre-release version (tagged as "DXA x.y Sprint z"). Updated each development Sprint (approx. bi-weekly).
- - develop - Represents the latest development version. Updated very frequently (typically nightly).
- - release/x.y - Represents the x.y Release. If hotfixes are applicable, they will be applied to the appropriate release branch, so that the release branch actually represent the initial release plus hotfixes.
+ - `master` - Represents the latest stable version. This may be a pre-release version (tagged as `DXA x.y Sprint z`). Updated each development Sprint (approx. bi-weekly).
+ - `develop` - Represents the latest development version. Updated very frequently (typically nightly).
+ - `release/x.y` - Represents the x.y Release. If hotfixes are applicable, they will be applied to the appropriate release branch, so that the release branch actually represent the initial release plus hotfixes.
 
-All releases (including pre-releases) are Tagged. 
- 
-If you wish to submit a Pull Request, it should normally be submitted on the develop branch, so it can be incorporated in the upcoming release.
+All releases (including pre-releases and hotfix releases) are tagged. 
+
+If you wish to submit a Pull Request, it should normally be submitted on the `develop` branch, so it can be incorporated in the upcoming release.
+
 Fixes for really severe/urgent issues (which qualify as hotfixes) should be submitted as Pull Request on the appropriate release branch.
-Please always submit an Issue for the problem and indicate whether you think it qualifies as a hotfix; Pull Requests on release branches will only be accepted after agreement on the severity of the issue.
-Furthermore, Pull Requests on release branches are expected to be extensively tested.
 
-Of course, it's also possible to report an Issue without associated Pull Requests.
+Please always submit an Issue for the problem and indicate whether you think it qualifies as a hotfix; Pull Requests on release branches will only be accepted after agreement on the severity of the issue.
+Furthermore, Pull Requests on release branches are expected to be extensively tested by the submitter.
+
+Of course, it's also possible (and appreciated) to report an Issue without associated Pull Requests.
 
 
 License
