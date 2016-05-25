@@ -1,6 +1,7 @@
 package com.sdl.dxa.modules.mediamanager.model;
 
 import org.junit.Test;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.HashMap;
 
@@ -104,5 +105,40 @@ public class MediaManagerDistributionTest {
 
         //then
         assertEquals(expected, embedScriptUrl);
+    }
+
+    @Test
+    public void shouldReturnDisplayIdForJsonIfClientSideIsEnabled() {
+        //given
+        MediaManagerDistribution distribution = new MediaManagerDistribution();
+        distribution.setClientSideScript("Enabled");
+
+        //when
+        String displayTypeId = distribution.getDisplayTypeId();
+
+        //then
+        assertEquals("json-dist", displayTypeId);
+
+        //when
+        distribution.setClientSideScript("enabled");
+        displayTypeId = distribution.getDisplayTypeId();
+
+        //then
+        assertEquals("Case should not matter", "json-dist", displayTypeId);
+
+        //when
+        distribution.setClientSideScript(null);
+        ReflectionTestUtils.setField(distribution, "displayTypeId", "test");
+        displayTypeId = distribution.getDisplayTypeId();
+
+        //then
+        assertEquals("And should get displayTypeId value if nothing special", "test", displayTypeId);
+
+        //when
+        distribution.setClientSideScript("disabled");
+        displayTypeId = distribution.getDisplayTypeId();
+
+        //then
+        assertEquals("And should get displayTypeId value if client-side disabled", "test", displayTypeId);
     }
 }

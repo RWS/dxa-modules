@@ -9,7 +9,8 @@ import com.sdl.webapp.common.api.model.mvcdata.MvcDataCreator;
 import com.sdl.webapp.common.exceptions.DxaException;
 import com.sdl.webapp.common.markup.html.HtmlElement;
 import com.sdl.webapp.common.markup.html.builders.ImgElementBuilder;
-import lombok.Getter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -26,7 +27,8 @@ import static com.sdl.webapp.common.markup.html.builders.HtmlBuilders.script;
 import static java.lang.String.format;
 
 @SemanticEntity(entityName = "ExternalContentLibraryStubSchemamm", vocabulary = SDL_CORE, prefix = "s")
-@Getter
+@Data
+@EqualsAndHashCode(callSuper = true)
 public class MediaManagerDistribution extends EclItem {
 
     @SemanticProperty("s:clientSideScript")
@@ -89,12 +91,13 @@ public class MediaManagerDistribution extends EclItem {
         super.setUrl(url != null ? url.replaceAll("/\\?", "?") : null);
     }
 
+    /**
+     * {@inheritDoc}
+     * Special implementation which checks if this should be initialized on a client side with a JSON data.
+     */
     @Override
-    public MvcData getMvcData() {
-        return MvcDataCreator.creator()
-                .fromQualifiedName("MediaManager:" + getDisplayTypeId())
-                .defaults(DefaultsMvcData.CORE_ENTITY)
-                .create();
+    public String getDisplayTypeId() {
+        return "Enabled".equalsIgnoreCase(clientSideScript) ? "json-dist" : super.getDisplayTypeId();
     }
 
     @Override
@@ -107,6 +110,14 @@ public class MediaManagerDistribution extends EclItem {
             default:
                 return super.toHtmlElement(widthFactor, aspect, cssClass, containerSize, contextPath);
         }
+    }
+
+    @Override
+    public MvcData getMvcData() {
+        return MvcDataCreator.creator()
+                .fromQualifiedName("MediaManager:" + getDisplayTypeId())
+                .defaults(DefaultsMvcData.CORE_ENTITY)
+                .create();
     }
 
     private HtmlElement getImageDist(String widthFactor, double aspect, String cssClass) {
