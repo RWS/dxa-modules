@@ -1,6 +1,7 @@
 package com.sdl.dxa.modules.mediamanager.model;
 
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticEntity;
+import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticProperty;
 import com.sdl.webapp.common.api.model.MvcData;
 import com.sdl.webapp.common.api.model.entity.EclItem;
 import com.sdl.webapp.common.api.model.mvcdata.DefaultsMvcData;
@@ -8,6 +9,7 @@ import com.sdl.webapp.common.api.model.mvcdata.MvcDataCreator;
 import com.sdl.webapp.common.exceptions.DxaException;
 import com.sdl.webapp.common.markup.html.HtmlElement;
 import com.sdl.webapp.common.markup.html.builders.ImgElementBuilder;
+import lombok.Getter;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -24,12 +26,20 @@ import static com.sdl.webapp.common.markup.html.builders.HtmlBuilders.script;
 import static java.lang.String.format;
 
 @SemanticEntity(entityName = "ExternalContentLibraryStubSchemamm", vocabulary = SDL_CORE, prefix = "s")
+@Getter
 public class MediaManagerDistribution extends EclItem {
 
-    @Override
-    public void setUrl(String url) {
-        super.setUrl(url != null ? url.replaceAll("/\\?", "?") : null);
-    }
+    @SemanticProperty("s:clientSideScript")
+    private String clientSideScript;
+
+    @SemanticProperty("s:videoAutoplay")
+    private String videoAutoplay;
+
+    @SemanticProperty("s:videoSubtitles")
+    private String videoSubtitles;
+
+    @SemanticProperty("s:videoControls")
+    private String videoControls;
 
     public String getGlobalId() {
         final Map<String, Object> externalMetadata = getExternalMetadata();
@@ -52,11 +62,6 @@ public class MediaManagerDistribution extends EclItem {
         return UriComponentsBuilder.fromHttpUrl(getUrl()).pathSegment("embed").build().encode().toString();
     }
 
-    @Override
-    public String getMimeType() {
-        return (String) getFromExternalMetadataOrAlternative(getExternalMetadata(), "Program/Asset/MIMEType", super.getMimeType());
-    }
-
     public String getTitle() {
         Object first = getFromExternalMetadataOrAlternative(getExternalMetadata(), "Program/Asset/Title", null);
         if (first == null) {
@@ -72,6 +77,16 @@ public class MediaManagerDistribution extends EclItem {
     @Override
     public String getFileName() {
         return getTitle();
+    }
+
+    @Override
+    public String getMimeType() {
+        return (String) getFromExternalMetadataOrAlternative(getExternalMetadata(), "Program/Asset/MIMEType", super.getMimeType());
+    }
+
+    @Override
+    public void setUrl(String url) {
+        super.setUrl(url != null ? url.replaceAll("/\\?", "?") : null);
     }
 
     @Override
