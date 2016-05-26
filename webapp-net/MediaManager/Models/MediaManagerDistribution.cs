@@ -9,10 +9,10 @@ namespace Sdl.Web.Modules.MediaManager.Models
     [SemanticEntity(CoreVocabulary, "ExternalContentLibraryStubSchemamm")]
     public class MediaManagerDistribution : EclItem
     {
-        public string ClientSideScript { get; set; }
-        public string VideoAutoplay { get; set; }
-        public string VideoSubtitles { get; set; }
-        public string VideoControls { get; set; }
+        public string PlayerType { get; set; }
+        public string CustomVideoAutoplay { get; set; }
+        public string CustomVideoSubtitles { get; set; }
+        public string CustomVideoControls { get; set; }
       
         /// <summary>
         /// Media Manager distribution GUID
@@ -75,11 +75,44 @@ namespace Sdl.Web.Modules.MediaManager.Models
         /// <summary>
         /// Returns true if the custom player is enabled
         /// </summary>
-        public bool IsCustomPlayerEnabled
+        public bool CustomPlayerEnabled
         {
             get
             {
-                return ClientSideScript != null && ClientSideScript.Equals("Enabled", StringComparison.InvariantCultureIgnoreCase);
+                return PlayerType != null && PlayerType.Equals("Custom", StringComparison.InvariantCultureIgnoreCase);
+            }
+        }
+
+        /// <summary>
+        /// Returns true if autoplay is enabled
+        /// </summary>
+        public bool Autoplay
+        {
+            get
+            {
+                return CustomVideoAutoplay != null && CustomVideoAutoplay.Equals("Enabled", StringComparison.InvariantCultureIgnoreCase);
+            }
+        }
+
+        /// <summary>
+        /// Returns true if subtitles should be shown
+        /// </summary>
+        public bool Subtitles
+        {
+            get
+            {
+                return CustomVideoSubtitles != null && CustomVideoSubtitles.Equals("Enabled", StringComparison.InvariantCultureIgnoreCase);
+            }
+        }
+
+        /// <summary>
+        /// Returns true if the video controls should be shown
+        /// </summary>
+        public bool ShowControls
+        {
+            get
+            {
+                return CustomVideoControls != null && CustomVideoControls.Equals("Enabled", StringComparison.InvariantCultureIgnoreCase);
             }
         }
 
