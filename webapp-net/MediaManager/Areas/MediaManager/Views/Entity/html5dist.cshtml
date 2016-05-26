@@ -1,12 +1,14 @@
 ﻿@model MediaManagerDistribution
 
-@if (Model.IsClientSideScriptEnabled)
+@if (Model.IsCustomPlayerEnabled)
 {
+    // custom player selected
     // use partial view and let our display mode handle adding device family suffix
-    @Html.Partial("Partials/clientside-html5dist", Model);
+    @Html.Partial("Partials/customplayer-html5dist", Model);
 }
 else
 { 
+    // standard player selected
     if (Model.IsEmbedded)
     {
         @Html.Media(Model, cssClass: "embed-video")

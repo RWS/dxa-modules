@@ -75,7 +75,7 @@ namespace Sdl.Web.Modules.MediaManager.Models
         /// <summary>
         /// Returns true if client side scripting is enabled
         /// </summary>
-        public bool IsClientSideScriptEnabled
+        public bool IsCustomPlayerEnabled
         {
             get
             {
