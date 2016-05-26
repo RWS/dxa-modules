@@ -52,9 +52,13 @@ var SDL;
                             asset.renditionGroups.forEach(function (renditionGroup) {
                                 renditionGroup.renditions.forEach(function (rendition) {
                                     switch (rendition.name) {
-                                        case 'Mobile 360p mp4':                                                                                       
+                                        case 'Mobile 240p mp4':
                                             qualities[0].url = rendition.url;
 											qualities[0].resolution = rendition.name;
+                                            break;
+                                        case 'Mobile 360p mp4':
+                                            qualities[0].url = rendition.url;
+                                            qualities[0].resolution = rendition.name;
                                             break;
                                         case 'Web':
                                             qualities[1].url = rendition.url;
@@ -109,7 +113,7 @@ var SDL;
 								if(qualities[qIndex].url != null)
 									break;
 							}
-							if(qIndex === 1) source.type = "video/webm";
+							if(qIndex == 1) source.type = "video/webm";
 							source.src = qualities[qIndex].url;
                             video.setAttribute(resolutionAttribute, qualities[qIndex].resolution);							
                             video.appendChild(source);
