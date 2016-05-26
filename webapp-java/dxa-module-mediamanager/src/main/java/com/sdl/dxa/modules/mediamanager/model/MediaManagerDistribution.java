@@ -31,16 +31,18 @@ import static java.lang.String.format;
 @EqualsAndHashCode(callSuper = true)
 public class MediaManagerDistribution extends EclItem {
 
-    @SemanticProperty("s:clientSideScript")
-    private String clientSideScript;
+    static final String CUSTOM_PLAYER_VIEW_PREFIX = "custom-";
 
-    @SemanticProperty("s:videoAutoplay")
-    private String videoAutoplay;
+    @SemanticProperty("s:playerType")
+    private String playerType;
 
-    @SemanticProperty("s:videoSubtitles")
+    @SemanticProperty("s:customVideoAutoplay")
+    private String videoAutoPlay;
+
+    @SemanticProperty("s:customVideoSubtitles")
     private String videoSubtitles;
 
-    @SemanticProperty("s:videoControls")
+    @SemanticProperty("s:customVideoControls")
     private String videoControls;
 
     public String getGlobalId() {
@@ -92,12 +94,32 @@ public class MediaManagerDistribution extends EclItem {
     }
 
     /**
-     * {@inheritDoc}
-     * Special implementation which checks if this should be initialized on a client side with a JSON data.
+     * Checks if this should be initialized on a with a custom player with JSON data.
+     *
+     * @return view name with respect to
      */
-    @Override
-    public String getDisplayTypeId() {
-        return "Enabled".equalsIgnoreCase(clientSideScript) ? "json-dist" : super.getDisplayTypeId();
+    String getViewName() {
+        return "Custom".equalsIgnoreCase(playerType) ? CUSTOM_PLAYER_VIEW_PREFIX + super.getDisplayTypeId() : super.getDisplayTypeId();
+    }
+
+    /**
+     * Checks is the video is subtitled. Doesn't check is this is indeed a video and not an image for example. Basically
+     * checks a property for video subtitles.
+     *
+     * @return true is videoSubtitles property is set to "enabled", false otherwise
+     */
+    public boolean isSubtitled() {
+        return "Enabled".equalsIgnoreCase(videoSubtitles);
+    }
+
+    /**
+     * Checks is the video is automatically started. Doesn't check is this is indeed a video and not an image
+     * for example. Basically checks a property for video auto play.
+     *
+     * @return true is videoAutoPlay property is set to "enabled", false otherwise
+     */
+    public boolean isAutoPlayed() {
+        return "Enabled".equalsIgnoreCase(videoAutoPlay);
     }
 
     @Override
@@ -115,7 +137,7 @@ public class MediaManagerDistribution extends EclItem {
     @Override
     public MvcData getMvcData() {
         return MvcDataCreator.creator()
-                .fromQualifiedName("MediaManager:" + getDisplayTypeId())
+                .fromQualifiedName("MediaManager:" + getViewName())
                 .defaults(DefaultsMvcData.CORE_ENTITY)
                 .create();
     }

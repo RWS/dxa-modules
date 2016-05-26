@@ -5,7 +5,10 @@ import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.HashMap;
 
+import static com.sdl.dxa.modules.mediamanager.model.MediaManagerDistribution.CUSTOM_PLAYER_VIEW_PREFIX;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class MediaManagerDistributionTest {
 
@@ -111,34 +114,76 @@ public class MediaManagerDistributionTest {
     public void shouldReturnDisplayIdForJsonIfClientSideIsEnabled() {
         //given
         MediaManagerDistribution distribution = new MediaManagerDistribution();
-        distribution.setClientSideScript("Enabled");
-
-        //when
-        String displayTypeId = distribution.getDisplayTypeId();
-
-        //then
-        assertEquals("json-dist", displayTypeId);
-
-        //when
-        distribution.setClientSideScript("enabled");
-        displayTypeId = distribution.getDisplayTypeId();
-
-        //then
-        assertEquals("Case should not matter", "json-dist", displayTypeId);
-
-        //when
-        distribution.setClientSideScript(null);
         ReflectionTestUtils.setField(distribution, "displayTypeId", "test");
-        displayTypeId = distribution.getDisplayTypeId();
+        distribution.setPlayerType("Custom");
+
+        //when
+        String displayTypeId = distribution.getViewName();
+
+        //then
+        assertEquals(CUSTOM_PLAYER_VIEW_PREFIX + "test", displayTypeId);
+
+        //when
+        distribution.setPlayerType("custom");
+        displayTypeId = distribution.getViewName();
+
+        //then
+        assertEquals("Case should not matter", CUSTOM_PLAYER_VIEW_PREFIX + "test", displayTypeId);
+
+        //when
+        distribution.setPlayerType(null);
+        displayTypeId = distribution.getViewName();
 
         //then
         assertEquals("And should get displayTypeId value if nothing special", "test", displayTypeId);
 
         //when
-        distribution.setClientSideScript("disabled");
-        displayTypeId = distribution.getDisplayTypeId();
+        distribution.setPlayerType("standard");
+        displayTypeId = distribution.getViewName();
 
         //then
-        assertEquals("And should get displayTypeId value if client-side disabled", "test", displayTypeId);
+        assertEquals("And should get displayTypeId value if custom is disabled", "test", displayTypeId);
+    }
+
+    @Test
+    public void shouldReturnIsSubtitled() {
+        //given
+        MediaManagerDistribution distribution = new MediaManagerDistribution();
+
+        //when
+        distribution.setVideoSubtitles("Enabled");
+        //then
+        assertTrue(distribution.isSubtitled());
+
+        //when
+        distribution.setVideoSubtitles("Disabled");
+        //then
+        assertFalse(distribution.isSubtitled());
+
+        //when
+        distribution.setVideoSubtitles(null);
+        //then
+        assertFalse(distribution.isSubtitled());
+    }
+
+    @Test
+    public void shouldReturnIsAutoplayed() {
+        //given
+        MediaManagerDistribution distribution = new MediaManagerDistribution();
+
+        //when
+        distribution.setVideoAutoPlay("Enabled");
+        //then
+        assertTrue(distribution.isAutoPlayed());
+
+        //when
+        distribution.setVideoAutoPlay("Disabled");
+        //then
+        assertFalse(distribution.isAutoPlayed());
+
+        //when
+        distribution.setVideoAutoPlay(null);
+        //then
+        assertFalse(distribution.isAutoPlayed());
     }
 }
