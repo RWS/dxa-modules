@@ -9,14 +9,13 @@ var SDL;
         })();
         MediaDelivery.Html5PlayerOptions = Html5PlayerOptions;
         var Quality = (function () {
-            function Quality(name, url, resolution) {
-                this.name = name;
+            function Quality(url, resolution) {
                 this.url = url;
                 this.resolution = resolution;
             }
             return Quality;
         })();
-        var Html5Player = (function () {
+        MediaDelivery.Html5Player = (function () {
             function Html5Player(container, options) {
                 this.container = container;
                 this.options = options;
@@ -41,81 +40,58 @@ var SDL;
                         var assetContainer = distribution.assetContainers[0];
                         if (assetContainer.assets != null && assetContainer.assets.length > 0) {
                             var id = distribution.id;
-                            var asset = distribution.assetContainers[0].assets[0];
-                            var qualityName = "";
-                            var qualities = [
-								new Quality("smartphone", null, null),
-								new Quality("tablet", null, null),
-								new Quality("desktop", null, null),
-								new Quality("desktopHD", null, null)
-							];
+                            var asset = distribution.assetContainers[0].assets[0];  
+                            var qualities = [];                       
                             asset.renditionGroups.forEach(function (renditionGroup) {
+                                var resolution;                                
+                                switch (renditionGroup.name) {                                  
+                                    case 'MobileLo - Source':
+                                        resolution = 240;                                       
+                                        break;
+                                    case 'MobileHi - Source':
+                                        resolution = 360;
+                                        break;
+                                    case 'Web - Source':
+                                        resolution = 480;
+                                        break;
+                                    case 'HD720 - Source':
+                                        resolution = 720;
+                                        break;
+                                    case 'HD1080 - Source':
+                                        resolution = 1080;
+                                        break;
+                                    default:
+                                        break;
+                                }
                                 renditionGroup.renditions.forEach(function (rendition) {
-                                    switch (rendition.name) {
-                                        case 'Mobile 240p mp4':
-                                            qualities[0].url = rendition.url;
-											qualities[0].resolution = rendition.name;
-                                            break;
-                                        case 'Mobile 360p mp4':
-                                            qualities[0].url = rendition.url;
-                                            qualities[0].resolution = rendition.name;
-                                            break;
-                                        case 'Web':
-                                            qualities[1].url = rendition.url;
-											qualities[1].resolution = rendition.name;
-                                            break;
-                                        case 'HD 720p webm':
-                                            qualities[2].url = rendition.url;
-											qualities[2].resolution = rendition.name;
-                                            break;
-                                        case 'HD 1080p webm':
-                                            qualities[3].url = rendition.url;
-											qualities[3].resolution = rendition.name;
-                                            break;
-                                        default:
-                                            break;
+                                    if (rendition.url != null) {                                    
+                                        qualities.push(new Quality(rendition.url, resolution));
                                     }
                                 });
                             });
-
+                            if(qualities.length == 0) return;
+                            qualities.sort(function(a,b) {return (a.resolution < b.resolution) ? 1 : ((b.resolution < a.resolution) ? -1 : 0);} );
+                            var quality = null;
+                            for(var i=0; i<qualities.length; i++) {
+                                if(qualities[i].resolution <= this.options.quality) {
+                                    quality = qualities[i];
+                                    break;
+                                }
+                            }
+                            quality = quality==null ? qualities[0] : quality;                          
                             var video = document.createElement("video");
                             video.setAttribute("crossorigin", "anonymous");
                             video.id = id;
-                            video.controls = true;
-                            if (this.options.autoplay == false) {
-                                video.autoplay = false;
-                            } else {
-                                video.autoplay = true;
-                            }
+                            video.controls = this.options.controls;                          
+                            video.autoplay = this.options.autoplay;
                             video.style.width = "100%";
                             video.style.height = "100%";
                             // Add the source
                             var resolutionAttribute = "data-resolution";
-                            var source = document.createElement("source");
-                            source.type = "video/mp4";
-							qIndex = 0;
-							switch (this.options.quality) {
-							 case "smartphone":
-									qIndex = 0;
-                                    break;
-                                case "tablet":     
-									qIndex = 1;
-                                    break;
-                                case "desktop":
-                                    qIndex = 3;
-                                    break;
-                                default:
-                                    qIndex = 3;
-                                    break;
-							}
-							for(;qIndex>0;qIndex--)
-							{
-								if(qualities[qIndex].url != null)
-									break;
-							}
-							if(qIndex == 1) source.type = "video/webm";
-							source.src = qualities[qIndex].url;
-                            video.setAttribute(resolutionAttribute, qualities[qIndex].resolution);							
+                            var source = document.createElement("source");                            			
+                            source.type = quality.url.indexOf(".webm") != -1 ? "video/webm" : "video/mp4";
+							source.src = quality.url;
+                            video.setAttribute(resolutionAttribute, quality.resolution);							
                             video.appendChild(source);
                             // Add the subtitles
                             if (asset.enrichments.subtitles != null) {
@@ -136,8 +112,7 @@ var SDL;
                 }
             };
             return Html5Player;
-        })();
-        MediaDelivery.Html5Player = Html5Player;
+        })();       
     })(MediaDelivery = SDL.MediaDelivery || (SDL.MediaDelivery = {}));
 })(SDL || (SDL = {}));
 (function ($) {
@@ -148,38 +123,19 @@ var SDL;
         html5PlayerOptions.subtitles = options.subtitles;
         html5PlayerOptions.autoplay = options.autoplay;
         html5PlayerOptions.quality = options.quality;
+        html5PlayerOptions.controls = options.controls;
         var html5Player = new SDL.MediaDelivery.Html5Player($container.get(0), html5PlayerOptions);
         html5Player.render();
     };
-
     $(document).ready(function () {        
-        $("div[id|='video']").each(function (index, value) {            
-            var method = $(this).data("mm-method");
-            //console.log("found video with id: " + $(this).attr("id") + " and method: " + method);
-            switch(method)
-            {
-                case "VideoAutoplayOff":                    
-                    sdlmediaHtml5Player({ selector: $(this), url: $(this).data('mm-url'), autoplay:false });                                    
-                    break;
-                case "VideoSubtitlesOff":
-                    sdlmediaHtml5Player({ selector: $(this), url: $(this).data('mm-url'), subtitles: false });
-                    break;
-                case "VideoSubtitlesOn":
-                    sdlmediaHtml5Player({ selector: $(this), url: $(this).data('mm-url'), subtitles: true});
-                    break;
-                case "VideoDesktop":
-                    sdlmediaHtml5Player({ selector: $(this), url: $(this).data('mm-url'), quality: "desktop"});
-                    break;
-                case "VideoSmartphone":
-                    sdlmediaHtml5Player({ selector: $(this), url: $(this).data('mm-url'), quality: "smartphone" });
-                    break;
-                case "VideoTablet":
-                    sdlmediaHtml5Player({ selector: $(this), url: $(this).data('mm-url'), quality: "tablet" });
-                    break;
-                default:
-					if($(this).data('mm-url'))
-						sdlmediaHtml5Player({ selector: $(this), url: $(this).data('mm-url')});                  
-            }
+        $("div[id|='video']").each(function (index, value) {       
+            sdlmediaHtml5Player({ 
+                selector: $(this), 
+                url: $(this).data('mm-url'), // MM Json distribution data url
+                quality: $(this).data("mm-quality"), // 240,360,480,720,1080
+                subtitles: $(this).data("mm-subtitles"), // true/false
+                autoplay: $(this).data("mm-autoplay"), // true/false
+                controls: $(this).data("mm-controls")}); // true/false           
         });    
     });
 }(jQuery));
