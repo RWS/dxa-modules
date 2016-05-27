@@ -32,27 +32,26 @@
     </tr>
     <tr>
         <td>TestProperty1 (custom metadata Text field)</td>
-        <td>${entity.testProperty1}</td>
+        <td>${entity.testProp1}</td>
     </tr>
     <tr>
         <td>TestProperty2 (custom metadata Number field)</td>
-        <td>${entity.testProperty2}</td>
+        <td>${entity.testProp2}</td>
     </tr>
     <tr>
         <td>TestProperty3 (custom metadata Date field)</td>
-        <td>${entity.testProperty3}</td>
+        <td>${entity.testProp3}</td>
     </tr>
     <tr>
         <td>TestProperty4 (custom metadata Text field)</td>
-        <td>${entity.testProperty4}</td>
+        <td>${entity.testProp4}</td>
     </tr>
 </table>
 
-    <%--does not work due to TSI-1592--%>
-    <%--image--%>
-<%--<div class="${entity.htmlClasses}" ${markup.entity(entity)}>--%>
-    <%--<dxa:media media="${entity}"/>--%>
-<%--</div>--%>
+image
+<div class="${entity.htmlClasses}" ${markup.entity(entity)}>
+    <dxa:media media="${entity}"/>
+</div>
 
 </body>
 </html>
