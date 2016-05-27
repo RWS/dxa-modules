@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Xml;
+using Newtonsoft.Json;
 using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Models;
 
@@ -75,7 +76,9 @@ namespace Sdl.Web.Modules.MediaManager.Models
         /// <summary>
         /// Returns true if the custom player is enabled
         /// </summary>
-        public bool CustomPlayerEnabled
+        [SemanticProperty(IgnoreMapping = true)]
+        [JsonIgnore]
+        public bool IsCustomPlayerEnabled
         {
             get
             {
@@ -86,7 +89,9 @@ namespace Sdl.Web.Modules.MediaManager.Models
         /// <summary>
         /// Returns true if autoplay is enabled
         /// </summary>
-        public bool Autoplay
+        [SemanticProperty(IgnoreMapping = true)]
+        [JsonIgnore]
+        public bool IsCustomVideoAutoplay
         {
             get
             {
@@ -97,7 +102,9 @@ namespace Sdl.Web.Modules.MediaManager.Models
         /// <summary>
         /// Returns true if subtitles should be shown
         /// </summary>
-        public bool Subtitles
+        [SemanticProperty(IgnoreMapping = true)]
+        [JsonIgnore]
+        public bool IsCustomVideoSubtitles
         {
             get
             {
@@ -108,7 +115,9 @@ namespace Sdl.Web.Modules.MediaManager.Models
         /// <summary>
         /// Returns true if the video controls should be shown
         /// </summary>
-        public bool ShowControls
+        [SemanticProperty(IgnoreMapping = true)]
+        [JsonIgnore]
+        public bool IsCustomVideoControls
         {
             get
             {
