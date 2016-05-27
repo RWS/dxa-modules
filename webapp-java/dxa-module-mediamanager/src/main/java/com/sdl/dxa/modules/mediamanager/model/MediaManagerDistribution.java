@@ -1,5 +1,6 @@
 package com.sdl.dxa.modules.mediamanager.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticEntity;
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticProperty;
 import com.sdl.webapp.common.api.model.MvcData;
@@ -98,6 +99,7 @@ public class MediaManagerDistribution extends EclItem {
      *
      * @return view name with respect to
      */
+    @JsonIgnore
     String getViewName() {
         return "Custom".equalsIgnoreCase(playerType) ? CUSTOM_PLAYER_VIEW_PREFIX + super.getDisplayTypeId() : super.getDisplayTypeId();
     }
@@ -108,6 +110,7 @@ public class MediaManagerDistribution extends EclItem {
      *
      * @return true is videoSubtitles property is set to "enabled", false otherwise
      */
+    @JsonIgnore
     public boolean isSubtitled() {
         return "Enabled".equalsIgnoreCase(videoSubtitles);
     }
@@ -118,8 +121,20 @@ public class MediaManagerDistribution extends EclItem {
      *
      * @return true is videoAutoPlay property is set to "enabled", false otherwise
      */
+    @JsonIgnore
     public boolean isAutoPlayed() {
         return "Enabled".equalsIgnoreCase(videoAutoPlay);
+    }
+
+    /**
+     * Checks is the video controls are shown. Doesn't check is this is indeed a video and not an image
+     * for example. Basically checks a property for video controls.
+     *
+     * @return true is videoControls property is set to "enabled", false otherwise
+     */
+    @JsonIgnore
+    public boolean isShowControls() {
+        return "Enabled".equalsIgnoreCase(videoControls);
     }
 
     @Override

@@ -6,8 +6,9 @@
 
 <div id="video-${entity.id}" class="video"
      data-mm-url="${entity.distributionJsonUrl}"
-     data-mm-method="${param.get("familyMethod")}" ${markup.entity(entity)}
-<%--data-mm-quality="1080"--%>
+     data-mm-quality="${param.get("quality")}"
      data-mm-subtitles="${entity.subtitled}"
-     data-mm-autoplay="${entity.autoPlayed}">
+     data-mm-autoplay="${entity.autoPlayed}"
+     data-mm-controls="${entity.showControls}"
+${markup.entity(entity)}>
 </div>
