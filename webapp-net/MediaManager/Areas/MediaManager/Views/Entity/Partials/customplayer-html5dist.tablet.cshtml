@@ -3,7 +3,7 @@
 <div id="video-@Model.Id" class="video @Model.HtmlClasses"
      data-mm-url="@Model.DistributionJsonUrl"
      data-mm-quality="480"
-     data-mm-subtitles="@Model.Subtitles"
-     data-mm-autoplay="@Model.Autoplay"
-     data-mm-controls="@Model.ShowControls">
+     data-mm-subtitles="@Model.IsCustomVideoSubtitles.ToString().ToLower()"
+     data-mm-autoplay="@Model.IsCustomVideoAutoplay.ToString().ToLower()"
+     data-mm-controls="@Model.IsCustomVideoControls.ToString().ToLower()">
 </div>
