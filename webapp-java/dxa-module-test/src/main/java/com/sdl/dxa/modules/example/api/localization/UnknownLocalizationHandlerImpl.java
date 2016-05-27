@@ -5,12 +5,14 @@ import com.sdl.webapp.common.api.localization.LocalizationNotResolvedException;
 import com.sdl.webapp.common.api.localization.UnknownLocalizationHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletRequest;
 
 @Component
 @Slf4j
+@Profile("dxa.test.UnknownLocalizationHandlerImpl")
 public class UnknownLocalizationHandlerImpl implements UnknownLocalizationHandler {
 
     @Value("${dxa.modules.example.UnknownLocalizationHandler.exception}")

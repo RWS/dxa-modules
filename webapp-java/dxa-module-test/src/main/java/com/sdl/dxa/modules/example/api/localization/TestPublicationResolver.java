@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Primary
-@Profile("test.publication.resolver")
+@Profile("dxa.test.TestPublicationResolver")
 @Slf4j
 public class TestPublicationResolver extends AbstractTridionLocalizationResolver {
 
