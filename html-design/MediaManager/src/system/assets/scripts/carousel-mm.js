@@ -37,7 +37,7 @@ var SDL;
             };
             Carousel.prototype.renderView = function (distribution, container) {
                 if (distribution != null) {
-                    var imageList = new Array();
+                    var imageList = [];
                     if (distribution.assetContainers.length > 0) {
                         distribution.assetContainers.forEach(function (assetContainer) {
                             assetContainer.assets.forEach(function (asset) {
