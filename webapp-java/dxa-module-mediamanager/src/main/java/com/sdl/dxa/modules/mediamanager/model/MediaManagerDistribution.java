@@ -38,13 +38,13 @@ public class MediaManagerDistribution extends EclItem {
     private String playerType;
 
     @SemanticProperty("s:customVideoAutoplay")
-    private String videoAutoPlay;
+    private String customVideoAutoPlay;
 
     @SemanticProperty("s:customVideoSubtitles")
-    private String videoSubtitles;
+    private String customVideoSubtitles;
 
     @SemanticProperty("s:customVideoControls")
-    private String videoControls;
+    private String customVideoControls;
 
     public String getGlobalId() {
         final Map<String, Object> externalMetadata = getExternalMetadata();
@@ -108,33 +108,33 @@ public class MediaManagerDistribution extends EclItem {
      * Checks if the video is subtitled. Doesn't check is this is indeed a video and not an image for example. Basically
      * checks a property for video subtitles.
      *
-     * @return true is videoSubtitles property is set to "enabled", false otherwise
+     * @return true is customVideoSubtitles property is set to "enabled", false otherwise
      */
     @JsonIgnore
     public boolean isSubtitled() {
-        return "Enabled".equalsIgnoreCase(videoSubtitles);
+        return "Enabled".equalsIgnoreCase(customVideoSubtitles);
     }
 
     /**
      * Checks if the video is automatically started. Doesn't check is this is indeed a video and not an image
      * for example. Basically checks a property for video auto play.
      *
-     * @return true is videoAutoPlay property is set to "enabled", false otherwise
+     * @return true is customVideoAutoPlay property is set to "enabled", false otherwise
      */
     @JsonIgnore
     public boolean isAutoPlayed() {
-        return "Enabled".equalsIgnoreCase(videoAutoPlay);
+        return "Enabled".equalsIgnoreCase(customVideoAutoPlay);
     }
 
     /**
      * Checks if the video controls are shown. Doesn't check is this is indeed a video and not an image
      * for example. Basically checks a property for video controls.
      *
-     * @return true is videoControls property is set to "enabled", false otherwise
+     * @return true is customVideoControls property is set to "enabled", false otherwise
      */
     @JsonIgnore
     public boolean isShowControls() {
-        return "Enabled".equalsIgnoreCase(videoControls);
+        return "Enabled".equalsIgnoreCase(customVideoControls);
     }
 
     @Override

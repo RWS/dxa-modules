@@ -151,17 +151,17 @@ public class MediaManagerDistributionTest {
         MediaManagerDistribution distribution = new MediaManagerDistribution();
 
         //when
-        distribution.setVideoSubtitles("Enabled");
+        distribution.setCustomVideoSubtitles("Enabled");
         //then
         assertTrue(distribution.isSubtitled());
 
         //when
-        distribution.setVideoSubtitles("Disabled");
+        distribution.setCustomVideoSubtitles("Disabled");
         //then
         assertFalse(distribution.isSubtitled());
 
         //when
-        distribution.setVideoSubtitles(null);
+        distribution.setCustomVideoSubtitles(null);
         //then
         assertFalse(distribution.isSubtitled());
     }
@@ -172,17 +172,17 @@ public class MediaManagerDistributionTest {
         MediaManagerDistribution distribution = new MediaManagerDistribution();
 
         //when
-        distribution.setVideoAutoPlay("Enabled");
+        distribution.setCustomVideoAutoPlay("Enabled");
         //then
         assertTrue(distribution.isAutoPlayed());
 
         //when
-        distribution.setVideoAutoPlay("Disabled");
+        distribution.setCustomVideoAutoPlay("Disabled");
         //then
         assertFalse(distribution.isAutoPlayed());
 
         //when
-        distribution.setVideoAutoPlay(null);
+        distribution.setCustomVideoAutoPlay(null);
         //then
         assertFalse(distribution.isAutoPlayed());
     }
