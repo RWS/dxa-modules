@@ -105,7 +105,7 @@ public class MediaManagerDistribution extends EclItem {
     }
 
     /**
-     * Checks is the video is subtitled. Doesn't check is this is indeed a video and not an image for example. Basically
+     * Checks if the video is subtitled. Doesn't check is this is indeed a video and not an image for example. Basically
      * checks a property for video subtitles.
      *
      * @return true is videoSubtitles property is set to "enabled", false otherwise
@@ -116,7 +116,7 @@ public class MediaManagerDistribution extends EclItem {
     }
 
     /**
-     * Checks is the video is automatically started. Doesn't check is this is indeed a video and not an image
+     * Checks if the video is automatically started. Doesn't check is this is indeed a video and not an image
      * for example. Basically checks a property for video auto play.
      *
      * @return true is videoAutoPlay property is set to "enabled", false otherwise
@@ -127,7 +127,7 @@ public class MediaManagerDistribution extends EclItem {
     }
 
     /**
-     * Checks is the video controls are shown. Doesn't check is this is indeed a video and not an image
+     * Checks if the video controls are shown. Doesn't check is this is indeed a video and not an image
      * for example. Basically checks a property for video controls.
      *
      * @return true is videoControls property is set to "enabled", false otherwise
