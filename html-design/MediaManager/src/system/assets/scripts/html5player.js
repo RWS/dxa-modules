@@ -9,9 +9,10 @@ var SDL;
         })();
         MediaDelivery.Html5PlayerOptions = Html5PlayerOptions;
         var Quality = (function () {
-            function Quality(url, resolution) {
+            function Quality(url, resolution, resolutionData) {
                 this.url = url;
                 this.resolution = resolution;
+                this.resolutionData = resolutionData;
             }
             return Quality;
         })();
@@ -64,8 +65,8 @@ var SDL;
                                         break;
                                 }
                                 renditionGroup.renditions.forEach(function (rendition) {
-                                    if (rendition.url != null) {                                    
-                                        qualities.push(new Quality(rendition.url, resolution));
+                                    if (rendition.url != null) {
+                                        qualities.push(new Quality(rendition.url, resolution, rendition.name));
                                     }
                                 });
                             });
@@ -91,7 +92,7 @@ var SDL;
                             var source = document.createElement("source");                            			
                             source.type = quality.url.indexOf(".webm") != -1 ? "video/webm" : "video/mp4";
 							source.src = quality.url;
-                            video.setAttribute(resolutionAttribute, quality.resolution);							
+                            video.setAttribute(resolutionAttribute, quality.resolutionData);
                             video.appendChild(source);
                             // Add the subtitles
                             if (asset.enrichments.subtitles != null) {
