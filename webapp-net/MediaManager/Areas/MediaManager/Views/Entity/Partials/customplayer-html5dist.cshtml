@@ -5,5 +5,6 @@
      data-mm-quality="720"
      data-mm-subtitles="@Model.IsCustomVideoSubtitles.ToString().ToLower()"
      data-mm-autoplay="@Model.IsCustomVideoAutoplay.ToString().ToLower()"
-     data-mm-controls="@Model.IsCustomVideoControls.ToString().ToLower()">
+     data-mm-controls="@Model.IsCustomVideoControls.ToString().ToLower()"
+     @Html.DxaEntityMarkup() >
 </div>

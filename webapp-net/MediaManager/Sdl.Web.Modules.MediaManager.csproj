@@ -75,6 +75,7 @@
     <Compile Include="..\CommonAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Areas\MediaManager\Views\Entity\Partials\customplayer-imagedist.cshtml" />
     <None Include="Areas\MediaManager\Views\Entity\Partials\customplayer-html5dist.featurephone.cshtml" />
     <None Include="Areas\MediaManager\Views\Entity\Partials\customplayer-html5dist.tablet.cshtml" />
     <None Include="Areas\MediaManager\Views\Entity\Partials\customplayer-html5dist.smartphone.cshtml" />
