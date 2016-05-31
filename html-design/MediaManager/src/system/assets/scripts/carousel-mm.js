@@ -89,7 +89,7 @@ var SDL;
                         anchor.setAttribute("role", "button");
                         anchor.setAttribute("data-slide", "prev");
                         var anchorSpan = document.createElement("span");
-                        anchorSpan.className = "glyphicon glyphicon-chevron-left";
+                        anchorSpan.className = "fa fa-chevron-left carousel-icon-left";
                         anchor.appendChild(anchorSpan);
                         carousel.appendChild(anchor);
                         // next navigation
@@ -99,7 +99,7 @@ var SDL;
                         anchor.setAttribute("role", "button");
                         anchor.setAttribute("data-slide", "next");
                         anchorSpan = document.createElement("span");
-                        anchorSpan.className = "glyphicon glyphicon-chevron-right";
+                        anchorSpan.className = "fa fa-chevron-right carousel-icon-right";
                         anchor.appendChild(anchorSpan);
                         carousel.appendChild(anchor);
                         container.appendChild(carousel);
