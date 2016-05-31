@@ -51,11 +51,14 @@ $(function () {
     };
 
     $("body").append($imgResolution)
-        .on('mouseenter', 'main img', function () {
+        .on('mouseenter', 'main img:not(.mfp-img)', function () {
             onHover(this, 0, ShowImgResolution);
         })
+        .on('mouseenter', 'main img.mfp-img', function () {
+            onHover(this, 40, ShowImgResolution);
+        })
         .on('mouseenter', 'main video', function () {
-            onHover(this, 0, ShowVideoResolution);
+            onHover(this, 35, ShowVideoResolution);
         })
         .on('mouseleave', 'main img, main video', hideImgResolutionIfVisible);
 });
