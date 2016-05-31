@@ -42,7 +42,7 @@ var SDL;
                         if (assetContainer.assets != null && assetContainer.assets.length > 0) {
                             var id = distribution.id;
                             var asset = distribution.assetContainers[0].assets[0];  
-                            var qualities = [];                       
+                            var qualities = [];                                
                             asset.renditionGroups.forEach(function (renditionGroup) {
                                 var resolution;                                
                                 switch (renditionGroup.name) {                                  
@@ -71,7 +71,13 @@ var SDL;
                                 });
                             });
                             if(qualities.length == 0) return;
-                            qualities.sort(function(a,b) {return (a.resolution < b.resolution) ? 1 : ((b.resolution < a.resolution) ? -1 : 0);} );
+                            qualities.sort(function(a,b) {return (a.resolution < b.resolution) ? 1 : ((b.resolution < a.resolution) ? -1 : 0);});
+                            qualities.sort(function(a,b) {
+                                // prefer mp4 formats
+                                var t0 = a.url.indexOf(".mp4") != -1;
+                                var t1 = b.url.indexOf(".mp4") != -1;
+                                return (t0 == t1) ? 0 : ((t0 && !t1) ? -1 : 1);                               
+                            });
                             var quality = null;
                             for(var i=0; i<qualities.length; i++) {
                                 if(qualities[i].resolution <= this.options.quality) {
@@ -89,7 +95,7 @@ var SDL;
                             video.style.height = "100%";
                             // Add the source
                             var resolutionAttribute = "data-resolution";
-                            var source = document.createElement("source");                            			
+                            var source = document.createElement("source");
                             source.type = quality.url.indexOf(".webm") != -1 ? "video/webm" : "video/mp4";
 							source.src = quality.url;
                             video.setAttribute(resolutionAttribute, quality.resolutionData);
