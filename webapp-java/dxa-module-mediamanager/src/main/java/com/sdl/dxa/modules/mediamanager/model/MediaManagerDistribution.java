@@ -1,6 +1,8 @@
 package com.sdl.dxa.modules.mediamanager.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticEntity;
+import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticProperty;
 import com.sdl.webapp.common.api.model.MvcData;
 import com.sdl.webapp.common.api.model.entity.EclItem;
 import com.sdl.webapp.common.api.model.mvcdata.DefaultsMvcData;
@@ -8,6 +10,8 @@ import com.sdl.webapp.common.api.model.mvcdata.MvcDataCreator;
 import com.sdl.webapp.common.exceptions.DxaException;
 import com.sdl.webapp.common.markup.html.HtmlElement;
 import com.sdl.webapp.common.markup.html.builders.ImgElementBuilder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -24,12 +28,23 @@ import static com.sdl.webapp.common.markup.html.builders.HtmlBuilders.script;
 import static java.lang.String.format;
 
 @SemanticEntity(entityName = "ExternalContentLibraryStubSchemamm", vocabulary = SDL_CORE, prefix = "s")
+@Data
+@EqualsAndHashCode(callSuper = true)
 public class MediaManagerDistribution extends EclItem {
 
-    @Override
-    public void setUrl(String url) {
-        super.setUrl(url != null ? url.replaceAll("/\\?", "?") : null);
-    }
+    static final String CUSTOM_PLAYER_VIEW_PREFIX = "custom-";
+
+    @SemanticProperty("s:playerType")
+    private String playerType;
+
+    @SemanticProperty("s:customVideoAutoplay")
+    private String customVideoAutoPlay;
+
+    @SemanticProperty("s:customVideoSubtitles")
+    private String customVideoSubtitles;
+
+    @SemanticProperty("s:customVideoControls")
+    private String customVideoControls;
 
     public String getGlobalId() {
         final Map<String, Object> externalMetadata = getExternalMetadata();
@@ -52,11 +67,6 @@ public class MediaManagerDistribution extends EclItem {
         return UriComponentsBuilder.fromHttpUrl(getUrl()).pathSegment("embed").build().encode().toString();
     }
 
-    @Override
-    public String getMimeType() {
-        return (String) getFromExternalMetadataOrAlternative(getExternalMetadata(), "Program/Asset/MIMEType", super.getMimeType());
-    }
-
     public String getTitle() {
         Object first = getFromExternalMetadataOrAlternative(getExternalMetadata(), "Program/Asset/Title", null);
         if (first == null) {
@@ -75,11 +85,56 @@ public class MediaManagerDistribution extends EclItem {
     }
 
     @Override
-    public MvcData getMvcData() {
-        return MvcDataCreator.creator()
-                .fromQualifiedName("MediaManager:" + getDisplayTypeId())
-                .defaults(DefaultsMvcData.CORE_ENTITY)
-                .create();
+    public String getMimeType() {
+        return (String) getFromExternalMetadataOrAlternative(getExternalMetadata(), "Program/Asset/MIMEType", super.getMimeType());
+    }
+
+    @Override
+    public void setUrl(String url) {
+        super.setUrl(url != null ? url.replaceAll("/\\?", "?") : null);
+    }
+
+    /**
+     * Checks if this should be initialized on a with a custom player with JSON data.
+     *
+     * @return view name with respect to
+     */
+    @JsonIgnore
+    String getViewName() {
+        return "Custom".equalsIgnoreCase(playerType) ? CUSTOM_PLAYER_VIEW_PREFIX + super.getDisplayTypeId() : super.getDisplayTypeId();
+    }
+
+    /**
+     * Checks if the video is subtitled. Doesn't checks if this is indeed a video and not an image for example. Basically
+     * checks a property for video subtitles.
+     *
+     * @return true if customVideoSubtitles property is set to "enabled", false otherwise
+     */
+    @JsonIgnore
+    public boolean isSubtitled() {
+        return "Enabled".equalsIgnoreCase(customVideoSubtitles);
+    }
+
+    /**
+     * Checks if the video is automatically started. Doesn't checks if this is indeed a video and not an image
+     * for example. Basically checks a property for video auto play.
+     *
+     * @return true if customVideoAutoPlay property is set to "enabled", false otherwise
+     */
+    @JsonIgnore
+    public boolean isAutoPlayed() {
+        return "Enabled".equalsIgnoreCase(customVideoAutoPlay);
+    }
+
+    /**
+     * Checks if the video controls are shown. Doesn't checks if this is indeed a video and not an image
+     * for example. Basically checks a property for video controls.
+     *
+     * @return true if customVideoControls property is set to "enabled", false otherwise
+     */
+    @JsonIgnore
+    public boolean isShowControls() {
+        return "Enabled".equalsIgnoreCase(customVideoControls);
     }
 
     @Override
@@ -92,6 +147,14 @@ public class MediaManagerDistribution extends EclItem {
             default:
                 return super.toHtmlElement(widthFactor, aspect, cssClass, containerSize, contextPath);
         }
+    }
+
+    @Override
+    public MvcData getMvcData() {
+        return MvcDataCreator.creator()
+                .fromQualifiedName("MediaManager:" + getViewName())
+                .defaults(DefaultsMvcData.CORE_ENTITY)
+                .create();
     }
 
     private HtmlElement getImageDist(String widthFactor, double aspect, String cssClass) {

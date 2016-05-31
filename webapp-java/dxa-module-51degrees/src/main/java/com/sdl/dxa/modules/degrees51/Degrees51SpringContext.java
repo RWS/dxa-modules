@@ -109,7 +109,8 @@ public class Degrees51SpringContext {
                             if (hm != null && wm != null) {
                                 Integer h = hm.process(match);
                                 Integer w = wm.process(match);
-                                return Double.valueOf(Math.round(Math.sqrt(h * h + w * w) / d)).intValue();
+                                return h != null && w != null ?
+                                        Double.valueOf(Math.round(Math.sqrt(h * h + w * w) / d)).intValue() : null;
                             }
                         }
                         return null;

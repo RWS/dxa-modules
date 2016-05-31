@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Xml;
+using Newtonsoft.Json;
 using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Models;
 
@@ -9,6 +10,11 @@ namespace Sdl.Web.Modules.MediaManager.Models
     [SemanticEntity(CoreVocabulary, "ExternalContentLibraryStubSchemamm")]
     public class MediaManagerDistribution : EclItem
     {
+        public string PlayerType { get; set; }
+        public string CustomVideoAutoplay { get; set; }
+        public string CustomVideoSubtitles { get; set; }
+        public string CustomVideoControls { get; set; }
+      
         /// <summary>
         /// Media Manager distribution GUID
         /// </summary>
@@ -65,6 +71,58 @@ namespace Sdl.Web.Modules.MediaManager.Models
 
             string fileType;
             return FontAwesomeMimeTypeToIconClassMapping.TryGetValue(assetMimeType, out fileType) ? string.Format("fa-file-{0}-o", fileType) : "fa-file";
+        }     
+
+        /// <summary>
+        /// Returns true if the custom player is enabled
+        /// </summary>
+        [SemanticProperty(IgnoreMapping = true)]
+        [JsonIgnore]
+        public bool IsCustomPlayerEnabled
+        {
+            get
+            {
+                return PlayerType != null && PlayerType.Equals("Custom", StringComparison.InvariantCultureIgnoreCase);
+            }
+        }
+
+        /// <summary>
+        /// Returns true if autoplay is enabled
+        /// </summary>
+        [SemanticProperty(IgnoreMapping = true)]
+        [JsonIgnore]
+        public bool IsCustomVideoAutoplay
+        {
+            get
+            {
+                return CustomVideoAutoplay != null && CustomVideoAutoplay.Equals("Enabled", StringComparison.InvariantCultureIgnoreCase);
+            }
+        }
+
+        /// <summary>
+        /// Returns true if subtitles should be shown
+        /// </summary>
+        [SemanticProperty(IgnoreMapping = true)]
+        [JsonIgnore]
+        public bool IsCustomVideoSubtitles
+        {
+            get
+            {
+                return CustomVideoSubtitles != null && CustomVideoSubtitles.Equals("Enabled", StringComparison.InvariantCultureIgnoreCase);
+            }
+        }
+
+        /// <summary>
+        /// Returns true if the video controls should be shown
+        /// </summary>
+        [SemanticProperty(IgnoreMapping = true)]
+        [JsonIgnore]
+        public bool IsCustomVideoControls
+        {
+            get
+            {
+                return CustomVideoControls != null && CustomVideoControls.Equals("Enabled", StringComparison.InvariantCultureIgnoreCase);
+            }
         }
 
         /// <summary>

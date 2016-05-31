@@ -1,7 +1,7 @@
 package com.sdl.dxa.modules.smarttarget.model.entity;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sdl.dxa.DxaWebSpringInitialization;
+import com.sdl.dxa.DxaSpringInitialization;
 import com.sdl.dxa.modules.smarttarget.SmartTargetInitializer;
 import com.sdl.dxa.modules.smarttarget.markup.AbstractTrackingMarkupDecorator;
 import com.sdl.webapp.common.util.ApplicationContextHolder;
@@ -77,7 +77,7 @@ public class SmartTargetExperimentTest {
     public static class SpringConfigurationContext extends SmartTargetInitializer {
         @Bean
         public ObjectMapper objectMapper() {
-            return new DxaWebSpringInitialization().objectMapper();
+            return new DxaSpringInitialization().objectMapper();
         }
 
         @Bean

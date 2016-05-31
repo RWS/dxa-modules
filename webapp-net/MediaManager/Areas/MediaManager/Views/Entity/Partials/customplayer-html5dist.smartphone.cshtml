@@ -1,0 +1,10 @@
+﻿@model MediaManagerDistribution
+
+<div id="video-@Model.Id" class="video @Model.HtmlClasses"
+     data-mm-url="@Model.DistributionJsonUrl"
+     data-mm-quality="360"
+     data-mm-subtitles="@Model.IsCustomVideoSubtitles.ToString().ToLower()"
+     data-mm-autoplay="@Model.IsCustomVideoAutoplay.ToString().ToLower()"
+     data-mm-controls="@Model.IsCustomVideoControls.ToString().ToLower()"
+     @Html.DxaEntityMarkup() >
+</div>

@@ -1,10 +1,14 @@
 package com.sdl.dxa.modules.mediamanager.model;
 
 import org.junit.Test;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.HashMap;
 
+import static com.sdl.dxa.modules.mediamanager.model.MediaManagerDistribution.CUSTOM_PLAYER_VIEW_PREFIX;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class MediaManagerDistributionTest {
 
@@ -104,5 +108,82 @@ public class MediaManagerDistributionTest {
 
         //then
         assertEquals(expected, embedScriptUrl);
+    }
+
+    @Test
+    public void shouldReturnDisplayIdForJsonIfClientSideIsEnabled() {
+        //given
+        MediaManagerDistribution distribution = new MediaManagerDistribution();
+        ReflectionTestUtils.setField(distribution, "displayTypeId", "test");
+        distribution.setPlayerType("Custom");
+
+        //when
+        String displayTypeId = distribution.getViewName();
+
+        //then
+        assertEquals(CUSTOM_PLAYER_VIEW_PREFIX + "test", displayTypeId);
+
+        //when
+        distribution.setPlayerType("custom");
+        displayTypeId = distribution.getViewName();
+
+        //then
+        assertEquals("Case should not matter", CUSTOM_PLAYER_VIEW_PREFIX + "test", displayTypeId);
+
+        //when
+        distribution.setPlayerType(null);
+        displayTypeId = distribution.getViewName();
+
+        //then
+        assertEquals("And should get displayTypeId value if nothing special", "test", displayTypeId);
+
+        //when
+        distribution.setPlayerType("standard");
+        displayTypeId = distribution.getViewName();
+
+        //then
+        assertEquals("And should get displayTypeId value if custom is disabled", "test", displayTypeId);
+    }
+
+    @Test
+    public void shouldReturnIsSubtitled() {
+        //given
+        MediaManagerDistribution distribution = new MediaManagerDistribution();
+
+        //when
+        distribution.setCustomVideoSubtitles("Enabled");
+        //then
+        assertTrue(distribution.isSubtitled());
+
+        //when
+        distribution.setCustomVideoSubtitles("Disabled");
+        //then
+        assertFalse(distribution.isSubtitled());
+
+        //when
+        distribution.setCustomVideoSubtitles(null);
+        //then
+        assertFalse(distribution.isSubtitled());
+    }
+
+    @Test
+    public void shouldReturnIsAutoplayed() {
+        //given
+        MediaManagerDistribution distribution = new MediaManagerDistribution();
+
+        //when
+        distribution.setCustomVideoAutoPlay("Enabled");
+        //then
+        assertTrue(distribution.isAutoPlayed());
+
+        //when
+        distribution.setCustomVideoAutoPlay("Disabled");
+        //then
+        assertFalse(distribution.isAutoPlayed());
+
+        //when
+        distribution.setCustomVideoAutoPlay(null);
+        //then
+        assertFalse(distribution.isAutoPlayed());
     }
 }

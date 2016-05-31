@@ -51,7 +51,8 @@ task build << {
             "dxa-module-smarttarget-abstract",
             "dxa-module-smarttarget-2013sp1",
             "dxa-module-smarttarget-web8",
-            "dxa-module-51degrees"
+            "dxa-module-51degrees",
+            "dxa-module-test"
     ].each {
         try {
             runMaven(commandToExecute, findPath([it, "pom.xml"]))
@@ -87,7 +88,7 @@ String findPath(List<String> parts) {
 }
 
 def runMaven(String command, String pomPath) {
-    String toRun = "${determineShell()} mvn ${command} -f \"${pomPath}\" -U"
+    String toRun = "${determineShell()} mvn ${command} -f \"${pomPath}\""
 
     println """
     Running ${toRun}
