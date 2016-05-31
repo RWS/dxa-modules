@@ -1,24 +1,6 @@
-//Image Resolution/Dimentions overlay - shows on each image on the page within the main content area, as well
+//Image Resolution/Dimensions overlay - shows on each image on the page within the main content area, as well
 //  as the pop-up/overlay images in the gallery the actual resolution of the image being displayed
 //  this is so that you do not have to inspect element to show the resolution of an image. *@
-function ShowResolution(img, offset, $imgResolution) {
-    var pos = $(img).offset();
-    $imgResolution.text(img.naturalWidth + "x" + img.naturalHeight)
-        .css({
-            top: (pos.top + $(img).outerHeight() - $imgResolution.outerHeight() - offset) + "px",
-            left: (pos.left + $(img).outerWidth() - $imgResolution.outerWidth()) + "px"
-        }).show();
-}
-
-function ShowVideoResolution(container, offset, $imgResolution) {
-    var pos = $(container).offset();
-    $imgResolution.text($(container).attr("data-resolution"))
-        .css({
-            top: (pos.top + $(container).outerHeight() - $imgResolution.outerHeight() - offset) + "px",
-            left: (pos.left + $(container).outerWidth() - $imgResolution.outerWidth()) + "px"
-        }).show();
-}
-
 $(function () {
     var $imgResolution = $('<div id="imgResolution"></div>').css({
         display: 'none',
@@ -34,6 +16,24 @@ $(function () {
         'text-shadow': '1px 0 0 #fff, -1px 0 0 #fff, 0 1px 0 #fff, 0 -1px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff'
     });
 
+    var ShowResolution = function ($elem, text, offset, $imgResolution) {
+        var pos = $elem.offset();
+        $imgResolution.text(text)
+            .css({
+                top: (pos.top + $elem.outerHeight() - $imgResolution.outerHeight() - offset) + "px",
+                left: (pos.left + $elem.outerWidth() - $imgResolution.outerWidth()) + "px"
+            }).show();
+    };
+
+    var ShowImgResolution = function (img, offset, $imgResolution) {
+        ShowResolution($(img), img.naturalWidth + "x" + img.naturalHeight, offset, $imgResolution);
+    };
+
+    var ShowVideoResolution = function (video, offset, $imgResolution) {
+        var $video = $(video);
+        ShowResolution($video, $video.attr("data-resolution"), offset, $imgResolution);
+    };
+
     var hideImgResolutionIfVisible = function () {
         if (imgResolutionVisible()) {
             $imgResolution.hide();
@@ -46,25 +46,19 @@ $(function () {
         }
     };
 
-    $("body").append($imgResolution).bind("DOMSubtreeModified", function () {
-        $("img.mfp-img").mouseenter(function () {
-            onHover(this, 40, ShowResolution);
-        });
-        $("video").mouseenter(function () {
-            onHover(this, 35, ShowVideoResolution);
-        });
-        $("video, img").mouseout(hideImgResolutionIfVisible);
-    });
-
     var imgResolutionVisible = function () {
-        $imgResolution.is(":visible");
+        return $imgResolution.is(":visible");
     };
 
-    $("main img").mouseenter(function () {
-        onHover(this, 0, ShowResolution);
-    });
-    $("main video").mouseenter(function () {
-        onHover(this, 0, ShowVideoResolution);
-    });
-    $("main video, main img").mouseout(hideImgResolutionIfVisible);
+    $("body").append($imgResolution)
+        .on('mouseenter', 'main img:not(.mfp-img)', function () {
+            onHover(this, 0, ShowImgResolution);
+        })
+        .on('mouseenter', 'main img.mfp-img', function () {
+            onHover(this, 40, ShowImgResolution);
+        })
+        .on('mouseenter', 'main video', function () {
+            onHover(this, 35, ShowVideoResolution);
+        })
+        .on('mouseleave', 'main img, main video', hideImgResolutionIfVisible);
 });
