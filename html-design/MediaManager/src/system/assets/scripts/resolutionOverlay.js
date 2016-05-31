@@ -16,24 +16,22 @@ $(function () {
         'text-shadow': '1px 0 0 #fff, -1px 0 0 #fff, 0 1px 0 #fff, 0 -1px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff'
     });
 
-    var ShowResolution = function (img, offset, $imgResolution) {
-        var $img = $(img);
-        var pos = $img.offset();
-        $imgResolution.text(img.naturalWidth + "x" + img.naturalHeight)
+    var ShowResolution = function ($elem, text, offset, $imgResolution) {
+        var pos = $elem.offset();
+        $imgResolution.text(text)
             .css({
-                top: (pos.top + $img.outerHeight() - $imgResolution.outerHeight() - offset) + "px",
-                left: (pos.left + $img.outerWidth() - $imgResolution.outerWidth()) + "px"
+                top: (pos.top + $elem.outerHeight() - $imgResolution.outerHeight() - offset) + "px",
+                left: (pos.left + $elem.outerWidth() - $imgResolution.outerWidth()) + "px"
             }).show();
+    };
+
+    var ShowImgResolution = function (img, offset, $imgResolution) {
+        ShowResolution($(img), img.naturalWidth + "x" + img.naturalHeight, offset, $imgResolution);
     };
 
     var ShowVideoResolution = function (video, offset, $imgResolution) {
         var $video = $(video);
-        var pos = $video.offset();
-        $imgResolution.text($video.attr("data-resolution"))
-            .css({
-                top: (pos.top + $video.outerHeight() - $imgResolution.outerHeight() - offset) + "px",
-                left: (pos.left + $video.outerWidth() - $imgResolution.outerWidth()) + "px"
-            }).show();
+        ShowResolution($video, $video.attr("data-resolution"), offset, $imgResolution);
     };
 
     var hideImgResolutionIfVisible = function () {
@@ -54,7 +52,7 @@ $(function () {
 
     $("body").append($imgResolution)
         .on('mouseenter', 'main img', function () {
-            onHover(this, 0, ShowResolution);
+            onHover(this, 0, ShowImgResolution);
         })
         .on('mouseenter', 'main video', function () {
             onHover(this, 0, ShowVideoResolution);
