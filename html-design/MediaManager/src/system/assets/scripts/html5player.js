@@ -109,6 +109,11 @@ var SDL;
                                         subtitleTrack.src = subtitle.webVideotextTrackUrl;
                                         subtitleTrack.srclang = subtitle.cultureName.toLowerCase();
                                         subtitleTrack.label = subtitle.cultureName;
+                                        if (/firefox/i.test(navigator.userAgent)) {
+                                            subtitleTrack.addEventListener("load", function () {
+                                                video.textTracks[0].mode = "showing"; // thanks Firefox
+                                            });
+                                        }
                                         video.appendChild(subtitleTrack);
                                     });
                                 }
