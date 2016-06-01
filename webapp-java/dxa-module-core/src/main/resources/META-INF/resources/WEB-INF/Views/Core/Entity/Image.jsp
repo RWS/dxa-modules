@@ -6,4 +6,4 @@
 <jsp:useBean id="entity" type="com.sdl.webapp.common.api.model.entity.Image" scope="request"/>
 <jsp:useBean id="markup" type="com.sdl.webapp.common.markup.Markup" scope="request"/>
 
-<dxa:media media="${entity}"/>
+<dxa:media media="${entity}" cssClass="${entity.htmlClasses}"/>
