@@ -169,5 +169,24 @@ namespace Sdl.Web.Modules.MediaManager.Models
                     return base.ToHtml(widthFactor, aspect, cssClass, containerSize);
             }
         }
+
+        /// <summary>
+        /// Read properties from XHTML element.
+        /// </summary>
+        /// <param name="xhtmlElement">XHTML element</param>
+        public override void ReadFromXhtmlElement(XmlElement xhtmlElement)
+        {
+            base.ReadFromXhtmlElement(xhtmlElement);
+            PlayerType = GetOptionalAttribute(xhtmlElement, "data-playerType");
+            CustomVideoAutoplay = GetOptionalAttribute(xhtmlElement, "data-customVideoAutoplay");
+            CustomVideoSubtitles = GetOptionalAttribute(xhtmlElement, "data-customVideoSubtitles");
+            CustomVideoControls = GetOptionalAttribute(xhtmlElement, "data-customVideoControls");
+        }
+
+        private static string GetOptionalAttribute(XmlElement xmlElement, string name)
+        {
+            XmlAttribute attribute = xmlElement.GetAttributeNode(name);
+            return (attribute == null) ? null : attribute.Value;
+        }
     }
 }
