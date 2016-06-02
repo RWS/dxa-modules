@@ -1,7 +1,11 @@
 package com.sdl.dxa.modules.mediamanager.model;
 
 import org.junit.Test;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 import org.springframework.test.util.ReflectionTestUtils;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
 
 import java.util.HashMap;
 
@@ -9,6 +13,9 @@ import static com.sdl.dxa.modules.mediamanager.model.MediaManagerDistribution.CU
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class MediaManagerDistributionTest {
 
@@ -185,5 +192,45 @@ public class MediaManagerDistributionTest {
         distribution.setCustomVideoAutoPlay(null);
         //then
         assertFalse(distribution.isAutoPlayed());
+    }
+
+    @Test
+    public void shouldReadFromXhtmlElement() {
+        //given
+        MediaManagerDistribution distribution = new MediaManagerDistribution();
+        Node node = mock(Node.class);
+
+        NamedNodeMap namedNodeMap = mock(NamedNodeMap.class);
+        when(namedNodeMap.getNamedItem(anyString())).thenAnswer(new Answer<Node>() {
+            @Override
+            public Node answer(InvocationOnMock invocation) throws Throwable {
+                Node node = mock(Node.class);
+                String key = (String) invocation.getArguments()[0];
+                String result;
+                switch (key) {
+                    case "xlink:href":
+                        result = "0-1";
+                        break;
+                    case "data-multimediaFileSize":
+                        result = "42";
+                        break;
+                    default:
+                        result = key;
+                        break;
+                }
+                when(node.getNodeValue()).thenReturn(result);
+                return node;
+            }
+        });
+        when(node.getAttributes()).thenReturn(namedNodeMap);
+
+        //when
+        distribution.readFromXhtmlElement(node);
+
+        //then
+        assertEquals("data-playerType", distribution.getPlayerType());
+        assertEquals("data-customVideoAutoplay", distribution.getCustomVideoAutoPlay());
+        assertEquals("data-customVideoSubtitles", distribution.getCustomVideoSubtitles());
+        assertEquals("data-customVideoControls", distribution.getCustomVideoControls());
     }
 }

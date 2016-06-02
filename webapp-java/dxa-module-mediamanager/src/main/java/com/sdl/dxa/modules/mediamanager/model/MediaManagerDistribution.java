@@ -14,6 +14,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.util.UriComponentsBuilder;
+import org.w3c.dom.Node;
 
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -68,15 +69,15 @@ public class MediaManagerDistribution extends EclItem {
     }
 
     public String getTitle() {
-        Object first = getFromExternalMetadataOrAlternative(getExternalMetadata(), "Program/Asset/Title", null);
+        Object first = getFromExternalMetadataOrAlternative("Program/Asset/Title", null);
         if (first == null) {
-            return (String) getFromExternalMetadataOrAlternative(getExternalMetadata(), "Program/Title", super.getFileName());
+            return (String) getFromExternalMetadataOrAlternative("Program/Title", super.getFileName());
         }
         return (String) first;
     }
 
     public String getDescription() {
-        return (String) getFromExternalMetadataOrAlternative(getExternalMetadata(), "Program/Asset/Description", null);
+        return (String) getFromExternalMetadataOrAlternative("Program/Asset/Description", null);
     }
 
     @Override
@@ -86,7 +87,7 @@ public class MediaManagerDistribution extends EclItem {
 
     @Override
     public String getMimeType() {
-        return (String) getFromExternalMetadataOrAlternative(getExternalMetadata(), "Program/Asset/MIMEType", super.getMimeType());
+        return (String) getFromExternalMetadataOrAlternative("Program/Asset/MIMEType", super.getMimeType());
     }
 
     @Override
@@ -147,6 +148,16 @@ public class MediaManagerDistribution extends EclItem {
             default:
                 return super.toHtmlElement(widthFactor, aspect, cssClass, containerSize, contextPath);
         }
+    }
+
+    @Override
+    public void readFromXhtmlElement(Node xhtmlElement) {
+        super.readFromXhtmlElement(xhtmlElement);
+
+        setPlayerType(getNodeAttribute(xhtmlElement, "data-playerType"));
+        setCustomVideoAutoPlay(getNodeAttribute(xhtmlElement, "data-customVideoAutoplay"));
+        setCustomVideoSubtitles(getNodeAttribute(xhtmlElement, "data-customVideoSubtitles"));
+        setCustomVideoControls(getNodeAttribute(xhtmlElement, "data-customVideoControls"));
     }
 
     @Override
