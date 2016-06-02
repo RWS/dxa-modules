@@ -26,6 +26,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdl.Web.Modules.AzureWebApp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdl.Web.Modules.Degrees51", "51Degrees\Sdl.Web.Modules.Degrees51.csproj", "{38F7139B-5A93-4485-9BA6-83593F3D973D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdl.Web.Modules.ContextExpressions", "ContextExpressions\Sdl.Web.Modules.ContextExpressions.csproj", "{EAF4C682-E10E-4178-9131-1F7AF16287DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,12 @@ Global
 		{38F7139B-5A93-4485-9BA6-83593F3D973D}.Release_7.1|Any CPU.Build.0 = Release|Any CPU
 		{38F7139B-5A93-4485-9BA6-83593F3D973D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38F7139B-5A93-4485-9BA6-83593F3D973D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAF4C682-E10E-4178-9131-1F7AF16287DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAF4C682-E10E-4178-9131-1F7AF16287DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAF4C682-E10E-4178-9131-1F7AF16287DB}.Release_7.1|Any CPU.ActiveCfg = Release|Any CPU
+		{EAF4C682-E10E-4178-9131-1F7AF16287DB}.Release_7.1|Any CPU.Build.0 = Release|Any CPU
+		{EAF4C682-E10E-4178-9131-1F7AF16287DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAF4C682-E10E-4178-9131-1F7AF16287DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
