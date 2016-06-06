@@ -27,7 +27,7 @@ namespace Sdl.Web.Modules.Test.Models
         }
 
         [SemanticProperty("test:sideArticle")]
-        public Article SideArticle
+        public ArticleModel SideArticle
         {
             get;
             set;
