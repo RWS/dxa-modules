@@ -3,16 +3,33 @@ Uploading HTML Design Configuration
 
 This file serves as a handy guide to creating html design configurations for DXA.
 
-TODO: 
-This is an initial guide in creating and publishing html designs. More details will be added soon based on if you want 
-CSS, merged scripts or individual scripts published. Also we should automate this process by automatically zipping the
-html-design artifacts and using Core Services to upload the design package.
+All html module designs should exist in a folder with the folder name being the module name. You must make sure
+you make this folder name identical to the one used in the CME. For example 'MediaManager'. 
+
+Automated publishing
+====================
+
+Run MSBuild .\html-design\htmlToCms.proj
+
+This will iterate through all the folders in \dxa-modules\html-design
+
+The folder name is used to identify the module name. The contents of this folder should consist of the following
+structure:
+		src\
+		src\system
+		src\system\assets
+		src\system\assets\scripts
+		src\templates
+		src\templates\pages
+		src\templates\partials
+
+
+\prebuild is excluded as this is used to store the scripts/assemblies required for automatic publishing.
 
 
 Manual creation of HTML designs and publishing within the CME:
 ==============================================================
-1) Create a multimedia component inside 100 Master/Building Blocks/Modules/<ModuleName>/Admin and upload the HTML design zip package. Make sure 
-you use the ZIP File schema. You should ideally name this component '<modulename>-html-design'.
+1) Create a multimedia component inside 100 Master/Building Blocks/Modules/<ModuleName>/Admin and upload the HTML design zip package. Make sure you use the ZIP File schema. You should ideally name this component '<modulename>-html-design'.
 
 	1.1) The html design package inside the zip must be correctly structured like this:
 		src\
@@ -23,8 +40,7 @@ you use the ZIP File schema. You should ideally name this component '<modulename
 		src\templates\pages
 		src\templates\partials
 		
-		To make sure all the scripts located in the src\system\assets\scripts folder are published correctly and individually a template is used
-		that will register the scripts. An example would look like the following:
+		To make sure all the scripts located in the src\system\assets\scripts folder are published correctly and individually a template is used that will register the scripts. An example would look like the following:
 		
 		Create a file src\templates\pagea\mediamanager.hbs with the following contents:
 		
