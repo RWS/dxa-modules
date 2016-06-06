@@ -24,6 +24,19 @@
         <tag>HEAD</tag>
     </scm>
 
+    <repositories>
+        <repository>
+            <id>github-project-repo</id>
+            <url>
+                https://raw.githubusercontent.com/sdl/dxa-modules/${dxa-release-branch}/webapp-java/local-project-repo
+            </url>
+        </repository>
+        <repository>
+            <id>local-project-repo</id>
+            <url>file:///${project.basedir}/../local-project-repo</url>
+        </repository>
+    </repositories>
+
     <developers>
         <developer>
             <id>rpannekoek</id>
@@ -46,6 +59,7 @@
     <properties>
         <java-version>1.7</java-version>
         <dxa-bom.version>1.5.0-SNAPSHOT</dxa-bom.version>
+        <dxa-release-branch>release/1.5</dxa-release-branch>
     </properties>
 
     <dependencyManagement>
