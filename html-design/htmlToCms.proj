@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.5">
+
+    <PropertyGroup>
+        <!-- Input parameters -->
+        <CmsUrl>http://saintjohn11.ams.dev/</CmsUrl>
+        <TargetType>tcm:0-6-65538</TargetType>
+        <!-- Jenkins replaces spaces with '+' if parameter's value contains spaces, so this is a dirty workaround -->
+        <InternalPublications Condition="'$(Publications)' == ''">400 Example Site</InternalPublications>
+        <InternalPublications Condition="'$(Publications)' != ''">$(Publications.Replace('+', ' '))</InternalPublications>
+
+        <ProjectDirectory>$(MSBuildProjectDirectory)</ProjectDirectory>
+            
+        <!-- Tools -->
+        <PowerShellx64 Condition="'$(PROCESSOR_ARCHITECTURE)' == 'x86' AND '$(PROCESSOR_ARCHITEW6432)' != ''">C:\Windows\Sysnative\WindowsPowerShell\v1.0\powershell.exe</PowerShellx64>
+        <PowerShellx64 Condition="'$(PROCESSOR_ARCHITECTURE)' == 'x86' AND '$(PROCESSOR_ARCHITEW6432)' == ''">C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</PowerShellx64>
+        <PowerShellx64 Condition="'$(PROCESSOR_ARCHITECTURE)' != 'x86'">C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</PowerShellx64>
+	</PropertyGroup>
+
+
+	<!-- =============================================================================================================================================  -->
+	<Target Name="Build">
+		<Message Text="Start build..." Importance="high" />
+    
+		<Exec Command="&quot;$(PowerShellx64)&quot; -file prebuild\PackageAndUpload.ps1 &quot;$(CmsUrl)&quot; &quot;$(TargetType)&quot; &quot;$(InternalPublications)&quot;" WorkingDirectory="$(ProjectDirectory)" />
+
+	</Target>
+</Project>

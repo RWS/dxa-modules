@@ -52,6 +52,7 @@
         <dxa-module-mediamanager.version>${dxa-modules.version}</dxa-module-mediamanager.version>
         <dxa-module-search.version>${dxa-modules.version}</dxa-module-search.version>
         <dxa-module-smarttarget.version>${dxa-modules.version}</dxa-module-smarttarget.version>
+        <dxa-module-context-expressions>${dxa-modules.version}</dxa-module-context-expressions>
         <dxa-module-51degrees.version>${dxa-modules.version}</dxa-module-51degrees.version>
         <dxa-module-test.version>${dxa-modules.version}</dxa-module-test.version>
     </properties>
@@ -87,6 +88,12 @@
                 <groupId>com.sdl.dxa.modules</groupId>
                 <version>${dxa-module-search.version}</version>
                 <scope>runtime</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.sdl.dxa.modules</groupId>
+                <artifactId>dxa-module-context-expressions</artifactId>
+                <version>${dxa-module-context-expressions}</version>
+                <scope>compile</scope>
             </dependency>
             <dependency>
                 <groupId>com.sdl.dxa.modules</groupId>
