@@ -10,10 +10,16 @@ using IPage = DD4T.ContentModel.IPage;
 
 namespace Sdl.Web.Modules.ContextExpressions
 {
+    /// <summary>
+    /// Model Builder which enriches Entity Models (on a Page) with <see cref="ContextExpressionConditions"/> based on Component Presentation conditions in CM.
+    /// </summary>
+    /// <remarks>
+    /// This Model Builder should be configured in the modelBuilderPipeline section in Web.config to run after the <see cref="DefaultModelBuilder"/>.
+    /// </remarks>
     public class ContextExpressionModelBuilder : IModelBuilder
     {
-        private const string ContextExpressionsKey = "ContextExpressions";
 
+        #region IModelBuilder members
         public void BuildPageModel(ref PageModel pageModel, IPage page, IEnumerable<IPage> includes, Localization localization)
         {
             // Nothing to do here
@@ -24,7 +30,7 @@ namespace Sdl.Web.Modules.ContextExpressions
             using (new Tracer(entityModel, cp, localization))
             {
                 IFieldSet contextExpressionsFieldSet;
-                if (cp.ExtensionData == null || !cp.ExtensionData.TryGetValue(ContextExpressionsKey, out contextExpressionsFieldSet))
+                if (cp.ExtensionData == null || !cp.ExtensionData.TryGetValue(Constants.ContextExpressionsKey, out contextExpressionsFieldSet))
                 {
                     // No Context Expressions found; nothing to do.
                     return;
@@ -42,7 +48,7 @@ namespace Sdl.Web.Modules.ContextExpressions
                     conditions.Exclude = excludeField.Values.ToArray();
                 }
 
-                entityModel.SetExtensionData(ContextExpressionsKey, conditions);
+                entityModel.SetExtensionData(Constants.ContextExpressionsKey, conditions);
             }
         }
 
@@ -50,5 +56,6 @@ namespace Sdl.Web.Modules.ContextExpressions
         {
             // Nothing to do here
         }
+        #endregion
     }
 }
