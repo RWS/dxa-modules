@@ -1,6 +1,6 @@
 ﻿@model ArticleModel
 <div class="entity" @Html.DxaEntityMarkup()>
-    <h5>Rendered @Model with Entity View "Test:NestedArticleTest"</h5>
+    <h5>Rendered @Model with Entity View "Test:Article"</h5>
     <p>Text value of DxaEntityMarkup() @Html.DxaEntityMarkup()</p>
     <p>TestEntity1 Container size - @ViewBag.ContainerSize</p>
     <table>
@@ -18,7 +18,7 @@
         </tr>
         <tr>
             <td>SideArticle</td>
-            <td @Html.DxaPropertyMarkup(() => Model.SideArticle)>@Model.SideArticle</td>
+            <td @Html.DxaPropertyMarkup(() => Model.SideArticle)>@Model.SideArticle.Heading</td>
         </tr>
     </table>
 </div>
