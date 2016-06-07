@@ -8,7 +8,6 @@ This script is intended to be included ("dot-sourced") in another PowerShell scr
 
 function Add-ModelBuilder($modelBuilderType, $configDoc) 
 {
-
     $modelBuilderPipelineElement = $configDoc.configuration.modelBuilderPipeline
     $modelBuilderElement = $modelBuilderPipelineElement.SelectSingleNode("add[@type='$modelBuilderType']")
 
@@ -25,7 +24,8 @@ function Add-ModelBuilder($modelBuilderType, $configDoc)
     }
 }
 
-function Add-UnityDeclaration($type, $name, $configDoc) {
+function Add-UnityDeclaration($type, $name, $configDoc) 
+{
 	$existing = $configDoc.SelectSingleNode("/unity/*[local-name()='" + $type + "' and @name='" + $name + "']")
 	if ($existing)
 	{
@@ -37,10 +37,12 @@ function Add-UnityDeclaration($type, $name, $configDoc) {
 		$item = $configDoc.CreateElement($type)
 		$item.SetAttribute("name",$name)
 		$configDoc.unity.InsertBefore($item, $aliases) | Out-Null
+        Write-Host "Added declaration for $type '$name'."
 	}
 }
 
-function Set-UnityTypeMapping($type, $mapTo, $configDoc) {
+function Set-UnityTypeMapping($type, $mapTo, $configDoc) 
+{
 	$mainContainer = $configDoc.unity.containers.container | ? {$_.name -eq "main"}
 	if (!$mainContainer) 
 	{
@@ -48,7 +50,11 @@ function Set-UnityTypeMapping($type, $mapTo, $configDoc) {
     }
 
 	$typeElement = $mainContainer.types.type | ? {$_.type -eq $type}
-	if (!$typeElement)
+	if ($typeElement)
+    {
+        Write-Host "Found existing type mapping: '$type' -> '$mapTo'"
+    }
+    else
 	{
 		$typeElement = $configDoc.CreateElement("type")
 		$mainContainer.types.AppendChild($typeElement) | Out-Null
