@@ -57,6 +57,7 @@
     </Compile>
     <Compile Include="Constants.cs" />
     <Compile Include="ContextExpressionConditions.cs" />
+    <Compile Include="ContextExpressionException.cs" />
     <Compile Include="ContextExpressionModelBuilder.cs" />
     <Compile Include="ContextExpressionEvaluator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
