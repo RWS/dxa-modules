@@ -78,7 +78,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Areas\Test\Views\Entity\NestedArticleTest.cshtml" />
+    <None Include="Areas\Test\Views\Entity\Article.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestFlickrImage.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestEclEntity.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestEntityWithEclLink.cshtml" />

@@ -3,7 +3,7 @@
 
     <PropertyGroup>
         <!-- Input parameters -->
-        <CmsUrl>http://saintjohn11.ams.dev/</CmsUrl>
+        <CmsUrl>http://dxadevweb8.ams.dev/</CmsUrl>
         <TargetType>tcm:0-6-65538</TargetType>
         <!-- Jenkins replaces spaces with '+' if parameter's value contains spaces, so this is a dirty workaround -->
         <InternalPublications Condition="'$(Publications)' == ''">400 Example Site</InternalPublications>
