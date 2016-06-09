@@ -119,7 +119,7 @@ namespace Sdl.Web.Modules.ContextExpressions
                 }
                 catch (ContextExpressionException ex)
                 {
-                    Log.Error("{0}. Ignoring Context Expression condition.", ex.Message);
+                    Log.Warn("{0}. Ignoring Context Expression condition.", ex.Message);
                 }
             }
 
