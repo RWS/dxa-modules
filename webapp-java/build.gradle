@@ -52,6 +52,7 @@ task build << {
             "dxa-module-smarttarget-2013sp1",
             "dxa-module-smarttarget-web8",
             "dxa-module-51degrees",
+            "dxa-module-context-expressions",
             "dxa-module-test"
     ].each {
         try {

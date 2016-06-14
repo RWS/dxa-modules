@@ -21,6 +21,10 @@ Param(
 #Terminate script on first occurred exception
 $ErrorActionPreference = "Stop"
 
+#Include functions from DxaDeployUtil.ps1
+$PSScriptDir = Split-Path $MyInvocation.MyCommand.Path
+. (Join-Path $PSScriptDir "..\DxaDeployUtils.ps1")
+
 # Update Web.config
 function Add-ExperimentTrackingHandler($configDoc)
 {
@@ -71,25 +75,6 @@ function Add-IgnoreUrl($ignoreUrl, $configDoc)
         $ignoreUrlsElement.SetAttribute("value", $ignoreUrl)
         $appSettingsElement.AppendChild($ignoreUrlsElement) | Out-Null
         Write-Host "Added '$ignoreUrlsKey' app setting with value '$ignoreUrl'."
-    }
-}
-
-function Add-ModelBuilder($modelBuilderType, $configDoc) 
-{
-
-    $modelBuilderPipelineElement = $configDoc.configuration.modelBuilderPipeline
-    $modelBuilderElement = $modelBuilderPipelineElement.SelectSingleNode("add[@type='$modelBuilderType']")
-
-	if ($modelBuilderElement)
-	{
-		Write-Host "Model Builder '$modelBuilderType' is already configured."
-	}
-	else
-	{ 
-        $modelBuilderElement = $configDoc.CreateElement("add")
-		$modelBuilderElement.SetAttribute("type", $modelBuilderType)
-		$modelBuilderPipelineElement.AppendChild($modelBuilderElement) | Out-Null
-		Write-Host "Added Model Builder '$modelBuilderType'."
     }
 }
 

@@ -12,48 +12,17 @@ Param(
     $searchProviderType = "SolrProvider"
 )
 
-##Unity.config
-function AddAssemblyOrNamespaceToUnityConfig ($type, $name) {
-	[xml]$config = Get-Content $distDestination\Unity.config -ErrorAction Stop
-	$existing = $config.SelectSingleNode("/unity/*[local-name()='" + $type + "' and @name='" + $name + "']")
-	if ($existing -ne $null)
-	{
-		Write-Output ("Unity.config already contains " + $type + " : " + $name)
-	}
-	else
-	{
-		$aliases = $config.unity.typeAliases
-		$item = $config.CreateElement($type)
-		$item.SetAttribute("name",$name)
-		$config.unity.InsertBefore($item, $aliases)
-		$config.Save("$distDestination\Unity.config")
-	}
-}
+#Terminate script on first occurred exception
+$ErrorActionPreference = "Stop"
 
-function AddTypeToUnityConfig ($type, $mapTo) {
-	[xml]$config = Get-Content $distDestination\Unity.config -ErrorAction Stop
-	$mainContainer = $config.unity.containers.container | ?{$_.name -eq "main"}
-	if ($mainContainer -ne $null) 
-	{
-		$existing = $mainContainer.types.type | ?{$_.type -eq $type}
-		if ($existing -ne $null)
-		{
-			Write-Output ("Unity.config already contains type: " + $type)
-		}
-		else
-		{
-			$item = $config.CreateElement("type")
-			$item.SetAttribute("type",$type)
-			$item.SetAttribute("mapTo",$mapTo)
-			$mainContainer.types.AppendChild($item)
-			$config.Save("$distDestination\Unity.config")
-		}
-	}
-}
+#Include functions from DxaDeployUtil.ps1
+$PSScriptDir = Split-Path $MyInvocation.MyCommand.Path
+. (Join-Path $PSScriptDir "..\DxaDeployUtils.ps1")
 
-
-AddAssemblyOrNamespaceToUnityConfig "assembly" "Sdl.Web.Modules.Search"
-AddAssemblyOrNamespaceToUnityConfig "namespace" "Sdl.Web.Modules.Search.Providers"
-AddTypeToUnityConfig "ISearchProvider" "SolrProvider"
-
-Write-Output ("Updated 'Unity.config' file for Search module")
+$unityConfigFile = "$distDestination\Unity.config"
+Write-Host "Updating '$unityConfigFile' ..."
+[xml] $unityConfigDoc = Get-Content $unityConfigFile
+Add-UnityDeclaration "assembly" "Sdl.Web.Modules.Search" $unityConfigDoc
+Add-UnityDeclaration "namespace" "Sdl.Web.Modules.Search.Providers" $unityConfigDoc
+Set-UnityTypeMapping "ISearchProvider" $searchProviderType $unityConfigDoc
+$unityConfigDoc.Save($unityConfigFile)
