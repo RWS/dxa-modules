@@ -202,7 +202,6 @@ namespace Sdl.Web.Modules.Degrees51
             foreach (IAspectMap x in _properties)
             {
                 object v = x.Value;
-                Log.Debug(string.Format("Context claim property {0}.{1} = {2}", x.Aspect, x.Name, v != null ? v.ToString() : "<NULL>"));
                 claims.Add(string.Format("{0}.{1}", x.Aspect, x.Name), v);
             }
 
