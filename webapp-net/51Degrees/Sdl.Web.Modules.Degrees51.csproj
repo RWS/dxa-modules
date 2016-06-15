@@ -39,6 +39,7 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Sdl.Web.Common, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.4.0\lib\net452\Sdl.Web.Common.dll</HintPath>
@@ -47,6 +48,7 @@
     <Reference Include="Sdl.Web.Context.Api, Version=8.1.0.1232, Culture=neutral, PublicKeyToken=ddfc895746e5ee6b, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Sdl.Web.Context.Client.8.1.1\lib\net45\Sdl.Web.Context.Api.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Sdl.Web.Mvc, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.4.0\lib\net452\Sdl.Web.Mvc.dll</HintPath>
@@ -59,6 +61,7 @@
     <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.1.2\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -85,6 +88,12 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Sdl.Dxa.Framework.Web8.1.4.0\build\net452\Sdl.Dxa.Framework.Web8.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Sdl.Dxa.Framework.Web8.1.4.0\build\net452\Sdl.Dxa.Framework.Web8.targets'))" />
   </Target>
+  <PropertyGroup>
+    <PostBuildEvent>REM Deploy build artifacts to DXA Site (on development machines with DXA_SITE_DIR environment variable set)
+if defined DXA_SITE_DIR (
+xcopy "$(TargetDir)*.*" "%25DXA_SITE_DIR%25\bin" /Y
+)</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
