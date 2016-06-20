@@ -6,6 +6,7 @@ import com.sdl.webapp.common.api.contextengine.ContextClaimsProvider;
 import com.sdl.webapp.common.api.model.EntityModel;
 import com.sdl.webapp.common.api.model.ViewModel;
 import com.sdl.webapp.common.exceptions.DxaException;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -37,7 +38,7 @@ public class ContextExpressionEntityEvaluator implements ConditionalEntityEvalua
      * based on the conditions specified on the Entity Model and the context.</p>
      */
     @Override
-    public boolean includeEntity(@NotNull EntityModel entity) {
+    public boolean includeEntity(@NonNull EntityModel entity) {
         if (entity.getExtensionData() == null || !entity.getExtensionData().containsKey(contextExpressionsKey)) {
             log.debug("Entity {} is included because there is no extension data with a key {}", entity, contextExpressionsKey);
             return true;
@@ -75,7 +76,7 @@ public class ContextExpressionEntityEvaluator implements ConditionalEntityEvalua
         return true;
     }
 
-    private boolean shouldBeExcluded(@Nullable Set<String> cxs, @NotNull Map<String, Object> contextClaims, @NotNull Mode mode) {
+    private boolean shouldBeExcluded(@Nullable Set<String> cxs, @NonNull Map<String, Object> contextClaims, @NonNull Mode mode) {
         //if set is null, then we don't process, and return FALSE for "excluded"
         if (cxs == null) {
             return false;
@@ -94,7 +95,7 @@ public class ContextExpressionEntityEvaluator implements ConditionalEntityEvalua
     }
 
     @NotNull
-    private Set<String> filterCxsByClaims(@NotNull Set<String> cxs, @NotNull Map<String, Object> contextClaims) {
+    private Set<String> filterCxsByClaims(@NonNull Set<String> cxs, @NonNull Map<String, Object> contextClaims) {
         Set<String> filtered = new HashSet<>();
         for (String cx : cxs) {
             if (contextClaims.containsKey(cx)) {
@@ -104,7 +105,7 @@ public class ContextExpressionEntityEvaluator implements ConditionalEntityEvalua
         return filtered;
     }
 
-    private boolean anyCxIsTrue(@NotNull Set<String> cxs, @NotNull Map<String, Object> contextClaims) {
+    private boolean anyCxIsTrue(@NonNull Set<String> cxs, @NonNull Map<String, Object> contextClaims) {
         //also covers if set is empty, then we don't iterate
         for (String cx : cxs) {
             Object o = contextClaims.get(cx);

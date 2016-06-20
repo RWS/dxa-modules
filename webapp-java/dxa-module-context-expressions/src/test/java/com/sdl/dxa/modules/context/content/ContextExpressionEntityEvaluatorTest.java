@@ -82,9 +82,8 @@ public class ContextExpressionEntityEvaluatorTest {
         assertTrue("No ContextExpressions = include entity", includeEntity);
     }
 
-    @SuppressWarnings("ConstantConditions")
-    @Test(expected = IllegalArgumentException.class)
-    public void shouldIAEIfEntityIsNull() {
+    @Test(expected = NullPointerException.class)
+    public void shouldNPEIfEntityIsNull() {
         //given
         ContextExpressionEntityEvaluator evaluator = new ContextExpressionEntityEvaluator();
 
