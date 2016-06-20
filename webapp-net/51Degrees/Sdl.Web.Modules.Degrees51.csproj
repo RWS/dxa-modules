@@ -47,7 +47,7 @@
     </Reference>
     <Reference Include="Sdl.Web.Context.Api, Version=8.1.0.1232, Culture=neutral, PublicKeyToken=ddfc895746e5ee6b, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Sdl.Web.Context.Client.8.1.1\lib\net45\Sdl.Web.Context.Api.dll</HintPath>
+      <HintPath>..\packages\Sdl.Web.Context.Client.8.2.0\lib\net45\Sdl.Web.Context.Api.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sdl.Web.Mvc, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
