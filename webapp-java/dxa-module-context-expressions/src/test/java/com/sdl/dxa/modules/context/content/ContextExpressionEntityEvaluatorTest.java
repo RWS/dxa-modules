@@ -38,7 +38,7 @@ public class ContextExpressionEntityEvaluatorTest {
                         "cx.ios", false));
         ReflectionTestUtils.setField(entityEvaluator, "contextClaimsProvider", contextClaimsProvider);
 
-        EvaluatorWrapper eval = new EvaluatorWrapper(entityEvaluator);
+        TestEvaluatorWrapper eval = new TestEvaluatorWrapper(entityEvaluator);
 
         assertTrue("Any TRUE include without excludes = include", eval.with(newHashSet("cx.apple", "cx.android"), null));
         assertTrue("NO TRUE exclude, without includes = include", eval.with(null, newHashSet("cx.ios")));
@@ -82,8 +82,9 @@ public class ContextExpressionEntityEvaluatorTest {
         assertTrue("No ContextExpressions = include entity", includeEntity);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void shouldNPEIfEntityIsNull() {
+    @SuppressWarnings("ConstantConditions")
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldIAEIfEntityIsNull() {
         //given
         ContextExpressionEntityEvaluator evaluator = new ContextExpressionEntityEvaluator();
 
@@ -146,11 +147,11 @@ public class ContextExpressionEntityEvaluatorTest {
         boolean includeEntity = evaluator.includeEntity(entity);
 
         //then
-        assertTrue("ComtextClaims exception = include entity", includeEntity);
+        assertTrue("ContextClaims exception = include entity", includeEntity);
     }
 
     @AllArgsConstructor
-    private static class EvaluatorWrapper {
+    private static class TestEvaluatorWrapper {
 
         private ContextExpressionEntityEvaluator evaluator;
 
