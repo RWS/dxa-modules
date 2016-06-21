@@ -78,13 +78,15 @@ public class ContextExpressionEntityEvaluator implements ConditionalEntityEvalua
 
     private boolean shouldBeExcluded(@Nullable Set<String> cxs, @NonNull Map<String, Object> contextClaims, @NonNull Mode mode) {
         //if set is null, then we don't process, and return FALSE for "excluded"
-        if (cxs == null) {
+        if (cxs == null || cxs.isEmpty()) {
+            log.debug("Context expression set is empty or null, ignoring");
             return false;
         }
 
         //ignore any unknown claims
         Set<String> filtered = filterCxsByClaims(cxs, contextClaims);
         if (filtered.isEmpty()) {
+            log.debug("Filtered context expressions set is empty, meaning expressions are not in context claims");
             //if set is empty, then we don't process, and return FALSE for "excluded"
             return false;
         }
