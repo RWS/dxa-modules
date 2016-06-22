@@ -123,8 +123,18 @@ var SDL;
 
     $(document).ready(function() { 
         $("div[id|='carousel']").each(function (index, value) {
-			if($(this).data('mm-url'))
+			if($(this).data('mm-url')) {
 				sdlmediaCarousel({ selector: $(this), url: $(this).data('mm-url') });
+                $(this).swipe( {            
+                    swipeLeft:function(event, direction, distance, duration, fingerCount) {
+                        $(this).find(".carousel.slide").carousel('next');
+                    },
+                    swipeRight: function() {
+                        $(this).find(".carousel.slide").carousel('prev');
+                    },
+                    threshold:75
+                });
+            }
         });
     });
 }(jQuery));
