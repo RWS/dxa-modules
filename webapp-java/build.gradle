@@ -43,6 +43,7 @@ task help << {
 task build << {
     greet()
 
+    def beforeAll = ["dxa-module-smarttarget-abstract"]
     def parallel = [
             "dxa-bom-modules",
             "dxa-module-cid",
@@ -53,16 +54,14 @@ task build << {
             "dxa-module-51degrees",
             "dxa-module-context-expressions",
             "dxa-module-test",
-            "dxa-module-smarttarget-abstract"
-    ]
-    def oneByOne = [
             "dxa-module-smarttarget-2013sp1",
             "dxa-module-smarttarget-web8"
     ]
+    def oneByOne = []
 
     def commandToExecute = getCommandToExecute()
 
-    def pool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() + 1)
+    def pool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors())
 
     def failed = []
     def tasks = []
@@ -76,6 +75,9 @@ task build << {
         }
     }
 
+    beforeAll.each {
+        processOutput(pool.submit(new BuildTask(name: it, commandToExecute: commandToExecute)).get())
+    }
     parallel.each {
         tasks << new BuildTask(name: it, commandToExecute: commandToExecute)
     }
@@ -83,7 +85,6 @@ task build << {
     for (Future<Output> buildResult : futures) {
         processOutput(buildResult.get())
     }
-
     oneByOne.each {
         processOutput(pool.submit(new BuildTask(name: it, commandToExecute: commandToExecute)).get())
     }
