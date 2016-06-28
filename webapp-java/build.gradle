@@ -57,7 +57,6 @@ task build << {
             "dxa-module-smarttarget-2013sp1",
             "dxa-module-smarttarget-web8"
     ]
-    def oneByOne = []
 
     def commandToExecute = getCommandToExecute()
 
@@ -84,9 +83,6 @@ task build << {
     List<Future<Output>> futures = pool.invokeAll(tasks)
     for (Future<Output> buildResult : futures) {
         processOutput(buildResult.get())
-    }
-    oneByOne.each {
-        processOutput(pool.submit(new BuildTask(name: it, commandToExecute: commandToExecute)).get())
     }
 
     if (failed.size() > 0) {
