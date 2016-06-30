@@ -20,7 +20,7 @@
     <properties>
         <dxa-bom.version>1.6.0-SNAPSHOT</dxa-bom.version>
         <dxa-bom-2013sp1.version>1.6.0-SNAPSHOT</dxa-bom-2013sp1.version>
-        <dxa-release-branch>release/1.5</dxa-release-branch>
+        <dxa-release-branch>release/1.6</dxa-release-branch>
         <java-version>1.7</java-version>
         <dxa-module-smarttarget.version>${project.version}</dxa-module-smarttarget.version>
     </properties>
