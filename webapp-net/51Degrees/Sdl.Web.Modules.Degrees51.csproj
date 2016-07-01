@@ -45,10 +45,10 @@
       <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.5.0\lib\net452\Sdl.Web.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Sdl.Web.Context.Api, Version=8.1.0.1232, Culture=neutral, PublicKeyToken=ddfc895746e5ee6b, processorArchitecture=MSIL">
+    <Reference Include="Sdl.Web.Context.Api">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Sdl.Web.Context.Client.8.2.0\lib\net45\Sdl.Web.Context.Api.dll</HintPath>
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Sdl.Web.Mvc">
       <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.5.0\lib\net452\Sdl.Web.Mvc.dll</HintPath>
