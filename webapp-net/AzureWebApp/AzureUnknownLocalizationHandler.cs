@@ -43,9 +43,9 @@ namespace Sdl.Web.Modules.AzureWebApp
                 }
 
                 // If all is well, WebRequestContext.Localization should resolve now, but it will take a while before the Discovery Service cache is updated:
-                for (int retry = 0; retry < 32; retry++)
+                for (int retry = 1; retry <= 10; retry++)
                 {
-                    System.Threading.Thread.Sleep(5000);
+                    System.Threading.Thread.Sleep(1000);
                     try
                     {
                         return WebRequestContext.Localization;
