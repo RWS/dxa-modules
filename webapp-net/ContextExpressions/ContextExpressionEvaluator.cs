@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web;
-using Sdl.Web.Common;
 using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Interfaces;
 using Sdl.Web.Common.Logging;
@@ -35,12 +34,14 @@ namespace Sdl.Web.Modules.ContextExpressions
 
                 IDictionary<string, object> contextClaims = GetCachedContextClaims();
 
-                if (!EvaluateContextExpressionClaims(ceConditions.Include, true, contextClaims, entity))
+                if (!EvaluateContextExpressionClaims(ceConditions.Include, true, contextClaims))
                 {
+                    Log.Debug("Include Context Expression conditions are not satisfied; suppressing Entity [{0}].", entity);
                     return false;
                 }
-                if (!EvaluateContextExpressionClaims(ceConditions.Exclude, false, contextClaims, entity))
+                if (!EvaluateContextExpressionClaims(ceConditions.Exclude, false, contextClaims))
                 {
+                    Log.Debug("Exclude Context Expression conditions are not satisfied; suppressing Entity [{0}].", entity);
                     return false;
                 }
 
@@ -86,13 +87,14 @@ namespace Sdl.Web.Modules.ContextExpressions
             return result;
         }
 
-        private static bool EvaluateContextExpressionClaims(string[] names, bool include, IDictionary<string, object> contextClaims, EntityModel entity)
+        private static bool EvaluateContextExpressionClaims(string[] names, bool include, IDictionary<string, object> contextClaims)
         {
-            if (names == null)
+            if (names == null || names.Length == 0)
             {
                 return true;
             }
 
+            IList<bool> resolvedContextClaimValues = new List<bool>(names.Length);
             foreach (string name in names)
             {
                 try
@@ -110,12 +112,7 @@ namespace Sdl.Web.Modules.ContextExpressions
                             );
                     }
 
-                    if ((bool) claimValue != include)
-                    {
-                        Log.Debug("Context Claim for {0} Context Expression '{1}' is '{2}'; suppressing Entity [{3}]",
-                            include ? "Include" : "Exclude", name, claimValue, entity);
-                        return false;
-                    }
+                    resolvedContextClaimValues.Add((bool) claimValue);
                 }
                 catch (ContextExpressionException ex)
                 {
@@ -123,7 +120,16 @@ namespace Sdl.Web.Modules.ContextExpressions
                 }
             }
 
-            return true;
+            if (!resolvedContextClaimValues.Any())
+            {
+                // We couldn't resolve any of the conditions. Keep the Entity.
+                return true;
+            }
+
+            // Any matching Include condition is enough to keep the Entity.
+            // Any matching Exclude condition is enough to suppress the Entity.
+            bool matchingConditionFound = resolvedContextClaimValues.Any(val => val);
+            return include ? matchingConditionFound : !matchingConditionFound;
         }
     }
 }
