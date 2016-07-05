@@ -25,6 +25,8 @@ task buildModules(dependsOn: 'maven.run') << {
     println "Build for DXA Modules"
 }
 
+task build(dependsOn: 'buildModules')
+
 if (project.hasProperty('command')) {
     maven.command = project.command
 }
