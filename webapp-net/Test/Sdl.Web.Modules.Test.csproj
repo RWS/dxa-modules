@@ -64,6 +64,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\EmbedParentModel.cs" />
+    <Compile Include="Models\EmbedChildModel.cs" />
     <Compile Include="Models\CustomPageModel.cs" />
     <Compile Include="Models\CustomRegionModel.cs" />
     <Compile Include="Models\ArticleModel.cs" />
@@ -78,6 +80,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Areas\Test\Views\Entity\EmbedParent.cshtml" />
     <None Include="Areas\Test\Views\Entity\Article.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestFlickrImage.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestEclEntity.cshtml" />
