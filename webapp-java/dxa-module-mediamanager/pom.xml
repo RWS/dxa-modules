@@ -11,7 +11,7 @@
 
     <groupId>com.sdl.dxa.modules</groupId>
     <artifactId>dxa-module-mediamanager</artifactId>
-    <version>1.5.0-SNAPSHOT</version>
+    <version>1.6.0-SNAPSHOT</version>
 
     <name>DXA Modules - MediaManager</name>
     <description>Implementation of DXA MediaManager module</description>
@@ -44,7 +44,7 @@
 
     <properties>
         <java-version>1.7</java-version>
-        <dxa-bom.version>1.5.0-SNAPSHOT</dxa-bom.version>
+        <dxa-bom.version>1.6.0-SNAPSHOT</dxa-bom.version>
     </properties>
 
     <dependencyManagement>

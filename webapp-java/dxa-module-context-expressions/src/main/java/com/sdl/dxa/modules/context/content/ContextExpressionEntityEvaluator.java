@@ -2,6 +2,7 @@ package com.sdl.dxa.modules.context.content;
 
 import com.sdl.dxa.modules.context.model.Conditions;
 import com.sdl.webapp.common.api.content.ConditionalEntityEvaluator;
+import com.sdl.webapp.common.api.contextengine.ContextClaims;
 import com.sdl.webapp.common.api.contextengine.ContextClaimsProvider;
 import com.sdl.webapp.common.api.model.EntityModel;
 import com.sdl.webapp.common.api.model.ViewModel;
@@ -78,13 +79,15 @@ public class ContextExpressionEntityEvaluator implements ConditionalEntityEvalua
 
     private boolean shouldBeExcluded(@Nullable Set<String> cxs, @NonNull Map<String, Object> contextClaims, @NonNull Mode mode) {
         //if set is null, then we don't process, and return FALSE for "excluded"
-        if (cxs == null) {
+        if (cxs == null || cxs.isEmpty()) {
+            log.debug("Context expression set is empty or null, ignoring");
             return false;
         }
 
         //ignore any unknown claims
         Set<String> filtered = filterCxsByClaims(cxs, contextClaims);
         if (filtered.isEmpty()) {
+            log.debug("Filtered context expressions set is empty, meaning expressions are not in context claims");
             //if set is empty, then we don't process, and return FALSE for "excluded"
             return false;
         }
@@ -95,24 +98,22 @@ public class ContextExpressionEntityEvaluator implements ConditionalEntityEvalua
     }
 
     @NotNull
-    private Set<String> filterCxsByClaims(@NonNull Set<String> cxs, @NonNull Map<String, Object> contextClaims) {
+    private Set<String> filterCxsByClaims(@NonNull Set<String> contextExpressions, @NonNull Map<String, Object> contextClaims) {
         Set<String> filtered = new HashSet<>();
-        for (String cx : cxs) {
-            if (contextClaims.containsKey(cx)) {
-                filtered.add(cx);
+        for (String claimName : contextExpressions) {
+            if (contextClaims.containsKey(claimName)) {
+                filtered.add(claimName);
             }
         }
         return filtered;
     }
 
-    private boolean anyCxIsTrue(@NonNull Set<String> cxs, @NonNull Map<String, Object> contextClaims) {
+    private boolean anyCxIsTrue(@NonNull Set<String> contextExpressions, @NonNull Map<String, Object> contextClaims) {
         //also covers if set is empty, then we don't iterate
-        for (String cx : cxs) {
-            Object o = contextClaims.get(cx);
-            if (o instanceof Boolean) {
-                if (((Boolean) o)) {
-                    return true;
-                }
+        for (String claimName : contextExpressions) {
+            Boolean claimValue = ContextClaims.castClaim(contextClaims.get(claimName), Boolean.class);
+            if (claimValue != null && claimValue) {
+                return true;
             }
         }
         //set is empty or all conditions are not satisfied
