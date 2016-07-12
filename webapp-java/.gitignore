@@ -12,3 +12,5 @@ cd_licenses.xml
 temp/
 build.log
 .gradle
+build/
+logs/
