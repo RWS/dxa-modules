@@ -28,6 +28,9 @@ task buildModules(dependsOn: 'maven.run') << {
 if (project.hasProperty('command')) {
     maven.command = project.command
 }
+if (project.hasProperty('removeMavenProperties')) {
+    maven.mavenProperties = ''
+}
 maven.projects = [
         ["dxa-module-smarttarget-abstract"],
         [
