@@ -34,7 +34,6 @@ if (project.hasProperty('mavenProperties')) {
 maven.projects = [
         ["dxa-module-smarttarget-abstract"],
         [
-                "dxa-bom-modules",
                 "dxa-module-cid",
                 "dxa-module-core",
                 "dxa-module-googleanalytics",
