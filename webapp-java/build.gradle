@@ -8,8 +8,6 @@ buildscript {
     }
 }
 
-apply plugin: 'com.sdl.dxa.builder'
-
 defaultTasks 'buildModules'
 
 task wrapper(type: Wrapper) {
@@ -17,32 +15,29 @@ task wrapper(type: Wrapper) {
     distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
 }
 
-task help(dependsOn: 'maven.help') << {
-    println "Builds ${maven.projects}"
-}
+task help(type: com.sdl.dxa.maven.MavenHelpTask)
 
-task buildModules(dependsOn: 'maven.run') << {
-    println "Build for DXA Modules"
-}
+task buildModules(type: com.sdl.dxa.maven.MavenBuildTask) {
+    configurations = [
+            ["dxa-module-smarttarget-abstract"],
+            [
+                    "dxa-module-cid",
+                    "dxa-module-core",
+                    "dxa-module-googleanalytics",
+                    "dxa-module-mediamanager",
+                    "dxa-module-search",
+                    "dxa-module-51degrees",
+                    "dxa-module-context-expressions",
+                    "dxa-module-test",
+                    "dxa-module-smarttarget-2013sp1",
+                    "dxa-module-smarttarget-web8"
+            ]
+    ]
 
-if (project.hasProperty('command')) {
-    maven.command = project.command
+    if (project.hasProperty('command')) {
+        command = project.command
+    }
+    if (project.hasProperty('mavenProperties')) {
+        mavenProperties = project.mavenProperties
+    }
 }
-if (project.hasProperty('mavenProperties')) {
-    maven.mavenProperties = project.mavenProperties
-}
-maven.projects = [
-        ["dxa-module-smarttarget-abstract"],
-        [
-                "dxa-module-cid",
-                "dxa-module-core",
-                "dxa-module-googleanalytics",
-                "dxa-module-mediamanager",
-                "dxa-module-search",
-                "dxa-module-51degrees",
-                "dxa-module-context-expressions",
-                "dxa-module-test",
-                "dxa-module-smarttarget-2013sp1",
-                "dxa-module-smarttarget-web8"
-        ]
-]
