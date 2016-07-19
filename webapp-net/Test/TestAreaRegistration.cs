@@ -48,10 +48,12 @@ namespace Sdl.Web.Modules.Test
             RegisterViewModel("TestEntityWithEclLink", typeof(TestEntityWithEclLink));
             RegisterViewModel("TestFlickrImage", typeof(TestFlickrImageModel));
             RegisterViewModel("Article", typeof(ArticleModel));
+            RegisterViewModel("EmbedParent", typeof(EmbedParentModel));
 
             // Entity Models without associated View
             RegisterViewModel(typeof(TestEntityModel2));
             RegisterViewModel(typeof(TestEntityModel3));
+            RegisterViewModel(typeof(EmbedChildModel));
         }
     }
 }
