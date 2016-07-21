@@ -52,8 +52,8 @@ We intend to follow Gitflow (http://nvie.com/posts/a-successful-git-branching-mo
 
 Please submit your pull requests on develop. In the near future we intend to push our changes to develop and master from our internal repositories, so you can follow our development process.
 
-Prerequisites
--------------
+Prerequisites (Java)
+--------------------
 For SDL Tridion 2013 SP1, you need these artifacts (`groudId : artifactId : version`) to be installed into your Maven repository:
  - `com.tridion : cd_ambient : 7.1.0`
  - `com.tridion : cd_broker : 7.1.0`
