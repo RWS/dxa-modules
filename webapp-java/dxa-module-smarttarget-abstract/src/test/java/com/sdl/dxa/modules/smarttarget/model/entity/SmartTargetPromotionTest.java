@@ -2,9 +2,7 @@ package com.sdl.dxa.modules.smarttarget.model.entity;
 
 import com.google.common.collect.ImmutableMap;
 import com.sdl.webapp.common.api.model.EntityModel;
-import com.sdl.webapp.common.api.model.entity.Article;
-import com.sdl.webapp.common.api.model.entity.Download;
-import com.sdl.webapp.common.api.model.entity.Image;
+import com.sdl.webapp.common.api.model.entity.AbstractEntityModel;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 
@@ -55,12 +53,12 @@ public class SmartTargetPromotionTest {
         smartTargetItems.add(item);
         smartTargetItems.add(item2);
 
-        Article article = new Article();
-        Image image = new Image();
-        when(item.getEntity()).thenReturn(article, image);
+        Test1 test1 = new Test1();
+        Test2 test2 = new Test2();
+        when(item.getEntity()).thenReturn(test1, test2);
 
-        Download download = new Download();
-        when(item2.getEntity()).thenReturn(download);
+        Test3 test3 = new Test3();
+        when(item2.getEntity()).thenReturn(test3);
 
         SmartTargetPromotion promotion = new SmartTargetPromotion();
         promotion.setItems(smartTargetItems);
@@ -69,6 +67,18 @@ public class SmartTargetPromotionTest {
         Collection<EntityModel> entityModels = promotion.getEntityModels();
 
         //then
-        assertThat(entityModels, Matchers.<EntityModel>hasItems(article, image, download));
+        assertThat(entityModels, Matchers.<EntityModel>hasItems(test1, test2, test3));
+    }
+
+    private static class Test1 extends AbstractEntityModel {
+
+    }
+
+    private static class Test2 extends AbstractEntityModel {
+
+    }
+
+    private static class Test3 extends AbstractEntityModel {
+
     }
 }

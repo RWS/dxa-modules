@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import com.sdl.dxa.modules.context.model.Conditions;
 import com.sdl.webapp.common.api.contextengine.ContextClaimsProvider;
 import com.sdl.webapp.common.api.model.EntityModel;
-import com.sdl.webapp.common.api.model.entity.Article;
+import com.sdl.webapp.common.api.model.entity.AbstractEntityModel;
 import com.sdl.webapp.common.exceptions.DxaException;
 import lombok.AllArgsConstructor;
 import org.junit.Test;
@@ -60,7 +60,7 @@ public class ContextExpressionEntityEvaluatorTest {
         ContextExpressionEntityEvaluator evaluator = new ContextExpressionEntityEvaluator();
 
         //when
-        boolean includeEntity = evaluator.includeEntity(new Article());
+        boolean includeEntity = evaluator.includeEntity(new TestEntity());
 
         //then
         assertTrue("No extension data = include entity", includeEntity);
@@ -72,7 +72,7 @@ public class ContextExpressionEntityEvaluatorTest {
         ContextExpressionEntityEvaluator evaluator = new ContextExpressionEntityEvaluator();
         ReflectionTestUtils.setField(evaluator, "contextExpressionsKey", CONTEXT_EXPRESSIONS_KEY);
 
-        Article entity = new Article();
+        TestEntity entity = new TestEntity();
         entity.setExtensionData(Collections.<String, Object>emptyMap());
 
         //when
@@ -101,7 +101,7 @@ public class ContextExpressionEntityEvaluatorTest {
         ContextExpressionEntityEvaluator evaluator = new ContextExpressionEntityEvaluator();
         ReflectionTestUtils.setField(evaluator, "contextExpressionsKey", CONTEXT_EXPRESSIONS_KEY);
 
-        Article entity = new Article();
+        TestEntity entity = new TestEntity();
         entity.setExtensionData(new HashMap<String, Object>() {{
             put(CONTEXT_EXPRESSIONS_KEY, null);
         }});
@@ -119,7 +119,7 @@ public class ContextExpressionEntityEvaluatorTest {
         ContextExpressionEntityEvaluator evaluator = new ContextExpressionEntityEvaluator();
         ReflectionTestUtils.setField(evaluator, "contextExpressionsKey", CONTEXT_EXPRESSIONS_KEY);
 
-        Article entity = new Article();
+        TestEntity entity = new TestEntity();
         entity.setExtensionData(ImmutableMap.<String, Object>of(CONTEXT_EXPRESSIONS_KEY, new Conditions(null, null)));
 
         //when
@@ -138,7 +138,7 @@ public class ContextExpressionEntityEvaluatorTest {
         when(contextClaimsProvider.getContextClaims(anyString())).thenThrow(new DxaException("Test"));
         ReflectionTestUtils.setField(evaluator, "contextClaimsProvider", contextClaimsProvider);
 
-        Article entity = new Article();
+        TestEntity entity = new TestEntity();
         entity.setExtensionData(ImmutableMap.<String, Object>of(CONTEXT_EXPRESSIONS_KEY,
                 new Conditions(newHashSet("contextepr.apple"), null)));
 
@@ -147,6 +147,10 @@ public class ContextExpressionEntityEvaluatorTest {
 
         //then
         assertTrue("ContextClaims exception = include entity", includeEntity);
+    }
+
+    private static class TestEntity extends AbstractEntityModel {
+
     }
 
     @AllArgsConstructor
@@ -159,7 +163,7 @@ public class ContextExpressionEntityEvaluatorTest {
         }
 
         private EntityModel entityWithCx(Set<String> includes, Set<String> excludes) {
-            Article entity = new Article();
+            TestEntity entity = new TestEntity();
             entity.setExtensionData(ImmutableMap.<String, Object>of(
                     CONTEXT_EXPRESSIONS_KEY, new Conditions(includes, excludes)));
             return entity;
