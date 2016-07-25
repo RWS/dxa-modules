@@ -1,5 +1,4 @@
-﻿using System.Xml;
-using Sdl.Web.Common.Configuration;
+﻿using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Models;
 
 namespace Sdl.Web.Modules.Core.Models

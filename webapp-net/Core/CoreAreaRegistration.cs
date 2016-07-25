@@ -1,11 +1,5 @@
 ﻿using Sdl.Web.Common.Models;
-using Sdl.Web.Modules.Core.Models;
 using Sdl.Web.Mvc.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sdl.Web.Modules.Core
 {
