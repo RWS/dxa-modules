@@ -28,6 +28,9 @@ namespace Sdl.Web.Modules.Core.Models
         /// </remarks>
         public override string ToHtml(string widthFactor, double aspect = 0, string cssClass = null, int containerSize = 0)
         {
+            if (string.IsNullOrEmpty(Url))
+                return string.Empty;
+
             string responsiveImageUrl = SiteConfiguration.MediaHelper.GetResponsiveImageUrl(Url, aspect, widthFactor, containerSize);
             string dataAspect = (Math.Truncate(aspect * 100) / 100).ToString(CultureInfo.InvariantCulture);
             string widthAttr = string.IsNullOrEmpty(widthFactor) ? null : string.Format("width=\"{0}\"", widthFactor);

@@ -28,6 +28,9 @@ namespace Sdl.Web.Modules.Core.Models
         /// </remarks>
         public override string ToHtml(string widthFactor, double aspect = 0, string cssClass = null, int containerSize = 0)
         {
+            if(string.IsNullOrEmpty(YouTubeId))
+                return string.Empty;
+
             if (string.IsNullOrEmpty(Url))
             {
                 return string.Format(

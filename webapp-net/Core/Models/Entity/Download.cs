@@ -24,6 +24,9 @@ namespace Sdl.Web.Modules.Core.Models
         /// </remarks>
         public override string ToHtml(string widthFactor, double aspect = 0, string cssClass = null, int containerSize = 0)
         {
+            if (string.IsNullOrEmpty(Url))
+                return string.Empty;
+
             string descriptionHtml = string.IsNullOrEmpty(Description) ? null : string.Format("<small>{0}</small>", Description);
             return string.Format(@"
                 <div class=""download-list"">
