@@ -3,7 +3,7 @@
 <%@ taglib prefix="dxa" uri="http://www.sdl.com/tridion-dxa" %>
 <%@ taglib prefix="xpm" uri="http://www.sdl.com/tridion-xpm" %>
 <jsp:useBean id="region" type="com.sdl.webapp.common.api.model.RegionModel" scope="request"/>
-<jsp:useBean id="item" type="com.sdl.webapp.common.api.model.entity.Teaser" scope="request"/>
+<jsp:useBean id="item" type="com.sdl.dxa.modules.core.model.entity.Teaser" scope="request"/>
 <jsp:useBean id="markup" type="com.sdl.webapp.common.markup.Markup" scope="request"/>
 <jsp:useBean id="screenWidth" type="com.sdl.webapp.common.api.ScreenWidth" scope="request"/>
 <c:choose>

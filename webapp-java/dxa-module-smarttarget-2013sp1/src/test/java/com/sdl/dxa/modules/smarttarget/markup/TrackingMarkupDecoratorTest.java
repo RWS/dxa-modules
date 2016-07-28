@@ -1,7 +1,7 @@
 package com.sdl.dxa.modules.smarttarget.markup;
 
 import com.sdl.dxa.modules.smarttarget.model.entity.SmartTargetExperiment;
-import com.sdl.webapp.common.api.model.entity.Article;
+import com.sdl.webapp.common.api.model.entity.AbstractEntityModel;
 import com.sdl.webapp.common.markup.html.HtmlNode;
 import com.tridion.smarttarget.SmartTargetException;
 import com.tridion.smarttarget.analytics.AnalyticsManager;
@@ -29,7 +29,8 @@ public class TrackingMarkupDecoratorTest {
 
         //when
         //then
-        assertTrue(decorator.isNotExperiment(new Article()));
+        assertTrue(decorator.isNotExperiment(new AbstractEntityModel() {
+        }));
         assertFalse(decorator.isNotExperiment(new SmartTargetExperiment(null)));
     }
 

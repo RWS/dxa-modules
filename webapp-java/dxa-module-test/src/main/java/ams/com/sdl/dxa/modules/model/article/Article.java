@@ -1,10 +1,10 @@
 package ams.com.sdl.dxa.modules.model.article;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sdl.dxa.modules.core.model.entity.Image;
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticEntity;
 import com.sdl.webapp.common.api.model.RichText;
 import com.sdl.webapp.common.api.model.entity.AbstractEntityModel;
-import com.sdl.webapp.common.api.model.entity.Image;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

@@ -6,7 +6,6 @@ import com.sdl.dxa.modules.context.model.Conditions;
 import com.sdl.webapp.common.api.content.ContentProviderException;
 import com.sdl.webapp.common.api.model.EntityModel;
 import com.sdl.webapp.common.api.model.entity.AbstractEntityModel;
-import com.sdl.webapp.common.api.model.entity.Article;
 import org.dd4t.contentmodel.ComponentPresentation;
 import org.dd4t.contentmodel.Field;
 import org.dd4t.contentmodel.FieldSet;
@@ -27,26 +26,26 @@ public class ContextExpressionModelBuilderTest {
     public void shouldNotChangeEntityBecauseNoCpPassed() throws Exception {
         //given
         ContextExpressionModelBuilder builder = new ContextExpressionModelBuilder();
-        Article article = new Article();
+        TestEntity testEntity = new TestEntity();
 
         //when
-        EntityModel entity = builder.createEntity(new ComponentImpl(), article, null);
+        EntityModel entity = builder.createEntity(new ComponentImpl(), testEntity, null);
 
         //then
-        assertSame(article, entity);
+        assertSame(testEntity, entity);
     }
 
     @Test
     public void shouldNotChangeEntityBecauseNoCpPassed2() throws Exception {
         //given
         ContextExpressionModelBuilder builder = new ContextExpressionModelBuilder();
-        Article article = new Article();
+        TestEntity testEntity = new TestEntity();
 
         //when
-        EntityModel entity = builder.createEntity(new ComponentImpl(), article, null, AbstractEntityModel.class);
+        EntityModel entity = builder.createEntity(new ComponentImpl(), testEntity, null, AbstractEntityModel.class);
 
         //then
-        assertSame(article, entity);
+        assertSame(testEntity, entity);
     }
 
     @Test
@@ -54,22 +53,21 @@ public class ContextExpressionModelBuilderTest {
         //given
         ContextExpressionModelBuilder builder = new ContextExpressionModelBuilder();
         ComponentPresentation cp = mock(ComponentPresentation.class);
-        Article article = new Article();
+        TestEntity testEntity = new TestEntity();
 
         //when
-        EntityModel entity = builder.createEntity(cp, article, null);
+        EntityModel entity = builder.createEntity(cp, testEntity, null);
 
         //then
-        assertSame(article, entity);
+        assertSame(testEntity, entity);
 
         //when
         when(cp.getExtensionData()).thenReturn(Collections.<String, FieldSet>emptyMap());
-        entity = builder.createEntity(cp, article, null);
+        entity = builder.createEntity(cp, testEntity, null);
 
         //then
-        assertSame(article, entity);
+        assertSame(testEntity, entity);
     }
-
 
     @Test
     public void shouldParseAllConditions() throws ContentProviderException {
@@ -83,17 +81,21 @@ public class ContextExpressionModelBuilderTest {
         FieldSet ce = mock(FieldSet.class);
         when(cp.getExtensionData()).thenReturn(ImmutableMap.of("ContextExpressions", ce));
         when(ce.getContent()).thenReturn(ImmutableMap.of("Include", (Field) includes, "Exclude", excludes));
-        Article article = new Article();
+        TestEntity testEntity = new TestEntity();
 
         //when
-        EntityModel entity = builder.createEntity(cp, article, null);
+        EntityModel entity = builder.createEntity(cp, testEntity, null);
 
         //then
-        Conditions conditions = (Conditions) article.getExtensionData().get("ContextExpressions");
+        Conditions conditions = (Conditions) testEntity.getExtensionData().get("ContextExpressions");
         assertTrue(conditions.getExcludes().contains("exclude1"));
         assertTrue(conditions.getExcludes().contains("exclude2"));
         assertTrue(conditions.getIncludes().contains("include1"));
         assertTrue(conditions.getIncludes().contains("include2"));
+
+    }
+
+    private static class TestEntity extends AbstractEntityModel {
 
     }
 

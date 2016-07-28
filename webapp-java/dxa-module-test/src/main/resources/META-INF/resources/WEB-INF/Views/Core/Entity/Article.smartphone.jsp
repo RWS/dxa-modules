@@ -4,7 +4,7 @@
 <%@ taglib prefix="dxa" uri="http://www.sdl.com/tridion-dxa" %>
 <%@ taglib prefix="xpm" uri="http://www.sdl.com/tridion-xpm" %>
 
-<jsp:useBean id="entity" type="com.sdl.webapp.common.api.model.entity.Article" scope="request"/>
+<jsp:useBean id="entity" type="com.sdl.dxa.modules.core.model.entity.Article" scope="request"/>
 <jsp:useBean id="markup" type="com.sdl.webapp.common.markup.Markup" scope="request"/>
 <jsp:useBean id="screenWidth" type="com.sdl.webapp.common.api.ScreenWidth" scope="request"/>
 
