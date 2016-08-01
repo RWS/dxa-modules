@@ -40,6 +40,9 @@ task buildModules(type: MavenBuildTask) {
     if (project.hasProperty('command')) {
         command = project.command
     }
+
+    verbose = project.hasProperty('verbose')
+
     if (project.hasProperty('mavenProperties')) {
         mavenProperties = project.mavenProperties
     }
