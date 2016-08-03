@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="dxa" uri="http://www.sdl.com/tridion-dxa" %>
 
-<jsp:useBean id="entity" type="com.sdl.webapp.common.api.model.entity.Notification" scope="request"/>
+<jsp:useBean id="entity" type="com.sdl.dxa.modules.core.model.entity.Notification" scope="request"/>
 <jsp:useBean id="markup" type="com.sdl.webapp.common.markup.Markup" scope="request"/>
 <!--[if lt IE 8]>
 

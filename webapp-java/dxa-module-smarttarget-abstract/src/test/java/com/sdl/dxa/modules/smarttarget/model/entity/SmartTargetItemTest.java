@@ -4,7 +4,7 @@ import com.sdl.webapp.common.api.content.ContentProvider;
 import com.sdl.webapp.common.api.content.ContentProviderException;
 import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.api.model.EntityModel;
-import com.sdl.webapp.common.api.model.entity.Article;
+import com.sdl.webapp.common.api.model.entity.AbstractEntityModel;
 import com.sdl.webapp.common.api.model.mvcdata.MvcDataImpl;
 import com.sdl.webapp.common.exceptions.DxaException;
 import com.sdl.webapp.common.util.ApplicationContextHolder;
@@ -63,19 +63,19 @@ public class SmartTargetItemTest {
         @Bean
         @Qualifier("1")
         public EntityModel entityModel1() {
-            Article article = new Article();
-            article.setId("qwe1");
-            article.setMvcData(new MvcDataImpl.MvcDataImplBuilder().build());
-            return article;
+            TestEntity testEntity = new TestEntity();
+            testEntity.setId("qwe1");
+            testEntity.setMvcData(new MvcDataImpl.MvcDataImplBuilder().build());
+            return testEntity;
         }
 
         @Bean
         @Qualifier("2")
         public EntityModel entityModel2() {
-            Article article = new Article();
-            article.setId("qwe2");
-            article.setMvcData(new MvcDataImpl.MvcDataImplBuilder().build());
-            return article;
+            TestEntity testEntity = new TestEntity();
+            testEntity.setId("qwe2");
+            testEntity.setMvcData(new MvcDataImpl.MvcDataImplBuilder().build());
+            return testEntity;
         }
 
         @Bean
@@ -91,6 +91,10 @@ public class SmartTargetItemTest {
             when(contentProvider.getEntityModel(eq("qwe2"), any(Localization.class)))
                     .thenReturn(entityModel1());
             return contentProvider;
+        }
+
+        private static class TestEntity extends AbstractEntityModel {
+
         }
     }
 }

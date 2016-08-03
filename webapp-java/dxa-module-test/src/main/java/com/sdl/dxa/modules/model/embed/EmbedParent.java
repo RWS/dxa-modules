@@ -3,9 +3,7 @@ package com.sdl.dxa.modules.model.embed;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticEntity;
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticProperty;
-import com.sdl.webapp.common.api.model.RichText;
 import com.sdl.webapp.common.api.model.entity.AbstractEntityModel;
-import com.sdl.webapp.common.api.model.entity.Image;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
