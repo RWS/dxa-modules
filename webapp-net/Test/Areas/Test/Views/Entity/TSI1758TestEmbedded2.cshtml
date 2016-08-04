@@ -1,0 +1,19 @@
+﻿@model Tsi1758TestEmbedded2Entity
+<div class="embeddedEntity">
+    <h5>Rendered @Model with Entity View "Test:Tsi1758TestEmbedded2"</h5>
+
+    <h6>textField</h6>
+    <div>@Model.TextField</div>
+
+    <h6>embedField2</h6>
+    @if (Model.EmbedField2 == null)
+    {
+        <div style="color: red">NULL</div>
+    }
+    else
+    {
+        <div><a href="@Model.EmbedField2.Url">@Model.EmbedField2.LinkText</a></div>
+    }
+    </div>
+
+</div>

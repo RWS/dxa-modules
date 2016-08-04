@@ -77,6 +77,7 @@
     <Compile Include="Models\TestEntityModel1.cs" />
     <Compile Include="Models\TestEntityModel3.cs" />
     <Compile Include="..\CommonAssemblyInfo.cs" />
+    <Compile Include="Models\Tsi1758TestEntity.cs" />
     <Compile Include="TestAreaRegistration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -84,6 +85,9 @@
     <None Include="Areas\Test\Views\Entity\EmbedParent.cshtml" />
     <None Include="Areas\Test\Views\Entity\Article.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestDxaEntityViewOverride.cshtml" />
+    <None Include="Areas\Test\Views\Entity\TSI1758TestEmbedded2.cshtml" />
+    <None Include="Areas\Test\Views\Entity\TSI1758TestEmbedded.cshtml" />
+    <None Include="Areas\Test\Views\Entity\TSI1758Test.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestFlickrImage.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestEclEntity.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestEntityWithEclLink.cshtml" />
@@ -93,6 +97,7 @@
     <None Include="Areas\Test\Views\Entity\TestEntity1.cshtml" />
     <None Include="Areas\Test\Views\Page\CustomPageModelInheritedController.cshtml" />
     <None Include="Areas\Test\Views\Page\TestDxaEntityViewOverride.cshtml" />
+    <None Include="Areas\Test\Views\Page\SimpleTestPage.cshtml" />
     <None Include="Areas\Test\Views\Page\TestPageInheritedController.cshtml" />
     <None Include="Areas\Test\Views\Page\TestPageCSSNoParams.cshtml" />
     <None Include="Areas\Test\Views\Page\TestPageCSS.cshtml" />

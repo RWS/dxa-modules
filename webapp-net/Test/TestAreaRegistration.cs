@@ -27,6 +27,7 @@ namespace Sdl.Web.Modules.Test
             RegisterViewModel("TestPageInheritedController", typeof(PageModel));
             RegisterViewModel("CustomPageModelInheritedController", typeof(CustomPageModel));
             RegisterViewModel("TestDxaEntityViewOverride", typeof(PageModel));
+            RegisterViewModel("SimpleTestPage", typeof(PageModel));
 
             // Region Views
             RegisterViewModel("TestRegion1", typeof(RegionModel), "Region");
@@ -50,6 +51,7 @@ namespace Sdl.Web.Modules.Test
             RegisterViewModel("TestFlickrImage", typeof(TestFlickrImageModel));
             RegisterViewModel("Article", typeof(ArticleModel));
             RegisterViewModel("EmbedParent", typeof(EmbedParentModel));
+            RegisterViewModel("TSI1758Test", typeof(Tsi1758TestEntity));
 
             // Entity Models without associated View
             RegisterViewModel(typeof(TestEntityModel2));
