@@ -1,0 +1,18 @@
+# IDE
+.vscode
+.vs
+.idea
+
+# Node.js
+node_modules/
+
+# Build output
+dist/
+
+#typings
+typings/
+
+# Specific files
+test/configuration/Configuration.js
+test/tests/*.js
+test/coverage/

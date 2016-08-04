@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "module": "none",
+        "noImplicitAny": true,
+        "allowUnreachableCode": false,
+        "allowUnusedLabels": false,
+        "forceConsistentCasingInFileNames": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitReturns": true,
+        "removeComments": false,
+        "preserveConstEnums": false,
+        "sourceMap": false,
+        "noEmitOnError": true,
+        "emitBOM": false,
+        "suppressImplicitAnyIndexErrors": false,
+        "target": "es5",
+        "declaration": true,
+        "experimentalDecorators": true,
+        "jsx": "react"
+    },
+    "compileOnSave": false, // Gulp does this for us
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
+}
