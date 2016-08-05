@@ -5,6 +5,9 @@
   "dependencies": {
     "react": "15.1.0",
     "react-dom": "15.1.0",
+    "sdl-catalina-react-wrappers": "0.1.0-35"
+  },
+  "peerDependencies": {
     "sdl-common-ui": "3.0.0-develop.2547"
   },
   "devDependencies": {
