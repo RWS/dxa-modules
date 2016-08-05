@@ -3,17 +3,17 @@
   "version": "0.1.0-0",
   "description": "Documentation portal for Knowledge Center end users.",
   "dependencies": {
-    "react": "15.1.0",
-    "react-dom": "15.1.0",
     "sdl-catalina-react-wrappers": "0.1.0-35"
   },
   "peerDependencies": {
+    "react": "15.1.0",
+    "react-dom": "15.1.0",
     "sdl-common-ui": "3.0.0-develop.2547"
   },
   "devDependencies": {
     "async": "~2.0.0-rc.6",
-    "autoprefixer": "~6.3.6",
-    "browser-sync": "~2.13.0",
+    "autoprefixer": "~6.4.0",
+    "browser-sync": "~2.14.0",
     "chalk": "~1.1.3",
     "fs-extra": "~0.30.0",
     "gulp": "~3.9.1",
@@ -31,19 +31,19 @@
     "jasmine-core": "~2.4.1",
     "karma": "~0.13.22",
     "karma-chrome-launcher": "~1.0.1",
-    "karma-coverage": "~1.0.0",
+    "karma-coverage": "~1.1.1",
     "karma-firefox-launcher": "~1.0.0",
     "karma-ie-launcher": "~1.0.0",
     "karma-jasmine": "~1.0.2",
-    "lodash": "~4.13.1",
+    "lodash": "~4.14.1",
     "portfinder": "~1.0.3",
     "remap-istanbul": "~0.5.1",
     "run-sequence": "~1.2.1",
     "through2": "~2.0.1",
-    "tslint": "~3.11.0",
-    "typings-core": "~1.3.1",
+    "tslint": "~3.14.0",
+    "typings-core": "~1.4.0",
     "xmldom": "~0.1.22",
-    "yargs": "~4.7.1"
+    "yargs": "~4.8.1"
   },
   "scripts": {
     "start": "gulp serve",
