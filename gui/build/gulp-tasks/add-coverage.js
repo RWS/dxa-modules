@@ -27,6 +27,7 @@ module.exports = function (buildOptions, gulp) {
         if (buildOptions.isTestCoverage) {
             var paths = [
                 buildOptions.distPath + '**/*.js',
+                '!' + buildOptions.distPath + 'Index.js', // Exclude main page
                 '!' + buildOptions.distPath + 'lib/**',
                 '!' + buildOptions.distPath + 'packages/**',
                 '!' + buildOptions.libraryPath + '**'

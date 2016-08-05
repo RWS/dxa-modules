@@ -16,7 +16,7 @@ var reload = browserSync.reload;
 var sourcesPath = './src/';
 var buildOptions = {
     version: packageInfo.version,
-    cuilVersion: packageInfo.dependencies['sdl-common-ui'],
+    cuilVersion: packageInfo.peerDependencies['sdl-common-ui'],
     sourcesPath: sourcesPath,
     testPath: './test/',
     distPath: './dist/',

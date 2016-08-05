@@ -1,27 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-               xsi:noNamespaceSchemaLocation="../node_modules/sdl-common-ui/Common/Library/Core/configuration.xsd" merge="false">
-
-  <appSettings>
-    <!-- AUTO MANAGED BY THE BUILD -->
-    <setting name="version" value="0.0.0" />
-  </appSettings>
-
-  <!-- Main resources -->
-  <resourceGroups>
-    <resourceGroup name="ReactComponents.Index">
-      <files>
-        <file name="index.js" />
-        <file name="styles/index.css"/>
-      </files>
-      <dependencies>
-        <dependency name="ReactComponents.Components" />
-      </dependencies>
-    </resourceGroup>
-  </resourceGroups>
-
-  <!-- Configuration for pages -->
-  <pages>
-    <page url="*" resource="ReactComponents.Index" title="React Components" />
-  </pages>
+<configuration
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../node_modules/sdl-common-ui/Common/Library/Core/configuration.xsd" merge="false">
+    <appSettings>
+        <!-- AUTO MANAGED BY THE BUILD -->
+        <setting name="version" value="0.0.0" />
+        <!-- AUTO MANAGED BY THE BUILD -->
+        <setting name="coreVersion" value="0.0.0" />
+        <setting name="corePath" value="SDL/Common/" />
+        <setting name="debug" value="false" />
+    </appSettings>
+    <!-- Main Catalina config -->
+    <include src="~/configuration.xml" />
+    <!-- Packages config -->
+    <include src="packages.xml" />
+    <!-- Child configs -->
+    <include src="components/_config.xml" />
+    <!-- Main resources -->
+    <resourceGroups>
+        <resourceGroup name="Sdl.KcWebApp">
+            <files>
+                <file name="Index.js" />
+            </files>
+            <dependencies>
+                <dependency name="Sdl.KcWebApp.Components" />
+            </dependencies>
+        </resourceGroup>
+    </resourceGroups>
+    <!-- Configuration for pages -->
+    <pages>
+        <page url="*" resource="Sdl.KcWebApp" title="SDL Knowledge Center Documentation Portal" />
+    </pages>
 </configuration>

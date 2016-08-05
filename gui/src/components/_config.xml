@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../node_modules/sdl-common-ui/Common/Library/Core/configuration.xsd" merge="false">
+    <!-- Main resources -->
+    <resourceGroups>
+        <resourceGroup name="Sdl.KcWebApp.Components">
+            <files>
+                <file name="App.js" />
+            </files>
+        </resourceGroup>
+    </resourceGroups>
+    <!-- Configuration for pages -->
+    <pages>
+        <page url="*" resource="ReactComponents.Index" title="React Components" />
+    </pages>
+</configuration>
