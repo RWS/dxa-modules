@@ -25,10 +25,11 @@ module.exports = function (buildOptions, gulp) {
             .pipe(gulpTSLint({
                 configuration: {
                     rules: tsLintRules
-                }
+                },
+                formatter: 'verbose'
             }))
             .pipe(gulpDebug({ title: 'Validated with TSLint' }))
-            .pipe(gulpTSLint.report('verbose', {
+            .pipe(gulpTSLint.report({
                 reportLimit: 100
             }))
             .on('error', function (err) {
