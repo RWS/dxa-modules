@@ -24,7 +24,7 @@ namespace Sdl.Web.Modules.Core
             RegisterViewModel("FooterLinkGroup", typeof(Sdl.Web.Modules.Core.Models.LinkList<Link>));
             RegisterViewModel("FooterLinks", typeof(Sdl.Web.Modules.Core.Models.LinkList<Link>));
             RegisterViewModel("HeaderLinks", typeof(Sdl.Web.Modules.Core.Models.LinkList<Link>));
-            RegisterViewModel("HeaderLogo", typeof(Teaser));
+            RegisterViewModel("HeaderLogo", typeof(Sdl.Web.Modules.Core.Models.Teaser));
             RegisterViewModel("Image", typeof(Sdl.Web.Modules.Core.Models.Image));
             RegisterViewModel("LanguageSelector", typeof(Configuration));
             RegisterViewModel("OldBrowserNotificationBar", typeof(Sdl.Web.Modules.Core.Models.Notification));
@@ -32,16 +32,17 @@ namespace Sdl.Web.Modules.Core
             RegisterViewModel("SocialLinks", typeof(Sdl.Web.Modules.Core.Models.LinkList<TagLink>));
             RegisterViewModel("SocialSharing", typeof(Sdl.Web.Modules.Core.Models.LinkList<TagLink>));
             RegisterViewModel("Tab", typeof(Sdl.Web.Modules.Core.Models.ItemList));
-            RegisterViewModel("Teaser-ImageOverlay", typeof(Teaser));
-            RegisterViewModel("Teaser", typeof(Teaser));
-            RegisterViewModel("TeaserColored", typeof(Teaser));
-            RegisterViewModel("TeaserHero-ImageOverlay", typeof(Teaser));
-            RegisterViewModel("TeaserMap", typeof(Teaser));
+            RegisterViewModel("Teaser-ImageOverlay", typeof(Sdl.Web.Modules.Core.Models.Teaser));
+            RegisterViewModel("Teaser", typeof(Sdl.Web.Modules.Core.Models.Teaser));
+            RegisterViewModel("TeaserColored", typeof(Sdl.Web.Modules.Core.Models.Teaser));
+            RegisterViewModel("TeaserHero-ImageOverlay", typeof(Sdl.Web.Modules.Core.Models.Teaser));
+            RegisterViewModel("TeaserMap", typeof(Sdl.Web.Modules.Core.Models.Teaser));
             RegisterViewModel("YouTubeVideo", typeof(Sdl.Web.Modules.Core.Models.YouTubeVideo));
 
-            RegisterViewModel("List", typeof(ContentList<Teaser>), "List");
-            RegisterViewModel("PagedList", typeof(ContentList<Teaser>), "List");
-            RegisterViewModel("ThumbnailList", typeof(ContentList<Teaser>), "List");
+            RegisterViewModel("List", typeof(Sdl.Web.Modules.Core.Models.ContentList<Sdl.Web.Modules.Core.Models.Teaser>), "List");
+            RegisterViewModel("ArticleList", typeof(Sdl.Web.Modules.Core.Models.ContentList<Sdl.Web.Modules.Core.Models.Article>), "List");
+            RegisterViewModel("PagedList", typeof(Sdl.Web.Modules.Core.Models.ContentList<Sdl.Web.Modules.Core.Models.Teaser>), "List");
+            RegisterViewModel("ThumbnailList", typeof(Sdl.Web.Modules.Core.Models.ContentList<Sdl.Web.Modules.Core.Models.Teaser>), "List");
 
             RegisterViewModel("Breadcrumb", typeof(NavigationLinks), "Navigation");
             RegisterViewModel("LeftNavigation", typeof(NavigationLinks), "Navigation");
