@@ -1,6 +1,6 @@
 {
   "name": "sdl-kc-webapp",
-  "version": "0.1.0-1",
+  "version": "0.1.0-2",
   "description": "Documentation portal for Knowledge Center end users.",
   "dependencies": {
     "sdl-catalina-react-wrappers": "0.1.0-35"
