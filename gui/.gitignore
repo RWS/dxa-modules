@@ -4,6 +4,7 @@
 .idea
 
 # Node.js
+node/
 node_modules/
 
 # Build output

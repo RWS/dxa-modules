@@ -11,6 +11,7 @@ var async = require('async');
 var runSequence = require('run-sequence');
 const packageInfo = require('./package.json');
 var gulpTypings = require('./build/gulp-plugins/install-typings');
+const yargs = require('yargs');
 
 var reload = browserSync.reload;
 var sourcesPath = './src/';
@@ -172,6 +173,17 @@ gulp.task('build', [
     'add-coverage',
     'package-project',
     'update-version']);
+
+gulp.task('build:dist', cb => {
+    buildOptions.isDebug = false;
+    runSequence('clean', 'copy-common-ui', 'build', err => {
+        if (err) {
+            cb(err);
+            return;
+        }
+        fs.move(buildOptions.distPath, yargs.argv.targetPath, cb);
+    });
+});
 
 gulp.task('clean', function (cb) {
     async.parallel([

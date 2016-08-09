@@ -48,6 +48,7 @@
   "scripts": {
     "start": "gulp serve",
     "build": "gulp",
+    "build-server": "gulp build:dist",
     "test": "gulp test"
   },
   "repository": {
