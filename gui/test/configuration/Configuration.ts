@@ -13,5 +13,5 @@ module SDL.Client.Test.Configuration {
      * Resource group inside your configuration file.
      * TestLoader will load this one into the browser and execute your tests.
      */
-    testResourceGroup = "ReactComponents.Test";
+    testResourceGroup = "Sdl.KcWebApp.Test";
 }
