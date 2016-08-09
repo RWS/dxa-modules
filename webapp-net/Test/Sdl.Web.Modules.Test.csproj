@@ -64,6 +64,7 @@
       <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.5.0\lib\net452\Sdl.Web.Tridion.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>False</Private>
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.1.2\lib\net45\System.Web.Mvc.dll</HintPath>
@@ -83,6 +84,7 @@
     <Compile Include="Models\TestEntityModel1.cs" />
     <Compile Include="Models\TestEntityModel3.cs" />
     <Compile Include="..\CommonAssemblyInfo.cs" />
+    <Compile Include="Models\Tsi1758TestEntity.cs" />
     <Compile Include="TestAreaRegistration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestFixture.cs" />
@@ -91,15 +93,20 @@
     <None Include="App.config" />
     <None Include="Areas\Test\Views\Entity\EmbedParent.cshtml" />
     <None Include="Areas\Test\Views\Entity\Article.cshtml" />
+    <None Include="Areas\Test\Views\Entity\TestDxaEntityViewOverride.cshtml" />
+    <None Include="Areas\Test\Views\Entity\TSI1758TestEmbedded2.cshtml" />
+    <None Include="Areas\Test\Views\Entity\TSI1758TestEmbedded.cshtml" />
+    <None Include="Areas\Test\Views\Entity\TSI1758Test.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestFlickrImage.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestEclEntity.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestEntityWithEclLink.cshtml" />
-    <None Include="Areas\Test\Views\Entity\TestEntityCSSFill.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestEntityCSSEmpty.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestEntity3.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestEntity2.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestEntity1.cshtml" />
     <None Include="Areas\Test\Views\Page\CustomPageModelInheritedController.cshtml" />
+    <None Include="Areas\Test\Views\Page\TestDxaEntityViewOverride.cshtml" />
+    <None Include="Areas\Test\Views\Page\SimpleTestPage.cshtml" />
     <None Include="Areas\Test\Views\Page\TestPageInheritedController.cshtml" />
     <None Include="Areas\Test\Views\Page\TestPageCSSNoParams.cshtml" />
     <None Include="Areas\Test\Views\Page\TestPageCSS.cshtml" />

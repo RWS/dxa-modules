@@ -1,0 +1,28 @@
+﻿@model PageModel
+<html>
+    <head>
+        <title>@Model.Title</title>
+        <style>
+            .region { border: solid thick; }
+            .entity { border: solid thin; }
+            .embeddedEntity { border: dashed thin; }
+            .alert { color: red }
+            td { border: solid thin; }
+        </style>
+    </head>
+    <body>
+        <h1>Rendered @Model with Page View "Test:SimpleTestPage"</h1>
+
+        <div>
+            @Html.DxaRegions()
+        </div>
+        
+        <!-- Epilogue -->
+        <script src="@Url.VersionedContent("/assets/scripts/main.js")"></script>
+        @if (WebRequestContext.IsPreview)
+        {
+            <script src="@Url.VersionedContent("/assets/scripts/xpm.js")"></script>
+        }
+        @Html.DxaPageMarkup()
+    </body>
+</html>

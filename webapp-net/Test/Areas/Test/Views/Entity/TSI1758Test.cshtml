@@ -1,0 +1,16 @@
+﻿@model Tsi1758TestEntity
+<div class="entity" @Html.DxaEntityMarkup()>
+    <h1>Rendered @Model with Entity View "Test:Tsi1758TestEntity"</h1>
+
+    <h2>embedField1</h2>
+    @foreach (var entity in Model.EmbedField1)
+    {
+        @Html.DxaEntity(entity)
+    }
+
+    <h2>embedField2</h2>
+    @foreach (var entity in Model.EmbedField2)
+    {
+        @Html.DxaEntity(entity)
+    }
+</div>
