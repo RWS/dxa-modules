@@ -51,17 +51,14 @@
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Sdl.Web.Common, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.5.0\lib\net452\Sdl.Web.Common.dll</HintPath>
+    <Reference Include="Sdl.Web.Common">
+      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.6.0-alpha-201608090605\lib\net452\Sdl.Web.Common.dll</HintPath>
     </Reference>
-    <Reference Include="Sdl.Web.Mvc, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.5.0\lib\net452\Sdl.Web.Mvc.dll</HintPath>
+    <Reference Include="Sdl.Web.Mvc">
+      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.6.0-alpha-201608090605\lib\net452\Sdl.Web.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="Sdl.Web.Tridion, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.5.0\lib\net452\Sdl.Web.Tridion.dll</HintPath>
+    <Reference Include="Sdl.Web.Tridion">
+      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.6.0-alpha-201608090605\lib\net452\Sdl.Web.Tridion.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data.DataSetExtensions">
