@@ -15,7 +15,8 @@
     <properties>
         <dxa-bom.version>1.5.0</dxa-bom.version>
         <dxa-release-branch>release/1.5</dxa-release-branch>
-        <java-version>1.7</java-version>
+        <java-version>1.8</java-version>
+        <nexus-repo>https://nexus.sdl.com/content/groups/npm/</nexus-repo>
     </properties>
 
     <repositories>
@@ -30,6 +31,74 @@
     <build>
         <finalName>${project.artifactId}</finalName>
         <plugins>
+            <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <version>1.0</version>
+
+                <configuration>
+                    <workingDirectory>../gui</workingDirectory>
+                    <nodeVersion>v6.3.0</nodeVersion>
+                    <npmVersion>3.10.5</npmVersion>
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <!-- optional: you don't really need execution ids,
+                        but it looks nice in your build log. -->
+                        <id>install node and npm</id>
+                        <goals>
+                            <goal>install-node-and-npm</goal>
+                        </goals>
+                        <!-- optional: default phase is "generate-resources" -->
+                        <phase>generate-resources</phase>
+                    </execution>
+
+                    <execution>
+                        <id>npm prune</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>prune -registry=${nexus-repo}</arguments>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>npm update</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>update -registry=${nexus-repo}</arguments>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>npm install</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>install -registry=${nexus-repo}</arguments>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>build script</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+
+                        <!-- optional: the default phase is "generate-resources" -->
+                        <phase>generate-resources</phase>
+
+                        <configuration>
+                            <arguments>run-script build-server -- --targetPath "../server/src/main/resources/gui/"</arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
