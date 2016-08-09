@@ -51,11 +51,16 @@
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Sdl.Web.Common">
-      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.5.0\lib\net452\Sdl.Web.Common.dll</HintPath>
+    <Reference Include="Sdl.Web.Common, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\web-application\Site\bin\Sdl.Web.Common.dll</HintPath>
     </Reference>
-    <Reference Include="Sdl.Web.Mvc">
-      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.5.0\lib\net452\Sdl.Web.Mvc.dll</HintPath>
+    <Reference Include="Sdl.Web.Mvc, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\web-application\Site\bin\Sdl.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Sdl.Web.Tridion">
+      <HintPath>..\..\..\web-application\Site\bin\Sdl.Web.Tridion.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data.DataSetExtensions">
@@ -102,13 +107,16 @@
   <ItemGroup>
     <Compile Include="CoreAreaRegistration.cs" />
     <Compile Include="Models\Entity\Article.cs" />
+    <Compile Include="Models\Entity\ContentList.cs" />
     <Compile Include="Models\Entity\Download.cs" />
     <Compile Include="Models\Entity\Image.cs" />
     <Compile Include="Models\Entity\ItemList.cs" />
     <Compile Include="Models\Entity\LinkList.cs" />
+    <Compile Include="Models\Entity\Location.cs" />
     <Compile Include="Models\Entity\Notification.cs" />
     <Compile Include="Models\Entity\Paragraph.cs" />
     <Compile Include="Models\Entity\Place.cs" />
+    <Compile Include="Models\Entity\Teaser.cs" />
     <Compile Include="Models\Entity\YouTubeVideo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -145,6 +153,57 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Core\Views\List\List.cshtml" />
+    <Content Include="Areas\Core\Views\List\PagedList.cshtml" />
+    <Content Include="Areas\Core\Views\List\Partials\Pager.cshtml" />
+    <Content Include="Areas\Core\Views\List\ThumbnailList.cshtml" />
+    <Content Include="Areas\Core\Views\Navigation\Breadcrumb.cshtml" />
+    <Content Include="Areas\Core\Views\Navigation\LeftNavigation.cshtml" />
+    <Content Include="Areas\Core\Views\Navigation\SiteMap.cshtml" />
+    <Content Include="Areas\Core\Views\Navigation\SiteMapXml.cshtml" />
+    <Content Include="Areas\Core\Views\Navigation\TopNavigation.cshtml" />
+    <Content Include="Areas\Core\Views\Page\GeneralPage.cshtml" />
+    <Content Include="Areas\Core\Views\Page\GeneralPage.featurephone.cshtml" />
+    <Content Include="Areas\Core\Views\Page\GeneralPage.smartphone.cshtml" />
+    <Content Include="Areas\Core\Views\Page\GeneralPage.tablet.cshtml" />
+    <Content Include="Areas\Core\Views\Page\IncludePage.cshtml" />
+    <Content Include="Areas\Core\Views\Page\RedirectPage.cshtml" />
+    <Content Include="Areas\Core\Views\Page\_ViewStart.cshtml" />
+    <Content Include="Areas\Core\Views\Region\2-Column.cshtml" />
+    <Content Include="Areas\Core\Views\Region\3-Column.cshtml" />
+    <Content Include="Areas\Core\Views\Region\4-Column.cshtml" />
+    <Content Include="Areas\Core\Views\Region\Content Tools.cshtml" />
+    <Content Include="Areas\Core\Views\Region\Footer.cshtml" />
+    <Content Include="Areas\Core\Views\Region\Header.cshtml" />
+    <Content Include="Areas\Core\Views\Region\Hero.cshtml" />
+    <Content Include="Areas\Core\Views\Region\Info.cshtml" />
+    <Content Include="Areas\Core\Views\Region\Left Navigation.cshtml" />
+    <Content Include="Areas\Core\Views\Region\Left.cshtml" />
+    <Content Include="Areas\Core\Views\Region\Links.cshtml" />
+    <Content Include="Areas\Core\Views\Region\Logo.cshtml" />
+    <Content Include="Areas\Core\Views\Region\Main.cshtml" />
+    <Content Include="Areas\Core\Views\Region\Nav.cshtml" />
+    <Content Include="Areas\Core\Views\Region\Tools.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Core\Views\Entity\EntityError.cshtml" />
+    <Content Include="Areas\Core\Views\Entity\LanguageSelector.cshtml" />
+    <Content Include="Areas\Core\Views\Entity\Teaser-ImageOverlay.cshtml" />
+    <Content Include="Areas\Core\Views\Entity\Teaser.cshtml" />
+    <Content Include="Areas\Core\Views\Entity\TeaserColored.cshtml" />
+    <Content Include="Areas\Core\Views\Entity\TeaserHero-ImageOverlay.cshtml" />
+    <Content Include="Areas\Core\Views\Entity\TeaserMap.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Core\Views\Entity\Partials\GoogleMap.cshtml" />
+    <Content Include="Areas\Core\Views\Entity\Partials\GoogleStaticMap.cshtml" />
+    <Content Include="Areas\Core\Views\Entity\Partials\Teaser-ImageOverlay.cshtml" />
+    <Content Include="Areas\Core\Views\Entity\Partials\Teaser.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Areas\Core\Views\Shared\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
