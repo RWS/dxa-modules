@@ -7,7 +7,7 @@
 <html lang="en">
 
 <head>
-    <title>Example</title>
+    <title>SDL Knowledge Center Documentation Portal</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta charset="utf-8"/>
     <c:forEach var="meta" items="${pageModel.meta.entrySet()}">

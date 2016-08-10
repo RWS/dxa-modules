@@ -16,6 +16,6 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry
                 .addResourceHandler("/gui/**")
                 .addResourceLocations("/WEB-INF/classes/gui/")
-                .setCachePeriod(BROWSER_CACHE_CONTROL);;
+                .setCachePeriod(BROWSER_CACHE_CONTROL);
     }
 }

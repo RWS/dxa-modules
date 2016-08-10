@@ -15,15 +15,15 @@ public class ReactComponentsRenderer {
 
     /**
      * Render a page
+     *
      * @param path Page path.
      * @return Html string with the rendered content.
      */
     public String renderPage(String path) {
         try {
-            Object html =  engineHolder.get().invokeFunction("renderToString", path);
+            Object html = engineHolder.get().invokeFunction("renderToString", path);
             return String.valueOf(html);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             throw new IllegalStateException("failed to render react component", e);
         }
     }
@@ -36,8 +36,8 @@ public class ReactComponentsRenderer {
                 nashornScriptEngine.eval(read("gui/lib/react/react.js"));
                 nashornScriptEngine.eval(read("gui/lib/react-dom/react-dom.js"));
                 nashornScriptEngine.eval(read("gui/lib/react-dom/react-dom-server.js"));
-                nashornScriptEngine.eval(read("gui/components/App.js"));
-                nashornScriptEngine.eval(read("gui/Server.js"));
+                nashornScriptEngine.eval(read("gui/packages/Sdl.KcWebApp.Components.js"));
+                nashornScriptEngine.eval(read("gui/packages/Sdl.KcWebApp.Server.js"));
             } catch (ScriptException e) {
                 throw new RuntimeException(e);
             }

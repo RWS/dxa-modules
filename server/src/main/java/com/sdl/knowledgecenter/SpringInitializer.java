@@ -19,7 +19,7 @@ import org.springframework.web.servlet.view.JstlView;
                 value = PageController.class
         )
 )
-@Import({ DxaSpringInitialization.class, MvcConfig.class })
+@Import({DxaSpringInitialization.class, MvcConfig.class})
 public class SpringInitializer {
 
     @Bean

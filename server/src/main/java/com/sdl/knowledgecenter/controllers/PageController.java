@@ -66,7 +66,7 @@ public class PageController extends com.sdl.webapp.common.controller.PageControl
 
     /**
      * Enriches all the Region/Entity Models embedded in the given Page Model.
-     * Used by <see cref="FormatDataAttribute"/> to get all embedded Models enriched without rendering any WEB-INF.
+     * Used by <see cref="FormatDataAttribute"/> to get all embedded Models enriched without rendering any Views.
      *
      * @param model   The Page Model to enrich.
      * @param request http request
