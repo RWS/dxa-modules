@@ -128,7 +128,7 @@ public class ContentList extends DynamicList<Teaser, SimpleBrokerQuery> {
         Teaser teaser = new Teaser();
 
         final Link link = new Link();
-        link.setUrl("tcm:" + componentMetadata.getPublicationId() + '-' + componentMetadata.getId());
+        link.setUrl(componentMetadata.getComponentUrl());
         teaser.setLink(link);
 
         @Nullable Date dateCreated = componentMetadata.getCustom("dateCreated", Date.class);

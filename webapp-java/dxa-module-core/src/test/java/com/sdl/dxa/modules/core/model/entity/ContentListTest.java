@@ -218,7 +218,7 @@ public class ContentListTest {
         ContentList contentList = new ContentList();
 
         Link link = new Link();
-        link.setUrl("tcm:1-2");
+        link.setUrl("url");
 
         Teaser expected1 = new Teaser();
         String headline1 = "Name";
@@ -243,12 +243,14 @@ public class ContentListTest {
         Teaser allFields = contentList.getEntity(ComponentMetadata.builder()
                 .publicationId("1")
                 .id("2")
+                .componentUrl("url")
                 .custom(ImmutableMap.<String, Object>of("dateCreated", date1, "name", headline1, "introText", introText1))
                 .build());
 
         Teaser noFields = contentList.getEntity(ComponentMetadata.builder()
                 .publicationId("1")
                 .id("2")
+                .componentUrl("url")
                 .lastPublicationDate(date2)
                 .title(title2)
                 .build());
