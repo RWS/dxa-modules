@@ -54,10 +54,7 @@ public class MainController {
         request.setAttribute(PAGE_MODEL, page);
         request.setAttribute(LOCALIZATION, localization);
 
-        // Use mock for content
-        String mockData = "Hello world!";
-        String homePage = reactComponentsRenderer.renderPage(requestPath, mockData);
-        request.setAttribute("content", mockData);
+        String homePage = reactComponentsRenderer.renderPage(requestPath);
         request.setAttribute("page", homePage);
 
         return "home";

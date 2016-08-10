@@ -16,12 +16,11 @@ public class ReactComponentsRenderer {
     /**
      * Render a page
      * @param path Page path.
-     * @param content Page content.
      * @return Html string with the rendered content.
      */
-    public String renderPage(String path, String content) {
+    public String renderPage(String path) {
         try {
-            Object html =  engineHolder.get().invokeFunction("renderToString", path, content);
+            Object html =  engineHolder.get().invokeFunction("renderToString", path);
             return String.valueOf(html);
         }
         catch (Exception e) {
