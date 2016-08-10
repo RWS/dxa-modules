@@ -1,9 +1,7 @@
 package com.sdl.knowledgecenter;
 
-import com.sdl.dxa.DxaSpringInitialization;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
+import com.sdl.knowledgecenter.controllers.PageController;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
@@ -16,18 +14,20 @@ import static com.sdl.webapp.common.util.InitializationUtils.loadActiveSpringPro
 import static com.sdl.webapp.common.util.InitializationUtils.registerListener;
 import static com.sdl.webapp.common.util.InitializationUtils.registerServlet;
 
-@Configuration
-@ComponentScan(basePackages = "com.sdl.knowledgecenter")
-@Import(DxaSpringInitialization.class)
+@Slf4j
 public class WebAppConfiguration implements WebApplicationInitializer {
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
+        log.debug("Initializing servlet application context");
         AnnotationConfigWebApplicationContext servletAppContext = new AnnotationConfigWebApplicationContext();
 
-        servletAppContext.register(DxaSpringInitialization.class);
+        servletAppContext.register(SpringInitializer.class, PageController.class);
 
+        log.debug("Registering Spring ContextLoaderListener");
         registerListener(servletContext, new ContextLoaderListener(servletAppContext));
+
+        log.debug("Registering Spring DispatcherServlet");
         registerServlet(servletContext, new DispatcherServlet(servletAppContext), "/").setLoadOnStartup(1);
 
         loadActiveSpringProfiles(servletContext, servletAppContext);
