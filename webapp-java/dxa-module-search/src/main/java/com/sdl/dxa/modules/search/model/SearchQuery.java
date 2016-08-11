@@ -49,8 +49,10 @@ public class SearchQuery extends AbstractEntityModel {
     @SemanticProperty("s:pageSize")
     @JsonProperty("PageSize")
     private int pageSize;
+
     @JsonProperty("Start")
     private int start;
+
     @JsonProperty("Total")
     private long total;
 
@@ -59,12 +61,15 @@ public class SearchQuery extends AbstractEntityModel {
     private List<SearchItem> results = new ArrayList<>();
 
     public String formatResultsText() {
-        return String.format(convertFormatStringFromCM(resultsText.toString()),
-                queryDetails.getQueryText(), getTotal());
+        return String.format(
+                convertFormatStringFromCM(resultsText == null ? "" : resultsText.toString()),
+                queryDetails == null ? "" : queryDetails.getQueryText(), getTotal());
     }
 
     public String formatNoResultsText() {
-        return String.format(convertFormatStringFromCM(noResultsText.toString()), queryDetails.getQueryText());
+        return String.format(
+                convertFormatStringFromCM(noResultsText == null ? "" : noResultsText.toString()),
+                queryDetails == null ? "" : queryDetails.getQueryText());
     }
 
     @JsonProperty("CurrentPage")
@@ -85,8 +90,10 @@ public class SearchQuery extends AbstractEntityModel {
      */
     @Data
     public static class QueryDetails {
+
         @JsonProperty("QueryText")
         private String queryText;
+
         @JsonProperty("QueryStringParameters")
         private Map<String, String[]> queryStringParameters;
 
