@@ -6,7 +6,8 @@ namespace Sdl.Web.Modules.Core.Models
 {
     [SemanticEntity(EntityName = "Teaser", Prefix = "t", Vocab = CoreVocabulary)]
     [SemanticEntity(EntityName = "Image", Prefix = "i", Vocab = CoreVocabulary)]
-    [SemanticEntity(EntityName = "Article", Prefix = "a", Vocab = CoreVocabulary)]
+    [SemanticEntity(EntityName = "Article", Prefix = "s", Vocab = SchemaOrgVocabulary)]
+    [SemanticEntity(EntityName = "NewsArticle", Prefix = "tri", Vocab = CoreVocabulary)]
     [SemanticEntity(EntityName = "Place", Prefix = "p", Vocab = CoreVocabulary)]
     public class Teaser : EntityModel
     {
@@ -14,19 +15,25 @@ namespace Sdl.Web.Modules.Core.Models
         [SemanticProperty("a:_self")]
         [SemanticProperty("p:_self")]
         public Link Link { get; set; } // TODO: add resolve link code on first retrieval
+        
+        [SemanticProperty("tri:name")] 
         [SemanticProperty("headline")]
         [SemanticProperty("subheading")]
-        [SemanticProperty("name")]
         public string Headline { get; set; }
+        
         //A teaser can be mapped from an individual image, in which case the image property is set from the source entity itself
         [SemanticProperty("i:_self")]
         [SemanticProperty("a:image")]
         public MediaItem Media { get; set; }
+
+        [SemanticProperty("tri:introText")]
         [SemanticProperty("content")]
-        [SemanticProperty("introText")]
         public RichText Text { get; set; }
+
+        [SemanticProperty("dateCreated")]
         public DateTime? Date { get; set; }
         public Location Location { get; set; }
+
         //To store formatting options for the teaser (link style etc.)
         [SemanticProperty(IgnoreMapping=true)]
         private Dictionary<string, string> FormatOptions { get; set; }
