@@ -9,7 +9,7 @@ using System.Web;
 namespace Sdl.Web.Modules.Core.Models
 {
     [SemanticEntity(Vocab = SchemaOrgVocabulary, EntityName = "ItemList", Prefix = "s", Public = true)]
-    public class ContentList<T> : DynamicList
+    public class ContentList<T> : DynamicList where T : EntityModel
     {
         //TODO add concept of filtering/query (filter options and active filters/query)
         [SemanticProperty("s:headline")]
@@ -63,6 +63,17 @@ namespace Sdl.Web.Modules.Core.Models
             get
             {
                 return QueryResults.Cast<T>().ToList();
+            }
+            set
+            {
+                if (value != null)
+                {
+                    QueryResults = value.Cast<EntityModel>().ToList();
+                }
+                else
+                {
+                    QueryResults = null;
+                }
             }
         }
     }
