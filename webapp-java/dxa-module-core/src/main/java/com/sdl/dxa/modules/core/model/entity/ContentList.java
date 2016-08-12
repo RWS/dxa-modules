@@ -114,8 +114,9 @@ public class ContentList extends DynamicList<Teaser, SimpleBrokerQuery> {
     }
 
     @Override
-    public void setQueryResults(List<Teaser> queryResults) {
+    public void setQueryResults(List<Teaser> queryResults, boolean hasMore) {
         setItemListElements(queryResults);
+        setHasMore(hasMore);
     }
 
     @Override
