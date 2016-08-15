@@ -19,8 +19,8 @@ namespace Sdl.Web.Modules.Test
 
         private static readonly IDictionary<Type, object> _testProviders = new Dictionary<Type, object>
         {
-            { typeof(IContentProvider), new DefaultProvider() },
-            { typeof(INavigationProvider), new DefaultProvider() },
+            { typeof(IContentProvider), new DefaultContentProvider() },
+            { typeof(INavigationProvider), new DefaultContentProvider() },
             { typeof(ILinkResolver), new DefaultLinkResolver() },
             { typeof(IRichTextProcessor), new DefaultRichTextProcessor() },
             { typeof(ILocalizationResolver), new TestFixture() }

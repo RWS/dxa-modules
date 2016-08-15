@@ -51,17 +51,13 @@
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Sdl.Web.Common">
-      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.5.0\lib\net452\Sdl.Web.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Sdl.Web.Common.Models">
-      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.5.0\lib\net452\Sdl.Web.Common.Models.dll</HintPath>
+      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.6.0-alpha-201608090605\lib\net452\Sdl.Web.Common.dll</HintPath>
     </Reference>
     <Reference Include="Sdl.Web.Mvc">
-      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.5.0\lib\net452\Sdl.Web.Mvc.dll</HintPath>
+      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.6.0-alpha-201608090605\lib\net452\Sdl.Web.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="Sdl.Web.Tridion, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.5.0\lib\net452\Sdl.Web.Tridion.dll</HintPath>
+    <Reference Include="Sdl.Web.Tridion">
+      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.6.0-alpha-201608090605\lib\net452\Sdl.Web.Tridion.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Web" />
@@ -129,6 +125,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core\Sdl.Web.Modules.Core.csproj">
+      <Project>{32943bd1-4891-4b03-afcd-296658f61581}</Project>
+      <Name>Sdl.Web.Modules.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ExperienceOptimization\Sdl.Web.Modules.SmartTarget.csproj">
       <Project>{492157de-3114-48e5-9a23-965d5fe4da74}</Project>
       <Name>SDL.Web.Modules.SmartTarget</Name>
@@ -151,11 +151,11 @@ xcopy "$(TargetPath)" "%25DXA_SITE_DIR%25\bin" /Y
 xcopy "$(ProjectDir)Areas" "%25DXA_SITE_DIR%25\Areas" /S /I /Y
 )</PostBuildEvent>
   </PropertyGroup>
-  <Import Project="..\packages\Sdl.Dxa.Framework.Web8.1.5.0\build\net452\Sdl.Dxa.Framework.Web8.targets" Condition="Exists('..\packages\Sdl.Dxa.Framework.Web8.1.5.0\build\net452\Sdl.Dxa.Framework.Web8.targets')" />
+  <Import Project="..\packages\Sdl.Dxa.Framework.Web8.1.6.0-alpha-201608090605\build\net452\Sdl.Dxa.Framework.Web8.targets" Condition="Exists('..\packages\Sdl.Dxa.Framework.Web8.1.6.0-alpha-201608090605\build\net452\Sdl.Dxa.Framework.Web8.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Sdl.Dxa.Framework.Web8.1.5.0\build\net452\Sdl.Dxa.Framework.Web8.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Sdl.Dxa.Framework.Web8.1.5.0\build\net452\Sdl.Dxa.Framework.Web8.targets')))" />
+    <Error Condition="!Exists('..\packages\Sdl.Dxa.Framework.Web8.1.6.0-alpha-201608090605\build\net452\Sdl.Dxa.Framework.Web8.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Sdl.Dxa.Framework.Web8.1.6.0-alpha-201608090605\build\net452\Sdl.Dxa.Framework.Web8.targets')))" />
   </Target>
 </Project>

@@ -12,7 +12,7 @@ namespace Sdl.Web.Modules.Impress.Helpers
         /// <param name="htmlHelper">HtmlHelper</param>
         /// <param name="image">The image</param>
         /// <returns>The background image style attribute, or empty string if no image available</returns>
-        public static MvcHtmlString BgImgStyle(this HtmlHelper htmlHelper, Image image)
+        public static MvcHtmlString BgImgStyle(this HtmlHelper htmlHelper, MediaItem image)
         {
             if (image == null || String.IsNullOrEmpty(image.Url))
             {

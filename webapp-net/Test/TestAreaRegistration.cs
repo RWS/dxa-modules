@@ -1,4 +1,5 @@
 ﻿using Sdl.Web.Common.Models;
+using Sdl.Web.Modules.Core.Models;
 using Sdl.Web.Modules.SmartTarget.Models;
 using Sdl.Web.Modules.Test.Models;
 using Sdl.Web.Mvc.Configuration;

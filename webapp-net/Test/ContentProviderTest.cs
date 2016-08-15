@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Models;
+using Sdl.Web.Modules.Core.Models;
 
 namespace Sdl.Web.Modules.Test
 {

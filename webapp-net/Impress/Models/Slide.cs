@@ -13,6 +13,6 @@ namespace Sdl.Web.Modules.Impress.Models
         public int Rotate { get; set; }
         public int XRotate { get; set; }
         public int YRotate { get; set; }
-        public Image BgImage { get; set; }
+        public MediaItem BgImage { get; set; }
     }
 }
