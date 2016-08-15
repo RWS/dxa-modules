@@ -20,6 +20,7 @@ namespace Sdl.Web.Modules.Core.Models
         [SemanticProperty("tri:name")]
         [SemanticProperty("headline")]
         [SemanticProperty("subheading")]
+        [SemanticProperty("p:name")]
         public string Headline { get; set; }
         
         //A teaser can be mapped from an individual image, in which case the image property is set from the source entity itself
