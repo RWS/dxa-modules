@@ -6,17 +6,18 @@ namespace Sdl.Web.Modules.Core.Models
 {
     [SemanticEntity(EntityName = "Teaser", Prefix = "t", Vocab = CoreVocabulary)]
     [SemanticEntity(EntityName = "Image", Prefix = "i", Vocab = CoreVocabulary)]
-    [SemanticEntity(EntityName = "Article", Prefix = "s", Vocab = SchemaOrgVocabulary)]
+    [SemanticEntity(EntityName = "Article", Prefix = "s", Vocab = CoreVocabulary)]
     [SemanticEntity(EntityName = "NewsArticle", Prefix = "tri", Vocab = CoreVocabulary)]
     [SemanticEntity(EntityName = "Place", Prefix = "p", Vocab = CoreVocabulary)]
     public class Teaser : EntityModel
     {
         //A teaser can be mapped from an article or place, in which case the link should be to the item itself
         [SemanticProperty("tri:_self")]
+        [SemanticProperty("s:_self")]
         [SemanticProperty("p:_self")]
         public Link Link { get; set; } // TODO: add resolve link code on first retrieval
         
-        [SemanticProperty("tri:name")] 
+        [SemanticProperty("tri:name")]
         [SemanticProperty("headline")]
         [SemanticProperty("subheading")]
         public string Headline { get; set; }
@@ -27,10 +28,11 @@ namespace Sdl.Web.Modules.Core.Models
         public MediaItem Media { get; set; }
 
         [SemanticProperty("tri:introText")]
-        [SemanticProperty("content")]
+        [SemanticProperty("s:introText")]
         public RichText Text { get; set; }
 
         [SemanticProperty("dateCreated")]
+        [SemanticProperty("_self")]
         public DateTime? Date { get; set; }
         public Location Location { get; set; }
 
