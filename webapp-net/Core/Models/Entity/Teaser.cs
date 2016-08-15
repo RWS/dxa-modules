@@ -12,7 +12,7 @@ namespace Sdl.Web.Modules.Core.Models
     public class Teaser : EntityModel
     {
         //A teaser can be mapped from an article or place, in which case the link should be to the item itself
-        [SemanticProperty("a:_self")]
+        [SemanticProperty("tri:_self")]
         [SemanticProperty("p:_self")]
         public Link Link { get; set; } // TODO: add resolve link code on first retrieval
         
