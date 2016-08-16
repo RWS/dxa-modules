@@ -25,9 +25,14 @@
                 <dependency name="Sdl.KcWebApp.Components" />
             </dependencies>
         </resourceGroup>
+        <resourceGroup name="Sdl.KcWebApp.Server">
+            <files>
+                <file name="Server.js"/>
+            </files>
+        </resourceGroup>
     </resourceGroups>
     <!-- Configuration for pages -->
-    <pages>
+    <pages baseUrl="/">
         <page url="*" resource="Sdl.KcWebApp" title="SDL Knowledge Center Documentation Portal" />
     </pages>
 </configuration>

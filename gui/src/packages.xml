@@ -7,5 +7,15 @@
                 <resourceGroup name="Sdl.KcWebApp" />
             </resourceGroups>
         </package>
+        <package name="Sdl.KcWebApp.Components">
+            <resourceGroups>
+                <resourceGroup name="Sdl.KcWebApp.Components" />
+            </resourceGroups>
+        </package>
+        <package name="Sdl.KcWebApp.Server">
+            <resourceGroups>
+                <resourceGroup name="Sdl.KcWebApp.Server" />
+            </resourceGroups>
+        </package>
     </packages>
 </configuration>

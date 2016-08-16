@@ -1,5 +1,6 @@
 package com.sdl.knowledgecenter;
 
+import com.sdl.knowledgecenter.renderers.ReactComponentsRenderer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,29 +17,31 @@ import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class)
 @ActiveProfiles("test")
-public class MainServiceTest {
+public class ReactComponentsRendererTest {
 
     @Autowired
-    private MainService mainService;
+    private ReactComponentsRenderer reactComponentsRenderer;
 
     @Test
-    public void shouldHello() throws Exception {
+    public void renders() throws Exception {
         //given
-        final String expected = "Hello, web-app!";
+        final String expected = "Hello world!";
 
         //when
-        final String result = mainService.hello();
+        final String result = reactComponentsRenderer.renderPage("home");
 
         //then
-        assertEquals(expected, result);
+        assertTrue(result.startsWith("<div"));
+        assertTrue(result.contains(expected));
+        assertTrue(result.endsWith("</div>"));
     }
 
     @Configuration
     @Profile("test")
     public static class TestConfig {
         @Bean
-        public MainService mainService() {
-            return new MainService();
+        public ReactComponentsRenderer reactComponentsRenderer() {
+            return new ReactComponentsRenderer();
         }
     }
 }

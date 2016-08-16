@@ -177,11 +177,17 @@ gulp.task('build', [
 gulp.task('build:dist', cb => {
     buildOptions.isDebug = false;
     runSequence('clean', 'copy-common-ui', 'build', err => {
-        if (err) {
+        if (err || !yargs.argv.targetPath) {
             cb(err);
             return;
         }
-        fs.move(buildOptions.distPath, yargs.argv.targetPath, cb);
+        fs.remove(yargs.argv.targetPath, err => {
+            if (err) {
+                cb(err);
+                return;
+            }
+            fs.move(buildOptions.distPath, yargs.argv.targetPath, cb);
+        });
     });
 });
 
