@@ -18,6 +18,7 @@ namespace Sdl.Web.Modules.Core.Models
         public Link Link { get; set; } // TODO: add resolve link code on first retrieval
         
         [SemanticProperty("tri:name")]
+        [SemanticProperty("s:name")]
         [SemanticProperty("headline")]
         [SemanticProperty("subheading")]
         [SemanticProperty("p:name")]
