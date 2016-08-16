@@ -15,28 +15,54 @@ namespace Sdl.Web.Modules.Core.Models
         [SemanticProperty("s:headline")]
         public string Headline { get; set; }
         public Link Link { get; set; }
-        public int PageSize { get; set; }
-        public int CurrentPage { get; set; }
         public Tag ContentType { get; set; }
         public Tag Sort { get; set; }
-        public int Start { get; set; }
+        [SemanticProperty(true)]
+        protected SimpleBrokerQuery Query { get; set; }
+        public int PageSize
+        {
+            get
+            {
+                return Query.PageSize;
+            }
+            set
+            {
+                Query.PageSize = value;
+            }
+        }
+        public int CurrentPage 
+        { 
+            get 
+            {
+                return Query.CurrentPage; 
+            } 
+        }
+        public int Start 
+        {
+            get
+            {
+                return Query.Start;
+            }
+            set
+            {
+                Query.Start = value;
+            }
+        }
 
         public ContentList()
         {
-            CurrentPage = 1;
+            Query = new SimpleBrokerQuery();
         }
 
         public override Common.Query GetQuery(Localization localization)
         {
-            return new SimpleBrokerQuery
-            {
-                Start = Start,
-                PublicationId = Int32.Parse(localization.LocalizationId),
-                PageSize = PageSize,
-                SchemaId = MapSchema(ContentType.Key, localization),
-                Sort = Sort.Key,
-                Localization = localization
-            };
+            Query.Start = Start;
+            Query.PublicationId = Int32.Parse(localization.LocalizationId);
+            Query.PageSize = PageSize;
+            Query.SchemaId = MapSchema(ContentType.Key, localization);
+            Query.Sort = Sort.Key;
+            Query.Localization = localization;
+            return Query;
         }
 
         protected int MapSchema(string schemaKey, Localization localization)
