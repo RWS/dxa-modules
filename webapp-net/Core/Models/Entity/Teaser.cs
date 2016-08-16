@@ -26,7 +26,8 @@ namespace Sdl.Web.Modules.Core.Models
         
         //A teaser can be mapped from an individual image, in which case the image property is set from the source entity itself
         [SemanticProperty("i:_self")]
-        [SemanticProperty("a:image")]
+        [SemanticProperty("s:image")]
+        [SemanticProperty("tri:image")]
         public MediaItem Media { get; set; }
 
         [SemanticProperty("tri:introText")]
