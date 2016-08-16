@@ -22,6 +22,12 @@ import org.springframework.web.servlet.view.JstlView;
 @Import({DxaSpringInitialization.class, MvcConfig.class})
 public class SpringInitializer {
 
+    /**
+     * Custom view resolver.
+     * Overwrites the default ViewResolver of DXA.
+     *
+     * @return The view resolver.
+     */
     @Bean
     public ViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();

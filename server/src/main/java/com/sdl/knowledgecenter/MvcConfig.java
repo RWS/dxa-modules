@@ -11,6 +11,11 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
     /* Time, in seconds, to have the browser cache static resources (one week). */
     private static final int BROWSER_CACHE_CONTROL = 604800;
 
+    /**
+     * Add resource handlers for the gui
+     *
+     * @param registry Resource registry.
+     */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry

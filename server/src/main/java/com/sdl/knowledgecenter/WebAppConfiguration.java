@@ -17,6 +17,12 @@ import static com.sdl.webapp.common.util.InitializationUtils.registerServlet;
 @Slf4j
 public class WebAppConfiguration implements WebApplicationInitializer {
 
+    /**
+     * Executed when the app starts
+     *
+     * @param servletContext
+     * @throws ServletException
+     */
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
         log.debug("Initializing servlet application context");

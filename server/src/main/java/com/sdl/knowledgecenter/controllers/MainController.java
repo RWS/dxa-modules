@@ -22,6 +22,9 @@ import java.net.URL;
 import static com.sdl.webapp.common.controller.RequestAttributeNames.LOCALIZATION;
 import static com.sdl.webapp.common.controller.RequestAttributeNames.PAGE_MODEL;
 
+/**
+ * Main controller
+ */
 @Controller
 public class MainController {
     private ReactComponentsRenderer reactComponentsRenderer = new ReactComponentsRenderer();
@@ -32,6 +35,13 @@ public class MainController {
     @Autowired
     private ContentProvider contentProvider;
 
+    /**
+     * Home page
+     *
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "/home")
     public String home(HttpServletRequest request) throws Exception {
         final String requestPath = "/";
@@ -45,6 +55,13 @@ public class MainController {
         return "home";
     }
 
+    /**
+     * Home page with server side rendering
+     *
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "/home-server")
     public String homeServer(HttpServletRequest request) throws Exception {
         final String requestPath = "/";

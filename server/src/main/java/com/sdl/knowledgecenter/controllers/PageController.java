@@ -21,6 +21,10 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Page controller
+ * Overwrites DXA page controller to allow custom routing.
+ */
 @Controller
 public class PageController extends com.sdl.webapp.common.controller.PageController {
 
@@ -33,12 +37,26 @@ public class PageController extends com.sdl.webapp.common.controller.PageControl
     @Autowired
     private DataFormatter dataFormatters;
 
+    /**
+     * Main entry point of the application
+     *
+     * @param request
+     * @param response
+     * @return Redirects to the home page.
+     * @throws Exception
+     */
     @Override
     @RequestMapping(method = RequestMethod.GET, value = "/", produces = {MediaType.TEXT_HTML_VALUE, MediaType.ALL_VALUE})
     public String handleGetPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
         return "redirect:home";
     }
 
+    /**
+     * Get page model using the json format
+     *
+     * @param request
+     * @return Page model using the json format.
+     */
     @Override
     @RequestMapping(method = RequestMethod.GET, value = "/api/**",
             produces = {MediaType.APPLICATION_JSON_VALUE})
