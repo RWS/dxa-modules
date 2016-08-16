@@ -30,11 +30,12 @@ namespace Sdl.Web.Modules.Core.Models
 
         [SemanticProperty("tri:introText")]
         [SemanticProperty("s:introText")]
+        [SemanticProperty("content")]
         public RichText Text { get; set; }
 
         [SemanticProperty("dateCreated")]
-        [SemanticProperty("_self")]
         public DateTime? Date { get; set; }
+
         public Location Location { get; set; }
 
         //To store formatting options for the teaser (link style etc.)
