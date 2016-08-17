@@ -86,7 +86,7 @@
     </Reference>
     <Reference Include="Tridion.SmartTarget">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Sdl.Web.Experience.8.2.0\lib\net45\Tridion.SmartTarget.dll</HintPath>
+      <HintPath>..\packages\Sdl.Web.Experience.8.2.1\lib\net45\Tridion.SmartTarget.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup Condition="'$(Configuration)' == 'Release_7.1'">
