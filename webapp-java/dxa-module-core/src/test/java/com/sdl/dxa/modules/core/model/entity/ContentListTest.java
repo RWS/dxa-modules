@@ -1,23 +1,17 @@
 package com.sdl.dxa.modules.core.model.entity;
 
-import com.google.common.collect.ImmutableMap;
 import com.sdl.webapp.common.api.localization.Localization;
-import com.sdl.webapp.common.api.model.RichText;
 import com.sdl.webapp.common.api.model.entity.Link;
 import com.sdl.webapp.common.api.model.entity.Tag;
-import com.sdl.webapp.common.api.model.query.ComponentMetadata;
 import com.sdl.webapp.common.api.model.query.SimpleBrokerQuery;
 import org.jetbrains.annotations.NotNull;
-import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.eq;
@@ -212,56 +206,6 @@ public class ContentListTest {
         return contentList;
     }
 
-    @SuppressWarnings("ConstantConditions")
-    @Test
-    public void shouldReturnTeaser() {
-        //given
-        ContentList contentList = new ContentList();
-
-        Link link = new Link();
-        link.setUrl("url");
-
-        Teaser expected1 = new Teaser();
-        String headline1 = "Name";
-        Date date1 = new Date();
-        String introText1 = "IntroText";
-        expected1.setDate(new DateTime(date1));
-        expected1.setHeadline(headline1);
-        expected1.setText(new RichText(introText1));
-        expected1.setLink(link);
-
-        Teaser expected2 = new Teaser();
-        Date date2 = new Date();
-        String title2 = "Title";
-        expected2.setDate(new DateTime(date2));
-        expected2.setHeadline(title2);
-        expected2.setText(new RichText((String) null));
-        expected2.setLink(link);
-
-        //when
-        Teaser nullTeaser = contentList.getEntity(null);
-
-        Teaser allFields = contentList.getEntity(ComponentMetadata.builder()
-                .publicationId("1")
-                .id("2")
-                .componentUrl("url")
-                .custom(ImmutableMap.<String, Object>of("dateCreated", date1, "name", headline1, "introText", introText1))
-                .build());
-
-        Teaser noFields = contentList.getEntity(ComponentMetadata.builder()
-                .publicationId("1")
-                .id("2")
-                .componentUrl("url")
-                .lastPublicationDate(date2)
-                .title(title2)
-                .build());
-
-        //then
-        assertNull(nullTeaser);
-        assertEquals(expected1, allFields);
-        assertEquals(expected2, noFields);
-    }
-
     @Test
     public void shouldSetItemListWithQueryResults() {
         //given
@@ -279,6 +223,18 @@ public class ContentListTest {
         assertSame(list, queryResults);
         assertSame(list, itemListElements);
         assertTrue(contentList.isHasMore());
+    }
+
+    @Test
+    public void shouldReturnItsEntityType() {
+        //given
+        ContentList contentList = new ContentList();
+
+        //when
+        Class<Teaser> entityType = contentList.getEntityType();
+
+        //then
+        assertEquals(entityType, Teaser.class);
     }
 
 }

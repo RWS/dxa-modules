@@ -6,22 +6,17 @@ import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticEntities;
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticEntity;
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticProperties;
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticProperty;
-import com.sdl.webapp.common.api.model.RichText;
 import com.sdl.webapp.common.api.model.entity.DynamicList;
 import com.sdl.webapp.common.api.model.entity.Link;
 import com.sdl.webapp.common.api.model.entity.Tag;
-import com.sdl.webapp.common.api.model.query.ComponentMetadata;
 import com.sdl.webapp.common.api.model.query.SimpleBrokerQuery;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.joda.time.DateTime;
 import org.springframework.util.Assert;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static com.sdl.webapp.common.api.mapping.semantic.config.SemanticVocabulary.SCHEMA_ORG;
@@ -120,28 +115,8 @@ public class ContentList extends DynamicList<Teaser, SimpleBrokerQuery> {
     }
 
     @Override
-    public Teaser getEntity(ComponentMetadata componentMetadata) {
-        if (componentMetadata == null) {
-            log.info("Component Metadata is null, returning null");
-            return null;
-        }
-
-        Teaser teaser = new Teaser();
-
-        final Link link = new Link();
-        link.setUrl(componentMetadata.getComponentUrl());
-        teaser.setLink(link);
-
-        @Nullable Date dateCreated = componentMetadata.getCustom("dateCreated", Date.class);
-        teaser.setDate(dateCreated != null ? new DateTime(dateCreated) :
-                new DateTime(componentMetadata.getLastPublicationDate()));
-
-        @Nullable String headline = componentMetadata.getCustom("name", String.class);
-        teaser.setHeadline(headline != null ? headline : componentMetadata.getTitle());
-
-        teaser.setText(new RichText(componentMetadata.getCustom("introText", String.class)));
-
-        return teaser;
+    public Class<Teaser> getEntityType() {
+        return Teaser.class;
     }
 
     @Override
