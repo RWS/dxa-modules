@@ -1,0 +1,25 @@
+{
+  "Id": "ish:39137-6119-16",
+  "Title": "answering or rejecting a call",
+  "Meta": {
+    "LogicalId": "GUID-291C9232-8846-42A5-BEA6-228F7C4A6C20",
+    "LogicalCardId": "6117",
+    "LanguageCardId": "6119",
+    "VersionCardId": "6118",
+    "ObjectType": "ISHModule",
+    "FTITLE-logical": "answering or rejecting a call",
+    "FDESCRIPTION-logical": null,
+    "FCHANGES-version": "Imported OASIS DITA 1.1",
+    "FISHRELEASELABEL-version": null,
+    "CREATED-ON-lng": "29/10/2008 16:37:23",
+    "FAUTHOR-lng": "Author",
+    "FSTATUS-lng": "Released",
+    "MODIFIED-ON-lng": "09/04/2010 10:24:52",
+    "VERSION-version": "1",
+    "FRESOLUTION-lng": null,
+    "DOC-LANGUAGE-lng": "en",
+    "FISHREVCOUNTER-lng": "1",
+    "ED-lng": "GUID-653C3661-2F4F-4F86-934C-E0AA5A556900"
+  },
+  "Html": "<div class=\"body taskbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\r\n\t\t\t<p class=\"shortdesc\">\r\n\t\t\t</p>\r\n\t\t\t<div class=\"section context\" id=\"GUID-291C9232-8846-42A5-BEA6-228F7C4A6C20__GUID-25D3E37A-5A35-4287-9CE2-8E9AD0D55069\">Note that when somebody is calling you, the phone shows the callerâ€™s name, phone number or the text <samp class=\"ph msgph\">Private Number</samp> or <samp class=\"ph msgph\">Call</samp>. If more than one name is found in the phone book with the same phone number as the callerâ€™s number, only the phone number\r\n            will be displayed, if this is available.\r\n         </div>\r\n\t\t\t<ol class=\"ol steps\" id=\"GUID-291C9232-8846-42A5-BEA6-228F7C4A6C20__GUID-7E9372DD-5095-4116-8D0F-A46300073277\">\r\n\t\t\t\t<li class=\"li step\">\r\n\t\t\t\t\t<span class=\"ph cmd\">Press <tcdl:link type=\"ish:image\" ref=\"ish:39137-6853-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" />to answer the incoming call and press <tcdl:link type=\"ish:image\" ref=\"ish:39137-6902-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" /> to end the call.</span>\r\n\t\t\t\t</li>\r\n\t\t\t\t<li class=\"li step\">\r\n\t\t\t\t\t<span class=\"ph cmd\">Press <tcdl:link type=\"ish:image\" ref=\"ish:39137-6902-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" /> to reject the incoming call.</span>\r\n\t\t\t\t</li>\r\n\t\t\t</ol>\r\n\t\t\t\r\n\t\t\t\t<div class=\"section postreq\" id=\"GUID-291C9232-8846-42A5-BEA6-228F7C4A6C20__GUID-3F821A81-144A-4684-A34D-1EDB3B0AEF3C\">If a compatible headset is connected to the phone, you can answer and end a call by pressing the headset key.</div>\r\n\t\t\t\r\n\t\t</div>"
+}

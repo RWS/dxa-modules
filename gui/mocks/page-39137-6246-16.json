@@ -1,0 +1,25 @@
+{
+  "Id": "ish:39137-6246-16",
+  "Title": "introduction",
+  "Meta": {
+    "LogicalId": "GUID-30956BCB-576E-4180-9CE4-044B7E9474A3",
+    "LogicalCardId": "6244",
+    "LanguageCardId": "6246",
+    "VersionCardId": "6245",
+    "ObjectType": "ISHModule",
+    "FTITLE-logical": "introduction",
+    "FDESCRIPTION-logical": null,
+    "FCHANGES-version": "Imported OASIS DITA 1.1",
+    "FISHRELEASELABEL-version": null,
+    "CREATED-ON-lng": "29/10/2008 17:11:04",
+    "FAUTHOR-lng": "Author",
+    "FSTATUS-lng": "Released",
+    "MODIFIED-ON-lng": "09/04/2010 10:25:40",
+    "VERSION-version": "1",
+    "FRESOLUTION-lng": null,
+    "DOC-LANGUAGE-lng": "en",
+    "FISHREVCOUNTER-lng": "1",
+    "ED-lng": "GUID-28E13274-6824-40D1-A8F6-40BFA972AC3F"
+  },
+  "Html": "<div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\r\n\t\t\t<div class=\"section\" id=\"GUID-30956BCB-576E-4180-9CE4-044B7E9474A3__GUID-E8464A34-9748-407E-A763-7DBB59A95920\">\r\n\t\t\t\t<div class=\"p\">In purchasing this mobile phone, you have decided on a quality product. The features of your machine meet the many needs that\r\n               arise in modern mobile communication.\r\n               <br /><tcdl:link type=\"ish:image\" ref=\"ish:39137-6500-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" /><br /></div>\r\n\t\t\t</div>\r\n\t\t\t<div class=\"section\" id=\"GUID-30956BCB-576E-4180-9CE4-044B7E9474A3__GUID-E332A7A0-D799-4362-B5D3-6B4237556906\">\r\n\t\t\t\t<p class=\"p\">Please read the user manual carefully and follow the safety instructions to ensure proper operation of your phone. Your phone\r\n               is identified by its IMEI number. Write this number down, and do not keep it with your phone, because you may be asked for\r\n               it in the event of your phone being stolen, in order to prevent it from being used, even with a different SIM card. In order\r\n               to display the IMEI on your phoneâ€™screen, type: *#06#. \r\n            </p>\r\n\t\t\t</div>\r\n\t\t\t<div class=\"section\" id=\"GUID-30956BCB-576E-4180-9CE4-044B7E9474A3__GUID-D485B709-626C-4C6C-AF2D-3450487B3AD9\">\r\n\t\t\t\t\r\n\t\t\t\t\t<p class=\"p\">Bluetooth technology enables cost-free wireless connections between electronic devices within a maximum range of 10 metres.\r\n                  A Bluetooth connection can be used to send images, videos, texts, business cards, calendar notes, or to connect wirelessly\r\n                  to devices using Bluetooth technology, such as computers.\r\n               </p>\r\n\t\t\t\t\r\n\t\t\t</div>\r\n\t\t\t<div class=\"section\" id=\"GUID-30956BCB-576E-4180-9CE4-044B7E9474A3__GUID-2E2D5963-7966-45AB-8E08-6D6DFEAB4533\">\r\n\t\t\t\t<p class=\"p\">You should only use original consumables â€” your guarantee does not cover damage to your product caused by the use of any other\r\n               consumables. \r\n            </p>\r\n\t\t\t\t<p class=\"p\">As part of our continuing quest for total customer satisfaction, all of our products are made with ease-of-use and reliability\r\n               in mind.\r\n            </p>\r\n\t\t\t</div>\r\n\t\t</div>"
+}

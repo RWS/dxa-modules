@@ -1,0 +1,25 @@
+{
+  "Id": "ish:39137-6278-16",
+  "Title": "snake game",
+  "Meta": {
+    "LogicalId": "GUID-E97722D1-514C-4FAE-A9BA-DB55C6CA04E0",
+    "LogicalCardId": "6276",
+    "LanguageCardId": "6278",
+    "VersionCardId": "6277",
+    "ObjectType": "ISHModule",
+    "FTITLE-logical": "snake game",
+    "FDESCRIPTION-logical": null,
+    "FCHANGES-version": "Imported OASIS DITA 1.1",
+    "FISHRELEASELABEL-version": null,
+    "CREATED-ON-lng": "29/10/2008 17:12:58",
+    "FAUTHOR-lng": "Author",
+    "FSTATUS-lng": "Released",
+    "MODIFIED-ON-lng": "09/04/2010 10:26:17",
+    "VERSION-version": "1",
+    "FRESOLUTION-lng": null,
+    "DOC-LANGUAGE-lng": "en",
+    "FISHREVCOUNTER-lng": "1",
+    "ED-lng": "GUID-0C5CB0DD-395B-48A9-A694-C6DD1A564B6A"
+  },
+  "Html": "<div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\r\n\t\t\t<p class=\"shortdesc\">Make the snake grow longer by directing it to the food.</p>\r\n\t\t\t<br />\r\n\t\t\t<tcdl:link type=\"ish:image\" ref=\"ish:39137-6536-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" />\r\n\t\t\t<br />\r\n\t\t\t<p class=\"p\">The goal of the game is to make the snake grow longer by directing it to the food.</p>\r\n\t\t\t<p class=\"p\">Use the keys <tcdl:link type=\"ish:image\" ref=\"ish:39137-6723-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" />,<tcdl:link type=\"ish:image\" ref=\"ish:39137-6757-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" />,<tcdl:link type=\"ish:image\" ref=\"ish:39137-6822-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" /> and <tcdl:link type=\"ish:image\" ref=\"ish:39137-6790-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" /> to change direction.\r\n         </p>\r\n\t\t\t<p class=\"p\">Avoid hitting the walls and your own tail.</p>\r\n\t\t\t<p class=\"p\">Eat the bonus food before time expires. I addition to the food there are some power-ups on the playground. Power-ups can either\r\n            help your game or make it more difficult.\r\n         </p>\r\n\t\t</div>"
+}

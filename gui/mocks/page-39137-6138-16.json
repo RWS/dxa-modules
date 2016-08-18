@@ -1,0 +1,25 @@
+{
+  "Id": "ish:39137-6138-16",
+  "Title": "deleting messages",
+  "Meta": {
+    "LogicalId": "GUID-F1F85108-6DA2-467B-8EE0-FA41B80AEB4B",
+    "LogicalCardId": "6135",
+    "LanguageCardId": "6138",
+    "VersionCardId": "6137",
+    "ObjectType": "ISHModule",
+    "FTITLE-logical": "deleting messages",
+    "FDESCRIPTION-logical": null,
+    "FCHANGES-version": "Imported OASIS DITA 1.1",
+    "FISHRELEASELABEL-version": null,
+    "CREATED-ON-lng": "29/10/2008 16:39:27",
+    "FAUTHOR-lng": "Author",
+    "FSTATUS-lng": "Released",
+    "MODIFIED-ON-lng": "09/04/2010 10:25:11",
+    "VERSION-version": "1",
+    "FRESOLUTION-lng": null,
+    "DOC-LANGUAGE-lng": "en",
+    "FISHREVCOUNTER-lng": "1",
+    "ED-lng": "GUID-7D388810-7E68-4B6C-956B-BCB3E77B2D5E"
+  },
+  "Html": "<div class=\"body taskbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\r\n\t\t\t<ol class=\"ol steps\" id=\"GUID-F1F85108-6DA2-467B-8EE0-FA41B80AEB4B__GUID-C83648A3-EE9E-458C-9228-154A89CED050\">\r\n\t\t\t\t<li class=\"li step\">\r\n\t\t\t\t\t<span class=\"ph cmd\">To delete text messages, press <samp class=\"ph msgph\">Menu</samp>, and select <samp class=\"ph msgph\">Messages</samp>, <samp class=\"ph msgph\">Text messages</samp> and <samp class=\"ph msgph\">Delete messages</samp>.</span>\r\n\t\t\t\t</li>\r\n\t\t\t\t<li class=\"li step\">\r\n\t\t\t\t\t<span class=\"ph cmd\">To delete all messages from a folder, select the folder where you want to delete the messages and press <samp class=\"ph msgph\">OK</samp>. If the folder contains unread messages, the phone will ask whether you want to delete them also. </span>\r\n\t\t\t\t</li>\r\n\t\t\t</ol>\r\n\t\t</div>"
+}

@@ -1,0 +1,25 @@
+{
+  "Id": "ish:39137-6111-16",
+  "Title": "screen saver",
+  "Meta": {
+    "LogicalId": "GUID-ECE240B0-00BD-4371-AB26-E5AA627FF527",
+    "LogicalCardId": "6109",
+    "LanguageCardId": "6111",
+    "VersionCardId": "6110",
+    "ObjectType": "ISHModule",
+    "FTITLE-logical": "screen saver",
+    "FDESCRIPTION-logical": null,
+    "FCHANGES-version": "Imported OASIS DITA 1.1",
+    "FISHRELEASELABEL-version": null,
+    "CREATED-ON-lng": "29/10/2008 16:36:52",
+    "FAUTHOR-lng": "Author",
+    "FSTATUS-lng": "Released",
+    "MODIFIED-ON-lng": "09/04/2010 10:26:12",
+    "VERSION-version": "1",
+    "FRESOLUTION-lng": null,
+    "DOC-LANGUAGE-lng": "en",
+    "FISHREVCOUNTER-lng": "1",
+    "ED-lng": "GUID-2607FD9C-1AD0-453D-86DA-4AAE013E50BF"
+  },
+  "Html": "<div class=\"body conbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\r\n\t\t\t<p class=\"shortdesc\">The phone automatically activates the screen saver, a digital clock view, for power saving in standby mode.</p>\r\n\t\t\t<p class=\"p\">It is activated when no function of the phone has been used for a certain time. Press any key to deactivate the screen saver.\r\n            Screen saver is also deactivated when the phone is out of the network coverage area.\r\n         </p>\r\n\t\t\t<p class=\"p\">Note that the screen saver overrides all the graphics and texts on the display in standby mode.</p>\r\n\t\t</div>"
+}

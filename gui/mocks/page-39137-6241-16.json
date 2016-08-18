@@ -1,0 +1,25 @@
+{
+  "Id": "ish:39137-6241-16",
+  "Title": "searching for a contact",
+  "Meta": {
+    "LogicalId": "GUID-EADC4793-B449-4D75-A899-135884C22ABD",
+    "LogicalCardId": "6238",
+    "LanguageCardId": "6241",
+    "VersionCardId": "6239",
+    "ObjectType": "ISHModule",
+    "FTITLE-logical": "searching for a contact",
+    "FDESCRIPTION-logical": null,
+    "FCHANGES-version": "Imported OASIS DITA 1.1",
+    "FISHRELEASELABEL-version": null,
+    "CREATED-ON-lng": "29/10/2008 17:10:56",
+    "FAUTHOR-lng": "Author",
+    "FSTATUS-lng": "Released",
+    "MODIFIED-ON-lng": "09/04/2010 10:26:14",
+    "VERSION-version": "1",
+    "FRESOLUTION-lng": null,
+    "DOC-LANGUAGE-lng": "en",
+    "FISHREVCOUNTER-lng": "1",
+    "ED-lng": "GUID-48364DEC-65A0-415C-B0C0-F7E348BE342B"
+  },
+  "Html": "<div class=\"body taskbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\r\n\t\t\t<ol class=\"ol steps\" id=\"GUID-EADC4793-B449-4D75-A899-135884C22ABD__GUID-C771C38F-BC47-440F-902C-7BE80C5814A9\">\r\n\t\t\t\t<li class=\"li step stepexpand\">\r\n\t\t\t\t\t<span class=\"ph cmd\">Press <samp class=\"ph msgph\">Contacts</samp> (or press Go to and select <samp class=\"ph msgph\">Contacts</samp>) and select <samp class=\"ph msgph\">Search</samp>.</span>\r\n\t\t\t\t</li>\r\n\t\t\t\t<li class=\"li step stepexpand\">\r\n\t\t\t\t\t<span class=\"ph cmd\">You can key in the first characters of the contactâ€™s name you are searching for in the search field. Press <tcdl:link type=\"ish:image\" ref=\"ish:39137-6974-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" /> and <tcdl:link type=\"ish:image\" ref=\"ish:39137-6918-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" /> to scroll through the contacts in the list, and <tcdl:link type=\"ish:image\" ref=\"ish:39137-6936-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" /> and <tcdl:link type=\"ish:image\" ref=\"ish:39137-6957-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" /> to move the cursor in the search field.</span>\r\n\t\t\t\t</li>\r\n\t\t\t\t<li class=\"li step stepexpand\">\r\n\t\t\t\t\t<span class=\"ph cmd\">Scroll to the contact you want, and press <samp class=\"ph msgph\">Detail</samp>. Scroll to view the details of the selected contact.</span>\r\n\t\t\t\t\t<div class=\"itemgroup info\">Tip: To quickly find a contact, press <tcdl:link type=\"ish:image\" ref=\"ish:39137-6974-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" /> or <tcdl:link type=\"ish:image\" ref=\"ish:39137-6918-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" /> in standby mode. Key in the first letter(s) of the name, and/or scroll to the contact you want.\r\n               </div>\r\n\t\t\t\t</li>\r\n\t\t\t</ol>\r\n\t\t</div>"
+}

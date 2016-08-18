@@ -1,0 +1,25 @@
+{
+  "Id": "ish:39137-6266-16",
+  "Title": "multimedia messages",
+  "Meta": {
+    "LogicalId": "GUID-D9222E28-4E8D-4D57-A0AB-C9E6C14F2679",
+    "LogicalCardId": "6264",
+    "LanguageCardId": "6266",
+    "VersionCardId": "6265",
+    "ObjectType": "ISHModule",
+    "FTITLE-logical": "multimedia messages",
+    "FDESCRIPTION-logical": null,
+    "FCHANGES-version": "Imported OASIS DITA 1.1",
+    "FISHRELEASELABEL-version": null,
+    "CREATED-ON-lng": "29/10/2008 17:12:28",
+    "FAUTHOR-lng": "Author",
+    "FSTATUS-lng": "Released",
+    "MODIFIED-ON-lng": "09/04/2010 10:26:00",
+    "VERSION-version": "1",
+    "FRESOLUTION-lng": null,
+    "DOC-LANGUAGE-lng": "en",
+    "FISHREVCOUNTER-lng": "1",
+    "ED-lng": "GUID-A5624175-A470-4EB7-873D-4FBFF7DAB403"
+  },
+  "Html": "<div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\r\n\t\t\t<p class=\"shortdesc\">A multimedia message can contain text, picture and sound.</p>\r\n\t\t\t<p class=\"p\">Your phone can receive but not send multimedia messages that contain sound. The phone supports multimedia messages that are\r\n            up to 45 KB in size. If the maximum size is exceeded, the phone may not be able to receive the message. Depending on the network,\r\n            you may receive a text message that includes an Internet address where you can view the multimedia message.\r\n         </p>\r\n\t\t\t<p class=\"p\">If the message contains a picture, the phone scales it down to fit the display area.</p>\r\n\t\t\t<p class=\"p\">Multimedia messaging supports the following formats:</p>\r\n\t\t\t<ul class=\"ul\">\r\n\t\t\t\t<li class=\"li\">Picture: JPEG, GIF, PNG, and BMP.</li>\r\n\t\t\t\t<li class=\"li\">Sound: MIDI, Scalable Polyphonic MIDI (SP-MIDI), monophonic ringing tones (RGN) and WB-AMR.</li>\r\n\t\t\t</ul>\r\n\t\t</div>"
+}

@@ -1,0 +1,25 @@
+{
+  "Id": "ish:39137-6262-16",
+  "Title": "messages",
+  "Meta": {
+    "LogicalId": "GUID-FD63F34C-0C66-4F6E-960A-EC79DDC0AA34",
+    "LogicalCardId": "6260",
+    "LanguageCardId": "6262",
+    "VersionCardId": "6261",
+    "ObjectType": "ISHModule",
+    "FTITLE-logical": "messages",
+    "FDESCRIPTION-logical": null,
+    "FCHANGES-version": "Imported OASIS DITA 1.1",
+    "FISHRELEASELABEL-version": null,
+    "CREATED-ON-lng": "29/10/2008 17:12:18",
+    "FAUTHOR-lng": "Author",
+    "FSTATUS-lng": "Released",
+    "MODIFIED-ON-lng": "09/04/2010 10:25:58",
+    "VERSION-version": "1",
+    "FRESOLUTION-lng": null,
+    "DOC-LANGUAGE-lng": "en",
+    "FISHREVCOUNTER-lng": "1",
+    "ED-lng": "GUID-9DB6656B-7224-4E82-A0AF-2194D22A0497"
+  },
+  "Html": "<div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\r\n\t\t\t<p class=\"shortdesc\">\r\n\t\t\t</p>\r\n\t\t\t<p class=\"p\">You can read, write, send and save text, multimedia, and e-mail messages. All messages are organised into folders. Text, multimedia,\r\n            and e-mail messaging are network services. Before you can send any text, picture, or e-mail message, you need to save your\r\n            message centre number.\r\n         </p>\r\n\t\t</div>"
+}

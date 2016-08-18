@@ -1,0 +1,25 @@
+{
+  "Id": "ish:39137-6146-16",
+  "Title": "connectors overview",
+  "Meta": {
+    "LogicalId": "GUID-03AB2EA1-F81B-4A22-8149-710094BE1081",
+    "LogicalCardId": "6143",
+    "LanguageCardId": "6146",
+    "VersionCardId": "6144",
+    "ObjectType": "ISHModule",
+    "FTITLE-logical": "connectors overview",
+    "FDESCRIPTION-logical": null,
+    "FCHANGES-version": "Imported OASIS DITA 1.1",
+    "FISHRELEASELABEL-version": null,
+    "CREATED-ON-lng": "29/10/2008 16:44:19",
+    "FAUTHOR-lng": "Author",
+    "FSTATUS-lng": "Released",
+    "MODIFIED-ON-lng": "09/04/2010 10:25:09",
+    "VERSION-version": "1",
+    "FRESOLUTION-lng": null,
+    "DOC-LANGUAGE-lng": "en",
+    "FISHREVCOUNTER-lng": "1",
+    "ED-lng": "GUID-51D6C680-7693-403A-A4E5-387291AFE85C"
+  },
+  "Html": "<div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\r\n\t\t\t<p class=\"shortdesc\">\r\n\t\t\t</p>\r\n\t\t\t\r\n\t\t\t\t<div class=\"section\" id=\"GUID-03AB2EA1-F81B-4A22-8149-710094BE1081__GUID-150A560B-A3B1-43A7-BE5C-F2251CC62CA1\">\r\n\t\t\t\t\t<br />\r\n\t\t\t\t\t<tcdl:link type=\"ish:image\" ref=\"ish:39137-6380-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" />\r\n\t\t\t\t\t<br />\r\n\t\t\t\t\t<ol class=\"ol\" id=\"GUID-03AB2EA1-F81B-4A22-8149-710094BE1081__GUID-AF0060CD-91E5-40D6-A175-E8ABEBBCBAE2\">\r\n\t\t\t\t\t\t<li class=\"li\">Charger connector</li>\r\n\t\t\t\t\t\t<li class=\"li\">Connector for headsets, the connectivity cable and loopset</li>\r\n\t\t\t\t\t\t<li class=\"li\">Audio line-in connector for the audio cable to connect the phone to external audio equipment</li>\r\n\t\t\t\t\t</ol>\r\n\t\t\t\t</div>\r\n\t\t\t\r\n\t\t</div>"
+}
