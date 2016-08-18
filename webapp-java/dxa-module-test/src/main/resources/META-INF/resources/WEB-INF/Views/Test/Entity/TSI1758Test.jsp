@@ -15,12 +15,12 @@
     <h1>Rendered Tsi1758TestEntity: 9971 with Entity View "Test:Tsi1758TestEntity"</h1>
 
     <h2>embedField1</h2>
-    <c:forEach var="item" items="${entity.embedField1s}">
+    <c:forEach var="item" items="${entity.embedField1}">
         <dxa:entity entity="${item}"/>
     </c:forEach>
 
     <h2>embedField2</h2>
-    <c:forEach var="item" items="${entity.embedField2s}">
+    <c:forEach var="item" items="${entity.embedField2}">
         <dxa:entity entity="${item}"/>
     </c:forEach>
 </div>

@@ -14,14 +14,16 @@ import static com.sdl.webapp.common.api.mapping.semantic.config.SemanticVocabula
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-@SemanticEntity(entityName = "TSI1758", vocabulary = SDL_CORE, prefix = "s")
+//@SemanticEntity(entityName = "TSI1758", vocabulary = SDL_CORE, prefix ="s")
+@SemanticEntity(entityName = "TSI1758", vocabulary = SDL_CORE)
 public class Tsi1758TestEntity extends AbstractEntityModel {
 
-    @SemanticProperty(propertyName = "s:embedField1")
-    public List<Tsi1758TestEmbeddedEntity> embedField1s;
+    //@SemanticProperty(propertyName = "s:embedField1")
+    public List<Tsi1758TestEmbeddedEntity> embedField1;
 
-    @SemanticProperty(propertyName = "s:embedField2")
-    public List<Tsi1758TestEmbeddedEntity> embedField2s;
+
+    //@SemanticProperty(propertyName = "s:embedField2")
+    public List<Tsi1758TestEmbeddedEntity> embedField2;
 
 }
 
