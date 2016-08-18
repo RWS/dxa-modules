@@ -3,6 +3,7 @@ using Sdl.Web.Common.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace Sdl.Web.Modules.Core.Models
 {
@@ -15,52 +16,27 @@ namespace Sdl.Web.Modules.Core.Models
         public Link Link { get; set; }
         public Tag ContentType { get; set; }
         public Tag Sort { get; set; }
-        [SemanticProperty(true)]
-        protected SimpleBrokerQuery Query { get; set; }
-        public int PageSize
-        {
-            get
-            {
-                return Query.PageSize;
-            }
-            set
-            {
-                Query.PageSize = value;
-            }
-        }
+        public int PageSize { get; set; }
+
         public int CurrentPage 
         { 
             get 
             {
-                return Query.CurrentPage; 
-            } 
-        }
-        public int Start 
-        {
-            get
-            {
-                return Query.Start;
+                return PageSize == 0 ? 1 : (Start / PageSize) + 1;
             }
-            set
-            {
-                Query.Start = value;
-            }
-        }
-
-        public ContentList()
-        {
-            Query = new SimpleBrokerQuery();
         }
 
         public override Query GetQuery(Localization localization)
         {
-            Query.Start = Start;
-            Query.PublicationId = Int32.Parse(localization.LocalizationId);
-            Query.PageSize = PageSize;
-            Query.SchemaId = MapSchema(ContentType.Key, localization);
-            Query.Sort = Sort.Key;
-            Query.Localization = localization;
-            return Query;
+            return new SimpleBrokerQuery
+            {
+                Start = Start,
+                PageSize = PageSize,
+                PublicationId = Int32.Parse(localization.LocalizationId),
+                SchemaId = MapSchema(ContentType.Key, localization),
+                Sort = Sort.Key,
+                Localization = localization
+            };
         }
 
         protected int MapSchema(string schemaKey, Localization localization)
@@ -74,6 +50,7 @@ namespace Sdl.Web.Modules.Core.Models
             return result;
         }
 
+        [JsonIgnore]
         public override Type ResultType
         {
             get
