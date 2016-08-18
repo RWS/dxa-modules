@@ -72,7 +72,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ContentProviderTest.cs" />
     <Compile Include="Models\EmbedParentModel.cs" />
     <Compile Include="Models\EmbedChildModel.cs" />
     <Compile Include="Models\CustomPageModel.cs" />
@@ -88,7 +87,6 @@
     <Compile Include="Models\Tsi1758TestEntity.cs" />
     <Compile Include="TestAreaRegistration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestFixture.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
