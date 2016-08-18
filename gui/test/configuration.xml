@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <configuration
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../node_modules/sdl-common-ui/Common/Library/Core/configuration.xsd" merge="false">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../node_modules/sdl-catalina/Common/Library/Core/configuration.xsd" merge="false">
     <!-- IMPORTANT: always include the catalina test configuration.xml file first.
     This to make sure the pages configuration for karma is set first.-->
     <include src="../SDL/Test/configuration.xml" />

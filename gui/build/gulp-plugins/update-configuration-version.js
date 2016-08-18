@@ -8,10 +8,10 @@ var xmlSerializer = new xmlDom.XMLSerializer();
 /**
  * Gulp plugin to update version inside a configuration.xml file
  * @module update-configuration-version
- * @param {Object} options Specifies the version of the application and the version of the CUIL.
+ * @param {Object} options Specifies the version of the application and the version of Catalina.
  */
 module.exports = options => {
-    let {version, cuilVersion} = options;
+    let {version, catalinaVersion} = options;
     return through.obj(function (file, enc, cb) {
         if (file.isNull()) {
             cb(null, file);
@@ -29,7 +29,7 @@ module.exports = options => {
                 el.setAttribute('value', version);
             }
             if (el.getAttribute('name') === 'coreVersion') {
-                el.setAttribute('value', cuilVersion);
+                el.setAttribute('value', catalinaVersion);
             }
         }
 

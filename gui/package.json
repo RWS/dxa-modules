@@ -3,12 +3,12 @@
   "version": "0.1.0-3",
   "description": "Documentation portal for Knowledge Center end users.",
   "dependencies": {
-    "sdl-catalina-react-wrappers": "0.1.0-35"
+    "sdl-catalina-react-wrappers": "0.1.0-42"
   },
   "peerDependencies": {
-    "react": "15.1.0",
-    "react-dom": "15.1.0",
-    "sdl-common-ui": "3.0.0-develop.2547"
+    "react": "15.3.0",
+    "react-dom": "15.3.0",
+    "sdl-catalina": "3.0.0-rc1"
   },
   "devDependencies": {
     "async": "~2.0.0-rc.6",
@@ -39,6 +39,7 @@
     "portfinder": "~1.0.3",
     "remap-istanbul": "~0.5.1",
     "run-sequence": "~1.2.1",
+    "sdl-packager": "1.0.1-1",
     "through2": "~2.0.1",
     "tslint": "~3.14.0",
     "typings-core": "~1.4.0",

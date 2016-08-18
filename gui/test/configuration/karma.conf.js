@@ -2,7 +2,7 @@
 // This file is part of Catalina and allows you to configure less
 // Every setting can be overwritten in your config
 // More info on: http://karma-runner.github.io/0.13/config/configuration-file.html
-var globalConfig = require('../../node_modules/sdl-common-ui/Test/Configuration/karma.conf.js');
+var globalConfig = require('../../node_modules/sdl-catalina/Test/Configuration/karma.conf.js');
 
 module.exports = function (config) {
     globalConfig.configuration(config);
@@ -22,9 +22,9 @@ module.exports = function (config) {
             // Main configuration
             { pattern: 'test/configuration/Configuration.js', watched: false },
             // Initialize the application
-            { pattern: './node_modules/sdl-common-ui/Common.debug/Library/Core/Packages/SDL.Client.Init.js', watched: false },
+            { pattern: './node_modules/sdl-catalina/Common.debug/Library/Core/Packages/SDL.Client.Init.js', watched: false },
             // Fire test loader
-            { pattern: './node_modules/sdl-common-ui/Test/TestLoader.js', watched: false }
+            { pattern: './node_modules/sdl-catalina/Test/TestLoader.js', watched: false }
         ],
 
         /**

@@ -6,7 +6,7 @@
  * @param {Object} buildOptions Build options.
  * @param {Object} gulp Instance of gulp.
  * @param {Object} browserSync BrowserSync instance.
- * @param {function} commonFolderName Returns the name of the CUIL Common folder.
+ * @param {function} commonFolderName Returns the name of the Catalina Common folder.
  */
 module.exports = function (buildOptions, gulp, browserSync, commonFolderName) {
     const _ = require('lodash');
@@ -99,8 +99,8 @@ module.exports = function (buildOptions, gulp, browserSync, commonFolderName) {
                     server: {
                         baseDir: buildOptions.distPath,
                         routes: {
-                            '/SDL/Common': './node_modules/sdl-common-ui/' + commonFolderName() + '/',
-                            '/SDL/Test': './node_modules/sdl-common-ui/Test/',
+                            '/SDL/Common': './node_modules/sdl-catalina/' + commonFolderName() + '/',
+                            '/SDL/Test': './node_modules/sdl-catalina/Test/',
                             // Put test folder behind a virtual directory
                             '/test': buildOptions.testPath
                         }

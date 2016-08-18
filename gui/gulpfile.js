@@ -17,7 +17,7 @@ var reload = browserSync.reload;
 var sourcesPath = './src/';
 var buildOptions = {
     version: packageInfo.version,
-    cuilVersion: packageInfo.peerDependencies['sdl-common-ui'],
+    catalinaVersion: packageInfo.peerDependencies['sdl-catalina'],
     sourcesPath: sourcesPath,
     testPath: './test/',
     distPath: './dist/',
@@ -72,8 +72,8 @@ var compileLess = require('./build/gulp-tasks/compile-less')(buildOptions, gulp)
 var compileTypescript = require('./build/gulp-tasks/compile-typescript')(buildOptions, gulp);
 var runTSLint = require('./build/gulp-tasks/run-tslint')(buildOptions, gulp);
 var serve = require('./build/gulp-tasks/serve')(buildOptions, gulp, browserSync, commonFolderName);
-var copyCommonUI = function (cb) {
-    // simple task to copy from node_modules/sdl-common-ui/Common
+var copyCatalina = function (cb) {
+    // simple task to copy from node_modules/sdl-catalina/Common
     // to src\main\webapp\SDL\Common
     var target = buildOptions.distPath + 'SDL/Common';
     // Clean up
@@ -82,7 +82,7 @@ var copyCommonUI = function (cb) {
             cb(err);
         } else {
             // Copy
-            gulp.src(['./node_modules/sdl-common-ui/' + commonFolderName() + '/**/*'])
+            gulp.src(['./node_modules/sdl-catalina/' + commonFolderName() + '/**/*'])
                 .pipe(gulpDebug({ title: 'Copying' }))
                 .pipe(gulp.dest(target))
                 .on('end', cb);
@@ -146,11 +146,11 @@ gulp.task('package-project', [
     'compile-less',
     'compile-typescript',
     'update-version'],
-    require('./build/gulp-tasks/package-project')(buildOptions, gulp, './node_modules/sdl-common-ui/Tools/Packager.exe'));
+    require('./build/gulp-tasks/package-project')(buildOptions, gulp, './node_modules/sdl-packager/Source/bin/Release/Packager.exe'));
 
 gulp.task('run-tslint', runTSLint);
 
-gulp.task('copy-common-ui', copyCommonUI);
+gulp.task('copy-catalina', copyCatalina);
 
 gulp.task('add-coverage', ['compile-typescript'], require('./build/gulp-tasks/add-coverage')(buildOptions, gulp));
 
@@ -176,7 +176,7 @@ gulp.task('build', [
 
 gulp.task('build:dist', cb => {
     buildOptions.isDebug = false;
-    runSequence('clean', 'copy-common-ui', 'build', err => {
+    runSequence('clean', 'copy-catalina', 'build', err => {
         if (err || !yargs.argv.targetPath) {
             cb(err);
             return;
@@ -241,7 +241,7 @@ gulp.task('serve:dist', function (cb) {
     buildOptions.isDebug = false;
 
     runSequence(
-        'copy-common-ui',
+        'copy-catalina',
         'build',
         function (err) {
             if (err) {
@@ -263,7 +263,7 @@ gulp.task('test', function (cb) {
     buildOptions.isDebug = false;
 
     runSequence(
-        'copy-common-ui',
+        'copy-catalina',
         'build',
         runTests(true, cb));
 });

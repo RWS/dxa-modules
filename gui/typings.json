@@ -10,6 +10,6 @@
     "react": "registry:dt/react#0.14.0+20160602125106",
     "react-dom": "registry:dt/react-dom#0.14.0+20160412154040",
     "sdl-catalina-react-wrappers": "file:./node_modules/sdl-catalina-react-wrappers/typings.json",
-    "sdl-common-ui": "file:./node_modules/sdl-common-ui/Typescript/typings.json"
+    "sdl-catalina": "file:./node_modules/sdl-catalina/Typescript/typings.json"
   }
 }
