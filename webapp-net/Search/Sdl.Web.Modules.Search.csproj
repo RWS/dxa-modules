@@ -48,9 +48,11 @@
     </Reference>
     <Reference Include="Sdl.Web.Common">
       <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.6.0-alpha-201608090605\lib\net452\Sdl.Web.Common.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Sdl.Web.Mvc">
       <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.6.0-alpha-201608090605\lib\net452\Sdl.Web.Mvc.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="SI4T.Query, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
