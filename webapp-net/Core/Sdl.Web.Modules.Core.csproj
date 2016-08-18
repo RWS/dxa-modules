@@ -54,15 +54,11 @@
       <Private>$(CopyLocal)</Private>
     </Reference>
     <Reference Include="Sdl.Web.Common">
-      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.6.0-alpha-201608090605\lib\net452\Sdl.Web.Common.dll</HintPath>
+      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.6.0-alpha-201608180159\lib\net452\Sdl.Web.Common.dll</HintPath>
       <Private>$(CopyLocal)</Private>
     </Reference>
     <Reference Include="Sdl.Web.Mvc">
-      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.6.0-alpha-201608090605\lib\net452\Sdl.Web.Mvc.dll</HintPath>
-      <Private>$(CopyLocal)</Private>
-    </Reference>
-    <Reference Include="Sdl.Web.Tridion">
-      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.6.0-alpha-201608090605\lib\net452\Sdl.Web.Tridion.dll</HintPath>
+      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.6.0-alpha-201608180159\lib\net452\Sdl.Web.Mvc.dll</HintPath>
       <Private>$(CopyLocal)</Private>
     </Reference>
     <Reference Include="System" />

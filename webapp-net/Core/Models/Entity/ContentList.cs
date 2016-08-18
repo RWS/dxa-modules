@@ -1,10 +1,8 @@
 ﻿using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Models;
-using Sdl.Web.Tridion.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace Sdl.Web.Modules.Core.Models
 {
@@ -54,7 +52,7 @@ namespace Sdl.Web.Modules.Core.Models
             Query = new SimpleBrokerQuery();
         }
 
-        public override Common.Query GetQuery(Localization localization)
+        public override Query GetQuery(Localization localization)
         {
             Query.Start = Start;
             Query.PublicationId = Int32.Parse(localization.LocalizationId);
