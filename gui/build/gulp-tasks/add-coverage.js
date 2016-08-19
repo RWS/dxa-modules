@@ -28,6 +28,7 @@ module.exports = function (buildOptions, gulp) {
             var paths = [
                 buildOptions.distPath + '**/*.js',
                 '!' + buildOptions.distPath + 'Index.js', // Exclude main page
+                '!' + buildOptions.distPath + 'CatalinaPolyfills.js',
                 '!' + buildOptions.distPath + 'lib/**',
                 '!' + buildOptions.distPath + 'packages/**',
                 '!' + buildOptions.distPath + 'SDL/**'
