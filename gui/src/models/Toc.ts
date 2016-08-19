@@ -7,16 +7,33 @@ module Sdl.KcWebApp.Models {
 
     /* tslint:disable-next-line */
     eval(SDL.Client.Types.OO.enableCustomInheritance);
+    /**
+     * Toc model, used for interacting with the server and doing basic operations on the model itself.
+     *
+     * @export
+     * @class Toc
+     * @extends {SDL.Client.Models.LoadableObject}
+     */
     export class Toc extends SDL.Client.Models.LoadableObject {
 
         private _parentId: string;
         private _sitemapItems: ISitemapItem[];
 
+        /**
+         * Creates an instance of Toc.
+         *
+         * @param {string} parentId
+         */
         constructor(parentId: string) {
             super();
             this._parentId = parentId;
         }
 
+        /**
+         * Get the site map items
+         *
+         * @returns {ISitemapItem[]}
+         */
         public getSitemapItems(): ISitemapItem[] {
             return this._sitemapItems;
         }

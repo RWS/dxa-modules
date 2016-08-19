@@ -6,8 +6,22 @@ module Sdl.KcWebApp.Components {
     import ITreeViewNode = SDL.UI.Controls.ITreeViewNode;
     import ISitemapItem = Server.Models.ISitemapItem;
 
+    /**
+     * Toc component props
+     *
+     * @export
+     * @interface ITocProps
+     */
     export interface ITocProps {
+        /**
+         * Root items, showed on initial render
+         *
+         * @type {Server.Models.ISitemapItem[]}
+         */
         rootItems: Server.Models.ISitemapItem[];
+        /**
+         * Load child items for a specific item
+         */
         loadChildItems: (parentId: string, callback: (error: string, children: ISitemapItem[]) => void) => void;
     }
 
@@ -16,6 +30,11 @@ module Sdl.KcWebApp.Components {
      */
     export class Toc extends React.Component<ITocProps, {}> {
 
+        /**
+         * Render the component
+         *
+         * @returns {JSX.Element}
+         */
         public render(): JSX.Element {
             const props = this.props;
 
