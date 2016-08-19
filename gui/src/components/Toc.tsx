@@ -3,7 +3,6 @@
 module Sdl.KcWebApp.Components {
 
     import TreeView = SDL.ReactComponents.TreeView;
-    import TreeViewControl = SDL.UI.Controls.TreeView;
     import ITreeViewNode = SDL.UI.Controls.ITreeViewNode;
     import ISitemapItem = Server.Models.ISitemapItem;
 
@@ -41,6 +40,7 @@ module Sdl.KcWebApp.Components {
 
         private _convertToTreeViewNodes(sitemapItems: ISitemapItem[], parentNode: ITreeViewNode = null): ITreeViewNode[] {
             const nodes: ITreeViewNode[] = [];
+            const TreeViewControl = SDL.UI.Controls.TreeView;
             for (let node of sitemapItems) {
                 nodes.push(
                     TreeViewControl.prototype.createNode(node.Id, node.Title, "FOLDER",

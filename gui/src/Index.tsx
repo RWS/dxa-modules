@@ -10,6 +10,7 @@ module Sdl.KcWebApp {
     DataStore.getSitemapRoot((error, children) => {
         if (error) {
             // TODO error handling
+            return;
         }
         ReactDOM.render(<App toc={{
             rootItems: children,

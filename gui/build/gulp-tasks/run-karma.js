@@ -27,7 +27,7 @@ module.exports = (buildOptions, browserSync) => {
                 // src folder
                 '/src/': urlPrefix,
                 // mocks
-                '/mocks/': urlPrefix + 'mocks/',
+                '/gui/mocks/': urlPrefix + 'mocks/',
                 // Browsers sync proxies
                 '/browser-sync/': urlPrefix + 'browser-sync-mock/'
             },

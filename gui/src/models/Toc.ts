@@ -23,7 +23,7 @@ module Sdl.KcWebApp.Models {
 
         /* Overloads */
         protected _executeLoad(reload: boolean): void {
-            SDL.Client.Net.getRequest(`mocks/toc-${this._stripId(this._parentId)}.json`, this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
+            SDL.Client.Net.getRequest(`gui/mocks/toc-${this._stripId(this._parentId)}.json`, this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
         }
 
         protected _processLoadResult(result: string, webRequest: SDL.Client.Net.IWebRequest): void {

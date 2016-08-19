@@ -105,7 +105,7 @@ module.exports = function (buildOptions, gulp, browserSync, commonFolderName) {
                             '/lib/react-dom': './node_modules/react-dom/dist/',
                             // Put test folder behind a virtual directory
                             '/test': buildOptions.testPath,
-                            '/mocks': './mocks/'
+                            '/gui/mocks': './mocks/'
                         }
                     },
                     middleware: [

@@ -6,13 +6,18 @@
         <resourceGroup name="Sdl.KcWebApp.Components">
             <files>
                 <file name="App.js" />
-                <file name="styles/App.css"/>
                 <file name="Toc.js" />
-                <file name="styles/Toc.css"/>
             </files>
             <dependencies>
                 <dependency name="ReactComponents.Components" />
+                <dependency name="Sdl.KcWebApp.Components.Styles" />
             </dependencies>
+        </resourceGroup>
+        <resourceGroup name="Sdl.KcWebApp.Components.Styles">
+            <files>
+                <file name="styles/App.css"/>
+                <file name="styles/Toc.css"/>
+            </files>
         </resourceGroup>
     </resourceGroups>
 </configuration>
