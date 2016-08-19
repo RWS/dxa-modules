@@ -18,9 +18,7 @@ module.exports = function (buildOptions, gulp) {
                 buildOptions.sourcesPath + '**/*.ts',
                 buildOptions.sourcesPath + '**/*.tsx',
                 buildOptions.testPath + '**/*.ts',
-                buildOptions.testPath + '**/*.tsx',
-                '!' + buildOptions.libraryPath + '**',
-                '!' + buildOptions.distPath + '**'
+                buildOptions.testPath + '**/*.tsx'
             ])
             .pipe(gulpTSLint({
                 configuration: {

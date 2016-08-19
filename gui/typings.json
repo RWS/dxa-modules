@@ -7,9 +7,9 @@
   ],
   "globalDependencies": {
     "jasmine": "registry:dt/jasmine#2.2.0+20160505161446",
-    "react": "registry:dt/react#0.14.0+20160602125106",
+    "react": "registry:dt/react#0.14.0+20160817201227",
     "react-dom": "registry:dt/react-dom#0.14.0+20160412154040",
-    "sdl-catalina-react-wrappers": "file:./node_modules/sdl-catalina-react-wrappers/typings.json",
-    "sdl-catalina": "file:./node_modules/sdl-catalina/Typescript/typings.json"
+    "sdl-catalina": "file:./node_modules/sdl-catalina/Typescript/typings.json",
+    "sdl-catalina-react-wrappers": "file:./node_modules/sdl-catalina-react-wrappers/typings.json"
   }
 }

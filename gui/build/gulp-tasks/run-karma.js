@@ -16,7 +16,6 @@ module.exports = (buildOptions, browserSync) => {
         var latestsResults = {}; // Set whenever tests are completed
 
         var browsersArg = yargs.argv.browsers;
-        var distPath = buildOptions.distPath;
         var karmaConfig = {
             configFile: configPath,
             singleRun: singleRun,

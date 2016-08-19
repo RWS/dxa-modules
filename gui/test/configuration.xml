@@ -9,12 +9,13 @@
         <resourceGroup name="Sdl.KcWebApp.Test">
             <files>
                 <file name="tests/Server.js"/>
-                <file name="tests/AppComponent.js" />
+                <file name="tests/components/AppComponent.js" />
             </files>
             <dependencies>
-                <dependency name="Sdl.KcWebApp.Components"/>
                 <dependency name="SDL.Client.Test.TestBase"/>
                 <dependency name="SDL.Client.Test.Utilities"/>
+                <dependency name="Sdl.KcWebApp.Components"/>
+                <dependency name="Sdl.KcWebApp.DataStore" />
                 <dependency name="Sdl.KcWebApp.Server"/>
             </dependencies>
         </resourceGroup>

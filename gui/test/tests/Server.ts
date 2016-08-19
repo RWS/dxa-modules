@@ -13,7 +13,7 @@ module Sdl.KcWebApp.Tests {
                     const app = renderToString("home");
                     const appElement = document.createElement("div");
                     appElement.innerHTML = app;
-                    expect(appElement.textContent).toBe("Hello world!");
+                    expect(appElement.children[0].innerHTML).toBe("<div></div>");
                 });
 
             });

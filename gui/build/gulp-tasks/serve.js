@@ -32,9 +32,7 @@ module.exports = function (buildOptions, gulp, browserSync, commonFolderName) {
                 buildOptions.sourcesPath + '**/*.json',
                 buildOptions.sourcesPath + '**/*.resjson',
                 buildOptions.testPath + '**/*.ts',
-                buildOptions.testPath + '**/*.tsx',
-                '!' + buildOptions.libraryPath + '**',
-                '!' + buildOptions.distPath + '**'
+                buildOptions.testPath + '**/*.tsx'
             ]);
             watcher.on('change', function (event) {
                 console.log('File ' + event.path + ' was ' + event.type + '.');
@@ -99,10 +97,15 @@ module.exports = function (buildOptions, gulp, browserSync, commonFolderName) {
                     server: {
                         baseDir: buildOptions.distPath,
                         routes: {
+                            // Third party dependencies
                             '/SDL/Common': './node_modules/sdl-catalina/' + commonFolderName() + '/',
                             '/SDL/Test': './node_modules/sdl-catalina/Test/',
+                            '/SDL/ReactComponents': './node_modules/sdl-catalina-react-wrappers/dist/components/',
+                            '/lib/react': './node_modules/react/dist/',
+                            '/lib/react-dom': './node_modules/react-dom/dist/',
                             // Put test folder behind a virtual directory
-                            '/test': buildOptions.testPath
+                            '/test': buildOptions.testPath,
+                            '/mocks': './mocks/'
                         }
                     },
                     middleware: [

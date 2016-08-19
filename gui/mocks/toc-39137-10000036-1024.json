@@ -1,6 +1,23 @@
-{
-  "Id": "ish:39137-10000036-1024",
-  "Title": "Phone book",
-  "Url": "ish:39137-6274-16",
-  "IsAbstract": false
-}
+[
+  {
+    "Id": "ish:39137-10000037-1024",
+    "Title": "Saving names and numbers",
+    "Url": "ish:39137-6229-16",
+    "IsAbstract": false,
+    "IsLeaf": true
+  },
+  {
+    "Id": "ish:39137-10000038-1024",
+    "Title": "Searching for a contact",
+    "Url": "ish:39137-6241-16",
+    "IsAbstract": false,
+    "IsLeaf": true
+  },
+  {
+    "Id": "ish:39137-10000039-1024",
+    "Title": "Editing a contact",
+    "Url": "ish:39137-6155-16",
+    "IsAbstract": false,
+    "IsLeaf": true
+  }
+]

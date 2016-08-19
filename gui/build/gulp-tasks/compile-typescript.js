@@ -56,9 +56,7 @@ module.exports = function (buildOptions, gulp) {
                 let paths = [
                     buildOptions.sourcesPath + '**/*.ts',
                     buildOptions.sourcesPath + '**/*.tsx',
-                    '!' + buildOptions.sourcesPath + '**/*.d.ts',
-                    '!' + buildOptions.libraryPath + '**',
-                    '!' + buildOptions.distPath + '**'
+                    '!' + buildOptions.sourcesPath + '**/*.d.ts'
                 ];
                 let tsResult = gulp.src(paths)
                     .pipe(gulpIf(buildOptions.isDebug, gulpSourceMaps.init()))

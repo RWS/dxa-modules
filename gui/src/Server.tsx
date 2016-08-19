@@ -11,5 +11,5 @@ import App = Sdl.KcWebApp.Components.App;
  */
 // tslint:disable-next-line:no-unused-variable
 function renderToString(path: string): string {
-    return ReactDOMServer.renderToString(<App />);
+    return ReactDOMServer.renderToString(<App/>);
 };

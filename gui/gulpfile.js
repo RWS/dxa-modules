@@ -21,7 +21,6 @@ var buildOptions = {
     sourcesPath: sourcesPath,
     testPath: './test/',
     distPath: './dist/',
-    libraryPath: './{dist/SDL,SDL}/Common/',
     isDebug: true,
     isDefaultTask: false,
     isTestCoverage: false,
@@ -72,23 +71,6 @@ var compileLess = require('./build/gulp-tasks/compile-less')(buildOptions, gulp)
 var compileTypescript = require('./build/gulp-tasks/compile-typescript')(buildOptions, gulp);
 var runTSLint = require('./build/gulp-tasks/run-tslint')(buildOptions, gulp);
 var serve = require('./build/gulp-tasks/serve')(buildOptions, gulp, browserSync, commonFolderName);
-var copyCatalina = function (cb) {
-    // simple task to copy from node_modules/sdl-catalina/Common
-    // to src\main\webapp\SDL\Common
-    var target = buildOptions.distPath + 'SDL/Common';
-    // Clean up
-    fs.remove(target, function (err) {
-        if (err) {
-            cb(err);
-        } else {
-            // Copy
-            gulp.src(['./node_modules/sdl-catalina/' + commonFolderName() + '/**/*'])
-                .pipe(gulpDebug({ title: 'Copying' }))
-                .pipe(gulp.dest(target))
-                .on('end', cb);
-        }
-    });
-};
 var runKarma = require('./build/gulp-tasks/run-karma')(buildOptions, browserSync);
 var runTests = function (singleRun, cb, onTestRunCompleted) {
     return function (err) {
@@ -117,6 +99,11 @@ var testCoverage = function (cb, singleRun) {
 gulp.task('copy-sources', require('./build/gulp-tasks/copy-sources')(buildOptions, gulp));
 
 gulp.task('copy-dependencies', cb => {
+    if (buildOptions.isDebug) {
+        // In case of debug mappings for browsersync are being used
+        cb();
+        return;
+    }
     async.parallel([
         // React
         next => {
@@ -131,6 +118,20 @@ gulp.task('copy-dependencies', cb => {
                 .pipe(gulpDebug({ title: 'Copying' }))
                 .pipe(gulp.dest(`${buildOptions.distPath}lib/react-dom/`))
                 .on('end', next);
+        },
+        // Catalina
+        next => {
+            gulp.src(['./node_modules/sdl-catalina/' + commonFolderName() + '/**/*'])
+                .pipe(gulpDebug({ title: 'Copying' }))
+                .pipe(gulp.dest(`${buildOptions.distPath}SDL/Common`))
+                .on('end', cb);
+        },
+        // Catalina React Wrappers
+        next => {
+            gulp.src(['./node_modules/sdl-catalina-react-wrappers/dist/components/**/*'])
+                .pipe(gulpDebug({ title: 'Copying' }))
+                .pipe(gulp.dest(`${buildOptions.distPath}SDL/ReactComponents`))
+                .on('end', cb);
         }
     ], cb);
 });
@@ -149,8 +150,6 @@ gulp.task('package-project', [
     require('./build/gulp-tasks/package-project')(buildOptions, gulp, './node_modules/sdl-packager/Source/bin/Release/Packager.exe'));
 
 gulp.task('run-tslint', runTSLint);
-
-gulp.task('copy-catalina', copyCatalina);
 
 gulp.task('add-coverage', ['compile-typescript'], require('./build/gulp-tasks/add-coverage')(buildOptions, gulp));
 
@@ -176,7 +175,7 @@ gulp.task('build', [
 
 gulp.task('build:dist', cb => {
     buildOptions.isDebug = false;
-    runSequence('clean', 'copy-catalina', 'build', err => {
+    runSequence('clean', 'build', err => {
         if (err || !yargs.argv.targetPath) {
             cb(err);
             return;
@@ -241,7 +240,6 @@ gulp.task('serve:dist', function (cb) {
     buildOptions.isDebug = false;
 
     runSequence(
-        'copy-catalina',
         'build',
         function (err) {
             if (err) {

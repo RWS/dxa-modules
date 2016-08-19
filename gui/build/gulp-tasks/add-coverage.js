@@ -30,7 +30,7 @@ module.exports = function (buildOptions, gulp) {
                 '!' + buildOptions.distPath + 'Index.js', // Exclude main page
                 '!' + buildOptions.distPath + 'lib/**',
                 '!' + buildOptions.distPath + 'packages/**',
-                '!' + buildOptions.libraryPath + '**'
+                '!' + buildOptions.distPath + 'SDL/**'
             ];
             // Add instrumentation
             gulp.src(paths)
