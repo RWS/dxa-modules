@@ -26,10 +26,12 @@ module.exports = (buildOptions, browserSync) => {
                 '/test/': urlPrefix + 'test/',
                 // src folder
                 '/src/': urlPrefix,
+                // mocks
+                '/mocks/': urlPrefix + 'mocks/',
                 // Browsers sync proxies
                 '/browser-sync/': urlPrefix + 'browser-sync-mock/'
             },
-            browsers: browsersArg ? browsersArg.split(',') : ['Firefox'],
+            browsers: browsersArg ? browsersArg.split(',') : ['PhantomJS'],
             preprocessors: {}
         };
 

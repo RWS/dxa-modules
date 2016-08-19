@@ -1,3 +1,5 @@
+/// <reference path="models/Toc.ts" />
+
 module Sdl.KcWebApp {
 
     import ISitemapItem = Server.Models.ISitemapItem;
@@ -14,9 +16,9 @@ module Sdl.KcWebApp {
                 toc.removeEventListener("load", onLoad);
                 callback(null, toc.getSitemapItems());
             };
-            const onLoadFailed = (error: string) => {
+            const onLoadFailed = (event: SDL.Client.Event.Event) => {
                 toc.removeEventListener("loadfailed", onLoadFailed);
-                callback(error, []);
+                callback(event.data.error, []);
             };
             toc.addEventListener("load", onLoad);
             toc.addEventListener("loadfailed", onLoadFailed);

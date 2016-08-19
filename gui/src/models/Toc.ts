@@ -3,6 +3,7 @@
 module Sdl.KcWebApp.Models {
 
     import ISitemapItem = Server.Models.ISitemapItem;
+    import IWebRequest = SDL.Client.Net.IWebRequest;
 
     /* tslint:disable-next-line */
     eval(SDL.Client.Types.OO.enableCustomInheritance);
@@ -29,6 +30,10 @@ module Sdl.KcWebApp.Models {
             this._sitemapItems = JSON.parse(result);
 
             super._processLoadResult(result, webRequest);
+        }
+
+        protected _onLoadFailed(error: string, webRequest: IWebRequest): void {
+            this.fireEvent("loadfailed", { error: error });
         }
 
         private _stripId(id: string): string {

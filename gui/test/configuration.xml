@@ -8,8 +8,10 @@
     <resourceGroups>
         <resourceGroup name="Sdl.KcWebApp.Test">
             <files>
-                <file name="tests/Server.js"/>
                 <file name="tests/components/AppComponent.js" />
+                <file name="tests/components/TocComponent.js" />
+                <file name="tests/DataStore.js"/>
+                <file name="tests/Server.js"/>
             </files>
             <dependencies>
                 <dependency name="SDL.Client.Test.TestBase"/>

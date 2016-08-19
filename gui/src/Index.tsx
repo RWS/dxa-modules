@@ -1,6 +1,5 @@
 /// <reference path="../typings/index.d.ts" />
 /// <reference path="components/App.tsx" />
-/// <reference path="models/Toc.ts" />
 
 module Sdl.KcWebApp {
     import App = Components.App;

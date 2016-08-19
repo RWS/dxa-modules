@@ -131,7 +131,17 @@ module.exports = function (buildOptions, gulp, browserSync, commonFolderName) {
                             } else {
                                 next();
                             }
-                        }
+                        },
+                        (req, res, next) => {
+                            // Don't cache mocks
+                            var url = req.url;
+                            if (_.startsWith(url, '/mocks/')) {
+                                res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+                                res.setHeader('Pragma', 'no-cache');
+                                res.setHeader('Expires', '0');
+                            }
+                            next();
+                        },
                     ]
                 };
 

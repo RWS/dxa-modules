@@ -124,14 +124,14 @@ gulp.task('copy-dependencies', cb => {
             gulp.src(['./node_modules/sdl-catalina/' + commonFolderName() + '/**/*'])
                 .pipe(gulpDebug({ title: 'Copying' }))
                 .pipe(gulp.dest(`${buildOptions.distPath}SDL/Common`))
-                .on('end', cb);
+                .on('end', next);
         },
         // Catalina React Wrappers
         next => {
             gulp.src(['./node_modules/sdl-catalina-react-wrappers/dist/components/**/*'])
                 .pipe(gulpDebug({ title: 'Copying' }))
                 .pipe(gulp.dest(`${buildOptions.distPath}SDL/ReactComponents`))
-                .on('end', cb);
+                .on('end', next);
         }
     ], cb);
 });
@@ -261,7 +261,6 @@ gulp.task('test', function (cb) {
     buildOptions.isDebug = false;
 
     runSequence(
-        'copy-catalina',
         'build',
         runTests(true, cb));
 });
