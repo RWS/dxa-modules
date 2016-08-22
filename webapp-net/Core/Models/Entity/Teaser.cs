@@ -1,6 +1,8 @@
 ﻿using Sdl.Web.Common.Models;
 using System;
 using System.Collections.Generic;
+using System.ServiceModel.Syndication;
+using Sdl.Web.Common.Configuration;
 
 namespace Sdl.Web.Modules.Core.Models
 {
@@ -9,7 +11,7 @@ namespace Sdl.Web.Modules.Core.Models
     [SemanticEntity(EntityName = "Article", Prefix = "s", Vocab = CoreVocabulary)]
     [SemanticEntity(EntityName = "NewsArticle", Prefix = "tri", Vocab = CoreVocabulary)]
     [SemanticEntity(EntityName = "Place", Prefix = "p", Vocab = CoreVocabulary)]
-    public class Teaser : EntityModel
+    public class Teaser : EntityModel, ISyndicationFeedItemProvider
     {
         //A teaser can be mapped from an article or place, in which case the link should be to the item itself
         [SemanticProperty("tri:_self")]
@@ -69,5 +71,17 @@ namespace Sdl.Web.Modules.Core.Models
                 FormatOptions[key] = value;
             }
         }
+
+        #region ISyndicationFeedItemProvider members
+        /// <summary>
+        /// Extracts syndication feed items.
+        /// </summary>
+        /// <param name="localization">The context <see cref="Localization"/>.</param>
+        /// <returns>A single syndication feed item containing information extracted from this <see cref="Teaser"/>.</returns>
+        public IEnumerable<SyndicationItem> ExtractSyndicationFeedItems(Localization localization)
+        {
+            return new[] { CreateSyndicationItem(Headline, Text, Link, Date, localization) };
+        }
+        #endregion
     }
 }
