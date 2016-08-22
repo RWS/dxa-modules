@@ -1,10 +1,13 @@
-﻿using Sdl.Web.Common.Configuration;
+﻿using System.Collections.Generic;
+using System.Net.Mime;
+using System.ServiceModel.Syndication;
+using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Models;
 
 namespace Sdl.Web.Modules.Core.Models
 {
     [SemanticEntity(SchemaOrgVocabulary, "DataDownload", Prefix = "s", Public = true)]
-    public class Download : MediaItem
+    public class Download : MediaItem, ISyndicationFeedItemProvider
     {
         [SemanticProperty("s:name")]
         [SemanticProperty("s:description")]
@@ -50,5 +53,18 @@ namespace Sdl.Web.Modules.Core.Models
         {
             return new MvcData("Core:Download");
         }
+
+        #region ISyndicationFeedItemProvider members
+        /// <summary>
+        /// Extracts syndication feed items.
+        /// </summary>
+        /// <param name="localization">The context <see cref="Localization"/>.</param>
+        /// <returns>A single syndication feed item containing information extracted from this <see cref="Teaser"/>.</returns>
+        public IEnumerable<SyndicationItem> ExtractSyndicationFeedItems(Localization localization)
+        {
+            Link downloadLink = new Link {Url = Url}; 
+            return new[] { CreateSyndicationItem(FileName, Description, downloadLink, null, localization) };
+        }
+        #endregion
     }
 }

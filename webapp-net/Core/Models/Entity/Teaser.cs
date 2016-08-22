@@ -80,7 +80,13 @@ namespace Sdl.Web.Modules.Core.Models
         /// <returns>A single syndication feed item containing information extracted from this <see cref="Teaser"/>.</returns>
         public IEnumerable<SyndicationItem> ExtractSyndicationFeedItems(Localization localization)
         {
-            return new[] { CreateSyndicationItem(Headline, Text, Link, Date, localization) };
+            Link link = Link;
+            if (link == null && Media != null)
+            {
+                // If the Teaser doesn't have a Link, but does have Media, create a Link from its Media.
+                link = new Link { Url = Media.Url };
+            }
+            return new[] { CreateSyndicationItem(Headline, Text, link, Date, localization) };
         }
         #endregion
     }
