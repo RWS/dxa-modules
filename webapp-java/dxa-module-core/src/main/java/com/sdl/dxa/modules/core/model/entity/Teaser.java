@@ -19,6 +19,7 @@ import static com.sdl.webapp.common.api.mapping.semantic.config.SemanticVocabula
 @SemanticEntities({
         @SemanticEntity(entityName = "Image", vocabulary = SDL_CORE, prefix = "i"),
         @SemanticEntity(entityName = "Article", vocabulary = SDL_CORE, prefix = "a"),
+        @SemanticEntity(entityName = "NewsArticle", vocabulary = SDL_CORE, prefix = "na"),
         @SemanticEntity(entityName = "Place", vocabulary = SDL_CORE, prefix = "p"),
         @SemanticEntity(entityName = "LinkedContent", vocabulary = SDL_CORE, prefix = "c"),
         @SemanticEntity(entityName = "StandardMetadata", vocabulary = SDL_CORE, prefix = "m")
@@ -28,6 +29,7 @@ import static com.sdl.webapp.common.api.mapping.semantic.config.SemanticVocabula
 public class Teaser extends AbstractEntityModel {
 
     @SemanticProperties({
+            @SemanticProperty("na:_self"),
             @SemanticProperty("a:_self"),
             @SemanticProperty("p:_self"),
             @SemanticProperty("c:link")
@@ -36,6 +38,9 @@ public class Teaser extends AbstractEntityModel {
     private Link link;
 
     @SemanticProperties({
+            @SemanticProperty("m:name"),
+            @SemanticProperty("na:name"),
+            @SemanticProperty("a:name"),
             @SemanticProperty("headline"),
             @SemanticProperty("subheading"),
             @SemanticProperty("a:headline"),
@@ -55,11 +60,12 @@ public class Teaser extends AbstractEntityModel {
     private MediaItem media;
 
     @SemanticProperties({
-            @SemanticProperty("content"),
+            @SemanticProperty("m:introText"),
+            @SemanticProperty("na:introText"),
             @SemanticProperty("a:introText"),
+            @SemanticProperty("content"),
             @SemanticProperty("c:text"),
             @SemanticProperty("c:content"),
-            @SemanticProperty("m:introText"),
             @SemanticProperty("m:description"),
     })
     @JsonProperty("Text")
