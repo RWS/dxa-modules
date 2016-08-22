@@ -8,19 +8,19 @@ namespace Sdl.Web.Modules.Core.Models
 {
     [SemanticEntity(EntityName = "Teaser", Prefix = "t", Vocab = CoreVocabulary)]
     [SemanticEntity(EntityName = "Image", Prefix = "i", Vocab = CoreVocabulary)]
-    [SemanticEntity(EntityName = "Article", Prefix = "s", Vocab = CoreVocabulary)]
-    [SemanticEntity(EntityName = "NewsArticle", Prefix = "tri", Vocab = CoreVocabulary)]
+    [SemanticEntity(EntityName = "Article", Prefix = "a", Vocab = CoreVocabulary)]
+    [SemanticEntity(EntityName = "NewsArticle", Prefix = "na", Vocab = CoreVocabulary)]
     [SemanticEntity(EntityName = "Place", Prefix = "p", Vocab = CoreVocabulary)]
     public class Teaser : EntityModel, ISyndicationFeedItemProvider
     {
         //A teaser can be mapped from an article or place, in which case the link should be to the item itself
-        [SemanticProperty("tri:_self")]
-        [SemanticProperty("s:_self")]
+        [SemanticProperty("na:_self")]
+        [SemanticProperty("a:_self")]
         [SemanticProperty("p:_self")]
-        public Link Link { get; set; } // TODO: add resolve link code on first retrieval
+        public Link Link { get; set; }
         
-        [SemanticProperty("tri:name")]
-        [SemanticProperty("s:name")]
+        [SemanticProperty("na:name")]
+        [SemanticProperty("a:name")]
         [SemanticProperty("headline")]
         [SemanticProperty("subheading")]
         [SemanticProperty("p:name")]
@@ -28,13 +28,14 @@ namespace Sdl.Web.Modules.Core.Models
         
         //A teaser can be mapped from an individual image, in which case the image property is set from the source entity itself
         [SemanticProperty("i:_self")]
-        [SemanticProperty("s:image")]
-        [SemanticProperty("tri:image")]
+        [SemanticProperty("a:image")]
+        [SemanticProperty("na:image")]
         public MediaItem Media { get; set; }
 
-        [SemanticProperty("tri:introText")]
-        [SemanticProperty("s:introText")]
+        [SemanticProperty("na:introText")]
+        [SemanticProperty("a:introText")]
         [SemanticProperty("content")]
+        [SemanticProperty("description")]
         public RichText Text { get; set; }
 
         [SemanticProperty("dateCreated")]
