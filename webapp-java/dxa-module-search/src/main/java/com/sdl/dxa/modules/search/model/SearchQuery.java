@@ -29,6 +29,7 @@ import static org.springframework.web.util.UriUtils.decode;
 public class SearchQuery extends AbstractEntityModel {
 
     @SemanticProperty("s:headline")
+    @JsonProperty("Headline")
     private String headline;
 
     @JsonProperty("ResultsText")
@@ -39,6 +40,7 @@ public class SearchQuery extends AbstractEntityModel {
     @JsonSerialize(using = FlatRichTextSerializer.class)
     private RichText noResultsText;
 
+    @JsonProperty("QueryDetails")
     private QueryDetails queryDetails;
 
     /*
@@ -47,21 +49,30 @@ public class SearchQuery extends AbstractEntityModel {
     @SemanticProperty("s:pageSize")
     @JsonProperty("PageSize")
     private int pageSize;
+
+    @JsonProperty("Start")
     private int start;
+
+    @JsonProperty("Total")
     private long total;
 
     @SemanticProperty("s:itemListElement")
+    @JsonProperty("Results")
     private List<SearchItem> results = new ArrayList<>();
 
     public String formatResultsText() {
-        return String.format(convertFormatStringFromCM(resultsText.toString()),
-                queryDetails.getQueryText(), getTotal());
+        return String.format(
+                convertFormatStringFromCM(resultsText == null ? "" : resultsText.toString()),
+                queryDetails == null ? "" : queryDetails.getQueryText(), getTotal());
     }
 
     public String formatNoResultsText() {
-        return String.format(convertFormatStringFromCM(noResultsText.toString()), queryDetails.getQueryText());
+        return String.format(
+                convertFormatStringFromCM(noResultsText == null ? "" : noResultsText.toString()),
+                queryDetails == null ? "" : queryDetails.getQueryText());
     }
 
+    @JsonProperty("CurrentPage")
     public int getCurrentPage() {
         return 1 + (getStart() - 1) / getPageSize();
     }
@@ -79,7 +90,11 @@ public class SearchQuery extends AbstractEntityModel {
      */
     @Data
     public static class QueryDetails {
+
+        @JsonProperty("QueryText")
         private String queryText;
+
+        @JsonProperty("QueryStringParameters")
         private Map<String, String[]> queryStringParameters;
 
         public QueryDetails(String queryText, Map<String, String[]> queryStringParameters) {

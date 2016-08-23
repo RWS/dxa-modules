@@ -43,21 +43,29 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sdl.Web.Common">
-      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.5.0\lib\net452\Sdl.Web.Common.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.6.0-alpha-201608220205\lib\net452\Sdl.Web.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sdl.Web.Mvc">
-      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.5.0\lib\net452\Sdl.Web.Mvc.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.6.0-alpha-201608220205\lib\net452\Sdl.Web.Mvc.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Sdl.Web.Tridion">
+      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.6.0-alpha-201608220205\lib\net452\Sdl.Web.Tridion.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>False</Private>
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.1.2\lib\net45\System.Web.Mvc.dll</HintPath>
@@ -76,21 +84,28 @@
     <Compile Include="Models\TestEntityModel1.cs" />
     <Compile Include="Models\TestEntityModel3.cs" />
     <Compile Include="..\CommonAssemblyInfo.cs" />
+    <Compile Include="Models\Tsi1758TestEntity.cs" />
     <Compile Include="TestAreaRegistration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="Areas\Test\Views\Entity\EmbedParent.cshtml" />
     <None Include="Areas\Test\Views\Entity\Article.cshtml" />
+    <None Include="Areas\Test\Views\Entity\TestDxaEntityViewOverride.cshtml" />
+    <None Include="Areas\Test\Views\Entity\TSI1758TestEmbedded2.cshtml" />
+    <None Include="Areas\Test\Views\Entity\TSI1758TestEmbedded.cshtml" />
+    <None Include="Areas\Test\Views\Entity\TSI1758Test.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestFlickrImage.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestEclEntity.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestEntityWithEclLink.cshtml" />
-    <None Include="Areas\Test\Views\Entity\TestEntityCSSFill.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestEntityCSSEmpty.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestEntity3.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestEntity2.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestEntity1.cshtml" />
     <None Include="Areas\Test\Views\Page\CustomPageModelInheritedController.cshtml" />
+    <None Include="Areas\Test\Views\Page\TestDxaEntityViewOverride.cshtml" />
+    <None Include="Areas\Test\Views\Page\SimpleTestPage.cshtml" />
     <None Include="Areas\Test\Views\Page\TestPageInheritedController.cshtml" />
     <None Include="Areas\Test\Views\Page\TestPageCSSNoParams.cshtml" />
     <None Include="Areas\Test\Views\Page\TestPageCSS.cshtml" />
@@ -113,11 +128,18 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core\Sdl.Web.Modules.Core.csproj">
+      <Project>{32943bd1-4891-4b03-afcd-296658f61581}</Project>
+      <Name>Sdl.Web.Modules.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ExperienceOptimization\Sdl.Web.Modules.SmartTarget.csproj">
       <Project>{492157de-3114-48e5-9a23-965d5fe4da74}</Project>
       <Name>SDL.Web.Modules.SmartTarget</Name>
       <Private>False</Private>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -132,11 +154,11 @@ xcopy "$(TargetPath)" "%25DXA_SITE_DIR%25\bin" /Y
 xcopy "$(ProjectDir)Areas" "%25DXA_SITE_DIR%25\Areas" /S /I /Y
 )</PostBuildEvent>
   </PropertyGroup>
-  <Import Project="..\packages\Sdl.Dxa.Framework.Web8.1.5.0\build\net452\Sdl.Dxa.Framework.Web8.targets" Condition="Exists('..\packages\Sdl.Dxa.Framework.Web8.1.5.0\build\net452\Sdl.Dxa.Framework.Web8.targets')" />
+  <Import Project="..\packages\Sdl.Dxa.Framework.Web8.1.6.0-alpha-201608220205\build\net452\Sdl.Dxa.Framework.Web8.targets" Condition="Exists('..\packages\Sdl.Dxa.Framework.Web8.1.6.0-alpha-201608220205\build\net452\Sdl.Dxa.Framework.Web8.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Sdl.Dxa.Framework.Web8.1.5.0\build\net452\Sdl.Dxa.Framework.Web8.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Sdl.Dxa.Framework.Web8.1.5.0\build\net452\Sdl.Dxa.Framework.Web8.targets')))" />
+    <Error Condition="!Exists('..\packages\Sdl.Dxa.Framework.Web8.1.6.0-alpha-201608220205\build\net452\Sdl.Dxa.Framework.Web8.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Sdl.Dxa.Framework.Web8.1.6.0-alpha-201608220205\build\net452\Sdl.Dxa.Framework.Web8.targets')))" />
   </Target>
 </Project>

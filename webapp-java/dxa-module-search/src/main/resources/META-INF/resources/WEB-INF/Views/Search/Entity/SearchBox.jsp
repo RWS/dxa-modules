@@ -7,7 +7,8 @@
     query = query == null || Objects.equals(query, "null") ? "" : query;
 %>
 
-<form class="navbar-form navbar-right ${entity.htmlClasses}" action="${entity.resultsLink}" method="get">
+<form class="navbar-form navbar-right ${entity.htmlClasses}" action="${entity.resultsLink}" method="get"
+      onsubmit="return document.getElementsByName('q').item(0).value != ''">
     <div class="form-group" ${markup.entity(entity)}>
         <input name="q" type="text" class="form-control" placeholder="${entity.searchBoxPlaceholderText}" value="<%=query%>">
     </div>

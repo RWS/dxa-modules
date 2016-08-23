@@ -1,4 +1,5 @@
 ﻿using Sdl.Web.Common.Models;
+using Sdl.Web.Modules.Core.Models;
 
 namespace Sdl.Web.Modules.Test.Models
 {

@@ -1,0 +1,26 @@
+﻿@using System.Linq
+@model PageModel
+<html>
+    <head>
+        <title>@Model.Title</title>
+        <style>
+            .region { border: solid; }
+            .entity { border: dashed thin; }
+            td { border: solid thin; }
+        </style>
+    </head>
+    <body>
+        <h1>Rendered @Model with Page View "Test:TestDxaEntityViewOverride"</h1>
+
+        @{
+            RegionModel firstRegion = Model.Regions.First();
+            foreach (var entity in firstRegion.Entities)
+            {
+                MvcData originalMvcData = new MvcData(entity.MvcData);
+                @Html.Raw(string.Format("<div>Entity [{0}] original MVC data: [{1}]</div>", entity, originalMvcData))
+                @Html.DxaEntity(entity, "Test:TestDxaEntityViewOverride")
+                @Html.Raw(string.Format("<div>Entity [{0}] final MVC data: [{1}]</div>", entity, entity.MvcData))
+            }
+        }
+    </body>
+</html>

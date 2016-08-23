@@ -1,0 +1,20 @@
+﻿@model Tsi1758TestEmbeddedEntity
+<div class="embeddedEntity">
+    <h3>Rendered @Model with Entity View "Test:Tsi1758TestEmbedded"</h3>
+
+    <h4>textField</h4>
+    <div>@Model.TextField</div>
+
+    <h4>embedField1</h4>
+    @if (Model.EmbedField1 == null)
+    {
+        <div class="alert">NULL</div>
+    }
+    else
+    {
+        <div><a href="@Model.EmbedField1.Url">@Model.EmbedField1.LinkText</a></div>
+    }
+
+    <h4>embedField2</h4>
+    @Html.DxaEntity(Model.EmbedField2)
+</div>
