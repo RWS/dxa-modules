@@ -1,0 +1,27 @@
+{
+  "Id": "ish:39137-6282-16",
+  "Title": null,
+  "Meta": {
+    "LogicalId": "GUID-A3CD45DD-9EAF-4D22-91B7-6C0676D5CB06",
+    "LogicalCardId": "6280",
+    "LanguageCardId": "6282",
+    "VersionCardId": "6281",
+    "ObjectType": "ISHModule",
+    "FTITLE.logical.": "speed dialling",
+    "FDESCRIPTION.logical.": null,
+    "FCHANGES.version.": "Imported OASIS DITA 1.1",
+    "FISHRELEASELABEL.version.": null,
+    "CREATED-ON.lng.": "29/10/2008 17:13:08",
+    "FAUTHOR.lng.": "Author",
+    "FSTATUS.lng.": "Released",
+    "MODIFIED-ON.lng.": "09/04/2010 10:26:19",
+    "VERSION.version.": "1",
+    "FRESOLUTION.lng.": null,
+    "DOC-LANGUAGE.lng.": "en",
+    "FISHREVCOUNTER.lng.": "1",
+    "ED.lng.": "GUID-4B827D7F-F901-4B01-A3C5-FF9700DB8FD8",
+    "FUSERGROUP.logical.element": null,
+    "READ-ACCESS.logical.element": null
+  },
+  "Html": "<div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\r\n\t\t\t<p class=\"shortdesc\">Before you can use speed dialling, assign a phone number to one of the speed dialling keys, from <tcdl:link type=\"ish:image\" ref=\"ish:39137-6723-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" /> to <tcdl:link type=\"ish:image\" ref=\"ish:39137-6838-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" /> .\r\n         </p>\r\n\t\t\t<p class=\"p\">Call the number in either of the following ways:</p>\r\n\t\t\t<ul class=\"ul\">\r\n\t\t\t\t<li class=\"li\">Press the speed dialling key you want and then press <tcdl:link type=\"ish:image\" ref=\"ish:39137-6853-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" /></li>\r\n\t\t\t\t<li class=\"li\">If Speed dialling is set to on, press and hold a speed dialling key until the call is started.</li>\r\n\t\t\t</ul>\r\n\t\t</div>"
+}

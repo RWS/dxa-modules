@@ -23,7 +23,7 @@ module.exports = function (buildOptions, gulp, packagerExePath) {
                 var runPackagerTask = require('./common/run-packager')(workingDirectory, packagerExePath, commandLineOptions);
                 runPackagerTask(cb);
             } else {
-                console.log('Running the CUIL packager is only supported on Windows.');
+                console.log('Running the packager is only supported on Windows.');
                 var configurationPath = process.cwd() + basePath + 'configuration.xml';
                 // Remove debug flag from main configuration.xml file
                 fs.readFile(configurationPath, function (err, data) {

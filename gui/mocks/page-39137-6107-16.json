@@ -1,0 +1,27 @@
+{
+  "Id": "ish:39137-6107-16",
+  "Title": null,
+  "Meta": {
+    "LogicalId": "GUID-A08D6FD8-63C7-4CAA-A2EA-AF08AF4C49B7",
+    "LogicalCardId": "6105",
+    "LanguageCardId": "6107",
+    "VersionCardId": "6106",
+    "ObjectType": "ISHModule",
+    "FTITLE.logical.": "keypad locking",
+    "FDESCRIPTION.logical.": null,
+    "FCHANGES.version.": "Imported OASIS DITA 1.1",
+    "FISHRELEASELABEL.version.": null,
+    "CREATED-ON.lng.": "29/10/2008 16:36:44",
+    "FAUTHOR.lng.": "Author",
+    "FSTATUS.lng.": "Released",
+    "MODIFIED-ON.lng.": "09/04/2010 10:25:43",
+    "VERSION.version.": "1",
+    "FRESOLUTION.lng.": null,
+    "DOC-LANGUAGE.lng.": "en",
+    "FISHREVCOUNTER.lng.": "1",
+    "ED.lng.": "GUID-ED3E66FA-23D7-4557-A429-AB948585518C",
+    "FUSERGROUP.logical.element": null,
+    "READ-ACCESS.logical.element": null
+  },
+  "Html": "<div class=\"body conbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\r\n\t\t\t<p class=\"shortdesc\">You can lock the keypad to prevent the keys being accidentally pressed, for example, when your phone is in your bag.</p>\r\n\t\t\t<ul class=\"ul\">\r\n\t\t\t\t<li class=\"li\">Locking the keypad \r\n               <p class=\"p\">In standby mode, press <samp class=\"ph msgph\">Menu</samp> and <tcdl:link type=\"ish:image\" ref=\"ish:39137-7021-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" />then within 1.5 seconds. \r\n               </p></li>\r\n\t\t\t\t<li class=\"li\">Unlocking the keypad \r\n               <p class=\"p\"> Press <samp class=\"ph msgph\">Unlock</samp> and then <tcdl:link type=\"ish:image\" ref=\"ish:39137-7021-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" />within 1.5 seconds.\r\n               </p></li>\r\n\t\t\t</ul>\r\n\t\t</div>"
+}

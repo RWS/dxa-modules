@@ -16,7 +16,6 @@ module.exports = (buildOptions, browserSync) => {
         var latestsResults = {}; // Set whenever tests are completed
 
         var browsersArg = yargs.argv.browsers;
-        var distPath = buildOptions.distPath;
         var karmaConfig = {
             configFile: configPath,
             singleRun: singleRun,
@@ -27,10 +26,12 @@ module.exports = (buildOptions, browserSync) => {
                 '/test/': urlPrefix + 'test/',
                 // src folder
                 '/src/': urlPrefix,
+                // mocks
+                '/gui/mocks/': urlPrefix + 'gui/mocks/',
                 // Browsers sync proxies
                 '/browser-sync/': urlPrefix + 'browser-sync-mock/'
             },
-            browsers: browsersArg ? browsersArg.split(',') : ['Firefox'],
+            browsers: browsersArg ? browsersArg.split(',') : ['PhantomJS'],
             preprocessors: {}
         };
 

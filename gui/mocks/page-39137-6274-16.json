@@ -1,0 +1,27 @@
+{
+  "Id": "ish:39137-6274-16",
+  "Title": null,
+  "Meta": {
+    "LogicalId": "GUID-882E4750-A864-4850-A778-03142AB12F36",
+    "LogicalCardId": "6272",
+    "LanguageCardId": "6274",
+    "VersionCardId": "6273",
+    "ObjectType": "ISHModule",
+    "FTITLE.logical.": "phone book",
+    "FDESCRIPTION.logical.": null,
+    "FCHANGES.version.": "Imported OASIS DITA 1.1",
+    "FISHRELEASELABEL.version.": null,
+    "CREATED-ON.lng.": "29/10/2008 17:12:45",
+    "FAUTHOR.lng.": "Author",
+    "FSTATUS.lng.": "Released",
+    "MODIFIED-ON.lng.": "09/04/2010 10:26:06",
+    "VERSION.version.": "1",
+    "FRESOLUTION.lng.": null,
+    "DOC-LANGUAGE.lng.": "en",
+    "FISHREVCOUNTER.lng.": "1",
+    "ED.lng.": "GUID-EB22D6C2-3ACC-41E2-806E-A05147833740",
+    "FUSERGROUP.logical.element": null,
+    "READ-ACCESS.logical.element": null
+  },
+  "Html": "<div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\r\n\t\t\t<p class=\"shortdesc\">You can save your contacts in the phoneâ€™s memory (internal phone book) and in the SIM cardâ€™s memory (SIM phone book).</p>\r\n\t\t\t<p class=\"p\">\r\n\t\t\t</p>\r\n\t\t</div>"
+}

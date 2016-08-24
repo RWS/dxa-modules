@@ -6,7 +6,7 @@
  * @param {Object} buildOptions Build options.
  * @param {Object} gulp Instance of gulp.
  * @param {Object} browserSync BrowserSync instance.
- * @param {function} commonFolderName Returns the name of the CUIL Common folder.
+ * @param {function} commonFolderName Returns the name of the Catalina Common folder.
  */
 module.exports = function (buildOptions, gulp, browserSync, commonFolderName) {
     const _ = require('lodash');
@@ -32,9 +32,7 @@ module.exports = function (buildOptions, gulp, browserSync, commonFolderName) {
                 buildOptions.sourcesPath + '**/*.json',
                 buildOptions.sourcesPath + '**/*.resjson',
                 buildOptions.testPath + '**/*.ts',
-                buildOptions.testPath + '**/*.tsx',
-                '!' + buildOptions.libraryPath + '**',
-                '!' + buildOptions.distPath + '**'
+                buildOptions.testPath + '**/*.tsx'
             ]);
             watcher.on('change', function (event) {
                 console.log('File ' + event.path + ' was ' + event.type + '.');
@@ -99,10 +97,15 @@ module.exports = function (buildOptions, gulp, browserSync, commonFolderName) {
                     server: {
                         baseDir: buildOptions.distPath,
                         routes: {
-                            '/SDL/Common': './node_modules/sdl-common-ui/' + commonFolderName() + '/',
-                            '/SDL/Test': './node_modules/sdl-common-ui/Test/',
+                            // Third party dependencies
+                            '/SDL/Common': './node_modules/sdl-catalina/' + commonFolderName() + '/',
+                            '/SDL/Test': './node_modules/sdl-catalina/Test/',
+                            '/SDL/ReactComponents': './node_modules/sdl-catalina-react-wrappers/dist/components/',
+                            '/lib/react': './node_modules/react/dist/',
+                            '/lib/react-dom': './node_modules/react-dom/dist/',
                             // Put test folder behind a virtual directory
-                            '/test': buildOptions.testPath
+                            '/test': buildOptions.testPath,
+                            '/gui/mocks': './mocks/'
                         }
                     },
                     middleware: [
@@ -128,7 +131,17 @@ module.exports = function (buildOptions, gulp, browserSync, commonFolderName) {
                             } else {
                                 next();
                             }
-                        }
+                        },
+                        (req, res, next) => {
+                            // Don't cache mocks
+                            var url = req.url;
+                            if (_.startsWith(url, '/gui/mocks/')) {
+                                res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+                                res.setHeader('Pragma', 'no-cache');
+                                res.setHeader('Expires', '0');
+                            }
+                            next();
+                        },
                     ]
                 };
 

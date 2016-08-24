@@ -1,0 +1,27 @@
+{
+  "Id": "ish:39137-6709-16",
+  "Title": null,
+  "Meta": {
+    "LogicalId": "GUID-F6DEEACC-8925-46B3-9EF3-5DAB76B4386F",
+    "LogicalCardId": "6705",
+    "LanguageCardId": "6709",
+    "VersionCardId": "6707",
+    "ObjectType": "ISHModule",
+    "FTITLE.logical.": "call functions",
+    "FDESCRIPTION.logical.": null,
+    "FCHANGES.version.": "Imported OASIS DITA 1.1",
+    "FISHRELEASELABEL.version.": null,
+    "CREATED-ON.lng.": "30/10/2008 09:59:32",
+    "FAUTHOR.lng.": "Author",
+    "FSTATUS.lng.": "Released",
+    "MODIFIED-ON.lng.": "09/04/2010 10:25:00",
+    "VERSION.version.": "1",
+    "FRESOLUTION.lng.": null,
+    "DOC-LANGUAGE.lng.": "en",
+    "FISHREVCOUNTER.lng.": "1",
+    "ED.lng.": "GUID-70F43929-2E15-4AA1-AB7C-F40381569D7C",
+    "FUSERGROUP.logical.element": null,
+    "READ-ACCESS.logical.element": null
+  },
+  "Html": "<div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\r\n\t\t\t<p class=\"shortdesc\">\r\n\t\t\t</p>\r\n\t\t\t<p class=\"p\">\r\n\t\t\t</p>\r\n\t\t</div>"
+}

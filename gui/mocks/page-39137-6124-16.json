@@ -1,0 +1,27 @@
+{
+  "Id": "ish:39137-6124-16",
+  "Title": null,
+  "Meta": {
+    "LogicalId": "GUID-8C8F01ED-9785-47DE-9A00-1F8AAFD94E7D",
+    "LogicalCardId": "6121",
+    "LanguageCardId": "6124",
+    "VersionCardId": "6123",
+    "ObjectType": "ISHModule",
+    "FTITLE.logical.": "bluetooth",
+    "FDESCRIPTION.logical.": null,
+    "FCHANGES.version.": "Imported OASIS DITA 1.1",
+    "FISHRELEASELABEL.version.": null,
+    "CREATED-ON.lng.": "29/10/2008 16:37:41",
+    "FAUTHOR.lng.": "Author",
+    "FSTATUS.lng.": "Released",
+    "MODIFIED-ON.lng.": "09/04/2010 10:24:58",
+    "VERSION.version.": "1",
+    "FRESOLUTION.lng.": null,
+    "DOC-LANGUAGE.lng.": "en",
+    "FISHREVCOUNTER.lng.": "1",
+    "ED.lng.": "GUID-7AAEC233-9B57-46F1-A6FE-5E7B90725549",
+    "FUSERGROUP.logical.element": null,
+    "READ-ACCESS.logical.element": null
+  },
+  "Html": "<div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\r\n\t\t\t<p class=\"shortdesc\">You can transfer data from your phone to another compatible device, for example, a phone, a headset using Bluetooth technology.</p>\r\n\t\t\t<p class=\"p\">Bluetooth technology enables cost-free wireless connections between electronic devices within a maximum range of 10 metres.\r\n            A Bluetooth connection can be used to send images, videos, texts, business cards, calendar notes, or to connect wirelessly\r\n            to devices using Bluetooth technology, such as computers.\r\n         </p>\r\n\t\t\t<p class=\"p\">Since devices using Bluetooth technology communicate using radio waves, your phone and the other devices do not need to be\r\n            in direct line-of-sight.\r\n         </p>\r\n\t\t\t<p class=\"p\">The two devices only need to be within a maximum of 10 metres of each other, although the connection can be subject to interference\r\n            from obstructions such as walls or from other electronic devices.\r\n         </p>\r\n\t\t\t<p class=\"p\">Using Bluetooth technology consumes the battery and the phone's operating time will be reduced. Take this into account when\r\n            performing other operations with your phone.\r\n         </p>\r\n\t\t\t<p class=\"p\">There may be restrictions on using devices using Bluetooth technology. Check with your local authorities.</p>\r\n\t\t\t<p class=\"p\">When you receive data via Bluetooth, a tone sound is played and you are asked if you want to accept the message. If you accept,\r\n            the item is placed in the Inbox folder in Messaging.\r\n         </p>\r\n\t\t\t<p class=\"p\">A Bluetooth connection is disconnected automatically after sending or receiving data.</p>\r\n\t\t</div>"
+}

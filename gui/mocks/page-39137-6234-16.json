@@ -1,0 +1,27 @@
+{
+  "Id": "ish:39137-6234-16",
+  "Title": null,
+  "Meta": {
+    "LogicalId": "GUID-0EDBAC80-8997-45CA-8578-E8AAB7EE0B6E",
+    "LogicalCardId": "6232",
+    "LanguageCardId": "6234",
+    "VersionCardId": "6233",
+    "ObjectType": "ISHModule",
+    "FTITLE.logical.": "gprs",
+    "FDESCRIPTION.logical.": null,
+    "FCHANGES.version.": "Imported OASIS DITA 1.1",
+    "FISHRELEASELABEL.version.": null,
+    "CREATED-ON.lng.": "29/10/2008 17:10:04",
+    "FAUTHOR.lng.": "Author",
+    "FSTATUS.lng.": "Released",
+    "MODIFIED-ON.lng.": "09/04/2010 10:25:36",
+    "VERSION.version.": "1",
+    "FRESOLUTION.lng.": null,
+    "DOC-LANGUAGE.lng.": "en",
+    "FISHREVCOUNTER.lng.": "1",
+    "ED.lng.": "GUID-1DD56A41-B68A-419C-8E30-963347845A90",
+    "FUSERGROUP.logical.element": null,
+    "READ-ACCESS.logical.element": null
+  },
+  "Html": "<div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\r\n\t\t\t<p class=\"shortdesc\">GPRS technology allows mobile phones to be used for sending and receiving data over the mobile network (network service).</p>\r\n\t\t\t<p class=\"p\">GPRS technology allows mobile phones to be used for sending and receiving data over the mobile network (network service).\r\n            GPRS as such is a data bearer that enables wireless access to data networks like the Internet. The applications that may use\r\n            GPRS are WAP services, MMS and SMS messaging, and Java application downloading.\r\n         </p>\r\n\t\t\t<div class=\"p\">Before you can use GPRS technology\r\n            <ul class=\"ul\"><li class=\"li\">Contact your network operator or service provider for availability, pricing and subscription to the GPRS service.</li><li class=\"li\">Save the GPRS settings for each of the applications used over GPRS.</li></ul></div>\r\n\t\t</div>"
+}

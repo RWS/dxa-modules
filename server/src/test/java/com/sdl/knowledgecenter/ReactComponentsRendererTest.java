@@ -25,15 +25,15 @@ public class ReactComponentsRendererTest {
     @Test
     public void renders() throws Exception {
         //given
-        final String expected = "Hello world!";
+        final String expected = "<div></div>";
 
         //when
         final String result = reactComponentsRenderer.renderPage("home");
 
         //then
-        assertTrue(result.startsWith("<div"));
+        assertTrue(result.startsWith("<span"));
         assertTrue(result.contains(expected));
-        assertTrue(result.endsWith("</div>"));
+        assertTrue(result.endsWith("</span>"));
     }
 
     @Configuration

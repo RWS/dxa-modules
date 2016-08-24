@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <configuration
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../node_modules/sdl-common-ui/Common/Library/Core/configuration.xsd" merge="false">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../node_modules/sdl-catalina/Common/Library/Core/configuration.xsd" merge="false">
     <appSettings>
         <!-- AUTO MANAGED BY THE BUILD -->
         <setting name="version" value="0.0.0" />
@@ -11,10 +11,12 @@
     </appSettings>
     <!-- Main Catalina config -->
     <include src="~/configuration.xml" />
+    <include src="SDL/ReactComponents/configuration.xml" />
     <!-- Packages config -->
     <include src="packages.xml" />
     <!-- Child configs -->
     <include src="components/_config.xml" />
+    <include src="models/_config.xml" />
     <!-- Main resources -->
     <resourceGroups>
         <resourceGroup name="Sdl.KcWebApp">
@@ -23,12 +25,24 @@
             </files>
             <dependencies>
                 <dependency name="Sdl.KcWebApp.Components" />
+                <dependency name="Sdl.KcWebApp.DataStore" />
+            </dependencies>
+        </resourceGroup>
+        <resourceGroup name="Sdl.KcWebApp.DataStore">
+            <files>
+                <file name="DataStore.js" />
+            </files>
+            <dependencies>
+                <dependency name="Sdl.KcWebApp.Models" />
             </dependencies>
         </resourceGroup>
         <resourceGroup name="Sdl.KcWebApp.Server">
             <files>
                 <file name="Server.js"/>
             </files>
+            <dependencies>
+                <dependency name="Sdl.KcWebApp.Components" />
+            </dependencies>
         </resourceGroup>
     </resourceGroups>
     <!-- Configuration for pages -->

@@ -1,0 +1,27 @@
+{
+  "Id": "ish:39137-6155-16",
+  "Title": null,
+  "Meta": {
+    "LogicalId": "GUID-EF99C727-4834-442F-84CE-4864EE505BFF",
+    "LogicalCardId": "6151",
+    "LanguageCardId": "6155",
+    "VersionCardId": "6152",
+    "ObjectType": "ISHModule",
+    "FTITLE.logical.": "editing a contact",
+    "FDESCRIPTION.logical.": null,
+    "FCHANGES.version.": "Imported OASIS DITA 1.1",
+    "FISHRELEASELABEL.version.": null,
+    "CREATED-ON.lng.": "29/10/2008 16:44:35",
+    "FAUTHOR.lng.": "Author",
+    "FSTATUS.lng.": "Released",
+    "MODIFIED-ON.lng.": "09/04/2010 10:25:23",
+    "VERSION.version.": "1",
+    "FRESOLUTION.lng.": null,
+    "DOC-LANGUAGE.lng.": "en",
+    "FISHREVCOUNTER.lng.": "1",
+    "ED.lng.": "GUID-D44A4812-8EBC-4DEE-B762-5B36F5F3E169",
+    "FUSERGROUP.logical.element": null,
+    "READ-ACCESS.logical.element": null
+  },
+  "Html": "<div class=\"body taskbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\r\n\t\t\t<ol class=\"ol steps\" id=\"GUID-EF99C727-4834-442F-84CE-4864EE505BFF__GUID-C8B78C26-E2F2-4FA0-8B32-98A678469AD4\">\r\n\t\t\t\t<li class=\"li step\">\r\n\t\t\t\t\t<span class=\"ph cmd\">Search for the contact you want to edit and press <samp class=\"ph msgph\">Detail</samp>. </span>\r\n\t\t\t\t</li>\r\n\t\t\t\t<li class=\"li step\">\r\n\t\t\t\t\t<span class=\"ph cmd\">Scroll to the name, number or text item you want to edit, and press <samp class=\"ph msgph\">Options</samp>. </span>\r\n\t\t\t\t</li>\r\n\t\t\t\t<li class=\"li step\">\r\n\t\t\t\t\t<span class=\"ph cmd\">Select <samp class=\"ph msgph\">Edit Name</samp>, <samp class=\"ph msgph\">Edit Number</samp>, or <samp class=\"ph msgph\">Edit Detail</samp>, and edit the name, number, or text and press <samp class=\"ph msgph\">OK</samp>.</span>\r\n\t\t\t\t</li>\r\n\t\t\t</ol>\r\n\t\t</div>"
+}

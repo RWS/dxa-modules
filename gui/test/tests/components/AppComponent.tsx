@@ -1,4 +1,4 @@
-/// <reference path="../../src/components/App.tsx" />
+/// <reference path="../../../src/components/App.tsx" />
 
 module Sdl.KcWebApp.Tests {
 
@@ -24,7 +24,7 @@ module Sdl.KcWebApp.Tests {
                 it("renders", (): void => {
                     const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
                     expect(domNode).not.toBeNull();
-                    expect(domNode.textContent).toBe("Hello world!");
+                    expect(domNode.querySelector(".sdl-activityindicator")).not.toBeNull("Could not find activity indicator.");
                 });
 
             });

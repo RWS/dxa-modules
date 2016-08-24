@@ -18,7 +18,7 @@ module.exports = function UpdateVersion(buildOptions, gulp) {
                 // Update version in version.txt
                 gulp.src([buildOptions.distPath + 'version.txt'])
                     .pipe(gulpReplace(/applicationVersion = .*[^\n]/gi, 'applicationVersion = ' + buildOptions.version))
-                    .pipe(gulpReplace(/libraryVersion = .*[^\n]/gi, 'libraryVersion = ' + buildOptions.cuilVersion))
+                    .pipe(gulpReplace(/libraryVersion = .*[^\n]/gi, 'libraryVersion = ' + buildOptions.catalinaVersion))
                     .pipe(gulpDebug({ title: 'Updated version' }))
                     .pipe(gulp.dest(buildOptions.distPath))
                     .on('end', next);
@@ -30,7 +30,7 @@ module.exports = function UpdateVersion(buildOptions, gulp) {
                 ], { base: buildOptions.distPath })
                     .pipe(gulpUpdateConfigurationVersion({
                         version: buildOptions.version,
-                        cuilVersion: buildOptions.cuilVersion
+                        catalinaVersion: buildOptions.catalinaVersion
                     }))
                     .pipe(gulpDebug({ title: 'Updated version' }))
                     .pipe(gulp.dest(buildOptions.distPath))
