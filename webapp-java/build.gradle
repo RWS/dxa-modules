@@ -47,26 +47,3 @@ task buildModules(type: MavenBuildTask) {
         mavenProperties = project.mavenProperties
     }
 }
-
-task localRepoDxa(dependsOn: buildModules, type: MavenBuildTask) {
-    def commonPart = "install:install-file -DgroupId=com.sdl.dxa.modules -Dversion=${version} -DlocalRepositoryPath=${projectDir}/local-project-repo"
-    def jar = { String artifact ->
-        "-Dfile=${artifact}/target/${artifact}-${version}.jar -DartifactId=${artifact} -Dpackaging=jar"
-    }
-    configurations = [
-            [
-                    ">> ${commonPart} ${jar('dxa-module-cid')}",
-                    ">> ${commonPart} ${jar('dxa-module-core')}",
-                    ">> ${commonPart} ${jar('dxa-module-googleanalytics')}",
-                    ">> ${commonPart} ${jar('dxa-module-mediamanager')}",
-                    ">> ${commonPart} ${jar('dxa-module-search')}",
-                    ">> ${commonPart} ${jar('dxa-module-51degrees')}",
-                    ">> ${commonPart} ${jar('dxa-module-context-expressions')}",
-                    ">> ${commonPart} ${jar('dxa-module-googleanalytics')}",
-                    ">> ${commonPart} ${jar('dxa-module-test')}",
-                    ">> ${commonPart} ${jar('dxa-module-smarttarget-2013sp1')}",
-                    ">> ${commonPart} ${jar('dxa-module-smarttarget-web8')}",
-            ]
-    ]
-    verbose = project.hasProperty('verbose')
-}
