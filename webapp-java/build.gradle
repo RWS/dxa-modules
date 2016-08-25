@@ -43,6 +43,8 @@ task buildModules(type: MavenBuildTask) {
 
     verbose = project.hasProperty('verbose')
 
+    batch = project.hasProperty('batch')
+
     if (project.hasProperty('mavenProperties')) {
         mavenProperties = project.mavenProperties
     }
