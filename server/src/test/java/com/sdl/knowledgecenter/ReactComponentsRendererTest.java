@@ -25,7 +25,7 @@ public class ReactComponentsRendererTest {
     @Test
     public void renders() throws Exception {
         //given
-        final String expected = "<div></div>";
+        final String expected = "This control does not support server side rendering.";
 
         //when
         final String result = reactComponentsRenderer.renderPage("home");

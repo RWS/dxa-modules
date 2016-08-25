@@ -6,7 +6,7 @@ module Sdl.KcWebApp {
 
     const mainElement = document.getElementById("main-view-target");
     const localization: Components.ILocalization = {
-        formatMessage: SDL.Globalize.formatMessage
+        formatMessage: (path, variables) => SDL.Globalize.formatMessage(path, variables)
     };
 
     ReactDOM.render(<App localization={localization} />, mainElement);

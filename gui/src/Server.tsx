@@ -3,8 +3,12 @@
 
 import App = Sdl.KcWebApp.Components.App;
 
-const localization: Sdl.KcWebApp.Components.ILocalization = {
-    formatMessage: SDL.Globalize.formatMessage
+const appProps: Sdl.KcWebApp.Components.IAppProps = {
+    localization: {
+        formatMessage: (path, variables) => {
+            return path;
+        }
+    }
 };
 
 /**
@@ -15,5 +19,5 @@ const localization: Sdl.KcWebApp.Components.ILocalization = {
  */
 // tslint:disable-next-line:no-unused-variable
 function renderToString(path: string): string {
-    return ReactDOMServer.renderToString(<App localization={localization}/>);
+    return ReactDOMServer.renderToString(<App {...appProps}/>);
 };

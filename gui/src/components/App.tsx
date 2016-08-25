@@ -59,8 +59,7 @@ module Sdl.KcWebApp.Components {
                 </div>
             );
         } else {
-            const ActivityIndicatorSizer = SDL.UI.Controls.ActivityIndicatorSize;
-            return (<ActivityIndicator size={ActivityIndicatorSizer.LARGE} text={"Loading..."}/>);
+            return (<ActivityIndicator text={props.localization.formatMessage("components.app.loading")}/>);
         }
     };
 }

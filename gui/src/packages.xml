@@ -5,12 +5,17 @@
         <package name="Sdl.KcWebApp">
             <resourceGroups>
                 <resourceGroup name="Sdl.KcWebApp" />
-                <resourceGroup name="Sdl.KcWebApp.Components.Styles" />
             </resourceGroups>
         </package>
         <package name="Sdl.KcWebApp.Components">
             <resourceGroups>
                 <resourceGroup name="Sdl.KcWebApp.Components" />
+            </resourceGroups>
+        </package>
+        <package name="Sdl.KcWebApp.Styles">
+            <resourceGroups>
+                <resourceGroup name="Sdl.KcWebApp.Components.Controls.Styles" />
+                <resourceGroup name="Sdl.KcWebApp.Components.Styles" />
             </resourceGroups>
         </package>
         <package name="Sdl.KcWebApp.Server">
