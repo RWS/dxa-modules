@@ -3,7 +3,8 @@
   "version": "0.1.0-3",
   "description": "Documentation portal for Knowledge Center end users.",
   "dependencies": {
-    "sdl-catalina-react-wrappers": "0.1.0-42"
+    "sdl-catalina-react-wrappers": "0.1.0-42",
+    "sdl-icons": "0.1.1-6"
   },
   "peerDependencies": {
     "react": "15.3.0",

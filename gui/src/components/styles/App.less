@@ -1,6 +1,15 @@
+@import (reference) "../../theming/styles.less";
+
+@font-face {
+    font-family: @fontFamily;
+    src: url('../../extensions/@{fontFamilyPath}') format("opentype");
+}
+
 html, body, #main-view-target {
     height: 100%;
-    margin: 0
+    margin: 0 auto;
+    font-family: @fontFamily;
+    font-size: @fontSize;
 }
 
 .sdl-kc-app {

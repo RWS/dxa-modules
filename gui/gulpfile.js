@@ -133,6 +133,13 @@ gulp.task('copy-dependencies', cb => {
                 .pipe(gulp.dest(`${buildOptions.distPath}SDL/ReactComponents`))
                 .on('end', next);
         },
+        // Icons
+        next => {
+            gulp.src(['./node_modules/sdl-icons/dist/**/*'])
+                .pipe(gulpDebug({ title: 'Copying' }))
+                .pipe(gulp.dest(`${buildOptions.distPath}SDL/Icons`))
+                .on('end', next);
+        },
         // Mocks
         next => {
             gulp.src(['./mocks/**/*'])

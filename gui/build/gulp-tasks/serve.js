@@ -101,6 +101,7 @@ module.exports = function (buildOptions, gulp, browserSync, commonFolderName) {
                             '/SDL/Common': './node_modules/sdl-catalina/' + commonFolderName() + '/',
                             '/SDL/Test': './node_modules/sdl-catalina/Test/',
                             '/SDL/ReactComponents': './node_modules/sdl-catalina-react-wrappers/dist/components/',
+                            '/SDL/Icons': './node_modules/sdl-icons/dist/',
                             '/lib/react': './node_modules/react/dist/',
                             '/lib/react-dom': './node_modules/react-dom/dist/',
                             // Put test folder behind a virtual directory
