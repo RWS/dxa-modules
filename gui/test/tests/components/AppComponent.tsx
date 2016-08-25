@@ -12,7 +12,7 @@ module Sdl.KcWebApp.Tests {
                 const target = super.createTargetElement();
 
                 beforeAll(() => {
-                    ReactDOM.render(<App/>, target);
+                    ReactDOM.render(<App localization={{ formatMessage: SDL.Globalize.formatMessage }}/>, target);
                 });
 
                 afterAll(() => {

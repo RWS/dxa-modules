@@ -60,7 +60,7 @@ var buildOptions = {
 };
 
 // Log info
-console.log('Application version: ' + buildOptions.version);
+console.log(`Application version: ${buildOptions.version}, Catalina version: ${buildOptions.catalinaVersion}`);
 
 var commonFolderName = function () {
     return buildOptions.isDebug ? 'Common.debug' : 'Common';

@@ -5,7 +5,11 @@ module Sdl.KcWebApp {
     import App = Components.App;
 
     const mainElement = document.getElementById("main-view-target");
-    ReactDOM.render(<App/>, mainElement);
+    const localization: Components.ILocalization = {
+        formatMessage: SDL.Globalize.formatMessage
+    };
+
+    ReactDOM.render(<App localization={localization} />, mainElement);
 
     DataStore.getSitemapRoot((error, children) => {
         if (error) {
@@ -15,6 +19,6 @@ module Sdl.KcWebApp {
         ReactDOM.render(<App toc={{
             rootItems: children,
             loadChildItems: DataStore.getSitemapItems
-        }}/>, mainElement);
+        }} localization={localization}/>, mainElement);
     });
 }

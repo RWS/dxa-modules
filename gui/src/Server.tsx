@@ -3,6 +3,10 @@
 
 import App = Sdl.KcWebApp.Components.App;
 
+const localization: Sdl.KcWebApp.Components.ILocalization = {
+    formatMessage: SDL.Globalize.formatMessage
+};
+
 /**
  * Render the application to a string.
  *
@@ -11,5 +15,5 @@ import App = Sdl.KcWebApp.Components.App;
  */
 // tslint:disable-next-line:no-unused-variable
 function renderToString(path: string): string {
-    return ReactDOMServer.renderToString(<App/>);
+    return ReactDOMServer.renderToString(<App localization={localization}/>);
 };

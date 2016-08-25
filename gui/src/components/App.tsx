@@ -3,6 +3,7 @@
 module Sdl.KcWebApp.Components {
 
     import ActivityIndicator = SDL.ReactComponents.ActivityIndicator;
+    import TopBar = SDL.ReactComponents.TopBar;
     import ISitemapItem = Server.Models.ISitemapItem;
 
     /**
@@ -27,6 +28,20 @@ module Sdl.KcWebApp.Components {
              */
             loadChildItems: (parentId: string, callback: (error: string, children: ISitemapItem[]) => void) => void;
         };
+        /**
+         * Localization
+         */
+        localization: ILocalization;
+    }
+
+    /**
+     * Localization
+     */
+    export interface ILocalization {
+        /**
+         * Give the message for a resource id
+         */
+        formatMessage: (path: string, variables?: string[]) => string;
     }
 
     /**
@@ -36,7 +51,7 @@ module Sdl.KcWebApp.Components {
         if (props.toc) {
             return (
                 <div className={"sdl-kc-app"}>
-                    <header className={"header"}>SDL Documenation</header>
+                    <TopBar/>
                     <section className={"content"}>
                         <Toc {...props.toc}/>
                     </section>
@@ -44,7 +59,8 @@ module Sdl.KcWebApp.Components {
                 </div>
             );
         } else {
-            return (<ActivityIndicator/>);
+            const ActivityIndicatorSizer = SDL.UI.Controls.ActivityIndicatorSize;
+            return (<ActivityIndicator size={ActivityIndicatorSizer.LARGE} text={"Loading..."}/>);
         }
     };
 }

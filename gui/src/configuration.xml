@@ -9,6 +9,11 @@
         <setting name="corePath" value="SDL/Common/" />
         <setting name="debug" value="false" />
     </appSettings>
+    <!-- Supported locales -->
+    <locales>
+        <locale>en</locale>
+        <locale>nl</locale>
+    </locales>
     <!-- Main Catalina config -->
     <include src="~/configuration.xml" />
     <include src="SDL/ReactComponents/configuration.xml" />
@@ -17,6 +22,7 @@
     <!-- Child configs -->
     <include src="components/_config.xml" />
     <include src="models/_config.xml" />
+    <include src="resources/_config.xml" />
     <!-- Main resources -->
     <resourceGroups>
         <resourceGroup name="Sdl.KcWebApp">
@@ -26,6 +32,7 @@
             <dependencies>
                 <dependency name="Sdl.KcWebApp.Components" />
                 <dependency name="Sdl.KcWebApp.DataStore" />
+                <dependency name="Sdl.KcWebApp.Resources" />
             </dependencies>
         </resourceGroup>
         <resourceGroup name="Sdl.KcWebApp.DataStore">
