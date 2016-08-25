@@ -12,7 +12,12 @@ module Sdl.KcWebApp.Tests {
                 const target = super.createTargetElement();
 
                 beforeAll(() => {
-                    ReactDOM.render(<App localization={{ formatMessage: SDL.Globalize.formatMessage }}/>, target);
+                    const appProps: Sdl.KcWebApp.Components.IAppProps = {
+                        localization: {
+                            formatMessage: (path, variables) => SDL.Globalize.formatMessage(path, variables)
+                        }
+                    };
+                    ReactDOM.render(<App {...appProps}/>, target);
                 });
 
                 afterAll(() => {

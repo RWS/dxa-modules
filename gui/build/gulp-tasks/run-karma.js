@@ -28,6 +28,8 @@ module.exports = (buildOptions, browserSync) => {
                 '/src/': urlPrefix,
                 // mocks
                 '/gui/mocks/': urlPrefix + 'gui/mocks/',
+                // theming
+                '/theming/': urlPrefix + 'theming/',
                 // Browsers sync proxies
                 '/browser-sync/': urlPrefix + 'browser-sync-mock/'
             },

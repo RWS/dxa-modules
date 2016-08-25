@@ -18,6 +18,7 @@
                 <dependency name="SDL.Client.Test.Utilities"/>
                 <dependency name="Sdl.KcWebApp.Components"/>
                 <dependency name="Sdl.KcWebApp.DataStore" />
+                <dependency name="Sdl.KcWebApp.Resources"/>
                 <dependency name="Sdl.KcWebApp.Server"/>
             </dependencies>
         </resourceGroup>
