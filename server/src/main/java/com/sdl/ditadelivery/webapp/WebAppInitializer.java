@@ -15,7 +15,7 @@ import static com.sdl.webapp.common.util.InitializationUtils.registerListener;
 import static com.sdl.webapp.common.util.InitializationUtils.registerServlet;
 
 @Slf4j
-public class WebAppConfiguration implements WebApplicationInitializer {
+public class WebAppInitializer implements WebApplicationInitializer {
 
     /**
      * Executed when the app starts
