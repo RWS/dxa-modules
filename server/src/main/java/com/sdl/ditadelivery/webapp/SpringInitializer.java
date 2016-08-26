@@ -1,7 +1,7 @@
-package com.sdl.knowledgecenter;
+package com.sdl.ditadelivery.webapp;
 
+import com.sdl.ditadelivery.webapp.controllers.PageController;
 import com.sdl.dxa.DxaSpringInitialization;
-import com.sdl.knowledgecenter.controllers.PageController;
 import org.springframework.context.annotation.*;
 import org.springframework.core.Ordered;
 import org.springframework.web.servlet.ViewResolver;
@@ -13,7 +13,7 @@ import org.springframework.web.servlet.view.JstlView;
  */
 @Configuration
 @ComponentScan(
-        basePackages = "com.sdl.knowledgecenter",
+        basePackages = "com.sdl.ditadelivery",
         excludeFilters = @ComponentScan.Filter(
                 type = FilterType.ASSIGNABLE_TYPE,
                 value = PageController.class

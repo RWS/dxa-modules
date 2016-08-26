@@ -1,4 +1,4 @@
-package com.sdl.knowledgecenter.controllers;
+package com.sdl.ditadelivery.webapp.controllers;
 
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.content.ContentProvider;

@@ -1,6 +1,6 @@
-package com.sdl.knowledgecenter;
+package com.sdl.ditadelivery.webapp;
 
-import com.sdl.knowledgecenter.controllers.PageController;
+import com.sdl.ditadelivery.webapp.controllers.PageController;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;

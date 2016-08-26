@@ -1,6 +1,6 @@
-package com.sdl.knowledgecenter.controllers;
+package com.sdl.ditadelivery.webapp.controllers;
 
-import com.sdl.knowledgecenter.renderers.ReactComponentsRenderer;
+import com.sdl.ditadelivery.webapp.renderers.ReactComponentsRenderer;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.content.ContentProvider;
 import com.sdl.webapp.common.api.content.ContentProviderException;
@@ -9,15 +9,11 @@ import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.api.model.PageModel;
 import com.sdl.webapp.common.controller.exception.InternalServerErrorException;
 import com.sdl.webapp.common.controller.exception.NotFoundException;
-import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.net.URL;
 
 import static com.sdl.webapp.common.controller.RequestAttributeNames.LOCALIZATION;
 import static com.sdl.webapp.common.controller.RequestAttributeNames.PAGE_MODEL;
