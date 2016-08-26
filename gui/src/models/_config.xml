@@ -5,6 +5,7 @@
     <resourceGroups>
         <resourceGroup name="Sdl.DitaDelivery.Models">
             <files>
+                <file name="Page.js" />
                 <file name="Toc.js" />
             </files>
             <dependencies>

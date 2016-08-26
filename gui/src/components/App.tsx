@@ -29,6 +29,17 @@ module Sdl.DitaDelivery.Components {
             loadChildItems: (parentId: string, callback: (error: string, children: ISitemapItem[]) => void) => void;
         };
         /**
+         * Page information
+         */
+        page?: {
+            /**
+             * Page content
+             *
+             * @type {string}
+             */
+            content: string;
+        };
+        /**
          * Localization
          */
         localization: ILocalization;
@@ -52,16 +63,24 @@ module Sdl.DitaDelivery.Components {
         if (props.toc) {
             return (
                 <div className={"sdl-dita-delivery-app"}>
-                    <TopBar title={formatMessage("components.app.title")} buttons={{user: {
-                        isPicture: true
-                    }}}/>
+                    <TopBar title={formatMessage("components.app.title") } buttons={{
+                        user: {
+                            isPicture: true
+                        }
+                    }}/>
                     <section className={"content"}>
                         <Toc {...props.toc}/>
+                        <div className={"page"}>
+                        {props.page ?
+                            <div className={"page-content"} dangerouslySetInnerHTML={{ __html: props.page.content }} />
+                            : <ActivityIndicator/>
+                        }
+                        </div>
                     </section>
                 </div>
             );
         } else {
-            return (<ActivityIndicator text={formatMessage("components.app.loading")}/>);
+            return (<ActivityIndicator text={formatMessage("components.app.loading") }/>);
         }
     };
 }

@@ -1,3 +1,4 @@
+/// <reference path="models/Page.ts" />
 /// <reference path="models/Toc.ts" />
 
 module Sdl.DitaDelivery {
@@ -11,6 +12,24 @@ module Sdl.DitaDelivery {
      * @class DataStore
      */
     export class DataStore {
+
+        /**
+         * Table of content models
+         *
+         * @private
+         * @static
+         * @type {{ [parentId:string]: Models.Toc }}
+         */
+        private static TocModels: { [parentId: string]: Models.Toc };
+
+        /**
+         * Page models
+         *
+         * @private
+         * @static
+         * @type {{ [pageId:string]: Models.Page }}
+         */
+        private static PageModels: { [pageId: string]: Models.Page };
 
         /**
          * Get the root objects of the sitemap
@@ -30,7 +49,7 @@ module Sdl.DitaDelivery {
          * @param {(error: string, children: ISitemapItem[]) => void} callback Returns the items
          */
         public static getSitemapItems(parentId: string, callback: (error: string, children: ISitemapItem[]) => void): void {
-            const toc = new Models.Toc(parentId);
+            const toc = DataStore.getTocModel(parentId);
             const onLoad = () => {
                 toc.removeEventListener("load", onLoad);
                 callback(null, toc.getSitemapItems());
@@ -39,9 +58,59 @@ module Sdl.DitaDelivery {
                 toc.removeEventListener("loadfailed", onLoadFailed);
                 callback(event.data.error, []);
             };
-            toc.addEventListener("load", onLoad);
-            toc.addEventListener("loadfailed", onLoadFailed);
-            toc.load();
+            if (!toc.isLoaded()) {
+                toc.addEventListener("load", onLoad);
+                toc.addEventListener("loadfailed", onLoadFailed);
+                toc.load();
+            } else {
+                callback(null, toc.getSitemapItems());
+            }
+        }
+
+        /**
+         * Get the html content of a page
+         *
+         * @static
+         * @param {string} pageId The page id
+         * @param {(error: string, content: string) => void} callback Returns the content
+         */
+        public static getPageContent(pageId: string, callback: (error: string, content: string) => void): void {
+            const page = DataStore.getPageModel(pageId);
+            const onLoad = () => {
+                page.removeEventListener("load", onLoad);
+                callback(null, page.getContent());
+            };
+            const onLoadFailed = (event: SDL.Client.Event.Event) => {
+                page.removeEventListener("loadfailed", onLoadFailed);
+                callback(event.data.error, "");
+            };
+            if (!page.isLoaded()) {
+                page.addEventListener("load", onLoad);
+                page.addEventListener("loadfailed", onLoadFailed);
+                page.load();
+            } else {
+                callback(null, page.getContent());
+            }
+        }
+
+        private static getTocModel(parentId: string): Models.Toc {
+            if (!DataStore.TocModels) {
+                DataStore.TocModels = {};
+            }
+            if (!DataStore.TocModels[parentId]) {
+                DataStore.TocModels[parentId] = new Models.Toc(parentId);
+            }
+            return DataStore.TocModels[parentId];
+        }
+
+        private static getPageModel(pageId: string): Models.Page {
+            if (!DataStore.PageModels) {
+                DataStore.PageModels = {};
+            }
+            if (!DataStore.PageModels[pageId]) {
+                DataStore.PageModels[pageId] = new Models.Page(pageId);
+            }
+            return DataStore.PageModels[pageId];
         }
 
     }
