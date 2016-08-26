@@ -58,7 +58,6 @@ module Sdl.KcWebApp.Components {
                     <section className={"content"}>
                         <Toc {...props.toc}/>
                     </section>
-                    <footer className={"footer"}>Footer</footer>
                 </div>
             );
         } else {
