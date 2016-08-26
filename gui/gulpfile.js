@@ -60,7 +60,7 @@ var buildOptions = {
 };
 
 // Log info
-console.log('Application version: ' + buildOptions.version);
+console.log(`Application version: ${buildOptions.version}, Catalina version: ${buildOptions.catalinaVersion}`);
 
 var commonFolderName = function () {
     return buildOptions.isDebug ? 'Common.debug' : 'Common';
@@ -131,6 +131,13 @@ gulp.task('copy-dependencies', cb => {
             gulp.src(['./node_modules/sdl-catalina-react-wrappers/dist/components/**/*'])
                 .pipe(gulpDebug({ title: 'Copying' }))
                 .pipe(gulp.dest(`${buildOptions.distPath}SDL/ReactComponents`))
+                .on('end', next);
+        },
+        // Icons
+        next => {
+            gulp.src(['./node_modules/sdl-icons/dist/**/*'])
+                .pipe(gulpDebug({ title: 'Copying' }))
+                .pipe(gulp.dest(`${buildOptions.distPath}SDL/Icons`))
                 .on('end', next);
         },
         // Mocks

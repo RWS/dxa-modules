@@ -1,0 +1,58 @@
+/* Graphene overwrites for the TopBar Control */
+
+@import (reference) "../../../theming/styles.less";
+html.sdl-topbar.sdl-topbar-page {
+    margin-top: 50px;
+    body {
+        top: 50px;
+    }
+}
+
+span.sdl-topbar.sdl-topbar-control {
+    background-color: @accentColor3;
+    border-width: 0px;
+    box-shadow: none;
+    height: 50px;
+    line-height: 50px;
+    .sdl-topbar-title {
+        font-size: 16px;
+        .icon-sdl-logo();
+        background-position: 0 10px;
+        width: inherit;
+        height: inherit;
+        > span {
+            margin-left: 100px;
+        }
+    }
+    > .sdl-topbar-ribbon, > .sdl-topbar-buttons {
+        height: 50px;
+    }
+    > .sdl-topbar-buttons {
+        > span {
+            box-shadow: none;
+            border-width: 0px;
+            margin: 10px 0;
+            cursor: pointer;
+            border-radius: 5px;
+            &:hover {
+                background-color: @accentcolor2;
+            }
+            > span {
+                padding: 0;
+                height: 16px;
+            }
+        }
+        span.sdl-topbar-button-userdefaultpicture {
+            padding: 7px 0;
+            >:first-child {
+                .icon-user-16-mono-bright();
+                background-color: transparent;
+                background-position: 0 0;
+                background-repeat: no-repeat;
+            }
+            &:hover>:first-child {
+                background-color: transparent;
+            }
+        }
+    }
+}

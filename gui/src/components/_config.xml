@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <configuration
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../node_modules/sdl-catalina/Common/Library/Core/configuration.xsd">
+    <include src="controls/_config.xml" />
     <!-- Main resources -->
     <resourceGroups>
         <resourceGroup name="Sdl.KcWebApp.Components">
@@ -11,6 +12,7 @@
             <dependencies>
                 <dependency name="ReactComponents.Components" />
                 <dependency name="Sdl.KcWebApp.Components.Styles" />
+                <dependency name="Sdl.KcWebApp.Components.Controls" />
             </dependencies>
         </resourceGroup>
         <resourceGroup name="Sdl.KcWebApp.Components.Styles">

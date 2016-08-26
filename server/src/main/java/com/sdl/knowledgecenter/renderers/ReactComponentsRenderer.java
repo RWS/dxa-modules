@@ -38,9 +38,8 @@ public class ReactComponentsRenderer {
             NashornScriptEngine nashornScriptEngine = (NashornScriptEngine) new ScriptEngineManager().getEngineByName("nashorn");
             try {
                 nashornScriptEngine.eval(read("gui/lib/react/react.js"));
-                nashornScriptEngine.eval(read("gui/lib/react-dom/react-dom.js"));
                 nashornScriptEngine.eval(read("gui/lib/react-dom/react-dom-server.js"));
-                nashornScriptEngine.eval(read("gui/CatalinaPolyfills.js"));
+                nashornScriptEngine.eval(read("gui/SDL/ReactComponents/packages/ReactComponents.js"));
                 nashornScriptEngine.eval(read("gui/packages/Sdl.KcWebApp.Components.js"));
                 nashornScriptEngine.eval(read("gui/packages/Sdl.KcWebApp.Server.js"));
             } catch (ScriptException e) {

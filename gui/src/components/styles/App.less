@@ -1,20 +1,24 @@
+@import (reference) "../../theming/styles.less";
+
+@font-face {
+    font-family: @fontFamily;
+    src: url('../../theming/@{fontFamilyPath}') format("opentype");
+}
+
 html, body, #main-view-target {
     height: 100%;
-    margin: 0
+    margin: 0 auto;
+    font-family: @fontFamily;
+    font-size: @fontSize;
 }
 
 .sdl-kc-app {
     display: flex;
     flex-flow: column;
     height: 100%;
-    .header {
-        flex: 0 1 auto;
-    }
+
     .content {
         position: relative;
         flex: 1 1 auto;
-    }
-    .footer {
-        flex: 0 1 40px;
     }
 }

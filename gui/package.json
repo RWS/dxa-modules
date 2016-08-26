@@ -3,12 +3,13 @@
   "version": "0.1.0-4",
   "description": "Documentation portal for Knowledge Center end users.",
   "dependencies": {
-    "sdl-catalina-react-wrappers": "0.1.0-42"
+    "sdl-catalina-react-wrappers": "0.1.0-46",
+    "sdl-icons": "0.1.1-6"
   },
   "peerDependencies": {
-    "react": "15.3.0",
-    "react-dom": "15.3.0",
-    "sdl-catalina": "3.0.0-rc1"
+    "react": "15.3.1",
+    "react-dom": "15.3.1",
+    "sdl-catalina": "~3.1.0-develop.30"
   },
   "devDependencies": {
     "async": "~2.0.0-rc.6",

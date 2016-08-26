@@ -3,6 +3,14 @@
 
 import App = Sdl.KcWebApp.Components.App;
 
+const appProps: Sdl.KcWebApp.Components.IAppProps = {
+    localization: {
+        formatMessage: (path, variables) => {
+            return path;
+        }
+    }
+};
+
 /**
  * Render the application to a string.
  *
@@ -11,5 +19,5 @@ import App = Sdl.KcWebApp.Components.App;
  */
 // tslint:disable-next-line:no-unused-variable
 function renderToString(path: string): string {
-    return ReactDOMServer.renderToString(<App/>);
+    return ReactDOMServer.renderToString(<App {...appProps}/>);
 };

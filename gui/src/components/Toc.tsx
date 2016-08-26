@@ -62,7 +62,7 @@ module Sdl.KcWebApp.Components {
             const TreeViewControl = SDL.UI.Controls.TreeView;
             for (let node of sitemapItems) {
                 nodes.push(
-                    TreeViewControl.prototype.createNode(node.Id, node.Title, "FOLDER",
+                    TreeViewControl.prototype.createNode(node.Id, node.Title, "TOPIC",
                         parentNode, null, node.IsLeaf, this._loadChildNodes.bind(this), true));
             }
             return nodes;
