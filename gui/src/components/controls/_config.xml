@@ -10,6 +10,7 @@
         </resourceGroup>
         <resourceGroup name="Sdl.KcWebApp.Components.Controls.Styles">
             <files>
+                <file name="styles/TopBar.css"/>
                 <file name="styles/TreeView.css"/>
             </files>
         </resourceGroup>

@@ -48,10 +48,13 @@ module Sdl.KcWebApp.Components {
      * Main component for the application
      */
     export const App = (props: IAppProps) => {
+        const formatMessage = props.localization.formatMessage;
         if (props.toc) {
             return (
                 <div className={"sdl-kc-app"}>
-                    <TopBar/>
+                    <TopBar title={formatMessage("components.app.title")} buttons={{user: {
+                        isPicture: true
+                    }}}/>
                     <section className={"content"}>
                         <Toc {...props.toc}/>
                     </section>
@@ -59,7 +62,7 @@ module Sdl.KcWebApp.Components {
                 </div>
             );
         } else {
-            return (<ActivityIndicator text={props.localization.formatMessage("components.app.loading")}/>);
+            return (<ActivityIndicator text={formatMessage("components.app.loading")}/>);
         }
     };
 }
