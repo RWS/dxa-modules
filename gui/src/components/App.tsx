@@ -1,6 +1,6 @@
 /// <reference path="Toc.tsx" />
 
-module Sdl.KcWebApp.Components {
+module Sdl.DitaDelivery.Components {
 
     import ActivityIndicator = SDL.ReactComponents.ActivityIndicator;
     import TopBar = SDL.ReactComponents.TopBar;
@@ -51,7 +51,7 @@ module Sdl.KcWebApp.Components {
         const formatMessage = props.localization.formatMessage;
         if (props.toc) {
             return (
-                <div className={"sdl-kc-app"}>
+                <div className={"sdl-dita-delivery-app"}>
                     <TopBar title={formatMessage("components.app.title")} buttons={{user: {
                         isPicture: true
                     }}}/>

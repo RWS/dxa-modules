@@ -1,9 +1,9 @@
 /// <reference path="../../src/components/App.tsx" />
 /// <reference path="../../src/DataStore.ts" />
 
-module Sdl.KcWebApp.Tests {
+module Sdl.DitaDelivery.Tests {
 
-    import DataStore = Sdl.KcWebApp.DataStore;
+    import DataStore = Sdl.DitaDelivery.DataStore;
 
     class DataStoreTests extends SDL.Client.Test.TestBase {
 

@@ -1,7 +1,7 @@
 /// <reference path="../typings/index.d.ts" />
 /// <reference path="components/App.tsx" />
 
-module Sdl.KcWebApp {
+module Sdl.DitaDelivery {
     import App = Components.App;
 
     const mainElement = document.getElementById("main-view-target");

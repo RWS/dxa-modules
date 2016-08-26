@@ -1,6 +1,6 @@
 /// <reference path="../../typings/index.d.ts" />
 
-module Sdl.KcWebApp.Models {
+module Sdl.DitaDelivery.Models {
 
     import ISitemapItem = Server.Models.ISitemapItem;
     import IWebRequest = SDL.Client.Net.IWebRequest;
@@ -61,5 +61,5 @@ module Sdl.KcWebApp.Models {
         }
     }
 
-    SDL.Client.Types.OO.createInterface("Sdl.KcWebApp.Models.Toc", Toc);
+    SDL.Client.Types.OO.createInterface("Sdl.DitaDelivery.Models.Toc", Toc);
 }

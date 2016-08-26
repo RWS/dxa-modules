@@ -1,6 +1,6 @@
 /// <reference path="models/Toc.ts" />
 
-module Sdl.KcWebApp {
+module Sdl.DitaDelivery {
 
     import ISitemapItem = Server.Models.ISitemapItem;
 
@@ -30,7 +30,7 @@ module Sdl.KcWebApp {
          * @param {(error: string, children: ISitemapItem[]) => void} callback Returns the items
          */
         public static getSitemapItems(parentId: string, callback: (error: string, children: ISitemapItem[]) => void): void {
-            const toc = new Sdl.KcWebApp.Models.Toc(parentId);
+            const toc = new Models.Toc(parentId);
             const onLoad = () => {
                 toc.removeEventListener("load", onLoad);
                 callback(null, toc.getSitemapItems());

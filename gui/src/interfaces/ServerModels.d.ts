@@ -1,14 +1,14 @@
 
-declare module Server.Models {
+declare module Sdl.DitaDelivery.Server.Models {
     interface IPage {
         Html: string;
         Id: string;
-        Meta: Server.Models.IKeyValuePair<string, string>[];
+        Meta: Sdl.DitaDelivery.Server.Models.IKeyValuePair<string, string>[];
         Title: string;
     }
     interface IPublication {
         Id: string;
-        Meta: Server.Models.IKeyValuePair<string, string>[];
+        Meta: Sdl.DitaDelivery.Server.Models.IKeyValuePair<string, string>[];
         Title: string;
     }
     interface ISitemapItem {
@@ -19,7 +19,7 @@ declare module Server.Models {
         Url: string;
     }
 }
-declare module Server.Models {
+declare module Sdl.DitaDelivery.Server.Models {
     interface IKeyValuePair<TKey, TValue> {
         Key: TKey;
         Value: TValue;

@@ -1,10 +1,6 @@
 {
-  "name": "sdl-catalina-react-wrappers",
+  "name": "sdl-dita-delivery-web-app-gui",
   "global": true,
-  "files": [
-    "src/global.d.ts",
-    "dist/index.d.ts"
-  ],
   "globalDependencies": {
     "jasmine": "registry:dt/jasmine#2.2.0+20160505161446",
     "react": "registry:dt/react#0.14.0+20160817201227",
