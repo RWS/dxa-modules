@@ -25,35 +25,35 @@
     <include src="resources/_config.xml" />
     <!-- Main resources -->
     <resourceGroups>
-        <resourceGroup name="Sdl.KcWebApp">
+        <resourceGroup name="Sdl.DitaDelivery">
             <files>
                 <file name="Index.js" />
             </files>
             <dependencies>
-                <dependency name="Sdl.KcWebApp.Components" />
-                <dependency name="Sdl.KcWebApp.DataStore" />
-                <dependency name="Sdl.KcWebApp.Resources" />
+                <dependency name="Sdl.DitaDelivery.Components" />
+                <dependency name="Sdl.DitaDelivery.DataStore" />
+                <dependency name="Sdl.DitaDelivery.Resources" />
             </dependencies>
         </resourceGroup>
-        <resourceGroup name="Sdl.KcWebApp.DataStore">
+        <resourceGroup name="Sdl.DitaDelivery.DataStore">
             <files>
                 <file name="DataStore.js" />
             </files>
             <dependencies>
-                <dependency name="Sdl.KcWebApp.Models" />
+                <dependency name="Sdl.DitaDelivery.Models" />
             </dependencies>
         </resourceGroup>
-        <resourceGroup name="Sdl.KcWebApp.Server">
+        <resourceGroup name="Sdl.DitaDelivery.Server">
             <files>
                 <file name="Server.js"/>
             </files>
             <dependencies>
-                <dependency name="Sdl.KcWebApp.Components" />
+                <dependency name="Sdl.DitaDelivery.Components" />
             </dependencies>
         </resourceGroup>
     </resourceGroups>
     <!-- Configuration for pages -->
     <pages baseUrl="/">
-        <page url="*" resource="Sdl.KcWebApp" title="SDL Knowledge Center Documentation Portal" />
+        <page url="*" resource="Sdl.DitaDelivery" title="SDL Dita Delivery" />
     </pages>
 </configuration>

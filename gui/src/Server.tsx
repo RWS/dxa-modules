@@ -1,9 +1,9 @@
 /// <reference path="../typings/index.d.ts" />
 /// <reference path="components/App.tsx" />
 
-import App = Sdl.KcWebApp.Components.App;
+import App = Sdl.DitaDelivery.Components.App;
 
-const appProps: Sdl.KcWebApp.Components.IAppProps = {
+const appProps: Sdl.DitaDelivery.Components.IAppProps = {
     localization: {
         formatMessage: (path, variables) => {
             return path;

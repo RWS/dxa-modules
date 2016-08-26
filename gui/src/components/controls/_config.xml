@@ -3,12 +3,12 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../node_modules/sdl-catalina/Common/Library/Core/configuration.xsd">
     <!-- Main resources -->
     <resourceGroups>
-        <resourceGroup name="Sdl.KcWebApp.Components.Controls">
+        <resourceGroup name="Sdl.DitaDelivery.Components.Controls">
             <dependencies>
-                <dependency name="Sdl.KcWebApp.Components.Controls.Styles" />
+                <dependency name="Sdl.DitaDelivery.Components.Controls.Styles" />
             </dependencies>
         </resourceGroup>
-        <resourceGroup name="Sdl.KcWebApp.Components.Controls.Styles">
+        <resourceGroup name="Sdl.DitaDelivery.Components.Controls.Styles">
             <files>
                 <file name="styles/TopBar.css"/>
                 <file name="styles/TreeView.css"/>

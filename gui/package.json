@@ -1,7 +1,7 @@
 {
-  "name": "sdl-kc-webapp",
+  "name": "sdl-dita-delivery-web-app-gui",
   "version": "0.1.0-5",
-  "description": "Documentation portal for Knowledge Center end users.",
+  "description": "GUI of the SDL Dita Delivery Web Application.",
   "dependencies": {
     "sdl-catalina-react-wrappers": "0.1.0-46",
     "sdl-icons": "0.1.1-6"

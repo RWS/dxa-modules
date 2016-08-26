@@ -2,25 +2,25 @@
 <configuration
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../node_modules/sdl-catalina/Common/Library/Core/configuration.xsd">
     <packages>
-        <package name="Sdl.KcWebApp">
+        <package name="Sdl.DitaDelivery">
             <resourceGroups>
-                <resourceGroup name="Sdl.KcWebApp" />
+                <resourceGroup name="Sdl.DitaDelivery" />
             </resourceGroups>
         </package>
-        <package name="Sdl.KcWebApp.Components">
+        <package name="Sdl.DitaDelivery.Components">
             <resourceGroups>
-                <resourceGroup name="Sdl.KcWebApp.Components" />
+                <resourceGroup name="Sdl.DitaDelivery.Components" />
             </resourceGroups>
         </package>
-        <package name="Sdl.KcWebApp.Styles">
+        <package name="Sdl.DitaDelivery.Styles">
             <resourceGroups>
-                <resourceGroup name="Sdl.KcWebApp.Components.Controls.Styles" />
-                <resourceGroup name="Sdl.KcWebApp.Components.Styles" />
+                <resourceGroup name="Sdl.DitaDelivery.Components.Controls.Styles" />
+                <resourceGroup name="Sdl.DitaDelivery.Components.Styles" />
             </resourceGroups>
         </package>
-        <package name="Sdl.KcWebApp.Server">
+        <package name="Sdl.DitaDelivery.Server">
             <resourceGroups>
-                <resourceGroup name="Sdl.KcWebApp.Server" />
+                <resourceGroup name="Sdl.DitaDelivery.Server" />
             </resourceGroups>
         </package>
     </packages>

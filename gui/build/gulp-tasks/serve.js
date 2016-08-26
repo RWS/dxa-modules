@@ -80,6 +80,21 @@ module.exports = function (buildOptions, gulp, browserSync, commonFolderName) {
             } else {
                 buildOptions.ports.httpServer = port;
 
+                let routes = {};
+                if (buildOptions.isDebug) {
+                     routes = {
+                        // Third party dependencies
+                        '/SDL/Common': './node_modules/sdl-catalina/' + commonFolderName() + '/',
+                        '/SDL/ReactComponents': './node_modules/sdl-catalina-react-wrappers/dist/components/',
+                        '/lib/react': './node_modules/react/dist/',
+                        '/lib/react-dom': './node_modules/react-dom/dist/',
+                    }
+                }
+                routes['/test'] =  buildOptions.testPath; // Put test folder behind a virtual directory
+                routes['/SDL/Test'] = './node_modules/sdl-catalina/Test/';
+                routes['/gui/mocks'] = './mocks/';
+                routes['/gui/theming'] = buildOptions.distPath + 'theming/';
+
                 // Start browser sync
                 var browserSyncOptions = {
                     notify: false,
@@ -96,18 +111,7 @@ module.exports = function (buildOptions, gulp, browserSync, commonFolderName) {
                     // Server config
                     server: {
                         baseDir: buildOptions.distPath,
-                        routes: {
-                            // Third party dependencies
-                            '/SDL/Common': './node_modules/sdl-catalina/' + commonFolderName() + '/',
-                            '/SDL/Test': './node_modules/sdl-catalina/Test/',
-                            '/SDL/ReactComponents': './node_modules/sdl-catalina-react-wrappers/dist/components/',
-                            '/SDL/Icons': './node_modules/sdl-icons/dist/',
-                            '/lib/react': './node_modules/react/dist/',
-                            '/lib/react-dom': './node_modules/react-dom/dist/',
-                            // Put test folder behind a virtual directory
-                            '/test': buildOptions.testPath,
-                            '/gui/mocks': './mocks/'
-                        }
+                        routes: routes
                     },
                     middleware: [
                         (req, res, next) => {

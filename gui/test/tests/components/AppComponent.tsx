@@ -1,6 +1,6 @@
 /// <reference path="../../../src/components/App.tsx" />
 
-module Sdl.KcWebApp.Tests {
+module Sdl.DitaDelivery.Tests {
 
     import App = Components.App;
 
@@ -12,7 +12,7 @@ module Sdl.KcWebApp.Tests {
                 const target = super.createTargetElement();
 
                 beforeAll(() => {
-                    const appProps: Sdl.KcWebApp.Components.IAppProps = {
+                    const appProps: Components.IAppProps = {
                         localization: {
                             formatMessage: (path, variables) => SDL.Globalize.formatMessage(path, variables)
                         }

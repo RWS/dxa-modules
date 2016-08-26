@@ -1,6 +1,6 @@
 /// <reference path="../interfaces/ServerModels.d.ts" />
 
-module Sdl.KcWebApp.Components {
+module Sdl.DitaDelivery.Components {
 
     import TreeView = SDL.ReactComponents.TreeView;
     import ITreeViewNode = SDL.UI.Controls.ITreeViewNode;
@@ -39,7 +39,7 @@ module Sdl.KcWebApp.Components {
             const props = this.props;
 
             return (
-                <div className={"sdl-kc-toc"}>
+                <div className={"sdl-dita-delivery-toc"}>
                     <TreeView
                         rootNodes={this._convertToTreeViewNodes(props.rootItems) }
                         useCommonUILibraryScrollView={false}/>

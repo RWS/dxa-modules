@@ -1,7 +1,7 @@
 /// <reference path="../../src/components/App.tsx" />
 /// <reference path="../../src/Server.tsx" />
 
-module Sdl.KcWebApp.Tests {
+module Sdl.DitaDelivery.Tests {
 
     class Server extends SDL.Client.Test.TestBase {
 

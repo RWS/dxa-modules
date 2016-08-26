@@ -1,4 +1,4 @@
-package com.sdl.knowledgecenter;
+package com.sdl.ditadelivery.webapp;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;

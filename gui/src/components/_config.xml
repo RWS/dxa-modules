@@ -4,18 +4,18 @@
     <include src="controls/_config.xml" />
     <!-- Main resources -->
     <resourceGroups>
-        <resourceGroup name="Sdl.KcWebApp.Components">
+        <resourceGroup name="Sdl.DitaDelivery.Components">
             <files>
                 <file name="App.js" />
                 <file name="Toc.js" />
             </files>
             <dependencies>
                 <dependency name="ReactComponents.Components" />
-                <dependency name="Sdl.KcWebApp.Components.Styles" />
-                <dependency name="Sdl.KcWebApp.Components.Controls" />
+                <dependency name="Sdl.DitaDelivery.Components.Styles" />
+                <dependency name="Sdl.DitaDelivery.Components.Controls" />
             </dependencies>
         </resourceGroup>
-        <resourceGroup name="Sdl.KcWebApp.Components.Styles">
+        <resourceGroup name="Sdl.DitaDelivery.Components.Styles">
             <files>
                 <file name="styles/App.css"/>
                 <file name="styles/Toc.css"/>

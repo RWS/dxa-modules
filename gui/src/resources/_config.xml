@@ -2,7 +2,7 @@
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:noNamespaceSchemaLocation="../../node_modules/sdl-catalina/Common/Library/Core/configuration.xsd">
   <resourceGroups>
-    <resourceGroup name="Sdl.KcWebApp.Resources">
+    <resourceGroup name="Sdl.DitaDelivery.Resources">
       <files>
         <file name="resources.default.resjson" />
         <file name="resources.{CULTURE}.resjson" />

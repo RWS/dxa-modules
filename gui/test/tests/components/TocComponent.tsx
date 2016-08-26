@@ -1,6 +1,6 @@
 /// <reference path="../../../src/components/App.tsx" />
 
-module Sdl.KcWebApp.Tests {
+module Sdl.DitaDelivery.Tests {
 
     import Toc = Components.Toc;
     import ISitemapItem = Server.Models.ISitemapItem;

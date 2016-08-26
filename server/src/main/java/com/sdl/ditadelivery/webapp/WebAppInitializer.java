@@ -1,6 +1,6 @@
-package com.sdl.knowledgecenter;
+package com.sdl.ditadelivery.webapp;
 
-import com.sdl.knowledgecenter.controllers.PageController;
+import com.sdl.ditadelivery.webapp.controllers.PageController;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
@@ -15,7 +15,7 @@ import static com.sdl.webapp.common.util.InitializationUtils.registerListener;
 import static com.sdl.webapp.common.util.InitializationUtils.registerServlet;
 
 @Slf4j
-public class WebAppConfiguration implements WebApplicationInitializer {
+public class WebAppInitializer implements WebApplicationInitializer {
 
     /**
      * Executed when the app starts

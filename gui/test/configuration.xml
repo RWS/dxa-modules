@@ -6,7 +6,7 @@
     <include src="../SDL/Test/configuration.xml" />
     <include src="../src/configuration.xml"/>
     <resourceGroups>
-        <resourceGroup name="Sdl.KcWebApp.Test">
+        <resourceGroup name="Sdl.DitaDelivery.Test">
             <files>
                 <file name="tests/components/AppComponent.js" />
                 <file name="tests/components/TocComponent.js" />
@@ -16,10 +16,10 @@
             <dependencies>
                 <dependency name="SDL.Client.Test.TestBase"/>
                 <dependency name="SDL.Client.Test.Utilities"/>
-                <dependency name="Sdl.KcWebApp.Components"/>
-                <dependency name="Sdl.KcWebApp.DataStore" />
-                <dependency name="Sdl.KcWebApp.Resources"/>
-                <dependency name="Sdl.KcWebApp.Server"/>
+                <dependency name="Sdl.DitaDelivery.Components"/>
+                <dependency name="Sdl.DitaDelivery.DataStore" />
+                <dependency name="Sdl.DitaDelivery.Resources"/>
+                <dependency name="Sdl.DitaDelivery.Server"/>
             </dependencies>
         </resourceGroup>
     </resourceGroups>
