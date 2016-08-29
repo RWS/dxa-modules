@@ -10,7 +10,7 @@ import com.sdl.dxa.modules.model.embed.EmbedParent;
 import com.sdl.webapp.common.api.mapping.views.AbstractInitializer;
 import com.sdl.webapp.common.api.mapping.views.RegisteredViewModel;
 import com.sdl.webapp.common.api.mapping.views.RegisteredViewModels;
-import com.sdl.webapp.common.api.model.page.PageModelImpl;
+import com.sdl.webapp.common.api.model.page.DefaultPageModel;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -28,7 +28,7 @@ import org.springframework.stereotype.Component;
         @RegisteredViewModel(viewName = "TSI1758Test", modelClass = Tsi1758TestEntity.class),
         @RegisteredViewModel(viewName = "TSI1758TestEmbedded", modelClass = Tsi1758TestEmbeddedEntity.class),
         @RegisteredViewModel(viewName = "TSI1758TestEmbedded2", modelClass = Tsi1758TestEmbedded2Entity.class),
-        @RegisteredViewModel(viewName = "SimpleTestPage", modelClass = PageModelImpl.class)
+        @RegisteredViewModel(viewName = "SimpleTestPage", modelClass = DefaultPageModel.class)
 
 
 

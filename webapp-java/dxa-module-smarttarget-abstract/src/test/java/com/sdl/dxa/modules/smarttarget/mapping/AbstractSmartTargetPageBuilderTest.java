@@ -7,7 +7,7 @@ import com.sdl.webapp.common.api.content.ContentProviderException;
 import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.api.model.PageModel;
 import com.sdl.webapp.common.api.model.RegionModel;
-import com.sdl.webapp.common.api.model.page.PageModelImpl;
+import com.sdl.webapp.common.api.model.page.DefaultPageModel;
 import com.sdl.webapp.common.api.model.region.RegionModelImpl;
 import com.sdl.webapp.common.api.model.region.RegionModelSetImpl;
 import com.sdl.webapp.common.exceptions.DxaException;
@@ -40,7 +40,7 @@ public class AbstractSmartTargetPageBuilderTest {
     };
 
     private static PageModel createPageModel(RegionModel... regionModels) throws DxaException {
-        PageModel pageModel = new PageModelImpl();
+        PageModel pageModel = new DefaultPageModel();
 
         RegionModelSetImpl regionModelSet = new RegionModelSetImpl();
         Collections.addAll(regionModelSet, regionModels);

@@ -1,10 +1,15 @@
 package com.sdl.dxa.modules.core.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.collect.Lists;
+import com.sdl.webapp.common.api.formatters.support.FeedItem;
+import com.sdl.webapp.common.api.formatters.support.FeedItemsProvider;
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticEntity;
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticProperties;
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticProperty;
 import com.sdl.webapp.common.api.model.MvcData;
+import com.sdl.webapp.common.api.model.RichText;
+import com.sdl.webapp.common.api.model.entity.Link;
 import com.sdl.webapp.common.api.model.entity.MediaItem;
 import com.sdl.webapp.common.api.model.mvcdata.DefaultsMvcData;
 import com.sdl.webapp.common.api.model.mvcdata.MvcDataCreator;
@@ -14,6 +19,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 import org.w3c.dom.Node;
+
+import java.util.List;
 
 import static com.sdl.webapp.common.api.mapping.semantic.config.SemanticVocabulary.SCHEMA_ORG;
 import static com.sdl.webapp.common.markup.html.builders.HtmlBuilders.a;
@@ -28,7 +35,7 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Slf4j
-public class Download extends MediaItem {
+public class Download extends MediaItem implements FeedItemsProvider {
 
     @SemanticProperties({
             @SemanticProperty("s:name"),
@@ -81,5 +88,16 @@ public class Download extends MediaItem {
                 .fromQualifiedName("Core:Entity:Download")
                 .defaults(DefaultsMvcData.CORE_ENTITY)
                 .create();
+    }
+
+    @Override
+    public List<FeedItem> extractFeedItems() {
+        Link link = new Link();
+        link.setUrl(getUrl());
+        return Lists.newArrayList(FeedItem.builder()
+                .headline(getFileName())
+                .summary(new RichText(description))
+                .link(link)
+                .build());
     }
 }

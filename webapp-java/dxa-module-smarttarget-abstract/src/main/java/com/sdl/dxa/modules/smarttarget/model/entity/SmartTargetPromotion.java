@@ -14,6 +14,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import static org.springframework.util.CollectionUtils.isEmpty;
+
 /**
  * <p>SmartTargetPromotion class.</p>
  */
@@ -36,7 +38,7 @@ public class SmartTargetPromotion extends AbstractEntityModel {
     @Override
     public String getXpmMarkup(Localization localization) {
         Map<String, Object> xpmMetadata = getXpmMetadata();
-        if (xpmMetadata == null) {
+        if (isEmpty(xpmMetadata)) {
             return "";
         }
 

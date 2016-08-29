@@ -2,7 +2,9 @@ package com.sdl.dxa.modules.core.model.entity;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sdl.dxa.DxaSpringInitialization;
+import com.sdl.webapp.common.api.formatters.support.FeedItem;
 import com.sdl.webapp.common.api.localization.Localization;
+import com.sdl.webapp.common.api.model.RichText;
 import com.sdl.webapp.common.util.ApplicationContextHolder;
 import org.joda.time.DateTime;
 import org.junit.Test;
@@ -148,6 +150,25 @@ public class ArticleTest {
 
         //then
         assertEquals(xpmPropertyMetadata, article.getXpmPropertyMetadata());
+    }
+
+    @Test
+    public void shouldReturnFeedItem() {
+        //given
+        Article article = new Article();
+        article.setHeadline("1");
+        article.setDescription("2");
+        DateTime dateTime = new DateTime();
+        article.setDate(dateTime);
+
+        //when
+        List<FeedItem> list = article.extractFeedItems();
+
+        //then
+        FeedItem feedItem = list.get(0);
+        assertEquals("1", feedItem.getHeadline());
+        assertEquals(new RichText("2"), feedItem.getSummary());
+        assertEquals(dateTime.toDate(), feedItem.getDate());
     }
 
     @Configuration

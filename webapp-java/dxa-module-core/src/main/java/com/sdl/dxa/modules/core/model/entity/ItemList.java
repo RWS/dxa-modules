@@ -1,6 +1,8 @@
 package com.sdl.dxa.modules.core.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sdl.webapp.common.api.formatters.support.FeedItem;
+import com.sdl.webapp.common.api.formatters.support.FeedItemsProvider;
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticEntity;
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticProperty;
 import com.sdl.webapp.common.api.model.entity.AbstractEntityModel;
@@ -14,7 +16,7 @@ import static com.sdl.webapp.common.api.mapping.semantic.config.SemanticVocabula
 @SemanticEntity(entityName = "ItemList", vocabulary = SCHEMA_ORG, prefix = "s", public_ = true)
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class ItemList extends AbstractEntityModel {
+public class ItemList extends AbstractEntityModel implements FeedItemsProvider {
 
     @JsonProperty("Headline")
     @SemanticProperty("s:headline")
@@ -26,4 +28,9 @@ public class ItemList extends AbstractEntityModel {
     @JsonProperty("ItemListElements")
     @SemanticProperty("s:itemListElement")
     private List<Teaser> itemListElements;
+
+    @Override
+    public List<FeedItem> extractFeedItems() {
+        return collectFeedItems(itemListElements);
+    }
 }
