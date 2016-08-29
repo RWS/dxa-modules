@@ -1,6 +1,6 @@
 {
   "name": "sdl-dita-delivery-web-app-gui",
-  "version": "0.1.0-7",
+  "version": "0.1.0-8",
   "description": "GUI of the SDL Dita Delivery Web Application.",
   "dependencies": {
     "sdl-catalina-react-wrappers": "0.1.0-46",
