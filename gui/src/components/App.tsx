@@ -95,6 +95,29 @@ module Sdl.DitaDelivery.Components {
         }
 
         /**
+         * Invoked once, both on the client and server, immediately before the initial rendering occurs.
+         */
+        public componentWillMount(): void {
+            this._selectFirstRoot(this.props);
+        }
+
+        /**
+         * Invoked when a component is receiving new props. This method is not called for the initial render.
+         *
+         * @param {IAppProps} nextProps Next props
+         */
+        public componentWillReceiveProps(nextProps: IAppProps): void {
+            const currentState = this.state;
+            if (!currentState.selectedSiteMapItem) {
+                this._selectFirstRoot(this.props);
+            } else {
+                this.setState({
+                    pageError: null
+                });
+            }
+        }
+
+        /**
          * Invoked immediately before rendering when new props or state are being received.
          * This method is not called for the initial render.
          *
@@ -102,32 +125,10 @@ module Sdl.DitaDelivery.Components {
          * @param {IAppState} nextState Next state
          */
         public componentWillUpdate(nextProps: IAppProps, nextState: IAppState): void {
-            const currentId = this.state.selectedSiteMapItem ? this.state.selectedSiteMapItem.Id : null;
-            const nextId = nextState.selectedSiteMapItem ? nextState.selectedSiteMapItem.Id : null;
-            if (nextId !== currentId) {
-                if (nextState.selectedSiteMapItem && nextState.selectedSiteMapItem.Url) {
-                    this.setState({
-                        pageError: null,
-                        pageIsLoading: true
-                    });
-                    nextProps.getPageContent(nextState.selectedSiteMapItem.Url, (error, content) => {
-                        if (error) {
-                            this.setState({
-                                pageError: error,
-                                pageIsLoading: false
-                            });
-                            return;
-                        }
-                        this.setState({
-                            pageContent: content ? content : nextState.selectedSiteMapItem.Title,
-                            pageIsLoading: false
-                        });
-                    });
-                } else {
-                    this.setState({
-                        pageContent: nextState.selectedSiteMapItem.Title
-                    });
-                }
+            const currentUrl = this.state.selectedSiteMapItem ? this.state.selectedSiteMapItem.Url : null;
+            const nextUrl = nextState.selectedSiteMapItem ? nextState.selectedSiteMapItem.Url : null;
+            if (currentUrl !== nextUrl && nextState.selectedSiteMapItem.Url) {
+                nextProps.getPageContent(nextState.selectedSiteMapItem.Url, this._onPageContentRetrieved.bind(this));
             }
         }
 
@@ -161,7 +162,36 @@ module Sdl.DitaDelivery.Components {
 
         private _onTocSelectionChanged(sitemapItem: ISitemapItem): void {
             this.setState({
-                selectedSiteMapItem: sitemapItem
+                selectedSiteMapItem: sitemapItem,
+                pageIsLoading: sitemapItem.Url ? true : false,
+                pageContent: !sitemapItem.Url ? sitemapItem.Title : undefined
+            });
+        }
+
+        private _selectFirstRoot(props: IAppProps): void {
+            // Select first root element if defined
+            if (props.toc && props.toc.rootItems.length > 0) {
+                const firsRoot = props.toc.rootItems[0];
+                this.setState({
+                    selectedSiteMapItem: firsRoot,
+                    pageError: null,
+                    pageIsLoading: firsRoot.Url ? true : false,
+                    pageContent: !firsRoot.Url ? firsRoot.Title : undefined
+                });
+            }
+        }
+
+        private _onPageContentRetrieved(error: string, content: string): void {
+            if (error) {
+                this.setState({
+                    pageError: error,
+                    pageIsLoading: false
+                });
+                return;
+            }
+            this.setState({
+                pageContent: content ? content : this.state.selectedSiteMapItem.Title,
+                pageIsLoading: false
             });
         }
     };

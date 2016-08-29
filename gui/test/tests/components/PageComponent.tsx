@@ -12,9 +12,12 @@ module Sdl.DitaDelivery.Tests {
             describe(`Page component tests.`, (): void => {
                 const target = super.createTargetElement();
 
-                afterAll(() => {
+                afterEach(() => {
                     const domNode = ReactDOM.findDOMNode(target);
                     ReactDOM.unmountComponentAtNode(domNode);
+                });
+
+                afterAll(() => {
                     target.parentElement.removeChild(target);
                 });
 
