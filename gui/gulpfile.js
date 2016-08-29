@@ -10,6 +10,7 @@ var _ = require('lodash');
 var async = require('async');
 var runSequence = require('run-sequence');
 const packageInfo = require('./package.json');
+const catalinaPackageInfo = require('./node_modules/sdl-catalina/package.json');
 var gulpTypings = require('./build/gulp-plugins/install-typings');
 const yargs = require('yargs');
 
@@ -17,7 +18,7 @@ var reload = browserSync.reload;
 var sourcesPath = './src/';
 var buildOptions = {
     version: packageInfo.version,
-    catalinaVersion: packageInfo.peerDependencies['sdl-catalina'],
+    catalinaVersion: catalinaPackageInfo.version,
     sourcesPath: sourcesPath,
     testPath: './test/',
     distPath: './dist/',
