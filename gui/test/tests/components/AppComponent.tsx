@@ -150,7 +150,7 @@ module Sdl.DitaDelivery.Tests {
                     expect(pageContentNode.innerHTML).toBe(title);
                 });
 
-                xit("shows an error message when page content fails to load", (done: () => void): void => {
+                it("shows an error message when page content fails to load", (done: () => void): void => {
                     this._renderComponent({
                         localization: localization,
                         toc: {
@@ -169,6 +169,9 @@ module Sdl.DitaDelivery.Tests {
                     }, target);
                     const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
                     expect(domNode).not.toBeNull();
+
+                    // Wait for the tree view to select the first node
+                    // Treeview uses debouncing for node selection so a timeout is required
                     setTimeout((): void => {
                         expect(domNode.querySelector(".sdl-activityindicator")).toBeNull("Activity indicator should not be rendered.");
                         const validationMessageNode = domNode.querySelector(".sdl-validationmessage");

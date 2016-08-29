@@ -95,26 +95,14 @@ module Sdl.DitaDelivery.Components {
         }
 
         /**
-         * Invoked once, both on the client and server, immediately before the initial rendering occurs.
-         */
-        public componentWillMount(): void {
-            this._selectFirstRoot(this.props);
-        }
-
-        /**
          * Invoked when a component is receiving new props. This method is not called for the initial render.
          *
          * @param {IAppProps} nextProps Next props
          */
         public componentWillReceiveProps(nextProps: IAppProps): void {
-            const currentState = this.state;
-            if (!currentState.selectedSiteMapItem) {
-                this._selectFirstRoot(this.props);
-            } else {
-                this.setState({
-                    pageError: null
-                });
-            }
+            this.setState({
+                pageError: null
+            });
         }
 
         /**
@@ -125,10 +113,11 @@ module Sdl.DitaDelivery.Components {
          * @param {IAppState} nextState Next state
          */
         public componentWillUpdate(nextProps: IAppProps, nextState: IAppState): void {
-            const currentUrl = this.state.selectedSiteMapItem ? this.state.selectedSiteMapItem.Url : null;
+            const state = this.state;
+            const currentUrl = state.selectedSiteMapItem ? state.selectedSiteMapItem.Url : null;
             const nextUrl = nextState.selectedSiteMapItem ? nextState.selectedSiteMapItem.Url : null;
-            if (currentUrl !== nextUrl && nextState.selectedSiteMapItem.Url) {
-                nextProps.getPageContent(nextState.selectedSiteMapItem.Url, this._onPageContentRetrieved.bind(this));
+            if (nextUrl && (state.pageIsLoading || currentUrl !== nextUrl)) {
+                nextProps.getPageContent(nextUrl, this._onPageContentRetrieved.bind(this));
             }
         }
 
@@ -166,19 +155,6 @@ module Sdl.DitaDelivery.Components {
                 pageIsLoading: sitemapItem.Url ? true : false,
                 pageContent: !sitemapItem.Url ? sitemapItem.Title : undefined
             });
-        }
-
-        private _selectFirstRoot(props: IAppProps): void {
-            // Select first root element if defined
-            if (props.toc && props.toc.rootItems.length > 0) {
-                const firsRoot = props.toc.rootItems[0];
-                this.setState({
-                    selectedSiteMapItem: firsRoot,
-                    pageError: null,
-                    pageIsLoading: firsRoot.Url ? true : false,
-                    pageContent: !firsRoot.Url ? firsRoot.Title : undefined
-                });
-            }
         }
 
         private _onPageContentRetrieved(error: string, content: string): void {
