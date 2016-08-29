@@ -2,26 +2,30 @@
   "Id": "ish:39137-6210-16",
   "Title": "games overview",
   "Meta": {
-    "LogicalId": "GUID-3EE04983-92CD-498F-97E5-EEB40E2BDB79",
-    "LogicalCardId": "6208",
-    "LanguageCardId": "6210",
-    "VersionCardId": "6209",
-    "ObjectType": "ISHModule",
+    "ishlngref.object.id": 6210,
+    "ishversionref.object.id": 6209,
+    "ishlogicalref.object.id": 6208,
+    "ishref.object.value": "GUID-3EE04983-92CD-498F-97E5-EEB40E2BDB79",
+    "ishtype.object.value": "ISHModule",
     "FTITLE.logical.value": "games overview",
     "FDESCRIPTION.logical.value": null,
     "FCHANGES.version.value": "Imported OASIS DITA 1.1",
     "FISHRELEASELABEL.version.value": null,
-    "CREATED-ON.lng.value": "29/10/2008 17:08:44",
+    "CREATED-ON.lng.value": "2008-10-29T17:08:44+01:00",
     "FAUTHOR.lng.value": "Author",
     "FSTATUS.lng.value": "Released",
-    "MODIFIED-ON.lng.value": "09/04/2010 10:25:31",
+    "MODIFIED-ON.lng.value": "2010-04-09T10:25:31+02:00",
     "VERSION.version.value": "1",
     "FRESOLUTION.lng.value": null,
-    "DOC-LANGUAGE.lng.value": "en",
-    "FISHREVCOUNTER.lng.value": "1",
-    "ED.lng.value": "GUID-ABCB30C9-33C2-4B36-A4E7-3D1B039E94D0",
-    "FUSERGROUP.logical.element": null,
-    "READ-ACCESS.logical.element": null
+    "DOC-LANGUAGE.lng.value": [
+      "en"
+    ],
+    "FISHREVCOUNTER.lng.value": 1,
+    "ED.lng.value": [
+      "GUID-ABCB30C9-33C2-4B36-A4E7-3D1B039E94D0"
+    ],
+    "FUSERGROUP.logical.value": null,
+    "READ-ACCESS.logical.value": null
   },
   "Html": "<div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\r\n\t\t\t<p class=\"shortdesc\">Your phone supports Java 2 Micro Edition (J2METM), which is a version of Java technology specifically designed for small consumer\r\n            electronics products. The phone includes some Java applications and games, and supports downloading new applications and games\r\n            from different WAP services.\r\n         </p>\r\n\t\t\t<p class=\"p\">\r\n\t\t\t</p>\r\n\t\t</div>"
 }

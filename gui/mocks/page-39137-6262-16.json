@@ -2,26 +2,30 @@
   "Id": "ish:39137-6262-16",
   "Title": "messages",
   "Meta": {
-    "LogicalId": "GUID-FD63F34C-0C66-4F6E-960A-EC79DDC0AA34",
-    "LogicalCardId": "6260",
-    "LanguageCardId": "6262",
-    "VersionCardId": "6261",
-    "ObjectType": "ISHModule",
+    "ishlngref.object.id": 6262,
+    "ishversionref.object.id": 6261,
+    "ishlogicalref.object.id": 6260,
+    "ishref.object.value": "GUID-FD63F34C-0C66-4F6E-960A-EC79DDC0AA34",
+    "ishtype.object.value": "ISHModule",
     "FTITLE.logical.value": "messages",
     "FDESCRIPTION.logical.value": null,
     "FCHANGES.version.value": "Imported OASIS DITA 1.1",
     "FISHRELEASELABEL.version.value": null,
-    "CREATED-ON.lng.value": "29/10/2008 17:12:18",
+    "CREATED-ON.lng.value": "2008-10-29T17:12:18+01:00",
     "FAUTHOR.lng.value": "Author",
     "FSTATUS.lng.value": "Released",
-    "MODIFIED-ON.lng.value": "09/04/2010 10:25:58",
+    "MODIFIED-ON.lng.value": "2010-04-09T10:25:58+02:00",
     "VERSION.version.value": "1",
     "FRESOLUTION.lng.value": null,
-    "DOC-LANGUAGE.lng.value": "en",
-    "FISHREVCOUNTER.lng.value": "1",
-    "ED.lng.value": "GUID-9DB6656B-7224-4E82-A0AF-2194D22A0497",
-    "FUSERGROUP.logical.element": null,
-    "READ-ACCESS.logical.element": null
+    "DOC-LANGUAGE.lng.value": [
+      "en"
+    ],
+    "FISHREVCOUNTER.lng.value": 1,
+    "ED.lng.value": [
+      "GUID-9DB6656B-7224-4E82-A0AF-2194D22A0497"
+    ],
+    "FUSERGROUP.logical.value": null,
+    "READ-ACCESS.logical.value": null
   },
   "Html": "<div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\r\n\t\t\t<p class=\"shortdesc\">\r\n\t\t\t</p>\r\n\t\t\t<p class=\"p\">You can read, write, send and save text, multimedia, and e-mail messages. All messages are organised into folders. Text, multimedia,\r\n            and e-mail messaging are network services. Before you can send any text, picture, or e-mail message, you need to save your\r\n            message centre number.\r\n         </p>\r\n\t\t</div>"
 }

@@ -2,26 +2,30 @@
   "Id": "ish:39137-6270-16",
   "Title": "music functions",
   "Meta": {
-    "LogicalId": "GUID-BE2DE06F-3702-493F-9176-A7944470B77C",
-    "LogicalCardId": "6268",
-    "LanguageCardId": "6270",
-    "VersionCardId": "6269",
-    "ObjectType": "ISHModule",
+    "ishlngref.object.id": 6270,
+    "ishversionref.object.id": 6269,
+    "ishlogicalref.object.id": 6268,
+    "ishref.object.value": "GUID-BE2DE06F-3702-493F-9176-A7944470B77C",
+    "ishtype.object.value": "ISHModule",
     "FTITLE.logical.value": "music functions",
     "FDESCRIPTION.logical.value": null,
     "FCHANGES.version.value": "Imported OASIS DITA 1.1",
     "FISHRELEASELABEL.version.value": null,
-    "CREATED-ON.lng.value": "29/10/2008 17:12:36",
+    "CREATED-ON.lng.value": "2008-10-29T17:12:36+01:00",
     "FAUTHOR.lng.value": "Author",
     "FSTATUS.lng.value": "Released",
-    "MODIFIED-ON.lng.value": "09/04/2010 10:26:03",
+    "MODIFIED-ON.lng.value": "2010-04-09T10:26:03+02:00",
     "VERSION.version.value": "1",
     "FRESOLUTION.lng.value": null,
-    "DOC-LANGUAGE.lng.value": "en",
-    "FISHREVCOUNTER.lng.value": "1",
-    "ED.lng.value": "GUID-23CDCFA3-919F-42E3-BE82-48DC8A9F3C26",
-    "FUSERGROUP.logical.element": null,
-    "READ-ACCESS.logical.element": null
+    "DOC-LANGUAGE.lng.value": [
+      "en"
+    ],
+    "FISHREVCOUNTER.lng.value": 1,
+    "ED.lng.value": [
+      "GUID-23CDCFA3-919F-42E3-BE82-48DC8A9F3C26"
+    ],
+    "FUSERGROUP.logical.value": null,
+    "READ-ACCESS.logical.value": null
   },
   "Html": "<div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\r\n\t\t\t<p class=\"shortdesc\">You can listen to MP3 and AAC music files stored on the memory card in your phone with the Music player, or you can listen\r\n            to the Radio. \r\n         </p>\r\n\t\t\t<p class=\"p\">The special Music key on the top left of your phone enables you to quickly turn on and off both the Music player and the Radio.</p>\r\n\t\t</div>"
 }

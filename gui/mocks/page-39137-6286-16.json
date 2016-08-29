@@ -2,26 +2,30 @@
   "Id": "ish:39137-6286-16",
   "Title": "text messages",
   "Meta": {
-    "LogicalId": "GUID-F2908D6D-3DF6-4E28-9F94-3A057669A444",
-    "LogicalCardId": "6284",
-    "LanguageCardId": "6286",
-    "VersionCardId": "6285",
-    "ObjectType": "ISHModule",
+    "ishlngref.object.id": 6286,
+    "ishversionref.object.id": 6285,
+    "ishlogicalref.object.id": 6284,
+    "ishref.object.value": "GUID-F2908D6D-3DF6-4E28-9F94-3A057669A444",
+    "ishtype.object.value": "ISHModule",
     "FTITLE.logical.value": "text messages",
     "FDESCRIPTION.logical.value": null,
     "FCHANGES.version.value": "Imported OASIS DITA 1.1",
     "FISHRELEASELABEL.version.value": null,
-    "CREATED-ON.lng.value": "29/10/2008 17:13:18",
+    "CREATED-ON.lng.value": "2008-10-29T17:13:18+01:00",
     "FAUTHOR.lng.value": "Author",
     "FSTATUS.lng.value": "Released",
-    "MODIFIED-ON.lng.value": "09/04/2010 10:26:25",
+    "MODIFIED-ON.lng.value": "2010-04-09T10:26:25+02:00",
     "VERSION.version.value": "1",
     "FRESOLUTION.lng.value": null,
-    "DOC-LANGUAGE.lng.value": "en",
-    "FISHREVCOUNTER.lng.value": "1",
-    "ED.lng.value": "GUID-25C7FEEC-2EF5-4C0B-991E-99F9B2CEA99B",
-    "FUSERGROUP.logical.element": null,
-    "READ-ACCESS.logical.element": null
+    "DOC-LANGUAGE.lng.value": [
+      "en"
+    ],
+    "FISHREVCOUNTER.lng.value": 1,
+    "ED.lng.value": [
+      "GUID-25C7FEEC-2EF5-4C0B-991E-99F9B2CEA99B"
+    ],
+    "FUSERGROUP.logical.value": null,
+    "READ-ACCESS.logical.value": null
   },
   "Html": "<div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\r\n\t\t\t<p class=\"shortdesc\">Your phone supports sending and receiving multi-part messages, which consist of several ordinary text messages.</p>\r\n\t\t\t<p class=\"p\">Your phone supports sending and receiving multi-part messages, which consist of several ordinary text messages (network service).\r\n            Invoicing is based on the number of ordinary messages that are required for a multi-part message. You can also send and receive\r\n            text messages that contain pictures. Each picture message is made up of several text messages. Therefore, sending one picture\r\n            message may cost more than sending one text message.\r\n         </p>\r\n\t\t</div>"
 }

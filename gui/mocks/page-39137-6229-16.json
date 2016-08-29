@@ -2,26 +2,30 @@
   "Id": "ish:39137-6229-16",
   "Title": "saving names and numbers",
   "Meta": {
-    "LogicalId": "GUID-67F1627E-FFBA-4E03-A62D-F70030C52596",
-    "LogicalCardId": "6226",
-    "LanguageCardId": "6229",
-    "VersionCardId": "6227",
-    "ObjectType": "ISHModule",
+    "ishlngref.object.id": 6229,
+    "ishversionref.object.id": 6227,
+    "ishlogicalref.object.id": 6226,
+    "ishref.object.value": "GUID-67F1627E-FFBA-4E03-A62D-F70030C52596",
+    "ishtype.object.value": "ISHModule",
     "FTITLE.logical.value": "saving names and numbers",
     "FDESCRIPTION.logical.value": null,
     "FCHANGES.version.value": "Imported OASIS DITA 1.1",
     "FISHRELEASELABEL.version.value": null,
-    "CREATED-ON.lng.value": "29/10/2008 17:09:58",
+    "CREATED-ON.lng.value": "2008-10-29T17:09:58+01:00",
     "FAUTHOR.lng.value": "Author",
     "FSTATUS.lng.value": "Released",
-    "MODIFIED-ON.lng.value": "09/04/2010 10:26:09",
+    "MODIFIED-ON.lng.value": "2010-04-09T10:26:09+02:00",
     "VERSION.version.value": "1",
     "FRESOLUTION.lng.value": null,
-    "DOC-LANGUAGE.lng.value": "en",
-    "FISHREVCOUNTER.lng.value": "1",
-    "ED.lng.value": "GUID-E17EDE47-A8D5-4072-9FB2-C79607D6C243",
-    "FUSERGROUP.logical.element": null,
-    "READ-ACCESS.logical.element": null
+    "DOC-LANGUAGE.lng.value": [
+      "en"
+    ],
+    "FISHREVCOUNTER.lng.value": 1,
+    "ED.lng.value": [
+      "GUID-E17EDE47-A8D5-4072-9FB2-C79607D6C243"
+    ],
+    "FUSERGROUP.logical.value": null,
+    "READ-ACCESS.logical.value": null
   },
   "Html": "<div class=\"body taskbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\r\n\t\t\t<p class=\"shortdesc\">\r\n\t\t\t</p>\r\n\t\t\t<ol class=\"ol steps\" id=\"GUID-67F1627E-FFBA-4E03-A62D-F70030C52596__GUID-39CCD92E-A42F-4E2C-AE5D-9BAA72560320\">\r\n\t\t\t\t<li class=\"li step stepexpand\">\r\n\t\t\t\t\t<span class=\"ph cmd\">Press <samp class=\"ph msgph\">Contacts</samp> (or press Go to and select <samp class=\"ph msgph\">Contacts</samp>) and select <samp class=\"ph msgph\">Add contact</samp>.</span>\r\n\t\t\t\t</li>\r\n\t\t\t\t<li class=\"li step stepexpand\">\r\n\t\t\t\t\t<span class=\"ph cmd\">Key in the name and press <samp class=\"ph msgph\">OK</samp>.</span>\r\n\t\t\t\t</li>\r\n\t\t\t\t<li class=\"li step stepexpand\">\r\n\t\t\t\t\t<span class=\"ph cmd\">Key in the phone number, and press <samp class=\"ph msgph\">OK</samp>.</span>\r\n\t\t\t\t</li>\r\n\t\t\t\t<li class=\"li step stepexpand\">\r\n\t\t\t\t\t<span class=\"ph cmd\">When the name and number are saved, press <samp class=\"ph msgph\">Done</samp>.</span>\r\n\t\t\t\t\t<div class=\"itemgroup info\"> Quick save In standby mode, key in the phone number. Press <samp class=\"ph msgph\">Options</samp>, and select <samp class=\"ph msgph\">Save</samp>. Key in the name, press <samp class=\"ph msgph\">OK</samp> and <samp class=\"ph msgph\">Done</samp>.\r\n               </div>\r\n\t\t\t\t</li>\r\n\t\t\t</ol>\r\n\t\t</div>"
 }
