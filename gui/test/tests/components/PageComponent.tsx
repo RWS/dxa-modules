@@ -31,7 +31,9 @@ module Sdl.DitaDelivery.Tests {
                     this._renderComponent({ showActivityIndicator: false, error: "Error!" }, target);
                     const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
                     expect(domNode).not.toBeNull();
-                    expect(domNode.querySelector(".sdl-validationmessage")).not.toBeNull("Could not find validation message.");
+                    const validationMessageNode = domNode.querySelector(".sdl-validationmessage");
+                    expect(validationMessageNode).not.toBeNull("Could not find validation message.");
+                    expect(validationMessageNode.textContent).toBe("Error!");
                 });
 
                 it("can show page content info", (): void => {
@@ -42,7 +44,7 @@ module Sdl.DitaDelivery.Tests {
                     const pageContentNode = domNode.querySelector(".page-content") as HTMLElement;
                     expect(pageContentNode).not.toBeNull("Could not find page content.");
                     expect(pageContentNode.children.length).toBe(1);
-                    expect(pageContentNode.children[0].innerHTML).toBe(pageContent);
+                    expect(pageContentNode.innerHTML).toBe(pageContent);
                 });
 
             });

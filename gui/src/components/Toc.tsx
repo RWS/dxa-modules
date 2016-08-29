@@ -38,6 +38,8 @@ module Sdl.DitaDelivery.Components {
      */
     export class Toc extends React.Component<ITocProps, {}> {
 
+        private _isDisposed: boolean = false;
+
         /**
          * Render the component
          *
@@ -54,6 +56,13 @@ module Sdl.DitaDelivery.Components {
                         onSelectionChanged={this._onSelectionChanged.bind(this) }/>
                 </div>
             );
+        }
+
+        /**
+         * Component will unmount
+         */
+        public componentWillUnmount(): void {
+            this._isDisposed = true;
         }
 
         private _loadChildNodes(node: ITreeViewNode, callback: (childNodes: ITreeViewNode[]) => void): void {
@@ -79,9 +88,11 @@ module Sdl.DitaDelivery.Components {
         }
 
         private _onSelectionChanged(nodes: ITreeViewNode[]): void {
-            const onSelectionChanged = this.props.onSelectionChanged;
-            if (typeof onSelectionChanged === "function") {
-                onSelectionChanged(nodes.length > 0 ? nodes[0].sitemapItem : null);
+            if (!this._isDisposed) {
+                const onSelectionChanged = this.props.onSelectionChanged;
+                if (typeof onSelectionChanged === "function") {
+                    onSelectionChanged(nodes.length > 0 ? nodes[0].sitemapItem : null);
+                }
             }
         }
 
