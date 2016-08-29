@@ -9,6 +9,7 @@
         <resourceGroup name="Sdl.DitaDelivery.Test">
             <files>
                 <file name="tests/components/AppComponent.js" />
+                <file name="tests/components/PageComponent.js" />
                 <file name="tests/components/TocComponent.js" />
                 <file name="tests/DataStore.js"/>
                 <file name="tests/Server.js"/>
