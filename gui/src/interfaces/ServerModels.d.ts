@@ -3,12 +3,12 @@ declare module Sdl.DitaDelivery.Server.Models {
     interface IPage {
         Html: string;
         Id: string;
-        Meta: Sdl.DitaDelivery.Server.Models.IKeyValuePair<string, string>[];
+        Meta: Sdl.DitaDelivery.Server.Models.IKeyValuePair<string, string | string[] | number | number[]>[];
         Title: string;
     }
     interface IPublication {
         Id: string;
-        Meta: Sdl.DitaDelivery.Server.Models.IKeyValuePair<string, string>[];
+        Meta: Sdl.DitaDelivery.Server.Models.IKeyValuePair<string, string | string[] | number | number[]>[];
         Title: string;
     }
     interface ISitemapItem {

@@ -2,26 +2,30 @@
   "Id": "ish:39137-6709-16",
   "Title": "call functions",
   "Meta": {
-    "LogicalId": "GUID-F6DEEACC-8925-46B3-9EF3-5DAB76B4386F",
-    "LogicalCardId": "6705",
-    "LanguageCardId": "6709",
-    "VersionCardId": "6707",
-    "ObjectType": "ISHModule",
+    "ishlngref.object.id": 6709,
+    "ishversionref.object.id": 6707,
+    "ishlogicalref.object.id": 6705,
+    "ishref.object.value": "GUID-F6DEEACC-8925-46B3-9EF3-5DAB76B4386F",
+    "ishtype.object.value": "ISHModule",
     "FTITLE.logical.value": "call functions",
     "FDESCRIPTION.logical.value": null,
     "FCHANGES.version.value": "Imported OASIS DITA 1.1",
     "FISHRELEASELABEL.version.value": null,
-    "CREATED-ON.lng.value": "30/10/2008 09:59:32",
+    "CREATED-ON.lng.value": "2008-10-30T09:59:32+01:00",
     "FAUTHOR.lng.value": "Author",
     "FSTATUS.lng.value": "Released",
-    "MODIFIED-ON.lng.value": "09/04/2010 10:25:00",
+    "MODIFIED-ON.lng.value": "2010-04-09T10:25:00+02:00",
     "VERSION.version.value": "1",
     "FRESOLUTION.lng.value": null,
-    "DOC-LANGUAGE.lng.value": "en",
-    "FISHREVCOUNTER.lng.value": "1",
-    "ED.lng.value": "GUID-70F43929-2E15-4AA1-AB7C-F40381569D7C",
-    "FUSERGROUP.logical.element": null,
-    "READ-ACCESS.logical.element": null
+    "DOC-LANGUAGE.lng.value": [
+      "en"
+    ],
+    "FISHREVCOUNTER.lng.value": 1,
+    "ED.lng.value": [
+      "GUID-70F43929-2E15-4AA1-AB7C-F40381569D7C"
+    ],
+    "FUSERGROUP.logical.value": null,
+    "READ-ACCESS.logical.value": null
   },
   "Html": "<div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\r\n\t\t\t<p class=\"shortdesc\">\r\n\t\t\t</p>\r\n\t\t\t<p class=\"p\">\r\n\t\t\t</p>\r\n\t\t</div>"
 }

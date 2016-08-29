@@ -2,26 +2,30 @@
   "Id": "ish:39137-6294-16",
   "Title": "water rapids",
   "Meta": {
-    "LogicalId": "GUID-9224F663-0A2C-4D48-B4AB-582DF6825B2E",
-    "LogicalCardId": "6292",
-    "LanguageCardId": "6294",
-    "VersionCardId": "6293",
-    "ObjectType": "ISHModule",
+    "ishlngref.object.id": 6294,
+    "ishversionref.object.id": 6293,
+    "ishlogicalref.object.id": 6292,
+    "ishref.object.value": "GUID-9224F663-0A2C-4D48-B4AB-582DF6825B2E",
+    "ishtype.object.value": "ISHModule",
     "FTITLE.logical.value": "water rapids",
     "FDESCRIPTION.logical.value": null,
     "FCHANGES.version.value": "Imported OASIS DITA 1.1",
     "FISHRELEASELABEL.version.value": null,
-    "CREATED-ON.lng.value": "29/10/2008 17:13:38",
+    "CREATED-ON.lng.value": "2008-10-29T17:13:38+01:00",
     "FAUTHOR.lng.value": "Author",
     "FSTATUS.lng.value": "Released",
-    "MODIFIED-ON.lng.value": "09/04/2010 10:26:32",
+    "MODIFIED-ON.lng.value": "2010-04-09T10:26:32+02:00",
     "VERSION.version.value": "1",
     "FRESOLUTION.lng.value": null,
-    "DOC-LANGUAGE.lng.value": "en",
-    "FISHREVCOUNTER.lng.value": "1",
-    "ED.lng.value": "GUID-339688B6-D1F0-45D2-86F8-F572A850B8A0",
-    "FUSERGROUP.logical.element": null,
-    "READ-ACCESS.logical.element": null
+    "DOC-LANGUAGE.lng.value": [
+      "en"
+    ],
+    "FISHREVCOUNTER.lng.value": 1,
+    "ED.lng.value": [
+      "GUID-339688B6-D1F0-45D2-86F8-F572A850B8A0"
+    ],
+    "FUSERGROUP.logical.value": null,
+    "READ-ACCESS.logical.value": null
   },
-  "Html": "<div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\r\n\t\t\t<p class=\"shortdesc\">Steer your raft down six rivers.</p>\r\n\t\t\t<br />\r\n\t\t\t<tcdl:link type=\"ish:image\" ref=\"ish:39137-6551-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" />\r\n\t\t\t<br />\r\n\t\t\t<p class=\"p\">Reach the end of each river to advance to the next.</p>\r\n\t\t\t<p class=\"p\">Navigate through rapids and waterfalls to score points and touch flags for bonus points.</p>\r\n\t\t\t<p class=\"p\">Paddle your raft with key <tcdl:link type=\"ish:image\" ref=\"ish:39137-6822-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" /> and <tcdl:link type=\"ish:image\" ref=\"ish:39137-6805-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" />.\r\n         </p>\r\n\t\t\t<p class=\"p\">Rotate you raft with keys <tcdl:link type=\"ish:image\" ref=\"ish:39137-6757-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" /> and <tcdl:link type=\"ish:image\" ref=\"ish:39137-6773-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" />.\r\n         </p>\r\n\t\t\t<p class=\"p\">You have four rafts in the beginning and you lose a raft each time you capsize or fall onto land.</p>\r\n\t\t</div>"
+  "Html": "<div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\r\n\t\t\t<p class=\"shortdesc\">Steer your raft down six rivers.</p>\r\n\t\t\t<br />\r\n\t\t\t<tcdl:Image type=\"ish:image\" ref=\"ish:39137-6551-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" />\r\n\t\t\t<br />\r\n\t\t\t<p class=\"p\">Reach the end of each river to advance to the next.</p>\r\n\t\t\t<p class=\"p\">Navigate through rapids and waterfalls to score points and touch flags for bonus points.</p>\r\n\t\t\t<p class=\"p\">Paddle your raft with key <tcdl:Image type=\"ish:image\" ref=\"ish:39137-6822-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" /> and <tcdl:Image type=\"ish:image\" ref=\"ish:39137-6805-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" />.\r\n         </p>\r\n\t\t\t<p class=\"p\">Rotate you raft with keys <tcdl:Image type=\"ish:image\" ref=\"ish:39137-6757-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" /> and <tcdl:Image type=\"ish:image\" ref=\"ish:39137-6773-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" />.\r\n         </p>\r\n\t\t\t<p class=\"p\">You have four rafts in the beginning and you lose a raft each time you capsize or fall onto land.</p>\r\n\t\t</div>"
 }

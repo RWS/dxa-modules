@@ -1,62 +1,62 @@
 [
   {
-    "Id": "ish:39137-10000001-1024",
+    "Id": "ish:39137-1-1024",
     "Title": "Dear Customer",
     "Url": "ish:39137-6246-16",
     "IsAbstract": false,
     "IsLeaf": true
   },
   {
-    "Id": "ish:39137-10000002-1024",
+    "Id": "ish:39137-2-1024",
     "Title": "For your safety",
     "Url": "ish:39137-6198-16",
     "IsAbstract": false,
     "IsLeaf": true
   },
   {
-    "Id": "ish:39137-10000003-1024",
+    "Id": "ish:39137-3-1024",
     "Title": "Your phone",
     "Url": "ish:39137-6298-16",
     "IsAbstract": false,
     "IsLeaf": false
   },
   {
-    "Id": "ish:39137-10000011-1024",
+    "Id": "ish:39137-11-1024",
     "Title": "Getting started",
     "Url": "ish:39137-6222-16",
     "IsAbstract": false,
     "IsLeaf": false
   },
   {
-    "Id": "ish:39137-10000015-1024",
+    "Id": "ish:39137-15-1024",
     "Title": "Call functions",
     "Url": "ish:39137-6709-16",
     "IsAbstract": false,
     "IsLeaf": false
   },
   {
-    "Id": "ish:39137-10000020-1024",
+    "Id": "ish:39137-20-1024",
     "Title": "Messages",
     "Url": "ish:39137-6262-16",
     "IsAbstract": false,
     "IsLeaf": false
   },
   {
-    "Id": "ish:39137-10000025-1024",
+    "Id": "ish:39137-25-1024",
     "Title": "Games",
     "Url": "ish:39137-6210-16",
     "IsAbstract": false,
     "IsLeaf": false
   },
   {
-    "Id": "ish:39137-10000031-1024",
+    "Id": "ish:39137-31-1024",
     "Title": "Music functions",
     "Url": "ish:39137-6270-16",
     "IsAbstract": false,
     "IsLeaf": false
   },
   {
-    "Id": "ish:39137-10000034-1024",
+    "Id": "ish:39137-34-1024",
     "Title": "Extras",
     "Url": null,
     "IsAbstract": true,

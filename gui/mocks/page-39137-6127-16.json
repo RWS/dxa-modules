@@ -2,26 +2,30 @@
   "Id": "ish:39137-6127-16",
   "Title": "charging the battery",
   "Meta": {
-    "LogicalId": "GUID-87DD5F98-0359-4975-BBA2-3B494D82BE3C",
-    "LogicalCardId": "6122",
-    "LanguageCardId": "6127",
-    "VersionCardId": "6126",
-    "ObjectType": "ISHModule",
+    "ishlngref.object.id": 6127,
+    "ishversionref.object.id": 6126,
+    "ishlogicalref.object.id": 6122,
+    "ishref.object.value": "GUID-87DD5F98-0359-4975-BBA2-3B494D82BE3C",
+    "ishtype.object.value": "ISHModule",
     "FTITLE.logical.value": "charging the battery",
     "FDESCRIPTION.logical.value": null,
     "FCHANGES.version.value": "Imported OASIS DITA 1.1",
     "FISHRELEASELABEL.version.value": null,
-    "CREATED-ON.lng.value": "29/10/2008 16:37:46",
+    "CREATED-ON.lng.value": "2008-10-29T16:37:46+01:00",
     "FAUTHOR.lng.value": "Author",
     "FSTATUS.lng.value": "Released",
-    "MODIFIED-ON.lng.value": "09/04/2010 10:25:03",
+    "MODIFIED-ON.lng.value": "2010-04-09T10:25:03+02:00",
     "VERSION.version.value": "1",
     "FRESOLUTION.lng.value": null,
-    "DOC-LANGUAGE.lng.value": "en",
-    "FISHREVCOUNTER.lng.value": "1",
-    "ED.lng.value": "GUID-B7780477-640B-4976-A172-313AB095FA5B",
-    "FUSERGROUP.logical.element": null,
-    "READ-ACCESS.logical.element": null
+    "DOC-LANGUAGE.lng.value": [
+      "en"
+    ],
+    "FISHREVCOUNTER.lng.value": 1,
+    "ED.lng.value": [
+      "GUID-B7780477-640B-4976-A172-313AB095FA5B"
+    ],
+    "FUSERGROUP.logical.value": null,
+    "READ-ACCESS.logical.value": null
   },
-  "Html": "<div class=\"body taskbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\r\n\t\t\t<ol class=\"ol steps\" id=\"GUID-87DD5F98-0359-4975-BBA2-3B494D82BE3C__GUID-26A7C2F2-3453-4B36-B0CF-1C42DC728C98\">\r\n\t\t\t\t<li class=\"li step stepexpand\">\r\n\t\t\t\t\t<span class=\"ph cmd\">Connect the lead from the charger to the socket of your phone.</span>\r\n\t\t\t\t\t<div class=\"itemgroup info\">\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t<br />\r\n\t\t\t\t\t\t\t<tcdl:link type=\"ish:image\" ref=\"ish:39137-6311-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" />\r\n\t\t\t\t\t\t\t<br />\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</li>\r\n\t\t\t\t<li class=\"li step stepexpand\">\r\n\t\t\t\t\t<span class=\"ph cmd\">Connect the charger to an AC wall socket.</span>\r\n\t\t\t\t\t<div class=\"itemgroup stepresult\">The text Charging is displayed briefly if the phone is switched on. If the battery is completely flat, it may take a few minutes\r\n                  before the charging indicator appears on the display or any calls can be made.\r\n               </div>\r\n\t\t\t\t</li>\r\n\t\t\t</ol>\r\n\t\t\t<div class=\"section postreq\" id=\"GUID-87DD5F98-0359-4975-BBA2-3B494D82BE3C__GUID-EA779A20-4964-4BEE-815B-ADAF0BDE8E20\">\r\n\t\t\t\t<p class=\"p\">You can use the phone while the charger is connected.</p>\r\n\t\t\t</div>\r\n\t\t</div>"
+  "Html": "<div class=\"body taskbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\r\n\t\t\t<ol class=\"ol steps\" id=\"GUID-87DD5F98-0359-4975-BBA2-3B494D82BE3C__GUID-26A7C2F2-3453-4B36-B0CF-1C42DC728C98\">\r\n\t\t\t\t<li class=\"li step stepexpand\">\r\n\t\t\t\t\t<span class=\"ph cmd\">Connect the lead from the charger to the socket of your phone.</span>\r\n\t\t\t\t\t<div class=\"itemgroup info\">\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t<br />\r\n\t\t\t\t\t\t\t<tcdl:Image type=\"ish:image\" ref=\"ish:39137-6311-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" />\r\n\t\t\t\t\t\t\t<br />\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</li>\r\n\t\t\t\t<li class=\"li step stepexpand\">\r\n\t\t\t\t\t<span class=\"ph cmd\">Connect the charger to an AC wall socket.</span>\r\n\t\t\t\t\t<div class=\"itemgroup stepresult\">The text Charging is displayed briefly if the phone is switched on. If the battery is completely flat, it may take a few minutes\r\n                  before the charging indicator appears on the display or any calls can be made.\r\n               </div>\r\n\t\t\t\t</li>\r\n\t\t\t</ol>\r\n\t\t\t<div class=\"section postreq\" id=\"GUID-87DD5F98-0359-4975-BBA2-3B494D82BE3C__GUID-EA779A20-4964-4BEE-815B-ADAF0BDE8E20\">\r\n\t\t\t\t<p class=\"p\">You can use the phone while the charger is connected.</p>\r\n\t\t\t</div>\r\n\t\t</div>"
 }
