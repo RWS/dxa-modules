@@ -3,6 +3,7 @@
 module Sdl.DitaDelivery.Tests {
 
     import Toc = Components.Toc;
+    import ITocProps = Components.ITocProps;
     import ISitemapItem = Server.Models.ISitemapItem;
 
     class TocComponent extends SDL.Client.Test.TestBase {
@@ -28,13 +29,20 @@ module Sdl.DitaDelivery.Tests {
                     }]);
                 };
 
-                beforeAll(() => {
-                    ReactDOM.render(<Toc loadChildItems={loadChildItems} rootItems={rootItems} />, target);
+                beforeEach(() => {
+                    const props: ITocProps = {
+                        loadChildItems: loadChildItems,
+                        rootItems: rootItems
+                    };
+                    this._renderComponent(props, target);
+                });
+
+                afterEach(() => {
+                    const domNode = ReactDOM.findDOMNode(target);
+                    ReactDOM.unmountComponentAtNode(domNode);
                 });
 
                 afterAll(() => {
-                    const domNode = ReactDOM.findDOMNode(target);
-                    ReactDOM.unmountComponentAtNode(domNode);
                     target.parentElement.removeChild(target);
                 });
 
@@ -58,6 +66,10 @@ module Sdl.DitaDelivery.Tests {
 
             });
 
+        }
+
+        private _renderComponent(props: ITocProps, target: HTMLElement): void {
+            ReactDOM.render(<Toc {...props}/>, target);
         }
     }
 

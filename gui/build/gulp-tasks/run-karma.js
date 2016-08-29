@@ -61,7 +61,9 @@ module.exports = (buildOptions, browserSync) => {
 
         // Get the results
         karmaServer.on('browser_complete', (browser, results) => {
-            latestsResults[browser.id] = results;
+            if (results.coverage) {
+                latestsResults[browser.id] = results;
+            }
         });
 
         // Call test run completed callback if tests have run

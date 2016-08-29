@@ -16,9 +16,14 @@ module Sdl.DitaDelivery {
             // TODO error handling
             return;
         }
-        ReactDOM.render(<App toc={{
-            rootItems: children,
-            loadChildItems: DataStore.getSitemapItems
-        }} localization={localization}/>, mainElement);
+
+        ReactDOM.render(
+            (<App toc={{
+                rootItems: children,
+                loadChildItems: DataStore.getSitemapItems
+            }}
+                getPageInfo={DataStore.getPageInfo}
+                localization={localization}/>
+            ), mainElement);
     });
 }

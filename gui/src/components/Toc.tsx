@@ -3,7 +3,7 @@
 module Sdl.DitaDelivery.Components {
 
     import TreeView = SDL.ReactComponents.TreeView;
-    import ITreeViewNode = SDL.UI.Controls.ITreeViewNode;
+    import IBaseTreeViewNode = SDL.UI.Controls.ITreeViewNode;
     import ISitemapItem = Server.Models.ISitemapItem;
 
     /**
@@ -23,12 +23,22 @@ module Sdl.DitaDelivery.Components {
          * Load child items for a specific item
          */
         loadChildItems: (parentId: string, callback: (error: string, children: ISitemapItem[]) => void) => void;
+        /**
+         * Triggered whenever the selected item in the toc changes
+         */
+        onSelectionChanged?: (sitemapItem: ISitemapItem) => void;
+    }
+
+    interface ITreeViewNode extends IBaseTreeViewNode {
+        sitemapItem: ISitemapItem;
     }
 
     /**
      * Table of contents
      */
     export class Toc extends React.Component<ITocProps, {}> {
+
+        private _isDisposed: boolean = false;
 
         /**
          * Render the component
@@ -42,9 +52,17 @@ module Sdl.DitaDelivery.Components {
                 <div className={"sdl-dita-delivery-toc"}>
                     <TreeView
                         rootNodes={this._convertToTreeViewNodes(props.rootItems) }
-                        useCommonUILibraryScrollView={false}/>
+                        useCommonUILibraryScrollView={false}
+                        onSelectionChanged={this._onSelectionChanged.bind(this) }/>
                 </div>
             );
+        }
+
+        /**
+         * Component will unmount
+         */
+        public componentWillUnmount(): void {
+            this._isDisposed = true;
         }
 
         private _loadChildNodes(node: ITreeViewNode, callback: (childNodes: ITreeViewNode[]) => void): void {
@@ -60,12 +78,22 @@ module Sdl.DitaDelivery.Components {
         private _convertToTreeViewNodes(sitemapItems: ISitemapItem[], parentNode: ITreeViewNode = null): ITreeViewNode[] {
             const nodes: ITreeViewNode[] = [];
             const TreeViewControl = SDL.UI.Controls.TreeView;
-            for (let node of sitemapItems) {
-                nodes.push(
-                    TreeViewControl.prototype.createNode(node.Id, node.Title, "TOPIC",
-                        parentNode, null, node.IsLeaf, this._loadChildNodes.bind(this), true));
+            for (let sitemapItem of sitemapItems) {
+                let newNode = TreeViewControl.prototype.createNode(sitemapItem.Id, sitemapItem.Title, "TOPIC",
+                    parentNode, null, sitemapItem.IsLeaf, this._loadChildNodes.bind(this), true) as ITreeViewNode;
+                newNode.sitemapItem = sitemapItem;
+                nodes.push(newNode);
             }
             return nodes;
+        }
+
+        private _onSelectionChanged(nodes: ITreeViewNode[]): void {
+            if (!this._isDisposed) {
+                const onSelectionChanged = this.props.onSelectionChanged;
+                if (typeof onSelectionChanged === "function") {
+                    onSelectionChanged(nodes.length > 0 ? nodes[0].sitemapItem : null);
+                }
+            }
         }
 
     }
