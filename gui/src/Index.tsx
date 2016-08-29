@@ -22,7 +22,7 @@ module Sdl.DitaDelivery {
                 rootItems: children,
                 loadChildItems: DataStore.getSitemapItems
             }}
-                getPageContent={DataStore.getPageContent}
+                getPageInfo={DataStore.getPageInfo}
                 localization={localization}/>
             ), mainElement);
     });

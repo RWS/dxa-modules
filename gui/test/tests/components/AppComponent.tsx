@@ -62,8 +62,8 @@ module Sdl.DitaDelivery.Tests {
                             rootItems: [],
                             loadChildItems: null
                         },
-                        getPageContent: (pageId, callback): void => {
-                            callback(null, pageContent);
+                        getPageInfo: (pageId, callback): void => {
+                            callback(null, { content: pageContent, title: "Title!" });
                         }
                     }, target);
                     appComponent.setState({
@@ -78,6 +78,9 @@ module Sdl.DitaDelivery.Tests {
                     const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
                     expect(domNode).not.toBeNull();
                     expect(domNode.querySelector(".sdl-activityindicator")).toBeNull("Activity indicator should not be rendered.");
+                    const pageTitleNode = domNode.querySelector(".page-title") as HTMLElement;
+                    expect(pageTitleNode).not.toBeNull("Could not find page title.");
+                    expect(pageTitleNode.textContent).toBe("Title!");
                     const pageContentNode = domNode.querySelector(".page-content") as HTMLElement;
                     expect(pageContentNode).not.toBeNull("Could not find page content.");
                     expect(pageContentNode.children.length).toBe(1);
@@ -116,9 +119,9 @@ module Sdl.DitaDelivery.Tests {
                     // Treeview uses debouncing for node selection so a timeout is required
                     setTimeout((): void => {
                         expect(domNode.querySelector(".sdl-activityindicator")).toBeNull("Activity indicator should not be rendered.");
-                        const pageContentNode = domNode.querySelector(".page-content") as HTMLElement;
-                        expect(pageContentNode).not.toBeNull("Could not find page content.");
-                        expect(pageContentNode.innerHTML).toBe("Second element"); // page title
+                        const pageTitleNode = domNode.querySelector(".page-title") as HTMLElement;
+                        expect(pageTitleNode).not.toBeNull("Could not find page title.");
+                        expect(pageTitleNode.textContent).toBe("Second element");
                         done();
                     }, 200);
                 });
@@ -139,18 +142,19 @@ module Sdl.DitaDelivery.Tests {
                             Title: title,
                             Url: null
                         },
-                        pageContent: title
+                        page: {
+                            title: title
+                        }
                     });
                     const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
                     expect(domNode).not.toBeNull();
                     expect(domNode.querySelector(".sdl-activityindicator")).toBeNull("Activity indicator should not be rendered.");
-                    const pageContentNode = domNode.querySelector(".page-content") as HTMLElement;
-                    expect(pageContentNode).not.toBeNull("Could not find page content.");
-                    expect(pageContentNode.children.length).toBe(0);
-                    expect(pageContentNode.innerHTML).toBe(title);
+                    const pageTitleNode = domNode.querySelector(".page-title") as HTMLElement;
+                    expect(pageTitleNode).not.toBeNull("Could not find page title.");
+                    expect(pageTitleNode.textContent).toBe(title);
                 });
 
-                it("shows an error message when page content fails to load", (done: () => void): void => {
+                it("shows an error message when page info fails to load", (done: () => void): void => {
                     this._renderComponent({
                         localization: localization,
                         toc: {
@@ -163,8 +167,8 @@ module Sdl.DitaDelivery.Tests {
                             }],
                             loadChildItems: null
                         },
-                        getPageContent: (pageId, callback): void => {
-                            callback("Page failed to load!", "");
+                        getPageInfo: (pageId, callback): void => {
+                            callback("Page failed to load!");
                         }
                     }, target);
                     const domNode = ReactDOM.findDOMNode(target) as HTMLElement;

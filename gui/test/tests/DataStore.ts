@@ -19,7 +19,7 @@ module Sdl.DitaDelivery.Tests {
                     });
                 });
 
-                it("can get page content from memory", (done: () => void): void => {
+                it("can get site map items from memory", (done: () => void): void => {
                     const spy = spyOn(SDL.Client.Net, "getRequest").and.callThrough();
                     DataStore.getSitemapRoot((error, children) => {
                         expect(error).toBeNull();
@@ -48,7 +48,7 @@ module Sdl.DitaDelivery.Tests {
                 it("returns a proper error when a parent id does not exist", (done: () => void): void => {
                     DataStore.getSitemapItems("does-not-exist", (error, children) => {
                         expect(error).toContain("does-not-exist");
-                        expect(children.length).toBe(0);
+                        expect(children).toBeUndefined();
                         done();
                     });
                 });
@@ -57,34 +57,36 @@ module Sdl.DitaDelivery.Tests {
 
             describe(`Data Store tests (Page).`, (): void => {
 
-                it("can get page content", (done: () => void): void => {
+                it("can get page info", (done: () => void): void => {
                     const pageId = "ish:39137-6222-16";
-                    DataStore.getPageContent(pageId, (error, content) => {
+                    DataStore.getPageInfo(pageId, (error, pageInfo) => {
                         expect(error).toBeNull();
-                        expect(content.length).toBe(127);
+                        expect(pageInfo.title).toBe("getting started");
+                        expect(pageInfo.content.length).toBe(127);
                         const element = document.createElement("span");
-                        element.innerHTML = content;
+                        element.innerHTML = pageInfo.content;
                         expect(element.children.length).toBe(1);
                         expect((element.children[0] as HTMLElement).children.length).toBe(2);
                         done();
                     });
                 });
 
-                it("can get page content from memory", (done: () => void): void => {
+                it("can get page info from memory", (done: () => void): void => {
                     const pageId = "ish:39137-6222-16";
                     const spy = spyOn(SDL.Client.Net, "getRequest").and.callThrough();
-                    DataStore.getPageContent(pageId, (error, content) => {
+                    DataStore.getPageInfo(pageId, (error, pageInfo) => {
                         expect(error).toBeNull();
-                        expect(content.length).toBe(127);
+                        expect(pageInfo.title).toBe("getting started");
+                        expect(pageInfo.content.length).toBe(127);
                         expect(spy).not.toHaveBeenCalled();
                         done();
                     });
                 });
 
                 it("returns a proper error when a page does not exist", (done: () => void): void => {
-                    DataStore.getPageContent("does-not-exist", (error, content) => {
+                    DataStore.getPageInfo("does-not-exist", (error, pageInfo) => {
                         expect(error).toContain("does-not-exist");
-                        expect(content).toBe("");
+                        expect(pageInfo).toBeUndefined();
                         done();
                     });
                 });

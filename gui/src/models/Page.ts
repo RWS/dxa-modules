@@ -5,6 +5,17 @@ module Sdl.DitaDelivery.Models {
     import IPage = Server.Models.IPage;
     import IWebRequest = SDL.Client.Net.IWebRequest;
 
+    /**
+     * Page info
+     *
+     * @export
+     * @interface IPageInfo
+     */
+    export interface IPageInfo {
+        title: string;
+        content: string;
+    }
+
     /* tslint:disable-next-line */
     eval(SDL.Client.Types.OO.enableCustomInheritance);
     /**
@@ -30,12 +41,15 @@ module Sdl.DitaDelivery.Models {
         }
 
         /**
-         * Get the page content
+         * Get the page info
          *
-         * @returns {string}
+         * @returns {IPageInfo}
          */
-        public getContent(): string {
-            return this._page.Html;
+        public getPageInfo(): IPageInfo {
+            return {
+                content: this._page.Html,
+                title: this._page.Title
+            };
         }
 
         /* Overloads */

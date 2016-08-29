@@ -19,6 +19,12 @@ module Sdl.DitaDelivery.Components {
          */
         showActivityIndicator: boolean;
         /**
+         * Page title
+         *
+         * @type {string}
+         */
+        title?: string;
+        /**
          * Page content
          *
          * @type {string}
@@ -41,7 +47,12 @@ module Sdl.DitaDelivery.Components {
                 { props.showActivityIndicator ? <ActivityIndicator/> : null }
                 { props.error ?
                     <ValidationMessage messageType={SDL.UI.Controls.ValidationMessageType.Error} message={props.error} /> :
-                    <div className={"page-content"} dangerouslySetInnerHTML={{ __html: props.content }} />
+                    (
+                        <div>
+                            <h1 className={"page-title"}>{props.title}</h1>
+                            <div className={"page-content"} dangerouslySetInnerHTML={{ __html: props.content }} />
+                        </div>
+                    )
                 }
             </div>
         );

@@ -41,9 +41,17 @@ module Sdl.DitaDelivery.Tests {
 
                 it("can show page content info", (): void => {
                     const pageContent = "<div>Page content!</div>";
-                    this._renderComponent({ showActivityIndicator: false, content: pageContent }, target);
+                    this._renderComponent({
+                        showActivityIndicator: false,
+                        content: pageContent,
+                        title: "Page title"
+                    }, target);
+
                     const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
                     expect(domNode).not.toBeNull();
+                    const pageTitleNode = domNode.querySelector(".page-title") as HTMLElement;
+                    expect(pageTitleNode).not.toBeNull("Could not find page title.");
+                    expect(pageTitleNode.textContent).toBe("Page title");
                     const pageContentNode = domNode.querySelector(".page-content") as HTMLElement;
                     expect(pageContentNode).not.toBeNull("Could not find page content.");
                     expect(pageContentNode.children.length).toBe(1);

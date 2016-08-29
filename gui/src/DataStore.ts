@@ -4,6 +4,7 @@
 module Sdl.DitaDelivery {
 
     import ISitemapItem = Server.Models.ISitemapItem;
+    import IPageInfo = Sdl.DitaDelivery.Models.IPageInfo;
 
     /**
      * Data store, interacts with the models to fetch the required data.
@@ -46,9 +47,9 @@ module Sdl.DitaDelivery {
          *
          * @static
          * @param {string} parentId The parent id
-         * @param {(error: string, children: ISitemapItem[]) => void} callback Returns the items
+         * @param {(error: string, children?: ISitemapItem[]) => void} callback Returns the items
          */
-        public static getSitemapItems(parentId: string, callback: (error: string, children: ISitemapItem[]) => void): void {
+        public static getSitemapItems(parentId: string, callback: (error: string, children?: ISitemapItem[]) => void): void {
             const toc = DataStore.getTocModel(parentId);
             const onLoad = () => {
                 toc.removeEventListener("load", onLoad);
@@ -56,7 +57,7 @@ module Sdl.DitaDelivery {
             };
             const onLoadFailed = (event: SDL.Client.Event.Event) => {
                 toc.removeEventListener("loadfailed", onLoadFailed);
-                callback(event.data.error, []);
+                callback(event.data.error);
             };
             if (!toc.isLoaded()) {
                 toc.addEventListener("load", onLoad);
@@ -68,28 +69,28 @@ module Sdl.DitaDelivery {
         }
 
         /**
-         * Get the html content of a page
+         * Get page information
          *
          * @static
          * @param {string} pageId The page id
-         * @param {(error: string, content: string) => void} callback Returns the content
+         * @param {(error: string, info?: IPageInfo) => void} callback Returns the content
          */
-        public static getPageContent(pageId: string, callback: (error: string, content: string) => void): void {
+        public static getPageInfo(pageId: string, callback: (error: string, info?: IPageInfo) => void): void {
             const page = DataStore.getPageModel(pageId);
             const onLoad = () => {
                 page.removeEventListener("load", onLoad);
-                callback(null, page.getContent());
+                callback(null, page.getPageInfo());
             };
             const onLoadFailed = (event: SDL.Client.Event.Event) => {
                 page.removeEventListener("loadfailed", onLoadFailed);
-                callback(event.data.error, "");
+                callback(event.data.error);
             };
             if (!page.isLoaded()) {
                 page.addEventListener("load", onLoad);
                 page.addEventListener("loadfailed", onLoadFailed);
                 page.load();
             } else {
-                callback(null, page.getContent());
+                callback(null, page.getPageInfo());
             }
         }
 

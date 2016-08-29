@@ -6,6 +6,7 @@ module Sdl.DitaDelivery.Components {
     import ActivityIndicator = SDL.ReactComponents.ActivityIndicator;
     import TopBar = SDL.ReactComponents.TopBar;
     import ISitemapItem = Server.Models.ISitemapItem;
+    import IPageInfo = Sdl.DitaDelivery.Models.IPageInfo;
 
     /**
      * App component props
@@ -23,13 +24,9 @@ module Sdl.DitaDelivery.Components {
          */
         toc?: ITocProps;
         /**
-         * Page information
+         * Get page info for a specific page
          */
-        page?: IPageProps;
-        /**
-         * Get content for a specific page
-         */
-        getPageContent?: (pageId: string, callback: (error: string, content: string) => void) => void;
+        getPageInfo?: (pageId: string, callback: (error: string, info?: IPageInfo) => void) => void;
     }
 
     /**
@@ -56,23 +53,34 @@ module Sdl.DitaDelivery.Components {
          */
         selectedSiteMapItem?: ISitemapItem;
         /**
-         * Content of the current selected page
-         *
-         * @type {string}
+         * Page state
          */
-        pageContent?: string;
-        /**
-         * An error prevented the page from rendering
-         *
-         * @type {string}
-         */
-        pageError?: string;
-        /**
-         * Page is loading
-         *
-         * @type {boolean}
-         */
-        pageIsLoading?: boolean;
+        page?: {
+            /**
+             * Content of the current selected page
+             *
+             * @type {string}
+             */
+            content?: string;
+            /**
+             * An error prevented the page from rendering
+             *
+             * @type {string}
+             */
+            error?: string;
+            /**
+             * Page is loading
+             *
+             * @type {boolean}
+             */
+            isLoading?: boolean;
+            /**
+             * Page title
+             *
+             * @type {string}
+             */
+            title?: string;
+        };
     }
 
     /**
@@ -88,9 +96,12 @@ module Sdl.DitaDelivery.Components {
             super();
             this.state = {
                 selectedSiteMapItem: null,
-                pageContent: null,
-                pageError: null,
-                pageIsLoading: false
+                page: {
+                    content: null,
+                    title: null,
+                    error: null,
+                    isLoading: false
+                }
             };
         }
 
@@ -101,7 +112,9 @@ module Sdl.DitaDelivery.Components {
          */
         public componentWillReceiveProps(nextProps: IAppProps): void {
             this.setState({
-                pageError: null
+                page: {
+                    error: null
+                }
             });
         }
 
@@ -116,8 +129,8 @@ module Sdl.DitaDelivery.Components {
             const state = this.state;
             const currentUrl = state.selectedSiteMapItem ? state.selectedSiteMapItem.Url : null;
             const nextUrl = nextState.selectedSiteMapItem ? nextState.selectedSiteMapItem.Url : null;
-            if (nextUrl && (state.pageIsLoading || currentUrl !== nextUrl)) {
-                nextProps.getPageContent(nextUrl, this._onPageContentRetrieved.bind(this));
+            if (nextUrl && (state.page.isLoading || currentUrl !== nextUrl)) {
+                nextProps.getPageInfo(nextUrl, this._onPageContentRetrieved.bind(this));
             }
         }
 
@@ -140,7 +153,10 @@ module Sdl.DitaDelivery.Components {
                         }}/>
                         <section className={"content"}>
                             <Toc {...props.toc} onSelectionChanged={this._onTocSelectionChanged.bind(this) }/>
-                            <Page showActivityIndicator={state.pageIsLoading} content={state.pageContent} error={state.pageError}/>
+                            <Page showActivityIndicator={state.page.isLoading}
+                                content={state.page.content}
+                                title={state.page.title}
+                                error={state.page.error}/>
                         </section>
                     </div>
                 );
@@ -152,22 +168,29 @@ module Sdl.DitaDelivery.Components {
         private _onTocSelectionChanged(sitemapItem: ISitemapItem): void {
             this.setState({
                 selectedSiteMapItem: sitemapItem,
-                pageIsLoading: sitemapItem.Url ? true : false,
-                pageContent: !sitemapItem.Url ? sitemapItem.Title : undefined
+                page: {
+                    isLoading: sitemapItem.Url ? true : false,
+                    title: !sitemapItem.Url ? sitemapItem.Title : undefined
+                }
             });
         }
 
-        private _onPageContentRetrieved(error: string, content: string): void {
+        private _onPageContentRetrieved(error: string, pageInfo: IPageInfo): void {
             if (error) {
                 this.setState({
-                    pageError: error,
-                    pageIsLoading: false
+                    page: {
+                        error: error,
+                        isLoading: false
+                    }
                 });
                 return;
             }
             this.setState({
-                pageContent: content ? content : this.state.selectedSiteMapItem.Title,
-                pageIsLoading: false
+                page: {
+                    content: pageInfo.content,
+                    title: pageInfo.title ? pageInfo.title : this.state.selectedSiteMapItem.Title,
+                    isLoading: false
+                }
             });
         }
     };
