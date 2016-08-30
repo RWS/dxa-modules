@@ -38,6 +38,7 @@
     "karma-jasmine": "~1.0.2",
     "karma-phantomjs-launcher": "~1.0.1",
     "lodash": "~4.14.1",
+    "napa": "~2.3.0",
     "portfinder": "~1.0.3",
     "remap-istanbul": "~0.5.1",
     "run-sequence": "~1.2.1",
@@ -52,7 +53,8 @@
     "start": "gulp serve",
     "build": "gulp",
     "build-server": "gulp build:dist",
-    "test": "gulp test"
+    "test": "gulp test",
+    "install": "napa"
   },
   "repository": {
     "type": "git",
@@ -60,5 +62,8 @@
   },
   "author": "jbevers@sdl.com",
   "license": "Apache-2.0",
-  "private": true
+  "private": true,
+  "napa": {
+    "dita-ot": "dita-ot/dita-ot#ff8fbfd1d1dc69773e0af1cd726408b651eba1ec"
+  }
 }
