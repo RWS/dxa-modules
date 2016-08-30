@@ -1,22 +1,20 @@
 ﻿'use strict';
 
-var gulp = require('gulp');
-var gulpTypescript = require('gulp-typescript');
-var gulpLess = require('gulp-less');
-var gulpDebug = require('gulp-debug');
-var browserSync = require('browser-sync').create();
-var fs = require('fs-extra');
-var _ = require('lodash');
-var async = require('async');
-var runSequence = require('run-sequence');
+const gulp = require('gulp');
+const gulpDebug = require('gulp-debug');
+const browserSync = require('browser-sync').create();
+const fs = require('fs-extra');
+const _ = require('lodash');
+const async = require('async');
+const runSequence = require('run-sequence');
 const packageInfo = require('./package.json');
 const catalinaPackageInfo = require('./node_modules/sdl-catalina/package.json');
-var gulpTypings = require('./build/gulp-plugins/install-typings');
+const gulpTypings = require('./build/gulp-plugins/install-typings');
 const yargs = require('yargs');
 
-var reload = browserSync.reload;
-var sourcesPath = './src/';
-var buildOptions = {
+const reload = browserSync.reload;
+const sourcesPath = './src/';
+const buildOptions = {
     version: packageInfo.version,
     catalinaVersion: catalinaPackageInfo.version,
     sourcesPath: sourcesPath,
@@ -63,17 +61,17 @@ var buildOptions = {
 // Log info
 console.log(`Application version: ${buildOptions.version}, Catalina version: ${buildOptions.catalinaVersion}`);
 
-var commonFolderName = function () {
+const commonFolderName = function () {
     return buildOptions.isDebug ? 'Common.debug' : 'Common';
 };
 
 // Tasks
-var compileLess = require('./build/gulp-tasks/compile-less')(buildOptions, gulp);
-var compileTypescript = require('./build/gulp-tasks/compile-typescript')(buildOptions, gulp);
-var runTSLint = require('./build/gulp-tasks/run-tslint')(buildOptions, gulp);
-var serve = require('./build/gulp-tasks/serve')(buildOptions, gulp, browserSync, commonFolderName);
-var runKarma = require('./build/gulp-tasks/run-karma')(buildOptions, browserSync);
-var runTests = function (singleRun, cb, onTestRunCompleted) {
+const compileLess = require('./build/gulp-tasks/compile-less')(buildOptions, gulp);
+const compileTypescript = require('./build/gulp-tasks/compile-typescript')(buildOptions, gulp);
+const runTSLint = require('./build/gulp-tasks/run-tslint')(buildOptions, gulp);
+const serve = require('./build/gulp-tasks/serve')(buildOptions, gulp, browserSync, commonFolderName);
+const runKarma = require('./build/gulp-tasks/run-karma')(buildOptions, browserSync);
+const runTests = function (singleRun, cb, onTestRunCompleted) {
     return function (err) {
         var onTestCompleted = function (err, results) {
             browserSync.exit();
@@ -92,7 +90,7 @@ var runTests = function (singleRun, cb, onTestRunCompleted) {
         }
     };
 };
-var testCoverage = function (cb, singleRun) {
+const testCoverage = function (cb, singleRun) {
     singleRun = typeof singleRun === 'boolean' ? singleRun : false;
     return require('./build/gulp-tasks/test-coverage')(buildOptions, gulp, runTests, singleRun)(cb);
 };
@@ -154,8 +152,9 @@ gulp.task('package-project', [
     'copy-dependencies',
     'compile-less',
     'compile-typescript',
-    'update-version'],
-    require('./build/gulp-tasks/package-project')(buildOptions, gulp, './node_modules/sdl-packager/Source/bin/Release/Packager.exe'));
+    'update-version',
+    'wrap-dita-ot-styles'
+], require('./build/gulp-tasks/package-project')(buildOptions, gulp, './node_modules/sdl-packager/Source/bin/Release/Packager.exe'));
 
 gulp.task('run-tslint', runTSLint);
 
@@ -164,10 +163,11 @@ gulp.task('add-coverage', ['compile-typescript'], require('./build/gulp-tasks/ad
 gulp.task('test-coverage', testCoverage);
 
 gulp.task('install-typings', function () {
-    var stream = gulp.src("./typings.json")
+    return gulp.src("./typings.json")
         .pipe(gulpTypings());
-    return stream;
 });
+
+gulp.task('wrap-dita-ot-styles', require('./build/gulp-tasks/wrap-dita-ot-styles')(buildOptions, gulp));
 
 // Common tasks
 gulp.task('build', [
@@ -179,7 +179,8 @@ gulp.task('build', [
     'run-tslint',
     'add-coverage',
     'package-project',
-    'update-version']);
+    'update-version'
+]);
 
 gulp.task('build:dist', cb => {
     buildOptions.isDebug = false;
@@ -291,14 +292,14 @@ gulp.on('task_stop', e => {
 });
 
 process.on('uncaughtException', err => {
-    var date = (new Date).toUTCString();
+    const date = (new Date).toUTCString();
     console.error(date + ' uncaughtException:', err.message);
     console.error(err.stack);
     process.exit(1);
 });
 
 process.on('unhandledRejection', (reason, p) => {
-    var date = (new Date).toUTCString();
+    const date = (new Date).toUTCString();
     console.error(date + ' Unhandled Rejection at: Promise ', p, ' reason: ', reason);
     process.exit(1);
 });
