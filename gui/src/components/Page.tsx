@@ -50,7 +50,7 @@ module Sdl.DitaDelivery.Components {
                     (
                         <div>
                             <h1 className={"page-title"}>{props.title}</h1>
-                            <div className={"page-content"} dangerouslySetInnerHTML={{ __html: props.content }} />
+                            <div className={"page-content ltr"} dangerouslySetInnerHTML={{ __html: props.content }} />
                         </div>
                     )
                 }

@@ -54,8 +54,7 @@
         <resourceGroup name="Sdl.DitaDelivery.DitaOt.Styles">
             <files>
                 <file name="dita-ot/styles/commonltr.css"/>
-                <!-- TODO: rtl support -->
-                <!--file name="dita-ot/styles/commonrtl.css"/-->
+                <file name="dita-ot/styles/commonrtl.css"/>
             </files>
         </resourceGroup>
     </resourceGroups>

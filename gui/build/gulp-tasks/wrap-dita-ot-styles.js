@@ -29,7 +29,8 @@ module.exports = (buildOptions, gulp) => {
                 `${ditaOtStylesDir}commonrtl.css`
             ])
             .pipe(gulpChmod(666)) // Remove read-only flag
-            .pipe(gulpWrapCss({ className: 'page-content' }))
+            .pipe(gulpIf('*ltr.css', gulpWrapCss({ globalRule: '.page-content.ltr' })))
+            .pipe(gulpIf('*rtl.css', gulpWrapCss({ globalRule: '.page-content.rtl' })))
             .pipe(gulpDebug({ title: 'Wrapped css into a single class' }))
             .pipe(gulpPostCss([autoPrefixer]))
             .pipe(gulpDebug({ title: 'Auto prefixer output' }))

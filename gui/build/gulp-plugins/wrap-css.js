@@ -15,8 +15,8 @@ module.exports = options => {
             return;
         }
 
-        if (!options.className) {
-            cb(new Error('className option should be specified'));
+        if (!options.globalRule) {
+            cb(new Error('globalRule option should be specified'));
             return;
         }
 
@@ -28,7 +28,7 @@ module.exports = options => {
             if (Array.isArray(rule.selectors)) {
                 let index = 0;
                 for (let selector of rule.selectors) {
-                    rule.selectors[index] = `.${options.className} ${selector}`;
+                    rule.selectors[index] = `${options.globalRule} ${selector}`;
                     index++;
                 }
             }
