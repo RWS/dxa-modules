@@ -20,6 +20,10 @@ module Sdl.DitaDelivery.Components {
          */
         localization: ILocalization;
         /**
+         * Localization
+         */
+        routing?: IRouting;
+        /**
          * Table of contents
          */
         toc?: ITocProps;
@@ -37,6 +41,16 @@ module Sdl.DitaDelivery.Components {
          * Give the message for a resource id
          */
         formatMessage: (path: string, variables?: string[]) => string;
+    }
+
+    /**
+     * Routing
+     */
+    export interface IRouting {
+        /**
+         * Get the current location
+         */
+        getCurrentLocation: () => string;
     }
 
     /**

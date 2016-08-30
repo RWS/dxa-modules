@@ -33,6 +33,7 @@
                 <dependency name="Sdl.DitaDelivery.Components" />
                 <dependency name="Sdl.DitaDelivery.DataStore" />
                 <dependency name="Sdl.DitaDelivery.Resources" />
+                <dependency name="Sdl.DitaDelivery.Routing" />
             </dependencies>
         </resourceGroup>
         <resourceGroup name="Sdl.DitaDelivery.DataStore">
@@ -41,6 +42,15 @@
             </files>
             <dependencies>
                 <dependency name="Sdl.DitaDelivery.Models" />
+            </dependencies>
+        </resourceGroup>
+        <resourceGroup name="Sdl.DitaDelivery.Routing">
+            <files>
+                <file name="lib/history/history.js" />
+                <file name="Routing.js" />
+            </files>
+            <dependencies>
+                <dependency name="Sdl.DitaDelivery.Components" />
             </dependencies>
         </resourceGroup>
         <resourceGroup name="Sdl.DitaDelivery.Server">

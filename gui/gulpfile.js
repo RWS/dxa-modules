@@ -138,7 +138,14 @@ gulp.task('copy-dependencies', cb => {
                 .pipe(gulpDebug({ title: 'Copying' }))
                 .pipe(gulp.dest(`${buildOptions.distPath}mocks/`))
                 .on('end', next);
-        }
+        },
+        // History
+        next => {
+            gulp.src(['./node_modules/history/umd/*'])
+                .pipe(gulpDebug({ title: 'Copying' }))
+                .pipe(gulp.dest(`${buildOptions.distPath}lib/history/`))
+                .on('end', next);
+        },
     ], cb);
 });
 
