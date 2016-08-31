@@ -119,7 +119,7 @@ module.exports = function (buildOptions, gulp, browserSync, commonFolderName) {
                             if (buildOptions.isTestCoverage) {
                                 // Redirect all js files to the ones which are instrumented to be used for code coverage
                                 var url = req.url;
-                                if (!_.startsWith(url, '/SDL/') && !_.startsWith(url, '/test/')
+                                if (!_.startsWith(url, '/SDL/') && !_.startsWith(url, '/test/') && !_.startsWith(url, '/lib/')
                                     && _.endsWith(url, '.js?' + buildOptions.version)) {
                                     url = '/test/coverage' + url;
                                     req.url = url;

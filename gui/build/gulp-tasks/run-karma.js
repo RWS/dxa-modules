@@ -24,8 +24,6 @@ module.exports = (buildOptions, browserSync) => {
                 '/SDL/': urlPrefix + 'SDL/',
                 // Test folder
                 '/test/': urlPrefix + 'test/',
-                // lib
-                '/src/lib/': urlPrefix + 'lib/',
                 // src folder
                 '/src/': urlPrefix,
                 // mocks
