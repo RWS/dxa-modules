@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../node_modules/sdl-catalina/Common/Library/Core/configuration.xsd">
+    <include src="container/_config.xml"/>
+    <include src="presentation/_config.xml"/>
+    <!-- Main resources -->
+    <resourceGroups>
+        <resourceGroup name="Sdl.DitaDelivery.Test.Tests.Components">
+            <dependencies>
+                <dependency name="Sdl.DitaDelivery.Test.Tests.Components.Container"/>
+                <dependency name="Sdl.DitaDelivery.Test.Tests.Components.Presentation"/>
+            </dependencies>
+        </resourceGroup>
+    </resourceGroups>
+</configuration>

@@ -6,16 +6,9 @@
     <include src="../SDL/Test/configuration.xml" />
     <include src="../src/configuration.xml"/>
     <include src="mocks/_config.xml"/>
+    <include src="tests/_config.xml"/>
     <resourceGroups>
         <resourceGroup name="Sdl.DitaDelivery.Test">
-            <files>
-                <file name="tests/components/AppComponent.js" />
-                <file name="tests/components/PublicationContentComponent.js" />
-                <file name="tests/components/PageComponent.js" />
-                <file name="tests/components/TocComponent.js" />
-                <file name="tests/DataStoreClient.js"/>
-                <file name="tests/Server.js"/>
-            </files>
             <dependencies>
                 <dependency name="SDL.Client.Test.TestBase"/>
                 <dependency name="SDL.Client.Test.Utilities"/>
@@ -26,6 +19,16 @@
                 <dependency name="Sdl.DitaDelivery.Resources"/>
                 <dependency name="Sdl.DitaDelivery.RoutingClient" />
                 <dependency name="Sdl.DitaDelivery.Server"/>
+                <dependency name="Sdl.DitaDelivery.Test.Tests"/>
+            </dependencies>
+        </resourceGroup>
+        <resourceGroup name="Sdl.DitaDelivery.Test.Tests">
+            <files>
+                <file name="tests/Server.js"/>
+            </files>
+            <dependencies>
+                 <dependency name="Sdl.DitaDelivery.Test.Tests.Components"/>
+                 <dependency name="Sdl.DitaDelivery.Test.Tests.Global"/>
             </dependencies>
         </resourceGroup>
     </resourceGroups>
