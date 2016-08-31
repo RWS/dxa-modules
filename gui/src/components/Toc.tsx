@@ -1,4 +1,5 @@
 /// <reference path="../interfaces/ServerModels.d.ts" />
+/// <reference path="../interfaces/Routing.d.ts" />
 
 module Sdl.DitaDelivery.Components {
 
@@ -44,9 +45,20 @@ module Sdl.DitaDelivery.Components {
     /**
      * Table of contents
      */
-    export class Toc extends React.Component<ITocProps, {}> {
+    export class Toc extends React.Component<ITocProps, { error: string }> {
 
         private _isUnmounted: boolean = false;
+
+        /**
+         * Creates an instance of Toc.
+         *
+         */
+        constructor() {
+            super();
+            this.state = {
+                error: null
+            };
+        }
 
         /**
          * Render the component
@@ -55,21 +67,42 @@ module Sdl.DitaDelivery.Components {
          */
         public render(): JSX.Element {
             const props = this.props;
+            const { error } = this.state;
 
             return (
                 <div className={"sdl-dita-delivery-toc"}>
-                    { props.error ?
-                        <ValidationMessage messageType={SDL.UI.Controls.ValidationMessageType.Error} message={props.error} /> :
+                    { error ? <ValidationMessage messageType={SDL.UI.Controls.ValidationMessageType.Error} message={error} /> : null }
+                    {
                         props.rootItems ?
                             <TreeView
                                 rootNodes={this._convertToTreeViewNodes(props.rootItems) }
                                 useCommonUILibraryScrollView={false}
                                 onSelectionChanged={this._onSelectionChanged.bind(this) }/>
-                            : <ActivityIndicator/>
-
+                            : !error ? <ActivityIndicator/> : null
                     }
                 </div>
             );
+        }
+
+        /**
+         * Invoked once, both on the client and server, immediately before the initial rendering occurs.
+         */
+        public componentWillMount(): void {
+            const { error } = this.props;
+            this.setState({
+                error: error
+            });
+        }
+
+        /**
+         * Invoked when a component is receiving new props. This method is not called for the initial render.
+         *
+         * @param {ITocProps} nextProps
+         */
+        public componentWillReceiveProps(nextProps: ITocProps): void {
+            this.setState({
+                error: nextProps.error
+            });
         }
 
         /**
@@ -82,10 +115,16 @@ module Sdl.DitaDelivery.Components {
         private _loadChildNodes(node: ITreeViewNode, callback: (childNodes: ITreeViewNode[]) => void): void {
             const props = this.props;
             props.loadChildItems(node.id, (error, children) => {
-                if (error) {
-                    // TODO error handling
+                if (!this._isUnmounted) {
+                    if (error) {
+                        this.setState({
+                            error: error
+                        });
+                        callback([]);
+                        return;
+                    }
+                    callback(this._convertToTreeViewNodes(children, node));
                 }
-                callback(this._convertToTreeViewNodes(children, node));
             });
         }
 
@@ -104,8 +143,10 @@ module Sdl.DitaDelivery.Components {
         private _onSelectionChanged(nodes: ITreeViewNode[]): void {
             if (!this._isUnmounted) {
                 const onSelectionChanged = this.props.onSelectionChanged;
+                const selectedItem = nodes.length > 0 ? nodes[0].sitemapItem : null;
+                Routing.setSitemapItem(selectedItem.Id, selectedItem.Title);
                 if (typeof onSelectionChanged === "function") {
-                    onSelectionChanged(nodes.length > 0 ? nodes[0].sitemapItem : null);
+                    onSelectionChanged(selectedItem);
                 }
             }
         }

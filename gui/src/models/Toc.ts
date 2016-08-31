@@ -40,7 +40,8 @@ module Sdl.DitaDelivery.Models {
 
         /* Overloads */
         protected _executeLoad(reload: boolean): void {
-            SDL.Client.Net.getRequest(`gui/mocks/toc-${this._stripId(this._parentId)}.json`, this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
+            const url = Routing.getAbsolutePath(`gui/mocks/toc-${this._stripId(this._parentId)}.json`);
+            SDL.Client.Net.getRequest(url, this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
         }
 
         protected _processLoadResult(result: string, webRequest: SDL.Client.Net.IWebRequest): void {

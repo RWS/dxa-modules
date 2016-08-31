@@ -23,6 +23,7 @@
                 <dependency name="Sdl.DitaDelivery.DataStoreClient" />
                 <dependency name="Sdl.DitaDelivery.LocalizationGlobalize" />
                 <dependency name="Sdl.DitaDelivery.Resources"/>
+                <dependency name="Sdl.DitaDelivery.RoutingClient" />
                 <dependency name="Sdl.DitaDelivery.Server"/>
             </dependencies>
         </resourceGroup>

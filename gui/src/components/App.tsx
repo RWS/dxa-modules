@@ -147,6 +147,7 @@ module Sdl.DitaDelivery.Components {
             const { rootItems } = this._toc;
             const tocError = this._toc.error;
             const formatMessage = Localization.formatMessage;
+
             return (
                 <div className={"sdl-dita-delivery-app"}>
                     <TopBar title={formatMessage("components.app.title") } buttons={{
