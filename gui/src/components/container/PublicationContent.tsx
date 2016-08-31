@@ -1,20 +1,19 @@
-/// <reference path="Toc.tsx" />
-/// <reference path="Page.tsx" />
-/// <reference path="../interfaces/ServerModels.d.ts" />
+/// <reference path="../presentation/Toc.tsx" />
+/// <reference path="../presentation/Page.tsx" />
+/// <reference path="../../interfaces/ServerModels.d.ts" />
 
 module Sdl.DitaDelivery.Components {
 
-    import TopBar = SDL.ReactComponents.TopBar;
     import ISitemapItem = Server.Models.ISitemapItem;
     import IPageInfo = Models.IPageInfo;
 
     /**
-     * App component state
+     * PublicationContent component state
      *
      * @export
-     * @interface IAppState
+     * @interface IPublicationContentState
      */
-    export interface IAppState {
+    export interface IPublicationContentState {
         /**
          * Toc is loading
          *
@@ -74,7 +73,7 @@ module Sdl.DitaDelivery.Components {
     /**
      * Main component for the application
      */
-    export class App extends React.Component<{}, IAppState> {
+    export class PublicationContent extends React.Component<{}, IPublicationContentState> {
 
         private _page: IPage = {};
         private _toc: IToc = {};
@@ -125,9 +124,9 @@ module Sdl.DitaDelivery.Components {
          * This method is not called for the initial render.
          *
          * @param {{}} nextProps Next props
-         * @param {IAppState} nextState Next state
+         * @param {IPublicationContentState} nextState Next state
          */
-        public componentWillUpdate(nextProps: {}, nextState: IAppState): void {
+        public componentWillUpdate(nextProps: {}, nextState: IPublicationContentState): void {
             const { selectedTocItem, isPageLoading } = this.state;
             const currentUrl = selectedTocItem ? selectedTocItem.Url : null;
             const nextUrl = nextState.selectedTocItem ? nextState.selectedTocItem.Url : null;
@@ -146,28 +145,20 @@ module Sdl.DitaDelivery.Components {
             const { content, title, error} = this._page;
             const { rootItems } = this._toc;
             const tocError = this._toc.error;
-            const formatMessage = Localization.formatMessage;
 
             return (
-                <div className={"sdl-dita-delivery-app"}>
-                    <TopBar title={formatMessage("components.app.title") } buttons={{
-                        user: {
-                            isPicture: true
-                        }
-                    }}/>
-                    <section className={"content"}>
-                        <Toc
-                            rootItems={rootItems}
-                            loadChildItems={DataStore.getSitemapItems.bind(DataStore) }
-                            onSelectionChanged={this._onTocSelectionChanged.bind(this) }
-                            error={tocError}/>
-                        <Page
-                            showActivityIndicator={isPageLoading}
-                            content={content}
-                            title={title ? title : (selectedTocItem ? selectedTocItem.Title : null) }
-                            error={error}/>
-                    </section>
-                </div>
+                <section className={"sdl-dita-delivery-publication-content"}>
+                    <Toc
+                        rootItems={rootItems}
+                        loadChildItems={DataStore.getSitemapItems.bind(DataStore) }
+                        onSelectionChanged={this._onTocSelectionChanged.bind(this) }
+                        error={tocError}/>
+                    <Page
+                        showActivityIndicator={isPageLoading}
+                        content={content}
+                        title={title ? title : (selectedTocItem ? selectedTocItem.Title : null) }
+                        error={error}/>
+                </section>
             );
         }
 

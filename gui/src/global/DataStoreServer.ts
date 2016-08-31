@@ -5,6 +5,7 @@ module Sdl.DitaDelivery {
 
     import ISitemapItem = Server.Models.ISitemapItem;
     import IPageInfo = Sdl.DitaDelivery.Models.IPageInfo;
+    import IPublication = Server.Models.IPublication;
 
     /**
      * Data store for the server.
@@ -13,6 +14,14 @@ module Sdl.DitaDelivery {
      * @class DataStore
      */
     export class DataStoreServer implements IDataStore {
+
+        private _mockDataPublications: {
+            error: string;
+            publications: IPublication[];
+        } = {
+            error: null,
+            publications: []
+        };
 
         private _mockDataPage: {
             error: string;
@@ -32,6 +41,16 @@ module Sdl.DitaDelivery {
             error: null,
             children: []
         };
+
+        /**
+         * Get the list of publications
+         *
+         * @param {(error: string, publications?: IPublication[]) => void} callback Returns the items
+         */
+        public getPublications(callback: (error: string, publications?: IPublication[]) => void): void {
+            const { error, publications } = this._mockDataPublications;
+            callback(error, publications);
+        }
 
         /**
          * Get the root objects of the sitemap

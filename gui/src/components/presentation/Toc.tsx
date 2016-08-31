@@ -1,5 +1,5 @@
-/// <reference path="../interfaces/ServerModels.d.ts" />
-/// <reference path="../interfaces/Routing.d.ts" />
+/// <reference path="../../interfaces/ServerModels.d.ts" />
+/// <reference path="../../interfaces/Routing.d.ts" />
 
 module Sdl.DitaDelivery.Components {
 

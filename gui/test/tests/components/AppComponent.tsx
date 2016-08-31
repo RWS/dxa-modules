@@ -1,4 +1,4 @@
-/// <reference path="../../../src/components/App.tsx" />
+/// <reference path="../../../src/components/container/App.tsx" />
 
 module Sdl.DitaDelivery.Tests {
 
@@ -15,6 +15,7 @@ module Sdl.DitaDelivery.Tests {
                 beforeAll(() => {
                     Sdl.DitaDelivery.DataStore = dataStoreMock;
                     Sdl.DitaDelivery.Localization = new LocalizationGlobalize();
+                    Sdl.DitaDelivery.Routing = new RoutingClient();
                 });
 
                 afterEach(() => {

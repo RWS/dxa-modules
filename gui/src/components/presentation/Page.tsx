@@ -1,4 +1,4 @@
-/// <reference path="../interfaces/ServerModels.d.ts" />
+/// <reference path="../../interfaces/ServerModels.d.ts" />
 
 module Sdl.DitaDelivery.Components {
 

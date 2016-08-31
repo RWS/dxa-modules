@@ -1,6 +1,7 @@
 declare module Sdl.DitaDelivery {
     import ISitemapItem = Server.Models.ISitemapItem;
     import IPageInfo = Sdl.DitaDelivery.Models.IPageInfo;
+    import IPublication = Server.Models.IPublication;
 
     /**
      * Data Store instance
@@ -14,11 +15,18 @@ declare module Sdl.DitaDelivery {
     interface IDataStore {
 
         /**
+         * Get the list of publications
+         *
+         * @param {(error: string, publications?: IPublication[]) => void} callback Returns the items
+         */
+        getPublications(callback: (error: string, publications?: IPublication[]) => void): void;
+
+        /**
          * Get the root objects of the sitemap
          *
          * @param {(error: string, children: ISitemapItem[]) => void} callback Returns the items
          */
-        getSitemapRoot(callback: (error: string, children?: ISitemapItem[]) => void): void;
+        getSitemapRoot(callback: (error: string, items?: ISitemapItem[]) => void): void;
 
         /**
          * Get the site map items for a parent
@@ -26,7 +34,7 @@ declare module Sdl.DitaDelivery {
          * @param {string} parentId The parent id
          * @param {(error: string, children?: ISitemapItem[]) => void} callback Returns the items
          */
-        getSitemapItems(parentId: string, callback: (error: string, children?: ISitemapItem[]) => void): void;
+        getSitemapItems(parentId: string, callback: (error: string, items?: ISitemapItem[]) => void): void;
 
         /**
          * Get page information

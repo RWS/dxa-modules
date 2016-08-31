@@ -2,27 +2,16 @@
 <configuration
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../node_modules/sdl-catalina/Common/Library/Core/configuration.xsd">
     <include src="controls/_config.xml" />
+    <include src="container/_config.xml" />
+    <include src="presentation/_config.xml" />
+
     <!-- Main resources -->
     <resourceGroups>
         <resourceGroup name="Sdl.DitaDelivery.Components">
-            <files>
-                <file name="App.js" />
-                <file name="Toc.js" />
-                <file name="Page.js" />
-            </files>
             <dependencies>
-                <dependency name="ReactComponents.Components" />
-                <dependency name="Sdl.DitaDelivery.Components.Styles" />
-                <dependency name="Sdl.DitaDelivery.Components.Controls" />
-                <dependency name="Sdl.DitaDelivery.DitaOt.Styles" />
+                <dependency name="Sdl.DitaDelivery.Components.Container" />
+                <dependency name="Sdl.DitaDelivery.Components.Presentation" />
             </dependencies>
-        </resourceGroup>
-        <resourceGroup name="Sdl.DitaDelivery.Components.Styles">
-            <files>
-                <file name="styles/App.css"/>
-                <file name="styles/Toc.css"/>
-                <file name="styles/Page.css"/>
-            </files>
         </resourceGroup>
     </resourceGroups>
 </configuration>

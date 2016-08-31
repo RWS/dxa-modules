@@ -65,7 +65,6 @@ module Sdl.DitaDelivery {
          * @param {string} title Sitemap title
          */
         public setSitemapItem(id: string, title: string): void {
-            /*
             const publicationUrl = "pub/123/";
             const pathname = this.getAbsolutePath(
                 publicationUrl +
@@ -73,9 +72,9 @@ module Sdl.DitaDelivery {
                 encodeURIComponent(this._escapeTitle(title))
             );
 
-                        RoutingClient._history.push({
-                            pathname: pathname
-                        });*/
+            RoutingClient._history.push({
+                pathname: pathname
+            });
         }
 
         private _escapeTitle(title: string): string {

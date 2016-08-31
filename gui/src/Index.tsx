@@ -2,7 +2,7 @@
 /// <reference path="interfaces/DataStore.d.ts" />
 /// <reference path="interfaces/Localization.d.ts" />
 /// <reference path="interfaces/Routing.d.ts" />
-/// <reference path="components/App.tsx" />
+/// <reference path="components/container/App.tsx" />
 
 module Sdl.DitaDelivery {
     import App = Components.App;

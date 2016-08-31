@@ -1,10 +1,12 @@
 /// <reference path="../models/Page.ts" />
+/// <reference path="../models/Publications.ts" />
 /// <reference path="../models/Toc.ts" />
 
 module Sdl.DitaDelivery {
 
     import ISitemapItem = Server.Models.ISitemapItem;
     import IPageInfo = Sdl.DitaDelivery.Models.IPageInfo;
+    import IPublication = Server.Models.IPublication;
 
     /**
      * Data store, interacts with the models to fetch the required data.
@@ -13,6 +15,15 @@ module Sdl.DitaDelivery {
      * @class DataStore
      */
     export class DataStoreClient implements IDataStore {
+
+        /**
+         * Publications model
+         *
+         * @private
+         * @static
+         * @type {Models.Publications}
+         */
+        private static PublicationsModel: Models.Publications;
 
         /**
          * Table of content models
@@ -31,6 +42,30 @@ module Sdl.DitaDelivery {
          * @type {{ [pageId:string]: Models.Page }}
          */
         private static PageModels: { [pageId: string]: Models.Page };
+
+        /**
+         * Get the list of publications
+         *
+         * @param {(error: string, publications?: IPublication[]) => void} callback Returns the items
+         */
+        public getPublications(callback: (error: string, publications?: IPublication[]) => void): void {
+            const publication = this.getPublicationsModel();
+            const onLoad = () => {
+                publication.removeEventListener("load", onLoad);
+                callback(null, publication.getPublications());
+            };
+            const onLoadFailed = (event: SDL.Client.Event.Event) => {
+                publication.removeEventListener("loadfailed", onLoadFailed);
+                callback(event.data.error);
+            };
+            if (!publication.isLoaded()) {
+                publication.addEventListener("load", onLoad);
+                publication.addEventListener("loadfailed", onLoadFailed);
+                publication.load();
+            } else {
+                callback(null, publication.getPublications());
+            }
+        }
 
         /**
          * Get the root objects of the sitemap
@@ -109,6 +144,13 @@ module Sdl.DitaDelivery {
                 DataStoreClient.PageModels[pageId] = new Models.Page(pageId);
             }
             return DataStoreClient.PageModels[pageId];
+        }
+
+        private getPublicationsModel(): Models.Publications {
+            if (!DataStoreClient.PublicationsModel) {
+                DataStoreClient.PublicationsModel = new Models.Publications;
+            }
+            return DataStoreClient.PublicationsModel;
         }
 
     }

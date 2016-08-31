@@ -2,11 +2,20 @@
 module Sdl.DitaDelivery.Tests.Mocks {
     import ISitemapItem = Server.Models.ISitemapItem;
     import IPageInfo = Sdl.DitaDelivery.Models.IPageInfo;
+    import IPublication = Server.Models.IPublication;
 
     let fakeDelay = false;
     const DELAY = 100;
 
     export class DataStore implements IDataStore {
+
+        private _mockDataPublications: {
+            error: string;
+            publications: IPublication[];
+        } = {
+            error: null,
+            publications: []
+        };
 
         private _mockDataPage: {
             error: string;
@@ -26,6 +35,11 @@ module Sdl.DitaDelivery.Tests.Mocks {
             error: null,
             children: []
         };
+
+        public getPublications(callback: (error: string, publications?: IPublication[]) => void): void {
+            const { error, publications } = this._mockDataPublications;
+            callback(error, publications);
+        }
 
         public getSitemapRoot(callback: (error: string, children: ISitemapItem[]) => void): void {
             return this.getSitemapItems("root", callback);

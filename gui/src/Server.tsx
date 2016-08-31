@@ -3,7 +3,7 @@
 /// <reference path="interfaces/Localization.d.ts" />
 /// <reference path="global/LocalizationGlobalize.ts" />
 /// <reference path="global/DataStoreServer.ts" />
-/// <reference path="components/App.tsx" />
+/// <reference path="components/container/App.tsx" />
 
 import App = Sdl.DitaDelivery.Components.App;
 

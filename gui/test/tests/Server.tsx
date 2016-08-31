@@ -1,4 +1,4 @@
-/// <reference path="../../src/components/App.tsx" />
+/// <reference path="../../src/components/container/App.tsx" />
 /// <reference path="../../src/Server.tsx" />
 
 module Sdl.DitaDelivery.Tests {
