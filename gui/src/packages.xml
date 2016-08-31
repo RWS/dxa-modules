@@ -16,6 +16,7 @@
             <resourceGroups>
                 <resourceGroup name="Sdl.DitaDelivery.Components.Controls.Styles" />
                 <resourceGroup name="Sdl.DitaDelivery.Components.Styles" />
+                <resourceGroup name="Sdl.DitaDelivery.DitaOt.Styles" />
             </resourceGroups>
         </package>
         <package name="Sdl.DitaDelivery.Server">

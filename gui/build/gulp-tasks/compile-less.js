@@ -21,7 +21,8 @@ module.exports = function (buildOptions, gulp) {
         // Compile Less
         return gulp.src(
             [
-                buildOptions.sourcesPath + '**/*.less'
+                buildOptions.sourcesPath + '**/*.less',
+                '!' + buildOptions.sourcesPath + 'theming/**/*.less'
             ])
         .pipe(gulpLess())
         .pipe(gulpDebug({ title: 'Less output' }))
