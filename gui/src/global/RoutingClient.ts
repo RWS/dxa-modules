@@ -44,43 +44,34 @@ module Sdl.DitaDelivery {
         }
 
         /**
-         * Set the publication
+         * Set page url
          *
-         * @param {string} id Publication id
-         * @param {string} title Publication title
+         * @param {string} publicationId Publication id
+         * @param {string} publicationTitle Publication title
+         * @param {string} pageId Page id
+         * @param {string} pageTitle Page title
          */
-        public setPublication(id: string, title: string): void {
-            const pathname = this.getAbsolutePath(
-                encodeURIComponent(id) + "/"
-                + encodeURIComponent(this._escapeTitle(title)));
-            RoutingClient._history.push({
-                pathname: pathname
-            });
-        }
+        public setPageUrl(publicationId: string, publicationTitle: string,
+            pageId: string, pageTitle: string): void {
 
-        /**
-         * Set the sitemap item
-         *
-         * @param {string} id Sitemap item id
-         * @param {string} title Sitemap title
-         */
-        public setSitemapItem(id: string, title: string): void {
-            /*
-            const publicationUrl = "pub/123/";
             const pathname = this.getAbsolutePath(
-                publicationUrl +
-                encodeURIComponent(id) + "/" +
-                encodeURIComponent(this._escapeTitle(title))
+                encodeURIComponent(publicationId) + "/" +
+                encodeURIComponent(pageId) + "/" +
+                encodeURIComponent(this._escapeTitle(publicationTitle)) + "/" +
+                encodeURIComponent(this._escapeTitle(pageTitle))
             );
 
-            RoutingClient._history.push({
-                pathname: pathname
-            });
-            */
+            this._push(pathname);
         }
 
         private _escapeTitle(title: string): string {
             return title.replace(/\s/gi, "-");
+        }
+
+        private _push(pathname: string): void {
+            RoutingClient._history.push({
+                pathname: pathname
+            });
         }
     }
 

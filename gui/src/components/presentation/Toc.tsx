@@ -19,9 +19,9 @@ module Sdl.DitaDelivery.Components {
         /**
          * Root items, showed on initial render
          *
-         * @type {Server.Models.ISitemapItem[]}
+         * @type {ISitemapItem[]}
          */
-        rootItems: Server.Models.ISitemapItem[];
+        rootItems: ISitemapItem[];
         /**
          * Load child items for a specific item
          */
@@ -144,7 +144,8 @@ module Sdl.DitaDelivery.Components {
             if (!this._isUnmounted) {
                 const onSelectionChanged = this.props.onSelectionChanged;
                 const selectedItem = nodes.length > 0 ? nodes[0].sitemapItem : null;
-                Routing.setSitemapItem(selectedItem.Id, selectedItem.Title);
+                const { id, title } = { id: "ish:12345", title: "Publication Title"}; // TODO: get active publcation as prop
+                Routing.setPageUrl(id, title, selectedItem.Id, selectedItem.Title);
                 if (typeof onSelectionChanged === "function") {
                     onSelectionChanged(selectedItem);
                 }

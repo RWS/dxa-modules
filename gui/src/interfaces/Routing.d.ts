@@ -27,19 +27,14 @@ declare module Sdl.DitaDelivery {
         getAbsolutePath(path: string): string;
 
         /**
-         * Set the publication
+         * Set page url
          *
-         * @param {string} id Publication id
-         * @param {string} title Publication title
+         * @param {string} publicationId Publication id
+         * @param {string} publicationTitle Publication title
+         * @param {string} pageId Page id
+         * @param {string} pageTitle Page title
          */
-        setPublication(id: string, title: string): void;
-
-        /**
-         * Set the sitemap item
-         *
-         * @param {string} id Sitemap item id
-         * @param {string} title Sitemap title
-         */
-        setSitemapItem(id: string, title: string): void;
+        setPageUrl(publicationId: string, publicationTitle: string,
+            pageId: string, pageTitle: string): void;
     }
 }
