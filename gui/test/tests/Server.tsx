@@ -31,7 +31,7 @@ module Sdl.DitaDelivery.Tests {
                             <span>
                                 <span></span>
                             </span>
-                            <section className="content">
+                            <section className="sdl-dita-delivery-publication-content">
                                 <div className="sdl-dita-delivery-toc">
                                     <span>
                                         <div></div>
