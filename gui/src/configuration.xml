@@ -44,6 +44,7 @@
             </files>
             <dependencies>
                 <dependency name="Sdl.DitaDelivery.Components" />
+                <dependency name="Sdl.DitaDelivery.DataStoreServer" />
             </dependencies>
         </resourceGroup>
         <resourceGroup name="Sdl.DitaDelivery.DitaOt.Styles">

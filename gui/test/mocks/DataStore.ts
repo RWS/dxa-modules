@@ -4,6 +4,7 @@ module Sdl.DitaDelivery.Tests.Mocks {
     import IPageInfo = Sdl.DitaDelivery.Models.IPageInfo;
 
     let fakeDelay = false;
+    const DELAY = 100;
 
     export class DataStore implements IDataStore {
 
@@ -35,7 +36,7 @@ module Sdl.DitaDelivery.Tests.Mocks {
             if (fakeDelay) {
                 setTimeout(() => {
                     callback(error, children);
-                }, 500);
+                }, DELAY);
                 return;
             }
             callback(error, children);
@@ -46,7 +47,7 @@ module Sdl.DitaDelivery.Tests.Mocks {
             if (fakeDelay) {
                 setTimeout(() => {
                     callback(error, info);
-                }, 500);
+                }, DELAY);
                 return;
             }
             callback(error, info);

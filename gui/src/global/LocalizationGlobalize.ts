@@ -17,7 +17,6 @@ module Sdl.DitaDelivery {
         /**
          * Format a message
          *
-         * @static
          * @param {string} path Resource path
          * @param {string[]} [variables] Variables
          * @returns {string}

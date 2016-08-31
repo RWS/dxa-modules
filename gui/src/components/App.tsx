@@ -81,6 +81,7 @@ module Sdl.DitaDelivery.Components {
 
         private _page: IPage = {};
         private _toc: IToc = {};
+        private _isUnmounted: boolean = false;
 
         /**
          * Creates an instance of App.
@@ -91,7 +92,7 @@ module Sdl.DitaDelivery.Components {
             this.state = {
                 isTocLoading: true,
                 selectedTocItem: null,
-                isPageLoading: false
+                isPageLoading: true
             };
         }
 
@@ -99,14 +100,16 @@ module Sdl.DitaDelivery.Components {
          * Invoked once, both on the client and server, immediately before the initial rendering occurs.
          */
         public componentWillMount(): void {
-
             // Get the data for the Toc
             DataStore.getSitemapRoot((error, children) => {
-                const toc = this._toc;
-                toc.rootItems = children;
-                this.setState({
-                    isTocLoading: false
-                });
+                if (!this._isUnmounted) {
+                    const toc = this._toc;
+                    toc.rootItems = children;
+                    this.setState({
+                        isTocLoading: false,
+                        isPageLoading: Array.isArray(children) && children.length > 0
+                    });
+                }
             });
         }
 
@@ -132,7 +135,7 @@ module Sdl.DitaDelivery.Components {
          * @returns {JSX.Element}
          */
         public render(): JSX.Element {
-            const { isPageLoading } = this.state;
+            const { isPageLoading, selectedTocItem } = this.state;
             const { content, title, error} = this._page;
             const { rootItems } = this._toc;
             const formatMessage = Localization.formatMessage;
@@ -151,17 +154,25 @@ module Sdl.DitaDelivery.Components {
                         <Page
                             showActivityIndicator={isPageLoading}
                             content={content}
-                            title={title}
+                            title={title ? title : (selectedTocItem ? selectedTocItem.Title : null) }
                             error={error}/>
                     </section>
                 </div>
             );
         }
 
+        /**
+         * Component will unmount
+         */
+        public componentWillUnmount(): void {
+            this._isUnmounted = true;
+        }
+
         private _onTocSelectionChanged(sitemapItem: ISitemapItem): void {
             const page = this._page;
+            page.error = null;
             if (!sitemapItem.Url) {
-                page.title = sitemapItem.Title;
+                page.title = undefined;
                 page.content = undefined;
             }
             this.setState({

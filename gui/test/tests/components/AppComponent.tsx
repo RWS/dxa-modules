@@ -50,7 +50,10 @@ module Sdl.DitaDelivery.Tests {
                     this._renderComponent(target);
                     const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
                     expect(domNode).not.toBeNull();
-                    expect(domNode.querySelector(".sdl-activityindicator")).toBeNull("Activity indicator should not be rendered.");
+                    // Toc is ready
+                    expect(domNode.querySelector(".sdl-dita-delivery-toc .sdl-activityindicator")).toBeNull("Activity indicator should not be rendered.");
+                    // Page is still loading
+                    expect(domNode.querySelector(".sdl-dita-delivery-page .sdl-activityindicator")).not.toBeNull("Could not find activity indicator.");
                     const nodes = domNode.querySelectorAll(".sdl-treeview .content");
                     expect(nodes.length).toBe(1);
                     expect(nodes.item(0).textContent).toBe("First element");
@@ -103,12 +106,16 @@ module Sdl.DitaDelivery.Tests {
 
                     const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
                     expect(domNode).not.toBeNull();
-                    expect(domNode.querySelector(".sdl-activityindicator")).toBeNull("Activity indicator should not be rendered.");
+                    // Toc is ready
+                    expect(domNode.querySelector(".sdl-dita-delivery-toc .sdl-activityindicator")).toBeNull("Activity indicator should not be rendered.");
+                    // Page is still loading
+                    expect(domNode.querySelector(".sdl-dita-delivery-page .sdl-activityindicator")).not.toBeNull("Could not find activity indicator.");
                     // Click second element
                     (domNode.querySelectorAll(".sdl-treeview .content")[1] as HTMLDivElement).click();
 
                     // Treeview uses debouncing for node selection so a timeout is required
                     setTimeout((): void => {
+                        // All is loaded
                         expect(domNode.querySelector(".sdl-activityindicator")).toBeNull("Activity indicator should not be rendered.");
                         const pageTitleNode = domNode.querySelector(".page-title") as HTMLElement;
                         expect(pageTitleNode).not.toBeNull("Could not find page title.");

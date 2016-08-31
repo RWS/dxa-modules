@@ -2,7 +2,7 @@
 /// <reference path="interfaces/DataStore.d.ts" />
 /// <reference path="interfaces/Localization.d.ts" />
 /// <reference path="global/LocalizationGlobalize.ts" />
-/// <reference path="global/DataStoreClient.ts" />
+/// <reference path="global/DataStoreServer.ts" />
 /// <reference path="components/App.tsx" />
 
 import App = Sdl.DitaDelivery.Components.App;
@@ -11,8 +11,8 @@ module Sdl.DitaDelivery {
     /**
      * Set instances for data store / localization / routing
      */
-    DataStore = null;
-    Localization = null;
+    DataStore = new DataStoreServer();
+    Localization = new LocalizationGlobalize();
 }
 
 /**

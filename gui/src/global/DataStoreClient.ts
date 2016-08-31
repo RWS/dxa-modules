@@ -35,17 +35,15 @@ module Sdl.DitaDelivery {
         /**
          * Get the root objects of the sitemap
          *
-         * @static
          * @param {(error: string, children: ISitemapItem[]) => void} callback Returns the items
          */
-        public getSitemapRoot(callback: (error: string, children: ISitemapItem[]) => void): void {
+        public getSitemapRoot(callback: (error: string, children?: ISitemapItem[]) => void): void {
             this.getSitemapItems("root", callback);
         }
 
         /**
          * Get the site map items for a parent
          *
-         * @static
          * @param {string} parentId The parent id
          * @param {(error: string, children?: ISitemapItem[]) => void} callback Returns the items
          */
@@ -71,7 +69,6 @@ module Sdl.DitaDelivery {
         /**
          * Get page information
          *
-         * @static
          * @param {string} pageId The page id
          * @param {(error: string, info?: IPageInfo) => void} callback Returns the content
          */

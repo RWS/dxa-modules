@@ -10,6 +10,11 @@
                 <dependency name="Sdl.DitaDelivery.Models" />
             </dependencies>
         </resourceGroup>
+        <resourceGroup name="Sdl.DitaDelivery.DataStoreServer">
+            <files>
+                <file name="DataStoreServer.js" />
+            </files>
+        </resourceGroup>
         <resourceGroup name="Sdl.DitaDelivery.LocalizationGlobalize">
             <files>
                 <file name="LocalizationGlobalize.js" />

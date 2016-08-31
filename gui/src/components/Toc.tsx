@@ -39,7 +39,7 @@ module Sdl.DitaDelivery.Components {
      */
     export class Toc extends React.Component<ITocProps, {}> {
 
-        private _isDisposed: boolean = false;
+        private _isUnmounted: boolean = false;
 
         /**
          * Render the component
@@ -66,7 +66,7 @@ module Sdl.DitaDelivery.Components {
          * Component will unmount
          */
         public componentWillUnmount(): void {
-            this._isDisposed = true;
+            this._isUnmounted = true;
         }
 
         private _loadChildNodes(node: ITreeViewNode, callback: (childNodes: ITreeViewNode[]) => void): void {
@@ -92,7 +92,7 @@ module Sdl.DitaDelivery.Components {
         }
 
         private _onSelectionChanged(nodes: ITreeViewNode[]): void {
-            if (!this._isDisposed) {
+            if (!this._isUnmounted) {
                 const onSelectionChanged = this.props.onSelectionChanged;
                 if (typeof onSelectionChanged === "function") {
                     onSelectionChanged(nodes.length > 0 ? nodes[0].sitemapItem : null);
