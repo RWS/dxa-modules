@@ -23,14 +23,11 @@
                 <dependency name="SDL.Client.Libraries.SDL.Globalize" />
             </dependencies>
         </resourceGroup>
-        <resourceGroup name="Sdl.DitaDelivery.Routing">
+        <resourceGroup name="Sdl.DitaDelivery.RoutingClient">
             <files>
                 <file name="../lib/history/history.js" />
-                <file name="Routing.js" />
+                <file name="RoutingClient.js" />
             </files>
-            <dependencies>
-                <dependency name="Sdl.DitaDelivery.Components" />
-            </dependencies>
         </resourceGroup>
     </resourceGroups>
 </configuration>

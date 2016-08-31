@@ -3,6 +3,7 @@
 module Sdl.DitaDelivery.Components {
 
     import ActivityIndicator = SDL.ReactComponents.ActivityIndicator;
+    import ValidationMessage = SDL.ReactComponents.ValidationMessage;
     import TreeView = SDL.ReactComponents.TreeView;
     import IBaseTreeViewNode = SDL.UI.Controls.ITreeViewNode;
     import ISitemapItem = Server.Models.ISitemapItem;
@@ -28,6 +29,12 @@ module Sdl.DitaDelivery.Components {
          * Triggered whenever the selected item in the toc changes
          */
         onSelectionChanged?: (sitemapItem: ISitemapItem) => void;
+        /**
+         * An error prevented the toc from rendering
+         *
+         * @type {string}
+         */
+        error?: string;
     }
 
     interface ITreeViewNode extends IBaseTreeViewNode {
@@ -51,12 +58,15 @@ module Sdl.DitaDelivery.Components {
 
             return (
                 <div className={"sdl-dita-delivery-toc"}>
-                    { props.rootItems ?
-                        <TreeView
-                            rootNodes={this._convertToTreeViewNodes(props.rootItems) }
-                            useCommonUILibraryScrollView={false}
-                            onSelectionChanged={this._onSelectionChanged.bind(this) }/>
-                        : <ActivityIndicator/>
+                    { props.error ?
+                        <ValidationMessage messageType={SDL.UI.Controls.ValidationMessageType.Error} message={props.error} /> :
+                        props.rootItems ?
+                            <TreeView
+                                rootNodes={this._convertToTreeViewNodes(props.rootItems) }
+                                useCommonUILibraryScrollView={false}
+                                onSelectionChanged={this._onSelectionChanged.bind(this) }/>
+                            : <ActivityIndicator/>
+
                     }
                 </div>
             );

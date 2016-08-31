@@ -1,4 +1,5 @@
 /// <reference path="../../typings/index.d.ts" />
+/// <reference path="../interfaces/Routing.d.ts" />
 
 module Sdl.DitaDelivery {
     const HistoryModule = (<Window & { History: HistoryModule.Module }>window).History;
@@ -9,18 +10,17 @@ module Sdl.DitaDelivery {
      * @export
      * @class Routing
      */
-    export class Routing {
+    export class RoutingClient implements IRouting {
 
         private static _history: HistoryModule.History = HistoryModule.createMemoryHistory();
 
         /**
          * Get the current location
          *
-         * @static
-         * @returns {HistoryModule.Location}
+         * @returns {string}
          */
-        public static getCurrentLocation(): HistoryModule.Location {
-            return Routing._history.getCurrentLocation();
+        public getCurrentLocation(): string {
+            return RoutingClient._history.getCurrentLocation().search;
         }
     }
 

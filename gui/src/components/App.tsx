@@ -9,15 +9,6 @@ module Sdl.DitaDelivery.Components {
     import IPageInfo = Models.IPageInfo;
 
     /**
-     * App component props
-     *
-     * @export
-     * @interface IAppProps
-     */
-    export interface IAppProps {
-    }
-
-    /**
      * App component state
      *
      * @export
@@ -33,7 +24,7 @@ module Sdl.DitaDelivery.Components {
         /**
          * Current selected item in the TOC
          *
-         * @type {string}
+         * @type {ISitemapItem}
          */
         selectedTocItem?: ISitemapItem;
         /**
@@ -67,6 +58,12 @@ module Sdl.DitaDelivery.Components {
 
     interface IToc {
         /**
+         * An error prevented the toc from rendering
+         *
+         * @type {string}
+         */
+        error?: string;
+        /**
          * Root items
          *
          * @type {ISitemapItem[]}
@@ -77,7 +74,7 @@ module Sdl.DitaDelivery.Components {
     /**
      * Main component for the application
      */
-    export class App extends React.Component<IAppProps, IAppState> {
+    export class App extends React.Component<{}, IAppState> {
 
         private _page: IPage = {};
         private _toc: IToc = {};
@@ -104,6 +101,16 @@ module Sdl.DitaDelivery.Components {
             DataStore.getSitemapRoot((error, children) => {
                 if (!this._isUnmounted) {
                     const toc = this._toc;
+
+                    if (error) {
+                        toc.error = error;
+                        this.setState({
+                            isTocLoading: false,
+                            isPageLoading: false
+                        });
+                        return;
+                    }
+
                     toc.rootItems = children;
                     this.setState({
                         isTocLoading: false,
@@ -117,10 +124,10 @@ module Sdl.DitaDelivery.Components {
          * Invoked immediately before rendering when new props or state are being received.
          * This method is not called for the initial render.
          *
-         * @param {IAppProps} nextProps Next props
+         * @param {{}} nextProps Next props
          * @param {IAppState} nextState Next state
          */
-        public componentWillUpdate(nextProps: IAppProps, nextState: IAppState): void {
+        public componentWillUpdate(nextProps: {}, nextState: IAppState): void {
             const { selectedTocItem, isPageLoading } = this.state;
             const currentUrl = selectedTocItem ? selectedTocItem.Url : null;
             const nextUrl = nextState.selectedTocItem ? nextState.selectedTocItem.Url : null;
@@ -138,6 +145,7 @@ module Sdl.DitaDelivery.Components {
             const { isPageLoading, selectedTocItem } = this.state;
             const { content, title, error} = this._page;
             const { rootItems } = this._toc;
+            const tocError = this._toc.error;
             const formatMessage = Localization.formatMessage;
             return (
                 <div className={"sdl-dita-delivery-app"}>
@@ -150,7 +158,8 @@ module Sdl.DitaDelivery.Components {
                         <Toc
                             rootItems={rootItems}
                             loadChildItems={DataStore.getSitemapItems.bind(DataStore) }
-                            onSelectionChanged={this._onTocSelectionChanged.bind(this) }/>
+                            onSelectionChanged={this._onTocSelectionChanged.bind(this) }
+                            error={tocError}/>
                         <Page
                             showActivityIndicator={isPageLoading}
                             content={content}
@@ -172,8 +181,8 @@ module Sdl.DitaDelivery.Components {
             const page = this._page;
             page.error = null;
             if (!sitemapItem.Url) {
-                page.title = undefined;
-                page.content = undefined;
+                page.title = null;
+                page.content = null;
             }
             this.setState({
                 selectedTocItem: sitemapItem,

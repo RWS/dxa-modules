@@ -1,6 +1,7 @@
 /// <reference path="../typings/index.d.ts" />
 /// <reference path="interfaces/DataStore.d.ts" />
 /// <reference path="interfaces/Localization.d.ts" />
+/// <reference path="interfaces/Routing.d.ts" />
 /// <reference path="components/App.tsx" />
 
 module Sdl.DitaDelivery {
@@ -11,6 +12,7 @@ module Sdl.DitaDelivery {
      */
     DataStore = new DataStoreClient();
     Localization = new LocalizationGlobalize();
+    Routing = new RoutingClient();
 
     const mainElement = document.getElementById("main-view-target");
     ReactDOM.render(<App />, mainElement);
