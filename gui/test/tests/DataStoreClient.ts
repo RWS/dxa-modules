@@ -1,13 +1,12 @@
 /// <reference path="../../src/components/App.tsx" />
-/// <reference path="../../src/DataStore.ts" />
+/// <reference path="../../src/global/DataStoreClient.ts" />
 
 module Sdl.DitaDelivery.Tests {
 
-    import DataStore = Sdl.DitaDelivery.DataStore;
-
-    class DataStoreTests extends SDL.Client.Test.TestBase {
+    class DataStoreClientTests extends SDL.Client.Test.TestBase {
 
         public runTests(): void {
+            const DataStore = new DataStoreClient();
 
             describe(`Data Store tests (Toc).`, (): void => {
 
@@ -96,5 +95,5 @@ module Sdl.DitaDelivery.Tests {
         }
     }
 
-    new DataStoreTests().runTests();
+    new DataStoreClientTests().runTests();
 }

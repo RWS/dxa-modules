@@ -5,20 +5,22 @@
     This to make sure the pages configuration for karma is set first.-->
     <include src="../SDL/Test/configuration.xml" />
     <include src="../src/configuration.xml"/>
+    <include src="mocks//_config.xml"/>
     <resourceGroups>
         <resourceGroup name="Sdl.DitaDelivery.Test">
             <files>
                 <file name="tests/components/AppComponent.js" />
                 <file name="tests/components/PageComponent.js" />
                 <file name="tests/components/TocComponent.js" />
-                <file name="tests/DataStore.js"/>
+                <file name="tests/DataStoreClient.js"/>
                 <file name="tests/Server.js"/>
             </files>
             <dependencies>
                 <dependency name="SDL.Client.Test.TestBase"/>
                 <dependency name="SDL.Client.Test.Utilities"/>
+                <dependency name="Sdl.DitaDelivery.Tests.Mocks"/>
                 <dependency name="Sdl.DitaDelivery.Components"/>
-                <dependency name="Sdl.DitaDelivery.DataStore" />
+                <dependency name="Sdl.DitaDelivery.DataStoreClient" />
                 <dependency name="Sdl.DitaDelivery.Resources"/>
                 <dependency name="Sdl.DitaDelivery.Server"/>
             </dependencies>

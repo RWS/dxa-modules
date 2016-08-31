@@ -2,6 +2,7 @@
 
 module Sdl.DitaDelivery.Components {
 
+    import ActivityIndicator = SDL.ReactComponents.ActivityIndicator;
     import TreeView = SDL.ReactComponents.TreeView;
     import IBaseTreeViewNode = SDL.UI.Controls.ITreeViewNode;
     import ISitemapItem = Server.Models.ISitemapItem;
@@ -50,10 +51,13 @@ module Sdl.DitaDelivery.Components {
 
             return (
                 <div className={"sdl-dita-delivery-toc"}>
-                    <TreeView
-                        rootNodes={this._convertToTreeViewNodes(props.rootItems) }
-                        useCommonUILibraryScrollView={false}
-                        onSelectionChanged={this._onSelectionChanged.bind(this) }/>
+                    { props.rootItems ?
+                        <TreeView
+                            rootNodes={this._convertToTreeViewNodes(props.rootItems) }
+                            useCommonUILibraryScrollView={false}
+                            onSelectionChanged={this._onSelectionChanged.bind(this) }/>
+                        : <ActivityIndicator/>
+                    }
                 </div>
             );
         }

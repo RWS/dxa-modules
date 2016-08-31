@@ -1,5 +1,5 @@
-/// <reference path="models/Page.ts" />
-/// <reference path="models/Toc.ts" />
+/// <reference path="../models/Page.ts" />
+/// <reference path="../models/Toc.ts" />
 
 module Sdl.DitaDelivery {
 
@@ -12,7 +12,7 @@ module Sdl.DitaDelivery {
      * @export
      * @class DataStore
      */
-    export class DataStore {
+    export class DataStoreClient implements IDataStore {
 
         /**
          * Table of content models
@@ -21,7 +21,7 @@ module Sdl.DitaDelivery {
          * @static
          * @type {{ [parentId:string]: Models.Toc }}
          */
-        private static TocModels: { [parentId: string]: Models.Toc };
+        private TocModels: { [parentId: string]: Models.Toc };
 
         /**
          * Page models
@@ -30,7 +30,7 @@ module Sdl.DitaDelivery {
          * @static
          * @type {{ [pageId:string]: Models.Page }}
          */
-        private static PageModels: { [pageId: string]: Models.Page };
+        private PageModels: { [pageId: string]: Models.Page };
 
         /**
          * Get the root objects of the sitemap
@@ -38,7 +38,7 @@ module Sdl.DitaDelivery {
          * @static
          * @param {(error: string, children: ISitemapItem[]) => void} callback Returns the items
          */
-        public static getSitemapRoot(callback: (error: string, children: ISitemapItem[]) => void): void {
+        public getSitemapRoot(callback: (error: string, children: ISitemapItem[]) => void): void {
             this.getSitemapItems("root", callback);
         }
 
@@ -49,8 +49,8 @@ module Sdl.DitaDelivery {
          * @param {string} parentId The parent id
          * @param {(error: string, children?: ISitemapItem[]) => void} callback Returns the items
          */
-        public static getSitemapItems(parentId: string, callback: (error: string, children?: ISitemapItem[]) => void): void {
-            const toc = DataStore.getTocModel(parentId);
+        public getSitemapItems(parentId: string, callback: (error: string, children?: ISitemapItem[]) => void): void {
+            const toc = this.getTocModel(parentId);
             const onLoad = () => {
                 toc.removeEventListener("load", onLoad);
                 callback(null, toc.getSitemapItems());
@@ -75,8 +75,8 @@ module Sdl.DitaDelivery {
          * @param {string} pageId The page id
          * @param {(error: string, info?: IPageInfo) => void} callback Returns the content
          */
-        public static getPageInfo(pageId: string, callback: (error: string, info?: IPageInfo) => void): void {
-            const page = DataStore.getPageModel(pageId);
+        public getPageInfo(pageId: string, callback: (error: string, info?: IPageInfo) => void): void {
+            const page = this.getPageModel(pageId);
             const onLoad = () => {
                 page.removeEventListener("load", onLoad);
                 callback(null, page.getPageInfo());
@@ -94,24 +94,24 @@ module Sdl.DitaDelivery {
             }
         }
 
-        private static getTocModel(parentId: string): Models.Toc {
-            if (!DataStore.TocModels) {
-                DataStore.TocModels = {};
+        private getTocModel(parentId: string): Models.Toc {
+            if (!this.TocModels) {
+                this.TocModels = {};
             }
-            if (!DataStore.TocModels[parentId]) {
-                DataStore.TocModels[parentId] = new Models.Toc(parentId);
+            if (!this.TocModels[parentId]) {
+                this.TocModels[parentId] = new Models.Toc(parentId);
             }
-            return DataStore.TocModels[parentId];
+            return this.TocModels[parentId];
         }
 
-        private static getPageModel(pageId: string): Models.Page {
-            if (!DataStore.PageModels) {
-                DataStore.PageModels = {};
+        private getPageModel(pageId: string): Models.Page {
+            if (!this.PageModels) {
+                this.PageModels = {};
             }
-            if (!DataStore.PageModels[pageId]) {
-                DataStore.PageModels[pageId] = new Models.Page(pageId);
+            if (!this.PageModels[pageId]) {
+                this.PageModels[pageId] = new Models.Page(pageId);
             }
-            return DataStore.PageModels[pageId];
+            return this.PageModels[pageId];
         }
 
     }

@@ -1,4 +1,4 @@
-/// <reference path="../typings/index.d.ts" />
+/// <reference path="../../typings/index.d.ts" />
 
 module Sdl.DitaDelivery {
     const HistoryModule = (<Window & { History: HistoryModule.Module }>window).History;
@@ -11,11 +11,7 @@ module Sdl.DitaDelivery {
      */
     export class Routing {
 
-        private static _history: HistoryModule.History & {
-            getCurrentLocation: () => HistoryModule.Location
-        } = HistoryModule.createMemoryHistory() as HistoryModule.History & {
-            getCurrentLocation: () => HistoryModule.Location
-        };
+        private static _history: HistoryModule.History = HistoryModule.createMemoryHistory();
 
         /**
          * Get the current location

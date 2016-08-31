@@ -4,7 +4,6 @@ module Sdl.DitaDelivery.Tests {
 
     import App = Components.App;
     import IAppProps = Components.IAppProps;
-    import ILocalization = Components.ILocalization;
 
     class AppComponent extends SDL.Client.Test.TestBase {
 
@@ -12,9 +11,6 @@ module Sdl.DitaDelivery.Tests {
 
             describe(`App component tests.`, (): void => {
                 const target = super.createTargetElement();
-                const localization: ILocalization = {
-                    formatMessage: (path, variables) => SDL.Globalize.formatMessage(path, variables)
-                };
 
                 afterEach(() => {
                     const domNode = ReactDOM.findDOMNode(target);
@@ -26,7 +22,7 @@ module Sdl.DitaDelivery.Tests {
                 });
 
                 it("show loading indicator on initial render", (): void => {
-                    this._renderComponent({ localization: localization }, target);
+                    this._renderComponent({}, target);
                     const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
                     expect(domNode).not.toBeNull();
                     expect(domNode.querySelector(".sdl-activityindicator")).not.toBeNull("Could not find activity indicator.");
@@ -34,7 +30,7 @@ module Sdl.DitaDelivery.Tests {
 
                 it("shows toc", (): void => {
                     this._renderComponent({
-                        localization: localization, toc: {
+                        toc: {
                             rootItems: [
                                 {
                                     Id: "123",
@@ -58,21 +54,23 @@ module Sdl.DitaDelivery.Tests {
                 it("updates page content when selected site map item changes", (): void => {
                     const pageContent = "<div>Page content!</div>";
                     const appComponent = this._renderComponent({
-                        localization: localization, toc: {
+                        toc: {
                             rootItems: [],
                             loadChildItems: null
                         },
-                        getPageInfo: (pageId, callback): void => {
+                        getPageInfo: (pageId: string, callback: Function): void => {
                             callback(null, { content: pageContent, title: "Title!" });
                         }
                     }, target);
                     appComponent.setState({
-                        selectedSiteMapItem: {
-                            Id: "123",
-                            IsAbstract: false,
-                            IsLeaf: true,
-                            Title: "Some page",
-                            Url: "page"
+                        toc: {
+                            selectedItem: {
+                                Id: "123",
+                                IsAbstract: false,
+                                IsLeaf: true,
+                                Title: "Some page",
+                                Url: "page"
+                            }
                         }
                     });
                     const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
@@ -89,7 +87,7 @@ module Sdl.DitaDelivery.Tests {
 
                 it("updates page content when item is selected from toc", (done: () => void): void => {
                     this._renderComponent({
-                        localization: localization, toc: {
+                        toc: {
                             rootItems: [
                                 {
                                     Id: "1",
@@ -129,18 +127,20 @@ module Sdl.DitaDelivery.Tests {
                 it("updates page content with title when a site map item without url is selected", (): void => {
                     const title = "Some page";
                     const appComponent = this._renderComponent({
-                        localization: localization, toc: {
+                        toc: {
                             rootItems: [],
                             loadChildItems: null
                         }
                     }, target);
                     appComponent.setState({
-                        selectedSiteMapItem: {
-                            Id: "12345",
-                            IsAbstract: true,
-                            IsLeaf: true,
-                            Title: title,
-                            Url: null
+                        toc: {
+                            selectedItem: {
+                                Id: "12345",
+                                IsAbstract: true,
+                                IsLeaf: true,
+                                Title: title,
+                                Url: null
+                            }
                         },
                         page: {
                             title: title
@@ -156,7 +156,6 @@ module Sdl.DitaDelivery.Tests {
 
                 it("shows an error message when page info fails to load", (done: () => void): void => {
                     this._renderComponent({
-                        localization: localization,
                         toc: {
                             rootItems: [{
                                 Id: "123456",
@@ -167,7 +166,7 @@ module Sdl.DitaDelivery.Tests {
                             }],
                             loadChildItems: null
                         },
-                        getPageInfo: (pageId, callback): void => {
+                        getPageInfo: (pageId: string, callback: Function): void => {
                             callback("Page failed to load!");
                         }
                     }, target);

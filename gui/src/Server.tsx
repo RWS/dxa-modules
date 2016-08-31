@@ -1,15 +1,19 @@
 /// <reference path="../typings/index.d.ts" />
+/// <reference path="interfaces/DataStore.d.ts" />
+/// <reference path="interfaces/Localization.d.ts" />
+/// <reference path="global/LocalizationGlobalize.ts" />
+/// <reference path="global/DataStoreClient.ts" />
 /// <reference path="components/App.tsx" />
 
 import App = Sdl.DitaDelivery.Components.App;
 
-const appProps: Sdl.DitaDelivery.Components.IAppProps = {
-    localization: {
-        formatMessage: (path, variables) => {
-            return path;
-        }
-    }
-};
+module Sdl.DitaDelivery {
+    /**
+     * Set instances for data store / localization / routing
+     */
+    DataStore = new DataStoreClient();
+    Localization = new LocalizationGlobalize();
+}
 
 /**
  * Render the application to a string.
@@ -19,5 +23,5 @@ const appProps: Sdl.DitaDelivery.Components.IAppProps = {
  */
 // tslint:disable-next-line:no-unused-variable
 function renderToString(path: string): string {
-    return ReactDOMServer.renderToString(<App {...appProps}/>);
+    return ReactDOMServer.renderToString(<App />);
 };

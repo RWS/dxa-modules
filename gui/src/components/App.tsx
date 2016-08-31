@@ -1,12 +1,12 @@
 /// <reference path="Toc.tsx" />
 /// <reference path="Page.tsx" />
+/// <reference path="../interfaces/ServerModels.d.ts" />
 
 module Sdl.DitaDelivery.Components {
 
-    import ActivityIndicator = SDL.ReactComponents.ActivityIndicator;
     import TopBar = SDL.ReactComponents.TopBar;
     import ISitemapItem = Server.Models.ISitemapItem;
-    import IPageInfo = Sdl.DitaDelivery.Models.IPageInfo;
+    import IPageInfo = Models.IPageInfo;
 
     /**
      * App component props
@@ -15,42 +15,6 @@ module Sdl.DitaDelivery.Components {
      * @interface IAppProps
      */
     export interface IAppProps {
-        /**
-         * Localization
-         */
-        localization: ILocalization;
-        /**
-         * Localization
-         */
-        routing?: IRouting;
-        /**
-         * Table of contents
-         */
-        toc?: ITocProps;
-        /**
-         * Get page info for a specific page
-         */
-        getPageInfo?: (pageId: string, callback: (error: string, info?: IPageInfo) => void) => void;
-    }
-
-    /**
-     * Localization
-     */
-    export interface ILocalization {
-        /**
-         * Give the message for a resource id
-         */
-        formatMessage: (path: string, variables?: string[]) => string;
-    }
-
-    /**
-     * Routing
-     */
-    export interface IRouting {
-        /**
-         * Get the current location
-         */
-        getCurrentLocation: () => string;
     }
 
     /**
@@ -60,12 +24,26 @@ module Sdl.DitaDelivery.Components {
      * @interface IAppState
      */
     export interface IAppState {
-        /**
-         * Current selected sitemap item in the TOC
-         *
-         * @type {string}
-         */
-        selectedSiteMapItem?: ISitemapItem;
+        toc?: {
+            /**
+             * Toc is loading
+             *
+             * @type {boolean}
+             */
+            isLoading?: boolean;
+            /**
+             * Current selected item in the TOC
+             *
+             * @type {string}
+             */
+            selectedItem?: ISitemapItem;
+            /**
+             * Root items
+             *
+             * @type {ISitemapItem[]}
+             */
+            rootItems?: ISitemapItem[];
+        };
         /**
          * Page state
          */
@@ -109,7 +87,11 @@ module Sdl.DitaDelivery.Components {
         constructor() {
             super();
             this.state = {
-                selectedSiteMapItem: null,
+                toc: {
+                    isLoading: true,
+                    selectedItem: null,
+                    rootItems: null
+                },
                 page: {
                     content: null,
                     title: null,
@@ -117,6 +99,15 @@ module Sdl.DitaDelivery.Components {
                     isLoading: false
                 }
             };
+
+            DataStore.getSitemapRoot((error, children) => {
+                this.setState({
+                    toc: {
+                        isLoading: false,
+                        rootItems: children
+                    }
+                });
+            });
         }
 
         /**
@@ -140,11 +131,11 @@ module Sdl.DitaDelivery.Components {
          * @param {IAppState} nextState Next state
          */
         public componentWillUpdate(nextProps: IAppProps, nextState: IAppState): void {
-            const state = this.state;
-            const currentUrl = state.selectedSiteMapItem ? state.selectedSiteMapItem.Url : null;
-            const nextUrl = nextState.selectedSiteMapItem ? nextState.selectedSiteMapItem.Url : null;
-            if (nextUrl && (state.page.isLoading || currentUrl !== nextUrl)) {
-                nextProps.getPageInfo(nextUrl, this._onPageContentRetrieved.bind(this));
+            const { toc, page } = this.state;
+            const currentUrl = toc.selectedItem ? toc.selectedItem.Url : null;
+            const nextUrl = nextState.toc ? nextState.toc.selectedItem.Url : null;
+            if (nextUrl && (page.isLoading || currentUrl !== nextUrl)) {
+                DataStore.getPageInfo(nextUrl, this._onPageContentRetrieved.bind(this));
             }
         }
 
@@ -154,34 +145,35 @@ module Sdl.DitaDelivery.Components {
          * @returns {JSX.Element}
          */
         public render(): JSX.Element {
-            const props = this.props;
-            const state = this.state;
-            const formatMessage = props.localization.formatMessage;
-            if (props.toc) {
-                return (
-                    <div className={"sdl-dita-delivery-app"}>
-                        <TopBar title={formatMessage("components.app.title") } buttons={{
-                            user: {
-                                isPicture: true
-                            }
-                        }}/>
-                        <section className={"content"}>
-                            <Toc {...props.toc} onSelectionChanged={this._onTocSelectionChanged.bind(this) }/>
-                            <Page showActivityIndicator={state.page.isLoading}
-                                content={state.page.content}
-                                title={state.page.title}
-                                error={state.page.error}/>
-                        </section>
-                    </div>
-                );
-            } else {
-                return (<ActivityIndicator text={formatMessage("components.app.loading") }/>);
-            }
+            const { page, toc } = this.state;
+            const { content, title, error, isLoading } = page;
+            const formatMessage = Localization.formatMessage;
+            return (
+                <div className={"sdl-dita-delivery-app"}>
+                    <TopBar title={formatMessage("components.app.title") } buttons={{
+                        user: {
+                            isPicture: true
+                        }
+                    }}/>
+                    <section className={"content"}>
+                        <Toc {...toc}
+                            loadChildItems={DataStore.getSitemapItems}
+                            onSelectionChanged={this._onTocSelectionChanged.bind(this) }/>
+                        <Page
+                            showActivityIndicator={isLoading}
+                            content={content}
+                            title={title}
+                            error={error}/>
+                    </section>
+                </div>
+            );
         }
 
         private _onTocSelectionChanged(sitemapItem: ISitemapItem): void {
             this.setState({
-                selectedSiteMapItem: sitemapItem,
+                toc: {
+                    selectedItem: sitemapItem
+                },
                 page: {
                     isLoading: sitemapItem.Url ? true : false,
                     title: !sitemapItem.Url ? sitemapItem.Title : undefined
@@ -202,7 +194,7 @@ module Sdl.DitaDelivery.Components {
             this.setState({
                 page: {
                     content: pageInfo.content,
-                    title: pageInfo.title ? pageInfo.title : this.state.selectedSiteMapItem.Title,
+                    title: pageInfo.title ? pageInfo.title : this.state.toc.selectedItem.Title,
                     isLoading: false
                 }
             });
