@@ -24,61 +24,63 @@ module Sdl.DitaDelivery.Components {
      * @interface IAppState
      */
     export interface IAppState {
-        toc?: {
-            /**
-             * Toc is loading
-             *
-             * @type {boolean}
-             */
-            isLoading?: boolean;
-            /**
-             * Current selected item in the TOC
-             *
-             * @type {string}
-             */
-            selectedItem?: ISitemapItem;
-            /**
-             * Root items
-             *
-             * @type {ISitemapItem[]}
-             */
-            rootItems?: ISitemapItem[];
-        };
         /**
-         * Page state
+         * Toc is loading
+         *
+         * @type {boolean}
          */
-        page?: {
-            /**
-             * Content of the current selected page
-             *
-             * @type {string}
-             */
-            content?: string;
-            /**
-             * An error prevented the page from rendering
-             *
-             * @type {string}
-             */
-            error?: string;
-            /**
-             * Page is loading
-             *
-             * @type {boolean}
-             */
-            isLoading?: boolean;
-            /**
-             * Page title
-             *
-             * @type {string}
-             */
-            title?: string;
-        };
+        isTocLoading?: boolean;
+        /**
+         * Current selected item in the TOC
+         *
+         * @type {string}
+         */
+        selectedTocItem?: ISitemapItem;
+        /**
+         * Page is loading
+         *
+         * @type {boolean}
+         */
+        isPageLoading?: boolean;
+    }
+
+    interface IPage {
+        /**
+         * Content of the current selected page
+         *
+         * @type {string}
+         */
+        content?: string;
+        /**
+         * An error prevented the page from rendering
+         *
+         * @type {string}
+         */
+        error?: string;
+        /**
+         * Page title
+         *
+         * @type {string}
+         */
+        title?: string;
+    }
+
+    interface IToc {
+        /**
+         * Root items
+         *
+         * @type {ISitemapItem[]}
+         */
+        rootItems?: ISitemapItem[];
     }
 
     /**
      * Main component for the application
      */
     export class App extends React.Component<IAppProps, IAppState> {
+
+        private _page: IPage = {};
+        private _toc: IToc = {};
 
         /**
          * Creates an instance of App.
@@ -87,39 +89,24 @@ module Sdl.DitaDelivery.Components {
         constructor() {
             super();
             this.state = {
-                toc: {
-                    isLoading: true,
-                    selectedItem: null,
-                    rootItems: null
-                },
-                page: {
-                    content: null,
-                    title: null,
-                    error: null,
-                    isLoading: false
-                }
+                isTocLoading: true,
+                selectedTocItem: null,
+                isPageLoading: false
             };
-
-            DataStore.getSitemapRoot((error, children) => {
-                this.setState({
-                    toc: {
-                        isLoading: false,
-                        rootItems: children
-                    }
-                });
-            });
         }
 
         /**
-         * Invoked when a component is receiving new props. This method is not called for the initial render.
-         *
-         * @param {IAppProps} nextProps Next props
+         * Invoked once, both on the client and server, immediately before the initial rendering occurs.
          */
-        public componentWillReceiveProps(nextProps: IAppProps): void {
-            this.setState({
-                page: {
-                    error: null
-                }
+        public componentWillMount(): void {
+
+            // Get the data for the Toc
+            DataStore.getSitemapRoot((error, children) => {
+                const toc = this._toc;
+                toc.rootItems = children;
+                this.setState({
+                    isTocLoading: false
+                });
             });
         }
 
@@ -131,10 +118,10 @@ module Sdl.DitaDelivery.Components {
          * @param {IAppState} nextState Next state
          */
         public componentWillUpdate(nextProps: IAppProps, nextState: IAppState): void {
-            const { toc, page } = this.state;
-            const currentUrl = toc.selectedItem ? toc.selectedItem.Url : null;
-            const nextUrl = nextState.toc ? nextState.toc.selectedItem.Url : null;
-            if (nextUrl && (page.isLoading || currentUrl !== nextUrl)) {
+            const { selectedTocItem, isPageLoading } = this.state;
+            const currentUrl = selectedTocItem ? selectedTocItem.Url : null;
+            const nextUrl = nextState.selectedTocItem ? nextState.selectedTocItem.Url : null;
+            if (nextUrl && (isPageLoading || currentUrl !== nextUrl)) {
                 DataStore.getPageInfo(nextUrl, this._onPageContentRetrieved.bind(this));
             }
         }
@@ -145,8 +132,9 @@ module Sdl.DitaDelivery.Components {
          * @returns {JSX.Element}
          */
         public render(): JSX.Element {
-            const { page, toc } = this.state;
-            const { content, title, error, isLoading } = page;
+            const { isPageLoading } = this.state;
+            const { content, title, error} = this._page;
+            const { rootItems } = this._toc;
             const formatMessage = Localization.formatMessage;
             return (
                 <div className={"sdl-dita-delivery-app"}>
@@ -156,11 +144,12 @@ module Sdl.DitaDelivery.Components {
                         }
                     }}/>
                     <section className={"content"}>
-                        <Toc {...toc}
-                            loadChildItems={DataStore.getSitemapItems}
+                        <Toc
+                            rootItems={rootItems}
+                            loadChildItems={DataStore.getSitemapItems.bind(DataStore) }
                             onSelectionChanged={this._onTocSelectionChanged.bind(this) }/>
                         <Page
-                            showActivityIndicator={isLoading}
+                            showActivityIndicator={isPageLoading}
                             content={content}
                             title={title}
                             error={error}/>
@@ -170,33 +159,31 @@ module Sdl.DitaDelivery.Components {
         }
 
         private _onTocSelectionChanged(sitemapItem: ISitemapItem): void {
+            const page = this._page;
+            if (!sitemapItem.Url) {
+                page.title = sitemapItem.Title;
+                page.content = undefined;
+            }
             this.setState({
-                toc: {
-                    selectedItem: sitemapItem
-                },
-                page: {
-                    isLoading: sitemapItem.Url ? true : false,
-                    title: !sitemapItem.Url ? sitemapItem.Title : undefined
-                }
+                selectedTocItem: sitemapItem,
+                isPageLoading: sitemapItem.Url ? true : false
             });
         }
 
         private _onPageContentRetrieved(error: string, pageInfo: IPageInfo): void {
+            const page = this._page;
+            const { selectedTocItem } = this.state;
             if (error) {
+                page.error = error;
                 this.setState({
-                    page: {
-                        error: error,
-                        isLoading: false
-                    }
+                    isPageLoading: false
                 });
                 return;
             }
+            page.content = pageInfo.content;
+            page.title = pageInfo.title ? pageInfo.title : selectedTocItem.Title;
             this.setState({
-                page: {
-                    content: pageInfo.content,
-                    title: pageInfo.title ? pageInfo.title : this.state.toc.selectedItem.Title,
-                    isLoading: false
-                }
+                isPageLoading: false
             });
         }
     };

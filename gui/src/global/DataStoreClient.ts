@@ -21,7 +21,7 @@ module Sdl.DitaDelivery {
          * @static
          * @type {{ [parentId:string]: Models.Toc }}
          */
-        private TocModels: { [parentId: string]: Models.Toc };
+        private static TocModels: { [parentId: string]: Models.Toc };
 
         /**
          * Page models
@@ -30,7 +30,7 @@ module Sdl.DitaDelivery {
          * @static
          * @type {{ [pageId:string]: Models.Page }}
          */
-        private PageModels: { [pageId: string]: Models.Page };
+        private static PageModels: { [pageId: string]: Models.Page };
 
         /**
          * Get the root objects of the sitemap
@@ -95,23 +95,23 @@ module Sdl.DitaDelivery {
         }
 
         private getTocModel(parentId: string): Models.Toc {
-            if (!this.TocModels) {
-                this.TocModels = {};
+            if (!DataStoreClient.TocModels) {
+                DataStoreClient.TocModels = {};
             }
-            if (!this.TocModels[parentId]) {
-                this.TocModels[parentId] = new Models.Toc(parentId);
+            if (!DataStoreClient.TocModels[parentId]) {
+                DataStoreClient.TocModels[parentId] = new Models.Toc(parentId);
             }
-            return this.TocModels[parentId];
+            return DataStoreClient.TocModels[parentId];
         }
 
         private getPageModel(pageId: string): Models.Page {
-            if (!this.PageModels) {
-                this.PageModels = {};
+            if (!DataStoreClient.PageModels) {
+                DataStoreClient.PageModels = {};
             }
-            if (!this.PageModels[pageId]) {
-                this.PageModels[pageId] = new Models.Page(pageId);
+            if (!DataStoreClient.PageModels[pageId]) {
+                DataStoreClient.PageModels[pageId] = new Models.Page(pageId);
             }
-            return this.PageModels[pageId];
+            return DataStoreClient.PageModels[pageId];
         }
 
     }

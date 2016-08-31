@@ -11,8 +11,8 @@ module Sdl.DitaDelivery {
     /**
      * Set instances for data store / localization / routing
      */
-    DataStore = new DataStoreClient();
-    Localization = new LocalizationGlobalize();
+    DataStore = null;
+    Localization = null;
 }
 
 /**

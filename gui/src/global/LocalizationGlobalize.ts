@@ -12,7 +12,7 @@ module Sdl.DitaDelivery {
      */
     export class LocalizationGlobalize implements ILocalization {
 
-        private _globalize: SDL.SDLGlobalizeStatic = SDL.Globalize;
+        private static _globalize: SDL.SDLGlobalizeStatic = SDL.Globalize;
 
         /**
          * Format a message
@@ -23,7 +23,7 @@ module Sdl.DitaDelivery {
          * @returns {string}
          */
         public formatMessage(path: string, variables?: string[]): string {
-            return this._globalize.formatMessage(path, variables);
+            return LocalizationGlobalize._globalize.formatMessage(path, variables);
         }
     }
 

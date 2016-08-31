@@ -3,7 +3,6 @@
 module Sdl.DitaDelivery.Tests {
 
     import App = Components.App;
-    import IAppProps = Components.IAppProps;
 
     class AppComponent extends SDL.Client.Test.TestBase {
 
@@ -11,38 +10,44 @@ module Sdl.DitaDelivery.Tests {
 
             describe(`App component tests.`, (): void => {
                 const target = super.createTargetElement();
+                const dataStoreMock = new Mocks.DataStore();
+
+                beforeAll(() => {
+                    Sdl.DitaDelivery.DataStore = dataStoreMock;
+                    Sdl.DitaDelivery.Localization = new LocalizationGlobalize();
+                });
 
                 afterEach(() => {
                     const domNode = ReactDOM.findDOMNode(target);
                     ReactDOM.unmountComponentAtNode(domNode);
+                    dataStoreMock.fakeDelay(false);
                 });
 
                 afterAll(() => {
+                    Sdl.DitaDelivery.DataStore = null;
+                    Sdl.DitaDelivery.Localization = null;
                     target.parentElement.removeChild(target);
                 });
 
                 it("show loading indicator on initial render", (): void => {
-                    this._renderComponent({}, target);
+                    dataStoreMock.fakeDelay(true);
+                    this._renderComponent(target);
                     const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
                     expect(domNode).not.toBeNull();
                     expect(domNode.querySelector(".sdl-activityindicator")).not.toBeNull("Could not find activity indicator.");
                 });
 
                 it("shows toc", (): void => {
-                    this._renderComponent({
-                        toc: {
-                            rootItems: [
-                                {
-                                    Id: "123",
-                                    Title: "First element",
-                                    IsAbstract: false,
-                                    IsLeaf: false,
-                                    Url: null
-                                }
-                            ],
-                            loadChildItems: null
+                    dataStoreMock.setMockDataToc(null, [
+                        {
+                            Id: "123",
+                            Title: "First element",
+                            IsAbstract: false,
+                            IsLeaf: false,
+                            Url: null
                         }
-                    }, target);
+                    ]);
+                    this._renderComponent(target);
                     const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
                     expect(domNode).not.toBeNull();
                     expect(domNode.querySelector(".sdl-activityindicator")).toBeNull("Activity indicator should not be rendered.");
@@ -53,24 +58,16 @@ module Sdl.DitaDelivery.Tests {
 
                 it("updates page content when selected site map item changes", (): void => {
                     const pageContent = "<div>Page content!</div>";
-                    const appComponent = this._renderComponent({
-                        toc: {
-                            rootItems: [],
-                            loadChildItems: null
-                        },
-                        getPageInfo: (pageId: string, callback: Function): void => {
-                            callback(null, { content: pageContent, title: "Title!" });
-                        }
-                    }, target);
+                    dataStoreMock.setMockDataToc(null, []);
+                    dataStoreMock.setMockDataPage(null, { content: pageContent, title: "Title!" });
+                    const appComponent = this._renderComponent(target);
                     appComponent.setState({
-                        toc: {
-                            selectedItem: {
-                                Id: "123",
-                                IsAbstract: false,
-                                IsLeaf: true,
-                                Title: "Some page",
-                                Url: "page"
-                            }
+                        selectedTocItem: {
+                            Id: "123",
+                            IsAbstract: false,
+                            IsLeaf: true,
+                            Title: "Some page",
+                            Url: "page"
                         }
                     });
                     const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
@@ -86,27 +83,23 @@ module Sdl.DitaDelivery.Tests {
                 });
 
                 it("updates page content when item is selected from toc", (done: () => void): void => {
-                    this._renderComponent({
-                        toc: {
-                            rootItems: [
-                                {
-                                    Id: "1",
-                                    Title: "First element",
-                                    IsAbstract: true,
-                                    IsLeaf: true,
-                                    Url: null
-                                },
-                                {
-                                    Id: "2",
-                                    Title: "Second element",
-                                    IsAbstract: true,
-                                    IsLeaf: true,
-                                    Url: null
-                                }
-                            ],
-                            loadChildItems: null
+                    dataStoreMock.setMockDataToc(null, [
+                        {
+                            Id: "1",
+                            Title: "First element",
+                            IsAbstract: true,
+                            IsLeaf: true,
+                            Url: null
+                        },
+                        {
+                            Id: "2",
+                            Title: "Second element",
+                            IsAbstract: true,
+                            IsLeaf: true,
+                            Url: null
                         }
-                    }, target);
+                    ]);
+                    this._renderComponent(target);
 
                     const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
                     expect(domNode).not.toBeNull();
@@ -125,25 +118,16 @@ module Sdl.DitaDelivery.Tests {
                 });
 
                 it("updates page content with title when a site map item without url is selected", (): void => {
+                    dataStoreMock.setMockDataToc(null, []);
                     const title = "Some page";
-                    const appComponent = this._renderComponent({
-                        toc: {
-                            rootItems: [],
-                            loadChildItems: null
-                        }
-                    }, target);
+                    const appComponent = this._renderComponent(target);
                     appComponent.setState({
-                        toc: {
-                            selectedItem: {
-                                Id: "12345",
-                                IsAbstract: true,
-                                IsLeaf: true,
-                                Title: title,
-                                Url: null
-                            }
-                        },
-                        page: {
-                            title: title
+                        selectedTocItem: {
+                            Id: "12345",
+                            IsAbstract: true,
+                            IsLeaf: true,
+                            Title: title,
+                            Url: null
                         }
                     });
                     const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
@@ -155,21 +139,15 @@ module Sdl.DitaDelivery.Tests {
                 });
 
                 it("shows an error message when page info fails to load", (done: () => void): void => {
-                    this._renderComponent({
-                        toc: {
-                            rootItems: [{
-                                Id: "123456",
-                                IsAbstract: false,
-                                IsLeaf: true,
-                                Title: "Some page",
-                                Url: "page-url"
-                            }],
-                            loadChildItems: null
-                        },
-                        getPageInfo: (pageId: string, callback: Function): void => {
-                            callback("Page failed to load!");
-                        }
-                    }, target);
+                    dataStoreMock.setMockDataToc(null, [{
+                        Id: "123456",
+                        IsAbstract: false,
+                        IsLeaf: true,
+                        Title: "Some page",
+                        Url: "page-url"
+                    }]);
+                    dataStoreMock.setMockDataPage("Page failed to load!");
+                    this._renderComponent(target);
                     const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
                     expect(domNode).not.toBeNull();
 
@@ -188,8 +166,8 @@ module Sdl.DitaDelivery.Tests {
 
         }
 
-        private _renderComponent(props: IAppProps, target: HTMLElement): App {
-            return ReactDOM.render(<App {...props}/>, target) as App;
+        private _renderComponent(target: HTMLElement): App {
+            return ReactDOM.render(<App />, target) as App;
         }
     }
 

@@ -14,10 +14,13 @@
             <files>
                 <file name="LocalizationGlobalize.js" />
             </files>
+            <dependencies>
+                <dependency name="SDL.Client.Libraries.SDL.Globalize" />
+            </dependencies>
         </resourceGroup>
         <resourceGroup name="Sdl.DitaDelivery.Routing">
             <files>
-                <file name="lib/history/history.js" />
+                <file name="../lib/history/history.js" />
                 <file name="Routing.js" />
             </files>
             <dependencies>
