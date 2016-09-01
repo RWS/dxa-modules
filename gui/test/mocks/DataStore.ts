@@ -68,6 +68,21 @@ module Sdl.DitaDelivery.Tests.Mocks {
 
         }
 
+        public getPublicationTitle(publicationId: string, callback: (error: string, title?: string) => void): void {
+            callback(null, "MP330");
+        }
+
+        /**
+         * Get the full path for a page
+         *
+         * @param {string} pageId The page id
+         * @param {(error: string, path?: string[]) => void} callback Returns the full path
+         */
+        public getPagePath(pageId: string, callback: (error: string, path?: string[]) => void): void {
+        }
+
+        //#region Custom hooks for testing
+
         public setMockDataToc(error: string, children?: ISitemapItem[]): void {
             this._mockDataToc = {
                 error: error,
@@ -85,5 +100,7 @@ module Sdl.DitaDelivery.Tests.Mocks {
         public fakeDelay(value: boolean): void {
             fakeDelay = value;
         }
+
+        //#endregion
     }
 }

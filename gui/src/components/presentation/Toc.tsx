@@ -17,6 +17,12 @@ module Sdl.DitaDelivery.Components {
      */
     export interface ITocProps {
         /**
+         * Path of the active item in the tree
+         *
+         * @type {string[]}
+         */
+        activeItemPath?: string[];
+        /**
          * Root items, showed on initial render
          *
          * @type {ISitemapItem[]}
@@ -29,7 +35,7 @@ module Sdl.DitaDelivery.Components {
         /**
          * Triggered whenever the selected item in the toc changes
          */
-        onSelectionChanged?: (sitemapItem: ISitemapItem) => void;
+        onSelectionChanged?: (sitemapItem: ISitemapItem, path: string[]) => void;
         /**
          * An error prevented the toc from rendering
          *
@@ -75,6 +81,7 @@ module Sdl.DitaDelivery.Components {
                     {
                         props.rootItems ?
                             <TreeView
+                                activeNodeIdPath={Array.isArray(props.activeItemPath) ? props.activeItemPath.join("/") : null}
                                 rootNodes={this._convertToTreeViewNodes(props.rootItems) }
                                 useCommonUILibraryScrollView={false}
                                 onSelectionChanged={this._onSelectionChanged.bind(this) }/>
@@ -144,8 +151,9 @@ module Sdl.DitaDelivery.Components {
             if (!this._isUnmounted) {
                 const onSelectionChanged = this.props.onSelectionChanged;
                 if (typeof onSelectionChanged === "function") {
-                    const selectedItem = nodes.length > 0 ? nodes[0].sitemapItem : null;
-                    onSelectionChanged(selectedItem);
+                    const selectedNode = nodes.length > 0 ? nodes[0] : null;
+                    const path = selectedNode ? selectedNode.getPath() : null;
+                    onSelectionChanged(selectedNode.sitemapItem, path.split("/"));
                 }
             }
         }

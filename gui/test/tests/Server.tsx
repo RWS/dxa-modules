@@ -12,6 +12,13 @@ module Sdl.DitaDelivery.Tests {
                 beforeAll(() => {
                     Sdl.DitaDelivery.DataStore = new DataStoreServer();
                     Sdl.DitaDelivery.Localization = new LocalizationGlobalize();
+                    Sdl.DitaDelivery.Routing = new Mocks.Routing();
+                });
+
+                afterAll(() => {
+                    Sdl.DitaDelivery.DataStore = null;
+                    Sdl.DitaDelivery.Localization = null;
+                    Sdl.DitaDelivery.Routing = null;
                 });
 
                 it("renders", (): void => {

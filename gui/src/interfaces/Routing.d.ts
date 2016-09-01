@@ -12,13 +12,6 @@ declare module Sdl.DitaDelivery {
     interface IRouting {
 
         /**
-         * Get the current location
-         *
-         * @returns {string}
-         */
-        getCurrentLocation(): string;
-
-        /**
          * Get the absolute path
          *
          * @param {string} path Path
@@ -36,5 +29,12 @@ declare module Sdl.DitaDelivery {
          */
         setPageUrl(publicationId: string, publicationTitle: string,
             pageId: string, pageTitle: string): void;
+
+        /**
+         * Get the current location within a publication
+         *
+         * @returns {IPublicationLocation}
+         */
+        getPublicationLocation(): IPublicationLocation;
     }
 }

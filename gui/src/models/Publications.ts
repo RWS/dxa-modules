@@ -34,7 +34,7 @@ module Sdl.DitaDelivery.Models {
                 this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
         }
 
-        protected _processLoadResult(result: string, webRequest: SDL.Client.Net.IWebRequest): void {
+        protected _processLoadResult(result: string, webRequest: IWebRequest): void {
             this._publications = JSON.parse(result);
 
             super._processLoadResult(result, webRequest);

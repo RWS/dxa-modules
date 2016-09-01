@@ -1,4 +1,5 @@
 ﻿{
   "components.app.loading": "Laden...",
-  "components.app.title": "Documentatie"
+  "components.app.title": "Documentatie",
+  "datastore.publication.not.found": "Publicatie met id {0} kon niet gevonden worden."
 }

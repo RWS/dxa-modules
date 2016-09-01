@@ -8,6 +8,7 @@
                 <file name="Page.js" />
                 <file name="Publications.js" />
                 <file name="Toc.js" />
+                <file name="NavigationLinks.js" />
             </files>
             <dependencies>
                 <dependency name="SDL.Client.Models.Classes" />

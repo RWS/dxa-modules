@@ -4,6 +4,18 @@
 module Sdl.DitaDelivery {
     const HistoryModule = (<Window & { History: HistoryModule.Module }>window).History;
 
+    export interface IPublicationLocation {
+        publicationId: string;
+        pageId: string;
+    }
+
+    /**
+     * Regex to validate if a url is pointing to a publication + page
+     *
+     * example: /ish:39137-1-1/ish:39137-1-512/MP330/User-Guide
+     */
+    const PUBLICATION_URL_REGEX = /^\/[^\/]+%3A[0-9]+-[0-9]+-[0-9]+\/[^\/]+%3A[0-9]+-[0-9]+-[0-9]+\/.*$/gmi;
+
     /**
      * Routing related functionality
      *
@@ -28,15 +40,6 @@ module Sdl.DitaDelivery {
             } else {
                 RoutingClient._history = HistoryModule.createMemoryHistory();
             }
-        }
-
-        /**
-         * Get the current location
-         *
-         * @returns {string}
-         */
-        public getCurrentLocation(): string {
-            return RoutingClient._history.getCurrentLocation().pathname;
         }
 
         /**
@@ -68,6 +71,24 @@ module Sdl.DitaDelivery {
             );
 
             this._push(pathname);
+        }
+
+        /**
+         * Get the current location within a publication
+         *
+         * @returns {IPublicationLocation}
+         */
+        public getPublicationLocation(): IPublicationLocation {
+            const currentLocation = RoutingClient._history.getCurrentLocation().pathname;
+            const paths = currentLocation.match(PUBLICATION_URL_REGEX);
+            if (paths) {
+                var result = paths[0].split("/");
+                return {
+                    publicationId: decodeURIComponent(result[1]),
+                    pageId: decodeURIComponent(result[2])
+                };
+            }
+            return;
         }
 
         private _escapeTitle(title: string): string {

@@ -83,6 +83,25 @@ module Sdl.DitaDelivery {
             callback(error, info);
         }
 
+        /**
+         * Get the publication title
+         *
+         * @param {string} publicationId Publication id
+         * @param {(error: string, title?: string) => void} callback Returns the title
+         */
+        public getPublicationTitle(publicationId: string, callback: (error: string, title?: string) => void): void {
+            callback(null, "MP330");
+        }
+
+        /**
+         * Get the full path for a page
+         *
+         * @param {string} pageId The page id
+         * @param {(error: string, path?: string[]) => void} callback Returns the full path
+         */
+        public getPagePath(pageId: string, callback: (error: string, path?: string[]) => void): void {
+        }
+
     }
 
 }

@@ -45,15 +45,11 @@ module Sdl.DitaDelivery.Components {
         return (
             <div className={"sdl-dita-delivery-page"}>
                 { props.showActivityIndicator ? <ActivityIndicator/> : null }
-                { props.error ?
-                    <ValidationMessage messageType={SDL.UI.Controls.ValidationMessageType.Error} message={props.error} /> :
-                    (
-                        <div>
-                            <h1 className={"page-title"}>{props.title}</h1>
-                            <div className={"page-content ltr"} dangerouslySetInnerHTML={{ __html: props.content }} />
-                        </div>
-                    )
-                }
+                { props.error ? <ValidationMessage messageType={SDL.UI.Controls.ValidationMessageType.Error} message={props.error} /> : null }
+                <div>
+                    <h1 className={"page-title"}>{props.title}</h1>
+                    <div className={"page-content ltr"} dangerouslySetInnerHTML={{ __html: props.content }} />
+                </div>
             </div>
         );
     };

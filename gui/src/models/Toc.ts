@@ -44,7 +44,7 @@ module Sdl.DitaDelivery.Models {
             SDL.Client.Net.getRequest(url, this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
         }
 
-        protected _processLoadResult(result: string, webRequest: SDL.Client.Net.IWebRequest): void {
+        protected _processLoadResult(result: string, webRequest: IWebRequest): void {
             this._sitemapItems = JSON.parse(result);
 
             super._processLoadResult(result, webRequest);

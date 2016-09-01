@@ -1,6 +1,7 @@
 /// <reference path="../models/Page.ts" />
 /// <reference path="../models/Publications.ts" />
 /// <reference path="../models/Toc.ts" />
+/// <reference path="../models/NavigationLinks.ts" />
 
 module Sdl.DitaDelivery {
 
@@ -42,6 +43,15 @@ module Sdl.DitaDelivery {
          * @type {{ [pageId:string]: Models.Page }}
          */
         private static PageModels: { [pageId: string]: Models.Page };
+
+        /**
+         * Navigation links models
+         *
+         * @private
+         * @static
+         * @type {{ [pageId: string]: Models.NavigationLinks }}
+         */
+        private static NavigationLinksModels: { [pageId: string]: Models.NavigationLinks };
 
         /**
          * Get the list of publications
@@ -126,6 +136,59 @@ module Sdl.DitaDelivery {
             }
         }
 
+        /**
+         * Get the publication title
+         *
+         * @param {string} publicationId Publication id
+         * @param {(error: string, title?: string) => void} callback Returns the title
+         */
+        public getPublicationTitle(publicationId: string, callback: (error: string, title?: string) => void): void {
+            this.getPublications((error, publications) => {
+                if (error) {
+                    callback(error);
+                    return;
+                }
+
+                if (Array.isArray(publications)) {
+                    for (const pub of (publications as IPublication[])) {
+                        if (pub.Id === publicationId) {
+                            callback(null, pub.Title);
+                            return;
+                        }
+                    }
+                }
+
+                callback(Localization.formatMessage("datastore.publication.not.found", [publicationId]));
+            });
+        }
+
+        /**
+         * Get the full path for a page
+         *
+         * @param {string} pageId The page id
+         * @param {(error: string, path?: string[]) => void} callback Returns the full path
+         */
+        public getPagePath(pageId: string, callback: (error: string, path?: string[]) => void): void {
+            const navigationLinks = this.getNavigationLinksModel(pageId);
+            const onLoad = () => {
+                navigationLinks.removeEventListener("load", onLoad);
+                const path = navigationLinks.getNavigationLinks().Items.map(item => item.Id);
+                callback(null, path);
+            };
+            const onLoadFailed = (event: SDL.Client.Event.Event) => {
+                navigationLinks.removeEventListener("loadfailed", onLoadFailed);
+                callback(event.data.error);
+            };
+            if (!navigationLinks.isLoaded()) {
+                navigationLinks.addEventListener("load", onLoad);
+                navigationLinks.addEventListener("loadfailed", onLoadFailed);
+                navigationLinks.load();
+            } else {
+                const path = navigationLinks.getNavigationLinks().Items.map(item => item.Id);
+                callback(null, path);
+            }
+        }
+
         private getTocModel(parentId: string): Models.Toc {
             if (!DataStoreClient.TocModels) {
                 DataStoreClient.TocModels = {};
@@ -151,6 +214,16 @@ module Sdl.DitaDelivery {
                 DataStoreClient.PublicationsModel = new Models.Publications;
             }
             return DataStoreClient.PublicationsModel;
+        }
+
+        private getNavigationLinksModel(pageId: string): Models.NavigationLinks {
+            if (!DataStoreClient.NavigationLinksModels) {
+                DataStoreClient.NavigationLinksModels = {};
+            }
+            if (!DataStoreClient.NavigationLinksModels[pageId]) {
+                DataStoreClient.NavigationLinksModels[pageId] = new Models.NavigationLinks(pageId);
+            }
+            return DataStoreClient.NavigationLinksModels[pageId];
         }
 
     }

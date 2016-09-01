@@ -20,12 +20,6 @@ module Sdl.DitaDelivery.Components {
          * @type {string}
          */
         publicationId: string;
-        /**
-         * Title of the current publication
-         *
-         * @type {string}
-         */
-        publicationTitle: string;
     }
 
     /**
@@ -99,6 +93,7 @@ module Sdl.DitaDelivery.Components {
         private _page: IPage = {};
         private _toc: IToc = {};
         private _isUnmounted: boolean = false;
+        private _activePagePath: string[];
 
         /**
          * Creates an instance of App.
@@ -117,9 +112,13 @@ module Sdl.DitaDelivery.Components {
          * Invoked once, both on the client and server, immediately before the initial rendering occurs.
          */
         public componentWillMount(): void {
-            // Get the data for the Toc
-            DataStore.getSitemapRoot((error, children) => {
-                if (!this._isUnmounted) {
+            const getRootItems = (): void => {
+                // Get the data for the Toc
+                DataStore.getSitemapRoot((error, children) => {
+                    if (this._isUnmounted) {
+                        return;
+                    }
+
                     const toc = this._toc;
 
                     if (error) {
@@ -136,8 +135,16 @@ module Sdl.DitaDelivery.Components {
                         isTocLoading: false,
                         isPageLoading: Array.isArray(children) && children.length > 0
                     });
-                }
-            });
+                });
+            };
+
+            const location = Routing.getPublicationLocation();
+            if (location) {
+                // Set the current active path for the tree
+                this._setActivePagePath(location.pageId, getRootItems);
+            } else {
+               getRootItems();
+            }
         }
 
         /**
@@ -170,6 +177,7 @@ module Sdl.DitaDelivery.Components {
             return (
                 <section className={"sdl-dita-delivery-publication-content"}>
                     <Toc
+                        activeItemPath={this._activePagePath}
                         rootItems={rootItems}
                         loadChildItems={DataStore.getSitemapItems.bind(DataStore) }
                         onSelectionChanged={this._onTocSelectionChanged.bind(this) }
@@ -190,18 +198,30 @@ module Sdl.DitaDelivery.Components {
             this._isUnmounted = true;
         }
 
-        private _onTocSelectionChanged(sitemapItem: ISitemapItem): void {
+        private _onTocSelectionChanged(sitemapItem: ISitemapItem, path: string[]): void {
             const page = this._page;
+            const { publicationId } = this.props;
+
             page.error = null;
             if (!sitemapItem.Url) {
                 page.title = null;
                 page.content = null;
             }
-            const { publicationId, publicationTitle } = this.props;
-            Routing.setPageUrl(publicationId, publicationTitle, sitemapItem.Id, sitemapItem.Title);
-            this.setState({
-                selectedTocItem: sitemapItem,
-                isPageLoading: sitemapItem.Url ? true : false
+
+            this._activePagePath = path;
+
+            DataStore.getPublicationTitle(publicationId, (error, title) => {
+                if (error) {
+                    page.error = error;
+                }
+                this.setState({
+                    selectedTocItem: sitemapItem,
+                    isPageLoading: sitemapItem.Url ? true : false
+                });
+
+                if (!error) {
+                    Routing.setPageUrl(publicationId, title, sitemapItem.Id, sitemapItem.Title);
+                }
             });
         }
 
@@ -210,6 +230,8 @@ module Sdl.DitaDelivery.Components {
             const { selectedTocItem } = this.state;
             if (error) {
                 page.error = error;
+                page.title = null;
+                page.content = null;
                 this.setState({
                     isPageLoading: false
                 });
@@ -219,6 +241,27 @@ module Sdl.DitaDelivery.Components {
             page.title = pageInfo.title ? pageInfo.title : selectedTocItem.Title;
             this.setState({
                 isPageLoading: false
+            });
+        }
+
+        private _setActivePagePath(pageId: string, done: () => void): void {
+            DataStore.getPagePath(pageId, (error, path) => {
+                if (this._isUnmounted) {
+                    return;
+                }
+
+                if (error) {
+                    const toc = this._toc;
+                    toc.error = error;
+                    this.setState({
+                        isTocLoading: false,
+                        isPageLoading: false
+                    });
+                    return;
+                }
+                this._activePagePath = path;
+
+                done();
             });
         }
     };

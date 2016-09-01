@@ -66,8 +66,8 @@ module Sdl.DitaDelivery.Tests {
                     const pageContent = "<div>Page content!</div>";
                     dataStoreMock.setMockDataToc(null, []);
                     dataStoreMock.setMockDataPage(null, { content: pageContent, title: "Title!" });
-                    const appComponent = this._renderComponent(target);
-                    appComponent.setState({
+                    const component = this._renderComponent(target);
+                    component.setState({
                         selectedTocItem: {
                             Id: "123",
                             IsAbstract: false,
@@ -130,8 +130,8 @@ module Sdl.DitaDelivery.Tests {
                 it("updates page content with title when a site map item without url is selected", (): void => {
                     dataStoreMock.setMockDataToc(null, []);
                     const title = "Some page";
-                    const appComponent = this._renderComponent(target);
-                    appComponent.setState({
+                    const component = this._renderComponent(target);
+                    component.setState({
                         selectedTocItem: {
                             Id: "12345",
                             IsAbstract: true,
@@ -176,10 +176,10 @@ module Sdl.DitaDelivery.Tests {
 
         }
 
-        private _renderComponent(target: HTMLElement): App {
+        private _renderComponent(target: HTMLElement): PublicationContent {
             return ReactDOM.render(
-                (<PublicationContent publicationId={"123"} publicationTitle="Publication title"/>)
-                , target) as App;
+                (<PublicationContent publicationId={"123"}/>)
+                , target) as PublicationContent;
         }
     }
 

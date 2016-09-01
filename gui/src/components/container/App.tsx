@@ -14,6 +14,12 @@ module Sdl.DitaDelivery.Components {
      * @interface IAppState
      */
     export interface IAppState {
+        /**
+         * Id of the open publication
+         *
+         * @type {string}
+         */
+        selectedPublicationId: string;
     }
 
     /**
@@ -28,6 +34,7 @@ module Sdl.DitaDelivery.Components {
         constructor() {
             super();
             this.state = {
+                selectedPublicationId: "ish:39137-1-1"
             };
         }
 
@@ -38,7 +45,7 @@ module Sdl.DitaDelivery.Components {
          */
         public render(): JSX.Element {
             const formatMessage = Localization.formatMessage;
-
+            const { selectedPublicationId } = this.state;
             return (
                 <div className={"sdl-dita-delivery-app"}>
                     <TopBar title={formatMessage("components.app.title") } buttons={{
@@ -46,7 +53,7 @@ module Sdl.DitaDelivery.Components {
                             isPicture: true
                         }
                     }}/>
-                    <PublicationContent publicationId={"ish:39137-1-1"} publicationTitle="MP330" />
+                    <PublicationContent publicationId={selectedPublicationId} />
                 </div>
             );
         }

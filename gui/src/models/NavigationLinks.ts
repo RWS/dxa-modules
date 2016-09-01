@@ -2,36 +2,25 @@
 
 module Sdl.DitaDelivery.Models {
 
-    import IPage = Server.Models.IPage;
     import IWebRequest = SDL.Client.Net.IWebRequest;
-
-    /**
-     * Page info
-     *
-     * @export
-     * @interface IPageInfo
-     */
-    export interface IPageInfo {
-        title: string;
-        content: string;
-    }
+    import INavigationLinks = Server.Models.INavigationLinks;
 
     /* tslint:disable-next-line */
     eval(SDL.Client.Types.OO.enableCustomInheritance);
     /**
-     * Page model
+     * Navigation links model
      *
      * @export
-     * @class Page
+     * @class NavigationLinks
      * @extends {SDL.Client.Models.LoadableObject}
      */
-    export class Page extends SDL.Client.Models.LoadableObject {
+    export class NavigationLinks extends SDL.Client.Models.LoadableObject {
 
         private _pageId: string;
-        private _page: IPage;
+        private _navigationLinks: INavigationLinks;
 
         /**
-         * Creates an instance of Page.
+         * Creates an instance of NavigationLinks.
          *
          * @param {string} pageId
          */
@@ -41,26 +30,24 @@ module Sdl.DitaDelivery.Models {
         }
 
         /**
-         * Get the page info
+         * Get the navigation links
+         * Typically used for displaying breadcrumbs
          *
-         * @returns {IPageInfo}
+         * @returns {INavigationLinks}
          */
-        public getPageInfo(): IPageInfo {
-            return {
-                content: this._page.Html,
-                title: this._page.Title
-            };
+        public getNavigationLinks(): INavigationLinks {
+            return this._navigationLinks;
         }
 
         /* Overloads */
         protected _executeLoad(reload: boolean): void {
-            const url = Routing.getAbsolutePath(`gui/mocks/page-${this._stripId(this._pageId)}.json`);
+            const url = Routing.getAbsolutePath(`gui/mocks/navigation-${this._stripId(this._pageId)}.json`);
             SDL.Client.Net.getRequest(url,
                 this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
         }
 
         protected _processLoadResult(result: string, webRequest: IWebRequest): void {
-            this._page = JSON.parse(result);
+            this._navigationLinks = JSON.parse(result);
 
             super._processLoadResult(result, webRequest);
         }
@@ -77,5 +64,5 @@ module Sdl.DitaDelivery.Models {
         }
     }
 
-    SDL.Client.Types.OO.createInterface("Sdl.DitaDelivery.Models.Page", Page);
+    SDL.Client.Types.OO.createInterface("Sdl.DitaDelivery.Models.NavigationLinks", NavigationLinks);
 }
