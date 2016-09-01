@@ -1,13 +1,8 @@
-/// <reference path="../../typings/index.d.ts" />
-/// <reference path="../interfaces/Routing.d.ts" />
+/// <reference path="../../../typings/index.d.ts" />
+/// <reference path="../../interfaces/Routing.d.ts" />
 
 module Sdl.DitaDelivery {
     const HistoryModule = (<Window & { History: HistoryModule.Module }>window).History;
-
-    export interface IPublicationLocation {
-        publicationId: string;
-        pageId: string;
-    }
 
     /**
      * Regex to validate if a url is pointing to a publication + page

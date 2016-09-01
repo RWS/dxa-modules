@@ -21,7 +21,8 @@
     <include src="packages.xml" />
     <!-- Child configs -->
     <include src="components/_config.xml" />
-    <include src="global/_config.xml" />
+    <include src="global/client/_config.xml" />
+    <include src="global/server/_config.xml" />
     <include src="models/_config.xml" />
     <include src="resources/_config.xml" />
     <!-- Main resources -->
@@ -45,6 +46,8 @@
             <dependencies>
                 <dependency name="Sdl.DitaDelivery.Components" />
                 <dependency name="Sdl.DitaDelivery.DataStoreServer" />
+                <dependency name="Sdl.DitaDelivery.LocalizationServer" />
+                <dependency name="Sdl.DitaDelivery.RoutingServer" />
             </dependencies>
         </resourceGroup>
         <resourceGroup name="Sdl.DitaDelivery.DitaOt.Styles">

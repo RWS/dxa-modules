@@ -15,13 +15,19 @@
         <package name="Sdl.DitaDelivery.Styles">
             <resourceGroups>
                 <resourceGroup name="Sdl.DitaDelivery.Components.Controls.Styles" />
-                <resourceGroup name="Sdl.DitaDelivery.Components.Styles" />
+                <resourceGroup name="Sdl.DitaDelivery.Components.Container.Styles" />
+                <resourceGroup name="Sdl.DitaDelivery.Components.Presentation.Styles" />
                 <resourceGroup name="Sdl.DitaDelivery.DitaOt.Styles" />
             </resourceGroups>
         </package>
         <package name="Sdl.DitaDelivery.Server">
             <resourceGroups>
                 <resourceGroup name="Sdl.DitaDelivery.Server" />
+            </resourceGroups>
+        </package>
+        <package name="Sdl.DitaDelivery.Localization">
+            <resourceGroups>
+                <resourceGroup name="Sdl.DitaDelivery.LocalizationGlobalize" />
             </resourceGroups>
         </package>
     </packages>

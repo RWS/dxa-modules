@@ -1,5 +1,5 @@
-/// <reference path="../models/Page.ts" />
-/// <reference path="../models/Toc.ts" />
+/// <reference path="../../models/Page.ts" />
+/// <reference path="../../models/Toc.ts" />
 
 module Sdl.DitaDelivery {
 

@@ -1,5 +1,5 @@
-/// <reference path="../../typings/index.d.ts" />
-/// <reference path="../interfaces/Localization.d.ts" />
+/// <reference path="../../../typings/index.d.ts" />
+/// <reference path="../../interfaces/Localization.d.ts" />
 
 module Sdl.DitaDelivery {
 
@@ -7,7 +7,7 @@ module Sdl.DitaDelivery {
      * Localization implemented using Globalize
      *
      * @export
-     * @class Localization
+     * @class LocalizationGlobalize
      * @implements {ILocalization}
      */
     export class LocalizationGlobalize implements ILocalization {

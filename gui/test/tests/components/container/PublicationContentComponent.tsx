@@ -1,5 +1,6 @@
 /// <reference path="../../../../src/components/container/App.tsx" />
-/// <reference path="../../../../src/global/RoutingClient.ts" />
+/// <reference path="../../../../src/global/client/RoutingClient.ts" />
+/// <reference path="../../../../src/global/client/LocalizationGlobalize.ts" />
 
 module Sdl.DitaDelivery.Tests {
 

@@ -37,4 +37,25 @@ declare module Sdl.DitaDelivery {
          */
         getPublicationLocation(): IPublicationLocation;
     }
+
+    /**
+     * Publication location
+     *
+     * @interface IPublicationLocation
+     */
+    interface IPublicationLocation {
+        /**
+         * Publication id
+         *
+         * @type {string}
+         */
+        publicationId: string;
+        /**
+         * Page id
+         *
+         * @type {string}
+         */
+        pageId: string;
+    }
+
 }

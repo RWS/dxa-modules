@@ -1,5 +1,6 @@
 /// <reference path="../../../src/components/container/App.tsx" />
-/// <reference path="../../../src/global/DataStoreClient.ts" />
+/// <reference path="../../../src/global/client/DataStoreClient.ts" />
+/// <reference path="../../../src/global/client/LocalizationGlobalize.ts" />
 
 module Sdl.DitaDelivery.Tests {
 
@@ -11,10 +12,12 @@ module Sdl.DitaDelivery.Tests {
             describe(`Data Store tests (Toc).`, (): void => {
 
                 beforeAll(() => {
+                    Sdl.DitaDelivery.Localization = new LocalizationGlobalize();
                     Sdl.DitaDelivery.Routing = new Mocks.Routing();
                 });
 
                 afterAll(() => {
+                    Sdl.DitaDelivery.Localization = null;
                     Sdl.DitaDelivery.Routing = null;
                 });
 

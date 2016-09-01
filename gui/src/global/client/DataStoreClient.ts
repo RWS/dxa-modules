@@ -1,7 +1,7 @@
-/// <reference path="../models/Page.ts" />
-/// <reference path="../models/Publications.ts" />
-/// <reference path="../models/Toc.ts" />
-/// <reference path="../models/NavigationLinks.ts" />
+/// <reference path="../../models/Page.ts" />
+/// <reference path="../../models/Publications.ts" />
+/// <reference path="../../models/Toc.ts" />
+/// <reference path="../../models/NavigationLinks.ts" />
 
 module Sdl.DitaDelivery {
 

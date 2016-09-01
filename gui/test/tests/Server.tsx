@@ -11,8 +11,8 @@ module Sdl.DitaDelivery.Tests {
 
                 beforeAll(() => {
                     Sdl.DitaDelivery.DataStore = new DataStoreServer();
-                    Sdl.DitaDelivery.Localization = new LocalizationGlobalize();
-                    Sdl.DitaDelivery.Routing = new Mocks.Routing();
+                    Sdl.DitaDelivery.Localization = new LocalizationServer();
+                    Sdl.DitaDelivery.Routing = new RoutingServer();
                 });
 
                 afterAll(() => {
@@ -45,6 +45,9 @@ module Sdl.DitaDelivery.Tests {
                                     </span>
                                 </div>
                                 <div className="sdl-dita-delivery-page">
+                                    <span>
+                                        <div></div>
+                                    </span>
                                     <div>
                                         <h1 className="page-title"></h1>
                                         <div className="page-content ltr"></div>
