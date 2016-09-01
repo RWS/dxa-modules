@@ -1,6 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="com.sdl.webapp.common.api.model.entity.Link" %>
-<%@ page import="java.util.List" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="dxa" uri="http://www.sdl.com/tridion-dxa" %>
 <%@ taglib prefix="xpm" uri="http://www.sdl.com/tridion-xpm" %>
@@ -8,39 +6,30 @@
 <jsp:useBean id="entity" type="com.sdl.webapp.common.api.model.entity.NavigationLinks" scope="request"/>
 <jsp:useBean id="markup" type="com.sdl.webapp.common.markup.Markup" scope="request"/>
 
-<%
-    final List<Link> links = entity.getItems();
-    if (links != null && !links.isEmpty()) {
-        int start = links.size() > 5 ? links.size() - 4 : 1;
-%>
-<ol class="breadcrumb" ${markup.entity(entity)}>
-    <li>
-        <a href="<%= links.get(0).getUrl() %>"><i class="fa fa-home"><span
-                class="sr-only"><%= links.get(0).getLinkText() %></span></i></a>
-    </li>
-    <%
-        if (start > 1) {
-    %>
-    <li>...</li>
-    <%
-        }
-        for (int i = start; i < links.size() - 1; i++) {
-    %>
-    <li>
-        <a href="<%= links.get(i).getUrl() %>"><%= links.get(i).getLinkText() %>
-        </a>
-    </li>
-    <%
-        }
-        if (links.size() > 1) {
-    %>
-    <li class="active">
-        <%= links.get(links.size() - 1).getLinkText() %>
-    </li>
-    <%
-        }
-    %>
-</ol>
-<%
-    }
-%>
+<c:if test="${not empty entity.items}">
+    <ol class="breadcrumb" ${markup.entity(entity)}>
+
+        <li>
+            <a href="${entity.items[0].url}"><i class="fa fa-home"><span
+                    class="sr-only">${entity.items[0].linkText}</span></i></a>
+        </li>
+
+        <c:set var="size" value="${entity.items.size()}"/>
+        <c:set var="start" value="${size > 5 ? size - 4 : 1}"/>
+
+        <c:if test="${start > 1}">
+            <li>...</li>
+        </c:if>
+
+        <c:forEach items="${entity.items}" var="link" varStatus="status" begin="${start}">
+            <c:choose>
+                <c:when test="${status.last}">
+                    <li class="active">${link.linkText}</li>
+                </c:when>
+                <c:otherwise>
+                    <li><a href="${link.url}">${link.linkText}</a></li>
+                </c:otherwise>
+            </c:choose>
+        </c:forEach>
+    </ol>
+</c:if>
