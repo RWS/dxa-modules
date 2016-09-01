@@ -8,6 +8,27 @@ module Sdl.DitaDelivery.Components {
     import IPageInfo = Models.IPageInfo;
 
     /**
+     * PublicationContent component props
+     *
+     * @export
+     * @interface IPublicationContentProps
+     */
+    export interface IPublicationContentProps {
+        /**
+         * Id of the current publication
+         *
+         * @type {string}
+         */
+        publicationId: string;
+        /**
+         * Title of the current publication
+         *
+         * @type {string}
+         */
+        publicationTitle: string;
+    }
+
+    /**
      * PublicationContent component state
      *
      * @export
@@ -73,7 +94,7 @@ module Sdl.DitaDelivery.Components {
     /**
      * Main component for the application
      */
-    export class PublicationContent extends React.Component<{}, IPublicationContentState> {
+    export class PublicationContent extends React.Component<IPublicationContentProps, IPublicationContentState> {
 
         private _page: IPage = {};
         private _toc: IToc = {};
@@ -126,7 +147,7 @@ module Sdl.DitaDelivery.Components {
          * @param {{}} nextProps Next props
          * @param {IPublicationContentState} nextState Next state
          */
-        public componentWillUpdate(nextProps: {}, nextState: IPublicationContentState): void {
+        public componentWillUpdate(nextProps: IPublicationContentProps, nextState: IPublicationContentState): void {
             const { selectedTocItem, isPageLoading } = this.state;
             const currentUrl = selectedTocItem ? selectedTocItem.Url : null;
             const nextUrl = nextState.selectedTocItem ? nextState.selectedTocItem.Url : null;
@@ -176,6 +197,8 @@ module Sdl.DitaDelivery.Components {
                 page.title = null;
                 page.content = null;
             }
+            const { publicationId, publicationTitle } = this.props;
+            Routing.setPageUrl(publicationId, publicationTitle, sitemapItem.Id, sitemapItem.Title);
             this.setState({
                 selectedTocItem: sitemapItem,
                 isPageLoading: sitemapItem.Url ? true : false

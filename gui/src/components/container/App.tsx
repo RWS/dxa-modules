@@ -46,7 +46,7 @@ module Sdl.DitaDelivery.Components {
                             isPicture: true
                         }
                     }}/>
-                    <PublicationContent />
+                    <PublicationContent publicationId={"ish:39137-1-1"} publicationTitle="MP330" />
                 </div>
             );
         }

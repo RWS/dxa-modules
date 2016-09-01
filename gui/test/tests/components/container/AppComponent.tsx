@@ -16,7 +16,7 @@ module Sdl.DitaDelivery.Tests {
                 beforeAll(() => {
                     Sdl.DitaDelivery.DataStore = dataStoreMock;
                     Sdl.DitaDelivery.Localization = new LocalizationGlobalize();
-                    Sdl.DitaDelivery.Routing = new RoutingClient();
+                    Sdl.DitaDelivery.Routing = new Mocks.Routing();
                 });
 
                 afterEach(() => {
@@ -28,6 +28,7 @@ module Sdl.DitaDelivery.Tests {
                 afterAll(() => {
                     Sdl.DitaDelivery.DataStore = null;
                     Sdl.DitaDelivery.Localization = null;
+                    Sdl.DitaDelivery.Routing = null;
                     target.parentElement.removeChild(target);
                 });
 

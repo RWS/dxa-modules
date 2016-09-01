@@ -27,8 +27,8 @@
                 <file name="tests/Server.js"/>
             </files>
             <dependencies>
-                 <dependency name="Sdl.DitaDelivery.Test.Tests.Components"/>
-                 <dependency name="Sdl.DitaDelivery.Test.Tests.Global"/>
+                <dependency name="Sdl.DitaDelivery.Test.Tests.Components"/>
+                <dependency name="Sdl.DitaDelivery.Test.Tests.Global"/>
             </dependencies>
         </resourceGroup>
     </resourceGroups>

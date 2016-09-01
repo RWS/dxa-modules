@@ -10,6 +10,14 @@ module Sdl.DitaDelivery.Tests {
 
             describe(`Data Store tests (Toc).`, (): void => {
 
+                beforeAll(() => {
+                    Sdl.DitaDelivery.Routing = new Mocks.Routing();
+                });
+
+                afterAll(() => {
+                    Sdl.DitaDelivery.Routing = null;
+                });
+
                 it("can get site map items for the root", (done: () => void): void => {
                     DataStore.getSitemapRoot((error, children) => {
                         expect(error).toBeNull();
@@ -55,6 +63,14 @@ module Sdl.DitaDelivery.Tests {
             });
 
             describe(`Data Store tests (Page).`, (): void => {
+
+                beforeAll(() => {
+                    Sdl.DitaDelivery.Routing = new Mocks.Routing();
+                });
+
+                afterAll(() => {
+                    Sdl.DitaDelivery.Routing = null;
+                });
 
                 it("can get page info", (done: () => void): void => {
                     const pageId = "ish:39137-6222-16";

@@ -8,7 +8,9 @@
                 <file name="PageComponent.js" />
                 <file name="TocComponent.js" />
             </files>
+            <dependencies>
+                <dependency name="Sdl.DitaDelivery.Components"/>
+            </dependencies>
         </resourceGroup>
     </resourceGroups>
 </configuration>
-

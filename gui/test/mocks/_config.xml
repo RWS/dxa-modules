@@ -6,7 +6,11 @@
         <resourceGroup name="Sdl.DitaDelivery.Tests.Mocks">
             <files>
                 <file name="DataStore.js" />
+                <file name="Routing.js" />
             </files>
+            <dependencies>
+                <dependency name="Sdl.DitaDelivery.RoutingClient" />
+            </dependencies>
         </resourceGroup>
     </resourceGroups>
 </configuration>

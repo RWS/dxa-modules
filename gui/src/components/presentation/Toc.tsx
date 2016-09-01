@@ -143,10 +143,8 @@ module Sdl.DitaDelivery.Components {
         private _onSelectionChanged(nodes: ITreeViewNode[]): void {
             if (!this._isUnmounted) {
                 const onSelectionChanged = this.props.onSelectionChanged;
-                const selectedItem = nodes.length > 0 ? nodes[0].sitemapItem : null;
-                const { id, title } = { id: "ish:12345", title: "Publication Title"}; // TODO: get active publcation as prop
-                Routing.setPageUrl(id, title, selectedItem.Id, selectedItem.Title);
                 if (typeof onSelectionChanged === "function") {
+                    const selectedItem = nodes.length > 0 ? nodes[0].sitemapItem : null;
                     onSelectionChanged(selectedItem);
                 }
             }

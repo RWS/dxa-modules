@@ -8,6 +8,9 @@
                 <file name="AppComponent.js" />
                 <file name="PublicationContentComponent.js" />
             </files>
+            <dependencies>
+                <dependency name="Sdl.DitaDelivery.Components"/>
+            </dependencies>
         </resourceGroup>
     </resourceGroups>
 </configuration>

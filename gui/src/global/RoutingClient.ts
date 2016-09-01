@@ -12,16 +12,22 @@ module Sdl.DitaDelivery {
      */
     export class RoutingClient implements IRouting {
 
-        private static _history: HistoryModule.History = HistoryModule.createHistory();
+        private static _history: HistoryModule.History;
         private _root: string;
 
         /**
          * Creates an instance of RoutingClient.
          *
          * @param {string} [root="/"] Root path of the application.
+         * @param {boolean} [inMemory=false] When true no urls will be updated, urls will be managed in memory.
          */
-        constructor(root: string = "/") {
+        constructor(root: string = "/", inMemory: boolean = false) {
             this._root = root;
+            if (!inMemory) {
+                RoutingClient._history = HistoryModule.createHistory();
+            } else {
+                RoutingClient._history = HistoryModule.createMemoryHistory();
+            }
         }
 
         /**
