@@ -220,7 +220,7 @@ module Sdl.DitaDelivery.Components {
                 });
 
                 if (!error) {
-                    Routing.setPageUrl(publicationId, title, sitemapItem.Id, sitemapItem.Title);
+                    Routing.setPublicationLocation(publicationId, title, sitemapItem.Id, sitemapItem.Title);
                 }
             });
         }

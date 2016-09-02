@@ -52,17 +52,17 @@ module Sdl.DitaDelivery {
          *
          * @param {string} publicationId Publication id
          * @param {string} publicationTitle Publication title
-         * @param {string} pageId Page id
-         * @param {string} pageTitle Page title
+         * @param {string} sitemapItemId Sitemap item id
+         * @param {string} sitemapItemTitle Sitemap item title
          */
-        public setPageUrl(publicationId: string, publicationTitle: string,
-            pageId: string, pageTitle: string): void {
+        public setPublicationLocation(publicationId: string, publicationTitle: string,
+            sitemapItemId: string, sitemapItemTitle: string): void {
 
             const pathname = this.getAbsolutePath(
                 encodeURIComponent(publicationId) + "/" +
-                encodeURIComponent(pageId) + "/" +
+                encodeURIComponent(sitemapItemId) + "/" +
                 encodeURIComponent(this._escapeTitle(publicationTitle)) + "/" +
-                encodeURIComponent(this._escapeTitle(pageTitle))
+                encodeURIComponent(this._escapeTitle(sitemapItemTitle))
             );
 
             this._push(pathname);

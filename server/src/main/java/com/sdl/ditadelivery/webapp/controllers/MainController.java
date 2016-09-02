@@ -33,7 +33,7 @@ public class MainController {
     private PageService pageService;
 
     /**
-     * Home page
+     * Home page (default)
      *
      * @param request
      * @return
@@ -48,20 +48,20 @@ public class MainController {
     }
 
     /**
-     * Page
+     * Home page (with context)
      *
      * @param publicationId Publication id
-     * @param pageId        Page Id
+     * @param sitemapItemId Sitemap item id
      * @param request
      * @return
      * @throws Exception
      */
     @RequestMapping(
-            value = "/{publicationid:^ish:[0-9]+-[0-9]+-[0-9]+$}/{pageid:^ish:[0-9]+-[0-9]+-[0-9]+$}/**",
+            value = "/{publicationid:^ish:[0-9]+-[0-9]+-[0-9]+$}/{sitemapitemid:^ish:[0-9]+-[0-9]+-[0-9]+$}/**",
             method = RequestMethod.GET
     )
-    public String page(@PathVariable("publicationid") String publicationId,
-                       @PathVariable("pageid") String pageId,
+    public String home(@PathVariable("publicationid") String publicationId,
+                       @PathVariable("sitemapitemid") String sitemapItemId,
                        HttpServletRequest request) throws Exception {
 
         this.setPageModelOnRequest(request);
