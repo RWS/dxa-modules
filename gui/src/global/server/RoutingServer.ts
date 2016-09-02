@@ -42,7 +42,7 @@ module Sdl.DitaDelivery {
         public getPublicationLocation(): IPublicationLocation {
             return {
                 publicationId: null,
-                pageId: null
+                sitemapItemId: null
             };
         }
     }

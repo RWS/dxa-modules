@@ -51,11 +51,11 @@ declare module Sdl.DitaDelivery {
          */
         publicationId: string;
         /**
-         * Page id
+         * Sitemap item id
          *
          * @type {string}
          */
-        pageId: string;
+        sitemapItemId: string;
     }
 
 }

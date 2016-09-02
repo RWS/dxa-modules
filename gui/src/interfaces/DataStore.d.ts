@@ -53,11 +53,11 @@ declare module Sdl.DitaDelivery {
         getPublicationTitle(publicationId: string, callback: (error: string, title?: string) => void): void;
 
         /**
-         * Get the full path for a page
+         * Get the full path for a sitemap item within a sitemap
          *
-         * @param {string} pageId The page id
+         * @param {string} sitemapItemId The id of the item in the sitemap
          * @param {(error: string, path?: string[]) => void} callback Returns the full path
          */
-        getPagePath(pageId: string, callback: (error: string, path?: string[]) => void): void;
+        getSitemapPath(sitemapItemId: string, callback: (error: string, path?: string[]) => void): void;
     }
 }

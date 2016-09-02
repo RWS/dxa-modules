@@ -80,7 +80,7 @@ module Sdl.DitaDelivery {
                 var result = paths[0].split("/");
                 return {
                     publicationId: decodeURIComponent(result[1]),
-                    pageId: decodeURIComponent(result[2])
+                    sitemapItemId: decodeURIComponent(result[2])
                 };
             }
             return;

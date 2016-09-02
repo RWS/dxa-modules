@@ -16,7 +16,7 @@ module Sdl.DitaDelivery.Tests {
 
                 beforeAll(() => {
                     Sdl.DitaDelivery.DataStore = dataStoreMock;
-                    Sdl.DitaDelivery.Localization = new LocalizationGlobalize();
+                    Sdl.DitaDelivery.Localization = new Mocks.Localization();
                     Sdl.DitaDelivery.Routing = new Mocks.Routing();
                 });
 

@@ -51,6 +51,8 @@ module Sdl.DitaDelivery.Models {
         }
 
         protected _onLoadFailed(error: string, webRequest: IWebRequest): void {
+            const p = this.properties;
+            p.loading = false;
             this.fireEvent("loadfailed", { error: error });
         }
 

@@ -114,7 +114,7 @@ module Sdl.DitaDelivery.Components {
         public componentWillMount(): void {
             const getRootItems = (): void => {
                 // Get the data for the Toc
-                DataStore.getSitemapRoot((error, children) => {
+                DataStore.getSitemapRoot((error, items) => {
                     if (this._isUnmounted) {
                         return;
                     }
@@ -130,10 +130,10 @@ module Sdl.DitaDelivery.Components {
                         return;
                     }
 
-                    toc.rootItems = children;
+                    toc.rootItems = items;
                     this.setState({
                         isTocLoading: false,
-                        isPageLoading: Array.isArray(children) && children.length > 0
+                        isPageLoading: Array.isArray(items) && items.length > 0
                     });
                 });
             };
@@ -141,7 +141,7 @@ module Sdl.DitaDelivery.Components {
             const location = Routing.getPublicationLocation();
             if (location) {
                 // Set the current active path for the tree
-                this._setActivePagePath(location.pageId, getRootItems);
+                this._setActiveSitemapPath(location.sitemapItemId, getRootItems);
             } else {
                getRootItems();
             }
@@ -244,8 +244,8 @@ module Sdl.DitaDelivery.Components {
             });
         }
 
-        private _setActivePagePath(pageId: string, done: () => void): void {
-            DataStore.getPagePath(pageId, (error, path) => {
+        private _setActiveSitemapPath(sitemapItemId: string, done: () => void): void {
+            DataStore.getSitemapPath(sitemapItemId, (error, path) => {
                 if (this._isUnmounted) {
                     return;
                 }

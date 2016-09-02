@@ -55,9 +55,9 @@ module Sdl.DitaDelivery {
         /**
          * Get the root objects of the sitemap
          *
-         * @param {(error: string, children: ISitemapItem[]) => void} callback Returns the items
+         * @param {(error: string, items: ISitemapItem[]) => void} callback Returns the items
          */
-        public getSitemapRoot(callback: (error: string, children?: ISitemapItem[]) => void): void {
+        public getSitemapRoot(callback: (error: string, items?: ISitemapItem[]) => void): void {
             return this.getSitemapItems("root", callback);
         }
 
@@ -65,9 +65,9 @@ module Sdl.DitaDelivery {
          * Get the site map items for a parent
          *
          * @param {string} parentId The parent id
-         * @param {(error: string, children?: ISitemapItem[]) => void} callback Returns the items
+         * @param {(error: string, items?: ISitemapItem[]) => void} callback Returns the items
          */
-        public getSitemapItems(parentId: string, callback: (error: string, children?: ISitemapItem[]) => void): void {
+        public getSitemapItems(parentId: string, callback: (error: string, items?: ISitemapItem[]) => void): void {
             const { error, children } = this._mockDataToc;
             callback(error, children);
         }
@@ -94,12 +94,12 @@ module Sdl.DitaDelivery {
         }
 
         /**
-         * Get the full path for a page
+         * Get the full path for a sitemap item within a sitemap
          *
-         * @param {string} pageId The page id
+         * @param {string} sitemapItemId The id of the item in the sitemap
          * @param {(error: string, path?: string[]) => void} callback Returns the full path
          */
-        public getPagePath(pageId: string, callback: (error: string, path?: string[]) => void): void {
+        public getSitemapPath(sitemapItemId: string, callback: (error: string, path?: string[]) => void): void {
         }
 
     }

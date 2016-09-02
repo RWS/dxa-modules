@@ -30,10 +30,10 @@ module Sdl.DitaDelivery.Tests.Mocks {
 
         private _mockDataToc: {
             error: string;
-            children: ISitemapItem[]
+            items: ISitemapItem[]
         } = {
             error: null,
-            children: []
+            items: []
         };
 
         public getPublications(callback: (error: string, publications?: IPublication[]) => void): void {
@@ -41,19 +41,19 @@ module Sdl.DitaDelivery.Tests.Mocks {
             callback(error, publications);
         }
 
-        public getSitemapRoot(callback: (error: string, children: ISitemapItem[]) => void): void {
+        public getSitemapRoot(callback: (error: string, items: ISitemapItem[]) => void): void {
             return this.getSitemapItems("root", callback);
         }
 
-        public getSitemapItems(parentId: string, callback: (error: string, children?: ISitemapItem[]) => void): void {
-            const { error, children } = this._mockDataToc;
+        public getSitemapItems(parentId: string, callback: (error: string, items?: ISitemapItem[]) => void): void {
+            const { error, items } = this._mockDataToc;
             if (fakeDelay) {
                 setTimeout(() => {
-                    callback(error, children);
+                    callback(error, items);
                 }, DELAY);
                 return;
             }
-            callback(error, children);
+            callback(error, items);
         }
 
         public getPageInfo(pageId: string, callback: (error: string, info?: IPageInfo) => void): void {
@@ -72,21 +72,15 @@ module Sdl.DitaDelivery.Tests.Mocks {
             callback(null, "MP330");
         }
 
-        /**
-         * Get the full path for a page
-         *
-         * @param {string} pageId The page id
-         * @param {(error: string, path?: string[]) => void} callback Returns the full path
-         */
-        public getPagePath(pageId: string, callback: (error: string, path?: string[]) => void): void {
+        public getSitemapPath(sitemapItemId: string, callback: (error: string, path?: string[]) => void): void {
         }
 
         //#region Custom hooks for testing
 
-        public setMockDataToc(error: string, children?: ISitemapItem[]): void {
+        public setMockDataToc(error: string, items?: ISitemapItem[]): void {
             this._mockDataToc = {
                 error: error,
-                children: children
+                items: items
             };
         }
 

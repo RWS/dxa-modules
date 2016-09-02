@@ -60,13 +60,18 @@ module Sdl.DitaDelivery {
          */
         public getPublications(callback: (error: string, publications?: IPublication[]) => void): void {
             const publication = this.getPublicationsModel();
+            let removeEventListeners: () => void;
             const onLoad = () => {
-                publication.removeEventListener("load", onLoad);
+                removeEventListeners();
                 callback(null, publication.getPublications());
             };
             const onLoadFailed = (event: SDL.Client.Event.Event) => {
-                publication.removeEventListener("loadfailed", onLoadFailed);
+                removeEventListeners();
                 callback(event.data.error);
+            };
+            removeEventListeners = (): void => {
+                publication.removeEventListener("load", onLoad);
+                publication.removeEventListener("loadfailed", onLoadFailed);
             };
             if (!publication.isLoaded()) {
                 publication.addEventListener("load", onLoad);
@@ -80,9 +85,9 @@ module Sdl.DitaDelivery {
         /**
          * Get the root objects of the sitemap
          *
-         * @param {(error: string, children: ISitemapItem[]) => void} callback Returns the items
+         * @param {(error: string, items: ISitemapItem[]) => void} callback Returns the items
          */
-        public getSitemapRoot(callback: (error: string, children?: ISitemapItem[]) => void): void {
+        public getSitemapRoot(callback: (error: string, items?: ISitemapItem[]) => void): void {
             this.getSitemapItems("root", callback);
         }
 
@@ -90,17 +95,22 @@ module Sdl.DitaDelivery {
          * Get the site map items for a parent
          *
          * @param {string} parentId The parent id
-         * @param {(error: string, children?: ISitemapItem[]) => void} callback Returns the items
+         * @param {(error: string, items?: ISitemapItem[]) => void} callback Returns the items
          */
-        public getSitemapItems(parentId: string, callback: (error: string, children?: ISitemapItem[]) => void): void {
+        public getSitemapItems(parentId: string, callback: (error: string, items?: ISitemapItem[]) => void): void {
             const toc = this.getTocModel(parentId);
+            let removeEventListeners: () => void;
             const onLoad = () => {
-                toc.removeEventListener("load", onLoad);
+                removeEventListeners();
                 callback(null, toc.getSitemapItems());
             };
             const onLoadFailed = (event: SDL.Client.Event.Event) => {
-                toc.removeEventListener("loadfailed", onLoadFailed);
+                removeEventListeners();
                 callback(event.data.error);
+            };
+            removeEventListeners = (): void => {
+                toc.removeEventListener("load", onLoad);
+                toc.removeEventListener("loadfailed", onLoadFailed);
             };
             if (!toc.isLoaded()) {
                 toc.addEventListener("load", onLoad);
@@ -119,13 +129,18 @@ module Sdl.DitaDelivery {
          */
         public getPageInfo(pageId: string, callback: (error: string, info?: IPageInfo) => void): void {
             const page = this.getPageModel(pageId);
+            let removeEventListeners: () => void;
             const onLoad = () => {
-                page.removeEventListener("load", onLoad);
+                removeEventListeners();
                 callback(null, page.getPageInfo());
             };
             const onLoadFailed = (event: SDL.Client.Event.Event) => {
-                page.removeEventListener("loadfailed", onLoadFailed);
+                removeEventListeners();
                 callback(event.data.error);
+            };
+            removeEventListeners = (): void => {
+                page.removeEventListener("load", onLoad);
+                page.removeEventListener("loadfailed", onLoadFailed);
             };
             if (!page.isLoaded()) {
                 page.addEventListener("load", onLoad);
@@ -163,21 +178,26 @@ module Sdl.DitaDelivery {
         }
 
         /**
-         * Get the full path for a page
+         * Get the full path for a sitemap item within a sitemap
          *
-         * @param {string} pageId The page id
+         * @param {string} sitemapItemId The id of the item in the sitemap
          * @param {(error: string, path?: string[]) => void} callback Returns the full path
          */
-        public getPagePath(pageId: string, callback: (error: string, path?: string[]) => void): void {
-            const navigationLinks = this.getNavigationLinksModel(pageId);
+        public getSitemapPath(sitemapItemId: string, callback: (error: string, path?: string[]) => void): void {
+            const navigationLinks = this.getNavigationLinksModel(sitemapItemId);
+            let removeEventListeners: () => void;
             const onLoad = () => {
-                navigationLinks.removeEventListener("load", onLoad);
+                removeEventListeners();
                 const path = navigationLinks.getNavigationLinks().Items.map(item => item.Id);
                 callback(null, path);
             };
             const onLoadFailed = (event: SDL.Client.Event.Event) => {
-                navigationLinks.removeEventListener("loadfailed", onLoadFailed);
+                removeEventListeners();
                 callback(event.data.error);
+            };
+            removeEventListeners = (): void => {
+                navigationLinks.removeEventListener("load", onLoad);
+                navigationLinks.removeEventListener("loadfailed", onLoadFailed);
             };
             if (!navigationLinks.isLoaded()) {
                 navigationLinks.addEventListener("load", onLoad);

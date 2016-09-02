@@ -5,7 +5,8 @@
     <resourceGroups>
         <resourceGroup name="Sdl.DitaDelivery.Test.Tests.Global">
             <files>
-                <file name="DataStoreClient.js"/>
+                <file name="client/DataStoreClient.js"/>
+                <file name="client/DataStoreClient.js"/>
             </files>
         </resourceGroup>
     </resourceGroups>

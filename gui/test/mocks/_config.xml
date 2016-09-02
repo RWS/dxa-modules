@@ -6,6 +6,7 @@
         <resourceGroup name="Sdl.DitaDelivery.Tests.Mocks">
             <files>
                 <file name="DataStore.js" />
+                <file name="Localization.js" />
                 <file name="Routing.js" />
             </files>
             <dependencies>
