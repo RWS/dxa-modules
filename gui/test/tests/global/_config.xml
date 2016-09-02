@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../node_modules/sdl-catalina/Common/Library/Core/configuration.xsd">
+    <!-- Main resources -->
+    <resourceGroups>
+        <resourceGroup name="Sdl.DitaDelivery.Test.Tests.Global">
+            <files>
+                <file name="client/DataStoreClient.js"/>
+                <file name="client/DataStoreClient.js"/>
+            </files>
+        </resourceGroup>
+    </resourceGroups>
+</configuration>
+

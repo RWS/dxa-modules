@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../node_modules/sdl-catalina/Common/Library/Core/configuration.xsd">
+    <resourceGroups>
+        <resourceGroup name="Sdl.DitaDelivery.DataStoreClient">
+            <files>
+                <file name="DataStoreClient.js" />
+            </files>
+            <dependencies>
+                <dependency name="Sdl.DitaDelivery.Models" />
+            </dependencies>
+        </resourceGroup>
+        <resourceGroup name="Sdl.DitaDelivery.LocalizationGlobalize">
+            <files>
+                <file name="LocalizationGlobalize.js" />
+            </files>
+            <dependencies>
+                <dependency name="SDL.Client.Libraries.SDL.Globalize" />
+            </dependencies>
+        </resourceGroup>
+        <resourceGroup name="Sdl.DitaDelivery.RoutingClient">
+            <files>
+                <file name="../../lib/history/history.js" />
+                <file name="RoutingClient.js" />
+            </files>
+        </resourceGroup>
+    </resourceGroups>
+</configuration>

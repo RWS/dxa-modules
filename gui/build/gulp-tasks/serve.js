@@ -82,15 +82,16 @@ module.exports = function (buildOptions, gulp, browserSync, commonFolderName) {
 
                 let routes = {};
                 if (buildOptions.isDebug) {
-                     routes = {
+                    routes = {
                         // Third party dependencies
                         '/SDL/Common': './node_modules/sdl-catalina/' + commonFolderName() + '/',
                         '/SDL/ReactComponents': './node_modules/sdl-catalina-react-wrappers/dist/components/',
                         '/lib/react': './node_modules/react/dist/',
                         '/lib/react-dom': './node_modules/react-dom/dist/',
+                        '/lib/history': './node_modules/history/umd/'
                     }
                 }
-                routes['/test'] =  buildOptions.testPath; // Put test folder behind a virtual directory
+                routes['/test'] = buildOptions.testPath; // Put test folder behind a virtual directory
                 routes['/SDL/Test'] = './node_modules/sdl-catalina/Test/';
                 routes['/gui/mocks'] = './mocks/';
                 routes['/gui/theming'] = buildOptions.distPath + 'theming/';
@@ -118,7 +119,7 @@ module.exports = function (buildOptions, gulp, browserSync, commonFolderName) {
                             if (buildOptions.isTestCoverage) {
                                 // Redirect all js files to the ones which are instrumented to be used for code coverage
                                 var url = req.url;
-                                if (!_.startsWith(url, '/SDL/') && !_.startsWith(url, '/test/')
+                                if (!_.startsWith(url, '/SDL/') && !_.startsWith(url, '/test/') && !_.startsWith(url, '/lib/')
                                     && _.endsWith(url, '.js?' + buildOptions.version)) {
                                     url = '/test/coverage' + url;
                                     req.url = url;
@@ -147,6 +148,15 @@ module.exports = function (buildOptions, gulp, browserSync, commonFolderName) {
                             }
                             next();
                         },
+                        (req, res, next) => {
+                            // Use main page for dynamic urls used for deep linking
+                            // example: /ish:39137-1-1/ish:39137-1-512/MP330/User-Guide
+                            const publicationContentRegex = /^\/[^\/]+%3A[0-9]+-[0-9]+-[0-9]+\/[^\/]+%3A[0-9]+-[0-9]+-[0-9]+\/[^\/]+\/[^\/]+\/?$/gi;
+                            if (req.url.match(publicationContentRegex)) {
+                                req.url = '/index.html';
+                            }
+                            next();
+                        }
                     ]
                 };
 

@@ -54,17 +54,20 @@ module Sdl.DitaDelivery.Models {
 
         /* Overloads */
         protected _executeLoad(reload: boolean): void {
-            SDL.Client.Net.getRequest(`gui/mocks/page-${this._stripId(this._pageId)}.json`,
+            const url = Routing.getAbsolutePath(`gui/mocks/page-${this._stripId(this._pageId)}.json`);
+            SDL.Client.Net.getRequest(url,
                 this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
         }
 
-        protected _processLoadResult(result: string, webRequest: SDL.Client.Net.IWebRequest): void {
+        protected _processLoadResult(result: string, webRequest: IWebRequest): void {
             this._page = JSON.parse(result);
 
             super._processLoadResult(result, webRequest);
         }
 
         protected _onLoadFailed(error: string, webRequest: IWebRequest): void {
+            const p = this.properties;
+            p.loading = false;
             this.fireEvent("loadfailed", { error: error });
         }
 

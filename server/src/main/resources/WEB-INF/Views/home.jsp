@@ -13,13 +13,13 @@
     <c:forEach var="meta" items="${pageModel.meta.entrySet()}">
         <meta name="${fn:escapeXml(meta.key)}" content="${fn:escapeXml(meta.value)}">
     </c:forEach>
-    <script src="gui/lib/react/react.js"></script>
-    <script src="gui/lib/react-dom/react-dom.js"></script>
+    <script src="${pageContext.request.contextPath}/gui/lib/react/react.min.js"></script>
+    <script src="${pageContext.request.contextPath}/gui/lib/react-dom/react-dom.min.js"></script>
     <!--[if gt IE 8]><!-- -->
-    <script type="text/javascript" src="gui/SDL/Common/bootstrap.js"
+    <script type="text/javascript" src="${pageContext.request.contextPath}/gui/SDL/Common/bootstrap.js"
             data-package-name="SDL.Client.Bootstrap"
-            data-configuration-file="gui/configuration.xml"
-            data-version-file="gui/version.txt"></script>
+            data-configuration-file="${pageContext.request.contextPath}/gui/configuration.xml"
+            data-version-file="${pageContext.request.contextPath}/gui/version.txt"></script>
     <!-- <![endif]-->
     <c:if test="${page.length() > 0}">
         <style type="text/css">

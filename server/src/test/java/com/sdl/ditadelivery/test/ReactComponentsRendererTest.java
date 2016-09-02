@@ -31,9 +31,9 @@ public class ReactComponentsRendererTest {
         final String result = reactComponentsRenderer.renderPage("home");
 
         //then
-        assertTrue(result.startsWith("<span"));
+        assertTrue(result.startsWith("<div"));
         assertTrue(result.contains(expected));
-        assertTrue(result.endsWith("</span>"));
+        assertTrue(result.endsWith("</div>"));
     }
 
     @Configuration

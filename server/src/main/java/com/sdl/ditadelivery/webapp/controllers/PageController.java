@@ -1,5 +1,6 @@
 package com.sdl.ditadelivery.webapp.controllers;
 
+import com.sdl.ditadelivery.webapp.services.PageService;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.content.ContentProvider;
 import com.sdl.webapp.common.api.content.ContentProviderException;
@@ -32,7 +33,7 @@ public class PageController extends com.sdl.webapp.common.controller.PageControl
     private WebRequestContext webRequestContext;
 
     @Autowired
-    private ContentProvider contentProvider;
+    private PageService pageService;
 
     @Autowired
     private DataFormatter dataFormatters;
@@ -66,20 +67,9 @@ public class PageController extends com.sdl.webapp.common.controller.PageControl
         final String path = requestPath.substring(requestPath.indexOf("/api") + 4);
 
         final Localization localization = webRequestContext.getLocalization();
-        final PageModel page = getPageModel(path, localization);
+        final PageModel page = pageService.getPageModel(path, localization);
         this.enrichEmbeddedModels(page, request);
         return dataFormatters.view(page);
-    }
-
-    private PageModel getPageModel(String path, Localization localization) {
-        // TODO: return json when an exception occurs
-        try {
-            return contentProvider.getPageModel(path, localization);
-        } catch (PageNotFoundException e) {
-            throw new NotFoundException("Page not found: " + path, e);
-        } catch (ContentProviderException e) {
-            throw new InternalServerErrorException("An unexpected error occurred", e);
-        }
     }
 
     /**

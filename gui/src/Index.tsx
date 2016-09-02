@@ -1,29 +1,26 @@
 /// <reference path="../typings/index.d.ts" />
-/// <reference path="components/App.tsx" />
+/// <reference path="interfaces/DataStore.d.ts" />
+/// <reference path="interfaces/Localization.d.ts" />
+/// <reference path="interfaces/Routing.d.ts" />
+/// <reference path="components/container/App.tsx" />
 
 module Sdl.DitaDelivery {
     import App = Components.App;
 
+    /**
+     * Set instances for data store / localization / routing
+     */
+    DataStore = new DataStoreClient();
+    Localization = new LocalizationGlobalize();
+    Routing = new RoutingClient();
+
     const mainElement = document.getElementById("main-view-target");
-    const localization: Components.ILocalization = {
-        formatMessage: (path, variables) => SDL.Globalize.formatMessage(path, variables)
+
+    const render = (): void => {
+        ReactDOM.render(<App />, mainElement);
     };
 
-    ReactDOM.render(<App localization={localization} />, mainElement);
+    Routing.onLocationChanged(render);
+    render();
 
-    DataStore.getSitemapRoot((error, children) => {
-        if (error) {
-            // TODO error handling
-            return;
-        }
-
-        ReactDOM.render(
-            (<App toc={{
-                rootItems: children,
-                loadChildItems: DataStore.getSitemapItems
-            }}
-                getPageInfo={DataStore.getPageInfo}
-                localization={localization}/>
-            ), mainElement);
-    });
 }

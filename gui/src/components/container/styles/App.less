@@ -1,0 +1,22 @@
+@import (reference) "../../../theming/styles.less";
+@font-face {
+    font-family: @fontFamily;
+    src: url('gui/theming/@{fontFamilyPath}') format("opentype");
+}
+
+html, body, #main-view-target {
+    height: 100%;
+    margin: 0 auto;
+    font-family: @fontFamily;
+    font-size: @fontSize;
+}
+
+.sdl-dita-delivery-app {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+    .sdl-dita-delivery-publication-content {
+        position: relative;
+        flex: 1 1 auto;
+    }
+}
