@@ -1,6 +1,7 @@
 package com.sdl.ditadelivery.webapp.controllers;
 
 import com.sdl.ditadelivery.webapp.renderers.ReactComponentsRenderer;
+import com.sdl.ditadelivery.webapp.services.PageService;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.content.ContentProvider;
 import com.sdl.webapp.common.api.content.ContentProviderException;
@@ -11,7 +12,7 @@ import com.sdl.webapp.common.controller.exception.InternalServerErrorException;
 import com.sdl.webapp.common.controller.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -29,7 +30,7 @@ public class MainController {
     private WebRequestContext webRequestContext;
 
     @Autowired
-    private ContentProvider contentProvider;
+    private PageService pageService;
 
     /**
      * Home page
@@ -38,15 +39,32 @@ public class MainController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/home")
+    @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String home(HttpServletRequest request) throws Exception {
-        final String requestPath = "/";
-        final Localization localization = webRequestContext.getLocalization();
 
-        final PageModel page = getPageModel(requestPath, localization);
+        this.setPageModelOnRequest(request);
 
-        request.setAttribute(PAGE_MODEL, page);
-        request.setAttribute(LOCALIZATION, localization);
+        return "home";
+    }
+
+    /**
+     * Page
+     *
+     * @param publicationId Publication id
+     * @param pageId        Page Id
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(
+            value = "/{publicationid:^ish:[0-9]+-[0-9]+-[0-9]+$}/{pageid:^ish:[0-9]+-[0-9]+-[0-9]+$}/**",
+            method = RequestMethod.GET
+    )
+    public String page(@PathVariable("publicationid") String publicationId,
+                       @PathVariable("pageid") String pageId,
+                       HttpServletRequest request) throws Exception {
+
+        this.setPageModelOnRequest(request);
 
         return "home";
     }
@@ -60,27 +78,22 @@ public class MainController {
      */
     @RequestMapping(value = "/home-server")
     public String homeServer(HttpServletRequest request) throws Exception {
-        final String requestPath = "/";
-        final Localization localization = webRequestContext.getLocalization();
+        this.setPageModelOnRequest(request);
 
-        final PageModel page = getPageModel(requestPath, localization);
-        request.setAttribute(PAGE_MODEL, page);
-        request.setAttribute(LOCALIZATION, localization);
-
-        String homePage = reactComponentsRenderer.renderPage(requestPath);
+        String homePage = reactComponentsRenderer.renderPage("/");
         request.setAttribute("page", homePage);
 
         return "home";
     }
 
-    private PageModel getPageModel(String path, Localization localization) {
-        try {
-            return contentProvider.getPageModel(path, localization);
-        } catch (PageNotFoundException e) {
-            throw new NotFoundException("Page not found: " + path, e);
-        } catch (ContentProviderException e) {
-            throw new InternalServerErrorException("An unexpected error occurred", e);
-        }
+    private void setPageModelOnRequest(HttpServletRequest request) {
+        final String requestPath = "/";
+        final Localization localization = webRequestContext.getLocalization();
+
+        final PageModel page = pageService.getPageModel(requestPath, localization);
+
+        request.setAttribute(PAGE_MODEL, page);
+        request.setAttribute(LOCALIZATION, localization);
     }
 
 }

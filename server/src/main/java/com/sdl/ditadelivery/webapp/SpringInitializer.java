@@ -32,7 +32,7 @@ public class SpringInitializer {
     public ViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setViewClass(JstlView.class);
-        viewResolver.setPrefix("WEB-INF/classes/WEB-INF/Views/");
+        viewResolver.setPrefix("/WEB-INF/classes/WEB-INF/Views/");
         viewResolver.setSuffix(".jsp");
         viewResolver.setOrder(Ordered.LOWEST_PRECEDENCE);
         return viewResolver;
