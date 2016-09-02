@@ -10,6 +10,12 @@ declare module Sdl.DitaDelivery {
      * Routing implementation
      */
     interface IRouting {
+        /**
+         * Use this hook to be notified on location changes
+         *
+         * @param {() => void} handler Handler which will be triggered upon a location change.
+         */
+        onLocationChanged(handler: () => void): void;
 
         /**
          * Get the absolute path

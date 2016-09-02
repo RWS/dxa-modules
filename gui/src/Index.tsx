@@ -15,5 +15,12 @@ module Sdl.DitaDelivery {
     Routing = new RoutingClient();
 
     const mainElement = document.getElementById("main-view-target");
-    ReactDOM.render(<App />, mainElement);
+
+    const render = (): void => {
+        ReactDOM.render(<App />, mainElement);
+    };
+
+    Routing.onLocationChanged(render);
+    render();
+
 }

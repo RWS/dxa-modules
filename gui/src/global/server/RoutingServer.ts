@@ -14,6 +14,15 @@ module Sdl.DitaDelivery {
         private _root: string = "/";
 
         /**
+         * Use this hook to be notified on location changes
+         *
+         * @param {() => void} handler Handler which will be triggered upon a location change.
+         */
+        public onLocationChanged(handler: () => void): void {
+            throw new Error(`Should not be used on a server side environment.`);
+        }
+
+        /**
          * Get the absolute path
          *
          * @param {string} path Path
@@ -32,7 +41,9 @@ module Sdl.DitaDelivery {
          * @param {string} sitemapItemTitle Sitemap item title
          */
         public setPublicationLocation(publicationId: string, publicationTitle: string,
-            sitemapItemId: string, sitemapItemTitle: string): void { }
+            sitemapItemId: string, sitemapItemTitle: string): void {
+             // TODO implement this
+        }
 
         /**
          * Get the current location within a publication
@@ -40,6 +51,7 @@ module Sdl.DitaDelivery {
          * @returns {IPublicationLocation}
          */
         public getPublicationLocation(): IPublicationLocation {
+            // TODO implement this
             return {
                 publicationId: null,
                 sitemapItemId: null

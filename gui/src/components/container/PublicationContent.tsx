@@ -47,6 +47,12 @@ module Sdl.DitaDelivery.Components {
          * @type {boolean}
          */
         isPageLoading?: boolean;
+        /**
+         * Current active item path in the TOC
+         *
+         * @type {string[]}
+         */
+        activeTocItemPath?: string[];
     }
 
     interface IPage {
@@ -93,7 +99,6 @@ module Sdl.DitaDelivery.Components {
         private _page: IPage = {};
         private _toc: IToc = {};
         private _isUnmounted: boolean = false;
-        private _activePagePath: string[];
 
         /**
          * Creates an instance of App.
@@ -112,7 +117,7 @@ module Sdl.DitaDelivery.Components {
          * Invoked once, both on the client and server, immediately before the initial rendering occurs.
          */
         public componentWillMount(): void {
-            const getRootItems = (): void => {
+            const getRootItems = (path?: string[]): void => {
                 // Get the data for the Toc
                 DataStore.getSitemapRoot((error, items) => {
                     if (this._isUnmounted) {
@@ -132,6 +137,7 @@ module Sdl.DitaDelivery.Components {
 
                     toc.rootItems = items;
                     this.setState({
+                        activeTocItemPath: path,
                         isTocLoading: false,
                         isPageLoading: Array.isArray(items) && items.length > 0
                     });
@@ -141,9 +147,27 @@ module Sdl.DitaDelivery.Components {
             const location = Routing.getPublicationLocation();
             if (location) {
                 // Set the current active path for the tree
-                this._setActiveSitemapPath(location.sitemapItemId, getRootItems);
+                this._getActiveSitemapPath(location.sitemapItemId, getRootItems);
             } else {
-               getRootItems();
+                getRootItems();
+            }
+        }
+
+        /**
+         * Invoked when a component is receiving new props. This method is not called for the initial render.
+         *
+         * @param {ITocProps} nextProps
+         */
+        public componentWillReceiveProps(nextProps: ITocProps): void {
+            const location = Routing.getPublicationLocation();
+            const { selectedTocItem } = this.state;
+            if (location && (!selectedTocItem || location.sitemapItemId !== selectedTocItem.Id)) {
+                // Set the current active path for the tree
+                this._getActiveSitemapPath(location.sitemapItemId, (path) => {
+                    this.setState({
+                        activeTocItemPath: path
+                    });
+                });
             }
         }
 
@@ -169,7 +193,7 @@ module Sdl.DitaDelivery.Components {
          * @returns {JSX.Element}
          */
         public render(): JSX.Element {
-            const { isPageLoading, selectedTocItem } = this.state;
+            const { isPageLoading, selectedTocItem, activeTocItemPath } = this.state;
             const { content, title, error} = this._page;
             const { rootItems } = this._toc;
             const tocError = this._toc.error;
@@ -177,7 +201,7 @@ module Sdl.DitaDelivery.Components {
             return (
                 <section className={"sdl-dita-delivery-publication-content"}>
                     <Toc
-                        activeItemPath={this._activePagePath}
+                        activeItemPath={activeTocItemPath}
                         rootItems={rootItems}
                         loadChildItems={DataStore.getSitemapItems.bind(DataStore) }
                         onSelectionChanged={this._onTocSelectionChanged.bind(this) }
@@ -208,13 +232,12 @@ module Sdl.DitaDelivery.Components {
                 page.content = null;
             }
 
-            this._activePagePath = path;
-
             DataStore.getPublicationTitle(publicationId, (error, title) => {
                 if (error) {
                     page.error = error;
                 }
                 this.setState({
+                    activeTocItemPath: path,
                     selectedTocItem: sitemapItem,
                     isPageLoading: sitemapItem.Url ? true : false
                 });
@@ -244,7 +267,7 @@ module Sdl.DitaDelivery.Components {
             });
         }
 
-        private _setActiveSitemapPath(sitemapItemId: string, done: () => void): void {
+        private _getActiveSitemapPath(sitemapItemId: string, done: (path: string[]) => void): void {
             DataStore.getSitemapPath(sitemapItemId, (error, path) => {
                 if (this._isUnmounted) {
                     return;
@@ -259,9 +282,8 @@ module Sdl.DitaDelivery.Components {
                     });
                     return;
                 }
-                this._activePagePath = path;
 
-                done();
+                done(path);
             });
         }
     };

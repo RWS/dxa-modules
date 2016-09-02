@@ -38,6 +38,15 @@ module Sdl.DitaDelivery {
         }
 
         /**
+         * Use this hook to be notified on location changes
+         *
+         * @param {() => void} handler Handler which will be triggered upon a location change.
+         */
+        public onLocationChanged(handler: () => void): void {
+            RoutingClient._history.listen(handler);
+        }
+
+        /**
          * Get the absolute path
          *
          * @param {string} path Path
