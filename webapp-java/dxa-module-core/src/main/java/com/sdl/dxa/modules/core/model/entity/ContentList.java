@@ -21,7 +21,7 @@ import java.util.List;
 
 import static com.sdl.webapp.common.api.mapping.semantic.config.SemanticVocabulary.SCHEMA_ORG;
 import static com.sdl.webapp.common.api.mapping.semantic.config.SemanticVocabulary.SDL_CORE;
-import static com.sdl.webapp.common.util.InitializationUtils.ContentManagerUtils.schemaIdFromSchemaKey;
+import static com.sdl.webapp.common.util.LocalizationUtils.schemaIdFromSchemaKey;
 
 @SemanticEntities({
         @SemanticEntity(entityName = "ItemList", vocabulary = SCHEMA_ORG, prefix = "s", public_ = true),
