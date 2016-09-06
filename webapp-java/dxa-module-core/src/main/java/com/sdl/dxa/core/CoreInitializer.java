@@ -18,7 +18,7 @@ import com.sdl.webapp.common.api.mapping.views.RegisteredViewModels;
 import com.sdl.webapp.common.api.model.entity.Configuration;
 import com.sdl.webapp.common.api.model.entity.NavigationLinks;
 import com.sdl.webapp.common.api.model.entity.SitemapItem;
-import com.sdl.webapp.common.api.model.page.PageModelImpl;
+import com.sdl.webapp.common.api.model.page.DefaultPageModel;
 import com.sdl.webapp.common.api.model.region.RegionModelImpl;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
@@ -59,9 +59,9 @@ public class CoreInitializer {
             @RegisteredViewModel(viewName = "ThumbnailList", modelClass = ContentList.class),
             @RegisteredViewModel(viewName = "TopNavigation", modelClass = NavigationLinks.class),
             @RegisteredViewModel(viewName = "YouTubeVideo", modelClass = YouTubeVideo.class),
-            @RegisteredViewModel(viewName = "GeneralPage", modelClass = PageModelImpl.class),
-            @RegisteredViewModel(viewName = "IncludePage", modelClass = PageModelImpl.class),
-            @RegisteredViewModel(viewName = "RedirectPage", modelClass = PageModelImpl.class),
+            @RegisteredViewModel(viewName = "GeneralPage", modelClass = DefaultPageModel.class),
+            @RegisteredViewModel(viewName = "IncludePage", modelClass = DefaultPageModel.class),
+            @RegisteredViewModel(viewName = "RedirectPage", modelClass = DefaultPageModel.class),
             @RegisteredViewModel(viewName = "2-Column", modelClass = RegionModelImpl.class),
             @RegisteredViewModel(viewName = "3-Column", modelClass = RegionModelImpl.class),
             @RegisteredViewModel(viewName = "4-Column", modelClass = RegionModelImpl.class),
