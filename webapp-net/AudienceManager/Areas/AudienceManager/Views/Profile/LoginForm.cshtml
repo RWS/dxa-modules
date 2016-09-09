@@ -1,0 +1,49 @@
+﻿@model Sdl.Web.Modules.AudienceManager.Models.LoginForm
+
+<section id="accountLogin" class="container-fluid full-width">
+    <div class="account-login-profile account-form">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="col-sm-12 text-center">
+                    <hr class="container-fluid fw-divider">
+                    <h3 class="form-h">@Model.Heading</h3>
+                </div>
+            </div>
+        </div>
+        <hr class="container-fluid fw-divider" />
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <div class="login-container">
+                    @using (Html.BeginForm("login", "api/profile", new { returnUrl = WebRequestContext.Localization.GetBaseUrl() }, FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        if (!Html.ViewData.ModelState.IsValid)
+                        {   <div class="form-control">
+                            @Html.ValidationSummary(true)<br />
+                        </div>
+                        }
+                        <fieldset>
+                            @Html.TextBoxFor(m => m.Username, new { @class = "form-control", placeholder = @Model.UserNameLabel })
+                            @if (!Html.ViewData.ModelState.IsValid) { Html.ValidationMessageFor(m => m.Username); }
+
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = @Model.PasswordLabel })
+                            @if (!Html.ViewData.ModelState.IsValid)
+                            { @Html.ValidationMessageFor(m => m.Password);
+                            }
+                            <br />
+
+                            <div class="pull-left">
+                                @Html.EditorFor(m => m.RememberMe, new { @class = "form-control", placeholder = @Model.RememberMeLabel })
+                            </div>
+
+                            <br />
+                            <br />
+                            <br />
+                            <button type="submit" class="form-control btn-primary">@Model.SubmitButtonLabel</button>
+                        </fieldset>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

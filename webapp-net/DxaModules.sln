@@ -30,6 +30,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdl.Web.Modules.ContextExpr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdl.Web.Modules.Core", "Core\Sdl.Web.Modules.Core.csproj", "{32943BD1-4891-4B03-AFCD-296658F61581}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdl.Web.Modules.AudienceManager", "AudienceManager\Sdl.Web.Modules.AudienceManager.csproj", "{83EC18A4-831F-4939-9912-D8A93FA3998D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -103,6 +105,12 @@ Global
 		{32943BD1-4891-4B03-AFCD-296658F61581}.Release_7.1|Any CPU.Build.0 = Release|Any CPU
 		{32943BD1-4891-4B03-AFCD-296658F61581}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32943BD1-4891-4B03-AFCD-296658F61581}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83EC18A4-831F-4939-9912-D8A93FA3998D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83EC18A4-831F-4939-9912-D8A93FA3998D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83EC18A4-831F-4939-9912-D8A93FA3998D}.Release_7.1|Any CPU.ActiveCfg = Release|Any CPU
+		{83EC18A4-831F-4939-9912-D8A93FA3998D}.Release_7.1|Any CPU.Build.0 = Release|Any CPU
+		{83EC18A4-831F-4939-9912-D8A93FA3998D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83EC18A4-831F-4939-9912-D8A93FA3998D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
