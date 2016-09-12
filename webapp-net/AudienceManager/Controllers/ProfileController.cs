@@ -21,6 +21,7 @@ namespace Sdl.Web.Modules.AudienceManager.Controllers
         [Route("~/api/profile/login")]
         public ActionResult Login()
         {
+            // Return login form view
             return View("~/Areas/AudienceManager/Views/Profile/LoginForm.cshtml", new LoginForm());
         }
 
@@ -30,7 +31,9 @@ namespace Sdl.Web.Modules.AudienceManager.Controllers
         [Route("~/api/profile/login")]
         public ActionResult Login(LoginForm model, string returnUrl)
         {
-            if (this.ModelState.IsValid && Membership.ValidateUser(model.Username, model.Password))
+            // TODO:
+            // Do we use a membership provider, ASP.NET Identity for authentication ?
+            if (this.ModelState.IsValid /*&& Membership.ValidateUser(model.Username, model.Password)*/)
             {
                 FormsAuthentication.SetAuthCookie(model.Username, model.RememberMe);
             }
@@ -49,6 +52,7 @@ namespace Sdl.Web.Modules.AudienceManager.Controllers
         [Route("~/api/profile/logout")]
         public ActionResult Logout()
         {
+            // TODO
             return Redirect(WebRequestContext.Localization.GetBaseUrl());
         }
     }   
