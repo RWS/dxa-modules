@@ -17,14 +17,6 @@ namespace Sdl.Web.Modules.AudienceManager.Controllers
     [RoutePrefix("{localization}/api/profile")]
     public class ProfileController : EntityController
     {
-        [Route("login")]
-        [Route("~/api/profile/login")]
-        public ActionResult Login()
-        {
-            // Return login form view
-            return View("~/Areas/AudienceManager/Views/Profile/LoginForm.cshtml", new LoginForm());
-        }
-
         [AllowAnonymous]
         [HttpPost]
         [Route("login")]

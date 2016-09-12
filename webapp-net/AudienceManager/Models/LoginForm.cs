@@ -13,24 +13,27 @@ namespace Sdl.Web.Modules.AudienceManager.Models
     public class LoginForm : EntityModel
     {
         /// <summary>
-        /// Form heading text
-        /// </summary>
-        public string Heading { get; set; }
-
-        /// <summary>
         /// Holds the form control value for username
         /// </summary>
+        [SemanticProperty(IgnoreMapping=true)]
         public string Username { get; set; }
 
         /// <summary>
         /// Holds the form control value for password
         /// </summary>
+        [SemanticProperty(IgnoreMapping = true)]
         public string Password { get; set; }
 
         /// <summary>
         /// Holds the form control value for remember me
         /// </summary>
+        [SemanticProperty(IgnoreMapping = true)]
         public bool RememberMe { get; set; }
+
+        /// <summary>
+        /// Form heading text
+        /// </summary>
+        public string Heading { get; set; }
 
         /// <summary>
         /// Label text for username input control on view
