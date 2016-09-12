@@ -27,7 +27,7 @@ namespace Sdl.Web.Modules.AudienceManager.Controllers
             // Do we use a membership provider, ASP.NET Identity for authentication ?
             if (this.ModelState.IsValid /*&& Membership.ValidateUser(model.Username, model.Password)*/)
             {
-                FormsAuthentication.SetAuthCookie(model.Username, model.RememberMe);
+                FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
             }
             if (!string.IsNullOrEmpty(returnUrl))
             {

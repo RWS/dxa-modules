@@ -16,7 +16,7 @@ namespace Sdl.Web.Modules.AudienceManager.Models
         /// Holds the form control value for username
         /// </summary>
         [SemanticProperty(IgnoreMapping=true)]
-        public string Username { get; set; }
+        public string UserName { get; set; }
 
         /// <summary>
         /// Holds the form control value for password

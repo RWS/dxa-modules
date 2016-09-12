@@ -24,10 +24,10 @@
                 }
                 <fieldset>
                     <div class="row">
-                        @Html.TextBoxFor(m => m.Username, new { @class = "form-control", placeholder = @Model.UserNameLabel })
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = @Model.UserNameLabel })
                         @if (!Html.ViewData.ModelState.IsValid)
                         {
-                            Html.ValidationMessageFor(m => m.Username);
+                            Html.ValidationMessageFor(m => m.UserName);
                         }
 
                         @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = @Model.PasswordLabel })
