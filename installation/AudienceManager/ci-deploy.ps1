@@ -117,7 +117,6 @@ function Add-SystemDiagnosticsLogger([string] $logSourceName, [string] $listener
 $webConfigFile = "$distDestination\Web.config"
 Write-Host "Updating '$webConfigFile' ..."
 [xml] $webConfigDoc = Get-Content $webConfigFile
-Enable-AmbientFrameworkModule $webConfigDoc
 Set-MembershipProvider "AudienceManagerMembership" "Sdl.Web.Modules.AudienceManager.Security.AudienceManagerMembershipProvider, Sdl.Web.Modules.AudienceManager" $webConfigDoc
 Add-SystemDiagnosticsLogger "AudienceManagerLogger" "AudienceManagerTraceListener" "Sdl.AudienceManager.ContentDelivery.Logging.TraceListeners.RollingFlatFileTraceListener, Sdl.AudienceManager.ContentDelivery" $logPath $logLevel $webConfigDoc
 $webConfigDoc.Save($webConfigFile)
