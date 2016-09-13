@@ -13,6 +13,19 @@ namespace Sdl.Web.Modules.AudienceManager.Controllers
 {
     /// <summary>
     /// ProfileController
+    /// 
+    /// A membership provider is required to be configured in your Web.Config:
+    /// <system.web>
+    ///     ...
+    ///     <membership defaultProvider="AudienceManagerMembership">
+    ///         <providers>
+    ///             <clear />
+    ///             <add name="AudienceManagerMembership" type="Sdl.Web.Modules.AudienceManager.Security.AudienceManagerMembershipProvider, Sdl.Web.Modules.AudienceManager, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" applicationName="/" enablePasswordReset="false" enablePasswordRetrieval="false" minRequiredPasswordLength="3" passwordFormat="Clear" requiresQuestionAndAnswer="false" requiresUniqueEmail="false" />
+    ///         </providers>
+    ///     </membership>
+    ///     ...
+    /// </system.web>
+    /// 
     /// </summary>
     [RoutePrefix("{localization}/api/profile")]
     public class ProfileController : EntityController
@@ -23,9 +36,7 @@ namespace Sdl.Web.Modules.AudienceManager.Controllers
         [Route("~/api/profile/login")]
         public ActionResult Login(LoginForm model, string returnUrl)
         {
-            // TODO:
-            // Do we use a membership provider, ASP.NET Identity for authentication ?
-            if (this.ModelState.IsValid /*&& Membership.ValidateUser(model.Username, model.Password)*/)
+            if (this.ModelState.IsValid && Membership.ValidateUser(model.UserName, model.Password))
             {
                 FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
             }
