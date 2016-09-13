@@ -1,10 +1,5 @@
 ﻿using Sdl.Web.Modules.AudienceManager.Models;
 using Sdl.Web.Mvc.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sdl.Web.Modules.AudienceManager
 {
@@ -24,7 +19,7 @@ namespace Sdl.Web.Modules.AudienceManager
         protected override void RegisterAllViewModels()
         {
             // Entity Views
-            RegisterViewModel("LoginForm", typeof(LoginForm), "Profile");           
+            RegisterViewModel("LoginForm", typeof(LoginForm), "Profile");
         }
     }
 }

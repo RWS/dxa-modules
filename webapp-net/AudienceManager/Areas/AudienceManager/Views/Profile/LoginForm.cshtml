@@ -1,4 +1,4 @@
-﻿@model Sdl.Web.Modules.AudienceManager.Models.LoginForm
+﻿@model LoginForm
 
 <section id="accountLogin" class="container-fluid full-width">
     <div class="account-login-profile account-form">
@@ -27,7 +27,7 @@
                         @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = @Model.UserNameLabel })
                         @if (!Html.ViewData.ModelState.IsValid)
                         {
-                            Html.ValidationMessageFor(m => m.UserName);
+                            @Html.ValidationMessageFor(m => m.UserName);
                         }
 
                         @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = @Model.PasswordLabel })

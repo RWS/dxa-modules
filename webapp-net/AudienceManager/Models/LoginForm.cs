@@ -1,9 +1,4 @@
 ﻿using Sdl.Web.Common.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 
 namespace Sdl.Web.Modules.AudienceManager.Models
 {
