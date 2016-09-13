@@ -36,7 +36,9 @@
                             @Html.ValidationMessageFor(m => m.Password);
                         }
 
-                        @Html.EditorFor(m => m.RememberMe, new { @class = "form-control", placeholder = @Model.RememberMeLabel })
+                        @Html.CheckBoxFor(m => m.RememberMe)
+                        @Html.LabelFor(m => m.RememberMe, Model.RememberMeLabel)
+
                         <hr class="fw-divider">
                         <button type="submit" class="form-control btn-primary">@Model.SubmitButtonLabel</button>
                     </div>
