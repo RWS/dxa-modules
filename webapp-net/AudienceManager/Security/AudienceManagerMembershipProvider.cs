@@ -3,9 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using WebMatrix.WebData;
+using Tridion.OutboundEmail.ContentDelivery.Profile;
 
 namespace Sdl.Web.Modules.AudienceManager.Security
 {
+    /// <summary>
+    /// AudienceManagerMembershipProvider
+    /// 
+    /// A membership provider is required to be configured in your Web.Config:
+    /// <system.web>
+    ///     ...
+    ///     <membership defaultProvider="AudienceManagerMembership">
+    ///         <providers>
+    ///             <clear />
+    ///             <add name="AudienceManagerMembership" type="Sdl.Web.Modules.AudienceManager.Security.AudienceManagerMembershipProvider, Sdl.Web.Modules.AudienceManager, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" applicationName="/" enablePasswordReset="false" enablePasswordRetrieval="false" minRequiredPasswordLength="3" passwordFormat="Clear" requiresQuestionAndAnswer="false" requiresUniqueEmail="false" />
+    ///         </providers>
+    ///     </membership>
+    ///     ...
+    /// </system.web>
+    /// 
+    /// </summary>
     public class AudienceManagerMembershipProvider : ExtendedMembershipProvider
     {
         public override bool ConfirmAccount(string accountConfirmationToken)
@@ -157,7 +174,8 @@ namespace Sdl.Web.Modules.AudienceManager.Security
 
         public override string GetUserNameByEmail(string email)
         {
-            throw new NotImplementedException();
+            // we are using the email as the username
+            return email;
         }
 
         public override int MaxInvalidPasswordAttempts
@@ -217,7 +235,17 @@ namespace Sdl.Web.Modules.AudienceManager.Security
 
         public override bool ValidateUser(string username, string password)
         {
-            throw new NotImplementedException();
+            UserProfile userProfile = AudienceManagerFactory.GetUser(username);
+            if (userProfile != null && userProfile.VerifyPassword(password))
+            {
+                userProfile.SetAsCurrentVisitor();
+                return true;
+            }
+            else
+            {
+                UserProfile.ClearCurrentVisitor();
+                return false;
+            }
         }
     }
 }

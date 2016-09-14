@@ -39,7 +39,7 @@
     <CopyLocal>false</CopyLocal>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Sdl.Web.Common, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Sdl.Web.Common">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.6.0-alpha-201609051357\lib\net452\Sdl.Web.Common.dll</HintPath>
       <Private>$(CopyLocal)</Private>
@@ -53,7 +53,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
-    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.Mvc">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.1.2\lib\net45\System.Web.Mvc.dll</HintPath>
       <Private>$(CopyLocal)</Private>
@@ -63,21 +63,30 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="WebMatrix.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="Tridion.ContentDelivery.AmbientData">
+      <HintPath>..\packages\Sdl.Web.Delivery.8.3.0-beta-201609132228\lib\net45\Tridion.ContentDelivery.AmbientData.dll</HintPath>
+    </Reference>
+    <Reference Include="Tridion.OutboundEmail.ContentDelivery">
+      <HintPath>..\packages\Sdl.AudienceManager.ContentDelivery.8.3.0-beta-201609131852\lib\net452\Tridion.OutboundEmail.ContentDelivery.dll</HintPath>
+    </Reference>
+    <Reference Include="WebMatrix.Data">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.Data.3.2.3\lib\net45\WebMatrix.Data.dll</HintPath>
     </Reference>
-    <Reference Include="WebMatrix.WebData, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="WebMatrix.WebData">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.WebData.3.2.3\lib\net45\WebMatrix.WebData.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AudienceManagerAreaRegistration.cs" />
+    <Compile Include="AudienceManagerClaims.cs" />
+    <Compile Include="AudienceManagerFactory.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Models\LoginForm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\AudienceManagerMembershipProvider.cs" />
+    <Compile Include="UserProfile.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -85,7 +94,9 @@
     <Content Include="Areas\AudienceManager\Views\Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
