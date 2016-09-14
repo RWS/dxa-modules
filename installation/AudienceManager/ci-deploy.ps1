@@ -31,7 +31,7 @@ $distSource = $distSource.TrimEnd("\")
 $distDestination = $distDestination.TrimEnd("\")
 
 
-function Set-MembershipProvider([string] $providerName, [string] $providerType, [xml] $configDoc)
+function Set-MembershipProvider([string] $providerName, [string] $providerType, [bool] $isDefaultProvider, [xml] $configDoc)
 {
     $membershipProvidersElement = Get-XmlElement "/configuration/system.web/membership/providers" $configDoc
     if (!$membershipProvidersElement.HasChildNodes)
@@ -52,6 +52,12 @@ function Set-MembershipProvider([string] $providerName, [string] $providerType, 
         $membershipProvidersElement.AppendChild($membershipProviderElement) | Out-Null
 
         Write-Host "Added '$providerName' Membership Provider."
+    }
+
+    if ($isDefaultProvider)
+    {
+        $membershipProvidersElement.ParentNode.SetAttribute("defaultProvider", $providerName)
+        Write-Host "Set '$providerName' as default Membership Provider."
     }
 }
 
@@ -117,6 +123,6 @@ function Add-SystemDiagnosticsLogger([string] $logSourceName, [string] $listener
 $webConfigFile = "$distDestination\Web.config"
 Write-Host "Updating '$webConfigFile' ..."
 [xml] $webConfigDoc = Get-Content $webConfigFile
-Set-MembershipProvider "AudienceManagerMembership" "Sdl.Web.Modules.AudienceManager.Security.AudienceManagerMembershipProvider, Sdl.Web.Modules.AudienceManager" $webConfigDoc
+Set-MembershipProvider "AudienceManagerMembership" "Sdl.Web.Modules.AudienceManager.Security.AudienceManagerMembershipProvider, Sdl.Web.Modules.AudienceManager" $true $webConfigDoc
 Add-SystemDiagnosticsLogger "AudienceManagerLogger" "AudienceManagerTraceListener" "Sdl.AudienceManager.ContentDelivery.Logging.TraceListeners.RollingFlatFileTraceListener, Sdl.AudienceManager.ContentDelivery" $logPath $logLevel $webConfigDoc
 $webConfigDoc.Save($webConfigFile)
