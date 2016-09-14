@@ -38,6 +38,16 @@
     <WarningLevel>4</WarningLevel>
     <CopyLocal>false</CopyLocal>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release_7.1|AnyCPU'">
+    <OutputPath>bin\Release_7.1\</OutputPath>
+    <DefineConstants>TRACE;TRIDION_71</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CopyLocal>false</CopyLocal>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Sdl.Web.Common">
       <SpecificVersion>False</SpecificVersion>
@@ -63,12 +73,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Tridion.ContentDelivery.AmbientData">
-      <HintPath>..\packages\Sdl.Web.Delivery.8.3.0-beta-201609132228\lib\net45\Tridion.ContentDelivery.AmbientData.dll</HintPath>
-    </Reference>
-    <Reference Include="Tridion.OutboundEmail.ContentDelivery">
-      <HintPath>..\packages\Sdl.AudienceManager.ContentDelivery.8.3.0-beta-201609131852\lib\net452\Tridion.OutboundEmail.ContentDelivery.dll</HintPath>
-    </Reference>
     <Reference Include="WebMatrix.Data">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.Data.3.2.3\lib\net45\WebMatrix.Data.dll</HintPath>
@@ -76,6 +80,26 @@
     <Reference Include="WebMatrix.WebData">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.WebData.3.2.3\lib\net45\WebMatrix.WebData.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition="'$(Configuration)' != 'Release_7.1'">
+    <Reference Include="Tridion.ContentDelivery.AmbientData">
+      <HintPath>..\packages\Sdl.Web.Delivery.8.3.0-beta-201609132228\lib\net45\Tridion.ContentDelivery.AmbientData.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Tridion.OutboundEmail.ContentDelivery">
+      <HintPath>..\packages\Sdl.AudienceManager.ContentDelivery.8.3.0-beta-201609131852\lib\net452\Tridion.OutboundEmail.ContentDelivery.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition="'$(Configuration)' == 'Release_7.1'">
+    <Reference Include="Tridion.ContentDelivery.AmbientData">
+      <HintPath>..\_references\2013-sp1\Tridion.ContentDelivery.AmbientData.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Tridion.OutboundEmail.ContentDelivery">
+      <HintPath>..\_references\2013-sp1\Tridion.OutboundEmail.ContentDelivery.dll</HintPath>
+      <Private>true</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
