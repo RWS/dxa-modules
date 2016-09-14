@@ -9,7 +9,7 @@
 <% request.setAttribute("requestPath", new UrlPathHelper().getOriginatingRequestUri(request)); %>
 <ul class="nav navbar-nav main-nav" ${markup.entity(entity)}>
     <c:forEach var="item" items="${entity.items}">
-        <c:set var="cssClass" value="${requestPath.startsWith(item.url) ? 'active' : ''}"/>
+        <c:set var="cssClass" value="${requestPath.equalsIgnoreCase(item.url) ? 'active' : ''}"/>
         <li class="${cssClass}">
             <a href="${item.url}" title="${item.alternateText}">${item.linkText}</a>
         </li>
