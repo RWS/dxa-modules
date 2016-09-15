@@ -18,6 +18,9 @@
     </FileUpgradeFlags>
     <OldToolsVersion>12.0</OldToolsVersion>
     <UpgradeBackupLocation />
+    <DxaFrameworkVersion>1.6.0-alpha-201609141615</DxaFrameworkVersion>
+    <SdlDeliveryVersion>8.3.0-beta-201609132228</SdlDeliveryVersion>
+    <AudienceManagerVersion>8.3.0-beta-201609131852</AudienceManagerVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -51,11 +54,11 @@
   <ItemGroup>
     <Reference Include="Sdl.Web.Common">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.6.0-alpha-201609051357\lib\net452\Sdl.Web.Common.dll</HintPath>
+      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net452\Sdl.Web.Common.dll</HintPath>
       <Private>$(CopyLocal)</Private>
     </Reference>
     <Reference Include="Sdl.Web.Mvc">
-      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.1.6.0-alpha-201609051357\lib\net452\Sdl.Web.Mvc.dll</HintPath>
+      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net452\Sdl.Web.Mvc.dll</HintPath>
       <Private>$(CopyLocal)</Private>
     </Reference>
     <Reference Include="System" />
@@ -84,11 +87,11 @@
   </ItemGroup>
   <ItemGroup Condition="'$(Configuration)' != 'Release_7.1'">
     <Reference Include="Tridion.ContentDelivery.AmbientData">
-      <HintPath>..\packages\Sdl.Web.Delivery.8.3.0-beta-201609132228\lib\net45\Tridion.ContentDelivery.AmbientData.dll</HintPath>
+      <HintPath>..\packages\Sdl.Web.Delivery.$(SdlDeliveryVersion)\lib\net45\Tridion.ContentDelivery.AmbientData.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="Tridion.OutboundEmail.ContentDelivery">
-      <HintPath>..\packages\Sdl.AudienceManager.ContentDelivery.8.3.0-beta-201609131852\lib\net452\Tridion.OutboundEmail.ContentDelivery.dll</HintPath>
+      <HintPath>..\packages\Sdl.AudienceManager.ContentDelivery.$(AudienceManagerVersion)\lib\net452\Tridion.OutboundEmail.ContentDelivery.dll</HintPath>
       <Private>true</Private>
     </Reference>
   </ItemGroup>
