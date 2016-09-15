@@ -2,46 +2,32 @@
 
 <section id="accountLogin" class="container-fluid full-width">
     <div class="account-login-profile account-form">
+        <hr class="container-fluid fw-divider">
+
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="col-sm-12 text-center">
-                    <hr class="container-fluid fw-divider">
                     <h3 class="form-h">@Model.Heading</h3>
                 </div>
             </div>
         </div>
+
         <hr class="container-fluid fw-divider" />
 
         <div class="login-container">
-
-            @using (Html.BeginForm("login", "api/profile", new { returnUrl = WebRequestContext.Localization.GetBaseUrl() }, FormMethod.Post))
+            @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
                 if (!Html.ViewData.ModelState.IsValid)
-                {   <div class="form-control">
-                    @Html.ValidationSummary(true)<br />
-                </div>
+                {
+                    @Html.ValidationSummary(excludePropertyErrors: false)
                 }
                 <fieldset>
-                    <div class="row">
-                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = @Model.UserNameLabel })
-                        @if (!Html.ViewData.ModelState.IsValid)
-                        {
-                            @Html.ValidationMessageFor(m => m.UserName);
-                        }
-
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = @Model.PasswordLabel })
-                        @if (!Html.ViewData.ModelState.IsValid)
-                        {
-                            @Html.ValidationMessageFor(m => m.Password);
-                        }
-
-                        @Html.CheckBoxFor(m => m.RememberMe)
-                        @Html.LabelFor(m => m.RememberMe, Model.RememberMeLabel)
-
-                        <hr class="fw-divider">
-                        <button type="submit" class="form-control btn-primary">@Model.SubmitButtonLabel</button>
-                    </div>
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = @Model.UserNameLabel })
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = @Model.PasswordLabel })
+                    @Html.CheckBoxFor(m => m.RememberMe)
+                    @Html.LabelFor(m => m.RememberMe, Model.RememberMeLabel)
+                    <button type="submit" class="form-control btn-primary">@Model.SubmitButtonLabel</button>
                 </fieldset>
             }
         </div>

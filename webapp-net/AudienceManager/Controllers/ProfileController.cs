@@ -2,37 +2,35 @@
 using Sdl.Web.Mvc.Controllers;
 using System.Web.Mvc;
 using System.Web.Security;
+using Sdl.Web.Common.Models;
 using WebMatrix.WebData;
-using Tridion.OutboundEmail.ContentDelivery.Profile;
 using Sdl.Web.Modules.AudienceManager.Models;
 
 namespace Sdl.Web.Modules.AudienceManager.Controllers
 {
     /// <summary>
-    /// ProfileController
+    /// Audience Manager Profile Controller
     /// </summary>
     [RoutePrefix("{localization}/api/profile")]
     public class ProfileController : EntityController
     {
-        [AllowAnonymous]
-        [HttpPost]
-        [Route("login")]
-        [Route("~/api/profile/login")]
-        public ActionResult Login(LoginForm model, string returnUrl)
+        protected override ViewModel EnrichModel(ViewModel model)
         {
-            // validate the user using the AudienceManager membership provider.
-            if (this.ModelState.IsValid && Membership.ValidateUser(model.UserName, model.Password))
+            LoginForm loginForm = base.EnrichModel(model) as LoginForm;
+
+            if (loginForm != null && MapRequestFormData(loginForm) && ModelState.IsValid)
             {
-                FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
+                // This is login form submission and basic field validation is fine.
+                // Authenticate the user using the AudienceManager Membership Provider.
+                if (Membership.ValidateUser(loginForm.UserName, loginForm.Password))
+                {
+                    FormsAuthentication.SetAuthCookie(loginForm.UserName, loginForm.RememberMe);
+                    return new RedirectModel(WebRequestContext.Localization.GetBaseUrl());
+                }
+                ModelState.AddModelError("UserName", "Unknown user name or password"); // TODO: Get error message from CM
             }
-            if (!string.IsNullOrEmpty(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
-            else
-            {
-                return Redirect(WebRequestContext.Localization.GetBaseUrl());
-            }           
+
+            return model;
         }
 
         [HttpGet]

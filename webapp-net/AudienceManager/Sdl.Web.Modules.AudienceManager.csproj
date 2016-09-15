@@ -18,7 +18,7 @@
     </FileUpgradeFlags>
     <OldToolsVersion>12.0</OldToolsVersion>
     <UpgradeBackupLocation />
-    <DxaFrameworkVersion>1.6.0-alpha-201609141615</DxaFrameworkVersion>
+    <DxaFrameworkVersion>1.6.0-alpha-201609152250</DxaFrameworkVersion>
     <SdlDeliveryVersion>8.3.0-beta-201609141135</SdlDeliveryVersion>
     <AudienceManagerVersion>8.3.0-beta-201609131852</AudienceManagerVersion>
   </PropertyGroup>
@@ -62,6 +62,7 @@
       <Private>$(CopyLocal)</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -143,6 +144,8 @@
     <PostBuildEvent>REM Deploy build artifacts to DXA Site (on development machines with DXA_SITE_DIR environment variable set)
 if defined DXA_SITE_DIR (
 xcopy "$(TargetDir)Sdl.Web.Modules.AudienceManager.*" "%25DXA_SITE_DIR%25\bin" /Y
+xcopy "$(TargetDir)Tridion.OutboundEmail*.*" "%25DXA_SITE_DIR%25\bin" /Y
+xcopy "$(TargetDir)Sdl.AudienceManager*.*" "%25DXA_SITE_DIR%25\bin" /Y
 xcopy "$(TargetDir)WebMatrix.*" "%25DXA_SITE_DIR%25\bin" /Y
 xcopy "$(ProjectDir)Areas" "%25DXA_SITE_DIR%25\Areas" /S /I /Y
 )</PostBuildEvent>
