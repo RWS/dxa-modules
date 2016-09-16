@@ -1,4 +1,5 @@
 ﻿using Sdl.Web.Common.Logging;
+using Sdl.Web.Mvc.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,44 +8,38 @@ using Tridion.OutboundEmail.ContentDelivery.Profile;
 
 namespace Sdl.Web.Modules.AudienceManager
 {
+    /// <summary>
+    /// AudienceManagerFactory
+    /// </summary>
     public static class AudienceManagerFactory
     {
         public static UserProfile GetUser(string emailAddress)
         {
-            List<string> sources = new List<string>();
-            // TODO: get sources from configuration CSV format
-            // WebRequestContext.Localization.GetConfigValue("audiencemanager.contactImportSources");
-            foreach (string source in sources)
+            string[] importSources = new string[0];
+            string sourceCSV = WebRequestContext.Localization.GetConfigValue("audiencemanager.contactImportSources");
+            if(!string.IsNullOrEmpty(sourceCSV))
             {
-                Contact contact = GetContactBySourceKey(source, emailAddress);
+                importSources = sourceCSV.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            }
+
+            foreach (string importSource in importSources)
+            {
+                Contact contact = GetContactByImportSourceAndIdKey(importSource, emailAddress);
                 if (contact != null)
                 {
                     return UserProfile.Create(contact);
                 }
             }
-
             // no contact found
             return null;
-        }
+        }      
 
-        public static UserProfile GetUserBySourceKey(string source, string key)
+        private static Contact GetContactByImportSourceAndIdKey(string importSource, string idKey)
         {
-            Contact contact = GetContactBySourceKey(source, key);
-            if (contact != null)
+            if (!string.IsNullOrEmpty(importSource) && !string.IsNullOrEmpty(idKey))
             {
-                return UserProfile.Create(contact);
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        private static Contact GetContactBySourceKey(string source, string key)
-        {
-            if (!string.IsNullOrEmpty(source) && !string.IsNullOrEmpty(key))
-            {
-                var identifiers = new string[] { key, source };
+                // identification key comes first followed by import source otherwise you'll not get a match!
+                var identifiers = new string[] { idKey, importSource };
                 try
                 {
                     if (Contact.Exists(identifiers))
@@ -54,7 +49,7 @@ namespace Sdl.Web.Modules.AudienceManager
                 }
                 catch
                 {
-                    Log.Info("Contact not found for identifiers {0}:{1}", source, key);
+                    Log.Info("Contact not found for import source {0} and identification key {1}", importSource, idKey);
                 }
             }
             return null;

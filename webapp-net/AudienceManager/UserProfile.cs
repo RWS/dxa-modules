@@ -13,6 +13,9 @@ namespace Sdl.Web.Modules.AudienceManager
     /// </summary>
     public class UserProfile
     {
+        private static readonly string EXT_PASSWORD = "Password";
+        private static readonly string EXT_ENCRYPTED = "encrypted:";
+
         private readonly Contact _contact;
 
         protected UserProfile(Contact contact)
@@ -33,11 +36,27 @@ namespace Sdl.Web.Modules.AudienceManager
             }
         }
 
+        public string Password
+        {
+            get
+            {
+                return GetExtendedDetail(EXT_PASSWORD);
+            }
+        }
+   
         public bool VerifyPassword(string password)
         {
-            // why do we need to digest the password and then pass that to the CheckPassword function?
-            // this results in two service requests when really you only need to send the password over!
-            return Digests.CheckPassword(password, Digests.DigestPassword(password));
+            // passwords are stored in plaintext. any contacts made through the webapp will not store the 
+            // password but instead it's digest. we identify this by a prefix of 'encrypted:'.
+            string storedPword = Password;
+            if (storedPword.StartsWith(EXT_ENCRYPTED))
+            {
+                return Digests.CheckPassword(password, storedPword.Substring(EXT_ENCRYPTED.Length));
+            }
+            else
+            {
+                return password.Equals(storedPword);
+            }
         }
 
         public static void ClearCurrentVisitor()
@@ -71,6 +90,12 @@ namespace Sdl.Web.Modules.AudienceManager
         {
             AmbientDataContext.CurrentClaimStore.Put(AudienceManagerClaims.AudienceManagerContact, Contact.Id.ToString());
             Contact.IdentifyAsCurrentVisitor();
+        }
+
+        private string GetExtendedDetail(string fieldName)
+        {
+            ExtendedDetail detail = _contact.ExtendedDetails[fieldName];
+            return detail != null ? detail.StringValue : null;
         }
     }
 }
