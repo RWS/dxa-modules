@@ -52,7 +52,11 @@ namespace Sdl.Web.Modules.AudienceManager
                 {
                     return Contact.GetFromContactIdentificatonKeys(identifiers);
                 }
+#if TRIDION_71
+                catch (Tridion.OutboundEmail.ContentDelivery.AudienceManagementException)
+#else            
                 catch (ContactDoesNotExistException)
+#endif
                 {
                     // Contact does not exist in the given import source
                     return null;
