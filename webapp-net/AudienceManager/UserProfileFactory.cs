@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Web;
+using Sdl.Web.Common;
 using Sdl.Web.Common.Logging;
 using Sdl.Web.Mvc.Configuration;
+using Tridion.ContentDelivery.AmbientData;
 using Tridion.OutboundEmail.ContentDelivery.Profile;
 
 namespace Sdl.Web.Modules.AudienceManager
@@ -10,6 +13,11 @@ namespace Sdl.Web.Modules.AudienceManager
     /// </summary>
     public static class UserProfileFactory
     {
+        /// <summary>
+        /// Gets the User Profile for a given identification key.
+        /// </summary>
+        /// <param name="identificationKey">The identification key.</param>
+        /// <returns>The <see cref="UserProfile"/> or <c>null</c> if no User Profile is found for the given identification key.</returns>
         public static UserProfile GetUserProfile(string identificationKey)
         {
             using (new Tracer(identificationKey))
@@ -20,6 +28,8 @@ namespace Sdl.Web.Modules.AudienceManager
                     Log.Warn("No Audience Manager Contact Import Sources are configured.");
                     return null;
                 }
+
+                PreparePublicationResolving();
 
                 foreach (string importSource in contactImportSources.Split(','))
                 {
@@ -34,6 +44,24 @@ namespace Sdl.Web.Modules.AudienceManager
 
                 Log.Debug("No Audience Manager Contact found for identification key '{0}' and Import Sources '{1}'.", identificationKey, contactImportSources);
                 return null;
+            }
+        }
+
+        /// <summary>
+        /// Prepares for Audience Manager Publication Resolving.
+        /// </summary>
+        /// <remarks>
+        /// Audience Manager tries to resolve the context Publication based on the <c>taf:request:full_url</c> ADF claim.
+        /// However, this will fail if the Request URL is extensionless (which it typically is in DXA).
+        /// As a work-around, we ensure that the <c>taf:request:full_url</c> ADF claim has a file extension here.
+        /// </remarks>
+        private static void PreparePublicationResolving()
+        {
+            string pageUrl = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Path);
+            if (!pageUrl.EndsWith(Constants.DefaultExtension))
+            {
+                pageUrl += Constants.DefaultExtension;
+                AmbientDataContext.CurrentClaimStore.Put(new Uri("taf:request:full_url"), pageUrl);
             }
         }
 
