@@ -1,28 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using WebMatrix.WebData;
-using Tridion.OutboundEmail.ContentDelivery.Profile;
 
 namespace Sdl.Web.Modules.AudienceManager.Security
 {
     /// <summary>
     /// AudienceManagerMembershipProvider
-    /// 
-    /// A membership provider is required to be configured in your Web.Config:
+    /// </summary>
+    /// <remarks>
+    /// The membership provider should be configured as default membership provider in your web.config:
     /// <system.web>
     ///     ...
     ///     <membership defaultProvider="AudienceManagerMembership">
     ///         <providers>
     ///             <clear />
-    ///             <add name="AudienceManagerMembership" type="Sdl.Web.Modules.AudienceManager.Security.AudienceManagerMembershipProvider, Sdl.Web.Modules.AudienceManager, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" applicationName="/" enablePasswordReset="false" enablePasswordRetrieval="false" minRequiredPasswordLength="3" passwordFormat="Clear" requiresQuestionAndAnswer="false" requiresUniqueEmail="false" />
+    ///             <add name="AudienceManagerMembership" type="Sdl.Web.Modules.AudienceManager.Security.AudienceManagerMembershipProvider" />
     ///         </providers>
     ///     </membership>
     ///     ...
     /// </system.web>
     /// 
-    /// </summary>
+    /// </remarks>
     public class AudienceManagerMembershipProvider : ExtendedMembershipProvider
     {
         public override bool ConfirmAccount(string accountConfirmationToken)
@@ -235,7 +233,7 @@ namespace Sdl.Web.Modules.AudienceManager.Security
 
         public override bool ValidateUser(string username, string password)
         {
-            UserProfile userProfile = AudienceManagerFactory.GetUser(username);
+            UserProfile userProfile = UserProfileFactory.GetUserProfile(username);
             if (userProfile != null && userProfile.VerifyPassword(password))
             {
                 userProfile.SetAsCurrentVisitor();

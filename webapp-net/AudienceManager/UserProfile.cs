@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Tridion.OutboundEmail.ContentDelivery.Profile;
+﻿using Tridion.OutboundEmail.ContentDelivery.Profile;
 using Tridion.OutboundEmail.ContentDelivery.Utilities;
 using Tridion.ContentDelivery.AmbientData;
 
 namespace Sdl.Web.Modules.AudienceManager
 {
     /// <summary>
-    /// UserProfile
+    /// Represents a User Profile obtained from Audience Manager
     /// </summary>
     public class UserProfile
     {
-        private static readonly string EXT_PASSWORD = "Password";
-        private static readonly string EXT_ENCRYPTED = "encrypted:";
+        private const string PasswordFieldName = "Password";
+        private const string EncryptedPrefix = "encrypted:";
 
         private readonly Contact _contact;
 
@@ -40,7 +36,7 @@ namespace Sdl.Web.Modules.AudienceManager
         {
             get
             {
-                return GetExtendedDetail(EXT_PASSWORD);
+                return GetExtendedDetail(PasswordFieldName);
             }
         }
    
@@ -48,14 +44,14 @@ namespace Sdl.Web.Modules.AudienceManager
         {
             // passwords are stored in plaintext. any contacts made through the webapp will not store the 
             // password but instead it's digest. we identify this by a prefix of 'encrypted:'.
-            string storedPword = Password;
-            if (storedPword.StartsWith(EXT_ENCRYPTED))
+            string storedPassword = Password;
+            if (storedPassword.StartsWith(EncryptedPrefix))
             {
-                return Digests.CheckPassword(password, storedPword.Substring(EXT_ENCRYPTED.Length));
+                return Digests.CheckPassword(password, storedPassword.Substring(EncryptedPrefix.Length));
             }
             else
             {
-                return password.Equals(storedPword);
+                return password.Equals(storedPassword);
             }
         }
 
@@ -69,20 +65,18 @@ namespace Sdl.Web.Modules.AudienceManager
             get
             {
                 string tcmUri = AmbientDataContext.CurrentClaimStore.Get<string>(AudienceManagerClaims.AudienceManagerContact);
-                if (!string.IsNullOrEmpty(tcmUri))
+                if (string.IsNullOrEmpty(tcmUri))
                 {
-                    TcmUri uri = new TcmUri(tcmUri);
-                    Contact contact = Contact.GetFromInternalContactId(uri);
-                    if (contact != null)
-                    {
-                        return Create(contact);
-                    }
-                    else
-                    {
-                        ClearCurrentVisitor();
-                    }
+                    return null;
                 }
-                return null;
+                TcmUri uri = new TcmUri(tcmUri);
+                Contact contact = Contact.GetFromInternalContactId(uri);
+                if (contact == null)
+                {
+                    ClearCurrentVisitor();
+                    return null;
+                }
+                return Create(contact);
             }
         }
 
