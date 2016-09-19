@@ -32,7 +32,7 @@ namespace Sdl.Web.Modules.AudienceManager
                     }
                 }
 
-                Log.Debug("No Audience Manager Contact found for identification key '{0} and Import Sources '{1}''.", identificationKey, contactImportSources);
+                Log.Debug("No Audience Manager Contact found for identification key '{0}' and Import Sources '{1}'.", identificationKey, contactImportSources);
                 return null;
             }
         }
