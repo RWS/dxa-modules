@@ -1,36 +1,34 @@
 ﻿@model LoginForm
 
-<section id="accountLogin" class="container-fluid full-width">
-    <div class="account-login-profile account-form">
-        <hr class="container-fluid fw-divider">
+<div @Html.DxaEntityMarkup()>
+    <h1 @Html.DxaPropertyMarkup(() => Model.Heading)>@Model.Heading</h1>
 
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="col-sm-12 text-center">
-                    <h3 class="form-h">@Model.Heading</h3>
-                </div>
+    @using (Html.BeginForm())
+    {
+        if (!WebRequestContext.IsPreview)
+        {
+            @* If we put in an Anti Forgery Token, the Page can't be edited in XPM anymore *@
+            @Html.AntiForgeryToken()
+        }
+        if (!Html.ViewData.ModelState.IsValid)
+        {
+            <div class="alert-danger">
+                @Html.ValidationSummary(excludePropertyErrors: false)
             </div>
+        }
+        <div class="form-group">
+            @Html.TextBoxFor(m => m.UserName, new {@class = "form-control", placeholder = @Model.UserNameLabel})
         </div>
-
-        <hr class="container-fluid fw-divider" />
-
-        <div class="login-container">
-            @using (Html.BeginForm())
-            {
-                @Html.AntiForgeryToken()
-                if (!Html.ViewData.ModelState.IsValid)
-                {
-                    @Html.ValidationSummary(excludePropertyErrors: false)
-                }
-                <fieldset>
-                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = @Model.UserNameLabel })
-                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = @Model.PasswordLabel })
-                    @Html.CheckBoxFor(m => m.RememberMe)
-                    @Html.LabelFor(m => m.RememberMe, Model.RememberMeLabel)
-                    <button type="submit" class="form-control btn-primary">@Model.SubmitButtonLabel</button>
-                </fieldset>
-            }
+        <div class="form-group">
+            @Html.PasswordFor(m => m.Password, new {@class = "form-control", placeholder = @Model.PasswordLabel})
         </div>
-    </div>
-</section>
+        <div class="form-group">
+            @Html.CheckBoxFor(m => m.RememberMe)
+            @Html.LabelFor(m => m.RememberMe, Model.RememberMeLabel)
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">@Model.SubmitButtonLabel</button>
+        </div>
+    }
+</div>
 
