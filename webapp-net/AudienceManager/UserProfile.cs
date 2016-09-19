@@ -9,6 +9,7 @@ namespace Sdl.Web.Modules.AudienceManager
     /// </summary>
     public class UserProfile
     {
+        private const string UserNameFieldName = "IDENTIFICATION_KEY";
         private const string PasswordFieldName = "Password";
         private const string EncryptedPrefix = "encrypted:";
 
@@ -29,6 +30,14 @@ namespace Sdl.Web.Modules.AudienceManager
             get
             {
                 return _contact;
+            }
+        }
+
+        public string UserName
+        {
+            get
+            {
+                return GetExtendedDetail(UserNameFieldName);
             }
         }
 
@@ -82,7 +91,6 @@ namespace Sdl.Web.Modules.AudienceManager
 
         public void SetAsCurrentVisitor()
         {
-            AmbientDataContext.CurrentClaimStore.Put(AudienceManagerClaims.AudienceManagerContact, Contact.Id.ToString());
             Contact.IdentifyAsCurrentVisitor();
         }
 
