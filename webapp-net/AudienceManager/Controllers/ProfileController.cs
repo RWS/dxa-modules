@@ -27,7 +27,7 @@ namespace Sdl.Web.Modules.AudienceManager.Controllers
                     FormsAuthentication.SetAuthCookie(loginForm.UserName, loginForm.RememberMe);
                     return new RedirectModel(WebRequestContext.Localization.GetBaseUrl());
                 }
-                ModelState.AddModelError("UserName", "Unknown user name or password"); // TODO: Get error message from CM
+                ModelState.AddModelError("UserName", loginForm.AuthenticationErrorMessage);
             }
 
             return model;

@@ -11,14 +11,14 @@ namespace Sdl.Web.Modules.AudienceManager.Models
         /// <summary>
         /// Holds the form control value for username
         /// </summary>
-        [Required(ErrorMessage = "Please specify user name.")]
+        [Required(ErrorMessage = "@Model.NoUserNameMessage")]
         [SemanticProperty(IgnoreMapping=true)]
         public string UserName { get; set; }
 
         /// <summary>
         /// Holds the form control value for password
         /// </summary>
-        [Required(ErrorMessage = "Please specify password.")]
+        [Required(ErrorMessage = "@Model.NoPasswordMessage")]
         [SemanticProperty(IgnoreMapping = true)]
         public string Password { get; set; }
 
@@ -54,8 +54,18 @@ namespace Sdl.Web.Modules.AudienceManager.Models
         public string SubmitButtonLabel { get; set; }
 
         /// <summary>
-        /// Text for sucessfull login on view
+        /// User name not specified message
         /// </summary>
-        public string LoginSuccessText { get; set; }
+        public string NoUserNameMessage { get; set; }
+
+        /// <summary>
+        /// Password not specified message
+        /// </summary>
+        public string NoPasswordMessage { get; set; }
+
+        /// <summary>
+        /// Authentication error message
+        /// </summary>
+        public string AuthenticationErrorMessage { get; set; }
     }
 }
