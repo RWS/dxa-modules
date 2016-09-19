@@ -7,6 +7,6 @@ namespace Sdl.Web.Modules.AudienceManager
     /// </summary>
     public static class AudienceManagerClaims
     {
-        public static readonly Uri AudienceManagerContact = new Uri("taf:claim:audiencemanager:contact");
+        public static readonly Uri AudienceManagerContact = new Uri("taf:claim:audiencemanager:contact:id");
     }
 }

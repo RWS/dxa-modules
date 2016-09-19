@@ -64,40 +64,20 @@ namespace Sdl.Web.Modules.AudienceManager
             }
         }
 
+        private string GetExtendedDetail(string fieldName)
+        {
+            ExtendedDetail detail = _contact.ExtendedDetails[fieldName];
+            return detail != null ? detail.StringValue : null;
+        }
+
         public static void ClearCurrentVisitor()
         {
             AmbientDataContext.CurrentClaimStore.Remove(AudienceManagerClaims.AudienceManagerContact);
         }
 
-        public static UserProfile CurrentVisitor
-        {
-            get
-            {
-                string tcmUri = AmbientDataContext.CurrentClaimStore.Get<string>(AudienceManagerClaims.AudienceManagerContact);
-                if (string.IsNullOrEmpty(tcmUri))
-                {
-                    return null;
-                }
-                TcmUri uri = new TcmUri(tcmUri);
-                Contact contact = Contact.GetFromInternalContactId(uri);
-                if (contact == null)
-                {
-                    ClearCurrentVisitor();
-                    return null;
-                }
-                return Create(contact);
-            }
-        }
-
         public void SetAsCurrentVisitor()
         {
-            Contact.IdentifyAsCurrentVisitor();
-        }
-
-        private string GetExtendedDetail(string fieldName)
-        {
-            ExtendedDetail detail = _contact.ExtendedDetails[fieldName];
-            return detail != null ? detail.StringValue : null;
+            AmbientDataContext.CurrentClaimStore.Put(AudienceManagerClaims.AudienceManagerContact, _contact.Id.ToString(), Tridion.ContentDelivery.AmbientData.Runtime.ClaimValueScope.Session);
         }
     }
 }

@@ -112,6 +112,7 @@
     </Compile>
     <Compile Include="AudienceManagerAreaRegistration.cs" />
     <Compile Include="AudienceManagerClaims.cs" />
+    <Compile Include="Models\CurrentUserWidget.cs" />
     <Compile Include="UserProfileFactory.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Models\LoginForm.cs" />
@@ -121,6 +122,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Areas\AudienceManager\Views\Profile\CurrentUserWidget.cshtml" />
     <None Include="Areas\AudienceManager\Views\Profile\LoginForm.cshtml" />
     <Content Include="Areas\AudienceManager\Views\Web.config">
       <SubType>Designer</SubType>

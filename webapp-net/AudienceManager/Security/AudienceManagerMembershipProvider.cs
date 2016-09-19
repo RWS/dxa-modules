@@ -234,7 +234,7 @@ namespace Sdl.Web.Modules.AudienceManager.Security
         public override bool ValidateUser(string username, string password)
         {
             UserProfile userProfile = UserProfileFactory.GetUserProfile(username);
-            if (userProfile != null && userProfile.VerifyPassword(password))
+            if(userProfile != null && userProfile.VerifyPassword(password))
             {
                 userProfile.SetAsCurrentVisitor();
                 return true;

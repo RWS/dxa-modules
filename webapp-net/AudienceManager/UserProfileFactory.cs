@@ -14,6 +14,17 @@ namespace Sdl.Web.Modules.AudienceManager
     public static class UserProfileFactory
     {
         /// <summary>
+        /// Gets the User Profile for the currently logged in user.
+        /// </summary>
+        public static UserProfile CurrentLoggedInUser
+        {
+            get
+            {
+                return GetUserProfile(HttpContext.Current.User.Identity.Name);
+            }
+        }
+
+        /// <summary>
         /// Gets the User Profile for a given identification key.
         /// </summary>
         /// <param name="identificationKey">The identification key.</param>
@@ -22,27 +33,30 @@ namespace Sdl.Web.Modules.AudienceManager
         {
             using (new Tracer(identificationKey))
             {
-                string contactImportSources = WebRequestContext.Localization.GetConfigValue("audiencemanager.contactImportSources");
-                if (string.IsNullOrEmpty(contactImportSources))
+                if (!string.IsNullOrEmpty(identificationKey))
                 {
-                    Log.Warn("No Audience Manager Contact Import Sources are configured.");
-                    return null;
-                }
-
-                PreparePublicationResolving();
-
-                foreach (string importSource in contactImportSources.Split(','))
-                {
-                    Contact contact = FindContact(importSource, identificationKey);
-                    if (contact != null)
+                    string contactImportSources = WebRequestContext.Localization.GetConfigValue("audiencemanager.contactImportSources");
+                    if (string.IsNullOrEmpty(contactImportSources))
                     {
-                        Log.Debug("Audience Manager identification key '{0}' in import source '{1}' resolved to Contact '{2}' (Email: '{3}').",
-                            identificationKey, importSource, contact.Id, contact.EmailAddress);
-                        return UserProfile.Create(contact);
+                        Log.Warn("No Audience Manager Contact Import Sources are configured.");
+                        return null;
                     }
-                }
 
-                Log.Debug("No Audience Manager Contact found for identification key '{0}' and Import Sources '{1}'.", identificationKey, contactImportSources);
+                    PreparePublicationResolving();
+
+                    foreach (string importSource in contactImportSources.Split(','))
+                    {
+                        Contact contact = FindContact(importSource, identificationKey);
+                        if (contact != null)
+                        {
+                            Log.Debug("Audience Manager identification key '{0}' in import source '{1}' resolved to Contact '{2}' (Email: '{3}').",
+                                identificationKey, importSource, contact.Id, contact.EmailAddress);
+                            return UserProfile.Create(contact);
+                        }
+                    }
+
+                    Log.Debug("No Audience Manager Contact found for identification key '{0}' and Import Sources '{1}'.", identificationKey, contactImportSources);
+                }
                 return null;
             }
         }

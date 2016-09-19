@@ -20,6 +20,7 @@ namespace Sdl.Web.Modules.AudienceManager
         {
             // Entity Views
             RegisterViewModel("LoginForm", typeof(LoginForm), "Profile");
+            RegisterViewModel("CurrentUserWidget", typeof(CurrentUserWidget), "Profile");
         }
     }
 }

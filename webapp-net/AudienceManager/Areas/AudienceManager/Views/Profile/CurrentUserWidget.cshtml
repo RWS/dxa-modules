@@ -1,0 +1,12 @@
+﻿@model CurrentUserWidget
+
+@{
+    if (Model.IsLoggedIn)
+    {
+        <div>Welcome <strong>@Model.UserName</strong> [ <a href="api/profile/logout">Logout</a> ]</div>
+    }
+    else
+    {
+        <a href="/login.html">Login</a>
+    }
+}
