@@ -9,7 +9,7 @@ import com.sdl.dxa.modules.smarttarget.model.entity.SmartTargetRegion;
 import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.api.model.PageModel;
 import com.sdl.webapp.common.api.model.mvcdata.DefaultsMvcData;
-import com.sdl.webapp.util.dd4t.TcmUtils;
+import com.sdl.webapp.common.util.TcmUtils;
 import com.tridion.ambientdata.AmbientDataContext;
 import com.tridion.ambientdata.claimstore.ClaimStore;
 import com.tridion.smarttarget.SmartTargetException;

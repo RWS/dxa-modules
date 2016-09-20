@@ -11,7 +11,7 @@
 <nav ${markup.entity(entity)}>
     <ul class="nav nav-sidebar">
         <c:forEach var="item" items="${entity.items}">
-            <c:set var="cssClass" value="${requestPath.startsWith(item.url) ? 'active' : ''}"/>
+            <c:set var="cssClass" value="${requestPath.equalsIgnoreCase(item.url) ? 'active' : ''}"/>
             <li class="${cssClass}">
                 <dxa:link link="${item}"/>
             </li>

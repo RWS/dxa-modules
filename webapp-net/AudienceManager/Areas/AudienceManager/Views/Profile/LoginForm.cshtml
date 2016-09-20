@@ -1,0 +1,34 @@
+﻿@model LoginForm
+
+<div @Html.DxaEntityMarkup()>
+    <h1 @Html.DxaPropertyMarkup(() => Model.Heading)>@Model.Heading</h1>
+
+    @using (Html.BeginForm())
+    {
+        if (!WebRequestContext.IsPreview)
+        {
+            @* If we put in an Anti Forgery Token, the Page can't be edited in XPM anymore *@
+            @Html.AntiForgeryToken()
+        }
+        if (!Html.ViewData.ModelState.IsValid)
+        {
+            <div class="alert-danger">
+                @Html.ValidationSummary(excludePropertyErrors: false)
+            </div>
+        }
+        <div class="form-group">
+            @Html.TextBoxFor(m => m.UserName, new {@class = "form-control", placeholder = @Model.UserNameLabel})
+        </div>
+        <div class="form-group">
+            @Html.PasswordFor(m => m.Password, new {@class = "form-control", placeholder = @Model.PasswordLabel})
+        </div>
+        <div class="form-group">
+            @Html.CheckBoxFor(m => m.RememberMe)
+            @Html.LabelFor(m => m.RememberMe, Model.RememberMeLabel)
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">@Model.SubmitButtonLabel</button>
+        </div>
+    }
+</div>
+
