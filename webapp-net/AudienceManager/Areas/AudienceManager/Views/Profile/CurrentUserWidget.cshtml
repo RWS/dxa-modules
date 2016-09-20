@@ -3,10 +3,10 @@
 @{
     if (Model.IsLoggedIn)
     {
-        <div>Welcome <strong>@Model.UserName</strong> [ <a href="api/profile/logout">Logout</a> ]</div>
+        <div>Welcome <strong>@Model.UserName</strong> [ <a href="api/profile/logout">@Model.LogoutLabel</a> ]</div>
     }
     else
     {
-        <a href="/login.html">Login</a>
+        <a href="@Model.LoginLink.Url">@Model.LoginLink.LinkText</a>
     }
 }
