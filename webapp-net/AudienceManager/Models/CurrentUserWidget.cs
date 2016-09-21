@@ -46,6 +46,11 @@ namespace Sdl.Web.Modules.AudienceManager.Models
         public Link EditProfileLink { get; set; }
 
         /// <summary>
+        /// Label text for login link
+        /// </summary>        
+        public string LoginLabel { get; set; }
+
+        /// <summary>
         /// Label text for logout link
         /// </summary>
         public string LogoutLabel { get; set; }
