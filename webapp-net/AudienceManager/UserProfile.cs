@@ -15,14 +15,9 @@ namespace Sdl.Web.Modules.AudienceManager
 
         private readonly Contact _contact;
 
-        protected UserProfile(Contact contact)
+        internal UserProfile(Contact contact)
         {
             _contact = contact;
-        }
-
-        internal static UserProfile Create(Contact contact)
-        {          
-            return new UserProfile(contact);
         }
 
         public Contact Contact
