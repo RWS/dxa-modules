@@ -71,12 +71,12 @@ namespace Sdl.Web.Modules.AudienceManager
         /// </remarks>
         private static void PreparePublicationResolving()
         {
-            string pageUrl = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Path);
+            string pageUrl = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + WebRequestContext.PageModel.Url;
             if (!pageUrl.EndsWith(Constants.DefaultExtension))
             {
                 pageUrl += Constants.DefaultExtension;
-                AmbientDataContext.CurrentClaimStore.Put(new Uri("taf:request:full_url"), pageUrl);
             }
+            AmbientDataContext.CurrentClaimStore.Put(new Uri("taf:request:full_url"), pageUrl);
         }
 
         private static Contact FindContact(string importSource, string identificationKey)
