@@ -5,6 +5,7 @@ import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticMappingIgn
 import com.sdl.webapp.common.api.model.entity.AbstractEntityModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.validation.BindingResult;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -21,6 +22,10 @@ public class LoginForm extends AbstractEntityModel {
     @SemanticMappingIgnore
     @JsonIgnore
     private boolean rememberMe;
+
+    @SemanticMappingIgnore
+    @JsonIgnore
+    private BindingResult bindingResult;
 
     private String heading;
 
