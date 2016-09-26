@@ -9,11 +9,11 @@
     </parent>
 
     <groupId>com.sdl.dxa.modules</groupId>
-    <artifactId>dxa-module-audience-manager</artifactId>
+    <artifactId>dxa-module-audience-manager-2013sp1</artifactId>
     <version>1.6.0-SNAPSHOT</version>
 
-    <name>DXA Modules - Audience Manager</name>
-    <description>Implementation of DXA Audience Manager module</description>
+    <name>DXA Modules - 2013SP1 Audience Manager</name>
+    <description>Implementation of DXA Audience Manager module for Tridion 2013SP1</description>
 
     <scm>
         <url>https://github.com/sdl/dxa-modules</url>
@@ -56,6 +56,20 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <dependency>
+                <groupId>com.sdl.dxa</groupId>
+                <artifactId>dxa-bom-2013sp1</artifactId>
+                <version>${dxa-bom-2013sp1.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>com.sdl.dxa.modules</groupId>
+                <artifactId>dxa-bom-modules</artifactId>
+                <version>${dxa-bom.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -66,23 +80,39 @@
         </dependency>
 
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.servlet.jsp</groupId>
-            <artifactId>javax.servlet.jsp-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sdl.dxa.modules</groupId>
+            <artifactId>dxa-module-audience-manager-abstract</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jasypt</groupId>
+            <artifactId>jasypt</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.tridion.marketingsolution</groupId>
+            <artifactId>profile</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.tridion.marketingsolution</groupId>
+            <artifactId>profilesync</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.tridion.marketingsolution</groupId>
+            <artifactId>utils</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.tridion.marketingsolution</groupId>
+            <artifactId>tracking</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.tridion.marketingsolution</groupId>
+            <artifactId>trackingsync</artifactId>
         </dependency>
 
         <dependency>

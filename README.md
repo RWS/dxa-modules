@@ -92,6 +92,13 @@ To use SmartTarget module you also need
  - `com.tridion.smarttarget : smarttarget_core : 2014sp1`
  - `com.tridion.smarttarget : smarttarget_entitymodel : 2014sp1`
  - `com.tridion.smarttarget : smarttarget_google-analytics : 2014sp1`
+   
+To use AudienceManager 2013SP1 modul you also need
+ - `com.tridion.marketingsolution : profile : 7.1.0-SNAPSHOT`
+ - `com.tridion.marketingsolution : profilesync : 7.1.0-SNAPSHOT`
+ - `com.tridion.marketingsolution : utils : 7.1.0-SNAPSHOT`
+ - `com.tridion.marketingsolution : tracking : 7.1.0-SNAPSHOT`
+ - `com.tridion.marketingsolution : trackingsync : 7.1.0-SNAPSHOT`
 
 To ease the installation you can use the latest [`/install-libs/`](https://github.com/sdl/dxa-web-application-java/tree/develop/install-libs). For help, run `install`.
 
