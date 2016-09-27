@@ -56,7 +56,8 @@ namespace Sdl.Web.Modules.SmartTarget.Mapping
                 // "Upgrade" the PageModel to a SmartTargetPageModel, so we can store AllowDuplicates in the Page Model.
                 SmartTargetPageModel smartTargetPageModel = new SmartTargetPageModel(pageModel)
                 {
-                    AllowDuplicates = GetAllowDuplicatesOnSamePage(page.PageTemplate, localization)
+                    AllowDuplicates = GetAllowDuplicatesOnSamePage(page.PageTemplate, localization),
+                    NoCache = true // Don't cache the Page Model, because its contents are dynamic.
                 };
                 pageModel = smartTargetPageModel;
                 
