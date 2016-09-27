@@ -70,6 +70,21 @@ namespace Sdl.Web.Modules.Search.Models
             SearchItemView = "Search:SearchItem";
             PageSize = 10;
         }
+
+        /// <summary>
+        /// Creates a deep copy of this View Model.
+        /// </summary>
+        /// <returns>The copied View Model.</returns>
+        public override ViewModel DeepCopy()
+        {
+            SearchQuery clone = (SearchQuery) base.DeepCopy();
+            if (QueryStringParameters != null)
+            {
+                clone.QueryStringParameters = new NameValueCollection(QueryStringParameters);
+            }
+            clone.Results = new List<SearchItem>(Results);
+            return clone;
+        }
     }
 
     /// <summary>
