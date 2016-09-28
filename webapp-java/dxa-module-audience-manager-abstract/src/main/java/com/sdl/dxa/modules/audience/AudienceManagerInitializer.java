@@ -1,5 +1,6 @@
 package com.sdl.dxa.modules.audience;
 
+import com.sdl.dxa.modules.audience.model.CurrentUserWidget;
 import com.sdl.dxa.modules.audience.model.LoginForm;
 import com.sdl.webapp.common.api.mapping.views.AbstractInitializer;
 import com.sdl.webapp.common.api.mapping.views.ModuleInfo;
@@ -17,9 +18,10 @@ public class AudienceManagerInitializer { //NOSONAR
     @ModuleInfo(areaName = "AudienceManager",
             name = "Audience Manager DXA module",
             description = "Implementation of support for SDL Audience Manager")
-    @RegisteredViewModels(
-            @RegisteredViewModel(viewName = "LoginForm", modelClass = LoginForm.class, controllerName = "Profile")
-    )
+    @RegisteredViewModels(value = {
+            @RegisteredViewModel(viewName = "LoginForm", modelClass = LoginForm.class, controllerName = "Profile"),
+            @RegisteredViewModel(viewName = "CurrentUserWidget", modelClass = CurrentUserWidget.class)
+    })
     public static class ModuleInitializer extends AbstractInitializer {
 
         @Override

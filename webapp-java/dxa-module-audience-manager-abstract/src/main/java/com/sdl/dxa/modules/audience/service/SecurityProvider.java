@@ -38,6 +38,11 @@ public class SecurityProvider implements UserDetailsService, AuthenticationManag
         this.audienceManagerService = audienceManagerService;
     }
 
+    @Nullable
+    public static Authentication currentUser() {
+        return SecurityContextHolder.getContext().getAuthentication();
+    }
+
     @Override
     @Nullable
     public UserProfile loadUserByUsername(String username) {
