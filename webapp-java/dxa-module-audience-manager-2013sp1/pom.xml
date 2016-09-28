@@ -59,7 +59,7 @@
             <dependency>
                 <groupId>com.sdl.dxa</groupId>
                 <artifactId>dxa-bom-2013sp1</artifactId>
-                <version>${dxa-bom-2013sp1.version}</version>
+                <version>${dxa-bom.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
@@ -92,6 +92,15 @@
         <dependency>
             <groupId>org.jasypt</groupId>
             <artifactId>jasypt</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.tridion</groupId>
+            <artifactId>cd_ambient</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.tridion</groupId>
+            <artifactId>cd_core</artifactId>
         </dependency>
 
         <dependency>

@@ -2,6 +2,7 @@ package com.sdl.dxa.modules.audience.controller;
 
 import com.sdl.dxa.modules.audience.model.LoginForm;
 import com.sdl.dxa.modules.audience.model.validator.LoginFormValidator;
+import com.sdl.dxa.modules.audience.service.SecurityProvider;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.api.model.ViewModel;
@@ -14,6 +15,7 @@ import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -24,6 +26,7 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -39,17 +42,23 @@ public class ProfileControllerTest {
     private WebRequestContext webRequestContext;
 
     @Mock
+    private SecurityProvider securityProvider;
+
+    @Mock
     private Localization localization;
 
     @InjectMocks
     @Spy
-    private ProfileController controller = new ProfileController();
+    private ProfileController controller;
 
     @Before
     public void init() {
         when(webRequestContext.getLocalization()).thenReturn(localization);
 
         when(localization.getPath()).thenReturn("path");
+
+        when(securityProvider.validate(eq("username"), eq("password"))).thenReturn(true);
+        when(securityProvider.validate(eq("badName"), eq("badPassword"))).thenReturn(false);
     }
 
     @Test
@@ -109,13 +118,13 @@ public class ProfileControllerTest {
     }
 
     @Test
-    public void shouldProcessPortRequestAndValidateBoundModel() throws Exception {
+    public void shouldProcessPortRequestAndValidateBoundModelWithSuccessLogin() throws Exception {
         //given 
         LoginForm model = new LoginForm();
         MockHttpServletRequest request = new MockHttpServletRequest();
         request.setMethod("POST");
-        request.setParameter("userName", "name");
-        request.setParameter("password", "pass");
+        request.setParameter("userName", "username");
+        request.setParameter("password", "password");
         request.setParameter("rememberMe", "true");
 
         //when
@@ -125,9 +134,35 @@ public class ProfileControllerTest {
         assertNotNull(request.getAttribute("dataBinding"));
         assertEquals(RedirectEntity.class, viewModel.getClass());
         assertEquals("path", ((RedirectEntity) viewModel).getUrl());
-        assertEquals("name", model.getUserName());
-        assertEquals("pass", model.getPassword());
+        assertEquals("username", model.getUserName());
+        assertEquals("password", model.getPassword());
         assertTrue(model.isRememberMe());
+
+        verify(securityProvider).validate(eq("username"), anyString());
+    }
+
+    @Test
+    public void shouldProcessPortRequestAndValidateBoundModelWithoutLogin() throws Exception {
+        //given
+        LoginForm model = new LoginForm();
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        request.setMethod("POST");
+        request.setParameter("userName", "badName");
+        request.setParameter("password", "badPassword");
+
+        //when
+        ViewModel viewModel = controller.enrichModel(model, request);
+
+        //then
+        assertNotNull(request.getAttribute("dataBinding"));
+        assertEquals(LoginForm.class, viewModel.getClass());
+        BindingResult bindingResult = ((LoginForm) viewModel).getBindingResult();
+        assertNotNull(bindingResult);
+        assertTrue(bindingResult.getAllErrors().size() == 1);
+        assertEquals("login.failed", bindingResult.getAllErrors().get(0).getCode());
+        assertEquals(request.getAttribute("dataBinding"), bindingResult);
+
+        verify(securityProvider).validate(eq("badName"), anyString());
     }
 
     @Test
@@ -152,12 +187,15 @@ public class ProfileControllerTest {
         //given 
         MockHttpServletRequest request = new MockHttpServletRequest();
         request.setParameter("userName", "");
+        request.setMethod("POST");
+        LoginForm model = new LoginForm();
 
         //when
-        ViewModel viewModel = controller.enrichModel(new LoginForm(), request);
+        ViewModel viewModel = controller.enrichModel(model, request);
 
         //then
         assertNotEquals(RedirectEntity.class, viewModel.getClass());
+        assertTrue(controller.modelBindingRequired(model, request));
     }
 
 
