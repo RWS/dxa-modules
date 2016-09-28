@@ -27,7 +27,7 @@
     <RestorePackages>true</RestorePackages>
     <UseGlobalApplicationHostFile />
     <TargetFrameworkProfile />
-    <DxaFrameworkVersion>1.6.0-alpha-201609271500</DxaFrameworkVersion>
+    <DxaFrameworkVersion>1.6.0-alpha-201609272055</DxaFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

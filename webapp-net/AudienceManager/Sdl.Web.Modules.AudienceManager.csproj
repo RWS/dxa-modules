@@ -18,7 +18,7 @@
     </FileUpgradeFlags>
     <OldToolsVersion>12.0</OldToolsVersion>
     <UpgradeBackupLocation />
-    <DxaFrameworkVersion>1.6.0-alpha-201609271500</DxaFrameworkVersion>
+    <DxaFrameworkVersion>1.6.0-alpha-201609272055</DxaFrameworkVersion>
     <SdlDeliveryVersion>8.3.0</SdlDeliveryVersion>
     <AudienceManagerVersion>8.3.0-beta-201609271542</AudienceManagerVersion>
   </PropertyGroup>
