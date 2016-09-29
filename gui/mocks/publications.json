@@ -3,68 +3,64 @@
     "Id": "ish:39137-1-1",
     "Title": "MP330",
     "Meta": {
-      "publication_meta": {
-        "properties": {
-          "ishlngref.object.id": 39137,
-          "ishversionref.object.id": 6942,
-          "ishlogicalref.object.id": 6901,
-          "ishref.object.value": "GUID-70ADD682-FF68-40D2-AA03-4BB66E00EA74",
-          "ishtype.object.value": "ISHPublication",
-          "FTITLE.logical.value": "MP330",
-          "FDESCRIPTION.logical.value": "Mobile Phone Manual 330",
-          "FUSERGROUP.logical.value": null,
-          "VERSION.version.value": "1",
-          "FREQUESTEDLANGUAGES.version.value": [
-            "en",
-            "nl",
-            "de"
-          ],
-          "FCHANGES.version.value": null,
-          "FISHPUBSOURCELANGUAGES.version.value": [
-            "en"
-          ],
-          "FISHBASELINE.version.value": "MP330-v1-GUID-70ADD682-FF68-40D2-AA03-4BB66E00EA74-2008/10/30 10:08:24",
-          "FISHMASTERREF.version.value": "GUID-C9CA7357-CBA3-43B3-A4B2-B977AD1B7D1E",
-          "FISHRESOURCES.version.value": [
-            "GUID-8C023953-0F7C-4986-9DE2-568FF183FC25",
-            "GUID-9E48AEC2-2AF4-444A-85C2-A96EE537A340",
-            "GUID-2A1268AC-F89E-4FC8-A032-3CDBC1328658",
-            "GUID-F907E081-CAF5-4B3F-91F3-8CADDD573C00",
-            "GUID-54F20824-43B5-4CE1-8EA2-400F1CB13716",
-            "GUID-11283692-6B6A-4781-9863-D4D8070BF606"
-          ],
-          "FISHREQUIREDRESOLUTIONS.version.value": "Low",
-          "CREATED-ON.version.value": "2008-10-30T10:08:26+01:00",
-          "MODIFIED-ON.version.value": "2016-06-23T16:51:27+02:00",
-          "FPUBINCLUDECOMMENTS.lng.value": "No",
-          "FPUBINCLUDECOMMENTS.lng.element": "FALSE",
-          "FPUBINCLUDEMETADATA.lng.value": "No",
-          "FPUBWATERMARK.lng.value": "No",
-          "MODIFIED-ON.lng.value": "2016-06-27T15:46:16+02:00",
-          "FSDLXPPPDFINCLFRONTMAT.lng.value": "No",
-          "FSDLXPPPDFINCLINDEX.lng.value": "No",
-          "FSDLXPPPDFINCLTOC.lng.value": "No",
-          "FSDLXPPPDFINCLPRINTMARKS.lng.value": "No",
-          "FMAPID.lng.value": "GUID-70ADD682-FF68-40D2-AA03-4BB66E00EA74",
-          "FISHPUBLICATIONTYPE.logical.value": "User Manual",
-          "FISHPUBREVIEWENDDATE.lng.value": null,
-          "FISHFALLBACKLNGDEFAULT.lng.value": [
-            "en"
-          ],
-          "FISHFALLBACKLNGIMAGES.lng.value": [
-            "en"
-          ],
-          "FISHFALLBACKLNGRESOURCES.lng.value": [
-            "en"
-          ],
-          "FUSERGROUP.logical.element": null,
-          "READ-ACCESS.logical.element": [
-            "VUSERGROUPDEVELOPMENT",
-            "VUSERGROUPMARKETING"
-          ],
-          "conditionset.generated.value": "<features>\n\t<feature name=\"MODEL\" type=\"text\" value=\"330\"/>\n\t<feature name=\"BLUETOOTH\" type=\"text\" value=\"Y\"/>\n\t<feature name=\"GAMES\" type=\"text\" value=\"DJ\"/>\n\t<feature name=\"GAMES\" type=\"text\" value=\"SNAKE\"/>\n\t<feature name=\"GAMES\" type=\"text\" value=\"WATERRAPIDS\"/>\n\t<feature name=\"GPRS\" type=\"text\" value=\"Y\"/>\n\t<feature name=\"HEADSET\" type=\"text\" value=\"Y\"/>\n\t<feature name=\"LOUDSPEAKER\" type=\"text\" value=\"Y\"/>\n\t<feature name=\"SIM\" type=\"text\" value=\"Y\"/>\n\t<feature name=\"REJECTCALL\" type=\"text\" value=\"ENABLED\"/>\n</features>"
-        }
-      }
+      "ishlngref.object.id": 39137,
+      "ishversionref.object.id": 6942,
+      "ishlogicalref.object.id": 6901,
+      "ishref.object.value": "GUID-70ADD682-FF68-40D2-AA03-4BB66E00EA74",
+      "ishtype.object.value": "ISHPublication",
+      "FTITLE.logical.value": "MP330",
+      "FDESCRIPTION.logical.value": "Mobile Phone Manual 330",
+      "FUSERGROUP.logical.value": null,
+      "VERSION.version.value": "1",
+      "FREQUESTEDLANGUAGES.version.value": [
+        "en",
+        "nl",
+        "de"
+      ],
+      "FCHANGES.version.value": null,
+      "FISHPUBSOURCELANGUAGES.version.value": [
+        "en"
+      ],
+      "FISHBASELINE.version.value": "MP330-v1-GUID-70ADD682-FF68-40D2-AA03-4BB66E00EA74-2008/10/30 10:08:24",
+      "FISHMASTERREF.version.value": "GUID-C9CA7357-CBA3-43B3-A4B2-B977AD1B7D1E",
+      "FISHRESOURCES.version.value": [
+        "GUID-8C023953-0F7C-4986-9DE2-568FF183FC25",
+        "GUID-9E48AEC2-2AF4-444A-85C2-A96EE537A340",
+        "GUID-2A1268AC-F89E-4FC8-A032-3CDBC1328658",
+        "GUID-F907E081-CAF5-4B3F-91F3-8CADDD573C00",
+        "GUID-54F20824-43B5-4CE1-8EA2-400F1CB13716",
+        "GUID-11283692-6B6A-4781-9863-D4D8070BF606"
+      ],
+      "FISHREQUIREDRESOLUTIONS.version.value": "Low",
+      "CREATED-ON.version.value": "2008-10-30T10:08:26+01:00",
+      "MODIFIED-ON.version.value": "2016-06-23T16:51:27+02:00",
+      "FPUBINCLUDECOMMENTS.lng.value": "No",
+      "FPUBINCLUDECOMMENTS.lng.element": "FALSE",
+      "FPUBINCLUDEMETADATA.lng.value": "No",
+      "FPUBWATERMARK.lng.value": "No",
+      "MODIFIED-ON.lng.value": "2016-06-27T15:46:16+02:00",
+      "FSDLXPPPDFINCLFRONTMAT.lng.value": "No",
+      "FSDLXPPPDFINCLINDEX.lng.value": "No",
+      "FSDLXPPPDFINCLTOC.lng.value": "No",
+      "FSDLXPPPDFINCLPRINTMARKS.lng.value": "No",
+      "FMAPID.lng.value": "GUID-70ADD682-FF68-40D2-AA03-4BB66E00EA74",
+      "FISHPUBLICATIONTYPE.logical.value": "User Manual",
+      "FISHPUBREVIEWENDDATE.lng.value": null,
+      "FISHFALLBACKLNGDEFAULT.lng.value": [
+        "en"
+      ],
+      "FISHFALLBACKLNGIMAGES.lng.value": [
+        "en"
+      ],
+      "FISHFALLBACKLNGRESOURCES.lng.value": [
+        "en"
+      ],
+      "FUSERGROUP.logical.element": null,
+      "READ-ACCESS.logical.element": [
+        "VUSERGROUPDEVELOPMENT",
+        "VUSERGROUPMARKETING"
+      ],
+      "conditionset.generated.value": "<features>\n\t<feature name=\"MODEL\" type=\"text\" value=\"330\"/>\n\t<feature name=\"BLUETOOTH\" type=\"text\" value=\"Y\"/>\n\t<feature name=\"GAMES\" type=\"text\" value=\"DJ\"/>\n\t<feature name=\"GAMES\" type=\"text\" value=\"SNAKE\"/>\n\t<feature name=\"GAMES\" type=\"text\" value=\"WATERRAPIDS\"/>\n\t<feature name=\"GPRS\" type=\"text\" value=\"Y\"/>\n\t<feature name=\"HEADSET\" type=\"text\" value=\"Y\"/>\n\t<feature name=\"LOUDSPEAKER\" type=\"text\" value=\"Y\"/>\n\t<feature name=\"SIM\" type=\"text\" value=\"Y\"/>\n\t<feature name=\"REJECTCALL\" type=\"text\" value=\"ENABLED\"/>\n</features>"
     }
   }
 ]
