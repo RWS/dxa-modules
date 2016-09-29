@@ -92,7 +92,7 @@ module Sdl.DitaDelivery {
                     sitemapItemId: decodeURIComponent(result[2])
                 };
             }
-            return;
+            return null;
         }
 
         private _escapeTitle(title: string): string {
