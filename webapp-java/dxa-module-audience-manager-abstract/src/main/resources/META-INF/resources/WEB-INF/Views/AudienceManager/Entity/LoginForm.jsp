@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="dxa" uri="http://www.sdl.com/tridion-dxa" %>
 <jsp:useBean id="entity" type="com.sdl.dxa.modules.audience.model.LoginForm" scope="request"/>
 <jsp:useBean id="markup" type="com.sdl.webapp.common.markup.Markup" scope="request"/>
 
 <div ${markup.entity(entity)}>
     <h1 ${markup.property(entity, "heading")}>${entity.heading}</h1>
     <form:form method="post" commandName="entity">
+
+        <dxa:csrf-token/>
 
         <c:if test="${entity.bindingResult.hasErrors()}">
             <div class="alert-danger">
