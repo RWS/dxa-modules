@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/api/profile/logout")
+@RequestMapping(value = {"/api/profile/logout", "/{path}/api/profile/logout"})
 public class LogoutController {
 
     private final SecurityProvider securityProvider;
