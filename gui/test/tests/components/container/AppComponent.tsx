@@ -27,9 +27,6 @@ module Sdl.DitaDelivery.Tests {
                 });
 
                 afterAll(() => {
-                    Sdl.DitaDelivery.DataStore = null;
-                    Sdl.DitaDelivery.Localization = null;
-                    Sdl.DitaDelivery.Routing = null;
                     target.parentElement.removeChild(target);
                 });
 
