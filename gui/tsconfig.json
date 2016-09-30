@@ -1,27 +1,31 @@
 {
-    "compilerOptions": {
-        "module": "none",
-        "noImplicitAny": true,
-        "allowUnreachableCode": false,
-        "allowUnusedLabels": false,
-        "forceConsistentCasingInFileNames": true,
-        "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
-        "removeComments": false,
-        "preserveConstEnums": false,
-        "sourceMap": false,
-        "noEmitOnError": true,
-        "emitBOM": false,
-        "suppressImplicitAnyIndexErrors": false,
-        "target": "es5",
-        "declaration": true,
-        "experimentalDecorators": true,
-        "jsx": "react",
-        "strictNullChecks": false
-    },
-    "compileOnSave": false, // Gulp does this for us
-    "exclude": [
-        "node_modules",
-        "dist"
-    ]
+  "compilerOptions": {
+    "module": "none",
+    "noImplicitAny": true,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "removeComments": false,
+    "preserveConstEnums": false,
+    "sourceMap": false,
+    "noEmitOnError": true,
+    "emitBOM": false,
+    "suppressImplicitAnyIndexErrors": false,
+    "target": "es5",
+    "declaration": true,
+    "experimentalDecorators": true,
+    "jsx": "react",
+    "strictNullChecks": true,
+    "noImplicitThis": false, // TODO: enable
+    "noUnusedLocals": false, // TODO: enable
+    "noUnusedParameters": false // TODO: enable
+  },
+  "compileOnSave": false, // Gulp does this for us
+  "exclude": [
+    "node_modules",
+    "dist",
+    "typings"
+  ]
 }

@@ -80,9 +80,9 @@ module Sdl.DitaDelivery {
         /**
          * Get the current location within a publication
          *
-         * @returns {IPublicationLocation}
+         * @returns {IPublicationLocation | null}
          */
-        public getPublicationLocation(): IPublicationLocation {
+        public getPublicationLocation(): IPublicationLocation | null {
             const currentLocation = RoutingClient._history.getCurrentLocation().pathname;
             const paths = currentLocation.match(PUBLICATION_URL_REGEX);
             if (paths) {

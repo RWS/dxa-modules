@@ -16,11 +16,15 @@ module Sdl.DitaDelivery {
 
     const mainElement = document.getElementById("main-view-target");
 
-    const render = (): void => {
-        ReactDOM.render(<App />, mainElement);
-    };
+    if (!mainElement) {
+        console.error(`Unable to locate element to render application.`);
+    } else {
+        const render = (): void => {
+            ReactDOM.render(<App />, mainElement);
+        };
 
-    Routing.onLocationChanged(render);
-    render();
+        Routing.onLocationChanged(render);
+        render();
+    }
 
 }

@@ -38,9 +38,9 @@ module Sdl.DitaDelivery.Components {
         /**
          * Current selected item in the TOC
          *
-         * @type {ISitemapItem}
+         * @type {ISitemapItem | null}
          */
-        selectedTocItem?: ISitemapItem;
+        selectedTocItem?: ISitemapItem | null;
         /**
          * Page is loading
          *
@@ -59,21 +59,21 @@ module Sdl.DitaDelivery.Components {
         /**
          * Content of the current selected page
          *
-         * @type {string}
+         * @type {string | null}
          */
-        content?: string;
+        content?: string | null;
         /**
          * An error prevented the page from rendering
          *
-         * @type {string}
+         * @type {string | null}
          */
-        error?: string;
+        error?: string | null;
         /**
          * Page title
          *
-         * @type {string}
+         * @type {string | null}
          */
-        title?: string;
+        title?: string | null;
     }
 
     interface IToc {
@@ -207,7 +207,7 @@ module Sdl.DitaDelivery.Components {
                         onSelectionChanged={this._onTocSelectionChanged.bind(this) }
                         error={tocError}/>
                     <Page
-                        showActivityIndicator={isPageLoading}
+                        showActivityIndicator={isPageLoading || true}
                         content={content}
                         title={title ? title : (selectedTocItem ? selectedTocItem.Title : null) }
                         error={error}/>
@@ -243,7 +243,7 @@ module Sdl.DitaDelivery.Components {
                 });
 
                 if (!error) {
-                    Routing.setPublicationLocation(publicationId, title, sitemapItem.Id, sitemapItem.Title);
+                    Routing.setPublicationLocation(publicationId, title || "", sitemapItem.Id, sitemapItem.Title);
                 }
             });
         }
@@ -261,7 +261,7 @@ module Sdl.DitaDelivery.Components {
                 return;
             }
             page.content = pageInfo.content;
-            page.title = pageInfo.title ? pageInfo.title : selectedTocItem.Title;
+            page.title = pageInfo.title ? pageInfo.title : (selectedTocItem ? selectedTocItem.Title : "");
             this.setState({
                 isPageLoading: false
             });
@@ -283,7 +283,7 @@ module Sdl.DitaDelivery.Components {
                     return;
                 }
 
-                done(path);
+                done(path || []);
             });
         }
     };
