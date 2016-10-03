@@ -17,7 +17,7 @@
     "declaration": true,
     "experimentalDecorators": true,
     "jsx": "react",
-    "strictNullChecks": true,
+    "strictNullChecks": false, // TODO: enable
     "noImplicitThis": false, // TODO: enable
     "noUnusedLocals": false, // TODO: enable
     "noUnusedParameters": false // TODO: enable
