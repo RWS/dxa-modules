@@ -54,8 +54,9 @@ namespace Sdl.Web.Modules.AudienceManager
                     return null;
                 }
 
+#if !TRIDION_71
                 PreparePublicationResolving();
-
+#endif
                 Localization localization = WebRequestContext.Localization;
                 string contactImportSources = localization.GetConfigValue("audiencemanager.contactImportSources");
                 Contact contact = null;
