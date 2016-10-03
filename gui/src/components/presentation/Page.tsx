@@ -21,21 +21,21 @@ module Sdl.DitaDelivery.Components {
         /**
          * Page title
          *
-         * @type {string}
+         * @type {string | null}
          */
-        title?: string;
+        title?: string | null;
         /**
          * Page content
          *
-         * @type {string}
+         * @type {string | null}
          */
-        content?: string;
+        content?: string | null;
         /**
          * An error prevented the page from rendering
          *
-         * @type {string}
+         * @type {string | null}
          */
-        error?: string;
+        error?: string | null;
     }
 
     /**
@@ -48,7 +48,7 @@ module Sdl.DitaDelivery.Components {
                 { props.error ? <ValidationMessage messageType={SDL.UI.Controls.ValidationMessageType.Error} message={props.error} /> : null }
                 <div>
                     <h1 className={"page-title"}>{props.title}</h1>
-                    <div className={"page-content ltr"} dangerouslySetInnerHTML={{ __html: props.content }} />
+                    <div className={"page-content ltr"} dangerouslySetInnerHTML={{ __html: props.content || "" }} />
                 </div>
             </div>
         );

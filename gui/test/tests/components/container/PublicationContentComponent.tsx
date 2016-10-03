@@ -27,9 +27,6 @@ module Sdl.DitaDelivery.Tests {
                 });
 
                 afterAll(() => {
-                    Sdl.DitaDelivery.DataStore = null;
-                    Sdl.DitaDelivery.Localization = null;
-                    Sdl.DitaDelivery.Routing = null;
                     target.parentElement.removeChild(target);
                 });
 
@@ -48,7 +45,7 @@ module Sdl.DitaDelivery.Tests {
                             Title: "First element",
                             IsAbstract: false,
                             IsLeaf: false,
-                            Url: null
+                            Url: ""
                         }
                     ]);
                     this._renderComponent(target);
@@ -96,14 +93,14 @@ module Sdl.DitaDelivery.Tests {
                             Title: "First element",
                             IsAbstract: true,
                             IsLeaf: true,
-                            Url: null
+                            Url: ""
                         },
                         {
                             Id: "2",
                             Title: "Second element",
                             IsAbstract: true,
                             IsLeaf: true,
-                            Url: null
+                            Url: ""
                         }
                     ]);
                     this._renderComponent(target);
@@ -138,7 +135,7 @@ module Sdl.DitaDelivery.Tests {
                             IsAbstract: true,
                             IsLeaf: true,
                             Title: title,
-                            Url: null
+                            Url: ""
                         }
                     });
                     const domNode = ReactDOM.findDOMNode(target) as HTMLElement;

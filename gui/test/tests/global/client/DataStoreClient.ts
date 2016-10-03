@@ -18,15 +18,13 @@ module Sdl.DitaDelivery.Tests {
                     Sdl.DitaDelivery.Routing = new Mocks.Routing();
                 });
 
-                afterAll(() => {
-                    Sdl.DitaDelivery.Localization = null;
-                    Sdl.DitaDelivery.Routing = null;
-                });
-
                 it("can get site map items for the root", (done: () => void): void => {
                     DataStore.getSitemapRoot((error, items) => {
                         expect(error).toBeNull();
-                        expect(items.length).toBe(1);
+                        expect(items).toBeDefined();
+                        if (items) {
+                            expect(items.length).toBe(1);
+                        }
                         done();
                     });
                 });
@@ -35,7 +33,10 @@ module Sdl.DitaDelivery.Tests {
                     const spy = spyOn(SDL.Client.Net, "getRequest").and.callThrough();
                     DataStore.getSitemapRoot((error, items) => {
                         expect(error).toBeNull();
-                        expect(items.length).toBe(1);
+                        expect(items).toBeDefined();
+                        if (items) {
+                            expect(items.length).toBe(1);
+                        }
                         expect(spy).not.toHaveBeenCalled();
                         done();
                     });
@@ -45,15 +46,21 @@ module Sdl.DitaDelivery.Tests {
                     const getChildren = (parentId: string): void => {
                         DataStore.getSitemapItems(parentId, (error, items) => {
                             expect(error).toBeNull();
-                            expect(items.length).toBe(9);
+                            expect(items).toBeDefined();
+                            if (items) {
+                                expect(items.length).toBe(9);
+                            }
                             done();
                         });
                     };
 
                     DataStore.getSitemapRoot((error, items) => {
                         expect(error).toBeNull();
-                        expect(items.length).toBe(1);
-                        getChildren(items[0].Id);
+                        expect(items).toBeDefined();
+                        if (items) {
+                            expect(items.length).toBe(1);
+                            getChildren(items[0].Id);
+                        }
                     });
                 });
 
@@ -74,21 +81,19 @@ module Sdl.DitaDelivery.Tests {
                     Sdl.DitaDelivery.Routing = new Mocks.Routing();
                 });
 
-                afterAll(() => {
-                    Sdl.DitaDelivery.Localization = null;
-                    Sdl.DitaDelivery.Routing = null;
-                });
-
                 it("can get page info", (done: () => void): void => {
                     const pageId = "ish:39137-6222-16";
                     DataStore.getPageInfo(pageId, (error, pageInfo) => {
                         expect(error).toBeNull();
-                        expect(pageInfo.title).toBe("getting started");
-                        expect(pageInfo.content.length).toBe(127);
-                        const element = document.createElement("span");
-                        element.innerHTML = pageInfo.content;
-                        expect(element.children.length).toBe(1);
-                        expect((element.children[0] as HTMLElement).children.length).toBe(2);
+                        expect(pageInfo).toBeDefined();
+                        if (pageInfo) {
+                            expect(pageInfo.title).toBe("getting started");
+                            expect(pageInfo.content.length).toBe(127);
+                            const element = document.createElement("span");
+                            element.innerHTML = pageInfo.content;
+                            expect(element.children.length).toBe(1);
+                            expect((element.children[0] as HTMLElement).children.length).toBe(2);
+                        }
                         done();
                     });
                 });
@@ -98,9 +103,12 @@ module Sdl.DitaDelivery.Tests {
                     const spy = spyOn(SDL.Client.Net, "getRequest").and.callThrough();
                     DataStore.getPageInfo(pageId, (error, pageInfo) => {
                         expect(error).toBeNull();
-                        expect(pageInfo.title).toBe("getting started");
-                        expect(pageInfo.content.length).toBe(127);
-                        expect(spy).not.toHaveBeenCalled();
+                        expect(pageInfo).toBeDefined();
+                        if (pageInfo) {
+                            expect(pageInfo.title).toBe("getting started");
+                            expect(pageInfo.content.length).toBe(127);
+                            expect(spy).not.toHaveBeenCalled();
+                        }
                         done();
                     });
                 });
@@ -122,15 +130,10 @@ module Sdl.DitaDelivery.Tests {
                     Sdl.DitaDelivery.Routing = new Mocks.Routing();
                 });
 
-                afterAll(() => {
-                    Sdl.DitaDelivery.Localization = null;
-                    Sdl.DitaDelivery.Routing = null;
-                });
-
                 it("returns a proper error when publications cannot be retrieved", (done: () => void): void => {
                     // Put this test first, otherwise the publication would be already in the cache and the spy would not work
                     const failMessage = "failure";
-                    const fakeGetRequest = (url: string, onSuccess: Function, onFailure: (error: string, request: IWebRequest) => void): void => {
+                    const fakeGetRequest = (url: string, onSuccess: Function, onFailure: (error: string, request: IWebRequest | null) => void): void => {
                         onFailure(failMessage, null);
                     };
                     spyOn(SDL.Client.Net, "getRequest").and.callFake(fakeGetRequest);
@@ -144,8 +147,11 @@ module Sdl.DitaDelivery.Tests {
                 it("can get the publications", (done: () => void): void => {
                     DataStore.getPublications((error, publications) => {
                         expect(error).toBeNull();
-                        expect(publications.length).toBe(1);
-                        expect(publications[0].Title).toBe("MP330");
+                        expect(publications).toBeDefined();
+                        if (publications) {
+                            expect(publications.length).toBe(1);
+                            expect(publications[0].Title).toBe("MP330");
+                        }
                         done();
                     });
                 });
@@ -154,9 +160,12 @@ module Sdl.DitaDelivery.Tests {
                     const spy = spyOn(SDL.Client.Net, "getRequest").and.callThrough();
                     DataStore.getPublications((error, publications) => {
                         expect(error).toBeNull();
-                        expect(publications.length).toBe(1);
-                        expect(publications[0].Title).toBe("MP330");
-                        expect(spy).not.toHaveBeenCalled();
+                        expect(publications).toBeDefined();
+                        if (publications) {
+                            expect(publications.length).toBe(1);
+                            expect(publications[0].Title).toBe("MP330");
+                            expect(spy).not.toHaveBeenCalled();
+                        }
                         done();
                     });
                 });
@@ -198,16 +207,14 @@ module Sdl.DitaDelivery.Tests {
                     Sdl.DitaDelivery.Routing = new Mocks.Routing();
                 });
 
-                afterAll(() => {
-                    Sdl.DitaDelivery.Localization = null;
-                    Sdl.DitaDelivery.Routing = null;
-                });
-
                 it("can get a path for a page", (done: () => void): void => {
                     const sitemapItemId = "ish:39137-5-1024";
                     DataStore.getSitemapPath(sitemapItemId, (error, path) => {
                         expect(error).toBeNull();
-                        expect(path.length).toBe(3);
+                        expect(path).toBeDefined();
+                        if (path) {
+                            expect(path.length).toBe(3);
+                        }
                         done();
                     });
                 });
@@ -217,7 +224,10 @@ module Sdl.DitaDelivery.Tests {
                     const spy = spyOn(SDL.Client.Net, "getRequest").and.callThrough();
                     DataStore.getSitemapPath(sitemapItemId, (error, path) => {
                         expect(error).toBeNull();
-                        expect(path.length).toBe(3);
+                        expect(path).toBeDefined();
+                        if (path) {
+                            expect(path.length).toBe(3);
+                        }
                         expect(spy).not.toHaveBeenCalled();
                         done();
                     });

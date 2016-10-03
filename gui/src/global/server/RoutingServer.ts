@@ -53,8 +53,8 @@ module Sdl.DitaDelivery {
         public getPublicationLocation(): IPublicationLocation {
             // TODO implement this
             return {
-                publicationId: null,
-                sitemapItemId: null
+                publicationId: "",
+                sitemapItemId: ""
             };
         }
     }

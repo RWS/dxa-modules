@@ -17,15 +17,15 @@ module Sdl.DitaDelivery.Tests {
                     Title: "Root",
                     IsAbstract: false,
                     IsLeaf: false,
-                    Url: null
+                    Url: ""
                 }];
-                const loadChildItems = (parentId: string, callback: (error: string, children: ISitemapItem[]) => void): void => {
+                const loadChildItems = (parentId: string, callback: (error: string | null, children: ISitemapItem[]) => void): void => {
                     callback(null, [{
                         Id: "12345",
                         Title: "Child1",
                         IsAbstract: false,
                         IsLeaf: true,
-                        Url: null
+                        Url: ""
                     }]);
                 };
 

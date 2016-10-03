@@ -39,9 +39,9 @@ declare module Sdl.DitaDelivery {
         /**
          * Get the current location within a publication
          *
-         * @returns {IPublicationLocation}
+         * @returns {IPublicationLocation | null}
          */
-        getPublicationLocation(): IPublicationLocation;
+        getPublicationLocation(): IPublicationLocation | null;
     }
 
     /**

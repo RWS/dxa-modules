@@ -17,47 +17,47 @@ declare module Sdl.DitaDelivery {
         /**
          * Get the list of publications
          *
-         * @param {(error: string, publications?: IPublication[]) => void} callback Returns the items
+         * @param {(error: string | null, publications?: IPublication[]) => void} callback Returns the items
          */
-        getPublications(callback: (error: string, publications?: IPublication[]) => void): void;
+        getPublications(callback: (error: string | null, publications?: IPublication[]) => void): void;
 
         /**
          * Get the root objects of the sitemap
          *
-         * @param {(error: string, items?: ISitemapItem[]) => void} callback
+         * @param {(error: string | null, items?: ISitemapItem[]) => void} callback
          */
-        getSitemapRoot(callback: (error: string, items?: ISitemapItem[]) => void): void;
+        getSitemapRoot(callback: (error: string | null, items?: ISitemapItem[]) => void): void;
 
         /**
          * Get the site map items for a parent
          *
          * @param {string} parentId The parent id
-         * @param {(error: string, items?: ISitemapItem[]) => void} callback Returns the items
+         * @param {(error: string | null, items?: ISitemapItem[]) => void} callback Returns the items
          */
-        getSitemapItems(parentId: string, callback: (error: string, items?: ISitemapItem[]) => void): void;
+        getSitemapItems(parentId: string, callback: (error: string | null, items?: ISitemapItem[]) => void): void;
 
         /**
          * Get page information
          *
          * @param {string} pageId The page id
-         * @param {(error: string, info?: IPageInfo) => void} callback Returns the content
+         * @param {(error: string | null, info?: IPageInfo) => void} callback Returns the content
          */
-        getPageInfo(pageId: string, callback: (error: string, info?: IPageInfo) => void): void;
+        getPageInfo(pageId: string, callback: (error: string | null, info?: IPageInfo) => void): void;
 
         /**
          * Get the publication title
          *
          * @param {string} publicationId Publication id
-         * @param {(error: string, title?: string) => void} callback Returns the title
+         * @param {(error: string | null, title?: string) => void} callback Returns the title
          */
-        getPublicationTitle(publicationId: string, callback: (error: string, title?: string) => void): void;
+        getPublicationTitle(publicationId: string, callback: (error: string | null, title?: string) => void): void;
 
         /**
          * Get the full path for a sitemap item within a sitemap
          *
          * @param {string} sitemapItemId The id of the item in the sitemap
-         * @param {(error: string, path?: string[]) => void} callback Returns the full path
+         * @param {(error: string | null, path?: string[]) => void} callback Returns the full path
          */
-        getSitemapPath(sitemapItemId: string, callback: (error: string, path?: string[]) => void): void;
+        getSitemapPath(sitemapItemId: string, callback: (error: string | null, path?: string[]) => void): void;
     }
 }

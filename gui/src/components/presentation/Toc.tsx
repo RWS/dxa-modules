@@ -27,7 +27,7 @@ module Sdl.DitaDelivery.Components {
          *
          * @type {ISitemapItem[]}
          */
-        rootItems: ISitemapItem[];
+        rootItems: ISitemapItem[] | undefined;
         /**
          * Load child items for a specific item
          */
@@ -51,7 +51,7 @@ module Sdl.DitaDelivery.Components {
     /**
      * Table of contents
      */
-    export class Toc extends React.Component<ITocProps, { error: string }> {
+    export class Toc extends React.Component<ITocProps, { error: string | null | undefined }> {
 
         private _isUnmounted: boolean = false;
 
@@ -77,15 +77,15 @@ module Sdl.DitaDelivery.Components {
 
             return (
                 <div className={"sdl-dita-delivery-toc"}>
-                    { error ? <ValidationMessage messageType={SDL.UI.Controls.ValidationMessageType.Error} message={error} /> : null }
+                    {error ? <ValidationMessage messageType={SDL.UI.Controls.ValidationMessageType.Error} message={error} /> : null}
                     {
                         props.rootItems ?
                             <TreeView
-                                activeNodeIdPath={Array.isArray(props.activeItemPath) ? props.activeItemPath.join("/") : null}
-                                rootNodes={this._convertToTreeViewNodes(props.rootItems) }
+                                activeNodeIdPath={Array.isArray(props.activeItemPath) ? props.activeItemPath.join("/") : undefined}
+                                rootNodes={this._convertToTreeViewNodes(props.rootItems)}
                                 useCommonUILibraryScrollView={false}
-                                onSelectionChanged={this._onSelectionChanged.bind(this) }/>
-                            : !error ? <ActivityIndicator/> : null
+                                onSelectionChanged={this._onSelectionChanged.bind(this)} />
+                            : !error ? <ActivityIndicator /> : null
                     }
                 </div>
             );
@@ -135,7 +135,7 @@ module Sdl.DitaDelivery.Components {
             });
         }
 
-        private _convertToTreeViewNodes(sitemapItems: ISitemapItem[], parentNode: ITreeViewNode = null): ITreeViewNode[] {
+        private _convertToTreeViewNodes(sitemapItems: ISitemapItem[], parentNode: ITreeViewNode | null = null): ITreeViewNode[] {
             const nodes: ITreeViewNode[] = [];
             const TreeViewControl = SDL.UI.Controls.TreeView;
             for (let sitemapItem of sitemapItems) {
@@ -152,8 +152,10 @@ module Sdl.DitaDelivery.Components {
                 const onSelectionChanged = this.props.onSelectionChanged;
                 if (typeof onSelectionChanged === "function") {
                     const selectedNode = nodes.length > 0 ? nodes[0] : null;
-                    const path = selectedNode ? selectedNode.getPath() : null;
-                    onSelectionChanged(selectedNode.sitemapItem, path.split("/"));
+                    if (selectedNode) {
+                        const path = selectedNode ? selectedNode.getPath() : "";
+                        onSelectionChanged(selectedNode.sitemapItem, path.split("/"));
+                    }
                 }
             }
         }

@@ -15,12 +15,6 @@ module Sdl.DitaDelivery.Tests {
                     Sdl.DitaDelivery.Routing = new RoutingServer();
                 });
 
-                afterAll(() => {
-                    Sdl.DitaDelivery.DataStore = null;
-                    Sdl.DitaDelivery.Localization = null;
-                    Sdl.DitaDelivery.Routing = null;
-                });
-
                 it("renders", (): void => {
                     const app = renderToString("home");
                     const element = document.createElement("div");

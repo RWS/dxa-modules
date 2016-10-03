@@ -56,9 +56,9 @@ module Sdl.DitaDelivery {
         /**
          * Get the list of publications
          *
-         * @param {(error: string, publications?: IPublication[]) => void} callback Returns the items
+         * @param {(error: string | null, publications?: IPublication[]) => void} callback Returns the items
          */
-        public getPublications(callback: (error: string, publications?: IPublication[]) => void): void {
+        public getPublications(callback: (error: string | null, publications?: IPublication[]) => void): void {
             const publication = this.getPublicationsModel();
             let removeEventListeners: () => void;
             const onLoad = () => {
@@ -85,9 +85,9 @@ module Sdl.DitaDelivery {
         /**
          * Get the root objects of the sitemap
          *
-         * @param {(error: string, items: ISitemapItem[]) => void} callback Returns the items
+         * @param {(error: string | null, items: ISitemapItem[]) => void} callback Returns the items
          */
-        public getSitemapRoot(callback: (error: string, items?: ISitemapItem[]) => void): void {
+        public getSitemapRoot(callback: (error: string | null, items?: ISitemapItem[]) => void): void {
             this.getSitemapItems("root", callback);
         }
 
@@ -95,9 +95,9 @@ module Sdl.DitaDelivery {
          * Get the site map items for a parent
          *
          * @param {string} parentId The parent id
-         * @param {(error: string, items?: ISitemapItem[]) => void} callback Returns the items
+         * @param {(error: string | null, items?: ISitemapItem[]) => void} callback Returns the items
          */
-        public getSitemapItems(parentId: string, callback: (error: string, items?: ISitemapItem[]) => void): void {
+        public getSitemapItems(parentId: string, callback: (error: string | null, items?: ISitemapItem[]) => void): void {
             const toc = this.getTocModel(parentId);
             let removeEventListeners: () => void;
             const onLoad = () => {
@@ -125,9 +125,9 @@ module Sdl.DitaDelivery {
          * Get page information
          *
          * @param {string} pageId The page id
-         * @param {(error: string, info?: IPageInfo) => void} callback Returns the content
+         * @param {(error: string | null, info?: IPageInfo) => void} callback Returns the content
          */
-        public getPageInfo(pageId: string, callback: (error: string, info?: IPageInfo) => void): void {
+        public getPageInfo(pageId: string, callback: (error: string | null, info?: IPageInfo) => void): void {
             const page = this.getPageModel(pageId);
             let removeEventListeners: () => void;
             const onLoad = () => {
@@ -155,9 +155,9 @@ module Sdl.DitaDelivery {
          * Get the publication title
          *
          * @param {string} publicationId Publication id
-         * @param {(error: string, title?: string) => void} callback Returns the title
+         * @param {(error: string | null, title?: string) => void} callback Returns the title
          */
-        public getPublicationTitle(publicationId: string, callback: (error: string, title?: string) => void): void {
+        public getPublicationTitle(publicationId: string, callback: (error: string | null, title?: string) => void): void {
             this.getPublications((error, publications) => {
                 if (error) {
                     callback(error);
@@ -181,9 +181,9 @@ module Sdl.DitaDelivery {
          * Get the full path for a sitemap item within a sitemap
          *
          * @param {string} sitemapItemId The id of the item in the sitemap
-         * @param {(error: string, path?: string[]) => void} callback Returns the full path
+         * @param {(error: string | null, path?: string[]) => void} callback Returns the full path
          */
-        public getSitemapPath(sitemapItemId: string, callback: (error: string, path?: string[]) => void): void {
+        public getSitemapPath(sitemapItemId: string, callback: (error: string | null, path?: string[]) => void): void {
             const navigationLinks = this.getNavigationLinksModel(sitemapItemId);
             let removeEventListeners: () => void;
             const onLoad = () => {

@@ -10,7 +10,7 @@ module Sdl.DitaDelivery.Tests.Mocks {
     export class DataStore implements IDataStore {
 
         private _mockDataPublications: {
-            error: string;
+            error: string | null;
             publications: IPublication[];
         } = {
             error: null,
@@ -18,8 +18,8 @@ module Sdl.DitaDelivery.Tests.Mocks {
         };
 
         private _mockDataPage: {
-            error: string;
-            info: IPageInfo;
+            error: string | null;
+            info: IPageInfo | undefined;
         } = {
             error: null,
             info: {
@@ -29,14 +29,14 @@ module Sdl.DitaDelivery.Tests.Mocks {
         };
 
         private _mockDataToc: {
-            error: string;
+            error: string | null;
             items: ISitemapItem[]
         } = {
             error: null,
             items: []
         };
 
-        public getPublications(callback: (error: string, publications?: IPublication[]) => void): void {
+        public getPublications(callback: (error: string | null, publications?: IPublication[]) => void): void {
             const { error, publications } = this._mockDataPublications;
             callback(error, publications);
         }
@@ -45,7 +45,7 @@ module Sdl.DitaDelivery.Tests.Mocks {
             return this.getSitemapItems("root", callback);
         }
 
-        public getSitemapItems(parentId: string, callback: (error: string, items?: ISitemapItem[]) => void): void {
+        public getSitemapItems(parentId: string, callback: (error: string | null, items?: ISitemapItem[]) => void): void {
             const { error, items } = this._mockDataToc;
             if (fakeDelay) {
                 setTimeout(() => {
@@ -56,7 +56,7 @@ module Sdl.DitaDelivery.Tests.Mocks {
             callback(error, items);
         }
 
-        public getPageInfo(pageId: string, callback: (error: string, info?: IPageInfo) => void): void {
+        public getPageInfo(pageId: string, callback: (error: string | null, info?: IPageInfo) => void): void {
             const { error, info } = this._mockDataPage;
             if (fakeDelay) {
                 setTimeout(() => {
@@ -68,23 +68,23 @@ module Sdl.DitaDelivery.Tests.Mocks {
 
         }
 
-        public getPublicationTitle(publicationId: string, callback: (error: string, title?: string) => void): void {
+        public getPublicationTitle(publicationId: string, callback: (error: string | null, title?: string) => void): void {
             callback(null, "MP330");
         }
 
-        public getSitemapPath(sitemapItemId: string, callback: (error: string, path?: string[]) => void): void {
+        public getSitemapPath(sitemapItemId: string, callback: (error: string | null, path?: string[]) => void): void {
         }
 
         //#region Custom hooks for testing
 
-        public setMockDataToc(error: string, items?: ISitemapItem[]): void {
+        public setMockDataToc(error: string | null, items?: ISitemapItem[]): void {
             this._mockDataToc = {
                 error: error,
-                items: items
+                items: items || []
             };
         }
 
-        public setMockDataPage(error: string, info?: IPageInfo): void {
+        public setMockDataPage(error: string | null, info?: IPageInfo): void {
             this._mockDataPage = {
                 error: error,
                 info: info
