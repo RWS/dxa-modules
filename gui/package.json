@@ -4,7 +4,7 @@
   "description": "GUI of the SDL Dita Delivery Web Application.",
   "dependencies": {
     "history": "~3.0.0",
-    "sdl-catalina-react-wrappers": "~0.1.0-47",
+    "sdl-catalina-react-wrappers": "0.1.0-47",
     "sdl-icons": "0.1.1-6"
   },
   "peerDependencies": {
