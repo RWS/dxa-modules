@@ -146,12 +146,16 @@
   </ProjectExtensions>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <PropertyGroup>
-    <PostBuildEvent>REM Deploy build artifacts to DXA Site (on development machines with DXA_SITE_DIR environment variable set)
+    <PostBuildEvent>REM Remove unwanted indirect dependencies
+del "$(TargetDir)Sdl.Web.Delivery.*.*" /Q
+del "$(TargetDir)Microsoft.Data.*.*" /Q
+del "$(TargetDir)System.*.*" /Q
+
+REM Deploy build artifacts to DXA Site (on development machines with DXA_SITE_DIR environment variable set)
 if defined DXA_SITE_DIR (
-xcopy "$(TargetDir)Sdl.Web.Modules.AudienceManager.*" "%25DXA_SITE_DIR%25\bin" /Y
-xcopy "$(TargetDir)Tridion.OutboundEmail*.*" "%25DXA_SITE_DIR%25\bin" /Y
-xcopy "$(TargetDir)Sdl.AudienceManager*.*" "%25DXA_SITE_DIR%25\bin" /Y
-xcopy "$(TargetDir)WebMatrix.*" "%25DXA_SITE_DIR%25\bin" /Y
+
+xcopy "$(TargetDir)*.*" "%25DXA_SITE_DIR%25\bin" /Y
+
 xcopy "$(ProjectDir)Areas" "%25DXA_SITE_DIR%25\Areas" /S /I /Y
 )</PostBuildEvent>
   </PropertyGroup>
