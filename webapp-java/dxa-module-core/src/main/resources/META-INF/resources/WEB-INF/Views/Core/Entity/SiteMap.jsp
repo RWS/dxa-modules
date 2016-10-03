@@ -18,9 +18,14 @@
 
         <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
             <h2>
-                <a href="${item.url}" title="${item.title}">
+                <c:choose>
+                    <c:when test="${empty item.url}">
                         ${item.title}
-                </a>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="${item.url}" title="${item.title}">${item.title}</a>
+                    </c:otherwise>
+                </c:choose>
             </h2>
             <ul class="list-unstyled">
 
