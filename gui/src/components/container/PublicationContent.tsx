@@ -207,7 +207,7 @@ module Sdl.DitaDelivery.Components {
                         onSelectionChanged={this._onTocSelectionChanged.bind(this) }
                         error={tocError}/>
                     <Page
-                        showActivityIndicator={isPageLoading || true}
+                        showActivityIndicator={isPageLoading || false}
                         content={content}
                         title={title ? title : (selectedTocItem ? selectedTocItem.Title : null) }
                         error={error}/>
