@@ -27,7 +27,16 @@
                     <li class="active">${link.linkText}</li>
                 </c:when>
                 <c:otherwise>
-                    <li><a href="${link.url}">${link.linkText}</a></li>
+                    <li>
+                        <c:choose>
+                            <c:when test="${not empty link.url}">
+                                <a href="${link.url}">${link.linkText}</a>
+                            </c:when>
+                            <c:otherwise>
+                                ${link.linkText}
+                            </c:otherwise>
+                        </c:choose>
+                    </li>
                 </c:otherwise>
             </c:choose>
         </c:forEach>

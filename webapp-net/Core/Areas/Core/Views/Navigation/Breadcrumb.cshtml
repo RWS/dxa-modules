@@ -1,8 +1,9 @@
 ﻿@model NavigationLinks
-@if (Model.Items!=null && Model.Items.Count>0)
+@if ((Model.Items != null) && (Model.Items.Count > 0))
 {
     const int maxItems = 5;
-    int start = Model.Items.Count > maxItems ? Model.Items.Count - (maxItems) + 1 : 1;
+    int depth = Model.Items.Count;
+    int start = (depth > maxItems) ? (depth - maxItems + 1) : 1;
     
     <ol class="breadcrumb" @Html.DxaEntityMarkup()>
         <li>
@@ -12,13 +13,21 @@
         {
             <li>...</li>
         }
-        @for (int i = start; i < Model.Items.Count - 1; i++)
+        @for (int i = start; i < depth - 1; i++)
         {
-            <li><a href="@Model.Items[i].Url">@Model.Items[i].LinkText</a></li>
+            Link link = Model.Items[i];
+            if (string.IsNullOrEmpty(link.Url))
+            {
+                <li>@link.LinkText</li>
+            }
+            else
+            {
+                <li><a href="@link.Url">@link.LinkText</a></li>
+            }
         }
-        @if (Model.Items.Count>1)
-        {      
-            <li class="active">@Model.Items[Model.Items.Count-1].LinkText</li>
+        @if (depth > 1)
+        {
+            <li class="active">@Model.Items[depth - 1].LinkText</li>
         }
         
     </ol>

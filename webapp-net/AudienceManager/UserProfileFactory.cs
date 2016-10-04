@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web;
 using Sdl.Web.Common;
+using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Logging;
 using Sdl.Web.Mvc.Configuration;
 using Tridion.ContentDelivery.AmbientData;
@@ -13,6 +14,8 @@ namespace Sdl.Web.Modules.AudienceManager
     /// </summary>
     public static class UserProfileFactory
     {
+        private const string UserProfileCacheRegionName = "UserProfile";
+
         /// <summary>
         /// Gets the User Profile for the currently logged in user.
         /// </summary>
@@ -20,7 +23,20 @@ namespace Sdl.Web.Modules.AudienceManager
         {
             get
             {
-                return GetUserProfile(HttpContext.Current.User.Identity.Name);
+                string currentUserName = HttpContext.Current.User.Identity.Name;
+                using (new Tracer(currentUserName))
+                {
+                    if (string.IsNullOrEmpty(currentUserName))
+                    {
+                        return null;
+                    }
+
+                    return SiteConfiguration.CacheProvider.GetOrAdd(
+                        currentUserName,
+                        UserProfileCacheRegionName,
+                        () => GetUserProfile(currentUserName)
+                        );
+                }
             }
         }
 
@@ -33,31 +49,46 @@ namespace Sdl.Web.Modules.AudienceManager
         {
             using (new Tracer(identificationKey))
             {
-                if (!string.IsNullOrEmpty(identificationKey))
+                if (string.IsNullOrEmpty(identificationKey))
                 {
-                    string contactImportSources = WebRequestContext.Localization.GetConfigValue("audiencemanager.contactImportSources");
-                    if (string.IsNullOrEmpty(contactImportSources))
-                    {
-                        Log.Warn("No Audience Manager Contact Import Sources are configured.");
-                        return null;
-                    }
+                    return null;
+                }
 
-                    PreparePublicationResolving();
-
+#if !TRIDION_71
+                PreparePublicationResolving();
+#endif
+                Localization localization = WebRequestContext.Localization;
+                string contactImportSources = localization.GetConfigValue("audiencemanager.contactImportSources");
+                Contact contact = null;
+                if (string.IsNullOrEmpty(contactImportSources))
+                {
+                    contact = FindContact(identificationKey);
+                }
+                else
+                {
                     foreach (string importSource in contactImportSources.Split(','))
                     {
-                        Contact contact = FindContact(importSource, identificationKey);
+                        contact = FindContact(identificationKey, importSource);
                         if (contact != null)
                         {
-                            Log.Debug("Audience Manager identification key '{0}' in import source '{1}' resolved to Contact '{2}' (Email: '{3}').",
-                                identificationKey, importSource, contact.Id, contact.EmailAddress);
-                            return UserProfile.Create(contact);
+                            break;
                         }
                     }
-
-                    Log.Debug("No Audience Manager Contact found for identification key '{0}' and Import Sources '{1}'.", identificationKey, contactImportSources);
                 }
-                return null;
+
+                if (contact == null)
+                {
+                    Log.Debug("No Audience Manager Contact found for identification key '{0}' and Import Sources '{1}'.", identificationKey, contactImportSources);
+                    return null;
+                }
+
+                Log.Debug("Audience Manager identification key '{0}' resolved to Contact '{1}' (Email: '{2}').", identificationKey, contact.Id, contact.EmailAddress);
+
+                string userNameField = localization.GetConfigValue("audiencemanager.userNameField");
+                string passwordField = localization.GetConfigValue("audiencemanager.passwordField");
+                Log.Debug("User Name Field: '{0}'. Password Field: '{1}'", userNameField, passwordField);
+
+                return new UserProfile(contact, userNameField, passwordField);
             }
         }
 
@@ -71,25 +102,20 @@ namespace Sdl.Web.Modules.AudienceManager
         /// </remarks>
         private static void PreparePublicationResolving()
         {
-            string pageUrl = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Path);
+            string pageUrl = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + WebRequestContext.PageModel.Url;
             if (!pageUrl.EndsWith(Constants.DefaultExtension))
             {
                 pageUrl += Constants.DefaultExtension;
-                AmbientDataContext.CurrentClaimStore.Put(new Uri("taf:request:full_url"), pageUrl);
             }
+            AmbientDataContext.CurrentClaimStore.Put(new Uri("taf:request:full_url"), pageUrl);
         }
 
-        private static Contact FindContact(string importSource, string identificationKey)
+        private static Contact FindContact(string identificationKey, string importSource = null)
         {
             using (new Tracer(importSource, identificationKey))
             {
-                if (string.IsNullOrEmpty(importSource) || string.IsNullOrEmpty(identificationKey))
-                {
-                    return null;
-                }
-
                 // NOTE: Identification key comes first followed by import source otherwise you'll not get a match!
-                string[] identifiers = new[] { identificationKey, importSource };
+                string[] identifiers = (importSource == null) ? new [] { identificationKey} : new[] { identificationKey, importSource };
                 try
                 {
                     return Contact.GetFromContactIdentificatonKeys(identifiers);

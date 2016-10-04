@@ -5,6 +5,7 @@
     var items = Model.Items.Where(i=>i.Items.Count>0).ToList();
     if (Model.Type == "StructureGroup")
     {
+        // Move the items in the root Structure Group into a new top-level "Home" SitemapItem
         SitemapItem home = new SitemapItem { Title = Model.Title, Url = Model.Url, Items=new List<SitemapItem>() };
         foreach(var item in Model.Items)
         {
@@ -24,11 +25,11 @@
             {
                 var item = items[cols * i + j];
                 <div class="col-sm-6 col-md-4">
-                    <h2><a href="@item.Url" title="@item.Title">@item.Title</a></h2>
+                    <h2>@Link(item)</h2>
                     <ul class="list-unstyled">
-                        @foreach(var link in item.Items)
+                        @foreach(SitemapItem childItem in item.Items)
                         { 
-                            @List(link)
+                            @List(childItem)
                         }
                     </ul>
                 </div>
@@ -36,7 +37,19 @@
         </div>
     }
 </div>
-        
+
+@helper Link(SitemapItem item)
+{
+    if (string.IsNullOrEmpty(item.Url)) 
+    {
+        @item.Title 
+    }
+    else
+    {
+        <a href="@item.Url" title="@item.Title">@item.Title</a>
+    }
+}
+
 @helper List(SitemapItem item)
 {
     if (item.Url != null && item.Url.EndsWith("/index"))
@@ -45,11 +58,11 @@
         return;
     }
     <li>
-        <a href="@item.Url" title="@item.Title">@item.Title</a>
+        @Link(item)
         @if (item.Items.Count > 0)
         {
             <ul class="list-unstyled">
-                @foreach(var child in item.Items)
+                @foreach (var child in item.Items)
                 {
                     @List(child)
                 }

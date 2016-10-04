@@ -1,12 +1,20 @@
 ﻿@model CurrentUserWidget
 
-@{
-    if (Model.IsLoggedIn)
-    {
-        <div>Welcome <strong>@Model.UserName</strong> [ <a href="api/profile/logout">Logout</a> ]</div>
-    }
-    else
-    {
-        <a href="/login.html">Login</a>
-    }
-}
+<div class="navbar-nav utility-nav" style="padding: 8px 23px;">
+    <div class="btn-group">
+        @if(Model.IsLoggedIn)
+        { 
+            <a class="btn btn-primary" href="#"><i class="fa fa-user fa-fw"></i> @Model.UserName</a>
+            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+                <span class="fa fa-caret-down" title="Toggle dropdown menu"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="api/profile/logout"><i class="fa fa-sign-out fa-fw"></i> @Model.LogoutLabel</a></li>
+            </ul>
+        }
+        else
+        {
+            <a class="btn btn-primary" href="@Model.LoginLink.Url"><i class="fa fa-user fa-fw"></i> @Model.LoginLabel</a>
+        }
+    </div>
+</div>

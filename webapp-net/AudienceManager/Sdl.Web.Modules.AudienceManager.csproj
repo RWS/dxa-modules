@@ -18,9 +18,9 @@
     </FileUpgradeFlags>
     <OldToolsVersion>12.0</OldToolsVersion>
     <UpgradeBackupLocation />
-    <DxaFrameworkVersion>1.6.0-alpha-201609152250</DxaFrameworkVersion>
-    <SdlDeliveryVersion>8.3.0-beta-201609141135</SdlDeliveryVersion>
-    <AudienceManagerVersion>8.3.0-beta-201609131852</AudienceManagerVersion>
+    <DxaFrameworkVersion>1.6.0-alpha-201609272055</DxaFrameworkVersion>
+    <SdlDeliveryVersion>8.3.0</SdlDeliveryVersion>
+    <AudienceManagerVersion>8.3.0</AudienceManagerVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -71,6 +71,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.1.2\lib\net45\System.Web.Mvc.dll</HintPath>
       <Private>$(CopyLocal)</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.1.2\lib\net45\System.Web.WebPages.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -143,8 +146,14 @@
   </ProjectExtensions>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <PropertyGroup>
-    <PostBuildEvent>REM Deploy build artifacts to DXA Site (on development machines with DXA_SITE_DIR environment variable set)
+    <PostBuildEvent>REM Remove unwanted indirect dependencies
+del "$(TargetDir)Sdl.Web.Delivery.*.*" /Q
+del "$(TargetDir)Microsoft.Data.*.*" /Q
+del "$(TargetDir)System.*.*" /Q
+
+REM Deploy build artifacts to DXA Site (on development machines with DXA_SITE_DIR environment variable set)
 if defined DXA_SITE_DIR (
+
 xcopy "$(TargetDir)Sdl.Web.Modules.AudienceManager.*" "%25DXA_SITE_DIR%25\bin" /Y
 xcopy "$(TargetDir)Tridion.OutboundEmail*.*" "%25DXA_SITE_DIR%25\bin" /Y
 xcopy "$(TargetDir)Sdl.AudienceManager*.*" "%25DXA_SITE_DIR%25\bin" /Y

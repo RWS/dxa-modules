@@ -9,20 +9,17 @@ namespace Sdl.Web.Modules.AudienceManager
     /// </summary>
     public class UserProfile
     {
-        private const string UserNameFieldName = "IDENTIFICATION_KEY";
-        private const string PasswordFieldName = "Password";
         private const string EncryptedPrefix = "encrypted:";
 
         private readonly Contact _contact;
+        private readonly string _userNameField;
+        private readonly string _passwordField;
 
-        protected UserProfile(Contact contact)
+        internal UserProfile(Contact contact, string userNameField, string passwordField)
         {
             _contact = contact;
-        }
-
-        internal static UserProfile Create(Contact contact)
-        {          
-            return new UserProfile(contact);
+            _userNameField = userNameField;
+            _passwordField = passwordField;
         }
 
         public Contact Contact
@@ -37,7 +34,7 @@ namespace Sdl.Web.Modules.AudienceManager
         {
             get
             {
-                return GetExtendedDetail(UserNameFieldName);
+                return GetExtendedDetail(_userNameField);
             }
         }
 
@@ -45,7 +42,7 @@ namespace Sdl.Web.Modules.AudienceManager
         {
             get
             {
-                return GetExtendedDetail(PasswordFieldName);
+                return GetExtendedDetail(_passwordField);
             }
         }
    
