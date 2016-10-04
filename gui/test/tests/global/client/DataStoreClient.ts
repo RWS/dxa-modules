@@ -59,7 +59,11 @@ module Sdl.DitaDelivery.Tests {
                         expect(items).toBeDefined();
                         if (items) {
                             expect(items.length).toBe(1);
-                            getChildren(items[0].Id);
+                            const firstItem = items[0];
+                            expect(firstItem.Id).toBeDefined();
+                            if (firstItem.Id) {
+                                getChildren(firstItem.Id);
+                            }
                         }
                     });
                 });

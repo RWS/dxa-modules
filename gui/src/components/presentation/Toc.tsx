@@ -138,11 +138,13 @@ module Sdl.DitaDelivery.Components {
         private _convertToTreeViewNodes(sitemapItems: ISitemapItem[], parentNode: ITreeViewNode | null = null): ITreeViewNode[] {
             const nodes: ITreeViewNode[] = [];
             const TreeViewControl = SDL.UI.Controls.TreeView;
+            let count = 0;
             for (let sitemapItem of sitemapItems) {
-                let newNode = TreeViewControl.prototype.createNode(sitemapItem.Id, sitemapItem.Title, "TOPIC",
+                let newNode = TreeViewControl.prototype.createNode(sitemapItem.Id || count.toString(), sitemapItem.Title, "TOPIC",
                     parentNode, null, sitemapItem.HasChildNodes, this._loadChildNodes.bind(this), true) as ITreeViewNode;
                 newNode.sitemapItem = sitemapItem;
                 nodes.push(newNode);
+                count++;
             }
             return nodes;
         }

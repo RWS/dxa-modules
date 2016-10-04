@@ -231,7 +231,7 @@ module Sdl.DitaDelivery {
 
         private getPublicationsModel(): Models.Publications {
             if (!DataStoreClient.PublicationsModel) {
-                DataStoreClient.PublicationsModel = new Models.Publications;
+                DataStoreClient.PublicationsModel = new Models.Publications();
             }
             return DataStoreClient.PublicationsModel;
         }

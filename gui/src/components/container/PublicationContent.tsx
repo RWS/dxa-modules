@@ -145,7 +145,7 @@ module Sdl.DitaDelivery.Components {
             };
 
             const location = Routing.getPublicationLocation();
-            if (location) {
+            if (location && location.sitemapItemId) {
                 // Set the current active path for the tree
                 this._getActiveSitemapPath(location.sitemapItemId, getRootItems);
             } else {
@@ -161,7 +161,7 @@ module Sdl.DitaDelivery.Components {
         public componentWillReceiveProps(nextProps: ITocProps): void {
             const location = Routing.getPublicationLocation();
             const { selectedTocItem } = this.state;
-            if (location && (!selectedTocItem || location.sitemapItemId !== selectedTocItem.Id)) {
+            if (location && location.sitemapItemId && (!selectedTocItem || location.sitemapItemId !== selectedTocItem.Id)) {
                 // Set the current active path for the tree
                 this._getActiveSitemapPath(location.sitemapItemId, (path) => {
                     this.setState({

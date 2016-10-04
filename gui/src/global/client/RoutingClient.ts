@@ -12,6 +12,13 @@ module Sdl.DitaDelivery {
     const PUBLICATION_URL_REGEX = /^\/[^\/]+%3A[0-9]+-[0-9]+-[0-9]+\/[^\/]+%3A[0-9]+-[0-9]+-[0-9]+\/.*$/gmi;
 
     /**
+     * Regex to validate if a url is pointing to a publication but it has no reference to a page (eg an abstract page)
+     *
+     * example: /ish:39137-1-1/MP330/User-Guide
+     */
+    const PUBLICATION_URL_REGEX_NO_PAGE = /^\/[^\/]+%3A[0-9]+-[0-9]+-[0-9]+\/.*$/gmi;
+
+    /**
      * Routing related functionality
      *
      * @export
@@ -61,15 +68,15 @@ module Sdl.DitaDelivery {
          *
          * @param {string} publicationId Publication id
          * @param {string} publicationTitle Publication title
-         * @param {string} sitemapItemId Sitemap item id
+         * @param {string | undefined} sitemapItemId Sitemap item id
          * @param {string} sitemapItemTitle Sitemap item title
          */
         public setPublicationLocation(publicationId: string, publicationTitle: string,
-            sitemapItemId: string, sitemapItemTitle: string): void {
+            sitemapItemId: string | undefined, sitemapItemTitle: string): void {
 
             const pathname = this.getAbsolutePath(
                 encodeURIComponent(publicationId) + "/" +
-                encodeURIComponent(sitemapItemId) + "/" +
+                (sitemapItemId ? encodeURIComponent(sitemapItemId) + "/" : "") +
                 encodeURIComponent(this._escapeTitle(publicationTitle)) + "/" +
                 encodeURIComponent(this._escapeTitle(sitemapItemTitle))
             );
@@ -86,11 +93,20 @@ module Sdl.DitaDelivery {
             const currentLocation = RoutingClient._history.getCurrentLocation().pathname;
             const paths = currentLocation.match(PUBLICATION_URL_REGEX);
             if (paths) {
-                var result = paths[0].split("/");
+                const result = paths[0].split("/");
                 return {
                     publicationId: decodeURIComponent(result[1]),
                     sitemapItemId: decodeURIComponent(result[2])
                 };
+            } else {
+                const noPagePaths = currentLocation.match(PUBLICATION_URL_REGEX_NO_PAGE);
+                if (noPagePaths) {
+                    const result = noPagePaths[0].split("/");
+                    return {
+                        publicationId: decodeURIComponent(result[1]),
+                        sitemapItemId: null
+                    };
+                }
             }
             return null;
         }

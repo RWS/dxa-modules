@@ -30,11 +30,11 @@ declare module Sdl.DitaDelivery {
          *
          * @param {string} publicationId Publication id
          * @param {string} publicationTitle Publication title
-         * @param {string} sitemapItemId Sitemap item id
+         * @param {string | undefined} sitemapItemId Sitemap item id
          * @param {string} sitemapItemTitle Sitemap item title
          */
         setPublicationLocation(publicationId: string, publicationTitle: string,
-            sitemapItemId: string, sitemapItemTitle: string): void;
+            sitemapItemId: string | undefined, sitemapItemTitle: string): void;
 
         /**
          * Get the current location within a publication
@@ -59,9 +59,9 @@ declare module Sdl.DitaDelivery {
         /**
          * Sitemap item id
          *
-         * @type {string}
+         * @type {string | null}
          */
-        sitemapItemId: string;
+        sitemapItemId: string | null;
     }
 
 }

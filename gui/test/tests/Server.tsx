@@ -25,8 +25,8 @@ module Sdl.DitaDelivery.Tests {
                     expect(firstChild.childNodes.length).toBe(2);
                 });
 
-                 it("renders correct static markup", (): void => {
-                    const app = ReactDOMServer.renderToStaticMarkup(<App/>);
+                it("renders correct static markup", (): void => {
+                    const app = ReactDOMServer.renderToStaticMarkup(<App />);
                     const expected = ReactDOMServer.renderToStaticMarkup((
                         <div className="sdl-dita-delivery-app">
                             <span>
@@ -39,9 +39,6 @@ module Sdl.DitaDelivery.Tests {
                                     </span>
                                 </div>
                                 <div className="sdl-dita-delivery-page">
-                                    <span>
-                                        <div></div>
-                                    </span>
                                     <div>
                                         <h1 className="page-title"></h1>
                                         <div className="page-content ltr"></div>
