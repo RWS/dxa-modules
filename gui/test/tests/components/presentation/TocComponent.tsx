@@ -16,7 +16,7 @@ module Sdl.DitaDelivery.Tests {
                     Id: "123",
                     Title: "Root",
                     IsAbstract: false,
-                    IsLeaf: false,
+                    HasChildNodes: false,
                     Url: ""
                 }];
                 const loadChildItems = (parentId: string, callback: (error: string | null, children: ISitemapItem[]) => void): void => {
@@ -24,7 +24,7 @@ module Sdl.DitaDelivery.Tests {
                         Id: "12345",
                         Title: "Child1",
                         IsAbstract: false,
-                        IsLeaf: true,
+                        HasChildNodes: true,
                         Url: ""
                     }]);
                 };

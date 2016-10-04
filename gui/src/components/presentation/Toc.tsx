@@ -140,7 +140,7 @@ module Sdl.DitaDelivery.Components {
             const TreeViewControl = SDL.UI.Controls.TreeView;
             for (let sitemapItem of sitemapItems) {
                 let newNode = TreeViewControl.prototype.createNode(sitemapItem.Id, sitemapItem.Title, "TOPIC",
-                    parentNode, null, sitemapItem.IsLeaf, this._loadChildNodes.bind(this), true) as ITreeViewNode;
+                    parentNode, null, sitemapItem.HasChildNodes, this._loadChildNodes.bind(this), true) as ITreeViewNode;
                 newNode.sitemapItem = sitemapItem;
                 nodes.push(newNode);
             }
