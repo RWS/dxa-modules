@@ -28,7 +28,7 @@
         </div>
 
         <div class="form-group">
-            <form:input path="password" placeholder="${entity.passwordLabel}" cssClass="form-control"/>
+            <form:password path="password" placeholder="${entity.passwordLabel}" cssClass="form-control"/>
         </div>
 
         <div class="form-group">
