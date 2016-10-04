@@ -4,20 +4,20 @@
     "Title": "Installing the SIM card and the battery",
     "Url": "ish:39137-6169-16",
     "IsAbstract": false,
-    "IsLeaf": true
+    "HasChildNodes": true
   },
   {
     "Id": "ish:39137-13-1024",
     "Title": "Charging the battery",
     "Url": "ish:39137-6127-16",
     "IsAbstract": false,
-    "IsLeaf": true
+    "HasChildNodes": true
   },
   {
     "Id": "ish:39137-14-1024",
     "Title": "Locking the keypad",
     "Url": "ish:39137-6107-16",
     "IsAbstract": false,
-    "IsLeaf": true
+    "HasChildNodes": true
   }
 ]

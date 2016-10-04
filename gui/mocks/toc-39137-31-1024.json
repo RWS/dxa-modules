@@ -4,13 +4,13 @@
     "Title": "Listening to music",
     "Url": "ish:39137-6193-16",
     "IsAbstract": false,
-    "IsLeaf": true
+    "HasChildNodes": true
   },
   {
     "Id": "ish:39137-33-1024",
     "Title": "Listening to the radio",
     "Url": "ish:39137-6205-16",
     "IsAbstract": false,
-    "IsLeaf": true
+    "HasChildNodes": true
   }
 ]

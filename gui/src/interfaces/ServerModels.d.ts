@@ -1,4 +1,4 @@
-
+﻿
 declare module Sdl.DitaDelivery.Server.Models {
     interface ILink {
         Id: string;
@@ -18,11 +18,11 @@ declare module Sdl.DitaDelivery.Server.Models {
         Title: string;
     }
     interface ISitemapItem {
-        Id: string;
+        HasChildNodes: boolean;
+        Id?: string;
         IsAbstract: boolean;
-        IsLeaf: boolean;
         Title: string;
-        Url: string;
+        Url?: string;
     }
 }
 declare module Sdl.DitaDelivery.Server.Models {

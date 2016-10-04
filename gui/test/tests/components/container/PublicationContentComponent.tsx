@@ -44,7 +44,7 @@ module Sdl.DitaDelivery.Tests {
                             Id: "123",
                             Title: "First element",
                             IsAbstract: false,
-                            IsLeaf: false,
+                            HasChildNodes: false,
                             Url: ""
                         }
                     ]);
@@ -69,7 +69,7 @@ module Sdl.DitaDelivery.Tests {
                         selectedTocItem: {
                             Id: "123",
                             IsAbstract: false,
-                            IsLeaf: true,
+                            HasChildNodes: true,
                             Title: "Some page",
                             Url: "page"
                         }
@@ -92,14 +92,14 @@ module Sdl.DitaDelivery.Tests {
                             Id: "1",
                             Title: "First element",
                             IsAbstract: true,
-                            IsLeaf: true,
+                            HasChildNodes: true,
                             Url: ""
                         },
                         {
                             Id: "2",
                             Title: "Second element",
                             IsAbstract: true,
-                            IsLeaf: true,
+                            HasChildNodes: true,
                             Url: ""
                         }
                     ]);
@@ -133,7 +133,7 @@ module Sdl.DitaDelivery.Tests {
                         selectedTocItem: {
                             Id: "12345",
                             IsAbstract: true,
-                            IsLeaf: true,
+                            HasChildNodes: true,
                             Title: title,
                             Url: ""
                         }
@@ -150,7 +150,7 @@ module Sdl.DitaDelivery.Tests {
                     dataStoreMock.setMockDataToc(null, [{
                         Id: "123456",
                         IsAbstract: false,
-                        IsLeaf: true,
+                        HasChildNodes: true,
                         Title: "Some page",
                         Url: "page-url"
                     }]);
