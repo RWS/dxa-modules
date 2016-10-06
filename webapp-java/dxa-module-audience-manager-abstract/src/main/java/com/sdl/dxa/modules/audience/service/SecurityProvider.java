@@ -77,7 +77,7 @@ public class SecurityProvider implements UserDetailsService, AuthenticationManag
             throw new BadCredentialsException("No user found in Audience manager with username " + authentication.getName());
         }
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
-                authentication.getName(), authentication.getCredentials(), UserProfile.DEFAULT_AUTHORITIES);
+                user.getUsername(), user.getPassword(), UserProfile.DEFAULT_AUTHORITIES);
         token.setDetails(user.getId());
         return token;
     }

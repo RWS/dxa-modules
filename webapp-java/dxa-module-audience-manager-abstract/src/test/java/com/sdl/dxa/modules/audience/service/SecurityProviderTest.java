@@ -136,6 +136,8 @@ public class SecurityProviderTest {
         UserProfile user = mock(UserProfile.class);
         doReturn(true).when(user).verifyPassword(anyString());
         doReturn("id").when(user).getId();
+        doReturn("user_by_key").when(user).getUsername();
+        doReturn("password_by_key").when(user).getPassword();
         doReturn(user).when(provider).loadUserByUsername("user");
 
         //when
@@ -143,8 +145,8 @@ public class SecurityProviderTest {
 
         //then
         verify(user).verifyPassword(eq("password"));
-        assertEquals("user", result.getName());
-        assertEquals("password", result.getCredentials());
+        assertEquals("user_by_key", result.getName());
+        assertEquals("password_by_key", result.getCredentials());
         assertEquals("id", result.getDetails());
         assertEquals(DEFAULT_AUTHORITIES.iterator().next(), result.getAuthorities().iterator().next());
     }
