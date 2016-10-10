@@ -5,25 +5,21 @@
 <jsp:useBean id="localization" type="com.sdl.webapp.common.api.localization.Localization" scope="request"/>
 <jsp:useBean id="markup" type="com.sdl.webapp.common.markup.Markup" scope="request"/>
 
-<div class="navbar" style="margin-bottom: 0; border-bottom: 0 none;">
-    <div class="navbar-inner">
-        <div class="btn-group pull-right">
-            <c:choose>
-                <c:when test="${entity.loggedIn}">
-                    <a class="btn btn-primary" href="#"><i class="fa fa-user fa-fw"></i>${entity.userName}</a>
-                    <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
-                        <span class="fa fa-caret-down" title="Toggle dropdown menu"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="${localization.localizePath("/api/profile/logout")}"><i
-                                class="fa fa-sign-out fa-fw"></i>${entity.logoutLabel}</a></li>
-                    </ul>
-                </c:when>
-                <c:otherwise>
-                    <a class="btn btn-primary" href="${entity.loginLink.url}"><i
-                            class="fa fa-user fa-fw"></i>${entity.loginLabel}</a>
-                </c:otherwise>
-            </c:choose>
-        </div>
-    </div>
+<div class="btn-group pull-right" style="margin: 8px;">
+    <c:choose>
+        <c:when test="${entity.loggedIn}">
+            <a class="btn btn-primary" href="#"><i class="fa fa-user fa-fw"></i>${entity.userName}</a>
+            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+                <span class="fa fa-caret-down" title="Toggle dropdown menu"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="${localization.localizePath("/api/profile/logout")}"><i
+                        class="fa fa-sign-out fa-fw"></i>${entity.logoutLabel}</a></li>
+            </ul>
+        </c:when>
+        <c:otherwise>
+            <a class="btn btn-primary" href="${entity.loginLink.url}"><i
+                    class="fa fa-user fa-fw"></i>${entity.loginLabel}</a>
+        </c:otherwise>
+    </c:choose>
 </div>
