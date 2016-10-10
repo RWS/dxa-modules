@@ -58,6 +58,10 @@ public class AudienceManagerServiceImpl implements AudienceManagerService {
     @SneakyThrows(URISyntaxException.class)
     private void replaceFullUrlClaim() {
         ClaimStore claimStore = AmbientDataContext.getCurrentClaimStore();
+        if (claimStore == null) {
+            log.warn("There is no current ClaimStore set, cannot modify full_url needed for resolving a contact");
+            return;
+        }
         URI claimFullUrl = new URI("taf:request:full_url");
         claimStore.getAllReadOnlyClaims().remove(claimFullUrl);
         claimStore.put(claimFullUrl, replaceRequestContextPath(webRequestContext, normalizePathToDefaults(webRequestContext.getPage().getUrl())));
