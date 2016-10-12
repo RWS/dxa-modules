@@ -180,15 +180,15 @@ module Sdl.DitaDelivery {
         /**
          * Get the full path for a sitemap item within a sitemap
          *
-         * @param {string} sitemapItemId The id of the item in the sitemap
+         * @param {string} pageId The page id
          * @param {(error: string | null, path?: string[]) => void} callback Returns the full path
          */
-        public getSitemapPath(sitemapItemId: string, callback: (error: string | null, path?: string[]) => void): void {
-            const navigationLinks = this.getNavigationLinksModel(sitemapItemId);
+        public getSitemapPath(pageId: string, callback: (error: string | null, path?: string[]) => void): void {
+            const navigationLinks = this.getNavigationLinksModel(pageId);
             let removeEventListeners: () => void;
             const onLoad = () => {
                 removeEventListeners();
-                const path = navigationLinks.getNavigationLinks().Items.map(item => item.Id);
+                const path = navigationLinks.getPath();
                 callback(null, path);
             };
             const onLoadFailed = (event: SDL.Client.Event.Event) => {
@@ -204,7 +204,7 @@ module Sdl.DitaDelivery {
                 navigationLinks.addEventListener("loadfailed", onLoadFailed);
                 navigationLinks.load();
             } else {
-                const path = navigationLinks.getNavigationLinks().Items.map(item => item.Id);
+                const path = navigationLinks.getPath();
                 callback(null, path);
             }
         }
@@ -241,7 +241,8 @@ module Sdl.DitaDelivery {
                 DataStoreClient.NavigationLinksModels = {};
             }
             if (!DataStoreClient.NavigationLinksModels[pageId]) {
-                DataStoreClient.NavigationLinksModels[pageId] = new Models.NavigationLinks(pageId);
+                // TODO: calculate taxonomy id base on page id
+                DataStoreClient.NavigationLinksModels[pageId] = new Models.NavigationLinks("39137-1-512", pageId);
             }
             return DataStoreClient.NavigationLinksModels[pageId];
         }

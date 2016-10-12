@@ -92,11 +92,11 @@ module Sdl.DitaDelivery.Tests {
                         expect(pageInfo).toBeDefined();
                         if (pageInfo) {
                             expect(pageInfo.title).toBe("getting started");
-                            expect(pageInfo.content.length).toBe(127);
+                            expect(pageInfo.content.length).toBe(1109);
                             const element = document.createElement("span");
                             element.innerHTML = pageInfo.content;
-                            expect(element.children.length).toBe(1);
-                            expect((element.children[0] as HTMLElement).children.length).toBe(2);
+                            expect(element.children.length).toBe(3); // title, content, related links
+                            expect((element.children[1] as HTMLElement).children.length).toBe(2);
                         }
                         done();
                     });
@@ -110,7 +110,7 @@ module Sdl.DitaDelivery.Tests {
                         expect(pageInfo).toBeDefined();
                         if (pageInfo) {
                             expect(pageInfo.title).toBe("getting started");
-                            expect(pageInfo.content.length).toBe(127);
+                            expect(pageInfo.content.length).toBe(1109);
                             expect(spy).not.toHaveBeenCalled();
                         }
                         done();
@@ -212,8 +212,8 @@ module Sdl.DitaDelivery.Tests {
                 });
 
                 it("can get a path for a page", (done: () => void): void => {
-                    const sitemapItemId = "ish:39137-5-1024";
-                    DataStore.getSitemapPath(sitemapItemId, (error, path) => {
+                    const pageId = "ish:39137-6146-16";
+                    DataStore.getSitemapPath(pageId, (error, path) => {
                         expect(error).toBeNull();
                         expect(path).toBeDefined();
                         if (path) {
@@ -224,9 +224,9 @@ module Sdl.DitaDelivery.Tests {
                 });
 
                 it("can get a path for a page from memory", (done: () => void): void => {
-                    const sitemapItemId = "ish:39137-5-1024";
+                    const pageId = "ish:39137-6146-16";
                     const spy = spyOn(SDL.Client.Net, "getRequest").and.callThrough();
-                    DataStore.getSitemapPath(sitemapItemId, (error, path) => {
+                    DataStore.getSitemapPath(pageId, (error, path) => {
                         expect(error).toBeNull();
                         expect(path).toBeDefined();
                         if (path) {

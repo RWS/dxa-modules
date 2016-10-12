@@ -144,7 +144,7 @@ module Sdl.DitaDelivery.Components {
                 let count = 0;
                 for (let sitemapItem of sitemapItems) {
                     let newNode = TreeViewControl.prototype.createNode(sitemapItem.Id || count.toString(), sitemapItem.Title, "TOPIC",
-                        parentNode, null, sitemapItem.HasChildNodes, this._loadChildNodes.bind(this), true) as ITreeViewNode;
+                        parentNode, null, !sitemapItem.HasChildNodes, this._loadChildNodes.bind(this), true) as ITreeViewNode;
                     newNode.sitemapItem = sitemapItem;
                     nodes.push(newNode);
                     count++;

@@ -11,10 +11,10 @@
     "FDESCRIPTION.logical.value": null,
     "FCHANGES.version.value": "Imported OASIS DITA 1.1",
     "FISHRELEASELABEL.version.value": null,
-    "CREATED-ON.lng.value": "2008-10-29T17:52:26+02:00",
+    "CREATED-ON.lng.value": "2008-10-29T15:52:26Z",
     "FAUTHOR.lng.value": "Author",
     "FSTATUS.lng.value": "Released",
-    "MODIFIED-ON.lng.value": "2010-04-09T11:25:17+03:00",
+    "MODIFIED-ON.lng.value": "2010-04-09T08:25:17Z",
     "VERSION.version.value": "1",
     "FRESOLUTION.lng.value": null,
     "DOC-LANGUAGE.lng.value": [
@@ -27,5 +27,5 @@
     "FUSERGROUP.logical.value": null,
     "READ-ACCESS.logical.value": null
   },
-  "Html": "<div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\r\n\t\t\t<p class=\"shortdesc\">The phone supports downloading new applications and games from different WAP services.</p>\r\n\t\t\t<p class=\"p\">Press Menu, and select Games and Game downloads (network service).</p>\r\n\t\t\t<p class=\"p\">The list of available WAP bookmarks is shown. Select the appropriate bookmark to connect to the desired WAP page. If the connection\r\n            fails, you may not be able to access the WAP page from the WAP service whose connection settings are currently active.\r\n         </p>\r\n\t\t\t<p class=\"p\">To view the size of memory available for game and application installations, press Menu, and select Games and Memory.</p>\r\n\t\t\t<div class=\"p\">For the availability of different WAP services, pricing and tariffs, contact your network operator and/or the WAP service\r\n            provider.\r\n            <div class=\"note attention\" id=\"GUID-0F8BA10F-B081-4120-8B32-12736F46B805__GUID-BE700D8B-AC2C-4118-9782-69CC34497FCB\"><span class=\"attentiontitle\">Attention:</span> Only install software from sources that offer adequate protection against viruses and other harmful software.\r\n            </div></div>\r\n\t\t</div>"
+  "Html": "\n\t\t<h1 class=\"title topictitle1\" id=\"GUID-0F8BA10F-B081-4120-8B32-12736F46B805__GUID-523A34A8-68E2-44BA-AEB2-677385F2ABB2\" xmlns=\"http://www.w3.org/1999/xhtml\">Game Downloads</h1>\n\t\t<div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\n\t\t\t<p class=\"shortdesc\">The phone supports downloading new applications and games from different WAP services.</p>\n\t\t\t<p class=\"p\">Press Menu, and select Games and Game downloads (network service).</p>\n\t\t\t<p class=\"p\">The list of available WAP bookmarks is shown. Select the appropriate bookmark to connect to the desired WAP page. If the connection\n            fails, you may not be able to access the WAP page from the WAP service whose connection settings are currently active.\n         </p>\n\t\t\t<p class=\"p\">To view the size of memory available for game and application installations, press Menu, and select Games and Memory.</p>\n\t\t\t<div class=\"p\">For the availability of different WAP services, pricing and tariffs, contact your network operator and/or the WAP service\n            provider.\n            <div class=\"note attention\" id=\"GUID-0F8BA10F-B081-4120-8B32-12736F46B805__GUID-BE700D8B-AC2C-4118-9782-69CC34497FCB\"><span class=\"attentiontitle\">Attention:</span> Only install software from sources that offer adequate protection against viruses and other harmful software.\n            </div></div>\n\t\t</div>\n\t\t<div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n\t\t\t<div class=\"familylinks\">\n\t\t\t\t<div class=\"parentlink\">\n\t\t\t\t\t<strong>Parent topic:</strong>\n\t\t\t\t\t<a href=\"ish:39137-6210-16\">Games</a>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t"
 }

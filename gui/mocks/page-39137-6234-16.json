@@ -11,10 +11,10 @@
     "FDESCRIPTION.logical.value": null,
     "FCHANGES.version.value": "Imported OASIS DITA 1.1",
     "FISHRELEASELABEL.version.value": null,
-    "CREATED-ON.lng.value": "2008-10-29T18:10:04+02:00",
+    "CREATED-ON.lng.value": "2008-10-29T16:10:04Z",
     "FAUTHOR.lng.value": "Author",
     "FSTATUS.lng.value": "Released",
-    "MODIFIED-ON.lng.value": "2010-04-09T11:25:36+03:00",
+    "MODIFIED-ON.lng.value": "2010-04-09T08:25:36Z",
     "VERSION.version.value": "1",
     "FRESOLUTION.lng.value": null,
     "DOC-LANGUAGE.lng.value": [
@@ -27,5 +27,5 @@
     "FUSERGROUP.logical.value": null,
     "READ-ACCESS.logical.value": null
   },
-  "Html": "<div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\r\n\t\t\t<p class=\"shortdesc\">GPRS technology allows mobile phones to be used for sending and receiving data over the mobile network (network service).</p>\r\n\t\t\t<p class=\"p\">GPRS technology allows mobile phones to be used for sending and receiving data over the mobile network (network service).\r\n            GPRS as such is a data bearer that enables wireless access to data networks like the Internet. The applications that may use\r\n            GPRS are WAP services, MMS and SMS messaging, and Java application downloading.\r\n         </p>\r\n\t\t\t<div class=\"p\">Before you can use GPRS technology\r\n            <ul class=\"ul\"><li class=\"li\">Contact your network operator or service provider for availability, pricing and subscription to the GPRS service.</li><li class=\"li\">Save the GPRS settings for each of the applications used over GPRS.</li></ul></div>\r\n\t\t</div>"
+  "Html": "\n\t\t<h1 class=\"title topictitle1\" id=\"GUID-0EDBAC80-8997-45CA-8578-E8AAB7EE0B6E__GUID-A9BCAA46-D536-4C48-9DCC-83D91F8F8450\" xmlns=\"http://www.w3.org/1999/xhtml\">General Packet Radio Service (GPRS)</h1>\n\t\t<div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\n\t\t\t<p class=\"shortdesc\">GPRS technology allows mobile phones to be used for sending and receiving data over the mobile network (network service).</p>\n\t\t\t<p class=\"p\">GPRS technology allows mobile phones to be used for sending and receiving data over the mobile network (network service).\n            GPRS as such is a data bearer that enables wireless access to data networks like the Internet. The applications that may use\n            GPRS are WAP services, MMS and SMS messaging, and Java application downloading.\n         </p>\n\t\t\t<div class=\"p\">Before you can use GPRS technology\n            <ul class=\"ul\"><li class=\"li\">Contact your network operator or service provider for availability, pricing and subscription to the GPRS service.</li><li class=\"li\">Save the GPRS settings for each of the applications used over GPRS.</li></ul></div>\n\t\t</div>\n\t\t<div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n\t\t\t<div class=\"familylinks\">\n\t\t\t\t<div class=\"parentlink\">\n\t\t\t\t\t<strong>Parent topic:</strong>\n\t\t\t\t\t<a title=\"Your phone hover\" href=\"ish:39137-6298-16\">Your phone</a>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t"
 }

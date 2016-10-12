@@ -4,13 +4,15 @@
     "Title": "Making a call",
     "Url": "ish:39137-6218-16",
     "IsAbstract": false,
-    "HasChildNodes": false
+    "HasChildNodes": true,
+    "Items": []
   },
   {
     "Id": "ish:39137-19-1024",
     "Title": "Answering or rejecting a call",
     "Url": "ish:39137-6119-16",
     "IsAbstract": false,
-    "HasChildNodes": true
+    "HasChildNodes": false,
+    "Items": []
   }
 ]

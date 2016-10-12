@@ -16,16 +16,16 @@ module Sdl.DitaDelivery.Tests {
                     Id: "123",
                     Title: "Root",
                     IsAbstract: false,
-                    HasChildNodes: false,
-                    Url: ""
+                    HasChildNodes: true,
+                    Items: []
                 }];
                 const loadChildItems = (parentId: string, callback: (error: string | null, children: ISitemapItem[]) => void): void => {
                     callback(null, [{
                         Id: "12345",
                         Title: "Child1",
                         IsAbstract: false,
-                        HasChildNodes: true,
-                        Url: ""
+                        HasChildNodes: false,
+                        Items: []
                     }]);
                 };
 
@@ -69,7 +69,7 @@ module Sdl.DitaDelivery.Tests {
         }
 
         private _renderComponent(props: ITocProps, target: HTMLElement): void {
-            ReactDOM.render(<Toc {...props}/>, target);
+            ReactDOM.render(<Toc {...props} />, target);
         }
     }
 

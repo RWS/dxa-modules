@@ -4,48 +4,55 @@
     "Title": "Keys overview",
     "Url": "ish:39137-6258-16",
     "IsAbstract": false,
-    "HasChildNodes": true
+    "HasChildNodes": false,
+    "Items": []
   },
   {
     "Id": "ish:39137-5-1024",
     "Title": "Connectors overview",
     "Url": "ish:39137-6146-16",
     "IsAbstract": false,
-    "HasChildNodes": true
+    "HasChildNodes": false,
+    "Items": []
   },
   {
     "Id": "ish:39137-6-1024",
     "Title": "Standby mode",
     "Url": "ish:39137-6115-16",
     "IsAbstract": false,
-    "HasChildNodes": true
+    "HasChildNodes": false,
+    "Items": []
   },
   {
     "Id": "ish:39137-7-1024",
     "Title": "Essential indicators in standby mode",
     "Url": "ish:39137-6186-16",
     "IsAbstract": false,
-    "HasChildNodes": true
+    "HasChildNodes": false,
+    "Items": []
   },
   {
     "Id": "ish:39137-8-1024",
     "Title": "Screen saver",
     "Url": "ish:39137-6111-16",
     "IsAbstract": false,
-    "HasChildNodes": true
+    "HasChildNodes": false,
+    "Items": []
   },
   {
     "Id": "ish:39137-9-1024",
     "Title": "General Packet Radio Service (GPRS)",
     "Url": "ish:39137-6234-16",
     "IsAbstract": false,
-    "HasChildNodes": true
+    "HasChildNodes": false,
+    "Items": []
   },
   {
     "Id": "ish:39137-10-1024",
     "Title": "Bluetooth Connection",
     "Url": "ish:39137-6124-16",
     "IsAbstract": false,
-    "HasChildNodes": true
+    "HasChildNodes": false,
+    "Items": []
   }
 ]

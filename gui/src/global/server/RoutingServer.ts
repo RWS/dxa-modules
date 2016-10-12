@@ -33,16 +33,27 @@ module Sdl.DitaDelivery {
         }
 
         /**
-         * Set page url
+         * Set publication location
          *
          * @param {string} publicationId Publication id
          * @param {string} publicationTitle Publication title
-         * @param {string} sitemapItemId Sitemap item id
-         * @param {string} sitemapItemTitle Sitemap item title
+         * @param {string} [pageId] Page id
+         * @param {string} [pageTitle] Page title
          */
         public setPublicationLocation(publicationId: string, publicationTitle: string,
-            sitemapItemId: string, sitemapItemTitle: string): void {
-             // TODO implement this
+            pageId?: string, pageTitle?: string): void {
+            // TODO implement this
+        }
+
+        /**
+         * Set page location
+         *
+         * @param {string} pageId Page id
+         *
+         * @memberOf IRouting
+         */
+        public setPageLocation(pageId: string): void {
+            // TODO implement this
         }
 
         /**
@@ -54,7 +65,7 @@ module Sdl.DitaDelivery {
             // TODO implement this
             return {
                 publicationId: "",
-                sitemapItemId: ""
+                pageId: ""
             };
         }
     }

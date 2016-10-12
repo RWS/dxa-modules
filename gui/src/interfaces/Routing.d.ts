@@ -26,15 +26,15 @@ declare module Sdl.DitaDelivery {
         getAbsolutePath(path: string): string;
 
         /**
-         * Set page url
+         * Set publication location
          *
          * @param {string} publicationId Publication id
          * @param {string} publicationTitle Publication title
-         * @param {string | undefined} sitemapItemId Sitemap item id
-         * @param {string} sitemapItemTitle Sitemap item title
+         * @param {string} [pageId] Page id
+         * @param {string} [pageTitle] Page title
          */
         setPublicationLocation(publicationId: string, publicationTitle: string,
-            sitemapItemId: string | undefined, sitemapItemTitle: string): void;
+            pageId?: string, pageTitle?: string): void;
 
         /**
          * Get the current location within a publication
@@ -42,6 +42,15 @@ declare module Sdl.DitaDelivery {
          * @returns {IPublicationLocation | null}
          */
         getPublicationLocation(): IPublicationLocation | null;
+
+        /**
+         * Set page location
+         *
+         * @param {string} pageId Page id
+         *
+         * @memberOf IRouting
+         */
+        setPageLocation(pageId: string): void;
     }
 
     /**
@@ -57,11 +66,11 @@ declare module Sdl.DitaDelivery {
          */
         publicationId: string;
         /**
-         * Sitemap item id
+         * Page id
          *
          * @type {string | null}
          */
-        sitemapItemId: string | null;
+        pageId: string | null;
     }
 
 }

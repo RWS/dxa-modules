@@ -11,10 +11,10 @@
     "FDESCRIPTION.logical.value": null,
     "FCHANGES.version.value": "Imported OASIS DITA 1.1",
     "FISHRELEASELABEL.version.value": null,
-    "CREATED-ON.lng.value": "2008-10-29T17:44:35+02:00",
+    "CREATED-ON.lng.value": "2008-10-29T15:44:35Z",
     "FAUTHOR.lng.value": "Author",
     "FSTATUS.lng.value": "Released",
-    "MODIFIED-ON.lng.value": "2010-04-09T11:25:23+03:00",
+    "MODIFIED-ON.lng.value": "2010-04-09T08:25:23Z",
     "VERSION.version.value": "1",
     "FRESOLUTION.lng.value": null,
     "DOC-LANGUAGE.lng.value": [
@@ -27,5 +27,5 @@
     "FUSERGROUP.logical.value": null,
     "READ-ACCESS.logical.value": null
   },
-  "Html": "<div class=\"body taskbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\r\n\t\t\t<ol class=\"ol steps\" id=\"GUID-EF99C727-4834-442F-84CE-4864EE505BFF__GUID-C8B78C26-E2F2-4FA0-8B32-98A678469AD4\">\r\n\t\t\t\t<li class=\"li step\">\r\n\t\t\t\t\t<span class=\"ph cmd\">Search for the contact you want to edit and press <samp class=\"ph msgph\">Detail</samp>. </span>\r\n\t\t\t\t</li>\r\n\t\t\t\t<li class=\"li step\">\r\n\t\t\t\t\t<span class=\"ph cmd\">Scroll to the name, number or text item you want to edit, and press <samp class=\"ph msgph\">Options</samp>. </span>\r\n\t\t\t\t</li>\r\n\t\t\t\t<li class=\"li step\">\r\n\t\t\t\t\t<span class=\"ph cmd\">Select <samp class=\"ph msgph\">Edit Name</samp>, <samp class=\"ph msgph\">Edit Number</samp>, or <samp class=\"ph msgph\">Edit Detail</samp>, and edit the name, number, or text and press <samp class=\"ph msgph\">OK</samp>.</span>\r\n\t\t\t\t</li>\r\n\t\t\t</ol>\r\n\t\t</div>"
+  "Html": "\n\t\t<h1 class=\"title topictitle1\" id=\"GUID-EF99C727-4834-442F-84CE-4864EE505BFF__GUID-76ED1FBE-8588-4E3F-BC4F-D09EF37C0105\" xmlns=\"http://www.w3.org/1999/xhtml\">Editing a contact</h1>\n\t\t<div class=\"body taskbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n\t\t\t<ol class=\"ol steps\" id=\"GUID-EF99C727-4834-442F-84CE-4864EE505BFF__GUID-C8B78C26-E2F2-4FA0-8B32-98A678469AD4\">\n\t\t\t\t<li class=\"li step\">\n\t\t\t\t\t<span class=\"ph cmd\">Search for the contact you want to edit and press <samp class=\"ph msgph\">Detail</samp>. </span>\n\t\t\t\t</li>\n\t\t\t\t<li class=\"li step\">\n\t\t\t\t\t<span class=\"ph cmd\">Scroll to the name, number or text item you want to edit, and press <samp class=\"ph msgph\">Options</samp>. </span>\n\t\t\t\t</li>\n\t\t\t\t<li class=\"li step\">\n\t\t\t\t\t<span class=\"ph cmd\">Select <samp class=\"ph msgph\">Edit Name</samp>, <samp class=\"ph msgph\">Edit Number</samp>, or <samp class=\"ph msgph\">Edit Detail</samp>, and edit the name, number, or text and press <samp class=\"ph msgph\">OK</samp>.</span>\n\t\t\t\t</li>\n\t\t\t</ol>\n\t\t</div>\n\t\t<div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n\t\t\t<div class=\"familylinks\">\n\t\t\t\t<div class=\"parentlink\">\n\t\t\t\t\t<strong>Parent topic:</strong>\n\t\t\t\t\t<a title=\"Phone book\" href=\"ish:39137-6274-16\">Phone book</a>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t"
 }

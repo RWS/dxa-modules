@@ -40,7 +40,6 @@ module Sdl.DitaDelivery.Tests {
                                 </div>
                                 <div className="sdl-dita-delivery-page">
                                     <div>
-                                        <h1 className="page-title"></h1>
                                         <div className="page-content ltr"></div>
                                     </div>
                                 </div>

@@ -11,10 +11,10 @@
     "FDESCRIPTION.logical.value": null,
     "FCHANGES.version.value": "Imported OASIS DITA 1.1",
     "FISHRELEASELABEL.version.value": null,
-    "CREATED-ON.lng.value": "2008-10-29T17:46:55+02:00",
+    "CREATED-ON.lng.value": "2008-10-29T15:46:55Z",
     "FAUTHOR.lng.value": "Author",
     "FSTATUS.lng.value": "Released",
-    "MODIFIED-ON.lng.value": "2010-04-09T11:25:14+03:00",
+    "MODIFIED-ON.lng.value": "2010-04-09T08:25:14Z",
     "VERSION.version.value": "1",
     "FRESOLUTION.lng.value": null,
     "DOC-LANGUAGE.lng.value": [
@@ -27,5 +27,5 @@
     "FUSERGROUP.logical.value": null,
     "READ-ACCESS.logical.value": null
   },
-  "Html": "<div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\r\n\t\t\t<p class=\"shortdesc\">\r\n\t\t\t</p>\r\n\t\t\t<p class=\"p\">In this game you play a budding DJ in his quest for fame and fortune. </p>\r\n\t\t\t<p class=\"p\">Guide him throughthe city collecting records and practicing his scratching to get ready for performing in clubs.</p>\r\n\t\t\t<p class=\"p\">Once you have the skills you will be requested to play in the coolest club in town. Will it be your breakthrough? It's all\r\n            up to you!\r\n         </p>\r\n\t\t</div>"
+  "Html": "\n\t\t<h1 class=\"title topictitle1\" id=\"GUID-DEE39F35-598E-4559-9733-76F34E115FE5__GUID-1787BC3F-9DF8-42C4-8C40-FC77E019C0CF\" xmlns=\"http://www.w3.org/1999/xhtml\">DJ Game</h1>\n\t\t<div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\n\t\t\t<p class=\"shortdesc\">\n\t\t\t</p>\n\t\t\t<p class=\"p\">In this game you play a budding DJ in his quest for fame and fortune. </p>\n\t\t\t<p class=\"p\">Guide him throughthe city collecting records and practicing his scratching to get ready for performing in clubs.</p>\n\t\t\t<p class=\"p\">Once you have the skills you will be requested to play in the coolest club in town. Will it be your breakthrough? It's all\n            up to you!\n         </p>\n\t\t</div>\n\t\t<div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n\t\t\t<div class=\"familylinks\">\n\t\t\t\t<div class=\"parentlink\">\n\t\t\t\t\t<strong>Parent topic:</strong>\n\t\t\t\t\t<a title=\"Games\" href=\"ish:39137-6210-16\">Games</a>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t"
 }

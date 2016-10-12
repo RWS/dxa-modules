@@ -3,7 +3,7 @@
 module Sdl.DitaDelivery.Models {
 
     import IWebRequest = SDL.Client.Net.IWebRequest;
-    import INavigationLinks = Server.Models.INavigationLinks;
+    import ISitemapItem = Server.Models.ISitemapItem;
 
     /* tslint:disable-next-line */
     eval(SDL.Client.Types.OO.enableCustomInheritance);
@@ -17,37 +17,43 @@ module Sdl.DitaDelivery.Models {
     export class NavigationLinks extends SDL.Client.Models.LoadableObject {
 
         private _pageId: string;
-        private _navigationLinks: INavigationLinks;
+        private _taxonomyId: string;
+        private _path: string[] = [];
 
         /**
          * Creates an instance of NavigationLinks.
          *
-         * @param {string} pageId
+         * @param {string} taxonomyId Taxonomy id
+         * @param {string} pageId Page id
+         *
+         * @memberOf NavigationLinks
          */
-        constructor(pageId: string) {
+        constructor(taxonomyId: string, pageId: string) {
             super();
+            this._taxonomyId = taxonomyId;
             this._pageId = pageId;
         }
 
         /**
-         * Get the navigation links
-         * Typically used for displaying breadcrumbs
+         * Get the path
          *
-         * @returns {INavigationLinks}
+         * @returns {string[]} Ids of ancestors
+         *
+         * @memberOf NavigationLinks
          */
-        public getNavigationLinks(): INavigationLinks {
-            return this._navigationLinks;
+        public getPath(): string[] {
+            return this._path;
         }
 
         /* Overloads */
         protected _executeLoad(reload: boolean): void {
-            const url = Routing.getAbsolutePath(`gui/mocks/navigation-${this._stripId(this._pageId)}.json`);
+            const url = Routing.getAbsolutePath(`gui/mocks/navigation-${this._stripId(this._taxonomyId)}-${this._stripId(this._pageId)}.json`);
             SDL.Client.Net.getRequest(url,
                 this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
         }
 
         protected _processLoadResult(result: string, webRequest: IWebRequest): void {
-            this._navigationLinks = JSON.parse(result);
+            this._path = this._calculatePath(JSON.parse(result));
 
             super._processLoadResult(result, webRequest);
         }
@@ -63,6 +69,22 @@ module Sdl.DitaDelivery.Models {
                 return id.substring(4);
             }
             return id;
+        }
+
+        private _calculatePath(navigationLinks: ISitemapItem): string[] {
+            const path: string[] = [];
+            let items: ISitemapItem[] = navigationLinks.Items;
+            if (navigationLinks.Id) {
+                path.push(navigationLinks.Id);
+            }
+            while (items && items.length > 0) {
+                const firstItem = items[0];
+                items = firstItem.Items;
+                if (firstItem.Id) {
+                    path.push(firstItem.Id);
+                }
+            }
+            return path;
         }
     }
 

@@ -45,7 +45,7 @@ module Sdl.DitaDelivery.Tests {
                             Title: "First element",
                             IsAbstract: false,
                             HasChildNodes: false,
-                            Url: ""
+                            Items: []
                         }
                     ]);
                     this._renderComponent(target);
@@ -69,17 +69,15 @@ module Sdl.DitaDelivery.Tests {
                         selectedTocItem: {
                             Id: "123",
                             IsAbstract: false,
-                            HasChildNodes: true,
+                            HasChildNodes: false,
                             Title: "Some page",
-                            Url: "page"
+                            Url: "page",
+                            Items: []
                         }
                     });
                     const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
                     expect(domNode).not.toBeNull();
                     expect(domNode.querySelector(".sdl-activityindicator")).toBeNull("Activity indicator should not be rendered.");
-                    const pageTitleNode = domNode.querySelector(".page-title") as HTMLElement;
-                    expect(pageTitleNode).not.toBeNull("Could not find page title.");
-                    expect(pageTitleNode.textContent).toBe("Title!");
                     const pageContentNode = domNode.querySelector(".page-content") as HTMLElement;
                     expect(pageContentNode).not.toBeNull("Could not find page content.");
                     expect(pageContentNode.children.length).toBe(1);
@@ -92,15 +90,15 @@ module Sdl.DitaDelivery.Tests {
                             Id: "1",
                             Title: "First element",
                             IsAbstract: true,
-                            HasChildNodes: true,
-                            Url: ""
+                            HasChildNodes: false,
+                            Items: []
                         },
                         {
                             Id: "2",
                             Title: "Second element",
                             IsAbstract: true,
-                            HasChildNodes: true,
-                            Url: ""
+                            HasChildNodes: false,
+                            Items: []
                         }
                     ]);
                     this._renderComponent(target);
@@ -118,7 +116,7 @@ module Sdl.DitaDelivery.Tests {
                     setTimeout((): void => {
                         // All is loaded
                         expect(domNode.querySelector(".sdl-activityindicator")).toBeNull("Activity indicator should not be rendered.");
-                        const pageTitleNode = domNode.querySelector(".page-title") as HTMLElement;
+                        const pageTitleNode = domNode.querySelector(".page-content h1") as HTMLElement;
                         expect(pageTitleNode).not.toBeNull("Could not find page title.");
                         expect(pageTitleNode.textContent).toBe("Second element");
                         done();
@@ -135,13 +133,13 @@ module Sdl.DitaDelivery.Tests {
                             IsAbstract: true,
                             HasChildNodes: true,
                             Title: title,
-                            Url: ""
+                            Items: []
                         }
                     });
                     const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
                     expect(domNode).not.toBeNull();
                     expect(domNode.querySelector(".sdl-activityindicator")).toBeNull("Activity indicator should not be rendered.");
-                    const pageTitleNode = domNode.querySelector(".page-title") as HTMLElement;
+                    const pageTitleNode = domNode.querySelector(".page-content h1") as HTMLElement;
                     expect(pageTitleNode).not.toBeNull("Could not find page title.");
                     expect(pageTitleNode.textContent).toBe(title);
                 });
@@ -152,7 +150,8 @@ module Sdl.DitaDelivery.Tests {
                         IsAbstract: false,
                         HasChildNodes: true,
                         Title: "Some page",
-                        Url: "page-url"
+                        Url: "page-url",
+                        Items: []
                     }]);
                     dataStoreMock.setMockDataPage("Page failed to load!");
                     this._renderComponent(target);
@@ -176,7 +175,7 @@ module Sdl.DitaDelivery.Tests {
 
         private _renderComponent(target: HTMLElement): PublicationContent {
             return ReactDOM.render(
-                (<PublicationContent publicationId={"123"}/>)
+                (<PublicationContent publicationId={"123"} />)
                 , target) as PublicationContent;
         }
     }

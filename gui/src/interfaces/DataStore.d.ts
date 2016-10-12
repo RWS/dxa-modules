@@ -55,9 +55,9 @@ declare module Sdl.DitaDelivery {
         /**
          * Get the full path for a sitemap item within a sitemap
          *
-         * @param {string} sitemapItemId The id of the item in the sitemap
+         * @param {string} pageId The page id
          * @param {(error: string | null, path?: string[]) => void} callback Returns the full path
          */
-        getSitemapPath(sitemapItemId: string, callback: (error: string | null, path?: string[]) => void): void;
+        getSitemapPath(pageId: string, callback: (error: string | null, path?: string[]) => void): void;
     }
 }

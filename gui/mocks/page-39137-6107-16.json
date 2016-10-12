@@ -11,10 +11,10 @@
     "FDESCRIPTION.logical.value": null,
     "FCHANGES.version.value": "Imported OASIS DITA 1.1",
     "FISHRELEASELABEL.version.value": null,
-    "CREATED-ON.lng.value": "2008-10-29T17:36:44+02:00",
+    "CREATED-ON.lng.value": "2008-10-29T15:36:44Z",
     "FAUTHOR.lng.value": "Author",
     "FSTATUS.lng.value": "Released",
-    "MODIFIED-ON.lng.value": "2010-04-09T11:25:43+03:00",
+    "MODIFIED-ON.lng.value": "2010-04-09T08:25:43Z",
     "VERSION.version.value": "1",
     "FRESOLUTION.lng.value": null,
     "DOC-LANGUAGE.lng.value": [
@@ -27,5 +27,5 @@
     "FUSERGROUP.logical.value": null,
     "READ-ACCESS.logical.value": null
   },
-  "Html": "<div class=\"body conbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\r\n\t\t\t<p class=\"shortdesc\">You can lock the keypad to prevent the keys being accidentally pressed, for example, when your phone is in your bag.</p>\r\n\t\t\t<ul class=\"ul\">\r\n\t\t\t\t<li class=\"li\">Locking the keypad \r\n               <p class=\"p\">In standby mode, press <samp class=\"ph msgph\">Menu</samp> and <tcdl:Image type=\"ish:image\" ref=\"ish:39137-7021-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" />then within 1.5 seconds. \r\n               </p></li>\r\n\t\t\t\t<li class=\"li\">Unlocking the keypad \r\n               <p class=\"p\"> Press <samp class=\"ph msgph\">Unlock</samp> and then <tcdl:Image type=\"ish:image\" ref=\"ish:39137-7021-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" />within 1.5 seconds.\r\n               </p></li>\r\n\t\t\t</ul>\r\n\t\t</div>"
+  "Html": "\n\t\t<h1 class=\"title topictitle1\" id=\"GUID-A08D6FD8-63C7-4CAA-A2EA-AF08AF4C49B7__GUID-A0F6594E-0C93-4597-9794-4A86C7FDD5B9\" xmlns=\"http://www.w3.org/1999/xhtml\">Locking the keypad</h1>\n\t\t<div class=\"body conbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n\t\t\t<p class=\"shortdesc\">You can lock the keypad to prevent the keys being accidentally pressed, for example, when your phone is in your bag.</p>\n\t\t\t<ul class=\"ul\">\n\t\t\t\t<li class=\"li\">Locking the keypad \n               <p class=\"p\">In standby mode, press <samp class=\"ph msgph\">Menu</samp> and <tcdl:Image type=\"ish:image\" ref=\"ish:39137-7021-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" />then within 1.5 seconds. \n               </p></li>\n\t\t\t\t<li class=\"li\">Unlocking the keypad \n               <p class=\"p\"> Press <samp class=\"ph msgph\">Unlock</samp> and then <tcdl:Image type=\"ish:image\" ref=\"ish:39137-7021-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" />within 1.5 seconds.\n               </p></li>\n\t\t\t</ul>\n\t\t</div>\n\t\t<div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n\t\t\t<div class=\"familylinks\">\n\t\t\t\t<div class=\"parentlink\">\n\t\t\t\t\t<strong>Parent topic:</strong>\n\t\t\t\t\t<a title=\"Getting started\" href=\"ish:39137-6222-16\">Getting started</a>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t"
 }

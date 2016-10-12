@@ -11,10 +11,10 @@
     "FDESCRIPTION.logical.value": null,
     "FCHANGES.version.value": "Imported OASIS DITA 1.1",
     "FISHRELEASELABEL.version.value": null,
-    "CREATED-ON.lng.value": "2008-10-29T18:12:36+02:00",
+    "CREATED-ON.lng.value": "2008-10-29T16:12:36Z",
     "FAUTHOR.lng.value": "Author",
     "FSTATUS.lng.value": "Released",
-    "MODIFIED-ON.lng.value": "2010-04-09T11:26:03+03:00",
+    "MODIFIED-ON.lng.value": "2010-04-09T08:26:03Z",
     "VERSION.version.value": "1",
     "FRESOLUTION.lng.value": null,
     "DOC-LANGUAGE.lng.value": [
@@ -27,5 +27,5 @@
     "FUSERGROUP.logical.value": null,
     "READ-ACCESS.logical.value": null
   },
-  "Html": "<div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\r\n\t\t\t<p class=\"shortdesc\">You can listen to MP3 and AAC music files stored on the memory card in your phone with the Music player, or you can listen\r\n            to the Radio. \r\n         </p>\r\n\t\t\t<p class=\"p\">The special Music key on the top left of your phone enables you to quickly turn on and off both the Music player and the Radio.</p>\r\n\t\t</div>"
+  "Html": "\n\t\t<h1 class=\"title topictitle1\" id=\"GUID-BE2DE06F-3702-493F-9176-A7944470B77C__GUID-EB127F99-B5ED-4A4D-ACF7-8CD03FC0A7E2\" xmlns=\"http://www.w3.org/1999/xhtml\">Music functions</h1>\n\t\t<div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\n\t\t\t<p class=\"shortdesc\">You can listen to MP3 and AAC music files stored on the memory card in your phone with the Music player, or you can listen\n            to the Radio. \n         </p>\n\t\t\t<p class=\"p\">The special Music key on the top left of your phone enables you to quickly turn on and off both the Music player and the Radio.</p>\n\t\t</div>\n\t\t<div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n\t\t\t<ul class=\"ullinks\">\n\t\t\t\t<li class=\"link ulchildlink\">\n\t\t\t\t\t<strong>\n\t\t\t\t\t\t<a title=\"Listening to music\" href=\"ish:39137-6193-16\">Listening to music</a>\n\t\t\t\t\t</strong>\n\t\t\t\t\t<br />\n\t\t\t\t</li>\n\t\t\t\t<li class=\"link ulchildlink\">\n\t\t\t\t\t<strong>\n\t\t\t\t\t\t<a title=\"Listening to the radio\" href=\"ish:39137-6205-16\">Listening to the radio</a>\n\t\t\t\t\t</strong>\n\t\t\t\t\t<br />\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t</div>\n\t"
 }

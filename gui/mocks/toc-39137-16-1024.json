@@ -4,13 +4,15 @@
     "Title": "Speed Dialling",
     "Url": "ish:39137-6282-16",
     "IsAbstract": false,
-    "HasChildNodes": true
+    "HasChildNodes": false,
+    "Items": []
   },
   {
     "Id": "ish:39137-18-1024",
     "Title": "Voice dialling",
     "Url": "ish:39137-6253-16",
     "IsAbstract": false,
-    "HasChildNodes": true
+    "HasChildNodes": false,
+    "Items": []
   }
 ]

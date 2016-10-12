@@ -64,24 +64,32 @@ module Sdl.DitaDelivery {
         }
 
         /**
-         * Set page url
+         * Set publication location
          *
          * @param {string} publicationId Publication id
          * @param {string} publicationTitle Publication title
-         * @param {string | undefined} sitemapItemId Sitemap item id
-         * @param {string} sitemapItemTitle Sitemap item title
+         * @param {string} [pageId] Page id
+         * @param {string} [pageTitle] Page title
          */
         public setPublicationLocation(publicationId: string, publicationTitle: string,
-            sitemapItemId: string | undefined, sitemapItemTitle: string): void {
+            pageId?: string, pageTitle?: string): void {
+
+            const currentLocation = this.getPublicationLocation();
 
             const pathname = this.getAbsolutePath(
                 encodeURIComponent(publicationId) + "/" +
-                (sitemapItemId ? encodeURIComponent(sitemapItemId) + "/" : "") +
+                (pageId ? encodeURIComponent(pageId) + "/" : "") +
                 encodeURIComponent(this._escapeTitle(publicationTitle)) + "/" +
-                encodeURIComponent(this._escapeTitle(sitemapItemTitle))
+                (pageTitle ? encodeURIComponent(this._escapeTitle(pageTitle)) : "")
             );
 
-            this._push(pathname);
+            if (currentLocation &&
+                currentLocation.publicationId === publicationId &&
+                currentLocation.pageId === pageId) {
+                this._replace(pathname);
+            } else {
+                this._push(pathname);
+            }
         }
 
         /**
@@ -96,7 +104,7 @@ module Sdl.DitaDelivery {
                 const result = paths[0].split("/");
                 return {
                     publicationId: decodeURIComponent(result[1]),
-                    sitemapItemId: decodeURIComponent(result[2])
+                    pageId: decodeURIComponent(result[2])
                 };
             } else {
                 const noPagePaths = currentLocation.match(PUBLICATION_URL_REGEX_NO_PAGE);
@@ -104,11 +112,31 @@ module Sdl.DitaDelivery {
                     const result = noPagePaths[0].split("/");
                     return {
                         publicationId: decodeURIComponent(result[1]),
-                        sitemapItemId: null
+                        pageId: null
                     };
                 }
             }
             return null;
+        }
+
+        /**
+         * Set page location
+         *
+         * @param {string} pageId Page id
+         *
+         * @memberOf IRouting
+         */
+        public setPageLocation(pageId: string): void {
+            const location = this.getPublicationLocation();
+            if (location) {
+                const { publicationId} = location;
+                const pathname = this.getAbsolutePath(
+                    encodeURIComponent(publicationId) + "/" +
+                    encodeURIComponent(pageId) + "/"
+                );
+
+                this._push(pathname);
+            }
         }
 
         private _escapeTitle(title: string): string {
@@ -117,6 +145,12 @@ module Sdl.DitaDelivery {
 
         private _push(pathname: string): void {
             RoutingClient._history.push({
+                pathname: pathname
+            });
+        }
+
+        private _replace(pathname: string): void {
+            RoutingClient._history.replace({
                 pathname: pathname
             });
         }

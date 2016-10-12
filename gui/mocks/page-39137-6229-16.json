@@ -11,10 +11,10 @@
     "FDESCRIPTION.logical.value": null,
     "FCHANGES.version.value": "Imported OASIS DITA 1.1",
     "FISHRELEASELABEL.version.value": null,
-    "CREATED-ON.lng.value": "2008-10-29T18:09:58+02:00",
+    "CREATED-ON.lng.value": "2008-10-29T16:09:58Z",
     "FAUTHOR.lng.value": "Author",
     "FSTATUS.lng.value": "Released",
-    "MODIFIED-ON.lng.value": "2010-04-09T11:26:09+03:00",
+    "MODIFIED-ON.lng.value": "2010-04-09T08:26:09Z",
     "VERSION.version.value": "1",
     "FRESOLUTION.lng.value": null,
     "DOC-LANGUAGE.lng.value": [
@@ -27,5 +27,5 @@
     "FUSERGROUP.logical.value": null,
     "READ-ACCESS.logical.value": null
   },
-  "Html": "<div class=\"body taskbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\r\n\t\t\t<p class=\"shortdesc\">\r\n\t\t\t</p>\r\n\t\t\t<ol class=\"ol steps\" id=\"GUID-67F1627E-FFBA-4E03-A62D-F70030C52596__GUID-39CCD92E-A42F-4E2C-AE5D-9BAA72560320\">\r\n\t\t\t\t<li class=\"li step stepexpand\">\r\n\t\t\t\t\t<span class=\"ph cmd\">Press <samp class=\"ph msgph\">Contacts</samp> (or press Go to and select <samp class=\"ph msgph\">Contacts</samp>) and select <samp class=\"ph msgph\">Add contact</samp>.</span>\r\n\t\t\t\t</li>\r\n\t\t\t\t<li class=\"li step stepexpand\">\r\n\t\t\t\t\t<span class=\"ph cmd\">Key in the name and press <samp class=\"ph msgph\">OK</samp>.</span>\r\n\t\t\t\t</li>\r\n\t\t\t\t<li class=\"li step stepexpand\">\r\n\t\t\t\t\t<span class=\"ph cmd\">Key in the phone number, and press <samp class=\"ph msgph\">OK</samp>.</span>\r\n\t\t\t\t</li>\r\n\t\t\t\t<li class=\"li step stepexpand\">\r\n\t\t\t\t\t<span class=\"ph cmd\">When the name and number are saved, press <samp class=\"ph msgph\">Done</samp>.</span>\r\n\t\t\t\t\t<div class=\"itemgroup info\"> Quick save In standby mode, key in the phone number. Press <samp class=\"ph msgph\">Options</samp>, and select <samp class=\"ph msgph\">Save</samp>. Key in the name, press <samp class=\"ph msgph\">OK</samp> and <samp class=\"ph msgph\">Done</samp>.\r\n               </div>\r\n\t\t\t\t</li>\r\n\t\t\t</ol>\r\n\t\t</div>"
+  "Html": "\n\t\t<h1 class=\"title topictitle1\" id=\"GUID-67F1627E-FFBA-4E03-A62D-F70030C52596__GUID-91208EF2-9DF8-4968-95C3-7B281273B8A0\" xmlns=\"http://www.w3.org/1999/xhtml\">Saving names and numbers</h1>\n\t\t<div class=\"body taskbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n\t\t\t<p class=\"shortdesc\">\n\t\t\t</p>\n\t\t\t<ol class=\"ol steps\" id=\"GUID-67F1627E-FFBA-4E03-A62D-F70030C52596__GUID-39CCD92E-A42F-4E2C-AE5D-9BAA72560320\">\n\t\t\t\t<li class=\"li step stepexpand\">\n\t\t\t\t\t<span class=\"ph cmd\">Press <samp class=\"ph msgph\">Contacts</samp> (or press Go to and select <samp class=\"ph msgph\">Contacts</samp>) and select <samp class=\"ph msgph\">Add contact</samp>.</span>\n\t\t\t\t</li>\n\t\t\t\t<li class=\"li step stepexpand\">\n\t\t\t\t\t<span class=\"ph cmd\">Key in the name and press <samp class=\"ph msgph\">OK</samp>.</span>\n\t\t\t\t</li>\n\t\t\t\t<li class=\"li step stepexpand\">\n\t\t\t\t\t<span class=\"ph cmd\">Key in the phone number, and press <samp class=\"ph msgph\">OK</samp>.</span>\n\t\t\t\t</li>\n\t\t\t\t<li class=\"li step stepexpand\">\n\t\t\t\t\t<span class=\"ph cmd\">When the name and number are saved, press <samp class=\"ph msgph\">Done</samp>.</span>\n\t\t\t\t\t<div class=\"itemgroup info\"> Quick save In standby mode, key in the phone number. Press <samp class=\"ph msgph\">Options</samp>, and select <samp class=\"ph msgph\">Save</samp>. Key in the name, press <samp class=\"ph msgph\">OK</samp> and <samp class=\"ph msgph\">Done</samp>.\n               </div>\n\t\t\t\t</li>\n\t\t\t</ol>\n\t\t</div>\n\t\t<div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n\t\t\t<div class=\"familylinks\">\n\t\t\t\t<div class=\"parentlink\">\n\t\t\t\t\t<strong>Parent topic:</strong>\n\t\t\t\t\t<a title=\"Phone book\" href=\"ish:39137-6274-16\">Phone book</a>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t"
 }

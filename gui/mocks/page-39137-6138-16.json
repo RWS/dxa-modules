@@ -11,10 +11,10 @@
     "FDESCRIPTION.logical.value": null,
     "FCHANGES.version.value": "Imported OASIS DITA 1.1",
     "FISHRELEASELABEL.version.value": null,
-    "CREATED-ON.lng.value": "2008-10-29T17:39:27+02:00",
+    "CREATED-ON.lng.value": "2008-10-29T15:39:27Z",
     "FAUTHOR.lng.value": "Author",
     "FSTATUS.lng.value": "Released",
-    "MODIFIED-ON.lng.value": "2010-04-09T11:25:11+03:00",
+    "MODIFIED-ON.lng.value": "2010-04-09T08:25:11Z",
     "VERSION.version.value": "1",
     "FRESOLUTION.lng.value": null,
     "DOC-LANGUAGE.lng.value": [
@@ -27,5 +27,5 @@
     "FUSERGROUP.logical.value": null,
     "READ-ACCESS.logical.value": null
   },
-  "Html": "<div class=\"body taskbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\r\n\t\t\t<ol class=\"ol steps\" id=\"GUID-F1F85108-6DA2-467B-8EE0-FA41B80AEB4B__GUID-C83648A3-EE9E-458C-9228-154A89CED050\">\r\n\t\t\t\t<li class=\"li step\">\r\n\t\t\t\t\t<span class=\"ph cmd\">To delete text messages, press <samp class=\"ph msgph\">Menu</samp>, and select <samp class=\"ph msgph\">Messages</samp>, <samp class=\"ph msgph\">Text messages</samp> and <samp class=\"ph msgph\">Delete messages</samp>.</span>\r\n\t\t\t\t</li>\r\n\t\t\t\t<li class=\"li step\">\r\n\t\t\t\t\t<span class=\"ph cmd\">To delete all messages from a folder, select the folder where you want to delete the messages and press <samp class=\"ph msgph\">OK</samp>. If the folder contains unread messages, the phone will ask whether you want to delete them also. </span>\r\n\t\t\t\t</li>\r\n\t\t\t</ol>\r\n\t\t</div>"
+  "Html": "\n\t\t<h1 class=\"title topictitle1\" id=\"GUID-F1F85108-6DA2-467B-8EE0-FA41B80AEB4B__GUID-269B12D4-B4F8-493F-9178-C7BB5F1B30B8\" xmlns=\"http://www.w3.org/1999/xhtml\">Deleting messages</h1>\n\t\t<div class=\"body taskbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n\t\t\t<ol class=\"ol steps\" id=\"GUID-F1F85108-6DA2-467B-8EE0-FA41B80AEB4B__GUID-C83648A3-EE9E-458C-9228-154A89CED050\">\n\t\t\t\t<li class=\"li step\">\n\t\t\t\t\t<span class=\"ph cmd\">To delete text messages, press <samp class=\"ph msgph\">Menu</samp>, and select <samp class=\"ph msgph\">Messages</samp>, <samp class=\"ph msgph\">Text messages</samp> and <samp class=\"ph msgph\">Delete messages</samp>.</span>\n\t\t\t\t</li>\n\t\t\t\t<li class=\"li step\">\n\t\t\t\t\t<span class=\"ph cmd\">To delete all messages from a folder, select the folder where you want to delete the messages and press <samp class=\"ph msgph\">OK</samp>. If the folder contains unread messages, the phone will ask whether you want to delete them also. </span>\n\t\t\t\t</li>\n\t\t\t</ol>\n\t\t</div>\n\t\t<div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n\t\t\t<div class=\"familylinks\">\n\t\t\t\t<div class=\"parentlink\">\n\t\t\t\t\t<strong>Parent topic:</strong>\n\t\t\t\t\t<a title=\"Messages\" href=\"ish:39137-6262-16\">Messages</a>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t"
 }

@@ -11,10 +11,10 @@
     "FDESCRIPTION.logical.value": null,
     "FCHANGES.version.value": "Imported OASIS DITA 1.1",
     "FISHRELEASELABEL.version.value": null,
-    "CREATED-ON.lng.value": "2008-10-29T18:09:03+02:00",
+    "CREATED-ON.lng.value": "2008-10-29T16:09:03Z",
     "FAUTHOR.lng.value": "Author",
     "FSTATUS.lng.value": "Released",
-    "MODIFIED-ON.lng.value": "2010-04-09T11:25:33+03:00",
+    "MODIFIED-ON.lng.value": "2010-04-09T08:25:33Z",
     "VERSION.version.value": "1",
     "FRESOLUTION.lng.value": null,
     "DOC-LANGUAGE.lng.value": [
@@ -27,5 +27,5 @@
     "FUSERGROUP.logical.value": null,
     "READ-ACCESS.logical.value": null
   },
-  "Html": "<div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\r\n\t\t\t<p class=\"shortdesc\">\r\n\t\t\t</p>\r\n\t\t\t<p class=\"p\">\r\n\t\t\t</p>\r\n\t\t</div>"
+  "Html": "\n\t\t<h1 class=\"title topictitle1\" id=\"GUID-DE88D123-3B26-4E37-BDAA-F225F9F46D66__GUID-AD779943-546F-4FB6-A725-2B05AB943241\" xmlns=\"http://www.w3.org/1999/xhtml\">Getting started</h1>\n\t\t<div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\n\t\t\t<p class=\"shortdesc\">\n\t\t\t</p>\n\t\t\t<p class=\"p\">\n\t\t\t</p>\n\t\t</div>\n\t\t<div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n\t\t\t<ul class=\"ullinks\">\n\t\t\t\t<li class=\"link ulchildlink\">\n\t\t\t\t\t<strong>\n\t\t\t\t\t\t<a title=\"Installing the SIM card and the battery\" href=\"ish:39137-6169-16\">Installing the SIM card and the battery</a>\n\t\t\t\t\t</strong>\n\t\t\t\t\t<br />\n\t\t\t\t</li>\n\t\t\t\t<li class=\"link ulchildlink\">\n\t\t\t\t\t<strong>\n\t\t\t\t\t\t<a title=\"Charging the battery\" href=\"ish:39137-6127-16\">Charging the battery</a>\n\t\t\t\t\t</strong>\n\t\t\t\t\t<br />\n\t\t\t\t</li>\n\t\t\t\t<li class=\"link ulchildlink\">\n\t\t\t\t\t<strong>\n\t\t\t\t\t\t<a title=\"Locking the keypad\" href=\"ish:39137-6107-16\">Locking the keypad</a>\n\t\t\t\t\t</strong>\n\t\t\t\t\t<br />\n               You can lock the keypad to prevent the keys being accidentally pressed, for example, when your phone is in your bag.\n            </li>\n\t\t\t</ul>\n\t\t</div>\n\t"
 }

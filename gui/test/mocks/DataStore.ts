@@ -72,7 +72,7 @@ module Sdl.DitaDelivery.Tests.Mocks {
             callback(null, "MP330");
         }
 
-        public getSitemapPath(sitemapItemId: string, callback: (error: string | null, path?: string[]) => void): void {
+        public getSitemapPath(pageId: string, callback: (error: string | null, path?: string[]) => void): void {
         }
 
         //#region Custom hooks for testing

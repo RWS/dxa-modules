@@ -11,10 +11,10 @@
     "FDESCRIPTION.logical.value": null,
     "FCHANGES.version.value": "Imported OASIS DITA 1.1",
     "FISHRELEASELABEL.version.value": null,
-    "CREATED-ON.lng.value": "2008-10-29T18:13:18+02:00",
+    "CREATED-ON.lng.value": "2008-10-29T16:13:18Z",
     "FAUTHOR.lng.value": "Author",
     "FSTATUS.lng.value": "Released",
-    "MODIFIED-ON.lng.value": "2010-04-09T11:26:25+03:00",
+    "MODIFIED-ON.lng.value": "2010-04-09T08:26:25Z",
     "VERSION.version.value": "1",
     "FRESOLUTION.lng.value": null,
     "DOC-LANGUAGE.lng.value": [
@@ -27,5 +27,5 @@
     "FUSERGROUP.logical.value": null,
     "READ-ACCESS.logical.value": null
   },
-  "Html": "<div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\r\n\t\t\t<p class=\"shortdesc\">Your phone supports sending and receiving multi-part messages, which consist of several ordinary text messages.</p>\r\n\t\t\t<p class=\"p\">Your phone supports sending and receiving multi-part messages, which consist of several ordinary text messages (network service).\r\n            Invoicing is based on the number of ordinary messages that are required for a multi-part message. You can also send and receive\r\n            text messages that contain pictures. Each picture message is made up of several text messages. Therefore, sending one picture\r\n            message may cost more than sending one text message.\r\n         </p>\r\n\t\t</div>"
+  "Html": "\n\t\t<h1 class=\"title topictitle1\" id=\"GUID-F2908D6D-3DF6-4E28-9F94-3A057669A444__GUID-ABED599B-57A2-465B-948F-528A628BE292\" xmlns=\"http://www.w3.org/1999/xhtml\">Text Messages</h1>\n\t\t<div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\n\t\t\t<p class=\"shortdesc\">Your phone supports sending and receiving multi-part messages, which consist of several ordinary text messages.</p>\n\t\t\t<p class=\"p\">Your phone supports sending and receiving multi-part messages, which consist of several ordinary text messages (network service).\n            Invoicing is based on the number of ordinary messages that are required for a multi-part message. You can also send and receive\n            text messages that contain pictures. Each picture message is made up of several text messages. Therefore, sending one picture\n            message may cost more than sending one text message.\n         </p>\n\t\t</div>\n\t\t<div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n\t\t\t<div class=\"familylinks\">\n\t\t\t\t<div class=\"parentlink\">\n\t\t\t\t\t<strong>Parent topic:</strong>\n\t\t\t\t\t<a title=\"Messages\" href=\"ish:39137-6262-16\">Messages</a>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t"
 }

@@ -68,12 +68,6 @@ module Sdl.DitaDelivery.Components {
          * @type {string | null}
          */
         error?: string | null;
-        /**
-         * Page title
-         *
-         * @type {string | null}
-         */
-        title?: string | null;
     }
 
     interface IToc {
@@ -92,7 +86,7 @@ module Sdl.DitaDelivery.Components {
     }
 
     /**
-     * Main component for the application
+     * Publication + content component
      */
     export class PublicationContent extends React.Component<IPublicationContentProps, IPublicationContentState> {
 
@@ -145,9 +139,9 @@ module Sdl.DitaDelivery.Components {
             };
 
             const location = Routing.getPublicationLocation();
-            if (location && location.sitemapItemId) {
+            if (location && location.pageId) {
                 // Set the current active path for the tree
-                this._getActiveSitemapPath(location.sitemapItemId, getRootItems);
+                this._getActiveSitemapPath(location.pageId, getRootItems);
             } else {
                 getRootItems();
             }
@@ -161,9 +155,9 @@ module Sdl.DitaDelivery.Components {
         public componentWillReceiveProps(nextProps: ITocProps): void {
             const location = Routing.getPublicationLocation();
             const { selectedTocItem } = this.state;
-            if (location && location.sitemapItemId && (!selectedTocItem || location.sitemapItemId !== selectedTocItem.Id)) {
+            if (location && location.pageId && (!selectedTocItem || location.pageId !== selectedTocItem.Url)) {
                 // Set the current active path for the tree
-                this._getActiveSitemapPath(location.sitemapItemId, (path) => {
+                this._getActiveSitemapPath(location.pageId, (path) => {
                     this.setState({
                         activeTocItemPath: path
                     });
@@ -175,13 +169,16 @@ module Sdl.DitaDelivery.Components {
          * Invoked immediately before rendering when new props or state are being received.
          * This method is not called for the initial render.
          *
-         * @param {{}} nextProps Next props
+         * @param {IPublicationContentProps} nextProps Next props
          * @param {IPublicationContentState} nextState Next state
          */
         public componentWillUpdate(nextProps: IPublicationContentProps, nextState: IPublicationContentState): void {
             const { selectedTocItem, isPageLoading } = this.state;
             const currentUrl = selectedTocItem ? selectedTocItem.Url : null;
             const nextUrl = nextState.selectedTocItem ? nextState.selectedTocItem.Url : null;
+            if (nextState.selectedTocItem && !nextState.selectedTocItem.Url) {
+                this._page.content = `<h1 class="title topictitle1">${nextState.selectedTocItem.Title}</h1>`;
+            }
             if (nextUrl && (isPageLoading || currentUrl !== nextUrl)) {
                 DataStore.getPageInfo(nextUrl, this._onPageContentRetrieved.bind(this));
             }
@@ -193,8 +190,8 @@ module Sdl.DitaDelivery.Components {
          * @returns {JSX.Element}
          */
         public render(): JSX.Element {
-            const { isPageLoading, selectedTocItem, activeTocItemPath } = this.state;
-            const { content, title, error} = this._page;
+            const { isPageLoading, activeTocItemPath } = this.state;
+            const { content, error} = this._page;
             const { rootItems } = this._toc;
             const tocError = this._toc.error;
 
@@ -203,14 +200,14 @@ module Sdl.DitaDelivery.Components {
                     <Toc
                         activeItemPath={activeTocItemPath}
                         rootItems={rootItems}
-                        loadChildItems={DataStore.getSitemapItems.bind(DataStore) }
-                        onSelectionChanged={this._onTocSelectionChanged.bind(this) }
-                        error={tocError}/>
+                        loadChildItems={DataStore.getSitemapItems.bind(DataStore)}
+                        onSelectionChanged={this._onTocSelectionChanged.bind(this)}
+                        error={tocError} />
                     <Page
                         showActivityIndicator={isPageLoading || false}
                         content={content}
-                        title={title ? title : (selectedTocItem ? selectedTocItem.Title : null) }
-                        error={error}/>
+                        error={error}
+                        onNavigate={Routing.setPageLocation.bind(Routing)} />
                 </section>
             );
         }
@@ -227,10 +224,6 @@ module Sdl.DitaDelivery.Components {
             const { publicationId } = this.props;
 
             page.error = null;
-            if (!sitemapItem.Url) {
-                page.title = null;
-                page.content = null;
-            }
 
             DataStore.getPublicationTitle(publicationId, (error, title) => {
                 if (error) {
@@ -243,17 +236,15 @@ module Sdl.DitaDelivery.Components {
                 });
 
                 if (!error) {
-                    Routing.setPublicationLocation(publicationId, title || "", sitemapItem.Id, sitemapItem.Title);
+                    Routing.setPublicationLocation(publicationId, title || "", sitemapItem.Url, sitemapItem.Title);
                 }
             });
         }
 
         private _onPageContentRetrieved(error: string, pageInfo: IPageInfo): void {
             const page = this._page;
-            const { selectedTocItem } = this.state;
             if (error) {
                 page.error = error;
-                page.title = null;
                 page.content = null;
                 this.setState({
                     isPageLoading: false
@@ -261,14 +252,13 @@ module Sdl.DitaDelivery.Components {
                 return;
             }
             page.content = pageInfo.content;
-            page.title = pageInfo.title ? pageInfo.title : (selectedTocItem ? selectedTocItem.Title : "");
             this.setState({
                 isPageLoading: false
             });
         }
 
-        private _getActiveSitemapPath(sitemapItemId: string, done: (path: string[]) => void): void {
-            DataStore.getSitemapPath(sitemapItemId, (error, path) => {
+        private _getActiveSitemapPath(pageId: string, done: (path: string[]) => void): void {
+            DataStore.getSitemapPath(pageId, (error, path) => {
                 if (this._isUnmounted) {
                     return;
                 }

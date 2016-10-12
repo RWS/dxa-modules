@@ -4,6 +4,7 @@
     "Title": "User Guide",
     "Url": null,
     "IsAbstract": true,
-    "HasChildNodes": false
+    "HasChildNodes": true,
+    "Items": []
   }
 ]

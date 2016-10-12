@@ -11,10 +11,10 @@
     "FDESCRIPTION.logical.value": null,
     "FCHANGES.version.value": "Imported OASIS DITA 1.1",
     "FISHRELEASELABEL.version.value": null,
-    "CREATED-ON.lng.value": "2008-10-29T17:36:52+02:00",
+    "CREATED-ON.lng.value": "2008-10-29T15:36:52Z",
     "FAUTHOR.lng.value": "Author",
     "FSTATUS.lng.value": "Released",
-    "MODIFIED-ON.lng.value": "2010-04-09T11:26:12+03:00",
+    "MODIFIED-ON.lng.value": "2010-04-09T08:26:12Z",
     "VERSION.version.value": "1",
     "FRESOLUTION.lng.value": null,
     "DOC-LANGUAGE.lng.value": [
@@ -27,5 +27,5 @@
     "FUSERGROUP.logical.value": null,
     "READ-ACCESS.logical.value": null
   },
-  "Html": "<div class=\"body conbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\r\n\t\t\t<p class=\"shortdesc\">The phone automatically activates the screen saver, a digital clock view, for power saving in standby mode.</p>\r\n\t\t\t<p class=\"p\">It is activated when no function of the phone has been used for a certain time. Press any key to deactivate the screen saver.\r\n            Screen saver is also deactivated when the phone is out of the network coverage area.\r\n         </p>\r\n\t\t\t<p class=\"p\">Note that the screen saver overrides all the graphics and texts on the display in standby mode.</p>\r\n\t\t</div>"
+  "Html": "\n\t\t<h1 class=\"title topictitle1\" id=\"GUID-ECE240B0-00BD-4371-AB26-E5AA627FF527__GUID-26F149AC-433E-4440-892A-E356163E548A\" xmlns=\"http://www.w3.org/1999/xhtml\">Screen saver</h1>\n\t\t<div class=\"body conbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n\t\t\t<p class=\"shortdesc\">The phone automatically activates the screen saver, a digital clock view, for power saving in standby mode.</p>\n\t\t\t<p class=\"p\">It is activated when no function of the phone has been used for a certain time. Press any key to deactivate the screen saver.\n            Screen saver is also deactivated when the phone is out of the network coverage area.\n         </p>\n\t\t\t<p class=\"p\">Note that the screen saver overrides all the graphics and texts on the display in standby mode.</p>\n\t\t</div>\n\t\t<div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n\t\t\t<div class=\"familylinks\">\n\t\t\t\t<div class=\"parentlink\">\n\t\t\t\t\t<strong>Parent topic:</strong>\n\t\t\t\t\t<a title=\"Your phone\" href=\"ish:39137-6298-16\">Your phone</a>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t"
 }

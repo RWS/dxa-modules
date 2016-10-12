@@ -4,6 +4,7 @@
     "Title": "Phone book",
     "Url": "ish:39137-6274-16",
     "IsAbstract": false,
-    "HasChildNodes": false
+    "HasChildNodes": true,
+    "Items": []
   }
 ]
