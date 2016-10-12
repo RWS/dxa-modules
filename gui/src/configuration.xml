@@ -37,6 +37,7 @@
                 <dependency name="Sdl.DitaDelivery.LocalizationGlobalize" />
                 <dependency name="Sdl.DitaDelivery.Resources" />
                 <dependency name="Sdl.DitaDelivery.RoutingClient" />
+                <dependency name="Sdl.DitaDelivery.Polyfills" />
             </dependencies>
         </resourceGroup>
         <resourceGroup name="Sdl.DitaDelivery.Server">
@@ -48,12 +49,18 @@
                 <dependency name="Sdl.DitaDelivery.DataStoreServer" />
                 <dependency name="Sdl.DitaDelivery.LocalizationServer" />
                 <dependency name="Sdl.DitaDelivery.RoutingServer" />
+                <dependency name="Sdl.DitaDelivery.Polyfills" />
             </dependencies>
         </resourceGroup>
         <resourceGroup name="Sdl.DitaDelivery.DitaOt.Styles">
             <files>
                 <file name="dita-ot/styles/commonltr.css"/>
                 <file name="dita-ot/styles/commonrtl.css"/>
+            </files>
+        </resourceGroup>
+        <resourceGroup name="Sdl.DitaDelivery.Polyfills">
+            <files>
+                <file name="lib/es6-promise-polyfill/promise.min.js"/>
             </files>
         </resourceGroup>
     </resourceGroups>

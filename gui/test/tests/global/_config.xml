@@ -7,6 +7,7 @@
             <files>
                 <file name="client/DataStoreClient.js"/>
                 <file name="client/RoutingClient.js"/>
+                <file name="Server/DataStoreServer.js"/>
             </files>
         </resourceGroup>
     </resourceGroups>

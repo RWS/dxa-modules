@@ -38,7 +38,7 @@ module Sdl.DitaDelivery.Tests {
                     expect(domNode.querySelector(".sdl-activityindicator")).not.toBeNull("Could not find activity indicator.");
                 });
 
-                it("shows toc", (): void => {
+                it("shows toc", (done: () => void): void => {
                     dataStoreMock.setMockDataToc(null, [
                         {
                             Id: "123",
@@ -51,16 +51,20 @@ module Sdl.DitaDelivery.Tests {
                     this._renderComponent(target);
                     const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
                     expect(domNode).not.toBeNull();
-                    // Toc is ready
-                    expect(domNode.querySelector(".sdl-dita-delivery-toc .sdl-activityindicator")).toBeNull("Activity indicator should not be rendered.");
-                    // Page is still loading
-                    expect(domNode.querySelector(".sdl-dita-delivery-page .sdl-activityindicator")).not.toBeNull("Could not find activity indicator.");
-                    const nodes = domNode.querySelectorAll(".sdl-treeview .content");
-                    expect(nodes.length).toBe(1);
-                    expect(nodes.item(0).textContent).toBe("First element");
+                    // Use a timeout to allow the DataStore to return a promise with the data
+                    setTimeout((): void => {
+                        // Toc is ready
+                        expect(domNode.querySelector(".sdl-dita-delivery-toc .sdl-activityindicator")).toBeNull("Activity indicator should not be rendered.");
+                        // Page is still loading
+                        expect(domNode.querySelector(".sdl-dita-delivery-page .sdl-activityindicator")).not.toBeNull("Could not find activity indicator.");
+                        const nodes = domNode.querySelectorAll(".sdl-treeview .content");
+                        expect(nodes.length).toBe(1);
+                        expect(nodes.item(0).textContent).toBe("First element");
+                        done();
+                    }, 0);
                 });
 
-                it("updates page content when selected site map item changes", (): void => {
+                it("updates page content when selected site map item changes", (done: () => void): void => {
                     const pageContent = "<div>Page content!</div>";
                     dataStoreMock.setMockDataToc(null, []);
                     dataStoreMock.setMockDataPage(null, { content: pageContent, title: "Title!" });
@@ -77,11 +81,15 @@ module Sdl.DitaDelivery.Tests {
                     });
                     const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
                     expect(domNode).not.toBeNull();
-                    expect(domNode.querySelector(".sdl-activityindicator")).toBeNull("Activity indicator should not be rendered.");
-                    const pageContentNode = domNode.querySelector(".page-content") as HTMLElement;
-                    expect(pageContentNode).not.toBeNull("Could not find page content.");
-                    expect(pageContentNode.children.length).toBe(1);
-                    expect(pageContentNode.innerHTML).toBe(pageContent);
+                    // Use a timeout to allow the DataStore to return a promise with the data
+                    setTimeout((): void => {
+                        expect(domNode.querySelector(".sdl-activityindicator")).toBeNull("Activity indicator should not be rendered.");
+                        const pageContentNode = domNode.querySelector(".page-content") as HTMLElement;
+                        expect(pageContentNode).not.toBeNull("Could not find page content.");
+                        expect(pageContentNode.children.length).toBe(1);
+                        expect(pageContentNode.innerHTML).toBe(pageContent);
+                        done();
+                    }, 0);
                 });
 
                 it("updates page content when item is selected from toc", (done: () => void): void => {
@@ -105,25 +113,28 @@ module Sdl.DitaDelivery.Tests {
 
                     const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
                     expect(domNode).not.toBeNull();
-                    // Toc is ready
-                    expect(domNode.querySelector(".sdl-dita-delivery-toc .sdl-activityindicator")).toBeNull("Activity indicator should not be rendered.");
-                    // Page is still loading
-                    expect(domNode.querySelector(".sdl-dita-delivery-page .sdl-activityindicator")).not.toBeNull("Could not find activity indicator.");
-                    // Click second element
-                    (domNode.querySelectorAll(".sdl-treeview .content")[1] as HTMLDivElement).click();
-
-                    // Treeview uses debouncing for node selection so a timeout is required
+                    // Use a timeout to allow the DataStore to return a promise with the data
                     setTimeout((): void => {
-                        // All is loaded
-                        expect(domNode.querySelector(".sdl-activityindicator")).toBeNull("Activity indicator should not be rendered.");
-                        const pageTitleNode = domNode.querySelector(".page-content h1") as HTMLElement;
-                        expect(pageTitleNode).not.toBeNull("Could not find page title.");
-                        expect(pageTitleNode.textContent).toBe("Second element");
-                        done();
-                    }, 200);
+                        // Toc is ready
+                        expect(domNode.querySelector(".sdl-dita-delivery-toc .sdl-activityindicator")).toBeNull("Activity indicator should not be rendered.");
+                        // Page is still loading
+                        expect(domNode.querySelector(".sdl-dita-delivery-page .sdl-activityindicator")).not.toBeNull("Could not find activity indicator.");
+                        // Click second element
+                        (domNode.querySelectorAll(".sdl-treeview .content")[1] as HTMLDivElement).click();
+
+                        // Treeview uses debouncing for node selection so a timeout is required
+                        setTimeout((): void => {
+                            // All is loaded
+                            expect(domNode.querySelector(".sdl-activityindicator")).toBeNull("Activity indicator should not be rendered.");
+                            const pageTitleNode = domNode.querySelector(".page-content h1") as HTMLElement;
+                            expect(pageTitleNode).not.toBeNull("Could not find page title.");
+                            expect(pageTitleNode.textContent).toBe("Second element");
+                            done();
+                        }, 200);
+                    }, 0);
                 });
 
-                it("updates page content with title when a site map item without url is selected", (): void => {
+                it("updates page content with title when a site map item without url is selected", (done: () => void): void => {
                     dataStoreMock.setMockDataToc(null, []);
                     const title = "Some page";
                     const component = this._renderComponent(target);
@@ -138,10 +149,14 @@ module Sdl.DitaDelivery.Tests {
                     });
                     const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
                     expect(domNode).not.toBeNull();
-                    expect(domNode.querySelector(".sdl-activityindicator")).toBeNull("Activity indicator should not be rendered.");
-                    const pageTitleNode = domNode.querySelector(".page-content h1") as HTMLElement;
-                    expect(pageTitleNode).not.toBeNull("Could not find page title.");
-                    expect(pageTitleNode.textContent).toBe(title);
+                    // Use a timeout to allow the DataStore to return a promise with the data
+                    setTimeout((): void => {
+                        expect(domNode.querySelector(".sdl-activityindicator")).toBeNull("Activity indicator should not be rendered.");
+                        const pageTitleNode = domNode.querySelector(".page-content h1") as HTMLElement;
+                        expect(pageTitleNode).not.toBeNull("Could not find page title.");
+                        expect(pageTitleNode.textContent).toBe(title);
+                        done();
+                    }, 0);
                 });
 
                 it("shows an error message when page info fails to load", (done: () => void): void => {
@@ -164,9 +179,27 @@ module Sdl.DitaDelivery.Tests {
                         expect(domNode.querySelector(".sdl-activityindicator")).toBeNull("Activity indicator should not be rendered.");
                         const validationMessageNode = domNode.querySelector(".sdl-validationmessage");
                         expect(validationMessageNode).not.toBeNull("Could not find validation message.");
-                        expect(validationMessageNode.textContent).toBe("Page failed to load!");
+                        expect(validationMessageNode && validationMessageNode.textContent).toBe("Page failed to load!");
                         done();
-                    }, 100);
+                    }, 500);
+                });
+
+                it("shows an error message when publication title failed to load", (done: () => void): void => {
+                    const errorMessage = "Page title is invalid!";
+                    dataStoreMock.setMockDataPublication(errorMessage);
+                    dataStoreMock.setMockDataPage(null, { content: "<div/>", title: "Title!" });
+                    this._renderComponent(target);
+                    const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
+                    expect(domNode).not.toBeNull();
+
+                    // Wait for the tree view to select the first node
+                    // Treeview uses debouncing for node selection so a timeout is required
+                    setTimeout((): void => {
+                        const validationMessageNode = domNode.querySelector(".sdl-validationmessage");
+                        expect(validationMessageNode).not.toBeNull("Could not find validation message.");
+                        expect(validationMessageNode && validationMessageNode.textContent).toBe(errorMessage);
+                        done();
+                    }, 500);
                 });
 
             });

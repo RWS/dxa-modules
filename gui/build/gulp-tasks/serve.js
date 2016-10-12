@@ -88,7 +88,8 @@ module.exports = function (buildOptions, gulp, browserSync, commonFolderName) {
                         '/SDL/ReactComponents': './node_modules/sdl-catalina-react-wrappers/dist/components/',
                         '/lib/react': './node_modules/react/dist/',
                         '/lib/react-dom': './node_modules/react-dom/dist/',
-                        '/lib/history': './node_modules/history/umd/'
+                        '/lib/history': './node_modules/history/umd/',
+                        '/lib/es6-promise-polyfill': './node_modules/es6-promise-polyfill/'
                     }
                 }
                 routes['/test'] = buildOptions.testPath; // Put test folder behind a virtual directory

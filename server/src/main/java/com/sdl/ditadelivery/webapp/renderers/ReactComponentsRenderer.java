@@ -39,6 +39,9 @@ public class ReactComponentsRenderer {
             try {
                 nashornScriptEngine.eval(read("gui/lib/react/react.js"));
                 nashornScriptEngine.eval(read("gui/lib/react-dom/react-dom-server.js"));
+                // Nashorn has no implementation for setTimeout
+                nashornScriptEngine.eval("setTimeout = function(method) { method(); };");
+                nashornScriptEngine.eval(read("gui/lib/es6-promise-polyfill/promise.js"));
                 nashornScriptEngine.eval(read("gui/SDL/ReactComponents/packages/ReactComponents.js"));
                 nashornScriptEngine.eval(read("gui/packages/Sdl.DitaDelivery.Components.js"));
                 nashornScriptEngine.eval(read("gui/packages/Sdl.DitaDelivery.Server.js"));

@@ -19,63 +19,66 @@ module Sdl.DitaDelivery.Tests {
                 });
 
                 it("can get site map items for the root", (done: () => void): void => {
-                    DataStore.getSitemapRoot((error, items) => {
-                        expect(error).toBeNull();
-                        expect(items).toBeDefined();
-                        if (items) {
-                            expect(items.length).toBe(1);
-                        }
-                        done();
-                    });
+                    DataStore.getSitemapRoot()
+                        .then(
+                        items => {
+                            expect(items).toBeDefined();
+                            if (items) {
+                                expect(items.length).toBe(1);
+                            }
+                            done();
+                        });
                 });
 
                 it("can get site map items from memory", (done: () => void): void => {
                     const spy = spyOn(SDL.Client.Net, "getRequest").and.callThrough();
-                    DataStore.getSitemapRoot((error, items) => {
-                        expect(error).toBeNull();
-                        expect(items).toBeDefined();
-                        if (items) {
-                            expect(items.length).toBe(1);
-                        }
-                        expect(spy).not.toHaveBeenCalled();
-                        done();
-                    });
+                    DataStore.getSitemapRoot()
+                        .then(
+                        items => {
+                            expect(items).toBeDefined();
+                            if (items) {
+                                expect(items.length).toBe(1);
+                            }
+                            expect(spy).not.toHaveBeenCalled();
+                            done();
+                        });
                 });
 
                 it("can get site map items for a child", (done: () => void): void => {
                     const getChildren = (parentId: string): void => {
-                        DataStore.getSitemapItems(parentId, (error, items) => {
-                            expect(error).toBeNull();
+                        DataStore.getSitemapItems(parentId)
+                            .then(
+                            items => {
+                                expect(items).toBeDefined();
+                                if (items) {
+                                    expect(items.length).toBe(9);
+                                }
+                                done();
+                            });
+                    };
+                    DataStore.getSitemapRoot()
+                        .then(
+                        items => {
                             expect(items).toBeDefined();
                             if (items) {
-                                expect(items.length).toBe(9);
+                                expect(items.length).toBe(1);
+                                const firstItem = items[0];
+                                expect(firstItem.Id).toBeDefined();
+                                if (firstItem.Id) {
+                                    getChildren(firstItem.Id);
+                                }
                             }
-                            done();
                         });
-                    };
-
-                    DataStore.getSitemapRoot((error, items) => {
-                        expect(error).toBeNull();
-                        expect(items).toBeDefined();
-                        if (items) {
-                            expect(items.length).toBe(1);
-                            const firstItem = items[0];
-                            expect(firstItem.Id).toBeDefined();
-                            if (firstItem.Id) {
-                                getChildren(firstItem.Id);
-                            }
-                        }
-                    });
                 });
 
                 it("returns a proper error when a parent id does not exist", (done: () => void): void => {
-                    DataStore.getSitemapItems("does-not-exist", (error, items) => {
-                        expect(error).toContain("does-not-exist");
-                        expect(items).toBeUndefined();
-                        done();
-                    });
+                    DataStore.getSitemapItems("does-not-exist")
+                        .catch(
+                        error => {
+                            expect(error).toContain("does-not-exist");
+                            done();
+                        });
                 });
-
             });
 
             describe(`Data Store tests (Page).`, (): void => {
@@ -87,8 +90,7 @@ module Sdl.DitaDelivery.Tests {
 
                 it("can get page info", (done: () => void): void => {
                     const pageId = "ish:39137-6222-16";
-                    DataStore.getPageInfo(pageId, (error, pageInfo) => {
-                        expect(error).toBeNull();
+                    DataStore.getPageInfo(pageId).then(pageInfo => {
                         expect(pageInfo).toBeDefined();
                         if (pageInfo) {
                             expect(pageInfo.title).toBe("getting started");
@@ -105,8 +107,7 @@ module Sdl.DitaDelivery.Tests {
                 it("can get page info from memory", (done: () => void): void => {
                     const pageId = "ish:39137-6222-16";
                     const spy = spyOn(SDL.Client.Net, "getRequest").and.callThrough();
-                    DataStore.getPageInfo(pageId, (error, pageInfo) => {
-                        expect(error).toBeNull();
+                    DataStore.getPageInfo(pageId).then(pageInfo => {
                         expect(pageInfo).toBeDefined();
                         if (pageInfo) {
                             expect(pageInfo.title).toBe("getting started");
@@ -118,9 +119,8 @@ module Sdl.DitaDelivery.Tests {
                 });
 
                 it("returns a proper error when a page does not exist", (done: () => void): void => {
-                    DataStore.getPageInfo("does-not-exist", (error, pageInfo) => {
+                    DataStore.getPageInfo("does-not-exist").catch(error => {
                         expect(error).toContain("does-not-exist");
-                        expect(pageInfo).toBeUndefined();
                         done();
                     });
                 });
@@ -141,16 +141,27 @@ module Sdl.DitaDelivery.Tests {
                         onFailure(failMessage, null);
                     };
                     spyOn(SDL.Client.Net, "getRequest").and.callFake(fakeGetRequest);
-                    DataStore.getPublications((error, publications) => {
+                    DataStore.getPublications().catch(error => {
                         expect(error).toBe(failMessage);
-                        expect(publications).toBeUndefined();
+                        done();
+                    });
+                });
+
+                it("returns a proper error when publication title cannot be retrieved", (done: () => void): void => {
+                    // Put this test first, otherwise the publication would be already in the cache and the spy would not work
+                    const failMessage = "failure";
+                    const fakeGetRequest = (url: string, onSuccess: Function, onFailure: (error: string, request: IWebRequest | null) => void): void => {
+                        onFailure(failMessage, null);
+                    };
+                    spyOn(SDL.Client.Net, "getRequest").and.callFake(fakeGetRequest);
+                    DataStore.getPublicationTitle(failMessage).catch(error => {
+                        expect(error).toBe(failMessage);
                         done();
                     });
                 });
 
                 it("can get the publications", (done: () => void): void => {
-                    DataStore.getPublications((error, publications) => {
-                        expect(error).toBeNull();
+                    DataStore.getPublications().then(publications => {
                         expect(publications).toBeDefined();
                         if (publications) {
                             expect(publications.length).toBe(1);
@@ -162,8 +173,7 @@ module Sdl.DitaDelivery.Tests {
 
                 it("can get the publications from memory", (done: () => void): void => {
                     const spy = spyOn(SDL.Client.Net, "getRequest").and.callThrough();
-                    DataStore.getPublications((error, publications) => {
-                        expect(error).toBeNull();
+                    DataStore.getPublications().then(publications => {
                         expect(publications).toBeDefined();
                         if (publications) {
                             expect(publications.length).toBe(1);
@@ -176,8 +186,7 @@ module Sdl.DitaDelivery.Tests {
 
                 it("can get a publication title", (done: () => void): void => {
                     const publicationId = "ish:39137-1-1";
-                    DataStore.getPublicationTitle(publicationId, (error, title) => {
-                        expect(error).toBeNull();
+                    DataStore.getPublicationTitle(publicationId).then(title => {
                         expect(title).toBe("MP330");
                         done();
                     });
@@ -186,8 +195,7 @@ module Sdl.DitaDelivery.Tests {
                 it("can get a publication title from memory", (done: () => void): void => {
                     const publicationId = "ish:39137-1-1";
                     const spy = spyOn(SDL.Client.Net, "getRequest").and.callThrough();
-                    DataStore.getPublicationTitle(publicationId, (error, title) => {
-                        expect(error).toBeNull();
+                    DataStore.getPublicationTitle(publicationId).then(title => {
                         expect(title).toBe("MP330");
                         expect(spy).not.toHaveBeenCalled();
                         done();
@@ -195,9 +203,8 @@ module Sdl.DitaDelivery.Tests {
                 });
 
                 it("returns a proper error when a publication title cannot be resolved", (done: () => void): void => {
-                    DataStore.getPublicationTitle("does-not-exist", (error, title) => {
+                    DataStore.getPublicationTitle("does-not-exist").catch(error => {
                         expect(error).toContain("does-not-exist");
-                        expect(title).toBeUndefined();
                         done();
                     });
                 });
@@ -213,8 +220,7 @@ module Sdl.DitaDelivery.Tests {
 
                 it("can get a path for a page", (done: () => void): void => {
                     const pageId = "ish:39137-6146-16";
-                    DataStore.getSitemapPath(pageId, (error, path) => {
-                        expect(error).toBeNull();
+                    DataStore.getSitemapPath(pageId).then(path => {
                         expect(path).toBeDefined();
                         if (path) {
                             expect(path.length).toBe(3);
@@ -226,8 +232,7 @@ module Sdl.DitaDelivery.Tests {
                 it("can get a path for a page from memory", (done: () => void): void => {
                     const pageId = "ish:39137-6146-16";
                     const spy = spyOn(SDL.Client.Net, "getRequest").and.callThrough();
-                    DataStore.getSitemapPath(pageId, (error, path) => {
-                        expect(error).toBeNull();
+                    DataStore.getSitemapPath(pageId).then(path => {
                         expect(path).toBeDefined();
                         if (path) {
                             expect(path.length).toBe(3);
@@ -238,9 +243,8 @@ module Sdl.DitaDelivery.Tests {
                 });
 
                 it("returns a proper error when a page does not exist", (done: () => void): void => {
-                    DataStore.getSitemapPath("does-not-exist", (error, pageInfo) => {
+                    DataStore.getSitemapPath("does-not-exist").catch(error => {
                         expect(error).toContain("does-not-exist");
-                        expect(pageInfo).toBeUndefined();
                         done();
                     });
                 });

@@ -113,29 +113,26 @@ module Sdl.DitaDelivery.Components {
         public componentWillMount(): void {
             const getRootItems = (path?: string[]): void => {
                 // Get the data for the Toc
-                DataStore.getSitemapRoot((error, items) => {
-                    if (this._isUnmounted) {
-                        return;
-                    }
-
-                    const toc = this._toc;
-
-                    if (error) {
-                        toc.error = error;
-                        this.setState({
-                            isTocLoading: false,
-                            isPageLoading: false
-                        });
-                        return;
-                    }
-
-                    toc.rootItems = items;
-                    this.setState({
-                        activeTocItemPath: path,
-                        isTocLoading: false,
-                        isPageLoading: Array.isArray(items) && items.length > 0
+                DataStore.getSitemapRoot().then(
+                    items => {
+                        if (!this._isUnmounted) {
+                            this._toc.rootItems = items;
+                            this.setState({
+                                activeTocItemPath: path,
+                                isTocLoading: false,
+                                isPageLoading: Array.isArray(items) && items.length > 0
+                            });
+                        }
+                    },
+                    error => {
+                        if (!this._isUnmounted) {
+                            this._toc.error = error;
+                            this.setState({
+                                isTocLoading: false,
+                                isPageLoading: false
+                            });
+                        }
                     });
-                });
             };
 
             const location = Routing.getPublicationLocation();
@@ -180,7 +177,9 @@ module Sdl.DitaDelivery.Components {
                 this._page.content = `<h1 class="title topictitle1">${nextState.selectedTocItem.Title}</h1>`;
             }
             if (nextUrl && (isPageLoading || currentUrl !== nextUrl)) {
-                DataStore.getPageInfo(nextUrl, this._onPageContentRetrieved.bind(this));
+                DataStore.getPageInfo(nextUrl).then(
+                    this._onPageContentRetrieved.bind(this),
+                    this._onPageContentRetrievFailed.bind(this));
             }
         }
 
@@ -225,56 +224,60 @@ module Sdl.DitaDelivery.Components {
 
             page.error = null;
 
-            DataStore.getPublicationTitle(publicationId, (error, title) => {
-                if (error) {
-                    page.error = error;
-                }
-                this.setState({
-                    activeTocItemPath: path,
-                    selectedTocItem: sitemapItem,
-                    isPageLoading: sitemapItem.Url ? true : false
-                });
+            DataStore.getPublicationTitle(publicationId).then(
+                title => {
+                    this.setState({
+                        activeTocItemPath: path,
+                        selectedTocItem: sitemapItem,
+                        isPageLoading: sitemapItem.Url ? true : false
+                    });
 
-                if (!error) {
                     Routing.setPublicationLocation(publicationId, title || "", sitemapItem.Url, sitemapItem.Title);
-                }
-            });
+                },
+                error => {
+                    page.error = error;
+
+                    this.setState({
+                        activeTocItemPath: path,
+                        selectedTocItem: sitemapItem,
+                        isPageLoading: sitemapItem.Url ? true : false
+                    });
+                });
         }
 
-        private _onPageContentRetrieved(error: string, pageInfo: IPageInfo): void {
+        private _onPageContentRetrieved(pageInfo: IPageInfo): void {
             const page = this._page;
-            if (error) {
-                page.error = error;
-                page.content = null;
-                this.setState({
-                    isPageLoading: false
-                });
-                return;
-            }
             page.content = pageInfo.content;
             this.setState({
                 isPageLoading: false
             });
         }
 
-        private _getActiveSitemapPath(pageId: string, done: (path: string[]) => void): void {
-            DataStore.getSitemapPath(pageId, (error, path) => {
-                if (this._isUnmounted) {
-                    return;
-                }
-
-                if (error) {
-                    const toc = this._toc;
-                    toc.error = error;
-                    this.setState({
-                        isTocLoading: false,
-                        isPageLoading: false
-                    });
-                    return;
-                }
-
-                done(path || []);
+        private _onPageContentRetrievFailed(error: string): void {
+            const page = this._page;
+            page.error = error;
+            page.content = null;
+            this.setState({
+                isPageLoading: false
             });
+        }
+
+        private _getActiveSitemapPath(pageId: string, done: (path: string[]) => void): void {
+            DataStore.getSitemapPath(pageId).then(
+                path => {
+                    if (!this._isUnmounted) {
+                        done(path || []);
+                    }
+                },
+                error => {
+                    if (!this._isUnmounted) {
+                        this._toc.error = error;
+                        this.setState({
+                            isTocLoading: false,
+                            isPageLoading: false
+                        });
+                    }
+                });
         }
     };
 }

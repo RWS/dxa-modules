@@ -31,7 +31,7 @@ module Sdl.DitaDelivery.Components {
         /**
          * Load child items for a specific item
          */
-        loadChildItems: (parentId: string, callback: (error: string, children: ISitemapItem[]) => void) => void;
+        loadChildItems: (parentId: string) => Promise<ISitemapItem[]>;
         /**
          * Triggered whenever the selected item in the toc changes
          */
@@ -121,18 +121,21 @@ module Sdl.DitaDelivery.Components {
 
         private _loadChildNodes(node: ITreeViewNode, callback: (childNodes: ITreeViewNode[]) => void): void {
             const props = this.props;
-            props.loadChildItems(node.id, (error, children) => {
-                if (!this._isUnmounted) {
-                    if (error) {
+            props.loadChildItems(node.id)
+                .then(
+                children => {
+                    if (!this._isUnmounted) {
+                        callback(this._convertToTreeViewNodes(children, node));
+                    }
+                },
+                error => {
+                    if (!this._isUnmounted) {
                         this.setState({
                             error: error
                         });
                         callback([]);
-                        return;
                     }
-                    callback(this._convertToTreeViewNodes(children, node));
-                }
-            });
+                });
         }
 
         private _convertToTreeViewNodes(sitemapItems: ISitemapItem[], parentNode: ITreeViewNode | null = null): ITreeViewNode[] {

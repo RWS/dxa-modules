@@ -38,7 +38,6 @@ module Sdl.DitaDelivery.Tests {
                     expect(domNode.querySelector(".sdl-activityindicator")).not.toBeNull("Could not find activity indicator.");
                 });
             });
-
         }
 
         private _renderComponent(target: HTMLElement): App {

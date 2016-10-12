@@ -146,6 +146,13 @@ gulp.task('copy-dependencies', cb => {
                 .pipe(gulp.dest(`${buildOptions.distPath}lib/history/`))
                 .on('end', next);
         },
+         // Es6-Promise Polyfill lib
+        next => {
+            gulp.src(['./node_modules/es6-promise-polyfill/*.js'])
+                .pipe(gulpDebug({ title: 'Copying' }))
+                .pipe(gulp.dest(`${buildOptions.distPath}lib/es6-promise-polyfill/`))
+                .on('end', next);
+        },
     ], cb);
 });
 

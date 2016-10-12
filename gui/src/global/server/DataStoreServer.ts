@@ -42,66 +42,105 @@ module Sdl.DitaDelivery {
             children: []
         };
 
+        private _mockDataPublication: {
+            error: string | null,
+            title: string | undefined
+        } = {
+            error: null,
+            title: "MP330"
+        };
+
         /**
          * Get the list of publications
          *
-         * @param {(error: string | null, publications?: IPublication[]) => void} callback Returns the items
+         * @returns {Promise<IPublication[]>} promise to return the items
+         * 
+         * @memberOf DataStoreServer
          */
-        public getPublications(callback: (error: string | null, publications?: IPublication[]) => void): void {
+        public getPublications(): Promise<IPublication[]> {
             const { error, publications } = this._mockDataPublications;
-            callback(error, publications);
+            if (error) {
+                return Promise.reject(error);
+            } else {
+                return Promise.resolve(publications);
+            }
         }
 
         /**
          * Get the root objects of the sitemap
          *
-         * @param {(error: string | null, items: ISitemapItem[]) => void} callback Returns the items
+         * @returns {Promise<ISitemapItem[]>} promise to return the items
+         * 
+         * @memberOf DataStoreServer
          */
-        public getSitemapRoot(callback: (error: string | null, items?: ISitemapItem[]) => void): void {
-            return this.getSitemapItems("root", callback);
+        public getSitemapRoot(): Promise<ISitemapItem[]> {
+            return this.getSitemapItems("root");
         }
 
         /**
          * Get the site map items for a parent
          *
-         * @param {string} parentId The parent id
-         * @param {(error: string | null, items?: ISitemapItem[]) => void} callback Returns the items
+         * @param {string} parentId
+         * @returns {Promise<ISitemapItem[]>} promise to return the items
+         * 
+         * @memberOf DataStoreServer
          */
-        public getSitemapItems(parentId: string, callback: (error: string | null, items?: ISitemapItem[]) => void): void {
+        public getSitemapItems(parentId: string): Promise<ISitemapItem[]> {
             const { error, children } = this._mockDataToc;
-            callback(error, children);
+            if (error) {
+                return Promise.reject(error);
+            } else {
+                return Promise.resolve(children);
+            }
         }
 
         /**
          * Get page information
          *
-         * @param {string} pageId The page id
-         * @param {(error: string | null, info?: IPageInfo) => void} callback Returns the content
+         * @param {string} pageId
+         * @returns {Promise<IPageInfo>} promise to returns the content
+         * 
+         * @memberOf DataStoreServer
          */
-        public getPageInfo(pageId: string, callback: (error: string | null, info?: IPageInfo) => void): void {
+        public getPageInfo(pageId: string): Promise<IPageInfo> {
             const { error, info } = this._mockDataPage;
-            callback(error, info);
+            if (error) {
+                return Promise.reject(error);
+            } else {
+                return Promise.resolve(info);
+            }
         }
 
         /**
          * Get the publication title
          *
-         * @param {string} publicationId Publication id
-         * @param {(error: string | null, title?: string) => void} callback Returns the title
+         * @param {string} publicationId
+         * @returns {Promise<string>} promise to returns the title
+         * 
+         * @memberOf DataStoreServer
          */
-        public getPublicationTitle(publicationId: string, callback: (error: string | null, title?: string) => void): void {
-            callback(null, "MP330");
+        public getPublicationTitle(publicationId: string): Promise<string> {
+            const { error, title } = this._mockDataPublication;
+            if (error) {
+                return Promise.reject(error);
+            } else {
+                return Promise.resolve(title);
+            }
         }
 
         /**
          * Get the full path for a sitemap item within a sitemap
          *
          * @param {string} pageId The page id
-         * @param {(error: string | null, path?: string[]) => void} callback Returns the full path
+         * @returns {Promise<string[]>} promise to return the full path
+         * 
+         * @memberOf DataStoreServer
          */
-        public getSitemapPath(pageId: string, callback: (error: string | null, path?: string[]) => void): void {
+        public getSitemapPath(pageId: string): Promise<string[]> {
+            return new Promise((resolve: (path?: string[]) => void, reject: (error: string | null) => void) => {
+                //
+            });
         }
-
     }
 
 }

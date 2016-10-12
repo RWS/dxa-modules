@@ -36,43 +36,98 @@ module Sdl.DitaDelivery.Tests.Mocks {
             items: []
         };
 
-        public getPublications(callback: (error: string | null, publications?: IPublication[]) => void): void {
+        private _mockDataPublication: {
+            error: string | null,
+            title: string | undefined
+        } = {
+            error: null,
+            title: "MP330"
+        };
+        public getPublications(): Promise<IPublication[]> {
             const { error, publications } = this._mockDataPublications;
-            callback(error, publications);
+            return new Promise((resolve: (publications?: IPublication[]) => void, reject: (error: string | null) => void) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(publications);
+                }
+            });
         }
 
-        public getSitemapRoot(callback: (error: string, items: ISitemapItem[]) => void): void {
-            return this.getSitemapItems("root", callback);
+        public getSitemapRoot(): Promise<ISitemapItem[]> {
+            return this.getSitemapItems("root");
         }
 
-        public getSitemapItems(parentId: string, callback: (error: string | null, items?: ISitemapItem[]) => void): void {
+        public getSitemapItems(parentId: string): Promise<ISitemapItem[]> {
             const { error, items } = this._mockDataToc;
             if (fakeDelay) {
-                setTimeout(() => {
-                    callback(error, items);
-                }, DELAY);
-                return;
+            return new Promise((resolve: (items?: ISitemapItem[]) => void, reject: (error: string | null) => void) => {
+                    setTimeout((): void => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            resolve(items);
+                        }
+                    }, DELAY);
+                });
+            } else {
+                if (error) {
+                    return Promise.reject(error);
+                } else {
+                    return Promise.resolve(items);
+                }
             }
-            callback(error, items);
         }
 
-        public getPageInfo(pageId: string, callback: (error: string | null, info?: IPageInfo) => void): void {
+        public getPageInfo(pageId: string): Promise<IPageInfo> {
             const { error, info } = this._mockDataPage;
             if (fakeDelay) {
-                setTimeout(() => {
-                    callback(error, info);
-                }, DELAY);
-                return;
+            return new Promise((resolve: (info?: IPageInfo) => void, reject: (error: string | null) => void) => {
+                    setTimeout((): void => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            resolve(info);
+                        }
+                    }, DELAY);
+                });
+            } else {
+                if (error) {
+                    return Promise.reject(error);
+                } else {
+                    return Promise.resolve(info);
+                }
             }
-            callback(error, info);
-
         }
 
-        public getPublicationTitle(publicationId: string, callback: (error: string | null, title?: string) => void): void {
-            callback(null, "MP330");
+        public getPublicationTitle(publicationId: string): Promise<string> {
+            const { error, title } = this._mockDataPublication;
+            if (fakeDelay) {
+                return new Promise((resolve: (info?: string) => void, reject: (error: string | null) => void) => {
+                    setTimeout((): void => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            resolve(title);
+                        }
+                    }, DELAY);
+            });
+            } else {
+                if (error) {
+                    return Promise.reject(error);
+                } else {
+                    return Promise.resolve(title);
+                }
+            }
         }
 
-        public getSitemapPath(pageId: string, callback: (error: string | null, path?: string[]) => void): void {
+        public getSitemapPath(pageId: string): Promise<string[]> {
+            return new Promise((resolve: (path?: string[]) => void, reject: (error: string | null) => void) => {
+                //
+            });
         }
 
         //#region Custom hooks for testing
@@ -91,6 +146,12 @@ module Sdl.DitaDelivery.Tests.Mocks {
             };
         }
 
+        public setMockDataPublication(error: string | null, title?: string): void {
+            this._mockDataPublication = {
+                error: error,
+                title: title
+            };
+        }
         public fakeDelay(value: boolean): void {
             fakeDelay = value;
         }

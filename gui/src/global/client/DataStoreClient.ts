@@ -56,124 +56,145 @@ module Sdl.DitaDelivery {
         /**
          * Get the list of publications
          *
-         * @param {(error: string | null, publications?: IPublication[]) => void} callback Returns the items
+         * @returns {Promise<IPublication[]>} Promise to return Items
+         *
+         * @memberOf DataStoreClient
          */
-        public getPublications(callback: (error: string | null, publications?: IPublication[]) => void): void {
+        public getPublications(): Promise<IPublication[]> {
             const publication = this.getPublicationsModel();
-            let removeEventListeners: () => void;
-            const onLoad = () => {
-                removeEventListeners();
-                callback(null, publication.getPublications());
-            };
-            const onLoadFailed = (event: SDL.Client.Event.Event) => {
-                removeEventListeners();
-                callback(event.data.error);
-            };
-            removeEventListeners = (): void => {
-                publication.removeEventListener("load", onLoad);
-                publication.removeEventListener("loadfailed", onLoadFailed);
-            };
-            if (!publication.isLoaded()) {
-                publication.addEventListener("load", onLoad);
-                publication.addEventListener("loadfailed", onLoadFailed);
-                publication.load();
-            } else {
-                callback(null, publication.getPublications());
-            }
+            return new Promise((resolve: (publications?: IPublication[]) => void, reject: (error: string | null) => void) => {
+                if (publication.isLoaded()) {
+                    resolve(publication.getPublications());
+                } else {
+                    let removeEventListeners: () => void;
+                    const onLoad = () => {
+                        removeEventListeners();
+                        resolve(publication.getPublications());
+                    };
+                    const onLoadFailed = (event: SDL.Client.Event.Event) => {
+                        removeEventListeners();
+                        reject(event.data.error);
+                    };
+                    removeEventListeners = (): void => {
+                        publication.removeEventListener("load", onLoad);
+                        publication.removeEventListener("loadfailed", onLoadFailed);
+                    };
+
+                    publication.addEventListener("load", onLoad);
+                    publication.addEventListener("loadfailed", onLoadFailed);
+                    publication.load();
+                }
+            });
         }
 
         /**
          * Get the root objects of the sitemap
          *
-         * @param {(error: string | null, items: ISitemapItem[]) => void} callback Returns the items
+         * @returns {Promise<ISitemapItem[]>} Promise to return items
+         *
+         * @memberOf DataStoreClient
          */
-        public getSitemapRoot(callback: (error: string | null, items?: ISitemapItem[]) => void): void {
-            this.getSitemapItems("root", callback);
+        public getSitemapRoot(): Promise<ISitemapItem[]> {
+            return this.getSitemapItems("root");
         }
 
         /**
          * Get the site map items for a parent
          *
-         * @param {string} parentId The parent id
-         * @param {(error: string | null, items?: ISitemapItem[]) => void} callback Returns the items
+         * @param {string} parentId The parent Id
+         * @returns {Promise<ISitemapItem[]>} Promise to return Items
+         *
+         * @memberOf DataStoreClient
          */
-        public getSitemapItems(parentId: string, callback: (error: string | null, items?: ISitemapItem[]) => void): void {
+        public getSitemapItems(parentId: string): Promise<ISitemapItem[]> {
             const toc = this.getTocModel(parentId);
-            let removeEventListeners: () => void;
-            const onLoad = () => {
-                removeEventListeners();
-                callback(null, toc.getSitemapItems());
-            };
-            const onLoadFailed = (event: SDL.Client.Event.Event) => {
-                removeEventListeners();
-                callback(event.data.error);
-            };
-            removeEventListeners = (): void => {
-                toc.removeEventListener("load", onLoad);
-                toc.removeEventListener("loadfailed", onLoadFailed);
-            };
-            if (!toc.isLoaded()) {
-                toc.addEventListener("load", onLoad);
-                toc.addEventListener("loadfailed", onLoadFailed);
-                toc.load();
-            } else {
-                callback(null, toc.getSitemapItems());
-            }
+
+            return new Promise((resolve: (items?: ISitemapItem[]) => void, reject: (error: string | null) => void) => {
+                if (toc.isLoaded()) {
+                    resolve(toc.getSitemapItems());
+                } else {
+                    let removeEventListeners: () => void;
+                    const onLoad = () => {
+                        removeEventListeners();
+                        resolve(toc.getSitemapItems());
+                    };
+                    const onLoadFailed = (event: SDL.Client.Event.Event) => {
+                        removeEventListeners();
+                        reject(event.data.error);
+                    };
+                    removeEventListeners = (): void => {
+                        toc.removeEventListener("load", onLoad);
+                        toc.removeEventListener("loadfailed", onLoadFailed);
+                    };
+
+                    toc.addEventListener("load", onLoad);
+                    toc.addEventListener("loadfailed", onLoadFailed);
+                    toc.load();
+                }
+            });
         }
 
         /**
          * Get page information
          *
-         * @param {string} pageId The page id
-         * @param {(error: string | null, info?: IPageInfo) => void} callback Returns the content
+         * @param {string} pageId The page Id
+         * @returns {Promise<IPageInfo>} Promise to return the content
+         *
+         * @memberOf DataStoreClient
          */
-        public getPageInfo(pageId: string, callback: (error: string | null, info?: IPageInfo) => void): void {
+        public getPageInfo(pageId: string): Promise<IPageInfo> {
             const page = this.getPageModel(pageId);
-            let removeEventListeners: () => void;
-            const onLoad = () => {
-                removeEventListeners();
-                callback(null, page.getPageInfo());
-            };
-            const onLoadFailed = (event: SDL.Client.Event.Event) => {
-                removeEventListeners();
-                callback(event.data.error);
-            };
-            removeEventListeners = (): void => {
-                page.removeEventListener("load", onLoad);
-                page.removeEventListener("loadfailed", onLoadFailed);
-            };
-            if (!page.isLoaded()) {
-                page.addEventListener("load", onLoad);
-                page.addEventListener("loadfailed", onLoadFailed);
-                page.load();
-            } else {
-                callback(null, page.getPageInfo());
-            }
+            return new Promise((resolve: (info?: IPageInfo) => void, reject: (error: string | null) => void) => {
+                if (page.isLoaded()) {
+                    resolve(page.getPageInfo());
+                } else {
+                    let removeEventListeners: () => void;
+                    const onLoad = () => {
+                        removeEventListeners();
+                        resolve(page.getPageInfo());
+                    };
+                    const onLoadFailed = (event: SDL.Client.Event.Event) => {
+                        removeEventListeners();
+                        reject(event.data.error);
+                    };
+                    removeEventListeners = (): void => {
+                        page.removeEventListener("load", onLoad);
+                        page.removeEventListener("loadfailed", onLoadFailed);
+                    };
+
+                    page.addEventListener("load", onLoad);
+                    page.addEventListener("loadfailed", onLoadFailed);
+                    page.load();
+                }
+            });
         }
 
         /**
          * Get the publication title
          *
-         * @param {string} publicationId Publication id
-         * @param {(error: string | null, title?: string) => void} callback Returns the title
+         * @param {string} publicationId Publication Id
+         * @returns {Promise<string>} Promise to return the title
+         *
+         * @memberOf DataStoreClient
          */
-        public getPublicationTitle(publicationId: string, callback: (error: string | null, title?: string) => void): void {
-            this.getPublications((error, publications) => {
-                if (error) {
-                    callback(error);
-                    return;
-                }
-
-                if (Array.isArray(publications)) {
-                    for (const pub of (publications as IPublication[])) {
-                        if (pub.Id === publicationId) {
-                            callback(null, pub.Title);
-                            return;
+        public getPublicationTitle(publicationId: string): Promise<string> {
+            return new Promise((resolve: (title?: string) => void, reject: (error: string | null) => void) => {
+                this.getPublications().then(
+                    publications => {
+                        if (Array.isArray(publications)) {
+                            for (const pub of publications) {
+                                if (pub.Id === publicationId) {
+                                    resolve(pub.Title);
+                                    return;
+                                }
+                            }
                         }
-                    }
-                }
 
-                callback(Localization.formatMessage("datastore.publication.not.found", [publicationId]));
+                        reject(Localization.formatMessage("datastore.publication.not.found", [publicationId]));
+                    },
+                    error => {
+                        reject(error);
+                    });
             });
         }
 
@@ -181,32 +202,38 @@ module Sdl.DitaDelivery {
          * Get the full path for a sitemap item within a sitemap
          *
          * @param {string} pageId The page id
-         * @param {(error: string | null, path?: string[]) => void} callback Returns the full path
+         * @returns {Promise<string[]>} Promise to return the full path
+         *
+         * @memberOf DataStoreClient
          */
-        public getSitemapPath(pageId: string, callback: (error: string | null, path?: string[]) => void): void {
+        public getSitemapPath(pageId: string): Promise<string[]> {
             const navigationLinks = this.getNavigationLinksModel(pageId);
-            let removeEventListeners: () => void;
-            const onLoad = () => {
-                removeEventListeners();
-                const path = navigationLinks.getPath();
-                callback(null, path);
-            };
-            const onLoadFailed = (event: SDL.Client.Event.Event) => {
-                removeEventListeners();
-                callback(event.data.error);
-            };
-            removeEventListeners = (): void => {
-                navigationLinks.removeEventListener("load", onLoad);
-                navigationLinks.removeEventListener("loadfailed", onLoadFailed);
-            };
-            if (!navigationLinks.isLoaded()) {
-                navigationLinks.addEventListener("load", onLoad);
-                navigationLinks.addEventListener("loadfailed", onLoadFailed);
-                navigationLinks.load();
-            } else {
-                const path = navigationLinks.getPath();
-                callback(null, path);
-            }
+
+            return new Promise((resolve: (path?: string[]) => void, reject: (error: string | null) => void) => {
+                if (navigationLinks.isLoaded()) {
+                    const path = navigationLinks.getPath();
+                    resolve(path);
+                } else {
+                    let removeEventListeners: () => void;
+                    const onLoad = () => {
+                        removeEventListeners();
+                        const path = navigationLinks.getPath();
+                        resolve(path);
+                    };
+                    const onLoadFailed = (event: SDL.Client.Event.Event) => {
+                        removeEventListeners();
+                        reject(event.data.error);
+                    };
+                    removeEventListeners = (): void => {
+                        navigationLinks.removeEventListener("load", onLoad);
+                        navigationLinks.removeEventListener("loadfailed", onLoadFailed);
+                    };
+
+                    navigationLinks.addEventListener("load", onLoad);
+                    navigationLinks.addEventListener("loadfailed", onLoadFailed);
+                    navigationLinks.load();
+                }
+            });
         }
 
         private getTocModel(parentId: string): Models.Toc {

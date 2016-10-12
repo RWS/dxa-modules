@@ -19,8 +19,8 @@ module Sdl.DitaDelivery.Tests {
                     HasChildNodes: true,
                     Items: []
                 }];
-                const loadChildItems = (parentId: string, callback: (error: string | null, children: ISitemapItem[]) => void): void => {
-                    callback(null, [{
+                const loadChildItems = (parentId: string): Promise<ISitemapItem[]> => {
+                    return Promise.resolve([{
                         Id: "12345",
                         Title: "Child1",
                         IsAbstract: false,
@@ -54,14 +54,18 @@ module Sdl.DitaDelivery.Tests {
                     expect(nodes.item(0).textContent).toBe("Root");
                 });
 
-                it("expands the root node upon click", (): void => {
+                it("expands the root node upon click", (done: () => void): void => {
                     const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
                     expect(domNode).not.toBeNull();
                     (domNode.querySelector(".sdl-treeview .expand-collapse") as HTMLDivElement).click();
-                    const nodes = domNode.querySelectorAll(".sdl-treeview .content");
-                    expect(nodes.length).toBe(2);
-                    expect(nodes.item(0).textContent).toBe("Root");
-                    expect(nodes.item(1).textContent).toBe("Child1");
+                    // Use a timeout to allow the DataStore to return a promise with the data
+                    setTimeout((): void => {
+                        const nodes = domNode.querySelectorAll(".sdl-treeview .content");
+                        expect(nodes.length).toBe(2);
+                        expect(nodes.item(0).textContent).toBe("Root");
+                        expect(nodes.item(1).textContent).toBe("Child1");
+                        done();
+                    }, 0);
                 });
 
             });
