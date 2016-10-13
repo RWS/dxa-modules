@@ -1,0 +1,28 @@
+{
+  "Id": "ish:1669313-368581-16",
+  "Title": "[Phenomenon 31] Delivery pile does not lower automatically during printing",
+  "Meta": {
+    "ishlogicalref.object.id": 368579,
+    "ishversionref.object.id": 368580,
+    "ishlngref.object.id": 368581,
+    "ishref.object.value": "GUID-329E8698-3A9E-4E4C-8076-26F6303DC1C8",
+    "ishtype.object.value": "ISHModule",
+    "FTITLE.logical.value": "[Phenomenon 31] Delivery pile does not lower automatically during printing",
+    "FDESCRIPTION.logical.value": null,
+    "FCHANGES.version.value": null,
+    "FISHRELEASELABEL.version.value": null,
+    "CREATED-ON.lng.value": "2016-01-06T10:55:15Z",
+    "FAUTHOR.lng.value": "admin",
+    "FSTATUS.lng.value": "Draft",
+    "MODIFIED-ON.lng.value": "2016-05-26T15:02:23Z",
+    "VERSION.version.value": "1",
+    "DOC-LANGUAGE.lng.value": [
+      "ja"
+    ],
+    "FISHREVCOUNTER.lng.value": 2,
+    "ED.lng.value": "GUID-23DAB8B3-71BD-4F42-B8B1-185036BEDFFA",
+    "FUSERGROUP.logical.element": null,
+    "READ-ACCESS.logical.element": null
+  },
+  "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-329E8698-3A9E-4E4C-8076-26F6303DC1C8__GUID-9320FCEC-91A5-42B5-A8CB-D37C5C5FA81D\" xmlns=\"http://www.w3.org/1999/xhtml\">リファレンス・タイトルを入力してください</h1>\n      \n      \n      \n      <div class=\"body refbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">簡単な説明を入力してください (任意)</p>\n         \n         \n         <div class=\"section\" id=\"GUID-329E8698-3A9E-4E4C-8076-26F6303DC1C8__GUID-7D5992A5-C0DF-4FBA-AE21-2C0B4DB5C427\">実際の情報をこのセクションに入力してください (任意)</div>\n         \n         \n         <div class=\"example\" id=\"GUID-329E8698-3A9E-4E4C-8076-26F6303DC1C8__GUID-E1101993-E6C0-4216-B029-F2C8796D9FF9\">実例を入力してください (任意)</div>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>親トピック:</strong> <a class=\"link\" title=\"簡単な説明を入力して下さい(任意)\" href=\"ish:1669313-368625-16\">トピック・タイトルを入力して下さい</a></div>\n            \n         </div>\n         \n      </div>\n   "
+}

@@ -1,0 +1,26 @@
+{
+  "Id": "ish:1669313-1-512",
+  "Title": null,
+  "Url": null,
+  "IsAbstract": true,
+  "HasChildNodes": true,
+  "Items": [
+    {
+      "Id": "ish:1669313-111-1024",
+      "Title": "トピック・タイトルを入力して下さい",
+      "Url": "ish:1669313-368908-16",
+      "IsAbstract": false,
+      "HasChildNodes": true,
+      "Items": [
+        {
+          "Id": "ish:1669313-112-1024",
+          "Title": "リファレンス・タイトルを入力してください",
+          "Url": "ish:1669313-368916-16",
+          "IsAbstract": false,
+          "HasChildNodes": true,
+          "Items": []
+        }
+      ]
+    }
+  ]
+}

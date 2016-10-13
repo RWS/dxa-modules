@@ -107,7 +107,7 @@ module.exports = function (buildOptions, gulp, browserSync, commonFolderName) {
                             port: (port + 11)
                         }
                     } : false,
-                    open: true,
+                    open: !buildOptions.isDefaultTask,
                     // Server config
                     server: {
                         baseDir: buildOptions.distPath,

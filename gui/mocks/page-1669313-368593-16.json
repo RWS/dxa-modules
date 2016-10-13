@@ -1,0 +1,28 @@
+{
+  "Id": "ish:1669313-368593-16",
+  "Title": "[Phenomenon 67] Ready lamp does not light",
+  "Meta": {
+    "ishlogicalref.object.id": 368591,
+    "ishversionref.object.id": 368592,
+    "ishlngref.object.id": 368593,
+    "ishref.object.value": "GUID-34BB251D-E7BD-41F6-83FD-FBF8F7259E89",
+    "ishtype.object.value": "ISHModule",
+    "FTITLE.logical.value": "[Phenomenon 67] Ready lamp does not light",
+    "FDESCRIPTION.logical.value": null,
+    "FCHANGES.version.value": null,
+    "FISHRELEASELABEL.version.value": null,
+    "CREATED-ON.lng.value": "2016-01-06T10:55:16Z",
+    "FAUTHOR.lng.value": "admin",
+    "FSTATUS.lng.value": "Draft",
+    "MODIFIED-ON.lng.value": "2016-05-26T15:02:24Z",
+    "VERSION.version.value": "1",
+    "DOC-LANGUAGE.lng.value": [
+      "ja"
+    ],
+    "FISHREVCOUNTER.lng.value": 2,
+    "ED.lng.value": "GUID-7C758281-1EAC-4608-A0C4-E19F006CFFC5",
+    "FUSERGROUP.logical.element": null,
+    "READ-ACCESS.logical.element": null
+  },
+  "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-34BB251D-E7BD-41F6-83FD-FBF8F7259E89__GUID-31C94A2F-CD13-4CAC-845C-D762D3423913\" xmlns=\"http://www.w3.org/1999/xhtml\">リファレンス・タイトルを入力してください</h1>\n      \n      \n      \n      <div class=\"body refbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">簡単な説明を入力してください (任意)</p>\n         \n         \n         <div class=\"section\" id=\"GUID-34BB251D-E7BD-41F6-83FD-FBF8F7259E89__GUID-74CAB31F-B70D-4861-90EE-0281AA90AA68\">実際の情報をこのセクションに入力してください (任意)</div>\n         \n         \n         <div class=\"example\" id=\"GUID-34BB251D-E7BD-41F6-83FD-FBF8F7259E89__GUID-338AE4F1-2351-457E-8502-53AC9DE3D175\">実例を入力してください (任意)</div>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>親トピック:</strong> <a class=\"link\" title=\"簡単な説明を入力して下さい(任意)\" href=\"ish:1669313-368625-16\">トピック・タイトルを入力して下さい</a></div>\n            \n         </div>\n         \n      </div>\n   "
+}

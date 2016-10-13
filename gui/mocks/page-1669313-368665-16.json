@@ -1,0 +1,28 @@
+{
+  "Id": "ish:1669313-368665-16",
+  "Title": "[Phenomenon 35] Suction wheel does not operate",
+  "Meta": {
+    "ishlogicalref.object.id": 368663,
+    "ishversionref.object.id": 368664,
+    "ishlngref.object.id": 368665,
+    "ishref.object.value": "GUID-69819D2B-7615-484D-9AAE-C2ADA54B76F9",
+    "ishtype.object.value": "ISHModule",
+    "FTITLE.logical.value": "[Phenomenon 35] Suction wheel does not operate",
+    "FDESCRIPTION.logical.value": null,
+    "FCHANGES.version.value": null,
+    "FISHRELEASELABEL.version.value": null,
+    "CREATED-ON.lng.value": "2016-01-06T10:55:27Z",
+    "FAUTHOR.lng.value": "admin",
+    "FSTATUS.lng.value": "Draft",
+    "MODIFIED-ON.lng.value": "2016-05-26T15:02:27Z",
+    "VERSION.version.value": "1",
+    "DOC-LANGUAGE.lng.value": [
+      "ja"
+    ],
+    "FISHREVCOUNTER.lng.value": 2,
+    "ED.lng.value": "GUID-EFA52A6A-31E3-4864-A3C7-8B3A631FBB5C",
+    "FUSERGROUP.logical.element": null,
+    "READ-ACCESS.logical.element": null
+  },
+  "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-69819D2B-7615-484D-9AAE-C2ADA54B76F9__GUID-40E71EF8-D530-4A07-A794-C79F1B403449\" xmlns=\"http://www.w3.org/1999/xhtml\">リファレンス・タイトルを入力してください</h1>\n      \n      \n      \n      <div class=\"body refbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">簡単な説明を入力してください (任意)</p>\n         \n         \n         <div class=\"section\" id=\"GUID-69819D2B-7615-484D-9AAE-C2ADA54B76F9__GUID-0E177C99-57F0-4745-B818-7ED29371E6B3\">実際の情報をこのセクションに入力してください (任意)</div>\n         \n         \n         <div class=\"example\" id=\"GUID-69819D2B-7615-484D-9AAE-C2ADA54B76F9__GUID-8055EF84-B5B2-4018-8E45-FC6C2D9850DB\">実例を入力してください (任意)</div>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>親トピック:</strong> <a class=\"link\" title=\"簡単な説明を入力して下さい(任意)\" href=\"ish:1669313-368625-16\">トピック・タイトルを入力して下さい</a></div>\n            \n         </div>\n         \n      </div>\n   "
+}

@@ -1,0 +1,34 @@
+{
+  "Id": "ish:1656868-164284-16",
+  "Title": "keys overview",
+  "Meta": {
+    "ishlogicalref.object.id": 164278,
+    "ishversionref.object.id": 164279,
+    "ishlngref.object.id": 164284,
+    "ishref.object.value": "GUID-7DBD499A-5D70-4EAB-A78E-7313476C7E59",
+    "ishtype.object.value": "ISHModule",
+    "FTITLE.logical.value": "keys overview",
+    "FDESCRIPTION.logical.value": null,
+    "FCHANGES.version.value": "Change1",
+    "FISHRELEASELABEL.version.value": [
+      "Publication MP330-v1-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2012/09/21 12:27:01",
+      "Publication MP330-v2-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2012/09/24 17:31:39",
+      "Publication MP660-v1-GUID-EB2E82F1-1C76-4032-815C-4E717140A081-2012/09/24 14:57:38",
+      "Publication MP660-v2-GUID-EB2E82F1-1C76-4032-815C-4E717140A081-2012/09/24 17:09:12",
+      "Publication MP330-v3-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2016/02/11 10:42:22"
+    ],
+    "CREATED-ON.lng.value": "2015-12-22T18:26:59Z",
+    "FAUTHOR.lng.value": "admin",
+    "FSTATUS.lng.value": "Released",
+    "MODIFIED-ON.lng.value": "2016-05-26T15:33:08Z",
+    "VERSION.version.value": "1",
+    "DOC-LANGUAGE.lng.value": [
+      "nl"
+    ],
+    "FISHREVCOUNTER.lng.value": 2,
+    "ED.lng.value": "GUID-E38DB035-1364-455D-945B-BD7EC30B510F",
+    "FUSERGROUP.logical.element": null,
+    "READ-ACCESS.logical.element": null
+  },
+  "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-7DBD499A-5D70-4EAB-A78E-7313476C7E59__GUID-1E476661-09B1-4FDF-91D8-03701B57F119\" xmlns=\"http://www.w3.org/1999/xhtml\">Toetsen</h1>\n      \n      \n      <div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"section\" data-ishcondition=\"(MODEL=330)\" id=\"GUID-7DBD499A-5D70-4EAB-A78E-7313476C7E59__GUID-49D825BA-07EC-484A-888F-90099E1A4094\">\n            <br /><tcdl:Image class=\"image\" type=\"ish:Image\" ref=\"ish:1656868-345727-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" /><br />\n            \n            <ol class=\"ol\" id=\"GUID-7DBD499A-5D70-4EAB-A78E-7313476C7E59__GUID-F822509D-5C55-4040-AA58-FD2B11F12909\">\n               \n               <li class=\"li\">Aan/uit-toets - Hiermee schakelt u de telefoon in en uit. Wanneer u deze toets kort indrukt vanuit de standbymodus, kunt u\n                  het profiel wijzigen.\n               </li>\n               \n               \n               <li class=\"li\">Volumetoets - Toets om het volume van het luistergedeelte, de hoofdtelefoon en de luidspreker te regelen.</li>\n               \n               \n               <li class=\"li\">Muziektoets - Sneltoets om de Music player en Radio snel in en uit te schakelen.</li>\n               \n               \n               <li class=\"li\">Bladertoets in 4 richtingen - Hiermee kunt u door namen, telefoonnummers, menu's of instellingen bladeren. Deze toets kan\n                  bijvoorbeeld ook worden gebruikt om te zoeken naar radiozenders, om de muziekinstellingen aan te passen en om gebruik te maken\n                  van muziekfuncties, zoals afspelen, stoppen, snel vooruit en snel achteruit.\n               </li>\n               \n               \n               <li class=\"li\">Opnametoets - Hiermee start u een opname wanneer de radio is ingeschakeld of externe audioapparatuur is aangesloten op de\n                  telefoon.\n               </li>\n               \n               \n               <li class=\"li\">Selectietoetsen - De functie van de toetsen is afhankelijk van de tekst die boven de toetsen wordt weergegeven.\n                  <p class=\"p\"><tcdl:Image class=\"image\" type=\"ish:Image\" ref=\"ish:1656868-345915-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" /> laat u een telefoonnummer kiezen en een oproep beantwoorden. Vanuit de standby-modus kunt u met deze toets de laatstgekozen\n                     nummers weergegeven.\n                  </p>\n                  \n                  <p class=\"p\"><tcdl:Image class=\"image\" type=\"ish:Image\" ref=\"ish:1656868-345803-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" /> beëindigt een actief gesprek. Hiermee sluit u elke functie af.\n                  </p>\n                  \n               </li>\n               \n               \n               <li class=\"li\"><tcdl:Image class=\"image\" type=\"ish:Image\" ref=\"ish:1656868-345719-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" /> - <tcdl:Image class=\"image\" type=\"ish:Image\" ref=\"ish:1656868-345867-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" /> gebruikt u voor het invoeren van cijfers en letters. \n               </li>\n               \n               \n            </ol>\n            \n            \n         </div>\n         \n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Hoofdonderwerp:</strong> <a class=\"link\" href=\"ish:1656868-164233-16\">De telefoon</a></div>\n            \n         </div>\n         \n         \n         <div class=\"linklist linklist relinfo reltasks\"><strong>Verwante taken</strong><br />\n            \n            \n            <div><a class=\"link\" href=\"ish:1656868-164214-16\">Opbellen</a></div>\n            \n            <div><a class=\"link\" title=\"U kunt een telefoonnummer bellen door een of meer bijbehorende woorden ('spraaknummer') uit te spreken . Het spraaknummer kan bijvoorbeeld een naam zijn.\" href=\"ish:1656868-164333-16\">Voicedialling</a></div>\n            \n            <div><a class=\"link\" href=\"ish:1656868-164197-16\">Inkomende oproepen beantwoorden of weigeren</a></div>\n         </div>\n         \n         \n         <div class=\"linklist linklist relinfo\"><strong>Verwante informatie</strong><br />\n            \n            \n            <div><a class=\"link\" href=\"ish:1656868-164470-16\">Algemene functies</a></div>\n            \n            <div><a class=\"link\" title=\"Voordat u snelkeuze kunt gebruiken, moet u een telefoonnummer programmeren onder een van de snelkeuzetoetsen (van tot .\" href=\"ish:1656868-164365-16\">Snelkeuzetoetsen</a></div>\n         </div>\n         \n      </div>\n   "
+}

@@ -10,7 +10,7 @@ module Sdl.DitaDelivery.Tests {
 
         public runTests(): void {
             const DataStore = new DataStoreClient();
-            const publicationId = "ish:39137-1-1";
+            const publicationId = "ish:1656863-1-1";
 
             describe(`Data Store tests (Toc).`, (): void => {
 
@@ -101,12 +101,12 @@ module Sdl.DitaDelivery.Tests {
                 });
 
                 it("can get page info", (done: () => void): void => {
-                    const pageId = "ish:39137-6222-16";
+                    const pageId = "ish:1656863-164398-16";
                     DataStore.getPageInfo(publicationId, pageId).then(pageInfo => {
                         expect(pageInfo).toBeDefined();
                         if (pageInfo) {
                             expect(pageInfo.title).toBe("getting started");
-                            expect(pageInfo.content.length).toBe(1109);
+                            expect(pageInfo.content.length).toBe(1216);
                             const element = document.createElement("span");
                             element.innerHTML = pageInfo.content;
                             expect(element.children.length).toBe(3); // title, content, related links
@@ -120,13 +120,13 @@ module Sdl.DitaDelivery.Tests {
                 });
 
                 it("can get page info from memory", (done: () => void): void => {
-                    const pageId = "ish:39137-6222-16";
+                    const pageId = "ish:1656863-164398-16";
                     const spy = spyOn(SDL.Client.Net, "getRequest").and.callThrough();
                     DataStore.getPageInfo(publicationId, pageId).then(pageInfo => {
                         expect(pageInfo).toBeDefined();
                         if (pageInfo) {
                             expect(pageInfo.title).toBe("getting started");
-                            expect(pageInfo.content.length).toBe(1109);
+                            expect(pageInfo.content.length).toBe(1216);
                             expect(spy).not.toHaveBeenCalled();
                         }
                         done();
@@ -191,8 +191,8 @@ module Sdl.DitaDelivery.Tests {
                     DataStore.getPublications().then(publications => {
                         expect(publications).toBeDefined();
                         if (publications) {
-                            expect(publications.length).toBe(1);
-                            expect(publications[0].Title).toBe("MP330");
+                            expect(publications.length).toBe(5);
+                            expect(publications[0].Title).toBe("Publication MP330");
                         }
                         done();
                     }).catch(error => {
@@ -206,8 +206,8 @@ module Sdl.DitaDelivery.Tests {
                     DataStore.getPublications().then(publications => {
                         expect(publications).toBeDefined();
                         if (publications) {
-                            expect(publications.length).toBe(1);
-                            expect(publications[0].Title).toBe("MP330");
+                            expect(publications.length).toBe(5);
+                            expect(publications[0].Title).toBe("Publication MP330");
                             expect(spy).not.toHaveBeenCalled();
                         }
                         done();
@@ -219,7 +219,7 @@ module Sdl.DitaDelivery.Tests {
 
                 it("can get a publication title", (done: () => void): void => {
                     DataStore.getPublicationTitle(publicationId).then(title => {
-                        expect(title).toBe("MP330");
+                        expect(title).toBe("Publication MP330");
                         done();
                     }).catch(error => {
                         fail(`Unexpected error: ${error}`);
@@ -230,7 +230,7 @@ module Sdl.DitaDelivery.Tests {
                 it("can get a publication title from memory", (done: () => void): void => {
                     const spy = spyOn(SDL.Client.Net, "getRequest").and.callThrough();
                     DataStore.getPublicationTitle(publicationId).then(title => {
-                        expect(title).toBe("MP330");
+                        expect(title).toBe("Publication MP330");
                         expect(spy).not.toHaveBeenCalled();
                         done();
                     }).catch(error => {
@@ -259,7 +259,7 @@ module Sdl.DitaDelivery.Tests {
                 });
 
                 it("can get a path for a page", (done: () => void): void => {
-                    const pageId = "ish:39137-6146-16";
+                    const pageId = "ish:1656863-164187-16";
                     DataStore.getSitemapPath(publicationId, pageId).then(path => {
                         expect(path).toBeDefined();
                         if (path) {
@@ -273,7 +273,7 @@ module Sdl.DitaDelivery.Tests {
                 });
 
                 it("can get a path for a page from memory", (done: () => void): void => {
-                    const pageId = "ish:39137-6146-16";
+                    const pageId = "ish:1656863-164187-16";
                     const spy = spyOn(SDL.Client.Net, "getRequest").and.callThrough();
                     DataStore.getSitemapPath(publicationId, pageId).then(path => {
                         expect(path).toBeDefined();

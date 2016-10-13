@@ -1,0 +1,26 @@
+{
+  "Id": "ish:1656863-1-512",
+  "Title": "User Guide",
+  "Url": null,
+  "IsAbstract": true,
+  "HasChildNodes": true,
+  "Items": [
+    {
+      "Id": "ish:1656863-11-1024",
+      "Title": "Getting started",
+      "Url": "ish:1656863-164398-16",
+      "IsAbstract": false,
+      "HasChildNodes": true,
+      "Items": [
+        {
+          "Id": "ish:1656863-12-1024",
+          "Title": "Installing the SIM card and the battery",
+          "Url": "ish:1656863-164271-16",
+          "IsAbstract": false,
+          "HasChildNodes": false,
+          "Items": []
+        }
+      ]
+    }
+  ]
+}

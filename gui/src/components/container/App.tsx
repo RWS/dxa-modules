@@ -34,7 +34,7 @@ module Sdl.DitaDelivery.Components {
         constructor() {
             super();
             this.state = {
-                selectedPublicationId: "ish:39137-1-1"
+                selectedPublicationId: "ish:1656863-1-1"
             };
         }
 

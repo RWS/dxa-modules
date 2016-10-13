@@ -1,0 +1,26 @@
+{
+  "Id": "ish:1656863-1-512",
+  "Title": "User Guide",
+  "Url": null,
+  "IsAbstract": true,
+  "HasChildNodes": true,
+  "Items": [
+    {
+      "Id": "ish:1656863-20-1024",
+      "Title": "Messages",
+      "Url": "ish:1656863-164479-16",
+      "IsAbstract": false,
+      "HasChildNodes": true,
+      "Items": [
+        {
+          "Id": "ish:1656863-24-1024",
+          "Title": "Deleting messages",
+          "Url": "ish:1656863-164452-16",
+          "IsAbstract": false,
+          "HasChildNodes": false,
+          "Items": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "Id": "ish:1669313-368520-16",
+  "Title": "Press monitor",
+  "Meta": {
+    "ishlogicalref.object.id": 368518,
+    "ishversionref.object.id": 368519,
+    "ishlngref.object.id": 368520,
+    "ishref.object.value": "GUID-EC6AF2AB-8465-4606-9D4C-CC9091EDCF49",
+    "ishtype.object.value": "ISHModule",
+    "FTITLE.logical.value": "Press monitor",
+    "FDESCRIPTION.logical.value": null,
+    "FCHANGES.version.value": null,
+    "FISHRELEASELABEL.version.value": null,
+    "CREATED-ON.lng.value": "2016-01-06T10:55:05Z",
+    "FAUTHOR.lng.value": "admin",
+    "FSTATUS.lng.value": "Draft",
+    "MODIFIED-ON.lng.value": "2016-05-26T15:02:20Z",
+    "VERSION.version.value": "1",
+    "DOC-LANGUAGE.lng.value": [
+      "ja"
+    ],
+    "FISHREVCOUNTER.lng.value": 2,
+    "ED.lng.value": "GUID-8DFA9DEA-149B-47A9-83D2-DF37C504DC74",
+    "FUSERGROUP.logical.element": null,
+    "READ-ACCESS.logical.element": null
+  },
+  "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-EC6AF2AB-8465-4606-9D4C-CC9091EDCF49__GUID-E763EFCD-5563-4865-AB4D-E6BBB78A1317\" xmlns=\"http://www.w3.org/1999/xhtml\">リファレンス・タイトルを入力してください</h1>\n      \n      \n      \n      <div class=\"body refbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">簡単な説明を入力してください (任意)</p>\n         \n         \n         <div class=\"section\" id=\"GUID-EC6AF2AB-8465-4606-9D4C-CC9091EDCF49__GUID-E0483BA1-68F6-43AC-BE54-A5F183A61434\">実際の情報をこのセクションに入力してください (任意)</div>\n         \n         \n         <div class=\"example\" id=\"GUID-EC6AF2AB-8465-4606-9D4C-CC9091EDCF49__GUID-B8EA753D-7E2E-4AC2-86E0-14ED223EBB47\">実例を入力してください (任意)</div>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>親トピック:</strong> <a class=\"link\" title=\"簡単な説明を入力して下さい(任意)\" href=\"ish:1669313-368476-16\">トピック・タイトルを入力して下さい</a></div>\n            \n         </div>\n         \n      </div>\n   "
+}

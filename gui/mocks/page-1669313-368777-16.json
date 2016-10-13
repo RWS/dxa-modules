@@ -1,0 +1,28 @@
+{
+  "Id": "ish:1669313-368777-16",
+  "Title": "[Phenomenon 37] Delivery missing sheet detector does not operate (option)",
+  "Meta": {
+    "ishlogicalref.object.id": 368775,
+    "ishversionref.object.id": 368776,
+    "ishlngref.object.id": 368777,
+    "ishref.object.value": "GUID-E4840CA1-6C3A-4D88-A868-37117E91C778",
+    "ishtype.object.value": "ISHModule",
+    "FTITLE.logical.value": "[Phenomenon 37] Delivery missing sheet detector does not operate (option)",
+    "FDESCRIPTION.logical.value": null,
+    "FCHANGES.version.value": null,
+    "FISHRELEASELABEL.version.value": null,
+    "CREATED-ON.lng.value": "2016-01-06T10:55:44Z",
+    "FAUTHOR.lng.value": "admin",
+    "FSTATUS.lng.value": "Draft",
+    "MODIFIED-ON.lng.value": "2016-05-26T15:02:33Z",
+    "VERSION.version.value": "1",
+    "DOC-LANGUAGE.lng.value": [
+      "ja"
+    ],
+    "FISHREVCOUNTER.lng.value": 2,
+    "ED.lng.value": "GUID-C6113138-F47B-4C55-A649-FEF4782623C5",
+    "FUSERGROUP.logical.element": null,
+    "READ-ACCESS.logical.element": null
+  },
+  "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-E4840CA1-6C3A-4D88-A868-37117E91C778__GUID-C6A02F67-7C6C-4672-A3B0-D1F43395B57C\" xmlns=\"http://www.w3.org/1999/xhtml\">リファレンス・タイトルを入力してください</h1>\n      \n      \n      \n      <div class=\"body refbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">簡単な説明を入力してください (任意)</p>\n         \n         \n         <div class=\"section\" id=\"GUID-E4840CA1-6C3A-4D88-A868-37117E91C778__GUID-A87E2434-7DA8-40D3-B2A5-87F90D3E4814\">実際の情報をこのセクションに入力してください (任意)</div>\n         \n         \n         <div class=\"example\" id=\"GUID-E4840CA1-6C3A-4D88-A868-37117E91C778__GUID-BD85A2C9-4C7D-4102-B519-E0205451A446\">実例を入力してください (任意)</div>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>親トピック:</strong> <a class=\"link\" title=\"簡単な説明を入力して下さい(任意)\" href=\"ish:1669313-368625-16\">トピック・タイトルを入力して下さい</a></div>\n            \n         </div>\n         \n      </div>\n   "
+}

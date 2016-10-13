@@ -1,0 +1,28 @@
+{
+  "Id": "ish:1669313-368789-16",
+  "Title": "[Phenomenon 21] Dampening fountain roller does not operate",
+  "Meta": {
+    "ishlogicalref.object.id": 368787,
+    "ishversionref.object.id": 368788,
+    "ishlngref.object.id": 368789,
+    "ishref.object.value": "GUID-EF289CA7-07A7-4815-9F7B-47FC44671263",
+    "ishtype.object.value": "ISHModule",
+    "FTITLE.logical.value": "[Phenomenon 21] Dampening fountain roller does not operate",
+    "FDESCRIPTION.logical.value": null,
+    "FCHANGES.version.value": null,
+    "FISHRELEASELABEL.version.value": null,
+    "CREATED-ON.lng.value": "2016-01-06T10:55:46Z",
+    "FAUTHOR.lng.value": "admin",
+    "FSTATUS.lng.value": "Draft",
+    "MODIFIED-ON.lng.value": "2016-05-26T15:02:34Z",
+    "VERSION.version.value": "1",
+    "DOC-LANGUAGE.lng.value": [
+      "ja"
+    ],
+    "FISHREVCOUNTER.lng.value": 2,
+    "ED.lng.value": "GUID-11314E3C-BD07-4295-82B5-E64DD4C4AF71",
+    "FUSERGROUP.logical.element": null,
+    "READ-ACCESS.logical.element": null
+  },
+  "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-EF289CA7-07A7-4815-9F7B-47FC44671263__GUID-19E199CA-16E6-4F8F-A73B-3F1BEAED81CC\" xmlns=\"http://www.w3.org/1999/xhtml\">リファレンス・タイトルを入力してください</h1>\n      \n      \n      \n      <div class=\"body refbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">簡単な説明を入力してください (任意)</p>\n         \n         \n         <div class=\"section\" id=\"GUID-EF289CA7-07A7-4815-9F7B-47FC44671263__GUID-2FCE9508-9826-4615-8732-DBCB0ECAF196\">実際の情報をこのセクションに入力してください (任意)</div>\n         \n         \n         <div class=\"example\" id=\"GUID-EF289CA7-07A7-4815-9F7B-47FC44671263__GUID-26AFCCA6-62B1-4E3C-ABF4-9B13DCCF5BCF\">実例を入力してください (任意)</div>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>親トピック:</strong> <a class=\"link\" title=\"簡単な説明を入力して下さい(任意)\" href=\"ish:1669313-368625-16\">トピック・タイトルを入力して下さい</a></div>\n            \n         </div>\n         \n      </div>\n   "
+}

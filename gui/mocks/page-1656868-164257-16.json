@@ -1,0 +1,34 @@
+{
+  "Id": "ish:1656868-164257-16",
+  "Title": "essential indicators in standby mode",
+  "Meta": {
+    "ishlogicalref.object.id": 164251,
+    "ishversionref.object.id": 164252,
+    "ishlngref.object.id": 164257,
+    "ishref.object.value": "GUID-53925A2B-DCEE-48DB-BB47-623F13EA618F",
+    "ishtype.object.value": "ISHModule",
+    "FTITLE.logical.value": "essential indicators in standby mode",
+    "FDESCRIPTION.logical.value": null,
+    "FCHANGES.version.value": "Change1",
+    "FISHRELEASELABEL.version.value": [
+      "Publication MP330-v1-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2012/09/21 12:27:01",
+      "Publication MP330-v2-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2012/09/24 17:31:39",
+      "Publication MP660-v1-GUID-EB2E82F1-1C76-4032-815C-4E717140A081-2012/09/24 14:57:38",
+      "Publication MP660-v2-GUID-EB2E82F1-1C76-4032-815C-4E717140A081-2012/09/24 17:09:12",
+      "Publication MP330-v3-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2016/02/11 10:42:22"
+    ],
+    "CREATED-ON.lng.value": "2015-12-22T18:26:55Z",
+    "FAUTHOR.lng.value": "admin",
+    "FSTATUS.lng.value": "Released",
+    "MODIFIED-ON.lng.value": "2016-05-26T15:33:07Z",
+    "VERSION.version.value": "1",
+    "DOC-LANGUAGE.lng.value": [
+      "nl"
+    ],
+    "FISHREVCOUNTER.lng.value": 2,
+    "ED.lng.value": "GUID-06CC6A4A-E1F4-41A0-B312-7DEC3F3F285C",
+    "FUSERGROUP.logical.element": null,
+    "READ-ACCESS.logical.element": null
+  },
+  "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-53925A2B-DCEE-48DB-BB47-623F13EA618F__GUID-0D1BF0CB-B930-4321-B65E-67D89103FF62\" xmlns=\"http://www.w3.org/1999/xhtml\">Belangrijke indicatoren in de standby-modus</h1>\n      \n      \n      \n      <div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\" />\n         \n         \n         <p class=\"p\"><tcdl:Image class=\"image\" type=\"ish:Image\" ref=\"ish:1656868-164003-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" /> U hebt een of meer tekst- of afbeeldingberichten ontvangen.\n         </p>\n         \n         \n         <p class=\"p\"><tcdl:Image class=\"image\" type=\"ish:Image\" ref=\"ish:1656868-163995-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" /> U hebt een of meer multimediaberichten ontvangen.\n         </p>\n         \n         \n         <p class=\"p\"><tcdl:Image class=\"image\" type=\"ish:Image\" ref=\"ish:1656868-163939-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" /> U hebt een of meer spraakberichten ontvangen.\n         </p>\n         \n         \n         <p class=\"p\"><tcdl:Image class=\"image\" type=\"ish:Image\" ref=\"ish:1656868-163891-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" />De toetsen van de telefoon zijn geblokkeerd.\n         </p>\n         \n         \n         <p class=\"p\" data-ishcondition=\"(GPRS=Y)\"><tcdl:Image class=\"image\" type=\"ish:Image\" ref=\"ish:1656868-163947-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" /> Er is een GPRS-verbinding tot stand gebracht. De indicator wordt linksboven in het display weergegeven. \n         </p>\n         \n         \n         <p class=\"p\" data-ishcondition=\"(GPRS=Y)\"><tcdl:Image class=\"image\" type=\"ish:Image\" ref=\"ish:1656868-163875-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" /> De GPRS-verbinding is tijdelijk onderbroken, bijvoorbeeld bij een inkomende of uitgaande oproep tijdens een GPRS-verbinding.\n         </p>\n         \n         \n         <p class=\"p\"><tcdl:Image class=\"image\" type=\"ish:Image\" ref=\"ish:1656868-163963-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" /> De tijdsopname met de stopwatch wordt uitgevoerd in de achtergrond.\n         </p>\n         \n         \n         <p class=\"p\" data-ishcondition=\"(LOUDSPEAKER=Y)\"><tcdl:Image class=\"image\" type=\"ish:Image\" ref=\"ish:1656868-163979-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" />De luidspreker is ingeschakeld.\n         </p>\n         \n         \n         <p class=\"p\" data-ishcondition=\"(BLUETOOTH=Y)\"><tcdl:Image class=\"image\" type=\"ish:Image\" ref=\"ish:1656868-164011-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" />Geeft aan dat Bluetooth actief is.\n         </p>\n         \n         \n         <p class=\"p\" data-ishcondition=\"(BLUETOOTH=Y)\"><tcdl:Image class=\"image\" type=\"ish:Image\" ref=\"ish:1656868-163883-16\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\" />Geeft datatransmissie via Bluetooth aan.\n         </p>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Hoofdonderwerp:</strong> <a class=\"link\" href=\"ish:1656868-164233-16\">De telefoon</a></div>\n            \n         </div>\n         \n         \n         <div class=\"linklist linklist relinfo relconcepts\"><strong>Verwante onderwerpen</strong><br />\n            \n            \n            <div><a class=\"link\" title=\"Wanneer de telefoon gereed is voor gebruik en geen tekens zijn ingevoerd, bevindt de telefoon zich in de standby-modus. De naam/logo van de exploitant van uw telefoonnetwerk verschijnt in het display.\" href=\"ish:1656868-164189-16\">Standby-modus</a></div>\n         </div>\n         \n         \n         <div class=\"linklist linklist relinfo reltasks\"><strong>Verwante taken</strong><br />\n            \n            \n            <div><a class=\"link\" href=\"ish:1656868-164273-16\">De SIM-kaart en de batterij installeren</a></div>\n            \n            <div><a class=\"link\" href=\"ish:1656868-164292-16\">De batterij opladen.</a></div>\n         </div>\n         \n         \n         <div class=\"linklist linklist relinfo\"><strong>Verwante informatie</strong><br />\n            \n            \n            <div><a class=\"link\" href=\"ish:1656868-164157-16\">Aansluitingen</a></div>\n         </div>\n         \n      </div>\n   "
+}

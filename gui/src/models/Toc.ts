@@ -46,12 +46,10 @@ module Sdl.DitaDelivery.Models {
         protected _executeLoad(reload: boolean): void {
             const taxonomyId = TcmIdUtils.getTaxonomyId(this._publicationId);
 
-            if (this._parentId === "root" && !taxonomyId) {
+            if (!taxonomyId) {
                 this._onLoadFailed(Localization.formatMessage("error.path.not.found", [this._parentId, this._publicationId]));
             } else {
-                const parentPart = this._parentId !== "root" ?
-                    TcmIdUtils.removeNamespace(this._parentId) :
-                    `root-${TcmIdUtils.removeNamespace(taxonomyId || "")}`;
+                const parentPart = `${TcmIdUtils.removeNamespace(taxonomyId)}-${TcmIdUtils.removeNamespace(this._parentId)}`;
                 const url = Routing.getAbsolutePath(`gui/mocks/toc-${parentPart}.json`);
                 SDL.Client.Net.getRequest(url, this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
             }
