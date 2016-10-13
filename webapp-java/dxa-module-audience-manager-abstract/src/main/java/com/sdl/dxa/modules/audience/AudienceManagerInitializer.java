@@ -9,9 +9,10 @@ import com.sdl.webapp.common.api.mapping.views.RegisteredViewModels;
 import com.sdl.webapp.common.util.InitializationUtils;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.web.context.SecurityContextPersistenceFilter;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.WebApplicationInitializer;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.servlet.ServletContext;
@@ -19,6 +20,7 @@ import javax.servlet.ServletException;
 
 @Configuration
 @ComponentScan("com.sdl.dxa.modules.audience")
+@ImportResource("classpath:spring-security.xml")
 public class AudienceManagerInitializer { //NOSONAR
 
     @Component
@@ -41,7 +43,7 @@ public class AudienceManagerInitializer { //NOSONAR
 
         @Override
         public void onStartup(ServletContext servletContext) throws ServletException {
-            InitializationUtils.registerFilter(servletContext, SecurityContextPersistenceFilter.class, "/*");
+            InitializationUtils.registerFilter(servletContext, "springSecurityFilterChain", DelegatingFilterProxy.class, "/*");
         }
     }
 }

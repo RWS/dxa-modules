@@ -45,7 +45,7 @@ public class UserProfileTest {
         assertTrue(profile.isCredentialsNonExpired());
         assertTrue(profile.isEnabled());
 
-        assertEquals("USER", profile.getAuthorities().iterator().next().getAuthority());
+        assertEquals("ROLE_USER", profile.getAuthorities().iterator().next().getAuthority());
     }
 
     @Test

@@ -1,6 +1,7 @@
 package com.sdl.dxa.modules.audience.service;
 
 import com.sdl.dxa.modules.audience.model.ContactIdentifiers;
+import com.sdl.dxa.modules.audience.model.LoginForm;
 import com.sdl.dxa.modules.audience.model.UserProfile;
 import com.sdl.dxa.modules.audience.model.UserProfileImpl;
 import com.sdl.webapp.common.api.WebRequestContext;
@@ -18,6 +19,7 @@ import java.net.URISyntaxException;
 import java.sql.SQLException;
 
 import static com.sdl.dxa.modules.audience.service.support.ContextClaimKey.AUDIENCE_MANAGER_CONTACT_CLAIM;
+import static com.sdl.dxa.modules.audience.service.support.ContextClaimKey.REQUEST_FULL_URL_CLAIM;
 import static com.sdl.webapp.common.util.LocalizationUtils.normalizePathToDefaults;
 import static com.sdl.webapp.common.util.LocalizationUtils.replaceRequestContextPath;
 
@@ -35,12 +37,16 @@ public class AudienceManagerServiceImpl implements AudienceManagerService {
     @Override
     public UserProfile findContact(ContactIdentifiers contactIdentifiers, String usernameKey, String passwordKey) {
         try {
-            replaceFullUrlClaim();
-            return new UserProfileImpl(new Contact(contactIdentifiers.getIdentifiers()), usernameKey, passwordKey);
+            return new UserProfileImpl(new Contact(contactIdentifiers.getIdentifiers()), usernameKey, passwordKey, contactIdentifiers);
         } catch (SQLException | IOException e) {
             log.debug("No user found for {}", contactIdentifiers, e);
             return null;
         }
+    }
+
+    @Override
+    public void prepareClaims(LoginForm form) {
+        replaceFullUrlClaim(form.getLoginFormUrl());
     }
 
     @Override
@@ -56,15 +62,15 @@ public class AudienceManagerServiceImpl implements AudienceManagerService {
     }
 
     @SneakyThrows(URISyntaxException.class)
-    private void replaceFullUrlClaim() {
+    private void replaceFullUrlClaim(String url) {
         ClaimStore claimStore = AmbientDataContext.getCurrentClaimStore();
         if (claimStore == null) {
             log.warn("There is no current ClaimStore set, cannot modify full_url needed for resolving a contact");
             return;
         }
-        URI claimFullUrl = new URI("taf:request:full_url");
+        URI claimFullUrl = new URI(REQUEST_FULL_URL_CLAIM.getKey());
         claimStore.getAllReadOnlyClaims().remove(claimFullUrl);
-        claimStore.put(claimFullUrl, replaceRequestContextPath(webRequestContext, normalizePathToDefaults(webRequestContext.getPage().getUrl())));
+        claimStore.put(claimFullUrl, replaceRequestContextPath(webRequestContext, normalizePathToDefaults(url)));
     }
 
 }

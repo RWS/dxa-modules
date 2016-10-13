@@ -84,17 +84,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.sdl.audiencemanager</groupId>
-            <artifactId>audiencemanager_profile_compatibility</artifactId>
-            <version>8.3.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sdl.audiencemanager</groupId>
-            <artifactId>audiencemanager_tracking_compatibility</artifactId>
-            <version>8.3.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>

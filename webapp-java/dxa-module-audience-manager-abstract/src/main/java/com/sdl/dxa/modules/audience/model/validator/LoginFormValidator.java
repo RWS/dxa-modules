@@ -2,10 +2,12 @@ package com.sdl.dxa.modules.audience.model.validator;
 
 
 import com.sdl.dxa.modules.audience.model.LoginForm;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
+@Component
 public class LoginFormValidator implements Validator {
 
     @Override

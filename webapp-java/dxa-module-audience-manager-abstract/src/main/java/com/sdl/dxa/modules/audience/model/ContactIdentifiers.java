@@ -1,7 +1,11 @@
 package com.sdl.dxa.modules.audience.model;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.ToString;
+
+import java.io.Serializable;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
@@ -10,8 +14,10 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
  */
 @AllArgsConstructor
 @ToString
-public class ContactIdentifiers {
+@EqualsAndHashCode
+public class ContactIdentifiers implements Serializable {
 
+    @Getter
     private String identificationKey;
 
     private String importSource;

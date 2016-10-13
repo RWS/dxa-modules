@@ -13,8 +13,8 @@ public class UserProfileImpl extends UserProfile {
 
     private transient Contact contact;
 
-    public UserProfileImpl(Contact contact, String usernameKey, String passwordKey) {
-        super(usernameKey, passwordKey);
+    public UserProfileImpl(Contact contact, String usernameKey, String passwordKey, ContactIdentifiers contactIdentifiers) {
+        super(usernameKey, passwordKey, contactIdentifiers);
         this.contact = contact;
     }
 

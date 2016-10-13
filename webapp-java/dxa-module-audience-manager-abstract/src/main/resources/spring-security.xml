@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns="http://www.springframework.org/schema/security"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/security
+           http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+    <http entry-point-ref="authenticationEntryPoint" use-expressions="true" create-session="ifRequired">
+        <intercept-url pattern="/" access="permitAll"/>
+        <intercept-url pattern="/**" access="permitAll"/>
+        <remember-me user-service-ref="audienceManagerUserService"/>
+    </http>
+
+    <beans:bean id="authenticationEntryPoint"
+                class="org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint">
+        <beans:property name="realmName" value="DXA"/>
+    </beans:bean>
+
+    <authentication-manager alias="authenticationManager">
+        <authentication-provider ref="audienceManagerAuthenticationProvider"/>
+    </authentication-manager>
+</beans:beans>

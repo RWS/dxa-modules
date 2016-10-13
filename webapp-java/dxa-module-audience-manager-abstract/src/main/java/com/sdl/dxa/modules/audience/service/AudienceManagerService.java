@@ -1,6 +1,7 @@
 package com.sdl.dxa.modules.audience.service;
 
 import com.sdl.dxa.modules.audience.model.ContactIdentifiers;
+import com.sdl.dxa.modules.audience.model.LoginForm;
 import com.sdl.dxa.modules.audience.model.UserProfile;
 import org.jetbrains.annotations.Nullable;
 
@@ -21,6 +22,13 @@ public interface AudienceManagerService {
      */
     @Nullable
     UserProfile findContact(ContactIdentifiers contactIdentifiers, String usernameKey, String passwordKey);
+
+    /**
+     * Prepares claims if needed used given form data. Used to workaround DXA-specific requests without '.html'.
+     *
+     * @param form login form data
+     */
+    void prepareClaims(LoginForm form);
 
     /**
      * Logs user with {@code id} in with Ambient Context.
