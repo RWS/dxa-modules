@@ -25,6 +25,7 @@
     <include src="global/server/_config.xml" />
     <include src="models/_config.xml" />
     <include src="resources/_config.xml" />
+    <include src="utils/_config.xml" />
     <!-- Main resources -->
     <resourceGroups>
         <resourceGroup name="Sdl.DitaDelivery">

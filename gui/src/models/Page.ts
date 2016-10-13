@@ -4,6 +4,7 @@ module Sdl.DitaDelivery.Models {
 
     import IPage = Server.Models.IPage;
     import IWebRequest = SDL.Client.Net.IWebRequest;
+    import TcmIdUtils = Utils.TcmId;
 
     /**
      * Page info
@@ -27,16 +28,19 @@ module Sdl.DitaDelivery.Models {
      */
     export class Page extends SDL.Client.Models.LoadableObject {
 
+        private _publicationId: string;
         private _pageId: string;
         private _page: IPage;
 
         /**
          * Creates an instance of Page.
          *
-         * @param {string} pageId
+         * @param {string} publicationId Publication id
+         * @param {string} pageId Page id
          */
-        constructor(pageId: string) {
+        constructor(publicationId: string, pageId: string) {
             super();
+            this._publicationId = publicationId;
             this._pageId = pageId;
         }
 
@@ -54,7 +58,7 @@ module Sdl.DitaDelivery.Models {
 
         /* Overloads */
         protected _executeLoad(reload: boolean): void {
-            const url = Routing.getAbsolutePath(`gui/mocks/page-${this._stripId(this._pageId)}.json`);
+            const url = Routing.getAbsolutePath(`gui/mocks/page-${TcmIdUtils.removeNamespace(this._pageId)}.json`);
             SDL.Client.Net.getRequest(url,
                 this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
         }
@@ -69,13 +73,6 @@ module Sdl.DitaDelivery.Models {
             const p = this.properties;
             p.loading = false;
             this.fireEvent("loadfailed", { error: error });
-        }
-
-        private _stripId(id: string): string {
-            if (id.indexOf("ish:") !== -1) {
-                return id.substring(4);
-            }
-            return id;
         }
     }
 

@@ -21,6 +21,9 @@ module Sdl.DitaDelivery.Tests {
                     DataStore.getPublicationTitle(publicationId).then(title => {
                         expect(title).toBe("MP330");
                         done();
+                    }).catch(error => {
+                        fail(`Unexpected error: ${error}`);
+                        done();
                     });
                 });
             });

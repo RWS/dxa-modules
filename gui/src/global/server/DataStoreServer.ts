@@ -54,7 +54,7 @@ module Sdl.DitaDelivery {
          * Get the list of publications
          *
          * @returns {Promise<IPublication[]>} promise to return the items
-         * 
+         *
          * @memberOf DataStoreServer
          */
         public getPublications(): Promise<IPublication[]> {
@@ -69,23 +69,25 @@ module Sdl.DitaDelivery {
         /**
          * Get the root objects of the sitemap
          *
-         * @returns {Promise<ISitemapItem[]>} promise to return the items
-         * 
+         * @param {string} publicationId Publication Id
+         * @returns {Promise<ISitemapItem[]>} Promise to return the items
+         *
          * @memberOf DataStoreServer
          */
-        public getSitemapRoot(): Promise<ISitemapItem[]> {
-            return this.getSitemapItems("root");
+        public getSitemapRoot(publicationId: string): Promise<ISitemapItem[]> {
+            return this.getSitemapItems(publicationId);
         }
 
         /**
          * Get the site map items for a parent
          *
-         * @param {string} parentId
-         * @returns {Promise<ISitemapItem[]>} promise to return the items
-         * 
+         * @param {string} publicationId Publication Id
+         * @param {string} [parentId] The parent id
+         * @returns {Promise<ISitemapItem[]>} Promise to return the items
+         *
          * @memberOf DataStoreServer
          */
-        public getSitemapItems(parentId: string): Promise<ISitemapItem[]> {
+        public getSitemapItems(publicationId: string, parentId?: string): Promise<ISitemapItem[]> {
             const { error, children } = this._mockDataToc;
             if (error) {
                 return Promise.reject(error);
@@ -97,12 +99,13 @@ module Sdl.DitaDelivery {
         /**
          * Get page information
          *
-         * @param {string} pageId
-         * @returns {Promise<IPageInfo>} promise to returns the content
-         * 
+         * @param {string} publicationId Publication Id
+         * @param {string} pageId The page id
+         * @returns {Promise<IPageInfo>} Promise to return the the content
+         *
          * @memberOf DataStoreServer
          */
-        public getPageInfo(pageId: string): Promise<IPageInfo> {
+        public getPageInfo(publicationId: string, pageId: string): Promise<IPageInfo> {
             const { error, info } = this._mockDataPage;
             if (error) {
                 return Promise.reject(error);
@@ -116,7 +119,7 @@ module Sdl.DitaDelivery {
          *
          * @param {string} publicationId
          * @returns {Promise<string>} promise to returns the title
-         * 
+         *
          * @memberOf DataStoreServer
          */
         public getPublicationTitle(publicationId: string): Promise<string> {
@@ -131,12 +134,13 @@ module Sdl.DitaDelivery {
         /**
          * Get the full path for a sitemap item within a sitemap
          *
+         * @param {string} publicationId Publication Id
          * @param {string} pageId The page id
-         * @returns {Promise<string[]>} promise to return the full path
-         * 
+         * @returns {Promise<string[]>} Promise to return the full path
+         *
          * @memberOf DataStoreServer
          */
-        public getSitemapPath(pageId: string): Promise<string[]> {
+        public getSitemapPath(publicationId: string, pageId: string): Promise<string[]> {
             return new Promise((resolve: (path?: string[]) => void, reject: (error: string | null) => void) => {
                 //
             });

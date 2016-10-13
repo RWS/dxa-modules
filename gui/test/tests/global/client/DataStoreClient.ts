@@ -10,6 +10,7 @@ module Sdl.DitaDelivery.Tests {
 
         public runTests(): void {
             const DataStore = new DataStoreClient();
+            const publicationId = "ish:39137-1-1";
 
             describe(`Data Store tests (Toc).`, (): void => {
 
@@ -19,46 +20,51 @@ module Sdl.DitaDelivery.Tests {
                 });
 
                 it("can get site map items for the root", (done: () => void): void => {
-                    DataStore.getSitemapRoot()
-                        .then(
-                        items => {
+                    DataStore.getSitemapRoot(publicationId)
+                        .then(items => {
                             expect(items).toBeDefined();
                             if (items) {
                                 expect(items.length).toBe(1);
                             }
+                            done();
+                        }).catch(error => {
+                            fail(`Unexpected error: ${error}`);
                             done();
                         });
                 });
 
                 it("can get site map items from memory", (done: () => void): void => {
                     const spy = spyOn(SDL.Client.Net, "getRequest").and.callThrough();
-                    DataStore.getSitemapRoot()
-                        .then(
-                        items => {
+                    DataStore.getSitemapRoot(publicationId)
+                        .then(items => {
                             expect(items).toBeDefined();
                             if (items) {
                                 expect(items.length).toBe(1);
                             }
                             expect(spy).not.toHaveBeenCalled();
                             done();
+                        }).catch(error => {
+                            fail(`Unexpected error: ${error}`);
+                            done();
                         });
                 });
 
                 it("can get site map items for a child", (done: () => void): void => {
                     const getChildren = (parentId: string): void => {
-                        DataStore.getSitemapItems(parentId)
-                            .then(
-                            items => {
+                        DataStore.getSitemapItems(publicationId, parentId)
+                            .then(items => {
                                 expect(items).toBeDefined();
                                 if (items) {
                                     expect(items.length).toBe(9);
                                 }
                                 done();
+                            }).catch(error => {
+                                fail(`Unexpected error: ${error}`);
+                                done();
                             });
                     };
-                    DataStore.getSitemapRoot()
-                        .then(
-                        items => {
+                    DataStore.getSitemapRoot(publicationId)
+                        .then(items => {
                             expect(items).toBeDefined();
                             if (items) {
                                 expect(items.length).toBe(1);
@@ -68,13 +74,19 @@ module Sdl.DitaDelivery.Tests {
                                     getChildren(firstItem.Id);
                                 }
                             }
+                        }).catch(error => {
+                            fail(`Unexpected error: ${error}`);
+                            done();
                         });
                 });
 
                 it("returns a proper error when a parent id does not exist", (done: () => void): void => {
-                    DataStore.getSitemapItems("does-not-exist")
-                        .catch(
-                        error => {
+                    DataStore.getSitemapItems(publicationId, "does-not-exist")
+                        .then(() => {
+                            fail("An error was expected.");
+                            done();
+                        })
+                        .catch(error => {
                             expect(error).toContain("does-not-exist");
                             done();
                         });
@@ -90,7 +102,7 @@ module Sdl.DitaDelivery.Tests {
 
                 it("can get page info", (done: () => void): void => {
                     const pageId = "ish:39137-6222-16";
-                    DataStore.getPageInfo(pageId).then(pageInfo => {
+                    DataStore.getPageInfo(publicationId, pageId).then(pageInfo => {
                         expect(pageInfo).toBeDefined();
                         if (pageInfo) {
                             expect(pageInfo.title).toBe("getting started");
@@ -101,13 +113,16 @@ module Sdl.DitaDelivery.Tests {
                             expect((element.children[1] as HTMLElement).children.length).toBe(2);
                         }
                         done();
+                    }).catch(error => {
+                        fail(`Unexpected error: ${error}`);
+                        done();
                     });
                 });
 
                 it("can get page info from memory", (done: () => void): void => {
                     const pageId = "ish:39137-6222-16";
                     const spy = spyOn(SDL.Client.Net, "getRequest").and.callThrough();
-                    DataStore.getPageInfo(pageId).then(pageInfo => {
+                    DataStore.getPageInfo(publicationId, pageId).then(pageInfo => {
                         expect(pageInfo).toBeDefined();
                         if (pageInfo) {
                             expect(pageInfo.title).toBe("getting started");
@@ -115,11 +130,17 @@ module Sdl.DitaDelivery.Tests {
                             expect(spy).not.toHaveBeenCalled();
                         }
                         done();
+                    }).catch(error => {
+                        fail(`Unexpected error: ${error}`);
+                        done();
                     });
                 });
 
                 it("returns a proper error when a page does not exist", (done: () => void): void => {
-                    DataStore.getPageInfo("does-not-exist").catch(error => {
+                    DataStore.getPageInfo(publicationId, "does-not-exist").then(() => {
+                        fail("An error was expected.");
+                        done();
+                    }).catch(error => {
                         expect(error).toContain("does-not-exist");
                         done();
                     });
@@ -141,7 +162,10 @@ module Sdl.DitaDelivery.Tests {
                         onFailure(failMessage, null);
                     };
                     spyOn(SDL.Client.Net, "getRequest").and.callFake(fakeGetRequest);
-                    DataStore.getPublications().catch(error => {
+                    DataStore.getPublications().then(() => {
+                        fail("An error was expected.");
+                        done();
+                    }).catch(error => {
                         expect(error).toBe(failMessage);
                         done();
                     });
@@ -154,7 +178,10 @@ module Sdl.DitaDelivery.Tests {
                         onFailure(failMessage, null);
                     };
                     spyOn(SDL.Client.Net, "getRequest").and.callFake(fakeGetRequest);
-                    DataStore.getPublicationTitle(failMessage).catch(error => {
+                    DataStore.getPublicationTitle(failMessage).then(() => {
+                        fail("An error was expected.");
+                        done();
+                    }).catch(error => {
                         expect(error).toBe(failMessage);
                         done();
                     });
@@ -167,6 +194,9 @@ module Sdl.DitaDelivery.Tests {
                             expect(publications.length).toBe(1);
                             expect(publications[0].Title).toBe("MP330");
                         }
+                        done();
+                    }).catch(error => {
+                        fail(`Unexpected error: ${error}`);
                         done();
                     });
                 });
@@ -181,29 +211,39 @@ module Sdl.DitaDelivery.Tests {
                             expect(spy).not.toHaveBeenCalled();
                         }
                         done();
+                    }).catch(error => {
+                        fail(`Unexpected error: ${error}`);
+                        done();
                     });
                 });
 
                 it("can get a publication title", (done: () => void): void => {
-                    const publicationId = "ish:39137-1-1";
                     DataStore.getPublicationTitle(publicationId).then(title => {
                         expect(title).toBe("MP330");
+                        done();
+                    }).catch(error => {
+                        fail(`Unexpected error: ${error}`);
                         done();
                     });
                 });
 
                 it("can get a publication title from memory", (done: () => void): void => {
-                    const publicationId = "ish:39137-1-1";
                     const spy = spyOn(SDL.Client.Net, "getRequest").and.callThrough();
                     DataStore.getPublicationTitle(publicationId).then(title => {
                         expect(title).toBe("MP330");
                         expect(spy).not.toHaveBeenCalled();
                         done();
+                    }).catch(error => {
+                        fail(`Unexpected error: ${error}`);
+                        done();
                     });
                 });
 
                 it("returns a proper error when a publication title cannot be resolved", (done: () => void): void => {
-                    DataStore.getPublicationTitle("does-not-exist").catch(error => {
+                    DataStore.getPublicationTitle("does-not-exist").then(() => {
+                        fail("An error was expected.");
+                        done();
+                    }).catch(error => {
                         expect(error).toContain("does-not-exist");
                         done();
                     });
@@ -220,11 +260,14 @@ module Sdl.DitaDelivery.Tests {
 
                 it("can get a path for a page", (done: () => void): void => {
                     const pageId = "ish:39137-6146-16";
-                    DataStore.getSitemapPath(pageId).then(path => {
+                    DataStore.getSitemapPath(publicationId, pageId).then(path => {
                         expect(path).toBeDefined();
                         if (path) {
                             expect(path.length).toBe(3);
                         }
+                        done();
+                    }).catch(error => {
+                        fail(`Unexpected error: ${error}`);
                         done();
                     });
                 });
@@ -232,18 +275,24 @@ module Sdl.DitaDelivery.Tests {
                 it("can get a path for a page from memory", (done: () => void): void => {
                     const pageId = "ish:39137-6146-16";
                     const spy = spyOn(SDL.Client.Net, "getRequest").and.callThrough();
-                    DataStore.getSitemapPath(pageId).then(path => {
+                    DataStore.getSitemapPath(publicationId, pageId).then(path => {
                         expect(path).toBeDefined();
                         if (path) {
                             expect(path.length).toBe(3);
                         }
                         expect(spy).not.toHaveBeenCalled();
                         done();
+                    }).catch(error => {
+                        fail(`Unexpected error: ${error}`);
+                        done();
                     });
                 });
 
                 it("returns a proper error when a page does not exist", (done: () => void): void => {
-                    DataStore.getSitemapPath("does-not-exist").catch(error => {
+                    DataStore.getSitemapPath(publicationId, "does-not-exist").then(() => {
+                        fail("An error was expected.");
+                        done();
+                    }).catch(error => {
                         expect(error).toContain("does-not-exist");
                         done();
                     });

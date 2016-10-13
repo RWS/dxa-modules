@@ -12,6 +12,7 @@
             </files>
             <dependencies>
                 <dependency name="SDL.Client.Models.Classes" />
+                <dependency name="Sdl.DitaDelivery.Utils" />
             </dependencies>
         </resourceGroup>
     </resourceGroups>

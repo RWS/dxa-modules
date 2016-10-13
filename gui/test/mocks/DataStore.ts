@@ -54,14 +54,14 @@ module Sdl.DitaDelivery.Tests.Mocks {
             });
         }
 
-        public getSitemapRoot(): Promise<ISitemapItem[]> {
-            return this.getSitemapItems("root");
+        public getSitemapRoot(publicationId: string): Promise<ISitemapItem[]> {
+            return this.getSitemapItems(publicationId);
         }
 
-        public getSitemapItems(parentId: string): Promise<ISitemapItem[]> {
+        public getSitemapItems(publicationId: string, parentId?: string): Promise<ISitemapItem[]> {
             const { error, items } = this._mockDataToc;
             if (fakeDelay) {
-            return new Promise((resolve: (items?: ISitemapItem[]) => void, reject: (error: string | null) => void) => {
+                return new Promise((resolve: (items?: ISitemapItem[]) => void, reject: (error: string | null) => void) => {
                     setTimeout((): void => {
                         if (error) {
                             reject(error);
@@ -80,10 +80,10 @@ module Sdl.DitaDelivery.Tests.Mocks {
             }
         }
 
-        public getPageInfo(pageId: string): Promise<IPageInfo> {
+        public getPageInfo(publicationId: string, pageId: string): Promise<IPageInfo> {
             const { error, info } = this._mockDataPage;
             if (fakeDelay) {
-            return new Promise((resolve: (info?: IPageInfo) => void, reject: (error: string | null) => void) => {
+                return new Promise((resolve: (info?: IPageInfo) => void, reject: (error: string | null) => void) => {
                     setTimeout((): void => {
                         if (error) {
                             reject(error);
@@ -114,7 +114,7 @@ module Sdl.DitaDelivery.Tests.Mocks {
                             resolve(title);
                         }
                     }, DELAY);
-            });
+                });
             } else {
                 if (error) {
                     return Promise.reject(error);
@@ -124,7 +124,7 @@ module Sdl.DitaDelivery.Tests.Mocks {
             }
         }
 
-        public getSitemapPath(pageId: string): Promise<string[]> {
+        public getSitemapPath(publicationId: string, pageId: string): Promise<string[]> {
             return new Promise((resolve: (path?: string[]) => void, reject: (error: string | null) => void) => {
                 //
             });

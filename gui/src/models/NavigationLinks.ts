@@ -4,6 +4,7 @@ module Sdl.DitaDelivery.Models {
 
     import IWebRequest = SDL.Client.Net.IWebRequest;
     import ISitemapItem = Server.Models.ISitemapItem;
+    import TcmIdUtils = Utils.TcmId;
 
     /* tslint:disable-next-line */
     eval(SDL.Client.Types.OO.enableCustomInheritance);
@@ -47,7 +48,7 @@ module Sdl.DitaDelivery.Models {
 
         /* Overloads */
         protected _executeLoad(reload: boolean): void {
-            const url = Routing.getAbsolutePath(`gui/mocks/navigation-${this._stripId(this._taxonomyId)}-${this._stripId(this._pageId)}.json`);
+            const url = Routing.getAbsolutePath(`gui/mocks/navigation-${TcmIdUtils.removeNamespace(this._taxonomyId)}-${TcmIdUtils.removeNamespace(this._pageId)}.json`);
             SDL.Client.Net.getRequest(url,
                 this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
         }
@@ -62,13 +63,6 @@ module Sdl.DitaDelivery.Models {
             const p = this.properties;
             p.loading = false;
             this.fireEvent("loadfailed", { error: error });
-        }
-
-        private _stripId(id: string): string {
-            if (id.indexOf("ish:") !== -1) {
-                return id.substring(4);
-            }
-            return id;
         }
 
         private _calculatePath(navigationLinks: ISitemapItem): string[] {

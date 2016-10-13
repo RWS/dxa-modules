@@ -4,6 +4,7 @@ module Sdl.DitaDelivery.Models {
 
     import ISitemapItem = Server.Models.ISitemapItem;
     import IWebRequest = SDL.Client.Net.IWebRequest;
+    import TcmIdUtils = Utils.TcmId;
 
     /* tslint:disable-next-line */
     eval(SDL.Client.Types.OO.enableCustomInheritance);
@@ -16,16 +17,19 @@ module Sdl.DitaDelivery.Models {
      */
     export class Toc extends SDL.Client.Models.LoadableObject {
 
+        private _publicationId: string;
         private _parentId: string;
         private _sitemapItems: ISitemapItem[];
 
         /**
          * Creates an instance of Toc.
          *
-         * @param {string} parentId
+         * @param {string} publicationId Publication id
+         * @param {string} parentId Parent sitemap item id, for the root item pass "root" as the parent id.
          */
-        constructor(parentId: string) {
+        constructor(publicationId: string, parentId: string) {
             super();
+            this._publicationId = publicationId;
             this._parentId = parentId;
         }
 
@@ -40,8 +44,17 @@ module Sdl.DitaDelivery.Models {
 
         /* Overloads */
         protected _executeLoad(reload: boolean): void {
-            const url = Routing.getAbsolutePath(`gui/mocks/toc-${this._stripId(this._parentId)}.json`);
-            SDL.Client.Net.getRequest(url, this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
+            const taxonomyId = TcmIdUtils.getTaxonomyId(this._publicationId);
+
+            if (this._parentId === "root" && !taxonomyId) {
+                this._onLoadFailed(Localization.formatMessage("error.path.not.found", [this._parentId, this._publicationId]));
+            } else {
+                const parentPart = this._parentId !== "root" ?
+                    TcmIdUtils.removeNamespace(this._parentId) :
+                    `root-${TcmIdUtils.removeNamespace(taxonomyId || "")}`;
+                const url = Routing.getAbsolutePath(`gui/mocks/toc-${parentPart}.json`);
+                SDL.Client.Net.getRequest(url, this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
+            }
         }
 
         protected _processLoadResult(result: string, webRequest: IWebRequest): void {
@@ -50,17 +63,10 @@ module Sdl.DitaDelivery.Models {
             super._processLoadResult(result, webRequest);
         }
 
-        protected _onLoadFailed(error: string, webRequest: IWebRequest): void {
+        protected _onLoadFailed(error: string, webRequest?: IWebRequest): void {
             const p = this.properties;
             p.loading = false;
             this.fireEvent("loadfailed", { error: error });
-        }
-
-        private _stripId(id: string): string {
-            if (id.indexOf("ish:") !== -1) {
-                return id.substring(4);
-            }
-            return id;
         }
     }
 

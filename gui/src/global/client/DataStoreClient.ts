@@ -2,12 +2,14 @@
 /// <reference path="../../models/Publications.ts" />
 /// <reference path="../../models/Toc.ts" />
 /// <reference path="../../models/NavigationLinks.ts" />
+/// <reference path="../../utils/TcmId.ts" />
 
 module Sdl.DitaDelivery {
 
     import ISitemapItem = Server.Models.ISitemapItem;
     import IPageInfo = Sdl.DitaDelivery.Models.IPageInfo;
     import IPublication = Server.Models.IPublication;
+    import TcmIdUtils = Utils.TcmId;
 
     /**
      * Data store, interacts with the models to fetch the required data.
@@ -31,27 +33,27 @@ module Sdl.DitaDelivery {
          *
          * @private
          * @static
-         * @type {{ [parentId:string]: Models.Toc }}
+         * @type {{ [publicationId: string]: { [parentId: string]: Models.Toc } }}
          */
-        private static TocModels: { [parentId: string]: Models.Toc };
+        private static TocModels: { [publicationId: string]: { [parentId: string]: Models.Toc } };
 
         /**
          * Page models
          *
          * @private
          * @static
-         * @type {{ [pageId:string]: Models.Page }}
+         * @type {{ [publicationId: string]: {  [pageId: string]: Models.Page } }}
          */
-        private static PageModels: { [pageId: string]: Models.Page };
+        private static PageModels: { [publicationId: string]: { [pageId: string]: Models.Page } };
 
         /**
          * Navigation links models
          *
          * @private
          * @static
-         * @type {{ [pageId: string]: Models.NavigationLinks }}
+         * @type {{ [publicationId: string]: { [pageId: string]: Models.NavigationLinks } }}
          */
-        private static NavigationLinksModels: { [pageId: string]: Models.NavigationLinks };
+        private static NavigationLinksModels: { [publicationId: string]: { [pageId: string]: Models.NavigationLinks } };
 
         /**
          * Get the list of publications
@@ -90,24 +92,26 @@ module Sdl.DitaDelivery {
         /**
          * Get the root objects of the sitemap
          *
+         * @param {string} publicationId Publication Id
          * @returns {Promise<ISitemapItem[]>} Promise to return items
          *
          * @memberOf DataStoreClient
          */
-        public getSitemapRoot(): Promise<ISitemapItem[]> {
-            return this.getSitemapItems("root");
+        public getSitemapRoot(publicationId: string): Promise<ISitemapItem[]> {
+            return this.getSitemapItems(publicationId);
         }
 
         /**
          * Get the site map items for a parent
          *
-         * @param {string} parentId The parent Id
+         * @param {string} publicationId Publication Id
+         * @param {string} [parentId] The parent Id
          * @returns {Promise<ISitemapItem[]>} Promise to return Items
          *
          * @memberOf DataStoreClient
          */
-        public getSitemapItems(parentId: string): Promise<ISitemapItem[]> {
-            const toc = this.getTocModel(parentId);
+        public getSitemapItems(publicationId: string, parentId?: string): Promise<ISitemapItem[]> {
+            const toc = this.getTocModel(publicationId, parentId || "root");
 
             return new Promise((resolve: (items?: ISitemapItem[]) => void, reject: (error: string | null) => void) => {
                 if (toc.isLoaded()) {
@@ -137,13 +141,14 @@ module Sdl.DitaDelivery {
         /**
          * Get page information
          *
+         * @param {string} publicationId Publication Id
          * @param {string} pageId The page Id
          * @returns {Promise<IPageInfo>} Promise to return the content
          *
          * @memberOf DataStoreClient
          */
-        public getPageInfo(pageId: string): Promise<IPageInfo> {
-            const page = this.getPageModel(pageId);
+        public getPageInfo(publicationId: string, pageId: string): Promise<IPageInfo> {
+            const page = this.getPageModel(publicationId, pageId);
             return new Promise((resolve: (info?: IPageInfo) => void, reject: (error: string | null) => void) => {
                 if (page.isLoaded()) {
                     resolve(page.getPageInfo());
@@ -190,7 +195,7 @@ module Sdl.DitaDelivery {
                             }
                         }
 
-                        reject(Localization.formatMessage("datastore.publication.not.found", [publicationId]));
+                        reject(Localization.formatMessage("error.publication.not.found", [publicationId]));
                     },
                     error => {
                         reject(error);
@@ -201,13 +206,17 @@ module Sdl.DitaDelivery {
         /**
          * Get the full path for a sitemap item within a sitemap
          *
+         * @param {string} publicationId Publication Id
          * @param {string} pageId The page id
          * @returns {Promise<string[]>} Promise to return the full path
          *
          * @memberOf DataStoreClient
          */
-        public getSitemapPath(pageId: string): Promise<string[]> {
-            const navigationLinks = this.getNavigationLinksModel(pageId);
+        public getSitemapPath(publicationId: string, pageId: string): Promise<string[]> {
+            const navigationLinks = this.getNavigationLinksModel(publicationId, pageId);
+            if (!navigationLinks) {
+                return Promise.reject(Localization.formatMessage("error.path.not.found", [pageId, publicationId]));
+            }
 
             return new Promise((resolve: (path?: string[]) => void, reject: (error: string | null) => void) => {
                 if (navigationLinks.isLoaded()) {
@@ -236,24 +245,30 @@ module Sdl.DitaDelivery {
             });
         }
 
-        private getTocModel(parentId: string): Models.Toc {
+        private getTocModel(publicationId: string, parentId: string): Models.Toc {
             if (!DataStoreClient.TocModels) {
                 DataStoreClient.TocModels = {};
             }
-            if (!DataStoreClient.TocModels[parentId]) {
-                DataStoreClient.TocModels[parentId] = new Models.Toc(parentId);
+            if (!DataStoreClient.TocModels[publicationId]) {
+                DataStoreClient.TocModels[publicationId] = {};
             }
-            return DataStoreClient.TocModels[parentId];
+            if (!DataStoreClient.TocModels[publicationId][parentId]) {
+                DataStoreClient.TocModels[publicationId][parentId] = new Models.Toc(publicationId, parentId);
+            }
+            return DataStoreClient.TocModels[publicationId][parentId];
         }
 
-        private getPageModel(pageId: string): Models.Page {
+        private getPageModel(publicationId: string, pageId: string): Models.Page {
             if (!DataStoreClient.PageModels) {
                 DataStoreClient.PageModels = {};
             }
-            if (!DataStoreClient.PageModels[pageId]) {
-                DataStoreClient.PageModels[pageId] = new Models.Page(pageId);
+            if (!DataStoreClient.PageModels[publicationId]) {
+                DataStoreClient.PageModels[publicationId] = {};
             }
-            return DataStoreClient.PageModels[pageId];
+            if (!DataStoreClient.PageModels[publicationId][pageId]) {
+                DataStoreClient.PageModels[publicationId][pageId] = new Models.Page(publicationId, pageId);
+            }
+            return DataStoreClient.PageModels[publicationId][pageId];
         }
 
         private getPublicationsModel(): Models.Publications {
@@ -263,15 +278,22 @@ module Sdl.DitaDelivery {
             return DataStoreClient.PublicationsModel;
         }
 
-        private getNavigationLinksModel(pageId: string): Models.NavigationLinks {
+        private getNavigationLinksModel(publicationId: string, pageId: string): Models.NavigationLinks | undefined {
             if (!DataStoreClient.NavigationLinksModels) {
                 DataStoreClient.NavigationLinksModels = {};
             }
-            if (!DataStoreClient.NavigationLinksModels[pageId]) {
-                // TODO: calculate taxonomy id base on page id
-                DataStoreClient.NavigationLinksModels[pageId] = new Models.NavigationLinks("39137-1-512", pageId);
+            if (!DataStoreClient.NavigationLinksModels[publicationId]) {
+                DataStoreClient.NavigationLinksModels[publicationId] = {};
             }
-            return DataStoreClient.NavigationLinksModels[pageId];
+            if (!DataStoreClient.NavigationLinksModels[publicationId][pageId]) {
+                // Calculate taxonomy id based on publication id
+                const taxonomyId = TcmIdUtils.getTaxonomyId(publicationId);
+                if (!taxonomyId) {
+                    return undefined;
+                }
+                DataStoreClient.NavigationLinksModels[publicationId][pageId] = new Models.NavigationLinks(taxonomyId, pageId);
+            }
+            return DataStoreClient.NavigationLinksModels[publicationId][pageId];
         }
 
     }

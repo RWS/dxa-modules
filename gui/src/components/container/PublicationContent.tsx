@@ -111,9 +111,10 @@ module Sdl.DitaDelivery.Components {
          * Invoked once, both on the client and server, immediately before the initial rendering occurs.
          */
         public componentWillMount(): void {
+            const { publicationId } = this.props;
             const getRootItems = (path?: string[]): void => {
                 // Get the data for the Toc
-                DataStore.getSitemapRoot().then(
+                DataStore.getSitemapRoot(publicationId).then(
                     items => {
                         if (!this._isUnmounted) {
                             this._toc.rootItems = items;
@@ -170,6 +171,7 @@ module Sdl.DitaDelivery.Components {
          * @param {IPublicationContentState} nextState Next state
          */
         public componentWillUpdate(nextProps: IPublicationContentProps, nextState: IPublicationContentState): void {
+            const { publicationId } = this.props;
             const { selectedTocItem, isPageLoading } = this.state;
             const currentUrl = selectedTocItem ? selectedTocItem.Url : null;
             const nextUrl = nextState.selectedTocItem ? nextState.selectedTocItem.Url : null;
@@ -177,7 +179,7 @@ module Sdl.DitaDelivery.Components {
                 this._page.content = `<h1 class="title topictitle1">${nextState.selectedTocItem.Title}</h1>`;
             }
             if (nextUrl && (isPageLoading || currentUrl !== nextUrl)) {
-                DataStore.getPageInfo(nextUrl).then(
+                DataStore.getPageInfo(publicationId, nextUrl).then(
                     this._onPageContentRetrieved.bind(this),
                     this._onPageContentRetrievFailed.bind(this));
             }
@@ -192,6 +194,7 @@ module Sdl.DitaDelivery.Components {
             const { isPageLoading, activeTocItemPath } = this.state;
             const { content, error} = this._page;
             const { rootItems } = this._toc;
+            const { publicationId } = this.props;
             const tocError = this._toc.error;
 
             return (
@@ -199,7 +202,9 @@ module Sdl.DitaDelivery.Components {
                     <Toc
                         activeItemPath={activeTocItemPath}
                         rootItems={rootItems}
-                        loadChildItems={DataStore.getSitemapItems.bind(DataStore)}
+                        loadChildItems={(parentId:string): Promise<ISitemapItem[]> => {
+                            return DataStore.getSitemapItems(publicationId, parentId);
+                        }}
                         onSelectionChanged={this._onTocSelectionChanged.bind(this)}
                         error={tocError} />
                     <Page
@@ -263,7 +268,8 @@ module Sdl.DitaDelivery.Components {
         }
 
         private _getActiveSitemapPath(pageId: string, done: (path: string[]) => void): void {
-            DataStore.getSitemapPath(pageId).then(
+            const { publicationId } = this.props;
+            DataStore.getSitemapPath(publicationId, pageId).then(
                 path => {
                     if (!this._isUnmounted) {
                         done(path || []);
