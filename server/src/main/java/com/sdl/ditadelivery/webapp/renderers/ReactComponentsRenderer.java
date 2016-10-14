@@ -15,27 +15,14 @@ import java.io.Reader;
 @Slf4j
 public class ReactComponentsRenderer {
 
-    /**
-     * Render a page
-     *
-     * @param path Page path.
-     * @return Html string with the rendered content.
-     */
-    public String renderPage(String path) {
-        try {
-            Object html = engineHolder.get().invokeFunction("renderToString", path);
-            return String.valueOf(html);
-        } catch (Exception e) {
-            String message = "Failed to render react component";
-            log.error(message, e);
-            throw new IllegalStateException(message, e);
-        }
-    }
+    private static NashornScriptEngine nashornScriptEngine = null;
 
-    private ThreadLocal<NashornScriptEngine> engineHolder = new ThreadLocal<NashornScriptEngine>() {
-        @Override
-        protected NashornScriptEngine initialValue() {
-            NashornScriptEngine nashornScriptEngine = (NashornScriptEngine) new ScriptEngineManager().getEngineByName("nashorn");
+    /**
+     * Create an instance of the React Components Renderer
+     */
+    public ReactComponentsRenderer() {
+        if (ReactComponentsRenderer.nashornScriptEngine == null) {
+            ReactComponentsRenderer.nashornScriptEngine = (NashornScriptEngine) new ScriptEngineManager().getEngineByName("nashorn");
             try {
                 nashornScriptEngine.eval(read("gui/lib/react/react.js"));
                 nashornScriptEngine.eval(read("gui/lib/react-dom/react-dom-server.js"));
@@ -49,9 +36,25 @@ public class ReactComponentsRenderer {
                 log.error("Failed to initialize Nashorn Script Engine", e);
                 throw new RuntimeException(e);
             }
-            return nashornScriptEngine;
         }
-    };
+    }
+
+    /**
+     * Render a page
+     *
+     * @param path Page path.
+     * @return Html string with the rendered content.
+     */
+    public String renderPage(String path) {
+        try {
+            Object html = ReactComponentsRenderer.nashornScriptEngine.invokeFunction("renderToString", path);
+            return String.valueOf(html);
+        } catch (Exception e) {
+            String message = "Failed to render react component";
+            log.error(message, e);
+            throw new IllegalStateException(message, e);
+        }
+    }
 
     private Reader read(String path) {
         InputStream in = getClass().getClassLoader().getResourceAsStream(path);
