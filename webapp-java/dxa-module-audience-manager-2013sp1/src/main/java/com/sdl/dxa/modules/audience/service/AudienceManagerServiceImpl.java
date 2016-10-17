@@ -5,6 +5,7 @@ import com.sdl.dxa.modules.audience.model.LoginForm;
 import com.sdl.dxa.modules.audience.model.UserProfile;
 import com.sdl.dxa.modules.audience.model.UserProfileImpl;
 import com.sdl.webapp.common.api.WebRequestContext;
+import com.sdl.webapp.common.util.LocalizationUtils;
 import com.tridion.ambientdata.AmbientDataContext;
 import com.tridion.ambientdata.claimstore.ClaimStore;
 import com.tridion.marketingsolution.profile.Contact;
@@ -14,9 +15,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.Set;
 
 import static com.sdl.dxa.modules.audience.service.support.ContextClaimKey.AUDIENCE_MANAGER_CONTACT_CLAIM;
 import static com.sdl.dxa.modules.audience.service.support.ContextClaimKey.REQUEST_FULL_URL_CLAIM;
@@ -69,8 +74,41 @@ public class AudienceManagerServiceImpl implements AudienceManagerService {
             return;
         }
         URI claimFullUrl = new URI(REQUEST_FULL_URL_CLAIM.getKey());
-        claimStore.getAllReadOnlyClaims().remove(claimFullUrl);
-        claimStore.put(claimFullUrl, replaceRequestContextPath(webRequestContext, normalizePathToDefaults(url)));
+
+        String fullUrl = (String) claimStore.get(claimFullUrl);
+        if (LocalizationUtils.hasDefaultExtension(fullUrl)) {
+            log.trace("Url {} already has default extension, no need to replace it", fullUrl);
+            return;
+        }
+
+        log.debug("Url {} has no default extension, so we need to hack the claim to be able to resolve the contact", fullUrl);
+        Set<URI> readOnlyClaims = claimStore.getAllReadOnlyClaims();
+        Set<URI> readOnlyHacked = new HashSet<>();
+        for (URI uri : readOnlyClaims) {
+            if (!uri.equals(claimFullUrl)) {
+                readOnlyHacked.add(uri);
+            }
+        }
+
+        Field field;
+        try {
+            field = ClaimStore.class.getDeclaredField("readOnly");
+            field.setAccessible(true);
+
+            Field modifiers = Field.class.getDeclaredField("modifiers");
+            modifiers.setAccessible(true);
+            modifiers.setInt(field, field.getModifiers() & ~Modifier.FINAL);
+
+            field.set(claimStore, readOnlyHacked);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            log.warn("DXA attempted to set ClaimStore read-only value for Full Url but failed. " +
+                    "Most probably we won't be able to resolve contact", e);
+            return;
+        }
+
+        String newUrl = replaceRequestContextPath(webRequestContext, normalizePathToDefaults(url));
+        claimStore.put(claimFullUrl, newUrl);
+        log.trace("Set full url claim '{}' to '{}'", claimFullUrl, newUrl);
     }
 
 }
