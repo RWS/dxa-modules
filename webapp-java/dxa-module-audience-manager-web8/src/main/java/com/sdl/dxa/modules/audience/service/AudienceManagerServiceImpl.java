@@ -5,6 +5,7 @@ import com.sdl.dxa.modules.audience.model.LoginForm;
 import com.sdl.dxa.modules.audience.model.UserProfile;
 import com.sdl.dxa.modules.audience.model.UserProfileImpl;
 import com.sdl.webapp.common.api.WebRequestContext;
+import com.sdl.webapp.common.util.LocalizationUtils;
 import com.tridion.ambientdata.AmbientDataContext;
 import com.tridion.ambientdata.claimstore.ClaimStore;
 import com.tridion.marketingsolution.profile.Contact;
@@ -70,6 +71,15 @@ public class AudienceManagerServiceImpl implements AudienceManagerService {
             return;
         }
         URI claimFullUrl = new URI(REQUEST_FULL_URL_CLAIM.getKey());
+
+        String fullUrl = (String) claimStore.get(claimFullUrl);
+        if (LocalizationUtils.hasDefaultExtension(fullUrl)) {
+            log.trace("Url {} already has default extension, no need to replace it", fullUrl);
+            return;
+        }
+
+        log.debug("Url {} has no default extension, so we need to hack the claim to be able to resolve the contact", fullUrl);
+
         claimStore.getReadOnly().remove(claimFullUrl);
         claimStore.put(claimFullUrl, replaceRequestContextPath(webRequestContext, normalizePathToDefaults(url)));
     }
