@@ -112,6 +112,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\CommonAssemblyInfo.cs">
+      <Link>CommonAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="CoreAreaRegistration.cs" />
     <Compile Include="Models\Entity\Article.cs" />
     <Compile Include="Models\Entity\ContentList.cs" />
