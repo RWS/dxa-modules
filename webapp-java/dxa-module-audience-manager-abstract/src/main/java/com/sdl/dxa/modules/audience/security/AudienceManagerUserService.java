@@ -6,12 +6,12 @@ import com.sdl.dxa.modules.audience.service.AudienceManagerService;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.localization.Localization;
 import lombok.extern.slf4j.Slf4j;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import javax.servlet.http.HttpServletRequest;
 
 import static com.google.common.base.Strings.nullToEmpty;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
@@ -24,27 +24,37 @@ public class AudienceManagerUserService implements UserDetailsService {
 
     private final AudienceManagerService audienceManagerService;
 
+    @Value("${dxa.modules.am.configuration.contactImportSources}")
+    private String configContactImportSources;
+
+    @Value("${dxa.modules.am.configuration.userNameField}")
+    private String configUsernameField;
+
+    @Value("${dxa.modules.am.configuration.passwordField}")
+    private String configPasswordField;
+
     @Autowired
-    public AudienceManagerUserService(WebRequestContext webRequestContext, HttpServletRequest httpServletRequest, AudienceManagerService audienceManagerService) {
-        this.webRequestContext = webRequestContext;
+    public AudienceManagerUserService(AudienceManagerService audienceManagerService,
+                                      WebRequestContext webRequestContext) {
         this.audienceManagerService = audienceManagerService;
+        this.webRequestContext = webRequestContext;
     }
 
-    @Nullable
+    @NotNull
     @Override
     public UserProfile loadUserByUsername(String username) {
         if (isEmpty(username)) {
             log.debug("Passed an empty username");
-            return null;
+            throw new UsernameNotFoundException("Empty username passed to UserService");
         }
 
         Localization localization = webRequestContext.getLocalization();
 
-        String importSources = localization.getConfiguration("audiencemanager.contactImportSources");
+        String importSources = localization.getConfiguration(configContactImportSources);
         for (String source : nullToEmpty(importSources).split(",")) {
             UserProfile user = audienceManagerService.findContact(new ContactIdentifiers(username, source.trim()),
-                    localization.getConfiguration("audiencemanager.userNameField"),
-                    localization.getConfiguration("audiencemanager.passwordField"));
+                    localization.getConfiguration(configUsernameField),
+                    localization.getConfiguration(configPasswordField));
 
             if (user != null) {
                 log.debug("Audience Manager identification key '{}' resolved to UserProfile '{}'", username, user);
@@ -53,6 +63,6 @@ public class AudienceManagerUserService implements UserDetailsService {
         }
 
         log.debug("No Audience Manager Contact found for identification key '{}' and Import Sources '{}'", username, importSources);
-        return null;
+        throw new UsernameNotFoundException("Nothing found for id key " + username + " and import sources " + importSources);
     }
 }

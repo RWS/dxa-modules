@@ -14,10 +14,11 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.argThat;
@@ -29,6 +30,12 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AudienceManagerUserServiceTest {
+
+    private static final String CONFIG_PASSWORD_FIELD = "configPasswordField";
+
+    private static final String CONFIG_USERNAME_FIELD = "configUsernameField";
+
+    private static final String CONFIG_CONTACT_IMPORT_SOURCES = "configContactImportSources";
 
     @Mock
     private WebRequestContext webRequestContext;
@@ -44,49 +51,82 @@ public class AudienceManagerUserServiceTest {
 
     @Before
     public void init() {
+        ReflectionTestUtils.setField(service, CONFIG_CONTACT_IMPORT_SOURCES, CONFIG_CONTACT_IMPORT_SOURCES);
+        ReflectionTestUtils.setField(service, CONFIG_USERNAME_FIELD, CONFIG_USERNAME_FIELD);
+        ReflectionTestUtils.setField(service, CONFIG_PASSWORD_FIELD, CONFIG_PASSWORD_FIELD);
+
         when(webRequestContext.getLocalization()).thenReturn(localization);
     }
 
-    @Test
-    public void shouldReturnNullIfUserNameIsEmptyOrNull() {
+    @Test(expected = UsernameNotFoundException.class)
+    public void shouldThrowExceptionIfUserNameIsNull() {
         //given
 
         //when
-        UserProfile isNull = service.loadUserByUsername(null);
-        UserProfile isEmpty = service.loadUserByUsername("");
+        service.loadUserByUsername(null);
 
         //then
-        assertNull(isEmpty);
-        assertNull(isNull);
+        //exception
     }
 
-    @Test
-    public void shouldReturnNullInCaseNoUserFound() {
+    @Test(expected = UsernameNotFoundException.class)
+    public void shouldThrowExceptionIfUserNameIsEmpty() {
+        //given
+
+        //when
+        service.loadUserByUsername("");
+
+        //then
+        //exception
+    }
+
+    @Test(expected = UsernameNotFoundException.class)
+    public void shouldThrowExceptionInCaseNoUserFound1() {
         //given
         when(audienceManagerService.findContact(any(ContactIdentifiers.class), anyString(), anyString())).thenReturn(null);
 
         //when
-        UserProfile isNull = service.loadUserByUsername("username");
-        UserProfile isNull2 = service.loadUserByUsername("");
-        UserProfile isNull3 = service.loadUserByUsername(null);
+        service.loadUserByUsername("username");
 
         //then
-        assertNull(isNull);
-        assertNull(isNull2);
-        assertNull(isNull3);
+        verify(audienceManagerService).findContact(argThat(getContactIdentifiersMatcher("username", null, 1)), anyString(), anyString());
+    }
+
+    @Test(expected = UsernameNotFoundException.class)
+    public void shouldThrowExceptionInCaseNoUserFound2() {
+        //given
+        when(audienceManagerService.findContact(any(ContactIdentifiers.class), anyString(), anyString())).thenReturn(null);
+
+        //when
+        service.loadUserByUsername("");
+
+        //then
+        verify(audienceManagerService).findContact(argThat(getContactIdentifiersMatcher("username", null, 1)), anyString(), anyString());
+    }
+
+    @Test(expected = UsernameNotFoundException.class)
+    public void shouldThrowExceptionInCaseNoUserFound3() {
+        //given
+        when(audienceManagerService.findContact(any(ContactIdentifiers.class), anyString(), anyString())).thenReturn(null);
+
+        //when
+        service.loadUserByUsername(null);
+
+        //then
         verify(audienceManagerService).findContact(argThat(getContactIdentifiersMatcher("username", null, 1)), anyString(), anyString());
     }
 
     @Test
     public void shouldReturnUserIfFound() {
         //given
-        when(localization.getConfiguration(eq("audiencemanager.contactImportSources"))).thenReturn("other, DXA, other2");
-        when(localization.getConfiguration(eq("audiencemanager.userNameField"))).thenReturn("userKey");
-        when(localization.getConfiguration(eq("audiencemanager.passwordField"))).thenReturn("passwordKey");
+        when(localization.getConfiguration(eq(CONFIG_CONTACT_IMPORT_SOURCES))).thenReturn("other, DXA, other2");
+        when(localization.getConfiguration(eq(CONFIG_USERNAME_FIELD))).thenReturn("userKey");
+        when(localization.getConfiguration(eq(CONFIG_PASSWORD_FIELD))).thenReturn("passwordKey");
 
         UserProfile profile = mock(UserProfile.class);
         when(profile.getId()).thenReturn("my id");
-        when(audienceManagerService.findContact(argThat(getContactIdentifiersMatcher("username", "DXA", 2)), eq("userKey"), eq("passwordKey"))).thenReturn(profile);
+        when(audienceManagerService.findContact(argThat(getContactIdentifiersMatcher("username", "DXA", 2)), eq("userKey"), eq("passwordKey")))
+                .thenReturn(profile);
 
         //when
         UserProfile user = service.loadUserByUsername("username");
