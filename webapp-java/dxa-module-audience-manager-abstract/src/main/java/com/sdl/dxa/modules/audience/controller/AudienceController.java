@@ -3,6 +3,7 @@ package com.sdl.dxa.modules.audience.controller;
 import com.sdl.dxa.modules.audience.model.LoginForm;
 import com.sdl.dxa.modules.audience.model.validator.LoginFormValidator;
 import com.sdl.dxa.modules.audience.security.AudienceManagerSecurityProvider;
+import com.sdl.dxa.modules.audience.service.AudienceManagerService;
 import com.sdl.webapp.common.api.WebRequestContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping(value = {"/api/profile", "/{path}/api/profile"})
@@ -26,21 +30,28 @@ public class AudienceController {
 
     private final LoginFormValidator loginFormValidator;
 
+    private final AudienceManagerService audienceManagerService;
+
     @Autowired
-    public AudienceController(AudienceManagerSecurityProvider securityProvider, WebRequestContext webRequestContext, LoginFormValidator loginFormValidator) {
+    public AudienceController(AudienceManagerSecurityProvider securityProvider, WebRequestContext webRequestContext,
+                              LoginFormValidator loginFormValidator, AudienceManagerService audienceManagerService) {
         this.securityProvider = securityProvider;
         this.webRequestContext = webRequestContext;
         this.loginFormValidator = loginFormValidator;
+        this.audienceManagerService = audienceManagerService;
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(@ModelAttribute("entity") LoginForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String login(@ModelAttribute("entity") LoginForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes,
+                        HttpServletRequest request, HttpServletResponse response) {
         loginFormValidator.validate(form, bindingResult);
 
         if (!bindingResult.hasErrors()) {
             log.trace("Login form is valid, logging in into Audience Manager");
 
-            if (!securityProvider.validate(form)) {
+            audienceManagerService.prepareClaims(form.getLoginFormUrl());
+
+            if (!securityProvider.validate(form, request, response)) {
                 log.debug("Logging attempt failed because username {} /password combination is not valid", form.getUserName());
                 bindingResult.reject("login.failed", form.getAuthenticationErrorMessage());
             }
@@ -56,8 +67,8 @@ public class AudienceController {
     }
 
     @RequestMapping("/logout")
-    public String logout() {
-        securityProvider.logout();
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+        securityProvider.logout(request, response);
         return REDIRECT_PREFIX + webRequestContext.getLocalization().getPath();
     }
 }

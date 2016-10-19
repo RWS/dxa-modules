@@ -6,15 +6,15 @@ import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.TestingAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -25,24 +25,28 @@ import static org.mockito.Matchers.argThat;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
-@RunWith(MockitoJUnitRunner.class)
 public class AudienceManagerSecurityProviderTest {
 
-    @Mock
     private AudienceManagerService audienceManagerService;
 
-    @Mock
     private AuthenticationManager authenticationManager;
 
-    @InjectMocks
     private AudienceManagerSecurityProvider provider;
 
     private TestingAuthenticationToken token = new TestingAuthenticationToken("user", "password");
 
     @Before
     public void init() {
+        audienceManagerService = mock(AudienceManagerService.class);
+        authenticationManager = mock(AuthenticationManager.class);
+        UserDetailsService userDetailsService = mock(UserDetailsService.class);
+        TokenBasedRememberMeServices rememberMeServices = spy(new TokenBasedRememberMeServices("key", userDetailsService));
+        provider = new AudienceManagerSecurityProvider(audienceManagerService, authenticationManager, rememberMeServices);
+
         token.setDetails("id");
 
         doThrow(new BadCredentialsException("Test")).when(authenticationManager).authenticate(any(Authentication.class));
@@ -61,12 +65,12 @@ public class AudienceManagerSecurityProviderTest {
 
 
     @Test
-    public void shouldLogoutAlsoInAudienceManager() {
+    public void shouldLogoutAlsoInAudienceManagerAndRememberMe() {
         //when
         SecurityContextHolder.getContext().setAuthentication(new TestingAuthenticationToken("test", "test"));
 
         //when
-        provider.logout();
+        provider.logout(new MockHttpServletRequest(), new MockHttpServletResponse());
 
         //then
         verify(audienceManagerService).logout();
@@ -74,18 +78,17 @@ public class AudienceManagerSecurityProviderTest {
     }
 
     @Test
-    public void shouldAlsoAuthenticateInAudienceManager() {
+    public void shouldAlsoAuthenticateInAudienceManagerAndRememberMe() {
         //given
         LoginForm loginForm = new LoginForm();
         loginForm.setUserName("user");
         loginForm.setPassword("password");
 
         //when
-        boolean isTrue = provider.validate(loginForm);
+        boolean isTrue = provider.validate(loginForm, new MockHttpServletRequest(), new MockHttpServletResponse());
 
         //then
         assertTrue(isTrue);
-        verify(audienceManagerService).prepareClaims(eq(loginForm));
         assertEquals(token, SecurityContextHolder.getContext().getAuthentication());
         verify(audienceManagerService).login(eq("id"));
     }
@@ -93,7 +96,7 @@ public class AudienceManagerSecurityProviderTest {
     @Test
     public void shouldNotAuthenticateIfLoginFormIsNull() {
         //when
-        boolean isFalse = provider.validate(null);
+        boolean isFalse = provider.validate(null, new MockHttpServletRequest(), new MockHttpServletResponse());
 
         //then
         assertFalse(isFalse);
@@ -107,7 +110,7 @@ public class AudienceManagerSecurityProviderTest {
         loginForm.setPassword("wrong");
 
         //when
-        boolean isFalse = provider.validate(loginForm);
+        boolean isFalse = provider.validate(loginForm, new MockHttpServletRequest(), new MockHttpServletResponse());
 
         //then
         assertFalse(isFalse);

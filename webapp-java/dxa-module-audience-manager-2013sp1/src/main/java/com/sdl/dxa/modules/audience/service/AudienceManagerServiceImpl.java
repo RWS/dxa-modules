@@ -1,7 +1,6 @@
 package com.sdl.dxa.modules.audience.service;
 
 import com.sdl.dxa.modules.audience.model.ContactIdentifiers;
-import com.sdl.dxa.modules.audience.model.LoginForm;
 import com.sdl.dxa.modules.audience.model.UserProfile;
 import com.sdl.dxa.modules.audience.model.UserProfileImpl;
 import com.tridion.ambientdata.AmbientDataContext;
@@ -28,11 +27,14 @@ public class AudienceManagerServiceImpl implements AudienceManagerService {
         } catch (SQLException | IOException e) {
             log.debug("No user found for {}", contactIdentifiers, e);
             return null;
+        } catch (Exception e) {
+            log.warn("Unknown exception in Audience Manager, cannot get user for {}", contactIdentifiers, e);
+            return null;
         }
     }
 
     @Override
-    public void prepareClaims(LoginForm form) {
+    public void prepareClaims(String url) {
         log.trace("There is no need to prepare claims for 2013sp1, skipping");
     }
 

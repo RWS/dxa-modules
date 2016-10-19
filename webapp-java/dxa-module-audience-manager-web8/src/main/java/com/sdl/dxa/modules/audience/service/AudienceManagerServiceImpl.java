@@ -1,17 +1,18 @@
 package com.sdl.dxa.modules.audience.service;
 
 import com.sdl.dxa.modules.audience.model.ContactIdentifiers;
-import com.sdl.dxa.modules.audience.model.LoginForm;
 import com.sdl.dxa.modules.audience.model.UserProfile;
 import com.sdl.dxa.modules.audience.model.UserProfileImpl;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.util.LocalizationUtils;
 import com.tridion.ambientdata.AmbientDataContext;
 import com.tridion.ambientdata.claimstore.ClaimStore;
+import com.tridion.dynamiccontent.DynamicMetaRetriever;
 import com.tridion.marketingsolution.profile.Contact;
 import com.tridion.marketingsolution.profile.ContactDoesNotExistException;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,16 +40,20 @@ public class AudienceManagerServiceImpl implements AudienceManagerService {
     @Override
     public UserProfile findContact(ContactIdentifiers contactIdentifiers, String usernameKey, String passwordKey) {
         try {
-            return new UserProfileImpl(new Contact(contactIdentifiers.getIdentifiers()), usernameKey, passwordKey, contactIdentifiers);
+            Contact contact = new Contact(contactIdentifiers.getIdentifiers());
+            return new UserProfileImpl(contact, usernameKey, passwordKey, contactIdentifiers);
         } catch (SQLException | IOException | ContactDoesNotExistException e) {
             log.debug("No user found for {}", contactIdentifiers, e);
+            return null;
+        } catch (Exception e) {
+            log.warn("Unknown exception in Audience Manager, cannot get user for {}", contactIdentifiers, e);
             return null;
         }
     }
 
     @Override
-    public void prepareClaims(LoginForm form) {
-        replaceFullUrlClaim(form.getLoginFormUrl());
+    public void prepareClaims(String url) {
+        replaceFullUrlClaim(url);
     }
 
     @Override
@@ -79,9 +84,26 @@ public class AudienceManagerServiceImpl implements AudienceManagerService {
         }
 
         log.debug("Url {} has no default extension, so we need to hack the claim to be able to resolve the contact", fullUrl);
+        String newFullUrl = selectUrlByTryingToRetrievePage(url, url + "/", "/");
+
+        if (newFullUrl == null) {
+            log.warn("DXA wanted to set a new full url but failed to find a page for current url");
+            return;
+        }
 
         claimStore.getReadOnly().remove(claimFullUrl);
-        claimStore.put(claimFullUrl, replaceRequestContextPath(webRequestContext, normalizePathToDefaults(url)));
+        claimStore.put(claimFullUrl, newFullUrl);
     }
 
+    @Nullable
+    private String selectUrlByTryingToRetrievePage(String... urls) {
+        DynamicMetaRetriever dynamicMetaRetriever = new DynamicMetaRetriever();
+        for (String url : urls) {
+            String path = replaceRequestContextPath(webRequestContext, normalizePathToDefaults(url));
+            if (null != dynamicMetaRetriever.getPageMetaByURL(path)) {
+                return path;
+            }
+        }
+        return null;
+    }
 }

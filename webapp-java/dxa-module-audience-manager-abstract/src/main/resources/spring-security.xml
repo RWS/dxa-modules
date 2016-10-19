@@ -9,15 +9,29 @@
     <http entry-point-ref="authenticationEntryPoint" use-expressions="true" create-session="ifRequired">
         <intercept-url pattern="/" access="permitAll"/>
         <intercept-url pattern="/**" access="permitAll"/>
-        <remember-me user-service-ref="audienceManagerUserService"/>
+        <custom-filter ref="audienceManagerClaimFilter" before="REMEMBER_ME_FILTER"/>
+        <remember-me services-ref="rememberMeServices"/>
     </http>
 
     <beans:bean id="authenticationEntryPoint"
                 class="org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint">
-        <beans:property name="realmName" value="DXA"/>
+        <beans:property name="realmName" ref="realmName"/>
+    </beans:bean>
+
+    <beans:bean id="rememberMeServices"
+                class="org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices">
+        <beans:constructor-arg name="key" ref="rememberMeKey"/>
+        <beans:constructor-arg name="userDetailsService" ref="audienceManagerUserService"/>
+        <beans:property name="parameter" value="rememberMe"/>
+    </beans:bean>
+
+    <beans:bean id="rememberMeAuthenticationProvider"
+                class="org.springframework.security.authentication.RememberMeAuthenticationProvider">
+        <beans:constructor-arg name="key" ref="rememberMeKey"/>
     </beans:bean>
 
     <authentication-manager alias="authenticationManager">
+        <authentication-provider ref="rememberMeAuthenticationProvider"/>
         <authentication-provider ref="audienceManagerAuthenticationProvider"/>
     </authentication-manager>
 </beans:beans>
