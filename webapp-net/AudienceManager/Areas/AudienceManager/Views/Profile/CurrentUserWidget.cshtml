@@ -5,12 +5,13 @@
         <div class="btn-group">
             @if (Model.IsLoggedIn)
             {
+                string logoutLink = string.Format("{0}/api/profile/logout", WebRequestContext.Localization.Path);
                 <a class="btn btn-primary" href="#"><i class="fa fa-user fa-fw"></i> @Model.UserName</a>
                 <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
                     <span class="fa fa-caret-down" title="Toggle dropdown menu"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a @Html.DxaPropertyMarkup(() => Model.LogoutLabel) href="api/profile/logout"><i class="fa fa-sign-out fa-fw"></i> @Model.LogoutLabel</a></li>
+                    <li><a @Html.DxaPropertyMarkup(() => Model.LogoutLabel) href="@logoutLink"><i class="fa fa-sign-out fa-fw"></i> @Model.LogoutLabel</a></li>
                 </ul>
             }
             else
