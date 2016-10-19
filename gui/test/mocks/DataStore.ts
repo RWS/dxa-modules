@@ -124,8 +124,8 @@ module Sdl.DitaDelivery.Tests.Mocks {
             }
         }
 
-        public getSitemapPath(publicationId: string, pageId: string): Promise<string[]> {
-            return new Promise((resolve: (path?: string[]) => void, reject: (error: string | null) => void) => {
+        public getSitemapPath(publicationId: string, pageId: string): Promise<ISitemapItem[]> {
+            return new Promise((resolve: (path?: ISitemapItem[]) => void, reject: (error: string | null) => void) => {
                 //
             });
         }

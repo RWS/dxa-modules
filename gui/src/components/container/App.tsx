@@ -1,5 +1,3 @@
-/// <reference path="../presentation/Toc.tsx" />
-/// <reference path="../presentation/Page.tsx" />
 /// <reference path="PublicationContent.tsx" />
 /// <reference path="../../interfaces/ServerModels.d.ts" />
 
@@ -48,11 +46,11 @@ module Sdl.DitaDelivery.Components {
             const { selectedPublicationId } = this.state;
             return (
                 <div className={"sdl-dita-delivery-app"}>
-                    <TopBar title={formatMessage("components.app.title") } buttons={{
+                    <TopBar title={formatMessage("components.app.title")} buttons={{
                         user: {
                             isPicture: true
                         }
-                    }}/>
+                    }} />
                     <PublicationContent publicationId={selectedPublicationId} />
                 </div>
             );

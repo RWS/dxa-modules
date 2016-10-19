@@ -1,0 +1,21 @@
+@import (reference) "../../../theming/styles.less";
+@import (reference) "../../../theming/icons.less";
+
+.sdl-dita-delivery-breadcrumbs {
+    ul {
+        .icon-home-16-color();
+        width: auto;
+        height: auto;
+        background-repeat: no-repeat;
+        background-position: center left;        
+        padding-left: 25px;
+        margin: 0;
+        li {
+            color: @neutralColor5;
+            display: inline;
+            &:before {
+                content: " / ";
+            }
+        }
+    }
+}

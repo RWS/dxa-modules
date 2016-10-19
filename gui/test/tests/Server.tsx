@@ -38,6 +38,13 @@ module Sdl.DitaDelivery.Tests {
                                         <div></div>
                                     </span>
                                 </div>
+                                <div className="sdl-dita-delivery-breadcrumbs">
+                                    <ul>
+                                        <li>
+                                            <a href="ish:1656863-1-1" title=""></a>
+                                        </li>
+                                    </ul>
+                                </div>
                                 <div className="sdl-dita-delivery-page">
                                     <span>
                                         <div></div>
@@ -50,9 +57,7 @@ module Sdl.DitaDelivery.Tests {
                         </div>));
                     expect(app).toBe(expected);
                 });
-
             });
-
         }
     }
 

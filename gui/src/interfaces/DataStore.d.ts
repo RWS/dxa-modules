@@ -70,10 +70,10 @@ declare module Sdl.DitaDelivery {
          *
          * @param {string} publicationId Publication Id
          * @param {string} pageId The page id
-         * @returns {Promise<string[]>} Promise to return the full path
-         *
+         * @returns {Promise<ISitemapItem[]>} Promise to return the full path
+         * 
          * @memberOf IDataStore
          */
-        getSitemapPath(publicationId: string, pageId: string): Promise<string[]>;
+        getSitemapPath(publicationId: string, pageId: string): Promise<ISitemapItem[]>;
     }
 }

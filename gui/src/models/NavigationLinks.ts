@@ -19,7 +19,7 @@ module Sdl.DitaDelivery.Models {
 
         private _pageId: string;
         private _taxonomyId: string;
-        private _path: string[] = [];
+        private _path: ISitemapItem[] = [];
 
         /**
          * Creates an instance of NavigationLinks.
@@ -38,11 +38,11 @@ module Sdl.DitaDelivery.Models {
         /**
          * Get the path
          *
-         * @returns {string[]} Ids of ancestors
+         * @returns {ISitemapItem[]} Ids of ancestors
          *
          * @memberOf NavigationLinks
          */
-        public getPath(): string[] {
+        public getPath(): ISitemapItem[] {
             return this._path;
         }
 
@@ -54,6 +54,7 @@ module Sdl.DitaDelivery.Models {
         }
 
         protected _processLoadResult(result: string, webRequest: IWebRequest): void {
+
             this._path = this._calculatePath(JSON.parse(result));
 
             super._processLoadResult(result, webRequest);
@@ -65,17 +66,17 @@ module Sdl.DitaDelivery.Models {
             this.fireEvent("loadfailed", { error: error });
         }
 
-        private _calculatePath(navigationLinks: ISitemapItem): string[] {
-            const path: string[] = [];
+        private _calculatePath(navigationLinks: ISitemapItem): ISitemapItem[] {
+            const path: ISitemapItem[] = [];
             let items: ISitemapItem[] = navigationLinks.Items;
             if (navigationLinks.Id) {
-                path.push(navigationLinks.Id);
+                path.push(navigationLinks);
             }
             while (items && items.length > 0) {
                 const firstItem = items[0];
                 items = firstItem.Items;
                 if (firstItem.Id) {
-                    path.push(firstItem.Id);
+                    path.push(firstItem);
                 }
             }
             return path;

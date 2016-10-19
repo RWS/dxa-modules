@@ -1,5 +1,6 @@
 /// <reference path="../presentation/Toc.tsx" />
 /// <reference path="../presentation/Page.tsx" />
+/// <reference path="../presentation/Breadcrumbs.tsx" />
 /// <reference path="../../interfaces/ServerModels.d.ts" />
 
 module Sdl.DitaDelivery.Components {
@@ -53,6 +54,12 @@ module Sdl.DitaDelivery.Components {
          * @type {string[]}
          */
         activeTocItemPath?: string[];
+        /**
+         * Title of the current publication
+         *
+         * @type {string}
+         */
+        publicationTitle?: string;
     }
 
     interface IPage {
@@ -191,10 +198,10 @@ module Sdl.DitaDelivery.Components {
          * @returns {JSX.Element}
          */
         public render(): JSX.Element {
-            const { isPageLoading, activeTocItemPath } = this.state;
+            const { isPageLoading, activeTocItemPath, selectedTocItem, publicationTitle } = this.state;
+            const { publicationId } = this.props;
             const { content, error} = this._page;
             const { rootItems } = this._toc;
-            const { publicationId } = this.props;
             const tocError = this._toc.error;
 
             return (
@@ -202,11 +209,16 @@ module Sdl.DitaDelivery.Components {
                     <Toc
                         activeItemPath={activeTocItemPath}
                         rootItems={rootItems}
-                        loadChildItems={(parentId:string): Promise<ISitemapItem[]> => {
+                        loadChildItems={(parentId: string): Promise<ISitemapItem[]> => {
                             return DataStore.getSitemapItems(publicationId, parentId);
-                        }}
+                        } }
                         onSelectionChanged={this._onTocSelectionChanged.bind(this)}
                         error={tocError} />
+                    <Breadcrumbs
+                        publicationId={publicationId}
+                        publicationTitle={publicationTitle || ""}
+                        loadItemsPath={DataStore.getSitemapPath.bind(DataStore)}
+                        selectedItem={selectedTocItem} />
                     <Page
                         showActivityIndicator={isPageLoading || false}
                         content={content}
@@ -233,6 +245,7 @@ module Sdl.DitaDelivery.Components {
                 title => {
                     this.setState({
                         activeTocItemPath: path,
+                        publicationTitle: title,
                         selectedTocItem: sitemapItem,
                         isPageLoading: sitemapItem.Url ? true : false
                     });
@@ -272,7 +285,7 @@ module Sdl.DitaDelivery.Components {
             DataStore.getSitemapPath(publicationId, pageId).then(
                 path => {
                     if (!this._isUnmounted) {
-                        done(path || []);
+                        done(path.map(item => item.Id || "") || []);
                     }
                 },
                 error => {

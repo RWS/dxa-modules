@@ -208,17 +208,17 @@ module Sdl.DitaDelivery {
          *
          * @param {string} publicationId Publication Id
          * @param {string} pageId The page id
-         * @returns {Promise<string[]>} Promise to return the full path
+         * @returns {Promise<ISitemapItem[]>} Promise to return the full path
          *
          * @memberOf DataStoreClient
          */
-        public getSitemapPath(publicationId: string, pageId: string): Promise<string[]> {
+        public getSitemapPath(publicationId: string, pageId: string): Promise<ISitemapItem[]> {
             const navigationLinks = this.getNavigationLinksModel(publicationId, pageId);
             if (!navigationLinks) {
                 return Promise.reject(Localization.formatMessage("error.path.not.found", [pageId, publicationId]));
             }
 
-            return new Promise((resolve: (path?: string[]) => void, reject: (error: string | null) => void) => {
+            return new Promise((resolve: (path?: ISitemapItem[]) => void, reject: (error: string | null) => void) => {
                 if (navigationLinks.isLoaded()) {
                     const path = navigationLinks.getPath();
                     resolve(path);
