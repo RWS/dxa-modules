@@ -34,7 +34,8 @@
         </div>
 
         <div class="form-group">
-            <form:checkbox path="rememberMe"/><form:label path="rememberMe">${entity.rememberMeLabel}</form:label>
+            <form:checkbox id="rememberMeCheckbox" path="rememberMe"/><form:label for="rememberMeCheckbox"
+                                                                                  path="rememberMe">${entity.rememberMeLabel}</form:label>
         </div>
 
         <form:hidden path="loginFormUrl"/>
