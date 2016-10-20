@@ -20,7 +20,7 @@ module.exports = function (config) {
             { pattern: './node_modules/react-dom/dist/react-dom.js', watched: false },
             { pattern: './node_modules/react-dom/dist/react-dom-server.js', watched: false },
             // Main configuration
-            { pattern: 'test/configuration/Configuration.js', watched: false },
+            { pattern: 'dist/testConfiguration.bundle.js', watched: false },
             // Initialize the application
             { pattern: './node_modules/sdl-catalina/Common.debug/Library/Core/Packages/SDL.Client.Init.js', watched: false },
             // Fire test loader
@@ -36,6 +36,8 @@ module.exports = function (config) {
         proxies: {
         },
 
-        reporters: ['progress']
+        reporters: ['progress', 'coverage'],
+
+        coverageReporter: { type: 'text-summary' }
     });
 };

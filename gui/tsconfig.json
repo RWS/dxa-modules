@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "module": "none",
+    "module": "commonjs",
+    "moduleResolution": "node",
     "noImplicitAny": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
@@ -9,18 +10,19 @@
     "noImplicitReturns": true,
     "removeComments": false,
     "preserveConstEnums": false,
-    "sourceMap": false,
+    "sourceMap": true,
     "noEmitOnError": true,
     "emitBOM": false,
     "suppressImplicitAnyIndexErrors": false,
     "target": "es5",
-    "declaration": true,
+    "declaration": false,
     "experimentalDecorators": true,
     "jsx": "react",
     "strictNullChecks": true,
     "noImplicitThis": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": false
+    "noUnusedParameters": false,
+    "noEmitHelpers": true
   },
   "compileOnSave": false, // Gulp does this for us
   "exclude": [

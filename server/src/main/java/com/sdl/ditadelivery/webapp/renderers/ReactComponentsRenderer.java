@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
+import javax.script.ScriptContext;
+import javax.script.Bindings;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -26,12 +28,12 @@ public class ReactComponentsRenderer {
             try {
                 nashornScriptEngine.eval(read("gui/lib/react/react.js"));
                 nashornScriptEngine.eval(read("gui/lib/react-dom/react-dom-server.js"));
-                // Nashorn has no implementation for setTimeout
+                // Nashorn has no implementation for setTimeout, required by promise polyfill
                 nashornScriptEngine.eval("setTimeout = function(method) { method(); };");
-                nashornScriptEngine.eval(read("gui/lib/es6-promise-polyfill/promise.js"));
                 nashornScriptEngine.eval(read("gui/SDL/ReactComponents/packages/ReactComponents.js"));
-                nashornScriptEngine.eval(read("gui/packages/Sdl.DitaDelivery.Components.js"));
-                nashornScriptEngine.eval(read("gui/packages/Sdl.DitaDelivery.Server.js"));
+                Bindings engineScope = nashornScriptEngine.getBindings(ScriptContext.ENGINE_SCOPE);
+                engineScope.put("_renderToString", engineScope);
+                nashornScriptEngine.eval(read("gui/server.bundle.js"));
             } catch (ScriptException e) {
                 log.error("Failed to initialize Nashorn Script Engine", e);
                 throw new RuntimeException(e);
@@ -47,7 +49,7 @@ public class ReactComponentsRenderer {
      */
     public String renderPage(String path) {
         try {
-            Object html = ReactComponentsRenderer.nashornScriptEngine.invokeFunction("renderToString", path);
+            Object html = ReactComponentsRenderer.nashornScriptEngine.invokeFunction("_renderToString", path);
             return String.valueOf(html);
         } catch (Exception e) {
             String message = "Failed to render react component";

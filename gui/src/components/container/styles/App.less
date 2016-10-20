@@ -1,13 +1,13 @@
 @import (reference) "../../../theming/styles.less";
 @font-face {
     font-family: @fontFamily;
-    src: url('gui/theming/@{fontFamilyPath}') format("opentype");
+    src: url('../../../theming/@{fontFamilyPath}');
 }
 
 html, body, #main-view-target {
     height: 100%;
     margin: 0 auto;
-    font-family: @fontFamily;
+    font-family: @fontFamily, @fontFamilyFallback;
     font-size: @fontSize;
 }
 
@@ -20,7 +20,7 @@ html, body, #main-view-target {
         left: 20px;
         height: 30px;
         line-height: 30px;
-    }    
+    }
     .sdl-dita-delivery-publication-content {
         position: relative;
         flex: 1 1 auto;

@@ -39,10 +39,11 @@ module.exports = function (buildOptions, gulp, browserSync, commonFolderName) {
                 if (event.type === 'changed') {
                     var filePath = event.path.replace(/\\/g, '/'); // Replace back slashes with forward slashes
 
+                    const tasks = ['run-tslint', 'update-version', 'package-project'];
                     if (_.endsWith(filePath, '.less')) {
-                        runSequence('compile-less', reload);
+                        runSequence(tasks, reload);
                     } else if (_.endsWith(filePath, '.ts') || _.endsWith(filePath, '.tsx')) {
-                        runSequence(['run-tslint', 'compile-typescript', 'add-coverage'], function (err) {
+                        runSequence(tasks, function (err) {
                             if (err) {
                                 console.error(err);
                             } else {
@@ -87,9 +88,7 @@ module.exports = function (buildOptions, gulp, browserSync, commonFolderName) {
                         '/SDL/Common': './node_modules/sdl-catalina/' + commonFolderName() + '/',
                         '/SDL/ReactComponents': './node_modules/sdl-catalina-react-wrappers/dist/components/',
                         '/lib/react': './node_modules/react/dist/',
-                        '/lib/react-dom': './node_modules/react-dom/dist/',
-                        '/lib/history': './node_modules/history/umd/',
-                        '/lib/es6-promise-polyfill': './node_modules/es6-promise-polyfill/'
+                        '/lib/react-dom': './node_modules/react-dom/dist/'
                     }
                 }
                 routes['/test'] = buildOptions.testPath; // Put test folder behind a virtual directory
@@ -114,18 +113,6 @@ module.exports = function (buildOptions, gulp, browserSync, commonFolderName) {
                         routes: routes
                     },
                     middleware: [
-                        (req, res, next) => {
-                            if (buildOptions.isTestCoverage) {
-                                // Redirect all js files to the ones which are instrumented to be used for code coverage
-                                var url = req.url;
-                                if (!_.startsWith(url, '/SDL/') && !_.startsWith(url, '/test/') && !_.startsWith(url, '/lib/')
-                                    && _.endsWith(url, '.js?' + buildOptions.version)) {
-                                    url = '/test/coverage' + url;
-                                    req.url = url;
-                                }
-                            }
-                            next();
-                        },
                         (req, res, next) => {
                             // For test runs a mock folder name is used to proxy browser sync requests
                             // As karma also uses socket.io this can lead to collisions (browser is using multiple sockets)

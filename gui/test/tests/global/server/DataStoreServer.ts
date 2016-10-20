@@ -1,34 +1,27 @@
-/// <reference path="../../../../src/components/container/App.tsx" />
-/// <reference path="../../../../src/global/server/DataStoreServer.ts" />
-/// <reference path="../../../../src/global/server/LocalizationServer.ts" />
+import { DataStoreServer } from "../../../../src/global/server/DataStoreServer";
 
-module Sdl.DitaDelivery.Tests {
+// Global Catalina dependencies
+import TestBase = SDL.Client.Test.TestBase;
 
-    class DataStoreServerTests extends SDL.Client.Test.TestBase {
+class DataStoreServerTests extends TestBase {
 
-        public runTests(): void {
-            const DataStore = new DataStoreServer();
+    public runTests(): void {
+        const DataStore = new DataStoreServer();
 
-            describe(`Data Store tests (Publications).`, (): void => {
+        describe(`Data Store tests (Publications).`, (): void => {
 
-                beforeAll(() => {
-                    Sdl.DitaDelivery.Localization = new LocalizationServer();
-                    Sdl.DitaDelivery.Routing = new RoutingServer();
-                });
-
-                it("can get a publication title", (done: () => void): void => {
-                    const publicationId = "ish:39137-1-1";
-                    DataStore.getPublicationTitle(publicationId).then(title => {
-                        expect(title).toBe("MP330");
-                        done();
-                    }).catch(error => {
-                        fail(`Unexpected error: ${error}`);
-                        done();
-                    });
+            it("can get a publication title", (done: () => void): void => {
+                const publicationId = "ish:39137-1-1";
+                DataStore.getPublicationTitle(publicationId).then(title => {
+                    expect(title).toBe("MP330");
+                    done();
+                }).catch(error => {
+                    fail(`Unexpected error: ${error}`);
+                    done();
                 });
             });
-        }
+        });
     }
-
-    new DataStoreServerTests().runTests();
 }
+
+new DataStoreServerTests().runTests();

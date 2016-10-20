@@ -12,7 +12,7 @@ module.exports = function (buildOptions, gulp) {
     return function (cb) {
         // Copy sources
         gulp.src([
-            buildOptions.sourcesPath + '**',
+            buildOptions.sourcesPath + '**/*.*',
             '!' + buildOptions.sourcesPath + '**/*.ts',
             '!' + buildOptions.sourcesPath + '**/*.tsx',
             '!' + buildOptions.sourcesPath + '**/*.less'

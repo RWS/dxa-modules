@@ -9,6 +9,8 @@
  * @param {boolean=} singleRun Only run the tests once.
  */
 module.exports = function (buildOptions, gulp, runTests, singleRun) {
+    const glob = require('glob');
+    const path = require('path');
     var istanbul = require('istanbul');
     var runSequence = require('run-sequence').use(gulp);
     var chalk = require('chalk');
@@ -19,7 +21,6 @@ module.exports = function (buildOptions, gulp, runTests, singleRun) {
 
     return function (cb) {
         buildOptions.isTest = true;
-        buildOptions.isTestCoverage = true;
 
         var buildReport = function (results) {
             var currentWorkingDir = process.cwd();
@@ -34,13 +35,22 @@ module.exports = function (buildOptions, gulp, runTests, singleRun) {
             // Check if all files are covered
             var allFilesCovered = true;
             var testedFilesCount = Object.keys(collector.store.map).length;
-            var instrumentedFilesCount = buildOptions.coverage.filesInstrumented.length;
+            var instrumentedFiles = glob.sync(`${buildOptions.sourcesPath}**/*.{ts,tsx}`, {
+                ignore: [`${buildOptions.sourcesPath}**/*.d.ts`, `${buildOptions.sourcesPath}/Main.tsx`]
+            }).map(item => {
+                let key = item;
+                if (path.sep !== '/') {
+                    key = key.replace('/', '\\');
+                }
+                return path.resolve(process.cwd(), key);
+            });
+            var instrumentedFilesCount = instrumentedFiles.length;
             console.log(chalk.cyan('File coverage report'));
             if (testedFilesCount !== instrumentedFilesCount) {
                 allFilesCovered = false;
                 console.log(chalk.red('Only ' + testedFilesCount + ' of ' + instrumentedFilesCount + ' files were tested.'));
                 for (var i = 0; i < instrumentedFilesCount; i++) {
-                    var file = buildOptions.coverage.filesInstrumented[i];
+                    var file = instrumentedFiles[i];
                     if (!collector.store.map.hasOwnProperty(file)) {
                         console.log(chalk.red(file + ' has not been tested.'));
                     }
@@ -54,9 +64,9 @@ module.exports = function (buildOptions, gulp, runTests, singleRun) {
             jsonReport.writeReport(collector, true);
 
             // Remap the results
-            collector = remap(loadCoverage(reportPath + 'coverage-final.json'), {
-                basePath: currentWorkingDir + buildOptions.sourcesPath.substring(1)
-            });
+            // collector = remap(loadCoverage(reportPath + 'coverage-final.json'), {
+            //     basePath: currentWorkingDir + buildOptions.sourcesPath.substring(1)
+            // });
 
             // Print full coverage report to console
             var reporter = new istanbul.Reporter();

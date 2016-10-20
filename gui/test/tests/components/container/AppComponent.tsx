@@ -1,49 +1,43 @@
-/// <reference path="../../../../src/components/container/App.tsx" />
-/// <reference path="../../../../src/global/client/RoutingClient.ts" />
-/// <reference path="../../../../src/global/client/LocalizationGlobalize.ts" />
+import { App } from "../../../../src/components/container/App";
+import { DataStore } from "../../../mocks/DataStore";
+import { routing } from "../../../mocks/Routing";
+import { localization } from "../../../mocks/Localization";
 
-module Sdl.DitaDelivery.Tests {
+// Global Catalina dependencies
+import TestBase = SDL.Client.Test.TestBase;
 
-    import App = Components.App;
+const dataStoreMock = new DataStore();
 
-    class AppComponent extends SDL.Client.Test.TestBase {
+class AppComponent extends TestBase {
 
-        public runTests(): void {
+    public runTests(): void {
 
-            describe(`App component tests.`, (): void => {
-                const target = super.createTargetElement();
-                const dataStoreMock = new Mocks.DataStore();
+        describe(`App component tests.`, (): void => {
+            const target = super.createTargetElement();
 
-                beforeAll(() => {
-                    Sdl.DitaDelivery.DataStore = dataStoreMock;
-                    Sdl.DitaDelivery.Localization = new Mocks.Localization();
-                    Sdl.DitaDelivery.Routing = new Mocks.Routing();
-                });
-
-                afterEach(() => {
-                    const domNode = ReactDOM.findDOMNode(target);
-                    ReactDOM.unmountComponentAtNode(domNode);
-                    dataStoreMock.fakeDelay(false);
-                });
-
-                afterAll(() => {
-                    target.parentElement.removeChild(target);
-                });
-
-                it("show loading indicator on initial render", (): void => {
-                    dataStoreMock.fakeDelay(true);
-                    this._renderComponent(target);
-                    const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
-                    expect(domNode).not.toBeNull();
-                    expect(domNode.querySelector(".sdl-activityindicator")).not.toBeNull("Could not find activity indicator.");
-                });
+            afterEach(() => {
+                const domNode = ReactDOM.findDOMNode(target);
+                ReactDOM.unmountComponentAtNode(domNode);
+                dataStoreMock.fakeDelay(false);
             });
-        }
 
-        private _renderComponent(target: HTMLElement): App {
-            return ReactDOM.render(<App />, target) as App;
-        }
+            afterAll(() => {
+                target.parentElement.removeChild(target);
+            });
+
+            it("show loading indicator on initial render", (): void => {
+                dataStoreMock.fakeDelay(true);
+                this._renderComponent(target);
+                const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
+                expect(domNode).not.toBeNull();
+                expect(domNode.querySelector(".sdl-activityindicator")).not.toBeNull("Could not find activity indicator.");
+            });
+        });
     }
 
-    new AppComponent().runTests();
+    private _renderComponent(target: HTMLElement): App {
+        return ReactDOM.render(<App dataStore={dataStoreMock} routing={routing} localization={localization}/>, target) as App;
+    }
 }
+
+new AppComponent().runTests();

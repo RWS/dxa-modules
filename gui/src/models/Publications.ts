@@ -1,51 +1,52 @@
-/// <reference path="../../typings/index.d.ts" />
+import { routing } from "../global/client/RoutingClient";
+import { IPublication } from "../interfaces/ServerModels";
 
-module Sdl.DitaDelivery.Models {
+// Global Catalina dependencies
+import IWebRequest = SDL.Client.Net.IWebRequest;
+import LoadableObject = SDL.Client.Models.LoadableObject;
+import OO = SDL.Client.Types.OO;
+import Net = SDL.Client.Net;
 
-    import IPublication = Server.Models.IPublication;
-    import IWebRequest = SDL.Client.Net.IWebRequest;
+/* tslint:disable-next-line */
+eval(SDL.Client.Types.OO.enableCustomInheritance);
+/**
+ * Publications model
+ *
+ * @export
+ * @class Publications
+ * @extends {LoadableObject}
+ */
+export class Publications extends LoadableObject {
 
-    /* tslint:disable-next-line */
-    eval(SDL.Client.Types.OO.enableCustomInheritance);
+    private _publications: IPublication[];
+
     /**
-     * Publications model
+     * Get the Publications
      *
-     * @export
-     * @class Publications
-     * @extends {SDL.Client.Models.LoadableObject}
+     * @returns {IPublication[]}
      */
-    export class Publications extends SDL.Client.Models.LoadableObject {
-
-        private _publications: IPublication[];
-
-        /**
-         * Get the Publications
-         *
-         * @returns {IPublication[]}
-         */
-        public getPublications(): IPublication[] {
-            return this._publications;
-        }
-
-        /* Overloads */
-        protected _executeLoad(reload: boolean): void {
-            const url = Routing.getAbsolutePath(`gui/mocks/publications.json`);
-            SDL.Client.Net.getRequest(url,
-                this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
-        }
-
-        protected _processLoadResult(result: string, webRequest: IWebRequest): void {
-            this._publications = JSON.parse(result);
-
-            super._processLoadResult(result, webRequest);
-        }
-
-        protected _onLoadFailed(error: string, webRequest: IWebRequest): void {
-            const p = this.properties;
-            p.loading = false;
-            this.fireEvent("loadfailed", { error: error });
-        }
+    public getPublications(): IPublication[] {
+        return this._publications;
     }
 
-    SDL.Client.Types.OO.createInterface("Sdl.DitaDelivery.Models.Publications", Publications);
+    /* Overloads */
+    protected _executeLoad(reload: boolean): void {
+        const url = routing.getAbsolutePath(`gui/mocks/publications.json`);
+        Net.getRequest(url,
+            this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
+    }
+
+    protected _processLoadResult(result: string, webRequest: IWebRequest): void {
+        this._publications = JSON.parse(result);
+
+        super._processLoadResult(result, webRequest);
+    }
+
+    protected _onLoadFailed(error: string, webRequest: IWebRequest): void {
+        const p = this.properties;
+        p.loading = false;
+        this.fireEvent("loadfailed", { error: error });
+    }
 }
+
+OO.createInterface("Sdl.DitaDelivery.Models.Publications", Publications);

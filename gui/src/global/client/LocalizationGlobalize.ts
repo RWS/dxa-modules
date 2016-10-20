@@ -1,29 +1,26 @@
-/// <reference path="../../../typings/index.d.ts" />
-/// <reference path="../../interfaces/Localization.d.ts" />
+import { ILocalization } from "../../interfaces/Localization";
 
-module Sdl.DitaDelivery {
+/**
+ * Localization implemented using Globalize
+ *
+ * @export
+ * @class LocalizationGlobalize
+ * @implements {ILocalization}
+ */
+export class LocalizationGlobalize implements ILocalization {
+
+    private static _globalize: SDL.SDLGlobalizeStatic = SDL.Globalize;
 
     /**
-     * Localization implemented using Globalize
+     * Format a message
      *
-     * @export
-     * @class LocalizationGlobalize
-     * @implements {ILocalization}
+     * @param {string} path Resource path
+     * @param {string[]} [variables] Variables
+     * @returns {string}
      */
-    export class LocalizationGlobalize implements ILocalization {
-
-        private static _globalize: SDL.SDLGlobalizeStatic = SDL.Globalize;
-
-        /**
-         * Format a message
-         *
-         * @param {string} path Resource path
-         * @param {string[]} [variables] Variables
-         * @returns {string}
-         */
-        public formatMessage(path: string, variables?: string[]): string {
-            return LocalizationGlobalize._globalize.formatMessage(path, variables);
-        }
+    public formatMessage(path: string, variables?: string[]): string {
+        return LocalizationGlobalize._globalize.formatMessage(path, variables);
     }
-
 }
+
+export let localization = new LocalizationGlobalize();

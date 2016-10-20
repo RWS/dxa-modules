@@ -1,72 +1,74 @@
-/// <reference path="../../typings/index.d.ts" />
+import { routing } from "../global/client/RoutingClient";
+import { localization } from "../global/client/LocalizationGlobalize";
+import { ISitemapItem } from "../interfaces/ServerModels";
+import { TcmId as TcmIdUtils } from "../utils/TcmId";
 
-module Sdl.DitaDelivery.Models {
+// Global Catalina dependencies
+import IWebRequest = SDL.Client.Net.IWebRequest;
+import LoadableObject = SDL.Client.Models.LoadableObject;
+import OO = SDL.Client.Types.OO;
+import Net = SDL.Client.Net;
 
-    import ISitemapItem = Server.Models.ISitemapItem;
-    import IWebRequest = SDL.Client.Net.IWebRequest;
-    import TcmIdUtils = Utils.TcmId;
+/* tslint:disable-next-line */
+eval(OO.enableCustomInheritance);
+/**
+ * Toc model, used for interacting with the server and doing basic operations on the model itself.
+ *
+ * @export
+ * @class Toc
+ * @extends {LoadableObject}
+ */
+export class Toc extends LoadableObject {
 
-    /* tslint:disable-next-line */
-    eval(SDL.Client.Types.OO.enableCustomInheritance);
+    private _publicationId: string;
+    private _parentId: string;
+    private _sitemapItems: ISitemapItem[];
+
     /**
-     * Toc model, used for interacting with the server and doing basic operations on the model itself.
+     * Creates an instance of Toc.
      *
-     * @export
-     * @class Toc
-     * @extends {SDL.Client.Models.LoadableObject}
+     * @param {string} publicationId Publication id
+     * @param {string} parentId Parent sitemap item id, for the root item pass "root" as the parent id.
      */
-    export class Toc extends SDL.Client.Models.LoadableObject {
+    constructor(publicationId: string, parentId: string) {
+        super();
+        this._publicationId = publicationId;
+        this._parentId = parentId;
+    }
 
-        private _publicationId: string;
-        private _parentId: string;
-        private _sitemapItems: ISitemapItem[];
+    /**
+     * Get the site map items
+     *
+     * @returns {ISitemapItem[]}
+     */
+    public getSitemapItems(): ISitemapItem[] {
+        return this._sitemapItems;
+    }
 
-        /**
-         * Creates an instance of Toc.
-         *
-         * @param {string} publicationId Publication id
-         * @param {string} parentId Parent sitemap item id, for the root item pass "root" as the parent id.
-         */
-        constructor(publicationId: string, parentId: string) {
-            super();
-            this._publicationId = publicationId;
-            this._parentId = parentId;
-        }
+    /* Overloads */
+    protected _executeLoad(reload: boolean): void {
+        const taxonomyId = TcmIdUtils.getTaxonomyId(this._publicationId);
 
-        /**
-         * Get the site map items
-         *
-         * @returns {ISitemapItem[]}
-         */
-        public getSitemapItems(): ISitemapItem[] {
-            return this._sitemapItems;
-        }
-
-        /* Overloads */
-        protected _executeLoad(reload: boolean): void {
-            const taxonomyId = TcmIdUtils.getTaxonomyId(this._publicationId);
-
-            if (!taxonomyId) {
-                this._onLoadFailed(Localization.formatMessage("error.path.not.found", [this._parentId, this._publicationId]));
-            } else {
-                const parentPart = `${TcmIdUtils.removeNamespace(taxonomyId)}-${TcmIdUtils.removeNamespace(this._parentId)}`;
-                const url = Routing.getAbsolutePath(`gui/mocks/toc-${parentPart}.json`);
-                SDL.Client.Net.getRequest(url, this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
-            }
-        }
-
-        protected _processLoadResult(result: string, webRequest: IWebRequest): void {
-            this._sitemapItems = JSON.parse(result);
-
-            super._processLoadResult(result, webRequest);
-        }
-
-        protected _onLoadFailed(error: string, webRequest?: IWebRequest): void {
-            const p = this.properties;
-            p.loading = false;
-            this.fireEvent("loadfailed", { error: error });
+        if (!taxonomyId) {
+            this._onLoadFailed(localization.formatMessage("error.path.not.found", [this._parentId, this._publicationId]));
+        } else {
+            const parentPart = `${TcmIdUtils.removeNamespace(taxonomyId)}-${TcmIdUtils.removeNamespace(this._parentId)}`;
+            const url = routing.getAbsolutePath(`gui/mocks/toc-${parentPart}.json`);
+            Net.getRequest(url, this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
         }
     }
 
-    SDL.Client.Types.OO.createInterface("Sdl.DitaDelivery.Models.Toc", Toc);
+    protected _processLoadResult(result: string, webRequest: IWebRequest): void {
+        this._sitemapItems = JSON.parse(result);
+
+        super._processLoadResult(result, webRequest);
+    }
+
+    protected _onLoadFailed(error: string, webRequest?: IWebRequest): void {
+        const p = this.properties;
+        p.loading = false;
+        this.fireEvent("loadfailed", { error: error });
+    }
 }
+
+OO.createInterface("Sdl.DitaDelivery.Models.Toc", Toc);

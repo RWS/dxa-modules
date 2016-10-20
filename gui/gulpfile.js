@@ -22,15 +22,14 @@ const buildOptions = {
     distPath: './dist/',
     isDebug: true,
     isDefaultTask: false,
-    isTestCoverage: false,
+    isTest: false,
     coverage: {
         minCoverage: { // Minimum code coverage %
             statements: 80,
             branches: 80,
             functions: 80,
             lines: 80
-        },
-        filesInstrumented: []
+        }
     },
     ports: {
         httpServer: 9005
@@ -66,8 +65,6 @@ const commonFolderName = function () {
 };
 
 // Tasks
-const compileLess = require('./build/gulp-tasks/compile-less')(buildOptions, gulp);
-const compileTypescript = require('./build/gulp-tasks/compile-typescript')(buildOptions, gulp);
 const runTSLint = require('./build/gulp-tasks/run-tslint')(buildOptions, gulp);
 const serve = require('./build/gulp-tasks/serve')(buildOptions, gulp, browserSync, commonFolderName);
 const runKarma = require('./build/gulp-tasks/run-karma')(buildOptions, browserSync);
@@ -138,41 +135,19 @@ gulp.task('copy-dependencies', cb => {
                 .pipe(gulpDebug({ title: 'Copying' }))
                 .pipe(gulp.dest(`${buildOptions.distPath}mocks/`))
                 .on('end', next);
-        },
-        // History
-        next => {
-            gulp.src(['./node_modules/history/umd/*'])
-                .pipe(gulpDebug({ title: 'Copying' }))
-                .pipe(gulp.dest(`${buildOptions.distPath}lib/history/`))
-                .on('end', next);
-        },
-         // Es6-Promise Polyfill lib
-        next => {
-            gulp.src(['./node_modules/es6-promise-polyfill/*.js'])
-                .pipe(gulpDebug({ title: 'Copying' }))
-                .pipe(gulp.dest(`${buildOptions.distPath}lib/es6-promise-polyfill/`))
-                .on('end', next);
-        },
+        }
     ], cb);
 });
-
-gulp.task('compile-less', ['copy-sources'], compileLess);
-
-gulp.task('compile-typescript', ['install-typings', 'copy-sources'], compileTypescript);
 
 gulp.task('update-version', ['copy-sources'], require('./build/gulp-tasks/update-version')(buildOptions, gulp));
 
 gulp.task('package-project', [
     'copy-dependencies',
-    'compile-less',
-    'compile-typescript',
-    'update-version',
+    'install-typings',
     'wrap-dita-ot-styles'
-], require('./build/gulp-tasks/package-project')(buildOptions, gulp, './node_modules/sdl-packager/Source/bin/Release/Packager.exe'));
+], require('./build/gulp-tasks/package-project')(buildOptions));
 
 gulp.task('run-tslint', runTSLint);
-
-gulp.task('add-coverage', ['compile-typescript'], require('./build/gulp-tasks/add-coverage')(buildOptions, gulp));
 
 gulp.task('test-coverage', testCoverage);
 
@@ -185,13 +160,9 @@ gulp.task('wrap-dita-ot-styles', require('./build/gulp-tasks/wrap-dita-ot-styles
 
 // Common tasks
 gulp.task('build', [
-    'install-typings',
     'copy-dependencies',
     'copy-sources',
-    'compile-less',
-    'compile-typescript',
     'run-tslint',
-    'add-coverage',
     'package-project',
     'update-version'
 ]);
@@ -247,7 +218,6 @@ gulp.task('default', function (cb) {
         next => {
             // Reset build options
             buildOptions.isTest = false;
-            buildOptions.isTestCoverage = false;
 
             // Release
             buildOptions.isDebug = false;

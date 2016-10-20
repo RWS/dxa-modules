@@ -1,13 +1,10 @@
-/// <reference path="../../typings/index.d.ts" />
-/// <reference path="../../src/global/client/RoutingClient.ts" />
+import { RoutingClient } from "../../src/global/client/RoutingClient";
 
-module Sdl.DitaDelivery.Tests.Mocks {
+export class Routing extends RoutingClient {
 
-    export class Routing extends RoutingClient {
-
-        constructor() {
-            super("/", true);
-        }
+    constructor() {
+        super("/", true);
     }
-
 }
+
+export let routing = new Routing();

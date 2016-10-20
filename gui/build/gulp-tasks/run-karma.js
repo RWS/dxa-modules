@@ -37,13 +37,6 @@ module.exports = (buildOptions, browserSync) => {
             preprocessors: {}
         };
 
-        if (buildOptions.isTestCoverage) {
-            // Add coverage to reporters
-            karmaConfig.reporters = ['progress', 'coverage'];
-            // Add coverage reporter
-            karmaConfig.coverageReporter = { type: 'text-summary' };
-        }
-
         // Start the test server
         var karmaServer = new karma.Server(karmaConfig, (exitCode, error) => {
             console.log('Karma has exited with ' + exitCode);

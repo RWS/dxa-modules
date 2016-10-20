@@ -17,52 +17,26 @@
     <!-- Main Catalina config -->
     <include src="~/configuration.xml" />
     <include src="SDL/ReactComponents/configuration.xml" />
-    <!-- Packages config -->
-    <include src="packages.xml" />
-    <!-- Child configs -->
-    <include src="components/_config.xml" />
-    <include src="global/client/_config.xml" />
-    <include src="global/server/_config.xml" />
-    <include src="models/_config.xml" />
-    <include src="resources/_config.xml" />
-    <include src="utils/_config.xml" />
     <!-- Main resources -->
     <resourceGroups>
         <resourceGroup name="Sdl.DitaDelivery">
             <files>
-                <file name="Index.js" />
+                <file name="stylesheets/main.css" />
+                <file name="main.bundle.js" />
             </files>
             <dependencies>
-                <dependency name="Sdl.DitaDelivery.Components" />
-                <dependency name="Sdl.DitaDelivery.DataStoreClient" />
-                <dependency name="Sdl.DitaDelivery.LocalizationGlobalize" />
-                <dependency name="Sdl.DitaDelivery.Resources" />
-                <dependency name="Sdl.DitaDelivery.RoutingClient" />
-                <dependency name="Sdl.DitaDelivery.Polyfills" />
+                <dependency name="Sdl.DitaDelivery.Dependencies" />
             </dependencies>
         </resourceGroup>
-        <resourceGroup name="Sdl.DitaDelivery.Server">
+        <resourceGroup name="Sdl.DitaDelivery.Dependencies">
             <files>
-                <file name="Server.js"/>
+                <file name="resources/resources.default.resjson" />
+                <file name="resources/resources.{CULTURE}.resjson" />
             </files>
             <dependencies>
-                <dependency name="Sdl.DitaDelivery.Components" />
-                <dependency name="Sdl.DitaDelivery.DataStoreServer" />
-                <dependency name="Sdl.DitaDelivery.LocalizationServer" />
-                <dependency name="Sdl.DitaDelivery.RoutingServer" />
-                <dependency name="Sdl.DitaDelivery.Polyfills" />
+                <dependency name="ReactComponents.Components" />
+                <dependency name="SDL.Client.Models.Classes" />
             </dependencies>
-        </resourceGroup>
-        <resourceGroup name="Sdl.DitaDelivery.DitaOt.Styles">
-            <files>
-                <file name="dita-ot/styles/commonltr.css"/>
-                <file name="dita-ot/styles/commonrtl.css"/>
-            </files>
-        </resourceGroup>
-        <resourceGroup name="Sdl.DitaDelivery.Polyfills">
-            <files>
-                <file name="lib/es6-promise-polyfill/promise.min.js"/>
-            </files>
         </resourceGroup>
     </resourceGroups>
     <!-- Configuration for pages -->

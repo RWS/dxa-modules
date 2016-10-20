@@ -14,7 +14,4 @@ dist/
 typings/
 
 # Specific files
-test/configuration/Configuration.js
-test/mocks/*.js
-test/tests/**/*.js
 test/coverage/

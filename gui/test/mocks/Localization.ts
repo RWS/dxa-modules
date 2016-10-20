@@ -1,17 +1,14 @@
-/// <reference path="../../typings/index.d.ts" />
-/// <reference path="../../src/interfaces/Localization.d.ts" />
+import { ILocalization } from "../../src/interfaces/Localization";
 
-module Sdl.DitaDelivery.Tests.Mocks {
+export class Localization implements ILocalization {
 
-    export class Localization implements ILocalization {
-
-        public formatMessage(path: string, variables?: string[]): string {
-            const message = `mock-${path}`;
-            if (Array.isArray(variables)) {
-                return message + variables.join("-");
-            }
-            return message;
+    public formatMessage(path: string, variables?: string[]): string {
+        const message = `mock-${path}`;
+        if (Array.isArray(variables)) {
+            return message + variables.join("-");
         }
+        return message;
     }
-
 }
+
+export let localization = new Localization();
