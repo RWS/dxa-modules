@@ -12,10 +12,10 @@ module.exports = function (buildOptions, gulp) {
     return function (cb) {
         // Copy sources
         gulp.src([
-            buildOptions.sourcesPath + '**/*.*',
-            '!' + buildOptions.sourcesPath + '**/*.ts',
-            '!' + buildOptions.sourcesPath + '**/*.tsx',
-            '!' + buildOptions.sourcesPath + '**/*.less'
+            buildOptions.sourcesPath + '**/*.xml',
+            buildOptions.sourcesPath + '**/*.txt',
+            buildOptions.sourcesPath + '**/*.html',
+            buildOptions.sourcesPath + '**/*.resjson'
         ].concat(buildOptions.excludePatterns.global))
             .pipe(gulpDebug({ title: 'Copying' }))
             .pipe(gulp.dest(buildOptions.distPath))

@@ -145,7 +145,7 @@ gulp.task('package-project', [
     'copy-dependencies',
     'install-typings',
     'wrap-dita-ot-styles'
-], require('./build/gulp-tasks/package-project')(buildOptions));
+], require('./build/gulp-tasks/package-project')(buildOptions, browserSync));
 
 gulp.task('run-tslint', runTSLint);
 
