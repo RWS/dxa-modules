@@ -5,7 +5,7 @@
 <jsp:useBean id="localization" type="com.sdl.webapp.common.api.localization.Localization" scope="request"/>
 <jsp:useBean id="markup" type="com.sdl.webapp.common.markup.Markup" scope="request"/>
 
-<div class="btn-group pull-right" style="margin: 8px;">
+<div class="btn-group pull-right navbar-widget" ${markup.entity(entity)}>
     <c:choose>
         <c:when test="${entity.loggedIn}">
             <a class="btn btn-primary" href="#"><i class="fa fa-user fa-fw"></i>${entity.userName}</a>
@@ -23,3 +23,4 @@
         </c:otherwise>
     </c:choose>
 </div>
+<div class="clearfix"></div>
