@@ -22,6 +22,7 @@ class PageComponent extends TestBase {
             it("shows / hides activity indicator", (): void => {
                 this._renderComponent({
                     showActivityIndicator: true,
+                    getPageLocationPath: (): void => { },
                     onNavigate: (): void => { }
                 }, target);
                 const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
@@ -29,6 +30,7 @@ class PageComponent extends TestBase {
                 expect(domNode.querySelector(".sdl-activityindicator")).not.toBeNull("Could not find activity indicator.");
                 this._renderComponent({
                     showActivityIndicator: false,
+                    getPageLocationPath: (): void => { },
                     onNavigate: (): void => { }
                 }, target);
                 expect(domNode.querySelector(".sdl-activityindicator")).toBeNull("Activity indicator should have been removed.");
@@ -38,6 +40,7 @@ class PageComponent extends TestBase {
                 this._renderComponent({
                     showActivityIndicator: false,
                     error: "Error!",
+                    getPageLocationPath: (): void => { },
                     onNavigate: (): void => { }
                 }, target);
                 const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
@@ -52,6 +55,7 @@ class PageComponent extends TestBase {
                 this._renderComponent({
                     showActivityIndicator: false,
                     content: pageContent,
+                    getPageLocationPath: (): void => { },
                     onNavigate: (): void => { }
                 }, target);
 
@@ -64,12 +68,13 @@ class PageComponent extends TestBase {
             });
 
             it("navigates to another page when a hyperlink is clicked", (done: () => void): void => {
-                const pageContent = "<div><a href=\"ish:123456\"/></div>";
+                const pageContent = "<div><a href=\"ish:12-34-56\"/></div>";
                 this._renderComponent({
                     showActivityIndicator: false,
                     content: pageContent,
+                    getPageLocationPath: (): void => { },
                     onNavigate: (pageId: string): void => {
-                        expect(pageId).toBe("ish:123456");
+                        expect(pageId).toBe("ish:12-34-56");
                         done();
                     }
                 }, target);

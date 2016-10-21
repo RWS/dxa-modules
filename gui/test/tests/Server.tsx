@@ -37,7 +37,7 @@ class Server extends SDL.Client.Test.TestBase {
                             <div className="sdl-dita-delivery-breadcrumbs">
                                 <ul>
                                     <li>
-                                        <a href="ish:1656863-1-1" title=""></a>
+                                        <a href="" title=""></a>
                                     </li>
                                 </ul>
                             </div>

@@ -1,10 +1,10 @@
+import { Promise } from "es6-promise";
 import { ISitemapItem } from "../../interfaces/ServerModels";
 import { IDataStore } from "../../interfaces/DataStore";
 import { IRouting } from "../../interfaces/Routing";
 import { Toc } from "../presentation/Toc";
 import { Page } from "../presentation/Page";
 import { IPageInfo } from "../../models/Page";
-import { Promise } from "es6-promise";
 import { Breadcrumbs } from "../presentation/Breadcrumbs";
 import "./styles/PublicationContent";
 
@@ -239,6 +239,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     loadItemsPath={dataStore.getSitemapPath.bind(dataStore)}
                     selectedItem={selectedTocItem} />
                 <Page
+                    getPageLocationPath={routing.getPageLocationPath.bind(routing)}
                     showActivityIndicator={isPageLoading || false}
                     content={content}
                     error={error}

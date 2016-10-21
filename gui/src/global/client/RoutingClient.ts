@@ -71,70 +71,99 @@ export class RoutingClient implements IRouting {
     public setPublicationLocation(publicationId: string, publicationTitle: string,
         pageId?: string, pageTitle?: string): void {
 
-        const currentLocation = this.getPublicationLocation();
+            const pathname = this.getPublicationLocationPath(publicationId, publicationTitle, pageId, pageTitle);
 
-        const pathname = this.getAbsolutePath(
-            encodeURIComponent(publicationId) + "/" +
-            (pageId ? encodeURIComponent(pageId) + "/" : "") +
-            encodeURIComponent(this._escapeTitle(publicationTitle)) + "/" +
-            (pageTitle ? encodeURIComponent(this._escapeTitle(pageTitle)) : "")
-        );
-
-        if (currentLocation &&
-            currentLocation.publicationId === publicationId &&
-            currentLocation.pageId === pageId) {
-            this._replace(pathname);
-        } else {
-            this._push(pathname);
-        }
-    }
-
-    /**
-     * Get the current location within a publication
-     *
-     * @returns {IPublicationLocation | null}
-     */
-    public getPublicationLocation(): IPublicationLocation | null {
-        const currentLocation = RoutingClient._history.getCurrentLocation().pathname;
-        const paths = currentLocation.match(PUBLICATION_URL_REGEX);
-        if (paths) {
-            const result = paths[0].split("/");
-            return {
-                publicationId: decodeURIComponent(result[1]),
-                pageId: decodeURIComponent(result[2])
-            };
-        } else {
-            const noPagePaths = currentLocation.match(PUBLICATION_URL_REGEX_NO_PAGE);
-            if (noPagePaths) {
-                const result = noPagePaths[0].split("/");
-                return {
-                    publicationId: decodeURIComponent(result[1]),
-                    pageId: null
-                };
+            const currentLocation = this.getPublicationLocation();
+            if (currentLocation &&
+                currentLocation.publicationId === publicationId &&
+                currentLocation.pageId === pageId) {
+                this._replace(pathname);
+            } else {
+                this._push(pathname);
             }
         }
-        return null;
-    }
 
-    /**
-     * Set page location
-     *
-     * @param {string} pageId Page id
-     *
-     * @memberOf IRouting
-     */
-    public setPageLocation(pageId: string): void {
-        const location = this.getPublicationLocation();
-        if (location) {
-            const { publicationId} = location;
-            const pathname = this.getAbsolutePath(
+        /**
+         * Gets publication location path
+         *
+         * @param {string} publicationId Publication id
+         * @param {string} publicationTitle Publication title
+         * @param {string} [pageId] Page id
+         * @param {string} [pageTitle] Page title
+         * 
+         * @returns {string} Page location path
+         */
+        public getPublicationLocationPath(publicationId: string, publicationTitle: string,
+            pageId?: string, pageTitle?: string): string {
+
+            return this.getAbsolutePath(
                 encodeURIComponent(publicationId) + "/" +
-                encodeURIComponent(pageId) + "/"
+                (pageId ? encodeURIComponent(pageId) + "/" : "") +
+                encodeURIComponent(this._escapeTitle(publicationTitle)) + "/" +
+                (pageTitle ? encodeURIComponent(this._escapeTitle(pageTitle)) : "")
             );
-
-            this._push(pathname);
         }
-    }
+
+        /**
+         * Get the current location within a publication
+         *
+         * @returns {IPublicationLocation | null}
+         */
+        public getPublicationLocation(): IPublicationLocation | null {
+            const currentLocation = RoutingClient._history.getCurrentLocation().pathname;
+            const paths = currentLocation.match(PUBLICATION_URL_REGEX);
+            if (paths) {
+                const result = paths[0].split("/");
+                return {
+                    publicationId: decodeURIComponent(result[1]),
+                    pageId: decodeURIComponent(result[2])
+                };
+            } else {
+                const noPagePaths = currentLocation.match(PUBLICATION_URL_REGEX_NO_PAGE);
+                if (noPagePaths) {
+                    const result = noPagePaths[0].split("/");
+                    return {
+                        publicationId: decodeURIComponent(result[1]),
+                        pageId: null
+                    };
+                }
+            }
+            return null;
+        }
+
+        /**
+         * Set page location
+         *
+         * @param {string} pageId Page id
+         *
+         * @memberOf IRouting
+         */
+        public setPageLocation(pageId: string): void {
+            const pathname = this.getPageLocationPath(pageId);
+            if (pathname) {
+                this._push(pathname);
+            }
+        }
+
+        /**
+         * Gets page location path
+         *
+         * @param {string} pageId Page id
+         *
+         * @memberOf IRouting
+         * @returns {string | undefined} Page location path
+         */
+        public getPageLocationPath(pageId: string): string | undefined {
+            const location = this.getPublicationLocation();
+            if (location) {
+                const { publicationId} = location;
+                return this.getAbsolutePath(
+                    encodeURIComponent(publicationId) + "/" +
+                    encodeURIComponent(pageId) + "/"
+                );
+            }
+            return undefined;
+        }
 
     private _escapeTitle(title: string): string {
         return title.replace(/\s/gi, "-");

@@ -1,5 +1,5 @@
-import { ISitemapItem } from "../../interfaces/ServerModels";
 import { Promise } from "es6-promise";
+import { ISitemapItem } from "../../interfaces/ServerModels";
 import "./styles/Toc";
 import "../controls/styles/TreeView";
 

@@ -42,16 +42,45 @@ export class RoutingServer implements IRouting {
         // TODO implement this
     }
 
-    /**
-     * Set page location
-     *
-     * @param {string} pageId Page id
-     *
-     * @memberOf IRouting
-     */
-    public setPageLocation(pageId: string): void {
-        // TODO implement this
-    }
+        /**
+         * Gets publication location path
+         *
+         * @param {string} publicationId Publication id
+         * @param {string} publicationTitle Publication title
+         * @param {string} [pageId] Page id
+         * @param {string} [pageTitle] Page title
+         * 
+         * @returns {string} Publication location path
+         */
+        public getPublicationLocationPath(publicationId: string, publicationTitle: string,
+            pageId?: string, pageTitle?: string): string {
+            // TODO implement this
+            return "";
+        }
+
+        /**
+         * Set page location
+         *
+         * @param {string} pageId Page id
+         *
+         * @memberOf IRouting
+         */
+        public setPageLocation(pageId: string): void {
+            // TODO implement this
+        }
+
+        /**
+         * Gets page location path
+         *
+         * @param {string} pageId Page id
+         *
+         * @memberOf IRouting
+         * @returns {string | undefined} Page location path 
+         */
+        public getPageLocationPath(pageId: string): string | undefined {
+            // TODO implement this
+            return undefined;
+        }
 
     /**
      * Get the current location within a publication

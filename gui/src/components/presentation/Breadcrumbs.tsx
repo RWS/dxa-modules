@@ -152,7 +152,7 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
                         <a onClick={(e: React.MouseEvent): void => {
                             routing.setPublicationLocation(publicationId, publicationTitle);
                             e.preventDefault();
-                        } } href={publicationId} title={publicationTitle}>{publicationTitle}</a>
+                        } } href={routing.getPublicationLocationPath(publicationId, publicationTitle)} title={publicationTitle}>{publicationTitle}</a>
                     </li>
                     {
                         Array.isArray(itemPath) && (
@@ -169,7 +169,10 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
                                                         routing.setPublicationLocation(publicationId, publicationTitle, item.Url, item.Title);
                                                     }
                                                     e.preventDefault();
-                                                } } href={item.Url || item.Id} title={item.Title}>{item.Title}</a>
+                                                } } href={item.Url
+                                                    ? routing.getPageLocationPath(item.Url)
+                                                    : routing.getPublicationLocationPath(publicationId, publicationTitle, item.Url, item.Title)}
+                                                    title={item.Title}>{item.Title}</a>
                                                 : <span>{item.Title}</span>
                                         }
                                     </li>
