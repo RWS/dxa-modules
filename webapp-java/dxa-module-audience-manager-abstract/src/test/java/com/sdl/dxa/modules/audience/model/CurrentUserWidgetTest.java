@@ -30,6 +30,7 @@ public class CurrentUserWidgetTest {
         //given
         TestingAuthenticationToken token = new TestingAuthenticationToken("test", "2");
         token.setAuthenticated(true);
+        token.setDetails(new UserProfile.Details("2", "test"));
         SecurityContextHolder.getContext().setAuthentication(token);
 
         //when
@@ -37,6 +38,21 @@ public class CurrentUserWidgetTest {
 
         //then
         assertEquals("test", name);
+    }
+
+    @Test
+    public void shouldReturnCurrentUserNameIfNotSpecificDetails() {
+        //given
+        TestingAuthenticationToken token = new TestingAuthenticationToken("test", "2");
+        token.setAuthenticated(true);
+        token.setDetails("test_simple");
+        SecurityContextHolder.getContext().setAuthentication(token);
+
+        //when
+        String name = new CurrentUserWidget().getUserName();
+
+        //then
+        assertEquals("test_simple", name);
     }
 
     @Test

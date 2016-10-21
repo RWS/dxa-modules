@@ -23,7 +23,8 @@ public class AudienceManagerServiceImpl implements AudienceManagerService {
     @Override
     public UserProfile findContact(ContactIdentifiers contactIdentifiers, String usernameKey, String passwordKey) {
         try {
-            return new UserProfileImpl(new Contact(contactIdentifiers.getIdentifiers()), usernameKey, passwordKey, contactIdentifiers);
+            Contact contact = new Contact(contactIdentifiers.getIdentifiers());
+            return new UserProfileImpl(contact, contactIdentifiers.getIdentificationKey(), usernameKey, passwordKey, contactIdentifiers);
         } catch (SQLException | IOException e) {
             log.debug("No user found for {}", contactIdentifiers, e);
             return null;

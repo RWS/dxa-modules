@@ -41,7 +41,7 @@ public class AudienceManagerServiceImpl implements AudienceManagerService {
     public UserProfile findContact(ContactIdentifiers contactIdentifiers, String usernameKey, String passwordKey) {
         try {
             Contact contact = new Contact(contactIdentifiers.getIdentifiers());
-            return new UserProfileImpl(contact, usernameKey, passwordKey, contactIdentifiers);
+            return new UserProfileImpl(contact, contactIdentifiers.getIdentificationKey(), usernameKey, passwordKey, contactIdentifiers);
         } catch (SQLException | IOException | ContactDoesNotExistException e) {
             log.debug("No user found for {}", contactIdentifiers, e);
             return null;

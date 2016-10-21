@@ -1,6 +1,7 @@
 package com.sdl.dxa.modules.audience.model;
 
 import com.google.common.collect.Sets;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
@@ -23,7 +24,9 @@ public abstract class UserProfile implements UserDetails {
 
     private static final String ENCRYPTED_TOKEN = "encrypted:";
 
-    private final String usernameKey;
+    private final String username;
+
+    private final String displayUsernameKey;
 
     private final String passwordKey;
 
@@ -31,6 +34,8 @@ public abstract class UserProfile implements UserDetails {
 
     @NotNull
     protected abstract PasswordEncoder getPasswordEncoder();
+
+    public abstract String getDisplayUsername();
 
     public abstract String getId();
 
@@ -68,5 +73,19 @@ public abstract class UserProfile implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Data
+    @AllArgsConstructor
+    public static class Details {
+
+        private String id;
+
+        private String displayUsername;
+
+        @Override
+        public String toString() {
+            return getId() + ";" + getDisplayUsername();
+        }
     }
 }

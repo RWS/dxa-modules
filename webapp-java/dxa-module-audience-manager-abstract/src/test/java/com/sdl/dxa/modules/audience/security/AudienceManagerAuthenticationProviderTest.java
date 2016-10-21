@@ -2,6 +2,8 @@ package com.sdl.dxa.modules.audience.security;
 
 import com.sdl.dxa.modules.audience.model.ContactIdentifiers;
 import com.sdl.dxa.modules.audience.model.UserProfile;
+import org.hamcrest.BaseMatcher;
+import org.hamcrest.Description;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,8 +19,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.argThat;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doCallRealMethod;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -36,11 +40,23 @@ public class AudienceManagerAuthenticationProviderTest {
 
     @Before
     public void init() {
-        when(audienceManagerUserService.loadUserByUsername("userIdKey")).thenReturn(userProfile);
-        when(audienceManagerUserService.loadUserByUsername("user_wrong_name")).thenReturn(userProfile);
+        when(audienceManagerUserService.loadUserByUsername(eq("userIdKey"))).thenReturn(userProfile);
+        when(audienceManagerUserService.loadUserByUsername(eq("user_wrong_name"))).thenReturn(userProfile);
+        doThrow(BadCredentialsException.class).when(audienceManagerUserService).loadUserByUsername(argThat(new BaseMatcher<String>() {
+            @Override
+            public boolean matches(Object item) {
+                return !(item.equals("userIdKey") || item.equals("user_wrong_name"));
+            }
+
+            @Override
+            public void describeTo(Description description) {
+                description.appendText("Any other username");
+            }
+        }));
 
         when(userProfile.getIdentifiers()).thenReturn(new ContactIdentifiers("userIdKey", "DXA"));
         when(userProfile.getUsername()).thenReturn("user");
+        when(userProfile.getDisplayUsername()).thenReturn("dispUser");
         when(userProfile.getPassword()).thenReturn("password");
         when(userProfile.getId()).thenReturn("id");
         doCallRealMethod().when(userProfile).verifyPassword(anyString());
@@ -100,7 +116,7 @@ public class AudienceManagerAuthenticationProviderTest {
         verify(userProfile).verifyPassword(eq("password"));
         assertEquals("user", result.getName());
         assertEquals("password", result.getCredentials());
-        assertEquals("id", result.getDetails());
+        assertEquals("id;dispUser", result.getDetails().toString());
         assertEquals(DEFAULT_AUTHORITIES.iterator().next(), result.getAuthorities().iterator().next());
     }
 }

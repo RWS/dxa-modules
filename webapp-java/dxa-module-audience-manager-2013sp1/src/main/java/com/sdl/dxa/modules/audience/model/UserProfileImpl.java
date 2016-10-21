@@ -13,19 +13,14 @@ public class UserProfileImpl extends UserProfile {
 
     private transient Contact contact;
 
-    public UserProfileImpl(Contact contact, String usernameKey, String passwordKey, ContactIdentifiers contactIdentifiers) {
-        super(usernameKey, passwordKey, contactIdentifiers);
+    public UserProfileImpl(Contact contact, String username, String displayUsernameKey, String passwordKey, ContactIdentifiers contactIdentifiers) {
+        super(username, displayUsernameKey, passwordKey, contactIdentifiers);
         this.contact = contact;
     }
 
     @Override
     public String getPassword() {
         return contact.getExtendedDetail(getPasswordKey());
-    }
-
-    @Override
-    public String getUsername() {
-        return contact.getExtendedDetail(getUsernameKey());
     }
 
     @NotNull
@@ -42,6 +37,11 @@ public class UserProfileImpl extends UserProfile {
                 return Digests.checkPassword(rawPassword.toString(), encodedPassword);
             }
         };
+    }
+
+    @Override
+    public String getDisplayUsername() {
+        return contact.getExtendedDetail(getDisplayUsernameKey());
     }
 
     @Override

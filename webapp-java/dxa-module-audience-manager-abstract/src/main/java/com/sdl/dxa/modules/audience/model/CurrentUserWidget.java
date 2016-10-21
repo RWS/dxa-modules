@@ -34,7 +34,8 @@ public class CurrentUserWidget extends AbstractEntityModel {
 
     public String getUserName() {
         Authentication user = currentUser();
-        return user == null ? "" : user.getName();
+        return user == null ? "" : (user.getDetails() instanceof UserProfile.Details ?
+                ((UserProfile.Details) user.getDetails()).getDisplayUsername() : user.getDetails().toString());
     }
 
     private Authentication currentUser() {

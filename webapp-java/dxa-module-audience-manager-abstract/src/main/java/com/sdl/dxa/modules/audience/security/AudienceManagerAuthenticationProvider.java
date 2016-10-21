@@ -27,7 +27,7 @@ public class AudienceManagerAuthenticationProvider implements AuthenticationProv
 
         UserProfile user = audienceManagerUserService.loadUserByUsername(username);
 
-        if (user == null || !user.getIdentifiers().getIdentificationKey().equals(username)) {
+        if (!user.getIdentifiers().getIdentificationKey().equals(username)) {
             log.debug("User '{}' is not found in AM", username);
             throw new BadCredentialsException("No user found in Audience manager with username " + username);
         }
@@ -39,7 +39,7 @@ public class AudienceManagerAuthenticationProvider implements AuthenticationProv
 
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
                 user.getUsername(), user.getPassword(), user.getAuthorities());
-        token.setDetails(user.getId());
+        token.setDetails(new UserProfile.Details(user.getId(), user.getDisplayUsername()));
 
         log.trace("Successful authentication for user '{}' and id '{}'", username, user.getId());
         return token;
