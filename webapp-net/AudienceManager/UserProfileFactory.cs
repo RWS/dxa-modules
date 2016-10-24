@@ -96,7 +96,7 @@ namespace Sdl.Web.Modules.AudienceManager
         /// Prepares for Audience Manager Publication Resolving.
         /// </summary>
         /// <remarks>
-        /// Audience Manager tries to resolve the context Publication based on the <c>taf:request:full_url</c> ADF claim.
+        /// Audience Manager tries to resolve the context Publication based on the <c>taf:request:full_url</c> ADF claim (see CRQ-2502).
         /// However, this will fail if the Request URL is extensionless (which it typically is in DXA).
         /// As a work-around, we ensure that the <c>taf:request:full_url</c> ADF claim has a file extension here.
         /// </remarks>
@@ -108,6 +108,10 @@ namespace Sdl.Web.Modules.AudienceManager
                 pageUrl += Constants.DefaultExtension;
             }
             AmbientDataContext.CurrentClaimStore.Put(new Uri("taf:request:full_url"), pageUrl);
+
+            // This looks bizarre, but it clears AM's Publication Context cache:
+            Contact dummyContact = new Contact();
+            if (dummyContact == null) throw new DxaException("This should never happen.");
         }
 
         private static Contact FindContact(string identificationKey, string importSource = null)
