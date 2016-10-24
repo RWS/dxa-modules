@@ -37,9 +37,7 @@ public class AudienceManagerAuthenticationProvider implements AuthenticationProv
             throw new BadCredentialsException("Wrong password for username " + username);
         }
 
-        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
-                user.getUsername(), user.getPassword(), user.getAuthorities());
-        token.setDetails(new UserProfile.Details(user.getId(), user.getDisplayUsername()));
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities());
 
         log.trace("Successful authentication for user '{}' and id '{}'", username, user.getId());
         return token;

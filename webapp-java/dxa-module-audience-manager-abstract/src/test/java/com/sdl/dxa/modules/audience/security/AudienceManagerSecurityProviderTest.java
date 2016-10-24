@@ -90,7 +90,7 @@ public class AudienceManagerSecurityProviderTest {
         //then
         assertTrue(isTrue);
         assertEquals(token, SecurityContextHolder.getContext().getAuthentication());
-        verify(audienceManagerService).login(eq("id"));
+        verify(audienceManagerService).login(eq("user"));
     }
 
     @Test

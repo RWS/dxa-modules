@@ -116,7 +116,6 @@ public class AudienceManagerAuthenticationProviderTest {
         verify(userProfile).verifyPassword(eq("password"));
         assertEquals("user", result.getName());
         assertEquals("password", result.getCredentials());
-        assertEquals("id;dispUser", result.getDetails().toString());
         assertEquals(DEFAULT_AUTHORITIES.iterator().next(), result.getAuthorities().iterator().next());
     }
 }

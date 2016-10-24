@@ -8,6 +8,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class CurrentUserWidgetTest {
 
@@ -30,7 +32,6 @@ public class CurrentUserWidgetTest {
         //given
         TestingAuthenticationToken token = new TestingAuthenticationToken("test", "2");
         token.setAuthenticated(true);
-        token.setDetails(new UserProfile.Details("2", "test"));
         SecurityContextHolder.getContext().setAuthentication(token);
 
         //when
@@ -41,11 +42,12 @@ public class CurrentUserWidgetTest {
     }
 
     @Test
-    public void shouldReturnCurrentUserNameIfNotSpecificDetails() {
+    public void shouldReturnCurrentUserNameIfUserProfilePrincipalIsSet() {
         //given
-        TestingAuthenticationToken token = new TestingAuthenticationToken("test", "2");
+        UserProfile userProfile = mock(UserProfile.class);
+        when(userProfile.getDisplayUsername()).thenReturn("test_simple");
+        TestingAuthenticationToken token = new TestingAuthenticationToken(userProfile, "2");
         token.setAuthenticated(true);
-        token.setDetails("test_simple");
         SecurityContextHolder.getContext().setAuthentication(token);
 
         //when

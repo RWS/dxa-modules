@@ -1,7 +1,6 @@
 package com.sdl.dxa.modules.audience.model;
 
 import com.google.common.collect.Sets;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
@@ -73,19 +72,5 @@ public abstract class UserProfile implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
-    }
-
-    @Data
-    @AllArgsConstructor
-    public static class Details {
-
-        private String id;
-
-        private String displayUsername;
-
-        @Override
-        public String toString() {
-            return getId() + ";" + getDisplayUsername();
-        }
     }
 }

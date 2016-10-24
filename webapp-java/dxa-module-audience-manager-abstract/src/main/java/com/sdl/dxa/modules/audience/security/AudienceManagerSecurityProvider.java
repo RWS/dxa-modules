@@ -54,7 +54,7 @@ public class AudienceManagerSecurityProvider {
             Authentication result = authenticationManager.authenticate(requested);
 
             SecurityContextHolder.getContext().setAuthentication(result);
-            audienceManagerService.login(result.getDetails().toString());
+            audienceManagerService.login(result.getName());
             rememberMeServices.loginSuccess(request, response, result);
 
             log.trace("Successfully authenticated. Security context contains: {}", SecurityContextHolder.getContext().getAuthentication());
