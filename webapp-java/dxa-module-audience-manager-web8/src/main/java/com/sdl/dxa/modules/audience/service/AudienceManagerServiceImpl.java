@@ -1,5 +1,7 @@
 package com.sdl.dxa.modules.audience.service;
 
+import com.sdl.audiencemanager.exceptions.AudienceManagerException;
+import com.sdl.audiencemanager.odata_client.AudienceManagerClientException;
 import com.sdl.dxa.modules.audience.model.ContactIdentifiers;
 import com.sdl.dxa.modules.audience.model.UserProfile;
 import com.sdl.dxa.modules.audience.model.UserProfileImpl;
@@ -10,6 +12,7 @@ import com.tridion.ambientdata.claimstore.ClaimStore;
 import com.tridion.dynamiccontent.DynamicMetaRetriever;
 import com.tridion.marketingsolution.profile.Contact;
 import com.tridion.marketingsolution.profile.ContactDoesNotExistException;
+import com.tridion.marketingsolution.wrapper.ContactWrapper;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.Nullable;
@@ -51,9 +54,21 @@ public class AudienceManagerServiceImpl implements AudienceManagerService {
         }
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     public void prepareClaims(String url) {
         replaceFullUrlClaim(url);
+        try {
+            // CRQ-2502
+            // this is a really dirty hack to reset AM caching since they don't provide any public API for this
+            // we could've called PublicationContext.clearCache() since it's public, but it's only technically public
+            // and is not a part of official public API
+            if (null == new ContactWrapper()) { //NOSONAR
+                throw new IllegalStateException("This should never happen");
+            }
+        } catch (AudienceManagerException | AudienceManagerClientException | IOException e) {
+            log.warn("Exception in Audience Manager", e);
+        }
     }
 
     @Override
