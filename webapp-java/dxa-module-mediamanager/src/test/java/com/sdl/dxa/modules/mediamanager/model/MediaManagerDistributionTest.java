@@ -203,7 +203,7 @@ public class MediaManagerDistributionTest {
         MediaManagerDistribution distribution = new MediaManagerDistribution();
 
         //then
-        assertTrue(distribution.isCustomView());
+        assertFalse(distribution.isCustomView());
 
         //when
         distribution.setPlayerType("custom");
