@@ -73,7 +73,7 @@ public class Degrees51DataProvider {
     @Value("${dxa.modules.51degrees.file.reattempt.delay.mins}")
     private int fileUpdateReattemptDelayMinutes;
 
-    @Value("${dxa.modules.51degrees.license:#{null}}")
+    @Value("${dxa.modules.51degrees.license}")
     private String preConfiguredLicenseKey;
 
     /**
@@ -105,7 +105,7 @@ public class Degrees51DataProvider {
     private void onAppStart() {
 
         log.debug("Check if the 51degrees licenseKey is in properties");
-        if (preConfiguredLicenseKey != null) {
+        if (!isEmpty(preConfiguredLicenseKey)) {
             log.debug("The licenseKey key for 51degrees found in properties, pre-loading data file");
             if (!updateFile(preConfiguredLicenseKey, getDataFileName(preConfiguredLicenseKey), RequestPending.OUTSIDE_REQUEST)) {
                 log.debug("Failed to pre-load data file for 51degrees, pre-loading Lite file");
