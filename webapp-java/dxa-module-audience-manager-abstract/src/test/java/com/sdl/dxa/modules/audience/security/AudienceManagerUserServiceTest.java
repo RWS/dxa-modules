@@ -5,9 +5,6 @@ import com.sdl.dxa.modules.audience.model.UserProfile;
 import com.sdl.dxa.modules.audience.service.AudienceManagerService;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.localization.Localization;
-import org.dd4t.core.caching.CacheElement;
-import org.dd4t.core.caching.impl.CacheElementImpl;
-import org.dd4t.providers.PayloadCacheProvider;
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.jetbrains.annotations.NotNull;
@@ -49,9 +46,6 @@ public class AudienceManagerUserServiceTest {
     @Mock
     private Localization localization;
 
-    @Mock
-    private PayloadCacheProvider payloadCacheProvider;
-
     @InjectMocks
     private AudienceManagerUserService service;
 
@@ -62,8 +56,6 @@ public class AudienceManagerUserServiceTest {
         ReflectionTestUtils.setField(service, CONFIG_PASSWORD_FIELD, CONFIG_PASSWORD_FIELD);
 
         when(webRequestContext.getLocalization()).thenReturn(localization);
-        CacheElement<UserProfile> cacheElement = new CacheElementImpl<>(null, true);
-        when(payloadCacheProvider.<UserProfile>loadPayloadFromLocalCache(anyString())).thenReturn(cacheElement);
     }
 
     @Test(expected = UsernameNotFoundException.class)
