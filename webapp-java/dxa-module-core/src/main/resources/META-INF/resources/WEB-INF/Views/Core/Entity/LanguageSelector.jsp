@@ -32,7 +32,7 @@
 %>
 <c:set var="defaultItem" value="${entity.settings['defaultContentLink']}"/>
 <c:if test="${not empty filteredLocalizations and filteredLocalizations.size() > 1}">
-    <div class="xpm-outer-wrapper ${entity.htmlClasses}" ${markup.entity(entity)}>
+    <div class="navbar-pull-right-widget ${entity.htmlClasses}" ${markup.entity(entity)}>
         <select class="selectpicker" data-width="auto">
             <c:forEach var="loc" items="${filteredLocalizations}">
                 <c:set var="params"

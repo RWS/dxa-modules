@@ -5,7 +5,7 @@
 <jsp:useBean id="localization" type="com.sdl.webapp.common.api.localization.Localization" scope="request"/>
 <jsp:useBean id="markup" type="com.sdl.webapp.common.markup.Markup" scope="request"/>
 
-<div class="btn-group pull-right navbar-widget" ${markup.entity(entity)}>
+<div class="btn-group utility-nav navbar-widget" ${markup.entity(entity)}>
     <c:choose>
         <c:when test="${entity.loggedIn}">
             <a class="btn btn-primary" href="#"><i class="fa fa-user fa-fw"></i>${entity.userName}</a>
@@ -13,14 +13,14 @@
                 <span class="fa fa-caret-down" title="Toggle dropdown menu"></span>
             </a>
             <ul class="dropdown-menu">
-                <li><a href="${localization.localizePath("/api/profile/logout")}"><i
+                <li>
+                    <a href="${localization.localizePath("/api/profile/logout")}" ${markup.property(entity, "logoutLabel")}><i
                         class="fa fa-sign-out fa-fw"></i>${entity.logoutLabel}</a></li>
             </ul>
         </c:when>
         <c:otherwise>
-            <a class="btn btn-primary" href="${entity.loginLink.url}"><i
+            <a class="btn btn-primary" href="${entity.loginLink.url}" ${markup.property(entity, "loginLabel")}><i
                     class="fa fa-user fa-fw"></i>${entity.loginLabel}</a>
         </c:otherwise>
     </c:choose>
 </div>
-<div class="clearfix"></div>
