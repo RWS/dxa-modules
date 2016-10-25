@@ -9,7 +9,6 @@
     <http entry-point-ref="authenticationEntryPoint" use-expressions="true" create-session="ifRequired">
         <intercept-url pattern="/" access="permitAll"/>
         <intercept-url pattern="/**" access="permitAll"/>
-        <custom-filter ref="audienceManagerClaimFilter" before="REMEMBER_ME_FILTER"/>
         <remember-me services-ref="rememberMeServices"/>
     </http>
 

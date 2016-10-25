@@ -37,6 +37,8 @@ public class AudienceManagerUserServiceTest {
 
     private static final String CONFIG_CONTACT_IMPORT_SOURCES = "configContactImportSources";
 
+    private static final String BASE_URL = "http://localhost:8080/test";
+
     @Mock
     private WebRequestContext webRequestContext;
 
@@ -56,6 +58,7 @@ public class AudienceManagerUserServiceTest {
         ReflectionTestUtils.setField(service, CONFIG_PASSWORD_FIELD, CONFIG_PASSWORD_FIELD);
 
         when(webRequestContext.getLocalization()).thenReturn(localization);
+        when(webRequestContext.getBaseUrl()).thenReturn(BASE_URL);
     }
 
     @Test(expected = UsernameNotFoundException.class)
@@ -134,6 +137,7 @@ public class AudienceManagerUserServiceTest {
         //then
         assertNotNull(user);
         assertEquals("my id", user.getId());
+        verify(audienceManagerService).prepareClaims(eq(BASE_URL));
         verify(audienceManagerService).findContact(argThat(getContactIdentifiersMatcher("username", "other", 2)), eq("userKey"), eq("passwordKey"));
         verify(audienceManagerService).findContact(argThat(getContactIdentifiersMatcher("username", "DXA", 2)), eq("userKey"), eq("passwordKey"));
         verify(audienceManagerService, never()).findContact(argThat(getContactIdentifiersMatcher("username", "other2", 2)), eq("userKey"), eq("passwordKey"));

@@ -50,6 +50,8 @@ public class AudienceManagerUserService implements UserDetailsService {
 
         Localization localization = webRequestContext.getLocalization();
 
+        audienceManagerService.prepareClaims(webRequestContext.getBaseUrl());
+
         String importSources = localization.getConfiguration(configContactImportSources);
         for (String source : nullToEmpty(importSources).split(",")) {
             UserProfile user = audienceManagerService.findContact(new ContactIdentifiers(username, source.trim()),
