@@ -45,7 +45,7 @@
 
     <properties>
         <dxa-bom.version>1.6.0-SNAPSHOT</dxa-bom.version>
-        <java-version>1.7</java-version>
+        <java-version>1.8</java-version>
         <device-detection.version>3.2.4.5</device-detection.version>
     </properties>
 
