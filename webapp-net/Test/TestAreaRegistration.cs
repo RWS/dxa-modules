@@ -56,11 +56,12 @@ namespace Sdl.Web.Modules.Test
             RegisterViewModel("Article", typeof(ArticleModel));
             RegisterViewModel("EmbedParent", typeof(EmbedParentModel));
             RegisterViewModel("TSI1758Test", typeof(Tsi1758TestEntity));
+            RegisterViewModel("TSI1947Test", typeof(ArticleModel));
 
             // Entity Models without associated View
             RegisterViewModel(typeof(TestEntityModel2));
             RegisterViewModel(typeof(TestEntityModel3));
-            RegisterViewModel(typeof(EmbedChildModel));            
+            RegisterViewModel(typeof(EmbedChildModel));
         }
 
         internal void RegisterCoreViewModels()

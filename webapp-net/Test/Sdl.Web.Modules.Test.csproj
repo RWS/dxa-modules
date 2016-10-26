@@ -82,6 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Areas\Test\Views\Entity\TSI1947Test.cshtml" />
     <None Include="Areas\Test\Views\Entity\EmbedParent.cshtml" />
     <None Include="Areas\Test\Views\Entity\Article.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestDxaEntityViewOverride.cshtml" />
