@@ -15,6 +15,7 @@ import com.tridion.marketingsolution.profile.ContactDoesNotExistException;
 import com.tridion.marketingsolution.wrapper.ContactWrapper;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,7 @@ import java.net.URISyntaxException;
 import java.sql.SQLException;
 
 import static com.sdl.dxa.modules.audience.service.support.ContextClaimKey.AUDIENCE_MANAGER_CONTACT_CLAIM;
+import static com.sdl.dxa.modules.audience.service.support.ContextClaimKey.HACK_APPLIED;
 import static com.sdl.dxa.modules.audience.service.support.ContextClaimKey.REQUEST_FULL_URL_CLAIM;
 import static com.sdl.webapp.common.util.LocalizationUtils.normalizePathToDefaults;
 import static com.sdl.webapp.common.util.LocalizationUtils.replaceRequestContextPath;
@@ -35,9 +37,12 @@ public class AudienceManagerServiceImpl implements AudienceManagerService {
 
     private final WebRequestContext webRequestContext;
 
+    private final HttpServletRequest servletRequest;
+
     @Autowired
-    public AudienceManagerServiceImpl(WebRequestContext webRequestContext) {
+    public AudienceManagerServiceImpl(WebRequestContext webRequestContext, HttpServletRequest servletRequest) {
         this.webRequestContext = webRequestContext;
+        this.servletRequest = servletRequest;
     }
 
     @Override
@@ -57,6 +62,11 @@ public class AudienceManagerServiceImpl implements AudienceManagerService {
     @SuppressWarnings("ConstantConditions")
     @Override
     public void prepareClaims(String url) {
+        if (servletRequest.getAttribute(HACK_APPLIED.getKey()) != null) {
+            log.trace("AM hack is already applied for this request, skipping.");
+            return;
+        }
+
         replaceFullUrlClaim(url);
         try {
             // CRQ-2502
@@ -108,6 +118,7 @@ public class AudienceManagerServiceImpl implements AudienceManagerService {
 
         claimStore.getReadOnly().remove(claimFullUrl);
         claimStore.put(claimFullUrl, newFullUrl);
+        servletRequest.setAttribute(HACK_APPLIED.getKey(), newFullUrl);
     }
 
     @Nullable

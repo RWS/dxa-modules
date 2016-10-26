@@ -3,6 +3,7 @@ package com.sdl.dxa.modules.audience.controller;
 import com.sdl.dxa.modules.audience.model.LoginForm;
 import com.sdl.dxa.modules.audience.model.validator.LoginFormValidator;
 import com.sdl.dxa.modules.audience.security.AudienceManagerSecurityProvider;
+import com.sdl.dxa.modules.audience.service.AudienceManagerService;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.localization.Localization;
 import org.junit.Before;
@@ -46,6 +47,9 @@ public class AudienceControllerTest {
     @Mock
     private LoginFormValidator loginFormValidator;
 
+    @Mock
+    private AudienceManagerService audienceManagerService;
+    
     @InjectMocks
     private AudienceController controller;
 
@@ -70,6 +74,7 @@ public class AudienceControllerTest {
 
         //then
         assertEquals("redirect:path", path);
+        verify(audienceManagerService).prepareClaims("url");
     }
 
     @Test
