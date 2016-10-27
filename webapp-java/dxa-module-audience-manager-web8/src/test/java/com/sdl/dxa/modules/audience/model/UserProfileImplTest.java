@@ -27,7 +27,7 @@ public class UserProfileImplTest {
         when(contact.getId()).thenReturn(tcmUri);
 
         //when
-        UserProfile profile = new UserProfileImpl(contact, "uKey", "pKey");
+        UserProfile profile = new UserProfileImpl(contact, "user", "uKey", "pKey", new ContactIdentifiers("uKey", "DXA"));
 
         //then
         assertEquals("user", profile.getUsername());
@@ -38,7 +38,7 @@ public class UserProfileImplTest {
     @Test
     public void shouldReturnNonNullPasswordEncoder() {
         //when
-        PasswordEncoder encoder = new UserProfileImpl(null, null, null).getPasswordEncoder();
+        PasswordEncoder encoder = new UserProfileImpl(null, null, null, null, null).getPasswordEncoder();
 
         //then
         assertNotNull(encoder);

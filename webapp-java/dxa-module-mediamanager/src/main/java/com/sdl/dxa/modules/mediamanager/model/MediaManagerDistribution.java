@@ -33,6 +33,8 @@ import static java.lang.String.format;
 @EqualsAndHashCode(callSuper = true)
 public class MediaManagerDistribution extends EclItem {
 
+    protected static final String ENABLED_MARKER = "Enabled";
+
     static final String CUSTOM_PLAYER_VIEW_PREFIX = "custom-";
 
     @SemanticProperty("s:playerType")
@@ -101,8 +103,8 @@ public class MediaManagerDistribution extends EclItem {
      * @return view name with respect to
      */
     @JsonIgnore
-    String getViewName() {
-        return "Custom".equalsIgnoreCase(playerType) ? CUSTOM_PLAYER_VIEW_PREFIX + super.getDisplayTypeId() : super.getDisplayTypeId();
+    public boolean isCustomView() {
+        return "Custom".equalsIgnoreCase(playerType);
     }
 
     /**
@@ -113,7 +115,7 @@ public class MediaManagerDistribution extends EclItem {
      */
     @JsonIgnore
     public boolean isSubtitled() {
-        return "Enabled".equalsIgnoreCase(customVideoSubtitles);
+        return ENABLED_MARKER.equalsIgnoreCase(customVideoSubtitles);
     }
 
     /**
@@ -124,7 +126,7 @@ public class MediaManagerDistribution extends EclItem {
      */
     @JsonIgnore
     public boolean isAutoPlayed() {
-        return "Enabled".equalsIgnoreCase(customVideoAutoPlay);
+        return ENABLED_MARKER.equalsIgnoreCase(customVideoAutoPlay);
     }
 
     /**
@@ -135,7 +137,7 @@ public class MediaManagerDistribution extends EclItem {
      */
     @JsonIgnore
     public boolean isShowControls() {
-        return "Enabled".equalsIgnoreCase(customVideoControls);
+        return ENABLED_MARKER.equalsIgnoreCase(customVideoControls);
     }
 
     @Override
@@ -163,7 +165,7 @@ public class MediaManagerDistribution extends EclItem {
     @Override
     public MvcData getMvcData() {
         return MvcDataCreator.creator()
-                .fromQualifiedName("MediaManager:" + getViewName())
+                .fromQualifiedName("MediaManager:" + super.getDisplayTypeId())
                 .defaults(DefaultsMvcData.CORE_ENTITY)
                 .create();
     }
@@ -173,7 +175,7 @@ public class MediaManagerDistribution extends EclItem {
         final ImgElementBuilder elementBuilder = img().withSrc(getUrl())
                 .withClass(cssClass)
                 .withAttribute("width", widthFactor);
-        if (aspect != 0.0) {
+        if (!Objects.equals(0.0, aspect)) {
             elementBuilder.withAttribute("data-aspect", NumberFormat.getNumberInstance(Locale.getDefault()).format(aspect));
         }
 

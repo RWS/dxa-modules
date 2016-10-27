@@ -1,4 +1,5 @@
-﻿using Sdl.Web.Common.Models;
+﻿using Newtonsoft.Json;
+using Sdl.Web.Common.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace Sdl.Web.Modules.AudienceManager.Models
         /// Returns true if we are currently logged in
         /// </summary>
         [SemanticProperty(IgnoreMapping = true)]
+        [JsonIgnore]
         public bool IsLoggedIn
         {
             get
@@ -27,6 +29,7 @@ namespace Sdl.Web.Modules.AudienceManager.Models
         /// UserName of currently logged in user
         /// </summary>
         [SemanticProperty(IgnoreMapping = true)]
+        [JsonIgnore]
         public string UserName
         {
             get

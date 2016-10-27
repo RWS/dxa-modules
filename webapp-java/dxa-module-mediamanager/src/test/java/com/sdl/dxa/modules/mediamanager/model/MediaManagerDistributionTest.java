@@ -3,13 +3,11 @@ package com.sdl.dxa.modules.mediamanager.model;
 import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
-import org.springframework.test.util.ReflectionTestUtils;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
 import java.util.HashMap;
 
-import static com.sdl.dxa.modules.mediamanager.model.MediaManagerDistribution.CUSTOM_PLAYER_VIEW_PREFIX;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -118,41 +116,6 @@ public class MediaManagerDistributionTest {
     }
 
     @Test
-    public void shouldReturnDisplayIdForJsonIfClientSideIsEnabled() {
-        //given
-        MediaManagerDistribution distribution = new MediaManagerDistribution();
-        ReflectionTestUtils.setField(distribution, "displayTypeId", "test");
-        distribution.setPlayerType("Custom");
-
-        //when
-        String displayTypeId = distribution.getViewName();
-
-        //then
-        assertEquals(CUSTOM_PLAYER_VIEW_PREFIX + "test", displayTypeId);
-
-        //when
-        distribution.setPlayerType("custom");
-        displayTypeId = distribution.getViewName();
-
-        //then
-        assertEquals("Case should not matter", CUSTOM_PLAYER_VIEW_PREFIX + "test", displayTypeId);
-
-        //when
-        distribution.setPlayerType(null);
-        displayTypeId = distribution.getViewName();
-
-        //then
-        assertEquals("And should get displayTypeId value if nothing special", "test", displayTypeId);
-
-        //when
-        distribution.setPlayerType("standard");
-        displayTypeId = distribution.getViewName();
-
-        //then
-        assertEquals("And should get displayTypeId value if custom is disabled", "test", displayTypeId);
-    }
-
-    @Test
     public void shouldReturnIsSubtitled() {
         //given
         MediaManagerDistribution distribution = new MediaManagerDistribution();
@@ -232,5 +195,19 @@ public class MediaManagerDistributionTest {
         assertEquals("data-customVideoAutoplay", distribution.getCustomVideoAutoPlay());
         assertEquals("data-customVideoSubtitles", distribution.getCustomVideoSubtitles());
         assertEquals("data-customVideoControls", distribution.getCustomVideoControls());
+    }
+
+    @Test
+    public void shouldDetectCustomView() {
+        //given 
+        MediaManagerDistribution distribution = new MediaManagerDistribution();
+
+        //then
+        assertFalse(distribution.isCustomView());
+
+        //when
+        distribution.setPlayerType("custom");
+        //then
+        assertTrue(distribution.isCustomView());
     }
 }

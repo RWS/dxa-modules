@@ -1,20 +1,23 @@
 ﻿@model CurrentUserWidget
 
-<div class="navbar-nav utility-nav" style="padding: 8px 23px;">
-    <div class="btn-group">
-        @if(Model.IsLoggedIn)
-        { 
-            <a class="btn btn-primary" href="#"><i class="fa fa-user fa-fw"></i> @Model.UserName</a>
-            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
-                <span class="fa fa-caret-down" title="Toggle dropdown menu"></span>
-            </a>
-            <ul class="dropdown-menu">
-                <li><a href="api/profile/logout"><i class="fa fa-sign-out fa-fw"></i> @Model.LogoutLabel</a></li>
-            </ul>
-        }
-        else
-        {
-            <a class="btn btn-primary" href="@Model.LoginLink.Url"><i class="fa fa-user fa-fw"></i> @Model.LoginLabel</a>
-        }
+<div @Html.DxaEntityMarkup()>
+    <div class="utility-nav" style="padding-right: 25px; padding-top: 8px;">
+        <div class="btn-group">
+            @if (Model.IsLoggedIn)
+            {
+                string logoutLink = string.Format("{0}/api/profile/logout", WebRequestContext.Localization.Path);
+                <a class="btn btn-primary" href="#"><i class="fa fa-user fa-fw"></i> @Model.UserName</a>
+                <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+                    <span class="fa fa-caret-down" title="Toggle dropdown menu"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a @Html.DxaPropertyMarkup(() => Model.LogoutLabel) href="@logoutLink"><i class="fa fa-sign-out fa-fw"></i> @Model.LogoutLabel</a></li>
+                </ul>
+            }
+            else
+            {
+                <a @Html.DxaPropertyMarkup(() => Model.LoginLabel) class="btn btn-primary" href="@Model.LoginLink.Url"><i class="fa fa-user fa-fw"></i> @Model.LoginLabel</a>
+            }
+        </div>
     </div>
 </div>

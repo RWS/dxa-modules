@@ -23,6 +23,13 @@ public interface AudienceManagerService {
     UserProfile findContact(ContactIdentifiers contactIdentifiers, String usernameKey, String passwordKey);
 
     /**
+     * Prepares claims if needed used given full url. Used to workaround DXA-specific requests without '.html'.
+     *
+     * @param fullUrl url of a requested page in a default format {@code /index.html}
+     */
+    void prepareClaims(String fullUrl);
+
+    /**
      * Logs user with {@code id} in with Ambient Context.
      *
      * @param id id of current user

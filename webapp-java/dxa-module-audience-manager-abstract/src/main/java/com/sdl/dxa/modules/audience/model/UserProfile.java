@@ -19,18 +19,22 @@ import static java.util.Collections.unmodifiableSet;
 public abstract class UserProfile implements UserDetails {
 
     public static final Collection<? extends GrantedAuthority> DEFAULT_AUTHORITIES = unmodifiableSet(
-            Sets.<GrantedAuthority>newHashSet(new SimpleGrantedAuthority("USER")));
+            Sets.<GrantedAuthority>newHashSet(new SimpleGrantedAuthority("ROLE_USER")));
 
     private static final String ENCRYPTED_TOKEN = "encrypted:";
 
-    private final String usernameKey;
+    private final String username;
+
+    private final String displayUsernameKey;
 
     private final String passwordKey;
 
-    private String email;
+    private final transient ContactIdentifiers identifiers;
 
     @NotNull
     protected abstract PasswordEncoder getPasswordEncoder();
+
+    public abstract String getDisplayUsername();
 
     public abstract String getId();
 

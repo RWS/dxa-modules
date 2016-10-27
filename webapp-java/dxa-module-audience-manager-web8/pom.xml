@@ -10,7 +10,7 @@
 
     <groupId>com.sdl.dxa.modules</groupId>
     <artifactId>dxa-module-audience-manager-web8</artifactId>
-    <version>1.6.0-SNAPSHOT</version>
+    <version>1.6.0</version>
 
     <name>DXA Modules - SDL Web 8 Audience Manager</name>
     <description>Implementation of DXA Audience Manager module for SDL Web 8</description>
@@ -44,7 +44,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java-version>1.8</java-version>
-        <dxa-bom.version>1.6.0-SNAPSHOT</dxa-bom.version>
+        <dxa-bom.version>1.6.0</dxa-bom.version>
     </properties>
 
     <dependencyManagement>
@@ -81,17 +81,6 @@
         <dependency>
             <groupId>com.sdl.dxa.modules</groupId>
             <artifactId>dxa-module-audience-manager-abstract</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.sdl.audiencemanager</groupId>
-            <artifactId>audiencemanager_profile_compatibility</artifactId>
-            <version>8.2.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sdl.audiencemanager</groupId>
-            <artifactId>audiencemanager_tracking_compatibility</artifactId>
-            <version>8.2.0</version>
         </dependency>
 
         <dependency>

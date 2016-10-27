@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns="http://www.springframework.org/schema/security"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/security
+           http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+    <http entry-point-ref="authenticationEntryPoint" use-expressions="true" create-session="ifRequired">
+        <intercept-url pattern="/" access="permitAll"/>
+        <intercept-url pattern="/**" access="permitAll"/>
+        <remember-me services-ref="rememberMeServices"/>
+    </http>
+
+    <beans:bean id="authenticationEntryPoint"
+                class="org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint">
+        <beans:property name="realmName" ref="realmName"/>
+    </beans:bean>
+
+    <beans:bean id="rememberMeServices"
+                class="org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices">
+        <beans:constructor-arg name="key" ref="rememberMeKey"/>
+        <beans:constructor-arg name="userDetailsService" ref="audienceManagerUserService"/>
+        <beans:property name="parameter" value="rememberMe"/>
+    </beans:bean>
+
+    <beans:bean id="rememberMeAuthenticationProvider"
+                class="org.springframework.security.authentication.RememberMeAuthenticationProvider">
+        <beans:constructor-arg name="key" ref="rememberMeKey"/>
+    </beans:bean>
+
+    <authentication-manager alias="authenticationManager">
+        <authentication-provider ref="rememberMeAuthenticationProvider"/>
+        <authentication-provider ref="audienceManagerAuthenticationProvider"/>
+    </authentication-manager>
+</beans:beans>
