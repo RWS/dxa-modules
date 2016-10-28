@@ -28,10 +28,10 @@ import org.springframework.stereotype.Component;
         @RegisteredViewModel(viewName = "TSI1758Test", modelClass = Tsi1758TestEntity.class),
         @RegisteredViewModel(viewName = "TSI1758TestEmbedded", modelClass = Tsi1758TestEmbeddedEntity.class),
         @RegisteredViewModel(viewName = "TSI1758TestEmbedded2", modelClass = Tsi1758TestEmbedded2Entity.class),
-        @RegisteredViewModel(viewName = "SimpleTestPage", modelClass = DefaultPageModel.class)
+        @RegisteredViewModel(viewName = "SimpleTestPage", modelClass = DefaultPageModel.class),
 
-
-
+        // https://jira.sdl.com/browse/TSI-1947
+        @RegisteredViewModel(viewName = "TSI1758Test", modelClass = Article.class)
 })
 public class TestModuleInitializer extends AbstractInitializer {
 
