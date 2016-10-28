@@ -26,6 +26,39 @@
                 https://raw.githubusercontent.com/sdl/dxa-web-application-java/${dxa-release-branch}/local-project-repo
             </url>
         </repository>
+        <repository>
+            <id>releases-nexus</id>
+            <name>Tridion Releases</name>
+            <url>https://nexus.sdl.com/content/repositories/releases/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>external</id>
+            <name>Tridion external plus internal</name>
+            <url>https://nexus.sdl.com/nexus/content/groups/external</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>snapshots-nexus</id>
+            <name>Tridion Snapshots</name>
+            <url>https://nexus.sdl.com/nexus/content/repositories/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
     </repositories>
 
     <build>
@@ -80,7 +113,7 @@
                             <goal>npm</goal>
                         </goals>
                         <configuration>
-                            <arguments>install -registry=${nexus-repo}</arguments>
+                            <arguments>install -registry=${nexus-repo} --unsafe-perm</arguments>
                         </configuration>
                     </execution>
 

@@ -169,17 +169,24 @@ gulp.task('build', [
 
 gulp.task('build:dist', cb => {
     buildOptions.isDebug = false;
-    runSequence('clean', 'build', err => {
-        if (err || !yargs.argv.targetPath) {
-            cb(err);
+    runSequence('clean', 'build', errRs => {
+        const targetPath = yargs.argv.targetPath;
+        if (errRs || !targetPath) {
+            cb(errRs);
             return;
         }
-        fs.remove(yargs.argv.targetPath, err => {
-            if (err) {
-                cb(err);
+        fs.remove(targetPath, errRemove => {
+            if (errRemove) {
+                cb(errRemove);
                 return;
             }
-            fs.move(buildOptions.distPath, yargs.argv.targetPath, cb);
+            fs.ensureDir(targetPath, errEnsure => {
+                if (errEnsure) {
+                    cb(errEnsure);
+                    return;
+                }
+                fs.move(buildOptions.distPath, targetPath, { clobber: true }, cb);
+            });
         });
     });
 });
