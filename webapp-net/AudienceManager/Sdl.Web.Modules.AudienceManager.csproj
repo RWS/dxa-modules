@@ -41,16 +41,6 @@
     <WarningLevel>4</WarningLevel>
     <CopyLocal>false</CopyLocal>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release_7.1|AnyCPU'">
-    <OutputPath>bin\Release_7.1\</OutputPath>
-    <DefineConstants>TRACE;TRIDION_71</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <CopyLocal>false</CopyLocal>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -92,24 +82,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.WebData.3.2.3\lib\net45\WebMatrix.WebData.dll</HintPath>
     </Reference>
-  </ItemGroup>
-  <ItemGroup Condition="'$(Configuration)' != 'Release_7.1'">
     <Reference Include="Tridion.ContentDelivery.AmbientData">
       <HintPath>..\packages\Sdl.Web.Delivery.$(SdlDeliveryVersion)\lib\net45\Tridion.ContentDelivery.AmbientData.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="Tridion.OutboundEmail.ContentDelivery">
       <HintPath>..\packages\Sdl.AudienceManager.ContentDelivery.$(AudienceManagerVersion)\lib\net452\Tridion.OutboundEmail.ContentDelivery.dll</HintPath>
-      <Private>true</Private>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup Condition="'$(Configuration)' == 'Release_7.1'">
-    <Reference Include="Tridion.ContentDelivery.AmbientData">
-      <HintPath>..\_references\2013-sp1\Tridion.ContentDelivery.AmbientData.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="Tridion.OutboundEmail.ContentDelivery">
-      <HintPath>..\_references\2013-sp1\Tridion.OutboundEmail.ContentDelivery.dll</HintPath>
       <Private>true</Private>
     </Reference>
   </ItemGroup>

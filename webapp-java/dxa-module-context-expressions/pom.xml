@@ -12,7 +12,7 @@
 
     <groupId>com.sdl.dxa.modules</groupId>
     <artifactId>dxa-module-context-expressions</artifactId>
-    <version>1.6.0</version>
+    <version>1.7.0-SNAPSHOT</version>
 
     <name>DXA Modules - Context Expressions support</name>
     <description>Implementation of DXA Context Expressions support module</description>
@@ -57,8 +57,8 @@
     </developers>
 
     <properties>
-        <java-version>1.7</java-version>
-        <dxa-bom.version>1.6.0</dxa-bom.version>
+        <java-version>1.8</java-version>
+        <dxa-bom.version>1.7.0-SNAPSHOT</dxa-bom.version>
         <dxa-release-branch>release/1.6</dxa-release-branch>
     </properties>
 

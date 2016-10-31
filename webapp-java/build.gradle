@@ -32,9 +32,7 @@ task buildModules(type: MavenBuildTask) {
                     "dxa-module-51degrees",
                     "dxa-module-context-expressions",
                     "dxa-module-test",
-                    "dxa-module-smarttarget-2013sp1",
                     "dxa-module-smarttarget-web8",
-                    "dxa-module-audience-manager-2013sp1",
                     "dxa-module-audience-manager-web8"
             ]
     ]

@@ -11,7 +11,7 @@
     <BuildConfiguration>Release</BuildConfiguration>
     <IsPreRelease>true</IsPreRelease>
     <DxaBuildType>Dev</DxaBuildType>
-    <CdTestDeployFolder>\\saintjohn03.ams.dev\c$\inetpub\wwwroot\7.1_gitversion</CdTestDeployFolder>
+    <CdTestDeployFolder>\\saintjohn03.ams.dev\c$\inetpub\wwwroot\8.1_staging</CdTestDeployFolder>
 
     <ProjectDirectory>$(MSBuildProjectDirectory)</ProjectDirectory>
 
@@ -75,15 +75,6 @@
             Properties="Configuration=$(BuildConfiguration);Platform=Any CPU;AsmVersion=$(Version);FileVersion=$(Version)" 
             Targets="Build" 
             StopOnFirstFailure="true" 
-            />
-
-        <!--We only need to build ST Module in Release_7.1 configuration too, but it seems MSBuild doesn't want to build non-standard configs without a solution file.  -->
-        <Message Text="Building all modules in 'Release_7.1' configuration..."/>
-        <MSBuild
-            Projects="$(ProjectDirectory)\DxaModules.sln"
-            Properties="Configuration=Release_7.1;Platform=Any CPU;AsmVersion=$(Version);FileVersion=$(Version)"
-            Targets="Build"
-            StopOnFirstFailure="true"
             />
     </Target>
 
