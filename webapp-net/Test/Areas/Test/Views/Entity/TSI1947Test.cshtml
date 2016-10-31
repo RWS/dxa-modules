@@ -1,0 +1,15 @@
+﻿@model EntityModel
+@{
+    PageModel contextPageModel = WebRequestContext.PageModel;
+}
+<div class="entity" @Html.DxaEntityMarkup()>
+    <h5>Rendered @Model with Entity View "Test:TSI1947Test"</h5>
+    <div>PageModel.Id: @contextPageModel.Id</div>
+    <div>PageModel.Url: @contextPageModel.Url</div>
+    <div>PageModel.Title: @contextPageModel.Title</div>
+    <h6>PageModel.Meta</h6>
+    @foreach (var kvp in contextPageModel.Meta)
+    {
+        <div>@kvp.Key: @kvp.Value</div>
+    }
+</div>
