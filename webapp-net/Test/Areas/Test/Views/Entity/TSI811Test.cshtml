@@ -5,34 +5,34 @@
     <h4>Keyword1</h4>
     @foreach (Tsi811TestKeyword keyword in Model.Keyword1)
     {
-        <div>Id: @keyword.Id</div>
-        <div>Title: @keyword.Title</div>
-        <div>Description: @keyword.Description</div>
-        <div>Key: @keyword.Key</div>
-        <div>TaxonomyId: @keyword.TaxonomyId</div>
+        <div>Keyword1.Id: @keyword.Id</div>
+        <div>Keyword1.Title: @keyword.Title</div>
+        <div>Keyword1.Description: @keyword.Description</div>
+        <div>Keyword1.Key: @keyword.Key</div>
+        <div>Keyword1.TaxonomyId: @keyword.TaxonomyId</div>
         <div>----</div>
-        <div>TextField: @keyword.TextField</div>
-        <div>NumberField: @keyword.NumberProperty</div>
-        <div>DateField: @keyword.DateField</div>
+        <div>Keyword1.TextField: @keyword.TextField</div>
+        <div>Keyword1.NumberField: @keyword.NumberProperty</div>
+        <div>Keyword1.DateField: @keyword.DateField</div>
         if (keyword.KeywordField != null)
         {
             foreach (Tag value in keyword.KeywordField)
             {
-                <div>KeywordField: @value.DisplayText</div>
+                <div>Keyword1.KeywordField: @value.DisplayText</div>
             }
         }
-        <hr/>
+        <hr />
     }
 
     <h4>Keyword2</h4>
     @{
-        KeywordModel keyword = Model.Keyword2;
+        KeywordModel keyword2 = Model.Keyword2;
     }
-    <div>Id: @keyword.Id</div>
-    <div>Title: @keyword.Title</div>
-    <div>Description: @keyword.Description</div>
-    <div>Key: @keyword.Key</div>
-    <div>TaxonomyId: @keyword.TaxonomyId</div>
+    <div>Keyword2.Id: @keyword2.Id</div>
+    <div>Keyword2.Title: @keyword2.Title</div>
+    <div>Keyword2.Description: @keyword2.Description</div>
+    <div>Keyword2.Key: @keyword2.Key</div>
+    <div>Keyword2.TaxonomyId: @keyword2.TaxonomyId</div>
 
     <h4>BooleanProperty</h4>
     <div>@Model.BooleanProperty</div>
