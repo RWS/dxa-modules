@@ -15,7 +15,7 @@
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <DxaFrameworkVersion>1.6.0</DxaFrameworkVersion>
+    <DxaFrameworkVersion>1.7.0-alpha-201611021644</DxaFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -77,11 +77,13 @@
     <Compile Include="Models\TestEntityModel3.cs" />
     <Compile Include="..\CommonAssemblyInfo.cs" />
     <Compile Include="Models\Tsi1758TestEntity.cs" />
+    <Compile Include="Models\Tsi811TestEntity.cs" />
     <Compile Include="TestAreaRegistration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Areas\Test\Views\Entity\TSI811Test.cshtml" />
     <None Include="Areas\Test\Views\Entity\TSI1947Test.cshtml" />
     <None Include="Areas\Test\Views\Entity\EmbedParent.cshtml" />
     <None Include="Areas\Test\Views\Entity\Article.cshtml" />

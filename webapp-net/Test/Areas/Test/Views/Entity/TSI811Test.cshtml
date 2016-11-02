@@ -1,0 +1,39 @@
+﻿@model Tsi811TestEntity
+<div class="entity" @Html.DxaEntityMarkup()>
+    <h3>Rendered @Model with Entity View "Test:TSI811Test"</h3>
+
+    <h4>Keyword1</h4>
+    @foreach (Tsi811TestKeyword keyword in Model.Keyword1)
+    {
+        <div>Id: @keyword.Id</div>
+        <div>Title: @keyword.Title</div>
+        <div>Description: @keyword.Description</div>
+        <div>Key: @keyword.Key</div>
+        <div>TaxonomyId: @keyword.TaxonomyId</div>
+        <div>----</div>
+        <div>TextField: @keyword.TextField</div>
+        <div>NumberField: @keyword.NumberProperty</div>
+        <div>DateField: @keyword.DateField</div>
+        if (keyword.KeywordField != null)
+        {
+            foreach (Tag value in keyword.KeywordField)
+            {
+                <div>KeywordField: @value.DisplayText</div>
+            }
+        }
+        <hr/>
+    }
+
+    <h4>Keyword2</h4>
+    @{
+        KeywordModel keyword = Model.Keyword2;
+    }
+    <div>Id: @keyword.Id</div>
+    <div>Title: @keyword.Title</div>
+    <div>Description: @keyword.Description</div>
+    <div>Key: @keyword.Key</div>
+    <div>TaxonomyId: @keyword.TaxonomyId</div>
+
+    <h4>BooleanProperty</h4>
+    <div>@Model.BooleanProperty</div>
+</div>
