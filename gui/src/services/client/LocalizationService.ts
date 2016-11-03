@@ -1,13 +1,13 @@
-import { ILocalization } from "../interfaces/Localization";
+import { ILocalizationService } from "../interfaces/LocalizationService";
 
 /**
  * Localization implemented using Globalize
  *
  * @export
  * @class LocalizationGlobalize
- * @implements {ILocalization}
+ * @implements {ILocalizationService}
  */
-export class LocalizationGlobalize implements ILocalization {
+export class LocalizationGlobalize implements ILocalizationService {
 
     private static _globalize: SDL.SDLGlobalizeStatic = SDL.Globalize;
 

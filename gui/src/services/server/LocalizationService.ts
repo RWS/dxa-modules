@@ -1,13 +1,13 @@
-import { ILocalization } from "../interfaces/Localization";
+import { ILocalizationService } from "../interfaces/LocalizationService";
 
 /**
  * Localization implemented for usage on the server
  *
  * @export
- * @class LocalizationServer
- * @implements {ILocalization}
+ * @class LocalizationService
+ * @implements {ILocalizationService}
  */
-export class LocalizationServer implements ILocalization {
+export class LocalizationService implements ILocalizationService {
 
     /**
      * Format a message
@@ -21,4 +21,4 @@ export class LocalizationServer implements ILocalization {
     }
 }
 
-export let localization = new LocalizationServer();
+export let localization = new LocalizationService();
