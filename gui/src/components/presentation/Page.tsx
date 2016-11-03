@@ -44,7 +44,7 @@ export interface IPageProps {
      * @param {string} pageId Page id
      * @memberOf IBreadcrumbsProps
      */
-    getPageLocationPath(pageId: string): void;
+    //getPageLocationPath(pageId: string): void;
     /**
      * Called whenever navigation to another page is requested
      *
@@ -52,7 +52,7 @@ export interface IPageProps {
      *
      * @memberOf IPageProps
      */
-    onNavigate(pageId: string): void;
+    //onNavigate(pageId: string): void;
 }
 
 /**
@@ -113,10 +113,10 @@ export class Page extends React.Component<IPageProps, {}> {
      * @memberOf Page
      */
     private _enableHyperlinks(): void {
-        const props = this.props;
+        //const props = this.props;
         const domNode = ReactDOM.findDOMNode(this);
         const anchors = domNode.querySelectorAll("a");
-        const hyperlinks = this._hyperlinks;
+        //const hyperlinks = this._hyperlinks;
         for (let i: number = 0, length: number = anchors.length; i < length; i++) {
             const anchor = anchors.item(i);
             let itemUrl = anchor.getAttribute("data-url");
@@ -124,18 +124,18 @@ export class Page extends React.Component<IPageProps, {}> {
                 itemUrl = anchor.getAttribute("href");
                 if (itemUrl && itemUrl.match(ITEM_URL_REGEX)) {
                     anchor.setAttribute("data-url", itemUrl);
-                    anchor.setAttribute("href", props.getPageLocationPath(itemUrl) || "");
-                    const onClick = (e: Event): void => {
-                        if (itemUrl) {
-                            props.onNavigate(itemUrl);
-                        }
-                        e.preventDefault();
-                    };
-                    hyperlinks.push({
-                        element: anchor,
-                        handler: onClick
-                    });
-                    anchor.addEventListener("click", onClick);
+                    //anchor.setAttribute("href", props.getPageLocationPath(itemUrl) || "");
+                    // const onClick = (e: Event): void => {
+                    //     if (itemUrl) {
+                    //         //props.onNavigate(itemUrl);
+                    //     }
+                    //     e.preventDefault();
+                    // };
+                    // hyperlinks.push({
+                    //     element: anchor,
+                    //     handler: onClick
+                    // });
+                    // anchor.addEventListener("click", onClick);
                 }
             }
         }

@@ -1,6 +1,6 @@
 import { Promise } from "es6-promise";
+import { Link } from "react-router";
 import { ISitemapItem } from "../../interfaces/ServerModels";
-import { IRouting } from "../../interfaces/Routing";
 import "./styles/Breadcrumbs";
 
 /**
@@ -32,13 +32,6 @@ export interface IBreadcrumbsProps {
      * Load items path for a specific item
      */
     loadItemsPath: (publicationId: string, parentId: string) => Promise<ISitemapItem[]>;
-    /**
-     * Routing
-     *
-     * @type {IRouting}
-     * @memberOf IBreadcrumbsProps
-     */
-    routing: IRouting;
 }
 
 /**
@@ -141,18 +134,14 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
      */
     public render(): JSX.Element {
         const { itemPath } = this.state;
-        const { publicationId, publicationTitle, routing } = this.props;
+        const { publicationId, publicationTitle } = this.props;
         const { selectedItem } = this.props;
         const currentUrl = selectedItem ? selectedItem.Url : null;
-
         return (
             <div className={"sdl-dita-delivery-breadcrumbs"}>
                 <ul>
                     <li>
-                        <a onClick={(e: React.MouseEvent): void => {
-                            routing.setPublicationLocation(publicationId, publicationTitle);
-                            e.preventDefault();
-                        } } href={routing.getPublicationLocationPath(publicationId, publicationTitle)} title={publicationTitle}>{publicationTitle}</a>
+                        <Link to={`/${publicationId}/${publicationTitle}`}>{publicationTitle}</Link>
                     </li>
                     {
                         Array.isArray(itemPath) && (
@@ -161,18 +150,11 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
                                     <li key={key}>
                                         {
                                             (currentUrl != item.Url)
-                                                ? <a onClick={(e: React.MouseEvent): void => {
-                                                    if (item.Url) {
-                                                        routing.setPageLocation(item.Url || "");
-                                                    }
-                                                    else {
-                                                        routing.setPublicationLocation(publicationId, publicationTitle, item.Url, item.Title);
-                                                    }
-                                                    e.preventDefault();
-                                                } } href={item.Url
-                                                    ? routing.getPageLocationPath(item.Url)
-                                                    : routing.getPublicationLocationPath(publicationId, publicationTitle, item.Url, item.Title)}
-                                                    title={item.Title}>{item.Title}</a>
+                                                ?
+                                                (item.Url) ?
+                                                    <Link to={`/${publicationId}/${item.Url}/${publicationId}/${publicationTitle}`}>{item.Title}</Link>
+                                                    :
+                                                    <Link to={`/${publicationId}/${publicationTitle}/${item.Title}`}>{item.Title}</Link>
                                                 : <span>{item.Title}</span>
                                         }
                                     </li>

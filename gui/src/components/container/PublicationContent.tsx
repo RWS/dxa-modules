@@ -9,6 +9,42 @@ import { Breadcrumbs } from "../presentation/Breadcrumbs";
 import "./styles/PublicationContent";
 
 /**
+ * PublicationContent component props params
+ *
+ * @export
+ * @interface IPublicationContentProps
+ */
+export interface IPublicationContentPropsParams {
+    /**
+     * Id of the current publication
+     *
+     * @type {string}
+     */
+    publicationId: string;
+
+    /**
+     * Title of the current publication
+     *
+     * @type {string}
+     */
+    publicationTitle?: string;
+
+    /**
+     * Id of the current page
+     *
+     * @type {string}
+     */
+    pageId: string;
+
+    /**
+     * Title of the current page
+     *
+     * @type {string}
+     */
+    pageTitle: string;
+}
+
+/**
  * PublicationContent component props
  *
  * @export
@@ -18,16 +54,9 @@ export interface IPublicationContentProps {
     /**
      * Id of the current publication
      *
-     * @type {string}
+     * @type {IPublicationContentPropsParams}
      */
-    publicationId: string;
-    /**
-     * Data store
-     *
-     * @type {IDataStore}
-     * @memberOf IPublicationContentProps
-     */
-    dataStore: IDataStore;
+    params: IPublicationContentPropsParams;
     /**
      * Routing
      *
@@ -106,6 +135,16 @@ interface IToc {
     rootItems?: ISitemapItem[];
 }
 
+export interface IPublicationContentContext {
+    /**
+     * Data store
+     *
+     * @type {IDataStore}
+     * @memberOf IAppWrapperProps
+     */
+    dataStore: IDataStore;
+}
+
 /**
  * Publication + content component
  */
@@ -114,6 +153,10 @@ export class PublicationContent extends React.Component<IPublicationContentProps
     private _page: IPage = {};
     private _toc: IToc = {};
     private _isUnmounted: boolean = false;
+
+    public static contextTypes: React.ValidationMap<IPublicationContentContext> = {
+        dataStore: React.PropTypes.object.isRequired
+    };
 
     /**
      * Creates an instance of App.
@@ -132,7 +175,8 @@ export class PublicationContent extends React.Component<IPublicationContentProps
      * Invoked once, both on the client and server, immediately before the initial rendering occurs.
      */
     public componentWillMount(): void {
-        const { publicationId, dataStore, routing } = this.props;
+        const { dataStore } = this.context as IPublicationContentContext;
+        const { publicationId, pageId } = this.props.params;
         const getRootItems = (path?: string[]): void => {
             // Get the data for the Toc
             dataStore.getSitemapRoot(publicationId).then(
@@ -159,10 +203,9 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                 });
         };
 
-        const location = routing.getPublicationLocation();
-        if (location && location.pageId) {
+        if (pageId) {
             // Set the current active path for the tree
-            this._getActiveSitemapPath(location.pageId, getRootItems);
+            this._getActiveSitemapPath(pageId, getRootItems);
         } else {
             getRootItems();
         }
@@ -174,13 +217,12 @@ export class PublicationContent extends React.Component<IPublicationContentProps
      * @param {IPublicationContentProps} nextProps
      */
     public componentWillReceiveProps(nextProps: IPublicationContentProps): void {
-        const { routing } = this.props;
         const { selectedTocItem } = this.state;
-        const location = routing.getPublicationLocation();
+        const {pageId} = this.props.params;
 
-        if (location && location.pageId && (!selectedTocItem || location.pageId !== selectedTocItem.Url)) {
+        if (pageId && (!selectedTocItem || pageId !== selectedTocItem.Url)) {
             // Set the current active path for the tree
-            this._getActiveSitemapPath(location.pageId, (path) => {
+            this._getActiveSitemapPath(pageId, (path) => {
                 this.setState({
                     activeTocItemPath: path
                 });
@@ -196,7 +238,8 @@ export class PublicationContent extends React.Component<IPublicationContentProps
      * @param {IPublicationContentState} nextState Next state
      */
     public componentWillUpdate(nextProps: IPublicationContentProps, nextState: IPublicationContentState): void {
-        const { publicationId, dataStore } = this.props;
+        const { dataStore } = this.context as IPublicationContentContext;
+        const { publicationId } = this.props.params;
         const { selectedTocItem, isPageLoading } = this.state;
         const currentUrl = selectedTocItem ? selectedTocItem.Url : null;
         const nextUrl = nextState.selectedTocItem ? nextState.selectedTocItem.Url : null;
@@ -217,7 +260,9 @@ export class PublicationContent extends React.Component<IPublicationContentProps
      */
     public render(): JSX.Element {
         const { isPageLoading, activeTocItemPath, selectedTocItem, publicationTitle } = this.state;
-        const { publicationId, dataStore, routing } = this.props;
+        const { dataStore } = this.context as IPublicationContentContext;
+        //const { routing} = this.props;
+        const { publicationId } = this.props.params;
         const { content, error} = this._page;
         const { rootItems } = this._toc;
         const tocError = this._toc.error;
@@ -233,17 +278,17 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     onSelectionChanged={this._onTocSelectionChanged.bind(this)}
                     error={tocError} />
                 <Breadcrumbs
-                    routing={routing}
                     publicationId={publicationId}
                     publicationTitle={publicationTitle || ""}
                     loadItemsPath={dataStore.getSitemapPath.bind(dataStore)}
                     selectedItem={selectedTocItem} />
-                <Page
-                    getPageLocationPath={routing.getPageLocationPath.bind(routing)}
+                 <Page
+                    //getPageLocationPath={routing.getPageLocationPath.bind(routing)}
                     showActivityIndicator={isPageLoading || false}
                     content={content}
                     error={error}
-                    onNavigate={routing.setPageLocation.bind(routing)} />
+                    //onNavigate={routing.setPageLocation.bind(routing)}
+                    />
             </section>
         );
     }
@@ -257,7 +302,9 @@ export class PublicationContent extends React.Component<IPublicationContentProps
 
     private _onTocSelectionChanged(sitemapItem: ISitemapItem, path: string[]): void {
         const page = this._page;
-        const { publicationId, dataStore, routing } = this.props;
+        const { dataStore } = this.context as IPublicationContentContext;
+        const { routing } = this.props;
+        const { publicationId } = this.props.params;
 
         page.error = null;
 
@@ -301,7 +348,8 @@ export class PublicationContent extends React.Component<IPublicationContentProps
     }
 
     private _getActiveSitemapPath(pageId: string, done: (path: string[]) => void): void {
-        const { publicationId, dataStore } = this.props;
+        const { dataStore } = this.context as IPublicationContentContext;
+        const { publicationId } = this.props.params;
         dataStore.getSitemapPath(publicationId, pageId).then(
             path => {
                 /* istanbul ignore else */

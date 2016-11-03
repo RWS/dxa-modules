@@ -1,7 +1,6 @@
 /// <reference path="../typings/index.d.ts" />
 
-import "ts-helpers";
-import { App } from "./components/container/App";
+import { AppWrapper } from "./modules/AppWrapper";
 import { DataStoreServer } from "./global/server/DataStoreServer";
 import { localization } from "./global/server/LocalizationServer";
 import { routing } from "./global/server/RoutingServer";
@@ -21,7 +20,7 @@ export function renderToString(path: string): string {
      */
     const dataStore = new DataStoreServer();
 
-    return ReactDOMServer.renderToString(<App
+    return ReactDOMServer.renderToString(<AppWrapper
         dataStore={dataStore}
         routing={routing}
         localization={localization} />);

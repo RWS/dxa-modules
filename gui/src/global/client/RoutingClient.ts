@@ -1,5 +1,6 @@
 import { IRouting, IPublicationLocation } from "../../interfaces/Routing";
-import { createHistory, createMemoryHistory } from "history";
+import { createMemoryHistory } from "history";
+import { browserHistory } from "react-router";
 
 /**
  * Regex to validate if a url is pointing to a publication + page
@@ -35,7 +36,7 @@ export class RoutingClient implements IRouting {
     constructor(root: string = "/", inMemory: boolean = false) {
         this._root = root;
         if (!inMemory) {
-            RoutingClient._history = createHistory();
+            RoutingClient._history = browserHistory;
         } else {
             RoutingClient._history = createMemoryHistory();
         }
@@ -71,99 +72,110 @@ export class RoutingClient implements IRouting {
     public setPublicationLocation(publicationId: string, publicationTitle: string,
         pageId?: string, pageTitle?: string): void {
 
-            const pathname = this.getPublicationLocationPath(publicationId, publicationTitle, pageId, pageTitle);
+        const pathname = this.getPublicationLocationPath(publicationId, publicationTitle, pageId, pageTitle);
 
-            const currentLocation = this.getPublicationLocation();
-            if (currentLocation &&
-                currentLocation.publicationId === publicationId &&
-                currentLocation.pageId === pageId) {
-                this._replace(pathname);
-            } else {
-                this._push(pathname);
-            }
+        const currentLocation = this.getPublicationLocation();
+        if (currentLocation &&
+            currentLocation.publicationId === publicationId &&
+            currentLocation.pageId === pageId) {
+            this._replace(pathname);
+        } else {
+            this._push(pathname);
         }
+    }
 
-        /**
-         * Gets publication location path
-         *
-         * @param {string} publicationId Publication id
-         * @param {string} publicationTitle Publication title
-         * @param {string} [pageId] Page id
-         * @param {string} [pageTitle] Page title
-         * 
-         * @returns {string} Page location path
-         */
-        public getPublicationLocationPath(publicationId: string, publicationTitle: string,
-            pageId?: string, pageTitle?: string): string {
+    /**
+     * Gets publication location path
+     *
+     * @param {string} publicationId Publication id
+     * @param {string} publicationTitle Publication title
+     * @param {string} [pageId] Page id
+     * @param {string} [pageTitle] Page title
+     *
+     * @returns {string} Page location path
+     */
+    public getPublicationLocationPath(publicationId: string, publicationTitle: string,
+        pageId?: string, pageTitle?: string): string {
 
-            return this.getAbsolutePath(
-                encodeURIComponent(publicationId) + "/" +
-                (pageId ? encodeURIComponent(pageId) + "/" : "") +
-                encodeURIComponent(this._escapeTitle(publicationTitle)) + "/" +
-                (pageTitle ? encodeURIComponent(this._escapeTitle(pageTitle)) : "")
-            );
-        }
+        return this.getAbsolutePath(
+            encodeURIComponent(publicationId) + "/" +
+            (pageId ? encodeURIComponent(pageId) + "/" : "") +
+            encodeURIComponent(this._escapeTitle(publicationTitle)) + "/" +
+            (pageTitle ? encodeURIComponent(this._escapeTitle(pageTitle)) : "")
+        );
+    }
 
-        /**
-         * Get the current location within a publication
-         *
-         * @returns {IPublicationLocation | null}
-         */
-        public getPublicationLocation(): IPublicationLocation | null {
-            const currentLocation = RoutingClient._history.getCurrentLocation().pathname;
-            const paths = currentLocation.match(PUBLICATION_URL_REGEX);
-            if (paths) {
-                const result = paths[0].split("/");
+    /**
+     * Get the current location within a publication
+     *
+     * @returns {IPublicationLocation | null}
+     */
+    public getPublicationLocation(): IPublicationLocation | null {
+        const currentLocation = RoutingClient._history.getCurrentLocation().pathname;
+        const paths = currentLocation.match(PUBLICATION_URL_REGEX);
+        if (paths) {
+            const result = paths[0].split("/");
+            return {
+                publicationId: decodeURIComponent(result[1]),
+                pageId: decodeURIComponent(result[2])
+            };
+        } else {
+            const noPagePaths = currentLocation.match(PUBLICATION_URL_REGEX_NO_PAGE);
+            if (noPagePaths) {
+                const result = noPagePaths[0].split("/");
                 return {
                     publicationId: decodeURIComponent(result[1]),
-                    pageId: decodeURIComponent(result[2])
+                    pageId: null
                 };
-            } else {
-                const noPagePaths = currentLocation.match(PUBLICATION_URL_REGEX_NO_PAGE);
-                if (noPagePaths) {
-                    const result = noPagePaths[0].split("/");
-                    return {
-                        publicationId: decodeURIComponent(result[1]),
-                        pageId: null
-                    };
-                }
             }
-            return null;
         }
+        return null;
+    }
 
-        /**
-         * Set page location
-         *
-         * @param {string} pageId Page id
-         *
-         * @memberOf IRouting
-         */
-        public setPageLocation(pageId: string): void {
-            const pathname = this.getPageLocationPath(pageId);
-            if (pathname) {
-                this._push(pathname);
-            }
+    /**
+     * Set page location
+     *
+     * @param {string} pageId Page id
+     *
+     * @memberOf IRouting
+     */
+    public setPageLocation(pageId: string): void {
+        const pathname = this.getPageLocationPath(pageId);
+        if (pathname) {
+            this._push(pathname);
         }
+    }
 
-        /**
-         * Gets page location path
-         *
-         * @param {string} pageId Page id
-         *
-         * @memberOf IRouting
-         * @returns {string | undefined} Page location path
-         */
-        public getPageLocationPath(pageId: string): string | undefined {
-            const location = this.getPublicationLocation();
-            if (location) {
-                const { publicationId} = location;
-                return this.getAbsolutePath(
-                    encodeURIComponent(publicationId) + "/" +
-                    encodeURIComponent(pageId) + "/"
-                );
-            }
-            return undefined;
+    /**
+     * Gets page location path
+     *
+     * @param {string} pageId Page id
+     *
+     * @memberOf IRouting
+     * @returns {string | undefined} Page location path
+     */
+    public getPageLocationPath(pageId: string): string | undefined {
+        const location = this.getPublicationLocation();
+        if (location) {
+            const { publicationId} = location;
+            return this.getAbsolutePath(
+                encodeURIComponent(publicationId) + "/" +
+                encodeURIComponent(pageId) + "/"
+            );
         }
+        return undefined;
+    }
+
+    /**
+     * gets the history
+     *
+     *
+     * @memberOf IRouting
+     * @returns {HistoryModule.History} The browser history object
+     */
+    public getHistory(): HistoryModule.History {
+        return RoutingClient._history;
+    }
 
     private _escapeTitle(title: string): string {
         return title.replace(/\s/gi, "-");
