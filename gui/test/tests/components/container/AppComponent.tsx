@@ -24,7 +24,7 @@ class AppComponent extends TestBase {
             afterEach(() => {
                 const domNode = ReactDOM.findDOMNode(target);
                 ReactDOM.unmountComponentAtNode(domNode);
-                services.taxonomyService.fakeDelay(false);
+                services.pageService.fakeDelay(false);
             });
 
             afterAll(() => {
