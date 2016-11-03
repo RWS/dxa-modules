@@ -1,4 +1,4 @@
-import { ILocalization } from "../../src/interfaces/Localization";
+import { ILocalization } from "../../../src/services/interfaces/Localization";
 
 export class Localization implements ILocalization {
 

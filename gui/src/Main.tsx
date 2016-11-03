@@ -2,8 +2,8 @@
 
 import "ts-helpers";
 import { App } from "./components/container/App";
-import { DataStoreClient } from "./global/client/DataStoreClient";
-import { localization } from "./global/client/LocalizationGlobalize";
+import { DataStoreClient } from "./services/client/DataStoreClient";
+import { localization } from "./services/client/LocalizationGlobalize";
 import { routing } from "./global/client/RoutingClient";
 
 /**

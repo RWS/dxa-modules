@@ -1,6 +1,6 @@
 import { PublicationContent } from "./PublicationContent";
-import { ILocalization } from "../../interfaces/Localization";
-import { IDataStore } from "../../interfaces/DataStore";
+import { ILocalization } from "../../services/interfaces/Localization";
+import { IDataStore } from "../../services/interfaces/DataStore";
 import { IRouting } from "../../interfaces/Routing";
 import "./styles/App";
 import "../controls/styles/TopBar";

@@ -1,5 +1,5 @@
 import { routing } from "../global/client/RoutingClient";
-import { localization } from "../global/client/LocalizationGlobalize";
+import { localization } from "../services/client/LocalizationGlobalize";
 import { ISitemapItem } from "../interfaces/ServerModels";
 import { TcmId as TcmIdUtils } from "../utils/TcmId";
 

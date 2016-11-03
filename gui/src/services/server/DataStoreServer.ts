@@ -1,4 +1,4 @@
-import { IDataStore } from "../../interfaces/DataStore";
+import { IDataStore } from "../interfaces/DataStore";
 import { ISitemapItem, IPublication } from "../../interfaces/ServerModels";
 import { IPageInfo } from "../../models/Page";
 import { Promise } from "es6-promise";

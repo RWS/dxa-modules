@@ -1,6 +1,6 @@
 import { Promise } from "es6-promise";
 import { ISitemapItem } from "../../interfaces/ServerModels";
-import { IDataStore } from "../../interfaces/DataStore";
+import { IDataStore } from "../../services/interfaces/DataStore";
 import { IRouting } from "../../interfaces/Routing";
 import { Toc } from "../presentation/Toc";
 import { Page } from "../presentation/Page";

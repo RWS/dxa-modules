@@ -1,6 +1,6 @@
 import { PublicationContent } from "../../../../src/components/container/PublicationContent";
 import { ISitemapItem } from "../../../../src/interfaces/ServerModels";
-import { DataStore } from "../../../mocks/DataStore";
+import { DataStore } from "../../../mocks/services/DataStore";
 import { routing } from "../../../mocks/Routing";
 
 // Global Catalina dependencies

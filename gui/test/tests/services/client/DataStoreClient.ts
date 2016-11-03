@@ -1,4 +1,4 @@
-import { DataStoreClient } from "../../../../src/global/client/DataStoreClient";
+import { DataStoreClient } from "../../../../src/services/client/DataStoreClient";
 
 // Global Catalina dependencies
 import TestBase = SDL.Client.Test.TestBase;

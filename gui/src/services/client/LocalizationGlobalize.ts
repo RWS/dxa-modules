@@ -1,4 +1,4 @@
-import { ILocalization } from "../../interfaces/Localization";
+import { ILocalization } from "../interfaces/Localization";
 
 /**
  * Localization implemented using Globalize

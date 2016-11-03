@@ -1,8 +1,8 @@
 import { renderToString } from "../../src/Server";
 import { App } from "../../src/components/container/App";
 import { routing } from "../../src/global/server/RoutingServer";
-import { localization } from "../../src/global/server/LocalizationServer";
-import { DataStoreServer } from "../../src/global/server/DataStoreServer";
+import { localization } from "../../src/services/server/LocalizationServer";
+import { DataStoreServer } from "../../src/services/server/DataStoreServer";
 
 class Server extends SDL.Client.Test.TestBase {
 

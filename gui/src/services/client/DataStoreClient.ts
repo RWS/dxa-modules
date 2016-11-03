@@ -1,4 +1,4 @@
-import { IDataStore } from "../../interfaces/DataStore";
+import { IDataStore } from "../interfaces/DataStore";
 import { ISitemapItem, IPublication } from "../../interfaces/ServerModels";
 import { localization } from "./LocalizationGlobalize";
 import { Page, IPageInfo } from "../../models/Page";

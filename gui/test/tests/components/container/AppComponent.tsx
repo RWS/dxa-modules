@@ -1,7 +1,7 @@
 import { App } from "../../../../src/components/container/App";
-import { DataStore } from "../../../mocks/DataStore";
+import { DataStore } from "../../../mocks/services/DataStore";
 import { routing } from "../../../mocks/Routing";
-import { localization } from "../../../mocks/Localization";
+import { localization } from "../../../mocks/services/Localization";
 
 // Global Catalina dependencies
 import TestBase = SDL.Client.Test.TestBase;

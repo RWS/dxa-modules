@@ -1,5 +1,5 @@
-import { ISitemapItem, IPublication } from "../interfaces/ServerModels";
-import { IPageInfo } from "../models/Page";
+import { ISitemapItem, IPublication } from "../../interfaces/ServerModels";
+import { IPageInfo } from "../../models/Page";
 import { Promise } from "es6-promise";
 
 /**

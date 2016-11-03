@@ -1,6 +1,6 @@
-import { IDataStore } from "../../src/interfaces/DataStore";
-import { ISitemapItem, IPublication } from "../../src/interfaces/ServerModels";
-import { IPageInfo } from "../../src/models/Page";
+import { IDataStore } from "../../../src/services/interfaces/DataStore";
+import { ISitemapItem, IPublication } from "../../../src/interfaces/ServerModels";
+import { IPageInfo } from "../../../src/models/Page";
 import { Promise } from "es6-promise";
 
 let fakeDelay = false;

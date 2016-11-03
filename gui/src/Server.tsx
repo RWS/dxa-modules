@@ -2,8 +2,8 @@
 
 import "ts-helpers";
 import { App } from "./components/container/App";
-import { DataStoreServer } from "./global/server/DataStoreServer";
-import { localization } from "./global/server/LocalizationServer";
+import { DataStoreServer } from "./services/server/DataStoreServer";
+import { localization } from "./services/server/LocalizationServer";
 import { routing } from "./global/server/RoutingServer";
 
 // Nashorn script engine needs a global scope
