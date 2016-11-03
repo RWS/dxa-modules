@@ -10,7 +10,7 @@ class PublicationServiceTests extends TestBase {
         const publicationService = new PublicationService();
         const publicationId = "ish:1656863-1-1";
 
-        describe(`Data Store tests (Publications).`, (): void => {
+        describe(`Publication service tests.`, (): void => {
 
             it("returns a proper error when publications cannot be retrieved", (done: () => void): void => {
                 // Put this test first, otherwise the publication would be already in the cache and the spy would not work

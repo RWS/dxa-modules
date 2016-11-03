@@ -9,7 +9,7 @@ class PageServiceTests extends TestBase {
         const pageService = new PageService();
         const publicationId = "ish:1656863-1-1";
 
-        describe(`Data Store tests (Page).`, (): void => {
+        describe(`Page service tests.`, (): void => {
 
             it("can get page info", (done: () => void): void => {
                 const pageId = "ish:1656863-164398-16";

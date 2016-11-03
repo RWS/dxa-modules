@@ -9,7 +9,7 @@ class TaxonomyServiceTests extends TestBase {
         const taxonomyService = new TaxonomyService();
         const publicationId = "ish:1656863-1-1";
 
-        describe(`Data Store tests (Toc).`, (): void => {
+        describe(`Taxonomy service tests.`, (): void => {
 
             it("can get site map items for the root", (done: () => void): void => {
                 taxonomyService.getSitemapRoot(publicationId)
@@ -83,9 +83,6 @@ class TaxonomyServiceTests extends TestBase {
                         done();
                     });
             });
-        });
-
-        describe(`Data Store tests (Navigation Links).`, (): void => {
 
             it("can get a path for a page", (done: () => void): void => {
                 const pageId = "ish:1656863-164187-16";
