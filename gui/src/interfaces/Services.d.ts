@@ -1,6 +1,7 @@
-import { ITaxonomyService } from "../services/interfaces/TaxonomyService";
 import { IPageService } from "../services/interfaces/PageService";
+import { ILocalizationService } from "../services/interfaces/LocalizationService";
 import { IPublicationService } from "../services/interfaces/PublicationService";
+import { ITaxonomyService } from "../services/interfaces/TaxonomyService";
 
 /**
  * List of all services
@@ -9,13 +10,7 @@ import { IPublicationService } from "../services/interfaces/PublicationService";
  * @interface IServices
  */
 export interface IServices {
-    /**
-     * Taxonomy service
-     *
-     * @type {ITaxonomyService}
-     * @memberOf IServices
-     */
-    taxonomyService: ITaxonomyService;
+
     /**
      * Page service
      *
@@ -30,4 +25,18 @@ export interface IServices {
      * @memberOf IServices
      */
     publicationService: IPublicationService;
+    /**
+     * Localization service
+     *
+     * @type {ILocalizationService}
+     * @memberOf IServices
+     */
+    localizationService: ILocalizationService;
+    /**
+     * Taxonomy service
+     *
+     * @type {ITaxonomyService}
+     * @memberOf IServices
+     */
+    taxonomyService: ITaxonomyService;
 }

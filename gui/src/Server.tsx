@@ -25,13 +25,13 @@ export function renderToString(path: string): string {
     const services: IServices = {
         pageService: new PageService(),
         publicationService: new PublicationService(),
+        localizationService: localization,
         taxonomyService: new TaxonomyService()
     };
 
     return ReactDOMServer.renderToString(<App
         services={services}
-        routing={routing}
-        localization={localization} />);
+        routing={routing} />);
 };
 
 _renderToString = renderToString;

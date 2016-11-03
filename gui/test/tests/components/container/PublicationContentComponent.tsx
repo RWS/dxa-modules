@@ -4,13 +4,15 @@ import { PageService } from "../../../mocks/services/PageService";
 import { PublicationService } from "../../../mocks/services/PublicationService";
 import { TaxonomyService } from "../../../mocks/services/TaxonomyService";
 import { routing } from "../../../mocks/Routing";
+import { localization } from "../../../mocks/services/LocalizationService";
 
 // Global Catalina dependencies
 import TestBase = SDL.Client.Test.TestBase;
 
 const services = {
     pageService: new PageService(),
-    publicationService: new PublicationService,
+    publicationService: new PublicationService(),
+    localizationService: localization,
     taxonomyService: new TaxonomyService()
 };
 

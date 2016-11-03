@@ -11,6 +11,7 @@ import TestBase = SDL.Client.Test.TestBase;
 const services = {
     pageService: new PageService(),
     publicationService: new PublicationService,
+    localizationService: localization,
     taxonomyService: new TaxonomyService()
 };
 
@@ -42,7 +43,7 @@ class AppComponent extends TestBase {
     }
 
     private _renderComponent(target: HTMLElement): App {
-        return ReactDOM.render(<App services={services} routing={routing} localization={localization}/>, target) as App;
+        return ReactDOM.render(<App services={services} routing={routing} />, target) as App;
     }
 }
 

@@ -1,5 +1,4 @@
 import { PublicationContent } from "./PublicationContent";
-import { ILocalizationService } from "../../services/interfaces/LocalizationService";
 import { IServices } from "../../interfaces/Services";
 import { IRouting } from "../../interfaces/Routing";
 import "./styles/App";
@@ -24,13 +23,6 @@ export interface IAppState {
 }
 
 export interface IAppProps {
-    /**
-     * Localization
-     *
-     * @type {ILocalization}
-     * @memberOf IAppProps
-     */
-    localization: ILocalizationService;
     /**
      * Services
      *
@@ -69,9 +61,9 @@ export class App extends React.Component<IAppProps, IAppState> {
      * @returns {JSX.Element}
      */
     public render(): JSX.Element {
-        const { formatMessage } = this.props.localization;
         const { selectedPublicationId } = this.state;
         const { services, routing } = this.props;
+        const { formatMessage } = services.localizationService;
         return (
             <div className={"sdl-dita-delivery-app"}>
                 <TopBar title={formatMessage("components.app.title")} buttons={{

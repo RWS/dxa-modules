@@ -15,6 +15,7 @@ import { routing } from "./global/client/RoutingClient";
 const services: IServices = {
     pageService: new PageService(),
     publicationService: new PublicationService(),
+    localizationService: localization,
     taxonomyService: new TaxonomyService()
 };
 
@@ -26,8 +27,7 @@ if (!mainElement) {
     const render = (): void => {
         ReactDOM.render(<App
             services={services}
-            routing={routing}
-            localization={localization} />, mainElement);
+            routing={routing} />, mainElement);
     };
 
     routing.onLocationChanged(render);

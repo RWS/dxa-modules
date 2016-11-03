@@ -27,9 +27,10 @@ class Server extends SDL.Client.Test.TestBase {
                 const services: IServices = {
                     pageService: new PageService(),
                     publicationService: new PublicationService(),
+                    localizationService: localization,
                     taxonomyService: new TaxonomyService()
                 };
-                const app = ReactDOMServer.renderToStaticMarkup(<App routing={routing} localization={localization} services={services} />);
+                const app = ReactDOMServer.renderToStaticMarkup(<App routing={routing} services={services} />);
                 const expected = ReactDOMServer.renderToStaticMarkup((
                     <div className="sdl-dita-delivery-app">
                         <span>
