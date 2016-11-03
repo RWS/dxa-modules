@@ -32,6 +32,7 @@ namespace Sdl.Web.Modules.Test
             RegisterViewModel("CustomPageModelInheritedController", typeof(CustomPageModel));
             RegisterViewModel("TestDxaEntityViewOverride", typeof(PageModel));
             RegisterViewModel("SimpleTestPage", typeof(PageModel));
+            RegisterViewModel("TSI811TestPage", typeof(Tsi811PageModel));
 
             // Region Views
             RegisterViewModel("TestRegion1", typeof(RegionModel), "Region");

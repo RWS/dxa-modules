@@ -64,6 +64,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Tsi811PageModel.cs" />
     <Compile Include="Models\EmbedParentModel.cs" />
     <Compile Include="Models\EmbedChildModel.cs" />
     <Compile Include="Models\CustomPageModel.cs" />
@@ -99,6 +100,7 @@
     <None Include="Areas\Test\Views\Entity\TestEntity2.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestEntity1.cshtml" />
     <None Include="Areas\Test\Views\Page\CustomPageModelInheritedController.cshtml" />
+    <None Include="Areas\Test\Views\Page\TSI811TestPage.cshtml" />
     <None Include="Areas\Test\Views\Page\TestDxaEntityViewOverride.cshtml" />
     <None Include="Areas\Test\Views\Page\SimpleTestPage.cshtml" />
     <None Include="Areas\Test\Views\Page\TestPageInheritedController.cshtml" />

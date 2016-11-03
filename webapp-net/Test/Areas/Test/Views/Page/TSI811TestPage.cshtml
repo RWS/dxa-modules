@@ -1,0 +1,42 @@
+﻿@model Tsi811PageModel
+<html>
+    <head>
+        <title>@Model.Title</title>
+        <style>
+            .region { border: solid thick; }
+            .entity { border: solid thin; }
+            .embeddedEntity { border: dashed thin; }
+            .alert { color: red }
+            td { border: solid thin; }
+        </style>
+    </head>
+    <body>
+        <h1>Rendered @Model with Page View "Test:TSI811TestPage"</h1>
+
+        <div>
+            @Html.DxaRegions()
+        </div>
+
+        <h2>Page metadata</h2>
+        @{
+            Tsi811TestKeyword keyword = Model.PageKeyword;
+        }
+        <div>PageKeyword.Id: @keyword.Id</div>
+        <div>PageKeyword.Title: @keyword.Title</div>
+        <div>PageKeyword.Description: @keyword.Description</div>
+        <div>PageKeyword.Key: @keyword.Key</div>
+        <div>PageKeyword.TaxonomyId: @keyword.TaxonomyId</div>
+        <div>----</div>
+        <div>PageKeyword.TextField: @keyword.TextField</div>
+        <div>PageKeyword.NumberField: @keyword.NumberProperty</div>
+        <div>PageKeyword.DateField: @keyword.DateField</div>
+
+        <!-- Epilogue -->
+        <script src="@Url.VersionedContent("/assets/scripts/main.js")"></script>
+        @if (WebRequestContext.IsPreview)
+        {
+            <script src="@Url.VersionedContent("/assets/scripts/xpm.js")"></script>
+        }
+        @Html.DxaPageMarkup()
+    </body>
+</html>
