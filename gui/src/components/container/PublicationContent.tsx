@@ -152,7 +152,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
 
     public static contextTypes: React.ValidationMap<IPublicationContentContext> = {
         services: React.PropTypes.object.isRequired,
-        dataStore: React.PropTypes.object.isRequired
+        routing: React.PropTypes.object.isRequired
     };
 
     private _page: IPage = {};

@@ -28,7 +28,7 @@ export interface IAppContext {
 /**
  * Main component for the application
  */
-export class App extends React.Component<IAppProps, {},> {
+export class App extends React.Component<IAppProps, {}> {
 
     public static contextTypes: React.ValidationMap<IAppContext> = {
         services: React.PropTypes.object.isRequired

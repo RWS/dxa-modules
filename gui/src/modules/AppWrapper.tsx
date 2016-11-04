@@ -50,8 +50,8 @@ export interface IAppWrapperChildContext {
 export class AppWrapper extends React.Component<IAppWrapperProps, {}> {
 
     public static childContextTypes: React.ValidationMap<IAppWrapperChildContext> = {
-        service: React.PropTypes.object,
-        localization: React.PropTypes.object
+        services: React.PropTypes.object,
+        routing: React.PropTypes.object
     };
 
     public getChildContext(): IAppWrapperChildContext {

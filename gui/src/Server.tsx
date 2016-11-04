@@ -19,7 +19,7 @@ declare var _renderToString: (path: string) => void;
  * @returns {string}
  */
 export function renderToString(path: string): string {
-     /**
+    /**
      * Set instances for services
      */
     const services: IServices = {
