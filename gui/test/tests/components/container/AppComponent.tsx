@@ -2,7 +2,6 @@ import { App } from "../../../../src/components/container/App";
 import { PageService } from "../../../mocks/services/PageService";
 import { PublicationService } from "../../../mocks/services/PublicationService";
 import { TaxonomyService } from "../../../mocks/services/TaxonomyService";
-import { routing } from "../../../mocks/Routing";
 import { localization } from "../../../mocks/services/LocalizationService";
 
 // Global Catalina dependencies
@@ -43,7 +42,7 @@ class AppComponent extends TestBase {
     }
 
     private _renderComponent(target: HTMLElement): App {
-        return ReactDOM.render(<App services={services} routing={routing} />, target) as App;
+        return ReactDOM.render(<App children={"CHILDREN"} />, target) as App;
     }
 }
 

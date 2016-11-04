@@ -130,14 +130,6 @@ interface IToc {
 
 export interface IPublicationContentContext {
     /**
-     * Data store
-     *
-     * @type {IDataStore}
-     * @memberOf IAppWrapperProps
-     */
-    dataStore: IDataStore;
-
-    /**
      * Routing
      *
      * @type {IRouting}
@@ -159,7 +151,6 @@ export interface IPublicationContentContext {
 export class PublicationContent extends React.Component<IPublicationContentProps, IPublicationContentState> {
 
     public static contextTypes: React.ValidationMap<IPublicationContentContext> = {
-        routing: React.PropTypes.object.isRequired,
         services: React.PropTypes.object.isRequired,
         dataStore: React.PropTypes.object.isRequired
     };
@@ -185,7 +176,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
      * Invoked once, both on the client and server, immediately before the initial rendering occurs.
      */
     public componentWillMount(): void {
-        const { dataStore, services } = this.context as IPublicationContentContext;
+        const { services } = this.context as IPublicationContentContext;
         const { publicationId, pageId } = this.props.params;
         const getRootItems = (path?: string[]): void => {
             // Get the data for the Toc
@@ -248,7 +239,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
      * @param {IPublicationContentState} nextState Next state
      */
     public componentWillUpdate(nextProps: IPublicationContentProps, nextState: IPublicationContentState): void {
-        const { dataStore, services } = this.context as IPublicationContentContext;
+        const { services } = this.context as IPublicationContentContext;
         const { publicationId } = this.props.params;
         const pageService = services.pageService;
         const { selectedTocItem, isPageLoading } = this.state;
@@ -271,7 +262,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
      */
     public render(): JSX.Element {
         const { isPageLoading, activeTocItemPath, selectedTocItem, publicationTitle } = this.state;
-        const { dataStore, routing, services } = this.context as IPublicationContentContext;
+        const { routing, services } = this.context as IPublicationContentContext;
         const { publicationId } = this.props.params;
         const taxonomyService = services.taxonomyService;
         const { content, error} = this._page;
@@ -313,7 +304,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
 
     private _onTocSelectionChanged(sitemapItem: ISitemapItem, path: string[]): void {
         const page = this._page;
-        const { dataStore, routing, services } = this.context as IPublicationContentContext;
+        const { routing, services } = this.context as IPublicationContentContext;
         const { publicationId } = this.props.params;
         const publicationService = services.publicationService;
 
@@ -359,10 +350,9 @@ export class PublicationContent extends React.Component<IPublicationContentProps
     }
 
     private _getActiveSitemapPath(pageId: string, done: (path: string[]) => void): void {
-        const { dataStore, services } = this.context as IPublicationContentContext;
+        const { services } = this.context as IPublicationContentContext;
         const { publicationId } = this.props.params;
-        taxonomyService.getSitemapPath(publicationId, pageId).then(
-        taxonomyService.getSitemapPath(publicationId, pageId).then(
+        services.taxonomyService.getSitemapPath(publicationId, pageId).then(
             path => {
                 /* istanbul ignore else */
                 if (!this._isUnmounted) {

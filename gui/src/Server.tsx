@@ -1,8 +1,12 @@
 /// <reference path="../typings/index.d.ts" />
 
+import "ts-helpers";
 import { AppWrapper } from "./modules/AppWrapper";
-import { DataStoreServer } from "./global/server/DataStoreServer";
-import { localization } from "./global/server/LocalizationServer";
+import { IServices } from "./interfaces/Services";
+import { PageService } from "./services/server/PageService";
+import { PublicationService } from "./services/server/PublicationService";
+import { TaxonomyService } from "./services/server/TaxonomyService";
+import { localization } from "./services/server/LocalizationService";
 import { routing } from "./global/server/RoutingServer";
 
 // Nashorn script engine needs a global scope
@@ -15,15 +19,18 @@ declare var _renderToString: (path: string) => void;
  * @returns {string}
  */
 export function renderToString(path: string): string {
-    /**
-     * Set instances for data store / localization / routing
+     /**
+     * Set instances for services
      */
-    const dataStore = new DataStoreServer();
+    const services: IServices = {
+        pageService: new PageService(),
+        publicationService: new PublicationService(),
+        localizationService: localization,
+        taxonomyService: new TaxonomyService()
+    };
 
-    return ReactDOMServer.renderToString(<AppWrapper
-        dataStore={dataStore}
-        routing={routing}
-        localization={localization} />);
+    return ReactDOMServer.renderToString(
+        <AppWrapper services={services} routing={routing} />);
 };
 
 _renderToString = renderToString;

@@ -1,9 +1,16 @@
 /// <reference path="../typings/index.d.ts" />
 
-import { routing } from "./global/client/RoutingClient";
-import { localization } from "./global/client/LocalizationGlobalize";
-import { DataStoreClient } from "./global/client/DataStoreClient";
+import "ts-helpers";
 import { AppWrapper } from "./modules/AppWrapper";
+
+import { IServices } from "./interfaces/Services";
+import { PageService } from "./services/client/PageService";
+import { PublicationService } from "./services/client/PublicationService";
+import { TaxonomyService } from "./services/client/TaxonomyService";
+import { localization } from "./services/client/LocalizationService";
+import { routing } from "./global/client/RoutingClient";
+
+const mainElement = document.getElementById("main-view-target");
 
 /**
  * Set instances for services
@@ -15,18 +22,10 @@ const services: IServices = {
     taxonomyService: new TaxonomyService()
 };
 
-const mainElement = document.getElementById("main-view-target");
-
 if (!mainElement) {
     console.error(`Unable to locate element to render application.`);
 } else {
-
-    /**
-     * Set instances for data store / localization / routing
-     */
-    const dataStore = new DataStoreClient();
-
     ReactDOM.render(
-        <AppWrapper dataStore={dataStore} localization={localization} routing={routing} />,
+        <AppWrapper services={services} routing={routing} />,
         mainElement);
 }

@@ -2,8 +2,7 @@
 
 import { Router, Route, IndexRedirect } from "react-router";
 
-import { IDataStore } from "../interfaces/DataStore";
-import { ILocalization } from "../interfaces/Localization";
+import { IServices } from "../interfaces/Services";
 import { IRouting } from "../interfaces/Routing";
 
 import { App } from "../components/container/App";
@@ -11,20 +10,12 @@ import { PublicationContent } from "../components/container/PublicationContent";
 
 export interface IAppWrapperProps {
     /**
-     * Data store
+     * Services
      *
-     * @type {IDataStore}
-     * @memberOf IAppWrapperProps
-     */
-    dataStore: IDataStore;
-
-    /**
-     * Localization
-     *
-     * @type {ILocalization}
+     * @type {IServices}
      * @memberOf IAppProps
      */
-    localization: ILocalization;
+    services: IServices;
 
     /**
      * Routing
@@ -37,20 +28,12 @@ export interface IAppWrapperProps {
 
 export interface IAppWrapperChildContext {
     /**
-     * Data store
+     * Services
      *
-     * @type {IDataStore}
-     * @memberOf IAppWrapperProps
-     */
-    dataStore: IDataStore;
-
-    /**
-     * Localization
-     *
-     * @type {ILocalization}
+     * @type {IServices}
      * @memberOf IAppProps
      */
-    localization: ILocalization;
+    services: IServices;
 
     /**
      * Routing
@@ -67,17 +50,15 @@ export interface IAppWrapperChildContext {
 export class AppWrapper extends React.Component<IAppWrapperProps, {}> {
 
     public static childContextTypes: React.ValidationMap<IAppWrapperChildContext> = {
-        dataStore: React.PropTypes.object,
-        routing: React.PropTypes.object,
+        service: React.PropTypes.object,
         localization: React.PropTypes.object
     };
 
     public getChildContext(): IAppWrapperChildContext {
-        const { dataStore, localization, routing} = this.props;
+        const { services, routing} = this.props;
         return {
-            dataStore: dataStore,
-            routing: routing,
-            localization: localization
+            services: services,
+            routing: routing
         };
     };
 

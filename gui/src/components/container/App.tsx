@@ -1,4 +1,3 @@
-import { ILocalization } from "../../interfaces/Localization";
 import { IServices } from "../../interfaces/Services";
 import "./styles/App";
 import "../controls/styles/TopBar";
@@ -14,20 +13,6 @@ export interface IAppProps {
      * @memberOf IAppProps
      */
     children: React.ReactChild;
-    /**
-     * Services
-     *
-     * @type {IServices}
-     * @memberOf IAppProps
-     */
-    services: IServices;
-    /**
-     * Routing
-     *
-     * @type {IRouting}
-     * @memberOf IAppProps
-     */
-    routing: IRouting;
 }
 
 export interface IAppContext {
@@ -37,16 +22,16 @@ export interface IAppContext {
      * @type {ILocalization}
      * @memberOf IAppProps
      */
-    localization: ILocalization;
+    services: IServices;
 }
 
 /**
  * Main component for the application
  */
-export class App extends React.Component<IAppProps, {}, > {
+export class App extends React.Component<IAppProps, {},> {
 
     public static contextTypes: React.ValidationMap<IAppContext> = {
-        localization: React.PropTypes.object.isRequired
+        services: React.PropTypes.object.isRequired
     };
 
     /**
@@ -55,10 +40,10 @@ export class App extends React.Component<IAppProps, {}, > {
      * @returns {JSX.Element}
      */
     public render(): JSX.Element {
-        const { formatMessage } = (this.context as IAppContext).localization;
+        const { localizationService } = (this.context as IAppContext).services;
         return (
             <div className={"sdl-dita-delivery-app"}>
-                <TopBar title={formatMessage("components.app.title")} buttons={{
+                <TopBar title={localizationService.formatMessage("components.app.title")} buttons={{
                     user: {
                         isPicture: true
                     }
