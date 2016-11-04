@@ -34,14 +34,14 @@ export interface IPublicationContentPropsParams {
      *
      * @type {string}
      */
-    pageId: string;
+    pageId?: string;
 
     /**
      * Title of the current page
      *
      * @type {string}
      */
-    pageTitle: string;
+    pageTitle?: string;
 }
 
 /**
@@ -57,13 +57,6 @@ export interface IPublicationContentProps {
      * @type {IPublicationContentPropsParams}
      */
     params: IPublicationContentPropsParams;
-    /**
-     * Routing
-     *
-     * @type {IRouting}
-     * @memberOf IPublicationContentProps
-     */
-    routing: IRouting;
 }
 
 /**
@@ -143,6 +136,14 @@ export interface IPublicationContentContext {
      * @memberOf IAppWrapperProps
      */
     dataStore: IDataStore;
+
+    /**
+     * Routing
+     *
+     * @type {IRouting}
+     * @memberOf IPublicationContentProps
+     */
+    routing: IRouting;
 }
 
 /**
@@ -150,13 +151,14 @@ export interface IPublicationContentContext {
  */
 export class PublicationContent extends React.Component<IPublicationContentProps, IPublicationContentState> {
 
+    public static contextTypes: React.ValidationMap<IPublicationContentContext> = {
+        routing: React.PropTypes.object.isRequired,
+        dataStore: React.PropTypes.object.isRequired
+    };
+
     private _page: IPage = {};
     private _toc: IToc = {};
     private _isUnmounted: boolean = false;
-
-    public static contextTypes: React.ValidationMap<IPublicationContentContext> = {
-        dataStore: React.PropTypes.object.isRequired
-    };
 
     /**
      * Creates an instance of App.
@@ -260,8 +262,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
      */
     public render(): JSX.Element {
         const { isPageLoading, activeTocItemPath, selectedTocItem, publicationTitle } = this.state;
-        const { dataStore } = this.context as IPublicationContentContext;
-        //const { routing} = this.props;
+        const { dataStore, routing } = this.context as IPublicationContentContext;
         const { publicationId } = this.props.params;
         const { content, error} = this._page;
         const { rootItems } = this._toc;
@@ -283,11 +284,11 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     loadItemsPath={dataStore.getSitemapPath.bind(dataStore)}
                     selectedItem={selectedTocItem} />
                  <Page
-                    //getPageLocationPath={routing.getPageLocationPath.bind(routing)}
+                    getPageLocationPath={routing.getPageLocationPath.bind(routing)}
                     showActivityIndicator={isPageLoading || false}
                     content={content}
                     error={error}
-                    //onNavigate={routing.setPageLocation.bind(routing)}
+                    onNavigate={routing.setPageLocation.bind(routing)}
                     />
             </section>
         );
@@ -302,8 +303,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
 
     private _onTocSelectionChanged(sitemapItem: ISitemapItem, path: string[]): void {
         const page = this._page;
-        const { dataStore } = this.context as IPublicationContentContext;
-        const { routing } = this.props;
+        const { dataStore, routing } = this.context as IPublicationContentContext;
         const { publicationId } = this.props.params;
 
         page.error = null;

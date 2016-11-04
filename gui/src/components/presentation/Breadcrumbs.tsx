@@ -89,8 +89,8 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
      * Invoked immediately before rendering when new props or state are being received.
      * This method is not called for the initial render.
      *
-     * @param {IPublicationContentProps} nextProps Next props
-     * @param {IPublicationContentState} nextState Next state
+     * @param {IBreadcrumbsProps} nextProps Next props
+     * @param {IBreadcrumbsProps} nextState Next state
      */
     public componentWillUpdate(nextProps: IBreadcrumbsProps, nextState: IBreadcrumbsProps): void {
         const { publicationId, selectedItem, loadItemsPath } = this.props;

@@ -246,7 +246,7 @@ class PublicationContentComponent extends TestBase {
 
     private _renderComponent(target: HTMLElement): PublicationContent {
         return ReactDOM.render(
-            (<PublicationContent dataStore={dataStoreMock} routing={routing} publicationId={"ish:123-1-1"} />)
+            (<PublicationContent params={{publicationId: "ish:123-1-1"}} />)
             , target) as PublicationContent;
     }
 }

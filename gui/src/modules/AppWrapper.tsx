@@ -51,6 +51,14 @@ export interface IAppWrapperChildContext {
      * @memberOf IAppProps
      */
     localization: ILocalization;
+
+    /**
+     * Routing
+     *
+     * @type {IRouting}
+     * @memberOf IAppProps
+     */
+    routing: IRouting;
 }
 
 /**
@@ -60,13 +68,15 @@ export class AppWrapper extends React.Component<IAppWrapperProps, {}> {
 
     public static childContextTypes: React.ValidationMap<IAppWrapperChildContext> = {
         dataStore: React.PropTypes.object,
+        routing: React.PropTypes.object,
         localization: React.PropTypes.object
     };
 
     public getChildContext(): IAppWrapperChildContext {
-        const { dataStore, localization} = this.props;
+        const { dataStore, localization, routing} = this.props;
         return {
             dataStore: dataStore,
+            routing: routing,
             localization: localization
         };
     };

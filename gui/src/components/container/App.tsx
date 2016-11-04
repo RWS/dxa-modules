@@ -7,13 +7,6 @@ import TopBar = SDL.ReactComponents.TopBar;
 
 export interface IAppProps {
     /**
-     * Localization
-     *
-     * @type {ILocalization}
-     * @memberOf IAppProps
-     */
-    localization: ILocalization;
-    /**
      * Data store
      *
      * @type {IDataStore}

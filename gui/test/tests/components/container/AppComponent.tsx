@@ -1,7 +1,5 @@
 import { App } from "../../../../src/components/container/App";
 import { DataStore } from "../../../mocks/DataStore";
-import { routing } from "../../../mocks/Routing";
-import { localization } from "../../../mocks/Localization";
 
 // Global Catalina dependencies
 import TestBase = SDL.Client.Test.TestBase;
@@ -36,7 +34,7 @@ class AppComponent extends TestBase {
     }
 
     private _renderComponent(target: HTMLElement): App {
-        return ReactDOM.render(<App dataStore={dataStoreMock} routing={routing} localization={localization}/>, target) as App;
+        return ReactDOM.render(<App children={"CHILD"}/>, target) as App;
     }
 }
 

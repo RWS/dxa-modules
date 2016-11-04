@@ -49,7 +49,6 @@ class BreadcrumbsComponent extends SDL.Client.Test.TestBase {
             beforeEach(() => {
                 routing.setPublicationLocation(data.publicationId, data.publicationTitle);
                 const props: IBreadcrumbsProps = {
-                    routing: routing,
                     publicationId: data.publicationId,
                     publicationTitle: data.publicationTitle,
                     loadItemsPath: loadItemsPath,
