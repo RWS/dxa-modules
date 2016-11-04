@@ -1,18 +1,18 @@
-import { DataStoreServer } from "../../../../src/global/server/DataStoreServer";
+import { PublicationService } from "../../../../src/services/server/PublicationService";
 
 // Global Catalina dependencies
 import TestBase = SDL.Client.Test.TestBase;
 
-class DataStoreServerTests extends TestBase {
+class PublicationServiceTests extends TestBase {
 
     public runTests(): void {
-        const DataStore = new DataStoreServer();
+        const publicationService = new PublicationService();
 
         describe(`Data Store tests (Publications).`, (): void => {
 
             it("can get a publication title", (done: () => void): void => {
                 const publicationId = "ish:39137-1-1";
-                DataStore.getPublicationTitle(publicationId).then(title => {
+                publicationService.getPublicationTitle(publicationId).then(title => {
                     expect(title).toBe("MP330");
                     done();
                 }).catch(error => {
@@ -24,4 +24,4 @@ class DataStoreServerTests extends TestBase {
     }
 }
 
-new DataStoreServerTests().runTests();
+new PublicationServiceTests().runTests();

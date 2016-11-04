@@ -2,14 +2,22 @@
 
 import "ts-helpers";
 import { App } from "./components/container/App";
-import { DataStoreClient } from "./global/client/DataStoreClient";
-import { localization } from "./global/client/LocalizationGlobalize";
+import { IServices } from "./interfaces/Services";
+import { PageService } from "./services/client/PageService";
+import { PublicationService } from "./services/client/PublicationService";
+import { TaxonomyService } from "./services/client/TaxonomyService";
+import { localization } from "./services/client/LocalizationService";
 import { routing } from "./global/client/RoutingClient";
 
 /**
- * Set instances for data store / localization / routing
+ * Set instances for services
  */
-const dataStore = new DataStoreClient();
+const services: IServices = {
+    pageService: new PageService(),
+    publicationService: new PublicationService(),
+    localizationService: localization,
+    taxonomyService: new TaxonomyService()
+};
 
 const mainElement = document.getElementById("main-view-target");
 
@@ -18,9 +26,8 @@ if (!mainElement) {
 } else {
     const render = (): void => {
         ReactDOM.render(<App
-            dataStore={dataStore}
-            routing={routing}
-            localization={localization} />, mainElement);
+            services={services}
+            routing={routing} />, mainElement);
     };
 
     routing.onLocationChanged(render);

@@ -1,12 +1,20 @@
 import { PublicationContent } from "../../../../src/components/container/PublicationContent";
 import { ISitemapItem } from "../../../../src/interfaces/ServerModels";
-import { DataStore } from "../../../mocks/DataStore";
+import { PageService } from "../../../mocks/services/PageService";
+import { PublicationService } from "../../../mocks/services/PublicationService";
+import { TaxonomyService } from "../../../mocks/services/TaxonomyService";
 import { routing } from "../../../mocks/Routing";
+import { localization } from "../../../mocks/services/LocalizationService";
 
 // Global Catalina dependencies
 import TestBase = SDL.Client.Test.TestBase;
 
-const dataStoreMock = new DataStore();
+const services = {
+    pageService: new PageService(),
+    publicationService: new PublicationService(),
+    localizationService: localization,
+    taxonomyService: new TaxonomyService()
+};
 
 class PublicationContentComponent extends TestBase {
 
@@ -18,7 +26,7 @@ class PublicationContentComponent extends TestBase {
             afterEach(() => {
                 const domNode = ReactDOM.findDOMNode(target);
                 ReactDOM.unmountComponentAtNode(domNode);
-                dataStoreMock.fakeDelay(false);
+                services.taxonomyService.fakeDelay(false);
             });
 
             afterAll(() => {
@@ -26,7 +34,7 @@ class PublicationContentComponent extends TestBase {
             });
 
             it("show loading indicator on initial render", (): void => {
-                dataStoreMock.fakeDelay(true);
+                services.taxonomyService.fakeDelay(true);
                 this._renderComponent(target);
                 const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
                 expect(domNode).not.toBeNull();
@@ -34,7 +42,7 @@ class PublicationContentComponent extends TestBase {
             });
 
             it("shows toc", (done: () => void): void => {
-                dataStoreMock.setMockDataToc(null, [
+                services.taxonomyService.setMockDataToc(null, [
                     {
                         Id: "123",
                         Title: "First element",
@@ -61,8 +69,8 @@ class PublicationContentComponent extends TestBase {
 
             it("updates page content when selected site map item changes", (done: () => void): void => {
                 const pageContent = "<div>Page content!</div>";
-                dataStoreMock.setMockDataToc(null, []);
-                dataStoreMock.setMockDataPage(null, { content: pageContent, title: "Title!" });
+                services.taxonomyService.setMockDataToc(null, []);
+                services.pageService.setMockDataPage(null, { content: pageContent, title: "Title!" });
                 const component = this._renderComponent(target);
                 component.setState({
                     selectedTocItem: {
@@ -88,7 +96,7 @@ class PublicationContentComponent extends TestBase {
             });
 
             it("updates page content when item is selected from toc", (done: () => void): void => {
-                dataStoreMock.setMockDataToc(null, [
+                services.taxonomyService.setMockDataToc(null, [
                     {
                         Id: "1",
                         Title: "First element",
@@ -130,7 +138,7 @@ class PublicationContentComponent extends TestBase {
             });
 
             it("updates page content with title when a site map item without url is selected", (done: () => void): void => {
-                dataStoreMock.setMockDataToc(null, []);
+                services.taxonomyService.setMockDataToc(null, []);
                 const title = "Some page";
                 const component = this._renderComponent(target);
                 component.setState({
@@ -155,7 +163,7 @@ class PublicationContentComponent extends TestBase {
             });
 
             it("shows an error message when page info fails to load", (done: () => void): void => {
-                dataStoreMock.setMockDataToc(null, [{
+                services.taxonomyService.setMockDataToc(null, [{
                     Id: "123456",
                     IsAbstract: false,
                     HasChildNodes: true,
@@ -163,7 +171,7 @@ class PublicationContentComponent extends TestBase {
                     Url: "page-url",
                     Items: []
                 }]);
-                dataStoreMock.setMockDataPage("Page failed to load!");
+                services.pageService.setMockDataPage("Page failed to load!");
                 this._renderComponent(target);
                 const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
                 expect(domNode).not.toBeNull();
@@ -181,8 +189,8 @@ class PublicationContentComponent extends TestBase {
 
             it("shows an error message when publication title failed to load", (done: () => void): void => {
                 const errorMessage = "Page title is invalid!";
-                dataStoreMock.setMockDataPublication(errorMessage);
-                dataStoreMock.setMockDataPage(null, { content: "<div/>", title: "Title!" });
+                services.publicationService.setMockDataPublication(errorMessage);
+                services.pageService.setMockDataPage(null, { content: "<div/>", title: "Title!" });
                 this._renderComponent(target);
                 const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
                 expect(domNode).not.toBeNull();
@@ -216,7 +224,7 @@ class PublicationContentComponent extends TestBase {
                 };
                 routing.setPublicationLocation("ish:123-1-1", "Publication", first.Url, first.Title);
 
-                dataStoreMock.setMockDataToc(null, [first, second]);
+                services.taxonomyService.setMockDataToc(null, [first, second]);
                 this._renderComponent(target);
 
                 const assert = (item: ISitemapItem, ready: () => void): void => {
@@ -246,7 +254,7 @@ class PublicationContentComponent extends TestBase {
 
     private _renderComponent(target: HTMLElement): PublicationContent {
         return ReactDOM.render(
-            (<PublicationContent dataStore={dataStoreMock} routing={routing} publicationId={"ish:123-1-1"} />)
+            (<PublicationContent services={services} routing={routing} publicationId={"ish:123-1-1"} />)
             , target) as PublicationContent;
     }
 }
