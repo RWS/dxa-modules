@@ -1,10 +1,19 @@
 import { App } from "../../../../src/components/container/App";
-import { DataStore } from "../../../mocks/DataStore";
+import { PageService } from "../../../mocks/services/PageService";
+import { PublicationService } from "../../../mocks/services/PublicationService";
+import { TaxonomyService } from "../../../mocks/services/TaxonomyService";
+import { routing } from "../../../mocks/Routing";
+import { localization } from "../../../mocks/services/LocalizationService";
 
 // Global Catalina dependencies
 import TestBase = SDL.Client.Test.TestBase;
 
-const dataStoreMock = new DataStore();
+const services = {
+    pageService: new PageService(),
+    publicationService: new PublicationService,
+    localizationService: localization,
+    taxonomyService: new TaxonomyService()
+};
 
 class AppComponent extends TestBase {
 
@@ -16,7 +25,7 @@ class AppComponent extends TestBase {
             afterEach(() => {
                 const domNode = ReactDOM.findDOMNode(target);
                 ReactDOM.unmountComponentAtNode(domNode);
-                dataStoreMock.fakeDelay(false);
+                services.pageService.fakeDelay(false);
             });
 
             afterAll(() => {
@@ -24,7 +33,7 @@ class AppComponent extends TestBase {
             });
 
             it("show loading indicator on initial render", (): void => {
-                dataStoreMock.fakeDelay(true);
+                services.pageService.fakeDelay(true);
                 this._renderComponent(target);
                 const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
                 expect(domNode).not.toBeNull();
@@ -34,7 +43,7 @@ class AppComponent extends TestBase {
     }
 
     private _renderComponent(target: HTMLElement): App {
-        return ReactDOM.render(<App children={"CHILD"}/>, target) as App;
+        return ReactDOM.render(<App services={services} routing={routing} />, target) as App;
     }
 }
 

@@ -1,4 +1,5 @@
 import { ILocalization } from "../../interfaces/Localization";
+import { IServices } from "../../interfaces/Services";
 import "./styles/App";
 import "../controls/styles/TopBar";
 
@@ -12,7 +13,21 @@ export interface IAppProps {
      * @type {IDataStore}
      * @memberOf IAppProps
      */
-     children: React.ReactChild;
+    children: React.ReactChild;
+    /**
+     * Services
+     *
+     * @type {IServices}
+     * @memberOf IAppProps
+     */
+    services: IServices;
+    /**
+     * Routing
+     *
+     * @type {IRouting}
+     * @memberOf IAppProps
+     */
+    routing: IRouting;
 }
 
 export interface IAppContext {

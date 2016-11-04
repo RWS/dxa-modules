@@ -5,6 +5,16 @@ import { localization } from "./global/client/LocalizationGlobalize";
 import { DataStoreClient } from "./global/client/DataStoreClient";
 import { AppWrapper } from "./modules/AppWrapper";
 
+/**
+ * Set instances for services
+ */
+const services: IServices = {
+    pageService: new PageService(),
+    publicationService: new PublicationService(),
+    localizationService: localization,
+    taxonomyService: new TaxonomyService()
+};
+
 const mainElement = document.getElementById("main-view-target");
 
 if (!mainElement) {
