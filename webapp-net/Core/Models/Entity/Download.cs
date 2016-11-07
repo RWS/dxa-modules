@@ -3,10 +3,12 @@ using System.Net.Mime;
 using System.ServiceModel.Syndication;
 using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Models;
+using System;
 
 namespace Sdl.Web.Modules.Core.Models
 {
     [SemanticEntity(SchemaOrgVocabulary, "DataDownload", Prefix = "s", Public = true)]
+    [Serializable]
     public class Download : MediaItem, ISyndicationFeedItemProvider
     {
         [SemanticProperty("s:name")]

@@ -4,6 +4,7 @@ using System;
 namespace Sdl.Web.Modules.Core.Models
 {
     [SemanticEntity(Vocab = SchemaOrgVocabulary, EntityName = "GeoCoordinates", Prefix = "s", Public = true)]
+    [Serializable]
     public class Location : EntityModel
     {
         [SemanticProperty("s:longitude")]
