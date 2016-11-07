@@ -38,7 +38,7 @@ export interface IBreadcrumbsProps {
  * Breadcrumbs props
  *
  * @export
- * @interface IBreadcrumbsProps
+ * @interface IBreadcrumbsState
  */
 export interface IBreadcrumbsState {
     /**
@@ -90,9 +90,9 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
      * This method is not called for the initial render.
      *
      * @param {IBreadcrumbsProps} nextProps Next props
-     * @param {IBreadcrumbsProps} nextState Next state
+     * @param {IBreadcrumbsState} nextState Next state
      */
-    public componentWillUpdate(nextProps: IBreadcrumbsProps, nextState: IBreadcrumbsProps): void {
+    public componentWillUpdate(nextProps: IBreadcrumbsProps, nextState: IBreadcrumbsState): void {
         const { publicationId, selectedItem, loadItemsPath } = this.props;
         const currentUrl = selectedItem ? selectedItem.Url : null;
         const nextItem = nextProps.selectedItem;
@@ -141,7 +141,7 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
             <div className={"sdl-dita-delivery-breadcrumbs"}>
                 <ul>
                     <li>
-                        <Link to={`/${publicationId}/${publicationTitle}`}>{publicationTitle}</Link>
+                        <Link to={`/${publicationId}`}>{publicationTitle}</Link>
                     </li>
                     {
                         Array.isArray(itemPath) && (
@@ -152,9 +152,9 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
                                             (currentUrl != item.Url)
                                                 ?
                                                 (item.Url) ?
-                                                    <Link to={`/${publicationId}/${item.Url}/${publicationId}/${publicationTitle}`}>{item.Title}</Link>
+                                                    <Link to={`/${publicationId}/${item.Url}`}>{item.Title}</Link>
                                                     :
-                                                    <Link to={`/${publicationId}/${publicationTitle}/${item.Title}`}>{item.Title}</Link>
+                                                    <Link to={`/${publicationId}`}>{item.Title}</Link>
                                                 : <span>{item.Title}</span>
                                         }
                                     </li>

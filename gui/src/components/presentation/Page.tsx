@@ -127,7 +127,7 @@ export class Page extends React.Component<IPageProps, {}> {
                     anchor.setAttribute("href", props.getPageLocationPath(itemUrl) || "");
                     const onClick = (e: Event): void => {
                         if (itemUrl) {
-                            //props.onNavigate(itemUrl);
+                            props.onNavigate(itemUrl);
                         }
                         e.preventDefault();
                     };

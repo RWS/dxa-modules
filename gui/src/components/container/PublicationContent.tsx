@@ -1,7 +1,6 @@
 import { Promise } from "es6-promise";
 import { ISitemapItem } from "../../interfaces/ServerModels";
 import { IServices } from "../../interfaces/Services";
-import { IRouting } from "../../interfaces/Routing";
 import { Toc } from "../presentation/Toc";
 import { Page } from "../presentation/Page";
 import { IPageInfo } from "../../models/Page";
@@ -12,7 +11,7 @@ import "./styles/PublicationContent";
  * PublicationContent component props params
  *
  * @export
- * @interface IPublicationContentProps
+ * @interface IPublicationContentPropsParams
  */
 export interface IPublicationContentPropsParams {
     /**
@@ -132,10 +131,10 @@ export interface IPublicationContentContext {
     /**
      * Routing
      *
-     * @type {IRouting}
+     * @type {router}
      * @memberOf IPublicationContentProps
      */
-    routing: IRouting;
+    router: ReactRouter.RouterOnContext;
     /**
      * Services
      *
@@ -152,7 +151,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
 
     public static contextTypes: React.ValidationMap<IPublicationContentContext> = {
         services: React.PropTypes.object.isRequired,
-        routing: React.PropTypes.object.isRequired
+        router: React.PropTypes.object.isRequired
     };
 
     private _page: IPage = {};
@@ -218,16 +217,18 @@ export class PublicationContent extends React.Component<IPublicationContentProps
      * @param {IPublicationContentProps} nextProps
      */
     public componentWillReceiveProps(nextProps: IPublicationContentProps): void {
-        const { selectedTocItem } = this.state;
-        const {pageId} = this.props.params;
+        const { pageId } = this.props.params;
+        const nextPageId = nextProps.params.pageId;
 
-        if (pageId && (!selectedTocItem || pageId !== selectedTocItem.Url)) {
-            // Set the current active path for the tree
-            this._getActiveSitemapPath(pageId, (path) => {
-                this.setState({
-                    activeTocItemPath: path
+        if (nextPageId) {
+            if (!pageId || nextPageId !== pageId) {
+                // Set the current active path for the tree
+                this._getActiveSitemapPath(nextPageId, (path) => {
+                    this.setState({
+                        activeTocItemPath: path
+                    });
                 });
-            });
+            }
         }
     }
 
@@ -262,7 +263,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
      */
     public render(): JSX.Element {
         const { isPageLoading, activeTocItemPath, selectedTocItem, publicationTitle } = this.state;
-        const { routing, services } = this.context as IPublicationContentContext;
+        const { services, router } = this.context as IPublicationContentContext;
         const { publicationId } = this.props.params;
         const taxonomyService = services.taxonomyService;
         const { content, error} = this._page;
@@ -283,14 +284,18 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     publicationId={publicationId}
                     publicationTitle={publicationTitle || ""}
                     loadItemsPath={taxonomyService.getSitemapPath.bind(taxonomyService)}
-                    selectedItem={selectedTocItem} />
-                 <Page
-                    getPageLocationPath={routing.getPageLocationPath.bind(routing)}
+                    selectedItem={selectedTocItem}
+                    />
+                <Page
+                    getPageLocationPath={(selectedPageId: string): string => {
+                        return `/${publicationId}/${selectedPageId || ""}`;
+                    } }
                     showActivityIndicator={isPageLoading || false}
                     content={content}
                     error={error}
-                    onNavigate={routing.setPageLocation.bind(routing)}
-                    />
+                    onNavigate={(selectedPageId: string): void => {
+                        router.push(`/${publicationId}/${selectedPageId || ""}`);
+                    } } />
             </section>
         );
     }
@@ -304,8 +309,8 @@ export class PublicationContent extends React.Component<IPublicationContentProps
 
     private _onTocSelectionChanged(sitemapItem: ISitemapItem, path: string[]): void {
         const page = this._page;
-        const { routing, services } = this.context as IPublicationContentContext;
-        const { publicationId } = this.props.params;
+        const { router, services } = this.context as IPublicationContentContext;
+        const { publicationId, pageId } = this.props.params;
         const publicationService = services.publicationService;
 
         page.error = null;
@@ -319,7 +324,13 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     isPageLoading: sitemapItem.Url ? true : false
                 });
 
-                routing.setPublicationLocation(publicationId, title || "", sitemapItem.Url, sitemapItem.Title);
+                const navPath = `/${publicationId}/${sitemapItem.Url || "-"}/${sitemapItem.Title || ""}`;
+                if (sitemapItem && sitemapItem.Url == pageId) {
+                    router.replace(navPath);
+                }
+                else {
+                    router.push(navPath);
+                }
             },
             error => {
                 page.error = error;

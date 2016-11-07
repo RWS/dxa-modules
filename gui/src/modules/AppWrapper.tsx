@@ -34,14 +34,6 @@ export interface IAppWrapperChildContext {
      * @memberOf IAppProps
      */
     services: IServices;
-
-    /**
-     * Routing
-     *
-     * @type {IRouting}
-     * @memberOf IAppProps
-     */
-    routing: IRouting;
 }
 
 /**
@@ -50,15 +42,13 @@ export interface IAppWrapperChildContext {
 export class AppWrapper extends React.Component<IAppWrapperProps, {}> {
 
     public static childContextTypes: React.ValidationMap<IAppWrapperChildContext> = {
-        services: React.PropTypes.object,
-        routing: React.PropTypes.object
+        services: React.PropTypes.object
     };
 
     public getChildContext(): IAppWrapperChildContext {
-        const { services, routing} = this.props;
+        const { services} = this.props;
         return {
-            services: services,
-            routing: routing
+            services: services
         };
     };
 
@@ -73,11 +63,14 @@ export class AppWrapper extends React.Component<IAppWrapperProps, {}> {
             <Router history={routing.getHistory()}>
                 <Route path="/" component={App} >
                     <IndexRedirect to="/ish:1656863-1-1" />
-                    <Route path=":publicationId(/:publicationTitle)" component={PublicationContent} />} />
-                    <Route path=":publicationId/:publicationTitle/:pageTitle" component={PublicationContent} />} />
-                    <Route path=":publicationId/:pageId/:publicationTitle/:pageTitle" component={PublicationContent} />} />
-                </Route>
-            </Router>
+                    <Route path=":publicationId" component={PublicationContent}>
+                        <Route path=":pageId" component={PublicationContent}>
+                            <Route path=":publicationTitle/:pageTitle" component={PublicationContent} />
+                        </Route>
+                        <Route path=":publicationTitle/:pageTitle" component={PublicationContent} />
+                    </Route>
+                </Route >
+            </Router >
         );
     }
 };

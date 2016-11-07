@@ -5,16 +5,6 @@ import "../controls/styles/TopBar";
 // Global Catalina dependencies
 import TopBar = SDL.ReactComponents.TopBar;
 
-export interface IAppProps {
-    /**
-     * Data store
-     *
-     * @type {IDataStore}
-     * @memberOf IAppProps
-     */
-    children: React.ReactChild;
-}
-
 export interface IAppContext {
     /**
      * Localization
@@ -28,7 +18,7 @@ export interface IAppContext {
 /**
  * Main component for the application
  */
-export class App extends React.Component<IAppProps, {}> {
+export class App extends React.Component<{}, {}> {
 
     public static contextTypes: React.ValidationMap<IAppContext> = {
         services: React.PropTypes.object.isRequired
