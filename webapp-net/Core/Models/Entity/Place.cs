@@ -1,7 +1,9 @@
 ﻿using Sdl.Web.Common.Models;
+using System;
 namespace Sdl.Web.Modules.Core.Models
 {
     [SemanticEntity(Vocab = SchemaOrgVocabulary, EntityName = "Place", Prefix = "s", Public = true)]
+    [Serializable]
     public class Place : EntityModel
     {
         [SemanticProperty("s:name")]

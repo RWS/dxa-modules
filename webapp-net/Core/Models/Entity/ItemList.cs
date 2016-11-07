@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.ServiceModel.Syndication;
 using Sdl.Web.Common.Configuration;
+using System;
 
 namespace Sdl.Web.Modules.Core.Models
 {
     [SemanticEntity(Vocab = SchemaOrgVocabulary, EntityName = "ItemList", Prefix = "s", Public = true)]
+    [Serializable]
     public class ItemList : EntityModel, ISyndicationFeedItemProvider
     {
         [SemanticProperty("s:headline")]

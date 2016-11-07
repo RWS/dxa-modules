@@ -8,6 +8,7 @@ namespace Sdl.Web.Modules.Core.Models
 {
     [SemanticEntity(SchemaOrgVocabulary, "ImageObject", Prefix = "s", Public = true)]
     [SemanticEntity(CoreVocabulary, "Image", Prefix = "c")]
+    [Serializable]
     public class Image : MediaItem
     {
         [SemanticProperty("s:name")]

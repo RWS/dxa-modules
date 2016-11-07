@@ -6,6 +6,7 @@ using Sdl.Web.Common.Models;
 namespace Sdl.Web.Modules.Core.Models
 {
     [SemanticEntity(SchemaOrgVocabulary, "VideoObject", Prefix = "s", Public = true)]
+    [Serializable]
     public class YouTubeVideo : MediaItem
     {
         public string Headline { get; set; }
