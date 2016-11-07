@@ -14,7 +14,7 @@
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <SdlDeliveryVersion>8.3.0</SdlDeliveryVersion>
+    <SdlDeliveryVersion>8.5.0-beta-201611071506</SdlDeliveryVersion>
     <DxaFrameworkVersion>1.6.0</DxaFrameworkVersion>
     <ExperienceManagerVersion>8.3.0</ExperienceManagerVersion>
   </PropertyGroup>
@@ -72,11 +72,11 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Tridion.ContentDelivery.AmbientData">
-      <HintPath>..\packages\Sdl.Web.Delivery.$(SdlDeliveryVersion)\lib\net45\Tridion.ContentDelivery.AmbientData.dll</HintPath>
+      <HintPath>..\packages\Sdl.Web.Delivery.$(SdlDeliveryVersion)\lib\net452\Tridion.ContentDelivery.AmbientData.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Tridion.ContentDelivery">
-      <HintPath>..\packages\Sdl.Web.Delivery.$(SdlDeliveryVersion)\lib\net45\Tridion.ContentDelivery.dll</HintPath>
+      <HintPath>..\packages\Sdl.Web.Delivery.$(SdlDeliveryVersion)\lib\net452\Tridion.ContentDelivery.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Tridion.SmartTarget">
