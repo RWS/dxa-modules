@@ -1,4 +1,5 @@
 ﻿using Sdl.Web.Common.Models;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Sdl.Web.Modules.AudienceManager.Models
@@ -6,6 +7,7 @@ namespace Sdl.Web.Modules.AudienceManager.Models
     /// <summary>
     /// LoginForm entity
     /// </summary>
+    [Serializable]
     public class LoginForm : EntityModel
     {
         /// <summary>

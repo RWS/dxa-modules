@@ -10,6 +10,7 @@ namespace Sdl.Web.Modules.AudienceManager.Models
     /// <summary>
     /// CurrentUserWidget entity
     /// </summary>
+    [Serializable]
     public class CurrentUserWidget : EntityModel
     {
         /// <summary>
