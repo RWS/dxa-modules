@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Sdl.Web.Common.Models;
+using System;
 
 namespace Sdl.Web.Modules.Search.Models
 {
@@ -7,6 +8,7 @@ namespace Sdl.Web.Modules.Search.Models
     /// Contains the default fields that come back from Result,
     /// Excluded PublicationId and Id
     /// </summary>
+    [Serializable]
     public class SearchItem : EntityModel
     {        
         public string Title { get; set; }
