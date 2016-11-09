@@ -1,3 +1,4 @@
+import { Router, Route } from "react-router";
 import { Breadcrumbs, IBreadcrumbsProps } from "../../../../src/components/presentation/Breadcrumbs";
 import { ISitemapItem } from "../../../../src/interfaces/ServerModels";
 import { Promise } from "es6-promise";
@@ -96,61 +97,51 @@ class BreadcrumbsComponent extends SDL.Client.Test.TestBase {
                 }, 0);
             });
 
-            // it("navigates to publication root when a publication title breadcrumb is clicked", (done: () => void): void => {
-            //     const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
-            //     expect(domNode).not.toBeNull();
+            // Tests below does not make sense
+            it("navigates to publication root when a publication title breadcrumb is clicked", (done: () => void): void => {
+                const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
+                expect(domNode).not.toBeNull();
 
-            //     // Use a timeout to allow the DataStore to return a promise with the data
-            //     setTimeout((): void => {
-            //         const hyperlinksNodes = domNode.querySelectorAll(".sdl-dita-delivery-breadcrumbs a");
-            //         const hyperlink = hyperlinksNodes.item(0) as HTMLElement;
+                // Use a timeout to allow the DataStore to return a promise with the data
+                setTimeout((): void => {
+                    const hyperlinksNodes = domNode.querySelectorAll(".sdl-dita-delivery-breadcrumbs a");
+                    const hyperlink = hyperlinksNodes.item(0) as HTMLElement;
 
-            //         expect(hyperlink).toBeDefined();
-            //         hyperlink.click();
+                    expect(hyperlink).toBeDefined();
+                    hyperlink.click();
 
-            //         // const location = routing.getPublicationLocation();
-            //         // expect(location).toBeDefined();
-            //         // if (location) {
-            //         //     expect(location.publicationId).toBe(data.publicationId);
-            //         //     expect(location.pageId).toBe(null);
-            //         // }
+                    done();
+                }, 0);
+            });
 
-            //         done();
-            //     }, 0);
-            // });
+            it("navigates to another item when a breadcrumb is clicked", (done: () => void): void => {
+                const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
+                expect(domNode).not.toBeNull();
 
-            // it("navigates to another item when a breadcrumb is clicked", (done: () => void): void => {
-            //     const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
-            //     expect(domNode).not.toBeNull();
+                // Use a timeout to allow the DataStore to return a promise with the data
+                setTimeout((): void => {
+                    const hyperlinksNodes = domNode.querySelectorAll(".sdl-dita-delivery-breadcrumbs a");
+                    expect(hyperlinksNodes.length).toBe(3);
 
-            //     // Use a timeout to allow the DataStore to return a promise with the data
-            //     setTimeout((): void => {
-            //         const hyperlinksNodes = domNode.querySelectorAll(".sdl-dita-delivery-breadcrumbs a");
-            //         expect(hyperlinksNodes.length).toBe(3);
+                    for (let i: number = hyperlinksNodes.length - 1; i > 0; i--) {
+                        const hyperlink = hyperlinksNodes.item(i) as HTMLElement;
+                        expect(hyperlink).toBeDefined();
+                        if (hyperlink) {
+                            hyperlink.click();
+                        }
+                    };
 
-            //         for (let i: number = hyperlinksNodes.length - 1; i > 0; i--) {
-            //             const hyperlink = hyperlinksNodes.item(i) as HTMLElement;
-            //             expect(hyperlink).toBeDefined();
-            //             if (hyperlink) {
-            //                 hyperlink.click();
-
-            //                 // const location = routing.getPublicationLocation();
-            //                 // expect(location).toBeDefined();
-            //                 // if (location) {
-            //                 //     expect(location.publicationId).toBe(data.publicationId);
-            //                 //     expect(location.pageId).toBe(itemsPath[i - 1].Url || null);
-            //                 // }
-            //             }
-            //         };
-
-            //         done();
-            //     }, 0);
-            // });
+                    done();
+                }, 0);
+            });
         });
     }
 
     private _renderComponent(props: IBreadcrumbsProps, target: HTMLElement): void {
-        ReactDOM.render(<Breadcrumbs {...props} />, target);
+        ReactDOM.render(
+            <Router history={routing.getHistory()}>
+                <Route path=":publicationId(/:pageId)" component={() => (<Breadcrumbs {...props} />)} />
+            </Router>, target);
     }
 }
 

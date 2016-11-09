@@ -1,6 +1,7 @@
+import { Router, Route } from "react-router";
+
 import { App } from "../../../../src/components/container/App";
 import { PublicationContent } from "../../../../src/components/container/PublicationContent";
-
 import { PageService } from "../../../mocks/services/PageService";
 import { PublicationService } from "../../../mocks/services/PublicationService";
 import { TaxonomyService } from "../../../mocks/services/TaxonomyService";
@@ -23,13 +24,14 @@ const routingHistory = routing.getHistory();
 const wrapper = TestHelper.wrapWithContext(
     {
         services: services,
-        router: routingHistory as ReactRouter.RouterOnContext
     },
     {
         services: React.PropTypes.object,
-        router: React.PropTypes.object
     },
-    <App children={<PublicationContent params={{ publicationId: "ish:123-1-1" }} />} />);
+    (<Router history={routingHistory}>
+        <Route path="/" component={() => (<App children={<PublicationContent params={{ publicationId: "ish:123-1-1" }} />} />)} />
+    </Router>));
+
 
 class AppComponent extends TestBase {
 

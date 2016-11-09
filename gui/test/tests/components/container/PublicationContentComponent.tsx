@@ -1,3 +1,4 @@
+import { Router, Route } from "react-router";
 import { PublicationContent } from "../../../../src/components/container/PublicationContent";
 import { PageService } from "../../../mocks/services/PageService";
 import { PublicationService } from "../../../mocks/services/PublicationService";
@@ -22,13 +23,14 @@ const routingHistory = routing.getHistory();
 const wrapper = TestHelper.wrapWithContext(
     {
         services: services,
-        router: routingHistory as ReactRouter.RouterOnContext
     },
     {
         services: React.PropTypes.object,
-        router: React.PropTypes.object
     },
-    (<PublicationContent params={{ publicationId: "ish:123-1-1" }} />));
+    (<Router history={routingHistory}>
+        <Route path="/**(/**)" component={() => (<PublicationContent params={{ publicationId: "ish:123-1-1" }} />)} />
+    </Router>));
+
 
 class PublicationContentComponent extends TestBase {
 
@@ -272,6 +274,7 @@ class PublicationContentComponent extends TestBase {
     private _renderComponent(target: HTMLElement): PublicationContent {
         return ReactDOM.render(wrapper, target) as PublicationContent;
     }
+
 }
 
 new PublicationContentComponent().runTests();
