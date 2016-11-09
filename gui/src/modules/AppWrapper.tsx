@@ -64,10 +64,7 @@ export class AppWrapper extends React.Component<IAppWrapperProps, {}> {
                 <Route path="/" component={App} >
                     <IndexRedirect to="/ish:1656863-1-1" />
                     <Route path=":publicationId" component={PublicationContent}>
-                        <Route path=":pageId" component={PublicationContent}>
-                            <Route path=":publicationTitle/:pageTitle" component={PublicationContent} />
-                        </Route>
-                        <Route path=":publicationTitle/:pageTitle" component={PublicationContent} />
+                        <Route path=":pageId(/:pageTitle)" component={PublicationContent} />
                     </Route>
                 </Route >
             </Router >

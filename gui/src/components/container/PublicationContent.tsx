@@ -288,13 +288,13 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     />
                 <Page
                     getPageLocationPath={(selectedPageId: string): string => {
-                        return `/${publicationId}/${selectedPageId || ""}`;
+                        return `/${encodeURIComponent(publicationId)}/${encodeURIComponent(selectedPageId) || ""}`;
                     } }
                     showActivityIndicator={isPageLoading || false}
                     content={content}
                     error={error}
                     onNavigate={(selectedPageId: string): void => {
-                        router.push(`/${publicationId}/${selectedPageId || ""}`);
+                        router.push(`/${encodeURIComponent(publicationId)}/${encodeURIComponent(selectedPageId) || ""}`);
                     } } />
             </section>
         );
@@ -324,7 +324,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     isPageLoading: sitemapItem.Url ? true : false
                 });
 
-                const navPath = `/${publicationId}/${sitemapItem.Url || "-"}/${sitemapItem.Title || ""}`;
+                const navPath = `/${encodeURIComponent(publicationId)}/${encodeURIComponent(sitemapItem.Url || "")}/${sitemapItem.Title || ""}`;
                 if (sitemapItem && sitemapItem.Url == pageId) {
                     router.replace(navPath);
                 }
