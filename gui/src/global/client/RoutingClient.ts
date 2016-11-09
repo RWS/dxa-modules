@@ -1,6 +1,5 @@
 import { IRouting } from "../../interfaces/Routing";
-import { createMemoryHistory } from "history";
-import { browserHistory } from "react-router";
+import { browserHistory, createMemoryHistory } from "react-router";
 
 /**
  * Routing related functionality

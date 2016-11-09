@@ -9,8 +9,8 @@ export interface IAppContext {
     /**
      * Localization
      *
-     * @type {ILocalization}
-     * @memberOf IAppProps
+     * @type {IServices}
+     * @memberOf IAppContext
      */
     services: IServices;
 }

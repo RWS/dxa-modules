@@ -22,15 +22,14 @@ const routingHistory = routing.getHistory();
 
 const wrapper = TestHelper.wrapWithContext(
     {
-        services: services,
+        services: services
     },
     {
-        services: React.PropTypes.object,
+        services: React.PropTypes.object
     },
     (<Router history={routingHistory}>
         <Route path="/**(/**)" component={() => (<PublicationContent params={{ publicationId: "ish:123-1-1" }} />)} />
     </Router>));
-
 
 class PublicationContentComponent extends TestBase {
 

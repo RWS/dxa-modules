@@ -51,7 +51,7 @@ export interface IPublicationContentPropsParams {
  */
 export interface IPublicationContentProps {
     /**
-     * Id of the current publication
+     * Publication content props parameters
      *
      * @type {IPublicationContentPropsParams}
      */
