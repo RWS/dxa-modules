@@ -16,7 +16,7 @@ module.exports = function (config) {
          */
         files: [
             // React dependencies
-            { pattern: './node_modules/react/dist/react.js', watched: false },
+            { pattern: './node_modules/react/dist/react-with-addons.js', watched: false },
             { pattern: './node_modules/react-dom/dist/react-dom.js', watched: false },
             { pattern: './node_modules/react-dom/dist/react-dom-server.js', watched: false },
             // Main configuration
