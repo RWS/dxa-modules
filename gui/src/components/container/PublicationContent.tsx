@@ -278,6 +278,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     content={content}
                     error={error}
                     onNavigate={(selectedPageId: string): void => {
+                        /* istanbul ignore else */
                         if (router) {
                             router.push(`/${encodeURIComponent(publicationId)}/${encodeURIComponent(selectedPageId) || ""}`);
                         }
@@ -310,6 +311,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     isPageLoading: sitemapItem.Url ? true : false
                 });
 
+                /* istanbul ignore else */
                 if (router) {
                     const navPath = `/${encodeURIComponent(publicationId)}/${encodeURIComponent(sitemapItem.Url || "")}/${sitemapItem.Title || ""}`;
                     if (sitemapItem && sitemapItem.Url == pageId) {
