@@ -31,7 +31,7 @@ module.exports = (buildOptions, browserSync) => {
 
         const compiler = webpack(config, (err, stats) => {
             onCompleted(err, stats);
-            if (!buildOptions.isDefaultTask && buildOptions.isDebug) {
+            if (!err && !buildOptions.isDefaultTask && buildOptions.isDebug) {
                 compiler.watch({
                     aggregateTimeout: 500,
                     poll: true
