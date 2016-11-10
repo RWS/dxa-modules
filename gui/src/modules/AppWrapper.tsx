@@ -26,26 +26,34 @@ export interface IAppWrapperProps {
     routing: IRouting;
 }
 
-export interface IAppWrapperChildContext {
+export interface IAppContext {
+    /**
+     * Router
+     *
+     * @type {ReactRouter.RouterOnContext}
+     * @memberOf IAppContext
+     */
+    router?: ReactRouter.RouterOnContext;
     /**
      * Services
      *
      * @type {IServices}
-     * @memberOf IAppProps
+     * @memberOf IAppContext
      */
     services: IServices;
 }
+
 
 /**
  * Main component for the application
  */
 export class AppWrapper extends React.Component<IAppWrapperProps, {}> {
 
-    public static childContextTypes: React.ValidationMap<IAppWrapperChildContext> = {
+    public static childContextTypes: React.ValidationMap<IAppContext> = {
         services: React.PropTypes.object
     };
 
-    public getChildContext(): IAppWrapperChildContext {
+    public getChildContext(): IAppContext {
         const { services} = this.props;
         return {
             services: services
