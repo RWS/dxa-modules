@@ -11,7 +11,7 @@ export class Url {
     /**
      * Options to slugify titles in Url
      */
-    private static _slugOptions: {
+    private static SlugOptions: slug.Options = {
         lower: true
     };
 
@@ -28,7 +28,7 @@ export class Url {
     public static getPublicationLocation(publicationId: string, publicationTitle?: string): string {
         let url = `/${encodeURIComponent(publicationId)}`;
         if (publicationTitle) {
-            url += `/${slug(publicationTitle, this._slugOptions)}`;
+            url += `/${slug(publicationTitle, Url.SlugOptions)}`;
         }
         return url;
     }
@@ -50,9 +50,9 @@ export class Url {
 
         let url = `/${encodeURIComponent(publicationId)}/${encodeURIComponent(pageId)}`;
         if (publicationTitle) {
-            url += `/${slug(publicationTitle, this._slugOptions)}`;
+            url += `/${slug(publicationTitle, Url.SlugOptions)}`;
             if (pageTitle) {
-                url += `/${slug(pageTitle, this._slugOptions)}`;
+                url += `/${slug(pageTitle, Url.SlugOptions)}`;
             }
         }
 
