@@ -8,12 +8,6 @@ class UrlUtil extends TestBase {
     public runTests(): void {
 
         describe(`PublicationContent component tests.`, (): void => {
-            const target = super.createTargetElement();
-
-            afterEach(() => {
-                const domNode = ReactDOM.findDOMNode(target);
-                ReactDOM.unmountComponentAtNode(domNode);
-            });
 
             it("encodes url to safe format", (): void => {
                 const publicationLocation = Url.getPublicationLocation("ish:777-1-1", "Veröffentlichung№пять");
