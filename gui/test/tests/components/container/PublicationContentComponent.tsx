@@ -1,13 +1,11 @@
-import { Router, Route } from "react-router";
-import { PublicationContent } from "../../../../src/components/container/PublicationContent";
+import { PublicationContent, IPublicationContentProps } from "../../../../src/components/container/PublicationContent";
+import { ISitemapItem } from "../../../../src/interfaces/ServerModels";
 import { PageService } from "../../../mocks/services/PageService";
 import { PublicationService } from "../../../mocks/services/PublicationService";
 import { TaxonomyService } from "../../../mocks/services/TaxonomyService";
-import { routing } from "../../../mocks/Routing";
 import { localization } from "../../../mocks/services/LocalizationService";
 import { Toc } from "../../../../src/components/presentation/Toc";
 import { Page } from "../../../../src/components/presentation/Page";
-
 import { TestHelper } from "../../../helpers/TestHelper";
 
 // Global Catalina dependencies
@@ -24,18 +22,13 @@ const services = {
     taxonomyService: new TaxonomyService()
 };
 
-const routingHistory = routing.getHistory();
-
-const wrapper = TestHelper.wrapWithContext(
+const wrapper = TestHelper.wrapWithContext<IPublicationContentProps>(
     {
         services: services
     },
     {
         services: React.PropTypes.object
-    },
-    (<Router history={routingHistory}>
-        <Route path="/**(/**)" component={() => (<PublicationContent params={{ publicationId: "ish:123-1-1" }} />)} />
-    </Router>));
+    });
 
 class PublicationContentComponent extends TestBase {
 
@@ -270,10 +263,9 @@ class PublicationContentComponent extends TestBase {
                     Title: "Second page!",
                     Url: "ish:123-2-16"
                 };
-                routing.setPublicationLocation("ish:123-1-1", "Publication", first.Url, first.Title);
 
                 services.taxonomyService.setMockDataToc(null, [first, second]);
-                const publicationContent = this._renderComponent(target);
+                let publicationContent = this._renderComponent(target, first.Url);
 
                 const assert = (item: ISitemapItem, ready: () => void): void => {
                     // Use a timeout to allow the DataStore to return a promise with the data
@@ -288,10 +280,7 @@ class PublicationContentComponent extends TestBase {
                 };
 
                 assert(first, (): void => {
-                    if (second.Url) {
-                        routing.setPageLocation(second.Url);
-                    }
-                    this._renderComponent(target);
+                    publicationContent = this._renderComponent(target, second.Url);
                     assert(second, done);
                 });
 
@@ -300,8 +289,11 @@ class PublicationContentComponent extends TestBase {
 
     }
 
-    private _renderComponent(target: HTMLElement): PublicationContent {
-        return ReactDOM.render(wrapper, target) as PublicationContent;
+    private _renderComponent(target: HTMLElement, pageId?: string): PublicationContent {
+        const comp = ReactDOM.render(
+            wrapper((<PublicationContent params={{ publicationId: "ish:123-1-1", pageId: pageId }} />)),
+            target) as React.Component<{}, {}>;
+        return TestUtils.findRenderedComponentWithType(comp, PublicationContent) as PublicationContent;
     }
 
 }

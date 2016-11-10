@@ -7,6 +7,8 @@ import { routing } from "../../../mocks/Routing";
 // Global Catalina dependencies
 import TestBase = SDL.Client.Test.TestBase;
 
+const routingHistory = routing.getHistory();
+
 class BreadcrumbsComponent extends TestBase {
 
     public runTests(): void {
@@ -140,7 +142,7 @@ class BreadcrumbsComponent extends TestBase {
     }
 
     private _renderComponent(props: IBreadcrumbsProps, target: HTMLElement): Breadcrumbs {
-        ReactDOM.render(
+        return ReactDOM.render(
             <Router history={routing.getHistory()}>
                 <Route path=":publicationId(/:pageId)" component={() => (<Breadcrumbs {...props} />)} />
             </Router>, target) as Breadcrumbs;

@@ -29,10 +29,7 @@ const wrapper = TestHelper.wrapWithContext(
     },
     {
         services: React.PropTypes.object
-    },
-    (<Router history={routingHistory}>
-        <Route path="/" component={() => (<App children={<PublicationContent params={{ publicationId: "ish:123-1-1" }} />} />)} />
-    </Router>));
+    });
 
 class AppComponent extends TestBase {
 
@@ -63,7 +60,10 @@ class AppComponent extends TestBase {
     }
 
     private _renderComponent(target: HTMLElement): App {
-        return ReactDOM.render(wrapper, target) as App;
+        return ReactDOM.render(
+            wrapper((<Router history={routingHistory}>
+                <Route path="/" component={() => (<App children={<PublicationContent params={{ publicationId: "ish:123-1-1" }} />} />)} />
+            </Router>)), target) as App;
     }
 }
 
