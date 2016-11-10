@@ -1,7 +1,7 @@
 /**
- * Localization implementation
+ * Localization service
  */
-export interface ILocalization {
+export interface ILocalizationService {
 
     /**
      * Format a message

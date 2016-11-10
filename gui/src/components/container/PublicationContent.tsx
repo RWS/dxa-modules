@@ -1,6 +1,6 @@
 import { Promise } from "es6-promise";
 import { ISitemapItem } from "../../interfaces/ServerModels";
-import { IDataStore } from "../../interfaces/DataStore";
+import { IServices } from "../../interfaces/Services";
 import { IRouting } from "../../interfaces/Routing";
 import { Toc } from "../presentation/Toc";
 import { Page } from "../presentation/Page";
@@ -22,12 +22,12 @@ export interface IPublicationContentProps {
      */
     publicationId: string;
     /**
-     * Data store
+     * Services
      *
-     * @type {IDataStore}
+     * @type {IServices}
      * @memberOf IPublicationContentProps
      */
-    dataStore: IDataStore;
+    services: IServices;
     /**
      * Routing
      *
@@ -132,10 +132,10 @@ export class PublicationContent extends React.Component<IPublicationContentProps
      * Invoked once, both on the client and server, immediately before the initial rendering occurs.
      */
     public componentWillMount(): void {
-        const { publicationId, dataStore, routing } = this.props;
+        const { publicationId, services, routing } = this.props;
         const getRootItems = (path?: string[]): void => {
             // Get the data for the Toc
-            dataStore.getSitemapRoot(publicationId).then(
+            services.taxonomyService.getSitemapRoot(publicationId).then(
                 items => {
                     /* istanbul ignore else */
                     if (!this._isUnmounted) {
@@ -196,7 +196,8 @@ export class PublicationContent extends React.Component<IPublicationContentProps
      * @param {IPublicationContentState} nextState Next state
      */
     public componentWillUpdate(nextProps: IPublicationContentProps, nextState: IPublicationContentState): void {
-        const { publicationId, dataStore } = this.props;
+        const { publicationId, services } = this.props;
+        const pageService = services.pageService;
         const { selectedTocItem, isPageLoading } = this.state;
         const currentUrl = selectedTocItem ? selectedTocItem.Url : null;
         const nextUrl = nextState.selectedTocItem ? nextState.selectedTocItem.Url : null;
@@ -204,7 +205,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
             this._page.content = `<h1 class="title topictitle1">${nextState.selectedTocItem.Title}</h1>`;
         }
         if (nextUrl && (isPageLoading || currentUrl !== nextUrl)) {
-            dataStore.getPageInfo(publicationId, nextUrl).then(
+            pageService.getPageInfo(publicationId, nextUrl).then(
                 this._onPageContentRetrieved.bind(this),
                 this._onPageContentRetrievFailed.bind(this));
         }
@@ -217,7 +218,8 @@ export class PublicationContent extends React.Component<IPublicationContentProps
      */
     public render(): JSX.Element {
         const { isPageLoading, activeTocItemPath, selectedTocItem, publicationTitle } = this.state;
-        const { publicationId, dataStore, routing } = this.props;
+        const { publicationId, services, routing } = this.props;
+        const taxonomyService = services.taxonomyService;
         const { content, error} = this._page;
         const { rootItems } = this._toc;
         const tocError = this._toc.error;
@@ -228,7 +230,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     activeItemPath={activeTocItemPath}
                     rootItems={rootItems}
                     loadChildItems={(parentId: string): Promise<ISitemapItem[]> => {
-                        return dataStore.getSitemapItems(publicationId, parentId);
+                        return taxonomyService.getSitemapItems(publicationId, parentId);
                     } }
                     onSelectionChanged={this._onTocSelectionChanged.bind(this)}
                     error={tocError} />
@@ -236,7 +238,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     routing={routing}
                     publicationId={publicationId}
                     publicationTitle={publicationTitle || ""}
-                    loadItemsPath={dataStore.getSitemapPath.bind(dataStore)}
+                    loadItemsPath={taxonomyService.getSitemapPath.bind(taxonomyService)}
                     selectedItem={selectedTocItem} />
                 <Page
                     getPageLocationPath={routing.getPageLocationPath.bind(routing)}
@@ -257,11 +259,12 @@ export class PublicationContent extends React.Component<IPublicationContentProps
 
     private _onTocSelectionChanged(sitemapItem: ISitemapItem, path: string[]): void {
         const page = this._page;
-        const { publicationId, dataStore, routing } = this.props;
+        const { publicationId, services, routing } = this.props;
+        const publicationService = services.publicationService;
 
         page.error = null;
 
-        dataStore.getPublicationTitle(publicationId).then(
+        publicationService.getPublicationTitle(publicationId).then(
             title => {
                 this.setState({
                     activeTocItemPath: path,
@@ -301,8 +304,9 @@ export class PublicationContent extends React.Component<IPublicationContentProps
     }
 
     private _getActiveSitemapPath(pageId: string, done: (path: string[]) => void): void {
-        const { publicationId, dataStore } = this.props;
-        dataStore.getSitemapPath(publicationId, pageId).then(
+        const { publicationId, services } = this.props;
+        const taxonomyService = services.taxonomyService;
+        taxonomyService.getSitemapPath(publicationId, pageId).then(
             path => {
                 /* istanbul ignore else */
                 if (!this._isUnmounted) {

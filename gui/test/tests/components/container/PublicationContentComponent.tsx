@@ -1,12 +1,26 @@
 import { PublicationContent } from "../../../../src/components/container/PublicationContent";
 import { ISitemapItem } from "../../../../src/interfaces/ServerModels";
-import { DataStore } from "../../../mocks/DataStore";
+import { PageService } from "../../../mocks/services/PageService";
+import { PublicationService } from "../../../mocks/services/PublicationService";
+import { TaxonomyService } from "../../../mocks/services/TaxonomyService";
 import { routing } from "../../../mocks/Routing";
+import { localization } from "../../../mocks/services/LocalizationService";
+import { Toc } from "../../../../src/components/presentation/Toc";
+import { Page } from "../../../../src/components/presentation/Page";
 
 // Global Catalina dependencies
 import TestBase = SDL.Client.Test.TestBase;
+import ActivityIndicator = SDL.ReactComponents.ActivityIndicator;
+import TreeView = SDL.ReactComponents.TreeView;
+import ValidationMessage = SDL.ReactComponents.ValidationMessage;
+const TestUtils = React.addons.TestUtils;
 
-const dataStoreMock = new DataStore();
+const services = {
+    pageService: new PageService(),
+    publicationService: new PublicationService(),
+    localizationService: localization,
+    taxonomyService: new TaxonomyService()
+};
 
 class PublicationContentComponent extends TestBase {
 
@@ -18,7 +32,7 @@ class PublicationContentComponent extends TestBase {
             afterEach(() => {
                 const domNode = ReactDOM.findDOMNode(target);
                 ReactDOM.unmountComponentAtNode(domNode);
-                dataStoreMock.fakeDelay(false);
+                services.taxonomyService.fakeDelay(false);
             });
 
             afterAll(() => {
@@ -26,15 +40,16 @@ class PublicationContentComponent extends TestBase {
             });
 
             it("show loading indicator on initial render", (): void => {
-                dataStoreMock.fakeDelay(true);
-                this._renderComponent(target);
-                const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
-                expect(domNode).not.toBeNull();
-                expect(domNode.querySelector(".sdl-activityindicator")).not.toBeNull("Could not find activity indicator.");
+                services.taxonomyService.fakeDelay(true);
+                const publicationContent = this._renderComponent(target);
+                // tslint:disable-next-line:no-any
+                const activityIndicators = TestUtils.scryRenderedComponentsWithType(publicationContent, ActivityIndicator as any);
+                // One indicator for the toc, one for the page
+                expect(activityIndicators.length).toBe(2, "Could not find activity indicators.");
             });
 
             it("shows toc", (done: () => void): void => {
-                dataStoreMock.setMockDataToc(null, [
+                services.taxonomyService.setMockDataToc(null, [
                     {
                         Id: "123",
                         Title: "First element",
@@ -43,16 +58,24 @@ class PublicationContentComponent extends TestBase {
                         Items: []
                     }
                 ]);
-                this._renderComponent(target);
-                const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
-                expect(domNode).not.toBeNull();
+                const publicationContent = this._renderComponent(target);
                 // Use a timeout to allow the DataStore to return a promise with the data
                 setTimeout((): void => {
                     // Toc is ready
-                    expect(domNode.querySelector(".sdl-dita-delivery-toc .sdl-activityindicator")).toBeNull("Activity indicator should not be rendered.");
+                    const toc = TestUtils.findRenderedComponentWithType(publicationContent, Toc);
+                    // tslint:disable-next-line:no-any
+                    const activityIndicatorsToc = TestUtils.scryRenderedComponentsWithType(toc, ActivityIndicator as any);
+                    expect(activityIndicatorsToc.length).toBe(0, "Activity indicator should not be rendered.");
                     // Page is still loading
-                    expect(domNode.querySelector(".sdl-dita-delivery-page .sdl-activityindicator")).not.toBeNull("Could not find activity indicator.");
-                    const nodes = domNode.querySelectorAll(".sdl-treeview .content");
+                    const page = TestUtils.findRenderedComponentWithType(publicationContent, Page);
+                    // tslint:disable-next-line:no-any
+                    const activityIndicatorsPage = TestUtils.scryRenderedComponentsWithType(page, ActivityIndicator as any);
+                    expect(activityIndicatorsPage.length).toBe(1, "Could not find activity indicator.");
+                    // Check if tree view nodes are there
+                    // tslint:disable-next-line:no-any
+                    const treeView = TestUtils.findRenderedComponentWithType(toc, TreeView as any);
+                    const treeNode = ReactDOM.findDOMNode(treeView) as HTMLElement;
+                    const nodes = treeNode.querySelectorAll(".content");
                     expect(nodes.length).toBe(1);
                     expect(nodes.item(0).textContent).toBe("First element");
                     done();
@@ -61,10 +84,10 @@ class PublicationContentComponent extends TestBase {
 
             it("updates page content when selected site map item changes", (done: () => void): void => {
                 const pageContent = "<div>Page content!</div>";
-                dataStoreMock.setMockDataToc(null, []);
-                dataStoreMock.setMockDataPage(null, { content: pageContent, title: "Title!" });
-                const component = this._renderComponent(target);
-                component.setState({
+                services.taxonomyService.setMockDataToc(null, []);
+                services.pageService.setMockDataPage(null, { content: pageContent, title: "Title!" });
+                const publicationContent = this._renderComponent(target);
+                publicationContent.setState({
                     selectedTocItem: {
                         Id: "123",
                         IsAbstract: false,
@@ -74,21 +97,23 @@ class PublicationContentComponent extends TestBase {
                         Items: []
                     }
                 });
-                const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
-                expect(domNode).not.toBeNull();
                 // Use a timeout to allow the DataStore to return a promise with the data
                 setTimeout((): void => {
-                    expect(domNode.querySelector(".sdl-activityindicator")).toBeNull("Activity indicator should not be rendered.");
-                    const pageContentNode = domNode.querySelector(".page-content") as HTMLElement;
-                    expect(pageContentNode).not.toBeNull("Could not find page content.");
+                    // tslint:disable-next-line:no-any
+                    const activityIndicators = TestUtils.scryRenderedComponentsWithType(publicationContent, ActivityIndicator as any);
+                    expect(activityIndicators.length).toBe(0, "Activity indicator should not be rendered.");
+                    const page = TestUtils.findRenderedComponentWithType(publicationContent, Page);
+                    expect(page).not.toBeNull("Could not find page content.");
+                    const pageContentNode = ReactDOM.findDOMNode(page);
                     expect(pageContentNode.children.length).toBe(1);
-                    expect(pageContentNode.innerHTML).toBe(pageContent);
+                    expect(pageContentNode.children[0].children.length).toBe(1);
+                    expect(pageContentNode.children[0].children[0].innerHTML).toBe(pageContent);
                     done();
                 }, 0);
             });
 
             it("updates page content when item is selected from toc", (done: () => void): void => {
-                dataStoreMock.setMockDataToc(null, [
+                services.taxonomyService.setMockDataToc(null, [
                     {
                         Id: "1",
                         Title: "First element",
@@ -104,24 +129,34 @@ class PublicationContentComponent extends TestBase {
                         Items: []
                     }
                 ]);
-                this._renderComponent(target);
+                const publicationContent = this._renderComponent(target);
 
-                const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
-                expect(domNode).not.toBeNull();
                 // Use a timeout to allow the DataStore to return a promise with the data
                 setTimeout((): void => {
                     // Toc is ready
-                    expect(domNode.querySelector(".sdl-dita-delivery-toc .sdl-activityindicator")).toBeNull("Activity indicator should not be rendered.");
+                    const toc = TestUtils.findRenderedComponentWithType(publicationContent, Toc);
+                    // tslint:disable-next-line:no-any
+                    const activityIndicatorsToc = TestUtils.scryRenderedComponentsWithType(toc, ActivityIndicator as any);
+                    expect(activityIndicatorsToc.length).toBe(0, "Activity indicator should not be rendered.");
                     // Page is still loading
-                    expect(domNode.querySelector(".sdl-dita-delivery-page .sdl-activityindicator")).not.toBeNull("Could not find activity indicator.");
-                    // Click second element
-                    (domNode.querySelectorAll(".sdl-treeview .content")[1] as HTMLDivElement).click();
+                    const page = TestUtils.findRenderedComponentWithType(publicationContent, Page);
+                    // tslint:disable-next-line:no-any
+                    const activityIndicatorsPage = TestUtils.scryRenderedComponentsWithType(page, ActivityIndicator as any);
+                    expect(activityIndicatorsPage.length).toBe(1, "Could not find activity indicator.");
+                    // Click second element inside toc
+                    // tslint:disable-next-line:no-any
+                    const treeView = TestUtils.findRenderedComponentWithType(toc, TreeView as any);
+                    const treeNode = ReactDOM.findDOMNode(treeView) as HTMLElement;
+                    (treeNode.querySelectorAll(".content")[1] as HTMLDivElement).click();
 
                     // Treeview uses debouncing for node selection so a timeout is required
                     setTimeout((): void => {
                         // All is loaded
-                        expect(domNode.querySelector(".sdl-activityindicator")).toBeNull("Activity indicator should not be rendered.");
-                        const pageTitleNode = domNode.querySelector(".page-content h1") as HTMLElement;
+                        // tslint:disable-next-line:no-any
+                        const activityIndicators = TestUtils.scryRenderedComponentsWithType(publicationContent, ActivityIndicator as any);
+                        expect(activityIndicators.length).toBe(0, "Activity indicator should not be rendered.");
+                        const pageNode = ReactDOM.findDOMNode(page) as HTMLElement;
+                        const pageTitleNode = pageNode.querySelector("h1") as HTMLElement;
                         expect(pageTitleNode).not.toBeNull("Could not find page title.");
                         expect(pageTitleNode.textContent).toBe("Second element");
                         done();
@@ -130,10 +165,10 @@ class PublicationContentComponent extends TestBase {
             });
 
             it("updates page content with title when a site map item without url is selected", (done: () => void): void => {
-                dataStoreMock.setMockDataToc(null, []);
+                services.taxonomyService.setMockDataToc(null, []);
                 const title = "Some page";
-                const component = this._renderComponent(target);
-                component.setState({
+                const publicationContent = this._renderComponent(target);
+                publicationContent.setState({
                     selectedTocItem: {
                         Id: "12345",
                         IsAbstract: true,
@@ -142,12 +177,15 @@ class PublicationContentComponent extends TestBase {
                         Items: []
                     }
                 });
-                const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
-                expect(domNode).not.toBeNull();
+
                 // Use a timeout to allow the DataStore to return a promise with the data
                 setTimeout((): void => {
-                    expect(domNode.querySelector(".sdl-activityindicator")).toBeNull("Activity indicator should not be rendered.");
-                    const pageTitleNode = domNode.querySelector(".page-content h1") as HTMLElement;
+                    // tslint:disable-next-line:no-any
+                    const activityIndicators = TestUtils.scryRenderedComponentsWithType(publicationContent, ActivityIndicator as any);
+                    expect(activityIndicators.length).toBe(0, "Activity indicator should not be rendered.");
+                    const page = TestUtils.findRenderedComponentWithType(publicationContent, Page);
+                    const pageNode = ReactDOM.findDOMNode(page) as HTMLElement;
+                    const pageTitleNode = pageNode.querySelector("h1") as HTMLElement;
                     expect(pageTitleNode).not.toBeNull("Could not find page title.");
                     expect(pageTitleNode.textContent).toBe(title);
                     done();
@@ -155,7 +193,7 @@ class PublicationContentComponent extends TestBase {
             });
 
             it("shows an error message when page info fails to load", (done: () => void): void => {
-                dataStoreMock.setMockDataToc(null, [{
+                services.taxonomyService.setMockDataToc(null, [{
                     Id: "123456",
                     IsAbstract: false,
                     HasChildNodes: true,
@@ -163,17 +201,20 @@ class PublicationContentComponent extends TestBase {
                     Url: "page-url",
                     Items: []
                 }]);
-                dataStoreMock.setMockDataPage("Page failed to load!");
-                this._renderComponent(target);
-                const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
-                expect(domNode).not.toBeNull();
+                services.pageService.setMockDataPage("Page failed to load!");
+                const publicationContent = this._renderComponent(target);
 
                 // Wait for the tree view to select the first node
                 // Treeview uses debouncing for node selection so a timeout is required
                 setTimeout((): void => {
-                    expect(domNode.querySelector(".sdl-activityindicator")).toBeNull("Activity indicator should not be rendered.");
-                    const validationMessageNode = domNode.querySelector(".sdl-validationmessage");
-                    expect(validationMessageNode).not.toBeNull("Could not find validation message.");
+                    // tslint:disable-next-line:no-any
+                    const activityIndicators = TestUtils.scryRenderedComponentsWithType(publicationContent, ActivityIndicator as any);
+                    expect(activityIndicators.length).toBe(0, "Activity indicator should not be rendered.");
+                    const page = TestUtils.findRenderedComponentWithType(publicationContent, Page);
+                    // tslint:disable-next-line:no-any
+                    const validationMessage = TestUtils.findRenderedComponentWithType(page, ValidationMessage as any);
+                    expect(validationMessage).not.toBeNull("Could not find validation message.");
+                    const validationMessageNode = ReactDOM.findDOMNode(validationMessage);
                     expect(validationMessageNode && validationMessageNode.textContent).toBe("Page failed to load!");
                     done();
                 }, 500);
@@ -181,17 +222,17 @@ class PublicationContentComponent extends TestBase {
 
             it("shows an error message when publication title failed to load", (done: () => void): void => {
                 const errorMessage = "Page title is invalid!";
-                dataStoreMock.setMockDataPublication(errorMessage);
-                dataStoreMock.setMockDataPage(null, { content: "<div/>", title: "Title!" });
-                this._renderComponent(target);
-                const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
-                expect(domNode).not.toBeNull();
+                services.publicationService.setMockDataPublication(errorMessage);
+                services.pageService.setMockDataPage(null, { content: "<div/>", title: "Title!" });
+                const publicationContent = this._renderComponent(target);
 
                 // Wait for the tree view to select the first node
                 // Treeview uses debouncing for node selection so a timeout is required
                 setTimeout((): void => {
-                    const validationMessageNode = domNode.querySelector(".sdl-validationmessage");
-                    expect(validationMessageNode).not.toBeNull("Could not find validation message.");
+                    // tslint:disable-next-line:no-any
+                    const validationMessage = TestUtils.findRenderedComponentWithType(publicationContent, ValidationMessage as any);
+                    expect(validationMessage).not.toBeNull("Could not find validation message.");
+                    const validationMessageNode = ReactDOM.findDOMNode(validationMessage);
                     expect(validationMessageNode && validationMessageNode.textContent).toBe(errorMessage);
                     done();
                 }, 500);
@@ -216,15 +257,15 @@ class PublicationContentComponent extends TestBase {
                 };
                 routing.setPublicationLocation("ish:123-1-1", "Publication", first.Url, first.Title);
 
-                dataStoreMock.setMockDataToc(null, [first, second]);
-                this._renderComponent(target);
+                services.taxonomyService.setMockDataToc(null, [first, second]);
+                const publicationContent = this._renderComponent(target);
 
                 const assert = (item: ISitemapItem, ready: () => void): void => {
-                    const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
-                    expect(domNode).not.toBeNull();
                     // Use a timeout to allow the DataStore to return a promise with the data
                     setTimeout((): void => {
-                        const tocItems = domNode.querySelector(".sdl-treeview ul");
+                        // tslint:disable-next-line:no-any
+                        const treeView = TestUtils.findRenderedComponentWithType(publicationContent, TreeView as any);
+                        const tocItems = ReactDOM.findDOMNode(treeView).querySelector("ul");
                         expect(tocItems.childNodes.length).toBe(2);
                         expect(tocItems.querySelector(".active").textContent).toBe(item.Title);
                         ready();
@@ -246,7 +287,7 @@ class PublicationContentComponent extends TestBase {
 
     private _renderComponent(target: HTMLElement): PublicationContent {
         return ReactDOM.render(
-            (<PublicationContent dataStore={dataStoreMock} routing={routing} publicationId={"ish:123-1-1"} />)
+            (<PublicationContent services={services} routing={routing} publicationId={"ish:123-1-1"} />)
             , target) as PublicationContent;
     }
 }

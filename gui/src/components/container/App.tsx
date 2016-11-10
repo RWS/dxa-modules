@@ -1,6 +1,5 @@
 import { PublicationContent } from "./PublicationContent";
-import { ILocalization } from "../../interfaces/Localization";
-import { IDataStore } from "../../interfaces/DataStore";
+import { IServices } from "../../interfaces/Services";
 import { IRouting } from "../../interfaces/Routing";
 import "./styles/App";
 import "../controls/styles/TopBar";
@@ -25,19 +24,12 @@ export interface IAppState {
 
 export interface IAppProps {
     /**
-     * Localization
+     * Services
      *
-     * @type {ILocalization}
+     * @type {IServices}
      * @memberOf IAppProps
      */
-    localization: ILocalization;
-    /**
-     * Data store
-     *
-     * @type {IDataStore}
-     * @memberOf IAppProps
-     */
-    dataStore: IDataStore;
+    services: IServices;
     /**
      * Routing
      *
@@ -69,9 +61,9 @@ export class App extends React.Component<IAppProps, IAppState> {
      * @returns {JSX.Element}
      */
     public render(): JSX.Element {
-        const { formatMessage } = this.props.localization;
         const { selectedPublicationId } = this.state;
-        const { dataStore, routing } = this.props;
+        const { services, routing } = this.props;
+        const { formatMessage } = services.localizationService;
         return (
             <div className={"sdl-dita-delivery-app"}>
                 <TopBar title={formatMessage("components.app.title")} buttons={{
@@ -79,7 +71,7 @@ export class App extends React.Component<IAppProps, IAppState> {
                         isPicture: true
                     }
                 }} />
-                <PublicationContent publicationId={selectedPublicationId} dataStore={dataStore} routing={routing} />
+                <PublicationContent publicationId={selectedPublicationId} services={services} routing={routing} />
             </div>
         );
     }
