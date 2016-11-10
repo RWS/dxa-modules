@@ -43,7 +43,6 @@ export interface IAppContext {
     services: IServices;
 }
 
-
 /**
  * Main component for the application
  */
