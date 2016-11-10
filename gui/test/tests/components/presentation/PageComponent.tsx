@@ -2,6 +2,9 @@ import { Page, IPageProps } from "../../../../src/components/presentation/Page";
 
 // Global Catalina dependencies
 import TestBase = SDL.Client.Test.TestBase;
+import ActivityIndicator = SDL.ReactComponents.ActivityIndicator;
+import ValidationMessage = SDL.ReactComponents.ValidationMessage;
+const TestUtils = React.addons.TestUtils;
 
 class PageComponent extends TestBase {
 
@@ -20,46 +23,52 @@ class PageComponent extends TestBase {
             });
 
             it("shows / hides activity indicator", (): void => {
-                this._renderComponent({
+                // Show
+                let page = this._renderComponent({
                     showActivityIndicator: true,
                     getPageLocationPath: (): void => { },
                     onNavigate: (): void => { }
                 }, target);
-                const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
-                expect(domNode).not.toBeNull();
-                expect(domNode.querySelector(".sdl-activityindicator")).not.toBeNull("Could not find activity indicator.");
-                this._renderComponent({
+                // tslint:disable-next-line:no-any
+                const activityIndicator = TestUtils.findRenderedComponentWithType(page, ActivityIndicator as any);
+                expect(activityIndicator).not.toBeNull("Could not find activity indicator.");
+
+                // Hide
+                page = this._renderComponent({
                     showActivityIndicator: false,
                     getPageLocationPath: (): void => { },
                     onNavigate: (): void => { }
                 }, target);
-                expect(domNode.querySelector(".sdl-activityindicator")).toBeNull("Activity indicator should have been removed.");
+                // tslint:disable-next-line:no-any
+                const activityIndicators = TestUtils.scryRenderedComponentsWithType(page, ActivityIndicator as any);
+                expect(activityIndicators.length).toBe(0, "Activity indicator should have been removed.");
             });
 
             it("can show error info", (): void => {
-                this._renderComponent({
+                const page = this._renderComponent({
                     showActivityIndicator: false,
                     error: "Error!",
                     getPageLocationPath: (): void => { },
                     onNavigate: (): void => { }
                 }, target);
-                const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
-                expect(domNode).not.toBeNull();
-                const validationMessageNode = domNode.querySelector(".sdl-validationmessage");
-                expect(validationMessageNode).not.toBeNull("Could not find validation message.");
+
+                // tslint:disable-next-line:no-any
+                const validationMessage = TestUtils.findRenderedComponentWithType(page, ValidationMessage as any);
+                expect(validationMessage).not.toBeNull("Could not find validation message.");
+                const validationMessageNode = ReactDOM.findDOMNode(validationMessage);
                 expect(validationMessageNode.textContent).toBe("Error!");
             });
 
             it("can show page content info", (): void => {
                 const pageContent = "<div>Page content!</div>";
-                this._renderComponent({
+                const page = this._renderComponent({
                     showActivityIndicator: false,
                     content: pageContent,
                     getPageLocationPath: (): void => { },
                     onNavigate: (): void => { }
                 }, target);
 
-                const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
+                const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
                 expect(domNode).not.toBeNull();
                 const pageContentNode = domNode.querySelector(".page-content") as HTMLElement;
                 expect(pageContentNode).not.toBeNull("Could not find page content.");
@@ -69,7 +78,7 @@ class PageComponent extends TestBase {
 
             it("navigates to another page when a hyperlink is clicked", (done: () => void): void => {
                 const pageContent = "<div><a href=\"ish:12-34-56\"/></div>";
-                this._renderComponent({
+                const page = this._renderComponent({
                     showActivityIndicator: false,
                     content: pageContent,
                     getPageLocationPath: (): void => { },
@@ -79,9 +88,9 @@ class PageComponent extends TestBase {
                     }
                 }, target);
 
-                const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
+                const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
                 expect(domNode).not.toBeNull();
-                const hyperlink = domNode.querySelector(".page-content a") as HTMLElement;
+                const hyperlink = domNode.querySelector("a") as HTMLElement;
                 hyperlink.click();
             });
 
@@ -89,8 +98,8 @@ class PageComponent extends TestBase {
 
     }
 
-    private _renderComponent(props: IPageProps, target: HTMLElement): void {
-        ReactDOM.render(<Page {...props} />, target);
+    private _renderComponent(props: IPageProps, target: HTMLElement): Page {
+        return ReactDOM.render(<Page {...props} />, target) as Page;
     }
 }
 

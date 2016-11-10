@@ -76,6 +76,7 @@ export class NavigationLinks extends LoadableObject {
         while (items && items.length > 0) {
             const firstItem = items[0];
             items = firstItem.Items;
+            /* istanbul ignore else */
             if (firstItem.Id) {
                 path.push(firstItem);
             }
