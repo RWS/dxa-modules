@@ -1,5 +1,4 @@
 import { Router, Route } from "react-router";
-
 import { App } from "../../../../src/components/container/App";
 import { PublicationContent } from "../../../../src/components/container/PublicationContent";
 import { PageService } from "../../../mocks/services/PageService";
@@ -7,10 +6,12 @@ import { PublicationService } from "../../../mocks/services/PublicationService";
 import { TaxonomyService } from "../../../mocks/services/TaxonomyService";
 import { localization } from "../../../mocks/services/LocalizationService";
 import { routing } from "../../../mocks/Routing";
-import { TestHelper } from "../../../helpers/TestHelper";
+import { ComponentWithContext } from "../../../mocks/ComponentWithContext";
 
 // Global Catalina dependencies
 import TestBase = SDL.Client.Test.TestBase;
+import ActivityIndicator = SDL.ReactComponents.ActivityIndicator;
+const TestUtils = React.addons.TestUtils;
 
 const services = {
     pageService: new PageService(),
@@ -20,17 +21,6 @@ const services = {
 };
 
 const routingHistory = routing.getHistory();
-
-const wrapper = TestHelper.wrapWithContext(
-    {
-        services: services
-    },
-    {
-        services: React.PropTypes.object
-    },
-    (<Router history={routingHistory}>
-        <Route path="/" component={() => (<App children={<PublicationContent params={{ publicationId: "ish:123-1-1" }} />} />)} />
-    </Router>));
 
 class AppComponent extends TestBase {
 
@@ -51,16 +41,25 @@ class AppComponent extends TestBase {
 
             it("show loading indicator on initial render", (): void => {
                 services.pageService.fakeDelay(true);
-                this._renderComponent(target);
-                const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
-                expect(domNode).not.toBeNull();
-                expect(domNode.querySelector(".sdl-activityindicator")).not.toBeNull("Could not find activity indicator.");
+                const app = this._renderComponent(target);
+                // tslint:disable-next-line:no-any
+                const activityIndicators = TestUtils.scryRenderedComponentsWithType(app, ActivityIndicator as any);
+                // One indicator for the toc, one for the page
+                expect(activityIndicators.length).toBe(2, "Could not find activity indicators.");
             });
         });
     }
 
     private _renderComponent(target: HTMLElement): App {
-        return ReactDOM.render(wrapper, target) as App;
+        return ReactDOM.render(
+            (
+                <ComponentWithContext services={services}>
+                    <Router history={routingHistory}>
+                        <Route path="/" component={() => (<App children={<PublicationContent params={{ publicationId: "ish:123-1-1" }} />} />)} />
+                    </Router>
+                </ComponentWithContext>
+            )
+            , target) as App;
     }
 }
 

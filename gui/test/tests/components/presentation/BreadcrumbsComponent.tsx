@@ -4,14 +4,18 @@ import { ISitemapItem } from "../../../../src/interfaces/ServerModels";
 import { Promise } from "es6-promise";
 import { routing } from "../../../mocks/Routing";
 
+// Global Catalina dependencies
+import TestBase = SDL.Client.Test.TestBase;
+
 const routingHistory = routing.getHistory();
 
-class BreadcrumbsComponent extends SDL.Client.Test.TestBase {
+class BreadcrumbsComponent extends TestBase {
 
     public runTests(): void {
 
         describe(`Breadcrumbs tests`, (): void => {
             const target = super.createTargetElement();
+            let breadCrumbs: Breadcrumbs;
 
             const data = {
                 publicationId: "ish:777-1-1",
@@ -57,7 +61,7 @@ class BreadcrumbsComponent extends SDL.Client.Test.TestBase {
                     loadItemsPath: loadItemsPath,
                     selectedItem: selectedItem
                 };
-                this._renderComponent(props, target);
+                breadCrumbs = this._renderComponent(props, target);
             });
 
             afterEach(() => {
@@ -70,41 +74,41 @@ class BreadcrumbsComponent extends SDL.Client.Test.TestBase {
             });
 
             it("renders breadcumbs", (): void => {
-                const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
+                const domNode = ReactDOM.findDOMNode(breadCrumbs);
                 expect(domNode).not.toBeNull();
-                const nodes = domNode.querySelectorAll(".sdl-dita-delivery-breadcrumbs a");
+                const nodes = domNode.querySelectorAll("a");
                 expect(nodes.length).toBe(1);
                 expect(nodes.item(0).getAttribute("title")).toBe(data.publicationTitle);
             });
 
             it("renders breadcrumbs for selected item", (done: () => void): void => {
-                const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
+                const domNode = ReactDOM.findDOMNode(breadCrumbs);
                 expect(domNode).not.toBeNull();
 
                 // Use a timeout to allow the DataStore to return a promise with the data
                 setTimeout((): void => {
-                    const nodes = domNode.querySelectorAll(".sdl-dita-delivery-breadcrumbs a");
+                    const nodes = domNode.querySelectorAll("a");
                     expect(nodes.length).toBe(3);
-                    expect(nodes.item(0).textContent).toBe("Publication");
-                    expect(nodes.item(1).textContent).toBe("Root");
-                    expect(nodes.item(2).textContent).toBe("Child");
+                    expect(nodes.item(0).textContent).toBe(data.publicationTitle);
+                    expect(nodes.item(1).textContent).toBe(itemsPath[0].Title);
+                    expect(nodes.item(2).textContent).toBe(itemsPath[1].Title);
 
                     // Last item is the selected item and should not highlighted with Link
-                    const spanNodes = domNode.querySelectorAll(".sdl-dita-delivery-breadcrumbs span");
+                    const spanNodes = domNode.querySelectorAll("span");
                     expect(spanNodes.length).toBe(1);
-                    expect(spanNodes.item(0).textContent).toBe("Selected");
+                    expect(spanNodes.item(0).textContent).toBe(selectedItem.Title);
                     done();
                 }, 0);
             });
 
             // Tests below does not make sense
             it("navigates to publication root when a publication title breadcrumb is clicked", (done: () => void): void => {
-                const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
+                const domNode = ReactDOM.findDOMNode(breadCrumbs) as HTMLElement;
                 expect(domNode).not.toBeNull();
 
                 // Use a timeout to allow the DataStore to return a promise with the data
                 setTimeout((): void => {
-                    const hyperlinksNodes = domNode.querySelectorAll(".sdl-dita-delivery-breadcrumbs a");
+                    const hyperlinksNodes = domNode.querySelectorAll("a");
                     const hyperlink = hyperlinksNodes.item(0) as HTMLElement;
 
                     expect(hyperlink).toBeDefined();
@@ -115,12 +119,12 @@ class BreadcrumbsComponent extends SDL.Client.Test.TestBase {
             });
 
             it("navigates to another item when a breadcrumb is clicked", (done: () => void): void => {
-                const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
+                const domNode = ReactDOM.findDOMNode(breadCrumbs) as HTMLElement;
                 expect(domNode).not.toBeNull();
 
                 // Use a timeout to allow the DataStore to return a promise with the data
                 setTimeout((): void => {
-                    const hyperlinksNodes = domNode.querySelectorAll(".sdl-dita-delivery-breadcrumbs a");
+                    const hyperlinksNodes = domNode.querySelectorAll("a");
                     expect(hyperlinksNodes.length).toBe(3);
 
                     for (let i: number = hyperlinksNodes.length - 1; i > 0; i--) {
@@ -137,11 +141,11 @@ class BreadcrumbsComponent extends SDL.Client.Test.TestBase {
         });
     }
 
-    private _renderComponent(props: IBreadcrumbsProps, target: HTMLElement): void {
-        ReactDOM.render(
+    private _renderComponent(props: IBreadcrumbsProps, target: HTMLElement): Breadcrumbs {
+        return ReactDOM.render(
             <Router history={routing.getHistory()}>
                 <Route path=":publicationId(/:pageId)" component={() => (<Breadcrumbs {...props} />)} />
-            </Router>, target);
+            </Router>, target) as Breadcrumbs;
     }
 }
 
