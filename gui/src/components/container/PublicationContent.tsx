@@ -7,6 +7,8 @@ import { IPageInfo } from "../../models/Page";
 import { Breadcrumbs } from "../presentation/Breadcrumbs";
 import "./styles/PublicationContent";
 
+import { Url } from "../../utils/Url";
+
 /**
  * PublicationContent component props params
  *
@@ -288,13 +290,13 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     />
                 <Page
                     getPageLocationPath={(selectedPageId: string): string => {
-                        return `/${encodeURIComponent(publicationId)}/${encodeURIComponent(selectedPageId) || ""}`;
+                        return Url.getPageLocation(publicationId, selectedPageId);
                     } }
                     showActivityIndicator={isPageLoading || false}
                     content={content}
                     error={error}
                     onNavigate={(selectedPageId: string): void => {
-                        router.push(`/${encodeURIComponent(publicationId)}/${encodeURIComponent(selectedPageId) || ""}`);
+                        router.push(Url.getPageLocation(publicationId, selectedPageId));
                     } } />
             </section>
         );
@@ -309,6 +311,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
 
     private _onTocSelectionChanged(sitemapItem: ISitemapItem, path: string[]): void {
         const page = this._page;
+        const { publicationTitle } = this.state;
         const { router, services } = this.context as IPublicationContentContext;
         const { publicationId, pageId } = this.props.params;
         const publicationService = services.publicationService;
@@ -324,7 +327,10 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     isPageLoading: sitemapItem.Url ? true : false
                 });
 
-                const navPath = `/${encodeURIComponent(publicationId)}/${encodeURIComponent(sitemapItem.Url || "")}/${sitemapItem.Title || ""}`;
+                const navPath = sitemapItem.Url
+                    ? Url.getPageLocation(publicationId, sitemapItem.Url, publicationTitle, sitemapItem.Title)
+                    : Url.getPublicationLocation(publicationId, publicationTitle);
+
                 if (sitemapItem && sitemapItem.Url == pageId) {
                     router.replace(navPath);
                 }

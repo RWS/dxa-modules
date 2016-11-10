@@ -3,6 +3,8 @@ import { Link } from "react-router";
 import { ISitemapItem } from "../../interfaces/ServerModels";
 import "./styles/Breadcrumbs";
 
+import { Url } from "../../utils/Url";
+
 /**
  * Breadcrumbs props
  *
@@ -141,7 +143,7 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
             <div className={"sdl-dita-delivery-breadcrumbs"}>
                 <ul>
                     <li>
-                        <Link title={publicationTitle} to={`/${publicationId}`}>{publicationTitle}</Link>
+                        <Link title={publicationTitle} to={`/${Url.getPublicationLocation(publicationId)}`}>{publicationTitle}</Link>
                     </li>
                     {
                         Array.isArray(itemPath) && (
@@ -152,9 +154,9 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
                                             (currentUrl != item.Url)
                                                 ?
                                                 (item.Url) ?
-                                                    <Link title={item.Title} to={`/${publicationId}/${item.Url}`}>{item.Title}</Link>
+                                                    <Link title={item.Title} to={`/${Url.getPageLocation(publicationId, item.Url)}`}>{item.Title}</Link>
                                                     :
-                                                    <Link title={item.Title} to={`/${publicationId}`}>{item.Title}</Link>
+                                                    <Link title={item.Title} to={`/${Url.getPublicationLocation(publicationId)}`}>{item.Title}</Link>
                                                 : <span>{item.Title}</span>
                                         }
                                     </li>
