@@ -5,7 +5,7 @@
   "dependencies": {
     "es6-promise": "~4.0.5",
     "history": "~3.0.0",
-    "sdl-catalina-react-wrappers": "0.1.0-48",
+    "sdl-catalina-react-wrappers": "0.1.0-52",
     "ts-helpers": "~1.1.2"
   },
   "peerDependencies": {

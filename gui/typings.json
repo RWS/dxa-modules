@@ -3,6 +3,7 @@
   "globalDependencies": {
     "jasmine": "registry:dt/jasmine#2.5.0+20161003201800",
     "react": "registry:dt/react#0.14.0+20161008064207",
+    "react-addons-test-utils": "registry:dt/react-addons-test-utils#0.14.0+20160427035638",
     "react-dom": "registry:dt/react-dom#0.14.0+20160412154040",
     "react-router/history": "registry:dt/react-router/history#2.0.0+20160830150755",
     "sdl-catalina": "file:./node_modules/sdl-catalina/Typescript/typings.json",

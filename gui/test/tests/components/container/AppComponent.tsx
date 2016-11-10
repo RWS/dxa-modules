@@ -7,6 +7,8 @@ import { localization } from "../../../mocks/services/LocalizationService";
 
 // Global Catalina dependencies
 import TestBase = SDL.Client.Test.TestBase;
+import ActivityIndicator = SDL.ReactComponents.ActivityIndicator;
+const TestUtils = React.addons.TestUtils;
 
 const services = {
     pageService: new PageService(),
@@ -34,10 +36,11 @@ class AppComponent extends TestBase {
 
             it("show loading indicator on initial render", (): void => {
                 services.pageService.fakeDelay(true);
-                this._renderComponent(target);
-                const domNode = ReactDOM.findDOMNode(target) as HTMLElement;
-                expect(domNode).not.toBeNull();
-                expect(domNode.querySelector(".sdl-activityindicator")).not.toBeNull("Could not find activity indicator.");
+                const app = this._renderComponent(target);
+                // tslint:disable-next-line:no-any
+                const activityIndicators = TestUtils.scryRenderedComponentsWithType(app, ActivityIndicator as any);
+                // One indicator for the toc, one for the page
+                expect(activityIndicators.length).toBe(2, "Could not find activity indicators.");
             });
         });
     }
