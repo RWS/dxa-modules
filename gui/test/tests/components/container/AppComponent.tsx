@@ -1,5 +1,4 @@
 import { Router, Route } from "react-router";
-
 import { App } from "../../../../src/components/container/App";
 import { PublicationContent } from "../../../../src/components/container/PublicationContent";
 import { PageService } from "../../../mocks/services/PageService";
@@ -7,7 +6,7 @@ import { PublicationService } from "../../../mocks/services/PublicationService";
 import { TaxonomyService } from "../../../mocks/services/TaxonomyService";
 import { localization } from "../../../mocks/services/LocalizationService";
 import { routing } from "../../../mocks/Routing";
-import { TestHelper } from "../../../helpers/TestHelper";
+import { ComponentWithContext } from "../../../mocks/ComponentWithContext";
 
 // Global Catalina dependencies
 import TestBase = SDL.Client.Test.TestBase;
@@ -22,14 +21,6 @@ const services = {
 };
 
 const routingHistory = routing.getHistory();
-
-const wrapper = TestHelper.wrapWithContext(
-    {
-        services: services
-    },
-    {
-        services: React.PropTypes.object
-    });
 
 class AppComponent extends TestBase {
 
@@ -61,9 +52,14 @@ class AppComponent extends TestBase {
 
     private _renderComponent(target: HTMLElement): App {
         return ReactDOM.render(
-            wrapper((<Router history={routingHistory}>
-                <Route path="/" component={() => (<App children={<PublicationContent params={{ publicationId: "ish:123-1-1" }} />} />)} />
-            </Router>)), target) as App;
+            (
+                <ComponentWithContext services={services}>
+                    <Router history={routingHistory}>
+                        <Route path="/" component={() => (<App children={<PublicationContent params={{ publicationId: "ish:123-1-1" }} />} />)} />
+                    </Router>
+                </ComponentWithContext>
+            )
+            , target) as App;
     }
 }
 

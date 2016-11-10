@@ -1,4 +1,4 @@
-import { PublicationContent, IPublicationContentProps } from "../../../../src/components/container/PublicationContent";
+import { PublicationContent } from "../../../../src/components/container/PublicationContent";
 import { ISitemapItem } from "../../../../src/interfaces/ServerModels";
 import { PageService } from "../../../mocks/services/PageService";
 import { PublicationService } from "../../../mocks/services/PublicationService";
@@ -6,7 +6,7 @@ import { TaxonomyService } from "../../../mocks/services/TaxonomyService";
 import { localization } from "../../../mocks/services/LocalizationService";
 import { Toc } from "../../../../src/components/presentation/Toc";
 import { Page } from "../../../../src/components/presentation/Page";
-import { TestHelper } from "../../../helpers/TestHelper";
+import { ComponentWithContext } from "../../../mocks/ComponentWithContext";
 
 // Global Catalina dependencies
 import TestBase = SDL.Client.Test.TestBase;
@@ -21,14 +21,6 @@ const services = {
     localizationService: localization,
     taxonomyService: new TaxonomyService()
 };
-
-const wrapper = TestHelper.wrapWithContext<IPublicationContentProps>(
-    {
-        services: services
-    },
-    {
-        services: React.PropTypes.object
-    });
 
 class PublicationContentComponent extends TestBase {
 
@@ -291,8 +283,11 @@ class PublicationContentComponent extends TestBase {
 
     private _renderComponent(target: HTMLElement, pageId?: string): PublicationContent {
         const comp = ReactDOM.render(
-            wrapper((<PublicationContent params={{ publicationId: "ish:123-1-1", pageId: pageId }} />)),
-            target) as React.Component<{}, {}>;
+            (
+                <ComponentWithContext services={services}>
+                    <PublicationContent params={{ publicationId: "ish:123-1-1", pageId: pageId }} />
+                </ComponentWithContext>
+            ), target) as React.Component<{}, {}>;
         return TestUtils.findRenderedComponentWithType(comp, PublicationContent) as PublicationContent;
     }
 
