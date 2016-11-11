@@ -4,6 +4,8 @@ import ams.com.sdl.dxa.modules.model.article.Article;
 import com.sdl.dxa.modules.model.TSI1758.Tsi1758TestEmbedded2Entity;
 import com.sdl.dxa.modules.model.TSI1758.Tsi1758TestEmbeddedEntity;
 import com.sdl.dxa.modules.model.TSI1758.Tsi1758TestEntity;
+import com.sdl.dxa.modules.model.TSI811.Tsi811PageModel;
+import com.sdl.dxa.modules.model.TSI811.Tsi811TestEntity;
 import com.sdl.dxa.modules.model.ecl.EclTest;
 import com.sdl.dxa.modules.model.embed.EmbedChild;
 import com.sdl.dxa.modules.model.embed.EmbedParent;
@@ -31,7 +33,11 @@ import org.springframework.stereotype.Component;
         @RegisteredViewModel(viewName = "SimpleTestPage", modelClass = DefaultPageModel.class),
 
         // https://jira.sdl.com/browse/TSI-1947
-        @RegisteredViewModel(viewName = "TSI1758Test", modelClass = Article.class)
+        @RegisteredViewModel(viewName = "TSI1758Test", modelClass = Article.class),
+
+        // https://jira.sdl.com/browse/TSI-811
+        @RegisteredViewModel(viewName = "TSI811TestPage", modelClass = Tsi811PageModel.class),
+        @RegisteredViewModel(viewName = "TSI811Test", modelClass = Tsi811TestEntity.class)
 })
 public class TestModuleInitializer extends AbstractInitializer {
 
