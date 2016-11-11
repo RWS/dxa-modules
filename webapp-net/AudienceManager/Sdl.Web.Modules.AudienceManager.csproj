@@ -19,7 +19,7 @@
     <OldToolsVersion>12.0</OldToolsVersion>
     <UpgradeBackupLocation />
     <DxaFrameworkVersion>1.7.0-alpha-201611081551</DxaFrameworkVersion>
-    <SdlDeliveryVersion>8.5.0-beta-201611102209</SdlDeliveryVersion>
+    <SdlDeliveryVersion>8.5.0-beta-201611111258</SdlDeliveryVersion>
     <AudienceManagerVersion>8.3.0</AudienceManagerVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
