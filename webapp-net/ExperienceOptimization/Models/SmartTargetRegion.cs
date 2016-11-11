@@ -7,6 +7,7 @@ namespace Sdl.Web.Modules.SmartTarget.Models
     /// <summary>
     /// View Model for SmartTarget Regions.
     /// </summary>
+    [Serializable]
     public class SmartTargetRegion : RegionModel
     {
         public SmartTargetRegion(string name) 

@@ -8,6 +8,7 @@ using Sdl.Web.Common.Models;
 namespace Sdl.Web.Modules.MediaManager.Models
 {
     [SemanticEntity(CoreVocabulary, "ExternalContentLibraryStubSchemamm")]
+    [Serializable]
     public class MediaManagerDistribution : EclItem
     {
         public string PlayerType { get; set; }

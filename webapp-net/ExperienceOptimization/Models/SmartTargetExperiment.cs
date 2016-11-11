@@ -7,6 +7,7 @@ using Tridion.SmartTarget.Analytics;
 
 namespace Sdl.Web.Modules.SmartTarget.Models
 {
+    [Serializable]
     public class SmartTargetExperiment : SmartTargetPromotion
     {
         public ExperimentDimensions ExperimentDimensions { get; private set; }

@@ -4,9 +4,11 @@ using Sdl.Web.Common.Logging;
 using Sdl.Web.Common.Models;
 using Tridion.SmartTarget.Query;
 using Tridion.SmartTarget.Utils;
+using System;
 
 namespace Sdl.Web.Modules.SmartTarget.Models
 {
+    [Serializable]
     public class SmartTargetPageModel : PageModelWithHttpResponseData
     {
         internal SmartTargetPageModel(PageModel pageModel) : base(pageModel.Id)

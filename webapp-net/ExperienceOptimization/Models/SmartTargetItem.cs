@@ -1,8 +1,10 @@
 ﻿using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Models;
+using System;
 
 namespace Sdl.Web.Modules.SmartTarget.Models
 {
+    [Serializable]
     public class SmartTargetItem
     {
         private readonly Localization _localization;

@@ -1,7 +1,9 @@
 ﻿using Sdl.Web.Common.Models;
+using System;
 
 namespace Sdl.Web.Modules.Impress.Models
 {
+    [Serializable]
     public class Slide : EntityModel
     {
         public RichText Content { get; set; }
