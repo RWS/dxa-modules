@@ -1,8 +1,7 @@
 /// <reference path="../typings/index.d.ts" />
 
 import "ts-helpers";
-import { AppWrapper } from "./modules/AppWrapper";
-
+import { App } from "./components/container/App";
 import { IServices } from "./interfaces/Services";
 import { PageService } from "./services/client/PageService";
 import { PublicationService } from "./services/client/PublicationService";
@@ -26,6 +25,6 @@ if (!mainElement) {
     console.error(`Unable to locate element to render application.`);
 } else {
     ReactDOM.render(
-        <AppWrapper services={services} routing={routing} />,
+        <App services={services} routing={routing} />,
         mainElement);
 }
