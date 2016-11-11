@@ -5,35 +5,33 @@
 
 <table>
     <tr>
-        <th>Field</th>
-        <th>PageModel</th>
+        <th>Field name and PageModel properties</th>
         <th>WebRequestContext.getPage()</th>
         <th>&nbsp;</th>
     </tr>
     <tr>
-        <td>ID</td>
-        <td>${pageModel.id}</td>
+        <td>PageModel.Id: ${pageModel.id}</td>
         <td>${markup.webRequestContext.page.id}</td>
-        <td>${pageModel.id eq markup.webRequestContext.page.id ? 'EQ' : '-'}</td>
+        <td>${pageModel.id eq markup.webRequestContext.page.id ? 'EQ' : 'UNEQUAL'}</td>
     </tr>
     <tr>
-        <td>URL</td>
-        <td>${pageModel.url}</td>
+        <td>PageModel.Url: ${pageModel.url}</td>
         <td>${markup.webRequestContext.page.url}</td>
-        <td>${pageModel.url eq markup.webRequestContext.page.url ? 'EQ' : '-'}</td>
+        <td>${pageModel.url eq markup.webRequestContext.page.url ? 'EQ' : 'UNEQUAL'}</td>
     </tr>
     <tr>
-        <td>Title</td>
-        <td>${pageModel.title}</td>
+        <td>PageModel.Title: ${pageModel.title}</td>
         <td>${markup.webRequestContext.page.title}</td>
-        <td>${pageModel.title eq markup.webRequestContext.page.title ? 'EQ' : '-'}</td>
+        <td>${pageModel.title eq markup.webRequestContext.page.title ? 'EQ' : 'UNEQUAL'}</td>
+    </tr>
+    <tr>
+        <th>PageModel.Meta</th>
     </tr>
     <c:forEach items="${markup.webRequestContext.page.meta.entrySet()}" varStatus="status" var="item">
         <tr>
-            <td>META: ${item.key}</td>
-            <td>${pageModel.meta.get(item.key)}</td>
+            <td>${item.key}: ${pageModel.meta.get(item.key)}</td>
             <td>${item.value}</td>
-            <td>${pageModel.meta.get(item.key) eq item.value ? 'EQ' : '-'}</td>
+            <td>${pageModel.meta.get(item.key) eq item.value ? 'EQ' : 'UNEQUAL'}</td>
         </tr>
     </c:forEach>
 </table>

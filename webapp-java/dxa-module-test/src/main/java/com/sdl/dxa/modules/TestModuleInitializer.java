@@ -31,7 +31,7 @@ import org.springframework.stereotype.Component;
         @RegisteredViewModel(viewName = "SimpleTestPage", modelClass = DefaultPageModel.class),
 
         // https://jira.sdl.com/browse/TSI-1947
-        @RegisteredViewModel(viewName = "TSI1758Test", modelClass = Article.class)
+        @RegisteredViewModel(viewName = "TSI1947Test", modelClass = Article.class)
 })
 public class TestModuleInitializer extends AbstractInitializer {
 
