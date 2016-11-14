@@ -100,7 +100,7 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
         const nextItem = nextProps.selectedItem;
         if (nextItem) {
             const nextUrl = nextItem.Url;
-            if (nextUrl && (currentUrl !== nextUrl)) {
+            if (nextItem && nextUrl && (currentUrl !== nextUrl)) {
                 loadItemsPath(nextProps.publicationId || publicationId, nextUrl).then(
                     path => {
                         /* istanbul ignore else */
@@ -111,14 +111,10 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
                         }
                     });
             }
-            else if ((selectedItem && selectedItem.Id) != nextItem.Id) {
-                /* istanbul ignore else */
-                if (!this._isUnmounted) {
-                    this.setState({
-                        itemPath: nextItem ? [nextItem] : []
-                    });
-                }
-            }
+        } else if (currentUrl) {
+            this.setState({
+                itemPath: nextItem ? [nextItem] : []
+            });
         }
     }
 
