@@ -3,6 +3,7 @@
 import "ts-helpers";
 
 // Import all tests
+import "./tests/utils/UrlUtil";
 import "./tests/components/container/HomeComponent";
 import "./tests/components/container/PublicationContentComponent";
 import "./tests/components/presentation/BreadcrumbsComponent";

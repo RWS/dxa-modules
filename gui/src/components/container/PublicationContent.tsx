@@ -7,6 +7,8 @@ import { IPageInfo } from "../../models/Page";
 import { Breadcrumbs } from "../presentation/Breadcrumbs";
 import "./styles/PublicationContent";
 
+import { Url } from "../../utils/Url";
+
 /**
  * PublicationContent component props params
  *
@@ -272,7 +274,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     />
                 <Page
                     getPageLocationPath={(selectedPageId: string): string => {
-                        return `/${encodeURIComponent(publicationId)}/${encodeURIComponent(selectedPageId) || ""}`;
+                        return Url.getPageUrl(publicationId, selectedPageId);
                     } }
                     showActivityIndicator={isPageLoading || false}
                     content={content}
@@ -280,7 +282,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     onNavigate={(selectedPageId: string): void => {
                         /* istanbul ignore else */
                         if (router) {
-                            router.push(`/${encodeURIComponent(publicationId)}/${encodeURIComponent(selectedPageId) || ""}`);
+                            router.push(Url.getPageUrl(publicationId, selectedPageId));
                         }
                     } } />
             </section>
@@ -296,6 +298,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
 
     private _onTocSelectionChanged(sitemapItem: ISitemapItem, path: string[]): void {
         const page = this._page;
+        const { publicationTitle } = this.state;
         const { router, services } = this.context;
         const { publicationId, pageId } = this.props.params;
         const publicationService = services.publicationService;
@@ -313,7 +316,9 @@ export class PublicationContent extends React.Component<IPublicationContentProps
 
                 /* istanbul ignore else */
                 if (router) {
-                    const navPath = `/${encodeURIComponent(publicationId)}/${encodeURIComponent(sitemapItem.Url || "")}/${sitemapItem.Title || ""}`;
+                    const navPath = sitemapItem.Url
+                        ? Url.getPageUrl(publicationId, sitemapItem.Url, publicationTitle, sitemapItem.Title)
+                        : Url.getPublicationUrl(publicationId, publicationTitle);
                     if (sitemapItem && sitemapItem.Url == pageId) {
                         router.replace(navPath);
                     }

@@ -9,5 +9,8 @@
     "react-router/history": "registry:dt/react-router/history#2.0.0+20160830150755",
     "sdl-catalina": "file:./node_modules/sdl-catalina/Typescript/typings.json",
     "sdl-catalina-react-wrappers": "file:./node_modules/sdl-catalina-react-wrappers/typings.json"
+  },
+  "dependencies": {
+    "slug": "registry:npm/slug#0.9.0+20160723033700"
   }
 }

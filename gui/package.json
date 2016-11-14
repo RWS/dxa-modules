@@ -6,6 +6,7 @@
     "es6-promise": "~4.0.5",
     "react-router": "~3.0.0",
     "sdl-catalina-react-wrappers": "0.1.0-52",
+    "slug": "~0.9.1",
     "ts-helpers": "~1.1.2"
   },
   "peerDependencies": {
