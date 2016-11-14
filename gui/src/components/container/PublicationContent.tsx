@@ -1,6 +1,6 @@
 import { Promise } from "es6-promise";
 import { ISitemapItem } from "../../interfaces/ServerModels";
-import { IAppContext } from "../../modules/AppWrapper";
+import { IAppContext } from "./App";
 import { Toc } from "../presentation/Toc";
 import { Page } from "../presentation/Page";
 import { IPageInfo } from "../../models/Page";

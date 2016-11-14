@@ -1,20 +1,61 @@
-import { IAppContext } from "../../modules/AppWrapper";
-import "./styles/App";
-import "../controls/styles/TopBar";
+import { Router, Route, IndexRedirect } from "react-router";
 
-// Global Catalina dependencies
-import TopBar = SDL.ReactComponents.TopBar;
+import { IServices } from "../../interfaces/Services";
+import { IRouting } from "../../interfaces/Routing";
+
+import { Home } from "./Home";
+import { PublicationContent } from "./PublicationContent";
+
+export interface IAppProps {
+    /**
+     * Services
+     *
+     * @type {IServices}
+     * @memberOf IAppProps
+     */
+    services: IServices;
+
+    /**
+     * Routing
+     *
+     * @type {IRouting}
+     * @memberOf IAppProps
+     */
+    routing: IRouting;
+}
+
+export interface IAppContext {
+    /**
+     * Router
+     *
+     * @type {ReactRouter.RouterOnContext}
+     * @memberOf IAppContext
+     */
+    router?: ReactRouter.RouterOnContext;
+    /**
+     * Services
+     *
+     * @type {IServices}
+     * @memberOf IAppContext
+     */
+    services: IServices;
+}
 
 /**
  * Main component for the application
  */
-export class App extends React.Component<{}, {}> {
+export class App extends React.Component<IAppProps, {}> {
 
-    public static contextTypes: React.ValidationMap<IAppContext> = {
-        services: React.PropTypes.object.isRequired
+    public static childContextTypes: React.ValidationMap<IAppContext> = {
+        services: React.PropTypes.object
     };
 
-    public context: IAppContext;
+    public getChildContext(): IAppContext {
+        const { services} = this.props;
+        return {
+            services: services
+        };
+    };
 
     /**
      * Render the component
@@ -22,17 +63,16 @@ export class App extends React.Component<{}, {}> {
      * @returns {JSX.Element}
      */
     public render(): JSX.Element {
-        const { localizationService } = this.context.services;
+        const { routing } = this.props;
         return (
-            <div className={"sdl-dita-delivery-app"}>
-                <TopBar title={localizationService.formatMessage("components.app.title")} buttons={{
-                    user: {
-                        isPicture: true
-                    }
-                }} />
-
-                {this.props.children}
-            </div>
+            <Router history={routing.getHistory()}>
+                <Route path="/" component={Home} >
+                    <IndexRedirect to="/ish:1656863-1-1" />
+                    <Route path=":publicationId" component={PublicationContent}>
+                        <Route path=":pageId(/:pageTitle)" component={PublicationContent} />
+                    </Route>
+                </Route >
+            </Router >
         );
     }
 };
