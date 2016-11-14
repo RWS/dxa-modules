@@ -2,12 +2,10 @@ import { Router, Route } from "react-router";
 import { Breadcrumbs, IBreadcrumbsProps } from "../../../../src/components/presentation/Breadcrumbs";
 import { ISitemapItem } from "../../../../src/interfaces/ServerModels";
 import { Promise } from "es6-promise";
-import { routing } from "../../../mocks/Routing";
+import { hashHistory } from "react-router";
 
 // Global Catalina dependencies
 import TestBase = SDL.Client.Test.TestBase;
-
-const routingHistory = routing.getHistory();
 
 class BreadcrumbsComponent extends TestBase {
 
@@ -54,7 +52,7 @@ class BreadcrumbsComponent extends TestBase {
             };
 
             beforeEach(() => {
-                routingHistory.push(`/${encodeURIComponent(data.publicationId)}`);
+                hashHistory.push(`/${encodeURIComponent(data.publicationId)}`);
                 const props: IBreadcrumbsProps = {
                     publicationId: data.publicationId,
                     publicationTitle: data.publicationTitle,
@@ -143,7 +141,7 @@ class BreadcrumbsComponent extends TestBase {
 
     private _renderComponent(props: IBreadcrumbsProps, target: HTMLElement): Breadcrumbs {
         return ReactDOM.render(
-            <Router history={routing.getHistory()}>
+            <Router history={hashHistory}>
                 <Route path=":publicationId(/:pageId)" component={() => (<Breadcrumbs {...props} />)} />
             </Router>, target) as Breadcrumbs;
     }

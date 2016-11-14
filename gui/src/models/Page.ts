@@ -1,4 +1,4 @@
-import { routing } from "../global/client/RoutingClient";
+import { path } from "../utils/Path";
 import { IPage } from "../interfaces/ServerModels";
 import { TcmId as TcmIdUtils } from "../utils/TcmId";
 
@@ -60,7 +60,7 @@ export class Page extends LoadableObject {
 
     /* Overloads */
     protected _executeLoad(reload: boolean): void {
-        const url = routing.getAbsolutePath(`gui/mocks/page-${TcmIdUtils.removeNamespace(this._pageId)}.json`);
+        const url = path.getAbsolutePath(`gui/mocks/page-${TcmIdUtils.removeNamespace(this._pageId)}.json`);
         Net.getRequest(url,
             this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
     }

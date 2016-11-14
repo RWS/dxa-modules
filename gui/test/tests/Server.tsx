@@ -1,6 +1,6 @@
 import { renderToString } from "../../src/Server";
 import { App } from "../../src/components/container/App";
-import { routing } from "../../src/global/server/RoutingServer";
+import { hashHistory } from "react-router";
 import { localization } from "../../src/services/server/LocalizationService";
 import { IServices } from "../../src/interfaces/Services";
 import { PageService } from "../../src/services/server/PageService";
@@ -30,7 +30,7 @@ class Server extends SDL.Client.Test.TestBase {
                     localizationService: localization,
                     taxonomyService: new TaxonomyService()
                 };
-                const app = ReactDOMServer.renderToStaticMarkup(<App routing={routing} services={services} />);
+                const app = ReactDOMServer.renderToStaticMarkup(<App history={hashHistory} services={services} />);
                 const expected = ReactDOMServer.renderToStaticMarkup((
                     <div className="sdl-dita-delivery-app">
                         <span>
