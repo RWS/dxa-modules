@@ -23,12 +23,12 @@ export class Url {
      * @param {string} publicationTitle Publication title
      * @returns {string | undefined}
      *
-     * @memberOf TcmUri
+     * @memberOf Url
      */
-    public static getPublicationLocation(publicationId: string, publicationTitle?: string): string {
+    public static getPublicationUrl(publicationId: string, publicationTitle?: string): string {
         let url = `/${encodeURIComponent(publicationId)}`;
         if (publicationTitle) {
-            url += `/${slug(publicationTitle, Url.SlugOptions)}`;
+            url += `/${encodeURIComponent(slug(publicationTitle, Url.SlugOptions))}`;
         }
         return url;
     }
@@ -43,16 +43,16 @@ export class Url {
      * @param {string} pageTitle Page title
      * @returns {string | undefined}
      *
-     * @memberOf TcmUri
+     * @memberOf Url
      */
-    public static getPageLocation(publicationId: string, pageId: string,
+    public static getPageUrl(publicationId: string, pageId: string,
         publicationTitle?: string, pageTitle?: string): string {
 
         let url = `/${encodeURIComponent(publicationId)}/${encodeURIComponent(pageId)}`;
         if (publicationTitle) {
-            url += `/${slug(publicationTitle, Url.SlugOptions)}`;
+            url += `/${encodeURIComponent(slug(publicationTitle, Url.SlugOptions))}`;
             if (pageTitle) {
-                url += `/${slug(pageTitle, Url.SlugOptions)}`;
+                url += `/${encodeURIComponent(slug(pageTitle, Url.SlugOptions))}`;
             }
         }
 

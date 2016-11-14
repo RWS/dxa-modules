@@ -143,7 +143,7 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
             <div className={"sdl-dita-delivery-breadcrumbs"}>
                 <ul>
                     <li>
-                        <Link title={publicationTitle} to={`/${Url.getPublicationLocation(publicationId)}`}>{publicationTitle}</Link>
+                        <Link title={publicationTitle} to={`${Url.getPublicationUrl(publicationId)}`}>{publicationTitle}</Link>
                     </li>
                     {
                         Array.isArray(itemPath) && (
@@ -154,9 +154,9 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
                                             (currentUrl != item.Url)
                                                 ?
                                                 (item.Url) ?
-                                                    <Link title={item.Title} to={`/${Url.getPageLocation(publicationId, item.Url)}`}>{item.Title}</Link>
+                                                    <Link title={item.Title} to={`${Url.getPageUrl(publicationId, item.Url)}`}>{item.Title}</Link>
                                                     :
-                                                    <Link title={item.Title} to={`/${Url.getPublicationLocation(publicationId)}`}>{item.Title}</Link>
+                                                    <Link title={item.Title} to={`${Url.getPublicationUrl(publicationId)}`}>{item.Title}</Link>
                                                 : <span>{item.Title}</span>
                                         }
                                     </li>

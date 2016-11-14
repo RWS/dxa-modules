@@ -7,18 +7,17 @@ class UrlUtil extends TestBase {
 
     public runTests(): void {
 
-        describe(`PublicationContent component tests.`, (): void => {
+         describe(`Url utils tests.`, (): void => {
 
             it("encodes url to safe format", (): void => {
-                const publicationLocation = Url.getPublicationLocation("ish:777-1-1", "Veröffentlichung№пять");
+                const publicationLocation = Url.getPublicationUrl("ish:777-1-1", "Veröffentlichung№пятьコンセプト");
                 expect(publicationLocation).toBe("/ish%3A777-1-1/veroffentlichungpyat");
             });
 
             it("slugifies url to safe format", (): void => {
-                const pageLocation = Url.getPageLocation("ish:777-1-1", "ish:1656863-164282-16", "Veröffentlichung № пять", "¿Qué? ●");
+                const pageLocation = Url.getPageUrl("ish:777-1-1", "ish:1656863-164282-16", "Veröffentlichung № пять", "¿Qué? ●");
                 expect(pageLocation).toBe("/ish%3A777-1-1/ish%3A1656863-164282-16/veroffentlichung-pyat/que");
             });
-
         });
     }
 }

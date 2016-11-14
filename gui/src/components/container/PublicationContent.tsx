@@ -274,7 +274,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     />
                 <Page
                     getPageLocationPath={(selectedPageId: string): string => {
-                        return Url.getPageLocation(publicationId, selectedPageId);
+                        return Url.getPageUrl(publicationId, selectedPageId);
                     } }
                     showActivityIndicator={isPageLoading || false}
                     content={content}
@@ -282,7 +282,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     onNavigate={(selectedPageId: string): void => {
                         /* istanbul ignore else */
                         if (router) {
-                            router.push(Url.getPageLocation(publicationId, selectedPageId));
+                            router.push(Url.getPageUrl(publicationId, selectedPageId));
                         }
                     } } />
             </section>
@@ -317,8 +317,8 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                 /* istanbul ignore else */
                 if (router) {
                     const navPath = sitemapItem.Url
-                        ? Url.getPageLocation(publicationId, sitemapItem.Url, publicationTitle, sitemapItem.Title)
-                        : Url.getPublicationLocation(publicationId, publicationTitle);
+                        ? Url.getPageUrl(publicationId, sitemapItem.Url, publicationTitle, sitemapItem.Title)
+                        : Url.getPublicationUrl(publicationId, publicationTitle);
                     if (sitemapItem && sitemapItem.Url == pageId) {
                         router.replace(navPath);
                     }
