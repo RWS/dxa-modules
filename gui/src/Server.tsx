@@ -1,7 +1,7 @@
 /// <reference path="../typings/index.d.ts" />
 
 import "ts-helpers";
-import { AppWrapper } from "./modules/AppWrapper";
+import { App } from "./components/container/App";
 import { IServices } from "./interfaces/Services";
 import { PageService } from "./services/server/PageService";
 import { PublicationService } from "./services/server/PublicationService";
@@ -30,7 +30,7 @@ export function renderToString(path: string): string {
     };
 
     return ReactDOMServer.renderToString(
-        <AppWrapper services={services} routing={routing} />);
+        <App services={services} routing={routing} />);
 };
 
 _renderToString = renderToString;

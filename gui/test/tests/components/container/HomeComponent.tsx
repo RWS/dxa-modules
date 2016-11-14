@@ -1,5 +1,5 @@
 import { Router, Route } from "react-router";
-import { App } from "../../../../src/components/container/App";
+import { Home } from "../../../../src/components/container/Home";
 import { PublicationContent } from "../../../../src/components/container/PublicationContent";
 import { PageService } from "../../../mocks/services/PageService";
 import { PublicationService } from "../../../mocks/services/PublicationService";
@@ -22,7 +22,7 @@ const services = {
 
 const routingHistory = routing.getHistory();
 
-class AppComponent extends TestBase {
+class HomeComponent extends TestBase {
 
     public runTests(): void {
 
@@ -50,17 +50,17 @@ class AppComponent extends TestBase {
         });
     }
 
-    private _renderComponent(target: HTMLElement): App {
+    private _renderComponent(target: HTMLElement): Home {
         return ReactDOM.render(
             (
                 <ComponentWithContext services={services}>
                     <Router history={routingHistory}>
-                        <Route path="/" component={() => (<App children={<PublicationContent params={{ publicationId: "ish:123-1-1" }} />} />)} />
+                        <Route path="/" component={() => (<Home children={<PublicationContent params={{ publicationId: "ish:123-1-1" }} />} />)} />
                     </Router>
                 </ComponentWithContext>
             )
-            , target) as App;
+            , target) as Home;
     }
 }
 
-new AppComponent().runTests();
+new HomeComponent().runTests();
