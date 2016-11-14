@@ -1,8 +1,5 @@
-import { Router, Route, IndexRedirect } from "react-router";
-
+import { Router, Route, IndexRedirect, History } from "react-router";
 import { IServices } from "../../interfaces/Services";
-import { IRouting } from "../../interfaces/Routing";
-
 import { Home } from "./Home";
 import { PublicationContent } from "./PublicationContent";
 
@@ -14,14 +11,13 @@ export interface IAppProps {
      * @memberOf IAppProps
      */
     services: IServices;
-
     /**
-     * Routing
+     * History
      *
-     * @type {IRouting}
+     * @type {History}
      * @memberOf IAppProps
      */
-    routing: IRouting;
+    history: History;
 }
 
 export interface IAppContext {
@@ -63,9 +59,9 @@ export class App extends React.Component<IAppProps, {}> {
      * @returns {JSX.Element}
      */
     public render(): JSX.Element {
-        const { routing } = this.props;
+        const { history } = this.props;
         return (
-            <Router history={routing.getHistory()}>
+            <Router history={history}>
                 <Route path="/" component={Home} >
                     <IndexRedirect to="/ish:1656863-1-1" />
                     <Route path=":publicationId" component={PublicationContent}>

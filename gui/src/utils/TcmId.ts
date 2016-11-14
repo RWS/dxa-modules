@@ -47,8 +47,9 @@ export class TcmId {
      * @memberOf TcmUri
      */
     public static removeNamespace(id: string): string {
-        if (id.indexOf("ish:") === 0) {
-            return id.substring(4);
+        const match = id.match(TCM_ID_FORMAT_REGEX);
+        if (match) {
+            return `${match[2]}-${match[3]}-${match[4]}`;
         }
         return id;
     }

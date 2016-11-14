@@ -5,8 +5,8 @@ import { PageService } from "../../../mocks/services/PageService";
 import { PublicationService } from "../../../mocks/services/PublicationService";
 import { TaxonomyService } from "../../../mocks/services/TaxonomyService";
 import { localization } from "../../../mocks/services/LocalizationService";
-import { routing } from "../../../mocks/Routing";
 import { ComponentWithContext } from "../../../mocks/ComponentWithContext";
+import { hashHistory } from "react-router";
 
 // Global Catalina dependencies
 import TestBase = SDL.Client.Test.TestBase;
@@ -19,8 +19,6 @@ const services = {
     localizationService: localization,
     taxonomyService: new TaxonomyService()
 };
-
-const routingHistory = routing.getHistory();
 
 class HomeComponent extends TestBase {
 
@@ -54,7 +52,7 @@ class HomeComponent extends TestBase {
         return ReactDOM.render(
             (
                 <ComponentWithContext services={services}>
-                    <Router history={routingHistory}>
+                    <Router history={hashHistory}>
                         <Route path="/" component={() => (<Home children={<PublicationContent params={{ publicationId: "ish:123-1-1" }} />} />)} />
                     </Router>
                 </ComponentWithContext>

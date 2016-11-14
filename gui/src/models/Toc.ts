@@ -1,4 +1,4 @@
-import { routing } from "../global/client/RoutingClient";
+import { path } from "../utils/Path";
 import { localization } from "../services/client/LocalizationService";
 import { ISitemapItem } from "../interfaces/ServerModels";
 import { TcmId as TcmIdUtils } from "../utils/TcmId";
@@ -53,7 +53,7 @@ export class Toc extends LoadableObject {
             this._onLoadFailed(localization.formatMessage("error.path.not.found", [this._parentId, this._publicationId]));
         } else {
             const parentPart = `${TcmIdUtils.removeNamespace(taxonomyId)}-${TcmIdUtils.removeNamespace(this._parentId)}`;
-            const url = routing.getAbsolutePath(`gui/mocks/toc-${parentPart}.json`);
+            const url = path.getAbsolutePath(`gui/mocks/toc-${parentPart}.json`);
             Net.getRequest(url, this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
         }
     }

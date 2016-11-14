@@ -13,4 +13,6 @@ import "./tests/services/client/PageService";
 import "./tests/services/client/PublicationService";
 import "./tests/services/client/TaxonomyService";
 import "./tests/services/server/PublicationService";
+import "./tests/utils/Path";
+import "./tests/utils/TcmId";
 import "./tests/Server";
