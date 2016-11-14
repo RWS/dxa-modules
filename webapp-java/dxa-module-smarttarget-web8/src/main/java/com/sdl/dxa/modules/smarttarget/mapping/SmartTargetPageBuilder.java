@@ -130,7 +130,7 @@ public class SmartTargetPageBuilder extends AbstractSmartTargetPageBuilder {
     @Override
     protected void processQueryAndPromotions(Localization localization, AbstractSmartTargetPageModel stPageModel, String promotionViewName) {
         try {
-            TcmUri pageUri = new TcmUri(stPageModel.getId());
+            TcmUri pageUri = new TcmUri(TcmUtils.buildPageTcmUri(localization.getId(), stPageModel.getId()));
 
             final ResultSet resultSet = executeSmartTargetQuery(stPageModel, pageUri);
 
@@ -157,7 +157,7 @@ public class SmartTargetPageBuilder extends AbstractSmartTargetPageBuilder {
     }
 
     @SneakyThrows(ParseException.class)
-    private ResultSet executeSmartTargetQuery(AbstractSmartTargetPageModel stPageModel, final TcmUri pageUri) throws SmartTargetException {
+    ResultSet executeSmartTargetQuery(AbstractSmartTargetPageModel stPageModel, final TcmUri pageUri) throws SmartTargetException {
         TcmUri publicationUri = new TcmUri(TcmUtils.buildPublicationTcmUri(pageUri.getPublicationId()));
 
         ClaimStore claimStore = AmbientDataContext.getCurrentClaimStore();
