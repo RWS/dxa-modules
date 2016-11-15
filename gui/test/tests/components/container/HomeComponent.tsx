@@ -24,7 +24,7 @@ class HomeComponent extends TestBase {
 
     public runTests(): void {
 
-        describe(`App component tests.`, (): void => {
+        describe(`Home component tests.`, (): void => {
             const target = super.createTargetElement();
 
             afterEach(() => {
@@ -53,7 +53,7 @@ class HomeComponent extends TestBase {
             (
                 <ComponentWithContext services={services}>
                     <Router history={hashHistory}>
-                        <Route path="/" component={() => (<Home children={<PublicationContent params={{ publicationId: "ish:123-1-1" }} />} />)} />
+                        <Route path="/" component={() => (<Home><PublicationContent params={{ publicationId: "ish:123-1-1" }} /></Home>)} />
                     </Router>
                 </ComponentWithContext>
             )
