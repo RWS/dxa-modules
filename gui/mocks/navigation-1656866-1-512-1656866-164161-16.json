@@ -8,14 +8,14 @@
     {
       "Id": "ish:1656866-31-1024",
       "Title": "Musikfunktionen",
-      "Url": "ish:1656866-164369-16",
+      "Url": "/1656866/164369/publication-mp330/musikfunktionen",
       "IsAbstract": false,
       "HasChildNodes": true,
       "Items": [
         {
           "Id": "ish:1656866-33-1024",
           "Title": "Radio hören",
-          "Url": "ish:1656866-164161-16",
+          "Url": "/1656866/164161/publication-mp330/radio-horen",
           "IsAbstract": false,
           "HasChildNodes": false,
           "Items": []

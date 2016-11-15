@@ -1,0 +1,35 @@
+{
+  "Id": "ish:1184146-1-512",
+  "Title": "Penguin guide",
+  "Url": null,
+  "IsAbstract": true,
+  "HasChildNodes": true,
+  "Items": [
+    {
+      "Id": "ish:1184146-43-1024",
+      "Title": "Other birds",
+      "Url": "/1184146/515736/penguin-publication/other-birds",
+      "IsAbstract": false,
+      "HasChildNodes": true,
+      "Items": [
+        {
+          "Id": "ish:1184146-50-1024",
+          "Title": "H",
+          "Url": null,
+          "IsAbstract": true,
+          "HasChildNodes": true,
+          "Items": [
+            {
+              "Id": "ish:1184146-51-1024",
+              "Title": "Herons",
+              "Url": "/1184146/515903/penguin-publication/herons",
+              "IsAbstract": false,
+              "HasChildNodes": false,
+              "Items": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

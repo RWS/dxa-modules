@@ -8,14 +8,14 @@
     {
       "Id": "ish:1656863-25-1024",
       "Title": "Games",
-      "Url": "ish:1656863-164239-16",
+      "Url": "/1656863/164239/publication-mp330/games",
       "IsAbstract": false,
       "HasChildNodes": true,
       "Items": [
         {
           "Id": "ish:1656863-27-1024",
           "Title": "Game Downloads",
-          "Url": "ish:1656863-164179-16",
+          "Url": "/1656863/164179/publication-mp330/game-downloads",
           "IsAbstract": false,
           "HasChildNodes": false,
           "Items": []

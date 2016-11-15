@@ -8,14 +8,14 @@
     {
       "Id": "ish:1656866-3-1024",
       "Title": "Ihr Telefon",
-      "Url": "ish:1656866-164229-16",
+      "Url": "/1656866/164229/publication-mp330/ihr-telefon",
       "IsAbstract": false,
       "HasChildNodes": true,
       "Items": [
         {
           "Id": "ish:1656866-10-1024",
           "Title": "Bluetooth-Verbindung",
-          "Url": "ish:1656866-164307-16",
+          "Url": "/1656866/164307/publication-mp330/bluetooth-verbindung",
           "IsAbstract": false,
           "HasChildNodes": false,
           "Items": []

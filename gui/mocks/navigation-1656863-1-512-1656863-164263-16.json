@@ -8,14 +8,14 @@
     {
       "Id": "ish:1656863-34-1024",
       "Title": "Phone book",
-      "Url": "ish:1656863-164301-16",
+      "Url": "/1656863/164301/publication-mp330/phone-book",
       "IsAbstract": false,
       "HasChildNodes": true,
       "Items": [
         {
           "Id": "ish:1656863-35-1024",
           "Title": "Saving names and numbers",
-          "Url": "ish:1656863-164263-16",
+          "Url": "/1656863/164263/publication-mp330/saving-names-and-numbers",
           "IsAbstract": false,
           "HasChildNodes": false,
           "Items": []

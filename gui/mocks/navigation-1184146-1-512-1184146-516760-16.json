@@ -1,0 +1,35 @@
+{
+  "Id": "ish:1184146-1-512",
+  "Title": "Penguin guide",
+  "Url": null,
+  "IsAbstract": true,
+  "HasChildNodes": true,
+  "Items": [
+    {
+      "Id": "ish:1184146-1-1024",
+      "Title": "Penguins Overview",
+      "Url": "/1184146/516062/penguin-publication/penguins-overview",
+      "IsAbstract": false,
+      "HasChildNodes": true,
+      "Items": [
+        {
+          "Id": "ish:1184146-4-1024",
+          "Title": "Systematics and evolution",
+          "Url": "/1184146/516088/penguin-publication/systematics-and-evolution",
+          "IsAbstract": false,
+          "HasChildNodes": true,
+          "Items": [
+            {
+              "Id": "ish:1184146-5-1024",
+              "Title": "Living species and recent extinctions",
+              "Url": "/1184146/516760/penguin-publication/living-species-and-recent-extinctions",
+              "IsAbstract": false,
+              "HasChildNodes": false,
+              "Items": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -8,14 +8,14 @@
     {
       "Id": "ish:1656866-20-1024",
       "Title": "Mitteilungen",
-      "Url": "ish:1656866-164477-16",
+      "Url": "/1656866/164477/publication-mp330/mitteilungen",
       "IsAbstract": false,
       "HasChildNodes": true,
       "Items": [
         {
           "Id": "ish:1656866-23-1024",
           "Title": "Sprachmailbox",
-          "Url": "ish:1656866-164321-16",
+          "Url": "/1656866/164321/publication-mp330/sprachmailbox",
           "IsAbstract": false,
           "HasChildNodes": false,
           "Items": []

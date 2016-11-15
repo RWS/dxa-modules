@@ -1,0 +1,57 @@
+{
+  "Id": "ish:1184146-517008-16",
+  "Title": "Etymology",
+  "Meta": {
+    "ishlogicalref.object.id": 517002,
+    "ishversionref.object.id": 517003,
+    "ishlngref.object.id": 517008,
+    "ishref.object.value": "GUID-CF89FF39-F5A5-44F3-BB89-4F01E1290587",
+    "ishtype.object.value": "ISHModule",
+    "FTITLE.logical.value": "Etymology",
+    "FDESCRIPTION.logical.value": "This topic describes the etymology of the word \"penguin\"",
+    "FCHANGES.version.value": null,
+    "FISHRELEASELABEL.version.value": [
+      "Penguin publication-v1-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/22 11:14:29",
+      "Penguin publication-v2-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/22 13:26:27",
+      "Penguin publication-v3-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/22 13:44:30",
+      "Penguin publication-v3.1.10-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/29 14:32:30",
+      "Penguin publication-v3.1.2-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/22 14:27:38",
+      "Penguin publication-v3.1.3-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/22 14:36:15",
+      "Penguin publication-v3.1.3.1.1-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/22 15:03:16",
+      "Penguin publication-v3.1.3.1.2-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/22 16:07:05",
+      "Penguin publication-v3.1.3.1.4-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/22 16:24:08",
+      "Penguin publication-v3.1.4-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/22 15:02:03",
+      "Penguin publication-v3.1.5-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/28 11:52:09",
+      "Penguin publication-v3.1.6-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/28 14:49:04",
+      "Penguin publication-v3.1.7-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/29 11:09:18",
+      "Penguin publication-v3.1.8-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/29 12:20:02",
+      "Penguin publication-v3.1.9-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/29 13:43:39",
+      "Penguin publication-v4-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/22 13:59:44",
+      "Penguin publication-v5-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/12/03 16:24:48",
+      "Penguin publication-v6-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/12/04 12:08:31",
+      "Penguin publication-v6.1.1-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/12/06 15:01:48",
+      "Penguin publication-v6.1.2-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/12/10 13:51:16",
+      "Penguin publication-v6.1.3-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/12/10 15:16:42",
+      "Penguin publication-v6.1.4-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/12/13 10:52:57",
+      "Penguin publication-v6.1.5-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/12/13 12:18:19",
+      "Penguin publication-v7-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/12/12 11:44:45"
+    ],
+    "CREATED-ON.lng.value": "2016-01-07T03:51:12Z",
+    "FAUTHOR.lng.value": "admin",
+    "FSTATUS.lng.value": "Released",
+    "MODIFIED-ON.lng.value": "2016-05-26T13:49:53Z",
+    "VERSION.version.value": "1",
+    "DOC-LANGUAGE.lng.value": [
+      "en"
+    ],
+    "FISHREVCOUNTER.lng.value": 1,
+    "ED.lng.value": "GUID-B99A9AE3-3157-47C7-9776-007CF2979DF9",
+    "FUSERGROUP.logical.element": [
+      "VUSERGROUPDEFAULTDEPARTMENT"
+    ],
+    "READ-ACCESS.logical.element": [
+      "VUSERGROUPDEFAULTDEPARTMENT"
+    ]
+  },
+  "Html": "\n       \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-CF89FF39-F5A5-44F3-BB89-4F01E1290587__GUID-97636394-7228-4E25-9063-A1CC6903C664\" xmlns=\"http://www.w3.org/1999/xhtml\">Etymology</h1>\n      \n      \n      \n      <div class=\"body conbody\" xmlns=\"http://www.w3.org/1999/xhtml\"> \n         \t \n         <p class=\"p\">The word \"Penguin\" first appears in the 16th century as a synonym for Great Auk. It may be derived from the Welsh pen gwyn\n            \"white head\", although the etymology is debated. When European explorers discovered what are today known as penguins in the\n            Southern Hemisphere, they noticed their similar appearance to the Great Auk of the northern hemisphere, and named them after\n            this bird, although they are not related.\n            \t \n         </p>\n         \n         \t \n         <p class=\"p\">The etymology of the word \"penguin\" is still debated. The English word is not apparently of French, nor of Breton or Spanish\n            origin (both attributed to the French word pingouin \"auk\"), but first appears in English or Dutch.\n            \t \n         </p>\n         \n         \t \n         <p class=\"p\">Some dictionaries suggest a derivation from Welsh pen, \"head\" and gwyn, \"white\", including the Oxford English Dictionary,\n            the American Heritage Dictionary, the Century Dictionary and Merriam-Webster, on the basis that the name was originally applied\n            to the great auk, either because it was found on White Head Island (Welsh Pen Gwyn) in Newfoundland, or because it had white\n            circles around its eyes (though the head was black).\n            \t \n         </p>\n         \n         \t \n         <p class=\"p\">An alternative etymology links the word to Latin pinguis which means \"fat\". In Dutch the alternative word for penguin is 'fat-goose'\n            ('vetgans' see: Dutch wiki or dictionaries under Pinguïn), and would indicate this bird received its name from its appearance.\n            \t \n         </p>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Parent topic:</strong> <a class=\"link\" title=\"This chapter contains a general overview about penguins in general without a detailed description of a specific type of penguin\" href=\"/1184146/516062/penguin-publication/etymology\">Penguins Overview</a></div>\n            \n         </div>\n         \n      </div>\n   "
+}

@@ -1,0 +1,36 @@
+{
+  "Id": "ish:1184146-516692-16",
+  "Title": "Megadyptes",
+  "Meta": {
+    "ishlogicalref.object.id": 516686,
+    "ishversionref.object.id": 516687,
+    "ishlngref.object.id": 516692,
+    "ishref.object.value": "GUID-985B81D1-0EB5-40A8-B970-34FF78FE9C29",
+    "ishtype.object.value": "ISHModule",
+    "FTITLE.logical.value": "Megadyptes",
+    "FDESCRIPTION.logical.value": null,
+    "FCHANGES.version.value": null,
+    "FISHRELEASELABEL.version.value": [
+      "Penguin publication-v6.1.4-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/12/13 10:52:57",
+      "Penguin publication-v6.1.5-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/12/13 12:18:19",
+      "Penguin publication-v7-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/12/12 11:44:45"
+    ],
+    "CREATED-ON.lng.value": "2016-01-07T03:50:01Z",
+    "FAUTHOR.lng.value": "admin",
+    "FSTATUS.lng.value": "Released",
+    "MODIFIED-ON.lng.value": "2016-05-26T13:49:47Z",
+    "VERSION.version.value": "1",
+    "DOC-LANGUAGE.lng.value": [
+      "en"
+    ],
+    "FISHREVCOUNTER.lng.value": 1,
+    "ED.lng.value": "GUID-F7E08CDE-FDD3-4BA0-B6EF-9B01302751EF",
+    "FUSERGROUP.logical.element": [
+      "VUSERGROUPDEFAULTDEPARTMENT"
+    ],
+    "READ-ACCESS.logical.element": [
+      "VUSERGROUPDEFAULTDEPARTMENT"
+    ]
+  },
+  "Html": "\n       \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-985B81D1-0EB5-40A8-B970-34FF78FE9C29__GUID-F5F555D9-46A8-4530-8F88-B1088EAFDE88\" xmlns=\"http://www.w3.org/1999/xhtml\">Megadyptes</h1>\n      \n      \n      <div class=\"body learningBasebody learningContentbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <div class=\"section lcIntro\" id=\"GUID-985B81D1-0EB5-40A8-B970-34FF78FE9C29__LCINTRO_697AB5143199432B8D2249196AFFBA77\"> \n            \n            <p class=\"p\">The genus Megadyptes contains only a single species, the Yellow-eyed Penguin, which is endemic to southern New Zealand. Recent\n               phylogenetic studies have shown Megadyptes to be the sister taxon of the crested penguins, Eudyptes. \n               \n            </p>\n            \n            \n            <p class=\"p\">Yellow-eyed Penguins share the strong reddish bill and yellow feathers on the head with the crested penguins, but differ distinctively\n               in many other respects. Generally they rear two chicks, they forage close inshore and do not migrate. In contrast to most\n               other penguins, Yellow-eyed Penguins do not breed in dense colonies, but in single pairs or loose groups with nests out of\n               sight of each other. \n               \n            </p>\n            \n         </div>\n         \n      </div>\n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <ul class=\"ullinks\">\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1184146/516609/penguin-publication/megadyptes\">Yellow-eyed penguin (Megadyptes antipodes)</a></strong><br />\n               \n            </li>\n            \n         </ul>\n         \n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Parent topic:</strong> <a class=\"link\" href=\"/1184146/516000/penguin-publication/megadyptes\">Types of penguins</a></div>\n            \n         </div>\n         \n      </div>\n   "
+}

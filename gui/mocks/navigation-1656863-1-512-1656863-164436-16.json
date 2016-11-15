@@ -8,14 +8,14 @@
     {
       "Id": "ish:1656863-3-1024",
       "Title": "Your phone",
-      "Url": "ish:1656863-164231-16",
+      "Url": "/1656863/164231/publication-mp330/your-phone",
       "IsAbstract": false,
       "HasChildNodes": true,
       "Items": [
         {
           "Id": "ish:1656863-8-1024",
           "Title": "Screen saver",
-          "Url": "ish:1656863-164436-16",
+          "Url": "/1656863/164436/publication-mp330/screen-saver",
           "IsAbstract": false,
           "HasChildNodes": false,
           "Items": []

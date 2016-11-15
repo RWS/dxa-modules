@@ -8,14 +8,14 @@
     {
       "Id": "ish:1656866-11-1024",
       "Title": "Erste Schritte",
-      "Url": "ish:1656866-164396-16",
+      "Url": "/1656866/164396/publication-mp330/erste-schritte",
       "IsAbstract": false,
       "HasChildNodes": true,
       "Items": [
         {
           "Id": "ish:1656866-13-1024",
           "Title": "Laden des Akkus",
-          "Url": "ish:1656866-164288-16",
+          "Url": "/1656866/164288/publication-mp330/laden-des-akkus",
           "IsAbstract": false,
           "HasChildNodes": false,
           "Items": []

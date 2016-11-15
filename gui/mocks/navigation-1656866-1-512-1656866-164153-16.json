@@ -8,14 +8,14 @@
     {
       "Id": "ish:1656866-3-1024",
       "Title": "Ihr Telefon",
-      "Url": "ish:1656866-164229-16",
+      "Url": "/1656866/164229/publication-mp330/ihr-telefon",
       "IsAbstract": false,
       "HasChildNodes": true,
       "Items": [
         {
           "Id": "ish:1656866-5-1024",
           "Title": "Anschlüsse",
-          "Url": "ish:1656866-164153-16",
+          "Url": "/1656866/164153/publication-mp330/anschlusse",
           "IsAbstract": false,
           "HasChildNodes": false,
           "Items": []

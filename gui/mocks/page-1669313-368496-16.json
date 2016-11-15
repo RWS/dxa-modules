@@ -1,6 +1,6 @@
 {
   "Id": "ish:1669313-368496-16",
-  "Title": "Part names",
+  "Title": "リファレンス・タイトルを入力してください",
   "Meta": {
     "ishlogicalref.object.id": 368494,
     "ishversionref.object.id": 368495,
@@ -24,5 +24,5 @@
     "FUSERGROUP.logical.element": null,
     "READ-ACCESS.logical.element": null
   },
-  "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-4ADF12F5-DE16-4150-84F2-27309F88E7F3__GUID-EED3C455-52DE-4712-975C-312CF040273B\" xmlns=\"http://www.w3.org/1999/xhtml\">リファレンス・タイトルを入力してください</h1>\n      \n      \n      \n      <div class=\"body refbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">簡単な説明を入力してください (任意)</p>\n         \n         \n         <div class=\"section\" id=\"GUID-4ADF12F5-DE16-4150-84F2-27309F88E7F3__GUID-CA3D08FC-BD3A-49E9-B89F-EDA5A146ED0F\">実際の情報をこのセクションに入力してください (任意)</div>\n         \n         \n         <div class=\"example\" id=\"GUID-4ADF12F5-DE16-4150-84F2-27309F88E7F3__GUID-AB0D8015-E0C0-4F16-AB18-4573DC3EDE00\">実例を入力してください (任意)</div>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>親トピック:</strong> <a class=\"link\" title=\"簡単な説明を入力して下さい(任意)\" href=\"ish:1669313-368500-16\">トピック・タイトルを入力して下さい</a></div>\n            \n         </div>\n         \n      </div>\n   "
+  "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-4ADF12F5-DE16-4150-84F2-27309F88E7F3__GUID-EED3C455-52DE-4712-975C-312CF040273B\" xmlns=\"http://www.w3.org/1999/xhtml\">リファレンス・タイトルを入力してください</h1>\n      \n      \n      \n      <div class=\"body refbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">簡単な説明を入力してください (任意)</p>\n         \n         \n         <div class=\"section\" id=\"GUID-4ADF12F5-DE16-4150-84F2-27309F88E7F3__GUID-CA3D08FC-BD3A-49E9-B89F-EDA5A146ED0F\">実際の情報をこのセクションに入力してください (任意)</div>\n         \n         \n         <div class=\"example\" id=\"GUID-4ADF12F5-DE16-4150-84F2-27309F88E7F3__GUID-AB0D8015-E0C0-4F16-AB18-4573DC3EDE00\">実例を入力してください (任意)</div>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>親トピック:</strong> <a class=\"link\" title=\"簡単な説明を入力して下さい(任意)\" href=\"/1669313/368500/ls40-el/%e3%83%aa%e3%83%95%e3%82%a1%e3%83%ac%e3%83%b3%e3%82%b9%e3%83%bb%e3%82%bf%e3%82%a4%e3%83%88%e3%83%ab%e3%82%92%e5%85%a5%e5%8a%9b%e3%81%97%e3%81%a6%e3%81%8f%e3%81%9f%e3%81%95%e3%81%84\">トピック・タイトルを入力して下さい</a></div>\n            \n         </div>\n         \n      </div>\n   "
 }

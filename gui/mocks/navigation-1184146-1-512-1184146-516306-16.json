@@ -1,0 +1,35 @@
+{
+  "Id": "ish:1184146-1-512",
+  "Title": "Penguin guide",
+  "Url": null,
+  "IsAbstract": true,
+  "HasChildNodes": true,
+  "Items": [
+    {
+      "Id": "ish:1184146-16-1024",
+      "Title": "Types of penguins",
+      "Url": "/1184146/516000/penguin-publication/types-of-penguins",
+      "IsAbstract": false,
+      "HasChildNodes": true,
+      "Items": [
+        {
+          "Id": "ish:1184146-20-1024",
+          "Title": "Pygoscelis \n                     ",
+          "Url": "/1184146/1184170/penguin-publication/pygoscelis",
+          "IsAbstract": false,
+          "HasChildNodes": true,
+          "Items": [
+            {
+              "Id": "ish:1184146-22-1024",
+              "Title": "Chinstrap Penguin \n                        ",
+              "Url": "/1184146/516306/penguin-publication/chinstrap-penguin",
+              "IsAbstract": false,
+              "HasChildNodes": false,
+              "Items": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

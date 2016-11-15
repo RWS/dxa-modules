@@ -1,0 +1,35 @@
+{
+  "Id": "ish:1184146-1-512",
+  "Title": "Penguin guide",
+  "Url": null,
+  "IsAbstract": true,
+  "HasChildNodes": true,
+  "Items": [
+    {
+      "Id": "ish:1184146-16-1024",
+      "Title": "Types of penguins",
+      "Url": "/1184146/516000/penguin-publication/types-of-penguins",
+      "IsAbstract": false,
+      "HasChildNodes": true,
+      "Items": [
+        {
+          "Id": "ish:1184146-33-1024",
+          "Title": "Eudyptes (Crested penguins)",
+          "Url": "/1184146/1184182/penguin-publication/eudyptes-(crested-penguins)",
+          "IsAbstract": false,
+          "HasChildNodes": true,
+          "Items": [
+            {
+              "Id": "ish:1184146-36-1024",
+              "Title": "Southern Rockhopper Penguin \n                        ",
+              "Url": "/1184146/516488/penguin-publication/southern-rockhopper-penguin",
+              "IsAbstract": false,
+              "HasChildNodes": false,
+              "Items": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "Id": "ish:1184146-1-512",
+  "Title": "Penguin guide",
+  "Url": null,
+  "IsAbstract": true,
+  "HasChildNodes": true,
+  "Items": [
+    {
+      "Id": "ish:1184146-16-1024",
+      "Title": "Types of penguins",
+      "Url": "/1184146/516000/penguin-publication/types-of-penguins",
+      "IsAbstract": false,
+      "HasChildNodes": true,
+      "Items": [
+        {
+          "Id": "ish:1184146-31-1024",
+          "Title": "Megadyptes",
+          "Url": "/1184146/516692/penguin-publication/megadyptes",
+          "IsAbstract": false,
+          "HasChildNodes": true,
+          "Items": [
+            {
+              "Id": "ish:1184146-32-1024",
+              "Title": "Yellow-eyed penguin \n                        ",
+              "Url": "/1184146/516609/penguin-publication/yellow-eyed-penguin",
+              "IsAbstract": false,
+              "HasChildNodes": false,
+              "Items": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

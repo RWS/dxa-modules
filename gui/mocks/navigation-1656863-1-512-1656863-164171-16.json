@@ -8,14 +8,14 @@
     {
       "Id": "ish:1656863-3-1024",
       "Title": "Your phone",
-      "Url": "ish:1656863-164231-16",
+      "Url": "/1656863/164231/publication-mp330/your-phone",
       "IsAbstract": false,
       "HasChildNodes": true,
       "Items": [
         {
           "Id": "ish:1656863-9-1024",
           "Title": "General Packet Radio Service (GPRS)",
-          "Url": "ish:1656863-164171-16",
+          "Url": "/1656863/164171/publication-mp330/general-packet-radio-service-(gprs)",
           "IsAbstract": false,
           "HasChildNodes": false,
           "Items": []

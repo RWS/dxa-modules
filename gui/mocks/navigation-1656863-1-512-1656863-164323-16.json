@@ -8,14 +8,14 @@
     {
       "Id": "ish:1656863-20-1024",
       "Title": "Messages",
-      "Url": "ish:1656863-164479-16",
+      "Url": "/1656863/164479/publication-mp330/messages",
       "IsAbstract": false,
       "HasChildNodes": true,
       "Items": [
         {
           "Id": "ish:1656863-23-1024",
           "Title": "Voice mailbox",
-          "Url": "ish:1656863-164323-16",
+          "Url": "/1656863/164323/publication-mp330/voice-mailbox",
           "IsAbstract": false,
           "HasChildNodes": false,
           "Items": []

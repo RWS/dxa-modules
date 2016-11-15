@@ -1,0 +1,26 @@
+{
+  "Id": "ish:1184146-1-512",
+  "Title": "Penguin guide",
+  "Url": null,
+  "IsAbstract": true,
+  "HasChildNodes": true,
+  "Items": [
+    {
+      "Id": "ish:1184146-68-1024",
+      "Title": "Appendices",
+      "Url": "/1184146/516024/penguin-publication/appendices",
+      "IsAbstract": false,
+      "HasChildNodes": true,
+      "Items": [
+        {
+          "Id": "ish:1184146-69-1024",
+          "Title": "Penguin species",
+          "Url": "/1184146/516132/penguin-publication/penguin-species",
+          "IsAbstract": false,
+          "HasChildNodes": false,
+          "Items": []
+        }
+      ]
+    }
+  ]
+}
