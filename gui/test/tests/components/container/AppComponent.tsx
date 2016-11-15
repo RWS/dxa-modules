@@ -36,11 +36,11 @@ class AppComponent extends TestBase {
 
             it("renders publication content component on root", (): void => {
                 const onRender = function (this: PublicationContent): JSX.Element {
-                    const { publicationId, pageId, publicationTitle, pageTitle } = this.props.params;
+                    const { publicationId, pageIdOrPublicationTitle, publicationTitle, pageTitle } = this.props.params;
 
                     expect(publicationId).toBe("ish:1656863-1-1");
+                    expect(pageIdOrPublicationTitle).toBeUndefined();
                     expect(publicationTitle).toBeUndefined();
-                    expect(pageId).toBeUndefined();
                     expect(pageTitle).toBeUndefined();
 
                     return (<div />);
@@ -52,16 +52,16 @@ class AppComponent extends TestBase {
 
             it("renders publication content component when publication id and page id are set", (): void => {
                 const onRender = function (this: PublicationContent): JSX.Element {
-                    const { publicationId, pageId, publicationTitle, pageTitle } = this.props.params;
+                    const { publicationId, pageIdOrPublicationTitle, publicationTitle, pageTitle } = this.props.params;
 
                     if (publicationId === "pub-id-with-page") {
+                        expect(pageIdOrPublicationTitle).toBe("page-id");
                         expect(publicationTitle).toBe("pub-title");
-                        expect(pageId).toBe("page-id");
                         expect(pageTitle).toBe("page-title");
                     } else {
                         expect(publicationId).toBe("pub-id");
-                        expect(publicationTitle).toBe("pub-title");
-                        expect(pageId).toBeUndefined();
+                        expect(pageIdOrPublicationTitle).toBe("pub-title");
+                        expect(publicationTitle).toBeUndefined();
                         expect(pageTitle).toBeUndefined();
                     }
 

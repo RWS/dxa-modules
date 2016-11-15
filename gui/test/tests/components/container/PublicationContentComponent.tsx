@@ -285,7 +285,7 @@ class PublicationContentComponent extends TestBase {
         const comp = ReactDOM.render(
             (
                 <ComponentWithContext services={services}>
-                    <PublicationContent params={{ publicationId: "ish:123-1-1", pageId: pageId }} />
+                    <PublicationContent params={{ publicationId: "ish:123-1-1", pageIdOrPublicationTitle: pageId || "pub-title" }} />
                 </ComponentWithContext>
             ), target) as React.Component<{}, {}>;
         return TestUtils.findRenderedComponentWithType(comp, PublicationContent) as PublicationContent;

@@ -53,7 +53,7 @@ class HomeComponent extends TestBase {
             (
                 <ComponentWithContext services={services}>
                     <Router history={hashHistory}>
-                        <Route path="/" component={() => (<Home><PublicationContent params={{ publicationId: "ish:123-1-1" }} /></Home>)} />
+                        <Route path="*" component={() => (<Home><PublicationContent params={{ publicationId: "ish:123-1-1" }} /></Home>)} />
                     </Router>
                 </ComponentWithContext>
             )

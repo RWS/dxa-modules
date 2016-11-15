@@ -6,7 +6,7 @@ import { Page } from "../presentation/Page";
 import { IPageInfo } from "../../models/Page";
 import { Breadcrumbs } from "../presentation/Breadcrumbs";
 import "./styles/PublicationContent";
-
+import { TcmId } from "../../utils/TcmId";
 import { Url } from "../../utils/Url";
 
 /**
@@ -24,18 +24,18 @@ export interface IPublicationContentPropsParams {
     publicationId: string;
 
     /**
+     * The page id or the title of the current publication
+     *
+     * @type {string}
+     */
+    pageIdOrPublicationTitle?: string;
+
+    /**
      * Title of the current publication
      *
      * @type {string}
      */
     publicationTitle?: string;
-
-    /**
-     * Id of the current page
-     *
-     * @type {string}
-     */
-    pageId?: string;
 
     /**
      * Title of the current page
@@ -162,7 +162,8 @@ export class PublicationContent extends React.Component<IPublicationContentProps
      */
     public componentWillMount(): void {
         const { services } = this.context;
-        const { publicationId, pageId } = this.props.params;
+        const { publicationId, pageIdOrPublicationTitle } = this.props.params;
+        const pageId = pageIdOrPublicationTitle && TcmId.isValid(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
         const getRootItems = (path?: string[]): void => {
             // Get the data for the Toc
             services.taxonomyService.getSitemapRoot(publicationId).then(
@@ -203,8 +204,10 @@ export class PublicationContent extends React.Component<IPublicationContentProps
      * @param {IPublicationContentProps} nextProps
      */
     public componentWillReceiveProps(nextProps: IPublicationContentProps): void {
-        const { pageId } = this.props.params;
-        const nextPageId = nextProps.params.pageId;
+        const { pageIdOrPublicationTitle } = this.props.params;
+        const pageId = pageIdOrPublicationTitle && TcmId.isValid(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
+        const nextpageIdOrPublicationTitle = nextProps.params.pageIdOrPublicationTitle;
+        const nextPageId = nextpageIdOrPublicationTitle && TcmId.isValid(nextpageIdOrPublicationTitle) ? nextpageIdOrPublicationTitle : null;
 
         if (nextPageId) {
             if (!pageId || nextPageId !== pageId) {
@@ -300,8 +303,9 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         const page = this._page;
         const { publicationTitle } = this.state;
         const { router, services } = this.context;
-        const { publicationId, pageId } = this.props.params;
+        const { publicationId, pageIdOrPublicationTitle } = this.props.params;
         const publicationService = services.publicationService;
+        const pageId = pageIdOrPublicationTitle && TcmId.isValid(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
 
         page.error = null;
 
@@ -319,7 +323,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     const navPath = sitemapItem.Url
                         ? Url.getPageUrl(publicationId, sitemapItem.Url, publicationTitle, sitemapItem.Title)
                         : Url.getPublicationUrl(publicationId, publicationTitle);
-                    if (sitemapItem && sitemapItem.Url == pageId) {
+                    if (sitemapItem && sitemapItem.Url === pageId) {
                         router.replace(navPath);
                     }
                     else {
