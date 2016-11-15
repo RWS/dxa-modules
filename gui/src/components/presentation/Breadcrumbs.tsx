@@ -33,7 +33,7 @@ export interface IBreadcrumbsProps {
     /**
      * Load items path for a specific item
      */
-    loadItemsPath: (publicationId: string, parentId: string) => Promise<ISitemapItem[]>;
+    loadItemsPath: (publicationId: string, pageUrl: string) => Promise<ISitemapItem[]>;
 }
 
 /**
@@ -111,14 +111,10 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
                         }
                     });
             }
-            else if ((selectedItem && selectedItem.Id) != nextItem.Id) {
-                /* istanbul ignore else */
-                if (!this._isUnmounted) {
-                    this.setState({
-                        itemPath: nextItem ? [nextItem] : []
-                    });
-                }
-            }
+        } else if (currentUrl) {
+            this.setState({
+                itemPath: nextItem ? [nextItem] : []
+            });
         }
     }
 
