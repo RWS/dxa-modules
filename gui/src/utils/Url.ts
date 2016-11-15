@@ -12,7 +12,7 @@ export class Url {
      * Options to slugify titles in Url
      */
     private static SlugOptions: slug.Options = {
-        lower: true
+        mode: "rfc3986"
     };
 
     /**
