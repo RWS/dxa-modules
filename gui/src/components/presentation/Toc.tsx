@@ -1,6 +1,6 @@
 import { Promise } from "es6-promise";
 import { ISitemapItem } from "interfaces/ServerModels";
-import "components/styles/Toc";
+import "components/presentation/styles/Toc";
 import "components/controls/styles/TreeView";
 
 // Global Catalina dependencies

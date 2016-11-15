@@ -2,11 +2,11 @@ import { Router, Route } from "react-router";
 import { Home } from "components/container/Home";
 import { PublicationContent } from "components/container/PublicationContent";
 
-import { PageService } from "../../../mocks/services/PageService";
-import { PublicationService } from "../../../mocks/services/PublicationService";
-import { TaxonomyService } from "../../../mocks/services/TaxonomyService";
-import { localization } from "../../../mocks/services/LocalizationService";
-import { ComponentWithContext } from "../../../mocks/ComponentWithContext";
+import { PageService } from "test/mocks/services/PageService";
+import { PublicationService } from "test/mocks/services/PublicationService";
+import { TaxonomyService } from "test/mocks/services/TaxonomyService";
+import { localization } from "test/mocks/services/LocalizationService";
+import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 import { hashHistory } from "react-router";
 
 // Global Catalina dependencies

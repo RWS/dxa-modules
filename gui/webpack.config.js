@@ -16,6 +16,11 @@ module.exports = isTest => {
         },
         devtool: 'source-map',
         resolve: {
+            modules: [
+                path.resolve(__dirname),
+                path.resolve(__dirname, 'src'),
+                path.resolve(__dirname, 'node_modules')
+            ],
             extensions: ['.ts', '.tsx', '.js', '.css', '.less']
         },
         module: {

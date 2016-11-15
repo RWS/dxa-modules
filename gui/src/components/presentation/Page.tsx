@@ -1,7 +1,7 @@
-import "components/styles/Page";
+import "components/presentation/styles/Page";
 
-import "../../../dist/dita-ot/styles/commonltr";
-import "../../../dist/dita-ot/styles/commonrtl";
+import "dist/dita-ot/styles/commonltr";
+import "dist/dita-ot/styles/commonrtl";
 
 // Global Catalina dependencies
 import ActivityIndicator = SDL.ReactComponents.ActivityIndicator;
