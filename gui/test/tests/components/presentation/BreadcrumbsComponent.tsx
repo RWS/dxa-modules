@@ -8,14 +8,38 @@ import { Url } from "../../../../src/utils/Url";
 // Global Catalina dependencies
 import TestBase = SDL.Client.Test.TestBase;
 
-let selectedItem: ISitemapItem | null = {
-    Id: "s-9",
-    Title: "Selected",
-    Url: "ish:5-15-99",
-    IsAbstract: false,
-    HasChildNodes: false,
-    Items: []
-};
+interface IProps {
+    params: {
+        publicationId: string;
+        pageId?: string;
+    };
+}
+
+const itemsPath: ISitemapItem[] = [
+    {
+        Id: "r-5",
+        Title: "Root",
+        IsAbstract: false,
+        HasChildNodes: true,
+        Items: []
+    },
+    {
+        Id: "ch-6",
+        Title: "Child",
+        Url: "ish:5-15-66",
+        IsAbstract: false,
+        HasChildNodes: true,
+        Items: []
+    },
+    {
+        Id: "s-9",
+        Title: "Selected",
+        Url: "ish:5-15-99",
+        IsAbstract: false,
+        HasChildNodes: false,
+        Items: []
+    }
+];
 
 class BreadcrumbsComponent extends TestBase {
 
@@ -30,45 +54,19 @@ class BreadcrumbsComponent extends TestBase {
                 publicationTitle: "Publication"
             };
 
-            const itemsPath: ISitemapItem[] = [
-                {
-                    Id: "r-5",
-                    Title: "Root",
-                    IsAbstract: false,
-                    HasChildNodes: true,
-                    Items: []
-                },
-                {
-                    Id: "ch-6",
-                    Title: "Child",
-                    Url: "ish:5-15-66",
-                    IsAbstract: false,
-                    HasChildNodes: true,
-                    Items: []
-                }
-            ];
-
-            if (selectedItem) {
-                itemsPath.push(selectedItem);
-            }
-
-            const loadItemsPath = (parentId: string, publicationId: string): Promise<ISitemapItem[]> => {
-                if (selectedItem) {
-                    const itemsToReturn: ISitemapItem[] = [];
-                    for (let item of itemsPath) {
-                        itemsToReturn.push(item);
-                        if (item.Url === selectedItem.Url) {
-                            break;
-                        }
+            const loadItemsPath = (publicationId: string, pageUrl: string): Promise<ISitemapItem[]> => {
+                const itemsToReturn: ISitemapItem[] = [];
+                for (let item of itemsPath) {
+                    itemsToReturn.push(item);
+                    if (item.Url === pageUrl) {
+                        break;
                     }
-                    return Promise.resolve(itemsToReturn);
-                } else {
-                    return Promise.resolve([]);
                 }
+                return Promise.resolve(itemsToReturn);
             };
 
             beforeEach(() => {
-                hashHistory.push(Url.getPublicationUrl(data.publicationId));
+                hashHistory.push(Url.getPageUrl(data.publicationId, itemsPath[2].Url || ""));
                 const props: IBreadcrumbsProps = {
                     publicationId: data.publicationId,
                     publicationTitle: data.publicationTitle,
@@ -109,10 +107,8 @@ class BreadcrumbsComponent extends TestBase {
                     // Last item is the selected item and should not highlighted with Link
                     const spanNodes = domNode.querySelectorAll("span");
                     expect(spanNodes.length).toBe(1);
-                    expect(selectedItem).not.toBeNull();
-                    if (selectedItem) {
-                        expect(spanNodes.item(0).textContent).toBe(selectedItem.Title);
-                    }
+                    expect(spanNodes.item(0).textContent).toBe(itemsPath[2].Title);
+
                     done();
                 }, 0);
             });
@@ -129,16 +125,12 @@ class BreadcrumbsComponent extends TestBase {
                     expect(hyperlink).toBeDefined();
 
                     // Update selected item, this will be used after hyperlink click triggers a re-render
-                    selectedItem = null;
                     hyperlink.click();
 
                     // Validate
                     const updatedHyperlinksNodes = domNode.querySelectorAll("a");
                     expect(updatedHyperlinksNodes.length).toBe(1);
                     expect(updatedHyperlinksNodes[0].textContent).toBe(data.publicationTitle);
-
-                    // Reset selected item
-                    selectedItem = itemsPath[2];
 
                     done();
                 }, 0);
@@ -156,29 +148,22 @@ class BreadcrumbsComponent extends TestBase {
                     const childHyperlink = hyperlinksNodes[2] as HTMLElement;
                     expect(childHyperlink).toBeDefined();
                     if (childHyperlink) {
-                        // Update selected item, this will be used after hyperlink click triggers a re-render
-                        selectedItem = itemsPath[1];
                         childHyperlink.click();
 
                         // Use a timeout to allow the promise with the data to be finished
                         setTimeout((): void => {
-                            expect(selectedItem).not.toBeNull();
-                            if (selectedItem) {
-                                // Validate
-                                const updatedItems = domNode.querySelectorAll("li");
-                                expect(updatedItems.length).toBe(3);
-                                expect(updatedItems[0].querySelector("a")).not.toBeNull();
-                                expect(updatedItems[0].textContent).toBe(data.publicationTitle);
-                                expect(updatedItems[1].querySelector("a")).not.toBeNull();
-                                expect(updatedItems[1].textContent).toBe(itemsPath[0].Title);
-                                expect(updatedItems[2].querySelector("a")).toBeNull();
-                                expect(updatedItems[2].textContent).toBe(selectedItem.Title);
+                            // Validate
+                            const selectedItem = itemsPath[1];
+                            const updatedItems = domNode.querySelectorAll("li");
+                            expect(updatedItems.length).toBe(3);
+                            expect(updatedItems[0].querySelector("a")).not.toBeNull();
+                            expect(updatedItems[0].textContent).toBe(data.publicationTitle);
+                            expect(updatedItems[1].querySelector("a")).not.toBeNull();
+                            expect(updatedItems[1].textContent).toBe(itemsPath[0].Title);
+                            expect(updatedItems[2].querySelector("a")).toBeNull();
+                            expect(updatedItems[2].textContent).toBe(selectedItem.Title);
 
-                                // Reset selected item
-                                selectedItem = itemsPath[2];
-
-                                done();
-                            }
+                            done();
                         }, 0);
                     }
                 }, 0);
@@ -187,9 +172,17 @@ class BreadcrumbsComponent extends TestBase {
     }
 
     private _renderComponent(props: IBreadcrumbsProps, target: HTMLElement): Breadcrumbs {
+        const getSelectedItem = (pageId?: string): ISitemapItem | null => {
+            if (!pageId) {
+                return null;
+            }
+            return itemsPath.filter(item => item.Url === pageId)[0];
+        };
+
         return ReactDOM.render(
             <Router history={hashHistory}>
-                <Route path=":publicationId(/:pageId)" component={() => (<Breadcrumbs selectedItem={selectedItem} {...props} />)} />
+                <Route path=":publicationId(/:pageId)" component={(compProps: IProps) =>
+                    (<Breadcrumbs selectedItem={getSelectedItem(compProps.params.pageId)} {...props} />)} />
             </Router>, target) as Breadcrumbs;
     }
 }

@@ -33,7 +33,7 @@ export interface IBreadcrumbsProps {
     /**
      * Load items path for a specific item
      */
-    loadItemsPath: (publicationId: string, parentId: string) => Promise<ISitemapItem[]>;
+    loadItemsPath: (publicationId: string, pageUrl: string) => Promise<ISitemapItem[]>;
 }
 
 /**
@@ -100,7 +100,7 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
         const nextItem = nextProps.selectedItem;
         if (nextItem) {
             const nextUrl = nextItem.Url;
-            if (nextItem && nextUrl && (currentUrl !== nextUrl)) {
+            if (nextUrl && (currentUrl !== nextUrl)) {
                 loadItemsPath(nextProps.publicationId || publicationId, nextUrl).then(
                     path => {
                         /* istanbul ignore else */
