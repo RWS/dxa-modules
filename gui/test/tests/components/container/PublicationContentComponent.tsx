@@ -1,11 +1,12 @@
-import { PublicationContent } from "../../../../src/components/container/PublicationContent";
-import { ISitemapItem } from "../../../../src/interfaces/ServerModels";
+import { PublicationContent } from "components/container/PublicationContent";
+import { Toc } from "components/presentation/Toc";
+import { Page } from "components/presentation/Page";
+import { ISitemapItem } from "interfaces/ServerModels";
+
 import { PageService } from "../../../mocks/services/PageService";
 import { PublicationService } from "../../../mocks/services/PublicationService";
 import { TaxonomyService } from "../../../mocks/services/TaxonomyService";
 import { localization } from "../../../mocks/services/LocalizationService";
-import { Toc } from "../../../../src/components/presentation/Toc";
-import { Page } from "../../../../src/components/presentation/Page";
 import { ComponentWithContext } from "../../../mocks/ComponentWithContext";
 
 // Global Catalina dependencies

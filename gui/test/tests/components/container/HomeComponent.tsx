@@ -1,6 +1,7 @@
 import { Router, Route } from "react-router";
-import { Home } from "../../../../src/components/container/Home";
-import { PublicationContent } from "../../../../src/components/container/PublicationContent";
+import { Home } from "components/container/Home";
+import { PublicationContent } from "components/container/PublicationContent";
+
 import { PageService } from "../../../mocks/services/PageService";
 import { PublicationService } from "../../../mocks/services/PublicationService";
 import { TaxonomyService } from "../../../mocks/services/TaxonomyService";

@@ -1,4 +1,5 @@
-import "./styles/Page";
+import "components/styles/Page";
+
 import "../../../dist/dita-ot/styles/commonltr";
 import "../../../dist/dita-ot/styles/commonrtl";
 

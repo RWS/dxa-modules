@@ -1,12 +1,12 @@
 /// <reference path="../typings/index.d.ts" />
 
 import "ts-helpers";
-import { App } from "./components/container/App";
-import { IServices } from "./interfaces/Services";
-import { PageService } from "./services/server/PageService";
-import { PublicationService } from "./services/server/PublicationService";
-import { TaxonomyService } from "./services/server/TaxonomyService";
-import { localization } from "./services/server/LocalizationService";
+import { App } from "components/container/App";
+import { IServices } from "interfaces/Services";
+import { PageService } from "services/server/PageService";
+import { PublicationService } from "services/server/PublicationService";
+import { TaxonomyService } from "services/server/TaxonomyService";
+import { localization } from "services/server/LocalizationService";
 import { hashHistory } from "react-router";
 
 // Nashorn script engine needs a global scope

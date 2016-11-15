@@ -1,7 +1,7 @@
-import { IPublicationService } from "../interfaces/PublicationService";
-import { IPublication } from "../../interfaces/ServerModels";
-import { localization } from "./LocalizationService";
-import { Publications } from "../../models/Publications";
+import { IPublicationService } from "services/interfaces/PublicationService";
+import { IPublication } from "interfaces/ServerModels";
+import { localization } from "services/client/LocalizationService";
+import { Publications } from "models/Publications";
 import { Promise } from "es6-promise";
 
 /**

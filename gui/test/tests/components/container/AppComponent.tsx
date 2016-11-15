@@ -1,11 +1,12 @@
-import { App } from "../../../../src/components/container/App";
-import { PublicationContent } from "../../../../src/components/container/PublicationContent";
+import { App } from "components/container/App";
+import { PublicationContent } from "components/container/PublicationContent";
+import { Url } from "utils/Url";
+
 import { PageService } from "../../../mocks/services/PageService";
 import { PublicationService } from "../../../mocks/services/PublicationService";
 import { TaxonomyService } from "../../../mocks/services/TaxonomyService";
 import { localization } from "../../../mocks/services/LocalizationService";
 import { hashHistory } from "react-router";
-import { Url } from "../../../../src/utils/Url";
 
 // Global Catalina dependencies
 import TestBase = SDL.Client.Test.TestBase;

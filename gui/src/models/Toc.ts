@@ -1,7 +1,7 @@
-import { path } from "../utils/Path";
-import { localization } from "../services/client/LocalizationService";
-import { ISitemapItem } from "../interfaces/ServerModels";
-import { TcmId as TcmIdUtils } from "../utils/TcmId";
+import { path } from "utils/Path";
+import { localization } from "services/client/LocalizationService";
+import { ISitemapItem } from "interfaces/ServerModels";
+import { TcmId as TcmIdUtils } from "utils/TcmId";
 
 // Global Catalina dependencies
 import IWebRequest = SDL.Client.Net.IWebRequest;

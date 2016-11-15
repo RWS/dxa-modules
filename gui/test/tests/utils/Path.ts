@@ -1,4 +1,4 @@
-import { path, Path as PathUtils } from "../../../src/utils/Path";
+import { path, Path as PathUtils } from "utils/Path";
 
 describe(`Url utils tests.`, (): void => {
 

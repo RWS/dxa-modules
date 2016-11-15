@@ -1,9 +1,9 @@
 import { Promise } from "es6-promise";
 import { Link } from "react-router";
-import { ISitemapItem } from "../../interfaces/ServerModels";
-import "./styles/Breadcrumbs";
+import { ISitemapItem } from "interfaces/ServerModels";
+import "components/styles/Breadcrumbs";
 
-import { Url } from "../../utils/Url";
+import { Url } from "utils/Url";
 
 /**
  * Breadcrumbs props

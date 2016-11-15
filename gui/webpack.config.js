@@ -19,24 +19,19 @@ module.exports = isTest => {
             extensions: ['.ts', '.tsx', '.js', '.css', '.less']
         },
         module: {
-            loaders: [
-                {
-                    test: /\.otf$/,
-                    loader: 'url-loader?limit=100000'
-                },
-                {
-                    test: /\.css$/,
-                    loader: extractCSS.extract(['css-loader'])
-                },
-                {
-                    test: /\.less$/,
-                    loader: extractCSS.extract(['css-loader', 'less-loader'])
-                },
-                {
-                    test: /\.tsx?$/,
-                    loader: 'ts-loader'
-                }
-            ]
+            loaders: [{
+                test: /\.otf$/,
+                loader: 'url-loader?limit=100000'
+            }, {
+                test: /\.css$/,
+                loader: extractCSS.extract(['css-loader'])
+            }, {
+                test: /\.less$/,
+                loader: extractCSS.extract(['css-loader', 'less-loader'])
+            }, {
+                test: /\.tsx?$/,
+                loader: 'ts-loader'
+            }]
         },
         plugins: [
             extractCSS

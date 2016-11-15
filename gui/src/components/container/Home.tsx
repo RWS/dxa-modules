@@ -1,6 +1,7 @@
-import { IAppContext } from "./App";
-import "./styles/App";
-import "../controls/styles/TopBar";
+import { IAppContext } from "components/container/App";
+
+import "components/container/styles/App";
+import "components/controls/styles/TopBar";
 
 // Global Catalina dependencies
 import TopBar = SDL.ReactComponents.TopBar;

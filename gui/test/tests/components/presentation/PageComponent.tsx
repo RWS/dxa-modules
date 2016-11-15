@@ -1,4 +1,4 @@
-import { Page, IPageProps } from "../../../../src/components/presentation/Page";
+import { Page, IPageProps } from "components/presentation/Page";
 
 // Global Catalina dependencies
 import TestBase = SDL.Client.Test.TestBase;

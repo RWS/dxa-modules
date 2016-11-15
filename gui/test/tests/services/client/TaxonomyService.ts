@@ -1,4 +1,4 @@
-import { TaxonomyService } from "../../../../src/services/client/TaxonomyService";
+import { TaxonomyService } from "services/client/TaxonomyService";
 
 // Global Catalina dependencies
 import TestBase = SDL.Client.Test.TestBase;
