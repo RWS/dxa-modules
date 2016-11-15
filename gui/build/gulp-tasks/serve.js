@@ -98,7 +98,7 @@ module.exports = function (buildOptions, gulp, browserSync, commonFolderName) {
                             // Use main page for dynamic urls used for deep linking
                             // example: /ish:39137-1-1/ish:39137-1-512/MP330/User-Guide
                             const publicationContentRegex = /^\/[^\/]+%3A[0-9]+-[0-9]+-[0-9]+.*$/gi;
-                            if (req.url.match(publicationContentRegex)) {
+                            if (req.url.match(/^\/home$/gi) || req.url.match(publicationContentRegex)) {
                                 req.url = '/index.html';
                             }
                             next();
