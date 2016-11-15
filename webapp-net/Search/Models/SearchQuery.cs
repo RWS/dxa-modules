@@ -2,6 +2,7 @@
 using System.Collections.Specialized;
 using System.Linq;
 using Sdl.Web.Common.Models;
+using System;
 
 namespace Sdl.Web.Modules.Search.Models
 {
@@ -10,6 +11,7 @@ namespace Sdl.Web.Modules.Search.Models
     /// </summary>
     [SemanticEntity(Vocab = "http://schema.org", EntityName = "ItemList", Prefix = "s", Public = true)]
     [SemanticDefaults(MapAllProperties = false)]
+    [Serializable]
     public abstract class SearchQuery : EntityModel
     {
         // Below properties are mapped to fields of the CMS "Search Query" Component.
@@ -91,6 +93,7 @@ namespace Sdl.Web.Modules.Search.Models
     /// Represents a Search Query with strongly typed results.
     /// </summary>
     /// <typeparam name="TResult">The type of the <see cref="Results"/> (must be a subclass of <see cref="SearchItem"/>).</typeparam>
+    [Serializable]
     public class SearchQuery<TResult> : SearchQuery 
         where TResult : SearchItem
     {

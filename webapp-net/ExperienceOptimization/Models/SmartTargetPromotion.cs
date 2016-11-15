@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace Sdl.Web.Modules.SmartTarget.Models
 {
+    [Serializable]
     public class SmartTargetPromotion : EntityModel
     {
         private const string XpmMarkupFormat = "<!-- Start Promotion: {{ \"PromotionID\": \"{0}\", \"RegionID\" : \"{1}\"}} -->";

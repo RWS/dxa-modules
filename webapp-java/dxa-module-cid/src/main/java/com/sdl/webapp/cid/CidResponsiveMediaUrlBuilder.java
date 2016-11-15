@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 @Component
 @Primary
 @Slf4j
-public class CidResponsiveMediaUrlBuilder extends MediaHelper.ResponsiveMediaUrlBuilder {
+public class CidResponsiveMediaUrlBuilder implements MediaHelper.ResponsiveMediaUrlBuilder {
 
     @Autowired
     private HttpServletRequest servletRequest;

@@ -1,6 +1,8 @@
 ﻿using Sdl.Web.Common.Models;
+using System;
 namespace Sdl.Web.Modules.Core.Models
 {
+    [Serializable]
     public class Paragraph : EntityModel
     {
         public string Subheading { get; set; }

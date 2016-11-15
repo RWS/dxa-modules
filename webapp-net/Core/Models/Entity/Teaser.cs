@@ -11,6 +11,7 @@ namespace Sdl.Web.Modules.Core.Models
     [SemanticEntity(EntityName = "Article", Prefix = "a", Vocab = CoreVocabulary)]
     [SemanticEntity(EntityName = "NewsArticle", Prefix = "na", Vocab = CoreVocabulary)]
     [SemanticEntity(EntityName = "Place", Prefix = "p", Vocab = CoreVocabulary)]
+    [Serializable]
     public class Teaser : EntityModel, ISyndicationFeedItemProvider
     {
         //A teaser can be mapped from an article or place, in which case the link should be to the item itself

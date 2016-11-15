@@ -8,6 +8,7 @@ using Sdl.Web.Common.Configuration;
 namespace Sdl.Web.Modules.Core.Models
 {
     [SemanticEntity(Vocab = SchemaOrgVocabulary, EntityName= "Article", Prefix= "s", Public=true)]
+    [Serializable]
     public class Article : EntityModel, ISyndicationFeedItemProvider
     {
         [SemanticProperty("s:headline")]

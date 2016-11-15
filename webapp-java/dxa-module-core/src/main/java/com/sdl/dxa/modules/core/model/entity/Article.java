@@ -1,6 +1,5 @@
 package com.sdl.dxa.modules.core.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Lists;
 import com.sdl.webapp.common.api.formatters.support.FeedItem;
@@ -32,7 +31,6 @@ public class Article extends AbstractEntityModel implements FeedItemsProvider {
 
     @JsonProperty("Date")
     @SemanticProperty("s:dateCreated")
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
     private DateTime date;
 
     @JsonProperty("Description")

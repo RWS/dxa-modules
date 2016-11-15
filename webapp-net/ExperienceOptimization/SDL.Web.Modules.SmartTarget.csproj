@@ -14,8 +14,8 @@
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <SdlDeliveryVersion>8.3.0</SdlDeliveryVersion>
-    <DxaFrameworkVersion>1.6.0</DxaFrameworkVersion>
+    <SdlDeliveryVersion>8.5.0-beta-201611141640</SdlDeliveryVersion>
+    <DxaFrameworkVersion>1.7.0-alpha-201611081551</DxaFrameworkVersion>
     <ExperienceManagerVersion>8.3.0</ExperienceManagerVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -34,15 +34,6 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release_7.1|AnyCPU'">
-    <OutputPath>bin\Release_7.1\</OutputPath>
-    <DefineConstants>TRACE;TRIDION_71</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DD4T.ContentModel.Contracts">
@@ -80,32 +71,17 @@
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.1.2\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-  </ItemGroup>
-  <ItemGroup Condition="'$(Configuration)' != 'Release_7.1'">
     <Reference Include="Tridion.ContentDelivery.AmbientData">
-      <HintPath>..\packages\Sdl.Web.Delivery.$(SdlDeliveryVersion)\lib\net45\Tridion.ContentDelivery.AmbientData.dll</HintPath>
+      <HintPath>..\packages\Sdl.Web.Delivery.$(SdlDeliveryVersion)\lib\net452\Tridion.ContentDelivery.AmbientData.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Tridion.ContentDelivery">
-      <HintPath>..\packages\Sdl.Web.Delivery.$(SdlDeliveryVersion)\lib\net45\Tridion.ContentDelivery.dll</HintPath>
+      <HintPath>..\packages\Sdl.Web.Delivery.$(SdlDeliveryVersion)\lib\net452\Tridion.ContentDelivery.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Tridion.SmartTarget">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Sdl.Web.Experience.$(ExperienceManagerVersion)\lib\net452\Tridion.SmartTarget.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup Condition="'$(Configuration)' == 'Release_7.1'">
-    <Reference Include="Tridion.ContentDelivery">
-      <HintPath>..\_references\2013-sp1\Tridion.ContentDelivery.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Tridion.ContentDelivery.AmbientData">
-      <HintPath>..\_references\2013-sp1\Tridion.ContentDelivery.AmbientData.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Tridion.SmartTarget">
-      <HintPath>..\_references\st-2014-sp1\Tridion.SmartTarget.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
