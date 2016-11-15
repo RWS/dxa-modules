@@ -1,7 +1,9 @@
 import { Promise } from "es6-promise";
+import { Link } from "react-router";
 import { ISitemapItem } from "../../interfaces/ServerModels";
-import { IRouting } from "../../interfaces/Routing";
 import "./styles/Breadcrumbs";
+
+import { Url } from "../../utils/Url";
 
 /**
  * Breadcrumbs props
@@ -31,21 +33,14 @@ export interface IBreadcrumbsProps {
     /**
      * Load items path for a specific item
      */
-    loadItemsPath: (publicationId: string, parentId: string) => Promise<ISitemapItem[]>;
-    /**
-     * Routing
-     *
-     * @type {IRouting}
-     * @memberOf IBreadcrumbsProps
-     */
-    routing: IRouting;
+    loadItemsPath: (publicationId: string, pageUrl: string) => Promise<ISitemapItem[]>;
 }
 
 /**
  * Breadcrumbs props
  *
  * @export
- * @interface IBreadcrumbsProps
+ * @interface IBreadcrumbsState
  */
 export interface IBreadcrumbsState {
     /**
@@ -96,10 +91,10 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
      * Invoked immediately before rendering when new props or state are being received.
      * This method is not called for the initial render.
      *
-     * @param {IPublicationContentProps} nextProps Next props
-     * @param {IPublicationContentState} nextState Next state
+     * @param {IBreadcrumbsProps} nextProps Next props
+     * @param {IBreadcrumbsState} nextState Next state
      */
-    public componentWillUpdate(nextProps: IBreadcrumbsProps, nextState: IBreadcrumbsProps): void {
+    public componentWillUpdate(nextProps: IBreadcrumbsProps, nextState: IBreadcrumbsState): void {
         const { publicationId, selectedItem, loadItemsPath } = this.props;
         const currentUrl = selectedItem ? selectedItem.Url : null;
         const nextItem = nextProps.selectedItem;
@@ -116,14 +111,10 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
                         }
                     });
             }
-            else if ((selectedItem && selectedItem.Id) != nextItem.Id) {
-                /* istanbul ignore else */
-                if (!this._isUnmounted) {
-                    this.setState({
-                        itemPath: nextItem ? [nextItem] : []
-                    });
-                }
-            }
+        } else if (currentUrl) {
+            this.setState({
+                itemPath: nextItem ? [nextItem] : []
+            });
         }
     }
 
@@ -141,18 +132,14 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
      */
     public render(): JSX.Element {
         const { itemPath } = this.state;
-        const { publicationId, publicationTitle, routing } = this.props;
+        const { publicationId, publicationTitle } = this.props;
         const { selectedItem } = this.props;
         const currentUrl = selectedItem ? selectedItem.Url : null;
-
         return (
             <div className={"sdl-dita-delivery-breadcrumbs"}>
                 <ul>
                     <li>
-                        <a onClick={(e: React.MouseEvent): void => {
-                            routing.setPublicationLocation(publicationId, publicationTitle);
-                            e.preventDefault();
-                        } } href={routing.getPublicationLocationPath(publicationId, publicationTitle)} title={publicationTitle}>{publicationTitle}</a>
+                        <Link title={publicationTitle} to={`${Url.getPublicationUrl(publicationId)}`}>{publicationTitle}</Link>
                     </li>
                     {
                         Array.isArray(itemPath) && (
@@ -161,18 +148,11 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
                                     <li key={key}>
                                         {
                                             (currentUrl != item.Url)
-                                                ? <a onClick={(e: React.MouseEvent): void => {
-                                                    if (item.Url) {
-                                                        routing.setPageLocation(item.Url || "");
-                                                    }
-                                                    else {
-                                                        routing.setPublicationLocation(publicationId, publicationTitle, item.Url, item.Title);
-                                                    }
-                                                    e.preventDefault();
-                                                } } href={item.Url
-                                                    ? routing.getPageLocationPath(item.Url)
-                                                    : routing.getPublicationLocationPath(publicationId, publicationTitle, item.Url, item.Title)}
-                                                    title={item.Title}>{item.Title}</a>
+                                                ?
+                                                (item.Url) ?
+                                                    <Link title={item.Title} to={`${Url.getPageUrl(publicationId, item.Url)}`}>{item.Title}</Link>
+                                                    :
+                                                    <Link title={item.Title} to={`${Url.getPublicationUrl(publicationId)}`}>{item.Title}</Link>
                                                 : <span>{item.Title}</span>
                                         }
                                     </li>

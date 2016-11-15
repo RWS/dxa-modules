@@ -1,26 +1,7 @@
-import { PublicationContent } from "./PublicationContent";
+import { Router, Route, IndexRedirect, History } from "react-router";
 import { IServices } from "../../interfaces/Services";
-import { IRouting } from "../../interfaces/Routing";
-import "./styles/App";
-import "../controls/styles/TopBar";
-
-// Global Catalina dependencies
-import TopBar = SDL.ReactComponents.TopBar;
-
-/**
- * App component state
- *
- * @export
- * @interface IAppState
- */
-export interface IAppState {
-    /**
-     * Id of the open publication
-     *
-     * @type {string}
-     */
-    selectedPublicationId: string;
-}
+import { Home } from "./Home";
+import { PublicationContent } from "./PublicationContent";
 
 export interface IAppProps {
     /**
@@ -31,29 +12,46 @@ export interface IAppProps {
      */
     services: IServices;
     /**
-     * Routing
+     * History
      *
-     * @type {IRouting}
+     * @type {History}
      * @memberOf IAppProps
      */
-    routing: IRouting;
+    history: History;
+}
+
+export interface IAppContext {
+    /**
+     * Router
+     *
+     * @type {ReactRouter.RouterOnContext}
+     * @memberOf IAppContext
+     */
+    router?: ReactRouter.RouterOnContext;
+    /**
+     * Services
+     *
+     * @type {IServices}
+     * @memberOf IAppContext
+     */
+    services: IServices;
 }
 
 /**
  * Main component for the application
  */
-export class App extends React.Component<IAppProps, IAppState> {
+export class App extends React.Component<IAppProps, {}> {
 
-    /**
-     * Creates an instance of App.
-     *
-     */
-    constructor() {
-        super();
-        this.state = {
-            selectedPublicationId: "ish:1656863-1-1"
+    public static childContextTypes: React.ValidationMap<IAppContext> = {
+        services: React.PropTypes.object
+    };
+
+    public getChildContext(): IAppContext {
+        const { services} = this.props;
+        return {
+            services: services
         };
-    }
+    };
 
     /**
      * Render the component
@@ -61,18 +59,14 @@ export class App extends React.Component<IAppProps, IAppState> {
      * @returns {JSX.Element}
      */
     public render(): JSX.Element {
-        const { selectedPublicationId } = this.state;
-        const { services, routing } = this.props;
-        const { formatMessage } = services.localizationService;
+        const { history } = this.props;
         return (
-            <div className={"sdl-dita-delivery-app"}>
-                <TopBar title={formatMessage("components.app.title")} buttons={{
-                    user: {
-                        isPicture: true
-                    }
-                }} />
-                <PublicationContent publicationId={selectedPublicationId} services={services} routing={routing} />
-            </div>
+            <Router history={history}>
+                <Route path="/" component={Home} >
+                    <IndexRedirect to="/ish:1656863-1-1" />
+                    <Route path=":publicationId(/:pageIdOrPublicationTitle)(/:publicationTitle)(/:pageTitle)" component={PublicationContent} />
+                </Route >
+            </Router >
         );
     }
 };

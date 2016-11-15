@@ -20,6 +20,22 @@ enum CDItemTypes {
 export class TcmId {
 
     /**
+     * Validates if an id has a valid format
+     *
+     * @static
+     * @param {string | null | undefined} id Id to validate
+     * @returns {boolean}
+     *
+     * @memberOf TcmId
+     */
+    public static isValid(id: string | null | undefined): boolean {
+        if (typeof id === "string") {
+            return !!id.match(TCM_ID_FORMAT_REGEX);
+        }
+        return false;
+    }
+
+    /**
      * Get the taxonomy id from a publication id
      *
      * @static
@@ -47,8 +63,9 @@ export class TcmId {
      * @memberOf TcmUri
      */
     public static removeNamespace(id: string): string {
-        if (id.indexOf("ish:") === 0) {
-            return id.substring(4);
+        const match = id.match(TCM_ID_FORMAT_REGEX);
+        if (match) {
+            return `${match[2]}-${match[3]}-${match[4]}`;
         }
         return id;
     }

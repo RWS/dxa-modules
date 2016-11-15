@@ -1,4 +1,4 @@
-import { routing } from "../global/client/RoutingClient";
+import { path } from "../utils/Path";
 import { IPublication } from "../interfaces/ServerModels";
 
 // Global Catalina dependencies
@@ -31,7 +31,7 @@ export class Publications extends LoadableObject {
 
     /* Overloads */
     protected _executeLoad(reload: boolean): void {
-        const url = routing.getAbsolutePath(`gui/mocks/publications.json`);
+        const url = path.getAbsolutePath(`gui/mocks/publications.json`);
         Net.getRequest(url,
             this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
     }

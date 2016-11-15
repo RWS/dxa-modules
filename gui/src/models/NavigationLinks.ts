@@ -1,4 +1,4 @@
-import { routing } from "../global/client/RoutingClient";
+import { path } from "../utils/Path";
 import { ISitemapItem } from "../interfaces/ServerModels";
 import { TcmId as TcmIdUtils } from "../utils/TcmId";
 
@@ -50,7 +50,7 @@ export class NavigationLinks extends LoadableObject {
 
     /* Overloads */
     protected _executeLoad(reload: boolean): void {
-        const url = routing.getAbsolutePath(`gui/mocks/navigation-${TcmIdUtils.removeNamespace(this._taxonomyId)}-${TcmIdUtils.removeNamespace(this._pageId)}.json`);
+        const url = path.getAbsolutePath(`gui/mocks/navigation-${TcmIdUtils.removeNamespace(this._taxonomyId)}-${TcmIdUtils.removeNamespace(this._pageId)}.json`);
         Net.getRequest(url,
             this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
     }
@@ -76,6 +76,7 @@ export class NavigationLinks extends LoadableObject {
         while (items && items.length > 0) {
             const firstItem = items[0];
             items = firstItem.Items;
+            /* istanbul ignore else */
             if (firstItem.Id) {
                 path.push(firstItem);
             }

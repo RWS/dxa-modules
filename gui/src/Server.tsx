@@ -7,7 +7,7 @@ import { PageService } from "./services/server/PageService";
 import { PublicationService } from "./services/server/PublicationService";
 import { TaxonomyService } from "./services/server/TaxonomyService";
 import { localization } from "./services/server/LocalizationService";
-import { routing } from "./global/server/RoutingServer";
+import { hashHistory } from "react-router";
 
 // Nashorn script engine needs a global scope
 declare var _renderToString: (path: string) => void;
@@ -29,9 +29,8 @@ export function renderToString(path: string): string {
         taxonomyService: new TaxonomyService()
     };
 
-    return ReactDOMServer.renderToString(<App
-        services={services}
-        routing={routing} />);
+    return ReactDOMServer.renderToString(
+        <App services={services} history={hashHistory} />);
 };
 
 _renderToString = renderToString;

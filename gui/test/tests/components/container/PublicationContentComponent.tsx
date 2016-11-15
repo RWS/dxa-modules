@@ -3,10 +3,10 @@ import { ISitemapItem } from "../../../../src/interfaces/ServerModels";
 import { PageService } from "../../../mocks/services/PageService";
 import { PublicationService } from "../../../mocks/services/PublicationService";
 import { TaxonomyService } from "../../../mocks/services/TaxonomyService";
-import { routing } from "../../../mocks/Routing";
 import { localization } from "../../../mocks/services/LocalizationService";
 import { Toc } from "../../../../src/components/presentation/Toc";
 import { Page } from "../../../../src/components/presentation/Page";
+import { ComponentWithContext } from "../../../mocks/ComponentWithContext";
 
 // Global Catalina dependencies
 import TestBase = SDL.Client.Test.TestBase;
@@ -255,10 +255,9 @@ class PublicationContentComponent extends TestBase {
                     Title: "Second page!",
                     Url: "ish:123-2-16"
                 };
-                routing.setPublicationLocation("ish:123-1-1", "Publication", first.Url, first.Title);
 
                 services.taxonomyService.setMockDataToc(null, [first, second]);
-                const publicationContent = this._renderComponent(target);
+                let publicationContent = this._renderComponent(target, first.Url);
 
                 const assert = (item: ISitemapItem, ready: () => void): void => {
                     // Use a timeout to allow the DataStore to return a promise with the data
@@ -273,10 +272,7 @@ class PublicationContentComponent extends TestBase {
                 };
 
                 assert(first, (): void => {
-                    if (second.Url) {
-                        routing.setPageLocation(second.Url);
-                    }
-                    this._renderComponent(target);
+                    publicationContent = this._renderComponent(target, second.Url);
                     assert(second, done);
                 });
 
@@ -285,11 +281,16 @@ class PublicationContentComponent extends TestBase {
 
     }
 
-    private _renderComponent(target: HTMLElement): PublicationContent {
-        return ReactDOM.render(
-            (<PublicationContent services={services} routing={routing} publicationId={"ish:123-1-1"} />)
-            , target) as PublicationContent;
+    private _renderComponent(target: HTMLElement, pageId?: string): PublicationContent {
+        const comp = ReactDOM.render(
+            (
+                <ComponentWithContext services={services}>
+                    <PublicationContent params={{ publicationId: "ish:123-1-1", pageIdOrPublicationTitle: pageId || "pub-title" }} />
+                </ComponentWithContext>
+            ), target) as React.Component<{}, {}>;
+        return TestUtils.findRenderedComponentWithType(comp, PublicationContent) as PublicationContent;
     }
+
 }
 
 new PublicationContentComponent().runTests();

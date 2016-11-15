@@ -7,7 +7,9 @@ import { PageService } from "./services/client/PageService";
 import { PublicationService } from "./services/client/PublicationService";
 import { TaxonomyService } from "./services/client/TaxonomyService";
 import { localization } from "./services/client/LocalizationService";
-import { routing } from "./global/client/RoutingClient";
+import { browserHistory } from "react-router";
+
+const mainElement = document.getElementById("main-view-target");
 
 /**
  * Set instances for services
@@ -19,17 +21,10 @@ const services: IServices = {
     taxonomyService: new TaxonomyService()
 };
 
-const mainElement = document.getElementById("main-view-target");
-
 if (!mainElement) {
     console.error(`Unable to locate element to render application.`);
 } else {
-    const render = (): void => {
-        ReactDOM.render(<App
-            services={services}
-            routing={routing} />, mainElement);
-    };
-
-    routing.onLocationChanged(render);
-    render();
+    ReactDOM.render(
+        <App services={services} history={browserHistory} />,
+        mainElement);
 }
