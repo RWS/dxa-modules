@@ -23,13 +23,16 @@ export class TcmId {
      * Validates if an id has a valid format
      *
      * @static
-     * @param {string} id Id to validate
+     * @param {string | null | undefined} id Id to validate
      * @returns {boolean}
      *
      * @memberOf TcmId
      */
-    public static isValid(id: string): boolean {
-        return !!id.match(TCM_ID_FORMAT_REGEX);
+    public static isValid(id: string | null | undefined): boolean {
+        if (typeof id === "string") {
+            return !!id.match(TCM_ID_FORMAT_REGEX);
+        }
+        return false;
     }
 
     /**

@@ -163,7 +163,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
     public componentWillMount(): void {
         const { services } = this.context;
         const { publicationId, pageIdOrPublicationTitle } = this.props.params;
-        const pageId = pageIdOrPublicationTitle && TcmId.isValid(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
+        const pageId = TcmId.isValid(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
         const getRootItems = (path?: string[]): void => {
             // Get the data for the Toc
             services.taxonomyService.getSitemapRoot(publicationId).then(
@@ -205,9 +205,9 @@ export class PublicationContent extends React.Component<IPublicationContentProps
      */
     public componentWillReceiveProps(nextProps: IPublicationContentProps): void {
         const { pageIdOrPublicationTitle } = this.props.params;
-        const pageId = pageIdOrPublicationTitle && TcmId.isValid(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
+        const pageId = TcmId.isValid(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
         const nextpageIdOrPublicationTitle = nextProps.params.pageIdOrPublicationTitle;
-        const nextPageId = nextpageIdOrPublicationTitle && TcmId.isValid(nextpageIdOrPublicationTitle) ? nextpageIdOrPublicationTitle : null;
+        const nextPageId = TcmId.isValid(nextpageIdOrPublicationTitle) ? nextpageIdOrPublicationTitle : null;
 
         if (nextPageId) {
             if (!pageId || nextPageId !== pageId) {
@@ -305,7 +305,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         const { router, services } = this.context;
         const { publicationId, pageIdOrPublicationTitle } = this.props.params;
         const publicationService = services.publicationService;
-        const pageId = pageIdOrPublicationTitle && TcmId.isValid(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
+        const pageId = TcmId.isValid(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
 
         page.error = null;
 
