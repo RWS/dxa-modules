@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const extractCSS = new ExtractTextPlugin('stylesheets/[name].css');
 
@@ -8,7 +9,8 @@ module.exports = isTest => {
             main: './src/Main.tsx',
             server: './src/Server.tsx',
             test: './test/Main.ts',
-            testConfiguration: './test/configuration/Configuration.ts'
+            testConfiguration: './test/configuration/Configuration.ts',
+            vendor: ['es6-promise', 'react-router', 'slug', 'ts-helpers']
         },
         output: {
             path: path.resolve(__dirname + '/dist'),
@@ -39,7 +41,11 @@ module.exports = isTest => {
             }]
         },
         plugins: [
-            extractCSS
+            extractCSS,
+            new webpack.optimize.CommonsChunkPlugin({
+                name: 'vendor',
+                filename: 'vendor.bundle.js'
+            })
         ]
     };
 
