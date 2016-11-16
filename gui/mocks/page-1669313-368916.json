@@ -1,0 +1,28 @@
+{
+  "Id": "368916",
+  "Title": "リファレンス・タイトルを入力してください",
+  "Meta": {
+    "ishlogicalref.object.id": 368914,
+    "ishversionref.object.id": 368915,
+    "ishlngref.object.id": 368916,
+    "ishref.object.value": "GUID-C4A6C4A6-FB94-4776-B894-F20174D0EFD5",
+    "ishtype.object.value": "ISHModule",
+    "FTITLE.logical.value": "Inspection",
+    "FDESCRIPTION.logical.value": null,
+    "FCHANGES.version.value": null,
+    "FISHRELEASELABEL.version.value": null,
+    "CREATED-ON.lng.value": "2016-01-06T10:56:05Z",
+    "FAUTHOR.lng.value": "admin",
+    "FSTATUS.lng.value": "Draft",
+    "MODIFIED-ON.lng.value": "2016-05-26T15:02:40Z",
+    "VERSION.version.value": "1",
+    "DOC-LANGUAGE.lng.value": [
+      "ja"
+    ],
+    "FISHREVCOUNTER.lng.value": 2,
+    "ED.lng.value": "GUID-A2E58FEC-FBFF-4752-A465-1CF3F942C50B",
+    "FUSERGROUP.logical.element": null,
+    "READ-ACCESS.logical.element": null
+  },
+  "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-C4A6C4A6-FB94-4776-B894-F20174D0EFD5__GUID-2F3B51A4-CEFA-481A-92AD-DF8AD02BD7CE\" xmlns=\"http://www.w3.org/1999/xhtml\">リファレンス・タイトルを入力してください</h1>\n      \n      \n      \n      <div class=\"body refbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">簡単な説明を入力してください (任意)</p>\n         \n         \n         <div class=\"section\" id=\"GUID-C4A6C4A6-FB94-4776-B894-F20174D0EFD5__GUID-6793B2A3-321B-4B67-886A-5A4EAA0F5A19\">実際の情報をこのセクションに入力してください (任意)</div>\n         \n         \n         <div class=\"example\" id=\"GUID-C4A6C4A6-FB94-4776-B894-F20174D0EFD5__GUID-3762B911-2DC1-4B9C-B8B6-1297F71EAF2C\">実例を入力してください (任意)</div>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <ul class=\"ullinks\">\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1669313/368920/ls40-el/%e3%83%aa%e3%83%95%e3%82%a1%e3%83%ac%e3%83%b3%e3%82%b9%e3%83%bb%e3%82%bf%e3%82%a4%e3%83%88%e3%83%ab%e3%82%92%e5%85%a5%e5%8a%9b%e3%81%97%e3%81%a6%e3%81%8f%e3%81%9f%e3%81%95%e3%81%84\">コンセプト・タイトルを入力してください</a></strong><br />\n               簡単な説明を入力してください (任意)\n            </li>\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1669313/368912/ls40-el/%e3%83%aa%e3%83%95%e3%82%a1%e3%83%ac%e3%83%b3%e3%82%b9%e3%83%bb%e3%82%bf%e3%82%a4%e3%83%88%e3%83%ab%e3%82%92%e5%85%a5%e5%8a%9b%e3%81%97%e3%81%a6%e3%81%8f%e3%81%9f%e3%81%95%e3%81%84\">コンセプト・タイトルを入力してください</a></strong><br />\n               簡単な説明を入力してください (任意)\n            </li>\n            \n         </ul>\n         \n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>親トピック:</strong> <a class=\"link\" title=\"簡単な説明を入力して下さい(任意)\" href=\"/1669313/368908/ls40-el/%e3%83%aa%e3%83%95%e3%82%a1%e3%83%ac%e3%83%b3%e3%82%b9%e3%83%bb%e3%82%bf%e3%82%a4%e3%83%88%e3%83%ab%e3%82%92%e5%85%a5%e5%8a%9b%e3%81%97%e3%81%a6%e3%81%8f%e3%81%9f%e3%81%95%e3%81%84\">トピック・タイトルを入力して下さい</a></div>\n            \n         </div>\n         \n      </div>\n   "
+}

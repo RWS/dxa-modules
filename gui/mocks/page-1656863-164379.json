@@ -1,0 +1,34 @@
+{
+  "Id": "164379",
+  "Title": "Launching a game",
+  "Meta": {
+    "ishlogicalref.object.id": 164375,
+    "ishversionref.object.id": 164376,
+    "ishlngref.object.id": 164379,
+    "ishref.object.value": "GUID-D6045A82-6286-4EC8-806E-4566EE0E7349",
+    "ishtype.object.value": "ISHModule",
+    "FTITLE.logical.value": "launching a game",
+    "FDESCRIPTION.logical.value": null,
+    "FCHANGES.version.value": "Change1",
+    "FISHRELEASELABEL.version.value": [
+      "Publication MP330-v1-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2012/09/21 12:27:01",
+      "Publication MP330-v2-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2012/09/24 17:31:39",
+      "Publication MP660-v1-GUID-EB2E82F1-1C76-4032-815C-4E717140A081-2012/09/24 14:57:38",
+      "Publication MP660-v2-GUID-EB2E82F1-1C76-4032-815C-4E717140A081-2012/09/24 17:09:12",
+      "Publication MP330-v3-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2016/02/11 10:42:22"
+    ],
+    "CREATED-ON.lng.value": "2015-12-22T18:27:13Z",
+    "FAUTHOR.lng.value": "admin",
+    "FSTATUS.lng.value": "Released",
+    "MODIFIED-ON.lng.value": "2016-05-27T08:08:13Z",
+    "VERSION.version.value": "1",
+    "DOC-LANGUAGE.lng.value": [
+      "en"
+    ],
+    "FISHREVCOUNTER.lng.value": 2,
+    "ED.lng.value": "GUID-7775472B-73C8-4390-BE19-486DAC62CA48",
+    "FUSERGROUP.logical.element": null,
+    "READ-ACCESS.logical.element": null
+  },
+  "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-D6045A82-6286-4EC8-806E-4566EE0E7349__GUID-AC322A45-DE2F-4563-A459-587992935500\" xmlns=\"http://www.w3.org/1999/xhtml\">Launching a game</h1>\n      \n      \n      \n      <div class=\"body taskbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">The phone includes some Java applications and games, and supports downloading new applications and games from different WAP\n            services.\n         </p>\n         \n         \n         <ol class=\"ol steps\" id=\"GUID-D6045A82-6286-4EC8-806E-4566EE0E7349__GUID-A5ACDEA3-6CC9-412B-A2B3-FFB2F9EB8C3A\">\n            <li class=\"li step\">\n               <span class=\"ph cmd\">Press <samp class=\"ph msgph\">Menu</samp>, and select <samp class=\"ph msgph\">Games</samp> and <samp class=\"ph msgph\">Select Game</samp>.</span>\n               \n            </li>\n            \n            <li class=\"li step\">\n               <span class=\"ph cmd\">Scroll to a game or a game set (name depends on the game).</span>\n               \n            </li>\n            \n            <li class=\"li step\">\n               <span class=\"ph cmd\">Press <samp class=\"ph msgph\">Options</samp> and select <samp class=\"ph msgph\">OK</samp> or press <img class=\"image\" src=\"/gui/mocks/bin/1656863-345915-16.gif\" />. If the selection is a single game it will be launched. Otherwise, a list of games in the selected game set is displayed.\n                  To launch a single game, scroll to the desired game and press <samp class=\"ph msgph\">Options</samp> and select <samp class=\"ph msgph\">OK</samp>, or press <img class=\"image\" src=\"/gui/mocks/bin/1656863-345915-16.gif\" />.</span>\n               \n            </li>\n            \n         </ol>\n         \n         \n         <div class=\"section postreq\" id=\"GUID-D6045A82-6286-4EC8-806E-4566EE0E7349__GUID-F5256341-3085-41BB-9674-F79BBDEE01DC\">\n            \n            <div class=\"note attention\" id=\"GUID-D6045A82-6286-4EC8-806E-4566EE0E7349__GUID-E9D98993-36A1-4CDB-9172-6391C9FA6BF7\"><span class=\"attentiontitle\">Attention:</span> Note that running some games may consume the phone’s battery faster (and you may need to connect the phone to the charger).\n            </div>\n            \n            \n         </div>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Parent topic:</strong> <a class=\"link\" title=\"Your phone supports Java 2 Micro Edition (J2METM), which is a version of Java technology specifically designed for small consumer electronics products. The phone includes some Java applications and games, and supports downloading new applications and games from different WAP services.\" href=\"/1656863/164239/publication-mp330/launching-a-game\">Games</a></div>\n            \n         </div>\n         \n      </div>\n   "
+}

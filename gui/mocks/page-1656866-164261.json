@@ -1,0 +1,34 @@
+{
+  "Id": "164261",
+  "Title": "Speichern von Namen und Telefonnummern",
+  "Meta": {
+    "ishlogicalref.object.id": 164259,
+    "ishversionref.object.id": 164260,
+    "ishlngref.object.id": 164261,
+    "ishref.object.value": "GUID-67F1627E-FFBA-4E03-A62D-F70030C52596",
+    "ishtype.object.value": "ISHModule",
+    "FTITLE.logical.value": "saving names and numbers",
+    "FDESCRIPTION.logical.value": null,
+    "FCHANGES.version.value": "Change1",
+    "FISHRELEASELABEL.version.value": [
+      "Publication MP330-v1-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2012/09/21 12:27:01",
+      "Publication MP330-v2-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2012/09/24 17:31:39",
+      "Publication MP660-v1-GUID-EB2E82F1-1C76-4032-815C-4E717140A081-2012/09/24 14:57:38",
+      "Publication MP660-v2-GUID-EB2E82F1-1C76-4032-815C-4E717140A081-2012/09/24 17:09:12",
+      "Publication MP330-v3-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2016/02/11 10:42:22"
+    ],
+    "CREATED-ON.lng.value": "2015-12-22T18:26:56Z",
+    "FAUTHOR.lng.value": "admin",
+    "FSTATUS.lng.value": "Released",
+    "MODIFIED-ON.lng.value": "2016-05-26T13:51:23Z",
+    "VERSION.version.value": "1",
+    "DOC-LANGUAGE.lng.value": [
+      "de"
+    ],
+    "FISHREVCOUNTER.lng.value": 2,
+    "ED.lng.value": "GUID-9C1A352E-9CF2-4BFE-B92D-97DECC539A23",
+    "FUSERGROUP.logical.element": null,
+    "READ-ACCESS.logical.element": null
+  },
+  "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-67F1627E-FFBA-4E03-A62D-F70030C52596__GUID-91208EF2-9DF8-4968-95C3-7B281273B8A0\" xmlns=\"http://www.w3.org/1999/xhtml\">Speichern von Namen und Telefonnummern</h1>\n      \n      \n      \n      <div class=\"body taskbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\" />\n         \n         \n         <ol class=\"ol steps\" id=\"GUID-67F1627E-FFBA-4E03-A62D-F70030C52596__GUID-39CCD92E-A42F-4E2C-AE5D-9BAA72560320\">\n            <li class=\"li step stepexpand\">\n               <span class=\"ph cmd\">Drücken Sie <samp class=\"ph msgph\">Adressen</samp> (oder drücken Sie Nach und wählen Sie <samp class=\"ph msgph\">Adressen</samp>) und wählen Sie <samp class=\"ph msgph\">Neuer Eintrag</samp>.</span>\n               \n            </li>\n            \n            <li class=\"li step stepexpand\">\n               <span class=\"ph cmd\">Geben Sie den Namen ein und drücken Sie <samp class=\"ph msgph\">OK</samp>.</span>\n               \n            </li>\n            \n            <li class=\"li step stepexpand\">\n               <span class=\"ph cmd\">Geben Sie die Telefonnummer ein und drücken Sie <samp class=\"ph msgph\">OK</samp>.</span>\n               \n            </li>\n            \n            <li class=\"li step stepexpand\">\n               <span class=\"ph cmd\">Wenn der Name und die Telefonnummer gespeichert sind, drücken Sie <samp class=\"ph msgph\">Beenden</samp>.</span>\n               \n               <div class=\"itemgroup info\"> Schnellspeicherung Geben Sie in der Ausgangsanzeige die Telefonnummer ein. Drücken Sie <samp class=\"ph msgph\">Optionen</samp> und wählen Sie <samp class=\"ph msgph\">Ablegen</samp>. Geben Sie den Namen ein und drücken Sie <samp class=\"ph msgph\">OK</samp> und <samp class=\"ph msgph\">Beenden</samp>.\n               </div>\n               \n            </li>\n            \n         </ol>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Übergeordnetes Thema:</strong> <a class=\"link\" title=\"Sie können Adressen im Telefonspeicher (internes Verzeichnis) oder im Speicher der SIM-Karte (SIM-Verzeichnis) speichern.\" href=\"/1656866/164299/publication-mp330/speichern-von-namen-und-telefonnummern\">Adressbuch</a></div>\n            \n         </div>\n         \n      </div>\n   "
+}

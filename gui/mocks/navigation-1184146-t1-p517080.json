@@ -1,0 +1,44 @@
+{
+  "Id": "ish:1184146-1-512",
+  "Title": "Penguin guide",
+  "Url": null,
+  "IsAbstract": true,
+  "HasChildNodes": true,
+  "Items": [
+    {
+      "Id": "ish:1184146-516062-16",
+      "Title": "Penguins Overview",
+      "Url": "/1184146/516062/penguin-publication/penguins-overview",
+      "IsAbstract": false,
+      "HasChildNodes": true,
+      "Items": [
+        {
+          "Id": "ish:1184146-516088-16",
+          "Title": "Systematics and evolution",
+          "Url": "/1184146/516088/penguin-publication/systematics-and-evolution",
+          "IsAbstract": false,
+          "HasChildNodes": true,
+          "Items": [
+            {
+              "Id": "ish:1184146-516982-16",
+              "Title": "Evolution",
+              "Url": "/1184146/516982/penguin-publication/evolution",
+              "IsAbstract": false,
+              "HasChildNodes": true,
+              "Items": [
+                {
+                  "Id": "ish:1184146-517080-16",
+                  "Title": "Palaeeudyptines",
+                  "Url": "/1184146/517080/penguin-publication/palaeeudyptines",
+                  "IsAbstract": false,
+                  "HasChildNodes": false,
+                  "Items": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

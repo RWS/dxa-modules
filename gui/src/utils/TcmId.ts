@@ -1,6 +1,6 @@
 /**
  * Regex to parse tcm uri
- * Format is {namespace}:{publication}-{id}-{itemType}
+ * Format is {namespace}:{publicationId}-{itemId}-{itemType}
  */
 const TCM_ID_FORMAT_REGEX = /^([^\/]+):([0-9]+)-([0-9]+)-([0-9]+)$/i;
 

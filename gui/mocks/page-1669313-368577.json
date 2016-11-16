@@ -1,0 +1,28 @@
+{
+  "Id": "368577",
+  "Title": "リファレンス・タイトルを入力してください",
+  "Meta": {
+    "ishlogicalref.object.id": 368575,
+    "ishversionref.object.id": 368576,
+    "ishlngref.object.id": 368577,
+    "ishref.object.value": "GUID-28F821AB-D9D3-444E-BCE7-7E4371540E27",
+    "ishtype.object.value": "ISHModule",
+    "FTITLE.logical.value": "[Phenomenon 59] Sheet pile of the pile board guide hoist does not lower",
+    "FDESCRIPTION.logical.value": null,
+    "FCHANGES.version.value": null,
+    "FISHRELEASELABEL.version.value": null,
+    "CREATED-ON.lng.value": "2016-01-06T10:55:14Z",
+    "FAUTHOR.lng.value": "admin",
+    "FSTATUS.lng.value": "Draft",
+    "MODIFIED-ON.lng.value": "2016-05-26T15:02:23Z",
+    "VERSION.version.value": "1",
+    "DOC-LANGUAGE.lng.value": [
+      "ja"
+    ],
+    "FISHREVCOUNTER.lng.value": 2,
+    "ED.lng.value": "GUID-4C51CCE4-0330-44B1-8FE7-64428D612786",
+    "FUSERGROUP.logical.element": null,
+    "READ-ACCESS.logical.element": null
+  },
+  "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-28F821AB-D9D3-444E-BCE7-7E4371540E27__GUID-12BFCE46-F257-4636-AD7B-10647BA81BA0\" xmlns=\"http://www.w3.org/1999/xhtml\">リファレンス・タイトルを入力してください</h1>\n      \n      \n      \n      <div class=\"body refbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">簡単な説明を入力してください (任意)</p>\n         \n         \n         <div class=\"section\" id=\"GUID-28F821AB-D9D3-444E-BCE7-7E4371540E27__GUID-62BF5B99-21DB-4E27-A2A9-55A31B9189E2\">実際の情報をこのセクションに入力してください (任意)</div>\n         \n         \n         <div class=\"example\" id=\"GUID-28F821AB-D9D3-444E-BCE7-7E4371540E27__GUID-26554A77-C578-4FAB-9013-E22E6C778936\">実例を入力してください (任意)</div>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>親トピック:</strong> <a class=\"link\" title=\"簡単な説明を入力して下さい(任意)\" href=\"/1669313/368625/ls40-el/%e3%83%aa%e3%83%95%e3%82%a1%e3%83%ac%e3%83%b3%e3%82%b9%e3%83%bb%e3%82%bf%e3%82%a4%e3%83%88%e3%83%ab%e3%82%92%e5%85%a5%e5%8a%9b%e3%81%97%e3%81%a6%e3%81%8f%e3%81%9f%e3%81%95%e3%81%84\">トピック・タイトルを入力して下さい</a></div>\n            \n         </div>\n         \n      </div>\n   "
+}

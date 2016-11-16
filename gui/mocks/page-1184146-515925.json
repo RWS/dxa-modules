@@ -1,0 +1,32 @@
+{
+  "Id": "515925",
+  "Title": "Snow Petrel (Pagodroma nivea)",
+  "Meta": {
+    "ishlogicalref.object.id": 515923,
+    "ishversionref.object.id": 515924,
+    "ishlngref.object.id": 515925,
+    "ishref.object.value": "GUID-FA1314FE-1F54-4064-A4D0-7582839E5C7F",
+    "ishtype.object.value": "ISHModule",
+    "FTITLE.logical.value": "Snow Petrel",
+    "FDESCRIPTION.logical.value": null,
+    "FCHANGES.version.value": null,
+    "FISHRELEASELABEL.version.value": null,
+    "CREATED-ON.lng.value": "2016-01-07T03:47:12Z",
+    "FAUTHOR.lng.value": "admin",
+    "FSTATUS.lng.value": "To be reviewed",
+    "MODIFIED-ON.lng.value": "2016-05-26T13:49:34Z",
+    "VERSION.version.value": "1",
+    "DOC-LANGUAGE.lng.value": [
+      "en"
+    ],
+    "FISHREVCOUNTER.lng.value": 1,
+    "ED.lng.value": "GUID-84CA4952-044A-42E6-B769-5767963400A6",
+    "FUSERGROUP.logical.element": [
+      "VUSERGROUPDEFAULTDEPARTMENT"
+    ],
+    "READ-ACCESS.logical.element": [
+      "VUSERGROUPDEFAULTDEPARTMENT"
+    ]
+  },
+  "Html": "\n       \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-FA1314FE-1F54-4064-A4D0-7582839E5C7F__GUID-C09B24D8-54AF-4391-97B6-F50F89E75E3F\" xmlns=\"http://www.w3.org/1999/xhtml\">Snow Petrel (Pagodroma nivea)</h1>\n      \n      \n      <div class=\"body refbody\" xmlns=\"http://www.w3.org/1999/xhtml\"> \n         \t \n         <div class=\"section\" id=\"GUID-FA1314FE-1F54-4064-A4D0-7582839E5C7F__GUID-686E53EF-4AD6-4E77-A244-225E5A6CB2BB\">\n            \t\t\n            <p class=\"p\"> The snow petrel is the only member of the genus Pagodroma. It is one of only three birds that breed exclusively in Antarctica\n               and has been seen at the South Pole. It has the most southerly breeding distribution of any bird. \n               \t\t\n            </p>\n            \n            \t\t\n            <p class=\"p\">The snow petrel, Pagodroma nivea, is a small, pure white fulmarine petrel with black underdown, coal-black eyes, small black\n               bill and bluish gray feet. Body length is 36-41 cm (14-16 in) and the wingspan is 76-79 cm (30-31 in). Flight is more fluttering\n               than most petrels. They are known to live 14 to 20 years. \n               \t\t\n            </p>\n            \n            \t\t\n            <div class=\"p\">\n               \t\t  \n               <div class=\"fig fignone\" id=\"GUID-FA1314FE-1F54-4064-A4D0-7582839E5C7F__FIG_107B41E21CAB46789B89CD09D63D92DD\"><img class=\"image\" id=\"GUID-FA1314FE-1F54-4064-A4D0-7582839E5C7F__IMAGE_C30061A584B44D8C85FE0A689A7753A6\" src=\"/gui/mocks/bin/1184146-515538-16.jpg\" />\n                  \t\t  \n               </div>\n               \n               \t\t\n            </div>\n            \n            \t\t\n            <p class=\"p\">Snow petrels are almost entirely restricted to cold Antarctic waters. Flocks are characteristically seen sitting on icebergs.\n               \t\t\n            </p>\n            \n            \t \n         </div>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Parent topic:</strong> <a class=\"link\" href=\"/1184146/515791/penguin-publication/snow-petrel-(pagodroma-nivea)\">Petrels</a></div>\n            \n         </div>\n         \n      </div>\n   "
+}
