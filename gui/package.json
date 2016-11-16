@@ -47,6 +47,7 @@
     "lodash": "~4.14.1",
     "napa": "~2.3.0",
     "portfinder": "~1.0.3",
+    "postcss-loader": "^1.1.1",
     "remap-istanbul": "~0.7.0",
     "run-sequence": "~1.2.1",
     "sdl-icons": "0.1.1-6",
