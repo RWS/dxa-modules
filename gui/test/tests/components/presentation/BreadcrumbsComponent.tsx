@@ -1,9 +1,9 @@
 import { Router, Route } from "react-router";
-import { Breadcrumbs, IBreadcrumbsProps } from "../../../../src/components/presentation/Breadcrumbs";
-import { ISitemapItem } from "../../../../src/interfaces/ServerModels";
+import { Breadcrumbs, IBreadcrumbsProps } from "components/presentation/Breadcrumbs";
+import { ISitemapItem } from "interfaces/ServerModels";
 import { Promise } from "es6-promise";
 import { hashHistory } from "react-router";
-import { Url } from "../../../../src/utils/Url";
+import { Url } from "utils/Url";
 
 // Global Catalina dependencies
 import TestBase = SDL.Client.Test.TestBase;

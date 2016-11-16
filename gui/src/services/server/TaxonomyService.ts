@@ -1,5 +1,5 @@
-import { ITaxonomyService } from "../interfaces/TaxonomyService";
-import { ISitemapItem } from "../../interfaces/ServerModels";
+import { ITaxonomyService } from "services/interfaces/TaxonomyService";
+import { ISitemapItem } from "interfaces/ServerModels";
 import { Promise } from "es6-promise";
 
 /**

@@ -1,4 +1,4 @@
-import { TcmId as TcmIdUtils } from "../../../src/utils/TcmId";
+import { TcmId as TcmIdUtils } from "utils/TcmId";
 
 describe(`TcmId utils tests.`, (): void => {
 

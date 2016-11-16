@@ -1,5 +1,5 @@
-import { Toc, ITocProps } from "../../../../src/components/presentation/Toc";
-import { ISitemapItem } from "../../../../src/interfaces/ServerModels";
+import { Toc, ITocProps } from "components/presentation/Toc";
+import { ISitemapItem } from "interfaces/ServerModels";
 import { Promise } from "es6-promise";
 
 // Global Catalina dependencies

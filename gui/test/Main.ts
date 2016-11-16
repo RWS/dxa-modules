@@ -3,17 +3,17 @@
 import "ts-helpers";
 
 // Import all tests
-import "./tests/components/container/AppComponent";
-import "./tests/components/container/HomeComponent";
-import "./tests/components/container/PublicationContentComponent";
-import "./tests/components/presentation/BreadcrumbsComponent";
-import "./tests/components/presentation/PageComponent";
-import "./tests/components/presentation/TocComponent";
-import "./tests/services/client/PageService";
-import "./tests/services/client/PublicationService";
-import "./tests/services/client/TaxonomyService";
-import "./tests/services/server/PublicationService";
-import "./tests/utils/Path";
-import "./tests/utils/TcmId";
-import "./tests/utils/UrlUtil";
-import "./tests/Server";
+import "test/tests/components/container/AppComponent";
+import "test/tests/components/container/HomeComponent";
+import "test/tests/components/container/PublicationContentComponent";
+import "test/tests/components/presentation/BreadcrumbsComponent";
+import "test/tests/components/presentation/PageComponent";
+import "test/tests/components/presentation/TocComponent";
+import "test/tests/services/client/PageService";
+import "test/tests/services/client/PublicationService";
+import "test/tests/services/client/TaxonomyService";
+import "test/tests/services/server/PublicationService";
+import "test/tests/utils/Path";
+import "test/tests/utils/TcmId";
+import "test/tests/utils/UrlUtil";
+import "test/tests/Server";

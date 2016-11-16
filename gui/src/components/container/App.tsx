@@ -1,7 +1,7 @@
 import { Router, Route, IndexRedirect, History } from "react-router";
-import { IServices } from "../../interfaces/Services";
-import { Home } from "./Home";
-import { PublicationContent } from "./PublicationContent";
+import { IServices } from "interfaces/Services";
+import { Home } from "components/container/Home";
+import { PublicationContent } from "components/container/PublicationContent";
 
 export interface IAppProps {
     /**
