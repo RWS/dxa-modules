@@ -63,8 +63,8 @@ export class App extends React.Component<IAppProps, {}> {
         return (
             <Router history={history}>
                 <Route path="/" component={Home} >
-                    <IndexRedirect to="/ish:1656863-1-1" />
-                    <Redirect from="home" to="/ish:1656863-1-1" />
+                    <IndexRedirect to="/1656863/publication-mp330" />
+                    <Redirect from="home" to="/1656863/publication-mp330" />
                     <Route path=":publicationId(/:pageIdOrPublicationTitle)(/:publicationTitle)(/:pageTitle)" component={PublicationContent} />
                 </Route >
             </Router >

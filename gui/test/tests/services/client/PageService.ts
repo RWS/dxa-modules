@@ -7,17 +7,17 @@ class PageServiceTests extends TestBase {
 
     public runTests(): void {
         const pageService = new PageService();
-        const publicationId = "ish:1656863-1-1";
+        const publicationId = "1656863";
 
         describe(`Page service tests.`, (): void => {
 
             it("can get page info", (done: () => void): void => {
-                const pageId = "ish:1656863-164398-16";
+                const pageId = "164398";
                 pageService.getPageInfo(publicationId, pageId).then(pageInfo => {
                     expect(pageInfo).toBeDefined();
                     if (pageInfo) {
-                        expect(pageInfo.title).toBe("getting started");
-                        expect(pageInfo.content.length).toBe(1216);
+                        expect(pageInfo.title).toBe("Getting started");
+                        expect(pageInfo.content.length).toBe(1332);
                         const element = document.createElement("span");
                         element.innerHTML = pageInfo.content;
                         expect(element.children.length).toBe(3); // title, content, related links
@@ -31,13 +31,13 @@ class PageServiceTests extends TestBase {
             });
 
             it("can get page info from memory", (done: () => void): void => {
-                const pageId = "ish:1656863-164398-16";
+                const pageId = "164398";
                 const spy = spyOn(SDL.Client.Net, "getRequest").and.callThrough();
                 pageService.getPageInfo(publicationId, pageId).then(pageInfo => {
                     expect(pageInfo).toBeDefined();
                     if (pageInfo) {
-                        expect(pageInfo.title).toBe("getting started");
-                        expect(pageInfo.content.length).toBe(1216);
+                        expect(pageInfo.title).toBe("Getting started");
+                        expect(pageInfo.content.length).toBe(1332);
                         expect(spy).not.toHaveBeenCalled();
                     }
                     done();
