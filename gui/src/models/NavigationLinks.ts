@@ -1,6 +1,7 @@
-import { path } from "../utils/Path";
-import { ISitemapItem } from "../interfaces/ServerModels";
-import { TcmId as TcmIdUtils } from "../utils/TcmId";
+import { path } from "utils/Path";
+import { TcmId as TcmIdUtils } from "utils/TcmId";
+
+import { ISitemapItem } from "interfaces/ServerModels";
 
 // Global Catalina dependencies
 import IWebRequest = SDL.Client.Net.IWebRequest;

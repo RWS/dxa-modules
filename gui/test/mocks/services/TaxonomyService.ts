@@ -1,5 +1,5 @@
-import { ITaxonomyService } from "../../../src/services/interfaces/TaxonomyService";
-import { ISitemapItem } from "../../../src/interfaces/ServerModels";
+import { ITaxonomyService } from "services/interfaces/TaxonomyService";
+import { ISitemapItem } from "interfaces/ServerModels";
 import { Promise } from "es6-promise";
 
 let fakeDelay = false;

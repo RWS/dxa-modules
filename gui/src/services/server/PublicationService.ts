@@ -1,5 +1,5 @@
-import { IPublicationService } from "../interfaces/PublicationService";
-import { IPublication } from "../../interfaces/ServerModels";
+import { IPublicationService } from "services/interfaces/PublicationService";
+import { IPublication } from "interfaces/ServerModels";
 import { Promise } from "es6-promise";
 
 /**

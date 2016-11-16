@@ -1,5 +1,5 @@
-import { IPageService } from "../interfaces/PageService";
-import { IPageInfo } from "../../models/Page";
+import { IPageService } from "services/interfaces/PageService";
+import { IPageInfo } from "models/Page";
 import { Promise } from "es6-promise";
 
 /**

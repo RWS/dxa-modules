@@ -1,4 +1,4 @@
-import { IServices } from "../../src/interfaces/Services";
+import { IServices } from "interfaces/Services";
 
 export interface IComponentWithContextContext {
     services: IServices;

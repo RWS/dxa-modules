@@ -1,4 +1,4 @@
-import { PageService } from "../../../../src/services/client/PageService";
+import { PageService } from "services/client/PageService";
 
 // Global Catalina dependencies
 import TestBase = SDL.Client.Test.TestBase;
