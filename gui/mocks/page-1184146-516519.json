@@ -1,0 +1,57 @@
+{
+  "Id": "516519",
+  "Title": "Breeding",
+  "Meta": {
+    "ishlogicalref.object.id": 516513,
+    "ishversionref.object.id": 516514,
+    "ishlngref.object.id": 516519,
+    "ishref.object.value": "GUID-80C1E944-669E-42F5-82C3-F3DCD2A60309",
+    "ishtype.object.value": "ISHModule",
+    "FTITLE.logical.value": "Breeding",
+    "FDESCRIPTION.logical.value": null,
+    "FCHANGES.version.value": null,
+    "FISHRELEASELABEL.version.value": [
+      "Penguin publication-v1-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/22 11:14:29",
+      "Penguin publication-v2-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/22 13:26:27",
+      "Penguin publication-v3-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/22 13:44:30",
+      "Penguin publication-v3.1.10-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/29 14:32:30",
+      "Penguin publication-v3.1.2-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/22 14:27:38",
+      "Penguin publication-v3.1.3-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/22 14:36:15",
+      "Penguin publication-v3.1.3.1.1-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/22 15:03:16",
+      "Penguin publication-v3.1.3.1.2-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/22 16:07:05",
+      "Penguin publication-v3.1.3.1.4-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/22 16:24:08",
+      "Penguin publication-v3.1.4-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/22 15:02:03",
+      "Penguin publication-v3.1.5-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/28 11:52:09",
+      "Penguin publication-v3.1.6-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/28 14:49:04",
+      "Penguin publication-v3.1.7-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/29 11:09:18",
+      "Penguin publication-v3.1.8-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/29 12:20:02",
+      "Penguin publication-v3.1.9-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/29 13:43:39",
+      "Penguin publication-v4-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/22 13:59:44",
+      "Penguin publication-v5-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/12/03 16:24:48",
+      "Penguin publication-v6-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/12/04 12:08:31",
+      "Penguin publication-v6.1.1-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/12/06 15:01:48",
+      "Penguin publication-v6.1.2-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/12/10 13:51:16",
+      "Penguin publication-v6.1.3-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/12/10 15:16:42",
+      "Penguin publication-v6.1.4-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/12/13 10:52:57",
+      "Penguin publication-v6.1.5-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/12/13 12:18:19",
+      "Penguin publication-v7-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/12/12 11:44:45"
+    ],
+    "CREATED-ON.lng.value": "2016-01-07T03:49:23Z",
+    "FAUTHOR.lng.value": "admin",
+    "FSTATUS.lng.value": "Released",
+    "MODIFIED-ON.lng.value": "2016-05-26T13:49:45Z",
+    "VERSION.version.value": "1",
+    "DOC-LANGUAGE.lng.value": [
+      "en"
+    ],
+    "FISHREVCOUNTER.lng.value": 1,
+    "ED.lng.value": "GUID-7904C158-6BB4-4A3A-832B-12CB1DC24AB7",
+    "FUSERGROUP.logical.element": [
+      "VUSERGROUPDEFAULTDEPARTMENT"
+    ],
+    "READ-ACCESS.logical.element": [
+      "VUSERGROUPDEFAULTDEPARTMENT"
+    ]
+  },
+  "Html": "\n       \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-80C1E944-669E-42F5-82C3-F3DCD2A60309__GUID-9B62DD76-D3C2-4B1C-A604-0E9667BC117F\" xmlns=\"http://www.w3.org/1999/xhtml\">Breeding</h1>\n      \n      \n      \n      <div class=\"body conbody\" xmlns=\"http://www.w3.org/1999/xhtml\"> \n         \t \n         <p class=\"p\">Penguins for the most part breed in large colonies, the exceptions being the Yellow-eyed and Fiordland species; these colonies\n            may range in size from as few as a 100 pairs for Gentoo Penguins, to several hundred thousand in the case of King, Macaroni\n            and Chinstrap Penguins. Living in colonies results in a high level of social interaction between birds, which has led to a\n            large repertoire of visual as well as vocal displays in all penguin species. Agonistic displays are those intended to confront\n            or drive off, or alternately appease and avoid conflict with, other individuals. \n            \t \n         </p>\n         \n         \t \n         <p class=\"p\"><img class=\"image\" id=\"GUID-80C1E944-669E-42F5-82C3-F3DCD2A60309__IMAGE_F3E411A4DAD0402996153CCC0CAB9B9D\" src=\"/gui/mocks/bin/1184146-515258-16.jpg\" />\n            \t \n         </p>\n         \n         \t \n         <p class=\"p\">Penguins form monogamous pairs for a breeding season, though the rate the same pair recouples varies drastically. Most penguins\n            lay two eggs in a clutch, although the two largest species, the Emperor and the King Penguins, lay only one. With the exception\n            of the Emperor Penguin, where the male does it all, all penguins share the incubation duties. These incubation shifts can\n            last days and even weeks as one member of the pair feeds at sea.\n            \t \n         </p>\n         \n         \t \n         <p class=\"p\">Penguins generally only lay one brood; the exception is the Little Penguin, which can raise two or three broods in a season.\n            \t \n         </p>\n         \n         \t \n         <p class=\"p\">Penguin eggs are smaller than any other bird species when compared proportionally to the weight of the parent birds; at 52\n            g (2 oz), the Little Penguin egg is 4.7% of its mothers' weight, and the 450 g (1 lb) Emperor Penguin egg is 2.3%. The relatively\n            thick shell forms between 10 and 16% of the weight of a penguin egg, presumably to minimise risk of breakage in an adverse\n            nesting environment. The yolk, too, is large, and comprises 22–31% of the egg. Some yolk often remains when a chick is born,\n            and is thought to help sustain it if parents are delayed in returning with food.\n            \t \n         </p>\n         \n         \t \n         <p class=\"p\">When mothers lose a chick, they sometimes attempt to \"steal\" another mother's chick, usually unsuccessfully as other females\n            in the vicinity assist the defending mother in keeping her chick. In some species, such as Emperor Penguins, young penguins\n            assemble in large groups called crèches.\n            \t \n         </p>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Parent topic:</strong> <a class=\"link\" title=\"This topic groups all topics which describe specific behavior of penguins\" href=\"/1184146/516036/penguin-publication/behavior\">Behavior</a></div>\n            \n         </div>\n         \n      </div>\n   "
+}

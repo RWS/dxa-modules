@@ -1,0 +1,26 @@
+{
+  "Id": "ish:1656866-1-512",
+  "Title": "User Guide",
+  "Url": null,
+  "IsAbstract": true,
+  "HasChildNodes": true,
+  "Items": [
+    {
+      "Id": "ish:1656866-164229-16",
+      "Title": "Ihr Telefon",
+      "Url": "/1656866/164229/publication-mp330/ihr-telefon",
+      "IsAbstract": false,
+      "HasChildNodes": true,
+      "Items": [
+        {
+          "Id": "ish:1656866-164169-16",
+          "Title": "General Packet Radio Service (GPRS)",
+          "Url": "/1656866/164169/publication-mp330/general-packet-radio-service-(gprs)",
+          "IsAbstract": false,
+          "HasChildNodes": false,
+          "Items": []
+        }
+      ]
+    }
+  ]
+}

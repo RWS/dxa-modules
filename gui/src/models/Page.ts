@@ -1,6 +1,5 @@
 import { path } from "../utils/Path";
 import { IPage } from "../interfaces/ServerModels";
-import { TcmId as TcmIdUtils } from "../utils/TcmId";
 
 // Global Catalina dependencies
 import IWebRequest = SDL.Client.Net.IWebRequest;
@@ -60,7 +59,7 @@ export class Page extends LoadableObject {
 
     /* Overloads */
     protected _executeLoad(reload: boolean): void {
-        const url = path.getAbsolutePath(`gui/mocks/page-${TcmIdUtils.removeNamespace(this._pageId)}.json`);
+        const url = path.getAbsolutePath(`gui/mocks/page-${this._publicationId}-${this._pageId}.json`);
         Net.getRequest(url,
             this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
     }

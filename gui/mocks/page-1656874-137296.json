@@ -1,0 +1,30 @@
+{
+  "Id": "137296",
+  "Title": "How do I access MVT",
+  "Meta": {
+    "ishlogicalref.object.id": 137290,
+    "ishversionref.object.id": 137291,
+    "ishlngref.object.id": 137296,
+    "ishref.object.value": "MVT-42007CDF0T0J5Z",
+    "ishtype.object.value": "ISHModule",
+    "FTITLE.logical.value": "How do I access MVT",
+    "FDESCRIPTION.logical.value": null,
+    "FCHANGES.version.value": "Imported",
+    "FISHRELEASELABEL.version.value": [
+      "Publication McAfee-v1-GUID-5D6FA032-0189-4CB2-85E7-41455F86D612-2012/09/21 11:12:18"
+    ],
+    "CREATED-ON.lng.value": "2015-12-22T17:31:12Z",
+    "FAUTHOR.lng.value": "admin",
+    "FSTATUS.lng.value": "Released",
+    "MODIFIED-ON.lng.value": "2016-05-27T08:00:19Z",
+    "VERSION.version.value": "1",
+    "DOC-LANGUAGE.lng.value": [
+      "en"
+    ],
+    "FISHREVCOUNTER.lng.value": 2,
+    "ED.lng.value": "GUID-4FC18419-7443-4D3F-9D4C-0018CEE890DC",
+    "FUSERGROUP.logical.element": null,
+    "READ-ACCESS.logical.element": null
+  },
+  "Html": "\n      \n      \t\n      <h1 class=\"title topictitle1\" id=\"MVT-42007CDF0T0J5Z__GUID-5EB8E8A4-264D-4343-8469-B09EE72565D8\" xmlns=\"http://www.w3.org/1999/xhtml\">How do I access MVT</h1>\n      \n      \n   "
+}

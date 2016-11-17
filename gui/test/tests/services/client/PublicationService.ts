@@ -8,7 +8,7 @@ class PublicationServiceTests extends TestBase {
 
     public runTests(): void {
         const publicationService = new PublicationService();
-        const publicationId = "ish:1656863-1-1";
+        const publicationId = "1656863";
 
         describe(`Publication service tests.`, (): void => {
 
@@ -48,8 +48,8 @@ class PublicationServiceTests extends TestBase {
                 publicationService.getPublications().then(publications => {
                     expect(publications).toBeDefined();
                     if (publications) {
-                        expect(publications.length).toBe(5);
-                        expect(publications[0].Title).toBe("Publication MP330");
+                        expect(publications.length).toBe(6);
+                        expect(publications[1].Title).toBe("Publication MP330");
                     }
                     done();
                 }).catch(error => {
@@ -63,8 +63,8 @@ class PublicationServiceTests extends TestBase {
                 publicationService.getPublications().then(publications => {
                     expect(publications).toBeDefined();
                     if (publications) {
-                        expect(publications.length).toBe(5);
-                        expect(publications[0].Title).toBe("Publication MP330");
+                        expect(publications.length).toBe(6);
+                        expect(publications[1].Title).toBe("Publication MP330");
                         expect(spy).not.toHaveBeenCalled();
                     }
                     done();
