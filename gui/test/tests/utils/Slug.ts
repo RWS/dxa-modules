@@ -20,22 +20,18 @@ describe(`Slugify tests.`, (): void => {
     it("slugifies UTF-8 chars", (): void => {
         const publicationLocationUTF8 = slugify("你好 你好吗");
         expect(publicationLocationUTF8).toBe("你好-你好吗");
+        const publicationLocationUTF8Many = slugify(
+            "编译实例  我们使用Scala编译器“scalac”来编译Scala代码。和大多数编译器一样，scalac 接受源文件名和一" +
+            "些选项作为参数，生成一个或者多个目标文件");
+        expect(publicationLocationUTF8Many).toBe(
+            "编译实例--我们使用scala编译器“scalac”来编译scala代码。和大多数编译器一样，scalac-接受源文件名和一" +
+            "些选项作为参数，生成一个或者多个目标文件");
     });
 
     it("slugifies combined punctuation, UTF-8 chars", (): void => {
         // All combines (punctuation, UTF-8)
         const publicationLocationAllCombines = slugify("你好 ! ça va ? Molto bene!");
         expect(publicationLocationAllCombines).toBe("你好---ca-va---molto-bene-");
-    });
-
-    it("slugifies UTF-8 chars resulting more than 250 chars", (): void => {
-        // response is truncated at 250 chars
-        const publicationLocationUTF8250 = slugify(
-            "编译实例  我们使用Scala编译器“scalac”来编译Scala代码。和大多数编译器一样，scalac 接受源文件名和一" +
-            "些选项作为参数，生成一个或者多个目标文件");
-        expect(publicationLocationUTF8250).toBe(
-            "编译实例--我们使用scala编译器“scalac”来编译scala代码。和大多数编译器一样，scalac-接受源文件名和一" +
-            "些选项作为参数，生成一个或者多个目标文件");
     });
 
 });
