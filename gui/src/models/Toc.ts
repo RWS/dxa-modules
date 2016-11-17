@@ -1,7 +1,5 @@
 import { path } from "../utils/Path";
-import { localization } from "../services/client/LocalizationService";
 import { ISitemapItem } from "../interfaces/ServerModels";
-import { TcmId as TcmIdUtils } from "../utils/TcmId";
 
 // Global Catalina dependencies
 import IWebRequest = SDL.Client.Net.IWebRequest;
@@ -47,15 +45,8 @@ export class Toc extends LoadableObject {
 
     /* Overloads */
     protected _executeLoad(reload: boolean): void {
-        const taxonomyId = TcmIdUtils.getTaxonomyId(this._publicationId);
-
-        if (!taxonomyId) {
-            this._onLoadFailed(localization.formatMessage("error.path.not.found", [this._parentId, this._publicationId]));
-        } else {
-            const parentPart = `${TcmIdUtils.removeNamespace(taxonomyId)}-${TcmIdUtils.removeNamespace(this._parentId)}`;
-            const url = path.getAbsolutePath(`gui/mocks/toc-${parentPart}.json`);
-            Net.getRequest(url, this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
-        }
+        const url = path.getAbsolutePath(`gui/mocks/toc-${this._publicationId}-${this._parentId}.json`);
+        Net.getRequest(url, this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
     }
 
     protected _processLoadResult(result: string, webRequest: IWebRequest): void {

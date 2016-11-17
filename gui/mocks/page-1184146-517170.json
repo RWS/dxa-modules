@@ -1,0 +1,57 @@
+{
+  "Id": "517170",
+  "Title": "Distribution and habitat",
+  "Meta": {
+    "ishlogicalref.object.id": 517164,
+    "ishversionref.object.id": 517165,
+    "ishlngref.object.id": 517170,
+    "ishref.object.value": "GUID-F839F09E-47A3-47F2-A0E2-9E929E39DC77",
+    "ishtype.object.value": "ISHModule",
+    "FTITLE.logical.value": "Distribution and habitat",
+    "FDESCRIPTION.logical.value": null,
+    "FCHANGES.version.value": null,
+    "FISHRELEASELABEL.version.value": [
+      "Penguin publication-v1-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/22 11:14:29",
+      "Penguin publication-v2-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/22 13:26:27",
+      "Penguin publication-v3-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/22 13:44:30",
+      "Penguin publication-v3.1.10-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/29 14:32:30",
+      "Penguin publication-v3.1.2-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/22 14:27:38",
+      "Penguin publication-v3.1.3-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/22 14:36:15",
+      "Penguin publication-v3.1.3.1.1-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/22 15:03:16",
+      "Penguin publication-v3.1.3.1.2-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/22 16:07:05",
+      "Penguin publication-v3.1.3.1.4-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/22 16:24:08",
+      "Penguin publication-v3.1.4-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/22 15:02:03",
+      "Penguin publication-v3.1.5-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/28 11:52:09",
+      "Penguin publication-v3.1.6-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/28 14:49:04",
+      "Penguin publication-v3.1.7-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/29 11:09:18",
+      "Penguin publication-v3.1.8-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/29 12:20:02",
+      "Penguin publication-v3.1.9-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/29 13:43:39",
+      "Penguin publication-v4-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/22 13:59:44",
+      "Penguin publication-v5-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/12/03 16:24:48",
+      "Penguin publication-v6-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/12/04 12:08:31",
+      "Penguin publication-v6.1.1-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/12/06 15:01:48",
+      "Penguin publication-v6.1.2-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/12/10 13:51:16",
+      "Penguin publication-v6.1.3-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/12/10 15:16:42",
+      "Penguin publication-v6.1.4-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/12/13 10:52:57",
+      "Penguin publication-v6.1.5-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/12/13 12:18:19",
+      "Penguin publication-v7-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/12/12 11:44:45"
+    ],
+    "CREATED-ON.lng.value": "2016-01-07T03:51:48Z",
+    "FAUTHOR.lng.value": "admin",
+    "FSTATUS.lng.value": "Released",
+    "MODIFIED-ON.lng.value": "2016-05-26T13:49:57Z",
+    "VERSION.version.value": "1",
+    "DOC-LANGUAGE.lng.value": [
+      "en"
+    ],
+    "FISHREVCOUNTER.lng.value": 1,
+    "ED.lng.value": "GUID-C7A95921-4D81-4456-84C6-D5EC8C8C1B0C",
+    "FUSERGROUP.logical.element": [
+      "VUSERGROUPDEFAULTDEPARTMENT"
+    ],
+    "READ-ACCESS.logical.element": [
+      "VUSERGROUPDEFAULTDEPARTMENT"
+    ]
+  },
+  "Html": "\n       \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-F839F09E-47A3-47F2-A0E2-9E929E39DC77__GUID-6DCB8756-DA16-4B08-A715-7254D79AC322\" xmlns=\"http://www.w3.org/1999/xhtml\">Distribution and habitat</h1>\n      \n      \n      \n      <div class=\"body conbody\" xmlns=\"http://www.w3.org/1999/xhtml\"> \n         \t \n         <p class=\"p\">Although all penguin species are native to the southern hemisphere, they are not found only in cold climates, such as Antarctica.\n            In fact, only a few species of penguin actually live so far south. At least 10 species live in the temperate zone; one, the\n            Galápagos Penguin, lives as far north as the Galápagos Islands, but this is only made possible by the cold, rich waters of\n            the Antarctic Humboldt Current that flows around these islands. \n            \t \n         </p>\n         \n         \t \n         <p class=\"p\">Several authors have suggested that penguins are a good example of Bergmann's Rule where larger bodied populations live at\n            higher latitudes than smaller bodied populations. There is some disagreement about this, and several other authors have noted\n            that there are fossil penguin species that contradict this hypothesis and that ocean currents and upwellings are likely to\n            have had a greater effect on species diversity than latitude alone.\n            \t \n         </p>\n         \n         \t \n         <p class=\"p\">Major populations of penguins are found in Antarctica, Argentina, Australia, Chile, New Zealand, and South Africa.\n            \t \n         </p>\n         \n         \t \n         <p class=\"p\"><img class=\"image\" id=\"GUID-F839F09E-47A3-47F2-A0E2-9E929E39DC77__IMAGE_9B6F92F869D74D448636A3CE70A3B2A0\" src=\"/gui/mocks/bin/1184146-515206-16.jpg\" />\n            \t \n         </p>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Parent topic:</strong> <a class=\"link\" title=\"This chapter contains a general overview about penguins in general without a detailed description of a specific type of penguin\" href=\"/1184146/516062/penguin-publication/penguins-overview\">Penguins Overview</a></div>\n            \n         </div>\n         \n      </div>\n   "
+}

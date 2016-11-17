@@ -1,0 +1,34 @@
+{
+  "Id": "164392",
+  "Title": "Multimediaberichten",
+  "Meta": {
+    "ishlogicalref.object.id": 164386,
+    "ishversionref.object.id": 164387,
+    "ishlngref.object.id": 164392,
+    "ishref.object.value": "GUID-D9222E28-4E8D-4D57-A0AB-C9E6C14F2679",
+    "ishtype.object.value": "ISHModule",
+    "FTITLE.logical.value": "multimedia messages",
+    "FDESCRIPTION.logical.value": null,
+    "FCHANGES.version.value": "Change1",
+    "FISHRELEASELABEL.version.value": [
+      "Publication MP330-v1-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2012/09/21 12:27:01",
+      "Publication MP330-v2-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2012/09/24 17:31:39",
+      "Publication MP660-v1-GUID-EB2E82F1-1C76-4032-815C-4E717140A081-2012/09/24 14:57:38",
+      "Publication MP660-v2-GUID-EB2E82F1-1C76-4032-815C-4E717140A081-2012/09/24 17:09:12",
+      "Publication MP330-v3-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2016/02/11 10:42:22"
+    ],
+    "CREATED-ON.lng.value": "2015-12-22T18:27:15Z",
+    "FAUTHOR.lng.value": "admin",
+    "FSTATUS.lng.value": "Released",
+    "MODIFIED-ON.lng.value": "2016-05-26T15:33:11Z",
+    "VERSION.version.value": "1",
+    "DOC-LANGUAGE.lng.value": [
+      "nl"
+    ],
+    "FISHREVCOUNTER.lng.value": 2,
+    "ED.lng.value": "GUID-B644B0B1-C5DC-4206-942B-986A99A40148",
+    "FUSERGROUP.logical.element": null,
+    "READ-ACCESS.logical.element": null
+  },
+  "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-D9222E28-4E8D-4D57-A0AB-C9E6C14F2679__GUID-87FE4C0C-41F2-40FD-ABAB-32563843BFA2\" xmlns=\"http://www.w3.org/1999/xhtml\">Multimediaberichten</h1>\n      \n      \n      \n      <div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">Multimediaberichten kunnen tekst, afbeeldingen en geluid bevatten.</p>\n         \n         \n         <p class=\"p\">De telefoon kan multimediaberichten met geluid wel ontvangen maar niet verzenden. De telefoon ondersteunt multimediaberichten\n            van maximaal 45 kB. Als een bericht groter dan 45 kB is, kunt u het bericht waarschijnlijk niet ontvangen. Afhankelijk van\n            uw netwerk, ontvangt u een tekstbericht waarin een internetadres is opgenomen waar u het multimediabericht kunt bekijken.\n         </p>\n         \n         \n         <p class=\"p\">Als het bericht een afbeelding bevat, wordt deze aangepast aan het display.</p>\n         \n         \n         <p class=\"p\">De volgende indelingen voor multimediaberichten worden ondersteund:</p>\n         \n         \n         <ul class=\"ul\" id=\"GUID-D9222E28-4E8D-4D57-A0AB-C9E6C14F2679__GUID-F5B6FF10-DA09-430A-93BD-530EDA0B5139\">\n            \n            <li class=\"li\">Afbeelding: JPEG, GIF, PNG en BMP.</li>\n            \n            \n            <li class=\"li\">Geluid: MIDI, Scalable Polyphonic MIDI (SP-MIDI), monofone beltonen (RGN) en WB-AMR.</li>\n            \n            \n         </ul>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Hoofdonderwerp:</strong> <a class=\"link\" href=\"/1656868/164481/publication-mp330/berichten\">Berichten</a></div>\n            \n         </div>\n         \n      </div>\n   "
+}

@@ -1,0 +1,26 @@
+{
+  "Id": "ish:1656868-1-512",
+  "Title": "User Guide",
+  "Url": null,
+  "IsAbstract": true,
+  "HasChildNodes": true,
+  "Items": [
+    {
+      "Id": "ish:1656868-164303-16",
+      "Title": "Telefoonlijst",
+      "Url": "/1656868/164303/publication-mp330/telefoonlijst",
+      "IsAbstract": false,
+      "HasChildNodes": true,
+      "Items": [
+        {
+          "Id": "ish:1656868-164446-16",
+          "Title": "Contacten wijzigen",
+          "Url": "/1656868/164446/publication-mp330/contacten-wijzigen",
+          "IsAbstract": false,
+          "HasChildNodes": false,
+          "Items": []
+        }
+      ]
+    }
+  ]
+}

@@ -4,6 +4,7 @@ import { ISitemapItem } from "../../../../src/interfaces/ServerModels";
 import { Promise } from "es6-promise";
 import { hashHistory } from "react-router";
 import { Url } from "../../../../src/utils/Url";
+import { TcmId } from "../../../../src/utils/TcmId";
 
 // Global Catalina dependencies
 import TestBase = SDL.Client.Test.TestBase;
@@ -15,26 +16,28 @@ interface IProps {
     };
 }
 
+const taxnomyId = "5";
+
 const itemsPath: ISitemapItem[] = [
     {
-        Id: "r-5",
+        Id: TcmId.getTaxonomyItemId(taxnomyId, "1"),
         Title: "Root",
-        IsAbstract: false,
-        HasChildNodes: true,
+        IsAbstract: true,
+        HasChildNodes: false,
         Items: []
     },
     {
-        Id: "ch-6",
+        Id: TcmId.getTaxonomyItemId(taxnomyId, "2"),
         Title: "Child",
-        Url: "ish:5-15-66",
+        Url: Url.getPageUrl("pub-id", "2"),
         IsAbstract: false,
-        HasChildNodes: true,
+        HasChildNodes: false,
         Items: []
     },
     {
-        Id: "s-9",
+        Id: TcmId.getTaxonomyItemId(taxnomyId, "3"),
         Title: "Selected",
-        Url: "ish:5-15-99",
+        Url: Url.getPageUrl("pub-id", "3"),
         IsAbstract: false,
         HasChildNodes: false,
         Items: []
@@ -54,11 +57,11 @@ class BreadcrumbsComponent extends TestBase {
                 publicationTitle: "Publication"
             };
 
-            const loadItemsPath = (publicationId: string, pageUrl: string): Promise<ISitemapItem[]> => {
+            const loadItemsPath = (publicationId: string, parentId: string): Promise<ISitemapItem[]> => {
                 const itemsToReturn: ISitemapItem[] = [];
                 for (let item of itemsPath) {
                     itemsToReturn.push(item);
-                    if (item.Url === pageUrl) {
+                    if (item.Id === parentId) {
                         break;
                     }
                 }
@@ -66,7 +69,7 @@ class BreadcrumbsComponent extends TestBase {
             };
 
             beforeEach(() => {
-                hashHistory.push(Url.getPageUrl(data.publicationId, itemsPath[2].Url || ""));
+                hashHistory.push(itemsPath[2].Url || "");
                 const props: IBreadcrumbsProps = {
                     publicationId: data.publicationId,
                     publicationTitle: data.publicationTitle,
@@ -176,7 +179,8 @@ class BreadcrumbsComponent extends TestBase {
             if (!pageId) {
                 return null;
             }
-            return itemsPath.filter(item => item.Url === pageId)[0];
+            const taxonomyItemId = TcmId.getTaxonomyItemId(taxnomyId, pageId);
+            return itemsPath.filter(item => item.Id === taxonomyItemId)[0];
         };
 
         return ReactDOM.render(

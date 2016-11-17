@@ -1,0 +1,34 @@
+{
+  "Id": "164444",
+  "Title": "Editing a contact",
+  "Meta": {
+    "ishlogicalref.object.id": 164440,
+    "ishversionref.object.id": 164441,
+    "ishlngref.object.id": 164444,
+    "ishref.object.value": "GUID-EF99C727-4834-442F-84CE-4864EE505BFF",
+    "ishtype.object.value": "ISHModule",
+    "FTITLE.logical.value": "editing a contact",
+    "FDESCRIPTION.logical.value": null,
+    "FCHANGES.version.value": "Change1",
+    "FISHRELEASELABEL.version.value": [
+      "Publication MP330-v1-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2012/09/21 12:27:01",
+      "Publication MP330-v2-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2012/09/24 17:31:39",
+      "Publication MP660-v1-GUID-EB2E82F1-1C76-4032-815C-4E717140A081-2012/09/24 14:57:38",
+      "Publication MP660-v2-GUID-EB2E82F1-1C76-4032-815C-4E717140A081-2012/09/24 17:09:12",
+      "Publication MP330-v3-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2016/02/11 10:42:22"
+    ],
+    "CREATED-ON.lng.value": "2015-12-22T18:27:22Z",
+    "FAUTHOR.lng.value": "admin",
+    "FSTATUS.lng.value": "Released",
+    "MODIFIED-ON.lng.value": "2016-05-27T08:08:14Z",
+    "VERSION.version.value": "1",
+    "DOC-LANGUAGE.lng.value": [
+      "en"
+    ],
+    "FISHREVCOUNTER.lng.value": 2,
+    "ED.lng.value": "GUID-A1A5076A-3B15-4FC9-B12D-EF7E4F734A5F",
+    "FUSERGROUP.logical.element": null,
+    "READ-ACCESS.logical.element": null
+  },
+  "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-EF99C727-4834-442F-84CE-4864EE505BFF__GUID-76ED1FBE-8588-4E3F-BC4F-D09EF37C0105\" xmlns=\"http://www.w3.org/1999/xhtml\">Editing a contact</h1>\n      \n      \n      <div class=\"body taskbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <ol class=\"ol steps\" id=\"GUID-EF99C727-4834-442F-84CE-4864EE505BFF__GUID-C8B78C26-E2F2-4FA0-8B32-98A678469AD4\">\n            <li class=\"li step\">\n               <span class=\"ph cmd\">Search for the contact you want to edit and press <samp class=\"ph msgph\">Detail</samp>. </span>\n               \n            </li>\n            \n            <li class=\"li step\">\n               <span class=\"ph cmd\">Scroll to the name, number or text item you want to edit, and press <samp class=\"ph msgph\">Options</samp>. </span>\n               \n            </li>\n            \n            <li class=\"li step\">\n               <span class=\"ph cmd\">Select <samp class=\"ph msgph\">Edit Name</samp>, <samp class=\"ph msgph\">Edit Number</samp>, or <samp class=\"ph msgph\">Edit Detail</samp>, and edit the name, number, or text and press <samp class=\"ph msgph\">OK</samp>.</span>\n               \n            </li>\n            \n         </ol>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Parent topic:</strong> <a class=\"link\" title=\"You can save your contacts in the phone’s memory (internal phone book) and in the SIM card’s memory (SIM phone book).\" href=\"/1656863/164301/publication-mp330/phone-book\">Phone book</a></div>\n            \n         </div>\n         \n      </div>\n   "
+}

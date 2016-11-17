@@ -163,7 +163,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
     public componentWillMount(): void {
         const { services } = this.context;
         const { publicationId, pageIdOrPublicationTitle } = this.props.params;
-        const pageId = TcmId.isValid(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
+        const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
         const getRootItems = (path?: string[]): void => {
             // Get the data for the Toc
             services.taxonomyService.getSitemapRoot(publicationId).then(
@@ -205,9 +205,9 @@ export class PublicationContent extends React.Component<IPublicationContentProps
      */
     public componentWillReceiveProps(nextProps: IPublicationContentProps): void {
         const { pageIdOrPublicationTitle } = this.props.params;
-        const pageId = TcmId.isValid(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
+        const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
         const nextpageIdOrPublicationTitle = nextProps.params.pageIdOrPublicationTitle;
-        const nextPageId = TcmId.isValid(nextpageIdOrPublicationTitle) ? nextpageIdOrPublicationTitle : null;
+        const nextPageId = TcmId.isValidPageId(nextpageIdOrPublicationTitle) ? nextpageIdOrPublicationTitle : null;
 
         if (nextPageId) {
             if (!pageId || nextPageId !== pageId) {
@@ -233,13 +233,16 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         const { publicationId } = this.props.params;
         const pageService = services.pageService;
         const { selectedTocItem, isPageLoading } = this.state;
-        const currentUrl = selectedTocItem ? selectedTocItem.Url : null;
-        const nextUrl = nextState.selectedTocItem ? nextState.selectedTocItem.Url : null;
+        const currentId = selectedTocItem ? selectedTocItem.Id : null;
+        const nextId = nextState.selectedTocItem ? nextState.selectedTocItem.Id : null;
         if (nextState.selectedTocItem && !nextState.selectedTocItem.Url) {
             this._page.content = `<h1 class="title topictitle1">${nextState.selectedTocItem.Title}</h1>`;
+            return;
         }
-        if (nextUrl && (isPageLoading || currentUrl !== nextUrl)) {
-            pageService.getPageInfo(publicationId, nextUrl).then(
+        if (nextId && (isPageLoading || currentId !== nextId)) {
+            // After upgrading to DXA 1.7 use TcmId.getItemIdFromTaxonomyId
+            const pageId = TcmId.parseId(nextId);
+            pageService.getPageInfo(publicationId, pageId ? pageId.itemId : nextId).then(
                 this._onPageContentRetrieved.bind(this),
                 this._onPageContentRetrievFailed.bind(this));
         }
@@ -265,7 +268,10 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     activeItemPath={activeTocItemPath}
                     rootItems={rootItems}
                     loadChildItems={(parentId: string): Promise<ISitemapItem[]> => {
-                        return taxonomyService.getSitemapItems(publicationId, parentId);
+                        // TODO: this conversion will not be needed when upgrading to DXA 1.7
+                        // https://jira.sdl.com/browse/TSI-2131
+                        const taxonomyItemId = TcmId.getTaxonomyItemId("1", parentId);
+                        return taxonomyService.getSitemapItems(publicationId, taxonomyItemId || parentId);
                     } }
                     onSelectionChanged={this._onTocSelectionChanged.bind(this)}
                     error={tocError} />
@@ -276,16 +282,13 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     selectedItem={selectedTocItem}
                     />
                 <Page
-                    getPageLocationPath={(selectedPageId: string): string => {
-                        return Url.getPageUrl(publicationId, selectedPageId);
-                    } }
                     showActivityIndicator={isPageLoading || false}
                     content={content}
                     error={error}
-                    onNavigate={(selectedPageId: string): void => {
+                    onNavigate={(url: string): void => {
                         /* istanbul ignore else */
                         if (router) {
-                            router.push(Url.getPageUrl(publicationId, selectedPageId));
+                            router.push(url);
                         }
                     } } />
             </section>
@@ -301,11 +304,10 @@ export class PublicationContent extends React.Component<IPublicationContentProps
 
     private _onTocSelectionChanged(sitemapItem: ISitemapItem, path: string[]): void {
         const page = this._page;
-        const { publicationTitle } = this.state;
         const { router, services } = this.context;
         const { publicationId, pageIdOrPublicationTitle } = this.props.params;
         const publicationService = services.publicationService;
-        const pageId = TcmId.isValid(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
+        const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
 
         page.error = null;
 
@@ -320,10 +322,10 @@ export class PublicationContent extends React.Component<IPublicationContentProps
 
                 /* istanbul ignore else */
                 if (router) {
-                    const navPath = sitemapItem.Url
-                        ? Url.getPageUrl(publicationId, sitemapItem.Url, publicationTitle, sitemapItem.Title)
-                        : Url.getPublicationUrl(publicationId, publicationTitle);
-                    if (sitemapItem && sitemapItem.Url === pageId) {
+                    const navPath = sitemapItem.Url || Url.getPublicationUrl(publicationId, title);
+                    // After upgrading to DXA 1.7 use TcmId.getItemIdFromTaxonomyId
+                    const siteMapPageId = TcmId.parseId(sitemapItem.Id);
+                    if (siteMapPageId && siteMapPageId.itemId === pageId) {
                         router.replace(navPath);
                     }
                     else {
