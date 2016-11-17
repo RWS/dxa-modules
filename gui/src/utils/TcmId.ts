@@ -1,4 +1,4 @@
-import { CdItemTypes, TcmId as TcmIdModel } from "../interfaces/TcmId";
+import { CdItemTypes, ITcmId as TcmIdModel } from "../interfaces/TcmId";
 
 /**
  * Regex to parse tcm uri
@@ -20,22 +20,6 @@ const TAXONOMY_ID_FORMAT_REGEX = /^t([0-9]+)-(p|k)([0-9]+)$/i;
 export class TcmId {
 
     /**
-     * Validates if an id has a valid format
-     *
-     * @static
-     * @param {string | null | undefined} id Id to validate
-     * @returns {boolean}
-     *
-     * @memberOf TcmId
-     */
-    public static isValid(id: string | null | undefined): boolean {
-        if (typeof id === "string") {
-            return !!id.match(TCM_ID_FORMAT_REGEX);
-        }
-        return false;
-    }
-
-    /**
      * Validates if a page id is valid
      *
      * @static
@@ -46,7 +30,7 @@ export class TcmId {
      */
     public static isValidPageId(id: string | null | undefined): boolean {
         if (typeof id === "string") {
-            return !isNaN(parseInt(id, 10));
+            return !isNaN(TcmId.parseInt(id));
         }
         return false;
     }
@@ -69,7 +53,7 @@ export class TcmId {
             }
             return `t${taxonomyId}-p${match[3]}`;
         }
-        const isNumber = !isNaN(parseInt(id, 10));
+        const isNumber = !isNaN(TcmId.parseInt(id));
         if (isNumber) {
             return `t${taxonomyId}-p${id}`;
         }
@@ -93,7 +77,7 @@ export class TcmId {
                     namespace: match[1],
                     publicationId: match[2],
                     itemId: match[3],
-                    itemType: parseInt(match[4], 10)
+                    itemType: TcmId.parseInt(match[4])
                 };
             }
         }
@@ -101,40 +85,29 @@ export class TcmId {
     }
 
     /**
-     * Remove a namespace from an id
-     * Eg "ish:123-1-1" becomes "123-1-1"
+     * Get the item id (page or keyword) from a taxonomy item id
      *
      * @static
-     * @param {string} id Id to remove the namespace form
-     * @returns {string}
-     *
-     * @memberOf TcmUri
-     */
-    public static removeNamespace(id: string): string {
-        const match = id.match(TCM_ID_FORMAT_REGEX);
-        if (match) {
-            return `${match[2]}-${match[3]}-${match[4]}`;
-        }
-        return id;
-    }
-
-    /**
-     * Get the item id (page or keyword) from a taxonomy id
-     *
-     * @static
-     * @param {string | undefined} taxonomyId Taxonomy id
+     * @param {string | undefined} taxonomyItemId Taxonomy item id
      * @returns {(string | undefined)}
      *
      * @memberOf TcmId
      */
-    public static getItemIdFromTaxonomyId(taxonomyId: string | undefined): string | undefined {
-        if (typeof taxonomyId === "string") {
-            const match = taxonomyId.match(TAXONOMY_ID_FORMAT_REGEX);
+    public static getItemIdFromTaxonomyItemId(taxonomyItemId: string | undefined): string | undefined {
+        if (typeof taxonomyItemId === "string") {
+            const match = taxonomyItemId.match(TAXONOMY_ID_FORMAT_REGEX);
             if (match) {
-                return match[2];
+                return match[3];
             }
         }
         return undefined;
+    }
+
+    private static parseInt(value: string): number {
+        if (/^(\-|\+)?([0-9]+|Infinity)$/.test(value)) {
+            return Number(value);
+        }
+        return NaN;
     }
 
 }

@@ -2,9 +2,9 @@
  * Tcm id
  *
  * @export
- * @interface TcmId
+ * @interface ITcmId
  */
-export interface TcmId {
+export interface ITcmId {
     /**
      * Namespace (eg ish, tcm)
      *
