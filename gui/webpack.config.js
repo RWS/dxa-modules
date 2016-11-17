@@ -69,7 +69,9 @@ module.exports = (isTest, isDebug) => {
         config.plugins.push(new webpack.optimize.UglifyJsPlugin({
             compress: {
                 warnings: false
-            }
+            },
+            sourceMap: false,
+            mangle: false
         }));
     }
 
