@@ -6,12 +6,7 @@ const gulpWrapCss = require('../gulp-plugins/wrap-css');
 const gulpDebug = require('gulp-debug');
 const gulpChmod = require('gulp-chmod');
 const gulpIf = require('gulp-if');
-const gulpPostCss = require('gulp-postcss');
 const gulpCsso = require('gulp-csso');
-const autoPrefixer = require('autoprefixer')({
-    browsers: ['last 1 version', 'ie 10', 'ie 11'],
-    remove: false
-});
 
 /**
  * Add a specific scope to the dita-ot stylesheets.
