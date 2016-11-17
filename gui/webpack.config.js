@@ -41,11 +41,7 @@ module.exports = isTest => {
             }]
         },
         plugins: [
-            extractCSS,
-            new webpack.optimize.CommonsChunkPlugin({
-                name: 'vendor',
-                filename: 'vendor.bundle.js'
-            })
+            extractCSS
         ]
     };
 
@@ -62,6 +58,11 @@ module.exports = isTest => {
                 path.resolve(__dirname, 'src')
             ]
         });
+    } else {
+        config.plugins.push(new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendor',
+            filename: 'vendor.bundle.js'
+        }));
     }
 
     return config;
