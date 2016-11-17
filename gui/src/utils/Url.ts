@@ -16,7 +16,7 @@ export class Url {
     };
 
     /**
-     * Gets the publication location relative path
+     * Creates a publication url
      *
      * @static
      * @param {string} publicationId Publication id
@@ -34,7 +34,7 @@ export class Url {
     }
 
     /**
-     * Gets the page location relative path
+     * Creates a page url
      *
      * @static
      * @param {string} publicationId Publication id

@@ -20,6 +20,22 @@ enum CDItemTypes {
 export class TcmId {
 
     /**
+     * Validates if an id has a valid format
+     *
+     * @static
+     * @param {string | null | undefined} id Id to validate
+     * @returns {boolean}
+     *
+     * @memberOf TcmId
+     */
+    public static isValid(id: string | null | undefined): boolean {
+        if (typeof id === "string") {
+            return !!id.match(TCM_ID_FORMAT_REGEX);
+        }
+        return false;
+    }
+
+    /**
      * Get the taxonomy id from a publication id
      *
      * @static

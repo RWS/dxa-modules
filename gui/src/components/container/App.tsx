@@ -1,4 +1,4 @@
-import { Router, Route, IndexRedirect, History } from "react-router";
+import { Router, Route, IndexRedirect, Redirect, History } from "react-router";
 import { IServices } from "../../interfaces/Services";
 import { Home } from "./Home";
 import { PublicationContent } from "./PublicationContent";
@@ -64,9 +64,8 @@ export class App extends React.Component<IAppProps, {}> {
             <Router history={history}>
                 <Route path="/" component={Home} >
                     <IndexRedirect to="/ish:1656863-1-1" />
-                    <Route path=":publicationId" component={PublicationContent}>
-                        <Route path=":pageId(/:pageTitle)" component={PublicationContent} />
-                    </Route>
+                    <Redirect from="home" to="/ish:1656863-1-1" />
+                    <Route path=":publicationId(/:pageIdOrPublicationTitle)(/:publicationTitle)(/:pageTitle)" component={PublicationContent} />
                 </Route >
             </Router >
         );
