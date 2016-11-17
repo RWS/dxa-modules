@@ -1,4 +1,4 @@
-import * as slug from "slug";
+import { slugify } from "./Slug";
 
 /**
  * Url helper methods
@@ -7,13 +7,6 @@ import * as slug from "slug";
  * @class Url
  */
 export class Url {
-
-    /**
-     * Options to slugify titles in Url
-     */
-    private static SlugOptions: slug.Options = {
-        mode: "rfc3986"
-    };
 
     /**
      * Creates a publication url
@@ -28,7 +21,7 @@ export class Url {
     public static getPublicationUrl(publicationId: string, publicationTitle?: string): string {
         let url = `/${encodeURIComponent(publicationId)}`;
         if (publicationTitle) {
-            url += `/${encodeURIComponent(slug(publicationTitle, Url.SlugOptions))}`;
+            url += `/${encodeURIComponent(slugify(publicationTitle))}`;
         }
         return url;
     }
@@ -50,9 +43,9 @@ export class Url {
 
         let url = `/${encodeURIComponent(publicationId)}/${encodeURIComponent(pageId)}`;
         if (publicationTitle) {
-            url += `/${encodeURIComponent(slug(publicationTitle, Url.SlugOptions))}`;
+            url += `/${encodeURIComponent(slugify(publicationTitle))}`;
             if (pageTitle) {
-                url += `/${encodeURIComponent(slug(pageTitle, Url.SlugOptions))}`;
+                url += `/${encodeURIComponent(slugify(pageTitle))}`;
             }
         }
 
