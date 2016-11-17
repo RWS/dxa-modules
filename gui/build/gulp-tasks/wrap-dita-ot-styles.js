@@ -6,12 +6,7 @@ const gulpWrapCss = require('../gulp-plugins/wrap-css');
 const gulpDebug = require('gulp-debug');
 const gulpChmod = require('gulp-chmod');
 const gulpIf = require('gulp-if');
-const gulpPostCss = require('gulp-postcss');
 const gulpCsso = require('gulp-csso');
-const autoPrefixer = require('autoprefixer')({
-    browsers: ['last 1 version', 'ie 10', 'ie 11'],
-    remove: false
-});
 
 /**
  * Add a specific scope to the dita-ot stylesheets.
@@ -32,8 +27,6 @@ module.exports = (buildOptions, gulp) => {
             .pipe(gulpIf('*ltr.css', gulpWrapCss({ globalRule: '.page-content.ltr' })))
             .pipe(gulpIf('*rtl.css', gulpWrapCss({ globalRule: '.page-content.rtl' })))
             .pipe(gulpDebug({ title: 'Wrapped css into a single class' }))
-            .pipe(gulpPostCss([autoPrefixer]))
-            .pipe(gulpDebug({ title: 'Auto prefixer output' }))
             .pipe(gulpIf(!buildOptions.isDebug, gulpCsso()))
             .pipe(gulpIf(!buildOptions.isDebug, gulpDebug({ title: 'Uglified output' })))
             .pipe(gulp.dest(buildOptions.distPath + 'dita-ot/styles/'));

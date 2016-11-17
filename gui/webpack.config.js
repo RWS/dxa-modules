@@ -31,10 +31,17 @@ module.exports = isTest => {
                 loader: 'url-loader?limit=100000'
             }, {
                 test: /\.css$/,
-                loader: extractCSS.extract(['css-loader'])
+                loader: extractCSS.extract([
+                    'css-loader',
+                    'postcss-loader'
+                ])
             }, {
                 test: /\.less$/,
-                loader: extractCSS.extract(['css-loader', 'less-loader'])
+                loader: extractCSS.extract([
+                    'css-loader',
+                    'postcss-loader',
+                    'less-loader'
+                ])
             }, {
                 test: /\.tsx?$/,
                 loader: 'ts-loader'
