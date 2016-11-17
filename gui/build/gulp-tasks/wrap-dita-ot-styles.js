@@ -32,8 +32,6 @@ module.exports = (buildOptions, gulp) => {
             .pipe(gulpIf('*ltr.css', gulpWrapCss({ globalRule: '.page-content.ltr' })))
             .pipe(gulpIf('*rtl.css', gulpWrapCss({ globalRule: '.page-content.rtl' })))
             .pipe(gulpDebug({ title: 'Wrapped css into a single class' }))
-            .pipe(gulpPostCss([autoPrefixer]))
-            .pipe(gulpDebug({ title: 'Auto prefixer output' }))
             .pipe(gulpIf(!buildOptions.isDebug, gulpCsso()))
             .pipe(gulpIf(!buildOptions.isDebug, gulpDebug({ title: 'Uglified output' })))
             .pipe(gulp.dest(buildOptions.distPath + 'dita-ot/styles/'));
