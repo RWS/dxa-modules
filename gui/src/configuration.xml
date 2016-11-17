@@ -22,6 +22,7 @@
         <resourceGroup name="Sdl.DitaDelivery">
             <files>
                 <file name="stylesheets/main.css" />
+                <file name="vendor.bundle.js" />
                 <file name="main.bundle.js" />
             </files>
             <dependencies>
