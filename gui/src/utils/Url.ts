@@ -58,6 +58,8 @@ export class Url {
     }
 
     private static _processTitle(title: string): string {
+        // trim
+        title = title.trim();
         // slugify
         title = slugify(title);
         // Encode

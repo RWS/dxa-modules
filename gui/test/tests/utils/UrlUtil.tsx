@@ -37,6 +37,17 @@ class UrlUtil extends TestBase {
                 expect(publicationLocation).toBe(`/ish%3A777-1-1/${expectedTitle}`);
             });
 
+            it("trims the titles on the url", (): void => {
+                const title = " Activities \n          ";
+                const expectedTitle = "activities";
+
+                const pageLocation = Url.getPageUrl("pub-id", "page-id", title, title);
+                expect(pageLocation).toBe(`/pub-id/page-id/${expectedTitle}/${expectedTitle}`);
+
+                const publicationLocation = Url.getPublicationUrl("pub-id", title);
+                expect(publicationLocation).toBe(`/pub-id/${expectedTitle}`);
+            });
+
         });
     }
 }
