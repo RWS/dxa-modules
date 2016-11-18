@@ -14,7 +14,7 @@
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <SdlDeliveryVersion>8.5.0-beta-201611151607</SdlDeliveryVersion>
+    <SdlDeliveryVersion>8.5.0-beta-201611181009</SdlDeliveryVersion>
     <DxaFrameworkVersion>1.7.0-alpha-201611081551</DxaFrameworkVersion>
     <ExperienceManagerVersion>8.3.0</ExperienceManagerVersion>
   </PropertyGroup>
