@@ -57,6 +57,8 @@
     "typings-core": "~1.4.0",
     "url-loader": "~0.5.7",
     "webpack": "~2.1.0-beta.26",
+    "webpack-dev-middleware": "~1.8.4",
+    "webpack-hot-middleware": "~2.13.2",
     "xmldom": "~0.1.22",
     "yargs": "~4.8.1"
   },

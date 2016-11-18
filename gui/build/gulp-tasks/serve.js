@@ -14,8 +14,19 @@ module.exports = function (buildOptions, gulp, browserSync, commonFolderName) {
     const reload = browserSync.reload;
     const portfinder = require('portfinder');
     portfinder.basePort = buildOptions.ports.httpServer;
+    const webpackDevMiddleware = require('webpack-dev-middleware');
+    const webpackHotMiddleware = require('webpack-hot-middleware');
 
-    return function (cb, addWatcher) {
+    return function (cb, webpackInstance, addWatcher) {
+        const webpackConfig = webpackInstance.config;
+        const webpackCompiler = webpackInstance.compiler;
+        // Node.js middleware that compiles application in watch mode with HMR support
+        // http://webpack.github.io/docs/webpack-dev-middleware.html
+        const webpackDevMiddlewareInstance = webpackDevMiddleware(webpackCompiler, {
+            publicPath: webpackConfig.output.publicPath,
+            stats: webpackConfig.stats,
+        });
+
         addWatcher = typeof addWatcher === 'boolean' ? addWatcher : buildOptions.isDebug;
         if (addWatcher) {
             console.log('Setting up file watcher');
@@ -102,11 +113,18 @@ module.exports = function (buildOptions, gulp, browserSync, commonFolderName) {
                                 req.url = '/index.html';
                             }
                             next();
-                        }
+                        },
+                        webpackDevMiddlewareInstance,
+                        webpackHotMiddleware(webpackCompiler)
                     ]
                 };
 
-                browserSync.init(browserSyncOptions, cb);
+                webpackCompiler.plugin('done', stats => {
+                    if (!browserSync.active) {
+                        browserSync.init(browserSyncOptions, cb);
+                    }
+                });
+
             }
         });
     };

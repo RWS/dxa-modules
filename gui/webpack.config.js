@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const extractCSS = new ExtractTextPlugin('stylesheets/[name].css');
 
-module.exports = isTest => {
+module.exports = (isTest, isDebug) => {
     const config = {
         entry: {
             main: './src/Main.tsx',
@@ -14,6 +14,7 @@ module.exports = isTest => {
         },
         output: {
             path: path.resolve(__dirname + '/dist'),
+            publicPath: '/',
             filename: '[name].bundle.js'
         },
         devtool: 'source-map',
@@ -26,30 +27,44 @@ module.exports = isTest => {
             extensions: ['.ts', '.tsx', '.js', '.css', '.less']
         },
         module: {
-            loaders: [{
-                test: /\.otf$/,
-                loader: 'url-loader?limit=100000'
-            }, {
-                test: /\.css$/,
-                loader: extractCSS.extract([
-                    'css-loader',
-                    'postcss-loader'
-                ])
-            }, {
-                test: /\.less$/,
-                loader: extractCSS.extract([
-                    'css-loader',
-                    'postcss-loader',
-                    'less-loader'
-                ])
-            }, {
-                test: /\.tsx?$/,
-                loader: 'ts-loader'
-            }]
+            rules: [
+                {
+                    test: /\.otf$/,
+                    loader: 'url-loader?limit=100000'
+                }, {
+                    test: /\.css$/,
+                    loader: extractCSS.extract([
+                        'css-loader',
+                        'postcss-loader'
+                    ])
+                }, {
+                    test: /\.less$/,
+                    loader: extractCSS.extract([
+                        'css-loader',
+                        'postcss-loader',
+                        'less-loader'
+                    ])
+                }, {
+                    test: /\.tsx?$/,
+                    loader: 'ts-loader'
+                }
+            ]
         },
         plugins: [
             extractCSS
-        ]
+        ],
+        // What information should be printed to the console
+        stats: {
+            colors: true,
+            reasons: isDebug,
+            hash: isDebug,
+            version: isDebug,
+            timings: true,
+            chunks: isDebug,
+            chunkModules: isDebug,
+            cached: isDebug,
+            cachedAssets: isDebug,
+        },
     };
 
     if (isTest) {
@@ -70,6 +85,19 @@ module.exports = isTest => {
             name: 'vendor',
             filename: 'vendor.bundle.js'
         }));
+    }
+
+    if (isDebug) {
+        // Hot Module Replacement (HMR)
+        const hotMiddlewareScript = 'webpack-hot-middleware/client';
+        for (let entryName in config.entry) {
+            if (entryName !== 'vendor') {
+                let entryValue = config.entry[entryName];
+                config.entry[entryName] = [entryValue, hotMiddlewareScript];
+            }
+        }
+        config.plugins.push(new webpack.HotModuleReplacementPlugin());
+        config.plugins.push(new webpack.NoErrorsPlugin());
     }
 
     return config;
