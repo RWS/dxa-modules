@@ -26,7 +26,6 @@ class PageComponent extends TestBase {
                 // Show
                 let page = this._renderComponent({
                     showActivityIndicator: true,
-                    getPageLocationPath: (): void => { },
                     onNavigate: (): void => { }
                 }, target);
                 // tslint:disable-next-line:no-any
@@ -36,7 +35,6 @@ class PageComponent extends TestBase {
                 // Hide
                 page = this._renderComponent({
                     showActivityIndicator: false,
-                    getPageLocationPath: (): void => { },
                     onNavigate: (): void => { }
                 }, target);
                 // tslint:disable-next-line:no-any
@@ -48,7 +46,6 @@ class PageComponent extends TestBase {
                 const page = this._renderComponent({
                     showActivityIndicator: false,
                     error: "Error!",
-                    getPageLocationPath: (): void => { },
                     onNavigate: (): void => { }
                 }, target);
 
@@ -64,7 +61,6 @@ class PageComponent extends TestBase {
                 const page = this._renderComponent({
                     showActivityIndicator: false,
                     content: pageContent,
-                    getPageLocationPath: (): void => { },
                     onNavigate: (): void => { }
                 }, target);
 
@@ -81,7 +77,6 @@ class PageComponent extends TestBase {
                 const page = this._renderComponent({
                     showActivityIndicator: false,
                     content: pageContent,
-                    getPageLocationPath: (): void => { },
                     onNavigate: (pageId: string): void => {
                         expect(pageId).toBe("ish:12-34-56");
                         done();

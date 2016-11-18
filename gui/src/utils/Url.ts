@@ -1,4 +1,9 @@
-import * as slug from "slug";
+import { slugify } from "./Slug";
+
+/**
+ * Maximum characters for a title
+ */
+const TITLE_MAX_CHARS = 250;
 
 /**
  * Url helper methods
@@ -7,13 +12,6 @@ import * as slug from "slug";
  * @class Url
  */
 export class Url {
-
-    /**
-     * Options to slugify titles in Url
-     */
-    private static SlugOptions: slug.Options = {
-        lower: true
-    };
 
     /**
      * Creates a publication url
@@ -28,7 +26,7 @@ export class Url {
     public static getPublicationUrl(publicationId: string, publicationTitle?: string): string {
         let url = `/${encodeURIComponent(publicationId)}`;
         if (publicationTitle) {
-            url += `/${encodeURIComponent(slug(publicationTitle, Url.SlugOptions))}`;
+            url += `/${Url._processTitle(publicationTitle)}`;
         }
         return url;
     }
@@ -50,12 +48,26 @@ export class Url {
 
         let url = `/${encodeURIComponent(publicationId)}/${encodeURIComponent(pageId)}`;
         if (publicationTitle) {
-            url += `/${encodeURIComponent(slug(publicationTitle, Url.SlugOptions))}`;
+            url += `/${Url._processTitle(publicationTitle)}`;
             if (pageTitle) {
-                url += `/${encodeURIComponent(slug(pageTitle, Url.SlugOptions))}`;
+                url += `/${Url._processTitle(pageTitle)}`;
             }
         }
 
         return url;
+    }
+
+    private static _processTitle(title: string): string {
+        // trim
+        title = title.trim();
+        // slugify
+        title = slugify(title);
+        // Encode
+        title = encodeURIComponent(title);
+        // Truncate
+        if (title.length > TITLE_MAX_CHARS) {
+            title = title.substring(0, 250);
+        }
+        return title;
     }
 }

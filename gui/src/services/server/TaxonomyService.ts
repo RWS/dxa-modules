@@ -28,19 +28,19 @@ export class TaxonomyService implements ITaxonomyService {
      * @memberOf DataStoreServer
      */
     public getSitemapRoot(publicationId: string): Promise<ISitemapItem[]> {
-        return this.getSitemapItems(publicationId);
+        return this.getSitemapItems(publicationId, "root");
     }
 
     /**
      * Get the site map items for a parent
      *
      * @param {string} publicationId Publication Id
-     * @param {string} [parentId] The parent id
+     * @param {string} parentId The parent id
      * @returns {Promise<ISitemapItem[]>} Promise to return the items
      *
      * @memberOf DataStoreServer
      */
-    public getSitemapItems(publicationId: string, parentId?: string): Promise<ISitemapItem[]> {
+    public getSitemapItems(publicationId: string, parentId: string): Promise<ISitemapItem[]> {
         const { error, children } = this._mockDataToc;
         if (error) {
             return Promise.reject(error);

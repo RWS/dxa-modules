@@ -240,20 +240,20 @@ class PublicationContentComponent extends TestBase {
 
             it("updates the toc when the location changes", (done: () => void): void => {
                 const first: ISitemapItem = {
-                    Id: "ish:123-1-1024",
+                    Id: "1",
                     HasChildNodes: false,
                     IsAbstract: false,
                     Items: [],
                     Title: "First page!",
-                    Url: "ish:123-1-16"
+                    Url: "1"
                 };
                 const second: ISitemapItem = {
-                    Id: "ish:123-2-1024",
+                    Id: "2",
                     HasChildNodes: false,
                     IsAbstract: false,
                     Items: [],
                     Title: "Second page!",
-                    Url: "ish:123-2-16"
+                    Url: "2"
                 };
 
                 services.taxonomyService.setMockDataToc(null, [first, second]);
