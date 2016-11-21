@@ -57,7 +57,8 @@ const buildOptions = {
 };
 let webpackInstance = {
     compiler: null,
-    config: null
+    config: null,
+    onBundleCreated: null
 };
 
 // Log info
@@ -70,7 +71,7 @@ const commonFolderName = function () {
 // Tasks
 const runTSLint = require('./build/gulp-tasks/run-tslint')(buildOptions, gulp);
 const serve = require('./build/gulp-tasks/serve')(buildOptions, gulp, browserSync, commonFolderName);
-const runKarma = require('./build/gulp-tasks/run-karma')(buildOptions, browserSync);
+const runKarma = require('./build/gulp-tasks/run-karma')(buildOptions);
 const runTests = function (singleRun, cb, onTestRunCompleted) {
     return function (err) {
         var onTestCompleted = function (err, results) {
@@ -84,7 +85,7 @@ const runTests = function (singleRun, cb, onTestRunCompleted) {
                 if (err) {
                     cb(err);
                 } else {
-                    runKarma(singleRun, onTestCompleted, onTestRunCompleted);
+                    runKarma(webpackInstance, singleRun, onTestCompleted, onTestRunCompleted);
                 }
             }, webpackInstance, !singleRun);
         }

@@ -123,8 +123,10 @@ module.exports = function (buildOptions, gulp, browserSync, commonFolderName) {
                     if (!browserSync.active) {
                         browserSync.init(browserSyncOptions, cb);
                     }
+                    if (typeof webpackInstance.onBundleCreated === "function") {
+                        webpackInstance.onBundleCreated();
+                    }
                 });
-
             }
         });
     };
