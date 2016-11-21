@@ -8,7 +8,7 @@
  * @param {Object} browserSync BrowserSync instance.
  * @param {function} commonFolderName Returns the name of the Catalina Common folder.
  */
-module.exports = function (buildOptions, gulp, browserSync, commonFolderName) {
+module.exports = function(buildOptions, gulp, browserSync, commonFolderName) {
     const _ = require('lodash');
     const runSequence = require('run-sequence').use(gulp);
     const reload = browserSync.reload;
@@ -17,15 +17,9 @@ module.exports = function (buildOptions, gulp, browserSync, commonFolderName) {
     const webpackDevMiddleware = require('webpack-dev-middleware');
     const webpackHotMiddleware = require('webpack-hot-middleware');
 
-    return function (cb, webpackInstance, addWatcher) {
+    return function(cb, webpackInstance, addWatcher) {
         const webpackConfig = webpackInstance.config;
         const webpackCompiler = webpackInstance.compiler;
-        // Node.js middleware that compiles application in watch mode with HMR support
-        // http://webpack.github.io/docs/webpack-dev-middleware.html
-        const webpackDevMiddlewareInstance = webpackDevMiddleware(webpackCompiler, {
-            publicPath: webpackConfig.output.publicPath,
-            stats: webpackConfig.stats,
-        });
 
         addWatcher = typeof addWatcher === 'boolean' ? addWatcher : buildOptions.isDebug;
         if (addWatcher) {
@@ -37,7 +31,7 @@ module.exports = function (buildOptions, gulp, browserSync, commonFolderName) {
                 buildOptions.sourcesPath + '**/*.html',
                 buildOptions.sourcesPath + '**/*.resjson'
             ]);
-            watcher.on('change', function (event) {
+            watcher.on('change', function(event) {
                 console.log('File ' + event.path + ' was ' + event.type + '.');
                 if (event.type === 'changed') {
                     runSequence(['run-tslint', 'update-version'], 'copy-sources', reload);
@@ -113,20 +107,38 @@ module.exports = function (buildOptions, gulp, browserSync, commonFolderName) {
                                 req.url = '/index.html';
                             }
                             next();
-                        },
-                        webpackDevMiddlewareInstance,
-                        webpackHotMiddleware(webpackCompiler)
+                        }
                     ]
                 };
 
-                webpackCompiler.plugin('done', stats => {
-                    if (!browserSync.active) {
-                        browserSync.init(browserSyncOptions, cb);
-                    }
-                    if (typeof webpackInstance.onBundleCreated === "function") {
-                        webpackInstance.onBundleCreated();
-                    }
-                });
+                if (buildOptions.isDebug && !buildOptions.isDefaultTask) {
+                    // Node.js middleware that compiles application in watch mode with HMR support
+                    // http://webpack.github.io/docs/webpack-dev-middleware.html
+                    const webpackDevMiddlewareInstance = webpackDevMiddleware(webpackCompiler, {
+                        publicPath: webpackConfig.output.publicPath,
+                        stats: webpackConfig.stats,
+                    });
+                    // Enable Hot Module Replacement
+                    browserSyncOptions.middleware.push(webpackDevMiddlewareInstance);
+                    browserSyncOptions.middleware.push(webpackHotMiddleware(webpackCompiler));
+
+                    // Close middleware when browsersync closes
+                    browserSync.emitter.on('service:exit', () => {
+                        webpackDevMiddlewareInstance.close();
+                    });
+
+                    webpackCompiler.plugin('done', stats => {
+                        if (!browserSync.active) {
+                            browserSync.init(browserSyncOptions, cb);
+                        }
+                        if (typeof webpackInstance.onBundleCreated === "function") {
+                            webpackInstance.onBundleCreated();
+                        }
+                    });
+                } else {
+                    browserSync.init(browserSyncOptions, cb);
+                }
+
             }
         });
     };
