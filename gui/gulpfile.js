@@ -107,35 +107,45 @@ gulp.task('copy-dependencies', cb => {
         // React
         next => {
             gulp.src('./node_modules/react/dist/*')
-                .pipe(gulpDebug({ title: 'Copying' }))
+                .pipe(gulpDebug({
+                    title: 'Copying'
+                }))
                 .pipe(gulp.dest(`${buildOptions.distPath}lib/react/`))
                 .on('end', next);
         },
         // React dom
         next => {
             gulp.src('./node_modules/react-dom/dist/*')
-                .pipe(gulpDebug({ title: 'Copying' }))
+                .pipe(gulpDebug({
+                    title: 'Copying'
+                }))
                 .pipe(gulp.dest(`${buildOptions.distPath}lib/react-dom/`))
                 .on('end', next);
         },
         // Catalina
         next => {
             gulp.src(['./node_modules/sdl-catalina/' + commonFolderName() + '/**/*'])
-                .pipe(gulpDebug({ title: 'Copying' }))
+                .pipe(gulpDebug({
+                    title: 'Copying'
+                }))
                 .pipe(gulp.dest(`${buildOptions.distPath}SDL/Common`))
                 .on('end', next);
         },
         // Catalina React Wrappers
         next => {
             gulp.src(['./node_modules/sdl-catalina-react-wrappers/dist/components/**/*'])
-                .pipe(gulpDebug({ title: 'Copying' }))
+                .pipe(gulpDebug({
+                    title: 'Copying'
+                }))
                 .pipe(gulp.dest(`${buildOptions.distPath}SDL/ReactComponents`))
                 .on('end', next);
         },
         // Mocks
         next => {
             gulp.src(['./mocks/**/*'])
-                .pipe(gulpDebug({ title: 'Copying' }))
+                .pipe(gulpDebug({
+                    title: 'Copying'
+                }))
                 .pipe(gulp.dest(`${buildOptions.distPath}mocks/`))
                 .on('end', next);
         }
@@ -194,7 +204,9 @@ gulp.task('build:dist', cb => {
                     cb(errEnsure);
                     return;
                 }
-                fs.move(buildOptions.distPath, targetPath, { clobber: true }, cb);
+                fs.move(buildOptions.distPath, targetPath, {
+                    clobber: true
+                }, cb);
             });
         });
     });

@@ -76,6 +76,9 @@ module.exports = (isTest, isDebug) => {
             enforce: 'post',
             test: /\.tsx?$/,
             loader: 'istanbul-instrumenter-loader',
+            query: {
+                esModules: true
+            },
             include: [
                 path.resolve(__dirname, 'src')
             ]
@@ -87,7 +90,15 @@ module.exports = (isTest, isDebug) => {
         }));
     }
 
-    if (isDebug) {
+    if (!isDebug) { // Only for production
+        config.plugins.push(new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            },
+            sourceMap: false,
+            mangle: false
+        }));
+    } else { // Only for debug
         // Hot Module Replacement (HMR)
         const hotMiddlewareScript = 'webpack-hot-middleware/client';
         for (let entryName in config.entry) {
