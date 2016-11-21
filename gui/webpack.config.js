@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const extractCSS = new ExtractTextPlugin('stylesheets/[name].css');
 
-module.exports = isTest => {
+module.exports = (isTest, isDebug) => {
     const config = {
         entry: {
             main: './src/Main.tsx',
@@ -61,6 +61,9 @@ module.exports = isTest => {
             enforce: 'post',
             test: /\.tsx?$/,
             loader: 'istanbul-instrumenter-loader',
+            query: {
+                esModules: true
+            },
             include: [
                 path.resolve(__dirname, 'src')
             ]
@@ -69,6 +72,16 @@ module.exports = isTest => {
         config.plugins.push(new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
             filename: 'vendor.bundle.js'
+        }));
+    }
+
+    if (!isDebug) {
+        config.plugins.push(new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            },
+            sourceMap: false,
+            mangle: false
         }));
     }
 

@@ -10,7 +10,7 @@ module.exports = (buildOptions, browserSync) => {
     const webpack = require('webpack');
 
     return (cb) => {
-        const config = require('../../webpack.config')(buildOptions.isTest);
+        const config = require('../../webpack.config')(buildOptions.isTest, buildOptions.isDebug);
         let firstRun = true;
 
         const onCompleted = (err, stats) => {
