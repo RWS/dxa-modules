@@ -54,6 +54,9 @@ module.exports = (isTest, isDebug) => {
             enforce: 'post',
             test: /\.tsx?$/,
             loader: 'istanbul-instrumenter-loader',
+            query: {
+                esModules: true
+            },
             include: [
                 path.resolve(__dirname, 'src')
             ]
