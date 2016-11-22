@@ -7,6 +7,13 @@ import ActivityIndicator = SDL.ReactComponents.ActivityIndicator;
 import ValidationMessage = SDL.ReactComponents.ValidationMessage;
 
 /**
+ * Regex to validate if a url is an item Url
+ *
+ * example: /1656863/164363/publication-mp330/speed-dialling
+ */
+const ITEM_URL_REGEX = /^\/\d+(\/[^\/]+(\/[^\/]+(\/[^\/]+)?)?)?$/i;
+
+/**
  * Page component props
  *
  * @export
@@ -108,17 +115,19 @@ export class Page extends React.Component<IPageProps, {}> {
             const alreadyAdded = hyperlinks.filter(hyperlink => hyperlink.element === anchor).length === 1;
             if (!alreadyAdded) {
                 const itemUrl = anchor.getAttribute("href");
-                const onClick = (e: Event): void => {
-                    if (itemUrl) {
-                        props.onNavigate(itemUrl);
-                    }
-                    e.preventDefault();
-                };
-                hyperlinks.push({
-                    element: anchor,
-                    handler: onClick
-                });
-                anchor.addEventListener("click", onClick);
+                if (itemUrl && itemUrl.match(ITEM_URL_REGEX)) {
+                    const onClick = (e: Event): void => {
+                        if (itemUrl) {
+                            props.onNavigate(itemUrl);
+                        }
+                        e.preventDefault();
+                    };
+                    hyperlinks.push({
+                        element: anchor,
+                        handler: onClick
+                    });
+                    anchor.addEventListener("click", onClick);
+                }
             }
         }
     }
