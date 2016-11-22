@@ -89,8 +89,25 @@ class PageComponent extends TestBase {
                 hyperlink.click();
             });
 
-        });
+            it("does not handle external links", (): void => {
+                const pageProps = {
+                    showActivityIndicator: false,
+                    content: "<div><a href=\"http://doc.sdl.com\"/></div>",
+                    onNavigate: (): void => {
+                    }
+                };
+                const spy = spyOn(pageProps, "onNavigate").and.callThrough();
+                const page = this._renderComponent(pageProps, target);
 
+                const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
+                expect(domNode).not.toBeNull();
+                const hyperlink = domNode.querySelector("a") as HTMLElement;
+                expect(hyperlink).toBeDefined();
+                hyperlink.click();
+                expect(spy).not.toHaveBeenCalled();
+            });
+
+        });
     }
 
     private _renderComponent(props: IPageProps, target: HTMLElement): Page {
