@@ -112,12 +112,14 @@ class PageComponent extends TestBase {
 
                 const hyperlinks = domNode.querySelectorAll("a");
                 expect(hyperlinks.length).toBe(6);
-                [].forEach.call(hyperlinks, (link: HTMLElement) => {
+
+                for (let i: number = 0, length: number = hyperlinks.length; i < length; i++) {
+                    const link = hyperlinks.item(i);
                     link.addEventListener("click", (e: Event): void => {
                         e.preventDefault();
                     });
                     link.click();
-                })
+                }
 
                 expect(spy).not.toHaveBeenCalled();
             });

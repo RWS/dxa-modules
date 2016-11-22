@@ -2,16 +2,11 @@ import "./styles/Page";
 import "../../../dist/dita-ot/styles/commonltr";
 import "../../../dist/dita-ot/styles/commonrtl";
 
+import { Url } from "../../utils/Url";
+
 // Global Catalina dependencies
 import ActivityIndicator = SDL.ReactComponents.ActivityIndicator;
 import ValidationMessage = SDL.ReactComponents.ValidationMessage;
-
-/**
- * Regex to validate if a url is an item Url
- *
- * example: /1656863/164363/publication-mp330/speed-dialling
- */
-const ITEM_URL_REGEX = /^\/\d+(\/[^\/]+(\/[^\/]+(\/[^\/]+)?)?)?$/i;
 
 /**
  * Page component props
@@ -115,7 +110,7 @@ export class Page extends React.Component<IPageProps, {}> {
             const alreadyAdded = hyperlinks.filter(hyperlink => hyperlink.element === anchor).length === 1;
             if (!alreadyAdded) {
                 const itemUrl = anchor.getAttribute("href");
-                if (itemUrl && itemUrl.match(ITEM_URL_REGEX)) {
+                if (Url.itemUrlIsValid(itemUrl)) {
                     const onClick = (e: Event): void => {
                         if (itemUrl) {
                             props.onNavigate(itemUrl);
