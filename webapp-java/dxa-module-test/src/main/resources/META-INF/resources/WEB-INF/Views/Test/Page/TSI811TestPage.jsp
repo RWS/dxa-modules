@@ -49,7 +49,7 @@
 <div>PageKeyword.TaxonomyId: ${keyword.taxonomyId}</div>
 <div>----</div>
 <div>PageKeyword.TextField: ${keyword.textField}</div>
-<div>PageKeyword.NumberField: ${keyword.numberProperty}</div>
+<div>PageKeyword.NumberField: ${keyword.numberField}</div>
 <div>PageKeyword.DateField: ${keyword.dateField}</div>
 
 <dxa:region name="Footer"/>
