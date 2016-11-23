@@ -7,6 +7,18 @@ import LoadableObject = SDL.Client.Models.LoadableObject;
 import OO = SDL.Client.Types.OO;
 import Net = SDL.Client.Net;
 
+/**
+ * Link info
+ *
+ * @export
+ * @interface ILinkInfo
+ */
+export interface ILinkInfo {
+    Id?: string;
+    Title: string;
+    Url?: string;
+}
+
 /* tslint:disable-next-line */
 eval(OO.enableCustomInheritance);
 /**
@@ -20,7 +32,7 @@ export class NavigationLinks extends LoadableObject {
 
     private _publicationId: string;
     private _taxonomyId: string;
-    private _path: ISitemapItem[] = [];
+    private _path: ILinkInfo[] = [];
 
     /**
      * Creates an instance of NavigationLinks.
@@ -39,11 +51,11 @@ export class NavigationLinks extends LoadableObject {
     /**
      * Get the path
      *
-     * @returns {ISitemapItem[]} Ids of ancestors
+     * @returns {ILinkInfo[]} Ids of ancestors
      *
      * @memberOf NavigationLinks
      */
-    public getPath(): ISitemapItem[] {
+    public getPath(): ILinkInfo[] {
         return this._path;
     }
 
@@ -66,18 +78,18 @@ export class NavigationLinks extends LoadableObject {
         this.fireEvent("loadfailed", { error: error });
     }
 
-    private _calculatePath(navigationLinks: ISitemapItem): ISitemapItem[] {
-        const path: ISitemapItem[] = [];
+    private _calculatePath(navigationLinks: ISitemapItem): ILinkInfo[] {
+        const path: ILinkInfo[] = [];
         let items: ISitemapItem[] = navigationLinks.Items;
         if (navigationLinks.Id) {
-            path.push(navigationLinks);
+            path.push(navigationLinks as ILinkInfo);
         }
         while (items && items.length > 0) {
             const firstItem = items[0];
             items = firstItem.Items;
             /* istanbul ignore else */
             if (firstItem.Id) {
-                path.push(firstItem);
+                path.push(navigationLinks as ILinkInfo);
             }
         }
         return path;
