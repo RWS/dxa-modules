@@ -25,11 +25,13 @@ export class Home extends React.Component<{}, {}> {
         const { localizationService } = this.context.services;
         return (
             <div className={"sdl-dita-delivery-app"}>
-                <TopBar title={localizationService.formatMessage("components.app.title")} buttons={{
-                    user: {
-                        isPicture: true
-                    }
-                }} />
+                <div className={"sdl-dita-delivery-content-wrapper"}>
+                    <TopBar className={".sdl-dita-delivery-content-wrapper"} title={localizationService.formatMessage("components.app.title")} buttons={{
+                        user: {
+                            isPicture: true
+                        }
+                    }} />
+                </div>
 
                 {this.props.children}
             </div>
