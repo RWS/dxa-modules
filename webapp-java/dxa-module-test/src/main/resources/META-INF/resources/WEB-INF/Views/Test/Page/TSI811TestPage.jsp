@@ -10,7 +10,7 @@
 <!--[if IE 8]><html class="no-js lt-ie9"><![endif]-->
 <!--[if gt IE 8]><!--><html class="no-js"><!--<![endif]-->
 <head>
-    <title>@Model.Title</title>
+    <title>${pageModel.title}</title>
     <style>
         .region {
             border: solid thick;
