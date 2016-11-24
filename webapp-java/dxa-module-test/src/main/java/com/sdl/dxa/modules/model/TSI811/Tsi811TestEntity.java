@@ -23,5 +23,5 @@ public class Tsi811TestEntity extends AbstractEntityModel {
     private KeywordModel keyword2;
 
     @JsonProperty("BooleanProperty")
-    private String booleanKeyword;
+    private boolean booleanKeyword;
 }

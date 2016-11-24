@@ -2,6 +2,7 @@ package com.sdl.dxa.modules.model.TSI811;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticEntity;
+import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticProperty;
 import com.sdl.webapp.common.api.model.KeywordModel;
 import com.sdl.webapp.common.api.model.entity.Tag;
 import lombok.Data;
@@ -21,7 +22,8 @@ public class Tsi811TestKeyword extends KeywordModel {
     private String textField;
 
     @JsonProperty("NumberProperty")
-    private Double numberField;
+    @SemanticProperty("numberField")
+    private double numberProperty;
 
     @JsonProperty("DateField")
     private DateTime dateField;
