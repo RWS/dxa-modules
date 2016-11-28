@@ -1,0 +1,30 @@
+{
+  "Id": "137347",
+  "Title": "Technical support options",
+  "Meta": {
+    "ishlogicalref.object.id": 137341,
+    "ishversionref.object.id": 137342,
+    "ishlngref.object.id": 137347,
+    "ishref.object.value": "MVT-42007CEBG00HUI",
+    "ishtype.object.value": "ISHModule",
+    "FTITLE.logical.value": "Technical support options",
+    "FDESCRIPTION.logical.value": null,
+    "FCHANGES.version.value": "Imported",
+    "FISHRELEASELABEL.version.value": [
+      "Publication McAfee-v1-GUID-5D6FA032-0189-4CB2-85E7-41455F86D612-2012/09/21 11:12:18"
+    ],
+    "CREATED-ON.lng.value": "2015-12-22T17:31:20Z",
+    "FAUTHOR.lng.value": "admin",
+    "FSTATUS.lng.value": "Released",
+    "MODIFIED-ON.lng.value": "2016-05-27T08:00:20Z",
+    "VERSION.version.value": "1",
+    "DOC-LANGUAGE.lng.value": [
+      "en"
+    ],
+    "FISHREVCOUNTER.lng.value": 2,
+    "ED.lng.value": "GUID-5633947B-0A90-4FDD-A701-B47ADED5F66D",
+    "FUSERGROUP.logical.element": null,
+    "READ-ACCESS.logical.element": null
+  },
+  "Html": "\n      \n      \t\n      <h1 class=\"title topictitle1\" id=\"MVT-42007CEBG00HUI__GUID-6FF65E52-2C41-41EB-9329-A6B4F87A43A9\" xmlns=\"http://www.w3.org/1999/xhtml\">Technical support options</h1>\n      \n      \n   "
+}

@@ -1,0 +1,55 @@
+{
+  "Id": "516346",
+  "Title": "Origin and systematics of modern penguins",
+  "Meta": {
+    "ishlogicalref.object.id": 516340,
+    "ishversionref.object.id": 516341,
+    "ishlngref.object.id": 516346,
+    "ishref.object.value": "GUID-65E54E56-105B-4585-9043-2B6044312491",
+    "ishtype.object.value": "ISHModule",
+    "FTITLE.logical.value": "Origin and systematics of modern penguins",
+    "FDESCRIPTION.logical.value": null,
+    "FCHANGES.version.value": null,
+    "FISHRELEASELABEL.version.value": [
+      "Penguin publication-v3-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/22 13:44:30",
+      "Penguin publication-v3.1.10-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/29 14:32:30",
+      "Penguin publication-v3.1.2-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/22 14:27:38",
+      "Penguin publication-v3.1.3-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/22 14:36:15",
+      "Penguin publication-v3.1.3.1.1-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/22 15:03:16",
+      "Penguin publication-v3.1.3.1.2-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/22 16:07:05",
+      "Penguin publication-v3.1.3.1.4-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/22 16:24:08",
+      "Penguin publication-v3.1.4-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/22 15:02:03",
+      "Penguin publication-v3.1.5-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/28 11:52:09",
+      "Penguin publication-v3.1.6-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/28 14:49:04",
+      "Penguin publication-v3.1.7-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/29 11:09:18",
+      "Penguin publication-v3.1.8-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/29 12:20:02",
+      "Penguin publication-v3.1.9-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/29 13:43:39",
+      "Penguin publication-v4-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/11/22 13:59:44",
+      "Penguin publication-v5-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/12/03 16:24:48",
+      "Penguin publication-v6-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/12/04 12:08:31",
+      "Penguin publication-v6.1.1-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/12/06 15:01:48",
+      "Penguin publication-v6.1.2-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/12/10 13:51:16",
+      "Penguin publication-v6.1.3-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/12/10 15:16:42",
+      "Penguin publication-v6.1.4-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/12/13 10:52:57",
+      "Penguin publication-v6.1.5-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/12/13 12:18:19",
+      "Penguin publication-v7-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/12/12 11:44:45"
+    ],
+    "CREATED-ON.lng.value": "2016-01-07T03:48:45Z",
+    "FAUTHOR.lng.value": "admin",
+    "FSTATUS.lng.value": "Released",
+    "MODIFIED-ON.lng.value": "2016-05-26T13:49:41Z",
+    "VERSION.version.value": "1",
+    "DOC-LANGUAGE.lng.value": [
+      "en"
+    ],
+    "FISHREVCOUNTER.lng.value": 1,
+    "ED.lng.value": "GUID-FA1D2CE1-3311-4020-916D-9A98CE888C37",
+    "FUSERGROUP.logical.element": [
+      "VUSERGROUPDEFAULTDEPARTMENT"
+    ],
+    "READ-ACCESS.logical.element": [
+      "VUSERGROUPDEFAULTDEPARTMENT"
+    ]
+  },
+  "Html": "\n       \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-65E54E56-105B-4585-9043-2B6044312491__GUID-CA069259-7C21-4752-9A64-7191AFFEC5C5\" xmlns=\"http://www.w3.org/1999/xhtml\">Origin and systematics of modern penguins</h1>\n      \n      \n      <div class=\"body conbody\" xmlns=\"http://www.w3.org/1999/xhtml\"> \n         \t \n         <p class=\"p\">Modern penguins consititute two undisputed clades and another two more basal genera with more ambiguous relationships. The\n            origin of the Spheniscinae lies probably in the latest Paleogene, and geographically it must have been much the same as the\n            general area in which the order evolved: the oceans between the Australia-New Zealand region and the Antarctic.[19] Presumedly\n            diverging from other penguins around 40 million years ago, it seems that the Spheniscinae were for quite some time limited\n            to their ancestral area, as the well-researched deposits of the Antarctic Peninsula and Patagonia have not yielded Paleogene\n            fossils of the subfamily. Also, the earliest spheniscine lineages are those with the most southern distribution.\n            \t \n         </p>\n         \n         \t \n         <p class=\"p\">The genus Aptenodytes appears to be the basal most divergence among living penguins they have bright yellow-orange neck, breast,\n            and bill patches; incubate by placing their eggs on their feet, and when they hatch the chicks are almost naked. This genus\n            has a distribution centered on the Antarctic coasts and barely extends to some subantarctic islands today.\n            \t \n         </p>\n         \n         \t \n         <p class=\"p\">Pygoscelis contains species with a fairly simple black-and-white head pattern; their distribution is intermediate, centered\n            on Antarctic coasts but extending somewhat northwards from there. In external morphology, these apparently still resemble\n            the common ancestor of the Spheniscinae, as Aptenodytes' autapomorphies are in most cases fairly pronounced adaptations related\n            to that genus' extreme habitat conditions. As the former genus, Pygoscelis seems to have diverged during the Bartonian, but\n            the range expansion and radiation that led to the present-day diversity probably did not occur until much later; around the\n            Burdigalian stage of the Early Miocene, roughly 20–15 million years ago.\n            \t \n         </p>\n         \n         \t \n         <p class=\"p\">The genera Spheniscus and Eudyptula contain species with a mostly subantarctic distribution centered on South America; some,\n            however, range quite far northwards. They all lack carotenoid coloration, and the former genus has a conspicuous banded head\n            pattern; they are unique among living penguins by nesting in burrows. This group probably radiated eastwards with the Antarctic\n            Circumpolar Current out of the ancestral range of modern penguins throughout the Chattian (Late Oligocene), starting approximately\n            28 million years ago. While the two genera separated during this time, the present-day diversity is the result of a Pliocene\n            radiation, taking place some 4–2 million years ago.\n            \t \n         </p>\n         \n         \t \n         <p class=\"p\">The Megadyptes–Eudyptes clade occurs at similar latitudes (though not as far north as the Galapagos Penguin), has its highest\n            diversity in the New Zealand region, and represent a westward dispersal. They are characterized by hairy yellow ornamental\n            head feathers; their bills are at least partly red. These two genera diverged apparently in the Middle Miocene (Langhian,\n            roughly 15–14 million years ago), but again, the living species of Eudyptes are the product of a later radiation, stretching\n            from about the late Tortonian (Late Miocene, 8 million years ago) to the end of the Pliocene.\n            \t \n         </p>\n         \n         \t \n         <p class=\"p\">The geographical and temporal pattern or spheniscine evolution corresponds closely to two episodes of global cooling documented\n            in the paleoclimatic record. The emergence of the subantarctic lineage at the end of the Bartonian corresponds with the onset\n            of the slow period of cooling that eventually led to the ice ages some 35 million years later. With habitat on the Antarctic\n            coasts declining, by the Priabonian more hospitable conditions for most penguins existed in the subantarctic regions rather\n            than in Antarctica itself. Notably, the cold Antarctic Circumpolar Current also started as a continuous circumpolar flow only\n            around 30 million years ago, on the one hand forcing the Antarctic cooling, and on the other facilitating the eastward expansion\n            of Spheniscus to South America and eventually beyond. Despite this, there is no fossil evidence to support the idea of a crown\n            radiation from the antarctic continent in the Paleogene.\n            \t \n         </p>\n         \n         \t \n         <p class=\"p\">Later, an interspersed period of slight warming was ended by the Middle Miocene Climate Transition, a sharp drop in global\n            average temperature from 14–12 million years ago, and similar abrupt cooling events followed at 8 million years ago and 4\n            million years ago; by the end of the Tortonian, the Antarctic ice sheet was already much like today in volume and extent.\n            The emergence of most of today's subantarctic penguin species almost certainly was caused by this sequence of Neogene climate\n            shifts.\n            \t \n         </p>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Parent topic:</strong> <a class=\"link\" href=\"/1184146/516982/penguin-publication/evolution\">Evolution</a></div>\n            \n         </div>\n         \n      </div>\n   "
+}

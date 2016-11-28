@@ -1,0 +1,32 @@
+{
+  "Id": "515680",
+  "Title": " Cranes \n         \n      ",
+  "Meta": {
+    "ishlogicalref.object.id": 515674,
+    "ishversionref.object.id": 515675,
+    "ishlngref.object.id": 515680,
+    "ishref.object.value": "GUID-89DD7630-7AE5-4C64-85DE-246A03ED97B9",
+    "ishtype.object.value": "ISHModule",
+    "FTITLE.logical.value": "Cranes",
+    "FDESCRIPTION.logical.value": null,
+    "FCHANGES.version.value": null,
+    "FISHRELEASELABEL.version.value": null,
+    "CREATED-ON.lng.value": "2016-01-07T03:46:20Z",
+    "FAUTHOR.lng.value": "admin",
+    "FSTATUS.lng.value": "Released",
+    "MODIFIED-ON.lng.value": "2016-05-26T13:49:31Z",
+    "VERSION.version.value": "1",
+    "DOC-LANGUAGE.lng.value": [
+      "en"
+    ],
+    "FISHREVCOUNTER.lng.value": 1,
+    "ED.lng.value": "GUID-08C0BBCA-0A02-4A28-8835-A4CED701ACFA",
+    "FUSERGROUP.logical.element": [
+      "VUSERGROUPDEFAULTDEPARTMENT"
+    ],
+    "READ-ACCESS.logical.element": [
+      "VUSERGROUPDEFAULTDEPARTMENT"
+    ]
+  },
+  "Html": "\n       \n      \n      <h1 class=\"title title glossterm topictitle1\" id=\"GUID-89DD7630-7AE5-4C64-85DE-246A03ED97B9__GUID-BE96E553-1A32-4217-B451-9DFBE3E6CBF1\" xmlns=\"http://www.w3.org/1999/xhtml\"> Cranes \n         \n      </h1>\n      \n      \n      <div class=\"abstract abstract glossdef\" xmlns=\"http://www.w3.org/1999/xhtml\"> \n         \t \n         <p class=\"p\"> \n            \t\t<strong class=\"ph b\">Cranes</strong> are large, long-legged and long-necked birds. There are fifteen species of crane in four genera. Unlike the similar-looking\n            but unrelated herons, cranes fly with necks outstretched, not pulled back. Cranes live on all continents except Antarctica\n            and South America. \n            \t \n         </p>\n         \n         \t \n         <p class=\"p\">They are opportunistic feeders that change their diet according to the season and their own nutrient requirements. They eat\n            a range of items from suitably sized small rodents, fish, amphibians, and insects, to grain, berries, and plants. \n            \t \n         </p>\n         \n         \t \n         <p class=\"p\">Cranes construct platform nests in shallow water, and typically lay two eggs at a time. Both parents help to rear the young,\n            which remain with them until the next breeding season. \n            \t \n         </p>\n         \n         \t \n         <p class=\"p\">Some species and populations of cranes migrate over long distances; others do not migrate at all. Cranes are solitary during\n            the breeding season, occurring in pairs, but during the non-breeding season they are gregarious, forming large flocks where\n            their numbers are sufficient. \n            \t \n         </p>\n         \n         \t \n         <div class=\"p\"> \n            \t\t\n            <div class=\"fig fignone\" id=\"FIG_D6EC71CACAB642619C9617B858473285\">\n               <img class=\"image\" id=\"IMAGE_D5D3E0AE149B452BADF440F8DA3CE8B1\" src=\"/gui/mocks/bin/1184146-515593-16.jpg\" /> \n               \t\t\n            </div>\n            \n            \t \n         </div>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Parent topic:</strong> <a class=\"link\" title=\"This topic groups birds of other orders which are predators of penguins or have another relation with the penguins\" href=\"/1184146/515736/penguin-publication/other-birds\">Other birds</a></div>\n            \n         </div>\n         \n      </div>\n   "
+}

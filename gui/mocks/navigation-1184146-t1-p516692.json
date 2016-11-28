@@ -1,0 +1,26 @@
+{
+  "Id": "ish:1184146-1-512",
+  "Title": "Penguin guide",
+  "Url": null,
+  "IsAbstract": true,
+  "HasChildNodes": true,
+  "Items": [
+    {
+      "Id": "ish:1184146-516000-16",
+      "Title": "Types of penguins",
+      "Url": "/1184146/516000/penguin-publication/types-of-penguins",
+      "IsAbstract": false,
+      "HasChildNodes": true,
+      "Items": [
+        {
+          "Id": "ish:1184146-516692-16",
+          "Title": "Megadyptes",
+          "Url": "/1184146/516692/penguin-publication/megadyptes",
+          "IsAbstract": false,
+          "HasChildNodes": true,
+          "Items": []
+        }
+      ]
+    }
+  ]
+}

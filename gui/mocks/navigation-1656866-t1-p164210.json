@@ -1,0 +1,26 @@
+{
+  "Id": "ish:1656866-1-512",
+  "Title": "User Guide",
+  "Url": null,
+  "IsAbstract": true,
+  "HasChildNodes": true,
+  "Items": [
+    {
+      "Id": "ish:1656866-164466-16",
+      "Title": "Anruffunktionen",
+      "Url": "/1656866/164466/publication-mp330/anruffunktionen",
+      "IsAbstract": false,
+      "HasChildNodes": true,
+      "Items": [
+        {
+          "Id": "ish:1656866-164210-16",
+          "Title": "Anrufen",
+          "Url": "/1656866/164210/publication-mp330/anrufen",
+          "IsAbstract": false,
+          "HasChildNodes": true,
+          "Items": []
+        }
+      ]
+    }
+  ]
+}

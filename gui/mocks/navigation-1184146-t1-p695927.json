@@ -1,0 +1,26 @@
+{
+  "Id": "ish:1184146-1-512",
+  "Title": "Penguin guide",
+  "Url": null,
+  "IsAbstract": true,
+  "HasChildNodes": true,
+  "Items": [
+    {
+      "Id": "ish:1184146-516062-16",
+      "Title": "Penguins Overview",
+      "Url": "/1184146/516062/penguin-publication/penguins-overview",
+      "IsAbstract": false,
+      "HasChildNodes": true,
+      "Items": [
+        {
+          "Id": "ish:1184146-695927-16",
+          "Title": "Anatomy and physiology",
+          "Url": "/1184146/695927/penguin-publication/anatomy-and-physiology",
+          "IsAbstract": false,
+          "HasChildNodes": false,
+          "Items": []
+        }
+      ]
+    }
+  ]
+}

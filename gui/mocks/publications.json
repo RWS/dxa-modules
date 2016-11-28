@@ -1,6 +1,69 @@
 [
   {
-    "Id": "ish:1656863-1-1",
+    "Id": "1184146",
+    "Title": "Penguin publication",
+    "Meta": {
+      "ishlogicalref.object.id": 517673,
+      "ishversionref.object.id": 517681,
+      "ishlngref.object.id": 1184146,
+      "ishref.object.value": "GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA",
+      "ishtype.object.value": "ISHPublication",
+      "FTITLE.logical.value": "Penguin publication",
+      "FDESCRIPTION.logical.value": null,
+      "FUSERGROUP.logical.value": [
+        "Default Department"
+      ],
+      "VERSION.version.value": "8",
+      "FREQUESTEDLANGUAGES.version.value": [
+        "fr",
+        "is",
+        "it",
+        "es",
+        "nl",
+        "de",
+        "pt",
+        "ja",
+        "fi",
+        "zh",
+        "ar"
+      ],
+      "FCHANGES.version.value": "Adding conditions & xrefs",
+      "FISHPUBSOURCELANGUAGES.version.value": [
+        "en"
+      ],
+      "FISHBASELINE.version.value": "Penguin publication-v8",
+      "FISHMASTERREF.version.value": "GUID-170BDC5B-984B-4FBA-8A5D-8F04AD6EB7C2",
+      "FISHRESOURCES.version.value": [
+        "GUID-B1DEFB4B-8EB5-4845-B488-29A44BB83936"
+      ],
+      "FISHREQUIREDRESOLUTIONS.version.value": "Low",
+      "CREATED-ON.version.value": "2016-01-07T03:53:57Z",
+      "MODIFIED-ON.version.value": "2016-11-02T08:43:39Z",
+      "FPUBINCLUDECOMMENTS.lng.value": null,
+      "FPUBINCLUDEMETADATA.lng.value": null,
+      "FPUBWATERMARK.lng.value": null,
+      "MODIFIED-ON.lng.value": "2016-11-09T12:47:26Z",
+      "FSDLXPPPDFINCLFRONTMAT.lng.value": null,
+      "FSDLXPPPDFINCLINDEX.lng.value": null,
+      "FSDLXPPPDFINCLTOC.lng.value": null,
+      "FSDLXPPPDFINCLPRINTMARKS.lng.value": null,
+      "FMAPID.lng.value": "GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA",
+      "FISHPUBLICATIONTYPE.logical.value": null,
+      "FISHPUBREVIEWENDDATE.lng.value": "2016-07-03T22:00:00Z",
+      "FISHFALLBACKLNGDEFAULT.lng.value": null,
+      "FISHFALLBACKLNGIMAGES.lng.value": null,
+      "FISHFALLBACKLNGRESOURCES.lng.value": null,
+      "FUSERGROUP.logical.element": [
+        "VUSERGROUPDEFAULTDEPARTMENT"
+      ],
+      "READ-ACCESS.logical.element": [
+        "VUSERGROUPDEFAULTDEPARTMENT"
+      ],
+      "conditionset.generated.value": "<features><feature name=\"Bird_group\" value=\"A\" type=\"Text\" range=\"no\" /><feature name=\"Bird_group\" value=\"C\" type=\"Text\" range=\"no\" /><feature name=\"Bird_group\" value=\"G\" type=\"Text\" range=\"no\" /><feature name=\"Bird_group\" value=\"H\" type=\"Text\" range=\"no\" /><feature name=\"Bird_group\" value=\"I\" type=\"Text\" range=\"no\" /><feature name=\"Bird_group\" value=\"P\" type=\"Text\" range=\"no\" /><feature name=\"Bird_group\" value=\"R\" type=\"Text\" range=\"no\" /><feature name=\"Bird_group\" value=\"S\" type=\"Text\" range=\"no\" /><feature name=\"Continents\" value=\"Africa\" type=\"Text\" range=\"no\" /><feature name=\"Continents\" value=\"Antarctica\" type=\"Text\" range=\"no\" /><feature name=\"Continents\" value=\"Oceania\" type=\"Text\" range=\"no\" /><feature name=\"Continents\" value=\"South America\" type=\"Text\" range=\"no\" /><feature name=\"Crafts\" value=\"DRAWING\" type=\"Text\" range=\"no\" /><feature name=\"Crafts\" value=\"ORIGAMI\" type=\"Text\" range=\"no\" /><feature name=\"Crafts\" value=\"SONG\" type=\"Text\" range=\"no\" /><feature name=\"LatinName\" value=\"yes\" type=\"Text\" range=\"no\" /></features>"
+    }
+  },
+  {
+    "Id": "1656863",
     "Title": "Publication MP330",
     "Meta": {
       "ishlogicalref.object.id": 346489,
@@ -31,11 +94,11 @@
       ],
       "FISHREQUIREDRESOLUTIONS.version.value": "Low",
       "CREATED-ON.version.value": "2015-12-23T03:22:09Z",
-      "MODIFIED-ON.version.value": "2016-10-11T12:35:44Z",
+      "MODIFIED-ON.version.value": "2016-10-11T12:43:08Z",
       "FPUBINCLUDECOMMENTS.lng.value": "No",
       "FPUBINCLUDEMETADATA.lng.value": "No",
       "FPUBWATERMARK.lng.value": "No",
-      "MODIFIED-ON.lng.value": "2016-10-11T12:36:03Z",
+      "MODIFIED-ON.lng.value": "2016-11-09T12:30:38Z",
       "FSDLXPPPDFINCLFRONTMAT.lng.value": "No",
       "FSDLXPPPDFINCLINDEX.lng.value": "No",
       "FSDLXPPPDFINCLTOC.lng.value": "No",
@@ -58,7 +121,7 @@
     }
   },
   {
-    "Id": "ish:1656866-1-1",
+    "Id": "1656866",
     "Title": "Publication MP330",
     "Meta": {
       "ishlogicalref.object.id": 346489,
@@ -93,7 +156,7 @@
       "FPUBINCLUDECOMMENTS.lng.value": "No",
       "FPUBINCLUDEMETADATA.lng.value": "No",
       "FPUBWATERMARK.lng.value": "No",
-      "MODIFIED-ON.lng.value": "2016-10-11T12:43:22Z",
+      "MODIFIED-ON.lng.value": "2016-11-09T12:30:54Z",
       "FSDLXPPPDFINCLFRONTMAT.lng.value": "No",
       "FSDLXPPPDFINCLINDEX.lng.value": "No",
       "FSDLXPPPDFINCLTOC.lng.value": "No",
@@ -116,7 +179,7 @@
     }
   },
   {
-    "Id": "ish:1656868-1-1",
+    "Id": "1656868",
     "Title": "Publication MP330",
     "Meta": {
       "ishlogicalref.object.id": 346489,
@@ -151,7 +214,7 @@
       "FPUBINCLUDECOMMENTS.lng.value": "No",
       "FPUBINCLUDEMETADATA.lng.value": "No",
       "FPUBWATERMARK.lng.value": "No",
-      "MODIFIED-ON.lng.value": "2016-10-11T12:43:32Z",
+      "MODIFIED-ON.lng.value": "2016-11-09T12:31:39Z",
       "FSDLXPPPDFINCLFRONTMAT.lng.value": "No",
       "FSDLXPPPDFINCLINDEX.lng.value": "No",
       "FSDLXPPPDFINCLTOC.lng.value": "No",
@@ -174,7 +237,7 @@
     }
   },
   {
-    "Id": "ish:1656874-1-1",
+    "Id": "1656874",
     "Title": "Publication McAfee Virtual Technician 4.2",
     "Meta": {
       "ishlogicalref.object.id": 346486,
@@ -204,7 +267,7 @@
       "FPUBINCLUDECOMMENTS.lng.value": "No",
       "FPUBINCLUDEMETADATA.lng.value": "No",
       "FPUBWATERMARK.lng.value": "No",
-      "MODIFIED-ON.lng.value": "2016-10-11T12:50:13Z",
+      "MODIFIED-ON.lng.value": "2016-11-09T12:41:18Z",
       "FSDLXPPPDFINCLFRONTMAT.lng.value": "No",
       "FSDLXPPPDFINCLINDEX.lng.value": "No",
       "FSDLXPPPDFINCLTOC.lng.value": "No",
@@ -227,7 +290,7 @@
     }
   },
   {
-    "Id": "ish:1669313-1-1",
+    "Id": "1669313",
     "Title": "LS40-el",
     "Meta": {
       "ishlogicalref.object.id": 566443,
@@ -253,7 +316,7 @@
       "FPUBINCLUDECOMMENTS.lng.value": "No",
       "FPUBINCLUDEMETADATA.lng.value": "No",
       "FPUBWATERMARK.lng.value": "No",
-      "MODIFIED-ON.lng.value": "2016-10-13T07:53:05Z",
+      "MODIFIED-ON.lng.value": "2016-11-09T12:44:03Z",
       "FSDLXPPPDFINCLFRONTMAT.lng.value": "No",
       "FSDLXPPPDFINCLINDEX.lng.value": "No",
       "FSDLXPPPDFINCLTOC.lng.value": "No",

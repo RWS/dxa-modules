@@ -1,0 +1,32 @@
+{
+  "Id": "516818",
+  "Title": "Relationship to other bird orders",
+  "Meta": {
+    "ishlogicalref.object.id": 516794,
+    "ishversionref.object.id": 516817,
+    "ishlngref.object.id": 516818,
+    "ishref.object.value": "GUID-A4F37E0D-30D0-4987-89CB-213D4FCC12FB",
+    "ishtype.object.value": "ISHModule",
+    "FTITLE.logical.value": "Relationship to other bird orders",
+    "FDESCRIPTION.logical.value": null,
+    "FCHANGES.version.value": "Referencing other birds",
+    "FISHRELEASELABEL.version.value": null,
+    "CREATED-ON.lng.value": "2016-01-07T03:50:28Z",
+    "FAUTHOR.lng.value": "admin",
+    "FSTATUS.lng.value": "To be reviewed",
+    "MODIFIED-ON.lng.value": "2016-05-26T13:49:51Z",
+    "VERSION.version.value": "3",
+    "DOC-LANGUAGE.lng.value": [
+      "en"
+    ],
+    "FISHREVCOUNTER.lng.value": 1,
+    "ED.lng.value": "GUID-6CFA85CD-1E6A-49B8-BFDA-D27C64D1BBAF",
+    "FUSERGROUP.logical.element": [
+      "VUSERGROUPDEFAULTDEPARTMENT"
+    ],
+    "READ-ACCESS.logical.element": [
+      "VUSERGROUPDEFAULTDEPARTMENT"
+    ]
+  },
+  "Html": "\n       \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-A4F37E0D-30D0-4987-89CB-213D4FCC12FB__GUID-958916D3-742D-4474-8FD8-6FCF1224EC1E\" xmlns=\"http://www.w3.org/1999/xhtml\">Relationship to other bird orders</h1>\n      \n      \n      <div class=\"body conbody\" xmlns=\"http://www.w3.org/1999/xhtml\"> \n         \t \n         <p class=\"p\">Penguin ancestry beyond Waimanu remains unknown and not well-resolved by molecular or morphological analyses. The latter tend\n            to be confounded by the strong adaptive autapomorphies of the Sphenisciformes; a sometimes perceived fairly close relationship\n            between penguins and grebes is almost certainly an error based on both groups' strong diving adaptations, which are homoplasies.\n            On the other hand, different DNA sequence datasets do not agree in detail with each other either. \n            \t \n         </p>\n         \n         \t \n         <p class=\"p\">What seems clear is that penguins belong to a clade of Neoaves (living birds except paleognaths and fowl) that comprises what\n            is sometimes called \"higher waterbirds\" to distinguish them from the more ancient waterfowl. This group contains such birds\n            as \n            \t\t<a class=\"xref\" href=\"/1184146/515825/penguin-publication/storks\">storks</a>, \n            \t\t<a class=\"xref\" href=\"/1184146/515769/penguin-publication/rail-birds\">rails</a>, and the seabirds, with the possible exception of the \n            \t\t<a class=\"xref\" href=\"http://en.wikipedia.org/wiki/Charadriiformes\" target=\"_blank\">Charadriiformes</a>. \n            \t \n         </p>\n         \n         \t \n         <p class=\"p\">Inside this group, penguin relationships are far less clear. Depending on the analysis and dataset, a close relationship to\n            \n            \t\t<a class=\"xref\" href=\"http://en.wikipedia.org/wiki/Ciconiiformes\" target=\"_blank\">Ciconiiformes</a> or to \n            \t\t<a class=\"xref\" href=\"http://en.wikipedia.org/wiki/Procellariiformes\" target=\"_blank\">Procellariiformes</a> has been suggested. Some think the penguin-like \n            \t\t<a class=\"xref\" href=\"http://en.wikipedia.org/wiki/Plotopteridae\" target=\"_blank\">plotopterids</a> (usually considered relatives of anhingas and cormorants) may actually be a sister group of the penguins, and that penguins\n            may have ultimately shared a common ancestor with the Pelecaniformes and consequently would have to be included in that order,\n            or that the plotopterids were not as close to other pelecaniforms as generally assumed, which would necessitate splitting\n            the traditional Pelecaniformes in three. \n            \t \n         </p>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Parent topic:</strong> <a class=\"link\" href=\"/1184146/516088/penguin-publication/systematics-and-evolution\">Systematics and evolution</a></div>\n            \n         </div>\n         \n      </div>\n   "
+}

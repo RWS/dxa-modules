@@ -1,0 +1,40 @@
+{
+  "Id": "516000",
+  "Title": "Types of penguins",
+  "Meta": {
+    "ishlogicalref.object.id": 515994,
+    "ishversionref.object.id": 515995,
+    "ishlngref.object.id": 516000,
+    "ishref.object.value": "GUID-4A75B581-0D81-412A-A5E1-5E601A7E6DDF",
+    "ishtype.object.value": "ISHModule",
+    "FTITLE.logical.value": "Types of penguins",
+    "FDESCRIPTION.logical.value": "Container topic grouping all types of penguins per genus",
+    "FCHANGES.version.value": null,
+    "FISHRELEASELABEL.version.value": [
+      "Penguin publication-v6-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/12/04 12:08:31",
+      "Penguin publication-v6.1.1-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/12/06 15:01:48",
+      "Penguin publication-v6.1.2-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/12/10 13:51:16",
+      "Penguin publication-v6.1.3-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/12/10 15:16:42",
+      "Penguin publication-v6.1.4-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/12/13 10:52:57",
+      "Penguin publication-v6.1.5-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/12/13 12:18:19",
+      "Penguin publication-v7-GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA-2012/12/12 11:44:45"
+    ],
+    "CREATED-ON.lng.value": "2016-01-07T03:47:28Z",
+    "FAUTHOR.lng.value": "admin",
+    "FSTATUS.lng.value": "Released",
+    "MODIFIED-ON.lng.value": "2016-05-26T13:49:34Z",
+    "VERSION.version.value": "1",
+    "DOC-LANGUAGE.lng.value": [
+      "en"
+    ],
+    "FISHREVCOUNTER.lng.value": 1,
+    "ED.lng.value": "GUID-7FF9C422-D95C-4AF0-B66C-D1B4AF49E9BA",
+    "FUSERGROUP.logical.element": [
+      "VUSERGROUPDEFAULTDEPARTMENT"
+    ],
+    "READ-ACCESS.logical.element": [
+      "VUSERGROUPDEFAULTDEPARTMENT"
+    ]
+  },
+  "Html": "\n       \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-4A75B581-0D81-412A-A5E1-5E601A7E6DDF__GUID-2D3CF861-276F-4871-9BE0-68B0669A4953\" xmlns=\"http://www.w3.org/1999/xhtml\">Types of penguins</h1>\n      \n      <div class=\"body learningBasebody learningOverviewbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <div class=\"section lcIntro\" id=\"GUID-4A75B581-0D81-412A-A5E1-5E601A7E6DDF__LCINTRO_130B2AADEA86480D918C112D4EA3CDC1\"> \n            \n            <p class=\"p\">Nowadays 17 species of penguins exist, subdivided in 6 groups or genus (genera) \n               \n            </p>\n            \n            \n            <p class=\"p\">Some scientists mention the white-flippered little penguin as an 18th species, but most of them consider it as a subspecies\n               of the little penguin. So, we will not adress that one. \n               \n            </p>\n            \n         </div>\n         \n         <div class=\"section lcObjectives\" id=\"GUID-4A75B581-0D81-412A-A5E1-5E601A7E6DDF__LCOBJECTIVES_253452FF6D334E78AE47820C20A89B9F\"> <span class=\"ph lcObjectivesStem\">The following topics describe the different species per genus.</span> \n         </div>\n         \n      </div>\n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <ul class=\"ullinks\">\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1184146/1184166/penguin-publication/great-penguins--------------aptenodytes-\">Great penguins (Aptenodytes)</a></strong><br />\n               \n            </li>\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1184146/1184170/penguin-publication/brush-tailed-penguins--------------pygoscelis-\">Brush-tailed penguins (Pygoscelis)</a></strong><br />\n               \n            </li>\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1184146/1184174/penguin-publication/brush-tailed-penguins--------------pygoscelis-\">Brush-tailed penguins (Pygoscelis)</a></strong><br />\n               \n            </li>\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1184146/1184177/penguin-publication/banded-penguins--spheniscus-\">Banded penguins (Spheniscus)</a></strong><br />\n               \n            </li>\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1184146/516692/penguin-publication/megadyptes\">Megadyptes</a></strong><br />\n               \n            </li>\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1184146/1184182/penguin-publication/crested-penguins--eudyptes-\">Crested penguins (Eudyptes)</a></strong><br />\n               \n            </li>\n            \n         </ul>\n         \n      </div>\n   "
+}
