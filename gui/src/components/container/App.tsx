@@ -1,4 +1,4 @@
-import { Router, Route, IndexRedirect, History } from "react-router";
+import { Router, Route, IndexRedirect, History, Redirect } from "react-router";
 import { IServices } from "interfaces/Services";
 import { Home } from "components/container/Home";
 import { PublicationContent } from "components/container/PublicationContent";

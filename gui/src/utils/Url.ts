@@ -1,4 +1,4 @@
-import { slugify } from "./Slug";
+import { slugify } from "utils/Slug";
 
 /**
  * Maximum characters for a title

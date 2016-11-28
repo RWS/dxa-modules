@@ -1,4 +1,5 @@
 import { path } from "utils/Path";
+import { ISitemapItem } from "interfaces/ServerModels";
 
 // Global Catalina dependencies
 import IWebRequest = SDL.Client.Net.IWebRequest;

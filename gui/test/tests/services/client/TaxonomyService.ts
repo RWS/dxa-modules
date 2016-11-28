@@ -1,5 +1,5 @@
 import { TaxonomyService } from "services/client/TaxonomyService";
-import { TcmId } from ".utils/TcmId";
+import { TcmId } from "utils/TcmId";
 
 // Global Catalina dependencies
 import TestBase = SDL.Client.Test.TestBase;
