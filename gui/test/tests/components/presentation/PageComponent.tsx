@@ -124,6 +124,35 @@ class PageComponent extends TestBase {
                 expect(spy).not.toHaveBeenCalled();
             });
 
+            it("does handle internal links", (): void => {
+                const pageProps = {
+                    showActivityIndicator: false,
+                    content: `<div>
+                                <a href="/1656863/164363"/>
+                                <a href="/1656863/164363/"/>
+                                <a href="/1656863/164363/publication-mp330"/>
+                                <a href="/1656863/164363/publication-mp330/"/>
+                                <a href="/1656863/164363/publication-mp330/speed-dialling"/>
+                            </div>`,
+                    onNavigate: (): void => {
+                    }
+                };
+                const spy = spyOn(pageProps, "onNavigate").and.callThrough();
+                const page = this._renderComponent(pageProps, target);
+
+                const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
+                expect(domNode).not.toBeNull();
+
+                const hyperlinks = domNode.querySelectorAll("a");
+                expect(hyperlinks.length).toBe(5);
+
+                for (let i: number = 0, length: number = hyperlinks.length; i < length; i++) {
+                    hyperlinks.item(i).click();
+                }
+
+                expect(spy).toHaveBeenCalledTimes(5);
+            });
+
         });
     }
 

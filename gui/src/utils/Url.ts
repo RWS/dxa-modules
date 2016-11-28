@@ -5,7 +5,7 @@ import { slugify } from "./Slug";
  *
  * example: /1656863/164363/publication-mp330/speed-dialling
  */
-const ITEM_URL_REGEX = /^\/\d+(\/[^\/]+(\/[^\/]+(\/[^\/]+)?)?)?$/i;
+const ITEM_URL_REGEX = /^\/\d+\/\d+(\/([^\/]+(\/([^\/]+)?)?)?)?$/i;
 
 /**
  * Maximum characters for a title
