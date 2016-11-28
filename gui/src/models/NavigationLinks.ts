@@ -1,5 +1,4 @@
 import { path } from "utils/Path";
-import { TcmId as TcmIdUtils } from "utils/TcmId";
 
 // Global Catalina dependencies
 import IWebRequest = SDL.Client.Net.IWebRequest;

@@ -3,7 +3,6 @@ import { ISitemapItem } from "interfaces/ServerModels";
 import { localization } from "services/client/LocalizationService";
 import { Toc } from "models/Toc";
 import { NavigationLinks } from "models/NavigationLinks";
-import { TcmId as TcmIdUtils } from "utils/TcmId";
 import { Promise } from "es6-promise";
 
 /**
