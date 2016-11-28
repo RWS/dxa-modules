@@ -3,6 +3,15 @@
 // ---------------------------------------------------------------------------------------------------------------------
 
 @fontFamily: "Myriad Pro";
+@fontHeaderFamily: "Sommet Rounded";
 @fontFamilyFallback: "Arial";
 @fontFamilyPath: "fonts/MyriadPro-Regular.otf";
 @fontSize: 14px;
+
+.sdl-dita-delivery-header-font(@weight: 400, @size:20px, @height: 24px) {
+    font-family: @fontHeaderFamily, @fontFamilyFallback, sans-serif;
+    font-style: normal;
+    font-weight: @weight;
+    font-size: @size;
+    line-height: @height;
+}

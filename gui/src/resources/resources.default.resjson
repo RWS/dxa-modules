@@ -1,4 +1,7 @@
 ﻿{
+  "app.productfamily": "Documentation",
+  "app.language": "English",
+
   "components.app.loading": "Loading",
   "components.app.title": "Documentation",
   "error.publication.not.found": "Unable to retrieve title for publication with id {0}.",

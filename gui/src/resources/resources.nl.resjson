@@ -1,4 +1,7 @@
 ﻿{
+  "app.productfamily": "Documentatie",
+  "app.language": "Engels",
+
   "components.app.loading": "Laden...",
   "components.app.title": "Documentatie",
   "error.publication.not.found": "Publicatie met id {0} kon niet gevonden worden.",
