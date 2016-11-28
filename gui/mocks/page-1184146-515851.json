@@ -1,0 +1,32 @@
+{
+  "Id": "515851",
+  "Title": "Coots \n         \n      ",
+  "Meta": {
+    "ishlogicalref.object.id": 515845,
+    "ishversionref.object.id": 515846,
+    "ishlngref.object.id": 515851,
+    "ishref.object.value": "GUID-CE0CD72E-7838-4B09-9610-C402DBC1F4EA",
+    "ishtype.object.value": "ISHModule",
+    "FTITLE.logical.value": "Coots",
+    "FDESCRIPTION.logical.value": null,
+    "FCHANGES.version.value": null,
+    "FISHRELEASELABEL.version.value": null,
+    "CREATED-ON.lng.value": "2016-01-07T03:46:56Z",
+    "FAUTHOR.lng.value": "admin",
+    "FSTATUS.lng.value": "Released",
+    "MODIFIED-ON.lng.value": "2016-05-26T13:49:33Z",
+    "VERSION.version.value": "1",
+    "DOC-LANGUAGE.lng.value": [
+      "en"
+    ],
+    "FISHREVCOUNTER.lng.value": 1,
+    "ED.lng.value": "GUID-308DB5E9-78B1-43AF-B316-ECA46BC03B9A",
+    "FUSERGROUP.logical.element": [
+      "VUSERGROUPDEFAULTDEPARTMENT"
+    ],
+    "READ-ACCESS.logical.element": [
+      "VUSERGROUPDEFAULTDEPARTMENT"
+    ]
+  },
+  "Html": "\n       \n      \n      <h1 class=\"title title glossterm topictitle1\" id=\"GUID-CE0CD72E-7838-4B09-9610-C402DBC1F4EA__GUID-5395E321-37C1-47DD-B91E-30CFCE5E89DD\" xmlns=\"http://www.w3.org/1999/xhtml\">Coots \n         \n      </h1>\n      \n      \n      <div class=\"abstract abstract glossdef\" xmlns=\"http://www.w3.org/1999/xhtml\"> \n         \t \n         <p class=\"p\">Coots are any of ten species of ducklike water-dwelling birds. Coots are found throughout the world in larger inland waters\n            and streams, where they swim and bob for food, mostly plants, seeds, mollusks, and worms. Coots have greenish or bluish gray\n            feet, the toes of which are fringed by a lobed membrane that facilitates swimming and walking over plant-choked marshes and\n            ooze. The beak is short and conical, surmounted by a flattened fleshy shield that extends onto the forehead. \n            \t \n         </p>\n         \n         \t \n         <div class=\"p\">\n            \t\t\n            <div class=\"fig fignone\"><img class=\"image\" src=\"/gui/mocks/bin/1184146-515560-16.jpg\" />\n               \t\t\n            </div>\n            \n            \t \n         </div>\n         \n         \t \n         <p class=\"p\">The European coot (F. atra) breeds abundantly in many northern parts of the Old World, in winter resorting to river mouths\n            or shallow bays of the sea. About 45 centimetres (18 inches) long and sometimes more than 900 grams (2 pounds) in weight,\n            the seemingly short-winged coot appears to rise with difficulty from the water, pattering along the surface with its feet.\n            It is capable of long-sustained and rapid flight. Although not considered to be game birds, coots sometimes are hunted in\n            winter, when they are most gregarious. \n            \t \n         </p>\n         \n         \t \n         <p class=\"p\">Coots nest in masses of water plants, laying as many as ten speckled eggs. The young are beautifully clothed in jet-black\n            down, with heads of bright orange scarlet, varied with purplish blue. This brilliant colouring is soon lost; adults have sooty\n            black plumage and a bare white callus on the forehead. \n            \t \n         </p>\n         \n         \t \n         <p class=\"p\">The coot of North America, or mud hen (F. americana), closely resembles the European bird. In South America about six species\n            are found, one (F. gigantea) being of considerable size; F. caribaea occurs also in the West Indies. An African species (F.\n            cristata) is distinguished by two red knobs on the forehead. \n            \t \n         </p>\n         \n         \t \n         <p class=\"p\">The scoter, a diving duck of the family Anatidae, is also called a sea coot. \n            \t \n         </p>\n         \n         \t \n         <p class=\"p\">For more information: \n            \t\t<a class=\"xref\" href=\"http://www.britannica.com/EBchecked/topic/136457/coot\" target=\"_blank\">Encyclopedia Britannica - Coot (bird)</a> \n            \t \n         </p>\n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Parent topic:</strong> <a class=\"link\" title=\"This topic groups birds of other orders which are predators of penguins or have another relation with the penguins\" href=\"/1184146/515736/penguin-publication/other-birds\">Other birds</a></div>\n            \n         </div>\n         \n      </div>\n   "
+}

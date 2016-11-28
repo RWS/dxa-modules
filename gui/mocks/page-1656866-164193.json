@@ -1,0 +1,34 @@
+{
+  "Id": "164193",
+  "Title": "Beantworten oder Abweisen eines ankommenden Anrufs",
+  "Meta": {
+    "ishlogicalref.object.id": 164191,
+    "ishversionref.object.id": 164192,
+    "ishlngref.object.id": 164193,
+    "ishref.object.value": "GUID-291C9232-8846-42A5-BEA6-228F7C4A6C20",
+    "ishtype.object.value": "ISHModule",
+    "FTITLE.logical.value": "answering or rejecting a call",
+    "FDESCRIPTION.logical.value": null,
+    "FCHANGES.version.value": "Change1",
+    "FISHRELEASELABEL.version.value": [
+      "Publication MP330-v1-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2012/09/21 12:27:01",
+      "Publication MP330-v2-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2012/09/24 17:31:39",
+      "Publication MP660-v1-GUID-EB2E82F1-1C76-4032-815C-4E717140A081-2012/09/24 14:57:38",
+      "Publication MP660-v2-GUID-EB2E82F1-1C76-4032-815C-4E717140A081-2012/09/24 17:09:12",
+      "Publication MP330-v3-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2016/02/11 10:42:22"
+    ],
+    "CREATED-ON.lng.value": "2015-12-22T18:26:46Z",
+    "FAUTHOR.lng.value": "admin",
+    "FSTATUS.lng.value": "Released",
+    "MODIFIED-ON.lng.value": "2016-05-26T13:51:22Z",
+    "VERSION.version.value": "1",
+    "DOC-LANGUAGE.lng.value": [
+      "de"
+    ],
+    "FISHREVCOUNTER.lng.value": 2,
+    "ED.lng.value": "GUID-7A1AC87D-064F-4912-91BE-D8DF058502D5",
+    "FUSERGROUP.logical.element": null,
+    "READ-ACCESS.logical.element": null
+  },
+  "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-291C9232-8846-42A5-BEA6-228F7C4A6C20__GUID-46C6AC62-4581-415A-A833-76F8FD5EA9D3\" xmlns=\"http://www.w3.org/1999/xhtml\">Beantworten oder Abweisen eines ankommenden Anrufs</h1>\n      \n      \n      \n      <div class=\"body taskbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\" />\n         \n         \n         <div class=\"section context\" id=\"GUID-291C9232-8846-42A5-BEA6-228F7C4A6C20__GUID-25D3E37A-5A35-4287-9CE2-8E9AD0D55069\">Beachten Sie, dass, wenn Sie angerufen werden, der Name und die Telefonnummer des Anrufers oder der Text <samp class=\"ph msgph\">Geheimes Nummer</samp> oder <samp class=\"ph msgph\">Anruf</samp>auf dem Telefon angezeigt werden. Wird im Verzeichnis mehr als ein Name mit derselben Telefonnummer wie der des Anrufers gefunden,\n            wird nur die Telefonnummer angezeigt, falls diese Funktion verfügbar ist.\n         </div>\n         \n         \n         <ol class=\"ol steps\" id=\"GUID-291C9232-8846-42A5-BEA6-228F7C4A6C20__GUID-7E9372DD-5095-4116-8D0F-A46300073277\">\n            <li class=\"li step\">\n               <span class=\"ph cmd\">Drücken Sie <img class=\"image\" src=\"/gui/mocks/bin/1656866-345915-16.gif\" />um den ankommenden Anruf zu beantworten, und <img class=\"image\" src=\"/gui/mocks/bin/1656866-345803-16.gif\" /> um den Anruf zu beenden.</span>\n               \n            </li>\n            \n            <li class=\"li step\">\n               <span class=\"ph cmd\">Drücken Sie <img class=\"image\" src=\"/gui/mocks/bin/1656866-345803-16.gif\" /> um den Anruf abzuweisen.</span>\n               \n            </li>\n            \n         </ol>\n         \n         \n         <tcdl:If type=\"ish:Condition\" condition=\"(HEADSET=Y)\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\"><div class=\"section postreq\" id=\"GUID-291C9232-8846-42A5-BEA6-228F7C4A6C20__GUID-3F821A81-144A-4684-A34D-1EDB3B0AEF3C\">Wenn ein kompatibles Headset mit dem Telefon verbunden ist, können Sie einen Anruf entgegennehmen und beenden, indem Sie die\n            Taste am Headset drücken.\n         </div></tcdl:If>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Übergeordnetes Thema:</strong> <a class=\"link\" href=\"/1656866/164466/publication-mp330/anruffunktionen\">Anruffunktionen</a></div>\n            \n         </div>\n         \n         \n         <div class=\"linklist linklist relinfo reltasks\"><strong>Zugehörige Tasks</strong><br />\n            \n            \n            <div><a class=\"link\" href=\"/1656866/164210/publication-mp330/anrufen\">Anrufen</a></div>\n            \n            <div><a class=\"link\" title=\"Eine Nummer kann gewählt werden, indem Sie ein oder mehrere Wörter sprechen, die damit verknüpft wurden. Bei dem Anrufnamen kann es sich beispielsweise um einen Namen handeln.\" href=\"/1656866/164329/publication-mp330/sprachanwahl\">Sprachanwahl</a></div>\n         </div>\n         \n         \n         <div class=\"linklist linklist relinfo\"><strong>Zugehörige Informationen</strong><br />\n            \n            \n            <div><a class=\"link\" title=\"Bevor Sie die Kurzwahl verwenden können, weisen Sie einer der Kurzwahltasten von bis eine Telefonnummer zu.\" href=\"/1656866/164361/publication-mp330/kurzwahl\">Kurzwahl</a></div>\n            \n            <div><a class=\"link\" href=\"/1656866/164466/publication-mp330/anruffunktionen\">Anruffunktionen</a></div>\n            \n            <div><a class=\"link\" href=\"/1656866/164280/publication-mp330/tasten\">Tasten</a></div>\n         </div>\n         \n      </div>\n   "
+}
