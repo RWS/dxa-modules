@@ -68,17 +68,7 @@ namespace Sdl.Web.Modules.ContextExpressions
                 return result;
             }
 
-            IContextClaimsProvider contextClaimsProvider = SiteConfiguration.ContextClaimsProvider;
-            if (contextClaimsProvider is AdfContextClaimsProvider)
-            {
-                result = SiteConfiguration.ContextClaimsProvider.GetContextClaims(null, localization);
-            }
-            else
-            {
-                throw new ContextExpressionException(
-                    string.Format("Context Expressions Module requires use of AdfContextClaimsProvider, but '{0}' is currently used.", contextClaimsProvider.GetType().Name) 
-                    );
-            }
+            result = SiteConfiguration.ContextClaimsProvider.GetContextClaims(null, localization);
 
             if (httpContext != null)
             {
