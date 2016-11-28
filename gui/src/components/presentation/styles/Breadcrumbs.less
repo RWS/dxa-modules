@@ -1,20 +1,34 @@
 @import (reference) "../../../theming/styles.less";
 @import (reference) "../../../theming/icons.less";
-
 .sdl-dita-delivery-breadcrumbs {
     ul {
-        .icon-home-16-color();
+        .icon-bc-home-icon();
         width: auto;
         height: auto;
+        line-height: 30px;
         background-repeat: no-repeat;
-        background-position: center left;        
-        padding-left: 25px;
+        background-position: left 6px;
+        padding-left: 40px;
         margin: 0;
         li {
             color: @neutralColor5;
-            display: inline;
-            &:before {
-                content: " / ";
+            display: inline-block;
+            line-height: 30px;
+            vertical-align: middle;
+            a, a:visited, a:hover, a:active, a:link {
+                text-decoration: unset;
+                color: inherit;
+            }
+            .separator {
+                .icon-breadcrumb-icon();
+                background-repeat: no-repeat;
+                background-position: center 6px;
+                height: 30px;
+                float: right;
+                margin: 0 15px;
+            }
+            .active {
+                color: @neutralColor7;
             }
         }
     }
