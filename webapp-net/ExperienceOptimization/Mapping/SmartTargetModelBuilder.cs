@@ -78,7 +78,12 @@ namespace Sdl.Web.Modules.SmartTarget.Mapping
                     SmartTargetRegion smartTargetRegion = smartTargetPageModel.Regions[regionName] as SmartTargetRegion;
                     if (smartTargetRegion != null)
                     {
-                        int maxItems = smartTargetRegionField.ContainsKey("maxItems") ? Convert.ToInt32(smartTargetRegionField["maxItems"].Value) : 100;
+                        int maxItems = 100; // Default
+                        IField maxItemsField;
+                        if (smartTargetRegionField.TryGetValue("maxItems", out maxItemsField))
+                        {
+                            maxItems = Convert.ToInt32(maxItemsField.NumericValues[0]);
+                        }
                         smartTargetRegion.MaxItems = maxItems;
                     }
                 }
