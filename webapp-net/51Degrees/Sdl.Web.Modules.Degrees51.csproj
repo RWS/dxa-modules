@@ -14,7 +14,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <DxaFrameworkVersion>1.7.0-alpha-201611241636</DxaFrameworkVersion>
-    <ContextClientVersion>8.5.0</ContextClientVersion>
+    <ContextClientVersion>8.5.0-beta-201611280026</ContextClientVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
