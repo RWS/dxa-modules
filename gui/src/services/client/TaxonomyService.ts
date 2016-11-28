@@ -42,20 +42,20 @@ export class TaxonomyService implements ITaxonomyService {
      * @memberOf DataStoreClient
      */
     public getSitemapRoot(publicationId: string): Promise<ISitemapItem[]> {
-        return this.getSitemapItems(publicationId);
+        return this.getSitemapItems(publicationId, "root");
     }
 
     /**
      * Get the site map items for a parent
      *
      * @param {string} publicationId Publication Id
-     * @param {string} [parentId] The parent Id
+     * @param {string} parentId The parent Id
      * @returns {Promise<ISitemapItem[]>} Promise to return Items
      *
      * @memberOf DataStoreClient
      */
-    public getSitemapItems(publicationId: string, parentId?: string): Promise<ISitemapItem[]> {
-        const toc = this.getTocModel(publicationId, parentId || "root");
+    public getSitemapItems(publicationId: string, parentId: string): Promise<ISitemapItem[]> {
+        const toc = this.getTocModel(publicationId, parentId);
 
         return new Promise((resolve: (items?: ISitemapItem[]) => void, reject: (error: string | null) => void) => {
             if (toc.isLoaded()) {
@@ -145,12 +145,10 @@ export class TaxonomyService implements ITaxonomyService {
             TaxonomyService.NavigationLinksModels[publicationId] = {};
         }
         if (!TaxonomyService.NavigationLinksModels[publicationId][pageId]) {
-            // Calculate taxonomy id based on publication id
-            const taxonomyId = TcmIdUtils.getTaxonomyId(publicationId);
-            if (!taxonomyId) {
-                return undefined;
-            }
-            TaxonomyService.NavigationLinksModels[publicationId][pageId] = new NavigationLinks(taxonomyId, pageId);
+            // TODO: this conversion will not be needed when upgrading to DXA 1.7
+            // https://jira.sdl.com/browse/TSI-2131
+            const taxonomyId = TcmId.getTaxonomyItemId("1", pageId);
+            TaxonomyService.NavigationLinksModels[publicationId][pageId] = new NavigationLinks(publicationId, taxonomyId || pageId);
         }
         return TaxonomyService.NavigationLinksModels[publicationId][pageId];
     }

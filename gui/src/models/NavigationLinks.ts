@@ -1,8 +1,6 @@
 import { path } from "utils/Path";
 import { TcmId as TcmIdUtils } from "utils/TcmId";
 
-import { ISitemapItem } from "interfaces/ServerModels";
-
 // Global Catalina dependencies
 import IWebRequest = SDL.Client.Net.IWebRequest;
 import LoadableObject = SDL.Client.Models.LoadableObject;
@@ -20,22 +18,22 @@ eval(OO.enableCustomInheritance);
  */
 export class NavigationLinks extends LoadableObject {
 
-    private _pageId: string;
+    private _publicationId: string;
     private _taxonomyId: string;
     private _path: ISitemapItem[] = [];
 
     /**
      * Creates an instance of NavigationLinks.
      *
+     * @param {string} publicationId Publication id
      * @param {string} taxonomyId Taxonomy id
-     * @param {string} pageId Page id
      *
      * @memberOf NavigationLinks
      */
-    constructor(taxonomyId: string, pageId: string) {
+    constructor(publicationId: string, taxonomyId: string) {
         super();
+        this._publicationId = publicationId;
         this._taxonomyId = taxonomyId;
-        this._pageId = pageId;
     }
 
     /**
@@ -51,7 +49,7 @@ export class NavigationLinks extends LoadableObject {
 
     /* Overloads */
     protected _executeLoad(reload: boolean): void {
-        const url = path.getAbsolutePath(`gui/mocks/navigation-${TcmIdUtils.removeNamespace(this._taxonomyId)}-${TcmIdUtils.removeNamespace(this._pageId)}.json`);
+        const url = path.getAbsolutePath(`gui/mocks/navigation-${this._publicationId}-${this._taxonomyId}.json`);
         Net.getRequest(url,
             this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
     }

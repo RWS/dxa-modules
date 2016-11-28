@@ -33,7 +33,7 @@ export interface IBreadcrumbsProps {
     /**
      * Load items path for a specific item
      */
-    loadItemsPath: (publicationId: string, pageUrl: string) => Promise<ISitemapItem[]>;
+    loadItemsPath: (publicationId: string, parentId: string) => Promise<ISitemapItem[]>;
 }
 
 /**
@@ -74,8 +74,8 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
      */
     public componentWillMount(): void {
         const { publicationId, selectedItem, loadItemsPath } = this.props;
-        if (selectedItem && selectedItem.Url) {
-            loadItemsPath(publicationId, selectedItem.Url).then(
+        if (selectedItem && selectedItem.Id) {
+            loadItemsPath(publicationId, selectedItem.Id).then(
                 path => {
                     /* istanbul ignore else */
                     if (!this._isUnmounted) {
@@ -96,12 +96,12 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
      */
     public componentWillUpdate(nextProps: IBreadcrumbsProps, nextState: IBreadcrumbsState): void {
         const { publicationId, selectedItem, loadItemsPath } = this.props;
-        const currentUrl = selectedItem ? selectedItem.Url : null;
+        const currentId = selectedItem ? selectedItem.Id : null;
         const nextItem = nextProps.selectedItem;
-        if (nextItem) {
-            const nextUrl = nextItem.Url;
-            if (nextUrl && (currentUrl !== nextUrl)) {
-                loadItemsPath(nextProps.publicationId || publicationId, nextUrl).then(
+        if (nextItem && nextItem.Url) {
+            const nextId = nextItem.Id;
+            if (nextId && (currentId !== nextId)) {
+                loadItemsPath(nextProps.publicationId || publicationId, nextId).then(
                     path => {
                         /* istanbul ignore else */
                         if (!this._isUnmounted) {
@@ -111,7 +111,7 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
                         }
                     });
             }
-        } else if (currentUrl) {
+        } else if (currentId) {
             this.setState({
                 itemPath: nextItem ? [nextItem] : []
             });
@@ -139,7 +139,7 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
             <div className={"sdl-dita-delivery-breadcrumbs"}>
                 <ul>
                     <li>
-                        <Link title={publicationTitle} to={`${Url.getPublicationUrl(publicationId)}`}>{publicationTitle}</Link>
+                        <Link title={publicationTitle} to={`${Url.getPublicationUrl(publicationId, publicationTitle)}`}>{publicationTitle}</Link>
                     </li>
                     {
                         Array.isArray(itemPath) && (
@@ -147,12 +147,12 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
                                 return (
                                     <li key={key}>
                                         {
-                                            (currentUrl != item.Url)
+                                            (currentUrl !== item.Url)
                                                 ?
                                                 (item.Url) ?
-                                                    <Link title={item.Title} to={`${Url.getPageUrl(publicationId, item.Url)}`}>{item.Title}</Link>
+                                                    <Link title={item.Title} to={item.Url}>{item.Title}</Link>
                                                     :
-                                                    <Link title={item.Title} to={`${Url.getPublicationUrl(publicationId)}`}>{item.Title}</Link>
+                                                    <Link title={item.Title} to={`${Url.getPublicationUrl(publicationId, publicationTitle)}`}>{item.Title}</Link>
                                                 : <span>{item.Title}</span>
                                         }
                                     </li>
