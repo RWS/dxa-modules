@@ -22,10 +22,22 @@ const services: IServices = {
     taxonomyService: new TaxonomyService()
 };
 
-if (!mainElement) {
-    console.error(`Unable to locate element to render application.`);
-} else {
-    ReactDOM.render(
-        <App services={services} history={browserHistory} />,
-        mainElement);
+const render = (AppComp: typeof App): void => {
+    if (!mainElement) {
+        console.error(`Unable to locate element to render application.`);
+    } else {
+        ReactDOM.render(
+            <AppComp services={services} history={browserHistory} />,
+            mainElement);
+    }
+};
+render(App);
+
+// Enable Hot Module Replacement (HMR)
+if (module.hot) {
+    module.hot.accept("./components/container/App", () => {
+        // If we receive a HMR request for our App container, then reload it using require (we can't do this dynamically with import)
+        const NextApp = (require("./components/container/App") as { App: typeof App }).App;
+        render(NextApp);
+    });
 }

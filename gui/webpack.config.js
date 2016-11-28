@@ -4,16 +4,21 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const extractCSS = new ExtractTextPlugin('stylesheets/[name].css');
 
 module.exports = (isTest, isDebug) => {
+    const entries = {
+        main: './src/Main.tsx',
+        server: './src/Server.tsx',
+        vendor: ['es6-promise', 'react-router', 'slug', 'ts-helpers']
+    };
+    const testEntries = Object.assign({
+        test: './test/Main.ts',
+        testConfiguration: './test/configuration/Configuration.ts',
+    }, entries);
+
     const config = {
-        entry: {
-            main: './src/Main.tsx',
-            server: './src/Server.tsx',
-            test: './test/Main.ts',
-            testConfiguration: './test/configuration/Configuration.ts',
-            vendor: ['es6-promise', 'react-router', 'slug', 'ts-helpers']
-        },
+        entry: isTest ? testEntries : entries,
         output: {
             path: path.resolve(__dirname + '/dist'),
+            publicPath: '/',
             filename: '[name].bundle.js'
         },
         devtool: 'source-map',
@@ -26,30 +31,44 @@ module.exports = (isTest, isDebug) => {
             extensions: ['.ts', '.tsx', '.js', '.css', '.less']
         },
         module: {
-            loaders: [{
-                test: /\.otf$/,
-                loader: 'url-loader?limit=100000'
-            }, {
-                test: /\.css$/,
-                loader: extractCSS.extract([
-                    'css-loader',
-                    'postcss-loader'
-                ])
-            }, {
-                test: /\.less$/,
-                loader: extractCSS.extract([
-                    'css-loader',
-                    'postcss-loader',
-                    'less-loader'
-                ])
-            }, {
-                test: /\.tsx?$/,
-                loader: 'ts-loader'
-            }]
+            rules: [
+                {
+                    test: /\.otf$/,
+                    loader: 'url-loader?limit=100000'
+                }, {
+                    test: /\.css$/,
+                    loader: extractCSS.extract([
+                        'css-loader',
+                        'postcss-loader'
+                    ])
+                }, {
+                    test: /\.less$/,
+                    loader: extractCSS.extract([
+                        'css-loader',
+                        'postcss-loader',
+                        'less-loader'
+                    ])
+                }, {
+                    test: /\.tsx?$/,
+                    loader: 'ts-loader'
+                }
+            ]
         },
         plugins: [
             extractCSS
-        ]
+        ],
+        // What information should be printed to the console
+        stats: {
+            colors: true,
+            reasons: isDebug,
+            hash: isDebug,
+            version: isDebug,
+            timings: true,
+            chunks: isDebug,
+            chunkModules: isDebug,
+            cached: isDebug,
+            cachedAssets: isDebug,
+        },
     };
 
     if (isTest) {
@@ -57,7 +76,7 @@ module.exports = (isTest, isDebug) => {
          * Instruments TS source files for subsequent code coverage.
          * See https://github.com/deepsweet/istanbul-instrumenter-loader
          */
-        config.module.loaders.push({
+        config.module.rules.push({
             enforce: 'post',
             test: /\.tsx?$/,
             loader: 'istanbul-instrumenter-loader',
@@ -75,7 +94,7 @@ module.exports = (isTest, isDebug) => {
         }));
     }
 
-    if (!isDebug) {
+    if (!isDebug) { // Only for production
         config.plugins.push(new webpack.optimize.UglifyJsPlugin({
             compress: {
                 warnings: false
@@ -83,6 +102,17 @@ module.exports = (isTest, isDebug) => {
             sourceMap: false,
             mangle: false
         }));
+    } else { // Only for debug
+        // Hot Module Replacement (HMR)
+        const hotMiddlewareScript = 'webpack-hot-middleware/client';
+        for (let entryName in config.entry) {
+            if (entryName !== 'vendor') {
+                let entryValue = config.entry[entryName];
+                config.entry[entryName] = [entryValue, hotMiddlewareScript];
+            }
+        }
+        config.plugins.push(new webpack.HotModuleReplacementPlugin());
+        config.plugins.push(new webpack.NoErrorsPlugin());
     }
 
     return config;

@@ -12,7 +12,6 @@ const catalinaPackageInfo = require('./node_modules/sdl-catalina/package.json');
 const gulpTypings = require('./build/gulp-plugins/install-typings');
 const yargs = require('yargs');
 
-const reload = browserSync.reload;
 const sourcesPath = './src/';
 const buildOptions = {
     version: packageInfo.version,
@@ -56,6 +55,11 @@ const buildOptions = {
         ]
     }
 };
+let webpackInstance = {
+    compiler: null,
+    config: null,
+    onBundleCreated: null
+};
 
 // Log info
 console.log(`Application version: ${buildOptions.version}, Catalina version: ${buildOptions.catalinaVersion}`);
@@ -67,7 +71,7 @@ const commonFolderName = function () {
 // Tasks
 const runTSLint = require('./build/gulp-tasks/run-tslint')(buildOptions, gulp);
 const serve = require('./build/gulp-tasks/serve')(buildOptions, gulp, browserSync, commonFolderName);
-const runKarma = require('./build/gulp-tasks/run-karma')(buildOptions, browserSync);
+const runKarma = require('./build/gulp-tasks/run-karma')(buildOptions);
 const runTests = function (singleRun, cb, onTestRunCompleted) {
     return function (err) {
         var onTestCompleted = function (err, results) {
@@ -81,9 +85,9 @@ const runTests = function (singleRun, cb, onTestRunCompleted) {
                 if (err) {
                     cb(err);
                 } else {
-                    runKarma(singleRun, onTestCompleted, onTestRunCompleted);
+                    runKarma(webpackInstance, singleRun, onTestCompleted, onTestRunCompleted);
                 }
-            }, !singleRun);
+            }, webpackInstance, !singleRun);
         }
     };
 };
@@ -155,7 +159,13 @@ gulp.task('package-project', [
     'copy-dependencies',
     'install-typings',
     'wrap-dita-ot-styles'
-], require('./build/gulp-tasks/package-project')(buildOptions, browserSync));
+], cb => {
+    const onCompleted = (err, wpInstance) => {
+        webpackInstance = wpInstance;
+        cb(err);
+    };
+    require('./build/gulp-tasks/package-project')(buildOptions)(onCompleted);
+} );
 
 gulp.task('run-tslint', runTSLint);
 
@@ -245,7 +255,9 @@ gulp.task('default', function (cb) {
     ], cb);
 });
 
-gulp.task('serve', ['build'], serve);
+gulp.task('serve', ['build'], cb => {
+    serve(cb, webpackInstance);
+});
 
 gulp.task('serve:dist', function (cb) {
     // Build release
@@ -258,7 +270,7 @@ gulp.task('serve:dist', function (cb) {
                 cb(err);
                 return;
             }
-            serve(cb);
+            serve(cb, webpackInstance);
         });
 });
 

@@ -4,14 +4,14 @@
  * Package current project.
  * @module package-project
  * @param {Object} buildOptions Build options.
- * @param {Object} browserSync BrowserSync instance.
  */
-module.exports = (buildOptions, browserSync) => {
+module.exports = (buildOptions) => {
     const webpack = require('webpack');
 
     return (cb) => {
         const config = require('../../webpack.config')(buildOptions.isTest, buildOptions.isDebug);
         let firstRun = true;
+        let compiler;
 
         const onCompleted = (err, stats) => {
             console.log(stats.toString({
@@ -23,20 +23,13 @@ module.exports = (buildOptions, browserSync) => {
                 firstRun = false;
                 const jsonStats = stats.toJson();
                 const error = err || (jsonStats.errors && jsonStats.errors.length > 0 ? new Error('Failed to create bundles') : null);
-                cb(error);
-            } else {
-                browserSync.reload();
+                cb(error, {
+                    config,
+                    compiler
+                });
             }
         };
 
-        const compiler = webpack(config, (err, stats) => {
-            onCompleted(err, stats);
-            if (!err && !buildOptions.isDefaultTask && buildOptions.isDebug) {
-                compiler.watch({
-                    aggregateTimeout: 500,
-                    poll: true
-                }, onCompleted);
-            }
-        });
+        compiler = webpack(config, onCompleted);
     }
 };

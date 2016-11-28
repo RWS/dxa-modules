@@ -4,13 +4,12 @@
  * Run karma.
  * @module run-karma
  * @param {Object} buildOptions Build options.
- * @param {Object} browserSync BrowserSync instance.
  */
-module.exports = (buildOptions, browserSync) => {
+module.exports = (buildOptions) => {
     const karma = require('karma');
     const yargs = require('yargs');
 
-    return (singleRun, cb, onTestRunCompleted) => {
+    return (webpackInstance, singleRun, cb, onTestRunCompleted) => {
         var configPath = process.cwd() + '/test/configuration/karma.conf.js';
         var urlPrefix = 'http://localhost:' + buildOptions.ports.httpServer + '/';
         var latestsResults = {}; // Set whenever tests are completed
@@ -64,8 +63,8 @@ module.exports = (buildOptions, browserSync) => {
             karmaServer.on('run_complete', () => onTestRunCompleted(latestsResults));
         }
 
-        // Refresh files if browsersync reloads browser
-        browserSync.emitter.on('browser:reload', () => karmaServer.refreshFiles());
+        // Refresh files when a new bundle is created
+        webpackInstance.onBundleCreated = () => karmaServer.refreshFiles();
 
         karmaServer.start();
     }
