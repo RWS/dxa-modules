@@ -23,10 +23,12 @@ export class Home extends React.Component<{}, {}> {
         const { localizationService } = this.context.services;
         return (
             <div className={"sdl-dita-delivery-app"}>
-                <TopBar
-                    selectedProductFamilyTitle={localizationService.formatMessage("app.productfamily")}
-                    selectedLanguage={localizationService.formatMessage("app.language")}
-                />
+                <div className={"sdl-dita-delivery-content-wrapper"}>
+                    <TopBar
+                        selectedProductFamilyTitle={localizationService.formatMessage("app.productfamily")}
+                        selectedLanguage={localizationService.formatMessage("app.language")}
+                    />
+                </div>
                 {this.props.children}
             </div>
         );
