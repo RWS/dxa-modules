@@ -363,8 +363,8 @@ export class PublicationContent extends React.Component<IPublicationContentProps
     }
 
     private _getActiveSitemapPath(pageId: string, done: (path: string[]) => void): void {
-        const {services} = this.context;
-        const {publicationId} = this.props.params;
+        const { services } = this.context;
+        const { publicationId } = this.props.params;
         services.taxonomyService.getSitemapPath(publicationId, pageId).then(
             path => {
                 /* istanbul ignore else */
