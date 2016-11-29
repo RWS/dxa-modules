@@ -140,12 +140,13 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
                 <ul>
                     <li>
                         <Link title={publicationTitle} to={`${Url.getPublicationUrl(publicationId, publicationTitle)}`}>{publicationTitle}</Link>
+                        <span className="separator" />
                     </li>
                     {
                         Array.isArray(itemPath) && (
-                            itemPath.map((item: ISitemapItem, key: number) => {
+                            itemPath.map((item: ISitemapItem, index: number) => {
                                 return (
-                                    <li key={key}>
+                                    <li key={index}>
                                         {
                                             (currentUrl !== item.Url)
                                                 ?
@@ -153,8 +154,9 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
                                                     <Link title={item.Title} to={item.Url}>{item.Title}</Link>
                                                     :
                                                     <Link title={item.Title} to={`${Url.getPublicationUrl(publicationId, publicationTitle)}`}>{item.Title}</Link>
-                                                : <span>{item.Title}</span>
+                                                : <span className="active">{item.Title}</span>
                                         }
+                                        {index < (itemPath.length - 1) ? <span className="separator" /> : ""}
                                     </li>
                                 );
                             })

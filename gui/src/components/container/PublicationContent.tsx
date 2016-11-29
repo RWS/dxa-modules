@@ -276,12 +276,6 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                         } }
                         onSelectionChanged={this._onTocSelectionChanged.bind(this)}
                         error={tocError} />
-                    <Breadcrumbs
-                        publicationId={publicationId}
-                        publicationTitle={publicationTitle || ""}
-                        loadItemsPath={taxonomyService.getSitemapPath.bind(taxonomyService)}
-                        selectedItem={selectedTocItem}
-                        />
                     <Page
                         showActivityIndicator={isPageLoading || false}
                         content={content}
@@ -291,7 +285,14 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                             if (router) {
                                 router.push(url);
                             }
-                        } } />
+                        } } >
+                        <Breadcrumbs
+                            publicationId={publicationId}
+                            publicationTitle={publicationTitle || ""}
+                            loadItemsPath={taxonomyService.getSitemapPath.bind(taxonomyService)}
+                            selectedItem={selectedTocItem}
+                            />
+                    </Page>
                 </div>
             </section>
         );
@@ -306,8 +307,8 @@ export class PublicationContent extends React.Component<IPublicationContentProps
 
     private _onTocSelectionChanged(sitemapItem: ISitemapItem, path: string[]): void {
         const page = this._page;
-        const { router, services } = this.context;
-        const { publicationId, pageIdOrPublicationTitle } = this.props.params;
+        const {router, services } = this.context;
+        const {publicationId, pageIdOrPublicationTitle } = this.props.params;
         const publicationService = services.publicationService;
         const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
 
@@ -364,8 +365,8 @@ export class PublicationContent extends React.Component<IPublicationContentProps
     }
 
     private _getActiveSitemapPath(pageId: string, done: (path: string[]) => void): void {
-        const { services } = this.context;
-        const { publicationId } = this.props.params;
+        const {services} = this.context;
+        const {publicationId} = this.props.params;
         services.taxonomyService.getSitemapPath(publicationId, pageId).then(
             path => {
                 /* istanbul ignore else */
