@@ -276,12 +276,6 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                         } }
                         onSelectionChanged={this._onTocSelectionChanged.bind(this)}
                         error={tocError} />
-                    <Breadcrumbs
-                        publicationId={publicationId}
-                        publicationTitle={publicationTitle || ""}
-                        loadItemsPath={taxonomyService.getSitemapPath.bind(taxonomyService)}
-                        selectedItem={selectedTocItem}
-                        />
                     <Page
                         showActivityIndicator={isPageLoading || false}
                         content={content}
@@ -291,7 +285,14 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                             if (router) {
                                 router.push(url);
                             }
-                        } } />
+                        } }>
+                        <Breadcrumbs
+                            publicationId={publicationId}
+                            publicationTitle={publicationTitle || ""}
+                            loadItemsPath={taxonomyService.getSitemapPath.bind(taxonomyService)}
+                            selectedItem={selectedTocItem}
+                            />
+                    </Page>
                 </div>
             </section>
         );

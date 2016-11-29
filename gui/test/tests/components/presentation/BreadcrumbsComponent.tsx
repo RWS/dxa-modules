@@ -108,7 +108,7 @@ class BreadcrumbsComponent extends TestBase {
                     expect(nodes.item(2).textContent).toBe(itemsPath[1].Title);
 
                     // Last item is the selected item and should not highlighted with Link
-                    const spanNodes = domNode.querySelectorAll("span");
+                    const spanNodes = domNode.querySelectorAll("span.active");
                     expect(spanNodes.length).toBe(1);
                     expect(spanNodes.item(0).textContent).toBe(itemsPath[2].Title);
 
