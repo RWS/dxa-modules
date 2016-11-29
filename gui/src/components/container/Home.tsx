@@ -24,8 +24,8 @@ export class Home extends React.Component<{}, {}> {
         return (
             <div className={"sdl-dita-delivery-app"}>
                 <TopBar
-                    selectedProductFamilyTitle={localizationService.formatMessage("app.productfamily")}
-                    selectedLanguage={localizationService.formatMessage("app.language")}
+                    title={localizationService.formatMessage("app.productfamily")}
+                    language={localizationService.formatMessage("app.language")}
                 />
                 {this.props.children}
             </div>

@@ -2,20 +2,19 @@
 
 @import (reference) "../../../theming/styles.less";
 
-.sdl-dita-delivery-topbar-sticky-header-wrapper {
+.sdl-dita-delivery-topbar {
     width: 100%;
-    height: @gridTopHeight;
+    height: 50px;
     background-color: @accentColor3;
     color: @neutralColor8;
     border-width: 0px;
     box-shadow: none;
-    line-height: @gridTopHeight;
+    line-height: 50px;
     position: fixed;
 
     header {
         display: table;
-        width: @gridCenterWidth;
-        min-width: @gridCenterWidth;
+        width: 1200px;
         position: relative;
         margin: 0 auto;
 
@@ -38,7 +37,7 @@
 
         .sdl-dita-delivery-topbar-family
         {
-            .sdl-dita-delivery-header-font(200, 20px, @gridTopHeight);
+            .sdl-dita-delivery-header-font(200, 20px, 50px);
         }
 
         .sdl-dita-delivery-topbar-language {
