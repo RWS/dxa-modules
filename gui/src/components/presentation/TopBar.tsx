@@ -1,3 +1,5 @@
+import { IndexLink } from "react-router";
+
 import "./styles/TopBar";
 
 /**
@@ -30,7 +32,7 @@ export const TopBar = (props: ITopBarProps) => {
         <div className={"sdl-dita-delivery-topbar"}>
             <header>
                 <div className={"sdl-dita-delivery-topbar-logo"} title="SDL">
-                    <a href="/"></a>
+                    <IndexLink to="/"/>
                 </div>
                 <div className={"sdl-dita-delivery-topbar-family"}>
                     {props.title}
