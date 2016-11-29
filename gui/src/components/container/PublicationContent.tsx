@@ -292,7 +292,8 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                             loadItemsPath={taxonomyService.getSitemapPath.bind(taxonomyService)}
                             selectedItem={selectedTocItem}
                             />
-                </Page>
+                    </Page>
+                </div>
             </section>
         );
     }
