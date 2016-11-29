@@ -48,7 +48,7 @@
     "portfinder": "~1.0.3",
     "remap-istanbul": "~0.7.0",
     "run-sequence": "~1.2.1",
-    "sdl-icons": "0.1.1-6",
+    "sdl-icons": "1.1.0-3",
     "through2": "~2.0.1",
     "ts-loader": "~1.0.0",
     "tslint": "~3.14.0",

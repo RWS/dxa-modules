@@ -1,8 +1,6 @@
 @import (reference) "../../../theming/styles.less";
-@font-face {
-    font-family: @fontFamily;
-    src: url('../../../theming/@{fontFamilyPath}');
-}
+
+.customFont();
 
 html, body, #main-view-target {
     height: 100%;
@@ -15,12 +13,6 @@ html, body, #main-view-target {
     display: flex;
     flex-flow: column;
     height: 100%;
-    .sdl-dita-delivery-breadcrumbs {
-        position: relative;
-        left: 20px;
-        height: 30px;
-        line-height: 30px;
-    }
     .sdl-dita-delivery-publication-content {
         position: relative;
         flex: 1 1 auto;
