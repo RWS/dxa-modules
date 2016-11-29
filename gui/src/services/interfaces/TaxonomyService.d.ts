@@ -20,12 +20,12 @@ export interface ITaxonomyService {
      * Get the site map items for a parent
      *
      * @param {string} publicationId Publication Id
-     * @param {string} [parentId] The parent id
+     * @param {string} parentId The parent id
      * @returns {Promise<ISitemapItem[]>} Promise to return the items
      *
      * @memberOf IDataStore
      */
-    getSitemapItems(publicationId: string, parentId?: string): Promise<ISitemapItem[]>;
+    getSitemapItems(publicationId: string, parentId: string): Promise<ISitemapItem[]>;
 
     /**
      * Get the full path for a sitemap item within a sitemap

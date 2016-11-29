@@ -8,13 +8,6 @@ import ActivityIndicator = SDL.ReactComponents.ActivityIndicator;
 import ValidationMessage = SDL.ReactComponents.ValidationMessage;
 
 /**
- * Regex to validate if a url is an item Url
- *
- * example: ish:39137-1-1
- */
-const ITEM_URL_REGEX = /^\w+:\d+-\d+-\d+$/i;
-
-/**
  * Page component props
  *
  * @export
@@ -40,20 +33,13 @@ export interface IPageProps {
      */
     error?: string | null;
     /**
-     * Resolving page path using pageId
-     *
-     * @param {string} pageId Page id
-     * @memberOf IBreadcrumbsProps
-     */
-    getPageLocationPath(pageId: string): void;
-    /**
      * Called whenever navigation to another page is requested
      *
-     * @param {string} pageId Page id
+     * @param {string} url Url
      *
      * @memberOf IPageProps
      */
-    onNavigate(pageId: string): void;
+    onNavigate(url: string): void;
 }
 
 /**
@@ -120,24 +106,20 @@ export class Page extends React.Component<IPageProps, {}> {
         const hyperlinks = this._hyperlinks;
         for (let i: number = 0, length: number = anchors.length; i < length; i++) {
             const anchor = anchors.item(i);
-            let itemUrl = anchor.getAttribute("data-url");
-            if (!itemUrl) {
-                itemUrl = anchor.getAttribute("href");
-                if (itemUrl && itemUrl.match(ITEM_URL_REGEX)) {
-                    anchor.setAttribute("data-url", itemUrl);
-                    anchor.setAttribute("href", props.getPageLocationPath(itemUrl) || "");
-                    const onClick = (e: Event): void => {
-                        if (itemUrl) {
-                            props.onNavigate(itemUrl);
-                        }
-                        e.preventDefault();
-                    };
-                    hyperlinks.push({
-                        element: anchor,
-                        handler: onClick
-                    });
-                    anchor.addEventListener("click", onClick);
-                }
+            const alreadyAdded = hyperlinks.filter(hyperlink => hyperlink.element === anchor).length === 1;
+            if (!alreadyAdded) {
+                const itemUrl = anchor.getAttribute("href");
+                const onClick = (e: Event): void => {
+                    if (itemUrl) {
+                        props.onNavigate(itemUrl);
+                    }
+                    e.preventDefault();
+                };
+                hyperlinks.push({
+                    element: anchor,
+                    handler: onClick
+                });
+                anchor.addEventListener("click", onClick);
             }
         }
     }

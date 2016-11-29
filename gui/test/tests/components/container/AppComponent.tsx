@@ -31,6 +31,10 @@ class AppComponent extends TestBase {
                 ReactDOM.unmountComponentAtNode(domNode);
             });
 
+            beforeAll(() => {
+                hashHistory.push("");
+            });
+
             afterAll(() => {
                 target.parentElement.removeChild(target);
             });
@@ -39,8 +43,8 @@ class AppComponent extends TestBase {
                 const onRender = function (this: PublicationContent): JSX.Element {
                     const { publicationId, pageIdOrPublicationTitle, publicationTitle, pageTitle } = this.props.params;
 
-                    expect(publicationId).toBe("ish:1656863-1-1");
-                    expect(pageIdOrPublicationTitle).toBeUndefined();
+                    expect(publicationId).toBe("1656863");
+                    expect(pageIdOrPublicationTitle).toBe("publication-mp330");
                     expect(publicationTitle).toBeUndefined();
                     expect(pageTitle).toBeUndefined();
 

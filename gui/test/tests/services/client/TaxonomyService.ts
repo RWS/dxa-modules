@@ -1,4 +1,5 @@
 import { TaxonomyService } from "services/client/TaxonomyService";
+import { TcmId } from "utils/TcmId";
 
 // Global Catalina dependencies
 import TestBase = SDL.Client.Test.TestBase;
@@ -7,7 +8,7 @@ class TaxonomyServiceTests extends TestBase {
 
     public runTests(): void {
         const taxonomyService = new TaxonomyService();
-        const publicationId = "ish:1656863-1-1";
+        const publicationId = "1656863";
 
         describe(`Taxonomy service tests.`, (): void => {
 
@@ -63,7 +64,10 @@ class TaxonomyServiceTests extends TestBase {
                             const firstItem = items[0];
                             expect(firstItem.Id).toBeDefined();
                             if (firstItem.Id) {
-                                getChildren(firstItem.Id);
+                                // TODO: this conversion will not be needed when upgrading to DXA 1.7
+                                // https://jira.sdl.com/browse/TSI-2131
+                                const taxonomyItemId = TcmId.getTaxonomyItemId("1", firstItem.Id);
+                                getChildren(taxonomyItemId || firstItem.Id);
                             }
                         }
                     }).catch(error => {
@@ -85,7 +89,7 @@ class TaxonomyServiceTests extends TestBase {
             });
 
             it("can get a path for a page", (done: () => void): void => {
-                const pageId = "ish:1656863-164187-16";
+                const pageId = "164187";
                 taxonomyService.getSitemapPath(publicationId, pageId).then(path => {
                     expect(path).toBeDefined();
                     if (path) {
@@ -99,7 +103,7 @@ class TaxonomyServiceTests extends TestBase {
             });
 
             it("can get a path for a page from memory", (done: () => void): void => {
-                const pageId = "ish:1656863-164187-16";
+                const pageId = "164187";
                 const spy = spyOn(SDL.Client.Net, "getRequest").and.callThrough();
                 taxonomyService.getSitemapPath(publicationId, pageId).then(path => {
                     expect(path).toBeDefined();
