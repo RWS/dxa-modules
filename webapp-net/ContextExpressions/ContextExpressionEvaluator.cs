@@ -19,8 +19,9 @@ namespace Sdl.Web.Modules.ContextExpressions
         /// Determines whether a given Entity Model should be included based on the conditions specified on the Entity Model and the context.
         /// </summary>
         /// <param name="entity">The Entity Model to be evaluated.</param>
+        /// <param name="localization">The context Localization</param>
         /// <returns><c>true</c> if the Entity should be included.</returns>
-        public bool IncludeEntity(EntityModel entity)
+        public bool IncludeEntity(EntityModel entity, Localization localization)
         {
             using (new Tracer(entity))
             {
@@ -32,7 +33,7 @@ namespace Sdl.Web.Modules.ContextExpressions
                 }
                 ContextExpressionConditions ceConditions = (ContextExpressionConditions) ceExtensionData;
 
-                IDictionary<string, object> contextClaims = GetCachedContextClaims();
+                IDictionary<string, object> contextClaims = GetCachedContextClaims(localization);
 
                 if (!EvaluateContextExpressionClaims(ceConditions.Include, true, contextClaims))
                 {
@@ -51,7 +52,7 @@ namespace Sdl.Web.Modules.ContextExpressions
         }
         #endregion
 
-        private static IDictionary<string, object> GetCachedContextClaims()
+        private static IDictionary<string, object> GetCachedContextClaims(Localization localization)
         {
             // TODO TSI-110: This is a temporary measure to cache the Context Claims per request
             IDictionary<string, object> result = null;
@@ -67,17 +68,7 @@ namespace Sdl.Web.Modules.ContextExpressions
                 return result;
             }
 
-            IContextClaimsProvider contextClaimsProvider = SiteConfiguration.ContextClaimsProvider;
-            if (contextClaimsProvider is AdfContextClaimsProvider)
-            {
-                result = SiteConfiguration.ContextClaimsProvider.GetContextClaims(null);
-            }
-            else
-            {
-                throw new ContextExpressionException(
-                    string.Format("Context Expressions Module requires use of AdfContextClaimsProvider, but '{0}' is currently used.", contextClaimsProvider.GetType().Name) 
-                    );
-            }
+            result = SiteConfiguration.ContextClaimsProvider.GetContextClaims(null, localization);
 
             if (httpContext != null)
             {

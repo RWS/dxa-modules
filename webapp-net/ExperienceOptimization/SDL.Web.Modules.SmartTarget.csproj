@@ -14,9 +14,9 @@
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <SdlDeliveryVersion>8.5.0-beta-201611141640</SdlDeliveryVersion>
-    <DxaFrameworkVersion>1.7.0-alpha-201611081551</DxaFrameworkVersion>
-    <ExperienceManagerVersion>8.3.0</ExperienceManagerVersion>
+    <SdlDeliveryVersion>8.5.0-beta-201611280942</SdlDeliveryVersion>
+    <DxaFrameworkVersion>1.7.0-alpha-201611241636</DxaFrameworkVersion>
+    <ExperienceManagerVersion>8.3.0-beta-201610101150</ExperienceManagerVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

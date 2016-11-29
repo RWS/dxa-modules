@@ -1,4 +1,5 @@
-﻿@model Tsi811TestEntity
+﻿@using System.Globalization
+@model Tsi811TestEntity
 <div class="entity" @Html.DxaEntityMarkup()>
     <h3>Rendered @Model with Entity View "Test:TSI811Test"</h3>
 
@@ -12,8 +13,15 @@
         <div>Keyword1.TaxonomyId: @keyword.TaxonomyId</div>
         <div>----</div>
         <div>Keyword1.TextField: @keyword.TextField</div>
-        <div>Keyword1.NumberField: @keyword.NumberProperty</div>
-        <div>Keyword1.DateField: @keyword.DateField</div>
+        <div>Keyword1.NumberField: @keyword.NumberProperty.ToString("0.00", CultureInfo.InvariantCulture)</div>
+        if (keyword.DateField.HasValue)
+        {
+            <div>Keyword1.DateField: @keyword.DateField.Value.ToString("s")</div>
+        }
+        else
+        {
+            <div>Keyword1.DateField: empty</div>
+        }
         if (keyword.KeywordField != null)
         {
             foreach (Tag value in keyword.KeywordField)

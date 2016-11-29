@@ -161,11 +161,11 @@ namespace Sdl.Web.Modules.Degrees51
             return false;
         }
      
-        public IDictionary<string, object> GetContextClaims(string aspectName)
+        public IDictionary<string, object> GetContextClaims(string aspectName, Localization localization)
         {
             try
             {
-                string key = WebRequestContext.Localization.GetConfigValue("51degrees.licenseKey");
+                string key = localization.GetConfigValue("51degrees.licenseKey");
                 if (!string.IsNullOrEmpty(key))
                 {
                     Log.Info("Found 51 Degrees licence key.");
@@ -180,7 +180,7 @@ namespace Sdl.Web.Modules.Degrees51
                         {
                             LicenceKey.Activate(key);
                         });
-                    }                  
+                    }
                 }
                 else
                 {
@@ -189,7 +189,7 @@ namespace Sdl.Web.Modules.Degrees51
                 }
             }
             catch(Exception ex)
-            {               
+            {
                 Log.Error("An error occured when attempted to access the 51degrees.licenseKey configuration setting.", ex);
                 if (WebProvider.ActiveProvider != null)
                 {
@@ -197,7 +197,7 @@ namespace Sdl.Web.Modules.Degrees51
                 }
             }
             
-            // grab all the properties from the data set and map to context claims                  
+            // grab all the properties from the data set and map to context claims
             Dictionary<string, object> claims = new Dictionary<string, object>();
             foreach (IAspectMap x in _properties)
             {
@@ -205,9 +205,9 @@ namespace Sdl.Web.Modules.Degrees51
                 claims.Add(string.Format("{0}.{1}", x.Aspect, x.Name), v);
             }
 
-            return claims;            
+            return claims;
         }
-                
+
         public string GetDeviceFamily()
         {
             // returning null will force the default implementation

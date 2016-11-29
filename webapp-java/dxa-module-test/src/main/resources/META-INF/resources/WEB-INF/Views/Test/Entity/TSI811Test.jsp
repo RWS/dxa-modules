@@ -24,7 +24,7 @@
         <div>----</div>
         <div>Keyword1.TextField: ${keyword2.textField}</div>
         <div>Keyword1.NumberField: ${keyword2.numberProperty}</div>
-        <div>Keyword1.DateField: ${keyword2.dateField}</div>
+        <div>Keyword1.DateField: ${empty keyword2.dateField ? 'empty' : keyword2.dateField}</div>
         <c:if test="${keyword2.keywordField != null}">
             <c:forEach items="${keyword2.keywordField}" var="value">
                 <div>Keyword1.KeywordField: ${value.displayText}</div>

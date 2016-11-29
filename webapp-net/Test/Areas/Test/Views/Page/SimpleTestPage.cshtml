@@ -9,6 +9,12 @@
             .alert { color: red }
             td { border: solid thin; }
         </style>
+        
+        @foreach (var meta in Model.Meta)
+        {
+            <meta name="@meta.Key" content="@meta.Value"/>
+        }
+
     </head>
     <body>
         <h1>Rendered @Model with Page View "Test:SimpleTestPage"</h1>
