@@ -1,9 +1,19 @@
 // ---------------------------------------------------------------------------------------------------------------------
 // This file contains global LESS variables that can be used across the application when using fonts
 // ---------------------------------------------------------------------------------------------------------------------
+
 @fontFamily: "Calibri";
+@fontHeaderFamily: "Sommet Rounded";
 @fontFamilyFallback: "Arial";
 @fontSize: 14px;
+
+.sdl-dita-delivery-header-font(@weight: 400, @size:20px, @height: 24px) {
+    font-family: @fontHeaderFamily, @fontFamilyFallback, sans-serif;
+    font-style: normal;
+    font-weight: @weight;
+    font-size: @size;
+    line-height: @height;
+}
 
 .customFont() {
     /* Define a custom font
