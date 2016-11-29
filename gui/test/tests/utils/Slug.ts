@@ -1,4 +1,4 @@
-import { slugify } from "../../../src/utils/Slug";
+import { slugify } from "utils/Slug";
 
 describe(`Slugify tests.`, (): void => {
 

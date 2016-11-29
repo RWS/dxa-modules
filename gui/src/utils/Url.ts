@@ -1,4 +1,4 @@
-import { slugify } from "./Slug";
+import { slugify } from "utils/Slug";
 
 /**
  * Regex to validate if a url is an item Url

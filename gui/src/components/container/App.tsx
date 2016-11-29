@@ -1,7 +1,7 @@
-import { Router, Route, IndexRedirect, Redirect, History } from "react-router";
-import { IServices } from "../../interfaces/Services";
-import { Home } from "./Home";
-import { PublicationContent } from "./PublicationContent";
+import { Router, Route, IndexRedirect, History, Redirect } from "react-router";
+import { IServices } from "interfaces/Services";
+import { Home } from "components/container/Home";
+import { PublicationContent } from "components/container/PublicationContent";
 
 export interface IAppProps {
     /**
@@ -66,8 +66,8 @@ export class App extends React.Component<IAppProps, {}> {
                     <IndexRedirect to="/1656863/publication-mp330" />
                     <Redirect from="home" to="/1656863/publication-mp330" />
                     <Route path=":publicationId(/:pageIdOrPublicationTitle)(/:publicationTitle)(/:pageTitle)" component={PublicationContent} />
-                </Route >
-            </Router >
+                </Route>
+            </Router>
         );
     }
 };

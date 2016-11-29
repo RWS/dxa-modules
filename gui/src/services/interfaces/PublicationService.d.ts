@@ -1,4 +1,4 @@
-import { IPublication } from "../../interfaces/ServerModels";
+import { IPublication } from "interfaces/ServerModels";
 import { Promise } from "es6-promise";
 
 /**

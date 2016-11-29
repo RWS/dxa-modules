@@ -1,4 +1,4 @@
-import { IPageInfo } from "../../models/Page";
+import { IPageInfo } from "models/Page";
 import { Promise } from "es6-promise";
 
 /**
