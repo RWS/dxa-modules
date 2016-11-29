@@ -1,5 +1,6 @@
-import "components/presentation/styles/Page";
+import { Url } from "utils/Url";
 
+import "components/presentation/styles/Page";
 import "dist/dita-ot/styles/commonltr";
 import "dist/dita-ot/styles/commonrtl";
 
@@ -109,17 +110,19 @@ export class Page extends React.Component<IPageProps, {}> {
             const alreadyAdded = hyperlinks.filter(hyperlink => hyperlink.element === anchor).length === 1;
             if (!alreadyAdded) {
                 const itemUrl = anchor.getAttribute("href");
-                const onClick = (e: Event): void => {
-                    if (itemUrl) {
-                        props.onNavigate(itemUrl);
-                    }
-                    e.preventDefault();
-                };
-                hyperlinks.push({
-                    element: anchor,
-                    handler: onClick
-                });
-                anchor.addEventListener("click", onClick);
+                if (Url.itemUrlIsValid(itemUrl)) {
+                    const onClick = (e: Event): void => {
+                        if (itemUrl) {
+                            props.onNavigate(itemUrl);
+                        }
+                        e.preventDefault();
+                    };
+                    hyperlinks.push({
+                        element: anchor,
+                        handler: onClick
+                    });
+                    anchor.addEventListener("click", onClick);
+                }
             }
         }
     }
