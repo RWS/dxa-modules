@@ -1,0 +1,67 @@
+/* Graphene overwrites for the TopBar Control */
+
+@import (reference) "../../../theming/styles.less";
+
+.sdl-dita-delivery-topbar {
+    width: 100%;
+    height: 50px;
+    background-color: @accentColor3;
+    color: @neutralColor8;
+    border-width: 0px;
+    box-shadow: none;
+    line-height: 50px;
+    position: fixed;
+
+    header {
+        display: table;
+        width: 1200px;
+        position: relative;
+        margin: 0 auto;
+
+        > * {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        .sdl-dita-delivery-topbar-logo {
+            .icon-sdl-company-logo();
+            background-size: 68px 30px;
+            background-position: left center;
+            width: 75px;
+            a {
+                height: 100%;
+                width: 100%;
+                display: inline-block;
+            }
+        }
+
+        .sdl-dita-delivery-topbar-family
+        {
+            .sdl-dita-delivery-header-font(200, 20px, 50px);
+        }
+
+        .sdl-dita-delivery-topbar-language {
+            width: 140px;
+            span {
+                width: 30px;
+                .sdl-dita-delivery-sdl-icons();
+                &:before {
+                    content: @sdl-icon-language;
+                }
+            }
+        }
+
+        .sdl-dita-delivery-topbar-user{
+            width: 40px;
+            span {
+                width: 30px;
+                .sdl-dita-delivery-sdl-icons();
+                &:before {
+                    content: @sdl-icon-user;
+                }
+            }
+        }
+
+
+    }
+}
