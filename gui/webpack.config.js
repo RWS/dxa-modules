@@ -90,7 +90,10 @@ module.exports = (isTest, isDebug) => {
     } else {
         config.plugins.push(new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
-            filename: 'vendor.bundle.js'
+            filename: 'vendor.bundle.js',
+            // with more entries, this ensures that no other module
+            // goes into the vendor chunk
+            minChunks: Infinity
         }));
     }
 
