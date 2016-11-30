@@ -1,4 +1,4 @@
-import { Url } from "../../../src/utils/Url";
+import { Url } from "utils/Url";
 
 // Global Catalina dependencies
 import TestBase = SDL.Client.Test.TestBase;

@@ -1,13 +1,14 @@
 import { Promise } from "es6-promise";
-import { ISitemapItem } from "../../interfaces/ServerModels";
-import { IAppContext } from "./App";
-import { Toc } from "../presentation/Toc";
-import { Page } from "../presentation/Page";
-import { IPageInfo } from "../../models/Page";
-import { Breadcrumbs } from "../presentation/Breadcrumbs";
-import "./styles/PublicationContent";
-import { TcmId } from "../../utils/TcmId";
-import { Url } from "../../utils/Url";
+import { ISitemapItem } from "interfaces/ServerModels";
+import { IAppContext } from "components/container/App";
+import { Toc } from "components/presentation/Toc";
+import { Page } from "components/presentation/Page";
+import { Breadcrumbs } from "components/presentation/Breadcrumbs";
+import { IPageInfo } from "models/Page";
+import { TcmId } from "utils/TcmId";
+import { Url } from "utils/Url";
+
+import "components/container/styles/PublicationContent";
 
 /**
  * PublicationContent component props params

@@ -1,7 +1,7 @@
-import { IPageService } from "../services/interfaces/PageService";
-import { ILocalizationService } from "../services/interfaces/LocalizationService";
-import { IPublicationService } from "../services/interfaces/PublicationService";
-import { ITaxonomyService } from "../services/interfaces/TaxonomyService";
+import { IPageService } from "services/interfaces/PageService";
+import { ILocalizationService } from "services/interfaces/LocalizationService";
+import { IPublicationService } from "services/interfaces/PublicationService";
+import { ITaxonomyService } from "services/interfaces/TaxonomyService";
 
 /**
  * List of all services
