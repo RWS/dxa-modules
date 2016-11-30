@@ -314,7 +314,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
      * Invoked once, only on the client (not on the server), immediately after the initial rendering occurs.
      */
     public componentDidMount(): void {
-        window.addEventListener('scroll', this._fixTocPanel.bind(this));
+        window.addEventListener("scroll", this._fixTocPanel.bind(this));
     }
 
     /**
@@ -323,7 +323,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
     public componentWillUnmount(): void {
         this._isUnmounted = true;
 
-        window.removeEventListener('scroll', this._fixTocPanel.bind(this));
+        window.removeEventListener("scroll", this._fixTocPanel.bind(this));
     }
 
     private _onTocSelectionChanged(sitemapItem: ISitemapItem, path: string[]): void {
