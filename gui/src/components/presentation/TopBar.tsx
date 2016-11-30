@@ -10,7 +10,7 @@ import "./styles/TopBar";
  */
 export interface ITopBarProps {
     /**
-     * Name of selected product family
+     * Title
      *
      * @type {string}
      */
@@ -34,7 +34,7 @@ export const TopBar = (props: ITopBarProps) => {
                 <div className={"sdl-dita-delivery-topbar-logo"} title="SDL">
                     <IndexLink to="/"/>
                 </div>
-                <div className={"sdl-dita-delivery-topbar-family"}>
+                <div className={"sdl-dita-delivery-topbar-title"}>
                     {props.title}
                 </div>
                 <div className={"sdl-dita-delivery-topbar-language"} >

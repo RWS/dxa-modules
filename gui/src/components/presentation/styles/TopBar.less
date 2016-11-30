@@ -11,12 +11,14 @@
     box-shadow: none;
     line-height: 50px;
     position: fixed;
+    z-index: 999;
 
     header {
         display: table;
-        width: 1200px;
-        position: relative;
+        max-width: 1200px;
         margin: 0 auto;
+        width: 100%;
+        position: relative;
 
         > * {
             display: table-cell;
@@ -24,10 +26,11 @@
         }
 
         .sdl-dita-delivery-topbar-logo {
-            .icon-sdl-company-logo();
-            background-size: 68px 30px;
+            .icon-company-logo();
+            position: relative;
+            top: -4px;
+            padding-right: 5px;
             background-position: left center;
-            width: 75px;
             a {
                 height: 100%;
                 width: 100%;
@@ -35,33 +38,25 @@
             }
         }
 
-        .sdl-dita-delivery-topbar-family
-        {
-            .sdl-dita-delivery-header-font(200, 20px, 50px);
+        .sdl-dita-delivery-topbar-title {
+            .header-font(200, 20px, 50px);
         }
 
         .sdl-dita-delivery-topbar-language {
             width: 140px;
             span {
-                width: 30px;
-                .sdl-dita-delivery-sdl-icons();
-                &:before {
-                    content: @sdl-icon-language;
-                }
+                margin-right: 10px;
+                .icon-language();
             }
         }
 
         .sdl-dita-delivery-topbar-user{
             width: 40px;
             span {
-                width: 30px;
-                .sdl-dita-delivery-sdl-icons();
-                &:before {
-                    content: @sdl-icon-user;
-                }
+                margin-right: 10px;
+                .icon-user();
             }
         }
-
 
     }
 }

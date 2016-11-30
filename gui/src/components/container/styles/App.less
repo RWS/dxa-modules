@@ -1,9 +1,15 @@
 @import (reference) "../../../theming/styles.less";
 
-.customFont();
-
-@import (less) "../../../theming/SDLfont.less";
-@import (less) "../../../theming/SommetRounded.less";
+/* Import fonts */
+@font-face {
+    .import-regular-font();
+}
+@font-face {
+    .import-header-font();
+}
+@font-face {
+    .import-icon-font();
+}
 
 html, body, #main-view-target {
     height: 100%;
@@ -14,18 +20,7 @@ html, body, #main-view-target {
 }
 
 .sdl-dita-delivery-app {
-    display: flex;
-    flex-flow: column;
     height: 100%;
-    min-width: 1200px;
-    .sdl-dita-delivery-content-wrapper{
-        width: 1200px;
-        margin: 0 auto;
-    }
-    .sdl-dita-delivery-publication-content {
-        position: relative;
-        flex: 1 1 auto;
-    }
 }
 
 h1 {
