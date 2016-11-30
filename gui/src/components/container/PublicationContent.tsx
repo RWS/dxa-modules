@@ -75,6 +75,14 @@ export interface IPublicationContentState {
      * @type {boolean}
      */
     isTocLoading?: boolean;
+
+    /**
+     * Toc is fixed to the top of the screen
+     *
+     * @type {boolean}
+     */
+    tocIsFixed?: boolean;
+
     /**
      * Current selected item in the TOC
      *
@@ -154,6 +162,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         super();
         this.state = {
             isTocLoading: true,
+            tocIsFixed: false,
             selectedTocItem: null,
             isPageLoading: true
         };
@@ -256,7 +265,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
      * @returns {JSX.Element}
      */
     public render(): JSX.Element {
-        const { isPageLoading, activeTocItemPath, selectedTocItem, publicationTitle } = this.state;
+        const { isPageLoading, activeTocItemPath, selectedTocItem, publicationTitle, tocIsFixed } = this.state;
         const { services, router } = this.context;
         const { publicationId } = this.props.params;
         const taxonomyService = services.taxonomyService;
@@ -267,7 +276,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         return (
             <section className={"sdl-dita-delivery-publication-content"}>
                 <SearchBar />
-                <div className="sdl-dita-delivery-toc-and-page">
+                <div className={"sdl-dita-delivery-toc-and-page" + (tocIsFixed ? " sdl-dita-delivery-fixed-toc" : "")}>
                     <Toc
                         activeItemPath={activeTocItemPath}
                         rootItems={rootItems}
@@ -302,10 +311,19 @@ export class PublicationContent extends React.Component<IPublicationContentProps
     }
 
     /**
+     * Invoked once, only on the client (not on the server), immediately after the initial rendering occurs.
+     */
+    public componentDidMount(): void {
+        window.addEventListener('scroll', this._fixTocPanel.bind(this));
+    }
+
+    /**
      * Component will unmount
      */
     public componentWillUnmount(): void {
         this._isUnmounted = true;
+
+        window.removeEventListener('scroll', this._fixTocPanel.bind(this));
     }
 
     private _onTocSelectionChanged(sitemapItem: ISitemapItem, path: string[]): void {
@@ -387,5 +405,14 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     });
                 }
             });
+    }
+
+    private _fixTocPanel(): void {
+        /* istanbul ignore else */
+        if (!this._isUnmounted) {
+            this.setState({
+                tocIsFixed: (window.document.body.scrollTop > 150)
+            });
+        }
     }
 }
