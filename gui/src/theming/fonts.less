@@ -5,22 +5,35 @@
 // ---------------------------------------------------------------------------------------------------------------------
 @fontFamily: "Calibri W01";
 @fontHeaderFamily: "Sommet Rounded";
+@fontHeaderPath: "./fonts/SommetRounded";
 @fontFamilyFallback: "Arial";
 @fontSize: 14px;
 @fontColor: @neutralColor1;
 
-.header-font(@weight: 400, @size:20px, @height: 24px) {
-    font-family: @fontHeaderFamily, @fontFamilyFallback, sans-serif;
+.import-header-font() {
+    font-family: @fontHeaderFamily;
+    src: url('@{fontHeaderPath}/SommetRounded.eot');
+    src:
+        url('@{fontHeaderPath}/SommetRounded.ttf') format('truetype'),
+        url('@{fontHeaderPath}/SommetRounded.woff') format('woff'),
+        url('@{fontHeaderPath}/SommetRounded.woff2') format('woff2'),
+        url('@{fontHeaderPath}/SommetRounded.svg#SommetRounded') format('svg');
+    font-weight: normal;
     font-style: normal;
-    font-weight: @weight;
-    font-size: @size;
-    line-height: @height;
 }
 
-.custom-font() {
+.import-regular-font() {
     /* Define a custom font
      * eg
      * font-family: 'Myriad Pro';
      * src: url('../../../theming/@{fontFamilyPath}');
      */
+}
+
+.header-font(@weight: 400, @size:20px, @height: 24px) {
+    font-family: @fontHeaderFamily, @fontFamilyFallback;
+    font-style: normal;
+    font-weight: @weight;
+    font-size: @size;
+    line-height: @height;
 }

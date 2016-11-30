@@ -6,13 +6,14 @@
 @import (reference) "../../node_modules/sdl-icons/dist/icons-carbon-2.0.less";
 @import (reference) "../../node_modules/sdl-icons/dist/icons-common.less";
 
+@iconFont: "SDLfont";
 @iconFontPath: "./fonts/SDLfont";
 @iconLanguage: "\e011";
 @iconUser: "\e023";
 @iconArrowRight: "\e013";
 
-.icon-font() {
-    font-family: 'SDLfont';
+.import-icon-font() {
+    font-family: @iconFont;
     src: url('@{iconFontPath}/SDLfont.eot');
     src: url('@{iconFontPath}/SDLfont.otf') format('opentype'),
         url('@{iconFontPath}/SDLfont.ttf') format('truetype'),
@@ -24,7 +25,7 @@
 
 .icon-font-default-style() {
     display: inline-block;
-    font-family: 'SDLfont'; // shortening font declaration
+    font-family: @iconFont; // shortening font declaration
     font-size: 24px;
 }
 
