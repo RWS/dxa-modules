@@ -1,0 +1,19 @@
+﻿@model Tsi1946TestEntity
+<div class="entity" @Html.DxaEntityMarkup()>
+    <h3>Rendered @Model with Entity View "Test:TSI1946Test"</h3>
+
+    <h4>All fields are empty</h4>
+    <div>SingleLineText: '@Model.SingleLineText'</div>
+    <div>MultiLineText: '@Model.MultiLineText'</div>
+    <div>RichText: '@Model.RichText'</div>
+    <div>Number: '@Model.Number'</div>
+    <div>Date: '@Model.Date'</div>
+    <div>Keyword: '@Model.Keyword'</div>
+    <div>CompLink: '@Model.CompLink'</div>
+
+    <h4>XpmPropertyMetadata</h4>
+    @foreach (var kvp in Model.XpmPropertyMetadata)
+    {
+        <div>@kvp.Key = @kvp.Value</div>
+    }
+</div>
