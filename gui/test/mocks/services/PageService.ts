@@ -1,5 +1,5 @@
-import { IPageService } from "../../../src/services/interfaces/PageService";
-import { IPageInfo } from "../../../src/models/Page";
+import { IPageService } from "services/interfaces/PageService";
+import { IPageInfo } from "models/Page";
 import { Promise } from "es6-promise";
 
 let fakeDelay = false;
