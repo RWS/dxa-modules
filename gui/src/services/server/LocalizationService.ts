@@ -1,4 +1,4 @@
-import { ILocalizationService } from "../interfaces/LocalizationService";
+import { ILocalizationService } from "services/interfaces/LocalizationService";
 
 /**
  * Localization implemented for usage on the server

@@ -1,10 +1,10 @@
-import { ITaxonomyService } from "../interfaces/TaxonomyService";
-import { ISitemapItem } from "../../interfaces/ServerModels";
-import { localization } from "./LocalizationService";
-import { Toc } from "../../models/Toc";
-import { NavigationLinks } from "../../models/NavigationLinks";
+import { ITaxonomyService } from "services/interfaces/TaxonomyService";
+import { ISitemapItem } from "interfaces/ServerModels";
+import { localization } from "services/client/LocalizationService";
+import { Toc } from "models/Toc";
+import { NavigationLinks } from "models/NavigationLinks";
 import { Promise } from "es6-promise";
-import { TcmId } from "../../utils/TcmId";
+import { TcmId } from "utils/TcmId";
 
 /**
  * Taxonomy service, interacts with the models to fetch the required data.

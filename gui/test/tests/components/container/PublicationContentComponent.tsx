@@ -1,12 +1,13 @@
-import { PublicationContent } from "../../../../src/components/container/PublicationContent";
-import { ISitemapItem } from "../../../../src/interfaces/ServerModels";
-import { PageService } from "../../../mocks/services/PageService";
-import { PublicationService } from "../../../mocks/services/PublicationService";
-import { TaxonomyService } from "../../../mocks/services/TaxonomyService";
-import { localization } from "../../../mocks/services/LocalizationService";
-import { Toc } from "../../../../src/components/presentation/Toc";
-import { Page } from "../../../../src/components/presentation/Page";
-import { ComponentWithContext } from "../../../mocks/ComponentWithContext";
+import { PublicationContent } from "components/container/PublicationContent";
+import { Toc } from "components/presentation/Toc";
+import { Page } from "components/presentation/Page";
+import { ISitemapItem } from "interfaces/ServerModels";
+
+import { PageService } from "test/mocks/services/PageService";
+import { PublicationService } from "test/mocks/services/PublicationService";
+import { TaxonomyService } from "test/mocks/services/TaxonomyService";
+import { localization } from "test/mocks/services/LocalizationService";
+import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 
 // Global Catalina dependencies
 import TestBase = SDL.Client.Test.TestBase;

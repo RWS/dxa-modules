@@ -1,5 +1,5 @@
-import { path } from "../utils/Path";
-import { IPage } from "../interfaces/ServerModels";
+import { path } from "utils/Path";
+import { IPage } from "interfaces/ServerModels";
 
 // Global Catalina dependencies
 import IWebRequest = SDL.Client.Net.IWebRequest;
