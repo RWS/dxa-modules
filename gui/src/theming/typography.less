@@ -6,5 +6,32 @@
 @import (reference) "colors.less";
 @import (reference) "fonts.less";
 
-@h1Size: 18px;
+@h1Size: 50px;
+@h2Size: 30px;
+@h3Size: 18px;
 @h1Color: @neutralColor1;
+@anchorColor: @accentColor5;
+
+.header-h1() {
+    .header-font(300, @h1Size, @h1Size);
+}
+
+.header-h2() {
+    .header-font(300, @h2Size, @h2Size);
+}
+
+.header-h3() {
+    font-weight: 400;
+    line-height: 24px;
+    font-size: @h3Size;
+}
+
+.paragraph() {
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.anchor() {
+    color: @anchorColor;
+    text-decoration: none;
+}
