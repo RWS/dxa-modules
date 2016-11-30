@@ -13,10 +13,18 @@
             padding-top: 15px;
         }
     }
+
     .sdl-dita-delivery-page {
         flex: 1 1 100%;
+        min-height: 150px;
         .sdl-dita-delivery-breadcrumbs {
             padding-bottom: 15px;
         }
+    }
+
+    .sdl-dita-delivery-toc, .sdl-dita-delivery-page {
+        /* Add position / min-height for activity indicator to display nicely */
+        position: relative;
+        min-height: 150px;
     }
 }

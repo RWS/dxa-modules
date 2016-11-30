@@ -1,9 +1,15 @@
 @import (reference) "../../../theming/styles.less";
 
-.customFont();
-
-@import (less) "../../../theming/SDLfont.less";
-@import (less) "../../../theming/SommetRounded.less";
+/* Import fonts */
+@font-face {
+    .import-regular-font();
+}
+@font-face {
+    .import-header-font();
+}
+@font-face {
+    .import-icon-font();
+}
 
 html, body, #main-view-target {
     height: 100%;
