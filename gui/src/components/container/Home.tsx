@@ -1,7 +1,7 @@
-import { IAppContext } from "./App";
-import { TopBar } from "../presentation/TopBar";
+import { IAppContext } from "components/container/App";
+import { TopBar } from "components/presentation/TopBar";
 
-import "./styles/App";
+import "components/container/styles/App";
 
 /**
  * Main component for the application
@@ -26,7 +26,7 @@ export class Home extends React.Component<{}, {}> {
                 <TopBar
                     title={localizationService.formatMessage("app.productfamily")}
                     language={localizationService.formatMessage("app.language")}
-                />
+                    />
                 {this.props.children}
             </div>
         );

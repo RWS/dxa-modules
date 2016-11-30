@@ -1,11 +1,11 @@
-import { renderToString } from "../../src/Server";
-import { App } from "../../src/components/container/App";
+import { renderToString } from "Server";
+import { App } from "components/container/App";
 import { hashHistory } from "react-router";
-import { localization } from "../../src/services/server/LocalizationService";
-import { IServices } from "../../src/interfaces/Services";
-import { PageService } from "../../src/services/server/PageService";
-import { PublicationService } from "../../src/services/server/PublicationService";
-import { TaxonomyService } from "../../src/services/server/TaxonomyService";
+import { localization } from "services/server/LocalizationService";
+import { IServices } from "interfaces/Services";
+import { PageService } from "services/server/PageService";
+import { PublicationService } from "services/server/PublicationService";
+import { TaxonomyService } from "services/server/TaxonomyService";
 
 class Server extends SDL.Client.Test.TestBase {
 

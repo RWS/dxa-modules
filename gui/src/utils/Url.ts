@@ -1,4 +1,11 @@
-import { slugify } from "./Slug";
+import { slugify } from "utils/Slug";
+
+/**
+ * Regex to validate if a url is an item Url
+ *
+ * example: /1656863/164363/publication-mp330/speed-dialling
+ */
+const ITEM_URL_REGEX = /^\/\d+\/\d+(\/([^\/]+(\/([^\/]+)?)?)?)?$/i;
 
 /**
  * Maximum characters for a title
@@ -29,6 +36,19 @@ export class Url {
             url += `/${Url._processTitle(publicationTitle)}`;
         }
         return url;
+    }
+
+    /**
+     * Checks if  a publication url
+     *
+     * @static
+     * @param {string} [url] Item Url
+     * @returns {boolean}
+     *
+     * @memberOf Url
+     */
+    public static itemUrlIsValid(url?: string | null): boolean {
+        return (url && url.match(ITEM_URL_REGEX)) != null;
     }
 
     /**

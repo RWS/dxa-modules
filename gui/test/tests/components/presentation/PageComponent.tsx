@@ -1,4 +1,4 @@
-import { Page, IPageProps } from "../../../../src/components/presentation/Page";
+import { Page, IPageProps } from "components/presentation/Page";
 
 // Global Catalina dependencies
 import TestBase = SDL.Client.Test.TestBase;
@@ -72,13 +72,14 @@ class PageComponent extends TestBase {
                 expect(pageContentNode.innerHTML).toBe(pageContent);
             });
 
-            it("navigates to another page when a hyperlink is clicked", (done: () => void): void => {
-                const pageContent = "<div><a href=\"ish:12-34-56\"/></div>";
+            it("navigates to another page when internal hyperlink is clicked", (done: () => void): void => {
+                const navUrl = "/1234/56/publication-title/page-title";
+                const pageContent = `<div><a href="${navUrl}"/></div>`;
                 const page = this._renderComponent({
                     showActivityIndicator: false,
                     content: pageContent,
-                    onNavigate: (pageId: string): void => {
-                        expect(pageId).toBe("ish:12-34-56");
+                    onNavigate: (url: string): void => {
+                        expect(url).toBe(navUrl);
                         done();
                     }
                 }, target);
@@ -89,8 +90,70 @@ class PageComponent extends TestBase {
                 hyperlink.click();
             });
 
-        });
+            it("does not handle external links", (): void => {
+                const pageProps = {
+                    showActivityIndicator: false,
+                    content: `<div>
+                                <a href="http://doc.sdl.com"/>
+                                <a href="doc.sdl.com"/>
+                                <a href="~/doc.sdl.com"/>
+                                <a href="/doc.sdl.com"/>
+                                <a href="/12a34/5c"/>
+                                <a href="/12/34/56/78/9"/>
+                            </div>`,
+                    onNavigate: (): void => {
+                    }
+                };
+                const spy = spyOn(pageProps, "onNavigate").and.callThrough();
+                const page = this._renderComponent(pageProps, target);
 
+                const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
+                expect(domNode).not.toBeNull();
+
+                const hyperlinks = domNode.querySelectorAll("a");
+                expect(hyperlinks.length).toBe(6);
+
+                for (let i: number = 0, length: number = hyperlinks.length; i < length; i++) {
+                    const link = hyperlinks.item(i);
+                    link.addEventListener("click", (e: Event): void => {
+                        e.preventDefault();
+                    });
+                    link.click();
+                }
+
+                expect(spy).not.toHaveBeenCalled();
+            });
+
+            it("does handle internal links", (): void => {
+                const pageProps = {
+                    showActivityIndicator: false,
+                    content: `<div>
+                                <a href="/1656863/164363"/>
+                                <a href="/1656863/164363/"/>
+                                <a href="/1656863/164363/publication-mp330"/>
+                                <a href="/1656863/164363/publication-mp330/"/>
+                                <a href="/1656863/164363/publication-mp330/speed-dialling"/>
+                            </div>`,
+                    onNavigate: (): void => {
+                    }
+                };
+                const spy = spyOn(pageProps, "onNavigate").and.callThrough();
+                const page = this._renderComponent(pageProps, target);
+
+                const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
+                expect(domNode).not.toBeNull();
+
+                const hyperlinks = domNode.querySelectorAll("a");
+                expect(hyperlinks.length).toBe(5);
+
+                for (let i: number = 0, length: number = hyperlinks.length; i < length; i++) {
+                    hyperlinks.item(i).click();
+                }
+
+                expect(spy).toHaveBeenCalledTimes(5);
+            });
+
+        });
     }
 
     private _renderComponent(props: IPageProps, target: HTMLElement): Page {

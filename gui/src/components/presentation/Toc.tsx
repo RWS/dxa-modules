@@ -1,7 +1,7 @@
 import { Promise } from "es6-promise";
-import { ISitemapItem } from "../../interfaces/ServerModels";
-import "./styles/Toc";
-import "../controls/styles/TreeView";
+import { ISitemapItem } from "interfaces/ServerModels";
+import "components/presentation/styles/Toc";
+import "components/controls/styles/TreeView";
 
 // Global Catalina dependencies
 import ActivityIndicator = SDL.ReactComponents.ActivityIndicator;
