@@ -3,6 +3,7 @@ import { ISitemapItem } from "interfaces/ServerModels";
 import { IAppContext } from "components/container/App";
 import { Toc } from "components/presentation/Toc";
 import { Page } from "components/presentation/Page";
+import { SearchBar } from "components/presentation/SearchBar";
 import { Breadcrumbs } from "components/presentation/Breadcrumbs";
 import { IPageInfo } from "models/Page";
 import { TcmId } from "utils/TcmId";
@@ -265,34 +266,37 @@ export class PublicationContent extends React.Component<IPublicationContentProps
 
         return (
             <section className={"sdl-dita-delivery-publication-content"}>
-                <Toc
-                    activeItemPath={activeTocItemPath}
-                    rootItems={rootItems}
-                    loadChildItems={(parentId: string): Promise<ISitemapItem[]> => {
-                        // TODO: this conversion will not be needed when upgrading to DXA 1.7
-                        // https://jira.sdl.com/browse/TSI-2131
-                        const taxonomyItemId = TcmId.getTaxonomyItemId("1", parentId);
-                        return taxonomyService.getSitemapItems(publicationId, taxonomyItemId || parentId);
-                    } }
-                    onSelectionChanged={this._onTocSelectionChanged.bind(this)}
-                    error={tocError} />
-                <Page
-                    showActivityIndicator={isPageLoading || false}
-                    content={content}
-                    error={error}
-                    onNavigate={(url: string): void => {
-                        /* istanbul ignore else */
-                        if (router) {
-                            router.push(url);
-                        }
-                    } } >
-                    <Breadcrumbs
-                        publicationId={publicationId}
-                        publicationTitle={publicationTitle || ""}
-                        loadItemsPath={taxonomyService.getSitemapPath.bind(taxonomyService)}
-                        selectedItem={selectedTocItem}
-                        />
-                </Page>
+                <SearchBar />
+                <div className="sdl-dita-delivery-toc-and-page">
+                    <Toc
+                        activeItemPath={activeTocItemPath}
+                        rootItems={rootItems}
+                        loadChildItems={(parentId: string): Promise<ISitemapItem[]> => {
+                            // TODO: this conversion will not be needed when upgrading to DXA 1.7
+                            // https://jira.sdl.com/browse/TSI-2131
+                            const taxonomyItemId = TcmId.getTaxonomyItemId("1", parentId);
+                            return taxonomyService.getSitemapItems(publicationId, taxonomyItemId || parentId);
+                        } }
+                        onSelectionChanged={this._onTocSelectionChanged.bind(this)}
+                        error={tocError} />
+                    <Page
+                        showActivityIndicator={isPageLoading || false}
+                        content={content}
+                        error={error}
+                        onNavigate={(url: string): void => {
+                            /* istanbul ignore else */
+                            if (router) {
+                                router.push(url);
+                            }
+                        } } >
+                        <Breadcrumbs
+                            publicationId={publicationId}
+                            publicationTitle={publicationTitle || ""}
+                            loadItemsPath={taxonomyService.getSitemapPath.bind(taxonomyService)}
+                            selectedItem={selectedTocItem}
+                            />
+                    </Page>
+                </div>
             </section>
         );
     }

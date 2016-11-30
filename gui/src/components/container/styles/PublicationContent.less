@@ -4,23 +4,34 @@
 .sdl-dita-delivery-publication-content {
     @tocWidth: 300px;
 
-    max-width: 1200px;
-    margin: 0 auto;
     position: relative;
-    top: @topBarHeight;
+    top: 50px;
+
+    .sdl-dita-delivery-toc-and-page {
+        display: flex;
+        flex-flow: row;
+        max-width: 1200px;
+        margin: 0 auto;
 
     .sdl-dita-delivery-toc {
         width: @tocWidth;
-        min-height: 150px;
         .sdl-treeview {
             padding-top: 15px;
         }
     }
 
-    .sdl-dita-delivery-page {
-        margin-left: @tocWidth;
-        .sdl-dita-delivery-breadcrumbs {
-            padding-bottom: 15px;
+        .sdl-dita-delivery-page {
+            margin-left: @tocWidth;
+            min-height: 150px;
+            .sdl-dita-delivery-breadcrumbs {
+                padding-bottom: 15px;
+            }
+        }
+
+        .sdl-dita-delivery-toc, .sdl-dita-delivery-page {
+            /* Add position / min-height for activity indicator to display nicely */
+            position: relative;
+            min-height: 150px;
         }
     }
 }
