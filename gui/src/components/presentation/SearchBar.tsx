@@ -13,16 +13,24 @@ export interface ISearchProps {
      * @memberOf ISearchProps
      */
     onSearch?: (query: string) => void;
+
+    /**
+     * Placeholder label
+     *
+     * @type {string}
+     * @memberOf ISearchProps
+     */
+    placeholderLabel: string;
 }
 
 /**
  * Search bar component
  */
-export const SearchBar = (props: ISearchProps): JSX.Element => {
+export const SearchBar: React.StatelessComponent<ISearchProps> = (props: ISearchProps): JSX.Element => {
     return (
         <div className="sdl-dita-delivery-searchbar">
             <div className="input-area">
-                <input type="text"/>
+                <input type="text" placeholder={props.placeholderLabel}/>
                 <div className="search-button"/>
             </div>
         </div>
