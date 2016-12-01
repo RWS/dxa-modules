@@ -315,10 +315,12 @@ export class PublicationContent extends React.Component<IPublicationContentProps
      * Invoked once, only on the client (not on the server), immediately after the initial rendering occurs.
      */
     public componentDidMount(): void {
-        const domNode = ReactDOM.findDOMNode(this);
-        const topBar = domNode.querySelector(".sdl-dita-delivery-searchbar");
+        if (ReactDOM) {
+            const domNode = ReactDOM.findDOMNode(this);
+            const topBar = domNode.querySelector(".sdl-dita-delivery-searchbar");
 
-        this._headerSize = topBar ? topBar.clientHeight : 0;
+            this._headerSize = topBar ? topBar.clientHeight : 0;
+        }
 
         window.addEventListener("scroll", this._fixTocPanel.bind(this));
     }
