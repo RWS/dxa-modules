@@ -8,6 +8,7 @@ import "test/tests/components/container/HomeComponent";
 import "test/tests/components/container/PublicationContentComponent";
 import "test/tests/components/presentation/BreadcrumbsComponent";
 import "test/tests/components/presentation/PageComponent";
+import "test/tests/components/presentation/SearchBarComponent";
 import "test/tests/components/presentation/TocComponent";
 import "test/tests/services/client/PageService";
 import "test/tests/services/client/PublicationService";

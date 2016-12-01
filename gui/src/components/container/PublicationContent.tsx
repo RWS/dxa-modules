@@ -269,14 +269,16 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         const { isPageLoading, activeTocItemPath, selectedTocItem, publicationTitle, tocIsFixed } = this.state;
         const { services, router } = this.context;
         const { publicationId } = this.props.params;
-        const taxonomyService = services.taxonomyService;
+        const { taxonomyService, localizationService } = services;
         const { content, error} = this._page;
         const { rootItems } = this._toc;
         const tocError = this._toc.error;
 
         return (
             <section className={"sdl-dita-delivery-publication-content"}>
-                <SearchBar />
+                <SearchBar
+                    placeholderLabel={localizationService.formatMessage("components.searchbar.placeholder", [publicationTitle || ""])}
+                    onSearch={query => console.log(query)} />
                 <div className={"sdl-dita-delivery-toc-and-page" + (tocIsFixed ? " sdl-dita-delivery-fixed-toc" : "")}>
                     <Toc
                         activeItemPath={activeTocItemPath}

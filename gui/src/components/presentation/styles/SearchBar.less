@@ -6,4 +6,35 @@
     height: 150px;
     width: 100%;
     background-image: url("../images/search-bar-background.jpg");
+    text-align: center;
+
+    .input-area {
+        display: flex;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 5px 10px;
+        margin-top: 49px;
+        border-bottom: 1px solid @neutralColor8;
+
+        input {
+            width: 100%;
+            background-color: transparent;
+            border-style: none;
+            color: @neutralColor8;
+            .header-font(400, 28px, 28px);
+            &:focus {
+                outline: none;
+            }
+            &::placeholder {
+                color: @neutralColor8;
+            }
+        }
+
+        .search-button {
+            cursor: pointer;
+            padding: 5px 0;
+            color: @neutralColor8;
+            .icon-search(28px);
+        }
+    }
 }
