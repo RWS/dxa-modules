@@ -269,8 +269,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         const { isPageLoading, activeTocItemPath, selectedTocItem, publicationTitle, tocIsFixed } = this.state;
         const { services, router } = this.context;
         const { publicationId } = this.props.params;
-        const taxonomyService = services.taxonomyService;
-        const localizationService = services.localizationService;
+        const { taxonomyService, localizationService } = services;
         const { content, error} = this._page;
         const { rootItems } = this._toc;
         const tocError = this._toc.error;
