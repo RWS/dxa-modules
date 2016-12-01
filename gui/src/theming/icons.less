@@ -11,6 +11,7 @@
 @iconLanguage: "\e011";
 @iconUser: "\e023";
 @iconArrowRight: "\e013";
+@iconSearch: "\e01b";
 
 .import-icon-font() {
     font-family: @iconFont;
@@ -23,10 +24,10 @@
     font-style: normal;
 }
 
-.icon-font-default-style() {
+.icon-font-default-style(@size: 24px) {
     display: inline-block;
     font-family: @iconFont; // shortening font declaration
-    font-size: 24px;
+    font-size: @size;
 }
 
 .icon-company-logo() {
@@ -34,25 +35,30 @@
     background-repeat: no-repeat;
 }
 
-.icon-language() {
-    .icon-font-default-style();
+.icon-language(@size: 24px) {
+    .icon-font-default-style(@size);
     &:before {
         content: @iconLanguage;
     }
 }
 
-.icon-user() {
-    .icon-font-default-style();
+.icon-user(@size: 24px) {
+    .icon-font-default-style(@size);
     &:before {
         content: @iconUser;
     }
 }
 
-.icon-arrow-right() {
-    .icon-font-default-style();
+.icon-arrow-right(@size: 24px) {
+    .icon-font-default-style(@size);
     &:before {
         content: @iconArrowRight;
     }
 }
 
-
+.icon-search(@size: 24px) {
+    .icon-font-default-style(@size);
+    &:before {
+        content: @iconSearch;
+    }
+}

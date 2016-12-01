@@ -20,6 +20,11 @@ export interface ISearchProps {
  */
 export const SearchBar = (props: ISearchProps): JSX.Element => {
     return (
-        <div className="sdl-dita-delivery-searchbar"/>
+        <div className="sdl-dita-delivery-searchbar">
+            <div className="input-area">
+                <input type="text"/>
+                <div className="search-button"/>
+            </div>
+        </div>
     );
 };
