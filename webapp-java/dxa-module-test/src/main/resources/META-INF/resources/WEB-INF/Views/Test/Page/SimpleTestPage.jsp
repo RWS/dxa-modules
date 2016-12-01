@@ -22,8 +22,8 @@
 </head>
 
 <body>
-<h5>Rendered PageModel: 9973 ('TSI-1758 Test Page | My Site') with Page View "Test:SimpleTestPage"</h5>
-<!--h5>Rendered {pageModel.title} with Page View "Test:SimpleTestPage"</h5-->
+
+<h1>Rendered ${pageModel.title} with Page View "Test:SimpleTestPage"</h1>
 
 <dxa:regions/>
 <script src="${markup.versionedContent('/assets/scripts/main.js')}"></script>
