@@ -153,6 +153,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
     private _page: IPage = {};
     private _toc: IToc = {};
     private _isUnmounted: boolean = false;
+    private _headerSize: number = 0;
 
     /**
      * Creates an instance of App.
@@ -314,6 +315,11 @@ export class PublicationContent extends React.Component<IPublicationContentProps
      * Invoked once, only on the client (not on the server), immediately after the initial rendering occurs.
      */
     public componentDidMount(): void {
+        const domNode = ReactDOM.findDOMNode(this);
+        const topBar = domNode.querySelector(".sdl-dita-delivery-searchbar");
+
+        this._headerSize = topBar ? topBar.clientHeight : 0;
+
         window.addEventListener("scroll", this._fixTocPanel.bind(this));
     }
 
@@ -411,7 +417,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         /* istanbul ignore else */
         if (!this._isUnmounted) {
             this.setState({
-                tocIsFixed: (window.document.body.scrollTop > 150)
+                tocIsFixed: (window.document.body.scrollTop >= this._headerSize)
             });
         }
     }
