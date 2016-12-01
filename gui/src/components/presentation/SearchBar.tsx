@@ -4,13 +4,13 @@ import "components/presentation/styles/SearchBar";
  * Search bar component props
  *
  * @export
- * @interface ISearchProps
+ * @interface ISearchBarProps
  */
-export interface ISearchProps {
+export interface ISearchBarProps {
     /**
      * Called whenever a search is requested
      *
-     * @memberOf ISearchProps
+     * @memberOf ISearchBarProps
      */
     onSearch?: (query: string) => void;
 
@@ -18,7 +18,7 @@ export interface ISearchProps {
      * Placeholder label
      *
      * @type {string}
-     * @memberOf ISearchProps
+     * @memberOf ISearchBarProps
      */
     placeholderLabel: string;
 }
@@ -26,7 +26,7 @@ export interface ISearchProps {
 /**
  * Search bar component
  */
-export const SearchBar: React.StatelessComponent<ISearchProps> = (props: ISearchProps): JSX.Element => {
+export const SearchBar: React.StatelessComponent<ISearchBarProps> = (props: ISearchBarProps): JSX.Element => {
     let value = "";
 
     function _onKeyUp(e: React.KeyboardEvent): void {
