@@ -267,7 +267,9 @@ export class PublicationContent extends React.Component<IPublicationContentProps
 
         return (
             <section className={"sdl-dita-delivery-publication-content"}>
-                <SearchBar placeholderLabel={localizationService.formatMessage("components.searchbar.placeholder", [publicationTitle || ""])} />
+                <SearchBar
+                    placeholderLabel={localizationService.formatMessage("components.searchbar.placeholder", [publicationTitle || ""])}
+                    onSearch={query => console.log(query)} />
                 <div className="sdl-dita-delivery-toc-and-page">
                     <Toc
                         activeItemPath={activeTocItemPath}
