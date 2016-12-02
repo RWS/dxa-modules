@@ -1,15 +1,14 @@
 @import (reference) "../../../theming/styles.less";
 @import (reference) "../../../theming/icons.less";
+
 .sdl-dita-delivery-breadcrumbs {
     ul {
-        .icon-home();
         width: auto;
         height: auto;
         line-height: 30px;
-        background-repeat: no-repeat;
-        background-position: left 6px;
-        padding-left: 40px;
         margin: 0;
+        padding-left: 0;
+
         li {
             color: @neutralColor4;
             display: inline-block;
@@ -30,6 +29,15 @@
             }
             .active {
                 color: @neutralColor1;
+            }
+            .home {
+                display: inline-block;
+                padding-left: 30px;
+                .icon-home();
+                background-repeat: no-repeat;
+                background-position: left 5px;
+                height: inherit;
+                width: inherit;
             }
         }
     }
