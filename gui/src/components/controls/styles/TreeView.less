@@ -4,7 +4,7 @@
 div.sdl-treeview {
     font-family: @fontFamily, @fontFamilyFallback;
     font-size: @fontSize;
-    color: @neutralColor7;
+    color: @neutralColor1;
     &:focus {
         ul.root {
             li.active > div.node {
@@ -17,26 +17,27 @@ div.sdl-treeview {
         li.active > div.node {
             background-color: transparent;
             border-color: transparent;
-            color: @accentColor3;
+            color: @accentColor1;
             font-weight: bold;
         }
         li > div.node {
             > i.expand-collapse {
-                .icon-nav-plus();
+                .icon-plus-16x16-ico();
             }
             > i.node {
                 display: none;
             }
             &:hover {
+                cursor: pointer;
                 background-color: transparent;
                 border-color: transparent;
             }
         }
         li.expanded > div.node > i.expand-collapse {
-            .icon-nav-cross();
+            .icon-cross-16x16-ico();
         }
         li.leaf-node > div.node > i.expand-collapse {
-            .icon-nav-dot();
+            .icon-dot-16x16-ico();
             visibility: visible;
         }
     }

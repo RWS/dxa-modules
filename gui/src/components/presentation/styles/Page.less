@@ -3,23 +3,41 @@
 .sdl-dita-delivery-page {
     padding: 10px;
 
-    h1 {
-        .header-h1();
-    }
+    .page-content {
+        color: @neutralColor4;
 
-    h2 {
-        .header-h2();
-    }
-
-    h3 {
-        .header-h3();
-    }
-
-    p {
-        .paragraph();
-    }
-
-    a {
-        .anchor();
+        h1 {
+            .header-h1();
+        }
+        h2 {
+            .header-h2();
+        }
+        h3 {
+            .header-h3();
+        }
+        p, div.section, div.p {
+            .paragraph();
+        }
+        a {
+            .anchor();
+        }
+        table {
+            .table();
+            th {
+                .table-header();
+            }
+            tr, tr.row {
+                .table-row();
+            }
+            td, td.entry {
+                .table-cell();
+            }
+        }
+        ul {
+            .unordered-list();
+        }
+        ol, ol.steps {
+            .ordered-list();
+        }
     }
 }
