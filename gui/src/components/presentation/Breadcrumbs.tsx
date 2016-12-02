@@ -1,7 +1,7 @@
 import { Promise } from "es6-promise";
 import { Link } from "react-router";
 import { ISitemapItem } from "interfaces/ServerModels";
-import { IAppContext } from "components/container/App";
+import { ILocalizationService } from "services/interfaces/LocalizationService";
 import "components/presentation/styles/Breadcrumbs";
 
 import { Url } from "utils/Url";
@@ -35,6 +35,13 @@ export interface IBreadcrumbsProps {
      * Load items path for a specific item
      */
     loadItemsPath: (publicationId: string, parentId: string) => Promise<ISitemapItem[]>;
+    /**
+     * Localization service
+     *
+     * @type {ILocalizationService}
+     * @memberOf IBreadcrumbsProps
+     */
+    localizationService: ILocalizationService;
 }
 
 /**
@@ -57,11 +64,6 @@ export interface IBreadcrumbsState {
  */
 export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbsState> {
 
-    public static contextTypes: React.ValidationMap<IAppContext> = {
-        services: React.PropTypes.object.isRequired
-    };
-
-    public context: IAppContext;
     private _isUnmounted: boolean = false;
 
     /**
@@ -138,9 +140,8 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
      */
     public render(): JSX.Element {
         const { itemPath } = this.state;
-        const { publicationId, publicationTitle } = this.props;
+        const { publicationId, publicationTitle, localizationService } = this.props;
         const { selectedItem } = this.props;
-        const { localizationService } = this.context.services;
         const currentUrl = selectedItem ? selectedItem.Url : null;
         const homeLabel = localizationService.formatMessage("components.breadcrumbs.home");
 
