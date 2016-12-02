@@ -5,31 +5,36 @@
 // ---------------------------------------------------------------------------------------------------------------------
 // Defined inside https://confluence.sdl.com/pages/viewpage.action?pageId=72917975
 
-@fontFamily: "Calibri W01";
-@fontHeaderFamily: "Sommet Rounded";
-@fontHeaderPath: "./fonts/SommetRounded";
+@fontFamily: "Calibri W01 Regular";
+@fontHeaderFamily: "Sommet Rounded W00 Regular";
+@fontFamilyPath: "./fonts/Calibri W01 Regular";
+@fontHeaderPath: "./fonts/Sommet Rounded W00 Regular";
 @fontFamilyFallback: "Arial";
 @fontSize: 14px;
 @fontColor: @neutralColor1;
 
 .import-header-font() {
     font-family: @fontHeaderFamily;
-    src: url('@{fontHeaderPath}/SommetRounded.eot');
+    src: url('@{fontHeaderPath}/Sommet Rounded W00 Regular.eot');
     src:
-        url('@{fontHeaderPath}/SommetRounded.ttf') format('truetype'),
-        url('@{fontHeaderPath}/SommetRounded.woff') format('woff'),
-        url('@{fontHeaderPath}/SommetRounded.woff2') format('woff2'),
-        url('@{fontHeaderPath}/SommetRounded.svg#SommetRounded') format('svg');
+        url('@{fontHeaderPath}/Sommet Rounded W00 Regular.ttf') format('truetype'),
+        url('@{fontHeaderPath}/Sommet Rounded W00 Regular.woff') format('woff'),
+        url('@{fontHeaderPath}/Sommet Rounded W00 Regular.woff2') format('woff2'),
+        url('@{fontHeaderPath}/Sommet Rounded W00 Regular.svg#Sommet%20Rounded%20W00%20Regular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 
 .import-regular-font() {
-    /* Define a custom font
-     * eg
-     * font-family: 'Myriad Pro';
-     * src: url('../../../theming/@{fontFamilyPath}');
-     */
+    font-family: @fontFamily;
+    src: url('@{fontFamilyPath}/Calibri W01 Regular.eot');
+    src:
+        url('@{fontFamilyPath}/Calibri W01 Regular.ttf') format('truetype'),
+        url('@{fontFamilyPath}/Calibri W01 Regular.woff') format('woff'),
+        url('@{fontFamilyPath}/Calibri W01 Regular.woff2') format('woff2'),
+        url('@{fontFamilyPath}/Calibri W01 Regular.svg#Calibri%20W01%20Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
 }
 
 .header-font(@weight: 400, @size:20px, @height: 24px) {
