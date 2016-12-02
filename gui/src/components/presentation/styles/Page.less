@@ -4,6 +4,8 @@
     padding: 10px;
 
     .page-content {
+        color: @neutralColor4;
+
         h1 {
             .header-h1();
         }
@@ -13,7 +15,7 @@
         h3 {
             .header-h3();
         }
-        p {
+        p, div.section, div.p {
             .paragraph();
         }
         a {
@@ -30,6 +32,12 @@
             td, td.entry {
                 .table-cell();
             }
+        }
+        ul {
+            .unordered-list();
+        }
+        ol, ol.steps {
+            .ordered-list();
         }
     }
 }
