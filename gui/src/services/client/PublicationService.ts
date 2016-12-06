@@ -1,5 +1,5 @@
 import { IPublicationService } from "services/interfaces/PublicationService";
-import { IPublication } from "interfaces/ServerModels";
+import { IPublication } from "interfaces/Publication";
 import { localization } from "services/client/LocalizationService";
 import { Publications } from "models/Publications";
 import { Promise } from "es6-promise";
@@ -70,8 +70,8 @@ export class PublicationService implements IPublicationService {
                 publications => {
                     if (Array.isArray(publications)) {
                         for (const pub of publications) {
-                            if (pub.Id === publicationId) {
-                                resolve(pub.Title);
+                            if (pub.id === publicationId) {
+                                resolve(pub.title);
                                 return;
                             }
                         }

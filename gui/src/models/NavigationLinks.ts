@@ -1,5 +1,6 @@
 import { path } from "utils/Path";
 import { ISitemapItem } from "interfaces/ServerModels";
+import { ITaxonomy } from "interfaces/Taxonomy";
 
 // Global Catalina dependencies
 import IWebRequest = SDL.Client.Net.IWebRequest;
@@ -20,7 +21,7 @@ export class NavigationLinks extends LoadableObject {
 
     private _publicationId: string;
     private _taxonomyId: string;
-    private _path: ISitemapItem[] = [];
+    private _path: ITaxonomy[] = [];
 
     /**
      * Creates an instance of NavigationLinks.
@@ -39,11 +40,11 @@ export class NavigationLinks extends LoadableObject {
     /**
      * Get the path
      *
-     * @returns {ISitemapItem[]} Ids of ancestors
+     * @returns {ITaxonomy[]} Ids of ancestors
      *
      * @memberOf NavigationLinks
      */
-    public getPath(): ISitemapItem[] {
+    public getPath(): ITaxonomy[] {
         return this._path;
     }
 
@@ -66,18 +67,28 @@ export class NavigationLinks extends LoadableObject {
         this.fireEvent("loadfailed", { error: error });
     }
 
-    private _calculatePath(navigationLinks: ISitemapItem): ISitemapItem[] {
-        const path: ISitemapItem[] = [];
+    private _calculatePath(navigationLinks: ISitemapItem): ITaxonomy[] {
+        const path: ITaxonomy[] = [];
         let items: ISitemapItem[] = navigationLinks.Items;
         if (navigationLinks.Id) {
-            path.push(navigationLinks);
+            path.push({
+                id: navigationLinks.Id,
+                title: navigationLinks.Title,
+                url: navigationLinks.Url,
+                hasChildNodes: navigationLinks.HasChildNodes
+            });
         }
         while (items && items.length > 0) {
             const firstItem = items[0];
             items = firstItem.Items;
             /* istanbul ignore else */
             if (firstItem.Id) {
-                path.push(firstItem);
+                path.push({
+                    id: firstItem.Id,
+                    title: firstItem.Title,
+                    url: firstItem.Url,
+                    hasChildNodes: navigationLinks.HasChildNodes
+                });
             }
         }
         return path;

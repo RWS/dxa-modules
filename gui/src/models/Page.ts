@@ -1,22 +1,12 @@
 import { path } from "utils/Path";
-import { IPage } from "interfaces/ServerModels";
+import * as ServerModels from "interfaces/ServerModels";
+import { IPage } from "interfaces/Page";
 
 // Global Catalina dependencies
 import IWebRequest = SDL.Client.Net.IWebRequest;
 import LoadableObject = SDL.Client.Models.LoadableObject;
 import OO = SDL.Client.Types.OO;
 import Net = SDL.Client.Net;
-
-/**
- * Page info
- *
- * @export
- * @interface IPageInfo
- */
-export interface IPageInfo {
-    title: string;
-    content: string;
-}
 
 /* tslint:disable-next-line */
 eval(OO.enableCustomInheritance);
@@ -48,13 +38,10 @@ export class Page extends LoadableObject {
     /**
      * Get the page info
      *
-     * @returns {IPageInfo}
+     * @returns {IPage}
      */
-    public getPageInfo(): IPageInfo {
-        return {
-            content: this._page.Html,
-            title: this._page.Title
-        };
+    public getPage(): IPage {
+        return this._page;
     }
 
     /* Overloads */
@@ -65,7 +52,12 @@ export class Page extends LoadableObject {
     }
 
     protected _processLoadResult(result: string, webRequest: IWebRequest): void {
-        this._page = JSON.parse(result);
+        const page = (JSON.parse(result) as ServerModels.IPage);
+        this._page = {
+            id: page.Id,
+            title: page.Title,
+            content: page.Html
+        } as IPage;
 
         super._processLoadResult(result, webRequest);
     }

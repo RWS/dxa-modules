@@ -1,5 +1,5 @@
 import { IPageService } from "services/interfaces/PageService";
-import { IPageInfo } from "models/Page";
+import { IPage } from "interfaces/Page";
 import { Promise } from "es6-promise";
 
 let fakeDelay = false;
@@ -9,19 +9,20 @@ export class PageService implements IPageService {
 
     private _mockDataPage: {
         error: string | null;
-        info: IPageInfo | undefined;
+        info: IPage | undefined;
     } = {
         error: null,
         info: {
+            id: "12345",
             content: "<span>Page content!</span>",
             title: "Page title!"
         }
     };
 
-    public getPageInfo(publicationId: string, pageId: string): Promise<IPageInfo> {
+    public getPageInfo(publicationId: string, pageId: string): Promise<IPage> {
         const { error, info } = this._mockDataPage;
         if (fakeDelay) {
-            return new Promise((resolve: (info?: IPageInfo) => void, reject: (error: string | null) => void) => {
+            return new Promise((resolve: (info?: IPage) => void, reject: (error: string | null) => void) => {
                 setTimeout((): void => {
                     if (error) {
                         reject(error);
@@ -40,7 +41,7 @@ export class PageService implements IPageService {
         }
     }
 
-    public setMockDataPage(error: string | null, info?: IPageInfo): void {
+    public setMockDataPage(error: string | null, info?: IPage): void {
         this._mockDataPage = {
             error: error,
             info: info

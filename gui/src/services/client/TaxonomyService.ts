@@ -1,5 +1,5 @@
 import { ITaxonomyService } from "services/interfaces/TaxonomyService";
-import { ISitemapItem } from "interfaces/ServerModels";
+import { ITaxonomy } from "interfaces/Taxonomy";
 import { localization } from "services/client/LocalizationService";
 import { Toc } from "models/Toc";
 import { NavigationLinks } from "models/NavigationLinks";
@@ -37,11 +37,11 @@ export class TaxonomyService implements ITaxonomyService {
      * Get the root objects of the sitemap
      *
      * @param {string} publicationId Publication Id
-     * @returns {Promise<ISitemapItem[]>} Promise to return items
+     * @returns {Promise<ITaxonomy[]>} Promise to return items
      *
      * @memberOf DataStoreClient
      */
-    public getSitemapRoot(publicationId: string): Promise<ISitemapItem[]> {
+    public getSitemapRoot(publicationId: string): Promise<ITaxonomy[]> {
         return this.getSitemapItems(publicationId, "root");
     }
 
@@ -50,14 +50,14 @@ export class TaxonomyService implements ITaxonomyService {
      *
      * @param {string} publicationId Publication Id
      * @param {string} parentId The parent Id
-     * @returns {Promise<ISitemapItem[]>} Promise to return Items
+     * @returns {Promise<ITaxonomy[]>} Promise to return Items
      *
      * @memberOf DataStoreClient
      */
-    public getSitemapItems(publicationId: string, parentId: string): Promise<ISitemapItem[]> {
+    public getSitemapItems(publicationId: string, parentId: string): Promise<ITaxonomy[]> {
         const toc = this.getTocModel(publicationId, parentId);
 
-        return new Promise((resolve: (items?: ISitemapItem[]) => void, reject: (error: string | null) => void) => {
+        return new Promise((resolve: (items?: ITaxonomy[]) => void, reject: (error: string | null) => void) => {
             if (toc.isLoaded()) {
                 resolve(toc.getSitemapItems());
             } else {
@@ -87,17 +87,17 @@ export class TaxonomyService implements ITaxonomyService {
      *
      * @param {string} publicationId Publication Id
      * @param {string} pageId The page id
-     * @returns {Promise<ISitemapItem[]>} Promise to return the full path
+     * @returns {Promise<ITaxonomy[]>} Promise to return the full path
      *
      * @memberOf DataStoreClient
      */
-    public getSitemapPath(publicationId: string, pageId: string): Promise<ISitemapItem[]> {
+    public getSitemapPath(publicationId: string, pageId: string): Promise<ITaxonomy[]> {
         const navigationLinks = this.getNavigationLinksModel(publicationId, pageId);
         if (!navigationLinks) {
             return Promise.reject(localization.formatMessage("error.path.not.found", [pageId, publicationId]));
         }
 
-        return new Promise((resolve: (path?: ISitemapItem[]) => void, reject: (error: string | null) => void) => {
+        return new Promise((resolve: (path?: ITaxonomy[]) => void, reject: (error: string | null) => void) => {
             if (navigationLinks.isLoaded()) {
                 const path = navigationLinks.getPath();
                 resolve(path);

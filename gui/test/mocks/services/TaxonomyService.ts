@@ -1,5 +1,5 @@
 import { ITaxonomyService } from "services/interfaces/TaxonomyService";
-import { ISitemapItem } from "interfaces/ServerModels";
+import { ITaxonomy } from "interfaces/Taxonomy";
 import { Promise } from "es6-promise";
 
 let fakeDelay = false;
@@ -9,20 +9,20 @@ export class TaxonomyService implements ITaxonomyService {
 
     private _mockDataToc: {
         error: string | null;
-        items: ISitemapItem[]
+        items: ITaxonomy[]
     } = {
         error: null,
         items: []
     };
 
-    public getSitemapRoot(publicationId: string): Promise<ISitemapItem[]> {
+    public getSitemapRoot(publicationId: string): Promise<ITaxonomy[]> {
         return this.getSitemapItems(publicationId);
     }
 
-    public getSitemapItems(publicationId: string, parentId?: string): Promise<ISitemapItem[]> {
+    public getSitemapItems(publicationId: string, parentId?: string): Promise<ITaxonomy[]> {
         const { error, items } = this._mockDataToc;
         if (fakeDelay) {
-            return new Promise((resolve: (items?: ISitemapItem[]) => void, reject: (error: string | null) => void) => {
+            return new Promise((resolve: (items?: ITaxonomy[]) => void, reject: (error: string | null) => void) => {
                 setTimeout((): void => {
                     if (error) {
                         reject(error);
@@ -41,18 +41,18 @@ export class TaxonomyService implements ITaxonomyService {
         }
     }
 
-    public getSitemapPath(publicationId: string, pageId: string): Promise<ISitemapItem[]> {
+    public getSitemapPath(publicationId: string, pageId: string): Promise<ITaxonomy[]> {
         const tocItems = this._mockDataToc.items;
         if (Array.isArray(tocItems)) {
             // Only first level is supported
-            const path = tocItems.filter(item => item.Url === pageId);
+            const path = tocItems.filter(item => item.url === pageId);
             return Promise.resolve(path);
         } else {
             return Promise.reject("Unable to resolve path.");
         }
     }
 
-    public setMockDataToc(error: string | null, items?: ISitemapItem[]): void {
+    public setMockDataToc(error: string | null, items?: ITaxonomy[]): void {
         this._mockDataToc = {
             error: error,
             items: items || []

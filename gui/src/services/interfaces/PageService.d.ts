@@ -1,4 +1,4 @@
-import { IPageInfo } from "models/Page";
+import { IPage } from "interfaces/Page";
 import { Promise } from "es6-promise";
 
 /**
@@ -11,9 +11,9 @@ export interface IPageService {
      *
      * @param {string} publicationId Publication Id
      * @param {string} pageId The page id
-     * @returns {Promise<IPageInfo>} Promise to return the the content
+     * @returns {Promise<IPage>} Promise to return the the content
      *
      * @memberOf IDataStore
      */
-    getPageInfo(publicationId: string, pageId: string): Promise<IPageInfo>;
+    getPageInfo(publicationId: string, pageId: string): Promise<IPage>;
 }

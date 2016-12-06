@@ -1,11 +1,11 @@
 import { Promise } from "es6-promise";
-import { ISitemapItem } from "interfaces/ServerModels";
+import { ITaxonomy } from "interfaces/Taxonomy";
+import { IPage } from "interfaces/Page";
 import { IAppContext } from "components/container/App";
 import { Toc } from "components/presentation/Toc";
 import { Page } from "components/presentation/Page";
 import { SearchBar } from "components/presentation/SearchBar";
 import { Breadcrumbs } from "components/presentation/Breadcrumbs";
-import { IPageInfo } from "models/Page";
 import { TcmId } from "utils/TcmId";
 import { Url } from "utils/Url";
 
@@ -86,9 +86,9 @@ export interface IPublicationContentState {
     /**
      * Current selected item in the TOC
      *
-     * @type {ISitemapItem | null}
+     * @type {ITaxonomy | null}
      */
-    selectedTocItem?: ISitemapItem | null;
+    selectedTocItem?: ITaxonomy | null;
     /**
      * Page is loading
      *
@@ -109,7 +109,7 @@ export interface IPublicationContentState {
     publicationTitle?: string;
 }
 
-interface IPage {
+interface ISelectedPage {
     /**
      * Content of the current selected page
      *
@@ -134,9 +134,9 @@ interface IToc {
     /**
      * Root items
      *
-     * @type {ISitemapItem[]}
+     * @type {ITaxonomy[]}
      */
-    rootItems?: ISitemapItem[];
+    rootItems?: ITaxonomy[];
 }
 
 /**
@@ -150,7 +150,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
     };
 
     public context: IAppContext;
-    private _page: IPage = {};
+    private _page: ISelectedPage = {};
     private _toc: IToc = {};
     private _isUnmounted: boolean = false;
     private _headerSize: number = 0;
@@ -245,10 +245,10 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         const { publicationId } = this.props.params;
         const pageService = services.pageService;
         const { selectedTocItem, isPageLoading } = this.state;
-        const currentId = selectedTocItem ? selectedTocItem.Id : null;
-        const nextId = nextState.selectedTocItem ? nextState.selectedTocItem.Id : null;
-        if (nextState.selectedTocItem && !nextState.selectedTocItem.Url) {
-            this._page.content = `<h1 class="title topictitle1">${nextState.selectedTocItem.Title}</h1>`;
+        const currentId = selectedTocItem ? selectedTocItem.id : null;
+        const nextId = nextState.selectedTocItem ? nextState.selectedTocItem.id : null;
+        if (nextState.selectedTocItem && !nextState.selectedTocItem.url) {
+            this._page.content = `<h1 class="title topictitle1">${nextState.selectedTocItem.title}</h1>`;
             return;
         }
         if (nextId && (isPageLoading || currentId !== nextId)) {
@@ -283,7 +283,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     <Toc
                         activeItemPath={activeTocItemPath}
                         rootItems={rootItems}
-                        loadChildItems={(parentId: string): Promise<ISitemapItem[]> => {
+                        loadChildItems={(parentId: string): Promise<ITaxonomy[]> => {
                             // TODO: this conversion will not be needed when upgrading to DXA 1.7
                             // https://jira.sdl.com/browse/TSI-2131
                             const taxonomyItemId = TcmId.getTaxonomyItemId("1", parentId);
@@ -337,7 +337,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         window.removeEventListener("scroll", this._fixTocPanel.bind(this));
     }
 
-    private _onTocSelectionChanged(sitemapItem: ISitemapItem, path: string[]): void {
+    private _onTocSelectionChanged(sitemapItem: ITaxonomy, path: string[]): void {
         const page = this._page;
         const {router, services } = this.context;
         const {publicationId, pageIdOrPublicationTitle } = this.props.params;
@@ -352,14 +352,14 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     activeTocItemPath: path,
                     publicationTitle: title,
                     selectedTocItem: sitemapItem,
-                    isPageLoading: sitemapItem.Url ? true : false
+                    isPageLoading: sitemapItem.url ? true : false
                 });
 
                 /* istanbul ignore else */
                 if (router) {
-                    const navPath = sitemapItem.Url || Url.getPublicationUrl(publicationId, title);
+                    const navPath = sitemapItem.url || Url.getPublicationUrl(publicationId, title);
                     // After upgrading to DXA 1.7 use TcmId.getItemIdFromTaxonomyId
-                    const siteMapPageId = TcmId.parseId(sitemapItem.Id);
+                    const siteMapPageId = TcmId.parseId(sitemapItem.id);
                     if (siteMapPageId && siteMapPageId.itemId === pageId) {
                         router.replace(navPath);
                     }
@@ -374,12 +374,12 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                 this.setState({
                     activeTocItemPath: path,
                     selectedTocItem: sitemapItem,
-                    isPageLoading: sitemapItem.Url ? true : false
+                    isPageLoading: sitemapItem.url ? true : false
                 });
             });
     }
 
-    private _onPageContentRetrieved(pageInfo: IPageInfo): void {
+    private _onPageContentRetrieved(pageInfo: IPage): void {
         const page = this._page;
         page.content = pageInfo.content;
         this.setState({
@@ -403,7 +403,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
             path => {
                 /* istanbul ignore else */
                 if (!this._isUnmounted) {
-                    done(path.map(item => item.Id || "") || []);
+                    done(path.map(item => item.id || "") || []);
                 }
             },
             error => {
