@@ -1,9 +1,10 @@
-import { ITaxonomyService } from "../interfaces/TaxonomyService";
-import { localization } from "./LocalizationService";
-import { Toc } from "../../models/Toc";
-import { NavigationLinks, ILinkInfo } from "../../models/NavigationLinks";
+import { ITaxonomyService } from "services/interfaces/TaxonomyService";
+import { ISitemapItem } from "interfaces/ServerModels";
+import { localization } from "services/client/LocalizationService";
+import { Toc } from "models/Toc";
+import { NavigationLinks } from "models/NavigationLinks";
 import { Promise } from "es6-promise";
-import { TcmId } from "../../utils/TcmId";
+import { TcmId } from "utils/TcmId";
 
 /**
  * Taxonomy service, interacts with the models to fetch the required data.
@@ -40,7 +41,7 @@ export class TaxonomyService implements ITaxonomyService {
      *
      * @memberOf DataStoreClient
      */
-    public getSitemapRoot(publicationId: string): Promise<ILinkInfo[]> {
+    public getSitemapRoot(publicationId: string): Promise<ISitemapItem[]> {
         return this.getSitemapItems(publicationId, "root");
     }
 
@@ -53,10 +54,10 @@ export class TaxonomyService implements ITaxonomyService {
      *
      * @memberOf DataStoreClient
      */
-    public getSitemapItems(publicationId: string, parentId: string): Promise<ILinkInfo[]> {
+    public getSitemapItems(publicationId: string, parentId: string): Promise<ISitemapItem[]> {
         const toc = this.getTocModel(publicationId, parentId);
 
-        return new Promise((resolve: (items?: ILinkInfo[]) => void, reject: (error: string | null) => void) => {
+        return new Promise((resolve: (items?: ISitemapItem[]) => void, reject: (error: string | null) => void) => {
             if (toc.isLoaded()) {
                 resolve(toc.getSitemapItems());
             } else {
@@ -86,17 +87,17 @@ export class TaxonomyService implements ITaxonomyService {
      *
      * @param {string} publicationId Publication Id
      * @param {string} pageId The page id
-     * @returns {Promise<ILinkInfo[]>} Promise to return the full path
+     * @returns {Promise<ISitemapItem[]>} Promise to return the full path
      *
      * @memberOf DataStoreClient
      */
-    public getSitemapPath(publicationId: string, pageId: string): Promise<ILinkInfo[]> {
+    public getSitemapPath(publicationId: string, pageId: string): Promise<ISitemapItem[]> {
         const navigationLinks = this.getNavigationLinksModel(publicationId, pageId);
         if (!navigationLinks) {
             return Promise.reject(localization.formatMessage("error.path.not.found", [pageId, publicationId]));
         }
 
-        return new Promise((resolve: (path?: ILinkInfo[]) => void, reject: (error: string | null) => void) => {
+        return new Promise((resolve: (path?: ISitemapItem[]) => void, reject: (error: string | null) => void) => {
             if (navigationLinks.isLoaded()) {
                 const path = navigationLinks.getPath();
                 resolve(path);

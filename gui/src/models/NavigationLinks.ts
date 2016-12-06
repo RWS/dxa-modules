@@ -1,23 +1,11 @@
-import { path } from "../utils/Path";
-import { ISitemapItem } from "../interfaces/ServerModels";
+import { path } from "utils/Path";
+import { ISitemapItem } from "interfaces/ServerModels";
 
 // Global Catalina dependencies
 import IWebRequest = SDL.Client.Net.IWebRequest;
 import LoadableObject = SDL.Client.Models.LoadableObject;
 import OO = SDL.Client.Types.OO;
 import Net = SDL.Client.Net;
-
-/**
- * Link info
- *
- * @export
- * @interface ILinkInfo
- */
-export interface ILinkInfo {
-    Id?: string;
-    Title: string;
-    Url?: string;
-}
 
 /* tslint:disable-next-line */
 eval(OO.enableCustomInheritance);
@@ -32,7 +20,7 @@ export class NavigationLinks extends LoadableObject {
 
     private _publicationId: string;
     private _taxonomyId: string;
-    private _path: ILinkInfo[] = [];
+    private _path: ISitemapItem[] = [];
 
     /**
      * Creates an instance of NavigationLinks.
@@ -51,11 +39,11 @@ export class NavigationLinks extends LoadableObject {
     /**
      * Get the path
      *
-     * @returns {ILinkInfo[]} Ids of ancestors
+     * @returns {ISitemapItem[]} Ids of ancestors
      *
      * @memberOf NavigationLinks
      */
-    public getPath(): ILinkInfo[] {
+    public getPath(): ISitemapItem[] {
         return this._path;
     }
 
@@ -78,18 +66,18 @@ export class NavigationLinks extends LoadableObject {
         this.fireEvent("loadfailed", { error: error });
     }
 
-    private _calculatePath(navigationLinks: ISitemapItem): ILinkInfo[] {
-        const path: ILinkInfo[] = [];
+    private _calculatePath(navigationLinks: ISitemapItem): ISitemapItem[] {
+        const path: ISitemapItem[] = [];
         let items: ISitemapItem[] = navigationLinks.Items;
         if (navigationLinks.Id) {
-            path.push(navigationLinks as ILinkInfo);
+            path.push(navigationLinks);
         }
         while (items && items.length > 0) {
             const firstItem = items[0];
             items = firstItem.Items;
             /* istanbul ignore else */
             if (firstItem.Id) {
-                path.push(navigationLinks as ILinkInfo);
+                path.push(firstItem);
             }
         }
         return path;

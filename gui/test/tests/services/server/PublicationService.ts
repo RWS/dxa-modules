@@ -1,4 +1,4 @@
-import { PublicationService } from "../../../../src/services/server/PublicationService";
+import { PublicationService } from "services/server/PublicationService";
 
 // Global Catalina dependencies
 import TestBase = SDL.Client.Test.TestBase;

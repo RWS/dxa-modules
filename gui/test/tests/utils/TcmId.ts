@@ -1,5 +1,5 @@
-import { TcmId as TcmIdUtils } from "../../../src/utils/TcmId";
-import { CdItemTypes } from "../../../src/interfaces/TcmId";
+import { TcmId as TcmIdUtils } from "utils/TcmId";
+import { CdItemTypes } from "interfaces/TcmId";
 
 describe(`TcmId utils tests.`, (): void => {
 
