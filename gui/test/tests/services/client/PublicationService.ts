@@ -49,7 +49,7 @@ class PublicationServiceTests extends TestBase {
                     expect(publications).toBeDefined();
                     if (publications) {
                         expect(publications.length).toBe(6);
-                        expect(publications[1].Title).toBe("Publication MP330");
+                        expect(publications[1].title).toBe("Publication MP330");
                     }
                     done();
                 }).catch(error => {
@@ -64,7 +64,7 @@ class PublicationServiceTests extends TestBase {
                     expect(publications).toBeDefined();
                     if (publications) {
                         expect(publications.length).toBe(6);
-                        expect(publications[1].Title).toBe("Publication MP330");
+                        expect(publications[1].title).toBe("Publication MP330");
                         expect(spy).not.toHaveBeenCalled();
                     }
                     done();

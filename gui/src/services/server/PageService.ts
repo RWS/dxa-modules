@@ -1,5 +1,5 @@
 import { IPageService } from "services/interfaces/PageService";
-import { IPageInfo } from "models/Page";
+import { IPage } from "interfaces/Page";
 import { Promise } from "es6-promise";
 
 /**
@@ -13,10 +13,11 @@ export class PageService implements IPageService {
 
     private _mockDataPage: {
         error: string | null;
-        info: IPageInfo;
+        info: IPage;
     } = {
         error: null,
         info: {
+            id: "12345",
             content: "<span>Page content!</span>",
             title: "Page title!"
         }
@@ -27,11 +28,11 @@ export class PageService implements IPageService {
      *
      * @param {string} publicationId Publication Id
      * @param {string} pageId The page id
-     * @returns {Promise<IPageInfo>} Promise to return the the content
+     * @returns {Promise<IPage>} Promise to return the the content
      *
      * @memberOf DataStoreServer
      */
-    public getPageInfo(publicationId: string, pageId: string): Promise<IPageInfo> {
+    public getPageInfo(publicationId: string, pageId: string): Promise<IPage> {
         const { error, info } = this._mockDataPage;
         if (error) {
             return Promise.reject(error);

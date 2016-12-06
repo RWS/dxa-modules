@@ -1,5 +1,6 @@
 import { path } from "utils/Path";
 import { ISitemapItem } from "interfaces/ServerModels";
+import { ITaxonomy } from "interfaces/Taxonomy";
 
 // Global Catalina dependencies
 import IWebRequest = SDL.Client.Net.IWebRequest;
@@ -20,7 +21,7 @@ export class Toc extends LoadableObject {
 
     private _publicationId: string;
     private _parentId: string;
-    private _sitemapItems: ISitemapItem[];
+    private _sitemapItems: ITaxonomy[];
 
     /**
      * Creates an instance of Toc.
@@ -37,9 +38,9 @@ export class Toc extends LoadableObject {
     /**
      * Get the site map items
      *
-     * @returns {ISitemapItem[]}
+     * @returns {ITaxonomy[]}
      */
-    public getSitemapItems(): ISitemapItem[] {
+    public getSitemapItems(): ITaxonomy[] {
         return this._sitemapItems;
     }
 
@@ -50,7 +51,14 @@ export class Toc extends LoadableObject {
     }
 
     protected _processLoadResult(result: string, webRequest: IWebRequest): void {
-        this._sitemapItems = JSON.parse(result);
+        this._sitemapItems = (JSON.parse(result) as ISitemapItem[]).map((item: ISitemapItem) => {
+            return {
+                id: item.Id,
+                title: item.Title,
+                url: item.Url,
+                hasChildNodes: item.HasChildNodes
+            } as ITaxonomy;
+        });
 
         super._processLoadResult(result, webRequest);
     }

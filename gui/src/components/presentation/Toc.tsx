@@ -1,5 +1,5 @@
 import { Promise } from "es6-promise";
-import { ISitemapItem } from "interfaces/ServerModels";
+import { ITaxonomy } from "interfaces/Taxonomy";
 import "components/presentation/styles/Toc";
 import "components/controls/styles/TreeView";
 
@@ -25,17 +25,17 @@ export interface ITocProps {
     /**
      * Root items, showed on initial render
      *
-     * @type {ISitemapItem[]}
+     * @type {ITaxonomy[]}
      */
-    rootItems: ISitemapItem[] | undefined;
+    rootItems: ITaxonomy[] | undefined;
     /**
      * Load child items for a specific item
      */
-    loadChildItems: (parentId: string) => Promise<ISitemapItem[]>;
+    loadChildItems: (parentId: string) => Promise<ITaxonomy[]>;
     /**
      * Triggered whenever the selected item in the toc changes
      */
-    onSelectionChanged?: (sitemapItem: ISitemapItem, path: string[]) => void;
+    onSelectionChanged?: (sitemapItem: ITaxonomy, path: string[]) => void;
     /**
      * An error prevented the toc from rendering
      *
@@ -45,7 +45,7 @@ export interface ITocProps {
 }
 
 interface ITreeViewNode extends IBaseTreeViewNode {
-    sitemapItem: ISitemapItem;
+    taxonomy: ITaxonomy;
 }
 
 /**
@@ -140,17 +140,24 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
             });
     }
 
-    private _convertToTreeViewNodes(sitemapItems: ISitemapItem[], parentNode: ITreeViewNode | null = null): ITreeViewNode[] {
+    private _convertToTreeViewNodes(taxonomies: ITaxonomy[], parentNode: ITreeViewNode | null = null): ITreeViewNode[] {
         const nodes: ITreeViewNode[] = [];
         // Check if Catalina is loaded, on a server environment this is typically not the case
         // TODO: https://jira.sdl.com/browse/SDLUI-1980
         if (SDL && SDL.UI && SDL.UI.Controls) {
             const TreeViewControl = SDL.UI.Controls.TreeView;
             let count = 0;
-            for (let sitemapItem of sitemapItems) {
-                let newNode = TreeViewControl.prototype.createNode(sitemapItem.Id || count.toString(), sitemapItem.Title, "TOPIC",
-                    parentNode, null, !sitemapItem.HasChildNodes, this._loadChildNodes.bind(this), true) as ITreeViewNode;
-                newNode.sitemapItem = sitemapItem;
+            for (let taxonomy of taxonomies) {
+                let newNode = TreeViewControl.prototype.createNode(
+                    taxonomy.id || count.toString(),
+                    taxonomy.title,
+                    "TOPIC",
+                    parentNode,
+                    null,
+                    !taxonomy.hasChildNodes,
+                    this._loadChildNodes.bind(this),
+                    true) as ITreeViewNode;
+                newNode.taxonomy = taxonomy;
                 nodes.push(newNode);
                 count++;
             }
@@ -166,7 +173,7 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
                 const selectedNode = nodes.length > 0 ? nodes[0] : null;
                 if (selectedNode) {
                     const path = selectedNode ? selectedNode.getPath() : "";
-                    onSelectionChanged(selectedNode.sitemapItem, path.split("/"));
+                    onSelectionChanged(selectedNode.taxonomy, path.split("/"));
                 }
             }
         }

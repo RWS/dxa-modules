@@ -1,5 +1,6 @@
 import { path } from "utils/Path";
-import { IPublication } from "interfaces/ServerModels";
+import * as ServerModels from "interfaces/ServerModels";
+import { IPublication } from "interfaces/Publication";
 
 // Global Catalina dependencies
 import IWebRequest = SDL.Client.Net.IWebRequest;
@@ -37,7 +38,12 @@ export class Publications extends LoadableObject {
     }
 
     protected _processLoadResult(result: string, webRequest: IWebRequest): void {
-        this._publications = JSON.parse(result);
+        this._publications = (JSON.parse(result) as ServerModels.IPublication[]).map((item: ServerModels.IPublication) => {
+            return {
+                id: item.Id,
+                title: item.Title
+            } as IPublication;
+        });
 
         super._processLoadResult(result, webRequest);
     }

@@ -1,6 +1,6 @@
 import { Promise } from "es6-promise";
 import { Link } from "react-router";
-import { ISitemapItem } from "interfaces/ServerModels";
+import { ITaxonomy } from "interfaces/Taxonomy";
 import { ILocalizationService } from "services/interfaces/LocalizationService";
 import "components/presentation/styles/Breadcrumbs";
 
@@ -28,13 +28,13 @@ export interface IBreadcrumbsProps {
     /**
      * Current selected item
      *
-     * @type {ISitemapItem}
+     * @type {ITaxonomy}
      */
-    selectedItem?: ISitemapItem | null;
+    selectedItem?: ITaxonomy | null;
     /**
      * Load items path for a specific item
      */
-    loadItemsPath: (publicationId: string, parentId: string) => Promise<ISitemapItem[]>;
+    loadItemsPath: (publicationId: string, parentId: string) => Promise<ITaxonomy[]>;
     /**
      * Localization service
      *
@@ -54,9 +54,9 @@ export interface IBreadcrumbsState {
     /**
      * Current selected item path
      *
-     * @type {ISitemapItem}
+     * @type {ITaxonomy}
      */
-    itemPath?: ISitemapItem[];
+    itemPath?: ITaxonomy[];
 }
 
 /**
@@ -82,8 +82,8 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
      */
     public componentWillMount(): void {
         const { publicationId, selectedItem, loadItemsPath } = this.props;
-        if (selectedItem && selectedItem.Id) {
-            loadItemsPath(publicationId, selectedItem.Id).then(
+        if (selectedItem && selectedItem.id) {
+            loadItemsPath(publicationId, selectedItem.id).then(
                 path => {
                     /* istanbul ignore else */
                     if (!this._isUnmounted) {
@@ -104,10 +104,10 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
      */
     public componentWillUpdate(nextProps: IBreadcrumbsProps, nextState: IBreadcrumbsState): void {
         const { publicationId, selectedItem, loadItemsPath } = this.props;
-        const currentId = selectedItem ? selectedItem.Id : null;
+        const currentId = selectedItem ? selectedItem.id : null;
         const nextItem = nextProps.selectedItem;
-        if (nextItem && nextItem.Url) {
-            const nextId = nextItem.Id;
+        if (nextItem && nextItem.url) {
+            const nextId = nextItem.id;
             if (nextId && (currentId !== nextId)) {
                 loadItemsPath(nextProps.publicationId || publicationId, nextId).then(
                     path => {
@@ -142,7 +142,7 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
         const { itemPath } = this.state;
         const { publicationId, publicationTitle, localizationService } = this.props;
         const { selectedItem } = this.props;
-        const currentUrl = selectedItem ? selectedItem.Url : null;
+        const currentUrl = selectedItem ? selectedItem.url : null;
         const homeLabel = localizationService.formatMessage("components.breadcrumbs.home");
 
         return (
@@ -158,17 +158,17 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
                     </li>
                     {
                         Array.isArray(itemPath) && (
-                            itemPath.map((item: ISitemapItem, index: number) => {
+                            itemPath.map((item: ITaxonomy, index: number) => {
                                 return (
                                     <li key={index}>
                                         {
-                                            (currentUrl !== item.Url)
+                                            (currentUrl !== item.url)
                                                 ?
-                                                (item.Url) ?
-                                                    <Link title={item.Title} to={item.Url}>{item.Title}</Link>
+                                                (item.url) ?
+                                                    <Link title={item.title} to={item.url}>{item.title}</Link>
                                                     :
-                                                    <Link title={item.Title} to={`${Url.getPublicationUrl(publicationId, publicationTitle)}`}>{item.Title}</Link>
-                                                : <span className="active">{item.Title}</span>
+                                                    <Link title={item.title} to={`${Url.getPublicationUrl(publicationId, publicationTitle)}`}>{item.title}</Link>
+                                                : <span className="active">{item.title}</span>
                                         }
                                         {index < (itemPath.length - 1) ? <span className="separator" /> : ""}
                                     </li>
