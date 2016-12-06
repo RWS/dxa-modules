@@ -61,7 +61,12 @@ namespace Sdl.Web.Modules.Core.Models
             }
         }
 
-        [SemanticProperty(IgnoreMapping = true)]
+        /// <summary>
+        /// Gets or sets the items in the list.
+        /// </summary>
+        /// <remarks>
+        /// The items can be retrieved dynamically, but also mapped from CM (e.g. ItemList Schema).
+        /// </remarks>
         public List<T> ItemListElements
         {
             get
