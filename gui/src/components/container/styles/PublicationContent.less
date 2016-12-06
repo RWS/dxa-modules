@@ -5,7 +5,11 @@
     @tocWidth: 300px;
 
     position: relative;
-    top: 50px;
+    height: 100%;
+
+    .sdl-dita-delivery-searchbar {
+        margin-top: 50px;
+    }
 
     .sdl-dita-delivery-toc-and-page {
         max-width: 1200px;
@@ -15,6 +19,8 @@
             width: @tocWidth;
             position: absolute;
             min-height: 150px;
+            top: 200px;
+            bottom: 0;
             .sdl-treeview {
                 padding-top: 15px;
             }
@@ -28,8 +34,7 @@
             }
         }
 
-        &.sdl-dita-delivery-fixed-toc
-        {
+        &.sdl-dita-delivery-fixed-toc {
             .sdl-dita-delivery-toc {
                 top: 50px;
                 position: fixed;
