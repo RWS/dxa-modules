@@ -19,6 +19,7 @@ namespace Sdl.Web.Modules.Core.Models
         public Tag Sort { get; set; }
         public int PageSize { get; set; }
 
+        [SemanticProperty(IgnoreMapping = true)]
         public int CurrentPage 
         { 
             get 
@@ -60,6 +61,7 @@ namespace Sdl.Web.Modules.Core.Models
             }
         }
 
+        [SemanticProperty(IgnoreMapping = true)]
         public List<T> ItemListElements
         {
             get

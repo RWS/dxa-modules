@@ -59,6 +59,7 @@ namespace Sdl.Web.Modules.Search.Models
         public bool HasMore { get; set; }
 
         [SemanticProperty("s:itemListElement")]
+        [SemanticProperty(IgnoreMapping = true)]
         public IList<SearchItem> Results { get; private set; }
 
         /// <summary>
@@ -98,6 +99,7 @@ namespace Sdl.Web.Modules.Search.Models
         where TResult : SearchItem
     {
         [SemanticProperty("s:itemListElement")]
+        [SemanticProperty(IgnoreMapping = true)]
         public new IList<TResult> Results
         {
             get
