@@ -1,8 +1,80 @@
 // ---------------------------------------------------------------------------------------------------------------------
 // This file contains global LESS variables that can be used across the application for specifying typography
 // ---------------------------------------------------------------------------------------------------------------------
+// Defined inside https://confluence.sdl.com/pages/viewpage.action?pageId=72917975
 
 @import (reference) "colors.less";
+@import (reference) "fonts.less";
 
-@h1Size: 18px;
-@h1Color: @neutralColor1;
+@h1Size: 24px;
+@h2Size: 20px;
+@h3Size: 18px;
+@h1Color: @accentColor1;
+@h2Color: @accentColor1;
+@h3Color: @neutralColor1;
+@anchorColor: @accentColor2;
+@paragraphColor: @neutralColor4;
+@tableBorderColor: @neutralColor5;
+
+.header-h1() {
+    color: @h1Color;
+    .header-font(300, @h1Size, @h1Size);
+}
+
+.header-h2() {
+    color: @h2Color;
+    .header-font(300, @h2Size, @h2Size);
+}
+
+.header-h3() {
+    color: @h3Color;
+    font-weight: 400;
+    line-height: 24px;
+    font-size: @h3Size;
+}
+
+.paragraph() {
+    color: @paragraphColor;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.anchor() {
+    color: @anchorColor;
+    text-decoration: none;
+}
+
+.table() {
+    border-color: @tableBorderColor;
+    border-left-style: none;
+    border-right-style: none;
+}
+
+.table-header() {
+    text-transform: uppercase;
+}
+
+.table-row() {
+    padding: 0;
+}
+
+.table-cell() {
+    padding: 10px;
+    border-color: @tableBorderColor;
+    border-right-style: none;
+}
+
+.unordered-list() {
+    li {
+        padding-left: 10px;
+        padding-bottom: 5px;
+    }
+}
+
+.ordered-list() {
+    li {
+        padding-left: 10px;
+        margin: 0;
+        padding-bottom: 5px;
+    }
+}

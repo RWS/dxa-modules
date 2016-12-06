@@ -1,8 +1,44 @@
 /* Graphene overwrites for the TreeView Control */
 
 @import (reference) "../../../theming/styles.less";
-
 div.sdl-treeview {
-    font-family: @fontFamily;
+    font-family: @fontFamily, @fontFamilyFallback;
     font-size: @fontSize;
+    color: @neutralColor1;
+    &:focus {
+        ul.root {
+            li.active > div.node {
+                background-color: transparent;
+                border-color: transparent;
+            }
+        }
+    }
+    ul.root {
+        li.active > div.node {
+            background-color: transparent;
+            border-color: transparent;
+            color: @accentColor1;
+            font-weight: bold;
+        }
+        li > div.node {
+            > i.expand-collapse {
+                .icon-plus-16x16-ico();
+            }
+            > i.node {
+                display: none;
+            }
+            &:hover {
+                cursor: pointer;
+                background-color: transparent;
+                border-color: transparent;
+            }
+        }
+        li.expanded > div.node > i.expand-collapse {
+            .icon-cross-16x16-ico();
+        }
+        li.leaf-node > div.node > i.expand-collapse {
+            .icon-dot-16x16-ico();
+            visibility: visible;
+        }
+    }
 }

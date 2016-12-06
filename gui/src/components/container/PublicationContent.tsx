@@ -3,6 +3,7 @@ import { ISitemapItem } from "interfaces/ServerModels";
 import { IAppContext } from "components/container/App";
 import { Toc } from "components/presentation/Toc";
 import { Page } from "components/presentation/Page";
+import { SearchBar } from "components/presentation/SearchBar";
 import { Breadcrumbs } from "components/presentation/Breadcrumbs";
 import { IPageInfo } from "models/Page";
 import { TcmId } from "utils/TcmId";
@@ -74,6 +75,14 @@ export interface IPublicationContentState {
      * @type {boolean}
      */
     isTocLoading?: boolean;
+
+    /**
+     * Toc is fixed to the top of the screen
+     *
+     * @type {boolean}
+     */
+    tocIsFixed?: boolean;
+
     /**
      * Current selected item in the TOC
      *
@@ -144,6 +153,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
     private _page: IPage = {};
     private _toc: IToc = {};
     private _isUnmounted: boolean = false;
+    private _headerSize: number = 0;
 
     /**
      * Creates an instance of App.
@@ -153,6 +163,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         super();
         this.state = {
             isTocLoading: true,
+            tocIsFixed: false,
             selectedTocItem: null,
             isPageLoading: true
         };
@@ -255,45 +266,66 @@ export class PublicationContent extends React.Component<IPublicationContentProps
      * @returns {JSX.Element}
      */
     public render(): JSX.Element {
-        const { isPageLoading, activeTocItemPath, selectedTocItem, publicationTitle } = this.state;
+        const { isPageLoading, activeTocItemPath, selectedTocItem, publicationTitle, tocIsFixed } = this.state;
         const { services, router } = this.context;
         const { publicationId } = this.props.params;
-        const taxonomyService = services.taxonomyService;
+        const { taxonomyService, localizationService } = services;
         const { content, error} = this._page;
         const { rootItems } = this._toc;
         const tocError = this._toc.error;
 
         return (
             <section className={"sdl-dita-delivery-publication-content"}>
-                <Toc
-                    activeItemPath={activeTocItemPath}
-                    rootItems={rootItems}
-                    loadChildItems={(parentId: string): Promise<ISitemapItem[]> => {
-                        // TODO: this conversion will not be needed when upgrading to DXA 1.7
-                        // https://jira.sdl.com/browse/TSI-2131
-                        const taxonomyItemId = TcmId.getTaxonomyItemId("1", parentId);
-                        return taxonomyService.getSitemapItems(publicationId, taxonomyItemId || parentId);
-                    } }
-                    onSelectionChanged={this._onTocSelectionChanged.bind(this)}
-                    error={tocError} />
-                <Breadcrumbs
-                    publicationId={publicationId}
-                    publicationTitle={publicationTitle || ""}
-                    loadItemsPath={taxonomyService.getSitemapPath.bind(taxonomyService)}
-                    selectedItem={selectedTocItem}
-                    />
-                <Page
-                    showActivityIndicator={isPageLoading || false}
-                    content={content}
-                    error={error}
-                    onNavigate={(url: string): void => {
-                        /* istanbul ignore else */
-                        if (router) {
-                            router.push(url);
-                        }
-                    } } />
+                <SearchBar
+                    placeholderLabel={localizationService.formatMessage("components.searchbar.placeholder", [publicationTitle || ""])}
+                    onSearch={query => console.log(query)} />
+                <div className={"sdl-dita-delivery-toc-and-page" + (tocIsFixed ? " sdl-dita-delivery-fixed-toc" : "")}>
+                    <Toc
+                        activeItemPath={activeTocItemPath}
+                        rootItems={rootItems}
+                        loadChildItems={(parentId: string): Promise<ISitemapItem[]> => {
+                            // TODO: this conversion will not be needed when upgrading to DXA 1.7
+                            // https://jira.sdl.com/browse/TSI-2131
+                            const taxonomyItemId = TcmId.getTaxonomyItemId("1", parentId);
+                            return taxonomyService.getSitemapItems(publicationId, taxonomyItemId || parentId);
+                        } }
+                        onSelectionChanged={this._onTocSelectionChanged.bind(this)}
+                        error={tocError} />
+                    <Page
+                        showActivityIndicator={isPageLoading || false}
+                        content={content}
+                        error={error}
+                        onNavigate={(url: string): void => {
+                            /* istanbul ignore else */
+                            if (router) {
+                                router.push(url);
+                            }
+                        } } >
+                        <Breadcrumbs
+                            publicationId={publicationId}
+                            publicationTitle={publicationTitle || ""}
+                            loadItemsPath={taxonomyService.getSitemapPath.bind(taxonomyService)}
+                            selectedItem={selectedTocItem}
+                            localizationService={localizationService}
+                            />
+                    </Page>
+                </div>
             </section>
         );
+    }
+
+    /**
+     * Invoked once, only on the client (not on the server), immediately after the initial rendering occurs.
+     */
+    public componentDidMount(): void {
+        if (ReactDOM) {
+            const domNode = ReactDOM.findDOMNode(this);
+            const topBar = domNode.querySelector(".sdl-dita-delivery-searchbar");
+
+            this._headerSize = topBar ? topBar.clientHeight : 0;
+        }
+
+        window.addEventListener("scroll", this._fixTocPanel.bind(this));
     }
 
     /**
@@ -301,12 +333,14 @@ export class PublicationContent extends React.Component<IPublicationContentProps
      */
     public componentWillUnmount(): void {
         this._isUnmounted = true;
+
+        window.removeEventListener("scroll", this._fixTocPanel.bind(this));
     }
 
     private _onTocSelectionChanged(sitemapItem: ISitemapItem, path: string[]): void {
         const page = this._page;
-        const { router, services } = this.context;
-        const { publicationId, pageIdOrPublicationTitle } = this.props.params;
+        const {router, services } = this.context;
+        const {publicationId, pageIdOrPublicationTitle } = this.props.params;
         const publicationService = services.publicationService;
         const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
 
@@ -382,5 +416,14 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     });
                 }
             });
+    }
+
+    private _fixTocPanel(): void {
+        /* istanbul ignore else */
+        if (!this._isUnmounted) {
+            this.setState({
+                tocIsFixed: (window.document.body.scrollTop >= this._headerSize)
+            });
+        }
     }
 }

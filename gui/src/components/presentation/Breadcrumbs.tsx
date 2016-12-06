@@ -1,6 +1,7 @@
 import { Promise } from "es6-promise";
 import { Link } from "react-router";
 import { ISitemapItem } from "interfaces/ServerModels";
+import { ILocalizationService } from "services/interfaces/LocalizationService";
 import "components/presentation/styles/Breadcrumbs";
 
 import { Url } from "utils/Url";
@@ -34,6 +35,13 @@ export interface IBreadcrumbsProps {
      * Load items path for a specific item
      */
     loadItemsPath: (publicationId: string, parentId: string) => Promise<ISitemapItem[]>;
+    /**
+     * Localization service
+     *
+     * @type {ILocalizationService}
+     * @memberOf IBreadcrumbsProps
+     */
+    localizationService: ILocalizationService;
 }
 
 /**
@@ -132,20 +140,27 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
      */
     public render(): JSX.Element {
         const { itemPath } = this.state;
-        const { publicationId, publicationTitle } = this.props;
+        const { publicationId, publicationTitle, localizationService } = this.props;
         const { selectedItem } = this.props;
         const currentUrl = selectedItem ? selectedItem.Url : null;
+        const homeLabel = localizationService.formatMessage("components.breadcrumbs.home");
+
         return (
             <div className={"sdl-dita-delivery-breadcrumbs"}>
                 <ul>
                     <li>
+                        <Link className="home" title={homeLabel} to="/home">{homeLabel}</Link>
+                        <span className="separator" />
+                    </li>
+                    <li>
                         <Link title={publicationTitle} to={`${Url.getPublicationUrl(publicationId, publicationTitle)}`}>{publicationTitle}</Link>
+                        <span className="separator" />
                     </li>
                     {
                         Array.isArray(itemPath) && (
-                            itemPath.map((item: ISitemapItem, key: number) => {
+                            itemPath.map((item: ISitemapItem, index: number) => {
                                 return (
-                                    <li key={key}>
+                                    <li key={index}>
                                         {
                                             (currentUrl !== item.Url)
                                                 ?
@@ -153,8 +168,9 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
                                                     <Link title={item.Title} to={item.Url}>{item.Title}</Link>
                                                     :
                                                     <Link title={item.Title} to={`${Url.getPublicationUrl(publicationId, publicationTitle)}`}>{item.Title}</Link>
-                                                : <span>{item.Title}</span>
+                                                : <span className="active">{item.Title}</span>
                                         }
+                                        {index < (itemPath.length - 1) ? <span className="separator" /> : ""}
                                     </li>
                                 );
                             })

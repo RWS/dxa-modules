@@ -4,14 +4,61 @@
 
 @import (reference) "../../node_modules/sdl-icons/dist/icons-graphene.less";
 @import (reference) "../../node_modules/sdl-icons/dist/icons-carbon-2.0.less";
+@import (reference) "../../node_modules/sdl-icons/dist/icons-common.less";
 
-.icon-company-logo() {
-    .icon-sdl-white-logo();
-    background-repeat: no-repeat;
-    background-size: 98px 30px;
+@iconFont: "SDLfont";
+@iconFontPath: "./fonts/SDLfont";
+@iconLanguage: "\e011";
+@iconUser: "\e023";
+@iconArrowRight: "\e013";
+@iconSearch: "\e01b";
+
+.import-icon-font() {
+    font-family: @iconFont;
+    src: url('@{iconFontPath}/SDLfont.eot');
+    src: url('@{iconFontPath}/SDLfont.otf') format('opentype'),
+        url('@{iconFontPath}/SDLfont.ttf') format('truetype'),
+        url('@{iconFontPath}/SDLfont.woff') format('woff'),
+        url('@{iconFontPath}/SDLfont.svg#SDLfont') format('svg');
+    font-weight: normal;
+    font-style: normal;
 }
 
-.icon-topic-16-color() {
-    .icon-mmconnector-asset-file-16-color();
+.icon-font-default-style(@size: 24px) {
+    display: inline-block;
+    font-family: @iconFont; // shortening font declaration
+    font-size: @size;
+}
+
+.icon-company-logo() {
+    .icon-sdl-logo-white();
     background-repeat: no-repeat;
+}
+
+.icon-language(@size: 24px) {
+    .icon-font-default-style(@size);
+    &:before {
+        content: @iconLanguage;
+    }
+}
+
+.icon-user(@size: 24px) {
+    .icon-font-default-style(@size);
+    &:before {
+        content: @iconUser;
+    }
+}
+
+.icon-arrow-right(@size: 24px) {
+    .icon-font-default-style(@size);
+    &:before {
+        content: @iconArrowRight;
+    }
+}
+
+.icon-search(@size: 24px) {
+    .icon-font-default-style(@size);
+    &:before {
+        content: @iconSearch;
+    }
 }

@@ -63,6 +63,7 @@ export class Page extends React.Component<IPageProps, {}> {
             <div className={"sdl-dita-delivery-page"}>
                 {props.showActivityIndicator ? <ActivityIndicator /> : null}
                 {props.error ? <ValidationMessage messageType={SDL.UI.Controls.ValidationMessageType.Error} message={props.error} /> : null}
+                {props.children}
                 <div>
                     <div className={"page-content ltr"} dangerouslySetInnerHTML={{ __html: props.content || "" }} />
                 </div>

@@ -1,7 +1,14 @@
 @import (reference) "../../../theming/styles.less";
+
+/* Import fonts */
 @font-face {
-    font-family: @fontFamily;
-    src: url('../../../theming/@{fontFamilyPath}');
+    .import-regular-font();
+}
+@font-face {
+    .import-header-font();
+}
+@font-face {
+    .import-icon-font();
 }
 
 html, body, #main-view-target {
@@ -9,20 +16,9 @@ html, body, #main-view-target {
     margin: 0 auto;
     font-family: @fontFamily, @fontFamilyFallback;
     font-size: @fontSize;
+    color: @fontColor;
 }
 
 .sdl-dita-delivery-app {
-    display: flex;
-    flex-flow: column;
     height: 100%;
-    .sdl-dita-delivery-breadcrumbs {
-        position: relative;
-        left: 20px;
-        height: 30px;
-        line-height: 30px;
-    }
-    .sdl-dita-delivery-publication-content {
-        position: relative;
-        flex: 1 1 auto;
-    }
 }

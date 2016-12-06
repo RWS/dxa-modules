@@ -31,28 +31,19 @@ module.exports = (isTest, isDebug) => {
             extensions: ['.ts', '.tsx', '.js', '.css', '.less']
         },
         module: {
-            rules: [
-                {
-                    test: /\.otf$/,
-                    loader: 'url-loader?limit=100000'
-                }, {
-                    test: /\.css$/,
-                    loader: extractCSS.extract([
-                        'css-loader',
-                        'postcss-loader'
-                    ])
-                }, {
-                    test: /\.less$/,
-                    loader: extractCSS.extract([
-                        'css-loader',
-                        'postcss-loader',
-                        'less-loader'
-                    ])
-                }, {
-                    test: /\.tsx?$/,
-                    loader: 'ts-loader'
-                }
-            ]
+            rules: [{
+                test: /\.(png|jpg|otf|woff(2)?|eot|ttf|svg)$/,
+                loader: 'url-loader?limit=100000'
+            }, {
+                test: /\.css$/,
+                loader: extractCSS.extract(['css-loader', 'postcss-loader'])
+            }, {
+                test: /\.less$/,
+                loader: extractCSS.extract(['css-loader', 'postcss-loader', 'less-loader'])
+            }, {
+                test: /\.tsx?$/,
+                loader: 'ts-loader'
+            }]
         },
         plugins: [
             extractCSS
