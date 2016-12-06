@@ -87,7 +87,7 @@ export class NavigationLinks extends LoadableObject {
                     id: firstItem.Id,
                     title: firstItem.Title,
                     url: firstItem.Url,
-                    hasChildNodes: navigationLinks.HasChildNodes
+                    hasChildNodes: firstItem.HasChildNodes
                 });
             }
         }
