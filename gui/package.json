@@ -1,6 +1,6 @@
 {
   "name": "sdl-dita-delivery-web-app-gui",
-  "version": "0.1.0-44",
+  "version": "0.1.0-45",
   "description": "GUI of the SDL Dita Delivery Web Application.",
   "dependencies": {
     "es6-promise": "~4.0.5",
@@ -48,7 +48,7 @@
     "postcss-loader": "~1.1.1",
     "remap-istanbul": "~0.7.0",
     "run-sequence": "~1.2.1",
-    "sdl-icons": "0.1.1-6",
+    "sdl-icons": "1.1.0-5",
     "through2": "~2.0.1",
     "ts-loader": "~1.0.0",
     "tslint": "~3.14.0",

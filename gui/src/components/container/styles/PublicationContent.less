@@ -1,18 +1,45 @@
 @import (reference) "../../../theming/styles.less";
+@import (reference) "../../presentation/styles/TopBar.less";
 
 .sdl-dita-delivery-publication-content {
-    .sdl-dita-delivery-toc {
-        position: fixed;
-        top: 80px;
-        left: 0;
-        bottom: 0;
-        width: 400px;
+    @tocWidth: 300px;
+
+    position: relative;
+    height: 100%;
+
+    .sdl-dita-delivery-searchbar {
+        margin-top: 50px;
     }
-    .sdl-dita-delivery-page {
-        position: absolute;
-        left: 400px;
-        right: 0;
-        bottom: 0;
-        top: 30px;
+
+    .sdl-dita-delivery-toc-and-page {
+        max-width: 1200px;
+        margin: 0 auto;
+
+        .sdl-dita-delivery-toc {
+            width: @tocWidth;
+            position: absolute;
+            min-height: 150px;
+            top: 200px;
+            bottom: 0;
+            .sdl-treeview {
+                padding-top: 15px;
+            }
+        }
+
+        .sdl-dita-delivery-page {
+            min-height: 150px;
+            margin-left: @tocWidth;
+            .sdl-dita-delivery-breadcrumbs {
+                padding-bottom: 15px;
+            }
+        }
+
+        &.sdl-dita-delivery-fixed-toc {
+            .sdl-dita-delivery-toc {
+                top: 50px;
+                position: fixed;
+                z-index: 999;
+            }
+        }
     }
 }

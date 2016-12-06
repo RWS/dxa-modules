@@ -1,10 +1,7 @@
 import { IAppContext } from "components/container/App";
+import { TopBar } from "components/presentation/TopBar";
 
 import "components/container/styles/App";
-import "components/controls/styles/TopBar";
-
-// Global Catalina dependencies
-import TopBar = SDL.ReactComponents.TopBar;
 
 /**
  * Main component for the application
@@ -26,12 +23,10 @@ export class Home extends React.Component<{}, {}> {
         const { localizationService } = this.context.services;
         return (
             <div className={"sdl-dita-delivery-app"}>
-                <TopBar title={localizationService.formatMessage("components.app.title")} buttons={{
-                    user: {
-                        isPicture: true
-                    }
-                }} />
-
+                <TopBar
+                    title={localizationService.formatMessage("app.productfamily")}
+                    language={localizationService.formatMessage("app.language")}
+                    />
                 {this.props.children}
             </div>
         );
