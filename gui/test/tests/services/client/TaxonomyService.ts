@@ -62,12 +62,12 @@ class TaxonomyServiceTests extends TestBase {
                         if (items) {
                             expect(items.length).toBe(1);
                             const firstItem = items[0];
-                            expect(firstItem.Id).toBeDefined();
-                            if (firstItem.Id) {
+                            expect(firstItem.id).toBeDefined();
+                            if (firstItem.id) {
                                 // TODO: this conversion will not be needed when upgrading to DXA 1.7
                                 // https://jira.sdl.com/browse/TSI-2131
-                                const taxonomyItemId = TcmId.getTaxonomyItemId("1", firstItem.Id);
-                                getChildren(taxonomyItemId || firstItem.Id);
+                                const taxonomyItemId = TcmId.getTaxonomyItemId("1", firstItem.id);
+                                getChildren(taxonomyItemId || firstItem.id);
                             }
                         }
                     }).catch(error => {

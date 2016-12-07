@@ -1,6 +1,6 @@
 import { Router, Route } from "react-router";
 import { Breadcrumbs, IBreadcrumbsProps } from "components/presentation/Breadcrumbs";
-import { ISitemapItem } from "interfaces/ServerModels";
+import { ITaxonomy } from "interfaces/Taxonomy";
 import { Promise } from "es6-promise";
 import { hashHistory } from "react-router";
 import { Url } from "utils/Url";
@@ -19,29 +19,23 @@ interface IProps {
 
 const taxnomyId = "5";
 
-const itemsPath: ISitemapItem[] = [
+const itemsPath: ITaxonomy[] = [
     {
-        Id: TcmId.getTaxonomyItemId(taxnomyId, "1"),
-        Title: "Root",
-        IsAbstract: true,
-        HasChildNodes: false,
-        Items: []
+        id: TcmId.getTaxonomyItemId(taxnomyId, "1"),
+        title: "Root",
+        hasChildNodes: false
     },
     {
-        Id: TcmId.getTaxonomyItemId(taxnomyId, "2"),
-        Title: "Child",
-        Url: Url.getPageUrl("pub-id", "2"),
-        IsAbstract: false,
-        HasChildNodes: false,
-        Items: []
+        id: TcmId.getTaxonomyItemId(taxnomyId, "2"),
+        title: "Child",
+        url: Url.getPageUrl("pub-id", "2"),
+        hasChildNodes: false
     },
     {
-        Id: TcmId.getTaxonomyItemId(taxnomyId, "3"),
-        Title: "Selected",
-        Url: Url.getPageUrl("pub-id", "3"),
-        IsAbstract: false,
-        HasChildNodes: false,
-        Items: []
+        id: TcmId.getTaxonomyItemId(taxnomyId, "3"),
+        title: "Selected",
+        url: Url.getPageUrl("pub-id", "3"),
+        hasChildNodes: false
     }
 ];
 
@@ -58,11 +52,11 @@ class BreadcrumbsComponent extends TestBase {
                 publicationTitle: "Publication"
             };
 
-            const loadItemsPath = (publicationId: string, parentId: string): Promise<ISitemapItem[]> => {
-                const itemsToReturn: ISitemapItem[] = [];
+            const loadItemsPath = (publicationId: string, parentId: string): Promise<ITaxonomy[]> => {
+                const itemsToReturn: ITaxonomy[] = [];
                 for (let item of itemsPath) {
                     itemsToReturn.push(item);
-                    if (item.Id === parentId) {
+                    if (item.id === parentId) {
                         break;
                     }
                 }
@@ -70,7 +64,7 @@ class BreadcrumbsComponent extends TestBase {
             };
 
             beforeEach(() => {
-                hashHistory.push(itemsPath[2].Url || "");
+                hashHistory.push(itemsPath[2].url || "");
                 const props: IBreadcrumbsProps = {
                     publicationId: data.publicationId,
                     publicationTitle: data.publicationTitle,
@@ -108,13 +102,13 @@ class BreadcrumbsComponent extends TestBase {
                     expect(nodes.length).toBe(4);
                     expect(nodes.item(0).getAttribute("title")).toBe("mock-components.breadcrumbs.home");
                     expect(nodes.item(1).textContent).toBe(data.publicationTitle);
-                    expect(nodes.item(2).textContent).toBe(itemsPath[0].Title);
-                    expect(nodes.item(3).textContent).toBe(itemsPath[1].Title);
+                    expect(nodes.item(2).textContent).toBe(itemsPath[0].title);
+                    expect(nodes.item(3).textContent).toBe(itemsPath[1].title);
 
                     // Last item is the selected item and should not highlighted with Link
                     const spanNodes = domNode.querySelectorAll("span.active");
                     expect(spanNodes.length).toBe(1);
-                    expect(spanNodes.item(0).textContent).toBe(itemsPath[2].Title);
+                    expect(spanNodes.item(0).textContent).toBe(itemsPath[2].title);
 
                     done();
                 }, 0);
@@ -169,9 +163,9 @@ class BreadcrumbsComponent extends TestBase {
                             expect(updatedItems[1].querySelector("a")).not.toBeNull();
                             expect(updatedItems[1].textContent).toBe(data.publicationTitle);
                             expect(updatedItems[2].querySelector("a")).not.toBeNull();
-                            expect(updatedItems[2].textContent).toBe(itemsPath[0].Title);
+                            expect(updatedItems[2].textContent).toBe(itemsPath[0].title);
                             expect(updatedItems[3].querySelector("a")).toBeNull();
-                            expect(updatedItems[3].textContent).toBe(selectedItem.Title);
+                            expect(updatedItems[3].textContent).toBe(selectedItem.title);
 
                             done();
                         }, 0);
@@ -182,12 +176,12 @@ class BreadcrumbsComponent extends TestBase {
     }
 
     private _renderComponent(props: IBreadcrumbsProps, target: HTMLElement): Breadcrumbs {
-        const getSelectedItem = (pageId?: string): ISitemapItem | null => {
+        const getSelectedItem = (pageId?: string): ITaxonomy | null => {
             if (!pageId) {
                 return null;
             }
             const taxonomyItemId = TcmId.getTaxonomyItemId(taxnomyId, pageId);
-            return itemsPath.filter(item => item.Id === taxonomyItemId)[0];
+            return itemsPath.filter(item => item.id === taxonomyItemId)[0];
         };
 
         return ReactDOM.render(

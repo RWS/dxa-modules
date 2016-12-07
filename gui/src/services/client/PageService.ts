@@ -1,5 +1,6 @@
 import { IPageService } from "services/interfaces/PageService";
-import { Page, IPageInfo } from "models/Page";
+import { IPage } from "interfaces/Page";
+import { Page } from "models/Page";
 import { Promise } from "es6-promise";
 
 /**
@@ -25,20 +26,20 @@ export class PageService implements IPageService {
      *
      * @param {string} publicationId Publication Id
      * @param {string} pageId The page Id
-     * @returns {Promise<IPageInfo>} Promise to return the content
+     * @returns {Promise<IPage>} Promise to return the content
      *
      * @memberOf DataStoreClient
      */
-    public getPageInfo(publicationId: string, pageId: string): Promise<IPageInfo> {
+    public getPageInfo(publicationId: string, pageId: string): Promise<IPage> {
         const page = this.getPageModel(publicationId, pageId);
-        return new Promise((resolve: (info?: IPageInfo) => void, reject: (error: string | null) => void) => {
+        return new Promise((resolve: (info?: IPage) => void, reject: (error: string | null) => void) => {
             if (page.isLoaded()) {
-                resolve(page.getPageInfo());
+                resolve(page.getPage());
             } else {
                 let removeEventListeners: () => void;
                 const onLoad = () => {
                     removeEventListeners();
-                    resolve(page.getPageInfo());
+                    resolve(page.getPage());
                 };
                 const onLoadFailed = (event: SDL.Client.Event.Event) => {
                     removeEventListeners();

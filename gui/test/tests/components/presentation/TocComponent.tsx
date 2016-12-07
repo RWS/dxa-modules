@@ -1,5 +1,5 @@
 import { Toc, ITocProps } from "components/presentation/Toc";
-import { ISitemapItem } from "interfaces/ServerModels";
+import { ITaxonomy } from "interfaces/Taxonomy";
 import { Promise } from "es6-promise";
 
 // Global Catalina dependencies
@@ -16,27 +16,21 @@ class TocComponent extends TestBase {
             const target = super.createTargetElement();
             let toc: Toc;
 
-            const rootItems: ISitemapItem[] = [{
-                Id: "root",
-                Title: "Root1",
-                IsAbstract: false,
-                HasChildNodes: true,
-                Items: []
+            const rootItems: ITaxonomy[] = [{
+                id: "root",
+                title: "Root1",
+                hasChildNodes: true
             }, {
-                Id: "root-error",
-                Title: "Root2",
-                IsAbstract: false,
-                HasChildNodes: true,
-                Items: []
+                id: "root-error",
+                title: "Root2",
+                hasChildNodes: true
             }];
-            const loadChildItems = (parentId: string): Promise<ISitemapItem[]> => {
+            const loadChildItems = (parentId: string): Promise<ITaxonomy[]> => {
                 if (parentId === "root") {
                     return Promise.resolve([{
-                        Id: "12345",
-                        Title: "Child1",
-                        IsAbstract: false,
-                        HasChildNodes: false,
-                        Items: []
+                        id: "12345",
+                        title: "Child1",
+                        hasChildNodes: false
                     }]);
                 } else {
                     return Promise.reject("Failed to load child nodes");
@@ -67,7 +61,7 @@ class TocComponent extends TestBase {
                 const domNode = ReactDOM.findDOMNode(treeView);
                 const nodes = domNode.querySelectorAll(".content");
                 expect(nodes.length).toBe(2);
-                expect(nodes.item(0).textContent).toBe(rootItems[0].Title);
+                expect(nodes.item(0).textContent).toBe(rootItems[0].title);
             });
 
             it("expands the root node upon click", (done: () => void): void => {
@@ -80,7 +74,7 @@ class TocComponent extends TestBase {
                 setTimeout((): void => {
                     const nodes = domNode.querySelectorAll(".content");
                     expect(nodes.length).toBe(3);
-                    expect(nodes.item(0).textContent).toBe(rootItems[0].Title);
+                    expect(nodes.item(0).textContent).toBe(rootItems[0].title);
                     expect(nodes.item(1).textContent).toBe("Child1");
                     done();
                 }, 0);

@@ -1,7 +1,7 @@
 import { PublicationContent } from "components/container/PublicationContent";
 import { Toc } from "components/presentation/Toc";
 import { Page } from "components/presentation/Page";
-import { ISitemapItem } from "interfaces/ServerModels";
+import { ITaxonomy } from "interfaces/Taxonomy";
 
 import { PageService } from "test/mocks/services/PageService";
 import { PublicationService } from "test/mocks/services/PublicationService";
@@ -52,11 +52,9 @@ class PublicationContentComponent extends TestBase {
             it("shows toc", (done: () => void): void => {
                 services.taxonomyService.setMockDataToc(null, [
                     {
-                        Id: "123",
-                        Title: "First element",
-                        IsAbstract: false,
-                        HasChildNodes: false,
-                        Items: []
+                        id: "123",
+                        title: "First element",
+                        hasChildNodes: false
                     }
                 ]);
                 const publicationContent = this._renderComponent(target);
@@ -86,16 +84,18 @@ class PublicationContentComponent extends TestBase {
             it("updates page content when selected site map item changes", (done: () => void): void => {
                 const pageContent = "<div>Page content!</div>";
                 services.taxonomyService.setMockDataToc(null, []);
-                services.pageService.setMockDataPage(null, { content: pageContent, title: "Title!" });
+                services.pageService.setMockDataPage(null, {
+                    id: "12345",
+                    content: pageContent,
+                    title: "Title!"
+                });
                 const publicationContent = this._renderComponent(target);
                 publicationContent.setState({
                     selectedTocItem: {
-                        Id: "123",
-                        IsAbstract: false,
-                        HasChildNodes: false,
-                        Title: "Some page",
-                        Url: "page",
-                        Items: []
+                        id: "123",
+                        title: "Some page",
+                        url: "page",
+                        hasChildNodes: false
                     }
                 });
                 // Use a timeout to allow the DataStore to return a promise with the data
@@ -117,18 +117,14 @@ class PublicationContentComponent extends TestBase {
             it("updates page content when item is selected from toc", (done: () => void): void => {
                 services.taxonomyService.setMockDataToc(null, [
                     {
-                        Id: "1",
-                        Title: "First element",
-                        IsAbstract: true,
-                        HasChildNodes: false,
-                        Items: []
+                        id: "1",
+                        title: "First element",
+                        hasChildNodes: false
                     },
                     {
-                        Id: "2",
-                        Title: "Second element",
-                        IsAbstract: true,
-                        HasChildNodes: false,
-                        Items: []
+                        id: "2",
+                        title: "Second element",
+                        hasChildNodes: false
                     }
                 ]);
                 const publicationContent = this._renderComponent(target);
@@ -172,11 +168,9 @@ class PublicationContentComponent extends TestBase {
                 const publicationContent = this._renderComponent(target);
                 publicationContent.setState({
                     selectedTocItem: {
-                        Id: "12345",
-                        IsAbstract: true,
-                        HasChildNodes: true,
-                        Title: title,
-                        Items: []
+                        id: "12345",
+                        title: title,
+                        hasChildNodes: true
                     }
                 });
 
@@ -196,12 +190,10 @@ class PublicationContentComponent extends TestBase {
 
             it("shows an error message when page info fails to load", (done: () => void): void => {
                 services.taxonomyService.setMockDataToc(null, [{
-                    Id: "123456",
-                    IsAbstract: false,
-                    HasChildNodes: true,
-                    Title: "Some page",
-                    Url: "page-url",
-                    Items: []
+                    id: "123456",
+                    title: "Some page",
+                    url: "page-url",
+                    hasChildNodes: true
                 }]);
                 services.pageService.setMockDataPage("Page failed to load!");
                 const publicationContent = this._renderComponent(target);
@@ -225,7 +217,11 @@ class PublicationContentComponent extends TestBase {
             it("shows an error message when publication title failed to load", (done: () => void): void => {
                 const errorMessage = "Page title is invalid!";
                 services.publicationService.setMockDataPublication(errorMessage);
-                services.pageService.setMockDataPage(null, { content: "<div/>", title: "Title!" });
+                services.pageService.setMockDataPage(null, {
+                    id: "12345",
+                    content: "<div/>",
+                    title: "Title!"
+                });
                 const publicationContent = this._renderComponent(target);
 
                 // Wait for the tree view to select the first node
@@ -241,40 +237,36 @@ class PublicationContentComponent extends TestBase {
             });
 
             it("updates the toc when the location changes", (done: () => void): void => {
-                const first: ISitemapItem = {
-                    Id: "1",
-                    HasChildNodes: false,
-                    IsAbstract: false,
-                    Items: [],
-                    Title: "First page!",
-                    Url: "1"
+                const first: ITaxonomy = {
+                    id: "1",
+                    title: "First page!",
+                    url: "1",
+                    hasChildNodes: false
                 };
-                const second: ISitemapItem = {
-                    Id: "2",
-                    HasChildNodes: false,
-                    IsAbstract: false,
-                    Items: [],
-                    Title: "Second page!",
-                    Url: "2"
+                const second: ITaxonomy = {
+                    id: "2",
+                    title: "Second page!",
+                    url: "2",
+                    hasChildNodes: false
                 };
 
                 services.taxonomyService.setMockDataToc(null, [first, second]);
-                let publicationContent = this._renderComponent(target, first.Url);
+                let publicationContent = this._renderComponent(target, first.url);
 
-                const assert = (item: ISitemapItem, ready: () => void): void => {
+                const assert = (item: ITaxonomy, ready: () => void): void => {
                     // Use a timeout to allow the DataStore to return a promise with the data
                     setTimeout((): void => {
                         // tslint:disable-next-line:no-any
                         const treeView = TestUtils.findRenderedComponentWithType(publicationContent, TreeView as any);
                         const tocItems = ReactDOM.findDOMNode(treeView).querySelector("ul");
                         expect(tocItems.childNodes.length).toBe(2);
-                        expect(tocItems.querySelector(".active").textContent).toBe(item.Title);
+                        expect(tocItems.querySelector(".active").textContent).toBe(item.title);
                         ready();
                     }, 0);
                 };
 
                 assert(first, (): void => {
-                    publicationContent = this._renderComponent(target, second.Url);
+                    publicationContent = this._renderComponent(target, second.url);
                     assert(second, done);
                 });
 

@@ -1,5 +1,5 @@
 import { ITaxonomyService } from "services/interfaces/TaxonomyService";
-import { ISitemapItem } from "interfaces/ServerModels";
+import { ITaxonomy } from "interfaces/Taxonomy";
 import { Promise } from "es6-promise";
 
 /**
@@ -13,7 +13,7 @@ export class TaxonomyService implements ITaxonomyService {
 
     private _mockDataToc: {
         error: string | null;
-        children: ISitemapItem[]
+        children: ITaxonomy[]
     } = {
         error: null,
         children: []
@@ -23,11 +23,11 @@ export class TaxonomyService implements ITaxonomyService {
      * Get the root objects of the sitemap
      *
      * @param {string} publicationId Publication Id
-     * @returns {Promise<ISitemapItem[]>} Promise to return the items
+     * @returns {Promise<ITaxonomy[]>} Promise to return the items
      *
      * @memberOf DataStoreServer
      */
-    public getSitemapRoot(publicationId: string): Promise<ISitemapItem[]> {
+    public getSitemapRoot(publicationId: string): Promise<ITaxonomy[]> {
         return this.getSitemapItems(publicationId, "root");
     }
 
@@ -36,11 +36,11 @@ export class TaxonomyService implements ITaxonomyService {
      *
      * @param {string} publicationId Publication Id
      * @param {string} parentId The parent id
-     * @returns {Promise<ISitemapItem[]>} Promise to return the items
+     * @returns {Promise<ITaxonomy[]>} Promise to return the items
      *
      * @memberOf DataStoreServer
      */
-    public getSitemapItems(publicationId: string, parentId: string): Promise<ISitemapItem[]> {
+    public getSitemapItems(publicationId: string, parentId: string): Promise<ITaxonomy[]> {
         const { error, children } = this._mockDataToc;
         if (error) {
             return Promise.reject(error);
@@ -54,12 +54,12 @@ export class TaxonomyService implements ITaxonomyService {
      *
      * @param {string} publicationId Publication Id
      * @param {string} pageId The page id
-     * @returns {Promise<ISitemapItem[]>} Promise to return the full path
+     * @returns {Promise<ITaxonomy[]>} Promise to return the full path
      *
      * @memberOf DataStoreServer
      */
-    public getSitemapPath(publicationId: string, pageId: string): Promise<ISitemapItem[]> {
-        return new Promise((resolve: (path?: ISitemapItem[]) => void, reject: (error: string | null) => void) => {
+    public getSitemapPath(publicationId: string, pageId: string): Promise<ITaxonomy[]> {
+        return new Promise((resolve: (path?: ITaxonomy[]) => void, reject: (error: string | null) => void) => {
             //
         });
     }
