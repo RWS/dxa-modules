@@ -3,6 +3,7 @@
 
 .sdl-dita-delivery-publication-content {
     @tocWidth: 300px;
+    @contentNavWidth: 210px;
 
     position: relative;
     height: 100%;
@@ -11,35 +12,51 @@
         margin-top: 50px;
     }
 
-    .sdl-dita-delivery-toc-and-page {
+    .sdl-dita-delivery-page {
         max-width: 1200px;
         margin: 0 auto;
+        position: relative;
 
         .sdl-dita-delivery-toc {
             width: @tocWidth;
-            position: absolute;
-            min-height: 150px;
-            top: 200px;
-            bottom: 0;
             .sdl-treeview {
                 padding-top: 15px;
             }
         }
 
-        .sdl-dita-delivery-page {
-            min-height: 150px;
-            margin-left: @tocWidth;
-            .sdl-dita-delivery-breadcrumbs {
-                padding-bottom: 15px;
-            }
+        .sdl-dita-delivery-content-navigation {
+            width: @contentNavWidth;
+            right: 0;
+            /*margin-left: -@contentNavWidth;*/
         }
 
-        &.sdl-dita-delivery-fixed-toc {
-            .sdl-dita-delivery-toc {
+        nav {
+            position: absolute;
+            min-height: 150px;
+            bottom: 0;
+            top: 0;
+        }
+
+        &.sdl-dita-delivery-fixed-nav {
+            nav {
                 top: 50px;
                 position: fixed;
                 z-index: 999;
             }
+        }
+
+        .sdl-dita-delivery-breadcrumbs,
+        article.page-content{
+            margin-left: @tocWidth;
+            margin-right: @contentNavWidth;
+        }
+
+        .sdl-dita-delivery-breadcrumbs {
+            padding-bottom: 15px;
+        }
+
+        article.page-content{
+            min-height: 150px;
         }
     }
 }
