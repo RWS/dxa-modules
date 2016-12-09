@@ -1,6 +1,6 @@
-import { path } from "utils/Path";
 import { ISitemapItem } from "interfaces/ServerModels";
 import { ITaxonomy } from "interfaces/Taxonomy";
+import { Api } from "utils/Api";
 
 // Global Catalina dependencies
 import IWebRequest = SDL.Client.Net.IWebRequest;
@@ -50,7 +50,7 @@ export class NavigationLinks extends LoadableObject {
 
     /* Overloads */
     protected _executeLoad(reload: boolean): void {
-        const url = path.getAbsolutePath(`gui/mocks/navigation-${this._publicationId}-${this._taxonomyId}.json`);
+        const url = Api.getNavigationLinksUrl(this._publicationId, this._taxonomyId);
         Net.getRequest(url,
             this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
     }

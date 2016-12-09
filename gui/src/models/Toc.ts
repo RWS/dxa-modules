@@ -1,6 +1,6 @@
-import { path } from "utils/Path";
 import { ISitemapItem } from "interfaces/ServerModels";
 import { ITaxonomy } from "interfaces/Taxonomy";
+import { Api } from "utils/Api";
 
 // Global Catalina dependencies
 import IWebRequest = SDL.Client.Net.IWebRequest;
@@ -46,7 +46,7 @@ export class Toc extends LoadableObject {
 
     /* Overloads */
     protected _executeLoad(reload: boolean): void {
-        const url = path.getAbsolutePath(`gui/mocks/toc-${this._publicationId}-${this._parentId}.json`);
+        const url = Api.getTocItemsUrl(this._publicationId, this._parentId);
         Net.getRequest(url, this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
     }
 

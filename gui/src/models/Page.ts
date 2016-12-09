@@ -1,6 +1,6 @@
-import { path } from "utils/Path";
 import * as ServerModels from "interfaces/ServerModels";
 import { IPage } from "interfaces/Page";
+import { Api } from "utils/Api";
 
 // Global Catalina dependencies
 import IWebRequest = SDL.Client.Net.IWebRequest;
@@ -46,7 +46,7 @@ export class Page extends LoadableObject {
 
     /* Overloads */
     protected _executeLoad(reload: boolean): void {
-        const url = path.getAbsolutePath(`gui/mocks/page-${this._publicationId}-${this._pageId}.json`);
+        const url = Api.getPageUrl(this._publicationId, this._pageId);
         Net.getRequest(url,
             this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
     }
