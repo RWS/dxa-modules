@@ -1,0 +1,49 @@
+{
+  "Id": "164163",
+  "Meta": {
+    "ishlogicalref.object.id": 164159,
+    "ishversionref.object.id": 164160,
+    "ishlngref.object.id": 164163,
+    "ishref.object.value": "GUID-0B4A7CB0-DF4C-4753-B283-9F5F5FEA0D0E",
+    "ishtype.object.value": "ISHModule",
+    "FTITLE.logical.value": "listening to the radio",
+    "FDESCRIPTION.logical.value": null,
+    "FCHANGES.version.value": "Imported OASIS DITA 1.1",
+    "FISHRELEASELABEL.version.value": [
+      "Publication MP330-v1-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2012/09/21 12:27:01",
+      "Publication MP330-v2-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2012/09/24 17:31:39",
+      "Publication MP660-v1-GUID-EB2E82F1-1C76-4032-815C-4E717140A081-2012/09/24 14:57:38",
+      "Publication MP660-v2-GUID-EB2E82F1-1C76-4032-815C-4E717140A081-2012/09/24 17:09:12"
+    ],
+    "CREATED-ON.lng.value": "2015-12-23T04:56:42Z",
+    "FAUTHOR.lng.value": "admin",
+    "FSTATUS.lng.value": "Released",
+    "MODIFIED-ON.lng.value": "2016-04-08T15:11:20Z",
+    "VERSION.version.value": "1",
+    "DOC-LANGUAGE.lng.value": [
+      "en"
+    ],
+    "FISHREVCOUNTER.lng.value": 4,
+    "ED.lng.value": "GUID-1EBBB003-8633-45B8-BEE5-5F5755A1AC1F",
+    "FUSERGROUP.logical.element": null,
+    "READ-ACCESS.logical.element": null,
+    "publicationtitle.generated.value": "Publication MP330"
+  },
+  "Regions": [
+    {
+      "Entities": [
+        {
+          "Id": "164163",
+          "topicTitle": "Listening to the radio",
+          "topicBody": {
+            "Fragments": [
+              {
+                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-0B4A7CB0-DF4C-4753-B283-9F5F5FEA0D0E__GUID-2A3C03C6-12A6-460A-814A-FB22D21218FE\" xmlns=\"http://www.w3.org/1999/xhtml\">Listening to the radio</h1>\n      \n      \n      \n      <div class=\"body taskbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\" />\n         \n         \n         <div class=\"section prereq p\" id=\"GUID-0B4A7CB0-DF4C-4753-B283-9F5F5FEA0D0E__GUID-9BE1A886-843B-4825-BA4D-22E8873E19FF\">To listen to the radio on your phone connect a compatible headset to the phone. The lead of the headset functions as the antenna\n            of the radio, so let it hang freely.\n         </div>\n         \n         \n         <ol class=\"ol steps\" id=\"GUID-0B4A7CB0-DF4C-4753-B283-9F5F5FEA0D0E__GUID-93161D4C-D1ED-41C1-BC58-6792685BD4E5\">\n            <li class=\"li step\">\n               <span class=\"ph cmd\">Press the Music key and select <samp class=\"ph msgph\">Radio</samp>.</span>\n               \n            </li>\n            \n            <li class=\"li step\">\n               <span class=\"ph cmd\">To tune a channel, press and hold <img class=\"image\" src=\"/gui/mocks/bin/1420746-345751-16.gif\" /> or <img class=\"image\" src=\"/gui/mocks/bin/1420746-345947-16.gif\" />and the channel search starts. Searching stops when a channel is found.</span>\n               \n            </li>\n            \n         </ol>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Parent topic:</strong> <a class=\"link\" title=\"You can listen to MP3 and AAC music files stored on the memory card in your phone with the Music player, or you can listen to the Radio.\" href=\"/1420746/164371/publication-mp330/music-functions\">Music functions</a></div>\n            \n         </div>\n         \n      </div>\n   "
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

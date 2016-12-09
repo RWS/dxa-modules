@@ -1,0 +1,49 @@
+{
+  "Id": "164390",
+  "Meta": {
+    "ishlogicalref.object.id": 164386,
+    "ishversionref.object.id": 164387,
+    "ishlngref.object.id": 164390,
+    "ishref.object.value": "GUID-D9222E28-4E8D-4D57-A0AB-C9E6C14F2679",
+    "ishtype.object.value": "ISHModule",
+    "FTITLE.logical.value": "multimedia messages",
+    "FDESCRIPTION.logical.value": null,
+    "FCHANGES.version.value": "Imported OASIS DITA 1.1",
+    "FISHRELEASELABEL.version.value": [
+      "Publication MP330-v1-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2012/09/21 12:27:01",
+      "Publication MP330-v2-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2012/09/24 17:31:39",
+      "Publication MP660-v1-GUID-EB2E82F1-1C76-4032-815C-4E717140A081-2012/09/24 14:57:38",
+      "Publication MP660-v2-GUID-EB2E82F1-1C76-4032-815C-4E717140A081-2012/09/24 17:09:12"
+    ],
+    "CREATED-ON.lng.value": "2015-12-23T04:57:15Z",
+    "FAUTHOR.lng.value": "admin",
+    "FSTATUS.lng.value": "Released",
+    "MODIFIED-ON.lng.value": "2016-04-08T15:12:28Z",
+    "VERSION.version.value": "1",
+    "DOC-LANGUAGE.lng.value": [
+      "en"
+    ],
+    "FISHREVCOUNTER.lng.value": 4,
+    "ED.lng.value": "GUID-CA919038-7DCA-443E-9EB1-BCEFB0351C87",
+    "FUSERGROUP.logical.element": null,
+    "READ-ACCESS.logical.element": null,
+    "publicationtitle.generated.value": "Publication MP330"
+  },
+  "Regions": [
+    {
+      "Entities": [
+        {
+          "Id": "164390",
+          "topicTitle": "Multimedia messages",
+          "topicBody": {
+            "Fragments": [
+              {
+                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-D9222E28-4E8D-4D57-A0AB-C9E6C14F2679__GUID-87FE4C0C-41F2-40FD-ABAB-32563843BFA2\" xmlns=\"http://www.w3.org/1999/xhtml\">Multimedia messages</h1>\n      \n      \n      \n      <div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">A multimedia message can contain text, picture and sound.</p>\n         \n         \n         <p class=\"p\">Your phone can receive but not send multimedia messages that contain sound. The phone supports multimedia messages that are\n            up to 45 KB in size. If the maximum size is exceeded, the phone may not be able to receive the message. Depending on the network,\n            you may receive a text message that includes an Internet address where you can view the multimedia message.\n         </p>\n         \n         \n         <p class=\"p\">If the message contains a picture, the phone scales it down to fit the display area.</p>\n         \n         \n         <p class=\"p\">Multimedia messaging supports the following formats:</p>\n         \n         \n         <ul class=\"ul\" id=\"GUID-D9222E28-4E8D-4D57-A0AB-C9E6C14F2679__GUID-4E1D3431-D9F8-43C8-A095-E491A3B8E762\">\n            \n            <li class=\"li\">Picture: JPEG, GIF, PNG, and BMP.</li>\n            \n            \n            <li class=\"li\">Sound: MIDI, Scalable Polyphonic MIDI (SP-MIDI), monophonic ringing tones (RGN) and WB-AMR.</li>\n            \n            \n         </ul>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Parent topic:</strong> <a class=\"link\" href=\"/1420746/164479/publication-mp330/messages\">Messages</a></div>\n            \n         </div>\n         \n      </div>\n   "
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

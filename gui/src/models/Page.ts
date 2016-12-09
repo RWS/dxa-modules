@@ -53,10 +53,23 @@ export class Page extends LoadableObject {
 
     protected _processLoadResult(result: string, webRequest: IWebRequest): void {
         const page = (JSON.parse(result) as ServerModels.IPage);
+        let pageTitle = "";
+        let pageBody = "";
+        const regions = page.Regions;
+        if (Array.isArray(regions) && regions.length > 0) {
+            const entities = regions[0].Entities;
+            if (Array.isArray(entities) && entities.length > 0) {
+                pageTitle = entities[0].topicTitle;
+                const topicBody = entities[0].topicBody;
+                if (topicBody && Array.isArray(topicBody.Fragments) && topicBody.Fragments.length > 0) {
+                    pageBody = topicBody.Fragments[0].Html;
+                }
+            }
+        }
         this._page = {
             id: page.Id,
-            title: page.Title,
-            content: page.Html
+            title: pageTitle,
+            content: pageBody
         } as IPage;
 
         super._processLoadResult(result, webRequest);

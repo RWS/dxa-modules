@@ -1,0 +1,26 @@
+{
+  "Id": "ish:1420746-1-512",
+  "Title": "User Guide",
+  "Url": null,
+  "IsAbstract": true,
+  "HasChildNodes": true,
+  "Items": [
+    {
+      "Id": "ish:1420746-164371-16",
+      "Title": "Music functions",
+      "Url": "/1420746/164371/publication-mp330/music-functions",
+      "IsAbstract": false,
+      "HasChildNodes": true,
+      "Items": [
+        {
+          "Id": "ish:1420746-164163-16",
+          "Title": "Listening to the radio",
+          "Url": "/1420746/164163/publication-mp330/listening-to-the-radio",
+          "IsAbstract": false,
+          "HasChildNodes": false,
+          "Items": []
+        }
+      ]
+    }
+  ]
+}

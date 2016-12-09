@@ -1,6 +1,5 @@
 {
   "Id": "164446",
-  "Title": "Contacten wijzigen",
   "Meta": {
     "ishlogicalref.object.id": 164440,
     "ishversionref.object.id": 164441,
@@ -30,5 +29,21 @@
     "FUSERGROUP.logical.element": null,
     "READ-ACCESS.logical.element": null
   },
-  "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-EF99C727-4834-442F-84CE-4864EE505BFF__GUID-76ED1FBE-8588-4E3F-BC4F-D09EF37C0105\" xmlns=\"http://www.w3.org/1999/xhtml\">Contacten wijzigen</h1>\n      \n      \n      <div class=\"body taskbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <ol class=\"ol steps\" id=\"GUID-EF99C727-4834-442F-84CE-4864EE505BFF__GUID-C8B78C26-E2F2-4FA0-8B32-98A678469AD4\">\n            <li class=\"li step\">\n               <span class=\"ph cmd\">Zoek naar het contact dat u wilt bewerken en druk op <samp class=\"ph msgph\">Detail</samp>. </span>\n               \n            </li>\n            \n            <li class=\"li step\">\n               <span class=\"ph cmd\">Ga naar het nummer of de tekstaantekening die u wilt wijzigen en druk op <samp class=\"ph msgph\">Opties</samp>. </span>\n               \n            </li>\n            \n            <li class=\"li step\">\n               <span class=\"ph cmd\">Selecteer <samp class=\"ph msgph\">Naam bewerken</samp>, <samp class=\"ph msgph\">Nummer bew.</samp> of <samp class=\"ph msgph\">Detail bew.</samp>, wijzig de naam, het nummer of de tekstaantekening en druk op <samp class=\"ph msgph\">OK</samp>.</span>\n               \n            </li>\n            \n         </ol>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Hoofdonderwerp:</strong> <a class=\"link\" title=\"U kunt namen van contacten opslaan in het geheugen van de telefoon (de interne telefoonlijst) en in het geheugen van de SIM-kaart (SIM-telefoonlijst).\" href=\"/1656868/164303/publication-mp330/telefoonlijst\">Telefoonlijst</a></div>\n            \n         </div>\n         \n      </div>\n   "
+  "Regions": [
+    {
+      "Entities": [
+        {
+          "Id": "164446",
+          "topicTitle": "Contacten wijzigen",
+          "topicBody": {
+            "Fragments": [
+              {
+                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-EF99C727-4834-442F-84CE-4864EE505BFF__GUID-76ED1FBE-8588-4E3F-BC4F-D09EF37C0105\" xmlns=\"http://www.w3.org/1999/xhtml\">Contacten wijzigen</h1>\n      \n      \n      <div class=\"body taskbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <ol class=\"ol steps\" id=\"GUID-EF99C727-4834-442F-84CE-4864EE505BFF__GUID-C8B78C26-E2F2-4FA0-8B32-98A678469AD4\">\n            <li class=\"li step\">\n               <span class=\"ph cmd\">Zoek naar het contact dat u wilt bewerken en druk op <samp class=\"ph msgph\">Detail</samp>. </span>\n               \n            </li>\n            \n            <li class=\"li step\">\n               <span class=\"ph cmd\">Ga naar het nummer of de tekstaantekening die u wilt wijzigen en druk op <samp class=\"ph msgph\">Opties</samp>. </span>\n               \n            </li>\n            \n            <li class=\"li step\">\n               <span class=\"ph cmd\">Selecteer <samp class=\"ph msgph\">Naam bewerken</samp>, <samp class=\"ph msgph\">Nummer bew.</samp> of <samp class=\"ph msgph\">Detail bew.</samp>, wijzig de naam, het nummer of de tekstaantekening en druk op <samp class=\"ph msgph\">OK</samp>.</span>\n               \n            </li>\n            \n         </ol>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Hoofdonderwerp:</strong> <a class=\"link\" title=\"U kunt namen van contacten opslaan in het geheugen van de telefoon (de interne telefoonlijst) en in het geheugen van de SIM-kaart (SIM-telefoonlijst).\" href=\"/1656868/164303/publication-mp330/telefoonlijst\">Telefoonlijst</a></div>\n            \n         </div>\n         \n      </div>\n   "
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
 }
