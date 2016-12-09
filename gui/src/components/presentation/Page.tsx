@@ -199,11 +199,17 @@ export class Page extends React.Component<IPageProps, IPageState> {
 
         updatedNavItems.sort();
 
-        // Check if array is changed
-        if (!navItems.every((item: IContentNavigationItem, index: number) => {
-            return navItems[index] && (item.url == navItems[index].url);
-        })) {
-            // if it was changed, then update the state
+        // // Check if array is changed
+        // if (!navItems.every((item: IContentNavigationItem, index: number) => {
+        //     return navItems[index] && (item.url == navItems[index].url);
+        // })) {
+        //     // if it was changed, then update the state
+        //     this.setState({
+        //         navItems: updatedNavItems
+        //     });
+        // }
+
+        if (navItems.map((i) => i.url).join("") != updatedNavItems.map((i) => i.url).join("")) {
             this.setState({
                 navItems: updatedNavItems
             });
