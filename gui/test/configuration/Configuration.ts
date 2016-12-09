@@ -1,3 +1,5 @@
+import { IWindow } from "interfaces/Window";
+
 module SDL.Client.Configuration {
     /**
      * Location of your main configuration file.
@@ -15,4 +17,7 @@ module SDL.Client.Test.Configuration {
 }
 
 // Update global scope so Catalina can pick up the settings
-(<Window & { SDL: typeof SDL }>window).SDL = SDL;
+(window as Window & { SDL: typeof SDL }).SDL = SDL;
+
+// Enable mocks
+(window as IWindow).SdlDitaDeliveryMocksEnabled = true;

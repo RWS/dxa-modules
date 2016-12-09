@@ -1,6 +1,6 @@
-import { path } from "utils/Path";
 import * as ServerModels from "interfaces/ServerModels";
 import { IPublication } from "interfaces/Publication";
+import { getPublicationsUrl } from "utils/Api";
 
 // Global Catalina dependencies
 import IWebRequest = SDL.Client.Net.IWebRequest;
@@ -32,7 +32,7 @@ export class Publications extends LoadableObject {
 
     /* Overloads */
     protected _executeLoad(reload: boolean): void {
-        const url = path.getAbsolutePath(`gui/mocks/publications.json`);
+        const url = getPublicationsUrl();
         Net.getRequest(url,
             this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
     }
