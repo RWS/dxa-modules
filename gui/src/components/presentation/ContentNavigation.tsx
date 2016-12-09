@@ -51,18 +51,16 @@ export class ContentNavigation extends React.Component<IContentNavigationProps, 
         const { navItems } = this.props;
         return (
             <nav className={"sdl-dita-delivery-content-navigation"}>
-                <h1>Contents</h1>
+                <h3>Contents</h3>
                 <ul>
                     {
-                        Array.isArray(navItems) && (
-                            navItems.map((item: IContentNavigationItem, index: number) => {
-                                return (
-                                    <li key={index}>
-                                        <a href={item.url}>{item.title}</a>
-                                    </li>
-                                );
-                            })
-                        )
+                        Array.isArray(navItems) && navItems.map((item: IContentNavigationItem, index: number) => {
+                            return (
+                                <li key={index}>
+                                    <a href={item.url}>{item.title}</a>
+                                </li>
+                            );
+                        })
                     }
                 </ul>
             </nav>

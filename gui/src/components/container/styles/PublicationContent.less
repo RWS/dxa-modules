@@ -57,6 +57,16 @@
 
         article.page-content{
             min-height: 150px;
+
+            /* Fixed scroll issue */
+            h1:before,
+            h2:before,
+            h3:before {
+                content:"";
+                display:block;
+                height:60px;
+                margin:-60px 0 0;
+            }
         }
     }
 }

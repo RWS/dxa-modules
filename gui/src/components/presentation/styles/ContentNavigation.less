@@ -2,19 +2,20 @@
 
 .sdl-dita-delivery-content-navigation {
     @outerBorderSize: 4px;
+    overflow: auto;
 
     ul {
         margin-top: 0;
         padding: 0;
 
         li {
-            background: #F2FAFD;
+            background: @customColor1;
             position: relative;
             display: block;
             padding: 10px 15px;
             margin-bottom: -1px;
-            border: 1px solid #ddd;
-            border-left: 2px solid #54b196;
+            border: 1px solid @customColor2;
+            border-left: 2px solid @customColor3;
 
             &:first-child {
                 border-top-left-radius: @outerBorderSize;
@@ -29,7 +30,7 @@
 
             a {
                 text-decoration: none;
-                color: #00253D;
+                color: @customColor4;
             }
         }
     }

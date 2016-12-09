@@ -183,6 +183,11 @@ export class Page extends React.Component<IPageProps, IPageState> {
             const title = header.textContent || "";
             if (!id) {
                 id = encodeURIComponent(title);
+                const alreadyAdded = updatedNavItems.filter(item => item.url === id).length === 1;
+                if (alreadyAdded) {
+                    id += "_1";
+                }
+
                 header.setAttribute("id", id);
             }
 
@@ -192,8 +197,13 @@ export class Page extends React.Component<IPageProps, IPageState> {
             } as IContentNavigationItem);
         }
 
-        // TODOL: Chnage it to more elegant way
-        if (navItems.map((i) => i.url).join("") != updatedNavItems.map((i) => i.url).join("")) {
+        updatedNavItems.sort();
+
+        // Check if array is changed
+        if (!navItems.every((item: IContentNavigationItem, index: number) => {
+            return navItems[index] && (item.url == navItems[index].url);
+        })) {
+            // if it was changed, then update the state
             this.setState({
                 navItems: updatedNavItems
             });
