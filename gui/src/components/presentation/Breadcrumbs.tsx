@@ -104,10 +104,11 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
      */
     public componentWillUpdate(nextProps: IBreadcrumbsProps, nextState: IBreadcrumbsState): void {
         const { publicationId, selectedItem, loadItemsPath } = this.props;
+        const { itemPath } = nextState;
         const currentId = selectedItem ? selectedItem.id : null;
         const nextItem = nextProps.selectedItem;
+        const nextId = nextItem ? nextItem.id : null;
         if (nextItem && nextItem.url) {
-            const nextId = nextItem.id;
             if (nextId && (currentId !== nextId)) {
                 loadItemsPath(nextProps.publicationId || publicationId, nextId).then(
                     path => {
@@ -120,9 +121,12 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
                     });
             }
         } else if (currentId) {
-            this.setState({
-                itemPath: nextItem ? [nextItem] : []
-            });
+            const nextPath = nextItem ? [nextItem] : [];
+            if (!itemPath || (nextPath.join("") !== itemPath.join(""))) {
+                this.setState({
+                    itemPath: nextPath
+                });
+            }
         }
     }
 

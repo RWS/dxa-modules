@@ -107,6 +107,13 @@ export interface IPublicationContentState {
      * @type {string}
      */
     publicationTitle?: string;
+    /**
+     * Toc is expanding
+     *
+     * @type {boolean}
+     * @memberOf IPublicationContentState
+     */
+    isTocExpanding?: boolean;
 }
 
 interface ISelectedPage {
@@ -165,7 +172,8 @@ export class PublicationContent extends React.Component<IPublicationContentProps
             isTocLoading: true,
             tocIsFixed: false,
             selectedTocItem: null,
-            isPageLoading: true
+            isPageLoading: true,
+            isTocExpanding: true
         };
     }
 
@@ -176,6 +184,8 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         const { services } = this.context;
         const { publicationId, pageIdOrPublicationTitle } = this.props.params;
         const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
+        const { publicationService, pageService } = this.context.services;
+
         const getRootItems = (path?: string[]): void => {
             // Get the data for the Toc
             services.taxonomyService.getSitemapRoot(publicationId).then(
@@ -186,7 +196,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                         this.setState({
                             activeTocItemPath: path,
                             isTocLoading: false,
-                            isPageLoading: Array.isArray(items) && items.length > 0
+                            isTocExpanding: typeof path === "undefined" ? false : true
                         });
                     }
                 },
@@ -196,7 +206,8 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                         this._toc.error = error;
                         this.setState({
                             isTocLoading: false,
-                            isPageLoading: false
+                            isPageLoading: false,
+                            isTocExpanding: false
                         });
                     }
                 });
@@ -205,9 +216,33 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         if (pageId) {
             // Set the current active path for the tree
             this._getActiveSitemapPath(pageId, getRootItems);
+            // Load the page
+            pageService.getPageInfo(publicationId, pageId).then(
+                this._onPageContentRetrieved.bind(this),
+                this._onPageContentRetrievFailed.bind(this));
         } else {
             getRootItems();
         }
+
+        // Get publication title
+        publicationService.getPublicationTitle(publicationId).then(
+            title => {
+                /* istanbul ignore else */
+                if (!this._isUnmounted) {
+                    this.setState({
+                        publicationTitle: title
+                    });
+                }
+            },
+            error => {
+                /* istanbul ignore else */
+                if (!this._isUnmounted) {
+                    // TODO: improve error handling
+                    this.setState({
+                        publicationTitle: error
+                    });
+                }
+            });
     }
 
     /**
@@ -216,20 +251,27 @@ export class PublicationContent extends React.Component<IPublicationContentProps
      * @param {IPublicationContentProps} nextProps
      */
     public componentWillReceiveProps(nextProps: IPublicationContentProps): void {
-        const { pageIdOrPublicationTitle } = this.props.params;
+        const { publicationId, pageIdOrPublicationTitle } = this.props.params;
+        const { activeTocItemPath } = this.state;
         const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
         const nextpageIdOrPublicationTitle = nextProps.params.pageIdOrPublicationTitle;
         const nextPageId = TcmId.isValidPageId(nextpageIdOrPublicationTitle) ? nextpageIdOrPublicationTitle : null;
+        const pageService = this.context.services.pageService;
 
-        if (nextPageId) {
-            if (!pageId || nextPageId !== pageId) {
-                // Set the current active path for the tree
-                this._getActiveSitemapPath(nextPageId, (path) => {
+        if (nextPageId && nextPageId !== pageId) {
+            // Set the current active path for the tree
+            this._getActiveSitemapPath(nextPageId, (path) => {
+                if (activeTocItemPath && path.join("") !== activeTocItemPath.join("")) {
                     this.setState({
-                        activeTocItemPath: path
+                        activeTocItemPath: path,
+                        isTocExpanding: true
                     });
-                });
-            }
+                }
+            });
+            // Load the page
+            pageService.getPageInfo(publicationId, nextPageId).then(
+                this._onPageContentRetrieved.bind(this),
+                this._onPageContentRetrievFailed.bind(this));
         }
     }
 
@@ -241,22 +283,11 @@ export class PublicationContent extends React.Component<IPublicationContentProps
      * @param {IPublicationContentState} nextState Next state
      */
     public componentWillUpdate(nextProps: IPublicationContentProps, nextState: IPublicationContentState): void {
-        const { services } = this.context;
-        const { publicationId } = this.props.params;
-        const pageService = services.pageService;
-        const { selectedTocItem, isPageLoading } = this.state;
-        const currentId = selectedTocItem ? selectedTocItem.id : null;
-        const nextId = nextState.selectedTocItem ? nextState.selectedTocItem.id : null;
-        if (nextState.selectedTocItem && !nextState.selectedTocItem.url) {
+        const { isTocExpanding } = this.state;
+        if (nextState.selectedTocItem && !nextState.selectedTocItem.url && !isTocExpanding) {
             this._page.content = `<h1 class="title topictitle1">${nextState.selectedTocItem.title}</h1>`;
+            nextState.isPageLoading = false;
             return;
-        }
-        if (nextId && (isPageLoading || currentId !== nextId)) {
-            // After upgrading to DXA 1.7 use TcmId.getItemIdFromTaxonomyId
-            const pageId = TcmId.parseId(nextId);
-            pageService.getPageInfo(publicationId, pageId ? pageId.itemId : nextId).then(
-                this._onPageContentRetrieved.bind(this),
-                this._onPageContentRetrievFailed.bind(this));
         }
     }
 
@@ -338,45 +369,40 @@ export class PublicationContent extends React.Component<IPublicationContentProps
     }
 
     private _onTocSelectionChanged(sitemapItem: ITaxonomy, path: string[]): void {
-        const page = this._page;
-        const {router, services } = this.context;
-        const {publicationId, pageIdOrPublicationTitle } = this.props.params;
-        const publicationService = services.publicationService;
+        const { router } = this.context;
+        const { isTocExpanding, publicationTitle } = this.state;
+        const { pageIdOrPublicationTitle, publicationId } = this.props.params;
         const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
+        // After upgrading to DXA 1.7 use TcmId.getItemIdFromTaxonomyId
+        const siteMapPageId = TcmId.parseId(sitemapItem.id);
+        const isTocExpandingFinished = isTocExpanding ? siteMapPageId && (siteMapPageId.itemId === pageId) : undefined;
 
-        page.error = null;
+        const updatedState: IPublicationContentState = {
+            activeTocItemPath: path,
+            selectedTocItem: sitemapItem
+        };
+        if (isTocExpandingFinished || !isTocExpanding) {
+            updatedState.isTocExpanding = false;
+            this.setState(updatedState);
+        }
 
-        publicationService.getPublicationTitle(publicationId).then(
-            title => {
-                this.setState({
-                    activeTocItemPath: path,
-                    publicationTitle: title,
-                    selectedTocItem: sitemapItem,
-                    isPageLoading: sitemapItem.url ? true : false
-                });
-
-                /* istanbul ignore else */
-                if (router) {
-                    const navPath = sitemapItem.url || Url.getPublicationUrl(publicationId, title);
-                    // After upgrading to DXA 1.7 use TcmId.getItemIdFromTaxonomyId
-                    const siteMapPageId = TcmId.parseId(sitemapItem.id);
-                    if (siteMapPageId && siteMapPageId.itemId === pageId) {
-                        router.replace(navPath);
-                    }
-                    else {
-                        router.push(navPath);
-                    }
+        // When the tree is expanding it is also calling the onTocSelectionChanged callback
+        /* istanbul ignore else */
+        if (router && !isTocExpanding) {
+            const navPath = sitemapItem.url;
+            if (navPath) {
+                if (siteMapPageId && siteMapPageId.itemId === pageId) {
+                    router.replace(navPath);
+                } else {
+                    router.push(navPath);
                 }
-            },
-            error => {
-                page.error = error;
-
-                this.setState({
-                    activeTocItemPath: path,
-                    selectedTocItem: sitemapItem,
-                    isPageLoading: sitemapItem.url ? true : false
-                });
-            });
+            } else {
+                const url = Url.getPublicationUrl(publicationId, publicationTitle);
+                if (router.getCurrentLocation().pathname !== url) {
+                    router.push(url);
+                }
+            }
+        }
     }
 
     private _onPageContentRetrieved(pageInfo: IPage): void {
@@ -412,7 +438,8 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     this._toc.error = error;
                     this.setState({
                         isTocLoading: false,
-                        isPageLoading: false
+                        isPageLoading: false,
+                        isTocExpanding: false
                     });
                 }
             });
