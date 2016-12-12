@@ -49,8 +49,6 @@ public class AudienceController {
         if (!bindingResult.hasErrors()) {
             log.trace("Login form is valid, logging in into Audience Manager");
 
-            audienceManagerService.prepareClaims(form.getLoginFormUrl());
-
             if (!securityProvider.validate(form, request, response)) {
                 log.debug("Logging attempt failed because username {} /password combination is not valid", form.getUserName());
                 bindingResult.reject("login.failed", form.getAuthenticationErrorMessage());
