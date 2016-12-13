@@ -54,10 +54,12 @@ namespace Sdl.Web.Modules.AudienceManager
                     return null;
                 }
 
-#if !TRIDION_71
-                PreparePublicationResolving();
-#endif
+
                 Localization localization = WebRequestContext.Localization;
+
+                // Audience Manager reads the context Publication ID from ADF:
+                AmbientDataContext.CurrentClaimStore.Put(new Uri("taf:claim:publication:id"), localization.LocalizationId);
+
                 string contactImportSources = localization.GetConfigValue("audiencemanager.contactImportSources");
                 Contact contact = null;
                 if (string.IsNullOrEmpty(contactImportSources))
@@ -92,28 +94,6 @@ namespace Sdl.Web.Modules.AudienceManager
             }
         }
 
-        /// <summary>
-        /// Prepares for Audience Manager Publication Resolving.
-        /// </summary>
-        /// <remarks>
-        /// Audience Manager tries to resolve the context Publication based on the <c>taf:request:full_url</c> ADF claim (see CRQ-2502).
-        /// However, this will fail if the Request URL is extensionless (which it typically is in DXA).
-        /// As a work-around, we ensure that the <c>taf:request:full_url</c> ADF claim has a file extension here.
-        /// </remarks>
-        private static void PreparePublicationResolving()
-        {
-            string pageUrl = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + WebRequestContext.PageModel.Url;
-            if (!pageUrl.EndsWith(Constants.DefaultExtension))
-            {
-                pageUrl += Constants.DefaultExtension;
-            }
-            AmbientDataContext.CurrentClaimStore.Put(new Uri("taf:request:full_url"), pageUrl);
-
-            // This looks bizarre, but it clears AM's Publication Context cache:
-            Contact dummyContact = new Contact();
-            if (dummyContact == null) throw new DxaException("This should never happen.");
-        }
-
         private static Contact FindContact(string identificationKey, string importSource = null)
         {
             using (new Tracer(importSource, identificationKey))
@@ -124,11 +104,7 @@ namespace Sdl.Web.Modules.AudienceManager
                 {
                     return Contact.GetFromContactIdentificatonKeys(identifiers);
                 }
-#if TRIDION_71
-                catch (Tridion.OutboundEmail.ContentDelivery.AudienceManagementException)
-#else            
                 catch (ContactDoesNotExistException)
-#endif
                 {
                     // Contact does not exist in the given import source
                     return null;

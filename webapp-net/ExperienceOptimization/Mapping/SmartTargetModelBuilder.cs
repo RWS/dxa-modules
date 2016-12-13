@@ -142,7 +142,7 @@ namespace Sdl.Web.Modules.SmartTarget.Mapping
 
                     // Create SmartTargetPromotion Entity Models for visible Promotions in the current SmartTargetRegion.
                     // It seems that ResultSet.FilterPromotions doesn't really filter on Region name, so we do post-filtering here.
-                    foreach (Promotion promotion in promotions.Where(promotion => promotion.Visible && promotion.Region.Contains(regionName)))
+                    foreach (Promotion promotion in promotions.Where(promotion => promotion.Visible && promotion.Regions.Contains(regionName)))
                     {
                         SmartTargetPromotion smartTargetPromotion = CreatePromotionEntity(promotion, promotionViewName, smartTargetRegion.Name, localization, experimentDimensions);
 

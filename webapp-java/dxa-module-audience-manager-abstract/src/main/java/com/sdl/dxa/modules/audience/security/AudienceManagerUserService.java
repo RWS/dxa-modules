@@ -6,7 +6,8 @@ import com.sdl.dxa.modules.audience.service.AudienceManagerService;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.localization.Localization;
 import lombok.extern.slf4j.Slf4j;
-import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -40,17 +41,15 @@ public class AudienceManagerUserService implements UserDetailsService {
         this.webRequestContext = webRequestContext;
     }
 
-    @NotNull
     @Override
-    public UserProfile loadUserByUsername(String username) {
+    @Contract("null -> fail; !null -> !null")
+    public UserProfile loadUserByUsername(@Nullable String username) {
         if (isEmpty(username)) {
             log.debug("Passed an empty username");
             throw new UsernameNotFoundException("Empty username passed to UserService");
         }
 
         Localization localization = webRequestContext.getLocalization();
-
-        audienceManagerService.prepareClaims(webRequestContext.getBaseUrl());
 
         String importSources = localization.getConfiguration(configContactImportSources);
         for (String source : nullToEmpty(importSources).split(",")) {

@@ -64,7 +64,6 @@ public class AudienceControllerTest {
     public void shouldLoginSuccessfullyAndRedirect() {
         //given 
         LoginForm form = new LoginForm();
-        form.setLoginFormUrl("url");
         RedirectAttributesModelMap map = new RedirectAttributesModelMap();
         MapBindingResult bindingResult = new MapBindingResult(new HashMap<String, Object>(), "loginForm");
         doReturn(true).when(securityProvider).validate(eq(form), any(HttpServletRequest.class), any(HttpServletResponse.class));
@@ -74,7 +73,6 @@ public class AudienceControllerTest {
 
         //then
         assertEquals("redirect:path", path);
-        verify(audienceManagerService).prepareClaims("url");
     }
 
     @Test
@@ -84,12 +82,14 @@ public class AudienceControllerTest {
         MapBindingResult bindingResult = new MapBindingResult(new HashMap<String, Object>(), "loginForm");
         bindingResult.addError(new FieldError("test", "test", "test"));
         LoginForm loginForm = new LoginForm();
+        loginForm.setLoginFormUrl("url");
 
         //when
-        controller.login(loginForm, bindingResult, map, new MockHttpServletRequest(), new MockHttpServletResponse());
+        String path = controller.login(loginForm, bindingResult, map, new MockHttpServletRequest(), new MockHttpServletResponse());
 
         //then
         assertEquals(bindingResult.getAllErrors(), map.getFlashAttributes().get("errors"));
+        assertEquals("redirect:url", path);
     }
 
     @Test

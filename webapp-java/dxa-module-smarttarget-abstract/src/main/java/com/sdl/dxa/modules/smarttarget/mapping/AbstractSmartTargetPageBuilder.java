@@ -72,7 +72,7 @@ public abstract class AbstractSmartTargetPageBuilder implements PageBuilder {
         if (metadata.containsKey("maxItems")) {
             String value = FieldUtils.getStringValue(metadata.get("maxItems"));
             if (value != null) {
-                regionModel.setMaxItems(Integer.parseInt(value));
+                regionModel.setMaxItems((int) Double.parseDouble(value));
             }
         }
     }

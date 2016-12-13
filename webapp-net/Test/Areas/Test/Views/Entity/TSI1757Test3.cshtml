@@ -1,0 +1,12 @@
+﻿@model Tsi1757TestEntity3
+<div class="entity" @Html.DxaEntityMarkup()>
+    <h1>Rendered @Model with Entity View "Test:TSI1757Test"</h1>
+
+    <div>TextField: @Model.TextField</div>
+
+    <h2>CompLinkField</h2>
+    @foreach (var entity in Model.CompLinkField)
+    {
+        <h3>@entity</h3>
+    }
+</div>

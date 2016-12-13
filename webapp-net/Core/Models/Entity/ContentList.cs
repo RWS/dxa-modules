@@ -19,6 +19,7 @@ namespace Sdl.Web.Modules.Core.Models
         public Tag Sort { get; set; }
         public int PageSize { get; set; }
 
+        [SemanticProperty(IgnoreMapping = true)]
         public int CurrentPage 
         { 
             get 
@@ -60,6 +61,12 @@ namespace Sdl.Web.Modules.Core.Models
             }
         }
 
+        /// <summary>
+        /// Gets or sets the items in the list.
+        /// </summary>
+        /// <remarks>
+        /// The items can be retrieved dynamically, but also mapped from CM (e.g. ItemList Schema).
+        /// </remarks>
         public List<T> ItemListElements
         {
             get

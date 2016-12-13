@@ -26,7 +26,9 @@ public interface AudienceManagerService {
      * Prepares claims if needed used given full url. Used to workaround DXA-specific requests without '.html'.
      *
      * @param fullUrl url of a requested page in a default format {@code /index.html}
+     * @deprecated since 1.7
      */
+    @Deprecated
     void prepareClaims(String fullUrl);
 
     /**
