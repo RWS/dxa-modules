@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,7 +17,7 @@ import static java.util.Collections.unmodifiableSet;
 
 @Data
 @RequiredArgsConstructor
-public abstract class UserProfile implements UserDetails {
+public abstract class UserProfile implements UserDetails, CredentialsContainer {
 
     public static final Collection<? extends GrantedAuthority> DEFAULT_AUTHORITIES = unmodifiableSet(
             Sets.<GrantedAuthority>newHashSet(new SimpleGrantedAuthority("ROLE_USER")));
