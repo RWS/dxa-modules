@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Web;
-using Sdl.Web.Common;
 using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Logging;
 using Sdl.Web.Mvc.Configuration;
@@ -31,8 +30,12 @@ namespace Sdl.Web.Modules.AudienceManager
                         return null;
                     }
 
+                    // We include the Localization ID in the cache key, because a user name may resolve to a different Contact / User Profile
+                    // in a different context Localization (associated with a different AM Sync Target).
+                    string cacheKey = string.Format("{0}:{1}", currentUserName, WebRequestContext.Localization.LocalizationId);
+
                     return SiteConfiguration.CacheProvider.GetOrAdd(
-                        currentUserName,
+                        cacheKey,
                         UserProfileCacheRegionName,
                         () => GetUserProfile(currentUserName)
                         );
