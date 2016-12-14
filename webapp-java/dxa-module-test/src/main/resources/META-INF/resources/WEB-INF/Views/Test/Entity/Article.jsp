@@ -18,11 +18,6 @@
         <td>${entity.heading}</td>
     </tr>
     <tr>
-        <td>Media</td>
-        <td>${entity.media}</td>
-        <td><dxa:media media="${entity.media}"/></td>
-    </tr>
-    <tr>
         <td>Content</td>
         <td>${entity.content}</td>
         <td><dxa:richtext content="${entity.content}"/></td>
