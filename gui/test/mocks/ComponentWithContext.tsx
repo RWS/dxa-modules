@@ -11,13 +11,14 @@ export interface IComponentWithContextProps {
 
 interface IRouter {
     createHref: () => void;
-    push: () => void;
-    replace: () => void;
+    push: (path: string) => void;
+    replace: (path: string) => void;
     go: () => void;
     goBack: () => void;
     goForward: () => void;
     setRouteLeaveHook: () => void;
     isActive: () => void;
+    getCurrentLocation: () => { pathname: string };
 }
 
 export class ComponentWithContext extends React.Component<IComponentWithContextProps, {}> {
@@ -28,17 +29,23 @@ export class ComponentWithContext extends React.Component<IComponentWithContextP
     };
 
     public getChildContext(): IComponentWithContextContext {
+        let pathname = "";
         return {
             services: this.props.services,
             router: {
                 createHref: (): void => { },
-                push: (): void => { },
-                replace: (): void => { },
+                push: (path: string): void => { pathname = path; },
+                replace: (path: string): void => { pathname = path; },
                 go: (): void => { },
                 goBack: (): void => { },
                 goForward: (): void => { },
                 setRouteLeaveHook: (): void => { },
-                isActive: (): void => {}
+                isActive: (): void => { },
+                getCurrentLocation: (): { pathname: string } => {
+                    return {
+                        pathname: pathname
+                    };
+                }
             }
         };
     };

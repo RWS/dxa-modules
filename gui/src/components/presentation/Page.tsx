@@ -104,10 +104,10 @@ export class Page extends React.Component<IPageProps, {}> {
     private _enableHyperlinks(): void {
         const props = this.props;
         const domNode = ReactDOM.findDOMNode(this);
-        const anchors = domNode.querySelectorAll("a");
+        const anchors = domNode.querySelectorAll(".page-content a");
         const hyperlinks = this._hyperlinks;
         for (let i: number = 0, length: number = anchors.length; i < length; i++) {
-            const anchor = anchors.item(i);
+            const anchor = anchors.item(i) as HTMLAnchorElement;
             const alreadyAdded = hyperlinks.filter(hyperlink => hyperlink.element === anchor).length === 1;
             if (!alreadyAdded) {
                 const itemUrl = anchor.getAttribute("href");

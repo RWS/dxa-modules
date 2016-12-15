@@ -153,11 +153,34 @@ class PageComponent extends TestBase {
                 expect(spy).toHaveBeenCalledTimes(5);
             });
 
+            it("does not handle links that are not part of the page content", (): void => {
+                const pageProps = {
+                    showActivityIndicator: false,
+                    content: `<div />`,
+                    onNavigate: (): void => {
+                    }
+                };
+                const spy = spyOn(pageProps, "onNavigate").and.callThrough();
+                const page = this._renderComponent(pageProps, target, (<a href="/1656863/164363" onClick={(e):void => { e.preventDefault(); }}/>));
+
+                const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
+                expect(domNode).not.toBeNull();
+
+                const hyperlinks = domNode.querySelectorAll("a");
+                expect(hyperlinks.length).toBe(1);
+
+                for (let i: number = 0, length: number = hyperlinks.length; i < length; i++) {
+                    hyperlinks.item(i).click();
+                }
+
+                expect(spy).not.toHaveBeenCalled();
+            });
+
         });
     }
 
-    private _renderComponent(props: IPageProps, target: HTMLElement): Page {
-        return ReactDOM.render(<Page {...props} />, target) as Page;
+    private _renderComponent(props: IPageProps, target: HTMLElement, children?: {}): Page {
+        return ReactDOM.render(<Page {...props}>{children}</Page>, target) as Page;
     }
 }
 
