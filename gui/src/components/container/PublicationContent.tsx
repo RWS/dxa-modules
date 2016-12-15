@@ -62,6 +62,13 @@ export interface IPublicationContentProps {
      * @type {IPublicationContentPropsParams}
      */
     params: IPublicationContentPropsParams;
+    /**
+     * Current location, injected by React Router
+     *
+     * @type {Location}
+     * @memberOf IPublicationContentProps
+     */
+    location?: Location;
 }
 
 /**
@@ -302,6 +309,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         const { isPageLoading, activeTocItemPath, selectedTocItem, publicationTitle, tocIsFixed } = this.state;
         const { services, router } = this.context;
         const { publicationId } = this.props.params;
+        const { location } = this.props;
         const { taxonomyService, localizationService } = services;
         const { content, error} = this._page;
         const { rootItems } = this._toc;
@@ -322,7 +330,8 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                         if (router) {
                             router.push(url);
                         }
-                    } } >
+                    } }
+                    location={location}>
 
                     <Toc
                         activeItemPath={activeTocItemPath}

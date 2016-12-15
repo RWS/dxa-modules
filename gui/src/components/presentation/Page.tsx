@@ -42,6 +42,13 @@ export interface IPageProps {
      */
     error?: string | null;
     /**
+     * Current location
+     *
+     * @type {Location}
+     * @memberOf IPublicationContentProps
+     */
+    location?: Location;
+    /**
      * Called whenever navigation to another page is requested
      *
      * @param {string} url Url
@@ -179,8 +186,15 @@ export class Page extends React.Component<IPageProps, IPageState> {
         const domNode = ReactDOM.findDOMNode(this);
         if (domNode) {
             const { navItems } = this.state;
+            const { location } = this.props;
             const pageContentNode = domNode.querySelector(".page-content") as HTMLElement;
-            const updatedNavItems = Html.getHeaderLinks(pageContentNode);
+            const headerLinks = Html.getHeaderLinks(pageContentNode);
+            const updatedNavItems: IContentNavigationItem[] = headerLinks.map(item => {
+                return {
+                    title: item.title,
+                    url: location ? Url.getAnchorUrl(location.pathname, item.id) : ("#" + item.id)
+                };
+            });
 
             if (navItems.map((i) => i.url).join("") !== updatedNavItems.map((i) => i.url).join("")) {
                 this.setState({

@@ -13,12 +13,12 @@ export interface IHeader {
      */
     title: string;
     /**
-     * Header url
+     * Unique id
      *
      * @type {string}
      * @memberOf IHeader
      */
-    url: string;
+    id: string;
 }
 
 /**
@@ -45,23 +45,23 @@ export class Html {
         for (let i: number = 0, length: number = headers.length; i < length; i++) {
             const header = headers.item(i);
             const title = header.textContent || "";
-            let url = encodeURIComponent(title.toLowerCase());
-            let originalUrl = url;
+            let id = encodeURIComponent(title.toLowerCase());
+            let originalUrl = id;
             let timesFound = 0;
-            while (Html._isHeaderAlreadyAdded(navItems, url)) {
+            while (Html._isHeaderAlreadyAdded(navItems, id)) {
                 timesFound++;
-                url = originalUrl + `_${timesFound}`;
+                id = originalUrl + `_${timesFound}`;
             }
             navItems.push({
                 title: title,
-                url: url
+                id: id
             });
         }
 
         return navItems;
     }
 
-    private static _isHeaderAlreadyAdded(navItems: IHeader[], url: string): boolean {
-        return navItems.filter(item => item.url === url).length === 1;
+    private static _isHeaderAlreadyAdded(navItems: IHeader[], id: string): boolean {
+        return navItems.filter(item => item.id === id).length === 1;
     }
 }

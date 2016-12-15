@@ -91,7 +91,7 @@ class PageComponent extends TestBase {
             });
 
             it("does not handle external links", (): void => {
-                const pageProps = {
+                const pageProps: IPageProps = {
                     showActivityIndicator: false,
                     content: `<div>
                                 <a href="http://doc.sdl.com"/>
@@ -125,7 +125,7 @@ class PageComponent extends TestBase {
             });
 
             it("does handle internal links", (): void => {
-                const pageProps = {
+                const pageProps: IPageProps = {
                     showActivityIndicator: false,
                     content: `<div>
                                 <a href="/1656863/164363"/>
@@ -154,14 +154,14 @@ class PageComponent extends TestBase {
             });
 
             it("does not handle links that are not part of the page content", (): void => {
-                const pageProps = {
+                const pageProps: IPageProps = {
                     showActivityIndicator: false,
                     content: `<div />`,
                     onNavigate: (): void => {
                     }
                 };
                 const spy = spyOn(pageProps, "onNavigate").and.callThrough();
-                const page = this._renderComponent(pageProps, target, (<a href="/1656863/164363" onClick={(e):void => { e.preventDefault(); }}/>));
+                const page = this._renderComponent(pageProps, target, (<a href="/1656863/164363" onClick={(e): void => { e.preventDefault(); } } />));
 
                 const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
                 expect(domNode).not.toBeNull();
