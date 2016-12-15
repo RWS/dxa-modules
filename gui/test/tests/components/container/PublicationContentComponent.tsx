@@ -22,6 +22,7 @@ const services = {
     localizationService: localization,
     taxonomyService: new TaxonomyService()
 };
+const PUBLICATION_ID = "ish:123-1-1";
 
 class PublicationContentComponent extends TestBase {
 
@@ -81,7 +82,7 @@ class PublicationContentComponent extends TestBase {
                 }, 0);
             });
 
-            it("updates page content when selected site map item changes", (done: () => void): void => {
+            it("renders content for a specific page", (done: () => void): void => {
                 const pageContent = "<div>Page content!</div>";
                 services.taxonomyService.setMockDataToc(null, []);
                 services.pageService.setMockDataPage(null, {
@@ -89,15 +90,9 @@ class PublicationContentComponent extends TestBase {
                     content: pageContent,
                     title: "Title!"
                 });
-                const publicationContent = this._renderComponent(target);
-                publicationContent.setState({
-                    selectedTocItem: {
-                        id: "123",
-                        title: "Some page",
-                        url: "page",
-                        hasChildNodes: false
-                    }
-                });
+
+                const publicationContent = this._renderComponent(target, "12345");
+
                 // Use a timeout to allow the DataStore to return a promise with the data
                 setTimeout((): void => {
                     // tslint:disable-next-line:no-any
@@ -129,6 +124,23 @@ class PublicationContentComponent extends TestBase {
                 ]);
                 const publicationContent = this._renderComponent(target);
 
+                // Spy on the router
+                spyOn(publicationContent.context.router, "push").and.callFake((path: string): void => {
+                    // Check if routing was called with correct params
+                    expect(path).toBe(`/${encodeURIComponent(PUBLICATION_ID)}/mp330`);
+
+                    // tslint:disable-next-line:no-any
+                    const activityIndicators = TestUtils.scryRenderedComponentsWithType(publicationContent, ActivityIndicator as any);
+                    expect(activityIndicators.length).toBe(0, "Activity indicator should not be rendered.");
+
+                    const page = TestUtils.findRenderedComponentWithType(publicationContent, Page);
+                    const pageNode = ReactDOM.findDOMNode(page) as HTMLElement;
+                    const pageTitleNode = pageNode.querySelector("h1") as HTMLElement;
+                    expect(pageTitleNode).not.toBeNull("Could not find page title.");
+                    expect(pageTitleNode.textContent).toBe("Second element");
+                    done();
+                });
+
                 // Use a timeout to allow the DataStore to return a promise with the data
                 setTimeout((): void => {
                     // Toc is ready
@@ -146,19 +158,6 @@ class PublicationContentComponent extends TestBase {
                     const treeView = TestUtils.findRenderedComponentWithType(toc, TreeView as any);
                     const treeNode = ReactDOM.findDOMNode(treeView) as HTMLElement;
                     (treeNode.querySelectorAll(".content")[1] as HTMLDivElement).click();
-
-                    // Treeview uses debouncing for node selection so a timeout is required
-                    setTimeout((): void => {
-                        // All is loaded
-                        // tslint:disable-next-line:no-any
-                        const activityIndicators = TestUtils.scryRenderedComponentsWithType(publicationContent, ActivityIndicator as any);
-                        expect(activityIndicators.length).toBe(0, "Activity indicator should not be rendered.");
-                        const pageNode = ReactDOM.findDOMNode(page) as HTMLElement;
-                        const pageTitleNode = pageNode.querySelector("h1") as HTMLElement;
-                        expect(pageTitleNode).not.toBeNull("Could not find page title.");
-                        expect(pageTitleNode.textContent).toBe("Second element");
-                        done();
-                    }, 200);
                 }, 0);
             });
 
@@ -196,7 +195,7 @@ class PublicationContentComponent extends TestBase {
                     hasChildNodes: true
                 }]);
                 services.pageService.setMockDataPage("Page failed to load!");
-                const publicationContent = this._renderComponent(target);
+                const publicationContent = this._renderComponent(target, "123");
 
                 // Wait for the tree view to select the first node
                 // Treeview uses debouncing for node selection so a timeout is required
@@ -214,7 +213,7 @@ class PublicationContentComponent extends TestBase {
                 }, 500);
             });
 
-            it("shows an error message when publication title failed to load", (done: () => void): void => {
+            it("shows an error message in the search bar when the publication title failed to load", (done: () => void): void => {
                 const errorMessage = "Page title is invalid!";
                 services.publicationService.setMockDataPublication(errorMessage);
                 services.pageService.setMockDataPage(null, {
@@ -222,18 +221,14 @@ class PublicationContentComponent extends TestBase {
                     content: "<div/>",
                     title: "Title!"
                 });
-                const publicationContent = this._renderComponent(target);
+                const publicationContent = this._renderComponent(target, "123");
 
-                // Wait for the tree view to select the first node
-                // Treeview uses debouncing for node selection so a timeout is required
+                // Use a timeout to allow the DataStore to return a promise with the data
                 setTimeout((): void => {
-                    // tslint:disable-next-line:no-any
-                    const validationMessage = TestUtils.findRenderedComponentWithType(publicationContent, ValidationMessage as any);
-                    expect(validationMessage).not.toBeNull("Could not find validation message.");
-                    const validationMessageNode = ReactDOM.findDOMNode(validationMessage);
-                    expect(validationMessageNode && validationMessageNode.textContent).toBe(errorMessage);
+                    const publicationContentNode = ReactDOM.findDOMNode(publicationContent);
+                    expect(publicationContentNode.querySelector(".sdl-dita-delivery-searchbar input").getAttribute("placeholder")).toContain(errorMessage);
                     done();
-                }, 500);
+                }, 0);
             });
 
             it("updates the toc when the location changes", (done: () => void): void => {
@@ -271,6 +266,7 @@ class PublicationContentComponent extends TestBase {
                 });
 
             });
+
         });
 
     }
@@ -279,7 +275,7 @@ class PublicationContentComponent extends TestBase {
         const comp = ReactDOM.render(
             (
                 <ComponentWithContext services={services}>
-                    <PublicationContent params={{ publicationId: "ish:123-1-1", pageIdOrPublicationTitle: pageId || "pub-title" }} />
+                    <PublicationContent params={{ publicationId: PUBLICATION_ID, pageIdOrPublicationTitle: pageId || "pub-title" }} />
                 </ComponentWithContext>
             ), target) as React.Component<{}, {}>;
         return TestUtils.findRenderedComponentWithType(comp, PublicationContent) as PublicationContent;
