@@ -1,3 +1,4 @@
+import { Html } from "utils/Html";
 import { Url } from "utils/Url";
 import { ContentNavigation, IContentNavigationItem } from "components/presentation/ContentNavigation";
 
@@ -141,25 +142,27 @@ export class Page extends React.Component<IPageProps, IPageState> {
     private _enableHyperlinks(): void {
         const props = this.props;
         const domNode = ReactDOM.findDOMNode(this);
-        const anchors = domNode.querySelectorAll(".page-content a");
-        const hyperlinks = this._hyperlinks;
-        for (let i: number = 0, length: number = anchors.length; i < length; i++) {
-            const anchor = anchors.item(i) as HTMLAnchorElement;
-            const alreadyAdded = hyperlinks.filter(hyperlink => hyperlink.element === anchor).length === 1;
-            if (!alreadyAdded) {
-                const itemUrl = anchor.getAttribute("href");
-                if (Url.itemUrlIsValid(itemUrl)) {
-                    const onClick = (e: Event): void => {
-                        if (itemUrl) {
-                            props.onNavigate(itemUrl);
-                        }
-                        e.preventDefault();
-                    };
-                    hyperlinks.push({
-                        element: anchor,
-                        handler: onClick
-                    });
-                    anchor.addEventListener("click", onClick);
+        if (domNode) {
+            const anchors = domNode.querySelectorAll(".page-content a");
+            const hyperlinks = this._hyperlinks;
+            for (let i: number = 0, length: number = anchors.length; i < length; i++) {
+                const anchor = anchors.item(i) as HTMLAnchorElement;
+                const alreadyAdded = hyperlinks.filter(hyperlink => hyperlink.element === anchor).length === 1;
+                if (!alreadyAdded) {
+                    const itemUrl = anchor.getAttribute("href");
+                    if (Url.itemUrlIsValid(itemUrl)) {
+                        const onClick = (e: Event): void => {
+                            if (itemUrl) {
+                                props.onNavigate(itemUrl);
+                            }
+                            e.preventDefault();
+                        };
+                        hyperlinks.push({
+                            element: anchor,
+                            handler: onClick
+                        });
+                        anchor.addEventListener("click", onClick);
+                    }
                 }
             }
         }
@@ -174,45 +177,16 @@ export class Page extends React.Component<IPageProps, IPageState> {
      */
     private _colectHeadersLinks(): void {
         const domNode = ReactDOM.findDOMNode(this);
-        const headers = domNode.querySelectorAll("article h1, article h2, article h3");
-        const { navItems } = this.state;
-        let updatedNavItems: IContentNavigationItem[] = [];
-        for (let i: number = 0, length: number = headers.length; i < length; i++) {
-            const header = headers.item(i);
-            let id = header.getAttribute("id");
-            const title = header.textContent || "";
-            if (!id) {
-                id = encodeURIComponent(title);
-                const alreadyAdded = updatedNavItems.filter(item => item.url === id).length === 1;
-                if (alreadyAdded) {
-                    id += "_1";
-                }
+        if (domNode) {
+            const { navItems } = this.state;
+            const pageContentNode = domNode.querySelector(".page-content") as HTMLElement;
+            const updatedNavItems = Html.getHeaderLinks(pageContentNode);
 
-                header.setAttribute("id", id);
+            if (navItems.map((i) => i.url).join("") !== updatedNavItems.map((i) => i.url).join("")) {
+                this.setState({
+                    navItems: updatedNavItems
+                });
             }
-
-            updatedNavItems.push({
-                title: title,
-                url: "#" + id
-            } as IContentNavigationItem);
-        }
-
-        updatedNavItems.sort();
-
-        // // Check if array is changed
-        // if (!navItems.every((item: IContentNavigationItem, index: number) => {
-        //     return navItems[index] && (item.url == navItems[index].url);
-        // })) {
-        //     // if it was changed, then update the state
-        //     this.setState({
-        //         navItems: updatedNavItems
-        //     });
-        // }
-
-        if (navItems.map((i) => i.url).join("") != updatedNavItems.map((i) => i.url).join("")) {
-            this.setState({
-                navItems: updatedNavItems
-            });
         }
     }
 
