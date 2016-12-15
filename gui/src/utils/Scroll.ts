@@ -1,3 +1,9 @@
+/**
+ * Scroll utitilities
+ *
+ * @export
+ * @class Scroll
+ */
 export class Scroll {
 
     /**
@@ -11,16 +17,16 @@ export class Scroll {
      * @memberOf Scroll
      */
     public static scrollTo(element: HTMLElement, to: number, duration: number): void {
-        var start = element.scrollTop;
-        var change = to - start;
-        var increment = 20;
+        const start = element.scrollTop;
+        const change = to - start;
+        const increment = 20;
 
-        var animateScroll = function (elapsedTime: number): void {
+        const animateScroll = function (elapsedTime: number): void {
             elapsedTime += increment;
             var position = Scroll._easeInOut(elapsedTime, start, change, duration);
             element.scrollTop = position;
             if (elapsedTime < duration) {
-                setTimeout(function () {
+                setTimeout(function (): void {
                     animateScroll(elapsedTime);
                 }, increment);
             }
@@ -29,7 +35,7 @@ export class Scroll {
         animateScroll(0);
     }
 
-    private static _easeInOut(currentTime: number, start: number, change: number, duration: number) {
+    private static _easeInOut(currentTime: number, start: number, change: number, duration: number): number {
         currentTime /= duration / 2;
         if (currentTime < 1) {
             return change / 2 * currentTime * currentTime + start;
