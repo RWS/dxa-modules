@@ -24,7 +24,7 @@ describe(`Html utils tests.`, (): void => {
         expect(headers).toEqual(expected);
     });
 
-    it("appends double titles with _1, _2, _3... in the url", (): void => {
+    it("appends non unique titles with _1, _2, _3... for the id", (): void => {
         const element = document.createElement("div");
         element.innerHTML = "<h1>Header</h1><h2>Header</h2><h3>Header</h3><h4>Header</h4>";
         const headers = Html.getHeaderLinks(element);
