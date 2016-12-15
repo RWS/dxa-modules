@@ -42,12 +42,12 @@ export interface IPageProps {
      */
     error?: string | null;
     /**
-     * Current location
+     * Url of the page
      *
-     * @type {Location}
+     * @type {string}
      * @memberOf IPublicationContentProps
      */
-    location?: Location;
+    url?: string;
     /**
      * Called whenever navigation to another page is requested
      *
@@ -106,7 +106,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                 {props.showActivityIndicator ? <ActivityIndicator /> : null}
                 {props.error ? <ValidationMessage messageType={SDL.UI.Controls.ValidationMessageType.Error} message={props.error} /> : null}
                 {props.children}
-                <ContentNavigation navItems={navItems} />
+                <ContentNavigation navItems={navItems} onNavigate={props.onNavigate} />
                 <article>
                     <article className={"page-content ltr"} dangerouslySetInnerHTML={{ __html: props.content || "" }} />
                 </article>
@@ -186,13 +186,13 @@ export class Page extends React.Component<IPageProps, IPageState> {
         const domNode = ReactDOM.findDOMNode(this);
         if (domNode) {
             const { navItems } = this.state;
-            const { location } = this.props;
+            const { url } = this.props;
             const pageContentNode = domNode.querySelector(".page-content") as HTMLElement;
             const headerLinks = Html.getHeaderLinks(pageContentNode);
             const updatedNavItems: IContentNavigationItem[] = headerLinks.map(item => {
                 return {
                     title: item.title,
-                    url: location ? Url.getAnchorUrl(location.pathname, item.id) : ("#" + item.id)
+                    url: url ? Url.getAnchorUrl(url, item.id) : ("#" + item.id)
                 };
             });
 

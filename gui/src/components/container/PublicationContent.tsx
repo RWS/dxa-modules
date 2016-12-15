@@ -62,13 +62,6 @@ export interface IPublicationContentProps {
      * @type {IPublicationContentPropsParams}
      */
     params: IPublicationContentPropsParams;
-    /**
-     * Current location, injected by React Router
-     *
-     * @type {Location}
-     * @memberOf IPublicationContentProps
-     */
-    location?: Location;
 }
 
 /**
@@ -307,9 +300,10 @@ export class PublicationContent extends React.Component<IPublicationContentProps
      */
     public render(): JSX.Element {
         const { isPageLoading, activeTocItemPath, selectedTocItem, publicationTitle, tocIsFixed } = this.state;
+        const { pageIdOrPublicationTitle, pageTitle } = this.props.params;
+        const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
         const { services, router } = this.context;
         const { publicationId } = this.props.params;
-        const { location } = this.props;
         const { taxonomyService, localizationService } = services;
         const { content, error} = this._page;
         const { rootItems } = this._toc;
@@ -331,7 +325,9 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                             router.push(url);
                         }
                     } }
-                    location={location}>
+                    url={pageId ?
+                        Url.getPageUrl(publicationId, pageId, publicationTitle, pageTitle) :
+                        Url.getPublicationUrl(publicationId, publicationTitle)}>
 
                     <Toc
                         activeItemPath={activeTocItemPath}

@@ -34,36 +34,50 @@ export interface IContentNavigationProps {
      * @type {IContentNavigationItem}
      */
     navItems?: IContentNavigationItem[];
+    /**
+     * Called whenever navigation to another page is requested
+     *
+     * @param {string} url Url
+     *
+     * @memberOf IPageProps
+     */
+    onNavigate(url: string): void;
 }
 
 /**
- * Table of contents
+ * Content Navigation component
  */
-export class ContentNavigation extends React.Component<IContentNavigationProps, {}> {
-    //private _isUnmounted: boolean = false;
+export const ContentNavigation = (props: IContentNavigationProps): JSX.Element => {
+    const { navItems, onNavigate } = props;
 
     /**
-     * Render the component
+     * Executed when a hyperlink is clicked
      *
-     * @returns {JSX.Element}
+     * @param {React.MouseEvent} e Incoming mouse event
      */
-    public render(): JSX.Element {
-        const { navItems } = this.props;
-        return (
-            <nav className={"sdl-dita-delivery-content-navigation"}>
-                <h3>Contents</h3>
-                <ul>
-                    {
-                        Array.isArray(navItems) && navItems.map((item: IContentNavigationItem, index: number) => {
-                            return (
-                                <li key={index}>
-                                    <a href={item.url}>{item.title}</a>
-                                </li>
-                            );
-                        })
-                    }
-                </ul>
-            </nav>
-        );
+    function _onNavigate(e: React.MouseEvent): void {
+        e.preventDefault();
+        const anchor = e.target as HTMLAnchorElement;
+        const href = anchor.getAttribute("href");
+        if (href) {
+            onNavigate(href);
+        }
     }
-}
+
+    return (
+        <nav className={"sdl-dita-delivery-content-navigation"}>
+            <h3>Contents</h3>
+            <ul>
+                {
+                    Array.isArray(navItems) && navItems.map((item: IContentNavigationItem, index: number) => {
+                        return (
+                            <li key={index}>
+                                <a href={item.url} onClick={_onNavigate}>{item.title}</a>
+                            </li>
+                        );
+                    })
+                }
+            </ul>
+        </nav>
+    );
+};
