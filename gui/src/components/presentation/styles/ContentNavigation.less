@@ -1,0 +1,37 @@
+@import (reference) "../../../theming/styles.less";
+
+.sdl-dita-delivery-content-navigation {
+    @outerBorderSize: 4px;
+    overflow: auto;
+
+    ul {
+        margin-top: 0;
+        padding: 0;
+
+        li {
+            background: @customColor1;
+            position: relative;
+            display: block;
+            padding: 10px 15px;
+            margin-bottom: -1px;
+            border: 1px solid @customColor2;
+            border-left: 2px solid @customColor3;
+
+            &:first-child {
+                border-top-left-radius: @outerBorderSize;
+                border-top-right-radius: @outerBorderSize;
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+                border-bottom-right-radius: @outerBorderSize;
+                border-bottom-left-radius: @outerBorderSize;
+            }
+
+            a {
+                text-decoration: none;
+                color: @customColor4;
+            }
+        }
+    }
+}

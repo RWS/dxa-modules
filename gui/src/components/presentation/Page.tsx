@@ -1,4 +1,5 @@
 import { Url } from "utils/Url";
+import { ContentNavigation, IContentNavigationItem } from "components/presentation/ContentNavigation";
 
 import "components/presentation/styles/Page";
 import "dist/dita-ot/styles/commonltr";
@@ -22,6 +23,12 @@ export interface IPageProps {
      */
     showActivityIndicator: boolean;
     /**
+     * Show fixed navigation panels
+     *
+     * @type {boolean}
+     */
+    isNavFixed?: boolean;
+    /**
      * Page content
      *
      * @type {string | null}
@@ -44,11 +51,37 @@ export interface IPageProps {
 }
 
 /**
+ * Page component state
+ *
+ * @export
+ * @interface IPageState
+ */
+export interface IPageState {
+    /**
+     * Items used in content Navigation
+     *
+     * @type {IContentNavigationItem[]}
+     */
+    navItems: IContentNavigationItem[];
+}
+
+/**
  * Page component
  */
-export class Page extends React.Component<IPageProps, {}> {
+export class Page extends React.Component<IPageProps, IPageState> {
 
     private _hyperlinks: { element: HTMLElement, handler: (e: Event) => void; }[] = [];
+
+    /**
+     * Creates an instance of Toc.
+     *
+     */
+    constructor() {
+        super();
+        this.state = {
+            navItems: []
+        };
+    }
 
     /**
      * Render the component
@@ -59,14 +92,16 @@ export class Page extends React.Component<IPageProps, {}> {
      */
     public render(): JSX.Element {
         const props = this.props;
+        const { navItems } = this.state;
         return (
-            <div className={"sdl-dita-delivery-page"}>
+            <div className={"sdl-dita-delivery-page" + (props.isNavFixed ? " sdl-dita-delivery-fixed-nav" : "")}>
                 {props.showActivityIndicator ? <ActivityIndicator /> : null}
                 {props.error ? <ValidationMessage messageType={SDL.UI.Controls.ValidationMessageType.Error} message={props.error} /> : null}
                 {props.children}
-                <div>
-                    <div className={"page-content ltr"} dangerouslySetInnerHTML={{ __html: props.content || "" }} />
-                </div>
+                <ContentNavigation navItems={navItems} />
+                <article>
+                    <article className={"page-content ltr"} dangerouslySetInnerHTML={{ __html: props.content || "" }} />
+                </article>
             </div>
         );
     }
@@ -76,6 +111,7 @@ export class Page extends React.Component<IPageProps, {}> {
      */
     public componentDidMount(): void {
         this._enableHyperlinks();
+        this._colectHeadersLinks();
     }
 
     /**
@@ -85,6 +121,7 @@ export class Page extends React.Component<IPageProps, {}> {
      */
     public componentDidUpdate(): void {
         this._enableHyperlinks();
+        this._colectHeadersLinks();
     }
 
     /**
@@ -129,6 +166,57 @@ export class Page extends React.Component<IPageProps, {}> {
     }
 
     /**
+     * Collects headers links
+     *
+     * @private
+     *
+     * @memberOf Page
+     */
+    private _colectHeadersLinks(): void {
+        const domNode = ReactDOM.findDOMNode(this);
+        const headers = domNode.querySelectorAll("article h1, article h2, article h3");
+        const { navItems } = this.state;
+        let updatedNavItems: IContentNavigationItem[] = [];
+        for (let i: number = 0, length: number = headers.length; i < length; i++) {
+            const header = headers.item(i);
+            let id = header.getAttribute("id");
+            const title = header.textContent || "";
+            if (!id) {
+                id = encodeURIComponent(title);
+                const alreadyAdded = updatedNavItems.filter(item => item.url === id).length === 1;
+                if (alreadyAdded) {
+                    id += "_1";
+                }
+
+                header.setAttribute("id", id);
+            }
+
+            updatedNavItems.push({
+                title: title,
+                url: "#" + id
+            } as IContentNavigationItem);
+        }
+
+        updatedNavItems.sort();
+
+        // // Check if array is changed
+        // if (!navItems.every((item: IContentNavigationItem, index: number) => {
+        //     return navItems[index] && (item.url == navItems[index].url);
+        // })) {
+        //     // if it was changed, then update the state
+        //     this.setState({
+        //         navItems: updatedNavItems
+        //     });
+        // }
+
+        if (navItems.map((i) => i.url).join("") != updatedNavItems.map((i) => i.url).join("")) {
+            this.setState({
+                navItems: updatedNavItems
+            });
+        }
+    }
+
+    /**
      * Make hyperlinks navigation disabled
      *
      * @private
@@ -137,10 +225,6 @@ export class Page extends React.Component<IPageProps, {}> {
      */
     private _disableHyperlinks(): void {
         this._hyperlinks.forEach(anchor => {
-            const itemUrl = anchor.element.getAttribute("data-url");
-            if (itemUrl) {
-                anchor.element.setAttribute("href", itemUrl);
-            }
             anchor.element.removeEventListener("click", anchor.handler);
         });
     }

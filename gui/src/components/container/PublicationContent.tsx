@@ -1,11 +1,13 @@
 import { Promise } from "es6-promise";
 import { ITaxonomy } from "interfaces/Taxonomy";
 import { IPage } from "interfaces/Page";
+
 import { IAppContext } from "components/container/App";
 import { Toc } from "components/presentation/Toc";
 import { Page } from "components/presentation/Page";
 import { SearchBar } from "components/presentation/SearchBar";
 import { Breadcrumbs } from "components/presentation/Breadcrumbs";
+
 import { TcmId } from "utils/TcmId";
 import { Url } from "utils/Url";
 
@@ -279,7 +281,18 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                 <SearchBar
                     placeholderLabel={localizationService.formatMessage("components.searchbar.placeholder", [publicationTitle || ""])}
                     onSearch={query => console.log(query)} />
-                <div className={"sdl-dita-delivery-toc-and-page" + (tocIsFixed ? " sdl-dita-delivery-fixed-toc" : "")}>
+                <Page
+                    showActivityIndicator={isPageLoading || false}
+                    content={content}
+                    error={error}
+                    isNavFixed={tocIsFixed}
+                    onNavigate={(url: string): void => {
+                        /* istanbul ignore else */
+                        if (router) {
+                            router.push(url);
+                        }
+                    } } >
+
                     <Toc
                         activeItemPath={activeTocItemPath}
                         rootItems={rootItems}
@@ -291,25 +304,14 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                         } }
                         onSelectionChanged={this._onTocSelectionChanged.bind(this)}
                         error={tocError} />
-                    <Page
-                        showActivityIndicator={isPageLoading || false}
-                        content={content}
-                        error={error}
-                        onNavigate={(url: string): void => {
-                            /* istanbul ignore else */
-                            if (router) {
-                                router.push(url);
-                            }
-                        } } >
-                        <Breadcrumbs
-                            publicationId={publicationId}
-                            publicationTitle={publicationTitle || ""}
-                            loadItemsPath={taxonomyService.getSitemapPath.bind(taxonomyService)}
-                            selectedItem={selectedTocItem}
-                            localizationService={localizationService}
-                            />
-                    </Page>
-                </div>
+                    <Breadcrumbs
+                        publicationId={publicationId}
+                        publicationTitle={publicationTitle || ""}
+                        loadItemsPath={taxonomyService.getSitemapPath.bind(taxonomyService)}
+                        selectedItem={selectedTocItem}
+                        localizationService={localizationService}
+                        />
+                </Page>
             </section>
         );
     }
