@@ -24,12 +24,6 @@ export interface IPageProps {
      */
     showActivityIndicator: boolean;
     /**
-     * Show fixed navigation panels
-     *
-     * @type {boolean}
-     */
-    isNavFixed?: boolean;
-    /**
      * Page content
      *
      * @type {string | null}
@@ -56,6 +50,14 @@ export interface IPageProps {
      * @memberOf IPageProps
      */
     anchor?: string;
+    /**
+     * Scroll offset using for jumping to anchors
+     * For example when there is a topbar overlaying part of the component
+     *
+     * @type {number}
+     * @memberOf IPageProps
+     */
+    scrollOffset?: number;
     /**
      * Called whenever navigation to another page is requested
      *
@@ -111,11 +113,11 @@ export class Page extends React.Component<IPageProps, IPageState> {
         const props = this.props;
         const { navItems } = this.state;
         return (
-            <div className={"sdl-dita-delivery-page" + (props.isNavFixed ? " sdl-dita-delivery-fixed-nav" : "")}>
+            <div className={"sdl-dita-delivery-page"}>
                 {props.showActivityIndicator ? <ActivityIndicator /> : null}
                 {props.error ? <ValidationMessage messageType={SDL.UI.Controls.ValidationMessageType.Error} message={props.error} /> : null}
-                {props.children}
                 <ContentNavigation navItems={navItems} />
+                {props.children}
                 <article>
                     <article className={"page-content ltr"} dangerouslySetInnerHTML={{ __html: props.content || "" }} />
                 </article>
@@ -235,7 +237,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
      * @memberOf Page
      */
     private _jumpToAnchor(): void {
-        const { anchor } = this.props;
+        const { anchor, scrollOffset } = this.props;
         // Keep track of the previous anchor to allow scrolling
         if (anchor && anchor !== this._lastAnchor) {
             const domNode = ReactDOM.findDOMNode(this) as HTMLElement;
@@ -247,7 +249,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                     // TODO: make sure images are loaded before jumping to the anchor
                     // Use a timeout to make sure all components are rendered
                     setTimeout((): void => {
-                        var topPos = header.offsetTop + domNode.offsetTop;
+                        var topPos = (header.offsetTop + domNode.offsetTop) - scrollOffset;
                         window.scrollTo(0, topPos);
                     }, 0);
                 }

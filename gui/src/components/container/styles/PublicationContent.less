@@ -9,7 +9,7 @@
     height: 100%;
 
     .sdl-dita-delivery-searchbar {
-        margin-top: 50px;
+        padding-top: 50px;
     }
 
     .sdl-dita-delivery-page {
@@ -19,54 +19,36 @@
 
         .sdl-dita-delivery-toc {
             width: @tocWidth;
-            .sdl-treeview {
-                padding-top: 15px;
-            }
+            float: left;
         }
 
         .sdl-dita-delivery-content-navigation {
             width: @contentNavWidth;
-            right: 0;
-            /*margin-left: -@contentNavWidth;*/
+            float: right;
         }
 
-        nav {
-            position: absolute;
+        nav.sdl-dita-delivery-toc,
+        nav.sdl-dita-delivery-content-navigation {
             min-height: 150px;
-            bottom: 0;
-            top: 0;
-        }
+            overflow: auto;
 
-        &.sdl-dita-delivery-fixed-nav {
-            nav {
+            &.fixed-nav {
                 top: 50px;
                 position: fixed;
                 z-index: 999;
             }
         }
 
-        .sdl-dita-delivery-breadcrumbs,
-        article.page-content{
+        .sdl-dita-delivery-breadcrumbs {
+            padding-bottom: 15px;
             margin-left: @tocWidth;
             margin-right: @contentNavWidth;
         }
 
-        .sdl-dita-delivery-breadcrumbs {
-            padding-bottom: 15px;
-        }
-
-        article.page-content{
+        article.page-content {
+            margin-left: @tocWidth;
+            margin-right: @contentNavWidth;
             min-height: 150px;
-
-            /* Fixed scroll issue */
-            h1:before,
-            h2:before,
-            h3:before {
-                content:"";
-                display:block;
-                height:60px;
-                margin:-60px 0 0;
-            }
         }
     }
 }

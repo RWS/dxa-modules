@@ -8,10 +8,13 @@ import { Page } from "components/presentation/Page";
 import { SearchBar } from "components/presentation/SearchBar";
 import { Breadcrumbs } from "components/presentation/Breadcrumbs";
 
+import { Html } from "utils/Html";
 import { TcmId } from "utils/TcmId";
 import { Url } from "utils/Url";
 
 import "components/container/styles/PublicationContent";
+
+const FIXED_NAV_CLASS = "fixed-nav";
 
 /**
  * PublicationContent component props params
@@ -84,14 +87,6 @@ export interface IPublicationContentState {
      * @type {boolean}
      */
     isTocLoading?: boolean;
-
-    /**
-     * Toc is fixed to the top of the screen
-     *
-     * @type {boolean}
-     */
-    tocIsFixed?: boolean;
-
     /**
      * Current selected item in the TOC
      *
@@ -169,7 +164,8 @@ export class PublicationContent extends React.Component<IPublicationContentProps
     private _page: ISelectedPage = {};
     private _toc: IToc = {};
     private _isUnmounted: boolean = false;
-    private _headerSize: number = 0;
+    private _searchBarHeight: number = 0;
+    private _topBarHeight: number = 0;
 
     /**
      * Creates an instance of App.
@@ -179,7 +175,6 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         super();
         this.state = {
             isTocLoading: true,
-            tocIsFixed: false,
             selectedTocItem: null,
             isPageLoading: true,
             isTocExpanding: true
@@ -306,7 +301,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
      * @returns {JSX.Element}
      */
     public render(): JSX.Element {
-        const { isPageLoading, activeTocItemPath, selectedTocItem, publicationTitle, tocIsFixed } = this.state;
+        const { isPageLoading, activeTocItemPath, selectedTocItem, publicationTitle } = this.state;
         const { pageIdOrPublicationTitle, pageTitle, pageAnchor } = this.props.params;
         const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
         const { services, router } = this.context;
@@ -325,7 +320,6 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     showActivityIndicator={isPageLoading || false}
                     content={content}
                     error={error}
-                    isNavFixed={tocIsFixed}
                     onNavigate={(url: string): void => {
                         /* istanbul ignore else */
                         if (router) {
@@ -337,8 +331,8 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                         Url.getPublicationUrl(publicationId, publicationTitle)}
                     // Wait for the selected toc item to be set to set the anchor
                     // This is needed to make sure components on top are rendered first (eg bread crumbs)
-                    anchor={selectedTocItem ? pageAnchor : undefined}>
-
+                    anchor={selectedTocItem ? pageAnchor : undefined}
+                    scrollOffset={this._topBarHeight}>
                     <Toc
                         activeItemPath={activeTocItemPath}
                         rootItems={rootItems}
@@ -368,12 +362,18 @@ export class PublicationContent extends React.Component<IPublicationContentProps
     public componentDidMount(): void {
         if (ReactDOM) {
             const domNode = ReactDOM.findDOMNode(this);
-            const topBar = domNode.querySelector(".sdl-dita-delivery-searchbar");
+            const searchBar = domNode.querySelector(".sdl-dita-delivery-searchbar") as HTMLElement;
 
-            this._headerSize = topBar ? topBar.clientHeight : 0;
+            if (searchBar) {
+                const searchBarStyle = window.getComputedStyle(searchBar);
+                this._searchBarHeight = parseInt(searchBarStyle.height || "0", 10);
+                this._topBarHeight = searchBar.offsetHeight - this._searchBarHeight;
+            }
         }
 
         window.addEventListener("scroll", this._fixTocPanel.bind(this));
+        window.addEventListener("resize", this._fixTocPanel.bind(this));
+        this._fixTocPanel();
     }
 
     /**
@@ -383,6 +383,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         this._isUnmounted = true;
 
         window.removeEventListener("scroll", this._fixTocPanel.bind(this));
+        window.removeEventListener("resize", this._fixTocPanel.bind(this));
     }
 
     private _onTocSelectionChanged(sitemapItem: ITaxonomy, path: string[]): void {
@@ -463,11 +464,44 @@ export class PublicationContent extends React.Component<IPublicationContentProps
     }
 
     private _fixTocPanel(): void {
-        /* istanbul ignore else */
-        if (!this._isUnmounted) {
-            this.setState({
-                tocIsFixed: (window.document.body.scrollTop >= this._headerSize)
-            });
+        if (this._isUnmounted) {
+            return;
+        }
+
+        // Set height of toc and content navigation panel to a maximum
+        const domNode = ReactDOM.findDOMNode(this) as HTMLElement;
+        if (domNode) {
+            const toc = domNode.querySelector("nav.sdl-dita-delivery-toc") as HTMLElement;
+            const contentNavigation = domNode.querySelector("nav.sdl-dita-delivery-content-navigation") as HTMLElement;
+
+            // Firefox needs document.documentElement, otherwise scrollTop value will be 0 all the time
+            // Chrome though needs document.body to work correctly
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+            const { maxHeight, sticksToTop } = Html.getFixedPanelInfo(scrollTop, this._searchBarHeight, this._topBarHeight);
+            if (toc) {
+                toc.style.maxHeight = maxHeight;
+                if (sticksToTop) {
+                    toc.classList.add(FIXED_NAV_CLASS);
+                } else {
+                    toc.classList.remove(FIXED_NAV_CLASS);
+                }
+            }
+
+            if (contentNavigation) {
+                contentNavigation.style.maxHeight = maxHeight;
+                if (sticksToTop) {
+                    contentNavigation.classList.add(FIXED_NAV_CLASS);
+                    // Set left position
+                    const page = document.querySelector(".sdl-dita-delivery-page") as HTMLElement;
+                    if (page) {
+                        contentNavigation.style.left = (page.offsetLeft + page.clientWidth - contentNavigation.offsetWidth) + "px";
+                    }
+                } else {
+                    contentNavigation.classList.remove(FIXED_NAV_CLASS);
+                    contentNavigation.style.left = null;
+                }
+            }
+
         }
     }
 }
