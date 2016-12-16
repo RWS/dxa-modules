@@ -46,4 +46,23 @@ describe(`Html utils tests.`, (): void => {
         expect(headers).toEqual(expected);
     });
 
+    it("can lookup an element with an id", (): void => {
+        const element = document.createElement("div");
+        element.innerHTML = "<h1>Header</h1><h2>Header</h2><h3>Header</h3><h4>Header</h4>";
+        const header1 = Html.getHeaderElement(element, "header");
+        expect(header1).toBeDefined();
+        if (header1) {
+            expect(header1.tagName.toLowerCase()).toBe("h1");
+            expect(header1.textContent).toBe("Header");
+        }
+        const header3 = Html.getHeaderElement(element, "header_2");
+        expect(header3).toBeDefined();
+        if (header3) {
+            expect(header3.tagName.toLowerCase()).toBe("h3");
+            expect(header3.textContent).toBe("Header");
+        }
+        const notFound = Html.getHeaderElement(element, "header_3");
+        expect(notFound).toBeUndefined();
+    });
+
 });

@@ -1,7 +1,6 @@
 import { Html } from "utils/Html";
 import { Url } from "utils/Url";
 import { ContentNavigation, IContentNavigationItem } from "components/presentation/ContentNavigation";
-import { Scroll } from "utils/Scroll";
 
 import "components/presentation/styles/Page";
 import "dist/dita-ot/styles/commonltr";
@@ -248,7 +247,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                     // Use a timeout to make sure all components are rendered
                     setTimeout((): void => {
                         var topPos = header.offsetTop + domNode.offsetTop;
-                        Scroll.scrollTo(document.body, topPos, 500);
+                        window.scrollTo(0, topPos);
                     }, 0);
                 }
             }
