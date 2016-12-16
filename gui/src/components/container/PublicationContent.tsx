@@ -331,7 +331,8 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                         Url.getPublicationUrl(publicationId, publicationTitle)}
                     // Wait for the selected toc item to be set to set the anchor
                     // This is needed to make sure components on top are rendered first (eg bread crumbs)
-                    anchor={selectedTocItem ? pageAnchor : undefined}>
+                    anchor={selectedTocItem ? pageAnchor : undefined}
+                    scrollOffset={this._topBarHeight}>
                     <Toc
                         activeItemPath={activeTocItemPath}
                         rootItems={rootItems}
