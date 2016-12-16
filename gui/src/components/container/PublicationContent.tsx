@@ -47,6 +47,13 @@ export interface IPublicationContentPropsParams {
      * @type {string}
      */
     pageTitle?: string;
+
+    /**
+     * Anchor within the current page
+     *
+     * @type {string}
+     */
+    pageAnchor?: string;
 }
 
 /**
@@ -300,6 +307,8 @@ export class PublicationContent extends React.Component<IPublicationContentProps
      */
     public render(): JSX.Element {
         const { isPageLoading, activeTocItemPath, selectedTocItem, publicationTitle, tocIsFixed } = this.state;
+        const { pageIdOrPublicationTitle, pageTitle, pageAnchor } = this.props.params;
+        const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
         const { services, router } = this.context;
         const { publicationId } = this.props.params;
         const { taxonomyService, localizationService } = services;
@@ -322,7 +331,13 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                         if (router) {
                             router.push(url);
                         }
-                    } } >
+                    } }
+                    url={pageId ?
+                        Url.getPageUrl(publicationId, pageId, publicationTitle, pageTitle) :
+                        Url.getPublicationUrl(publicationId, publicationTitle)}
+                    // Wait for the selected toc item to be set to set the anchor
+                    // This is needed to make sure components on top are rendered first (eg bread crumbs)
+                    anchor={selectedTocItem ? pageAnchor : undefined}>
 
                     <Toc
                         activeItemPath={activeTocItemPath}

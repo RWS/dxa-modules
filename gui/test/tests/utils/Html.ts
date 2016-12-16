@@ -1,4 +1,4 @@
-import { Html } from "utils/Html";
+import { Html, IHeader } from "utils/Html";
 
 describe(`Html utils tests.`, (): void => {
 
@@ -7,41 +7,62 @@ describe(`Html utils tests.`, (): void => {
         element.innerHTML = "<h1>Header1</h1><h2>Header2</h2><h3>Header3</h3><h4>Header4</h4>";
         const headers = Html.getHeaderLinks(element);
         expect(headers.length).toBe(3);
-        expect(headers).toEqual([
+        const expected: IHeader[] = [
             {
                 title: "Header1",
-                url: "header1"
+                id: "header1"
             },
             {
                 title: "Header2",
-                url: "header2"
+                id: "header2"
             },
             {
                 title: "Header3",
-                url: "header3"
+                id: "header3"
             }
-        ]);
+        ];
+        expect(headers).toEqual(expected);
     });
 
-    it("appends double titles with _1, _2, _3... in the url", (): void => {
+    it("appends non unique titles with _1, _2, _3... for the id", (): void => {
         const element = document.createElement("div");
         element.innerHTML = "<h1>Header</h1><h2>Header</h2><h3>Header</h3><h4>Header</h4>";
         const headers = Html.getHeaderLinks(element);
         expect(headers.length).toBe(3);
-        expect(headers).toEqual([
+        const expected: IHeader[] = [
             {
                 title: "Header",
-                url: "header"
+                id: "header"
             },
             {
                 title: "Header",
-                url: "header_1"
+                id: "header_1"
             },
             {
                 title: "Header",
-                url: "header_2"
+                id: "header_2"
             }
-        ]);
+        ];
+        expect(headers).toEqual(expected);
+    });
+
+    it("can lookup an element with an id", (): void => {
+        const element = document.createElement("div");
+        element.innerHTML = "<h1>Header</h1><h2>Header</h2><h3>Header</h3><h4>Header</h4>";
+        const header1 = Html.getHeaderElement(element, "header");
+        expect(header1).toBeDefined();
+        if (header1) {
+            expect(header1.tagName.toLowerCase()).toBe("h1");
+            expect(header1.textContent).toBe("Header");
+        }
+        const header3 = Html.getHeaderElement(element, "header_2");
+        expect(header3).toBeDefined();
+        if (header3) {
+            expect(header3.tagName.toLowerCase()).toBe("h3");
+            expect(header3.textContent).toBe("Header");
+        }
+        const notFound = Html.getHeaderElement(element, "header_3");
+        expect(notFound).toBeUndefined();
     });
 
 });

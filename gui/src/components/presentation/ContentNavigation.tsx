@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import "components/presentation/styles/ContentNavigation";
 
 /**
@@ -37,33 +38,25 @@ export interface IContentNavigationProps {
 }
 
 /**
- * Table of contents
+ * Content Navigation component
  */
-export class ContentNavigation extends React.Component<IContentNavigationProps, {}> {
-    //private _isUnmounted: boolean = false;
+export const ContentNavigation = (props: IContentNavigationProps): JSX.Element => {
+    const { navItems } = props;
 
-    /**
-     * Render the component
-     *
-     * @returns {JSX.Element}
-     */
-    public render(): JSX.Element {
-        const { navItems } = this.props;
-        return (
-            <nav className={"sdl-dita-delivery-content-navigation"}>
-                <h3>Contents</h3>
-                <ul>
-                    {
-                        Array.isArray(navItems) && navItems.map((item: IContentNavigationItem, index: number) => {
-                            return (
-                                <li key={index}>
-                                    <a href={item.url}>{item.title}</a>
-                                </li>
-                            );
-                        })
-                    }
-                </ul>
-            </nav>
-        );
-    }
-}
+    return (
+        <nav className={"sdl-dita-delivery-content-navigation"}>
+            <h3>Contents</h3>
+            <ul>
+                {
+                    Array.isArray(navItems) && navItems.map((item: IContentNavigationItem, index: number) => {
+                        return (
+                            <li key={index}>
+                                <Link to={item.url}>{item.title}</Link>
+                            </li>
+                        );
+                    })
+                }
+            </ul>
+        </nav>
+    );
+};

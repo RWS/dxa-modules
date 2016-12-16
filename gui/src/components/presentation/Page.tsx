@@ -42,6 +42,21 @@ export interface IPageProps {
      */
     error?: string | null;
     /**
+     * Url of the page
+     *
+     * @type {string}
+     * @memberOf IPublicationContentProps
+     */
+    url?: string;
+    /**
+     * Anchor which is active.
+     * Used for navigating to a specific section in the page.
+     *
+     * @type {string}
+     * @memberOf IPageProps
+     */
+    anchor?: string;
+    /**
      * Called whenever navigation to another page is requested
      *
      * @param {string} url Url
@@ -72,6 +87,7 @@ export interface IPageState {
 export class Page extends React.Component<IPageProps, IPageState> {
 
     private _hyperlinks: { element: HTMLElement, handler: (e: Event) => void; }[] = [];
+    private _lastAnchor: string;
 
     /**
      * Creates an instance of Toc.
@@ -112,7 +128,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
      */
     public componentDidMount(): void {
         this._enableHyperlinks();
-        this._colectHeadersLinks();
+        this._collectHeadersLinks();
     }
 
     /**
@@ -122,7 +138,8 @@ export class Page extends React.Component<IPageProps, IPageState> {
      */
     public componentDidUpdate(): void {
         this._enableHyperlinks();
-        this._colectHeadersLinks();
+        this._collectHeadersLinks();
+        this._jumpToAnchor();
     }
 
     /**
@@ -175,12 +192,19 @@ export class Page extends React.Component<IPageProps, IPageState> {
      *
      * @memberOf Page
      */
-    private _colectHeadersLinks(): void {
+    private _collectHeadersLinks(): void {
         const domNode = ReactDOM.findDOMNode(this);
         if (domNode) {
             const { navItems } = this.state;
+            const { url } = this.props;
             const pageContentNode = domNode.querySelector(".page-content") as HTMLElement;
-            const updatedNavItems = Html.getHeaderLinks(pageContentNode);
+            const headerLinks = Html.getHeaderLinks(pageContentNode);
+            const updatedNavItems: IContentNavigationItem[] = headerLinks.map(item => {
+                return {
+                    title: item.title,
+                    url: url ? Url.getAnchorUrl(url, item.id) : ("#" + item.id)
+                };
+            });
 
             if (navItems.map((i) => i.url).join("") !== updatedNavItems.map((i) => i.url).join("")) {
                 this.setState({
@@ -201,5 +225,33 @@ export class Page extends React.Component<IPageProps, IPageState> {
         this._hyperlinks.forEach(anchor => {
             anchor.element.removeEventListener("click", anchor.handler);
         });
+    }
+
+    /**
+     * Jump to an anchor in the page
+     *
+     * @private
+     *
+     * @memberOf Page
+     */
+    private _jumpToAnchor(): void {
+        const { anchor } = this.props;
+        // Keep track of the previous anchor to allow scrolling
+        if (anchor && anchor !== this._lastAnchor) {
+            const domNode = ReactDOM.findDOMNode(this) as HTMLElement;
+            if (domNode) {
+                const pageContentNode = domNode.querySelector(".page-content") as HTMLElement;
+                const header = Html.getHeaderElement(pageContentNode, anchor);
+                if (header) {
+                    this._lastAnchor = anchor;
+                    // TODO: make sure images are loaded before jumping to the anchor
+                    // Use a timeout to make sure all components are rendered
+                    setTimeout((): void => {
+                        var topPos = header.offsetTop + domNode.offsetTop;
+                        window.scrollTo(0, topPos);
+                    }, 0);
+                }
+            }
+        }
     }
 }
