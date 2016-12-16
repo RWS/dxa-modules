@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import "components/presentation/styles/ContentNavigation";
 
 /**
@@ -34,35 +35,13 @@ export interface IContentNavigationProps {
      * @type {IContentNavigationItem}
      */
     navItems?: IContentNavigationItem[];
-    /**
-     * Called whenever navigation to another page is requested
-     *
-     * @param {string} url Url
-     *
-     * @memberOf IPageProps
-     */
-    onNavigate(url: string): void;
 }
 
 /**
  * Content Navigation component
  */
 export const ContentNavigation = (props: IContentNavigationProps): JSX.Element => {
-    const { navItems, onNavigate } = props;
-
-    /**
-     * Executed when a hyperlink is clicked
-     *
-     * @param {React.MouseEvent} e Incoming mouse event
-     */
-    function _onNavigate(e: React.MouseEvent): void {
-        e.preventDefault();
-        const anchor = e.target as HTMLAnchorElement;
-        const href = anchor.getAttribute("href");
-        if (href) {
-            onNavigate(href);
-        }
-    }
+    const { navItems } = props;
 
     return (
         <nav className={"sdl-dita-delivery-content-navigation"}>
@@ -72,7 +51,7 @@ export const ContentNavigation = (props: IContentNavigationProps): JSX.Element =
                     Array.isArray(navItems) && navItems.map((item: IContentNavigationItem, index: number) => {
                         return (
                             <li key={index}>
-                                <a href={item.url} onClick={_onNavigate}>{item.title}</a>
+                                <Link to={item.url}>{item.title}</Link>
                             </li>
                         );
                     })

@@ -115,7 +115,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                 {props.showActivityIndicator ? <ActivityIndicator /> : null}
                 {props.error ? <ValidationMessage messageType={SDL.UI.Controls.ValidationMessageType.Error} message={props.error} /> : null}
                 {props.children}
-                <ContentNavigation navItems={navItems} onNavigate={props.onNavigate} />
+                <ContentNavigation navItems={navItems} />
                 <article>
                     <article className={"page-content ltr"} dangerouslySetInnerHTML={{ __html: props.content || "" }} />
                 </article>
@@ -244,6 +244,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                 const header = Html.getHeaderElement(pageContentNode, anchor);
                 if (header) {
                     this._lastAnchor = anchor;
+                    // TODO: make sure images are loaded before jumping to the anchor
                     // Use a timeout to make sure all components are rendered
                     setTimeout((): void => {
                         var topPos = header.offsetTop + domNode.offsetTop;
