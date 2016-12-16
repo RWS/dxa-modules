@@ -24,12 +24,6 @@ export interface IPageProps {
      */
     showActivityIndicator: boolean;
     /**
-     * Show fixed navigation panels
-     *
-     * @type {boolean}
-     */
-    isNavFixed?: boolean;
-    /**
      * Page content
      *
      * @type {string | null}
@@ -111,11 +105,11 @@ export class Page extends React.Component<IPageProps, IPageState> {
         const props = this.props;
         const { navItems } = this.state;
         return (
-            <div className={"sdl-dita-delivery-page" + (props.isNavFixed ? " sdl-dita-delivery-fixed-nav" : "")}>
+            <div className={"sdl-dita-delivery-page"}>
                 {props.showActivityIndicator ? <ActivityIndicator /> : null}
                 {props.error ? <ValidationMessage messageType={SDL.UI.Controls.ValidationMessageType.Error} message={props.error} /> : null}
-                {props.children}
                 <ContentNavigation navItems={navItems} />
+                {props.children}
                 <article>
                     <article className={"page-content ltr"} dangerouslySetInnerHTML={{ __html: props.content || "" }} />
                 </article>
