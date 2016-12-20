@@ -14,8 +14,8 @@ module.exports = function (buildOptions, gulp, runTests, singleRun) {
     var istanbul = require('istanbul');
     var runSequence = require('run-sequence').use(gulp);
     var chalk = require('chalk');
-    var loadCoverage = require('remap-istanbul/lib/loadCoverage');
-    var remap = require('remap-istanbul/lib/remap');
+    var loadCoverage = require('remap-istanbul/lib/loadCoverage').default;
+    var remap = require('remap-istanbul/lib/remap').default;
     var minCoverage = buildOptions.coverage.minCoverage;
     singleRun = singleRun || false;
 
@@ -64,9 +64,9 @@ module.exports = function (buildOptions, gulp, runTests, singleRun) {
             jsonReport.writeReport(collector, true);
 
             // Remap the results
-            // collector = remap(loadCoverage(reportPath + 'coverage-final.json'), {
-            //     basePath: currentWorkingDir + buildOptions.sourcesPath.substring(1)
-            // });
+            collector = remap(loadCoverage(reportPath + 'coverage-final.json'), {
+                basePath: currentWorkingDir + buildOptions.sourcesPath.substring(1)
+            });
 
             // Print full coverage report to console
             var reporter = new istanbul.Reporter();
