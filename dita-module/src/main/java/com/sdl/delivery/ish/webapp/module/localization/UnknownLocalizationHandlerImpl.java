@@ -1,12 +1,16 @@
 package com.sdl.delivery.ish.webapp.module.localization;
 
+import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.api.localization.LocalizationNotResolvedException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.sdl.webapp.common.api.localization.UnknownLocalizationHandler;
 
 import javax.servlet.ServletRequest;
+import static org.apache.commons.lang3.StringUtils.isNumeric;
+
 
 /**
  * Unknown localization handler.
@@ -14,6 +18,9 @@ import javax.servlet.ServletRequest;
 @Component
 @Slf4j
 public class UnknownLocalizationHandlerImpl implements UnknownLocalizationHandler {
+
+    @Autowired
+    private WebRequestContext webRequestContext;
 
     private DitaLocalization ditaLocalization = new DitaLocalization();
 
@@ -24,6 +31,16 @@ public class UnknownLocalizationHandlerImpl implements UnknownLocalizationHandle
      * @return
      */
     public Localization handleUnknown(Exception exception, ServletRequest request) {
+        // Parse publication id from the request
+        String path = webRequestContext.getRequestPath();
+        String[] params = path.split("/");
+        if (params.length > 1) {
+            // First parameter is the publication id (in case it is numeric)
+            String firstParam = params[1];
+            if (isNumeric(firstParam)) {
+                ditaLocalization.setPublicationId(firstParam);
+            }
+        }
         return ditaLocalization;
     }
 

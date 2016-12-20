@@ -8,7 +8,6 @@ import com.sdl.webapp.common.util.LocalizationUtils;
 import com.sdl.webapp.common.util.TcmUtils;
 import com.sdl.webapp.tridion.mapping.DefaultContentProvider;
 import com.sdl.webapp.tridion.mapping.ModelBuilderPipeline;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.dd4t.contentmodel.impl.PageImpl;
 import org.dd4t.core.exceptions.FactoryException;
@@ -17,11 +16,9 @@ import org.dd4t.core.factories.PageFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
-import org.springframework.web.util.UriUtils;
-
-import java.io.UnsupportedEncodingException;
 
 import static com.sdl.webapp.common.util.LocalizationUtils.findPageByPath;
+import static org.dd4t.core.util.TCMURI.Namespace;
 
 /**
  * Dita content provider
@@ -43,26 +40,23 @@ public class DitaContentProvider extends DefaultContentProvider {
     private WebRequestContext webRequestContext;
 
     /**
-     * Get a page model by path.
-     * This provider does not use the path. Instead it uses the ids to retrieve the page model.
-     * The id's are parsed from the path.
+     * Get a page model by it's item id.
      *
-     * @param path Path
+     * @param pageId The page id
      * @param localization Localization
      * @return
      * @throws ContentProviderException
      */
     @Override
-    @SneakyThrows(UnsupportedEncodingException.class)
-    public PageModel getPageModel(String path, final Localization localization) throws ContentProviderException {
-        path = UriUtils.encodePath(path, "UTF-8");
-        return findPageByPath(path, localization, new LocalizationUtils.TryFindPage<PageModel>() {
+    public PageModel getPageModel(final String pageId, final Localization localization) throws ContentProviderException {
+        return findPageByPath(pageId, localization, new LocalizationUtils.TryFindPage<PageModel>() {
             public PageModel tryFindPage(String path, int publicationId) throws ContentProviderException {
                 final org.dd4t.contentmodel.Page genericPage;
                 try {
                     synchronized (LOCK) {
-                        String uri = TcmUtils.buildTcmUri(publicationId, 164155, 16);
-                        String source = dd4tPageFactory.findSourcePageByTcmId(uri);
+                        Namespace namespace = Namespace.valueOf(localization.getCmUriScheme());
+                        String cmId = TcmUtils.buildPageCmUri(namespace, Integer.toString(publicationId), pageId);
+                        String source = dd4tPageFactory.findSourcePageByTcmId(cmId);
                         genericPage = dd4tPageFactory.deserialize(source, PageImpl.class);
                     }
                 } catch (ItemNotFoundException e) {
