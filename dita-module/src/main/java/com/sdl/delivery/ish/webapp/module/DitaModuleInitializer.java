@@ -21,6 +21,6 @@ public class DitaModuleInitializer extends AbstractInitializer {
 
     @Override
     protected String getAreaName() {
-        return "Core";
+        return "Dita";
     }
 }

@@ -1,6 +1,6 @@
 package com.sdl.delivery.ish.webapp.module.controller;
 
-import com.sdl.delivery.ish.webapp.module.model.HelloModel;
+import com.sdl.delivery.ish.webapp.module.model.Topic;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,8 +18,10 @@ public class DitaController {
      */
     @RequestMapping(value = "/api/helloworld", method = GET, produces = "application/json")
     @ResponseBody
-    public HelloModel helloworld() {
-        return new HelloModel();
+    public Topic helloworld() {
+        Topic result = new Topic();
+        result.setTopicTitle("hello topic");
+        return result;
     }
 
 }
