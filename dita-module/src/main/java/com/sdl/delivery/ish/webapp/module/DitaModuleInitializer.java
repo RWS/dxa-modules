@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 /**
- * DXA Initializer for HelloModel.
+ * DXA Initializer for dita module.
  */
 @Component
 @RegisteredViewModels({
