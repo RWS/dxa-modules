@@ -28,8 +28,6 @@ import static org.dd4t.core.util.TCMURI.Namespace;
 @Primary
 public class DitaContentProvider extends DefaultContentProvider {
 
-    private static final Object LOCK = new Object();
-
     @Autowired
     private PageFactory dd4tPageFactory;
 
@@ -42,7 +40,7 @@ public class DitaContentProvider extends DefaultContentProvider {
     /**
      * Get a page model by it's item id.
      *
-     * @param pageId The page id
+     * @param pageId       The page id
      * @param localization Localization
      * @return
      * @throws ContentProviderException
@@ -53,11 +51,13 @@ public class DitaContentProvider extends DefaultContentProvider {
             public PageModel tryFindPage(String path, int publicationId) throws ContentProviderException {
                 final org.dd4t.contentmodel.Page genericPage;
                 try {
-                    synchronized (LOCK) {
-                        Namespace namespace = Namespace.valueOf(localization.getCmUriScheme());
-                        String cmId = TcmUtils.buildPageCmUri(namespace, Integer.toString(publicationId), pageId);
-                        String source = dd4tPageFactory.findSourcePageByTcmId(cmId);
+                    Namespace namespace = Namespace.valueOf(localization.getCmUriScheme().toUpperCase());
+                    String cmId = TcmUtils.buildCmUri(namespace, Integer.toString(publicationId), pageId, "16");
+                    String source = dd4tPageFactory.findSourcePageByTcmId(cmId);
+                    if (source != null) {
                         genericPage = dd4tPageFactory.deserialize(source, PageImpl.class);
+                    } else {
+                        return null;
                     }
                 } catch (ItemNotFoundException e) {
                     log.debug("Page not found: [{}] {}", publicationId, path, e);
