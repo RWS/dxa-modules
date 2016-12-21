@@ -1,6 +1,6 @@
 {
   "name": "sdl-dita-delivery-web-app-gui",
-  "version": "0.1.0-56",
+  "version": "0.1.0-57",
   "description": "GUI of the SDL Dita Delivery Web Application.",
   "dependencies": {
     "es6-promise": "~4.0.5",
