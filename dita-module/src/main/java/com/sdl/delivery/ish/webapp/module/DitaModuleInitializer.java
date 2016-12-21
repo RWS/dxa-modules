@@ -5,6 +5,7 @@ import com.sdl.webapp.common.api.mapping.views.AbstractInitializer;
 import com.sdl.webapp.common.api.mapping.views.ModuleInfo;
 import com.sdl.webapp.common.api.mapping.views.RegisteredViewModel;
 import com.sdl.webapp.common.api.mapping.views.RegisteredViewModels;
+import com.sdl.webapp.common.api.model.page.DefaultPageModel;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +15,8 @@ import org.springframework.stereotype.Component;
 @Component
 @ComponentScan("com.sdl.delivery.ish.webapp.module")
 @RegisteredViewModels({
-        @RegisteredViewModel(viewName = "Topic", modelClass = Topic.class)
+        @RegisteredViewModel(viewName = "Topic", modelClass = Topic.class),
+        @RegisteredViewModel(viewName = "GeneralPage", modelClass = DefaultPageModel.class),
 })
 @ModuleInfo(name = "Dita module", areaName = "Dita", description = "Dita DXA module which contains basic views")
 public class DitaModuleInitializer extends AbstractInitializer {
