@@ -46,7 +46,7 @@
     "napa": "~2.3.0",
     "portfinder": "~1.0.3",
     "postcss-loader": "~1.1.1",
-    "remap-istanbul": "~0.8.2",
+    "remap-istanbul": "~0.8.3",
     "run-sequence": "~1.2.1",
     "sdl-icons": "1.1.0-5",
     "through2": "~2.0.1",
