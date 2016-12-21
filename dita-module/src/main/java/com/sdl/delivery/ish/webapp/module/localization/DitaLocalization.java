@@ -3,8 +3,12 @@ package com.sdl.delivery.ish.webapp.module.localization;
 import com.sdl.webapp.common.api.localization.SiteLocalization;
 import com.sdl.webapp.common.api.mapping.semantic.config.SemanticSchema;
 import com.sdl.webapp.common.api.localization.Localization;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.*;
+
+import static org.dd4t.core.util.TCMURI.Namespace.ISH;
 
 /**
  * Dita localization.
@@ -12,12 +16,18 @@ import java.util.*;
 public class DitaLocalization implements Localization {
 
     /**
+     * Set the id for the current publication
+     *
+     * Hardcoded for now.
+     * Will become dynamic when the publication query api is available in CD.
+     */
+    @Getter @Setter public String publicationId = "1176127";
+
+    /**
      * {@inheritDoc}
      */
     public String getId() {
-        // Hardcoded for now.
-        // Will become dynamic when the publication query api is available in CD.
-        return "1176127";
+        return publicationId;
     }
 
     /**
@@ -122,6 +132,6 @@ public class DitaLocalization implements Localization {
      * {@inheritDoc}
      */
     public String getCmUriScheme() {
-        return "ish";
+        return ISH.getValue();
     }
 }
