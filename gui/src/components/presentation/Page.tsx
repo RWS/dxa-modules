@@ -260,7 +260,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                     // TODO: make sure images are loaded before jumping to the anchor
                     // Use a timeout to make sure all components are rendered
                     setTimeout((): void => {
-                        var topPos = (header.offsetTop + domNode.offsetTop) - scrollOffset;
+                    var topPos = (header.offsetTop + domNode.offsetTop) - (scrollOffset || 0);
                         window.scrollTo(0, topPos);
                     }, 0);
                 }

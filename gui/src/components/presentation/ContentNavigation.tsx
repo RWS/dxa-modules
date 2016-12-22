@@ -57,12 +57,12 @@ export interface IContentNavigationProps {
 export const ContentNavigation = (props: IContentNavigationProps): JSX.Element => {
     const { navItems, activeNavItemId } = props;
 
-    return (
+    return Array.isArray(navItems) && (navItems.length > 0) ? (
         <nav className={"sdl-dita-delivery-content-navigation"}>
             <h3>Contents</h3>
             <ul>
                 {
-                    Array.isArray(navItems) && navItems.map((item: IContentNavigationItem, index: number) => {
+                    navItems.map((item: IContentNavigationItem, index: number) => {
                         const isActive = activeNavItemId && activeNavItemId === item.id;
                         return (
                             <li key={index} className={isActive ? "active" : ""}>
@@ -73,5 +73,5 @@ export const ContentNavigation = (props: IContentNavigationProps): JSX.Element =
                 }
             </ul>
         </nav>
-    );
+    ) : <nav className={"sdl-dita-delivery-content-navigation"}/>;
 };
