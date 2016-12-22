@@ -184,6 +184,22 @@ class PageComponent extends TestBase {
                 expect(spy).not.toHaveBeenCalled();
             });
 
+            it("does not renders page navigation content, when page has no navigation items", (): void => {
+                const pageProps: IPageProps = {
+                    showActivityIndicator: false,
+                    content: `<div />`,
+                    onNavigate: (): void => {
+                    }
+                };
+                const page = this._renderComponent(pageProps, target);
+
+                const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
+                expect(domNode).not.toBeNull();
+
+                const contentNavigationNode = domNode.querySelector(".sdl-dita-delivery-content-navigation") as HTMLElement;
+                expect(contentNavigationNode.childNodes.length).toBe(0);
+            });
+
         });
 
         describe(`Page navigation tests.`, (): void => {
