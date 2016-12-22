@@ -513,12 +513,22 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                 const pageContent = document.querySelector(".sdl-dita-delivery-page .page-content") as HTMLElement;
                 if (pageContent) {
                     const header = Html.getActiveHeader(document.body, pageContent, this._searchBarHeight);
-                    if (header) {
+                    if (header && header !== this.state.activePageHeader) {
                         this.setState({
                             activePageHeader: header
                         });
+                        const activeLinkEl = contentNavigation.querySelector("li.active") as HTMLElement;
+                        if (activeLinkEl) {
+                            // Scroll when the active item is out of view
+                            if ((contentNavigation.scrollTop < activeLinkEl.offsetTop && activeLinkEl.offsetTop > contentNavigation.clientHeight) // Below
+                                || activeLinkEl.offsetTop < contentNavigation.scrollTop) { // Above
+                                contentNavigation.scrollTop = activeLinkEl.offsetTop - 30;
+                            }
+                        }
                     }
                 }
+
+
             }
 
         }
