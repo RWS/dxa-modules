@@ -193,12 +193,16 @@ class PageComponent extends TestBase {
 
             beforeEach(() => {
                 hashHistory.push(pageUrl);
+                const margin = Array(100).join("<br/>");
                 const pageProps: IPageProps = {
                     showActivityIndicator: false,
                     content: `<div>
                                 <h1>header-1</h1>
+                                ${margin}
                                 <h2>header-2</h2>
+                                ${margin}
                                 <h3>header-3</h3>
+                                ${margin}
                                 <h4>header-4</h4>
                             </div>`,
                     url: pageUrl,
@@ -217,7 +221,19 @@ class PageComponent extends TestBase {
                 target.parentElement.removeChild(target);
             });
 
-            it("renders page navigation content", (done: () => void): void => {
+            it("renders page navigation content", (): void => {
+                const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
+                expect(domNode).not.toBeNull();
+
+                const hyperlinks = domNode.querySelectorAll(".sdl-dita-delivery-content-navigation a") as NodeListOf<HTMLAnchorElement>;
+                expect(hyperlinks.length).toBe(3);
+
+                expect(hyperlinks.item(0).textContent).toBe("header-1");
+                expect(hyperlinks.item(1).textContent).toBe("header-2");
+                expect(hyperlinks.item(2).textContent).toBe("header-3");
+            });
+
+            it("scrolls to page content item", (done: () => void): void => {
                 const spy = spyOn(window, "scrollTo").and.callThrough();
 
                 const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
@@ -226,12 +242,13 @@ class PageComponent extends TestBase {
                 const hyperlinks = domNode.querySelectorAll(".sdl-dita-delivery-content-navigation a") as NodeListOf<HTMLAnchorElement>;
                 expect(hyperlinks.length).toBe(3);
 
-                for (let i: number = 0, length: number = hyperlinks.length; i < length; i++) {
-                    hyperlinks.item(i).click();
-                }
+                // We only need last item
+                hyperlinks.item(2).click();
 
                 setTimeout((): void => {
-                    expect(spy).toHaveBeenCalledTimes(3);
+                    expect(spy).toHaveBeenCalledTimes(1);
+                    // Scroll position is changed
+                    expect(spy).not.toHaveBeenCalledWith(0, 0);
                     done();
                 }, 100);
             });
