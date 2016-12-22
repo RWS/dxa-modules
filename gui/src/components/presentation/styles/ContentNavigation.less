@@ -9,13 +9,13 @@
         padding: 0 10px 0 0;
 
         li {
-            background: @customColor1;
+            background: fade(@accentColor2, 5%);
             position: relative;
             display: block;
             padding: 10px 15px;
             margin-bottom: -1px;
-            border: 1px solid @customColor2;
-            border-left: 2px solid @customColor3;
+            border: 1px solid @neutralColor5;
+            border-left: 2px solid @accentColor1;
 
             &:first-child {
                 border-top-left-radius: @outerBorderSize;
@@ -30,7 +30,10 @@
 
             a {
                 text-decoration: none;
-                color: @customColor4;
+                color: @neutralColor1;
+                &:hover {
+                    color: @accentColor2;
+                }
             }
         }
     }

@@ -14,8 +14,8 @@ module.exports = function (buildOptions, gulp, runTests, singleRun) {
     var istanbul = require('istanbul');
     var runSequence = require('run-sequence').use(gulp);
     var chalk = require('chalk');
-    var loadCoverage = require('remap-istanbul/lib/loadCoverage').default;
-    var remap = require('remap-istanbul/lib/remap').default;
+    var loadCoverage = require('remap-istanbul/lib/loadCoverage');
+    var remap = require('remap-istanbul/lib/remap');
     var minCoverage = buildOptions.coverage.minCoverage;
     singleRun = singleRun || false;
 
