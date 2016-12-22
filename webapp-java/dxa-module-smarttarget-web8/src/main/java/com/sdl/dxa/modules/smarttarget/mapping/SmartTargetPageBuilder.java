@@ -89,7 +89,7 @@ public class SmartTargetPageBuilder extends AbstractSmartTargetPageBuilder {
     private static ExperimentDimensions getExperimentDimensions(Localization localization, AbstractSmartTargetPageModel stPageModel, String currentRegionName) {
         ExperimentDimensions experimentDimensions = new ExperimentDimensions();
         experimentDimensions.setPublicationId(TcmUtils.buildPublicationTcmUri(localization.getId()));
-        experimentDimensions.setPageId(TcmUtils.buildPageTcmUri(localization.getId(), stPageModel.getId()));
+        experimentDimensions.setPageId(stPageModel.getId());
         experimentDimensions.setRegion(currentRegionName);
         return experimentDimensions;
     }
@@ -130,7 +130,7 @@ public class SmartTargetPageBuilder extends AbstractSmartTargetPageBuilder {
     @Override
     protected void processQueryAndPromotions(Localization localization, AbstractSmartTargetPageModel stPageModel, String promotionViewName) {
         try {
-            TcmUri pageUri = new TcmUri(TcmUtils.buildPageTcmUri(localization.getId(), stPageModel.getId()));
+            TcmUri pageUri = new TcmUri(stPageModel.getId());
 
             final ResultSet resultSet = executeSmartTargetQuery(stPageModel, pageUri);
 

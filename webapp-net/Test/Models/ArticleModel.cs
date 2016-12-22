@@ -1,5 +1,4 @@
 ﻿using Sdl.Web.Common.Models;
-using Sdl.Web.Modules.Core.Models;
 
 namespace Sdl.Web.Modules.Test.Models
 {
@@ -8,13 +7,6 @@ namespace Sdl.Web.Modules.Test.Models
     {
         [SemanticProperty("test:heading")]
         public string Heading
-        {
-            get;
-            set;
-        }
-
-        [SemanticProperty("test:media")]
-        public Image Media
         {
             get;
             set;

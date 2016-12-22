@@ -48,4 +48,9 @@ public class UserProfileImpl extends UserProfile {
     public String getId() {
         return contact.getId().toString();
     }
+
+    @Override
+    public void eraseCredentials() {
+        contact.setExtendedDetail(getPasswordKey(), null);
+    }
 }

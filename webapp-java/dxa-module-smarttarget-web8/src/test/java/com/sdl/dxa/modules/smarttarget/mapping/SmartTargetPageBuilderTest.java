@@ -30,7 +30,7 @@ public class SmartTargetPageBuilderTest {
     public void shouldExpectPageModelIdAsIntegerID() throws SmartTargetException {
         //given 
         SmartTargetPageModel model = new SmartTargetPageModel(new DefaultPageModel());
-        model.setId("128");
+        model.setId("tcm:1-128-64");
         BaseMatcher<TcmUri> uriMatcher = new BaseMatcher<TcmUri>() {
             @Override
             public boolean matches(Object item) {

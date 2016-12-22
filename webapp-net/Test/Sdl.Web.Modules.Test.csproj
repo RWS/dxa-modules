@@ -15,7 +15,7 @@
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <DxaFrameworkVersion>1.7.0-alpha-201611241636</DxaFrameworkVersion>
+    <DxaFrameworkVersion>1.7.0</DxaFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -129,10 +129,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core\Sdl.Web.Modules.Core.csproj">
-      <Project>{32943bd1-4891-4b03-afcd-296658f61581}</Project>
-      <Name>Sdl.Web.Modules.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ExperienceOptimization\Sdl.Web.Modules.SmartTarget.csproj">
       <Project>{492157de-3114-48e5-9a23-965d5fe4da74}</Project>
       <Name>Sdl.Web.Modules.SmartTarget</Name>
