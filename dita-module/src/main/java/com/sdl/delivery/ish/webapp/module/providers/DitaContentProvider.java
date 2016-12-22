@@ -21,7 +21,7 @@ import static com.sdl.webapp.common.util.LocalizationUtils.findPageByPath;
 import static org.dd4t.core.util.TCMURI.Namespace;
 
 /**
- * Dita content provider
+ * Dita content provider.
  */
 @Component
 @Slf4j

@@ -11,7 +11,6 @@ import com.sdl.webapp.common.api.localization.UnknownLocalizationHandler;
 import javax.servlet.ServletRequest;
 import static org.apache.commons.lang3.StringUtils.isNumeric;
 
-
 /**
  * Unknown localization handler.
  */
