@@ -64,9 +64,9 @@ module.exports = function (buildOptions, gulp, runTests, singleRun) {
             jsonReport.writeReport(collector, true);
 
             // Remap the results
-            // collector = remap(loadCoverage(reportPath + 'coverage-final.json'), {
-            //     basePath: currentWorkingDir + buildOptions.sourcesPath.substring(1)
-            // });
+            collector = remap(loadCoverage(reportPath + 'coverage-final.json'), {
+                basePath: currentWorkingDir + buildOptions.sourcesPath.substring(1)
+            });
 
             // Print full coverage report to console
             var reporter = new istanbul.Reporter();
