@@ -517,17 +517,13 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                         this.setState({
                             activePageHeader: header
                         });
+                        // Make sure the active link is in view
                         const activeLinkEl = contentNavigation.querySelector("li.active") as HTMLElement;
                         if (activeLinkEl) {
-                            // Scroll when the active item is out of view
-                            if ((contentNavigation.scrollTop < activeLinkEl.offsetTop && activeLinkEl.offsetTop > contentNavigation.clientHeight) // Below
-                                || activeLinkEl.offsetTop < contentNavigation.scrollTop) { // Above
-                                contentNavigation.scrollTop = activeLinkEl.offsetTop - 30;
-                            }
+                            Html.scrollIntoView(contentNavigation, activeLinkEl);
                         }
                     }
                 }
-
 
             }
 

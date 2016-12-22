@@ -148,6 +148,23 @@ export class Html {
         return undefined;
     }
 
+    /**
+     * Scroll element into view
+     *
+     * @static
+     * @param {HTMLElement} scrollContainter Element which is used for scrolling
+     * @param {HTMLElement} element Element which should be in view
+     *
+     * @memberOf Html
+     */
+    public static scrollIntoView(scrollContainter: HTMLElement, element: HTMLElement): void {
+        // Scroll when the element is out of view
+        if ((scrollContainter.scrollTop < element.offsetTop && element.offsetTop > scrollContainter.clientHeight) // Below
+            || element.offsetTop < scrollContainter.scrollTop) { // Above
+            scrollContainter.scrollTop = element.offsetTop - element.clientHeight;
+        }
+    }
+
     private static _isHeaderAlreadyAdded(navItems: IHeader[], id: string): boolean {
         return navItems.filter(item => item.id === id).length === 1;
     }

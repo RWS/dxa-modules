@@ -65,4 +65,28 @@ describe(`Html utils tests.`, (): void => {
         expect(notFound).toBeUndefined();
     });
 
+    it("calculates the correct max height for a panel", (): void => {
+        // TODO
+    });
+
+    it("sticks a panel to the top when the top scroll is bigger then the header height", (): void => {
+         // TODO
+    });
+
+    it("can get the active header", (): void => {
+         // TODO
+    });
+
+    it("can scroll an element into view when it is above the view port", (): void => {
+         // TODO
+    });
+
+    it("can scroll an element into view when it is below the view port", (): void => {
+         // TODO
+    });
+
+    it("doesn't scroll an element if it's already in the view port", (): void => {
+         // TODO
+    });
+
 });
