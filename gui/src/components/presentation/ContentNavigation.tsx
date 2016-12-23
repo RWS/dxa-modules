@@ -1,3 +1,4 @@
+import { IAppContext } from "components/container/App";
 import { Link } from "react-router";
 import "components/presentation/styles/ContentNavigation";
 
@@ -40,12 +41,12 @@ export interface IContentNavigationProps {
 /**
  * Content Navigation component
  */
-export const ContentNavigation = (props: IContentNavigationProps): JSX.Element => {
+export const ContentNavigation: React.StatelessComponent<IContentNavigationProps> = (props: IContentNavigationProps, context: IAppContext): JSX.Element => {
     const { navItems } = props;
 
     return (
         <nav className={"sdl-dita-delivery-content-navigation"}>
-            <h3>Contents</h3>
+            <h3>{context.services.localizationService.formatMessage("components.contentnavigation.title")}</h3>
             <ul>
                 {
                     Array.isArray(navItems) && navItems.map((item: IContentNavigationItem, index: number) => {
@@ -60,3 +61,7 @@ export const ContentNavigation = (props: IContentNavigationProps): JSX.Element =
         </nav>
     );
 };
+
+ContentNavigation.contextTypes = {
+    services: React.PropTypes.object
+} as React.ValidationMap<IAppContext>;

@@ -1,4 +1,12 @@
 import { IServices } from "interfaces/Services";
+import { PageService } from "test/mocks/services/PageService";
+import { PublicationService } from "test/mocks/services/PublicationService";
+import { TaxonomyService } from "test/mocks/services/TaxonomyService";
+import { localization } from "test/mocks/services/LocalizationService";
+import { IPageService } from "services/interfaces/PageService";
+import { ILocalizationService } from "services/interfaces/LocalizationService";
+import { IPublicationService } from "services/interfaces/PublicationService";
+import { ITaxonomyService } from "services/interfaces/TaxonomyService";
 
 export interface IComponentWithContextContext {
     services: IServices;
@@ -6,7 +14,10 @@ export interface IComponentWithContextContext {
 }
 
 export interface IComponentWithContextProps {
-    services: IServices;
+    localizationService?: ILocalizationService;
+    pageService?: IPageService;
+    publicationService?: IPublicationService;
+    taxonomyService?: ITaxonomyService;
 }
 
 interface IRouter {
@@ -21,6 +32,13 @@ interface IRouter {
     getCurrentLocation: () => { pathname: string };
 }
 
+const services: IServices = {
+    pageService: new PageService(),
+    publicationService: new PublicationService(),
+    localizationService: localization,
+    taxonomyService: new TaxonomyService()
+};
+
 export class ComponentWithContext extends React.Component<IComponentWithContextProps, {}> {
 
     public static childContextTypes: React.ValidationMap<IComponentWithContextContext> = {
@@ -28,11 +46,19 @@ export class ComponentWithContext extends React.Component<IComponentWithContextP
         router: React.PropTypes.object
     };
 
+    public context: IComponentWithContextContext;
+
     public getChildContext(): IComponentWithContextContext {
+        const { pageService, localizationService, publicationService, taxonomyService } = this.props;
         let pathname = "";
         return {
-            services: this.props.services,
-            router: {
+            services: {
+                pageService: pageService || services.pageService,
+                localizationService: localizationService || services.localizationService,
+                publicationService: publicationService || services.publicationService,
+                taxonomyService: taxonomyService || services.taxonomyService
+            },
+            router: this.context.router || {
                 createHref: (): void => { },
                 push: (path: string): void => { pathname = path; },
                 replace: (path: string): void => { pathname = path; },

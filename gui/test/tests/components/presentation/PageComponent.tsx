@@ -1,4 +1,5 @@
 import { Page, IPageProps } from "components/presentation/Page";
+import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 
 // Global Catalina dependencies
 import TestBase = SDL.Client.Test.TestBase;
@@ -180,7 +181,12 @@ class PageComponent extends TestBase {
     }
 
     private _renderComponent(props: IPageProps, target: HTMLElement, children?: {}): Page {
-        return ReactDOM.render(<Page {...props}>{children}</Page>, target) as Page;
+        const comp = ReactDOM.render(
+            <ComponentWithContext>
+                <Page {...props}>{children}</Page>
+            </ComponentWithContext>, target
+        ) as React.Component<{}, {}>;;
+        return TestUtils.findRenderedComponentWithType(comp, Page) as Page;
     }
 }
 
