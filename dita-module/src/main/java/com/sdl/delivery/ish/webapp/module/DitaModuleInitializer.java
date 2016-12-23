@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 @Component
 @ComponentScan("com.sdl.delivery.ish.webapp.module")
 @RegisteredViewModels({
-        @RegisteredViewModel(viewName = "ContentPage", modelClass = DefaultPageModel.class),
+        @RegisteredViewModel(viewName = "GeneralPage", modelClass = DefaultPageModel.class),
         @RegisteredViewModel(viewName = "Main", modelClass = RegionModelImpl.class),
         @RegisteredViewModel(viewName = "Topic", modelClass = Topic.class)
 })
