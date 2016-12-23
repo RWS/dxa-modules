@@ -283,11 +283,16 @@ class PageComponent extends TestBase {
     }
 
     private _renderRoutedComponent(props: IPageProps, target: HTMLElement, children?: {}): Page {
-        return ReactDOM.render(
+        const comp = ReactDOM.render(
             <Router history={hashHistory}>
                 <Route path=":publicationId(/:pageIdOrPublicationTitle)(/:publicationTitle)(/:pageTitle)(/:pageAnchor)"
-                    component={(compProps: IProps) => (<Page anchor={compProps.params.pageAnchor} {...props}>{children}</Page>)} />
-            </Router>, target) as Page;
+                    component={(compProps: IProps) => (
+                        <ComponentWithContext>
+                            <Page anchor={compProps.params.pageAnchor} {...props}>{children}</Page>
+                        </ComponentWithContext>
+                    )} />
+            </Router>, target) as React.Component<{}, {}>;
+        return TestUtils.findRenderedComponentWithType(comp, Page) as Page;
     }
 }
 

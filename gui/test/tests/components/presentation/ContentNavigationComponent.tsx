@@ -1,4 +1,5 @@
 import { ContentNavigation, IContentNavigationItem, IContentNavigationProps } from "components/presentation/ContentNavigation";
+import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 
 // Global Catalina dependencies
 import TestBase = SDL.Client.Test.TestBase;
@@ -46,7 +47,7 @@ class ContentNavigationComponent extends TestBase {
     }
 
     private _renderComponent(props: IContentNavigationProps, target: HTMLElement): void {
-        ReactDOM.render(<ContentNavigation {...props} />, target);
+        ReactDOM.render(<ComponentWithContext><ContentNavigation {...props} /></ComponentWithContext>, target);
     }
 }
 
