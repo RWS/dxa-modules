@@ -1,4 +1,4 @@
-import { Html } from "utils/Html";
+import { Html, IHeader } from "utils/Html";
 import { Url } from "utils/Url";
 import { ContentNavigation, IContentNavigationItem } from "components/presentation/ContentNavigation";
 
@@ -59,6 +59,14 @@ export interface IPageProps {
      */
     scrollOffset?: number;
     /**
+     * Header which is active.
+     * The header inside the page which is the first one visible in the view port.
+     *
+     * @type {IHeader}
+     * @memberOf IPageProps
+     */
+    activeHeader?: IHeader;
+    /**
      * Called whenever navigation to another page is requested
      *
      * @param {string} url Url
@@ -111,12 +119,14 @@ export class Page extends React.Component<IPageProps, IPageState> {
      */
     public render(): JSX.Element {
         const props = this.props;
+        const { activeHeader } = props;
         const { navItems } = this.state;
+        const activeNavItemId = activeHeader ? activeHeader.id : (navItems.length > 0 ? navItems[0].id : undefined);
         return (
             <div className={"sdl-dita-delivery-page"}>
                 {props.showActivityIndicator ? <ActivityIndicator /> : null}
                 {props.error ? <ValidationMessage messageType={SDL.UI.Controls.ValidationMessageType.Error} message={props.error} /> : null}
-                <ContentNavigation navItems={navItems} />
+                <ContentNavigation navItems={navItems} activeNavItemId={activeNavItemId} />
                 {props.children}
                 <article>
                     <article className={"page-content ltr"} dangerouslySetInnerHTML={{ __html: props.content || "" }} />
@@ -203,6 +213,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
             const headerLinks = Html.getHeaderLinks(pageContentNode);
             const updatedNavItems: IContentNavigationItem[] = headerLinks.map(item => {
                 return {
+                    id: item.id,
                     title: item.title,
                     url: url ? Url.getAnchorUrl(url, item.id) : ("#" + item.id)
                 };
@@ -249,7 +260,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                     // TODO: make sure images are loaded before jumping to the anchor
                     // Use a timeout to make sure all components are rendered
                     setTimeout((): void => {
-                        var topPos = (header.offsetTop + domNode.offsetTop) - scrollOffset;
+                    var topPos = (header.offsetTop + domNode.offsetTop) - (scrollOffset || 0);
                         window.scrollTo(0, topPos);
                     }, 0);
                 }

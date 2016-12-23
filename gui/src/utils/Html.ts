@@ -29,6 +29,11 @@ export interface IHeader {
 }
 
 /**
+ * Selector for header elements
+ */
+const HEADER_SELECTOR = "h1, h2, h3";
+
+/**
  * Html utilities
  *
  * @export
@@ -47,7 +52,7 @@ export class Html {
      * @memberOf Html
      */
     public static getHeaderLinks(element: HTMLElement, includeElement: boolean = false): IHeader[] {
-        const headers = element.querySelectorAll("h1, h2, h3");
+        const headers = element.querySelectorAll(HEADER_SELECTOR);
 
         let navItems: IHeader[] = [];
         for (let i: number = 0, length: number = headers.length; i < length; i++) {
@@ -114,6 +119,50 @@ export class Html {
             maxHeight = (viewPortHeight - offsetTop - fixedHeaderHeight + scrollTop) + "px";
         }
         return { sticksToTop, maxHeight };
+    }
+
+    /**
+     * Get the active header in the document
+     *
+     * @static
+     * @param {HTMLElement} scrollContainter Element which is used for scrolling
+     * @param {HTMLElement} element Source element to search in
+     * @param {number} offsetTop Offset on the top. For example a header
+     * @returns {(IHeader | undefined)}
+     *
+     * @memberOf Html
+     */
+    public static getActiveHeader(scrollContainter: HTMLElement, element: HTMLElement, offsetTop: number): IHeader | undefined {
+        const top = scrollContainter.scrollTop;
+        const headers = element.querySelectorAll(HEADER_SELECTOR);
+        for (let i = 0, length = headers.length; i < length; i++) {
+            const headerEl = <HTMLElement>headers.item(i);
+            if ((headerEl.offsetTop + offsetTop) >= top) {
+                const headerLinks = Html.getHeaderLinks(element, true);
+                const matchingHeaders = headerLinks.filter(item => item.element === headerEl);
+                if (matchingHeaders.length > 0) {
+                    return matchingHeaders[0];
+                }
+            }
+        }
+        return undefined;
+    }
+
+    /**
+     * Scroll element into view
+     *
+     * @static
+     * @param {HTMLElement} scrollContainter Element which is used for scrolling
+     * @param {HTMLElement} element Element which should be in view
+     *
+     * @memberOf Html
+     */
+    public static scrollIntoView(scrollContainter: HTMLElement, element: HTMLElement): void {
+        // Scroll when the element is out of view
+        if ((scrollContainter.scrollTop < element.offsetTop && element.offsetTop > scrollContainter.clientHeight) // Below
+            || element.offsetTop < scrollContainter.scrollTop) { // Above
+            scrollContainter.scrollTop = element.offsetTop - element.clientHeight;
+        }
     }
 
     private static _isHeaderAlreadyAdded(navItems: IHeader[], id: string): boolean {

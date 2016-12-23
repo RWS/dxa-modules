@@ -10,6 +10,13 @@ import "components/presentation/styles/ContentNavigation";
  */
 export interface IContentNavigationItem {
     /**
+     * Identifier
+     *
+     * @type {string}
+     * @memberOf IContentNavigationItem
+     */
+    id: string;
+    /**
      * Page content
      *
      * @type {string | null}
@@ -36,22 +43,30 @@ export interface IContentNavigationProps {
      * @type {IContentNavigationItem}
      */
     navItems?: IContentNavigationItem[];
+    /**
+     * Active item id
+     *
+     * @type {string}
+     * @memberOf IContentNavigationProps
+     */
+    activeNavItemId?: string;
 }
 
 /**
  * Content Navigation component
  */
 export const ContentNavigation: React.StatelessComponent<IContentNavigationProps> = (props: IContentNavigationProps, context: IAppContext): JSX.Element => {
-    const { navItems } = props;
+    const { navItems, activeNavItemId } = props;
 
-    return (
+    return Array.isArray(navItems) && (navItems.length > 0) ? (
         <nav className={"sdl-dita-delivery-content-navigation"}>
             <h3>{context.services.localizationService.formatMessage("components.contentnavigation.title")}</h3>
             <ul>
                 {
-                    Array.isArray(navItems) && navItems.map((item: IContentNavigationItem, index: number) => {
+                    navItems.map((item: IContentNavigationItem, index: number) => {
+                        const isActive = activeNavItemId && activeNavItemId === item.id;
                         return (
-                            <li key={index}>
+                            <li key={index} className={isActive ? "active" : ""}>
                                 <Link to={item.url}>{item.title}</Link>
                             </li>
                         );
@@ -59,7 +74,7 @@ export const ContentNavigation: React.StatelessComponent<IContentNavigationProps
                 }
             </ul>
         </nav>
-    );
+    ) : <nav className={"sdl-dita-delivery-content-navigation"}/>;
 };
 
 ContentNavigation.contextTypes = {
