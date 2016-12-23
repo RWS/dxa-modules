@@ -8,7 +8,7 @@ import { Page } from "components/presentation/Page";
 import { SearchBar } from "components/presentation/SearchBar";
 import { Breadcrumbs } from "components/presentation/Breadcrumbs";
 
-import { Html } from "utils/Html";
+import { Html, IHeader } from "utils/Html";
 import { TcmId } from "utils/TcmId";
 import { Url } from "utils/Url";
 
@@ -118,6 +118,13 @@ export interface IPublicationContentState {
      * @memberOf IPublicationContentState
      */
     isTocExpanding?: boolean;
+    /**
+     * Active header inside the page
+     *
+     * @type {IHeader}
+     * @memberOf IPublicationContentState
+     */
+    activePageHeader?: IHeader;
 }
 
 interface ISelectedPage {
@@ -301,7 +308,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
      * @returns {JSX.Element}
      */
     public render(): JSX.Element {
-        const { isPageLoading, activeTocItemPath, selectedTocItem, publicationTitle } = this.state;
+        const { isPageLoading, activeTocItemPath, selectedTocItem, publicationTitle, activePageHeader } = this.state;
         const { pageIdOrPublicationTitle, pageTitle, pageAnchor } = this.props.params;
         const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
         const { services, router } = this.context;
@@ -332,7 +339,8 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     // Wait for the selected toc item to be set to set the anchor
                     // This is needed to make sure components on top are rendered first (eg bread crumbs)
                     anchor={selectedTocItem ? pageAnchor : undefined}
-                    scrollOffset={this._topBarHeight}>
+                    scrollOffset={this._topBarHeight}
+                    activeHeader={activePageHeader}>
                     <Toc
                         activeItemPath={activeTocItemPath}
                         rootItems={rootItems}
@@ -371,9 +379,9 @@ export class PublicationContent extends React.Component<IPublicationContentProps
             }
         }
 
-        window.addEventListener("scroll", this._fixTocPanel.bind(this));
-        window.addEventListener("resize", this._fixTocPanel.bind(this));
-        this._fixTocPanel();
+        window.addEventListener("scroll", this._fixPanels.bind(this));
+        window.addEventListener("resize", this._fixPanels.bind(this));
+        this._fixPanels();
     }
 
     /**
@@ -382,8 +390,8 @@ export class PublicationContent extends React.Component<IPublicationContentProps
     public componentWillUnmount(): void {
         this._isUnmounted = true;
 
-        window.removeEventListener("scroll", this._fixTocPanel.bind(this));
-        window.removeEventListener("resize", this._fixTocPanel.bind(this));
+        window.removeEventListener("scroll", this._fixPanels.bind(this));
+        window.removeEventListener("resize", this._fixPanels.bind(this));
     }
 
     private _onTocSelectionChanged(sitemapItem: ITaxonomy, path: string[]): void {
@@ -463,7 +471,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
             });
     }
 
-    private _fixTocPanel(): void {
+    private _fixPanels(): void {
         if (this._isUnmounted) {
             return;
         }
@@ -490,9 +498,9 @@ export class PublicationContent extends React.Component<IPublicationContentProps
             if (contentNavigation) {
                 contentNavigation.style.maxHeight = maxHeight;
                 if (sticksToTop) {
+                    const page = document.querySelector(".sdl-dita-delivery-page") as HTMLElement;
                     contentNavigation.classList.add(FIXED_NAV_CLASS);
                     // Set left position
-                    const page = document.querySelector(".sdl-dita-delivery-page") as HTMLElement;
                     if (page) {
                         contentNavigation.style.left = (page.offsetLeft + page.clientWidth - contentNavigation.offsetWidth) + "px";
                     }
@@ -500,6 +508,23 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     contentNavigation.classList.remove(FIXED_NAV_CLASS);
                     contentNavigation.style.left = null;
                 }
+
+                // Update active title inside content navigation panel
+                const pageContent = document.querySelector(".sdl-dita-delivery-page .page-content") as HTMLElement;
+                if (pageContent) {
+                    const header = Html.getActiveHeader(document.body, pageContent, this._searchBarHeight);
+                    if (header && header !== this.state.activePageHeader) {
+                        this.setState({
+                            activePageHeader: header
+                        });
+                        // Make sure the active link is in view
+                        const activeLinkEl = contentNavigation.querySelector("li.active") as HTMLElement;
+                        if (activeLinkEl) {
+                            Html.scrollIntoView(contentNavigation, activeLinkEl);
+                        }
+                    }
+                }
+
             }
 
         }

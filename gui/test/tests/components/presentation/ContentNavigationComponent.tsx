@@ -11,9 +11,11 @@ class ContentNavigationComponent extends TestBase {
             const target = super.createTargetElement();
 
             const navItems: IContentNavigationItem[] = [{
+                id: "title_1",
                 url: "/123/456/publication/Title-1",
                 title: "Title-1"
             }, {
+                id: "title_2",
                 url: "/123/567/publication/Title-2",
                 title: "Title-2"
             }];
