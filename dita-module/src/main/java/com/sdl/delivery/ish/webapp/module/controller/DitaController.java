@@ -6,10 +6,7 @@ import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.content.ContentProvider;
 import com.sdl.webapp.common.api.content.ContentProviderException;
 import com.sdl.webapp.common.api.formats.DataFormatter;
-import com.sdl.webapp.common.api.model.EntityModel;
 import com.sdl.webapp.common.api.model.PageModel;
-import com.sdl.webapp.common.api.model.RegionModel;
-import com.sdl.webapp.common.controller.AbstractController;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -29,7 +26,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
  */
 @Slf4j
 @Controller
-public class DitaController extends AbstractController {
+public class DitaController {
 
     @Autowired
     private WebRequestContext webRequestContext;
@@ -61,44 +58,13 @@ public class DitaController extends AbstractController {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/api/page/{publicationId}/{pageId}/**",
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ModelAndView getPublication(@PathVariable String publicationId,
-                                       @PathVariable String pageId,
-                                       final HttpServletRequest request) {
+    public ModelAndView getPage(@PathVariable String publicationId,
+                                @PathVariable String pageId,
+                                final HttpServletRequest request) throws ContentProviderException {
         final DitaLocalization localization = (DitaLocalization) webRequestContext.getLocalization();
         localization.setPublicationId(publicationId);
         final PageModel page;
-        try {
-            page = contentProvider.getPageModel(pageId, localization);
-            this.enrichEmbeddedModels(page, request);
-            return dataFormatters.view(page);
-        } catch (ContentProviderException e) {
-            log.error("Unable to get page model.", e);
-        }
-        return null;
+        page = contentProvider.getPageModel(pageId, localization);
+        return dataFormatters.view(page);
     }
-
-    /**
-     * Enriches all the Region/Entity Models embedded in the given Page Model.
-     * Used by <see cref="FormatDataAttribute"/> to get all embedded Models enriched without rendering any Views.
-     *
-     * @param model   The Page Model to enrich.
-     * @param request http request
-     */
-    private void enrichEmbeddedModels(PageModel model, HttpServletRequest request) {
-        if (model == null) {
-            return;
-        }
-
-        for (RegionModel region : model.getRegions()) {
-            // NOTE: Currently not enriching the Region Model itself, because we don't support custom Region
-            // Controllers (yet).
-            for (int i = 0; i < region.getEntities().size(); i++) {
-                EntityModel entity = region.getEntities().get(i);
-                if (entity != null && entity.getMvcData() != null) {
-                    region.getEntities().set(i, enrichEntityModel(entity, request));
-                }
-            }
-        }
-    }
-
 }
