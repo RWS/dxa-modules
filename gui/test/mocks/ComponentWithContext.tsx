@@ -46,6 +46,10 @@ export class ComponentWithContext extends React.Component<IComponentWithContextP
         router: React.PropTypes.object
     };
 
+    public static contextTypes: React.ValidationMap<IComponentWithContextContext> = {
+        router: React.PropTypes.object
+    };
+
     public context: IComponentWithContextContext;
 
     public getChildContext(): IComponentWithContextContext {

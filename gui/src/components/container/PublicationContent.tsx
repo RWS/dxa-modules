@@ -349,7 +349,6 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                         publicationTitle={publicationTitle || ""}
                         loadItemsPath={taxonomyService.getSitemapPath.bind(taxonomyService)}
                         selectedItem={selectedTocItem}
-                        localizationService={localizationService}
                         />
                 </Page>
             </section>

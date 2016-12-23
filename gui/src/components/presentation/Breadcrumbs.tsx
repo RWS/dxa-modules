@@ -1,10 +1,10 @@
 import { Promise } from "es6-promise";
 import { Link } from "react-router";
 import { ITaxonomy } from "interfaces/Taxonomy";
-import { ILocalizationService } from "services/interfaces/LocalizationService";
-import "components/presentation/styles/Breadcrumbs";
-
+import { IAppContext } from "components/container/App";
 import { Url } from "utils/Url";
+
+import "components/presentation/styles/Breadcrumbs";
 
 /**
  * Breadcrumbs props
@@ -35,13 +35,6 @@ export interface IBreadcrumbsProps {
      * Load items path for a specific item
      */
     loadItemsPath: (publicationId: string, parentId: string) => Promise<ITaxonomy[]>;
-    /**
-     * Localization service
-     *
-     * @type {ILocalizationService}
-     * @memberOf IBreadcrumbsProps
-     */
-    localizationService: ILocalizationService;
 }
 
 /**
@@ -63,6 +56,25 @@ export interface IBreadcrumbsState {
  * Breadcrumbs
  */
 export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbsState> {
+
+    /**
+     * Context types
+     *
+     * @static
+     * @type {React.ValidationMap<IAppContext>}
+     * @memberOf Breadcrumbs
+     */
+    public static contextTypes: React.ValidationMap<IAppContext> = {
+        services: React.PropTypes.object.isRequired
+    };
+
+    /**
+     * Global context
+     *
+     * @type {IAppContext}
+     * @memberOf Breadcrumbs
+     */
+    public context: IAppContext;
 
     private _isUnmounted: boolean = false;
 
@@ -144,7 +156,8 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
      */
     public render(): JSX.Element {
         const { itemPath } = this.state;
-        const { publicationId, publicationTitle, localizationService } = this.props;
+        const { publicationId, publicationTitle } = this.props;
+        const { localizationService } = this.context.services;
         const { selectedItem } = this.props;
         const currentUrl = selectedItem ? selectedItem.url : null;
         const homeLabel = localizationService.formatMessage("components.breadcrumbs.home");

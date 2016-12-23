@@ -185,7 +185,7 @@ class PageComponent extends TestBase {
             <ComponentWithContext>
                 <Page {...props}>{children}</Page>
             </ComponentWithContext>, target
-        ) as React.Component<{}, {}>;;
+        ) as React.Component<{}, {}>;
         return TestUtils.findRenderedComponentWithType(comp, Page) as Page;
     }
 }
