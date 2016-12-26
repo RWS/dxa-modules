@@ -1,10 +1,19 @@
+import { Router, Route, hashHistory } from "react-router";
 import { Page, IPageProps } from "components/presentation/Page";
+import { Url } from "utils/Url";
+import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 
 // Global Catalina dependencies
 import TestBase = SDL.Client.Test.TestBase;
 import ActivityIndicator = SDL.ReactComponents.ActivityIndicator;
 import ValidationMessage = SDL.ReactComponents.ValidationMessage;
 const TestUtils = React.addons.TestUtils;
+
+interface IProps {
+    params: {
+        pageAnchor?: string;
+    };
+}
 
 class PageComponent extends TestBase {
 
@@ -91,7 +100,7 @@ class PageComponent extends TestBase {
             });
 
             it("does not handle external links", (): void => {
-                const pageProps = {
+                const pageProps: IPageProps = {
                     showActivityIndicator: false,
                     content: `<div>
                                 <a href="http://doc.sdl.com"/>
@@ -125,7 +134,7 @@ class PageComponent extends TestBase {
             });
 
             it("does handle internal links", (): void => {
-                const pageProps = {
+                const pageProps: IPageProps = {
                     showActivityIndicator: false,
                     content: `<div>
                                 <a href="/1656863/164363"/>
@@ -154,14 +163,14 @@ class PageComponent extends TestBase {
             });
 
             it("does not handle links that are not part of the page content", (): void => {
-                const pageProps = {
+                const pageProps: IPageProps = {
                     showActivityIndicator: false,
                     content: `<div />`,
                     onNavigate: (): void => {
                     }
                 };
                 const spy = spyOn(pageProps, "onNavigate").and.callThrough();
-                const page = this._renderComponent(pageProps, target, (<a href="/1656863/164363" onClick={(e):void => { e.preventDefault(); }}/>));
+                const page = this._renderComponent(pageProps, target, (<a href="/1656863/164363" onClick={(e): void => { e.preventDefault(); } } />));
 
                 const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
                 expect(domNode).not.toBeNull();
@@ -176,11 +185,114 @@ class PageComponent extends TestBase {
                 expect(spy).not.toHaveBeenCalled();
             });
 
+            it("does not renders page navigation content, when page has no navigation items", (): void => {
+                const pageProps: IPageProps = {
+                    showActivityIndicator: false,
+                    content: `<div />`,
+                    onNavigate: (): void => {
+                    }
+                };
+                const page = this._renderComponent(pageProps, target);
+
+                const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
+                expect(domNode).not.toBeNull();
+
+                const contentNavigationNode = domNode.querySelector(".sdl-dita-delivery-content-navigation") as HTMLElement;
+                expect(contentNavigationNode.childNodes.length).toBe(0);
+            });
+
         });
+
+        describe(`Page navigation tests.`, (): void => {
+            const target = super.createTargetElement();
+            const pageUrl = Url.getPageUrl("123", "456", "publication", "page");
+            let page: Page;
+
+            beforeEach(() => {
+                hashHistory.push(pageUrl);
+                const margin = Array(100).join("<br/>");
+                const pageProps: IPageProps = {
+                    showActivityIndicator: false,
+                    content: `<div>
+                                <h1>header-1</h1>
+                                ${margin}
+                                <h2>header-2</h2>
+                                ${margin}
+                                <h3>header-3</h3>
+                                ${margin}
+                                <h4>header-4</h4>
+                            </div>`,
+                    url: pageUrl,
+                    onNavigate: (): void => {
+                    }
+                };
+                page = this._renderRoutedComponent(pageProps, target);
+            });
+
+            afterEach(() => {
+                const domNode = ReactDOM.findDOMNode(target);
+                ReactDOM.unmountComponentAtNode(domNode);
+            });
+
+            afterAll(() => {
+                target.parentElement.removeChild(target);
+            });
+
+            it("renders page navigation content", (): void => {
+                const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
+                expect(domNode).not.toBeNull();
+
+                const hyperlinks = domNode.querySelectorAll(".sdl-dita-delivery-content-navigation a") as NodeListOf<HTMLAnchorElement>;
+                expect(hyperlinks.length).toBe(3);
+
+                expect(hyperlinks.item(0).textContent).toBe("header-1");
+                expect(hyperlinks.item(1).textContent).toBe("header-2");
+                expect(hyperlinks.item(2).textContent).toBe("header-3");
+            });
+
+            it("scrolls to page content item", (done: () => void): void => {
+                const spy = spyOn(window, "scrollTo").and.callThrough();
+
+                const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
+                expect(domNode).not.toBeNull();
+
+                const hyperlinks = domNode.querySelectorAll(".sdl-dita-delivery-content-navigation a") as NodeListOf<HTMLAnchorElement>;
+                expect(hyperlinks.length).toBe(3);
+
+                // We only need last item
+                hyperlinks.item(2).click();
+
+                setTimeout((): void => {
+                    expect(spy).toHaveBeenCalledTimes(1);
+                    // Scroll position is changed
+                    expect(spy).not.toHaveBeenCalledWith(0, 0);
+                    done();
+                }, 100);
+            });
+        });
+
     }
 
     private _renderComponent(props: IPageProps, target: HTMLElement, children?: {}): Page {
-        return ReactDOM.render(<Page {...props}>{children}</Page>, target) as Page;
+        const comp = ReactDOM.render(
+            <ComponentWithContext>
+                <Page {...props}>{children}</Page>
+            </ComponentWithContext>, target
+        ) as React.Component<{}, {}>;
+        return TestUtils.findRenderedComponentWithType(comp, Page) as Page;
+    }
+
+    private _renderRoutedComponent(props: IPageProps, target: HTMLElement, children?: {}): Page {
+        const comp = ReactDOM.render(
+            <Router history={hashHistory}>
+                <Route path=":publicationId(/:pageIdOrPublicationTitle)(/:publicationTitle)(/:pageTitle)(/:pageAnchor)"
+                    component={(compProps: IProps) => (
+                        <ComponentWithContext>
+                            <Page anchor={compProps.params.pageAnchor} {...props}>{children}</Page>
+                        </ComponentWithContext>
+                    )} />
+            </Router>, target) as React.Component<{}, {}>;
+        return TestUtils.findRenderedComponentWithType(comp, Page) as Page;
     }
 }
 

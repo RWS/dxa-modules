@@ -3,9 +3,6 @@ import { Home } from "components/container/Home";
 import { PublicationContent } from "components/container/PublicationContent";
 
 import { PageService } from "test/mocks/services/PageService";
-import { PublicationService } from "test/mocks/services/PublicationService";
-import { TaxonomyService } from "test/mocks/services/TaxonomyService";
-import { localization } from "test/mocks/services/LocalizationService";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 import { hashHistory } from "react-router";
 
@@ -15,10 +12,7 @@ import ActivityIndicator = SDL.ReactComponents.ActivityIndicator;
 const TestUtils = React.addons.TestUtils;
 
 const services = {
-    pageService: new PageService(),
-    publicationService: new PublicationService,
-    localizationService: localization,
-    taxonomyService: new TaxonomyService()
+    pageService: new PageService()
 };
 
 class HomeComponent extends TestBase {
@@ -52,7 +46,7 @@ class HomeComponent extends TestBase {
     private _renderComponent(target: HTMLElement): Home {
         return ReactDOM.render(
             (
-                <ComponentWithContext services={services}>
+                <ComponentWithContext {...services}>
                     <Router history={hashHistory}>
                         <Route path="*" component={() => (<Home><PublicationContent params={{ publicationId: "ish:123-1-1" }} /></Home>)} />
                     </Router>
