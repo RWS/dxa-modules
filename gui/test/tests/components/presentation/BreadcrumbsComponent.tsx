@@ -98,7 +98,7 @@ class BreadcrumbsComponent extends TestBase {
 
                 // Use a timeout to allow the DataStore to return a promise with the data
                 setTimeout((): void => {
-                    const nodes = domNode.querySelectorAll(".home, a");
+                    const nodes = domNode.querySelectorAll(".home, .abstract, a");
                     expect(nodes.length).toBe(4);
                     expect(nodes.item(0).getAttribute("title")).toBe("mock-components.breadcrumbs.home");
                     expect(nodes.item(1).textContent).toBe(data.publicationTitle);
@@ -144,7 +144,7 @@ class BreadcrumbsComponent extends TestBase {
 
                 // Use a timeout to allow the DataStore to return a promise with the data
                 setTimeout((): void => {
-                    const hyperlinksNodes = domNode.querySelectorAll(".home, a");
+                    const hyperlinksNodes = domNode.querySelectorAll(".home, .abstract, a");
                     expect(hyperlinksNodes.length).toBe(4);
 
                     const childHyperlink = hyperlinksNodes[3] as HTMLElement;
@@ -162,7 +162,7 @@ class BreadcrumbsComponent extends TestBase {
                             expect(updatedItems[0].textContent).toBe("mock-components.breadcrumbs.home");
                             expect(updatedItems[1].querySelector("a")).not.toBeNull();
                             expect(updatedItems[1].textContent).toBe(data.publicationTitle);
-                            expect(updatedItems[2].querySelector("a")).not.toBeNull();
+                            expect(updatedItems[2].querySelector(".abstract")).not.toBeNull();
                             expect(updatedItems[2].textContent).toBe(itemsPath[0].title);
                             expect(updatedItems[3].querySelector("a")).toBeNull();
                             expect(updatedItems[3].textContent).toBe(selectedItem.title);

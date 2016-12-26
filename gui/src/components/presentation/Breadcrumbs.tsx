@@ -173,7 +173,7 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
                                                 (item.url) ?
                                                     <Link title={item.title} to={item.url}>{item.title}</Link>
                                                     :
-                                                    <Link title={item.title} to={`${Url.getPublicationUrl(publicationId, publicationTitle)}`}>{item.title}</Link>
+                                                    <span className="abstract">{item.title}</span>
                                                 : <span className="active">{item.title}</span>
                                         }
                                         {index < (itemPath.length - 1) ? <span className="separator" /> : ""}
