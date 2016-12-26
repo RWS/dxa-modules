@@ -1,33 +1,24 @@
 {
-  "Id": "ish:1656866-1-512",
-  "Title": "User Guide",
-  "Url": null,
-  "IsAbstract": true,
+  "Id": "ish:1656866-164466-16",
+  "Title": "Anruffunktionen",
+  "Url": "/1656866/164466/publication-mp330/anruffunktionen",
+  "IsAbstract": false,
   "HasChildNodes": true,
   "Items": [
     {
-      "Id": "ish:1656866-164466-16",
-      "Title": "Anruffunktionen",
-      "Url": "/1656866/164466/publication-mp330/anruffunktionen",
+      "Id": "ish:1656866-164210-16",
+      "Title": "Anrufen",
+      "Url": "/1656866/164210/publication-mp330/anrufen",
       "IsAbstract": false,
       "HasChildNodes": true,
       "Items": [
         {
-          "Id": "ish:1656866-164210-16",
-          "Title": "Anrufen",
-          "Url": "/1656866/164210/publication-mp330/anrufen",
+          "Id": "ish:1656866-164361-16",
+          "Title": "Kurzwahl",
+          "Url": "/1656866/164361/publication-mp330/kurzwahl",
           "IsAbstract": false,
-          "HasChildNodes": true,
-          "Items": [
-            {
-              "Id": "ish:1656866-164361-16",
-              "Title": "Kurzwahl",
-              "Url": "/1656866/164361/publication-mp330/kurzwahl",
-              "IsAbstract": false,
-              "HasChildNodes": false,
-              "Items": []
-            }
-          ]
+          "HasChildNodes": false,
+          "Items": []
         }
       ]
     }

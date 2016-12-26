@@ -1,26 +1,17 @@
 {
-  "Id": "ish:1656863-1-512",
-  "Title": "User Guide",
-  "Url": null,
-  "IsAbstract": true,
+  "Id": "ish:1656863-164479-16",
+  "Title": "Messages",
+  "Url": "/1656863/164479/publication-mp330/messages",
+  "IsAbstract": false,
   "HasChildNodes": true,
   "Items": [
     {
-      "Id": "ish:1656863-164479-16",
-      "Title": "Messages",
-      "Url": "/1656863/164479/publication-mp330/messages",
+      "Id": "ish:1656863-164452-16",
+      "Title": "Deleting messages",
+      "Url": "/1656863/164452/publication-mp330/deleting-messages",
       "IsAbstract": false,
-      "HasChildNodes": true,
-      "Items": [
-        {
-          "Id": "ish:1656863-164452-16",
-          "Title": "Deleting messages",
-          "Url": "/1656863/164452/publication-mp330/deleting-messages",
-          "IsAbstract": false,
-          "HasChildNodes": false,
-          "Items": []
-        }
-      ]
+      "HasChildNodes": false,
+      "Items": []
     }
   ]
 }

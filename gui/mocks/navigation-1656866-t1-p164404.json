@@ -1,26 +1,17 @@
 {
-  "Id": "ish:1656866-1-512",
-  "Title": "User Guide",
-  "Url": null,
-  "IsAbstract": true,
+  "Id": "ish:1656866-164237-16",
+  "Title": "Spiele",
+  "Url": "/1656866/164237/publication-mp330/spiele",
+  "IsAbstract": false,
   "HasChildNodes": true,
   "Items": [
     {
-      "Id": "ish:1656866-164237-16",
-      "Title": "Spiele",
-      "Url": "/1656866/164237/publication-mp330/spiele",
+      "Id": "ish:1656866-164404-16",
+      "Title": "DJ Spiel",
+      "Url": "/1656866/164404/publication-mp330/dj-spiel",
       "IsAbstract": false,
-      "HasChildNodes": true,
-      "Items": [
-        {
-          "Id": "ish:1656866-164404-16",
-          "Title": "DJ Spiel",
-          "Url": "/1656866/164404/publication-mp330/dj-spiel",
-          "IsAbstract": false,
-          "HasChildNodes": false,
-          "Items": []
-        }
-      ]
+      "HasChildNodes": false,
+      "Items": []
     }
   ]
 }

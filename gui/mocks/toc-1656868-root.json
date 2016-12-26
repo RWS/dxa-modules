@@ -1,9 +1,73 @@
 [
   {
-    "Id": "ish:1656868-1-512",
-    "Title": "User Guide",
-    "Url": null,
-    "IsAbstract": true,
+    "Id": "ish:1656868-164225-16",
+    "Title": "Geachte klant",
+    "Url": "/1656868/164225/publication-mp330/geachte-klant",
+    "IsAbstract": false,
+    "HasChildNodes": false,
+    "Items": []
+  },
+  {
+    "Id": "ish:1656868-164249-16",
+    "Title": "Voor uw veiligheid",
+    "Url": "/1656868/164249/publication-mp330/voor-uw-veiligheid",
+    "IsAbstract": false,
+    "HasChildNodes": false,
+    "Items": []
+  },
+  {
+    "Id": "ish:1656868-164233-16",
+    "Title": "De telefoon",
+    "Url": "/1656868/164233/publication-mp330/de-telefoon",
+    "IsAbstract": false,
+    "HasChildNodes": true,
+    "Items": []
+  },
+  {
+    "Id": "ish:1656868-164400-16",
+    "Title": "Aan de slag",
+    "Url": "/1656868/164400/publication-mp330/aan-de-slag",
+    "IsAbstract": false,
+    "HasChildNodes": true,
+    "Items": []
+  },
+  {
+    "Id": "ish:1656868-164470-16",
+    "Title": "Algemene functies",
+    "Url": "/1656868/164470/publication-mp330/algemene-functies",
+    "IsAbstract": false,
+    "HasChildNodes": true,
+    "Items": []
+  },
+  {
+    "Id": "ish:1656868-164481-16",
+    "Title": "Berichten",
+    "Url": "/1656868/164481/publication-mp330/berichten",
+    "IsAbstract": false,
+    "HasChildNodes": true,
+    "Items": []
+  },
+  {
+    "Id": "ish:1656868-164241-16",
+    "Title": "Spelletjes",
+    "Url": "/1656868/164241/publication-mp330/spelletjes",
+    "IsAbstract": false,
+    "HasChildNodes": true,
+    "Items": []
+  },
+  {
+    "Id": "ish:1656868-164373-16",
+    "Title": "Muziekfuncties",
+    "Url": "/1656868/164373/publication-mp330/muziekfuncties",
+    "IsAbstract": false,
+    "HasChildNodes": true,
+    "Items": []
+  },
+  {
+    "Id": "ish:1656868-164303-16",
+    "Title": "Telefoonlijst",
+    "Url": "/1656868/164303/publication-mp330/telefoonlijst",
+    "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
   }

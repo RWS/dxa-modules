@@ -1,17 +1,8 @@
 {
-  "Id": "ish:1656874-1-512",
-  "Title": "McAfee Virtual Technician 4.2",
-  "Url": null,
-  "IsAbstract": true,
+  "Id": "ish:1656874-137347-16",
+  "Title": "Technical support options",
+  "Url": "/1656874/137347/publication-mcafee-virtual-technician-4-2/technical-support-options",
+  "IsAbstract": false,
   "HasChildNodes": true,
-  "Items": [
-    {
-      "Id": "ish:1656874-137347-16",
-      "Title": "Technical support options",
-      "Url": "/1656874/137347/publication-mcafee-virtual-technician-4-2/technical-support-options",
-      "IsAbstract": false,
-      "HasChildNodes": true,
-      "Items": []
-    }
-  ]
+  "Items": []
 }

@@ -1,26 +1,17 @@
 {
-  "Id": "ish:1420746-1-512",
-  "Title": "User Guide",
-  "Url": null,
-  "IsAbstract": true,
+  "Id": "ish:1420746-164301-16",
+  "Title": "Phone book",
+  "Url": "/1420746/164301/publication-mp330/phone-book",
+  "IsAbstract": false,
   "HasChildNodes": true,
   "Items": [
     {
-      "Id": "ish:1420746-164301-16",
-      "Title": "Phone book",
-      "Url": "/1420746/164301/publication-mp330/phone-book",
+      "Id": "ish:1420746-164428-16",
+      "Title": "Searching for a contact",
+      "Url": "/1420746/164428/publication-mp330/searching-for-a-contact",
       "IsAbstract": false,
-      "HasChildNodes": true,
-      "Items": [
-        {
-          "Id": "ish:1420746-164428-16",
-          "Title": "Searching for a contact",
-          "Url": "/1420746/164428/publication-mp330/searching-for-a-contact",
-          "IsAbstract": false,
-          "HasChildNodes": false,
-          "Items": []
-        }
-      ]
+      "HasChildNodes": false,
+      "Items": []
     }
   ]
 }

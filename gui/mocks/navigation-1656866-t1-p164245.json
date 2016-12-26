@@ -1,17 +1,8 @@
 {
-  "Id": "ish:1656866-1-512",
-  "Title": "User Guide",
-  "Url": null,
-  "IsAbstract": true,
-  "HasChildNodes": true,
-  "Items": [
-    {
-      "Id": "ish:1656866-164245-16",
-      "Title": "Sicherheitshinweise",
-      "Url": "/1656866/164245/publication-mp330/sicherheitshinweise",
-      "IsAbstract": false,
-      "HasChildNodes": false,
-      "Items": []
-    }
-  ]
+  "Id": "ish:1656866-164245-16",
+  "Title": "Sicherheitshinweise",
+  "Url": "/1656866/164245/publication-mp330/sicherheitshinweise",
+  "IsAbstract": false,
+  "HasChildNodes": false,
+  "Items": []
 }

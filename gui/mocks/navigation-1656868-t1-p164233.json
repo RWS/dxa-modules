@@ -1,17 +1,8 @@
 {
-  "Id": "ish:1656868-1-512",
-  "Title": "User Guide",
-  "Url": null,
-  "IsAbstract": true,
+  "Id": "ish:1656868-164233-16",
+  "Title": "De telefoon",
+  "Url": "/1656868/164233/publication-mp330/de-telefoon",
+  "IsAbstract": false,
   "HasChildNodes": true,
-  "Items": [
-    {
-      "Id": "ish:1656868-164233-16",
-      "Title": "De telefoon",
-      "Url": "/1656868/164233/publication-mp330/de-telefoon",
-      "IsAbstract": false,
-      "HasChildNodes": true,
-      "Items": []
-    }
-  ]
+  "Items": []
 }

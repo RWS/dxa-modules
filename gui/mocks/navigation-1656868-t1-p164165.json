@@ -1,26 +1,17 @@
 {
-  "Id": "ish:1656868-1-512",
-  "Title": "User Guide",
-  "Url": null,
-  "IsAbstract": true,
+  "Id": "ish:1656868-164373-16",
+  "Title": "Muziekfuncties",
+  "Url": "/1656868/164373/publication-mp330/muziekfuncties",
+  "IsAbstract": false,
   "HasChildNodes": true,
   "Items": [
     {
-      "Id": "ish:1656868-164373-16",
-      "Title": "Muziekfuncties",
-      "Url": "/1656868/164373/publication-mp330/muziekfuncties",
+      "Id": "ish:1656868-164165-16",
+      "Title": "Naar de radio luisteren",
+      "Url": "/1656868/164165/publication-mp330/naar-de-radio-luisteren",
       "IsAbstract": false,
-      "HasChildNodes": true,
-      "Items": [
-        {
-          "Id": "ish:1656868-164165-16",
-          "Title": "Naar de radio luisteren",
-          "Url": "/1656868/164165/publication-mp330/naar-de-radio-luisteren",
-          "IsAbstract": false,
-          "HasChildNodes": false,
-          "Items": []
-        }
-      ]
+      "HasChildNodes": false,
+      "Items": []
     }
   ]
 }

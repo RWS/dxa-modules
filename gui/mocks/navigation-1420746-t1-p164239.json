@@ -1,17 +1,8 @@
 {
-  "Id": "ish:1420746-1-512",
-  "Title": "User Guide",
-  "Url": null,
-  "IsAbstract": true,
+  "Id": "ish:1420746-164239-16",
+  "Title": "Games",
+  "Url": "/1420746/164239/publication-mp330/games",
+  "IsAbstract": false,
   "HasChildNodes": true,
-  "Items": [
-    {
-      "Id": "ish:1420746-164239-16",
-      "Title": "Games",
-      "Url": "/1420746/164239/publication-mp330/games",
-      "IsAbstract": false,
-      "HasChildNodes": true,
-      "Items": []
-    }
-  ]
+  "Items": []
 }

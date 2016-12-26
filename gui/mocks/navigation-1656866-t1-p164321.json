@@ -1,26 +1,17 @@
 {
-  "Id": "ish:1656866-1-512",
-  "Title": "User Guide",
-  "Url": null,
-  "IsAbstract": true,
+  "Id": "ish:1656866-164477-16",
+  "Title": "Mitteilungen",
+  "Url": "/1656866/164477/publication-mp330/mitteilungen",
+  "IsAbstract": false,
   "HasChildNodes": true,
   "Items": [
     {
-      "Id": "ish:1656866-164477-16",
-      "Title": "Mitteilungen",
-      "Url": "/1656866/164477/publication-mp330/mitteilungen",
+      "Id": "ish:1656866-164321-16",
+      "Title": "Sprachmailbox",
+      "Url": "/1656866/164321/publication-mp330/sprachmailbox",
       "IsAbstract": false,
-      "HasChildNodes": true,
-      "Items": [
-        {
-          "Id": "ish:1656866-164321-16",
-          "Title": "Sprachmailbox",
-          "Url": "/1656866/164321/publication-mp330/sprachmailbox",
-          "IsAbstract": false,
-          "HasChildNodes": false,
-          "Items": []
-        }
-      ]
+      "HasChildNodes": false,
+      "Items": []
     }
   ]
 }
