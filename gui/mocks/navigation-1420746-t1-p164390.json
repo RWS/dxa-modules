@@ -1,26 +1,17 @@
 {
-  "Id": "ish:1420746-1-512",
-  "Title": "User Guide",
-  "Url": null,
-  "IsAbstract": true,
+  "Id": "ish:1420746-164479-16",
+  "Title": "Messages",
+  "Url": "/1420746/164479/publication-mp330/messages",
+  "IsAbstract": false,
   "HasChildNodes": true,
   "Items": [
     {
-      "Id": "ish:1420746-164479-16",
-      "Title": "Messages",
-      "Url": "/1420746/164479/publication-mp330/messages",
+      "Id": "ish:1420746-164390-16",
+      "Title": "Multimedia messages",
+      "Url": "/1420746/164390/publication-mp330/multimedia-messages",
       "IsAbstract": false,
-      "HasChildNodes": true,
-      "Items": [
-        {
-          "Id": "ish:1420746-164390-16",
-          "Title": "Multimedia messages",
-          "Url": "/1420746/164390/publication-mp330/multimedia-messages",
-          "IsAbstract": false,
-          "HasChildNodes": false,
-          "Items": []
-        }
-      ]
+      "HasChildNodes": false,
+      "Items": []
     }
   ]
 }

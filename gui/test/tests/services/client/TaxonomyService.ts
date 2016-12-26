@@ -17,7 +17,7 @@ class TaxonomyServiceTests extends TestBase {
                     .then(items => {
                         expect(items).toBeDefined();
                         if (items) {
-                            expect(items.length).toBe(1);
+                            expect(items.length).toBe(9);
                         }
                         done();
                     }).catch(error => {
@@ -32,7 +32,7 @@ class TaxonomyServiceTests extends TestBase {
                     .then(items => {
                         expect(items).toBeDefined();
                         if (items) {
-                            expect(items.length).toBe(1);
+                            expect(items.length).toBe(9);
                         }
                         expect(spy).not.toHaveBeenCalled();
                         done();
@@ -48,7 +48,7 @@ class TaxonomyServiceTests extends TestBase {
                         .then(items => {
                             expect(items).toBeDefined();
                             if (items) {
-                                expect(items.length).toBe(9);
+                                expect(items.length).toBe(7);
                             }
                             done();
                         }).catch(error => {
@@ -60,8 +60,9 @@ class TaxonomyServiceTests extends TestBase {
                     .then(items => {
                         expect(items).toBeDefined();
                         if (items) {
-                            expect(items.length).toBe(1);
-                            const firstItem = items[0];
+                            expect(items.length).toBe(9);
+                            // Get Your Phone topic, first item which has childnodes
+                            const firstItem = items.filter(item => item.hasChildNodes)[0];
                             expect(firstItem.id).toBeDefined();
                             if (firstItem.id) {
                                 // TODO: this conversion will not be needed when upgrading to DXA 1.7
@@ -93,7 +94,7 @@ class TaxonomyServiceTests extends TestBase {
                 taxonomyService.getSitemapPath(publicationId, pageId).then(path => {
                     expect(path).toBeDefined();
                     if (path) {
-                        expect(path.length).toBe(3);
+                        expect(path.length).toBe(2);
                     }
                     done();
                 }).catch(error => {
@@ -108,7 +109,7 @@ class TaxonomyServiceTests extends TestBase {
                 taxonomyService.getSitemapPath(publicationId, pageId).then(path => {
                     expect(path).toBeDefined();
                     if (path) {
-                        expect(path.length).toBe(3);
+                        expect(path.length).toBe(2);
                     }
                     expect(spy).not.toHaveBeenCalled();
                     done();

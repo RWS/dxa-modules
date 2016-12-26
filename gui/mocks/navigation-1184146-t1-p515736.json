@@ -1,17 +1,8 @@
 {
-  "Id": "ish:1184146-1-512",
-  "Title": "Penguin guide",
-  "Url": null,
-  "IsAbstract": true,
+  "Id": "ish:1184146-515736-16",
+  "Title": "Other birds",
+  "Url": "/1184146/515736/penguin-publication/other-birds",
+  "IsAbstract": false,
   "HasChildNodes": true,
-  "Items": [
-    {
-      "Id": "ish:1184146-515736-16",
-      "Title": "Other birds",
-      "Url": "/1184146/515736/penguin-publication/other-birds",
-      "IsAbstract": false,
-      "HasChildNodes": true,
-      "Items": []
-    }
-  ]
+  "Items": []
 }

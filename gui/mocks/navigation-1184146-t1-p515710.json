@@ -1,33 +1,24 @@
 {
-  "Id": "ish:1184146-1-512",
-  "Title": "Penguin guide",
-  "Url": null,
-  "IsAbstract": true,
+  "Id": "ish:1184146-515736-16",
+  "Title": "Other birds",
+  "Url": "/1184146/515736/penguin-publication/other-birds",
+  "IsAbstract": false,
   "HasChildNodes": true,
   "Items": [
     {
-      "Id": "ish:1184146-515736-16",
-      "Title": "Other birds",
-      "Url": "/1184146/515736/penguin-publication/other-birds",
-      "IsAbstract": false,
+      "Id": "ish:1184146-48-1024",
+      "Title": "G",
+      "Url": null,
+      "IsAbstract": true,
       "HasChildNodes": true,
       "Items": [
         {
-          "Id": "ish:1184146-48-1024",
-          "Title": "G",
-          "Url": null,
-          "IsAbstract": true,
-          "HasChildNodes": true,
-          "Items": [
-            {
-              "Id": "ish:1184146-515710-16",
-              "Title": "Gallinules ",
-              "Url": "/1184146/515710/penguin-publication/gallinules",
-              "IsAbstract": false,
-              "HasChildNodes": false,
-              "Items": []
-            }
-          ]
+          "Id": "ish:1184146-515710-16",
+          "Title": "Gallinules ",
+          "Url": "/1184146/515710/penguin-publication/gallinules",
+          "IsAbstract": false,
+          "HasChildNodes": false,
+          "Items": []
         }
       ]
     }

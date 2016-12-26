@@ -1,26 +1,17 @@
 {
-  "Id": "ish:1656863-1-512",
-  "Title": "User Guide",
-  "Url": null,
-  "IsAbstract": true,
+  "Id": "ish:1656863-164231-16",
+  "Title": "Your phone",
+  "Url": "/1656863/164231/publication-mp330/your-phone",
+  "IsAbstract": false,
   "HasChildNodes": true,
   "Items": [
     {
-      "Id": "ish:1656863-164231-16",
-      "Title": "Your phone",
-      "Url": "/1656863/164231/publication-mp330/your-phone",
+      "Id": "ish:1656863-164155-16",
+      "Title": "Connectors overview",
+      "Url": "/1656863/164155/publication-mp330/connectors-overview",
       "IsAbstract": false,
-      "HasChildNodes": true,
-      "Items": [
-        {
-          "Id": "ish:1656863-164155-16",
-          "Title": "Connectors overview",
-          "Url": "/1656863/164155/publication-mp330/connectors-overview",
-          "IsAbstract": false,
-          "HasChildNodes": false,
-          "Items": []
-        }
-      ]
+      "HasChildNodes": false,
+      "Items": []
     }
   ]
 }

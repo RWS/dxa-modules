@@ -1,17 +1,8 @@
 {
-  "Id": "ish:1656863-1-512",
-  "Title": "User Guide",
-  "Url": null,
-  "IsAbstract": true,
+  "Id": "ish:1656863-164371-16",
+  "Title": "Music functions",
+  "Url": "/1656863/164371/publication-mp330/music-functions",
+  "IsAbstract": false,
   "HasChildNodes": true,
-  "Items": [
-    {
-      "Id": "ish:1656863-164371-16",
-      "Title": "Music functions",
-      "Url": "/1656863/164371/publication-mp330/music-functions",
-      "IsAbstract": false,
-      "HasChildNodes": true,
-      "Items": []
-    }
-  ]
+  "Items": []
 }

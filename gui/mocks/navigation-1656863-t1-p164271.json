@@ -1,26 +1,17 @@
 {
-  "Id": "ish:1656863-1-512",
-  "Title": "User Guide",
-  "Url": null,
-  "IsAbstract": true,
+  "Id": "ish:1656863-164398-16",
+  "Title": "Getting started",
+  "Url": "/1656863/164398/publication-mp330/getting-started",
+  "IsAbstract": false,
   "HasChildNodes": true,
   "Items": [
     {
-      "Id": "ish:1656863-164398-16",
-      "Title": "Getting started",
-      "Url": "/1656863/164398/publication-mp330/getting-started",
+      "Id": "ish:1656863-164271-16",
+      "Title": "Installing the SIM card and the battery",
+      "Url": "/1656863/164271/publication-mp330/installing-the-sim-card-and-the-battery",
       "IsAbstract": false,
-      "HasChildNodes": true,
-      "Items": [
-        {
-          "Id": "ish:1656863-164271-16",
-          "Title": "Installing the SIM card and the battery",
-          "Url": "/1656863/164271/publication-mp330/installing-the-sim-card-and-the-battery",
-          "IsAbstract": false,
-          "HasChildNodes": false,
-          "Items": []
-        }
-      ]
+      "HasChildNodes": false,
+      "Items": []
     }
   ]
 }

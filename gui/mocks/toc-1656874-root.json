@@ -1,9 +1,25 @@
 [
   {
-    "Id": "ish:1656874-1-512",
-    "Title": "McAfee Virtual Technician 4.2",
-    "Url": null,
-    "IsAbstract": true,
+    "Id": "ish:1656874-345337-16",
+    "Title": "McAfee Virtual Technician",
+    "Url": "/1656874/345337/publication-mcafee-virtual-technician-4-2/mcafee-virtual-technician",
+    "IsAbstract": false,
+    "HasChildNodes": true,
+    "Items": []
+  },
+  {
+    "Id": "ish:1656874-137296-16",
+    "Title": "How do I access MVT",
+    "Url": "/1656874/137296/publication-mcafee-virtual-technician-4-2/how-do-i-access-mvt",
+    "IsAbstract": false,
+    "HasChildNodes": true,
+    "Items": []
+  },
+  {
+    "Id": "ish:1656874-137347-16",
+    "Title": "Technical support options",
+    "Url": "/1656874/137347/publication-mcafee-virtual-technician-4-2/technical-support-options",
+    "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
   }

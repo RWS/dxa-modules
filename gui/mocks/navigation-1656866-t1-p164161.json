@@ -1,26 +1,17 @@
 {
-  "Id": "ish:1656866-1-512",
-  "Title": "User Guide",
-  "Url": null,
-  "IsAbstract": true,
+  "Id": "ish:1656866-164369-16",
+  "Title": "Musikfunktionen",
+  "Url": "/1656866/164369/publication-mp330/musikfunktionen",
+  "IsAbstract": false,
   "HasChildNodes": true,
   "Items": [
     {
-      "Id": "ish:1656866-164369-16",
-      "Title": "Musikfunktionen",
-      "Url": "/1656866/164369/publication-mp330/musikfunktionen",
+      "Id": "ish:1656866-164161-16",
+      "Title": "Radio hören",
+      "Url": "/1656866/164161/publication-mp330/radio-horen",
       "IsAbstract": false,
-      "HasChildNodes": true,
-      "Items": [
-        {
-          "Id": "ish:1656866-164161-16",
-          "Title": "Radio hören",
-          "Url": "/1656866/164161/publication-mp330/radio-horen",
-          "IsAbstract": false,
-          "HasChildNodes": false,
-          "Items": []
-        }
-      ]
+      "HasChildNodes": false,
+      "Items": []
     }
   ]
 }

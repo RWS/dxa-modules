@@ -1,26 +1,17 @@
 {
-  "Id": "ish:1184146-1-512",
-  "Title": "Penguin guide",
-  "Url": null,
-  "IsAbstract": true,
+  "Id": "ish:1184146-516062-16",
+  "Title": "Penguins Overview",
+  "Url": "/1184146/516062/penguin-publication/penguins-overview",
+  "IsAbstract": false,
   "HasChildNodes": true,
   "Items": [
     {
-      "Id": "ish:1184146-516062-16",
-      "Title": "Penguins Overview",
-      "Url": "/1184146/516062/penguin-publication/penguins-overview",
+      "Id": "ish:1184146-517008-16",
+      "Title": "Etymology",
+      "Url": "/1184146/517008/penguin-publication/etymology",
       "IsAbstract": false,
-      "HasChildNodes": true,
-      "Items": [
-        {
-          "Id": "ish:1184146-517008-16",
-          "Title": "Etymology",
-          "Url": "/1184146/517008/penguin-publication/etymology",
-          "IsAbstract": false,
-          "HasChildNodes": false,
-          "Items": []
-        }
-      ]
+      "HasChildNodes": false,
+      "Items": []
     }
   ]
 }

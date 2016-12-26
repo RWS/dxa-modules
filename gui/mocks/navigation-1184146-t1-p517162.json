@@ -1,33 +1,24 @@
 {
-  "Id": "ish:1184146-1-512",
-  "Title": "Penguin guide",
-  "Url": null,
-  "IsAbstract": true,
+  "Id": "ish:1184146-516000-16",
+  "Title": "Types of penguins",
+  "Url": "/1184146/516000/penguin-publication/types-of-penguins",
+  "IsAbstract": false,
   "HasChildNodes": true,
   "Items": [
     {
-      "Id": "ish:1184146-516000-16",
-      "Title": "Types of penguins",
-      "Url": "/1184146/516000/penguin-publication/types-of-penguins",
+      "Id": "ish:1184146-1184174-16",
+      "Title": "Eudyptula (Little penguins)",
+      "Url": "/1184146/1184174/penguin-publication/eudyptula--little-penguins-",
       "IsAbstract": false,
       "HasChildNodes": true,
       "Items": [
         {
-          "Id": "ish:1184146-1184174-16",
-          "Title": "Eudyptula (Little penguins)",
-          "Url": "/1184146/1184174/penguin-publication/eudyptula--little-penguins-",
+          "Id": "ish:1184146-517162-16",
+          "Title": "Little Penguin \n                        ",
+          "Url": "/1184146/517162/penguin-publication/little-penguin",
           "IsAbstract": false,
-          "HasChildNodes": true,
-          "Items": [
-            {
-              "Id": "ish:1184146-517162-16",
-              "Title": "Little Penguin \n                        ",
-              "Url": "/1184146/517162/penguin-publication/little-penguin",
-              "IsAbstract": false,
-              "HasChildNodes": false,
-              "Items": []
-            }
-          ]
+          "HasChildNodes": false,
+          "Items": []
         }
       ]
     }

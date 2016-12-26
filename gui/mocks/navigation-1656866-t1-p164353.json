@@ -1,26 +1,17 @@
 {
-  "Id": "ish:1656866-1-512",
-  "Title": "User Guide",
-  "Url": null,
-  "IsAbstract": true,
+  "Id": "ish:1656866-164396-16",
+  "Title": "Erste Schritte",
+  "Url": "/1656866/164396/publication-mp330/erste-schritte",
+  "IsAbstract": false,
   "HasChildNodes": true,
   "Items": [
     {
-      "Id": "ish:1656866-164396-16",
-      "Title": "Erste Schritte",
-      "Url": "/1656866/164396/publication-mp330/erste-schritte",
+      "Id": "ish:1656866-164353-16",
+      "Title": "Tastensperre",
+      "Url": "/1656866/164353/publication-mp330/tastensperre",
       "IsAbstract": false,
-      "HasChildNodes": true,
-      "Items": [
-        {
-          "Id": "ish:1656866-164353-16",
-          "Title": "Tastensperre",
-          "Url": "/1656866/164353/publication-mp330/tastensperre",
-          "IsAbstract": false,
-          "HasChildNodes": false,
-          "Items": []
-        }
-      ]
+      "HasChildNodes": false,
+      "Items": []
     }
   ]
 }

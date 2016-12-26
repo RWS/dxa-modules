@@ -1,17 +1,8 @@
 {
-  "Id": "ish:1656863-1-512",
-  "Title": "User Guide",
-  "Url": null,
-  "IsAbstract": true,
-  "HasChildNodes": true,
-  "Items": [
-    {
-      "Id": "ish:1656863-164223-16",
-      "Title": "Dear Customer",
-      "Url": "/1656863/164223/publication-mp330/dear-customer",
-      "IsAbstract": false,
-      "HasChildNodes": false,
-      "Items": []
-    }
-  ]
+  "Id": "ish:1656863-164223-16",
+  "Title": "Dear Customer",
+  "Url": "/1656863/164223/publication-mp330/dear-customer",
+  "IsAbstract": false,
+  "HasChildNodes": false,
+  "Items": []
 }

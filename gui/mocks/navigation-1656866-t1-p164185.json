@@ -1,26 +1,17 @@
 {
-  "Id": "ish:1656866-1-512",
-  "Title": "User Guide",
-  "Url": null,
-  "IsAbstract": true,
+  "Id": "ish:1656866-164229-16",
+  "Title": "Ihr Telefon",
+  "Url": "/1656866/164229/publication-mp330/ihr-telefon",
+  "IsAbstract": false,
   "HasChildNodes": true,
   "Items": [
     {
-      "Id": "ish:1656866-164229-16",
-      "Title": "Ihr Telefon",
-      "Url": "/1656866/164229/publication-mp330/ihr-telefon",
+      "Id": "ish:1656866-164185-16",
+      "Title": "Ausgangsanzeige",
+      "Url": "/1656866/164185/publication-mp330/ausgangsanzeige",
       "IsAbstract": false,
-      "HasChildNodes": true,
-      "Items": [
-        {
-          "Id": "ish:1656866-164185-16",
-          "Title": "Ausgangsanzeige",
-          "Url": "/1656866/164185/publication-mp330/ausgangsanzeige",
-          "IsAbstract": false,
-          "HasChildNodes": false,
-          "Items": []
-        }
-      ]
+      "HasChildNodes": false,
+      "Items": []
     }
   ]
 }
