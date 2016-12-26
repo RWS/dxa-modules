@@ -1,6 +1,5 @@
 {
   "Id": "164265",
-  "Title": "Namen en telefoonnummers opslaan",
   "Meta": {
     "ishlogicalref.object.id": 164259,
     "ishversionref.object.id": 164260,
@@ -30,5 +29,21 @@
     "FUSERGROUP.logical.element": null,
     "READ-ACCESS.logical.element": null
   },
-  "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-67F1627E-FFBA-4E03-A62D-F70030C52596__GUID-91208EF2-9DF8-4968-95C3-7B281273B8A0\" xmlns=\"http://www.w3.org/1999/xhtml\">Namen en telefoonnummers opslaan</h1>\n      \n      \n      \n      <div class=\"body taskbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\" />\n         \n         \n         <ol class=\"ol steps\" id=\"GUID-67F1627E-FFBA-4E03-A62D-F70030C52596__GUID-39CCD92E-A42F-4E2C-AE5D-9BAA72560320\">\n            <li class=\"li step stepexpand\">\n               <span class=\"ph cmd\">Druk op <samp class=\"ph msgph\">Contacten</samp> (of druk Go to en selecteer <samp class=\"ph msgph\">Contacten</samp>) en selecteer <samp class=\"ph msgph\">contact toev.</samp>.</span>\n               \n            </li>\n            \n            <li class=\"li step stepexpand\">\n               <span class=\"ph cmd\">Toets de naam in en druk op <samp class=\"ph msgph\">OK</samp>.</span>\n               \n            </li>\n            \n            <li class=\"li step stepexpand\">\n               <span class=\"ph cmd\">Toets het telefoonnummer in en druk op <samp class=\"ph msgph\">OK</samp>.</span>\n               \n            </li>\n            \n            <li class=\"li step stepexpand\">\n               <span class=\"ph cmd\">Wanneer de naam en het nummer zijn opgeslagen, drukt u op <samp class=\"ph msgph\">Klaar</samp>.</span>\n               \n               <div class=\"itemgroup info\"> Snel opslaan: toets het telefoonnummer in vanuit de standby modus, toets het telefoonnummer in. Druk <samp class=\"ph msgph\">Opties</samp> en selecteer <samp class=\"ph msgph\">Bewaar</samp>. Toets de naam in en druk op <samp class=\"ph msgph\">OK</samp> en <samp class=\"ph msgph\">Klaar</samp>.\n               </div>\n               \n            </li>\n            \n         </ol>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Hoofdonderwerp:</strong> <a class=\"link\" title=\"U kunt namen van contacten opslaan in het geheugen van de telefoon (de interne telefoonlijst) en in het geheugen van de SIM-kaart (SIM-telefoonlijst).\" href=\"/1656868/164303/publication-mp330/telefoonlijst\">Telefoonlijst</a></div>\n            \n         </div>\n         \n      </div>\n   "
+  "Regions": [
+    {
+      "Entities": [
+        {
+          "Id": "164265",
+          "topicTitle": "Namen en telefoonnummers opslaan",
+          "topicBody": {
+            "Fragments": [
+              {
+                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-67F1627E-FFBA-4E03-A62D-F70030C52596__GUID-91208EF2-9DF8-4968-95C3-7B281273B8A0\" xmlns=\"http://www.w3.org/1999/xhtml\">Namen en telefoonnummers opslaan</h1>\n      \n      \n      \n      <div class=\"body taskbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\" />\n         \n         \n         <ol class=\"ol steps\" id=\"GUID-67F1627E-FFBA-4E03-A62D-F70030C52596__GUID-39CCD92E-A42F-4E2C-AE5D-9BAA72560320\">\n            <li class=\"li step stepexpand\">\n               <span class=\"ph cmd\">Druk op <samp class=\"ph msgph\">Contacten</samp> (of druk Go to en selecteer <samp class=\"ph msgph\">Contacten</samp>) en selecteer <samp class=\"ph msgph\">contact toev.</samp>.</span>\n               \n            </li>\n            \n            <li class=\"li step stepexpand\">\n               <span class=\"ph cmd\">Toets de naam in en druk op <samp class=\"ph msgph\">OK</samp>.</span>\n               \n            </li>\n            \n            <li class=\"li step stepexpand\">\n               <span class=\"ph cmd\">Toets het telefoonnummer in en druk op <samp class=\"ph msgph\">OK</samp>.</span>\n               \n            </li>\n            \n            <li class=\"li step stepexpand\">\n               <span class=\"ph cmd\">Wanneer de naam en het nummer zijn opgeslagen, drukt u op <samp class=\"ph msgph\">Klaar</samp>.</span>\n               \n               <div class=\"itemgroup info\"> Snel opslaan: toets het telefoonnummer in vanuit de standby modus, toets het telefoonnummer in. Druk <samp class=\"ph msgph\">Opties</samp> en selecteer <samp class=\"ph msgph\">Bewaar</samp>. Toets de naam in en druk op <samp class=\"ph msgph\">OK</samp> en <samp class=\"ph msgph\">Klaar</samp>.\n               </div>\n               \n            </li>\n            \n         </ol>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Hoofdonderwerp:</strong> <a class=\"link\" title=\"U kunt namen van contacten opslaan in het geheugen van de telefoon (de interne telefoonlijst) en in het geheugen van de SIM-kaart (SIM-telefoonlijst).\" href=\"/1656868/164303/publication-mp330/telefoonlijst\">Telefoonlijst</a></div>\n            \n         </div>\n         \n      </div>\n   "
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
 }

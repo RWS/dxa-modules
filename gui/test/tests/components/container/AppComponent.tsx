@@ -43,7 +43,7 @@ class AppComponent extends TestBase {
                 const onRender = function (this: PublicationContent): JSX.Element {
                     const { publicationId, pageIdOrPublicationTitle, publicationTitle, pageTitle } = this.props.params;
 
-                    expect(publicationId).toBe("1656863");
+                    expect(publicationId).toBe("1420746");
                     expect(pageIdOrPublicationTitle).toBe("publication-mp330");
                     expect(publicationTitle).toBeUndefined();
                     expect(pageTitle).toBeUndefined();
