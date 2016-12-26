@@ -47,8 +47,7 @@ export class Api {
         if (mocksEnabled) {
             return path.getAbsolutePath(`gui/mocks/page-${publicationId}-${pageId}.json`);
         } else {
-            // TODO: use real end point
-            return path.getAbsolutePath(`gui/mocks/page-${publicationId}-${pageId}.json`);
+            return path.getAbsolutePath(`api/page/${publicationId}/${pageId}`);
         }
     }
 
