@@ -78,7 +78,7 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
         const firstRootNode = rootNodes.length > 0 ? rootNodes[0] : null;
 
         return (
-            <div className={"sdl-dita-delivery-toc"}>
+            <nav className={"sdl-dita-delivery-toc"}>
                 {error ? <ValidationMessage messageType={SDL.UI.Controls.ValidationMessageType.Error} message={error} /> : null}
                 {
                     props.rootItems ?
@@ -91,7 +91,7 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
                             onSelectionChanged={this._onSelectionChanged.bind(this)} />
                         : !error ? <ActivityIndicator /> : null
                 }
-            </div>
+            </nav>
         );
     }
 

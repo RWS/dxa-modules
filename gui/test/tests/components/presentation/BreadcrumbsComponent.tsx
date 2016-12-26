@@ -5,10 +5,11 @@ import { Promise } from "es6-promise";
 import { hashHistory } from "react-router";
 import { Url } from "utils/Url";
 import { TcmId } from "utils/TcmId";
-import { localization } from "test/mocks/services/LocalizationService";
+import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 
 // Global Catalina dependencies
 import TestBase = SDL.Client.Test.TestBase;
+const TestUtils = React.addons.TestUtils;
 
 interface IProps {
     params: {
@@ -68,8 +69,7 @@ class BreadcrumbsComponent extends TestBase {
                 const props: IBreadcrumbsProps = {
                     publicationId: data.publicationId,
                     publicationTitle: data.publicationTitle,
-                    loadItemsPath: loadItemsPath,
-                    localizationService: localization
+                    loadItemsPath: loadItemsPath
                 };
                 breadCrumbs = this._renderComponent(props, target);
             });
@@ -184,11 +184,12 @@ class BreadcrumbsComponent extends TestBase {
             return itemsPath.filter(item => item.id === taxonomyItemId)[0];
         };
 
-        return ReactDOM.render(
+        const comp = ReactDOM.render(
             <Router history={hashHistory}>
                 <Route path=":publicationId(/:pageId)" component={(compProps: IProps) =>
-                    (<Breadcrumbs selectedItem={getSelectedItem(compProps.params.pageId)} {...props} />)} />
-            </Router>, target) as Breadcrumbs;
+                    (<ComponentWithContext><Breadcrumbs selectedItem={getSelectedItem(compProps.params.pageId)} {...props} /></ComponentWithContext>)} />
+            </Router>, target) as React.Component<{}, {}>;
+        return TestUtils.findRenderedComponentWithType(comp, Breadcrumbs) as Breadcrumbs;
     }
 }
 

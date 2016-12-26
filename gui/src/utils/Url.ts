@@ -77,6 +77,21 @@ export class Url {
         return url;
     }
 
+    /**
+     * Get an anchor url
+     *
+     * @static
+     * @param {string} pageUrl The page url
+     * @param {string} anchorId Anchor id
+     * @returns {string}
+     *
+     * @memberOf Url
+     */
+    public static getAnchorUrl(pageUrl: string, anchorId: string): string {
+        // Don't slugify the anchor as we need to be able to look it up again in the document
+        return `${pageUrl}/${encodeURIComponent(anchorId)}`;
+    }
+
     private static _processTitle(title: string): string {
         // trim
         title = title.trim();

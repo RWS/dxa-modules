@@ -1,4 +1,6 @@
+import { Html, IHeader } from "utils/Html";
 import { Url } from "utils/Url";
+import { ContentNavigation, IContentNavigationItem } from "components/presentation/ContentNavigation";
 
 import "components/presentation/styles/Page";
 import "dist/dita-ot/styles/commonltr";
@@ -34,6 +36,37 @@ export interface IPageProps {
      */
     error?: string | null;
     /**
+     * Url of the page
+     *
+     * @type {string}
+     * @memberOf IPublicationContentProps
+     */
+    url?: string;
+    /**
+     * Anchor which is active.
+     * Used for navigating to a specific section in the page.
+     *
+     * @type {string}
+     * @memberOf IPageProps
+     */
+    anchor?: string;
+    /**
+     * Scroll offset using for jumping to anchors
+     * For example when there is a topbar overlaying part of the component
+     *
+     * @type {number}
+     * @memberOf IPageProps
+     */
+    scrollOffset?: number;
+    /**
+     * Header which is active.
+     * The header inside the page which is the first one visible in the view port.
+     *
+     * @type {IHeader}
+     * @memberOf IPageProps
+     */
+    activeHeader?: IHeader;
+    /**
      * Called whenever navigation to another page is requested
      *
      * @param {string} url Url
@@ -44,11 +77,38 @@ export interface IPageProps {
 }
 
 /**
+ * Page component state
+ *
+ * @export
+ * @interface IPageState
+ */
+export interface IPageState {
+    /**
+     * Items used in content Navigation
+     *
+     * @type {IContentNavigationItem[]}
+     */
+    navItems: IContentNavigationItem[];
+}
+
+/**
  * Page component
  */
-export class Page extends React.Component<IPageProps, {}> {
+export class Page extends React.Component<IPageProps, IPageState> {
 
     private _hyperlinks: { element: HTMLElement, handler: (e: Event) => void; }[] = [];
+    private _lastAnchor: string;
+
+    /**
+     * Creates an instance of Toc.
+     *
+     */
+    constructor() {
+        super();
+        this.state = {
+            navItems: []
+        };
+    }
 
     /**
      * Render the component
@@ -59,14 +119,18 @@ export class Page extends React.Component<IPageProps, {}> {
      */
     public render(): JSX.Element {
         const props = this.props;
+        const { activeHeader } = props;
+        const { navItems } = this.state;
+        const activeNavItemId = activeHeader ? activeHeader.id : (navItems.length > 0 ? navItems[0].id : undefined);
         return (
             <div className={"sdl-dita-delivery-page"}>
                 {props.showActivityIndicator ? <ActivityIndicator /> : null}
                 {props.error ? <ValidationMessage messageType={SDL.UI.Controls.ValidationMessageType.Error} message={props.error} /> : null}
+                <ContentNavigation navItems={navItems} activeNavItemId={activeNavItemId} />
                 {props.children}
-                <div>
-                    <div className={"page-content ltr"} dangerouslySetInnerHTML={{ __html: props.content || "" }} />
-                </div>
+                <article>
+                    <article className={"page-content ltr"} dangerouslySetInnerHTML={{ __html: props.content || "" }} />
+                </article>
             </div>
         );
     }
@@ -76,6 +140,7 @@ export class Page extends React.Component<IPageProps, {}> {
      */
     public componentDidMount(): void {
         this._enableHyperlinks();
+        this._collectHeadersLinks();
     }
 
     /**
@@ -85,6 +150,8 @@ export class Page extends React.Component<IPageProps, {}> {
      */
     public componentDidUpdate(): void {
         this._enableHyperlinks();
+        this._collectHeadersLinks();
+        this._jumpToAnchor();
     }
 
     /**
@@ -104,26 +171,58 @@ export class Page extends React.Component<IPageProps, {}> {
     private _enableHyperlinks(): void {
         const props = this.props;
         const domNode = ReactDOM.findDOMNode(this);
-        const anchors = domNode.querySelectorAll(".page-content a");
-        const hyperlinks = this._hyperlinks;
-        for (let i: number = 0, length: number = anchors.length; i < length; i++) {
-            const anchor = anchors.item(i) as HTMLAnchorElement;
-            const alreadyAdded = hyperlinks.filter(hyperlink => hyperlink.element === anchor).length === 1;
-            if (!alreadyAdded) {
-                const itemUrl = anchor.getAttribute("href");
-                if (Url.itemUrlIsValid(itemUrl)) {
-                    const onClick = (e: Event): void => {
-                        if (itemUrl) {
-                            props.onNavigate(itemUrl);
-                        }
-                        e.preventDefault();
-                    };
-                    hyperlinks.push({
-                        element: anchor,
-                        handler: onClick
-                    });
-                    anchor.addEventListener("click", onClick);
+        if (domNode) {
+            const anchors = domNode.querySelectorAll(".page-content a");
+            const hyperlinks = this._hyperlinks;
+            for (let i: number = 0, length: number = anchors.length; i < length; i++) {
+                const anchor = anchors.item(i) as HTMLAnchorElement;
+                const alreadyAdded = hyperlinks.filter(hyperlink => hyperlink.element === anchor).length === 1;
+                if (!alreadyAdded) {
+                    const itemUrl = anchor.getAttribute("href");
+                    if (Url.itemUrlIsValid(itemUrl)) {
+                        const onClick = (e: Event): void => {
+                            if (itemUrl) {
+                                props.onNavigate(itemUrl);
+                            }
+                            e.preventDefault();
+                        };
+                        hyperlinks.push({
+                            element: anchor,
+                            handler: onClick
+                        });
+                        anchor.addEventListener("click", onClick);
+                    }
                 }
+            }
+        }
+    }
+
+    /**
+     * Collects headers links
+     *
+     * @private
+     *
+     * @memberOf Page
+     */
+    private _collectHeadersLinks(): void {
+        const domNode = ReactDOM.findDOMNode(this);
+        if (domNode) {
+            const { navItems } = this.state;
+            const { url } = this.props;
+            const pageContentNode = domNode.querySelector(".page-content") as HTMLElement;
+            const headerLinks = Html.getHeaderLinks(pageContentNode);
+            const updatedNavItems: IContentNavigationItem[] = headerLinks.map(item => {
+                return {
+                    id: item.id,
+                    title: item.title,
+                    url: url ? Url.getAnchorUrl(url, item.id) : ("#" + item.id)
+                };
+            });
+
+            if (navItems.map((i) => i.url).join("") !== updatedNavItems.map((i) => i.url).join("")) {
+                this.setState({
+                    navItems: updatedNavItems
+                });
             }
         }
     }
@@ -137,11 +236,35 @@ export class Page extends React.Component<IPageProps, {}> {
      */
     private _disableHyperlinks(): void {
         this._hyperlinks.forEach(anchor => {
-            const itemUrl = anchor.element.getAttribute("data-url");
-            if (itemUrl) {
-                anchor.element.setAttribute("href", itemUrl);
-            }
             anchor.element.removeEventListener("click", anchor.handler);
         });
+    }
+
+    /**
+     * Jump to an anchor in the page
+     *
+     * @private
+     *
+     * @memberOf Page
+     */
+    private _jumpToAnchor(): void {
+        const { anchor, scrollOffset } = this.props;
+        // Keep track of the previous anchor to allow scrolling
+        if (anchor && anchor !== this._lastAnchor) {
+            const domNode = ReactDOM.findDOMNode(this) as HTMLElement;
+            if (domNode) {
+                const pageContentNode = domNode.querySelector(".page-content") as HTMLElement;
+                const header = Html.getHeaderElement(pageContentNode, anchor);
+                if (header) {
+                    this._lastAnchor = anchor;
+                    // TODO: make sure images are loaded before jumping to the anchor
+                    // Use a timeout to make sure all components are rendered
+                    setTimeout((): void => {
+                    var topPos = (header.offsetTop + domNode.offsetTop) - (scrollOffset || 0);
+                        window.scrollTo(0, topPos);
+                    }, 0);
+                }
+            }
+        }
     }
 }
