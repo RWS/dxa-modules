@@ -1,6 +1,6 @@
-import { path } from "utils/Path";
 import * as ServerModels from "interfaces/ServerModels";
 import { IPage } from "interfaces/Page";
+import { Api } from "utils/Api";
 
 // Global Catalina dependencies
 import IWebRequest = SDL.Client.Net.IWebRequest;
@@ -46,17 +46,30 @@ export class Page extends LoadableObject {
 
     /* Overloads */
     protected _executeLoad(reload: boolean): void {
-        const url = path.getAbsolutePath(`gui/mocks/page-${this._publicationId}-${this._pageId}.json`);
+        const url = Api.getPageUrl(this._publicationId, this._pageId);
         Net.getRequest(url,
             this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
     }
 
     protected _processLoadResult(result: string, webRequest: IWebRequest): void {
         const page = (JSON.parse(result) as ServerModels.IPage);
+        let pageTitle = "";
+        let pageBody = "";
+        const regions = page.Regions;
+        if (Array.isArray(regions) && regions.length > 0) {
+            const entities = regions[0].Entities;
+            if (Array.isArray(entities) && entities.length > 0) {
+                pageTitle = entities[0].topicTitle;
+                const topicBody = entities[0].topicBody;
+                if (topicBody && Array.isArray(topicBody.Fragments) && topicBody.Fragments.length > 0) {
+                    pageBody = topicBody.Fragments[0].Html;
+                }
+            }
+        }
         this._page = {
             id: page.Id,
-            title: page.Title,
-            content: page.Html
+            title: pageTitle,
+            content: pageBody
         } as IPage;
 
         super._processLoadResult(result, webRequest);

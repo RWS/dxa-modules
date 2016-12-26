@@ -1,0 +1,26 @@
+{
+  "Id": "ish:1420746-1-512",
+  "Title": "User Guide",
+  "Url": null,
+  "IsAbstract": true,
+  "HasChildNodes": true,
+  "Items": [
+    {
+      "Id": "ish:1420746-164301-16",
+      "Title": "Phone book",
+      "Url": "/1420746/164301/publication-mp330/phone-book",
+      "IsAbstract": false,
+      "HasChildNodes": true,
+      "Items": [
+        {
+          "Id": "ish:1420746-164263-16",
+          "Title": "Saving names and numbers",
+          "Url": "/1420746/164263/publication-mp330/saving-names-and-numbers",
+          "IsAbstract": false,
+          "HasChildNodes": false,
+          "Items": []
+        }
+      ]
+    }
+  ]
+}

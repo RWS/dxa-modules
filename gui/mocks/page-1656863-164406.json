@@ -1,6 +1,5 @@
 {
   "Id": "164406",
-  "Title": "DJ Game",
   "Meta": {
     "ishlogicalref.object.id": 164402,
     "ishversionref.object.id": 164403,
@@ -30,5 +29,21 @@
     "FUSERGROUP.logical.element": null,
     "READ-ACCESS.logical.element": null
   },
-  "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-DEE39F35-598E-4559-9733-76F34E115FE5__GUID-1787BC3F-9DF8-42C4-8C40-FC77E019C0CF\" xmlns=\"http://www.w3.org/1999/xhtml\">DJ Game</h1>\n      \n      \n      \n      <div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\" />\n         \n         \n         <p class=\"p\">In this game you play a budding DJ in his quest for fame and fortune. </p>\n         \n         \n         <p class=\"p\">Guide him throughthe city collecting records and practicing his scratching to get ready for performing in clubs.</p>\n         \n         \n         <p class=\"p\">Once you have the skills you will be requested to play in the coolest club in town. Will it be your breakthrough? It's all\n            up to you!\n         </p>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Parent topic:</strong> <a class=\"link\" title=\"Your phone supports Java 2 Micro Edition (J2METM), which is a version of Java technology specifically designed for small consumer electronics products. The phone includes some Java applications and games, and supports downloading new applications and games from different WAP services.\" href=\"/1656863/164239/publication-mp330/games\">Games</a></div>\n            \n         </div>\n         \n      </div>\n   "
+  "Regions": [
+    {
+      "Entities": [
+        {
+          "Id": "164406",
+          "topicTitle": "DJ Game",
+          "topicBody": {
+            "Fragments": [
+              {
+                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-DEE39F35-598E-4559-9733-76F34E115FE5__GUID-1787BC3F-9DF8-42C4-8C40-FC77E019C0CF\" xmlns=\"http://www.w3.org/1999/xhtml\">DJ Game</h1>\n      \n      \n      \n      <div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\" />\n         \n         \n         <p class=\"p\">In this game you play a budding DJ in his quest for fame and fortune. </p>\n         \n         \n         <p class=\"p\">Guide him throughthe city collecting records and practicing his scratching to get ready for performing in clubs.</p>\n         \n         \n         <p class=\"p\">Once you have the skills you will be requested to play in the coolest club in town. Will it be your breakthrough? It's all\n            up to you!\n         </p>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Parent topic:</strong> <a class=\"link\" title=\"Your phone supports Java 2 Micro Edition (J2METM), which is a version of Java technology specifically designed for small consumer electronics products. The phone includes some Java applications and games, and supports downloading new applications and games from different WAP services.\" href=\"/1656863/164239/publication-mp330/games\">Games</a></div>\n            \n         </div>\n         \n      </div>\n   "
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
 }
