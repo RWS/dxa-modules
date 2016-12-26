@@ -1,6 +1,5 @@
 {
   "Id": "164396",
-  "Title": "Erste Schritte",
   "Meta": {
     "ishlogicalref.object.id": 164394,
     "ishversionref.object.id": 164395,
@@ -30,5 +29,21 @@
     "FUSERGROUP.logical.element": null,
     "READ-ACCESS.logical.element": null
   },
-  "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-DE88D123-3B26-4E37-BDAA-F225F9F46D66__GUID-AD779943-546F-4FB6-A725-2B05AB943241\" xmlns=\"http://www.w3.org/1999/xhtml\">Erste Schritte</h1>\n      \n      \n      \n      <div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\" />\n         \n         \n         <p class=\"p\" />\n         \n         \n      </div>\n      \n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <ul class=\"ullinks\">\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1656866/164269/publication-mp330/installieren-der-sim-karte-und-des-akkus\">Installieren der SIM-Karte und des Akkus</a></strong><br />\n               \n            </li>\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1656866/164288/publication-mp330/laden-des-akkus\">Laden des Akkus</a></strong><br />\n               \n            </li>\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1656866/164353/publication-mp330/tastensperre\">Tastensperre</a></strong><br />\n               Die Tastensperre verhindert das versehentliche Drücken der Tasten, wenn das Telefon beispielsweise in der Tasche getragen\n               wird.\n            </li>\n            \n         </ul>\n         \n      </div>\n   "
+  "Regions": [
+    {
+      "Entities": [
+        {
+          "Id": "164396",
+          "topicTitle": "Erste Schritte",
+          "topicBody": {
+            "Fragments": [
+              {
+                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-DE88D123-3B26-4E37-BDAA-F225F9F46D66__GUID-AD779943-546F-4FB6-A725-2B05AB943241\" xmlns=\"http://www.w3.org/1999/xhtml\">Erste Schritte</h1>\n      \n      \n      \n      <div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\" />\n         \n         \n         <p class=\"p\" />\n         \n         \n      </div>\n      \n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <ul class=\"ullinks\">\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1656866/164269/publication-mp330/installieren-der-sim-karte-und-des-akkus\">Installieren der SIM-Karte und des Akkus</a></strong><br />\n               \n            </li>\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1656866/164288/publication-mp330/laden-des-akkus\">Laden des Akkus</a></strong><br />\n               \n            </li>\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1656866/164353/publication-mp330/tastensperre\">Tastensperre</a></strong><br />\n               Die Tastensperre verhindert das versehentliche Drücken der Tasten, wenn das Telefon beispielsweise in der Tasche getragen\n               wird.\n            </li>\n            \n         </ul>\n         \n      </div>\n   "
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
 }

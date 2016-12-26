@@ -1,6 +1,5 @@
 {
   "Id": "368516",
-  "Title": "トピック・タイトルを入力して下さい",
   "Meta": {
     "ishlogicalref.object.id": 368514,
     "ishversionref.object.id": 368515,
@@ -24,5 +23,21 @@
     "FUSERGROUP.logical.element": null,
     "READ-ACCESS.logical.element": null
   },
-  "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-D7F29C16-45D1-4A0D-A30E-23A6A1DFE470__GUID-28E0D61D-9369-461F-A090-E65D9D4CB51D\" xmlns=\"http://www.w3.org/1999/xhtml\">トピック・タイトルを入力して下さい</h1>\n      \n      \n      \n      <div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">簡単な説明を入力して下さい(任意)</p>\n         \n         \n         <p class=\"p\">トピックを入力して下さい</p>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <ul class=\"ullinks\">\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1669313/368480/ls40-el/%e3%82%b3%e3%83%b3%e3%82%bb%e3%83%95%e3%83%88%e3%83%bb%e3%82%bf%e3%82%a4%e3%83%88%e3%83%ab%e3%82%92%e5%85%a5%e5%8a%9b%e3%81%97%e3%81%a6%e3%81%8f%e3%81%9f%e3%81%95%e3%81%84\">コンセプト・タイトルを入力してください</a></strong><br />\n               簡単な説明を入力してください (任意)\n            </li>\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1669313/368508/ls40-el/%e3%82%b3%e3%83%b3%e3%82%bb%e3%83%95%e3%83%88%e3%83%bb%e3%82%bf%e3%82%a4%e3%83%88%e3%83%ab%e3%82%92%e5%85%a5%e5%8a%9b%e3%81%97%e3%81%a6%e3%81%8f%e3%81%9f%e3%81%95%e3%81%84\">コンセプト・タイトルを入力してください</a></strong><br />\n               簡単な説明を入力してください (任意)\n            </li>\n            \n         </ul>\n         \n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>親トピック:</strong> <a class=\"link\" title=\"簡単な説明を入力して下さい(任意)\" href=\"/1669313/368500/ls40-el/%e3%83%88%e3%83%92%e3%83%83%e3%82%af%e3%83%bb%e3%82%bf%e3%82%a4%e3%83%88%e3%83%ab%e3%82%92%e5%85%a5%e5%8a%9b%e3%81%97%e3%81%a6%e4%b8%8b%e3%81%95%e3%81%84\">トピック・タイトルを入力して下さい</a></div>\n            \n         </div>\n         \n      </div>\n   "
+  "Regions": [
+    {
+      "Entities": [
+        {
+          "Id": "368516",
+          "topicTitle": "トピック・タイトルを入力して下さい",
+          "topicBody": {
+            "Fragments": [
+              {
+                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-D7F29C16-45D1-4A0D-A30E-23A6A1DFE470__GUID-28E0D61D-9369-461F-A090-E65D9D4CB51D\" xmlns=\"http://www.w3.org/1999/xhtml\">トピック・タイトルを入力して下さい</h1>\n      \n      \n      \n      <div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">簡単な説明を入力して下さい(任意)</p>\n         \n         \n         <p class=\"p\">トピックを入力して下さい</p>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <ul class=\"ullinks\">\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1669313/368480/ls40-el/%e3%82%b3%e3%83%b3%e3%82%bb%e3%83%95%e3%83%88%e3%83%bb%e3%82%bf%e3%82%a4%e3%83%88%e3%83%ab%e3%82%92%e5%85%a5%e5%8a%9b%e3%81%97%e3%81%a6%e3%81%8f%e3%81%9f%e3%81%95%e3%81%84\">コンセプト・タイトルを入力してください</a></strong><br />\n               簡単な説明を入力してください (任意)\n            </li>\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1669313/368508/ls40-el/%e3%82%b3%e3%83%b3%e3%82%bb%e3%83%95%e3%83%88%e3%83%bb%e3%82%bf%e3%82%a4%e3%83%88%e3%83%ab%e3%82%92%e5%85%a5%e5%8a%9b%e3%81%97%e3%81%a6%e3%81%8f%e3%81%9f%e3%81%95%e3%81%84\">コンセプト・タイトルを入力してください</a></strong><br />\n               簡単な説明を入力してください (任意)\n            </li>\n            \n         </ul>\n         \n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>親トピック:</strong> <a class=\"link\" title=\"簡単な説明を入力して下さい(任意)\" href=\"/1669313/368500/ls40-el/%e3%83%88%e3%83%92%e3%83%83%e3%82%af%e3%83%bb%e3%82%bf%e3%82%a4%e3%83%88%e3%83%ab%e3%82%92%e5%85%a5%e5%8a%9b%e3%81%97%e3%81%a6%e4%b8%8b%e3%81%95%e3%81%84\">トピック・タイトルを入力して下さい</a></div>\n            \n         </div>\n         \n      </div>\n   "
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
 }

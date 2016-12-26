@@ -1,6 +1,5 @@
 {
   "Id": "164237",
-  "Title": "Spiele",
   "Meta": {
     "ishlogicalref.object.id": 164235,
     "ishversionref.object.id": 164236,
@@ -30,5 +29,21 @@
     "FUSERGROUP.logical.element": null,
     "READ-ACCESS.logical.element": null
   },
-  "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-3EE04983-92CD-498F-97E5-EEB40E2BDB79__GUID-F9BB818B-18A1-4C3A-A117-632717B5D6F2\" xmlns=\"http://www.w3.org/1999/xhtml\">Spiele</h1>\n      \n      \n      \n      <div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">Ihr Telefon unterstützt die Java 2 Micro Edition (J2METM), eine Version der Java-Technik, die speziell für kleine Elektronikgeräte\n            für Endanwender entwickelt wurde. Das Telefon enthält einige Java-Programme und -Spiele und unterstützt das Herunterladen\n            von neuen Programmen und Spielen über verschiedene WAPDienste.\n         </p>\n         \n         \n         <p class=\"p\">\n            \n            \n         </p>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <ul class=\"ullinks\">\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1656866/164377/publication-mp330/starten-eines-spiels\">Starten eines Spiels</a></strong><br />\n               Das Telefon enthält einige Java-Programme und -Spiele und unterstützt das Herunterladen von neuen Programmen und Spielen über\n               verschiedene WAPDienste.\n            </li>\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1656866/164177/publication-mp330/spiel-downloads\">Spiel-Downloads</a></strong><br />\n               Das Telefon unterstützt das Herunterladen von neuen Programmen und Spielen über verschiedene WAPDienste.\n            </li>\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1656866/164415/publication-mp330/snake-2\">Snake 2</a></strong><br />\n               Führe die Slange zu ihrem Futter, damit sie wächst.\n            </li>\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1656866/164345/publication-mp330/water-rapids\">Water Rapids</a></strong><br />\n               Mit dem Kanu sind sechs Flüsse zu bewältigen.\n            </li>\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1656866/164404/publication-mp330/dj-spiel\">DJ Spiel</a></strong><br />\n               \n            </li>\n            \n         </ul>\n         \n      </div>\n   "
+  "Regions": [
+    {
+      "Entities": [
+        {
+          "Id": "164237",
+          "topicTitle": "Spiele",
+          "topicBody": {
+            "Fragments": [
+              {
+                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-3EE04983-92CD-498F-97E5-EEB40E2BDB79__GUID-F9BB818B-18A1-4C3A-A117-632717B5D6F2\" xmlns=\"http://www.w3.org/1999/xhtml\">Spiele</h1>\n      \n      \n      \n      <div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">Ihr Telefon unterstützt die Java 2 Micro Edition (J2METM), eine Version der Java-Technik, die speziell für kleine Elektronikgeräte\n            für Endanwender entwickelt wurde. Das Telefon enthält einige Java-Programme und -Spiele und unterstützt das Herunterladen\n            von neuen Programmen und Spielen über verschiedene WAPDienste.\n         </p>\n         \n         \n         <p class=\"p\">\n            \n            \n         </p>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <ul class=\"ullinks\">\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1656866/164377/publication-mp330/starten-eines-spiels\">Starten eines Spiels</a></strong><br />\n               Das Telefon enthält einige Java-Programme und -Spiele und unterstützt das Herunterladen von neuen Programmen und Spielen über\n               verschiedene WAPDienste.\n            </li>\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1656866/164177/publication-mp330/spiel-downloads\">Spiel-Downloads</a></strong><br />\n               Das Telefon unterstützt das Herunterladen von neuen Programmen und Spielen über verschiedene WAPDienste.\n            </li>\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1656866/164415/publication-mp330/snake-2\">Snake 2</a></strong><br />\n               Führe die Slange zu ihrem Futter, damit sie wächst.\n            </li>\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1656866/164345/publication-mp330/water-rapids\">Water Rapids</a></strong><br />\n               Mit dem Kanu sind sechs Flüsse zu bewältigen.\n            </li>\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1656866/164404/publication-mp330/dj-spiel\">DJ Spiel</a></strong><br />\n               \n            </li>\n            \n         </ul>\n         \n      </div>\n   "
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
 }

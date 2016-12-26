@@ -1,6 +1,5 @@
 {
   "Id": "164466",
-  "Title": "Anruffunktionen",
   "Meta": {
     "ishlogicalref.object.id": 164464,
     "ishversionref.object.id": 164465,
@@ -30,5 +29,21 @@
     "FUSERGROUP.logical.element": null,
     "READ-ACCESS.logical.element": null
   },
-  "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-F6DEEACC-8925-46B3-9EF3-5DAB76B4386F__GUID-1B2B973F-0EDB-474E-AC8F-A7C8419C37F9\" xmlns=\"http://www.w3.org/1999/xhtml\">Anruffunktionen</h1>\n      \n      \n      \n      <div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\" />\n         \n         \n         <p class=\"p\" />\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <ul class=\"ullinks\">\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1656866/164210/publication-mp330/anrufen\">Anrufen</a></strong><br />\n               \n            </li>\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1656866/164193/publication-mp330/beantworten-oder-abweisen-eines-ankommenden-anrufs\">Beantworten oder Abweisen eines ankommenden Anrufs</a></strong><br />\n               \n            </li>\n            \n         </ul>\n         \n         \n         <div class=\"linklist linklist relinfo reltasks\"><strong>Zugehörige Tasks</strong><br />\n            \n            \n            <div><a class=\"link\" href=\"/1656866/164210/publication-mp330/anrufen\">Anrufen</a></div>\n            \n            <div><a class=\"link\" title=\"Eine Nummer kann gewählt werden, indem Sie ein oder mehrere Wörter sprechen, die damit verknüpft wurden. Bei dem Anrufnamen kann es sich beispielsweise um einen Namen handeln.\" href=\"/1656866/164329/publication-mp330/sprachanwahl\">Sprachanwahl</a></div>\n            \n            <div><a class=\"link\" href=\"/1656866/164193/publication-mp330/beantworten-oder-abweisen-eines-ankommenden-anrufs\">Beantworten oder Abweisen eines ankommenden Anrufs</a></div>\n         </div>\n         \n         \n         <div class=\"linklist linklist relinfo\"><strong>Zugehörige Informationen</strong><br />\n            \n            \n            <div><a class=\"link\" title=\"Bevor Sie die Kurzwahl verwenden können, weisen Sie einer der Kurzwahltasten von bis eine Telefonnummer zu.\" href=\"/1656866/164361/publication-mp330/kurzwahl\">Kurzwahl</a></div>\n            \n            <div><a class=\"link\" href=\"/1656866/164280/publication-mp330/tasten\">Tasten</a></div>\n         </div>\n         \n      </div>\n   "
+  "Regions": [
+    {
+      "Entities": [
+        {
+          "Id": "164466",
+          "topicTitle": "Anruffunktionen",
+          "topicBody": {
+            "Fragments": [
+              {
+                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-F6DEEACC-8925-46B3-9EF3-5DAB76B4386F__GUID-1B2B973F-0EDB-474E-AC8F-A7C8419C37F9\" xmlns=\"http://www.w3.org/1999/xhtml\">Anruffunktionen</h1>\n      \n      \n      \n      <div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\" />\n         \n         \n         <p class=\"p\" />\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <ul class=\"ullinks\">\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1656866/164210/publication-mp330/anrufen\">Anrufen</a></strong><br />\n               \n            </li>\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1656866/164193/publication-mp330/beantworten-oder-abweisen-eines-ankommenden-anrufs\">Beantworten oder Abweisen eines ankommenden Anrufs</a></strong><br />\n               \n            </li>\n            \n         </ul>\n         \n         \n         <div class=\"linklist linklist relinfo reltasks\"><strong>Zugehörige Tasks</strong><br />\n            \n            \n            <div><a class=\"link\" href=\"/1656866/164210/publication-mp330/anrufen\">Anrufen</a></div>\n            \n            <div><a class=\"link\" title=\"Eine Nummer kann gewählt werden, indem Sie ein oder mehrere Wörter sprechen, die damit verknüpft wurden. Bei dem Anrufnamen kann es sich beispielsweise um einen Namen handeln.\" href=\"/1656866/164329/publication-mp330/sprachanwahl\">Sprachanwahl</a></div>\n            \n            <div><a class=\"link\" href=\"/1656866/164193/publication-mp330/beantworten-oder-abweisen-eines-ankommenden-anrufs\">Beantworten oder Abweisen eines ankommenden Anrufs</a></div>\n         </div>\n         \n         \n         <div class=\"linklist linklist relinfo\"><strong>Zugehörige Informationen</strong><br />\n            \n            \n            <div><a class=\"link\" title=\"Bevor Sie die Kurzwahl verwenden können, weisen Sie einer der Kurzwahltasten von bis eine Telefonnummer zu.\" href=\"/1656866/164361/publication-mp330/kurzwahl\">Kurzwahl</a></div>\n            \n            <div><a class=\"link\" href=\"/1656866/164280/publication-mp330/tasten\">Tasten</a></div>\n         </div>\n         \n      </div>\n   "
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
 }

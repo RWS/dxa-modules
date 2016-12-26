@@ -1,0 +1,26 @@
+{
+  "Id": "ish:1420746-1-512",
+  "Title": "User Guide",
+  "Url": null,
+  "IsAbstract": true,
+  "HasChildNodes": true,
+  "Items": [
+    {
+      "Id": "ish:1420746-164239-16",
+      "Title": "Games",
+      "Url": "/1420746/164239/publication-mp330/games",
+      "IsAbstract": false,
+      "HasChildNodes": true,
+      "Items": [
+        {
+          "Id": "ish:1420746-164347-16",
+          "Title": "Water Rapids",
+          "Url": "/1420746/164347/publication-mp330/water-rapids",
+          "IsAbstract": false,
+          "HasChildNodes": false,
+          "Items": []
+        }
+      ]
+    }
+  ]
+}
