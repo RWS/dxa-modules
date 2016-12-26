@@ -6,7 +6,6 @@ import { ITaxonomy } from "interfaces/Taxonomy";
 import { PageService } from "test/mocks/services/PageService";
 import { PublicationService } from "test/mocks/services/PublicationService";
 import { TaxonomyService } from "test/mocks/services/TaxonomyService";
-import { localization } from "test/mocks/services/LocalizationService";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 
 // Global Catalina dependencies
@@ -19,7 +18,6 @@ const TestUtils = React.addons.TestUtils;
 const services = {
     pageService: new PageService(),
     publicationService: new PublicationService(),
-    localizationService: localization,
     taxonomyService: new TaxonomyService()
 };
 const PUBLICATION_ID = "ish:123-1-1";
@@ -274,7 +272,7 @@ class PublicationContentComponent extends TestBase {
     private _renderComponent(target: HTMLElement, pageId?: string): PublicationContent {
         const comp = ReactDOM.render(
             (
-                <ComponentWithContext services={services}>
+                <ComponentWithContext {...services}>
                     <PublicationContent params={{ publicationId: PUBLICATION_ID, pageIdOrPublicationTitle: pageId || "pub-title" }} />
                 </ComponentWithContext>
             ), target) as React.Component<{}, {}>;
