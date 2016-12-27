@@ -3,8 +3,9 @@
 .sdl-dita-delivery-page {
 
     .page-content {
-        padding: 10px;
+        padding: 0 10px 10px 10px;
         color: @neutralColor4;
+        overflow-x: auto;
 
         h1 {
             .header-h1();
@@ -23,7 +24,7 @@
         }
         table {
             .table();
-            th {
+            th, th.entry, th.entry.cell-norowborder, th.entry.nocellnorowborder {
                 .table-header();
             }
             tr, tr.row {
