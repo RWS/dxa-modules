@@ -166,7 +166,9 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
             <div className={"sdl-dita-delivery-breadcrumbs"}>
                 <ul>
                     <li>
-                        <Link className="home" title={homeLabel} to="/home">{homeLabel}</Link>
+                        { /* TODO: Enable when home page is implemented
+                             <Link className="home" title={homeLabel} to="/home">{homeLabel}</Link> */ }
+                        <span title={homeLabel} className="home">{homeLabel}</span>
                         <span className="separator" />
                     </li>
                     <li>
@@ -184,7 +186,7 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
                                                 (item.url) ?
                                                     <Link title={item.title} to={item.url}>{item.title}</Link>
                                                     :
-                                                    <Link title={item.title} to={`${Url.getPublicationUrl(publicationId, publicationTitle)}`}>{item.title}</Link>
+                                                    <span className="abstract">{item.title}</span>
                                                 : <span className="active">{item.title}</span>
                                         }
                                         {index < (itemPath.length - 1) ? <span className="separator" /> : ""}

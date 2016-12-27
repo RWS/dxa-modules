@@ -269,13 +269,18 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         const nextPageId = TcmId.isValidPageId(nextpageIdOrPublicationTitle) ? nextpageIdOrPublicationTitle : null;
         const pageService = this.context.services.pageService;
 
-        if (nextPageId && nextPageId !== pageId) {
+        if (!nextPageId) {
+            // Navigate to the first page in the publication
+            this.setState({
+                activeTocItemPath: undefined
+            });
+        } else if (nextPageId !== pageId) {
             // Set the current active path for the tree
             this._getActiveSitemapPath(nextPageId, (path) => {
-                if (activeTocItemPath && path.join("") !== activeTocItemPath.join("")) {
+                if (!activeTocItemPath || path.join("") !== activeTocItemPath.join("")) {
                     this.setState({
                         activeTocItemPath: path,
-                        isTocExpanding: true
+                        isTocExpanding: !!activeTocItemPath
                     });
                 }
             });
