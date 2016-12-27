@@ -284,7 +284,11 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     });
                 }
             });
+
             // Load the page
+            this.setState({
+                isPageLoading: true
+            });
             pageService.getPageInfo(publicationId, nextPageId).then(
                 this._onPageContentRetrieved.bind(this),
                 this._onPageContentRetrievFailed.bind(this));
