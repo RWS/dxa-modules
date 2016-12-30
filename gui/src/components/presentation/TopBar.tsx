@@ -22,17 +22,27 @@ export interface ITopBarProps {
      * @type {string}
      */
     language: string;
+
+    /**
+     * Triggered whenever the selected item in the toc changes
+     */
+    toggleNavigationMenu: () => void;
 }
 
 /**
  * TopBar
  */
 export const TopBar = (props: ITopBarProps) => {
+
     return (
         <div className={"sdl-dita-delivery-topbar"}>
+            <div className={"sdl-dita-delivery-nav-mask"} onClick={props.toggleNavigationMenu} />
             <header>
+                <div className={"sdl-dita-delivery-topbar-expand-nav"} onClick={props.toggleNavigationMenu} >
+                    <span />
+                </div>
                 <div className={"sdl-dita-delivery-topbar-logo"} title="SDL">
-                    <IndexLink to="/"/>
+                    <IndexLink to="/" />
                 </div>
                 <div className={"sdl-dita-delivery-topbar-title"}>
                     {props.title}
@@ -45,6 +55,6 @@ export const TopBar = (props: ITopBarProps) => {
                     <span />
                 </div>
             </header>
-        </div>
+        </div >
     );
 };
