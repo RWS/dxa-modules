@@ -23,6 +23,12 @@ export interface IHomeState {
  */
 export class Home extends React.Component<{}, IHomeState> {
 
+    public static contextTypes: React.ValidationMap<IAppContext> = {
+        services: React.PropTypes.object.isRequired
+    };
+
+    public context: IAppContext;
+
     /**
      * Creates an instance of App.
      *
@@ -32,19 +38,6 @@ export class Home extends React.Component<{}, IHomeState> {
         this.state = {
             isNavOpen: false
         };
-    }
-
-    public static contextTypes: React.ValidationMap<IAppContext> = {
-        services: React.PropTypes.object.isRequired
-    };
-
-    public context: IAppContext;
-
-    private _toggleNavigationMenu(): void {
-        const { isNavOpen } = this.state;
-        this.setState({
-            isNavOpen: !isNavOpen
-        });
     }
 
     /**
@@ -65,5 +58,12 @@ export class Home extends React.Component<{}, IHomeState> {
                 {this.props.children}
             </div>
         );
+    }
+
+    private _toggleNavigationMenu(): void {
+        const { isNavOpen } = this.state;
+        this.setState({
+            isNavOpen: !isNavOpen
+        });
     }
 };
