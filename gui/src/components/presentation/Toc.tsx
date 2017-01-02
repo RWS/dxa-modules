@@ -74,6 +74,8 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
     public render(): JSX.Element {
         const props = this.props;
         const { error } = this.state;
+        const rootNodes = this._convertToTreeViewNodes(props.rootItems || []);
+        const firstRootNode = rootNodes.length > 0 ? rootNodes[0] : null;
 
         return (
             <nav className={"sdl-dita-delivery-toc"}>
@@ -81,8 +83,10 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
                 {
                     props.rootItems ?
                         <TreeView
-                            activeNodeIdPath={Array.isArray(props.activeItemPath) ? props.activeItemPath.join("/") : undefined}
-                            rootNodes={this._convertToTreeViewNodes(props.rootItems)}
+                            activeNodeIdPath={Array.isArray(props.activeItemPath) ?
+                                props.activeItemPath.join("/") :
+                                (firstRootNode ? firstRootNode.id : undefined)}
+                            rootNodes={rootNodes}
                             useCommonUILibraryScrollView={false}
                             onSelectionChanged={this._onSelectionChanged.bind(this)} />
                         : !error ? <ActivityIndicator /> : null

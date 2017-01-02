@@ -9,7 +9,7 @@
         height: auto;
         line-height: 30px;
         margin: 0;
-        padding-left: 0;
+        padding: 0 10px;
 
         li {
             color: @neutralColor4;
@@ -17,19 +17,20 @@
             line-height: 30px;
             vertical-align: middle;
             a, a:visited, a:hover, a:active, a:link {
-                text-decoration: unset;
+                text-decoration: inherit;
                 color: inherit;
             }
             .separator {
                 .icon-arrow-right();
                 color: @accentColor1;
                 background-repeat: no-repeat;
-                background-position: center 6px;
-                height: 30px;
+                height: 27px;
+                line-height: 27px;
                 float: right;
                 margin: 0 10px;
+                padding-top: 3px;
             }
-            .active {
+            .active, .home, .abstract {
                 color: @neutralColor1;
             }
             .home {
@@ -37,7 +38,7 @@
                 padding-left: 30px;
                 .icon-home();
                 background-repeat: no-repeat;
-                background-position: left 5px;
+                background-position: left 6px;
                 height: inherit;
                 width: inherit;
             }
