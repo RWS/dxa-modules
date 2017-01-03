@@ -493,9 +493,13 @@ export class PublicationContent extends React.Component<IPublicationContentProps
             // Firefox needs document.documentElement, otherwise scrollTop value will be 0 all the time
             // Chrome though needs document.body to work correctly
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-            const { maxHeight, sticksToTop } = Html.getFixedPanelInfo(scrollTop, this._searchBarHeight, this._topBarHeight);
+            const { maxHeight, sticksToTop } = Html.getFixedPanelInfo(scrollTop, this._searchBarHeight, this._topBarHeight, 20);
             if (toc) {
-                toc.style.maxHeight = maxHeight;
+                // Set the max height on the tree view as this is displaying the scroll bar
+                const tocTree = toc.querySelector(".sdl-treeview") as HTMLElement;
+                if (tocTree) {
+                    tocTree.style.maxHeight = maxHeight;
+                }
                 if (sticksToTop) {
                     toc.classList.add(FIXED_NAV_CLASS);
                 } else {

@@ -105,18 +105,19 @@ export class Html {
      * @param {number} scrollTop Scroll top offset
      * @param {number} offsetTop Offset on the top. For example a header
      * @param {number} fixedHeaderHeight Height of the header on top which is using a fixed position
+     * @param {number} [margins=0] Is removed from the maximum height. Use this to indicate there is empty space at the top and/or bottom of the panel.
      * @returns {{ sticksToTop: boolean; maxHeight: string; }}
      *
      * @memberOf Html
      */
-    public static getFixedPanelInfo(scrollTop: number, offsetTop: number, fixedHeaderHeight: number): { sticksToTop: boolean; maxHeight: string; } {
+    public static getFixedPanelInfo(scrollTop: number, offsetTop: number, fixedHeaderHeight: number, margins: number = 0): { sticksToTop: boolean; maxHeight: string; } {
         const viewPortHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
         const sticksToTop = scrollTop > offsetTop;
         let maxHeight: string;
         if (sticksToTop) {
-            maxHeight = (viewPortHeight - fixedHeaderHeight) + "px";
+            maxHeight = (viewPortHeight - fixedHeaderHeight - margins) + "px";
         } else {
-            maxHeight = (viewPortHeight - offsetTop - fixedHeaderHeight + scrollTop) + "px";
+            maxHeight = (viewPortHeight - offsetTop - fixedHeaderHeight - margins + scrollTop) + "px";
         }
         return { sticksToTop, maxHeight };
     }
