@@ -17,7 +17,7 @@
         margin: 0 auto;
         position: relative;
 
-        .sdl-dita-delivery-toc {
+        .sdl-dita-delivery-navigation-menu {
             width: @tocWidth;
             float: left;
         }
@@ -66,7 +66,7 @@
                 margin:0;
             }
 
-            nav.sdl-dita-delivery-toc {
+            .sdl-dita-delivery-navigation-menu {
                 float: none;
                 position: fixed;
                 top: 0;
@@ -75,16 +75,11 @@
                 min-height: 100%;
                 z-index: 1010;
                 background-color: #fff;
-
-                .sdl-treeview{
-                    padding: 0;
-                }
-
                 transition: left .3s ease-out;
             }
 
             article.page-content {
-                margin:0;
+                margin: 0;
             }
 
             nav.sdl-dita-delivery-content-navigation {
@@ -102,8 +97,12 @@
 
         .sdl-dita-delivery-publication-content {
             .sdl-dita-delivery-page {
-                nav.sdl-dita-delivery-toc {
+                .sdl-dita-delivery-navigation-menu {
                     left: 0;
+                    nav.sdl-dita-delivery-toc {
+                        margin:0;
+                        min-height: 100%;
+                    }
                 }
             }
         }
