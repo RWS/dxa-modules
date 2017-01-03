@@ -17,20 +17,40 @@
         margin: 0 auto;
         position: relative;
 
-        .sdl-dita-delivery-toc {
+        nav.sdl-dita-delivery-toc {
             width: @tocWidth;
             float: left;
+
+            > span:first-child, .sdl-treeview {
+                // Inherit max-height from toc panel, needed for scroll bar / separator using vertical space
+                max-height: inherit;
+                width: @tocWidth - 20;
+            }
+
+            .separator {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                margin-left: @tocWidth;
+                width: 10px;
+                box-shadow: -5px 0px 10px 0px fade(@neutralColor1, 10);
+            }
+
+            &.fixed-nav .separator {
+                position: fixed;
+                top: 50px;
+            }
         }
 
         .sdl-dita-delivery-content-navigation {
             width: @contentNavWidth;
             float: right;
+            overflow: auto;
         }
 
         nav.sdl-dita-delivery-toc,
         nav.sdl-dita-delivery-content-navigation {
             min-height: 100px;
-            overflow: auto;
 
             &.fixed-nav {
                 top: 50px;

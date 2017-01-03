@@ -15,6 +15,10 @@ import { Url } from "utils/Url";
 import "components/container/styles/PublicationContent";
 
 const FIXED_NAV_CLASS = "fixed-nav";
+/**
+ * Sum of top and bottom margin of a panel
+ */
+const PANEL_MARGIN = 20;
 
 /**
  * PublicationContent component props params
@@ -360,7 +364,11 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                             return taxonomyService.getSitemapItems(publicationId, taxonomyItemId || parentId);
                         } }
                         onSelectionChanged={this._onTocSelectionChanged.bind(this)}
-                        error={tocError} />
+                        error={tocError}
+                        >
+                        <span className="separator" />
+                    </Toc>
+
                     <Breadcrumbs
                         publicationId={publicationId}
                         publicationTitle={publicationTitle || ""}
@@ -493,12 +501,12 @@ export class PublicationContent extends React.Component<IPublicationContentProps
             // Firefox needs document.documentElement, otherwise scrollTop value will be 0 all the time
             // Chrome though needs document.body to work correctly
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-            const { maxHeight, sticksToTop } = Html.getFixedPanelInfo(scrollTop, this._searchBarHeight, this._topBarHeight, 20);
+            const { maxHeight, sticksToTop } = Html.getFixedPanelInfo(scrollTop, this._searchBarHeight, this._topBarHeight, PANEL_MARGIN);
             if (toc) {
-                // Set the max height on the tree view as this is displaying the scroll bar
-                const tocTree = toc.querySelector(".sdl-treeview") as HTMLElement;
-                if (tocTree) {
-                    tocTree.style.maxHeight = maxHeight;
+                toc.style.maxHeight = maxHeight;
+                const page = domNode.querySelector(".sdl-dita-delivery-page") as HTMLElement;
+                if (page) {
+                   page.style.height = (parseInt(maxHeight, 10) + PANEL_MARGIN) + "px";
                 }
                 if (sticksToTop) {
                     toc.classList.add(FIXED_NAV_CLASS);
