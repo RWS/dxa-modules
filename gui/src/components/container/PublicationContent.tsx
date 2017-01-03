@@ -506,7 +506,8 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                 toc.style.maxHeight = maxHeight;
                 const page = domNode.querySelector(".sdl-dita-delivery-page") as HTMLElement;
                 if (page) {
-                   page.style.height = (parseInt(maxHeight, 10) + PANEL_MARGIN) + "px";
+                   // An extra 3 px is removed because in FF and IE this still shows a scrollbar
+                   page.style.height = (parseInt(maxHeight, 10) + PANEL_MARGIN - 3) + "px";
                 }
                 if (sticksToTop) {
                     toc.classList.add(FIXED_NAV_CLASS);
