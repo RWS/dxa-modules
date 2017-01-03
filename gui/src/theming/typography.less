@@ -42,26 +42,39 @@
 .anchor() {
     color: @anchorColor;
     text-decoration: none;
+    &:hover {
+        color: @accentColor1;
+    }
 }
 
 .table() {
     border-color: @tableBorderColor;
-    border-left-style: none;
-    border-right-style: none;
+    border-style: none;
+    padding: 10px 0;
 }
 
 .table-header() {
     text-transform: uppercase;
+    border-left-style: none;
+    border-top-style: none;
+    border-right-style: none;
+    border-bottom: 1px solid @tableBorderColor;
+    padding: 10px;
 }
 
 .table-row() {
     padding: 0;
+    border-style: none;
 }
 
 .table-cell() {
     padding: 10px;
     border-color: @tableBorderColor;
+    border-left-style: none;
+    border-top-style: none;
     border-right-style: none;
+    border-bottom: 1px solid @tableBorderColor;
+    padding: 10px;
 }
 
 .unordered-list() {
