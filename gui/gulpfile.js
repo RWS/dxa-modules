@@ -245,12 +245,10 @@ gulp.task('default', function (cb) {
             });
         },
         next => {
-            // Reset build options
-            buildOptions.isTest = false;
-
             // Release
+            buildOptions.isTest = false;
             buildOptions.isDebug = false;
-            runSequence('clean', 'test', next);
+            runSequence('clean', 'build', next);
         }
     ], cb);
 });
