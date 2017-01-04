@@ -1,9 +1,10 @@
 @import (reference) "../../../theming/styles.less";
 @import (reference) "../../presentation/styles/TopBar.less";
 
+@tocWidth: 300px;
+@contentNavWidth: 210px;
+
 .sdl-dita-delivery-publication-content {
-    @tocWidth: 300px;
-    @contentNavWidth: 210px;
 
     position: relative;
     height: 100%;
@@ -51,8 +52,10 @@
             min-height: 100px;
         }
     }
+}
 
-    @media screen and (max-width: @screenSm) {
+@media screen and (max-width: @screenSm) {
+    .sdl-dita-delivery-publication-content {
         position: initial;
 
         .sdl-dita-delivery-page {
