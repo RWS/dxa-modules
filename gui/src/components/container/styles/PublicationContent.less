@@ -37,6 +37,10 @@
                     margin-left: @tocWidth;
                     width: 10px;
                     box-shadow: -5px 0px 10px 0px fade(@neutralColor1, 10);
+
+                    @media screen and (max-width: @screenSm) {
+                        display: none;
+                    }
                 }
 
                 &.fixed-nav .separator {
