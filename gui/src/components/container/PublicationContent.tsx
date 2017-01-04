@@ -3,6 +3,7 @@ import { ITaxonomy } from "interfaces/Taxonomy";
 import { IPage } from "interfaces/Page";
 
 import { IAppContext } from "components/container/App";
+import { NavigationMenu } from "components/container/NavigationMenu";
 import { Toc } from "components/presentation/Toc";
 import { Page } from "components/presentation/Page";
 import { SearchBar } from "components/presentation/SearchBar";
@@ -354,21 +355,22 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     anchor={selectedTocItem ? pageAnchor : undefined}
                     scrollOffset={this._topBarHeight}
                     activeHeader={activePageHeader}>
-                    <Toc
-                        activeItemPath={activeTocItemPath}
-                        rootItems={rootItems}
-                        loadChildItems={(parentId: string): Promise<ITaxonomy[]> => {
-                            // TODO: this conversion will not be needed when upgrading to DXA 1.7
-                            // https://jira.sdl.com/browse/TSI-2131
-                            const taxonomyItemId = TcmId.getTaxonomyItemId("1", parentId);
-                            return taxonomyService.getSitemapItems(publicationId, taxonomyItemId || parentId);
-                        } }
-                        onSelectionChanged={this._onTocSelectionChanged.bind(this)}
-                        error={tocError}
-                        >
-                        <span className="separator" />
-                    </Toc>
-
+                    <NavigationMenu>
+                        <Toc
+                            activeItemPath={activeTocItemPath}
+                            rootItems={rootItems}
+                            loadChildItems={(parentId: string): Promise<ITaxonomy[]> => {
+                                // TODO: this conversion will not be needed when upgrading to DXA 1.7
+                                // https://jira.sdl.com/browse/TSI-2131
+                                const taxonomyItemId = TcmId.getTaxonomyItemId("1", parentId);
+                                return taxonomyService.getSitemapItems(publicationId, taxonomyItemId || parentId);
+                            } }
+                            onSelectionChanged={this._onTocSelectionChanged.bind(this)}
+                            error={tocError}
+                            >
+                            <span className="separator" />
+                        </Toc>
+                    </NavigationMenu>
                     <Breadcrumbs
                         publicationId={publicationId}
                         publicationTitle={publicationTitle || ""}
@@ -545,9 +547,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                         }
                     }
                 }
-
             }
-
         }
     }
 }

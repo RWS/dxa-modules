@@ -1,9 +1,10 @@
 @import (reference) "../../../theming/styles.less";
 @import (reference) "../../presentation/styles/TopBar.less";
 
+@tocWidth: 300px;
+@contentNavWidth: 210px;
+
 .sdl-dita-delivery-publication-content {
-    @tocWidth: 300px;
-    @contentNavWidth: 210px;
 
     position: relative;
     height: 100%;
@@ -17,28 +18,31 @@
         margin: 0 auto;
         position: relative;
 
-        nav.sdl-dita-delivery-toc {
+        .sdl-dita-delivery-navigation-menu {
             width: @tocWidth;
             float: left;
 
-            > span:first-child, .sdl-treeview {
-                // Inherit max-height from toc panel, needed for scroll bar / separator using vertical space
-                max-height: inherit;
-                width: @tocWidth - 20;
-            }
+            nav.sdl-dita-delivery-toc {
 
-            .separator {
-                position: absolute;
-                top: 0;
-                bottom: 0;
-                margin-left: @tocWidth;
-                width: 10px;
-                box-shadow: -5px 0px 10px 0px fade(@neutralColor1, 10);
-            }
+                > span:first-child, .sdl-treeview {
+                    // Inherit max-height from toc panel, needed for scroll bar / separator using vertical space
+                    max-height: inherit;
+                    width: @tocWidth - 20;
+                }
 
-            &.fixed-nav .separator {
-                position: fixed;
-                top: 50px;
+                .separator {
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    margin-left: @tocWidth;
+                    width: 10px;
+                    box-shadow: -5px 0px 10px 0px fade(@neutralColor1, 10);
+                }
+
+                &.fixed-nav .separator {
+                    position: fixed;
+                    top: 50px;
+                }
             }
         }
 
@@ -69,6 +73,62 @@
             margin-left: @tocWidth;
             margin-right: @contentNavWidth;
             min-height: 100px;
+        }
+    }
+}
+
+@media screen and (max-width: @screenSm) {
+    .sdl-dita-delivery-publication-content {
+        position: initial;
+
+        .sdl-dita-delivery-page {
+
+            position: initial;
+
+            .sdl-dita-delivery-breadcrumbs {
+                padding-bottom: 15px;
+                margin:0;
+            }
+
+            .sdl-dita-delivery-navigation-menu {
+                float: none;
+                position: fixed;
+                top: 0;
+                bottom: 0;
+                left: @tocWidth * -1;
+                min-height: 100%;
+                z-index: 1010;
+                background-color: #fff;
+                transition: left .3s ease-out;
+            }
+
+            article.page-content {
+                margin: 0;
+            }
+
+            nav.sdl-dita-delivery-content-navigation {
+                width: 100%;
+                float: none;
+            }
+        }
+    }
+
+    .sdl-dita-delivery-app-nav-open {
+
+        .sdl-dita-delivery-nav-mask {
+            display: block;
+        }
+
+        .sdl-dita-delivery-publication-content {
+            .sdl-dita-delivery-page {
+                .sdl-dita-delivery-navigation-menu {
+                    left: 0;
+                    nav.sdl-dita-delivery-toc {
+                        margin:0;
+                        min-height: 100%;
+                    }
+                }
+            }
         }
     }
 }
