@@ -512,23 +512,24 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         }
     }
 
-            // Firefox needs document.documentElement, otherwise scrollTop value will be 0 all the time
-            // Chrome though needs document.body to work correctly
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-            const { maxHeight, sticksToTop } = Html.getFixedPanelInfo(scrollTop, this._searchBarHeight, this._topBarHeight, PANEL_MARGIN);
-            if (toc) {
-                toc.style.maxHeight = maxHeight;
-                const page = domNode.querySelector(".sdl-dita-delivery-page") as HTMLElement;
-                if (page) {
-                   // An extra 3 px is removed because in FF and IE this still shows a scrollbar
-                   page.style.height = (parseInt(maxHeight, 10) + PANEL_MARGIN - 3) + "px";
-                }
-                if (sticksToTop) {
-                    toc.classList.add(FIXED_NAV_CLASS);
-                } else {
-                    toc.classList.remove(FIXED_NAV_CLASS);
-                }
+    private _updatePanels(toc: HTMLElement, contentNavigation: HTMLElement): void {
+        // Firefox needs document.documentElement, otherwise scrollTop value will be 0 all the time
+        // Chrome though needs document.body to work correctly
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        const { maxHeight, sticksToTop } = Html.getFixedPanelInfo(scrollTop, this._searchBarHeight, this._topBarHeight, PANEL_MARGIN);
+        if (toc) {
+            toc.style.maxHeight = maxHeight;
+            const page = domNode.querySelector(".sdl-dita-delivery-page") as HTMLElement;
+            if (page) {
+                // An extra 3 px is removed because in FF and IE this still shows a scrollbar
+                page.style.height = (parseInt(maxHeight, 10) + PANEL_MARGIN - 3) + "px";
             }
+            if (sticksToTop) {
+                toc.classList.add(FIXED_NAV_CLASS);
+            } else {
+                toc.classList.remove(FIXED_NAV_CLASS);
+            }
+        }
 
         if (contentNavigation) {
             contentNavigation.style.maxHeight = maxHeight;
