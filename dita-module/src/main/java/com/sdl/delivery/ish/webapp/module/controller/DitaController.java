@@ -1,7 +1,6 @@
 package com.sdl.delivery.ish.webapp.module.controller;
 
 import com.sdl.delivery.ish.webapp.module.localization.DitaLocalization;
-import com.sdl.delivery.ish.webapp.module.model.Topic;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.content.ContentProvider;
 import com.sdl.webapp.common.api.content.ContentProviderException;
@@ -14,12 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 /**
  * Controller for Dita Module.
@@ -36,19 +32,6 @@ public class DitaController {
 
     @Autowired
     private DataFormatter dataFormatters;
-
-
-    /**
-     * Hello world request mapping.
-     */
-    @RequestMapping(value = "/api/helloworld", method = GET, produces = "application/json")
-    @ResponseBody
-    public Topic helloworld() {
-        Topic result = new Topic();
-        result.setTopicTitle("hello topic");
-        return result;
-    }
-
 
     /**
      * Get page model using the json format.

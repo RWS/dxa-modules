@@ -134,7 +134,8 @@ export class Html {
      * @memberOf Html
      */
     public static getActiveHeader(scrollContainter: HTMLElement, element: HTMLElement, offsetTop: number): IHeader | undefined {
-        const top = scrollContainter.scrollTop;
+        // In IE scrollTop is always 0
+        const top = (scrollContainter.scrollTop || document.documentElement.scrollTop || document.body.scrollTop || 0) - 10;
         const headers = element.querySelectorAll(HEADER_SELECTOR);
         for (let i = 0, length = headers.length; i < length; i++) {
             const headerEl = <HTMLElement>headers.item(i);
@@ -159,9 +160,11 @@ export class Html {
      * @memberOf Html
      */
     public static scrollIntoView(scrollContainter: HTMLElement, element: HTMLElement): void {
+        // In IE scrollTop is always 0
+        const scrollTop = scrollContainter.scrollTop || document.documentElement.scrollTop || document.body.scrollTop || 0;
         // Scroll when the element is out of view
-        if ((scrollContainter.scrollTop < element.offsetTop && element.offsetTop > scrollContainter.clientHeight) // Below
-            || element.offsetTop < scrollContainter.scrollTop) { // Above
+        if ((scrollTop < element.offsetTop && element.offsetTop > scrollContainter.clientHeight) // Below
+            || element.offsetTop < scrollTop) { // Above
             scrollContainter.scrollTop = element.offsetTop - element.clientHeight;
         }
     }

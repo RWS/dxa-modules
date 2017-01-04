@@ -12,6 +12,7 @@ import { Breadcrumbs } from "components/presentation/Breadcrumbs";
 import { Html, IHeader } from "utils/Html";
 import { TcmId } from "utils/TcmId";
 import { Url } from "utils/Url";
+import { debounce } from "utils/Function";
 
 import "components/container/styles/PublicationContent";
 
@@ -494,58 +495,72 @@ export class PublicationContent extends React.Component<IPublicationContentProps
             return;
         }
 
+        let ticking = false;
+
         // Set height of toc and content navigation panel to a maximum
         const domNode = ReactDOM.findDOMNode(this) as HTMLElement;
         if (domNode) {
             const toc = domNode.querySelector("nav.sdl-dita-delivery-toc") as HTMLElement;
             const contentNavigation = domNode.querySelector("nav.sdl-dita-delivery-content-navigation") as HTMLElement;
+            const page = domNode.querySelector(".sdl-dita-delivery-page") as HTMLElement;
+            if (!ticking) {
+                requestAnimationFrame((): void => {
+                    this._updatePanels(page, toc, contentNavigation);
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+    }
 
-            // Firefox needs document.documentElement, otherwise scrollTop value will be 0 all the time
-            // Chrome though needs document.body to work correctly
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-            const { maxHeight, sticksToTop } = Html.getFixedPanelInfo(scrollTop, this._searchBarHeight, this._topBarHeight, PANEL_MARGIN);
-            if (toc) {
-                toc.style.maxHeight = maxHeight;
-                const page = domNode.querySelector(".sdl-dita-delivery-page") as HTMLElement;
+    private _updatePanels(page: HTMLElement, toc: HTMLElement, contentNavigation: HTMLElement): void {
+        // Firefox needs document.documentElement, otherwise scrollTop value will be 0 all the time
+        // Chrome though needs document.body to work correctly
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        const { maxHeight, sticksToTop } = Html.getFixedPanelInfo(scrollTop, this._searchBarHeight, this._topBarHeight, PANEL_MARGIN);
+
+        if (page) {
+            // An extra 3 px is removed because in FF and IE this still shows a scrollbar
+            page.style.height = (parseInt(maxHeight, 10) + PANEL_MARGIN - 3) + "px";
+        }
+
+        if (toc) {
+            toc.style.maxHeight = maxHeight;
+            if (sticksToTop) {
+                toc.classList.add(FIXED_NAV_CLASS);
+            } else {
+                toc.classList.remove(FIXED_NAV_CLASS);
+            }
+        }
+
+        if (contentNavigation) {
+            contentNavigation.style.maxHeight = maxHeight;
+            if (sticksToTop) {
+                contentNavigation.classList.add(FIXED_NAV_CLASS);
+                // Set left position
                 if (page) {
-                   // An extra 3 px is removed because in FF and IE this still shows a scrollbar
-                   page.style.height = (parseInt(maxHeight, 10) + PANEL_MARGIN - 3) + "px";
+                    contentNavigation.style.left = (page.offsetLeft + page.clientWidth - contentNavigation.offsetWidth) + "px";
                 }
-                if (sticksToTop) {
-                    toc.classList.add(FIXED_NAV_CLASS);
-                } else {
-                    toc.classList.remove(FIXED_NAV_CLASS);
-                }
+            } else {
+                contentNavigation.classList.remove(FIXED_NAV_CLASS);
+                contentNavigation.style.left = null;
             }
 
-            if (contentNavigation) {
-                contentNavigation.style.maxHeight = maxHeight;
-                if (sticksToTop) {
-                    const page = document.querySelector(".sdl-dita-delivery-page") as HTMLElement;
-                    contentNavigation.classList.add(FIXED_NAV_CLASS);
-                    // Set left position
-                    if (page) {
-                        contentNavigation.style.left = (page.offsetLeft + page.clientWidth - contentNavigation.offsetWidth) + "px";
-                    }
-                } else {
-                    contentNavigation.classList.remove(FIXED_NAV_CLASS);
-                    contentNavigation.style.left = null;
-                }
-
-                // Update active title inside content navigation panel
-                const pageContent = document.querySelector(".sdl-dita-delivery-page .page-content") as HTMLElement;
-                if (pageContent) {
-                    const header = Html.getActiveHeader(document.body, pageContent, this._searchBarHeight);
-                    if (header && header !== this.state.activePageHeader) {
-                        this.setState({
-                            activePageHeader: header
-                        });
+            // Update active title inside content navigation panel
+            const pageContent = page.querySelector(".page-content") as HTMLElement;
+            if (pageContent) {
+                const header = Html.getActiveHeader(document.body, pageContent, this._searchBarHeight);
+                if (header && header !== this.state.activePageHeader) {
+                    this.setState({
+                        activePageHeader: header
+                    });
+                    debounce((): void => {
                         // Make sure the active link is in view
                         const activeLinkEl = contentNavigation.querySelector("li.active") as HTMLElement;
                         if (activeLinkEl) {
                             Html.scrollIntoView(contentNavigation, activeLinkEl);
                         }
-                    }
+                    })();
                 }
             }
         }
