@@ -7,7 +7,7 @@ module.exports = (isTest, isDebug) => {
     const entries = {
         main: './src/Main.tsx',
         server: './src/Server.tsx',
-        vendor: ['es6-promise', 'react-router', 'ts-helpers']
+        vendor: ['es6-promise', 'react-router', 'ts-helpers', 'sdl-controls', 'sdl-controls-react-wrappers']
     };
     const testEntries = Object.assign({
         test: './test/Main.ts',
@@ -23,6 +23,12 @@ module.exports = (isTest, isDebug) => {
         },
         devtool: 'source-map',
         resolve: {
+            // Needed to resolve dependencies to react inside sdl-control-react-wrappers
+            alias: {
+                React: "react",
+                ReactDOM: "react-dom",
+                ReactDOMServer: "react-dom/server"
+            },
             modules: [
                 path.resolve(__dirname),
                 path.resolve(__dirname, 'src'),
@@ -44,6 +50,11 @@ module.exports = (isTest, isDebug) => {
                 test: /\.tsx?$/,
                 loader: 'ts-loader'
             }]
+        },
+        externals: {
+            react: 'React',
+            'react-dom': 'ReactDOM',
+            'react-dom/server': 'ReactDOMServer'
         },
         plugins: [
             extractCSS
