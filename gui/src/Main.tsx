@@ -1,6 +1,8 @@
 /// <reference path="../typings/index.d.ts" />
 
 import "ts-helpers";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 import { App } from "components/container/App";
 import { IServices } from "interfaces/Services";
 import { PageService } from "services/client/PageService";

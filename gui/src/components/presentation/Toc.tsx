@@ -1,12 +1,12 @@
+import * as React from "react";
 import { Promise } from "es6-promise";
 import { ITaxonomy } from "interfaces/Taxonomy";
+import { ActivityIndicator, TreeView, ValidationMessage} from "sdl-controls-react-wrappers";
+
 import "components/presentation/styles/Toc";
 import "components/controls/styles/TreeView";
 
 // Global Catalina dependencies
-import ActivityIndicator = SDL.ReactComponents.ActivityIndicator;
-import ValidationMessage = SDL.ReactComponents.ValidationMessage;
-import TreeView = SDL.ReactComponents.TreeView;
 import IBaseTreeViewNode = SDL.UI.Controls.ITreeViewNode;
 
 /**
@@ -87,7 +87,6 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
                                 props.activeItemPath.join("/") :
                                 (firstRootNode ? firstRootNode.id : undefined)}
                             rootNodes={rootNodes}
-                            useCommonUILibraryScrollView={false}
                             onSelectionChanged={this._onSelectionChanged.bind(this)} />
                         : !error ? <ActivityIndicator /> : null
                 }

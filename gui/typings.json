@@ -8,7 +8,6 @@
     "react-router": "registry:dt/react-router#2.0.0+20160928130202",
     "react-router/history": "registry:dt/react-router/history#2.0.0+20160830150755",
     "sdl-catalina": "file:./node_modules/sdl-catalina/Typescript/typings.json",
-    "sdl-catalina-react-wrappers": "file:./node_modules/sdl-catalina-react-wrappers/typings.json",
     "source-map": "registry:dt/source-map#0.0.0+20161003134342",
     "uglify-js": "registry:dt/uglify-js#2.6.1+20160316155526",
     "webpack-env": "github:DefinitelyTyped/DefinitelyTyped/webpack-env/index.d.ts#50f20d7af556db2da21e70de65f5c909ab5145ca"

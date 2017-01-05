@@ -1,14 +1,13 @@
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 import { Html, IHeader } from "utils/Html";
 import { Url } from "utils/Url";
 import { ContentNavigation, IContentNavigationItem } from "components/presentation/ContentNavigation";
+import { ActivityIndicator, ValidationMessage } from "sdl-controls-react-wrappers";
 
 import "components/presentation/styles/Page";
 import "dist/dita-ot/styles/commonltr";
 import "dist/dita-ot/styles/commonrtl";
-
-// Global Catalina dependencies
-import ActivityIndicator = SDL.ReactComponents.ActivityIndicator;
-import ValidationMessage = SDL.ReactComponents.ValidationMessage;
 
 /**
  * Page component props
