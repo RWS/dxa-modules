@@ -4,6 +4,7 @@ import { Html, IHeader } from "utils/Html";
 import { Url } from "utils/Url";
 import { ContentNavigation, IContentNavigationItem } from "components/presentation/ContentNavigation";
 import { ActivityIndicator, ValidationMessage } from "sdl-controls-react-wrappers";
+import { ValidationMessageType } from "sdl-controls";
 
 import "components/presentation/styles/Page";
 import "dist/dita-ot/styles/commonltr";
@@ -124,7 +125,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
         return (
             <div className={"sdl-dita-delivery-page"}>
                 {props.showActivityIndicator ? <ActivityIndicator /> : null}
-                {props.error ? <ValidationMessage messageType={SDL.UI.Controls.ValidationMessageType.Error} message={props.error} /> : null}
+                {props.error ? <ValidationMessage messageType={ValidationMessageType.Error} message={props.error} /> : null}
                 <ContentNavigation navItems={navItems} activeNavItemId={activeNavItemId} />
                 {props.children}
                 <article>

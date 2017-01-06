@@ -1,13 +1,11 @@
 import * as React from "react";
 import { Promise } from "es6-promise";
 import { ITaxonomy } from "interfaces/Taxonomy";
-import { ActivityIndicator, TreeView, ValidationMessage} from "sdl-controls-react-wrappers";
+import { ActivityIndicator, TreeView, ValidationMessage } from "sdl-controls-react-wrappers";
+import { TreeView as TreeViewControl, ITreeViewNode as IBaseTreeViewNode, ValidationMessageType } from "sdl-controls";
 
 import "components/presentation/styles/Toc";
 import "components/controls/styles/TreeView";
-
-// Global Catalina dependencies
-import IBaseTreeViewNode = SDL.UI.Controls.ITreeViewNode;
 
 /**
  * Toc component props
@@ -79,7 +77,7 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
 
         return (
             <nav className={"sdl-dita-delivery-toc"}>
-                {error ? <ValidationMessage messageType={SDL.UI.Controls.ValidationMessageType.Error} message={error} /> : null}
+                {error ? <ValidationMessage messageType={ValidationMessageType.Error} message={error} /> : null}
                 {
                     props.rootItems ?
                         <TreeView
@@ -145,26 +143,23 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
 
     private _convertToTreeViewNodes(taxonomies: ITaxonomy[], parentNode: ITreeViewNode | null = null): ITreeViewNode[] {
         const nodes: ITreeViewNode[] = [];
-        // Check if Catalina is loaded, on a server environment this is typically not the case
-        // TODO: https://jira.sdl.com/browse/SDLUI-1980
-        if (SDL && SDL.UI && SDL.UI.Controls) {
-            const TreeViewControl = SDL.UI.Controls.TreeView;
-            let count = 0;
-            for (let taxonomy of taxonomies) {
-                let newNode = TreeViewControl.prototype.createNode(
-                    taxonomy.id || count.toString(),
-                    taxonomy.title,
-                    "TOPIC",
-                    parentNode,
-                    null,
-                    !taxonomy.hasChildNodes,
-                    this._loadChildNodes.bind(this),
-                    true) as ITreeViewNode;
-                newNode.taxonomy = taxonomy;
-                nodes.push(newNode);
-                count++;
-            }
+
+        let count = 0;
+        for (let taxonomy of taxonomies) {
+            let newNode = TreeViewControl.prototype.createNode(
+                taxonomy.id || count.toString(),
+                taxonomy.title,
+                "TOPIC",
+                parentNode,
+                null,
+                !taxonomy.hasChildNodes,
+                this._loadChildNodes.bind(this),
+                true) as ITreeViewNode;
+            newNode.taxonomy = taxonomy;
+            nodes.push(newNode);
+            count++;
         }
+
         return nodes;
     }
 
