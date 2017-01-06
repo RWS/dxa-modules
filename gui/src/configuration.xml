@@ -16,7 +16,6 @@
     </locales>
     <!-- Main Catalina config -->
     <include src="~/configuration.xml" />
-    <include src="SDL/ReactComponents/configuration.xml" />
     <!-- Main resources -->
     <resourceGroups>
         <resourceGroup name="Sdl.DitaDelivery">
@@ -35,7 +34,7 @@
                 <file name="resources/resources.{CULTURE}.resjson" />
             </files>
             <dependencies>
-                <dependency name="ReactComponents.Components" />
+                <dependency name="SDL.Client.Libraries.SDL.Globalize" />
                 <dependency name="SDL.Client.Models.Classes" />
             </dependencies>
         </resourceGroup>

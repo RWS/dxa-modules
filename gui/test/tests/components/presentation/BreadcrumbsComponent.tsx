@@ -1,3 +1,6 @@
+import * as React from "react";
+import * as ReactDOM from "react-dom";
+import * as TestUtils from "react-addons-test-utils";
 import { Router, Route } from "react-router";
 import { Breadcrumbs, IBreadcrumbsProps } from "components/presentation/Breadcrumbs";
 import { ITaxonomy } from "interfaces/Taxonomy";
@@ -9,7 +12,6 @@ import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 
 // Global Catalina dependencies
 import TestBase = SDL.Client.Test.TestBase;
-const TestUtils = React.addons.TestUtils;
 
 interface IProps {
     params: {

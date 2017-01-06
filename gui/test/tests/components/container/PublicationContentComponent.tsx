@@ -1,7 +1,11 @@
+import * as React from "react";
+import * as ReactDOM from "react-dom";
+import * as TestUtils from "react-addons-test-utils";
 import { PublicationContent } from "components/container/PublicationContent";
 import { Toc } from "components/presentation/Toc";
 import { Page } from "components/presentation/Page";
 import { ITaxonomy } from "interfaces/Taxonomy";
+import { ActivityIndicator, TreeView, ValidationMessage} from "sdl-controls-react-wrappers";
 
 import { PageService } from "test/mocks/services/PageService";
 import { PublicationService } from "test/mocks/services/PublicationService";
@@ -10,10 +14,6 @@ import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 
 // Global Catalina dependencies
 import TestBase = SDL.Client.Test.TestBase;
-import ActivityIndicator = SDL.ReactComponents.ActivityIndicator;
-import TreeView = SDL.ReactComponents.TreeView;
-import ValidationMessage = SDL.ReactComponents.ValidationMessage;
-const TestUtils = React.addons.TestUtils;
 
 const services = {
     pageService: new PageService(),

@@ -1,13 +1,13 @@
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const extractCSS = new ExtractTextPlugin('stylesheets/[name].css');
 
 module.exports = (isTest, isDebug) => {
     const entries = {
         main: './src/Main.tsx',
         server: './src/Server.tsx',
-        vendor: ['es6-promise', 'react-router', 'ts-helpers']
+        vendor: ['es6-promise', 'react-router', 'ts-helpers', 'sdl-controls-react-wrappers']
     };
     const testEntries = Object.assign({
         test: './test/Main.ts',
@@ -23,6 +23,12 @@ module.exports = (isTest, isDebug) => {
         },
         devtool: 'source-map',
         resolve: {
+            // Needed to resolve dependencies to react inside sdl-control-react-wrappers
+            alias: {
+                React: 'react',
+                ReactDOM: 'react-dom',
+                ReactDOMServer: 'react-dom/server'
+            },
             modules: [
                 path.resolve(__dirname),
                 path.resolve(__dirname, 'src'),
@@ -45,6 +51,12 @@ module.exports = (isTest, isDebug) => {
                 loader: 'ts-loader'
             }]
         },
+        externals: {
+            react: 'React',
+            'react-dom': 'ReactDOM',
+            'react-dom/server': 'ReactDOMServer',
+            'react-addons-test-utils': 'React.addons.TestUtils'
+        },
         plugins: [
             extractCSS
         ],
@@ -52,14 +64,14 @@ module.exports = (isTest, isDebug) => {
         stats: {
             colors: true,
             reasons: isDebug,
-            hash: isDebug,
-            version: isDebug,
+            hash: false,
+            version: false,
             timings: true,
-            chunks: isDebug,
-            chunkModules: isDebug,
-            cached: isDebug,
-            cachedAssets: isDebug,
-        },
+            chunks: false,
+            chunkModules: false,
+            cached: false,
+            cachedAssets: false,
+        }
     };
 
     if (isTest) {

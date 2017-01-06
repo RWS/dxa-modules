@@ -1,3 +1,4 @@
+import * as React from "react";
 import { IServices } from "interfaces/Services";
 import { PageService } from "test/mocks/services/PageService";
 import { PublicationService } from "test/mocks/services/PublicationService";

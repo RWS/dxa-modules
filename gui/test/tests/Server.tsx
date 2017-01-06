@@ -1,3 +1,5 @@
+import * as React from "react";
+import * as ReactDOMServer from "react-dom/server";
 import { renderToString } from "Server";
 import { App } from "components/container/App";
 import { hashHistory } from "react-router";
