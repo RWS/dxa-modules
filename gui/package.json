@@ -13,12 +13,6 @@
     "sdl-models": "~0.1.0-4",
     "ts-helpers": "~1.1.2"
   },
-  "peerDependencies": {
-    "react": "~15.3.2",
-    "react-dom": "~15.3.2",
-    "sdl-controls": "~0.1.0-5",
-    "sdl-models": "~0.1.0-4"
-  },
   "devDependencies": {
     "async": "~2.0.0-rc.6",
     "autoprefixer": "~6.4.0",
