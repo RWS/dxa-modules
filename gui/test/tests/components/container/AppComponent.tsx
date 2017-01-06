@@ -4,15 +4,12 @@ import * as TestUtils from "react-addons-test-utils";
 import { App } from "components/container/App";
 import { PublicationContent } from "components/container/PublicationContent";
 import { Url } from "utils/Url";
-
+import { TestBase } from "sdl-models";
 import { PageService } from "test/mocks/services/PageService";
 import { PublicationService } from "test/mocks/services/PublicationService";
 import { TaxonomyService } from "test/mocks/services/TaxonomyService";
 import { localization } from "test/mocks/services/LocalizationService";
 import { hashHistory } from "react-router";
-
-// Global Catalina dependencies
-import TestBase = SDL.Client.Test.TestBase;
 
 const services = {
     pageService: new PageService(),

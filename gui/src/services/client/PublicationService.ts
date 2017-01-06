@@ -40,7 +40,7 @@ export class PublicationService implements IPublicationService {
                     removeEventListeners();
                     resolve(publication.getPublications());
                 };
-                const onLoadFailed = (event: SDL.Client.Event.Event) => {
+                const onLoadFailed = (event: Event & { data: { error: string } }) => {
                     removeEventListeners();
                     reject(event.data.error);
                 };

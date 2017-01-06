@@ -5,13 +5,10 @@ import { Router, Route } from "react-router";
 import { Home } from "components/container/Home";
 import { PublicationContent } from "components/container/PublicationContent";
 import { ActivityIndicator} from "sdl-controls-react-wrappers";
-
+import { TestBase } from "sdl-models";
 import { PageService } from "test/mocks/services/PageService";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 import { hashHistory } from "react-router";
-
-// Global Catalina dependencies
-import TestBase = SDL.Client.Test.TestBase;
 
 const services = {
     pageService: new PageService()

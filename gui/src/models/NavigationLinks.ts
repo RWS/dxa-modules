@@ -1,15 +1,8 @@
 import { ISitemapItem } from "interfaces/ServerModels";
 import { ITaxonomy } from "interfaces/Taxonomy";
 import { Api } from "utils/Api";
+import { getRequest, IWebRequest, LoadableObject } from "sdl-models";
 
-// Global Catalina dependencies
-import IWebRequest = SDL.Client.Net.IWebRequest;
-import LoadableObject = SDL.Client.Models.LoadableObject;
-import OO = SDL.Client.Types.OO;
-import Net = SDL.Client.Net;
-
-/* tslint:disable-next-line */
-eval(OO.enableCustomInheritance);
 /**
  * Navigation links model
  *
@@ -51,7 +44,7 @@ export class NavigationLinks extends LoadableObject {
     /* Overloads */
     protected _executeLoad(reload: boolean): void {
         const url = Api.getNavigationLinksUrl(this._publicationId, this._taxonomyId);
-        Net.getRequest(url,
+        getRequest(url,
             this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
     }
 
@@ -59,12 +52,6 @@ export class NavigationLinks extends LoadableObject {
         this._path = this._calculatePath(JSON.parse(result));
 
         super._processLoadResult(result, webRequest);
-    }
-
-    protected _onLoadFailed(error: string, webRequest: IWebRequest): void {
-        const p = this.properties;
-        p.loading = false;
-        this.fireEvent("loadfailed", { error: error });
     }
 
     private _calculatePath(navigationLinks: ISitemapItem): ITaxonomy[] {
@@ -94,5 +81,3 @@ export class NavigationLinks extends LoadableObject {
         return path;
     }
 }
-
-OO.createInterface("Sdl.DitaDelivery.Models.NavigationLinks", NavigationLinks);

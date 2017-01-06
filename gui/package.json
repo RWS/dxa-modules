@@ -4,16 +4,20 @@
   "description": "GUI of the SDL Dita Delivery Web Application.",
   "dependencies": {
     "es6-promise": "~4.0.5",
-    "react": "15.3.1",
-    "react-dom": "15.3.1",
+    "react": "~15.3.2",
+    "react-dom": "~15.3.2",
     "react-router": "~3.0.0",
     "sdl-catalina": "~3.1.0-develop.37",
-    "sdl-controls-react-wrappers": "~0.1.0-9",
+    "sdl-controls": "~0.1.0-5",
+    "sdl-controls-react-wrappers": "~0.1.0-12",
+    "sdl-models": "~0.1.0-4",
     "ts-helpers": "~1.1.2"
   },
   "peerDependencies": {
-    "react": "15.3.1",
-    "react-dom": "15.3.1"
+    "react": "~15.3.2",
+    "react-dom": "~15.3.2",
+    "sdl-controls": "~0.1.0-5",
+    "sdl-models": "~0.1.0-4"
   },
   "devDependencies": {
     "async": "~2.0.0-rc.6",

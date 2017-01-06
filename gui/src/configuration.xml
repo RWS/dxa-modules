@@ -35,7 +35,6 @@
             </files>
             <dependencies>
                 <dependency name="SDL.Client.Libraries.SDL.Globalize" />
-                <dependency name="SDL.Client.Models.Classes" />
             </dependencies>
         </resourceGroup>
     </resourceGroups>

@@ -56,7 +56,6 @@ module.exports = function(buildOptions, gulp, browserSync, commonFolderName) {
                     }
                 }
                 routes['/test'] = buildOptions.testPath; // Put test folder behind a virtual directory
-                routes['/SDL/Test'] = './node_modules/sdl-catalina/Test/';
                 routes['/gui/mocks'] = './mocks/';
                 routes['/gui/theming'] = buildOptions.distPath + 'theming/';
 

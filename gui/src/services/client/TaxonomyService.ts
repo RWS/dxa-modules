@@ -66,7 +66,7 @@ export class TaxonomyService implements ITaxonomyService {
                     removeEventListeners();
                     resolve(toc.getSitemapItems());
                 };
-                const onLoadFailed = (event: SDL.Client.Event.Event) => {
+                const onLoadFailed = (event: Event & { data: { error: string } }) => {
                     removeEventListeners();
                     reject(event.data.error);
                 };
@@ -108,7 +108,7 @@ export class TaxonomyService implements ITaxonomyService {
                     const path = navigationLinks.getPath();
                     resolve(path);
                 };
-                const onLoadFailed = (event: SDL.Client.Event.Event) => {
+                const onLoadFailed = (event: Event & { data: { error: string } }) => {
                     removeEventListeners();
                     reject(event.data.error);
                 };
