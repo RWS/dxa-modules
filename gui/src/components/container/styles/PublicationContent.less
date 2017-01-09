@@ -59,8 +59,20 @@
         nav.sdl-dita-delivery-toc,
         nav.sdl-dita-delivery-content-navigation {
             min-height: 100px;
+        }
 
-            &.fixed-nav {
+        @media screen and (min-width: (1+@screenSm)) {
+
+            nav.sdl-dita-delivery-toc.fixed-nav {
+                top: 50px;
+                position: fixed;
+                z-index: 999;
+            }
+        }
+
+        @media screen and (min-width: (1+@screenLg)) {
+
+            nav.sdl-dita-delivery-content-navigation.fixed-nav {
                 top: 50px;
                 position: fixed;
                 z-index: 999;
@@ -81,6 +93,25 @@
     }
 }
 
+@media screen and (max-width: @screenLg) {
+    .sdl-dita-delivery-publication-content {
+
+        .sdl-dita-delivery-page {
+
+            .sdl-dita-delivery-breadcrumbs,
+            article.page-content {
+                margin-right: 0;
+            }
+
+            nav.sdl-dita-delivery-content-navigation {
+                float: none;
+                margin-left: @tocWidth;
+                padding: 0 5px;
+            }
+        }
+    }
+}
+
 @media screen and (max-width: @screenSm) {
     .sdl-dita-delivery-publication-content {
         position: initial;
@@ -89,9 +120,14 @@
 
             position: initial;
 
+            .sdl-dita-delivery-breadcrumbs,
+            article.page-content,
+            nav.sdl-dita-delivery-content-navigation {
+                margin-left: 0;
+            }
+
             .sdl-dita-delivery-breadcrumbs {
                 padding-bottom: 15px;
-                margin:0;
             }
 
             .sdl-dita-delivery-navigation-menu {
@@ -104,10 +140,6 @@
                 z-index: 1010;
                 background-color: #fff;
                 transition: left .3s ease-out;
-            }
-
-            article.page-content {
-                margin: 0;
             }
 
             nav.sdl-dita-delivery-content-navigation {
