@@ -1,7 +1,7 @@
 import * as ServerModels from "interfaces/ServerModels";
 import { IPage } from "interfaces/Page";
 import { Api } from "utils/Api";
-import { getRequest, IWebRequest, LoadableObject } from "sdl-models";
+import { Net, IWebRequest, LoadableObject } from "sdl-models";
 
 /**
  * Page model
@@ -40,7 +40,7 @@ export class Page extends LoadableObject {
     /* Overloads */
     protected _executeLoad(reload: boolean): void {
         const url = Api.getPageUrl(this._publicationId, this._pageId);
-        getRequest(url,
+        Net.getRequest(url,
             this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
     }
 

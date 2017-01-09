@@ -1,7 +1,7 @@
 import { ISitemapItem } from "interfaces/ServerModels";
 import { ITaxonomy } from "interfaces/Taxonomy";
 import { Api } from "utils/Api";
-import { getRequest, IWebRequest, LoadableObject } from "sdl-models";
+import { Net, IWebRequest, LoadableObject } from "sdl-models";
 
 /**
  * Navigation links model
@@ -44,7 +44,7 @@ export class NavigationLinks extends LoadableObject {
     /* Overloads */
     protected _executeLoad(reload: boolean): void {
         const url = Api.getNavigationLinksUrl(this._publicationId, this._taxonomyId);
-        getRequest(url,
+        Net.getRequest(url,
             this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
     }
 

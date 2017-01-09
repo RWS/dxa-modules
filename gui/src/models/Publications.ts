@@ -1,7 +1,7 @@
 import * as ServerModels from "interfaces/ServerModels";
 import { IPublication } from "interfaces/Publication";
 import { Api } from "utils/Api";
-import { getRequest, IWebRequest, LoadableObject } from "sdl-models";
+import { Net, IWebRequest, LoadableObject } from "sdl-models";
 
 /**
  * Publications model
@@ -26,7 +26,7 @@ export class Publications extends LoadableObject {
     /* Overloads */
     protected _executeLoad(reload: boolean): void {
         const url = Api.getPublicationsUrl();
-        getRequest(url,
+        Net.getRequest(url,
             this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
     }
 

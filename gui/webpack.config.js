@@ -7,7 +7,7 @@ module.exports = (isTest, isDebug) => {
     const entries = {
         main: './src/Main.tsx',
         server: './src/Server.tsx',
-        vendor: ['es6-promise', 'react-router', 'ts-helpers', 'sdl-controls-react-wrappers']
+        vendor: ['es6-promise', 'react-router', 'ts-helpers', 'sdl-models', 'sdl-controls', 'sdl-controls-react-wrappers']
     };
     const testEntries = Object.assign({
         test: './test/Main.ts',
