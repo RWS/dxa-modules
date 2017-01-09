@@ -3,15 +3,17 @@
 .sdl-dita-delivery-navigation-menu {
     @rightMargin: 30px;
 
+    display: none;
     position: fixed;
     top: 0;
     bottom: 0;
     left: ~"calc(100% - @{rightMargin} * -1)";
     min-height: 100%;
-    z-index: 1010;
     background-color: #fff;
 
     &.open {
+        display: block;
+        z-index: 1010;
         width: ~"calc(100% - @{rightMargin})";
         max-width: ~"calc(100% - @{rightMargin})";
         left: 0;

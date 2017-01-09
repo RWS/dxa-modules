@@ -26,7 +26,7 @@ export interface INavigationMenuProps {
 /**
  * Navigation Menu component
  */
-export const NavigationMenu = (props: INavigationMenuProps): JSX.Element => {
+export const NavigationMenu: React.StatelessComponent<INavigationMenuProps> = (props: INavigationMenuProps): JSX.Element => {
     return (
         <div className={"sdl-dita-delivery-navigation-menu" + (props.isOpen ? " open" : "")}>
             {props.children}
