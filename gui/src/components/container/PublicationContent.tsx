@@ -3,7 +3,7 @@ import { ITaxonomy } from "interfaces/Taxonomy";
 import { IPage } from "interfaces/Page";
 
 import { IAppContext } from "components/container/App";
-import { NavigationMenu } from "components/container/NavigationMenu";
+import { NavigationMenu } from "components/presentation/NavigationMenu";
 import { Toc } from "components/presentation/Toc";
 import { Page } from "components/presentation/Page";
 import { SearchBar } from "components/presentation/SearchBar";
@@ -356,7 +356,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     anchor={selectedTocItem ? pageAnchor : undefined}
                     scrollOffset={this._topBarHeight}
                     activeHeader={activePageHeader}>
-                    <NavigationMenu>
+                    <NavigationMenu isOpen={false}> { /* TODO: use global state store */ }
                         <Toc
                             activeItemPath={activeTocItemPath}
                             rootItems={rootItems}

@@ -17,7 +17,6 @@
 
     .sdl-dita-delivery-nav-mask {
         background: @neutralColor1;
-        cursor: pointer;
         display: none;
         height: 100vh;
         opacity: 0;
@@ -98,6 +97,9 @@
         header {
             .sdl-dita-delivery-topbar-expand-nav {
                 display: table-cell;
+                &:hover {
+                    cursor: pointer;
+                }
             }
 
             .sdl-dita-delivery-topbar-language label,

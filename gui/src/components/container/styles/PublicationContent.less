@@ -19,8 +19,11 @@
         position: relative;
 
         .sdl-dita-delivery-navigation-menu {
+            display: block;
             width: @tocWidth;
             float: left;
+            position: inherit;
+            left: 0;
 
             nav.sdl-dita-delivery-toc {
 
@@ -126,6 +129,20 @@
 
             position: initial;
 
+            .sdl-dita-delivery-navigation-menu {
+                position: fixed;
+                left: @tocWidth * -1;
+
+                &.open {
+                    left: 0;
+                }
+
+                nav.sdl-dita-delivery-toc {
+                    margin:0;
+                    min-height: 100%;
+                }
+            }
+
             .sdl-dita-delivery-breadcrumbs,
             article.page-content,
             nav.sdl-dita-delivery-content-navigation {
@@ -136,41 +153,16 @@
                 padding-bottom: 15px;
             }
 
-            .sdl-dita-delivery-navigation-menu {
-                float: none;
-                position: fixed;
-                top: 0;
-                bottom: 0;
-                left: @tocWidth * -1;
-                min-height: 100%;
-                z-index: 1010;
-                background-color: #fff;
-                transition: left .3s ease-out;
-            }
-
             nav.sdl-dita-delivery-content-navigation {
-                width: 100%;
+                width: ~"calc(100% - 10px)";
                 float: none;
             }
         }
     }
 
     .sdl-dita-delivery-app-nav-open {
-
         .sdl-dita-delivery-nav-mask {
             display: block;
-        }
-
-        .sdl-dita-delivery-publication-content {
-            .sdl-dita-delivery-page {
-                .sdl-dita-delivery-navigation-menu {
-                    left: 0;
-                    nav.sdl-dita-delivery-toc {
-                        margin:0;
-                        min-height: 100%;
-                    }
-                }
-            }
         }
     }
 }

@@ -65,5 +65,15 @@ export class Home extends React.Component<{}, IHomeState> {
         this.setState({
             isNavOpen: !isNavOpen
         });
+
+        // HACK: we should use some global state store to achieve this
+        const navMenu = document.querySelector(".sdl-dita-delivery-navigation-menu");
+        if (navMenu) {
+            if (!isNavOpen) {
+                navMenu.classList.add("open");
+            } else {
+                navMenu.classList.remove("open");
+            }
+        }
     }
 };
