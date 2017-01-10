@@ -88,6 +88,7 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
                             onSelectionChanged={this._onSelectionChanged.bind(this)} />
                         : !error ? <ActivityIndicator /> : null
                 }
+                {props.children}
             </nav>
         );
     }
