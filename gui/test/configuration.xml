@@ -12,8 +12,6 @@
                 <file name="../src/test.bundle.js" />
             </files>
             <dependencies>
-                <dependency name="SDL.Client.Test.TestBase"/>
-                <dependency name="SDL.Client.Test.Utilities"/>
                 <dependency name="Sdl.DitaDelivery.Dependencies"/>
             </dependencies>
         </resourceGroup>

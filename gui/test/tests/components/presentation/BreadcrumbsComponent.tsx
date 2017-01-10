@@ -9,9 +9,7 @@ import { hashHistory } from "react-router";
 import { Url } from "utils/Url";
 import { TcmId } from "utils/TcmId";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
-
-// Global Catalina dependencies
-import TestBase = SDL.Client.Test.TestBase;
+import { TestBase } from "sdl-models";
 
 interface IProps {
     params: {

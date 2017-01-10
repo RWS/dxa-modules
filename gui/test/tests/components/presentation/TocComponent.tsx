@@ -4,10 +4,8 @@ import * as TestUtils from "react-addons-test-utils";
 import { Toc, ITocProps } from "components/presentation/Toc";
 import { ITaxonomy } from "interfaces/Taxonomy";
 import { Promise } from "es6-promise";
-import { TreeView, ValidationMessage} from "sdl-controls-react-wrappers";
-
-// Global Catalina dependencies
-import TestBase = SDL.Client.Test.TestBase;
+import { TreeView, ValidationMessage } from "sdl-controls-react-wrappers";
+import { TestBase } from "sdl-models";
 
 class TocComponent extends TestBase {
 

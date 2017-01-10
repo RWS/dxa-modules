@@ -2,9 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as TestUtils from "react-addons-test-utils";
 import { SearchBar, ISearchBarProps } from "components/presentation/SearchBar";
-
-// Global Catalina dependencies
-import TestBase = SDL.Client.Test.TestBase;
+import { TestBase } from "sdl-models";
 
 class SearchBarComponent extends TestBase {
 

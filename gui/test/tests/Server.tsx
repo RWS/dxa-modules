@@ -8,8 +8,9 @@ import { IServices } from "interfaces/Services";
 import { PageService } from "services/server/PageService";
 import { PublicationService } from "services/server/PublicationService";
 import { TaxonomyService } from "services/server/TaxonomyService";
+import { TestBase } from "sdl-models";
 
-class Server extends SDL.Client.Test.TestBase {
+class Server extends TestBase {
 
     public runTests(): void {
 

@@ -1,7 +1,5 @@
 import { PublicationService } from "services/server/PublicationService";
-
-// Global Catalina dependencies
-import TestBase = SDL.Client.Test.TestBase;
+import { TestBase } from "sdl-models";
 
 class PublicationServiceTests extends TestBase {
 

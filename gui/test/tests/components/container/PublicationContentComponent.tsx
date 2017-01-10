@@ -6,14 +6,11 @@ import { Toc } from "components/presentation/Toc";
 import { Page } from "components/presentation/Page";
 import { ITaxonomy } from "interfaces/Taxonomy";
 import { ActivityIndicator, TreeView, ValidationMessage} from "sdl-controls-react-wrappers";
-
+import { TestBase } from "sdl-models";
 import { PageService } from "test/mocks/services/PageService";
 import { PublicationService } from "test/mocks/services/PublicationService";
 import { TaxonomyService } from "test/mocks/services/TaxonomyService";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
-
-// Global Catalina dependencies
-import TestBase = SDL.Client.Test.TestBase;
 
 const services = {
     pageService: new PageService(),

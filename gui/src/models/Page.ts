@@ -1,15 +1,8 @@
 import * as ServerModels from "interfaces/ServerModels";
 import { IPage } from "interfaces/Page";
 import { Api } from "utils/Api";
+import { Net, IWebRequest, LoadableObject } from "sdl-models";
 
-// Global Catalina dependencies
-import IWebRequest = SDL.Client.Net.IWebRequest;
-import LoadableObject = SDL.Client.Models.LoadableObject;
-import OO = SDL.Client.Types.OO;
-import Net = SDL.Client.Net;
-
-/* tslint:disable-next-line */
-eval(OO.enableCustomInheritance);
 /**
  * Page model
  *
@@ -74,12 +67,4 @@ export class Page extends LoadableObject {
 
         super._processLoadResult(result, webRequest);
     }
-
-    protected _onLoadFailed(error: string, webRequest: IWebRequest): void {
-        const p = this.properties;
-        p.loading = false;
-        this.fireEvent("loadfailed", { error: error });
-    }
 }
-
-OO.createInterface("Sdl.DitaDelivery.Models.Page", Page);

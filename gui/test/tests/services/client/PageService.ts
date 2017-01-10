@@ -1,7 +1,5 @@
 import { PageService } from "services/client/PageService";
-
-// Global Catalina dependencies
-import TestBase = SDL.Client.Test.TestBase;
+import { TestBase } from "sdl-models";
 
 class PageServiceTests extends TestBase {
 
@@ -32,7 +30,7 @@ class PageServiceTests extends TestBase {
 
             it("can get page info from memory", (done: () => void): void => {
                 const pageId = "164398";
-                const spy = spyOn(SDL.Client.Net, "getRequest").and.callThrough();
+                const spy = spyOn(window, "XMLHttpRequest").and.callThrough();
                 pageService.getPageInfo(publicationId, pageId).then(pageInfo => {
                     expect(pageInfo).toBeDefined();
                     if (pageInfo) {

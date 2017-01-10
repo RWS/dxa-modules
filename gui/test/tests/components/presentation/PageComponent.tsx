@@ -5,10 +5,8 @@ import { Router, Route, hashHistory } from "react-router";
 import { Page, IPageProps } from "components/presentation/Page";
 import { Url } from "utils/Url";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
-import { ActivityIndicator, ValidationMessage} from "sdl-controls-react-wrappers";
-
-// Global Catalina dependencies
-import TestBase = SDL.Client.Test.TestBase;
+import { ActivityIndicator, ValidationMessage } from "sdl-controls-react-wrappers";
+import { TestBase } from "sdl-models";
 
 interface IProps {
     params: {
