@@ -356,7 +356,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     anchor={selectedTocItem ? pageAnchor : undefined}
                     scrollOffset={this._topBarHeight}
                     activeHeader={activePageHeader}>
-                    <NavigationMenu isOpen={false}> { /* TODO: use global state store */ }
+                    <NavigationMenu isOpen={false}> { /* TODO: use global state store */}
                         <Toc
                             activeItemPath={activeTocItemPath}
                             rootItems={rootItems}
@@ -525,7 +525,15 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         }
 
         if (toc) {
-            toc.style.maxHeight = maxHeight;
+            // Only set max height if the navigation menu is not opened
+            const navigationMenuElement = toc.parentElement;
+            const isFixedNavMenu = navigationMenuElement && navigationMenuElement.classList.contains("sdl-dita-delivery-navigation-menu")
+                ? getComputedStyle(navigationMenuElement).position === "fixed" : false;
+            if (isFixedNavMenu) {
+                toc.style.maxHeight = "";
+            } else {
+                toc.style.maxHeight = maxHeight;
+            }
             if (sticksToTop) {
                 toc.classList.add(FIXED_NAV_CLASS);
             } else {
