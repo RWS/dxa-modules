@@ -45,11 +45,11 @@ export const TopBar = (props: ITopBarProps) => {
                     <IndexLink to="/" />
                 </div>
                 <div className={"sdl-dita-delivery-topbar-title"}>
-                    {props.title}
+                    <label>{props.title}</label>
                 </div>
                 <div className={"sdl-dita-delivery-topbar-language"} >
                     <span />
-                    {props.language}
+                    <label>{props.language}</label>
                 </div>
                 <div className={"sdl-dita-delivery-topbar-user"} >
                     <span />
