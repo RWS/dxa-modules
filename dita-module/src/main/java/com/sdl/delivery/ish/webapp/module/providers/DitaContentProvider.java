@@ -1,5 +1,6 @@
 package com.sdl.delivery.ish.webapp.module.providers;
 
+import com.sdl.web.api.content.BinaryContentRetriever;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.content.ContentProviderException;
 import com.sdl.webapp.common.api.localization.Localization;
@@ -8,6 +9,7 @@ import com.sdl.webapp.common.util.LocalizationUtils;
 import com.sdl.webapp.common.util.TcmUtils;
 import com.sdl.webapp.tridion.mapping.DefaultContentProvider;
 import com.sdl.webapp.tridion.mapping.ModelBuilderPipeline;
+import com.tridion.data.BinaryData;
 import lombok.extern.slf4j.Slf4j;
 import org.dd4t.contentmodel.impl.PageImpl;
 import org.dd4t.core.exceptions.FactoryException;
@@ -16,6 +18,8 @@ import org.dd4t.core.factories.PageFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
+
+import java.io.IOException;
 
 import static com.sdl.webapp.common.util.LocalizationUtils.findPageByPath;
 import static org.dd4t.core.util.TCMURI.Namespace;
@@ -30,6 +34,9 @@ public class DitaContentProvider extends DefaultContentProvider {
 
     @Autowired
     private PageFactory dd4tPageFactory;
+
+    @Autowired
+    private BinaryContentRetriever binaryContentRetriever;
 
     @Autowired
     private ModelBuilderPipeline modelBuilderPipeline;
@@ -75,5 +82,10 @@ public class DitaContentProvider extends DefaultContentProvider {
                 return pageModel;
             }
         });
+    }
+
+    public byte[] getBinaryContent(final Integer pageId, final Integer binaryId) throws IOException {
+        BinaryData data = binaryContentRetriever.getBinary(pageId, binaryId);
+        return data.getBytes();
     }
 }
