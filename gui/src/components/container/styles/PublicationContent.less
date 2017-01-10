@@ -1,9 +1,10 @@
 @import (reference) "../../../theming/styles.less";
 @import (reference) "../../presentation/styles/TopBar.less";
 
+@tocWidth: 300px;
+@contentNavWidth: 210px;
+
 .sdl-dita-delivery-publication-content {
-    @tocWidth: 300px;
-    @contentNavWidth: 210px;
 
     position: relative;
     height: 100%;
@@ -17,25 +18,72 @@
         margin: 0 auto;
         position: relative;
 
-        .sdl-dita-delivery-toc {
+        .sdl-dita-delivery-navigation-menu {
+            display: block;
             width: @tocWidth;
             float: left;
+            position: inherit;
+            left: 0;
+
+            nav.sdl-dita-delivery-toc {
+
+                > span:first-child, .sdl-treeview {
+                    // Inherit max-height from toc panel, needed for scroll bar / separator using vertical space
+                    max-height: inherit;
+                    width: @tocWidth - 20;
+                }
+
+                .separator {
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    margin-left: @tocWidth;
+                    width: 10px;
+                    box-shadow: -5px 0px 10px 0px fade(@neutralColor1, 10);
+
+                    @media screen and (max-width: @screenSm) {
+                        display: none;
+                    }
+                }
+
+                &.fixed-nav .separator {
+                    position: fixed;
+                    top: 50px;
+                }
+            }
         }
 
         .sdl-dita-delivery-content-navigation {
             width: @contentNavWidth;
             float: right;
+            overflow: auto;
         }
 
         nav.sdl-dita-delivery-toc,
         nav.sdl-dita-delivery-content-navigation {
-            min-height: 150px;
-            overflow: auto;
+            min-height: 100px;
+        }
 
-            &.fixed-nav {
+        @media screen and (min-width: (1+@screenSm)) {
+
+            nav.sdl-dita-delivery-toc.fixed-nav {
                 top: 50px;
                 position: fixed;
                 z-index: 999;
+            }
+        }
+
+        @media screen and (min-width: (1+@screenLg)) {
+
+            nav.sdl-dita-delivery-content-navigation {
+                top: 0;
+                position: absolute;
+                left: calc(100% ~"-" @contentNavWidth);
+
+                &.fixed-nav {
+                    top: 50px;
+                    position: fixed;
+                }
             }
         }
 
@@ -48,7 +96,75 @@
         article.page-content {
             margin-left: @tocWidth;
             margin-right: @contentNavWidth;
-            min-height: 150px;
+            min-height: 100px;
+        }
+    }
+}
+
+@media screen and (max-width: @screenLg) {
+    .sdl-dita-delivery-publication-content {
+
+        .sdl-dita-delivery-page {
+
+            .sdl-dita-delivery-breadcrumbs,
+            article.page-content {
+                margin-right: 0;
+            }
+
+            nav.sdl-dita-delivery-content-navigation {
+                float: none;
+                margin-left: @tocWidth;
+                padding: 0 5px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: @screenSm) {
+    .sdl-dita-delivery-publication-content {
+        position: initial;
+
+        .sdl-dita-delivery-page {
+
+            position: initial;
+
+            .sdl-dita-delivery-navigation-menu {
+                position: fixed;
+                left: @tocWidth * -1;
+
+                &.open {
+                    left: 0;
+                }
+
+                nav.sdl-dita-delivery-toc {
+                    margin:0;
+                    height: 100%;
+                    > span:first-child, .sdl-treeview {
+                        width: 100%;
+                    }
+                }
+            }
+
+            .sdl-dita-delivery-breadcrumbs,
+            article.page-content,
+            nav.sdl-dita-delivery-content-navigation {
+                margin-left: 0;
+            }
+
+            .sdl-dita-delivery-breadcrumbs {
+                padding-bottom: 15px;
+            }
+
+            nav.sdl-dita-delivery-content-navigation {
+                width: ~"calc(100% - 10px)";
+                float: none;
+            }
+        }
+    }
+
+    .sdl-dita-delivery-app-nav-open {
+        .sdl-dita-delivery-nav-mask {
+            display: block;
         }
     }
 }

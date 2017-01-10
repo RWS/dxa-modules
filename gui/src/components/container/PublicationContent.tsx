@@ -3,6 +3,7 @@ import { ITaxonomy } from "interfaces/Taxonomy";
 import { IPage } from "interfaces/Page";
 
 import { IAppContext } from "components/container/App";
+import { NavigationMenu } from "components/presentation/NavigationMenu";
 import { Toc } from "components/presentation/Toc";
 import { Page } from "components/presentation/Page";
 import { SearchBar } from "components/presentation/SearchBar";
@@ -16,6 +17,10 @@ import { debounce } from "utils/Function";
 import "components/container/styles/PublicationContent";
 
 const FIXED_NAV_CLASS = "fixed-nav";
+/**
+ * Sum of top and bottom margin of a panel
+ */
+const PANEL_MARGIN = 20;
 
 /**
  * PublicationContent component props params
@@ -351,17 +356,22 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     anchor={selectedTocItem ? pageAnchor : undefined}
                     scrollOffset={this._topBarHeight}
                     activeHeader={activePageHeader}>
-                    <Toc
-                        activeItemPath={activeTocItemPath}
-                        rootItems={rootItems}
-                        loadChildItems={(parentId: string): Promise<ITaxonomy[]> => {
-                            // TODO: this conversion will not be needed when upgrading to DXA 1.7
-                            // https://jira.sdl.com/browse/TSI-2131
-                            const taxonomyItemId = TcmId.getTaxonomyItemId("1", parentId);
-                            return taxonomyService.getSitemapItems(publicationId, taxonomyItemId || parentId);
-                        } }
-                        onSelectionChanged={this._onTocSelectionChanged.bind(this)}
-                        error={tocError} />
+                    <NavigationMenu isOpen={false}> { /* TODO: use global state store */}
+                        <Toc
+                            activeItemPath={activeTocItemPath}
+                            rootItems={rootItems}
+                            loadChildItems={(parentId: string): Promise<ITaxonomy[]> => {
+                                // TODO: this conversion will not be needed when upgrading to DXA 1.7
+                                // https://jira.sdl.com/browse/TSI-2131
+                                const taxonomyItemId = TcmId.getTaxonomyItemId("1", parentId);
+                                return taxonomyService.getSitemapItems(publicationId, taxonomyItemId || parentId);
+                            } }
+                            onSelectionChanged={this._onTocSelectionChanged.bind(this)}
+                            error={tocError}
+                            >
+                            <span className="separator" />
+                        </Toc>
+                    </NavigationMenu>
                     <Breadcrumbs
                         publicationId={publicationId}
                         publicationTitle={publicationTitle || ""}
@@ -492,9 +502,10 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         if (domNode) {
             const toc = domNode.querySelector("nav.sdl-dita-delivery-toc") as HTMLElement;
             const contentNavigation = domNode.querySelector("nav.sdl-dita-delivery-content-navigation") as HTMLElement;
+            const page = domNode.querySelector(".sdl-dita-delivery-page") as HTMLElement;
             if (!ticking) {
                 requestAnimationFrame((): void => {
-                    this._updatePanels(toc, contentNavigation);
+                    this._updatePanels(page, toc, contentNavigation);
                     ticking = false;
                 });
                 ticking = true;
@@ -502,13 +513,27 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         }
     }
 
-    private _updatePanels(toc: HTMLElement, contentNavigation: HTMLElement): void {
+    private _updatePanels(page: HTMLElement, toc: HTMLElement, contentNavigation: HTMLElement): void {
         // Firefox needs document.documentElement, otherwise scrollTop value will be 0 all the time
         // Chrome though needs document.body to work correctly
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-        const { maxHeight, sticksToTop } = Html.getFixedPanelInfo(scrollTop, this._searchBarHeight, this._topBarHeight);
+        const { maxHeight, sticksToTop } = Html.getFixedPanelInfo(scrollTop, this._searchBarHeight, this._topBarHeight, PANEL_MARGIN);
+
+        if (page) {
+            // An extra 3 px is removed because in FF and IE this still shows a scrollbar
+            page.style.height = (parseInt(maxHeight, 10) + PANEL_MARGIN - 3) + "px";
+        }
+
         if (toc) {
-            toc.style.maxHeight = maxHeight;
+            // Only set max height if the navigation menu is not opened
+            const navigationMenuElement = toc.parentElement;
+            const isFixedNavMenu = navigationMenuElement && navigationMenuElement.classList.contains("sdl-dita-delivery-navigation-menu")
+                ? getComputedStyle(navigationMenuElement).position === "fixed" : false;
+            if (isFixedNavMenu) {
+                toc.style.maxHeight = "";
+            } else {
+                toc.style.maxHeight = maxHeight;
+            }
             if (sticksToTop) {
                 toc.classList.add(FIXED_NAV_CLASS);
             } else {
@@ -519,7 +544,6 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         if (contentNavigation) {
             contentNavigation.style.maxHeight = maxHeight;
             if (sticksToTop) {
-                const page = document.querySelector(".sdl-dita-delivery-page") as HTMLElement;
                 contentNavigation.classList.add(FIXED_NAV_CLASS);
                 // Set left position
                 if (page) {
@@ -531,7 +555,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
             }
 
             // Update active title inside content navigation panel
-            const pageContent = document.querySelector(".sdl-dita-delivery-page .page-content") as HTMLElement;
+            const pageContent = page.querySelector(".page-content") as HTMLElement;
             if (pageContent) {
                 const header = Html.getActiveHeader(document.body, pageContent, this._searchBarHeight);
                 if (header && header !== this.state.activePageHeader) {
@@ -547,7 +571,6 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     })();
                 }
             }
-
         }
     }
 }
