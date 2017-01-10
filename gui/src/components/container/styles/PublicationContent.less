@@ -72,10 +72,16 @@
 
         @media screen and (min-width: (1+@screenLg)) {
 
-            nav.sdl-dita-delivery-content-navigation.fixed-nav {
-                top: 50px;
-                position: fixed;
+            nav.sdl-dita-delivery-content-navigation {
+                top: 0;
+                position: absolute;
                 z-index: 999;
+                left: calc(100% ~"-" @contentNavWidth);
+
+                &.fixed-nav {
+                    top: 50px;
+                    position: fixed;
+                }
             }
         }
 
