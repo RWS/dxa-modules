@@ -1,6 +1,9 @@
 package com.sdl.delivery.ish.webapp.module.providers;
 
+import com.google.common.io.Files;
 import com.sdl.web.api.content.BinaryContentRetriever;
+import com.sdl.web.api.meta.WebComponentMetaFactory;
+import com.sdl.web.api.meta.WebComponentMetaFactoryImpl;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.content.ContentProviderException;
 import com.sdl.webapp.common.api.localization.Localization;
@@ -10,7 +13,9 @@ import com.sdl.webapp.common.util.TcmUtils;
 import com.sdl.webapp.tridion.mapping.DefaultContentProvider;
 import com.sdl.webapp.tridion.mapping.ModelBuilderPipeline;
 import com.tridion.data.BinaryData;
+import com.tridion.meta.ComponentMeta;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.dd4t.contentmodel.impl.PageImpl;
 import org.dd4t.core.exceptions.FactoryException;
 import org.dd4t.core.exceptions.ItemNotFoundException;
@@ -18,7 +23,9 @@ import org.dd4t.core.factories.PageFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.WebApplicationContext;
 
+import java.io.File;
 import java.io.IOException;
 
 import static com.sdl.webapp.common.util.LocalizationUtils.findPageByPath;
@@ -32,6 +39,8 @@ import static org.dd4t.core.util.TCMURI.Namespace;
 @Primary
 public class DitaContentProvider extends DefaultContentProvider {
 
+    private static final String STATIC_FILES_DIR = "BinaryData";
+
     @Autowired
     private PageFactory dd4tPageFactory;
 
@@ -43,6 +52,9 @@ public class DitaContentProvider extends DefaultContentProvider {
 
     @Autowired
     private WebRequestContext webRequestContext;
+
+    @Autowired
+    private WebApplicationContext webApplicationContext;
 
     /**
      * Get a page model by it's item id.
@@ -87,6 +99,38 @@ public class DitaContentProvider extends DefaultContentProvider {
     }
 
     public byte[] getBinaryContent(final Integer pageId, final Integer binaryId) throws ContentProviderException {
+        WebComponentMetaFactory factory = new WebComponentMetaFactoryImpl(pageId);
+        ComponentMeta componentMeta = factory.getMeta(binaryId);
+        if (componentMeta == null) {
+            throw new BinaryNotFoundException("No meta meta found for: [" + pageId + "-" + binaryId + "]");
+        }
+
+        String parentDir = StringUtils.join(new String[]{
+                webApplicationContext.getServletContext().getRealPath("/"), STATIC_FILES_DIR, pageId.toString()
+        }, File.separator);
+
+        File file = new File(parentDir, binaryId.toString());
+
+        long componentTime = componentMeta.getLastPublicationDate().getTime();
+        byte[] data;
+        if (isToBeRefreshed(file, componentTime)) {
+            data = getBinaryFromContentService(pageId, binaryId);
+            try {
+                Files.write(data, file);
+            } catch (IOException e) {
+                log.error("Unable to write local file: " + file.getAbsolutePath(), e);
+            }
+        } else {
+            try {
+                data = Files.toByteArray(file);
+            } catch (IOException e) {
+                throw new ContentProviderException("Ubable to read locally stored file: " + file.getAbsolutePath(), e);
+            }
+        }
+        return data;
+    }
+
+    private byte[] getBinaryFromContentService(Integer pageId, Integer binaryId) throws ContentProviderException {
         BinaryData data = binaryContentRetriever.getBinary(pageId, binaryId);
         if (data == null) {
             throw new BinaryNotFoundException("Unable to retrieve binary from content service");
