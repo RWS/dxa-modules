@@ -3,7 +3,7 @@ import { ILocalizationService } from "services/interfaces/LocalizationService";
 const resources = require("resources/resources.default") as { [path: string]: string };
 
 /**
- * Localization implemented for usage on the server
+ * Localization service
  *
  * @export
  * @class LocalizationService
