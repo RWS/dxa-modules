@@ -124,7 +124,7 @@ public class DitaContentProvider extends DefaultContentProvider {
             try {
                 data = Files.toByteArray(file);
             } catch (IOException e) {
-                throw new ContentProviderException("Ubable to read locally stored file: " + file.getAbsolutePath(), e);
+                throw new BinaryNotFoundException("Unable to read locally stored file: " + file.getAbsolutePath(), e);
             }
         }
         return data;
