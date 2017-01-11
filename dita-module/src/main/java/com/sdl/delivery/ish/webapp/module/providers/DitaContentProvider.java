@@ -1,5 +1,6 @@
 package com.sdl.delivery.ish.webapp.module.providers;
 
+import com.sdl.web.api.content.BinaryContentRetriever;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.content.ContentProviderException;
 import com.sdl.webapp.common.api.localization.Localization;
@@ -8,6 +9,7 @@ import com.sdl.webapp.common.util.LocalizationUtils;
 import com.sdl.webapp.common.util.TcmUtils;
 import com.sdl.webapp.tridion.mapping.DefaultContentProvider;
 import com.sdl.webapp.tridion.mapping.ModelBuilderPipeline;
+import com.tridion.data.BinaryData;
 import lombok.extern.slf4j.Slf4j;
 import org.dd4t.contentmodel.impl.PageImpl;
 import org.dd4t.core.exceptions.FactoryException;
@@ -16,6 +18,8 @@ import org.dd4t.core.factories.PageFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
+
+import java.io.IOException;
 
 import static com.sdl.webapp.common.util.LocalizationUtils.findPageByPath;
 import static org.dd4t.core.util.TCMURI.Namespace;
@@ -32,6 +36,9 @@ public class DitaContentProvider extends DefaultContentProvider {
     private PageFactory dd4tPageFactory;
 
     @Autowired
+    private BinaryContentRetriever binaryContentRetriever;
+
+    @Autowired
     private ModelBuilderPipeline modelBuilderPipeline;
 
     @Autowired
@@ -46,7 +53,8 @@ public class DitaContentProvider extends DefaultContentProvider {
      * @throws ContentProviderException
      */
     @Override
-    public PageModel getPageModel(final String pageId, final Localization localization) throws ContentProviderException {
+    public PageModel getPageModel(final String pageId, final Localization localization)
+            throws ContentProviderException {
         return findPageByPath(pageId, localization, new LocalizationUtils.TryFindPage<PageModel>() {
             public PageModel tryFindPage(String path, int publicationId) throws ContentProviderException {
                 final org.dd4t.contentmodel.Page genericPage;
@@ -67,7 +75,8 @@ public class DitaContentProvider extends DefaultContentProvider {
                             "] " + path, e);
                 }
 
-                PageModel pageModel = modelBuilderPipeline.createPageModel(genericPage, localization, DitaContentProvider.this);
+                PageModel pageModel = modelBuilderPipeline.createPageModel(genericPage, localization,
+                        DitaContentProvider.this);
                 if (pageModel != null) {
                     pageModel.setUrl(LocalizationUtils.stripDefaultExtension(path));
                     webRequestContext.setPage(pageModel);
@@ -75,5 +84,17 @@ public class DitaContentProvider extends DefaultContentProvider {
                 return pageModel;
             }
         });
+    }
+
+    public byte[] getBinaryContent(final Integer pageId, final Integer binaryId) throws ContentProviderException {
+        BinaryData data = binaryContentRetriever.getBinary(pageId, binaryId);
+        if (data == null) {
+            throw new BinaryNotFoundException("Unable to retrieve binary from content service");
+        }
+        try {
+            return data.getBytes();
+        } catch (IOException e) {
+            throw new ContentProviderException("Unable to extract data from BinaryData object", e);
+        }
     }
 }
