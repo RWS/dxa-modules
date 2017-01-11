@@ -34,7 +34,6 @@
   "compileOnSave": false, // Gulp does this for us
   "exclude": [
     "node_modules",
-    "dist",
-    "typings"
+    "dist"
   ]
 }

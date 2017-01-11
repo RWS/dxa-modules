@@ -6,9 +6,8 @@
  * @param {Object} buildOptions Build options.
  * @param {Object} gulp Instance of gulp.
  * @param {Object} browserSync BrowserSync instance.
- * @param {function} commonFolderName Returns the name of the Catalina Common folder.
  */
-module.exports = function(buildOptions, gulp, browserSync, commonFolderName) {
+module.exports = function(buildOptions, gulp, browserSync) {
     const _ = require('lodash');
     const runSequence = require('run-sequence').use(gulp);
     const reload = browserSync.reload;
@@ -50,13 +49,11 @@ module.exports = function(buildOptions, gulp, browserSync, commonFolderName) {
                 if (buildOptions.isDebug) {
                     routes = {
                         // Third party dependencies
-                        '/SDL/Common': './node_modules/sdl-catalina/' + commonFolderName() + '/',
                         '/lib/react': './node_modules/react/dist/',
                         '/lib/react-dom': './node_modules/react-dom/dist/'
                     }
                 }
                 routes['/test'] = buildOptions.testPath; // Put test folder behind a virtual directory
-                routes['/SDL/Test'] = './node_modules/sdl-catalina/Test/';
                 routes['/gui/mocks'] = './mocks/';
                 routes['/gui/theming'] = buildOptions.distPath + 'theming/';
 

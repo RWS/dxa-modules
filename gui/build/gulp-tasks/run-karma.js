@@ -19,8 +19,6 @@ module.exports = (buildOptions) => {
             configFile: configPath,
             singleRun: singleRun,
             proxies: {
-                // Common UI
-                '/SDL/': urlPrefix + 'SDL/',
                 // Test folder
                 '/test/': urlPrefix + 'test/',
                 // src folder
