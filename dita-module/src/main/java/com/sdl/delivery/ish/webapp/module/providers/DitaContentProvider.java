@@ -53,7 +53,8 @@ public class DitaContentProvider extends DefaultContentProvider {
      * @throws ContentProviderException
      */
     @Override
-    public PageModel getPageModel(final String pageId, final Localization localization) throws ContentProviderException {
+    public PageModel getPageModel(final String pageId, final Localization localization)
+            throws ContentProviderException {
         return findPageByPath(pageId, localization, new LocalizationUtils.TryFindPage<PageModel>() {
             public PageModel tryFindPage(String path, int publicationId) throws ContentProviderException {
                 final org.dd4t.contentmodel.Page genericPage;
@@ -74,7 +75,8 @@ public class DitaContentProvider extends DefaultContentProvider {
                             "] " + path, e);
                 }
 
-                PageModel pageModel = modelBuilderPipeline.createPageModel(genericPage, localization, DitaContentProvider.this);
+                PageModel pageModel = modelBuilderPipeline.createPageModel(genericPage, localization,
+                        DitaContentProvider.this);
                 if (pageModel != null) {
                     pageModel.setUrl(LocalizationUtils.stripDefaultExtension(path));
                     webRequestContext.setPage(pageModel);
@@ -84,8 +86,15 @@ public class DitaContentProvider extends DefaultContentProvider {
         });
     }
 
-    public byte[] getBinaryContent(final Integer pageId, final Integer binaryId) throws IOException {
+    public byte[] getBinaryContent(final Integer pageId, final Integer binaryId) throws ContentProviderException {
         BinaryData data = binaryContentRetriever.getBinary(pageId, binaryId);
-        return data.getBytes();
+        if (data == null) {
+            throw new BinaryNotFoundException("Unable to retrieve binary from content service");
+        }
+        try {
+            return data.getBytes();
+        } catch (IOException e) {
+            throw new ContentProviderException("Unable to extract data from BinaryData object", e);
+        }
     }
 }

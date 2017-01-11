@@ -62,7 +62,8 @@ public class DitaController {
     @RequestMapping(method = GET, value = "/binary/{publicationId}/{binaryId}/**")
     @ResponseBody
     public ResponseEntity<byte[]> getBinaryResource(@PathVariable Integer publicationId,
-                                                    @PathVariable Integer binaryId) throws IOException {
+                                                    @PathVariable Integer binaryId)
+            throws ContentProviderException, IOException {
         byte[] result = contentProvider.getBinaryContent(publicationId, binaryId);
         String contentType = URLConnection.guessContentTypeFromStream(new ByteArrayInputStream(result));
         HttpHeaders headers = new HttpHeaders();
