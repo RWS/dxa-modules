@@ -358,7 +358,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     anchor={selectedTocItem ? pageAnchor : undefined}
                     scrollOffset={this._topBarHeight}
                     activeHeader={activePageHeader}>
-                    <NavigationMenu isOpen={false}> { /* TODO: use global state store */}
+                    <NavigationMenu isOpen={false}>{/* TODO: use global state store */}
                         <Toc
                             activeItemPath={activeTocItemPath}
                             rootItems={rootItems}

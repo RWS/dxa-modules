@@ -19,6 +19,8 @@ module.exports = (buildOptions) => {
             configFile: configPath,
             singleRun: singleRun,
             proxies: {
+                // assets
+                '/assets': urlPrefix + 'assets',
                 // mocks
                 '/gui/mocks/': urlPrefix + 'gui/mocks/',
                 // theming

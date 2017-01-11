@@ -18,8 +18,8 @@ module.exports = (isTest, isDebug) => {
     const config = {
         entry: isTest ? testEntries : entries,
         output: {
-            path: path.resolve(__dirname + '/dist'),
-            publicPath: '/',
+            path: path.resolve(__dirname + '/dist/assets'),
+            publicPath: '/assets/',
             filename: '[name].bundle.js'
         },
         devtool: 'source-map',
@@ -35,7 +35,7 @@ module.exports = (isTest, isDebug) => {
                 path.resolve(__dirname, 'src'),
                 path.resolve(__dirname, 'node_modules')
             ],
-            extensions: ['.ts', '.tsx', '.js', '.css', '.less']
+            extensions: ['.ts', '.tsx', '.js', '.css', '.less', '.resjson']
         },
         module: {
             rules: [{
@@ -50,6 +50,9 @@ module.exports = (isTest, isDebug) => {
             }, {
                 test: /\.tsx?$/,
                 loader: 'ts-loader'
+            }, {
+                test: /\.resjson$/,
+                loader: 'json-loader'
             }]
         },
         externals: {
@@ -62,6 +65,8 @@ module.exports = (isTest, isDebug) => {
             extractCSS,
             new HtmlWebpackPlugin({
                 template: './src/index.html',
+                filename: '../index.html',
+                favicon: './node_modules/sdl-icons/icons/favicon.ico',
                 hash: true,
                 excludeChunks: ['test', 'server']
             })
@@ -116,7 +121,7 @@ module.exports = (isTest, isDebug) => {
         }));
     } else { // Only for debug
         // Hot Module Replacement (HMR)
-        const hotMiddlewareScript = 'webpack-hot-middleware/client';
+        const hotMiddlewareScript = 'webpack-hot-middleware/client?path=/assets';
         for (let entryName in config.entry) {
             if (entryName !== 'vendor') {
                 let entryValue = config.entry[entryName];

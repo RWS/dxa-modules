@@ -90,8 +90,6 @@ const testCoverage = function (cb, singleRun) {
     return require('./build/gulp-tasks/test-coverage')(buildOptions, gulp, runTests, singleRun)(cb);
 };
 
-gulp.task('copy-sources', require('./build/gulp-tasks/copy-sources')(buildOptions, gulp));
-
 gulp.task('copy-dependencies', cb => {
     if (buildOptions.isDebug) {
         // In case of debug mappings for browsersync are being used
@@ -155,7 +153,6 @@ gulp.task('wrap-dita-ot-styles', require('./build/gulp-tasks/wrap-dita-ot-styles
 // Common tasks
 gulp.task('build', [
     'copy-dependencies',
-    'copy-sources',
     'run-tslint',
     'package-project'
 ]);

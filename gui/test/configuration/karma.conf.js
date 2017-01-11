@@ -17,11 +17,11 @@ module.exports = function (config) {
             { pattern: './node_modules/react-dom/dist/react-dom.js', watched: false },
             { pattern: './node_modules/react-dom/dist/react-dom-server.js', watched: false },
             // Application
-            './dist/testConfiguration.bundle.js',
-            './dist/stylesheets/test.css',
-            './dist/test.bundle.js',
+            './dist/assets/testConfiguration.bundle.js',
+            './dist/assets/stylesheets/test.css',
+            './dist/assets/test.bundle.js',
             {
-                pattern: './dist/test.bundle.js.map',
+                pattern: './dist/assets/test.bundle.js.map',
                 included: false
             }
         ],

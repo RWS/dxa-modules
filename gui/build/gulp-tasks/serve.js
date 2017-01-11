@@ -91,11 +91,11 @@ module.exports = function(buildOptions, gulp, browserSync) {
                     // http://webpack.github.io/docs/webpack-dev-middleware.html
                     const webpackDevMiddlewareInstance = webpackDevMiddleware(webpackCompiler, {
                         publicPath: webpackConfig.output.publicPath,
-                        stats: webpackConfig.stats,
+                        stats: webpackConfig.stats
                     });
                     // Enable Hot Module Replacement
                     browserSyncOptions.middleware.push(webpackDevMiddlewareInstance);
-                    browserSyncOptions.middleware.push(webpackHotMiddleware(webpackCompiler));
+                    browserSyncOptions.middleware.push(webpackHotMiddleware(webpackCompiler, { path: '/assets' }));
 
                     // Close middleware when browsersync closes
                     browserSync.emitter.on('service:exit', () => {
