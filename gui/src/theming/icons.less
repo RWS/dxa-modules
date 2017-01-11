@@ -9,6 +9,7 @@
 @iconFont: "SDLfont";
 @iconFontPath: "./fonts/SDLfont";
 @iconLanguage: "\e011";
+@iconHamburger: "\e007";
 @iconUser: "\e023";
 @iconArrowRight: "\e013";
 @iconSearch: "\e01b";
@@ -33,6 +34,13 @@
 .icon-company-logo() {
     .icon-sdl-logo-white();
     background-repeat: no-repeat;
+}
+
+.icon-hamburger(@size: 24px) {
+    .icon-font-default-style(@size);
+    &:before {
+        content: @iconHamburger;
+    }
 }
 
 .icon-language(@size: 24px) {
