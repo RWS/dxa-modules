@@ -1,6 +1,6 @@
 import { ITaxonomyService } from "services/interfaces/TaxonomyService";
 import { ITaxonomy } from "interfaces/Taxonomy";
-import { localization } from "services/client/LocalizationService";
+import { localization } from "services/common/LocalizationService";
 import { Toc } from "models/Toc";
 import { NavigationLinks } from "models/NavigationLinks";
 import { Promise } from "es6-promise";

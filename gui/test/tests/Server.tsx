@@ -3,7 +3,7 @@ import * as ReactDOMServer from "react-dom/server";
 import { renderToString } from "Server";
 import { App } from "components/container/App";
 import { hashHistory } from "react-router";
-import { localization } from "services/server/LocalizationService";
+import { localization } from "services/common/LocalizationService";
 import { IServices } from "interfaces/Services";
 import { PageService } from "services/server/PageService";
 import { PublicationService } from "services/server/PublicationService";

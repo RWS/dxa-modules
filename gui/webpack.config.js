@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const extractCSS = new ExtractTextPlugin('stylesheets/[name].css');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = (isTest, isDebug) => {
     const entries = {
@@ -58,7 +59,11 @@ module.exports = (isTest, isDebug) => {
             'react-addons-test-utils': 'React.addons.TestUtils'
         },
         plugins: [
-            extractCSS
+            extractCSS,
+            new HtmlWebpackPlugin({
+                template: './src/index.html',
+                hash: true
+            })
         ],
         // What information should be printed to the console
         stats: {

@@ -1,5 +1,3 @@
-/// <reference path="../typings/index.d.ts" />
-
 import "ts-helpers";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
@@ -8,7 +6,7 @@ import { IServices } from "interfaces/Services";
 import { PageService } from "services/client/PageService";
 import { PublicationService } from "services/client/PublicationService";
 import { TaxonomyService } from "services/client/TaxonomyService";
-import { localization } from "services/client/LocalizationService";
+import { localization } from "services/common/LocalizationService";
 import { browserHistory } from "react-router";
 
 import "sdl-controls-react-wrappers/dist/stylesheets/main";

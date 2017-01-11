@@ -262,6 +262,7 @@ gulp.task('test', function (cb) {
 
 // Error handling
 gulp.on('task_err', function (err) {
+    console.error('Task failed:', err);
     // This error event is fired on the entire task tree
     // If it fails on a sub task this event will also be fired for all parent tasks
     // It should only be handled on the main task
