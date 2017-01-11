@@ -19,8 +19,6 @@ module.exports = (buildOptions) => {
             configFile: configPath,
             singleRun: singleRun,
             proxies: {
-                // assets
-                '/assets': urlPrefix + 'assets',
                 // mocks
                 '/gui/mocks/': urlPrefix + 'gui/mocks/',
                 // theming
@@ -62,9 +60,6 @@ module.exports = (buildOptions) => {
         if (!singleRun && typeof onTestRunCompleted === 'function') {
             karmaServer.on('run_complete', () => onTestRunCompleted(latestsResults));
         }
-
-        // Refresh files when a new bundle is created
-        webpackInstance.onBundleCreated = () => karmaServer.refreshFiles();
 
         karmaServer.start();
     }
