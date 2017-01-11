@@ -62,7 +62,8 @@ module.exports = (isTest, isDebug) => {
             extractCSS,
             new HtmlWebpackPlugin({
                 template: './src/index.html',
-                hash: true
+                hash: true,
+                excludeChunks: ['test', 'server']
             })
         ],
         // What information should be printed to the console

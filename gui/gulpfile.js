@@ -81,7 +81,7 @@ const runTests = function (singleRun, cb, onTestRunCompleted) {
                 } else {
                     runKarma(webpackInstance, singleRun, onTestCompleted, onTestRunCompleted);
                 }
-            }, webpackInstance, !singleRun);
+            }, webpackInstance);
         }
     };
 };

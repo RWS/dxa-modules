@@ -11,9 +11,6 @@ import { TaxonomyService } from "services/server/TaxonomyService";
 import { localization } from "services/common/LocalizationService";
 import { hashHistory } from "react-router";
 
-// Nashorn script engine needs a global scope
-declare var _renderToString: (path: string) => void;
-
 /**
  * Render the application to a string.
  *
@@ -34,5 +31,3 @@ export function renderToString(path: string): string {
     return ReactDOMServer.renderToString(
         <App services={services} history={hashHistory} />);
 };
-
-_renderToString = renderToString;

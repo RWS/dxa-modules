@@ -9,35 +9,14 @@
  */
 module.exports = function(buildOptions, gulp, browserSync) {
     const _ = require('lodash');
-    const runSequence = require('run-sequence').use(gulp);
-    const reload = browserSync.reload;
     const portfinder = require('portfinder');
     portfinder.basePort = buildOptions.ports.httpServer;
     const webpackDevMiddleware = require('webpack-dev-middleware');
     const webpackHotMiddleware = require('webpack-hot-middleware');
 
-    return function(cb, webpackInstance, addWatcher) {
+    return function(cb, webpackInstance) {
         const webpackConfig = webpackInstance.config;
         const webpackCompiler = webpackInstance.compiler;
-
-        addWatcher = typeof addWatcher === 'boolean' ? addWatcher : buildOptions.isDebug;
-        if (addWatcher) {
-            console.log('Setting up file watcher');
-            // Not all files are being watched here
-            // Most of the files are handled by the webpack watcher
-            var watcher = gulp.watch([
-                buildOptions.sourcesPath + '**/*.xml',
-                buildOptions.sourcesPath + '**/*.html',
-                buildOptions.sourcesPath + '**/*.resjson'
-            ]);
-            watcher.on('change', function(event) {
-                console.log('File ' + event.path + ' was ' + event.type + '.');
-                if (event.type === 'changed') {
-                    runSequence(['run-tslint', 'update-version'], 'copy-sources', reload);
-                }
-            });
-            console.log('Setting up file watcher finished');
-        }
 
         portfinder.getPort((err, port) => {
             if (err) {

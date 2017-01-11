@@ -1,30 +1,29 @@
-// Get the global config
-// This file is part of Catalina and allows you to configure less
-// Every setting can be overwritten in your config
-// More info on: http://karma-runner.github.io/0.13/config/configuration-file.html
-var globalConfig = require('../../node_modules/sdl-catalina/Test/Configuration/karma.conf.js');
-
 module.exports = function (config) {
-    globalConfig.configuration(config);
-
     config.set({
         basePath: '../../',
+
+        // frameworks to use
+        // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
+        frameworks: ['jasmine'],
+
         /**
          * Always load these three files in the specified order.
          * Use file paths, not urls inside this configuration section.
          * Paths should be relative to the path of this config file.
          */
         files: [
-            // React dependencies
+            // React
             { pattern: './node_modules/react/dist/react-with-addons.js', watched: false },
             { pattern: './node_modules/react-dom/dist/react-dom.js', watched: false },
             { pattern: './node_modules/react-dom/dist/react-dom-server.js', watched: false },
-            // Main configuration
-            { pattern: 'dist/testConfiguration.bundle.js', watched: false },
-            // Initialize the application
-            { pattern: './node_modules/sdl-catalina/Common.debug/Library/Core/Packages/SDL.Client.Init.js', watched: false },
-            // Fire test loader
-            { pattern: './node_modules/sdl-catalina/Test/TestLoader.js', watched: false }
+            // Application
+            './dist/testConfiguration.bundle.js',
+            './dist/stylesheets/test.css',
+            './dist/test.bundle.js',
+            {
+                pattern: './dist/test.bundle.js.map',
+                included: false
+            }
         ],
 
         /**
@@ -38,6 +37,39 @@ module.exports = function (config) {
 
         reporters: ['progress', 'coverage'],
 
-        coverageReporter: { type: 'text-summary' }
+        coverageReporter: { type: 'text-summary' },
+
+        // web server port
+        port: 9876,
+
+        // enable / disable colors in the output (reporters and logs)
+        colors: true,
+
+        // level of logging
+        // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
+        logLevel: config.LOG_ERROR,
+
+        // enable / disable watching file and executing tests whenever any file changes
+        autoWatchBatchDelay: 1000,
+        autoWatch: true,
+
+        // start these browsers
+        // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
+        browsers: ['Chrome', 'Firefox', 'IE'],
+
+        // Continuous Integration mode
+        // if true, Karma captures browsers, runs the tests and exits
+        singleRun: false,
+
+        // Output file for jasmine
+        htmlReporter: {
+            outputFile: 'output/Results.html'
+        },
+
+        // The number of disconnections tolerated.
+        browserDisconnectTolerance: 1,
+
+        // How long will Karma wait for a message from a browser before disconnecting from it (in ms).
+        browserNoActivityTimeout: 60000
     });
 };
