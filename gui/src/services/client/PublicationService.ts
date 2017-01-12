@@ -1,6 +1,6 @@
 import { IPublicationService } from "services/interfaces/PublicationService";
 import { IPublication } from "interfaces/Publication";
-import { localization } from "services/client/LocalizationService";
+import { localization } from "services/common/LocalizationService";
 import { Publications } from "models/Publications";
 import { Promise } from "es6-promise";
 

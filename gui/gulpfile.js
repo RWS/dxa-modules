@@ -8,14 +8,12 @@ const _ = require('lodash');
 const async = require('async');
 const runSequence = require('run-sequence');
 const packageInfo = require('./package.json');
-const catalinaPackageInfo = require('./node_modules/sdl-catalina/package.json');
 const gulpTypings = require('./build/gulp-plugins/install-typings');
 const yargs = require('yargs');
 
 const sourcesPath = './src/';
 const buildOptions = {
     version: packageInfo.version,
-    catalinaVersion: catalinaPackageInfo.version,
     sourcesPath: sourcesPath,
     testPath: './test/',
     distPath: './dist/',
@@ -62,15 +60,11 @@ let webpackInstance = {
 };
 
 // Log info
-console.log(`Application version: ${buildOptions.version}, Catalina version: ${buildOptions.catalinaVersion}`);
-
-const commonFolderName = function () {
-    return buildOptions.isDebug ? 'Common.debug' : 'Common';
-};
+console.log(`Application version: ${buildOptions.version}`);
 
 // Tasks
 const runTSLint = require('./build/gulp-tasks/run-tslint')(buildOptions, gulp);
-const serve = require('./build/gulp-tasks/serve')(buildOptions, gulp, browserSync, commonFolderName);
+const serve = require('./build/gulp-tasks/serve')(buildOptions, gulp, browserSync);
 const runKarma = require('./build/gulp-tasks/run-karma')(buildOptions);
 const runTests = function (singleRun, cb, onTestRunCompleted) {
     return function (err) {
@@ -87,7 +81,7 @@ const runTests = function (singleRun, cb, onTestRunCompleted) {
                 } else {
                     runKarma(webpackInstance, singleRun, onTestCompleted, onTestRunCompleted);
                 }
-            }, webpackInstance, !singleRun);
+            }, webpackInstance);
         }
     };
 };
@@ -95,8 +89,6 @@ const testCoverage = function (cb, singleRun) {
     singleRun = typeof singleRun === 'boolean' ? singleRun : false;
     return require('./build/gulp-tasks/test-coverage')(buildOptions, gulp, runTests, singleRun)(cb);
 };
-
-gulp.task('copy-sources', require('./build/gulp-tasks/copy-sources')(buildOptions, gulp));
 
 gulp.task('copy-dependencies', cb => {
     if (buildOptions.isDebug) {
@@ -123,24 +115,6 @@ gulp.task('copy-dependencies', cb => {
                 .pipe(gulp.dest(`${buildOptions.distPath}lib/react-dom/`))
                 .on('end', next);
         },
-        // Catalina
-        next => {
-            gulp.src(['./node_modules/sdl-catalina/' + commonFolderName() + '/**/*'])
-                .pipe(gulpDebug({
-                    title: 'Copying'
-                }))
-                .pipe(gulp.dest(`${buildOptions.distPath}SDL/Common`))
-                .on('end', next);
-        },
-        // Catalina React Wrappers
-        next => {
-            gulp.src(['./node_modules/sdl-catalina-react-wrappers/dist/components/**/*'])
-                .pipe(gulpDebug({
-                    title: 'Copying'
-                }))
-                .pipe(gulp.dest(`${buildOptions.distPath}SDL/ReactComponents`))
-                .on('end', next);
-        },
         // Mocks
         next => {
             gulp.src(['./mocks/**/*'])
@@ -152,8 +126,6 @@ gulp.task('copy-dependencies', cb => {
         }
     ], cb);
 });
-
-gulp.task('update-version', ['copy-sources'], require('./build/gulp-tasks/update-version')(buildOptions, gulp));
 
 gulp.task('package-project', [
     'copy-dependencies',
@@ -181,10 +153,8 @@ gulp.task('wrap-dita-ot-styles', require('./build/gulp-tasks/wrap-dita-ot-styles
 // Common tasks
 gulp.task('build', [
     'copy-dependencies',
-    'copy-sources',
     'run-tslint',
-    'package-project',
-    'update-version'
+    'package-project'
 ]);
 
 gulp.task('build:dist', cb => {
@@ -289,6 +259,7 @@ gulp.task('test', function (cb) {
 
 // Error handling
 gulp.on('task_err', function (err) {
+    console.error('Task failed:', err);
     // This error event is fired on the entire task tree
     // If it fails on a sub task this event will also be fired for all parent tasks
     // It should only be handled on the main task

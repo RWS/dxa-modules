@@ -1,2 +1,0 @@
-applicationVersion = 0.0.0
-libraryVersion = 0.0.0

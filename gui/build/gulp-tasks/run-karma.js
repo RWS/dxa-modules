@@ -19,12 +19,8 @@ module.exports = (buildOptions) => {
             configFile: configPath,
             singleRun: singleRun,
             proxies: {
-                // Common UI
-                '/SDL/': urlPrefix + 'SDL/',
-                // Test folder
-                '/test/': urlPrefix + 'test/',
-                // src folder
-                '/src/': urlPrefix,
+                // assets
+                '/assets': urlPrefix + 'assets',
                 // mocks
                 '/gui/mocks/': urlPrefix + 'gui/mocks/',
                 // theming
@@ -37,6 +33,7 @@ module.exports = (buildOptions) => {
         };
 
         // Start the test server
+        let karmaExitedCalled = false;
         var karmaServer = new karma.Server(karmaConfig, (exitCode, error) => {
             console.log('Karma has exited with ' + exitCode);
             var returnErr;
@@ -48,7 +45,10 @@ module.exports = (buildOptions) => {
                     returnErr = new Error('Tests failed.');
                 }
             }
-            cb(returnErr, latestsResults);
+            if (!karmaExitedCalled) {
+                cb(returnErr, latestsResults);
+            }
+            karmaExitedCalled = true;
         });
 
         // Get the results
