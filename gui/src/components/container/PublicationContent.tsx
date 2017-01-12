@@ -529,11 +529,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
             const navigationMenuElement = toc.parentElement;
             const isFixedNavMenu = navigationMenuElement && navigationMenuElement.classList.contains("sdl-dita-delivery-navigation-menu")
                 ? getComputedStyle(navigationMenuElement).position === "fixed" : false;
-            if (isFixedNavMenu) {
-                toc.style.maxHeight = "";
-            } else {
-                toc.style.maxHeight = maxHeight;
-            }
+            toc.style.maxHeight = isFixedNavMenu ? "" : maxHeight;
             if (sticksToTop) {
                 toc.classList.add(FIXED_NAV_CLASS);
             } else {
@@ -542,7 +538,8 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         }
 
         if (contentNavigation) {
-            contentNavigation.style.maxHeight = maxHeight;
+            const isInline = getComputedStyle(contentNavigation).position === "static";
+            contentNavigation.style.maxHeight = isInline ? "" : maxHeight;
             if (sticksToTop) {
                 contentNavigation.classList.add(FIXED_NAV_CLASS);
                 // Set left position
