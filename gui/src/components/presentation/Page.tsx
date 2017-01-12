@@ -126,8 +126,8 @@ export class Page extends React.Component<IPageProps, IPageState> {
             <div className={"sdl-dita-delivery-page"}>
                 {props.showActivityIndicator ? <ActivityIndicator /> : null}
                 {props.error ? <ValidationMessage messageType={SDL.UI.Controls.ValidationMessageType.Error} message={props.error} /> : null}
-                <ContentNavigation navItems={navItems} activeNavItemId={activeNavItemId} />
                 {props.children}
+                <ContentNavigation navItems={navItems} activeNavItemId={activeNavItemId} />
                 <article>
                     <article className={"page-content ltr"} dangerouslySetInnerHTML={{ __html: props.content || "" }} />
                 </article>

@@ -1,0 +1,23 @@
+@import (reference) "../../../theming/styles.less";
+
+.sdl-dita-delivery-navigation-menu {
+    @rightMargin: 30px;
+    @defaultWidth: 500px;
+
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: @defaultWidth;
+    left: @defaultWidth * -1;
+    min-height: 100%;
+    background-color: #fff;
+
+    &.open {
+        display: block;
+        z-index: 1010;
+        max-width: ~"calc(100% - @{rightMargin})";
+        left: 0;
+        transition: left .3s ease-out;
+    }
+}
