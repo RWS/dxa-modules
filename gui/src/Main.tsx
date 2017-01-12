@@ -7,10 +7,14 @@ import { PageService } from "services/client/PageService";
 import { PublicationService } from "services/client/PublicationService";
 import { TaxonomyService } from "services/client/TaxonomyService";
 import { localization } from "services/client/LocalizationService";
-
-import { browserHistory } from "react-router";
+import { useBasename, createHistory } from "history";
+import { Url } from "utils/Url";
 
 const mainElement = document.getElementById("main-view-target");
+
+ const browserHistory = useBasename(createHistory)({
+     basename: Url.getBaseName(window.location)
+ });
 
 /**
  * Set instances for services
@@ -27,7 +31,7 @@ const render = (AppComp: typeof App): void => {
         console.error(`Unable to locate element to render application.`);
     } else {
         ReactDOM.render(
-            <AppComp services={services} history={browserHistory} />,
+            <AppComp services={services} history={browserHistory as ReactRouter.History} />,
             mainElement);
     }
 };

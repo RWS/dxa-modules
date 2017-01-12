@@ -92,6 +92,33 @@ export class Url {
         return `${pageUrl}/${encodeURIComponent(anchorId)}`;
     }
 
+    /**
+     * Get Location base name
+     *
+     * @static
+     * @param {Location} location Current location
+     * @returns {string}
+     *
+     * @memberOf Url
+     */
+    public static getBaseName(location: Location): string {
+        const pathname = location.pathname;
+
+        const homePathRegEx = /\/home?$/i;
+        const pubPathRegEx = /\/\d+\/[^\/]+$/i;
+        const pagePathRegEx = /\/\d+\/\d+(\/([^\/]+(\/([^\/]+(\/([^\/]+)?)?)?)?)?)?$/i;
+
+        if (pathname.match(pagePathRegEx)) {
+            return pathname.replace(pagePathRegEx, "");
+        } else if (pathname.match(homePathRegEx)) {
+            return pathname.replace(homePathRegEx, "");
+        } else if (pathname.match(pubPathRegEx)) {
+            return pathname.replace(pubPathRegEx, "");
+        }
+
+        return "";
+    }
+
     private static _processTitle(title: string): string {
         // trim
         title = title.trim();
