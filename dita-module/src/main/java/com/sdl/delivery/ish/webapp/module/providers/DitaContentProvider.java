@@ -2,6 +2,7 @@ package com.sdl.delivery.ish.webapp.module.providers;
 
 import com.google.common.io.Files;
 import com.sdl.web.api.content.BinaryContentRetriever;
+import com.sdl.web.api.dynamic.DynamicMetaRetriever;
 import com.sdl.web.api.meta.WebComponentMetaFactory;
 import com.sdl.web.api.meta.WebComponentMetaFactoryImpl;
 import com.sdl.webapp.common.api.WebRequestContext;
@@ -98,15 +99,15 @@ public class DitaContentProvider extends DefaultContentProvider {
         });
     }
 
-    public byte[] getBinaryContent(final Integer pageId, final Integer binaryId) throws ContentProviderException {
-        WebComponentMetaFactory factory = new WebComponentMetaFactoryImpl(pageId);
+    public byte[] getBinaryContent(final Integer publicationId, final Integer binaryId) throws ContentProviderException {
+        WebComponentMetaFactory factory = new WebComponentMetaFactoryImpl(publicationId);
         ComponentMeta componentMeta = factory.getMeta(binaryId);
         if (componentMeta == null) {
-            throw new BinaryNotFoundException("No meta meta found for: [" + pageId + "-" + binaryId + "]");
+            throw new BinaryNotFoundException("No metadata found for: [" + publicationId + "-" + binaryId + "]");
         }
 
         String parentDir = StringUtils.join(new String[]{
-                webApplicationContext.getServletContext().getRealPath("/"), STATIC_FILES_DIR, pageId.toString()
+                webApplicationContext.getServletContext().getRealPath("/"), STATIC_FILES_DIR, publicationId.toString()
         }, File.separator);
 
         File file = new File(parentDir, binaryId.toString());
@@ -114,7 +115,7 @@ public class DitaContentProvider extends DefaultContentProvider {
         long componentTime = componentMeta.getLastPublicationDate().getTime();
         byte[] data;
         if (isToBeRefreshed(file, componentTime)) {
-            data = getBinaryFromContentService(pageId, binaryId);
+            data = getBinaryFromContentService(publicationId, binaryId);
             try {
                 Files.write(data, file);
             } catch (IOException e) {
@@ -130,8 +131,8 @@ public class DitaContentProvider extends DefaultContentProvider {
         return data;
     }
 
-    private byte[] getBinaryFromContentService(Integer pageId, Integer binaryId) throws ContentProviderException {
-        BinaryData data = binaryContentRetriever.getBinary(pageId, binaryId);
+    private byte[] getBinaryFromContentService(Integer publicationId, Integer binaryId) throws ContentProviderException {
+        BinaryData data = binaryContentRetriever.getBinary(publicationId, binaryId);
         if (data == null) {
             throw new BinaryNotFoundException("Unable to retrieve binary from content service");
         }
