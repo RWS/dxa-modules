@@ -7,14 +7,16 @@
  * @param {Object} gulp Instance of gulp.
  * @param {Object} browserSync BrowserSync instance.
  */
-module.exports = function(buildOptions, gulp, browserSync) {
+module.exports = function (buildOptions, gulp, browserSync) {
     const _ = require('lodash');
+    const path = require('path');
+    const fs = require('fs-extra');
     const portfinder = require('portfinder');
     portfinder.basePort = buildOptions.ports.httpServer;
     const webpackDevMiddleware = require('webpack-dev-middleware');
     const webpackHotMiddleware = require('webpack-hot-middleware');
 
-    return function(cb, webpackInstance) {
+    return function (cb, webpackInstance) {
         const webpackConfig = webpackInstance.config;
         const webpackCompiler = webpackInstance.compiler;
 
@@ -96,6 +98,22 @@ module.exports = function(buildOptions, gulp, browserSync) {
                     // Enable Hot Module Replacement
                     browserSyncOptions.middleware.push(webpackDevMiddlewareInstance);
                     browserSyncOptions.middleware.push(webpackHotMiddleware(webpackCompiler, { path: '/assets' }));
+
+                    // Write output to the disk (for test only)
+                    // This is needed so karma can pick up changes to the bundle and rerun the tests
+                    if (buildOptions.isTest) {
+                        webpackCompiler.plugin('emit', (compilation, callback) => {
+                            const assets = compilation.assets;
+                            Object.keys(assets).forEach(key => {
+                                if (!key.match(/\.hot-update.*$/)) {
+                                    const file = path.resolve(buildOptions.distPath + 'assets/', key);
+                                    const data = assets[key].source();
+                                    fs.writeFileSync(file, data);
+                                }
+                            })
+                            callback();
+                        });
+                    }
 
                     // Close middleware when browsersync closes
                     browserSync.emitter.on('service:exit', () => {
