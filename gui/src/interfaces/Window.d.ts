@@ -14,7 +14,6 @@ export interface IWindow extends Window {
      */
     SdlDitaDeliveryMocksEnabled?: boolean;
 
-
     /**
      * SDL Dita application root path
      *
