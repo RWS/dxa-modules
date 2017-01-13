@@ -44,7 +44,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java-version>1.8</java-version>
-        <dxa-bom.version>2.0.0-SNAPSHOT</dxa-bom.version>
+        <dxa-bom.version>${project.version}</dxa-bom.version>
     </properties>
 
     <dependencyManagement>
@@ -55,13 +55,6 @@
                 <version>${dxa-bom.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.sdl.dxa.modules</groupId>
-                <artifactId>dxa-bom-modules</artifactId>
-                <version>${dxa-bom.version}</version>
-                <scope>import</scope>
-                <type>pom</type>
             </dependency>
         </dependencies>
     </dependencyManagement>
