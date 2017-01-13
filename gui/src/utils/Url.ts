@@ -101,22 +101,25 @@ export class Url {
      *
      * @memberOf Url
      */
-    public static getBaseName(location: Location): string {
+    public static getBasePath(location: Location): string {
         const pathname = location.pathname;
 
-        const homePathRegEx = /\/home?$/i;
-        const pubPathRegEx = /\/\d+\/[^\/]+$/i;
-        const pagePathRegEx = /\/\d+\/\d+(\/([^\/]+(\/([^\/]+(\/([^\/]+)?)?)?)?)?)?$/i;
+        const regExs = [
+            /\/\d+\/\d+(\/([^\/]+(\/([^\/]+(\/([^\/]+)?)?)?)?)?)?$/i,    // Page regEx
+            /\/\d+\/[^\/]+$/i,  // Publication regEx
+            /\/home$/i, // Home page regEx
+            /\/[\w\.]*\.[\w\.]+$/i, // trim path file endings like /app/index.html
+            /\/$/i // trim path file endings like /app/index.html
+        ];
 
-        if (pathname.match(pagePathRegEx)) {
-            return pathname.replace(pagePathRegEx, "");
-        } else if (pathname.match(homePathRegEx)) {
-            return pathname.replace(homePathRegEx, "");
-        } else if (pathname.match(pubPathRegEx)) {
-            return pathname.replace(pubPathRegEx, "");
+        for (let regEx of regExs) {
+            if (pathname.match(regEx)) {
+                return pathname.replace(regEx, "");
+            }
         }
 
-        return "";
+        // If no matches, then return pathname
+        return pathname;
     }
 
     private static _processTitle(title: string): string {

@@ -8,13 +8,14 @@ import { PublicationService } from "services/client/PublicationService";
 import { TaxonomyService } from "services/client/TaxonomyService";
 import { localization } from "services/client/LocalizationService";
 import { useBasename, createHistory } from "history";
-import { Url } from "utils/Url";
+
+import { path } from "utils/Path";
 
 const mainElement = document.getElementById("main-view-target");
 
- const browserHistory = useBasename(createHistory)({
-     basename: Url.getBaseName(window.location)
- });
+const browserHistory = useBasename(createHistory)({
+    basename: path.getRootPath()
+});
 
 /**
  * Set instances for services

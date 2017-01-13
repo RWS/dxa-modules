@@ -49,10 +49,31 @@ class UrlUtil extends TestBase {
             });
 
             it("extracts basepath from location", (): void => {
-                const baseTest = Url.getBaseName({
+
+                const emptyTest = Url.getBasePath({
+                    pathname: "/"
+                } as Location);
+                expect(emptyTest).toBe("");
+
+                const blankTest = Url.getBasePath({
+                    pathname: "/app/"
+                } as Location);
+                expect(blankTest).toBe("/app");
+
+                const baseTest = Url.getBasePath({
+                    pathname: "/root/sub/app"
+                } as Location);
+                expect(baseTest).toBe("/root/sub/app");
+
+                const fileTest = Url.getBasePath({
+                    pathname: "/root/sub/app/index.html"
+                } as Location);
+                expect(fileTest).toBe("/root/sub/app");
+
+                const homePageTest = Url.getBasePath({
                     pathname: "/root/sub/app/home"
                 } as Location);
-                expect(baseTest).toBe(`/root/sub/app`);
+                expect(homePageTest).toBe("/root/sub/app");
 
                 [
                     "/app/home",
@@ -62,10 +83,10 @@ class UrlUtil extends TestBase {
                     "/app/123/456/publication/page",
                     "/app/123/456/publication/page/anchor"
                 ].forEach((testPath: string) => {
-                    const base = Url.getBaseName({
+                    const base = Url.getBasePath({
                         pathname: testPath
                     } as Location);
-                    expect(base).toBe(`/app`);
+                    expect(base).toBe("/app");
                 });
             });
 

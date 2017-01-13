@@ -1,3 +1,5 @@
+import { Url } from "utils/Url";
+
 /**
  * Path utilities
  *
@@ -18,6 +20,15 @@ export class Path {
     }
 
     /**
+     * Get the root path
+     *
+     * @returns {string}
+     */
+    public getRootPath(): string {
+        return this._root;
+    }
+
+    /**
      * Get the absolute path
      *
      * @param {string} path Path
@@ -29,4 +40,4 @@ export class Path {
 
 }
 
-export let path = new Path();
+export let path = new Path(`${Url.getBasePath(window.location)}/`);

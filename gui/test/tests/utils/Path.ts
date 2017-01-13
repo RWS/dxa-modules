@@ -10,6 +10,10 @@ describe(`Url utils tests.`, (): void => {
     it("has option to set different root path", (): void => {
         const rootPath = "/some-dir/";
         const pathUtil = new PathUtils(rootPath);
+
+        const testTootPath = pathUtil.getRootPath();
+        expect(testTootPath).toBe(rootPath);
+
         const absolutePath = pathUtil.getAbsolutePath("foo/bar");
         expect(absolutePath).toBe(`${rootPath}foo/bar`);
     });
