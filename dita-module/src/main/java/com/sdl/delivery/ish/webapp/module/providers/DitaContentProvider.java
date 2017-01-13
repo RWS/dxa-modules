@@ -12,7 +12,6 @@ import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.api.model.PageModel;
 import com.sdl.webapp.common.util.LocalizationUtils;
 import com.sdl.webapp.common.util.MimeUtils;
-import com.sdl.webapp.common.util.TcmUtils;
 import com.sdl.webapp.tridion.mapping.DefaultContentProvider;
 import com.sdl.webapp.tridion.mapping.ModelBuilderPipeline;
 import com.tridion.data.BinaryData;
@@ -35,7 +34,9 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import static com.sdl.webapp.common.util.LocalizationUtils.findPageByPath;
+import static com.sdl.webapp.common.util.TcmUtils.buildCmUri;
 import static org.dd4t.core.util.TCMURI.Namespace;
+import static org.dd4t.core.util.TCMURI.Namespace.ISH;
 
 /**
  * Dita content provider.
@@ -81,7 +82,7 @@ public class DitaContentProvider extends DefaultContentProvider {
                 final org.dd4t.contentmodel.Page genericPage;
                 try {
                     Namespace namespace = Namespace.valueOf(localization.getCmUriScheme().toUpperCase());
-                    String cmId = TcmUtils.buildCmUri(namespace, Integer.toString(publicationId), pageId, "16");
+                    String cmId = buildCmUri(namespace, Integer.toString(publicationId), pageId, "16");
                     String source = dd4tPageFactory.findSourcePageByTcmId(cmId);
                     if (source != null) {
                         genericPage = dd4tPageFactory.deserialize(source, PageImpl.class);
@@ -107,17 +108,19 @@ public class DitaContentProvider extends DefaultContentProvider {
         });
     }
 
-    public StaticContentItem getBinaryContent(final Integer publicationId, final Integer binaryId) throws ContentProviderException {
+    public StaticContentItem getBinaryContent(final Integer publicationId, final Integer binaryId)
+            throws ContentProviderException {
         WebComponentMetaFactory factory = new WebComponentMetaFactoryImpl(publicationId);
         ComponentMeta componentMeta = factory.getMeta(binaryId);
         if (componentMeta == null) {
             throw new BinaryNotFoundException("No metadata found for: [" + publicationId + "-" + binaryId + "]");
         }
 
-        BinaryMeta binaryMeta = webBinaryMetaFactory.getMeta("ish:" + publicationId + "-" + binaryId);
+        String binaryUri = buildCmUri(ISH, publicationId, binaryId);
+        BinaryMeta binaryMeta = webBinaryMetaFactory.getMeta(binaryUri);
         if (binaryMeta == null) {
-            throw new BinaryNotFoundException("Unable to get binary metadata for publicationId=" + publicationId +
-                    ", binaryId=" + binaryId);
+            throw new BinaryNotFoundException("Unable to get binary metadata for: [" + publicationId + "-"
+                    + binaryId + "]");
         }
 
         String parentDir = StringUtils.join(new String[]{
@@ -146,7 +149,8 @@ public class DitaContentProvider extends DefaultContentProvider {
         return createStaticContentItem(data, binaryMeta);
     }
 
-    private byte[] getBinaryFromContentService(Integer publicationId, Integer binaryId) throws ContentProviderException {
+    private byte[] getBinaryFromContentService(Integer publicationId, Integer binaryId)
+            throws ContentProviderException {
         BinaryData data = binaryContentRetriever.getBinary(publicationId, binaryId);
         if (data == null) {
             throw new BinaryNotFoundException("Unable to retrieve binary from content service");
