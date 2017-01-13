@@ -6,7 +6,7 @@ import { IServices } from "interfaces/Services";
 import { PageService } from "services/client/PageService";
 import { PublicationService } from "services/client/PublicationService";
 import { TaxonomyService } from "services/client/TaxonomyService";
-import { localization } from "services/client/LocalizationService";
+import { localization } from "services/common/LocalizationService";
 import { useBasename, createHistory } from "history";
 
 import { path } from "utils/Path";
