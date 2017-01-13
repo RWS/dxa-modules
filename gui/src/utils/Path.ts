@@ -18,7 +18,7 @@ export class Path {
      * @param {string} [root="/"] Root path of the application.
      */
     constructor(root: string = "/") {
-        this._root = root;
+        this._root = root + (root.slice(-1) == "/" ? "" : "/");
     }
 
     /**
