@@ -92,36 +92,6 @@ export class Url {
         return `${pageUrl}/${encodeURIComponent(anchorId)}`;
     }
 
-    /**
-     * Get Location base name
-     *
-     * @static
-     * @param {Location} location Current location
-     * @returns {string}
-     *
-     * @memberOf Url
-     */
-    public static getBasePath(location: Location): string {
-        const pathname = location.pathname;
-
-        const regExs = [
-            /\/\d+\/\d+(\/([^\/]+(\/([^\/]+(\/([^\/]+)?)?)?)?)?)?$/i,    // Page regEx
-            /\/\d+\/[^\/]+$/i,  // Publication regEx
-            /\/home$/i, // Home page regEx
-            /\/[\w\.]*\.[\w\.]+$/i, // trim path file endings like /app/index.html
-            /\/$/i // trim trailing slash
-        ];
-
-        for (let regEx of regExs) {
-            if (pathname.match(regEx)) {
-                return pathname.replace(regEx, "");
-            }
-        }
-
-        // If no matches, then return pathname
-        return pathname;
-    }
-
     private static _processTitle(title: string): string {
         // trim
         title = title.trim();

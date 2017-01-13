@@ -1,4 +1,6 @@
-import { Url } from "utils/Url";
+import { IWindow } from "interfaces/Window";
+
+const rootPath: string = (window as IWindow).SDLDitaDeliveryRootPath || "/";
 
 /**
  * Path utilities
@@ -40,4 +42,4 @@ export class Path {
 
 }
 
-export let path = new Path(`${Url.getBasePath(window.location)}/`);
+export let path = new Path(rootPath);

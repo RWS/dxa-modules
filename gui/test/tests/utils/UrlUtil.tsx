@@ -48,48 +48,6 @@ class UrlUtil extends TestBase {
                 expect(publicationLocation).toBe(`/pub-id/${expectedTitle}`);
             });
 
-            it("extracts basepath from location", (): void => {
-
-                const emptyTest = Url.getBasePath({
-                    pathname: "/"
-                } as Location);
-                expect(emptyTest).toBe("");
-
-                const blankTest = Url.getBasePath({
-                    pathname: "/app/"
-                } as Location);
-                expect(blankTest).toBe("/app");
-
-                const baseTest = Url.getBasePath({
-                    pathname: "/root/sub/app"
-                } as Location);
-                expect(baseTest).toBe("/root/sub/app");
-
-                const fileTest = Url.getBasePath({
-                    pathname: "/root/sub/app/index.html"
-                } as Location);
-                expect(fileTest).toBe("/root/sub/app");
-
-                const homePageTest = Url.getBasePath({
-                    pathname: "/root/sub/app/home"
-                } as Location);
-                expect(homePageTest).toBe("/root/sub/app");
-
-                [
-                    "/app/home",
-                    "/app/123/publication",
-                    "/app/123/456",
-                    "/app/123/456/publication",
-                    "/app/123/456/publication/page",
-                    "/app/123/456/publication/page/anchor"
-                ].forEach((testPath: string) => {
-                    const base = Url.getBasePath({
-                        pathname: testPath
-                    } as Location);
-                    expect(base).toBe("/app");
-                });
-            });
-
         });
     }
 }
