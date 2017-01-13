@@ -20,15 +20,15 @@ module.exports = (buildOptions) => {
             singleRun: singleRun,
             proxies: {
                 // Common UI
-                '/SDL/': urlPrefix + 'SDL/',
+                '/SDL/': urlPrefix + '/app/SDL/',
                 // Test folder
-                '/test/': urlPrefix + 'test/',
+                '/test/': urlPrefix + '/app/test/',
                 // src folder
-                '/src/': urlPrefix,
+                '/src/': urlPrefix + '/app/',
                 // mocks
-                '/gui/mocks/': urlPrefix + 'gui/mocks/',
+                '/gui/mocks/': urlPrefix + '/app/gui/mocks/',
                 // theming
-                '/gui/theming/': urlPrefix + 'theming/',
+                '/gui/theming/': urlPrefix + '/app/theming/',
                 // Browsers sync proxies
                 '/browser-sync/': urlPrefix + 'browser-sync-mock/'
             },
