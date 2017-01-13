@@ -1,3 +1,4 @@
+import * as React from "react";
 import { IndexLink } from "react-router";
 
 import "./styles/TopBar";

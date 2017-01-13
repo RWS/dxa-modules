@@ -1,6 +1,5 @@
-/// <reference path="../typings/index.d.ts" />
-
 import "ts-helpers";
+import "sdl-controls-react-wrappers/dist/stylesheets/main";
 
 // Import all tests
 import "test/tests/components/container/AppComponent";

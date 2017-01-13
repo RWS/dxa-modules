@@ -1,3 +1,6 @@
+import * as React from "react";
+import * as ReactDOM from "react-dom";
+import * as TestUtils from "react-addons-test-utils";
 import { Router, Route } from "react-router";
 import { Breadcrumbs, IBreadcrumbsProps } from "components/presentation/Breadcrumbs";
 import { ITaxonomy } from "interfaces/Taxonomy";
@@ -6,10 +9,7 @@ import { hashHistory } from "react-router";
 import { Url } from "utils/Url";
 import { TcmId } from "utils/TcmId";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
-
-// Global Catalina dependencies
-import TestBase = SDL.Client.Test.TestBase;
-const TestUtils = React.addons.TestUtils;
+import { TestBase } from "sdl-models";
 
 interface IProps {
     params: {

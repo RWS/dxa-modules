@@ -1,3 +1,4 @@
+import * as React from "react";
 import { Promise } from "es6-promise";
 import { Link } from "react-router";
 import { ITaxonomy } from "interfaces/Taxonomy";

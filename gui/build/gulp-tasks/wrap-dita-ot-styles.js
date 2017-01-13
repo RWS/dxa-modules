@@ -1,6 +1,5 @@
 'use strict';
 
-const fs = require('fs-extra');
 const ditaOtStylesDir = './node_modules/dita-ot/src/main/plugins/org.dita.xhtml/resource/';
 const gulpWrapCss = require('../gulp-plugins/wrap-css');
 const gulpDebug = require('gulp-debug');

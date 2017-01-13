@@ -1,8 +1,6 @@
 import { PublicationService } from "services/client/PublicationService";
-
-// Global Catalina dependencies
-import TestBase = SDL.Client.Test.TestBase;
-import IWebRequest = SDL.Client.Net.IWebRequest;
+import { TestBase } from "sdl-models";
+import { FakeXMLHttpRequest } from "test/mocks/XmlHttpRequest";
 
 class PublicationServiceTests extends TestBase {
 
@@ -14,32 +12,26 @@ class PublicationServiceTests extends TestBase {
 
             it("returns a proper error when publications cannot be retrieved", (done: () => void): void => {
                 // Put this test first, otherwise the publication would be already in the cache and the spy would not work
-                const failMessage = "failure";
-                const fakeGetRequest = (url: string, onSuccess: Function, onFailure: (error: string, request: IWebRequest | null) => void): void => {
-                    onFailure(failMessage, null);
-                };
-                spyOn(SDL.Client.Net, "getRequest").and.callFake(fakeGetRequest);
+                const failMessage = "failure-retrieving-publications";
+                spyOn(window, "XMLHttpRequest").and.callFake(() => new FakeXMLHttpRequest(failMessage));
                 publicationService.getPublications().then(() => {
                     fail("An error was expected.");
                     done();
                 }).catch(error => {
-                    expect(error).toBe(failMessage);
+                    expect(error).toContain(failMessage);
                     done();
                 });
             });
 
             it("returns a proper error when publication title cannot be retrieved", (done: () => void): void => {
                 // Put this test first, otherwise the publication would be already in the cache and the spy would not work
-                const failMessage = "failure";
-                const fakeGetRequest = (url: string, onSuccess: Function, onFailure: (error: string, request: IWebRequest | null) => void): void => {
-                    onFailure(failMessage, null);
-                };
-                spyOn(SDL.Client.Net, "getRequest").and.callFake(fakeGetRequest);
+                const failMessage = "failure-retrieving-publication-title";
+                spyOn(window, "XMLHttpRequest").and.callFake(() => new FakeXMLHttpRequest(failMessage));
                 publicationService.getPublicationTitle(failMessage).then(() => {
                     fail("An error was expected.");
                     done();
                 }).catch(error => {
-                    expect(error).toBe(failMessage);
+                    expect(error).toContain(failMessage);
                     done();
                 });
             });
@@ -59,7 +51,7 @@ class PublicationServiceTests extends TestBase {
             });
 
             it("can get the publications from memory", (done: () => void): void => {
-                const spy = spyOn(SDL.Client.Net, "getRequest").and.callThrough();
+                const spy = spyOn(window, "XMLHttpRequest").and.callThrough();
                 publicationService.getPublications().then(publications => {
                     expect(publications).toBeDefined();
                     if (publications) {
@@ -85,7 +77,7 @@ class PublicationServiceTests extends TestBase {
             });
 
             it("can get a publication title from memory", (done: () => void): void => {
-                const spy = spyOn(SDL.Client.Net, "getRequest").and.callThrough();
+                const spy = spyOn(window, "XMLHttpRequest").and.callThrough();
                 publicationService.getPublicationTitle(publicationId).then(title => {
                     expect(title).toBe("Publication MP330");
                     expect(spy).not.toHaveBeenCalled();

@@ -1,6 +1,6 @@
 import { IPublicationService } from "services/interfaces/PublicationService";
 import { IPublication } from "interfaces/Publication";
-import { localization } from "services/client/LocalizationService";
+import { localization } from "services/common/LocalizationService";
 import { Publications } from "models/Publications";
 import { Promise } from "es6-promise";
 
@@ -40,7 +40,7 @@ export class PublicationService implements IPublicationService {
                     removeEventListeners();
                     resolve(publication.getPublications());
                 };
-                const onLoadFailed = (event: SDL.Client.Event.Event) => {
+                const onLoadFailed = (event: Event & { data: { error: string } }) => {
                     removeEventListeners();
                     reject(event.data.error);
                 };

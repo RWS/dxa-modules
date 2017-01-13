@@ -1,7 +1,8 @@
+import * as React from "react";
+import * as ReactDOM from "react-dom";
+import * as TestUtils from "react-addons-test-utils";
 import { SearchBar, ISearchBarProps } from "components/presentation/SearchBar";
-
-// Global Catalina dependencies
-import TestBase = SDL.Client.Test.TestBase;
+import { TestBase } from "sdl-models";
 
 class SearchBarComponent extends TestBase {
 
@@ -39,7 +40,7 @@ class SearchBarComponent extends TestBase {
                 }, target);
                 const input = document.querySelector(".sdl-dita-delivery-searchbar input") as HTMLInputElement;
                 input.value = searchQuery;
-                React.addons.TestUtils.Simulate.keyUp(input, {
+                TestUtils.Simulate.keyUp(input, {
                     keyCode: 13
                 });
             });
@@ -55,9 +56,9 @@ class SearchBarComponent extends TestBase {
                 }, target);
                 const input = document.querySelector(".sdl-dita-delivery-searchbar input") as HTMLInputElement;
                 input.value = searchQuery;
-                React.addons.TestUtils.Simulate.keyUp(input);
+                TestUtils.Simulate.keyUp(input);
                 const button = document.querySelector(".sdl-dita-delivery-searchbar .search-button") as HTMLInputElement;
-                React.addons.TestUtils.Simulate.click(button);
+                TestUtils.Simulate.click(button);
             });
 
         });

@@ -6,39 +6,19 @@
  * @param {Object} buildOptions Build options.
  * @param {Object} gulp Instance of gulp.
  * @param {Object} browserSync BrowserSync instance.
- * @param {function} commonFolderName Returns the name of the Catalina Common folder.
  */
-module.exports = function(buildOptions, gulp, browserSync, commonFolderName) {
+module.exports = function (buildOptions, gulp, browserSync) {
     const _ = require('lodash');
-    const runSequence = require('run-sequence').use(gulp);
-    const reload = browserSync.reload;
+    const path = require('path');
+    const fs = require('fs-extra');
     const portfinder = require('portfinder');
     portfinder.basePort = buildOptions.ports.httpServer;
     const webpackDevMiddleware = require('webpack-dev-middleware');
     const webpackHotMiddleware = require('webpack-hot-middleware');
 
-    return function(cb, webpackInstance, addWatcher) {
+    return function (cb, webpackInstance) {
         const webpackConfig = webpackInstance.config;
         const webpackCompiler = webpackInstance.compiler;
-
-        addWatcher = typeof addWatcher === 'boolean' ? addWatcher : buildOptions.isDebug;
-        if (addWatcher) {
-            console.log('Setting up file watcher');
-            // Not all files are being watched here
-            // Most of the files are handled by the webpack watcher
-            var watcher = gulp.watch([
-                buildOptions.sourcesPath + '**/*.xml',
-                buildOptions.sourcesPath + '**/*.html',
-                buildOptions.sourcesPath + '**/*.resjson'
-            ]);
-            watcher.on('change', function(event) {
-                console.log('File ' + event.path + ' was ' + event.type + '.');
-                if (event.type === 'changed') {
-                    runSequence(['run-tslint', 'update-version'], 'copy-sources', reload);
-                }
-            });
-            console.log('Setting up file watcher finished');
-        }
 
         portfinder.getPort((err, port) => {
             if (err) {
@@ -50,14 +30,11 @@ module.exports = function(buildOptions, gulp, browserSync, commonFolderName) {
                 if (buildOptions.isDebug) {
                     routes = {
                         // Third party dependencies
-                        '/SDL/Common': './node_modules/sdl-catalina/' + commonFolderName() + '/',
-                        '/SDL/ReactComponents': './node_modules/sdl-catalina-react-wrappers/dist/components/',
                         '/lib/react': './node_modules/react/dist/',
                         '/lib/react-dom': './node_modules/react-dom/dist/'
                     }
                 }
                 routes['/test'] = buildOptions.testPath; // Put test folder behind a virtual directory
-                routes['/SDL/Test'] = './node_modules/sdl-catalina/Test/';
                 routes['/gui/mocks'] = './mocks/';
                 routes['/gui/theming'] = buildOptions.distPath + 'theming/';
 
@@ -116,11 +93,27 @@ module.exports = function(buildOptions, gulp, browserSync, commonFolderName) {
                     // http://webpack.github.io/docs/webpack-dev-middleware.html
                     const webpackDevMiddlewareInstance = webpackDevMiddleware(webpackCompiler, {
                         publicPath: webpackConfig.output.publicPath,
-                        stats: webpackConfig.stats,
+                        stats: webpackConfig.stats
                     });
                     // Enable Hot Module Replacement
                     browserSyncOptions.middleware.push(webpackDevMiddlewareInstance);
-                    browserSyncOptions.middleware.push(webpackHotMiddleware(webpackCompiler));
+                    browserSyncOptions.middleware.push(webpackHotMiddleware(webpackCompiler, { path: '/assets' }));
+
+                    // Write output to the disk (for test only)
+                    // This is needed so karma can pick up changes to the bundle and rerun the tests
+                    if (buildOptions.isTest) {
+                        webpackCompiler.plugin('emit', (compilation, callback) => {
+                            const assets = compilation.assets;
+                            Object.keys(assets).forEach(key => {
+                                if (!key.match(/\.hot-update.*$/)) {
+                                    const file = path.resolve(buildOptions.distPath + 'assets/', key);
+                                    const data = assets[key].source();
+                                    fs.writeFileSync(file, data);
+                                }
+                            })
+                            callback();
+                        });
+                    }
 
                     // Close middleware when browsersync closes
                     browserSync.emitter.on('service:exit', () => {

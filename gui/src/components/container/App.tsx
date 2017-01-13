@@ -1,3 +1,4 @@
+import * as React from "react";
 import { Router, Route, IndexRedirect, History, Redirect } from "react-router";
 import { IServices } from "interfaces/Services";
 import { Home } from "components/container/Home";

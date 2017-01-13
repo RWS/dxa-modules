@@ -2,9 +2,9 @@
 // This file contains global LESS mixins that can be used across the application when using icons
 // ---------------------------------------------------------------------------------------------------------------------
 
-@import (reference) "../../node_modules/sdl-icons/dist/icons-graphene.less";
-@import (reference) "../../node_modules/sdl-icons/dist/icons-carbon-2.0.less";
-@import (reference) "../../node_modules/sdl-icons/dist/icons-common.less";
+@import (reference) "~sdl-icons/dist/icons-graphene.less";
+@import (reference) "~sdl-icons/dist/icons-carbon-2.0.less";
+@import (reference) "~sdl-icons/dist/icons-common.less";
 
 @iconFont: "SDLfont";
 @iconFontPath: "./fonts/SDLfont";
@@ -16,11 +16,7 @@
 
 .import-icon-font() {
     font-family: @iconFont;
-    src: url('@{iconFontPath}/SDLfont.eot');
-    src: url('@{iconFontPath}/SDLfont.otf') format('opentype'),
-        url('@{iconFontPath}/SDLfont.ttf') format('truetype'),
-        url('@{iconFontPath}/SDLfont.woff') format('woff'),
-        url('@{iconFontPath}/SDLfont.svg#SDLfont') format('svg');
+    src: url('@{iconFontPath}/SDLfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
