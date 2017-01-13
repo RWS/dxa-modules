@@ -4,7 +4,6 @@ const gulp = require('gulp');
 const gulpDebug = require('gulp-debug');
 const browserSync = require('browser-sync').create();
 const fs = require('fs-extra');
-const _ = require('lodash');
 const async = require('async');
 const runSequence = require('run-sequence');
 const packageInfo = require('./package.json');
@@ -30,27 +29,6 @@ const buildOptions = {
     },
     ports: {
         httpServer: 9005
-    },
-    excludePatterns: {
-        global: [
-            '!' + sourcesPath + '**/{node_modules,node_modules/**}',
-            '!' + sourcesPath + '**/**/[.]git*', // .gitignore, .gitattributes..
-            '!' + sourcesPath + '**/tsconfig.json',
-            // IntelliJ IDEA
-            '!' + sourcesPath + '**/{[.]idea,[.]idea/**}',
-            // Visual studio
-            '!' + sourcesPath + '**/{[.]vs,[.]vs/**}',
-            '!' + sourcesPath + '**/*.sln',
-            '!' + sourcesPath + '**/*.suo',
-            '!' + sourcesPath + '**/*.csproj*',
-            '!' + sourcesPath + '**/*.vssscc',
-            '!' + sourcesPath + '**/*.bat',
-            '!' + sourcesPath + '**/web.*.config',
-            '!' + sourcesPath + '**/*.targets',
-            '!' + sourcesPath + '**/packages.config',
-            '!' + sourcesPath + '**/{obj,obj/**}',
-            '!' + sourcesPath + '**/{bin,bin/**}'
-        ]
     }
 };
 let webpackInstance = {
