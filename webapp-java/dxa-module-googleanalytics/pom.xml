@@ -74,12 +74,6 @@
             <artifactId>spring-core</artifactId>
         </dependency>
 
-        <!-- Necessary for Spring 3 to process @Configuration annotated classes -->
-        <dependency>
-            <groupId>cglib</groupId>
-            <artifactId>cglib</artifactId>
-        </dependency>
-
         <!-- Servlet API -->
         <dependency>
             <groupId>javax.servlet</groupId>

@@ -89,12 +89,6 @@
             <version>${device-detection.version}</version>
         </dependency>
 
-        <!-- Necessary for Spring 3 to process @Configuration annotated classes -->
-        <dependency>
-            <groupId>cglib</groupId>
-            <artifactId>cglib</artifactId>
-        </dependency>
-
         <!-- Spring Framework -->
         <dependency>
             <groupId>org.springframework</groupId>
