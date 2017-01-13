@@ -1,13 +1,14 @@
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const extractCSS = new ExtractTextPlugin('stylesheets/[name].css');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = (isTest, isDebug) => {
     const entries = {
         main: './src/Main.tsx',
         server: './src/Server.tsx',
-        vendor: ['es6-promise', 'react-router', 'ts-helpers']
+        vendor: ['es6-promise', 'react-router', 'ts-helpers', 'sdl-models', 'sdl-controls', 'sdl-controls-react-wrappers']
     };
     const testEntries = Object.assign({
         test: './test/Main.ts',
@@ -17,18 +18,24 @@ module.exports = (isTest, isDebug) => {
     const config = {
         entry: isTest ? testEntries : entries,
         output: {
-            path: path.resolve(__dirname + '/dist'),
-            publicPath: '/',
+            path: path.resolve(__dirname + '/dist/assets'),
+            publicPath: '/assets/',
             filename: '[name].bundle.js'
         },
         devtool: 'source-map',
         resolve: {
+            // Needed to resolve dependencies to react inside sdl-control-react-wrappers
+            alias: {
+                React: 'react',
+                ReactDOM: 'react-dom',
+                ReactDOMServer: 'react-dom/server'
+            },
             modules: [
                 path.resolve(__dirname),
                 path.resolve(__dirname, 'src'),
                 path.resolve(__dirname, 'node_modules')
             ],
-            extensions: ['.ts', '.tsx', '.js', '.css', '.less']
+            extensions: ['.ts', '.tsx', '.js', '.css', '.less', '.resjson']
         },
         module: {
             rules: [{
@@ -43,23 +50,39 @@ module.exports = (isTest, isDebug) => {
             }, {
                 test: /\.tsx?$/,
                 loader: 'ts-loader'
+            }, {
+                test: /\.resjson$/,
+                loader: 'json-loader'
             }]
         },
+        externals: {
+            react: 'React',
+            'react-dom': 'ReactDOM',
+            'react-dom/server': 'ReactDOMServer',
+            'react-addons-test-utils': 'React.addons.TestUtils'
+        },
         plugins: [
-            extractCSS
+            extractCSS,
+            new HtmlWebpackPlugin({
+                template: './src/index.html',
+                filename: '../index.html',
+                favicon: './node_modules/sdl-icons/icons/favicon.ico',
+                hash: true,
+                excludeChunks: ['test', 'server']
+            })
         ],
         // What information should be printed to the console
         stats: {
             colors: true,
             reasons: isDebug,
-            hash: isDebug,
-            version: isDebug,
+            hash: false,
+            version: false,
             timings: true,
-            chunks: isDebug,
-            chunkModules: isDebug,
-            cached: isDebug,
-            cachedAssets: isDebug,
-        },
+            chunks: false,
+            chunkModules: false,
+            cached: false,
+            cachedAssets: false,
+        }
     };
 
     if (isTest) {
@@ -98,7 +121,7 @@ module.exports = (isTest, isDebug) => {
         }));
     } else { // Only for debug
         // Hot Module Replacement (HMR)
-        const hotMiddlewareScript = 'webpack-hot-middleware/client';
+        const hotMiddlewareScript = 'webpack-hot-middleware/client?path=/assets';
         for (let entryName in config.entry) {
             if (entryName !== 'vendor') {
                 let entryValue = config.entry[entryName];

@@ -1,8 +1,6 @@
 import { TaxonomyService } from "services/client/TaxonomyService";
 import { TcmId } from "utils/TcmId";
-
-// Global Catalina dependencies
-import TestBase = SDL.Client.Test.TestBase;
+import { TestBase } from "sdl-models";
 
 class TaxonomyServiceTests extends TestBase {
 
@@ -27,7 +25,7 @@ class TaxonomyServiceTests extends TestBase {
             });
 
             it("can get site map items from memory", (done: () => void): void => {
-                const spy = spyOn(SDL.Client.Net, "getRequest").and.callThrough();
+                const spy = spyOn(window, "XMLHttpRequest").and.callThrough();
                 taxonomyService.getSitemapRoot(publicationId)
                     .then(items => {
                         expect(items).toBeDefined();
@@ -105,7 +103,7 @@ class TaxonomyServiceTests extends TestBase {
 
             it("can get a path for a page from memory", (done: () => void): void => {
                 const pageId = "164187";
-                const spy = spyOn(SDL.Client.Net, "getRequest").and.callThrough();
+                const spy = spyOn(window, "XMLHttpRequest").and.callThrough();
                 taxonomyService.getSitemapPath(publicationId, pageId).then(path => {
                     expect(path).toBeDefined();
                     if (path) {

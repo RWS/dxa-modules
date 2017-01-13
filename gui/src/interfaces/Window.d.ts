@@ -14,13 +14,6 @@ export interface IWindow extends Window {
      */
     SdlDitaDeliveryMocksEnabled?: boolean;
 
-    /**
-     * SDL namespace, used by Catalina
-     *
-     * @type {typeof SDL}
-     * @memberOf IWindow
-     */
-    SDL: typeof SDL;
 
     /**
      * SDL Dita application root path

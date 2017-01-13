@@ -1,16 +1,15 @@
 /// <reference path="../typings/index.d.ts" />
 
 import "ts-helpers";
+import * as React from "react";
+import * as ReactDOMServer from "react-dom/server";
 import { App } from "components/container/App";
 import { IServices } from "interfaces/Services";
 import { PageService } from "services/server/PageService";
 import { PublicationService } from "services/server/PublicationService";
 import { TaxonomyService } from "services/server/TaxonomyService";
-import { localization } from "services/server/LocalizationService";
+import { localization } from "services/common/LocalizationService";
 import { hashHistory } from "react-router";
-
-// Nashorn script engine needs a global scope
-declare var _renderToString: (path: string) => void;
 
 /**
  * Render the application to a string.
@@ -32,5 +31,3 @@ export function renderToString(path: string): string {
     return ReactDOMServer.renderToString(
         <App services={services} history={hashHistory} />);
 };
-
-_renderToString = renderToString;

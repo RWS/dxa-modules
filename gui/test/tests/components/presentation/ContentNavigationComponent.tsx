@@ -1,8 +1,8 @@
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 import { ContentNavigation, IContentNavigationItem, IContentNavigationProps } from "components/presentation/ContentNavigation";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
-
-// Global Catalina dependencies
-import TestBase = SDL.Client.Test.TestBase;
+import { TestBase } from "sdl-models";
 
 class ContentNavigationComponent extends TestBase {
 

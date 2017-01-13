@@ -1,6 +1,6 @@
-/// <reference path="../typings/index.d.ts" />
-
 import "ts-helpers";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 import { App } from "components/container/App";
 import { IServices } from "interfaces/Services";
 import { PageService } from "services/client/PageService";
@@ -10,6 +10,7 @@ import { localization } from "services/client/LocalizationService";
 import { useBasename, createHistory } from "history";
 
 import { path } from "utils/Path";
+import "sdl-controls-react-wrappers/dist/stylesheets/main";
 
 const mainElement = document.getElementById("main-view-target");
 

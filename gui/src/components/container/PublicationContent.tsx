@@ -1,3 +1,5 @@
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 import { Promise } from "es6-promise";
 import { ITaxonomy } from "interfaces/Taxonomy";
 import { IPage } from "interfaces/Page";
@@ -356,7 +358,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     anchor={selectedTocItem ? pageAnchor : undefined}
                     scrollOffset={this._topBarHeight}
                     activeHeader={activePageHeader}>
-                    <NavigationMenu isOpen={false}> { /* TODO: use global state store */}
+                    <NavigationMenu isOpen={false}>{/* TODO: use global state store */}
                         <Toc
                             activeItemPath={activeTocItemPath}
                             rootItems={rootItems}
