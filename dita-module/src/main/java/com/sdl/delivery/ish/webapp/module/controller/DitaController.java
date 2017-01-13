@@ -4,10 +4,12 @@ import com.sdl.delivery.ish.webapp.module.localization.DitaLocalization;
 import com.sdl.delivery.ish.webapp.module.providers.DitaContentProvider;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.content.ContentProviderException;
+import com.sdl.webapp.common.api.content.StaticContentItem;
 import com.sdl.webapp.common.api.formats.DataFormatter;
 import com.sdl.webapp.common.api.model.PageModel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,9 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.net.URLConnection;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
@@ -61,13 +61,15 @@ public class DitaController {
 
     @RequestMapping(method = GET, value = "/binary/{publicationId}/{binaryId}/**")
     @ResponseBody
-    public ResponseEntity<byte[]> getBinaryResource(@PathVariable Integer publicationId,
-                                                    @PathVariable Integer binaryId)
+    public ResponseEntity<InputStreamResource> getBinaryResource(@PathVariable Integer publicationId,
+                                                                 @PathVariable Integer binaryId)
             throws ContentProviderException, IOException {
-        byte[] result = contentProvider.getBinaryContent(publicationId, binaryId);
-        String contentType = URLConnection.guessContentTypeFromStream(new ByteArrayInputStream(result));
+        StaticContentItem binaryItem = contentProvider.getBinaryContent(publicationId, binaryId);
+        InputStreamResource result = new InputStreamResource(binaryItem.getContent());
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.parseMediaType(contentType));
-        return new ResponseEntity<byte[]>(result, headers, HttpStatus.OK);
+        headers.setContentType(MediaType.parseMediaType(binaryItem.getContentType()));
+        headers.setContentLength(binaryItem.getContent().available());
+
+        return new ResponseEntity<InputStreamResource>(result, headers, HttpStatus.OK);
     }
 }

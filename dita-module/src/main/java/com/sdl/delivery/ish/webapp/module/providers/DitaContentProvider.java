@@ -2,18 +2,21 @@ package com.sdl.delivery.ish.webapp.module.providers;
 
 import com.google.common.io.Files;
 import com.sdl.web.api.content.BinaryContentRetriever;
-import com.sdl.web.api.dynamic.DynamicMetaRetriever;
+import com.sdl.web.api.meta.WebBinaryMetaFactory;
 import com.sdl.web.api.meta.WebComponentMetaFactory;
 import com.sdl.web.api.meta.WebComponentMetaFactoryImpl;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.content.ContentProviderException;
+import com.sdl.webapp.common.api.content.StaticContentItem;
 import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.api.model.PageModel;
 import com.sdl.webapp.common.util.LocalizationUtils;
+import com.sdl.webapp.common.util.MimeUtils;
 import com.sdl.webapp.common.util.TcmUtils;
 import com.sdl.webapp.tridion.mapping.DefaultContentProvider;
 import com.sdl.webapp.tridion.mapping.ModelBuilderPipeline;
 import com.tridion.data.BinaryData;
+import com.tridion.meta.BinaryMeta;
 import com.tridion.meta.ComponentMeta;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -26,8 +29,10 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 import static com.sdl.webapp.common.util.LocalizationUtils.findPageByPath;
 import static org.dd4t.core.util.TCMURI.Namespace;
@@ -56,6 +61,9 @@ public class DitaContentProvider extends DefaultContentProvider {
 
     @Autowired
     private WebApplicationContext webApplicationContext;
+
+    @Autowired
+    private WebBinaryMetaFactory webBinaryMetaFactory;
 
     /**
      * Get a page model by it's item id.
@@ -99,18 +107,24 @@ public class DitaContentProvider extends DefaultContentProvider {
         });
     }
 
-    public byte[] getBinaryContent(final Integer publicationId, final Integer binaryId) throws ContentProviderException {
+    public StaticContentItem getBinaryContent(final Integer publicationId, final Integer binaryId) throws ContentProviderException {
         WebComponentMetaFactory factory = new WebComponentMetaFactoryImpl(publicationId);
         ComponentMeta componentMeta = factory.getMeta(binaryId);
         if (componentMeta == null) {
             throw new BinaryNotFoundException("No metadata found for: [" + publicationId + "-" + binaryId + "]");
         }
 
+        BinaryMeta binaryMeta = webBinaryMetaFactory.getMeta("ish:" + publicationId + "-" + binaryId);
+        if (binaryMeta == null) {
+            throw new BinaryNotFoundException("Unable to get binary metadata for publicationId=" + publicationId +
+                    ", binaryId=" + binaryId);
+        }
+
         String parentDir = StringUtils.join(new String[]{
                 webApplicationContext.getServletContext().getRealPath("/"), STATIC_FILES_DIR, publicationId.toString()
         }, File.separator);
 
-        File file = new File(parentDir, binaryId.toString());
+        File file = new File(parentDir, binaryId.toString() + binaryMeta.getType());
 
         long componentTime = componentMeta.getLastPublicationDate().getTime();
         byte[] data;
@@ -128,7 +142,8 @@ public class DitaContentProvider extends DefaultContentProvider {
                 throw new BinaryNotFoundException("Unable to read locally stored file: " + file.getAbsolutePath(), e);
             }
         }
-        return data;
+
+        return createStaticContentItem(data, binaryMeta);
     }
 
     private byte[] getBinaryFromContentService(Integer publicationId, Integer binaryId) throws ContentProviderException {
@@ -141,5 +156,25 @@ public class DitaContentProvider extends DefaultContentProvider {
         } catch (IOException e) {
             throw new ContentProviderException("Unable to extract data from BinaryData object", e);
         }
+    }
+
+    private StaticContentItem createStaticContentItem(final byte[] binaryData, final BinaryMeta binaryMeta) {
+        return new StaticContentItem() {
+            public long getLastModified() {
+                return 0;
+            }
+
+            public String getContentType() {
+                return MimeUtils.getMimeType(binaryMeta.getType());
+            }
+
+            public InputStream getContent() throws IOException {
+                return new ByteArrayInputStream(binaryData);
+            }
+
+            public boolean isVersioned() {
+                return false;
+            }
+        };
     }
 }

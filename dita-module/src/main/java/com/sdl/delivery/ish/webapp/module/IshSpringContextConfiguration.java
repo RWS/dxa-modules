@@ -1,13 +1,15 @@
 package com.sdl.delivery.ish.webapp.module;
 
+import com.sdl.web.api.meta.WebBinaryMetaFactory;
+import com.sdl.web.api.meta.WebBinaryMetaFactoryImpl;
 import com.sdl.webapp.tridion.BrokerDynamicComponentPresentationProvider;
+import com.sdl.webapp.tridion.SpringContextConfiguration;
 import org.dd4t.providers.ComponentPresentationProvider;
 import org.dd4t.providers.PayloadCacheProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import com.sdl.webapp.tridion.SpringContextConfiguration;
 
 /**
  * Spring configuration.
@@ -31,5 +33,10 @@ public class IshSpringContextConfiguration {
         componentPresentationProvider.setContentIsCompressed("false");
         componentPresentationProvider.setCacheProvider(cacheProvider);
         return componentPresentationProvider;
+    }
+
+    @Bean
+    public WebBinaryMetaFactory webBinaryMetaFactory() {
+        return new WebBinaryMetaFactoryImpl();
     }
 }
