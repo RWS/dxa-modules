@@ -109,7 +109,7 @@ export class Url {
             /\/\d+\/[^\/]+$/i,  // Publication regEx
             /\/home$/i, // Home page regEx
             /\/[\w\.]*\.[\w\.]+$/i, // trim path file endings like /app/index.html
-            /\/$/i // trim path file endings like /app/index.html
+            /\/$/i // trim trailing slash
         ];
 
         for (let regEx of regExs) {
