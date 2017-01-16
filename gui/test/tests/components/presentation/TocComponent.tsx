@@ -6,6 +6,7 @@ import { ITaxonomy } from "interfaces/Taxonomy";
 import { Promise } from "es6-promise";
 import { TreeView, ValidationMessage } from "sdl-controls-react-wrappers";
 import { TestBase } from "sdl-models";
+import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 
 class TocComponent extends TestBase {
 
@@ -104,7 +105,11 @@ class TocComponent extends TestBase {
     }
 
     private _renderComponent(props: ITocProps, target: HTMLElement): Toc {
-        return ReactDOM.render(<Toc {...props} />, target) as Toc;
+        const comp = ReactDOM.render(
+            <ComponentWithContext>
+                <Toc {...props} />
+            </ComponentWithContext>, target) as React.Component<{}, {}>;
+        return TestUtils.findRenderedComponentWithType(comp, Toc) as Toc;
     }
 }
 
