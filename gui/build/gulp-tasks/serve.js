@@ -30,13 +30,12 @@ module.exports = function (buildOptions, gulp, browserSync) {
                 if (buildOptions.isDebug) {
                     routes = {
                         // Third party dependencies
-                        '/lib/react': './node_modules/react/dist/',
-                        '/lib/react-dom': './node_modules/react-dom/dist/'
+                        '/app/lib/react': './node_modules/react/dist/',
+                        '/app/lib/react-dom': './node_modules/react-dom/dist/'
                     }
                 }
-                routes['/test'] = buildOptions.testPath; // Put test folder behind a virtual directory
-                routes['/gui/mocks'] = './mocks/';
-                routes['/gui/theming'] = buildOptions.distPath + 'theming/';
+                routes['/app/gui/mocks'] = './mocks/';
+                routes['/app/gui/theming'] = buildOptions.distPath + 'theming/';
 
                 // Start browser sync
                 var browserSyncOptions = {
@@ -49,6 +48,7 @@ module.exports = function (buildOptions, gulp, browserSync) {
                         }
                     } : false,
                     open: !buildOptions.isDefaultTask,
+                    startPath: '/app/',
                     // Server config
                     server: {
                         baseDir: buildOptions.distPath,
@@ -69,7 +69,7 @@ module.exports = function (buildOptions, gulp, browserSync) {
                         (req, res, next) => {
                             // Don't cache mocks
                             var url = req.url;
-                            if (_.startsWith(url, '/gui/mocks/')) {
+                            if (_.startsWith(url, '/app/gui/mocks/')) {
                                 res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
                                 res.setHeader('Pragma', 'no-cache');
                                 res.setHeader('Expires', '0');
@@ -79,10 +79,11 @@ module.exports = function (buildOptions, gulp, browserSync) {
                         (req, res, next) => {
                             // Use main page for dynamic urls used for deep linking
                             // example: /39137/234/MP330/User-Guide (only the first number is mandatory)
-                            const publicationContentRegex = /^\/[0-9]+.*$/gi; // All urls starting with a number
-                            if (req.url.match(/^\/home$/gi) || req.url.match(publicationContentRegex)) {
+                            const publicationContentRegex = /^\/app\/[0-9]+.*$/gi; // All urls starting with a number
+                            if (req.url.match(/^\/app\/$/gi) || req.url.match(/^\/app\/home$/gi) || req.url.match(publicationContentRegex)) {
                                 req.url = '/index.html';
                             }
+
                             next();
                         }
                     ]

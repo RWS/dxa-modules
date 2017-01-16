@@ -20,9 +20,9 @@ module.exports = (buildOptions) => {
             singleRun: singleRun,
             proxies: {
                 // mocks
-                '/gui/mocks/': urlPrefix + 'gui/mocks/',
+                '/gui/mocks/': urlPrefix + '/app/gui/mocks/',
                 // theming
-                '/gui/theming/': urlPrefix + 'theming/',
+                '/gui/theming/': urlPrefix + '/app/theming/',
                 // Browsers sync proxies
                 '/browser-sync/': urlPrefix + 'browser-sync-mock/'
             },

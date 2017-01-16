@@ -1,3 +1,7 @@
+import { IWindow } from "interfaces/Window";
+
+const rootPath: string = (window as IWindow).SDLDitaDeliveryRootPath || "/";
+
 /**
  * Path utilities
  *
@@ -14,7 +18,16 @@ export class Path {
      * @param {string} [root="/"] Root path of the application.
      */
     constructor(root: string = "/") {
-        this._root = root;
+        this._root = root + (root.slice(-1) == "/" ? "" : "/");
+    }
+
+    /**
+     * Get the root path
+     *
+     * @returns {string}
+     */
+    public getRootPath(): string {
+        return this._root;
     }
 
     /**
@@ -29,4 +42,4 @@ export class Path {
 
 }
 
-export let path = new Path();
+export let path = new Path(rootPath);
