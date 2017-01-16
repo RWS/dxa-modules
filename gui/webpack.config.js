@@ -70,6 +70,9 @@ module.exports = (isTest, isDebug) => {
                 favicon: './node_modules/sdl-icons/icons/favicon.ico',
                 hash: true,
                 excludeChunks: ['test', 'server']
+            }),
+            new Visualizer({
+                filename: '../bundle.stats.html'
             })
         ],
         // What information should be printed to the console
@@ -131,7 +134,6 @@ module.exports = (isTest, isDebug) => {
         }
         config.plugins.push(new webpack.HotModuleReplacementPlugin());
         config.plugins.push(new webpack.NoErrorsPlugin());
-        config.plugins.push(new Visualizer());
     }
 
     return config;
