@@ -69,7 +69,6 @@
         <dependency>
             <groupId>com.sdl.dxa</groupId>
             <artifactId>dxa-common-impl</artifactId>
-            <scope>provided</scope>
         </dependency>
 
         <dependency>
