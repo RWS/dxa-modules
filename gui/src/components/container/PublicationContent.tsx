@@ -417,8 +417,8 @@ export class PublicationContent extends React.Component<IPublicationContentProps
 
     private _onTocSelectionChanged(sitemapItem: ITaxonomy, path: string[]): void {
         const { router } = this.context;
-        const { isTocExpanding, publicationTitle } = this.state;
-        const { pageIdOrPublicationTitle, publicationId } = this.props.params;
+        const { isTocExpanding } = this.state;
+        const { pageIdOrPublicationTitle } = this.props.params;
         const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
         // After upgrading to DXA 1.7 use TcmId.getItemIdFromTaxonomyId
         const siteMapPageId = TcmId.parseId(sitemapItem.id);
@@ -436,17 +436,13 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         // When the tree is expanding it is also calling the onTocSelectionChanged callback
         /* istanbul ignore else */
         if (router && !isTocExpanding) {
+            // Only navigate to pages which have a location
             const navPath = sitemapItem.url;
             if (navPath) {
                 if (siteMapPageId && siteMapPageId.itemId === pageId) {
                     router.replace(navPath);
                 } else {
                     router.push(navPath);
-                }
-            } else {
-                const url = Url.getPublicationUrl(publicationId, publicationTitle);
-                if (router.getCurrentLocation().pathname !== url) {
-                    router.push(url);
                 }
             }
         }

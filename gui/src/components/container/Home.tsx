@@ -25,7 +25,8 @@ export interface IHomeState {
 export class Home extends React.Component<{}, IHomeState> {
 
     public static contextTypes: React.ValidationMap<IAppContext> = {
-        services: React.PropTypes.object.isRequired
+        services: React.PropTypes.object.isRequired,
+        router: React.PropTypes.object.isRequired
     };
 
     public context: IAppContext;
@@ -63,6 +64,7 @@ export class Home extends React.Component<{}, IHomeState> {
 
     private _toggleNavigationMenu(): void {
         const { isNavOpen } = this.state;
+        const { router } = this.context;
         this.setState({
             isNavOpen: !isNavOpen
         });
@@ -75,6 +77,21 @@ export class Home extends React.Component<{}, IHomeState> {
             } else {
                 navMenu.classList.remove("open");
             }
+            if (router) {
+                router.listen(this._onNavigated.bind(this));
+            }
+        }
+    }
+
+    private _onNavigated(location: HistoryModule.Location): void {
+        this.setState({
+            isNavOpen: false
+        });
+
+        // HACK: we should use some global state store to achieve this
+        const navMenu = document.querySelector(".sdl-dita-delivery-navigation-menu");
+        if (navMenu) {
+            navMenu.classList.remove("open");
         }
     }
 };
