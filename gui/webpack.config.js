@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const extractCSS = new ExtractTextPlugin('stylesheets/[name].css');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Visualizer = require('webpack-visualizer-plugin');
 
 module.exports = (isTest, isDebug) => {
     const entries = {
@@ -69,6 +70,9 @@ module.exports = (isTest, isDebug) => {
                 favicon: './node_modules/sdl-icons/icons/favicon.ico',
                 hash: true,
                 excludeChunks: ['test', 'server']
+            }),
+            new Visualizer({
+                filename: '../bundle.stats.html'
             })
         ],
         // What information should be printed to the console
