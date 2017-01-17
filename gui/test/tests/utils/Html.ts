@@ -26,14 +26,17 @@ describe(`Html utils tests.`, (): void => {
         const expected: IHeader[] = [
             {
                 title: "Header1",
+                importancy: 1,
                 id: "header1"
             },
             {
                 title: "Header2",
+                importancy: 2,
                 id: "header2"
             },
             {
                 title: "Header3",
+                importancy: 3,
                 id: "header3"
             }
         ];
@@ -48,14 +51,17 @@ describe(`Html utils tests.`, (): void => {
         const expected: IHeader[] = [
             {
                 title: "Header",
+                importancy: 1,
                 id: "header"
             },
             {
                 title: "Header",
+                importancy: 2,
                 id: "header_1"
             },
             {
                 title: "Header",
+                importancy: 3,
                 id: "header_2"
             }
         ];
