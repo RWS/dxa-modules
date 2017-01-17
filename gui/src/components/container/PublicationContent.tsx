@@ -80,6 +80,8 @@ export interface IPublicationContentProps {
      * @type {IPublicationContentPropsParams}
      */
     params: IPublicationContentPropsParams;
+
+    router : HistoryModule.History;
 }
 
 /**
@@ -204,6 +206,11 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         const { publicationId, pageIdOrPublicationTitle } = this.props.params;
         const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
         const { publicationService, pageService } = this.context.services;
+
+        const { router } = this.props;
+        router.listen(((location: HistoryModule.Location) => {
+            console.log(location.pathname);
+        }) as HistoryModule.LocationListener);
 
         const getRootItems = (path?: string[]): void => {
             // Get the data for the Toc
