@@ -5,7 +5,7 @@ import { PublicationContent } from "components/container/PublicationContent";
 import { Toc } from "components/presentation/Toc";
 import { Page } from "components/presentation/Page";
 import { ITaxonomy } from "interfaces/Taxonomy";
-import { ActivityIndicator, TreeView, ValidationMessage} from "sdl-controls-react-wrappers";
+import { ActivityIndicator, TreeView, ValidationMessage } from "sdl-controls-react-wrappers";
 import { TestBase } from "sdl-models";
 import { PageService } from "test/mocks/services/PageService";
 import { PublicationService } from "test/mocks/services/PublicationService";
@@ -114,7 +114,8 @@ class PublicationContentComponent extends TestBase {
                     {
                         id: "2",
                         title: "Second element",
-                        hasChildNodes: false
+                        hasChildNodes: false,
+                        url: `/${encodeURIComponent(PUBLICATION_ID)}/mp330/second-el-url`
                     }
                 ]);
                 const publicationContent = this._renderComponent(target);
@@ -122,17 +123,16 @@ class PublicationContentComponent extends TestBase {
                 // Spy on the router
                 spyOn(publicationContent.context.router, "push").and.callFake((path: string): void => {
                     // Check if routing was called with correct params
-                    expect(path).toBe(`/${encodeURIComponent(PUBLICATION_ID)}/mp330`);
+                    expect(path).toBe(`/${encodeURIComponent(PUBLICATION_ID)}/mp330/second-el-url`);
 
-                    // tslint:disable-next-line:no-any
-                    const activityIndicators = TestUtils.scryRenderedComponentsWithType(publicationContent, ActivityIndicator as any);
-                    expect(activityIndicators.length).toBe(0, "Activity indicator should not be rendered.");
-
+                    // A page load was triggered by changing the selected item in the Toc
                     const page = TestUtils.findRenderedComponentWithType(publicationContent, Page);
                     const pageNode = ReactDOM.findDOMNode(page) as HTMLElement;
-                    const pageTitleNode = pageNode.querySelector("h1") as HTMLElement;
-                    expect(pageTitleNode).not.toBeNull("Could not find page title.");
-                    expect(pageTitleNode.textContent).toBe("Second element");
+                    expect(pageNode).not.toBeNull("Could not find page.");
+
+                    // tslint:disable-next-line:no-any
+                    const activityIndicators = TestUtils.scryRenderedComponentsWithType(page, ActivityIndicator as any);
+                    expect(activityIndicators.length).toBe(1, "One activity indicator should be rendered.");
                     done();
                 });
 
