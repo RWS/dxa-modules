@@ -25,17 +25,15 @@ module.exports = function (buildOptions, gulp, browserSync) {
                 cb(err);
             } else {
                 buildOptions.ports.httpServer = port;
-
-                let routes = {};
-                if (buildOptions.isDebug) {
-                    routes = {
-                        // Third party dependencies
-                        '/app/lib/react': './node_modules/react/dist/',
-                        '/app/lib/react-dom': './node_modules/react-dom/dist/'
-                    }
-                }
-                routes['/app/gui/mocks'] = './mocks/';
-                routes['/app/gui/theming'] = buildOptions.distPath + 'theming/';
+                const isDebug = buildOptions.isDebug;
+                const routes = {
+                    // Third party dependencies
+                    '/app/lib/react': isDebug ? './node_modules/react/dist/' : `${buildOptions.distPath}/lib/react`,
+                    '/app/lib/react-dom': isDebug ? './node_modules/react-dom/dist/' : `${buildOptions.distPath}/lib/react-dom`,
+                    // Application
+                    '/app/gui/mocks': './mocks/',
+                    '/app/gui/theming': buildOptions.distPath + 'theming/'
+                };
 
                 // Start browser sync
                 var browserSyncOptions = {
