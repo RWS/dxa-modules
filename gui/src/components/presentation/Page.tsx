@@ -210,11 +210,15 @@ export class Page extends React.Component<IPageProps, IPageState> {
             const { navItems } = this.state;
             const { url } = this.props;
             const pageContentNode = domNode.querySelector(".page-content") as HTMLElement;
-            const headerLinks = Html.getHeaderLinks(pageContentNode);
+            const headerLinks = Html.getHeaderLinks(pageContentNode).filter((item: IHeader) => {
+                // We only need level 2 and 3 for items rendered in conten navigation
+                return (item.importancy == 2) || (item.importancy == 3);
+            });
             const updatedNavItems: IContentNavigationItem[] = headerLinks.map(item => {
                 return {
                     id: item.id,
                     title: item.title,
+                    indention: +(item.importancy == 3),
                     url: url ? Url.getAnchorUrl(url, item.id) : ("#" + item.id)
                 };
             });

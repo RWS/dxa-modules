@@ -24,6 +24,12 @@ export interface IContentNavigationItem {
      */
     title: string;
     /**
+     * Header indention
+     *
+     * @type {number}
+     */
+    indention: number;
+    /**
      * Page content anchors
      *
      * @type {string}
@@ -67,7 +73,7 @@ export const ContentNavigation: React.StatelessComponent<IContentNavigationProps
                     navItems.map((item: IContentNavigationItem, index: number) => {
                         const isActive = activeNavItemId && activeNavItemId === item.id;
                         return (
-                            <li key={index} className={isActive ? "active" : ""}>
+                            <li key={index} className={`indent-${item.indention}` + (isActive ? " active" : "")}>
                                 <Link to={item.url}>{item.title}</Link>
                             </li>
                         );
@@ -75,7 +81,7 @@ export const ContentNavigation: React.StatelessComponent<IContentNavigationProps
                 }
             </ul>
         </nav>
-    ) : <nav className={"sdl-dita-delivery-content-navigation"}/>;
+    ) : <nav className={"sdl-dita-delivery-content-navigation"} />;
 };
 
 ContentNavigation.contextTypes = {

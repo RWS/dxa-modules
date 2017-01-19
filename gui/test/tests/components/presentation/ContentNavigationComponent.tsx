@@ -14,10 +14,12 @@ class ContentNavigationComponent extends TestBase {
             const navItems: IContentNavigationItem[] = [{
                 id: "title_1",
                 url: "/123/456/publication/Title-1",
+                indention: 1,
                 title: "Title-1"
             }, {
                 id: "title_2",
                 url: "/123/567/publication/Title-2",
+                indention: 2,
                 title: "Title-2"
             }];
 
@@ -40,7 +42,10 @@ class ContentNavigationComponent extends TestBase {
                 expect(hyperlinks.length).toBe(2);
 
                 expect(hyperlinks.item(0).textContent).toBe(navItems[0].title);
+                expect((hyperlinks.item(0).parentNode as HTMLElement).classList).toContain("indent-1");
+
                 expect(hyperlinks.item(1).textContent).toBe(navItems[1].title);
+                expect((hyperlinks.item(1).parentNode as HTMLElement).classList).toContain("indent-2");
             });
         });
 
