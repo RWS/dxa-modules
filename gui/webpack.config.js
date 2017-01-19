@@ -15,6 +15,7 @@ module.exports = (isTest, isDebug) => {
         test: './test/Main.ts',
         testConfiguration: './test/configuration/Configuration.ts',
     }, entries);
+    const cssLoader = `css-loader?${isDebug ? 'sourceMap' : 'minimize'}`;
 
     const config = {
         entry: isTest ? testEntries : entries,
@@ -44,10 +45,10 @@ module.exports = (isTest, isDebug) => {
                 loader: 'url-loader?limit=100000'
             }, {
                 test: /\.css$/,
-                loader: extractCSS.extract(['css-loader', 'postcss-loader'])
+                loader: extractCSS.extract([cssLoader, 'postcss-loader'])
             }, {
                 test: /\.less$/,
-                loader: extractCSS.extract(['css-loader', 'postcss-loader', 'less-loader'])
+                loader: extractCSS.extract([cssLoader, 'postcss-loader', 'less-loader'])
             }, {
                 test: /\.tsx?$/,
                 loader: 'ts-loader'
