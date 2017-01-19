@@ -32,7 +32,8 @@ module.exports = function (buildOptions, gulp, browserSync) {
                     '/app/lib/react-dom': isDebug ? './node_modules/react-dom/dist/' : `${buildOptions.distPath}/lib/react-dom`,
                     // Application
                     '/app/gui/mocks': './mocks/',
-                    '/app/gui/theming': buildOptions.distPath + 'theming/'
+                    '/app/gui/theming': buildOptions.distPath + 'theming/',
+                    '/app': buildOptions.distPath
                 };
 
                 // Start browser sync
@@ -96,7 +97,7 @@ module.exports = function (buildOptions, gulp, browserSync) {
                     });
                     // Enable Hot Module Replacement
                     browserSyncOptions.middleware.push(webpackDevMiddlewareInstance);
-                    browserSyncOptions.middleware.push(webpackHotMiddleware(webpackCompiler, { path: '/assets' }));
+                    browserSyncOptions.middleware.push(webpackHotMiddleware(webpackCompiler, { path: '/app/assets' }));
 
                     // Write output to the disk (for test only)
                     // This is needed so karma can pick up changes to the bundle and rerun the tests
