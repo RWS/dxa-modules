@@ -242,11 +242,10 @@ class PageComponent extends TestBase {
                 expect(domNode).not.toBeNull();
 
                 const hyperlinks = domNode.querySelectorAll(".sdl-dita-delivery-content-navigation a") as NodeListOf<HTMLAnchorElement>;
-                expect(hyperlinks.length).toBe(3);
+                expect(hyperlinks.length).toBe(2);
 
-                expect(hyperlinks.item(0).textContent).toBe("header-1");
-                expect(hyperlinks.item(1).textContent).toBe("header-2");
-                expect(hyperlinks.item(2).textContent).toBe("header-3");
+                expect(hyperlinks.item(0).textContent).toBe("header-2");
+                expect(hyperlinks.item(1).textContent).toBe("header-3");
             });
 
             it("scrolls to page content item", (done: () => void): void => {
@@ -256,10 +255,10 @@ class PageComponent extends TestBase {
                 expect(domNode).not.toBeNull();
 
                 const hyperlinks = domNode.querySelectorAll(".sdl-dita-delivery-content-navigation a") as NodeListOf<HTMLAnchorElement>;
-                expect(hyperlinks.length).toBe(3);
+                expect(hyperlinks.length).toBe(2);
 
                 // We only need last item
-                hyperlinks.item(2).click();
+                hyperlinks.item(1).click();
 
                 setTimeout((): void => {
                     expect(spy).toHaveBeenCalledTimes(1);
