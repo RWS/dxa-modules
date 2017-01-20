@@ -49,7 +49,7 @@ export interface IPageProps {
      * @type {string}
      * @memberOf IPageProps
      */
-    anchor?: string;
+    anchor?: string | undefined;
     /**
      * Scroll offset using for jumping to anchors
      * For example when there is a topbar overlaying part of the component
@@ -97,7 +97,6 @@ export interface IPageState {
 export class Page extends React.Component<IPageProps, IPageState> {
 
     private _hyperlinks: { element: HTMLElement, handler: (e: Event) => void; }[] = [];
-    private _lastAnchor: string;
 
     /**
      * Creates an instance of Toc.
@@ -250,13 +249,12 @@ export class Page extends React.Component<IPageProps, IPageState> {
     private _jumpToAnchor(): void {
         const { anchor, scrollOffset } = this.props;
         // Keep track of the previous anchor to allow scrolling
-        if (anchor && anchor !== this._lastAnchor) {
+        if (anchor) {
             const domNode = ReactDOM.findDOMNode(this) as HTMLElement;
             if (domNode) {
                 const pageContentNode = domNode.querySelector(".page-content") as HTMLElement;
                 const header = Html.getHeaderElement(pageContentNode, anchor);
                 if (header) {
-                    this._lastAnchor = anchor;
                     // TODO: make sure images are loaded before jumping to the anchor
                     // Use a timeout to make sure all components are rendered
                     setTimeout((): void => {
