@@ -80,13 +80,6 @@ export interface IPublicationContentProps {
      * @type {IPublicationContentPropsParams}
      */
     params: IPublicationContentPropsParams;
-
-    /**
-     * React router history module instance
-     *
-     * @type {HistoryModule.History}
-     */
-    router: HistoryModule.History;
 }
 
 /**
@@ -210,12 +203,12 @@ export class PublicationContent extends React.Component<IPublicationContentProps
      * Invoked once, both on the client and server, immediately before the initial rendering occurs.
      */
     public componentWillMount(): void {
-        const { services } = this.context;
+        const { services, router} = this.context;
         const { publicationId, pageIdOrPublicationTitle} = this.props.params;
         const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
         const { publicationService, pageService } = this.context.services;
 
-        this._reactHistoryListener = this.props.router.listen(((location: HistoryModule.Location) => {
+        this._reactHistoryListener = (router as HistoryModule.History).listen(((location: HistoryModule.Location) => {
             this._lastPageAnchor = undefined;
         }).bind(this) as HistoryModule.LocationListener);
 
