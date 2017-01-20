@@ -208,9 +208,11 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
         const { publicationService, pageService } = this.context.services;
 
-        this._reactHistoryListener = (router as HistoryModule.History).listen(((location: HistoryModule.Location) => {
-            this._lastPageAnchor = undefined;
-        }).bind(this) as HistoryModule.LocationListener);
+        if (router) {
+            this._reactHistoryListener = router.listen((() => {
+                this._lastPageAnchor = undefined;
+            }).bind(this));
+        }
 
         const getRootItems = (path?: string[]): void => {
             // Get the data for the Toc
