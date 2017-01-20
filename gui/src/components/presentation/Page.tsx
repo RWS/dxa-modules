@@ -147,10 +147,14 @@ export class Page extends React.Component<IPageProps, IPageState> {
      *
      * @memberOf Page
      */
-    public componentDidUpdate(): void {
+    public componentDidUpdate(prevProps: IPageProps): void {
         this._enableHyperlinks();
         this._collectHeadersLinks();
-        this._jumpToAnchor();
+
+        const {anchor} = this.props;
+        if (anchor != prevProps.anchor) {
+            this._jumpToAnchor();
+        }
     }
 
     /**
@@ -262,7 +266,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                     // TODO: make sure images are loaded before jumping to the anchor
                     // Use a timeout to make sure all components are rendered
                     setTimeout((): void => {
-                    var topPos = (header.offsetTop + domNode.offsetTop) - (scrollOffset || 0);
+                        var topPos = (header.offsetTop + domNode.offsetTop) - (scrollOffset || 0);
                         window.scrollTo(0, topPos);
                     }, 0);
                 }
