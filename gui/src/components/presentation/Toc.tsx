@@ -106,7 +106,8 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
                                 props.activeItemPath.join("/") :
                                 (firstRootNode ? firstRootNode.id : undefined)}
                             rootNodes={rootNodes}
-                            onSelectionChanged={this._onSelectionChanged.bind(this)} />
+                            onSelectionChanged={this._onSelectionChanged.bind(this)}
+                            skin="graphene"/>
                         : !error ? <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")}/> : null
                 }
                 {props.children}
