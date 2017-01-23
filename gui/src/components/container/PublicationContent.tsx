@@ -183,7 +183,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
     private _topBarHeight: number = 0;
     private _lastPageAnchor: string | undefined = undefined;
 
-    private _reactHistoryListener: () => void;
+    private _historyUnlisten: () => void;
 
     /**
      * Creates an instance of App.
@@ -209,7 +209,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         const { publicationService, pageService } = this.context.services;
 
         if (router) {
-            this._reactHistoryListener = router.listen((() => {
+            this._historyUnlisten = router.listen((() => {
                 this._lastPageAnchor = undefined;
             }).bind(this));
         }
@@ -431,8 +431,8 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         window.removeEventListener("scroll", this._fixPanels.bind(this));
         window.removeEventListener("resize", this._fixPanels.bind(this));
 
-        if (this._reactHistoryListener) {
-            this._reactHistoryListener();
+        if (this._historyUnlisten) {
+            this._historyUnlisten();
         }
     }
 
