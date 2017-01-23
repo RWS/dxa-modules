@@ -3,6 +3,7 @@ import { Promise } from "es6-promise";
 import { ITaxonomy } from "interfaces/Taxonomy";
 import { ActivityIndicator, TreeView, ValidationMessage } from "sdl-controls-react-wrappers";
 import { TreeView as TreeViewControl, ITreeViewNode as IBaseTreeViewNode, ValidationMessageType } from "sdl-controls";
+import { IAppContext } from "components/container/App";
 
 import "components/presentation/styles/Toc";
 import "components/controls/styles/TreeView";
@@ -51,6 +52,25 @@ interface ITreeViewNode extends IBaseTreeViewNode {
  */
 export class Toc extends React.Component<ITocProps, { error: string | null | undefined }> {
 
+    /**
+     * Context types
+     *
+     * @static
+     * @type {React.ValidationMap<IAppContext>}
+     * @memberOf Breadcrumbs
+     */
+    public static contextTypes: React.ValidationMap<IAppContext> = {
+        services: React.PropTypes.object.isRequired
+    };
+
+    /**
+     * Global context
+     *
+     * @type {IAppContext}
+     * @memberOf Breadcrumbs
+     */
+    public context: IAppContext;
+
     private _isUnmounted: boolean = false;
 
     /**
@@ -74,6 +94,7 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
         const { error } = this.state;
         const rootNodes = this._convertToTreeViewNodes(props.rootItems || []);
         const firstRootNode = rootNodes.length > 0 ? rootNodes[0] : null;
+        const { formatMessage } = this.context.services.localizationService;
 
         return (
             <nav className={"sdl-dita-delivery-toc"}>
@@ -85,8 +106,9 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
                                 props.activeItemPath.join("/") :
                                 (firstRootNode ? firstRootNode.id : undefined)}
                             rootNodes={rootNodes}
-                            onSelectionChanged={this._onSelectionChanged.bind(this)} />
-                        : !error ? <ActivityIndicator /> : null
+                            onSelectionChanged={this._onSelectionChanged.bind(this)}
+                            skin="graphene"/>
+                        : !error ? <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")}/> : null
                 }
                 {props.children}
             </nav>

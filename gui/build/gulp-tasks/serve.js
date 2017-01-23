@@ -25,17 +25,16 @@ module.exports = function (buildOptions, gulp, browserSync) {
                 cb(err);
             } else {
                 buildOptions.ports.httpServer = port;
-
-                let routes = {};
-                if (buildOptions.isDebug) {
-                    routes = {
-                        // Third party dependencies
-                        '/app/lib/react': './node_modules/react/dist/',
-                        '/app/lib/react-dom': './node_modules/react-dom/dist/'
-                    }
-                }
-                routes['/app/gui/mocks'] = './mocks/';
-                routes['/app/gui/theming'] = buildOptions.distPath + 'theming/';
+                const isDebug = buildOptions.isDebug;
+                const routes = {
+                    // Third party dependencies
+                    '/app/lib/react': isDebug ? './node_modules/react/dist/' : `${buildOptions.distPath}/lib/react`,
+                    '/app/lib/react-dom': isDebug ? './node_modules/react-dom/dist/' : `${buildOptions.distPath}/lib/react-dom`,
+                    // Application
+                    '/app/gui/mocks': './mocks/',
+                    '/app/gui/theming': buildOptions.distPath + 'theming/',
+                    '/app': buildOptions.distPath
+                };
 
                 // Start browser sync
                 var browserSyncOptions = {
@@ -98,7 +97,7 @@ module.exports = function (buildOptions, gulp, browserSync) {
                     });
                     // Enable Hot Module Replacement
                     browserSyncOptions.middleware.push(webpackDevMiddlewareInstance);
-                    browserSyncOptions.middleware.push(webpackHotMiddleware(webpackCompiler, { path: '/assets' }));
+                    browserSyncOptions.middleware.push(webpackHotMiddleware(webpackCompiler, { path: '/app/assets' }));
 
                     // Write output to the disk (for test only)
                     // This is needed so karma can pick up changes to the bundle and rerun the tests

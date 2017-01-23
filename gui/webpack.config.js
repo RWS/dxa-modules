@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const extractCSS = new ExtractTextPlugin('stylesheets/[name].css');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Visualizer = require('webpack-visualizer-plugin');
 
 module.exports = (isTest, isDebug) => {
     const entries = {
@@ -14,17 +15,18 @@ module.exports = (isTest, isDebug) => {
         test: './test/Main.ts',
         testConfiguration: './test/configuration/Configuration.ts',
     }, entries);
+    const cssLoader = `css-loader?${isDebug ? 'sourceMap' : 'minimize'}`;
 
     const config = {
         entry: isTest ? testEntries : entries,
         output: {
             path: path.resolve(__dirname + '/dist/assets'),
-            publicPath: '/assets/',
+            publicPath: '/app/assets/',
             filename: '[name].bundle.js'
         },
         devtool: 'source-map',
         resolve: {
-            // Needed to resolve dependencies to react inside sdl-control-react-wrappers
+            // Needed to resolve dependencies to react inside sdl-controls-react-wrappers
             alias: {
                 React: 'react',
                 ReactDOM: 'react-dom',
@@ -43,10 +45,10 @@ module.exports = (isTest, isDebug) => {
                 loader: 'url-loader?limit=100000'
             }, {
                 test: /\.css$/,
-                loader: extractCSS.extract(['css-loader', 'postcss-loader'])
+                loader: extractCSS.extract([cssLoader, 'postcss-loader'])
             }, {
                 test: /\.less$/,
-                loader: extractCSS.extract(['css-loader', 'postcss-loader', 'less-loader'])
+                loader: extractCSS.extract([cssLoader, 'postcss-loader', 'less-loader'])
             }, {
                 test: /\.tsx?$/,
                 loader: 'ts-loader'
@@ -59,7 +61,11 @@ module.exports = (isTest, isDebug) => {
             react: 'React',
             'react-dom': 'ReactDOM',
             'react-dom/server': 'ReactDOMServer',
-            'react-addons-test-utils': 'React.addons.TestUtils'
+            'react-addons-test-utils': 'React.addons.TestUtils',
+            // Map aliases from  sdl-controls-react-wrappers
+            React: 'React',
+            ReactDOM: 'ReactDOM',
+            ReactDOMServer: 'ReactDOMServer'
         },
         plugins: [
             extractCSS,
@@ -69,6 +75,9 @@ module.exports = (isTest, isDebug) => {
                 favicon: './node_modules/sdl-icons/icons/favicon.ico',
                 hash: true,
                 excludeChunks: ['test', 'server']
+            }),
+            new Visualizer({
+                filename: '../bundle.stats.html'
             })
         ],
         // What information should be printed to the console
@@ -121,7 +130,7 @@ module.exports = (isTest, isDebug) => {
         }));
     } else { // Only for debug
         // Hot Module Replacement (HMR)
-        const hotMiddlewareScript = 'webpack-hot-middleware/client?path=/assets';
+        const hotMiddlewareScript = 'webpack-hot-middleware/client?path=/app/assets';
         for (let entryName in config.entry) {
             if (entryName !== 'vendor') {
                 let entryValue = config.entry[entryName];

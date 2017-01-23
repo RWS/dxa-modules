@@ -5,6 +5,7 @@ import { Url } from "utils/Url";
 import { ContentNavigation, IContentNavigationItem } from "components/presentation/ContentNavigation";
 import { ActivityIndicator, ValidationMessage } from "sdl-controls-react-wrappers";
 import { ValidationMessageType } from "sdl-controls";
+import { IAppContext } from "components/container/App";
 
 import "components/presentation/styles/Page";
 import "dist/dita-ot/styles/commonltr";
@@ -96,6 +97,25 @@ export interface IPageState {
  */
 export class Page extends React.Component<IPageProps, IPageState> {
 
+    /**
+     * Context types
+     *
+     * @static
+     * @type {React.ValidationMap<IAppContext>}
+     * @memberOf Breadcrumbs
+     */
+    public static contextTypes: React.ValidationMap<IAppContext> = {
+        services: React.PropTypes.object.isRequired
+    };
+
+    /**
+     * Global context
+     *
+     * @type {IAppContext}
+     * @memberOf Breadcrumbs
+     */
+    public context: IAppContext;
+
     private _hyperlinks: { element: HTMLElement, handler: (e: Event) => void; }[] = [];
     private _lastAnchor: string;
 
@@ -121,10 +141,12 @@ export class Page extends React.Component<IPageProps, IPageState> {
         const props = this.props;
         const { activeHeader } = props;
         const { navItems } = this.state;
+        const { formatMessage } = this.context.services.localizationService;
         const activeNavItemId = activeHeader ? activeHeader.id : (navItems.length > 0 ? navItems[0].id : undefined);
+
         return (
             <div className={"sdl-dita-delivery-page"}>
-                {props.showActivityIndicator ? <ActivityIndicator /> : null}
+                {props.showActivityIndicator ? <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} /> : null}
                 {props.error ? <ValidationMessage messageType={ValidationMessageType.Error} message={props.error} /> : null}
                 {props.children}
                 <ContentNavigation navItems={navItems} activeNavItemId={activeNavItemId} />
