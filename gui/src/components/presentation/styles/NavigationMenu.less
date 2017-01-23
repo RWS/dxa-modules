@@ -12,12 +12,12 @@
     left: @defaultWidth * -1;
     min-height: 100%;
     background-color: #fff;
+    transition: left .3s ease-out;
+    z-index: 1010;
 
     &.open {
         display: block;
-        z-index: 1010;
         max-width: ~"calc(100% - @{rightMargin})";
         left: 0;
-        transition: left .3s ease-out;
     }
 }
