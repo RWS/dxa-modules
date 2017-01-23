@@ -181,9 +181,6 @@ export class PublicationContent extends React.Component<IPublicationContentProps
     private _isUnmounted: boolean = false;
     private _searchBarHeight: number = 0;
     private _topBarHeight: number = 0;
-    private _lastPageAnchor: string | undefined = undefined;
-
-    private _historyUnlisten: () => void;
 
     /**
      * Creates an instance of App.
@@ -203,16 +200,10 @@ export class PublicationContent extends React.Component<IPublicationContentProps
      * Invoked once, both on the client and server, immediately before the initial rendering occurs.
      */
     public componentWillMount(): void {
-        const { services, router} = this.context;
+        const { services } = this.context;
         const { publicationId, pageIdOrPublicationTitle} = this.props.params;
         const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
         const { publicationService, pageService } = this.context.services;
-
-        if (router) {
-            this._historyUnlisten = router.listen((() => {
-                this._lastPageAnchor = undefined;
-            }).bind(this));
-        }
 
         const getRootItems = (path?: string[]): void => {
             // Get the data for the Toc
@@ -344,14 +335,6 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         const { rootItems } = this._toc;
         const tocError = this._toc.error;
 
-        let anchor: string | undefined = undefined;
-        if (selectedTocItem) {
-            if (this._lastPageAnchor !== pageAnchor) {
-                anchor = pageAnchor;
-                this._lastPageAnchor = anchor;
-            }
-        }
-
         return (
             <section className={"sdl-dita-delivery-publication-content"}>
                 <SearchBar
@@ -372,7 +355,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                         Url.getPublicationUrl(publicationId, publicationTitle)}
                     // Wait for the selected toc item to be set to set the anchor
                     // This is needed to make sure components on top are rendered first (eg bread crumbs)
-                    anchor={anchor}
+                    anchor={selectedTocItem ? pageAnchor : undefined}
                     scrollOffset={this._topBarHeight}
                     activeHeader={activePageHeader}>
                     <NavigationMenu isOpen={false}>{/* TODO: use global state store */}
@@ -430,10 +413,6 @@ export class PublicationContent extends React.Component<IPublicationContentProps
 
         window.removeEventListener("scroll", this._fixPanels.bind(this));
         window.removeEventListener("resize", this._fixPanels.bind(this));
-
-        if (this._historyUnlisten) {
-            this._historyUnlisten();
-        }
     }
 
     private _onTocSelectionChanged(sitemapItem: ITaxonomy, path: string[]): void {
