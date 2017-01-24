@@ -28,18 +28,22 @@ class NavigationMenuComponent extends TestBase {
                 expect(element.innerHTML).toBe("<div>Contents</div>");
             });
 
-            it("can open/close", (): void => {
+            it("can open/close", (done: () => void): void => {
                 this._renderComponent({
                     isOpen: false
                 }, target);
                 const element = document.querySelector(".sdl-dita-delivery-navigation-menu");
                 expect(element.classList).not.toContain("open");
-                expect(getComputedStyle(element).display).toBe("none");
+                expect(getComputedStyle(element).left).toBe("-500px");
                 this._renderComponent({
                     isOpen: true
                 }, target);
                 expect(element.classList).toContain("open");
-                expect(getComputedStyle(element).display).toBe("block");
+                // Animation takes .3s, use a slightly bigger timeout
+                setTimeout((): void => {
+                    expect(getComputedStyle(element).left).toBe("0px");
+                    done();
+                }, 310);
             });
         });
     }
