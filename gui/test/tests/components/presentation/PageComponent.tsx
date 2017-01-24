@@ -267,6 +267,26 @@ class PageComponent extends TestBase {
                     done();
                 }, 100);
             });
+
+            it("scrolls to same content item", (done: () => void): void => {
+                const spy = spyOn(window, "scrollTo").and.callThrough();
+
+                const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
+                expect(domNode).not.toBeNull();
+
+                const hyperlinks = domNode.querySelectorAll(".sdl-dita-delivery-content-navigation a") as NodeListOf<HTMLAnchorElement>;
+                expect(hyperlinks.length).toBe(2);
+
+                // We only need last item
+                hyperlinks.item(1).click();
+                window.scrollTo(0, 0);
+                hyperlinks.item(1).click();
+
+                setTimeout((): void => {
+                    expect(spy).toHaveBeenCalledTimes(3);
+                    done();
+                }, 100);
+            });
         });
 
     }

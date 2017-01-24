@@ -105,7 +105,8 @@ export class Page extends React.Component<IPageProps, IPageState> {
      * @memberOf Breadcrumbs
      */
     public static contextTypes: React.ValidationMap<IAppContext> = {
-        services: React.PropTypes.object.isRequired
+        services: React.PropTypes.object.isRequired,
+        router: React.PropTypes.object.isRequired
     };
 
     /**
@@ -117,7 +118,8 @@ export class Page extends React.Component<IPageProps, IPageState> {
     public context: IAppContext;
 
     private _hyperlinks: { element: HTMLElement, handler: (e: Event) => void; }[] = [];
-    private _lastAnchor: string;
+    private _lastPageAnchor: string | undefined = undefined;
+    private _historyUnlisten: () => void;
 
     /**
      * Creates an instance of Toc.
@@ -128,6 +130,19 @@ export class Page extends React.Component<IPageProps, IPageState> {
         this.state = {
             navItems: []
         };
+    }
+
+    /**
+     * Invoked once, both on the client and server, immediately before the initial rendering occurs.
+     */
+    public componentWillMount(): void {
+        const { router} = this.context;
+
+        if (router) {
+            this._historyUnlisten = router.listen((() => {
+                this._lastPageAnchor = undefined;
+            }).bind(this));
+        }
     }
 
     /**
@@ -181,6 +196,10 @@ export class Page extends React.Component<IPageProps, IPageState> {
      */
     public componentWillUnmount(): void {
         this._disableHyperlinks();
+
+        if (this._historyUnlisten) {
+            this._historyUnlisten();
+        }
     }
 
     /**
@@ -276,17 +295,17 @@ export class Page extends React.Component<IPageProps, IPageState> {
     private _jumpToAnchor(): void {
         const { anchor, scrollOffset } = this.props;
         // Keep track of the previous anchor to allow scrolling
-        if (anchor && anchor !== this._lastAnchor) {
+        if (anchor && (this._lastPageAnchor !== anchor)) {
             const domNode = ReactDOM.findDOMNode(this) as HTMLElement;
             if (domNode) {
                 const pageContentNode = domNode.querySelector(".page-content") as HTMLElement;
                 const header = Html.getHeaderElement(pageContentNode, anchor);
                 if (header) {
-                    this._lastAnchor = anchor;
+                    this._lastPageAnchor = anchor;
                     // TODO: make sure images are loaded before jumping to the anchor
                     // Use a timeout to make sure all components are rendered
                     setTimeout((): void => {
-                    var topPos = (header.offsetTop + domNode.offsetTop) - (scrollOffset || 0);
+                        var topPos = (header.offsetTop + domNode.offsetTop) - (scrollOffset || 0);
                         window.scrollTo(0, topPos);
                     }, 0);
                 }
