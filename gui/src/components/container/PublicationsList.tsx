@@ -32,7 +32,7 @@ export interface IPublicationsListState {
 }
 
 /**
- * Publication + content component
+ * Publications list component
  */
 export class PublicationsList extends React.Component<{}, IPublicationsListState> {
 
