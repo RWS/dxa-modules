@@ -19,7 +19,6 @@
         position: relative;
 
         .sdl-dita-delivery-navigation-menu {
-            display: block;
             width: @tocWidth;
             float: left;
             position: inherit;
@@ -66,20 +65,21 @@
 
         @media screen and (min-width: (1+@screenSm)) {
 
+            .sdl-dita-delivery-navigation-menu {
+                /* Remove transition and zindex */
+                transition: none;
+                z-index: auto;
+            }
+
             nav.sdl-dita-delivery-toc.fixed-nav {
                 top: 50px;
                 position: fixed;
                 z-index: 999;
             }
+
         }
 
         @media screen and (min-width: (1+@screenLg)) {
-
-             .sdl-dita-delivery-navigation-menu {
-                /* Remove transition and zindex */
-                transition: none;
-                z-index: auto;
-             }
 
             nav.sdl-dita-delivery-content-navigation {
                 top: 0;
@@ -91,6 +91,7 @@
                     position: fixed;
                 }
             }
+
         }
 
         .sdl-dita-delivery-breadcrumbs {
