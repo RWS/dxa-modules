@@ -46,7 +46,7 @@ export class PublicationsList extends React.Component<{}, IPublicationsListState
     private _isUnmounted: boolean = false;
 
     /**
-     * Creates an instance of Toc.
+     * Creates an instance of Publications list component.
      *
      */
     constructor() {

@@ -120,7 +120,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
     private _lastAnchor: string;
 
     /**
-     * Creates an instance of Toc.
+     * Creates an instance of Page.
      *
      */
     constructor() {
