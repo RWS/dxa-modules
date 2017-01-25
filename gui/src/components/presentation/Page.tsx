@@ -118,7 +118,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
     public context: IAppContext;
 
     private _hyperlinks: { element: HTMLElement, handler: (e: Event) => void; }[] = [];
-    private _lastPageAnchor: string | undefined = undefined;
+    private _lastPageAnchor?: string;
     private _historyUnlisten: () => void;
 
     /**
@@ -139,9 +139,9 @@ export class Page extends React.Component<IPageProps, IPageState> {
         const { router} = this.context;
 
         if (router) {
-            this._historyUnlisten = router.listen((() => {
+            this._historyUnlisten = router.listen(() => {
                 this._lastPageAnchor = undefined;
-            }).bind(this));
+            });
         }
     }
 
@@ -259,7 +259,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                 return {
                     id: item.id,
                     title: item.title,
-                    indention: +(item.importancy == 3),
+                    indention: Number(item.importancy == 3),
                     url: url ? Url.getAnchorUrl(url, item.id) : ("#" + item.id)
                 };
             });
