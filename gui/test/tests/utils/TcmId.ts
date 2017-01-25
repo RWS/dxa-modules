@@ -1,5 +1,5 @@
 import { TcmId as TcmIdUtils } from "utils/TcmId";
-import { CdItemTypes } from "interfaces/TcmId";
+import { CdItemTypes, TaxonomyItemId } from "interfaces/TcmId";
 
 describe(`TcmId utils tests.`, (): void => {
 
@@ -13,20 +13,20 @@ describe(`TcmId utils tests.`, (): void => {
 
     it("returns a taxonomy item id from a page id", (): void => {
         const pageId = "54";
-        expect(TcmIdUtils.getTaxonomyItemId("999", pageId)).toBe("t999-p54");
+        expect(TcmIdUtils.getTaxonomyItemId(TaxonomyItemId.Index, pageId)).toBe(`t${TaxonomyItemId.Index}-p54`);
         const pageIdTcmFormat = "ish:123-54-16";
-        expect(TcmIdUtils.getTaxonomyItemId("999", pageIdTcmFormat)).toBe("t999-p54");
+        expect(TcmIdUtils.getTaxonomyItemId(TaxonomyItemId.Toc, pageIdTcmFormat)).toBe(`t${TaxonomyItemId.Toc}-p54`);
     });
 
     it("returns a taxonomy item id from a taxonomy id", (): void => {
         const taxonomyId = "ish:123-54-512";
-        const taxonomyItemId = TcmIdUtils.getTaxonomyItemId("999", taxonomyId);
-        expect(taxonomyItemId).toBe("t999");
+        const taxonomyItemId = TcmIdUtils.getTaxonomyItemId(TaxonomyItemId.Toc, taxonomyId);
+        expect(taxonomyItemId).toBe(`t${TaxonomyItemId.Toc}`);
     });
 
     it("returns empty result when getting a taxonomy item id using an invalid page id", (): void => {
         const pageId = "invalid-id";
-        const taxonomyId = TcmIdUtils.getTaxonomyItemId("999", pageId);
+        const taxonomyId = TcmIdUtils.getTaxonomyItemId(TaxonomyItemId.Index, pageId);
         expect(taxonomyId).toBeUndefined();
     });
 

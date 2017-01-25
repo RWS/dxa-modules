@@ -363,10 +363,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                             activeItemPath={activeTocItemPath}
                             rootItems={rootItems}
                             loadChildItems={(parentId: string): Promise<ITaxonomy[]> => {
-                                // TODO: this conversion will not be needed when upgrading to DXA 1.7
-                                // https://jira.sdl.com/browse/TSI-2131
-                                const taxonomyItemId = TcmId.getTaxonomyItemId("1", parentId);
-                                return taxonomyService.getSitemapItems(publicationId, taxonomyItemId || parentId);
+                                return taxonomyService.getSitemapItems(publicationId, parentId);
                             } }
                             onSelectionChanged={this._onTocSelectionChanged.bind(this)}
                             error={tocError}

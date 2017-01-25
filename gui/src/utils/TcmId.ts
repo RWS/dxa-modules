@@ -1,4 +1,4 @@
-import { CdItemTypes, ITcmId as TcmIdModel } from "../interfaces/TcmId";
+import { CdItemTypes, ITcmId as TcmIdModel, TaxonomyItemId } from "../interfaces/TcmId";
 
 /**
  * Regex to parse tcm uri
@@ -39,23 +39,23 @@ export class TcmId {
      * Get the taxonomy item id
      *
      * @static
-     * @param {string} taxonomyId Taxonomy id
+     * @param {TaxonomyItemId} taxonomyItemId Taxonomy item id
      * @param {string} id Tcm id
      * @returns {string | undefined}
      *
      * @memberOf TcmUri
      */
-    public static getTaxonomyItemId(taxonomyId: string, id: string): string | undefined {
+    public static getTaxonomyItemId(taxonomyItemId: TaxonomyItemId, id: string): string | undefined {
         const match = id.match(TCM_ID_FORMAT_REGEX);
         if (match) {
             if (match[4] === CdItemTypes.Category.toString()) {
-                return `t${taxonomyId}`;
+                return `t${taxonomyItemId}`;
             }
-            return `t${taxonomyId}-p${match[3]}`;
+            return `t${taxonomyItemId}-p${match[3]}`;
         }
         const isNumber = !isNaN(TcmId.parseInt(id));
         if (isNumber) {
-            return `t${taxonomyId}-p${id}`;
+            return `t${taxonomyItemId}-p${id}`;
         }
         return undefined;
     }

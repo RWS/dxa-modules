@@ -1,5 +1,4 @@
 import { TaxonomyService } from "services/client/TaxonomyService";
-import { TcmId } from "utils/TcmId";
 import { TestBase } from "sdl-models";
 
 class TaxonomyServiceTests extends TestBase {
@@ -63,10 +62,7 @@ class TaxonomyServiceTests extends TestBase {
                             const firstItem = items.filter(item => item.hasChildNodes)[0];
                             expect(firstItem.id).toBeDefined();
                             if (firstItem.id) {
-                                // TODO: this conversion will not be needed when upgrading to DXA 1.7
-                                // https://jira.sdl.com/browse/TSI-2131
-                                const taxonomyItemId = TcmId.getTaxonomyItemId("1", firstItem.id);
-                                getChildren(taxonomyItemId || firstItem.id);
+                                getChildren(firstItem.id);
                             }
                         }
                     }).catch(error => {

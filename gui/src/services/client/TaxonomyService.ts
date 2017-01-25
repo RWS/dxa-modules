@@ -5,6 +5,7 @@ import { Toc } from "models/Toc";
 import { NavigationLinks } from "models/NavigationLinks";
 import { Promise } from "es6-promise";
 import { TcmId } from "utils/TcmId";
+import { TaxonomyItemId } from "interfaces/TcmId";
 
 /**
  * Taxonomy service, interacts with the models to fetch the required data.
@@ -145,9 +146,7 @@ export class TaxonomyService implements ITaxonomyService {
             TaxonomyService.NavigationLinksModels[publicationId] = {};
         }
         if (!TaxonomyService.NavigationLinksModels[publicationId][pageId]) {
-            // TODO: this conversion will not be needed when upgrading to DXA 1.7
-            // https://jira.sdl.com/browse/TSI-2131
-            const taxonomyId = TcmId.getTaxonomyItemId("1", pageId);
+            const taxonomyId = TcmId.getTaxonomyItemId(TaxonomyItemId.Toc, pageId);
             TaxonomyService.NavigationLinksModels[publicationId][pageId] = new NavigationLinks(publicationId, taxonomyId || pageId);
         }
         return TaxonomyService.NavigationLinksModels[publicationId][pageId];
