@@ -1,14 +1,14 @@
 {
   "Id": "ish:1184146-516062-16",
   "Title": "Penguins Overview",
-  "Url": "/1184146/516062/penguin-publication/penguins-overview",
+  "Url": "/app/1184146/516062/penguin-publication/penguins-overview",
   "IsAbstract": false,
   "HasChildNodes": true,
   "Items": [
     {
       "Id": "ish:1184146-517008-16",
       "Title": "Etymology",
-      "Url": "/1184146/517008/penguin-publication/etymology",
+      "Url": "/app/1184146/517008/penguin-publication/etymology",
       "IsAbstract": false,
       "HasChildNodes": false,
       "Items": []

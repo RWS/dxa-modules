@@ -1,14 +1,14 @@
 {
   "Id": "ish:1656866-164369-16",
   "Title": "Musikfunktionen",
-  "Url": "/1656866/164369/publication-mp330/musikfunktionen",
+  "Url": "/app/1656866/164369/publication-mp330/musikfunktionen",
   "IsAbstract": false,
   "HasChildNodes": true,
   "Items": [
     {
       "Id": "ish:1656866-164337-16",
       "Title": "Anhören von Musik",
-      "Url": "/1656866/164337/publication-mp330/anhoren-von-musik",
+      "Url": "/app/1656866/164337/publication-mp330/anhoren-von-musik",
       "IsAbstract": false,
       "HasChildNodes": false,
       "Items": []

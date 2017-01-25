@@ -2,7 +2,7 @@
   {
     "Id": "ish:1656866-164221-16",
     "Title": "Sehr geehrter Kunde!",
-    "Url": "/1656866/164221/publication-mp330/sehr-geehrter-kunde-",
+    "Url": "/app/1656866/164221/publication-mp330/sehr-geehrter-kunde-",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -10,7 +10,7 @@
   {
     "Id": "ish:1656866-164245-16",
     "Title": "Sicherheitshinweise",
-    "Url": "/1656866/164245/publication-mp330/sicherheitshinweise",
+    "Url": "/app/1656866/164245/publication-mp330/sicherheitshinweise",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -18,7 +18,7 @@
   {
     "Id": "ish:1656866-164229-16",
     "Title": "Ihr Telefon",
-    "Url": "/1656866/164229/publication-mp330/ihr-telefon",
+    "Url": "/app/1656866/164229/publication-mp330/ihr-telefon",
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -26,7 +26,7 @@
   {
     "Id": "ish:1656866-164396-16",
     "Title": "Erste Schritte",
-    "Url": "/1656866/164396/publication-mp330/erste-schritte",
+    "Url": "/app/1656866/164396/publication-mp330/erste-schritte",
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -34,7 +34,7 @@
   {
     "Id": "ish:1656866-164466-16",
     "Title": "Anruffunktionen",
-    "Url": "/1656866/164466/publication-mp330/anruffunktionen",
+    "Url": "/app/1656866/164466/publication-mp330/anruffunktionen",
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -42,7 +42,7 @@
   {
     "Id": "ish:1656866-164477-16",
     "Title": "Mitteilungen",
-    "Url": "/1656866/164477/publication-mp330/mitteilungen",
+    "Url": "/app/1656866/164477/publication-mp330/mitteilungen",
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -50,7 +50,7 @@
   {
     "Id": "ish:1656866-164237-16",
     "Title": "Spiele",
-    "Url": "/1656866/164237/publication-mp330/spiele",
+    "Url": "/app/1656866/164237/publication-mp330/spiele",
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -58,7 +58,7 @@
   {
     "Id": "ish:1656866-164369-16",
     "Title": "Musikfunktionen",
-    "Url": "/1656866/164369/publication-mp330/musikfunktionen",
+    "Url": "/app/1656866/164369/publication-mp330/musikfunktionen",
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -66,7 +66,7 @@
   {
     "Id": "ish:1656866-164299-16",
     "Title": "Adressbuch",
-    "Url": "/1656866/164299/publication-mp330/adressbuch",
+    "Url": "/app/1656866/164299/publication-mp330/adressbuch",
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []

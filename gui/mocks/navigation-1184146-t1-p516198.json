@@ -1,14 +1,14 @@
 {
   "Id": "ish:1184146-1184158-16",
   "Title": " Activities\n               ",
-  "Url": "/1184146/1184158/penguin-publication/activities",
+  "Url": "/app/1184146/1184158/penguin-publication/activities",
   "IsAbstract": false,
   "HasChildNodes": true,
   "Items": [
     {
       "Id": "ish:1184146-516198-16",
       "Title": "How to draw a penguin",
-      "Url": "/1184146/516198/penguin-publication/how-to-draw-a-penguin",
+      "Url": "/app/1184146/516198/penguin-publication/how-to-draw-a-penguin",
       "IsAbstract": false,
       "HasChildNodes": false,
       "Items": []

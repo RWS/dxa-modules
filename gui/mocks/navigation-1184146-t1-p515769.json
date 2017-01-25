@@ -1,7 +1,7 @@
 {
   "Id": "ish:1184146-515736-16",
   "Title": "Other birds",
-  "Url": "/1184146/515736/penguin-publication/other-birds",
+  "Url": "/app/1184146/515736/penguin-publication/other-birds",
   "IsAbstract": false,
   "HasChildNodes": true,
   "Items": [
@@ -15,7 +15,7 @@
         {
           "Id": "ish:1184146-515769-16",
           "Title": "Rail birds ",
-          "Url": "/1184146/515769/penguin-publication/rail-birds",
+          "Url": "/app/1184146/515769/penguin-publication/rail-birds",
           "IsAbstract": false,
           "HasChildNodes": false,
           "Items": []

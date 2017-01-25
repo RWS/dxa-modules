@@ -1,14 +1,14 @@
 {
   "Id": "ish:1656863-164231-16",
   "Title": "Your phone",
-  "Url": "/1656863/164231/publication-mp330/your-phone",
+  "Url": "/app/1656863/164231/publication-mp330/your-phone",
   "IsAbstract": false,
   "HasChildNodes": true,
   "Items": [
     {
       "Id": "ish:1656863-164187-16",
       "Title": "Standby mode",
-      "Url": "/1656863/164187/publication-mp330/standby-mode",
+      "Url": "/app/1656863/164187/publication-mp330/standby-mode",
       "IsAbstract": false,
       "HasChildNodes": false,
       "Items": []

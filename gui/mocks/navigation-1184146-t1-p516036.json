@@ -1,14 +1,14 @@
 {
   "Id": "ish:1184146-516062-16",
   "Title": "Penguins Overview",
-  "Url": "/1184146/516062/penguin-publication/penguins-overview",
+  "Url": "/app/1184146/516062/penguin-publication/penguins-overview",
   "IsAbstract": false,
   "HasChildNodes": true,
   "Items": [
     {
       "Id": "ish:1184146-516036-16",
       "Title": "Behavior",
-      "Url": "/1184146/516036/penguin-publication/behavior",
+      "Url": "/app/1184146/516036/penguin-publication/behavior",
       "IsAbstract": false,
       "HasChildNodes": true,
       "Items": []

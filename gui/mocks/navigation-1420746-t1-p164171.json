@@ -1,14 +1,14 @@
 {
   "Id": "ish:1420746-164231-16",
   "Title": "Your phone",
-  "Url": "/1420746/164231/publication-mp330/your-phone",
+  "Url": "/app/1420746/164231/publication-mp330/your-phone",
   "IsAbstract": false,
   "HasChildNodes": true,
   "Items": [
     {
       "Id": "ish:1420746-164171-16",
       "Title": "General Packet Radio Service (GPRS)",
-      "Url": "/1420746/164171/publication-mp330/general-packet-radio-service--gprs-",
+      "Url": "/app/1420746/164171/publication-mp330/general-packet-radio-service--gprs-",
       "IsAbstract": false,
       "HasChildNodes": false,
       "Items": []

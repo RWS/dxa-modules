@@ -2,7 +2,7 @@
   {
     "Id": "ish:1656863-164223-16",
     "Title": "Dear Customer",
-    "Url": "/1656863/164223/publication-mp330/dear-customer",
+    "Url": "/app/1656863/164223/publication-mp330/dear-customer",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -10,7 +10,7 @@
   {
     "Id": "ish:1656863-164247-16",
     "Title": "For your safety",
-    "Url": "/1656863/164247/publication-mp330/for-your-safety",
+    "Url": "/app/1656863/164247/publication-mp330/for-your-safety",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -18,7 +18,7 @@
   {
     "Id": "ish:1656863-164231-16",
     "Title": "Your phone",
-    "Url": "/1656863/164231/publication-mp330/your-phone",
+    "Url": "/app/1656863/164231/publication-mp330/your-phone",
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -26,7 +26,7 @@
   {
     "Id": "ish:1656863-164398-16",
     "Title": "Getting started",
-    "Url": "/1656863/164398/publication-mp330/getting-started",
+    "Url": "/app/1656863/164398/publication-mp330/getting-started",
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -34,7 +34,7 @@
   {
     "Id": "ish:1656863-164468-16",
     "Title": "Call functions",
-    "Url": "/1656863/164468/publication-mp330/call-functions",
+    "Url": "/app/1656863/164468/publication-mp330/call-functions",
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -42,7 +42,7 @@
   {
     "Id": "ish:1656863-164479-16",
     "Title": "Messages",
-    "Url": "/1656863/164479/publication-mp330/messages",
+    "Url": "/app/1656863/164479/publication-mp330/messages",
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -50,7 +50,7 @@
   {
     "Id": "ish:1656863-164239-16",
     "Title": "Games",
-    "Url": "/1656863/164239/publication-mp330/games",
+    "Url": "/app/1656863/164239/publication-mp330/games",
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -58,7 +58,7 @@
   {
     "Id": "ish:1656863-164371-16",
     "Title": "Music functions",
-    "Url": "/1656863/164371/publication-mp330/music-functions",
+    "Url": "/app/1656863/164371/publication-mp330/music-functions",
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -66,7 +66,7 @@
   {
     "Id": "ish:1656863-164301-16",
     "Title": "Phone book",
-    "Url": "/1656863/164301/publication-mp330/phone-book",
+    "Url": "/app/1656863/164301/publication-mp330/phone-book",
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []

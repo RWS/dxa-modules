@@ -1,14 +1,14 @@
 {
   "Id": "ish:1656868-164481-16",
   "Title": "Berichten",
-  "Url": "/1656868/164481/publication-mp330/berichten",
+  "Url": "/app/1656868/164481/publication-mp330/berichten",
   "IsAbstract": false,
   "HasChildNodes": true,
   "Items": [
     {
       "Id": "ish:1656868-164392-16",
       "Title": "Multimediaberichten",
-      "Url": "/1656868/164392/publication-mp330/multimediaberichten",
+      "Url": "/app/1656868/164392/publication-mp330/multimediaberichten",
       "IsAbstract": false,
       "HasChildNodes": false,
       "Items": []

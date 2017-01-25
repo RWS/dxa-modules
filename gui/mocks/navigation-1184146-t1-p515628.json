@@ -1,7 +1,7 @@
 {
   "Id": "ish:1184146-515736-16",
   "Title": "Other birds",
-  "Url": "/1184146/515736/penguin-publication/other-birds",
+  "Url": "/app/1184146/515736/penguin-publication/other-birds",
   "IsAbstract": false,
   "HasChildNodes": true,
   "Items": [
@@ -15,14 +15,14 @@
         {
           "Id": "ish:1184146-515791-16",
           "Title": "Petrels",
-          "Url": "/1184146/515791/penguin-publication/petrels",
+          "Url": "/app/1184146/515791/penguin-publication/petrels",
           "IsAbstract": false,
           "HasChildNodes": true,
           "Items": [
             {
               "Id": "ish:1184146-515628-16",
               "Title": "Southern giant Petrel (Macronectes giganteus)",
-              "Url": "/1184146/515628/penguin-publication/southern-giant-petrel--macronectes-giganteus-",
+              "Url": "/app/1184146/515628/penguin-publication/southern-giant-petrel--macronectes-giganteus-",
               "IsAbstract": false,
               "HasChildNodes": false,
               "Items": []

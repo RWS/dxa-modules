@@ -1,14 +1,14 @@
 {
   "Id": "ish:1656868-164241-16",
   "Title": "Spelletjes",
-  "Url": "/1656868/164241/publication-mp330/spelletjes",
+  "Url": "/app/1656868/164241/publication-mp330/spelletjes",
   "IsAbstract": false,
   "HasChildNodes": true,
   "Items": [
     {
       "Id": "ish:1656868-164349-16",
       "Title": "Water Rapids",
-      "Url": "/1656868/164349/publication-mp330/water-rapids",
+      "Url": "/app/1656868/164349/publication-mp330/water-rapids",
       "IsAbstract": false,
       "HasChildNodes": false,
       "Items": []

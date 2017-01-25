@@ -1,21 +1,21 @@
 {
   "Id": "ish:1184146-516000-16",
   "Title": "Types of penguins",
-  "Url": "/1184146/516000/penguin-publication/types-of-penguins",
+  "Url": "/app/1184146/516000/penguin-publication/types-of-penguins",
   "IsAbstract": false,
   "HasChildNodes": true,
   "Items": [
     {
       "Id": "ish:1184146-1184182-16",
       "Title": "Eudyptes (Crested penguins)",
-      "Url": "/1184146/1184182/penguin-publication/eudyptes--crested-penguins-",
+      "Url": "/app/1184146/1184182/penguin-publication/eudyptes--crested-penguins-",
       "IsAbstract": false,
       "HasChildNodes": true,
       "Items": [
         {
           "Id": "ish:1184146-516413-16",
           "Title": "Fiordland Penguin \n                        ",
-          "Url": "/1184146/516413/penguin-publication/fiordland-penguin",
+          "Url": "/app/1184146/516413/penguin-publication/fiordland-penguin",
           "IsAbstract": false,
           "HasChildNodes": false,
           "Items": []
