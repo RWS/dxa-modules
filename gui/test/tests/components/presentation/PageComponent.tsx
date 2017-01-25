@@ -107,7 +107,7 @@ class PageComponent extends TestBase {
                                 <a href="~/doc.sdl.com"/>
                                 <a href="/doc.sdl.com"/>
                                 <a href="/12a34/5c"/>
-                                <a href="/12/34/56/78/9"/>
+                                <a href="/12/3d4/56/78/9"/>
                             </div>`,
                     onNavigate: (): void => {
                     }
