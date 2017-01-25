@@ -201,7 +201,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
      */
     public componentWillMount(): void {
         const { services } = this.context;
-        const { publicationId, pageIdOrPublicationTitle } = this.props.params;
+        const { publicationId, pageIdOrPublicationTitle} = this.props.params;
         const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
         const { publicationService, pageService } = this.context.services;
 

@@ -31,6 +31,7 @@ interface IRouter {
     setRouteLeaveHook: () => void;
     isActive: () => void;
     getCurrentLocation: () => { pathname: string };
+    listen: () => void;
 }
 
 const services: IServices = {
@@ -64,6 +65,7 @@ export class ComponentWithContext extends React.Component<IComponentWithContextP
                 taxonomyService: taxonomyService || services.taxonomyService
             },
             router: this.context.router || {
+                listen: (): void => { },
                 createHref: (): void => { },
                 push: (path: string): void => { pathname = path; },
                 replace: (path: string): void => { pathname = path; },
