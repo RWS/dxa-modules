@@ -43,7 +43,8 @@ export class TaxonomyService implements ITaxonomyService {
      * @memberOf DataStoreClient
      */
     public getSitemapRoot(publicationId: string): Promise<ITaxonomy[]> {
-        return this.getSitemapItems(publicationId, "root");
+        const taxonomyItemId = TcmId.getTaxonomyItemId(TaxonomyItemId.Toc);
+        return this.getSitemapItems(publicationId, taxonomyItemId || "");
     }
 
     /**

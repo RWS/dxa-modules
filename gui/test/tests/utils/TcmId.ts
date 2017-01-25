@@ -30,6 +30,11 @@ describe(`TcmId utils tests.`, (): void => {
         expect(taxonomyId).toBeUndefined();
     });
 
+    it("returns a taxonomy id when not specifying a page id", (): void => {
+        const taxonomyId = TcmIdUtils.getTaxonomyItemId(TaxonomyItemId.Index);
+        expect(taxonomyId).toBe(`t${TaxonomyItemId.Index}`);
+    });
+
     it("returns an item id from a taxonomy item id", (): void => {
         const taxonomyItemIdPage = "t264-p564";
         const itemIdPage = TcmIdUtils.getItemIdFromTaxonomyItemId(taxonomyItemIdPage);

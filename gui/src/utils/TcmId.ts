@@ -40,22 +40,26 @@ export class TcmId {
      *
      * @static
      * @param {TaxonomyItemId} taxonomyItemId Taxonomy item id
-     * @param {string} id Tcm id
+     * @param {string} [id] Tcm id
      * @returns {string | undefined}
      *
      * @memberOf TcmUri
      */
-    public static getTaxonomyItemId(taxonomyItemId: TaxonomyItemId, id: string): string | undefined {
-        const match = id.match(TCM_ID_FORMAT_REGEX);
-        if (match) {
-            if (match[4] === CdItemTypes.Category.toString()) {
-                return `t${taxonomyItemId}`;
+    public static getTaxonomyItemId(taxonomyItemId: TaxonomyItemId, id?: string): string | undefined {
+        if (id) {
+            const match = id.match(TCM_ID_FORMAT_REGEX);
+            if (match) {
+                if (match[4] === CdItemTypes.Category.toString()) {
+                    return `t${taxonomyItemId}`;
+                }
+                return `t${taxonomyItemId}-p${match[3]}`;
             }
-            return `t${taxonomyItemId}-p${match[3]}`;
-        }
-        const isNumber = !isNaN(TcmId.parseInt(id));
-        if (isNumber) {
-            return `t${taxonomyItemId}-p${id}`;
+            const isNumber = !isNaN(TcmId.parseInt(id));
+            if (isNumber) {
+                return `t${taxonomyItemId}-p${id}`;
+            }
+        } else {
+            return `t${taxonomyItemId}`;
         }
         return undefined;
     }
