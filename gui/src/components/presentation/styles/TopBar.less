@@ -40,16 +40,17 @@
         }
 
         .sdl-dita-delivery-topbar-expand-nav {
-            width: 40px;
+            width: 24px;
             display: none;
             span {
                 margin: 0 15px;
-                .icon-hamburger();
+                .icon-hamburger(21px);
             }
         }
 
         .sdl-dita-delivery-topbar-logo {
             .icon-company-logo();
+            background-size: 46px 21px;
             position: relative;
             top: -4px;
             background-position: left center;
@@ -60,14 +61,10 @@
             }
         }
 
-        .sdl-dita-delivery-topbar-title {
-            .header-font(200, 20px, @topBarHeight);
-        }
-
         .sdl-dita-delivery-topbar-language {
             text-align: right;
             span {
-                .icon-language();
+                .icon-language(21px);
                 margin-right: 15px;
             }
         }
@@ -75,7 +72,7 @@
         .sdl-dita-delivery-topbar-user{
             width: 24px;
             span {
-                .icon-user();
+                .icon-user(21px);
             }
         }
     }
@@ -103,8 +100,11 @@
                 }
             }
 
-            .sdl-dita-delivery-topbar-language label,
-            .sdl-dita-delivery-topbar-title label {
+            .sdl-dita-delivery-topbar-logo {
+                width: 100%;
+            }
+
+            .sdl-dita-delivery-topbar-language label {
                 display: none;
             }
 

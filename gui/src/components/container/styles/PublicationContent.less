@@ -122,7 +122,8 @@
 
             nav.sdl-dita-delivery-content-navigation {
                 float: none;
-                width: ~"calc(100% - @{tocWidth} - 30px)";
+                max-width: ~"calc(100% - @{tocWidth} - 30px)";
+                min-width: ~"calc(80% - @{tocWidth} - 30px)";
                 margin-left: @tocWidth + 30;
             }
         }
@@ -165,6 +166,7 @@
             }
 
             nav.sdl-dita-delivery-content-navigation {
+                max-width: ~"calc(100% - 15px)";
                 width: ~"calc(100% - 15px)";
                 margin-left: 15px;
             }

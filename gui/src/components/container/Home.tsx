@@ -66,7 +66,6 @@ export class Home extends React.Component<{}, IHomeState> {
         return (
             <div className={"sdl-dita-delivery-app" + (isNavOpen ? " sdl-dita-delivery-app-nav-open" : "")}>
                 <TopBar
-                    title={localizationService.formatMessage("app.productfamily")}
                     language={localizationService.formatMessage("app.language")}
                     toggleNavigationMenu={this._toggleNavigationMenu.bind(this)}
                     />
