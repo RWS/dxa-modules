@@ -28,10 +28,11 @@
 
     header {
         display: table;
-        max-width: 1200px;
+        max-width: @screenXl;
         margin: 0 auto;
         width: 100%;
         position: relative;
+        border-spacing: 15px 0;
 
         > * {
             display: table-cell;
@@ -42,7 +43,7 @@
             width: 40px;
             display: none;
             span {
-                margin: 0 10px;
+                margin: 0 15px;
                 .icon-hamburger();
             }
         }
@@ -51,7 +52,6 @@
             .icon-company-logo();
             position: relative;
             top: -4px;
-            padding-right: 5px;
             background-position: left center;
             a {
                 height: 100%;
@@ -65,17 +65,16 @@
         }
 
         .sdl-dita-delivery-topbar-language {
-            width: 140px;
+            text-align: right;
             span {
-                margin-right: 10px;
                 .icon-language();
+                margin-right: 15px;
             }
         }
 
         .sdl-dita-delivery-topbar-user{
-            width: 40px;
+            width: 24px;
             span {
-                margin-right: 10px;
                 .icon-user();
             }
         }
@@ -95,6 +94,8 @@
 
     .sdl-dita-delivery-topbar {
         header {
+            border-spacing: 0;
+
             .sdl-dita-delivery-topbar-expand-nav {
                 display: table-cell;
                 &:hover {
@@ -109,6 +110,10 @@
 
             .sdl-dita-delivery-topbar-language {
                 width: 40px;
+            }
+
+            .sdl-dita-delivery-topbar-user {
+                padding-right: 15px;
             }
         }
     }
