@@ -26,6 +26,14 @@ export interface IHeader {
      * @memberOf IHeader
      */
     element?: HTMLElement;
+
+    /**
+     * Header importancy
+     *
+     * @type {number}
+     * @memberOf IHeader
+     */
+    importancy: number;
 }
 
 /**
@@ -67,6 +75,7 @@ export class Html {
             }
             const item: IHeader = {
                 title: title,
+                importancy: Number(header.tagName.replace(/h/i, "")) || 0,
                 id: id
             };
             if (includeElement) {

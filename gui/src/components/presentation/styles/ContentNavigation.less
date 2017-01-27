@@ -2,8 +2,16 @@
 
 .sdl-dita-delivery-content-navigation {
     @outerBorderSize: 4px;
+    @indentSize: 26px;
     overflow: auto;
     margin: 10px 0;
+
+    .generate-indents (@i) when (@i > 0) {
+        &.indent-@{i} {
+            padding-left: (@i * @indentSize);
+        }
+        .generate-indents(@i - 1);
+    }
 
     h3 {
         margin-top: 0;
@@ -47,6 +55,8 @@
                     color: @accentColor2;
                 }
             }
+
+            .generate-indents(4);
         }
     }
 }

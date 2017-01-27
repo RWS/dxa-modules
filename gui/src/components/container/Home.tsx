@@ -31,6 +31,8 @@ export class Home extends React.Component<{}, IHomeState> {
 
     public context: IAppContext;
 
+    private _historyUnlisten: () => void;
+
     /**
      * Creates an instance of App.
      *
@@ -40,6 +42,17 @@ export class Home extends React.Component<{}, IHomeState> {
         this.state = {
             isNavOpen: false
         };
+    }
+
+    /**
+     * Invoked once, both on the client and server, immediately before the initial rendering occurs.
+     */
+    public componentWillMount(): void {
+        const { router} = this.context;
+
+        if (router) {
+            this._historyUnlisten = router.listen(this._onNavigated.bind(this));
+        }
     }
 
     /**
@@ -62,36 +75,45 @@ export class Home extends React.Component<{}, IHomeState> {
         );
     }
 
+    /**
+     * Invoked immediately after updating.
+     */
+    public componentDidUpdate(prevProp: {}, prevState: IHomeState): void {
+        const { isNavOpen } = this.state;
+
+        if (prevState.isNavOpen !== isNavOpen) {
+            // HACK: we should use some global state store to achieve this
+            const navMenu = document.querySelector(".sdl-dita-delivery-navigation-menu");
+            if (navMenu) {
+                if (isNavOpen) {
+                    navMenu.classList.add("open");
+                } else {
+                    navMenu.classList.remove("open");
+                }
+            }
+        }
+    }
+
+    /**
+     * Component will unmount
+     */
+    public componentWillUnmount(): void {
+        if (this._historyUnlisten) {
+            this._historyUnlisten();
+        }
+    }
+
     private _toggleNavigationMenu(): void {
         const { isNavOpen } = this.state;
-        const { router } = this.context;
+
         this.setState({
             isNavOpen: !isNavOpen
         });
-
-        // HACK: we should use some global state store to achieve this
-        const navMenu = document.querySelector(".sdl-dita-delivery-navigation-menu");
-        if (navMenu) {
-            if (!isNavOpen) {
-                navMenu.classList.add("open");
-            } else {
-                navMenu.classList.remove("open");
-            }
-            if (router) {
-                router.listen(this._onNavigated.bind(this));
-            }
-        }
     }
 
     private _onNavigated(location: HistoryModule.Location): void {
         this.setState({
             isNavOpen: false
         });
-
-        // HACK: we should use some global state store to achieve this
-        const navMenu = document.querySelector(".sdl-dita-delivery-navigation-menu");
-        if (navMenu) {
-            navMenu.classList.remove("open");
-        }
     }
 };
