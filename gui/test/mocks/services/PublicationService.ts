@@ -25,13 +25,21 @@ export class PublicationService implements IPublicationService {
 
     public getPublications(): Promise<IPublication[]> {
         const { error, publications } = this._mockDataPublications;
-        return new Promise((resolve: (publications?: IPublication[]) => void, reject: (error: string | null) => void) => {
+        if (fakeDelay) {
+            return new Promise((resolve: (publications?: IPublication[]) => void, reject: (error: string | null) => void) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(publications);
+                }
+            });
+        } else {
             if (error) {
-                reject(error);
+                return Promise.reject(error);
             } else {
-                resolve(publications);
+                return Promise.resolve(publications);
             }
-        });
+        }
     }
 
     public getPublicationTitle(publicationId: string): Promise<string> {
@@ -54,6 +62,13 @@ export class PublicationService implements IPublicationService {
                 return Promise.resolve(title);
             }
         }
+    }
+
+    public setMockDataPublications(error: string | null, publications?: IPublication[]): void {
+        this._mockDataPublications = {
+            error: error,
+            publications: publications || []
+        };
     }
 
     public setMockDataPublication(error: string | null, title?: string): void {

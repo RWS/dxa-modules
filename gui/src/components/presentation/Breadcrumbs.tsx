@@ -167,9 +167,7 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
             <div className={"sdl-dita-delivery-breadcrumbs"}>
                 <ul>
                     <li>
-                        { /* TODO: Enable when home page is implemented
-                             <Link className="home" title={homeLabel} to="/home">{homeLabel}</Link> */ }
-                        <span title={homeLabel} className="home">{homeLabel}</span>
+                        <Link className="home" title={homeLabel} to="/home">{homeLabel}</Link>
                         <span className="separator" />
                     </li>
                     <li>

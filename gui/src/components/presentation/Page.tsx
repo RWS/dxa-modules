@@ -122,7 +122,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
     private _historyUnlisten: () => void;
 
     /**
-     * Creates an instance of Toc.
+     * Creates an instance of Page.
      *
      */
     constructor() {
