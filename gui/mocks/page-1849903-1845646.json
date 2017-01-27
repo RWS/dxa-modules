@@ -1,0 +1,45 @@
+{
+  "Id": "1845646",
+  "Meta": {
+    "ishlogicalref.object.id": 1845643,
+    "ishversionref.object.id": 1845644,
+    "ishlngref.object.id": 1845646,
+    "ishref.object.value": "GUID-9CA702F2-3313-4B15-9B39-3D463FDB66B2",
+    "ishtype.object.value": "ISHModule",
+    "FTITLE.logical.value": "קישורים חיצוניים",
+    "FDESCRIPTION.logical.value": null,
+    "FCHANGES.version.value": null,
+    "FISHRELEASELABEL.version.value": null,
+    "CREATED-ON.lng.value": "2017-01-25T12:30:11Z",
+    "FAUTHOR.lng.value": "admin",
+    "FSTATUS.lng.value": "Draft",
+    "MODIFIED-ON.lng.value": "2017-01-25T13:44:49Z",
+    "VERSION.version.value": "1",
+    "DOC-LANGUAGE.lng.value": [
+      "iw"
+    ],
+    "FISHREVCOUNTER.lng.value": 4,
+    "ED.lng.value": "GUID-552E5A60-62B6-4251-9893-125FE23ECCCA",
+    "FUSERGROUP.logical.element": null,
+    "READ-ACCESS.logical.element": null,
+    "publicationtitle.generated.value": "בירה",
+    "conditionsused.generated.value": null
+  },
+  "Regions": [
+    {
+      "Entities": [
+        {
+          "Id": "1845646",
+          "topicTitle": "קישורים חיצוניים",
+          "topicBody": {
+            "Fragments": [
+              {
+                "Html": "\n      \n      \t\n      <h1 class=\"title topictitle1\" dir=\"rtl\" id=\"GUID-9CA702F2-3313-4B15-9B39-3D463FDB66B2__GUID-631A5FBA-967A-4DFE-9204-14D8CDCA0023\" xmlns=\"http://www.w3.org/1999/xhtml\">קישורים חיצוניים</h1>\n      \n      \t\n      <div dir=\"rtl\" class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \t\t\n         <ul dir=\"rtl\" class=\"ul\" id=\"GUID-9CA702F2-3313-4B15-9B39-3D463FDB66B2__GUID-B685EBF5-ABE8-455D-8014-340C2367AE09\">\n            \t\t\t\n            <li dir=\"rtl\" class=\"li\"><a class=\"xref\" href=\"HTTP://WWW.ALCO-PEDIA.CO.IL/INDEX.html\">בירה</a> - אלכופדיה, אנציקלופדיית האלכוהול האינטראקטיבית\n            </li>\n            \n            \t\t\t\n            <li dir=\"rtl\" class=\"li\">דורעם גונט, <a class=\"xref\" href=\"HTTP://TOOLS.WMFLABS.ORG/HEWIKI-TOOLS/REDIRECT.PHP?Q=HTTP://WWW.HAARETZ.CO.IL/HASITE/SPAGES/777098.html\">הבירה הטובה ביותר</a>, באתר <a class=\"xref\" href=\"HTTPS://HE.WIKIPEDIA.html\">הארץ</a>, 20.10.06\n            </li>\n            \n            \t\t\t\n            <li dir=\"rtl\" class=\"li\"><a class=\"xref\" href=\"HTTPS://HE.WIKIPEDIA.html\">נועה מנהיים</a>, <a class=\"xref\" href=\"HTTP://TOOLS.WMFLABS.ORG/HEWIKI-TOOLS/REDIRECT.PHP?Q=HTTP://WWW.HAARETZ.CO.IL/1.html\">הכירו את האם הרוחנית של הבירה, לפני שגולדסטאר היה משקה לגברים</a>, באתר <a class=\"xref\" href=\"HTTPS://HE.WIKIPEDIA.html\">הארץ</a>, 21 באוגוסט 2015\n            </li>\n            \n            \t\t\t\n            <li dir=\"rtl\" class=\"li\">ליאור שדמתי, <a class=\"xref\" href=\"HTTP://CAFE.MOUSE.CO.html\">הבירות האלכוהוליות בעולם</a>, TheMarker Cafe\n            </li>\n            \n            \t\t\t\n            <li dir=\"rtl\" class=\"li\"><a class=\"xref\" href=\"HTTP://WWW.HOMEBREWING.CO.html\">המדריך לבישול בירה</a></li>\n            \n            \t\t\t\n            <li dir=\"rtl\" class=\"li\"><a class=\"xref\" href=\"HTTP://WWW.MILOG.CO.html\">מילון למונחי בירה</a>, באתר מילוג\n            </li>\n            \n            \t\t\t\n            <li dir=\"rtl\" class=\"li\"><a class=\"xref\" href=\"HTTP://BREWISRAEL.ESMARTBIZ.html\">בישול בירה בישראל</a> כל המידע על בישול בירה בישראל\n            </li>\n            \n            \t\t\t\n            <li dir=\"rtl\" class=\"li\">יעל דרור, לימור בן-חיים, <a class=\"xref\" href=\"HTTP://WWW.CLALIT.CO.IL/HE/LIFESTYLE/NUTRITION/PAGES/BEER.html\">כוס בירה זה בריאות</a>, אתר <strong class=\"ph b\">ה<a class=\"xref\" href=\"HTTPS://HE.WIKIPEDIA.html\">כללית</a></strong> (תאריך פרסום <a class=\"xref\" href=\"HTTPS://HE.WIKIPEDIA.html\">11 בנובמבר</a> <a class=\"xref\" href=\"HTTPS://HE.WIKIPEDIA.html\">2009</a>)\n            </li>\n            \n            \t\t\t\n            <li dir=\"rtl\" class=\"li\">גדי דבירי, <a class=\"xref\" href=\"HTTP://WWW.WINET.CO.html\">מורה נבוכים לעולם הבירה</a>, \"יין וגורמה\"\n            </li>\n            \n            \t\t\t\n            <li dir=\"rtl\" class=\"li\">גדי אבקסיס, <a class=\"xref\" href=\"HTTP://WWW.WINET.CO.html\">ראשיתה של הבירה</a>, \"יין וגורמה\" גיליון מספר 121\n            </li>\n            \n            \t\t\t\n            <li dir=\"rtl\" class=\"li\"><a class=\"xref\" href=\"HTTP://WWW.WINET.CO.html\">בירה ספונטנית</a>, \"יין וגורמה\" גיליון מספר 121\n            </li>\n            \n            \t\t\n         </ul>\n         \n         \t\n      </div>\n      \n      \n   "
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
