@@ -417,9 +417,8 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         const { isTocExpanding } = this.state;
         const { pageIdOrPublicationTitle } = this.props.params;
         const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
-        // After upgrading to DXA 1.7 use TcmId.getItemIdFromTaxonomyId
-        const siteMapPageId = TcmId.parseId(sitemapItem.id);
-        const isTocExpandingFinished = isTocExpanding ? siteMapPageId && (siteMapPageId.itemId === pageId) : undefined;
+        const siteMapPageId = TcmId.getItemIdFromTaxonomyItemId(sitemapItem.id);
+        const isTocExpandingFinished = isTocExpanding ? siteMapPageId && (siteMapPageId === pageId) : undefined;
 
         const updatedState: IPublicationContentState = {
             activeTocItemPath: path,
@@ -436,7 +435,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
             // Only navigate to pages which have a location
             const navPath = sitemapItem.url;
             if (navPath) {
-                if (siteMapPageId && siteMapPageId.itemId === pageId) {
+                if (siteMapPageId && siteMapPageId === pageId) {
                     router.replace(navPath);
                 } else {
                     router.push(navPath);
@@ -469,7 +468,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
             path => {
                 /* istanbul ignore else */
                 if (!this._isUnmounted) {
-                    done(path.map(item => item.id || "") || []);
+                    done(path.map(item =>  item.id || "") || []);
                 }
             },
             error => {
