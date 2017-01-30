@@ -105,6 +105,32 @@
             margin-right: @contentNavWidth;
             min-height: 100px;
         }
+
+        .error-page-component {
+            width: auto;
+            max-width: none;
+
+            @media screen and (max-width: @screenSm) {
+                margin: 34px 10px;
+            }
+
+            @media screen and (min-width: @screenSm) {
+                margin: 34px 10px 34px 310px;
+            }
+        }
+    }
+
+    .error-page-component {
+        margin: 76px auto;
+
+        @media screen and (min-width: (1+@screenLg)) {
+            width: 845px;
+            max-width: 845px;
+        }
+        
+        @media screen and (max-width: @screenLg) {
+            width: 80%;
+        }
     }
 }
 
