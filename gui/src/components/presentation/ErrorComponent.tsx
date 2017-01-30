@@ -43,7 +43,9 @@ export class ErrorComponent extends React.Component<IErrorComponentProps, {}> {
             <div className={"error-page-component"}>
                 <h1>{formatMessage(props.errorTitle)}</h1>
                 <div>{message}</div>
-                {props.errorButtons}
+                <div className="sdl-button-group">
+                    {props.errorButtons}
+                </div>
             </div>
         );
     }
