@@ -70,6 +70,6 @@ module.exports = function (config) {
         browserDisconnectTolerance: 1,
 
         // How long will Karma wait for a message from a browser before disconnecting from it (in ms).
-        browserNoActivityTimeout: 60000
+        browserNoActivityTimeout: 180000
     });
 };

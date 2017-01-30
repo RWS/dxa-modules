@@ -1,5 +1,6 @@
 ﻿{
   "app.productfamily": "Documentation",
+  "app.publications": "Publications",
   "app.language": "English",
   "components.app.loading": "Loading",
   "components.breadcrumbs.home": "Home",
