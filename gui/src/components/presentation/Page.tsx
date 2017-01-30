@@ -304,8 +304,10 @@ export class Page extends React.Component<IPageProps, IPageState> {
                     this._lastPageAnchor = anchor;
                     // TODO: make sure images are loaded before jumping to the anchor
                     // Use a timeout to make sure all components are rendered
+
+                    const offsetTop = (domNode.parentNode === domNode.offsetParent) ? domNode.offsetTop : 0;
                     setTimeout((): void => {
-                        var topPos = (header.offsetTop + domNode.offsetTop) - (scrollOffset || 0);
+                        var topPos = (header.offsetTop + offsetTop) - (scrollOffset || 0);
                         window.scrollTo(0, topPos);
                     }, 0);
                 }
