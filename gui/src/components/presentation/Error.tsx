@@ -1,14 +1,43 @@
 import * as React from "react";
 import "components/presentation/styles/Error";
-import "dist/dita-ot/styles/commonltr";
-import "dist/dita-ot/styles/commonrtl";
 
+/**
+ * Error component props
+ *
+ * @export 
+ * @interface IErrorProps
+ */
 export interface IErrorProps {
+    /**
+     * Error title 
+     * 
+     * @type {string}
+     * @memberOf IErrorProps
+     */
     title: string;
+    /**
+     * Array of messages for error description
+     * 
+     * @type {string[]}
+     * @memberOf IErrorProps
+     */
     messages: string[];
+    /**
+     * Buttons container for user reactions on an error
+     * 
+     * @type {JSX.Element}
+     * @memberOf IErrorProps
+     */
     buttons: JSX.Element;
 }
 
+/**
+ * Error component
+ *
+ * @export
+ * @param {IErrorProps} props
+ * @returns {JSX.Element}
+ */
 export const Error = (props: IErrorProps) => {
     const messages = props.messages.map((value, index) => <p key={index}>{value}</p>);
 
