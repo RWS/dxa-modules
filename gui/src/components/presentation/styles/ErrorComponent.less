@@ -1,0 +1,78 @@
+@import (reference) "../../../theming/styles.less";
+
+@media screen and (min-width: (1+@screenLg)) {
+    .sdl-dita-delivery-publication-content {
+        .error-page-component {
+            width: 845px;
+            max-width: 845px;
+        }
+
+        .sdl-dita-delivery-page {
+            .error-page-component {
+                width: auto;
+                max-width: none;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: @screenLg) {
+    .sdl-dita-delivery-publication-content {
+        .error-page-component {
+            width: 80%;
+        }
+
+        .sdl-dita-delivery-page {
+            .error-page-component {
+                width: auto;
+                margin: 34px 10px;
+            }
+        }
+    }
+}
+
+.sdl-dita-delivery-publication-content {
+    .error-page-component {
+        margin: 76px auto;
+    }   
+
+    @media screen and (min-width: @screenSm) {
+        .sdl-dita-delivery-page {
+            .error-page-component {
+                margin: 34px 10px 34px 310px;
+            }
+        }
+    }
+}
+
+.sdl-dita-delivery-publication-content {
+    .error-page-component {
+        padding: 28px 23px;
+        border: 1px solid @neutralColor5;
+        border-radius: 4px;
+        color: @neutralColor4;
+
+        h1 {
+            .page-header();
+        }
+
+        p, div.section, div.p {
+            .paragraph();
+        }
+    }
+
+    .sdl-button-group {
+        margin-top: 26px;
+        > span {
+            margin: 0 5px;
+
+            &:first-child {
+                margin: 0 5px 0 0;
+            }
+
+            &:last-child {
+                margin: 0 0 0 5px;   
+            }
+        }
+    }
+}
