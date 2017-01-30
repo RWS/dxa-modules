@@ -83,32 +83,35 @@
 }
 
 @media screen and (max-width: @screenSm) {
-    .sdl-dita-delivery-app-nav-open {
-        overflow: hidden;
 
-        .sdl-dita-delivery-topbar {
-            .sdl-dita-delivery-nav-mask {
-                opacity: .5;
-            }
-        }
-    }
-
-    .sdl-dita-delivery-topbar {
-        header {
-            .sdl-dita-delivery-topbar-expand-nav {
-                display: table-cell;
-                &:hover {
-                    cursor: pointer;
+    .sdl-dita-delivery-app-nav {
+        &.open {
+            overflow: hidden;
+            .sdl-dita-delivery-topbar {
+                .sdl-dita-delivery-nav-mask {
+                    opacity: .5;
+                    display: block;
                 }
             }
+        }
 
-            .sdl-dita-delivery-topbar-language label,
-            .sdl-dita-delivery-topbar-title label {
-                display: none;
-            }
+        .sdl-dita-delivery-topbar {
+            header {
+                .sdl-dita-delivery-topbar-expand-nav {
+                    display: table-cell;
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
 
-            .sdl-dita-delivery-topbar-language {
-                width: 40px;
+                .sdl-dita-delivery-topbar-language label,
+                .sdl-dita-delivery-topbar-title label {
+                    display: none;
+                }
+
+                .sdl-dita-delivery-topbar-language {
+                    width: 40px;
+                }
             }
         }
     }
