@@ -91,10 +91,7 @@
             }
         }
 
-    .sdl-dita-delivery-topbar {
-        header {
-            border-spacing: 0;
-
+        .sdl-dita-delivery-topbar {
             .sdl-dita-delivery-topbar-expand-nav {
                 display: table-cell;
                 &:hover {
@@ -103,7 +100,18 @@
             }
 
             .sdl-dita-delivery-topbar-logo {
+                left: 0;
+            }
+        }
+    }
+
+    .sdl-dita-delivery-topbar {
+        header {
+            border-spacing: 0;
+
+            .sdl-dita-delivery-topbar-logo {
                 width: 100%;
+                left: 15px;
             }
 
             .sdl-dita-delivery-topbar-language label {
