@@ -1,0 +1,17 @@
+{
+  "Id": "t1-k4",
+  "Title": "De telefoon",
+  "Url": "/1881665/164233/publication-mp330/de-telefoon",
+  "IsAbstract": false,
+  "HasChildNodes": true,
+  "Items": [
+    {
+      "Id": "t1-k5",
+      "Title": "Toetsen",
+      "Url": "/1881665/164284/publication-mp330/toetsen",
+      "IsAbstract": false,
+      "HasChildNodes": false,
+      "Items": []
+    }
+  ]
+}

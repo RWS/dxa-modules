@@ -1,0 +1,34 @@
+[
+  {
+    "Id": "t1-k22",
+    "Title": "Text Messages",
+    "Url": "/1961702/164460/publication-mp330/text-messages",
+    "IsAbstract": false,
+    "HasChildNodes": false,
+    "Items": []
+  },
+  {
+    "Id": "t1-k23",
+    "Title": "Multimedia messages",
+    "Url": "/1961702/164390/publication-mp330/multimedia-messages",
+    "IsAbstract": false,
+    "HasChildNodes": false,
+    "Items": []
+  },
+  {
+    "Id": "t1-k24",
+    "Title": "Voice mailbox",
+    "Url": "/1961702/164323/publication-mp330/voice-mailbox",
+    "IsAbstract": false,
+    "HasChildNodes": false,
+    "Items": []
+  },
+  {
+    "Id": "t1-k25",
+    "Title": "Deleting messages",
+    "Url": "/1961702/164452/publication-mp330/deleting-messages",
+    "IsAbstract": false,
+    "HasChildNodes": false,
+    "Items": []
+  }
+]
