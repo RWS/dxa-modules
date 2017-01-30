@@ -423,6 +423,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         const page = this._page;
         page.error = error;
         page.content = null;
+        this._toc.rootItems = [];
         this.setState({
             isPageLoading: false,
             isTocLoading: false
@@ -452,6 +453,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
     }
 
     private _fixPanels(): void {
+        /* istanbul ignore if */
         if (this._isUnmounted) {
             return;
         }

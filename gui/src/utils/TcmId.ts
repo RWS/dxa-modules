@@ -7,9 +7,9 @@ import { CdItemTypes, ITcmId as TcmIdModel, TaxonomyItemId } from "../interfaces
 const TCM_ID_FORMAT_REGEX = /^([^\/]+):([0-9]+)-([0-9]+)-([0-9]+)$/i;
 /**
  * Regext to parse a taxonomy id used by the taxonomy api
- * Format is t{taxonomyId}-p{pageId} or t{taxonomyId}-k{keywordId}
+ * Format is t{taxonomyId}-k{keywordId}
  */
-const TAXONOMY_ID_FORMAT_REGEX = /^t([0-9]+)-(p|k)([0-9]+)$/i;
+const TAXONOMY_ID_FORMAT_REGEX = /^t([0-9]+)-k([0-9]+)$/i;
 
 /**
  * Tcm Id helper methods
@@ -101,7 +101,7 @@ export class TcmId {
         if (typeof taxonomyItemId === "string") {
             const match = taxonomyItemId.match(TAXONOMY_ID_FORMAT_REGEX);
             if (match) {
-                return match[3];
+                return match[2];
             }
         }
         return undefined;

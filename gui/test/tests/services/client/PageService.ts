@@ -5,7 +5,7 @@ class PageServiceTests extends TestBase {
 
     public runTests(): void {
         const pageService = new PageService();
-        const publicationId = "1656863";
+        const publicationId = "1961702";
 
         describe(`Page service tests.`, (): void => {
 

@@ -5,6 +5,7 @@ import { PublicationContent } from "components/container/PublicationContent";
 import { Toc } from "components/presentation/Toc";
 import { Page } from "components/presentation/Page";
 import { ITaxonomy } from "interfaces/Taxonomy";
+import { IPage } from "interfaces/Page";
 import { ActivityIndicator, TreeView, ValidationMessage } from "sdl-controls-react-wrappers";
 import { TestBase } from "sdl-models";
 import { PageService } from "test/mocks/services/PageService";
@@ -196,6 +197,7 @@ class PublicationContentComponent extends TestBase {
                 // Wait for the tree view to select the first node
                 // Treeview uses debouncing for node selection so a timeout is required
                 setTimeout((): void => {
+                    debugger;
                     // tslint:disable-next-line:no-any
                     const activityIndicators = TestUtils.scryRenderedComponentsWithType(publicationContent, ActivityIndicator as any);
                     expect(activityIndicators.length).toBe(0, "Activity indicator should not be rendered.");
@@ -235,14 +237,27 @@ class PublicationContentComponent extends TestBase {
                     url: "1",
                     hasChildNodes: false
                 };
+                const firstPage: IPage = {
+                    content: "Page 1",
+                    id: "1",
+                    title: "First page!",
+                    sitemapIds: ["1"]
+                };
                 const second: ITaxonomy = {
                     id: "2",
                     title: "Second page!",
                     url: "2",
                     hasChildNodes: false
                 };
+                const secondPage: IPage = {
+                    content: "Page 2",
+                    id: "2",
+                    title: "Second page!",
+                    sitemapIds: ["2"]
+                };
 
                 services.taxonomyService.setMockDataToc(null, [first, second]);
+                services.pageService.setMockDataPage(null, firstPage);
                 let publicationContent = this._renderComponent(target, first.url);
 
                 const assert = (item: ITaxonomy, ready: () => void): void => {
@@ -258,6 +273,7 @@ class PublicationContentComponent extends TestBase {
                 };
 
                 assert(first, (): void => {
+                    services.pageService.setMockDataPage(null, secondPage);
                     publicationContent = this._renderComponent(target, second.url);
                     assert(second, done);
                 });
