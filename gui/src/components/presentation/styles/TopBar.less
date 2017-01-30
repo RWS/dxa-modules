@@ -79,15 +79,17 @@
 }
 
 @media screen and (max-width: @screenSm) {
-    .sdl-dita-delivery-app-nav-open {
-        overflow: hidden;
 
-        .sdl-dita-delivery-topbar {
-            .sdl-dita-delivery-nav-mask {
-                opacity: .5;
+    .sdl-dita-delivery-app-nav {
+        &.open {
+            overflow: hidden;
+            .sdl-dita-delivery-topbar {
+                .sdl-dita-delivery-nav-mask {
+                    opacity: .5;
+                    display: block;
+                }
             }
         }
-    }
 
     .sdl-dita-delivery-topbar {
         header {

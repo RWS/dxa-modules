@@ -35,7 +35,7 @@ class Server extends TestBase {
                 };
                 const app = ReactDOMServer.renderToStaticMarkup(<App history={hashHistory} services={services} />);
                 const expected = ReactDOMServer.renderToStaticMarkup((
-                    <div className="sdl-dita-delivery-app">
+                    <div className="sdl-dita-delivery-app sdl-dita-delivery-app-nav">
                         <div className="sdl-dita-delivery-topbar">
                             <div className="sdl-dita-delivery-nav-mask"></div>
                             <header>
@@ -60,7 +60,7 @@ class Server extends TestBase {
                                 <div className="sdl-dita-delivery-breadcrumbs">
                                     <ul>
                                         <li>
-                                            <span title="Home" className="home">Home</span><span className="separator"></span>
+                                            <a className="home" title="Home" href="#/home">Home</a><span className="separator"></span>
                                         </li>
                                         <li>
                                             <a title="" href="#/123"></a><span className="separator"></span>

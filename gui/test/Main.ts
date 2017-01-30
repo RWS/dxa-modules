@@ -5,6 +5,7 @@ import "sdl-controls-react-wrappers/dist/stylesheets/main";
 import "test/tests/components/container/AppComponent";
 import "test/tests/components/container/HomeComponent";
 import "test/tests/components/container/PublicationContentComponent";
+import "test/tests/components/container/PublicationsListComponent";
 import "test/tests/components/presentation/BreadcrumbsComponent";
 import "test/tests/components/presentation/ContentNavigationComponent";
 import "test/tests/components/presentation/NavigationMenuComponent";
