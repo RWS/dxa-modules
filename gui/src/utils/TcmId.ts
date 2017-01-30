@@ -52,11 +52,11 @@ export class TcmId {
                 if (match[4] === CdItemTypes.Category.toString()) {
                     return `t${taxonomyItemId}`;
                 }
-                return `t${taxonomyItemId}-p${match[3]}`;
+                return `t${taxonomyItemId}-k${match[3]}`;
             }
             const isNumber = !isNaN(TcmId.parseInt(id));
             if (isNumber) {
-                return `t${taxonomyItemId}-p${id}`;
+                return `t${taxonomyItemId}-k${id}`;
             }
         } else {
             return `t${taxonomyItemId}`;

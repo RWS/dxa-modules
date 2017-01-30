@@ -62,7 +62,8 @@ export class Page extends LoadableObject {
         this._page = {
             id: page.Id,
             title: pageTitle,
-            content: pageBody
+            content: pageBody,
+            sitemapIds: page.Meta["tocnaventries.generated.value"]
         } as IPage;
 
         super._processLoadResult(result, webRequest);

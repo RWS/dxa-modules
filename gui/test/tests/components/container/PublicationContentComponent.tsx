@@ -83,7 +83,8 @@ class PublicationContentComponent extends TestBase {
                 services.pageService.setMockDataPage(null, {
                     id: "12345",
                     content: pageContent,
-                    title: "Title!"
+                    title: "Title!",
+                    sitemapIds: null
                 });
 
                 const publicationContent = this._renderComponent(target, "12345");
@@ -214,7 +215,8 @@ class PublicationContentComponent extends TestBase {
                 services.pageService.setMockDataPage(null, {
                     id: "12345",
                     content: "<div/>",
-                    title: "Title!"
+                    title: "Title!",
+                    sitemapIds: null
                 });
                 const publicationContent = this._renderComponent(target, "123");
 

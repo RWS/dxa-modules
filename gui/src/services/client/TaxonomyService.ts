@@ -88,15 +88,15 @@ export class TaxonomyService implements ITaxonomyService {
      * Get the full path for a sitemap item within a sitemap
      *
      * @param {string} publicationId Publication Id
-     * @param {string} pageId The page id
+     * @param {string} sitemapId The sitemap id
      * @returns {Promise<ITaxonomy[]>} Promise to return the full path
      *
      * @memberOf DataStoreClient
      */
-    public getSitemapPath(publicationId: string, pageId: string): Promise<ITaxonomy[]> {
-        const navigationLinks = this.getNavigationLinksModel(publicationId, pageId);
+    public getSitemapPath(publicationId: string, sitemapId: string): Promise<ITaxonomy[]> {
+        const navigationLinks = this.getNavigationLinksModel(publicationId, sitemapId);
         if (!navigationLinks) {
-            return Promise.reject(localization.formatMessage("error.path.not.found", [pageId, publicationId]));
+            return Promise.reject(localization.formatMessage("error.path.not.found", [sitemapId, publicationId]));
         }
 
         return new Promise((resolve: (path?: ITaxonomy[]) => void, reject: (error: string | null) => void) => {
