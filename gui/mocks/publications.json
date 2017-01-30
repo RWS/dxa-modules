@@ -535,5 +535,63 @@
       "READ-ACCESS.logical.element": null,
       "conditionset.generated.value": ""
     }
+  },
+  {
+    "Id": "1849903",
+    "Title": "בירה",
+    "Meta": {
+      "ishlogicalref.object.id": 1849899,
+      "ishversionref.object.id": 1849901,
+      "ishlngref.object.id": 1849903,
+      "ishref.object.value": "GUID-244F3FD2-930C-4C44-80B4-8BE461DBF28A",
+      "ishtype.object.value": "ISHPublication",
+      "FTITLE.logical.value": "בירה",
+      "FDESCRIPTION.logical.value": null,
+      "FUSERGROUP.logical.value": null,
+      "VERSION.version.value": "1",
+      "FREQUESTEDLANGUAGES.version.value": [
+        "iw"
+      ],
+      "FCHANGES.version.value": null,
+      "FISHPUBSOURCELANGUAGES.version.value": [
+        "iw"
+      ],
+      "FISHBASELINE.version.value": "בירה-v1-GUID-244F3FD2-930C-4C44-80B4-8BE461DBF28A-2017/01/26 03:31:35",
+      "FISHMASTERREF.version.value": "GUID-1A0D920E-C3DD-4337-86FB-440048B8BD29",
+      "FISHRESOURCES.version.value": null,
+      "FISHREQUIREDRESOLUTIONS.version.value": "Low",
+      "CREATED-ON.version.value": "2017-01-26T08:31:35Z",
+      "MODIFIED-ON.version.value": "2017-01-26T08:32:04Z",
+      "FMAPID.lng.value": "GUID-244F3FD2-930C-4C44-80B4-8BE461DBF28A",
+      "FPUBINCLUDECOMMENTS.lng.value": "No",
+      "FPUBINCLUDEMETADATA.lng.value": "No",
+      "FPUBWATERMARK.lng.value": "No",
+      "MODIFIED-ON.lng.value": "2017-01-26T08:32:40Z",
+      "FSDLXPPPDFINCLFRONTMAT.lng.value": "No",
+      "FSDLXPPPDFINCLINDEX.lng.value": "No",
+      "FSDLXPPPDFINCLTOC.lng.value": "No",
+      "FSDLXPPPDFINCLPRINTMARKS.lng.value": "No",
+      "FISHPUBLICATIONTYPE.logical.value": null,
+      "FISHPUBREVIEWENDDATE.lng.value": null,
+      "FISHFALLBACKLNGDEFAULT.lng.value": [
+        "iw"
+      ],
+      "FISHFALLBACKLNGIMAGES.lng.value": [
+        "iw"
+      ],
+      "FISHFALLBACKLNGRESOURCES.lng.value": [
+        "iw"
+      ],
+      "FUSERGROUP.logical.element": null,
+      "READ-ACCESS.logical.element": null,
+      "FISHDITADLVRREMOTESTATUS.lng.element": null,
+      "topologyuris.generated.value": [
+        "https://www.kcwebdevora12.com",
+        "https://www.kcwebdevora12.be"
+      ],
+      "publicationtitle.generated.value": "בירה",
+      "conditionsused.generated.value": null,
+      "conditionset.generated.value": null
+    }
   }
 ]
