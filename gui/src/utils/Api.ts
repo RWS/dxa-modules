@@ -65,8 +65,7 @@ export class Api {
         if (mocksEnabled) {
             return path.getAbsolutePath(`gui/mocks/publications.json`);
         } else {
-            // TODO: use real end point
-            return path.getAbsolutePath(`gui/mocks/publications.json`);
+            return path.getAbsolutePath(`api/publications`);
         }
     }
 
