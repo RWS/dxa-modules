@@ -206,7 +206,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
 
         if (pageId) {
             // Set the current active path for the tree
-            this._getActiveSitemapPath(pageId, this._getRootItems.bind(this));
+            this._getActiveSitemapPath(pageId, () => this._getRootItems());
             // Load the page
             pageService.getPageInfo(publicationId, pageId).then(
                 this._onPageContentRetrieved.bind(this),
@@ -342,7 +342,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                             } }
                             onSelectionChanged={this._onTocSelectionChanged.bind(this)}
                             error={tocError}
-                            loadRoot={this._getRootItems.bind(this)}
+                            loadRoot={() => this._getRootItems() }
                             >
                             <span className="separator" />
                         </Toc>
