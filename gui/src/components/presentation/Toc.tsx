@@ -63,11 +63,11 @@ const TaxonomyType = {
 /**
  * Function that generates unique value every time it's called.
  */
-const getUniqueTaxonomyId = (function (count: number): () => string {
+const getUniqueTaxonomyId = function (count: number): () => string {
     return function(): string {
         return `taxonomy-${count++}`;
     };
-}(0));
+}(0);
 
 /**
  * Table of contents
