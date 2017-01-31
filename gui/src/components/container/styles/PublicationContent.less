@@ -1,5 +1,6 @@
 @import (reference) "../../../theming/styles.less";
 @import (reference) "../../presentation/styles/TopBar.less";
+@import (reference) "../../presentation/styles/Error.less";
 
 @tocWidth: 300px;
 @contentNavWidth: 210px;
@@ -115,7 +116,7 @@
             }
 
             @media screen and (min-width: @screenSm) {
-                margin: 34px 10px 34px 310px;
+                margin: 34px 10px 34px @tocWidth+10;
             }
         }
     }
@@ -124,8 +125,8 @@
         margin: 76px auto;
 
         @media screen and (min-width: (1+@screenLg)) {
-            width: 845px;
-            max-width: 845px;
+            width: @errorWidth;
+            max-width: @errorWidth;
         }
 
         @media screen and (max-width: @screenLg) {

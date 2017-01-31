@@ -38,7 +38,7 @@ export interface IErrorProps {
  * @param {IErrorProps} props
  * @returns {JSX.Element}
  */
-export const Error = (props: IErrorProps) => {
+export const Error: React.StatelessComponent<IErrorProps> = (props: IErrorProps): JSX.Element => {
     const messages = props.messages.map((value, index) => <p key={index}>{value}</p>);
 
     return (
