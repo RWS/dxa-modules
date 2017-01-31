@@ -48,6 +48,27 @@ interface ITreeViewNode extends IBaseTreeViewNode {
     taxonomy: ITaxonomy;
 }
 
+interface ITaxonomyNodeOptions {
+    id?: string;
+    dataType?: string;
+    parentNode?: ITreeViewNode | null;
+    load?: (node: ITreeViewNode, callback: (nodes: ITreeViewNode[]) => void) => void;
+}
+
+const TaxonomyType = {
+    TOPIC: "topic",
+    DUMMY: ""
+};
+
+/**
+ * Function that generates unique value every time it's called.
+ */
+const getUniqueTaxonomyId = (function (count: number): () => string {
+    return function(): string {
+        return `taxonomy-${count++}`;
+    };
+}(0));
+
 /**
  * Table of contents
  */
@@ -166,7 +187,7 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
 
     private _getIndent(parentNode: ITreeViewNode): string {
         const { element, depth } = parentNode;
-        const indent: number = parseInt(element.style.textIndent || "0px", 10) / depth;
+        const indent: number = element.style.textIndent ? parseInt(element.style.textIndent, 10) / depth : 0;
         return `${indent * (depth + 1)}px`;
     }
 
@@ -200,39 +221,49 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
     }
 
     private _createEmptyTreeViewNode(parentNode: ITreeViewNode): ITreeViewNode[] {
-        const nodes: ITreeViewNode[] = [];
-        const taxonomy: ITaxonomy = {
+        const emptyTaxonomy: ITaxonomy = {
             title: "",
             hasChildNodes: false
         };
 
-        const newNode = this._createNode(taxonomy, "", parentNode, () => {});
-        nodes.push(newNode);
-        return nodes;
+        return [this._createTaxonomyNode(emptyTaxonomy, {
+            parentNode,
+            dataType: TaxonomyType.DUMMY
+        })];
     }
 
     private _convertToTreeViewNodes(taxonomies: ITaxonomy[], parentNode: ITreeViewNode | null = null): ITreeViewNode[] {
-        const nodes: ITreeViewNode[] = taxonomies.map((taxonomy, index) => {
-            return this._createNode(taxonomy, "TOPIC", parentNode, this._loadChildNodes.bind(this), index);
+        return taxonomies.map((taxonomy) => {
+            return this._createTaxonomyNode(taxonomy, {
+                parentNode,
+                load: this._loadChildNodes.bind(this)
+            });
         });
-
-        return nodes;
     }
 
-    private _createNode(taxonomy: ITaxonomy, dataType: string, parentNode: ITreeViewNode | null = null, load: () => void, optId?: number): ITreeViewNode {
-        let treeViewNode = TreeViewControl.prototype.createNodeFromObject({
-            id: taxonomy.id || `${optId}`,
+    /**
+     * This method is just a wrapper for TreeViewControl.prototype.createNode,
+     * just because we don't want to write this long list of arguments every time.
+     */
+    private _createTaxonomyNode(taxonomy: ITaxonomy, {
+            dataType = TaxonomyType.TOPIC,
+            parentNode = null,
+            load = () => {}
+        }: ITaxonomyNodeOptions = {}
+    ): ITreeViewNode {
+        const taxonomyNode = TreeViewControl.prototype.createNodeFromObject({
+            id: taxonomy.id || getUniqueTaxonomyId(),
             name: taxonomy.title,
+            isLeafNode: !taxonomy.hasChildNodes,
             dataType: dataType,
             parent: parentNode,
             children: null,
-            isLeafNode: !taxonomy.hasChildNodes,
             load: load,
             isSelectable: true
         }) as ITreeViewNode;
-        treeViewNode.taxonomy = taxonomy;
+        taxonomyNode.taxonomy = taxonomy;
 
-        return treeViewNode;
+        return taxonomyNode;
     }
 
     private _onSelectionChanged(nodes: ITreeViewNode[]): void {
