@@ -351,7 +351,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                         }
                     } }
                     url={pageId ?
-                        Url.getPageUrl(publicationId, pageId, publicationTitle, pageTitle || (selectedTocItem && selectedTocItem.title) || ""):
+                        Url.getPageUrl(publicationId, pageId, publicationTitle, pageTitle || (selectedTocItem && selectedTocItem.title) || "") :
                         Url.getPublicationUrl(publicationId, publicationTitle)}
                     // Wait for the selected toc item to be set to set the anchor
                     // This is needed to make sure components on top are rendered first (eg bread crumbs)
