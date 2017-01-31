@@ -307,7 +307,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
 
                     const offsetTop = (domNode.parentNode === domNode.offsetParent) ? domNode.offsetTop : 0;
                     setTimeout((): void => {
-                        var topPos = (header.offsetTop + offsetTop) - (scrollOffset || 0);
+                        const topPos = (header.offsetTop + offsetTop) - (scrollOffset || 0);
                         window.scrollTo(0, topPos);
                     }, 0);
                 }
