@@ -1,9 +1,10 @@
 import * as React from "react";
 import { Promise } from "es6-promise";
 import { ITaxonomy } from "interfaces/Taxonomy";
-import { ActivityIndicator, TreeView, ValidationMessage } from "sdl-controls-react-wrappers";
-import { TreeView as TreeViewControl, ITreeViewNode as IBaseTreeViewNode, ValidationMessageType } from "sdl-controls";
+import { ActivityIndicator, TreeView } from "sdl-controls-react-wrappers";
+import { TreeView as TreeViewControl, ITreeViewNode as IBaseTreeViewNode } from "sdl-controls";
 import { IAppContext } from "components/container/App";
+import { ErrorToc } from "components/presentation/ErrorToc";
 
 import "components/presentation/styles/Toc";
 import "components/controls/styles/TreeView";
@@ -41,6 +42,11 @@ export interface ITocProps {
      * @type {string}
      */
     error?: string;
+    /**
+     * Load Toc root items
+     *
+     */
+    loadRoot: () => void;
 }
 
 interface ITreeViewNode extends IBaseTreeViewNode {
@@ -95,10 +101,13 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
         const rootNodes = this._convertToTreeViewNodes(props.rootItems || []);
         const firstRootNode = rootNodes.length > 0 ? rootNodes[0] : null;
         const { formatMessage } = this.context.services.localizationService;
+        const _retryHandler = (): void => {
+            props.loadRoot();
+        };
 
         return (
             <nav className={"sdl-dita-delivery-toc"}>
-                {error ? <ValidationMessage messageType={ValidationMessageType.Error} message={error} /> : null}
+                {error ? <ErrorToc message={formatMessage(error)} onRetry={_retryHandler} /> : null}
                 {
                     props.rootItems ?
                         <TreeView

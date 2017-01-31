@@ -200,47 +200,19 @@ export class PublicationContent extends React.Component<IPublicationContentProps
      * Invoked once, both on the client and server, immediately before the initial rendering occurs.
      */
     public componentWillMount(): void {
-        const { services } = this.context;
         const { publicationId, pageIdOrPublicationTitle} = this.props.params;
         const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
         const { publicationService, pageService } = this.context.services;
 
-        const getRootItems = (path?: string[]): void => {
-            // Get the data for the Toc
-            services.taxonomyService.getSitemapRoot(publicationId).then(
-                items => {
-                    /* istanbul ignore else */
-                    if (!this._isUnmounted) {
-                        this._toc.rootItems = items;
-                        this.setState({
-                            activeTocItemPath: path,
-                            isTocLoading: false,
-                            isTocExpanding: typeof path === "undefined" ? false : true
-                        });
-                    }
-                },
-                error => {
-                    /* istanbul ignore else */
-                    if (!this._isUnmounted) {
-                        this._toc.error = error;
-                        this.setState({
-                            isTocLoading: false,
-                            isPageLoading: false,
-                            isTocExpanding: false
-                        });
-                    }
-                });
-        };
-
         if (pageId) {
             // Set the current active path for the tree
-            this._getActiveSitemapPath(pageId, getRootItems);
+            this._getActiveSitemapPath(pageId, this._getRootItems.bind(this));
             // Load the page
             pageService.getPageInfo(publicationId, pageId).then(
                 this._onPageContentRetrieved.bind(this),
                 this._onPageContentRetrievFailed.bind(this));
         } else {
-            getRootItems();
+            this._getRootItems();
         }
 
         // Get publication title
@@ -370,6 +342,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                             } }
                             onSelectionChanged={this._onTocSelectionChanged.bind(this)}
                             error={tocError}
+                            loadRoot={this._getRootItems.bind(this)}
                             >
                             <span className="separator" />
                         </Toc>
@@ -473,6 +446,36 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                 /* istanbul ignore else */
                 if (!this._isUnmounted) {
                     done(path.map(item => item.id || "") || []);
+                }
+            },
+            error => {
+                /* istanbul ignore else */
+                if (!this._isUnmounted) {
+                    this._toc.error = error;
+                    this.setState({
+                        isTocLoading: false,
+                        isPageLoading: false,
+                        isTocExpanding: false
+                    });
+                }
+            });
+    }
+
+    private _getRootItems(path?: string[]): void {
+        const { services } = this.context;
+        const { publicationId } = this.props.params;
+        // Get the data for the Toc
+        services.taxonomyService.getSitemapRoot(publicationId).then(
+            items => {
+                /* istanbul ignore else */
+                if (!this._isUnmounted) {
+                    this._toc.rootItems = items;
+                    this._toc.error = undefined;
+                    this.setState({
+                        activeTocItemPath: path,
+                        isTocLoading: false,
+                        isTocExpanding: typeof path === "undefined" ? false : true
+                    });
                 }
             },
             error => {

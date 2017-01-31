@@ -40,7 +40,8 @@ class TocComponent extends TestBase {
             beforeEach(() => {
                 const props: ITocProps = {
                     loadChildItems: loadChildItems,
-                    rootItems: rootItems
+                    rootItems: rootItems,
+                    loadRoot: () => {}
                 };
                 toc = this._renderComponent(props, target);
             });
