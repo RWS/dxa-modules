@@ -41,7 +41,11 @@ class TocComponent extends TestBase {
                 const props: ITocProps = {
                     loadChildItems: loadChildItems,
                     rootItems: rootItems,
-                    onRetry: () => {}
+                    onRetry: () => {
+                        toc.setState({
+                            error: null
+                        });
+                    }
                 };
                 toc = this._renderComponent(props, target);
             });
@@ -79,6 +83,24 @@ class TocComponent extends TestBase {
                     expect(nodes.item(1).textContent).toBe("Child1");
                     done();
                 }, 0);
+            });
+
+            it("correct error component rendering", (done: () => void): void => {
+                toc.setState({
+                    error: "Oops, error!"
+                });
+
+                const element = document.querySelector(".sdl-dita-delivery-error-toc");
+                expect(element).not.toBeNull();
+
+                const message = element.querySelector(".sdl-dita-delivery-error-toc-message");
+                expect(message.textContent).toEqual("mock-Oops, error!");
+
+                element.querySelector("button").click();
+
+                const element2 = document.querySelector(".sdl-dita-delivery-error-toc");
+                expect(element2).toBeNull();
+                done();
             });
         });
 
