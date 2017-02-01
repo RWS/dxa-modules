@@ -1,0 +1,17 @@
+{
+  "Id": "t1-k4",
+  "Title": "De telefoon",
+  "Url": "/1881665/164233/publication-mp330/de-telefoon",
+  "IsAbstract": false,
+  "HasChildNodes": true,
+  "Items": [
+    {
+      "Id": "t1-k10",
+      "Title": "General Packet Radio Service (GPRS)",
+      "Url": "/1881665/164173/publication-mp330/general-packet-radio-service--gprs-",
+      "IsAbstract": false,
+      "HasChildNodes": false,
+      "Items": []
+    }
+  ]
+}

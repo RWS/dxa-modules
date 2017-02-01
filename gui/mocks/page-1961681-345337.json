@@ -1,0 +1,25 @@
+{
+  "Id": "345337",
+  "Meta": {
+    "tocnaventries.generated.value": [
+      "ish:1961681-2-1024"
+    ]
+  },
+  "Regions": [
+    {
+      "Entities": [
+        {
+          "Id": "345337",
+          "topicTitle": "McAfee Virtual Technician",
+          "topicBody": {
+            "Fragments": [
+              {
+                "Html": "\n      \n      \t\n      <h1 class=\"title topictitle1\" id=\"MVT-42007CDB0V025Z__GUID-9E632403-9ED9-4F75-97E4-0BD1FC0C67B8\" xmlns=\"http://www.w3.org/1999/xhtml\">McAfee Virtual Technician</h1>\n      \n      \t\n      <div class=\"body conbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \t\t\n         <p class=\"p\">\n            \t\t\tThis\n            guide provides information on how to use McAfee Virtual Technician (MVT)\n            to check your computer for problems that might occur with your installed\n            McAfee products. MVT checks your computer to see if the installed McAfee\n            product(s) are working properly and are using the latest DATs. MVT helps\n            you in resolving any McAfee product deviations that may have occurred since\n            you have installed the product.\n         </p>\n         \n         \t\n      </div>\n      \n      \n   "
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

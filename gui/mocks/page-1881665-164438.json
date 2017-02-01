@@ -1,0 +1,25 @@
+{
+  "Id": "164438",
+  "Meta": {
+    "tocnaventries.generated.value": [
+      "ish:1881665-9-1024"
+    ]
+  },
+  "Regions": [
+    {
+      "Entities": [
+        {
+          "Id": "164438",
+          "topicTitle": "Screensaver",
+          "topicBody": {
+            "Fragments": [
+              {
+                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-ECE240B0-00BD-4371-AB26-E5AA627FF527__GUID-26F149AC-433E-4440-892A-E356163E548A\" xmlns=\"http://www.w3.org/1999/xhtml\">Screensaver</h1>\n      \n      \n      \n      <div class=\"body conbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">De screensaver, een digitale klok, wordt automatisch geactiveerd om energie te besparen in de standby-modus.</p>\n         \n         \n         <p class=\"p\">De screensaver wordt geactiveerd wanneer gedurende bepaalde tijd geen telefoonfunctie wordt gebruikt. Druk op een willekeurige\n            toets om de screensaver uit te schakelen. De screensaver wordt ook uitgeschakeld als de telefoon zich buiten het bereik van\n            het netwerk bevindt.\n         </p>\n         \n         \n         <p class=\"p\">Door de screensaver worden alle afbeeldingen en tekst die normaal in de standbymodus worden weergegeven, verborgen.</p>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Hoofdonderwerp:</strong> <a class=\"link\" href=\"/1881665/164233/publication-mp330/de-telefoon\">De telefoon</a></div>\n            \n         </div>\n         \n      </div>\n   "
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
