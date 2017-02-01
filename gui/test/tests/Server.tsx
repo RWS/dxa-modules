@@ -54,7 +54,7 @@ class Server extends TestBase {
                                     <div className="search-button"></div>
                                 </div>
                             </div>
-                            <div className="sdl-dita-delivery-page"><span><div></div></span>
+                            <div className="sdl-dita-delivery-page" style={{ overflow: "hidden" }}><span><div></div></span>
                                 <div className="sdl-dita-delivery-navigation-menu">
                                     <nav className="sdl-dita-delivery-toc"><span><div></div></span><span className="separator"></span></nav>
                                 </div>
