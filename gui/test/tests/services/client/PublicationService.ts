@@ -55,7 +55,7 @@ class PublicationServiceTests extends TestBase {
                 publicationService.getPublications().then(publications => {
                     expect(publications).toBeDefined();
                     if (publications) {
-                        expect(publications.length).toBe(7);
+                        expect(publications.length).toBe(8);
                         expect(publications[1].title).toBe("Publication MP330");
                         expect(spy).not.toHaveBeenCalled();
                     }
