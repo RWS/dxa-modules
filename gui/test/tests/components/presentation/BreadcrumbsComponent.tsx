@@ -10,6 +10,7 @@ import { Url } from "utils/Url";
 import { TcmId } from "utils/TcmId";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 import { TestBase } from "sdl-models";
+import { TaxonomyItemId } from "interfaces/TcmId";
 
 interface IProps {
     params: {
@@ -18,22 +19,22 @@ interface IProps {
     };
 }
 
-const taxnomyId = "5";
+const taxonomyItemId: TaxonomyItemId = TaxonomyItemId.Toc;
 
 const itemsPath: ITaxonomy[] = [
     {
-        id: TcmId.getTaxonomyItemId(taxnomyId, "1"),
+        id: TcmId.getTaxonomyItemId(taxonomyItemId, "1"),
         title: "Root",
         hasChildNodes: false
     },
     {
-        id: TcmId.getTaxonomyItemId(taxnomyId, "2"),
+        id: TcmId.getTaxonomyItemId(taxonomyItemId, "2"),
         title: "Child",
         url: Url.getPageUrl("pub-id", "2"),
         hasChildNodes: false
     },
     {
-        id: TcmId.getTaxonomyItemId(taxnomyId, "3"),
+        id: TcmId.getTaxonomyItemId(taxonomyItemId, "3"),
         title: "Selected",
         url: Url.getPageUrl("pub-id", "3"),
         hasChildNodes: false
@@ -180,8 +181,8 @@ class BreadcrumbsComponent extends TestBase {
             if (!pageId) {
                 return null;
             }
-            const taxonomyItemId = TcmId.getTaxonomyItemId(taxnomyId, pageId);
-            return itemsPath.filter(item => item.id === taxonomyItemId)[0];
+            const taxonomyId = TcmId.getTaxonomyItemId(taxonomyItemId, pageId);
+            return itemsPath.filter(item => item.id === taxonomyId)[0];
         };
 
         const comp = ReactDOM.render(

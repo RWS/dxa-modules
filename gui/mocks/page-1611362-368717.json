@@ -1,0 +1,25 @@
+{
+  "Id": "368717",
+  "Meta": {
+    "tocnaventries.generated.value": [
+      "ish:1611362-26-1024"
+    ]
+  },
+  "Regions": [
+    {
+      "Entities": [
+        {
+          "Id": "368717",
+          "topicTitle": "リファレンス・タイトルを入力してください",
+          "topicBody": {
+            "Fragments": [
+              {
+                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-B0269E33-91E8-4331-817A-20CDC6311A8E__GUID-24578517-7C3E-47B3-B72B-FE392823C76A\" xmlns=\"http://www.w3.org/1999/xhtml\">リファレンス・タイトルを入力してください</h1>\n      \n      \n      \n      <div class=\"body refbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">簡単な説明を入力してください (任意)</p>\n         \n         \n         <div class=\"section\" id=\"GUID-B0269E33-91E8-4331-817A-20CDC6311A8E__GUID-BFD52E0A-EA82-4009-A082-BAEAA27D9FFE\">実際の情報をこのセクションに入力してください (任意)</div>\n         \n         \n         <div class=\"example\" id=\"GUID-B0269E33-91E8-4331-817A-20CDC6311A8E__GUID-F7FAF862-33A3-4C16-BD47-18127AE5A8E2\">実例を入力してください (任意)</div>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>親トピック:</strong> <a class=\"link\" title=\"簡単な説明を入力して下さい(任意)\" href=\"/1611362/368625/ls40-el/%e3%83%88%e3%83%92%e3%83%83%e3%82%af%e3%83%bb%e3%82%bf%e3%82%a4%e3%83%88%e3%83%ab%e3%82%92%e5%85%a5%e5%8a%9b%e3%81%97%e3%81%a6%e4%b8%8b%e3%81%95%e3%81%84\">トピック・タイトルを入力して下さい</a></div>\n            \n         </div>\n         \n      </div>\n   "
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

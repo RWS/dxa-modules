@@ -1,0 +1,17 @@
+{
+  "Id": "t1-k21",
+  "Title": "Berichten",
+  "Url": "/1881665/164481/publication-mp330/berichten",
+  "IsAbstract": false,
+  "HasChildNodes": true,
+  "Items": [
+    {
+      "Id": "t1-k22",
+      "Title": "Tekstberichten",
+      "Url": "/1881665/164462/publication-mp330/tekstberichten",
+      "IsAbstract": false,
+      "HasChildNodes": false,
+      "Items": []
+    }
+  ]
+}

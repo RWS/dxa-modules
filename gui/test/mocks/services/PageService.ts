@@ -15,7 +15,8 @@ export class PageService implements IPageService {
         info: {
             id: "12345",
             content: "<span>Page content!</span>",
-            title: "Page title!"
+            title: "Page title!",
+            sitemapIds: null
         }
     };
 
