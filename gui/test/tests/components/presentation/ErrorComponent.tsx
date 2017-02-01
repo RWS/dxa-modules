@@ -12,8 +12,8 @@ class ErrorComponent extends TestBase {
 
         describe(`Error component tests.`, (): void => {
             const target = super.createTargetElement();
-            const onClickHome = jasmine.createSpy('homeSpy');
-            const onClickReturn = jasmine.createSpy('returnSpy');
+            const onClickHome = jasmine.createSpy("homeSpy");
+            const onClickReturn = jasmine.createSpy("returnSpy");
             const title: string = "Error Title";
             const messages: string[] = ["Something went wrong", "What do you want to do?"];
             const buttons = <div>
@@ -55,7 +55,7 @@ class ErrorComponent extends TestBase {
             it("Check button clicks", (done: () => void): void => {
                 this._renderComponent(props, target);
                 const errorElement = document.querySelector(".sdl-dita-delivery-error");
-                const errorButtons = errorElement.querySelectorAll(".sdl-button") as NodeListOf<HTMLButtonElement>;;
+                const errorButtons = errorElement.querySelectorAll(".sdl-button") as NodeListOf<HTMLButtonElement>;
 
                 errorButtons.item(0).click();
                 errorButtons.item(1).click();
