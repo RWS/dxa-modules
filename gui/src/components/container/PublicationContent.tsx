@@ -206,13 +206,13 @@ export class PublicationContent extends React.Component<IPublicationContentProps
 
         if (pageId) {
             // Set the current active path for the tree
-            this._getActiveSitemapPath(pageId, () => this._getRootItems());
+            this._getActiveSitemapPath(pageId, () => this._loadRootItems());
             // Load the page
             pageService.getPageInfo(publicationId, pageId).then(
                 this._onPageContentRetrieved.bind(this),
                 this._onPageContentRetrievFailed.bind(this));
         } else {
-            this._getRootItems();
+            this._loadRootItems();
         }
 
         // Get publication title
@@ -342,7 +342,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                             } }
                             onSelectionChanged={this._onTocSelectionChanged.bind(this)}
                             error={tocError}
-                            loadRoot={() => this._getRootItems() }
+                            onRetry={() => this._loadRootItems() }
                             >
                             <span className="separator" />
                         </Toc>
@@ -461,7 +461,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
             });
     }
 
-    private _getRootItems(path?: string[]): void {
+    private _loadRootItems(path?: string[]): void {
         const { services } = this.context;
         const { publicationId } = this.props.params;
         // Get the data for the Toc

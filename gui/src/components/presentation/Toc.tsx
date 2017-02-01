@@ -46,7 +46,7 @@ export interface ITocProps {
      * Load Toc root items
      *
      */
-    loadRoot: () => void;
+    onRetry: () => void;
 }
 
 interface ITreeViewNode extends IBaseTreeViewNode {
@@ -102,7 +102,7 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
         const firstRootNode = rootNodes.length > 0 ? rootNodes[0] : null;
         const { formatMessage } = this.context.services.localizationService;
         const _retryHandler = (): void => {
-            props.loadRoot();
+            props.onRetry();
         };
 
         return (

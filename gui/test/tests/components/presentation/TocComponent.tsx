@@ -41,7 +41,7 @@ class TocComponent extends TestBase {
                 const props: ITocProps = {
                     loadChildItems: loadChildItems,
                     rootItems: rootItems,
-                    loadRoot: () => {}
+                    onRetry: () => {}
                 };
                 toc = this._renderComponent(props, target);
             });
