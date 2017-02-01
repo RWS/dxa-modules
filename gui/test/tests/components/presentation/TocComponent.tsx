@@ -4,7 +4,7 @@ import * as TestUtils from "react-addons-test-utils";
 import { Toc, ITocProps } from "components/presentation/Toc";
 import { ITaxonomy } from "interfaces/Taxonomy";
 import { Promise } from "es6-promise";
-import { TreeView, ValidationMessage } from "sdl-controls-react-wrappers";
+import { TreeView } from "sdl-controls-react-wrappers";
 import { TestBase } from "sdl-models";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 
@@ -80,27 +80,6 @@ class TocComponent extends TestBase {
                     done();
                 }, 0);
             });
-
-            it("shows an error when node failes to expand", (done: () => void): void => {
-                // tslint:disable-next-line:no-any
-                const treeView = TestUtils.findRenderedComponentWithType(toc, TreeView as any);
-                expect(treeView).not.toBeNull();
-                const domNode = ReactDOM.findDOMNode(treeView);
-                (domNode.querySelectorAll(".expand-collapse").item(1) as HTMLDivElement).click();
-                // Use a timeout to allow the DataStore to return a promise with the data
-                setTimeout((): void => {
-                    const nodes = domNode.querySelectorAll(".content");
-                    expect(nodes.length).toBe(2);
-                    // Check if validation message is shown
-                    // tslint:disable-next-line:no-any
-                    const validationMessage = TestUtils.findRenderedComponentWithType(toc, ValidationMessage as any);
-                    expect(validationMessage).not.toBeNull();
-                    const validationMessageNode = ReactDOM.findDOMNode(validationMessage);
-                    expect(validationMessageNode.querySelector("label").textContent).toBe("Failed to load child nodes");
-                    done();
-                }, 0);
-            });
-
         });
 
     }
