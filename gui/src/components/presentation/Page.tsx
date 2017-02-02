@@ -302,10 +302,18 @@ export class Page extends React.Component<IPageProps, IPageState> {
                 const header = Html.getHeaderElement(pageContentNode, anchor);
                 if (header) {
                     this._lastPageAnchor = anchor;
+
+                    let offsetTop = 0;
+                    let currentNode = header;
+                    while (currentNode && currentNode.offsetTop) {
+                        offsetTop += currentNode.offsetTop;
+                        currentNode = currentNode.offsetParent as HTMLElement;
+                    }
+
                     // TODO: make sure images are loaded before jumping to the anchor
                     // Use a timeout to make sure all components are rendered
                     setTimeout((): void => {
-                        var topPos = (header.offsetTop + domNode.offsetTop) - (scrollOffset || 0);
+                        const topPos = offsetTop - (scrollOffset || 0);
                         window.scrollTo(0, topPos);
                     }, 0);
                 }
