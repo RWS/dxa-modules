@@ -1,4 +1,4 @@
-import { CdItemTypes, ITcmId as TcmIdModel } from "../interfaces/TcmId";
+import { CdItemTypes, ITcmId as TcmIdModel, TaxonomyItemId } from "../interfaces/TcmId";
 
 /**
  * Regex to parse tcm uri
@@ -7,9 +7,9 @@ import { CdItemTypes, ITcmId as TcmIdModel } from "../interfaces/TcmId";
 const TCM_ID_FORMAT_REGEX = /^([^\/]+):([0-9]+)-([0-9]+)-([0-9]+)$/i;
 /**
  * Regext to parse a taxonomy id used by the taxonomy api
- * Format is t{taxonomyId}-p{pageId} or t{taxonomyId}-k{keywordId}
+ * Format is t{taxonomyId}-k{keywordId}
  */
-const TAXONOMY_ID_FORMAT_REGEX = /^t([0-9]+)-(p|k)([0-9]+)$/i;
+const TAXONOMY_ID_FORMAT_REGEX = /^t([0-9]+)-k([0-9]+)$/i;
 
 /**
  * Tcm Id helper methods
@@ -39,23 +39,27 @@ export class TcmId {
      * Get the taxonomy item id
      *
      * @static
-     * @param {string} taxonomyId Taxonomy id
-     * @param {string} id Tcm id
+     * @param {TaxonomyItemId} taxonomyItemId Taxonomy item id
+     * @param {string} [id] Tcm id
      * @returns {string | undefined}
      *
      * @memberOf TcmUri
      */
-    public static getTaxonomyItemId(taxonomyId: string, id: string): string | undefined {
-        const match = id.match(TCM_ID_FORMAT_REGEX);
-        if (match) {
-            if (match[4] === CdItemTypes.Category.toString()) {
-                return `t${taxonomyId}`;
+    public static getTaxonomyItemId(taxonomyItemId: TaxonomyItemId, id?: string): string | undefined {
+        if (id) {
+            const match = id.match(TCM_ID_FORMAT_REGEX);
+            if (match) {
+                if (match[4] === CdItemTypes.Category.toString()) {
+                    return `t${taxonomyItemId}`;
+                }
+                return `t${taxonomyItemId}-k${match[3]}`;
             }
-            return `t${taxonomyId}-p${match[3]}`;
-        }
-        const isNumber = !isNaN(TcmId.parseInt(id));
-        if (isNumber) {
-            return `t${taxonomyId}-p${id}`;
+            const isNumber = !isNaN(TcmId.parseInt(id));
+            if (isNumber) {
+                return `t${taxonomyItemId}-k${id}`;
+            }
+        } else {
+            return `t${taxonomyItemId}`;
         }
         return undefined;
     }
@@ -97,7 +101,7 @@ export class TcmId {
         if (typeof taxonomyItemId === "string") {
             const match = taxonomyItemId.match(TAXONOMY_ID_FORMAT_REGEX);
             if (match) {
-                return match[3];
+                return match[2];
             }
         }
         return undefined;

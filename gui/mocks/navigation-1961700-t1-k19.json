@@ -1,0 +1,26 @@
+{
+  "Id": "t1-k16",
+  "Title": "Anruffunktionen",
+  "Url": "/1961700/164466/publication-mp330/anruffunktionen",
+  "IsAbstract": false,
+  "HasChildNodes": true,
+  "Items": [
+    {
+      "Id": "t1-k17",
+      "Title": "Anrufen",
+      "Url": "/1961700/164210/publication-mp330/anrufen",
+      "IsAbstract": false,
+      "HasChildNodes": true,
+      "Items": [
+        {
+          "Id": "t1-k19",
+          "Title": "Sprachanwahl",
+          "Url": "/1961700/164329/publication-mp330/sprachanwahl",
+          "IsAbstract": false,
+          "HasChildNodes": false,
+          "Items": []
+        }
+      ]
+    }
+  ]
+}

@@ -22,12 +22,14 @@ export class Api {
      * @memberOf Api
      */
     public static getNavigationLinksUrl(publicationId: string, taxonomyId: string): string {
+        const encodedPubId = encodeURIComponent(publicationId);
+        const encodedTaxonomyId = encodeURIComponent(taxonomyId);
         /* istanbul ignore else */
         if (mocksEnabled) {
-            return path.getAbsolutePath(`gui/mocks/navigation-${publicationId}-${taxonomyId}.json`);
+            return path.getAbsolutePath(`gui/mocks/navigation-${encodedPubId}-${encodedTaxonomyId}.json`);
         } else {
             // TODO: use real end point
-            return path.getAbsolutePath(`gui/mocks/navigation-${publicationId}-${taxonomyId}.json`);
+            return path.getAbsolutePath(`gui/mocks/navigation-${encodedPubId}-${encodedTaxonomyId}.json`);
         }
     }
 
@@ -43,11 +45,13 @@ export class Api {
      * @memberOf Api
      */
     public static getPageUrl(publicationId: string, pageId: string): string {
+        const encodedPubId = encodeURIComponent(publicationId);
+        const encodedPageId = encodeURIComponent(pageId);
         /* istanbul ignore else */
         if (mocksEnabled) {
-            return path.getAbsolutePath(`gui/mocks/page-${publicationId}-${pageId}.json`);
+            return path.getAbsolutePath(`gui/mocks/page-${encodedPubId}-${encodedPageId}.json`);
         } else {
-            return path.getAbsolutePath(`api/page/${publicationId}/${pageId}`);
+            return path.getAbsolutePath(`api/page/${encodedPubId}/${encodedPageId}`);
         }
     }
 
@@ -75,18 +79,19 @@ export class Api {
      *
      * @static
      * @param {string} publicationId Publication id
-     * @param {string} parentId Parent id
+     * @param {string} sitemapItemId Sitemap item id
      * @returns {string}
      *
      * @memberOf Api
      */
-    public static getTocItemsUrl(publicationId: string, parentId: string): string {
+    public static getTocItemsUrl(publicationId: string, sitemapItemId: string): string {
+        const encodedPubId = encodeURIComponent(publicationId);
+        const encodedSitemapItemId = encodeURIComponent(sitemapItemId);
         /* istanbul ignore else */
         if (mocksEnabled) {
-            return path.getAbsolutePath(`gui/mocks/toc-${publicationId}-${parentId}.json`);
+            return path.getAbsolutePath(`gui/mocks/toc-${encodedPubId}-${encodedSitemapItemId}.json`);
         } else {
-            // TODO: use real end point
-            return path.getAbsolutePath(`gui/mocks/toc-${publicationId}-${parentId}.json`);
+            return path.getAbsolutePath(`api/toc/${encodedPubId}/${encodedSitemapItemId}`);
         }
     }
 

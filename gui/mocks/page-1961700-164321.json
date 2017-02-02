@@ -1,0 +1,25 @@
+{
+  "Id": "164321",
+  "Meta": {
+    "tocnaventries.generated.value": [
+      "ish:1961700-24-1024"
+    ]
+  },
+  "Regions": [
+    {
+      "Entities": [
+        {
+          "Id": "164321",
+          "topicTitle": "Sprachmailbox",
+          "topicBody": {
+            "Fragments": [
+              {
+                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-9000493F-2721-4498-9391-BCCC66CE50F1__GUID-033FCA5C-B977-4125-AFBF-C05C6899B3F3\" xmlns=\"http://www.w3.org/1999/xhtml\">Sprachmailbox</h1>\n      \n      \n      \n      <div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">Die <samp class=\"ph msgph\">Sprachmailbox</samp> ist ein Netzdienst, für den Sie sich unter Umständen anmelden müssen.\n         </p>\n         \n         \n         <div class=\"p\">Drücken Sie <samp class=\"ph msgph\">Menü</samp>, und wählen Sie <samp class=\"ph msgph\">Mitteilungen</samp> und anschließend <samp class=\"ph msgph\">Sprachmitteil.</samp>. Wählen Sie\n            <ul class=\"ul\" id=\"GUID-9000493F-2721-4498-9391-BCCC66CE50F1__GUID-576FE370-486C-4BE5-B0B7-7C1F62A769A7\">\n               \n               <li class=\"li\">Sprachmitteilungen abhören um die <samp class=\"ph msgph\">Sprachmailbox</samp> unter der im Menü <samp class=\"ph msgph\">Sprachmailboxnummer</samp> gespeicherten Telefonnummer anzurufen.\n               </li>\n               \n               \n               <li class=\"li\"><samp class=\"ph msgph\">Sprachmailboxnummer</samp>, um die <samp class=\"ph msgph\">Sprachmailboxnummer</samp> einzugeben, zu suchen oder zu bearbeiten. Drücken Sie <samp class=\"ph msgph\">OK</samp>, um sie zu speichern.\n               </li>\n               \n               \n            </ul>\n            \n         </div>\n         \n         \n         <div class=\"section\" id=\"GUID-9000493F-2721-4498-9391-BCCC66CE50F1__GUID-00EF02A4-DFD2-472E-BD7C-E83040074119\">\n            \n            \n            <p class=\"p\">Sofern vom Netz unterstützt, wird das Symbol <img class=\"image\" src=\"/app/gui/mocks/bin/1961700-163939-16.gif\" /> angezeigt, wenn Sie eine neue Sprachmitteilung erhalten haben. Drücken Sie <samp class=\"ph msgph\">Anhören</samp>,um die Nummer für die Sprachmailbox anzurufen.\n            </p>\n            \n            \n            <div class=\"note tip\" id=\"GUID-9000493F-2721-4498-9391-BCCC66CE50F1__GUID-112349E4-62E0-44E7-8C2B-1BD1E1956A9B\"><span class=\"tiptitle\">Tipp:</span> Wenn Sie die Taste <img class=\"image\" src=\"/app/gui/mocks/bin/1961700-345827-16.gif\" /> gedrückt halten, wird die Nummer Ihrer <samp class=\"ph msgph\">Sprachmailboxnummer</samp> gewählt.\n            </div>\n            \n            \n         </div>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Übergeordnetes Thema:</strong> <a class=\"link\" href=\"/1961700/164477/publication-mp330/mitteilungen\">Mitteilungen</a></div>\n            \n         </div>\n         \n      </div>\n   "
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

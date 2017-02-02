@@ -1,0 +1,25 @@
+{
+  "Id": "164341",
+  "Meta": {
+    "tocnaventries.generated.value": [
+      "ish:1881665-33-1024"
+    ]
+  },
+  "Regions": [
+    {
+      "Entities": [
+        {
+          "Id": "164341",
+          "topicTitle": "Naar muziek luisteren",
+          "topicBody": {
+            "Fragments": [
+              {
+                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-91A4F586-8735-490D-8BA4-0ECCB335CA90__GUID-B7F39E13-C355-45D3-92FA-3AD781077F2A\" xmlns=\"http://www.w3.org/1999/xhtml\">Naar muziek luisteren</h1>\n      \n      \n      <div class=\"body taskbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         \n         <ol class=\"ol steps\" id=\"GUID-91A4F586-8735-490D-8BA4-0ECCB335CA90__GUID-6DA44DA8-9622-4781-B4D1-F52A55B48DDD\">\n            <li class=\"li step stepexpand\">\n               <span class=\"ph cmd\">Druk op de muziektoets en selecteer <samp class=\"ph msgph\">Music Player</samp>.</span>\n               \n            </li>\n            \n            <li class=\"li step stepexpand\">\n               <span class=\"ph cmd\">Met de bladertoets in 4 richtingen kunt u gebruikmaken van de muziekfuncties</span>\n               \n               <div class=\"itemgroup info\">\n                  \n                  <ul class=\"ul\" id=\"GUID-91A4F586-8735-490D-8BA4-0ECCB335CA90__GUID-EE18BDB3-CE00-4AD1-AA44-9A5C52F9CE28\">\n                     \n                     <li class=\"li\">Om de huidige opname snel vooruit of achteruit te spoelen druk <img class=\"image\" src=\"/app/gui/mocks/bin/1881665-345947-16.gif\" /> of <img class=\"image\" src=\"/app/gui/mocks/bin/1881665-345751-16.gif\" />, respektievelijk.\n                     </li>\n                     \n                     \n                     <li class=\"li\">Om naar de volgende of vorige opname in de lijst met opnames te gaan, druk <img class=\"image\" src=\"/app/gui/mocks/bin/1881665-345947-16.gif\" /> of <img class=\"image\" src=\"/app/gui/mocks/bin/1881665-345751-16.gif\" />, respektievelijk.\n                     </li>\n                     \n                     \n                     <li class=\"li\">Om het afspelen te stoppen, druk <img class=\"image\" src=\"/app/gui/mocks/bin/1881665-345883-16.gif\" />.\n                     </li>\n                     \n                     \n                     <li class=\"li\">Om het afspelen te stoppen, druk <img class=\"image\" src=\"/app/gui/mocks/bin/1881665-345923-16.gif\" />.\n                     </li>\n                     \n                     \n                  </ul>\n                  \n                  \n               </div>\n               \n            </li>\n            \n            <li class=\"li step stepexpand\">\n               <span class=\"ph cmd\">Om de speler uit te schakelen, druk op de Muziek toets en kies<samp class=\"ph msgph\">Muziek uitsch.</samp></span>\n               \n            </li>\n            \n         </ol>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Hoofdonderwerp:</strong> <a class=\"link\" title=\"U kunt naar MP3- en AAC-muziekbestanden op de geheugenkaart in de telefoon luisteren met behulp van de Music player of U kunt naar de Radio luisteren.\" href=\"/1881665/164373/publication-mp330/muziekfuncties\">Muziekfuncties</a></div>\n            \n         </div>\n         \n      </div>\n   "
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

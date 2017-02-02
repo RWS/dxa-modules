@@ -53,12 +53,12 @@ export class TaxonomyService implements ITaxonomyService {
      * Get the full path for a sitemap item within a sitemap
      *
      * @param {string} publicationId Publication Id
-     * @param {string} pageId The page id
+     * @param {string} sitemapId The sitemap id
      * @returns {Promise<ITaxonomy[]>} Promise to return the full path
      *
      * @memberOf DataStoreServer
      */
-    public getSitemapPath(publicationId: string, pageId: string): Promise<ITaxonomy[]> {
+    public getSitemapPath(publicationId: string, sitemapId: string): Promise<ITaxonomy[]> {
         return new Promise((resolve: (path?: ITaxonomy[]) => void, reject: (error: string | null) => void) => {
             //
         });
