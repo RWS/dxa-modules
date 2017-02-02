@@ -1,14 +1,14 @@
 {
   "Id": "t1-k26",
   "Title": "Games",
-  "Url": "/1420746/164239/publication-mp330/games",
+  "Url": "/1420746/164239/user-guide/games",
   "IsAbstract": false,
   "HasChildNodes": true,
   "Items": [
     {
       "Id": "t1-k27",
       "Title": "Launching a game",
-      "Url": "/1420746/164379/publication-mp330/launching-a-game",
+      "Url": "/1420746/164379/user-guide/launching-a-game",
       "IsAbstract": false,
       "HasChildNodes": false,
       "Items": []

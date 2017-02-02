@@ -1,14 +1,14 @@
 {
   "Id": "t1-k21",
   "Title": "Messages",
-  "Url": "/1961702/164479/publication-mp330/messages",
+  "Url": "/1961702/164479/user-guide/messages",
   "IsAbstract": false,
   "HasChildNodes": true,
   "Items": [
     {
       "Id": "t1-k25",
       "Title": "Deleting messages",
-      "Url": "/1961702/164452/publication-mp330/deleting-messages",
+      "Url": "/1961702/164452/user-guide/deleting-messages",
       "IsAbstract": false,
       "HasChildNodes": false,
       "Items": []

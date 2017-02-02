@@ -1,14 +1,14 @@
 {
   "Id": "t1-k26",
   "Title": "Games",
-  "Url": "/1420746/164239/publication-mp330/games",
+  "Url": "/1420746/164239/user-guide/games",
   "IsAbstract": false,
   "HasChildNodes": true,
   "Items": [
     {
       "Id": "t1-k28",
       "Title": "Game Downloads",
-      "Url": "/1420746/164179/publication-mp330/game-downloads",
+      "Url": "/1420746/164179/user-guide/game-downloads",
       "IsAbstract": false,
       "HasChildNodes": false,
       "Items": []

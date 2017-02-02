@@ -2,7 +2,7 @@
   {
     "Id": "t1-k2",
     "Title": "Penguins Overview",
-    "Url": "/1601084/516062/penguin-publication/penguins-overview",
+    "Url": "/1601084/516062/penguin-guide/penguins-overview",
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -10,7 +10,7 @@
   {
     "Id": "t1-k17",
     "Title": "Types of penguins",
-    "Url": "/1601084/516000/penguin-publication/types-of-penguins",
+    "Url": "/1601084/516000/penguin-guide/types-of-penguins",
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -18,7 +18,7 @@
   {
     "Id": "t1-k40",
     "Title": "Crafts and Activities",
-    "Url": "/1601084/516310/penguin-publication/crafts-and-activities",
+    "Url": "/1601084/516310/penguin-guide/crafts-and-activities",
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -26,7 +26,7 @@
   {
     "Id": "t1-k44",
     "Title": "Other birds",
-    "Url": "/1601084/515736/penguin-publication/other-birds",
+    "Url": "/1601084/515736/penguin-guide/other-birds",
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -34,7 +34,7 @@
   {
     "Id": "t1-k87",
     "Title": "Appendices",
-    "Url": "/1601084/516024/penguin-publication/appendices",
+    "Url": "/1601084/516024/penguin-guide/appendices",
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []

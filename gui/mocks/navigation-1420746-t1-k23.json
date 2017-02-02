@@ -1,14 +1,14 @@
 {
   "Id": "t1-k21",
   "Title": "Messages",
-  "Url": "/1420746/164479/publication-mp330/messages",
+  "Url": "/1420746/164479/user-guide/messages",
   "IsAbstract": false,
   "HasChildNodes": true,
   "Items": [
     {
       "Id": "t1-k23",
       "Title": "Multimedia messages",
-      "Url": "/1420746/164390/publication-mp330/multimedia-messages",
+      "Url": "/1420746/164390/user-guide/multimedia-messages",
       "IsAbstract": false,
       "HasChildNodes": false,
       "Items": []

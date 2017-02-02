@@ -1,7 +1,7 @@
 {
   "Id": "t1-k44",
   "Title": "Other birds",
-  "Url": "/1601084/515736/penguin-publication/other-birds",
+  "Url": "/1601084/515736/penguin-guide/other-birds",
   "IsAbstract": false,
   "HasChildNodes": true,
   "Items": [
@@ -15,14 +15,14 @@
         {
           "Id": "t1-k66",
           "Title": "Petrels",
-          "Url": "/1601084/515791/penguin-publication/petrels",
+          "Url": "/1601084/515791/penguin-guide/petrels",
           "IsAbstract": false,
           "HasChildNodes": true,
           "Items": [
             {
               "Id": "t1-k67",
               "Title": "Antarctic Petrel (Thalassoica antarctica)",
-              "Url": "/1601084/515616/penguin-publication/antarctic-petrel--thalassoica-antarctica-",
+              "Url": "/1601084/515616/penguin-guide/antarctic-petrel--thalassoica-antarctica-",
               "IsAbstract": false,
               "HasChildNodes": false,
               "Items": []

@@ -1,14 +1,14 @@
 {
   "Id": "t1-k4",
   "Title": "De telefoon",
-  "Url": "/1881665/164233/publication-mp330/de-telefoon",
+  "Url": "/1881665/164233/user-guide/de-telefoon",
   "IsAbstract": false,
   "HasChildNodes": true,
   "Items": [
     {
       "Id": "t1-k11",
       "Title": "Bluetooth-verbinding",
-      "Url": "/1881665/164311/publication-mp330/bluetooth-verbinding",
+      "Url": "/1881665/164311/user-guide/bluetooth-verbinding",
       "IsAbstract": false,
       "HasChildNodes": false,
       "Items": []
