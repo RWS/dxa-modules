@@ -1,5 +1,6 @@
 @import (reference) "../../../theming/styles.less";
 @import (reference) "../../presentation/styles/TopBar.less";
+@import (reference) "../../presentation/styles/Error.less";
 
 @tocWidth: 300px;
 @contentNavWidth: 210px;
@@ -104,6 +105,32 @@
             margin-left: @tocWidth;
             margin-right: @contentNavWidth;
             min-height: 100px;
+        }
+
+        .sdl-dita-delivery-error {
+            width: auto;
+            max-width: none;
+
+            @media screen and (max-width: @screenSm) {
+                margin: 34px 10px;
+            }
+
+            @media screen and (min-width: @screenSm) {
+                margin: 34px 10px 34px @tocWidth+10;
+            }
+        }
+    }
+
+    .sdl-dita-delivery-error {
+        margin: 76px auto;
+
+        @media screen and (min-width: (1+@screenLg)) {
+            width: @errorWidth;
+            max-width: @errorWidth;
+        }
+
+        @media screen and (max-width: @screenLg) {
+            width: 80%;
         }
     }
 }
