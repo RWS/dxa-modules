@@ -11,6 +11,7 @@ namespace Sdl.Web.Modules.Core.Models
     [SemanticEntity(EntityName = "Article", Prefix = "a", Vocab = CoreVocabulary)]
     [SemanticEntity(EntityName = "NewsArticle", Prefix = "na", Vocab = CoreVocabulary)]
     [SemanticEntity(EntityName = "Place", Prefix = "p", Vocab = CoreVocabulary)]
+    [SemanticEntity(EntityName = "StandardMetadata", Prefix = "m", Vocab = CoreVocabulary)]
     [Serializable]
     public class Teaser : EntityModel, ISyndicationFeedItemProvider
     {
@@ -37,6 +38,7 @@ namespace Sdl.Web.Modules.Core.Models
         [SemanticProperty("a:introText")]
         [SemanticProperty("content")]
         [SemanticProperty("description")]
+        [SemanticProperty("m:description")]
         public RichText Text { get; set; }
 
         [SemanticProperty("dateCreated")]

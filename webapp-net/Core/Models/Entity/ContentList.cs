@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 namespace Sdl.Web.Modules.Core.Models
 {
     [SemanticEntity(Vocab = SchemaOrgVocabulary, EntityName = "ItemList", Prefix = "s", Public = true)]
+    [SemanticEntity(EntityName = "ContentQuery")]
     [Serializable]
     public class ContentList<T> : DynamicList where T : EntityModel
     {
