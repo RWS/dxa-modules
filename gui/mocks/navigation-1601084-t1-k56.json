@@ -1,7 +1,7 @@
 {
   "Id": "t1-k44",
   "Title": "Other birds",
-  "Url": "/1601084/515736/penguin-publication/other-birds",
+  "Url": "/1601084/515736/penguin-guide/other-birds",
   "IsAbstract": false,
   "HasChildNodes": true,
   "Items": [
@@ -15,7 +15,7 @@
         {
           "Id": "t1-k56",
           "Title": "Herons",
-          "Url": "/1601084/515903/penguin-publication/herons",
+          "Url": "/1601084/515903/penguin-guide/herons",
           "IsAbstract": false,
           "HasChildNodes": false,
           "Items": []

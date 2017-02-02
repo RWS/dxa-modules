@@ -1,0 +1,25 @@
+{
+  "Id": "1845641",
+  "Meta": {
+    "tocnaventries.generated.value": [
+      "ish:1849903-8-1024"
+    ]
+  },
+  "Regions": [
+    {
+      "Entities": [
+        {
+          "Id": "1845641",
+          "topicTitle": "לקריאה נוספת",
+          "topicBody": {
+            "Fragments": [
+              {
+                "Html": "\n      \n      \t\n      <h1 class=\"title topictitle1\" dir=\"rtl\" id=\"GUID-69027808-048E-4D83-AFDD-4B97E87DF02C__GUID-2E066F37-028F-4594-BF00-8CB65993620F\" xmlns=\"http://www.w3.org/1999/xhtml\">לקריאה נוספת</h1>\n      \n      \t\n      <div dir=\"rtl\" class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \t\t\n         <ul dir=\"rtl\" class=\"ul\" id=\"GUID-69027808-048E-4D83-AFDD-4B97E87DF02C__GUID-3976860B-17A0-4A6F-86A7-7426C0F9FB8E\">\n            \t\t\t\n            <li dir=\"rtl\" class=\"li\"><a class=\"xref\" href=\"HTTPS://HE.WIKIPEDIA.html\">שלמה פפירבלט</a>, <strong class=\"ph b\">עולם הבירה</strong>, הוצאת אריה ניר, 2005.\n            </li>\n            \n            \t\t\n         </ul>\n         \n         \t\n      </div>\n      \n      \n   "
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

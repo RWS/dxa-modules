@@ -1,14 +1,14 @@
 {
   "Id": "t1-k4",
   "Title": "Ihr Telefon",
-  "Url": "/1961700/164229/publication-mp330/ihr-telefon",
+  "Url": "/1961700/164229/user-guide/ihr-telefon",
   "IsAbstract": false,
   "HasChildNodes": true,
   "Items": [
     {
       "Id": "t1-k7",
       "Title": "Ausgangsanzeige",
-      "Url": "/1961700/164185/publication-mp330/ausgangsanzeige",
+      "Url": "/1961700/164185/user-guide/ausgangsanzeige",
       "IsAbstract": false,
       "HasChildNodes": false,
       "Items": []

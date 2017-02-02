@@ -1,14 +1,14 @@
 {
   "Id": "t1-k2",
   "Title": "Penguins Overview",
-  "Url": "/1601084/516062/penguin-publication/penguins-overview",
+  "Url": "/1601084/516062/penguin-guide/penguins-overview",
   "IsAbstract": false,
   "HasChildNodes": true,
   "Items": [
     {
       "Id": "t1-k15",
       "Title": "Behavior",
-      "Url": "/1601084/516036/penguin-publication/behavior",
+      "Url": "/1601084/516036/penguin-guide/behavior",
       "IsAbstract": false,
       "HasChildNodes": true,
       "Items": []

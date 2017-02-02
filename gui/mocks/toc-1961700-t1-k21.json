@@ -2,7 +2,7 @@
   {
     "Id": "t1-k22",
     "Title": "Kurzmitteilungen",
-    "Url": "/1961700/164458/publication-mp330/kurzmitteilungen",
+    "Url": "/1961700/164458/user-guide/kurzmitteilungen",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -10,7 +10,7 @@
   {
     "Id": "t1-k23",
     "Title": "Multimedia-Mitteilungen",
-    "Url": "/1961700/164388/publication-mp330/multimedia-mitteilungen",
+    "Url": "/1961700/164388/user-guide/multimedia-mitteilungen",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -18,7 +18,7 @@
   {
     "Id": "t1-k24",
     "Title": "Sprachmailbox",
-    "Url": "/1961700/164321/publication-mp330/sprachmailbox",
+    "Url": "/1961700/164321/user-guide/sprachmailbox",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -26,7 +26,7 @@
   {
     "Id": "t1-k25",
     "Title": "Löschen von Mitteilungen",
-    "Url": "/1961700/164450/publication-mp330/loschen-von-mitteilungen",
+    "Url": "/1961700/164450/user-guide/loschen-von-mitteilungen",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []

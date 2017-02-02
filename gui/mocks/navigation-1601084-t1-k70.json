@@ -1,7 +1,7 @@
 {
   "Id": "t1-k44",
   "Title": "Other birds",
-  "Url": "/1601084/515736/penguin-publication/other-birds",
+  "Url": "/1601084/515736/penguin-guide/other-birds",
   "IsAbstract": false,
   "HasChildNodes": true,
   "Items": [
@@ -15,14 +15,14 @@
         {
           "Id": "t1-k66",
           "Title": "Petrels",
-          "Url": "/1601084/515791/penguin-publication/petrels",
+          "Url": "/1601084/515791/penguin-guide/petrels",
           "IsAbstract": false,
           "HasChildNodes": true,
           "Items": [
             {
               "Id": "t1-k70",
               "Title": "Wilson's Storm Petrel (Oceanites oceanicus)",
-              "Url": "/1601084/515610/penguin-publication/wilson-s-storm-petrel--oceanites-oceanicus-",
+              "Url": "/1601084/515610/penguin-guide/wilson-s-storm-petrel--oceanites-oceanicus-",
               "IsAbstract": false,
               "HasChildNodes": false,
               "Items": []

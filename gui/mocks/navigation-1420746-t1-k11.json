@@ -1,14 +1,14 @@
 {
   "Id": "t1-k4",
   "Title": "Your phone",
-  "Url": "/1420746/164231/publication-mp330/your-phone",
+  "Url": "/1420746/164231/user-guide/your-phone",
   "IsAbstract": false,
   "HasChildNodes": true,
   "Items": [
     {
       "Id": "t1-k11",
       "Title": "Bluetooth Connection",
-      "Url": "/1420746/164309/publication-mp330/bluetooth-connection",
+      "Url": "/1420746/164309/user-guide/bluetooth-connection",
       "IsAbstract": false,
       "HasChildNodes": false,
       "Items": []

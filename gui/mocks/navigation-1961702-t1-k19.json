@@ -1,21 +1,21 @@
 {
   "Id": "t1-k16",
   "Title": "Call functions",
-  "Url": "/1961702/164468/publication-mp330/call-functions",
+  "Url": "/1961702/164468/user-guide/call-functions",
   "IsAbstract": false,
   "HasChildNodes": true,
   "Items": [
     {
       "Id": "t1-k17",
       "Title": "Making a call",
-      "Url": "/1961702/164212/publication-mp330/making-a-call",
+      "Url": "/1961702/164212/user-guide/making-a-call",
       "IsAbstract": false,
       "HasChildNodes": true,
       "Items": [
         {
           "Id": "t1-k19",
           "Title": "Voice dialling",
-          "Url": "/1961702/164331/publication-mp330/voice-dialling",
+          "Url": "/1961702/164331/user-guide/voice-dialling",
           "IsAbstract": false,
           "HasChildNodes": false,
           "Items": []

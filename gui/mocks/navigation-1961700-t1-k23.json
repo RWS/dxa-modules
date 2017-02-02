@@ -1,14 +1,14 @@
 {
   "Id": "t1-k21",
   "Title": "Mitteilungen",
-  "Url": "/1961700/164477/publication-mp330/mitteilungen",
+  "Url": "/1961700/164477/user-guide/mitteilungen",
   "IsAbstract": false,
   "HasChildNodes": true,
   "Items": [
     {
       "Id": "t1-k23",
       "Title": "Multimedia-Mitteilungen",
-      "Url": "/1961700/164388/publication-mp330/multimedia-mitteilungen",
+      "Url": "/1961700/164388/user-guide/multimedia-mitteilungen",
       "IsAbstract": false,
       "HasChildNodes": false,
       "Items": []
