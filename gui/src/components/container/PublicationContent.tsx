@@ -22,7 +22,7 @@ const FIXED_NAV_CLASS = "fixed-nav";
 /**
  * Sum of top and bottom margin of a panel
  */
-const PANEL_MARGIN = 20;
+const PANEL_MARGIN = 64;
 
 /**
  * PublicationContent component props params

@@ -4,7 +4,11 @@
     @outerBorderSize: 4px;
     @indentSize: 26px;
     overflow: auto;
-    margin: 10px 0;
+    margin: 32px 0;
+
+    &:empty {
+        display: none;
+    }
 
     .generate-indents (@i) when (@i > 0) {
         &.indent-@{i} {
@@ -19,7 +23,7 @@
 
     ul {
         margin-top: 0;
-        padding: 0 10px 0 0;
+        padding: 0 15px 0 0;
 
         li {
             background: fade(@accentColor2, 5%);
