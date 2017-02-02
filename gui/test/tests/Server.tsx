@@ -43,7 +43,6 @@ class Server extends TestBase {
                                 <div className="sdl-dita-delivery-topbar-logo" title="SDL">
                                     <a href="#/"></a>
                                 </div>
-                                <div className="sdl-dita-delivery-topbar-title"><label>Documentation</label></div>
                                 <div className="sdl-dita-delivery-topbar-language"><span></span><label>English</label></div>
                                 <div className="sdl-dita-delivery-topbar-user"><span></span></div>
                             </header>
@@ -54,7 +53,7 @@ class Server extends TestBase {
                                     <div className="search-button"></div>
                                 </div>
                             </div>
-                            <div className="sdl-dita-delivery-page"><span><div></div></span>
+                            <div className="sdl-dita-delivery-page" style={{ overflow: "hidden" }}><span><div></div></span>
                                 <div className="sdl-dita-delivery-navigation-menu">
                                     <nav className="sdl-dita-delivery-toc"><span><div></div></span><span className="separator"></span></nav>
                                 </div>

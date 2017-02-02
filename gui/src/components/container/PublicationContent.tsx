@@ -22,7 +22,7 @@ const FIXED_NAV_CLASS = "fixed-nav";
 /**
  * Sum of top and bottom margin of a panel
  */
-const PANEL_MARGIN = 20;
+const PANEL_MARGIN = 64;
 
 /**
  * PublicationContent component props params
@@ -301,7 +301,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                         }
                     } }
                     url={pageId ?
-                        Url.getPageUrl(publicationId, pageId, publicationTitle, pageTitle) :
+                        Url.getPageUrl(publicationId, pageId, publicationTitle, pageTitle || (selectedTocItem && selectedTocItem.title) || "") :
                         Url.getPublicationUrl(publicationId, publicationTitle)}
                     // Wait for the selected toc item to be set to set the anchor
                     // This is needed to make sure components on top are rendered first (eg bread crumbs)

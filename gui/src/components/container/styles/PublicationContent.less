@@ -3,6 +3,7 @@
 
 @tocWidth: 300px;
 @contentNavWidth: 210px;
+@defaultMargin: 15px;
 
 .sdl-dita-delivery-publication-content {
 
@@ -14,7 +15,7 @@
     }
 
     .sdl-dita-delivery-page {
-        max-width: 1200px;
+        max-width: @screenXl;
         margin: 0 auto;
         position: relative;
 
@@ -25,18 +26,20 @@
             left: 0;
 
             nav.sdl-dita-delivery-toc {
+                margin-left: @defaultMargin;
+                margin-right: @defaultMargin;
 
                 > span:first-child, .sdl-treeview {
                     // Inherit max-height from toc panel, needed for scroll bar / separator using vertical space
                     max-height: inherit;
-                    width: @tocWidth - 20;
+                    width: @tocWidth - (@defaultMargin * 2);
                 }
 
                 .separator {
                     position: absolute;
                     top: 0;
                     bottom: 0;
-                    margin-left: @tocWidth;
+                    margin-left: @tocWidth - 5;
                     width: 10px;
                     box-shadow: -5px 0px 10px 0px fade(@neutralColor1, 10);
 
@@ -96,13 +99,13 @@
 
         .sdl-dita-delivery-breadcrumbs {
             padding-bottom: 15px;
-            margin-left: @tocWidth;
-            margin-right: @contentNavWidth;
+            margin-left: @tocWidth + @defaultMargin;
+            margin-right: @contentNavWidth + @defaultMargin;
         }
 
         article.page-content {
-            margin-left: @tocWidth;
-            margin-right: @contentNavWidth;
+            margin-left: @tocWidth + @defaultMargin;
+            margin-right: @contentNavWidth + @defaultMargin;
             min-height: 100px;
         }
     }
@@ -120,9 +123,9 @@
 
             nav.sdl-dita-delivery-content-navigation {
                 float: none;
-                width: ~"calc(100% - @{tocWidth} - 10px)";
-                margin-left: @tocWidth;
-                padding: 0 5px;
+                max-width: ~"calc(100% - @{tocWidth} - (@{defaultMargin} * 2))";
+                min-width: ~"calc(80% - @{tocWidth} - (@{defaultMargin} * 2))";
+                margin-left: @tocWidth + (@defaultMargin * 2);
             }
         }
     }
@@ -160,11 +163,13 @@
             }
 
             .sdl-dita-delivery-breadcrumbs {
-                padding-bottom: 15px;
+                padding-bottom: @defaultMargin;
             }
 
             nav.sdl-dita-delivery-content-navigation {
-                width: ~"calc(100% - 10px)";
+                max-width: ~"calc(100% - @{defaultMargin})";
+                width: ~"calc(100% - @{defaultMargin})";
+                margin-left: @defaultMargin;
             }
         }
     }
