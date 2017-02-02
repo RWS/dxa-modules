@@ -6,6 +6,7 @@
 @import (reference) "colors.less";
 @import (reference) "fonts.less";
 
+@headerSize: 36px;
 @h1Size: 24px;
 @h2Size: 20px;
 @h3Size: 18px;
@@ -15,6 +16,12 @@
 @anchorColor: @accentColor2;
 @paragraphColor: @neutralColor4;
 @tableBorderColor: @neutralColor5;
+
+.page-header() {
+    margin: 0 0 14px 0;
+    color: @h1Color;
+    .header-font(300, @headerSize, @headerSize);
+}
 
 .header-h1() {
     color: @h1Color;

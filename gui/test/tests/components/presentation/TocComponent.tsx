@@ -85,6 +85,21 @@ class TocComponent extends TestBase {
                 }, 0);
             });
 
+            it("shows an error when node failes to expand", (done: () => void): void => {
+                // tslint:disable-next-line:no-any
+                const treeView = TestUtils.findRenderedComponentWithType(toc, TreeView as any);
+                expect(treeView).not.toBeNull();
+                const domNode = ReactDOM.findDOMNode(treeView);
+                (domNode.querySelectorAll(".expand-collapse").item(1) as HTMLDivElement).click();
+                // Use a timeout to allow the DataStore to return a promise with the data
+                setTimeout((): void => {
+                    const node = domNode.querySelector(".sdl-dita-delivery-toc-list-fail");
+                    expect(node).not.toBeNull();
+                    expect(node.querySelector("p").textContent).toBe("mock-error.toc.items.not.found");
+                    done();
+                }, 0);
+            });
+
             it("correct error component rendering", (done: () => void): void => {
                 toc.setState({
                     error: "Oops, error!"

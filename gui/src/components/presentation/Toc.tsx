@@ -1,8 +1,9 @@
 import * as React from "react";
+import * as ReactDOM from "react-dom";
 import { Promise } from "es6-promise";
 import { ITaxonomy } from "interfaces/Taxonomy";
-import { ActivityIndicator, TreeView } from "sdl-controls-react-wrappers";
-import { TreeView as TreeViewControl, ITreeViewNode as IBaseTreeViewNode } from "sdl-controls";
+import { Button, ActivityIndicator, TreeView } from "sdl-controls-react-wrappers";
+import { TreeView as TreeViewControl, ITreeViewNode as IBaseTreeViewNode, ButtonPurpose } from "sdl-controls";
 import { IAppContext } from "components/container/App";
 import { ErrorToc } from "components/presentation/ErrorToc";
 
@@ -52,6 +53,27 @@ export interface ITocProps {
 interface ITreeViewNode extends IBaseTreeViewNode {
     taxonomy: ITaxonomy;
 }
+
+interface ITaxonomyNodeOptions {
+    id?: string;
+    dataType?: string;
+    parentNode?: ITreeViewNode | null;
+    load?: (node: ITreeViewNode, callback: (nodes: ITreeViewNode[]) => void) => void;
+}
+
+const TaxonomyType = {
+    TOPIC: "topic",
+    DUMMY: ""
+};
+
+/**
+ * Function that generates unique value every time it's called.
+ */
+const getUniqueTaxonomyId = function (count: number): () => string {
+    return function(): string {
+        return `taxonomy-${count++}`;
+    };
+}(0);
 
 /**
  * Table of contents
@@ -159,40 +181,98 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
             children => {
                 /* istanbul ignore else */
                 if (!this._isUnmounted) {
+                    this._removeRetryNode(node);
                     callback(this._convertToTreeViewNodes(children, node));
                 }
             },
             error => {
                 /* istanbul ignore else */
                 if (!this._isUnmounted) {
-                    this.setState({
-                        error: error
-                    });
-                    callback([]);
+                    callback(this._createEmptyTreeViewNode(node));
+                    this._injectRetryNode(node, callback);
                 }
             });
     }
 
-    private _convertToTreeViewNodes(taxonomies: ITaxonomy[], parentNode: ITreeViewNode | null = null): ITreeViewNode[] {
-        const nodes: ITreeViewNode[] = [];
+    private _getIndent(parentNode: ITreeViewNode): string {
+        const { element, depth } = parentNode;
+        const indent: number = element.style.textIndent ? parseInt(element.style.textIndent, 10) / depth : 0;
+        return `${indent * (depth + 1)}px`;
+    }
 
-        let count = 0;
-        for (let taxonomy of taxonomies) {
-            let newNode = TreeViewControl.prototype.createNode(
-                taxonomy.id || count.toString(),
-                taxonomy.title,
-                "TOPIC",
-                parentNode,
-                null,
-                !taxonomy.hasChildNodes,
-                this._loadChildNodes.bind(this),
-                true) as ITreeViewNode;
-            newNode.taxonomy = taxonomy;
-            nodes.push(newNode);
-            count++;
+    private _removeRetryNode(parentNode: ITreeViewNode): void {
+        const el = parentNode.element.querySelector(`ul[id="${parentNode.id}"]`);
+        if (el && el.parentElement) {
+            const parent = el.parentElement;
+            ReactDOM.unmountComponentAtNode(parent);
+            parent.remove();
         }
+    }
 
-        return nodes;
+    private _createRetryNode(parentNode: ITreeViewNode, callback: (childNodes: ITreeViewNode[]) => void): JSX.Element {
+        const { formatMessage } = this.context.services.localizationService;
+
+        const _handleClick = (): void => this._loadChildNodes(parentNode, callback);
+
+        return (
+            <ul id={parentNode.id} className="sdl-dita-delivery-toc-list-fail">
+                <li style={{ paddingLeft: this._getIndent(parentNode) }}>
+                    <p>{formatMessage("error.toc.items.not.found")}</p>
+                    <Button purpose={ButtonPurpose.CONFIRM} events={{"click": _handleClick}}>{formatMessage("control.button.retry")}</Button>
+                </li>
+            </ul>
+        );
+    }
+
+    private _injectRetryNode(parentNode: ITreeViewNode, callback: (childNodes: ITreeViewNode[]) => void): void {
+        const emptyNode = parentNode.element.getElementsByClassName("children")[0];
+        ReactDOM.render(this._createRetryNode(parentNode, callback), emptyNode);
+    }
+
+    private _createEmptyTreeViewNode(parentNode: ITreeViewNode): ITreeViewNode[] {
+        const emptyTaxonomy: ITaxonomy = {
+            title: "",
+            hasChildNodes: false
+        };
+
+        return [this._createTaxonomyNode(emptyTaxonomy, {
+            parentNode,
+            dataType: TaxonomyType.DUMMY
+        })];
+    }
+
+    private _convertToTreeViewNodes(taxonomies: ITaxonomy[], parentNode: ITreeViewNode | null = null): ITreeViewNode[] {
+        return taxonomies.map((taxonomy) => {
+            return this._createTaxonomyNode(taxonomy, {
+                parentNode,
+                load: this._loadChildNodes.bind(this)
+            });
+        });
+    }
+
+    /**
+     * This method is just a wrapper for TreeViewControl.prototype.createNode,
+     * just because we don't want to write this long list of arguments every time.
+     */
+    private _createTaxonomyNode(taxonomy: ITaxonomy, {
+            dataType = TaxonomyType.TOPIC,
+            parentNode = null,
+            load = () => {}
+        }: ITaxonomyNodeOptions = {}
+    ): ITreeViewNode {
+        const taxonomyNode = TreeViewControl.prototype.createNodeFromObject({
+            id: taxonomy.id || getUniqueTaxonomyId(),
+            name: taxonomy.title,
+            isLeafNode: !taxonomy.hasChildNodes,
+            dataType: dataType,
+            parent: parentNode,
+            children: null,
+            load: load,
+            isSelectable: true
+        }) as ITreeViewNode;
+        taxonomyNode.taxonomy = taxonomy;
+
+        return taxonomyNode;
     }
 
     private _onSelectionChanged(nodes: ITreeViewNode[]): void {

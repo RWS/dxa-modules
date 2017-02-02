@@ -7,5 +7,7 @@
   "components.searchbar.placeholder": "Search in ‘{0}’",
   "components.contentnavigation.title": "Contents",
   "error.publication.not.found": "Unable to retrieve title for publication with id {0}.",
-  "error.path.not.found": "Unable to retrieve path for sitemap item with id {0} within publication with id {1}."
+  "error.path.not.found": "Unable to retrieve path for sitemap item with id {0} within publication with id {1}.",
+  "error.toc.items.not.found": "We couldn't load child items due to server internal error",
+  "control.button.retry": "Retry"
 }
