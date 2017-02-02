@@ -1,4 +1,5 @@
 @import (reference) "../../../theming/styles.less";
+
 .sdl-dita-delivery-toc {
     margin: 10px 0;
     .sdl-treeview > ul.root {
@@ -9,5 +10,16 @@
         @media screen and (max-width: @screenSm) {
             background: none;
         }
+    }
+
+    .sdl-treeview .sdl-dita-delivery-toc-list-fail > li {
+        text-indent: initial;
+        margin-left: 8px;
+    }
+
+    .sdl-treeview .sdl-dita-delivery-toc-list-fail p {
+        margin: 0 0 8px 0;
+        color: @accentColor3;
+        font-weight: bold;
     }
 }
