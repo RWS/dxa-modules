@@ -75,7 +75,6 @@ export class Home extends React.Component<{}, IHomeState> {
                 ? " sdl-dita-delivery-app-nav" + (isNavOpen ? " open" : "")
                 : "")}>
                 <TopBar
-                    title={localizationService.formatMessage("app.productfamily")}
                     language={localizationService.formatMessage("app.language")}
                     toggleNavigationMenu={canHaveNavMenuButton && this._toggleNavigationMenu.bind(this)}
                     />
