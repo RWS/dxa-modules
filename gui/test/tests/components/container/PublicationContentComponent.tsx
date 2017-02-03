@@ -5,7 +5,7 @@ import { PublicationContent } from "components/container/PublicationContent";
 import { Toc } from "components/presentation/Toc";
 import { Page } from "components/presentation/Page";
 import { ITaxonomy } from "interfaces/Taxonomy";
-import { ActivityIndicator, TreeView, ValidationMessage } from "sdl-controls-react-wrappers";
+import { ActivityIndicator, TreeView } from "sdl-controls-react-wrappers";
 import { TestBase } from "sdl-models";
 import { PageService } from "test/mocks/services/PageService";
 import { PublicationService } from "test/mocks/services/PublicationService";
@@ -199,11 +199,14 @@ class PublicationContentComponent extends TestBase {
                     const activityIndicators = TestUtils.scryRenderedComponentsWithType(publicationContent, ActivityIndicator as any);
                     expect(activityIndicators.length).toBe(0, "Activity indicator should not be rendered.");
                     const page = TestUtils.findRenderedComponentWithType(publicationContent, Page);
-                    // tslint:disable-next-line:no-any
-                    const validationMessage = TestUtils.findRenderedComponentWithType(page, ValidationMessage as any);
-                    expect(validationMessage).not.toBeNull("Could not find validation message.");
-                    const validationMessageNode = ReactDOM.findDOMNode(validationMessage);
-                    expect(validationMessageNode && validationMessageNode.textContent).toBe("Page failed to load!");
+
+                    const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
+                    const errorElement = domNode.querySelector(".sdl-dita-delivery-error");
+                    expect(errorElement).not.toBeNull("Error dialog not found");
+                    const errorTitle = errorElement.querySelector("h1");
+                    expect(errorTitle.textContent).toEqual("mock-error.page.not.found.title");
+                    const buttons = errorElement.querySelectorAll(".sdl-dita-delivery-button-group button");
+                    expect(buttons.length).toEqual(2);
                     done();
                 }, 500);
             });

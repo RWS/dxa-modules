@@ -254,7 +254,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
             this.setState({
                 activeTocItemPath: undefined
             });
-        } else if (nextPageId !== pageId) {
+        } else if (nextPageId !== pageId || (nextPageId === pageId && this._page.error)) {
             // Set the current active path for the tree
             this._getActiveSitemapPath(nextPageId, (path) => {
                 if (!activeTocItemPath || path.join("") !== activeTocItemPath.join("")) {
@@ -423,6 +423,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
 
     private _onPageContentRetrieved(pageInfo: IPage): void {
         const page = this._page;
+        page.error = null;
         page.content = pageInfo.content;
         this.setState({
             isPageLoading: false

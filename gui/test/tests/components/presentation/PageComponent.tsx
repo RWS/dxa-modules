@@ -5,7 +5,7 @@ import { Router, Route, hashHistory } from "react-router";
 import { Page, IPageProps } from "components/presentation/Page";
 import { Url } from "utils/Url";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
-import { ActivityIndicator, ValidationMessage } from "sdl-controls-react-wrappers";
+import { ActivityIndicator } from "sdl-controls-react-wrappers";
 import { TestBase } from "sdl-models";
 
 interface IProps {
@@ -56,12 +56,14 @@ class PageComponent extends TestBase {
                     error: "Error!",
                     onNavigate: (): void => { }
                 }, target);
+                const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
 
-                // tslint:disable-next-line:no-any
-                const validationMessage = TestUtils.findRenderedComponentWithType(page, ValidationMessage as any);
-                expect(validationMessage).not.toBeNull("Could not find validation message.");
-                const validationMessageNode = ReactDOM.findDOMNode(validationMessage);
-                expect(validationMessageNode.textContent).toBe("Error!");
+                const errorElement = domNode.querySelector(".sdl-dita-delivery-error");
+                expect(errorElement).not.toBeNull("Error dialog not found");
+                const errorTitle = errorElement.querySelector("h1");
+                expect(errorTitle.textContent).toEqual("mock-error.page.not.found.title");
+                const buttons = errorElement.querySelectorAll(".sdl-dita-delivery-button-group button");
+                expect(buttons.length).toEqual(2);
             });
 
             it("can show page content info", (): void => {

@@ -6,8 +6,11 @@
   "components.breadcrumbs.home": "Home",
   "components.searchbar.placeholder": "Search in ‘{0}’",
   "components.contentnavigation.title": "Contents",
+  "error.default.message": "If you are still seeing this error, please use the links below to go to the home page or search the documentation to find what you are looking for.",
   "error.publication.not.found": "Unable to retrieve title for publication with id {0}.",
   "error.path.not.found": "Unable to retrieve path for sitemap item with id {0} within publication with id {1}.",
+  "error.page.not.found": "We are very sorry, but this page is not available on this publication. Please make sure the URL you entered is correct.",
+  "error.page.not.found.title": "Oops, something has gone wrong!",
   "error.toc.items.not.found": "We couldn't load child items due to server internal error",
   "control.button.retry": "Retry"
 }

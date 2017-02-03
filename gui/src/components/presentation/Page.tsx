@@ -3,9 +3,10 @@ import * as ReactDOM from "react-dom";
 import { Html, IHeader } from "utils/Html";
 import { Url } from "utils/Url";
 import { ContentNavigation, IContentNavigationItem } from "components/presentation/ContentNavigation";
-import { ActivityIndicator, ValidationMessage } from "sdl-controls-react-wrappers";
-import { ValidationMessageType } from "sdl-controls";
+import { ActivityIndicator, Button } from "sdl-controls-react-wrappers";
+import { ButtonPurpose } from "sdl-controls";
 import { IAppContext } from "components/container/App";
+import { Error } from "components/presentation/Error";
 
 import "components/presentation/styles/Page";
 import "dist/dita-ot/styles/commonltr";
@@ -136,7 +137,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
      * Invoked once, both on the client and server, immediately before the initial rendering occurs.
      */
     public componentWillMount(): void {
-        const { router} = this.context;
+        const { router } = this.context;
 
         if (router) {
             this._historyUnlisten = router.listen(() => {
@@ -154,18 +155,34 @@ export class Page extends React.Component<IPageProps, IPageState> {
      */
     public render(): JSX.Element {
         const props = this.props;
-        const { activeHeader } = props;
+        const { activeHeader, error, url } = props;
         const { navItems } = this.state;
         const { formatMessage } = this.context.services.localizationService;
         const activeNavItemId = activeHeader ? activeHeader.id : (navItems.length > 0 ? navItems[0].id : undefined);
+        const _goHome = (): void => props.onNavigate("/");
+        const _retryHandler = () => url && props.onNavigate(url);
+        const errorButtons = <div>
+                <Button purpose={ButtonPurpose.CONFIRM} events={{"click": _goHome}}>{formatMessage("components.breadcrumbs.home")}</Button>
+                <Button purpose={ButtonPurpose.CONFIRM} events={{"click": _retryHandler}}>{formatMessage("control.button.retry")}</Button>
+            </div>;
+        const errorTitle = formatMessage("error.page.not.found.title");
+        const errorMessages = [
+            error || formatMessage("error.page.not.found"),
+            formatMessage("error.default.message")
+        ];
 
         return (
             <div className={"sdl-dita-delivery-page"}>
                 {props.showActivityIndicator ? <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} /> : null}
-                {props.error ? <ValidationMessage messageType={ValidationMessageType.Error} message={props.error} /> : null}
                 {props.children}
                 <ContentNavigation navItems={navItems} activeNavItemId={activeNavItemId} />
                 <article>
+                    {error
+                        ? <Error
+                            title={errorTitle}
+                            messages={errorMessages}
+                            buttons={errorButtons} />
+                        : null}
                     <article className={"page-content ltr"} dangerouslySetInnerHTML={{ __html: props.content || "" }} />
                 </article>
             </div>

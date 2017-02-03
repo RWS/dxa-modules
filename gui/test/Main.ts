@@ -9,6 +9,7 @@ import "test/tests/components/container/PublicationsListComponent";
 import "test/tests/components/presentation/BreadcrumbsComponent";
 import "test/tests/components/presentation/ContentNavigationComponent";
 import "test/tests/components/presentation/ErrorComponent";
+import "test/tests/components/presentation/ErrorPageComponent";
 import "test/tests/components/presentation/NavigationMenuComponent";
 import "test/tests/components/presentation/PageComponent";
 import "test/tests/components/presentation/SearchBarComponent";
