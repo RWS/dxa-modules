@@ -1,17 +1,28 @@
-{
-  "Id": "t1-k96",
-  "Title": "トピック・タイトルを入力して下さい",
-  "Url": "/1611362/368843/ls40-el/%e3%83%88%e3%83%92%e3%83%83%e3%82%af%e3%83%bb%e3%82%bf%e3%82%a4%e3%83%88%e3%83%ab%e3%82%92%e5%85%a5%e5%8a%9b%e3%81%97%e3%81%a6%e4%b8%8b%e3%81%95%e3%81%84",
-  "IsAbstract": false,
-  "HasChildNodes": true,
-  "Items": [
-    {
-      "Id": "t1-k108",
-      "Title": "トピック・タイトルを入力して下さい",
-      "Url": "/1611362/368883/ls40-el/%e3%83%88%e3%83%92%e3%83%83%e3%82%af%e3%83%bb%e3%82%bf%e3%82%a4%e3%83%88%e3%83%ab%e3%82%92%e5%85%a5%e5%8a%9b%e3%81%97%e3%81%a6%e4%b8%8b%e3%81%95%e3%81%84",
-      "IsAbstract": false,
-      "HasChildNodes": true,
-      "Items": []
-    }
-  ]
-}
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k96",
+        "Title": "トピック・タイトルを入力して下さい",
+        "Url": "/1611362/368843/ls40-el/%e3%83%88%e3%83%92%e3%83%83%e3%82%af%e3%83%bb%e3%82%bf%e3%82%a4%e3%83%88%e3%83%ab%e3%82%92%e5%85%a5%e5%8a%9b%e3%81%97%e3%81%a6%e4%b8%8b%e3%81%95%e3%81%84",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": [
+          {
+            "Id": "t1-k108",
+            "Title": "トピック・タイトルを入力して下さい",
+            "Url": "/1611362/368883/ls40-el/%e3%83%88%e3%83%92%e3%83%83%e3%82%af%e3%83%bb%e3%82%bf%e3%82%a4%e3%83%88%e3%83%ab%e3%82%92%e5%85%a5%e5%8a%9b%e3%81%97%e3%81%a6%e4%b8%8b%e3%81%95%e3%81%84",
+            "IsAbstract": false,
+            "HasChildNodes": true,
+            "Items": []
+          }
+        ]
+      }
+    ]
+  }
+]

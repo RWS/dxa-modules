@@ -1,17 +1,28 @@
-{
-  "Id": "t1-k16",
-  "Title": "Algemene functies",
-  "Url": "/1881665/164470/user-guide/algemene-functies",
-  "IsAbstract": false,
-  "HasChildNodes": true,
-  "Items": [
-    {
-      "Id": "t1-k20",
-      "Title": "Inkomende oproepen beantwoorden of weigeren",
-      "Url": "/1881665/164197/user-guide/inkomende-oproepen-beantwoorden-of-weigeren",
-      "IsAbstract": false,
-      "HasChildNodes": false,
-      "Items": []
-    }
-  ]
-}
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k16",
+        "Title": "Algemene functies",
+        "Url": "/1881665/164470/user-guide/algemene-functies",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": [
+          {
+            "Id": "t1-k20",
+            "Title": "Inkomende oproepen beantwoorden of weigeren",
+            "Url": "/1881665/164197/user-guide/inkomende-oproepen-beantwoorden-of-weigeren",
+            "IsAbstract": false,
+            "HasChildNodes": false,
+            "Items": []
+          }
+        ]
+      }
+    ]
+  }
+]

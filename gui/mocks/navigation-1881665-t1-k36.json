@@ -1,17 +1,28 @@
-{
-  "Id": "t1-k35",
-  "Title": "Telefoonlijst",
-  "Url": "/1881665/164303/user-guide/telefoonlijst",
-  "IsAbstract": false,
-  "HasChildNodes": true,
-  "Items": [
-    {
-      "Id": "t1-k36",
-      "Title": "Namen en telefoonnummers opslaan",
-      "Url": "/1881665/164265/user-guide/namen-en-telefoonnummers-opslaan",
-      "IsAbstract": false,
-      "HasChildNodes": false,
-      "Items": []
-    }
-  ]
-}
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k35",
+        "Title": "Telefoonlijst",
+        "Url": "/1881665/164303/user-guide/telefoonlijst",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": [
+          {
+            "Id": "t1-k36",
+            "Title": "Namen en telefoonnummers opslaan",
+            "Url": "/1881665/164265/user-guide/namen-en-telefoonnummers-opslaan",
+            "IsAbstract": false,
+            "HasChildNodes": false,
+            "Items": []
+          }
+        ]
+      }
+    ]
+  }
+]

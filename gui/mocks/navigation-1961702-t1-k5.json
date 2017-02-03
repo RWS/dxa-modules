@@ -1,17 +1,28 @@
-{
-  "Id": "t1-k4",
-  "Title": "Your phone",
-  "Url": "/1961702/164231/user-guide/your-phone",
-  "IsAbstract": false,
-  "HasChildNodes": true,
-  "Items": [
-    {
-      "Id": "t1-k5",
-      "Title": "Keys overview",
-      "Url": "/1961702/164282/user-guide/keys-overview",
-      "IsAbstract": false,
-      "HasChildNodes": false,
-      "Items": []
-    }
-  ]
-}
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k4",
+        "Title": "Your phone",
+        "Url": "/1961702/164231/user-guide/your-phone",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": [
+          {
+            "Id": "t1-k5",
+            "Title": "Keys overview",
+            "Url": "/1961702/164282/user-guide/keys-overview",
+            "IsAbstract": false,
+            "HasChildNodes": false,
+            "Items": []
+          }
+        ]
+      }
+    ]
+  }
+]
