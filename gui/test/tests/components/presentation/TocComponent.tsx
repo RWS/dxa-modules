@@ -30,7 +30,14 @@ class TocComponent extends TestBase {
                     return Promise.resolve([{
                         id: "12345",
                         title: "Child1",
-                        hasChildNodes: false
+                        hasChildNodes: true,
+                        loadChildItems: (): Promise<ITaxonomy[]> => {
+                            return Promise.resolve([{
+                                id: "12345-nested",
+                                title: "NestedChild1",
+                                hasChildNodes: false
+                            }]);
+                        }
                     }]);
                 } else {
                     return Promise.reject("Failed to load child nodes");
@@ -98,6 +105,29 @@ class TocComponent extends TestBase {
                     expect(validationMessageNode.querySelector("label").textContent).toBe("Failed to load child nodes");
                     done();
                 }, 0);
+            });
+
+            it("doesn't trigger on selection change when expanding nodes", (done: () => void): void => {
+                // Load root nodes
+                // tslint:disable-next-line:no-any
+                const treeView = TestUtils.findRenderedComponentWithType(toc, TreeView as any);
+                expect(treeView).not.toBeNull();
+                const domNode = ReactDOM.findDOMNode(treeView);
+                const nodes = domNode.querySelectorAll(".content");
+                expect(nodes.length).toBe(2);
+                expect(nodes.item(0).textContent).toBe(rootItems[0].title);
+                // Reload toc and use child path
+                const activeItemPath = [rootItems[0].id || "", "12345", "12345-nested"];
+                const props: ITocProps = {
+                    loadChildItems: loadChildItems,
+                    rootItems: rootItems,
+                    activeItemPath: activeItemPath,
+                    onSelectionChanged: (sitemapItem: ITaxonomy, path: string[]): void => {
+                        expect(path).toEqual(activeItemPath);
+                        done();
+                    }
+                };
+                this._renderComponent(props, target);
             });
 
         });

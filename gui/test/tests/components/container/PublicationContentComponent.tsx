@@ -197,7 +197,6 @@ class PublicationContentComponent extends TestBase {
                 // Wait for the tree view to select the first node
                 // Treeview uses debouncing for node selection so a timeout is required
                 setTimeout((): void => {
-                    debugger;
                     // tslint:disable-next-line:no-any
                     const activityIndicators = TestUtils.scryRenderedComponentsWithType(publicationContent, ActivityIndicator as any);
                     expect(activityIndicators.length).toBe(0, "Activity indicator should not be rendered.");
