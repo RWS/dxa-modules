@@ -9,14 +9,19 @@ using Sdl.Web.Common.Logging;
 namespace Sdl.Web.Modules.Core.Models
 {
     [SemanticEntity(Vocab = SchemaOrgVocabulary, EntityName = "ItemList", Prefix = "s", Public = true)]
+    [SemanticEntity(EntityName = "ItemList", Prefix="i")]
     [SemanticEntity(EntityName = "ContentQuery")]
     [Serializable]
     public class ContentList<T> : DynamicList where T : EntityModel
     {
         //TODO add concept of filtering/query (filter options and active filters/query)
         [SemanticProperty("s:headline")]
+        [SemanticProperty("i:headline")]
         public string Headline { get; set; }
+
+        [SemanticProperty("i:link")]
         public Link Link { get; set; }
+
         public Tag ContentType { get; set; }
         public Tag Sort { get; set; }
         public int PageSize { get; set; }
@@ -74,6 +79,8 @@ namespace Sdl.Web.Modules.Core.Models
         /// <remarks>
         /// The items can be retrieved dynamically, but also mapped from CM (e.g. ItemList Schema).
         /// </remarks>
+        [SemanticProperty("s:itemListElement")]
+        [SemanticProperty("i:itemListElement")]
         public List<T> ItemListElements
         {
             get
