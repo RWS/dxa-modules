@@ -1,0 +1,50 @@
+[
+  {
+    "Id": "t1-k67",
+    "Title": "Antarctic Petrel (Thalassoica antarctica)",
+<<<<<<< HEAD:gui/mocks/toc-1184146-t1-p515791.json
+    "Url": "/app/1184146/515616/penguin-publication/antarctic-petrel--thalassoica-antarctica-",
+=======
+    "Url": "/1601084/515616/penguin-guide/antarctic-petrel--thalassoica-antarctica-",
+>>>>>>> subtask/KCWA-458:gui/mocks/toc-1601084-t1-k66.json
+    "IsAbstract": false,
+    "HasChildNodes": false,
+    "Items": []
+  },
+  {
+    "Id": "t1-k68",
+    "Title": "Snow Petrel (Pagodroma nivea)",
+<<<<<<< HEAD:gui/mocks/toc-1184146-t1-p515791.json
+    "Url": "/app/1184146/515925/penguin-publication/snow-petrel--pagodroma-nivea-",
+=======
+    "Url": "/1601084/515925/penguin-guide/snow-petrel--pagodroma-nivea-",
+>>>>>>> subtask/KCWA-458:gui/mocks/toc-1601084-t1-k66.json
+    "IsAbstract": false,
+    "HasChildNodes": false,
+    "Items": []
+  },
+  {
+    "Id": "t1-k69",
+    "Title": "Southern giant Petrel (Macronectes giganteus)",
+<<<<<<< HEAD:gui/mocks/toc-1184146-t1-p515791.json
+    "Url": "/app/1184146/515628/penguin-publication/southern-giant-petrel--macronectes-giganteus-",
+=======
+    "Url": "/1601084/515628/penguin-guide/southern-giant-petrel--macronectes-giganteus-",
+>>>>>>> subtask/KCWA-458:gui/mocks/toc-1601084-t1-k66.json
+    "IsAbstract": false,
+    "HasChildNodes": false,
+    "Items": []
+  },
+  {
+    "Id": "t1-k70",
+    "Title": "Wilson's Storm Petrel (Oceanites oceanicus)",
+<<<<<<< HEAD:gui/mocks/toc-1184146-t1-p515791.json
+    "Url": "/app/1184146/515610/penguin-publication/wilson-s-storm-petrel--oceanites-oceanicus-",
+=======
+    "Url": "/1601084/515610/penguin-guide/wilson-s-storm-petrel--oceanites-oceanicus-",
+>>>>>>> subtask/KCWA-458:gui/mocks/toc-1601084-t1-k66.json
+    "IsAbstract": false,
+    "HasChildNodes": false,
+    "Items": []
+  }
+]

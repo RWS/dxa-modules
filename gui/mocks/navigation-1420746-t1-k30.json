@@ -1,0 +1,28 @@
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k26",
+        "Title": "Games",
+        "Url": "/1420746/164239/user-guide/games",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": [
+          {
+            "Id": "t1-k30",
+            "Title": "Water Rapids",
+            "Url": "/1420746/164347/user-guide/water-rapids",
+            "IsAbstract": false,
+            "HasChildNodes": false,
+            "Items": []
+          }
+        ]
+      }
+    ]
+  }
+]

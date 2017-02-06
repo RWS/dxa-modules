@@ -1,0 +1,27 @@
+{
+  "Id": "516643",
+  "Meta": {
+    "tocnaventries.generated.value": "ish:1601084-43-1024"
+  },
+  "Regions": [
+    {
+      "Entities": [
+        {
+          "Id": "516643",
+          "topicTitle": "Penguin Rhymes and Songs",
+          "topicBody": {
+            "Fragments": [
+              {
+<<<<<<< HEAD:gui/mocks/page-1184146-516643.json
+                "Html": "\n       \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-8E60E9AA-42D3-42CE-B0CE-D70EA4A4AB41__GUID-B704656B-5F3D-493E-B540-A6F0456191A6\" xmlns=\"http://www.w3.org/1999/xhtml\">Penguin Rhymes and Songs</h1>\n      \n      \n      <div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\"> \n         \t \n         <div class=\"section\" id=\"GUID-8E60E9AA-42D3-42CE-B0CE-D70EA4A4AB41__SECTION_D167848DA47F469F8219C01140D9538F\">\n            <h2 class=\"title sectiontitle\">I'm a little penguin</h2>\n            \t\t\n            \t\t\n            <p class=\"p\">I'm a little penguin,\n               \t\t\n            </p>\n            \n            \t\t\n            <p class=\"p\">Black and white.\n               \t\t\n            </p>\n            \n            \t\t\n            <p class=\"p\"> Short and wobbly, \n               \t\t\n            </p>\n            \n            \t\t\n            <p class=\"p\">An adorable sight.\n               \t\t\n            </p>\n            \n            \t\t\n            <p class=\"p\">I can't fly at all, \n               \t\t\n            </p>\n            \n            \t\t\n            <p class=\"p\">butI love to swim. \n               \t\t\n            </p>\n            \n            \t\t\n            <p class=\"p\">So I'll waddle to the water \n               \t\t\n            </p>\n            \n            \t\t\n            <p class=\"p\">And dive right in! \n               \t\t\n            </p>\n            \n            \t \n         </div>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Parent topic:</strong> <a class=\"link\" href=\"/app/1184146/1184158/penguin-publication/crafts-and-activities--chapter-\">Crafts and Activities (chapter)</a></div>\n            \n         </div>\n         \n      </div>\n   "
+=======
+                "Html": "\n       \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-8E60E9AA-42D3-42CE-B0CE-D70EA4A4AB41__GUID-B704656B-5F3D-493E-B540-A6F0456191A6\" xmlns=\"http://www.w3.org/1999/xhtml\">Penguin Rhymes and Songs</h1>\n      \n      \n      <div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\"> \n         \t \n         <div class=\"section\" id=\"GUID-8E60E9AA-42D3-42CE-B0CE-D70EA4A4AB41__SECTION_D167848DA47F469F8219C01140D9538F\">\n            <h2 class=\"title sectiontitle\">I'm a little penguin</h2>\n            \t\t\n            \t\t\n            <p class=\"p\">I'm a little penguin,\n               \t\t\n            </p>\n            \n            \t\t\n            <p class=\"p\">Black and white.\n               \t\t\n            </p>\n            \n            \t\t\n            <p class=\"p\"> Short and wobbly, \n               \t\t\n            </p>\n            \n            \t\t\n            <p class=\"p\">An adorable sight.\n               \t\t\n            </p>\n            \n            \t\t\n            <p class=\"p\">I can't fly at all, \n               \t\t\n            </p>\n            \n            \t\t\n            <p class=\"p\">butI love to swim. \n               \t\t\n            </p>\n            \n            \t\t\n            <p class=\"p\">So I'll waddle to the water \n               \t\t\n            </p>\n            \n            \t\t\n            <p class=\"p\">And dive right in! \n               \t\t\n            </p>\n            \n            \t \n         </div>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Parent topic:</strong> <a class=\"link\" href=\"/1601084/516310/penguin-guide/crafts-and-activities\">Crafts and Activities</a></div>\n            \n         </div>\n         \n      </div>\n   "
+>>>>>>> subtask/KCWA-458:gui/mocks/page-1601084-516643.json
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

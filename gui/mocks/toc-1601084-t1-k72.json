@@ -1,0 +1,14 @@
+[
+  {
+    "Id": "t1-k73",
+    "Title": "Rail birds ",
+<<<<<<< HEAD:gui/mocks/toc-1184146-t1-k60.json
+    "Url": "/app/1184146/515769/penguin-publication/rail-birds",
+=======
+    "Url": "/1601084/515769/penguin-guide/rail-birds",
+>>>>>>> subtask/KCWA-458:gui/mocks/toc-1601084-t1-k72.json
+    "IsAbstract": false,
+    "HasChildNodes": false,
+    "Items": []
+  }
+]

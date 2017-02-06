@@ -1,0 +1,14 @@
+[
+  {
+    "Id": "t1-k16",
+    "Title": "Breeding",
+<<<<<<< HEAD:gui/mocks/toc-1184146-t1-p516036.json
+    "Url": "/app/1184146/516519/penguin-publication/breeding",
+=======
+    "Url": "/1601084/516519/penguin-guide/breeding",
+>>>>>>> subtask/KCWA-458:gui/mocks/toc-1601084-t1-k15.json
+    "IsAbstract": false,
+    "HasChildNodes": false,
+    "Items": []
+  }
+]

@@ -1,12 +1,11 @@
 ﻿
 export interface IPage {
     Id: string;
-    Meta: IKeyValuePair<string, string | string[] | number | number[]>[];
+    Meta: { [key: string]: string | string[] | number | number[] | undefined | null };
     Regions: IRegion[];
 }
 export interface IPublication {
     Id: string;
-    Meta: IKeyValuePair<string, string | string[] | number | number[]>[];
     Title: string;
 }
 export interface ISitemapItem {

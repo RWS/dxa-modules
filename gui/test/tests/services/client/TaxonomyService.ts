@@ -1,12 +1,11 @@
 import { TaxonomyService } from "services/client/TaxonomyService";
-import { TcmId } from "utils/TcmId";
 import { TestBase } from "sdl-models";
 
 class TaxonomyServiceTests extends TestBase {
 
     public runTests(): void {
         const taxonomyService = new TaxonomyService();
-        const publicationId = "1656863";
+        const publicationId = "1961702";
 
         describe(`Taxonomy service tests.`, (): void => {
 
@@ -63,10 +62,7 @@ class TaxonomyServiceTests extends TestBase {
                             const firstItem = items.filter(item => item.hasChildNodes)[0];
                             expect(firstItem.id).toBeDefined();
                             if (firstItem.id) {
-                                // TODO: this conversion will not be needed when upgrading to DXA 1.7
-                                // https://jira.sdl.com/browse/TSI-2131
-                                const taxonomyItemId = TcmId.getTaxonomyItemId("1", firstItem.id);
-                                getChildren(taxonomyItemId || firstItem.id);
+                                getChildren(firstItem.id);
                             }
                         }
                     }).catch(error => {
@@ -87,9 +83,9 @@ class TaxonomyServiceTests extends TestBase {
                     });
             });
 
-            it("can get a path for a page", (done: () => void): void => {
-                const pageId = "164187";
-                taxonomyService.getSitemapPath(publicationId, pageId).then(path => {
+            it("can get a path for a sitemap id", (done: () => void): void => {
+                const sitemapId = "ish:1961702-7-1024";
+                taxonomyService.getSitemapPath(publicationId, sitemapId).then(path => {
                     expect(path).toBeDefined();
                     if (path) {
                         expect(path.length).toBe(2);
@@ -101,10 +97,10 @@ class TaxonomyServiceTests extends TestBase {
                 });
             });
 
-            it("can get a path for a page from memory", (done: () => void): void => {
-                const pageId = "164187";
+            it("can get a path for a sitemap id from memory", (done: () => void): void => {
+                const sitemapId = "ish:1961702-7-1024";
                 const spy = spyOn(window, "XMLHttpRequest").and.callThrough();
-                taxonomyService.getSitemapPath(publicationId, pageId).then(path => {
+                taxonomyService.getSitemapPath(publicationId, sitemapId).then(path => {
                     expect(path).toBeDefined();
                     if (path) {
                         expect(path.length).toBe(2);

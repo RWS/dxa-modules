@@ -1,5 +1,5 @@
 import { TcmId as TcmIdUtils } from "utils/TcmId";
-import { CdItemTypes } from "interfaces/TcmId";
+import { CdItemTypes, TaxonomyItemId } from "interfaces/TcmId";
 
 describe(`TcmId utils tests.`, (): void => {
 
@@ -11,29 +11,31 @@ describe(`TcmId utils tests.`, (): void => {
         expect(TcmIdUtils.isValidPageId(undefined)).toBeFalsy();
     });
 
-    it("returns a taxonomy item id from a page id", (): void => {
-        const pageId = "54";
-        expect(TcmIdUtils.getTaxonomyItemId("999", pageId)).toBe("t999-p54");
-        const pageIdTcmFormat = "ish:123-54-16";
-        expect(TcmIdUtils.getTaxonomyItemId("999", pageIdTcmFormat)).toBe("t999-p54");
+    it("returns a taxonomy item id from a sitemap id", (): void => {
+        const sitemapId = "54";
+        expect(TcmIdUtils.getTaxonomyItemId(TaxonomyItemId.Index, sitemapId)).toBe(`t${TaxonomyItemId.Index}-k54`);
+        const sitemapIdTcmFormat = "ish:123-54-1024";
+        expect(TcmIdUtils.getTaxonomyItemId(TaxonomyItemId.Toc, sitemapIdTcmFormat)).toBe(`t${TaxonomyItemId.Toc}-k54`);
     });
 
     it("returns a taxonomy item id from a taxonomy id", (): void => {
         const taxonomyId = "ish:123-54-512";
-        const taxonomyItemId = TcmIdUtils.getTaxonomyItemId("999", taxonomyId);
-        expect(taxonomyItemId).toBe("t999");
+        const taxonomyItemId = TcmIdUtils.getTaxonomyItemId(TaxonomyItemId.Toc, taxonomyId);
+        expect(taxonomyItemId).toBe(`t${TaxonomyItemId.Toc}`);
     });
 
-    it("returns empty result when getting a taxonomy item id using an invalid page id", (): void => {
-        const pageId = "invalid-id";
-        const taxonomyId = TcmIdUtils.getTaxonomyItemId("999", pageId);
+    it("returns empty result when getting a taxonomy item id using an invalid sitemap id", (): void => {
+        const sitemapId = "invalid-id";
+        const taxonomyId = TcmIdUtils.getTaxonomyItemId(TaxonomyItemId.Index, sitemapId);
         expect(taxonomyId).toBeUndefined();
     });
 
+    it("returns a taxonomy id when not specifying a sitemap id", (): void => {
+        const taxonomyId = TcmIdUtils.getTaxonomyItemId(TaxonomyItemId.Index);
+        expect(taxonomyId).toBe(`t${TaxonomyItemId.Index}`);
+    });
+
     it("returns an item id from a taxonomy item id", (): void => {
-        const taxonomyItemIdPage = "t264-p564";
-        const itemIdPage = TcmIdUtils.getItemIdFromTaxonomyItemId(taxonomyItemIdPage);
-        expect(itemIdPage).toBe("564");
         const taxonomyItemIdKeyword = "t254645-k48787";
         const itemIdKeyword = TcmIdUtils.getItemIdFromTaxonomyItemId(taxonomyItemIdKeyword);
         expect(itemIdKeyword).toBe("48787");

@@ -1,0 +1,23 @@
+{
+  "Id": "515736",
+  "Meta": {
+    "tocnaventries.generated.value": "ish:1601084-44-1024"
+  },
+  "Regions": [
+    {
+      "Entities": [
+        {
+          "Id": "515736",
+          "topicTitle": "Other birds",
+          "topicBody": {
+            "Fragments": [
+              {
+                "Html": "\n       \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-AF8A4376-5AF7-457A-A06F-147284A09BAA__GUID-8868AAC3-0C4C-44EB-90A1-61C5F87B8F7A\" xmlns=\"http://www.w3.org/1999/xhtml\">Other birds</h1>\n      \n      \n      \n      <div class=\"body refbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">This topic groups birds of other orders which are predators of penguins or have another relation with the penguins \n            \n         </p>\n         \n         \t \n         <div class=\"section refsyn\" id=\"GUID-AF8A4376-5AF7-457A-A06F-147284A09BAA__GUID-117EF59E-4F20-47B2-B6A5-E043E8CD913D\">Penguins have relationships with birds of other orders. Some of them are predators of penguins like the Southern giant petrel.\n            While others have a similar evolution, behavior or ... \n            \t \n         </div>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\" />\n   "
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

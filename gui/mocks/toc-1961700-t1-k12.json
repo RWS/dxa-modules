@@ -1,0 +1,38 @@
+[
+  {
+    "Id": "t1-k13",
+    "Title": "Installieren der SIM-Karte und des Akkus",
+<<<<<<< HEAD:gui/mocks/toc-1656866-t1-p164396.json
+    "Url": "/app/1656866/164269/publication-mp330/installieren-der-sim-karte-und-des-akkus",
+=======
+    "Url": "/1961700/164269/user-guide/installieren-der-sim-karte-und-des-akkus",
+>>>>>>> subtask/KCWA-458:gui/mocks/toc-1961700-t1-k12.json
+    "IsAbstract": false,
+    "HasChildNodes": false,
+    "Items": []
+  },
+  {
+    "Id": "t1-k14",
+    "Title": "Laden des Akkus",
+<<<<<<< HEAD:gui/mocks/toc-1656866-t1-p164396.json
+    "Url": "/app/1656866/164288/publication-mp330/laden-des-akkus",
+=======
+    "Url": "/1961700/164288/user-guide/laden-des-akkus",
+>>>>>>> subtask/KCWA-458:gui/mocks/toc-1961700-t1-k12.json
+    "IsAbstract": false,
+    "HasChildNodes": false,
+    "Items": []
+  },
+  {
+    "Id": "t1-k15",
+    "Title": "Tastensperre",
+<<<<<<< HEAD:gui/mocks/toc-1656866-t1-p164396.json
+    "Url": "/app/1656866/164353/publication-mp330/tastensperre",
+=======
+    "Url": "/1961700/164353/user-guide/tastensperre",
+>>>>>>> subtask/KCWA-458:gui/mocks/toc-1961700-t1-k12.json
+    "IsAbstract": false,
+    "HasChildNodes": false,
+    "Items": []
+  }
+]

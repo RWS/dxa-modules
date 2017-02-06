@@ -242,11 +242,10 @@ class PageComponent extends TestBase {
                 expect(domNode).not.toBeNull();
 
                 const hyperlinks = domNode.querySelectorAll(".sdl-dita-delivery-content-navigation a") as NodeListOf<HTMLAnchorElement>;
-                expect(hyperlinks.length).toBe(3);
+                expect(hyperlinks.length).toBe(2);
 
-                expect(hyperlinks.item(0).textContent).toBe("header-1");
-                expect(hyperlinks.item(1).textContent).toBe("header-2");
-                expect(hyperlinks.item(2).textContent).toBe("header-3");
+                expect(hyperlinks.item(0).textContent).toBe("header-2");
+                expect(hyperlinks.item(1).textContent).toBe("header-3");
             });
 
             it("scrolls to page content item", (done: () => void): void => {
@@ -256,15 +255,55 @@ class PageComponent extends TestBase {
                 expect(domNode).not.toBeNull();
 
                 const hyperlinks = domNode.querySelectorAll(".sdl-dita-delivery-content-navigation a") as NodeListOf<HTMLAnchorElement>;
-                expect(hyperlinks.length).toBe(3);
+                expect(hyperlinks.length).toBe(2);
 
                 // We only need last item
-                hyperlinks.item(2).click();
+                hyperlinks.item(1).click();
 
                 setTimeout((): void => {
                     expect(spy).toHaveBeenCalledTimes(1);
                     // Scroll position is changed
                     expect(spy).not.toHaveBeenCalledWith(0, 0);
+                    done();
+                }, 100);
+            });
+
+            it("scrolls to same content item", (done: () => void): void => {
+                const spy = spyOn(window, "scrollTo").and.callThrough();
+
+                const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
+                expect(domNode).not.toBeNull();
+
+                const hyperlinks = domNode.querySelectorAll(".sdl-dita-delivery-content-navigation a") as NodeListOf<HTMLAnchorElement>;
+                expect(hyperlinks.length).toBe(2);
+
+                // We only need last item
+                hyperlinks.item(1).click();
+                window.scrollTo(0, 0);
+                hyperlinks.item(1).click();
+
+                setTimeout((): void => {
+                    expect(spy).toHaveBeenCalledTimes(3);
+                    done();
+                }, 100);
+            });
+
+            it("scrolls when page title is not specified", (done: () => void): void => {
+                const spy = spyOn(window, "scrollTo").and.callThrough();
+
+                const pageUrlWithNoTitle = Url.getPageUrl("123", "456", "publication");
+                hashHistory.push(pageUrlWithNoTitle);
+
+                const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
+                expect(domNode).not.toBeNull();
+
+                const hyperlinks = domNode.querySelectorAll(".sdl-dita-delivery-content-navigation a") as NodeListOf<HTMLAnchorElement>;
+                expect(hyperlinks.length).toBe(2);
+
+                // We only need last item
+                hyperlinks.item(1).click();
+                setTimeout((): void => {
+                    expect(spy).toHaveBeenCalledTimes(1);
                     done();
                 }, 100);
             });

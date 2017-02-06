@@ -11,13 +11,6 @@ import "./styles/TopBar";
  */
 export interface ITopBarProps {
     /**
-     * Title
-     *
-     * @type {string}
-     */
-    title: string;
-
-    /**
      * Selected language
      *
      * @type {string}
@@ -44,9 +37,6 @@ export const TopBar = (props: ITopBarProps) => {
                 </div>
                 <div className={"sdl-dita-delivery-topbar-logo"} title="SDL">
                     <IndexLink to="/" />
-                </div>
-                <div className={"sdl-dita-delivery-topbar-title"}>
-                    <label>{props.title}</label>
                 </div>
                 <div className={"sdl-dita-delivery-topbar-language"} >
                     <span />

@@ -105,7 +105,8 @@ export class Page extends React.Component<IPageProps, IPageState> {
      * @memberOf Breadcrumbs
      */
     public static contextTypes: React.ValidationMap<IAppContext> = {
-        services: React.PropTypes.object.isRequired
+        services: React.PropTypes.object.isRequired,
+        router: React.PropTypes.object.isRequired
     };
 
     /**
@@ -117,10 +118,11 @@ export class Page extends React.Component<IPageProps, IPageState> {
     public context: IAppContext;
 
     private _hyperlinks: { element: HTMLElement, handler: (e: Event) => void; }[] = [];
-    private _lastAnchor: string;
+    private _lastPageAnchor?: string;
+    private _historyUnlisten: () => void;
 
     /**
-     * Creates an instance of Toc.
+     * Creates an instance of Page.
      *
      */
     constructor() {
@@ -128,6 +130,19 @@ export class Page extends React.Component<IPageProps, IPageState> {
         this.state = {
             navItems: []
         };
+    }
+
+    /**
+     * Invoked once, both on the client and server, immediately before the initial rendering occurs.
+     */
+    public componentWillMount(): void {
+        const { router} = this.context;
+
+        if (router) {
+            this._historyUnlisten = router.listen(() => {
+                this._lastPageAnchor = undefined;
+            });
+        }
     }
 
     /**
@@ -145,7 +160,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
         const activeNavItemId = activeHeader ? activeHeader.id : (navItems.length > 0 ? navItems[0].id : undefined);
 
         return (
-            <div className={"sdl-dita-delivery-page"}>
+            <div className={"sdl-dita-delivery-page"} style={props.showActivityIndicator ? { overflow: "hidden" } : {}} >
                 {props.showActivityIndicator ? <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} /> : null}
                 {props.error ? <ValidationMessage messageType={ValidationMessageType.Error} message={props.error} /> : null}
                 {props.children}
@@ -153,7 +168,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                 <article>
                     <article className={"page-content ltr"} dangerouslySetInnerHTML={{ __html: props.content || "" }} />
                 </article>
-            </div>
+            </div >
         );
     }
 
@@ -181,6 +196,10 @@ export class Page extends React.Component<IPageProps, IPageState> {
      */
     public componentWillUnmount(): void {
         this._disableHyperlinks();
+
+        if (this._historyUnlisten) {
+            this._historyUnlisten();
+        }
     }
 
     /**
@@ -232,11 +251,15 @@ export class Page extends React.Component<IPageProps, IPageState> {
             const { navItems } = this.state;
             const { url } = this.props;
             const pageContentNode = domNode.querySelector(".page-content") as HTMLElement;
-            const headerLinks = Html.getHeaderLinks(pageContentNode);
+            const headerLinks = Html.getHeaderLinks(pageContentNode).filter((item: IHeader) => {
+                // We only need level 2 and 3 for items rendered in conten navigation
+                return (item.importancy == 2) || (item.importancy == 3);
+            });
             const updatedNavItems: IContentNavigationItem[] = headerLinks.map(item => {
                 return {
                     id: item.id,
                     title: item.title,
+                    indention: Number(item.importancy == 3),
                     url: url ? Url.getAnchorUrl(url, item.id) : ("#" + item.id)
                 };
             });
@@ -272,17 +295,25 @@ export class Page extends React.Component<IPageProps, IPageState> {
     private _jumpToAnchor(): void {
         const { anchor, scrollOffset } = this.props;
         // Keep track of the previous anchor to allow scrolling
-        if (anchor && anchor !== this._lastAnchor) {
+        if (anchor && (this._lastPageAnchor !== anchor)) {
             const domNode = ReactDOM.findDOMNode(this) as HTMLElement;
             if (domNode) {
                 const pageContentNode = domNode.querySelector(".page-content") as HTMLElement;
                 const header = Html.getHeaderElement(pageContentNode, anchor);
                 if (header) {
-                    this._lastAnchor = anchor;
+                    this._lastPageAnchor = anchor;
+
+                    let offsetTop = 0;
+                    let currentNode = header;
+                    while (currentNode && currentNode.offsetTop) {
+                        offsetTop += currentNode.offsetTop;
+                        currentNode = currentNode.offsetParent as HTMLElement;
+                    }
+
                     // TODO: make sure images are loaded before jumping to the anchor
                     // Use a timeout to make sure all components are rendered
                     setTimeout((): void => {
-                    var topPos = (header.offsetTop + domNode.offsetTop) - (scrollOffset || 0);
+                        const topPos = offsetTop - (scrollOffset || 0);
                         window.scrollTo(0, topPos);
                     }, 0);
                 }

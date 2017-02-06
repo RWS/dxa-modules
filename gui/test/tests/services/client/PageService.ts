@@ -5,7 +5,7 @@ class PageServiceTests extends TestBase {
 
     public runTests(): void {
         const pageService = new PageService();
-        const publicationId = "1656863";
+        const publicationId = "1961702";
 
         describe(`Page service tests.`, (): void => {
 
@@ -15,7 +15,7 @@ class PageServiceTests extends TestBase {
                     expect(pageInfo).toBeDefined();
                     if (pageInfo) {
                         expect(pageInfo.title).toBe("Getting started");
-                        expect(pageInfo.content.length).toBe(1344);
+                        expect(pageInfo.content.length).toBe(1311);
                         const element = document.createElement("span");
                         element.innerHTML = pageInfo.content;
                         expect(element.children.length).toBe(3); // title, content, related links
@@ -35,7 +35,7 @@ class PageServiceTests extends TestBase {
                     expect(pageInfo).toBeDefined();
                     if (pageInfo) {
                         expect(pageInfo.title).toBe("Getting started");
-                        expect(pageInfo.content.length).toBe(1344);
+                        expect(pageInfo.content.length).toBe(1311);
                         expect(spy).not.toHaveBeenCalled();
                     }
                     done();

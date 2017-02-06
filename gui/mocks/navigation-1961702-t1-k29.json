@@ -1,0 +1,28 @@
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k26",
+        "Title": "Games",
+        "Url": "/1961702/164239/user-guide/games",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": [
+          {
+            "Id": "t1-k29",
+            "Title": "Snake 2 Game",
+            "Url": "/1961702/164417/user-guide/snake-2-game",
+            "IsAbstract": false,
+            "HasChildNodes": false,
+            "Items": []
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,27 @@
+{
+  "Id": "164353",
+  "Meta": {
+    "tocnaventries.generated.value": "ish:1961700-15-1024"
+  },
+  "Regions": [
+    {
+      "Entities": [
+        {
+          "Id": "164353",
+          "topicTitle": "Tastensperre",
+          "topicBody": {
+            "Fragments": [
+              {
+<<<<<<< HEAD:gui/mocks/page-1656866-164353.json
+                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-A08D6FD8-63C7-4CAA-A2EA-AF08AF4C49B7__GUID-A0F6594E-0C93-4597-9794-4A86C7FDD5B9\" xmlns=\"http://www.w3.org/1999/xhtml\">Tastensperre</h1>\n      \n      \n      \n      <div class=\"body conbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">Die Tastensperre verhindert das versehentliche Drücken der Tasten, wenn das Telefon beispielsweise in der Tasche getragen\n            wird.\n         </p>\n         \n         \n         <ul class=\"ul\" id=\"GUID-A08D6FD8-63C7-4CAA-A2EA-AF08AF4C49B7__GUID-97149D9C-8AA5-41AF-AD05-48D16EF18B6C\">\n            \n            <li class=\"li\">Tastensperre \n               <p class=\"p\">Drücken Sie in der Ausgangsanzeige <samp class=\"ph msgph\">Menü</samp> und dann <img class=\"image\" src=\"/app/gui/mocks/bin/1656866-345843-16.gif\" /> innerhalb von 1,5 Sekunden. \n               </p>\n               \n            </li>\n            \n            \n            <li class=\"li\">Entsperren des Tastenfelds \n               <p class=\"p\"> Drücken Sie <samp class=\"ph msgph\">Freigabe</samp> und dann <img class=\"image\" src=\"/app/gui/mocks/bin/1656866-345843-16.gif\" />innerhalb von 1,5 Sekunden.\n               </p>\n               \n            </li>\n            \n            \n         </ul>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Übergeordnetes Thema:</strong> <a class=\"link\" href=\"/app/1656866/164396/publication-mp330/erste-schritte\">Erste Schritte</a></div>\n            \n         </div>\n         \n      </div>\n   "
+=======
+                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-A08D6FD8-63C7-4CAA-A2EA-AF08AF4C49B7__GUID-A0F6594E-0C93-4597-9794-4A86C7FDD5B9\" xmlns=\"http://www.w3.org/1999/xhtml\">Tastensperre</h1>\n      \n      \n      \n      <div class=\"body conbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">Die Tastensperre verhindert das versehentliche Drücken der Tasten, wenn das Telefon beispielsweise in der Tasche getragen\n            wird.\n         </p>\n         \n         \n         <ul class=\"ul\" id=\"GUID-A08D6FD8-63C7-4CAA-A2EA-AF08AF4C49B7__GUID-97149D9C-8AA5-41AF-AD05-48D16EF18B6C\">\n            \n            <li class=\"li\">Tastensperre \n               <p class=\"p\">Drücken Sie in der Ausgangsanzeige <samp class=\"ph msgph\">Menü</samp> und dann <img class=\"image\" src=\"/app/gui/mocks/bin/1961700-345843-16.gif\" /> innerhalb von 1,5 Sekunden. \n               </p>\n               \n            </li>\n            \n            \n            <li class=\"li\">Entsperren des Tastenfelds \n               <p class=\"p\"> Drücken Sie <samp class=\"ph msgph\">Freigabe</samp> und dann <img class=\"image\" src=\"/app/gui/mocks/bin/1961700-345843-16.gif\" />innerhalb von 1,5 Sekunden.\n               </p>\n               \n            </li>\n            \n            \n         </ul>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Übergeordnetes Thema:</strong> <a class=\"link\" href=\"/1961700/164396/user-guide/erste-schritte\">Erste Schritte</a></div>\n            \n         </div>\n         \n      </div>\n   "
+>>>>>>> subtask/KCWA-458:gui/mocks/page-1961700-164353.json
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

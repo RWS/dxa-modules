@@ -1,0 +1,86 @@
+[
+  {
+    "Id": "t1-k5",
+    "Title": "Keys overview",
+<<<<<<< HEAD:gui/mocks/toc-1420746-t1-p164231.json
+    "Url": "/app/1420746/164282/publication-mp330/keys-overview",
+=======
+    "Url": "/1420746/164282/user-guide/keys-overview",
+>>>>>>> subtask/KCWA-458:gui/mocks/toc-1420746-t1-k4.json
+    "IsAbstract": false,
+    "HasChildNodes": false,
+    "Items": []
+  },
+  {
+    "Id": "t1-k6",
+    "Title": "Connectors overview",
+<<<<<<< HEAD:gui/mocks/toc-1420746-t1-p164231.json
+    "Url": "/app/1420746/164155/publication-mp330/connectors-overview",
+=======
+    "Url": "/1420746/164155/user-guide/connectors-overview",
+>>>>>>> subtask/KCWA-458:gui/mocks/toc-1420746-t1-k4.json
+    "IsAbstract": false,
+    "HasChildNodes": false,
+    "Items": []
+  },
+  {
+    "Id": "t1-k7",
+    "Title": "Standby mode",
+<<<<<<< HEAD:gui/mocks/toc-1420746-t1-p164231.json
+    "Url": "/app/1420746/164187/publication-mp330/standby-mode",
+=======
+    "Url": "/1420746/164187/user-guide/standby-mode",
+>>>>>>> subtask/KCWA-458:gui/mocks/toc-1420746-t1-k4.json
+    "IsAbstract": false,
+    "HasChildNodes": false,
+    "Items": []
+  },
+  {
+    "Id": "t1-k8",
+    "Title": "Essential indicators in standby mode",
+<<<<<<< HEAD:gui/mocks/toc-1420746-t1-p164231.json
+    "Url": "/app/1420746/164255/publication-mp330/essential-indicators-in-standby-mode",
+=======
+    "Url": "/1420746/164255/user-guide/essential-indicators-in-standby-mode",
+>>>>>>> subtask/KCWA-458:gui/mocks/toc-1420746-t1-k4.json
+    "IsAbstract": false,
+    "HasChildNodes": false,
+    "Items": []
+  },
+  {
+    "Id": "t1-k9",
+    "Title": "Screen saver",
+<<<<<<< HEAD:gui/mocks/toc-1420746-t1-p164231.json
+    "Url": "/app/1420746/164436/publication-mp330/screen-saver",
+=======
+    "Url": "/1420746/164436/user-guide/screen-saver",
+>>>>>>> subtask/KCWA-458:gui/mocks/toc-1420746-t1-k4.json
+    "IsAbstract": false,
+    "HasChildNodes": false,
+    "Items": []
+  },
+  {
+    "Id": "t1-k10",
+    "Title": "General Packet Radio Service (GPRS)",
+<<<<<<< HEAD:gui/mocks/toc-1420746-t1-p164231.json
+    "Url": "/app/1420746/164171/publication-mp330/general-packet-radio-service--gprs-",
+=======
+    "Url": "/1420746/164171/user-guide/general-packet-radio-service--gprs-",
+>>>>>>> subtask/KCWA-458:gui/mocks/toc-1420746-t1-k4.json
+    "IsAbstract": false,
+    "HasChildNodes": false,
+    "Items": []
+  },
+  {
+    "Id": "t1-k11",
+    "Title": "Bluetooth Connection",
+<<<<<<< HEAD:gui/mocks/toc-1420746-t1-p164231.json
+    "Url": "/app/1420746/164309/publication-mp330/bluetooth-connection",
+=======
+    "Url": "/1420746/164309/user-guide/bluetooth-connection",
+>>>>>>> subtask/KCWA-458:gui/mocks/toc-1420746-t1-k4.json
+    "IsAbstract": false,
+    "HasChildNodes": false,
+    "Items": []
+  }
+]

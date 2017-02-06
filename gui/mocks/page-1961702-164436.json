@@ -1,0 +1,23 @@
+{
+  "Id": "164436",
+  "Meta": {
+    "tocnaventries.generated.value": "ish:1961702-9-1024"
+  },
+  "Regions": [
+    {
+      "Entities": [
+        {
+          "Id": "164436",
+          "topicTitle": "Screen saver",
+          "topicBody": {
+            "Fragments": [
+              {
+                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-ECE240B0-00BD-4371-AB26-E5AA627FF527__GUID-26F149AC-433E-4440-892A-E356163E548A\" xmlns=\"http://www.w3.org/1999/xhtml\">Screen saver</h1>\n      \n      \n      \n      <div class=\"body conbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">The phone automatically activates the screen saver, a digital clock view, for power saving in standby mode.</p>\n         \n         \n         <p class=\"p\">It is activated when no function of the phone has been used for a certain time. Press any key to deactivate the screen saver.\n            Screen saver is also deactivated when the phone is out of the network coverage area.\n         </p>\n         \n         \n         <p class=\"p\">Note that the screen saver overrides all the graphics and texts on the display in standby mode.</p>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Parent topic:</strong> <a class=\"link\" href=\"/1961702/164231/user-guide/your-phone\">Your phone</a></div>\n            \n         </div>\n         \n      </div>\n   "
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

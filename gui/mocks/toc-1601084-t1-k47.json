@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "t1-k48",
+    "Title": "Coots ",
+<<<<<<< HEAD:gui/mocks/toc-1184146-t1-k45.json
+    "Url": "/app/1184146/515851/penguin-publication/coots",
+=======
+    "Url": "/1601084/515851/penguin-guide/coots",
+>>>>>>> subtask/KCWA-458:gui/mocks/toc-1601084-t1-k47.json
+    "IsAbstract": false,
+    "HasChildNodes": false,
+    "Items": []
+  },
+  {
+    "Id": "t1-k49",
+    "Title": "Cranes",
+<<<<<<< HEAD:gui/mocks/toc-1184146-t1-k45.json
+    "Url": "/app/1184146/515680/penguin-publication/cranes",
+=======
+    "Url": "/1601084/515680/penguin-guide/cranes",
+>>>>>>> subtask/KCWA-458:gui/mocks/toc-1601084-t1-k47.json
+    "IsAbstract": false,
+    "HasChildNodes": false,
+    "Items": []
+  }
+]

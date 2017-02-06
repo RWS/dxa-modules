@@ -1,0 +1,27 @@
+{
+  "Id": "164169",
+  "Meta": {
+    "tocnaventries.generated.value": "ish:1961700-10-1024"
+  },
+  "Regions": [
+    {
+      "Entities": [
+        {
+          "Id": "164169",
+          "topicTitle": "General Packet Radio Service (GPRS)",
+          "topicBody": {
+            "Fragments": [
+              {
+<<<<<<< HEAD:gui/mocks/page-1656866-164169.json
+                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-0EDBAC80-8997-45CA-8578-E8AAB7EE0B6E__GUID-A9BCAA46-D536-4C48-9DCC-83D91F8F8450\" xmlns=\"http://www.w3.org/1999/xhtml\">General Packet Radio Service (GPRS)</h1>\n      \n      \n      \n      <div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">GPRS ist eine Technik, die es Mobiltelefonen ermöglicht, Daten über das Mobilfunknetz (Netzdienst) zu senden und zu empfangen.\n            \n         </p>\n         \n         \n         <p class=\"p\">GPRS ist eine Technik, die es Mobiltelefonen ermöglicht, Daten über das Mobilfunknetz (Netzdienst) zu senden und zu empfangen.\n            Damit ist GPRS im Grunde eine Datenübertragungsart, die den drahtlosen Zugang zu Datennetzen wie dem Internet ermöglicht.\n            GPRS wird eingesetzt für WAP-Dienste, MMS- und SMS-Mitteilungen sowie Java-Programm-Downloads.\n         </p>\n         \n         \n         <div class=\"p\">Vor dem Einsatz der GPRS-Technik\n            <ul class=\"ul\" id=\"GUID-0EDBAC80-8997-45CA-8578-E8AAB7EE0B6E__GUID-904FADC1-2D18-4597-95FC-8EA9BD36733D\">\n               \n               <li class=\"li\">Wenden Sie sich an Ihren Netzbetreiber oder Diensteanbieter, um Informationen zur Verfügbarkeit, zum Preis und zu den Nutzungsvoraussetzungen\n                  von GPRS zu erhalten.\n               </li>\n               \n               \n               <li class=\"li\">Speichern Sie die GPRS-Einstellungen für alle über GPRS genutzten Anwendungen.</li>\n               \n               \n            </ul>\n            \n         </div>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Übergeordnetes Thema:</strong> <a class=\"link\" href=\"/app/1656866/164229/publication-mp330/ihr-telefon\">Ihr Telefon</a></div>\n            \n         </div>\n         \n      </div>\n   "
+=======
+                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-0EDBAC80-8997-45CA-8578-E8AAB7EE0B6E__GUID-A9BCAA46-D536-4C48-9DCC-83D91F8F8450\" xmlns=\"http://www.w3.org/1999/xhtml\">General Packet Radio Service (GPRS)</h1>\n      \n      \n      \n      <div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">GPRS ist eine Technik, die es Mobiltelefonen ermöglicht, Daten über das Mobilfunknetz (Netzdienst) zu senden und zu empfangen.\n            \n         </p>\n         \n         \n         <p class=\"p\">GPRS ist eine Technik, die es Mobiltelefonen ermöglicht, Daten über das Mobilfunknetz (Netzdienst) zu senden und zu empfangen.\n            Damit ist GPRS im Grunde eine Datenübertragungsart, die den drahtlosen Zugang zu Datennetzen wie dem Internet ermöglicht.\n            GPRS wird eingesetzt für WAP-Dienste, MMS- und SMS-Mitteilungen sowie Java-Programm-Downloads.\n         </p>\n         \n         \n         <div class=\"p\">Vor dem Einsatz der GPRS-Technik\n            <ul class=\"ul\" id=\"GUID-0EDBAC80-8997-45CA-8578-E8AAB7EE0B6E__GUID-904FADC1-2D18-4597-95FC-8EA9BD36733D\">\n               \n               <li class=\"li\">Wenden Sie sich an Ihren Netzbetreiber oder Diensteanbieter, um Informationen zur Verfügbarkeit, zum Preis und zu den Nutzungsvoraussetzungen\n                  von GPRS zu erhalten.\n               </li>\n               \n               \n               <li class=\"li\">Speichern Sie die GPRS-Einstellungen für alle über GPRS genutzten Anwendungen.</li>\n               \n               \n            </ul>\n            \n         </div>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Übergeordnetes Thema:</strong> <a class=\"link\" href=\"/1961700/164229/user-guide/ihr-telefon\">Ihr Telefon</a></div>\n            \n         </div>\n         \n      </div>\n   "
+>>>>>>> subtask/KCWA-458:gui/mocks/page-1961700-164169.json
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

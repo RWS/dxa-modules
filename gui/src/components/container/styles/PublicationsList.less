@@ -1,0 +1,35 @@
+@import (reference) "../../../theming/styles.less";
+@import (reference) "../../presentation/styles/TopBar.less";
+
+.sdl-dita-delivery-publications-list {
+    max-width: @screenXl;
+    margin: 0 auto;
+    padding: 50px 15px 0 15px;
+
+    nav {
+        min-height: 100px;
+
+        ul {
+            margin-top: 0;
+            padding: 0 10px 0 0;
+
+            li {
+                background: fade(@accentColor2, 5%);
+                display: block;
+                padding: 10px 15px;
+                margin-bottom: -1px;
+                border: 1px solid @neutralColor5;
+                border-left: 2px solid @accentColor1;
+
+                a {
+                    text-decoration: none;
+                    color: @neutralColor1;
+                    &:hover {
+                        color: @accentColor2;
+                    }
+                }
+            }
+        }
+
+    }
+}

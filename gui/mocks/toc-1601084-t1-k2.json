@@ -1,0 +1,74 @@
+[
+  {
+    "Id": "t1-k3",
+    "Title": "General Introduction",
+<<<<<<< HEAD:gui/mocks/toc-1184146-t1-p516062.json
+    "Url": "/app/1184146/516320/penguin-publication/general-introduction",
+=======
+    "Url": "/1601084/516320/penguin-guide/general-introduction",
+>>>>>>> subtask/KCWA-458:gui/mocks/toc-1601084-t1-k2.json
+    "IsAbstract": false,
+    "HasChildNodes": false,
+    "Items": []
+  },
+  {
+    "Id": "t1-k4",
+    "Title": "Etymology",
+<<<<<<< HEAD:gui/mocks/toc-1184146-t1-p516062.json
+    "Url": "/app/1184146/517008/penguin-publication/etymology",
+=======
+    "Url": "/1601084/517008/penguin-guide/etymology",
+>>>>>>> subtask/KCWA-458:gui/mocks/toc-1601084-t1-k2.json
+    "IsAbstract": false,
+    "HasChildNodes": false,
+    "Items": []
+  },
+  {
+    "Id": "t1-k5",
+    "Title": "Systematics and evolution",
+<<<<<<< HEAD:gui/mocks/toc-1184146-t1-p516062.json
+    "Url": "/app/1184146/516088/penguin-publication/systematics-and-evolution",
+=======
+    "Url": "/1601084/516088/penguin-guide/systematics-and-evolution",
+>>>>>>> subtask/KCWA-458:gui/mocks/toc-1601084-t1-k2.json
+    "IsAbstract": false,
+    "HasChildNodes": true,
+    "Items": []
+  },
+  {
+    "Id": "t1-k13",
+    "Title": "Anatomy and physiology",
+<<<<<<< HEAD:gui/mocks/toc-1184146-t1-p516062.json
+    "Url": "/app/1184146/695927/penguin-publication/anatomy-and-physiology",
+=======
+    "Url": "/1601084/516444/penguin-guide/anatomy-and-physiology",
+>>>>>>> subtask/KCWA-458:gui/mocks/toc-1601084-t1-k2.json
+    "IsAbstract": false,
+    "HasChildNodes": false,
+    "Items": []
+  },
+  {
+    "Id": "t1-k14",
+    "Title": "Distribution and habitat",
+<<<<<<< HEAD:gui/mocks/toc-1184146-t1-p516062.json
+    "Url": "/app/1184146/517170/penguin-publication/distribution-and-habitat",
+=======
+    "Url": "/1601084/517170/penguin-guide/distribution-and-habitat",
+>>>>>>> subtask/KCWA-458:gui/mocks/toc-1601084-t1-k2.json
+    "IsAbstract": false,
+    "HasChildNodes": false,
+    "Items": []
+  },
+  {
+    "Id": "t1-k15",
+    "Title": "Behavior",
+<<<<<<< HEAD:gui/mocks/toc-1184146-t1-p516062.json
+    "Url": "/app/1184146/516036/penguin-publication/behavior",
+=======
+    "Url": "/1601084/516036/penguin-guide/behavior",
+>>>>>>> subtask/KCWA-458:gui/mocks/toc-1601084-t1-k2.json
+    "IsAbstract": false,
+    "HasChildNodes": true,
+    "Items": []
+  }
+]

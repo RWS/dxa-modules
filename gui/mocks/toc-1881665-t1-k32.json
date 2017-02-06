@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "t1-k33",
+    "Title": "Naar muziek luisteren",
+<<<<<<< HEAD:gui/mocks/toc-1656868-t1-p164373.json
+    "Url": "/app/1656868/164341/publication-mp330/naar-muziek-luisteren",
+=======
+    "Url": "/1881665/164341/user-guide/naar-muziek-luisteren",
+>>>>>>> subtask/KCWA-458:gui/mocks/toc-1881665-t1-k32.json
+    "IsAbstract": false,
+    "HasChildNodes": false,
+    "Items": []
+  },
+  {
+    "Id": "t1-k34",
+    "Title": "Naar de radio luisteren",
+<<<<<<< HEAD:gui/mocks/toc-1656868-t1-p164373.json
+    "Url": "/app/1656868/164165/publication-mp330/naar-de-radio-luisteren",
+=======
+    "Url": "/1881665/164165/user-guide/naar-de-radio-luisteren",
+>>>>>>> subtask/KCWA-458:gui/mocks/toc-1881665-t1-k32.json
+    "IsAbstract": false,
+    "HasChildNodes": false,
+    "Items": []
+  }
+]

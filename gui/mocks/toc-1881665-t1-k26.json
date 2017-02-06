@@ -1,0 +1,62 @@
+[
+  {
+    "Id": "t1-k27",
+    "Title": "Een spelletje starten",
+<<<<<<< HEAD:gui/mocks/toc-1656868-t1-p164241.json
+    "Url": "/app/1656868/164381/publication-mp330/een-spelletje-starten",
+=======
+    "Url": "/1881665/164381/user-guide/een-spelletje-starten",
+>>>>>>> subtask/KCWA-458:gui/mocks/toc-1881665-t1-k26.json
+    "IsAbstract": false,
+    "HasChildNodes": false,
+    "Items": []
+  },
+  {
+    "Id": "t1-k28",
+    "Title": "Spelletjes downloaden",
+<<<<<<< HEAD:gui/mocks/toc-1656868-t1-p164241.json
+    "Url": "/app/1656868/164181/publication-mp330/spelletjes-downloaden",
+=======
+    "Url": "/1881665/164181/user-guide/spelletjes-downloaden",
+>>>>>>> subtask/KCWA-458:gui/mocks/toc-1881665-t1-k26.json
+    "IsAbstract": false,
+    "HasChildNodes": false,
+    "Items": []
+  },
+  {
+    "Id": "t1-k29",
+    "Title": "Snake 2",
+<<<<<<< HEAD:gui/mocks/toc-1656868-t1-p164241.json
+    "Url": "/app/1656868/164419/publication-mp330/snake-2",
+=======
+    "Url": "/1881665/164419/user-guide/snake-2",
+>>>>>>> subtask/KCWA-458:gui/mocks/toc-1881665-t1-k26.json
+    "IsAbstract": false,
+    "HasChildNodes": false,
+    "Items": []
+  },
+  {
+    "Id": "t1-k30",
+    "Title": "Water Rapids",
+<<<<<<< HEAD:gui/mocks/toc-1656868-t1-p164241.json
+    "Url": "/app/1656868/164349/publication-mp330/water-rapids",
+=======
+    "Url": "/1881665/164349/user-guide/water-rapids",
+>>>>>>> subtask/KCWA-458:gui/mocks/toc-1881665-t1-k26.json
+    "IsAbstract": false,
+    "HasChildNodes": false,
+    "Items": []
+  },
+  {
+    "Id": "t1-k31",
+    "Title": "DJ Game",
+<<<<<<< HEAD:gui/mocks/toc-1656868-t1-p164241.json
+    "Url": "/app/1656868/164408/publication-mp330/dj-game",
+=======
+    "Url": "/1881665/164408/user-guide/dj-game",
+>>>>>>> subtask/KCWA-458:gui/mocks/toc-1881665-t1-k26.json
+    "IsAbstract": false,
+    "HasChildNodes": false,
+    "Items": []
+  }
+]

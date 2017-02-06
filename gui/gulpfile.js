@@ -9,6 +9,7 @@ const runSequence = require('run-sequence');
 const packageInfo = require('./package.json');
 const gulpTypings = require('./build/gulp-plugins/install-typings');
 const yargs = require('yargs');
+const path = require('path');
 
 const sourcesPath = './src/';
 const buildOptions = {
@@ -92,15 +93,6 @@ gulp.task('copy-dependencies', cb => {
                 }))
                 .pipe(gulp.dest(`${buildOptions.distPath}lib/react-dom/`))
                 .on('end', next);
-        },
-        // Mocks
-        next => {
-            gulp.src(['./mocks/**/*'])
-                .pipe(gulpDebug({
-                    title: 'Copying'
-                }))
-                .pipe(gulp.dest(`${buildOptions.distPath}mocks/`))
-                .on('end', next);
         }
     ], cb);
 });
@@ -143,6 +135,7 @@ gulp.task('build:dist', cb => {
             cb(errRs);
             return;
         }
+        console.log(`Removing previous output from ${targetPath}`);
         fs.remove(targetPath, errRemove => {
             if (errRemove) {
                 cb(errRemove);
@@ -153,7 +146,11 @@ gulp.task('build:dist', cb => {
                     cb(errEnsure);
                     return;
                 }
-                fs.move(buildOptions.distPath, targetPath, {
+                const assetsDistPath = buildOptions.distPath + 'assets/';
+                const assetsTargetPath = path.normalize(targetPath + '/assets/');
+                console.log(`Moving files from ${assetsDistPath} to ${assetsTargetPath}`);
+                // Only move assets, other files are not needed
+                fs.move(assetsDistPath, assetsTargetPath, {
                     clobber: true
                 }, cb);
             });

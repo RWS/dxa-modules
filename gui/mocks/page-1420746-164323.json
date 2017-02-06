@@ -1,33 +1,7 @@
 {
   "Id": "164323",
   "Meta": {
-    "ishlogicalref.object.id": 164319,
-    "ishversionref.object.id": 164320,
-    "ishlngref.object.id": 164323,
-    "ishref.object.value": "GUID-9000493F-2721-4498-9391-BCCC66CE50F1",
-    "ishtype.object.value": "ISHModule",
-    "FTITLE.logical.value": "voice messages",
-    "FDESCRIPTION.logical.value": null,
-    "FCHANGES.version.value": "Imported OASIS DITA 1.1",
-    "FISHRELEASELABEL.version.value": [
-      "Publication MP330-v1-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2012/09/21 12:27:01",
-      "Publication MP330-v2-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2012/09/24 17:31:39",
-      "Publication MP660-v1-GUID-EB2E82F1-1C76-4032-815C-4E717140A081-2012/09/24 14:57:38",
-      "Publication MP660-v2-GUID-EB2E82F1-1C76-4032-815C-4E717140A081-2012/09/24 17:09:12"
-    ],
-    "CREATED-ON.lng.value": "2015-12-23T04:57:05Z",
-    "FAUTHOR.lng.value": "admin",
-    "FSTATUS.lng.value": "Released",
-    "MODIFIED-ON.lng.value": "2016-04-08T15:12:08Z",
-    "VERSION.version.value": "1",
-    "DOC-LANGUAGE.lng.value": [
-      "en"
-    ],
-    "FISHREVCOUNTER.lng.value": 4,
-    "ED.lng.value": "GUID-4F2DBCF8-526A-4D66-B055-0F468CEC2B3E",
-    "FUSERGROUP.logical.element": null,
-    "READ-ACCESS.logical.element": null,
-    "publicationtitle.generated.value": "Publication MP330"
+    "tocnaventries.generated.value": "ish:1420746-24-1024"
   },
   "Regions": [
     {
@@ -38,7 +12,11 @@
           "topicBody": {
             "Fragments": [
               {
+<<<<<<< HEAD
                 "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-9000493F-2721-4498-9391-BCCC66CE50F1__GUID-033FCA5C-B977-4125-AFBF-C05C6899B3F3\" xmlns=\"http://www.w3.org/1999/xhtml\">Voice mailbox</h1>\n      \n      \n      \n      <div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\"><samp class=\"ph msgph\">Voice mailbox</samp> is a network service and you may need to subscribe to it.\n         </p>\n         \n         \n         <div class=\"p\">Press <samp class=\"ph msgph\">Menu</samp>, and select <samp class=\"ph msgph\">Messages</samp> and <samp class=\"ph msgph\">Voice Messages</samp>. Select\n            <ul class=\"ul\" id=\"GUID-9000493F-2721-4498-9391-BCCC66CE50F1__GUID-31A86A90-A602-4E54-80D4-124D4AEF5467\">\n               \n               <li class=\"li\">Listen to voice messages to call your <samp class=\"ph msgph\">Voice mailbox</samp> at the phone number that you have saved in the <samp class=\"ph msgph\">Voicemail number</samp> menu.\n               </li>\n               \n               \n               <li class=\"li\"><samp class=\"ph msgph\">Voicemail number</samp> to key in, search for or edit your <samp class=\"ph msgph\">Voicemail number</samp> and press <samp class=\"ph msgph\">OK</samp> to save it.\n               </li>\n               \n               \n            </ul>\n            \n         </div>\n         \n         \n         <div class=\"section\" id=\"GUID-9000493F-2721-4498-9391-BCCC66CE50F1__GUID-00EF02A4-DFD2-472E-BD7C-E83040074119\">\n            \n            \n            <p class=\"p\">If supported by the network, the indicator <img class=\"image\" src=\"/app/gui/mocks/bin/1420746-163939-16.gif\" /> will be shown if you have received new voice messages. Press <samp class=\"ph msgph\">Listen</samp> to call your voice mailbox number.\n            </p>\n            \n            \n            <div class=\"note tip\" id=\"GUID-9000493F-2721-4498-9391-BCCC66CE50F1__GUID-112349E4-62E0-44E7-8C2B-1BD1E1956A9B\"><span class=\"tiptitle\">Tip:</span> Pressing and holding <img class=\"image\" src=\"/app/gui/mocks/bin/1420746-345827-16.gif\" /> calls your voice mailbox if you have saved the <samp class=\"ph msgph\">Voicemail number</samp>.\n            </div>\n            \n            \n         </div>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Parent topic:</strong> <a class=\"link\" href=\"/app/1420746/164479/publication-mp330/messages\">Messages</a></div>\n            \n         </div>\n         \n      </div>\n   "
+=======
+                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-9000493F-2721-4498-9391-BCCC66CE50F1__GUID-033FCA5C-B977-4125-AFBF-C05C6899B3F3\" xmlns=\"http://www.w3.org/1999/xhtml\">Voice mailbox</h1>\n      \n      \n      \n      <div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\"><samp class=\"ph msgph\">Voice mailbox</samp> is a network service and you may need to subscribe to it.\n         </p>\n         \n         \n         <div class=\"p\">Press <samp class=\"ph msgph\">Menu</samp>, and select <samp class=\"ph msgph\">Messages</samp> and <samp class=\"ph msgph\">Voice Messages</samp>. Select\n            <ul class=\"ul\" id=\"GUID-9000493F-2721-4498-9391-BCCC66CE50F1__GUID-31A86A90-A602-4E54-80D4-124D4AEF5467\">\n               \n               <li class=\"li\">Listen to voice messages to call your <samp class=\"ph msgph\">Voice mailbox</samp> at the phone number that you have saved in the <samp class=\"ph msgph\">Voicemail number</samp> menu.\n               </li>\n               \n               \n               <li class=\"li\"><samp class=\"ph msgph\">Voicemail number</samp> to key in, search for or edit your <samp class=\"ph msgph\">Voicemail number</samp> and press <samp class=\"ph msgph\">OK</samp> to save it.\n               </li>\n               \n               \n            </ul>\n            \n         </div>\n         \n         \n         <div class=\"section\" id=\"GUID-9000493F-2721-4498-9391-BCCC66CE50F1__GUID-00EF02A4-DFD2-472E-BD7C-E83040074119\">\n            \n            \n            <p class=\"p\">If supported by the network, the indicator <img class=\"image\" src=\"/app/gui/mocks/bin/1420746-163939-16.gif\" /> will be shown if you have received new voice messages. Press <samp class=\"ph msgph\">Listen</samp> to call your voice mailbox number.\n            </p>\n            \n            \n            <div class=\"note tip\" id=\"GUID-9000493F-2721-4498-9391-BCCC66CE50F1__GUID-112349E4-62E0-44E7-8C2B-1BD1E1956A9B\"><span class=\"tiptitle\">Tip:</span> Pressing and holding <img class=\"image\" src=\"/app/gui/mocks/bin/1420746-345827-16.gif\" /> calls your voice mailbox if you have saved the <samp class=\"ph msgph\">Voicemail number</samp>.\n            </div>\n            \n            \n         </div>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Parent topic:</strong> <a class=\"link\" href=\"/1420746/164479/user-guide/messages\">Messages</a></div>\n            \n         </div>\n         \n      </div>\n   "
+>>>>>>> subtask/KCWA-458
               }
             ]
           }

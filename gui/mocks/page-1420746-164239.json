@@ -1,33 +1,7 @@
 {
   "Id": "164239",
   "Meta": {
-    "ishlogicalref.object.id": 164235,
-    "ishversionref.object.id": 164236,
-    "ishlngref.object.id": 164239,
-    "ishref.object.value": "GUID-3EE04983-92CD-498F-97E5-EEB40E2BDB79",
-    "ishtype.object.value": "ISHModule",
-    "FTITLE.logical.value": "games overview",
-    "FDESCRIPTION.logical.value": null,
-    "FCHANGES.version.value": "Imported OASIS DITA 1.1",
-    "FISHRELEASELABEL.version.value": [
-      "Publication MP330-v1-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2012/09/21 12:27:01",
-      "Publication MP330-v2-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2012/09/24 17:31:39",
-      "Publication MP660-v1-GUID-EB2E82F1-1C76-4032-815C-4E717140A081-2012/09/24 14:57:38",
-      "Publication MP660-v2-GUID-EB2E82F1-1C76-4032-815C-4E717140A081-2012/09/24 17:09:12"
-    ],
-    "CREATED-ON.lng.value": "2015-12-23T04:56:53Z",
-    "FAUTHOR.lng.value": "admin",
-    "FSTATUS.lng.value": "Released",
-    "MODIFIED-ON.lng.value": "2016-04-08T15:11:41Z",
-    "VERSION.version.value": "1",
-    "DOC-LANGUAGE.lng.value": [
-      "en"
-    ],
-    "FISHREVCOUNTER.lng.value": 4,
-    "ED.lng.value": "GUID-0463A436-0561-4120-918D-000A62433D5B",
-    "FUSERGROUP.logical.element": null,
-    "READ-ACCESS.logical.element": null,
-    "publicationtitle.generated.value": "Publication MP330"
+    "tocnaventries.generated.value": "ish:1420746-26-1024"
   },
   "Regions": [
     {
@@ -38,7 +12,11 @@
           "topicBody": {
             "Fragments": [
               {
+<<<<<<< HEAD
                 "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-3EE04983-92CD-498F-97E5-EEB40E2BDB79__GUID-F9BB818B-18A1-4C3A-A117-632717B5D6F2\" xmlns=\"http://www.w3.org/1999/xhtml\">Games</h1>\n      \n      \n      \n      <div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">Your phone supports Java 2 Micro Edition (J2METM), which is a version of Java technology specifically designed for small consumer\n            electronics products. The phone includes some Java applications and games, and supports downloading new applications and games\n            from different WAP services.\n         </p>\n         \n         \n         <p class=\"p\">\n            \n            \n         </p>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <ul class=\"ullinks\">\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/app/1420746/164379/publication-mp330/launching-a-game\">Launching a game</a></strong><br />\n               The phone includes some Java applications and games, and supports downloading new applications and games from different WAP\n               services.\n            </li>\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/app/1420746/164179/publication-mp330/game-downloads\">Game Downloads</a></strong><br />\n               The phone supports downloading new applications and games from different WAP services.\n            </li>\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/app/1420746/164417/publication-mp330/snake-2-game\">Snake 2 Game</a></strong><br />\n               Make the snake grow longer by directing it to the food.\n            </li>\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/app/1420746/164347/publication-mp330/water-rapids\">Water Rapids</a></strong><br />\n               Steer your raft down six rivers.\n            </li>\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/app/1420746/164406/publication-mp330/dj-game\">DJ Game</a></strong><br />\n               \n            </li>\n            \n         </ul>\n         \n      </div>\n   "
+=======
+                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-3EE04983-92CD-498F-97E5-EEB40E2BDB79__GUID-F9BB818B-18A1-4C3A-A117-632717B5D6F2\" xmlns=\"http://www.w3.org/1999/xhtml\">Games</h1>\n      \n      \n      \n      <div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">Your phone supports Java 2 Micro Edition (J2METM), which is a version of Java technology specifically designed for small consumer\n            electronics products. The phone includes some Java applications and games, and supports downloading new applications and games\n            from different WAP services.\n         </p>\n         \n         \n         <p class=\"p\">\n            \n            \n         </p>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <ul class=\"ullinks\">\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1420746/164379/user-guide/launching-a-game\">Launching a game</a></strong><br />\n               The phone includes some Java applications and games, and supports downloading new applications and games from different WAP\n               services.\n            </li>\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1420746/164179/user-guide/game-downloads\">Game Downloads</a></strong><br />\n               The phone supports downloading new applications and games from different WAP services.\n            </li>\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1420746/164417/user-guide/snake-2-game\">Snake 2 Game</a></strong><br />\n               Make the snake grow longer by directing it to the food.\n            </li>\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1420746/164347/user-guide/water-rapids\">Water Rapids</a></strong><br />\n               Steer your raft down six rivers.\n            </li>\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1420746/164406/user-guide/dj-game\">DJ Game</a></strong><br />\n               \n            </li>\n            \n         </ul>\n         \n      </div>\n   "
+>>>>>>> subtask/KCWA-458
               }
             ]
           }
