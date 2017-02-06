@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 namespace Sdl.Web.Modules.Core.Models
 {
+    [SemanticEntity(EntityName = "SocialLinks")]
     [Serializable]
     public class LinkList<T> : EntityModel
     {
