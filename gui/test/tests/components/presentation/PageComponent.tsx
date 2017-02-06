@@ -62,8 +62,51 @@ class PageComponent extends TestBase {
                 expect(errorElement).not.toBeNull("Error dialog not found");
                 const errorTitle = errorElement.querySelector("h1");
                 expect(errorTitle.textContent).toEqual("mock-error.page.not.found.title");
-                const buttons = errorElement.querySelectorAll(".sdl-dita-delivery-button-group button");
+                const buttons = errorElement.querySelectorAll(".sdl-dita-delivery-button-group button") as NodeListOf<HTMLButtonElement>;
                 expect(buttons.length).toEqual(2);
+            });
+
+            it("click on home button in error info", (): void => {
+                let path: string = "";
+                const page = this._renderComponent({
+                    showActivityIndicator: false,
+                    error: "Error!",
+                    onNavigate: (url): void => {
+                        path = url;
+                    }
+                }, target);
+
+                const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
+                const errorElement = domNode.querySelector(".sdl-dita-delivery-error");
+                const buttons = errorElement.querySelectorAll(".sdl-dita-delivery-button-group button") as NodeListOf<HTMLButtonElement>;
+                expect(buttons.length).toEqual(2);
+
+                buttons.item(0).click();
+                setTimeout(() => {
+                    expect(path).toBe("/");
+                }, 0);
+            });
+
+            it("click on retry button in error info", (): void => {
+                let path: string = "";
+                const page = this._renderComponent({
+                    showActivityIndicator: false,
+                    error: "Error!",
+                    url: "url/to/page",
+                    onNavigate: (url): void => {
+                        path = url;
+                    }
+                }, target);
+
+                const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
+                const errorElement = domNode.querySelector(".sdl-dita-delivery-error");
+                const buttons = errorElement.querySelectorAll(".sdl-dita-delivery-button-group button") as NodeListOf<HTMLButtonElement>;
+                expect(buttons.length).toEqual(2);
+
+                buttons.item(1).click();
+                setTimeout(() => {
+                    expect(path).toBe("url/to/page");
+                }, 0);
             });
 
             it("can show page content info", (): void => {

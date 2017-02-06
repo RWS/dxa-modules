@@ -11,20 +11,20 @@ import "components/container/styles/PublicationContent";
  * Error page component props
  *
  * @export
- * @interface IErrorPageProps
+ * @interface IGlobalErrorPageProps
  */
-export interface IErrorPageProps {
+export interface IGlobalErrorPageProps {
 
 }
 
 /**
- * Error page component
+ * Global Error page component
  *
  * @export
- * @param {IErrorProps} props
+ * @param {IGlobalErrorPageProps} props
  * @returns {JSX.Element}
  */
-export const ErrorPage: React.StatelessComponent<IErrorPageProps> = (props: IErrorPageProps, context: IAppContext): JSX.Element => {
+export const GlobalErrorPage: React.StatelessComponent<IGlobalErrorPageProps> = (props: IGlobalErrorPageProps, context: IAppContext): JSX.Element => {
     const { formatMessage } = context.services.localizationService;
     const _goHome = (): void => context.router && context.router.push("/");
 
@@ -48,7 +48,7 @@ export const ErrorPage: React.StatelessComponent<IErrorPageProps> = (props: IErr
     );
 };
 
-ErrorPage.contextTypes = {
+GlobalErrorPage.contextTypes = {
     services: React.PropTypes.object.isRequired,
     router: React.PropTypes.object.isRequired
 } as React.ValidationMap<IAppContext>;

@@ -4,7 +4,7 @@ import { IServices } from "interfaces/Services";
 import { Home } from "components/container/Home";
 import { PublicationContent } from "components/container/PublicationContent";
 import { PublicationsList } from "components/container/PublicationsList";
-import { ErrorPage } from "components/presentation/ErrorPage";
+import { GlobalErrorPage } from "components/presentation/GlobalErrorPage";
 
 export interface IAppProps {
     /**
@@ -70,7 +70,7 @@ export class App extends React.Component<IAppProps, {}> {
                     <Redirect from="home;jsessionid=*" to="/home" />
                     <Route path="home" component={PublicationsList} />
                     <Route path=":publicationId(/:pageIdOrPublicationTitle)(/:publicationTitle)(/:pageTitle)(/:pageAnchor)" component={PublicationContent} />
-                    <Route path="*" component={ErrorPage} />
+                    <Route path="error" component={GlobalErrorPage} />
                 </Route>
             </Router>
         );
