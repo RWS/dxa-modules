@@ -1,0 +1,26 @@
+@import (reference) "../../../theming/styles.less";
+@import (reference) "../../presentation/styles/Error.less";
+
+.sdl-dita-delivery-error-content {
+
+    .content();
+
+    .sdl-dita-delivery-error-page {
+        max-width: 1200px;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    .sdl-dita-delivery-error {
+        margin: 76px auto;
+
+        @media screen and (min-width: (1+@screenLg)) {
+            width: @errorWidth;
+            max-width: @errorWidth;
+        }
+
+        @media screen and (max-width: @screenLg) {
+            width: 80%;
+        }
+    }
+}

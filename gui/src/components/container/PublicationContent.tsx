@@ -303,7 +303,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         const { services, router } = this.context;
         const { publicationId } = this.props.params;
         const { taxonomyService, localizationService } = services;
-        const { content, error} = this._page;
+        const { content, error } = this._page;
         const { rootItems } = this._toc;
         const tocError = this._toc.error;
 

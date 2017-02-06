@@ -5,7 +5,7 @@ import { IAppContext } from "components/container/App";
 import { Button } from "sdl-controls-react-wrappers";
 import { ButtonPurpose } from "sdl-controls";
 
-import "components/container/styles/PublicationContent";
+import "components/container/styles/ErrorContent";
 
 /**
  * Error page component props
@@ -33,8 +33,7 @@ export const GlobalErrorPage: React.StatelessComponent<IGlobalErrorPageProps> = 
         </div>;
 
     return (
-        <section className={"sdl-dita-delivery-publication-content"}>
-
+        <section className={"sdl-dita-delivery-error-content"}>
             <SearchBar
                 placeholderLabel={formatMessage("components.searchbar.placeholder")}
                 onSearch={query => console.log(query)} />
