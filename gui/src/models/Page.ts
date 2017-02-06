@@ -59,11 +59,12 @@ export class Page extends LoadableObject {
                 }
             }
         }
+        const navEntries = page.Meta["tocnaventries.generated.value"];
         this._page = {
             id: page.Id,
             title: pageTitle,
             content: pageBody,
-            sitemapIds: page.Meta["tocnaventries.generated.value"]
+            sitemapIds: typeof navEntries === "string" ? navEntries.split(", ") : navEntries
         } as IPage;
 
         super._processLoadResult(result, webRequest);
