@@ -8,23 +8,23 @@ import { ButtonPurpose } from "sdl-controls";
 import "components/container/styles/ErrorContent";
 
 /**
- * Error page component props
+ * Error content component props
  *
  * @export
- * @interface IGlobalErrorPageProps
+ * @interface IErrorContentProps
  */
-export interface IGlobalErrorPageProps {
+export interface IErrorContentProps {
 
 }
 
 /**
- * Global Error page component
+ * Error content component
  *
  * @export
- * @param {IGlobalErrorPageProps} props
+ * @param {IErrorContentProps} props
  * @returns {JSX.Element}
  */
-export const GlobalErrorPage: React.StatelessComponent<IGlobalErrorPageProps> = (props: IGlobalErrorPageProps, context: IAppContext): JSX.Element => {
+export const ErrorContent: React.StatelessComponent<IErrorContentProps> = (props: IErrorContentProps, context: IAppContext): JSX.Element => {
     const { formatMessage } = context.services.localizationService;
     const _goHome = (): void => context.router && context.router.push("/");
 
@@ -47,7 +47,7 @@ export const GlobalErrorPage: React.StatelessComponent<IGlobalErrorPageProps> = 
     );
 };
 
-GlobalErrorPage.contextTypes = {
+ErrorContent.contextTypes = {
     services: React.PropTypes.object.isRequired,
     router: React.PropTypes.object.isRequired
 } as React.ValidationMap<IAppContext>;

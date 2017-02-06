@@ -1,10 +1,10 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { GlobalErrorPage, IGlobalErrorPageProps } from "components/presentation/GlobalErrorPage";
+import { ErrorContent, IErrorContentProps } from "components/container/ErrorContent";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 import { TestBase } from "sdl-models";
 
-class GlobalErrorPageComponent extends TestBase {
+class ErrorContentComponent extends TestBase {
 
     public runTests(): void {
 
@@ -44,9 +44,9 @@ class GlobalErrorPageComponent extends TestBase {
         });
     }
 
-    private _renderComponent(props: IGlobalErrorPageProps, target: HTMLElement): void {
-        ReactDOM.render(<ComponentWithContext><GlobalErrorPage {...props} /></ComponentWithContext>, target) as React.Component<{}, {}>;
+    private _renderComponent(props: IErrorContentProps, target: HTMLElement): void {
+        ReactDOM.render(<ComponentWithContext><ErrorContent {...props} /></ComponentWithContext>, target) as React.Component<{}, {}>;
     }
 }
 
-new GlobalErrorPageComponent().runTests();
+new ErrorContentComponent().runTests();
