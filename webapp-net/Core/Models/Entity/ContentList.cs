@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
+using Sdl.Web.Common.Logging;
 
 namespace Sdl.Web.Modules.Core.Models
 {
@@ -36,17 +37,22 @@ namespace Sdl.Web.Modules.Core.Models
                 Start = Start,
                 PageSize = PageSize,
                 PublicationId = Int32.Parse(localization.LocalizationId),
-                SchemaId = MapSchema(ContentType.Key, localization),
-                Sort = Sort.Key,
+                SchemaId = MapSchema(localization),
+                Sort = Sort?.Key,
                 Localization = localization
             };
         }
 
-        protected int MapSchema(string schemaKey, Localization localization)
+        protected int MapSchema(Localization localization)
         {
-            string[] schemaKeyParts = schemaKey.Split('.');
+            if (ContentType == null)
+            {
+                Log.Debug("Content Type not set for {0}; results are not filtered by Schema.", this);
+                return 0;
+            }
+            string[] schemaKeyParts = ContentType.Key.Split('.');
             string moduleName = schemaKeyParts.Length > 1 ? schemaKeyParts[0] : SiteConfiguration.CoreModuleName;
-            schemaKey = schemaKeyParts.Length > 1 ? schemaKeyParts[1] : schemaKeyParts[0];
+            string schemaKey = schemaKeyParts.Length > 1 ? schemaKeyParts[1] : schemaKeyParts[0];
             string schemaId = localization.GetConfigValue(string.Format("{0}.schemas.{1}", moduleName, schemaKey));
             int result;
             Int32.TryParse(schemaId, out result);

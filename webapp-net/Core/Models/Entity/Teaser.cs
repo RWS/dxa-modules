@@ -12,6 +12,7 @@ namespace Sdl.Web.Modules.Core.Models
     [SemanticEntity(EntityName = "NewsArticle", Prefix = "na", Vocab = CoreVocabulary)]
     [SemanticEntity(EntityName = "Place", Prefix = "p", Vocab = CoreVocabulary)]
     [SemanticEntity(EntityName = "StandardMetadata", Prefix = "m", Vocab = CoreVocabulary)]
+    [SemanticEntity(EntityName = "LinkedContent", Prefix = "c", Vocab = CoreVocabulary)]
     [Serializable]
     public class Teaser : EntityModel, ISyndicationFeedItemProvider
     {
@@ -19,6 +20,8 @@ namespace Sdl.Web.Modules.Core.Models
         [SemanticProperty("na:_self")]
         [SemanticProperty("a:_self")]
         [SemanticProperty("p:_self")]
+        [SemanticProperty("c:link")]
+
         public Link Link { get; set; }
         
         [SemanticProperty("na:name")]
@@ -26,12 +29,14 @@ namespace Sdl.Web.Modules.Core.Models
         [SemanticProperty("headline")]
         [SemanticProperty("subheading")]
         [SemanticProperty("p:name")]
+        [SemanticProperty("c:subheading")]
         public string Headline { get; set; }
         
         //A teaser can be mapped from an individual image, in which case the image property is set from the source entity itself
         [SemanticProperty("i:_self")]
         [SemanticProperty("a:image")]
         [SemanticProperty("na:image")]
+        [SemanticProperty("c:media")]
         public MediaItem Media { get; set; }
 
         [SemanticProperty("na:introText")]
@@ -39,6 +44,7 @@ namespace Sdl.Web.Modules.Core.Models
         [SemanticProperty("content")]
         [SemanticProperty("description")]
         [SemanticProperty("m:description")]
+        [SemanticProperty("c:content")]
         public RichText Text { get; set; }
 
         [SemanticProperty("dateCreated")]
