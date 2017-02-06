@@ -1,17 +1,28 @@
-{
-  "Id": "t1-k32",
-  "Title": "Music functions",
-  "Url": "/1961702/164371/user-guide/music-functions",
-  "IsAbstract": false,
-  "HasChildNodes": true,
-  "Items": [
-    {
-      "Id": "t1-k34",
-      "Title": "Listening to the radio",
-      "Url": "/1961702/164163/user-guide/listening-to-the-radio",
-      "IsAbstract": false,
-      "HasChildNodes": false,
-      "Items": []
-    }
-  ]
-}
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k32",
+        "Title": "Music functions",
+        "Url": "/1961702/164371/user-guide/music-functions",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": [
+          {
+            "Id": "t1-k34",
+            "Title": "Listening to the radio",
+            "Url": "/1961702/164163/user-guide/listening-to-the-radio",
+            "IsAbstract": false,
+            "HasChildNodes": false,
+            "Items": []
+          }
+        ]
+      }
+    ]
+  }
+]

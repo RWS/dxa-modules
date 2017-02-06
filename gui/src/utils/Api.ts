@@ -16,20 +16,19 @@ export class Api {
      *
      * @static
      * @param {string} publicationId Publication id
-     * @param {string} taxonomyId Taxonomy id
+     * @param {string} sitemapItemId Sitemap item id
      * @returns {string}
      *
      * @memberOf Api
      */
-    public static getNavigationLinksUrl(publicationId: string, taxonomyId: string): string {
+    public static getNavigationLinksUrl(publicationId: string, sitemapItemId: string): string {
         const encodedPubId = encodeURIComponent(publicationId);
-        const encodedTaxonomyId = encodeURIComponent(taxonomyId);
+        const encodedSitemapItemId = encodeURIComponent(sitemapItemId);
         /* istanbul ignore else */
         if (mocksEnabled) {
-            return path.getAbsolutePath(`gui/mocks/navigation-${encodedPubId}-${encodedTaxonomyId}.json`);
+            return path.getAbsolutePath(`gui/mocks/navigation-${encodedPubId}-${encodedSitemapItemId}.json`);
         } else {
-            // TODO: use real end point
-            return path.getAbsolutePath(`gui/mocks/navigation-${encodedPubId}-${encodedTaxonomyId}.json`);
+            return path.getAbsolutePath(`api/toc/${encodedPubId}/${encodedSitemapItemId}?includeAncestors=true`);
         }
     }
 

@@ -1,17 +1,28 @@
-{
-  "Id": "t1-k21",
-  "Title": "Mitteilungen",
-  "Url": "/1961700/164477/user-guide/mitteilungen",
-  "IsAbstract": false,
-  "HasChildNodes": true,
-  "Items": [
-    {
-      "Id": "t1-k25",
-      "Title": "Löschen von Mitteilungen",
-      "Url": "/1961700/164450/user-guide/loschen-von-mitteilungen",
-      "IsAbstract": false,
-      "HasChildNodes": false,
-      "Items": []
-    }
-  ]
-}
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k21",
+        "Title": "Mitteilungen",
+        "Url": "/1961700/164477/user-guide/mitteilungen",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": [
+          {
+            "Id": "t1-k25",
+            "Title": "Löschen von Mitteilungen",
+            "Url": "/1961700/164450/user-guide/loschen-von-mitteilungen",
+            "IsAbstract": false,
+            "HasChildNodes": false,
+            "Items": []
+          }
+        ]
+      }
+    ]
+  }
+]

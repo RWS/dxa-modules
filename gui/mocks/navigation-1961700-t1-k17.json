@@ -1,17 +1,28 @@
-{
-  "Id": "t1-k16",
-  "Title": "Anruffunktionen",
-  "Url": "/1961700/164466/user-guide/anruffunktionen",
-  "IsAbstract": false,
-  "HasChildNodes": true,
-  "Items": [
-    {
-      "Id": "t1-k17",
-      "Title": "Anrufen",
-      "Url": "/1961700/164210/user-guide/anrufen",
-      "IsAbstract": false,
-      "HasChildNodes": true,
-      "Items": []
-    }
-  ]
-}
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k16",
+        "Title": "Anruffunktionen",
+        "Url": "/1961700/164466/user-guide/anruffunktionen",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": [
+          {
+            "Id": "t1-k17",
+            "Title": "Anrufen",
+            "Url": "/1961700/164210/user-guide/anrufen",
+            "IsAbstract": false,
+            "HasChildNodes": true,
+            "Items": []
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,17 +1,28 @@
-{
-  "Id": "t1-k4",
-  "Title": "Your phone",
-  "Url": "/1961702/164231/user-guide/your-phone",
-  "IsAbstract": false,
-  "HasChildNodes": true,
-  "Items": [
-    {
-      "Id": "t1-k6",
-      "Title": "Connectors overview",
-      "Url": "/1961702/164155/user-guide/connectors-overview",
-      "IsAbstract": false,
-      "HasChildNodes": false,
-      "Items": []
-    }
-  ]
-}
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k4",
+        "Title": "Your phone",
+        "Url": "/1961702/164231/user-guide/your-phone",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": [
+          {
+            "Id": "t1-k6",
+            "Title": "Connectors overview",
+            "Url": "/1961702/164155/user-guide/connectors-overview",
+            "IsAbstract": false,
+            "HasChildNodes": false,
+            "Items": []
+          }
+        ]
+      }
+    ]
+  }
+]

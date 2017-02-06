@@ -1,17 +1,28 @@
-{
-  "Id": "t1-k35",
-  "Title": "Phone book",
-  "Url": "/1420746/164301/user-guide/phone-book",
-  "IsAbstract": false,
-  "HasChildNodes": true,
-  "Items": [
-    {
-      "Id": "t1-k37",
-      "Title": "Searching for a contact",
-      "Url": "/1420746/164428/user-guide/searching-for-a-contact",
-      "IsAbstract": false,
-      "HasChildNodes": false,
-      "Items": []
-    }
-  ]
-}
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k35",
+        "Title": "Phone book",
+        "Url": "/1420746/164301/user-guide/phone-book",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": [
+          {
+            "Id": "t1-k37",
+            "Title": "Searching for a contact",
+            "Url": "/1420746/164428/user-guide/searching-for-a-contact",
+            "IsAbstract": false,
+            "HasChildNodes": false,
+            "Items": []
+          }
+        ]
+      }
+    ]
+  }
+]

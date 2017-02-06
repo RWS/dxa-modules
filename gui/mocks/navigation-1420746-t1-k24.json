@@ -1,17 +1,28 @@
-{
-  "Id": "t1-k21",
-  "Title": "Messages",
-  "Url": "/1420746/164479/user-guide/messages",
-  "IsAbstract": false,
-  "HasChildNodes": true,
-  "Items": [
-    {
-      "Id": "t1-k24",
-      "Title": "Voice mailbox",
-      "Url": "/1420746/164323/user-guide/voice-mailbox",
-      "IsAbstract": false,
-      "HasChildNodes": false,
-      "Items": []
-    }
-  ]
-}
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k21",
+        "Title": "Messages",
+        "Url": "/1420746/164479/user-guide/messages",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": [
+          {
+            "Id": "t1-k24",
+            "Title": "Voice mailbox",
+            "Url": "/1420746/164323/user-guide/voice-mailbox",
+            "IsAbstract": false,
+            "HasChildNodes": false,
+            "Items": []
+          }
+        ]
+      }
+    ]
+  }
+]
