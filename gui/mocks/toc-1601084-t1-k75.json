@@ -2,11 +2,7 @@
   {
     "Id": "t1-k76",
     "Title": "South polar skua (Stercorarius maccormicki)",
-<<<<<<< HEAD:gui/mocks/toc-1184146-t1-p515761.json
-    "Url": "/app/1184146/515702/penguin-publication/south-polar-skua--stercorarius-maccormicki-",
-=======
     "Url": "/1601084/515702/penguin-guide/south-polar-skua--stercorarius-maccormicki-",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1601084-t1-k75.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []

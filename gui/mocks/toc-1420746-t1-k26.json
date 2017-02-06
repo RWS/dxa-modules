@@ -2,11 +2,7 @@
   {
     "Id": "t1-k27",
     "Title": "Launching a game",
-<<<<<<< HEAD:gui/mocks/toc-1656863-t1-p164239.json
-    "Url": "/app/1656863/164379/publication-mp330/launching-a-game",
-=======
     "Url": "/1420746/164379/user-guide/launching-a-game",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1420746-t1-k26.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -14,11 +10,7 @@
   {
     "Id": "t1-k28",
     "Title": "Game Downloads",
-<<<<<<< HEAD:gui/mocks/toc-1656863-t1-p164239.json
-    "Url": "/app/1656863/164179/publication-mp330/game-downloads",
-=======
     "Url": "/1420746/164179/user-guide/game-downloads",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1420746-t1-k26.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -26,11 +18,7 @@
   {
     "Id": "t1-k29",
     "Title": "Snake 2 Game",
-<<<<<<< HEAD:gui/mocks/toc-1656863-t1-p164239.json
-    "Url": "/app/1656863/164417/publication-mp330/snake-2-game",
-=======
     "Url": "/1420746/164417/user-guide/snake-2-game",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1420746-t1-k26.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -38,11 +26,7 @@
   {
     "Id": "t1-k30",
     "Title": "Water Rapids",
-<<<<<<< HEAD:gui/mocks/toc-1656863-t1-p164239.json
-    "Url": "/app/1656863/164347/publication-mp330/water-rapids",
-=======
     "Url": "/1420746/164347/user-guide/water-rapids",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1420746-t1-k26.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -50,11 +34,7 @@
   {
     "Id": "t1-k31",
     "Title": "DJ Game",
-<<<<<<< HEAD:gui/mocks/toc-1656863-t1-p164239.json
-    "Url": "/app/1656863/164406/publication-mp330/dj-game",
-=======
     "Url": "/1420746/164406/user-guide/dj-game",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1420746-t1-k26.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []

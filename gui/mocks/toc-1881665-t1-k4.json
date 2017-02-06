@@ -2,11 +2,7 @@
   {
     "Id": "t1-k5",
     "Title": "Toetsen",
-<<<<<<< HEAD:gui/mocks/toc-1656868-t1-p164233.json
-    "Url": "/app/1656868/164284/publication-mp330/toetsen",
-=======
     "Url": "/1881665/164284/user-guide/toetsen",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1881665-t1-k4.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -14,11 +10,7 @@
   {
     "Id": "t1-k6",
     "Title": "Aansluitingen",
-<<<<<<< HEAD:gui/mocks/toc-1656868-t1-p164233.json
-    "Url": "/app/1656868/164157/publication-mp330/aansluitingen",
-=======
     "Url": "/1881665/164157/user-guide/aansluitingen",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1881665-t1-k4.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -26,11 +18,7 @@
   {
     "Id": "t1-k7",
     "Title": "Standby-modus",
-<<<<<<< HEAD:gui/mocks/toc-1656868-t1-p164233.json
-    "Url": "/app/1656868/164189/publication-mp330/standby-modus",
-=======
     "Url": "/1881665/164189/user-guide/standby-modus",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1881665-t1-k4.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -38,11 +26,7 @@
   {
     "Id": "t1-k8",
     "Title": "Belangrijke indicatoren in de standby-modus",
-<<<<<<< HEAD:gui/mocks/toc-1656868-t1-p164233.json
-    "Url": "/app/1656868/164257/publication-mp330/belangrijke-indicatoren-in-de-standby-modus",
-=======
     "Url": "/1881665/164257/user-guide/belangrijke-indicatoren-in-de-standby-modus",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1881665-t1-k4.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -50,11 +34,7 @@
   {
     "Id": "t1-k9",
     "Title": "Screensaver",
-<<<<<<< HEAD:gui/mocks/toc-1656868-t1-p164233.json
-    "Url": "/app/1656868/164438/publication-mp330/screensaver",
-=======
     "Url": "/1881665/164438/user-guide/screensaver",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1881665-t1-k4.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -62,11 +42,7 @@
   {
     "Id": "t1-k10",
     "Title": "General Packet Radio Service (GPRS)",
-<<<<<<< HEAD:gui/mocks/toc-1656868-t1-p164233.json
-    "Url": "/app/1656868/164173/publication-mp330/general-packet-radio-service--gprs-",
-=======
     "Url": "/1881665/164173/user-guide/general-packet-radio-service--gprs-",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1881665-t1-k4.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -74,11 +50,7 @@
   {
     "Id": "t1-k11",
     "Title": "Bluetooth-verbinding",
-<<<<<<< HEAD:gui/mocks/toc-1656868-t1-p164233.json
-    "Url": "/app/1656868/164311/publication-mp330/bluetooth-verbinding",
-=======
     "Url": "/1881665/164311/user-guide/bluetooth-verbinding",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1881665-t1-k4.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []

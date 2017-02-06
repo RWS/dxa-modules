@@ -2,11 +2,7 @@
   {
     "Id": "t1-k6",
     "Title": "Living species and recent extinctions",
-<<<<<<< HEAD:gui/mocks/toc-1184146-t1-p516088.json
-    "Url": "/app/1184146/516760/penguin-publication/living-species-and-recent-extinctions",
-=======
     "Url": "/1601084/516760/penguin-guide/living-species-and-recent-extinctions",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1601084-t1-k5.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -14,11 +10,7 @@
   {
     "Id": "t1-k7",
     "Title": "Taxonomy",
-<<<<<<< HEAD:gui/mocks/toc-1184146-t1-p516088.json
-    "Url": "/app/1184146/517118/penguin-publication/taxonomy",
-=======
     "Url": "/1601084/517118/penguin-guide/taxonomy",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1601084-t1-k5.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -26,11 +18,7 @@
   {
     "Id": "t1-k8",
     "Title": "Evolution",
-<<<<<<< HEAD:gui/mocks/toc-1184146-t1-p516088.json
-    "Url": "/app/1184146/516982/penguin-publication/evolution",
-=======
     "Url": "/1601084/516982/penguin-guide/evolution",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1601084-t1-k5.json
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -38,11 +26,7 @@
   {
     "Id": "t1-k12",
     "Title": "Relationship to other bird orders",
-<<<<<<< HEAD:gui/mocks/toc-1184146-t1-p516088.json
-    "Url": "/app/1184146/516818/penguin-publication/relationship-to-other-bird-orders",
-=======
     "Url": "/1601084/516818/penguin-guide/relationship-to-other-bird-orders",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1601084-t1-k5.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []

@@ -2,11 +2,7 @@
   {
     "Id": "t1-k75",
     "Title": "Skuas",
-<<<<<<< HEAD:gui/mocks/toc-1184146-t1-k62.json
-    "Url": "/app/1184146/515761/penguin-publication/skuas",
-=======
     "Url": "/1601084/515761/penguin-guide/skuas",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1601084-t1-k74.json
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -14,11 +10,7 @@
   {
     "Id": "t1-k77",
     "Title": "Snowy sheathbill (Chionis albus)",
-<<<<<<< HEAD:gui/mocks/toc-1184146-t1-k62.json
-    "Url": "/app/1184146/515877/penguin-publication/snowy-sheathbill--chionis-albus-",
-=======
     "Url": "/1601084/515877/penguin-guide/snowy-sheathbill--chionis-albus-",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1601084-t1-k74.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -26,11 +18,7 @@
   {
     "Id": "t1-k78",
     "Title": "Spoonbills",
-<<<<<<< HEAD:gui/mocks/toc-1184146-t1-k62.json
-    "Url": "/app/1184146/515799/penguin-publication/spoonbills",
-=======
     "Url": "/1601084/515799/penguin-guide/spoonbills",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1601084-t1-k74.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -38,11 +26,7 @@
   {
     "Id": "t1-k79",
     "Title": "Storks",
-<<<<<<< HEAD:gui/mocks/toc-1184146-t1-k62.json
-    "Url": "/app/1184146/515825/penguin-publication/storks",
-=======
     "Url": "/1601084/515825/penguin-guide/storks",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1601084-t1-k74.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []

@@ -2,11 +2,7 @@
   {
     "Id": "t1-k9",
     "Title": "Basal fossils",
-<<<<<<< HEAD:gui/mocks/toc-1184146-t1-p516982.json
-    "Url": "/app/1184146/516143/penguin-publication/basal-fossils",
-=======
     "Url": "/1601084/516143/penguin-guide/basal-fossils",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1601084-t1-k8.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -14,11 +10,7 @@
   {
     "Id": "t1-k10",
     "Title": "Palaeeudyptines",
-<<<<<<< HEAD:gui/mocks/toc-1184146-t1-p516982.json
-    "Url": "/app/1184146/517080/penguin-publication/palaeeudyptines",
-=======
     "Url": "/1601084/517080/penguin-guide/palaeeudyptines",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1601084-t1-k8.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -26,11 +18,7 @@
   {
     "Id": "t1-k11",
     "Title": "Origin and systematics of modern penguins",
-<<<<<<< HEAD:gui/mocks/toc-1184146-t1-p516982.json
-    "Url": "/app/1184146/516346/penguin-publication/origin-and-systematics-of-modern-penguins",
-=======
     "Url": "/1601084/516346/penguin-guide/origin-and-systematics-of-modern-penguins",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1601084-t1-k8.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []

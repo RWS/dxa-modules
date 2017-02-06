@@ -2,11 +2,7 @@
   {
     "Id": "t1-k36",
     "Title": "Saving names and numbers",
-<<<<<<< HEAD:gui/mocks/toc-1656863-t1-p164301.json
-    "Url": "/app/1656863/164263/publication-mp330/saving-names-and-numbers",
-=======
     "Url": "/1420746/164263/user-guide/saving-names-and-numbers",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1420746-t1-k35.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -14,11 +10,7 @@
   {
     "Id": "t1-k37",
     "Title": "Searching for a contact",
-<<<<<<< HEAD:gui/mocks/toc-1656863-t1-p164301.json
-    "Url": "/app/1656863/164428/publication-mp330/searching-for-a-contact",
-=======
     "Url": "/1420746/164428/user-guide/searching-for-a-contact",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1420746-t1-k35.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -26,11 +18,7 @@
   {
     "Id": "t1-k38",
     "Title": "Editing a contact",
-<<<<<<< HEAD:gui/mocks/toc-1656863-t1-p164301.json
-    "Url": "/app/1656863/164444/publication-mp330/editing-a-contact",
-=======
     "Url": "/1420746/164444/user-guide/editing-a-contact",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1420746-t1-k35.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []

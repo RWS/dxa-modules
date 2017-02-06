@@ -2,11 +2,7 @@
   {
     "Id": "t1-k58",
     "Title": "Ibis",
-<<<<<<< HEAD:gui/mocks/toc-1184146-t1-k52.json
-    "Url": "/app/1184146/515654/penguin-publication/ibis",
-=======
     "Url": "/1601084/515654/penguin-guide/ibis",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1601084-t1-k57.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []

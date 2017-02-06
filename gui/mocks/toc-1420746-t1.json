@@ -2,11 +2,7 @@
   {
     "Id": "t1-k2",
     "Title": "Dear Customer",
-<<<<<<< HEAD:gui/mocks/toc-1420746-root.json
-    "Url": "/app/1420746/164223/publication-mp330/dear-customer",
-=======
     "Url": "/1420746/164223/user-guide/dear-customer",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1420746-t1.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -14,11 +10,7 @@
   {
     "Id": "t1-k3",
     "Title": "For your safety",
-<<<<<<< HEAD:gui/mocks/toc-1420746-root.json
-    "Url": "/app/1420746/164247/publication-mp330/for-your-safety",
-=======
     "Url": "/1420746/164247/user-guide/for-your-safety",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1420746-t1.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -26,11 +18,7 @@
   {
     "Id": "t1-k4",
     "Title": "Your phone",
-<<<<<<< HEAD:gui/mocks/toc-1420746-root.json
-    "Url": "/app/1420746/164231/publication-mp330/your-phone",
-=======
     "Url": "/1420746/164231/user-guide/your-phone",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1420746-t1.json
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -38,11 +26,7 @@
   {
     "Id": "t1-k12",
     "Title": "Getting started",
-<<<<<<< HEAD:gui/mocks/toc-1420746-root.json
-    "Url": "/app/1420746/164398/publication-mp330/getting-started",
-=======
     "Url": "/1420746/164398/user-guide/getting-started",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1420746-t1.json
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -50,11 +34,7 @@
   {
     "Id": "t1-k16",
     "Title": "Call functions",
-<<<<<<< HEAD:gui/mocks/toc-1420746-root.json
-    "Url": "/app/1420746/164468/publication-mp330/call-functions",
-=======
     "Url": "/1420746/164468/user-guide/call-functions",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1420746-t1.json
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -62,11 +42,7 @@
   {
     "Id": "t1-k21",
     "Title": "Messages",
-<<<<<<< HEAD:gui/mocks/toc-1420746-root.json
-    "Url": "/app/1420746/164479/publication-mp330/messages",
-=======
     "Url": "/1420746/164479/user-guide/messages",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1420746-t1.json
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -74,11 +50,7 @@
   {
     "Id": "t1-k26",
     "Title": "Games",
-<<<<<<< HEAD:gui/mocks/toc-1420746-root.json
-    "Url": "/app/1420746/164239/publication-mp330/games",
-=======
     "Url": "/1420746/164239/user-guide/games",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1420746-t1.json
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -86,11 +58,7 @@
   {
     "Id": "t1-k32",
     "Title": "Music functions",
-<<<<<<< HEAD:gui/mocks/toc-1420746-root.json
-    "Url": "/app/1420746/164371/publication-mp330/music-functions",
-=======
     "Url": "/1420746/164371/user-guide/music-functions",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1420746-t1.json
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -98,11 +66,7 @@
   {
     "Id": "t1-k35",
     "Title": "Phone book",
-<<<<<<< HEAD:gui/mocks/toc-1420746-root.json
-    "Url": "/app/1420746/164301/publication-mp330/phone-book",
-=======
     "Url": "/1420746/164301/user-guide/phone-book",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1420746-t1.json
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []

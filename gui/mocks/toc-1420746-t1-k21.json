@@ -2,11 +2,7 @@
   {
     "Id": "t1-k22",
     "Title": "Text Messages",
-<<<<<<< HEAD:gui/mocks/toc-1656863-t1-p164479.json
-    "Url": "/app/1656863/164460/publication-mp330/text-messages",
-=======
     "Url": "/1420746/164460/user-guide/text-messages",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1420746-t1-k21.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -14,11 +10,7 @@
   {
     "Id": "t1-k23",
     "Title": "Multimedia messages",
-<<<<<<< HEAD:gui/mocks/toc-1656863-t1-p164479.json
-    "Url": "/app/1656863/164390/publication-mp330/multimedia-messages",
-=======
     "Url": "/1420746/164390/user-guide/multimedia-messages",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1420746-t1-k21.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -26,11 +18,7 @@
   {
     "Id": "t1-k24",
     "Title": "Voice mailbox",
-<<<<<<< HEAD:gui/mocks/toc-1656863-t1-p164479.json
-    "Url": "/app/1656863/164323/publication-mp330/voice-mailbox",
-=======
     "Url": "/1420746/164323/user-guide/voice-mailbox",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1420746-t1-k21.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -38,11 +26,7 @@
   {
     "Id": "t1-k25",
     "Title": "Deleting messages",
-<<<<<<< HEAD:gui/mocks/toc-1656863-t1-p164479.json
-    "Url": "/app/1656863/164452/publication-mp330/deleting-messages",
-=======
     "Url": "/1420746/164452/user-guide/deleting-messages",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1420746-t1-k21.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []

@@ -2,11 +2,7 @@
   {
     "Id": "t1-k13",
     "Title": "Installing the SIM card and the battery",
-<<<<<<< HEAD:gui/mocks/toc-1420746-t1-p164398.json
-    "Url": "/app/1420746/164271/publication-mp330/installing-the-sim-card-and-the-battery",
-=======
     "Url": "/1420746/164271/user-guide/installing-the-sim-card-and-the-battery",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1420746-t1-k12.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -14,11 +10,7 @@
   {
     "Id": "t1-k14",
     "Title": "Charging the battery",
-<<<<<<< HEAD:gui/mocks/toc-1420746-t1-p164398.json
-    "Url": "/app/1420746/164290/publication-mp330/charging-the-battery",
-=======
     "Url": "/1420746/164290/user-guide/charging-the-battery",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1420746-t1-k12.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -26,11 +18,7 @@
   {
     "Id": "t1-k15",
     "Title": "Locking the keypad",
-<<<<<<< HEAD:gui/mocks/toc-1420746-t1-p164398.json
-    "Url": "/app/1420746/164355/publication-mp330/locking-the-keypad",
-=======
     "Url": "/1420746/164355/user-guide/locking-the-keypad",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1420746-t1-k12.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []

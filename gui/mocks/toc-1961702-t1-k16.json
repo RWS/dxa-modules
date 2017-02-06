@@ -2,11 +2,7 @@
   {
     "Id": "t1-k17",
     "Title": "Making a call",
-<<<<<<< HEAD:gui/mocks/toc-1420746-t1-p164468.json
-    "Url": "/app/1420746/164212/publication-mp330/making-a-call",
-=======
     "Url": "/1961702/164212/user-guide/making-a-call",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1961702-t1-k16.json
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -14,11 +10,7 @@
   {
     "Id": "t1-k20",
     "Title": "Answering or rejecting a call",
-<<<<<<< HEAD:gui/mocks/toc-1420746-t1-p164468.json
-    "Url": "/app/1420746/164195/publication-mp330/answering-or-rejecting-a-call",
-=======
     "Url": "/1961702/164195/user-guide/answering-or-rejecting-a-call",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1961702-t1-k16.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []

@@ -2,11 +2,7 @@
   {
     "Id": "t1-k18",
     "Title": "Snelkeuzetoetsen",
-<<<<<<< HEAD:gui/mocks/toc-1656868-t1-p164214.json
-    "Url": "/app/1656868/164365/publication-mp330/snelkeuzetoetsen",
-=======
     "Url": "/1881665/164365/user-guide/snelkeuzetoetsen",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1881665-t1-k17.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -14,11 +10,7 @@
   {
     "Id": "t1-k19",
     "Title": "Voicedialling",
-<<<<<<< HEAD:gui/mocks/toc-1656868-t1-p164214.json
-    "Url": "/app/1656868/164333/publication-mp330/voicedialling",
-=======
     "Url": "/1881665/164333/user-guide/voicedialling",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1881665-t1-k17.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []

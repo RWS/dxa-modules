@@ -2,11 +2,7 @@
   {
     "Id": "t1-k13",
     "Title": "De SIM-kaart en de batterij installeren",
-<<<<<<< HEAD:gui/mocks/toc-1656868-t1-p164400.json
-    "Url": "/app/1656868/164273/publication-mp330/de-sim-kaart-en-de-batterij-installeren",
-=======
     "Url": "/1881665/164273/user-guide/de-sim-kaart-en-de-batterij-installeren",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1881665-t1-k12.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -14,11 +10,7 @@
   {
     "Id": "t1-k14",
     "Title": "De batterij opladen.",
-<<<<<<< HEAD:gui/mocks/toc-1656868-t1-p164400.json
-    "Url": "/app/1656868/164292/publication-mp330/de-batterij-opladen-",
-=======
     "Url": "/1881665/164292/user-guide/de-batterij-opladen-",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1881665-t1-k12.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -26,11 +18,7 @@
   {
     "Id": "t1-k15",
     "Title": "Toetsen blokkeren",
-<<<<<<< HEAD:gui/mocks/toc-1656868-t1-p164400.json
-    "Url": "/app/1656868/164357/publication-mp330/toetsen-blokkeren",
-=======
     "Url": "/1881665/164357/user-guide/toetsen-blokkeren",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1881665-t1-k12.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []

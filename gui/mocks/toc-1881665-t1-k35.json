@@ -2,11 +2,7 @@
   {
     "Id": "t1-k36",
     "Title": "Namen en telefoonnummers opslaan",
-<<<<<<< HEAD:gui/mocks/toc-1656868-t1-p164303.json
-    "Url": "/app/1656868/164265/publication-mp330/namen-en-telefoonnummers-opslaan",
-=======
     "Url": "/1881665/164265/user-guide/namen-en-telefoonnummers-opslaan",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1881665-t1-k35.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -14,11 +10,7 @@
   {
     "Id": "t1-k37",
     "Title": "Zoeken naar een contact",
-<<<<<<< HEAD:gui/mocks/toc-1656868-t1-p164303.json
-    "Url": "/app/1656868/164430/publication-mp330/zoeken-naar-een-contact",
-=======
     "Url": "/1881665/164430/user-guide/zoeken-naar-een-contact",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1881665-t1-k35.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -26,11 +18,7 @@
   {
     "Id": "t1-k38",
     "Title": "Contacten wijzigen",
-<<<<<<< HEAD:gui/mocks/toc-1656868-t1-p164303.json
-    "Url": "/app/1656868/164446/publication-mp330/contacten-wijzigen",
-=======
     "Url": "/1881665/164446/user-guide/contacten-wijzigen",
->>>>>>> subtask/KCWA-458:gui/mocks/toc-1881665-t1-k35.json
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
