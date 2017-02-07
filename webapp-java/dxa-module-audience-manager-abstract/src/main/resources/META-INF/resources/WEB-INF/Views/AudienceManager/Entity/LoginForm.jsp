@@ -10,8 +10,6 @@
     <h1 ${markup.property(entity, "heading")}>${entity.heading}</h1>
     <form:form method="post" commandName="entity" action="${localization.localizePath('/api/profile/login')}">
 
-        <dxa:csrf-token/>
-
         <%--@elvariable id="errors" type="java.util.ArrayList<org.springframework.validation.ObjectError>"--%>
         <c:if test="${not empty errors}">
             <div class="alert-danger">

@@ -12,14 +12,13 @@
 
     <groupId>com.sdl.dxa.modules</groupId>
     <artifactId>dxa-module-test</artifactId>
-    <version>1.7.0</version>
+    <version>2.0.0-SNAPSHOT</version>
 
     <name>DXA Modules - Test/Example reference implementation of DXA module</name>
     <description>Example/reference/test implementation of DXA module</description>
 
     <properties>
         <dxa-bom.version>${project.version}</dxa-bom.version>
-        <dxa-bom-modules.version>${project.version}</dxa-bom-modules.version>
         <java-version>1.7</java-version>
     </properties>
 
@@ -29,14 +28,6 @@
                 <groupId>com.sdl.dxa</groupId>
                 <artifactId>dxa-bom</artifactId>
                 <version>${dxa-bom.version}</version>
-                <scope>import</scope>
-                <type>pom</type>
-            </dependency>
-
-            <dependency>
-                <groupId>com.sdl.dxa.modules</groupId>
-                <artifactId>dxa-bom-modules</artifactId>
-                <version>${dxa-bom-modules.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>

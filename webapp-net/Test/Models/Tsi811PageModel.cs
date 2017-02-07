@@ -2,6 +2,7 @@
 
 namespace Sdl.Web.Modules.Test.Models
 {
+    [SemanticEntity(EntityName = "TSI811PageMetadataSchema")]
     public class Tsi811PageModel : PageModel
     {
         public Tsi811PageModel(string id) : base(id)

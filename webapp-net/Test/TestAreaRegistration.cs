@@ -57,6 +57,7 @@ namespace Sdl.Web.Modules.Test
             RegisterViewModel("TSI811Test", typeof(Tsi811TestEntity));
             RegisterViewModel("TSI1946Test", typeof(Tsi1946TestEntity));
             RegisterViewModel("TSI1757Test3", typeof(Tsi1757TestEntity3));
+            RegisterViewModel("TSI1856Test", typeof(Tsi1856TestEntity));
 
             // Entity Models without associated View
             RegisterViewModel(typeof(TestEntityModel2));
