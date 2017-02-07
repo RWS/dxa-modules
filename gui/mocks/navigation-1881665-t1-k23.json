@@ -9,14 +9,14 @@
       {
         "Id": "t1-k21",
         "Title": "Berichten",
-        "Url": "/1881665/164481/user-guide/berichten",
+        "Url": "/app/1881665/164481/user-guide/berichten",
         "IsAbstract": false,
         "HasChildNodes": true,
         "Items": [
           {
             "Id": "t1-k23",
             "Title": "Multimediaberichten",
-            "Url": "/1881665/164392/user-guide/multimediaberichten",
+            "Url": "/app/1881665/164392/user-guide/multimediaberichten",
             "IsAbstract": false,
             "HasChildNodes": false,
             "Items": []

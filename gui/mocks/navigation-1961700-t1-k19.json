@@ -9,21 +9,21 @@
       {
         "Id": "t1-k16",
         "Title": "Anruffunktionen",
-        "Url": "/1961700/164466/user-guide/anruffunktionen",
+        "Url": "/app/1961700/164466/user-guide/anruffunktionen",
         "IsAbstract": false,
         "HasChildNodes": true,
         "Items": [
           {
             "Id": "t1-k17",
             "Title": "Anrufen",
-            "Url": "/1961700/164210/user-guide/anrufen",
+            "Url": "/app/1961700/164210/user-guide/anrufen",
             "IsAbstract": false,
             "HasChildNodes": true,
             "Items": [
               {
                 "Id": "t1-k19",
                 "Title": "Sprachanwahl",
-                "Url": "/1961700/164329/user-guide/sprachanwahl",
+                "Url": "/app/1961700/164329/user-guide/sprachanwahl",
                 "IsAbstract": false,
                 "HasChildNodes": false,
                 "Items": []

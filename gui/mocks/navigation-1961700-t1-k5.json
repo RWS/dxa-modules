@@ -9,14 +9,14 @@
       {
         "Id": "t1-k4",
         "Title": "Ihr Telefon",
-        "Url": "/1961700/164229/user-guide/ihr-telefon",
+        "Url": "/app/1961700/164229/user-guide/ihr-telefon",
         "IsAbstract": false,
         "HasChildNodes": true,
         "Items": [
           {
             "Id": "t1-k5",
             "Title": "Tasten",
-            "Url": "/1961700/164280/user-guide/tasten",
+            "Url": "/app/1961700/164280/user-guide/tasten",
             "IsAbstract": false,
             "HasChildNodes": false,
             "Items": []
