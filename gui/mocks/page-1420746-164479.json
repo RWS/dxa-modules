@@ -1,33 +1,7 @@
 {
   "Id": "164479",
   "Meta": {
-    "ishlogicalref.object.id": 164475,
-    "ishversionref.object.id": 164476,
-    "ishlngref.object.id": 164479,
-    "ishref.object.value": "GUID-FD63F34C-0C66-4F6E-960A-EC79DDC0AA34",
-    "ishtype.object.value": "ISHModule",
-    "FTITLE.logical.value": "messages",
-    "FDESCRIPTION.logical.value": null,
-    "FCHANGES.version.value": "Imported OASIS DITA 1.1",
-    "FISHRELEASELABEL.version.value": [
-      "Publication MP330-v1-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2012/09/21 12:27:01",
-      "Publication MP330-v2-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2012/09/24 17:31:39",
-      "Publication MP660-v1-GUID-EB2E82F1-1C76-4032-815C-4E717140A081-2012/09/24 14:57:38",
-      "Publication MP660-v2-GUID-EB2E82F1-1C76-4032-815C-4E717140A081-2012/09/24 17:09:12"
-    ],
-    "CREATED-ON.lng.value": "2015-12-23T04:57:28Z",
-    "FAUTHOR.lng.value": "admin",
-    "FSTATUS.lng.value": "Released",
-    "MODIFIED-ON.lng.value": "2016-04-08T15:12:55Z",
-    "VERSION.version.value": "1",
-    "DOC-LANGUAGE.lng.value": [
-      "en"
-    ],
-    "FISHREVCOUNTER.lng.value": 4,
-    "ED.lng.value": "GUID-9D3A4668-332A-4D76-BC05-BF21EF00B45F",
-    "FUSERGROUP.logical.element": null,
-    "READ-ACCESS.logical.element": null,
-    "publicationtitle.generated.value": "Publication MP330"
+    "tocnaventries.generated.value": "ish:1420746-21-1024"
   },
   "Regions": [
     {
@@ -38,7 +12,7 @@
           "topicBody": {
             "Fragments": [
               {
-                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-FD63F34C-0C66-4F6E-960A-EC79DDC0AA34__GUID-8C0DFA2A-E16A-4242-9888-81477563506F\" xmlns=\"http://www.w3.org/1999/xhtml\">Messages</h1>\n      \n      \n      \n      <div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\" />\n         \n         \n         <p class=\"p\">You can read, write, send and save text, multimedia, and e-mail messages. All messages are organised into folders. Text, multimedia,\n            and e-mail messaging are network services. Before you can send any text, picture, or e-mail message, you need to save your\n            message centre number.\n         </p>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <ul class=\"ullinks\">\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1420746/164460/publication-mp330/text-messages\">Text Messages</a></strong><br />\n               Your phone supports sending and receiving multi-part messages, which consist of several ordinary text messages.\n            </li>\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1420746/164390/publication-mp330/multimedia-messages\">Multimedia messages</a></strong><br />\n               A multimedia message can contain text, picture and sound.\n            </li>\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1420746/164323/publication-mp330/voice-mailbox\">Voice mailbox</a></strong><br />\n               <samp class=\"ph msgph\">Voice mailbox</samp> is a network service and you may need to subscribe to it.\n            </li>\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1420746/164452/publication-mp330/deleting-messages\">Deleting messages</a></strong><br />\n               \n            </li>\n            \n         </ul>\n         \n      </div>\n   "
+                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-FD63F34C-0C66-4F6E-960A-EC79DDC0AA34__GUID-8C0DFA2A-E16A-4242-9888-81477563506F\" xmlns=\"http://www.w3.org/1999/xhtml\">Messages</h1>\n      \n      \n      \n      <div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\" />\n         \n         \n         <p class=\"p\">You can read, write, send and save text, multimedia, and e-mail messages. All messages are organised into folders. Text, multimedia,\n            and e-mail messaging are network services. Before you can send any text, picture, or e-mail message, you need to save your\n            message centre number.\n         </p>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <ul class=\"ullinks\">\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1420746/164460/user-guide/text-messages\">Text Messages</a></strong><br />\n               Your phone supports sending and receiving multi-part messages, which consist of several ordinary text messages.\n            </li>\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1420746/164390/user-guide/multimedia-messages\">Multimedia messages</a></strong><br />\n               A multimedia message can contain text, picture and sound.\n            </li>\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1420746/164323/user-guide/voice-mailbox\">Voice mailbox</a></strong><br />\n               <samp class=\"ph msgph\">Voice mailbox</samp> is a network service and you may need to subscribe to it.\n            </li>\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1420746/164452/user-guide/deleting-messages\">Deleting messages</a></strong><br />\n               \n            </li>\n            \n         </ul>\n         \n      </div>\n   "
               }
             ]
           }

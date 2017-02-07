@@ -28,4 +28,12 @@ export interface IPage {
      * @memberOf IPage
      */
     content: string;
+
+    /**
+     * Location of a page inside the Toc
+     *
+     * @type {string[] | undefined | null}
+     * @memberOf IPage
+     */
+    sitemapIds: string[] | undefined | null;
 }

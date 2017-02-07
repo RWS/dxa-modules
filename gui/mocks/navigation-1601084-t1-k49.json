@@ -1,0 +1,37 @@
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k44",
+        "Title": "Other birds",
+        "Url": "/1601084/515736/penguin-guide/other-birds",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": [
+          {
+            "Id": "t1-k47",
+            "Title": "C",
+            "Url": null,
+            "IsAbstract": true,
+            "HasChildNodes": true,
+            "Items": [
+              {
+                "Id": "t1-k49",
+                "Title": "Cranes",
+                "Url": "/1601084/515680/penguin-guide/cranes",
+                "IsAbstract": false,
+                "HasChildNodes": false,
+                "Items": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

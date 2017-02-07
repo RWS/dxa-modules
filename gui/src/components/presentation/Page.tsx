@@ -172,7 +172,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
         ];
 
         return (
-            <div className={"sdl-dita-delivery-page"}>
+            <div className={"sdl-dita-delivery-page"} style={props.showActivityIndicator ? { overflow: "hidden" } : {}} >
                 {props.showActivityIndicator ? <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} /> : null}
                 {props.children}
                 <ContentNavigation navItems={navItems} activeNavItemId={activeNavItemId} />
@@ -185,7 +185,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                         : null}
                     <article className={"page-content ltr"} dangerouslySetInnerHTML={{ __html: props.content || "" }} />
                 </article>
-            </div>
+            </div >
         );
     }
 
@@ -319,10 +319,18 @@ export class Page extends React.Component<IPageProps, IPageState> {
                 const header = Html.getHeaderElement(pageContentNode, anchor);
                 if (header) {
                     this._lastPageAnchor = anchor;
+
+                    let offsetTop = 0;
+                    let currentNode = header;
+                    while (currentNode && currentNode.offsetTop) {
+                        offsetTop += currentNode.offsetTop;
+                        currentNode = currentNode.offsetParent as HTMLElement;
+                    }
+
                     // TODO: make sure images are loaded before jumping to the anchor
                     // Use a timeout to make sure all components are rendered
                     setTimeout((): void => {
-                        var topPos = (header.offsetTop + domNode.offsetTop) - (scrollOffset || 0);
+                        const topPos = offsetTop - (scrollOffset || 0);
                         window.scrollTo(0, topPos);
                     }, 0);
                 }

@@ -1,33 +1,7 @@
 {
   "Id": "164436",
   "Meta": {
-    "ishlogicalref.object.id": 164432,
-    "ishversionref.object.id": 164433,
-    "ishlngref.object.id": 164436,
-    "ishref.object.value": "GUID-ECE240B0-00BD-4371-AB26-E5AA627FF527",
-    "ishtype.object.value": "ISHModule",
-    "FTITLE.logical.value": "screen saver",
-    "FDESCRIPTION.logical.value": null,
-    "FCHANGES.version.value": "Imported OASIS DITA 1.1",
-    "FISHRELEASELABEL.version.value": [
-      "Publication MP330-v1-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2012/09/21 12:27:01",
-      "Publication MP330-v2-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2012/09/24 17:31:39",
-      "Publication MP660-v1-GUID-EB2E82F1-1C76-4032-815C-4E717140A081-2012/09/24 14:57:38",
-      "Publication MP660-v2-GUID-EB2E82F1-1C76-4032-815C-4E717140A081-2012/09/24 17:09:12"
-    ],
-    "CREATED-ON.lng.value": "2015-12-23T04:57:21Z",
-    "FAUTHOR.lng.value": "admin",
-    "FSTATUS.lng.value": "Released",
-    "MODIFIED-ON.lng.value": "2016-04-08T15:12:42Z",
-    "VERSION.version.value": "1",
-    "DOC-LANGUAGE.lng.value": [
-      "en"
-    ],
-    "FISHREVCOUNTER.lng.value": 4,
-    "ED.lng.value": "GUID-1C9BECE4-F45A-42A2-A799-A2C5FF9CF36D",
-    "FUSERGROUP.logical.element": null,
-    "READ-ACCESS.logical.element": null,
-    "publicationtitle.generated.value": "Publication MP330"
+    "tocnaventries.generated.value": "ish:1420746-9-1024"
   },
   "Regions": [
     {
@@ -38,7 +12,7 @@
           "topicBody": {
             "Fragments": [
               {
-                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-ECE240B0-00BD-4371-AB26-E5AA627FF527__GUID-26F149AC-433E-4440-892A-E356163E548A\" xmlns=\"http://www.w3.org/1999/xhtml\">Screen saver</h1>\n      \n      \n      \n      <div class=\"body conbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">The phone automatically activates the screen saver, a digital clock view, for power saving in standby mode.</p>\n         \n         \n         <p class=\"p\">It is activated when no function of the phone has been used for a certain time. Press any key to deactivate the screen saver.\n            Screen saver is also deactivated when the phone is out of the network coverage area.\n         </p>\n         \n         \n         <p class=\"p\">Note that the screen saver overrides all the graphics and texts on the display in standby mode.</p>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Parent topic:</strong> <a class=\"link\" href=\"/1420746/164231/publication-mp330/your-phone\">Your phone</a></div>\n            \n         </div>\n         \n      </div>\n   "
+                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-ECE240B0-00BD-4371-AB26-E5AA627FF527__GUID-26F149AC-433E-4440-892A-E356163E548A\" xmlns=\"http://www.w3.org/1999/xhtml\">Screen saver</h1>\n      \n      \n      \n      <div class=\"body conbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">The phone automatically activates the screen saver, a digital clock view, for power saving in standby mode.</p>\n         \n         \n         <p class=\"p\">It is activated when no function of the phone has been used for a certain time. Press any key to deactivate the screen saver.\n            Screen saver is also deactivated when the phone is out of the network coverage area.\n         </p>\n         \n         \n         <p class=\"p\">Note that the screen saver overrides all the graphics and texts on the display in standby mode.</p>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Parent topic:</strong> <a class=\"link\" href=\"/1420746/164231/user-guide/your-phone\">Your phone</a></div>\n            \n         </div>\n         \n      </div>\n   "
               }
             ]
           }

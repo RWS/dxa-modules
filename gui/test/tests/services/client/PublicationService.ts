@@ -6,7 +6,7 @@ class PublicationServiceTests extends TestBase {
 
     public runTests(): void {
         const publicationService = new PublicationService();
-        const publicationId = "1656863";
+        const publicationId = "1961702";
 
         describe(`Publication service tests.`, (): void => {
 
@@ -40,8 +40,8 @@ class PublicationServiceTests extends TestBase {
                 publicationService.getPublications().then(publications => {
                     expect(publications).toBeDefined();
                     if (publications) {
-                        expect(publications.length).toBe(7);
-                        expect(publications[1].title).toBe("Publication MP330");
+                        expect(publications.length).toBe(8);
+                        expect(publications[6].title).toBe("User Guide");
                     }
                     done();
                 }).catch(error => {
@@ -55,8 +55,8 @@ class PublicationServiceTests extends TestBase {
                 publicationService.getPublications().then(publications => {
                     expect(publications).toBeDefined();
                     if (publications) {
-                        expect(publications.length).toBe(7);
-                        expect(publications[1].title).toBe("Publication MP330");
+                        expect(publications.length).toBe(8);
+                        expect(publications[6].title).toBe("User Guide");
                         expect(spy).not.toHaveBeenCalled();
                     }
                     done();
@@ -68,7 +68,7 @@ class PublicationServiceTests extends TestBase {
 
             it("can get a publication title", (done: () => void): void => {
                 publicationService.getPublicationTitle(publicationId).then(title => {
-                    expect(title).toBe("Publication MP330");
+                    expect(title).toBe("User Guide");
                     done();
                 }).catch(error => {
                     fail(`Unexpected error: ${error}`);
@@ -79,7 +79,7 @@ class PublicationServiceTests extends TestBase {
             it("can get a publication title from memory", (done: () => void): void => {
                 const spy = spyOn(window, "XMLHttpRequest").and.callThrough();
                 publicationService.getPublicationTitle(publicationId).then(title => {
-                    expect(title).toBe("Publication MP330");
+                    expect(title).toBe("User Guide");
                     expect(spy).not.toHaveBeenCalled();
                     done();
                 }).catch(error => {

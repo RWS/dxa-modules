@@ -1,34 +1,6 @@
 {
   "Id": "164090",
-  "Meta": {
-    "ishlogicalref.object.id": 164086,
-    "ishversionref.object.id": 164087,
-    "ishlngref.object.id": 164090,
-    "ishref.object.value": "GUID-54F20824-43B5-4CE1-8EA2-400F1CB13716",
-    "ishtype.object.value": "ISHLibrary",
-    "FTITLE.logical.value": "mp safety notes",
-    "FDESCRIPTION.logical.value": null,
-    "FCHANGES.version.value": "Imported OASIS DITA 1.1",
-    "FISHRELEASELABEL.version.value": [
-      "Publication MP330-v1-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2012/09/21 12:27:01",
-      "Publication MP330-v2-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2012/09/24 17:31:39",
-      "Publication MP660-v1-GUID-EB2E82F1-1C76-4032-815C-4E717140A081-2012/09/24 14:57:38",
-      "Publication MP660-v2-GUID-EB2E82F1-1C76-4032-815C-4E717140A081-2012/09/24 17:09:12"
-    ],
-    "CREATED-ON.lng.value": "2015-12-23T04:56:32Z",
-    "FAUTHOR.lng.value": "admin",
-    "FSTATUS.lng.value": "Released",
-    "MODIFIED-ON.lng.value": "2016-04-08T15:10:57Z",
-    "VERSION.version.value": "1",
-    "DOC-LANGUAGE.lng.value": [
-      "en"
-    ],
-    "FISHREVCOUNTER.lng.value": 11,
-    "ED.lng.value": "GUID-CB88AE0E-DE03-4271-AA7D-E6A7D626D485",
-    "FUSERGROUP.logical.element": null,
-    "READ-ACCESS.logical.element": null,
-    "publicationtitle.generated.value": "Publication MP330"
-  },
+  "Meta": {},
   "Regions": [
     {
       "Entities": [

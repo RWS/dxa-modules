@@ -101,6 +101,8 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
 
     private _isUnmounted: boolean = false;
 
+    private _isExpanding: boolean = false;
+
     /**
      * Creates an instance of Toc.
      *
@@ -126,6 +128,7 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
         const _retryHandler = (): void => {
             props.onRetry();
         };
+        const activeNodeIdPath = this._getNodeIdPath(props.activeItemPath, firstRootNode);
 
         return (
             <nav className={"sdl-dita-delivery-toc"}>
@@ -133,13 +136,11 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
                 {
                     props.rootItems ?
                         <TreeView
-                            activeNodeIdPath={Array.isArray(props.activeItemPath) ?
-                                props.activeItemPath.join("/") :
-                                (firstRootNode ? firstRootNode.id : undefined)}
+                            activeNodeIdPath={activeNodeIdPath}
                             rootNodes={rootNodes}
                             onSelectionChanged={this._onSelectionChanged.bind(this)}
-                            skin="graphene"/>
-                        : !error ? <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")}/> : null
+                            skin="graphene" />
+                        : !error ? <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} /> : null
                 }
                 {props.children}
             </nav>
@@ -162,6 +163,15 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
      * @param {ITocProps} nextProps
      */
     public componentWillReceiveProps(nextProps: ITocProps): void {
+        const props = this.props;
+        const currentRootNodes = this._convertToTreeViewNodes(props.rootItems || []);
+        const currentFirstRootNode = currentRootNodes.length > 0 ? currentRootNodes[0] : null;
+        const currentPath = this._getNodeIdPath(props.activeItemPath, currentFirstRootNode);
+        const nextRootNodes = this._convertToTreeViewNodes(props.rootItems || []);
+        const nextFirstRootNode = nextRootNodes.length > 0 ? nextRootNodes[0] : null;
+        const nextPath = this._getNodeIdPath(nextProps.activeItemPath, nextFirstRootNode);
+        this._isExpanding = currentPath !== nextPath;
+
         this.setState({
             error: nextProps.error
         });
@@ -278,15 +288,25 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
     private _onSelectionChanged(nodes: ITreeViewNode[]): void {
         /* istanbul ignore else */
         if (!this._isUnmounted) {
+            const { activeItemPath } = this.props;
             const onSelectionChanged = this.props.onSelectionChanged;
-            if (typeof onSelectionChanged === "function") {
-                const selectedNode = nodes.length > 0 ? nodes[0] : null;
-                if (selectedNode) {
-                    const path = selectedNode ? selectedNode.getPath() : "";
-                    onSelectionChanged(selectedNode.taxonomy, path.split("/"));
-                }
+            const selectedNode = nodes.length > 0 ? nodes[0] : null;
+            const activeId = activeItemPath ? activeItemPath[activeItemPath.length - 1] : null;
+            // Check if expanding is finished (expanding state is reset when the component is updated)
+            if (this._isExpanding) {
+                this._isExpanding = !(selectedNode && selectedNode.id === activeId);
+            }
+            if (!this._isExpanding && selectedNode && typeof onSelectionChanged === "function") {
+                const path = selectedNode ? selectedNode.getPath() : "";
+                onSelectionChanged(selectedNode.taxonomy, path.split("/"));
             }
         }
+    }
+
+    private _getNodeIdPath(activeItemPath: string[] | undefined, firstRootNode: ITreeViewNode | null): string | undefined {
+        return Array.isArray(activeItemPath) ?
+            activeItemPath.join("/") :
+            (firstRootNode ? firstRootNode.id : undefined);
     }
 
 }

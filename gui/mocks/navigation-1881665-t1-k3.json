@@ -1,0 +1,19 @@
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k3",
+        "Title": "Voor uw veiligheid",
+        "Url": "/1881665/164249/user-guide/voor-uw-veiligheid",
+        "IsAbstract": false,
+        "HasChildNodes": false,
+        "Items": []
+      }
+    ]
+  }
+]

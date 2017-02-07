@@ -41,11 +41,11 @@ export class TaxonomyService implements ITaxonomyService {
         }
     }
 
-    public getSitemapPath(publicationId: string, pageId: string): Promise<ITaxonomy[]> {
+    public getSitemapPath(publicationId: string, sitemapId: string): Promise<ITaxonomy[]> {
         const tocItems = this._mockDataToc.items;
         if (Array.isArray(tocItems)) {
             // Only first level is supported
-            const path = tocItems.filter(item => item.url === pageId);
+            const path = tocItems.filter(item => item.id === sitemapId);
             return Promise.resolve(path);
         } else {
             return Promise.reject("Unable to resolve path.");

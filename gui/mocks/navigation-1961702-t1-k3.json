@@ -1,0 +1,19 @@
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k3",
+        "Title": "For your safety",
+        "Url": "/1961702/164247/user-guide/for-your-safety",
+        "IsAbstract": false,
+        "HasChildNodes": false,
+        "Items": []
+      }
+    ]
+  }
+]

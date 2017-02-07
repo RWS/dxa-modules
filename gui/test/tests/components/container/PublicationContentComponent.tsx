@@ -5,6 +5,7 @@ import { PublicationContent } from "components/container/PublicationContent";
 import { Toc } from "components/presentation/Toc";
 import { Page } from "components/presentation/Page";
 import { ITaxonomy } from "interfaces/Taxonomy";
+import { IPage } from "interfaces/Page";
 import { ActivityIndicator, TreeView } from "sdl-controls-react-wrappers";
 import { TestBase } from "sdl-models";
 import { PageService } from "test/mocks/services/PageService";
@@ -83,7 +84,8 @@ class PublicationContentComponent extends TestBase {
                 services.pageService.setMockDataPage(null, {
                     id: "12345",
                     content: pageContent,
-                    title: "Title!"
+                    title: "Title!",
+                    sitemapIds: null
                 });
 
                 const publicationContent = this._renderComponent(target, "12345");
@@ -217,7 +219,8 @@ class PublicationContentComponent extends TestBase {
                 services.pageService.setMockDataPage(null, {
                     id: "12345",
                     content: "<div/>",
-                    title: "Title!"
+                    title: "Title!",
+                    sitemapIds: null
                 });
                 const publicationContent = this._renderComponent(target, "123");
 
@@ -236,14 +239,27 @@ class PublicationContentComponent extends TestBase {
                     url: "1",
                     hasChildNodes: false
                 };
+                const firstPage: IPage = {
+                    content: "Page 1",
+                    id: "1",
+                    title: "First page!",
+                    sitemapIds: ["1"]
+                };
                 const second: ITaxonomy = {
                     id: "2",
                     title: "Second page!",
                     url: "2",
                     hasChildNodes: false
                 };
+                const secondPage: IPage = {
+                    content: "Page 2",
+                    id: "2",
+                    title: "Second page!",
+                    sitemapIds: ["2"]
+                };
 
                 services.taxonomyService.setMockDataToc(null, [first, second]);
+                services.pageService.setMockDataPage(null, firstPage);
                 let publicationContent = this._renderComponent(target, first.url);
 
                 const assert = (item: ITaxonomy, ready: () => void): void => {
@@ -259,6 +275,7 @@ class PublicationContentComponent extends TestBase {
                 };
 
                 assert(first, (): void => {
+                    services.pageService.setMockDataPage(null, secondPage);
                     publicationContent = this._renderComponent(target, second.url);
                     assert(second, done);
                 });
