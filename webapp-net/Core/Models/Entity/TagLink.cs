@@ -2,7 +2,7 @@
 using System;
 namespace Sdl.Web.Modules.Core.Models
 {
-    [SemanticEntity(EntityName = "SocialLink", Vocab = CoreVocabulary, Prefix = "s", Public = true)]
+    [SemanticEntity(EntityName = "SocialLink")]
     [Serializable]
     public class TagLink : EntityModel
     {
