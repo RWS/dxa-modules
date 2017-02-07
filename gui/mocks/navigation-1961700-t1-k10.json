@@ -1,0 +1,28 @@
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k4",
+        "Title": "Ihr Telefon",
+        "Url": "/1961700/164229/user-guide/ihr-telefon",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": [
+          {
+            "Id": "t1-k10",
+            "Title": "General Packet Radio Service (GPRS)",
+            "Url": "/1961700/164169/user-guide/general-packet-radio-service--gprs-",
+            "IsAbstract": false,
+            "HasChildNodes": false,
+            "Items": []
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,23 @@
+{
+  "Id": "137313",
+  "Meta": {
+    "tocnaventries.generated.value": "ish:1961681-6-1024"
+  },
+  "Regions": [
+    {
+      "Entities": [
+        {
+          "Id": "137313",
+          "topicTitle": "Consumer products",
+          "topicBody": {
+            "Fragments": [
+              {
+                "Html": "\n      \n      \t\n      <h1 class=\"title topictitle1\" id=\"MVT-42007CEA0I505Z__GUID-B10FCFD0-E2BA-445F-9593-44672D83A79F\" xmlns=\"http://www.w3.org/1999/xhtml\">Consumer products</h1>\n      \n      \t\n      <div class=\"body taskbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \t\t\n         <ol class=\"ol steps\" id=\"MVT-42007CEA0I505Z__GUID-8B90DE5A-9303-41A2-A3F0-E21FC856B3CA\">\n            <li class=\"li step stepexpand\">\n               \t\t\t\t<span class=\"ph cmd\">\n                  \t\t\t\t\tStart <span class=\"ph uicontrol\">Internet\n                     Explorer</span>.</span>\n               \t\t\t\n            </li>\n            \n            <li class=\"li step stepexpand\">\n               \t\t\t\t<span class=\"ph cmd\">Type the URL <a class=\"xref\" href=\"http://service.mcafee.com\" target=\"_blank\">http://service.mcafee.com</a> and click <span class=\"ph uicontrol\">Go</span>.\n                  The <span class=\"ph uicontrol\">McAfee Services and Support for Home and Home Office</span> page\n                  appears.</span>\n               \t\t\t\t\n               <div class=\"itemgroup info\">\n                  \t\t\t\t\t\n                  <div class=\"fig figborder\">\n                     \t\t\t\t\t\t<br /><div class=\"imageleft\"><img class=\"image imageleft\" height=\"255\" width=\"305\" src=\"/app/gui/mocks/bin/1961681-137080-16.gif\" /></div><br />\n                     \t\t\t\t\t\n                  </div>\n                  \n                  \t\t\t\t\n               </div>\n               \t\t\t\t\n               <div class=\"itemgroup info\">\n                  \t\t\t\t\t\n                  <div class=\"note note\" id=\"MVT-42007CEA0I505Z__GUID-84D73A52-BBBA-4930-A8F5-DE8518A23A15\"><span class=\"notetitle\">Note:</span> If this page does not appear in the language you need,\n                     select the desired language from the <span class=\"ph uicontrol\">Choose Language</span> drop-down\n                     menu (upper right corner).\n                  </div>\n                  \n                  \t\t\t\t\n               </div>\n               \t\t\t\n            </li>\n            \n            <li class=\"li step stepexpand\">\n               \t\t\t\t<span class=\"ph cmd\">Click <span class=\"ph uicontrol\">Go to Technical Support</span>.\n                  The<span class=\"ph uicontrol\"> Technical Support for Home and Home Office</span> page\n                  appears.</span>\n               \t\t\t\t\n               <div class=\"itemgroup info\">\n                  \t\t\t\t\t\n                  <div class=\"fig figborder\">\n                     \t\t\t\t\t\t<br /><div class=\"imageleft\"><img class=\"image imageleft\" height=\"294\" width=\"307\" src=\"/app/gui/mocks/bin/1961681-137120-16.gif\" /></div><br />\n                     \t\t\t\t\t\n                  </div>\n                  \n                  \t\t\t\t\n               </div>\n               \t\t\t\n            </li>\n            \n            <li class=\"li step stepexpand\">\n               \t\t\t\t<span class=\"ph cmd\">Click <span class=\"ph uicontrol\">Start</span> to display the <span class=\"ph uicontrol\">McAfee\n                     Virtual Technician - Welcome</span> page.</span>\n               \t\t\t\n            </li>\n            \n         </ol>\n         \n         \t\n      </div>\n      \n      \n   "
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

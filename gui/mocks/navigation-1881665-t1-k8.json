@@ -1,0 +1,28 @@
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k4",
+        "Title": "De telefoon",
+        "Url": "/1881665/164233/user-guide/de-telefoon",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": [
+          {
+            "Id": "t1-k8",
+            "Title": "Belangrijke indicatoren in de standby-modus",
+            "Url": "/1881665/164257/user-guide/belangrijke-indicatoren-in-de-standby-modus",
+            "IsAbstract": false,
+            "HasChildNodes": false,
+            "Items": []
+          }
+        ]
+      }
+    ]
+  }
+]

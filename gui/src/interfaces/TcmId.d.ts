@@ -47,3 +47,20 @@ export const enum CdItemTypes {
     Category = 512,
     Taxonomy = 1024
 }
+
+/**
+ * Fixed ids used inside Taxonomy
+ *
+ * @export
+ * @enum {number}
+ */
+export const enum TaxonomyItemId {
+    /**
+     * Table of contents
+     */
+    Toc = 1,
+    /**
+     * Index table (index terms)
+     */
+    Index = 100000000
+}

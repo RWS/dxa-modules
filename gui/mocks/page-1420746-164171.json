@@ -1,33 +1,7 @@
 {
   "Id": "164171",
   "Meta": {
-    "ishlogicalref.object.id": 164167,
-    "ishversionref.object.id": 164168,
-    "ishlngref.object.id": 164171,
-    "ishref.object.value": "GUID-0EDBAC80-8997-45CA-8578-E8AAB7EE0B6E",
-    "ishtype.object.value": "ISHModule",
-    "FTITLE.logical.value": "gprs",
-    "FDESCRIPTION.logical.value": null,
-    "FCHANGES.version.value": "Imported OASIS DITA 1.1",
-    "FISHRELEASELABEL.version.value": [
-      "Publication MP330-v1-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2012/09/21 12:27:01",
-      "Publication MP330-v2-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2012/09/24 17:31:39",
-      "Publication MP660-v1-GUID-EB2E82F1-1C76-4032-815C-4E717140A081-2012/09/24 14:57:38",
-      "Publication MP660-v2-GUID-EB2E82F1-1C76-4032-815C-4E717140A081-2012/09/24 17:09:12"
-    ],
-    "CREATED-ON.lng.value": "2015-12-23T04:56:43Z",
-    "FAUTHOR.lng.value": "admin",
-    "FSTATUS.lng.value": "Released",
-    "MODIFIED-ON.lng.value": "2016-04-08T15:11:23Z",
-    "VERSION.version.value": "1",
-    "DOC-LANGUAGE.lng.value": [
-      "en"
-    ],
-    "FISHREVCOUNTER.lng.value": 4,
-    "ED.lng.value": "GUID-0C16514D-E682-4EEC-A790-516FE1ECAF36",
-    "FUSERGROUP.logical.element": null,
-    "READ-ACCESS.logical.element": null,
-    "publicationtitle.generated.value": "Publication MP330"
+    "tocnaventries.generated.value": "ish:1420746-10-1024"
   },
   "Regions": [
     {
@@ -38,7 +12,7 @@
           "topicBody": {
             "Fragments": [
               {
-                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-0EDBAC80-8997-45CA-8578-E8AAB7EE0B6E__GUID-A9BCAA46-D536-4C48-9DCC-83D91F8F8450\" xmlns=\"http://www.w3.org/1999/xhtml\">General Packet Radio Service (GPRS)</h1>\n      \n      \n      \n      <div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">GPRS technology allows mobile phones to be used for sending and receiving data over the mobile network (network service).</p>\n         \n         \n         <p class=\"p\">GPRS technology allows mobile phones to be used for sending and receiving data over the mobile network (network service).\n            GPRS as such is a data bearer that enables wireless access to data networks like the Internet. The applications that may use\n            GPRS are WAP services, MMS and SMS messaging, and Java application downloading.\n         </p>\n         \n         \n         <div class=\"p\">Before you can use GPRS technology\n            <ul class=\"ul\" id=\"GUID-0EDBAC80-8997-45CA-8578-E8AAB7EE0B6E__GUID-112C660D-D464-4857-AC53-5D1B37D1D312\">\n               \n               <li class=\"li\">Contact your network operator or service provider for availability, pricing and subscription to the GPRS service.</li>\n               \n               \n               <li class=\"li\">Save the GPRS settings for each of the applications used over GPRS.</li>\n               \n               \n            </ul>\n            \n         </div>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Parent topic:</strong> <a class=\"link\" href=\"/1420746/164231/publication-mp330/your-phone\">Your phone</a></div>\n            \n         </div>\n         \n      </div>\n   "
+                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-0EDBAC80-8997-45CA-8578-E8AAB7EE0B6E__GUID-A9BCAA46-D536-4C48-9DCC-83D91F8F8450\" xmlns=\"http://www.w3.org/1999/xhtml\">General Packet Radio Service (GPRS)</h1>\n      \n      \n      \n      <div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">GPRS technology allows mobile phones to be used for sending and receiving data over the mobile network (network service).</p>\n         \n         \n         <p class=\"p\">GPRS technology allows mobile phones to be used for sending and receiving data over the mobile network (network service).\n            GPRS as such is a data bearer that enables wireless access to data networks like the Internet. The applications that may use\n            GPRS are WAP services, MMS and SMS messaging, and Java application downloading.\n         </p>\n         \n         \n         <div class=\"p\">Before you can use GPRS technology\n            <ul class=\"ul\" id=\"GUID-0EDBAC80-8997-45CA-8578-E8AAB7EE0B6E__GUID-112C660D-D464-4857-AC53-5D1B37D1D312\">\n               \n               <li class=\"li\">Contact your network operator or service provider for availability, pricing and subscription to the GPRS service.</li>\n               \n               \n               <li class=\"li\">Save the GPRS settings for each of the applications used over GPRS.</li>\n               \n               \n            </ul>\n            \n         </div>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Parent topic:</strong> <a class=\"link\" href=\"/1420746/164231/user-guide/your-phone\">Your phone</a></div>\n            \n         </div>\n         \n      </div>\n   "
               }
             ]
           }

@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "t1-k13",
+    "Title": "Installieren der SIM-Karte und des Akkus",
+    "Url": "/1961700/164269/user-guide/installieren-der-sim-karte-und-des-akkus",
+    "IsAbstract": false,
+    "HasChildNodes": false,
+    "Items": []
+  },
+  {
+    "Id": "t1-k14",
+    "Title": "Laden des Akkus",
+    "Url": "/1961700/164288/user-guide/laden-des-akkus",
+    "IsAbstract": false,
+    "HasChildNodes": false,
+    "Items": []
+  },
+  {
+    "Id": "t1-k15",
+    "Title": "Tastensperre",
+    "Url": "/1961700/164353/user-guide/tastensperre",
+    "IsAbstract": false,
+    "HasChildNodes": false,
+    "Items": []
+  }
+]

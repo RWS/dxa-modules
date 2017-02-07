@@ -1,0 +1,23 @@
+{
+  "Id": "517170",
+  "Meta": {
+    "tocnaventries.generated.value": "ish:1601084-14-1024"
+  },
+  "Regions": [
+    {
+      "Entities": [
+        {
+          "Id": "517170",
+          "topicTitle": "Distribution and habitat",
+          "topicBody": {
+            "Fragments": [
+              {
+                "Html": "\n       \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-F839F09E-47A3-47F2-A0E2-9E929E39DC77__GUID-6DCB8756-DA16-4B08-A715-7254D79AC322\" xmlns=\"http://www.w3.org/1999/xhtml\">Distribution and habitat</h1>\n      \n      \n      \n      <div class=\"body conbody\" xmlns=\"http://www.w3.org/1999/xhtml\"> \n         \t \n         <p class=\"p\">Although all penguin species are native to the southern hemisphere, they are not found only in cold climates, such as Antarctica.\n            In fact, only a few species of penguin actually live so far south. At least 10 species live in the temperate zone; one, the\n            Galápagos Penguin, lives as far north as the Galápagos Islands, but this is only made possible by the cold, rich waters of\n            the Antarctic Humboldt Current that flows around these islands. \n            \t \n         </p>\n         \n         \t \n         <p class=\"p\">Several authors have suggested that penguins are a good example of Bergmann's Rule where larger bodied populations live at\n            higher latitudes than smaller bodied populations. There is some disagreement about this, and several other authors have noted\n            that there are fossil penguin species that contradict this hypothesis and that ocean currents and upwellings are likely to\n            have had a greater effect on species diversity than latitude alone.\n            \t \n         </p>\n         \n         \t \n         <p class=\"p\">Major populations of penguins are found in Antarctica, Argentina, Australia, Chile, New Zealand, and South Africa.\n            \t \n         </p>\n         \n         \t \n         <p class=\"p\"><img class=\"image\" id=\"GUID-F839F09E-47A3-47F2-A0E2-9E929E39DC77__IMAGE_9B6F92F869D74D448636A3CE70A3B2A0\" src=\"/app/gui/mocks/bin/1601084-515206-16.jpg\" />\n            \t \n         </p>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Parent topic:</strong> <a class=\"link\" title=\"This chapter contains a general overview about penguins in general without a detailed description of a specific type of penguin\" href=\"/1601084/516062/penguin-guide/penguins-overview\">Penguins Overview</a></div>\n            \n         </div>\n         \n      </div>\n   "
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

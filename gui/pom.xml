@@ -81,7 +81,7 @@
                         <phase>generate-resources</phase>
 
                         <configuration>
-                            <arguments>run-script build-server -- --targetPath "target/gui/"</arguments>
+                            <arguments>run-script build-server -- --targetPath target/gui/</arguments>
                         </configuration>
                     </execution>
                 </executions>
