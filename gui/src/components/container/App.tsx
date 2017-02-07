@@ -66,8 +66,8 @@ export class App extends React.Component<IAppProps, {}> {
         return (
             <Router history={history}>
                 <Route path={path.getRootPath()} component={Home} >
-                    <IndexRedirect to="/home" />
-                    <Redirect from="home;jsessionid=*" to="/home" />
+                    <IndexRedirect to="home" />
+                    <Redirect from="home;jsessionid=*" to="home" />
                     <Route path="home" component={PublicationsList} />
                     <Route path=":publicationId(/:pageIdOrPublicationTitle)(/:publicationTitle)(/:pageTitle)(/:pageAnchor)" component={PublicationContent} />
                 </Route>
