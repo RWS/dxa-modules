@@ -126,6 +126,7 @@
     <Compile Include="Models\Entity\Notification.cs" />
     <Compile Include="Models\Entity\Paragraph.cs" />
     <Compile Include="Models\Entity\Place.cs" />
+    <Compile Include="Models\Entity\TagLink.cs" />
     <Compile Include="Models\Entity\Teaser.cs" />
     <Compile Include="Models\Entity\YouTubeVideo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
