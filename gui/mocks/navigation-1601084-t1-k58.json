@@ -9,7 +9,7 @@
       {
         "Id": "t1-k44",
         "Title": "Other birds",
-        "Url": "/1601084/515736/penguin-guide/other-birds",
+        "Url": "/app/1601084/515736/penguin-guide/other-birds",
         "IsAbstract": false,
         "HasChildNodes": true,
         "Items": [
@@ -23,7 +23,7 @@
               {
                 "Id": "t1-k58",
                 "Title": "Ibis",
-                "Url": "/1601084/515654/penguin-guide/ibis",
+                "Url": "/app/1601084/515654/penguin-guide/ibis",
                 "IsAbstract": false,
                 "HasChildNodes": false,
                 "Items": []

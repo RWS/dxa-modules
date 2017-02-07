@@ -9,14 +9,14 @@
       {
         "Id": "t1-k21",
         "Title": "Messages",
-        "Url": "/1961702/164479/user-guide/messages",
+        "Url": "/app/1961702/164479/user-guide/messages",
         "IsAbstract": false,
         "HasChildNodes": true,
         "Items": [
           {
             "Id": "t1-k22",
             "Title": "Text Messages",
-            "Url": "/1961702/164460/user-guide/text-messages",
+            "Url": "/app/1961702/164460/user-guide/text-messages",
             "IsAbstract": false,
             "HasChildNodes": false,
             "Items": []

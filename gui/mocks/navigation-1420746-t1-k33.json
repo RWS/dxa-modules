@@ -9,14 +9,14 @@
       {
         "Id": "t1-k32",
         "Title": "Music functions",
-        "Url": "/1420746/164371/user-guide/music-functions",
+        "Url": "/app/1420746/164371/user-guide/music-functions",
         "IsAbstract": false,
         "HasChildNodes": true,
         "Items": [
           {
             "Id": "t1-k33",
             "Title": "Listening to music",
-            "Url": "/1420746/164339/user-guide/listening-to-music",
+            "Url": "/app/1420746/164339/user-guide/listening-to-music",
             "IsAbstract": false,
             "HasChildNodes": false,
             "Items": []

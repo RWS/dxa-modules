@@ -9,21 +9,21 @@
       {
         "Id": "t1-k17",
         "Title": "Types of penguins",
-        "Url": "/1601084/516000/penguin-guide/types-of-penguins",
+        "Url": "/app/1601084/516000/penguin-guide/types-of-penguins",
         "IsAbstract": false,
         "HasChildNodes": true,
         "Items": [
           {
             "Id": "t1-k32",
             "Title": "Megadyptes",
-            "Url": "/1601084/516692/penguin-guide/megadyptes",
+            "Url": "/app/1601084/516692/penguin-guide/megadyptes",
             "IsAbstract": false,
             "HasChildNodes": true,
             "Items": [
               {
                 "Id": "t1-k33",
                 "Title": "Yellow-eyed penguin (Megadyptes antipodes)",
-                "Url": "/1601084/516609/penguin-guide/yellow-eyed-penguin--megadyptes-antipodes-",
+                "Url": "/app/1601084/516609/penguin-guide/yellow-eyed-penguin--megadyptes-antipodes-",
                 "IsAbstract": false,
                 "HasChildNodes": false,
                 "Items": []

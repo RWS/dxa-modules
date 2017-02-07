@@ -9,14 +9,14 @@
       {
         "Id": "t1-k26",
         "Title": "Spelletjes",
-        "Url": "/1881665/164241/user-guide/spelletjes",
+        "Url": "/app/1881665/164241/user-guide/spelletjes",
         "IsAbstract": false,
         "HasChildNodes": true,
         "Items": [
           {
             "Id": "t1-k29",
             "Title": "Snake 2",
-            "Url": "/1881665/164419/user-guide/snake-2",
+            "Url": "/app/1881665/164419/user-guide/snake-2",
             "IsAbstract": false,
             "HasChildNodes": false,
             "Items": []

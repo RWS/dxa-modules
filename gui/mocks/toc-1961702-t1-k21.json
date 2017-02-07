@@ -2,7 +2,7 @@
   {
     "Id": "t1-k22",
     "Title": "Text Messages",
-    "Url": "/1961702/164460/user-guide/text-messages",
+    "Url": "/app/1961702/164460/user-guide/text-messages",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -10,7 +10,7 @@
   {
     "Id": "t1-k23",
     "Title": "Multimedia messages",
-    "Url": "/1961702/164390/user-guide/multimedia-messages",
+    "Url": "/app/1961702/164390/user-guide/multimedia-messages",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -18,7 +18,7 @@
   {
     "Id": "t1-k24",
     "Title": "Voice mailbox",
-    "Url": "/1961702/164323/user-guide/voice-mailbox",
+    "Url": "/app/1961702/164323/user-guide/voice-mailbox",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -26,7 +26,7 @@
   {
     "Id": "t1-k25",
     "Title": "Deleting messages",
-    "Url": "/1961702/164452/user-guide/deleting-messages",
+    "Url": "/app/1961702/164452/user-guide/deleting-messages",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []

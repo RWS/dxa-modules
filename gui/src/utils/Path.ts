@@ -1,6 +1,6 @@
 import { IWindow } from "interfaces/Window";
 
-const rootPath: string = (window as IWindow).SDLDitaDeliveryRootPath || "/";
+const rootPath: string = (window as IWindow).SdlDitaDeliveryRootPath || "/";
 
 /**
  * Path utilities

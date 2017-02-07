@@ -9,14 +9,14 @@
       {
         "Id": "t1-k32",
         "Title": "Muziekfuncties",
-        "Url": "/1881665/164373/user-guide/muziekfuncties",
+        "Url": "/app/1881665/164373/user-guide/muziekfuncties",
         "IsAbstract": false,
         "HasChildNodes": true,
         "Items": [
           {
             "Id": "t1-k34",
             "Title": "Naar de radio luisteren",
-            "Url": "/1881665/164165/user-guide/naar-de-radio-luisteren",
+            "Url": "/app/1881665/164165/user-guide/naar-de-radio-luisteren",
             "IsAbstract": false,
             "HasChildNodes": false,
             "Items": []

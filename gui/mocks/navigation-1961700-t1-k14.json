@@ -9,14 +9,14 @@
       {
         "Id": "t1-k12",
         "Title": "Erste Schritte",
-        "Url": "/1961700/164396/user-guide/erste-schritte",
+        "Url": "/app/1961700/164396/user-guide/erste-schritte",
         "IsAbstract": false,
         "HasChildNodes": true,
         "Items": [
           {
             "Id": "t1-k14",
             "Title": "Laden des Akkus",
-            "Url": "/1961700/164288/user-guide/laden-des-akkus",
+            "Url": "/app/1961700/164288/user-guide/laden-des-akkus",
             "IsAbstract": false,
             "HasChildNodes": false,
             "Items": []
