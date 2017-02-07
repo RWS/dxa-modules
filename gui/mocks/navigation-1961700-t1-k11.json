@@ -9,14 +9,14 @@
       {
         "Id": "t1-k4",
         "Title": "Ihr Telefon",
-        "Url": "/1961700/164229/user-guide/ihr-telefon",
+        "Url": "/app/1961700/164229/user-guide/ihr-telefon",
         "IsAbstract": false,
         "HasChildNodes": true,
         "Items": [
           {
             "Id": "t1-k11",
             "Title": "Bluetooth-Verbindung",
-            "Url": "/1961700/164307/user-guide/bluetooth-verbindung",
+            "Url": "/app/1961700/164307/user-guide/bluetooth-verbindung",
             "IsAbstract": false,
             "HasChildNodes": false,
             "Items": []

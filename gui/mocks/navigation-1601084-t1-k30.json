@@ -9,21 +9,21 @@
       {
         "Id": "t1-k17",
         "Title": "Types of penguins",
-        "Url": "/1601084/516000/penguin-guide/types-of-penguins",
+        "Url": "/app/1601084/516000/penguin-guide/types-of-penguins",
         "IsAbstract": false,
         "HasChildNodes": true,
         "Items": [
           {
             "Id": "t1-k27",
             "Title": "Spheniscus (Banded penguins)",
-            "Url": "/1601084/516904/penguin-guide/spheniscus--banded-penguins-",
+            "Url": "/app/1601084/516904/penguin-guide/spheniscus--banded-penguins-",
             "IsAbstract": false,
             "HasChildNodes": true,
             "Items": [
               {
                 "Id": "t1-k30",
                 "Title": "Galapagos penguin (Spheniscus mendiculus)",
-                "Url": "/1601084/516511/penguin-guide/galapagos-penguin--spheniscus-mendiculus-",
+                "Url": "/app/1601084/516511/penguin-guide/galapagos-penguin--spheniscus-mendiculus-",
                 "IsAbstract": false,
                 "HasChildNodes": false,
                 "Items": []

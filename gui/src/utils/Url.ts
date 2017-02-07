@@ -1,11 +1,12 @@
 import { slugify } from "utils/Slug";
+import { path } from "utils/Path";
 
 /**
  * Regex to validate if a url is an item Url
  *
  * example: /1656863/164363/publication-mp330/speed-dialling
  */
-const ITEM_URL_REGEX = /^\/\d+\/\d+(\/([^\/]+(\/([^\/]+)?)?)?)?$/i;
+const ITEM_URL_REGEX = /^\/\d+\/\d+($|\/).*$/i;
 
 /**
  * Maximum characters for a title
@@ -31,7 +32,8 @@ export class Url {
      * @memberOf Url
      */
     public static getPublicationUrl(publicationId: string, publicationTitle?: string): string {
-        let url = `/${encodeURIComponent(publicationId)}`;
+        const rootPath = path.getRootPath();
+        let url = `${rootPath}${encodeURIComponent(publicationId)}`;
         if (publicationTitle) {
             url += `/${Url._processTitle(publicationTitle)}`;
         }
@@ -48,7 +50,13 @@ export class Url {
      * @memberOf Url
      */
     public static itemUrlIsValid(url?: string | null): boolean {
-        return (url && url.match(ITEM_URL_REGEX)) != null;
+        const rootPath = path.getRootPath();
+        if (url && url.indexOf(rootPath) === 0) {
+            // Remove root path
+            const withoutRoot = url ? url.substring(rootPath.length - 1) : "";
+            return withoutRoot.match(ITEM_URL_REGEX) !== null;
+        }
+        return false;
     }
 
     /**
@@ -65,8 +73,8 @@ export class Url {
      */
     public static getPageUrl(publicationId: string, pageId: string,
         publicationTitle?: string, pageTitle?: string): string {
-
-        let url = `/${encodeURIComponent(publicationId)}/${encodeURIComponent(pageId)}`;
+        const rootPath = path.getRootPath();
+        let url = `${rootPath}${encodeURIComponent(publicationId)}/${encodeURIComponent(pageId)}`;
         if (publicationTitle) {
             url += `/${Url._processTitle(publicationTitle)}`;
             if (pageTitle) {

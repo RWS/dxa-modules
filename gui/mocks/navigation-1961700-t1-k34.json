@@ -9,14 +9,14 @@
       {
         "Id": "t1-k32",
         "Title": "Musikfunktionen",
-        "Url": "/1961700/164369/user-guide/musikfunktionen",
+        "Url": "/app/1961700/164369/user-guide/musikfunktionen",
         "IsAbstract": false,
         "HasChildNodes": true,
         "Items": [
           {
             "Id": "t1-k34",
             "Title": "Radio hören",
-            "Url": "/1961700/164161/user-guide/radio-horen",
+            "Url": "/app/1961700/164161/user-guide/radio-horen",
             "IsAbstract": false,
             "HasChildNodes": false,
             "Items": []

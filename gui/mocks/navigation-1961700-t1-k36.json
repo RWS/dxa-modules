@@ -9,14 +9,14 @@
       {
         "Id": "t1-k35",
         "Title": "Adressbuch",
-        "Url": "/1961700/164299/user-guide/adressbuch",
+        "Url": "/app/1961700/164299/user-guide/adressbuch",
         "IsAbstract": false,
         "HasChildNodes": true,
         "Items": [
           {
             "Id": "t1-k36",
             "Title": "Speichern von Namen und Telefonnummern",
-            "Url": "/1961700/164261/user-guide/speichern-von-namen-und-telefonnummern",
+            "Url": "/app/1961700/164261/user-guide/speichern-von-namen-und-telefonnummern",
             "IsAbstract": false,
             "HasChildNodes": false,
             "Items": []

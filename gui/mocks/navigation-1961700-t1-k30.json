@@ -9,14 +9,14 @@
       {
         "Id": "t1-k26",
         "Title": "Spiele",
-        "Url": "/1961700/164237/user-guide/spiele",
+        "Url": "/app/1961700/164237/user-guide/spiele",
         "IsAbstract": false,
         "HasChildNodes": true,
         "Items": [
           {
             "Id": "t1-k30",
             "Title": "Water Rapids",
-            "Url": "/1961700/164345/user-guide/water-rapids",
+            "Url": "/app/1961700/164345/user-guide/water-rapids",
             "IsAbstract": false,
             "HasChildNodes": false,
             "Items": []
