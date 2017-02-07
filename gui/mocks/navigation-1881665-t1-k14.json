@@ -1,17 +1,28 @@
-{
-  "Id": "t1-k12",
-  "Title": "Aan de slag",
-  "Url": "/1881665/164400/publication-mp330/aan-de-slag",
-  "IsAbstract": false,
-  "HasChildNodes": true,
-  "Items": [
-    {
-      "Id": "t1-k14",
-      "Title": "De batterij opladen.",
-      "Url": "/1881665/164292/publication-mp330/de-batterij-opladen-",
-      "IsAbstract": false,
-      "HasChildNodes": false,
-      "Items": []
-    }
-  ]
-}
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k12",
+        "Title": "Aan de slag",
+        "Url": "/1881665/164400/user-guide/aan-de-slag",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": [
+          {
+            "Id": "t1-k14",
+            "Title": "De batterij opladen.",
+            "Url": "/1881665/164292/user-guide/de-batterij-opladen-",
+            "IsAbstract": false,
+            "HasChildNodes": false,
+            "Items": []
+          }
+        ]
+      }
+    ]
+  }
+]

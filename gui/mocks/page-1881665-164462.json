@@ -1,9 +1,7 @@
 {
   "Id": "164462",
   "Meta": {
-    "tocnaventries.generated.value": [
-      "ish:1881665-22-1024"
-    ]
+    "tocnaventries.generated.value": "ish:1881665-22-1024"
   },
   "Regions": [
     {
@@ -14,7 +12,7 @@
           "topicBody": {
             "Fragments": [
               {
-                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-F2908D6D-3DF6-4E28-9F94-3A057669A444__GUID-ABED599B-57A2-465B-948F-528A628BE292\" xmlns=\"http://www.w3.org/1999/xhtml\">Tekstberichten</h1>\n      \n      \n      \n      <div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">U kunt met de telefoon berichten uit meerdere delen, samengesteld uit verschillende gewone tekstberichten, verzenden en ontvangen.</p>\n         \n         \n         <p class=\"p\">U kunt met de telefoon berichten uit meerdere delen, samengesteld uit verschillende gewone tekstberichten, verzenden en ontvangen\n            (netwerkdienst). De facturering wordt gebaseerd op het aantal gewone berichten waaruit het bericht is samengesteld. U kunt\n            ook berichten met tekst en afbeeldingen verzenden en ontvangen. Elk afbeeldingbericht is samengesteld uit verschillende tekstberichten.\n            Het verzenden van een afbeeldingbericht kan dus meer kosten dan het verzenden van een tekstbericht.\n         </p>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Hoofdonderwerp:</strong> <a class=\"link\" href=\"/1881665/164481/publication-mp330/berichten\">Berichten</a></div>\n            \n         </div>\n         \n      </div>\n   "
+                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-F2908D6D-3DF6-4E28-9F94-3A057669A444__GUID-ABED599B-57A2-465B-948F-528A628BE292\" xmlns=\"http://www.w3.org/1999/xhtml\">Tekstberichten</h1>\n      \n      \n      \n      <div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">U kunt met de telefoon berichten uit meerdere delen, samengesteld uit verschillende gewone tekstberichten, verzenden en ontvangen.</p>\n         \n         \n         <p class=\"p\">U kunt met de telefoon berichten uit meerdere delen, samengesteld uit verschillende gewone tekstberichten, verzenden en ontvangen\n            (netwerkdienst). De facturering wordt gebaseerd op het aantal gewone berichten waaruit het bericht is samengesteld. U kunt\n            ook berichten met tekst en afbeeldingen verzenden en ontvangen. Elk afbeeldingbericht is samengesteld uit verschillende tekstberichten.\n            Het verzenden van een afbeeldingbericht kan dus meer kosten dan het verzenden van een tekstbericht.\n         </p>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Hoofdonderwerp:</strong> <a class=\"link\" href=\"/1881665/164481/user-guide/berichten\">Berichten</a></div>\n            \n         </div>\n         \n      </div>\n   "
               }
             ]
           }

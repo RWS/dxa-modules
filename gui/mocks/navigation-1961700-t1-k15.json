@@ -1,17 +1,28 @@
-{
-  "Id": "t1-k12",
-  "Title": "Erste Schritte",
-  "Url": "/1961700/164396/publication-mp330/erste-schritte",
-  "IsAbstract": false,
-  "HasChildNodes": true,
-  "Items": [
-    {
-      "Id": "t1-k15",
-      "Title": "Tastensperre",
-      "Url": "/1961700/164353/publication-mp330/tastensperre",
-      "IsAbstract": false,
-      "HasChildNodes": false,
-      "Items": []
-    }
-  ]
-}
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k12",
+        "Title": "Erste Schritte",
+        "Url": "/1961700/164396/user-guide/erste-schritte",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": [
+          {
+            "Id": "t1-k15",
+            "Title": "Tastensperre",
+            "Url": "/1961700/164353/user-guide/tastensperre",
+            "IsAbstract": false,
+            "HasChildNodes": false,
+            "Items": []
+          }
+        ]
+      }
+    ]
+  }
+]

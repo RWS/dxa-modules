@@ -1,17 +1,28 @@
-{
-  "Id": "t1-k21",
-  "Title": "Berichten",
-  "Url": "/1881665/164481/publication-mp330/berichten",
-  "IsAbstract": false,
-  "HasChildNodes": true,
-  "Items": [
-    {
-      "Id": "t1-k23",
-      "Title": "Multimediaberichten",
-      "Url": "/1881665/164392/publication-mp330/multimediaberichten",
-      "IsAbstract": false,
-      "HasChildNodes": false,
-      "Items": []
-    }
-  ]
-}
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k21",
+        "Title": "Berichten",
+        "Url": "/1881665/164481/user-guide/berichten",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": [
+          {
+            "Id": "t1-k23",
+            "Title": "Multimediaberichten",
+            "Url": "/1881665/164392/user-guide/multimediaberichten",
+            "IsAbstract": false,
+            "HasChildNodes": false,
+            "Items": []
+          }
+        ]
+      }
+    ]
+  }
+]

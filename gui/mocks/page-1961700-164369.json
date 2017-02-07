@@ -1,9 +1,7 @@
 {
   "Id": "164369",
   "Meta": {
-    "tocnaventries.generated.value": [
-      "ish:1961700-32-1024"
-    ]
+    "tocnaventries.generated.value": "ish:1961700-32-1024"
   },
   "Regions": [
     {
@@ -14,7 +12,7 @@
           "topicBody": {
             "Fragments": [
               {
-                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-BE2DE06F-3702-493F-9176-A7944470B77C__GUID-EB127F99-B5ED-4A4D-ACF7-8CD03FC0A7E2\" xmlns=\"http://www.w3.org/1999/xhtml\">Musikfunktionen</h1>\n      \n      \n      \n      <div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">Sie können sich auf der Speicherkarte Ihres Telefons abgelegte MP3- und AACMusikdateien mit dem Player anhören oder Radio\n            hören. \n         </p>\n         \n         \n         <p class=\"p\">Die spezielle Musiktaste oben links am Telefon ermöglicht Ihnen ein schnelles Ein- und Ausschalten der Player-Funktion und\n            des Radios.\n         </p>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <ul class=\"ullinks\">\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1961700/164337/publication-mp330/anhoren-von-musik\">Anhören von Musik</a></strong><br />\n               \n            </li>\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1961700/164161/publication-mp330/radio-horen\">Radio hören</a></strong><br />\n               \n            </li>\n            \n         </ul>\n         \n      </div>\n   "
+                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-BE2DE06F-3702-493F-9176-A7944470B77C__GUID-EB127F99-B5ED-4A4D-ACF7-8CD03FC0A7E2\" xmlns=\"http://www.w3.org/1999/xhtml\">Musikfunktionen</h1>\n      \n      \n      \n      <div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">Sie können sich auf der Speicherkarte Ihres Telefons abgelegte MP3- und AACMusikdateien mit dem Player anhören oder Radio\n            hören. \n         </p>\n         \n         \n         <p class=\"p\">Die spezielle Musiktaste oben links am Telefon ermöglicht Ihnen ein schnelles Ein- und Ausschalten der Player-Funktion und\n            des Radios.\n         </p>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <ul class=\"ullinks\">\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1961700/164337/user-guide/anhoren-von-musik\">Anhören von Musik</a></strong><br />\n               \n            </li>\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/1961700/164161/user-guide/radio-horen\">Radio hören</a></strong><br />\n               \n            </li>\n            \n         </ul>\n         \n      </div>\n   "
               }
             ]
           }

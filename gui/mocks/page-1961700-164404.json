@@ -1,9 +1,7 @@
 {
   "Id": "164404",
   "Meta": {
-    "tocnaventries.generated.value": [
-      "ish:1961700-31-1024"
-    ]
+    "tocnaventries.generated.value": "ish:1961700-31-1024"
   },
   "Regions": [
     {
@@ -14,7 +12,7 @@
           "topicBody": {
             "Fragments": [
               {
-                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-DEE39F35-598E-4559-9733-76F34E115FE5__GUID-1787BC3F-9DF8-42C4-8C40-FC77E019C0CF\" xmlns=\"http://www.w3.org/1999/xhtml\">DJ Spiel</h1>\n      \n      \n      \n      <div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\" />\n         \n         \n         <p class=\"p\">Du stehst als DJ am Anfang deiner Karriere. </p>\n         \n         \n         <p class=\"p\">Vergrössere auf deinem Weg durch die Stadt deine Plattensammlung, übe dich im Scratchen und bereite dich auf deine ersten\n            Club Auftritte vor.\n         </p>\n         \n         \n         <p class=\"p\">Wenn du gut genug bist, winkt ein Job im coolsten Laden der Stadt. Wird dieses deine grösste Chance? Zeig allen was du draufhast!</p>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Übergeordnetes Thema:</strong> <a class=\"link\" title=\"Ihr Telefon unterstützt die Java 2 Micro Edition (J2METM), eine Version der Java-Technik, die speziell für kleine Elektronikgeräte für Endanwender entwickelt wurde. Das Telefon enthält einige Java-Programme und -Spiele und unterstützt das Herunterladen von neuen Programmen und Spielen über verschiedene WAPDienste.\" href=\"/1961700/164237/publication-mp330/spiele\">Spiele</a></div>\n            \n         </div>\n         \n      </div>\n   "
+                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-DEE39F35-598E-4559-9733-76F34E115FE5__GUID-1787BC3F-9DF8-42C4-8C40-FC77E019C0CF\" xmlns=\"http://www.w3.org/1999/xhtml\">DJ Spiel</h1>\n      \n      \n      \n      <div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\" />\n         \n         \n         <p class=\"p\">Du stehst als DJ am Anfang deiner Karriere. </p>\n         \n         \n         <p class=\"p\">Vergrössere auf deinem Weg durch die Stadt deine Plattensammlung, übe dich im Scratchen und bereite dich auf deine ersten\n            Club Auftritte vor.\n         </p>\n         \n         \n         <p class=\"p\">Wenn du gut genug bist, winkt ein Job im coolsten Laden der Stadt. Wird dieses deine grösste Chance? Zeig allen was du draufhast!</p>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Übergeordnetes Thema:</strong> <a class=\"link\" title=\"Ihr Telefon unterstützt die Java 2 Micro Edition (J2METM), eine Version der Java-Technik, die speziell für kleine Elektronikgeräte für Endanwender entwickelt wurde. Das Telefon enthält einige Java-Programme und -Spiele und unterstützt das Herunterladen von neuen Programmen und Spielen über verschiedene WAPDienste.\" href=\"/1961700/164237/user-guide/spiele\">Spiele</a></div>\n            \n         </div>\n         \n      </div>\n   "
               }
             ]
           }

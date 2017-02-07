@@ -1,8 +1,19 @@
-{
-  "Id": "t1-k16",
-  "Title": "Call functions",
-  "Url": "/1420746/164468/publication-mp330/call-functions",
-  "IsAbstract": false,
-  "HasChildNodes": true,
-  "Items": []
-}
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k16",
+        "Title": "Call functions",
+        "Url": "/1420746/164468/user-guide/call-functions",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": []
+      }
+    ]
+  }
+]

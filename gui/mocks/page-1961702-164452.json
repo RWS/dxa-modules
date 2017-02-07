@@ -1,9 +1,7 @@
 {
   "Id": "164452",
   "Meta": {
-    "tocnaventries.generated.value": [
-      "ish:1961702-25-1024"
-    ]
+    "tocnaventries.generated.value": "ish:1961702-25-1024"
   },
   "Regions": [
     {
@@ -14,7 +12,7 @@
           "topicBody": {
             "Fragments": [
               {
-                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-F1F85108-6DA2-467B-8EE0-FA41B80AEB4B__GUID-269B12D4-B4F8-493F-9178-C7BB5F1B30B8\" xmlns=\"http://www.w3.org/1999/xhtml\">Deleting messages</h1>\n      \n      \n      <div class=\"body taskbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <ol class=\"ol steps\" id=\"GUID-F1F85108-6DA2-467B-8EE0-FA41B80AEB4B__GUID-C83648A3-EE9E-458C-9228-154A89CED050\">\n            <li class=\"li step\">\n               <span class=\"ph cmd\">To delete text messages, press <samp class=\"ph msgph\">Menu</samp>, and select <samp class=\"ph msgph\">Messages</samp>, <samp class=\"ph msgph\">Text messages</samp> and <samp class=\"ph msgph\">Delete messages</samp>.</span>\n               \n            </li>\n            \n            <li class=\"li step\">\n               <span class=\"ph cmd\">To delete all messages from a folder, select the folder where you want to delete the messages and press <samp class=\"ph msgph\">OK</samp>. If the folder contains unread messages, the phone will ask whether you want to delete them also. </span>\n               \n            </li>\n            \n         </ol>\n         \n         \n      </div>\n      \n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Parent topic:</strong> <a class=\"link\" href=\"/1961702/164479/publication-mp330/messages\">Messages</a></div>\n            \n         </div>\n         \n      </div>\n   "
+                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-F1F85108-6DA2-467B-8EE0-FA41B80AEB4B__GUID-269B12D4-B4F8-493F-9178-C7BB5F1B30B8\" xmlns=\"http://www.w3.org/1999/xhtml\">Deleting messages</h1>\n      \n      \n      <div class=\"body taskbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <ol class=\"ol steps\" id=\"GUID-F1F85108-6DA2-467B-8EE0-FA41B80AEB4B__GUID-C83648A3-EE9E-458C-9228-154A89CED050\">\n            <li class=\"li step\">\n               <span class=\"ph cmd\">To delete text messages, press <samp class=\"ph msgph\">Menu</samp>, and select <samp class=\"ph msgph\">Messages</samp>, <samp class=\"ph msgph\">Text messages</samp> and <samp class=\"ph msgph\">Delete messages</samp>.</span>\n               \n            </li>\n            \n            <li class=\"li step\">\n               <span class=\"ph cmd\">To delete all messages from a folder, select the folder where you want to delete the messages and press <samp class=\"ph msgph\">OK</samp>. If the folder contains unread messages, the phone will ask whether you want to delete them also. </span>\n               \n            </li>\n            \n         </ol>\n         \n         \n      </div>\n      \n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Parent topic:</strong> <a class=\"link\" href=\"/1961702/164479/user-guide/messages\">Messages</a></div>\n            \n         </div>\n         \n      </div>\n   "
               }
             ]
           }
