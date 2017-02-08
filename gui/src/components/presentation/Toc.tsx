@@ -202,7 +202,7 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
             const { activeItemPath, rootItems } = this.props;
             const onSelectionChanged = this.props.onSelectionChanged;
             const selectedNode = nodes.length > 0 ? nodes[0] : null;
-            const firstRootNodeId = rootItems && rootItems.length > 0 ? (rootItems[0] ? rootItems[0].id : null) : null;
+            const firstRootNodeId = rootItems && rootItems[0] ? rootItems[0].id : null;
             const activeId = activeItemPath ? activeItemPath[activeItemPath.length - 1] : firstRootNodeId;
             // Check if expanding is finished (expanding state is reset when the component is updated)
             if (this._isExpanding) {
