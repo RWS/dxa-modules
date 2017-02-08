@@ -15,6 +15,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <SdlDeliveryVersion>8.5.0</SdlDeliveryVersion>
+    <SdlDxaDataModelPackageVersion>2.0.0-alpha-201701301042</SdlDxaDataModelPackageVersion>
     <DxaFrameworkVersion>2.0.0-alpha-201702071326</DxaFrameworkVersion>
     <ExperienceManagerVersion>8.5.0</ExperienceManagerVersion>
   </PropertyGroup>
@@ -43,6 +44,10 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="Sdl.Web.DataModel">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Sdl.Dxa.DataModel.$(SdlDxaDataModelPackageVersion)\lib\net452\Sdl.Web.DataModel.dll</HintPath>
     </Reference>
     <Reference Include="Sdl.Web.Common">
       <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net452\Sdl.Web.Common.dll</HintPath>
