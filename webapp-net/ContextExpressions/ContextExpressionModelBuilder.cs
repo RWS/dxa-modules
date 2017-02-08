@@ -5,7 +5,9 @@ using DD4T.ContentModel;
 using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Logging;
 using Sdl.Web.Common.Models;
+using Sdl.Web.DataModel;
 using Sdl.Web.Tridion.Mapping;
+using Sdl.Web.Tridion.R2Mapping;
 using IPage = DD4T.ContentModel.IPage;
 
 namespace Sdl.Web.Modules.ContextExpressions
@@ -15,8 +17,9 @@ namespace Sdl.Web.Modules.ContextExpressions
     /// </summary>
     /// <remarks>
     /// This Model Builder should be configured in the modelBuilderPipeline section in Web.config to run after the <see cref="DefaultModelBuilder"/>.
+    /// It can act both as Legacy Model Builder (<see cref="IModelBuilder"/>) and as R2 Model Builder (<see cref="IPageModelBuilder"/>).
     /// </remarks>
-    public class ContextExpressionModelBuilder : IModelBuilder
+    public class ContextExpressionModelBuilder : IModelBuilder, IEntityModelBuilder
     {
 
         #region IModelBuilder members
@@ -55,6 +58,45 @@ namespace Sdl.Web.Modules.ContextExpressions
         public void BuildEntityModel(ref EntityModel entityModel, IComponent component, Type baseModelType, Localization localization)
         {
             // Nothing to do here
+        }
+        #endregion
+
+        #region IEntityModelBuilder members
+        /// <summary>
+        /// Builds a strongly typed Entity Model based on a given DXA R2 Data Model.
+        /// </summary>
+        /// <param name="entityModel">The strongly typed Entity Model to build. Is <c>null</c> for the first Entity Model Builder in the pipeline.</param>
+        /// <param name="entityModelData">The DXA R2 Data Model.</param>
+        /// <param name="baseModelType">The base type for the Entity Model to build.</param>
+        /// <param name="localization">The context <see cref="Localization"/>.</param>
+        public void BuildEntityModel(ref EntityModel entityModel, EntityModelData entityModelData, Type baseModelType, Localization localization)
+        {
+            using (new Tracer(entityModel, entityModelData, baseModelType, localization))
+            {
+                IDictionary<string, object> extensionData = entityModel.ExtensionData;
+                if (extensionData == null)
+                {
+                    return;
+                }
+
+                object cxIncludes;
+                object cxExcludes;
+                extensionData.TryGetValue("CX.Include", out cxIncludes);
+                extensionData.TryGetValue("CX.Exclude", out cxExcludes);
+
+                if ((cxIncludes != null) || (cxExcludes != null))
+                {
+                    ContextExpressionConditions cxConditions = new ContextExpressionConditions
+                    {
+                        Include = (string[]) cxIncludes,
+                        Exclude = (string[]) cxExcludes
+                    };
+
+                    extensionData.Add(Constants.ContextExpressionsKey, cxConditions);
+                    extensionData.Remove("CX.Include");
+                    extensionData.Remove("CX.Exclude");
+                }
+            }
         }
         #endregion
     }
