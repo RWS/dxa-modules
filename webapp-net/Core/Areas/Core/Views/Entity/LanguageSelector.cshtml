@@ -9,16 +9,11 @@
         {
             excludedLocalizations = Model.Settings["suppressLocalizations"].Split(',').Select(l => ("/" + l.Trim())).ToList();
         }
-        foreach (var loc in siteLocalizations)
-        {
-            if (!excludedLocalizations.Contains(loc.Path))
-            {
-                filteredLocalizations.Add(loc);
-            }
-        }
+
+        filteredLocalizations.AddRange(siteLocalizations.Where(siteLoc => !excludedLocalizations.Contains(siteLoc.Path)).Select(s=>s));
     }
     var redirectId = WebRequestContext.PageModel.Id;
-    var defaultItem = Model.Settings.ContainsKey("defaultContentLink") ? Model.Settings["defaultContentLink"].Split('-')[1] : null;
+    var defaultItem = Model.Settings.ContainsKey("defaultContentLink") ? Model.Settings["defaultContentLink"] : null;
 }
 @if (redirectId != null && filteredLocalizations.Count > 1)
 {
@@ -26,7 +21,7 @@
         <select class="selectpicker" data-width="auto">
             @foreach (var loc in filteredLocalizations)
             {
-                var parms = "localizationId=" + loc.LocalizationId + (defaultItem != null ? "&defaultItemId=" + defaultItem : "");
+                var parms = "localizationId=" + loc.LocalizationId + (defaultItem != null ? "&defaultItem=" + defaultItem : "");
                 parms += "&defaultPath=" + loc.Path;
                 <option value="@loc.LocalizationId" data-href="@(WebRequestContext.Localization.Path)/resolve/@(redirectId)?@parms" @(loc.LocalizationId == WebRequestContext.Localization.LocalizationId ? "selected" : "")>
                     @loc.Language
