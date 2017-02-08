@@ -199,10 +199,11 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
     private _onSelectionChanged(nodes: ITreeViewNode[]): void {
         /* istanbul ignore else */
         if (!this._isUnmounted) {
-            const { activeItemPath } = this.props;
+            const { activeItemPath, rootItems } = this.props;
             const onSelectionChanged = this.props.onSelectionChanged;
             const selectedNode = nodes.length > 0 ? nodes[0] : null;
-            const activeId = activeItemPath ? activeItemPath[activeItemPath.length - 1] : null;
+            const firstRootNodeId = rootItems && rootItems.length > 0 ? (rootItems[0] ? rootItems[0].id : null) : null;
+            const activeId = activeItemPath ? activeItemPath[activeItemPath.length - 1] : firstRootNodeId;
             // Check if expanding is finished (expanding state is reset when the component is updated)
             if (this._isExpanding) {
                 this._isExpanding = !(selectedNode && selectedNode.id === activeId);
