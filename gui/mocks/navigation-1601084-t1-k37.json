@@ -1,0 +1,37 @@
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k17",
+        "Title": "Types of penguins",
+        "Url": "/app/1601084/516000/penguin-guide/types-of-penguins",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": [
+          {
+            "Id": "t1-k34",
+            "Title": "Eudyptes (Crested penguins)",
+            "Url": "/app/1601084/516875/penguin-guide/eudyptes--crested-penguins-",
+            "IsAbstract": false,
+            "HasChildNodes": true,
+            "Items": [
+              {
+                "Id": "t1-k37",
+                "Title": "Southern Rockhopper Penguin (Eudyptes chrysocome)",
+                "Url": "/app/1601084/516488/penguin-guide/southern-rockhopper-penguin--eudyptes-chrysocome-",
+                "IsAbstract": false,
+                "HasChildNodes": false,
+                "Items": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

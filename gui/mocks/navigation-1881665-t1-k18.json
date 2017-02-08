@@ -1,0 +1,37 @@
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k16",
+        "Title": "Algemene functies",
+        "Url": "/app/1881665/164470/user-guide/algemene-functies",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": [
+          {
+            "Id": "t1-k17",
+            "Title": "Opbellen",
+            "Url": "/app/1881665/164214/user-guide/opbellen",
+            "IsAbstract": false,
+            "HasChildNodes": true,
+            "Items": [
+              {
+                "Id": "t1-k18",
+                "Title": "Snelkeuzetoetsen",
+                "Url": "/app/1881665/164365/user-guide/snelkeuzetoetsen",
+                "IsAbstract": false,
+                "HasChildNodes": false,
+                "Items": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

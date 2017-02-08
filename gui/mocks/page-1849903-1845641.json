@@ -1,29 +1,7 @@
 {
   "Id": "1845641",
   "Meta": {
-    "ishlogicalref.object.id": 1845638,
-    "ishversionref.object.id": 1845639,
-    "ishlngref.object.id": 1845641,
-    "ishref.object.value": "GUID-69027808-048E-4D83-AFDD-4B97E87DF02C",
-    "ishtype.object.value": "ISHModule",
-    "FTITLE.logical.value": "לקריאה נוספת",
-    "FDESCRIPTION.logical.value": null,
-    "FCHANGES.version.value": null,
-    "FISHRELEASELABEL.version.value": null,
-    "CREATED-ON.lng.value": "2017-01-25T12:29:17Z",
-    "FAUTHOR.lng.value": "admin",
-    "FSTATUS.lng.value": "Draft",
-    "MODIFIED-ON.lng.value": "2017-01-25T13:45:16Z",
-    "VERSION.version.value": "1",
-    "DOC-LANGUAGE.lng.value": [
-      "iw"
-    ],
-    "FISHREVCOUNTER.lng.value": 3,
-    "ED.lng.value": "GUID-FD81FF56-0F88-425C-8CED-6C85D4099260",
-    "FUSERGROUP.logical.element": null,
-    "READ-ACCESS.logical.element": null,
-    "publicationtitle.generated.value": "בירה",
-    "conditionsused.generated.value": null
+    "tocnaventries.generated.value": "ish:1849903-8-1024"
   },
   "Regions": [
     {

@@ -5,6 +5,7 @@ import { Toc } from "models/Toc";
 import { NavigationLinks } from "models/NavigationLinks";
 import { Promise } from "es6-promise";
 import { TcmId } from "utils/TcmId";
+import { TaxonomyItemId } from "interfaces/TcmId";
 
 /**
  * Taxonomy service, interacts with the models to fetch the required data.
@@ -42,7 +43,8 @@ export class TaxonomyService implements ITaxonomyService {
      * @memberOf DataStoreClient
      */
     public getSitemapRoot(publicationId: string): Promise<ITaxonomy[]> {
-        return this.getSitemapItems(publicationId, "root");
+        const taxonomyItemId = TcmId.getTaxonomyItemId(TaxonomyItemId.Toc);
+        return this.getSitemapItems(publicationId, taxonomyItemId || "");
     }
 
     /**
@@ -86,15 +88,15 @@ export class TaxonomyService implements ITaxonomyService {
      * Get the full path for a sitemap item within a sitemap
      *
      * @param {string} publicationId Publication Id
-     * @param {string} pageId The page id
+     * @param {string} sitemapId The sitemap id
      * @returns {Promise<ITaxonomy[]>} Promise to return the full path
      *
      * @memberOf DataStoreClient
      */
-    public getSitemapPath(publicationId: string, pageId: string): Promise<ITaxonomy[]> {
-        const navigationLinks = this.getNavigationLinksModel(publicationId, pageId);
+    public getSitemapPath(publicationId: string, sitemapId: string): Promise<ITaxonomy[]> {
+        const navigationLinks = this.getNavigationLinksModel(publicationId, sitemapId);
         if (!navigationLinks) {
-            return Promise.reject(localization.formatMessage("error.path.not.found", [pageId, publicationId]));
+            return Promise.reject(localization.formatMessage("error.path.not.found", [sitemapId, publicationId]));
         }
 
         return new Promise((resolve: (path?: ITaxonomy[]) => void, reject: (error: string | null) => void) => {
@@ -145,9 +147,7 @@ export class TaxonomyService implements ITaxonomyService {
             TaxonomyService.NavigationLinksModels[publicationId] = {};
         }
         if (!TaxonomyService.NavigationLinksModels[publicationId][pageId]) {
-            // TODO: this conversion will not be needed when upgrading to DXA 1.7
-            // https://jira.sdl.com/browse/TSI-2131
-            const taxonomyId = TcmId.getTaxonomyItemId("1", pageId);
+            const taxonomyId = TcmId.getTaxonomyItemId(TaxonomyItemId.Toc, pageId);
             TaxonomyService.NavigationLinksModels[publicationId][pageId] = new NavigationLinks(publicationId, taxonomyId || pageId);
         }
         return TaxonomyService.NavigationLinksModels[publicationId][pageId];

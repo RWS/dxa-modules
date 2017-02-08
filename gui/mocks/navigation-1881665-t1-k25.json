@@ -1,0 +1,28 @@
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k21",
+        "Title": "Berichten",
+        "Url": "/app/1881665/164481/user-guide/berichten",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": [
+          {
+            "Id": "t1-k25",
+            "Title": "Berichten verwijderen",
+            "Url": "/app/1881665/164454/user-guide/berichten-verwijderen",
+            "IsAbstract": false,
+            "HasChildNodes": false,
+            "Items": []
+          }
+        ]
+      }
+    ]
+  }
+]

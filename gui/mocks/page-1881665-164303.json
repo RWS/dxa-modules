@@ -1,0 +1,23 @@
+{
+  "Id": "164303",
+  "Meta": {
+    "tocnaventries.generated.value": "ish:1881665-35-1024"
+  },
+  "Regions": [
+    {
+      "Entities": [
+        {
+          "Id": "164303",
+          "topicTitle": "Telefoonlijst",
+          "topicBody": {
+            "Fragments": [
+              {
+                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-882E4750-A864-4850-A778-03142AB12F36__GUID-F6D9FD6F-6E4B-42A2-833E-410EBE24B867\" xmlns=\"http://www.w3.org/1999/xhtml\">Telefoonlijst</h1>\n      \n      \n      \n      <div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">U kunt namen van contacten opslaan in het geheugen van de telefoon (de interne telefoonlijst) en in het geheugen van de SIM-kaart\n            (SIM-telefoonlijst).\n         </p>\n         \n         \n         <p class=\"p\" />\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <ul class=\"ullinks\">\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/app/1881665/164265/user-guide/namen-en-telefoonnummers-opslaan\">Namen en telefoonnummers opslaan</a></strong><br />\n               \n            </li>\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/app/1881665/164430/user-guide/zoeken-naar-een-contact\">Zoeken naar een contact</a></strong><br />\n               \n            </li>\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/app/1881665/164446/user-guide/contacten-wijzigen\">Contacten wijzigen</a></strong><br />\n               \n            </li>\n            \n         </ul>\n         \n      </div>\n   "
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

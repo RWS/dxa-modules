@@ -1,0 +1,28 @@
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k32",
+        "Title": "Musikfunktionen",
+        "Url": "/app/1961700/164369/user-guide/musikfunktionen",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": [
+          {
+            "Id": "t1-k34",
+            "Title": "Radio hören",
+            "Url": "/app/1961700/164161/user-guide/radio-horen",
+            "IsAbstract": false,
+            "HasChildNodes": false,
+            "Items": []
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,28 @@
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k26",
+        "Title": "Spelletjes",
+        "Url": "/app/1881665/164241/user-guide/spelletjes",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": [
+          {
+            "Id": "t1-k28",
+            "Title": "Spelletjes downloaden",
+            "Url": "/app/1881665/164181/user-guide/spelletjes-downloaden",
+            "IsAbstract": false,
+            "HasChildNodes": false,
+            "Items": []
+          }
+        ]
+      }
+    ]
+  }
+]

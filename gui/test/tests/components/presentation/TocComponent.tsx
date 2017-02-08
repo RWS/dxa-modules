@@ -8,6 +8,8 @@ import { TreeView, ValidationMessage } from "sdl-controls-react-wrappers";
 import { TestBase } from "sdl-models";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 
+const DELAY = 100;
+
 class TocComponent extends TestBase {
 
     public runTests(): void {
@@ -26,12 +28,27 @@ class TocComponent extends TestBase {
                 hasChildNodes: true
             }];
             const loadChildItems = (parentId: string): Promise<ITaxonomy[]> => {
+
                 if (parentId === "root") {
-                    return Promise.resolve([{
-                        id: "12345",
-                        title: "Child1",
-                        hasChildNodes: false
-                    }]);
+                    return new Promise((resolve: (taxonomy: ITaxonomy[]) => void) => {
+                        setTimeout((): void => {
+                            resolve([{
+                                id: "12345",
+                                title: "Child1",
+                                hasChildNodes: true
+                            }]);
+                        }, DELAY);
+                    });
+                } else if (parentId === "12345") {
+                    return new Promise((resolve: (taxonomy: ITaxonomy[]) => void) => {
+                        setTimeout((): void => {
+                            resolve([{
+                                id: "12345-nested",
+                                title: "NestedChild1",
+                                hasChildNodes: false
+                            }]);
+                        }, DELAY);
+                    });
                 } else {
                     return Promise.reject("Failed to load child nodes");
                 }
@@ -77,7 +94,7 @@ class TocComponent extends TestBase {
                     expect(nodes.item(0).textContent).toBe(rootItems[0].title);
                     expect(nodes.item(1).textContent).toBe("Child1");
                     done();
-                }, 0);
+                }, DELAY + 1);
             });
 
             it("shows an error when node failes to expand", (done: () => void): void => {
@@ -97,7 +114,30 @@ class TocComponent extends TestBase {
                     const validationMessageNode = ReactDOM.findDOMNode(validationMessage);
                     expect(validationMessageNode.querySelector("label").textContent).toBe("Failed to load child nodes");
                     done();
-                }, 0);
+                }, DELAY + 1);
+            });
+
+            it("doesn't trigger on selection change when expanding nodes", (done: () => void): void => {
+                // Load root nodes
+                // tslint:disable-next-line:no-any
+                const treeView = TestUtils.findRenderedComponentWithType(toc, TreeView as any);
+                expect(treeView).not.toBeNull();
+                const domNode = ReactDOM.findDOMNode(treeView);
+                const nodes = domNode.querySelectorAll(".content");
+                expect(nodes.length).toBe(2);
+                expect(nodes.item(0).textContent).toBe(rootItems[0].title);
+                // Reload toc and use child path
+                const activeItemPath = [rootItems[0].id || "", "12345", "12345-nested"];
+                const props: ITocProps = {
+                    loadChildItems: loadChildItems,
+                    rootItems: rootItems,
+                    activeItemPath: activeItemPath,
+                    onSelectionChanged: (sitemapItem: ITaxonomy, path: string[]): void => {
+                        expect(path).toEqual(activeItemPath);
+                        done();
+                    }
+                };
+                this._renderComponent(props, target);
             });
 
         });

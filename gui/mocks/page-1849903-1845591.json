@@ -1,29 +1,7 @@
 {
   "Id": "1845591",
   "Meta": {
-    "ishlogicalref.object.id": 1845588,
-    "ishversionref.object.id": 1845589,
-    "ishlngref.object.id": 1845591,
-    "ishref.object.value": "GUID-1713D7C8-4579-4132-BAC1-32AE3AE69D43",
-    "ishtype.object.value": "ISHModule",
-    "FTITLE.logical.value": "חברות בירה",
-    "FDESCRIPTION.logical.value": null,
-    "FCHANGES.version.value": null,
-    "FISHRELEASELABEL.version.value": null,
-    "CREATED-ON.lng.value": "2017-01-25T12:00:46Z",
-    "FAUTHOR.lng.value": "admin",
-    "FSTATUS.lng.value": "Draft",
-    "MODIFIED-ON.lng.value": "2017-01-25T13:45:48Z",
-    "VERSION.version.value": "1",
-    "DOC-LANGUAGE.lng.value": [
-      "iw"
-    ],
-    "FISHREVCOUNTER.lng.value": 4,
-    "ED.lng.value": "GUID-B6C8F569-0078-48D3-AE46-2366A02B4268",
-    "FUSERGROUP.logical.element": null,
-    "READ-ACCESS.logical.element": null,
-    "publicationtitle.generated.value": "בירה",
-    "conditionsused.generated.value": null
+    "tocnaventries.generated.value": "ish:1849903-5-1024"
   },
   "Regions": [
     {

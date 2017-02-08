@@ -1,0 +1,37 @@
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k2",
+        "Title": "Penguins Overview",
+        "Url": "/app/1601084/516062/penguin-guide/penguins-overview",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": [
+          {
+            "Id": "t1-k15",
+            "Title": "Behavior",
+            "Url": "/app/1601084/516036/penguin-guide/behavior",
+            "IsAbstract": false,
+            "HasChildNodes": true,
+            "Items": [
+              {
+                "Id": "t1-k16",
+                "Title": "Breeding",
+                "Url": "/app/1601084/516519/penguin-guide/breeding",
+                "IsAbstract": false,
+                "HasChildNodes": false,
+                "Items": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

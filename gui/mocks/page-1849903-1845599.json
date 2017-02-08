@@ -1,29 +1,7 @@
 {
   "Id": "1845599",
   "Meta": {
-    "ishlogicalref.object.id": 1845596,
-    "ishversionref.object.id": 1845597,
-    "ishlngref.object.id": 1845599,
-    "ishref.object.value": "GUID-98497AEF-5D32-4ECC-B722-F0933C5D9A37",
-    "ishtype.object.value": "ISHModule",
-    "FTITLE.logical.value": "בירה ובריאות",
-    "FDESCRIPTION.logical.value": null,
-    "FCHANGES.version.value": null,
-    "FISHRELEASELABEL.version.value": null,
-    "CREATED-ON.lng.value": "2017-01-25T12:01:38Z",
-    "FAUTHOR.lng.value": "admin",
-    "FSTATUS.lng.value": "Draft",
-    "MODIFIED-ON.lng.value": "2017-01-25T13:47:24Z",
-    "VERSION.version.value": "1",
-    "DOC-LANGUAGE.lng.value": [
-      "iw"
-    ],
-    "FISHREVCOUNTER.lng.value": 4,
-    "ED.lng.value": "GUID-C5E7EB27-B8FA-4D6C-9E3B-D1E5687922DD",
-    "FUSERGROUP.logical.element": null,
-    "READ-ACCESS.logical.element": null,
-    "publicationtitle.generated.value": "בירה",
-    "conditionsused.generated.value": null
+    "tocnaventries.generated.value": "ish:1849903-7-1024"
   },
   "Regions": [
     {

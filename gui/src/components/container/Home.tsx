@@ -1,14 +1,15 @@
 import * as React from "react";
 import { IAppContext } from "components/container/App";
 import { TopBar } from "components/presentation/TopBar";
+import { IPublicationContentProps } from "components/container/PublicationContent";
 
 import "components/container/styles/App";
 
 /**
- * TopBar props
+ * Home state
  *
  * @export
- * @interface ITopBarProps
+ * @interface IHomeState
  */
 export interface IHomeState {
     /**
@@ -63,14 +64,21 @@ export class Home extends React.Component<{}, IHomeState> {
     public render(): JSX.Element {
         const { localizationService } = this.context.services;
         const { isNavOpen } = this.state;
+        const { children } = this.props;
+
+        const child = children as React.ReactElement<IPublicationContentProps>;
+
+        // Only pages with publiction selected can have navigation menu button enabled
+        const canHaveNavMenuButton = child && (child.props.params.publicationId !== undefined);
         return (
-            <div className={"sdl-dita-delivery-app" + (isNavOpen ? " sdl-dita-delivery-app-nav-open" : "")}>
+            <div className={"sdl-dita-delivery-app" + (canHaveNavMenuButton
+                ? " sdl-dita-delivery-app-nav" + (isNavOpen ? " open" : "")
+                : "")}>
                 <TopBar
-                    title={localizationService.formatMessage("app.productfamily")}
                     language={localizationService.formatMessage("app.language")}
-                    toggleNavigationMenu={this._toggleNavigationMenu.bind(this)}
+                    toggleNavigationMenu={canHaveNavMenuButton && this._toggleNavigationMenu.bind(this)}
                     />
-                {this.props.children}
+                {children}
             </div>
         );
     }

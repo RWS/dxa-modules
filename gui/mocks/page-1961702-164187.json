@@ -1,0 +1,23 @@
+{
+  "Id": "164187",
+  "Meta": {
+    "tocnaventries.generated.value": "ish:1961702-7-1024"
+  },
+  "Regions": [
+    {
+      "Entities": [
+        {
+          "Id": "164187",
+          "topicTitle": "Standby mode",
+          "topicBody": {
+            "Fragments": [
+              {
+                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-11DF4D0E-11C3-4C1E-946D-0950B6DFDC4F__GUID-163B3BB0-8F07-47E7-91C9-99982AFB4ADA\" xmlns=\"http://www.w3.org/1999/xhtml\">Standby mode</h1>\n      \n      \n      \n      <div class=\"body conbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">When the phone is ready for use, and you have not keyed in any characters, the phone is in standby mode. The name of the service\n            provider/logo appears in the display.\n         </p>\n         \n         <tcdl:If type=\"ish:Condition\" condition=\"(MODEL=330)\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\"><img class=\"image\" src=\"/app/gui/mocks/bin/1961702-345875-16.gif\" /></tcdl:If>\n         \n         \n         <ol class=\"ol\" id=\"GUID-11DF4D0E-11C3-4C1E-946D-0950B6DFDC4F__GUID-91A65A58-EB16-4404-AA87-C2C468AE6F5C\">\n            \n            <li class=\"li\">Indicates in which cellular network the phone is currently being used.</li>\n            \n            \n            <li class=\"li\">Shows the signal strength of the cellular network at your current location. The bigger the bar, the stronger the signal.</li>\n            \n            \n            <li class=\"li\">Shows the battery charge level. The bigger the bar, the more power in the battery.</li>\n            \n            \n            <li class=\"li\">The left selection key in standby mode is Menu.</li>\n            \n            \n            <li class=\"li\">The right selection key in standby mode is Contacts if no other functions are assigned to it. Otherwise the key is Go to.</li>\n            \n            \n            <tcdl:If type=\"ish:Condition\" condition=\"(MODEL=330)\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\"><li class=\"li\">Shows the track title when the Music player is on or the radio channel when the Radio is on.</li></tcdl:If>\n            \n            \n            \n            \n         </ol>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Parent topic:</strong> <a class=\"link\" href=\"/app/1961702/164231/user-guide/your-phone\">Your phone</a></div>\n            \n         </div>\n         \n         \n         <div class=\"linklist linklist relinfo reltasks\"><strong>Related tasks</strong><br />\n            \n            \n            <div><a class=\"link\" href=\"/app/1961702/164271/user-guide/installing-the-sim-card-and-the-battery\">Installing the SIM card and the battery</a></div>\n            \n            <div><a class=\"link\" href=\"/app/1961702/164290/user-guide/charging-the-battery\">Charging the battery</a></div>\n         </div>\n         \n         \n         <div class=\"linklist linklist relinfo\"><strong>Related information</strong><br />\n            \n            \n            <div><a class=\"link\" href=\"/app/1961702/164255/user-guide/essential-indicators-in-standby-mode\">Essential indicators in standby mode</a></div>\n            \n            <div><a class=\"link\" href=\"/app/1961702/164155/user-guide/connectors-overview\">Connectors overview</a></div>\n         </div>\n         \n      </div>\n   "
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

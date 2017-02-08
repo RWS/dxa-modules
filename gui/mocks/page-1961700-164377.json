@@ -1,0 +1,23 @@
+{
+  "Id": "164377",
+  "Meta": {
+    "tocnaventries.generated.value": "ish:1961700-27-1024"
+  },
+  "Regions": [
+    {
+      "Entities": [
+        {
+          "Id": "164377",
+          "topicTitle": "Starten eines Spiels",
+          "topicBody": {
+            "Fragments": [
+              {
+                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-D6045A82-6286-4EC8-806E-4566EE0E7349__GUID-AC322A45-DE2F-4563-A459-587992935500\" xmlns=\"http://www.w3.org/1999/xhtml\">Starten eines Spiels</h1>\n      \n      \n      \n      <div class=\"body taskbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">Das Telefon enthält einige Java-Programme und -Spiele und unterstützt das Herunterladen von neuen Programmen und Spielen über\n            verschiedene WAPDienste.\n         </p>\n         \n         \n         <ol class=\"ol steps\" id=\"GUID-D6045A82-6286-4EC8-806E-4566EE0E7349__GUID-A5ACDEA3-6CC9-412B-A2B3-FFB2F9EB8C3A\">\n            <li class=\"li step\">\n               <span class=\"ph cmd\">Drücken Sie <samp class=\"ph msgph\">Menü</samp> und wählen Sie <samp class=\"ph msgph\">Spiele</samp> und <samp class=\"ph msgph\">Spiel wählen</samp>.</span>\n               \n            </li>\n            \n            <li class=\"li step\">\n               <span class=\"ph cmd\">Blättern Sie zu einem Spiel oder einem Spielesatz (der Name ist vom jeweiligen Spiel abhängig).</span>\n               \n            </li>\n            \n            <li class=\"li step\">\n               <span class=\"ph cmd\">Drücken Sie <samp class=\"ph msgph\">Optionen</samp> und wählen Sie <samp class=\"ph msgph\">OK</samp> or press <img class=\"image\" src=\"/app/gui/mocks/bin/1961700-345915-16.gif\" />. Wenn Sie ein einzelnes Spiel ausgewählt haben, wird dieses gestartet. Ansonsten wird eine Liste der Spiele in dem gewählten\n                  Spielesatz angezeigt. Um ein Spiel zu starten, blättern Sie zu dem gewünschten Spiel und drücken <samp class=\"ph msgph\">Optionen</samp> und wählen <samp class=\"ph msgph\">OK</samp>oder Sie drücken <img class=\"image\" src=\"/app/gui/mocks/bin/1961700-345915-16.gif\" />.</span>\n               \n            </li>\n            \n         </ol>\n         \n         \n         <div class=\"section postreq\" id=\"GUID-D6045A82-6286-4EC8-806E-4566EE0E7349__GUID-F5256341-3085-41BB-9674-F79BBDEE01DC\">\n            \n            <div class=\"note attention\" id=\"GUID-D6045A82-6286-4EC8-806E-4566EE0E7349__GUID-E9D98993-36A1-4CDB-9172-6391C9FA6BF7\"><span class=\"attentiontitle\">Achtung:</span> Das Ausführen mancher Spiele kann den Akku des Telefons schneller entladen (Sie müssen das Telefon also ggf. schneller an\n               das Ladegerät anschließen).\n            </div>\n            \n            \n         </div>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Übergeordnetes Thema:</strong> <a class=\"link\" title=\"Ihr Telefon unterstützt die Java 2 Micro Edition (J2METM), eine Version der Java-Technik, die speziell für kleine Elektronikgeräte für Endanwender entwickelt wurde. Das Telefon enthält einige Java-Programme und -Spiele und unterstützt das Herunterladen von neuen Programmen und Spielen über verschiedene WAPDienste.\" href=\"/app/1961700/164237/user-guide/spiele\">Spiele</a></div>\n            \n         </div>\n         \n      </div>\n   "
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -4,6 +4,7 @@ import { Link } from "react-router";
 import { ITaxonomy } from "interfaces/Taxonomy";
 import { IAppContext } from "components/container/App";
 import { Url } from "utils/Url";
+import { path } from "utils/Path";
 
 import "components/presentation/styles/Breadcrumbs";
 
@@ -167,9 +168,7 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
             <div className={"sdl-dita-delivery-breadcrumbs"}>
                 <ul>
                     <li>
-                        { /* TODO: Enable when home page is implemented
-                             <Link className="home" title={homeLabel} to="/home">{homeLabel}</Link> */ }
-                        <span title={homeLabel} className="home">{homeLabel}</span>
+                        <Link className="home" title={homeLabel} to={`${path.getRootPath()}home`}>{homeLabel}</Link>
                         <span className="separator" />
                     </li>
                     <li>

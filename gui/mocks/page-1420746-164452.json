@@ -1,33 +1,7 @@
 {
   "Id": "164452",
   "Meta": {
-    "ishlogicalref.object.id": 164448,
-    "ishversionref.object.id": 164449,
-    "ishlngref.object.id": 164452,
-    "ishref.object.value": "GUID-F1F85108-6DA2-467B-8EE0-FA41B80AEB4B",
-    "ishtype.object.value": "ISHModule",
-    "FTITLE.logical.value": "deleting messages",
-    "FDESCRIPTION.logical.value": null,
-    "FCHANGES.version.value": "Imported OASIS DITA 1.1",
-    "FISHRELEASELABEL.version.value": [
-      "Publication MP330-v1-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2012/09/21 12:27:01",
-      "Publication MP330-v2-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2012/09/24 17:31:39",
-      "Publication MP660-v1-GUID-EB2E82F1-1C76-4032-815C-4E717140A081-2012/09/24 14:57:38",
-      "Publication MP660-v2-GUID-EB2E82F1-1C76-4032-815C-4E717140A081-2012/09/24 17:09:12"
-    ],
-    "CREATED-ON.lng.value": "2015-12-23T04:57:24Z",
-    "FAUTHOR.lng.value": "admin",
-    "FSTATUS.lng.value": "Released",
-    "MODIFIED-ON.lng.value": "2016-04-08T15:12:47Z",
-    "VERSION.version.value": "1",
-    "DOC-LANGUAGE.lng.value": [
-      "en"
-    ],
-    "FISHREVCOUNTER.lng.value": 4,
-    "ED.lng.value": "GUID-32554C79-F0DD-4DA8-8377-7A546D200B47",
-    "FUSERGROUP.logical.element": null,
-    "READ-ACCESS.logical.element": null,
-    "publicationtitle.generated.value": "Publication MP330"
+    "tocnaventries.generated.value": "ish:1420746-25-1024"
   },
   "Regions": [
     {
@@ -38,7 +12,7 @@
           "topicBody": {
             "Fragments": [
               {
-                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-F1F85108-6DA2-467B-8EE0-FA41B80AEB4B__GUID-269B12D4-B4F8-493F-9178-C7BB5F1B30B8\" xmlns=\"http://www.w3.org/1999/xhtml\">Deleting messages</h1>\n      \n      \n      <div class=\"body taskbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <ol class=\"ol steps\" id=\"GUID-F1F85108-6DA2-467B-8EE0-FA41B80AEB4B__GUID-C83648A3-EE9E-458C-9228-154A89CED050\">\n            <li class=\"li step\">\n               <span class=\"ph cmd\">To delete text messages, press <samp class=\"ph msgph\">Menu</samp>, and select <samp class=\"ph msgph\">Messages</samp>, <samp class=\"ph msgph\">Text messages</samp> and <samp class=\"ph msgph\">Delete messages</samp>.</span>\n               \n            </li>\n            \n            <li class=\"li step\">\n               <span class=\"ph cmd\">To delete all messages from a folder, select the folder where you want to delete the messages and press <samp class=\"ph msgph\">OK</samp>. If the folder contains unread messages, the phone will ask whether you want to delete them also. </span>\n               \n            </li>\n            \n         </ol>\n         \n         \n      </div>\n      \n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Parent topic:</strong> <a class=\"link\" href=\"/1420746/164479/publication-mp330/messages\">Messages</a></div>\n            \n         </div>\n         \n      </div>\n   "
+                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-F1F85108-6DA2-467B-8EE0-FA41B80AEB4B__GUID-269B12D4-B4F8-493F-9178-C7BB5F1B30B8\" xmlns=\"http://www.w3.org/1999/xhtml\">Deleting messages</h1>\n      \n      \n      <div class=\"body taskbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <ol class=\"ol steps\" id=\"GUID-F1F85108-6DA2-467B-8EE0-FA41B80AEB4B__GUID-C83648A3-EE9E-458C-9228-154A89CED050\">\n            <li class=\"li step\">\n               <span class=\"ph cmd\">To delete text messages, press <samp class=\"ph msgph\">Menu</samp>, and select <samp class=\"ph msgph\">Messages</samp>, <samp class=\"ph msgph\">Text messages</samp> and <samp class=\"ph msgph\">Delete messages</samp>.</span>\n               \n            </li>\n            \n            <li class=\"li step\">\n               <span class=\"ph cmd\">To delete all messages from a folder, select the folder where you want to delete the messages and press <samp class=\"ph msgph\">OK</samp>. If the folder contains unread messages, the phone will ask whether you want to delete them also. </span>\n               \n            </li>\n            \n         </ol>\n         \n         \n      </div>\n      \n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Parent topic:</strong> <a class=\"link\" href=\"/app/1420746/164479/user-guide/messages\">Messages</a></div>\n            \n         </div>\n         \n      </div>\n   "
               }
             ]
           }

@@ -1,0 +1,28 @@
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k21",
+        "Title": "Mitteilungen",
+        "Url": "/app/1961700/164477/user-guide/mitteilungen",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": [
+          {
+            "Id": "t1-k24",
+            "Title": "Sprachmailbox",
+            "Url": "/app/1961700/164321/user-guide/sprachmailbox",
+            "IsAbstract": false,
+            "HasChildNodes": false,
+            "Items": []
+          }
+        ]
+      }
+    ]
+  }
+]

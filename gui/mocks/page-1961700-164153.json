@@ -1,0 +1,23 @@
+{
+  "Id": "164153",
+  "Meta": {
+    "tocnaventries.generated.value": "ish:1961700-6-1024"
+  },
+  "Regions": [
+    {
+      "Entities": [
+        {
+          "Id": "164153",
+          "topicTitle": "Anschlüsse",
+          "topicBody": {
+            "Fragments": [
+              {
+                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-03AB2EA1-F81B-4A22-8149-710094BE1081__GUID-4E0EC990-B468-401D-9D7B-9B5BEE368FED\" xmlns=\"http://www.w3.org/1999/xhtml\">Anschlüsse</h1>\n      \n      \n      \n      <div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\" />\n         \n         \n         <tcdl:If type=\"ish:Condition\" condition=\"(MODEL=330)\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\"><div class=\"section\" id=\"GUID-03AB2EA1-F81B-4A22-8149-710094BE1081__GUID-150A560B-A3B1-43A7-BE5C-F2251CC62CA1\">\n            <br /><img class=\"image\" src=\"/app/gui/mocks/bin/1961700-345907-16.jpg\" /><br />\n            \n            <ol class=\"ol\" id=\"GUID-03AB2EA1-F81B-4A22-8149-710094BE1081__GUID-AF0060CD-91E5-40D6-A175-E8ABEBBCBAE2\">\n               \n               <li class=\"li\">Anschluss für das Ladegerät</li>\n               \n               \n               <li class=\"li\">Anschluss für Headset, Connectivity-Kabel und induktive Schleifeneinheit</li>\n               \n               \n               <li class=\"li\">Audio-Line-In-Anschluss für das Audiokabel zur Verbindung von Telefon und externem Audiogerät.</li>\n               \n               \n            </ol>\n            \n            \n         </div></tcdl:If>\n         \n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Übergeordnetes Thema:</strong> <a class=\"link\" href=\"/app/1961700/164229/user-guide/ihr-telefon\">Ihr Telefon</a></div>\n            \n         </div>\n         \n         \n         <div class=\"linklist linklist relinfo relconcepts\"><strong>Zugehörige Konzepte</strong><br />\n            \n            \n            <div><a class=\"link\" title=\"Wenn das Telefon betriebsbereit ist und Sie keine Zeichen eingegeben haben, befindet sich das Telefon in der Ausgangsanzeige. Der Name/Logo des Netzbetreiber erscheint im Display.\" href=\"/app/1961700/164185/user-guide/ausgangsanzeige\">Ausgangsanzeige</a></div>\n         </div>\n         \n         \n         <div class=\"linklist linklist relinfo reltasks\"><strong>Zugehörige Tasks</strong><br />\n            \n            \n            <div><a class=\"link\" href=\"/app/1961700/164269/user-guide/installieren-der-sim-karte-und-des-akkus\">Installieren der SIM-Karte und des Akkus</a></div>\n            \n            <div><a class=\"link\" href=\"/app/1961700/164288/user-guide/laden-des-akkus\">Laden des Akkus</a></div>\n         </div>\n         \n         \n         <div class=\"linklist linklist relinfo\"><strong>Zugehörige Informationen</strong><br />\n            \n            \n            <div><a class=\"link\" href=\"/app/1961700/164253/user-guide/wichtige-symbole-in-der-ausgangsanzeige\">Wichtige Symbole in der Ausgangsanzeige</a></div>\n         </div>\n         \n      </div>\n   "
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

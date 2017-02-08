@@ -1,0 +1,23 @@
+{
+  "Id": "164290",
+  "Meta": {
+    "tocnaventries.generated.value": "ish:1961702-14-1024"
+  },
+  "Regions": [
+    {
+      "Entities": [
+        {
+          "Id": "164290",
+          "topicTitle": "Charging the battery",
+          "topicBody": {
+            "Fragments": [
+              {
+                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-87DD5F98-0359-4975-BBA2-3B494D82BE3C__GUID-FC33F9A6-B67D-4F1B-B6DD-320FBEBCBC2E\" xmlns=\"http://www.w3.org/1999/xhtml\">Charging the battery</h1>\n      \n      \n      <div class=\"body taskbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <ol class=\"ol steps\" id=\"GUID-87DD5F98-0359-4975-BBA2-3B494D82BE3C__GUID-26A7C2F2-3453-4B36-B0CF-1C42DC728C98\">\n            <li class=\"li step stepexpand\">\n               <span class=\"ph cmd\">Connect the lead from the charger to the socket of your phone.</span>\n               \n               <div class=\"itemgroup info\">\n                  <br /><tcdl:If type=\"ish:Condition\" condition=\"(MODEL=330)\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\"><img class=\"image\" src=\"/app/gui/mocks/bin/1961702-345891-16.jpg\" /></tcdl:If><br />\n                  \n                  \n               </div>\n               \n            </li>\n            \n            <li class=\"li step stepexpand\">\n               <span class=\"ph cmd\">Connect the charger to an AC wall socket.</span>\n               \n               <div class=\"itemgroup stepresult\">The text Charging is displayed briefly if the phone is switched on. If the battery is completely flat, it may take a few minutes\n                  before the charging indicator appears on the display or any calls can be made.\n               </div>\n               \n            </li>\n            \n         </ol>\n         \n         \n         <div class=\"section postreq\" id=\"GUID-87DD5F98-0359-4975-BBA2-3B494D82BE3C__GUID-EA779A20-4964-4BEE-815B-ADAF0BDE8E20\">\n            \n            <p class=\"p\">You can use the phone while the charger is connected.</p>\n            \n            \n         </div>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Parent topic:</strong> <a class=\"link\" href=\"/app/1961702/164398/user-guide/getting-started\">Getting started</a></div>\n            \n         </div>\n         \n         \n         <div class=\"linklist linklist relinfo relconcepts\"><strong>Related concepts</strong><br />\n            \n            \n            <div><a class=\"link\" title=\"When the phone is ready for use, and you have not keyed in any characters, the phone is in standby mode. The name of the service provider/logo appears in the display.\" href=\"/app/1961702/164187/user-guide/standby-mode\">Standby mode</a></div>\n         </div>\n         \n         \n         <div class=\"linklist linklist relinfo reltasks\"><strong>Related tasks</strong><br />\n            \n            \n            <div><a class=\"link\" href=\"/app/1961702/164271/user-guide/installing-the-sim-card-and-the-battery\">Installing the SIM card and the battery</a></div>\n         </div>\n         \n         \n         <div class=\"linklist linklist relinfo\"><strong>Related information</strong><br />\n            \n            \n            <div><a class=\"link\" href=\"/app/1961702/164155/user-guide/connectors-overview\">Connectors overview</a></div>\n            \n            <div><a class=\"link\" href=\"/app/1961702/164255/user-guide/essential-indicators-in-standby-mode\">Essential indicators in standby mode</a></div>\n         </div>\n         \n      </div>\n   "
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

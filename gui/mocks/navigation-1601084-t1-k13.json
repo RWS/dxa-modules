@@ -1,0 +1,28 @@
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k2",
+        "Title": "Penguins Overview",
+        "Url": "/app/1601084/516062/penguin-guide/penguins-overview",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": [
+          {
+            "Id": "t1-k13",
+            "Title": "Anatomy and physiology",
+            "Url": "/app/1601084/516444/penguin-guide/anatomy-and-physiology",
+            "IsAbstract": false,
+            "HasChildNodes": false,
+            "Items": []
+          }
+        ]
+      }
+    ]
+  }
+]

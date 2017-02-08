@@ -1,0 +1,28 @@
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k4",
+        "Title": "Your phone",
+        "Url": "/app/1420746/164231/user-guide/your-phone",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": [
+          {
+            "Id": "t1-k8",
+            "Title": "Essential indicators in standby mode",
+            "Url": "/app/1420746/164255/user-guide/essential-indicators-in-standby-mode",
+            "IsAbstract": false,
+            "HasChildNodes": false,
+            "Items": []
+          }
+        ]
+      }
+    ]
+  }
+]

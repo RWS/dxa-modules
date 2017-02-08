@@ -107,7 +107,7 @@ class PageComponent extends TestBase {
                                 <a href="~/doc.sdl.com"/>
                                 <a href="/doc.sdl.com"/>
                                 <a href="/12a34/5c"/>
-                                <a href="/12/34/56/78/9"/>
+                                <a href="/12/3d4/56/78/9"/>
                             </div>`,
                     onNavigate: (): void => {
                     }
@@ -284,6 +284,26 @@ class PageComponent extends TestBase {
 
                 setTimeout((): void => {
                     expect(spy).toHaveBeenCalledTimes(3);
+                    done();
+                }, 100);
+            });
+
+            it("scrolls when page title is not specified", (done: () => void): void => {
+                const spy = spyOn(window, "scrollTo").and.callThrough();
+
+                const pageUrlWithNoTitle = Url.getPageUrl("123", "456", "publication");
+                hashHistory.push(pageUrlWithNoTitle);
+
+                const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
+                expect(domNode).not.toBeNull();
+
+                const hyperlinks = domNode.querySelectorAll(".sdl-dita-delivery-content-navigation a") as NodeListOf<HTMLAnchorElement>;
+                expect(hyperlinks.length).toBe(2);
+
+                // We only need last item
+                hyperlinks.item(1).click();
+                setTimeout((): void => {
+                    expect(spy).toHaveBeenCalledTimes(1);
                     done();
                 }, 100);
             });

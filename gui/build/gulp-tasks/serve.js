@@ -79,11 +79,24 @@ module.exports = function (buildOptions, gulp, browserSync) {
                             // Use main page for dynamic urls used for deep linking
                             // example: /39137/234/MP330/User-Guide (only the first number is mandatory)
                             const publicationContentRegex = /^\/app\/[0-9]+.*$/gi; // All urls starting with a number
-                            if (req.url.match(/^\/app\/$/gi) || req.url.match(/^\/app\/home$/gi) || req.url.match(publicationContentRegex)) {
+                            if (req.url.match(/^\/app(\/home(;jsessionid=[\w\d]+)?)?$/gi) || req.url.match(publicationContentRegex)) {
                                 req.url = '/index.html';
                             }
 
                             next();
+                        },
+                        (req, res, next) => {
+                            let url = req.url;
+                            // Redirect root to "app/"
+                            if (url.trim() === '/') {
+                                url = url + "app/";
+                                res.writeHead(307, {
+                                    Location: url
+                                });
+                                res.end();
+                            } else {
+                                next();
+                            }
                         }
                     ]
                 };

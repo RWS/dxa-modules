@@ -1,0 +1,28 @@
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k4",
+        "Title": "De telefoon",
+        "Url": "/app/1881665/164233/user-guide/de-telefoon",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": [
+          {
+            "Id": "t1-k11",
+            "Title": "Bluetooth-verbinding",
+            "Url": "/app/1881665/164311/user-guide/bluetooth-verbinding",
+            "IsAbstract": false,
+            "HasChildNodes": false,
+            "Items": []
+          }
+        ]
+      }
+    ]
+  }
+]

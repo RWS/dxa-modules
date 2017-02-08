@@ -1,33 +1,7 @@
 {
   "Id": "164355",
   "Meta": {
-    "ishlogicalref.object.id": 164351,
-    "ishversionref.object.id": 164352,
-    "ishlngref.object.id": 164355,
-    "ishref.object.value": "GUID-A08D6FD8-63C7-4CAA-A2EA-AF08AF4C49B7",
-    "ishtype.object.value": "ISHModule",
-    "FTITLE.logical.value": "keypad locking",
-    "FDESCRIPTION.logical.value": null,
-    "FCHANGES.version.value": "Imported OASIS DITA 1.1",
-    "FISHRELEASELABEL.version.value": [
-      "Publication MP330-v1-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2012/09/21 12:27:01",
-      "Publication MP330-v2-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2012/09/24 17:31:39",
-      "Publication MP660-v1-GUID-EB2E82F1-1C76-4032-815C-4E717140A081-2012/09/24 14:57:38",
-      "Publication MP660-v2-GUID-EB2E82F1-1C76-4032-815C-4E717140A081-2012/09/24 17:09:12"
-    ],
-    "CREATED-ON.lng.value": "2015-12-23T04:57:10Z",
-    "FAUTHOR.lng.value": "admin",
-    "FSTATUS.lng.value": "Released",
-    "MODIFIED-ON.lng.value": "2016-04-08T15:12:18Z",
-    "VERSION.version.value": "1",
-    "DOC-LANGUAGE.lng.value": [
-      "en"
-    ],
-    "FISHREVCOUNTER.lng.value": 4,
-    "ED.lng.value": "GUID-916E76F4-1E22-41C3-B6CB-E6841AD32443",
-    "FUSERGROUP.logical.element": null,
-    "READ-ACCESS.logical.element": null,
-    "publicationtitle.generated.value": "Publication MP330"
+    "tocnaventries.generated.value": "ish:1420746-15-1024"
   },
   "Regions": [
     {
@@ -38,7 +12,7 @@
           "topicBody": {
             "Fragments": [
               {
-                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-A08D6FD8-63C7-4CAA-A2EA-AF08AF4C49B7__GUID-A0F6594E-0C93-4597-9794-4A86C7FDD5B9\" xmlns=\"http://www.w3.org/1999/xhtml\">Locking the keypad</h1>\n      \n      \n      \n      <div class=\"body conbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">You can lock the keypad to prevent the keys being accidentally pressed, for example, when your phone is in your bag.</p>\n         \n         \n         <ul class=\"ul\" id=\"GUID-A08D6FD8-63C7-4CAA-A2EA-AF08AF4C49B7__GUID-7F562804-7138-4496-AF84-7DBF65F1BFCA\">\n            \n            <li class=\"li\">Locking the keypad \n               <p class=\"p\">In standby mode, press <samp class=\"ph msgph\">Menu</samp> and <img class=\"image\" src=\"/app/gui/mocks/bin/1420746-345843-16.gif\" />then within 1.5 seconds. \n               </p>\n               \n            </li>\n            \n            \n            <li class=\"li\">Unlocking the keypad \n               <p class=\"p\"> Press <samp class=\"ph msgph\">Unlock</samp> and then <img class=\"image\" src=\"/app/gui/mocks/bin/1420746-345843-16.gif\" />within 1.5 seconds.\n               </p>\n               \n            </li>\n            \n            \n         </ul>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Parent topic:</strong> <a class=\"link\" href=\"/1420746/164398/publication-mp330/getting-started\">Getting started</a></div>\n            \n         </div>\n         \n      </div>\n   "
+                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-A08D6FD8-63C7-4CAA-A2EA-AF08AF4C49B7__GUID-A0F6594E-0C93-4597-9794-4A86C7FDD5B9\" xmlns=\"http://www.w3.org/1999/xhtml\">Locking the keypad</h1>\n      \n      \n      \n      <div class=\"body conbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">You can lock the keypad to prevent the keys being accidentally pressed, for example, when your phone is in your bag.</p>\n         \n         \n         <ul class=\"ul\" id=\"GUID-A08D6FD8-63C7-4CAA-A2EA-AF08AF4C49B7__GUID-7F562804-7138-4496-AF84-7DBF65F1BFCA\">\n            \n            <li class=\"li\">Locking the keypad \n               <p class=\"p\">In standby mode, press <samp class=\"ph msgph\">Menu</samp> and <img class=\"image\" src=\"/app/gui/mocks/bin/1420746-345843-16.gif\" />then within 1.5 seconds. \n               </p>\n               \n            </li>\n            \n            \n            <li class=\"li\">Unlocking the keypad \n               <p class=\"p\"> Press <samp class=\"ph msgph\">Unlock</samp> and then <img class=\"image\" src=\"/app/gui/mocks/bin/1420746-345843-16.gif\" />within 1.5 seconds.\n               </p>\n               \n            </li>\n            \n            \n         </ul>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Parent topic:</strong> <a class=\"link\" href=\"/app/1420746/164398/user-guide/getting-started\">Getting started</a></div>\n            \n         </div>\n         \n      </div>\n   "
               }
             ]
           }

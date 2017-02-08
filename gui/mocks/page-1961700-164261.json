@@ -1,0 +1,23 @@
+{
+  "Id": "164261",
+  "Meta": {
+    "tocnaventries.generated.value": "ish:1961700-36-1024"
+  },
+  "Regions": [
+    {
+      "Entities": [
+        {
+          "Id": "164261",
+          "topicTitle": "Speichern von Namen und Telefonnummern",
+          "topicBody": {
+            "Fragments": [
+              {
+                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-67F1627E-FFBA-4E03-A62D-F70030C52596__GUID-91208EF2-9DF8-4968-95C3-7B281273B8A0\" xmlns=\"http://www.w3.org/1999/xhtml\">Speichern von Namen und Telefonnummern</h1>\n      \n      \n      \n      <div class=\"body taskbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\" />\n         \n         \n         <ol class=\"ol steps\" id=\"GUID-67F1627E-FFBA-4E03-A62D-F70030C52596__GUID-39CCD92E-A42F-4E2C-AE5D-9BAA72560320\">\n            <li class=\"li step stepexpand\">\n               <span class=\"ph cmd\">Drücken Sie <samp class=\"ph msgph\">Adressen</samp> (oder drücken Sie Nach und wählen Sie <samp class=\"ph msgph\">Adressen</samp>) und wählen Sie <samp class=\"ph msgph\">Neuer Eintrag</samp>.</span>\n               \n            </li>\n            \n            <li class=\"li step stepexpand\">\n               <span class=\"ph cmd\">Geben Sie den Namen ein und drücken Sie <samp class=\"ph msgph\">OK</samp>.</span>\n               \n            </li>\n            \n            <li class=\"li step stepexpand\">\n               <span class=\"ph cmd\">Geben Sie die Telefonnummer ein und drücken Sie <samp class=\"ph msgph\">OK</samp>.</span>\n               \n            </li>\n            \n            <li class=\"li step stepexpand\">\n               <span class=\"ph cmd\">Wenn der Name und die Telefonnummer gespeichert sind, drücken Sie <samp class=\"ph msgph\">Beenden</samp>.</span>\n               \n               <div class=\"itemgroup info\"> Schnellspeicherung Geben Sie in der Ausgangsanzeige die Telefonnummer ein. Drücken Sie <samp class=\"ph msgph\">Optionen</samp> und wählen Sie <samp class=\"ph msgph\">Ablegen</samp>. Geben Sie den Namen ein und drücken Sie <samp class=\"ph msgph\">OK</samp> und <samp class=\"ph msgph\">Beenden</samp>.\n               </div>\n               \n            </li>\n            \n         </ol>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Übergeordnetes Thema:</strong> <a class=\"link\" title=\"Sie können Adressen im Telefonspeicher (internes Verzeichnis) oder im Speicher der SIM-Karte (SIM-Verzeichnis) speichern.\" href=\"/app/1961700/164299/user-guide/adressbuch\">Adressbuch</a></div>\n            \n         </div>\n         \n      </div>\n   "
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k35",
+        "Title": "Adressbuch",
+        "Url": "/app/1961700/164299/user-guide/adressbuch",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": [
+          {
+            "Id": "t1-k38",
+            "Title": "Bearbeiten einer Adresse",
+            "Url": "/app/1961700/164442/user-guide/bearbeiten-einer-adresse",
+            "IsAbstract": false,
+            "HasChildNodes": false,
+            "Items": []
+          }
+        ]
+      }
+    ]
+  }
+]

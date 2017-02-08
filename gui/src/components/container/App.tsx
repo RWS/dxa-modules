@@ -3,6 +3,8 @@ import { Router, Route, IndexRedirect, History, Redirect } from "react-router";
 import { IServices } from "interfaces/Services";
 import { Home } from "components/container/Home";
 import { PublicationContent } from "components/container/PublicationContent";
+import { PublicationsList } from "components/container/PublicationsList";
+import { path } from "utils/Path";
 
 export interface IAppProps {
     /**
@@ -63,9 +65,10 @@ export class App extends React.Component<IAppProps, {}> {
         const { history } = this.props;
         return (
             <Router history={history}>
-                <Route path="/" component={Home} >
-                    <IndexRedirect to="/1420746/publication-mp330" />
-                    <Redirect from="home" to="/1420746/publication-mp330" />
+                <Route path={path.getRootPath()} component={Home} >
+                    <IndexRedirect to="home" />
+                    <Redirect from="home;jsessionid=*" to="home" />
+                    <Route path="home" component={PublicationsList} />
                     <Route path=":publicationId(/:pageIdOrPublicationTitle)(/:publicationTitle)(/:pageTitle)(/:pageAnchor)" component={PublicationContent} />
                 </Route>
             </Router>
