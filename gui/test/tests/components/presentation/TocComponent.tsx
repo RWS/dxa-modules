@@ -117,7 +117,7 @@ class TocComponent extends TestBase {
                 }, DELAY + 1);
             });
 
-            it("doesn't trigger on selection change when expanding nodes", (done: () => void): void => {
+            it("triggers only one selection change when expanding nodes", (done: () => void): void => {
                 // Load root nodes
                 // tslint:disable-next-line:no-any
                 const treeView = TestUtils.findRenderedComponentWithType(toc, TreeView as any);
@@ -135,6 +135,40 @@ class TocComponent extends TestBase {
                     onSelectionChanged: (sitemapItem: ITaxonomy, path: string[]): void => {
                         expect(path).toEqual(activeItemPath);
                         done();
+                    }
+                };
+                this._renderComponent(props, target);
+            });
+
+            it("selects first root node when setting active item path to undefined", (done: () => void): void => {
+                // tslint:disable-next-line:no-any
+                const treeView = TestUtils.findRenderedComponentWithType(toc, TreeView as any);
+                expect(treeView).not.toBeNull();
+
+                const selectFirstRootNode = (): void => {
+                    // Reload toc and make active item path undefined
+                    // Expected is that the first root node is selected
+                    const propsReset: ITocProps = {
+                        loadChildItems: loadChildItems,
+                        rootItems: rootItems,
+                        activeItemPath: undefined,
+                        onSelectionChanged: (sitemapItem: ITaxonomy, path: string[]): void => {
+                            expect(path).toEqual([rootItems[0].id]);
+                            done();
+                        }
+                    };
+                    this._renderComponent(propsReset, target);
+                };
+
+                // Set active item path to a child path
+                const activeItemPath = [rootItems[0].id || "", "12345", "12345-nested"];
+                const props: ITocProps = {
+                    loadChildItems: loadChildItems,
+                    rootItems: rootItems,
+                    activeItemPath: activeItemPath,
+                    onSelectionChanged: (sitemapItem: ITaxonomy, path: string[]): void => {
+                        expect(path).toEqual(activeItemPath);
+                        selectFirstRootNode();
                     }
                 };
                 this._renderComponent(props, target);
