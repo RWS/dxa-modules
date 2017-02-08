@@ -29,7 +29,7 @@ export const ErrorContent: React.StatelessComponent<IErrorContentProps> = (props
     const _goHome = (): void => context.router && context.router.push("/");
 
     const errorButtons = <div>
-            <Button purpose={ButtonPurpose.CONFIRM} events={{"click": _goHome}}>{formatMessage("components.breadcrumbs.home")}</Button>
+            <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{"click": _goHome}}>{formatMessage("components.breadcrumbs.home")}</Button>
         </div>;
 
     return (

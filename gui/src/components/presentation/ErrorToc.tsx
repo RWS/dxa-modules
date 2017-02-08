@@ -43,7 +43,7 @@ export const ErrorToc: React.StatelessComponent<IErrorTocProps> = (props: IError
         <div className="sdl-dita-delivery-error-toc">
             <div className="sdl-dita-delivery-error-toc-content">
                 <div className="sdl-dita-delivery-error-toc-message">{message}</div>
-                <Button purpose={ButtonPurpose.CONFIRM} events={{"click": onRetry}}>{formatMessage("control.button.retry")}</Button>
+                <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{"click": onRetry}}>{formatMessage("control.button.retry")}</Button>
             </div>
         </div>
     );

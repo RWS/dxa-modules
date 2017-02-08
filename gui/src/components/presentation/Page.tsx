@@ -162,8 +162,8 @@ export class Page extends React.Component<IPageProps, IPageState> {
         const _goHome = (): void => props.onNavigate("/");
         const _retryHandler = () => url && props.onNavigate(url);
         const errorButtons = <div>
-                <Button purpose={ButtonPurpose.CONFIRM} events={{"click": _goHome}}>{formatMessage("components.breadcrumbs.home")}</Button>
-                <Button purpose={ButtonPurpose.CONFIRM} events={{"click": _retryHandler}}>{formatMessage("control.button.retry")}</Button>
+                <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{"click": _goHome}}>{formatMessage("components.breadcrumbs.home")}</Button>
+                <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{"click": _retryHandler}}>{formatMessage("control.button.retry")}</Button>
             </div>;
         const errorTitle = formatMessage("error.page.not.found.title");
         const errorMessages = [

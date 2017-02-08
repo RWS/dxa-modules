@@ -17,8 +17,8 @@ class ErrorComponent extends TestBase {
             const title: string = "Error Title";
             const messages: string[] = ["Something went wrong", "What do you want to do?"];
             const buttons = <div>
-                <Button purpose={ButtonPurpose.CONFIRM} events={{"click": onClickHome}}>Home</Button>
-                <Button purpose={ButtonPurpose.CONFIRM} events={{"click": onClickReturn}}>Return</Button>
+                <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{"click": onClickHome}}>Home</Button>
+                <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{"click": onClickReturn}}>Return</Button>
             </div>;
 
             const props: IErrorProps = {

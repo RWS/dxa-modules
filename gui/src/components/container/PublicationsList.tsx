@@ -77,7 +77,7 @@ export class PublicationsList extends React.Component<{}, IPublicationsListState
         const _retryHandler = (): void => this._loadPublicationsList();
 
         const errorButtons = <div>
-                <Button purpose={ButtonPurpose.CONFIRM} events={{"click": _retryHandler}}>{formatMessage("control.button.retry")}</Button>
+                <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{"click": _retryHandler}}>{formatMessage("control.button.retry")}</Button>
             </div>;
 
         return (

@@ -228,7 +228,7 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
             <ul id={parentNode.id} className="sdl-dita-delivery-toc-list-fail">
                 <li style={{ paddingLeft: this._getIndent(parentNode) }}>
                     <p>{formatMessage("error.toc.items.not.found")}</p>
-                    <Button purpose={ButtonPurpose.CONFIRM} events={{"click": _handleClick}}>{formatMessage("control.button.retry")}</Button>
+                    <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{"click": _handleClick}}>{formatMessage("control.button.retry")}</Button>
                 </li>
             </ul>
         );
