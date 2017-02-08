@@ -3,6 +3,7 @@ using Sdl.Web.Common.Models;
 
 namespace Sdl.Web.Modules.Test.Models
 {
+    [SemanticEntity("TSI1946")]
     public class Tsi1946TestEntity : EntityModel
     {
         public string SingleLineText { get; set; }
