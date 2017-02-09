@@ -2,6 +2,8 @@ import { ISitemapItem } from "interfaces/ServerModels";
 import { ITaxonomy } from "interfaces/Taxonomy";
 import { Api } from "utils/Api";
 import { Net, IWebRequest, LoadableObject } from "sdl-models";
+import { Url } from "utils/Url";
+import { localization } from "services/common/LocalizationService";
 
 /**
  * Navigation links model
@@ -54,7 +56,16 @@ export class NavigationLinks extends LoadableObject {
     protected _processLoadResult(result: string, webRequest: IWebRequest): void {
         this._path = this._calculatePath(JSON.parse(result));
 
-        // TODO: Validate if the path is pointing to the actual page
+        // Validate if the path is pointing to the actual page
+        const lastItemInPath = this._path[this._path.length - 1];
+        if (lastItemInPath && lastItemInPath.url) {
+            const parsedUrl = Url.parsePageUrl(lastItemInPath.url);
+            if (parsedUrl && parsedUrl.pageId !== this._pageId) {
+                const errorMessage = localization.formatMessage("error.unable.to.locate.page.in.toc", [this._pageId]);
+                super._onLoadFailed(errorMessage, null);
+                return;
+            }
+        }
 
         super._processLoadResult(result, webRequest);
     }

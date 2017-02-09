@@ -100,6 +100,30 @@ export class Url {
         return `${pageUrl}/${encodeURIComponent(anchorId)}`;
     }
 
+    /**
+     * Parse a page url
+     *
+     * @static
+     * @param {string} url Url to parse
+     * @param {string} [rootPath] Root path of the application
+     * @returns {({ publicationId: string, pageId: string, publicationTitle?: string, pageTitle?: string } | undefined)}
+     *
+     * @memberOf Url
+     */
+    public static parsePageUrl(url: string, rootPath?: string): { publicationId: string, pageId: string, publicationTitle?: string, pageTitle?: string } | undefined {
+        const rootPathValue = rootPath || path.getRootPath();
+        const parts = url.substring(rootPathValue.length).split("/");
+        if (parts.length >= 2) {
+            return {
+                publicationId: parts[0],
+                pageId: parts[1],
+                publicationTitle: parts[2],
+                pageTitle: parts[3]
+            }
+        }
+        return undefined;
+    }
+
     private static _processTitle(title: string): string {
         // trim
         title = title.trim();

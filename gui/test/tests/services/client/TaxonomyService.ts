@@ -85,7 +85,8 @@ class TaxonomyServiceTests extends TestBase {
 
             it("can get a path for a sitemap id", (done: () => void): void => {
                 const taxonomyId = "t1-k7";
-                taxonomyService.getSitemapPath(publicationId, "7", taxonomyId).then(path => {
+                const pageId = "1961702";
+                taxonomyService.getSitemapPath(publicationId, pageId, taxonomyId).then(path => {
                     expect(path).toBeDefined();
                     if (path) {
                         expect(path.length).toBe(2);
@@ -99,8 +100,9 @@ class TaxonomyServiceTests extends TestBase {
 
             it("can get a path for a sitemap id from memory", (done: () => void): void => {
                 const taxonomyId = "t1-k7";
+                const pageId = "1961702";
                 const spy = spyOn(window, "XMLHttpRequest").and.callThrough();
-                taxonomyService.getSitemapPath(publicationId, "7", taxonomyId).then(path => {
+                taxonomyService.getSitemapPath(publicationId, pageId, taxonomyId).then(path => {
                     expect(path).toBeDefined();
                     if (path) {
                         expect(path.length).toBe(2);
@@ -119,6 +121,18 @@ class TaxonomyServiceTests extends TestBase {
                     done();
                 }).catch(error => {
                     expect(error).toContain("does-not-exist");
+                    done();
+                });
+            });
+
+            it("returns a proper error when a path is not pointing to the expected page", (done: () => void): void => {
+                const taxonomyId = "t1-k8";
+                const pageId = "546545678";
+                taxonomyService.getSitemapPath(publicationId, pageId, taxonomyId).then(() => {
+                    fail("An error was expected.");
+                    done();
+                }).catch(error => {
+                    expect(error).toContain(pageId);
                     done();
                 });
             });
