@@ -5,6 +5,7 @@ import { Home } from "components/container/Home";
 import { PublicationContent } from "components/container/PublicationContent";
 import { PublicationsList } from "components/container/PublicationsList";
 import { ErrorContent } from "components/container/ErrorContent";
+import { IWindow } from "interfaces/Window";
 
 export interface IAppProps {
     /**
@@ -63,16 +64,21 @@ export class App extends React.Component<IAppProps, {}> {
      */
     public render(): JSX.Element {
         const { history } = this.props;
-        return (
-            <Router history={history}>
-                <Route path="/" component={Home} >
-                    <IndexRedirect to="/home" />
-                    <Redirect from="home;jsessionid=*" to="/home" />
-                    <Route path="home" component={PublicationsList} />
-                    <Route path=":publicationId(/:pageIdOrPublicationTitle)(/:publicationTitle)(/:pageTitle)(/:pageAnchor)" component={PublicationContent} />
-                    <Route path="error" component={ErrorContent} />
-                </Route>
-            </Router>
-        );
+        const errorObj = (window as IWindow).SDLDitaDeliveryError;
+        if (errorObj) {
+            return <ErrorContent error={errorObj}/>;
+        } else {
+            return (
+                <Router history={history}>
+                    <Route path="/" component={Home} >
+                        <IndexRedirect to="/home" />
+                        <Redirect from="home;jsessionid=*" to="/home" />
+                        <Redirect from="/" to="/home" />
+                        <Route path="home" component={PublicationsList} />
+                        <Route path=":publicationId(/:pageIdOrPublicationTitle)(/:publicationTitle)(/:pageTitle)(/:pageAnchor)" component={PublicationContent} />
+                    </Route>
+                </Router>
+            );
+        }
     }
 };

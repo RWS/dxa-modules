@@ -1,3 +1,5 @@
+import { IError } from "./Error";
+
 /**
  * Globally defined properties
  *
@@ -21,4 +23,11 @@ export interface IWindow extends Window {
      * @memberOf IWindow
      */
     SDLDitaDeliveryRootPath: string;
+
+    /**
+     * Error structure from backend
+     * 
+     * @type {IError}
+     */
+    SDLDitaDeliveryError: IError;
 }

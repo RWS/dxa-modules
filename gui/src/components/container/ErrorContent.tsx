@@ -5,6 +5,8 @@ import { IAppContext } from "components/container/App";
 import { Button } from "sdl-controls-react-wrappers";
 import { ButtonPurpose } from "sdl-controls";
 
+import { IError } from "interfaces/Error";
+
 import "components/container/styles/ErrorContent";
 
 /**
@@ -14,7 +16,12 @@ import "components/container/styles/ErrorContent";
  * @interface IErrorContentProps
  */
 export interface IErrorContentProps {
-
+    /**
+     * Error object information to render on the page
+     * 
+     * @type {IError}
+     */
+    error?: IError;
 }
 
 /**
@@ -26,11 +33,17 @@ export interface IErrorContentProps {
  */
 export const ErrorContent: React.StatelessComponent<IErrorContentProps> = (props: IErrorContentProps, context: IAppContext): JSX.Element => {
     const { formatMessage } = context.services.localizationService;
-    const _goHome = (): void => context.router && context.router.push("/");
+    const _goHome = (): void => window.location.replace("/");
 
     const errorButtons = <div>
             <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{"click": _goHome}}>{formatMessage("components.breadcrumbs.home")}</Button>
         </div>;
+
+    const error = props.error;
+    const errorMessages = error && error.message ? [error.message, formatMessage("error.default.message")] : [formatMessage("error.default.message")];
+    const errorTitle = error && error.statusCode ?
+        `${error.statusCode} - ${formatMessage("error.page.not.found.title")}` :
+        formatMessage("components.searchbar.placeholder");
 
     return (
         <section className={"sdl-dita-delivery-error-content"}>
@@ -39,8 +52,8 @@ export const ErrorContent: React.StatelessComponent<IErrorContentProps> = (props
                 onSearch={query => console.log(query)} />
             <div className={"sdl-dita-delivery-error-page"}>
                 <Error
-                    title={formatMessage("error.page.not.found.title")}
-                    messages={[formatMessage("error.page.not.found"), formatMessage("error.default.message")]}
+                    title={errorTitle}
+                    messages={errorMessages}
                     buttons={errorButtons} />
             </div>
         </section>
