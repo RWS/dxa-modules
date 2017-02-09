@@ -84,8 +84,8 @@ class TaxonomyServiceTests extends TestBase {
             });
 
             it("can get a path for a sitemap id", (done: () => void): void => {
-                const sitemapId = "ish:1961702-7-1024";
-                taxonomyService.getSitemapPath(publicationId, sitemapId).then(path => {
+                const taxonomyId = "t1-k7";
+                taxonomyService.getSitemapPath(publicationId, taxonomyId).then(path => {
                     expect(path).toBeDefined();
                     if (path) {
                         expect(path.length).toBe(2);
@@ -98,9 +98,9 @@ class TaxonomyServiceTests extends TestBase {
             });
 
             it("can get a path for a sitemap id from memory", (done: () => void): void => {
-                const sitemapId = "ish:1961702-7-1024";
+                const taxonomyId = "t1-k7";
                 const spy = spyOn(window, "XMLHttpRequest").and.callThrough();
-                taxonomyService.getSitemapPath(publicationId, sitemapId).then(path => {
+                taxonomyService.getSitemapPath(publicationId, taxonomyId).then(path => {
                     expect(path).toBeDefined();
                     if (path) {
                         expect(path.length).toBe(2);

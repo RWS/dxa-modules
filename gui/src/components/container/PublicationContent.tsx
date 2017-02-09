@@ -3,6 +3,7 @@ import * as ReactDOM from "react-dom";
 import { Promise } from "es6-promise";
 import { ITaxonomy } from "interfaces/Taxonomy";
 import { IPage } from "interfaces/Page";
+import { TaxonomyItemId } from "interfaces/TcmId";
 
 import { IAppContext } from "components/container/App";
 import { NavigationMenu } from "components/presentation/NavigationMenu";
@@ -399,8 +400,9 @@ export class PublicationContent extends React.Component<IPublicationContentProps
             // Always take the first sitemap id
             // There is no proper way for having a deep link to the second/third/... occurance inside the toc
             const firstSitemapId = pageInfo.sitemapIds[0];
+            const taxonomyId = TcmId.getTaxonomyItemId(TaxonomyItemId.Toc, firstSitemapId) || firstSitemapId;
 
-            this._getActiveSitemapPath(firstSitemapId, path => {
+            this._getActiveSitemapPath(taxonomyId, path => {
                 /* istanbul ignore if */
                 if (this._isUnmounted) {
                     return;
