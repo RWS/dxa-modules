@@ -67,6 +67,7 @@
     <Compile Include="Models\Tsi1856TestEntity.cs" />
     <Compile Include="Models\Tsi1757TestEntity.cs" />
     <Compile Include="Models\Tsi1946TestEntity.cs" />
+    <Compile Include="Models\Tsi2285PageModel.cs" />
     <Compile Include="Models\Tsi811PageModel.cs" />
     <Compile Include="Models\EmbedParentModel.cs" />
     <Compile Include="Models\EmbedChildModel.cs" />
@@ -106,6 +107,7 @@
     <None Include="Areas\Test\Views\Entity\TestEntity2.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestEntity1.cshtml" />
     <None Include="Areas\Test\Views\Page\CustomPageModelInheritedController.cshtml" />
+    <None Include="Areas\Test\Views\Page\TSI2285TestPage.cshtml" />
     <None Include="Areas\Test\Views\Page\TSI811TestPage.cshtml" />
     <None Include="Areas\Test\Views\Page\TestDxaEntityViewOverride.cshtml" />
     <None Include="Areas\Test\Views\Page\SimpleTestPage.cshtml" />
