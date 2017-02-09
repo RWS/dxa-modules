@@ -42,8 +42,8 @@ export const ErrorContent: React.StatelessComponent<IErrorContentProps> = (props
     const error = props.error;
     const errorMessages = error && error.message ? [error.message, formatMessage("error.default.message")] : [formatMessage("error.default.message")];
     const errorTitle = error && error.statusCode ?
-        `${error.statusCode} - ${formatMessage("error.page.not.found.title")}` :
-        formatMessage("components.searchbar.placeholder");
+        `${error.statusCode} - ${formatMessage("error.defalut.title")}` :
+        formatMessage("error.default.title");
 
     return (
         <section className={"sdl-dita-delivery-error-content"}>

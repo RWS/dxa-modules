@@ -165,7 +165,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                 <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{"click": _goHome}}>{formatMessage("components.breadcrumbs.home")}</Button>
                 <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{"click": _retryHandler}}>{formatMessage("control.button.retry")}</Button>
             </div>;
-        const errorTitle = formatMessage("error.page.not.found.title");
+        const errorTitle = formatMessage("error.default.title");
         const errorMessages = [
             error || formatMessage("error.page.not.found"),
             formatMessage("error.default.message")

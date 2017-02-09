@@ -50,7 +50,7 @@ class PublicationsListComponent extends TestBase {
                     const errorElement = domNode.querySelector(".sdl-dita-delivery-error");
                     expect(errorElement).not.toBeNull("Error dialog not found");
                     const errorTitle = errorElement.querySelector("h1");
-                    expect(errorTitle.textContent).toEqual("mock-error.page.not.found.title");
+                    expect(errorTitle.textContent).toEqual("mock-error.default.title");
                     const buttons = errorElement.querySelectorAll(".sdl-dita-delivery-button-group button");
                     expect(buttons.length).toEqual(1);
 

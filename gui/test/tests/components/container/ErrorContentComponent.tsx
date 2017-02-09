@@ -31,15 +31,9 @@ class ErrorContentComponent extends TestBase {
                 expect(searchBar).not.toBeNull();
                 expect(errorPageElement).not.toBeNull();
                 expect(errorButton.length).toBe(1);
-                expect(errorTitle.item(0).textContent).toBe("mock-error.page.not.found.title");
-                expect(errorMessage.item(0).textContent).toBe("mock-error.page.not.found");
-                expect(errorMessage.item(1).textContent).toBe("mock-error.default.message");
-
-                errorButton.item(0).click();
-                setTimeout(() => {
-                    const noErrorPageElement = document.querySelector(".sdl-dita-delivery-error-page");
-                    expect(noErrorPageElement).toBeNull();
-                }, 0);
+                expect(errorButton.length).toBe(1);
+                expect(errorTitle.item(0).textContent).toBe("mock-error.default.title");
+                expect(errorMessage.item(0).textContent).toBe("mock-error.default.message");
             });
         });
     }
