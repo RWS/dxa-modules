@@ -325,7 +325,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     <Breadcrumbs
                         publicationId={publicationId}
                         publicationTitle={publicationTitle || ""}
-                        loadItemsPath={taxonomyService.getSitemapPath.bind(taxonomyService)}
+                        loadItemsPath={(pubId, taxonomyId) => taxonomyService.getSitemapPath(pubId, pageId || "", taxonomyId)}
                         selectedItem={selectedTocItem}
                         />
                 </Page>
@@ -434,24 +434,28 @@ export class PublicationContent extends React.Component<IPublicationContentProps
 
     private _getActiveSitemapPath(sitemapId: string, done: (path: string[]) => void): void {
         const { services } = this.context;
-        const { publicationId } = this.props.params;
-        services.taxonomyService.getSitemapPath(publicationId, sitemapId).then(
-            path => {
-                /* istanbul ignore else */
-                if (!this._isUnmounted) {
-                    done(path.map(item => item.id || "") || []);
-                }
-            },
-            error => {
-                /* istanbul ignore else */
-                if (!this._isUnmounted) {
-                    this._toc.error = error;
-                    this.setState({
-                        isTocLoading: false,
-                        isPageLoading: false
-                    });
-                }
-            });
+        const { publicationId, pageIdOrPublicationTitle } = this.props.params;
+        const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
+
+        if (pageId) {
+            services.taxonomyService.getSitemapPath(publicationId, pageId, sitemapId).then(
+                path => {
+                    /* istanbul ignore else */
+                    if (!this._isUnmounted) {
+                        done(path.map(item => item.id || "") || []);
+                    }
+                },
+                error => {
+                    /* istanbul ignore else */
+                    if (!this._isUnmounted) {
+                        this._toc.error = error;
+                        this.setState({
+                            isTocLoading: false,
+                            isPageLoading: false
+                        });
+                    }
+                });
+        }
     }
 
     private _fixPanels(): void {

@@ -31,10 +31,11 @@ export interface ITaxonomyService {
      * Get the full path for a sitemap item within a sitemap
      *
      * @param {string} publicationId Publication Id
+     * @param {string} pageId Page id
      * @param {string} taxonomyId The taxonomy id (eg t1-k5)
      * @returns {Promise<ITaxonomy[]>} Promise to return the full path
      *
      * @memberOf IDataStore
      */
-    getSitemapPath(publicationId: string, taxonomyId: string): Promise<ITaxonomy[]>;
+    getSitemapPath(publicationId: string, pageId: string, taxonomyId: string): Promise<ITaxonomy[]>;
 }

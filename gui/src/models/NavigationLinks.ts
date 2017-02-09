@@ -13,6 +13,7 @@ import { Net, IWebRequest, LoadableObject } from "sdl-models";
 export class NavigationLinks extends LoadableObject {
 
     private _publicationId: string;
+    private _pageId: string;
     private _taxonomyId: string;
     private _path: ITaxonomy[] = [];
 
@@ -20,13 +21,15 @@ export class NavigationLinks extends LoadableObject {
      * Creates an instance of NavigationLinks.
      *
      * @param {string} publicationId Publication id
+     * @param {string} pageId Page id
      * @param {string} taxonomyId Taxonomy id
      *
      * @memberOf NavigationLinks
      */
-    constructor(publicationId: string, taxonomyId: string) {
+    constructor(publicationId: string, pageId: string, taxonomyId: string) {
         super();
         this._publicationId = publicationId;
+        this._pageId = pageId;
         this._taxonomyId = taxonomyId;
     }
 
@@ -50,6 +53,8 @@ export class NavigationLinks extends LoadableObject {
 
     protected _processLoadResult(result: string, webRequest: IWebRequest): void {
         this._path = this._calculatePath(JSON.parse(result));
+
+        // TODO: Validate if the path is pointing to the actual page
 
         super._processLoadResult(result, webRequest);
     }
