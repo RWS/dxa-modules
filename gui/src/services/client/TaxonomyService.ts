@@ -88,13 +88,14 @@ export class TaxonomyService implements ITaxonomyService {
      * Get the full path for a sitemap item within a sitemap
      *
      * @param {string} publicationId Publication Id
+     * @param {string} pageId Page id
      * @param {string} taxonomyId The taxonomy id (eg t1-k5)
      * @returns {Promise<ITaxonomy[]>} Promise to return the full path
      *
      * @memberOf DataStoreClient
      */
-    public getSitemapPath(publicationId: string, taxonomyId: string): Promise<ITaxonomy[]> {
-        const navigationLinks = this.getNavigationLinksModel(publicationId, taxonomyId);
+    public getSitemapPath(publicationId: string, pageId: string, taxonomyId: string): Promise<ITaxonomy[]> {
+        const navigationLinks = this.getNavigationLinksModel(publicationId, pageId, taxonomyId);
         if (!navigationLinks) {
             return Promise.reject(localization.formatMessage("error.path.not.found", [taxonomyId, publicationId]));
         }
@@ -139,7 +140,7 @@ export class TaxonomyService implements ITaxonomyService {
         return TaxonomyService.TocModels[publicationId][parentId];
     }
 
-    private getNavigationLinksModel(publicationId: string, taxonomyId: string): NavigationLinks | undefined {
+    private getNavigationLinksModel(publicationId: string, pageId: string, taxonomyId: string): NavigationLinks | undefined {
         if (!TaxonomyService.NavigationLinksModels) {
             TaxonomyService.NavigationLinksModels = {};
         }
@@ -147,7 +148,7 @@ export class TaxonomyService implements ITaxonomyService {
             TaxonomyService.NavigationLinksModels[publicationId] = {};
         }
         if (!TaxonomyService.NavigationLinksModels[publicationId][taxonomyId]) {
-            TaxonomyService.NavigationLinksModels[publicationId][taxonomyId] = new NavigationLinks(publicationId, taxonomyId);
+            TaxonomyService.NavigationLinksModels[publicationId][taxonomyId] = new NavigationLinks(publicationId, pageId, taxonomyId);
         }
         return TaxonomyService.NavigationLinksModels[publicationId][taxonomyId];
     }

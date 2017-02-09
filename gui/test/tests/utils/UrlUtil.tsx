@@ -46,6 +46,25 @@ class UrlUtil extends TestBase {
                 expect(publicationLocation).toBe(`/pub-id/${expectedTitle}`);
             });
 
+            it("parses page url correctly", (): void => {
+                const urlWithOnlyIds = "/123/12345";
+                expect(Url.parsePageUrl(urlWithOnlyIds)).toEqual({ publicationId: "123", pageId: "12345", publicationTitle: undefined, pageTitle: undefined });
+
+                const urlWithOnlyPubtitle = "/123/12345/pub-title";
+                expect(Url.parsePageUrl(urlWithOnlyPubtitle)).toEqual({ publicationId: "123", pageId: "12345", publicationTitle: "pub-title", pageTitle: undefined });
+
+                const urlComplete = "/123/12345/pub-title/page-title";
+                expect(Url.parsePageUrl(urlComplete)).toEqual({ publicationId: "123", pageId: "12345", publicationTitle: "pub-title", pageTitle: "page-title" });
+
+                const contextPath = "/foo/bar/";
+                const urlWithContextPath = `${contextPath}123/12345/pub-title/page-title`;
+                expect(Url.parsePageUrl(urlWithContextPath, contextPath)).toEqual(
+                    { publicationId: "123", pageId: "12345", publicationTitle: "pub-title", pageTitle: "page-title" });
+
+                const invalidPageUrl = "/invalid-url";
+                expect(Url.parsePageUrl(invalidPageUrl)).toBeUndefined();
+            });
+
         });
     }
 }

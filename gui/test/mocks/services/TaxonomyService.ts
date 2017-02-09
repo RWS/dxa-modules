@@ -42,7 +42,7 @@ export class TaxonomyService implements ITaxonomyService {
         }
     }
 
-    public getSitemapPath(publicationId: string, taxonomyId: string): Promise<ITaxonomy[]> {
+    public getSitemapPath(publicationId: string, pageId: string, taxonomyId: string): Promise<ITaxonomy[]> {
         const tocItems = this._mockDataToc.items;
         if (Array.isArray(tocItems)) {
             // Only first level is supported
