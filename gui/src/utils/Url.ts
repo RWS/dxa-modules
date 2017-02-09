@@ -102,11 +102,13 @@ export class Url {
 
     /**
      * Parse a page url
+     * Format of a page url is "<context><pub-id>/<page-id>/<publication-title>/<page-title>"
      *
      * @static
      * @param {string} url Url to parse
      * @param {string} [rootPath] Root path of the application
      * @returns {({ publicationId: string, pageId: string, publicationTitle?: string, pageTitle?: string } | undefined)}
+     * Returns an object with the different parameter values for the page url. If the url is not correct undefined is returned.
      *
      * @memberOf Url
      */

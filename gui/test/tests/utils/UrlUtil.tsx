@@ -60,6 +60,9 @@ class UrlUtil extends TestBase {
                 const urlWithContextPath = `${contextPath}123/12345/pub-title/page-title`;
                 expect(Url.parsePageUrl(urlWithContextPath, contextPath)).toEqual(
                     { publicationId: "123", pageId: "12345", publicationTitle: "pub-title", pageTitle: "page-title" });
+
+                const invalidPageUrl = "/invalid-url";
+                expect(Url.parsePageUrl(invalidPageUrl)).toBeUndefined();
             });
 
         });
