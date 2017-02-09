@@ -119,7 +119,7 @@ export class Url {
                 pageId: parts[1],
                 publicationTitle: parts[2],
                 pageTitle: parts[3]
-            }
+            };
         }
         return undefined;
     }
