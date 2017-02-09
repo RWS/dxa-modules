@@ -1,9 +1,11 @@
 import * as React from "react";
 import { IAppContext } from "components/container/App";
 import { TopBar } from "components/presentation/TopBar";
+import { SearchBar } from "components/presentation/SearchBar";
 import { IPublicationContentProps } from "components/container/PublicationContent";
 
 import "components/container/styles/App";
+import "components/container/styles/Home";
 
 /**
  * Home state
@@ -17,7 +19,14 @@ export interface IHomeState {
      *
      * @type {Boolean}
      */
-    isNavOpen: Boolean;
+    isNavOpen?: Boolean;
+
+    /**
+     * if search panel is open
+     *
+     * @type {Boolean}
+     */
+    isSearchOpen?: Boolean;
 }
 
 /**
@@ -41,7 +50,8 @@ export class Home extends React.Component<{}, IHomeState> {
     constructor() {
         super();
         this.state = {
-            isNavOpen: false
+            isNavOpen: false,
+            isSearchOpen: false
         };
     }
 
@@ -63,23 +73,38 @@ export class Home extends React.Component<{}, IHomeState> {
      */
     public render(): JSX.Element {
         const { localizationService } = this.context.services;
-        const { isNavOpen } = this.state;
+        const { isNavOpen, isSearchOpen } = this.state;
         const { children } = this.props;
 
         const child = children as React.ReactElement<IPublicationContentProps>;
 
         // Only pages with publiction selected can have navigation menu button enabled
-        const canHaveNavMenuButton = child && (child.props.params.publicationId !== undefined);
+        const publicationTitle = child && child.props.params.publicationTitle;
+        const hasPublication = !!publicationTitle;
+
         return (
-            <div className={"sdl-dita-delivery-app" + (canHaveNavMenuButton
-                ? " sdl-dita-delivery-app-nav" + (isNavOpen ? " open" : "")
-                : "")}>
-                <TopBar
-                    language={localizationService.formatMessage("app.language")}
-                    toggleNavigationMenu={canHaveNavMenuButton && this._toggleNavigationMenu.bind(this)}
-                    />
-                {children}
-            </div>
+            hasPublication
+                ? <div className={"sdl-dita-delivery-app" + (isNavOpen ? " open" : "") + (isSearchOpen ? " search-open" : "")}>
+                    <div className={"sdl-dita-delivery-nav-mask"} onClick={this._toggleNavigationMenu.bind(this)} />
+                    <TopBar
+                        language={localizationService.formatMessage("app.language")}>
+                        <div className={"sdl-dita-delivery-topbar-expand-search"} onClick={this._toggleSearchPanel.bind(this)} >
+                            <span />
+                        </div>
+                        <div className={"sdl-dita-delivery-topbar-expand-nav"} onClick={this._toggleNavigationMenu.bind(this)} >
+                            <span />
+                        </div>
+                    </TopBar>
+                    <SearchBar
+                        placeholderLabel={localizationService.formatMessage("components.searchbar.placeholder", [publicationTitle || ""])}
+                        onSearch={query => console.log(query)} />
+                    {children}
+                </div >
+                : <div className={"sdl-dita-delivery-app"}>
+                    <TopBar
+                        language={localizationService.formatMessage("app.language")} />
+                    {children}
+                </div >
         );
     }
 
@@ -122,6 +147,13 @@ export class Home extends React.Component<{}, IHomeState> {
     private _onNavigated(location: HistoryModule.Location): void {
         this.setState({
             isNavOpen: false
+        });
+    }
+
+    private _toggleSearchPanel(): void {
+        const { isSearchOpen } = this.state;
+        this.setState({
+            isSearchOpen: !isSearchOpen
         });
     }
 };

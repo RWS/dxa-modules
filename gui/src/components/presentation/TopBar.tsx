@@ -10,6 +10,7 @@ import "./styles/TopBar";
  * @interface ITopBarProps
  */
 export interface ITopBarProps {
+
     /**
      * Selected language
      *
@@ -18,29 +19,29 @@ export interface ITopBarProps {
     language: string;
 
     /**
-     * Triggered whenever the selected item in the toc changes
+     * Children
+     *
+     * @type {React.ReactNode}
+     * @memberOf INavigationMenuProps
      */
-    toggleNavigationMenu: () => void;
+    children?: React.ReactNode;
 }
 
 /**
  * TopBar
  */
 export const TopBar = (props: ITopBarProps) => {
-
+    const {language, children} = props;
     return (
         <div className={"sdl-dita-delivery-topbar"}>
-            <div className={"sdl-dita-delivery-nav-mask"} onClick={props.toggleNavigationMenu} />
             <header>
-                <div className={"sdl-dita-delivery-topbar-expand-nav"} onClick={props.toggleNavigationMenu} >
-                    <span />
-                </div>
                 <div className={"sdl-dita-delivery-topbar-logo"} title="SDL">
                     <IndexLink to="/" />
                 </div>
+                {children}
                 <div className={"sdl-dita-delivery-topbar-language"} >
                     <span />
-                    <label>{props.language}</label>
+                    <label>{language}</label>
                 </div>
                 <div className={"sdl-dita-delivery-topbar-user"} >
                     <span />

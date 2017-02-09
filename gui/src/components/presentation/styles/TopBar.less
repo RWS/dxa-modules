@@ -15,17 +15,6 @@
     position: fixed;
     z-index: 999;
 
-    .sdl-dita-delivery-nav-mask {
-        background: @neutralColor1;
-        display: none;
-        height: 100vh;
-        opacity: 0;
-        position: fixed;
-        top: 0;
-        width: 100%;
-        z-index: 1005;
-    }
-
     header {
         display: table;
         max-width: @screenXl;
@@ -37,15 +26,6 @@
         > * {
             display: table-cell;
             vertical-align: middle;
-        }
-
-        .sdl-dita-delivery-topbar-expand-nav {
-            width: 24px;
-            display: none;
-            span {
-                margin: 0 15px;
-                .icon-hamburger(21px);
-            }
         }
 
         .sdl-dita-delivery-topbar-logo {
@@ -80,37 +60,11 @@
 
 @media screen and (max-width: @screenSm) {
 
-    .sdl-dita-delivery-app-nav {
-        &.open {
-            overflow: hidden;
-            .sdl-dita-delivery-topbar {
-                .sdl-dita-delivery-nav-mask {
-                    opacity: .5;
-                    display: block;
-                }
-            }
-        }
-
-        .sdl-dita-delivery-topbar {
-            .sdl-dita-delivery-topbar-expand-nav {
-                display: table-cell;
-                &:hover {
-                    cursor: pointer;
-                }
-            }
-
-            .sdl-dita-delivery-topbar-logo {
-                left: 0;
-            }
-        }
-    }
-
     .sdl-dita-delivery-topbar {
         header {
             border-spacing: 0;
 
             .sdl-dita-delivery-topbar-logo {
-                width: 100%;
                 left: 15px;
             }
 

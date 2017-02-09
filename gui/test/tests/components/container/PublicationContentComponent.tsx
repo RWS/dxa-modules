@@ -211,24 +211,24 @@ class PublicationContentComponent extends TestBase {
                 }, 500);
             });
 
-            it("shows an error message in the search bar when the publication title failed to load", (done: () => void): void => {
-                const errorMessage = "Page title is invalid!";
-                services.publicationService.setMockDataPublication(errorMessage);
-                services.pageService.setMockDataPage(null, {
-                    id: "12345",
-                    content: "<div/>",
-                    title: "Title!",
-                    sitemapIds: null
-                });
-                const publicationContent = this._renderComponent(target, "123");
+            // it("shows an error message in the search bar when the publication title failed to load", (done: () => void): void => {
+            //     const errorMessage = "Page title is invalid!";
+            //     services.publicationService.setMockDataPublication(errorMessage);
+            //     services.pageService.setMockDataPage(null, {
+            //         id: "12345",
+            //         content: "<div/>",
+            //         title: "Title!",
+            //         sitemapIds: null
+            //     });
+            //     const publicationContent = this._renderComponent(target, "123");
 
-                // Use a timeout to allow the DataStore to return a promise with the data
-                setTimeout((): void => {
-                    const publicationContentNode = ReactDOM.findDOMNode(publicationContent);
-                    expect(publicationContentNode.querySelector(".sdl-dita-delivery-searchbar input").getAttribute("placeholder")).toContain(errorMessage);
-                    done();
-                }, 0);
-            });
+            //     // Use a timeout to allow the DataStore to return a promise with the data
+            //     setTimeout((): void => {
+            //         const publicationContentNode = ReactDOM.findDOMNode(publicationContent);
+            //         expect(publicationContentNode.querySelector(".sdl-dita-delivery-searchbar input").getAttribute("placeholder")).toContain(errorMessage);
+            //         done();
+            //     }, 0);
+            // });
 
             it("updates the toc when the location changes", (done: () => void): void => {
                 const first: ITaxonomy = {

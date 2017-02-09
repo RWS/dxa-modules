@@ -1,0 +1,132 @@
+@import (reference) "../../../theming/styles.less";
+@import (reference) "../../presentation/styles/TopBar.less";
+@navBarWidth: 50px;
+@navBarHeight: 50px;
+@searchBarHeight: 150px;
+.sdl-dita-delivery-app {
+    .sdl-dita-delivery-nav-mask {
+        background: @neutralColor1;
+        display: none;
+        height: 100vh;
+        opacity: 0;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1005;
+    }
+    .sdl-dita-delivery-topbar-expand-nav {
+        width: @navBarWidth;
+        left: 0;
+        position: absolute;
+        display: none;
+        span {
+            margin: 0 15px;
+            .icon-hamburger(21px);
+        }
+    }
+    .sdl-dita-delivery-topbar-expand-search {
+        text-align: right;
+        span {
+            .icon-search(21px);
+            margin-right: 15px;
+        }
+    }
+    .sdl-dita-delivery-searchbar {
+        position: fixed;
+        top: @searchBarHeight * -1;
+        transition: top .3s ease-out;
+    }
+    .sdl-dita-delivery-publication-content {
+        top: @navBarHeight;
+        transition: top .3s ease-out;
+        height: ~"calc(100% - @{navBarHeight})";
+        .sdl-dita-delivery-page {
+            height: 100%;
+            .sdl-dita-delivery-navigation-menu {
+                height: 100%;
+                nav.sdl-dita-delivery-toc {
+                    /*Calc of parent height minus margins*/
+                    height: ~"calc(100% - 64px)";
+                    &.fixed-nav {
+                        height: ~"calc(100% - 64px - @{navBarHeight})";
+                        .separator {
+                            top: @navBarHeight;
+                            transition: top .3s ease-out;
+                        }
+                        @media screen and (min-width: (1+@screenSm)) {
+                            top: @navBarHeight;
+                            transition: top .3s ease-out;
+                        }
+                    }
+                }
+            }
+
+            @media screen and (min-width: (1+@screenLg)) {
+                nav.sdl-dita-delivery-content-navigation {
+                    height: ~"calc(100% - 64px)";
+                    &.fixed-nav {
+                        height: ~"calc(100% - 64px - @{navBarHeight})";
+                        top: @navBarHeight;
+                        transition: top .3s ease-out;
+                    }
+                }
+            }
+        }
+    }
+
+    &.search-open {
+        .sdl-dita-delivery-searchbar {
+            top: @navBarHeight;
+        }
+        .sdl-dita-delivery-publication-content {
+            top: @searchBarHeight + @navBarHeight;
+            height: ~"calc(100% - (@{searchBarHeight} + @{navBarHeight}))";
+            .sdl-dita-delivery-page {
+                .sdl-dita-delivery-navigation-menu {
+                    nav.sdl-dita-delivery-toc {
+                        &.fixed-nav {
+                            height: ~"calc(100% - 64px - (@{searchBarHeight} + @{navBarHeight}))";
+                            .separator {
+                                top: @searchBarHeight + @navBarHeight;
+                            }
+                            @media screen and (min-width: (1+@screenSm)) {
+                                top: @searchBarHeight + @navBarHeight;
+                            }
+                        }
+                    }
+                }
+                @media screen and (min-width: (1+@screenLg)) {
+                    nav.sdl-dita-delivery-content-navigation {
+                        &.fixed-nav {
+                            height: ~"calc(100% - 64px - (@{searchBarHeight} + @{navBarHeight}))";
+                            top: @searchBarHeight + @navBarHeight;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: @screenSm) {
+    .sdl-dita-delivery-app {
+        &.open {
+            overflow: hidden;
+            .sdl-dita-delivery-nav-mask {
+                opacity: .5;
+                display: block;
+            }
+        }
+        .sdl-dita-delivery-topbar {
+            .sdl-dita-delivery-topbar-expand-nav {
+                display: table-cell;
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+            .sdl-dita-delivery-topbar-logo {
+                left: @navBarWidth;
+            }
+        }
+    }
+}

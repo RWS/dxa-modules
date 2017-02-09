@@ -8,7 +8,6 @@ import { IAppContext } from "components/container/App";
 import { NavigationMenu } from "components/presentation/NavigationMenu";
 import { Toc } from "components/presentation/Toc";
 import { Page } from "components/presentation/Page";
-import { SearchBar } from "components/presentation/SearchBar";
 import { Breadcrumbs } from "components/presentation/Breadcrumbs";
 
 import { Html, IHeader } from "utils/Html";
@@ -172,8 +171,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
     private _page: ISelectedPage = {};
     private _toc: IToc = {};
     private _isUnmounted: boolean = false;
-    private _searchBarHeight: number = 0;
-    private _topBarHeight: number = 0;
+    private _topOffset: number = 0;
 
     /**
      * Creates an instance of App.
@@ -280,16 +278,13 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
         const { services, router } = this.context;
         const { publicationId } = this.props.params;
-        const { taxonomyService, localizationService } = services;
+        const { taxonomyService } = services;
         const { content, error} = this._page;
         const { rootItems } = this._toc;
         const tocError = this._toc.error;
 
         return (
             <section className={"sdl-dita-delivery-publication-content"}>
-                <SearchBar
-                    placeholderLabel={localizationService.formatMessage("components.searchbar.placeholder", [publicationTitle || ""])}
-                    onSearch={query => console.log(query)} />
                 <Page
                     showActivityIndicator={isPageLoading || false}
                     content={content}
@@ -306,7 +301,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     // Wait for the selected toc item to be set to set the anchor
                     // This is needed to make sure components on top are rendered first (eg bread crumbs)
                     anchor={selectedTocItem ? pageAnchor : undefined}
-                    scrollOffset={this._topBarHeight}
+                    scrollOffset={this._topOffset}
                     activeHeader={activePageHeader}>
                     <NavigationMenu isOpen={false}>{/* TODO: use global state store */}
                         <Toc
@@ -337,13 +332,9 @@ export class PublicationContent extends React.Component<IPublicationContentProps
      */
     public componentDidMount(): void {
         if (ReactDOM) {
-            const domNode = ReactDOM.findDOMNode(this);
-            const searchBar = domNode.querySelector(".sdl-dita-delivery-searchbar") as HTMLElement;
-
-            if (searchBar) {
-                const searchBarStyle = window.getComputedStyle(searchBar);
-                this._searchBarHeight = parseInt(searchBarStyle.height || "0", 10);
-                this._topBarHeight = searchBar.offsetHeight - this._searchBarHeight;
+            const domNode = ReactDOM.findDOMNode(this) as HTMLElement;
+            if (domNode) {
+                this._topOffset = domNode.offsetTop;
             }
         }
 
@@ -480,19 +471,9 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         // Firefox needs document.documentElement, otherwise scrollTop value will be 0 all the time
         // Chrome though needs document.body to work correctly
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-        const { maxHeight, sticksToTop } = Html.getFixedPanelInfo(scrollTop, this._searchBarHeight, this._topBarHeight, PANEL_MARGIN);
-
-        if (page) {
-            // An extra 3 px is removed because in FF and IE this still shows a scrollbar
-            page.style.height = (parseInt(maxHeight, 10) + PANEL_MARGIN - 3) + "px";
-        }
+        const { sticksToTop } = Html.getFixedPanelInfo(scrollTop, 0, this._topOffset, PANEL_MARGIN);
 
         if (toc) {
-            // Only set max height if the navigation menu is not opened
-            const navigationMenuElement = toc.parentElement;
-            const isFixedNavMenu = navigationMenuElement && navigationMenuElement.classList.contains("sdl-dita-delivery-navigation-menu")
-                ? getComputedStyle(navigationMenuElement).position === "fixed" : false;
-            toc.style.maxHeight = isFixedNavMenu ? "" : maxHeight;
             if (sticksToTop) {
                 toc.classList.add(FIXED_NAV_CLASS);
             } else {
@@ -501,8 +482,6 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         }
 
         if (contentNavigation) {
-            const isInline = getComputedStyle(contentNavigation).position === "static";
-            contentNavigation.style.maxHeight = isInline ? "" : maxHeight;
             if (sticksToTop) {
                 contentNavigation.classList.add(FIXED_NAV_CLASS);
                 // Set left position
@@ -517,7 +496,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
             // Update active title inside content navigation panel
             const pageContent = page.querySelector(".page-content") as HTMLElement;
             if (pageContent) {
-                const header = Html.getActiveHeader(document.body, pageContent, this._searchBarHeight);
+                const header = Html.getActiveHeader(document.body, pageContent, 0);
                 if (header && header !== this.state.activePageHeader) {
                     this.setState({
                         activePageHeader: header

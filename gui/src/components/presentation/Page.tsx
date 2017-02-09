@@ -305,7 +305,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
 
                     let offsetTop = 0;
                     let currentNode = header;
-                    while (currentNode && currentNode.offsetTop) {
+                    while (currentNode && currentNode.offsetParent) {
                         offsetTop += currentNode.offsetTop;
                         currentNode = currentNode.offsetParent as HTMLElement;
                     }
