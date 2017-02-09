@@ -27,6 +27,8 @@ namespace Sdl.Web.Modules.Core.Models
         [SemanticProperty("na:name")]
         [SemanticProperty("a:name")]
         [SemanticProperty("headline")]
+        [SemanticProperty("t:headline")]
+        [SemanticProperty("a:headline")]
         [SemanticProperty("subheading")]
         [SemanticProperty("p:name")]
         [SemanticProperty("c:subheading")]
