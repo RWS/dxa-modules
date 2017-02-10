@@ -2,7 +2,7 @@
   {
     "Id": "t1-k17",
     "Title": "Making a call",
-    "Url": "/1420746/164212/user-guide/making-a-call",
+    "Url": "/app/1420746/164212/user-guide/making-a-call",
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -10,7 +10,7 @@
   {
     "Id": "t1-k20",
     "Title": "Answering or rejecting a call",
-    "Url": "/1420746/164195/user-guide/answering-or-rejecting-a-call",
+    "Url": "/app/1420746/164195/user-guide/answering-or-rejecting-a-call",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []

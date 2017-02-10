@@ -100,8 +100,8 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
     public context: IAppContext;
 
     private _isUnmounted: boolean = false;
-
     private _isExpanding: boolean = false;
+    private _currentActiveNode: ITreeViewNode | null = null;
 
     /**
      * Creates an instance of Toc.
@@ -166,7 +166,8 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
         const props = this.props;
         const currentRootNodes = this._convertToTreeViewNodes(props.rootItems || []);
         const currentFirstRootNode = currentRootNodes.length > 0 ? currentRootNodes[0] : null;
-        const currentPath = this._getNodeIdPath(props.activeItemPath, currentFirstRootNode);
+        const activeNodePath = this._currentActiveNode ? this._currentActiveNode.getPath().split("/") : undefined;
+        const currentPath = this._getNodeIdPath(activeNodePath, currentFirstRootNode);
         const nextRootNodes = this._convertToTreeViewNodes(props.rootItems || []);
         const nextFirstRootNode = nextRootNodes.length > 0 ? nextRootNodes[0] : null;
         const nextPath = this._getNodeIdPath(nextProps.activeItemPath, nextFirstRootNode);
@@ -288,10 +289,12 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
     private _onSelectionChanged(nodes: ITreeViewNode[]): void {
         /* istanbul ignore else */
         if (!this._isUnmounted) {
-            const { activeItemPath } = this.props;
+            const { activeItemPath, rootItems } = this.props;
             const onSelectionChanged = this.props.onSelectionChanged;
             const selectedNode = nodes.length > 0 ? nodes[0] : null;
-            const activeId = activeItemPath ? activeItemPath[activeItemPath.length - 1] : null;
+            this._currentActiveNode = selectedNode;
+            const firstRootNodeId = rootItems && rootItems[0] ? rootItems[0].id : null;
+            const activeId = activeItemPath ? activeItemPath[activeItemPath.length - 1] : firstRootNodeId;
             // Check if expanding is finished (expanding state is reset when the component is updated)
             if (this._isExpanding) {
                 this._isExpanding = !(selectedNode && selectedNode.id === activeId);

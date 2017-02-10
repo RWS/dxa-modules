@@ -22,12 +22,12 @@ export interface IWindow extends Window {
      * @type {string}
      * @memberOf IWindow
      */
-    SDLDitaDeliveryRootPath: string;
+    SdlDitaDeliveryRootPath: string;
 
     /**
      * Error structure from backend
      * 
      * @type {IError}
      */
-    SDLDitaDeliveryError: IError;
+    SdlDitaDeliveryError: IError;
 }

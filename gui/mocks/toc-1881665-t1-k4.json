@@ -2,7 +2,7 @@
   {
     "Id": "t1-k5",
     "Title": "Toetsen",
-    "Url": "/1881665/164284/user-guide/toetsen",
+    "Url": "/app/1881665/164284/user-guide/toetsen",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -10,7 +10,7 @@
   {
     "Id": "t1-k6",
     "Title": "Aansluitingen",
-    "Url": "/1881665/164157/user-guide/aansluitingen",
+    "Url": "/app/1881665/164157/user-guide/aansluitingen",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -18,7 +18,7 @@
   {
     "Id": "t1-k7",
     "Title": "Standby-modus",
-    "Url": "/1881665/164189/user-guide/standby-modus",
+    "Url": "/app/1881665/164189/user-guide/standby-modus",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -26,7 +26,7 @@
   {
     "Id": "t1-k8",
     "Title": "Belangrijke indicatoren in de standby-modus",
-    "Url": "/1881665/164257/user-guide/belangrijke-indicatoren-in-de-standby-modus",
+    "Url": "/app/1881665/164257/user-guide/belangrijke-indicatoren-in-de-standby-modus",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -34,7 +34,7 @@
   {
     "Id": "t1-k9",
     "Title": "Screensaver",
-    "Url": "/1881665/164438/user-guide/screensaver",
+    "Url": "/app/1881665/164438/user-guide/screensaver",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -42,7 +42,7 @@
   {
     "Id": "t1-k10",
     "Title": "General Packet Radio Service (GPRS)",
-    "Url": "/1881665/164173/user-guide/general-packet-radio-service--gprs-",
+    "Url": "/app/1881665/164173/user-guide/general-packet-radio-service--gprs-",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -50,7 +50,7 @@
   {
     "Id": "t1-k11",
     "Title": "Bluetooth-verbinding",
-    "Url": "/1881665/164311/user-guide/bluetooth-verbinding",
+    "Url": "/app/1881665/164311/user-guide/bluetooth-verbinding",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []

@@ -9,4 +9,5 @@
   "error.path.not.found": "Het pad voor de sitemap item met id {0} kon niet gevonden worden in de publicatie met id {1}.",
   "error.toc.items.not.found": "We konden geen kind artikelen te wijten aan server interne fout laden",
   "control.button.retry": "Opnieuw proberen"
+  "error.unable.to.locate.page.in.toc": "De pagina met id {0} kon niet gevonden worden in de inhoudstafel."
 }

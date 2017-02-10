@@ -7,16 +7,11 @@ import { PageService } from "services/client/PageService";
 import { PublicationService } from "services/client/PublicationService";
 import { TaxonomyService } from "services/client/TaxonomyService";
 import { localization } from "services/common/LocalizationService";
-import { useBasename, createHistory } from "history";
+import { browserHistory } from "react-router";
 
-import { path } from "utils/Path";
 import "sdl-controls-react-wrappers/dist/stylesheets/main";
 
 const mainElement = document.getElementById("main-view-target");
-
-const browserHistory = useBasename(createHistory)({
-    basename: path.getRootPath()
-});
 
 /**
  * Set instances for services

@@ -9,7 +9,7 @@
       {
         "Id": "t1-k44",
         "Title": "Other birds",
-        "Url": "/1601084/515736/penguin-guide/other-birds",
+        "Url": "/app/1601084/515736/penguin-guide/other-birds",
         "IsAbstract": false,
         "HasChildNodes": true,
         "Items": [
@@ -23,14 +23,14 @@
               {
                 "Id": "t1-k66",
                 "Title": "Petrels",
-                "Url": "/1601084/515791/penguin-guide/petrels",
+                "Url": "/app/1601084/515791/penguin-guide/petrels",
                 "IsAbstract": false,
                 "HasChildNodes": true,
                 "Items": [
                   {
                     "Id": "t1-k69",
                     "Title": "Southern giant Petrel (Macronectes giganteus)",
-                    "Url": "/1601084/515628/penguin-guide/southern-giant-petrel--macronectes-giganteus-",
+                    "Url": "/app/1601084/515628/penguin-guide/southern-giant-petrel--macronectes-giganteus-",
                     "IsAbstract": false,
                     "HasChildNodes": false,
                     "Items": []

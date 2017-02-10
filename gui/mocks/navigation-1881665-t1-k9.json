@@ -9,14 +9,14 @@
       {
         "Id": "t1-k4",
         "Title": "De telefoon",
-        "Url": "/1881665/164233/user-guide/de-telefoon",
+        "Url": "/app/1881665/164233/user-guide/de-telefoon",
         "IsAbstract": false,
         "HasChildNodes": true,
         "Items": [
           {
             "Id": "t1-k9",
             "Title": "Screensaver",
-            "Url": "/1881665/164438/user-guide/screensaver",
+            "Url": "/app/1881665/164438/user-guide/screensaver",
             "IsAbstract": false,
             "HasChildNodes": false,
             "Items": []

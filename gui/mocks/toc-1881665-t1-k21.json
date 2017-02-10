@@ -2,7 +2,7 @@
   {
     "Id": "t1-k22",
     "Title": "Tekstberichten",
-    "Url": "/1881665/164462/user-guide/tekstberichten",
+    "Url": "/app/1881665/164462/user-guide/tekstberichten",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -10,7 +10,7 @@
   {
     "Id": "t1-k23",
     "Title": "Multimediaberichten",
-    "Url": "/1881665/164392/user-guide/multimediaberichten",
+    "Url": "/app/1881665/164392/user-guide/multimediaberichten",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -18,7 +18,7 @@
   {
     "Id": "t1-k24",
     "Title": "Voice mailbox",
-    "Url": "/1881665/164325/user-guide/voice-mailbox",
+    "Url": "/app/1881665/164325/user-guide/voice-mailbox",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -26,7 +26,7 @@
   {
     "Id": "t1-k25",
     "Title": "Berichten verwijderen",
-    "Url": "/1881665/164454/user-guide/berichten-verwijderen",
+    "Url": "/app/1881665/164454/user-guide/berichten-verwijderen",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []

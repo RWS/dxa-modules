@@ -3,6 +3,7 @@ import * as ReactDOM from "react-dom";
 import { Promise } from "es6-promise";
 import { ITaxonomy } from "interfaces/Taxonomy";
 import { IPage } from "interfaces/Page";
+import { TaxonomyItemId } from "interfaces/TcmId";
 
 import { IAppContext } from "components/container/App";
 import { NavigationMenu } from "components/presentation/NavigationMenu";
@@ -197,9 +198,6 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         const { publicationService, pageService } = this.context.services;
 
         if (pageId) {
-            // Set the current active path for the tree
-            this._getActiveSitemapPath(pageId, () => this._loadTocRootItems(publicationId));
-
             // Load the page
             pageService.getPageInfo(publicationId, pageId).then(
                 this._onPageContentRetrieved.bind(this),
@@ -405,8 +403,9 @@ export class PublicationContent extends React.Component<IPublicationContentProps
             // Always take the first sitemap id
             // There is no proper way for having a deep link to the second/third/... occurance inside the toc
             const firstSitemapId = pageInfo.sitemapIds[0];
+            const taxonomyId = TcmId.getTaxonomyItemId(TaxonomyItemId.Toc, firstSitemapId) || firstSitemapId;
 
-            this._getActiveSitemapPath(firstSitemapId, path => {
+            this._getActiveSitemapPath(pageInfo.id, taxonomyId, path => {
                 /* istanbul ignore if */
                 if (this._isUnmounted) {
                     return;
@@ -436,26 +435,29 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         });
     }
 
-    private _getActiveSitemapPath(sitemapId: string, done: (path: string[]) => void): void {
+    private _getActiveSitemapPath(pageId: string, sitemapId: string, done: (path: string[]) => void): void {
         const { services } = this.context;
         const { publicationId } = this.props.params;
-        services.taxonomyService.getSitemapPath(publicationId, sitemapId).then(
-            path => {
-                /* istanbul ignore else */
-                if (!this._isUnmounted) {
-                    done(path.map(item => item.id || "") || []);
-                }
-            },
-            error => {
-                /* istanbul ignore else */
-                if (!this._isUnmounted) {
-                    this._toc.error = error;
-                    this.setState({
-                        isTocLoading: false,
-                        isPageLoading: false
-                    });
-                }
-            });
+
+        if (pageId) {
+            services.taxonomyService.getSitemapPath(publicationId, pageId, sitemapId).then(
+                path => {
+                    /* istanbul ignore else */
+                    if (!this._isUnmounted) {
+                        done(path.map(item => item.id || "") || []);
+                    }
+                },
+                error => {
+                    /* istanbul ignore else */
+                    if (!this._isUnmounted) {
+                        this._toc.error = error;
+                        this.setState({
+                            isTocLoading: false,
+                            isPageLoading: false
+                        });
+                    }
+                });
+        }
     }
 
     private _fixPanels(): void {
