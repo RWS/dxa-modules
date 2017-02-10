@@ -56,6 +56,7 @@
             <groupId>com.sdl.web</groupId>
             <artifactId>cil</artifactId>
             <type>pom</type>
+            <version>8.5.0-1008</version>
         </dependency>
 
         <dependency>
