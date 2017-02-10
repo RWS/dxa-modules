@@ -31,6 +31,12 @@ export class LocalizationService implements ILocalizationService {
         }
         return `Unable to localize: ${path}`;
     }
+
+    // This is interim method
+    // Implement it in the multi language story
+    public getDirection(): string {
+        return "rtl";
+    }
 }
 
 export let localization = new LocalizationService();

@@ -12,4 +12,6 @@ export interface ILocalizationService {
      * @returns {string}
      */
     formatMessage(path: string, variables?: string[]): string;
+
+    getDirection(): string;
 }

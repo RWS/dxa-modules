@@ -22,8 +22,13 @@
         .sdl-dita-delivery-navigation-menu {
             width: @tocWidth;
             float: left;
-            position: inherit;
+            position: absolute;
             left: 0;
+
+            .rtl& {
+                right: 0;
+                float: right;
+            }
 
             nav.sdl-dita-delivery-toc {
                 margin-left: @defaultMargin;
@@ -43,6 +48,12 @@
                     width: 10px;
                     box-shadow: -5px 0px 10px 0px fade(@neutralColor1, 10);
 
+                    .rtl& {
+                        margin-left: 0;
+                        margin-right: @tocWidth - 5;
+                        box-shadow: 5px 0px 10px 0px fade(@neutralColor1, 10);
+                    }
+
                     @media screen and (max-width: @screenSm) {
                         display: none;
                     }
@@ -58,6 +69,9 @@
         .sdl-dita-delivery-content-navigation {
             width: @contentNavWidth;
             float: right;
+            .rtl& {
+                float: left;
+            }
             overflow: auto;
         }
 
@@ -89,6 +103,10 @@
                 position: absolute;
                 left: calc(100% ~"-" @contentNavWidth);
 
+                .rtl& {
+                    left: 0;
+                }
+
                 &.fixed-nav {
                     top: 50px;
                     position: fixed;
@@ -101,11 +119,19 @@
             padding-bottom: 15px;
             margin-left: @tocWidth + @defaultMargin;
             margin-right: @contentNavWidth + @defaultMargin;
+            .rtl& {
+                margin-right: @tocWidth + @defaultMargin;
+                margin-left: @contentNavWidth + @defaultMargin;
+            }
         }
 
         article.page-content {
             margin-left: @tocWidth + @defaultMargin;
             margin-right: @contentNavWidth + @defaultMargin;
+            .rtl& {
+                margin-left: @contentNavWidth + @defaultMargin;
+                margin-right: @tocWidth + @defaultMargin;
+            }
             min-height: 100px;
         }
     }
@@ -119,6 +145,9 @@
             .sdl-dita-delivery-breadcrumbs,
             article.page-content {
                 margin-right: 0;
+                .rtl& {
+                    margin-left: 0;
+                }
             }
 
             nav.sdl-dita-delivery-content-navigation {
@@ -126,6 +155,11 @@
                 max-width: ~"calc(100% - @{tocWidth} - (@{defaultMargin} * 2))";
                 min-width: ~"calc(80% - @{tocWidth} - (@{defaultMargin} * 2))";
                 margin-left: @tocWidth + (@defaultMargin * 2);
+                .rtl& {
+                    float: none;
+                    margin-left: 0;
+                    margin-right: @tocWidth + (@defaultMargin * 2);
+                }
             }
         }
     }
@@ -142,9 +176,17 @@
             .sdl-dita-delivery-navigation-menu {
                 position: fixed;
                 left: @tocWidth * -1;
+                .rtl& {
+                    left: auto;
+                    right: @tocWidth * -1;
+                }
 
                 &.open {
                     left: 0;
+                    .rtl& {
+                        left: auto;
+                        right: 0;
+                    }
                 }
 
                 nav.sdl-dita-delivery-toc {
@@ -160,6 +202,9 @@
             article.page-content,
             nav.sdl-dita-delivery-content-navigation {
                 margin-left: 0;
+                .rtl& {
+                    margin-right: 0;
+                }
             }
 
             .sdl-dita-delivery-breadcrumbs {
@@ -170,6 +215,10 @@
                 max-width: ~"calc(100% - @{defaultMargin})";
                 width: ~"calc(100% - @{defaultMargin})";
                 margin-left: @defaultMargin;
+                .rtl& {
+                    margin-left: 0;
+                    margin-right: @defaultMargin;
+                }
             }
         }
     }

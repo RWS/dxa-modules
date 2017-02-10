@@ -35,8 +35,8 @@ class Server extends TestBase {
                 };
                 const app = ReactDOMServer.renderToStaticMarkup(<App history={hashHistory} services={services} />);
                 const expected = ReactDOMServer.renderToStaticMarkup((
-                    <div className="sdl-dita-delivery-app sdl-dita-delivery-app-nav">
-                        <div className="sdl-dita-delivery-topbar">
+                    <div dir="rtl" className="sdl-dita-delivery-app sdl-dita-delivery-app-nav">
+                        <div className="sdl-dita-delivery-topbar rtl">
                             <div className="sdl-dita-delivery-nav-mask"></div>
                             <header>
                                 <div className="sdl-dita-delivery-topbar-expand-nav"><span></span></div>
@@ -47,17 +47,17 @@ class Server extends TestBase {
                                 <div className="sdl-dita-delivery-topbar-user"><span></span></div>
                             </header>
                         </div>
-                        <section className="sdl-dita-delivery-publication-content">
+                        <section className="sdl-dita-delivery-publication-content rtl">
                             <div className="sdl-dita-delivery-searchbar">
                                 <div className="input-area"><input type="text" placeholder="Search in ‘’" />
                                     <div className="search-button"></div>
                                 </div>
                             </div>
-                            <div className="sdl-dita-delivery-page" style={{ overflow: "hidden" }}><span><div></div></span>
-                                <div className="sdl-dita-delivery-navigation-menu">
+                            <div className="sdl-dita-delivery-page rtl" style={{ overflow: "hidden" }}><span><div></div></span>
+                                <div className="rtl sdl-dita-delivery-navigation-menu">
                                     <nav className="sdl-dita-delivery-toc"><span><div></div></span><span className="separator"></span></nav>
                                 </div>
-                                <div className="sdl-dita-delivery-breadcrumbs">
+                                <div className="sdl-dita-delivery-breadcrumbs rtl">
                                     <ul>
                                         <li>
                                             <a className="home" title="Home" href="#/home">Home</a><span className="separator"></span>
@@ -68,8 +68,8 @@ class Server extends TestBase {
                                     </ul>
                                 </div>
                                 <nav className="sdl-dita-delivery-content-navigation"></nav>
-                                <article>
-                                    <article className="page-content ltr"></article>
+                                <article dir="ltr">
+                                    <article className="page-content"></article>
                                 </article>
                             </div>
                         </section>

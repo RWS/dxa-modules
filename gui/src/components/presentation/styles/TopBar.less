@@ -54,6 +54,9 @@
             position: relative;
             top: -4px;
             background-position: left center;
+            .rtl& {
+                background-position: right center;
+            }
             a {
                 height: 100%;
                 width: 100%;
@@ -63,9 +66,16 @@
 
         .sdl-dita-delivery-topbar-language {
             text-align: right;
+            .rtl& {
+                text-align: left;
+            }
             span {
                 .icon-language(21px);
                 margin-right: 15px;
+                .rtl& {
+                    margin-right: 0;
+                    margin-left: 15px;
+                }
             }
         }
 
@@ -101,6 +111,9 @@
 
             .sdl-dita-delivery-topbar-logo {
                 left: 0;
+                .rtl& {
+                    left: 15px;
+                }
             }
         }
     }
@@ -112,6 +125,9 @@
             .sdl-dita-delivery-topbar-logo {
                 width: 100%;
                 left: 15px;
+                .rtl& {
+                    left: 0;
+                }
             }
 
             .sdl-dita-delivery-topbar-language label {
@@ -124,6 +140,10 @@
 
             .sdl-dita-delivery-topbar-user {
                 padding-right: 15px;
+                .rtl& {
+                    padding-right: 0;
+                    padding-left: 15px;
+                }
             }
         }
     }

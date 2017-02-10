@@ -9,6 +9,10 @@ export class LocalizationService implements ILocalizationService {
         }
         return message;
     }
+
+    public getDirection(): string {
+        return "ltr";
+    }
 }
 
 export let localization = new LocalizationService();

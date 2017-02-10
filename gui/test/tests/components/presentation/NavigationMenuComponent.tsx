@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { NavigationMenu, INavigationMenuProps } from "components/presentation/NavigationMenu";
+import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 import { TestBase } from "sdl-models";
 
 class NavigationMenuComponent extends TestBase {
@@ -49,7 +50,7 @@ class NavigationMenuComponent extends TestBase {
     }
 
     private _renderComponent(props: INavigationMenuProps, target: HTMLElement): void {
-        ReactDOM.render(<NavigationMenu {...props}><div>Contents</div></NavigationMenu>, target);
+        ReactDOM.render(<ComponentWithContext><NavigationMenu {...props}><div>Contents</div></NavigationMenu></ComponentWithContext>, target);
     }
 }
 

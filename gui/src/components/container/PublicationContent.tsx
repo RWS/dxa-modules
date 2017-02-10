@@ -286,7 +286,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         const tocError = this._toc.error;
 
         return (
-            <section className={"sdl-dita-delivery-publication-content"}>
+            <section className={`sdl-dita-delivery-publication-content ${localizationService.getDirection()}`}>
                 <SearchBar
                     placeholderLabel={localizationService.formatMessage("components.searchbar.placeholder", [publicationTitle || ""])}
                     onSearch={query => console.log(query)} />
@@ -481,6 +481,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         // Chrome though needs document.body to work correctly
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
         const { maxHeight, sticksToTop } = Html.getFixedPanelInfo(scrollTop, this._searchBarHeight, this._topBarHeight, PANEL_MARGIN);
+        const { getDirection } = this.context.services.localizationService;
 
         if (page) {
             // An extra 3 px is removed because in FF and IE this still shows a scrollbar
@@ -507,7 +508,9 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                 contentNavigation.classList.add(FIXED_NAV_CLASS);
                 // Set left position
                 if (page) {
-                    contentNavigation.style.left = (page.offsetLeft + page.clientWidth - contentNavigation.offsetWidth) + "px";
+                    contentNavigation.style.left = getDirection() === "rtl"
+                        ? `${page.offsetLeft}px`
+                        : `${page.offsetLeft + page.clientWidth - contentNavigation.offsetWidth}px`;
                 }
             } else {
                 contentNavigation.classList.remove(FIXED_NAV_CLASS);

@@ -156,17 +156,17 @@ export class Page extends React.Component<IPageProps, IPageState> {
         const props = this.props;
         const { activeHeader } = props;
         const { navItems } = this.state;
-        const { formatMessage } = this.context.services.localizationService;
+        const { formatMessage, getDirection } = this.context.services.localizationService;
         const activeNavItemId = activeHeader ? activeHeader.id : (navItems.length > 0 ? navItems[0].id : undefined);
 
         return (
-            <div className={"sdl-dita-delivery-page"} style={props.showActivityIndicator ? { overflow: "hidden" } : {}} >
+            <div className={`sdl-dita-delivery-page ${getDirection()}`} style={props.showActivityIndicator ? { overflow: "hidden" } : {}} >
                 {props.showActivityIndicator ? <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} /> : null}
                 {props.error ? <ValidationMessage messageType={ValidationMessageType.Error} message={props.error} /> : null}
                 {props.children}
                 <ContentNavigation navItems={navItems} activeNavItemId={activeNavItemId} />
-                <article>
-                    <article className={"page-content ltr"} dangerouslySetInnerHTML={{ __html: props.content || "" }} />
+                <article dir="ltr">
+                    <article className={"page-content"} dangerouslySetInnerHTML={{ __html: props.content || "" }} />
                 </article>
             </div >
         );

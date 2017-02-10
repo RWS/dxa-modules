@@ -1,6 +1,7 @@
 import * as React from "react";
 import { IndexLink } from "react-router";
 import { path } from "utils/Path";
+import { IAppContext } from "components/container/App";
 
 import "./styles/TopBar";
 
@@ -27,10 +28,12 @@ export interface ITopBarProps {
 /**
  * TopBar
  */
-export const TopBar = (props: ITopBarProps) => {
+export const TopBar: React.StatelessComponent<ITopBarProps> = (props: ITopBarProps, context: IAppContext): JSX.Element => {
+
+    const { getDirection } = context.services.localizationService;
 
     return (
-        <div className={"sdl-dita-delivery-topbar"}>
+        <div className={`sdl-dita-delivery-topbar ${getDirection()}`}>
             <div className={"sdl-dita-delivery-nav-mask"} onClick={props.toggleNavigationMenu} />
             <header>
                 <div className={"sdl-dita-delivery-topbar-expand-nav"} onClick={props.toggleNavigationMenu} >
@@ -50,3 +53,7 @@ export const TopBar = (props: ITopBarProps) => {
         </div >
     );
 };
+
+TopBar.contextTypes = {
+    services: React.PropTypes.object
+} as React.ValidationMap<IAppContext>;

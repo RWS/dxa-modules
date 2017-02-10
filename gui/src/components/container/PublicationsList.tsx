@@ -92,10 +92,10 @@ export class PublicationsList extends React.Component<{}, IPublicationsListState
      */
     public render(): JSX.Element {
         const { publications, error } = this.state;
-        const { services } = this.context;
+        const { formatMessage, getDirection } = this.context.services.localizationService;
         return (
-            <section className={"sdl-dita-delivery-publications-list"}>
-                <h1>{services.localizationService.formatMessage("app.publications")}</h1>
+            <section className={`sdl-dita-delivery-publications-list ${getDirection()}`}>
+                <h1>{formatMessage("app.publications")}</h1>
                 <nav>
                     {
                         error ?
@@ -114,7 +114,7 @@ export class PublicationsList extends React.Component<{}, IPublicationsListState
                                     }
                                 </ul>
 
-                            ) : <ActivityIndicator skin="graphene" text={services.localizationService.formatMessage("components.app.loading")} />}
+                            ) : <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} />}
                 </nav>
             </section>);
     }

@@ -62,7 +62,7 @@ export class Home extends React.Component<{}, IHomeState> {
      * @returns {JSX.Element}
      */
     public render(): JSX.Element {
-        const { localizationService } = this.context.services;
+        const { formatMessage, getDirection } = this.context.services.localizationService;
         const { isNavOpen } = this.state;
         const { children } = this.props;
 
@@ -71,11 +71,11 @@ export class Home extends React.Component<{}, IHomeState> {
         // Only pages with publiction selected can have navigation menu button enabled
         const canHaveNavMenuButton = child && (child.props.params.publicationId !== undefined);
         return (
-            <div className={"sdl-dita-delivery-app" + (canHaveNavMenuButton
+            <div dir={getDirection()} className={"sdl-dita-delivery-app" + (canHaveNavMenuButton
                 ? " sdl-dita-delivery-app-nav" + (isNavOpen ? " open" : "")
                 : "")}>
                 <TopBar
-                    language={localizationService.formatMessage("app.language")}
+                    language={formatMessage("app.language")}
                     toggleNavigationMenu={canHaveNavMenuButton && this._toggleNavigationMenu.bind(this)}
                     />
                 {children}

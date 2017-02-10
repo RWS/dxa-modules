@@ -32,6 +32,10 @@
                 float: right;
                 margin: 0 10px;
                 padding-top: 3px;
+                .rtl& {
+                    .icon-arrow-left();
+                    float: left;
+                }
             }
             .active, .home, .abstract {
                 color: @neutralColor1;
@@ -44,6 +48,11 @@
                 background-position: left 6px;
                 height: inherit;
                 width: inherit;
+                .rtl& {
+                    padding-left: 0px;
+                    padding-right: 30px;
+                    background-position: right 6px;
+                }
             }
         }
     }

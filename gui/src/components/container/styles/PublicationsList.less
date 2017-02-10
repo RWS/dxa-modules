@@ -12,6 +12,9 @@
         ul {
             margin-top: 0;
             padding: 0 10px 0 0;
+            .rtl& {
+                padding: 0 0 0 10px;
+            }
 
             li {
                 background: fade(@accentColor2, 5%);
@@ -20,6 +23,10 @@
                 margin-bottom: -1px;
                 border: 1px solid @neutralColor5;
                 border-left: 2px solid @accentColor1;
+                .rtl& {
+                    border: 1px solid @neutralColor5;
+                    border-right: 2px solid @accentColor1;
+                }
 
                 a {
                     text-decoration: none;

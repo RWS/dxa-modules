@@ -12,6 +12,7 @@
 @iconHamburger: "\e007";
 @iconUser: "\e023";
 @iconArrowRight: "\e013";
+@iconArrowLeft: "\e01a";
 @iconSearch: "\e01b";
 
 .import-icon-font() {
@@ -57,6 +58,13 @@
     .icon-font-default-style(@size);
     &:before {
         content: @iconArrowRight;
+    }
+}
+
+.icon-arrow-left(@size: 24px) {
+    .icon-font-default-style(@size);
+    &:before {
+        content: @iconArrowLeft;
     }
 }
 
