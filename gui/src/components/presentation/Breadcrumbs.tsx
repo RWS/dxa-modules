@@ -36,7 +36,7 @@ export interface IBreadcrumbsProps {
     /**
      * Load items path for a specific item
      */
-    loadItemsPath: (publicationId: string, parentId: string) => Promise<ITaxonomy[]>;
+    loadItemsPath: (publicationId: string, pageId: string, parentId: string) => Promise<ITaxonomy[]>;
 }
 
 /**
@@ -96,8 +96,10 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
      */
     public componentWillMount(): void {
         const { publicationId, selectedItem, loadItemsPath } = this.props;
-        if (selectedItem && selectedItem.id) {
-            loadItemsPath(publicationId, selectedItem.id).then(
+        if (selectedItem && selectedItem.id && loadItemsPath) {
+            const parsedPageUrl = Url.parsePageUrl(selectedItem.url || "");
+            const parsedPageId = parsedPageUrl && parsedPageUrl.pageId;
+            loadItemsPath(publicationId, parsedPageId || "", selectedItem.id).then(
                 path => {
                     /* istanbul ignore else */
                     if (!this._isUnmounted) {
@@ -124,7 +126,9 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
         const nextId = nextItem ? nextItem.id : null;
         if (nextItem && nextItem.url) {
             if (nextId && (currentId !== nextId)) {
-                loadItemsPath(nextProps.publicationId || publicationId, nextId).then(
+                const parsedPageUrl = Url.parsePageUrl(nextItem.url || "");
+                const parsedPageId = parsedPageUrl && parsedPageUrl.pageId;
+                loadItemsPath(nextProps.publicationId || publicationId, parsedPageId || "", nextId).then(
                     path => {
                         /* istanbul ignore else */
                         if (!this._isUnmounted) {

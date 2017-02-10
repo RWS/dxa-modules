@@ -325,16 +325,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     <Breadcrumbs
                         publicationId={publicationId}
                         publicationTitle={publicationTitle || ""}
-                        loadItemsPath={(pubId, taxonomyId) => {
-                            const currentSelectedTocItem = this.state.selectedTocItem;
-                            if (currentSelectedTocItem) {
-                                const parsedPageUrl = Url.parsePageUrl(currentSelectedTocItem.url || "");
-                                if (parsedPageUrl) {
-                                    return taxonomyService.getSitemapPath(pubId, parsedPageUrl.pageId, taxonomyId);
-                                }
-                            }
-                            return Promise.resolve([]);
-                        } }
+                        loadItemsPath={taxonomyService.getSitemapPath.bind(taxonomyService)}
                         selectedItem={selectedTocItem}
                         />
                 </Page>
