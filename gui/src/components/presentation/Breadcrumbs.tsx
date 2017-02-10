@@ -96,7 +96,7 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
      */
     public componentWillMount(): void {
         const { publicationId, selectedItem, loadItemsPath } = this.props;
-        if (selectedItem && selectedItem.id && loadItemsPath) {
+        if (selectedItem && selectedItem.id) {
             const parsedPageUrl = Url.parsePageUrl(selectedItem.url || "");
             const parsedPageId = parsedPageUrl && parsedPageUrl.pageId;
             loadItemsPath(publicationId, parsedPageId || "", selectedItem.id).then(
