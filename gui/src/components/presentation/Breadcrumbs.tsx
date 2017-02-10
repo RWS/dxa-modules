@@ -97,9 +97,8 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
     public componentWillMount(): void {
         const { publicationId, selectedItem, loadItemsPath } = this.props;
         if (selectedItem && selectedItem.id) {
-            const parsedPageUrl = Url.parsePageUrl(selectedItem.url || "");
-            const parsedPageId = parsedPageUrl && parsedPageUrl.pageId;
-            loadItemsPath(publicationId, parsedPageId || "", selectedItem.id).then(
+            const pageId = this._getPageId(selectedItem.url);
+            loadItemsPath(publicationId, pageId, selectedItem.id).then(
                 path => {
                     /* istanbul ignore else */
                     if (!this._isUnmounted) {
@@ -126,9 +125,8 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
         const nextId = nextItem ? nextItem.id : null;
         if (nextItem && nextItem.url) {
             if (nextId && (currentId !== nextId)) {
-                const parsedPageUrl = Url.parsePageUrl(nextItem.url || "");
-                const parsedPageId = parsedPageUrl && parsedPageUrl.pageId;
-                loadItemsPath(nextProps.publicationId || publicationId, parsedPageId || "", nextId).then(
+                const pageId = this._getPageId(nextItem.url);
+                loadItemsPath(nextProps.publicationId || publicationId, pageId || "", nextId).then(
                     path => {
                         /* istanbul ignore else */
                         if (!this._isUnmounted) {
@@ -202,5 +200,10 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
                 </ul>
             </div>
         );
+    }
+
+    private _getPageId(url?: string): string {
+        const parsedPageUrl = Url.parsePageUrl(url || "");
+        return (parsedPageUrl && parsedPageUrl.pageId) || "";
     }
 }
