@@ -1,4 +1,4 @@
-import { IError } from "./Error";
+import { IError } from "interfaces/Error";
 
 /**
  * Globally defined properties

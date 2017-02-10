@@ -49,7 +49,7 @@ export class Home extends React.Component<{}, IHomeState> {
      * Invoked once, both on the client and server, immediately before the initial rendering occurs.
      */
     public componentWillMount(): void {
-        const { router} = this.context;
+        const { router } = this.context;
 
         if (router) {
             this._historyUnlisten = router.listen(this._onNavigated.bind(this));

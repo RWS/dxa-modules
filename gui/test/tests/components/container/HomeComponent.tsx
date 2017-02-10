@@ -4,7 +4,7 @@ import * as TestUtils from "react-addons-test-utils";
 import { Router, Route } from "react-router";
 import { Home } from "components/container/Home";
 import { PublicationContent } from "components/container/PublicationContent";
-import { ActivityIndicator} from "sdl-controls-react-wrappers";
+import { ActivityIndicator } from "sdl-controls-react-wrappers";
 import { TestBase } from "sdl-models";
 import { PageService } from "test/mocks/services/PageService";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";

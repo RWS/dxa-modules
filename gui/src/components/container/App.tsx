@@ -51,7 +51,7 @@ export class App extends React.Component<IAppProps, {}> {
     };
 
     public getChildContext(): IAppContext {
-        const { services} = this.props;
+        const { services } = this.props;
         return {
             services: services
         };
