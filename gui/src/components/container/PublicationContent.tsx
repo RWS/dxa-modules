@@ -325,7 +325,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     <Breadcrumbs
                         publicationId={publicationId}
                         publicationTitle={publicationTitle || ""}
-                        loadItemsPath={(pubId, taxonomyId) => taxonomyService.getSitemapPath(pubId, pageId || "", taxonomyId)}
+                        loadItemsPath={taxonomyService.getSitemapPath.bind(taxonomyService)}
                         selectedItem={selectedTocItem}
                         />
                 </Page>
@@ -402,7 +402,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
             const firstSitemapId = pageInfo.sitemapIds[0];
             const taxonomyId = TcmId.getTaxonomyItemId(TaxonomyItemId.Toc, firstSitemapId) || firstSitemapId;
 
-            this._getActiveSitemapPath(taxonomyId, path => {
+            this._getActiveSitemapPath(pageInfo.id, taxonomyId, path => {
                 /* istanbul ignore if */
                 if (this._isUnmounted) {
                     return;
@@ -432,10 +432,9 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         });
     }
 
-    private _getActiveSitemapPath(sitemapId: string, done: (path: string[]) => void): void {
+    private _getActiveSitemapPath(pageId: string, sitemapId: string, done: (path: string[]) => void): void {
         const { services } = this.context;
-        const { publicationId, pageIdOrPublicationTitle } = this.props.params;
-        const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
+        const { publicationId } = this.props.params;
 
         if (pageId) {
             services.taxonomyService.getSitemapPath(publicationId, pageId, sitemapId).then(
