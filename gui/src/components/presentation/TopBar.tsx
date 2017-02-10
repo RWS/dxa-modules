@@ -30,10 +30,8 @@ export interface ITopBarProps {
  */
 export const TopBar: React.StatelessComponent<ITopBarProps> = (props: ITopBarProps, context: IAppContext): JSX.Element => {
 
-    const { getDirection } = context.services.localizationService;
-
     return (
-        <div className={`sdl-dita-delivery-topbar ${getDirection()}`}>
+        <div className={"sdl-dita-delivery-topbar"}>
             <div className={"sdl-dita-delivery-nav-mask"} onClick={props.toggleNavigationMenu} />
             <header>
                 <div className={"sdl-dita-delivery-topbar-expand-nav"} onClick={props.toggleNavigationMenu} >

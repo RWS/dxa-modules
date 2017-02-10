@@ -64,10 +64,10 @@ export interface IContentNavigationProps {
  */
 export const ContentNavigation: React.StatelessComponent<IContentNavigationProps> = (props: IContentNavigationProps, context: IAppContext): JSX.Element => {
     const { navItems, activeNavItemId } = props;
-    const { formatMessage, getDirection } = context.services.localizationService;
+    const { formatMessage } = context.services.localizationService;
 
     return Array.isArray(navItems) && (navItems.length > 0) ? (
-        <nav className={`sdl-dita-delivery-content-navigation ${getDirection()}`}>
+        <nav className={"sdl-dita-delivery-content-navigation"}>
             <h3>{formatMessage("components.contentnavigation.title")}</h3>
             <ul>
                 {

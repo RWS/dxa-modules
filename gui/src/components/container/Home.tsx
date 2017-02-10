@@ -71,7 +71,7 @@ export class Home extends React.Component<{}, IHomeState> {
         // Only pages with publiction selected can have navigation menu button enabled
         const canHaveNavMenuButton = child && (child.props.params.publicationId !== undefined);
         return (
-            <div dir={getDirection()} className={"sdl-dita-delivery-app" + (canHaveNavMenuButton
+            <div className={getDirection() + " sdl-dita-delivery-app" + (canHaveNavMenuButton
                 ? " sdl-dita-delivery-app-nav" + (isNavOpen ? " open" : "")
                 : "")}>
                 <TopBar

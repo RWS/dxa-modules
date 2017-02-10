@@ -92,9 +92,9 @@ export class PublicationsList extends React.Component<{}, IPublicationsListState
      */
     public render(): JSX.Element {
         const { publications, error } = this.state;
-        const { formatMessage, getDirection } = this.context.services.localizationService;
+        const { formatMessage } = this.context.services.localizationService;
         return (
-            <section className={`sdl-dita-delivery-publications-list ${getDirection()}`}>
+            <section className={"sdl-dita-delivery-publications-list"}>
                 <h1>{formatMessage("app.publications")}</h1>
                 <nav>
                     {

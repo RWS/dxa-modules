@@ -286,7 +286,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         const tocError = this._toc.error;
 
         return (
-            <section className={`sdl-dita-delivery-publication-content ${localizationService.getDirection()}`}>
+            <section className={"sdl-dita-delivery-publication-content"}>
                 <SearchBar
                     placeholderLabel={localizationService.formatMessage("components.searchbar.placeholder", [publicationTitle || ""])}
                     onSearch={query => console.log(query)} />
