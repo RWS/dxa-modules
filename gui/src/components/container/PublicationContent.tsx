@@ -17,12 +17,6 @@ import { debounce } from "utils/Function";
 
 import "components/container/styles/PublicationContent";
 
-const FIXED_NAV_CLASS = "fixed-nav";
-/**
- * Sum of top and bottom margin of a panel
- */
-const PANEL_MARGIN = 64;
-
 /**
  * PublicationContent component props params
  *
@@ -468,46 +462,33 @@ export class PublicationContent extends React.Component<IPublicationContentProps
     }
 
     private _updatePanels(page: HTMLElement, toc: HTMLElement, contentNavigation: HTMLElement): void {
-        // Firefox needs document.documentElement, otherwise scrollTop value will be 0 all the time
-        // Chrome though needs document.body to work correctly
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-        const { sticksToTop } = Html.getFixedPanelInfo(scrollTop, 0, this._topOffset, PANEL_MARGIN);
-
-        if (toc) {
-            if (sticksToTop) {
-                toc.classList.add(FIXED_NAV_CLASS);
-            } else {
-                toc.classList.remove(FIXED_NAV_CLASS);
-            }
-        }
-
-        if (contentNavigation) {
-            if (sticksToTop) {
-                contentNavigation.classList.add(FIXED_NAV_CLASS);
-                // Set left position
-                if (page) {
+        /* istanbul ignore if */
+        if (!this._isUnmounted) {
+            if (contentNavigation) {
+                // We should position Content navigation relativelly to page content. If content navigation
+                // offset parent is different from page element, then we should re-apply positioning for nav
+                if (page !== contentNavigation.offsetParent) {
                     contentNavigation.style.left = (page.offsetLeft + page.clientWidth - contentNavigation.offsetWidth) + "px";
+                } else {
+                    contentNavigation.style.left = null;
                 }
-            } else {
-                contentNavigation.classList.remove(FIXED_NAV_CLASS);
-                contentNavigation.style.left = null;
-            }
 
-            // Update active title inside content navigation panel
-            const pageContent = page.querySelector(".page-content") as HTMLElement;
-            if (pageContent) {
-                const header = Html.getActiveHeader(document.body, pageContent, 0);
-                if (header && header !== this.state.activePageHeader) {
-                    this.setState({
-                        activePageHeader: header
-                    });
-                    debounce((): void => {
-                        // Make sure the active link is in view
-                        const activeLinkEl = contentNavigation.querySelector("li.active") as HTMLElement;
-                        if (activeLinkEl) {
-                            Html.scrollIntoView(contentNavigation, activeLinkEl);
-                        }
-                    })();
+                // Update active title inside content navigation panel
+                const pageContent = page.querySelector(".page-content") as HTMLElement;
+                if (pageContent) {
+                    const header = Html.getActiveHeader(document.body, pageContent, 0);
+                    if (header && header !== this.state.activePageHeader) {
+                        this.setState({
+                            activePageHeader: header
+                        });
+                        debounce((): void => {
+                            // Make sure the active link is in view
+                            const activeLinkEl = contentNavigation.querySelector("li.active") as HTMLElement;
+                            if (activeLinkEl) {
+                                Html.scrollIntoView(contentNavigation, activeLinkEl);
+                            }
+                        })();
+                    }
                 }
             }
         }

@@ -38,6 +38,7 @@ export const TopBar = (props: ITopBarProps) => {
                 <div className={"sdl-dita-delivery-topbar-logo"} title="SDL">
                     <IndexLink to="/" />
                 </div>
+                <div className={"spacer"} />
                 {children}
                 <div className={"sdl-dita-delivery-topbar-language"} >
                     <span />

@@ -1,9 +1,7 @@
 /* Graphene overwrites for the TopBar Control */
 
 @import (reference) "../../../theming/styles.less";
-
 @topBarHeight: 50px;
-
 .sdl-dita-delivery-topbar {
     width: 100%;
     height: @topBarHeight;
@@ -14,20 +12,25 @@
     line-height: @topBarHeight;
     position: fixed;
     z-index: 999;
-
     header {
-        display: table;
         max-width: @screenXl;
         margin: 0 auto;
         width: 100%;
         position: relative;
         border-spacing: 15px 0;
-
+        /* New layout */
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: space-between;
+        /* New layout */
         > * {
-            display: table-cell;
-            vertical-align: middle;
+            flex-grow: 0;
         }
-
+        .spacer {
+            flex-grow: 1;
+        }
         .sdl-dita-delivery-topbar-logo {
             .icon-company-logo();
             background-size: 46px 21px;
@@ -40,7 +43,6 @@
                 display: inline-block;
             }
         }
-
         .sdl-dita-delivery-topbar-language {
             text-align: right;
             span {
@@ -48,8 +50,7 @@
                 margin-right: 15px;
             }
         }
-
-        .sdl-dita-delivery-topbar-user{
+        .sdl-dita-delivery-topbar-user {
             width: 24px;
             span {
                 .icon-user(21px);
@@ -59,23 +60,18 @@
 }
 
 @media screen and (max-width: @screenSm) {
-
     .sdl-dita-delivery-topbar {
         header {
             border-spacing: 0;
-
             .sdl-dita-delivery-topbar-logo {
                 left: 15px;
             }
-
             .sdl-dita-delivery-topbar-language label {
                 display: none;
             }
-
             .sdl-dita-delivery-topbar-language {
                 width: 40px;
             }
-
             .sdl-dita-delivery-topbar-user {
                 padding-right: 15px;
             }
