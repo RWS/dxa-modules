@@ -61,6 +61,5 @@ export const ErrorContent: React.StatelessComponent<IErrorContentProps> = (props
 };
 
 ErrorContent.contextTypes = {
-    services: React.PropTypes.object.isRequired,
-    router: React.PropTypes.object.isRequired
+    services: React.PropTypes.object.isRequired
 } as React.ValidationMap<IAppContext>;
