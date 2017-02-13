@@ -425,13 +425,18 @@ export class PublicationContent extends React.Component<IPublicationContentProps
     }
 
     private _onPageContentRetrievFailed(error: string): void {
+        const { publicationId } = this.props.params;
+        const { isTocLoading } = this.state;
         const page = this._page;
         page.error = error;
         page.content = null;
-        this._toc.rootItems = [];
+
+        if (publicationId && isTocLoading) {
+            this._loadTocRootItems(publicationId);
+        }
+
         this.setState({
-            isPageLoading: false,
-            isTocLoading: false
+            isPageLoading: false
         });
     }
 
