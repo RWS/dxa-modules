@@ -464,15 +464,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
     private _updatePanels(page: HTMLElement, toc: HTMLElement, contentNavigation: HTMLElement): void {
         /* istanbul ignore if */
         if (!this._isUnmounted) {
-            if (contentNavigation) {
-                // We should position Content navigation relativelly to page content. If content navigation
-                // offset parent is different from page element, then we should re-apply positioning for nav
-                if (page !== contentNavigation.offsetParent) {
-                    contentNavigation.style.left = (page.offsetLeft + page.clientWidth - contentNavigation.offsetWidth) + "px";
-                } else {
-                    contentNavigation.style.left = null;
-                }
-
+            if (contentNavigation && page) {
                 // Update active title inside content navigation panel
                 const pageContent = page.querySelector(".page-content") as HTMLElement;
                 if (pageContent) {

@@ -27,6 +27,13 @@
         /* New layout */
         > * {
             flex-grow: 0;
+            margin-right: 15px;
+            &:first-child {
+                margin-left: 15px;
+            }
+            span {
+                margin-right: 5px;
+            }
         }
         .spacer {
             flex-grow: 1;
@@ -47,7 +54,6 @@
             text-align: right;
             span {
                 .icon-language(21px);
-                margin-right: 15px;
             }
         }
         .sdl-dita-delivery-topbar-user {
@@ -62,18 +68,11 @@
 @media screen and (max-width: @screenSm) {
     .sdl-dita-delivery-topbar {
         header {
-            border-spacing: 0;
             .sdl-dita-delivery-topbar-logo {
-                left: 15px;
+                margin-left: 0;
             }
             .sdl-dita-delivery-topbar-language label {
                 display: none;
-            }
-            .sdl-dita-delivery-topbar-language {
-                width: 40px;
-            }
-            .sdl-dita-delivery-topbar-user {
-                padding-right: 15px;
             }
         }
     }

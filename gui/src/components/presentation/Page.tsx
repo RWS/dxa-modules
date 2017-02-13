@@ -164,7 +164,9 @@ export class Page extends React.Component<IPageProps, IPageState> {
                 {props.showActivityIndicator ? <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} /> : null}
                 {props.error ? <ValidationMessage messageType={ValidationMessageType.Error} message={props.error} /> : null}
                 {props.children}
-                <ContentNavigation navItems={navItems} activeNavItemId={activeNavItemId} />
+                <div className={"sdl-dita-delivery-content-navigation-wrapper"}>
+                    <ContentNavigation navItems={navItems} activeNavItemId={activeNavItemId} />
+                </div>
                 <article>
                     <article className={"page-content ltr"} dangerouslySetInnerHTML={{ __html: props.content || "" }} />
                 </article>

@@ -38,12 +38,43 @@ export interface IHomeState {
      * @type {Boolean}
      */
     sticksToTop?: Boolean;
+
+    /**
+     * Title of the current search
+     *
+     * @type {string}
+     */
+    searchTitle?: string;
+
+    /**
+     * Selected publication Id
+     *
+     * @type {string}
+     */
+    publicationId?: string;
+}
+
+/**
+ * Home props
+ *
+ * @export
+ * @interface IHomeProps
+ */
+export interface IHomeProps {
+
+    /**
+     * Children
+     *
+     * @type {React.ReactNode}
+     * @memberOf INavigationMenuProps
+     */
+    children?: React.ReactNode;
 }
 
 /**
  * Main component for the application
  */
-export class Home extends React.Component<{}, IHomeState> {
+export class Home extends React.Component<IHomeProps, IHomeState> {
 
     public static contextTypes: React.ValidationMap<IAppContext> = {
         services: React.PropTypes.object.isRequired,
@@ -72,7 +103,7 @@ export class Home extends React.Component<{}, IHomeState> {
      * Invoked once, both on the client and server, immediately before the initial rendering occurs.
      */
     public componentWillMount(): void {
-        const { router} = this.context;
+        const { router } = this.context;
 
         if (router) {
             this._historyUnlisten = router.listen(this._onNavigated.bind(this));
@@ -90,20 +121,61 @@ export class Home extends React.Component<{}, IHomeState> {
     }
 
     /**
+     * Invoked immediately before rendering when new props or state are being received.
+     * This method is not called for the initial render.
+     *
+     * @param {IHomeProps} nextProps Next props
+     * @param {IHomeState} nextState Next state
+     */
+    public componentWillUpdate(nextProps: IHomeProps, nextState: IHomeState): void {
+        const { publicationService, localizationService } = this.context.services;
+        const { publicationId } = this.state;
+
+        const child = nextProps.children as React.ReactElement<IPublicationContentProps>;
+        const nextPublicationId = child.props.params.publicationId;
+
+        if (nextPublicationId !== publicationId) {
+            if (nextPublicationId) {
+                // Get publication title
+                publicationService.getPublicationTitle(nextPublicationId).then(
+                    title => {
+                        /* istanbul ignore else */
+                        if (!this._isUnmounted) {
+                            this.setState({
+                                publicationId: nextPublicationId,
+                                searchTitle: localizationService.formatMessage("components.searchbar.publication.placeholder", [title || ""])
+                            });
+                        }
+                    },
+                    error => {
+                        /* istanbul ignore else */
+                        if (!this._isUnmounted) {
+                            // TODO: improve error handling
+                            this.setState({
+                                searchTitle: error
+                            });
+                        }
+                    });
+            } else {
+                this.setState({
+                    publicationId: nextPublicationId,
+                    searchTitle: localizationService.formatMessage("components.searchbar.placeholder", [""])
+                });
+            }
+        }
+    }
+
+    /**
      * Render the component
      *
      * @returns {JSX.Element}
      */
     public render(): JSX.Element {
         const { localizationService } = this.context.services;
-        const { isNavOpen, isSearchOpen, sticksToTop } = this.state;
+        const { isNavOpen, isSearchOpen, sticksToTop, searchTitle, publicationId } = this.state;
         const { children } = this.props;
 
-        const child = children as React.ReactElement<IPublicationContentProps>;
-
-        // Only pages with publiction selected can have navigation menu button enabled
-        const publicationTitle = child && child.props.params.publicationTitle;
-        const hasPublication = !!publicationTitle;
+        const hasPublication = publicationId !== undefined;
 
         let rootClasses = ["sdl-dita-delivery-app"];
         if (sticksToTop) {
@@ -132,11 +204,7 @@ export class Home extends React.Component<{}, IHomeState> {
                     </div>
                 </TopBar>
                 <SearchBar
-                    placeholderLabel={
-                        hasPublication
-                            ? localizationService.formatMessage("components.searchbar.publication.placeholder", [publicationTitle || ""])
-                            : localizationService.formatMessage("components.searchbar.placeholder", [""])
-                    }
+                    placeholderLabel={searchTitle || ""}
                     onSearch={query => console.log(query)} />
                 {children}
             </div >

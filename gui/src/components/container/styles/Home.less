@@ -1,6 +1,5 @@
 @import (reference) "../../../theming/styles.less";
 @import (reference) "../../presentation/styles/TopBar.less";
-@navBarWidth: 50px;
 @navBarHeight: 50px;
 @searchBarHeight: 150px;
 .sdl-dita-delivery-app {
@@ -15,13 +14,13 @@
         z-index: 1005;
     }
     .sdl-dita-delivery-topbar-expand-nav {
-        width: @navBarWidth;
-        left: 0;
-        position: absolute;
         display: none;
+        margin: 0 15px;
         span {
-            margin: 0 15px;
             .icon-hamburger(21px);
+        }
+        &:hover {
+            cursor: pointer;
         }
     }
     .sdl-dita-delivery-topbar-expand-search {
@@ -29,6 +28,9 @@
         span {
             .icon-search(21px);
             margin-right: 15px;
+        }
+        &:hover {
+            cursor: pointer;
         }
     }
     .sdl-dita-delivery-searchbar {
@@ -46,6 +48,9 @@
                 height: 100%;
                 nav.sdl-dita-delivery-toc {
                     /*Calc of parent height minus margins*/
+                    /*  HACK: As a correct behaviour we should use max-height here,
+                        but Chrome is not taking calc() values into account in this case*/
+                    // max-height: ~"calc(100% - 64px)";
                     height: ~"calc(100% - 64px)";
                 }
             }
@@ -78,6 +83,9 @@
             .sdl-dita-delivery-page {
                 .sdl-dita-delivery-navigation-menu {
                     nav.sdl-dita-delivery-toc {
+                        /*  HACK: As a correct behaviour we should use max-height here,
+                            but Chrome is not taking calc() values into account in this case*/
+                        // max-height: ~"calc(100% - 64px - @{navBarHeight})";
                         height: ~"calc(100% - 64px - @{navBarHeight})";
                         .separator {
                             position: fixed;
@@ -109,6 +117,9 @@
                 .sdl-dita-delivery-page {
                     .sdl-dita-delivery-navigation-menu {
                         nav.sdl-dita-delivery-toc {
+                            /*  HACK: As a correct behaviour we should use max-height here,
+                                but Chrome is not taking calc() values into account in this case*/
+                            // max-height: ~"calc(100% - 64px - (@{searchBarHeight} + @{navBarHeight}))";
                             height: ~"calc(100% - 64px - (@{searchBarHeight} + @{navBarHeight}))";
                             .separator {
                                 top: @searchBarHeight + @navBarHeight;
@@ -143,16 +154,8 @@
         }
         .sdl-dita-delivery-topbar {
             .sdl-dita-delivery-topbar-expand-nav {
-                display: table-cell;
-                &:hover {
-                    cursor: pointer;
-                }
-            }
-            .sdl-dita-delivery-topbar-expand-nav {
+                display: block;
                 order: -1;
-            }
-            .sdl-dita-delivery-topbar-logo {
-                left: @navBarWidth;
             }
         }
         .sdl-dita-delivery-publication-content {

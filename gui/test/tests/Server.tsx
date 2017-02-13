@@ -69,7 +69,9 @@ class Server extends TestBase {
                                         </li>
                                     </ul>
                                 </div>
-                                <nav className="sdl-dita-delivery-content-navigation"></nav>
+                                <div className="sdl-dita-delivery-content-navigation-wrapper">
+                                    <nav className="sdl-dita-delivery-content-navigation"></nav>
+                                </div>
                                 <article>
                                     <article className="page-content ltr"></article>
                                 </article>
