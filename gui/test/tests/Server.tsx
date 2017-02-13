@@ -43,14 +43,13 @@ class Server extends TestBase {
                                     <a href="#/"></a>
                                 </div>
                                 <div className="spacer"></div>
-                                <div className="sdl-dita-delivery-topbar-expand-nav"><span></span></div>
                                 <div className="sdl-dita-delivery-topbar-expand-search"><span></span></div>
                                 <div className="sdl-dita-delivery-topbar-language"><span></span><label>English</label></div>
                                 <div className="sdl-dita-delivery-topbar-user"><span></span></div>
                             </header>
                         </div>
                         <div className="sdl-dita-delivery-searchbar">
-                            <div className="input-area"><input type="text" placeholder="Search in ‘publication’" />
+                            <div className="input-area"><input type="text" placeholder="" />
                                 <div className="search-button"></div>
                             </div>
                         </div>

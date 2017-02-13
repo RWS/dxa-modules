@@ -35,7 +35,7 @@ class HomeComponent extends TestBase {
 
             it("show loading indicator on initial render", (): void => {
                 services.pageService.fakeDelay(true);
-                const app = this._renderComponent(target);
+                const app = this._renderComponent(target, "ish:123-1-1");
                 // tslint:disable-next-line:no-any
                 const activityIndicators = TestUtils.scryRenderedComponentsWithType(app, ActivityIndicator as any);
                 // One indicator for the toc, one for the page
@@ -43,13 +43,13 @@ class HomeComponent extends TestBase {
             });
 
             it("shows an error message in the search bar when the publication title failed to load", (done: () => void): void => {
-                const errorMessage = "Page title is invalid!";
+                const errorMessage = "Publication title is invalid!";
                 services.publicationService.setMockDataPublication(errorMessage);
-                const app = this._renderComponent(target);
+                const app = this._renderComponent(target, "ish:123-1-1");
+                const homeNode = ReactDOM.findDOMNode(app);
 
                 // Use a timeout to allow the DataStore to return a promise with the data
                 setTimeout((): void => {
-                    const homeNode = ReactDOM.findDOMNode(app);
                     expect(homeNode.querySelector(".sdl-dita-delivery-searchbar input").getAttribute("placeholder")).toContain(errorMessage);
                     done();
                 }, 0);
@@ -57,16 +57,15 @@ class HomeComponent extends TestBase {
         });
     }
 
-    private _renderComponent(target: HTMLElement): Home {
+    private _renderComponent(target: HTMLElement, pubId?: string): Home {
         return ReactDOM.render(
             (
                 <ComponentWithContext {...services}>
                     <Router history={hashHistory}>
-                        <Route path="*" component={() => (<Home><PublicationContent params={{ publicationId: "ish:123-1-1" }} /></Home>)} />
+                        <Route path="*" component={() => (<Home><PublicationContent params={{ publicationId: pubId || "" }} /></Home>)} />
                     </Router>
                 </ComponentWithContext>
-            )
-            , target) as Home;
+            ), target) as Home;
     }
 }
 

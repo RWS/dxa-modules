@@ -152,6 +152,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
                         if (!this._isUnmounted) {
                             // TODO: improve error handling
                             this.setState({
+                                publicationId: nextPublicationId,
                                 searchTitle: error
                             });
                         }
