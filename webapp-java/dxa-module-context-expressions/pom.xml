@@ -84,6 +84,10 @@
             <groupId>com.sdl.dxa</groupId>
             <artifactId>dxa-tridion-provider</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.sdl.dxa</groupId>
+            <artifactId>dxa-dd4t-provider</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.dd4t</groupId>

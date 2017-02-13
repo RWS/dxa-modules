@@ -44,7 +44,7 @@ public class YouTubeVideo extends MediaItem {
     public MvcData getMvcData() {
         return MvcDataCreator.creator()
                 .fromQualifiedName("Core:Entity:YouTubeVideo")
-                .defaults(DefaultsMvcData.CORE_ENTITY)
+                .defaults(DefaultsMvcData.ENTITY)
                 .create();
     }
 

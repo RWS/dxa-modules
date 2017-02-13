@@ -166,7 +166,7 @@ public class MediaManagerDistribution extends EclItem {
     public MvcData getMvcData() {
         return MvcDataCreator.creator()
                 .fromQualifiedName("MediaManager:" + super.getDisplayTypeId())
-                .defaults(DefaultsMvcData.CORE_ENTITY)
+                .defaults(DefaultsMvcData.ENTITY)
                 .create();
     }
 

@@ -42,6 +42,6 @@ public class SearchItem extends AbstractEntityModel {
     public MvcData getMvcData() {
         return MvcDataCreator.creator()
                 .fromQualifiedName("Search:SearchItem")
-                .defaults(DefaultsMvcData.CORE_ENTITY).create();
+                .defaults(DefaultsMvcData.ENTITY).create();
     }
 }

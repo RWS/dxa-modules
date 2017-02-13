@@ -43,7 +43,7 @@ public class EclTest extends EclItem {
     public MvcData getMvcData() {
         return MvcDataCreator.creator()
                 .fromQualifiedName("Test:TestFlickrImage")
-                .defaults(DefaultsMvcData.CORE_ENTITY).create();
+                .defaults(DefaultsMvcData.ENTITY).create();
     }
 
     @Override
