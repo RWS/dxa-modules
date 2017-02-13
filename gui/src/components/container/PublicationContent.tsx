@@ -365,6 +365,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
 
     private _onTocSelectionChanged(sitemapItem: ITaxonomy, path: string[]): void {
         const { router } = this.context;
+        const { publicationTitle } = this.state;
 
         const updatedState: IPublicationContentState = {
             activeTocItemPath: path,
@@ -379,9 +380,15 @@ export class PublicationContent extends React.Component<IPublicationContentProps
             // Only navigate to pages which have a location
             const navPath = sitemapItem.url;
             if (navPath) {
-                // TODO: validate this after changes for KCWA-321
-                if (router.getCurrentLocation().pathname !== navPath) {
-                    router.push(navPath);
+                let url = navPath;
+                const parsedUrl = Url.parsePageUrl(url);
+                if (parsedUrl && (!parsedUrl.pageTitle || !parsedUrl.publicationTitle)) {
+                    // Use the title of the sitemap item instead of the page
+                    // When using dynamic link resolving these should actually be equal
+                    url = Url.getPageUrl(parsedUrl.publicationId, parsedUrl.pageId, publicationTitle, sitemapItem.title);
+                }
+                if (router.getCurrentLocation().pathname !== url) {
+                    router.push(url);
                 }
             }
         }
