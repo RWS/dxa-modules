@@ -50,6 +50,8 @@ namespace Sdl.Web.Modules.Core.Models
         public RichText Text { get; set; }
 
         [SemanticProperty("dateCreated")]
+        [SemanticProperty("m:dateCreated")]
+        [SemanticProperty("c:date")]
         public DateTime? Date { get; set; }
 
         public Location Location { get; set; }
