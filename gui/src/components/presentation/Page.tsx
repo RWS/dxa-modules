@@ -165,8 +165,8 @@ export class Page extends React.Component<IPageProps, IPageState> {
                 {props.error ? <ValidationMessage messageType={ValidationMessageType.Error} message={props.error} /> : null}
                 {props.children}
                 <ContentNavigation navItems={navItems} activeNavItemId={activeNavItemId} />
-                <article className="ltr">
-                    <article className={"page-content"} dangerouslySetInnerHTML={{ __html: props.content || "" }} />
+                <article>
+                    <article className={"page-content ltr"} dangerouslySetInnerHTML={{ __html: props.content || "" }} />
                 </article>
             </div >
         );
