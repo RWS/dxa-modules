@@ -1,4 +1,5 @@
 import * as React from "react";
+import { path } from "utils/Path";
 import { SearchBar } from "components/presentation/SearchBar";
 import { Error } from "components/presentation/Error";
 import { IAppContext } from "components/container/App";
@@ -33,7 +34,7 @@ export interface IErrorContentProps {
  */
 export const ErrorContent: React.StatelessComponent<IErrorContentProps> = (props: IErrorContentProps, context: IAppContext): JSX.Element => {
     const { formatMessage } = context.services.localizationService;
-    const _goHome = (): void => window.location.replace("/");
+    const _goHome = (): void => window.location.replace(path.getRootPath());
 
     const errorButtons = <div>
             <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{"click": _goHome}}>{formatMessage("components.breadcrumbs.home")}</Button>

@@ -2,6 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Html, IHeader } from "utils/Html";
 import { Url } from "utils/Url";
+import { path } from "utils/Path";
 import { ContentNavigation, IContentNavigationItem } from "components/presentation/ContentNavigation";
 import { ActivityIndicator, Button } from "sdl-controls-react-wrappers";
 import { ButtonPurpose } from "sdl-controls";
@@ -159,7 +160,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
         const { navItems } = this.state;
         const { formatMessage } = this.context.services.localizationService;
         const activeNavItemId = activeHeader ? activeHeader.id : (navItems.length > 0 ? navItems[0].id : undefined);
-        const _goHome = (): void => props.onNavigate("/");
+        const _goHome = (): void => props.onNavigate(path.getRootPath());
         const _retryHandler = () => url && props.onNavigate(url);
         const errorButtons = <div>
                 <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{"click": _goHome}}>{formatMessage("components.breadcrumbs.home")}</Button>
@@ -182,8 +183,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                             title={errorTitle}
                             messages={errorMessages}
                             buttons={errorButtons} />
-                        : null}
-                    <article className={"page-content ltr"} dangerouslySetInnerHTML={{ __html: props.content || "" }} />
+                        : <article className={"page-content ltr"} dangerouslySetInnerHTML={{ __html: props.content || "" }} />}
                 </article>
             </div >
         );
@@ -268,10 +268,10 @@ export class Page extends React.Component<IPageProps, IPageState> {
             const { navItems } = this.state;
             const { url } = this.props;
             const pageContentNode = domNode.querySelector(".page-content") as HTMLElement;
-            const headerLinks = Html.getHeaderLinks(pageContentNode).filter((item: IHeader) => {
+            const headerLinks = pageContentNode ? Html.getHeaderLinks(pageContentNode).filter((item: IHeader) => {
                 // We only need level 2 and 3 for items rendered in conten navigation
                 return (item.importancy == 2) || (item.importancy == 3);
-            });
+            }) : [];
             const updatedNavItems: IContentNavigationItem[] = headerLinks.map(item => {
                 return {
                     id: item.id,
