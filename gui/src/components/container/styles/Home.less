@@ -15,7 +15,7 @@
     }
     .sdl-dita-delivery-topbar-expand-nav {
         display: none;
-        margin: 0 15px;
+        margin: 0 0 0 15px;
         span {
             .icon-hamburger(21px);
         }
@@ -28,15 +28,17 @@
         span {
             .icon-search(21px);
             margin-right: 15px;
-        }
-        &:hover {
-            cursor: pointer;
+            &:hover {
+                cursor: pointer;
+            }
         }
     }
     .sdl-dita-delivery-searchbar {
         position: fixed;
         top: @searchBarHeight * -1;
-        transition: top .3s ease-out;
+        @media screen and (min-width: (1+@screenSm)) {
+            transition: top .3s ease-out;
+        }
     }
     .sdl-dita-delivery-publication-content {
         top: @navBarHeight;
@@ -73,8 +75,10 @@
         }
         &:not(.fixed-nav) {
             .sdl-dita-delivery-publication-content {
-                top: @searchBarHeight + @navBarHeight;
-                height: ~"calc(100% - (@{searchBarHeight} + @{navBarHeight}))";
+                @media screen and (min-width: (1+@screenSm)) {
+                    top: @searchBarHeight + @navBarHeight;
+                    height: ~"calc(100% - (@{searchBarHeight} + @{navBarHeight}))";
+                }
             }
         }
     }
@@ -150,6 +154,41 @@
             .sdl-dita-delivery-nav-mask {
                 opacity: .5;
                 display: block;
+            }
+        }
+        // Search panel is open
+        &.search-open {
+            .sdl-dita-delivery-topbar {
+                header > * {
+                    display: none
+                }
+                .sdl-dita-delivery-topbar-expand-search {
+                    display: inline-block;
+                    flex-grow: 5;
+                    margin: 0 15px;
+                    span {
+                        float: left;
+                        .icon-back(21px);
+                    }
+                }
+            }
+            .sdl-dita-delivery-searchbar {
+                transition: none;
+                background: none;
+                width: ~"calc(100% - 35px)";
+                height: 50px;
+                top: 0;
+                left: 35px;
+                z-index: 1000;
+                .input-area {
+                    margin-top: 0;
+                    input {
+                        .header-font(400, 18px, 18px);
+                    }
+                    .search-button {
+                        .icon-search(21px);
+                    }
+                }
             }
         }
         .sdl-dita-delivery-topbar {
