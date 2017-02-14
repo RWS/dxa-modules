@@ -7,7 +7,7 @@
         background: @neutralColor1;
         display: none;
         height: 100vh;
-        opacity: 0;
+        opacity: 0.5;
         position: fixed;
         top: 0;
         width: 100%;
@@ -82,7 +82,6 @@
             }
         }
         &.search-is-active {
-            overflow: hidden;
             .sdl-dita-delivery-nav-mask {
                 opacity: .5;
                 display: block;
@@ -95,10 +94,6 @@
             .sdl-dita-delivery-page {
                 .sdl-dita-delivery-navigation-menu {
                     nav.sdl-dita-delivery-toc {
-                        /*  HACK: As a correct behaviour we should use max-height here,
-                            but Chrome is not taking calc() values into account in this case*/
-                        // max-height: ~"calc(100% - 64px - @{navBarHeight})";
-                        height: ~"calc(100% - 64px - @{navBarHeight})";
                         .separator {
                             position: fixed;
                             top: @navBarHeight;
@@ -106,9 +101,12 @@
                         }
                         @media screen and (min-width: (1+@screenSm)) {
                             position: fixed;
-                            z-index: 999;
                             top: @navBarHeight;
                             transition: top .3s ease-out;
+                            /*  HACK: As a correct behaviour we should use max-height here,
+                            but Chrome is not taking calc() values into account in this case*/
+                            // max-height: ~"calc(100% - 64px - @{navBarHeight})";
+                            height: ~"calc(100% - 64px - @{navBarHeight})";
                         }
                     }
                 }
@@ -158,9 +156,7 @@
     .sdl-dita-delivery-app {
         // Table of content navigation is open
         &.open {
-            overflow: hidden;
             .sdl-dita-delivery-nav-mask {
-                opacity: .5;
                 display: block;
             }
         }

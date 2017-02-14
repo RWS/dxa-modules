@@ -18,30 +18,30 @@ export interface IHomeState {
     /**
      * if Nav panel is open
      *
-     * @type {Boolean}
+     * @type {boolean}
      */
-    isNavOpen?: Boolean;
+    isNavOpen?: boolean;
 
     /**
      * if search panel is open
      *
-     * @type {Boolean}
+     * @type {boolean}
      */
-    searchIsOpen?: Boolean;
+    searchIsOpen?: boolean;
 
     /**
      * if search panel is open
      *
-     * @type {Boolean}
+     * @type {boolean}
      */
-    searchIsActive?: Boolean;
+    searchIsActive?: boolean;
 
     /**
      * if page is scrolled
      *
-     * @type {Boolean}
+     * @type {boolean}
      */
-    sticksToTop?: Boolean;
+    sticksToTop?: boolean;
 
     /**
      * Title of the current search
@@ -89,6 +89,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
 
     private _historyUnlisten: () => void;
     private _isUnmounted: boolean = false;
+    private _preventBodyScroll: boolean = false;
 
     /**
      * Creates an instance of App.
@@ -185,11 +186,13 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
 
         const appClass = ClassNames({
             "sdl-dita-delivery-app": true,
-            "fixed-nav": (sticksToTop === true),
-            "open": ((hasPublication && isNavOpen) === true),
-            "search-open": (searchIsOpen === true),
-            "search-is-active": ((searchIsOpen && searchIsActive) === true)
+            "fixed-nav": sticksToTop,
+            "open": hasPublication && isNavOpen,
+            "search-open": searchIsOpen,
+            "search-is-active": searchIsOpen && searchIsActive
         });
+
+        this._preventBodyScroll = (hasPublication && isNavOpen) || (searchIsOpen && searchIsActive) || false;
 
         return (
             <div className={appClass}>
@@ -245,6 +248,16 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
                 }
             }
         }
+
+        // HACK: we should prevent scrolling when fade overlay is shown
+        if (document.body) {
+            if (this._preventBodyScroll) {
+                document.body.style.overflow = "hidden";
+            }
+            else {
+                document.body.style.removeProperty("overflow");
+            }
+        }
     }
 
     /**
@@ -254,6 +267,13 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
         this._isUnmounted = true;
         if (this._historyUnlisten) {
             this._historyUnlisten();
+        }
+
+        if (this._preventBodyScroll) {
+            this._preventBodyScroll = false;
+            if (document.body) {
+                document.body.style.removeProperty("overflow");
+            }
         }
 
         window.removeEventListener("scroll", this._onViewportChanged.bind(this));
