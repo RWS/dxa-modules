@@ -1,3 +1,4 @@
+import * as ClassNames from "classnames";
 import * as React from "react";
 import { IAppContext } from "components/container/App";
 import { TopBar } from "components/presentation/TopBar";
@@ -6,10 +7,6 @@ import { IPublicationContentProps } from "components/container/PublicationConten
 
 import "components/container/styles/App";
 import "components/container/styles/Home";
-
-const FIXED_NAV_CLASS = "fixed-nav";
-const SEARCH_OPEN_CLASS = "search-open";
-const NAV_PANEL_OPEN_CLASS = "open";
 
 /**
  * Home state
@@ -30,7 +27,14 @@ export interface IHomeState {
      *
      * @type {Boolean}
      */
-    isSearchOpen?: Boolean;
+    searchIsOpen?: Boolean;
+
+    /**
+     * if search panel is open
+     *
+     * @type {Boolean}
+     */
+    searchIsActive?: Boolean;
 
     /**
      * if page is scrolled
@@ -95,7 +99,8 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
         this.state = {
             isNavOpen: false,
             sticksToTop: false,
-            isSearchOpen: false
+            searchIsOpen: false,
+            searchIsActive: false
         };
     }
 
@@ -173,25 +178,22 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
      */
     public render(): JSX.Element {
         const { localizationService } = this.context.services;
-        const { isNavOpen, isSearchOpen, sticksToTop, searchTitle, publicationId } = this.state;
+        const { isNavOpen, searchIsOpen, searchIsActive, sticksToTop, searchTitle, publicationId } = this.state;
         const { children } = this.props;
 
         const hasPublication = publicationId !== undefined;
 
-        let rootClasses = ["sdl-dita-delivery-app"];
-        if (sticksToTop) {
-            rootClasses.push(FIXED_NAV_CLASS);
-        }
-        if (hasPublication && isNavOpen) {
-            rootClasses.push(NAV_PANEL_OPEN_CLASS);
-        }
-        if (isSearchOpen) {
-            rootClasses.push(SEARCH_OPEN_CLASS);
-        }
+        const appClass = ClassNames({
+            "sdl-dita-delivery-app": true,
+            "fixed-nav": (sticksToTop === true),
+            "open": ((hasPublication && isNavOpen) === true),
+            "search-open": (searchIsOpen === true),
+            "search-is-active": ((searchIsOpen && searchIsActive) === true)
+        });
 
         return (
-            <div className={rootClasses.join(" ")}>
-                <div className={"sdl-dita-delivery-nav-mask"} onClick={this._toggleNavigationMenu.bind(this)} />
+            <div className={appClass}>
+                <div className={"sdl-dita-delivery-nav-mask"} onClick={isNavOpen && this._toggleNavigationMenu.bind(this)} />
                 <TopBar
                     language={localizationService.formatMessage("app.language")}>
                     {
@@ -206,7 +208,21 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
                 </TopBar>
                 <SearchBar
                     placeholderLabel={searchTitle || ""}
-                    onSearch={query => console.log(query)} />
+                    onSearch={query => console.log(query)}
+                    onFocus={() => {
+                        if (!this._isUnmounted) {
+                            this.setState({
+                                searchIsActive: true
+                            });
+                        }
+                    } }
+                    onBlur={() => {
+                        if (!this._isUnmounted) {
+                            this.setState({
+                                searchIsActive: false
+                            });
+                        }
+                    } } />
                 {children}
             </div >
         );
@@ -264,11 +280,11 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
     }
 
     private _toggleSearchPanel(): void {
-        const { isSearchOpen } = this.state;
+        const { searchIsOpen } = this.state;
         /* istanbul ignore if */
         if (!this._isUnmounted) {
             this.setState({
-                isSearchOpen: !isSearchOpen
+                searchIsOpen: !searchIsOpen
             });
         }
     }
