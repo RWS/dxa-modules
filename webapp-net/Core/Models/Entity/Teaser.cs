@@ -54,6 +54,8 @@ namespace Sdl.Web.Modules.Core.Models
         [SemanticProperty("c:date")]
         public DateTime? Date { get; set; }
 
+        [SemanticProperty("p:location")]
+        [SemanticProperty("c:location")]
         public Location Location { get; set; }
 
         //To store formatting options for the teaser (link style etc.)
