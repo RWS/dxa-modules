@@ -1,11 +1,12 @@
 import { slugify } from "utils/Slug";
+import { path } from "utils/Path";
 
 /**
  * Regex to validate if a url is an item Url
  *
  * example: /1656863/164363/publication-mp330/speed-dialling
  */
-const ITEM_URL_REGEX = /^\/\d+\/\d+(\/([^\/]+(\/([^\/]+)?)?)?)?$/i;
+const ITEM_URL_REGEX = /^\/\d+\/\d+($|\/).*$/i;
 
 /**
  * Maximum characters for a title
@@ -31,7 +32,8 @@ export class Url {
      * @memberOf Url
      */
     public static getPublicationUrl(publicationId: string, publicationTitle?: string): string {
-        let url = `/${encodeURIComponent(publicationId)}`;
+        const rootPath = path.getRootPath();
+        let url = `${rootPath}${encodeURIComponent(publicationId)}`;
         if (publicationTitle) {
             url += `/${Url._processTitle(publicationTitle)}`;
         }
@@ -48,7 +50,13 @@ export class Url {
      * @memberOf Url
      */
     public static itemUrlIsValid(url?: string | null): boolean {
-        return (url && url.match(ITEM_URL_REGEX)) != null;
+        const rootPath = path.getRootPath();
+        if (url && url.indexOf(rootPath) === 0) {
+            // Remove root path
+            const withoutRoot = url ? url.substring(rootPath.length - 1) : "";
+            return withoutRoot.match(ITEM_URL_REGEX) !== null;
+        }
+        return false;
     }
 
     /**
@@ -65,8 +73,8 @@ export class Url {
      */
     public static getPageUrl(publicationId: string, pageId: string,
         publicationTitle?: string, pageTitle?: string): string {
-
-        let url = `/${encodeURIComponent(publicationId)}/${encodeURIComponent(pageId)}`;
+        const rootPath = path.getRootPath();
+        let url = `${rootPath}${encodeURIComponent(publicationId)}/${encodeURIComponent(pageId)}`;
         if (publicationTitle) {
             url += `/${Url._processTitle(publicationTitle)}`;
             if (pageTitle) {
@@ -90,6 +98,32 @@ export class Url {
     public static getAnchorUrl(pageUrl: string, anchorId: string): string {
         // Don't slugify the anchor as we need to be able to look it up again in the document
         return `${pageUrl}/${encodeURIComponent(anchorId)}`;
+    }
+
+    /**
+     * Parse a page url
+     * Format of a page url is "<context><pub-id>/<page-id>/<publication-title>/<page-title>"
+     *
+     * @static
+     * @param {string} url Url to parse
+     * @param {string} [rootPath] Root path of the application
+     * @returns {({ publicationId: string, pageId: string, publicationTitle?: string, pageTitle?: string } | undefined)}
+     * Returns an object with the different parameter values for the page url. If the url is not correct undefined is returned.
+     *
+     * @memberOf Url
+     */
+    public static parsePageUrl(url: string, rootPath?: string): { publicationId: string, pageId: string, publicationTitle?: string, pageTitle?: string } | undefined {
+        const rootPathValue = rootPath || path.getRootPath();
+        const parts = url.substring(rootPathValue.length).split("/");
+        if (parts.length >= 2) {
+            return {
+                publicationId: parts[0],
+                pageId: parts[1],
+                publicationTitle: parts[2],
+                pageTitle: parts[3]
+            };
+        }
+        return undefined;
     }
 
     private static _processTitle(title: string): string {

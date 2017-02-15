@@ -1,0 +1,19 @@
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k7",
+        "Title": "בירה ובריאות",
+        "Url": "/app/1849903/1845599/%d7%91%d7%99%d7%a8%d7%94/%d7%91%d7%99%d7%a8%d7%94-%d7%95%d7%91%d7%a8%d7%99%d7%90%d7%95%d7%aa",
+        "IsAbstract": false,
+        "HasChildNodes": false,
+        "Items": []
+      }
+    ]
+  }
+]

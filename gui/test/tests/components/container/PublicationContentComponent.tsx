@@ -117,7 +117,7 @@ class PublicationContentComponent extends TestBase {
                         id: "2",
                         title: "Second element",
                         hasChildNodes: false,
-                        url: `/${encodeURIComponent(PUBLICATION_ID)}/mp330/second-el-url`
+                        url: `/${encodeURIComponent(PUBLICATION_ID)}/12345/mp330/second-el-url`
                     }
                 ]);
                 const publicationContent = this._renderComponent(target);
@@ -125,7 +125,7 @@ class PublicationContentComponent extends TestBase {
                 // Spy on the router
                 spyOn(publicationContent.context.router, "push").and.callFake((path: string): void => {
                     // Check if routing was called with correct params
-                    expect(path).toBe(`/${encodeURIComponent(PUBLICATION_ID)}/mp330/second-el-url`);
+                    expect(path).toBe(`/${encodeURIComponent(PUBLICATION_ID)}/12345/mp330/second-el-url`);
 
                     // A page load was triggered by changing the selected item in the Toc
                     const page = TestUtils.findRenderedComponentWithType(publicationContent, Page);
@@ -197,7 +197,6 @@ class PublicationContentComponent extends TestBase {
                 // Wait for the tree view to select the first node
                 // Treeview uses debouncing for node selection so a timeout is required
                 setTimeout((): void => {
-                    debugger;
                     // tslint:disable-next-line:no-any
                     const activityIndicators = TestUtils.scryRenderedComponentsWithType(publicationContent, ActivityIndicator as any);
                     expect(activityIndicators.length).toBe(0, "Activity indicator should not be rendered.");

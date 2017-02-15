@@ -1,8 +1,19 @@
-{
-  "Id": "t1-k2",
-  "Title": "Dear Customer",
-  "Url": "/1420746/164223/publication-mp330/dear-customer",
-  "IsAbstract": false,
-  "HasChildNodes": false,
-  "Items": []
-}
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k2",
+        "Title": "Dear Customer",
+        "Url": "/app/1420746/164223/user-guide/dear-customer",
+        "IsAbstract": false,
+        "HasChildNodes": false,
+        "Items": []
+      }
+    ]
+  }
+]

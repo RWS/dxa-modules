@@ -2,7 +2,7 @@
   {
     "Id": "t1-k2",
     "Title": "Geachte klant",
-    "Url": "/1881665/164225/publication-mp330/geachte-klant",
+    "Url": "/app/1881665/164225/user-guide/geachte-klant",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -10,7 +10,7 @@
   {
     "Id": "t1-k3",
     "Title": "Voor uw veiligheid",
-    "Url": "/1881665/164249/publication-mp330/voor-uw-veiligheid",
+    "Url": "/app/1881665/164249/user-guide/voor-uw-veiligheid",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -18,7 +18,7 @@
   {
     "Id": "t1-k4",
     "Title": "De telefoon",
-    "Url": "/1881665/164233/publication-mp330/de-telefoon",
+    "Url": "/app/1881665/164233/user-guide/de-telefoon",
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -26,7 +26,7 @@
   {
     "Id": "t1-k12",
     "Title": "Aan de slag",
-    "Url": "/1881665/164400/publication-mp330/aan-de-slag",
+    "Url": "/app/1881665/164400/user-guide/aan-de-slag",
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -34,7 +34,7 @@
   {
     "Id": "t1-k16",
     "Title": "Algemene functies",
-    "Url": "/1881665/164470/publication-mp330/algemene-functies",
+    "Url": "/app/1881665/164470/user-guide/algemene-functies",
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -42,7 +42,7 @@
   {
     "Id": "t1-k21",
     "Title": "Berichten",
-    "Url": "/1881665/164481/publication-mp330/berichten",
+    "Url": "/app/1881665/164481/user-guide/berichten",
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -50,7 +50,7 @@
   {
     "Id": "t1-k26",
     "Title": "Spelletjes",
-    "Url": "/1881665/164241/publication-mp330/spelletjes",
+    "Url": "/app/1881665/164241/user-guide/spelletjes",
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -58,7 +58,7 @@
   {
     "Id": "t1-k32",
     "Title": "Muziekfuncties",
-    "Url": "/1881665/164373/publication-mp330/muziekfuncties",
+    "Url": "/app/1881665/164373/user-guide/muziekfuncties",
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -66,7 +66,7 @@
   {
     "Id": "t1-k35",
     "Title": "Telefoonlijst",
-    "Url": "/1881665/164303/publication-mp330/telefoonlijst",
+    "Url": "/app/1881665/164303/user-guide/telefoonlijst",
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []

@@ -1,9 +1,7 @@
 {
   "Id": "164434",
   "Meta": {
-    "tocnaventries.generated.value": [
-      "ish:1961700-9-1024"
-    ]
+    "tocnaventries.generated.value": "ish:1961700-9-1024"
   },
   "Regions": [
     {
@@ -14,7 +12,7 @@
           "topicBody": {
             "Fragments": [
               {
-                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-ECE240B0-00BD-4371-AB26-E5AA627FF527__GUID-26F149AC-433E-4440-892A-E356163E548A\" xmlns=\"http://www.w3.org/1999/xhtml\">Bildschirmschoner</h1>\n      \n      \n      \n      <div class=\"body conbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">Das Telefon aktiviert in der Ausgangsanzeige automatisch den Bildschirmschoner in Form einer Digitaluhr, um den Akkuverbrauch\n            zu reduzieren.\n         </p>\n         \n         \n         <p class=\"p\">Er wird nach einer bestimmten Zeitdauer aktiviert, wenn keine der Telefonfunktionen verwendet wurde. Drücken Sie eine beliebige\n            Taste, um den Bildschirmschoner zu deaktivieren. Der Bildschirmschoner wird auch deaktiviert, wenn sich das Telefon außerhalb\n            des Netzbereichs befindet.\n         </p>\n         \n         \n         <p class=\"p\">Beachten Sie, dass der Bildschirmschoner alle Grafiken und Texte der Ausgangsanzeige ausblendet.</p>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Übergeordnetes Thema:</strong> <a class=\"link\" href=\"/1961700/164229/publication-mp330/ihr-telefon\">Ihr Telefon</a></div>\n            \n         </div>\n         \n      </div>\n   "
+                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-ECE240B0-00BD-4371-AB26-E5AA627FF527__GUID-26F149AC-433E-4440-892A-E356163E548A\" xmlns=\"http://www.w3.org/1999/xhtml\">Bildschirmschoner</h1>\n      \n      \n      \n      <div class=\"body conbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">Das Telefon aktiviert in der Ausgangsanzeige automatisch den Bildschirmschoner in Form einer Digitaluhr, um den Akkuverbrauch\n            zu reduzieren.\n         </p>\n         \n         \n         <p class=\"p\">Er wird nach einer bestimmten Zeitdauer aktiviert, wenn keine der Telefonfunktionen verwendet wurde. Drücken Sie eine beliebige\n            Taste, um den Bildschirmschoner zu deaktivieren. Der Bildschirmschoner wird auch deaktiviert, wenn sich das Telefon außerhalb\n            des Netzbereichs befindet.\n         </p>\n         \n         \n         <p class=\"p\">Beachten Sie, dass der Bildschirmschoner alle Grafiken und Texte der Ausgangsanzeige ausblendet.</p>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Übergeordnetes Thema:</strong> <a class=\"link\" href=\"/app/1961700/164229/user-guide/ihr-telefon\">Ihr Telefon</a></div>\n            \n         </div>\n         \n      </div>\n   "
               }
             ]
           }

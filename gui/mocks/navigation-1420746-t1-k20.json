@@ -1,17 +1,28 @@
-{
-  "Id": "t1-k16",
-  "Title": "Call functions",
-  "Url": "/1420746/164468/publication-mp330/call-functions",
-  "IsAbstract": false,
-  "HasChildNodes": true,
-  "Items": [
-    {
-      "Id": "t1-k20",
-      "Title": "Answering or rejecting a call",
-      "Url": "/1420746/164195/publication-mp330/answering-or-rejecting-a-call",
-      "IsAbstract": false,
-      "HasChildNodes": false,
-      "Items": []
-    }
-  ]
-}
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k16",
+        "Title": "Call functions",
+        "Url": "/app/1420746/164468/user-guide/call-functions",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": [
+          {
+            "Id": "t1-k20",
+            "Title": "Answering or rejecting a call",
+            "Url": "/app/1420746/164195/user-guide/answering-or-rejecting-a-call",
+            "IsAbstract": false,
+            "HasChildNodes": false,
+            "Items": []
+          }
+        ]
+      }
+    ]
+  }
+]

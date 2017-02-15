@@ -1,8 +1,19 @@
-{
-  "Id": "t1-k32",
-  "Title": "Muziekfuncties",
-  "Url": "/1881665/164373/publication-mp330/muziekfuncties",
-  "IsAbstract": false,
-  "HasChildNodes": true,
-  "Items": []
-}
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k32",
+        "Title": "Muziekfuncties",
+        "Url": "/app/1881665/164373/user-guide/muziekfuncties",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": []
+      }
+    ]
+  }
+]

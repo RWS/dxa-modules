@@ -1,26 +1,37 @@
-{
-  "Id": "t1-k17",
-  "Title": "Types of penguins",
-  "Url": "/1601084/516000/penguin-publication/types-of-penguins",
-  "IsAbstract": false,
-  "HasChildNodes": true,
-  "Items": [
-    {
-      "Id": "t1-k34",
-      "Title": "Eudyptes (Crested penguins)",
-      "Url": "/1601084/516875/penguin-publication/eudyptes--crested-penguins-",
-      "IsAbstract": false,
-      "HasChildNodes": true,
-      "Items": [
-        {
-          "Id": "t1-k36",
-          "Title": "Snares Penguin (Eudyptes robustus)",
-          "Url": "/1601084/516560/penguin-publication/snares-penguin--eudyptes-robustus-",
-          "IsAbstract": false,
-          "HasChildNodes": false,
-          "Items": []
-        }
-      ]
-    }
-  ]
-}
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k17",
+        "Title": "Types of penguins",
+        "Url": "/app/1601084/516000/penguin-guide/types-of-penguins",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": [
+          {
+            "Id": "t1-k34",
+            "Title": "Eudyptes (Crested penguins)",
+            "Url": "/app/1601084/516875/penguin-guide/eudyptes--crested-penguins-",
+            "IsAbstract": false,
+            "HasChildNodes": true,
+            "Items": [
+              {
+                "Id": "t1-k36",
+                "Title": "Snares Penguin (Eudyptes robustus)",
+                "Url": "/app/1601084/516560/penguin-guide/snares-penguin--eudyptes-robustus-",
+                "IsAbstract": false,
+                "HasChildNodes": false,
+                "Items": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

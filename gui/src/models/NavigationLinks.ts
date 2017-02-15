@@ -2,6 +2,8 @@ import { ISitemapItem } from "interfaces/ServerModels";
 import { ITaxonomy } from "interfaces/Taxonomy";
 import { Api } from "utils/Api";
 import { Net, IWebRequest, LoadableObject } from "sdl-models";
+import { Url } from "utils/Url";
+import { localization } from "services/common/LocalizationService";
 
 /**
  * Navigation links model
@@ -13,6 +15,7 @@ import { Net, IWebRequest, LoadableObject } from "sdl-models";
 export class NavigationLinks extends LoadableObject {
 
     private _publicationId: string;
+    private _pageId: string;
     private _taxonomyId: string;
     private _path: ITaxonomy[] = [];
 
@@ -20,13 +23,15 @@ export class NavigationLinks extends LoadableObject {
      * Creates an instance of NavigationLinks.
      *
      * @param {string} publicationId Publication id
+     * @param {string} pageId Page id
      * @param {string} taxonomyId Taxonomy id
      *
      * @memberOf NavigationLinks
      */
-    constructor(publicationId: string, taxonomyId: string) {
+    constructor(publicationId: string, pageId: string, taxonomyId: string) {
         super();
         this._publicationId = publicationId;
+        this._pageId = pageId;
         this._taxonomyId = taxonomyId;
     }
 
@@ -51,31 +56,48 @@ export class NavigationLinks extends LoadableObject {
     protected _processLoadResult(result: string, webRequest: IWebRequest): void {
         this._path = this._calculatePath(JSON.parse(result));
 
+        // Validate if the path is pointing to the actual page
+        const lastItemInPath = this._path[this._path.length - 1];
+        if (lastItemInPath && lastItemInPath.url) {
+            const parsedUrl = Url.parsePageUrl(lastItemInPath.url);
+            if (parsedUrl && parsedUrl.pageId !== this._pageId) {
+                const errorMessage = localization.formatMessage("error.unable.to.locate.page.in.toc", [this._pageId]);
+                super._onLoadFailed(errorMessage, null);
+                return;
+            }
+        }
+
         super._processLoadResult(result, webRequest);
     }
 
-    private _calculatePath(navigationLinks: ISitemapItem): ITaxonomy[] {
+    private _calculatePath(navigationLinks: ISitemapItem[]): ITaxonomy[] {
         const path: ITaxonomy[] = [];
-        let items: ISitemapItem[] = navigationLinks.Items;
-        if (navigationLinks.Id) {
-            path.push({
-                id: navigationLinks.Id,
-                title: navigationLinks.Title,
-                url: navigationLinks.Url,
-                hasChildNodes: navigationLinks.HasChildNodes
-            });
-        }
-        while (items && items.length > 0) {
-            const firstItem = items[0];
-            items = firstItem.Items;
-            /* istanbul ignore else */
-            if (firstItem.Id) {
-                path.push({
-                    id: firstItem.Id,
-                    title: firstItem.Title,
-                    url: firstItem.Url,
-                    hasChildNodes: firstItem.HasChildNodes
-                });
+        if (navigationLinks && navigationLinks.length > 0) {
+            let items: ISitemapItem[] = navigationLinks[0].Items;
+            while (items && items.length > 0) {
+                for (const item of items) {
+                    if (item.Id && item.Id === this._taxonomyId) {
+                        path.push({
+                            id: item.Id,
+                            title: item.Title,
+                            url: item.Url,
+                            hasChildNodes: item.HasChildNodes
+                        });
+                        return path;
+                    }
+                    // If there is a child which has child items the node is nested in a deeper level
+                    // No need to loop over the entire collection
+                    if (item.Items.length > 0) {
+                        path.push({
+                            id: item.Id,
+                            title: item.Title,
+                            url: item.Url,
+                            hasChildNodes: item.HasChildNodes
+                        });
+                        items = item.Items;
+                        break;
+                    }
+                }
             }
         }
         return path;

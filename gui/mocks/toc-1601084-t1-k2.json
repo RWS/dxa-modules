@@ -2,7 +2,7 @@
   {
     "Id": "t1-k3",
     "Title": "General Introduction",
-    "Url": "/1601084/516320/penguin-publication/general-introduction",
+    "Url": "/app/1601084/516320/penguin-guide/general-introduction",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -10,7 +10,7 @@
   {
     "Id": "t1-k4",
     "Title": "Etymology",
-    "Url": "/1601084/517008/penguin-publication/etymology",
+    "Url": "/app/1601084/517008/penguin-guide/etymology",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -18,7 +18,7 @@
   {
     "Id": "t1-k5",
     "Title": "Systematics and evolution",
-    "Url": "/1601084/516088/penguin-publication/systematics-and-evolution",
+    "Url": "/app/1601084/516088/penguin-guide/systematics-and-evolution",
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -26,7 +26,7 @@
   {
     "Id": "t1-k13",
     "Title": "Anatomy and physiology",
-    "Url": "/1601084/516444/penguin-publication/anatomy-and-physiology",
+    "Url": "/app/1601084/516444/penguin-guide/anatomy-and-physiology",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -34,7 +34,7 @@
   {
     "Id": "t1-k14",
     "Title": "Distribution and habitat",
-    "Url": "/1601084/517170/penguin-publication/distribution-and-habitat",
+    "Url": "/app/1601084/517170/penguin-guide/distribution-and-habitat",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -42,7 +42,7 @@
   {
     "Id": "t1-k15",
     "Title": "Behavior",
-    "Url": "/1601084/516036/penguin-publication/behavior",
+    "Url": "/app/1601084/516036/penguin-guide/behavior",
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []

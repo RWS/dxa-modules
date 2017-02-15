@@ -1,17 +1,28 @@
-{
-  "Id": "t1-k26",
-  "Title": "Spiele",
-  "Url": "/1961700/164237/publication-mp330/spiele",
-  "IsAbstract": false,
-  "HasChildNodes": true,
-  "Items": [
-    {
-      "Id": "t1-k27",
-      "Title": "Starten eines Spiels",
-      "Url": "/1961700/164377/publication-mp330/starten-eines-spiels",
-      "IsAbstract": false,
-      "HasChildNodes": false,
-      "Items": []
-    }
-  ]
-}
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k26",
+        "Title": "Spiele",
+        "Url": "/app/1961700/164237/user-guide/spiele",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": [
+          {
+            "Id": "t1-k27",
+            "Title": "Starten eines Spiels",
+            "Url": "/app/1961700/164377/user-guide/starten-eines-spiels",
+            "IsAbstract": false,
+            "HasChildNodes": false,
+            "Items": []
+          }
+        ]
+      }
+    ]
+  }
+]
