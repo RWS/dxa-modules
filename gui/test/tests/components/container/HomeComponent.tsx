@@ -66,28 +66,25 @@ class HomeComponent extends TestBase {
                 expect(getComputedStyle(homeNode.querySelector(".sdl-dita-delivery-searchbar")).top).toBe("-150px");
                 TestUtils.Simulate.click(toggleSearchButtonNode);
 
-                // Use a timeout to allow the DataStore to return a promise with the data
+                // Use a timeout to allow animation to be finished
                 setTimeout((): void => {
-                    expect(getComputedStyle(homeNode.querySelector(".sdl-dita-delivery-searchbar")).top).toBe("50px");
+                    expect(getComputedStyle(homeNode.querySelector(".sdl-dita-delivery-searchbar")).top).toBe("0px");
                     const inputElement = searchBarNode.querySelector("input");
                     const overlayNode = homeNode.querySelector(".sdl-dita-delivery-nav-mask");
                     expect(getComputedStyle(overlayNode).display).toBe("none");
                     TestUtils.Simulate.focus(inputElement);
+
+                    expect(getComputedStyle(overlayNode).display).toBe("block");
+                    TestUtils.Simulate.blur(inputElement);
+
+                    expect(getComputedStyle(overlayNode).display).toBe("none");
+                    TestUtils.Simulate.click(toggleSearchButtonNode);
+                    // Use a timeout to allow animation to be finished
                     setTimeout((): void => {
-                        expect(getComputedStyle(overlayNode).display).toBe("block");
-                        TestUtils.Simulate.blur(inputElement);
-                        // Use a timeout to allow the DataStore to return a promise with the data
-                        setTimeout((): void => {
-                            expect(getComputedStyle(overlayNode).display).toBe("none");
-                            TestUtils.Simulate.click(toggleSearchButtonNode);
-                            // Use a timeout to allow the DataStore to return a promise with the data
-                            setTimeout((): void => {
-                                expect(getComputedStyle(homeNode.querySelector(".sdl-dita-delivery-searchbar")).top).toBe("-150px");
-                                done();
-                            }, 350);
-                        }, 0);
-                    }, 0);
-                }, 350);
+                        expect(getComputedStyle(homeNode.querySelector(".sdl-dita-delivery-searchbar")).top).toBe("-150px");
+                        done();
+                    }, 310);
+                }, 310);
             });
         });
     }
