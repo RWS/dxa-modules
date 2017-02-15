@@ -1,0 +1,48 @@
+@import (reference) "../../../theming/styles.less";
+@import (reference) "../../presentation/styles/TopBar.less";
+.sdl-dita-delivery-tiles-list {
+    margin: 0 auto;
+    button {
+        text-transform: uppercase;
+        margin: 20px auto;
+        display: block;
+    }
+    nav {
+        display: inline-flex;
+        flex-flow: row wrap;
+        justify-content: flex-start;
+        align-content: flex-start;
+        .sdl-dita-delivery-tile {
+            display: inline-block;
+            flex-grow: 1;
+            flex-shrink: 1;
+            flex-basis: 250px;
+            max-width: 370px;
+            min-width: 250px;
+            margin: 10px;
+            height: 256px;
+            background: #FFFFFF;
+            border: 1px solid #E1E7EB;
+            box-shadow: 0 2px 0 0 #E1E7EB;
+            border-radius: 4px;
+            h3 {
+                .header-font(300, 20px, 20px);
+                color: #2A3B4C;
+                text-align: center;
+            }
+            hr {
+                margin: 10px 20px;
+                background: #E1E7EB;
+                height: 1px;
+                border: none;
+            }
+            p {
+                .paragraph();
+                color: #5D6E7F;
+                line-height: 14px;
+                margin: 15px 5px;
+                height: 90px;
+            }
+        }
+    }
+}
