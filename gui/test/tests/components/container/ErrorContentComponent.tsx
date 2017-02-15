@@ -33,7 +33,7 @@ class ErrorContentComponent extends TestBase {
                 expect(errorButton.length).toBe(1);
                 expect(errorButton.length).toBe(1);
                 expect(errorTitle.item(0).textContent).toBe("mock-error.default.title");
-                expect(errorMessage.item(0).textContent).toBe("mock-error.default.message");
+                expect(errorMessage.item(0).textContent).toBe("mock-error.url.not.found");
             });
         });
     }

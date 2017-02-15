@@ -267,7 +267,7 @@ class TocComponent extends TestBase {
                 expect(element).not.toBeNull();
 
                 const message = element.querySelector(".sdl-dita-delivery-error-toc-message");
-                expect(message.textContent).toEqual("mock-Oops, error!");
+                expect(message.textContent).toEqual("mock-error.toc.not.found");
 
                 element.querySelector("button").click();
 
