@@ -88,15 +88,16 @@ export class TaxonomyService implements ITaxonomyService {
      * Get the full path for a sitemap item within a sitemap
      *
      * @param {string} publicationId Publication Id
-     * @param {string} sitemapId The sitemap id
+     * @param {string} pageId Page id
+     * @param {string} taxonomyId The taxonomy id (eg t1-k5)
      * @returns {Promise<ITaxonomy[]>} Promise to return the full path
      *
      * @memberOf DataStoreClient
      */
-    public getSitemapPath(publicationId: string, sitemapId: string): Promise<ITaxonomy[]> {
-        const navigationLinks = this.getNavigationLinksModel(publicationId, sitemapId);
+    public getSitemapPath(publicationId: string, pageId: string, taxonomyId: string): Promise<ITaxonomy[]> {
+        const navigationLinks = this.getNavigationLinksModel(publicationId, pageId, taxonomyId);
         if (!navigationLinks) {
-            return Promise.reject(localization.formatMessage("error.path.not.found", [sitemapId, publicationId]));
+            return Promise.reject(localization.formatMessage("error.path.not.found", [taxonomyId, publicationId]));
         }
 
         return new Promise((resolve: (path?: ITaxonomy[]) => void, reject: (error: string | null) => void) => {
@@ -139,18 +140,17 @@ export class TaxonomyService implements ITaxonomyService {
         return TaxonomyService.TocModels[publicationId][parentId];
     }
 
-    private getNavigationLinksModel(publicationId: string, pageId: string): NavigationLinks | undefined {
+    private getNavigationLinksModel(publicationId: string, pageId: string, taxonomyId: string): NavigationLinks | undefined {
         if (!TaxonomyService.NavigationLinksModels) {
             TaxonomyService.NavigationLinksModels = {};
         }
         if (!TaxonomyService.NavigationLinksModels[publicationId]) {
             TaxonomyService.NavigationLinksModels[publicationId] = {};
         }
-        if (!TaxonomyService.NavigationLinksModels[publicationId][pageId]) {
-            const taxonomyId = TcmId.getTaxonomyItemId(TaxonomyItemId.Toc, pageId);
-            TaxonomyService.NavigationLinksModels[publicationId][pageId] = new NavigationLinks(publicationId, taxonomyId || pageId);
+        if (!TaxonomyService.NavigationLinksModels[publicationId][taxonomyId]) {
+            TaxonomyService.NavigationLinksModels[publicationId][taxonomyId] = new NavigationLinks(publicationId, pageId, taxonomyId);
         }
-        return TaxonomyService.NavigationLinksModels[publicationId][pageId];
+        return TaxonomyService.NavigationLinksModels[publicationId][taxonomyId];
     }
 
 }

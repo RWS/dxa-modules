@@ -1,17 +1,28 @@
-{
-  "Id": "t1-k35",
-  "Title": "Telefoonlijst",
-  "Url": "/1881665/164303/publication-mp330/telefoonlijst",
-  "IsAbstract": false,
-  "HasChildNodes": true,
-  "Items": [
-    {
-      "Id": "t1-k37",
-      "Title": "Zoeken naar een contact",
-      "Url": "/1881665/164430/publication-mp330/zoeken-naar-een-contact",
-      "IsAbstract": false,
-      "HasChildNodes": false,
-      "Items": []
-    }
-  ]
-}
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k35",
+        "Title": "Telefoonlijst",
+        "Url": "/app/1881665/164303/user-guide/telefoonlijst",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": [
+          {
+            "Id": "t1-k37",
+            "Title": "Zoeken naar een contact",
+            "Url": "/app/1881665/164430/user-guide/zoeken-naar-een-contact",
+            "IsAbstract": false,
+            "HasChildNodes": false,
+            "Items": []
+          }
+        ]
+      }
+    ]
+  }
+]

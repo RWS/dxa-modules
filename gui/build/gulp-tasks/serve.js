@@ -84,6 +84,19 @@ module.exports = function (buildOptions, gulp, browserSync) {
                             }
 
                             next();
+                        },
+                        (req, res, next) => {
+                            let url = req.url;
+                            // Redirect root to "app/"
+                            if (url.trim() === '/') {
+                                url = url + "app/";
+                                res.writeHead(307, {
+                                    Location: url
+                                });
+                                res.end();
+                            } else {
+                                next();
+                            }
                         }
                     ]
                 };

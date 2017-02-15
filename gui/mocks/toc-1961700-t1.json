@@ -2,7 +2,7 @@
   {
     "Id": "t1-k2",
     "Title": "Sehr geehrter Kunde!",
-    "Url": "/1961700/164221/publication-mp330/sehr-geehrter-kunde-",
+    "Url": "/app/1961700/164221/user-guide/sehr-geehrter-kunde-",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -10,7 +10,7 @@
   {
     "Id": "t1-k3",
     "Title": "Sicherheitshinweise",
-    "Url": "/1961700/164245/publication-mp330/sicherheitshinweise",
+    "Url": "/app/1961700/164245/user-guide/sicherheitshinweise",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -18,7 +18,7 @@
   {
     "Id": "t1-k4",
     "Title": "Ihr Telefon",
-    "Url": "/1961700/164229/publication-mp330/ihr-telefon",
+    "Url": "/app/1961700/164229/user-guide/ihr-telefon",
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -26,7 +26,7 @@
   {
     "Id": "t1-k12",
     "Title": "Erste Schritte",
-    "Url": "/1961700/164396/publication-mp330/erste-schritte",
+    "Url": "/app/1961700/164396/user-guide/erste-schritte",
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -34,7 +34,7 @@
   {
     "Id": "t1-k16",
     "Title": "Anruffunktionen",
-    "Url": "/1961700/164466/publication-mp330/anruffunktionen",
+    "Url": "/app/1961700/164466/user-guide/anruffunktionen",
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -42,7 +42,7 @@
   {
     "Id": "t1-k21",
     "Title": "Mitteilungen",
-    "Url": "/1961700/164477/publication-mp330/mitteilungen",
+    "Url": "/app/1961700/164477/user-guide/mitteilungen",
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -50,7 +50,7 @@
   {
     "Id": "t1-k26",
     "Title": "Spiele",
-    "Url": "/1961700/164237/publication-mp330/spiele",
+    "Url": "/app/1961700/164237/user-guide/spiele",
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -58,7 +58,7 @@
   {
     "Id": "t1-k32",
     "Title": "Musikfunktionen",
-    "Url": "/1961700/164369/publication-mp330/musikfunktionen",
+    "Url": "/app/1961700/164369/user-guide/musikfunktionen",
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -66,7 +66,7 @@
   {
     "Id": "t1-k35",
     "Title": "Adressbuch",
-    "Url": "/1961700/164299/publication-mp330/adressbuch",
+    "Url": "/app/1961700/164299/user-guide/adressbuch",
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []

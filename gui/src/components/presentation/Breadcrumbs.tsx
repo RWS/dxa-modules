@@ -4,6 +4,7 @@ import { Link } from "react-router";
 import { ITaxonomy } from "interfaces/Taxonomy";
 import { IAppContext } from "components/container/App";
 import { Url } from "utils/Url";
+import { path } from "utils/Path";
 
 import "components/presentation/styles/Breadcrumbs";
 
@@ -35,7 +36,7 @@ export interface IBreadcrumbsProps {
     /**
      * Load items path for a specific item
      */
-    loadItemsPath: (publicationId: string, parentId: string) => Promise<ITaxonomy[]>;
+    loadItemsPath: (publicationId: string, pageId: string, parentId: string) => Promise<ITaxonomy[]>;
 }
 
 /**
@@ -96,7 +97,8 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
     public componentWillMount(): void {
         const { publicationId, selectedItem, loadItemsPath } = this.props;
         if (selectedItem && selectedItem.id) {
-            loadItemsPath(publicationId, selectedItem.id).then(
+            const pageId = this._getPageId(selectedItem.url);
+            loadItemsPath(publicationId, pageId, selectedItem.id).then(
                 path => {
                     /* istanbul ignore else */
                     if (!this._isUnmounted) {
@@ -123,7 +125,8 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
         const nextId = nextItem ? nextItem.id : null;
         if (nextItem && nextItem.url) {
             if (nextId && (currentId !== nextId)) {
-                loadItemsPath(nextProps.publicationId || publicationId, nextId).then(
+                const pageId = this._getPageId(nextItem.url);
+                loadItemsPath(nextProps.publicationId || publicationId, pageId || "", nextId).then(
                     path => {
                         /* istanbul ignore else */
                         if (!this._isUnmounted) {
@@ -167,7 +170,7 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
             <div className={"sdl-dita-delivery-breadcrumbs"}>
                 <ul>
                     <li>
-                        <Link className="home" title={homeLabel} to="/home">{homeLabel}</Link>
+                        <Link className="home" title={homeLabel} to={`${path.getRootPath()}home`}>{homeLabel}</Link>
                         <span className="separator" />
                     </li>
                     <li>
@@ -197,5 +200,10 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
                 </ul>
             </div>
         );
+    }
+
+    private _getPageId(url?: string): string {
+        const parsedPageUrl = Url.parsePageUrl(url || "");
+        return (parsedPageUrl && parsedPageUrl.pageId) || "";
     }
 }

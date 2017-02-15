@@ -1,17 +1,28 @@
-{
-  "Id": "t1-k26",
-  "Title": "Spiele",
-  "Url": "/1961700/164237/publication-mp330/spiele",
-  "IsAbstract": false,
-  "HasChildNodes": true,
-  "Items": [
-    {
-      "Id": "t1-k28",
-      "Title": "Spiel-Downloads",
-      "Url": "/1961700/164177/publication-mp330/spiel-downloads",
-      "IsAbstract": false,
-      "HasChildNodes": false,
-      "Items": []
-    }
-  ]
-}
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k26",
+        "Title": "Spiele",
+        "Url": "/app/1961700/164237/user-guide/spiele",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": [
+          {
+            "Id": "t1-k28",
+            "Title": "Spiel-Downloads",
+            "Url": "/app/1961700/164177/user-guide/spiel-downloads",
+            "IsAbstract": false,
+            "HasChildNodes": false,
+            "Items": []
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -3,6 +3,7 @@ import * as ReactDOM from "react-dom";
 import { Promise } from "es6-promise";
 import { ITaxonomy } from "interfaces/Taxonomy";
 import { IPage } from "interfaces/Page";
+import { TaxonomyItemId } from "interfaces/TcmId";
 
 import { IAppContext } from "components/container/App";
 import { NavigationMenu } from "components/presentation/NavigationMenu";
@@ -349,6 +350,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
 
     private _onTocSelectionChanged(sitemapItem: ITaxonomy, path: string[]): void {
         const { router } = this.context;
+        const { publicationTitle } = this.state;
 
         const updatedState: IPublicationContentState = {
             activeTocItemPath: path,
@@ -363,9 +365,15 @@ export class PublicationContent extends React.Component<IPublicationContentProps
             // Only navigate to pages which have a location
             const navPath = sitemapItem.url;
             if (navPath) {
-                // TODO: validate this after changes for KCWA-321
-                if (router.getCurrentLocation().pathname !== navPath) {
-                    router.push(navPath);
+                let url = navPath;
+                const parsedUrl = Url.parsePageUrl(url);
+                if (parsedUrl && (!parsedUrl.pageTitle || !parsedUrl.publicationTitle)) {
+                    // Use the title of the sitemap item instead of the page
+                    // When using dynamic link resolving these should actually be equal
+                    url = Url.getPageUrl(parsedUrl.publicationId, parsedUrl.pageId, publicationTitle, sitemapItem.title);
+                }
+                if (router.getCurrentLocation().pathname !== url) {
+                    router.push(url);
                 }
             }
         }
@@ -384,8 +392,9 @@ export class PublicationContent extends React.Component<IPublicationContentProps
             // Always take the first sitemap id
             // There is no proper way for having a deep link to the second/third/... occurance inside the toc
             const firstSitemapId = pageInfo.sitemapIds[0];
+            const taxonomyId = TcmId.getTaxonomyItemId(TaxonomyItemId.Toc, firstSitemapId) || firstSitemapId;
 
-            this._getActiveSitemapPath(firstSitemapId, path => {
+            this._getActiveSitemapPath(pageInfo.id, taxonomyId, path => {
                 /* istanbul ignore if */
                 if (this._isUnmounted) {
                     return;
@@ -415,26 +424,29 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         });
     }
 
-    private _getActiveSitemapPath(sitemapId: string, done: (path: string[]) => void): void {
+    private _getActiveSitemapPath(pageId: string, sitemapId: string, done: (path: string[]) => void): void {
         const { services } = this.context;
         const { publicationId } = this.props.params;
-        services.taxonomyService.getSitemapPath(publicationId, sitemapId).then(
-            path => {
-                /* istanbul ignore else */
-                if (!this._isUnmounted) {
-                    done(path.map(item => item.id || "") || []);
-                }
-            },
-            error => {
-                /* istanbul ignore else */
-                if (!this._isUnmounted) {
-                    this._toc.error = error;
-                    this.setState({
-                        isTocLoading: false,
-                        isPageLoading: false
-                    });
-                }
-            });
+
+        if (pageId) {
+            services.taxonomyService.getSitemapPath(publicationId, pageId, sitemapId).then(
+                path => {
+                    /* istanbul ignore else */
+                    if (!this._isUnmounted) {
+                        done(path.map(item => item.id || "") || []);
+                    }
+                },
+                error => {
+                    /* istanbul ignore else */
+                    if (!this._isUnmounted) {
+                        this._toc.error = error;
+                        this.setState({
+                            isTocLoading: false,
+                            isPageLoading: false
+                        });
+                    }
+                });
+        }
     }
 
     private _fixPanels(): void {

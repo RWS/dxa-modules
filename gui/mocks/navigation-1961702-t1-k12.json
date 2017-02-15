@@ -1,8 +1,19 @@
-{
-  "Id": "t1-k12",
-  "Title": "Getting started",
-  "Url": "/1961702/164398/publication-mp330/getting-started",
-  "IsAbstract": false,
-  "HasChildNodes": true,
-  "Items": []
-}
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k12",
+        "Title": "Getting started",
+        "Url": "/app/1961702/164398/user-guide/getting-started",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": []
+      }
+    ]
+  }
+]

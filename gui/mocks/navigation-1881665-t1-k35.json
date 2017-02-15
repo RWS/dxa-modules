@@ -1,8 +1,19 @@
-{
-  "Id": "t1-k35",
-  "Title": "Telefoonlijst",
-  "Url": "/1881665/164303/publication-mp330/telefoonlijst",
-  "IsAbstract": false,
-  "HasChildNodes": true,
-  "Items": []
-}
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k35",
+        "Title": "Telefoonlijst",
+        "Url": "/app/1881665/164303/user-guide/telefoonlijst",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": []
+      }
+    ]
+  }
+]

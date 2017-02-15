@@ -15,7 +15,7 @@ class PageServiceTests extends TestBase {
                     expect(pageInfo).toBeDefined();
                     if (pageInfo) {
                         expect(pageInfo.title).toBe("Getting started");
-                        expect(pageInfo.content.length).toBe(1332);
+                        expect(pageInfo.content.length).toBe(1323);
                         const element = document.createElement("span");
                         element.innerHTML = pageInfo.content;
                         expect(element.children.length).toBe(3); // title, content, related links
@@ -35,7 +35,7 @@ class PageServiceTests extends TestBase {
                     expect(pageInfo).toBeDefined();
                     if (pageInfo) {
                         expect(pageInfo.title).toBe("Getting started");
-                        expect(pageInfo.content.length).toBe(1332);
+                        expect(pageInfo.content.length).toBe(1323);
                         expect(spy).not.toHaveBeenCalled();
                     }
                     done();

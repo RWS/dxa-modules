@@ -2,7 +2,7 @@
   {
     "Id": "t1-k5",
     "Title": "Tasten",
-    "Url": "/1961700/164280/publication-mp330/tasten",
+    "Url": "/app/1961700/164280/user-guide/tasten",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -10,7 +10,7 @@
   {
     "Id": "t1-k6",
     "Title": "Anschlüsse",
-    "Url": "/1961700/164153/publication-mp330/anschlusse",
+    "Url": "/app/1961700/164153/user-guide/anschlusse",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -18,7 +18,7 @@
   {
     "Id": "t1-k7",
     "Title": "Ausgangsanzeige",
-    "Url": "/1961700/164185/publication-mp330/ausgangsanzeige",
+    "Url": "/app/1961700/164185/user-guide/ausgangsanzeige",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -26,7 +26,7 @@
   {
     "Id": "t1-k8",
     "Title": "Wichtige Symbole in der Ausgangsanzeige",
-    "Url": "/1961700/164253/publication-mp330/wichtige-symbole-in-der-ausgangsanzeige",
+    "Url": "/app/1961700/164253/user-guide/wichtige-symbole-in-der-ausgangsanzeige",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -34,7 +34,7 @@
   {
     "Id": "t1-k9",
     "Title": "Bildschirmschoner",
-    "Url": "/1961700/164434/publication-mp330/bildschirmschoner",
+    "Url": "/app/1961700/164434/user-guide/bildschirmschoner",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -42,7 +42,7 @@
   {
     "Id": "t1-k10",
     "Title": "General Packet Radio Service (GPRS)",
-    "Url": "/1961700/164169/publication-mp330/general-packet-radio-service--gprs-",
+    "Url": "/app/1961700/164169/user-guide/general-packet-radio-service--gprs-",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -50,7 +50,7 @@
   {
     "Id": "t1-k11",
     "Title": "Bluetooth-Verbindung",
-    "Url": "/1961700/164307/publication-mp330/bluetooth-verbindung",
+    "Url": "/app/1961700/164307/user-guide/bluetooth-verbindung",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []

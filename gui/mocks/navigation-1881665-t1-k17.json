@@ -1,17 +1,28 @@
-{
-  "Id": "t1-k16",
-  "Title": "Algemene functies",
-  "Url": "/1881665/164470/publication-mp330/algemene-functies",
-  "IsAbstract": false,
-  "HasChildNodes": true,
-  "Items": [
-    {
-      "Id": "t1-k17",
-      "Title": "Opbellen",
-      "Url": "/1881665/164214/publication-mp330/opbellen",
-      "IsAbstract": false,
-      "HasChildNodes": true,
-      "Items": []
-    }
-  ]
-}
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k16",
+        "Title": "Algemene functies",
+        "Url": "/app/1881665/164470/user-guide/algemene-functies",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": [
+          {
+            "Id": "t1-k17",
+            "Title": "Opbellen",
+            "Url": "/app/1881665/164214/user-guide/opbellen",
+            "IsAbstract": false,
+            "HasChildNodes": true,
+            "Items": []
+          }
+        ]
+      }
+    ]
+  }
+]

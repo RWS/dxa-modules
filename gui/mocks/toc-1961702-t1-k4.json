@@ -2,7 +2,7 @@
   {
     "Id": "t1-k5",
     "Title": "Keys overview",
-    "Url": "/1961702/164282/publication-mp330/keys-overview",
+    "Url": "/app/1961702/164282/user-guide/keys-overview",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -10,7 +10,7 @@
   {
     "Id": "t1-k6",
     "Title": "Connectors overview",
-    "Url": "/1961702/164155/publication-mp330/connectors-overview",
+    "Url": "/app/1961702/164155/user-guide/connectors-overview",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -18,7 +18,7 @@
   {
     "Id": "t1-k7",
     "Title": "Standby mode",
-    "Url": "/1961702/164187/publication-mp330/standby-mode",
+    "Url": "/app/1961702/164187/user-guide/standby-mode",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -26,7 +26,7 @@
   {
     "Id": "t1-k8",
     "Title": "Essential indicators in standby mode",
-    "Url": "/1961702/164255/publication-mp330/essential-indicators-in-standby-mode",
+    "Url": "/app/1961702/164255/user-guide/essential-indicators-in-standby-mode",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -34,7 +34,7 @@
   {
     "Id": "t1-k9",
     "Title": "Screen saver",
-    "Url": "/1961702/164436/publication-mp330/screen-saver",
+    "Url": "/app/1961702/164436/user-guide/screen-saver",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -42,7 +42,7 @@
   {
     "Id": "t1-k10",
     "Title": "General Packet Radio Service (GPRS)",
-    "Url": "/1961702/164171/publication-mp330/general-packet-radio-service--gprs-",
+    "Url": "/app/1961702/164171/user-guide/general-packet-radio-service--gprs-",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []
@@ -50,7 +50,7 @@
   {
     "Id": "t1-k11",
     "Title": "Bluetooth Connection",
-    "Url": "/1961702/164309/publication-mp330/bluetooth-connection",
+    "Url": "/app/1961702/164309/user-guide/bluetooth-connection",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []

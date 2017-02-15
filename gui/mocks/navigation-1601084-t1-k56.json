@@ -1,26 +1,37 @@
-{
-  "Id": "t1-k44",
-  "Title": "Other birds",
-  "Url": "/1601084/515736/penguin-publication/other-birds",
-  "IsAbstract": false,
-  "HasChildNodes": true,
-  "Items": [
-    {
-      "Id": "t1-k55",
-      "Title": "H",
-      "Url": null,
-      "IsAbstract": true,
-      "HasChildNodes": true,
-      "Items": [
-        {
-          "Id": "t1-k56",
-          "Title": "Herons",
-          "Url": "/1601084/515903/penguin-publication/herons",
-          "IsAbstract": false,
-          "HasChildNodes": false,
-          "Items": []
-        }
-      ]
-    }
-  ]
-}
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k44",
+        "Title": "Other birds",
+        "Url": "/app/1601084/515736/penguin-guide/other-birds",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": [
+          {
+            "Id": "t1-k55",
+            "Title": "H",
+            "Url": null,
+            "IsAbstract": true,
+            "HasChildNodes": true,
+            "Items": [
+              {
+                "Id": "t1-k56",
+                "Title": "Herons",
+                "Url": "/app/1601084/515903/penguin-guide/herons",
+                "IsAbstract": false,
+                "HasChildNodes": false,
+                "Items": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

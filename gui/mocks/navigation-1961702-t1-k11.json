@@ -1,17 +1,28 @@
-{
-  "Id": "t1-k4",
-  "Title": "Your phone",
-  "Url": "/1961702/164231/publication-mp330/your-phone",
-  "IsAbstract": false,
-  "HasChildNodes": true,
-  "Items": [
-    {
-      "Id": "t1-k11",
-      "Title": "Bluetooth Connection",
-      "Url": "/1961702/164309/publication-mp330/bluetooth-connection",
-      "IsAbstract": false,
-      "HasChildNodes": false,
-      "Items": []
-    }
-  ]
-}
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k4",
+        "Title": "Your phone",
+        "Url": "/app/1961702/164231/user-guide/your-phone",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": [
+          {
+            "Id": "t1-k11",
+            "Title": "Bluetooth Connection",
+            "Url": "/app/1961702/164309/user-guide/bluetooth-connection",
+            "IsAbstract": false,
+            "HasChildNodes": false,
+            "Items": []
+          }
+        ]
+      }
+    ]
+  }
+]

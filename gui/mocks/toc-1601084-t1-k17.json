@@ -2,7 +2,7 @@
   {
     "Id": "t1-k18",
     "Title": "Aptenodytes (Great penguins)",
-    "Url": "/1601084/516953/penguin-publication/aptenodytes--great-penguins-",
+    "Url": "/app/1601084/516953/penguin-guide/aptenodytes--great-penguins-",
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -10,7 +10,7 @@
   {
     "Id": "t1-k21",
     "Title": "Pygoscelis (Brush-tailed penguins)",
-    "Url": "/1601084/516774/penguin-publication/pygoscelis--brush-tailed-penguins-",
+    "Url": "/app/1601084/516774/penguin-guide/pygoscelis--brush-tailed-penguins-",
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -18,7 +18,7 @@
   {
     "Id": "t1-k25",
     "Title": "Eudyptula (Little penguins)",
-    "Url": "/1601084/516617/penguin-publication/eudyptula--little-penguins-",
+    "Url": "/app/1601084/516617/penguin-guide/eudyptula--little-penguins-",
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -26,7 +26,7 @@
   {
     "Id": "t1-k27",
     "Title": "Spheniscus (Banded penguins)",
-    "Url": "/1601084/516904/penguin-publication/spheniscus--banded-penguins-",
+    "Url": "/app/1601084/516904/penguin-guide/spheniscus--banded-penguins-",
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -34,7 +34,7 @@
   {
     "Id": "t1-k32",
     "Title": "Megadyptes",
-    "Url": "/1601084/516692/penguin-publication/megadyptes",
+    "Url": "/app/1601084/516692/penguin-guide/megadyptes",
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -42,7 +42,7 @@
   {
     "Id": "t1-k34",
     "Title": "Eudyptes (Crested penguins)",
-    "Url": "/1601084/516875/penguin-publication/eudyptes--crested-penguins-",
+    "Url": "/app/1601084/516875/penguin-guide/eudyptes--crested-penguins-",
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []

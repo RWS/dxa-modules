@@ -2,7 +2,7 @@
   {
     "Id": "t1-k17",
     "Title": "Anrufen",
-    "Url": "/1961700/164210/publication-mp330/anrufen",
+    "Url": "/app/1961700/164210/user-guide/anrufen",
     "IsAbstract": false,
     "HasChildNodes": true,
     "Items": []
@@ -10,7 +10,7 @@
   {
     "Id": "t1-k20",
     "Title": "Beantworten oder Abweisen eines ankommenden Anrufs",
-    "Url": "/1961700/164193/publication-mp330/beantworten-oder-abweisen-eines-ankommenden-anrufs",
+    "Url": "/app/1961700/164193/user-guide/beantworten-oder-abweisen-eines-ankommenden-anrufs",
     "IsAbstract": false,
     "HasChildNodes": false,
     "Items": []

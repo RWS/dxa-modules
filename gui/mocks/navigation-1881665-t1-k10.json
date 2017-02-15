@@ -1,17 +1,28 @@
-{
-  "Id": "t1-k4",
-  "Title": "De telefoon",
-  "Url": "/1881665/164233/publication-mp330/de-telefoon",
-  "IsAbstract": false,
-  "HasChildNodes": true,
-  "Items": [
-    {
-      "Id": "t1-k10",
-      "Title": "General Packet Radio Service (GPRS)",
-      "Url": "/1881665/164173/publication-mp330/general-packet-radio-service--gprs-",
-      "IsAbstract": false,
-      "HasChildNodes": false,
-      "Items": []
-    }
-  ]
-}
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k4",
+        "Title": "De telefoon",
+        "Url": "/app/1881665/164233/user-guide/de-telefoon",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": [
+          {
+            "Id": "t1-k10",
+            "Title": "General Packet Radio Service (GPRS)",
+            "Url": "/app/1881665/164173/user-guide/general-packet-radio-service--gprs-",
+            "IsAbstract": false,
+            "HasChildNodes": false,
+            "Items": []
+          }
+        ]
+      }
+    ]
+  }
+]

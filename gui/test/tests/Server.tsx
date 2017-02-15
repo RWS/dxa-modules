@@ -40,7 +40,7 @@ class Server extends TestBase {
                         <div className="sdl-dita-delivery-topbar">
                             <header>
                                 <div className="sdl-dita-delivery-topbar-logo" title="SDL">
-                                    <a href="#/"></a>
+                                    <a href="#/home"></a>
                                 </div>
                                 <div className="spacer"></div>
                                 <div className="sdl-dita-delivery-topbar-expand-search"><span></span></div>

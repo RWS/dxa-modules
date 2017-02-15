@@ -20,5 +20,5 @@ export interface IWindow extends Window {
      * @type {string}
      * @memberOf IWindow
      */
-    SDLDitaDeliveryRootPath: string;
+    SdlDitaDeliveryRootPath: string;
 }

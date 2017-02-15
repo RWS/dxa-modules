@@ -1,17 +1,28 @@
-{
-  "Id": "t1-k2",
-  "Title": "Penguins Overview",
-  "Url": "/1601084/516062/penguin-publication/penguins-overview",
-  "IsAbstract": false,
-  "HasChildNodes": true,
-  "Items": [
-    {
-      "Id": "t1-k14",
-      "Title": "Distribution and habitat",
-      "Url": "/1601084/517170/penguin-publication/distribution-and-habitat",
-      "IsAbstract": false,
-      "HasChildNodes": false,
-      "Items": []
-    }
-  ]
-}
+[
+  {
+    "Id": "t1",
+    "Title": "",
+    "Url": null,
+    "IsAbstract": true,
+    "HasChildNodes": true,
+    "Items": [
+      {
+        "Id": "t1-k2",
+        "Title": "Penguins Overview",
+        "Url": "/app/1601084/516062/penguin-guide/penguins-overview",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": [
+          {
+            "Id": "t1-k14",
+            "Title": "Distribution and habitat",
+            "Url": "/app/1601084/517170/penguin-guide/distribution-and-habitat",
+            "IsAbstract": false,
+            "HasChildNodes": false,
+            "Items": []
+          }
+        ]
+      }
+    ]
+  }
+]
