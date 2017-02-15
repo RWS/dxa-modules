@@ -29,6 +29,5 @@ Write-Host "Updating '$unityConfigFile' ..."
 Add-UnityDeclaration "assembly" "Sdl.Web.Modules.ContextExpressions" $unityConfigDoc
 Add-UnityDeclaration "namespace" "Sdl.Web.Modules.ContextExpressions" $unityConfigDoc
 Set-UnityTypeMapping "IConditionalEntityEvaluator" "ContextExpressionEvaluator" $unityConfigDoc
-Set-UnityTypeMapping "IContextClaimsProvider" "AdfContextClaimsProvider" $unityConfigDoc
 $unityConfigDoc.Save($unityConfigFile)
 
