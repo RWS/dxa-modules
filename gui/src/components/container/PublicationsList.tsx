@@ -89,7 +89,7 @@ export class PublicationsList extends React.Component<{}, IPublicationsListState
                         error ?
                             <Error
                                 title={formatMessage("error.default.title")}
-                                messages={[error || formatMessage("error.page.not.found"), formatMessage("error.default.message")]}
+                                messages={[formatMessage("error.publications.list.not.found"), formatMessage("error.publications.default.message")]}
                                 buttons={errorButtons} />
                             :
                             publications ? (

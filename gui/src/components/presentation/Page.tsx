@@ -168,7 +168,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
             </div>;
         const errorTitle = formatMessage("error.default.title");
         const errorMessages = [
-            error || formatMessage("error.page.not.found"),
+            formatMessage("error.page.not.found"),
             formatMessage("error.default.message")
         ];
 

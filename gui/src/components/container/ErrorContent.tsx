@@ -19,7 +19,7 @@ import "components/container/styles/ErrorContent";
 export interface IErrorContentProps {
     /**
      * Error object information to render on the page
-     * 
+     *
      * @type {IError}
      */
     error?: IError;
@@ -41,7 +41,7 @@ export const ErrorContent: React.StatelessComponent<IErrorContentProps> = (props
         </div>;
 
     const error = props.error;
-    const errorMessages = error && error.message ? [error.message, formatMessage("error.default.message")] : [formatMessage("error.default.message")];
+    const errorMessages = [formatMessage("error.url.not.found"), formatMessage("error.default.message")];
     const errorTitle = error && error.statusCode ?
         `${error.statusCode} - ${formatMessage("error.default.title")}` :
         formatMessage("error.default.title");

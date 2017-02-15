@@ -9,8 +9,12 @@
   "error.default.message": "Als u nog steeds deze fout ziet, gebruik dan de onderstaande links om naar de home page of zoek de documentatie te vinden wat u zoekt.",
   "error.default.title": "Oeps, er is iets fout gegaan!",
   "error.page.not.found": "We zijn erg jammer, maar deze pagina is niet beschikbaar op deze publicatie. Zorg ervoor dat de URL die u hebt ingevoerd correct is.",
+  "error.url.not.found": "We zijn erg jammer, maar deze URL is niet beschikbaar op deze website. Zorg ervoor dat de URL die u hebt ingevoerd correct is",
   "error.path.not.found": "Het pad voor de sitemap item met id {0} kon niet gevonden worden in de publicatie met id {1}.",
+  "error.publications.list.not.found": "We zijn erg jammer, maar de lijst van publicatie was niet geladen.",
+  "error.publications.default.message": "Probeer het opnieuw laden of gebruik maken van een directe link naar uw publicatie.",
   "error.publication.not.found": "Publicatie met id {0} kon niet gevonden worden.",
-  "error.toc.items.not.found": "We konden geen kind artikelen te wijten aan server interne fout laden",
+  "error.toc.not.found": "Oeps, ging er iets mis het laden van de inhoudsopgave van deze publicatie.",
+  "error.toc.items.not.found": "We konden geen kind artikelen te wijten aan server interne fout laden.",
   "error.unable.to.locate.page.in.toc": "De pagina met id {0} kon niet gevonden worden in de inhoudstafel."
 }

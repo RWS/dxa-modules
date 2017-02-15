@@ -132,7 +132,7 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
 
         return (
             <nav className={"sdl-dita-delivery-toc"}>
-                {error ? <ErrorToc message={formatMessage(error)} onRetry={_retryHandler} /> : null}
+                {error ? <ErrorToc message={formatMessage("error.toc.not.found")} onRetry={_retryHandler} /> : null}
                 {
                     props.rootItems ?
                         <TreeView
@@ -207,7 +207,8 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
 
     private _getIndent(parentNode: ITreeViewNode): string {
         const { element, depth } = parentNode;
-        const indent: number = element.style.textIndent ? parseInt(element.style.textIndent, 10) / depth : 0;
+        const { textIndent } = element.style;
+        const indent: number = textIndent && parseInt(textIndent) ? parseInt(textIndent, 10) / depth : 19;
         return `${indent * (depth + 1)}px`;
     }
 
