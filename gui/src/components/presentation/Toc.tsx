@@ -208,7 +208,7 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
     private _getIndent(parentNode: ITreeViewNode): string {
         const { element, depth } = parentNode;
         const { textIndent } = element.style;
-        const indent: number = textIndent && parseInt(textIndent) ? parseInt(textIndent, 10) / depth : 19;
+        const indent: number = textIndent && parseInt(textIndent, 10) ? parseInt(textIndent, 10) / depth : 19;
         return `${indent * (depth + 1)}px`;
     }
 
