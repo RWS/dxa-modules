@@ -70,7 +70,7 @@ namespace Sdl.Web.Modules.Search.Providers
         protected virtual NameValueCollection SetupParameters(SearchQuery searchQuery, Localization localization)
         {
             NameValueCollection result = new NameValueCollection(searchQuery.QueryStringParameters);
-            result["fq"] = "publicationid:" + localization.LocalizationId;
+            result["fq"] = "publicationid:" + localization.Id; // TODO: What about CM URI scheme?
             result["q"] = searchQuery.QueryText;
             result["start"] = searchQuery.Start.ToString(CultureInfo.InvariantCulture);
             result["rows"] = searchQuery.PageSize.ToString(CultureInfo.InvariantCulture);

@@ -32,7 +32,7 @@ namespace Sdl.Web.Modules.AudienceManager
 
                     // We include the Localization ID in the cache key, because a user name may resolve to a different Contact / User Profile
                     // in a different context Localization (associated with a different AM Sync Target).
-                    string cacheKey = string.Format("{0}:{1}", currentUserName, WebRequestContext.Localization.LocalizationId);
+                    string cacheKey = $"{currentUserName}:{WebRequestContext.Localization.Id}";
 
                     return SiteConfiguration.CacheProvider.GetOrAdd(
                         cacheKey,
@@ -61,7 +61,7 @@ namespace Sdl.Web.Modules.AudienceManager
                 Localization localization = WebRequestContext.Localization;
 
                 // Audience Manager reads the context Publication ID from ADF:
-                AmbientDataContext.CurrentClaimStore.Put(new Uri("taf:claim:publication:id"), localization.LocalizationId);
+                AmbientDataContext.CurrentClaimStore.Put(new Uri("taf:claim:publication:id"), localization.Id);
 
                 string contactImportSources = localization.GetConfigValue("audiencemanager.contactImportSources");
                 Contact contact = null;

@@ -21,9 +21,9 @@
         <select class="selectpicker" data-width="auto">
             @foreach (var loc in filteredLocalizations)
             {
-                var parms = "localizationId=" + loc.LocalizationId + (defaultItem != null ? "&defaultItem=" + defaultItem : "");
+                var parms = "localizationId=" + loc.Id + (defaultItem != null ? "&defaultItem=" + defaultItem : "");
                 parms += "&defaultPath=" + loc.Path;
-                <option value="@loc.LocalizationId" data-href="@(WebRequestContext.Localization.Path)/resolve/@(redirectId)?@parms" @(loc.LocalizationId == WebRequestContext.Localization.LocalizationId ? "selected" : "")>
+                <option value="@loc.Id" data-href="@(WebRequestContext.Localization.Path)/resolve/@(redirectId)?@parms" @(loc.Id == WebRequestContext.Localization.Id ? "selected" : "")>
                     @loc.Language
                 </option>
             }
