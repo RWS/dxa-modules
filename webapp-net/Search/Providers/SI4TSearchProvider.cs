@@ -47,7 +47,7 @@ namespace Sdl.Web.Modules.Search.Providers
             string result = localization.GetConfigValue("search.queryURL");
             if (string.IsNullOrEmpty(result))
             {
-                result = localization.GetConfigValue("search." + (localization.IsStaging ? "staging" : "live") + "IndexConfig");
+                result = localization.GetConfigValue("search." + (localization.IsXpmEnabled ? "staging" : "live") + "IndexConfig");
             }
             return result;
         }

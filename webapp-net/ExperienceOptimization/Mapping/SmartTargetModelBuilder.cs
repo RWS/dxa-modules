@@ -200,7 +200,7 @@ namespace Sdl.Web.Modules.SmartTarget.Mapping
                     experimentDimensions.Region = smartTargetRegion.Name;
                 }
 
-                if (localization.IsStaging)
+                if (localization.IsXpmEnabled)
                 {
                     // The SmartTarget API provides the entire XPM markup tag; put it in XpmMetadata["Query"]. See SmartTargetRegion.GetStartQueryXpmMarkup.
                     smartTargetRegion.XpmMetadata = new Dictionary<string, object>
