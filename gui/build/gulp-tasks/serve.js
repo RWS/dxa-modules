@@ -130,7 +130,7 @@ module.exports = function (buildOptions, gulp, browserSync) {
             webpackCompiler.plugin('done', stats => {
                 if (!browserSync.active) {
                     browserSync.init(browserSyncOptions, () => {
-                        buildOptions.ports.httpServer = browserSync.getOption("port")
+                        buildOptions.ports.httpServer = browserSync.getOption("port");
                         cb();
                     });
                 }
@@ -140,7 +140,7 @@ module.exports = function (buildOptions, gulp, browserSync) {
             });
         } else {
             browserSync.init(browserSyncOptions, () => {
-                buildOptions.ports.httpServer = browserSync.getOption("port")
+                buildOptions.ports.httpServer = browserSync.getOption("port");
                 cb();
             });
         }
