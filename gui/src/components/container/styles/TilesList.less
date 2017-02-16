@@ -1,6 +1,8 @@
 @import (reference) "../../../theming/styles.less";
 @import (reference) "../../presentation/styles/TopBar.less";
 .sdl-dita-delivery-tiles-list {
+    @tileHeight: 256px;
+    @tilewidth: 275px;
     margin: 0 auto;
     button {
         text-transform: uppercase;
@@ -14,34 +16,34 @@
         align-content: flex-start;
         .sdl-dita-delivery-tile {
             display: inline-block;
-            flex-grow: 1;
-            flex-shrink: 1;
-            flex-basis: 250px;
-            max-width: 370px;
-            min-width: 250px;
+            flex: 1 1 @tilewidth;
+            height: @tileHeight;
             margin: 10px;
-            height: 256px;
-            background: #FFFFFF;
-            border: 1px solid #E1E7EB;
-            box-shadow: 0 2px 0 0 #E1E7EB;
+            background-color: #fff;
+            border: 1px solid @neutralColor5;
+            box-shadow: 0 2px 0 0 @neutralColor5;
             border-radius: 4px;
             h3 {
                 .header-font(300, 20px, 20px);
-                color: #2A3B4C;
+                color: @neutralColor1;
                 text-align: center;
             }
             hr {
                 margin: 10px 20px;
-                background: #E1E7EB;
+                background: @neutralColor5;
                 height: 1px;
                 border: none;
             }
             p {
                 .paragraph();
-                color: #5D6E7F;
                 line-height: 14px;
-                margin: 15px 5px;
+                margin: 15px;
                 height: 90px;
+            }
+            &:empty {
+                /* Tile placeholder for making other tiles align propertly*/
+                height: 0;
+                border: none;
             }
         }
     }

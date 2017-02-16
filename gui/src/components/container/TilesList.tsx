@@ -83,6 +83,10 @@ export class TilesList extends React.Component<ITilesListProps, ITilesListState>
                     {tilesToDisplay.map((tile: ITile, i: number) => {
                         return <Tile key={i} tile={tile}/>;
                     })}
+                    {/* The following items are tiles placeholders, its intention to properly distribute tile width depending from screen resolution*/}
+                    <div className={"sdl-dita-delivery-tile"}/>
+                    <div className={"sdl-dita-delivery-tile"}/>
+                    <div className={"sdl-dita-delivery-tile"}/>
                 </nav>
                 {!showAllItems && <button onClick={() => {
                     this.setState({
