@@ -45,7 +45,6 @@
     "less-loader": "~2.2.3",
     "lodash": "~4.17.4",
     "napa": "~2.3.0",
-    "portfinder": "~1.0.3",
     "postcss-loader": "~1.2.2",
     "react-addons-test-utils": "~15.3.1",
     "remap-istanbul": "~0.8.3",
