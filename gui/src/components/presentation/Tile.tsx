@@ -37,14 +37,14 @@ export interface ITile {
      *
      * @memberOf ITile
      */
-    navigateTo(): void;
+    navigateTo?: () => void;
 }
 
 /**
- * Search bar component props
+ * Tile component props
  *
  * @export
- * @interface ISearchBarProps
+ * @interface ITileProps
  */
 export interface ITileProps {
     /**
@@ -56,10 +56,11 @@ export interface ITileProps {
 }
 
 /**
- * Search bar component
+ * Tile component
  */
 export const Tile: React.StatelessComponent<ITileProps> = (props: ITileProps, context: IAppContext): JSX.Element => {
     const tile = props.tile;
+    const tileNavigate = tile.navigateTo;
     return (
         <div className="sdl-dita-delivery-tile">
             <h3>{tile.title}</h3>
@@ -67,10 +68,12 @@ export const Tile: React.StatelessComponent<ITileProps> = (props: ITileProps, co
             <p>
                 {tile.description && StringHelper.truncate(tile.description)}
             </p>
-            <button onClick={() => {
-                tile.navigateTo();
-            } }>{context.services.localizationService.formatMessage("components.tiles.more")}
-            </button>
+            {tileNavigate && <button
+                className={"sdl-button sdl-button-large sdl-button-purpose-confirm graphene"}
+                onClick={() => {
+                    tileNavigate();
+                } }>{context.services.localizationService.formatMessage("components.tiles.more")}
+            </button>}
         </div>
     );
 };

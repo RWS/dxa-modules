@@ -1,10 +1,9 @@
 import * as React from "react";
 import { IAppContext } from "components/container/App";
 import { Tile, ITile } from "components/presentation/Tile";
-
 import "components/container/styles/TilesList";
 
-const SHOWN_ITEMS_COUNT = 5;
+const SHOWN_ITEMS_COUNT = 8;
 
 /**
  * Tiles List component props
@@ -55,7 +54,7 @@ export class TilesList extends React.Component<ITilesListProps, ITilesListState>
     private _isUnmounted: boolean = false;
 
     /**
-     * Creates an instance of Publications list component.
+     * Creates an instance of Tiles list component.
      *
      */
     constructor() {
@@ -81,14 +80,12 @@ export class TilesList extends React.Component<ITilesListProps, ITilesListState>
             <section className={"sdl-dita-delivery-tiles-list"}>
                 <nav>
                     {tilesToDisplay.map((tile: ITile, i: number) => {
-                        return <Tile key={i} tile={tile}/>;
+                        return <Tile key={i} tile={tile} />;
                     })}
                     {/* The following items are tiles placeholders, its intention to properly distribute tile width depending from screen resolution*/}
-                    <div className={"sdl-dita-delivery-tile"}/>
-                    <div className={"sdl-dita-delivery-tile"}/>
-                    <div className={"sdl-dita-delivery-tile"}/>
+                    <div /><div /><div />
                 </nav>
-                {!showAllItems && <button onClick={() => {
+                {(!showAllItems && (tiles.length > tilesToDisplay.length)) && <button className={"sdl-button sdl-button-large sdl-button-purpose-confirm graphene show-all-tiles"} onClick={() => {
                     this.setState({
                         showAllItems: true
                     });
