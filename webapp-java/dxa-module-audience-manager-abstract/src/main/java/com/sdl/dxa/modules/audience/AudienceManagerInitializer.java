@@ -47,7 +47,7 @@ public class AudienceManagerInitializer { //NOSONAR
             description = "Implementation of support for SDL Audience Manager")
     @RegisteredViewModels(value = {
             @RegisteredViewModel(viewName = "LoginForm", modelClass = LoginForm.class, controllerName = "Profile"),
-            @RegisteredViewModel(viewName = "CurrentUserWidget", modelClass = CurrentUserWidget.class)
+            @RegisteredViewModel(viewName = "CurrentUserWidget", modelClass = CurrentUserWidget.class, controllerName = "Profile")
     })
     public static class ModuleInitializer extends AbstractInitializer {
 

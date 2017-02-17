@@ -57,7 +57,7 @@ public class CoreInitializer {
             @RegisteredViewModel(viewName = "TeaserHero-ImageOverlay", modelClass = Teaser.class),
             @RegisteredViewModel(viewName = "TeaserMap", modelClass = Teaser.class),
             @RegisteredViewModel(viewName = "ThumbnailList", modelClass = ContentList.class),
-            @RegisteredViewModel(viewName = "TopNavigation", modelClass = NavigationLinks.class),
+            @RegisteredViewModel(viewName = "TopNavigation", modelClass = NavigationLinks.class, controllerName = "Navigation"),
             @RegisteredViewModel(viewName = "YouTubeVideo", modelClass = YouTubeVideo.class),
             @RegisteredViewModel(viewName = "GeneralPage", modelClass = DefaultPageModel.class),
             @RegisteredViewModel(viewName = "IncludePage", modelClass = DefaultPageModel.class),
