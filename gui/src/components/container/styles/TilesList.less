@@ -1,0 +1,41 @@
+@import (reference) "../../../theming/styles.less";
+.sdl-dita-delivery-tiles-list {
+    @tileHeight: 256px;
+    @tilewidth: 275px;
+    margin: 0 auto;
+    button.sdl-button {
+        text-transform: uppercase;
+        margin: 20px auto;
+        display: block;
+    }
+    nav {
+        display: inline-flex;
+        flex-flow: row wrap;
+        justify-content: flex-start;
+        align-content: flex-start;
+        > * {
+            flex: 1 1 @tilewidth;
+            height: @tileHeight;
+            &:empty {
+                /* Empry tile placeholder for making other tiles align propertly*/
+                height: 0;
+                border: none;
+            }
+        }
+        .sdl-dita-delivery-tile {
+            margin: 10px;
+            h3 {
+                height: 50px;
+                margin: 5px auto;
+            }
+            hr {
+                margin: 10px 20px;
+            }
+            p {
+                margin: 15px;
+                height: 90px;
+                overflow: hidden;
+            }
+        }
+    }
+}
