@@ -16,37 +16,22 @@
         > * {
             flex: 1 1 @tilewidth;
             height: @tileHeight;
-            border: none;
             &:empty {
-                /* Tile placeholder for making other tiles align propertly*/
+                /* Empry tile placeholder for making other tiles align propertly*/
                 height: 0;
+                border: none;
             }
         }
         .sdl-dita-delivery-tile {
             margin: 10px;
-            background-color: #fff;
-            border: 1px solid @neutralColor5;
-            box-shadow: 0 2px 0 0 @neutralColor5;
-            border-radius: 4px;
             h3 {
-                .header-font(300, 20px, 20px);
-                color: @neutralColor1;
-                text-align: center;
-                display: flex;
-                justify-content: center;
-                align-items: center;
                 height: 50px;
                 margin: 5px auto;
             }
             hr {
                 margin: 10px 20px;
-                background: @neutralColor5;
-                height: 1px;
-                border: none;
             }
             p {
-                .paragraph();
-                line-height: 14px;
                 margin: 15px;
                 height: 90px;
                 overflow: hidden;
