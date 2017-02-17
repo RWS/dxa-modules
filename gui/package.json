@@ -2,6 +2,8 @@
   "name": "sdl-dita-delivery-web-app-gui",
   "version": "1.0.0-SNAPSHOT",
   "description": "GUI of the SDL Dita Delivery Web Application.",
+  "main": "dist/main.bundle.js",
+  "typings": "dist/assets/typings/src/Main.d.ts",
   "dependencies": {
     "es6-promise": "~4.0.5",
     "react": "~15.3.2",
@@ -74,7 +76,6 @@
   },
   "author": "jbevers@sdl.com",
   "license": "Apache-2.0",
-  "private": true,
   "napa": {
     "dita-ot": "dita-ot/dita-ot#ff8fbfd1d1dc69773e0af1cd726408b651eba1ec"
   }
