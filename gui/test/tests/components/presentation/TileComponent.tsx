@@ -29,7 +29,7 @@ class TileComponent extends TestBase {
             it("properly renders title and description", (): void => {
                 const tile = {
                     id: "tile id",
-                    title: "tile title",
+                    title: "Penguins (order Sphenisciformes, family Spheniscidae)",
                     description: "Penguins (order Sphenisciformes, family Spheniscidae) are a group of aquatic, "
                     + "flightless birds living almost exclusively in the southern hemisphere, especially in "
                     + "Antarctica. Highly adapted for life in the water, penguins have countershaded dark and "
@@ -45,11 +45,11 @@ class TileComponent extends TestBase {
                 const appNode = ReactDOM.findDOMNode(target);
 
                 const tileTitleNode = appNode.querySelector(".sdl-dita-delivery-tile h3");
-                expect(tileTitleNode.textContent).toBe(tile.title);
+                expect(tileTitleNode.textContent).toBe("Penguins (order Sphenisciformes, family...");
 
                 const descriptionNode = appNode.querySelector(".sdl-dita-delivery-tile p");
                 expect(descriptionNode.textContent).toBe("Penguins (order Sphenisciformes, family Spheniscidae) are a group of aquatic, flightless birds living almost "
-                    + "exclusively in the southern hemisphere, especially in Antarctica. Highly adapted for life in the water, penguins have countershaded dark and...");
+                    + "exclusively in the southern hemisphere, especially in Antarctica. Highly adapted for life...");
             });
 
             it("navigates when `view all` button is clicked", (done: () => void): void => {

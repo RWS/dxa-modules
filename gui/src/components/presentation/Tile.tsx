@@ -4,6 +4,9 @@ import { String as StringHelper } from "utils/String";
 
 import "components/presentation/styles/Tile";
 
+const TILE_TITLE_TRUNCATE = 50;
+const TILE_DESCRIPTION_TRUNCATE = 200;
+
 /**
  * Tile item interface
  *
@@ -63,10 +66,12 @@ export const Tile: React.StatelessComponent<ITileProps> = (props: ITileProps, co
     const tileNavigate = tile.navigateTo;
     return (
         <div className="sdl-dita-delivery-tile">
-            <h3>{tile.title}</h3>
+            <div className="tile-header-wrapper">
+                <h3>{StringHelper.truncate(tile.title, TILE_TITLE_TRUNCATE)}</h3>
+            </div>
             <hr />
             <p>
-                {tile.description && StringHelper.truncate(tile.description)}
+                {tile.description && StringHelper.truncate(tile.description, TILE_DESCRIPTION_TRUNCATE)}
             </p>
             {tileNavigate && <button
                 className={"sdl-button sdl-button-large sdl-button-purpose-confirm graphene"}
