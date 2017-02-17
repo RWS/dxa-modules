@@ -85,11 +85,13 @@ export class TilesList extends React.Component<ITilesListProps, ITilesListState>
                     {/* The following items are tiles placeholders, its intention to properly distribute tile width depending from screen resolution*/}
                     <div /><div /><div />
                 </nav>
-                {(!showAllItems && (tiles.length > tilesToDisplay.length)) && <button className={"sdl-button sdl-button-large sdl-button-purpose-confirm graphene show-all-tiles"} onClick={() => {
-                    this.setState({
-                        showAllItems: true
-                    });
-                } }>{services.localizationService.formatMessage("components.tiles.all")}</button>}
+                {(!showAllItems && (tiles.length > tilesToDisplay.length)) && <button
+                    className={"sdl-button sdl-button-large sdl-button-purpose-confirm graphene show-all-tiles"}
+                    onClick={() => {
+                        this.setState({
+                            showAllItems: true
+                        });
+                    } }>{services.localizationService.formatMessage("components.tiles.all")}</button>}
             </section>);
     }
 
