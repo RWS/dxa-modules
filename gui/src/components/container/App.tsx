@@ -4,6 +4,8 @@ import { IServices } from "interfaces/Services";
 import { Home } from "components/container/Home";
 import { PublicationContent } from "components/container/PublicationContent";
 import { PublicationsList } from "components/container/PublicationsList";
+import { ProductFamiliesList } from "components/container/ProductFamiliesList";
+
 import { path } from "utils/Path";
 
 export interface IAppProps {
@@ -68,7 +70,8 @@ export class App extends React.Component<IAppProps, {}> {
                 <Route path={path.getRootPath()} component={Home} >
                     <IndexRedirect to="home" />
                     <Redirect from="home;jsessionid=*" to="home" />
-                    <Route path="home" component={PublicationsList} />
+                    <Route path="home" component={ProductFamiliesList} />
+                    <Route path="product-family/:productFamily" component={PublicationsList} />
                     <Route path=":publicationId(/:pageIdOrPublicationTitle)(/:publicationTitle)(/:pageTitle)(/:pageAnchor)" component={PublicationContent} />
                 </Route>
             </Router>

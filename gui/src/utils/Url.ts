@@ -22,6 +22,21 @@ const TITLE_MAX_CHARS = 250;
 export class Url {
 
     /**
+     * Creates a product family  url
+     *
+     * @static
+     * @param {string} productFamily product family
+     * @returns {string}
+     *
+     * @memberOf Url
+     */
+    public static getProductFamilyUrl(productFamily: string): string {
+        const rootPath = path.getRootPath();
+        // Don't slugify product family as we need to be able to look it up again
+        return `${rootPath}product-family/${encodeURIComponent(productFamily)}`;
+    }
+
+    /**
      * Creates a publication url
      *
      * @static
