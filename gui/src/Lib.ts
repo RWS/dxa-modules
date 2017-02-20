@@ -1,3 +1,11 @@
+/**
+ * Load global stylesheets
+ */
+import "sdl-controls-react-wrappers/dist/stylesheets/main";
+
+/**
+ * Components
+ */
 import * as AppComp from "components/container/App";
 import * as HomeComp from "components/container/Home";
 import * as PublicationContentComp from "components/container/PublicationContent";
@@ -15,3 +23,21 @@ export const Components = {
     BreadcrumbsComp, ContentNavigationComp, NavigationMenuComp,
     PageComp, SearchBarComp, TocComp, TopBarComp
 };
+
+/**
+ * Services
+ */
+import { PageService } from "services/client/PageService";
+import { PublicationService } from "services/client/PublicationService";
+import { TaxonomyService } from "services/client/TaxonomyService";
+import { LocalizationService, localization } from "services/common/LocalizationService";
+
+export const Services = {
+    Client: { PageService, PublicationService, TaxonomyService },
+    Common: { LocalizationService, localization }
+};
+
+export * from "services/interfaces/LocalizationService";
+export * from "services/interfaces/PageService";
+export * from "services/interfaces/PublicationService";
+export * from "services/interfaces/TaxonomyService";

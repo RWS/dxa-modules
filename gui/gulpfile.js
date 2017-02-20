@@ -98,10 +98,12 @@ gulp.task('copy-dependencies', cb => {
 });
 
 gulp.task('copy-lib-files', cb => {
+    const srcPath = buildOptions.sourcesPath;
     gulp.src([
-        './src/**/*.less',
-        './src/**/*.{jpg,svg}',
-        './src/**/*.{eot,woff,woff2,ttf}'
+        `${srcPath}**/*.less`,
+        `${srcPath}**/*.{jpg,svg}`,
+        `${srcPath}**/*.{eot,woff,woff2,ttf}`,
+        `${srcPath}**/*.resjson`
     ])
         .pipe(gulpDebug({
             title: 'Copying'
