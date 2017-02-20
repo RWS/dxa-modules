@@ -5,3 +5,9 @@
 .vscode
 .vs
 .idea
+*.iml
+
+# Java build
+node
+target
+pom.xml

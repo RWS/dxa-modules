@@ -36,7 +36,13 @@ module.exports = function (buildOptions, gulp, runTests, singleRun) {
             var allFilesCovered = true;
             var testedFilesCount = Object.keys(collector.store.map).length;
             var instrumentedFiles = glob.sync(`${buildOptions.sourcesPath}**/*.{ts,tsx}`, {
-                ignore: [`${buildOptions.sourcesPath}**/*.d.ts`, `${buildOptions.sourcesPath}/Main.tsx`]
+                ignore: [
+                    `${buildOptions.sourcesPath}**/*.d.ts`,
+                    `${buildOptions.sourcesPath}/Main.tsx`,
+                    `${buildOptions.sourcesPath}/interfaces/*.ts`,
+                    `${buildOptions.sourcesPath}/services/interfaces/*.ts`,
+                    `${buildOptions.sourcesPath}/Lib.ts`
+                ]
             }).map(item => {
                 let key = item;
                 if (path.sep !== '/') {

@@ -97,8 +97,22 @@ gulp.task('copy-dependencies', cb => {
     ], cb);
 });
 
+gulp.task('copy-lib-files', cb => {
+    gulp.src([
+        './src/**/*.less',
+        './src/**/*.{jpg,svg}',
+        './src/**/*.{eot,woff,woff2,ttf}'
+    ])
+        .pipe(gulpDebug({
+            title: 'Copying'
+        }))
+        .pipe(gulp.dest(`${buildOptions.distPath}lib/`))
+        .on('end', cb);
+});
+
 gulp.task('package-project', [
     'copy-dependencies',
+    'copy-lib-files',
     'install-typings',
     'wrap-dita-ot-styles'
 ], cb => {
@@ -107,7 +121,7 @@ gulp.task('package-project', [
         cb(err);
     };
     require('./build/gulp-tasks/package-project')(buildOptions)(onCompleted);
-} );
+});
 
 gulp.task('run-tslint', runTSLint);
 
@@ -123,6 +137,7 @@ gulp.task('wrap-dita-ot-styles', require('./build/gulp-tasks/wrap-dita-ot-styles
 // Common tasks
 gulp.task('build', [
     'copy-dependencies',
+    'copy-lib-files',
     'run-tslint',
     'package-project'
 ]);
