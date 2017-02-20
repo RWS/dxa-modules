@@ -110,11 +110,11 @@ class PublicationsListComponent extends TestBase {
         });
     }
 
-    private _renderComponent(target: HTMLElement): PublicationsList {
+    private _renderComponent(target: HTMLElement, productFamily?: string): PublicationsList {
         const comp = ReactDOM.render(
             (
                 <ComponentWithContext {...services}>
-                    <PublicationsList />
+                    <PublicationsList params={{ productFamily: productFamily || "prod-family" }} />
                 </ComponentWithContext>
             ), target) as React.Component<{}, {}>;
         return TestUtils.findRenderedComponentWithType(comp, PublicationsList) as PublicationsList;

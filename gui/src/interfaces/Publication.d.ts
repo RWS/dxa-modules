@@ -20,4 +20,20 @@ export interface IPublication {
      * @memberOf IPublication
      */
     title?: string;
+
+    /**
+     * Publication product family
+     *
+     * @type {string}
+     * @memberOf IPublication
+     */
+    productFamily?: string;
+
+    /**
+     * Publication product release version
+     *
+     * @type {string}
+     * @memberOf IPublication
+     */
+    productReleaseVersion?: string;
 }

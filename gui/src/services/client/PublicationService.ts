@@ -1,5 +1,6 @@
 import { IPublicationService } from "services/interfaces/PublicationService";
 import { IPublication } from "interfaces/Publication";
+import { IProductFamily } from "interfaces/ProductFamily";
 import { localization } from "services/common/LocalizationService";
 import { Publications } from "models/Publications";
 import { Promise } from "es6-promise";
@@ -53,6 +54,34 @@ export class PublicationService implements IPublicationService {
                 publication.addEventListener("loadfailed", onLoadFailed);
                 publication.load();
             }
+        });
+    }
+
+    /**
+     * Get the list of publications product families
+     *
+     * @returns {Promise<IProductFamily[]>} Promise to return Items
+     *
+     * @memberOf DataStoreClient
+     */
+    public getProductFamilies(): Promise<IProductFamily[]> {
+        return new Promise((resolve: (publications?: IProductFamily[]) => void, reject: (error: string | null) => void) => {
+            this.getPublications().then(
+                publications => {
+                    resolve(publications.map((publication: IPublication) => {
+                        return publication.productFamily;
+                    }).filter((family: string, i: number, arr: string[]) => {
+                        return arr.indexOf(family) == i;
+                    }).map((family: string) => {
+                        return {
+                            // Only title now, description would go here later on
+                            title: family
+                        } as IProductFamily;
+                    }));
+                },
+                error => {
+                    reject(error);
+                });
         });
     }
 

@@ -1,5 +1,7 @@
 import { IPublicationService } from "services/interfaces/PublicationService";
 import { IPublication } from "interfaces/Publication";
+import { IProductFamily } from "interfaces/ProductFamily";
+
 import { Promise } from "es6-promise";
 
 let fakeDelay = false;
@@ -10,9 +12,11 @@ export class PublicationService implements IPublicationService {
     private _mockDataPublications: {
         error: string | null;
         publications: IPublication[];
+        productFamilies: IProductFamily[];
     } = {
         error: null,
-        publications: []
+        publications: [],
+        productFamilies: []
     };
 
     private _mockDataPublication: {
@@ -42,6 +46,25 @@ export class PublicationService implements IPublicationService {
         }
     }
 
+    public getProductFamilies(): Promise<IProductFamily[]> {
+        const { error, productFamilies} = this._mockDataPublications;
+        if (fakeDelay) {
+            return new Promise((resolve: (productFamilies?: IProductFamily[]) => void, reject: (error: string | null) => void) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(productFamilies);
+                }
+            });
+        } else {
+            if (error) {
+                return Promise.reject(error);
+            } else {
+                return Promise.resolve(productFamilies);
+            }
+        }
+    }
+
     public getPublicationTitle(publicationId: string): Promise<string> {
         const { error, title } = this._mockDataPublication;
         if (fakeDelay) {
@@ -64,10 +87,11 @@ export class PublicationService implements IPublicationService {
         }
     }
 
-    public setMockDataPublications(error: string | null, publications?: IPublication[]): void {
+    public setMockDataPublications(error: string | null, publications?: IPublication[], productFamilies?: IProductFamily[]): void {
         this._mockDataPublications = {
             error: error,
-            publications: publications || []
+            publications: publications || [],
+            productFamilies: productFamilies || []
         };
     }
 

@@ -1,4 +1,5 @@
 import { IPublication } from "interfaces/Publication";
+import { IProductFamily } from "interfaces/ProductFamily";
 import { Promise } from "es6-promise";
 
 /**
@@ -14,6 +15,15 @@ export interface IPublicationService {
      * @memberOf IDataStore
      */
     getPublications(): Promise<IPublication[]>;
+
+    /**
+     * Get the list of publications product families
+     *
+     * @returns {Promise<IProductFamily[]>} Promise to return Items
+     *
+     * @memberOf DataStoreClient
+     */
+    getProductFamilies(): Promise<IProductFamily[]>;
 
     /**
      * Get the publication title
