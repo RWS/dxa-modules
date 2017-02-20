@@ -6,6 +6,7 @@ import "test/tests/components/container/AppComponent";
 import "test/tests/components/container/HomeComponent";
 import "test/tests/components/container/PublicationContentComponent";
 import "test/tests/components/container/PublicationsListComponent";
+import "test/tests/components/container/ProductFamiliesList";
 import "test/tests/components/container/TilesListComponent";
 import "test/tests/components/presentation/BreadcrumbsComponent";
 import "test/tests/components/presentation/ContentNavigationComponent";

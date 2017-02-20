@@ -51,6 +51,7 @@ export class TilesList extends React.Component<ITilesListProps, ITilesListState>
     };
 
     public context: IAppContext;
+    private _isUnmounted: boolean = false;
 
     /**
      * Creates an instance of Tiles list component.
@@ -87,10 +88,20 @@ export class TilesList extends React.Component<ITilesListProps, ITilesListState>
                 {(!showAllItems && (tiles.length > tilesToDisplay.length)) && <button
                     className={"sdl-button sdl-button-large sdl-button-purpose-confirm graphene show-all-tiles"}
                     onClick={() => {
-                        this.setState({
-                            showAllItems: true
-                        });
+                        /* istanbul ignore if */
+                        if (!this._isUnmounted) {
+                            this.setState({
+                                showAllItems: true
+                            });
+                        }
                     } }>{services.localizationService.formatMessage("components.tiles.all")}</button>}
             </section>);
+    }
+
+    /**
+     * Component will unmount
+     */
+    public componentWillUnmount(): void {
+        this._isUnmounted = true;
     }
 }

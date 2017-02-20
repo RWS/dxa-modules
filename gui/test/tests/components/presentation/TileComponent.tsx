@@ -52,7 +52,7 @@ class TileComponent extends TestBase {
                     + "exclusively in the southern hemisphere, especially in Antarctica. Highly adapted for life...");
             });
 
-            it("navigates when `view all` button is clicked", (done: () => void): void => {
+            it("navigates when `view more` button is clicked", (done: () => void): void => {
                 const tile = {
                     id: "tile id",
                     title: "tile title",
@@ -66,9 +66,9 @@ class TileComponent extends TestBase {
                 }, target);
                 const appNode = ReactDOM.findDOMNode(target);
 
-                const viewAllButtonNode = appNode.querySelector(".sdl-dita-delivery-tile button");
-                expect(viewAllButtonNode).not.toBeNull();
-                TestUtils.Simulate.click(viewAllButtonNode);
+                const viewMoreButtonNode = appNode.querySelector(".sdl-dita-delivery-tile button");
+                expect(viewMoreButtonNode).not.toBeNull();
+                TestUtils.Simulate.click(viewMoreButtonNode);
             });
 
         });

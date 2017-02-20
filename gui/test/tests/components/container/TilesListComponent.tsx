@@ -48,7 +48,7 @@ class TilesListComponent extends TestBase {
                 });
             });
 
-            it("renders only first 8 items, and expands when view all is clicked", (): void => {
+            it("renders only first 8 items, and expands when view all is clicked", (done: () => void): void => {
                 const tilesCount = 50;
                 const tilesItems: ITile[] = Array(tilesCount).join(",").split(",").map((n, i) => {
                     return {
@@ -68,8 +68,12 @@ class TilesListComponent extends TestBase {
                 expect(viewAllButtonNode).not.toBeNull();
                 TestUtils.Simulate.click(viewAllButtonNode);
 
-                expect(TestUtils.scryRenderedDOMComponentsWithClass(tilesList, "sdl-dita-delivery-tile").length).toBe(tilesCount);
-                expect(TestUtils.scryRenderedDOMComponentsWithClass(tilesList, "show-all-tiles").length).toBe(0);
+                setTimeout((): void => {
+                    expect(TestUtils.scryRenderedDOMComponentsWithClass(tilesList, "sdl-dita-delivery-tile").length).toBe(tilesCount);
+                    expect(TestUtils.scryRenderedDOMComponentsWithClass(tilesList, "show-all-tiles").length).toBe(0);
+
+                    done();
+                }, 0);
             });
         });
     }

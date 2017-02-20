@@ -55,14 +55,19 @@ class PublicationsListComponent extends TestBase {
                 }, 500);
             });
 
-            it("renders publications list", (done: () => void): void => {
+            it("renders only publications associated with product family", (done: () => void): void => {
                 services.publicationService.fakeDelay(true);
                 const publications = [{
                     id: "1",
-                    title: "Publication 1"
+                    title: "Publication 1",
+                    productFamily: "prod-family"
                 }, {
                     id: "2",
-                    title: "Publication 2"
+                    title: "Publication 2",
+                    productFamily: "prod-family"
+                }, {
+                    id: "3",
+                    title: "Publication 3"
                 }];
                 services.publicationService.setMockDataPublications(null, publications);
 
@@ -82,7 +87,8 @@ class PublicationsListComponent extends TestBase {
             it("navigates to publication when a publication title is clicked", (done: () => void): void => {
                 const publications = [{
                     id: "0",
-                    title: "Publication"
+                    title: "Publication",
+                    productFamily: "prod-family"
                 }];
                 services.publicationService.setMockDataPublications(null, publications);
 
