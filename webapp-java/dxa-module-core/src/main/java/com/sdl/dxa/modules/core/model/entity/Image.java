@@ -69,7 +69,7 @@ public class Image extends MediaItem {
     }
 
     @Override
-    public MvcData getMvcData() {
+    public MvcData getDefaultMvcData() {
         return MvcDataCreator.creator()
                 .fromQualifiedName("Core:Entity:Image")
                 .defaults(DefaultsMvcData.ENTITY)

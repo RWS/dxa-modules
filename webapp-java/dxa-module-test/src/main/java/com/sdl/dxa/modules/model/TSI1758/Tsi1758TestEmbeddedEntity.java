@@ -28,7 +28,7 @@ public class Tsi1758TestEmbeddedEntity extends AbstractEntityModel {
 
 
     @Override
-    public MvcData getMvcData() {
+    public MvcData getDefaultMvcData() {
         return MvcDataCreator.creator()
                 .fromQualifiedName("Test:TSI1758TestEmbedded")
                 .defaults(DefaultsMvcData.ENTITY).create();

@@ -5,7 +5,6 @@ import com.sdl.webapp.common.api.model.entity.Link;
 import com.sdl.webapp.common.api.model.entity.Tag;
 import com.sdl.webapp.common.api.model.query.SimpleBrokerQuery;
 import org.jetbrains.annotations.NotNull;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -20,15 +19,16 @@ import static org.mockito.Mockito.when;
 
 public class ContentListTest {
 
-    private static final Tag CONTENT_TYPE = mock(Tag.class);
+    private static final Tag CONTENT_TYPE = getTag();
 
-    private static final Tag SORT = mock(Tag.class);
+    private static final Tag SORT = new Tag();
 
-    private static final Link LINK = mock(Link.class);
+    private static final Link LINK = new Link();
 
-    @Before
-    public void before() {
-        when(CONTENT_TYPE.getKey()).thenReturn("json");
+    private static Tag getTag() {
+        Tag tag = new Tag();
+        tag.setKey("json");
+        return tag;
     }
 
     @Test
@@ -90,7 +90,7 @@ public class ContentListTest {
     public void shouldReturnSort() {
         //given
         ContentList contentList = new ContentList();
-        Tag tag = mock(Tag.class);
+        Tag tag = new Tag();
         contentList.setSort(tag);
         //then
         assertEquals(tag, contentList.getSort());
@@ -100,7 +100,7 @@ public class ContentListTest {
     public void shouldReturnContentType() {
         //given
         ContentList contentList = new ContentList();
-        Tag tag = mock(Tag.class);
+        Tag tag = new Tag();
         contentList.setContentType(tag);
         //then
         assertEquals(tag, contentList.getContentType());
@@ -131,6 +131,20 @@ public class ContentListTest {
                         ", itemListElements=" + new ArrayList<>().toString() +
                         ")",
                 contentList.toString());
+    }
+
+    @NotNull
+    private ContentList getFilledContentList() {
+        ContentList contentList = new ContentList();
+        contentList.setHeadline("ContentListHeadLine");
+        contentList.setLink(LINK);
+        contentList.setPageSize(100);
+        contentList.setContentType(CONTENT_TYPE);
+        contentList.setSort(SORT);
+        contentList.setCurrentPage(2);
+        contentList.setHasMore(true);
+        contentList.setItemListElements(new ArrayList<Teaser>());
+        return contentList;
     }
 
     @Test
@@ -190,20 +204,6 @@ public class ContentListTest {
         assertEquals(contentList.getPageSize(), query.getPageSize());
         assertEquals(43, query.getSchemaId());
         assertEquals(SORT.getKey(), query.getSort());
-    }
-
-    @NotNull
-    private ContentList getFilledContentList() {
-        ContentList contentList = new ContentList();
-        contentList.setHeadline("ContentListHeadLine");
-        contentList.setLink(LINK);
-        contentList.setPageSize(100);
-        contentList.setContentType(CONTENT_TYPE);
-        contentList.setSort(SORT);
-        contentList.setCurrentPage(2);
-        contentList.setHasMore(true);
-        contentList.setItemListElements(new ArrayList<Teaser>());
-        return contentList;
     }
 
     @Test
