@@ -34,7 +34,9 @@ export class Publications extends LoadableObject {
         this._publications = (JSON.parse(result) as ServerModels.IPublication[]).map((item: ServerModels.IPublication) => {
             return {
                 id: item.Id,
-                title: item.Title
+                title: item.Title,
+                productFamily: item.ProductFamily,
+                productReleaseVersion: item.ProductReleaseVersion
             } as IPublication;
         });
 

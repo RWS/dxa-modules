@@ -6,6 +6,8 @@ export interface IPage {
 }
 export interface IPublication {
     Id: string;
+    ProductFamily?: string;
+    ProductReleaseVersion?: string;
     Title: string;
 }
 export interface ISitemapItem {
