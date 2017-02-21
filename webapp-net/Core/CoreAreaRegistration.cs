@@ -30,8 +30,8 @@ namespace Sdl.Web.Modules.Core
             RegisterViewModel("LanguageSelector", typeof(Configuration));
             RegisterViewModel("OldBrowserNotificationBar", typeof(Notification));
             RegisterViewModel("Place", typeof(Place));
-            RegisterViewModel("SocialLinks", typeof(LinkList<TagLink>));
-            RegisterViewModel("SocialSharing", typeof(LinkList<TagLink>));
+            RegisterViewModel("SocialLinks", typeof(LinkList<Sdl.Web.Modules.Core.Models.TagLink>));
+            RegisterViewModel("SocialSharing", typeof(LinkList<Sdl.Web.Modules.Core.Models.TagLink>));
             RegisterViewModel("Tab", typeof(ItemList));
             RegisterViewModel("Teaser-ImageOverlay", typeof(Teaser));
             RegisterViewModel("Teaser", typeof(Teaser));

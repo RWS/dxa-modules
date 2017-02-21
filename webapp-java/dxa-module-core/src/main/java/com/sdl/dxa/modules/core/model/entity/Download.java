@@ -86,7 +86,7 @@ public class Download extends MediaItem implements FeedItemsProvider {
     public MvcData getMvcData() {
         return MvcDataCreator.creator()
                 .fromQualifiedName("Core:Entity:Download")
-                .defaults(DefaultsMvcData.CORE_ENTITY)
+                .defaults(DefaultsMvcData.ENTITY)
                 .create();
     }
 

@@ -41,7 +41,7 @@ namespace Sdl.Web.Modules.Core.Models
             {
                 Start = Start,
                 PageSize = PageSize,
-                PublicationId = Int32.Parse(localization.LocalizationId),
+                PublicationId = Int32.Parse(localization.Id), // TODO: What about CM URI scheme?
                 SchemaId = MapSchema(localization),
                 Sort = Sort?.Key,
                 Localization = localization

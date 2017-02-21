@@ -1,8 +1,6 @@
 package com.sdl.dxa.modules.model.TSI1758;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticEntity;
-import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticProperty;
 import com.sdl.webapp.common.api.model.MvcData;
 import com.sdl.webapp.common.api.model.entity.AbstractEntityModel;
 import com.sdl.webapp.common.api.model.entity.Link;
@@ -33,7 +31,7 @@ public class Tsi1758TestEmbeddedEntity extends AbstractEntityModel {
     public MvcData getMvcData() {
         return MvcDataCreator.creator()
                 .fromQualifiedName("Test:TSI1758TestEmbedded")
-                .defaults(DefaultsMvcData.CORE_ENTITY).create();
+                .defaults(DefaultsMvcData.ENTITY).create();
     }
 
 }

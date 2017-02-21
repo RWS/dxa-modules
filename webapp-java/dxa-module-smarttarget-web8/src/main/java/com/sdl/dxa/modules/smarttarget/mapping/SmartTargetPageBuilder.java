@@ -55,7 +55,7 @@ public class SmartTargetPageBuilder extends AbstractSmartTargetPageBuilder {
                 new SmartTargetExperiment(experimentDimensions) : new SmartTargetPromotion();
 
         smartTargetPromotion.setMvcData(creator()
-                .defaults(DefaultsMvcData.CORE_ENTITY)
+                .defaults(DefaultsMvcData.ENTITY)
                 .mergeIn(creator().fromQualifiedName(promotionViewName).create())
                 .create());
 

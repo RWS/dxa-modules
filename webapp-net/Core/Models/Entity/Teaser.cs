@@ -27,6 +27,8 @@ namespace Sdl.Web.Modules.Core.Models
         [SemanticProperty("na:name")]
         [SemanticProperty("a:name")]
         [SemanticProperty("headline")]
+        [SemanticProperty("t:headline")]
+        [SemanticProperty("a:headline")]
         [SemanticProperty("subheading")]
         [SemanticProperty("p:name")]
         [SemanticProperty("c:subheading")]
@@ -48,8 +50,12 @@ namespace Sdl.Web.Modules.Core.Models
         public RichText Text { get; set; }
 
         [SemanticProperty("dateCreated")]
+        [SemanticProperty("m:dateCreated")]
+        [SemanticProperty("c:date")]
         public DateTime? Date { get; set; }
 
+        [SemanticProperty("p:location")]
+        [SemanticProperty("c:location")]
         public Location Location { get; set; }
 
         //To store formatting options for the teaser (link style etc.)
