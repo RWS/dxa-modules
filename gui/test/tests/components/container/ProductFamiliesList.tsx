@@ -90,7 +90,7 @@ class ProductFamiliesListComponent extends TestBase {
                 // Spy on the router
                 spyOn(productFamiliesList.context.router, "push").and.callFake((path: string): void => {
                     // Check if routing was called with correct params
-                    expect(path).toBe(`/product-family/Product%20Family`);
+                    expect(path).toBe(`/publications/Product%20Family`);
                     done();
                 });
 

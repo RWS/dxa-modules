@@ -65,23 +65,29 @@ export class PublicationService implements IPublicationService {
      * @memberOf DataStoreClient
      */
     public getProductFamilies(): Promise<IProductFamily[]> {
+        const publication = this.getPublicationsModel();
         return new Promise((resolve: (publications?: IProductFamily[]) => void, reject: (error: string | null) => void) => {
-            this.getPublications().then(
-                publications => {
-                    resolve(publications.map((publication: IPublication) => {
-                        return publication.productFamily;
-                    }).filter((family: string, i: number, arr: string[]) => {
-                        return arr.indexOf(family) == i;
-                    }).map((family: string) => {
-                        return {
-                            // Only title now, description would go here later on
-                            title: family
-                        } as IProductFamily;
-                    }));
-                },
-                error => {
-                    reject(error);
-                });
+            if (publication.isLoaded()) {
+                resolve(publication.getProductFamilies());
+            } else {
+                let removeEventListeners: () => void;
+                const onLoad = () => {
+                    removeEventListeners();
+                    resolve(publication.getProductFamilies());
+                };
+                const onLoadFailed = (event: Event & { data: { error: string } }) => {
+                    removeEventListeners();
+                    reject(event.data.error);
+                };
+                removeEventListeners = (): void => {
+                    publication.removeEventListener("load", onLoad);
+                    publication.removeEventListener("loadfailed", onLoadFailed);
+                };
+
+                publication.addEventListener("load", onLoad);
+                publication.addEventListener("loadfailed", onLoadFailed);
+                publication.load();
+            }
         });
     }
 

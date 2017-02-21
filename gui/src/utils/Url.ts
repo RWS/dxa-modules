@@ -33,7 +33,7 @@ export class Url {
     public static getProductFamilyUrl(productFamily: string): string {
         const rootPath = path.getRootPath();
         // Don't slugify product family as we need to be able to look it up again
-        return `${rootPath}product-family/${encodeURIComponent(productFamily)}`;
+        return `${rootPath}publications/${encodeURIComponent(productFamily)}`;
     }
 
     /**
