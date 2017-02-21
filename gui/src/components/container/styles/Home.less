@@ -42,7 +42,7 @@
     }
     .sdl-dita-delivery-publication-content {
         top: @navBarHeight;
-        transition: top .3s ease-out;
+        transition: top .3s ease-out, height .3s ease-out;
         height: ~"calc(100% - @{navBarHeight})";
         .sdl-dita-delivery-page {
             height: 100%;
@@ -97,12 +97,12 @@
                         .separator {
                             position: fixed;
                             top: @navBarHeight;
-                            transition: top .3s ease-out;
+                            transition: top .3s ease-out, height .3s ease-out;
                         }
                         @media screen and (min-width: (1+@screenSm)) {
                             position: fixed;
                             top: @navBarHeight;
-                            transition: top .3s ease-out;
+                            transition: top .3s ease-out, height .3s ease-out;
                             /*  HACK: As a correct behaviour we should use max-height here,
                             but Chrome is not taking calc() values into account in this case*/
                             // max-height: ~"calc(100% - 64px - @{navBarHeight})";
@@ -115,7 +115,7 @@
                         position: fixed;
                         height: ~"calc(100% - 64px - @{navBarHeight})";
                         top: @navBarHeight;
-                        transition: top .3s ease-out;
+                        transition: top .3s ease-out, height .3s ease-out;
                     }
                 }
             }
