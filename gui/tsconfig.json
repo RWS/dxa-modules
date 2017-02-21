@@ -23,7 +23,7 @@
     "suppressImplicitAnyIndexErrors": false,
     "target": "es5",
     "declaration": true,
-    "declarationDir": "typings/",
+    "declarationDir": "../typings/",
     "experimentalDecorators": true,
     "jsx": "react",
     "strictNullChecks": true,

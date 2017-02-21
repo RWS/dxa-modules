@@ -3,7 +3,7 @@
   "version": "1.0.0-SNAPSHOT",
   "description": "GUI of the SDL Dita Delivery Web Application.",
   "main": "dist/lib/Lib.js",
-  "typings": "dist/assets/typings/src/Lib.d.ts",
+  "typings": "dist/typings/src/Lib.d.ts",
   "dependencies": {
     "es6-promise": "~4.0.5",
     "napa": "~2.3.0",
