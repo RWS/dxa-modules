@@ -110,10 +110,14 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
      */
     public componentWillMount(): void {
         const { router } = this.context;
+        const child = this.props.children as React.ReactElement<IPublicationContentProps>;
+        const publicationId = child.props.params.publicationId;
 
         if (router) {
             this._historyUnlisten = router.listen(this._onNavigated.bind(this));
         }
+
+        this._onUpdateSearchState(publicationId);
     }
 
     /**
@@ -134,41 +138,13 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
      * @param {IHomeState} nextState Next state
      */
     public componentWillUpdate(nextProps: IHomeProps, nextState: IHomeState): void {
-        const { publicationService, localizationService } = this.context.services;
         const { publicationId } = this.state;
 
         const child = nextProps.children as React.ReactElement<IPublicationContentProps>;
         const nextPublicationId = child.props.params.publicationId;
 
         if (nextPublicationId !== publicationId) {
-            if (nextPublicationId) {
-                // Get publication title
-                publicationService.getPublicationTitle(nextPublicationId).then(
-                    title => {
-                        /* istanbul ignore else */
-                        if (!this._isUnmounted) {
-                            this.setState({
-                                publicationId: nextPublicationId,
-                                searchTitle: localizationService.formatMessage("components.searchbar.publication.placeholder", [title || ""])
-                            });
-                        }
-                    },
-                    error => {
-                        /* istanbul ignore else */
-                        if (!this._isUnmounted) {
-                            // TODO: improve error handling
-                            this.setState({
-                                publicationId: nextPublicationId,
-                                searchTitle: error
-                            });
-                        }
-                    });
-            } else {
-                this.setState({
-                    publicationId: nextPublicationId,
-                    searchTitle: localizationService.formatMessage("components.searchbar.placeholder", [""])
-                });
-            }
+            this._onUpdateSearchState(nextPublicationId);
         }
     }
 
@@ -318,6 +294,38 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
                     sticksToTop: !sticksToTop
                 });
             }
+        }
+    }
+
+    private _onUpdateSearchState(publicationId?: string): void {
+        const { publicationService, localizationService } = this.context.services;
+        if (publicationId) {
+            // Get publication title
+            publicationService.getPublicationTitle(publicationId).then(
+                title => {
+                    /* istanbul ignore else */
+                    if (!this._isUnmounted) {
+                        this.setState({
+                            publicationId: publicationId,
+                            searchTitle: localizationService.formatMessage("components.searchbar.publication.placeholder", [title || ""])
+                        });
+                    }
+                },
+                error => {
+                    /* istanbul ignore else */
+                    if (!this._isUnmounted) {
+                        // TODO: improve error handling
+                        this.setState({
+                            publicationId: publicationId,
+                            searchTitle: error
+                        });
+                    }
+                });
+        } else {
+            this.setState({
+                publicationId: publicationId,
+                searchTitle: localizationService.formatMessage("components.searchbar.placeholder")
+            });
         }
     }
 };

@@ -3,7 +3,7 @@
   "app.language": "English",
   "components.app.loading": "Loading",
   "components.breadcrumbs.home": "Home",
-  "components.searchbar.placeholder": "Search ‘{0}’",
+  "components.searchbar.placeholder": "Search...",
   "components.searchbar.publication.placeholder": "Search in ‘{0}’",
   "components.contentnavigation.title": "Contents",
   "error.publication.not.found": "Unable to retrieve title for publication with id {0}.",
