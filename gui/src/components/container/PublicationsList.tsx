@@ -95,8 +95,8 @@ export class PublicationsList extends React.Component<{}, IPublicationsListState
         const { services } = this.context;
         return (
             <section className={"sdl-dita-delivery-publications-list"}>
-                <h1>{services.localizationService.formatMessage("app.publications")}</h1>
                 <nav>
+                    <h1>{services.localizationService.formatMessage("app.publications")}</h1>
                     {
                         error ?
                             <ValidationMessage messageType={ValidationMessageType.Error} message={error} /> :

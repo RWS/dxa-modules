@@ -117,7 +117,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
             this._historyUnlisten = router.listen(this._onNavigated.bind(this));
         }
 
-        this._onUpdateSearchState(publicationId);
+        this._updateSearchPlaceholder(publicationId);
     }
 
     /**
@@ -144,7 +144,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
         const nextPublicationId = child.props.params.publicationId;
 
         if (nextPublicationId !== publicationId) {
-            this._onUpdateSearchState(nextPublicationId);
+            this._updateSearchPlaceholder(nextPublicationId);
         }
     }
 
@@ -297,7 +297,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
         }
     }
 
-    private _onUpdateSearchState(publicationId?: string): void {
+    private _updateSearchPlaceholder(publicationId?: string): void {
         const { publicationService, localizationService } = this.context.services;
         if (publicationId) {
             // Get publication title
