@@ -2,7 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as TestUtils from "react-addons-test-utils";
 import { PublicationsList } from "components/container/PublicationsList";
-import { ActivityIndicator, ValidationMessage } from "sdl-controls-react-wrappers";
+import { ActivityIndicator } from "sdl-controls-react-wrappers";
 import { TestBase } from "sdl-models";
 import { PublicationService } from "test/mocks/services/PublicationService";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
@@ -46,11 +46,14 @@ class PublicationsListComponent extends TestBase {
                     const activityIndicators = TestUtils.scryRenderedComponentsWithType(publicationsList, ActivityIndicator as any);
                     expect(activityIndicators.length).toBe(0, "Activity indicator should not be rendered.");
 
-                    // tslint:disable-next-line:no-any
-                    const validationMessage = TestUtils.findRenderedComponentWithType(publicationsList, ValidationMessage as any);
-                    expect(validationMessage).not.toBeNull("Could not find validation message.");
-                    const validationMessageNode = ReactDOM.findDOMNode(validationMessage);
-                    expect(validationMessageNode && validationMessageNode.textContent).toBe(errorMessage);
+                    const domNode = ReactDOM.findDOMNode(publicationsList) as HTMLElement;
+                    const errorElement = domNode.querySelector(".sdl-dita-delivery-error");
+                    expect(errorElement).not.toBeNull("Error dialog not found");
+                    const errorTitle = errorElement.querySelector("h1");
+                    expect(errorTitle.textContent).toEqual("mock-error.default.title");
+                    const buttons = errorElement.querySelectorAll(".sdl-dita-delivery-button-group button");
+                    expect(buttons.length).toEqual(1);
+
                     done();
                 }, 500);
             });

@@ -1,8 +1,9 @@
 import * as React from "react";
 import { Link } from "react-router";
 import { IPublication } from "interfaces/Publication";
-import { ActivityIndicator, ValidationMessage } from "sdl-controls-react-wrappers";
-import { ValidationMessageType } from "sdl-controls";
+import { ActivityIndicator, Button } from "sdl-controls-react-wrappers";
+import { ButtonPurpose } from "sdl-controls";
+import { Error } from "components/presentation/Error";
 
 import { IAppContext } from "components/container/App";
 
@@ -92,12 +93,8 @@ export class PublicationsList extends React.Component<IPublicationsListProps, IP
      */
     public componentWillMount(): void {
 
-        const { publicationService } = this.context.services;
-
         // Load the publications list
-        publicationService.getPublications().then(
-            this._onPublicationsListRetrieved.bind(this),
-            this._onPublicationsListRetrieveFailed.bind(this));
+        this._loadPublicationsList();
     }
 
     /**
@@ -107,17 +104,14 @@ export class PublicationsList extends React.Component<IPublicationsListProps, IP
      */
     public componentWillReceiveProps(nextProps: IPublicationsListProps): void {
         const { productFamily } = this.props.params;
-        const { publicationService } = this.context.services;
 
         if (nextProps.params.productFamily !== productFamily) {
             this.setState({
                 publications: undefined
             });
 
-            // Load the page
-            publicationService.getPublications().then(
-                this._onPublicationsListRetrieved.bind(this),
-                this._onPublicationsListRetrieveFailed.bind(this));
+            // Load the publications list
+            this._loadPublicationsList();
         }
     }
 
@@ -129,13 +123,23 @@ export class PublicationsList extends React.Component<IPublicationsListProps, IP
     public render(): JSX.Element {
         const { publications, error } = this.state;
         const { services } = this.context;
+        const { formatMessage } = services.localizationService;
+        const _retryHandler = (): void => this._loadPublicationsList();
+
+        const errorButtons = <div>
+            <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{ "click": _retryHandler }}>{formatMessage("control.button.retry")}</Button>
+        </div>;
         return (
             <section className={"sdl-dita-delivery-publications-list"}>
-                <h1>{services.localizationService.formatMessage("app.publications")}</h1>
                 <nav>
+                    <h1>{services.localizationService.formatMessage("app.publications")}</h1>
                     {
                         error ?
-                            <ValidationMessage messageType={ValidationMessageType.Error} message={error} /> :
+                            <Error
+                                title={formatMessage("error.default.title")}
+                                messages={[formatMessage("error.publications.list.not.found"), formatMessage("error.publications.default.message")]}
+                                buttons={errorButtons} />
+                            :
                             publications ? (
 
                                 <ul>
@@ -160,6 +164,15 @@ export class PublicationsList extends React.Component<IPublicationsListProps, IP
      */
     public componentWillUnmount(): void {
         this._isUnmounted = true;
+    }
+
+    private _loadPublicationsList(): void {
+        const { publicationService } = this.context.services;
+
+        // Get publications list
+        publicationService.getPublications().then(
+            this._onPublicationsListRetrieved.bind(this),
+            this._onPublicationsListRetrieveFailed.bind(this));
     }
 
     private _onPublicationsListRetrieved(publications: IPublication[]): void {

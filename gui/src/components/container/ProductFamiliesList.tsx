@@ -1,10 +1,11 @@
 import * as React from "react";
 import { IProductFamily } from "interfaces/ProductFamily";
-import { ActivityIndicator, ValidationMessage } from "sdl-controls-react-wrappers";
-import { ValidationMessageType } from "sdl-controls";
+import { ActivityIndicator, Button } from "sdl-controls-react-wrappers";
+import { ButtonPurpose } from "sdl-controls";
 import { IAppContext } from "components/container/App";
 import { TilesList } from "components/container/TilesList";
 import { ITile } from "components/presentation/Tile";
+import { Error } from "components/presentation/Error";
 import { Url } from "utils/Url";
 
 import "components/container/styles/ProductFamiliesList";
@@ -60,28 +61,7 @@ export class ProductFamiliesList extends React.Component<{}, IProductFamiliesLis
      * Invoked once, both on the client and server, immediately before the initial rendering occurs.
      */
     public componentWillMount(): void {
-
-        const { publicationService } = this.context.services;
-
-        // Get product families list
-        publicationService.getProductFamilies().then(
-            families => {
-                /* istanbul ignore else */
-                if (!this._isUnmounted) {
-                    this.setState({
-                        productFamilies: families
-                    });
-                }
-            },
-            error => {
-                /* istanbul ignore else */
-                if (!this._isUnmounted) {
-                    // TODO: improve error handling
-                    this.setState({
-                        error: error
-                    });
-                }
-            });
+        this._loadProductFamilies();
     }
 
     /**
@@ -92,12 +72,19 @@ export class ProductFamiliesList extends React.Component<{}, IProductFamiliesLis
     public render(): JSX.Element {
         const { productFamilies, error } = this.state;
         const { services, router } = this.context;
+        const { formatMessage } = services.localizationService;
+        const errorButtons = <div>
+            <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{ "click": this._loadProductFamilies.bind(this) }}>{formatMessage("control.button.retry")}</Button>
+        </div>;
 
         return (
             <section className={"sdl-dita-delivery-product-families-list"}>
                 {
-                    error
-                        ? <ValidationMessage messageType={ValidationMessageType.Error} message={error} />
+                    error ?
+                        <Error
+                            title={formatMessage("error.default.title")}
+                            messages={[formatMessage("error.product.families.list.not.found"), formatMessage("error.product.families.default.message")]}
+                            buttons={errorButtons} />
                         : productFamilies
                             ? (<TilesList tiles={productFamilies.map((productFamily: IProductFamily) => {
                                 return {
@@ -121,5 +108,32 @@ export class ProductFamiliesList extends React.Component<{}, IProductFamiliesLis
      */
     public componentWillUnmount(): void {
         this._isUnmounted = true;
+    }
+
+    /**
+     * Component will unmount
+     */
+    public _loadProductFamilies(): void {
+        const { publicationService } = this.context.services;
+
+        // Get product families list
+        publicationService.getProductFamilies().then(
+            families => {
+                /* istanbul ignore else */
+                if (!this._isUnmounted) {
+                    this.setState({
+                        productFamilies: families
+                    });
+                }
+            },
+            error => {
+                /* istanbul ignore else */
+                if (!this._isUnmounted) {
+                    // TODO: improve error handling
+                    this.setState({
+                        error: error
+                    });
+                }
+            });
     }
 }

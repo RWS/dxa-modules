@@ -236,7 +236,8 @@ export class PublicationContent extends React.Component<IPublicationContentProps
             this.setState({
                 activeTocItemPath: undefined
             });
-        } else if (nextPageId !== pageId) {
+
+        } else if (nextPageId !== pageId || (nextPageId === pageId && this._page.error)) {
             // Load the page
             this.setState({
                 isPageLoading: true
@@ -307,6 +308,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                             } }
                             onSelectionChanged={this._onTocSelectionChanged.bind(this)}
                             error={tocError}
+                            onRetry={() => this._loadTocRootItems(publicationId) }
                             >
                             <span className="separator" />
                         </Toc>
@@ -383,6 +385,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         const { publicationId } = this.props.params;
         const { activeTocItemPath, isTocLoading } = this.state;
         const page = this._page;
+        page.error = null;
         page.content = pageInfo.content;
         this.setState({
             isPageLoading: false
@@ -414,13 +417,18 @@ export class PublicationContent extends React.Component<IPublicationContentProps
     }
 
     private _onPageContentRetrievFailed(error: string): void {
+        const { publicationId } = this.props.params;
+        const { isTocLoading } = this.state;
         const page = this._page;
         page.error = error;
         page.content = null;
-        this._toc.rootItems = [];
+
+        if (publicationId && isTocLoading) {
+            this._loadTocRootItems(publicationId);
+        }
+
         this.setState({
-            isPageLoading: false,
-            isTocLoading: false
+            isPageLoading: false
         });
     }
 
@@ -506,6 +514,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                 /* istanbul ignore else */
                 if (!this._isUnmounted) {
                     this._toc.rootItems = items;
+                    this._toc.error = undefined;
                     this.setState({
                         activeTocItemPath: path,
                         isTocLoading: false

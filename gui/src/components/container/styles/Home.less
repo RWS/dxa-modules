@@ -40,6 +40,8 @@
             transition: top .3s ease-out;
         }
     }
+    .sdl-dita-delivery-product-families-list,
+    .sdl-dita-delivery-publications-list,
     .sdl-dita-delivery-publication-content {
         top: @navBarHeight;
         transition: top .3s ease-out;
@@ -74,6 +76,8 @@
             }
         }
         &:not(.fixed-nav) {
+            .sdl-dita-delivery-product-families-list,
+            .sdl-dita-delivery-publications-list,
             .sdl-dita-delivery-publication-content {
                 @media screen and (min-width: (1+@screenSm)) {
                     top: @searchBarHeight + @navBarHeight;
