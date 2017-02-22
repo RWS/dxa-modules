@@ -1,5 +1,3 @@
-/// <reference path="../../typings/index.d.ts" />
-
 import { IWindow } from "interfaces/Window";
 
 const globalWindow = (window as IWindow);

@@ -4,7 +4,7 @@ import * as TestUtils from "react-addons-test-utils";
 import { Toc, ITocProps } from "components/presentation/Toc";
 import { ITaxonomy } from "interfaces/Taxonomy";
 import { Promise } from "es6-promise";
-import { TreeView, ValidationMessage } from "sdl-controls-react-wrappers";
+import { TreeView } from "sdl-controls-react-wrappers";
 import { TestBase } from "sdl-models";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 
@@ -67,7 +67,12 @@ class TocComponent extends TestBase {
             beforeEach(() => {
                 const props: ITocProps = {
                     loadChildItems: loadChildItems,
-                    rootItems: rootItems
+                    rootItems: rootItems,
+                    onRetry: () => {
+                        toc.setState({
+                            error: null
+                        });
+                    }
                 };
                 toc = this._renderComponent(props, target);
             });
@@ -115,14 +120,9 @@ class TocComponent extends TestBase {
                 (domNode.querySelectorAll(".expand-collapse").item(1) as HTMLDivElement).click();
                 // Use a timeout to allow the DataStore to return a promise with the data
                 setTimeout((): void => {
-                    const nodes = domNode.querySelectorAll(".content");
-                    expect(nodes.length).toBe(2);
-                    // Check if validation message is shown
-                    // tslint:disable-next-line:no-any
-                    const validationMessage = TestUtils.findRenderedComponentWithType(toc, ValidationMessage as any);
-                    expect(validationMessage).not.toBeNull();
-                    const validationMessageNode = ReactDOM.findDOMNode(validationMessage);
-                    expect(validationMessageNode.querySelector("label").textContent).toBe("Failed to load child nodes");
+                    const node = domNode.querySelector(".sdl-dita-delivery-toc-list-fail");
+                    expect(node).not.toBeNull();
+                    expect(node.querySelector("p").textContent).toBe("mock-error.toc.items.not.found");
                     done();
                 }, DELAY + 1);
             });
@@ -145,7 +145,8 @@ class TocComponent extends TestBase {
                     onSelectionChanged: (sitemapItem: ITaxonomy, path: string[]): void => {
                         expect(path).toEqual(activeItemPath);
                         done();
-                    }
+                    },
+                    onRetry: () => {}
                 };
                 this._renderComponent(props, target);
             });
@@ -165,7 +166,8 @@ class TocComponent extends TestBase {
                         onSelectionChanged: (sitemapItem: ITaxonomy, path: string[]): void => {
                             expect(path).toEqual([rootItems[0].id]);
                             done();
-                        }
+                        },
+                        onRetry: () => {}
                     };
                     this._renderComponent(propsReset, target);
                 };
@@ -179,7 +181,8 @@ class TocComponent extends TestBase {
                     onSelectionChanged: (sitemapItem: ITaxonomy, path: string[]): void => {
                         expect(path).toEqual(activeItemPath);
                         selectFirstRootNode();
-                    }
+                    },
+                    onRetry: () => {}
                 };
                 this._renderComponent(props, target);
             });
@@ -249,11 +252,29 @@ class TocComponent extends TestBase {
                     onSelectionChanged: (sitemapItem: ITaxonomy, path: string[]): void => {
                         expect(path).toEqual(activeItemPath);
                         switchBetweenChildNodes(props);
-                    }
+                    },
+                    onRetry: () => {}
                 };
                 this._renderComponent(props, target);
             });
 
+            it("correct error component rendering", (done: () => void): void => {
+                toc.setState({
+                    error: "Oops, error!"
+                });
+
+                const element = document.querySelector(".sdl-dita-delivery-error-toc");
+                expect(element).not.toBeNull();
+
+                const message = element.querySelector(".sdl-dita-delivery-error-toc-message");
+                expect(message.textContent).toEqual("mock-error.toc.not.found");
+
+                element.querySelector("button").click();
+
+                const element2 = document.querySelector(".sdl-dita-delivery-error-toc");
+                expect(element2).toBeNull();
+                done();
+            });
         });
 
     }

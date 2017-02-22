@@ -4,7 +4,9 @@ import { IServices } from "interfaces/Services";
 import { Home } from "components/container/Home";
 import { PublicationContent } from "components/container/PublicationContent";
 import { PublicationsList } from "components/container/PublicationsList";
+import { ErrorContent } from "components/container/ErrorContent";
 import { path } from "utils/Path";
+import { IWindow } from "interfaces/Window";
 
 export interface IAppProps {
     /**
@@ -50,7 +52,7 @@ export class App extends React.Component<IAppProps, {}> {
     };
 
     public getChildContext(): IAppContext {
-        const { services} = this.props;
+        const { services } = this.props;
         return {
             services: services
         };
@@ -63,15 +65,20 @@ export class App extends React.Component<IAppProps, {}> {
      */
     public render(): JSX.Element {
         const { history } = this.props;
-        return (
-            <Router history={history}>
+        const errorObj = (window as IWindow).SdlDitaDeliveryError;
+        if (errorObj) {
+            return <ErrorContent error={errorObj}/>;
+        } else {
+            return (
+                <Router history={history}>
                 <Route path={path.getRootPath()} component={Home} >
                     <IndexRedirect to="home" />
                     <Redirect from="home;jsessionid=*" to="home" />
-                    <Route path="home" component={PublicationsList} />
-                    <Route path=":publicationId(/:pageIdOrPublicationTitle)(/:publicationTitle)(/:pageTitle)(/:pageAnchor)" component={PublicationContent} />
-                </Route>
-            </Router>
-        );
+                        <Route path="home" component={PublicationsList} />
+                        <Route path=":publicationId(/:pageIdOrPublicationTitle)(/:publicationTitle)(/:pageTitle)(/:pageAnchor)" component={PublicationContent} />
+                    </Route>
+                </Router>
+            );
+        }
     }
 };

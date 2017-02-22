@@ -21,7 +21,7 @@ export interface IComponentWithContextProps {
     taxonomyService?: ITaxonomyService;
 }
 
-interface IRouter {
+export interface IRouter {
     createHref: () => void;
     push: (path: string) => void;
     replace: (path: string) => void;
