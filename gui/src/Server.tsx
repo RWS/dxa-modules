@@ -1,5 +1,3 @@
-/// <reference path="../typings/index.d.ts" />
-
 import "ts-helpers";
 import * as React from "react";
 import * as ReactDOMServer from "react-dom/server";
