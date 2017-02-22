@@ -80,7 +80,7 @@ class ProductFamiliesListComponent extends TestBase {
                 }, 500);
             });
 
-            it("navigates to publications list when a family button is clicked", (done: () => void): void => {
+            it("navigates to publications list when a product family `view more` button is clicked", (done: () => void): void => {
                 const productFamilies = [{
                     title: "Product Family"
                 }];

@@ -87,13 +87,14 @@ export class ProductFamiliesList extends React.Component<{}, IProductFamiliesLis
                             buttons={errorButtons} />
                         : productFamilies
                             ? (<TilesList tiles={productFamilies.map((productFamily: IProductFamily) => {
+                                const tileTitle = productFamily.title || formatMessage("error.product.families.unknown");
                                 return {
-                                    title: productFamily.title,
+                                    title: tileTitle,
                                     description: productFamily.description,
                                     navigateTo: () => {
                                         /* istanbul ignore else */
                                         if (router) {
-                                            router.push(Url.getProductFamilyUrl(productFamily.title));
+                                            router.push(Url.getProductFamilyUrl(tileTitle));
                                         }
                                     }
                                 } as ITile;

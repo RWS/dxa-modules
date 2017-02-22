@@ -16,6 +16,7 @@
   "error.path.not.found": "Unable to retrieve path for sitemap item with id {0} within publication with id {1}.",
   "error.publications.list.not.found": "We are very sorry, but the list of publication wasn't loaded.",
   "error.publications.default.message": "Please retry loading or use a direct link to your publication.",
+  "error.product.families.unknown": "Unknown product family",
   "error.product.families.list.not.found": "We are very sorry, but the list of product families wasn't loaded.",
   "error.product.families.default.message": "Please retry loading or use a direct link to your product family.",
   "error.publication.not.found": "Unable to retrieve title for publication with id {0}.",
