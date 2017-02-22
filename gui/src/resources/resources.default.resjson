@@ -3,7 +3,7 @@
   "app.publications": "Publications",
   "components.app.loading": "Loading",
   "components.breadcrumbs.home": "Home",
-  "components.searchbar.placeholder": "Search ‘{0}’",
+  "components.searchbar.placeholder": "Search...",
   "components.searchbar.publication.placeholder": "Search in ‘{0}’",
   "components.contentnavigation.title": "Contents",
   "control.button.retry": "Retry",
