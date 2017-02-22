@@ -49,13 +49,52 @@ class PublicationServiceTests extends TestBase {
                 });
             });
 
+            it("can get product families from publications with undefined properties", (done: () => void): void => {
+                spyOn(publicationService, "getPublications").and.callFake(() => {
+                    return [
+                        {
+                            "Id": "Pub1",
+                            "Title": "Pub1",
+                            "ProductFamily": "Family 1"
+                        },
+                        {
+                            "Id": "Pub2",
+                            "Title": "Pub2",
+                            "ProductFamily": "Family 2"
+                        }, {
+                            "Id": "Pub3",
+                            "Title": "Pub3",
+                            "ProductFamily": "Family 2"
+                        },
+                        {
+                            "Id": "Pub",
+                            "Title": "Pub",
+                        }
+                    ]
+                });
+
+                publicationService.getProductFamilies().then(families => {
+                    expect(families).toBeDefined();
+                    if (families) {
+                        expect(families.length).toBe(3);
+                        expect(families[3].title).toBe(undefined);
+                    }
+                    done();
+                }).catch(error => {
+                    fail(`Unexpected error: ${error}`);
+                    done();
+                });
+            });
+
             it("can get product families", (done: () => void): void => {
+                const spy = spyOn(window, "XMLHttpRequest").and.callThrough();
                 publicationService.getProductFamilies().then(families => {
                     expect(families).toBeDefined();
                     if (families) {
                         expect(families.length).toBe(5);
                         expect(families[3].title).toBe("SDL Knowledge Center");
                     }
+                    expect(spy).toHaveBeenCalled();
                     done();
                 }).catch(error => {
                     fail(`Unexpected error: ${error}`);
@@ -80,11 +119,13 @@ class PublicationServiceTests extends TestBase {
             });
 
             it("can get the publications", (done: () => void): void => {
+                const spy = spyOn(window, "XMLHttpRequest").and.callThrough();
                 publicationService.getPublications().then(publications => {
                     expect(publications).toBeDefined();
                     if (publications) {
                         expect(publications.length).toBe(8);
                         expect(publications[6].title).toBe("User Guide");
+                        expect(spy).toHaveBeenCalled();
                     }
                     done();
                 }).catch(error => {
@@ -110,8 +151,10 @@ class PublicationServiceTests extends TestBase {
             });
 
             it("can get a publication title", (done: () => void): void => {
+                const spy = spyOn(window, "XMLHttpRequest").and.callThrough();
                 publicationService.getPublicationTitle(publicationId).then(title => {
                     expect(title).toBe("User Guide");
+                    expect(spy).toHaveBeenCalled();
                     done();
                 }).catch(error => {
                     fail(`Unexpected error: ${error}`);
