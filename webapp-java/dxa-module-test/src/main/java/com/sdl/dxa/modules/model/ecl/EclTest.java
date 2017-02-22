@@ -40,7 +40,7 @@ public class EclTest extends EclItem {
     private String testProp4;
 
     @Override
-    public MvcData getMvcData() {
+    public MvcData getDefaultMvcData() {
         return MvcDataCreator.creator()
                 .fromQualifiedName("Test:TestFlickrImage")
                 .defaults(DefaultsMvcData.ENTITY).create();
