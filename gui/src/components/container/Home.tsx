@@ -1,9 +1,12 @@
+import * as ClassNames from "classnames";
 import * as React from "react";
 import { IAppContext } from "components/container/App";
 import { TopBar } from "components/presentation/TopBar";
+import { SearchBar } from "components/presentation/SearchBar";
 import { IPublicationContentProps } from "components/container/PublicationContent";
 
 import "components/container/styles/App";
+import "components/container/styles/Home";
 
 /**
  * Home state
@@ -15,15 +18,67 @@ export interface IHomeState {
     /**
      * if Nav panel is open
      *
-     * @type {Boolean}
+     * @type {boolean}
      */
-    isNavOpen: Boolean;
+    isNavOpen?: boolean;
+
+    /**
+     * if search panel is open
+     *
+     * @type {boolean}
+     */
+    searchIsOpen?: boolean;
+
+    /**
+     * if search panel is open
+     *
+     * @type {boolean}
+     */
+    searchIsActive?: boolean;
+
+    /**
+     * if page is scrolled
+     *
+     * @type {boolean}
+     */
+    sticksToTop?: boolean;
+
+    /**
+     * Title of the current search
+     *
+     * @type {string}
+     */
+    searchTitle?: string;
+
+    /**
+     * Selected publication Id
+     *
+     * @type {string}
+     */
+    publicationId?: string;
+}
+
+/**
+ * Home props
+ *
+ * @export
+ * @interface IHomeProps
+ */
+export interface IHomeProps {
+
+    /**
+     * Children
+     *
+     * @type {React.ReactNode}
+     * @memberOf INavigationMenuProps
+     */
+    children?: React.ReactNode;
 }
 
 /**
  * Main component for the application
  */
-export class Home extends React.Component<{}, IHomeState> {
+export class Home extends React.Component<IHomeProps, IHomeState> {
 
     public static contextTypes: React.ValidationMap<IAppContext> = {
         services: React.PropTypes.object.isRequired,
@@ -33,6 +88,8 @@ export class Home extends React.Component<{}, IHomeState> {
     public context: IAppContext;
 
     private _historyUnlisten: () => void;
+    private _isUnmounted: boolean = false;
+    private _preventBodyScroll: boolean = false;
 
     /**
      * Creates an instance of App.
@@ -41,7 +98,10 @@ export class Home extends React.Component<{}, IHomeState> {
     constructor() {
         super();
         this.state = {
-            isNavOpen: false
+            isNavOpen: false,
+            sticksToTop: false,
+            searchIsOpen: false,
+            searchIsActive: false
         };
     }
 
@@ -57,29 +117,117 @@ export class Home extends React.Component<{}, IHomeState> {
     }
 
     /**
+     * Invoked once, only on the client (not on the server), immediately after the initial rendering occurs.
+     */
+    public componentDidMount(): void {
+
+        window.addEventListener("scroll", this._onViewportChanged.bind(this));
+        window.addEventListener("resize", this._onViewportChanged.bind(this));
+        this._onViewportChanged();
+    }
+
+    /**
+     * Invoked immediately before rendering when new props or state are being received.
+     * This method is not called for the initial render.
+     *
+     * @param {IHomeProps} nextProps Next props
+     * @param {IHomeState} nextState Next state
+     */
+    public componentWillUpdate(nextProps: IHomeProps, nextState: IHomeState): void {
+        const { publicationService, localizationService } = this.context.services;
+        const { publicationId } = this.state;
+
+        const child = nextProps.children as React.ReactElement<IPublicationContentProps>;
+        const nextPublicationId = child.props.params.publicationId;
+
+        if (nextPublicationId !== publicationId) {
+            if (nextPublicationId) {
+                // Get publication title
+                publicationService.getPublicationTitle(nextPublicationId).then(
+                    title => {
+                        /* istanbul ignore else */
+                        if (!this._isUnmounted) {
+                            this.setState({
+                                publicationId: nextPublicationId,
+                                searchTitle: localizationService.formatMessage("components.searchbar.publication.placeholder", [title || ""])
+                            });
+                        }
+                    },
+                    error => {
+                        /* istanbul ignore else */
+                        if (!this._isUnmounted) {
+                            // TODO: improve error handling
+                            this.setState({
+                                publicationId: nextPublicationId,
+                                searchTitle: error
+                            });
+                        }
+                    });
+            } else {
+                this.setState({
+                    publicationId: nextPublicationId,
+                    searchTitle: localizationService.formatMessage("components.searchbar.placeholder", [""])
+                });
+            }
+        }
+    }
+
+    /**
      * Render the component
      *
      * @returns {JSX.Element}
      */
     public render(): JSX.Element {
         const { localizationService } = this.context.services;
-        const { isNavOpen } = this.state;
+        const { isNavOpen, searchIsOpen, searchIsActive, sticksToTop, searchTitle, publicationId } = this.state;
         const { children } = this.props;
 
-        const child = children as React.ReactElement<IPublicationContentProps>;
+        const hasPublication = publicationId !== undefined;
 
-        // Only pages with publiction selected can have navigation menu button enabled
-        const canHaveNavMenuButton = child && (child.props.params.publicationId !== undefined);
+        const appClass = ClassNames({
+            "sdl-dita-delivery-app": true,
+            "fixed-nav": sticksToTop,
+            "open": hasPublication && isNavOpen,
+            "search-open": searchIsOpen,
+            "search-is-active": searchIsOpen && searchIsActive
+        });
+
+        this._preventBodyScroll = (hasPublication && isNavOpen) || (searchIsOpen && searchIsActive) || false;
+
         return (
-            <div className={"sdl-dita-delivery-app" + (canHaveNavMenuButton
-                ? " sdl-dita-delivery-app-nav" + (isNavOpen ? " open" : "")
-                : "")}>
+            <div className={appClass}>
+                <div className={"sdl-dita-delivery-nav-mask"} onClick={isNavOpen && this._toggleNavigationMenu.bind(this)} />
                 <TopBar
-                    language={localizationService.formatMessage("app.language")}
-                    toggleNavigationMenu={canHaveNavMenuButton && this._toggleNavigationMenu.bind(this)}
-                    />
+                    language={localizationService.formatMessage("app.language")}>
+                    {
+                        hasPublication && (
+                            <div className={"sdl-dita-delivery-topbar-expand-nav"} onClick={this._toggleNavigationMenu.bind(this)} >
+                                <span />
+                            </div>)
+                    }
+                    <div className={"sdl-dita-delivery-topbar-expand-search"} onClick={this._toggleSearchPanel.bind(this)} >
+                        <span />
+                    </div>
+                </TopBar>
+                <SearchBar
+                    placeholderLabel={searchTitle || ""}
+                    onSearch={query => console.log(query)}
+                    onFocus={() => {
+                        if (!this._isUnmounted) {
+                            this.setState({
+                                searchIsActive: true
+                            });
+                        }
+                    } }
+                    onBlur={() => {
+                        if (!this._isUnmounted) {
+                            this.setState({
+                                searchIsActive: false
+                            });
+                        }
+                    } } />
                 {children}
-            </div>
+            </div >
         );
     }
 
@@ -100,28 +248,76 @@ export class Home extends React.Component<{}, IHomeState> {
                 }
             }
         }
+
+        // HACK: we should prevent scrolling when fade overlay is shown
+        if (document.body) {
+            if (this._preventBodyScroll) {
+                document.body.style.overflow = "hidden";
+            }
+            else {
+                document.body.style.removeProperty("overflow");
+            }
+        }
     }
 
     /**
      * Component will unmount
      */
     public componentWillUnmount(): void {
+        this._isUnmounted = true;
         if (this._historyUnlisten) {
             this._historyUnlisten();
         }
+
+        if (this._preventBodyScroll) {
+            this._preventBodyScroll = false;
+            if (document.body) {
+                document.body.style.removeProperty("overflow");
+            }
+        }
+
+        window.removeEventListener("scroll", this._onViewportChanged.bind(this));
+        window.removeEventListener("resize", this._onViewportChanged.bind(this));
     }
 
     private _toggleNavigationMenu(): void {
         const { isNavOpen } = this.state;
-
-        this.setState({
-            isNavOpen: !isNavOpen
-        });
+        /* istanbul ignore if */
+        if (!this._isUnmounted) {
+            this.setState({
+                isNavOpen: !isNavOpen
+            });
+        }
     }
 
     private _onNavigated(location: HistoryModule.Location): void {
-        this.setState({
-            isNavOpen: false
-        });
+        /* istanbul ignore if */
+        if (!this._isUnmounted) {
+            this.setState({
+                isNavOpen: false
+            });
+        }
+    }
+
+    private _toggleSearchPanel(): void {
+        const { searchIsOpen } = this.state;
+        /* istanbul ignore if */
+        if (!this._isUnmounted) {
+            this.setState({
+                searchIsOpen: !searchIsOpen
+            });
+        }
+    }
+
+    private _onViewportChanged(): void {
+        const { sticksToTop } = this.state;
+        /* istanbul ignore if */
+        if (!this._isUnmounted) {
+            if (sticksToTop !== (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0) > 0) {
+                this.setState({
+                    sticksToTop: !sticksToTop
+                });
+            }
+        }
     }
 };

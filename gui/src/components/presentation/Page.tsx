@@ -176,7 +176,9 @@ export class Page extends React.Component<IPageProps, IPageState> {
             <div className={"sdl-dita-delivery-page"} style={props.showActivityIndicator ? { overflow: "hidden" } : {}} >
                 {props.showActivityIndicator ? <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} /> : null}
                 {props.children}
-                <ContentNavigation navItems={navItems} activeNavItemId={activeNavItemId} />
+                <div className={"sdl-dita-delivery-content-navigation-wrapper"}>
+                    <ContentNavigation navItems={navItems} activeNavItemId={activeNavItemId} />
+                </div>
                 <article>
                     {error
                         ? <Error
@@ -322,7 +324,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
 
                     let offsetTop = 0;
                     let currentNode = header;
-                    while (currentNode && currentNode.offsetTop) {
+                    while (currentNode && currentNode.offsetParent) {
                         offsetTop += currentNode.offsetTop;
                         currentNode = currentNode.offsetParent as HTMLElement;
                     }

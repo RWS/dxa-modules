@@ -3,8 +3,9 @@
   "app.publications": "Publicaties",
   "components.app.loading": "Laden...",
   "components.breadcrumbs.home": "Home",
+  "components.searchbar.placeholder": "Zoeken ‘{0}’",
+  "components.searchbar.publication.placeholder": "Zoeken in ‘{0}’",
   "components.contentnavigation.title": "Inhoud",
-  "components.searchbar.placeholder": "Zoeken in ‘{0}’",
   "control.button.retry": "Opnieuw proberen"
   "error.default.message": "Als u nog steeds deze fout ziet, gebruik dan de onderstaande links om naar de home page of zoek de documentatie te vinden wat u zoekt.",
   "error.default.title": "Oeps, er is iets fout gegaan!",

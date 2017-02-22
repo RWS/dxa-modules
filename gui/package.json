@@ -10,7 +10,8 @@
     "sdl-controls": "~0.1.0-5",
     "sdl-controls-react-wrappers": "~0.1.0-12",
     "sdl-models": "~0.1.0-4",
-    "ts-helpers": "~1.1.2"
+    "ts-helpers": "~1.1.2",
+    "classnames": "~2.2.5"
   },
   "devDependencies": {
     "async": "~2.1.4",
@@ -44,7 +45,6 @@
     "less-loader": "~2.2.3",
     "lodash": "~4.17.4",
     "napa": "~2.3.0",
-    "portfinder": "~1.0.3",
     "postcss-loader": "~1.2.2",
     "react-addons-test-utils": "~15.3.1",
     "remap-istanbul": "~0.8.3",

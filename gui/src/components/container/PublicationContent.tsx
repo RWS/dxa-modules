@@ -9,7 +9,6 @@ import { IAppContext } from "components/container/App";
 import { NavigationMenu } from "components/presentation/NavigationMenu";
 import { Toc } from "components/presentation/Toc";
 import { Page } from "components/presentation/Page";
-import { SearchBar } from "components/presentation/SearchBar";
 import { Breadcrumbs } from "components/presentation/Breadcrumbs";
 
 import { Html, IHeader } from "utils/Html";
@@ -18,12 +17,6 @@ import { Url } from "utils/Url";
 import { debounce } from "utils/Function";
 
 import "components/container/styles/PublicationContent";
-
-const FIXED_NAV_CLASS = "fixed-nav";
-/**
- * Sum of top and bottom margin of a panel
- */
-const PANEL_MARGIN = 64;
 
 /**
  * PublicationContent component props params
@@ -173,8 +166,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
     private _page: ISelectedPage = {};
     private _toc: IToc = {};
     private _isUnmounted: boolean = false;
-    private _searchBarHeight: number = 0;
-    private _topBarHeight: number = 0;
+    private _topOffset: number = 0;
 
     /**
      * Creates an instance of App.
@@ -282,16 +274,13 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
         const { services, router } = this.context;
         const { publicationId } = this.props.params;
-        const { taxonomyService, localizationService } = services;
-        const { content, error } = this._page;
+        const { taxonomyService } = services;
+        const { content, error} = this._page;
         const { rootItems } = this._toc;
         const tocError = this._toc.error;
 
         return (
             <section className={"sdl-dita-delivery-publication-content"}>
-                <SearchBar
-                    placeholderLabel={localizationService.formatMessage("components.searchbar.placeholder", [publicationTitle || ""])}
-                    onSearch={query => console.log(query)} />
                 <Page
                     showActivityIndicator={isPageLoading || false}
                     content={content}
@@ -308,7 +297,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     // Wait for the selected toc item to be set to set the anchor
                     // This is needed to make sure components on top are rendered first (eg bread crumbs)
                     anchor={selectedTocItem ? pageAnchor : undefined}
-                    scrollOffset={this._topBarHeight}
+                    scrollOffset={this._topOffset}
                     activeHeader={activePageHeader}>
                     <NavigationMenu isOpen={false}>{/* TODO: use global state store */}
                         <Toc
@@ -340,13 +329,9 @@ export class PublicationContent extends React.Component<IPublicationContentProps
      */
     public componentDidMount(): void {
         if (ReactDOM) {
-            const domNode = ReactDOM.findDOMNode(this);
-            const searchBar = domNode.querySelector(".sdl-dita-delivery-searchbar") as HTMLElement;
-
-            if (searchBar) {
-                const searchBarStyle = window.getComputedStyle(searchBar);
-                this._searchBarHeight = parseInt(searchBarStyle.height || "0", 10);
-                this._topBarHeight = searchBar.offsetHeight - this._searchBarHeight;
+            const domNode = ReactDOM.findDOMNode(this) as HTMLElement;
+            if (domNode) {
+                this._topOffset = domNode.offsetTop;
             }
         }
 
@@ -367,6 +352,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
 
     private _onTocSelectionChanged(sitemapItem: ITaxonomy, path: string[]): void {
         const { router } = this.context;
+        const { publicationTitle } = this.state;
 
         const updatedState: IPublicationContentState = {
             activeTocItemPath: path,
@@ -381,9 +367,15 @@ export class PublicationContent extends React.Component<IPublicationContentProps
             // Only navigate to pages which have a location
             const navPath = sitemapItem.url;
             if (navPath) {
-                // TODO: validate this after changes for KCWA-321
-                if (router.getCurrentLocation().pathname !== navPath) {
-                    router.push(navPath);
+                let url = navPath;
+                const parsedUrl = Url.parsePageUrl(url);
+                if (parsedUrl && (!parsedUrl.pageTitle || !parsedUrl.publicationTitle)) {
+                    // Use the title of the sitemap item instead of the page
+                    // When using dynamic link resolving these should actually be equal
+                    url = Url.getPageUrl(parsedUrl.publicationId, parsedUrl.pageId, publicationTitle, sitemapItem.title);
+                }
+                if (router.getCurrentLocation().pathname !== url) {
+                    router.push(url);
                 }
             }
         }
@@ -490,58 +482,25 @@ export class PublicationContent extends React.Component<IPublicationContentProps
     }
 
     private _updatePanels(page: HTMLElement, toc: HTMLElement, contentNavigation: HTMLElement): void {
-        // Firefox needs document.documentElement, otherwise scrollTop value will be 0 all the time
-        // Chrome though needs document.body to work correctly
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-        const { maxHeight, sticksToTop } = Html.getFixedPanelInfo(scrollTop, this._searchBarHeight, this._topBarHeight, PANEL_MARGIN);
-
-        if (page) {
-            // An extra 3 px is removed because in FF and IE this still shows a scrollbar
-            page.style.height = (parseInt(maxHeight, 10) + PANEL_MARGIN - 3) + "px";
-        }
-
-        if (toc) {
-            // Only set max height if the navigation menu is not opened
-            const navigationMenuElement = toc.parentElement;
-            const isFixedNavMenu = navigationMenuElement && navigationMenuElement.classList.contains("sdl-dita-delivery-navigation-menu")
-                ? getComputedStyle(navigationMenuElement).position === "fixed" : false;
-            toc.style.maxHeight = isFixedNavMenu ? "" : maxHeight;
-            if (sticksToTop) {
-                toc.classList.add(FIXED_NAV_CLASS);
-            } else {
-                toc.classList.remove(FIXED_NAV_CLASS);
-            }
-        }
-
-        if (contentNavigation) {
-            const isInline = getComputedStyle(contentNavigation).position === "static";
-            contentNavigation.style.maxHeight = isInline ? "" : maxHeight;
-            if (sticksToTop) {
-                contentNavigation.classList.add(FIXED_NAV_CLASS);
-                // Set left position
-                if (page) {
-                    contentNavigation.style.left = (page.offsetLeft + page.clientWidth - contentNavigation.offsetWidth) + "px";
-                }
-            } else {
-                contentNavigation.classList.remove(FIXED_NAV_CLASS);
-                contentNavigation.style.left = null;
-            }
-
-            // Update active title inside content navigation panel
-            const pageContent = page.querySelector(".page-content") as HTMLElement;
-            if (pageContent) {
-                const header = Html.getActiveHeader(document.body, pageContent, this._searchBarHeight);
-                if (header && header !== this.state.activePageHeader) {
-                    this.setState({
-                        activePageHeader: header
-                    });
-                    debounce((): void => {
-                        // Make sure the active link is in view
-                        const activeLinkEl = contentNavigation.querySelector("li.active") as HTMLElement;
-                        if (activeLinkEl) {
-                            Html.scrollIntoView(contentNavigation, activeLinkEl);
-                        }
-                    })();
+        /* istanbul ignore if */
+        if (!this._isUnmounted) {
+            if (contentNavigation && page) {
+                // Update active title inside content navigation panel
+                const pageContent = page.querySelector(".page-content") as HTMLElement;
+                if (pageContent) {
+                    const header = Html.getActiveHeader(document.body, pageContent, 0);
+                    if (header && header !== this.state.activePageHeader) {
+                        this.setState({
+                            activePageHeader: header
+                        });
+                        debounce((): void => {
+                            // Make sure the active link is in view
+                            const activeLinkEl = contentNavigation.querySelector("li.active") as HTMLElement;
+                            if (activeLinkEl) {
+                                Html.scrollIntoView(contentNavigation, activeLinkEl);
+                            }
+                        })();
+                    }
                 }
             }
         }

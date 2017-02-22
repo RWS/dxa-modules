@@ -117,7 +117,7 @@ class PublicationContentComponent extends TestBase {
                         id: "2",
                         title: "Second element",
                         hasChildNodes: false,
-                        url: `/${encodeURIComponent(PUBLICATION_ID)}/mp330/second-el-url`
+                        url: `/${encodeURIComponent(PUBLICATION_ID)}/12345/mp330/second-el-url`
                     }
                 ]);
                 const publicationContent = this._renderComponent(target);
@@ -125,7 +125,7 @@ class PublicationContentComponent extends TestBase {
                 // Spy on the router
                 spyOn(publicationContent.context.router, "push").and.callFake((path: string): void => {
                     // Check if routing was called with correct params
-                    expect(path).toBe(`/${encodeURIComponent(PUBLICATION_ID)}/mp330/second-el-url`);
+                    expect(path).toBe(`/${encodeURIComponent(PUBLICATION_ID)}/12345/mp330/second-el-url`);
 
                     // A page load was triggered by changing the selected item in the Toc
                     const page = TestUtils.findRenderedComponentWithType(publicationContent, Page);
@@ -211,25 +211,6 @@ class PublicationContentComponent extends TestBase {
                     expect(buttons.length).toEqual(2);
                     done();
                 }, 500);
-            });
-
-            it("shows an error message in the search bar when the publication title failed to load", (done: () => void): void => {
-                const errorMessage = "Page title is invalid!";
-                services.publicationService.setMockDataPublication(errorMessage);
-                services.pageService.setMockDataPage(null, {
-                    id: "12345",
-                    content: "<div/>",
-                    title: "Title!",
-                    sitemapIds: null
-                });
-                const publicationContent = this._renderComponent(target, "123");
-
-                // Use a timeout to allow the DataStore to return a promise with the data
-                setTimeout((): void => {
-                    const publicationContentNode = ReactDOM.findDOMNode(publicationContent);
-                    expect(publicationContentNode.querySelector(".sdl-dita-delivery-searchbar input").getAttribute("placeholder")).toContain(errorMessage);
-                    done();
-                }, 0);
             });
 
             it("updates the toc when the location changes", (done: () => void): void => {
