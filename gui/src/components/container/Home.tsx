@@ -285,27 +285,42 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
             // Therefore this solution using js was chosen so the animation only occurs in case of expand / collapse of the search panel
             const cssTransition = "top .3s ease-out, height .3s ease-out";
             const domNode = ReactDOM.findDOMNode(this);
-            const pubContent = domNode.querySelector(".sdl-dita-delivery-publication-content") as HTMLElement;
-            if (pubContent) {
-                const tocPanel = pubContent.querySelector(".sdl-dita-delivery-toc") as HTMLElement;
+
+            const searchNode = domNode.querySelector(".sdl-dita-delivery-searchbar") as HTMLElement;
+            const contentNode = searchNode && searchNode.nextElementSibling as HTMLElement;
+            let handlersCleanup: { (): void; }[] = [];
+            if (contentNode) {
+
+                contentNode.style.transition = cssTransition;
+                handlersCleanup.push(() => {
+                    contentNode && contentNode.style.removeProperty("transition");
+                });
+
+                const tocPanel = contentNode.querySelector(".sdl-dita-delivery-toc") as HTMLElement;
                 if (tocPanel) {
                     tocPanel.style.transition = cssTransition;
+                    handlersCleanup.push(() => {
+                        tocPanel && tocPanel.style.removeProperty("transition");
+                    });
                 }
-                const contentNavigationPanel = pubContent.querySelector(".sdl-dita-delivery-content-navigation") as HTMLElement;
+                const contentNavigationPanel = contentNode.querySelector(".sdl-dita-delivery-content-navigation") as HTMLElement;
                 if (contentNavigationPanel) {
                     contentNavigationPanel.style.transition = cssTransition;
+                    handlersCleanup.push(() => {
+                        contentNavigationPanel && contentNavigationPanel.style.removeProperty("transition");
+                    });
                 }
-                pubContent.style.transition = cssTransition;
+
                 setTimeout((): void => {
-                    pubContent.style.removeProperty("transition");
-                    if (tocPanel) {
-                        tocPanel.style.removeProperty("transition");
-                    }
-                    if (contentNavigationPanel) {
-                        contentNavigationPanel.style.removeProperty("transition");
+                    if (!this._isUnmounted) {
+                        handlersCleanup.forEach(handler => {
+                            handler();
+                        });
+                        handlersCleanup = [];
                     }
                 }, 300);
             }
+
             this.setState({
                 searchIsOpen: !searchIsOpen
             });
