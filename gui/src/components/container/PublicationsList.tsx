@@ -1,8 +1,9 @@
 import * as React from "react";
 import { Link } from "react-router";
 import { IPublication } from "interfaces/Publication";
-import { ActivityIndicator, ValidationMessage } from "sdl-controls-react-wrappers";
-import { ValidationMessageType } from "sdl-controls";
+import { ActivityIndicator, Button } from "sdl-controls-react-wrappers";
+import { ButtonPurpose } from "sdl-controls";
+import { Error } from "components/presentation/Error";
 
 import { IAppContext } from "components/container/App";
 
@@ -61,28 +62,7 @@ export class PublicationsList extends React.Component<{}, IPublicationsListState
      * Invoked once, both on the client and server, immediately before the initial rendering occurs.
      */
     public componentWillMount(): void {
-
-        const { publicationService } = this.context.services;
-
-        // Get publications list
-        publicationService.getPublications().then(
-            publications => {
-                /* istanbul ignore else */
-                if (!this._isUnmounted) {
-                    this.setState({
-                        publications: publications
-                    });
-                }
-            },
-            error => {
-                /* istanbul ignore else */
-                if (!this._isUnmounted) {
-                    // TODO: improve error handling
-                    this.setState({
-                        error: error
-                    });
-                }
-            });
+        this._loadPublicationsList();
     }
 
     /**
@@ -93,13 +73,24 @@ export class PublicationsList extends React.Component<{}, IPublicationsListState
     public render(): JSX.Element {
         const { publications, error } = this.state;
         const { services } = this.context;
+        const { formatMessage } = services.localizationService;
+        const _retryHandler = (): void => this._loadPublicationsList();
+
+        const errorButtons = <div>
+                <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{"click": _retryHandler}}>{formatMessage("control.button.retry")}</Button>
+            </div>;
+
         return (
             <section className={"sdl-dita-delivery-publications-list"}>
-                <h1>{services.localizationService.formatMessage("app.publications")}</h1>
                 <nav>
+                    <h1>{services.localizationService.formatMessage("app.publications")}</h1>
                     {
                         error ?
-                            <ValidationMessage messageType={ValidationMessageType.Error} message={error} /> :
+                            <Error
+                                title={formatMessage("error.default.title")}
+                                messages={[formatMessage("error.publications.list.not.found"), formatMessage("error.publications.default.message")]}
+                                buttons={errorButtons} />
+                            :
                             publications ? (
 
                                 <ul>
@@ -124,5 +115,30 @@ export class PublicationsList extends React.Component<{}, IPublicationsListState
      */
     public componentWillUnmount(): void {
         this._isUnmounted = true;
+    }
+
+    private _loadPublicationsList(): void {
+        const { publicationService } = this.context.services;
+
+        // Get publications list
+        publicationService.getPublications().then(
+            publications => {
+                /* istanbul ignore else */
+                if (!this._isUnmounted) {
+                    this.setState({
+                        error: undefined,
+                        publications: publications
+                    });
+                }
+            },
+            error => {
+                /* istanbul ignore else */
+                if (!this._isUnmounted) {
+                    // TODO: improve error handling
+                    this.setState({
+                        error: error
+                    });
+                }
+            });
     }
 }

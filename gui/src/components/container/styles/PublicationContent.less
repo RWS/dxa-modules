@@ -1,5 +1,7 @@
 @import (reference) "../../../theming/styles.less";
 @import (reference) "../../presentation/styles/TopBar.less";
+@import (reference) "../../presentation/styles/Error.less";
+
 @tocWidth: 300px;
 @contentNavWidth: 210px;
 @defaultMargin: 15px;
@@ -68,6 +70,19 @@
             margin-left: @tocWidth + @defaultMargin;
             margin-right: @contentNavWidth + @defaultMargin;
             min-height: 100px;
+        }
+
+        .sdl-dita-delivery-error {
+            width: auto;
+            max-width: none;
+
+            @media screen and (max-width: @screenSm) {
+                margin: 19px 10px;
+            }
+
+            @media screen and (min-width: @screenSm) {
+                margin: 19px 10px 34px @tocWidth + @defaultMargin * 2;
+            }
         }
     }
 }

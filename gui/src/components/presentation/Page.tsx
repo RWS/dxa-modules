@@ -2,10 +2,12 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Html, IHeader } from "utils/Html";
 import { Url } from "utils/Url";
+import { path } from "utils/Path";
 import { ContentNavigation, IContentNavigationItem } from "components/presentation/ContentNavigation";
-import { ActivityIndicator, ValidationMessage } from "sdl-controls-react-wrappers";
-import { ValidationMessageType } from "sdl-controls";
+import { ActivityIndicator, Button } from "sdl-controls-react-wrappers";
+import { ButtonPurpose } from "sdl-controls";
 import { IAppContext } from "components/container/App";
+import { Error } from "components/presentation/Error";
 
 import "components/presentation/styles/Page";
 import "dist/dita-ot/styles/commonltr";
@@ -136,7 +138,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
      * Invoked once, both on the client and server, immediately before the initial rendering occurs.
      */
     public componentWillMount(): void {
-        const { router} = this.context;
+        const { router } = this.context;
 
         if (router) {
             this._historyUnlisten = router.listen(() => {
@@ -154,21 +156,36 @@ export class Page extends React.Component<IPageProps, IPageState> {
      */
     public render(): JSX.Element {
         const props = this.props;
-        const { activeHeader } = props;
+        const { activeHeader, error, url } = props;
         const { navItems } = this.state;
         const { formatMessage } = this.context.services.localizationService;
         const activeNavItemId = activeHeader ? activeHeader.id : (navItems.length > 0 ? navItems[0].id : undefined);
+        const _goHome = (): void => props.onNavigate(path.getRootPath());
+        const _retryHandler = () => url && props.onNavigate(url);
+        const errorButtons = <div>
+                <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{"click": _goHome}}>{formatMessage("components.breadcrumbs.home")}</Button>
+                <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{"click": _retryHandler}}>{formatMessage("control.button.retry")}</Button>
+            </div>;
+        const errorTitle = formatMessage("error.default.title");
+        const errorMessages = [
+            formatMessage("error.page.not.found"),
+            formatMessage("error.default.message")
+        ];
 
         return (
             <div className={"sdl-dita-delivery-page"} style={props.showActivityIndicator ? { overflow: "hidden" } : {}} >
                 {props.showActivityIndicator ? <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} /> : null}
-                {props.error ? <ValidationMessage messageType={ValidationMessageType.Error} message={props.error} /> : null}
                 {props.children}
                 <div className={"sdl-dita-delivery-content-navigation-wrapper"}>
                     <ContentNavigation navItems={navItems} activeNavItemId={activeNavItemId} />
                 </div>
                 <article>
-                    <article className={"page-content ltr"} dangerouslySetInnerHTML={{ __html: props.content || "" }} />
+                    {error
+                        ? <Error
+                            title={errorTitle}
+                            messages={errorMessages}
+                            buttons={errorButtons} />
+                        : <article className={"page-content ltr"} dangerouslySetInnerHTML={{ __html: props.content || "" }} />}
                 </article>
             </div >
         );
@@ -253,10 +270,10 @@ export class Page extends React.Component<IPageProps, IPageState> {
             const { navItems } = this.state;
             const { url } = this.props;
             const pageContentNode = domNode.querySelector(".page-content") as HTMLElement;
-            const headerLinks = Html.getHeaderLinks(pageContentNode).filter((item: IHeader) => {
+            const headerLinks = pageContentNode ? Html.getHeaderLinks(pageContentNode).filter((item: IHeader) => {
                 // We only need level 2 and 3 for items rendered in conten navigation
                 return (item.importancy == 2) || (item.importancy == 3);
-            });
+            }) : [];
             const updatedNavItems: IContentNavigationItem[] = headerLinks.map(item => {
                 return {
                     id: item.id,

@@ -1,14 +1,26 @@
 @import (reference) "../../../theming/styles.less";
+
 .sdl-dita-delivery-toc {
     margin: 32px 0;
-
-    .sdl-treeview > ul.root {
-        padding: 12px 13px 21px 12px;
+    .sdl-treeview > ul.root,
+    .sdl-dita-delivery-error-toc > div.sdl-dita-delivery-error-toc-content {
+        padding: 16px 12px 16px 16px;
         background-color: @neutralColor6;
         border-radius: 4px;
 
         @media screen and (max-width: @screenSm) {
             background: none;
         }
+    }
+
+    .sdl-treeview .sdl-dita-delivery-toc-list-fail > li {
+        text-indent: initial;
+        margin-left: 8px;
+    }
+
+    .sdl-treeview .sdl-dita-delivery-toc-list-fail p {
+        margin: 0 0 8px 0;
+        color: @accentColor3;
+        font-weight: bold;
     }
 }
