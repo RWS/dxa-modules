@@ -292,23 +292,23 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
             if (contentNode) {
 
                 contentNode.style.transition = cssTransition;
-                handlersCleanup.push(() => {
-                    contentNode && contentNode.style.removeProperty("transition");
-                });
+                handlersCleanup.push(() => contentNode && contentNode.style.removeProperty("transition"));
 
                 const tocPanel = contentNode.querySelector(".sdl-dita-delivery-toc") as HTMLElement;
                 if (tocPanel) {
                     tocPanel.style.transition = cssTransition;
-                    handlersCleanup.push(() => {
-                        tocPanel && tocPanel.style.removeProperty("transition");
-                    });
+                    handlersCleanup.push(() => tocPanel && tocPanel.style.removeProperty("transition"));
+
+                    const separator = tocPanel.querySelector(".separator") as HTMLElement;
+                    if (separator) {
+                        separator.style.transition = cssTransition;
+                        handlersCleanup.push(() => separator && separator.style.removeProperty("transition"));
+                    }
                 }
                 const contentNavigationPanel = contentNode.querySelector(".sdl-dita-delivery-content-navigation") as HTMLElement;
                 if (contentNavigationPanel) {
                     contentNavigationPanel.style.transition = cssTransition;
-                    handlersCleanup.push(() => {
-                        contentNavigationPanel && contentNavigationPanel.style.removeProperty("transition");
-                    });
+                    handlersCleanup.push(() => contentNavigationPanel && contentNavigationPanel.style.removeProperty("transition"));
                 }
 
                 setTimeout((): void => {
