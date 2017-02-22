@@ -1,5 +1,6 @@
 import * as ClassNames from "classnames";
 import * as React from "react";
+import * as ReactDOM from "react-dom";
 import { IAppContext } from "components/container/App";
 import { TopBar } from "components/presentation/TopBar";
 import { SearchBar } from "components/presentation/SearchBar";
@@ -279,6 +280,32 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
         const { searchIsOpen } = this.state;
         /* istanbul ignore if */
         if (!this._isUnmounted) {
+            // Add animation to the main content to allow a smoot transition
+            // This was hard to achieve using css only as the animation would also be triggered when for example scrolling back to the top
+            // Therefore this solution using js was chosen so the animation only occurs in case of expand / collapse of the search panel
+            const cssTransition = "top .3s ease-out, height .3s ease-out";
+            const domNode = ReactDOM.findDOMNode(this);
+            const pubContent = domNode.querySelector(".sdl-dita-delivery-publication-content") as HTMLElement;
+            if (pubContent) {
+                const tocPanel = pubContent.querySelector(".sdl-dita-delivery-toc") as HTMLElement;
+                if (tocPanel) {
+                    tocPanel.style.transition = cssTransition;
+                }
+                const contentNavigationPanel = pubContent.querySelector(".sdl-dita-delivery-content-navigation") as HTMLElement;
+                if (contentNavigationPanel) {
+                    contentNavigationPanel.style.transition = cssTransition;
+                }
+                pubContent.style.transition = cssTransition;
+                setTimeout((): void => {
+                    pubContent.style.removeProperty("transition");
+                    if (tocPanel) {
+                        tocPanel.style.removeProperty("transition");
+                    }
+                    if (contentNavigationPanel) {
+                        contentNavigationPanel.style.removeProperty("transition");
+                    }
+                }, 300);
+            }
             this.setState({
                 searchIsOpen: !searchIsOpen
             });
