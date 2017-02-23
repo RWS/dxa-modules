@@ -77,7 +77,7 @@ export class App extends React.Component<IAppProps, {}> {
                         <IndexRedirect to="home" />
                         <Redirect from="home;jsessionid=*" to="home" />
                         <Route path="home" component={ProductFamiliesList} />
-                        <Route path="publications/:productFamily" component={PublicationsList} />
+                        <Route path="publications/(:productFamily)" component={PublicationsList} />
                         <Route path=":publicationId(/:pageIdOrPublicationTitle)(/:publicationTitle)(/:pageTitle)(/:pageAnchor)" component={PublicationContent} />
                     </Route>
                 </Router>

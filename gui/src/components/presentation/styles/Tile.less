@@ -11,6 +11,13 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        &.exclamation-mark {
+            &::before {
+                .icon-exclamation-mark();
+                content: "";
+                margin-right:10px;
+            }
+        }
     }
     hr {
         background: @neutralColor5;

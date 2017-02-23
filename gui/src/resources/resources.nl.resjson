@@ -8,6 +8,8 @@
   "components.contentnavigation.title": "Inhoud",
   "components.tiles.more": "Bekijk meer",
   "components.tiles.all": "Bekijk alle Producten",
+  "components.productfamilies.unknown.title": "Onbekende product",
+  "components.productfamilies.unknown.description": "Deze publicatie is nog niet gekoppeld aan een specifiek product",
   "control.button.retry": "Opnieuw proberen"
   "error.default.message": "Als u nog steeds deze fout ziet, gebruik dan de onderstaande links om naar de home page of zoek de documentatie te vinden wat u zoekt.",
   "error.default.title": "Oeps, er is iets fout gegaan!",
@@ -16,7 +18,6 @@
   "error.path.not.found": "Het pad voor de sitemap item met id {0} kon niet gevonden worden in de publicatie met id {1}.",
   "error.publications.list.not.found": "We zijn erg jammer, maar de lijst van publicatie was niet geladen.",
   "error.publications.default.message": "Probeer het opnieuw laden of gebruik maken van een directe link naar uw publicatie.",
-  "error.product.families.unknown": "Onbekende productfamilie",
   "error.product.families.list.not.found": "We zijn erg jammer, maar de lijst van productfamilies was niet geladen.",
   "error.product.families.default.message": "Probeer het opnieuw laden of gebruik maken van een directe link naar uw productfamilie.",
   "error.publication.not.found": "Publicatie met id {0} kon niet gevonden worden.",

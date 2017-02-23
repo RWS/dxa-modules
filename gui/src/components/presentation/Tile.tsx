@@ -41,6 +41,13 @@ export interface ITile {
      * @memberOf ITile
      */
     navigateTo?: () => void;
+
+    /**
+     * If tile has a warning
+     *
+     * @memberOf ITile
+     */
+    hasWarning?: boolean;
 }
 
 /**
@@ -67,7 +74,7 @@ export const Tile: React.StatelessComponent<ITileProps> = (props: ITileProps, co
     return (
         <div className="sdl-dita-delivery-tile">
             <div className="tile-header-wrapper">
-                <h3>{StringHelper.truncate(tile.title, TILE_TITLE_TRUNCATE)}</h3>
+                <h3 className={tile.hasWarning ? "exclamation-mark" : ""}>{StringHelper.truncate(tile.title, TILE_TITLE_TRUNCATE)}</h3>
             </div>
             <hr />
             <p>

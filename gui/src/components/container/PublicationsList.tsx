@@ -23,7 +23,7 @@ export interface IPublicationsListPropsParams {
      *
      * @type {string}
      */
-    productFamily: string;
+    productFamily?: string;
 }
 
 /**
@@ -74,7 +74,6 @@ export class PublicationsList extends React.Component<IPublicationsListProps, IP
 
     public context: IAppContext;
 
-    private _unknownFamilyLabel: string;
     private _isUnmounted: boolean = false;
 
     /**
@@ -93,10 +92,6 @@ export class PublicationsList extends React.Component<IPublicationsListProps, IP
      * Invoked once, both on the client and server, immediately before the initial rendering occurs.
      */
     public componentWillMount(): void {
-        const { formatMessage } = this.context.services.localizationService;
-        if (!this._unknownFamilyLabel) {
-            this._unknownFamilyLabel = formatMessage("error.product.families.unknown");
-        }
 
         // Load the publications list
         this._loadPublicationsList();
@@ -185,7 +180,7 @@ export class PublicationsList extends React.Component<IPublicationsListProps, IP
 
         if (!this._isUnmounted) {
             const filteredPublications = publications && publications.filter((publication: IPublication) => {
-                return (publication.productFamily === ((productFamily === this._unknownFamilyLabel) ? undefined : productFamily));
+                return (publication.productFamily === productFamily);
             });
 
             this.setState({

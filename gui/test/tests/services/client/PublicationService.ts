@@ -5,10 +5,10 @@ import { FakeXMLHttpRequest } from "test/mocks/XmlHttpRequest";
 class PublicationServiceTests extends TestBase {
 
     public runTests(): void {
-        const publicationService = new PublicationService();
-        const publicationId = "1961702";
 
-        describe(`Publication service tests.`, (): void => {
+        describe(`Publication service tests. Publications`, (): void => {
+
+            const publicationService = new PublicationService();
 
             it("returns a proper error when product families cannot be retrieved", (done: () => void): void => {
                 // Put this test first, otherwise the publication would be already in the cache and the spy would not work
@@ -23,34 +23,8 @@ class PublicationServiceTests extends TestBase {
                 });
             });
 
-            it("returns a proper error when publications cannot be retrieved", (done: () => void): void => {
-                // Put this test first, otherwise the publication would be already in the cache and the spy would not work
-                const failMessage = "failure-retrieving-publications";
-                spyOn(window, "XMLHttpRequest").and.callFake(() => new FakeXMLHttpRequest(failMessage));
-                publicationService.getPublications().then(() => {
-                    fail("An error was expected.");
-                    done();
-                }).catch(error => {
-                    expect(error).toContain(failMessage);
-                    done();
-                });
-            });
-
-            it("returns a proper error when publication title cannot be retrieved", (done: () => void): void => {
-                // Put this test first, otherwise the publication would be already in the cache and the spy would not work
-                const failMessage = "failure-retrieving-publication-title";
-                spyOn(window, "XMLHttpRequest").and.callFake(() => new FakeXMLHttpRequest(failMessage));
-                publicationService.getPublicationTitle(failMessage).then(() => {
-                    fail("An error was expected.");
-                    done();
-                }).catch(error => {
-                    expect(error).toContain(failMessage);
-                    done();
-                });
-            });
-
             it("can get product families from publications with undefined properties", (done: () => void): void => {
-                spyOn(publicationService, "getPublications").and.callFake(() => {
+                const spy = spyOn(publicationService, "getPublications").and.callFake(() => {
                     return [
                         {
                             "Id": "Pub1",
@@ -68,9 +42,9 @@ class PublicationServiceTests extends TestBase {
                         },
                         {
                             "Id": "Pub",
-                            "Title": "Pub",
+                            "Title": "Pub"
                         }
-                    ]
+                    ];
                 });
 
                 publicationService.getProductFamilies().then(families => {
@@ -79,6 +53,7 @@ class PublicationServiceTests extends TestBase {
                         expect(families.length).toBe(3);
                         expect(families[3].title).toBe(undefined);
                     }
+                    expect(spy).toHaveBeenCalled();
                     done();
                 }).catch(error => {
                     fail(`Unexpected error: ${error}`);
@@ -118,6 +93,25 @@ class PublicationServiceTests extends TestBase {
                 });
             });
 
+        });
+
+        describe(`Publication service tests. Publications`, (): void => {
+
+            const publicationService = new PublicationService();
+
+            it("returns a proper error when publications cannot be retrieved", (done: () => void): void => {
+                // Put this test first, otherwise the publication would be already in the cache and the spy would not work
+                const failMessage = "failure-retrieving-publications";
+                spyOn(window, "XMLHttpRequest").and.callFake(() => new FakeXMLHttpRequest(failMessage));
+                publicationService.getPublications().then(() => {
+                    fail("An error was expected.");
+                    done();
+                }).catch(error => {
+                    expect(error).toContain(failMessage);
+                    done();
+                });
+            });
+
             it("can get the publications", (done: () => void): void => {
                 const spy = spyOn(window, "XMLHttpRequest").and.callThrough();
                 publicationService.getPublications().then(publications => {
@@ -146,6 +140,25 @@ class PublicationServiceTests extends TestBase {
                     done();
                 }).catch(error => {
                     fail(`Unexpected error: ${error}`);
+                    done();
+                });
+            });
+
+        });
+        describe(`Publication service tests. Publications`, (): void => {
+
+            const publicationService = new PublicationService();
+            const publicationId = "1961702";
+
+            it("returns a proper error when publication title cannot be retrieved", (done: () => void): void => {
+                // Put this test first, otherwise the publication would be already in the cache and the spy would not work
+                const failMessage = "failure-retrieving-publication-title";
+                spyOn(window, "XMLHttpRequest").and.callFake(() => new FakeXMLHttpRequest(failMessage));
+                publicationService.getPublicationTitle(failMessage).then(() => {
+                    fail("An error was expected.");
+                    done();
+                }).catch(error => {
+                    expect(error).toContain(failMessage);
                     done();
                 });
             });
