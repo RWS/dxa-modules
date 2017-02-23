@@ -35,6 +35,13 @@ export interface IHomeState {
      *
      * @type {boolean}
      */
+    searchIsOpening?: boolean;
+
+    /**
+     * if search panel is open
+     *
+     * @type {boolean}
+     */
     searchIsActive?: boolean;
 
     /**
@@ -156,7 +163,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
      */
     public render(): JSX.Element {
         const { localizationService } = this.context.services;
-        const { isNavOpen, searchIsOpen, searchIsActive, sticksToTop, searchTitle, publicationId } = this.state;
+        const { isNavOpen, searchIsOpen, searchIsOpening, searchIsActive, sticksToTop, searchTitle, publicationId } = this.state;
         const { children } = this.props;
 
         const hasPublication = publicationId !== undefined;
@@ -166,6 +173,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
             "fixed-nav": sticksToTop,
             "open": hasPublication && isNavOpen,
             "search-open": searchIsOpen,
+            "search-is-opening": searchIsOpening,
             "search-is-active": searchIsOpen && searchIsActive
         });
 
@@ -283,45 +291,21 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
             // Add animation to the main content to allow a smoot transition
             // This was hard to achieve using css only as the animation would also be triggered when for example scrolling back to the top
             // Therefore this solution using js was chosen so the animation only occurs in case of expand / collapse of the search panel
-            const cssTransition = "top .3s ease-out, height .3s ease-out";
+
             const domNode = ReactDOM.findDOMNode(this);
-
             const searchNode = domNode.querySelector(".sdl-dita-delivery-searchbar") as HTMLElement;
-            const contentNode = searchNode && searchNode.nextElementSibling as HTMLElement;
-            let handlersCleanup: { (): void; }[] = [];
-            if (contentNode) {
-
-                contentNode.style.transition = cssTransition;
-                handlersCleanup.push(() => contentNode && contentNode.style.removeProperty("transition"));
-
-                const tocPanel = contentNode.querySelector(".sdl-dita-delivery-toc") as HTMLElement;
-                if (tocPanel) {
-                    tocPanel.style.transition = cssTransition;
-                    handlersCleanup.push(() => tocPanel && tocPanel.style.removeProperty("transition"));
-
-                    const separator = tocPanel.querySelector(".separator") as HTMLElement;
-                    if (separator) {
-                        separator.style.transition = cssTransition;
-                        handlersCleanup.push(() => separator && separator.style.removeProperty("transition"));
-                    }
-                }
-                const contentNavigationPanel = contentNode.querySelector(".sdl-dita-delivery-content-navigation") as HTMLElement;
-                if (contentNavigationPanel) {
-                    contentNavigationPanel.style.transition = cssTransition;
-                    handlersCleanup.push(() => contentNavigationPanel && contentNavigationPanel.style.removeProperty("transition"));
-                }
-
-                setTimeout((): void => {
-                    if (!this._isUnmounted) {
-                        handlersCleanup.forEach(handler => {
-                            handler();
-                        });
-                        handlersCleanup = [];
-                    }
-                }, 300);
+            if (searchNode) {
+                const _onTransitionEnd = () => {
+                    searchNode.removeEventListener("transitionend", _onTransitionEnd);
+                    this.setState({
+                        searchIsOpening: false
+                    });
+                };
+                searchNode.addEventListener("transitionend", _onTransitionEnd);
             }
 
             this.setState({
+                searchIsOpening: true,
                 searchIsOpen: !searchIsOpen
             });
         }
