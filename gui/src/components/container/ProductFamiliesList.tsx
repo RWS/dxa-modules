@@ -87,30 +87,17 @@ export class ProductFamiliesList extends React.Component<{}, IProductFamiliesLis
                             buttons={errorButtons} />
                         : productFamilies
                             ? (<TilesList tiles={productFamilies.map((productFamily: IProductFamily) => {
-                                if (productFamily.title) {
-                                    return {
-                                        title: productFamily.title,
-                                        description: productFamily.description,
-                                        navigateTo: () => {
-                                            /* istanbul ignore else */
-                                            if (router) {
-                                                router.push(Url.getProductFamilyUrl(productFamily.title));
-                                            }
+                                return {
+                                    title: productFamily.title,
+                                    description: productFamily.description,
+                                    hasWarning: productFamily.hasWarning,
+                                    navigateTo: () => {
+                                        /* istanbul ignore else */
+                                        if (router) {
+                                            router.push(Url.getProductFamilyUrl(productFamily.title));
                                         }
-                                    } as ITile;
-                                } else {
-                                    return {
-                                        title: formatMessage("components.productfamilies.unknown.title"),
-                                        description: formatMessage("components.productfamilies.unknown.description"),
-                                        hasWarning: true,
-                                        navigateTo: () => {
-                                            /* istanbul ignore else */
-                                            if (router) {
-                                                router.push(Url.getProductFamilyUrl(""));
-                                            }
-                                        }
-                                    } as ITile;
-                                }
+                                    }
+                                } as ITile;
                             })} />)
                             : <ActivityIndicator skin="graphene" text={services.localizationService.formatMessage("components.tiles.more")} />
                 }

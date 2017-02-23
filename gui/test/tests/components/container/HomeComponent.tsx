@@ -53,7 +53,7 @@ class HomeComponent extends TestBase {
                 }, 0);
             });
 
-            it("can interract with search search panel", (done: () => void): void => {
+            it("can interract with search panel", (done: () => void): void => {
                 const app = this._renderComponent(target);
                 const homeNode = ReactDOM.findDOMNode(app);
 

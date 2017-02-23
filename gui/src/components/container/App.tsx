@@ -69,15 +69,15 @@ export class App extends React.Component<IAppProps, {}> {
         const { history } = this.props;
         const errorObj = (window as IWindow).SdlDitaDeliveryError;
         if (errorObj) {
-            return <ErrorContent error={errorObj}/>;
+            return <ErrorContent error={errorObj} />;
         } else {
             return (
                 <Router history={history}>
-                    <Route path={path.getRootPath() } component={Home} >
+                    <Route path={path.getRootPath()} component={Home} >
                         <IndexRedirect to="home" />
                         <Redirect from="home;jsessionid=*" to="home" />
                         <Route path="home" component={ProductFamiliesList} />
-                        <Route path="publications/(:productFamily)" component={PublicationsList} />
+                        <Route path="publications/:productFamily" component={PublicationsList} />
                         <Route path=":publicationId(/:pageIdOrPublicationTitle)(/:publicationTitle)(/:pageTitle)(/:pageAnchor)" component={PublicationContent} />
                     </Route>
                 </Router>

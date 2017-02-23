@@ -58,7 +58,7 @@ class ProductFamiliesListComponent extends TestBase {
                 }, 500);
             });
 
-            it("renders only publications associated with product family", (done: () => void): void => {
+            it("renders product families tiles", (done: () => void): void => {
                 services.publicationService.fakeDelay(true);
                 const productFamilies = [{
                     title: "Product Family 1"

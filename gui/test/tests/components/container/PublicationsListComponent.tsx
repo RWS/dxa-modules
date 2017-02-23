@@ -62,12 +62,10 @@ class PublicationsListComponent extends TestBase {
                 services.publicationService.fakeDelay(true);
                 const publications = [{
                     id: "1",
-                    title: "Publication 1",
-                    productFamily: "prod-family"
+                    title: "Publication 1"
                 }, {
                     id: "2",
-                    title: "Publication 2",
-                    productFamily: "prod-family"
+                    title: "Publication 2"
                 }, {
                     id: "3",
                     title: "Publication 3"
@@ -78,10 +76,11 @@ class PublicationsListComponent extends TestBase {
 
                 setTimeout((): void => {
                     const hyperlinks = TestUtils.scryRenderedDOMComponentsWithTag(publicationsList, "a");
-                    expect(hyperlinks.length).toBe(2);
+                    expect(hyperlinks.length).toBe(3);
 
                     expect(hyperlinks[0].textContent).toBe(publications[0].title);
                     expect(hyperlinks[1].textContent).toBe(publications[1].title);
+                    expect(hyperlinks[2].textContent).toBe(publications[2].title);
 
                     done();
                 }, 500);
@@ -90,8 +89,7 @@ class PublicationsListComponent extends TestBase {
             it("navigates to publication when a publication title is clicked", (done: () => void): void => {
                 const publications = [{
                     id: "0",
-                    title: "Publication",
-                    productFamily: "prod-family"
+                    title: "Publication"
                 }];
                 services.publicationService.setMockDataPublications(null, publications);
 

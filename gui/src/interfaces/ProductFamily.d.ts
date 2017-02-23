@@ -20,4 +20,12 @@ export interface IProductFamily {
      * @memberOf IProductFamily
      */
     description?: string;
+
+    /**
+     * If product family has a warning
+     *
+     * @type {string}
+     * @memberOf IProductFamily
+     */
+    hasWarning?: boolean;
 }

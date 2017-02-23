@@ -26,20 +26,21 @@ export class PublicationService implements IPublicationService {
     /**
      * Get the list of publications
      *
+     * @param {string} productFamily productFamily title
      * @returns {Promise<IPublication[]>} Promise to return Items
      *
      * @memberOf DataStoreClient
      */
-    public getPublications(): Promise<IPublication[]> {
+    public getPublications(productFamily?: string): Promise<IPublication[]> {
         const publication = this.getPublicationsModel();
         return new Promise((resolve: (publications?: IPublication[]) => void, reject: (error: string | null) => void) => {
             if (publication.isLoaded()) {
-                resolve(publication.getPublications());
+                resolve(publication.getPublications(productFamily));
             } else {
                 let removeEventListeners: () => void;
                 const onLoad = () => {
                     removeEventListeners();
-                    resolve(publication.getPublications());
+                    resolve(publication.getPublications(productFamily));
                 };
                 const onLoadFailed = (event: Event & { data: { error: string } }) => {
                     removeEventListeners();

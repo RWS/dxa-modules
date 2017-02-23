@@ -4,6 +4,8 @@ import { IProductFamily } from "interfaces/ProductFamily";
 import { Api } from "utils/Api";
 import { Net, IWebRequest, LoadableObject } from "sdl-models";
 
+import { localization } from "services/common/LocalizationService";
+
 /**
  * Publications model
  *
@@ -16,12 +18,22 @@ export class Publications extends LoadableObject {
     private _publications: IPublication[];
     private _productFamilies?: IProductFamily[];
 
+    private _unknownProductFamilyTitle: string = localization.formatMessage("components.productfamilies.unknown.title");
+
     /**
      * Get the Publications
      *
+     * @param {string} productFamily productFamily title
      * @returns {IPublication[]}
      */
-    public getPublications(): IPublication[] {
+    public getPublications(productFamily?: string): IPublication[] {
+        if (productFamily) {
+            const familyTitle = (productFamily === this._unknownProductFamilyTitle) ? undefined : productFamily;
+            return this._publications.filter((publication: IPublication) => {
+                return (publication.productFamily === familyTitle);
+            });
+        }
+
         return this._publications;
     }
 
@@ -32,17 +44,27 @@ export class Publications extends LoadableObject {
      */
     public getProductFamilies(): IProductFamily[] {
         if (!this._productFamilies) {
-            const publications = this._publications;
-            this._productFamilies = publications.map((publication: IPublication) => {
-                return publication.productFamily;
-            }).filter((family: string, i: number, arr: string[]) => {
-                return arr.indexOf(family) == i;
-            }).map((family: string) => {
-                return {
-                    // Only title now, description would go here later on
-                    title: family
-                } as IProductFamily;
-            });
+            const publications = this.getPublications();
+            if (publications) {
+                this._productFamilies = publications.map((publication: IPublication) => {
+                    return publication.productFamily;
+                }).filter((family: string, i: number, arr: string[]) => {
+                    return arr.indexOf(family) == i;
+                }).map((family: string) => {
+                    if (family === undefined) {
+                        return {
+                            title: localization.formatMessage("components.productfamilies.unknown.title"),
+                            description: localization.formatMessage("components.productfamilies.unknown.description"),
+                            hasWarning: true
+                        } as IProductFamily;
+                    } else {
+                        return {
+                            // Only title now, description would go here later on
+                            title: family
+                        } as IProductFamily;
+                    }
+                });
+            }
         }
         return this._productFamilies || [];
     }

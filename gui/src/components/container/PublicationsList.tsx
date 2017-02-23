@@ -168,23 +168,19 @@ export class PublicationsList extends React.Component<IPublicationsListProps, IP
 
     private _loadPublicationsList(): void {
         const { publicationService } = this.context.services;
+        const { productFamily } = this.props.params;
 
         // Get publications list
-        publicationService.getPublications().then(
+        publicationService.getPublications(productFamily).then(
             this._onPublicationsListRetrieved.bind(this),
             this._onPublicationsListRetrieveFailed.bind(this));
     }
 
     private _onPublicationsListRetrieved(publications: IPublication[]): void {
-        const { productFamily } = this.props.params;
-
+        /* istanbul ignore if */
         if (!this._isUnmounted) {
-            const filteredPublications = publications && publications.filter((publication: IPublication) => {
-                return (publication.productFamily === productFamily);
-            });
-
             this.setState({
-                publications: filteredPublications
+                publications: publications
             });
         }
     }
