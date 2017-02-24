@@ -6,8 +6,8 @@ export interface IPage {
 }
 export interface IPublication {
     Id: string;
-    ProductFamily?: string;
-    ProductReleaseVersion?: string;
+    ProductFamily?: string | null;
+    ProductReleaseVersion?: string | null;
     Title: string;
 }
 export interface ISitemapItem {

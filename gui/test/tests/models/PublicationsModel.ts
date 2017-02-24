@@ -1,6 +1,42 @@
-import { Publications } from "models/Publications";
+import { Publications as PublicationsBase } from "models/Publications";
 import { TestBase } from "sdl-models";
-import { IPublication } from "interfaces/Publication";
+import { IPublication } from "interfaces/ServerModels";
+import { localization } from "services/common/LocalizationService";
+
+const MOCK_DATA: IPublication[] = [
+    {
+        Id: "Pub1",
+        Title: "Pub1",
+        ProductFamily: "Family 1"
+    },
+    {
+        Id: "Pub2",
+        Title: "Pub2",
+        ProductFamily: "Family 2"
+    }, {
+        Id: "Pub3",
+        Title: "Pub3",
+        ProductFamily: "Family 2"
+    },
+    {
+        Id: "Pub",
+        Title: "Pub"
+    },
+    {
+        Id: "Pub4",
+        Title: "Pub4",
+        ProductFamily: null
+    }
+];
+
+class Publications extends PublicationsBase {
+    protected _executeLoad(reload: boolean): void {
+        const onLoad = this.getDelegate(this._onLoad);
+        if (onLoad) {
+            onLoad(JSON.stringify(MOCK_DATA), null);
+        }
+    }
+}
 
 class PublicationsModel extends TestBase {
 
@@ -9,35 +45,9 @@ class PublicationsModel extends TestBase {
         describe(`Publications model tests.`, (): void => {
 
             const publicationModel = new Publications();
-            const MOCK_DATA: IPublication[] = [
-                {
-                    id: "Pub1",
-                    title: "Pub1",
-                    productFamily: "Family 1"
-                },
-                {
-                    id: "Pub2",
-                    title: "Pub2",
-                    productFamily: "Family 2"
-                }, {
-                    id: "Pub3",
-                    title: "Pub3",
-                    productFamily: "Family 2"
-                },
-                {
-                    id: "Pub",
-                    title: "Pub"
-                },
-                {
-                    id: "Pub4",
-                    title: "Pub4",
-                    productFamily: null
-                }
-            ];
+            publicationModel.load();
 
             it("can resolve product families", (): void => {
-                spyOn(publicationModel, "getPublications").and.callFake(() => MOCK_DATA);
-
                 const families = publicationModel.getProductFamilies();
                 expect(families).toBeDefined();
                 if (families) {
@@ -49,26 +59,23 @@ class PublicationsModel extends TestBase {
             });
 
             it("can resolve publications for a product family", (): void => {
-                spyOn(publicationModel, "getPublications").and.callFake(() => MOCK_DATA);
-
                 const publications = publicationModel.getPublications("Family 2");
                 expect(publications).toBeDefined();
                 if (publications) {
                     expect(publications.length).toBe(2);
                     expect(publications[0].title).toBe("Pub2");
-                    expect(publications[0].title).toBe("Pub3");
+                    expect(publications[1].title).toBe("Pub3");
                 }
             });
 
             it("can resolve publications for an unknown product family", (): void => {
-                spyOn(publicationModel, "getPublications").and.callFake(() => MOCK_DATA);
-
-                const publications = publicationModel.getPublications();
+                const unknownProductFamilyTitle: string = localization.formatMessage("components.productfamilies.unknown.title");
+                const publications = publicationModel.getPublications(unknownProductFamilyTitle);
                 expect(publications).toBeDefined();
                 if (publications) {
                     expect(publications.length).toBe(2);
                     expect(publications[0].title).toBe("Pub");
-                    expect(publications[1].title).toBe("Pub 4");
+                    expect(publications[1].title).toBe("Pub4");
                 }
             });
         });

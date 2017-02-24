@@ -30,6 +30,9 @@ export class Publications extends LoadableObject {
         if (productFamily) {
             const familyTitle = (productFamily === this._unknownProductFamilyTitle) ? undefined : productFamily;
             return this._publications.filter((publication: IPublication) => {
+                if (!familyTitle) {
+                     return !publication.productFamily;
+                }
                 return (publication.productFamily === familyTitle);
             });
         }
@@ -47,11 +50,11 @@ export class Publications extends LoadableObject {
             const publications = this.getPublications();
             if (publications) {
                 this._productFamilies = publications.map((publication: IPublication) => {
-                    return publication.productFamily;
+                    return publication.productFamily || "unknown";
                 }).filter((family: string, i: number, arr: string[]) => {
                     return arr.indexOf(family) == i;
                 }).map((family: string) => {
-                    if (family === undefined) {
+                    if (family === "unknown") {
                         return {
                             title: localization.formatMessage("components.productfamilies.unknown.title"),
                             description: localization.formatMessage("components.productfamilies.unknown.description"),
