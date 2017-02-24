@@ -10,8 +10,8 @@ import { IAppContext } from "components/container/App";
 import { Error } from "components/presentation/Error";
 
 import "components/presentation/styles/Page";
-import "dist/dita-ot/styles/commonltr";
-import "dist/dita-ot/styles/commonrtl";
+import "dita-ot/styles/commonltr";
+import "dita-ot/styles/commonrtl";
 
 /**
  * Page component props

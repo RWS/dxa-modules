@@ -28,6 +28,6 @@ module.exports = (buildOptions, gulp) => {
             .pipe(gulpDebug({ title: 'Wrapped css into a single class' }))
             .pipe(gulpIf(!buildOptions.isDebug, gulpCsso()))
             .pipe(gulpIf(!buildOptions.isDebug, gulpDebug({ title: 'Uglified output' })))
-            .pipe(gulp.dest(buildOptions.distPath + 'dita-ot/styles/'));
+            .pipe(gulp.dest(buildOptions.distPath + 'lib/dita-ot/styles/'));
     };
 }
