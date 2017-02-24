@@ -46,11 +46,15 @@ export class Publications extends LoadableObject {
         if (!this._productFamilies) {
             const publications = this.getPublications();
             if (publications) {
-                this._productFamilies = publications.map((publication: IPublication) => {
+                let distinctFamilies: (string | undefined)[] = publications.map((publication: IPublication) => {
                     return publication.productFamily;
                 }).filter((family: string, i: number, arr: string[]) => {
                     return arr.indexOf(family) == i;
-                }).map((family: string) => {
+                });
+
+                distinctFamilies.sort();
+
+                this._productFamilies = distinctFamilies.map((family: string | undefined) => {
                     if (family === undefined) {
                         return {
                             title: localization.formatMessage("components.productfamilies.unknown.title"),
