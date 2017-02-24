@@ -54,7 +54,7 @@ class PublicationServiceTests extends TestBase {
                     expect(families).toBeDefined();
                     if (families) {
                         expect(families.length).toBe(5);
-                        expect(families[3].title).toBe("SDL Knowledge Center");
+                        expect(families[3].title).toBe("Mobile Phones");
                     }
                     done();
                 }).catch(error => {
@@ -69,7 +69,7 @@ class PublicationServiceTests extends TestBase {
                     expect(families).toBeDefined();
                     if (families) {
                         expect(families.length).toBe(5);
-                        expect(families[3].title).toBe("SDL Knowledge Center");
+                        expect(families[3].title).toBe("Mobile Phones");
                         expect(spy).not.toHaveBeenCalled();
                     }
                     done();
