@@ -55,7 +55,10 @@ export class Publications extends LoadableObject {
                     return arr.indexOf(family) == i;
                 });
 
-                distinctFamilies.sort();
+                // Implementing case in-sensetive sort
+                distinctFamilies.sort((left: string | undefined, right: string | undefined) => {
+                    return (left || "").toLowerCase().localeCompare((right || "").toLowerCase());
+                });
 
                 this._productFamilies = distinctFamilies.map((family: string | undefined) => {
                     if (family === "unknown") {
