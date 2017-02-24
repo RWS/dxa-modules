@@ -24,16 +24,16 @@ export interface IPublication {
     /**
      * Publication product family
      *
-     * @type {string}
+     * @type {string | null}
      * @memberOf IPublication
      */
-    productFamily?: string;
+    productFamily?: string | null;
 
     /**
      * Publication product release version
      *
-     * @type {string}
+     * @type {string | null}
      * @memberOf IPublication
      */
-    productReleaseVersion?: string;
+    productReleaseVersion?: string | null;
 }
