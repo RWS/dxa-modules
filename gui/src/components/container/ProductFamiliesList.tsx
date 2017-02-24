@@ -86,20 +86,22 @@ export class ProductFamiliesList extends React.Component<{}, IProductFamiliesLis
                             messages={[formatMessage("error.product.families.list.not.found"), formatMessage("error.product.families.default.message")]}
                             buttons={errorButtons} />
                         : productFamilies
-                            ? (<TilesList tiles={productFamilies.map((productFamily: IProductFamily) => {
-                                return {
-                                    title: productFamily.title,
-                                    description: productFamily.description,
-                                    hasWarning: productFamily.hasWarning,
-                                    navigateTo: () => {
-                                        /* istanbul ignore else */
-                                        if (router) {
-                                            router.push(Url.getProductFamilyUrl(productFamily.title));
+                            ? (productFamilies.length > 0)
+                                ? (<TilesList tiles={productFamilies.map((productFamily: IProductFamily) => {
+                                    return {
+                                        title: productFamily.title,
+                                        description: productFamily.description,
+                                        hasWarning: productFamily.hasWarning,
+                                        navigateTo: () => {
+                                            /* istanbul ignore else */
+                                            if (router) {
+                                                router.push(Url.getProductFamilyUrl(productFamily.title));
+                                            }
                                         }
-                                    }
-                                } as ITile;
-                            })} />)
-                            : <ActivityIndicator skin="graphene" text={services.localizationService.formatMessage("components.tiles.more")} />
+                                    } as ITile;
+                                })} />)
+                                : <div className={"no-available-publications-label"}>{formatMessage("components.productfamilies.no.published.publications")}</div>
+                            : <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} />
                 }
             </section>);
     }
