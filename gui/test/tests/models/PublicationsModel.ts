@@ -1,6 +1,7 @@
 import { Publications as PublicationsBase } from "models/Publications";
 import { TestBase } from "sdl-models";
 import { IPublication } from "interfaces/ServerModels";
+import { IPublication as IPublicationInterface } from "interfaces/Publication";
 import { localization } from "services/common/LocalizationService";
 
 const MOCK_DATA: IPublication[] = [
@@ -66,7 +67,7 @@ class PublicationsModel extends TestBase {
             });
 
             it("filters product families in alphabetical order", (): void => {
-                spyOn(publicationModel, "getPublications").and.callFake(() => {
+                spyOn(publicationModel, "getPublications").and.callFake((): IPublicationInterface[] => {
                     return [{
                         "id": "1",
                         "productFamily": "Blackberry"
@@ -75,19 +76,23 @@ class PublicationsModel extends TestBase {
                         "productFamily": "Strawberry"
                     }, {
                         "id": "3",
-                        "productFamily": "Blueberry"
+                        "productFamily": "blueberry"
                     }, {
                         "id": "4",
                         "productFamily": "Watermelonberry"
                     }, {
                         "id": "5",
-                        "productFamily": "Elderberry"
+                        "productFamily": "elderberry"
                     }, {
                         "id": "6",
                         "productFamily": "Mulberry"
                     }, {
                         "id": "7",
                         "title": "Salat item 7"
+                    }, {
+                        "id": "8",
+                        "title": "Salat item 8",
+                        "productFamily": null
                     }];
                 });
 
@@ -96,8 +101,8 @@ class PublicationsModel extends TestBase {
                 if (families) {
                     expect(families.length).toBe(7);
                     expect(families[0].title).toBe("Blackberry");
-                    expect(families[1].title).toBe("Blueberry");
-                    expect(families[2].title).toBe("Elderberry");
+                    expect(families[1].title).toBe("blueberry");
+                    expect(families[2].title).toBe("elderberry");
                     expect(families[3].title).toBe("Mulberry");
                     expect(families[4].title).toBe("Strawberry");
                     expect(families[5].title).toBe("Watermelonberry");

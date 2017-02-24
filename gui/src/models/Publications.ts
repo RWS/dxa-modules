@@ -50,7 +50,7 @@ export class Publications extends LoadableObject {
             const publications = this.getPublications();
             if (publications) {
                 let distinctFamilies: (string | undefined)[] = publications.map((publication: IPublication) => {
-                    return publication.productFamily || "unknown";
+                    return publication.productFamily || undefined;
                 }).filter((family: string, i: number, arr: string[]) => {
                     return arr.indexOf(family) == i;
                 });
@@ -61,7 +61,7 @@ export class Publications extends LoadableObject {
                 });
 
                 this._productFamilies = distinctFamilies.map((family: string | undefined) => {
-                    if (family === "unknown") {
+                    if (family === undefined) {
                         return {
                             title: localization.formatMessage("components.productfamilies.unknown.title"),
                             description: localization.formatMessage("components.productfamilies.unknown.description"),
