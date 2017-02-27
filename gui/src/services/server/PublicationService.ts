@@ -1,5 +1,6 @@
 import { IPublicationService } from "services/interfaces/PublicationService";
 import { IPublication } from "interfaces/Publication";
+import { IProductFamily } from "interfaces/ProductFamily";
 import { Promise } from "es6-promise";
 
 /**
@@ -14,9 +15,11 @@ export class PublicationService implements IPublicationService {
     private _mockDataPublications: {
         error: string | null;
         publications: IPublication[];
+        productFamilies: IProductFamily[];
     } = {
         error: null,
-        publications: []
+        publications: [],
+        productFamilies: []
     };
 
     private _mockDataPublication: {
@@ -30,16 +33,33 @@ export class PublicationService implements IPublicationService {
     /**
      * Get the list of publications
      *
+     * @param {string} productFamily productFamily title
      * @returns {Promise<IPublication[]>} promise to return the items
      *
      * @memberOf DataStoreServer
      */
-    public getPublications(): Promise<IPublication[]> {
+    public getPublications(productFamily?: string): Promise<IPublication[]> {
         const { error, publications } = this._mockDataPublications;
         if (error) {
             return Promise.reject(error);
         } else {
             return Promise.resolve(publications);
+        }
+    }
+
+    /**
+     * Get the list of publications product families
+     *
+     * @returns {Promise<ProductFamily[]>} promise to return the items
+     *
+     * @memberOf DataStoreServer
+     */
+    public getProductFamilies(): Promise<IProductFamily[]> {
+        const { error, productFamilies } = this._mockDataPublications;
+        if (error) {
+            return Promise.reject(error);
+        } else {
+            return Promise.resolve(productFamilies);
         }
     }
 

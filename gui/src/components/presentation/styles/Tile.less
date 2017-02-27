@@ -1,0 +1,31 @@
+@import (reference) "../../../theming/styles.less";
+.sdl-dita-delivery-tile {
+    background-color: #fff;
+    border: 1px solid @neutralColor5;
+    box-shadow: 0 2px 0 0 @neutralColor5;
+    border-radius: 4px;
+    h3 {
+        .header-font(300, 20px, 20px);
+        color: @neutralColor1;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &.exclamation-mark {
+            &::before {
+                .icon-exclamation-mark();
+                content: "";
+                margin-right:10px;
+            }
+        }
+    }
+    hr {
+        background: @neutralColor5;
+        height: 1px;
+        border: none;
+    }
+    p {
+        .paragraph();
+        line-height: 14px;
+    }
+}
