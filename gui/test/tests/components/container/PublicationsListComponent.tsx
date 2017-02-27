@@ -58,7 +58,7 @@ class PublicationsListComponent extends TestBase {
                 }, 500);
             });
 
-            it("renders publications list", (done: () => void): void => {
+            it("renders only publications associated with product family", (done: () => void): void => {
                 services.publicationService.fakeDelay(true);
                 const publications = [{
                     id: "1",
@@ -66,6 +66,9 @@ class PublicationsListComponent extends TestBase {
                 }, {
                     id: "2",
                     title: "Publication 2"
+                }, {
+                    id: "3",
+                    title: "Publication 3"
                 }];
                 services.publicationService.setMockDataPublications(null, publications);
 
@@ -73,10 +76,11 @@ class PublicationsListComponent extends TestBase {
 
                 setTimeout((): void => {
                     const hyperlinks = TestUtils.scryRenderedDOMComponentsWithTag(publicationsList, "a");
-                    expect(hyperlinks.length).toBe(2);
+                    expect(hyperlinks.length).toBe(3);
 
                     expect(hyperlinks[0].textContent).toBe(publications[0].title);
                     expect(hyperlinks[1].textContent).toBe(publications[1].title);
+                    expect(hyperlinks[2].textContent).toBe(publications[2].title);
 
                     done();
                 }, 500);
@@ -113,11 +117,11 @@ class PublicationsListComponent extends TestBase {
         });
     }
 
-    private _renderComponent(target: HTMLElement): PublicationsList {
+    private _renderComponent(target: HTMLElement, productFamily?: string): PublicationsList {
         const comp = ReactDOM.render(
             (
                 <ComponentWithContext {...services}>
-                    <PublicationsList />
+                    <PublicationsList params={{ productFamily: productFamily || "prod-family" }} />
                 </ComponentWithContext>
             ), target) as React.Component<{}, {}>;
         return TestUtils.findRenderedComponentWithType(comp, PublicationsList) as PublicationsList;

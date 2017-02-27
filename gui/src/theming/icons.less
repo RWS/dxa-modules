@@ -1,11 +1,9 @@
 // ---------------------------------------------------------------------------------------------------------------------
 // This file contains global LESS mixins that can be used across the application when using icons
 // ---------------------------------------------------------------------------------------------------------------------
-
 @import (reference) "~sdl-icons/dist/icons-graphene.less";
 @import (reference) "~sdl-icons/dist/icons-carbon-2.0.less";
 @import (reference) "~sdl-icons/dist/icons-common.less";
-
 @iconFont: "SDLfont";
 @iconFontPath: "./fonts/SDLfont";
 @iconLanguage: "\e011";
@@ -15,7 +13,6 @@
 @iconSearch: "\e01b";
 @iconClose: "\e00a";
 @iconBack: "\e04f";
-
 .import-icon-font() {
     font-family: @iconFont;
     src: url('@{iconFontPath}/SDLfont.woff') format('woff');
@@ -83,3 +80,9 @@
     }
 }
 
+.icon-exclamation-mark() {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAd1JREFUSA3VVb9OwkAYv68tI9HExUh10JGgJPgEDs7gK8DmZMJiYgyDC/AALvAIRlx9BSUpghsuGv8kTsbJCP2837XXEqBICAxccrn2vt+f6933XYVY9kaTPoAzmVjH+cy5ws0K5ozEbsjOsr8z0Z0h+CaVXm9Qs/kbpRNp4Jj2EbGosuDtKDLmSdATERV3+y+NcThjeJJLJaNl2VW54iuIS4GOXMVJzDKTsbXVuOryGXNS/lFidlx2rx3LLoM7rDfyDnHHSHDLsH8ejM3jSSTEgAFWcSy7MiI4OIFt0eItK3EwGJv0DKw2aZt2biwWBypBXRhgVeNAiKGPi4HjL64LLY0J9qztfGSxn9jz1Hn+UgOmHT2OdybQ0rzAgAX5k1ynUsnVgGlHcEhwDfhQS4jAQGbNPoKWZd5inKUFXF8LGqGBV0RCrMSfZxFXnJCLglRt0EDPzXUcNHhTyl/fW1EOafeV0KPiIuR6WhIYGhDdg9jr9Q8jBf4JBFxfC/DAQGaAf5dQPqp6J9UBODJ7ChANtfDmt0UVmtZX40KvCu0078tuJCPUDXlRK7PLRZji6pC1WVdFpPNcZgsO1NtzTqrFGVTZOyucDt8CIwb6S+b1w4k0gNE8fpl6wcs7/gGPLQCAK/xgqQAAAABJRU5ErkJggg==');
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 24px;
+}

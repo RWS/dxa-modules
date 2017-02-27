@@ -1,5 +1,6 @@
 import { IPublicationService } from "services/interfaces/PublicationService";
 import { IPublication } from "interfaces/Publication";
+import { IProductFamily } from "interfaces/ProductFamily";
 import { localization } from "services/common/LocalizationService";
 import { Publications } from "models/Publications";
 import { Promise } from "es6-promise";
@@ -25,20 +26,55 @@ export class PublicationService implements IPublicationService {
     /**
      * Get the list of publications
      *
+     * @param {string} productFamily productFamily title
      * @returns {Promise<IPublication[]>} Promise to return Items
      *
      * @memberOf DataStoreClient
      */
-    public getPublications(): Promise<IPublication[]> {
+    public getPublications(productFamily?: string): Promise<IPublication[]> {
         const publication = this.getPublicationsModel();
         return new Promise((resolve: (publications?: IPublication[]) => void, reject: (error: string | null) => void) => {
             if (publication.isLoaded()) {
-                resolve(publication.getPublications());
+                resolve(publication.getPublications(productFamily));
             } else {
                 let removeEventListeners: () => void;
                 const onLoad = () => {
                     removeEventListeners();
-                    resolve(publication.getPublications());
+                    resolve(publication.getPublications(productFamily));
+                };
+                const onLoadFailed = (event: Event & { data: { error: string } }) => {
+                    removeEventListeners();
+                    reject(event.data.error);
+                };
+                removeEventListeners = (): void => {
+                    publication.removeEventListener("load", onLoad);
+                    publication.removeEventListener("loadfailed", onLoadFailed);
+                };
+
+                publication.addEventListener("load", onLoad);
+                publication.addEventListener("loadfailed", onLoadFailed);
+                publication.load();
+            }
+        });
+    }
+
+    /**
+     * Get the list of publications product families
+     *
+     * @returns {Promise<IProductFamily[]>} Promise to return Items
+     *
+     * @memberOf DataStoreClient
+     */
+    public getProductFamilies(): Promise<IProductFamily[]> {
+        const publication = this.getPublicationsModel();
+        return new Promise((resolve: (publications?: IProductFamily[]) => void, reject: (error: string | null) => void) => {
+            if (publication.isLoaded()) {
+                resolve(publication.getProductFamilies());
+            } else {
+                let removeEventListeners: () => void;
+                const onLoad = () => {
+                    removeEventListeners();
+                    resolve(publication.getProductFamilies());
                 };
                 const onLoadFailed = (event: Event & { data: { error: string } }) => {
                     removeEventListeners();

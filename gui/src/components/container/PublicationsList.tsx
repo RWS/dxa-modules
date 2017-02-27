@@ -12,6 +12,36 @@ import { Url } from "utils/Url";
 import "components/container/styles/PublicationsList";
 
 /**
+ *  Publications list component props params
+ *
+ * @export
+ * @interface IPublicationsListPropsParams
+ */
+export interface IPublicationsListPropsParams {
+    /**
+     * Product family title
+     *
+     * @type {string}
+     */
+    productFamily?: string;
+}
+
+/**
+ * Publications list component props
+ *
+ * @export
+ * @interface IPublicationsListProps
+ */
+export interface IPublicationsListProps {
+    /**
+     * Publications list content props parameters
+     *
+     * @type {IPublicationsListPropsParams}
+     */
+    params: IPublicationsListPropsParams;
+}
+
+/**
  * PublicationsList component state
  *
  * @export
@@ -35,7 +65,7 @@ export interface IPublicationsListState {
 /**
  * Publications list component
  */
-export class PublicationsList extends React.Component<{}, IPublicationsListState> {
+export class PublicationsList extends React.Component<IPublicationsListProps, IPublicationsListState> {
 
     public static contextTypes: React.ValidationMap<IAppContext> = {
         services: React.PropTypes.object.isRequired,
@@ -62,7 +92,27 @@ export class PublicationsList extends React.Component<{}, IPublicationsListState
      * Invoked once, both on the client and server, immediately before the initial rendering occurs.
      */
     public componentWillMount(): void {
+
+        // Load the publications list
         this._loadPublicationsList();
+    }
+
+    /**
+     * Invoked when a component is receiving new props. This method is not called for the initial render.
+     *
+     * @param {IPublicationContentProps} nextProps
+     */
+    public componentWillReceiveProps(nextProps: IPublicationsListProps): void {
+        const { productFamily } = this.props.params;
+
+        if (nextProps.params.productFamily !== productFamily) {
+            this.setState({
+                publications: undefined
+            });
+
+            // Load the publications list
+            this._loadPublicationsList();
+        }
     }
 
     /**
@@ -77,9 +127,8 @@ export class PublicationsList extends React.Component<{}, IPublicationsListState
         const _retryHandler = (): void => this._loadPublicationsList();
 
         const errorButtons = <div>
-                <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{"click": _retryHandler}}>{formatMessage("control.button.retry")}</Button>
-            </div>;
-
+            <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{ "click": _retryHandler }}>{formatMessage("control.button.retry")}</Button>
+        </div>;
         return (
             <section className={"sdl-dita-delivery-publications-list"}>
                 <nav>
@@ -119,26 +168,29 @@ export class PublicationsList extends React.Component<{}, IPublicationsListState
 
     private _loadPublicationsList(): void {
         const { publicationService } = this.context.services;
+        const { productFamily } = this.props.params;
 
         // Get publications list
-        publicationService.getPublications().then(
-            publications => {
-                /* istanbul ignore else */
-                if (!this._isUnmounted) {
-                    this.setState({
-                        error: undefined,
-                        publications: publications
-                    });
-                }
-            },
-            error => {
-                /* istanbul ignore else */
-                if (!this._isUnmounted) {
-                    // TODO: improve error handling
-                    this.setState({
-                        error: error
-                    });
-                }
+        publicationService.getPublications(productFamily).then(
+            this._onPublicationsListRetrieved.bind(this),
+            this._onPublicationsListRetrieveFailed.bind(this));
+    }
+
+    private _onPublicationsListRetrieved(publications: IPublication[]): void {
+        /* istanbul ignore if */
+        if (!this._isUnmounted) {
+            this.setState({
+                publications: publications
             });
+        }
+    }
+
+    private _onPublicationsListRetrieveFailed(error: string): void {
+        /* istanbul ignore if */
+        if (!this._isUnmounted) {
+            this.setState({
+                error: error
+            });
+        }
     }
 }
