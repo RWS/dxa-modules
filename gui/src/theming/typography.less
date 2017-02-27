@@ -10,6 +10,7 @@
 @h1Size: 24px;
 @h2Size: 20px;
 @h3Size: 18px;
+@itemSize: 14px;
 @h1Color: @accentColor1;
 @h2Color: @accentColor1;
 @h3Color: @neutralColor3;
@@ -101,5 +102,16 @@
         padding-left: 10px;
         margin: 0;
         padding-bottom: 5px;
+    }
+}
+
+.dropdown-list() {
+    li {
+        .import-regular-font();
+        padding-left: 18px;
+        padding-right: 5px;
+        color: @neutralColor4;
+        font-size: @itemSize;
+        line-height: @itemSize;
     }
 }

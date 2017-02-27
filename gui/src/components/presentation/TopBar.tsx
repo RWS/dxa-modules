@@ -1,6 +1,8 @@
 import * as React from "react";
 import { IndexLink } from "react-router";
 import { path } from "utils/Path";
+import { Dropdown } from "sdl-controls-react-wrappers";
+import { ILanguage } from "sdl-controls";
 
 import "./styles/TopBar";
 
@@ -32,7 +34,18 @@ export interface ITopBarProps {
  * TopBar
  */
 export const TopBar = (props: ITopBarProps) => {
-    const {language, children} = props;
+    const {children} = props;
+
+    // List of mock languages
+    let languages: Array<ILanguage> = [];
+    languages.push({"name": "English", "iso": "en"});
+    languages.push({"name": "Deutsch", "iso": "de"});
+    languages.push({"name": "Nederlands", "iso": "nl"});
+    languages.push({"name": "Русский", "iso": "ru"});
+    languages.push({"name": "ქართული", "iso": "ka"});
+    languages.push({"name": "עברית", "iso": "he"});
+    languages.push({"name": "العربية", "iso": "ar"});
+    languages.push({"name": "中文", "iso": "zh"});
     return (
         <div className={"sdl-dita-delivery-topbar"}>
             <header>
@@ -43,12 +56,12 @@ export const TopBar = (props: ITopBarProps) => {
                 {children}
                 <div className={"sdl-dita-delivery-topbar-language"} >
                     <span />
-                    <label>{language}</label>
                 </div>
+                <Dropdown languages={languages} onClickItem={(id) => console.log(id)} value={languages[0]} />
                 <div className={"sdl-dita-delivery-topbar-user"} >
                     <span />
                 </div>
             </header>
-        </div >
+        </div>
     );
 };
