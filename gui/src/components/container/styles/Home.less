@@ -74,14 +74,12 @@
                 .icon-close(21px);
             }
         }
-        &:not(.fixed-nav) {
-            .sdl-dita-delivery-product-families-list,
-            .sdl-dita-delivery-publications-list,
-            .sdl-dita-delivery-publication-content {
-                @media screen and (min-width: (1+@screenSm)) {
-                    top: @searchBarHeight + @navBarHeight;
-                    height: ~"calc(100% - (@{searchBarHeight} + @{navBarHeight}))";
-                }
+        .sdl-dita-delivery-product-families-list,
+        .sdl-dita-delivery-publications-list,
+        .sdl-dita-delivery-publication-content {
+            @media screen and (min-width: (1+@screenSm)) {
+                top: @searchBarHeight + @navBarHeight;
+                height: ~"calc(100% - (@{searchBarHeight} + @{navBarHeight}))";
             }
         }
         &.search-is-active {

@@ -220,7 +220,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
      * Invoked immediately after updating.
      */
     public componentDidUpdate(prevProp: {}, prevState: IHomeState): void {
-        const { isNavOpen, searchIsOpen } = this.state;
+        const { isNavOpen } = this.state;
 
         if (prevState.isNavOpen !== isNavOpen) {
             // HACK: we should use some global state store to achieve this
@@ -230,21 +230,6 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
                     navMenu.classList.add("open");
                 } else {
                     navMenu.classList.remove("open");
-                }
-            }
-        }
-
-        // HACK: we should avoind page jumping when search bar is open. This is caused by
-        // searchbard disapearing and page dimensions gets changes. Hack is to add minimal padding
-        // bottom so the scroll bar appears regardless of page dimensions
-        if (searchIsOpen) {
-            const page = document.querySelector(".sdl-dita-delivery-page") as HTMLElement;
-            if (page) {
-                if (page.scrollHeight > page.offsetHeight) {
-                    page.style.paddingBottom = "1px";
-                }
-                else {
-                    page.style.removeProperty("padding-pottom");
                 }
             }
         }
