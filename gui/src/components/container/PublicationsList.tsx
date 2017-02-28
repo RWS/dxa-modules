@@ -150,7 +150,6 @@ export class PublicationsList extends React.Component<IPublicationsListProps, IP
                                 <TilesList tiles={publications.map((publication: IPublication) => {
                                     return {
                                         title: publication.title,
-                                        //description: publication,
                                         loadableContent: () => {
                                             return this._getLoadableContent(publication.id);
                                         },
@@ -210,7 +209,7 @@ export class PublicationsList extends React.Component<IPublicationsListProps, IP
                 items => {
                     const pagesToDisplay = items.slice(0, SHOWN_TILE_ITEMS_COUNT);
                     resolve(pagesToDisplay.map((item: ITaxonomy, i: number) => {
-                        return <Link title={item.title} to={item.url || ""}>{item.title}</Link>;
+                        return <Link key={i} title={item.title} to={item.url || ""}>{item.title}</Link>;
                     }));
                 },
                 error => reject(error)

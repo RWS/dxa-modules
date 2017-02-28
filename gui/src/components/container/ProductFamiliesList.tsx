@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Promise } from "es6-promise";
 import { IProductFamily } from "interfaces/ProductFamily";
 import { ActivityIndicator, Button } from "sdl-controls-react-wrappers";
 import { ButtonPurpose } from "sdl-controls";
@@ -90,7 +91,9 @@ export class ProductFamiliesList extends React.Component<{}, IProductFamiliesLis
                                 ? (<TilesList tiles={productFamilies.map((productFamily: IProductFamily) => {
                                     return {
                                         title: productFamily.title,
-                                        description: productFamily.description,
+                                        loadableContent: () => {
+                                            return Promise.resolve(productFamily.description);
+                                        },
                                         hasWarning: productFamily.hasWarning,
                                         navigateTo: () => {
                                             /* istanbul ignore else */
