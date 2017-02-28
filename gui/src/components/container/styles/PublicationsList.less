@@ -1,15 +1,17 @@
 @import (reference) "~theme-styles";
 @import (reference) "../../presentation/styles/TopBar.less";
 .sdl-dita-delivery-publications-list {
-    max-width: @screenXl;
-    margin: 0 auto;
     position: relative;
+    background-color: @neutralColor6;
     h1 {
         .header-font(300, @h1Size, 50px);
-        margin: 0 20px;
+        margin: 0 auto;
         padding-top: 15px;
+        max-width: @screenXl;
+        text-indent: 20px;
     }
     .sdl-dita-delivery-tiles-list {
+        max-width: @screenXl;
         .sdl-dita-delivery-tile {
             height: 340px;
         }
