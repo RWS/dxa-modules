@@ -3,6 +3,7 @@ package com.sdl.dxa.modules.search.controller;
 import com.sdl.dxa.modules.search.DxaSearchException;
 import com.sdl.dxa.modules.search.model.SearchQuery;
 import com.sdl.dxa.modules.search.provider.SearchProvider;
+import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.model.ViewModel;
 import com.sdl.webapp.common.controller.ControllerUtils;
 import com.sdl.webapp.common.controller.EntityController;
@@ -22,6 +23,9 @@ public class SearchController extends EntityController {
     @Autowired
     private SearchProvider searchProvider;
 
+    @Autowired
+    private WebRequestContext webRequestContext;
+
     @Override
     protected ViewModel enrichModel(ViewModel model, HttpServletRequest request) throws Exception {
         model = super.enrichModel(model, request);
@@ -38,7 +42,7 @@ public class SearchController extends EntityController {
         String start = request.getParameter("start");
 
         SearchQuery searchQuery = searchProvider.buildSearchQuery(model, queryText, start, queryStringParameters);
-        searchProvider.executeQuery(searchQuery, getContext().getLocalization());
+        searchProvider.executeQuery(searchQuery, webRequestContext.getLocalization());
 
         return searchQuery;
     }
