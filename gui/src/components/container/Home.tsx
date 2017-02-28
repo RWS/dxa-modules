@@ -99,6 +99,11 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
     private _isUnmounted: boolean = false;
     private _preventBodyScroll: boolean = false;
 
+    /* Always show a vertical scroll bar in IE / Edge due to an issue with animations not support calc based properties.
+     Transitionable properties with calc() derived values are not supported below and including IE11.
+     (http://connect.microsoft.com/IE/feedback/details/762719/css3-calc-bug-inside-transition-or-transform) */
+    private _alwaysShowScrollBar: boolean = (document as Document & { documentMode: boolean }).documentMode || /Edge/.test(navigator.userAgent);
+
     /**
      * Creates an instance of App.
      *
@@ -132,6 +137,9 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
      * Invoked once, only on the client (not on the server), immediately after the initial rendering occurs.
      */
     public componentDidMount(): void {
+        if (this._alwaysShowScrollBar) {
+            (document.body as HTMLElement).style.overflowY = "scroll";
+        }
 
         window.addEventListener("scroll", this._onViewportChanged.bind(this));
         window.addEventListener("resize", this._onViewportChanged.bind(this));
@@ -278,6 +286,10 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
 
         window.removeEventListener("scroll", this._onViewportChanged.bind(this));
         window.removeEventListener("resize", this._onViewportChanged.bind(this));
+
+        if (this._alwaysShowScrollBar) {
+            (document.body as HTMLElement).style.removeProperty("overflow-y");
+        }
     }
 
     private _toggleNavigationMenu(): void {
