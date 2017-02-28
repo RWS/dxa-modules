@@ -2,9 +2,7 @@ import * as React from "react";
 import { Promise } from "es6-promise";
 import { IAppContext } from "components/container/App";
 import { String as StringHelper } from "utils/String";
-import { ActivityIndicator, Button } from "sdl-controls-react-wrappers";
-import { ButtonPurpose } from "sdl-controls";
-import { Error } from "components/presentation/Error";
+import { ActivityIndicator } from "sdl-controls-react-wrappers";
 
 import "components/presentation/styles/Tile";
 
@@ -32,13 +30,6 @@ export interface ITile {
      * @memberOf ITile
      */
     title: string;
-    /**
-     * Tile description
-     *
-     * @type {string}
-     * @memberOf ITile
-     */
-    description?: string;
     /**
      * Called whenever tile navigation performed
      *
@@ -180,26 +171,29 @@ export class Tile extends React.Component<ITileProps, ITileState> {
                     <h3 className={tile.hasWarning ? "exclamation-mark" : ""}>{StringHelper.truncate(tile.title, TILE_TITLE_TRUNCATE)}</h3>
                 </div>
                 <hr />
-                <p>
-                    {tile.description && StringHelper.truncate(tile.description, TILE_DESCRIPTION_TRUNCATE)}
-                    {error ?
-                        <Error
-                            title={formatMessage("error.default.title")}
-                            messages={[formatMessage("error.publications.list.not.found"), formatMessage("error.publications.default.message")]}
-                            buttons={<Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{
-                                "click": () => this._loadTileContent(tile)
-                            }}>{formatMessage("control.button.retry")}</Button>} />
-                        : tileContentIsLoading ?
-                            <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} />
+                <div className="tile-content">
+                    {tileContentIsLoading
+                        ? <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} />
+                        : error
+                            ? (<div>
+                                <h4>{formatMessage("error.publications.list.not.found")}</h4>
+                                <p className={"error-message"}>{error}</p>
+                                <p>{formatMessage("error.publications.default.message")}</p>
+                            </div>)
                             : loadedTileContent}
-                </p>
-                {tileNavigate && <button
-                    className={"sdl-button sdl-button-large sdl-button-purpose-confirm graphene"}
-                    onClick={() => {
-                        tileNavigate();
-                    } }>{formatMessage("components.tiles.more")}
-                </button>}
-            </div>
+                </div>
+                {!tileContentIsLoading && (
+                    error && <button
+                        className={"sdl-button sdl-button-large sdl-button-purpose-critical graphene"}
+                        onClick={() => this._loadTileContent(tile)}>{formatMessage("control.button.retry")}
+                    </button>
+                    || tileNavigate && <button
+                        className={"sdl-button sdl-button-large sdl-button-purpose-confirm graphene"}
+                        onClick={() => {
+                            tileNavigate();
+                        } }>{formatMessage("components.tiles.more")}
+                    </button>)}
+            </div >
         );
     }
 
@@ -214,19 +208,19 @@ export class Tile extends React.Component<ITileProps, ITileState> {
      * Invoked once, both on the client and server, immediately before the initial rendering occurs.
      */
     public _loadTileContent(tile: ITile): void {
-
         if (tile.loadableContent) {
-
             this.setState({
-                tileContentIsLoading: true
+                tileContentIsLoading: true,
+                error: undefined
             });
 
             tile.loadableContent().then(
                 content => {
                     /* istanbul ignore else */
                     if (!this._isUnmounted) {
+
                         this.setState({
-                            loadedTileContent: content,
+                            loadedTileContent: (typeof content === "string") ? StringHelper.truncate(content, TILE_DESCRIPTION_TRUNCATE) : content,
                             tileContentIsLoading: false
                         });
                     }
