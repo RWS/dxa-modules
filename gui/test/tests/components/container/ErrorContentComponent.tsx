@@ -35,6 +35,15 @@ class ErrorContentComponent extends TestBase {
                 expect(errorTitle.item(0).textContent).toBe("mock-error.default.title");
                 expect(errorMessage.item(0).textContent).toBe("mock-error.url.not.found");
             });
+
+            it("Shows the status code when provided", (): void => {
+                this._renderComponent({ error: { message: "Something went serioursly wrong!", statusCode: "500" } }, target);
+                const errorPageElement = document.querySelector(".sdl-dita-delivery-error-page");
+                const errorTitle = errorPageElement.querySelectorAll("h1");
+
+                expect(errorPageElement).not.toBeNull();
+                expect(errorTitle.item(0).textContent).toBe("500 - mock-error.default.title");
+            });
         });
     }
 
