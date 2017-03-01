@@ -17,6 +17,7 @@
   "error.page.not.found": "We zijn erg jammer, maar deze pagina is niet beschikbaar op deze publicatie. Zorg ervoor dat de URL die u hebt ingevoerd correct is.",
   "error.url.not.found": "We zijn erg jammer, maar deze URL is niet beschikbaar op deze website. Zorg ervoor dat de URL die u hebt ingevoerd correct is",
   "error.path.not.found": "Het pad voor de sitemap item met id {0} kon niet gevonden worden in de publicatie met id {1}.",
+  "error.publication.topics.not.found": "We zijn erg jammer, maar de lijst van publicatie onderwerpen was niet geladen.",
   "error.publications.list.not.found": "We zijn erg jammer, maar de lijst van publicatie was niet geladen.",
   "error.publications.default.message": "Probeer het opnieuw laden of gebruik maken van een directe link naar uw publicatie.",
   "error.product.families.list.not.found": "We zijn erg jammer, maar de lijst van productfamilies was niet geladen.",

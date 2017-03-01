@@ -17,6 +17,7 @@
   "error.page.not.found": "We are very sorry, but this page is not available on this publication. Please make sure the URL you entered is correct.",
   "error.url.not.found": "We are very sorry, but this URL is not available on this website. PLease make sure the URL you entered is correct",
   "error.path.not.found": "Unable to retrieve path for sitemap item with id {0} within publication with id {1}.",
+  "error.publication.topics.not.found": "We are very sorry, but the list of publication topics wasn't loaded.",
   "error.publications.list.not.found": "We are very sorry, but the list of publication wasn't loaded.",
   "error.publications.default.message": "Please retry loading or use a direct link to your publication.",
   "error.product.families.list.not.found": "We are very sorry, but the list of product families wasn't loaded.",

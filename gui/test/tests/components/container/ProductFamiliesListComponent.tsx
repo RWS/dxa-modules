@@ -55,7 +55,35 @@ class ProductFamiliesListComponent extends TestBase {
                     expect(buttons.length).toEqual(1);
 
                     done();
-                }, 500);
+                }, 200);
+            });
+
+            it("Retries loading when error retry button is clicked", (done: () => void): void => {
+                services.publicationService.setMockDataPublications("ERROR");
+                const productFamiliesList = this._renderComponent(target);
+
+                setTimeout((): void => {
+                    const domNode = ReactDOM.findDOMNode(productFamiliesList) as HTMLElement;
+                    const buttons = domNode.querySelectorAll("button");
+                    expect(buttons.length).toEqual(1);
+                    const button = buttons[0] as HTMLButtonElement;
+                    expect(button).toBeDefined("Retry loading button is not defined");
+                    expect(button.textContent).toEqual("mock-control.button.retry");
+
+                    const productFamilies = [{
+                        title: "Product Family"
+                    }];
+                    services.publicationService.setMockDataPublications(null, [], productFamilies);
+                    button.click();
+
+                    setTimeout((): void => {
+                        const headers = TestUtils.scryRenderedDOMComponentsWithTag(productFamiliesList, "h3");
+                        expect(headers.length).toBe(1);
+                        expect(headers[0].textContent).toBe(productFamilies[0].title);
+
+                        done();
+                    }, 0);
+                }, 0);
             });
 
             it("renders product families tiles", (done: () => void): void => {

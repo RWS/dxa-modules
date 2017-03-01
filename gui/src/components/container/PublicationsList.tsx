@@ -202,6 +202,7 @@ export class PublicationsList extends React.Component<IPublicationsListProps, IP
 
     private _getLoadableContent(publicationId: string): Promise<JSX.Element[]> {
         const { services } = this.context;
+        const { formatMessage } = services.localizationService;
         // Get the data for the Tile
         return new Promise((resolve: (content: JSX.Element[]) => void, reject: (error: string | null) => void) => {
             // Get the data for the Toc
@@ -212,7 +213,7 @@ export class PublicationsList extends React.Component<IPublicationsListProps, IP
                         return <Link key={i} title={item.title} to={item.url || ""}>{item.title}</Link>;
                     }));
                 },
-                error => reject(error)
+                error => reject(formatMessage("error.publication.topics.not.found"))
             );
         });
     }

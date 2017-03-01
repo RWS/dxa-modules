@@ -175,11 +175,7 @@ export class Tile extends React.Component<ITileProps, ITileState> {
                     {tileContentIsLoading
                         ? <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} />
                         : error
-                            ? (<div>
-                                <h4>{formatMessage("error.publications.list.not.found")}</h4>
-                                <p className={"error-message"}>{error}</p>
-                                <p>{formatMessage("error.publications.default.message")}</p>
-                            </div>)
+                            ? <p className={"error-message"}>{error}</p>
                             : loadedTileContent}
                 </div>
                 {!tileContentIsLoading && (
