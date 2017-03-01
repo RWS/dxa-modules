@@ -28,7 +28,7 @@ task buildModules(type: MavenBuildTask) {
     configurations = [
             [
                     "dxa-module-smarttarget-abstract",
-                    "dxa-module-audience-manager-abstract",
+                    "dxa-module-audience-manager",
                     "dxa-module-cid",
                     "dxa-module-core",
                     "dxa-module-googleanalytics",
@@ -40,7 +40,6 @@ task buildModules(type: MavenBuildTask) {
             ],
             [
                     "dxa-module-smarttarget-web8",
-                    "dxa-module-audience-manager-web8"
             ]
     ]
 
