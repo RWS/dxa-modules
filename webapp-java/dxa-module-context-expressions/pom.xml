@@ -24,19 +24,6 @@
         <tag>HEAD</tag>
     </scm>
 
-    <repositories>
-        <repository>
-            <id>github-project-repo</id>
-            <url>
-                https://raw.githubusercontent.com/sdl/dxa-modules/${dxa-release-branch}/webapp-java/local-project-repo
-            </url>
-        </repository>
-        <repository>
-            <id>local-project-repo</id>
-            <url>file:///${project.basedir}/../local-project-repo</url>
-        </repository>
-    </repositories>
-
     <developers>
         <developer>
             <id>rpannekoek</id>
