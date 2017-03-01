@@ -26,6 +26,7 @@ import static com.sdl.webapp.common.api.mapping.semantic.config.SemanticVocabula
 import static com.sdl.webapp.common.markup.html.builders.HtmlBuilders.div;
 import static com.sdl.webapp.common.markup.html.builders.HtmlBuilders.img;
 import static com.sdl.webapp.common.markup.html.builders.HtmlBuilders.script;
+import static com.sdl.webapp.common.util.CollectionUtils.getByCompoundKeyOrAlternative;
 import static java.lang.String.format;
 
 @SemanticEntity(entityName = "ExternalContentLibraryStubSchemamm", vocabulary = SDL_CORE, prefix = "s")
@@ -71,15 +72,14 @@ public class MediaManagerDistribution extends EclItem {
     }
 
     public String getTitle() {
-        Object first = getFromExternalMetadataOrAlternative("Program/Asset/Title", null);
-        if (first == null) {
-            return (String) getFromExternalMetadataOrAlternative("Program/Title", super.getFileName());
-        }
-        return (String) first;
+        String first = getByCompoundKeyOrAlternative("Program/Asset/Title", getExternalMetadata(), null, String.class);
+        return first == null ?
+                getByCompoundKeyOrAlternative("Program/Title", getExternalMetadata(),
+                        super.getFileName(), String.class) : first;
     }
 
     public String getDescription() {
-        return (String) getFromExternalMetadataOrAlternative("Program/Asset/Description", null);
+        return getByCompoundKeyOrAlternative("Program/Asset/Description", getExternalMetadata(), null, String.class);
     }
 
     @Override
@@ -89,7 +89,7 @@ public class MediaManagerDistribution extends EclItem {
 
     @Override
     public String getMimeType() {
-        return (String) getFromExternalMetadataOrAlternative("Program/Asset/MIMEType", super.getMimeType());
+        return getByCompoundKeyOrAlternative("Program/Asset/MIMEType", getExternalMetadata(), super.getMimeType(), String.class);
     }
 
     @Override
