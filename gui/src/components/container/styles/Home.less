@@ -45,6 +45,17 @@
     .sdl-dita-delivery-publication-content {
         top: @navBarHeight;
         min-height:~"calc(100% - @{navBarHeight})";
+        .no-available-publications-label {
+            text-align: center;
+            .header-font(400, 28px, 250px);
+        }
+        .sdl-dita-delivery-error {
+            max-width: @screenSm;
+            margin: 0 auto;
+            background-color: #fff;
+            position: relative;
+            top: 50px;
+        }
     }
     .sdl-dita-delivery-publication-content {
         height:~"calc(100% - @{navBarHeight})";
@@ -66,17 +77,6 @@
                 }
             }
         }
-        .no-available-publications-label {
-            text-align: center;
-            .header-font(400, 28px, 250px);
-        }
-        .sdl-dita-delivery-error {
-            max-width: @screenSm;
-            margin: 0 auto;
-            background-color: #fff;
-            position: relative;
-            top: 50px;
-        }
     }
     // Search panel is open
     &.search-open {
@@ -94,6 +94,7 @@
             @media screen and (min-width: (1+@screenSm)) {
                 top: @searchBarHeight + @navBarHeight;
                 height:~"calc(100% - (@{searchBarHeight} + @{navBarHeight}))";
+                min-height:~"calc(100% - (@{searchBarHeight} + @{navBarHeight}))";
             }
         }
         &.search-is-active {
@@ -107,7 +108,7 @@
     &.search-is-opening {
         @media screen and (min-width: (1+@screenSm)) {
             .sdl-dita-delivery-searchbar + section {
-                transition: top .3s ease-out, height .3s ease-out;
+                transition: top .3s ease-out, height .3s ease-out, min-height .3s ease-out;
                 nav.sdl-dita-delivery-toc,
                 nav.sdl-dita-delivery-toc .separator,
                 nav.sdl-dita-delivery-content-navigation {
