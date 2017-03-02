@@ -45,13 +45,6 @@ export interface IHomeState {
     searchIsActive?: boolean;
 
     /**
-     * if page is scrolled
-     *
-     * @type {boolean}
-     */
-    sticksToTop?: boolean;
-
-    /**
      * Title of the current search
      *
      * @type {string}
@@ -112,7 +105,6 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
         super();
         this.state = {
             isNavOpen: false,
-            sticksToTop: false,
             searchIsOpen: false,
             searchIsActive: false
         };
@@ -140,10 +132,6 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
         if (this._alwaysShowScrollBar) {
             (document.body as HTMLElement).style.overflowY = "scroll";
         }
-
-        window.addEventListener("scroll", this._onViewportChanged.bind(this));
-        window.addEventListener("resize", this._onViewportChanged.bind(this));
-        this._onViewportChanged();
     }
 
     /**
@@ -171,14 +159,13 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
      */
     public render(): JSX.Element {
         const { localizationService } = this.context.services;
-        const { isNavOpen, searchIsOpen, searchIsOpening, searchIsActive, sticksToTop, searchTitle, publicationId } = this.state;
+        const { isNavOpen, searchIsOpen, searchIsOpening, searchIsActive, searchTitle, publicationId } = this.state;
         const { children } = this.props;
 
         const hasPublication = publicationId !== undefined;
 
         const appClass = ClassNames({
             "sdl-dita-delivery-app": true,
-            "fixed-nav": sticksToTop,
             "open": hasPublication && isNavOpen,
             "search-open": searchIsOpen,
             "search-is-opening": searchIsOpening,
@@ -269,9 +256,6 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
             }
         }
 
-        window.removeEventListener("scroll", this._onViewportChanged.bind(this));
-        window.removeEventListener("resize", this._onViewportChanged.bind(this));
-
         if (this._alwaysShowScrollBar) {
             (document.body as HTMLElement).style.removeProperty("overflow-y");
         }
@@ -320,18 +304,6 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
                 searchIsOpening: true,
                 searchIsOpen: !searchIsOpen
             });
-        }
-    }
-
-    private _onViewportChanged(): void {
-        const { sticksToTop } = this.state;
-        /* istanbul ignore if */
-        if (!this._isUnmounted) {
-            if (sticksToTop !== (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0) > 0) {
-                this.setState({
-                    sticksToTop: !sticksToTop
-                });
-            }
         }
     }
 
