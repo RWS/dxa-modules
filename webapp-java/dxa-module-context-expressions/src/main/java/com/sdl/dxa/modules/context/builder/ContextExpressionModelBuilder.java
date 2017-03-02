@@ -1,6 +1,7 @@
 package com.sdl.dxa.modules.context.builder;
 
 import com.sdl.dxa.api.datamodel.model.EntityModelData;
+import com.sdl.dxa.api.datamodel.model.util.ListWrapper;
 import com.sdl.dxa.modules.context.model.Conditions;
 import com.sdl.dxa.tridion.mapping.EntityModelBuilder;
 import com.sdl.webapp.common.api.content.ContentProviderException;
@@ -21,7 +22,6 @@ import java.util.Collections;
 import java.util.Map;
 
 import static com.google.common.collect.Sets.newHashSet;
-import static com.sdl.webapp.common.util.CollectionUtils.getByCompoundKeyOrAlternative;
 import static com.sdl.webapp.util.dd4t.FieldUtils.getStringValues;
 
 @org.springframework.stereotype.Component
@@ -30,6 +30,9 @@ public class ContextExpressionModelBuilder implements EntityBuilder, EntityModel
 
     @Value("${dxa.modules.contextexpr.extension_data_map_key}")
     private String contextExpressionsKey = "ContextExpressions";
+
+    @Value("${dxa.modules.contextexpr.r2.extension_data_map_key}")
+    private String cxKeyR2 = "CX";
 
     @Override
     public <T extends EntityModel> T createEntity(ComponentPresentation componentPresentation, T originalEntityModel, Localization localization) throws ContentProviderException {
@@ -77,20 +80,22 @@ public class ContextExpressionModelBuilder implements EntityBuilder, EntityModel
     public <T extends EntityModel> T buildEntityModel(@Nullable T originalEntityModel, EntityModelData modelData, @Nullable Class<T> expectedClass) throws DxaException {
         log.trace("Context expression model builder for EMD {}, entity {} and expectedClass {}", modelData, originalEntityModel, expectedClass);
 
+        String includeKey = cxKeyR2 + ".Include";
+        String excludeKey = cxKeyR2 + ".Exclude";
+
         Map<String, Object> extensionData = modelData.getExtensionData();
-        if (extensionData == null || extensionData.containsKey(contextExpressionsKey)) {
+        if (extensionData == null || (!extensionData.containsKey(includeKey) && !extensionData.containsKey(excludeKey))) {
             log.debug("ContextExpressions not found in {}", modelData);
             return originalEntityModel;
         }
 
         //noinspection unchecked
-        return applyConditions(originalEntityModel, getConditions(extensionData, "Include"), getConditions(extensionData, "Exclude"));
+        return applyConditions(originalEntityModel, getConditions(extensionData, includeKey), getConditions(extensionData, excludeKey));
     }
 
-    //cast is not type safe but we only expect there a collection of Strings, so let's pretend
+    //cast is not type safe but we only expect there a ListWrapper of Strings, so let's pretend
     @SuppressWarnings("unchecked")
     private Collection<String> getConditions(Map<String, Object> extensionData, String key) {
-        return getByCompoundKeyOrAlternative(contextExpressionsKey + "/" + key, extensionData,
-                Collections.emptySet(), Collection.class);
+        return extensionData.containsKey(key) ? ((ListWrapper<String>) extensionData.get(key)).getValues() : Collections.emptyList();
     }
 }
