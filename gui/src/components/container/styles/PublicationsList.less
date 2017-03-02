@@ -2,35 +2,18 @@
 @import (reference) "../../presentation/styles/TopBar.less";
 .sdl-dita-delivery-publications-list {
     position: relative;
-    height: 100%;
-    nav {
-        min-height: 100px;
-        max-width: @screenXl;
+    background-color: @neutralColor6;
+    h1 {
+        .header-font(300, @h1Size, 50px);
         margin: 0 auto;
-        padding: 0 15px;
-        h1 {
-            .header-font(300, @h1Size, 50px);
-            height: 50px;
-            margin: 0;
-        }
-        ul {
-            margin: 0;
-            padding: 0;
-            li {
-                background: fade(@accentColor2, 5%);
-                display: block;
-                padding: 10px 15px;
-                margin-bottom: -1px;
-                border: 1px solid @neutralColor5;
-                border-left: 2px solid @accentColor1;
-                a {
-                    text-decoration: none;
-                    color: @neutralColor1;
-                    &:hover {
-                        color: @accentColor2;
-                    }
-                }
-            }
+        padding-top: 15px;
+        max-width: @screenXl;
+        text-indent: 20px;
+    }
+    .sdl-dita-delivery-tiles-list {
+        max-width: @screenXl;
+        .sdl-dita-delivery-tile {
+            height: 340px;
         }
     }
 }

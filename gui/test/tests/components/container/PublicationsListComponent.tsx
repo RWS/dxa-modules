@@ -75,12 +75,12 @@ class PublicationsListComponent extends TestBase {
                 const publicationsList = this._renderComponent(target);
 
                 setTimeout((): void => {
-                    const hyperlinks = TestUtils.scryRenderedDOMComponentsWithTag(publicationsList, "a");
-                    expect(hyperlinks.length).toBe(3);
+                    const h3 = TestUtils.scryRenderedDOMComponentsWithTag(publicationsList, "h3");
+                    expect(h3.length).toBe(3);
 
-                    expect(hyperlinks[0].textContent).toBe(publications[0].title);
-                    expect(hyperlinks[1].textContent).toBe(publications[1].title);
-                    expect(hyperlinks[2].textContent).toBe(publications[2].title);
+                    expect(h3[0].textContent).toBe(publications[0].title);
+                    expect(h3[1].textContent).toBe(publications[1].title);
+                    expect(h3[2].textContent).toBe(publications[2].title);
 
                     done();
                 }, 500);
@@ -106,11 +106,10 @@ class PublicationsListComponent extends TestBase {
 
                 // Use a timeout to allow the DataStore to return a promise with the data
                 setTimeout((): void => {
-                    const hyperlinks = TestUtils.scryRenderedDOMComponentsWithTag(publicationsList, "a");
-                    const hyperlink = hyperlinks[0] as HTMLAnchorElement;
-                    expect(hyperlink).toBeDefined();
-
-                    hyperlink.click();
+                    const buttons = TestUtils.scryRenderedDOMComponentsWithTag(publicationsList, "button");
+                    const button = buttons[0] as HTMLButtonElement;
+                    expect(button).toBeDefined();
+                    TestUtils.Simulate.click(button);
                 }, 0);
             });
 
@@ -126,7 +125,6 @@ class PublicationsListComponent extends TestBase {
             ), target) as React.Component<{}, {}>;
         return TestUtils.findRenderedComponentWithType(comp, PublicationsList) as PublicationsList;
     }
-
 }
 
 new PublicationsListComponent().runTests();

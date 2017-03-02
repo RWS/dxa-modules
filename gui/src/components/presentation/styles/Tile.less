@@ -4,6 +4,11 @@
     border: 1px solid @neutralColor5;
     box-shadow: 0 2px 0 0 @neutralColor5;
     border-radius: 4px;
+    display: flex;
+    flex-flow: column nowrap;
+    > * {
+        flex: 0 0 auto;
+    }
     h3 {
         .header-font(300, 20px, 20px);
         color: @neutralColor1;
@@ -11,21 +16,37 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        height: 50px;
+        margin: 5px auto;
         &.exclamation-mark {
             &::before {
                 .icon-exclamation-mark();
                 content: "";
-                margin-right:10px;
+                margin-right: 10px;
             }
         }
     }
     hr {
+        margin: 10px 20px;
         background: @neutralColor5;
         height: 1px;
         border: none;
     }
-    p {
-        .paragraph();
+    .tile-content {
+        flex: 1 1 auto;
+        margin: 0 15px;
         line-height: 14px;
+        overflow: hidden;
+        position: relative;
+        .paragraph();
+        a {
+            .anchor();
+            display: block;
+            text-align: center;
+            line-height: 30px;
+        }
+        .error-message {
+            text-align: center;
+        }
     }
 }

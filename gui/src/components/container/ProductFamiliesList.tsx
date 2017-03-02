@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Promise } from "es6-promise";
 import { IProductFamily } from "interfaces/ProductFamily";
 import { ActivityIndicator, Button } from "sdl-controls-react-wrappers";
 import { ButtonPurpose } from "sdl-controls";
@@ -73,8 +74,9 @@ export class ProductFamiliesList extends React.Component<{}, IProductFamiliesLis
         const { productFamilies, error } = this.state;
         const { services, router } = this.context;
         const { formatMessage } = services.localizationService;
+
         const errorButtons = <div>
-            <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{ "click": this._loadProductFamilies.bind(this) }}>{formatMessage("control.button.retry")}</Button>
+            <Button skin="graphene" purpose={ButtonPurpose.CRITICAL} events={{ "click": () => this._loadProductFamilies(true) }}>{formatMessage("control.button.retry")}</Button>
         </div>;
 
         return (
@@ -90,7 +92,9 @@ export class ProductFamiliesList extends React.Component<{}, IProductFamiliesLis
                                 ? (<TilesList tiles={productFamilies.map((productFamily: IProductFamily) => {
                                     return {
                                         title: productFamily.title,
-                                        description: productFamily.description,
+                                        loadableContent: () => {
+                                            return Promise.resolve(productFamily.description);
+                                        },
                                         hasWarning: productFamily.hasWarning,
                                         navigateTo: () => {
                                             /* istanbul ignore else */
@@ -116,16 +120,17 @@ export class ProductFamiliesList extends React.Component<{}, IProductFamiliesLis
     /**
      * Component will unmount
      */
-    public _loadProductFamilies(): void {
+    public _loadProductFamilies(reload?: boolean): void {
         const { publicationService } = this.context.services;
 
         // Get product families list
-        publicationService.getProductFamilies().then(
+        publicationService.getProductFamilies(reload).then(
             families => {
                 /* istanbul ignore else */
                 if (!this._isUnmounted) {
                     this.setState({
-                        productFamilies: families
+                        productFamilies: families,
+                        error: undefined
                     });
                 }
             },
