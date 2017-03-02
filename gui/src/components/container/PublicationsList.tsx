@@ -147,20 +147,21 @@ export class PublicationsList extends React.Component<IPublicationsListProps, IP
                             buttons={errorButtons} />
                         : publications ?
                             (publications.length > 0) ? (
-                                <TilesList tiles={publications.map((publication: IPublication) => {
-                                    return {
-                                        title: publication.title,
-                                        loadableContent: () => {
-                                            return this._getLoadableContent(publication.id);
-                                        },
-                                        navigateTo: () => {
-                                            /* istanbul ignore else */
-                                            if (router) {
-                                                router.push(Url.getPublicationUrl(publication.id, publication.title));
+                                <TilesList viewAllLabel={formatMessage("components.publicationslist.view.all")}
+                                    tiles={publications.map((publication: IPublication) => {
+                                        return {
+                                            title: publication.title,
+                                            loadableContent: () => {
+                                                return this._getLoadableContent(publication.id);
+                                            },
+                                            navigateTo: () => {
+                                                /* istanbul ignore else */
+                                                if (router) {
+                                                    router.push(Url.getPublicationUrl(publication.id, publication.title));
+                                                }
                                             }
-                                        }
-                                    } as ITile;
-                                })} />) : <div className={"no-available-publications-label"}>{formatMessage("components.productfamilies.no.published.publications")}</div>
+                                        } as ITile;
+                                    })} />) : <div className={"no-available-publications-label"}>{formatMessage("components.productfamilies.no.published.publications")}</div>
                             : <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} />}
             </section>);
     }

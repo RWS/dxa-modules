@@ -7,10 +7,11 @@
   "components.searchbar.publication.placeholder": "Zoeken in ‘{0}’",
   "components.contentnavigation.title": "Inhoud",
   "components.tiles.more": "Bekijk meer",
-  "components.tiles.all": "Bekijk alle Producten",
   "components.productfamilies.unknown.title": "Onbekende product",
   "components.productfamilies.unknown.description": "Publicaties die nog niet zijn gekoppeld aan een specifiek product",
   "components.productfamilies.no.published.publications": "Nog geen publicaties verschenen",
+  "components.productfamilies.view.all": "Bekijk alle producten",
+  "components.publicationslist.view.all": "Bekijk alle publicaties",
   "control.button.retry": "Opnieuw proberen"
   "error.default.message": "Als u nog steeds deze fout ziet, gebruik dan de onderstaande links om naar de home page of zoek de documentatie te vinden wat u zoekt.",
   "error.default.title": "Oeps, er is iets fout gegaan!",
