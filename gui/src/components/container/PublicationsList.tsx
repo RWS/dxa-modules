@@ -208,7 +208,7 @@ export class PublicationsList extends React.Component<IPublicationsListProps, IP
             // Get the data for the Toc
             return services.taxonomyService.getSitemapRoot(publicationId).then(
                 items => {
-                    const pagesToDisplay = items.slice(0, SHOWN_TILE_ITEMS_COUNT);
+                    const pagesToDisplay = items.filter(item => item.url).slice(0, SHOWN_TILE_ITEMS_COUNT);
                     resolve(pagesToDisplay.map((item: ITaxonomy, i: number) => {
                         return <Link key={i} title={item.title} to={item.url || ""}>{item.title}</Link>;
                     }));

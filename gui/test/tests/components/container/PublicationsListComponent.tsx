@@ -5,10 +5,12 @@ import { PublicationsList } from "components/container/PublicationsList";
 import { ActivityIndicator } from "sdl-controls-react-wrappers";
 import { TestBase } from "sdl-models";
 import { PublicationService } from "test/mocks/services/PublicationService";
+import { TaxonomyService } from "test/mocks/services/TaxonomyService";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 
 const services = {
-    publicationService: new PublicationService()
+    publicationService: new PublicationService(),
+    taxonomyService: new TaxonomyService()
 };
 
 class PublicationsListComponent extends TestBase {
@@ -110,6 +112,71 @@ class PublicationsListComponent extends TestBase {
                     const button = buttons[0] as HTMLButtonElement;
                     expect(button).toBeDefined();
                     TestUtils.Simulate.click(button);
+                }, 0);
+            });
+
+            it("shows first 5 topic titles in the root map of the publication", (done: () => void): void => {
+                const publications = [{
+                    id: "0",
+                    title: "Publication"
+                }];
+                services.publicationService.setMockDataPublications(null, publications);
+                services.taxonomyService.setMockDataToc(null, [
+                    {
+                        id: "1",
+                        title: "Title 1",
+                        url: "/url-1",
+                        hasChildNodes: false
+                    },
+                    {
+                        id: "2",
+                        title: "Title 2",
+                        url: "/url-2",
+                        hasChildNodes: false
+                    },
+                    {
+                        id: "3",
+                        title: "Title 3",
+                        hasChildNodes: false
+                    },
+                    {
+                        id: "4",
+                        title: "Title 4",
+                        url: "/url-4",
+                        hasChildNodes: false
+                    },
+                    {
+                        id: "5",
+                        title: "Title 5",
+                        url: "/url-5",
+                        hasChildNodes: false
+                    },
+                    {
+                        id: "6",
+                        title: "Title 6",
+                        url: "/url-6",
+                        hasChildNodes: false
+                    },
+                    {
+                        id: "7",
+                        title: "Title 7",
+                        url: "/url-7",
+                        hasChildNodes: false
+                    }
+                ]);
+
+                const publicationsList = this._renderComponent(target);
+
+                setTimeout((): void => {
+                    const links = TestUtils.scryRenderedDOMComponentsWithTag(publicationsList, "a");
+                    expect(links.length).toBe(5);
+                    // Title 3 is not added as it has no url to a page
+                    expect(links[0].textContent).toBe("Title 1");
+                    expect(links[1].textContent).toBe("Title 2");
+                    expect(links[2].textContent).toBe("Title 4");
+                    expect(links[3].textContent).toBe("Title 5");
+                    expect(links[4].textContent).toBe("Title 6");
+                    done();
                 }, 0);
             });
 
