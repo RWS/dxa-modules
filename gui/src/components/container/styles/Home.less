@@ -125,7 +125,7 @@
                         position: fixed;
                         top: @navBarHeight;
                     }
-                    @media screen and (min-width: (1+@screenSm)) {
+                    @media screen and (min-width: (1+@screenMd)) {
                         position: fixed;
                         top: @navBarHeight;
                         /*  HACK: As a correct behaviour we should use max-height here,
@@ -172,8 +172,8 @@
     }
 }
 
-// Screen resolution Small
-@media screen and (max-width: @screenSm) {
+// Screen resolution Medium
+@media screen and (max-width: @screenMd) {
     .sdl-dita-delivery-app {
         // Table of content navigation is open
         &.open {
@@ -181,6 +181,27 @@
                 display: block;
             }
         }
+        .sdl-dita-delivery-topbar {
+            .sdl-dita-delivery-topbar-expand-nav {
+                display: block;
+                order: -1;
+            }
+        }
+        .sdl-dita-delivery-publication-content {
+            .sdl-dita-delivery-page {
+                .sdl-dita-delivery-navigation-menu {
+                    nav.sdl-dita-delivery-toc {
+                        height: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Screen resolution Small
+@media screen and (max-width: @screenSm) {
+    .sdl-dita-delivery-app {
         // Search panel is open
         &.search-open {
             .sdl-dita-delivery-topbar {
@@ -216,21 +237,6 @@
                     .search-button {
                         .icon-search(21px);
                         padding-right: 5px;
-                    }
-                }
-            }
-        }
-        .sdl-dita-delivery-topbar {
-            .sdl-dita-delivery-topbar-expand-nav {
-                display: block;
-                order: -1;
-            }
-        }
-        .sdl-dita-delivery-publication-content {
-            .sdl-dita-delivery-page {
-                .sdl-dita-delivery-navigation-menu {
-                    nav.sdl-dita-delivery-toc {
-                        height: 100%;
                     }
                 }
             }
