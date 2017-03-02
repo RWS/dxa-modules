@@ -2,8 +2,12 @@ package com.sdl.dxa.modules.smarttarget.mapping;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
+import com.sdl.dxa.api.datamodel.model.ContentModelData;
+import com.sdl.dxa.api.datamodel.model.PageModelData;
+import com.sdl.dxa.api.datamodel.model.RegionModelData;
 import com.sdl.dxa.modules.smarttarget.model.entity.SmartTargetPageModel;
 import com.sdl.dxa.modules.smarttarget.model.entity.SmartTargetRegion;
+import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.content.ContentProviderException;
 import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.api.model.PageModel;
@@ -24,8 +28,11 @@ import org.dd4t.contentmodel.impl.PageTemplateImpl;
 import org.dd4t.contentmodel.impl.TextField;
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -49,8 +56,21 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class SmartTargetPageBuilderTest {
 
+    @Mock
+    private WebRequestContext webRequestContext;
+
+    @Mock
+    private Localization localization;
+
     @Spy
-    private SmartTargetPageBuilder pageBuilder = new SmartTargetPageBuilder();
+    @InjectMocks
+    private SmartTargetPageBuilder pageBuilder;
+
+    @Before
+    public void init() {
+        when(webRequestContext.getLocalization()).thenReturn(localization);
+        when(localization.getId()).thenReturn("1");
+    }
 
     @Test
     public void shouldExpectPageModelIdAsIntegerID() throws SmartTargetException {
@@ -72,9 +92,6 @@ public class SmartTargetPageBuilderTest {
 
         doReturn(null).when(pageBuilder).executeSmartTargetQuery(any(SmartTargetPageModel.class), any(TcmUri.class));
 
-        Localization localization = mock(Localization.class);
-        when(localization.getId()).thenReturn("1");
-
         //when
         pageBuilder.processQueryAndPromotions(localization, model, null);
 
@@ -86,6 +103,8 @@ public class SmartTargetPageBuilderTest {
     public void shouldReturnNullIfPageModelIsNull() throws ContentProviderException {
         //when, then
         assertNull(pageBuilder.createPage(null, null, null, null));
+        //noinspection ConstantConditions
+        assertNull(pageBuilder.buildPageModel(null, new PageModelData("", null, null, null), null));
     }
 
     @Test
@@ -97,10 +116,12 @@ public class SmartTargetPageBuilderTest {
 
         //when
         PageModel page = pageBuilder.createPage(null, pageModel, null, null);
+        PageModel page2 = pageBuilder.buildPageModel(pageModel, new PageModelData("", null, null, null), null);
 
         //then
         assertEquals(expected, pageModel);
         assertEquals(expected, page);
+        assertEquals(expected, page2);
     }
 
     private static PageModel createPageModel(RegionModel... regionModels) throws DxaException {
@@ -116,9 +137,11 @@ public class SmartTargetPageBuilderTest {
     @Test
     public void shouldCallSubclassForSmartTargetAndProcessMetadata() throws DxaException {
         shouldCallSubclassForSmartTargetAndProcessMetadata("42");
+        shouldCallSubclassForSmartTargetAndProcessMetadata_R2("42");
 
         //TSI-2168 SmartTarget Module tests fail with NumberFormatException for input string
         shouldCallSubclassForSmartTargetAndProcessMetadata("42.0");
+        shouldCallSubclassForSmartTargetAndProcessMetadata_R2("42.0");
     }
 
     /**
@@ -129,7 +152,6 @@ public class SmartTargetPageBuilderTest {
         SmartTargetRegion smartTargetRegion = new SmartTargetRegion("test");
         PageModel pageModel = createPageModel(smartTargetRegion);
         Page dd4tPage = new PageImpl();
-        Localization localization = mock(Localization.class);
 
         PageTemplateImpl pageTemplate = new PageTemplateImpl();
 
@@ -168,6 +190,31 @@ public class SmartTargetPageBuilderTest {
         verify(pageBuilder).processQueryAndPromotions(eq(localization), eq(page), eq("SmartTarget:Entity:Promotion"));
     }
 
+    private void shouldCallSubclassForSmartTargetAndProcessMetadata_R2(String maxItemsValue) throws DxaException {
+        //given
+        SmartTargetRegion smartTargetRegion = new SmartTargetRegion("test");
+        PageModel pageModel = createPageModel(smartTargetRegion);
+        RegionModelData regionModelData = RegionModelData.builder().name("test").metadata(new ContentModelData() {{
+            put("maxItems", maxItemsValue);
+        }}).build();
+        PageModelData pageModelData = new PageModelData("id", Collections.emptyMap(), "title", Lists.newArrayList(regionModelData));
+
+        SmartTargetPageModel stPageModel = mock(SmartTargetPageModel.class);
+        when(stPageModel.setAllowDuplicates(anyBoolean())).thenReturn(stPageModel);
+        when(stPageModel.containsRegion(eq("test"))).thenReturn(true);
+        when(stPageModel.getRegions()).thenReturn(pageModel.getRegions());
+
+        doNothing().when(pageBuilder).processQueryAndPromotions(any(Localization.class), any(SmartTargetPageModel.class), anyString());
+
+        //when
+        SmartTargetPageModel page = ((SmartTargetPageModel) pageBuilder.buildPageModel(pageModel, pageModelData, null));
+
+        //then
+        assertEquals(42, smartTargetRegion.getMaxItems());
+        verify(pageBuilder).processQueryAndPromotions(eq(localization), eq(page), eq("SmartTarget:Entity:Promotion"));
+    }
+
+
     @Test
     public void shouldNotChangePageModelWithoutRegionsMetadata() throws DxaException {
         //given
@@ -179,6 +226,7 @@ public class SmartTargetPageBuilderTest {
         //when
         PageModel page = pageBuilder.createPage(null, pageModel, null, null);
         PageModel page2 = pageBuilder.createPage(dd4tPage, pageModel, null, null);
+        PageModel pageR2 = pageBuilder.buildPageModel(pageModel, new PageModelData("", null, null, null), null);
 
         //given
         PageTemplateImpl pageTemplate = new PageTemplateImpl();
@@ -200,7 +248,7 @@ public class SmartTargetPageBuilderTest {
         assertEquals(expected, page);
         assertEquals(expected, page2);
         assertEquals(expected, page3);
-        assertEquals(expected, page4);
+        assertEquals(expected, pageR2);
     }
 
     @Test

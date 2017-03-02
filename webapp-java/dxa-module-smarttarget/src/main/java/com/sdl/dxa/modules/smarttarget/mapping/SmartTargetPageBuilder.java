@@ -1,10 +1,16 @@
 package com.sdl.dxa.modules.smarttarget.mapping;
 
+import com.sdl.dxa.api.datamodel.model.ContentModelData;
+import com.sdl.dxa.api.datamodel.model.PageModelData;
+import com.sdl.dxa.api.datamodel.model.RegionModelData;
 import com.sdl.dxa.modules.smarttarget.model.entity.SmartTargetExperiment;
 import com.sdl.dxa.modules.smarttarget.model.entity.SmartTargetItem;
 import com.sdl.dxa.modules.smarttarget.model.entity.SmartTargetPageModel;
 import com.sdl.dxa.modules.smarttarget.model.entity.SmartTargetPromotion;
 import com.sdl.dxa.modules.smarttarget.model.entity.SmartTargetRegion;
+import com.sdl.dxa.tridion.mapping.PageInclusion;
+import com.sdl.dxa.tridion.mapping.PageModelBuilder;
+import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.content.ContentProvider;
 import com.sdl.webapp.common.api.content.ContentProviderException;
 import com.sdl.webapp.common.api.localization.Localization;
@@ -39,7 +45,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.dd4t.contentmodel.Field;
 import org.dd4t.contentmodel.FieldSet;
 import org.dd4t.contentmodel.Page;
-import org.dd4t.contentmodel.PageTemplate;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -59,12 +66,17 @@ import static com.sdl.webapp.common.api.model.mvcdata.MvcDataCreator.creator;
  */
 @Slf4j
 @Component
-public class SmartTargetPageBuilder implements PageBuilder {
+public class SmartTargetPageBuilder implements PageBuilder, PageModelBuilder {
+
+    protected static final String DUPLICATION_ON_SAME_PAGE_KEY = "allowDuplicationOnSamePage";
 
     private static final String PROMOTION_VIEW_NAME_CONFIG = "smarttarget.smartTargetEntityPromotion";
 
     @Autowired
     private HttpServletRequest httpServletRequest;
+
+    @Autowired
+    private WebRequestContext webRequestContext;
 
     /**
      * {@inheritDoc}
@@ -81,7 +93,7 @@ public class SmartTargetPageBuilder implements PageBuilder {
     public PageModel createPage(Page page, PageModel pageModel, Localization localization, ContentProvider contentProvider)
             throws ContentProviderException {
 
-        if (pageModel == null || !pageModel.getRegions().containsClass(SmartTargetRegion.class)) {
+        if (pageModel == null || pageModel.getRegions() == null || !pageModel.getRegions().containsClass(SmartTargetRegion.class)) {
             log.debug("There are no SmartTargetRegions on the page {}", pageModel);
             return pageModel;
         }
@@ -92,8 +104,13 @@ public class SmartTargetPageBuilder implements PageBuilder {
             return pageModel;
         }
 
+        String allowDuplicationOnSamePage = null;
+        if (page.getPageTemplate().getMetadata().containsKey(DUPLICATION_ON_SAME_PAGE_KEY)) {
+            allowDuplicationOnSamePage = FieldUtils.getStringValue(page.getPageTemplate().getMetadata().get(DUPLICATION_ON_SAME_PAGE_KEY));
+        }
+
         SmartTargetPageModel stPageModel = new SmartTargetPageModel(pageModel)
-                .setAllowDuplicates(getAllowDuplicatesFromConfig(page.getPageTemplate(), localization));
+                .setAllowDuplicates(getAllowDuplicatesFromConfig(allowDuplicationOnSamePage, localization));
 
         List<Object> regions = page.getPageTemplate().getMetadata().get("regions").getValues();
         for (Object region : regions) {
@@ -104,17 +121,17 @@ public class SmartTargetPageBuilder implements PageBuilder {
 
             Map<String, Field> metadata = ((FieldSet) region).getContent();
 
-            String regionName = getViewNameFromMetadata(metadata);
-            if (!stPageModel.containsRegion(regionName)) {
-                log.debug("Page model does not contain a region {}", regionName);
-                return stPageModel;
-            }
+            String regionName = getViewNameForRegion(
+                    FieldUtils.getStringValue(metadata.get("name")),
+                    FieldUtils.getStringValue(metadata.get("view")));
 
-            if (!(stPageModel.getRegions().get(regionName) instanceof SmartTargetRegion)) {
+            if (!(stPageModel.containsRegion(regionName) && stPageModel.getRegions().get(regionName) instanceof SmartTargetRegion)) {
+                log.debug("Page model does not contain a region {} of a class {}", regionName, SmartTargetRegion.class);
                 continue;
             }
 
-            processMetadataForCurrentRegionModel(metadata, (SmartTargetRegion) stPageModel.getRegions().get(regionName));
+            String maxItems = metadata.containsKey("maxItems") ? FieldUtils.getStringValue(metadata.get("maxItems")) : null;
+            setMaxItems(maxItems, (SmartTargetRegion) stPageModel.getRegions().get(regionName));
         }
 
         String promotionViewName = getPromotionViewName(localization);
@@ -125,43 +142,31 @@ public class SmartTargetPageBuilder implements PageBuilder {
         return stPageModel;
     }
 
-    private static boolean getAllowDuplicatesFromConfig(PageTemplate pageTemplate, @NonNull Localization localization) {
-        String allowDuplicationOnSamePage = null;
-        if (pageTemplate != null && pageTemplate.getMetadata() != null
-                && pageTemplate.getMetadata().containsKey("allowDuplicationOnSamePage")) {
-            allowDuplicationOnSamePage = FieldUtils.getStringValue(pageTemplate.getMetadata().get("allowDuplicationOnSamePage"));
-        }
+    private static boolean getAllowDuplicatesFromConfig(String allowDuplicationOnSamePage, @NonNull Localization localization) {
+        String _allowDuplicationOnSamePage = allowDuplicationOnSamePage;
+        if (StringUtils.isEmpty(_allowDuplicationOnSamePage) ||
+                "Use core configuration".equalsIgnoreCase(_allowDuplicationOnSamePage)) {
+            _allowDuplicationOnSamePage = localization.getConfiguration("smarttarget.allowDuplicationOnSamePageConfig");
 
-        if (StringUtils.isEmpty(allowDuplicationOnSamePage) ||
-                "Use core configuration".equalsIgnoreCase(allowDuplicationOnSamePage)) {
-            allowDuplicationOnSamePage = localization.getConfiguration("smarttarget.allowDuplicationOnSamePageConfig");
-
-            if (isNullOrEmpty(allowDuplicationOnSamePage)) {
+            if (isNullOrEmpty(_allowDuplicationOnSamePage)) {
                 return true;
             }
         }
 
-        return Boolean.parseBoolean(allowDuplicationOnSamePage);
+        return Boolean.parseBoolean(_allowDuplicationOnSamePage);
     }
 
-    private static String getViewNameFromMetadata(Map<String, Field> metadata) {
-        String regionName = FieldUtils.getStringValue(metadata.get("name"));
-        if (isNullOrEmpty(regionName)) {
-            regionName = MvcDataCreator.creator()
-                    .fromQualifiedName(FieldUtils.getStringValue(metadata.get("view")))
-                    .create()
-                    .getViewName();
-        }
-        return regionName;
+    private static String getViewNameForRegion(String regionName, String viewName) {
+        return isNullOrEmpty(regionName) ? MvcDataCreator.creator()
+                .fromQualifiedName(viewName)
+                .create()
+                .getViewName() : regionName;
     }
 
-    private static void processMetadataForCurrentRegionModel(Map<String, Field> metadata, SmartTargetRegion regionModel) {
+    private static void setMaxItems(String maxItems, SmartTargetRegion regionModel) {
         regionModel.setMaxItems(100);
-        if (metadata.containsKey("maxItems")) {
-            String value = FieldUtils.getStringValue(metadata.get("maxItems"));
-            if (value != null) {
-                regionModel.setMaxItems((int) Double.parseDouble(value));
-            }
+        if (maxItems != null) {
+            regionModel.setMaxItems((int) Double.parseDouble(maxItems));
         }
     }
 
@@ -355,6 +360,43 @@ public class SmartTargetPageBuilder implements PageBuilder {
         smartTargetPromotion.setItems(smartTargetItems);
 
         return smartTargetPromotion;
+    }
+
+    @Override
+    public PageModel buildPageModel(@Nullable PageModel pageModel, @NotNull PageModelData modelData, PageInclusion includePageRegions) {
+        if (pageModel == null || pageModel.getRegions() == null || !pageModel.getRegions().containsClass(SmartTargetRegion.class)
+                || modelData.getRegions() == null) {
+            log.debug("There are no SmartTargetRegions on the page {}", pageModel);
+            return pageModel;
+        }
+
+        Localization localization = webRequestContext.getLocalization();
+
+        String allowDuplicationOnSamePage = modelData.getMetadata() == null ? null :
+                String.valueOf(modelData.getMetadata().get(DUPLICATION_ON_SAME_PAGE_KEY));
+        SmartTargetPageModel stPageModel = new SmartTargetPageModel(pageModel)
+                .setAllowDuplicates(getAllowDuplicatesFromConfig(allowDuplicationOnSamePage, localization));
+
+        pageModel.getRegions().stream()
+                .filter(regionModel -> regionModel instanceof SmartTargetRegion)
+                .map(regionModel -> (SmartTargetRegion) regionModel)
+                .forEach(regionModel -> {
+                    RegionModelData regionModelData = modelData.getRegions().stream()
+                            .filter(rmd -> rmd.getName().equals(regionModel.getName()))
+                            .findFirst().orElse(null);
+
+                    ContentModelData metadata = regionModelData == null ? null : regionModelData.getMetadata();
+
+                    String maxItems = metadata == null ? null : metadata.getAndCast("maxItems", String.class);
+                    setMaxItems(maxItems, regionModel);
+                });
+
+        String promotionViewName = getPromotionViewName(localization);
+        log.debug("Using promotion view name {}", promotionViewName);
+
+        processQueryAndPromotions(localization, stPageModel, promotionViewName);
+
+        return stPageModel;
     }
 
     @Builder
