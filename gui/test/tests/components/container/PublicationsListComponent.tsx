@@ -2,7 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as TestUtils from "react-addons-test-utils";
 import { PublicationsList } from "components/container/PublicationsList";
-import { ActivityIndicator } from "sdl-controls-react-wrappers";
+import { ActivityIndicator, Button } from "sdl-controls-react-wrappers";
 import { TestBase } from "sdl-models";
 import { PublicationService } from "test/mocks/services/PublicationService";
 import { TaxonomyService } from "test/mocks/services/TaxonomyService";
@@ -108,10 +108,11 @@ class PublicationsListComponent extends TestBase {
 
                 // Use a timeout to allow the DataStore to return a promise with the data
                 setTimeout((): void => {
-                    const buttons = TestUtils.scryRenderedDOMComponentsWithTag(publicationsList, "button");
-                    const button = buttons[0] as HTMLButtonElement;
+                    // tslint:disable-next-line:no-any
+                    const button = TestUtils.findRenderedComponentWithType(publicationsList, Button as any);
                     expect(button).toBeDefined();
-                    TestUtils.Simulate.click(button);
+                    const buttonEl = ReactDOM.findDOMNode(button).querySelector("button");
+                    buttonEl.click();
                 }, 0);
             });
 
