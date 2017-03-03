@@ -147,20 +147,21 @@ export class PublicationsList extends React.Component<IPublicationsListProps, IP
                             buttons={errorButtons} />
                         : publications ?
                             (publications.length > 0) ? (
-                                <TilesList tiles={publications.map((publication: IPublication) => {
-                                    return {
-                                        title: publication.title,
-                                        loadableContent: () => {
-                                            return this._getLoadableContent(publication.id);
-                                        },
-                                        navigateTo: () => {
-                                            /* istanbul ignore else */
-                                            if (router) {
-                                                router.push(Url.getPublicationUrl(publication.id, publication.title));
+                                <TilesList viewAllLabel={formatMessage("components.publicationslist.view.all")}
+                                    tiles={publications.map((publication: IPublication) => {
+                                        return {
+                                            title: publication.title,
+                                            loadableContent: () => {
+                                                return this._getLoadableContent(publication.id);
+                                            },
+                                            navigateTo: () => {
+                                                /* istanbul ignore else */
+                                                if (router) {
+                                                    router.push(Url.getPublicationUrl(publication.id, publication.title));
+                                                }
                                             }
-                                        }
-                                    } as ITile;
-                                })} />) : <div className={"no-available-publications-label"}>{formatMessage("components.productfamilies.no.published.publications")}</div>
+                                        } as ITile;
+                                    })} />) : <div className={"no-available-publications-label"}>{formatMessage("components.productfamilies.no.published.publications")}</div>
                             : <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} />}
             </section>);
     }
@@ -208,7 +209,7 @@ export class PublicationsList extends React.Component<IPublicationsListProps, IP
             // Get the data for the Toc
             return services.taxonomyService.getSitemapRoot(publicationId).then(
                 items => {
-                    const pagesToDisplay = items.slice(0, SHOWN_TILE_ITEMS_COUNT);
+                    const pagesToDisplay = items.filter(item => item.url).slice(0, SHOWN_TILE_ITEMS_COUNT);
                     resolve(pagesToDisplay.map((item: ITaxonomy, i: number) => {
                         return <Link key={i} title={item.title} to={item.url || ""}>{item.title}</Link>;
                     }));

@@ -90,9 +90,9 @@ class TileComponent extends TestBase {
                     const descriptionNode = appNode.querySelector(".sdl-dita-delivery-tile .tile-content .error-message");
                     expect(descriptionNode.textContent).toBe(errorMessage);
 
-                    const retryButtonNode = appNode.querySelector(".sdl-dita-delivery-tile button");
+                    const retryButtonNode = appNode.querySelector(".sdl-dita-delivery-tile button") as HTMLElement;
                     expect(retryButtonNode).not.toBeNull();
-                    TestUtils.Simulate.click(retryButtonNode);
+                    retryButtonNode.click();
                 }, 0);
 
             });
@@ -111,9 +111,9 @@ class TileComponent extends TestBase {
                 }, target);
                 const appNode = ReactDOM.findDOMNode(target);
 
-                const viewMoreButtonNode = appNode.querySelector(".sdl-dita-delivery-tile button");
+                const viewMoreButtonNode = appNode.querySelector(".sdl-dita-delivery-tile button") as HTMLElement;
                 expect(viewMoreButtonNode).not.toBeNull();
-                TestUtils.Simulate.click(viewMoreButtonNode);
+                viewMoreButtonNode.click();
             });
 
         });

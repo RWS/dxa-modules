@@ -1,6 +1,7 @@
 import * as React from "react";
-import { IAppContext } from "components/container/App";
 import { Tile, ITile } from "components/presentation/Tile";
+import { Button } from "sdl-controls-react-wrappers";
+import { ButtonPurpose } from "sdl-controls";
 import "components/container/styles/TilesList";
 
 const SHOWN_ITEMS_COUNT = 8;
@@ -18,6 +19,13 @@ export interface ITilesListProps {
      * @type {ITile[]}
      */
     tiles: ITile[];
+    /**
+     * Label to show on view all button
+     *
+     * @type {string}
+     * @memberOf ITilesListProps
+     */
+    viewAllLabel: string;
     /**
      * An error prevented the list from loading
      *
@@ -46,11 +54,6 @@ export interface ITilesListState {
  */
 export class TilesList extends React.Component<ITilesListProps, ITilesListState> {
 
-    public static contextTypes: React.ValidationMap<IAppContext> = {
-        services: React.PropTypes.object.isRequired
-    };
-
-    public context: IAppContext;
     private _isUnmounted: boolean = false;
 
     /**
@@ -71,8 +74,7 @@ export class TilesList extends React.Component<ITilesListProps, ITilesListState>
      */
     public render(): JSX.Element {
         const { showAllItems } = this.state;
-        const { tiles } = this.props;
-        const { services } = this.context;
+        const { tiles, viewAllLabel } = this.props;
 
         const tilesToDisplay = showAllItems ? tiles : tiles.slice(0, SHOWN_ITEMS_COUNT);
 
@@ -85,16 +87,17 @@ export class TilesList extends React.Component<ITilesListProps, ITilesListState>
                     {/* The following items are tiles placeholders, its intention to properly distribute tile width depending from screen resolution*/}
                     <div /><div /><div />
                 </nav>
-                {(!showAllItems && (tiles.length > tilesToDisplay.length)) && <button
-                    className={"sdl-button sdl-button-large sdl-button-purpose-confirm graphene show-all-tiles"}
-                    onClick={() => {
+                {(!showAllItems && (tiles.length > tilesToDisplay.length)) && <Button
+                    skin="graphene"
+                    purpose={ButtonPurpose.CONFIRM}
+                    events={{"click": () => {
                         /* istanbul ignore if */
                         if (!this._isUnmounted) {
                             this.setState({
                                 showAllItems: true
                             });
                         }
-                    } }>{services.localizationService.formatMessage("components.tiles.all")}</button>}
+                    } }}>{viewAllLabel}</Button>}
             </section>);
     }
 

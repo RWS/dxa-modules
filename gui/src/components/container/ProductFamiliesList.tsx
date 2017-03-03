@@ -89,21 +89,22 @@ export class ProductFamiliesList extends React.Component<{}, IProductFamiliesLis
                             buttons={errorButtons} />
                         : productFamilies
                             ? (productFamilies.length > 0)
-                                ? (<TilesList tiles={productFamilies.map((productFamily: IProductFamily) => {
-                                    return {
-                                        title: productFamily.title,
-                                        loadableContent: () => {
-                                            return Promise.resolve(productFamily.description);
-                                        },
-                                        hasWarning: productFamily.hasWarning,
-                                        navigateTo: () => {
-                                            /* istanbul ignore else */
-                                            if (router) {
-                                                router.push(Url.getProductFamilyUrl(productFamily.title));
+                                ? (<TilesList viewAllLabel={formatMessage("components.productfamilies.view.all")}
+                                    tiles={productFamilies.map((productFamily: IProductFamily) => {
+                                        return {
+                                            title: productFamily.title,
+                                            loadableContent: () => {
+                                                return Promise.resolve(productFamily.description);
+                                            },
+                                            hasWarning: productFamily.hasWarning,
+                                            navigateTo: () => {
+                                                /* istanbul ignore else */
+                                                if (router) {
+                                                    router.push(Url.getProductFamilyUrl(productFamily.title));
+                                                }
                                             }
-                                        }
-                                    } as ITile;
-                                })} />)
+                                        } as ITile;
+                                    })} />)
                                 : <div className={"no-available-publications-label"}>{formatMessage("components.productfamilies.no.published.publications")}</div>
                             : <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} />
                 }

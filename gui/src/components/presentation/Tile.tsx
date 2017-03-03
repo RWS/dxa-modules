@@ -2,7 +2,8 @@ import * as React from "react";
 import { Promise } from "es6-promise";
 import { IAppContext } from "components/container/App";
 import { String as StringHelper } from "utils/String";
-import { ActivityIndicator } from "sdl-controls-react-wrappers";
+import { ActivityIndicator, Button } from "sdl-controls-react-wrappers";
+import { ButtonPurpose } from "sdl-controls";
 
 import "components/presentation/styles/Tile";
 
@@ -179,16 +180,18 @@ export class Tile extends React.Component<ITileProps, ITileState> {
                             : loadedTileContent}
                 </div>
                 {!tileContentIsLoading && (
-                    error && <button
-                        className={"sdl-button sdl-button-large sdl-button-purpose-critical graphene"}
-                        onClick={() => this._loadTileContent(tile)}>{formatMessage("control.button.retry")}
-                    </button>
-                    || tileNavigate && <button
-                        className={"sdl-button sdl-button-large sdl-button-purpose-confirm graphene"}
-                        onClick={() => {
+                    error && <Button
+                        skin="graphene"
+                        purpose={ButtonPurpose.CONFIRM}
+                        events={{"click": () => this._loadTileContent(tile)}}>{formatMessage("control.button.retry")}
+                    </Button>
+                    || tileNavigate && <Button
+                        skin="graphene"
+                        purpose={ButtonPurpose.CONFIRM}
+                        events={{"click": () => {
                             tileNavigate();
-                        } }>{formatMessage("components.tiles.more")}
-                    </button>)}
+                        }}}>{formatMessage("components.tiles.more")}
+                    </Button>)}
             </div >
         );
     }
