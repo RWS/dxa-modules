@@ -187,7 +187,8 @@ export class PublicationsList extends React.Component<IPublicationsListProps, IP
         /* istanbul ignore if */
         if (!this._isUnmounted) {
             this.setState({
-                publications: publications
+                publications: publications,
+                error: undefined
             });
         }
     }
