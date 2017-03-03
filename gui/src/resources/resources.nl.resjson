@@ -12,7 +12,7 @@
   "components.productfamilies.no.published.publications": "Nog geen publicaties verschenen",
   "components.productfamilies.view.all": "Bekijk alle producten",
   "components.publicationslist.view.all": "Bekijk alle publicaties",
-  "control.button.retry": "Opnieuw proberen"
+  "control.button.retry": "Opnieuw proberen",
   "error.default.message": "Als u nog steeds deze fout ziet, gebruik dan de onderstaande links om naar de home page of zoek de documentatie te vinden wat u zoekt.",
   "error.default.title": "Oeps, er is iets fout gegaan!",
   "error.page.not.found": "We zijn erg jammer, maar deze pagina is niet beschikbaar op deze publicatie. Zorg ervoor dat de URL die u hebt ingevoerd correct is.",

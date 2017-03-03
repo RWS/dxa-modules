@@ -1,7 +1,24 @@
 import { String } from "sdl-models";
 import { ILocalizationService } from "services/interfaces/LocalizationService";
-const resources = require("resources/resources.default") as { [path: string]: string };
+import { Store } from "redux";
+import { IState } from "store/interfaces/State";
 
+interface IDic { [path: string]: string; };
+interface IDics { [lang: string]: IDic; };
+
+const DEFAULT_LANGUAGE: string = "en";
+// Need to be loaded or configured somehow.
+const Languages = ["en", "nl"];
+
+const loadDics = (langs: string[]): IDics => Object.assign({},
+     ...langs.map(lang => require(`resources/resources.${lang}`))
+    .map((dictionary: {}) => dictionary as IDic)
+    .map((dictionary: IDic, index: number) => ({[langs[index]]: dictionary})));
+
+const Resources: IDics = loadDics(Languages);
+const translate = (lang: string) => (path: string) => lang in Resources ? Resources[lang][path] : null;
+
+const formatMessage = (resource: string, variables?: string[]) => Array.isArray(variables) ? String.format(resource, variables) : resource;
 /**
  * Localization service
  *
@@ -10,6 +27,15 @@ const resources = require("resources/resources.default") as { [path: string]: st
  * @implements {ILocalizationService}
  */
 export class LocalizationService implements ILocalizationService {
+    private store: Store<IState>;
+
+    public constructor() {
+        this.formatMessage = this.formatMessage.bind(this);
+    }
+
+    public setStore(store: Store<IState>): void {
+        this.store = store;
+    }
 
     /**
      * Format a message
@@ -19,17 +45,10 @@ export class LocalizationService implements ILocalizationService {
      * @returns {string}
      */
     public formatMessage(path: string, variables?: string[]): string {
-        const resource = resources[path];
-        // TODO: if we have localization we should fall back to the default resources if a translation cannot be found
-        // Eg when resource is not availble in nl use the one inside the default resource file
-        if (resource) {
-            if (Array.isArray(variables)) {
-                return String.format(resource, variables);
-            } else {
-                return resource;
-            }
-        }
-        return `Unable to localize: ${path}`;
+        const { language } = this.store.getState();
+        const resource = translate(language)(path) || translate(DEFAULT_LANGUAGE)(path);
+
+        return resource ? formatMessage(resource, variables) : `[${language}] Unable to localize: ${path}`;
     }
 }
 

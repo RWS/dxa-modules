@@ -9,6 +9,8 @@ export interface IPublication {
     ProductFamily?: string | null;
     ProductReleaseVersion?: string | null;
     Title: string;
+    VersionRef?: string;
+    Language?: string;
 }
 export interface ISitemapItem {
     HasChildNodes: boolean;

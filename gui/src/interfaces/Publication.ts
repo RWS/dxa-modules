@@ -36,4 +36,20 @@ export interface IPublication {
      * @memberOf IPublication
      */
     productReleaseVersion?: string | null;
+
+    /**
+     * Publication verison
+     *
+     * @type {string}
+     * @memberOf IPublication
+     */
+    versionRef?: string;
+
+    /**
+     * Publication language
+     *
+     * @type {string}
+     * @memberOf IPublication
+     */
+    language?: string;
 }

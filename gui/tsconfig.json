@@ -21,7 +21,7 @@
     "noEmitOnError": true,
     "emitBOM": false,
     "suppressImplicitAnyIndexErrors": false,
-    "target": "es5",
+    "target": "es6",
     "declaration": true,
     "declarationDir": "../typings/",
     "experimentalDecorators": true,
