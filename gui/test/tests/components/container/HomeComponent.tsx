@@ -28,7 +28,9 @@ class HomeComponent extends TestBase {
             });
 
             afterAll(() => {
-                target.parentElement.removeChild(target);
+                if (target.parentElement) {
+                    target.parentElement.removeChild(target);
+                }
             });
 
             it("show loading indicator on initial render", (): void => {
@@ -48,7 +50,8 @@ class HomeComponent extends TestBase {
 
                 // Use a timeout to allow the DataStore to return a promise with the data
                 setTimeout((): void => {
-                    expect(homeNode.querySelector(".sdl-dita-delivery-searchbar input").getAttribute("placeholder")).toContain(errorMessage);
+                    const input = homeNode.querySelector(".sdl-dita-delivery-searchbar input") as HTMLInputElement;
+                    expect(input.getAttribute("placeholder")).toContain(errorMessage);
                     done();
                 }, 0);
             });
@@ -60,17 +63,18 @@ class HomeComponent extends TestBase {
                 const searchBarNode = homeNode.querySelector(".sdl-dita-delivery-searchbar");
                 expect(searchBarNode).not.toBeNull();
 
-                const toggleSearchButtonNode = homeNode.querySelector(".sdl-dita-delivery-topbar-expand-search");
+                let toggleSearchButtonNode = homeNode.querySelector(".sdl-dita-delivery-topbar-expand-search");
                 expect(toggleSearchButtonNode).not.toBeNull();
 
-                expect(getComputedStyle(homeNode.querySelector(".sdl-dita-delivery-searchbar")).top).toBe("-150px");
-                TestUtils.Simulate.click(toggleSearchButtonNode);
+                expect(getComputedStyle(homeNode.querySelector(".sdl-dita-delivery-searchbar") as HTMLButtonElement).top).toBe("-150px");
+                TestUtils.Simulate.click(toggleSearchButtonNode as HTMLButtonElement);
 
                 // Use a timeout to allow animation to be finished
                 setTimeout((): void => {
-                    expect(getComputedStyle(homeNode.querySelector(".sdl-dita-delivery-searchbar")).top).toBe("0px");
-                    const inputElement = searchBarNode.querySelector("input");
-                    const overlayNode = homeNode.querySelector(".sdl-dita-delivery-nav-mask");
+                    const searchBar = homeNode.querySelector(".sdl-dita-delivery-searchbar") as HTMLElement;
+                    expect(getComputedStyle(searchBar).top).toBe("0px");
+                    const inputElement = (searchBarNode as HTMLElement).querySelector("input") as HTMLInputElement;
+                    const overlayNode = homeNode.querySelector(".sdl-dita-delivery-nav-mask") as HTMLElement;
                     expect(getComputedStyle(overlayNode).display).toBe("none");
                     TestUtils.Simulate.focus(inputElement);
 
@@ -78,10 +82,10 @@ class HomeComponent extends TestBase {
                     TestUtils.Simulate.blur(inputElement);
 
                     expect(getComputedStyle(overlayNode).display).toBe("none");
-                    TestUtils.Simulate.click(toggleSearchButtonNode);
+                    TestUtils.Simulate.click(toggleSearchButtonNode as HTMLElement);
                     // Use a timeout to allow animation to be finished
                     setTimeout((): void => {
-                        expect(getComputedStyle(homeNode.querySelector(".sdl-dita-delivery-searchbar")).top).toBe("-150px");
+                        expect(getComputedStyle(homeNode.querySelector(".sdl-dita-delivery-searchbar") as HTMLElement).top).toBe("-150px");
                         done();
                     }, 310);
                 }, 310);

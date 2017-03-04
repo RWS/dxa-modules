@@ -25,7 +25,9 @@ class TilesListComponent extends TestBase {
             });
 
             afterAll(() => {
-                target.parentElement.removeChild(target);
+                if (target.parentElement) {
+                    target.parentElement.removeChild(target);
+                }
             });
 
             it("renders tiles list", (): void => {
@@ -45,8 +47,8 @@ class TilesListComponent extends TestBase {
                 const tiles = TestUtils.scryRenderedDOMComponentsWithClass(tilesList, "sdl-dita-delivery-tile");
                 expect(tiles.length).toBe(2);
 
-                tiles.forEach((tile, index) => {
-                    expect(tile.querySelector("h3").textContent).toBe(tilesItems[index].title);
+                tiles.forEach((title, index) => {
+                    expect((title.querySelector("h3") as HTMLElement).textContent).toBe(tilesItems[index].title);
                 });
             });
 
@@ -70,7 +72,7 @@ class TilesListComponent extends TestBase {
                 // tslint:disable-next-line:no-any
                 const viewAllButtonComp = TestUtils.findRenderedComponentWithType(tilesList, Button as any);
                 expect(viewAllButtonComp).not.toBeNull();
-                const viewAllButtonNode = ReactDOM.findDOMNode(viewAllButtonComp).querySelector("button");
+                const viewAllButtonNode = ReactDOM.findDOMNode(viewAllButtonComp).querySelector("button") as HTMLButtonElement;
                 expect(viewAllButtonNode.textContent).toBe("View all");
                 viewAllButtonNode.click();
 

@@ -34,7 +34,9 @@ class PublicationContentComponent extends TestBase {
             });
 
             afterAll(() => {
-                target.parentElement.removeChild(target);
+                if (target.parentElement) {
+                    target.parentElement.removeChild(target);
+                }
             });
 
             it("show loading indicator on initial render", (): void => {
@@ -205,9 +207,9 @@ class PublicationContentComponent extends TestBase {
                     const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
                     const errorElement = domNode.querySelector(".sdl-dita-delivery-error");
                     expect(errorElement).not.toBeNull("Error dialog not found");
-                    const errorTitle = errorElement.querySelector("h1");
+                    const errorTitle = (errorElement as HTMLElement).querySelector("h1") as HTMLElement;
                     expect(errorTitle.textContent).toEqual("mock-error.default.title");
-                    const buttons = errorElement.querySelectorAll(".sdl-dita-delivery-button-group button");
+                    const buttons = (errorElement as HTMLElement).querySelectorAll(".sdl-dita-delivery-button-group button");
                     expect(buttons.length).toEqual(2);
                     done();
                 }, 500);
@@ -248,9 +250,9 @@ class PublicationContentComponent extends TestBase {
                     setTimeout((): void => {
                         // tslint:disable-next-line:no-any
                         const treeView = TestUtils.findRenderedComponentWithType(publicationContent, TreeView as any);
-                        const tocItems = ReactDOM.findDOMNode(treeView).querySelector("ul");
+                        const tocItems = ReactDOM.findDOMNode(treeView).querySelector("ul") as HTMLUListElement;
                         expect(tocItems.childNodes.length).toBe(2);
-                        expect(tocItems.querySelector(".active").textContent).toBe(item.title);
+                        expect((tocItems.querySelector(".active") as HTMLElement).textContent).toBe(item.title);
                         ready();
                     }, 0);
                 };
