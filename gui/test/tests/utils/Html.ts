@@ -89,16 +89,17 @@ describe(`Html utils tests.`, (): void => {
         function createLargePage(): HTMLElement {
             const element = document.createElement("div");
             element.id = "large-page";
-            element.innerHTML = `<h style="margin-bottom:1000px">Header</h1>
-                <h2 style="margin-bottom:1000px">Header</h2>
-                <h3 style="margin-bottom:1000px">Header</h3>
-                <h4 style="margin-bottom:1000px">Header</h4>`;
-            document.body.insertBefore(element, document.body.firstChild);
+            element.innerHTML = `<h1 style="margin:0 0 1000px 0">Header</h1>
+                <h2 style="margin:0 0 1000px 0">Header</h2>
+                <h3 style="margin:0 0 1000px 0">Header</h3>
+                <h4 style="margin:0 0 1000px 0">Header</h4>`;
             return element;
         }
 
         beforeEach((): void => {
             largePage = createLargePage();
+            document.body.insertBefore(largePage, document.body.firstChild);
+            document.body.scrollTop = 0;
         });
 
         afterEach(() => {
@@ -135,11 +136,10 @@ describe(`Html utils tests.`, (): void => {
             expect(document.body.scrollTop).toBe(0);
         });
 
-        it("can scroll an element into view when it is below the view port", (): void => {
-            const element = createLargePage();
+        it("can scroll an element into view when it is below the view port", () => {
             expect(document.body.scrollTop).toBe(0);
             // Scroll third header in to view
-            Html.scrollIntoView(document.body, element.querySelector("h3") as HTMLElement);
+            Html.scrollIntoView(document.body, largePage.querySelector("h3") as HTMLElement);
             // We cannot test this using phantomjs
             // In phantomjs the element doesn't show a scroll bar
             if (/PhantomJS/.test(window.navigator.userAgent)) {

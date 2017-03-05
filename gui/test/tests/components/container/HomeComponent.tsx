@@ -60,19 +60,16 @@ class HomeComponent extends TestBase {
                 const app = this._renderComponent(target);
                 const homeNode = ReactDOM.findDOMNode(app);
 
-                const searchBarNode = homeNode.querySelector(".sdl-dita-delivery-searchbar");
-                expect(searchBarNode).not.toBeNull();
-
-                let toggleSearchButtonNode = homeNode.querySelector(".sdl-dita-delivery-topbar-expand-search");
+                const searchBarNode = homeNode.querySelector(".sdl-dita-delivery-searchbar") as HTMLElement;
+                const toggleSearchButtonNode = homeNode.querySelector(".sdl-dita-delivery-topbar-expand-search");
                 expect(toggleSearchButtonNode).not.toBeNull();
 
-                expect(getComputedStyle(homeNode.querySelector(".sdl-dita-delivery-searchbar") as HTMLButtonElement).top).toBe("-150px");
-                TestUtils.Simulate.click(toggleSearchButtonNode as HTMLButtonElement);
+                expect(getComputedStyle(searchBarNode).top).toBe("-150px");
+                TestUtils.Simulate.click(toggleSearchButtonNode as HTMLElement);
 
                 // Use a timeout to allow animation to be finished
                 setTimeout((): void => {
-                    const searchBar = homeNode.querySelector(".sdl-dita-delivery-searchbar") as HTMLElement;
-                    expect(getComputedStyle(searchBar).top).toBe("0px");
+                    expect(getComputedStyle(searchBarNode).top).toBe("0px"); /* It's 50 in chrome :( */
                     const inputElement = (searchBarNode as HTMLElement).querySelector("input") as HTMLInputElement;
                     const overlayNode = homeNode.querySelector(".sdl-dita-delivery-nav-mask") as HTMLElement;
                     expect(getComputedStyle(overlayNode).display).toBe("none");
@@ -85,7 +82,7 @@ class HomeComponent extends TestBase {
                     TestUtils.Simulate.click(toggleSearchButtonNode as HTMLElement);
                     // Use a timeout to allow animation to be finished
                     setTimeout((): void => {
-                        expect(getComputedStyle(homeNode.querySelector(".sdl-dita-delivery-searchbar") as HTMLElement).top).toBe("-150px");
+                        expect(getComputedStyle(searchBarNode).top).toBe("-150px");
                         done();
                     }, 310);
                 }, 310);
