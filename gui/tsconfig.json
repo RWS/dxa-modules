@@ -21,7 +21,8 @@
     "noEmitOnError": true,
     "emitBOM": false,
     "suppressImplicitAnyIndexErrors": false,
-    "target": "es6",
+    "target": "es5",
+    "lib": ["es6", "es5", "dom", "dom.iterable", "scripthost"],
     "declaration": true,
     "declarationDir": "../typings/",
     "experimentalDecorators": true,
@@ -35,6 +36,7 @@
   "compileOnSave": false, // Gulp does this for us
   "exclude": [
     "node_modules",
-    "dist"
+    "dist",
+    "test"
   ]
 }
