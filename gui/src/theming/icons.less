@@ -7,6 +7,7 @@
 @iconFont: "SDLfont";
 @iconFontPath: "./fonts/SDLfont";
 @iconArrowRight: "\e013";
+@iconArrowDown: "\e02B";
 @iconBack: "\e04f";
 @iconChecked: "\e039";
 @iconClose: "\e00a";
@@ -70,9 +71,8 @@
 
 .icon-arrow-down(@size: 24px) {
     .icon-font-default-style(@size);
-    transform: rotate(90deg);
     &:before {
-        content: @iconArrowRight;
+        content: @iconArrowDown;
     }
 }
 

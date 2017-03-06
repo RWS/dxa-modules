@@ -112,7 +112,6 @@
             }
             .dropdown-menu {
                 .dropdown-items {
-                    .dropdown-list();
                     max-height: @dropdownItemHeight * 10 + (10 + 1) * 2; // 10 items + paddings + borders
                     overflow-y: auto;
                     background-color: white;
@@ -121,8 +120,14 @@
                     width: @dropdownMenuWidth;
                     max-width: @dropdownMenuWidth;
                     padding: 10px 0;
-                    box-shadow: 0 5px 10px -5px fade(@neutralColor1, 15);
+                    box-shadow: 0 2px 0 0 @neutralColor5;
                     li {
+                       .import-regular-font();
+                        padding-left: 18px;
+                        padding-right: 5px;
+                        color: @neutralColor4;
+                        font-size: @itemSize;
+                        line-height: @itemSize;
                         box-sizing: border-box;
                         height: @dropdownItemHeight;
                         border-bottom: 1px solid @neutralColor5;

@@ -1,8 +1,9 @@
 import * as React from "react";
 import { IndexLink } from "react-router";
 import { path } from "utils/Path";
-import { Dropdown } from "sdl-controls-react-wrappers";
-import { ILanguage } from "sdl-controls";
+import { Dropdown } from "components/controls/Dropdown";
+import { IDropdownValue } from "sdl-controls";
+import { IAppContext } from "components/container/App";
 
 import "./styles/TopBar";
 
@@ -33,19 +34,11 @@ export interface ITopBarProps {
 /**
  * TopBar
  */
-export const TopBar = (props: ITopBarProps) => {
-    const {children} = props;
+export const TopBar: React.StatelessComponent<ITopBarProps> = (props: ITopBarProps, context: IAppContext): JSX.Element => {
+    const { localizationService } = context.services;
+    const { children } = props;
+    const languages: Array<IDropdownValue> = localizationService.getLanguages().map(language => ({"text": language.name, "value": language.iso}));
 
-    // List of mock languages
-    let languages: Array<ILanguage> = [];
-    languages.push({"name": "English", "iso": "en"});
-    languages.push({"name": "Deutsch", "iso": "de"});
-    languages.push({"name": "Nederlands", "iso": "nl"});
-    languages.push({"name": "Русский", "iso": "ru"});
-    languages.push({"name": "ქართული", "iso": "ka"});
-    languages.push({"name": "עברית", "iso": "he"});
-    languages.push({"name": "العربية", "iso": "ar"});
-    languages.push({"name": "中文", "iso": "zh"});
     return (
         <div className={"sdl-dita-delivery-topbar"}>
             <header>
@@ -57,7 +50,7 @@ export const TopBar = (props: ITopBarProps) => {
                 <div className={"sdl-dita-delivery-topbar-language"} >
                     <span />
                 </div>
-                <Dropdown languages={languages} onClickItem={(id) => console.log(id)} value={languages[0]} />
+                <Dropdown items={languages}/>
                 <div className={"sdl-dita-delivery-topbar-user"} >
                     <span />
                 </div>
@@ -65,3 +58,7 @@ export const TopBar = (props: ITopBarProps) => {
         </div>
     );
 };
+
+TopBar.contextTypes = {
+    services: React.PropTypes.object.isRequired
+} as React.ValidationMap<IAppContext>;
