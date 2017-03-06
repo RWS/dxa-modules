@@ -3,41 +3,128 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import "./styles/Dropdown";
 
+/**
+ * Event extension for TypeScript to get event's path property
+ */
 interface IPathEvent extends MouseEvent {
     path: HTMLElement[];
 }
 
+/**
+ * Dropdown value item 
+ * 
+ * @export
+ * @interface IDropdownValue
+ */
 export interface IDropdownValue {
+    /**
+     * Text of dropdown item
+     * 
+     * @type {string}
+     */
     text: string;
+    /**
+     * Value of dropdown item
+     * 
+     * @type {string}
+     */
     value: string;
 }
 
+/**
+ * Toggle states to hide \ show dropdown
+ *
+ * @export
+ */
 export enum DropdownToggleState {
     "OFF",
     "ON"
 };
 
+/**
+ * Interface for onClick item function
+ * 
+ * @export
+ * @interface IClick
+ */
 export interface IClick {
+    /**
+     * Function interface 
+     * 
+     * @returns {void} 
+     */
     (index: number): void;
 }
 
+/**
+ * Dropdown interface
+ *
+ * @export
+ * @interface IDrodownProps
+ */
 export interface IDropdownProps {
+    /**
+     * Initial selected item of dropdown
+     * 
+     * @type {IDropdownValue}
+     */
     selected?: IDropdownValue;
+    /**
+     * Placeholder for dropdown text when no element is selected
+     * 
+     * @type {string}
+     */
     placeHolder?: string;
+    /**
+     * List of dropdown items
+     * 
+     * @type {IDropdownValue[]}
+     */
     items?: IDropdownValue[];
+    /**
+     * Executed function of selected item
+     * 
+     * @type {IClick}
+     */
     onClickItem?: IClick;
 }
 
+/**
+ * Dropdown state
+ *
+ * @export
+ * @interface
+ */
 export interface IDropdownState {
+    /**
+     * Current status of dropdown component (shown \ hidden)
+     * 
+     * @type {DropdownToggleState}
+     */
     status: DropdownToggleState;
+    /**
+     * Current selected item
+     * @type {IDropdownValue | null}
+     */
     selected: IDropdownValue | null;
+    /**
+     * List of possible items
+     * @type {IDropdownValue[]}
+     */
     items: IDropdownValue[];
 }
 
+/**
+ * Dropdown
+ */
 export class Dropdown extends React.Component<IDropdownProps, IDropdownState> {
 
     private _element: HTMLElement;
 
+    /**
+     * Creates an instance of Dropdown
+     * 
+     */
     constructor() {
         super();
         this.state = {
@@ -49,14 +136,30 @@ export class Dropdown extends React.Component<IDropdownProps, IDropdownState> {
         this.toggleOff();
     }
 
+    /**
+     * Check if dropdown is opened
+     *
+     * @returns {boolean} true if dropdown is openen, otherwise false
+     */
     public isOpen(): boolean {
         return this.state.status == DropdownToggleState.ON;
     }
 
+    /**
+     * Check if dropdown is closed
+     *
+     * @returns {boolean} true if dropdown is closed, otherwise false
+     */
     public isClose(): boolean {
         return this.state.status == DropdownToggleState.OFF;
     }
 
+    /**
+     * Open dropdown
+     *
+     * @param {Event} e 
+     * @returns {void}
+     */
     public toggleOn(e?: Event): void {
         if (!this.isOpen()) {
             this.setState({
@@ -65,6 +168,12 @@ export class Dropdown extends React.Component<IDropdownProps, IDropdownState> {
         }
     }
 
+    /**
+     * Close dropdown
+     *
+     * @param {Event} e 
+     * @returns {void}
+     */
     public toggleOff(e?: Event): void {
         if (!this.isClose()) {
             this.setState({
@@ -73,6 +182,12 @@ export class Dropdown extends React.Component<IDropdownProps, IDropdownState> {
         };
     }
 
+    /**
+     * Switch dropdown state
+     *
+     * @param {Event} e 
+     * @returns {void}
+     */
     public toggle(e?: Event): void {
         if (this.isOpen()) {
             this.toggleOff(e);
@@ -81,14 +196,27 @@ export class Dropdown extends React.Component<IDropdownProps, IDropdownState> {
         }
     }
 
+    /**
+     * Return current value of selected item
+     *
+     * @returns {string | null}
+     */
     public getValue(): string | null {
         return this.state.selected && this.state.selected.value;
     }
 
+    /**
+     * Return current text of selected item
+     *
+     * @returns {string | null}
+     */
     public getText(): string | null {
         return this.state.selected && this.state.selected.text;
     }
 
+    /**
+     * Component will mount 
+     */
     public componentWillMount(): void {
         const props = this.props;
         let selected: IDropdownValue | null = (props.selected) ? props.selected
@@ -102,18 +230,20 @@ export class Dropdown extends React.Component<IDropdownProps, IDropdownState> {
         } as IDropdownState);
     }
 
+    /**
+     * Component did mount
+     */
     public componentDidMount(): void {
         const domNode = ReactDOM.findDOMNode(this);
         this._element = domNode as HTMLElement;
         document.addEventListener("click", this.onFocusout.bind(this));
     }
 
-    public componentWillUpdate(nextProps: IDropdownProps, nextState: IDropdownState): void {
-    }
-
-    public componentWillUnmount(): void {
-    }
-
+    /**
+     * Render the component
+     *
+     * @returns {JSX.Element}
+     */
     public render(): JSX.Element {
         let items: JSX.Element[] = [];
         let options: JSX.Element[] = [];
