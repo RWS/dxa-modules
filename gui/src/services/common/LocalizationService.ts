@@ -12,6 +12,13 @@ const resources = require("resources/resources.default") as { [path: string]: st
 export class LocalizationService implements ILocalizationService {
 
     /**
+     *
+     * @type {string[]}
+     * @memberOf LocalizationService
+     */
+    public rtlLanguages: string[] = ["ar", "he", "ur"];
+
+    /**
      * Format a message
      *
      * @param {string} path Resource path
@@ -32,10 +39,15 @@ export class LocalizationService implements ILocalizationService {
         return `Unable to localize: ${path}`;
     }
 
-    // This is interim method
-    // Implement it in the multi language story
-    public getDirection(): string {
-        return "rtl";
+    /**
+     *
+     * @param {string} lang
+     * @returns {("rtl" | "ltr")}
+     *
+     * @memberOf LocalizationService
+     */
+    public getDirection(lang: string): "rtl" | "ltr" {
+        return this.rtlLanguages.some((val: string) => val === lang) ? "rtl" : "ltr";
     }
 }
 

@@ -163,8 +163,10 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
         const { children } = this.props;
 
         const hasPublication = publicationId !== undefined;
+        const languageDirection = localizationService.getDirection("en");
 
         const appClass = ClassNames({
+            [`${languageDirection}`]: true,
             "sdl-dita-delivery-app": true,
             "open": hasPublication && isNavOpen,
             "search-open": searchIsOpen,
