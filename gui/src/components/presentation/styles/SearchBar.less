@@ -1,4 +1,4 @@
-@import (reference) "../../../theming/styles.less";
+@import (reference) "~theme-styles";
 
 .sdl-dita-delivery-searchbar {
     display: inline-block;
@@ -7,23 +7,24 @@
     width: 100%;
     background-image: url("../images/search-bar-background.jpg");
     text-align: center;
-
+    z-index: 995;
     .input-area {
         display: flex;
         max-width: @screenXl;
         margin: 0 auto;
-        padding: 5px 15px;
+        padding: 5px 0;
         margin-top: 49px;
-
+        border-bottom: 1px solid @neutralColor6;
+        width: ~"calc(100% - 30px)";
         input {
             width: 100%;
             background-color: transparent;
             border-style: none;
             color: @neutralColor6;
-            padding-left: 15px;
-            border-bottom: 1px solid @neutralColor6;
             text-overflow: ellipsis;
-            .header-font(400, 28px, 28px);
+            .header-font(400, 28px, normal);
+            height: 28px;
+            padding-left: 15px;
             &:focus {
                 outline: none;
             }
@@ -32,14 +33,11 @@
                 opacity: 1;
             }
         }
-
         .search-button {
             cursor: pointer;
-            padding: 5px 0;
             color: @neutralColor6;
-            .icon-search(24px);
+            .icon-search(28px);
             padding-right: 15px;
-            border-bottom: 1px solid @neutralColor6;
         }
     }
 }

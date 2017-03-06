@@ -9,7 +9,8 @@
     "react-router/history": "registry:dt/react-router/history#2.0.0+20160830150755",
     "source-map": "registry:dt/source-map#0.0.0+20161003134342",
     "uglify-js": "registry:dt/uglify-js#2.6.1+20160316155526",
-    "webpack-env": "github:DefinitelyTyped/DefinitelyTyped/webpack-env/index.d.ts#50f20d7af556db2da21e70de65f5c909ab5145ca"
+    "webpack-env": "github:DefinitelyTyped/DefinitelyTyped/webpack-env/index.d.ts#50f20d7af556db2da21e70de65f5c909ab5145ca",
+    "classnames": "registry:dt/classnames#0.0.0+20161113184211"
   },
   "dependencies": {
     "webpack": "github:DefinitelyTyped/DefinitelyTyped/webpack/index.d.ts#df177d2915be6639a2d30d39805985ea9a3e10e6"

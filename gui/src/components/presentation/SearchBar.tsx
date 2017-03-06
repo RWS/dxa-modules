@@ -16,6 +16,19 @@ export interface ISearchBarProps {
     onSearch?: (query: string) => void;
 
     /**
+     * Called whenever a search gets active
+     *
+     * @memberOf ISearchBarProps
+     */
+    onFocus?: (e: React.FocusEvent) => void;
+    /**
+     * Called whenever a search looses its focus
+     *
+     * @memberOf ISearchBarProps
+     */
+    onBlur?: (e: React.FocusEvent) => void;
+
+    /**
      * Placeholder label
      *
      * @type {string}
@@ -46,7 +59,11 @@ export const SearchBar: React.StatelessComponent<ISearchBarProps> = (props: ISea
     return (
         <div className="sdl-dita-delivery-searchbar">
             <div className="input-area">
-                <input type="text" placeholder={props.placeholderLabel} onKeyUp={_onKeyUp} />
+                <input type="text" placeholder={props.placeholderLabel}
+                onKeyUp={_onKeyUp}
+                onFocus={props.onFocus}
+                onBlur={props.onBlur}
+                />
                 <div className="search-button" onClick={_search} />
             </div>
         </div>

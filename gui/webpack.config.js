@@ -9,7 +9,8 @@ module.exports = (isTest, isDebug) => {
     const entries = {
         main: './src/Main.tsx',
         server: './src/Server.tsx',
-        vendor: ['es6-promise', 'react-router', 'ts-helpers', 'sdl-models', 'sdl-controls', 'sdl-controls-react-wrappers']
+        lib: './src/Lib.ts',
+        vendor: ['classnames', 'es6-promise', 'react-router', 'ts-helpers', 'sdl-models', 'sdl-controls', 'sdl-controls-react-wrappers']
     };
     const testEntries = Object.assign({
         test: './test/Main.ts',
@@ -30,12 +31,16 @@ module.exports = (isTest, isDebug) => {
             alias: {
                 React: 'react',
                 ReactDOM: 'react-dom',
-                ReactDOMServer: 'react-dom/server'
+                ReactDOMServer: 'react-dom/server',
+                // This alias is needed so customization can happen on top of the theming folder
+                // by using dependency injection techniques
+                'theme-styles.less': path.resolve(__dirname, 'src/theming/styles.less')
             },
             modules: [
                 path.resolve(__dirname),
                 path.resolve(__dirname, 'src'),
-                path.resolve(__dirname, 'node_modules')
+                path.resolve(__dirname, 'node_modules'),
+                path.resolve(__dirname, 'dist/lib')
             ],
             extensions: ['.ts', '.tsx', '.js', '.css', '.less', '.resjson']
         },
@@ -51,11 +56,16 @@ module.exports = (isTest, isDebug) => {
                 loader: extractCSS.extract([cssLoader, 'postcss-loader', 'less-loader'])
             }, {
                 test: /\.tsx?$/,
-                loader: 'ts-loader'
+                loader: ['ts-lib-loader', 'ts-loader']
             }, {
                 test: /\.resjson$/,
                 loader: 'json-loader'
             }]
+        },
+        resolveLoader: {
+            modules: ["./build/webpack-loaders", "web_loaders", "web_modules", "node_loaders", "node_modules"],
+            extensions: [".webpack-loader.js", ".web-loader.js", ".loader.js", ".js"],
+            mainFields: ["webpackLoader", "webLoader", "loader", "main"]
         },
         externals: {
             react: 'React',
@@ -74,7 +84,7 @@ module.exports = (isTest, isDebug) => {
                 filename: '../index.html',
                 favicon: './node_modules/sdl-icons/icons/favicon.ico',
                 hash: true,
-                excludeChunks: ['test', 'server']
+                excludeChunks: ['lib', 'test', 'server']
             }),
             new Visualizer({
                 filename: '../bundle.stats.html'

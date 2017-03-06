@@ -22,6 +22,21 @@ const TITLE_MAX_CHARS = 250;
 export class Url {
 
     /**
+     * Creates a product family  url
+     *
+     * @static
+     * @param {string} productFamily product family
+     * @returns {string}
+     *
+     * @memberOf Url
+     */
+    public static getProductFamilyUrl(productFamily: string): string {
+        const rootPath = path.getRootPath();
+        // Don't slugify product family as we need to be able to look it up again
+        return `${rootPath}publications/${encodeURIComponent(productFamily)}`;
+    }
+
+    /**
      * Creates a publication url
      *
      * @static
@@ -98,6 +113,32 @@ export class Url {
     public static getAnchorUrl(pageUrl: string, anchorId: string): string {
         // Don't slugify the anchor as we need to be able to look it up again in the document
         return `${pageUrl}/${encodeURIComponent(anchorId)}`;
+    }
+
+    /**
+     * Parse a page url
+     * Format of a page url is "<context><pub-id>/<page-id>/<publication-title>/<page-title>"
+     *
+     * @static
+     * @param {string} url Url to parse
+     * @param {string} [rootPath] Root path of the application
+     * @returns {({ publicationId: string, pageId: string, publicationTitle?: string, pageTitle?: string } | undefined)}
+     * Returns an object with the different parameter values for the page url. If the url is not correct undefined is returned.
+     *
+     * @memberOf Url
+     */
+    public static parsePageUrl(url: string, rootPath?: string): { publicationId: string, pageId: string, publicationTitle?: string, pageTitle?: string } | undefined {
+        const rootPathValue = rootPath || path.getRootPath();
+        const parts = url.substring(rootPathValue.length).split("/");
+        if (parts.length >= 2) {
+            return {
+                publicationId: parts[0],
+                pageId: parts[1],
+                publicationTitle: parts[2],
+                pageTitle: parts[3]
+            };
+        }
+        return undefined;
     }
 
     private static _processTitle(title: string): string {

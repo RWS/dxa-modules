@@ -1,34 +1,50 @@
 [
   {
     "Id": "1420746",
-    "Title": "User Guide"
+    "Title": "User Guide",
+    "ProductFamily": "Mobile Phones",
+    "ProductReleaseVersion": "MP 330 2014"
   },
   {
     "Id": "1601084",
-    "Title": "Penguin guide"
+    "Title": "Penguin guide",
+    "ProductFamily": "Animals",
+    "ProductReleaseVersion": "Penguins (8.0.0)"
   },
   {
     "Id": "1611362",
-    "Title": "LS40-el"
+    "Title": "LS40-el",
+    "ProductFamily": "Komori",
+    "ProductReleaseVersion": "Komori CMS 2010"
   },
   {
     "Id": "1849903",
-    "Title": "בירה"
+    "Title": "בירה",
+    "ProductFamily": "SDL Knowledge Center",
+    "ProductReleaseVersion": "Beer 2017"
   },
   {
     "Id": "1881665",
-    "Title": "User Guide"
+    "Title": "User Guide",
+    "ProductFamily": "Mobile Phones",
+    "ProductReleaseVersion": "MP 330 (2.0.0)"
   },
   {
     "Id": "1961681",
-    "Title": "McAfee Virtual Technician 4.2"
+    "Title": "McAfee Virtual Technician 4.2",
+    "ProductFamily": "McAfee",
+    "ProductReleaseVersion": "McAfee Anti Virus 2008"
   },
   {
     "Id": "1961700",
-    "Title": "User Guide"
+    "Title": "User Guide",
+    "ProductFamily": "Mobile Phones",
+    "ProductReleaseVersion": "MP 330 (2.0.0)"
   },
   {
     "Id": "1961702",
-    "Title": "User Guide"
+    "Title": "User Guide",
+    "ProductFamily": "Mobile Phones",
+    "ProductReleaseVersion": "MP 330 (2.0.0)"
   }
 ]

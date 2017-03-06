@@ -2,15 +2,19 @@
   "name": "sdl-dita-delivery-web-app-gui",
   "version": "1.0.0-SNAPSHOT",
   "description": "GUI of the SDL Dita Delivery Web Application.",
+  "main": "dist/lib/Lib.js",
+  "typings": "dist/typings/src/Lib.d.ts",
   "dependencies": {
     "es6-promise": "~4.0.5",
+    "napa": "~2.3.0",
     "react": "~15.3.2",
     "react-dom": "~15.3.2",
     "react-router": "~3.0.0",
     "sdl-controls": "~0.1.0-5",
     "sdl-controls-react-wrappers": "~0.1.0-12",
     "sdl-models": "~0.1.0-4",
-    "ts-helpers": "~1.1.2"
+    "ts-helpers": "~1.1.2",
+    "classnames": "~2.2.5"
   },
   "devDependencies": {
     "async": "~2.1.4",
@@ -43,8 +47,6 @@
     "less": "~2.7.1",
     "less-loader": "~2.2.3",
     "lodash": "~4.17.4",
-    "napa": "~2.3.0",
-    "portfinder": "~1.0.3",
     "postcss-loader": "~1.2.2",
     "react-addons-test-utils": "~15.3.1",
     "remap-istanbul": "~0.8.3",
@@ -75,7 +77,6 @@
   },
   "author": "jbevers@sdl.com",
   "license": "Apache-2.0",
-  "private": true,
   "napa": {
     "dita-ot": "dita-ot/dita-ot#ff8fbfd1d1dc69773e0af1cd726408b651eba1ec"
   }

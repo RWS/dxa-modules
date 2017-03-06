@@ -6,7 +6,7 @@ import { Toc } from "components/presentation/Toc";
 import { Page } from "components/presentation/Page";
 import { ITaxonomy } from "interfaces/Taxonomy";
 import { IPage } from "interfaces/Page";
-import { ActivityIndicator, TreeView, ValidationMessage } from "sdl-controls-react-wrappers";
+import { ActivityIndicator, TreeView } from "sdl-controls-react-wrappers";
 import { TestBase } from "sdl-models";
 import { PageService } from "test/mocks/services/PageService";
 import { PublicationService } from "test/mocks/services/PublicationService";
@@ -117,7 +117,7 @@ class PublicationContentComponent extends TestBase {
                         id: "2",
                         title: "Second element",
                         hasChildNodes: false,
-                        url: `/${encodeURIComponent(PUBLICATION_ID)}/mp330/second-el-url`
+                        url: `/${encodeURIComponent(PUBLICATION_ID)}/12345/mp330/second-el-url`
                     }
                 ]);
                 const publicationContent = this._renderComponent(target);
@@ -125,7 +125,7 @@ class PublicationContentComponent extends TestBase {
                 // Spy on the router
                 spyOn(publicationContent.context.router, "push").and.callFake((path: string): void => {
                     // Check if routing was called with correct params
-                    expect(path).toBe(`/${encodeURIComponent(PUBLICATION_ID)}/mp330/second-el-url`);
+                    expect(path).toBe(`/${encodeURIComponent(PUBLICATION_ID)}/12345/mp330/second-el-url`);
 
                     // A page load was triggered by changing the selected item in the Toc
                     const page = TestUtils.findRenderedComponentWithType(publicationContent, Page);
@@ -201,32 +201,16 @@ class PublicationContentComponent extends TestBase {
                     const activityIndicators = TestUtils.scryRenderedComponentsWithType(publicationContent, ActivityIndicator as any);
                     expect(activityIndicators.length).toBe(0, "Activity indicator should not be rendered.");
                     const page = TestUtils.findRenderedComponentWithType(publicationContent, Page);
-                    // tslint:disable-next-line:no-any
-                    const validationMessage = TestUtils.findRenderedComponentWithType(page, ValidationMessage as any);
-                    expect(validationMessage).not.toBeNull("Could not find validation message.");
-                    const validationMessageNode = ReactDOM.findDOMNode(validationMessage);
-                    expect(validationMessageNode && validationMessageNode.textContent).toBe("Page failed to load!");
+
+                    const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
+                    const errorElement = domNode.querySelector(".sdl-dita-delivery-error");
+                    expect(errorElement).not.toBeNull("Error dialog not found");
+                    const errorTitle = errorElement.querySelector("h1");
+                    expect(errorTitle.textContent).toEqual("mock-error.default.title");
+                    const buttons = errorElement.querySelectorAll(".sdl-dita-delivery-button-group button");
+                    expect(buttons.length).toEqual(2);
                     done();
                 }, 500);
-            });
-
-            it("shows an error message in the search bar when the publication title failed to load", (done: () => void): void => {
-                const errorMessage = "Page title is invalid!";
-                services.publicationService.setMockDataPublication(errorMessage);
-                services.pageService.setMockDataPage(null, {
-                    id: "12345",
-                    content: "<div/>",
-                    title: "Title!",
-                    sitemapIds: null
-                });
-                const publicationContent = this._renderComponent(target, "123");
-
-                // Use a timeout to allow the DataStore to return a promise with the data
-                setTimeout((): void => {
-                    const publicationContentNode = ReactDOM.findDOMNode(publicationContent);
-                    expect(publicationContentNode.querySelector(".sdl-dita-delivery-searchbar input").getAttribute("placeholder")).toContain(errorMessage);
-                    done();
-                }, 0);
             });
 
             it("updates the toc when the location changes", (done: () => void): void => {

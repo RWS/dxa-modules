@@ -1,9 +1,8 @@
 /* Graphene overwrites for the TopBar Control */
 
-@import (reference) "../../../theming/styles.less";
+@import (reference) "~theme-styles";
 
 @topBarHeight: 50px;
-
 .sdl-dita-delivery-topbar {
     width: 100%;
     height: @topBarHeight;
@@ -14,72 +13,51 @@
     line-height: @topBarHeight;
     position: fixed;
     z-index: 999;
-
-    .sdl-dita-delivery-nav-mask {
-        background: @neutralColor1;
-        display: none;
-        height: 100vh;
-        opacity: 0;
-        position: fixed;
-        top: 0;
-        width: 100%;
-        z-index: 1005;
-    }
-
     header {
-        display: table;
         max-width: @screenXl;
         margin: 0 auto;
         width: 100%;
         position: relative;
         border-spacing: 15px 0;
-
+        /* New layout */
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: space-between;
+        /* New layout */
         > * {
-            display: table-cell;
-            vertical-align: middle;
-        }
-
-        .sdl-dita-delivery-topbar-expand-nav {
-            width: 24px;
-            display: none;
+            flex-grow: 0;
+            margin-right: 15px;
+            &:first-child {
+                margin-left: 15px;
+            }
             span {
-                margin: 0 15px;
-                .icon-hamburger(21px);
+                margin-right: 5px;
             }
         }
-
+        .spacer {
+            flex-grow: 1;
+        }
         .sdl-dita-delivery-topbar-logo {
             .icon-company-logo();
             background-size: 46px 21px;
             position: relative;
             top: -4px;
             background-position: left center;
-            .sdl-dita-delivery-app.rtl & {
-                background-position: right center;
-            }
             a {
                 height: 100%;
                 width: 100%;
                 display: inline-block;
             }
         }
-
         .sdl-dita-delivery-topbar-language {
             text-align: right;
-            .sdl-dita-delivery-app.rtl & {
-                text-align: left;
-            }
             span {
                 .icon-language(21px);
-                margin-right: 15px;
-                .sdl-dita-delivery-app.rtl & {
-                    margin-right: 0;
-                    margin-left: 15px;
-                }
             }
         }
-
-        .sdl-dita-delivery-topbar-user{
+        .sdl-dita-delivery-topbar-user {
             width: 24px;
             span {
                 .icon-user(21px);
@@ -89,63 +67,10 @@
 }
 
 @media screen and (max-width: @screenSm) {
-
-    .sdl-dita-delivery-app-nav {
-        &.open {
-            overflow: hidden;
-            .sdl-dita-delivery-topbar {
-                .sdl-dita-delivery-nav-mask {
-                    opacity: .5;
-                    display: block;
-                }
-            }
-        }
-
-        .sdl-dita-delivery-topbar {
-            .sdl-dita-delivery-topbar-expand-nav {
-                display: table-cell;
-                &:hover {
-                    cursor: pointer;
-                }
-            }
-
-            .sdl-dita-delivery-topbar-logo {
-                left: 0;
-                .sdl-dita-delivery-app.rtl& {
-                    left: auto;
-                    right: 0px;
-                }
-            }
-        }
-    }
-
     .sdl-dita-delivery-topbar {
         header {
-            border-spacing: 0;
-
-            .sdl-dita-delivery-topbar-logo {
-                width: 100%;
-                left: 15px;
-                .sdl-dita-delivery-app.rtl & {
-                    left: auto;
-                    right: 15px;
-                }
-            }
-
             .sdl-dita-delivery-topbar-language label {
                 display: none;
-            }
-
-            .sdl-dita-delivery-topbar-language {
-                width: 40px;
-            }
-
-            .sdl-dita-delivery-topbar-user {
-                padding-right: 15px;
-                .sdl-dita-delivery-app.rtl & {
-                    padding-right: 0;
-                    padding-left: 15px;
-                }
             }
         }
     }

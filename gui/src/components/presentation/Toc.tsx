@@ -1,9 +1,11 @@
 import * as React from "react";
+import * as ReactDOM from "react-dom";
 import { Promise } from "es6-promise";
 import { ITaxonomy } from "interfaces/Taxonomy";
-import { ActivityIndicator, TreeView, ValidationMessage } from "sdl-controls-react-wrappers";
-import { TreeView as TreeViewControl, ITreeViewNode as IBaseTreeViewNode, ValidationMessageType } from "sdl-controls";
+import { Button, ActivityIndicator, TreeView } from "sdl-controls-react-wrappers";
+import { TreeView as TreeViewControl, ITreeViewNode as IBaseTreeViewNode, ButtonPurpose } from "sdl-controls";
 import { IAppContext } from "components/container/App";
+import { ErrorToc } from "components/presentation/ErrorToc";
 
 import "components/presentation/styles/Toc";
 import "components/controls/styles/TreeView";
@@ -41,11 +43,37 @@ export interface ITocProps {
      * @type {string}
      */
     error?: string;
+    /**
+     * Load Toc root items
+     *
+     */
+    onRetry: () => void;
 }
 
 interface ITreeViewNode extends IBaseTreeViewNode {
     taxonomy: ITaxonomy;
 }
+
+interface ITaxonomyNodeOptions {
+    id?: string;
+    dataType?: string;
+    parentNode?: ITreeViewNode | null;
+    load?: (node: ITreeViewNode, callback: (nodes: ITreeViewNode[]) => void) => void;
+}
+
+const TaxonomyType = {
+    TOPIC: "topic",
+    DUMMY: ""
+};
+
+/**
+ * Function that generates unique value every time it's called.
+ */
+const getUniqueTaxonomyId = function (count: number): () => string {
+    return function(): string {
+        return `taxonomy-${count++}`;
+    };
+}(0);
 
 /**
  * Table of contents
@@ -72,8 +100,8 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
     public context: IAppContext;
 
     private _isUnmounted: boolean = false;
-
     private _isExpanding: boolean = false;
+    private _currentActiveNode: ITreeViewNode | null = null;
 
     /**
      * Creates an instance of Toc.
@@ -97,11 +125,14 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
         const rootNodes = this._convertToTreeViewNodes(props.rootItems || []);
         const firstRootNode = rootNodes.length > 0 ? rootNodes[0] : null;
         const { formatMessage } = this.context.services.localizationService;
+        const _retryHandler = (): void => {
+            props.onRetry();
+        };
         const activeNodeIdPath = this._getNodeIdPath(props.activeItemPath, firstRootNode);
 
         return (
             <nav className={"sdl-dita-delivery-toc"}>
-                {error ? <ValidationMessage messageType={ValidationMessageType.Error} message={error} /> : null}
+                {error ? <ErrorToc message={formatMessage("error.toc.not.found")} onRetry={_retryHandler} /> : null}
                 {
                     props.rootItems ?
                         <TreeView
@@ -135,7 +166,8 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
         const props = this.props;
         const currentRootNodes = this._convertToTreeViewNodes(props.rootItems || []);
         const currentFirstRootNode = currentRootNodes.length > 0 ? currentRootNodes[0] : null;
-        const currentPath = this._getNodeIdPath(props.activeItemPath, currentFirstRootNode);
+        const activeNodePath = this._currentActiveNode ? this._currentActiveNode.getPath().split("/") : undefined;
+        const currentPath = this._getNodeIdPath(activeNodePath, currentFirstRootNode);
         const nextRootNodes = this._convertToTreeViewNodes(props.rootItems || []);
         const nextFirstRootNode = nextRootNodes.length > 0 ? nextRootNodes[0] : null;
         const nextPath = this._getNodeIdPath(nextProps.activeItemPath, nextFirstRootNode);
@@ -160,49 +192,110 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
             children => {
                 /* istanbul ignore else */
                 if (!this._isUnmounted) {
+                    this._removeRetryNode(node);
                     callback(this._convertToTreeViewNodes(children, node));
                 }
             },
             error => {
                 /* istanbul ignore else */
                 if (!this._isUnmounted) {
-                    this.setState({
-                        error: error
-                    });
-                    callback([]);
+                    callback(this._createEmptyTreeViewNode(node));
+                    this._injectRetryNode(node, callback);
                 }
             });
     }
 
-    private _convertToTreeViewNodes(taxonomies: ITaxonomy[], parentNode: ITreeViewNode | null = null): ITreeViewNode[] {
-        const nodes: ITreeViewNode[] = [];
+    private _getIndent(parentNode: ITreeViewNode): string {
+        const { element, depth } = parentNode;
+        const { textIndent } = element.style;
+        const indent: number = textIndent && parseInt(textIndent, 10) ? parseInt(textIndent, 10) / depth : 19;
+        return `${indent * (depth + 1)}px`;
+    }
 
-        let count = 0;
-        for (let taxonomy of taxonomies) {
-            let newNode = TreeViewControl.prototype.createNode(
-                taxonomy.id || count.toString(),
-                taxonomy.title,
-                "TOPIC",
-                parentNode,
-                null,
-                !taxonomy.hasChildNodes,
-                this._loadChildNodes.bind(this),
-                true) as ITreeViewNode;
-            newNode.taxonomy = taxonomy;
-            nodes.push(newNode);
-            count++;
+    private _removeRetryNode(parentNode: ITreeViewNode): void {
+        const el = parentNode.element.querySelector(`ul[id="${parentNode.id}"]`);
+        if (el && el.parentElement) {
+            const parent = el.parentElement;
+            ReactDOM.unmountComponentAtNode(parent);
+            parent.remove();
         }
+    }
 
-        return nodes;
+    private _createRetryNode(parentNode: ITreeViewNode, callback: (childNodes: ITreeViewNode[]) => void): JSX.Element {
+        const { formatMessage } = this.context.services.localizationService;
+
+        const _handleClick = (): void => this._loadChildNodes(parentNode, callback);
+
+        return (
+            <ul id={parentNode.id} className="sdl-dita-delivery-toc-list-fail">
+                <li style={{ paddingLeft: this._getIndent(parentNode) }}>
+                    <p>{formatMessage("error.toc.items.not.found")}</p>
+                    <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{"click": _handleClick}}>{formatMessage("control.button.retry")}</Button>
+                </li>
+            </ul>
+        );
+    }
+
+    private _injectRetryNode(parentNode: ITreeViewNode, callback: (childNodes: ITreeViewNode[]) => void): void {
+        const emptyNode = parentNode.element.getElementsByClassName("children")[0];
+        ReactDOM.render(this._createRetryNode(parentNode, callback), emptyNode);
+    }
+
+    private _createEmptyTreeViewNode(parentNode: ITreeViewNode): ITreeViewNode[] {
+        const emptyTaxonomy: ITaxonomy = {
+            title: "",
+            hasChildNodes: false
+        };
+
+        return [this._createTaxonomyNode(emptyTaxonomy, {
+            parentNode,
+            dataType: TaxonomyType.DUMMY
+        })];
+    }
+
+    private _convertToTreeViewNodes(taxonomies: ITaxonomy[], parentNode: ITreeViewNode | null = null): ITreeViewNode[] {
+        return taxonomies.map((taxonomy) => {
+            return this._createTaxonomyNode(taxonomy, {
+                parentNode,
+                load: this._loadChildNodes.bind(this)
+            });
+        });
+    }
+
+    /**
+     * This method is just a wrapper for TreeViewControl.prototype.createNode,
+     * just because we don't want to write this long list of arguments every time.
+     */
+    private _createTaxonomyNode(taxonomy: ITaxonomy, {
+            dataType = TaxonomyType.TOPIC,
+            parentNode = null,
+            load = () => {}
+        }: ITaxonomyNodeOptions = {}
+    ): ITreeViewNode {
+        const taxonomyNode = TreeViewControl.prototype.createNodeFromObject({
+            id: taxonomy.id || getUniqueTaxonomyId(),
+            name: taxonomy.title,
+            isLeafNode: !taxonomy.hasChildNodes,
+            dataType: dataType,
+            parent: parentNode,
+            children: null,
+            load: load,
+            isSelectable: true
+        }) as ITreeViewNode;
+        taxonomyNode.taxonomy = taxonomy;
+
+        return taxonomyNode;
     }
 
     private _onSelectionChanged(nodes: ITreeViewNode[]): void {
         /* istanbul ignore else */
         if (!this._isUnmounted) {
-            const { activeItemPath } = this.props;
+            const { activeItemPath, rootItems } = this.props;
             const onSelectionChanged = this.props.onSelectionChanged;
             const selectedNode = nodes.length > 0 ? nodes[0] : null;
-            const activeId = activeItemPath ? activeItemPath[activeItemPath.length - 1] : null;
+            this._currentActiveNode = selectedNode;
+            const firstRootNodeId = rootItems && rootItems[0] ? rootItems[0].id : null;
+            const activeId = activeItemPath ? activeItemPath[activeItemPath.length - 1] : firstRootNodeId;
             // Check if expanding is finished (expanding state is reset when the component is updated)
             if (this._isExpanding) {
                 this._isExpanding = !(selectedNode && selectedNode.id === activeId);

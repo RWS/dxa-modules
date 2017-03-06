@@ -54,7 +54,7 @@ class BreadcrumbsComponent extends TestBase {
                 publicationTitle: "Publication"
             };
 
-            const loadItemsPath = (publicationId: string, parentId: string): Promise<ITaxonomy[]> => {
+            const loadItemsPath = (publicationId: string, pageId: string, parentId: string): Promise<ITaxonomy[]> => {
                 const itemsToReturn: ITaxonomy[] = [];
                 for (let item of itemsPath) {
                     itemsToReturn.push(item);
