@@ -43,7 +43,11 @@ class NavigationMenuComponent extends TestBase {
                 expect(element.classList).toContain("open");
                 // Animation takes .3s, use a slightly bigger timeout
                 setTimeout((): void => {
-                    expect(getComputedStyle(element).left).toBe("0px");
+                    const left = getComputedStyle(element).left;
+                    expect(left).not.toBeNull();
+                    if (left) {
+                        expect(parseInt(left, 10)).toBe(0);
+                    }
                     done();
                 }, 310);
             });
