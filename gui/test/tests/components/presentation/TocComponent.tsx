@@ -266,7 +266,7 @@ class TocComponent extends TestBase {
                     error: "Oops, error!"
                 });
 
-                let element = document.querySelector(".sdl-dita-delivery-error-toc");
+                const element = document.querySelector(".sdl-dita-delivery-error-toc");
                 expect(element).not.toBeNull();
 
                 const message = (element as HTMLElement).querySelector(".sdl-dita-delivery-error-toc-message") as HTMLElement;

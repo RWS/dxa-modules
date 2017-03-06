@@ -47,8 +47,8 @@ class TilesListComponent extends TestBase {
                 const tiles = TestUtils.scryRenderedDOMComponentsWithClass(tilesList, "sdl-dita-delivery-tile");
                 expect(tiles.length).toBe(2);
 
-                tiles.forEach((title, index) => {
-                    expect((title.querySelector("h3") as HTMLElement).textContent).toBe(tilesItems[index].title);
+                tiles.forEach((tile, index) => {
+                    expect((tile.querySelector("h3") as HTMLElement).textContent).toBe(tilesItems[index].title);
                 });
             });
 
