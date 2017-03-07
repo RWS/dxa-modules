@@ -7,7 +7,7 @@ export class LocalizationService implements ILocalizationService {
      * @type {string[]}
      * @memberOf LocalizationService
      */
-    public rtlLanguages: string[] = ["ar", "he", "ur"];
+    public rtlLanguages: string[] = ["ar", "he", "ur", "fa", "iw"];
 
     public formatMessage(path: string, variables?: string[]): string {
         const message = `mock-${path}`;

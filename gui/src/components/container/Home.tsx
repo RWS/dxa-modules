@@ -166,7 +166,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
         const languageDirection = localizationService.getDirection("en");
 
         const appClass = ClassNames({
-            [`${languageDirection}`]: true,
+            [languageDirection]: true,
             "sdl-dita-delivery-app": true,
             "open": hasPublication && isNavOpen,
             "search-open": searchIsOpen,
