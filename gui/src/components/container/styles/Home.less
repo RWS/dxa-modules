@@ -45,7 +45,21 @@
     .sdl-dita-delivery-publications-list,
     .sdl-dita-delivery-publication-content {
         top: @navBarHeight;
-        height: ~"calc(100% - @{navBarHeight})";
+        min-height:~"calc(100% - @{navBarHeight})";
+        .no-available-publications-label {
+            text-align: center;
+            .header-font(400, 28px, 250px);
+        }
+        .sdl-dita-delivery-error {
+            max-width: @screenSm;
+            margin: 0 auto;
+            background-color: #fff;
+            position: relative;
+            top: 50px;
+        }
+    }
+    .sdl-dita-delivery-publication-content {
+        height:~"calc(100% - @{navBarHeight})";
         .sdl-dita-delivery-page {
             height: 100%;
             .sdl-dita-delivery-navigation-menu {
@@ -75,14 +89,13 @@
                 .icon-close(21px);
             }
         }
-        &:not(.fixed-nav) {
-            .sdl-dita-delivery-product-families-list,
-            .sdl-dita-delivery-publications-list,
-            .sdl-dita-delivery-publication-content {
-                @media screen and (min-width: (1+@screenSm)) {
-                    top: @searchBarHeight + @navBarHeight;
-                    height: ~"calc(100% - (@{searchBarHeight} + @{navBarHeight}))";
-                }
+        .sdl-dita-delivery-product-families-list,
+        .sdl-dita-delivery-publications-list,
+        .sdl-dita-delivery-publication-content {
+            @media screen and (min-width: (1+@screenSm)) {
+                top: @searchBarHeight + @navBarHeight;
+                height:~"calc(100% - (@{searchBarHeight} + @{navBarHeight}))";
+                min-height:~"calc(100% - (@{searchBarHeight} + @{navBarHeight}))";
             }
         }
         &.search-is-active {
@@ -96,7 +109,7 @@
     &.search-is-opening {
         @media screen and (min-width: (1+@screenSm)) {
             .sdl-dita-delivery-searchbar + section {
-                transition: top .3s ease-out, height .3s ease-out;
+                transition: top .3s ease-out, height .3s ease-out, min-height .3s ease-out;
                 nav.sdl-dita-delivery-toc,
                 nav.sdl-dita-delivery-toc .separator,
                 nav.sdl-dita-delivery-content-navigation {
@@ -105,58 +118,81 @@
             }
         }
     }
-    &.fixed-nav {
+    .sdl-dita-delivery-publication-content {
+        .sdl-dita-delivery-page {
+            .sdl-dita-delivery-navigation-menu {
+                nav.sdl-dita-delivery-toc {
+                    .separator {
+                        position: fixed;
+                        top: @navBarHeight;
+                    }
+                    @media screen and (min-width: (1+@screenSm)) {
+                        position: fixed;
+                        top: @navBarHeight;
+                        /*  HACK: As a correct behaviour we should use max-height here,
+                        but Chrome is not taking calc() values into account in this case*/
+                        // max-height: ~"calc(100% - 64px - @{navBarHeight})";
+                        height:~"calc(100% - 64px - @{navBarHeight})";
+                    }
+                }
+            }
+            @media screen and (min-width: (1+@screenLg)) {
+                nav.sdl-dita-delivery-content-navigation {
+                    position: fixed;
+                    height:~"calc(100% - 64px - @{navBarHeight})";
+                    top: @navBarHeight;
+                }
+            }
+        }
+    }
+    &.search-open {
         .sdl-dita-delivery-publication-content {
             .sdl-dita-delivery-page {
                 .sdl-dita-delivery-navigation-menu {
                     nav.sdl-dita-delivery-toc {
+                        /*  HACK: As a correct behaviour we should use max-height here,
+                            but Chrome is not taking calc() values into account in this case*/
+                        // max-height: ~"calc(100% - 64px - (@{searchBarHeight} + @{navBarHeight}))";
+                        height:~"calc(100% - 64px - (@{searchBarHeight} + @{navBarHeight}))";
                         .separator {
-                            position: fixed;
-                            top: @navBarHeight;
+                            top: @searchBarHeight + @navBarHeight;
                         }
                         @media screen and (min-width: (1+@screenSm)) {
-                            position: fixed;
-                            top: @navBarHeight;
-                            /*  HACK: As a correct behaviour we should use max-height here,
-                            but Chrome is not taking calc() values into account in this case*/
-                            // max-height: ~"calc(100% - 64px - @{navBarHeight})";
-                            height: ~"calc(100% - 64px - @{navBarHeight})";
+                            top: @searchBarHeight + @navBarHeight;
                         }
                     }
                 }
                 @media screen and (min-width: (1+@screenLg)) {
                     nav.sdl-dita-delivery-content-navigation {
-                        position: fixed;
-                        height: ~"calc(100% - 64px - @{navBarHeight})";
-                        top: @navBarHeight;
+                        height:~"calc(100% - 64px - (@{searchBarHeight} + @{navBarHeight}))";
+                        top: @searchBarHeight + @navBarHeight;
                     }
                 }
             }
         }
     }
-    &.fixed-nav {
-        &.search-open {
-            .sdl-dita-delivery-publication-content {
-                .sdl-dita-delivery-page {
-                    .sdl-dita-delivery-navigation-menu {
-                        nav.sdl-dita-delivery-toc {
-                            /*  HACK: As a correct behaviour we should use max-height here,
-                                but Chrome is not taking calc() values into account in this case*/
-                            // max-height: ~"calc(100% - 64px - (@{searchBarHeight} + @{navBarHeight}))";
-                            height: ~"calc(100% - 64px - (@{searchBarHeight} + @{navBarHeight}))";
-                            .separator {
-                                top: @searchBarHeight + @navBarHeight;
-                            }
-                            @media screen and (min-width: (1+@screenSm)) {
-                                top: @searchBarHeight + @navBarHeight;
-                            }
-                        }
-                    }
-                    @media screen and (min-width: (1+@screenLg)) {
-                        nav.sdl-dita-delivery-content-navigation {
-                            height: ~"calc(100% - 64px - (@{searchBarHeight} + @{navBarHeight}))";
-                            top: @searchBarHeight + @navBarHeight;
-                        }
+}
+
+// Screen resolution Medium
+@media screen and (max-width: @screenMd) {
+    .sdl-dita-delivery-app {
+        // Table of content navigation is open
+        &.open {
+            .sdl-dita-delivery-nav-mask {
+                display: block;
+            }
+        }
+        .sdl-dita-delivery-topbar {
+            .sdl-dita-delivery-topbar-expand-nav {
+                display: block;
+                order: -1;
+            }
+        }
+        .sdl-dita-delivery-publication-content {
+            .sdl-dita-delivery-page {
+                .sdl-dita-delivery-navigation-menu {
+                    nav.sdl-dita-delivery-toc {
+                        height: 100%;
                     }
                 }
             }
@@ -167,16 +203,10 @@
 // Screen resolution Small
 @media screen and (max-width: @screenSm) {
     .sdl-dita-delivery-app {
-        // Table of content navigation is open
-        &.open {
-            .sdl-dita-delivery-nav-mask {
-                display: block;
-            }
-        }
         // Search panel is open
         &.search-open {
             .sdl-dita-delivery-topbar {
-                header > * {
+                header>* {
                     display: none
                 }
                 .sdl-dita-delivery-topbar-expand-search {
@@ -208,21 +238,6 @@
                     .search-button {
                         .icon-search(21px);
                         padding-right: 5px;
-                    }
-                }
-            }
-        }
-        .sdl-dita-delivery-topbar {
-            .sdl-dita-delivery-topbar-expand-nav {
-                display: block;
-                order: -1;
-            }
-        }
-        .sdl-dita-delivery-publication-content {
-            .sdl-dita-delivery-page {
-                .sdl-dita-delivery-navigation-menu {
-                    nav.sdl-dita-delivery-toc {
-                        height: 100%;
                     }
                 }
             }

@@ -1,6 +1,7 @@
 import * as ServerModels from "interfaces/ServerModels";
 import { IPublication } from "interfaces/Publication";
 import { IProductFamily } from "interfaces/ProductFamily";
+import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 import { Api } from "utils/Api";
 import { Net, IWebRequest, LoadableObject } from "sdl-models";
 
@@ -31,13 +32,33 @@ export class Publications extends LoadableObject {
             const familyTitle = (productFamily === this._unknownProductFamilyTitle) ? undefined : productFamily;
             return this._publications.filter((publication: IPublication) => {
                 if (!familyTitle) {
-                     return !publication.productFamily;
+                    return !publication.productFamily;
                 }
                 return (publication.productFamily === familyTitle);
             });
         }
 
         return this._publications;
+    }
+
+    /**
+     * Get the Product Release Versions for Product Family
+     *
+     * @param {string} productFamily productFamily title
+     * @returns {IProductReleaseVersion[]}
+     */
+    public getProductReleaseVersions(productFamily?: string): IProductReleaseVersion[] {
+        const publicationsList = this.getPublications(productFamily);
+        return publicationsList.map((publication: IPublication) => {
+            return publication.productReleaseVersion;
+        }).filter((version: string, i: number, arr: string[]) => {
+            return arr.indexOf(version) == i;
+        }).map((version: string | undefined) => {
+            return {
+                // Only title now, description would go here later on
+                title: version
+            } as IProductReleaseVersion;
+        });
     }
 
     /**

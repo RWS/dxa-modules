@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Promise } from "es6-promise";
 import { IProductFamily } from "interfaces/ProductFamily";
 import { ActivityIndicator, Button } from "sdl-controls-react-wrappers";
 import { ButtonPurpose } from "sdl-controls";
@@ -73,8 +74,9 @@ export class ProductFamiliesList extends React.Component<{}, IProductFamiliesLis
         const { productFamilies, error } = this.state;
         const { services, router } = this.context;
         const { formatMessage } = services.localizationService;
+
         const errorButtons = <div>
-            <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{ "click": this._loadProductFamilies.bind(this) }}>{formatMessage("control.button.retry")}</Button>
+            <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{ "click": () => this._loadProductFamilies() }}>{formatMessage("control.button.retry")}</Button>
         </div>;
 
         return (
@@ -87,19 +89,22 @@ export class ProductFamiliesList extends React.Component<{}, IProductFamiliesLis
                             buttons={errorButtons} />
                         : productFamilies
                             ? (productFamilies.length > 0)
-                                ? (<TilesList tiles={productFamilies.map((productFamily: IProductFamily) => {
-                                    return {
-                                        title: productFamily.title,
-                                        description: productFamily.description,
-                                        hasWarning: productFamily.hasWarning,
-                                        navigateTo: () => {
-                                            /* istanbul ignore else */
-                                            if (router) {
-                                                router.push(Url.getProductFamilyUrl(productFamily.title));
+                                ? (<TilesList viewAllLabel={formatMessage("components.productfamilies.view.all")}
+                                    tiles={productFamilies.map((productFamily: IProductFamily) => {
+                                        return {
+                                            title: productFamily.title,
+                                            loadableContent: () => {
+                                                return Promise.resolve(productFamily.description);
+                                            },
+                                            hasWarning: productFamily.hasWarning,
+                                            navigateTo: () => {
+                                                /* istanbul ignore else */
+                                                if (router) {
+                                                    router.push(Url.getProductFamilyUrl(productFamily.title));
+                                                }
                                             }
-                                        }
-                                    } as ITile;
-                                })} />)
+                                        } as ITile;
+                                    })} />)
                                 : <div className={"no-available-publications-label"}>{formatMessage("components.productfamilies.no.published.publications")}</div>
                             : <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} />
                 }
@@ -125,7 +130,8 @@ export class ProductFamiliesList extends React.Component<{}, IProductFamiliesLis
                 /* istanbul ignore else */
                 if (!this._isUnmounted) {
                     this.setState({
-                        productFamilies: families
+                        productFamilies: families,
+                        error: undefined
                     });
                 }
             },

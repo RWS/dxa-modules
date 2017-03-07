@@ -20,11 +20,12 @@ export interface IPublicationService {
     /**
      * Get the list of publications product families
      *
+     * @param {boolean} reload if list should be reloaded
      * @returns {Promise<IProductFamily[]>} Promise to return Items
      *
      * @memberOf DataStoreClient
      */
-    getProductFamilies(): Promise<IProductFamily[]>;
+    getProductFamilies(reload?: boolean): Promise<IProductFamily[]>;
 
     /**
      * Get the publication title

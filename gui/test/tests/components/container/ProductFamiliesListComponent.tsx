@@ -2,7 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as TestUtils from "react-addons-test-utils";
 import { ProductFamiliesList } from "components/container/ProductFamiliesList";
-import { ActivityIndicator } from "sdl-controls-react-wrappers";
+import { ActivityIndicator, Button } from "sdl-controls-react-wrappers";
 import { TestBase } from "sdl-models";
 import { PublicationService } from "test/mocks/services/PublicationService";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
@@ -25,7 +25,9 @@ class ProductFamiliesListComponent extends TestBase {
             });
 
             afterAll(() => {
-                target.parentElement.removeChild(target);
+                if (target.parentElement) {
+                    target.parentElement.removeChild(target);
+                }
             });
 
             it("show loading indicator on initial render", (): void => {
@@ -49,13 +51,41 @@ class ProductFamiliesListComponent extends TestBase {
                     const domNode = ReactDOM.findDOMNode(productFamiliesList) as HTMLElement;
                     const errorElement = domNode.querySelector(".sdl-dita-delivery-error");
                     expect(errorElement).not.toBeNull("Error dialog not found");
-                    const errorTitle = errorElement.querySelector("h1");
+                    const errorTitle = (errorElement as HTMLElement).querySelector("h1") as HTMLElement;
                     expect(errorTitle.textContent).toEqual("mock-error.default.title");
-                    const buttons = errorElement.querySelectorAll(".sdl-dita-delivery-button-group button");
+                    const buttons = (errorElement as HTMLElement).querySelectorAll(".sdl-dita-delivery-button-group button");
                     expect(buttons.length).toEqual(1);
 
                     done();
-                }, 500);
+                }, 200);
+            });
+
+            it("Retries loading when error retry button is clicked", (done: () => void): void => {
+                services.publicationService.setMockDataPublications("ERROR");
+                const productFamiliesList = this._renderComponent(target);
+
+                setTimeout((): void => {
+                    const domNode = ReactDOM.findDOMNode(productFamiliesList) as HTMLElement;
+                    const buttons = domNode.querySelectorAll("button");
+                    expect(buttons.length).toEqual(1);
+                    const button = buttons[0] as HTMLButtonElement;
+                    expect(button).toBeDefined("Retry loading button is not defined");
+                    expect(button.textContent).toEqual("mock-control.button.retry");
+
+                    const productFamilies = [{
+                        title: "Product Family"
+                    }];
+                    services.publicationService.setMockDataPublications(null, [], productFamilies);
+                    button.click();
+
+                    setTimeout((): void => {
+                        const headers = TestUtils.scryRenderedDOMComponentsWithTag(productFamiliesList, "h3");
+                        expect(headers.length).toBe(1);
+                        expect(headers[0].textContent).toBe(productFamilies[0].title);
+
+                        done();
+                    }, 0);
+                }, 0);
             });
 
             it("renders product families tiles", (done: () => void): void => {
@@ -99,10 +129,11 @@ class ProductFamiliesListComponent extends TestBase {
 
                 // Use a timeout to allow the DataStore to return a promise with the data
                 setTimeout((): void => {
-                    const buttons = TestUtils.scryRenderedDOMComponentsWithTag(productFamiliesList, "button");
-                    const button = buttons[0] as HTMLButtonElement;
+                    // tslint:disable-next-line:no-any
+                    const button = TestUtils.findRenderedComponentWithType(productFamiliesList, Button as any);
                     expect(button).toBeDefined();
-                    TestUtils.Simulate.click(button);
+                    const buttonEl = ReactDOM.findDOMNode(button).querySelector("button") as HTMLElement;
+                    buttonEl.click();
                 }, 0);
             });
 

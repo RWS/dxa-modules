@@ -18,6 +18,7 @@
             position: inherit;
             left: 0;
             nav.sdl-dita-delivery-toc {
+                width: @tocWidth - (@defaultMargin * 2);
                 margin-left: @defaultMargin;
                 margin-right: @defaultMargin;
                 > span:first-child, .sdl-treeview {
@@ -32,9 +33,6 @@
                     margin-left: @tocWidth - 5;
                     width: 10px;
                     box-shadow: -5px 0px 10px 0px fade(@neutralColor1, 10);
-                    @media screen and (max-width: @screenSm) {
-                        display: none;
-                    }
                 }
             }
         }
@@ -46,7 +44,7 @@
         nav.sdl-dita-delivery-toc, nav.sdl-dita-delivery-content-navigation {
             min-height: 100px;
         }
-        @media screen and (min-width: (1+@screenSm)) {
+        @media screen and (min-width: (1+@screenMd)) {
             .sdl-dita-delivery-navigation-menu {
                 /* Remove transition and zindex */
                 transition: none;
@@ -103,7 +101,7 @@
     }
 }
 
-@media screen and (max-width: @screenSm) {
+@media screen and (max-width: @screenMd) {
     .sdl-dita-delivery-publication-content {
         .sdl-dita-delivery-page {
             position: initial;
@@ -118,6 +116,9 @@
                     height: 100%;
                     > span:first-child, .sdl-treeview {
                         width: 100%;
+                    }
+                    .separator {
+                        display: none;
                     }
                 }
             }

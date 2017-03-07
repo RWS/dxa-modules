@@ -45,13 +45,6 @@ export interface IHomeState {
     searchIsActive?: boolean;
 
     /**
-     * if page is scrolled
-     *
-     * @type {boolean}
-     */
-    sticksToTop?: boolean;
-
-    /**
      * Title of the current search
      *
      * @type {string}
@@ -99,6 +92,11 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
     private _isUnmounted: boolean = false;
     private _preventBodyScroll: boolean = false;
 
+    /* Always show a vertical scroll bar in IE / Edge due to an issue with animations not support calc based properties.
+     Transitionable properties with calc() derived values are not supported below and including IE11.
+     (http://connect.microsoft.com/IE/feedback/details/762719/css3-calc-bug-inside-transition-or-transform) */
+    private _alwaysShowScrollBar: boolean = (document as Document & { documentMode: boolean }).documentMode || /Edge/.test(navigator.userAgent);
+
     /**
      * Creates an instance of App.
      *
@@ -107,7 +105,6 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
         super();
         this.state = {
             isNavOpen: false,
-            sticksToTop: false,
             searchIsOpen: false,
             searchIsActive: false
         };
@@ -132,10 +129,9 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
      * Invoked once, only on the client (not on the server), immediately after the initial rendering occurs.
      */
     public componentDidMount(): void {
-
-        window.addEventListener("scroll", this._onViewportChanged.bind(this));
-        window.addEventListener("resize", this._onViewportChanged.bind(this));
-        this._onViewportChanged();
+        if (this._alwaysShowScrollBar) {
+            (document.body as HTMLElement).style.overflowY = "scroll";
+        }
     }
 
     /**
@@ -163,14 +159,13 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
      */
     public render(): JSX.Element {
         const { localizationService } = this.context.services;
-        const { isNavOpen, searchIsOpen, searchIsOpening, searchIsActive, sticksToTop, searchTitle, publicationId } = this.state;
+        const { isNavOpen, searchIsOpen, searchIsOpening, searchIsActive, searchTitle, publicationId } = this.state;
         const { children } = this.props;
 
         const hasPublication = publicationId !== undefined;
 
         const appClass = ClassNames({
             "sdl-dita-delivery-app": true,
-            "fixed-nav": sticksToTop,
             "open": hasPublication && isNavOpen,
             "search-open": searchIsOpen,
             "search-is-opening": searchIsOpening,
@@ -220,7 +215,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
      * Invoked immediately after updating.
      */
     public componentDidUpdate(prevProp: {}, prevState: IHomeState): void {
-        const { isNavOpen, searchIsOpen } = this.state;
+        const { isNavOpen } = this.state;
 
         if (prevState.isNavOpen !== isNavOpen) {
             // HACK: we should use some global state store to achieve this
@@ -230,21 +225,6 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
                     navMenu.classList.add("open");
                 } else {
                     navMenu.classList.remove("open");
-                }
-            }
-        }
-
-        // HACK: we should avoind page jumping when search bar is open. This is caused by
-        // searchbard disapearing and page dimensions gets changes. Hack is to add minimal padding
-        // bottom so the scroll bar appears regardless of page dimensions
-        if (searchIsOpen) {
-            const page = document.querySelector(".sdl-dita-delivery-page") as HTMLElement;
-            if (page) {
-                if (page.scrollHeight > page.offsetHeight) {
-                    page.style.paddingBottom = "1px";
-                }
-                else {
-                    page.style.removeProperty("padding-pottom");
                 }
             }
         }
@@ -276,8 +256,9 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
             }
         }
 
-        window.removeEventListener("scroll", this._onViewportChanged.bind(this));
-        window.removeEventListener("resize", this._onViewportChanged.bind(this));
+        if (this._alwaysShowScrollBar) {
+            (document.body as HTMLElement).style.removeProperty("overflow-y");
+        }
     }
 
     private _toggleNavigationMenu(): void {
@@ -309,7 +290,8 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
 
             const domNode = ReactDOM.findDOMNode(this);
             const searchNode = domNode.querySelector(".sdl-dita-delivery-searchbar") as HTMLElement;
-            if (searchNode) {
+            const isAnimated = searchNode && getComputedStyle(searchNode).transitionProperty !== "none";
+            if (isAnimated) {
                 const _onTransitionEnd = () => {
                     searchNode.removeEventListener("transitionend", _onTransitionEnd);
                     this.setState({
@@ -320,21 +302,9 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
             }
 
             this.setState({
-                searchIsOpening: true,
+                searchIsOpening: isAnimated,
                 searchIsOpen: !searchIsOpen
             });
-        }
-    }
-
-    private _onViewportChanged(): void {
-        const { sticksToTop } = this.state;
-        /* istanbul ignore if */
-        if (!this._isUnmounted) {
-            if (sticksToTop !== (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0) > 0) {
-                this.setState({
-                    sticksToTop: !sticksToTop
-                });
-            }
         }
     }
 

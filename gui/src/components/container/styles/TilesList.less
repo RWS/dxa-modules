@@ -15,25 +15,14 @@
         align-content: flex-start;
         > * {
             flex: 1 1 @tilewidth;
+            width: @tilewidth;
+            max-width: 100%;
             height: @tileHeight;
             margin: 10px;
             &:empty {
                 /* Empry tile placeholder for making other tiles align propertly*/
                 height: 0;
                 border: none;
-            }
-        }
-        .sdl-dita-delivery-tile {
-            h3 {
-                height: 50px;
-                margin: 5px auto;
-            }
-            hr {
-                margin: 10px 20px;
-            }
-            p {
-                margin: 15px;
-                height: 90px;
             }
         }
     }

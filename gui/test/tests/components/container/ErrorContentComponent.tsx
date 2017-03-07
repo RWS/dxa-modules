@@ -17,12 +17,14 @@ class ErrorContentComponent extends TestBase {
             });
 
             afterAll(() => {
-                target.parentElement.removeChild(target);
+                if (target.parentElement) {
+                    target.parentElement.removeChild(target);
+                }
             });
 
             it("Correct component render", (): void => {
                 this._renderComponent({}, target);
-                const errorPageElement = document.querySelector(".sdl-dita-delivery-error-page");
+                const errorPageElement = document.querySelector(".sdl-dita-delivery-error-page") as HTMLButtonElement;
                 const errorButton = errorPageElement.querySelectorAll(".sdl-button") as NodeListOf<HTMLButtonElement>;
                 const errorTitle = errorPageElement.querySelectorAll("h1");
                 const errorMessage = errorPageElement.querySelectorAll("p");
@@ -34,6 +36,15 @@ class ErrorContentComponent extends TestBase {
                 expect(errorButton.length).toBe(1);
                 expect(errorTitle.item(0).textContent).toBe("mock-error.default.title");
                 expect(errorMessage.item(0).textContent).toBe("mock-error.url.not.found");
+            });
+
+            it("Shows the status code when provided", (): void => {
+                this._renderComponent({ error: { message: "Something went serioursly wrong!", statusCode: "500" } }, target);
+                const errorPageElement = document.querySelector(".sdl-dita-delivery-error-page") as HTMLElement;
+                const errorTitle = errorPageElement.querySelectorAll("h1");
+
+                expect(errorPageElement).not.toBeNull();
+                expect(errorTitle.item(0).textContent).toBe("500 - mock-error.default.title");
             });
         });
     }
