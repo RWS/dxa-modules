@@ -290,7 +290,8 @@ export class Dropdown extends React.Component<IDropdownProps, IDropdownState> {
     }
 
     private onFocusout(event: MouseEvent): void {
-        if ((event as IPathEvent).path.indexOf(this._element) == -1) {
+        const eventPath = event as IPathEvent;
+        if (eventPath && eventPath.path && eventPath.path.indexOf(this._element) == -1) {
             this.toggleOff();
         }
     }
