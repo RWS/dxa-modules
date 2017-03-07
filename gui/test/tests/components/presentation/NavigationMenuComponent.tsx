@@ -16,7 +16,9 @@ class NavigationMenuComponent extends TestBase {
             });
 
             afterAll(() => {
-                target.parentElement.removeChild(target);
+                if (target.parentElement) {
+                    target.parentElement.removeChild(target);
+                }
             });
 
             it("renders", (): void => {
@@ -25,14 +27,14 @@ class NavigationMenuComponent extends TestBase {
                 }, target);
                 const element = document.querySelector(".sdl-dita-delivery-navigation-menu");
                 expect(element).not.toBeNull();
-                expect(element.innerHTML).toBe("<div>Contents</div>");
+                expect((element as HTMLElement).innerHTML).toBe("<div>Contents</div>");
             });
 
             it("can open/close", (done: () => void): void => {
                 this._renderComponent({
                     isOpen: false
                 }, target);
-                const element = document.querySelector(".sdl-dita-delivery-navigation-menu");
+                const element = document.querySelector(".sdl-dita-delivery-navigation-menu") as HTMLElement;
                 expect(element.classList).not.toContain("open");
                 expect(getComputedStyle(element).left).toBe("-500px");
                 this._renderComponent({
@@ -41,7 +43,11 @@ class NavigationMenuComponent extends TestBase {
                 expect(element.classList).toContain("open");
                 // Animation takes .3s, use a slightly bigger timeout
                 setTimeout((): void => {
-                    expect(getComputedStyle(element).left).toBe("0px");
+                    const left = getComputedStyle(element).left;
+                    expect(left).not.toBeNull();
+                    if (left) {
+                        expect(parseInt(left, 10)).toBe(0);
+                    }
                     done();
                 }, 310);
             });

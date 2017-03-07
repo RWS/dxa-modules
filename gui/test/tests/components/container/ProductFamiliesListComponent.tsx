@@ -25,7 +25,9 @@ class ProductFamiliesListComponent extends TestBase {
             });
 
             afterAll(() => {
-                target.parentElement.removeChild(target);
+                if (target.parentElement) {
+                    target.parentElement.removeChild(target);
+                }
             });
 
             it("show loading indicator on initial render", (): void => {
@@ -49,9 +51,9 @@ class ProductFamiliesListComponent extends TestBase {
                     const domNode = ReactDOM.findDOMNode(productFamiliesList) as HTMLElement;
                     const errorElement = domNode.querySelector(".sdl-dita-delivery-error");
                     expect(errorElement).not.toBeNull("Error dialog not found");
-                    const errorTitle = errorElement.querySelector("h1");
+                    const errorTitle = (errorElement as HTMLElement).querySelector("h1") as HTMLElement;
                     expect(errorTitle.textContent).toEqual("mock-error.default.title");
-                    const buttons = errorElement.querySelectorAll(".sdl-dita-delivery-button-group button");
+                    const buttons = (errorElement as HTMLElement).querySelectorAll(".sdl-dita-delivery-button-group button");
                     expect(buttons.length).toEqual(1);
 
                     done();
@@ -130,7 +132,7 @@ class ProductFamiliesListComponent extends TestBase {
                     // tslint:disable-next-line:no-any
                     const button = TestUtils.findRenderedComponentWithType(productFamiliesList, Button as any);
                     expect(button).toBeDefined();
-                    const buttonEl = ReactDOM.findDOMNode(button).querySelector("button");
+                    const buttonEl = ReactDOM.findDOMNode(button).querySelector("button") as HTMLElement;
                     buttonEl.click();
                 }, 0);
             });

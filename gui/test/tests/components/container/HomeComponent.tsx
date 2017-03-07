@@ -28,7 +28,9 @@ class HomeComponent extends TestBase {
             });
 
             afterAll(() => {
-                target.parentElement.removeChild(target);
+                if (target.parentElement) {
+                    target.parentElement.removeChild(target);
+                }
             });
 
             it("show loading indicator on initial render", (): void => {
@@ -48,48 +50,45 @@ class HomeComponent extends TestBase {
 
                 // Use a timeout to allow the DataStore to return a promise with the data
                 setTimeout((): void => {
-                    expect(homeNode.querySelector(".sdl-dita-delivery-searchbar input").getAttribute("placeholder")).toContain(errorMessage);
+                    const input = homeNode.querySelector(".sdl-dita-delivery-searchbar input") as HTMLInputElement;
+                    expect(input.getAttribute("placeholder")).toContain(errorMessage);
                     done();
                 }, 0);
             });
 
-            it("can interract with search panel", (done: () => void): void => {
+            it("can interact with search panel", (): void => {
                 const app = this._renderComponent(target);
-                const homeNode = ReactDOM.findDOMNode(app);
+                const appNode = ReactDOM.findDOMNode(app);
+                const homeComp = TestUtils.findRenderedComponentWithType(app, Home);
+                const homeNode = ReactDOM.findDOMNode(homeComp);
 
-                const searchBarNode = homeNode.querySelector(".sdl-dita-delivery-searchbar");
-                expect(searchBarNode).not.toBeNull();
-
-                const toggleSearchButtonNode = homeNode.querySelector(".sdl-dita-delivery-topbar-expand-search");
+                const searchBarNode = appNode.querySelector(".sdl-dita-delivery-searchbar") as HTMLElement;
+                const toggleSearchButtonNode = appNode.querySelector(".sdl-dita-delivery-topbar-expand-search");
                 expect(toggleSearchButtonNode).not.toBeNull();
 
-                expect(getComputedStyle(homeNode.querySelector(".sdl-dita-delivery-searchbar")).top).toBe("-150px");
-                TestUtils.Simulate.click(toggleSearchButtonNode);
+                expect(getComputedStyle(searchBarNode).top).toBe("-150px");
+                TestUtils.Simulate.click(toggleSearchButtonNode as HTMLElement);
 
-                // Use a timeout to allow animation to be finished
-                setTimeout((): void => {
-                    expect(getComputedStyle(homeNode.querySelector(".sdl-dita-delivery-searchbar")).top).toBe("0px");
-                    const inputElement = searchBarNode.querySelector("input");
-                    const overlayNode = homeNode.querySelector(".sdl-dita-delivery-nav-mask");
-                    expect(getComputedStyle(overlayNode).display).toBe("none");
-                    TestUtils.Simulate.focus(inputElement);
+                expect(homeNode.classList).toContain("search-open");
+                expect(homeNode.classList).not.toContain("search-is-opening");
+                const inputElement = (searchBarNode as HTMLElement).querySelector("input") as HTMLInputElement;
+                const overlayNode = appNode.querySelector(".sdl-dita-delivery-nav-mask") as HTMLElement;
+                expect(getComputedStyle(overlayNode).display).toBe("none");
+                TestUtils.Simulate.focus(inputElement);
 
-                    expect(getComputedStyle(overlayNode).display).toBe("block");
-                    TestUtils.Simulate.blur(inputElement);
+                expect(getComputedStyle(overlayNode).display).toBe("block");
+                TestUtils.Simulate.blur(inputElement);
 
-                    expect(getComputedStyle(overlayNode).display).toBe("none");
-                    TestUtils.Simulate.click(toggleSearchButtonNode);
-                    // Use a timeout to allow animation to be finished
-                    setTimeout((): void => {
-                        expect(getComputedStyle(homeNode.querySelector(".sdl-dita-delivery-searchbar")).top).toBe("-150px");
-                        done();
-                    }, 310);
-                }, 310);
+                expect(getComputedStyle(overlayNode).display).toBe("none");
+                TestUtils.Simulate.click(toggleSearchButtonNode as HTMLElement);
+
+                expect(homeNode.classList).not.toContain("search-open");
+                expect(homeNode.classList).not.toContain("search-is-opening");
             });
         });
     }
 
-    private _renderComponent(target: HTMLElement, pubId?: string): Home {
+    private _renderComponent(target: HTMLElement, pubId?: string): ComponentWithContext {
         return ReactDOM.render(
             (
                 <ComponentWithContext {...services}>
@@ -97,7 +96,7 @@ class HomeComponent extends TestBase {
                         <Route path="*" component={() => (<Home><PublicationContent params={{ publicationId: pubId || "" }} /></Home>)} />
                     </Router>
                 </ComponentWithContext>
-            ), target) as Home;
+            ), target) as ComponentWithContext;
     }
 }
 

@@ -29,7 +29,9 @@ class ContentNavigationComponent extends TestBase {
             });
 
             afterAll(() => {
-                target.parentElement.removeChild(target);
+                if (target.parentElement) {
+                    target.parentElement.removeChild(target);
+                }
             });
 
             it("renders content navigation panel", (): void => {
@@ -38,7 +40,7 @@ class ContentNavigationComponent extends TestBase {
                 }, target);
                 const element = document.querySelector(".sdl-dita-delivery-content-navigation");
                 expect(element).not.toBeNull();
-                const hyperlinks = element.querySelectorAll("a");
+                const hyperlinks = (element as HTMLElement).querySelectorAll("a");
                 expect(hyperlinks.length).toBe(2);
 
                 expect(hyperlinks.item(0).textContent).toBe(navItems[0].title);
