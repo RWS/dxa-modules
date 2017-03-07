@@ -77,6 +77,8 @@ export interface IPublicationContentProps {
 
     pageId: string;
 
+    language: string;
+
     /**
      * Publication content props parameters
      *

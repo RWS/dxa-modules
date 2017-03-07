@@ -1,11 +1,12 @@
 import { PublicationContent as PublicationContentX, IPublicationContentProps } from "./PublicationContentX";
 import { connect } from "react-redux";
-import { IPublicationState } from "store/interfaces/State";
+import { IState } from "store/interfaces/State";
 
-const mapStateToProps = (state: IPublicationState) => ({
-    publicationId: state.id,
-    pageId: state.pageId
-});
+const mapStateToProps = (state: IState) => ({
+    language: state.language,
+    publicationId: state.publication.id,
+    pageId: state.publication.pageId
+})
 
 export const PublicationContent = connect(mapStateToProps)(PublicationContentX);
-export { IPublicationState, IPublicationContentProps };
+export { IState, IPublicationContentProps };

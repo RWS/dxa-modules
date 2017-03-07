@@ -7,7 +7,6 @@ import { SearchBar } from "components/presentation/SearchBar";
 
 import "components/container/styles/App";
 import "components/container/styles/Home";
-import { RouteStateSync } from "components/container/RouteStateSync";
 import { IPublicationContentProps } from "components/container/PublicationContent";
 
 /**
@@ -158,6 +157,13 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
         }
     }
 
+    public componentWillReceiveProps(nextProps: IHomeProps): void {
+        const child = nextProps.children as React.ReactElement<IPublicationContentProps>;
+        const nextPublicationId = child.props.params.publicationId;
+
+        this._updateSearchPlaceholder(nextPublicationId);
+    }
+
     /**
      * Render the component
      *
@@ -191,8 +197,6 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
 
         return (
             <div className={appClass}>
-                <RouteStateSync />
-
                 <div className={"sdl-dita-delivery-nav-mask"} onClick={isNavOpen && this._toggleNavigationMenu.bind(this)} />
                 <div>{language}</div>
                 <div>{ getLanguages() }</div>
