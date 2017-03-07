@@ -3,11 +3,11 @@ import { connect } from "react-redux";
 import { IState } from "store/interfaces/State";
 import { IPublicationContentPropsParams } from "./PublicationContentX";
 import { publicationRouteChanged } from "store/actions/Actions";
-import { browserHistory } from "react-router";
+import { browserHistory, withRouter } from "react-router";
 import { Url } from "utils/Url";
 
 export interface IPublication {
-   publicationId: string;
+    publicationId: string;
     pageId: string;
 }
 
@@ -69,4 +69,6 @@ const mapDispatchToProps = {
     onStateChange: publicationRouteChanged
 };
 
-export const RouteStateSync = connect(mapStateToProps, mapDispatchToProps)(RouteStateSync1);
+export const RouteStateSync = withRouter(
+    connect(mapStateToProps, mapDispatchToProps)(RouteStateSync1)
+);
