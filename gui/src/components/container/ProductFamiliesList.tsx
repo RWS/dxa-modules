@@ -76,7 +76,7 @@ export class ProductFamiliesList extends React.Component<{}, IProductFamiliesLis
         const { formatMessage } = services.localizationService;
 
         const errorButtons = <div>
-            <Button skin="graphene" purpose={ButtonPurpose.CRITICAL} events={{ "click": () => this._loadProductFamilies(true) }}>{formatMessage("control.button.retry")}</Button>
+            <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{ "click": () => this._loadProductFamilies() }}>{formatMessage("control.button.retry")}</Button>
         </div>;
 
         return (
@@ -121,11 +121,11 @@ export class ProductFamiliesList extends React.Component<{}, IProductFamiliesLis
     /**
      * Component will unmount
      */
-    public _loadProductFamilies(reload?: boolean): void {
+    public _loadProductFamilies(): void {
         const { publicationService } = this.context.services;
 
         // Get product families list
-        publicationService.getProductFamilies(reload).then(
+        publicationService.getProductFamilies().then(
             families => {
                 /* istanbul ignore else */
                 if (!this._isUnmounted) {

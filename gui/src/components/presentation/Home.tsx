@@ -309,7 +309,8 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
 
             const domNode = ReactDOM.findDOMNode(this);
             const searchNode = domNode.querySelector(".sdl-dita-delivery-searchbar") as HTMLElement;
-            if (searchNode) {
+            const isAnimated = searchNode && getComputedStyle(searchNode).transitionProperty !== "none";
+            if (isAnimated) {
                 const _onTransitionEnd = () => {
                     searchNode.removeEventListener("transitionend", _onTransitionEnd);
                     this.setState({
@@ -320,7 +321,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
             }
 
             this.setState({
-                searchIsOpening: true,
+                searchIsOpening: isAnimated,
                 searchIsOpen: !searchIsOpen
             });
         }

@@ -1,5 +1,6 @@
 import "ts-helpers";
 import "sdl-controls-react-wrappers/dist/stylesheets/main";
+import "./configuration/Tests.less";
 
 // Import all tests
 // import "test/tests/components/container/AppComponent";

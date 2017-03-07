@@ -27,7 +27,9 @@ class PageComponent extends TestBase {
             });
 
             afterAll(() => {
-                target.parentElement.removeChild(target);
+                if (target.parentElement) {
+                    target.parentElement.removeChild(target);
+                }
             });
 
             it("shows / hides activity indicator", (): void => {
@@ -58,9 +60,9 @@ class PageComponent extends TestBase {
                 }, target);
                 const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
 
-                const errorElement = domNode.querySelector(".sdl-dita-delivery-error");
+                const errorElement = domNode.querySelector(".sdl-dita-delivery-error") as HTMLElement;
                 expect(errorElement).not.toBeNull("Error dialog not found");
-                const errorTitle = errorElement.querySelector("h1");
+                const errorTitle = errorElement.querySelector("h1") as HTMLElement;
                 expect(errorTitle.textContent).toEqual("mock-error.default.title");
                 const buttons = errorElement.querySelectorAll(".sdl-dita-delivery-button-group button") as NodeListOf<HTMLButtonElement>;
                 expect(buttons.length).toEqual(2);
@@ -77,7 +79,7 @@ class PageComponent extends TestBase {
                 }, target);
 
                 const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
-                const errorElement = domNode.querySelector(".sdl-dita-delivery-error");
+                const errorElement = domNode.querySelector(".sdl-dita-delivery-error") as HTMLElement;
                 const buttons = errorElement.querySelectorAll(".sdl-dita-delivery-button-group button") as NodeListOf<HTMLButtonElement>;
                 expect(buttons.length).toEqual(2);
 
@@ -99,7 +101,7 @@ class PageComponent extends TestBase {
                 }, target);
 
                 const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
-                const errorElement = domNode.querySelector(".sdl-dita-delivery-error");
+                const errorElement = domNode.querySelector(".sdl-dita-delivery-error") as HTMLElement;
                 const buttons = errorElement.querySelectorAll(".sdl-dita-delivery-button-group button") as NodeListOf<HTMLButtonElement>;
                 expect(buttons.length).toEqual(2);
 
@@ -279,7 +281,9 @@ class PageComponent extends TestBase {
             });
 
             afterAll(() => {
-                target.parentElement.removeChild(target);
+                if (target.parentElement) {
+                    target.parentElement.removeChild(target);
+                }
             });
 
             it("renders page navigation content", (): void => {
