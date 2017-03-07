@@ -4,10 +4,11 @@ import * as ReactDOM from "react-dom";
 import { IAppContext } from "components/container/App";
 import { TopBar } from "components/presentation/TopBar";
 import { SearchBar } from "components/presentation/SearchBar";
-import { IPublicationContentProps } from "components/container/PublicationContent";
 
 import "components/container/styles/App";
 import "components/container/styles/Home";
+import { RouteStateSync } from "components/container/RouteStateSync";
+import { IPublicationContentProps } from "components/container/PublicationContent";
 
 /**
  * Home state
@@ -190,6 +191,8 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
 
         return (
             <div className={appClass}>
+                <RouteStateSync />
+
                 <div className={"sdl-dita-delivery-nav-mask"} onClick={isNavOpen && this._toggleNavigationMenu.bind(this)} />
                 <div>{language}</div>
                 <div>{ getLanguages() }</div>
