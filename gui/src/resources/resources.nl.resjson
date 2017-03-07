@@ -2,7 +2,7 @@
   "app.language": "Engels",
   "app.publications": "Publicaties",
   "components.app.loading": "Laden...",
-  "components.breadcrumbs.home": "Home",
+  "components.breadcrumbs.home": "Huis",
   "components.searchbar.placeholder": "Zoeken...",
   "components.searchbar.publication.placeholder": "Zoeken in ‘{0}’",
   "components.contentnavigation.title": "Inhoud",

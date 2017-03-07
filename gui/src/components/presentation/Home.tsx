@@ -157,6 +157,13 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
         }
     }
 
+    public componentWillReceiveProps(nextProps: IHomeProps): void {
+        const child = nextProps.children as React.ReactElement<IPublicationContentProps>;
+        const nextPublicationId = child.props.params.publicationId;
+
+        this._updateSearchPlaceholder(nextPublicationId);
+    }
+
     /**
      * Render the component
      *
