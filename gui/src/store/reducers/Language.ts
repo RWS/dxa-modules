@@ -6,4 +6,4 @@ export const languageReducer = handleActions({
     [CHANGE_LANGUAGE]: (state: string, action: IAction) => action.payload as string
 }, "");
 
-export { Reducer }
+export { Reducer };

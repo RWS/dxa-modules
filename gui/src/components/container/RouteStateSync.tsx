@@ -1,10 +1,10 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { IState } from "store/interfaces/State";
-import { IPublicationContentPropsParams } from "./PublicationContentX";
 import { publicationRouteChanged } from "store/actions/Actions";
 import { browserHistory, withRouter } from "react-router";
 import { Url } from "utils/Url";
+import { IPublicationContentPropsParams } from "./PublicationContentX";
 
 export interface IPublication {
     publicationId: string;
@@ -27,11 +27,12 @@ export interface ISyncParams {
     params: IPublicationContentPropsParams;
 }
 
-export class RouteStateSync1 extends React.Component< IPublication & ISyncParams, {}> {
+export class RouteStateSync1 extends React.Component<IPublication & ISyncParams, {}> {
 
     public componentWillMount(): void {
+        // debugger;
         const { onStateChange, params } = this.props;
-
+        console.log('WillMount', params)
         if (this.needSync(params as Pub)) {
             onStateChange({
                 publicationId: params.publicationId,
@@ -41,10 +42,11 @@ export class RouteStateSync1 extends React.Component< IPublication & ISyncParams
     }
 
     public componentWillReceiveProps(nextProps: ISyncParams): void {
-      const { pageId, publicationId } = nextProps;
-      if (this.needSync(nextProps)) {
-          browserHistory.push(Url.getPageUrl(pageId, publicationId));
-      }
+        console.log("RouteStateSync1.componentWillReceiveProps", nextProps);
+        const { pageId, publicationId } = nextProps;
+        if (this.needSync(nextProps) && Math.random() > 1) {
+            browserHistory.push(Url.getPageUrl(pageId, publicationId));
+        }
     }
 
     public render(): JSX.Element {
@@ -53,7 +55,7 @@ export class RouteStateSync1 extends React.Component< IPublication & ISyncParams
 
     private needSync(routeParams: Pub): boolean {
         const props = this.props;
-        const { params } = props ;
+        const { params } = props;
 
         return params.publicationId !== props.publicationId
         || params.pageIdOrPublicationTitle !== props.pageId;

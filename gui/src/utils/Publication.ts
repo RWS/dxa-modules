@@ -13,8 +13,8 @@ const getPubById = (publications: IPublication[], id: string): IPublication => {
     return foundPub || DEFAULT_PUB;
 };
 
-const getPubByLang = (publications: IPublication[]) => (hostPublicationId: string, language: string): IPublication => publications
+const getPubByLang = (publications: IPublication[]) => (hostPublicationId: string, language: string): IPublication | null => publications
     .filter((publication: IPublication): boolean => publication.versionRef === getPubById(publications, hostPublicationId).versionRef)
-    .find((publication: IPublication): boolean => publication.language === language) || DEFAULT_PUB;
+    .find((publication: IPublication): boolean => publication.language === language) || null;
 
 export { getPubByLang };

@@ -232,7 +232,7 @@ export class Tile extends React.Component<ITileProps, ITileState> {
                             tileContentIsLoading: false
                         });
                     }
-                },
+                }
             );
         }
     }

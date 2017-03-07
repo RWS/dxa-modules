@@ -26,8 +26,10 @@ export interface IWindow extends Window {
 
     /**
      * Error structure from backend
-     * 
+     *
      * @type {IError}
      */
     SdlDitaDeliveryError: IError;
+
+    __REDUX_DEVTOOLS_EXTENSION__: () => undefined;
 }
