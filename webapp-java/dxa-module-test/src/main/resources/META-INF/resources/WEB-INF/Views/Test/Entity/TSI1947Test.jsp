@@ -1,5 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="com.sdl.webapp.common.util.TcmUtils" %>
 
 <jsp:useBean id="pageModel" type="com.sdl.webapp.common.api.model.PageModel" scope="request"/>
 <jsp:useBean id="markup" type="com.sdl.webapp.common.markup.Markup" scope="request"/>
@@ -11,9 +10,9 @@
         <th>&nbsp;</th>
     </tr>
     <tr>
-        <td>PageModel.Id: <%=TcmUtils.getItemId(pageModel.getId())%>
+        <td>PageModel.Id: <%=pageModel.getId()%>
         </td>
-        <td><%=TcmUtils.getItemId(markup.getWebRequestContext().getPage().getId())%>
+        <td><%=markup.getWebRequestContext().getPage().getId()%>
         </td>
         <td>${pageModel.id eq markup.webRequestContext.page.id ? 'EQ' : 'UNEQUAL'}</td>
     </tr>

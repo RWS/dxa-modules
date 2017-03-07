@@ -41,7 +41,7 @@ public class YouTubeVideo extends MediaItem {
     private int height = 390;
 
     @Override
-    public MvcData getMvcData() {
+    public MvcData getDefaultMvcData() {
         return MvcDataCreator.creator()
                 .fromQualifiedName("Core:Entity:YouTubeVideo")
                 .defaults(DefaultsMvcData.ENTITY)

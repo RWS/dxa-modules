@@ -83,7 +83,7 @@ public class Download extends MediaItem implements FeedItemsProvider {
     }
 
     @Override
-    public MvcData getMvcData() {
+    public MvcData getDefaultMvcData() {
         return MvcDataCreator.creator()
                 .fromQualifiedName("Core:Entity:Download")
                 .defaults(DefaultsMvcData.ENTITY)

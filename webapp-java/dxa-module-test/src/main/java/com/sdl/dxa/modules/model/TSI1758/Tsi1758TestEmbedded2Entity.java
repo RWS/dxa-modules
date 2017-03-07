@@ -24,7 +24,7 @@ public class Tsi1758TestEmbedded2Entity extends AbstractEntityModel {
     public Link embedField2;
 
     @Override
-    public MvcData getMvcData() {
+    public MvcData getDefaultMvcData() {
         return MvcDataCreator.creator()
                 .fromQualifiedName("Test:TSI1758TestEmbedded2")
                 .defaults(DefaultsMvcData.ENTITY).create();
