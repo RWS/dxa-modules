@@ -1,8 +1,7 @@
 import * as React from "react";
 import { IndexLink } from "react-router";
 import { path } from "utils/Path";
-import { Dropdown } from "components/controls/Dropdown";
-import { IDropdownValue } from "sdl-controls";
+import { Dropdown, IDropdownValue } from "components/controls/Dropdown";
 import { IAppContext } from "components/container/App";
 
 import "./styles/TopBar";

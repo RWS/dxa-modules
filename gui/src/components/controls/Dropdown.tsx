@@ -42,12 +42,12 @@ export enum DropdownToggleState {
 };
 
 /**
- * Interface for onClick item function
+ * Interface for onChange event function
  * 
  * @export
- * @interface IClick
+ * @interface IOnChangeEvent
  */
-export interface IClick {
+export interface IOnChangeEvent {
     /**
      * Function interface 
      * 
@@ -80,13 +80,13 @@ export interface IDropdownProps {
      * 
      * @type {IDropdownValue[]}
      */
-    items?: IDropdownValue[];
+    items: IDropdownValue[];
     /**
      * Executed function of selected item
      * 
      * @type {IClick}
      */
-    onClickItem?: IClick;
+    onChange?: IOnChangeEvent;
 }
 
 /**
@@ -107,11 +107,6 @@ export interface IDropdownState {
      * @type {IDropdownValue | null}
      */
     selected: IDropdownValue | null;
-    /**
-     * List of possible items
-     * @type {IDropdownValue[]}
-     */
-    items: IDropdownValue[];
 }
 
 /**
@@ -128,7 +123,6 @@ export class Dropdown extends React.Component<IDropdownProps, IDropdownState> {
     constructor() {
         super();
         this.state = {
-            items: [],
             selected: null,
             status: DropdownToggleState.OFF
         };
@@ -157,10 +151,9 @@ export class Dropdown extends React.Component<IDropdownProps, IDropdownState> {
     /**
      * Open dropdown
      *
-     * @param {Event} e 
      * @returns {void}
      */
-    public toggleOn(e?: Event): void {
+    public toggleOn(): void {
         if (!this.isOpen()) {
             this.setState({
                 status: DropdownToggleState.ON
@@ -171,10 +164,9 @@ export class Dropdown extends React.Component<IDropdownProps, IDropdownState> {
     /**
      * Close dropdown
      *
-     * @param {Event} e 
      * @returns {void}
      */
-    public toggleOff(e?: Event): void {
+    public toggleOff(): void {
         if (!this.isClose()) {
             this.setState({
                 status: DropdownToggleState.OFF
@@ -185,14 +177,13 @@ export class Dropdown extends React.Component<IDropdownProps, IDropdownState> {
     /**
      * Switch dropdown state
      *
-     * @param {Event} e 
      * @returns {void}
      */
-    public toggle(e?: Event): void {
+    public toggle(): void {
         if (this.isOpen()) {
-            this.toggleOff(e);
+            this.toggleOff();
         } else {
-            this.toggleOn(e);
+            this.toggleOn();
         }
     }
 
@@ -221,11 +212,9 @@ export class Dropdown extends React.Component<IDropdownProps, IDropdownState> {
         const props = this.props;
         let selected: IDropdownValue | null = (props.selected) ? props.selected
             : (props.placeHolder) ? null
-            : (props.items) ? props.items[0]
-            : null;
+            : props.items[0];
 
         this.setState({
-            items: props.items || [],
             selected
         } as IDropdownState);
     }
@@ -253,7 +242,7 @@ export class Dropdown extends React.Component<IDropdownProps, IDropdownState> {
             "open": this.state.status == DropdownToggleState.ON
         });
 
-        this.state.items.map((item, index): void => {
+        this.props.items.map((item, index): void => {
             if (this.state.selected && item.value == this.state.selected.value) {
                 items.push(
                     <li key={item.value} className="active">
@@ -266,9 +255,7 @@ export class Dropdown extends React.Component<IDropdownProps, IDropdownState> {
                 items.push(<li key={item.value} onClick={this.onClickItem.bind(this, index)}><a href="#">{item.text}</a></li>);
             }
         });
-        for (let item of this.state.items) {
-            options.push(<option key={item.value} value={item.value}>{item.text}</option>);
-        }
+        options = this.props.items.map(item => <option key={item.value} value={item.value}>{item.text}</option>);
 
         return (
             <div className={dropdownClasses}>
@@ -310,15 +297,15 @@ export class Dropdown extends React.Component<IDropdownProps, IDropdownState> {
 
     private onClickItem(index: number): void {
         this.setState({
-            selected: this.state.items[index]
+            selected: this.props.items[index]
         } as IDropdownState);
         this.toggleOff();
-        return this.props.onClickItem && this.props.onClickItem(index);
+        return this.props.onChange && this.props.onChange(index);
     }
 
     private onChangeSelect(event: React.FormEvent): void {
         const selectedValue = (event.target as HTMLSelectElement).value;
-        const items = this.state.items;
+        const items = this.props.items;
         const values = items.map((item: IDropdownValue) => item.value);
         return this.onClickItem(values.indexOf(selectedValue));
     }
