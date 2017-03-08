@@ -20,7 +20,7 @@ export const publicationReducer = handleActions({
         publications: action.payload
     }),
 
-    [CHANGE_LANGUAGE]: function (state: IPublicationState, action: IAction): IPublicationState {
+    [CHANGE_LANGUAGE]: (state: IPublicationState, action: IAction): IPublicationState => {
         const newPub: IPublication | null = getPubByLang(state.publications)(state.id || "", action.payload as string);
         return newPub ? {
             id: newPub.id,

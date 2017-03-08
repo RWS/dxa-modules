@@ -154,10 +154,12 @@ interface IToc {
     rootItems?: ITaxonomy[];
 }
 
+export type Pub = IPublicationContentProps & IPublicationState;
+
 /**
  * Publication + content component
  */
-export class PublicationContent extends React.Component<IPublicationContentProps & IPublicationState, IPublicationContentState> {
+export class PublicationContent extends React.Component<Pub, IPublicationContentState> {
 
     public static contextTypes: React.ValidationMap<IAppContext> = {
         services: React.PropTypes.object.isRequired,
@@ -186,23 +188,19 @@ export class PublicationContent extends React.Component<IPublicationContentProps
     /**
      * Invoked once, both on the client and server, immediately before the initial rendering occurs.
      */
-    public componentWillMount(): void {
-        console.log("PUBCONTENT.componentWillMount");
-        const { id: publicationId, pageId} = this.props;
+    public fetchPublication(publicationId: string, pageId: string | null): void {
         // const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
-        const { publicationService, pageService } = this.context.services;
+        const { publicationService } = this.context.services;
 
         if (pageId) {
             // Load the page
-            pageService.getPageInfo(publicationId || "", pageId).then(
-                this._onPageContentRetrieved.bind(this),
-                this._onPageContentRetrievFailed.bind(this));
+           this.fetchPage(publicationId, pageId);
         } else {
-            this._loadTocRootItems(publicationId || "");
+            this._loadTocRootItems(publicationId);
         }
 
         // Get publication title
-        publicationService.getPublicationTitle(publicationId || "").then(
+        publicationService.getPublicationTitle(publicationId).then(
             title => {
                 /* istanbul ignore else */
                 if (!this._isUnmounted) {
@@ -222,35 +220,42 @@ export class PublicationContent extends React.Component<IPublicationContentProps
             });
     }
 
+    public fetchPage(publicationId: string, pageId: string): void {
+        // const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
+        // const nextpageIdOrPublicationTitle = nextProps.params.pageIdOrPublicationTitle;
+        const pageService = this.context.services.pageService;
+        // Load the page
+        this.setState({
+            isPageLoading: true
+        });
+        pageService.getPageInfo(publicationId, pageId).then(
+            this._onPageContentRetrieved.bind(this),
+            this._onPageContentRetrievFailed.bind(this));
+    }
+
+    public componentWillMount(): void {
+        const { id: publicationId, pageId } = this.props;
+        return this.fetchPublication(publicationId || "", pageId);
+    }
+
     /**
      * Invoked when a component is receiving new props. This method is not called for the initial render.
      *
      * @param {IPublicationContentProps} nextProps
      */
-    public componentWillReceiveProps(nextProps: IPublicationContentProps & IPublicationState): void {
-        console.log("PUBCONTENT.componentWillReceiveProps");
-        const { id: publicationId, pageId } = this.props;
-        // const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
-        // const nextpageIdOrPublicationTitle = nextProps.params.pageIdOrPublicationTitle;
-        const { pageId: nextPageId } = nextProps;
-        const pageService = this.context.services.pageService;
-        debugger;
+    public componentWillReceiveProps(nextProps: Pub): void {
+       const { id: publicationId, pageId } = this.props;
+       const { id: nextPubId, pageId: nextPageId} = nextProps;
 
-        if (!nextPageId) {
-            // Navigate to the first page in the publication
-            this.setState({
-                activeTocItemPath: undefined
-            });
+        // this.setState({
+        //     activeTocItemPath: undefined
+        // });
 
-        } else if (nextPageId !== pageId || (nextPageId === pageId && this._page.error)) {
-            // Load the page
-            this.setState({
-                isPageLoading: true
-            });
-            pageService.getPageInfo(publicationId || "", nextPageId).then(
-                this._onPageContentRetrieved.bind(this),
-                this._onPageContentRetrievFailed.bind(this));
-        }
+       if (publicationId !== nextPubId) {
+        this.fetchPublication(nextPubId || "", nextPageId);
+       } else if (pageId !== nextPageId) {
+        this.fetchPage(publicationId || "", nextPageId || "");
+       }
     }
 
     /**
