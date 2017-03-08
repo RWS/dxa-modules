@@ -83,7 +83,9 @@ class TocComponent extends TestBase {
             });
 
             afterAll(() => {
-                target.parentElement.removeChild(target);
+                if (target.parentElement) {
+                    target.parentElement.removeChild(target);
+                }
             });
 
             it("shows the root nodes on initial render", (): void => {
@@ -122,7 +124,8 @@ class TocComponent extends TestBase {
                 setTimeout((): void => {
                     const node = domNode.querySelector(".sdl-dita-delivery-toc-list-fail");
                     expect(node).not.toBeNull();
-                    expect(node.querySelector("p").textContent).toBe("mock-error.toc.items.not.found");
+                    const p = (node as HTMLElement).querySelector("p") as HTMLElement;
+                    expect(p.textContent).toBe("mock-error.toc.items.not.found");
                     done();
                 }, DELAY + 1);
             });
@@ -266,10 +269,11 @@ class TocComponent extends TestBase {
                 const element = document.querySelector(".sdl-dita-delivery-error-toc");
                 expect(element).not.toBeNull();
 
-                const message = element.querySelector(".sdl-dita-delivery-error-toc-message");
+                const message = (element as HTMLElement).querySelector(".sdl-dita-delivery-error-toc-message") as HTMLElement;
                 expect(message.textContent).toEqual("mock-error.toc.not.found");
 
-                element.querySelector("button").click();
+                const button = (element as HTMLElement).querySelector("button") as HTMLButtonElement;
+                button.click();
 
                 const element2 = document.querySelector(".sdl-dita-delivery-error-toc");
                 expect(element2).toBeNull();
