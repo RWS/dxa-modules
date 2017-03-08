@@ -11,9 +11,10 @@ export interface IPublication {
 }
 
 export type Pub = {
-        publicationId: string,
-        pageId: string
-    };
+    publicationId: string,
+    pageId: string
+};
+
 export interface ISyncParams {
     /**
      * Publications list content props parameters
@@ -31,7 +32,7 @@ export class RouteStateSync1 extends React.Component<Props, {}> {
     private code: number | null = null;
 
     public shouldComponentUpdate(nextProps: ISyncParams): boolean {
-        return this.needUpdateState(this.props.params, nextProps.params)
+        return this.needUpdateState(this.props.params, nextProps.params);
     }
     public componentDidUpdate(): void {
         const { params, onStateChange } = this.props;
@@ -41,13 +42,13 @@ export class RouteStateSync1 extends React.Component<Props, {}> {
         }
         const publicationId: string = params.publicationId;
         const pageId: string = (params.pageIdOrPublicationTitle || "");
-        console.log(pageId)
-        this.code = setTimeout((): void => {
-            this.code = null;
-            onStateChange({
-                publicationId, pageId
-            });
-        }, 200);
+        console.log(pageId);
+        // this.code = setTimeout((): void => {
+        this.code = null;
+        onStateChange({
+            publicationId, pageId
+        });
+        // }, 0);
     }
 
     public render(): JSX.Element {

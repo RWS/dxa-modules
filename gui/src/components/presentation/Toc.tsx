@@ -67,13 +67,11 @@ const TaxonomyType = {
 };
 
 /**
- * Function that generates unique value every time it's called.
+ * Function that generates unique value every time it"s called.
  */
-const getUniqueTaxonomyId = function (count: number): () => string {
-    return function(): string {
-        return `taxonomy-${count++}`;
-    };
-}(0);
+const getUniqueTaxonomyId = ((count: number): () => string => {
+    return (): string => `taxonomy-${count++}`;
+})(0);
 
 /**
  * Table of contents
@@ -152,9 +150,7 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
      */
     public componentWillMount(): void {
         const { error } = this.props;
-        this.setState({
-            error: error
-        });
+        this.setState({ error });
     }
 
     /**
@@ -264,7 +260,7 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
 
     /**
      * This method is just a wrapper for TreeViewControl.prototype.createNode,
-     * just because we don't want to write this long list of arguments every time.
+     * just because we don"t want to write this long list of arguments every time.
      */
     private _createTaxonomyNode(taxonomy: ITaxonomy, {
             dataType = TaxonomyType.TOPIC,
@@ -276,10 +272,10 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
             id: taxonomy.id || getUniqueTaxonomyId(),
             name: taxonomy.title,
             isLeafNode: !taxonomy.hasChildNodes,
-            dataType: dataType,
+            dataType,
             parent: parentNode,
             children: null,
-            load: load,
+            load,
             isSelectable: true
         }) as ITreeViewNode;
         taxonomyNode.taxonomy = taxonomy;
@@ -288,8 +284,7 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
     }
 
     private _onSelectionChanged(nodes: ITreeViewNode[]): void {
-        console.log('WTF._onSelectionChanged')
-        debugger;
+        console.log("WTF._onSelectionChanged");
         /* istanbul ignore else */
         if (!this._isUnmounted) {
             const { activeItemPath, rootItems } = this.props;
