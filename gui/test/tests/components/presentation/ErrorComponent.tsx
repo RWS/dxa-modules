@@ -33,12 +33,14 @@ class ErrorComponent extends TestBase {
             });
 
             afterAll(() => {
-                target.parentElement.removeChild(target);
+                if (target.parentElement) {
+                    target.parentElement.removeChild(target);
+                }
             });
 
             it("Correct component render", (): void => {
                 this._renderComponent(props, target);
-                const errorElement = document.querySelector(".sdl-dita-delivery-error");
+                const errorElement = document.querySelector(".sdl-dita-delivery-error") as HTMLElement;
                 const errorButtons = errorElement.querySelectorAll(".sdl-button");
                 const errorTitle = errorElement.querySelectorAll("h1");
                 const errorMessage = errorElement.querySelectorAll("p");
@@ -54,7 +56,7 @@ class ErrorComponent extends TestBase {
 
             it("Check button clicks", (done: () => void): void => {
                 this._renderComponent(props, target);
-                const errorElement = document.querySelector(".sdl-dita-delivery-error");
+                const errorElement = document.querySelector(".sdl-dita-delivery-error") as HTMLButtonElement;
                 const errorButtons = errorElement.querySelectorAll(".sdl-button") as NodeListOf<HTMLButtonElement>;
 
                 errorButtons.item(0).click();

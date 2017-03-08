@@ -61,15 +61,14 @@ export class PublicationService implements IPublicationService {
     /**
      * Get the list of publications product families
      *
-     * @param {boolean} reload if list should be reloaded
      * @returns {Promise<IProductFamily[]>} Promise to return Items
      *
      * @memberOf DataStoreClient
      */
-    public getProductFamilies(reload?: boolean): Promise<IProductFamily[]> {
+    public getProductFamilies(): Promise<IProductFamily[]> {
         const publication = this.getPublicationsModel();
         return new Promise((resolve: (publications?: IProductFamily[]) => void, reject: (error: string | null) => void) => {
-            if (!reload && publication.isLoaded()) {
+            if (publication.isLoaded()) {
                 resolve(publication.getProductFamilies());
             } else {
                 let removeEventListeners: () => void;
@@ -88,7 +87,7 @@ export class PublicationService implements IPublicationService {
 
                 publication.addEventListener("load", onLoad);
                 publication.addEventListener("loadfailed", onLoadFailed);
-                publication.load(reload);
+                publication.load();
             }
         });
     }

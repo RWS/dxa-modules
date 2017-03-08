@@ -17,7 +17,9 @@ class SearchBarComponent extends TestBase {
             });
 
             afterAll(() => {
-                target.parentElement.removeChild(target);
+                if (target.parentElement) {
+                    target.parentElement.removeChild(target);
+                }
             });
 
             it("shows placeholder text", (): void => {
@@ -25,8 +27,8 @@ class SearchBarComponent extends TestBase {
                 this._renderComponent({
                     placeholderLabel: placeholderLabel
                 }, target);
-                const element = document.querySelector(".sdl-dita-delivery-searchbar");
-                expect(element.querySelector("input").getAttribute("placeholder")).toBe(placeholderLabel);
+                const input = document.querySelector(".sdl-dita-delivery-searchbar input") as HTMLInputElement;
+                expect(input.getAttribute("placeholder")).toBe(placeholderLabel);
             });
 
             it("triggers search on enter key press", (done: () => void): void => {

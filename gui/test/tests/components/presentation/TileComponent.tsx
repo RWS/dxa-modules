@@ -32,7 +32,9 @@ class TileComponent extends TestBase {
             });
 
             afterAll(() => {
-                target.parentElement.removeChild(target);
+                if (target.parentElement) {
+                    target.parentElement.removeChild(target);
+                }
             });
 
             it("can render tile title and load tile string content", (done: () => void): void => {
@@ -49,7 +51,7 @@ class TileComponent extends TestBase {
 
                 const appNode = ReactDOM.findDOMNode(tileComponent) as HTMLElement;
 
-                const tileTitleNode = appNode.querySelector(".sdl-dita-delivery-tile h3");
+                const tileTitleNode = appNode.querySelector(".sdl-dita-delivery-tile h3") as HTMLElement;
                 expect(tileTitleNode.textContent).toBe("Penguins (order Sphenisciformes, family...");
 
                 // tslint:disable-next-line:no-any
@@ -59,7 +61,7 @@ class TileComponent extends TestBase {
                     // tslint:disable-next-line:no-any
                     expect(TestUtils.scryRenderedComponentsWithType(tileComponent, ActivityIndicator as any).length).toBe(0, "Activity indicator should not be rendered.");
 
-                    const descriptionNode = appNode.querySelector(".sdl-dita-delivery-tile .tile-content");
+                    const descriptionNode = appNode.querySelector(".sdl-dita-delivery-tile .tile-content") as HTMLElement;
                     expect(descriptionNode.textContent).toBe("Penguins (order Sphenisciformes, family Spheniscidae) are a group of aquatic, flightless birds living almost "
                         + "exclusively in the southern hemisphere, especially in Antarctica. Highly adapted for life...");
 
@@ -87,7 +89,7 @@ class TileComponent extends TestBase {
                 const appNode = ReactDOM.findDOMNode(target);
 
                 setTimeout((): void => {
-                    const descriptionNode = appNode.querySelector(".sdl-dita-delivery-tile .tile-content .error-message");
+                    const descriptionNode = appNode.querySelector(".sdl-dita-delivery-tile .tile-content .error-message") as HTMLElement;
                     expect(descriptionNode.textContent).toBe(errorMessage);
 
                     const retryButtonNode = appNode.querySelector(".sdl-dita-delivery-tile button") as HTMLElement;

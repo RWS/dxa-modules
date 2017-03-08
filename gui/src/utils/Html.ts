@@ -172,9 +172,9 @@ export class Html {
         // In IE scrollTop is always 0
         const scrollTop = scrollContainter.scrollTop || document.documentElement.scrollTop || document.body.scrollTop || 0;
         // Scroll when the element is out of view
-        if ((scrollTop < element.offsetTop && element.offsetTop > scrollContainter.clientHeight) // Below
+        if (element.offsetTop > (scrollContainter.clientHeight + scrollTop) // Below
             || element.offsetTop < scrollTop) { // Above
-            scrollContainter.scrollTop = element.offsetTop - element.clientHeight;
+            scrollContainter.scrollTop = element.offsetTop;
         }
     }
 
