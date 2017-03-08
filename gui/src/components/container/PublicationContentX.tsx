@@ -17,7 +17,6 @@ import { Url } from "utils/Url";
 import { debounce } from "utils/Function";
 
 import "components/container/styles/PublicationContent";
-import { RouteStateSync } from "./RouteStateSync";
 import { IPublicationState } from "store/interfaces/State";
 
 /**
@@ -186,9 +185,8 @@ export class PublicationContent extends React.Component<IPublicationContentProps
     /**
      * Invoked once, both on the client and server, immediately before the initial rendering occurs.
      */
-    public componentWillMount(): void {
-        console.log('PUBCONTENT.componentWillMount');
-        const { id: publicationId, pageId} = this.props;
+    public fetchData(publicationId: string, pageId: string): void {
+        // console.log("PUBCONTENT.componentWillMount");
         // const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
         const { publicationService, pageService } = this.context.services;
 
@@ -222,34 +220,39 @@ export class PublicationContent extends React.Component<IPublicationContentProps
             });
     }
 
+    public componentWillMount(): void {
+        const { id: publicationId, pageId} = this.props;
+        this.fetchData(publicationId || "", pageId || "");
+    }
+
     /**
      * Invoked when a component is receiving new props. This method is not called for the initial render.
      *
      * @param {IPublicationContentProps} nextProps
      */
     public componentWillReceiveProps(nextProps: IPublicationContentProps & IPublicationState): void {
-        console.log('PUBCONTENT.componentWillReceiveProps');
-        const { id: publicationId, pageId } = this.props;
+        // console.log("PUBCONTENT.componentWillReceiveProps");
+        const { id: publicationId, pageId } = nextProps;
+        this.fetchData(publicationId || "", pageId || "");
         // const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
         // const nextpageIdOrPublicationTitle = nextProps.params.pageIdOrPublicationTitle;
-        const { pageId: nextPageId } = nextProps;
-        const pageService = this.context.services.pageService;
+        // const { pageId: nextPageId } = nextProps;
+        // const pageService = this.context.services.pageService;
 
-        if (!nextPageId) {
-            // Navigate to the first page in the publication
-            this.setState({
-                activeTocItemPath: undefined
-            });
+        // if (!nextPageId) {
+        //     // Navigate to the first page in the publication
+        //     this.setState({
+        //         activeTocItemPath: undefined
+        //     });
 
-        } else if (nextPageId !== pageId || (nextPageId === pageId && this._page.error)) {
-            // Load the page
-            this.setState({
-                isPageLoading: true
-            });
-            pageService.getPageInfo(publicationId || "", nextPageId).then(
-                this._onPageContentRetrieved.bind(this),
-                this._onPageContentRetrievFailed.bind(this));
-        }
+        // } else if (nextPageId !== pageId || (nextPageId === pageId && this._page.error)) {
+        //     // Load the page
+        //     this.setState({
+        //         isPageLoading: true
+        //     });
+        //     pageService.getPageInfo(publicationId || "", nextPageId).then(
+        //         this._onPageContentRetrieved.bind(this),
+        //         this._onPageContentRetrievFailed.bind(this));
     }
 
     /**
@@ -285,7 +288,6 @@ export class PublicationContent extends React.Component<IPublicationContentProps
 
         return (
             <section className={"sdl-dita-delivery-publication-content"}>
-                <RouteStateSync />
                 <Page
                     showActivityIndicator={isPageLoading || false}
                     content={content}
@@ -293,7 +295,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     onNavigate={(url: string): void => {
                         /* istanbul ignore else */
                         if (router) {
-                            router.push(url);
+                            {/*router.push(url);*/}
                         }
                     } }
                     url={pageId ?

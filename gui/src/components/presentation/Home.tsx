@@ -1,3 +1,4 @@
+import { RouteStateSync } from "../container/RouteStateSync";
 import * as ClassNames from "classnames";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
@@ -200,6 +201,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
                 <div className={"sdl-dita-delivery-nav-mask"} onClick={isNavOpen && this._toggleNavigationMenu.bind(this)} />
                 <div>{language}</div>
                 <div>{ getLanguages() }</div>
+                <RouteStateSync />
                 <TopBar
                     language={localizationService.formatMessage("app.language")}>
                     {

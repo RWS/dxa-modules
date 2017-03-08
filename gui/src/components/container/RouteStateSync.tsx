@@ -2,9 +2,8 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { IState } from "store/interfaces/State";
 import { publicationRouteChanged } from "store/actions/Actions";
-import { browserHistory, withRouter } from "react-router";
-import { Url } from "utils/Url";
 import { IPublicationContentPropsParams } from "./PublicationContentX";
+import { withRouter } from "react-router";
 
 export interface IPublication {
     publicationId: string;
@@ -27,39 +26,44 @@ export interface ISyncParams {
     params: IPublicationContentPropsParams;
 }
 
-export class RouteStateSync1 extends React.Component<IPublication & ISyncParams, {}> {
+export type Props = IPublication & ISyncParams;
+export class RouteStateSync1 extends React.Component<Props, {}> {
+    private code: number | null = null;
 
-    public componentWillMount(): void {
-        // debugger;
-        const { onStateChange, params } = this.props;
-        console.log('WillMount', params)
-        if (this.needSync(params as Pub)) {
-            onStateChange({
-                publicationId: params.publicationId,
-                pageId: (params.pageIdOrPublicationTitle || "")
-            });
-        }
+    public shouldComponentUpdate(nextProps: ISyncParams): boolean {
+        return this.needUpdateState(this.props.params, nextProps.params)
     }
-
-    public componentWillReceiveProps(nextProps: ISyncParams): void {
-        console.log("RouteStateSync1.componentWillReceiveProps", nextProps);
-        const { pageId, publicationId } = nextProps;
-        if (this.needSync(nextProps) && Math.random() > 1) {
-            browserHistory.push(Url.getPageUrl(pageId, publicationId));
+    public componentDidUpdate(): void {
+        const { params, onStateChange } = this.props;
+        if (this.code !== null) {
+            clearTimeout(this.code);
+            this.code = null;
         }
+        const publicationId: string = params.publicationId;
+        const pageId: string = (params.pageIdOrPublicationTitle || "");
+        console.log(pageId)
+        this.code = setTimeout((): void => {
+            this.code = null;
+            onStateChange({
+                publicationId, pageId
+            });
+        }, 200);
     }
 
     public render(): JSX.Element {
         return <div></div>;
     }
 
-    private needSync(routeParams: Pub): boolean {
-        const props = this.props;
-        const { params } = props;
-
-        return params.publicationId !== props.publicationId
-        || params.pageIdOrPublicationTitle !== props.pageId;
+    // private needSync(): boolean {
+    //     return true;
+    // }
+    private needUpdateState(curParams: IPublicationContentPropsParams, nextParams: IPublicationContentPropsParams): boolean {
+        return !compareProps(curParams, nextParams);
     }
+
+    // private needUpdateLocation(curPub: IPublication, nextPub: IPublication): boolean {
+    //     return !compareProps(curPub, nextPub);
+    // }
 }
 
 const mapStateToProps = (state: IState) => ({
@@ -74,3 +78,7 @@ const mapDispatchToProps = {
 export const RouteStateSync = withRouter(
     connect(mapStateToProps, mapDispatchToProps)(RouteStateSync1)
 );
+
+function compareProps(props1: {}, props2: {}): boolean {
+    return JSON.stringify(props1) === JSON.stringify(props2);
+}

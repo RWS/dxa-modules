@@ -20,13 +20,13 @@ export const publicationReducer = handleActions({
         publications: action.payload
     }),
 
-    [CHANGE_LANGUAGE]: function (state: IPublicationState, action: IAction) {
+    [CHANGE_LANGUAGE]: function (state: IPublicationState, action: IAction): IPublicationState {
         const newPub: IPublication | null = getPubByLang(state.publications)(state.id || "", action.payload as string);
         return newPub ? {
             id: newPub.id,
             pageId: null,
             publications: state.publications.slice()
-        } : state
+        } : state;
     },
 
     [PUBLICATION_ROUTE_CHANGED]: (state: IPublicationState, action: IAction) => {
