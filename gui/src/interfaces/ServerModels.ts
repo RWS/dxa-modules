@@ -5,6 +5,7 @@ export interface IPage {
     Regions: IRegion[];
 }
 export interface IPublication {
+    CreatedOn: string;
     Id: string;
     ProductFamily?: string | null;
     ProductReleaseVersion?: string | null;

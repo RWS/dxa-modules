@@ -3,48 +3,56 @@
     "Id": "1420746",
     "Title": "User Guide",
     "ProductFamily": "Mobile Phones",
-    "ProductReleaseVersion": "MP 330 2014"
+    "ProductReleaseVersion": "MP 330 2014",
+    "CreatedOn": "2016-02-10T15:29:49Z"
   },
   {
     "Id": "1601084",
     "Title": "Penguin guide",
     "ProductFamily": "Animals",
-    "ProductReleaseVersion": "Penguins (8.0.0)"
+    "ProductReleaseVersion": "Penguins (8.0.0)",
+    "CreatedOn": "2016-01-07T03:53:57Z"
   },
   {
     "Id": "1611362",
     "Title": "LS40-el",
     "ProductFamily": "Komori",
-    "ProductReleaseVersion": "Komori CMS 2010"
+    "ProductReleaseVersion": "Komori CMS 2010",
+    "CreatedOn": "2016-01-14T05:47:16Z"
   },
   {
     "Id": "1849903",
     "Title": "בירה",
     "ProductFamily": "SDL Knowledge Center",
-    "ProductReleaseVersion": "Beer 2017"
+    "ProductReleaseVersion": "Beer 2017",
+    "CreatedOn": "2017-01-26T08:31:35Z"
   },
   {
     "Id": "1881665",
     "Title": "User Guide",
     "ProductFamily": "Mobile Phones",
-    "ProductReleaseVersion": "MP 330 (2.0.0)"
+    "ProductReleaseVersion": "MP 330 (2.0.0)",
+    "CreatedOn": "2015-12-23T03:22:09Z"
   },
   {
     "Id": "1961681",
     "Title": "McAfee Virtual Technician 4.2",
     "ProductFamily": "McAfee",
-    "ProductReleaseVersion": "McAfee Anti Virus 2008"
+    "ProductReleaseVersion": "McAfee Anti Virus 2008",
+    "CreatedOn": "2015-12-23T03:22:08Z"
   },
   {
     "Id": "1961700",
     "Title": "User Guide",
     "ProductFamily": "Mobile Phones",
-    "ProductReleaseVersion": "MP 330 (2.0.0)"
+    "ProductReleaseVersion": "MP 330 (2.0.0)",
+    "CreatedOn": "2015-12-23T03:22:09Z"
   },
   {
     "Id": "1961702",
     "Title": "User Guide",
     "ProductFamily": "Mobile Phones",
-    "ProductReleaseVersion": "MP 330 (2.0.0)"
+    "ProductReleaseVersion": "MP 330 (2.0.0)",
+    "CreatedOn": "2015-12-23T03:22:09Z"
   }
 ]
