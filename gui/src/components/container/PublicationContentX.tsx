@@ -17,8 +17,10 @@ import { Url } from "utils/Url";
 import { debounce } from "utils/Function";
 
 import "components/container/styles/PublicationContent";
-import { RouteStateSync } from "./RouteStateSync";
 import { IPublicationState } from "store/interfaces/State";
+import { FetchPublications } from "./FetchPublications";
+import { RouteToState } from "./RouteToState";
+import { StateToRoute } from "./StateToRoute";
 
 /**
  * PublicationContent component props params
@@ -76,6 +78,8 @@ export interface IPublicationContentProps {
      * @type {IPublicationContentPropsParams}
      */
     params: IPublicationContentPropsParams;
+
+    onPulicationChange: (publication: {}) => void;
 }
 
 /**
@@ -291,7 +295,9 @@ export class PublicationContent extends React.Component<Pub, IPublicationContent
 
         return (
             <section className={"sdl-dita-delivery-publication-content"}>
-                <RouteStateSync />
+                <RouteToState />
+                <StateToRoute />
+                <FetchPublications />
                 <Page
                     showActivityIndicator={isPageLoading || false}
                     content={content}
@@ -362,8 +368,8 @@ export class PublicationContent extends React.Component<Pub, IPublicationContent
     }
 
     private _onTocSelectionChanged(sitemapItem: ITaxonomy, path: string[]): void {
-        const { router } = this.context;
         const { publicationTitle } = this.state;
+        const { onPulicationChange } = this.props;
 
         const updatedState: IPublicationContentState = {
             activeTocItemPath: path,
@@ -374,21 +380,16 @@ export class PublicationContent extends React.Component<Pub, IPublicationContent
 
         // When the tree is expanding it is also calling the onTocSelectionChanged callback
         /* istanbul ignore else */
-        if (router) {
-            // Only navigate to pages which have a location
-            const navPath = sitemapItem.url;
-            if (navPath) {
-                let url = navPath;
-                const parsedUrl = Url.parsePageUrl(url);
-                if (parsedUrl && (!parsedUrl.pageTitle || !parsedUrl.publicationTitle)) {
-                    // Use the title of the sitemap item instead of the page
-                    // When using dynamic link resolving these should actually be equal
-                    url = Url.getPageUrl(parsedUrl.publicationId, parsedUrl.pageId, publicationTitle, sitemapItem.title);
-                }
-                if (router.getCurrentLocation().pathname !== url) {
-                    router.push(url);
-                }
-            }
+        const navPath = sitemapItem.url;
+        const parsedUrl = navPath && Url.parsePageUrl(navPath);
+
+        if (parsedUrl) {
+            onPulicationChange({
+                publicationId: parsedUrl.publicationId,
+                pageId: parsedUrl.pageId,
+                title: publicationTitle,
+                siteMapTitle: sitemapItem.title
+            });
         }
     }
 

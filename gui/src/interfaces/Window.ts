@@ -1,3 +1,4 @@
+import { GenericStoreEnhancer } from "redux";
 import { IError } from "interfaces/Error";
 
 /**
@@ -31,5 +32,5 @@ export interface IWindow extends Window {
      */
     SdlDitaDeliveryError: IError;
 
-    __REDUX_DEVTOOLS_EXTENSION__: () => undefined;
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: (storeEnchancer: GenericStoreEnhancer) => GenericStoreEnhancer;
 }

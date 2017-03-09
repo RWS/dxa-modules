@@ -15,6 +15,7 @@
   "dependencies": {
     "react-redux": "registry:dt/react-redux#4.4.0+20170123203653",
     "redux-actions": "github:DefinitelyTyped/DefinitelyTyped/redux-actions/index.d.ts#983c93531a0a732f2d0eca0148ac255ede0d40a6",
+    "redux-thunk": "registry:npm/redux-thunk#2.0.0+20160525185520",
     "webpack": "github:DefinitelyTyped/DefinitelyTyped/webpack/index.d.ts#df177d2915be6639a2d30d39805985ea9a3e10e6"
   }
 }

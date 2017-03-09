@@ -28,41 +28,39 @@ export interface ISyncParams {
 }
 
 export type Props = IPublication & ISyncParams;
-export class RouteStateSync1 extends React.Component<Props, {}> {
-    private code: number | null = null;
+export class RouteToState1 extends React.Component<Props, {}> {
 
     public shouldComponentUpdate(nextProps: ISyncParams): boolean {
         return this.needUpdateState(this.props.params, nextProps.params);
     }
+
     public componentDidUpdate(): void {
         const { params, onStateChange } = this.props;
-        if (this.code !== null) {
-            clearTimeout(this.code);
-            this.code = null;
-        }
         const publicationId: string = params.publicationId;
         const pageId: string = (params.pageIdOrPublicationTitle || "");
-        console.log(pageId);
-        // this.code = setTimeout((): void => {
-        this.code = null;
         onStateChange({
             publicationId, pageId
         });
-        // }, 0);
     }
 
     public render(): JSX.Element {
         return <div></div>;
     }
 
-    // private needSync(): boolean {
-    //     return true;
-    // }
     private needUpdateState(curParams: IPublicationContentPropsParams, nextParams: IPublicationContentPropsParams): boolean {
         return !compareProps(curParams, nextParams);
     }
 
-    // private needUpdateLocation(curPub: IPublication, nextPub: IPublication): boolean {
+    // private needUpdateLocation(props: Props, nextProps: Props): boolean {
+    //     return this.needUpdateLocationX({
+    //         publicationId: props.publicationId,
+    //         pageId: props.pageId
+    //     }, {
+    //         publicationId: nextProps.publicationId,
+    //         pageId: nextProps.pageId
+    //     });
+    // }
+    // private needUpdateLocationX(curPub: IPublication, nextPub: IPublication): boolean {
     //     return !compareProps(curPub, nextPub);
     // }
 }
@@ -76,10 +74,10 @@ const mapDispatchToProps = {
     onStateChange: publicationRouteChanged
 };
 
-export const RouteStateSync = withRouter(
-    connect(mapStateToProps, mapDispatchToProps)(RouteStateSync1)
+export const RouteToState = withRouter(
+    connect(mapStateToProps, mapDispatchToProps)(RouteToState1)
 );
 
 function compareProps(props1: {}, props2: {}): boolean {
-    return JSON.stringify(props1) === JSON.stringify(props2);
+    return JSON.stringify(props1) === JSON.stringify(props2); //magic :)
 }

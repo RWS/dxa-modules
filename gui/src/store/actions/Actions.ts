@@ -10,4 +10,15 @@ export const publicationsLoaded = createAction(PUBLICATIONS_LOADED, publications
 
 export const publicationRouteChanged = createAction(PUBLICATION_ROUTE_CHANGED, publication => publication);
 
+export const setPublication = createAction(PUBLICATION_ROUTE_CHANGED, publication => ({
+    id: publication.publicationId,
+    pageId: publication.pageId
+}));
+
+//==============
+// Api
+//=============
+export const fetchPublications = (productFamily?: string) => {
+};
+
 export { Action }
