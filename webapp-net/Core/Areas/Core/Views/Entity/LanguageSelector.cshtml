@@ -12,7 +12,11 @@
 
         filteredLocalizations.AddRange(siteLocalizations.Where(siteLoc => !excludedLocalizations.Contains(siteLoc.Path)).Select(s=>s));
     }
-    var redirectId = WebRequestContext.PageModel.Id;
+    var redirectId = "0";
+    if (WebRequestContext.PageModel != null && !string.IsNullOrEmpty(WebRequestContext.PageModel.Id))
+    {
+        redirectId = WebRequestContext.PageModel.Id;
+    }
     var defaultItem = Model.Settings.ContainsKey("defaultContentLink") ? Model.Settings["defaultContentLink"] : null;
 }
 @if (redirectId != null && filteredLocalizations.Count > 1)
