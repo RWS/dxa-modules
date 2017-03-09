@@ -1,12 +1,13 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import { Promise } from "es6-promise";
 import { ITaxonomy } from "interfaces/Taxonomy";
 import { IPage } from "interfaces/Page";
 import { TaxonomyItemId } from "interfaces/TcmId";
 
 import { IAppContext } from "components/container/App";
 import { NavigationMenu } from "components/presentation/NavigationMenu";
-import { Toc } from "components/container/Toc";
+import { Toc } from "components/presentation/Toc";
 import { Page } from "components/presentation/Page";
 import { Breadcrumbs } from "components/presentation/Breadcrumbs";
 
@@ -278,14 +279,15 @@ export class PublicationContent extends React.Component<Pub, IPublicationContent
      * @returns {JSX.Element}
      */
     public render(): JSX.Element {
-        const { isPageLoading, selectedTocItem, publicationTitle, activePageHeader } = this.state;
+        const { isPageLoading, activeTocItemPath, selectedTocItem, publicationTitle, activePageHeader } = this.state;
         const { pageIdOrPublicationTitle, pageTitle, pageAnchor } = this.props.params;
         const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
         const { services, router } = this.context;
         const { id: publicationId } = this.props;
         const { taxonomyService } = services;
         const { content, error} = this._page;
-        // const tocError = this._toc.error;
+        const { rootItems } = this._toc;
+        const tocError = this._toc.error;
 
         return (
             <section className={"sdl-dita-delivery-publication-content"}>
@@ -309,8 +311,18 @@ export class PublicationContent extends React.Component<Pub, IPublicationContent
                     scrollOffset={this._topOffset}
                     activeHeader={activePageHeader}>
                     <NavigationMenu isOpen={false}>{/* TODO: use global state store */}
-                        <Toc />
-                        <span className="separator" />
+                        <Toc
+                            activeItemPath={activeTocItemPath}
+                            rootItems={rootItems}
+                            loadChildItems={(parentId: string): Promise<ITaxonomy[]> => {
+                                return taxonomyService.getSitemapItems(publicationId || "", parentId);
+                            } }
+                            onSelectionChanged={this._onTocSelectionChanged.bind(this)}
+                            error={tocError}
+                            onRetry={() => this._loadTocRootItems(publicationId || "") }
+                            >
+                            <span className="separator" />
+                        </Toc>
                     </NavigationMenu>
                     <Breadcrumbs
                         publicationId={publicationId || ""}
@@ -349,36 +361,36 @@ export class PublicationContent extends React.Component<Pub, IPublicationContent
         window.removeEventListener("resize", this._fixPanels.bind(this));
     }
 
-    // private _onTocSelectionChanged(sitemapItem: ITaxonomy, path: string[]): void {
-    //     const { router } = this.context;
-    //     const { publicationTitle } = this.state;
+    private _onTocSelectionChanged(sitemapItem: ITaxonomy, path: string[]): void {
+        const { router } = this.context;
+        const { publicationTitle } = this.state;
 
-    //     const updatedState: IPublicationContentState = {
-    //         activeTocItemPath: path,
-    //         selectedTocItem: sitemapItem,
-    //         isTocLoading: false
-    //     };
-    //     this.setState(updatedState);
+        const updatedState: IPublicationContentState = {
+            activeTocItemPath: path,
+            selectedTocItem: sitemapItem,
+            isTocLoading: false
+        };
+        this.setState(updatedState);
 
-    //     // When the tree is expanding it is also calling the onTocSelectionChanged callback
-    //     /* istanbul ignore else */
-    //     if (router) {
-    //         // Only navigate to pages which have a location
-    //         const navPath = sitemapItem.url;
-    //         if (navPath) {
-    //             let url = navPath;
-    //             const parsedUrl = Url.parsePageUrl(url);
-    //             if (parsedUrl && (!parsedUrl.pageTitle || !parsedUrl.publicationTitle)) {
-    //                 // Use the title of the sitemap item instead of the page
-    //                 // When using dynamic link resolving these should actually be equal
-    //                 url = Url.getPageUrl(parsedUrl.publicationId, parsedUrl.pageId, publicationTitle, sitemapItem.title);
-    //             }
-    //             if (router.getCurrentLocation().pathname !== url) {
-    //                 router.push(url);
-    //             }
-    //         }
-    //     }
-    // }
+        // When the tree is expanding it is also calling the onTocSelectionChanged callback
+        /* istanbul ignore else */
+        if (router) {
+            // Only navigate to pages which have a location
+            const navPath = sitemapItem.url;
+            if (navPath) {
+                let url = navPath;
+                const parsedUrl = Url.parsePageUrl(url);
+                if (parsedUrl && (!parsedUrl.pageTitle || !parsedUrl.publicationTitle)) {
+                    // Use the title of the sitemap item instead of the page
+                    // When using dynamic link resolving these should actually be equal
+                    url = Url.getPageUrl(parsedUrl.publicationId, parsedUrl.pageId, publicationTitle, sitemapItem.title);
+                }
+                if (router.getCurrentLocation().pathname !== url) {
+                    router.push(url);
+                }
+            }
+        }
+    }
 
     private _onPageContentRetrieved(pageInfo: IPage): void {
         const { id: publicationId } = this.props;

@@ -15,13 +15,13 @@ import * as ContentNavigationComp from "components/presentation/ContentNavigatio
 import * as NavigationMenuComp from "components/presentation/NavigationMenu";
 import * as PageComp from "components/presentation/Page";
 import * as SearchBarComp from "components/presentation/SearchBar";
-// import * as TocComp from "components/presentation/Toc";
+import * as TocComp from "components/presentation/Toc";
 import * as TopBarComp from "components/presentation/TopBar";
 
 export const Components = {
     AppComp, HomeComp, PublicationContentComp, PublicationsListComp,
     BreadcrumbsComp, ContentNavigationComp, NavigationMenuComp,
-    PageComp, SearchBarComp, TopBarComp
+    PageComp, SearchBarComp, TocComp, TopBarComp
 };
 
 /**

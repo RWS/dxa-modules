@@ -14,9 +14,6 @@ import { IAppContext } from "components/container/App";
 import { Url } from "utils/Url";
 
 import "components/container/styles/PublicationsList";
-import { publicationsLoaded } from "store/actions/Actions";
-import { connect } from "react-redux";
-import { Action } from "redux-actions";
 
 const SHOWN_TILE_ITEMS_COUNT = 5;
 
@@ -42,7 +39,6 @@ export interface IPublicationsListPropsParams {
  * @interface IPublicationsListProps
  */
 export interface IPublicationsListProps {
-    dispatch: (arg: Action<IPublication[]>) => {};
     /**
      * Publications list content props parameters
      *
@@ -75,7 +71,7 @@ export interface IPublicationsListState {
 /**
  * Publications list component
  */
-export class PublicationsListPresentation extends React.Component<IPublicationsListProps, IPublicationsListState> {
+export class PublicationsList extends React.Component<IPublicationsListProps, IPublicationsListState> {
 
     public static contextTypes: React.ValidationMap<IAppContext> = {
         services: React.PropTypes.object.isRequired,
@@ -188,14 +184,12 @@ export class PublicationsListPresentation extends React.Component<IPublicationsL
     }
 
     private _onPublicationsListRetrieved(publications: IPublication[]): void {
-        const { dispatch } = this.props;
         /* istanbul ignore if */
         if (!this._isUnmounted) {
             this.setState({
                 publications,
                 error: undefined
             });
-            dispatch(publicationsLoaded(publications));
         }
     }
 
@@ -226,5 +220,3 @@ export class PublicationsListPresentation extends React.Component<IPublicationsL
         });
     }
 }
-
-export const PublicationsList = connect()(PublicationsListPresentation);
