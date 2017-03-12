@@ -1,7 +1,7 @@
 import thunk from "redux-thunk";
 import { IWindow } from "interfaces/Window";
 import { IState } from "./interfaces/State";
-import { mainReducer } from "./reducers/Main";
+import { mainReducer } from "./reducers/Reducer";
 import { applyMiddleware, compose, createStore, Store } from "redux";
 
 const windowQwerty = window as IWindow;

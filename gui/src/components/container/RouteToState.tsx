@@ -4,30 +4,15 @@ import { IState } from "store/interfaces/State";
 import { publicationRouteChanged } from "store/actions/Actions";
 import { IPublicationContentPropsParams } from "./PublicationContentX";
 import { withRouter } from "react-router";
-
-export interface IPublication {
-    publicationId: string;
-    pageId: string;
-}
-
-export type Pub = {
-    publicationId: string,
-    pageId: string
-};
+import { IPublicationCurrentState } from "store/interfaces/State";
+import { getCurrentPub } from "../../store/reducers/Reducer";
 
 export interface ISyncParams {
-    /**
-     * Publications list content props parameters
-     *
-     * @type {IPublicationsListPropsParams}
-     */
-    publicationId: string;
-    pageId: string;
-    onStateChange: (publication: Pub) => {};
+    onRouteChange: (publication: IPublicationCurrentState) => {};
     params: IPublicationContentPropsParams;
 }
 
-export type Props = IPublication & ISyncParams;
+export type Props = IPublicationCurrentState & ISyncParams;
 export class RouteToState1 extends React.Component<Props, {}> {
 
     public shouldComponentUpdate(nextProps: ISyncParams): boolean {
@@ -35,43 +20,28 @@ export class RouteToState1 extends React.Component<Props, {}> {
     }
 
     public componentDidUpdate(): void {
-        const { params, onStateChange } = this.props;
+        const { params, onRouteChange } = this.props;
         const publicationId: string = params.publicationId;
         const pageId: string = (params.pageIdOrPublicationTitle || "");
-        onStateChange({
+        debugger;
+        onRouteChange({
             publicationId, pageId
         });
     }
 
     public render(): JSX.Element {
-        return <div></div>;
+        return <div />;
     }
 
     private needUpdateState(curParams: IPublicationContentPropsParams, nextParams: IPublicationContentPropsParams): boolean {
         return !compareProps(curParams, nextParams);
     }
-
-    // private needUpdateLocation(props: Props, nextProps: Props): boolean {
-    //     return this.needUpdateLocationX({
-    //         publicationId: props.publicationId,
-    //         pageId: props.pageId
-    //     }, {
-    //         publicationId: nextProps.publicationId,
-    //         pageId: nextProps.pageId
-    //     });
-    // }
-    // private needUpdateLocationX(curPub: IPublication, nextPub: IPublication): boolean {
-    //     return !compareProps(curPub, nextPub);
-    // }
 }
 
-const mapStateToProps = (state: IState) => ({
-    publicationId: state.publication.id,
-    pageId: state.publication.pageId
-});
+const mapStateToProps = (state: IState) => getCurrentPub(state);
 
 const mapDispatchToProps = {
-    onStateChange: publicationRouteChanged
+    onRouteChange: publicationRouteChanged
 };
 
 export const RouteToState = withRouter(

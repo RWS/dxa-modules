@@ -5,25 +5,19 @@ import { IPublication } from "interfaces/Publication";
  * @export
  * @interface IState
  */
-export interface IPublicationState {
+export interface IPublicationCurrentState {
     /**
      *
      * @type {(string | null)}
      * @memberOf IPublicationState
      */
-    id: string | null;
+    publicationId: string;
     /**
      *
      * @type {(string | null)}
      * @memberOf IPublicationState
      */
-    pageId: string | null;
-    /**
-     *
-     * @type {IPublication[]}
-     * @memberOf IPublicationState
-     */
-    publications: IPublication[];
+    pageId: string;
 }
 
 export interface IState {
@@ -38,5 +32,8 @@ export interface IState {
      * @type {IPublicationState}
      * @memberOf IState
      */
-    publication: IPublicationState;
+    publication: IPublicationCurrentState;
+    publications: {
+        byId: { [id: string]: IPublication };
+    };
 }

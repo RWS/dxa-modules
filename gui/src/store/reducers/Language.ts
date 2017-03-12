@@ -1,9 +1,6 @@
-import { IAction } from "store/interfaces/Action";
-import { handleActions, Reducer } from "redux-actions";
 import { CHANGE_LANGUAGE } from "store/actions/Actions";
+import { handleAction } from "./combineReducers";
 
-export const languageReducer = handleActions({
-    [CHANGE_LANGUAGE]: (state: string, action: IAction) => action.payload as string
-}, "");
-
-export { Reducer };
+export const language = handleAction(CHANGE_LANGUAGE,
+    (state: string, payload: string) => payload,
+    "");

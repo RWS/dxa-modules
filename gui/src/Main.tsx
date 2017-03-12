@@ -31,10 +31,10 @@ const services: IServices = {
 const store: Store<IState> = configureStore({
     language: "en", // default language
     publication: {
-        id: "1961702",
-        pageId: null,
-        publications: []
-    }
+        publicationId: "1961702",
+        pageId: "",
+    },
+    publications: {byId: {}}
 });
 
 localization.setStore(store);

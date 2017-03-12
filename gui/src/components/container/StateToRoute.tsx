@@ -5,29 +5,19 @@ import { publicationRouteChanged } from "store/actions/Actions";
 import { IPublicationContentPropsParams } from "./PublicationContentX";
 import { withRouter, browserHistory } from "react-router";
 import { Url } from "utils/Url";
-
-export interface IPublication {
-    publicationId: string;
-    pageId: string;
-}
+import { IPublicationCurrentState } from "../../store/interfaces/State";
+import { getCurrentPub } from "store/reducers/Reducer";
 
 export interface ISyncParams {
-    /**
-     * Publications list content props parameters
-     *
-     * @type {IPublicationsListPropsParams}
-     */
-    publicationId: string;
-    pageId: string;
+    onStateChange: (publication: IPublicationCurrentState) => {};
     params: IPublicationContentPropsParams;
-    onStateChange: (publication: IPublication) => {};
 }
 
-export type Props = IPublication & ISyncParams;
+export type Props = IPublicationCurrentState & ISyncParams;
 
 export class StateToRoute1 extends React.Component<Props, {}> {
 
-    public shouldComponentUpdate(nextProps: ISyncParams): boolean {
+    public shouldComponentUpdate(nextProps: Props): boolean {
         const { params, publicationId, pageId } = nextProps;
         return !compareProps({
             publicationId, pageId
@@ -48,10 +38,7 @@ export class StateToRoute1 extends React.Component<Props, {}> {
     }
 }
 
-const mapStateToProps = (state: IState) => ({
-    publicationId: state.publication.id,
-    pageId: state.publication.pageId
-});
+const mapStateToProps = (state: IState) => getCurrentPub(state);
 
 const mapDispatchToProps = {
     onStateChange: publicationRouteChanged

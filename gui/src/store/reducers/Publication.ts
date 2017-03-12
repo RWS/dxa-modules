@@ -1,46 +1,27 @@
-import { IPublication } from "interfaces/Publication";
-import { IAction } from "store/interfaces/Action";
-import { IPublicationState } from "store/interfaces/State";
-import { handleActions, Reducer } from "redux-actions";
-import { CHANGE_LANGUAGE, PUBLICATIONS_LOADED } from "store/actions/Actions";
-import { getPubByLang } from "utils/Publication";
+import { IPublicationCurrentState } from "store/interfaces/State";
 import { PUBLICATION_ROUTE_CHANGED } from "store/actions/Actions";
+import { handleAction, combine } from "./combineReducers";
+import { CHANGE_LANGUAGE } from "../actions/Actions";
+import { getPubByLang } from "./Reducer";
 
-const DEFAULT_STATE: IPublicationState = {
-    id: null,
-    pageId: null,
-    publications: []
+const DEFAULT_STATE: IPublicationCurrentState = {
+    publicationId: "",
+    pageId: ""
 };
 
-type Pub = {
-    publicationId: string;
-    pageId: string;
-};
+const patchCurrentPulication = handleAction(PUBLICATION_ROUTE_CHANGED,
+     (state: IPublicationCurrentState, newPublication: IPublicationCurrentState) => newPublication, 
+     DEFAULT_STATE
+);
 
-export const publicationReducer = handleActions({
-    [PUBLICATIONS_LOADED]: (state: IPublicationState, action: IAction) => ({
-        ...state,
-        publications: action.payload
-    }),
-
-    [CHANGE_LANGUAGE]: (state: IPublicationState, action: IAction): IPublicationState => {
-        const newPub: IPublication | null = getPubByLang(state.publications)(state.id || "", action.payload as string);
-        return newPub ? {
-            ...state,
-            id: newPub.id,
-            pageId: null
-        } : state;
-    },
-
-    [PUBLICATION_ROUTE_CHANGED]: (state: IPublicationState, action: IAction) => {
-        // debugger;
-        const payload = action.payload as Pub;
+const updateByLanguage = handleAction(CHANGE_LANGUAGE,
+    (state: IPublicationCurrentState, langauge: string, getState) => {
+        const newPub = getPubByLang(getState(), state.publicationId, langauge);
         return {
-            ...state,
-            id: payload.publicationId || state.id,
-            pageId: payload.pageId || state.pageId
+            publicationId: newPub ? newPub.id : state.publicationId,
+            pageId: ""
         };
-    }
-}, DEFAULT_STATE);
+    }, 
+    DEFAULT_STATE);
 
-export { Reducer }
+export const publication = combine(patchCurrentPulication, updateByLanguage);

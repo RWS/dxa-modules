@@ -17,7 +17,7 @@ import { Url } from "utils/Url";
 import { debounce } from "utils/Function";
 
 import "components/container/styles/PublicationContent";
-import { IPublicationState } from "store/interfaces/State";
+import { IPublicationCurrentState } from "store/interfaces/State";
 import { FetchPublications } from "./FetchPublications";
 import { RouteToState } from "./RouteToState";
 import { StateToRoute } from "./StateToRoute";
@@ -158,7 +158,7 @@ interface IToc {
     rootItems?: ITaxonomy[];
 }
 
-export type Pub = IPublicationContentProps & IPublicationState;
+export type Pub = IPublicationContentProps & IPublicationCurrentState;
 
 /**
  * Publication + content component
@@ -192,7 +192,7 @@ export class PublicationContent extends React.Component<Pub, IPublicationContent
     /**
      * Invoked once, both on the client and server, immediately before the initial rendering occurs.
      */
-    public fetchPublication(publicationId: string, pageId: string | null): void {
+    public fetchPublication(publicationId: string, pageId: string): void {
         // const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
         const { publicationService } = this.context.services;
 
@@ -238,8 +238,8 @@ export class PublicationContent extends React.Component<Pub, IPublicationContent
     }
 
     public componentWillMount(): void {
-        const { id: publicationId, pageId } = this.props;
-        return this.fetchPublication(publicationId || "", pageId);
+        const { publicationId, pageId } = this.props;
+        return this.fetchPublication(publicationId, pageId);
     }
 
     /**
@@ -248,17 +248,17 @@ export class PublicationContent extends React.Component<Pub, IPublicationContent
      * @param {IPublicationContentProps} nextProps
      */
     public componentWillReceiveProps(nextProps: Pub): void {
-       const { id: publicationId, pageId } = this.props;
-       const { id: nextPubId, pageId: nextPageId} = nextProps;
+       const { publicationId, pageId } = this.props;
+       const { publicationId: nextPubId, pageId: nextPageId} = nextProps;
 
         // this.setState({
         //     activeTocItemPath: undefined
         // });
 
        if (publicationId !== nextPubId) {
-        this.fetchPublication(nextPubId || "", nextPageId);
+        this.fetchPublication(nextPubId, nextPageId);
        } else if (pageId !== nextPageId) {
-        this.fetchPage(publicationId || "", nextPageId || "");
+        this.fetchPage(publicationId, nextPageId);
        }
     }
 
@@ -287,7 +287,7 @@ export class PublicationContent extends React.Component<Pub, IPublicationContent
         const { pageIdOrPublicationTitle, pageTitle, pageAnchor } = this.props.params;
         const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
         const { services, router } = this.context;
-        const { id: publicationId } = this.props;
+        const { publicationId } = this.props;
         const { taxonomyService } = services;
         const { content, error} = this._page;
         const { rootItems } = this._toc;
@@ -309,8 +309,8 @@ export class PublicationContent extends React.Component<Pub, IPublicationContent
                         }
                     } }
                     url={pageId ?
-                        Url.getPageUrl(publicationId || "", pageId, publicationTitle, pageTitle || (selectedTocItem && selectedTocItem.title) || "") :
-                        Url.getPublicationUrl(publicationId || "", publicationTitle)}
+                        Url.getPageUrl(publicationId, pageId, publicationTitle, pageTitle || (selectedTocItem && selectedTocItem.title) || "") :
+                        Url.getPublicationUrl(publicationId, publicationTitle)}
                     // Wait for the selected toc item to be set to set the anchor
                     // This is needed to make sure components on top are rendered first (eg bread crumbs)
                     anchor={selectedTocItem ? pageAnchor : undefined}
@@ -321,17 +321,17 @@ export class PublicationContent extends React.Component<Pub, IPublicationContent
                             activeItemPath={activeTocItemPath}
                             rootItems={rootItems}
                             loadChildItems={(parentId: string): Promise<ITaxonomy[]> => {
-                                return taxonomyService.getSitemapItems(publicationId || "", parentId);
+                                return taxonomyService.getSitemapItems(publicationId, parentId);
                             } }
                             onSelectionChanged={this._onTocSelectionChanged.bind(this)}
                             error={tocError}
-                            onRetry={() => this._loadTocRootItems(publicationId || "") }
+                            onRetry={() => this._loadTocRootItems(publicationId) }
                             >
                             <span className="separator" />
                         </Toc>
                     </NavigationMenu>
                     <Breadcrumbs
-                        publicationId={publicationId || ""}
+                        publicationId={publicationId}
                         publicationTitle={publicationTitle || ""}
                         loadItemsPath={taxonomyService.getSitemapPath.bind(taxonomyService)}
                         selectedItem={selectedTocItem}
@@ -383,7 +383,7 @@ export class PublicationContent extends React.Component<Pub, IPublicationContent
         const navPath = sitemapItem.url;
         const parsedUrl = navPath && Url.parsePageUrl(navPath);
 
-        if (parsedUrl) {
+        if ( parsedUrl ) {
             onPulicationChange({
                 publicationId: parsedUrl.publicationId,
                 pageId: parsedUrl.pageId,
@@ -394,7 +394,7 @@ export class PublicationContent extends React.Component<Pub, IPublicationContent
     }
 
     private _onPageContentRetrieved(pageInfo: IPage): void {
-        const { id: publicationId } = this.props;
+        const { publicationId } = this.props;
         const { activeTocItemPath, isTocLoading } = this.state;
         const page = this._page;
         page.error = null;
@@ -416,7 +416,7 @@ export class PublicationContent extends React.Component<Pub, IPublicationContent
                 }
 
                 if (isTocLoading) {
-                    this._loadTocRootItems(publicationId || "", path);
+                    this._loadTocRootItems(publicationId, path);
                 } else if (!activeTocItemPath || path.join("") !== activeTocItemPath.join("")) {
                     this.setState({
                         activeTocItemPath: path
@@ -424,7 +424,7 @@ export class PublicationContent extends React.Component<Pub, IPublicationContent
                 }
             });
         } else if (isTocLoading) {
-            this._loadTocRootItems(publicationId || "");
+            this._loadTocRootItems(publicationId);
         }
     }
 
@@ -446,10 +446,10 @@ export class PublicationContent extends React.Component<Pub, IPublicationContent
 
     private _getActiveSitemapPath(pageId: string, sitemapId: string, done: (path: string[]) => void): void {
         const { services } = this.context;
-        const {id: publicationId } = this.props;
+        const { publicationId } = this.props;
 
         if (pageId) {
-            services.taxonomyService.getSitemapPath(publicationId || "", pageId, sitemapId).then(
+            services.taxonomyService.getSitemapPath(publicationId, pageId, sitemapId).then(
                 path => {
                     /* istanbul ignore else */
                     if (!this._isUnmounted) {
