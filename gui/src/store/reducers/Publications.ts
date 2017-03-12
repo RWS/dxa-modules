@@ -12,9 +12,13 @@ export interface IPublicationsState {
 
 const buildMap = (currentMap: IPublicationsIdMap, publications: IPublication[]) => Object.assign(currentMap, ...publications.map(publication => ({[publication.id]: publication})));
 
+const notFound = (id: string) => ({
+    id,
+    title: ""
+});
 
-const byId = handleAction(PUBLICATIONS_LOADED, 
-        (state: IPublicationsIdMap, payload: IPublication[], getState: () => any): IPublicationsIdMap => { debugger; return buildMap(state, payload)},
+const byId = handleAction(PUBLICATIONS_LOADED,
+        (state: IPublicationsIdMap, payload: IPublication[]): IPublicationsIdMap => buildMap(state, payload),
         {});
 
 export const publications = combineReducers({
@@ -23,7 +27,7 @@ export const publications = combineReducers({
 
 //selectors
 export const getPubList = (state: IPublicationsState): IPublication[] => Object.values(state.byId);
-export const getPubById = (state: IPublicationsState, id: string) => state.byId[id];
+export const getPubById = (state: IPublicationsState, id: string): IPublication => id in state.byId ? state.byId[id] : notFound(id);
 
 export const getPubByLang = (state: IPublicationsState, hostPubId: string, language: string) => getPubList(state)
      .filter((publication: IPublication) => publication.versionRef === getPubById(state, hostPubId).versionRef)

@@ -32,9 +32,10 @@ const store: Store<IState> = configureStore({
     language: "en", // default language
     publication: {
         publicationId: "1961702",
-        pageId: "",
+        pageId: ""
     },
-    publications: {byId: {}}
+    publications: {byId: {}},
+    pages: {byId: {}}
 });
 
 localization.setStore(store);

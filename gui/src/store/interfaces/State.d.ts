@@ -1,4 +1,5 @@
 import { IPublication } from "interfaces/Publication";
+import { IPagesMap } from "../reducers/Pages";
 
 /**
  *
@@ -35,5 +36,9 @@ export interface IState {
     publication: IPublicationCurrentState;
     publications: {
         byId: { [id: string]: IPublication };
+    };
+
+    pages: {
+        byId: IPagesMap;
     };
 }

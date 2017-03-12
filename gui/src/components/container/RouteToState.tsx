@@ -5,7 +5,7 @@ import { publicationRouteChanged } from "store/actions/Actions";
 import { IPublicationContentPropsParams } from "./PublicationContentX";
 import { withRouter } from "react-router";
 import { IPublicationCurrentState } from "store/interfaces/State";
-import { getCurrentPub } from "../../store/reducers/Reducer";
+import { getCurrentPub } from "store/reducers/Reducer";
 
 export interface ISyncParams {
     onRouteChange: (publication: IPublicationCurrentState) => {};
@@ -15,26 +15,34 @@ export interface ISyncParams {
 export type Props = IPublicationCurrentState & ISyncParams;
 export class RouteToState1 extends React.Component<Props, {}> {
 
-    public shouldComponentUpdate(nextProps: ISyncParams): boolean {
-        return this.needUpdateState(this.props.params, nextProps.params);
+    public shouldComponentUpdate(nextProps: Props): boolean {
+        return this.routeChanged(this.props.params, nextProps.params)
+            && this.routeEqualsToState(nextProps);
     }
 
     public componentDidUpdate(): void {
-        const { params, onRouteChange } = this.props;
-        const publicationId: string = params.publicationId;
-        const pageId: string = (params.pageIdOrPublicationTitle || "");
-        debugger;
-        onRouteChange({
-            publicationId, pageId
-        });
+        const { params, onRouteChange } = this.props
+        onRouteChange(this.paramsToState(params));
     }
 
     public render(): JSX.Element {
         return <div />;
     }
 
-    private needUpdateState(curParams: IPublicationContentPropsParams, nextParams: IPublicationContentPropsParams): boolean {
-        return !compareProps(curParams, nextParams);
+    private paramsToState(params: IPublicationContentPropsParams): IPublicationCurrentState {
+        return {
+            publicationId: params.publicationId,
+            pageId: /\d+/.test(params.pageIdOrPublicationTitle || "") ? params.pageIdOrPublicationTitle as string : ""
+        };
+    }
+    private routeEqualsToState(nextProps: Props) {
+        return compareProps(this.paramsToState(nextProps.params), {
+            publicationId: nextProps.publicationId,
+            pageId: nextProps.pageId
+        });
+    }
+    private routeChanged(curParams: IPublicationContentPropsParams, nextParams: IPublicationContentPropsParams): boolean {
+        return !compareProps(this.paramsToState(curParams), this.paramsToState(nextParams));
     }
 }
 

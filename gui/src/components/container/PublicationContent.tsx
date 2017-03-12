@@ -5,7 +5,6 @@ import { setPublication } from "store/actions/Actions";
 import { getCurrentPub } from "store/reducers/Reducer";
 
 const mapStateToProps = (state: IState) => {
-    debugger;
     const { publicationId, pageId } = getCurrentPub(state);
     return { publicationId, pageId };
 };

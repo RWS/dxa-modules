@@ -1,21 +1,24 @@
 import { createAction, Action } from "redux-actions";
 
 export const CHANGE_LANGUAGE = "CHANGE_LANGUAGE";
-export const PUBLICATIONS_LOADED: string = "PUBLICATIONS_LOADED";
+export const PUBLICATIONS_LOADED = "PUBLICATIONS_LOADED";
+
+export const PAGE_LOADED = "PAGE_LOADED";
 
 export const PUBLICATION_ROUTE_CHANGED = "PUBLICATION_ROUTE_CHANGED";
 
 export const changeLanguage = createAction(CHANGE_LANGUAGE, language => language);
 export const publicationsLoaded = createAction(PUBLICATIONS_LOADED, publications => publications);
 
-export const publicationRouteChanged = createAction(PUBLICATION_ROUTE_CHANGED, publication => publication);
+export const publicationRouteChanged = createAction(PUBLICATION_ROUTE_CHANGED, publication => ({
+    publicationId: publication.publicationId,
+    pageId: publication.pageId
+}));
 
-export const setPublication = createAction(PUBLICATION_ROUTE_CHANGED, publication => publication);
+export const setPublication = publicationRouteChanged;
 
 //==============
 // Api
 //=============
-export const fetchPublications = (productFamily?: string) => {
-};
 
 export { Action }

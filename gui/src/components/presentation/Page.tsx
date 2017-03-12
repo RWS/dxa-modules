@@ -12,6 +12,7 @@ import { Error } from "components/presentation/Error";
 import "components/presentation/styles/Page";
 import "dita-ot/styles/commonltr";
 import "dita-ot/styles/commonrtl";
+import { FetchPage } from "components/container/FetchPage";
 
 /**
  * Page component props
@@ -187,6 +188,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                             buttons={errorButtons} />
                         : <article className={"page-content ltr"} dangerouslySetInnerHTML={{ __html: props.content || "" }} />}
                 </article>
+                <FetchPage />
             </div >
         );
     }
