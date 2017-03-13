@@ -93,14 +93,12 @@ class ErrorContentComponent extends TestBase {
 
                 function openChecks(): void {
                     expect(getComputedStyle(dropdownMenu).display).toBe("block");
-                    expect(dropdownComponent.isClose()).toBe(false);
                     expect(dropdownComponent.isOpen()).toBe(true);
                     expect((dropdownNode.querySelector(".sdl-dita-delivery-dropdown") as HTMLElement).classList).toContain("open");
                 }
 
                 function closeChecks(): void {
                     expect(getComputedStyle(dropdownMenu).display).toBe("none");
-                    expect(dropdownComponent.isClose()).toBe(true);
                     expect(dropdownComponent.isOpen()).toBe(false);
                     expect((dropdownNode.querySelector(".sdl-dita-delivery-dropdown") as HTMLElement).classList).not.toContain("open");
                 }
@@ -124,7 +122,6 @@ class ErrorContentComponent extends TestBase {
                 const dropdownItems = dropdownNode.querySelectorAll(".dropdown-menu li");
 
                 expect(dropdownItems[0].classList).toContain("active");
-                // expect(variable).toBe(false);
                 expect(onClickItem).not.toHaveBeenCalled();
                 expect(dropdownComponent.getValue()).toBe(languages[0].value);
                 expect(dropdownComponent.getText()).toBe(languages[0].text);
@@ -134,8 +131,6 @@ class ErrorContentComponent extends TestBase {
 
                 expect(dropdownItems[0].classList).not.toContain("active");
                 expect(dropdownItems[1].classList).toContain("active");
-                expect(dropdownComponent.isClose()).toBe(true);
-                // expect(variable).toBe(false);
                 expect(onClickItem).toHaveBeenCalled();
             });
         });

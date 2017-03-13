@@ -140,15 +140,6 @@ export class Dropdown extends React.Component<IDropdownProps, IDropdownState> {
     }
 
     /**
-     * Check if dropdown is closed
-     *
-     * @returns {boolean} true if dropdown is closed, otherwise false
-     */
-    public isClose(): boolean {
-        return this.state.status == DropdownToggleState.OFF;
-    }
-
-    /**
      * Open dropdown
      *
      * @returns {void}
@@ -167,7 +158,7 @@ export class Dropdown extends React.Component<IDropdownProps, IDropdownState> {
      * @returns {void}
      */
     public toggleOff(): void {
-        if (!this.isClose()) {
+        if (this.isOpen()) {
             this.setState({
                 status: DropdownToggleState.OFF
             } as IDropdownState);
@@ -206,7 +197,7 @@ export class Dropdown extends React.Component<IDropdownProps, IDropdownState> {
     }
 
     /**
-     * Component will mount 
+     * Component will mount
      */
     public componentWillMount(): void {
         const props = this.props;
