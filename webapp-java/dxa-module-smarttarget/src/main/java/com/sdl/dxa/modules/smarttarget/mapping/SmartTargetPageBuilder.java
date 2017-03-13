@@ -3,7 +3,6 @@ package com.sdl.dxa.modules.smarttarget.mapping;
 import com.sdl.dxa.api.datamodel.model.ContentModelData;
 import com.sdl.dxa.api.datamodel.model.PageModelData;
 import com.sdl.dxa.api.datamodel.model.RegionModelData;
-import com.sdl.dxa.common.dto.PageRequestDto;
 import com.sdl.dxa.modules.smarttarget.model.entity.SmartTargetExperiment;
 import com.sdl.dxa.modules.smarttarget.model.entity.SmartTargetItem;
 import com.sdl.dxa.modules.smarttarget.model.entity.SmartTargetPageModel;
@@ -363,7 +362,7 @@ public class SmartTargetPageBuilder implements PageBuilder, PageModelBuilder {
     }
 
     @Override
-    public PageModel buildPageModel(@Nullable PageModel pageModel, @NotNull PageModelData modelData, PageRequestDto.PageInclusion includePageRegions) {
+    public PageModel buildPageModel(@Nullable PageModel pageModel, @NotNull PageModelData modelData) {
         if (pageModel == null || pageModel.getRegions() == null || !pageModel.getRegions().containsClass(SmartTargetRegion.class)
                 || modelData.getRegions() == null) {
             log.debug("There are no SmartTargetRegions on the page {}", pageModel);
