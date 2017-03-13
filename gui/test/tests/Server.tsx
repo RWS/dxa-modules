@@ -44,7 +44,36 @@ class Server extends TestBase {
                                 </div>
                                 <div className="spacer"></div>
                                 <div className="sdl-dita-delivery-topbar-expand-search"><span></span></div>
-                                <div className="sdl-dita-delivery-topbar-language"><span></span><label>English</label></div>
+                                <div className="sdl-dita-delivery-topbar-language"><span></span></div>
+                                <div className="sdl-dita-delivery-dropdown">
+                                    <button className="dropdown-toggle" type="button" data-toggle="dropdown">
+                                        English
+                                        <span className="caret"></span>
+                                    </button>
+                                    <div className="dropdown-menu">
+                                        <div className="dropdown-arrow"></div>
+                                        <ul className="dropdown-items">
+                                            <li className="active"><a href="#">English<span className="checked"></span></a></li>
+                                            <li><a href="#">Deutsch</a></li>
+                                            <li><a href="#">Nederlands</a></li>
+                                            <li><a href="#">Русский</a></li>
+                                            <li><a href="#">ქართული</a></li>
+                                            <li><a href="#">עברית</a></li>
+                                            <li><a href="#">العربية</a></li>
+                                            <li><a href="#">中文</a></li>
+                                        </ul>
+                                    </div>
+                                    <select>
+                                        <option selected value="en">English</option>
+                                        <option value="de">Deutsch</option>
+                                        <option value="nl">Nederlands</option>
+                                        <option value="ru">Русский</option>
+                                        <option value="ka">ქართული</option>
+                                        <option value="he">עברית</option>
+                                        <option value="ar">العربية</option>
+                                        <option value="zh">中文</option>
+                                    </select>
+                                </div>
                                 <div className="sdl-dita-delivery-topbar-user"><span></span></div>
                             </header>
                         </div>

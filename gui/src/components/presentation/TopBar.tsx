@@ -1,6 +1,8 @@
 import * as React from "react";
 import { IndexLink } from "react-router";
 import { path } from "utils/Path";
+import { Dropdown, IDropdownValue } from "components/controls/Dropdown";
+import { IAppContext } from "components/container/App";
 
 import "./styles/TopBar";
 
@@ -31,8 +33,11 @@ export interface ITopBarProps {
 /**
  * TopBar
  */
-export const TopBar = (props: ITopBarProps) => {
-    const {language, children} = props;
+export const TopBar: React.StatelessComponent<ITopBarProps> = (props: ITopBarProps, context: IAppContext): JSX.Element => {
+    const { localizationService } = context.services;
+    const { children } = props;
+    const languages: Array<IDropdownValue> = localizationService.getLanguages().map(language => ({"text": language.name, "value": language.iso}));
+
     return (
         <div className={"sdl-dita-delivery-topbar"}>
             <header>
@@ -43,12 +48,16 @@ export const TopBar = (props: ITopBarProps) => {
                 {children}
                 <div className={"sdl-dita-delivery-topbar-language"} >
                     <span />
-                    <label>{language}</label>
                 </div>
+                <Dropdown items={languages}/>
                 <div className={"sdl-dita-delivery-topbar-user"} >
                     <span />
                 </div>
             </header>
-        </div >
+        </div>
     );
 };
+
+TopBar.contextTypes = {
+    services: React.PropTypes.object.isRequired
+} as React.ValidationMap<IAppContext>;

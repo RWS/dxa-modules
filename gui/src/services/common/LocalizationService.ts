@@ -1,5 +1,5 @@
 import { String } from "sdl-models";
-import { ILocalizationService } from "services/interfaces/LocalizationService";
+import { ILocalizationService, ILanguage } from "services/interfaces/LocalizationService";
 import { Store } from "redux";
 import { IState } from "store/interfaces/State";
 
@@ -49,6 +49,24 @@ export class LocalizationService implements ILocalizationService {
         const resource = translate(language)(path) || translate(DEFAULT_LANGUAGE)(path);
 
         return resource ? formatMessage(resource, variables) : `[${language}] Unable to localize: ${path}`;
+    }
+
+    /**
+     * Get list of all languages
+     *
+     * @returns {ILanguage[]}
+     */
+    public getLanguages(): ILanguage[] {
+        let languages = [];
+        languages.push({"name": "English", "iso": "en"});
+        languages.push({"name": "Deutsch", "iso": "de"});
+        languages.push({"name": "Nederlands", "iso": "nl"});
+        languages.push({"name": "Русский", "iso": "ru"});
+        languages.push({"name": "ქართული", "iso": "ka"});
+        languages.push({"name": "עברית", "iso": "he"});
+        languages.push({"name": "العربية", "iso": "ar"});
+        languages.push({"name": "中文", "iso": "zh"});
+        return languages;
     }
 }
 
