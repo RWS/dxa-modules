@@ -21,7 +21,7 @@ export class RouteToState1 extends React.Component<Props, {}> {
     }
 
     public componentDidUpdate(): void {
-        const { params, onRouteChange } = this.props
+        const { params, onRouteChange } = this.props;
         onRouteChange(this.paramsToState(params));
     }
 
@@ -35,12 +35,14 @@ export class RouteToState1 extends React.Component<Props, {}> {
             pageId: /\d+/.test(params.pageIdOrPublicationTitle || "") ? params.pageIdOrPublicationTitle as string : ""
         };
     }
-    private routeEqualsToState(nextProps: Props) {
+
+    private routeEqualsToState(nextProps: Props): boolean {
         return compareProps(this.paramsToState(nextProps.params), {
             publicationId: nextProps.publicationId,
             pageId: nextProps.pageId
         });
     }
+
     private routeChanged(curParams: IPublicationContentPropsParams, nextParams: IPublicationContentPropsParams): boolean {
         return !compareProps(this.paramsToState(curParams), this.paramsToState(nextParams));
     }

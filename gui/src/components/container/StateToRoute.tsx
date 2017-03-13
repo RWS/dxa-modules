@@ -23,14 +23,12 @@ export type Props = IPublicationCurrentState & ISyncParams;
 export class StateToRoute1 extends React.Component<Props, {}> {
 
     public shouldComponentUpdate(nextProps: Props): boolean {
-        console.log("StateToRoute1", {...nextProps}, {...this.props})
-        return this.pageStateChanged(nextProps, this.props) 
+        return this.pageStateChanged(nextProps, this.props)
             && !this.routeChanged(nextProps, this.props)
             && !this.routeEqualsToState(nextProps);
     }
 
     public componentDidUpdate(): void {
-        console.log("Update location");
         const { publicationId, pageId, publicationTitle, pageTitle } = this.props;
         browserHistory.push(Url.getPageUrl(publicationId, pageId, publicationTitle, pageTitle));
     }
@@ -48,6 +46,7 @@ export class StateToRoute1 extends React.Component<Props, {}> {
             pageId: currentProps.pageId
         });
     }
+
     private routeChanged(nextProps: Props, currentProps: Props): boolean {
         return !compareProps(this.paramsToState(nextProps.params), this.paramsToState(currentProps.params));
     }
@@ -56,7 +55,7 @@ export class StateToRoute1 extends React.Component<Props, {}> {
         return compareProps({
             publicationId: nextProps.publicationId,
             pageId: nextProps.pageId
-        }, this.paramsToState(nextProps.params))
+        }, this.paramsToState(nextProps.params));
     }
 
     private paramsToState(params: IPublicationContentPropsParams): IPublicationCurrentState {

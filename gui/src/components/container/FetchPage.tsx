@@ -7,14 +7,15 @@ import { IAppContext } from "components/container/App";
 import { IPageService } from "services/interfaces/PageService";
 
 export interface IFetchPage {
-    fetch: (pageService: IPageService,publicationId: string, pageId: string) => void;
+    fetch: (pageService: IPageService, publicationId: string, pageId: string) => void;
     currentPub: IPublicationCurrentState;
 };
 
 class Fetch extends React.Component<IFetchPage & IPublicationCurrentState, {}> {
    public static contextTypes: React.ValidationMap<IAppContext> = {
         services: React.PropTypes.object.isRequired
-    }
+    };
+
     public context: IAppContext;
     public componentDidMount(): void {
         console.log("Do we ever come here?");

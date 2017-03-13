@@ -12,7 +12,7 @@ export interface IFetchPublications {
 class Fetch extends React.Component<IFetchPublications, {}> {
     public static contextTypes: React.ValidationMap<IAppContext> = {
         services: React.PropTypes.object.isRequired
-    }
+    };
     public context: IAppContext;
     public componentWillMount(): void {
         console.log("Do we ever come here?");
