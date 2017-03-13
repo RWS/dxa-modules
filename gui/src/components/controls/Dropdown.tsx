@@ -11,21 +11,21 @@ interface IPathEvent extends MouseEvent {
 }
 
 /**
- * Dropdown value item 
- * 
+ * Dropdown value item
+ *
  * @export
  * @interface IDropdownValue
  */
 export interface IDropdownValue {
     /**
      * Text of dropdown item
-     * 
+     *
      * @type {string}
      */
     text: string;
     /**
      * Value of dropdown item
-     * 
+     *
      * @type {string}
      */
     value: string;
@@ -43,15 +43,15 @@ export enum DropdownToggleState {
 
 /**
  * Interface for onChange event function
- * 
+ *
  * @export
  * @interface IOnChangeEvent
  */
 export interface IOnChangeEvent {
     /**
-     * Function interface 
-     * 
-     * @returns {void} 
+     * Function interface
+     *
+     * @returns {void}
      */
     (index: number): void;
 }
@@ -65,25 +65,25 @@ export interface IOnChangeEvent {
 export interface IDropdownProps {
     /**
      * Initial selected item of dropdown
-     * 
+     *
      * @type {IDropdownValue}
      */
     selected?: IDropdownValue;
     /**
      * Placeholder for dropdown text when no element is selected
-     * 
+     *
      * @type {string}
      */
     placeHolder?: string;
     /**
      * List of dropdown items
-     * 
+     *
      * @type {IDropdownValue[]}
      */
     items: IDropdownValue[];
     /**
      * Executed function of selected item
-     * 
+     *
      * @type {IClick}
      */
     onChange?: IOnChangeEvent;
@@ -98,7 +98,7 @@ export interface IDropdownProps {
 export interface IDropdownState {
     /**
      * Current status of dropdown component (shown \ hidden)
-     * 
+     *
      * @type {DropdownToggleState}
      */
     status: DropdownToggleState;
@@ -118,7 +118,7 @@ export class Dropdown extends React.Component<IDropdownProps, IDropdownState> {
 
     /**
      * Creates an instance of Dropdown
-     * 
+     *
      */
     constructor() {
         super();

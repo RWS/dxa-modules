@@ -3,8 +3,8 @@
  */
 export interface ILanguage {
 	/**
-	 * Language name written in its native form 
-	 * 
+	 * Language name written in its native form
+	 *
 	 * @type {string}
 	 * @memberOf ILanguage
 	 */
