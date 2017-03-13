@@ -2,7 +2,7 @@ import { fetchPublications } from "store/actions/Api";
 import * as React from "react";
 import { connect } from "react-redux";
 import { IState } from "store/interfaces/State";
-import { IAppContext } from "./App";
+import { IAppContext } from "components/container/App";
 import { IPublicationService } from "services/interfaces/PublicationService";
 
 export interface IFetchPublications {

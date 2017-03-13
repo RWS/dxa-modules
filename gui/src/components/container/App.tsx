@@ -2,7 +2,7 @@ import * as React from "react";
 import { Router, Route, IndexRedirect, History, Redirect } from "react-router";
 import { IServices } from "interfaces/Services";
 import { Home } from "components/container/Home";
-import { PublicationContent } from "components/container/PublicationContent";
+import { PublicationContent } from "components/PublicationContent/PublicationContent";
 import { PublicationsList } from "components/container/PublicationsList";
 import { ProductFamiliesList } from "components/container/ProductFamiliesList";
 import { ErrorContent } from "components/container/ErrorContent";

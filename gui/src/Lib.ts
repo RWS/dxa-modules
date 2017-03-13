@@ -8,7 +8,7 @@ import "sdl-controls-react-wrappers/dist/stylesheets/main";
  */
 import * as AppComp from "components/container/App";
 import * as HomeComp from "components/container/Home";
-import * as PublicationContentComp from "components/container/PublicationContent";
+import * as PublicationContentComp from "components/PublicationContent/PublicationContentPresentaion";
 import * as PublicationsListComp from "components/container/PublicationsList";
 import * as BreadcrumbsComp from "components/presentation/Breadcrumbs";
 import * as ContentNavigationComp from "components/presentation/ContentNavigation";

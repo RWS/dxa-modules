@@ -2,7 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { IState } from "store/interfaces/State";
 import { publicationRouteChanged } from "store/actions/Actions";
-import { IPublicationContentPropsParams } from "./PublicationContentX";
+import { IPublicationContentPropsParams } from "components/PublicationContent//PublicationContentPresentaion";
 import { withRouter } from "react-router";
 import { IPublicationCurrentState } from "store/interfaces/State";
 import { getCurrentPub } from "store/reducers/Reducer";

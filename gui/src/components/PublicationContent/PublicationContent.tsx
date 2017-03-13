@@ -1,4 +1,4 @@
-import { PublicationContent as PublicationContentX } from "./PublicationContentX";
+import { PublicationContentPresentation } from "./PublicationContentPresentaion";
 import { connect } from "react-redux";
 import { IState } from "store/interfaces/State";
 import { setPublication } from "store/actions/Actions";
@@ -13,4 +13,4 @@ const mapDispatchToProps = {
     onPulicationChange: setPublication
 };
 
-export const PublicationContent = connect(mapStateToProps, mapDispatchToProps)(PublicationContentX);
+export const PublicationContent = connect(mapStateToProps, mapDispatchToProps)(PublicationContentPresentation);

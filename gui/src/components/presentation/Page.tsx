@@ -12,7 +12,7 @@ import { Error } from "components/presentation/Error";
 import "components/presentation/styles/Page";
 import "dita-ot/styles/commonltr";
 import "dita-ot/styles/commonrtl";
-import { FetchPage } from "components/container/FetchPage";
+import { FetchPage } from "components/helpers/FetchPage";
 
 /**
  * Page component props

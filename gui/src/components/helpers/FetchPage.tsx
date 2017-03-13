@@ -11,19 +11,20 @@ export interface IFetchPage {
     currentPub: IPublicationCurrentState;
 };
 
-class Fetch extends React.Component<IFetchPage & IPublicationCurrentState, {}> {
-   public static contextTypes: React.ValidationMap<IAppContext> = {
+class Fetch extends React.Component<IFetchPage, {}> {
+    public static contextTypes: React.ValidationMap<IAppContext> = {
         services: React.PropTypes.object.isRequired
     };
 
     public context: IAppContext;
     public componentDidMount(): void {
-        console.log("Do we ever come here?");
-        this.fetchCurrentPage();
+        if (this.isPageInProps(this.props)) {
+            this.fetchCurrentPage();
+        }
     }
 
-    public shouldComponentUpdate(nextProps: IFetchPage & IPublicationCurrentState): boolean {
-        return (nextProps.currentPub.pageId !== "") && (this.props.currentPub.pageId !== nextProps.currentPub.pageId);
+    public shouldComponentUpdate(nextProps: IFetchPage): boolean {
+        return this.isPageInProps(nextProps) && (this.props.currentPub.pageId !== nextProps.currentPub.pageId);
     }
 
     public componentDidUpdate(): void {
@@ -39,6 +40,10 @@ class Fetch extends React.Component<IFetchPage & IPublicationCurrentState, {}> {
 
     public render(): JSX.Element {
         return (<div />);
+    }
+
+    private isPageInProps(props: IFetchPage): boolean {
+        return props.currentPub.pageId !== ""; /** need to be replaced with default page */
     }
 }
 

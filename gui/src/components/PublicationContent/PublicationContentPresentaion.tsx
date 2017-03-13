@@ -16,11 +16,12 @@ import { TcmId } from "utils/TcmId";
 import { Url } from "utils/Url";
 import { debounce } from "utils/Function";
 
-import "components/container/styles/PublicationContent";
 import { IPublicationCurrentState } from "store/interfaces/State";
-import { FetchPublications } from "./FetchPublications";
-import { RouteToState } from "./RouteToState";
-import { StateToRoute } from "./StateToRoute";
+import { FetchPublications } from "components/helpers/FetchPublications";
+import { RouteToState } from "components/helpers/RouteToState";
+import { StateToRoute } from "components/helpers/StateToRoute";
+
+import "./PublicationContent.less";
 
 /**
  * PublicationContent component props params
@@ -163,7 +164,7 @@ export type Pub = IPublicationContentProps & IPublicationCurrentState;
 /**
  * Publication + content component
  */
-export class PublicationContent extends React.Component<Pub, IPublicationContentState> {
+export class PublicationContentPresentation extends React.Component<Pub, IPublicationContentState> {
 
     public static contextTypes: React.ValidationMap<IAppContext> = {
         services: React.PropTypes.object.isRequired,

@@ -7,7 +7,7 @@ import { SearchBar } from "components/presentation/SearchBar";
 
 import "components/container/styles/App";
 import "components/container/styles/Home";
-import { IPublicationContentProps } from "components/container/PublicationContentX";
+import { IPublicationContentProps } from "components/PublicationContent/PublicationContentPresentaion";
 
 /**
  * Home state
