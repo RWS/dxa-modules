@@ -74,30 +74,38 @@ class PublicationsModel extends TestBase {
             it("filters product families in alphabetical order", (): void => {
                 spyOn(publicationModel, "getPublications").and.callFake((): IPublicationInterface[] => {
                     return [{
-                        "id": "1",
-                        "productFamily": "Blackberry"
+                        id: "1",
+                        productFamily: "Blackberry",
+                        createdOn: new Date()
                     }, {
-                        "id": "2",
-                        "productFamily": "Strawberry"
+                        id: "2",
+                        productFamily: "Strawberry",
+                        createdOn: new Date()
                     }, {
-                        "id": "3",
-                        "productFamily": "blueberry"
+                        id: "3",
+                        productFamily: "blueberry",
+                        createdOn: new Date()
                     }, {
-                        "id": "4",
-                        "productFamily": "Watermelonberry"
+                        id: "4",
+                        productFamily: "Watermelonberry",
+                        createdOn: new Date()
                     }, {
-                        "id": "5",
-                        "productFamily": "elderberry"
+                        id: "5",
+                        productFamily: "elderberry",
+                        createdOn: new Date()
                     }, {
-                        "id": "6",
-                        "productFamily": "Mulberry"
+                        id: "6",
+                        productFamily: "Mulberry",
+                        createdOn: new Date()
                     }, {
-                        "id": "7",
-                        "title": "Salat item 7"
+                        id: "7",
+                        title: "Salat item 7",
+                        createdOn: new Date()
                     }, {
-                        "id": "8",
-                        "title": "Salat item 8",
-                        "productFamily": null
+                        id: "8",
+                        title: "Salat item 8",
+                        productFamily: null,
+                        createdOn: new Date()
                     }];
                 });
 

@@ -13,12 +13,13 @@ export default class Version {
      * 3. If a release version is used on many publications and order could not be defined by publication version the
      * creation date metadata of the publication version is used (most recent data is latest release version)
      * @static
+     * @param {string | null} productFamily Product family
      * @param {IPublication[]} publications The list of publications
      * @returns {IProductReleaseVersion[]} A sorted list of product release versions
      *
      * @memberOf Version
      */
-    public static sortProductReleaseVersions(publications: IPublication[]): IProductReleaseVersion[] {
+    public static sortProductReleaseVersions(productFamily: string | null, publications: IPublication[]): IProductReleaseVersion[] {
         return [];
     }
 }

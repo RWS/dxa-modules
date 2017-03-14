@@ -7,6 +7,7 @@ import { TestBase } from "sdl-models";
 import { PublicationService } from "test/mocks/services/PublicationService";
 import { TaxonomyService } from "test/mocks/services/TaxonomyService";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
+import { IPublication } from "interfaces/Publication";
 
 const services = {
     publicationService: new PublicationService(),
@@ -64,15 +65,18 @@ class PublicationsListComponent extends TestBase {
 
             it("renders only publications associated with product family", (done: () => void): void => {
                 services.publicationService.fakeDelay(true);
-                const publications = [{
+                const publications: IPublication[] = [{
                     id: "1",
-                    title: "Publication 1"
+                    title: "Publication 1",
+                    createdOn: new Date()
                 }, {
                     id: "2",
-                    title: "Publication 2"
+                    title: "Publication 2",
+                    createdOn: new Date()
                 }, {
                     id: "3",
-                    title: "Publication 3"
+                    title: "Publication 3",
+                    createdOn: new Date()
                 }];
                 services.publicationService.setMockDataPublications(null, publications);
 
@@ -91,9 +95,10 @@ class PublicationsListComponent extends TestBase {
             });
 
             it("navigates to publication when a publication title is clicked", (done: () => void): void => {
-                const publications = [{
+                const publications: IPublication[] = [{
                     id: "0",
-                    title: "Publication"
+                    title: "Publication",
+                    createdOn: new Date()
                 }];
                 services.publicationService.setMockDataPublications(null, publications);
 
@@ -119,9 +124,10 @@ class PublicationsListComponent extends TestBase {
             });
 
             it("shows first 5 topic titles in the root map of the publication", (done: () => void): void => {
-                const publications = [{
+                const publications: IPublication[] = [{
                     id: "0",
-                    title: "Publication"
+                    title: "Publication",
+                    createdOn: new Date()
                 }];
                 services.publicationService.setMockDataPublications(null, publications);
                 services.taxonomyService.setMockDataToc(null, [

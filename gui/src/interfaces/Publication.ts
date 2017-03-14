@@ -36,4 +36,12 @@ export interface IPublication {
      * @memberOf IPublication
      */
     productReleaseVersion?: string | null;
+
+    /**
+     * Creation date
+     *
+     * @type {Date}
+     * @memberOf IPublication
+     */
+    createdOn: Date;
 }
