@@ -14,9 +14,11 @@
         position: relative;
         .sdl-dita-delivery-navigation-menu {
             width: @tocWidth;
-            float: left;
-            position: inherit;
+            position: absolute;
             left: 0;
+           .sdl-dita-delivery-app.rtl & {
+                right: 0;
+            }
             nav.sdl-dita-delivery-toc {
                 width: @tocWidth - (@defaultMargin * 2);
                 margin-left: @defaultMargin;
@@ -33,12 +35,21 @@
                     margin-left: @tocWidth - 5;
                     width: 10px;
                     box-shadow: -5px 0px 10px 0px fade(@neutralColor1, 10);
+                    .sdl-dita-delivery-app.rtl & {
+                        margin-left: 0;
+                        margin-right: @tocWidth - 5;
+                        box-shadow: 5px 0px 10px 0px fade(@neutralColor1, 10);
+                    }
+
                 }
             }
         }
         .sdl-dita-delivery-content-navigation {
             width: @contentNavWidth;
             float: right;
+            .sdl-dita-delivery-app.rtl & {
+                float: left;
+            }
             overflow: auto;
         }
         nav.sdl-dita-delivery-toc, nav.sdl-dita-delivery-content-navigation {
@@ -56,6 +67,9 @@
                 top: 0;
                 position: absolute;
                 left: calc(100% ~"-" @contentNavWidth);
+                .sdl-dita-delivery-app.rtl & {
+                    left: @contentNavWidth;
+                }
                 height: 100%;
             }
         }
@@ -63,10 +77,18 @@
             padding-bottom: 15px;
             margin-left: @tocWidth + @defaultMargin;
             margin-right: @contentNavWidth + @defaultMargin;
+            .sdl-dita-delivery-app.rtl & {
+                margin-right: @tocWidth + @defaultMargin;
+                margin-left: @contentNavWidth + @defaultMargin;
+            }
         }
         article.page-content {
             margin-left: @tocWidth + @defaultMargin;
             margin-right: @contentNavWidth + @defaultMargin;
+            .sdl-dita-delivery-app.rtl & {
+                margin-left: @contentNavWidth + @defaultMargin;
+                margin-right: @tocWidth + @defaultMargin;
+            }
             min-height: 100px;
         }
 
@@ -80,6 +102,9 @@
 
             @media screen and (min-width: @screenSm) {
                 margin: 19px 10px 34px @tocWidth + @defaultMargin * 2;
+                .sdl-dita-delivery-app.rtl & {
+                    margin: 19px @tocWidth + @defaultMargin * 2 34px 10px;
+                }
             }
         }
     }
@@ -90,12 +115,20 @@
         .sdl-dita-delivery-page {
             .sdl-dita-delivery-breadcrumbs, article.page-content {
                 margin-right: 0;
+                .sdl-dita-delivery-app.rtl & {
+                    margin-left: 0;
+                }
             }
             nav.sdl-dita-delivery-content-navigation {
                 float: none;
                 max-width: ~"calc(100% - @{tocWidth} - (@{defaultMargin} * 2))";
                 min-width: ~"calc(80% - @{tocWidth} - (@{defaultMargin} * 2))";
                 margin-left: @tocWidth + (@defaultMargin * 2);
+                .sdl-dita-delivery-app.rtl & {
+                    float: none;
+                    margin-left: 0;
+                    margin-right: @tocWidth + (@defaultMargin * 2);
+                }
             }
         }
     }
@@ -108,8 +141,17 @@
             .sdl-dita-delivery-navigation-menu {
                 position: fixed;
                 left: @tocWidth * -1;
+                .sdl-dita-delivery-app.rtl & {
+                    left: auto;
+                    right: @tocWidth * -1;
+                }
+
                 &.open {
                     left: 0;
+                    .sdl-dita-delivery-app.rtl & {
+                        left: auto;
+                        right: 0;
+                    }
                 }
                 nav.sdl-dita-delivery-toc {
                     margin: 0;
@@ -124,6 +166,9 @@
             }
             .sdl-dita-delivery-breadcrumbs, article.page-content, nav.sdl-dita-delivery-content-navigation {
                 margin-left: 0;
+                .sdl-dita-delivery-app.rtl & {
+                    margin-right: 0;
+                }
             }
             .sdl-dita-delivery-breadcrumbs {
                 padding-bottom: @defaultMargin;
@@ -132,6 +177,10 @@
                 max-width: ~"calc(100% - @{defaultMargin})";
                 width: ~"calc(100% - @{defaultMargin})";
                 margin-left: @defaultMargin;
+                .sdl-dita-delivery-app.rtl & {
+                    margin-left: 0;
+                    margin-right: @defaultMargin;
+                }
             }
         }
     }

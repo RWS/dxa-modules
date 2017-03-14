@@ -12,4 +12,13 @@ export interface ILocalizationService {
      * @returns {string}
      */
     formatMessage(path: string, variables?: string[]): string;
+
+    /**
+     *
+     * @param {string} lang
+     * @returns {("rtl" | "ltr")}
+     *
+     * @memberOf ILocalizationService
+     */
+    getDirection(lang: string): "rtl" | "ltr";
 }
