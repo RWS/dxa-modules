@@ -221,18 +221,17 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
      * @param {IPublicationContentProps} nextProps
      */
     public componentWillReceiveProps(nextProps: Pub): void {
-        debugger;
        const { publicationId, page } = this.props;
        const { publicationId: nextPubId,  page: nextPage} = nextProps;
 
         // this.setState({
         //     activeTocItemPath: undefined
         // });
-        
+
        if (publicationId !== nextPubId) {
             this.fetchPublication(publicationId, nextPubId);
        } else if (nextPage && nextPage.id !== page.id) {
-            this._onPageContentRetrieved(nextPage)
+            this._onPageContentRetrieved(nextPage);
        }
     }
 

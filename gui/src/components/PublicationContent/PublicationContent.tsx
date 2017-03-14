@@ -7,7 +7,7 @@ import { getCurrentPub, getPubById, getPageById } from "store/reducers/Reducer";
 const mapStateToProps = (state: IState) => {
     const { publicationId, pageId } = getCurrentPub(state);
     const publication = getPubById(state, publicationId);
-    const page = getPageById(state, pageId)
+    const page = getPageById(state, pageId);
     return { publicationId, pageId, publication, page };
 };
 
