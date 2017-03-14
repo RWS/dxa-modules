@@ -7,7 +7,7 @@ import { Url } from "utils/Url";
 import { IPublicationCurrentState } from "store/interfaces/State";
 import { getCurrentPub } from "store/reducers/Reducer";
 import { getPubById, getPageById } from "store/reducers/Reducer";
-import { IPublicationContentPropsParams } from "../PublicationContent/PublicationContentPresentaion";
+import { IPublicationContentPropsParams } from "../PublicationContent/PublicationContentPresentation";
 
 export interface ISyncParams {
     onStateChange: (publication: IPublicationCurrentState) => {};

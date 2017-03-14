@@ -22,6 +22,7 @@ import { RouteToState } from "components/helpers/RouteToState";
 import { StateToRoute } from "components/helpers/StateToRoute";
 
 import "./PublicationContent.less";
+import { IPublication } from "interfaces/Publication";
 
 /**
  * PublicationContent component props params
@@ -73,6 +74,10 @@ export interface IPublicationContentPropsParams {
  * @interface IPublicationContentProps
  */
 export interface IPublicationContentProps {
+
+    publication: IPublication;
+    page: IPage;
+
     /**
      * Publication content props parameters
      *
@@ -194,52 +199,19 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
      * Invoked once, both on the client and server, immediately before the initial rendering occurs.
      */
     public fetchPublication(publicationId: string, pageId: string): void {
-        // const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
-        const { publicationService } = this.context.services;
-
-        if (pageId) {
+//        this is temporary hack to move out loading data from this component
+        if (!pageId) {
             // Load the page
-           this.fetchPage(publicationId, pageId);
-        } else {
             this._loadTocRootItems(publicationId);
         }
-
-        // Get publication title
-        publicationService.getPublicationTitle(publicationId).then(
-            title => {
-                /* istanbul ignore else */
-                if (!this._isUnmounted) {
-                    this.setState({
-                        publicationTitle: title
-                    });
-                }
-            },
-            error => {
-                /* istanbul ignore else */
-                if (!this._isUnmounted) {
-                    // TODO: improve error handling
-                    this.setState({
-                        publicationTitle: error
-                    });
-                }
-            });
     }
 
-    public fetchPage(publicationId: string, pageId: string): void {
-        // const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
-        // const nextpageIdOrPublicationTitle = nextProps.params.pageIdOrPublicationTitle;
-        const pageService = this.context.services.pageService;
-        // Load the page
-        this.setState({
-            isPageLoading: true
-        });
-        pageService.getPageInfo(publicationId, pageId).then(
-            this._onPageContentRetrieved.bind(this),
-            this._onPageContentRetrievFailed.bind(this));
+    public fetchPage(page: IPage): void {
+        true ? this._onPageContentRetrieved(page) : this._onPageContentRetrievFailed("FFFF");
     }
 
     public componentWillMount(): void {
-        const { publicationId, pageId } = this.props;
+        const {publicationId, pageId} = this.props;
         return this.fetchPublication(publicationId, pageId);
     }
 
@@ -249,17 +221,17 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
      * @param {IPublicationContentProps} nextProps
      */
     public componentWillReceiveProps(nextProps: Pub): void {
-       const { publicationId, pageId } = this.props;
-       const { publicationId: nextPubId, pageId: nextPageId} = nextProps;
+       const { publicationId, page } = this.props;
+       const { publicationId: nextPubId,  page: nextPage} = nextProps;
 
         // this.setState({
         //     activeTocItemPath: undefined
         // });
 
        if (publicationId !== nextPubId) {
-        this.fetchPublication(nextPubId, nextPageId);
-       } else if (pageId !== nextPageId) {
-        this.fetchPage(publicationId, nextPageId);
+            this.fetchPublication(publicationId, nextPubId);
+       } else if (nextPage && nextPage.id !== page.id) {
+            this._onPageContentRetrieved(nextPage);
        }
     }
 
@@ -284,13 +256,12 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
      * @returns {JSX.Element}
      */
     public render(): JSX.Element {
-        const { isPageLoading, activeTocItemPath, selectedTocItem, publicationTitle, activePageHeader } = this.state;
-        const { pageIdOrPublicationTitle, pageTitle, pageAnchor } = this.props.params;
-        const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
+        const { isPageLoading, activeTocItemPath, selectedTocItem, activePageHeader } = this.state;
+        const { pageAnchor } = this.props.params;
         const { services, router } = this.context;
-        const { publicationId } = this.props;
+        const { publicationId, pageId, page, publication } = this.props;
         const { taxonomyService } = services;
-        const { content, error} = this._page;
+        const error = null;
         const { rootItems } = this._toc;
         const tocError = this._toc.error;
 
@@ -301,7 +272,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                 <FetchPublications />
                 <Page
                     showActivityIndicator={isPageLoading || false}
-                    content={content}
+                    content={page.content}
                     error={error}
                     onNavigate={(url: string): void => {
                         /* istanbul ignore else */
@@ -310,8 +281,8 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                         }
                     } }
                     url={pageId ?
-                        Url.getPageUrl(publicationId, pageId, publicationTitle, pageTitle || (selectedTocItem && selectedTocItem.title) || "") :
-                        Url.getPublicationUrl(publicationId, publicationTitle)}
+                        Url.getPageUrl(publicationId, pageId, publication.title, page.title || (selectedTocItem && selectedTocItem.title) || "") :
+                        Url.getPublicationUrl(publicationId, publication.title)}
                     // Wait for the selected toc item to be set to set the anchor
                     // This is needed to make sure components on top are rendered first (eg bread crumbs)
                     anchor={selectedTocItem ? pageAnchor : undefined}
@@ -333,7 +304,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                     </NavigationMenu>
                     <Breadcrumbs
                         publicationId={publicationId}
-                        publicationTitle={publicationTitle || ""}
+                        publicationTitle={publication.title || ""}
                         loadItemsPath={taxonomyService.getSitemapPath.bind(taxonomyService)}
                         selectedItem={selectedTocItem}
                         />

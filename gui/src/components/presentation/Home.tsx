@@ -7,7 +7,7 @@ import { SearchBar } from "components/presentation/SearchBar";
 
 import "components/container/styles/App";
 import "components/container/styles/Home";
-import { IPublicationContentProps } from "components/PublicationContent/PublicationContentPresentaion";
+import { IPublicationContentProps } from "components/PublicationContent/PublicationContentPresentation";
 
 /**
  * Home state
@@ -74,10 +74,6 @@ export interface IHomeProps {
      * @memberOf INavigationMenuProps
      */
     children?: React.ReactNode;
-
-    onLanguageChange: (language: string) => void;
-
-    language: string;
 }
 
 /**
@@ -170,9 +166,8 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
      * @returns {JSX.Element}
      */
     public render(): JSX.Element {
-        const { localizationService } = this.context.services;
         const { isNavOpen, searchIsOpen, searchIsOpening, searchIsActive, searchTitle, publicationId } = this.state;
-        const { children, onLanguageChange, language } = this.props;
+        const { children } = this.props;
 
         const hasPublication = publicationId !== undefined;
 
@@ -186,22 +181,10 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
 
         this._preventBodyScroll = (hasPublication && isNavOpen) || (searchIsOpen && searchIsActive) || false;
 
-        const getLanguages = (): JSX.Element[] => ["ru", "en", "nl", "de"].map(function (lang: string): JSX.Element {
-            const onClick = () => {
-                onLanguageChange(lang);
-                return undefined;
-            };
-
-            return (<button onClick={onClick} key={lang}>{lang}</button>);
-        });
-
         return (
             <div className={appClass}>
                 <div className={"sdl-dita-delivery-nav-mask"} onClick={isNavOpen && this._toggleNavigationMenu.bind(this)} />
-                <div>{language}</div>
-                <div>{ getLanguages() }</div>
-                <TopBar
-                    language={localizationService.formatMessage("app.language")}>
+                <TopBar>
                     {
                         hasPublication && (
                             <div className={"sdl-dita-delivery-topbar-expand-nav"} onClick={this._toggleNavigationMenu.bind(this)} >

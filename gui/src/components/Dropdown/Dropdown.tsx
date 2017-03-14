@@ -1,7 +1,8 @@
 import * as ClassNames from "classnames";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import "./styles/Dropdown";
+
+import "./Dropdown.less";
 
 /**
  * Event extension for TypeScript to get event's path property
@@ -53,7 +54,7 @@ export interface IOnChangeEvent {
      *
      * @returns {void}
      */
-    (index: number): void;
+    (index: string): void;
 }
 
 /**
@@ -86,7 +87,7 @@ export interface IDropdownProps {
      *
      * @type {IClick}
      */
-    onChange?: IOnChangeEvent;
+    onChange: IOnChangeEvent;
 }
 
 /**
@@ -237,13 +238,13 @@ export class Dropdown extends React.Component<IDropdownProps, IDropdownState> {
             if (this.state.selected && item.value == this.state.selected.value) {
                 items.push(
                     <li key={item.value} className="active">
-                        <a href="#">
+                        <a>
                             {item.text}
                             <span className="checked"/>
                         </a>
                     </li>);
             } else {
-                items.push(<li key={item.value} onClick={this.onClickItem.bind(this, index)}><a href="#">{item.text}</a></li>);
+                items.push(<li key={item.value} onClick={this.onClickItem.bind(this, index)}><a>{item.text}</a></li>);
             }
         });
         options = this.props.items.map(item => <option key={item.value} value={item.value}>{item.text}</option>);
@@ -292,7 +293,7 @@ export class Dropdown extends React.Component<IDropdownProps, IDropdownState> {
             selected: this.props.items[index]
         } as IDropdownState);
         this.toggleOff();
-        return this.props.onChange && this.props.onChange(index);
+        this.props.onChange(this.props.items[index].value);
     }
 
     private onChangeSelect(event: React.FormEvent): void {

@@ -68,6 +68,18 @@ export class LocalizationService implements ILocalizationService {
         languages.push({"name": "中文", "iso": "zh"});
         return languages;
     }
+
+    public getLanguageNameByIso(iso: string): string | undefined {
+        const languages = this.getLanguages();
+        const options = languages.filter((language: ILanguage) => language.iso == iso);
+        return options[0] && options[0].name || undefined;
+    }
+
+    public getLanguageIsoByName(name: string): string | undefined {
+        const languages = this.getLanguages();
+        const options = languages.filter((language: ILanguage) => language.name == name);
+        return options[0] && options[0].iso || undefined;
+    }
 }
 
 export let localization = new LocalizationService();

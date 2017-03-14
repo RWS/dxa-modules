@@ -1,12 +1,14 @@
-import { PublicationContentPresentation } from "./PublicationContentPresentaion";
+import { PublicationContentPresentation } from "./PublicationContentPresentation";
 import { connect } from "react-redux";
 import { IState } from "store/interfaces/State";
 import { setPublication } from "store/actions/Actions";
-import { getCurrentPub } from "store/reducers/Reducer";
+import { getCurrentPub, getPubById, getPageById } from "store/reducers/Reducer";
 
 const mapStateToProps = (state: IState) => {
     const { publicationId, pageId } = getCurrentPub(state);
-    return { publicationId, pageId };
+    const publication = getPubById(state, publicationId);
+    const page = getPageById(state, pageId);
+    return { publicationId, pageId, publication, page };
 };
 
 const mapDispatchToProps = {
