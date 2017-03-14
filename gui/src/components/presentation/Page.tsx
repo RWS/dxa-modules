@@ -1,3 +1,4 @@
+import * as ClassNames from "classnames";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Html, IHeader } from "utils/Html";
@@ -70,6 +71,13 @@ export interface IPageProps {
      * @memberOf IPageProps
      */
     activeHeader?: IHeader;
+    /**
+     * UI language
+     *
+     * @type {string}
+     * @memberOf IPageProps
+     */
+    language?: string;
     /**
      * Called whenever navigation to another page is requested
      *
@@ -157,9 +165,9 @@ export class Page extends React.Component<IPageProps, IPageState> {
      */
     public render(): JSX.Element {
         const props = this.props;
-        const { activeHeader, error, url } = props;
+        const { activeHeader, error, url, language } = props;
         const { navItems } = this.state;
-        const { formatMessage } = this.context.services.localizationService;
+        const { formatMessage, getDirection } = this.context.services.localizationService;
         const activeNavItemId = activeHeader ? activeHeader.id : (navItems.length > 0 ? navItems[0].id : undefined);
         const _goHome = (): void => props.onNavigate(path.getRootPath());
         const _retryHandler = () => url && props.onNavigate(url);
@@ -172,6 +180,12 @@ export class Page extends React.Component<IPageProps, IPageState> {
             formatMessage("error.page.not.found"),
             formatMessage("error.default.message")
         ];
+        const languageDirection = getDirection(language as string);
+
+        const appClass = ClassNames({
+            [languageDirection]: true,
+            "page-content": true
+        });
 
         return (
             <div className={"sdl-dita-delivery-page"} style={props.showActivityIndicator ? { overflow: "hidden" } : {}} >
@@ -186,7 +200,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                             title={errorTitle}
                             messages={errorMessages}
                             buttons={errorButtons} />
-                        : <article className={"page-content ltr"} dangerouslySetInnerHTML={{ __html: props.content || "" }} />}
+                        : <article className={appClass} dangerouslySetInnerHTML={{ __html: props.content || "" }} />}
                 </article>
                 <FetchPage />
             </div >

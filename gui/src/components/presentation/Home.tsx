@@ -74,6 +74,14 @@ export interface IHomeProps {
      * @memberOf INavigationMenuProps
      */
     children?: React.ReactNode;
+
+    /**
+     * UI language
+     *
+     * @type {string}
+     * @memberOf IHomeProps
+     */
+    language?: string;
 }
 
 /**
@@ -168,10 +176,10 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
     public render(): JSX.Element {
         const { localizationService } = this.context.services;
         const { isNavOpen, searchIsOpen, searchIsOpening, searchIsActive, searchTitle, publicationId } = this.state;
-        const { children } = this.props;
+        const { children, language } = this.props;
 
         const hasPublication = publicationId !== undefined;
-        const languageDirection = localizationService.getDirection("en");
+        const languageDirection = localizationService.getDirection(language as string);
 
         const appClass = ClassNames({
             [languageDirection]: true,

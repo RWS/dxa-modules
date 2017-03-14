@@ -38,6 +38,7 @@ export class LocalizationService implements ILocalizationService {
 
     public constructor() {
         this.formatMessage = this.formatMessage.bind(this);
+        this.getDirection = this.getDirection.bind(this);
     }
 
     public setStore(store: Store<IState>): void {
