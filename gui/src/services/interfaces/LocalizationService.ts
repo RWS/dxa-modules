@@ -38,4 +38,13 @@ export interface ILocalizationService {
      * @returns {ILanguage[]}
      */
     getLanguages(): ILanguage[];
+
+    /**
+     *
+     * @param {string} lang
+     * @returns {("rtl" | "ltr")}
+     *
+     * @memberOf ILocalizationService
+     */
+    getDirection(lang: string): "rtl" | "ltr";
 }

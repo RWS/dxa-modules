@@ -27,6 +27,13 @@ const formatMessage = (resource: string, variables?: string[]) => Array.isArray(
  * @implements {ILocalizationService}
  */
 export class LocalizationService implements ILocalizationService {
+    /**
+     *
+     * @type {string[]}
+     * @memberOf LocalizationService
+     */
+    public rtlLanguages: string[] = ["ar", "dv", "fa", "ff", "he", "iw", "ps", "ur"];
+
     private store: Store<IState>;
 
     public constructor() {
@@ -79,6 +86,17 @@ export class LocalizationService implements ILocalizationService {
         const languages = this.getLanguages();
         const options = languages.filter((language: ILanguage) => language.name == name);
         return options[0] && options[0].iso || undefined;
+    }
+
+    /**
+     *
+     * @param {string} lang
+     * @returns {("rtl" | "ltr")}
+     *
+     * @memberOf LocalizationService
+     */
+    public getDirection(lang: string): "rtl" | "ltr" {
+        return this.rtlLanguages.some((val: string) => val === lang) ? "rtl" : "ltr";
     }
 }
 

@@ -1,3 +1,4 @@
+import * as ClassNames from "classnames";
 import * as React from "react";
 import { path } from "utils/Path";
 import { SearchBar } from "components/presentation/SearchBar";
@@ -33,8 +34,9 @@ export interface IErrorContentProps {
  * @returns {JSX.Element}
  */
 export const ErrorContent: React.StatelessComponent<IErrorContentProps> = (props: IErrorContentProps, context: IAppContext): JSX.Element => {
-    const { formatMessage } = context.services.localizationService;
+    const { formatMessage, getDirection } = context.services.localizationService;
     const _goHome = (): void => window.location.replace(path.getRootPath());
+    const languageDirection = getDirection("en");
 
     const errorButtons = <div>
             <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{"click": _goHome}}>{formatMessage("components.breadcrumbs.home")}</Button>
@@ -46,8 +48,13 @@ export const ErrorContent: React.StatelessComponent<IErrorContentProps> = (props
         `${error.statusCode} - ${formatMessage("error.default.title")}` :
         formatMessage("error.default.title");
 
+    const appClass = ClassNames({
+            [languageDirection]: true,
+            "sdl-dita-delivery-error-content": true
+        });
+
     return (
-        <section className={"sdl-dita-delivery-error-content"}>
+        <section className={appClass}>
             <SearchBar
                 placeholderLabel={formatMessage("components.searchbar.placeholder")}
                 onSearch={query => console.log(query)} />
