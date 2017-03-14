@@ -238,13 +238,13 @@ export class Dropdown extends React.Component<IDropdownProps, IDropdownState> {
             if (this.state.selected && item.value == this.state.selected.value) {
                 items.push(
                     <li key={item.value} className="active">
-                        <a href="#">
+                        <a>
                             {item.text}
                             <span className="checked"/>
                         </a>
                     </li>);
             } else {
-                items.push(<li key={item.value} onClick={this.onClickItem.bind(this, index)}><a href="#">{item.text}</a></li>);
+                items.push(<li key={item.value} onClick={this.onClickItem.bind(this, index)}><a>{item.text}</a></li>);
             }
         });
         options = this.props.items.map(item => <option key={item.value} value={item.value}>{item.text}</option>);

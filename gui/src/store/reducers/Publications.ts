@@ -18,8 +18,8 @@ const notFound = (id: string) => ({
 });
 
 const byId = handleAction(PUBLICATIONS_LOADED,
-        (state: IPublicationsIdMap, payload: IPublication[]): IPublicationsIdMap => buildMap(state, payload),
-        {});
+    (state: IPublicationsIdMap, payload: IPublication[]): IPublicationsIdMap => buildMap(state, payload),
+    {});
 
 export const publications = combineReducers({
     byId
@@ -28,6 +28,9 @@ export const publications = combineReducers({
 //selectors
 export const getPubList = (state: IPublicationsState): IPublication[] => Object.values(state.byId);
 export const getPubById = (state: IPublicationsState, id: string): IPublication => id in state.byId ? state.byId[id] : notFound(id);
+
+export const getPubsByLang = (state: IPublicationsState, language: string) => getPubList(state)
+     .filter((publication: IPublication) => publication.language === language);
 
 export const getPubByLang = (state: IPublicationsState, hostPubId: string, language: string) => getPubList(state)
      .filter((publication: IPublication) => publication.versionRef === getPubById(state, hostPubId).versionRef)

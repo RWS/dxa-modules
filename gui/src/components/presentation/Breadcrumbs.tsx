@@ -161,10 +161,10 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
     public render(): JSX.Element {
         const { itemPath } = this.state;
         const { publicationId, publicationTitle } = this.props;
-        const { localizationService } = this.context.services;
+        const { formatMessage } = this.context.services.localizationService;
         const { selectedItem } = this.props;
         const currentUrl = selectedItem ? selectedItem.url : null;
-        const homeLabel = localizationService.formatMessage("components.breadcrumbs.home");
+        const homeLabel = formatMessage("components.breadcrumbs.home");
 
         return (
             <div className={"sdl-dita-delivery-breadcrumbs"}>
