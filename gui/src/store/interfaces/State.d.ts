@@ -40,5 +40,7 @@ export interface IState {
 
     pages: {
         byId: IPagesMap;
+        loading: string[],
+        errors: {[pageId: string]: string}
     };
 }

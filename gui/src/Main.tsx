@@ -35,7 +35,11 @@ const store: Store<IState> = configureStore({
         pageId: ""
     },
     publications: {byId: {}},
-    pages: {byId: {}}
+    pages: {
+        byId: {},
+        loading: [],
+        errors: {}
+    }
 });
 
 localization.setStore(store);
