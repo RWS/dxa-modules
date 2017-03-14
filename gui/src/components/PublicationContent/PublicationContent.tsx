@@ -1,4 +1,4 @@
-import { PublicationContentPresentation } from "./PublicationContentPresentaion";
+import { PublicationContentPresentation } from "./PublicationContentPresentation";
 import { connect } from "react-redux";
 import { IState } from "store/interfaces/State";
 import { setPublication } from "store/actions/Actions";
