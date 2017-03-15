@@ -68,6 +68,7 @@
     <Compile Include="Models\Tsi1757TestEntity.cs" />
     <Compile Include="Models\Tsi1946TestEntity.cs" />
     <Compile Include="Models\Tsi2285PageModel.cs" />
+    <Compile Include="Models\Tsi2316TestEntity.cs" />
     <Compile Include="Models\Tsi811PageModel.cs" />
     <Compile Include="Models\EmbedParentModel.cs" />
     <Compile Include="Models\EmbedChildModel.cs" />
@@ -91,6 +92,7 @@
     <None Include="Areas\Test\Views\Entity\TSI1757Test3.cshtml" />
     <None Include="Areas\Test\Views\Entity\TSI1856Test.cshtml" />
     <None Include="Areas\Test\Views\Entity\TSI1946Test.cshtml" />
+    <None Include="Areas\Test\Views\Entity\TSI2316Test.cshtml" />
     <None Include="Areas\Test\Views\Entity\TSI811Test.cshtml" />
     <None Include="Areas\Test\Views\Entity\TSI1947Test.cshtml" />
     <None Include="Areas\Test\Views\Entity\EmbedParent.cshtml" />
