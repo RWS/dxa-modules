@@ -59,7 +59,7 @@ export const getPageError = (state: IPageState, id: string): string => {
     if (id in state.errors) {
         return state.errors[id];
     } else if (id === "" && "undefined" in state.errors) {
-        return state.errors["undefined"];
+        return state.errors.undefined;
     } else {
         return "";
     }
