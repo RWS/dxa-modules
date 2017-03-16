@@ -229,7 +229,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         // });
 
        if (publicationId !== nextPubId) {
-            this.fetchPublication(publicationId, nextPubId);
+            this.fetchPublication(nextPubId, nextPage ? nextPage.id : "");
        } else if (nextPage && nextPage.id !== page.id) {
             this._onPageContentRetrieved(nextPage);
        }
