@@ -150,7 +150,14 @@ export class Tile extends React.Component<ITileProps, ITileState> {
     public componentWillUpdate(nextProps: ITileProps): void {
         const { tile } = this.props;
         const nextTile = nextProps.tile;
-        if (tile.title !== nextTile.title) {
+
+        // Is it a good idea check by title? I'm not sure that title unique
+        // if (tile.title !== nextTile.title) {
+        //     this._loadTileContent(nextTile);
+        // }
+
+        // Added publication id for a tile and check uniqueness by this id
+        if (tile.id !== nextTile.id) {
             this._loadTileContent(nextTile);
         }
     }

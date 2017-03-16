@@ -6,7 +6,8 @@ import { IAppContext } from "components/container/App";
 import { IPublicationService } from "services/interfaces/PublicationService";
 
 export interface IFetchPublications {
-    fetch: (publicationService: IPublicationService) => void;
+    productFamily?: string;
+    fetch?: (publicationService: IPublicationService, productFamily?: string) => void;
 }
 
 class Fetch extends React.Component<IFetchPublications, {}> {
@@ -15,9 +16,12 @@ class Fetch extends React.Component<IFetchPublications, {}> {
     };
     public context: IAppContext;
     public componentWillMount(): void {
-        console.log("Do we ever come here?");
         const { publicationService } = this.context.services;
-        this.props.fetch(publicationService);
+        if (this.props.fetch) {
+            this.props.productFamily ?
+                this.props.fetch(publicationService, this.props.productFamily) :
+                this.props.fetch(publicationService);
+        }
     }
 
     public render(): JSX.Element {
@@ -25,7 +29,7 @@ class Fetch extends React.Component<IFetchPublications, {}> {
     }
 }
 
-const mapStateToProps = (state: IState): {} => ({});
+const mapStateToProps = (state: IState, ownProps: IFetchPublications): {} => ({});
 
 const mapDispatchToProps = {
     fetch: fetchPublications

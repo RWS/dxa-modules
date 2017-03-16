@@ -106,7 +106,7 @@ export class PublicationsList extends React.Component<IPublicationsListProps, IP
         </div>;
         return (
             <section className={"sdl-dita-delivery-publications-list"}>
-                <FetchPublications />
+                <FetchPublications productFamily={productFamily} />
                 <h1>{productFamily}</h1>
                 {
                     error ?
@@ -120,6 +120,7 @@ export class PublicationsList extends React.Component<IPublicationsListProps, IP
                                     tiles={publications.map((publication: IPublication) => {
                                         return {
                                             title: publication.title,
+                                            id: publication.id,
                                             loadableContent: () => {
                                                 return this._getLoadableContent(publication.id);
                                             },

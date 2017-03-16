@@ -1,4 +1,3 @@
-// import { handleActions } from "redux-actions";
 import { PUBLICATIONS_LOADED } from "../actions/Actions";
 import { IPublication } from "interfaces/Publication";
 import { handleAction, combineReducers } from "./combineReducers";
@@ -10,7 +9,7 @@ export interface IPublicationsState {
     byId: IPublicationsIdMap;
 };
 
-const buildMap = (currentMap: IPublicationsIdMap, publications: IPublication[]) => Object.assign(currentMap, ...publications.map(publication => ({[publication.id]: publication})));
+const buildMap = (currentMap: IPublicationsIdMap, publications: IPublication[]) => Object.assign({}, ...publications.map(publication => ({[publication.id]: publication})));
 
 const notFound = (id: string) => ({
     id,
