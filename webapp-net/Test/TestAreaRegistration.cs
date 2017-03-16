@@ -60,6 +60,7 @@ namespace Sdl.Web.Modules.Test
             RegisterViewModel("TSI1757Test3", typeof(Tsi1757TestEntity3));
             RegisterViewModel("TSI1856Test", typeof(Tsi1856TestEntity));
             RegisterViewModel("TSI2316Test", typeof(Tsi2316TestEntity));
+            RegisterViewModel("CompLinkTest", typeof(CompLinkTest));
 
             // Entity Models without associated View
             RegisterViewModel(typeof(TestEntityModel2));
@@ -67,6 +68,7 @@ namespace Sdl.Web.Modules.Test
             RegisterViewModel(typeof(EmbedChildModel));
             RegisterViewModel(typeof(Tsi1757TestEntity1));
             RegisterViewModel(typeof(Tsi1757TestEntity2));
+            RegisterViewModel(typeof(TestEntity));
         }
     }
 }
