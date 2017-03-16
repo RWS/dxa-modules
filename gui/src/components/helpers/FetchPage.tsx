@@ -24,7 +24,8 @@ class Fetch extends React.Component<IFetchPage, {}> {
     }
 
     public shouldComponentUpdate(nextProps: IFetchPage): boolean {
-        return this.isPageInProps(nextProps) && (this.props.currentPub.pageId !== nextProps.currentPub.pageId);
+        return this.props.currentPub.pageId !== nextProps.currentPub.pageId;
+        // return this.isPageInProps(nextProps) && (this.props.currentPub.pageId !== nextProps.currentPub.pageId);
     }
 
     public componentDidUpdate(): void {

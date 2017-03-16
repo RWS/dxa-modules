@@ -77,6 +77,7 @@ export interface IPublicationContentProps {
 
     publication: IPublication;
     page: IPage;
+    pageError: string;
 
     /**
      * Publication content props parameters
@@ -207,6 +208,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
     }
 
     public fetchPage(page: IPage): void {
+        console.warn("DEAD CODE?");
         true ? this._onPageContentRetrieved(page) : this._onPageContentRetrievFailed("FFFF");
     }
 
@@ -222,7 +224,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
      */
     public componentWillReceiveProps(nextProps: Pub): void {
        const { publicationId, page } = this.props;
-       const { publicationId: nextPubId,  page: nextPage} = nextProps;
+       const { publicationId: nextPubId, page: nextPage, pageError: nextPageError} = nextProps;
 
         // this.setState({
         //     activeTocItemPath: undefined
@@ -230,8 +232,10 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
 
        if (publicationId !== nextPubId) {
             this.fetchPublication(nextPubId, nextPage ? nextPage.id : "");
-       } else if (nextPage && nextPage.id !== page.id) {
+       } else if (nextPage && nextPage.id !== page.id && nextPage.id !== "") {
             this._onPageContentRetrieved(nextPage);
+       } else if (nextPageError) {
+           this._onPageContentRetrievFailed(nextPageError);
        }
     }
 
@@ -261,7 +265,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         const { services, router } = this.context;
         const { publicationId, pageId, page, publication } = this.props;
         const { taxonomyService } = services;
-        const error = null;
+        const error = this.props.pageError;
         const { rootItems } = this._toc;
         const tocError = this._toc.error;
 

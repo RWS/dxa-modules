@@ -1,26 +1,28 @@
-import { language } from "./Language";
-import { publication } from "./Publication";
-import { publications } from "./Publications";
-import * as Publications from "./Publications";
-import { pages } from "./Pages";
+import * as Language from "./Language";
 import * as Pages from "./Pages";
+import * as Publication from "./Publication";
+import * as Publications from "./Publications";
 import { IState, IPublicationCurrentState } from "store/interfaces/State";
-// import { Publications as PublicationsBase } from "models/Publications";
 import { IPublication } from "interfaces/Publication";
-import { combineReducers } from "./combineReducers";
 import { IPage } from "interfaces/Page";
+import { combineReducers } from "./combineReducers";
 
 export const mainReducer = combineReducers({
-    language,
-    publication,
-    publications,
-    pages
+    language: Language.language,
+    pages: Pages.pages,
+    publication: Publication.publication,
+    publications: Publications.publications
 });
 
+// Publications selectors
 export const getPubList = (state: IState): IPublication[] => Publications.getPubList(state.publications);
-export const getPubByLang = (state: IState, pubId: string, language: string): IPublication | null => Publications.getPubByLang(state.publications, pubId, language);
-
-export const getCurrentPub = (state: IState): IPublicationCurrentState => state.publication;
 export const getPubById = (state: IState, id: string): IPublication => Publications.getPubById(state.publications, id);
-export const getPageById = (state: IState, id: string): IPage => Pages.getPageById(state.pages, id);
 export const getPubsByLang = (state: IState, language: string): IPublication[] => Publications.getPubsByLang(state.publications, language);
+export const getPubByIdAndLang = (state: IState, pubId: string, language: string): IPublication | null => Publications.getPubByIdAndLang(state.publications, pubId, language);
+
+// Pages selectors
+export const getPageById = (state: IState, pageId: string): IPage => Pages.getPageById(state.pages, pageId);
+export const getPageError = (state: IState, pageId: string): string => Pages.getPageError(state.pages, pageId);
+
+// State selectors
+export const getCurrentPub = (state: IState): IPublicationCurrentState => state.publication;

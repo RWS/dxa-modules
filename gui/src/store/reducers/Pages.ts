@@ -5,12 +5,14 @@ import { IPage } from "interfaces/Page";
 export interface IPagesMap {
     [id: string]: IPage;
 };
-export interface IPageErrosMap {
+
+export interface IPageErrorsMap {
     [pageId: string]: string;
 }
 
 export interface IPageState {
     byId: IPagesMap;
+    errors: IPageErrorsMap;
 }
 
 const notFound = (id: string): IPage => ({
@@ -20,24 +22,20 @@ const notFound = (id: string): IPage => ({
     sitemapIds: undefined
 });
 
-const removeByKey = (myObj: IPageErrosMap, deleteKey: string) => {
-  return Object.keys(myObj)
-    .filter(key => key !== deleteKey)
-    .reduce((result: IPageErrosMap, current) => {
-      result[current] = myObj[current];
-      return result;
-  }, {});
+const removeByKey = (myObj: IPageErrorsMap, deleteKey: string) => {
+    return Object.keys(myObj)
+        .filter(key => key !== deleteKey)
+        .reduce((result: IPageErrorsMap, current) => {
+          result[current] = myObj[current];
+          return result;
+    }, {});
 };
 
-export const getPageById = (state: IPageState, id: string): IPage => id in state.byId ? state.byId[id] : notFound(id);
-
-// const pageLoading = (id: string, page: IPage) => Object.assign({}, {
-
-// });
-
-const byId = handleAction(PAGE_LOADED,
-        (state: IPageState, page: IPage): IPagesMap => Object.assign({}, state, { [page.id]: page})
-        , {});
+const byId = handleAction(
+    PAGE_LOADED,
+    (state: IPageState, page: IPage): IPagesMap => Object.assign({}, state, { [page.id]: page }),
+    {}
+);
 
 const loading = combine(
     handleAction(PAGE_LOADING, (state: string[], pageId: string) => [...state, pageId], []),
@@ -45,8 +43,8 @@ const loading = combine(
 );
 
 const errors = combine(
-    handleAction(PAGE_ERROR, (state: IPageErrosMap, error) => Object.assign({}, state, { [error.id]: error.message}), {}),
-    handleAction(PAGE_LOADING, (state: IPageErrosMap, pageId: string) => removeByKey(state, pageId), {})
+    handleAction(PAGE_ERROR, (state: IPageErrorsMap, error) => Object.assign({}, state, { [error.id]: error.message}), {}),
+    handleAction(PAGE_LOADING, (state: IPageErrorsMap, pageId: string) => removeByKey(state, pageId), {})
 );
 
 export const pages = combineReducers({
@@ -54,3 +52,16 @@ export const pages = combineReducers({
     loading,
     errors
 });
+
+// Selectors
+export const getPageById = (state: IPageState, id: string): IPage => id in state.byId ? state.byId[id] : notFound(id);
+export const getPageError = (state: IPageState, id: string): string => {
+    if (id in state.errors) {
+        return state.errors[id];
+    } else if (id === "" && "undefined" in state.errors) {
+        return state.errors["undefined"];
+    } else {
+        return "";
+    }
+    // return (id in state.errors ? state.errors[id] : "";
+};
