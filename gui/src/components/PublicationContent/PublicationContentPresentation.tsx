@@ -212,10 +212,10 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         true ? this._onPageContentRetrieved(page) : this._onPageContentRetrievFailed("FFFF");
     }
 
-    public componentWillMount(): void {
-        const {publicationId, pageId} = this.props;
-        return this.fetchPublication(publicationId, pageId);
-    }
+    // public componentWillMount(): void {
+    //     const {publicationId, pageId} = this.props;
+    //     return this.fetchPublication(publicationId, pageId);
+    // }
 
     /**
      * Invoked when a component is receiving new props. This method is not called for the initial render.
@@ -225,6 +225,10 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
     public componentWillReceiveProps(nextProps: Pub): void {
        const { publicationId, page } = this.props;
        const { publicationId: nextPubId, page: nextPage, pageError: nextPageError} = nextProps;
+
+       if (this.state.isTocLoading && nextPubId) {
+            this._loadTocRootItems(nextPubId);
+        }
 
         // this.setState({
         //     activeTocItemPath: undefined
@@ -261,6 +265,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
      */
     public render(): JSX.Element {
         const { isPageLoading, activeTocItemPath, selectedTocItem, activePageHeader } = this.state;
+
         const { pageAnchor } = this.props.params;
         const { services, router } = this.context;
         const { publicationId, pageId, page, publication } = this.props;
@@ -375,6 +380,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         const page = this._page;
         page.error = null;
         page.content = pageInfo.content;
+
         this.setState({
             isPageLoading: false
         });
