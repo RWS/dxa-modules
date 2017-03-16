@@ -15,8 +15,13 @@ export interface ISyncParams {
 export type Props = IPublicationCurrentState & ISyncParams;
 export class RouteToState1 extends React.Component<Props, {}> {
 
+    public componentWillMount(): void {
+        const { params, onRouteChange } = this.props;
+        onRouteChange(this.paramsToState(params));
+    }
+
     public shouldComponentUpdate(nextProps: Props): boolean {
-        return this.routeChanged(this.props.params, nextProps.params)
+        return this.routeChanged(this.props, nextProps)
             && !this.routeEqualsToState(nextProps);
     }
 

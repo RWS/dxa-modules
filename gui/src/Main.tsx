@@ -31,7 +31,7 @@ const services: IServices = {
 const store: Store<IState> = configureStore({
     language: "en", // default language
     publication: {
-        publicationId: "1961702",
+        publicationId: "",
         pageId: ""
     },
     publications: {byId: {}},
