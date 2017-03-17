@@ -1,6 +1,7 @@
 import { IPublicationService } from "services/interfaces/PublicationService";
 import { IPublication } from "interfaces/Publication";
 import { IProductFamily } from "interfaces/ProductFamily";
+import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 import { Promise } from "es6-promise";
 
 /**
@@ -16,10 +17,12 @@ export class PublicationService implements IPublicationService {
         error: string | null;
         publications: IPublication[];
         productFamilies: IProductFamily[];
+        productReleaseVersions: IProductReleaseVersion[];
     } = {
         error: null,
         publications: [],
-        productFamilies: []
+        productFamilies: [],
+        productReleaseVersions: []
     };
 
     private _mockDataPublication: {
@@ -60,6 +63,24 @@ export class PublicationService implements IPublicationService {
             return Promise.reject(error);
         } else {
             return Promise.resolve(productFamilies);
+        }
+    }
+
+    /**
+     * Get the list of product release versions for a product ProductFamily
+     * Are sorted by release time (latest to oldest)
+     *
+     * @param {string} productFamily Product family
+     * @returns {Promise<IProductReleaseVersion[]>} Promise to return the product release versions
+     *
+     * @memberOf IPublicationService
+     */
+    public getProductReleaseVersions(productFamily: string): Promise<IProductReleaseVersion[]> {
+        const { error, productReleaseVersions } = this._mockDataPublications;
+        if (error) {
+            return Promise.reject(error);
+        } else {
+            return Promise.resolve(productReleaseVersions);
         }
     }
 

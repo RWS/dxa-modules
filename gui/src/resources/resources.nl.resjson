@@ -7,8 +7,6 @@
   "components.searchbar.publication.placeholder": "Zoeken in ‘{0}’",
   "components.contentnavigation.title": "Inhoud",
   "components.tiles.more": "Bekijk meer",
-  "components.productfamilies.unknown.title": "Onbekende product",
-  "components.productfamilies.unknown.description": "Publicaties die nog niet zijn gekoppeld aan een specifiek product",
   "components.productfamilies.no.published.publications": "Nog geen publicaties verschenen",
   "components.productfamilies.view.all": "Bekijk alle producten",
   "components.publicationslist.view.all": "Bekijk alle publicaties",
@@ -26,5 +24,8 @@
   "error.publication.not.found": "Publicatie met id {0} kon niet gevonden worden.",
   "error.toc.not.found": "Oeps, ging er iets mis het laden van de inhoudsopgave van deze publicatie.",
   "error.toc.items.not.found": "We konden geen kind artikelen te wijten aan server interne fout laden.",
-  "error.unable.to.locate.page.in.toc": "De pagina met id {0} kon niet gevonden worden in de inhoudstafel."
+  "error.unable.to.locate.page.in.toc": "De pagina met id {0} kon niet gevonden worden in de inhoudstafel.",
+  "productfamilies.unknown.title": "Onbekend product",
+  "productfamilies.unknown.description": "Publicaties die nog niet zijn gekoppeld aan een specifiek product",
+  "productreleaseversions.unknown.title": "Product versie onbekend"
 }

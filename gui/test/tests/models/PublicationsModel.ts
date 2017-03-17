@@ -153,13 +153,24 @@ class PublicationsModel extends TestBase {
             });
 
             it("can resolve publications for an unknown product family", (): void => {
-                const unknownProductFamilyTitle: string = localization.formatMessage("components.productfamilies.unknown.title");
+                const unknownProductFamilyTitle: string = localization.formatMessage("productfamilies.unknown.title");
                 const publications = publicationModel.getPublications(unknownProductFamilyTitle);
                 expect(publications).toBeDefined();
                 if (publications) {
                     expect(publications.length).toBe(2);
                     expect(publications[0].title).toBe("Pub");
                     expect(publications[1].title).toBe("Pub4");
+                }
+            });
+
+            it("can resolve product release versions for an unknown product family", (): void => {
+                const unknownProductFamilyTitle: string = localization.formatMessage("productfamilies.unknown.title");
+                const unknownProductReleaseVersionTitle: string = localization.formatMessage("productreleaseversions.unknown.title");
+                const publications = publicationModel.getProductReleaseVersions(unknownProductFamilyTitle);
+                expect(publications).toBeDefined();
+                if (publications) {
+                    expect(publications.length).toBe(1);
+                    expect(publications[0].title).toBe(unknownProductReleaseVersionTitle);
                 }
             });
         });

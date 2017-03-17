@@ -4,8 +4,8 @@ import { IProductFamily } from "interfaces/ProductFamily";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 import { Api } from "utils/Api";
 import { Net, IWebRequest, LoadableObject } from "sdl-models";
-
 import { localization } from "services/common/LocalizationService";
+import Version from "utils/Version";
 
 /**
  * Publications model
@@ -18,8 +18,9 @@ export class Publications extends LoadableObject {
 
     private _publications: IPublication[];
     private _productFamilies?: IProductFamily[];
-
-    private _unknownProductFamilyTitle: string = localization.formatMessage("components.productfamilies.unknown.title");
+    private _unknownProductFamilyTitle: string = localization.formatMessage("productfamilies.unknown.title");
+    private _unknownProductFamilyDescription: string = localization.formatMessage("productfamilies.unknown.description");
+    private _unknownProductReleaseVersion: string = localization.formatMessage("productreleaseversions.unknown.title");
 
     /**
      * Get the Publications
@@ -47,18 +48,21 @@ export class Publications extends LoadableObject {
      * @param {string} productFamily productFamily title
      * @returns {IProductReleaseVersion[]}
      */
-    public getProductReleaseVersions(productFamily?: string): IProductReleaseVersion[] {
+    public getProductReleaseVersions(productFamily: string): IProductReleaseVersion[] {
         const publicationsList = this.getPublications(productFamily);
-        return publicationsList.map((publication: IPublication) => {
-            return publication.productReleaseVersion;
-        }).filter((version: string, i: number, arr: string[]) => {
-            return arr.indexOf(version) == i;
-        }).map((version: string | undefined) => {
-            return {
-                // Only title now, description would go here later on
-                title: version
-            } as IProductReleaseVersion;
-        });
+        const familyTitle = (productFamily === this._unknownProductFamilyTitle) ? null : productFamily;
+        return Version.sortProductReleaseVersions(familyTitle,
+            publicationsList).map((version: string | null) => {
+                if (version === null) {
+                    return {
+                        title: this._unknownProductReleaseVersion,
+                        hasWarning: true
+                    } as IProductReleaseVersion;
+                }
+                return {
+                    title: version
+                } as IProductReleaseVersion;
+            });
     }
 
     /**
@@ -84,8 +88,8 @@ export class Publications extends LoadableObject {
                 this._productFamilies = distinctFamilies.map((family: string | undefined) => {
                     if (family === undefined) {
                         return {
-                            title: localization.formatMessage("components.productfamilies.unknown.title"),
-                            description: localization.formatMessage("components.productfamilies.unknown.description"),
+                            title: this._unknownProductFamilyTitle,
+                            description: this._unknownProductFamilyDescription,
                             hasWarning: true
                         } as IProductFamily;
                     } else {

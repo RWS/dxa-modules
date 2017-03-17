@@ -79,6 +79,40 @@ class PublicationServiceTests extends TestBase {
                 });
             });
 
+            it("can get product release versions", (done: () => void): void => {
+                publicationService.getProductFamilies().then(families => {
+                    publicationService.getProductReleaseVersions(families[0].title).then(releaseVersions => {
+                        expect(releaseVersions).toBeDefined();
+                        if (releaseVersions) {
+                            expect(releaseVersions.length).toBe(1);
+                            expect(releaseVersions[0].title).toBe("Penguins ");
+                        }
+                        done();
+                    }).catch(error => {
+                        fail(`Unexpected error: ${error}`);
+                        done();
+                    });
+                });
+            });
+
+            it("can get product release versions from memory", (done: () => void): void => {
+                const spy = spyOn(window, "XMLHttpRequest").and.callThrough();
+                publicationService.getProductFamilies().then(families => {
+                    publicationService.getProductReleaseVersions(families[0].title).then(releaseVersions => {
+                        expect(releaseVersions).toBeDefined();
+                        if (releaseVersions) {
+                            expect(releaseVersions.length).toBe(1);
+                            expect(releaseVersions[0].title).toBe("Penguins ");
+                            expect(spy).not.toHaveBeenCalled();
+                        }
+                        done();
+                    }).catch(error => {
+                        fail(`Unexpected error: ${error}`);
+                        done();
+                    });
+                });
+            });
+
             it("can get the publications", (done: () => void): void => {
                 publicationService.getPublications().then(publications => {
                     expect(publications).toBeDefined();

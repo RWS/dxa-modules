@@ -1,5 +1,6 @@
 import { IPublication } from "interfaces/Publication";
 import { IProductFamily } from "interfaces/ProductFamily";
+import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 import { Promise } from "es6-promise";
 
 /**
@@ -20,12 +21,11 @@ export interface IPublicationService {
     /**
      * Get the list of publications product families
      *
-     * @param {boolean} reload if list should be reloaded
      * @returns {Promise<IProductFamily[]>} Promise to return Items
      *
      * @memberOf DataStoreClient
      */
-    getProductFamilies(reload?: boolean): Promise<IProductFamily[]>;
+    getProductFamilies(): Promise<IProductFamily[]>;
 
     /**
      * Get the publication title
@@ -36,4 +36,15 @@ export interface IPublicationService {
      * @memberOf IDataStore
      */
     getPublicationTitle(publicationId: string): Promise<string>;
+
+    /**
+     * Get the list of product release versions for a product ProductFamily
+     * Are sorted by release time (latest to oldest)
+     *
+     * @param {string} productFamily Product family
+     * @returns {Promise<IProductReleaseVersion[]>} Promise to return the product release versions
+     *
+     * @memberOf IPublicationService
+     */
+    getProductReleaseVersions(productFamily: string): Promise<IProductReleaseVersion[]>;
 }

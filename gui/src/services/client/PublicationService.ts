@@ -1,5 +1,6 @@
 import { IPublicationService } from "services/interfaces/PublicationService";
 import { IPublication } from "interfaces/Publication";
+import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 import { IProductFamily } from "interfaces/ProductFamily";
 import { localization } from "services/common/LocalizationService";
 import { Publications } from "models/Publications";
@@ -33,7 +34,7 @@ export class PublicationService implements IPublicationService {
      */
     public getPublications(productFamily?: string): Promise<IPublication[]> {
         const publication = this.getPublicationsModel();
-        return new Promise((resolve: (publications?: IPublication[]) => void, reject: (error: string | null) => void) => {
+        return new Promise((resolve: (publications: IPublication[]) => void, reject: (error: string | null) => void) => {
             if (publication.isLoaded()) {
                 resolve(publication.getPublications(productFamily));
             } else {
@@ -67,7 +68,7 @@ export class PublicationService implements IPublicationService {
      */
     public getProductFamilies(): Promise<IProductFamily[]> {
         const publication = this.getPublicationsModel();
-        return new Promise((resolve: (publications?: IProductFamily[]) => void, reject: (error: string | null) => void) => {
+        return new Promise((resolve: (productFamilies: IProductFamily[]) => void, reject: (error: string | null) => void) => {
             if (publication.isLoaded()) {
                 resolve(publication.getProductFamilies());
             } else {
@@ -118,6 +119,42 @@ export class PublicationService implements IPublicationService {
                 error => {
                     reject(error);
                 });
+        });
+    }
+
+    /**
+     * Get the list of product release versions for a product ProductFamily
+     * Are sorted by release time (latest to oldest)
+     *
+     * @param {string} productFamily Product family
+     * @returns {Promise<IProductReleaseVersion[]>} Promise to return the product release versions
+     *
+     * @memberOf IPublicationService
+     */
+    public getProductReleaseVersions(productFamily: string): Promise<IProductReleaseVersion[]> {
+        const publication = this.getPublicationsModel();
+        return new Promise((resolve: (productReleaseVersions?: IProductReleaseVersion[]) => void, reject: (error: string | null) => void) => {
+            if (publication.isLoaded()) {
+                resolve(publication.getProductReleaseVersions(productFamily));
+            } else {
+                let removeEventListeners: () => void;
+                const onLoad = () => {
+                    removeEventListeners();
+                    resolve(publication.getProductReleaseVersions(productFamily));
+                };
+                const onLoadFailed = (event: Event & { data: { error: string } }) => {
+                    removeEventListeners();
+                    reject(event.data.error);
+                };
+                removeEventListeners = (): void => {
+                    publication.removeEventListener("load", onLoad);
+                    publication.removeEventListener("loadfailed", onLoadFailed);
+                };
+
+                publication.addEventListener("load", onLoad);
+                publication.addEventListener("loadfailed", onLoadFailed);
+                publication.load();
+            }
         });
     }
 
