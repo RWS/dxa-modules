@@ -29,11 +29,23 @@
         > * {
             flex-grow: 0;
             margin-right: 15px;
+            .sdl-dita-delivery-app.rtl & {
+                margin-right: 0px;
+                margin-left: 15px;
+            }
             &:first-child {
                 margin-left: 15px;
+                .sdl-dita-delivery-app.rtl & {
+                    margin-left: 0px;
+                    margin-right: 15px;
+                }
             }
             span {
                 margin-right: 5px;
+                .sdl-dita-delivery-app.rtl & {
+                    margin-right: 0px;
+                    margin-left: 5px;
+                }
             }
         }
         .spacer {
@@ -45,6 +57,9 @@
             position: relative;
             top: -4px;
             background-position: left center;
+            .sdl-dita-delivery-app.rtl & {
+                background-position: right center;
+            }
             a {
                 height: 100%;
                 width: 100%;
@@ -53,6 +68,9 @@
         }
         .sdl-dita-delivery-topbar-language {
             text-align: right;
+            .sdl-dita-delivery-app.rtl & {
+                text-align: left;
+            }
             span {
                 .icon-language(21px);
             }

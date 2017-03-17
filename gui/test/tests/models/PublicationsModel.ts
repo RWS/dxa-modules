@@ -9,29 +9,34 @@ const MOCK_DATA: IPublication[] = [
         Id: "Pub1",
         Title: "Pub1",
         ProductFamily: "Family 1",
-        CreatedOn: ""
+        CreatedOn: "",
+        Version: "1"
     },
     {
         Id: "Pub2",
         Title: "Pub2",
         ProductFamily: "Family 2",
-        CreatedOn: ""
+        CreatedOn: "",
+        Version: "1"
     }, {
         Id: "Pub3",
         Title: "Pub3",
         ProductFamily: "Family 2",
-        CreatedOn: ""
+        CreatedOn: "",
+        Version: "1"
     },
     {
         Id: "Pub",
         Title: "Pub",
-        CreatedOn: ""
+        CreatedOn: "",
+        Version: "1"
     },
     {
         Id: "Pub4",
         Title: "Pub4",
         ProductFamily: null,
-        CreatedOn: ""
+        CreatedOn: "",
+        Version: "1"
     }
 ];
 
