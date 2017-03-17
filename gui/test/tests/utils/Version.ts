@@ -4,10 +4,11 @@ import { IPublication } from "interfaces/Publication";
 describe(`Version tests.`, (): void => {
 
     it("sorts product release version correctly", (): void => {
-        const defaultPub = {
+        const defaultPub: IPublication = {
             id: "1",
             title: "Title1",
-            createdOn: new Date()
+            createdOn: new Date(),
+            version: "1"
         };
         const publications: IPublication[] = [
             /**
@@ -58,31 +59,42 @@ describe(`Version tests.`, (): void => {
             },
             /**
              * Different product release versions
-             * With created on
+             * With created on and version
              */
             {
                 ...defaultPub,
                 productFamily: "SDL Web",
                 productReleaseVersion: "Web 8",
-                createdOn: new Date(new Date().setFullYear(2012))
+                createdOn: new Date(new Date().setFullYear(2016)),
+                version: "4"
             },
             {
                 ...defaultPub,
                 productFamily: "SDL Web",
                 productReleaseVersion: "Tridion 98",
-                createdOn: new Date(new Date().setFullYear(1998))
+                createdOn: new Date(new Date().setFullYear(1998)),
+                version: "1"
+            },
+            {
+                ...defaultPub,
+                productFamily: "SDL Web",
+                productReleaseVersion: "Tridion 2013",
+                createdOn: new Date(new Date().setFullYear(2013)),
+                version: "2"
             },
             {
                 ...defaultPub,
                 productFamily: "SDL Web",
                 productReleaseVersion: "Tridion 2013SP1",
-                createdOn: new Date(new Date().setFullYear(2013))
+                createdOn: new Date(new Date().setFullYear(2015)),
+                version: "2.1.1"
             },
             {
                 ...defaultPub,
                 productFamily: "SDL Web",
-                productReleaseVersion: "Tridion 2015",
-                createdOn: new Date(new Date().setFullYear(2015))
+                productReleaseVersion: "Tridion 2014",
+                createdOn: new Date(new Date().setFullYear(2014)),
+                version: "3"
             },
             /**
              * Uncategorized, unknown
@@ -108,7 +120,7 @@ describe(`Version tests.`, (): void => {
         expect(Version.sortProductReleaseVersions("PF3", publications)).toEqual(["PR3.1"]);
         expect(Version.sortProductReleaseVersions("PF4", publications)).toEqual(["PR4.1"]);
         expect(Version.sortProductReleaseVersions("PF5", publications)).toEqual(["PR1"]);
-        expect(Version.sortProductReleaseVersions("SDL Web", publications)).toEqual(["Web 8", "Tridion 2015", "Tridion 2013SP1", "Tridion 98"]);
+        expect(Version.sortProductReleaseVersions("SDL Web", publications)).toEqual(["Web 8", "Tridion 2015", "Tridion 2013SP1", "Tridion 2013", "Tridion 98"]);
         expect(Version.sortProductReleaseVersions("PF7", publications)).toEqual(["v1", null]);
         expect(Version.sortProductReleaseVersions(null, publications)).toEqual([null]);
     });

@@ -81,36 +81,44 @@ class PublicationsModel extends TestBase {
                     return [{
                         id: "1",
                         productFamily: "Blackberry",
-                        createdOn: new Date()
+                        createdOn: new Date(),
+                        version: "1"
                     }, {
                         id: "2",
                         productFamily: "Strawberry",
-                        createdOn: new Date()
+                        createdOn: new Date(),
+                        version: "1"
                     }, {
                         id: "3",
                         productFamily: "blueberry",
-                        createdOn: new Date()
+                        createdOn: new Date(),
+                        version: "1"
                     }, {
                         id: "4",
                         productFamily: "Watermelonberry",
-                        createdOn: new Date()
+                        createdOn: new Date(),
+                        version: "1"
                     }, {
                         id: "5",
                         productFamily: "elderberry",
-                        createdOn: new Date()
+                        createdOn: new Date(),
+                        version: "1"
                     }, {
                         id: "6",
                         productFamily: "Mulberry",
-                        createdOn: new Date()
+                        createdOn: new Date(),
+                        version: "1"
                     }, {
                         id: "7",
                         title: "Salat item 7",
-                        createdOn: new Date()
+                        createdOn: new Date(),
+                        version: "1"
                     }, {
                         id: "8",
                         title: "Salat item 8",
                         productFamily: null,
-                        createdOn: new Date()
+                        createdOn: new Date(),
+                        version: "1"
                     }];
                 });
 

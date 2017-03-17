@@ -44,4 +44,12 @@ export interface IPublication {
      * @memberOf IPublication
      */
     createdOn: Date;
+
+    /**
+     * Version (eg 1, 1.1.1)
+     *
+     * @type {string}
+     * @memberOf IPublication
+     */
+    version: string;
 }

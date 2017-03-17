@@ -68,15 +68,18 @@ class PublicationsListComponent extends TestBase {
                 const publications: IPublication[] = [{
                     id: "1",
                     title: "Publication 1",
-                    createdOn: new Date()
+                    createdOn: new Date(),
+                    version: "1"
                 }, {
                     id: "2",
                     title: "Publication 2",
-                    createdOn: new Date()
+                    createdOn: new Date(),
+                    version: "1"
                 }, {
                     id: "3",
                     title: "Publication 3",
-                    createdOn: new Date()
+                    createdOn: new Date(),
+                    version: "1"
                 }];
                 services.publicationService.setMockDataPublications(null, publications);
 
@@ -98,7 +101,8 @@ class PublicationsListComponent extends TestBase {
                 const publications: IPublication[] = [{
                     id: "0",
                     title: "Publication",
-                    createdOn: new Date()
+                    createdOn: new Date(),
+                    version: "1"
                 }];
                 services.publicationService.setMockDataPublications(null, publications);
 
@@ -127,7 +131,8 @@ class PublicationsListComponent extends TestBase {
                 const publications: IPublication[] = [{
                     id: "0",
                     title: "Publication",
-                    createdOn: new Date()
+                    createdOn: new Date(),
+                    version: "1"
                 }];
                 services.publicationService.setMockDataPublications(null, publications);
                 services.taxonomyService.setMockDataToc(null, [
