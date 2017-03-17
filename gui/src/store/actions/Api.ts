@@ -12,7 +12,6 @@ export const pageLoaded = createAction(PAGE_LOADED, pageInfo => pageInfo);
 export const pageLoading = createAction(PAGE_LOADING, pageId => pageId);
 export const pageError = createAction(PAGE_ERROR, (pageId, message) => ({ pageId, message }));
 
-/* if anybody know how to make it readble with ts? */
 export interface IDispatcherFunction {
     (dispatch: Dispatch<IState>): void;
 }

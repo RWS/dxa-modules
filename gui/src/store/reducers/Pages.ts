@@ -1,4 +1,4 @@
-import { combineReducers, handleAction, combine } from "./combineReducers";
+import { combineReducers, handleAction, combine } from "./CombineReducers";
 import { PAGE_LOADED, PAGE_LOADING, PAGE_ERROR } from "store/actions/Actions";
 import { IPage } from "interfaces/Page";
 
@@ -56,12 +56,6 @@ export const pages = combineReducers({
 // Selectors
 export const getPageById = (state: IPageState, id: string): IPage => id in state.byId ? state.byId[id] : notFound(id);
 export const getPageError = (state: IPageState, id: string): string => {
-    if (id in state.errors) {
-        return state.errors[id];
-    } else if (id === "" && "undefined" in state.errors) {
-        return state.errors.undefined;
-    } else {
-        return "";
-    }
-    // return (id in state.errors ? state.errors[id] : "";
+    const { errors } = state;
+    return (id in errors) ? errors[id] : errors.undefined || "";
 };

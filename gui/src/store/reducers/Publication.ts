@@ -1,5 +1,5 @@
 import { getPubByIdAndLang } from "./Reducer";
-import { handleAction, combine } from "./combineReducers";
+import { handleAction, combine } from "./CombineReducers";
 import { IPublicationCurrentState } from "store/interfaces/State";
 import { PUBLICATION_ROUTE_CHANGED, CHANGE_LANGUAGE } from "store/actions/Actions";
 

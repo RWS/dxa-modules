@@ -1,6 +1,6 @@
 import { PUBLICATIONS_LOADED } from "../actions/Actions";
 import { IPublication } from "interfaces/Publication";
-import { handleAction, combineReducers } from "./combineReducers";
+import { handleAction, combineReducers } from "./CombineReducers";
 
 export interface IPublicationsIdMap {
     [id: string]: IPublication;

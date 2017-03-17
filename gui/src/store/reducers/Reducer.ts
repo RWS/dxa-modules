@@ -5,7 +5,7 @@ import * as Publications from "./Publications";
 import { IState, IPublicationCurrentState } from "store/interfaces/State";
 import { IPublication } from "interfaces/Publication";
 import { IPage } from "interfaces/Page";
-import { combineReducers } from "./combineReducers";
+import { combineReducers } from "./CombineReducers";
 
 export const mainReducer = combineReducers({
     language: Language.language,
