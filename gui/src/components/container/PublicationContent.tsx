@@ -188,7 +188,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         const { publicationId, pageIdOrPublicationTitle } = this.props.params;
         const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
         const { router } = this.context;
-        const { publicationService, pageService, taxonomyService } = this.context.services;
+        const { publicationService, pageService } = this.context.services;
 
         if (pageId) {
             // Load the page
@@ -197,27 +197,16 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                 this._onPageContentRetrievFailed.bind(this));
         } else {
             // Select first page in a list of Pubs
-            taxonomyService.getSitemapRoot(publicationId).then(
-                items => {
-                    /* istanbul ignore else */
-                    if (!this._isUnmounted) {
-                        if (items[0]) {
-                            let url = items[0].url;
-                            if (url && router) {
-                                router.replace(url);
-                            }
-                            this._loadTocRootItems(publicationId, [items[0].id || ""]);
-                        } else {
-                            this._loadTocRootItems(publicationId);
-                        }
+            this._loadTocRootItems(publicationId).then(items => {
+                /* istanbul ignore else */
+                if (!this._isUnmounted) {
+                    const firstItem = items[0];
+                    let url = firstItem.url;
+                    if (url && router) {
+                        router.replace(url);
                     }
-                },
-                error => {
-                    /* istanbul ignore else */
-                    if (!this._isUnmounted) {
-                        this._loadTocRootItems(publicationId);
-                    }
-                });
+                }
+            })
         }
 
         // Get publication title
@@ -528,10 +517,10 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         }
     }
 
-    private _loadTocRootItems(publicationId: string, path?: string[]): void {
+    private _loadTocRootItems(publicationId: string, path?: string[]): Promise<ITaxonomy[]> {
         const { services } = this.context;
         // Get the data for the Toc
-        services.taxonomyService.getSitemapRoot(publicationId).then(
+        return services.taxonomyService.getSitemapRoot(publicationId).then(
             items => {
                 /* istanbul ignore else */
                 if (!this._isUnmounted) {
@@ -542,6 +531,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                         isTocLoading: false
                     });
                 }
+                return items;
             },
             error => {
                 /* istanbul ignore else */
