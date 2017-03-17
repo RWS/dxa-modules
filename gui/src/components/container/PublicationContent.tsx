@@ -206,7 +206,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                         router.replace(url);
                     }
                 }
-            })
+            });
         }
 
         // Get publication title
