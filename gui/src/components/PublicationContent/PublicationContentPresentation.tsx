@@ -204,7 +204,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
 //        this is temporary hack to move out loading data from this component
         if (!pageId) {
             // Load the page
-            //this._loadTocRootItems(publicationId);
+            this._loadTocRootItems(publicationId);
         }
     }
 
@@ -502,7 +502,6 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
 
     private _loadTocRootItems(publicationId: string, path?: string[]): void {
         const { services } = this.context;
-        debugger;
         // Get the data for the Toc
         services.taxonomyService.getSitemapRoot(publicationId).then(
             items => {

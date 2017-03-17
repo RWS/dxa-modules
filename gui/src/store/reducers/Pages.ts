@@ -44,7 +44,7 @@ const loading = combine(
 );
 
 const errors = combine(
-    handleAction(PAGE_ERROR, (state: IPageErrorsMap, error) => Object.assign({}, state, { [error.id]: error.message}), {}),
+    handleAction(PAGE_ERROR, (state: IPageErrorsMap, error) => Object.assign({}, state, { [error.pageId]: error.message}), {}),
     handleAction(PAGE_LOADING, (state: IPageErrorsMap, pageId: string) => removeByKey(state, pageId), {})
 );
 
@@ -56,8 +56,5 @@ export const pages = combineReducers({
 
 // Selectors
 export const getPageById = (state: IPageState, id: string): IPage => id in state.byId ? state.byId[id] : notFound(id);
-export const getPageError = (state: IPageState, id: string): string => {
-    const { errors } = state;
-    return (id in errors) ? errors[id] : errors.undefined || "";
-};
+export const getPageError = (state: IPageState, id: string): string => id in state.errors ? state.errors[id] : "";
 export const isPageLoading = (state: IPageState, id: string): boolean => state.loading.includes(id);
