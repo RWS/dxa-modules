@@ -13,6 +13,7 @@ export interface IPageErrorsMap {
 export interface IPageState {
     byId: IPagesMap;
     errors: IPageErrorsMap;
+    loading: string[];
 }
 
 const notFound = (id: string): IPage => ({
@@ -59,3 +60,4 @@ export const getPageError = (state: IPageState, id: string): string => {
     const { errors } = state;
     return (id in errors) ? errors[id] : errors.undefined || "";
 };
+export const isPageLoading = (state: IPageState, id: string): boolean => id in state.loading;

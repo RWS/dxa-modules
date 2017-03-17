@@ -21,7 +21,7 @@ export class RouteToState1 extends React.Component<Props, {}> {
     }
 
     public shouldComponentUpdate(nextProps: Props): boolean {
-        return this.routeChanged(this.props, nextProps)
+        return this.routeChanged(this.props.params, nextProps.params)
             && !this.routeEqualsToState(nextProps);
     }
 

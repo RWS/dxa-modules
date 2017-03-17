@@ -78,6 +78,7 @@ export interface IPublicationContentProps {
     publication: IPublication;
     page: IPage;
     pageError: string;
+    isPageLoading: boolean;
 
     /**
      * Publication content props parameters
@@ -113,7 +114,7 @@ export interface IPublicationContentState {
      *
      * @type {boolean}
      */
-    isPageLoading?: boolean;
+    //isPageLoading?: boolean;
     /**
      * Current active item path in the TOC
      *
@@ -191,8 +192,8 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         super();
         this.state = {
             isTocLoading: true,
-            selectedTocItem: null,
-            isPageLoading: true
+            selectedTocItem: null
+            //isPageLoading: true
         };
     }
 
@@ -203,7 +204,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
 //        this is temporary hack to move out loading data from this component
         if (!pageId) {
             // Load the page
-            this._loadTocRootItems(publicationId);
+            //this._loadTocRootItems(publicationId);
         }
     }
 
@@ -230,10 +231,6 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
             this._loadTocRootItems(nextPubId);
         }
 
-        // this.setState({
-        //     activeTocItemPath: undefined
-        // });
-
        if (publicationId !== nextPubId) {
             this.fetchPublication(nextPubId, nextPage ? nextPage.id : "");
        } else if (nextPage && nextPage.id !== page.id && nextPage.id !== "") {
@@ -253,7 +250,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
     public componentWillUpdate(nextProps: IPublicationContentProps, nextState: IPublicationContentState): void {
         if (nextState.selectedTocItem && !nextState.selectedTocItem.url) {
             this._page.content = `<h1 class="title topictitle1">${nextState.selectedTocItem.title}</h1>`;
-            nextState.isPageLoading = false;
+            //nextState.isPageLoading = false;
             return;
         }
     }
@@ -264,11 +261,12 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
      * @returns {JSX.Element}
      */
     public render(): JSX.Element {
-        const { isPageLoading, activeTocItemPath, selectedTocItem, activePageHeader } = this.state;
+        const { activeTocItemPath, selectedTocItem, activePageHeader } = this.state;
 
         const { pageAnchor } = this.props.params;
         const { services, router } = this.context;
-        const { publicationId, pageId, page, publication } = this.props;
+        const { publicationId, pageId, page, publication, isPageLoading } = this.props;
+
         const { taxonomyService } = services;
         const error = this.props.pageError;
         const { rootItems } = this._toc;
@@ -365,6 +363,8 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         const parsedUrl = navPath && Url.parsePageUrl(navPath);
 
         if ( parsedUrl ) {
+            console.log("on pub change");
+
             onPulicationChange({
                 publicationId: parsedUrl.publicationId,
                 pageId: parsedUrl.pageId,
@@ -381,9 +381,9 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         page.error = null;
         page.content = pageInfo.content;
 
-        this.setState({
-            isPageLoading: false
-        });
+        // this.setState({
+        //     isPageLoading: false
+        // });
         // Set the current active path for the tree
         if (Array.isArray(pageInfo.sitemapIds) && pageInfo.sitemapIds.length > 0) {
             // Always take the first sitemap id
@@ -421,9 +421,9 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
             this._loadTocRootItems(publicationId);
         }
 
-        this.setState({
+        /*this.setState({
             isPageLoading: false
-        });
+        });*/
     }
 
     private _getActiveSitemapPath(pageId: string, sitemapId: string, done: (path: string[]) => void): void {
@@ -443,8 +443,8 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                     if (!this._isUnmounted) {
                         this._toc.error = error;
                         this.setState({
-                            isTocLoading: false,
-                            isPageLoading: false
+                            isTocLoading: false
+                            //isPageLoading: false
                         });
                     }
                 });
@@ -502,11 +502,14 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
 
     private _loadTocRootItems(publicationId: string, path?: string[]): void {
         const { services } = this.context;
+        debugger;
         // Get the data for the Toc
         services.taxonomyService.getSitemapRoot(publicationId).then(
             items => {
                 /* istanbul ignore else */
                 if (!this._isUnmounted) {
+                    console.log("items", items);
+
                     this._toc.rootItems = items;
                     this._toc.error = undefined;
                     this.setState({
@@ -520,8 +523,8 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                 if (!this._isUnmounted) {
                     this._toc.error = error;
                     this.setState({
-                        isTocLoading: false,
-                        isPageLoading: false
+                        isTocLoading: false
+                        //isPageLoading: false
                     });
                 }
             });
