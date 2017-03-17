@@ -19,7 +19,7 @@ export interface IPublication {
      * @type {string}
      * @memberOf IPublication
      */
-    title?: string;
+    title: string;
 
     /**
      * Publication product family

@@ -80,31 +80,37 @@ class PublicationsModel extends TestBase {
                 spyOn(publicationModel, "getPublications").and.callFake((): IPublicationInterface[] => {
                     return [{
                         id: "1",
+                        title: "Title",
                         productFamily: "Blackberry",
                         createdOn: new Date(),
                         version: "1"
                     }, {
                         id: "2",
+                        title: "Title",
                         productFamily: "Strawberry",
                         createdOn: new Date(),
                         version: "1"
                     }, {
                         id: "3",
+                        title: "Title",
                         productFamily: "blueberry",
                         createdOn: new Date(),
                         version: "1"
                     }, {
                         id: "4",
+                        title: "Title",
                         productFamily: "Watermelonberry",
                         createdOn: new Date(),
                         version: "1"
                     }, {
                         id: "5",
+                        title: "Title",
                         productFamily: "elderberry",
                         createdOn: new Date(),
                         version: "1"
                     }, {
                         id: "6",
+                        title: "Title",
                         productFamily: "Mulberry",
                         createdOn: new Date(),
                         version: "1"
