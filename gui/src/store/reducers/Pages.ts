@@ -40,7 +40,8 @@ const byId = handleAction(
 
 const loading = combine(
     handleAction(PAGE_LOADING, (state: string[], pageId: string) => [...state, pageId], []),
-    handleAction(PAGE_LOADED, (state: string[], page: IPage) => state.filter((id) => id !== page.id), [])
+    handleAction(PAGE_LOADED, (state: string[], page: IPage) => state.filter((id) => id !== page.id), []),
+    handleAction(PAGE_ERROR, (state: string[], error: IPageErrorsMap) => state.filter((id) => id !== error.pageId), [])
 );
 
 const errors = combine(
