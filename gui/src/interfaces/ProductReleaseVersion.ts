@@ -12,6 +12,7 @@ export interface IProductReleaseVersion {
      * @memberOf IProductReleaseVersion
      */
     title: string;
+
     /**
      * If Product Release Version has a warning
      *
