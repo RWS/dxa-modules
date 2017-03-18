@@ -193,30 +193,25 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         this.state = {
             isTocLoading: true,
             selectedTocItem: null
-            //isPageLoading: true
         };
+
+        this._fixPanels = this._fixPanels.bind(this);
     }
 
     /**
      * Invoked once, both on the client and server, immediately before the initial rendering occurs.
      */
-    public fetchPublication(publicationId: string, pageId: string): void {
+    public fetchPublication(publicationId: string): void {
 //        this is temporary hack to move out loading data from this component
-        if (!pageId) {
+        if (publicationId) {
             // Load the page
             this._loadTocRootItems(publicationId);
         }
     }
 
     public fetchPage(page: IPage): void {
-        console.warn("DEAD CODE?");
-        true ? this._onPageContentRetrieved(page) : this._onPageContentRetrievFailed("FFFF");
+        this._onPageContentRetrieved(page);
     }
-
-    // public componentWillMount(): void {
-    //     const {publicationId, pageId} = this.props;
-    //     return this.fetchPublication(publicationId, pageId);
-    // }
 
     /**
      * Invoked when a component is receiving new props. This method is not called for the initial render.
@@ -227,14 +222,10 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
        const { publicationId, page } = this.props;
        const { publicationId: nextPubId, page: nextPage, pageError: nextPageError} = nextProps;
 
-       if (this.state.isTocLoading && nextPubId) {
-            this._loadTocRootItems(nextPubId);
-        }
-
-       if (publicationId !== nextPubId) {
-            this.fetchPublication(nextPubId, nextPage ? nextPage.id : "");
-       } else if (nextPage && nextPage.id !== page.id && nextPage.id !== "") {
-            this._onPageContentRetrieved(nextPage);
+       if (publicationId !== nextPubId && nextPage.id === "") {
+            this.fetchPublication(nextPubId);
+       } else if (nextPage && nextPage.content !== page.content && nextPage.content !== "") {
+            this.fetchPage(nextPage);
        } else if (nextPageError) {
            this._onPageContentRetrievFailed(nextPageError);
        }
@@ -331,8 +322,8 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
             }
         }
 
-        window.addEventListener("scroll", this._fixPanels.bind(this));
-        window.addEventListener("resize", this._fixPanels.bind(this));
+        window.addEventListener("scroll", this._fixPanels);
+        window.addEventListener("resize", this._fixPanels);
         this._fixPanels();
     }
 
@@ -342,8 +333,8 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
     public componentWillUnmount(): void {
         this._isUnmounted = true;
 
-        window.removeEventListener("scroll", this._fixPanels.bind(this));
-        window.removeEventListener("resize", this._fixPanels.bind(this));
+        window.removeEventListener("scroll", this._fixPanels);
+        window.removeEventListener("resize", this._fixPanels);
     }
 
     private _onTocSelectionChanged(sitemapItem: ITaxonomy, path: string[]): void {
