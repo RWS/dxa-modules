@@ -1,6 +1,7 @@
 import * as React from "react";
 import { IPublication } from "interfaces/Publication";
-import { PageLink } from "../PageLink/PageLink";
+import { PageLink } from "components/PageLink/PageLink";
+import { localization } from "services/common/LocalizationService";
 
 import "./ContentLanguageWarning.less";
 
@@ -16,7 +17,9 @@ const noContent = (props: IContentLanguageWarningProps): JSX.Element => {
 
 const thereIsContent = (props: IContentLanguageWarningProps): JSX.Element => {
     const { id: publicationId } = props.languagePublication;
-    return <p>This publication is avaible in <PageLink publicationId={publicationId}>{props.uiLanguage}</PageLink></p>;
+    return <p>This publication is avaible in 
+               <PageLink publicationId={publicationId}>{localization.getLanguageNameByIso(props.uiLanguage)}</PageLink>
+           </p>;
 };
 
 const renderMessage = (props: IContentLanguageWarningProps): JSX.Element => {
@@ -24,11 +27,9 @@ const renderMessage = (props: IContentLanguageWarningProps): JSX.Element => {
 };
 
 export const ContentLanguageWarningPresentation = (props: IContentLanguageWarningProps): JSX.Element => {
-    if (!props.match) {
-        return (<div className="content-language-warning">
-            { !props.match ? renderMessage(props) : "" }
-        </div>);
-    } else {
+    if (props.match) {
         return <div />;
     }
+
+    return <div className="content-language-warning"> { renderMessage(props) } </div>;
 };
