@@ -27,6 +27,7 @@ export const fetchPublications = (publicationService: IPublicationService, produ
 export const fetchPage = (pageService: IPageService, publicationId: string, pageId: string): IDispatcherFunction => {
     return dispatch => {
         dispatch(pageLoading(pageId));
+
         pageService
             .getPageInfo(publicationId, pageId)
             .then(

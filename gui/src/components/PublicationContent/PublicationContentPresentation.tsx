@@ -23,6 +23,7 @@ import { StateToRoute } from "components/helpers/StateToRoute";
 
 import "./PublicationContent.less";
 import { IPublication } from "interfaces/Publication";
+import { isDummyPage, isPage } from "utils/Page";
 
 /**
  * PublicationContent component props params
@@ -219,12 +220,11 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
      * @param {IPublicationContentProps} nextProps
      */
     public componentWillReceiveProps(nextProps: Pub): void {
-       const { publicationId, page } = this.props;
+       const { page } = this.props;
        const { publicationId: nextPubId, page: nextPage, pageError: nextPageError} = nextProps;
-
-       if (publicationId !== nextPubId && nextPage.id === "") {
+       if (!isPage(nextPage)) {
             this.fetchPublication(nextPubId);
-       } else if (nextPage && nextPage.content !== page.content && nextPage.content !== "") {
+       } else if (nextPage && nextPage.content !== page.content && !isDummyPage(nextPage)) {
             this.fetchPage(nextPage);
        } else if (nextPageError) {
            this._onPageContentRetrievFailed(nextPageError);
@@ -262,14 +262,14 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         const error = this.props.pageError;
         const { rootItems } = this._toc;
         const tocError = this._toc.error;
-
+        console.log("Render!");
         return (
             <section className={"sdl-dita-delivery-publication-content"}>
                 <RouteToState />
                 <StateToRoute />
                 <FetchPublications />
                 <Page
-                    showActivityIndicator={isPageLoading || false}
+                    showActivityIndicator={isPageLoading}
                     content={page.content}
                     error={error}
                     onNavigate={(url: string): void => {
@@ -338,7 +338,6 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
     }
 
     private _onTocSelectionChanged(sitemapItem: ITaxonomy, path: string[]): void {
-        const { publicationTitle } = this.state;
         const { onPulicationChange } = this.props;
 
         const updatedState: IPublicationContentState = {
@@ -355,12 +354,9 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
 
         if ( parsedUrl ) {
             console.log("on pub change");
-
             onPulicationChange({
                 publicationId: parsedUrl.publicationId,
-                pageId: parsedUrl.pageId,
-                title: publicationTitle,
-                siteMapTitle: sitemapItem.title
+                pageId: parsedUrl.pageId
             });
         }
     }
@@ -411,10 +407,6 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         if (publicationId && isTocLoading) {
             this._loadTocRootItems(publicationId);
         }
-
-        /*this.setState({
-            isPageLoading: false
-        });*/
     }
 
     private _getActiveSitemapPath(pageId: string, sitemapId: string, done: (path: string[]) => void): void {
@@ -435,7 +427,6 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                         this._toc.error = error;
                         this.setState({
                             isTocLoading: false
-                            //isPageLoading: false
                         });
                     }
                 });
@@ -494,11 +485,19 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
     private _loadTocRootItems(publicationId: string, path?: string[]): void {
         const { services } = this.context;
         // Get the data for the Toc
+        this._toc.rootItems = [];
+        this._toc.error = undefined;
+        this.setState({
+            activeTocItemPath: undefined,
+            selectedTocItem: null,
+            isTocLoading: true
+        });
+
         services.taxonomyService.getSitemapRoot(publicationId).then(
             items => {
                 /* istanbul ignore else */
                 if (!this._isUnmounted) {
-                    console.log("items", items);
+                    console.log("!!!items!!!", items);
 
                     this._toc.rootItems = items;
                     this._toc.error = undefined;
@@ -514,7 +513,6 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                     this._toc.error = error;
                     this.setState({
                         isTocLoading: false
-                        //isPageLoading: false
                     });
                 }
             });

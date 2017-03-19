@@ -2,11 +2,14 @@ import { String } from "sdl-models";
 import { ILocalizationService, ILanguage } from "services/interfaces/LocalizationService";
 import { Store } from "redux";
 import { IState } from "store/interfaces/State";
+import { language } from "store/reducers/Language";
+import { changeLanguage } from "store/actions/Actions";
 
 interface IDic { [path: string]: string; };
 interface IDics { [lang: string]: IDic; };
 
 const DEFAULT_LANGUAGE: string = "en";
+const LANGUAGE_LOCALSTORAGE: string =  "sdl-dita-delivery-app-langugae";
 // Need to be loaded or configured somehow.
 const Languages = ["en", "nl"];
 
@@ -34,15 +37,25 @@ export class LocalizationService implements ILocalizationService {
      */
     public rtlLanguages: string[] = ["ar", "dv", "fa", "ff", "he", "iw", "ps", "ur"];
 
-    private store: Store<IState>;
+    private language: string;
 
     public constructor() {
+        this.language = localStorage.getItem(LANGUAGE_LOCALSTORAGE) || DEFAULT_LANGUAGE;
+
         this.formatMessage = this.formatMessage.bind(this);
         this.getDirection = this.getDirection.bind(this);
     }
 
     public setStore(store: Store<IState>): void {
-        this.store = store;
+        store.dispatch(changeLanguage(this.language));
+        store.subscribe((): void => {
+            const newLanguage = store.getState().language;
+
+            if (newLanguage !== this.language) {
+                this.language = newLanguage;
+                localStorage.setItem(LANGUAGE_LOCALSTORAGE, this.language);
+            }
+        });
     }
 
     /**
@@ -53,8 +66,7 @@ export class LocalizationService implements ILocalizationService {
      * @returns {string}
      */
     public formatMessage(path: string, variables?: string[]): string {
-        const { language } = this.store.getState();
-        const resource = translate(language)(path) || translate(DEFAULT_LANGUAGE)(path);
+        const resource = translate(this.language)(path) || translate(DEFAULT_LANGUAGE)(path);
 
         return resource ? formatMessage(resource, variables) : `[${language}] Unable to localize: ${path}`;
     }

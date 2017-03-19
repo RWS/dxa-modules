@@ -14,6 +14,7 @@ import "components/presentation/styles/Page";
 import "dita-ot/styles/commonltr";
 import "dita-ot/styles/commonrtl";
 import { FetchPage } from "components/helpers/FetchPage";
+import { ContentLanguageWarning } from "components/ContentLanguageWarning/ContentLanguageWarning";
 
 /**
  * Page component props
@@ -189,12 +190,14 @@ export class Page extends React.Component<IPageProps, IPageState> {
 
         return (
             <div className={"sdl-dita-delivery-page"} style={props.showActivityIndicator ? { overflow: "hidden" } : {}} >
+                <FetchPage />
                 {props.showActivityIndicator ? <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} /> : null}
                 {props.children}
                 <div className={"sdl-dita-delivery-content-navigation-wrapper"}>
                     <ContentNavigation navItems={navItems} activeNavItemId={activeNavItemId} />
                 </div>
                 <article>
+                    <ContentLanguageWarning />
                     {error
                         ? <Error
                             title={errorTitle}
@@ -202,7 +205,6 @@ export class Page extends React.Component<IPageProps, IPageState> {
                             buttons={errorButtons} />
                         : <article className={appClass} dangerouslySetInnerHTML={{ __html: props.content || "" }} />}
                 </article>
-                <FetchPage />
             </div >
         );
     }

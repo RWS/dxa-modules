@@ -3,13 +3,15 @@ import { connect } from "react-redux";
 import { IState } from "store/interfaces/State";
 import { publicationRouteChanged } from "store/actions/Actions";
 import { getCurrentPub, getPubById, getPageById, getPageError, isPageLoading as isPageLoadingGetter } from "store/reducers/Reducer";
+import { isPage, isDummyPage } from "utils/Page";
 
 const mapStateToProps = (state: IState) => {
     const { publicationId, pageId } = getCurrentPub(state);
     const publication = getPubById(state, publicationId);
     const page = getPageById(state, pageId);
     const pageError = getPageError(state, pageId);
-    const isPageLoading = isPageLoadingGetter(state, pageId);
+    const isPageLoading = isPage(page) && !isDummyPage(page) && isPageLoadingGetter(state, pageId);
+
     return { isPageLoading, publicationId, pageId, publication, page, pageError };
 };
 

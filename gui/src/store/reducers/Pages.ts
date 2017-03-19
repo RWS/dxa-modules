@@ -1,6 +1,7 @@
 import { combineReducers, handleAction, combine } from "./CombineReducers";
 import { PAGE_LOADED, PAGE_LOADING, PAGE_ERROR } from "store/actions/Actions";
 import { IPage } from "interfaces/Page";
+import { dummyPage } from "utils/Page";
 
 export interface IPagesMap {
     [id: string]: IPage;
@@ -15,13 +16,6 @@ export interface IPageState {
     errors: IPageErrorsMap;
     loading: string[];
 }
-
-const notFound = (id: string): IPage => ({
-    id,
-    title: "",
-    content: "",
-    sitemapIds: undefined
-});
 
 const removeByKey = (myObj: IPageErrorsMap, deleteKey: string) => {
     return Object.keys(myObj)
@@ -56,6 +50,6 @@ export const pages = combineReducers({
 });
 
 // Selectors
-export const getPageById = (state: IPageState, id: string): IPage => id in state.byId ? state.byId[id] : notFound(id);
+export const getPageById = (state: IPageState, id: string): IPage => id in state.byId ? state.byId[id] : dummyPage(id);
 export const getPageError = (state: IPageState, id: string): string => id in state.errors ? state.errors[id] : "";
 export const isPageLoading = (state: IPageState, id: string): boolean => state.loading.includes(id);

@@ -18,14 +18,11 @@ class Fetch extends React.Component<IFetchPage, {}> {
 
     public context: IAppContext;
     public componentDidMount(): void {
-        if (this.isPageInProps(this.props)) {
-            this.fetchCurrentPage();
-        }
+        this.fetchCurrentPage();
     }
 
     public shouldComponentUpdate(nextProps: IFetchPage): boolean {
         return this.props.currentPub.pageId !== nextProps.currentPub.pageId;
-        // return this.isPageInProps(nextProps) && (this.props.currentPub.pageId !== nextProps.currentPub.pageId);
     }
 
     public componentDidUpdate(): void {
@@ -36,15 +33,13 @@ class Fetch extends React.Component<IFetchPage, {}> {
         const { publicationId, pageId } = this.props.currentPub;
         const { pageService } = this.context.services;
         console.log("fetchCurrentPage", publicationId, pageId);
-        this.props.fetch(pageService, publicationId, pageId);
+        if (pageId !== "") {
+            this.props.fetch(pageService, publicationId, pageId);
+        }
     }
 
     public render(): JSX.Element {
         return (<div />);
-    }
-
-    private isPageInProps(props: IFetchPage): boolean {
-        return props.currentPub.pageId !== ""; /** need to be replaced with default page */
     }
 }
 
