@@ -17,9 +17,7 @@ const noContent = (props: IContentLanguageWarningProps): JSX.Element => {
 
 const thereIsContent = (props: IContentLanguageWarningProps): JSX.Element => {
     const { id: publicationId } = props.languagePublication;
-    return <p>This publication is avaible in 
-               <PageLink publicationId={publicationId}>{localization.getLanguageNameByIso(props.uiLanguage)}</PageLink>
-           </p>;
+    return <p>This publication is avaible in <PageLink publicationId={publicationId}>{localization.getLanguageNameByIso(props.uiLanguage)}</PageLink></p>;
 };
 
 const renderMessage = (props: IContentLanguageWarningProps): JSX.Element => {
