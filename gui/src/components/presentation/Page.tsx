@@ -14,7 +14,6 @@ import "components/presentation/styles/Page";
 import "dita-ot/styles/commonltr";
 import "dita-ot/styles/commonrtl";
 import { FetchPage } from "components/helpers/FetchPage";
-import { ContentLanguageWarning } from "components/ContentLanguageWarning/ContentLanguageWarning";
 
 /**
  * Page component props
@@ -197,7 +196,6 @@ export class Page extends React.Component<IPageProps, IPageState> {
                     <ContentNavigation navItems={navItems} activeNavItemId={activeNavItemId} />
                 </div>
                 <article>
-                    <ContentLanguageWarning />
                     {error
                         ? <Error
                             title={errorTitle}

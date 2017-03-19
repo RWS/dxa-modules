@@ -10,6 +10,7 @@ import { NavigationMenu } from "components/presentation/NavigationMenu";
 import { Toc } from "components/presentation/Toc";
 import { Page } from "components/container/Page";
 import { Breadcrumbs } from "components/presentation/Breadcrumbs";
+import { ContentLanguageWarning } from "components/ContentLanguageWarning/ContentLanguageWarning";
 
 import { Html, IHeader } from "utils/Html";
 import { TcmId } from "utils/TcmId";
@@ -306,6 +307,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                         loadItemsPath={taxonomyService.getSitemapPath.bind(taxonomyService)}
                         selectedItem={selectedTocItem}
                         />
+                    <ContentLanguageWarning />
                 </Page>
             </section>
         );
