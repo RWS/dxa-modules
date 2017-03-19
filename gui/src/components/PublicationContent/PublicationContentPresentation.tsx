@@ -8,7 +8,7 @@ import { TaxonomyItemId } from "interfaces/TcmId";
 import { IAppContext } from "components/container/App";
 import { NavigationMenu } from "components/presentation/NavigationMenu";
 import { Toc } from "components/presentation/Toc";
-import { Page } from "components/container/Page";
+import { Page } from "components/Page/Page";
 import { Breadcrumbs } from "components/presentation/Breadcrumbs";
 import { ContentLanguageWarning } from "components/ContentLanguageWarning/ContentLanguageWarning";
 

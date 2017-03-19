@@ -77,7 +77,7 @@ export interface IPageProps {
      * @type {string}
      * @memberOf IPageProps
      */
-    language?: string;
+    direction?: string;
     /**
      * Called whenever navigation to another page is requested
      *
@@ -165,9 +165,9 @@ export class Page extends React.Component<IPageProps, IPageState> {
      */
     public render(): JSX.Element {
         const props = this.props;
-        const { activeHeader, error, url, language } = props;
+        const { activeHeader, error, url, direction } = props;
         const { navItems } = this.state;
-        const { formatMessage, getDirection } = this.context.services.localizationService;
+        const { formatMessage } = this.context.services.localizationService;
         const activeNavItemId = activeHeader ? activeHeader.id : (navItems.length > 0 ? navItems[0].id : undefined);
         const _goHome = (): void => props.onNavigate(path.getRootPath());
         const _retryHandler = () => url && props.onNavigate(url);
@@ -180,12 +180,8 @@ export class Page extends React.Component<IPageProps, IPageState> {
             formatMessage("error.page.not.found"),
             formatMessage("error.default.message")
         ];
-        const languageDirection = getDirection(language as string);
 
-        const appClass = ClassNames({
-            [languageDirection]: true,
-            "page-content": true
-        });
+        const appClass = ClassNames(direction, "page-content");
 
         return (
             <div className={"sdl-dita-delivery-page"} style={props.showActivityIndicator ? { overflow: "hidden" } : {}} >

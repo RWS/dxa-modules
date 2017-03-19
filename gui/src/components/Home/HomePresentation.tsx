@@ -81,7 +81,7 @@ export interface IHomeProps {
      * @type {string}
      * @memberOf IHomeProps
      */
-    language?: string;
+    direction: string;
 }
 
 /**
@@ -174,16 +174,12 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
      * @returns {JSX.Element}
      */
     public render(): JSX.Element {
-        const { localizationService } = this.context.services;
         const { isNavOpen, searchIsOpen, searchIsOpening, searchIsActive, searchTitle, publicationId } = this.state;
-        const { children, language } = this.props;
+        const { children, direction } = this.props;
 
         const hasPublication = publicationId !== undefined;
-        const languageDirection = localizationService.getDirection(language as string);
 
-        const appClass = ClassNames({
-            [languageDirection]: true,
-            "sdl-dita-delivery-app": true,
+        const appClass = ClassNames(direction, "sdl-dita-delivery-app", {
             "open": hasPublication && isNavOpen,
             "search-open": searchIsOpen,
             "search-is-opening": searchIsOpening,

@@ -7,13 +7,13 @@ import "sdl-controls-react-wrappers/dist/stylesheets/main";
  * Components
  */
 import * as AppComp from "components/container/App";
-import * as HomeComp from "components/container/Home";
+import * as HomeComp from "components/Home/Home";
 import * as PublicationContentComp from "components/PublicationContent/PublicationContentPresentation";
 import * as PublicationsListComp from "components/container/PublicationsList";
 import * as BreadcrumbsComp from "components/presentation/Breadcrumbs";
 import * as ContentNavigationComp from "components/presentation/ContentNavigation";
 import * as NavigationMenuComp from "components/presentation/NavigationMenu";
-import * as PageComp from "components/presentation/Page";
+import * as PageComp from "components/Page/Page";
 import * as SearchBarComp from "components/presentation/SearchBar";
 import * as TocComp from "components/presentation/Toc";
 import * as TopBarComp from "components/presentation/TopBar";
