@@ -16,6 +16,8 @@ module.exports = function (config) {
             { pattern: './node_modules/react/dist/react-with-addons.js', watched: false },
             { pattern: './node_modules/react-dom/dist/react-dom.js', watched: false },
             { pattern: './node_modules/react-dom/dist/react-dom-server.js', watched: false },
+            //Vendors 
+            { pattern: './dist/assets/vendor.bundle.js', watched: false },
             // Application
             './dist/assets/testConfiguration.bundle.js',
             './dist/assets/stylesheets/test.css',
