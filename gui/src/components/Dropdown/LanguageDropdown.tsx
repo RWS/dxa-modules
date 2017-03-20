@@ -9,7 +9,7 @@ const languages: Array<IDropdownValue> = localization.getLanguages().map(languag
 const mapStateToProps = (state: IState): {} => ({
     selected: {
         value: state.language,
-        text: localization.getLanguageNameByIso(state.language)
+        text: localization.isoToName(state.language)
     },
     items: languages
 });

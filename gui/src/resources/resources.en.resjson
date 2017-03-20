@@ -26,5 +26,8 @@
   "error.publication.not.found": "Unable to retrieve title for publication with id {0}.",
   "error.toc.not.found": "Oops, something went wrong loading the table of contents for this publication.",
   "error.toc.items.not.found": "We couldn't load child items due to server internal error.",
-  "error.unable.to.locate.page.in.toc": "Unable to locate the page with id {0} inside the table of contents."
+  "error.unable.to.locate.page.in.toc": "Unable to locate the page with id {0} inside the table of contents.",
+  "warning.no.content": "There is no content available on {0}.",
+  "warning.different.language.content": "This publication is available in {0}.",
+  "warning.change.language": "Change"
 }
