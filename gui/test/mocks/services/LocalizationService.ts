@@ -15,6 +15,7 @@ export class LocalizationService implements ILocalizationService {
             { name: "Nederlands", iso: "nl" }
         ];
     }
+
     /**
      *
      * @param {string} lang
