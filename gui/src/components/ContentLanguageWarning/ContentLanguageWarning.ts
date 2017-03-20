@@ -1,19 +1,22 @@
 import { IState } from "store/interfaces/State";
 import { ContentLanguageWarningPresentation } from "./ContentLanguageWarningPresentation";
 import { connect } from "react-redux";
-import { getCurrentPub, getPubById, getPubByIdAndLang } from "store/reducers/Reducer";
+import { getCurrentPub, getPubById, getPubByIdAndLang, getPageById } from "store/reducers/Reducer";
 
 const mapStateToProps = (state: IState) => {
-    const { publicationId } = getCurrentPub(state);
+    const currentPublication = getCurrentPub(state);
+    const { publicationId, pageId } = currentPublication;
     const publication = getPubById(state, publicationId);
     const contentLanguage = publication.language || state.language;
     const match = state.language === contentLanguage;
     const languagePublication = getPubByIdAndLang(state, publicationId, state.language);
+    const languagePage = getPageById(state, pageId);
 
     return {
         uiLanguage: state.language,
         match,
-        languagePublication
+        languagePublication,
+        languagePage
     };
 };
 

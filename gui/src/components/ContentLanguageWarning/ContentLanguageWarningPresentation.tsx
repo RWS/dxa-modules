@@ -1,5 +1,6 @@
 import * as React from "react";
 import { IPublication } from "interfaces/Publication";
+import { IPage } from "interfaces/Page";
 import { PageLink } from "components/PageLink/PageLink";
 import { localization } from "services/common/LocalizationService";
 
@@ -9,6 +10,7 @@ export interface IContentLanguageWarningProps {
     uiLanguage: string;
     match: boolean;
     languagePublication: IPublication;
+    languagePage: IPage;
 };
 
 const noContent = (props: IContentLanguageWarningProps): JSX.Element => {
@@ -17,8 +19,12 @@ const noContent = (props: IContentLanguageWarningProps): JSX.Element => {
 
 const thereIsContent = (props: IContentLanguageWarningProps): JSX.Element => {
     const { id: publicationId } = props.languagePublication;
+    const { id: pageId } = props.languagePage;
     return <p>
-            {localization.formatMessage("warning.different.language.content", [localization.isoToName(props.uiLanguage)])} <PageLink publicationId={publicationId}>{localization.formatMessage("warning.change.language")}</PageLink>.
+                {localization.formatMessage("warning.different.language.content", [localization.isoToName(props.uiLanguage)])} 
+                <PageLink publicationId={publicationId} pageId={pageId}>
+                    {localization.formatMessage("warning.change.language")}
+                </PageLink>.
         </p>;
 };
 
