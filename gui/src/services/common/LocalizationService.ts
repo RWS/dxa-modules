@@ -12,6 +12,13 @@ const resources = require("resources/resources.default") as { [path: string]: st
 export class LocalizationService implements ILocalizationService {
 
     /**
+     *
+     * @type {string[]}
+     * @memberOf LocalizationService
+     */
+    public rtlLanguages: string[] = ["ar", "dv", "fa", "ff", "he", "iw", "ps", "ur"];
+
+    /**
      * Format a message
      *
      * @param {string} path Resource path
@@ -48,6 +55,16 @@ export class LocalizationService implements ILocalizationService {
         languages.push({"name": "العربية", "iso": "ar"});
         languages.push({"name": "中文", "iso": "zh"});
         return languages;
+    }
+
+    /**
+     * @param {string} lang
+     * @returns {("rtl" | "ltr")}
+     *
+     * @memberOf LocalizationService
+     */
+    public getDirection(lang: string): "rtl" | "ltr" {
+        return this.rtlLanguages.some((val: string) => val === lang) ? "rtl" : "ltr";
     }
 }
 

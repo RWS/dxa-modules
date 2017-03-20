@@ -8,6 +8,9 @@
 @iconFontPath: "./fonts/SDLfont";
 @iconArrowRight: "\e013";
 @iconArrowDown: "\e02B";
+@iconArrowLeft: "\e01a";
+@iconSearch: "\e01b";
+@iconClose: "\e00a";
 @iconBack: "\e04f";
 @iconChecked: "\e039";
 @iconClose: "\e00a";
@@ -73,6 +76,13 @@
     .icon-font-default-style(@size);
     &:before {
         content: @iconArrowDown;
+    }
+}
+
+.icon-arrow-left(@size: 24px) {
+    .icon-font-default-style(@size);
+    &:before {
+        content: @iconArrowLeft;
     }
 }
 
