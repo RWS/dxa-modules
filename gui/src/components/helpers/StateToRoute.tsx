@@ -7,7 +7,7 @@ import { Url } from "utils/Url";
 import { IPublicationCurrentState } from "store/interfaces/State";
 import { getCurrentPub } from "store/reducers/Reducer";
 import { getPubById, getPageById } from "store/reducers/Reducer";
-import { IPublicationContentPropsParams } from "../PublicationContent/PublicationContentPresentation";
+import { IPublicationContentPropsParams } from "./PublicationContentPropsParams";
 import { isDummyPage } from "utils/Page";
 import { getErrorMessage } from "store/reducers/Reducer";
 
@@ -18,6 +18,8 @@ export interface ISyncParams {
     publicationTitle: string;
 
     pageTitle: string;
+
+    anchor: string;
 
     dummy: boolean;
 }
@@ -39,14 +41,19 @@ export class StateToRoute1 extends React.Component<Props, {}> {
     }
 
     private propsToUrl(props: Props): string {
-        const { publicationId, pageId, publicationTitle, pageTitle } = props;
-        return pageId ? Url.getPageUrl(publicationId, pageId, publicationTitle, pageTitle)
-            : Url.getPublicationUrl(publicationId, publicationTitle);
+        const { publicationId, pageId, publicationTitle, pageTitle, anchor } = props;
+
+        if (pageId) {
+            const pageUrl = Url.getPageUrl(publicationId, pageId, publicationTitle, pageTitle);
+            return anchor ? Url.getAnchorUrl(pageUrl, anchor) : pageUrl;
+        } else {
+            return Url.getPublicationUrl(publicationId, publicationTitle);
+        }
     }
 }
 
 const mapStateToProps = (state: IState) => {
-    const { publicationId, pageId } = getCurrentPub(state);
+    const { publicationId, pageId, anchor } = getCurrentPub(state);
     const { title: publicationTitle } = getPubById(state, publicationId);
     const page = getPageById(state, pageId);
 
@@ -54,6 +61,7 @@ const mapStateToProps = (state: IState) => {
         publicationId,
         pageId,
         publicationTitle,
+        anchor,
         pageTitle:  !isDummyPage(page) ? page.title : "",
         dummy: !getErrorMessage(state, pageId) && isDummyPage(page)
     };

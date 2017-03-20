@@ -6,7 +6,7 @@ import { getCurrentPub, getPubById, getPageById, getErrorMessage, isPageLoading 
 import { isPage, isDummyPage } from "utils/Page";
 
 const mapStateToProps = (state: IState) => {
-    const { publicationId, pageId } = getCurrentPub(state);
+    const { publicationId, pageId, anchor } = getCurrentPub(state);
     const publication = getPubById(state, publicationId);
     const page = getPageById(state, pageId);
     const errorMessage = getErrorMessage(state, pageId);
@@ -17,6 +17,7 @@ const mapStateToProps = (state: IState) => {
         page,
         publicationId,
         pageId,
+        anchor,
         isPageLoading,
         errorMessage };
 };

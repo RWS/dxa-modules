@@ -15,6 +15,7 @@ export const publicationRouteChanged = createAction(PUBLICATION_ROUTE_CHANGED, p
     console.log("Action PUBLICATION_ROUTE_CHANGED", publication);
     return ({
         publicationId: publication.publicationId,
-        pageId: publication.pageId
+        pageId: publication.pageId,
+        anchor: publication.anchor || ""
     });
 });

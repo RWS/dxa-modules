@@ -10,6 +10,7 @@ import { PublicationService } from "test/mocks/services/PublicationService";
 import { TaxonomyService } from "test/mocks/services/TaxonomyService";
 import { localization } from "test/mocks/services/LocalizationService";
 import { hashHistory } from "react-router";
+import { isPage } from "utils/Page";
 
 const services = {
     pageService: new PageService(),
@@ -42,12 +43,12 @@ class AppComponent extends TestBase {
 
             it("renders publication content component on root", (): void => {
                 const onRender = function (this: PublicationContentPresentation): JSX.Element {
-                    const { publicationId, pageIdOrPublicationTitle, publicationTitle, pageTitle } = this.props.params;
+                    const { publicationId, pageId, publication, page } = this.props;
 
                     expect(publicationId).toBe("1420746");
-                    expect(pageIdOrPublicationTitle).toBe("publication-mp330");
-                    expect(publicationTitle).toBeUndefined();
-                    expect(pageTitle).toBeUndefined();
+                    expect(pageId).toBe("publication-mp330");
+                    expect(publication.title).toEqual("");
+                    expect(page.title).toEqual("");
 
                     return (<div />);
                 };
@@ -58,17 +59,17 @@ class AppComponent extends TestBase {
 
             it("renders publication content component when publication id and page id are set", (): void => {
                 const onRender = function (this: PublicationContentPresentation): JSX.Element {
-                    const { publicationId, pageIdOrPublicationTitle, publicationTitle, pageTitle } = this.props.params;
+                    const { publicationId, pageId, publication, page } = this.props;
 
                     if (publicationId === "pub-id-with-page") {
-                        expect(pageIdOrPublicationTitle).toBe("page-id");
-                        expect(publicationTitle).toBe("pub-title");
-                        expect(pageTitle).toBe("page-title");
+                        expect(pageId).toBe("page-id");
+                        expect(publication.title).toBe("pub-title");
+                        expect(page.title).toBe("page-title");
                     } else {
                         expect(publicationId).toBe("pub-id");
-                        expect(pageIdOrPublicationTitle).toBe("pub-title");
-                        expect(publicationTitle).toBeUndefined();
-                        expect(pageTitle).toBeUndefined();
+                        expect(publication.title).toBe("pub-title");
+                        expect(isPage(page)).toBeFalsy();
+                        expect(page.title).toBe("");
                     }
 
                     return (<div />);

@@ -2,7 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { IState } from "store/interfaces/State";
 import { publicationRouteChanged } from "store/actions/Actions";
-import { IPublicationContentPropsParams } from "components/PublicationContent//PublicationContentPresentation";
+import { IPublicationContentPropsParams } from "./PublicationContentPropsParams";
 import { withRouter } from "react-router";
 import { IPublicationCurrentState } from "store/interfaces/State";
 import { getCurrentPub } from "store/reducers/Reducer";
@@ -37,14 +37,16 @@ export class RouteToState1 extends React.Component<Props, {}> {
     private paramsToState(params: IPublicationContentPropsParams): IPublicationCurrentState {
         return {
             publicationId: params.publicationId,
-            pageId: /\d+/.test(params.pageIdOrPublicationTitle || "") ? params.pageIdOrPublicationTitle as string : ""
+            pageId: /\d+/.test(params.pageIdOrPublicationTitle || "") ? params.pageIdOrPublicationTitle as string : "",
+            anchor: params.pageAnchor || ""
         };
     }
 
     private routeEqualsToState(nextProps: Props): boolean {
         return compareProps(this.paramsToState(nextProps.params), {
             publicationId: nextProps.publicationId,
-            pageId: nextProps.pageId
+            pageId: nextProps.pageId,
+            anchor: nextProps.anchor
         });
     }
 

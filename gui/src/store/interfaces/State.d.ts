@@ -19,6 +19,8 @@ export interface IPublicationCurrentState {
      * @memberOf IPublicationState
      */
     pageId: string;
+
+    anchor: string;
 }
 
 export interface IState {

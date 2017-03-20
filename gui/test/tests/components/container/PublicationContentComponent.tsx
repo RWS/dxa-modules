@@ -284,10 +284,10 @@ class PublicationContentComponent extends TestBase {
                             publicationId = {PUBLICATION_ID}
                             pageId = {pageId || ""}
                             page = {dummyPage(pageId || "")}
+                            anchor = ""
                             onPulicationChange = {() => {}}
                             errorMessage = ""
-                            publication = {PUBLICATION}
-                            params={{publicationId: PUBLICATION_ID}}/>
+                            publication = {PUBLICATION} />
                 </ComponentWithContext>
             ), target) as React.Component<{}, {}>;
         return TestUtils.findRenderedComponentWithType(comp, PublicationContentPresentation) as PublicationContentPresentation;

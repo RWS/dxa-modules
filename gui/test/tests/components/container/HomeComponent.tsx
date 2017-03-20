@@ -102,8 +102,8 @@ class HomeComponent extends TestBase {
                                 publicationId={publicationId}
                                 publication={publication}
                                 pageId = {pageId}
+                                anchor = ""
                                 page={dummyPage(pageId)}
-                                params={{publicationId}}
                                 isPageLoading={false}
                                 errorMessage="" />
                         </HomePresentation>)} />

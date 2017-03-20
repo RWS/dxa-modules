@@ -32,7 +32,8 @@ const store: Store<IState> = configureStore({
     language: "",
     publication: {
         publicationId: "",
-        pageId: ""
+        pageId: "",
+        anchor: ""
     },
     publications: {byId: {}},
     pages: {

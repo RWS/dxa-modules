@@ -27,49 +27,6 @@ import { IPublication } from "interfaces/Publication";
 import { isDummyPage, isPage } from "utils/Page";
 
 /**
- * PublicationContent component props params
- *
- * @export
- * @interface IPublicationContentPropsParams
- */
-export interface IPublicationContentPropsParams {
-    /**
-     * Id of the current publication
-     *
-     * @type {string}
-     */
-    publicationId: string;
-
-    /**
-     * The page id or the title of the current publication
-     *
-     * @type {string}
-     */
-    pageIdOrPublicationTitle?: string;
-
-    /**
-     * Title of the current publication
-     *
-     * @type {string}
-     */
-    publicationTitle?: string;
-
-    /**
-     * Title of the current page
-     *
-     * @type {string}
-     */
-    pageTitle?: string;
-
-    /**
-     * Anchor within the current page
-     *
-     * @type {string}
-     */
-    pageAnchor?: string;
-}
-
-/**
  * PublicationContent component props
  *
  * @export
@@ -81,13 +38,6 @@ export interface IPublicationContentProps {
     page: IPage;
     errorMessage: string;
     isPageLoading: boolean;
-
-    /**
-     * Publication content props parameters
-     *
-     * @type {IPublicationContentPropsParams}
-     */
-    params: IPublicationContentPropsParams;
 
     onPulicationChange?: (publication: {}) => void;
 }
@@ -255,9 +205,8 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
     public render(): JSX.Element {
         const { activeTocItemPath, selectedTocItem, activePageHeader } = this.state;
 
-        const { pageAnchor } = this.props.params;
         const { services, router } = this.context;
-        const { publicationId, pageId, page, publication, isPageLoading, errorMessage } = this.props;
+        const { publicationId, pageId, page, publication, isPageLoading, errorMessage, anchor } = this.props;
 
         const { taxonomyService } = services;
         const { rootItems } = this._toc;
@@ -282,7 +231,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                         Url.getPublicationUrl(publicationId, publication.title)}
                     // Wait for the selected toc item to be set to set the anchor
                     // This is needed to make sure components on top are rendered first (eg bread crumbs)
-                    anchor={selectedTocItem ? pageAnchor : undefined}
+                    anchor={selectedTocItem ? anchor : undefined}
                     scrollOffset={this._topOffset}
                     activeHeader={activePageHeader}>
                     <NavigationMenu isOpen={false}>{/* TODO: use global state store */}
@@ -338,7 +287,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
     }
 
     private _onTocSelectionChanged(sitemapItem: ITaxonomy, path: string[]): void {
-        const { onPulicationChange } = this.props;
+        const { onPulicationChange, pageId, publicationId } = this.props;
 
         const updatedState: IPublicationContentState = {
             activeTocItemPath: path,
@@ -351,8 +300,8 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         /* istanbul ignore else */
         const navPath = sitemapItem.url;
         const parsedUrl = navPath && Url.parsePageUrl(navPath);
-
-        if ( parsedUrl &&  onPulicationChange) {
+        const pageHasChanged = parsedUrl && (pageId !== parsedUrl.pageId || publicationId !== parsedUrl.publicationId);
+        if (pageHasChanged && parsedUrl && onPulicationChange) {
             onPulicationChange({
                 publicationId: parsedUrl.publicationId,
                 pageId: parsedUrl.pageId
