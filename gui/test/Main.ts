@@ -3,7 +3,7 @@ import "sdl-controls-react-wrappers/dist/stylesheets/main";
 import "./configuration/Tests.less";
 
 // Import all tests
-// import "test/tests/components/container/AppComponent";
+import "test/tests/components/container/AppComponent";
 // import "test/tests/components/container/ErrorContentComponent";
 // import "test/tests/components/container/HomeComponent";
 // import "test/tests/components/container/ProductFamiliesListComponent";

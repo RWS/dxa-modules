@@ -25,7 +25,7 @@ export type Props = IPublicationCurrentState & ISyncParams;
 
 export class StateToRoute1 extends React.Component<Props, {}> {
     public shouldComponentUpdate(nextProps: Props): boolean {
-        return !this.props.dummy && this.propsToUrl(nextProps) !== this.propsToUrl(this.props);
+        return !nextProps.dummy && this.propsToUrl(nextProps) !== this.propsToUrl(this.props);
     }
 
     public componentDidUpdate(): void {

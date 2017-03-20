@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as TestUtils from "react-addons-test-utils";
-import { Dropdown, IDropdownProps } from "components/controls/Dropdown";
+import { Dropdown, IDropdownProps } from "components/Dropdown/Dropdown";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 import { TestBase } from "sdl-models";
 

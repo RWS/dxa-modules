@@ -1,4 +1,4 @@
-import { Page as PagePresentation, IPageProps } from "./PagePresentation";
+import { PagePresentation, IPageProps } from "./PagePresentation";
 import { connect } from "react-redux";
 import { IState } from "store/interfaces/State";
 import { localization } from "services/common/LocalizationService";

@@ -7,7 +7,6 @@ import { SearchBar } from "components/presentation/SearchBar";
 
 import "components/container/styles/App";
 import "components/container/styles/Home";
-import { IPublicationContentProps } from "components/PublicationContent/PublicationContentPresentation";
 
 /**
  * Home state
@@ -50,13 +49,6 @@ export interface IHomeState {
      * @type {string}
      */
     searchTitle?: string;
-
-    /**
-     * Selected publication Id
-     *
-     * @type {string}
-     */
-    publicationId?: string;
 }
 
 /**
@@ -66,6 +58,12 @@ export interface IHomeState {
  * @interface IHomeProps
  */
 export interface IHomeProps {
+    /**
+     * Selected publication Id
+     *
+     * @type {string}
+     */
+    publicationId: string;
 
     /**
      * Children
@@ -81,14 +79,14 @@ export interface IHomeProps {
      * @type {string}
      * @memberOf IHomeProps
      */
-    direction: string;
+    direction?: string;
 }
 
 /**
  * Main component for the application
  */
 
-export class Home extends React.Component<IHomeProps, IHomeState> {
+export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
 
     public static contextTypes: React.ValidationMap<IAppContext> = {
         services: React.PropTypes.object.isRequired,
@@ -124,9 +122,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
      */
     public componentWillMount(): void {
         const { router } = this.context;
-        const child = this.props.children as React.ReactElement<IPublicationContentProps>;
-        const publicationId = child.props.params.publicationId;
-
+        const { publicationId } = this.props;
         if (router) {
             this._historyUnlisten = router.listen(this._onNavigated.bind(this));
         }
@@ -151,10 +147,8 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
      * @param {IHomeState} nextState Next state
      */
     public componentWillUpdate(nextProps: IHomeProps, nextState: IHomeState): void {
-        const { publicationId } = this.state;
-
-        const child = nextProps.children as React.ReactElement<IPublicationContentProps>;
-        const nextPublicationId = child.props.params.publicationId;
+        const { publicationId } = this.props;
+        const { publicationId: nextPublicationId } = nextProps;
 
         if (nextPublicationId !== publicationId) {
             this._updateSearchPlaceholder(nextPublicationId);
@@ -162,10 +156,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
     }
 
     public componentWillReceiveProps(nextProps: IHomeProps): void {
-        const child = nextProps.children as React.ReactElement<IPublicationContentProps>;
-        const nextPublicationId = child.props.params.publicationId;
-
-        this._updateSearchPlaceholder(nextPublicationId);
+        this._updateSearchPlaceholder(nextProps.publicationId);
     }
 
     /**
@@ -174,12 +165,12 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
      * @returns {JSX.Element}
      */
     public render(): JSX.Element {
-        const { isNavOpen, searchIsOpen, searchIsOpening, searchIsActive, searchTitle, publicationId } = this.state;
-        const { children, direction } = this.props;
+        const { isNavOpen, searchIsOpen, searchIsOpening, searchIsActive, searchTitle } = this.state;
+        const { children, direction, publicationId } = this.props;
 
         const hasPublication = publicationId !== undefined;
 
-        const appClass = ClassNames(direction, "sdl-dita-delivery-app", {
+        const appClass = ClassNames(direction || "ltr", "sdl-dita-delivery-app", {
             "open": hasPublication && isNavOpen,
             "search-open": searchIsOpen,
             "search-is-opening": searchIsOpening,
@@ -330,7 +321,6 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
                     /* istanbul ignore else */
                     if (!this._isUnmounted) {
                         this.setState({
-                            publicationId: publicationId,
                             searchTitle: localizationService.formatMessage("components.searchbar.publication.placeholder", [title || ""])
                         });
                     }
@@ -340,14 +330,12 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
                     if (!this._isUnmounted) {
                         // TODO: improve error handling
                         this.setState({
-                            publicationId: publicationId,
                             searchTitle: error
                         });
                     }
                 });
         } else {
             this.setState({
-                publicationId: publicationId,
                 searchTitle: localizationService.formatMessage("components.searchbar.placeholder")
             });
         }

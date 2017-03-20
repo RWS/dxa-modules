@@ -68,7 +68,7 @@ export interface IPublicationsListState {
 /**
  * Publications list component
  */
-export class PublicationsList extends React.Component<IPublicationsListProps, IPublicationsListState> {
+export class PublicationsListPresentation extends React.Component<IPublicationsListProps, IPublicationsListState> {
 
     public static contextTypes: React.ValidationMap<IAppContext> = {
         services: React.PropTypes.object.isRequired,

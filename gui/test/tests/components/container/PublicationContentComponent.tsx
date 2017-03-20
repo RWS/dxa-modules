@@ -1,9 +1,9 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as TestUtils from "react-addons-test-utils";
-import { PublicationContent } from "components/container/PublicationContent";
+import { PublicationContentPresentation } from "components/PublicationContent/PublicationContentPresentation";
 import { Toc } from "components/presentation/Toc";
-import { Page } from "components/presentation/Page";
+import { PagePresentation } from "components/Page/PagePresentation";
 import { ITaxonomy } from "interfaces/Taxonomy";
 import { IPage } from "interfaces/Page";
 import { ActivityIndicator, TreeView } from "sdl-controls-react-wrappers";
@@ -12,6 +12,7 @@ import { PageService } from "test/mocks/services/PageService";
 import { PublicationService } from "test/mocks/services/PublicationService";
 import { TaxonomyService } from "test/mocks/services/TaxonomyService";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
+import { dummyPage } from "utils/Page";
 
 const services = {
     pageService: new PageService(),
@@ -19,6 +20,11 @@ const services = {
     taxonomyService: new TaxonomyService()
 };
 const PUBLICATION_ID = "ish:123-1-1";
+const PUBLICATION = {
+    id: PUBLICATION_ID,
+    title: "Teset publication",
+    language: "en"
+};
 
 class PublicationContentComponent extends TestBase {
 
@@ -65,7 +71,7 @@ class PublicationContentComponent extends TestBase {
                     const activityIndicatorsToc = TestUtils.scryRenderedComponentsWithType(toc, ActivityIndicator as any);
                     expect(activityIndicatorsToc.length).toBe(0, "Activity indicator should not be rendered.");
                     // Page is still loading
-                    const page = TestUtils.findRenderedComponentWithType(publicationContent, Page);
+                    const page = TestUtils.findRenderedComponentWithType(publicationContent, PagePresentation);
                     // tslint:disable-next-line:no-any
                     const activityIndicatorsPage = TestUtils.scryRenderedComponentsWithType(page, ActivityIndicator as any);
                     expect(activityIndicatorsPage.length).toBe(1, "Could not find activity indicator.");
@@ -97,7 +103,7 @@ class PublicationContentComponent extends TestBase {
                     // tslint:disable-next-line:no-any
                     const activityIndicators = TestUtils.scryRenderedComponentsWithType(publicationContent, ActivityIndicator as any);
                     expect(activityIndicators.length).toBe(0, "Activity indicator should not be rendered.");
-                    const page = TestUtils.findRenderedComponentWithType(publicationContent, Page);
+                    const page = TestUtils.findRenderedComponentWithType(publicationContent, PagePresentation);
                     expect(page).not.toBeNull("Could not find page content.");
                     const pageContentNode = ReactDOM.findDOMNode(page);
                     // First node is toc, second breadcrumbs, third one is content navigation, fourth is page
@@ -130,7 +136,7 @@ class PublicationContentComponent extends TestBase {
                     expect(path).toBe(`/${encodeURIComponent(PUBLICATION_ID)}/12345/mp330/second-el-url`);
 
                     // A page load was triggered by changing the selected item in the Toc
-                    const page = TestUtils.findRenderedComponentWithType(publicationContent, Page);
+                    const page = TestUtils.findRenderedComponentWithType(publicationContent, PagePresentation);
                     const pageNode = ReactDOM.findDOMNode(page) as HTMLElement;
                     expect(pageNode).not.toBeNull("Could not find page.");
 
@@ -148,7 +154,7 @@ class PublicationContentComponent extends TestBase {
                     const activityIndicatorsToc = TestUtils.scryRenderedComponentsWithType(toc, ActivityIndicator as any);
                     expect(activityIndicatorsToc.length).toBe(0, "Activity indicator should not be rendered.");
                     // Page is still loading
-                    const page = TestUtils.findRenderedComponentWithType(publicationContent, Page);
+                    const page = TestUtils.findRenderedComponentWithType(publicationContent, PagePresentation);
                     // tslint:disable-next-line:no-any
                     const activityIndicatorsPage = TestUtils.scryRenderedComponentsWithType(page, ActivityIndicator as any);
                     expect(activityIndicatorsPage.length).toBe(1, "Could not find activity indicator.");
@@ -177,7 +183,7 @@ class PublicationContentComponent extends TestBase {
                     // tslint:disable-next-line:no-any
                     const activityIndicators = TestUtils.scryRenderedComponentsWithType(publicationContent, ActivityIndicator as any);
                     expect(activityIndicators.length).toBe(0, "Activity indicator should not be rendered.");
-                    const page = TestUtils.findRenderedComponentWithType(publicationContent, Page);
+                    const page = TestUtils.findRenderedComponentWithType(publicationContent, PagePresentation);
                     const pageNode = ReactDOM.findDOMNode(page) as HTMLElement;
                     const pageTitleNode = pageNode.querySelector("h1") as HTMLElement;
                     expect(pageTitleNode).not.toBeNull("Could not find page title.");
@@ -202,7 +208,7 @@ class PublicationContentComponent extends TestBase {
                     // tslint:disable-next-line:no-any
                     const activityIndicators = TestUtils.scryRenderedComponentsWithType(publicationContent, ActivityIndicator as any);
                     expect(activityIndicators.length).toBe(0, "Activity indicator should not be rendered.");
-                    const page = TestUtils.findRenderedComponentWithType(publicationContent, Page);
+                    const page = TestUtils.findRenderedComponentWithType(publicationContent, PagePresentation);
 
                     const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
                     const errorElement = domNode.querySelector(".sdl-dita-delivery-error");
@@ -269,14 +275,22 @@ class PublicationContentComponent extends TestBase {
 
     }
 
-    private _renderComponent(target: HTMLElement, pageId?: string): PublicationContent {
+    private _renderComponent(target: HTMLElement, pageId?: string): PublicationContentPresentation {
         const comp = ReactDOM.render(
             (
                 <ComponentWithContext {...services}>
-                    <PublicationContent params={{ publicationId: PUBLICATION_ID, pageIdOrPublicationTitle: pageId || "pub-title" }} />
+                    <PublicationContentPresentation
+                            isPageLoading = {false}
+                            publicationId = {PUBLICATION_ID}
+                            pageId = {pageId || ""}
+                            page = {dummyPage(pageId || "")}
+                            onPulicationChange = {() => {}}
+                            errorMessage = ""
+                            publication = {PUBLICATION}
+                            params={{publicationId: PUBLICATION_ID}}/>
                 </ComponentWithContext>
             ), target) as React.Component<{}, {}>;
-        return TestUtils.findRenderedComponentWithType(comp, PublicationContent) as PublicationContent;
+        return TestUtils.findRenderedComponentWithType(comp, PublicationContentPresentation) as PublicationContentPresentation;
     }
 
 }

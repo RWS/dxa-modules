@@ -79,7 +79,7 @@ export interface IPublicationContentProps {
 
     publication: IPublication;
     page: IPage;
-    pageError: string;
+    errorMessage: string;
     isPageLoading: boolean;
 
     /**
@@ -89,7 +89,7 @@ export interface IPublicationContentProps {
      */
     params: IPublicationContentPropsParams;
 
-    onPulicationChange: (publication: {}) => void;
+    onPulicationChange?: (publication: {}) => void;
 }
 
 /**
@@ -222,13 +222,13 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
      */
     public componentWillReceiveProps(nextProps: Pub): void {
        const { page } = this.props;
-       const { publicationId: nextPubId, page: nextPage, pageError: nextPageError} = nextProps;
+       const { publicationId: nextPubId, page: nextPage, errorMessage} = nextProps;
        if (!isPage(nextPage)) {
             this.fetchPublication(nextPubId);
        } else if (nextPage && nextPage.content !== page.content && !isDummyPage(nextPage)) {
             this.fetchPage(nextPage);
-       } else if (nextPageError) {
-           this._onPageContentRetrievFailed(nextPageError);
+       } else if (errorMessage) {
+           this._onPageContentRetrievFailed(errorMessage);
        }
     }
 
@@ -257,13 +257,11 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
 
         const { pageAnchor } = this.props.params;
         const { services, router } = this.context;
-        const { publicationId, pageId, page, publication, isPageLoading } = this.props;
+        const { publicationId, pageId, page, publication, isPageLoading, errorMessage } = this.props;
 
         const { taxonomyService } = services;
-        const error = this.props.pageError;
         const { rootItems } = this._toc;
         const tocError = this._toc.error;
-        console.log("Render!");
         return (
             <section className={"sdl-dita-delivery-publication-content"}>
                 <RouteToState />
@@ -272,7 +270,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                 <Page
                     showActivityIndicator={isPageLoading}
                     content={page.content}
-                    error={error}
+                    error={errorMessage}
                     onNavigate={(url: string): void => {
                         /* istanbul ignore else */
                         if (router) {
@@ -354,8 +352,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         const navPath = sitemapItem.url;
         const parsedUrl = navPath && Url.parsePageUrl(navPath);
 
-        if ( parsedUrl ) {
-            console.log("on pub change");
+        if ( parsedUrl &&  onPulicationChange) {
             onPulicationChange({
                 publicationId: parsedUrl.publicationId,
                 pageId: parsedUrl.pageId
@@ -400,7 +397,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
     }
 
     private _onPageContentRetrievFailed(error: string): void {
-        const { publicationId } = this.props.params;
+        const { publicationId } = this.props;
         const { isTocLoading } = this.state;
         const page = this._page;
         page.error = error;

@@ -87,7 +87,7 @@ export interface IDropdownProps {
      *
      * @type {IClick}
      */
-    onChange: IOnChangeEvent;
+    onChange?: IOnChangeEvent;
 }
 
 /**
@@ -226,28 +226,23 @@ export class Dropdown extends React.Component<IDropdownProps, IDropdownState> {
      * @returns {JSX.Element}
      */
     public render(): JSX.Element {
-        let items: JSX.Element[] = [];
-        let options: JSX.Element[] = [];
-
-        const dropdownClasses = ClassNames({
-            "sdl-dita-delivery-dropdown": true,
+        const dropdownClasses = ClassNames("sdl-dita-delivery-dropdown", {
             "open": this.state.status == DropdownToggleState.ON
         });
 
-        this.props.items.map((item, index): void => {
+        const items = this.props.items.map((item, index): JSX.Element => {
             if (this.state.selected && item.value == this.state.selected.value) {
-                items.push(
-                    <li key={item.value} className="active">
+                return (<li key={item.value} className="active">
                         <a>
                             {item.text}
                             <span className="checked"/>
                         </a>
                     </li>);
             } else {
-                items.push(<li key={item.value} onClick={this.onClickItem.bind(this, index)}><a>{item.text}</a></li>);
+                return (<li key={item.value} onClick={this.onClickItem.bind(this, index)}><a>{item.text}</a></li>);
             }
         });
-        options = this.props.items.map(item => <option key={item.value} value={item.value}>{item.text}</option>);
+        const options = this.props.items.map(item => <option key={item.value} value={item.value}>{item.text}</option>);
 
         return (
             <div className={dropdownClasses}>
@@ -293,7 +288,9 @@ export class Dropdown extends React.Component<IDropdownProps, IDropdownState> {
             selected: this.props.items[index]
         } as IDropdownState);
         this.toggleOff();
-        this.props.onChange(this.props.items[index].value);
+        if (this.props.onChange) {
+            this.props.onChange(this.props.items[index].value);
+        }
     }
 
     private onChangeSelect(event: React.FormEvent): void {

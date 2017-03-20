@@ -9,10 +9,16 @@ const mapStateToProps = (state: IState) => {
     const { publicationId, pageId } = getCurrentPub(state);
     const publication = getPubById(state, publicationId);
     const page = getPageById(state, pageId);
-    const pageError = getPageError(state, pageId);
+    const errorMessage = getPageError(state, pageId);
     const isPageLoading = isPage(page) && !isDummyPage(page) && isPageLoadingGetter(state, pageId);
 
-    return { isPageLoading, publicationId, pageId, publication, page, pageError };
+    return {
+        publication,
+        page,
+        publicationId,
+        pageId,
+        isPageLoading,
+        errorMessage };
 };
 
 const mapDispatchToProps = {

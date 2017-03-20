@@ -36,8 +36,6 @@
   "compileOnSave": false, // Gulp does this for us
   "exclude": [
     "node_modules",
-    "dist",
-    "test",
-    "src/store/reducers/combineReducers.ts"
+    "dist"
   ]
 }

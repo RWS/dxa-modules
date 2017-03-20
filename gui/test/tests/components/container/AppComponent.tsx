@@ -2,7 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as TestUtils from "react-addons-test-utils";
 import { App } from "components/container/App";
-import { PublicationContent } from "components/container/PublicationContent";
+import { PublicationContentPresentation } from "components/PublicationContent/PublicationContentPresentation";
 import { Url } from "utils/Url";
 import { TestBase } from "sdl-models";
 import { PageService } from "test/mocks/services/PageService";
@@ -41,7 +41,7 @@ class AppComponent extends TestBase {
             });
 
             it("renders publication content component on root", (): void => {
-                const onRender = function (this: PublicationContent): JSX.Element {
+                const onRender = function (this: PublicationContentPresentation): JSX.Element {
                     const { publicationId, pageIdOrPublicationTitle, publicationTitle, pageTitle } = this.props.params;
 
                     expect(publicationId).toBe("1420746");
@@ -52,12 +52,12 @@ class AppComponent extends TestBase {
                     return (<div />);
                 };
 
-                spyOn(PublicationContent.prototype, "render").and.callFake(onRender);
+                spyOn(PublicationContentPresentation.prototype, "render").and.callFake(onRender);
                 this._renderComponent(target);
             });
 
             it("renders publication content component when publication id and page id are set", (): void => {
-                const onRender = function (this: PublicationContent): JSX.Element {
+                const onRender = function (this: PublicationContentPresentation): JSX.Element {
                     const { publicationId, pageIdOrPublicationTitle, publicationTitle, pageTitle } = this.props.params;
 
                     if (publicationId === "pub-id-with-page") {
@@ -76,23 +76,21 @@ class AppComponent extends TestBase {
 
                 const app = this._renderComponent(target);
 
-                spyOn(PublicationContent.prototype, "render").and.callFake(onRender);
+                spyOn(PublicationContentPresentation.prototype, "render").and.callFake(onRender);
 
                 // Publication content
                 hashHistory.push(Url.getPublicationUrl("pub-id", "pub-title"));
-                expect(TestUtils.findRenderedComponentWithType(app, PublicationContent)).not.toBeNull();
+                expect(TestUtils.findRenderedComponentWithType(app, PublicationContentPresentation)).not.toBeNull();
 
                 hashHistory.push(Url.getPageUrl("pub-id-with-page", "page-id", "pub-title", "page-title"));
-                expect(TestUtils.findRenderedComponentWithType(app, PublicationContent)).not.toBeNull();
+                expect(TestUtils.findRenderedComponentWithType(app, PublicationContentPresentation)).not.toBeNull();
             });
         });
     }
 
     private _renderComponent(target: HTMLElement): App {
         return ReactDOM.render(
-            (
                 <App history={hashHistory} services={services} />
-            )
             , target) as App;
     }
 }

@@ -2,7 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as TestUtils from "react-addons-test-utils";
 import { Router, Route, hashHistory } from "react-router";
-import { Page, IPageProps } from "components/presentation/Page";
+import { PagePresentation, IPageProps } from "components/Page/PagePresentation";
 import { Url } from "utils/Url";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 import { ActivityIndicator } from "sdl-controls-react-wrappers";
@@ -73,7 +73,7 @@ class PageComponent extends TestBase {
                 const page = this._renderComponent({
                     showActivityIndicator: false,
                     error: "Error!",
-                    onNavigate: (url): void => {
+                    onNavigate: (url: string): void => {
                         path = url;
                     }
                 }, target);
@@ -95,7 +95,7 @@ class PageComponent extends TestBase {
                     showActivityIndicator: false,
                     error: "Error!",
                     url: "url/to/page",
-                    onNavigate: (url): void => {
+                    onNavigate: (url: string): void => {
                         path = url;
                     }
                 }, target);
@@ -252,7 +252,7 @@ class PageComponent extends TestBase {
         describe(`Page navigation tests.`, (): void => {
             const target = super.createTargetElement();
             const pageUrl = Url.getPageUrl("123", "456", "publication", "page");
-            let page: Page;
+            let page: PagePresentation;
 
             beforeEach(() => {
                 hashHistory.push(pageUrl);
@@ -360,26 +360,26 @@ class PageComponent extends TestBase {
 
     }
 
-    private _renderComponent(props: IPageProps, target: HTMLElement, children?: {}): Page {
+    private _renderComponent(props: IPageProps, target: HTMLElement, children?: {}): PagePresentation {
         const comp = ReactDOM.render(
             <ComponentWithContext>
-                <Page {...props}>{children}</Page>
+                <PagePresentation {...props}>{children}</PagePresentation>
             </ComponentWithContext>, target
         ) as React.Component<{}, {}>;
-        return TestUtils.findRenderedComponentWithType(comp, Page) as Page;
+        return TestUtils.findRenderedComponentWithType(comp, PagePresentation) as PagePresentation;
     }
 
-    private _renderRoutedComponent(props: IPageProps, target: HTMLElement, children?: {}): Page {
+    private _renderRoutedComponent(props: IPageProps, target: HTMLElement, children?: {}): PagePresentation {
         const comp = ReactDOM.render(
             <Router history={hashHistory}>
                 <Route path=":publicationId(/:pageIdOrPublicationTitle)(/:publicationTitle)(/:pageTitle)(/:pageAnchor)"
                     component={(compProps: IProps) => (
                         <ComponentWithContext>
-                            <Page anchor={compProps.params.pageAnchor} {...props}>{children}</Page>
+                            <PagePresentation anchor={compProps.params.pageAnchor} {...props}>{children}</PagePresentation>
                         </ComponentWithContext>
                     )} />
             </Router>, target) as React.Component<{}, {}>;
-        return TestUtils.findRenderedComponentWithType(comp, Page) as Page;
+        return TestUtils.findRenderedComponentWithType(comp, PagePresentation) as PagePresentation;
     }
 }
 

@@ -2,13 +2,14 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as TestUtils from "react-addons-test-utils";
 import { Router, Route } from "react-router";
-import { Home } from "components/container/Home";
-import { PublicationContent } from "components/container/PublicationContent";
+import { HomePresentation } from "components/Home/HomePresentation";
+import { PublicationContentPresentation } from "components/PublicationContent/PublicationContentPresentation";
 import { ActivityIndicator } from "sdl-controls-react-wrappers";
 import { TestBase } from "sdl-models";
 import { PublicationService } from "test/mocks/services/PublicationService";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 import { hashHistory } from "react-router";
+import { dummyPage } from "utils/Page";
 
 const services = {
     publicationService: new PublicationService()
@@ -59,7 +60,7 @@ class HomeComponent extends TestBase {
             it("can interact with search panel", (): void => {
                 const app = this._renderComponent(target);
                 const appNode = ReactDOM.findDOMNode(app);
-                const homeComp = TestUtils.findRenderedComponentWithType(app, Home);
+                const homeComp = TestUtils.findRenderedComponentWithType(app, HomePresentation);
                 const homeNode = ReactDOM.findDOMNode(homeComp);
 
                 const searchBarNode = appNode.querySelector(".sdl-dita-delivery-searchbar") as HTMLElement;
@@ -89,11 +90,23 @@ class HomeComponent extends TestBase {
     }
 
     private _renderComponent(target: HTMLElement, pubId?: string): ComponentWithContext {
+        const publicationId = pubId || "";
+        const pageId = "";
+        const publication = {id: publicationId, title: ""};
         return ReactDOM.render(
             (
                 <ComponentWithContext {...services}>
                     <Router history={hashHistory}>
-                        <Route path="*" component={() => (<Home><PublicationContent params={{ publicationId: pubId || "" }} /></Home>)} />
+                        <Route path="*" component={() => (<HomePresentation publicationId={publicationId}>
+                            <PublicationContentPresentation
+                                publicationId={publicationId}
+                                publication={publication}
+                                pageId = {pageId}
+                                page={dummyPage(pageId)}
+                                params={{publicationId}}
+                                isPageLoading={false}
+                                errorMessage="" />
+                        </HomePresentation>)} />
                     </Router>
                 </ComponentWithContext>
             ), target) as ComponentWithContext;

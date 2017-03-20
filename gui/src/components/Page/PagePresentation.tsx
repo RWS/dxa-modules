@@ -106,7 +106,7 @@ export interface IPageState {
 /**
  * Page component
  */
-export class Page extends React.Component<IPageProps, IPageState> {
+export class PagePresentation extends React.Component<IPageProps, IPageState> {
 
     /**
      * Context types
