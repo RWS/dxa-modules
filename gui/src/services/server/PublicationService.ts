@@ -36,12 +36,13 @@ export class PublicationService implements IPublicationService {
     /**
      * Get the list of publications
      *
-     * @param {string} productFamily productFamily title
+     * @param {string} [productFamily] productFamily title
+     * @param {string} [productReleaseVersion] product release version title
      * @returns {Promise<IPublication[]>} promise to return the items
      *
      * @memberOf DataStoreServer
      */
-    public getPublications(productFamily?: string): Promise<IPublication[]> {
+    public getPublications(productFamily?: string, productReleaseVersion?: string): Promise<IPublication[]> {
         const { error, publications } = this._mockDataPublications;
         if (error) {
             return Promise.reject(error);

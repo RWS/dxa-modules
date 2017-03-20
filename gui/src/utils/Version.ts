@@ -123,4 +123,22 @@ export default class Version {
         // Versions are equal
         return true;
     }
+
+    /**
+     * Normalize a product release version
+     * Removes for example a version at the end of a value eg RV (1.0.0) become RV
+     *
+     * @static
+     * @param {string} productReleaseVersion Product release version
+     * @returns {string} Normalized release version
+     *
+     * @memberOf Version
+     */
+    public static normalize(productReleaseVersion: string): string {
+        const releaseVersionMatch = productReleaseVersion && productReleaseVersion.match(VERSION_REGEX);
+        if (releaseVersionMatch) {
+            return releaseVersionMatch[1];
+        }
+        return productReleaseVersion;
+    }
 }

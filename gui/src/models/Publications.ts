@@ -25,21 +25,38 @@ export class Publications extends LoadableObject {
     /**
      * Get the Publications
      *
-     * @param {string} productFamily productFamily title
+     * @param {string} [productFamily] productFamily title
+     * @param {string} [productReleaseVersion] product release version title
      * @returns {IPublication[]}
      */
-    public getPublications(productFamily?: string): IPublication[] {
+    public getPublications(productFamily?: string, productReleaseVersion?: string): IPublication[] {
+        let result: IPublication[] = this._publications;
+
         if (productFamily) {
-            const familyTitle = (productFamily === this._unknownProductFamilyTitle) ? undefined : productFamily;
-            return this._publications.filter((publication: IPublication) => {
+            const normalizedProductFamily = productFamily.toLowerCase().trim();
+            const familyTitle = (normalizedProductFamily === this._unknownProductFamilyTitle.toLowerCase()) ? undefined : normalizedProductFamily;
+            result = result.filter((publication: IPublication) => {
                 if (!familyTitle) {
                     return !publication.productFamily;
                 }
-                return (publication.productFamily === familyTitle);
+                return (publication.productFamily && publication.productFamily.toLowerCase().trim()) === familyTitle;
             });
         }
 
-        return this._publications;
+        if (productReleaseVersion) {
+            const normalizedProductReleaseVersion = productReleaseVersion.toLowerCase().trim();
+            const productReleaseVersionTitle = (normalizedProductReleaseVersion === this._unknownProductReleaseVersion.toLowerCase())
+                ? undefined : normalizedProductReleaseVersion;
+            result = result.filter((publication: IPublication) => {
+                if (!productReleaseVersionTitle) {
+                    return !publication.productReleaseVersion;
+                }
+                const normalizedPublicationProductReleaseVersion = publication.productReleaseVersion && Version.normalize(publication.productReleaseVersion).toLowerCase().trim()
+                return normalizedPublicationProductReleaseVersion === productReleaseVersionTitle;
+            });
+        }
+
+        return result;
     }
 
     /**
@@ -52,16 +69,18 @@ export class Publications extends LoadableObject {
         const publicationsList = this.getPublications(productFamily);
         const familyTitle = (productFamily === this._unknownProductFamilyTitle) ? null : productFamily;
         return Version.sortProductReleaseVersions(familyTitle,
-            publicationsList).map((version: string | null) => {
+            publicationsList).map((version: string | null): IProductReleaseVersion => {
                 if (version === null) {
                     return {
                         title: this._unknownProductReleaseVersion,
+                        value: this._unknownProductFamilyDescription.trim().toLowerCase(),
                         hasWarning: true
-                    } as IProductReleaseVersion;
+                    };
                 }
                 return {
-                    title: version
-                } as IProductReleaseVersion;
+                    title: version,
+                    value: version.trim().toLowerCase()
+                };
             });
     }
 
@@ -85,18 +104,18 @@ export class Publications extends LoadableObject {
                     return (left || "").toLowerCase().localeCompare((right || "").toLowerCase());
                 });
 
-                this._productFamilies = distinctFamilies.map((family: string | undefined) => {
+                this._productFamilies = distinctFamilies.map((family: string | undefined): IProductFamily => {
                     if (family === undefined) {
                         return {
                             title: this._unknownProductFamilyTitle,
                             description: this._unknownProductFamilyDescription,
                             hasWarning: true
-                        } as IProductFamily;
+                        };
                     } else {
                         return {
                             // Only title now, description would go here later on
                             title: family
-                        } as IProductFamily;
+                        };
                     }
                 });
             }

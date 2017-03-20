@@ -11,12 +11,13 @@ export interface IPublicationService {
     /**
      * Get the list of publications
      *
-     * @param {string} productFamily productFamily title
+     * @param {string} [productFamily] productFamily title
+     * @param {string} [productReleaseVersion] product release version title
      * @returns {Promise<IPublication[]>} Promise to return the items
      *
      * @memberOf IDataStore
      */
-    getPublications(productFamily?: string): Promise<IPublication[]>;
+    getPublications(productFamily?: string, productReleaseVersion?: string): Promise<IPublication[]>;
 
     /**
      * Get the list of publications product families
