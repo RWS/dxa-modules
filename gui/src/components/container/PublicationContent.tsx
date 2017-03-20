@@ -185,8 +185,9 @@ export class PublicationContent extends React.Component<IPublicationContentProps
      * Invoked once, both on the client and server, immediately before the initial rendering occurs.
      */
     public componentWillMount(): void {
-        const { publicationId, pageIdOrPublicationTitle} = this.props.params;
+        const { publicationId, pageIdOrPublicationTitle } = this.props.params;
         const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
+        const { router } = this.context;
         const { publicationService, pageService } = this.context.services;
 
         if (pageId) {
@@ -195,7 +196,17 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                 this._onPageContentRetrieved.bind(this),
                 this._onPageContentRetrievFailed.bind(this));
         } else {
-            this._loadTocRootItems(publicationId);
+            // Select first page in a list of Pubs
+            this._loadTocRootItems(publicationId).then(items => {
+                /* istanbul ignore else */
+                if (!this._isUnmounted) {
+                    const firstItem = items[0];
+                    let url = firstItem.url;
+                    if (url && router) {
+                        router.replace(url);
+                    }
+                }
+            });
         }
 
         // Get publication title
@@ -275,7 +286,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         const { services, router } = this.context;
         const { publicationId } = this.props.params;
         const { taxonomyService } = services;
-        const { content, error} = this._page;
+        const { content, error } = this._page;
         const { rootItems } = this._toc;
         const tocError = this._toc.error;
 
@@ -290,7 +301,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                         if (router) {
                             router.push(url);
                         }
-                    } }
+                    }}
                     url={pageId ?
                         Url.getPageUrl(publicationId, pageId, publicationTitle, pageTitle || (selectedTocItem && selectedTocItem.title) || "") :
                         Url.getPublicationUrl(publicationId, publicationTitle)}
@@ -305,11 +316,11 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                             rootItems={rootItems}
                             loadChildItems={(parentId: string): Promise<ITaxonomy[]> => {
                                 return taxonomyService.getSitemapItems(publicationId, parentId);
-                            } }
+                            }}
                             onSelectionChanged={this._onTocSelectionChanged.bind(this)}
                             error={tocError}
-                            onRetry={() => this._loadTocRootItems(publicationId) }
-                            >
+                            onRetry={() => this._loadTocRootItems(publicationId)}
+                        >
                             <span className="separator" />
                         </Toc>
                     </NavigationMenu>
@@ -318,7 +329,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                         publicationTitle={publicationTitle || ""}
                         loadItemsPath={taxonomyService.getSitemapPath.bind(taxonomyService)}
                         selectedItem={selectedTocItem}
-                        />
+                    />
                 </Page>
             </section>
         );
@@ -506,10 +517,10 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         }
     }
 
-    private _loadTocRootItems(publicationId: string, path?: string[]): void {
+    private _loadTocRootItems(publicationId: string, path?: string[]): Promise<ITaxonomy[]> {
         const { services } = this.context;
         // Get the data for the Toc
-        services.taxonomyService.getSitemapRoot(publicationId).then(
+        return services.taxonomyService.getSitemapRoot(publicationId).then(
             items => {
                 /* istanbul ignore else */
                 if (!this._isUnmounted) {
@@ -520,6 +531,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                         isTocLoading: false
                     });
                 }
+                return items;
             },
             error => {
                 /* istanbul ignore else */
