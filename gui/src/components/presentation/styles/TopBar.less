@@ -45,10 +45,6 @@
             }
             span {
                 margin-right: 5px;
-                .sdl-dita-delivery-app.rtl & {
-                    margin-right: 0px;
-                    margin-left: 5px;
-                }
             }
         }
         .spacer {
@@ -91,7 +87,10 @@
         .sdl-dita-delivery-dropdown {
             .dropdown-toggle {
                 color: white;
-                padding: 5px 12px 5px 5px;
+                padding: 5px 10px 5px 5px;
+                .rtl & {
+                    padding: 5px 5px 5px 10px;
+                }
                 .caret {
                     .icon-arrow-down(15px);
                 }
@@ -109,6 +108,9 @@
                     li {
                        .import-regular-font();
                         padding: 0 5px 0 18px;
+                        .rtl & {
+                            padding: 0 18px 0 5px;
+                        }
                         font-size: 14px;
                         line-height: 0;
                         height: @dropdownItemHeight;
@@ -127,6 +129,10 @@
                     li.active {
                         a {
                             padding-right: 25px;
+                            .rtl & {
+                                padding-right: 0px;
+                                padding-left: 25px;
+                            }
                             .checked {
                                 .icon-checked(18px);
                                 color: @accentColor1;

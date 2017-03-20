@@ -48,6 +48,10 @@
         position: absolute;
         top: 30px;
         right: -11px;
+        .rtl & {
+            left: -11px;
+            right: auto;
+        }
         .open& {
             display: block;
         }
@@ -75,6 +79,10 @@
                     .checked {
                         position: absolute;
                         right: 0;
+                        .rtl & {
+                            left: 0;
+                            right: auto;
+                        }
                         margin: 0;
                     }
                 }
@@ -93,9 +101,15 @@
         }
         .dropdown-arrow:before {
             left: 80%;
+            .rtl & {
+                left: 20%;
+            }
         }
         .dropdown-arrow:after {
             right: 20%;
+            .rtl & {
+                right: 80%;
+            }
         }
     }
 }
