@@ -445,8 +445,6 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
             items => {
                 /* istanbul ignore else */
                 if (!this._isUnmounted) {
-                    console.log("!!!items!!!", items);
-
                     this._toc.rootItems = items;
                     this._toc.error = undefined;
                     this.setState({

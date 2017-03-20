@@ -32,7 +32,6 @@ class Fetch extends React.Component<IFetchPage, {}> {
     public fetchCurrentPage(): void {
         const { publicationId, pageId } = this.props.currentPub;
         const { pageService } = this.context.services;
-        console.log("fetchCurrentPage", publicationId, pageId);
         if (pageId !== "") {
             this.props.fetch(pageService, publicationId, pageId);
         }

@@ -12,7 +12,6 @@ export const PUBLICATIONS_LOADED = "PUBLICATIONS_LOADED";
 export const changeLanguage = createAction(CHANGE_LANGUAGE, language => language);
 export const publicationsLoaded = createAction(PUBLICATIONS_LOADED, publications => publications);
 export const publicationRouteChanged = createAction(PUBLICATION_ROUTE_CHANGED, publication => {
-    console.log("Action PUBLICATION_ROUTE_CHANGED", publication);
     return ({
         publicationId: publication.publicationId,
         pageId: publication.pageId,

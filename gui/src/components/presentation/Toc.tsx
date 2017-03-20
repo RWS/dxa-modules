@@ -284,7 +284,6 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
     }
 
     private _onSelectionChanged(nodes: ITreeViewNode[]): void {
-        console.log("WTF._onSelectionChanged");
         /* istanbul ignore else */
         if (!this._isUnmounted) {
             const { activeItemPath, rootItems } = this.props;
@@ -299,7 +298,6 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
             }
             if (!this._isExpanding && selectedNode && typeof onSelectionChanged === "function") {
                 const path = selectedNode ? selectedNode.getPath() : "";
-                console.log(path);
                 onSelectionChanged(selectedNode.taxonomy, path.split("/"));
             }
         }
