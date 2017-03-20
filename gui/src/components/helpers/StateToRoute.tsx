@@ -7,7 +7,7 @@ import { Url } from "utils/Url";
 import { IPublicationCurrentState } from "store/interfaces/State";
 import { getCurrentPub } from "store/reducers/Reducer";
 import { getPubById, getPageById } from "store/reducers/Reducer";
-import { IPublicationContentPropsParams } from "./PublicationContentPropsParams";
+import { IPublicationContentPropsParams } from "interfaces/PublicationContentPropsParams";
 import { isDummyPage } from "utils/Page";
 import { getErrorMessage } from "store/reducers/Reducer";
 
