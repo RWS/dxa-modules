@@ -113,7 +113,9 @@ export class Publications extends LoadableObject {
                 id: item.Id,
                 title: item.Title,
                 productFamily: item.ProductFamily,
-                productReleaseVersion: item.ProductReleaseVersion
+                productReleaseVersion: item.ProductReleaseVersion,
+                createdOn: new Date(item.CreatedOn),
+                version: item.Version
             } as IPublication;
         });
 
