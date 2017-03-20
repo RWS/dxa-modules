@@ -13,6 +13,7 @@
     "webpack-env": "github:DefinitelyTyped/DefinitelyTyped/webpack-env/index.d.ts#50f20d7af556db2da21e70de65f5c909ab5145ca"
   },
   "dependencies": {
+    "deep-assign": "registry:dt/deep-assign#0.1.11+20161102140421",
     "react-redux": "registry:dt/react-redux#4.4.0+20170123203653",
     "redux-actions": "github:DefinitelyTyped/DefinitelyTyped/redux-actions/index.d.ts#983c93531a0a732f2d0eca0148ac255ede0d40a6",
     "redux-thunk": "registry:npm/redux-thunk#2.0.0+20160525185520",

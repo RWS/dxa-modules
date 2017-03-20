@@ -9,9 +9,9 @@ import { TaxonomyService } from "services/client/TaxonomyService";
 import { localization } from "services/common/LocalizationService";
 import { browserHistory } from "react-router";
 
-import { configureStore } from "store/Store";
 import { Provider } from "react-redux";
-import { IState } from "./store/interfaces/State";
+import { IState } from "store/interfaces/State";
+import { configureStore } from "store/Store";
 import { Store } from "redux";
 
 import "sdl-controls-react-wrappers/dist/stylesheets/main";
@@ -28,20 +28,7 @@ const services: IServices = {
     taxonomyService: new TaxonomyService()
 };
 
-const store: Store<IState> = configureStore({
-    language: "",
-    publication: {
-        publicationId: "",
-        pageId: "",
-        anchor: ""
-    },
-    publications: {byId: {}},
-    pages: {
-        byId: {},
-        loading: [],
-        errors: {}
-    }
-});
+const store: Store<IState> = configureStore({});
 
 localization.setStore(store);
 

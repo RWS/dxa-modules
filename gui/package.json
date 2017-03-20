@@ -6,6 +6,7 @@
   "typings": "dist/typings/src/Lib.d.ts",
   "dependencies": {
     "classnames": "~2.2.5",
+    "deep-assign": "^2.0.0",
     "es6-promise": "~4.0.5",
     "napa": "~2.3.0",
     "react": "~15.3.2",
