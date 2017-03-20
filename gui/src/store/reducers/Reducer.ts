@@ -22,7 +22,7 @@ export const getPubByIdAndLang = (state: IState, pubId: string, language: string
 
 // Pages selectors
 export const getPageById = (state: IState, pageId: string): IPage => Pages.getPageById(state.pages, pageId);
-export const getPageError = (state: IState, pageId: string): string => Pages.getPageError(state.pages, pageId);
+export const getErrorMessage = (state: IState, pageId: string): string => Pages.getErrorMessage(state.pages, pageId);
 export const isPageLoading = (state: IState, pageId: string): boolean => Pages.isPageLoading(state.pages, pageId);
 
 // State selectors

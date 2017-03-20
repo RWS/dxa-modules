@@ -9,6 +9,7 @@ import { getCurrentPub } from "store/reducers/Reducer";
 import { getPubById, getPageById } from "store/reducers/Reducer";
 import { IPublicationContentPropsParams } from "../PublicationContent/PublicationContentPresentation";
 import { isDummyPage } from "utils/Page";
+import { getErrorMessage } from "store/reducers/Reducer";
 
 export interface ISyncParams {
     onStateChange: (publication: IPublicationCurrentState) => {};
@@ -53,8 +54,8 @@ const mapStateToProps = (state: IState) => {
         publicationId,
         pageId,
         publicationTitle,
-        pageTitle: page.title,
-        dummy: isDummyPage(page)
+        pageTitle:  !isDummyPage(page) ? page.title : "",
+        dummy: !getErrorMessage(state, pageId) && isDummyPage(page)
     };
 };
 
