@@ -33,9 +33,7 @@ export class PageService implements IPageService {
     public getPageInfo(publicationId: string, pageId: string): Promise<IPage> {
         const page = this.getPageModel(publicationId, pageId);
         return new Promise((resolve: (info?: IPage) => void, reject: (error: string | null) => void) => {
-            if (pageId === "") {
-                reject("Page doesn't exist");
-            } else if (page.isLoaded()) {
+            if (page.isLoaded()) {
                 resolve(page.getPage());
             } else {
                 let removeEventListeners: () => void;
