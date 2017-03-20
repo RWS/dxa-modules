@@ -67,7 +67,6 @@ export class LocalizationService implements ILocalizationService {
      */
     public formatMessage(path: string, variables?: string[]): string {
         const resource = translate(this.language)(path) || translate(DEFAULT_LANGUAGE)(path);
-
         return resource ? formatMessage(resource, variables) : `[${language}] Unable to localize: ${path}`;
     }
 
@@ -89,16 +88,16 @@ export class LocalizationService implements ILocalizationService {
         return languages;
     }
 
-    public getLanguageNameByIso(iso: string): string | undefined {
+    public isoToName(iso: string): string {
         const languages = this.getLanguages();
         const options = languages.filter((language: ILanguage) => language.iso == iso);
-        return options[0] && options[0].name || undefined;
+        return options[0] && options[0].name || iso;
     }
 
-    public getLanguageIsoByName(name: string): string | undefined {
+    public nameToIso(name: string): string {
         const languages = this.getLanguages();
         const options = languages.filter((language: ILanguage) => language.name == name);
-        return options[0] && options[0].iso || undefined;
+        return options[0] && options[0].iso || name;
     }
 
     /**

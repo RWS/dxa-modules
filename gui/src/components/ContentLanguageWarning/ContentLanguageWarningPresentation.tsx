@@ -12,12 +12,14 @@ export interface IContentLanguageWarningProps {
 };
 
 const noContent = (props: IContentLanguageWarningProps): JSX.Element => {
-    return <p>There is no content content avaible on {props.uiLanguage}</p>;
+    return <p>{localization.formatMessage("warning.no.content", [localization.isoToName(props.uiLanguage)])}</p>;
 };
 
 const thereIsContent = (props: IContentLanguageWarningProps): JSX.Element => {
     const { id: publicationId } = props.languagePublication;
-    return <p>This publication is avaible in <PageLink publicationId={publicationId}>{localization.getLanguageNameByIso(props.uiLanguage)}</PageLink></p>;
+    return <p>
+            {localization.formatMessage("warning.different.language.content", [localization.isoToName(props.uiLanguage)])} <PageLink publicationId={publicationId}>{localization.formatMessage("warning.change.language")}</PageLink>.
+        </p>;
 };
 
 const renderMessage = (props: IContentLanguageWarningProps): JSX.Element => {

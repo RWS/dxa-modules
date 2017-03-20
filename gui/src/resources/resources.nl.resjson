@@ -26,5 +26,8 @@
   "error.publication.not.found": "Publicatie met id {0} kon niet gevonden worden.",
   "error.toc.not.found": "Oeps, ging er iets mis het laden van de inhoudsopgave van deze publicatie.",
   "error.toc.items.not.found": "We konden geen kind artikelen te wijten aan server interne fout laden.",
-  "error.unable.to.locate.page.in.toc": "De pagina met id {0} kon niet gevonden worden in de inhoudstafel."
+  "error.unable.to.locate.page.in.toc": "De pagina met id {0} kon niet gevonden worden in de inhoudstafel.",
+  "warning.no.content": "Deze publicatie is niet beschikbaar in het {0}.",
+  "warning.different.language.content": "Deze publicatie is beschikbaar in het {0}.",
+  "warning.change.language": "Veranderen"
 }
