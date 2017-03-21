@@ -206,7 +206,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         const { activeTocItemPath, selectedTocItem, activePageHeader } = this.state;
 
         const { services, router } = this.context;
-        const { publicationId, pageId, page, publication, isPageLoading, errorMessage, anchor } = this.props;
+        const { publicationId, pageId, page, publication, isPageLoading, errorMessage } = this.props;
 
         const { taxonomyService } = services;
         const { rootItems } = this._toc;
@@ -229,9 +229,6 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                     url={pageId ?
                         Url.getPageUrl(publicationId, pageId, publication.title, page.title || (selectedTocItem && selectedTocItem.title) || "") :
                         Url.getPublicationUrl(publicationId, publication.title)}
-                    // Wait for the selected toc item to be set to set the anchor
-                    // This is needed to make sure components on top are rendered first (eg bread crumbs)
-                    anchor={selectedTocItem ? anchor : undefined}
                     scrollOffset={this._topOffset}
                     activeHeader={activePageHeader}>
                     <NavigationMenu isOpen={false}>{/* TODO: use global state store */}
