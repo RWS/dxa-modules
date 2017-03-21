@@ -10,6 +10,8 @@ import { PublicationService } from "test/mocks/services/PublicationService";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 import { hashHistory } from "react-router";
 import { dummyPage } from "utils/Page";
+import { configureStore } from "store/Store";
+import { Provider } from "react-redux";
 
 const services = {
     publicationService: new PublicationService()
@@ -36,7 +38,7 @@ class HomeComponent extends TestBase {
 
             it("show loading indicator on initial render", (): void => {
                 services.publicationService.fakeDelay(true);
-                const app = this._renderComponent(target, "ish:123-1-1");
+                const app = this._renderComponent(target, "ish:123-1-1", true);
                 // tslint:disable-next-line:no-any
                 const activityIndicators = TestUtils.scryRenderedComponentsWithType(app, ActivityIndicator as any);
                 // One indicator for the toc, one for the page
@@ -89,24 +91,28 @@ class HomeComponent extends TestBase {
         });
     }
 
-    private _renderComponent(target: HTMLElement, pubId?: string): ComponentWithContext {
+    private _renderComponent(target: HTMLElement, pubId?: string, loadingPage?: boolean): ComponentWithContext {
         const publicationId = pubId || "";
         const pageId = "";
         const publication = {id: publicationId, title: ""};
+        const isPageLoading = loadingPage || false;
+
+        const store = configureStore();
+
         return ReactDOM.render(
             (
                 <ComponentWithContext {...services}>
                     <Router history={hashHistory}>
-                        <Route path="*" component={() => (<HomePresentation publicationId={publicationId}>
+                        <Route path="*" component={() => (<Provider store={store}><HomePresentation publicationId={publicationId}>
                             <PublicationContentPresentation
                                 publicationId={publicationId}
                                 publication={publication}
                                 pageId = {pageId}
                                 anchor = ""
                                 page={dummyPage(pageId)}
-                                isPageLoading={false}
+                                isPageLoading={isPageLoading}
                                 errorMessage="" />
-                        </HomePresentation>)} />
+                        </HomePresentation></Provider>)} />
                     </Router>
                 </ComponentWithContext>
             ), target) as ComponentWithContext;
