@@ -4,12 +4,13 @@ import { Link } from "react-router";
 import { IPublication } from "interfaces/Publication";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 import { ITaxonomy } from "interfaces/Taxonomy";
-import { ActivityIndicator, Button, DropdownList } from "sdl-controls-react-wrappers";
+import { ActivityIndicator, Button } from "sdl-controls-react-wrappers";
 import { ButtonPurpose } from "sdl-controls";
 import { Error } from "components/presentation/Error";
 import { TilesList } from "components/container/TilesList";
 import { ITile } from "components/presentation/Tile";
 import { IAppContext } from "components/container/App";
+import { VersionSelector } from "components/presentation/VersionSelector";
 import { Url } from "utils/Url";
 
 import "components/container/styles/PublicationsList";
@@ -155,18 +156,9 @@ export class PublicationsList extends React.Component<IPublicationsListProps, IP
         return (
             <section className={"sdl-dita-delivery-publications-list"}>
                 <h1>{productFamily}</h1>
-                <div className="product-release-version-selector">
-                    <label>{formatMessage("productreleaseversions.version.label")}</label>
-                    <DropdownList propertyMappings={{ "text": "title" }}
-                        selectedValue={productReleaseVersion
-                            ? productReleaseVersion.trim().toLowerCase() : undefined}
-                        options={productReleaseVersions || []}
-                        onChange={releaseVersion => {
-                            if (router) {
-                                router.push(Url.getProductFamilyUrl(productFamily, releaseVersion));
-                            }
-                        }} />
-                </div>
+                <VersionSelector productFamily={productFamily}
+                    productReleaseVersions={productReleaseVersions || []}
+                    selectedProductReleaseVersion={productReleaseVersion} />
                 {
                     error ?
                         <Error
