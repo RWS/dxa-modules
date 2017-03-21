@@ -36,11 +36,11 @@ class PublicationServiceTests extends TestBase {
                 });
             });
 
-            it("returns a proper error when publication title cannot be retrieved", (done: () => void): void => {
+            it("returns a proper error when publication cannot be retrieved", (done: () => void): void => {
                 // Put this test first, otherwise the publication would be already in the cache and the spy would not work
                 const failMessage = "failure-retrieving-publication-title";
                 spyOn(window, "XMLHttpRequest").and.callFake(() => new FakeXMLHttpRequest(failMessage));
-                publicationService.getPublicationTitle(failMessage).then(() => {
+                publicationService.getPublicationById(failMessage).then(() => {
                     fail("An error was expected.");
                     done();
                 }).catch(error => {
@@ -175,9 +175,9 @@ class PublicationServiceTests extends TestBase {
                 });
             });
 
-            it("can get a publication title", (done: () => void): void => {
-                publicationService.getPublicationTitle(publicationId).then(title => {
-                    expect(title).toBe("User Guide");
+            it("can get a publication by id", (done: () => void): void => {
+                publicationService.getPublicationById(publicationId).then(pub => {
+                    expect(pub.title).toBe("User Guide");
                     done();
                 }).catch(error => {
                     fail(`Unexpected error: ${error}`);
@@ -185,10 +185,10 @@ class PublicationServiceTests extends TestBase {
                 });
             });
 
-            it("can get a publication title from memory", (done: () => void): void => {
+            it("can get a publication by id from memory", (done: () => void): void => {
                 const spy = spyOn(window, "XMLHttpRequest").and.callThrough();
-                publicationService.getPublicationTitle(publicationId).then(title => {
-                    expect(title).toBe("User Guide");
+                publicationService.getPublicationById(publicationId).then(pub => {
+                    expect(pub.title).toBe("User Guide");
                     expect(spy).not.toHaveBeenCalled();
                     done();
                 }).catch(error => {
@@ -197,8 +197,8 @@ class PublicationServiceTests extends TestBase {
                 });
             });
 
-            it("returns a proper error when a publication title cannot be resolved", (done: () => void): void => {
-                publicationService.getPublicationTitle("does-not-exist").then(() => {
+            it("returns a proper error when a publication by id cannot be resolved", (done: () => void): void => {
+                publicationService.getPublicationById("does-not-exist").then(() => {
                     fail("An error was expected.");
                     done();
                 }).catch(error => {

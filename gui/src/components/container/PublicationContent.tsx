@@ -127,6 +127,14 @@ export interface IPublicationContentState {
      * @memberOf IPublicationsListState
      */
     productReleaseVersions?: IProductReleaseVersion[];
+
+    /**
+     * Selected product release version
+     *
+     * @type {string}
+     * @memberOf IPublicationContentState
+     */
+    selectedProductReleaseVersion?: string;
 }
 
 interface ISelectedPage {
@@ -217,12 +225,13 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         }
 
         // Get publication title
-        publicationService.getPublicationTitle(publicationId).then(
-            title => {
+        publicationService.getPublicationById(publicationId).then(
+            pub => {
                 /* istanbul ignore else */
                 if (!this._isUnmounted) {
                     this.setState({
-                        publicationTitle: title
+                        publicationTitle: pub.title,
+                        selectedProductReleaseVersion: pub.productReleaseVersion || undefined
                     });
                 }
             },
@@ -309,7 +318,9 @@ export class PublicationContent extends React.Component<IPublicationContentProps
      * @returns {JSX.Element}
      */
     public render(): JSX.Element {
-        const { isPageLoading, activeTocItemPath, selectedTocItem, publicationTitle, activePageHeader } = this.state;
+        const { isPageLoading, activeTocItemPath, selectedTocItem, publicationTitle,
+            activePageHeader, productReleaseVersions, selectedProductReleaseVersion } = this.state;
+        console.log(selectedProductReleaseVersion);
         const { pageIdOrPublicationTitle, pageTitle, pageAnchor } = this.props.params;
         const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
         const { services, router } = this.context;
@@ -359,9 +370,10 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                         loadItemsPath={taxonomyService.getSitemapPath.bind(taxonomyService)}
                         selectedItem={selectedTocItem}
                     />
-                    <VersionSelector productReleaseVersions={[]} selectedProductReleaseVersion={""} onChange={
-                        releaseVersion => { }
-                    } />
+                    <VersionSelector productReleaseVersions={productReleaseVersions || []}
+                        selectedProductReleaseVersion={selectedProductReleaseVersion} onChange={
+                            releaseVersion => { }
+                        } />
                 </Page>
             </section>
         );

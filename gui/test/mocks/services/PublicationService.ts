@@ -23,7 +23,7 @@ export class PublicationService implements IPublicationService {
 
     private _mockDataPublication: {
         error: string | null,
-        title: string | undefined
+        title: string
     } = {
         error: null,
         title: "MP330"
@@ -67,16 +67,22 @@ export class PublicationService implements IPublicationService {
         }
     }
 
-    public getPublicationTitle(publicationId: string): Promise<string> {
+    public getPublicationById(publicationId: string): Promise<IPublication> {
         const { error, title } = this._mockDataPublication;
         if (fakeDelay) {
-            return new Promise((resolve: (info?: string) => void, reject: (error: string | null) => void) => {
+            return new Promise((resolve: (info?: IPublication) => void, reject: (error: string | null) => void) => {
                 setTimeout((): void => {
                     if (error) {
                         reject(error);
                     }
                     else {
-                        resolve(title);
+                        resolve({
+                            id: "0",
+                            title,
+                            createdOn: new Date(),
+                            version: "1",
+                            logicalId: "GUID-123"
+                        });
                     }
                 }, DELAY);
             });
@@ -84,7 +90,7 @@ export class PublicationService implements IPublicationService {
             if (error) {
                 return Promise.reject(error);
             } else {
-                return Promise.resolve(title);
+                return Promise.resolve({ title });
             }
         }
     }
@@ -125,7 +131,7 @@ export class PublicationService implements IPublicationService {
     public setMockDataPublication(error: string | null, title?: string): void {
         this._mockDataPublication = {
             error: error,
-            title: title
+            title: title || ""
         };
     }
     public fakeDelay(value: boolean): void {

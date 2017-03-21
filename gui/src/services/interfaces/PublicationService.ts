@@ -29,14 +29,14 @@ export interface IPublicationService {
     getProductFamilies(): Promise<IProductFamily[]>;
 
     /**
-     * Get the publication title
+     * Get the publication by id
      *
      * @param {string} publicationId Publication id
-     * @returns {Promise<string>} Promise to return the title
+     * @returns {Promise<IPublication>} Promise to return the publication
      *
      * @memberOf IDataStore
      */
-    getPublicationTitle(publicationId: string): Promise<string>;
+    getPublicationById(publicationId: string): Promise<IPublication>;
 
     /**
      * Get the list of product release versions for a product ProductFamily

@@ -104,19 +104,19 @@ export class PublicationService implements IPublicationService {
     }
 
     /**
-     * Get the publication title
+     * Get the publication by id
      *
-     * @param {string} publicationId
-     * @returns {Promise<string>} promise to returns the title
+     * @param {string} publicationId Publication id
+     * @returns {Promise<IPublication>} Promise to return the publication
      *
-     * @memberOf DataStoreServer
+     * @memberOf PublicationService
      */
-    public getPublicationTitle(publicationId: string): Promise<string> {
+    public getPublicationById(publicationId: string): Promise<IPublication> {
         const { error, title } = this._mockDataPublication;
         if (error) {
             return Promise.reject(error);
         } else {
-            return Promise.resolve(title);
+            return Promise.resolve({ title });
         }
     }
 }

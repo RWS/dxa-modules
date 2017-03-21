@@ -30,7 +30,7 @@ export class Publications extends LoadableObject {
      * @returns {IPublication[]}
      */
     public getPublications(productFamily?: string, productReleaseVersion?: string): IPublication[] {
-        let result: IPublication[] = this._publications;
+        let result: IPublication[] = this._publications.slice();
 
         if (productFamily) {
             const normalizedProductFamily = productFamily.toLowerCase().trim();
@@ -77,7 +77,7 @@ export class Publications extends LoadableObject {
      * @returns {IProductReleaseVersion[]}
      */
     public getProductReleaseVersionsByPublicationId(publicationId: string): IProductReleaseVersion[] | undefined {
-        const publicationsList = this.getPublications().filter(pub => pub.id = publicationId);
+        const publicationsList = this.getPublications().filter(pub => pub.id === publicationId);
         const publication = publicationsList[0];
         if (publication) {
             const publicationVersionsList = this.getPublications().filter(pub => pub.logicalId === publication.logicalId);

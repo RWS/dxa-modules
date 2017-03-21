@@ -95,21 +95,21 @@ export class PublicationService implements IPublicationService {
     }
 
     /**
-     * Get the publication title
+     * Get the publication by id
      *
-     * @param {string} publicationId Publication Id
-     * @returns {Promise<string>} Promise to return the title
+     * @param {string} publicationId Publication id
+     * @returns {Promise<IPublication>} Promise to return the publication
      *
-     * @memberOf DataStoreClient
+     * @memberOf PublicationService
      */
-    public getPublicationTitle(publicationId: string): Promise<string> {
-        return new Promise((resolve: (title?: string) => void, reject: (error: string | null) => void) => {
+    public getPublicationById(publicationId: string): Promise<IPublication> {
+        return new Promise((resolve: (pub?: IPublication) => void, reject: (error: string | null) => void) => {
             this.getPublications().then(
                 publications => {
                     if (Array.isArray(publications)) {
                         for (const pub of publications) {
                             if (pub.id === publicationId) {
-                                resolve(pub.title);
+                                resolve(pub);
                                 return;
                             }
                         }
@@ -130,7 +130,7 @@ export class PublicationService implements IPublicationService {
      * @param {string} productFamily Product family
      * @returns {Promise<IProductReleaseVersion[]>} Promise to return the product release versions
      *
-     * @memberOf IPublicationService
+     * @memberOf PublicationService
      */
     public getProductReleaseVersions(productFamily: string): Promise<IProductReleaseVersion[]> {
         const publication = this.getPublicationsModel();
@@ -166,7 +166,7 @@ export class PublicationService implements IPublicationService {
      * @param {string} publicationId Publication id
      * @returns {Promise<IProductReleaseVersion[]>} Promise to return the product release versions
      *
-     * @memberOf IPublicationService
+     * @memberOf PublicationService
      */
     public getProductReleaseVersionsByPublicationId(publicationId: string): Promise<IProductReleaseVersion[]> {
         const publication = this.getPublicationsModel();
