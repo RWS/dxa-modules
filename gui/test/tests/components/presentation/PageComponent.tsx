@@ -30,7 +30,7 @@ class PageComponent extends TestBase {
                 }
             });
 
-            xit("shows / hides activity indicator", (): void => {
+            it("shows / hides activity indicator", (): void => {
                 // Show
                 let page = this._renderComponent({
                     showActivityIndicator: true,
@@ -50,7 +50,7 @@ class PageComponent extends TestBase {
                 expect(activityIndicators.length).toBe(0, "Activity indicator should have been removed.");
             });
 
-            xit("can show error info", (): void => {
+            it("can show error info", (): void => {
                 const page = this._renderComponent({
                     showActivityIndicator: false,
                     error: "Error!",
@@ -66,7 +66,7 @@ class PageComponent extends TestBase {
                 expect(buttons.length).toEqual(2);
             });
 
-            xit("click on home button in error info", (): void => {
+            it("click on home button in error info", (): void => {
                 let path: string = "";
                 const page = this._renderComponent({
                     showActivityIndicator: false,
@@ -87,7 +87,7 @@ class PageComponent extends TestBase {
                 }, 0);
             });
 
-            xit("click on retry button in error info", (): void => {
+            it("click on retry button in error info", (): void => {
                 let path: string = "";
                 const page = this._renderComponent({
                     showActivityIndicator: false,
@@ -109,7 +109,7 @@ class PageComponent extends TestBase {
                 }, 0);
             });
 
-            xit("can show page content info", (): void => {
+            it("can show page content info", (): void => {
                 const pageContent = "<div>Page content!</div>";
                 const page = this._renderComponent({
                     showActivityIndicator: false,
@@ -125,7 +125,7 @@ class PageComponent extends TestBase {
                 expect(pageContentNode.innerHTML).toBe(pageContent);
             });
 
-            xit("navigates to another page when internal hyperlink is clicked", (done: () => void): void => {
+            it("navigates to another page when internal hyperlink is clicked", (done: () => void): void => {
                 const navUrl = "/1234/56/publication-title/page-title";
                 const pageContent = `<div><a href="${navUrl}"/></div>`;
                 const page = this._renderComponent({
@@ -143,7 +143,7 @@ class PageComponent extends TestBase {
                 hyperlink.click();
             });
 
-            xit("does not handle external links", (): void => {
+            it("does not handle external links", (): void => {
                 const pageProps: IPageProps = {
                     showActivityIndicator: false,
                     content: `<div>
@@ -177,7 +177,7 @@ class PageComponent extends TestBase {
                 expect(spy).not.toHaveBeenCalled();
             });
 
-            xit("does handle internal links", (): void => {
+            it("does handle internal links", (): void => {
                 const pageProps: IPageProps = {
                     showActivityIndicator: false,
                     content: `<div>
@@ -206,7 +206,7 @@ class PageComponent extends TestBase {
                 expect(spy).toHaveBeenCalledTimes(5);
             });
 
-            xit("does not handle links that are not part of the page content", (): void => {
+            it("does not handle links that are not part of the page content", (): void => {
                 const pageProps: IPageProps = {
                     showActivityIndicator: false,
                     content: `<div />`,
@@ -229,7 +229,7 @@ class PageComponent extends TestBase {
                 expect(spy).not.toHaveBeenCalled();
             });
 
-            xit("does not renders page navigation content, when page has no navigation items", (): void => {
+            it("does not renders page navigation content, when page has no navigation items", (): void => {
                 const pageProps: IPageProps = {
                     showActivityIndicator: false,
                     content: `<div />`,

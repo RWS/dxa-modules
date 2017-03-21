@@ -89,7 +89,7 @@ describe(`Html utils tests.`, (): void => {
         function createLargePage(): HTMLElement {
             const element = document.createElement("div");
             const scrollContainer = document.createElement("div");
-            const style=`style="margin:0 0 1000px 0; padding: 0"`;
+            const style = `style="margin:0 0 1000px 0; padding: 0;"`;
             scrollContainer.style.height = "500px";
             scrollContainer.style.maxHeight = "500px";
             scrollContainer.style.overflow = "auto";
