@@ -156,9 +156,13 @@ export class PublicationsList extends React.Component<IPublicationsListProps, IP
         return (
             <section className={"sdl-dita-delivery-publications-list"}>
                 <h1>{productFamily}</h1>
-                <VersionSelector productFamily={productFamily}
-                    productReleaseVersions={productReleaseVersions || []}
-                    selectedProductReleaseVersion={productReleaseVersion} />
+                <VersionSelector productReleaseVersions={productReleaseVersions || []}
+                    selectedProductReleaseVersion={productReleaseVersion}
+                    onChange={releaseVersion => {
+                        if (router) {
+                            router.push(Url.getProductFamilyUrl(productFamily, releaseVersion));
+                        }
+                    }} />
                 {
                     error ?
                         <Error

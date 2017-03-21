@@ -67,21 +67,23 @@ export class Publications extends LoadableObject {
      */
     public getProductReleaseVersions(productFamily: string): IProductReleaseVersion[] {
         const publicationsList = this.getPublications(productFamily);
-        const familyTitle = (productFamily === this._unknownProductFamilyTitle) ? null : productFamily;
-        return Version.sortProductReleaseVersions(familyTitle,
-            publicationsList).map((version: string | null): IProductReleaseVersion => {
-                if (version === null) {
-                    return {
-                        title: this._unknownProductReleaseVersion,
-                        value: this._unknownProductFamilyDescription.trim().toLowerCase(),
-                        hasWarning: true
-                    };
-                }
-                return {
-                    title: version,
-                    value: version.trim().toLowerCase()
-                };
-            });
+        return Version.sortProductReleaseVersions(publicationsList).map(version => this._convertToProductReleaseVersion(version));
+    }
+
+    /**
+     * Get the Product Release Versions for a publication
+     *
+     * @param {string} publicationId Publication id
+     * @returns {IProductReleaseVersion[]}
+     */
+    public getProductReleaseVersionsByPublicationId(publicationId: string): IProductReleaseVersion[] | undefined {
+        const publicationsList = this.getPublications().filter(pub => pub.id = publicationId);
+        const publication = publicationsList[0];
+        if (publication) {
+            const publicationVersionsList = this.getPublications().filter(pub => pub.logicalId === publication.logicalId);
+            return Version.sortProductReleaseVersions(publicationVersionsList).map(version => this._convertToProductReleaseVersion(version));
+        }
+        return undefined;
     }
 
     /**
@@ -138,12 +140,27 @@ export class Publications extends LoadableObject {
                 productFamily: item.ProductFamily,
                 productReleaseVersion: item.ProductReleaseVersion,
                 createdOn: new Date(item.CreatedOn),
-                version: item.Version
+                version: item.Version,
+                logicalId: item.LogicalId
             } as IPublication;
         });
 
         this._productFamilies = undefined;
 
         super._processLoadResult(result, webRequest);
+    }
+
+    private _convertToProductReleaseVersion(version: string | null): IProductReleaseVersion {
+        if (version === null) {
+            return {
+                title: this._unknownProductReleaseVersion,
+                value: this._unknownProductFamilyDescription.trim().toLowerCase(),
+                hasWarning: true
+            };
+        }
+        return {
+            title: version,
+            value: version.trim().toLowerCase()
+        };
     }
 }

@@ -54,9 +54,9 @@ class PublicationsListComponent extends TestBase {
                     const domNode = ReactDOM.findDOMNode(publicationsList) as HTMLElement;
                     const errorElement = domNode.querySelector(".sdl-dita-delivery-error");
                     expect(errorElement).not.toBeNull("Error dialog not found");
-                    const errorTitle = (errorElement  as HTMLElement).querySelector("h1") as HTMLElement;
+                    const errorTitle = (errorElement as HTMLElement).querySelector("h1") as HTMLElement;
                     expect(errorTitle.textContent).toEqual("mock-error.default.title");
-                    const buttons = (errorElement  as HTMLElement).querySelectorAll(".sdl-dita-delivery-button-group button");
+                    const buttons = (errorElement as HTMLElement).querySelectorAll(".sdl-dita-delivery-button-group button");
                     expect(buttons.length).toEqual(1);
 
                     done();
@@ -69,17 +69,20 @@ class PublicationsListComponent extends TestBase {
                     id: "1",
                     title: "Publication 1",
                     createdOn: new Date(),
-                    version: "1"
+                    version: "1",
+                    logicalId: "GUID-123"
                 }, {
                     id: "2",
                     title: "Publication 2",
                     createdOn: new Date(),
-                    version: "1"
+                    version: "1",
+                    logicalId: "GUID-123"
                 }, {
                     id: "3",
                     title: "Publication 3",
                     createdOn: new Date(),
-                    version: "1"
+                    version: "1",
+                    logicalId: "GUID-123"
                 }];
                 services.publicationService.setMockDataPublications(null, publications);
 
@@ -102,7 +105,8 @@ class PublicationsListComponent extends TestBase {
                     id: "0",
                     title: "Publication",
                     createdOn: new Date(),
-                    version: "1"
+                    version: "1",
+                    logicalId: "GUID-123"
                 }];
                 services.publicationService.setMockDataPublications(null, publications);
 
@@ -132,7 +136,8 @@ class PublicationsListComponent extends TestBase {
                     id: "0",
                     title: "Publication",
                     createdOn: new Date(),
-                    version: "1"
+                    version: "1",
+                    logicalId: "GUID-123"
                 }];
                 services.publicationService.setMockDataPublications(null, publications);
                 services.taxonomyService.setMockDataToc(null, [

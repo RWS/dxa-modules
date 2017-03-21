@@ -52,4 +52,12 @@ export interface IPublication {
      * @memberOf IPublication
      */
     version: string;
+
+    /**
+     * Logical id
+     *
+     * @type {string}
+     * @memberOf IPublication
+     */
+    logicalId: string;
 }

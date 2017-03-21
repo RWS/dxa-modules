@@ -7,6 +7,7 @@ export interface IPage {
 export interface IPublication {
     CreatedOn: string;
     Id: string;
+    LogicalId: string;
     ProductFamily?: string | null;
     ProductReleaseVersion?: string | null;
     Title: string;

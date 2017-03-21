@@ -108,6 +108,10 @@ export class PublicationService implements IPublicationService {
         }
     }
 
+    public getProductReleaseVersionsByPublicationId(publicationId: string): Promise<IProductReleaseVersion[]> {
+        return this.getProductReleaseVersions("");
+    }
+
     public setMockDataPublications(error: string | null, publications?: IPublication[],
         productFamilies?: IProductFamily[], productReleaseVersions?: IProductReleaseVersion[]): void {
         this._mockDataPublications = {

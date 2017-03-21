@@ -2,15 +2,15 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Promise } from "es6-promise";
 import { ITaxonomy } from "interfaces/Taxonomy";
+import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 import { IPage } from "interfaces/Page";
 import { TaxonomyItemId } from "interfaces/TcmId";
-
 import { IAppContext } from "components/container/App";
 import { NavigationMenu } from "components/presentation/NavigationMenu";
 import { Toc } from "components/presentation/Toc";
 import { Page } from "components/presentation/Page";
 import { Breadcrumbs } from "components/presentation/Breadcrumbs";
-
+import { VersionSelector } from "components/presentation/VersionSelector";
 import { Html, IHeader } from "utils/Html";
 import { TcmId } from "utils/TcmId";
 import { Url } from "utils/Url";
@@ -120,6 +120,13 @@ export interface IPublicationContentState {
      * @memberOf IPublicationContentState
      */
     activePageHeader?: IHeader;
+    /**
+     * Available product release versions for the selected publication
+     *
+     * @type {IProductReleaseVersion[]}
+     * @memberOf IPublicationsListState
+     */
+    productReleaseVersions?: IProductReleaseVersion[];
 }
 
 interface ISelectedPage {
@@ -228,6 +235,28 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     });
                 }
             });
+
+        // Get product release versions
+        publicationService.getProductReleaseVersionsByPublicationId(publicationId).then(
+            productReleaseVersions => {
+                /* istanbul ignore else */
+                if (!this._isUnmounted) {
+                    this.setState({
+                        productReleaseVersions
+                    });
+                }
+            }).catch(error => {
+                /* istanbul ignore else */
+                if (!this._isUnmounted) {
+                    // TODO: improve error handling
+                    this.setState({
+                        productReleaseVersions: [{
+                            title: error,
+                            value: ""
+                        }]
+                    });
+                }
+            });
     }
 
     /**
@@ -330,6 +359,9 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                         loadItemsPath={taxonomyService.getSitemapPath.bind(taxonomyService)}
                         selectedItem={selectedTocItem}
                     />
+                    <VersionSelector productReleaseVersions={[]} selectedProductReleaseVersion={""} onChange={
+                        releaseVersion => { }
+                    } />
                 </Page>
             </section>
         );

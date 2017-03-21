@@ -100,10 +100,10 @@ class PublicationContentComponent extends TestBase {
                     const page = TestUtils.findRenderedComponentWithType(publicationContent, Page);
                     expect(page).not.toBeNull("Could not find page content.");
                     const pageContentNode = ReactDOM.findDOMNode(page);
-                    // First node is toc, second breadcrumbs, third one is content navigation, fourth is page
-                    expect(pageContentNode.children.length).toBe(4);
-                    expect(pageContentNode.children[3].children.length).toBe(1);
-                    expect(pageContentNode.children[3].children[0].innerHTML).toBe(pageContent);
+                    // First node is toc, second breadcrumbs, third one is version dropdown, fourth content navigation, fifth is page
+                    expect(pageContentNode.children.length).toBe(5);
+                    expect(pageContentNode.children[4].children.length).toBe(1);
+                    expect(pageContentNode.children[4].children[0].innerHTML).toBe(pageContent);
                     done();
                 }, 0);
             });

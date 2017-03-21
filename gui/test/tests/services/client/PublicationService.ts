@@ -113,6 +113,38 @@ class PublicationServiceTests extends TestBase {
                 });
             });
 
+            it("can get product release versions for a publication id", (done: () => void): void => {
+                publicationService.getProductReleaseVersionsByPublicationId(publicationId).then(releaseVersions => {
+                    expect(releaseVersions).toBeDefined();
+                    if (releaseVersions) {
+                        expect(releaseVersions.length).toBe(2);
+                        expect(releaseVersions[0].title).toBe("MP 330 ");
+                        expect(releaseVersions[1].title).toBe("MP 330 2014");
+                    }
+                    done();
+                }).catch(error => {
+                    fail(`Unexpected error: ${error}`);
+                    done();
+                });
+            });
+
+            it("can get product release versions for a publication id from memory", (done: () => void): void => {
+                const spy = spyOn(window, "XMLHttpRequest").and.callThrough();
+                publicationService.getProductReleaseVersionsByPublicationId(publicationId).then(releaseVersions => {
+                    expect(releaseVersions).toBeDefined();
+                    if (releaseVersions) {
+                        expect(releaseVersions.length).toBe(2);
+                        expect(releaseVersions[0].title).toBe("MP 330 ");
+                        expect(releaseVersions[1].title).toBe("MP 330 2014");
+                        expect(spy).not.toHaveBeenCalled();
+                    }
+                    done();
+                }).catch(error => {
+                    fail(`Unexpected error: ${error}`);
+                    done();
+                });
+            });
+
             it("can get the publications", (done: () => void): void => {
                 publicationService.getPublications().then(publications => {
                     expect(publications).toBeDefined();

@@ -20,7 +20,7 @@ export default class Version {
      *
      * @memberOf Version
      */
-    public static sortProductReleaseVersions(productFamily: string | null, publications: IPublication[]): (string | null)[] {
+    public static sortProductReleaseVersions(publications: IPublication[]): (string | null)[] {
         const sortByTitle = (a: IPublication, b: IPublication) => {
             const titleA = a.title.toUpperCase();
             const titleB = b.title.toUpperCase();
@@ -37,10 +37,10 @@ export default class Version {
             const createdOnA = a.createdOn;
             const createdOnB = b.createdOn;
             // Latest is first
-            if (createdOnA < createdOnB) {
+            if (createdOnA.getTime() < createdOnB.getTime()) {
                 return 1;
             }
-            if (createdOnA > createdOnB) {
+            if (createdOnA.getTime() > createdOnB.getTime()) {
                 return -1;
             }
             return 0;
@@ -52,16 +52,30 @@ export default class Version {
 
             if (versionInTitleA && versionInTitleB) {
                 return this.compareVersion(versionInTitleA[2], versionInTitleB[2]) ? -1 : 1;
+            } else if (versionInTitleA) {
+                return -1;
+            } else if (versionInTitleB) {
+                return 1;
+            }
+
+            if (!a.productReleaseVersion && !b.productReleaseVersion) {
+                return 0;
+            } else if (!a.productReleaseVersion) {
+                return 1;
+            } else if (!b.productReleaseVersion) {
+                return -1;
             }
 
             const sameVersion = a.version === b.version;
-            const sameCreatedOnDate = a.createdOn === b.createdOn;
+            const sameCreatedOnDate = a.createdOn.getTime() === b.createdOn.getTime();
 
             if (a.productReleaseVersion === b.productReleaseVersion) {
                 // In this case the publication with the most versions / release combinations is considered to the ordered higher
                 const publicationsAReleaseVersions = publications.filter(pub => pub.id === a.id).map(pub => pub.productReleaseVersion);
                 const publicationsBReleaseVersions = publications.filter(pub => pub.id === b.id).map(pub => pub.productReleaseVersion);
-                return publicationsAReleaseVersions.length > publicationsBReleaseVersions.length ? -1 : 1;
+                if (publicationsAReleaseVersions.length !== publicationsBReleaseVersions.length) {
+                    return publicationsAReleaseVersions.length > publicationsBReleaseVersions.length ? -1 : 1;
+                }
             }
 
             if (a.id === b.id && !sameVersion) {
@@ -73,8 +87,7 @@ export default class Version {
             }
         };
 
-        const pubsForFamily = publications.filter(p => p.productFamily === productFamily);
-        const orderedPubs = pubsForFamily.sort(sort);
+        const orderedPubs = publications.sort(sort);
 
         // Convert to a product release version (remove version from end if it's in the correct format)
         const releaseVersions = orderedPubs.map(pub => {
@@ -87,6 +100,21 @@ export default class Version {
         });
         // Take distinct product release versions
         return releaseVersions.filter((value, index, self) => self.indexOf(value) === index);
+    }
+
+    /**
+     * Sort product release versions by product family. Most recent first, oldest last.
+     *
+     * @static
+     * @param {string | null} productFamily Product family
+     * @param {IPublication[]} publications The list of publications
+     * @returns {string | null} A sorted list of product release version titles
+     *
+     * @memberOf Version
+     */
+    public static sortProductReleaseVersionsByProductFamily(productFamily: string | null, publications: IPublication[]): (string | null)[] {
+        const pubsForFamily = publications.filter(p => p.productFamily === productFamily);
+        return this.sortProductReleaseVersions(pubsForFamily);
     }
 
     /**
