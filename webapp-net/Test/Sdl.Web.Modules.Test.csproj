@@ -15,7 +15,7 @@
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <DxaFrameworkVersion>2.0.0-alpha-201702151511</DxaFrameworkVersion>
+    <DxaFrameworkVersion>2.0.0-alpha-201703071712</DxaFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -64,10 +64,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\CompLinkTest.cs" />
+    <Compile Include="Models\TestEntity.cs" />
     <Compile Include="Models\Tsi1856TestEntity.cs" />
     <Compile Include="Models\Tsi1757TestEntity.cs" />
     <Compile Include="Models\Tsi1946TestEntity.cs" />
     <Compile Include="Models\Tsi2285PageModel.cs" />
+    <Compile Include="Models\Tsi2316TestEntity.cs" />
     <Compile Include="Models\Tsi811PageModel.cs" />
     <Compile Include="Models\EmbedParentModel.cs" />
     <Compile Include="Models\EmbedChildModel.cs" />
@@ -88,9 +91,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Areas\Test\Views\Entity\CompLinkTest.cshtml" />
     <None Include="Areas\Test\Views\Entity\TSI1757Test3.cshtml" />
     <None Include="Areas\Test\Views\Entity\TSI1856Test.cshtml" />
     <None Include="Areas\Test\Views\Entity\TSI1946Test.cshtml" />
+    <None Include="Areas\Test\Views\Entity\TSI2316Test.cshtml" />
     <None Include="Areas\Test\Views\Entity\TSI811Test.cshtml" />
     <None Include="Areas\Test\Views\Entity\TSI1947Test.cshtml" />
     <None Include="Areas\Test\Views\Entity\EmbedParent.cshtml" />

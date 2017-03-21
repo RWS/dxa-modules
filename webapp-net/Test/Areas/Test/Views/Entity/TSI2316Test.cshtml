@@ -1,0 +1,24 @@
+﻿@using System.Globalization
+@model Tsi2316TestEntity
+<div class="entity" @Html.DxaEntityMarkup()>
+    <h3>Rendered @Model with Entity View "Test:TSI2316Test"</h3>
+
+    <h4>NotPublishedKeyword</h4>
+    <div>NotPublishedKeyword.Id: <pre>@Model.NotPublishedKeyword.Id</pre></div>
+    <div>NotPublishedKeyword.Title: <pre>@Model.NotPublishedKeyword.Title</pre></div>
+    <div>NotPublishedKeyword.Description: <pre>@Model.NotPublishedKeyword.Description</pre></div>
+    <div>NotPublishedKeyword.Key: <pre>@Model.NotPublishedKeyword.Key</pre></div>
+    <div>NotPublishedKeyword.TaxonomyId: <pre>@Model.NotPublishedKeyword.TaxonomyId</pre></div>
+
+    <h4>PublishedKeyword</h4>
+    <div>PublishedKeyword.Id: <pre>@Model.PublishedKeyword.Id</pre></div>
+    <div>PublishedKeyword.Title: <pre>@Model.PublishedKeyword.Title</pre></div>
+    <div>PublishedKeyword.Description: <pre>@Model.PublishedKeyword.Description</pre></div>
+    <div>PublishedKeyword.Key: <pre>@Model.PublishedKeyword.Key</pre></div>
+    <div>PublishedKeyword.TaxonomyId: <pre>@Model.PublishedKeyword.TaxonomyId</pre></div>
+    <div>PublishedKeyword.TextField: <pre>@Model.PublishedKeyword.TextField</pre></div>
+    <div>PublishedKeyword.NumberField: <pre>@Model.PublishedKeyword.NumberField.ToString(CultureInfo.InvariantCulture)</pre></div>
+    <div>PublishedKeyword.DateField: <pre>@Model.PublishedKeyword.DateField.Value.ToString("s")</pre></div>
+    <div>PublishedKeyword.CompLinkField: <pre>@Model.PublishedKeyword.CompLinkField</pre></div>
+    <div>PublishedKeyword.KeywordField: <pre>@Model.PublishedKeyword.KeywordField</pre></div>
+</div>
