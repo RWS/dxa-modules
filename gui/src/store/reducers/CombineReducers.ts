@@ -1,7 +1,7 @@
 /* tslint: disable:no-any */
-const getState = (state: any, newState: any) => () => Object.freeze(Object.assign({}, state, newState));
-
 export const combineReducers = (reducers: any) => {
+    const getState = (state: any, newState: any) => () => Object.freeze(Object.assign({}, state, newState));
+
     return (state: any, action: {}): {} => {
         const newState  = Object.keys(reducers)
             .reduce((currentState, reducerName) => {
