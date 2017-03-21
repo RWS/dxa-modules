@@ -5,7 +5,8 @@
     "ProductFamily": "Mobile Phones",
     "ProductReleaseVersion": "MP 330 2014",
     "CreatedOn": "2016-02-10T15:29:49Z",
-    "Version": "3"
+    "Version": "3",
+    "LogicalId": "GUID-789BBB3D-8A09-4916-8857-09A246CB6F59"
   },
   {
     "Id": "1601084",
@@ -13,7 +14,8 @@
     "ProductFamily": "Animals",
     "ProductReleaseVersion": "Penguins (8.0.0)",
     "CreatedOn": "2016-01-07T03:53:57Z",
-    "Version": "8"
+    "Version": "8",
+    "LogicalId": "GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA"
   },
   {
     "Id": "1611362",
@@ -21,7 +23,8 @@
     "ProductFamily": "Komori",
     "ProductReleaseVersion": "Komori CMS 2010",
     "CreatedOn": "2016-01-14T05:47:16Z",
-    "Version": "1"
+    "Version": "1",
+    "LogicalId": "GUID-E1A01DFF-EF3B-40F9-87BF-AB9DB7E97EE4"
   },
   {
     "Id": "1849903",
@@ -29,7 +32,8 @@
     "ProductFamily": "SDL Knowledge Center",
     "ProductReleaseVersion": "Beer 2017",
     "CreatedOn": "2017-01-26T08:31:35Z",
-    "Version": "1"
+    "Version": "1",
+    "LogicalId": "GUID-244F3FD2-930C-4C44-80B4-8BE461DBF28A"
   },
   {
     "Id": "1881665",
@@ -37,7 +41,8 @@
     "ProductFamily": "Mobile Phones",
     "ProductReleaseVersion": "MP 330 (2.0.0)",
     "CreatedOn": "2015-12-23T03:22:09Z",
-    "Version": "1"
+    "Version": "1",
+    "LogicalId": "GUID-789BBB3D-8A09-4916-8857-09A246CB6F59"
   },
   {
     "Id": "1961681",
@@ -45,7 +50,8 @@
     "ProductFamily": "McAfee",
     "ProductReleaseVersion": "McAfee Anti Virus 2008",
     "CreatedOn": "2015-12-23T03:22:08Z",
-    "Version": "1"
+    "Version": "1",
+    "LogicalId": "GUID-5D6FA032-0189-4CB2-85E7-41455F86D612"
   },
   {
     "Id": "1961700",
@@ -53,7 +59,8 @@
     "ProductFamily": "Mobile Phones",
     "ProductReleaseVersion": "MP 330 (2.0.0)",
     "CreatedOn": "2015-12-23T03:22:09Z",
-    "Version": "1"
+    "Version": "1",
+    "LogicalId": "GUID-789BBB3D-8A09-4916-8857-09A246CB6F59"
   },
   {
     "Id": "1961702",
@@ -61,6 +68,7 @@
     "ProductFamily": "Mobile Phones",
     "ProductReleaseVersion": "MP 330 (2.0.0)",
     "CreatedOn": "2015-12-23T03:22:09Z",
-    "Version": "1"
+    "Version": "1",
+    "LogicalId": "GUID-789BBB3D-8A09-4916-8857-09A246CB6F59"
   }
 ]
