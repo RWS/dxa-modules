@@ -156,7 +156,7 @@ export class PublicationsList extends React.Component<IPublicationsListProps, IP
             <section className={"sdl-dita-delivery-publications-list"}>
                 <h1>{productFamily}</h1>
                 <div className="product-release-version-selector">
-                    <label>Version:</label>
+                    <label>{formatMessage("productreleaseversions.version.label")}</label>
                     <DropdownList propertyMappings={{ "text": "title" }}
                         selectedValue={productReleaseVersion
                             ? productReleaseVersion.trim().toLowerCase() : undefined}

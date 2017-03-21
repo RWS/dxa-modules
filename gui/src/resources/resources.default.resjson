@@ -27,5 +27,6 @@
   "error.unable.to.locate.page.in.toc": "Unable to locate the page with id {0} inside the table of contents.",
   "productfamilies.unknown.title": "Unknown product",
   "productfamilies.unknown.description": "Publications which are not linked to a specific product yet",
-  "productreleaseversions.unknown.title": "Unknown product release version"
+  "productreleaseversions.unknown.title": "Unknown product release version",
+  "productreleaseversions.version.label": "Version:"
 }
