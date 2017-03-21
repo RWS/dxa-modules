@@ -67,7 +67,7 @@ const TaxonomyType = {
 };
 
 /**
- * Function that generates unique value every time it"s called.
+ * Function that generates unique value every time it's called.
  */
 const getUniqueTaxonomyId = ((count: number): () => string => {
     return (): string => `taxonomy-${count++}`;
@@ -260,7 +260,7 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
 
     /**
      * This method is just a wrapper for TreeViewControl.prototype.createNode,
-     * just because we don"t want to write this long list of arguments every time.
+     * just because we don't want to write this long list of arguments every time.
      */
     private _createTaxonomyNode(taxonomy: ITaxonomy, {
             dataType = TaxonomyType.TOPIC,

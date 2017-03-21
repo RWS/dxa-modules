@@ -18,4 +18,9 @@ const mapDispatchToProps = {
     onChange: changeLanguage
 };
 
+/**
+ * Connector of Language Dropdown component for Redux
+ *
+ * @export
+ */
 export const LanguageDropdown = connect(mapStateToProps, mapDispatchToProps)(Dropdown);

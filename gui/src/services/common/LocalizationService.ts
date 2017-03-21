@@ -1,9 +1,9 @@
-import { String } from "sdl-models";
-import { ILocalizationService, ILanguage } from "services/interfaces/LocalizationService";
 import { Store } from "redux";
-import { IState } from "store/interfaces/State";
+import { String } from "sdl-models";
 import { language } from "store/reducers/Language";
 import { changeLanguage } from "store/actions/Actions";
+import { ILocalizationService, ILanguage } from "services/interfaces/LocalizationService";
+import { IState } from "store/interfaces/State";
 
 interface IDic { [path: string]: string; };
 interface IDics { [lang: string]: IDic; };
@@ -22,6 +22,7 @@ const Resources: IDics = loadDics(Languages);
 const translate = (lang: string) => (path: string) => lang in Resources ? Resources[lang][path] : null;
 
 const formatMessage = (resource: string, variables?: string[]) => Array.isArray(variables) ? String.format(resource, variables) : resource;
+
 /**
  * Localization service
  *
@@ -39,6 +40,9 @@ export class LocalizationService implements ILocalizationService {
 
     private language: string;
 
+    /**
+     * Creates an instance of LocalizationService.
+     */
     public constructor() {
         this.language = localStorage.getItem(LANGUAGE_LOCALSTORAGE) || DEFAULT_LANGUAGE;
 
@@ -46,6 +50,12 @@ export class LocalizationService implements ILocalizationService {
         this.getDirection = this.getDirection.bind(this);
     }
 
+    /**
+     * Save current store to local storage
+     *
+     * @param {Store<IState>} store
+     * @returns void
+     */
     public setStore(store: Store<IState>): void {
         store.dispatch(changeLanguage(this.language));
         store.subscribe((): void => {
@@ -88,12 +98,24 @@ export class LocalizationService implements ILocalizationService {
         return languages;
     }
 
+    /**
+     * Convert language iso code to its name
+     *
+     * @param   {string} iso
+     * @returns {string}
+     */
     public isoToName(iso: string): string {
         const languages = this.getLanguages();
         const options = languages.filter((language: ILanguage) => language.iso == iso);
         return options[0] && options[0].name || iso;
     }
 
+    /**
+     * Convert language name to its iso code
+     *
+     * @param   {string} name
+     * @returns {string}
+     */
     public nameToIso(name: string): string {
         const languages = this.getLanguages();
         const options = languages.filter((language: ILanguage) => language.name == name);
@@ -101,11 +123,10 @@ export class LocalizationService implements ILocalizationService {
     }
 
     /**
+     * Determine language direction
      *
      * @param {string} lang
      * @returns {("rtl" | "ltr")}
-     *
-     * @memberOf LocalizationService
      */
     public getDirection(lang: string): "rtl" | "ltr" {
         return this.rtlLanguages.some((val: string) => val === lang) ? "rtl" : "ltr";

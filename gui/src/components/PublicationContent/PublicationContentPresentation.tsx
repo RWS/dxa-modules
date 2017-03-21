@@ -1,9 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Promise } from "es6-promise";
-import { ITaxonomy } from "interfaces/Taxonomy";
-import { IPage } from "interfaces/Page";
-import { TaxonomyItemId } from "interfaces/TcmId";
 
 import { IAppContext } from "components/container/App";
 import { NavigationMenu } from "components/presentation/NavigationMenu";
@@ -11,20 +8,23 @@ import { Toc } from "components/presentation/Toc";
 import { Page } from "components/Page/Page";
 import { Breadcrumbs } from "components/presentation/Breadcrumbs";
 import { ContentLanguageWarning } from "components/ContentLanguageWarning/ContentLanguageWarning";
+import { FetchPublications } from "components/helpers/FetchPublications";
+import { RouteToState } from "components/helpers/RouteToState";
+import { StateToRoute } from "components/helpers/StateToRoute";
 
 import { Html, IHeader } from "utils/Html";
 import { TcmId } from "utils/TcmId";
 import { Url } from "utils/Url";
 import { debounce } from "utils/Function";
+import { isDummyPage, isPage } from "utils/Page";
 
+import { ITaxonomy } from "interfaces/Taxonomy";
+import { IPage } from "interfaces/Page";
+import { TaxonomyItemId } from "interfaces/TcmId";
+import { IPublication } from "interfaces/Publication";
 import { IPublicationCurrentState } from "store/interfaces/State";
-import { FetchPublications } from "components/helpers/FetchPublications";
-import { RouteToState } from "components/helpers/RouteToState";
-import { StateToRoute } from "components/helpers/StateToRoute";
 
 import "./PublicationContent.less";
-import { IPublication } from "interfaces/Publication";
-import { isDummyPage, isPage } from "utils/Page";
 
 /**
  * PublicationContent component props
@@ -33,12 +33,40 @@ import { isDummyPage, isPage } from "utils/Page";
  * @interface IPublicationContentProps
  */
 export interface IPublicationContentProps {
-
+    /**
+     * Publication
+     *
+     * @type {IPublication}
+     * @memberOf IPublicationContentProps
+     */
     publication: IPublication;
+    /**
+     * Page
+     *
+     * @type {IPage}
+     * @memberOf IPublicationContentProps
+     */
     page: IPage;
+    /**
+     * Possible error message while page loading
+     *
+     * @type {string}
+     * @memberOf IPublicationContentProps
+     */
     errorMessage: string;
+    /**
+     * Is Page loading status
+     *
+     * @type {boolean}
+     * @memberOf IPublicationContentProps
+     */
     isPageLoading: boolean;
-
+    /**
+     * Function to execute when publication is changing
+     *
+     * @type {Function}
+     * @memberOf IPublicationContentProps
+     */
     onPulicationChange?: (publication: {}) => void;
 }
 
@@ -61,12 +89,6 @@ export interface IPublicationContentState {
      * @type {ITaxonomy | null}
      */
     selectedTocItem?: ITaxonomy | null;
-    /**
-     * Page is loading
-     *
-     * @type {boolean}
-     */
-    //isPageLoading?: boolean;
     /**
      * Current active item path in the TOC
      *
@@ -93,12 +115,14 @@ interface ISelectedPage {
      * Content of the current selected page
      *
      * @type {string | null}
+     * @memberOf ISelectedPage
      */
     content?: string | null;
     /**
      * An error prevented the page from rendering
      *
      * @type {string | null}
+     * @memberOf ISelectedPage
      */
     error?: string | null;
 }
@@ -108,16 +132,21 @@ interface IToc {
      * An error prevented the toc from rendering
      *
      * @type {string}
+     * @memberOf IToc
      */
     error?: string;
     /**
      * Root items
      *
      * @type {ITaxonomy[]}
+     * @memberOf IToc
      */
     rootItems?: ITaxonomy[];
 }
 
+/**
+ * Publication content props
+ */
 export type Pub = IPublicationContentProps & IPublicationCurrentState;
 
 /**
@@ -138,7 +167,6 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
 
     /**
      * Creates an instance of App.
-     *
      */
     constructor() {
         super();
@@ -154,7 +182,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
      * Invoked once, both on the client and server, immediately before the initial rendering occurs.
      */
     public fetchPublication(publicationId: string): void {
-//        this is temporary hack to move out loading data from this component
+       // this is temporary hack to move out loading data from this component
         if (publicationId) {
             // Load the page
             this._loadTocRootItems(publicationId);
@@ -169,6 +197,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
      * Invoked when a component is receiving new props. This method is not called for the initial render.
      *
      * @param {IPublicationContentProps} nextProps
+     * @returns {void}
      */
     public componentWillReceiveProps(nextProps: Pub): void {
        const { page } = this.props;
@@ -188,6 +217,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
      *
      * @param {IPublicationContentProps} nextProps Next props
      * @param {IPublicationContentState} nextState Next state
+     * @returns {void}
      */
     public componentWillUpdate(nextProps: IPublicationContentProps, nextState: IPublicationContentState): void {
         if (nextState.selectedTocItem && !nextState.selectedTocItem.url) {
@@ -313,9 +343,6 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         page.error = null;
         page.content = pageInfo.content;
 
-        // this.setState({
-        //     isPageLoading: false
-        // });
         // Set the current active path for the tree
         if (Array.isArray(pageInfo.sitemapIds) && pageInfo.sitemapIds.length > 0) {
             // Always take the first sitemap id
@@ -458,6 +485,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                         isTocLoading: false
                     });
                 }
-            });
+            }
+        );
     }
 }

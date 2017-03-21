@@ -1,19 +1,19 @@
 import * as ClassNames from "classnames";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import { ActivityIndicator, Button } from "sdl-controls-react-wrappers";
+import { ButtonPurpose } from "sdl-controls";
 import { Html, IHeader } from "utils/Html";
 import { Url } from "utils/Url";
 import { path } from "utils/Path";
 import { ContentNavigation, IContentNavigationItem } from "components/presentation/ContentNavigation";
-import { ActivityIndicator, Button } from "sdl-controls-react-wrappers";
-import { ButtonPurpose } from "sdl-controls";
-import { IAppContext } from "components/container/App";
 import { Error } from "components/presentation/Error";
+import { FetchPage } from "components/helpers/FetchPage";
+import { IAppContext } from "components/container/App";
 
 import "components/presentation/styles/Page";
 import "dita-ot/styles/commonltr";
 import "dita-ot/styles/commonrtl";
-import { FetchPage } from "components/helpers/FetchPage";
 
 /**
  * Page component props
@@ -26,12 +26,14 @@ export interface IPageProps {
      * Show activity indicator
      *
      * @type {boolean}
+     * @memberOf IPageProps
      */
     showActivityIndicator: boolean;
     /**
      * Page content
      *
      * @type {string | null}
+     * @memberOf IPageProps
      */
     content?: string | null;
     /**
@@ -44,7 +46,7 @@ export interface IPageProps {
      * Url of the page
      *
      * @type {string}
-     * @memberOf IPublicationContentProps
+     * @memberOf IPageProps
      */
     url?: string;
     /**
@@ -81,8 +83,7 @@ export interface IPageProps {
     /**
      * Called whenever navigation to another page is requested
      *
-     * @param {string} url Url
-     *
+     * @param {string}
      * @memberOf IPageProps
      */
     onNavigate(url: string): void;
@@ -99,6 +100,7 @@ export interface IPageState {
      * Items used in content Navigation
      *
      * @type {IContentNavigationItem[]}
+     * @memberOf IPageState
      */
     navItems: IContentNavigationItem[];
 }
@@ -107,13 +109,11 @@ export interface IPageState {
  * Page component
  */
 export class PagePresentation extends React.Component<IPageProps, IPageState> {
-
     /**
      * Context types
      *
      * @static
      * @type {React.ValidationMap<IAppContext>}
-     * @memberOf Breadcrumbs
      */
     public static contextTypes: React.ValidationMap<IAppContext> = {
         services: React.PropTypes.object.isRequired,
@@ -124,7 +124,6 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
      * Global context
      *
      * @type {IAppContext}
-     * @memberOf Breadcrumbs
      */
     public context: IAppContext;
 
@@ -134,7 +133,6 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
 
     /**
      * Creates an instance of Page.
-     *
      */
     constructor() {
         super();
@@ -160,8 +158,6 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
      * Render the component
      *
      * @returns {JSX.Element}
-     *
-     * @memberOf Page
      */
     public render(): JSX.Element {
         const props = this.props;
@@ -213,8 +209,6 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
 
     /**
      * Invoked immediately after the component's updates are flushed to the DOM. This method is not called for the initial render.
-     *
-     * @memberOf Page
      */
     public componentDidUpdate(): void {
         this._enableHyperlinks();
@@ -235,10 +229,6 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
 
     /**
      * Make hyperlinks navigate when clicked
-     *
-     * @private
-     *
-     * @memberOf Page
      */
     private _enableHyperlinks(): void {
         const props = this.props;
@@ -271,10 +261,6 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
 
     /**
      * Collects headers links
-     *
-     * @private
-     *
-     * @memberOf Page
      */
     private _collectHeadersLinks(): void {
         const domNode = ReactDOM.findDOMNode(this);
@@ -305,10 +291,6 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
 
     /**
      * Make hyperlinks navigation disabled
-     *
-     * @private
-     *
-     * @memberOf Page
      */
     private _disableHyperlinks(): void {
         this._hyperlinks.forEach(anchor => {
@@ -318,10 +300,6 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
 
     /**
      * Jump to an anchor in the page
-     *
-     * @private
-     *
-     * @memberOf Page
      */
     private _jumpToAnchor(): void {
         const { anchor, scrollOffset } = this.props;

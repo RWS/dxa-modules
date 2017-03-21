@@ -3,17 +3,53 @@ import { PAGE_LOADED, PAGE_LOADING, PAGE_ERROR } from "store/actions/Actions";
 import { IPage } from "interfaces/Page";
 import { dummyPage } from "utils/Page";
 
+/**
+ * Pages dictionary based on id
+ *
+ * @export
+ * @interface IPagesMap
+ */
 export interface IPagesMap {
     [id: string]: IPage;
 };
 
+/**
+ * Pages' errors dictionary based on page id
+ *
+ * @export
+ * @interface IPageErrorsMap
+ */
 export interface IPageErrorsMap {
     [pageId: string]: string;
 }
 
+/**
+ * Pages interface in the state
+ *
+ * @export
+ * @interface IPageState
+ */
 export interface IPageState {
+    /**
+     * Pages dictionary
+     *
+     * @type {IPagesMap}
+     * @memberOf IPageState
+     */
     byId: IPagesMap;
+    /**
+     * Errors dictionary
+     *
+     * @type {IPageErrorsMap}
+     * @memberOf IPageState
+     */
     errors: IPageErrorsMap;
+    /**
+     * Loading pages id list
+     *
+     * @type {string[]}
+     * @memberOf IPageState
+     */
     loading: string[];
 }
 

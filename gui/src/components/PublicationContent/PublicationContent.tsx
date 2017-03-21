@@ -1,8 +1,8 @@
-import { PublicationContentPresentation } from "./PublicationContentPresentation";
 import { connect } from "react-redux";
-import { IState } from "store/interfaces/State";
+import { PublicationContentPresentation } from "./PublicationContentPresentation";
 import { publicationRouteChanged } from "store/actions/Actions";
 import { getCurrentPub, getPubById, getPageById, getErrorMessage, isPageLoading as isPageLoadingGetter } from "store/reducers/Reducer";
+import { IState } from "store/interfaces/State";
 import { isPage, isDummyPage } from "utils/Page";
 
 const mapStateToProps = (state: IState) => {
@@ -19,11 +19,17 @@ const mapStateToProps = (state: IState) => {
         pageId,
         anchor,
         isPageLoading,
-        errorMessage };
+        errorMessage
+    };
 };
 
 const mapDispatchToProps = {
     onPulicationChange: publicationRouteChanged
 };
 
+/**
+ * Connector of Publication Content component for Redux
+ *
+ * @export
+ */
 export const PublicationContent = connect(mapStateToProps, mapDispatchToProps)(PublicationContentPresentation);

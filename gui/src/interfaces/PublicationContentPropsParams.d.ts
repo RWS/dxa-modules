@@ -9,6 +9,7 @@ export interface IPublicationContentPropsParams {
      * Id of the current publication
      *
      * @type {string}
+     * @memberOf IPublicationContentPropsParams
      */
     publicationId: string;
 
@@ -16,6 +17,7 @@ export interface IPublicationContentPropsParams {
      * The page id or the title of the current publication
      *
      * @type {string}
+     * @memberOf IPublicationContentPropsParams
      */
     pageIdOrPublicationTitle?: string;
 
@@ -23,6 +25,7 @@ export interface IPublicationContentPropsParams {
      * Title of the current publication
      *
      * @type {string}
+     * @memberOf IPublicationContentPropsParams
      */
     publicationTitle?: string;
 
@@ -30,6 +33,7 @@ export interface IPublicationContentPropsParams {
      * Title of the current page
      *
      * @type {string}
+     * @memberOf IPublicationContentPropsParams
      */
     pageTitle?: string;
 
@@ -37,6 +41,7 @@ export interface IPublicationContentPropsParams {
      * Anchor within the current page
      *
      * @type {string}
+     * @memberOf IPublicationContentPropsParams
      */
     pageAnchor?: string;
 }
