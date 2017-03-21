@@ -14,6 +14,14 @@ export interface IProductReleaseVersion {
     title: string;
 
     /**
+     * Normalized title, used for comparison
+     *
+     * @type {string}
+     * @memberOf IProductReleaseVersion
+     */
+    value: string;
+
+    /**
      * If Product Release Version has a warning
      *
      * @type {string}

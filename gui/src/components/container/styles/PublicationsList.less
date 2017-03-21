@@ -5,15 +5,16 @@
     background-color: @neutralColor6;
     h1 {
         .header-font(300, @h1Size, 50px);
-        margin: 0 auto;
         padding-top: 15px;
-        max-width: @screenXl;
         text-indent: 20px;
     }
+    h1,
+    .sdl-dita-delivery-version-selector,
     .sdl-dita-delivery-tiles-list {
         max-width: @screenXl;
-        .sdl-dita-delivery-tile {
-            height: 340px;
-        }
+        margin: 0 auto;
+    }
+    .sdl-dita-delivery-tiles-list .sdl-dita-delivery-tile {
+        height: 340px;
     }
 }

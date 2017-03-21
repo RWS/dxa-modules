@@ -7,8 +7,6 @@
   "components.searchbar.publication.placeholder": "Search in ‘{0}’",
   "components.contentnavigation.title": "Contents",
   "components.tiles.more": "View more",
-  "components.productfamilies.unknown.title": "Unknown product",
-  "components.productfamilies.unknown.description": "Publications which are not linked to a specific product yet",
   "components.productfamilies.no.published.publications": "No publications published yet",
   "components.productfamilies.view.all": "View all products",
   "components.publicationslist.view.all": "View all publications",
@@ -26,5 +24,9 @@
   "error.publication.not.found": "Unable to retrieve title for publication with id {0}.",
   "error.toc.not.found": "Oops, something went wrong loading the table of contents for this publication.",
   "error.toc.items.not.found": "We couldn't load child items due to server internal error.",
-  "error.unable.to.locate.page.in.toc": "Unable to locate the page with id {0} inside the table of contents."
+  "error.unable.to.locate.page.in.toc": "Unable to locate the page with id {0} inside the table of contents.",
+  "productfamilies.unknown.title": "Unknown product",
+  "productfamilies.unknown.description": "Publications which are not linked to a specific product yet",
+  "productreleaseversions.unknown.title": "Unknown product release version",
+  "productreleaseversions.version.label": "Version:"
 }

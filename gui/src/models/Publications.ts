@@ -4,8 +4,8 @@ import { IProductFamily } from "interfaces/ProductFamily";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 import { Api } from "utils/Api";
 import { Net, IWebRequest, LoadableObject } from "sdl-models";
-
 import { localization } from "services/common/LocalizationService";
+import Version from "utils/Version";
 
 /**
  * Publications model
@@ -18,27 +18,45 @@ export class Publications extends LoadableObject {
 
     private _publications: IPublication[];
     private _productFamilies?: IProductFamily[];
-
-    private _unknownProductFamilyTitle: string = localization.formatMessage("components.productfamilies.unknown.title");
+    private _unknownProductFamilyTitle: string = localization.formatMessage("productfamilies.unknown.title");
+    private _unknownProductFamilyDescription: string = localization.formatMessage("productfamilies.unknown.description");
+    private _unknownProductReleaseVersion: string = localization.formatMessage("productreleaseversions.unknown.title");
 
     /**
      * Get the Publications
      *
-     * @param {string} productFamily productFamily title
+     * @param {string} [productFamily] productFamily title
+     * @param {string} [productReleaseVersion] product release version title
      * @returns {IPublication[]}
      */
-    public getPublications(productFamily?: string): IPublication[] {
+    public getPublications(productFamily?: string, productReleaseVersion?: string): IPublication[] {
+        let result: IPublication[] = this._publications;
+
         if (productFamily) {
-            const familyTitle = (productFamily === this._unknownProductFamilyTitle) ? undefined : productFamily;
-            return this._publications.filter((publication: IPublication) => {
+            const normalizedProductFamily = productFamily.toLowerCase().trim();
+            const familyTitle = (normalizedProductFamily === this._unknownProductFamilyTitle.toLowerCase()) ? undefined : normalizedProductFamily;
+            result = result.filter((publication: IPublication) => {
                 if (!familyTitle) {
                     return !publication.productFamily;
                 }
-                return (publication.productFamily === familyTitle);
+                return (publication.productFamily && publication.productFamily.toLowerCase().trim()) === familyTitle;
             });
         }
 
-        return this._publications;
+        if (productReleaseVersion) {
+            const normalizedProductReleaseVersion = productReleaseVersion.toLowerCase().trim();
+            const productReleaseVersionTitle = (normalizedProductReleaseVersion === this._unknownProductReleaseVersion.toLowerCase())
+                ? undefined : normalizedProductReleaseVersion;
+            result = result.filter((publication: IPublication) => {
+                if (!productReleaseVersionTitle) {
+                    return !publication.productReleaseVersion;
+                }
+                const normalizedPublicationProductReleaseVersion = publication.productReleaseVersion && Version.normalize(publication.productReleaseVersion).toLowerCase().trim();
+                return normalizedPublicationProductReleaseVersion === productReleaseVersionTitle;
+            });
+        }
+
+        return result;
     }
 
     /**
@@ -47,18 +65,23 @@ export class Publications extends LoadableObject {
      * @param {string} productFamily productFamily title
      * @returns {IProductReleaseVersion[]}
      */
-    public getProductReleaseVersions(productFamily?: string): IProductReleaseVersion[] {
+    public getProductReleaseVersions(productFamily: string): IProductReleaseVersion[] {
         const publicationsList = this.getPublications(productFamily);
-        return publicationsList.map((publication: IPublication) => {
-            return publication.productReleaseVersion;
-        }).filter((version: string, i: number, arr: string[]) => {
-            return arr.indexOf(version) == i;
-        }).map((version: string | undefined) => {
-            return {
-                // Only title now, description would go here later on
-                title: version
-            } as IProductReleaseVersion;
-        });
+        const familyTitle = (productFamily === this._unknownProductFamilyTitle) ? null : productFamily;
+        return Version.sortProductReleaseVersions(familyTitle,
+            publicationsList).map((version: string | null): IProductReleaseVersion => {
+                if (version === null) {
+                    return {
+                        title: this._unknownProductReleaseVersion,
+                        value: this._unknownProductFamilyDescription.trim().toLowerCase(),
+                        hasWarning: true
+                    };
+                }
+                return {
+                    title: version,
+                    value: version.trim().toLowerCase()
+                };
+            });
     }
 
     /**
@@ -81,18 +104,18 @@ export class Publications extends LoadableObject {
                     return (left || "").toLowerCase().localeCompare((right || "").toLowerCase());
                 });
 
-                this._productFamilies = distinctFamilies.map((family: string | undefined) => {
+                this._productFamilies = distinctFamilies.map((family: string | undefined): IProductFamily => {
                     if (family === undefined) {
                         return {
-                            title: localization.formatMessage("components.productfamilies.unknown.title"),
-                            description: localization.formatMessage("components.productfamilies.unknown.description"),
+                            title: this._unknownProductFamilyTitle,
+                            description: this._unknownProductFamilyDescription,
                             hasWarning: true
-                        } as IProductFamily;
+                        };
                     } else {
                         return {
                             // Only title now, description would go here later on
                             title: family
-                        } as IProductFamily;
+                        };
                     }
                 });
             }

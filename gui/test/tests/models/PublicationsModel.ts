@@ -17,11 +17,13 @@ const MOCK_DATA: IPublication[] = [
         Title: "Pub2",
         ProductFamily: "Family 2",
         CreatedOn: "",
+        ProductReleaseVersion: "V1",
         Version: "1"
     }, {
         Id: "Pub3",
         Title: "Pub3",
         ProductFamily: "Family 2",
+        ProductReleaseVersion: null,
         CreatedOn: "",
         Version: "1"
     },
@@ -143,7 +145,7 @@ class PublicationsModel extends TestBase {
             });
 
             it("can resolve publications for a product family", (): void => {
-                const publications = publicationModel.getPublications("Family 2");
+                const publications = publicationModel.getPublications("family 2");
                 expect(publications).toBeDefined();
                 if (publications) {
                     expect(publications.length).toBe(2);
@@ -153,7 +155,7 @@ class PublicationsModel extends TestBase {
             });
 
             it("can resolve publications for an unknown product family", (): void => {
-                const unknownProductFamilyTitle: string = localization.formatMessage("components.productfamilies.unknown.title");
+                const unknownProductFamilyTitle: string = localization.formatMessage("productfamilies.unknown.title");
                 const publications = publicationModel.getPublications(unknownProductFamilyTitle);
                 expect(publications).toBeDefined();
                 if (publications) {
@@ -162,6 +164,37 @@ class PublicationsModel extends TestBase {
                     expect(publications[1].title).toBe("Pub4");
                 }
             });
+
+            it("can resolve publications for a product release version", (): void => {
+                const publications = publicationModel.getPublications("Family 2", "v1");
+                expect(publications).toBeDefined();
+                if (publications) {
+                    expect(publications.length).toBe(1);
+                    expect(publications[0].title).toBe("Pub2");
+                }
+            });
+
+            it("can resolve publications for an unknown product release version", (): void => {
+                const unknownProductReleaseVersion: string = localization.formatMessage("productreleaseversions.unknown.title");
+                const publications = publicationModel.getPublications("Family 2", unknownProductReleaseVersion);
+                expect(publications).toBeDefined();
+                if (publications) {
+                    expect(publications.length).toBe(1);
+                    expect(publications[0].title).toBe("Pub3");
+                }
+            });
+
+            it("can resolve product release versions for an unknown product family", (): void => {
+                const unknownProductFamilyTitle: string = localization.formatMessage("productfamilies.unknown.title");
+                const unknownProductReleaseVersionTitle: string = localization.formatMessage("productreleaseversions.unknown.title");
+                const publications = publicationModel.getProductReleaseVersions(unknownProductFamilyTitle);
+                expect(publications).toBeDefined();
+                if (publications) {
+                    expect(publications.length).toBe(1);
+                    expect(publications[0].title).toBe(unknownProductReleaseVersionTitle);
+                }
+            });
+
         });
     }
 }

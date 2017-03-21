@@ -1,7 +1,7 @@
 import { IPublicationService } from "services/interfaces/PublicationService";
 import { IPublication } from "interfaces/Publication";
 import { IProductFamily } from "interfaces/ProductFamily";
-
+import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 import { Promise } from "es6-promise";
 
 let fakeDelay = false;
@@ -13,10 +13,12 @@ export class PublicationService implements IPublicationService {
         error: string | null;
         publications: IPublication[];
         productFamilies: IProductFamily[];
+        productReleaseVersions: IProductReleaseVersion[];
     } = {
         error: null,
         publications: [],
-        productFamilies: []
+        productFamilies: [],
+        productReleaseVersions: []
     };
 
     private _mockDataPublication: {
@@ -47,7 +49,7 @@ export class PublicationService implements IPublicationService {
     }
 
     public getProductFamilies(): Promise<IProductFamily[]> {
-        const { error, productFamilies} = this._mockDataPublications;
+        const { error, productFamilies } = this._mockDataPublications;
         if (fakeDelay) {
             return new Promise((resolve: (productFamilies?: IProductFamily[]) => void, reject: (error: string | null) => void) => {
                 if (error) {
@@ -87,11 +89,32 @@ export class PublicationService implements IPublicationService {
         }
     }
 
-    public setMockDataPublications(error: string | null, publications?: IPublication[], productFamilies?: IProductFamily[]): void {
+    public getProductReleaseVersions(productFamily: string): Promise<IProductReleaseVersion[]> {
+        const { error, productReleaseVersions } = this._mockDataPublications;
+        if (fakeDelay) {
+            return new Promise((resolve: (productReleaseVersions?: IProductReleaseVersion[]) => void, reject: (error: string | null) => void) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(productReleaseVersions);
+                }
+            });
+        } else {
+            if (error) {
+                return Promise.reject(error);
+            } else {
+                return Promise.resolve(productReleaseVersions);
+            }
+        }
+    }
+
+    public setMockDataPublications(error: string | null, publications?: IPublication[],
+        productFamilies?: IProductFamily[], productReleaseVersions?: IProductReleaseVersion[]): void {
         this._mockDataPublications = {
             error: error,
             publications: publications || [],
-            productFamilies: productFamilies || []
+            productFamilies: productFamilies || [],
+            productReleaseVersions: productReleaseVersions || []
         };
     }
 
