@@ -1,35 +1,67 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { IState } from "store/interfaces/State";
+import { withRouter } from "react-router";
+import { getCurrentPub } from "store/reducers/Reducer";
 import { publicationRouteChanged } from "store/actions/Actions";
 import { IPublicationContentPropsParams } from "interfaces/PublicationContentPropsParams";
-import { withRouter } from "react-router";
-import { IPublicationCurrentState } from "store/interfaces/State";
-import { getCurrentPub } from "store/reducers/Reducer";
+import { IPublicationCurrentState, IState } from "store/interfaces/State";
 
 export interface ISyncParams {
+    /**
+     * Function with the following format to execute when route changes
+     *     `@param   {IPublicationCurrentState}
+     *     `@returns {void}
+     *
+     * @memberOf ISyncParams
+     */
     onRouteChange: (publication: IPublicationCurrentState) => {};
+    /**
+     * Parameters
+     *
+     * @type {IPublicationContentPropsParams}
+     * @memberOf ISyncParams
+     */
     params: IPublicationContentPropsParams;
 }
 
+/**
+ * Route to state props
+ */
 export type Props = IPublicationCurrentState & ISyncParams;
-export class RouteToState1 extends React.Component<Props, {}> {
 
+/**
+ * Route to state component
+ */
+export class RouteToStatePresentation extends React.Component<Props, {}> {
+    /**
+     * Invoked once, both on the client and server, immediately before the initial rendering occurs.
+     */
     public componentWillMount(): void {
         const { params, onRouteChange } = this.props;
         onRouteChange(this.paramsToState(params));
     }
 
+    /**
+     * Invoked immediately after the component's updates are flushed to the DOM. This method is not called for the initial render.
+     */
     public shouldComponentUpdate(nextProps: Props): boolean {
         return this.routeChanged(this.props.params, nextProps.params)
             && !this.routeEqualsToState(nextProps);
     }
 
+    /**
+     * Invoked immediately after updating.
+     */
     public componentDidUpdate(): void {
         const { params, onRouteChange } = this.props;
         onRouteChange(this.paramsToState(params));
     }
 
+    /**
+     * Render the component
+     *
+     * @returns {JSX.Element}
+     */
     public render(): JSX.Element {
         return <div />;
     }
@@ -61,8 +93,13 @@ const mapDispatchToProps = {
     onRouteChange: publicationRouteChanged
 };
 
+/**
+ * Connector of Route to state component for Redux
+ *
+ * @export
+ */
 export const RouteToState = withRouter(
-    connect(mapStateToProps, mapDispatchToProps)(RouteToState1)
+    connect(mapStateToProps, mapDispatchToProps)(RouteToStatePresentation)
 );
 
 function compareProps(props1: {}, props2: {}): boolean {

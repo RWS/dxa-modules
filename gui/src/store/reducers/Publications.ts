@@ -2,10 +2,22 @@ import { PUBLICATIONS_LOADED } from "../actions/Actions";
 import { IPublication } from "interfaces/Publication";
 import { handleAction, combineReducers } from "./CombineReducers";
 
+/**
+ * Publications dictionary based on id
+ *
+ * @export
+ * @interface IPagesMap
+ */
 export interface IPublicationsIdMap {
     [id: string]: IPublication;
 };
 
+/**
+ * Publications interface in the state
+ *
+ * @export
+ * @interface IPageState
+ */
 export interface IPublicationsState {
     byId: IPublicationsIdMap;
 };

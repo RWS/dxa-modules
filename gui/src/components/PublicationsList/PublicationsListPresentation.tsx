@@ -1,18 +1,18 @@
 import * as React from "react";
 import { Promise } from "es6-promise";
 import { Link } from "react-router";
-import { IPublication } from "interfaces/Publication";
-import { ITaxonomy } from "interfaces/Taxonomy";
-import { ActivityIndicator, Button } from "sdl-controls-react-wrappers";
 import { ButtonPurpose } from "sdl-controls";
+import { ActivityIndicator, Button } from "sdl-controls-react-wrappers";
+
 import { Error } from "components/presentation/Error";
 import { TilesList } from "components/container/TilesList";
 import { ITile } from "components/presentation/Tile";
-
 import { IAppContext } from "components/container/App";
 import { FetchPublications } from "components/helpers/FetchPublications";
-
 import { Url } from "utils/Url";
+
+import { IPublication } from "interfaces/Publication";
+import { ITaxonomy } from "interfaces/Taxonomy";
 
 import "components/container/styles/PublicationsList";
 
@@ -29,6 +29,7 @@ export interface IPublicationsListPropsParams {
      * Product family title
      *
      * @type {string}
+     * @memberOf IPublicationsListPropsParams
      */
     productFamily?: string;
 }
@@ -44,9 +45,15 @@ export interface IPublicationsListProps {
      * Publications list content props parameters
      *
      * @type {IPublicationsListPropsParams}
+     * @interface IPublicationsListProps
      */
     params: IPublicationsListPropsParams;
 
+    /**
+     * List of all publications
+     * @type {IPublication[]}
+     * @interface IPublicationsListProps
+     */
     publications: IPublication[];
 }
 
@@ -61,6 +68,7 @@ export interface IPublicationsListState {
      * An error prevented the list from loading
      *
      * @type {string}
+     * @memberOf IPublicationsListState
      */
     error?: string;
 }
@@ -69,17 +77,21 @@ export interface IPublicationsListState {
  * Publications list component
  */
 export class PublicationsListPresentation extends React.Component<IPublicationsListProps, IPublicationsListState> {
-
+    /**
+     * Context types
+     */
     public static contextTypes: React.ValidationMap<IAppContext> = {
         services: React.PropTypes.object.isRequired,
         router: React.PropTypes.object.isRequired
     };
 
+    /**
+     * Global context
+     */
     public context: IAppContext;
 
     /**
      * Creates an instance of Publications list component.
-     *
      */
     constructor() {
         super();
@@ -99,7 +111,7 @@ export class PublicationsListPresentation extends React.Component<IPublicationsL
         const { error } = this.state;
         const { services, router } = this.context;
         const { formatMessage } = services.localizationService;
-        const _retryHandler = (): void => alert("Please update Retry handler"); //this._loadPublicationsList();
+        const _retryHandler = (): void => alert("Please update Retry handler");
 
         const errorButtons = <div>
             <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{ "click": _retryHandler }}>{formatMessage("control.button.retry")}</Button>
@@ -108,31 +120,32 @@ export class PublicationsListPresentation extends React.Component<IPublicationsL
             <section className={"sdl-dita-delivery-publications-list"}>
                 <FetchPublications productFamily={productFamily} />
                 <h1>{productFamily}</h1>
-                {
-                    error ?
-                        <Error
-                            title={formatMessage("error.default.title")}
-                            messages={[formatMessage("error.publications.list.not.found"), formatMessage("error.publications.default.message")]}
-                            buttons={errorButtons} />
-                        : publications ?
-                            (publications.length > 0) ? (
-                                <TilesList viewAllLabel={formatMessage("components.publicationslist.view.all")}
-                                    tiles={publications.map((publication: IPublication) => {
-                                        return {
-                                            title: publication.title,
-                                            id: publication.id,
-                                            loadableContent: () => {
-                                                return this._getLoadableContent(publication.id);
-                                            },
-                                            navigateTo: () => {
-                                                /* istanbul ignore else */
-                                                if (router) {
-                                                    router.push(Url.getPublicationUrl(publication.id, publication.title));
-                                                }
+                {error
+                    ? <Error
+                        title={formatMessage("error.default.title")}
+                        messages={[formatMessage("error.publications.list.not.found"), formatMessage("error.publications.default.message")]}
+                        buttons={errorButtons} />
+                    : publications
+                        ? publications.length > 0
+                            ? (<TilesList viewAllLabel={formatMessage("components.publicationslist.view.all")}
+                                tiles={publications.map((publication: IPublication) => {
+                                    return {
+                                        title: publication.title,
+                                        id: publication.id,
+                                        loadableContent: () => {
+                                            return this._getLoadableContent(publication.id);
+                                        },
+                                        navigateTo: () => {
+                                            /* istanbul ignore else */
+                                            if (router) {
+                                                router.push(Url.getPublicationUrl(publication.id, publication.title));
                                             }
-                                        } as ITile;
-                                    })} />) : <div className={"no-available-publications-label"}>{formatMessage("components.productfamilies.no.published.publications")}</div>
-                            : <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} />}
+                                        }
+                                    } as ITile;
+                                })} />)
+                            : <div className={"no-available-publications-label"}>{formatMessage("components.productfamilies.no.published.publications")}</div>
+                        : <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} />
+                }
             </section>);
     }
 

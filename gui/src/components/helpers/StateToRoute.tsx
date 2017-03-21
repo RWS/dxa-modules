@@ -1,41 +1,88 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { IState } from "store/interfaces/State";
-import { publicationRouteChanged } from "store/actions/Actions";
 import { withRouter, browserHistory } from "react-router";
 import { Url } from "utils/Url";
-import { IPublicationCurrentState } from "store/interfaces/State";
-import { getCurrentPub } from "store/reducers/Reducer";
-import { getPubById, getPageById } from "store/reducers/Reducer";
+import { getCurrentPub, getErrorMessage, getPageById, getPubById } from "store/reducers/Reducer";
+import { publicationRouteChanged } from "store/actions/Actions";
 import { IPublicationContentPropsParams } from "interfaces/PublicationContentPropsParams";
+import { IPublicationCurrentState, IState } from "store/interfaces/State";
 import { isDummyPage } from "utils/Page";
-import { getErrorMessage } from "store/reducers/Reducer";
 
 export interface ISyncParams {
+    /**
+     * Function with the following format to execute when state changes
+     *     `@param   {IPublicationCurrentState}
+     *     `@returns {void}
+     *
+     * @memberOf ISyncParams
+     */
     onStateChange: (publication: IPublicationCurrentState) => {};
+    /**
+     * Parameters
+     *
+     * @type {IPublicationContentPropsParams}
+     * @memberOf ISyncParams
+     */
     params: IPublicationContentPropsParams;
-
+    /**
+     * Current publication title
+     *
+     * @type {string}
+     * @memberOf ISyncParams
+     */
     publicationTitle: string;
-
+    /**
+     * Current page title
+     *
+     * @type {string}
+     * @memberOf ISyncParams
+     */
     pageTitle: string;
-
+    /**
+     * Current anchor pointer
+     *
+     * @type {string}
+     * @memberOf ISyncParams
+     */
     anchor: string;
-
+    /**
+     * Is it a dummy page?
+     *
+     * @type {boolean}
+     * @memberOf ISyncParams
+     */
     dummy: boolean;
 }
 
+/**
+ * State to route props
+ */
 export type Props = IPublicationCurrentState & ISyncParams;
 
-export class StateToRoute1 extends React.Component<Props, {}> {
+/**
+ * State to route component
+ */
+export class StateToRoutePresentation extends React.Component<Props, {}> {
+    /**
+     * Invoked immediately after the component's updates are flushed to the DOM. This method is not called for the initial render.
+     */
     public shouldComponentUpdate(nextProps: Props): boolean {
         return !nextProps.dummy && this.propsToUrl(nextProps) !== this.propsToUrl(this.props);
     }
 
+    /**
+     * Invoked immediately after updating.
+     */
     public componentDidUpdate(): void {
-        // need to use replace if only title was updated, to aboid 2 times back.
+        // need to use replace if only title was updated, to avoid 2 times back.
         browserHistory.push(this.propsToUrl(this.props));
     }
 
+    /**
+     * Render the component
+     *
+     * @returns {JSX.Element}
+     */
     public render(): JSX.Element {
         return (<div />);
     }
@@ -71,6 +118,11 @@ const mapDispatchToProps = {
     onStateChange: publicationRouteChanged
 };
 
+/**
+ * Connector of state to route component for Redux
+ *
+ * @export
+ */
 export const StateToRoute = withRouter(
-    connect(mapStateToProps, mapDispatchToProps)(StateToRoute1)
+    connect(mapStateToProps, mapDispatchToProps)(StateToRoutePresentation)
 );

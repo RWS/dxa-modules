@@ -20,4 +20,9 @@ const mapStateToProps = (state: IState) => {
     };
 };
 
+/**
+ * Connector of Content Language Warining for Redux
+ *
+ * @export
+ */
 export const ContentLanguageWarning = connect(mapStateToProps)(ContentLanguageWarningPresentation);

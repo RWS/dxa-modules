@@ -85,7 +85,6 @@ export interface IHomeProps {
 /**
  * Main component for the application
  */
-
 export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
 
     public static contextTypes: React.ValidationMap<IAppContext> = {
@@ -106,7 +105,6 @@ export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
 
     /**
      * Creates an instance of App.
-     *
      */
     constructor() {
         super();
