@@ -15,6 +15,7 @@ import { Html, IHeader } from "utils/Html";
 import { TcmId } from "utils/TcmId";
 import { Url } from "utils/Url";
 import { debounce } from "utils/Function";
+import Version from "utils/Version";
 
 import "components/container/styles/PublicationContent";
 
@@ -197,78 +198,6 @@ export class PublicationContent extends React.Component<IPublicationContentProps
     }
 
     /**
-     * Invoked once, both on the client and server, immediately before the initial rendering occurs.
-     */
-    public componentWillMount(): void {
-        const { publicationId, pageIdOrPublicationTitle } = this.props.params;
-        const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
-        const { router } = this.context;
-        const { publicationService, pageService } = this.context.services;
-
-        if (pageId) {
-            // Load the page
-            pageService.getPageInfo(publicationId, pageId).then(
-                this._onPageContentRetrieved.bind(this),
-                this._onPageContentRetrievFailed.bind(this));
-        } else {
-            // Select first page in a list of Pubs
-            this._loadTocRootItems(publicationId).then(items => {
-                /* istanbul ignore else */
-                if (!this._isUnmounted) {
-                    const firstItem = items[0];
-                    let url = firstItem.url;
-                    if (url && router) {
-                        router.replace(url);
-                    }
-                }
-            });
-        }
-
-        // Get publication title
-        publicationService.getPublicationById(publicationId).then(
-            pub => {
-                /* istanbul ignore else */
-                if (!this._isUnmounted) {
-                    this.setState({
-                        publicationTitle: pub.title,
-                        selectedProductReleaseVersion: pub.productReleaseVersion || undefined
-                    });
-                }
-            },
-            error => {
-                /* istanbul ignore else */
-                if (!this._isUnmounted) {
-                    // TODO: improve error handling
-                    this.setState({
-                        publicationTitle: error
-                    });
-                }
-            });
-
-        // Get product release versions
-        publicationService.getProductReleaseVersionsByPublicationId(publicationId).then(
-            productReleaseVersions => {
-                /* istanbul ignore else */
-                if (!this._isUnmounted) {
-                    this.setState({
-                        productReleaseVersions
-                    });
-                }
-            }).catch(error => {
-                /* istanbul ignore else */
-                if (!this._isUnmounted) {
-                    // TODO: improve error handling
-                    this.setState({
-                        productReleaseVersions: [{
-                            title: error,
-                            value: ""
-                        }]
-                    });
-                }
-            });
-    }
-
-    /**
      * Invoked when a component is receiving new props. This method is not called for the initial render.
      *
      * @param {IPublicationContentProps} nextProps
@@ -313,6 +242,19 @@ export class PublicationContent extends React.Component<IPublicationContentProps
     }
 
     /**
+     * Invoked immediately after updating occurs. This method is not called for the initial render.
+     *
+     * @param {IPublicationContentProps} prevProps
+     *
+     * @memberOf PublicationContent
+     */
+    public componentDidUpdate(prevProps: IPublicationContentProps): void {
+        if (prevProps.params.publicationId !== this.props.params.publicationId) {
+            this._loadPublication();
+        }
+    }
+
+    /**
      * Render the component
      *
      * @returns {JSX.Element}
@@ -320,7 +262,6 @@ export class PublicationContent extends React.Component<IPublicationContentProps
     public render(): JSX.Element {
         const { isPageLoading, activeTocItemPath, selectedTocItem, publicationTitle,
             activePageHeader, productReleaseVersions, selectedProductReleaseVersion } = this.state;
-        console.log(selectedProductReleaseVersion);
         const { pageIdOrPublicationTitle, pageTitle, pageAnchor } = this.props.params;
         const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
         const { services, router } = this.context;
@@ -339,6 +280,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     onNavigate={(url: string): void => {
                         /* istanbul ignore else */
                         if (router) {
+                            debugger;
                             router.push(url);
                         }
                     }}
@@ -371,9 +313,8 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                         selectedItem={selectedTocItem}
                     />
                     <VersionSelector productReleaseVersions={productReleaseVersions || []}
-                        selectedProductReleaseVersion={selectedProductReleaseVersion} onChange={
-                            releaseVersion => { }
-                        } />
+                        selectedProductReleaseVersion={selectedProductReleaseVersion}
+                        onChange={version => this._navigateToOtherReleaseVersion(publicationId, version)} />
                 </Page>
             </section>
         );
@@ -383,6 +324,8 @@ export class PublicationContent extends React.Component<IPublicationContentProps
      * Invoked once, only on the client (not on the server), immediately after the initial rendering occurs.
      */
     public componentDidMount(): void {
+        this._loadPublication();
+
         if (ReactDOM) {
             const domNode = ReactDOM.findDOMNode(this) as HTMLElement;
             if (domNode) {
@@ -408,6 +351,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
     private _onTocSelectionChanged(sitemapItem: ITaxonomy, path: string[]): void {
         const { router } = this.context;
         const { publicationTitle } = this.state;
+        const { publicationId } = this.props.params;
 
         const updatedState: IPublicationContentState = {
             activeTocItemPath: path,
@@ -424,13 +368,15 @@ export class PublicationContent extends React.Component<IPublicationContentProps
             if (navPath) {
                 let url = navPath;
                 const parsedUrl = Url.parsePageUrl(url);
-                if (parsedUrl && (!parsedUrl.pageTitle || !parsedUrl.publicationTitle)) {
-                    // Use the title of the sitemap item instead of the page
-                    // When using dynamic link resolving these should actually be equal
-                    url = Url.getPageUrl(parsedUrl.publicationId, parsedUrl.pageId, publicationTitle, sitemapItem.title);
-                }
-                if (router.getCurrentLocation().pathname !== url) {
-                    router.push(url);
+                if (parsedUrl && parsedUrl.publicationId === publicationId) {
+                    if (!parsedUrl.pageTitle || !parsedUrl.publicationTitle) {
+                        // Use the title of the sitemap item instead of the page
+                        // When using dynamic link resolving these should actually be equal
+                        url = Url.getPageUrl(parsedUrl.publicationId, parsedUrl.pageId, publicationTitle, sitemapItem.title);
+                    }
+                    if (router.getCurrentLocation().pathname !== url) {
+                        router.push(url);
+                    }
                 }
             }
         }
@@ -563,6 +509,12 @@ export class PublicationContent extends React.Component<IPublicationContentProps
 
     private _loadTocRootItems(publicationId: string, path?: string[]): Promise<ITaxonomy[]> {
         const { services } = this.context;
+
+        this._toc.rootItems = undefined;
+        this.setState({
+            isTocLoading: true
+        });
+
         // Get the data for the Toc
         return services.taxonomyService.getSitemapRoot(publicationId).then(
             items => {
@@ -587,5 +539,93 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     });
                 }
             });
+    }
+
+    private _loadPublication(): void {
+        const { publicationId, pageIdOrPublicationTitle } = this.props.params;
+        const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
+        const { router } = this.context;
+        const { publicationService, pageService } = this.context.services;
+
+        if (pageId) {
+            // Load the page
+            this.setState({
+                isPageLoading: true
+            });
+            pageService.getPageInfo(publicationId, pageId).then(
+                this._onPageContentRetrieved.bind(this),
+                this._onPageContentRetrievFailed.bind(this));
+        } else {
+            // Select first page in a list of Pubs
+            this._loadTocRootItems(publicationId).then(items => {
+                /* istanbul ignore else */
+                if (!this._isUnmounted) {
+                    const firstItem = items[0];
+                    let url = firstItem.url;
+                    if (url && router) {
+                        router.replace(url);
+                    }
+                }
+            });
+        }
+
+        // Get publication title
+        publicationService.getPublicationById(publicationId).then(
+            pub => {
+                /* istanbul ignore else */
+                if (!this._isUnmounted) {
+                    const normalizedVersion = pub.productReleaseVersion ? Version.normalize(pub.productReleaseVersion).toLowerCase().trim() : undefined;
+                    this.setState({
+                        publicationTitle: pub.title,
+                        selectedProductReleaseVersion: normalizedVersion
+                    });
+                }
+            },
+            error => {
+                /* istanbul ignore else */
+                if (!this._isUnmounted) {
+                    // TODO: improve error handling
+                    this.setState({
+                        publicationTitle: error
+                    });
+                }
+            });
+
+        // Get product release versions
+        publicationService.getProductReleaseVersionsByPublicationId(publicationId).then(
+            productReleaseVersions => {
+                /* istanbul ignore else */
+                if (!this._isUnmounted) {
+                    this.setState({
+                        productReleaseVersions
+                    });
+                }
+            }).catch(error => {
+                /* istanbul ignore else */
+                if (!this._isUnmounted) {
+                    // TODO: improve error handling
+                    this.setState({
+                        productReleaseVersions: [{
+                            title: error,
+                            value: ""
+                        }]
+                    });
+                }
+            });
+    }
+
+    private _navigateToOtherReleaseVersion(publicationId: string, releaseVersion: string): void {
+        const { router, services } = this.context;
+        if (router) {
+            services.publicationService.getPublicationById(publicationId).then(currentPub => {
+                services.publicationService.getPublications().then(pubs => {
+                    const matchingPub = pubs.filter(pub => pub.logicalId === currentPub.logicalId &&
+                        Version.normalize(pub.productReleaseVersion || "").trim().toLowerCase() === releaseVersion);
+                    if (matchingPub && matchingPub[0] && matchingPub[0].id !== publicationId) {
+                        router.push(Url.getPublicationUrl(matchingPub[0].id, matchingPub[0].title));
+                    }
+                });
+            });
+        }
     }
 }
