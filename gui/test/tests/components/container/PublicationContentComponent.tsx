@@ -18,6 +18,10 @@ import { PublicationContent } from "src/components/PublicationContent/Publicatio
 
 import { FetchPage } from "components/helpers/FetchPage";
 import { publicationRouteChanged } from "src/store/actions/Actions";
+import { RouteToState } from "src/components/helpers/RouteToState";
+import { hashHistory, Router, Route } from "react-router";
+import { Store } from "redux";
+import { IState } from "src/store/interfaces/State";
 
 const services = {
     pageService: new PageService(),
@@ -27,11 +31,15 @@ const services = {
 const PUBLICATION_ID = "ish:123-1-1";
 
 class PublicationContentComponent extends TestBase {
-
+    private store: Store<IState> | null = null;
     public runTests(): void {
 
         describe(`PublicationContent component tests.`, (): void => {
             const target = super.createTargetElement();
+
+            beforeEach(() => {
+                this.store = configureStore();
+            });
 
             afterEach(() => {
                 const domNode = ReactDOM.findDOMNode(target);
@@ -45,16 +53,17 @@ class PublicationContentComponent extends TestBase {
                 }
             });
 
-            xit("show loading indicator on initial render", (): void => {
+            it("show loading indicator on initial render", (): void => {
                 services.taxonomyService.fakeDelay(true);
                 const publicationContent = this._renderComponent(target);
                 // tslint:disable-next-line:no-any
                 const activityIndicators = TestUtils.scryRenderedComponentsWithType(publicationContent, ActivityIndicator as any);
-                // One indicator for the toc, one for the page
-                expect(activityIndicators.length).toBe(2, "Could not find activity indicators.");
+                // Don't show page loading indicator, because no page is loading
+                expect(activityIndicators.length).toBe(1, "Toc loading indicator is rendered");
             });
 
-            xit("shows toc", (done: () => void): void => {
+            it("shows toc", (done: () => void): void => {
+                // services.taxonomyService.fakeDelay(true);
                 services.taxonomyService.setMockDataToc(null, [
                     {
                         id: "123",
@@ -62,6 +71,7 @@ class PublicationContentComponent extends TestBase {
                         hasChildNodes: false
                     }
                 ]);
+
                 const publicationContent = this._renderComponent(target);
                 // Use a timeout to allow the DataStore to return a promise with the data
                 setTimeout((): void => {
@@ -70,11 +80,7 @@ class PublicationContentComponent extends TestBase {
                     // tslint:disable-next-line:no-any
                     const activityIndicatorsToc = TestUtils.scryRenderedComponentsWithType(toc, ActivityIndicator as any);
                     expect(activityIndicatorsToc.length).toBe(0, "Activity indicator should not be rendered.");
-                    // Page is still loading
-                    const page = TestUtils.findRenderedComponentWithType(publicationContent, PagePresentation);
-                    // tslint:disable-next-line:no-any
-                    const activityIndicatorsPage = TestUtils.scryRenderedComponentsWithType(page, ActivityIndicator as any);
-                    expect(activityIndicatorsPage.length).toBe(1, "Could not find activity indicator.");
+
                     // Check if tree view nodes are there
                     // tslint:disable-next-line:no-any
                     const treeView = TestUtils.findRenderedComponentWithType(toc, TreeView as any);
@@ -114,7 +120,7 @@ class PublicationContentComponent extends TestBase {
                 }, 0);
             });
 
-            xit("updates page content when item is selected from toc", (done: () => void): void => {
+            it("updates page content when item is selected from toc", (done: () => void): void => {
                 services.taxonomyService.setMockDataToc(null, [
                     {
                         id: "1",
@@ -130,21 +136,23 @@ class PublicationContentComponent extends TestBase {
                 ]);
                 const publicationContent = this._renderComponent(target);
 
-                // Spy on the router
-                spyOn(publicationContent.context.router, "push").and.callFake((path: string): void => {
+                const checkLoadedPage = () => {
                     // Check if routing was called with correct params
-                    expect(path).toBe(`/${encodeURIComponent(PUBLICATION_ID)}/12345/mp330/second-el-url`);
+                    const store = this.store as Store<IState>;
+                    const state = store.getState();
+                    console.log(state);
+                    const {publicationId, pageId, anchor } = state.publication;
+
+                    expect(publicationId).toBe(PUBLICATION_ID);
+                    expect(pageId).toBe("12345");
+                    expect(anchor).toBe("");
 
                     // A page load was triggered by changing the selected item in the Toc
                     const page = TestUtils.findRenderedComponentWithType(publicationContent, PagePresentation);
                     const pageNode = ReactDOM.findDOMNode(page) as HTMLElement;
                     expect(pageNode).not.toBeNull("Could not find page.");
-
-                    // tslint:disable-next-line:no-any
-                    const activityIndicators = TestUtils.scryRenderedComponentsWithType(page, ActivityIndicator as any);
-                    expect(activityIndicators.length).toBe(1, "One activity indicator should be rendered.");
                     done();
-                });
+                };
 
                 // Use a timeout to allow the DataStore to return a promise with the data
                 setTimeout((): void => {
@@ -153,16 +161,13 @@ class PublicationContentComponent extends TestBase {
                     // tslint:disable-next-line:no-any
                     const activityIndicatorsToc = TestUtils.scryRenderedComponentsWithType(toc, ActivityIndicator as any);
                     expect(activityIndicatorsToc.length).toBe(0, "Activity indicator should not be rendered.");
-                    // Page is still loading
-                    const page = TestUtils.findRenderedComponentWithType(publicationContent, PagePresentation);
-                    // tslint:disable-next-line:no-any
-                    const activityIndicatorsPage = TestUtils.scryRenderedComponentsWithType(page, ActivityIndicator as any);
-                    expect(activityIndicatorsPage.length).toBe(1, "Could not find activity indicator.");
+
                     // Click second element inside toc
                     // tslint:disable-next-line:no-any
                     const treeView = TestUtils.findRenderedComponentWithType(toc, TreeView as any);
                     const treeNode = ReactDOM.findDOMNode(treeView) as HTMLElement;
                     (treeNode.querySelectorAll(".content")[1] as HTMLDivElement).click();
+                    setTimeout(checkLoadedPage, 110);
                 }, 0);
             });
 
@@ -276,7 +281,8 @@ class PublicationContentComponent extends TestBase {
     }
 
     private _renderComponent(target: HTMLElement, pageId?: string): PublicationContentPresentation {
-        const store = configureStore();
+        const store = this.store as Store<IState>;
+
         store.dispatch(publicationRouteChanged({
             publicationId: PUBLICATION_ID,
             pageId: pageId || ""
@@ -284,14 +290,17 @@ class PublicationContentComponent extends TestBase {
 
         const comp = ReactDOM.render(
             (
-                <ComponentWithContext {...services}>
-                    <Provider store={store}>
-                        <div>
-                            <FetchPage />
-                            <PublicationContent />
-                        </div>
-                    </Provider>
-                </ComponentWithContext>
+                <Provider store={store}>
+                    <ComponentWithContext {...services}>
+                        <Router history={hashHistory}>
+                            <Route path=":publicationId(/:pageIdOrPublicationTitle)(/:publicationTitle)(/:pageTitle)(/:pageAnchor)"
+                                    component={RouteToState} />
+                            <Route path="*" component={() => <div/>} />
+                        </Router>
+                        <FetchPage />
+                        <PublicationContent />
+                    </ComponentWithContext>
+                </Provider>
             ), target) as React.Component<{}, {}>;
         return TestUtils.findRenderedComponentWithType(comp, PublicationContentPresentation) as PublicationContentPresentation;
     }
