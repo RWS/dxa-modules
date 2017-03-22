@@ -274,7 +274,7 @@ class PublicationContentComponent extends TestBase {
                     version: "1",
                     logicalId: "GUID-1",
                     productFamily: "PF",
-                    productReleaseVersion: "PR1",
+                    productReleaseVersion: "PR1"
                 }, {
                     id: "2",
                     title: "Publication2",
