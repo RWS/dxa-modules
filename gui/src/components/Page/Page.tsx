@@ -1,13 +1,17 @@
 import { connect } from "react-redux";
 import { PagePresentation, IPageProps } from "./PagePresentation";
 import { IState } from "store/interfaces/State";
-import { getCurrentPub } from "store/reducers/Reducer";
+import { getCurrentPub, getPubById } from "store/reducers/Reducer";
 import { localization } from "services/common/LocalizationService";
 
-const mapStateToProps = (state: IState, ownProps: IPageProps): {} => ({
-    direction: localization.getDirection(state.language),
-    anchor: getCurrentPub(state).anchor
-});
+const mapStateToProps = (state: IState, ownProps: IPageProps): {} => {
+    const { publicationId, anchor } = getCurrentPub(state);
+    const pub = getPubById(state, publicationId);
+    return {
+        direction: localization.getDirection(pub.language || state.language),
+        anchor: anchor
+    };
+};
 
 /**
  * Connector of Page component for Redux
