@@ -15,10 +15,9 @@ import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 import { Provider } from "react-redux";
 import { configureStore } from "store/Store";
 import { PublicationContent } from "src/components/PublicationContent/PublicationContent";
-import { PUBLICATIONS_LOADED } from "store/actions/Actions";
-// import { RouteToState } from "components/helpers/RouteToState";
-// import { StateToRoute } from "../../../../src/components/helpers/StateToRoute";
+
 import { FetchPage } from "components/helpers/FetchPage";
+import { publicationRouteChanged } from "src/store/actions/Actions";
 
 const services = {
     pageService: new PageService(),
@@ -26,11 +25,6 @@ const services = {
     taxonomyService: new TaxonomyService()
 };
 const PUBLICATION_ID = "ish:123-1-1";
-const PUBLICATION = {
-    id: PUBLICATION_ID,
-    title: "Teset publication",
-    language: "en"
-};
 
 class PublicationContentComponent extends TestBase {
 
@@ -227,7 +221,7 @@ class PublicationContentComponent extends TestBase {
                 }, 0);
             });
 
-            it("updates the toc when the location changes", (done: () => void): void => {
+            it("updates the toc when the current publiction state changes", (done: () => void): void => {
                 const first: ITaxonomy = {
                     id: "1",
                     title: "First page!",
@@ -255,7 +249,7 @@ class PublicationContentComponent extends TestBase {
 
                 services.taxonomyService.setMockDataToc(null, [first, second]);
                 services.pageService.setMockDataPage(null, firstPage);
-                let publicationContent = this._renderComponent(target, first.url);
+                let publicationContent = this._renderComponent(target, first.id);
 
                 const assert = (item: ITaxonomy, ready: () => void): void => {
                     // Use a timeout to allow the DataStore to return a promise with the data
@@ -282,24 +276,17 @@ class PublicationContentComponent extends TestBase {
     }
 
     private _renderComponent(target: HTMLElement, pageId?: string): PublicationContentPresentation {
-        const store = configureStore({
-            publication: {
-                publicationId: PUBLICATION_ID,
-                pageId: pageId || ""
-            }
-        });
-        store.dispatch({
-            type: PUBLICATIONS_LOADED,
-            payload: [PUBLICATION]
-        });
+        const store = configureStore();
+        store.dispatch(publicationRouteChanged({
+            publicationId: PUBLICATION_ID,
+            pageId: pageId || ""
+        }));
 
         const comp = ReactDOM.render(
             (
                 <ComponentWithContext {...services}>
                     <Provider store={store}>
                         <div>
-                            {/*<RouteToState />
-                            <StateToRoute />*/}
                             <FetchPage />
                             <PublicationContent />
                         </div>
