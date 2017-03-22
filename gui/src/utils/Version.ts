@@ -46,6 +46,18 @@ export default class Version {
             return 0;
         };
 
+        const sortByMostVersions = (a: IPublication, b: IPublication): number => {
+            if (a.productReleaseVersion === b.productReleaseVersion) {
+                // In this case the publication with the most versions / release combinations is considered to the ordered higher
+                const publicationsAReleaseVersions = this._distinct(publications.filter(pub => pub.id === a.id).map(pub => pub.productReleaseVersion || null));
+                const publicationsBReleaseVersions = this._distinct(publications.filter(pub => pub.id === b.id).map(pub => pub.productReleaseVersion || null));
+                if (publicationsAReleaseVersions.length !== publicationsBReleaseVersions.length) {
+                    return publicationsAReleaseVersions.length > publicationsBReleaseVersions.length ? -1 : 1;
+                }
+            }
+            return 0;
+        };
+
         const sort = (a: IPublication, b: IPublication) => {
             const versionInTitleA = a.productReleaseVersion && a.productReleaseVersion.match(VERSION_REGEX);
             const versionInTitleB = b.productReleaseVersion && b.productReleaseVersion.match(VERSION_REGEX);
@@ -68,16 +80,6 @@ export default class Version {
 
             const sameVersion = a.version === b.version;
             const sameCreatedOnDate = a.createdOn.getTime() === b.createdOn.getTime();
-
-            if (a.productReleaseVersion === b.productReleaseVersion) {
-                // In this case the publication with the most versions / release combinations is considered to the ordered higher
-                const publicationsAReleaseVersions = publications.filter(pub => pub.id === a.id).map(pub => pub.productReleaseVersion);
-                const publicationsBReleaseVersions = publications.filter(pub => pub.id === b.id).map(pub => pub.productReleaseVersion);
-                if (publicationsAReleaseVersions.length !== publicationsBReleaseVersions.length) {
-                    return publicationsAReleaseVersions.length > publicationsBReleaseVersions.length ? -1 : 1;
-                }
-            }
-
             if (a.id === b.id && !sameVersion) {
                 return this.compareVersion(a.version, b.version) ? -1 : 1;
             } else if (!sameCreatedOnDate) {
@@ -87,7 +89,17 @@ export default class Version {
             }
         };
 
-        const orderedPubs = publications.sort(sort);
+        // First remove the duplicates, the one with the most versions is kept
+        const foundReleaseVersions: (string | null)[] = [];
+        const pubsWithDistinctReleaseVersions = publications.sort(sortByMostVersions).filter(pub => {
+            if (foundReleaseVersions.indexOf(pub.productReleaseVersion || null) === -1) {
+                foundReleaseVersions.push(pub.productReleaseVersion || null);
+                return true;
+            }
+            return false;
+        });
+
+        const orderedPubs = pubsWithDistinctReleaseVersions.sort(sort);
 
         // Convert to a product release version (remove version from end if it's in the correct format)
         const releaseVersions = orderedPubs.map(pub => {
@@ -99,7 +111,7 @@ export default class Version {
             return releaseVersion;
         });
         // Take distinct product release versions
-        return releaseVersions.filter((value, index, self) => self.indexOf(value) === index);
+        return this._distinct(releaseVersions);
     }
 
     /**
@@ -168,5 +180,9 @@ export default class Version {
             return releaseVersionMatch[1];
         }
         return productReleaseVersion;
+    }
+
+    private static _distinct(collection: (string | null)[]): (string | null)[] {
+        return collection.filter((value, index, self) => self.indexOf(value) === index);
     }
 }

@@ -280,7 +280,6 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     onNavigate={(url: string): void => {
                         /* istanbul ignore else */
                         if (router) {
-                            debugger;
                             router.push(url);
                         }
                     }}

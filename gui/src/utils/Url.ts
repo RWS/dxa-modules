@@ -137,10 +137,10 @@ export class Url {
         const parts = url.substring(rootPathValue.length).split("/");
         if (parts.length >= 2) {
             return {
-                publicationId: parts[0],
-                pageId: parts[1],
-                publicationTitle: parts[2],
-                pageTitle: parts[3]
+                publicationId: decodeURIComponent(parts[0]),
+                pageId: decodeURIComponent(parts[1]),
+                publicationTitle: parts[2] ? decodeURIComponent(parts[2]) : undefined,
+                pageTitle:  parts[3] ? decodeURIComponent(parts[3]) : undefined
             };
         }
         return undefined;

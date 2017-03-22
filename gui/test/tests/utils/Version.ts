@@ -130,29 +130,31 @@ describe(`Version tests.`, (): void => {
              */
             {
                 ...defaultPub,
+                id: "2",
                 productFamily: "PF7",
                 productReleaseVersion: "PR7.1",
                 version: "1",
-                createdOn: new Date(defaultPub.createdOn.setFullYear(2014))
-            },
-            {
-                ...defaultPub,
-                productFamily: "PF7",
-                productReleaseVersion: "PR7.2",
-                version: "2",
-                createdOn: new Date(defaultPub.createdOn.setFullYear(2015))
+                createdOn: new Date(defaultPub.createdOn.setFullYear(2018))
             },
             {
                 ...defaultPub,
                 id: "2",
                 productFamily: "PF7",
-                productReleaseVersion: "PR7.1",
-                version: "1",
-                createdOn: new Date(defaultPub.createdOn.setFullYear(2016))
+                productReleaseVersion: "PR7.2",
+                version: "2",
+                createdOn: new Date(defaultPub.createdOn.setFullYear(2019))
             },
             {
                 ...defaultPub,
                 id: "3",
+                productFamily: "PF7",
+                productReleaseVersion: "PR7.1",
+                version: "1",
+                createdOn: new Date(defaultPub.createdOn.setFullYear(2020))
+            },
+            {
+                ...defaultPub,
+                id: "4",
                 productFamily: "PF7",
                 productReleaseVersion: "PR7.3",
                 version: "1",
@@ -192,7 +194,7 @@ describe(`Version tests.`, (): void => {
         expect(Version.sortProductReleaseVersionsByProductFamily("PF8", publications)).toEqual(["v1", null]);
         expect(Version.sortProductReleaseVersionsByProductFamily(null, publications)).toEqual([null]);
         expect(Version.sortProductReleaseVersions(publications)).toEqual([
-            "PR v2", "PR v1.2.0", "PR v1.0.2", "PR v1", "PR7.1", "Web 8", "Tridion 2014", "Tridion 2013SP1", "PR7.2",
+            "PR v2", "PR v1.2.0", "PR v1.0.2", "PR v1", "PR7.2", "PR7.1", "Web 8", "Tridion 2014", "Tridion 2013SP1",
             "Tridion 2013", "First", "PR vx", "PR2.1", "PR3.1", "PR4.1", "PR5.1", "Second", "PR7.3", "v1", "Tridion 98", null
         ]);
     });
