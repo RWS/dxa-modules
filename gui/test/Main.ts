@@ -4,7 +4,7 @@ import "./configuration/Tests.less";
 import "babel-polyfill";
 
 // Import all tests
-// import "test/tests/components/container/AppComponent";
+import "test/tests/components/container/AppComponent";
 import "test/tests/components/container/ErrorContentComponent";
 import "test/tests/components/container/HomeComponent";
 import "test/tests/components/container/ProductFamiliesListComponent";

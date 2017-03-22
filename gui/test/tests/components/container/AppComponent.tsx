@@ -15,6 +15,7 @@ import { configureStore } from "store/Store";
 import { Provider } from "react-redux";
 import { Store } from "redux";
 import { IState } from "store/interfaces/State";
+import { pageLoaded, publicationsLoaded } from "store/actions/Api";
 
 const services = {
     pageService: new PageService(),
@@ -24,13 +25,11 @@ const services = {
 };
 
 class AppComponent extends TestBase {
-    private store: Store<IState>;
     public runTests(): void {
         describe(`App component tests.`, (): void => {
             const target = super.createTargetElement();
 
             afterEach(() => {
-                this.store = configureStore();
                 const domNode = ReactDOM.findDOMNode(target);
                 ReactDOM.unmountComponentAtNode(domNode);
             });
@@ -64,9 +63,8 @@ class AppComponent extends TestBase {
             it("renders publication content component when publication id and page id are set", (): void => {
                 const onRender = function (this: PublicationContentPresentation): JSX.Element {
                     const { publicationId, pageId, publication, page } = this.props;
-
                     if (publicationId === "pub-id-with-page") {
-                        expect(pageId).toBe("page-id");
+                        expect(pageId).toBe("0000001");
                         expect(publication.title).toBe("pub-title");
                         expect(page.title).toBe("page-title");
                     } else {
@@ -87,15 +85,31 @@ class AppComponent extends TestBase {
                 hashHistory.push(Url.getPublicationUrl("pub-id", "pub-title"));
                 expect(TestUtils.findRenderedComponentWithType(app, PublicationContentPresentation)).not.toBeNull();
 
-                hashHistory.push(Url.getPageUrl("pub-id-with-page", "page-id", "pub-title", "page-title"));
+                hashHistory.push(Url.getPageUrl("pub-id-with-page", "0000001", "pub-title", "page-title"));
                 expect(TestUtils.findRenderedComponentWithType(app, PublicationContentPresentation)).not.toBeNull();
             });
         });
     }
 
     private _renderComponent(target: HTMLElement): App {
+        const store: Store<IState> = configureStore();
+
+        store.dispatch(publicationsLoaded([{
+            id: "pub-id-with-page",
+            title: "pub-title"
+        }, {
+            id: "pub-id",
+            title: "pub-title"
+        }]));
+
+        store.dispatch(pageLoaded({
+            id: "0000001",
+            title: "page-title",
+            content: "Page content"
+        }));
+
         return ReactDOM.render(
-                <Provider store={this.store}>
+                <Provider store={store}>
                     <App history={hashHistory} services={services} />
                 </Provider>
             , target) as App;
