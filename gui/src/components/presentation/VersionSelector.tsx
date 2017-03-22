@@ -4,6 +4,7 @@ import { DropdownList } from "sdl-controls-react-wrappers";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 
 import "./styles/VersionSelector";
+import "components/controls/styles/DropdownList";
 
 /**
  * VersionSelector props
@@ -31,7 +32,8 @@ export const VersionSelector: React.StatelessComponent<IVersionSelectorProps> =
                     selectedValue={selectedProductReleaseVersion
                         ? selectedProductReleaseVersion.trim().toLowerCase() : undefined}
                     options={productReleaseVersions || []}
-                    onChange={onChange} />
+                    onChange={onChange}
+                    skin="graphene" />
             </div>
         );
     };
