@@ -420,7 +420,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
     private _loadTocRootItems(publicationId: string, path?: string[]): void {
         const { services } = this.context;
         // Get the data for the Toc
-        this._toc.rootItems = [];
+        this._toc.rootItems = undefined;
         this._toc.error = undefined;
         this.setState({
             activeTocItemPath: undefined,
