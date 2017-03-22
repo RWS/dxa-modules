@@ -134,7 +134,7 @@ export class Url {
             return {
                 publicationId: decodeURIComponent(parts[0]),
                 pageId: parts[1] ? decodeURIComponent(parts[1]) : parts[1],
-                publicationTitle: parts[2] ? decodeURIComponent(parts[2]): parts[2],
+                publicationTitle: parts[2] ? decodeURIComponent(parts[2]) : parts[2],
                 pageTitle: parts[3] ? decodeURIComponent(parts[3]) : parts[3]
             };
         }
