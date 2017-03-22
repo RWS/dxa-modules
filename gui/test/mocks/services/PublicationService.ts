@@ -29,21 +29,28 @@ export class PublicationService implements IPublicationService {
         title: "MP330"
     };
 
-    public getPublications(): Promise<IPublication[]> {
+    public getPublications(productFamily?: string, productReleaseVersion?: string): Promise<IPublication[]> {
         const { error, publications } = this._mockDataPublications;
+        let filteredPublications = publications;
+        if (productFamily) {
+            filteredPublications = filteredPublications.filter(pub => pub.productFamily === productFamily);
+            if (productReleaseVersion) {
+                filteredPublications = filteredPublications.filter(pub => pub.productReleaseVersion === productReleaseVersion);
+            }
+        }
         if (fakeDelay) {
             return new Promise((resolve: (publications?: IPublication[]) => void, reject: (error: string | null) => void) => {
                 if (error) {
                     reject(error);
                 } else {
-                    resolve(publications);
+                    resolve(filteredPublications);
                 }
             });
         } else {
             if (error) {
                 return Promise.reject(error);
             } else {
-                return Promise.resolve(publications);
+                return Promise.resolve(filteredPublications);
             }
         }
     }
@@ -69,6 +76,7 @@ export class PublicationService implements IPublicationService {
 
     public getPublicationById(publicationId: string): Promise<IPublication> {
         const { error, title } = this._mockDataPublication;
+        const publication = this._mockDataPublications.publications.filter(pub => pub.id === publicationId)[0];
         if (fakeDelay) {
             return new Promise((resolve: (info?: IPublication) => void, reject: (error: string | null) => void) => {
                 setTimeout((): void => {
@@ -77,11 +85,8 @@ export class PublicationService implements IPublicationService {
                     }
                     else {
                         resolve({
-                            id: "0",
-                            title,
-                            createdOn: new Date(),
-                            version: "1",
-                            logicalId: "GUID-123"
+                            ...publication,
+                            title
                         });
                     }
                 }, DELAY);
@@ -90,7 +95,10 @@ export class PublicationService implements IPublicationService {
             if (error) {
                 return Promise.reject(error);
             } else {
-                return Promise.resolve({ title });
+                return Promise.resolve({
+                    ...publication,
+                    title
+                });
             }
         }
     }

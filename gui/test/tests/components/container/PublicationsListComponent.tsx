@@ -2,7 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as TestUtils from "react-addons-test-utils";
 import { PublicationsList } from "components/container/PublicationsList";
-import { ActivityIndicator, Button } from "sdl-controls-react-wrappers";
+import { ActivityIndicator, Button, DropdownList } from "sdl-controls-react-wrappers";
 import { TestBase } from "sdl-models";
 import { PublicationService } from "test/mocks/services/PublicationService";
 import { TaxonomyService } from "test/mocks/services/TaxonomyService";
@@ -70,19 +70,22 @@ class PublicationsListComponent extends TestBase {
                     title: "Publication 1",
                     createdOn: new Date(),
                     version: "1",
-                    logicalId: "GUID-123"
+                    logicalId: "GUID-123",
+                    productFamily: "prod-family"
                 }, {
                     id: "2",
                     title: "Publication 2",
                     createdOn: new Date(),
                     version: "1",
-                    logicalId: "GUID-123"
+                    logicalId: "GUID-123",
+                    productFamily: "prod-family"
                 }, {
                     id: "3",
                     title: "Publication 3",
                     createdOn: new Date(),
                     version: "1",
-                    logicalId: "GUID-123"
+                    logicalId: "GUID-123",
+                    productFamily: "prod-family"
                 }];
                 services.publicationService.setMockDataPublications(null, publications);
 
@@ -106,7 +109,8 @@ class PublicationsListComponent extends TestBase {
                     title: "Publication",
                     createdOn: new Date(),
                     version: "1",
-                    logicalId: "GUID-123"
+                    logicalId: "GUID-123",
+                    productFamily: "prod-family"
                 }];
                 services.publicationService.setMockDataPublications(null, publications);
 
@@ -137,7 +141,8 @@ class PublicationsListComponent extends TestBase {
                     title: "Publication",
                     createdOn: new Date(),
                     version: "1",
-                    logicalId: "GUID-123"
+                    logicalId: "GUID-123",
+                    productFamily: "prod-family"
                 }];
                 services.publicationService.setMockDataPublications(null, publications);
                 services.taxonomyService.setMockDataToc(null, [
@@ -196,6 +201,48 @@ class PublicationsListComponent extends TestBase {
                     expect(links[3].textContent).toBe("Title 5");
                     expect(links[4].textContent).toBe("Title 6");
                     done();
+                }, 0);
+            });
+
+            it("can filter on publication release version", (done: () => void): void => {
+                const publications: IPublication[] = [{
+                    id: "1",
+                    title: "Publication1",
+                    createdOn: new Date(),
+                    version: "1",
+                    logicalId: "GUID-1",
+                    productFamily: "PF",
+                    productReleaseVersion: "PR1"
+                }, {
+                    id: "2",
+                    title: "Publication2",
+                    createdOn: new Date(),
+                    version: "1",
+                    logicalId: "GUID-1",
+                    productFamily: "PF",
+                    productReleaseVersion: "PR2"
+                }];
+                services.publicationService.setMockDataPublications(null, publications, [{ title: "PF" }],
+                    [{ title: "PR1", value: "pr1" }, { title: "PR2", value: "pr2" }]);
+                const publicationsList = this._renderComponent(target, "PF");
+
+                // Wait for services to return data
+                setTimeout((): void => {
+                    // tslint:disable-next-line:no-any
+                    const dropdownList = TestUtils.findRenderedComponentWithType(publicationsList, DropdownList as any);
+                    const dropdownListNode = ReactDOM.findDOMNode(dropdownList);
+                    const listItems = dropdownListNode.querySelectorAll("li");
+                    expect(listItems.length).toBe(2);
+
+                    // Spy on the router
+                    spyOn(publicationsList.context.router, "push").and.callFake((path: string): void => {
+                        // Check if routing was called with correct params
+                        expect(path).toBe(`/publications/PF/pr2`);
+                        done();
+                    });
+
+                    // Click on the second release version
+                    listItems[1].click();
                 }, 0);
             });
 
