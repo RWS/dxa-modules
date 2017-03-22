@@ -5,11 +5,11 @@ import { getCurrentPub, getPubById } from "store/reducers/Reducer";
 import { localization } from "services/common/LocalizationService";
 
 const mapStateToProps = (state: IState, ownProps: IPageProps): {} => {
-    const { publicationId, anchor } = getCurrentPub(state);
-    const pub = getPubById(state, publicationId);
+    const { publicationId, anchor } = getCurrentPub(state);
+    const pub = getPubById(state, publicationId);
     return {
-        direction: localization.getDirection(pub.language || state.language),
-        anchor: anchor
+        direction: localization.getDirection(pub.language || state.language),
+        anchor: anchor
     };
 };
 
