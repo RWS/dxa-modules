@@ -11,6 +11,10 @@ import { TaxonomyService } from "test/mocks/services/TaxonomyService";
 import { localization } from "test/mocks/services/LocalizationService";
 import { hashHistory } from "react-router";
 import { isPage } from "utils/Page";
+import { configureStore } from "store/Store";
+import { Provider } from "react-redux";
+import { Store } from "redux";
+import { IState } from "store/interfaces/State";
 
 const services = {
     pageService: new PageService(),
@@ -20,13 +24,13 @@ const services = {
 };
 
 class AppComponent extends TestBase {
-
+    private store: Store<IState>;
     public runTests(): void {
-
         describe(`App component tests.`, (): void => {
             const target = super.createTargetElement();
 
             afterEach(() => {
+                this.store = configureStore();
                 const domNode = ReactDOM.findDOMNode(target);
                 ReactDOM.unmountComponentAtNode(domNode);
             });
@@ -91,7 +95,9 @@ class AppComponent extends TestBase {
 
     private _renderComponent(target: HTMLElement): App {
         return ReactDOM.render(
-                <App history={hashHistory} services={services} />
+                <Provider store={this.store}>
+                    <App history={hashHistory} services={services} />
+                </Provider>
             , target) as App;
     }
 }
