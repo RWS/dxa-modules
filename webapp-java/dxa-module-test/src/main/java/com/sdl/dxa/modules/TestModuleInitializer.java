@@ -46,6 +46,9 @@ import org.springframework.stereotype.Component;
         // https://jira.sdl.com/browse/TSI-1946
         @RegisteredViewModel(viewName = "TSI1946Test", modelClass = Tsi1946TestEntity.class),
 
+        // https://jira.sdl.com/browse/TSI-1947
+        @RegisteredViewModel(viewName = "TSI1947Test", modelClass = TestEntity.class),
+
         // https://jira.sdl.com/browse/TSI-1757
         @RegisteredViewModel(viewName = "TSI1757Test3", modelClass = Tsi1757TestEntity3.class),
         @RegisteredViewModel(modelClass = Tsi1757TestEntity1.class),
