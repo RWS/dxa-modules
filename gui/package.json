@@ -10,9 +10,9 @@
     "react": "~15.3.2",
     "react-dom": "~15.3.2",
     "react-router": "~3.0.0",
-    "sdl-controls": "~0.1.0-5",
-    "sdl-controls-react-wrappers": "~0.1.0-12",
-    "sdl-models": "~0.1.0-4",
+    "sdl-controls": "~0.1.0-30",
+    "sdl-controls-react-wrappers": "~0.1.0-28",
+    "sdl-models": "~0.1.0-6",
     "ts-helpers": "~1.1.2",
     "classnames": "~2.2.5"
   },
