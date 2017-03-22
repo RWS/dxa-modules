@@ -22,17 +22,21 @@ div.sdl-treeview {
         }
         li > div.node {
             > i.expand-collapse {
+                cursor: pointer;
                 .icon-plus-16x16-ico();
             }
             > i.node {
                 display: none;
             }
             &:hover {
-                cursor: pointer;
                 background-color: transparent;
                 border-color: transparent;
-                color: @accentColor1;
+
             }
+        }
+        li:not(.not-active) > div.node:hover {
+            cursor: pointer;
+            color: @accentColor1;
         }
         li.expanded > div.node > i.expand-collapse {
             .icon-cross-16x16-ico();
@@ -40,6 +44,7 @@ div.sdl-treeview {
         li.leaf-node > div.node > i.expand-collapse {
             .icon-dot-16x16-ico();
             visibility: visible;
+            cursor: default;
         }
     }
 }
