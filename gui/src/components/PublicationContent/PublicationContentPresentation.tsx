@@ -8,9 +8,6 @@ import { Toc } from "components/presentation/Toc";
 import { Page } from "components/Page/Page";
 import { Breadcrumbs } from "components/presentation/Breadcrumbs";
 import { ContentLanguageWarning } from "components/ContentLanguageWarning/ContentLanguageWarning";
-import { FetchPublications } from "components/helpers/FetchPublications";
-import { RouteToState } from "components/helpers/RouteToState";
-import { StateToRoute } from "components/helpers/StateToRoute";
 
 import { Html, IHeader } from "utils/Html";
 import { TcmId } from "utils/TcmId";
@@ -110,23 +107,6 @@ export interface IPublicationContentState {
     activePageHeader?: IHeader;
 }
 
-interface ISelectedPage {
-    /**
-     * Content of the current selected page
-     *
-     * @type {string | null}
-     * @memberOf ISelectedPage
-     */
-    content?: string | null;
-    /**
-     * An error prevented the page from rendering
-     *
-     * @type {string | null}
-     * @memberOf ISelectedPage
-     */
-    error?: string | null;
-}
-
 interface IToc {
     /**
      * An error prevented the toc from rendering
@@ -160,7 +140,6 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
     };
 
     public context: IAppContext;
-    private _page: ISelectedPage = {};
     private _toc: IToc = {};
     private _isUnmounted: boolean = false;
     private _topOffset: number = 0;
@@ -193,6 +172,14 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         this._onPageContentRetrieved(page);
     }
 
+    public componentWillMount() {
+        const { publicationId, page } = this.props;
+        this.fetchPublication(publicationId);
+
+        if (isPage(page) && !isDummyPage(page)) {
+            this.fetchPage(page);
+        }
+    }
     /**
      * Invoked when a component is receiving new props. This method is not called for the initial render.
      *
@@ -204,27 +191,11 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
        const { publicationId: nextPubId, page: nextPage, errorMessage} = nextProps;
        if (!isPage(nextPage)) {
             this.fetchPublication(nextPubId);
-       } else if (nextPage && nextPage.content !== page.content && !isDummyPage(nextPage)) {
+       } else if (isPage(nextPage) && nextPage.content !== page.content && !isDummyPage(nextPage)) {
             this.fetchPage(nextPage);
        } else if (errorMessage) {
            this._onPageContentRetrievFailed(errorMessage);
        }
-    }
-
-    /**
-     * Invoked immediately before rendering when new props or state are being received.
-     * This method is not called for the initial render.
-     *
-     * @param {IPublicationContentProps} nextProps Next props
-     * @param {IPublicationContentState} nextState Next state
-     * @returns {void}
-     */
-    public componentWillUpdate(nextProps: IPublicationContentProps, nextState: IPublicationContentState): void {
-        if (nextState.selectedTocItem && !nextState.selectedTocItem.url) {
-            this._page.content = `<h1 class="title topictitle1">${nextState.selectedTocItem.title}</h1>`;
-            //nextState.isPageLoading = false;
-            return;
-        }
     }
 
     /**
@@ -237,18 +208,16 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
 
         const { services, router } = this.context;
         const { publicationId, pageId, page, publication, isPageLoading, errorMessage } = this.props;
-
         const { taxonomyService } = services;
         const { rootItems } = this._toc;
         const tocError = this._toc.error;
+
+        const content = selectedTocItem && !selectedTocItem.url ? `<h1 class="title topictitle1">${selectedTocItem.title}</h1>` : page.content;
         return (
             <section className={"sdl-dita-delivery-publication-content"}>
-                <RouteToState />
-                <StateToRoute />
-                <FetchPublications />
                 <Page
                     showActivityIndicator={isPageLoading}
-                    content={page.content}
+                    content={content}
                     error={errorMessage}
                     onNavigate={(url: string): void => {
                         /* istanbul ignore else */
@@ -339,9 +308,6 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
     private _onPageContentRetrieved(pageInfo: IPage): void {
         const { publicationId } = this.props;
         const { activeTocItemPath, isTocLoading } = this.state;
-        const page = this._page;
-        page.error = null;
-        page.content = pageInfo.content;
 
         // Set the current active path for the tree
         if (Array.isArray(pageInfo.sitemapIds) && pageInfo.sitemapIds.length > 0) {
@@ -372,9 +338,6 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
     private _onPageContentRetrievFailed(error: string): void {
         const { publicationId } = this.props;
         const { isTocLoading } = this.state;
-        const page = this._page;
-        page.error = error;
-        page.content = null;
 
         if (publicationId && isTocLoading) {
             this._loadTocRootItems(publicationId);

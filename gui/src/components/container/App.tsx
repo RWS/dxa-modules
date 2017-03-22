@@ -3,12 +3,16 @@ import { Router, Route, IndexRedirect, History, Redirect } from "react-router";
 import { IServices } from "interfaces/Services";
 import { Home } from "components/Home/Home";
 import { PublicationContent } from "components/PublicationContent/PublicationContent";
-import { PublicationsList } from "components/PublicationsList/PublicationsList";
 import { ProductFamiliesList } from "components/container/ProductFamiliesList";
 import { ErrorContent } from "components/container/ErrorContent";
 
 import { path } from "utils/Path";
 import { IWindow } from "interfaces/Window";
+import { RouteToState } from "components/helpers/RouteToState";
+import { StateToRoute } from "../helpers/StateToRoute";
+import { FetchPublications } from "../helpers/FetchPublications";
+import { FetchPage } from "components/helpers/FetchPage";
+import { PublicationsList } from "../PublicationsList/PublicationsList";
 
 export interface IAppProps {
     /**
@@ -78,7 +82,15 @@ export class App extends React.Component<IAppProps, {}> {
                         <Redirect from="home;jsessionid=*" to="home" />
                         <Route path="home" component={ProductFamiliesList} />
                         <Route path="publications/:productFamily" component={PublicationsList} />
-                        <Route path=":publicationId(/:pageIdOrPublicationTitle)(/:publicationTitle)(/:pageTitle)(/:pageAnchor)" component={PublicationContent} />
+                        <Route path=":publicationId(/:pageIdOrPublicationTitle)(/:publicationTitle)(/:pageTitle)(/:pageAnchor)"
+                            component={() => (
+                                <div>
+                                    <RouteToState />
+                                    <StateToRoute />
+                                    <FetchPublications />
+                                    <FetchPage />
+                                    <PublicationContent />
+                                </div>)} />
                     </Route>
                 </Router>
             );

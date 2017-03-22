@@ -8,7 +8,6 @@ import { Url } from "utils/Url";
 import { path } from "utils/Path";
 import { ContentNavigation, IContentNavigationItem } from "components/presentation/ContentNavigation";
 import { Error } from "components/presentation/Error";
-import { FetchPage } from "components/helpers/FetchPage";
 import { IAppContext } from "components/container/App";
 
 import "components/presentation/styles/Page";
@@ -181,7 +180,6 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
 
         return (
             <div className={"sdl-dita-delivery-page"} style={props.showActivityIndicator ? { overflow: "hidden" } : {}} >
-                <FetchPage />
                 {props.showActivityIndicator ? <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} /> : null}
                 {props.children}
                 <div className={"sdl-dita-delivery-content-navigation-wrapper"}>

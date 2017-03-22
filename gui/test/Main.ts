@@ -8,7 +8,7 @@ import "babel-polyfill";
 import "test/tests/components/container/ErrorContentComponent";
 import "test/tests/components/container/HomeComponent";
 import "test/tests/components/container/ProductFamiliesListComponent";
-// import "test/tests/components/container/PublicationContentComponent";
+import "test/tests/components/container/PublicationContentComponent";
 import "test/tests/components/container/PublicationsListComponent";
 import "test/tests/components/container/TilesListComponent";
 import "test/tests/components/container/TilesListComponent";
