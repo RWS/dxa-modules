@@ -275,8 +275,9 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
             dataType,
             parent: parentNode,
             children: null,
-            load,
-            isSelectable: true
+            load: load,
+            isSelectable: true,
+            canBeActive: true
         }) as ITreeViewNode;
         taxonomyNode.taxonomy = taxonomy;
 
