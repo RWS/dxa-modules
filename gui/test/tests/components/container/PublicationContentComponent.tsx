@@ -92,7 +92,7 @@ class PublicationContentComponent extends TestBase {
                 }, 0);
             });
 
-            xit("renders content for a specific page", (done: () => void): void => {
+            it("renders content for a specific page", (done: () => void): void => {
                 const pageContent = "<div>Page content!</div>";
                 services.taxonomyService.setMockDataToc(null, []);
                 services.pageService.setMockDataPage(null, {
@@ -172,7 +172,7 @@ class PublicationContentComponent extends TestBase {
                 }, 0);
             });
 
-            xit("updates page content with title when a site map item without url is selected", (done: () => void): void => {
+            it("updates page content with title when a site map item without url is selected", (done: () => void): void => {
                 services.taxonomyService.setMockDataToc(null, []);
                 const title = "Some page";
                 const publicationContent = this._renderComponent(target);
@@ -198,7 +198,7 @@ class PublicationContentComponent extends TestBase {
                 }, 0);
             });
 
-            xit("shows an error message when page info fails to load", (done: () => void): void => {
+            it("shows an error message when page info fails to load", (done: () => void): void => {
                 services.taxonomyService.setMockDataToc(null, [{
                     id: "123456",
                     title: "Some page",
@@ -293,7 +293,6 @@ class PublicationContentComponent extends TestBase {
             payload: [PUBLICATION]
         });
 
-        console.log("Ba", store.getState());
         const comp = ReactDOM.render(
             (
                 <ComponentWithContext {...services}>

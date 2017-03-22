@@ -172,7 +172,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         this._onPageContentRetrieved(page);
     }
 
-    public componentWillMount() {
+    public componentWillMount(): void {
         const { publicationId, page } = this.props;
         this.fetchPublication(publicationId);
 

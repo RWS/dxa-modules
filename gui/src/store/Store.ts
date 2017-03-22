@@ -29,7 +29,7 @@ const EMPTY_STATE: IState = {
 
 //need this to reset state for tests
 const resetState = createAction("KARMA_RESET", state => state);
-const resetStateReducer = handleAction("KARMA_RESET", (state: IState, newState: IState): IState => newState, {}); 
+const resetStateReducer = handleAction("KARMA_RESET", (state: IState, newState: IState): IState => newState, {});
 
 let store: Store<IState> | undefined;
 const configureStore = (initialState: {} = {}): Store<IState> => {
