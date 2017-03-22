@@ -22,7 +22,7 @@ import "test/tests/components/presentation/SearchBarComponent";
 import "test/tests/components/presentation/TileComponent";
 import "test/tests/components/presentation/TocComponent";
 import "test/tests/models/PublicationsModel";
-// import "test/tests/Server";
+import "test/tests/Server";
 import "test/tests/services/client/PageService";
 import "test/tests/services/client/PublicationService";
 import "test/tests/services/client/TaxonomyService";
