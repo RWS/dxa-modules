@@ -9,12 +9,22 @@ import { PageService } from "services/server/PageService";
 import { PublicationService } from "services/server/PublicationService";
 import { TaxonomyService } from "services/server/TaxonomyService";
 import { TestBase } from "sdl-models";
+import { configureStore } from "store/Store";
+import { Provider } from "react-redux";
+import { Store } from "redux";
+import { IState } from "store/interfaces/State";
 
 class Server extends TestBase {
-
+    private store: Store<IState>;
     public runTests(): void {
 
         describe(`Server side rendering tests.`, (): void => {
+
+            beforeAll(() => {
+                this.store = configureStore({
+                    language: "en"
+                });
+            });
 
             it("renders", (): void => {
                 const app = renderToString("home");
@@ -33,7 +43,8 @@ class Server extends TestBase {
                     localizationService: localization,
                     taxonomyService: new TaxonomyService()
                 };
-                const app = ReactDOMServer.renderToStaticMarkup(<App history={hashHistory} services={services} />);
+
+                const app = ReactDOMServer.renderToStaticMarkup(<Provider store={this.store}><App history={hashHistory} services={services} /></Provider>);
                 const expected = ReactDOMServer.renderToStaticMarkup((
                     <div className="ltr sdl-dita-delivery-app">
                         <div className="sdl-dita-delivery-nav-mask"></div>
@@ -43,6 +54,7 @@ class Server extends TestBase {
                                     <a href="#/home"></a>
                                 </div>
                                 <div className="spacer"></div>
+                                <div className="sdl-dita-delivery-topbar-expand-nav"><span/></div>
                                 <div className="sdl-dita-delivery-topbar-expand-search"><span></span></div>
                                 <div className="sdl-dita-delivery-topbar-language"><span></span></div>
                                 <div className="sdl-dita-delivery-dropdown">
@@ -53,14 +65,14 @@ class Server extends TestBase {
                                     <div className="dropdown-menu">
                                         <div className="dropdown-arrow"></div>
                                         <ul className="dropdown-items">
-                                            <li className="active"><a href="#">English<span className="checked"></span></a></li>
-                                            <li><a href="#">Deutsch</a></li>
-                                            <li><a href="#">Nederlands</a></li>
-                                            <li><a href="#">Русский</a></li>
-                                            <li><a href="#">ქართული</a></li>
-                                            <li><a href="#">עברית</a></li>
-                                            <li><a href="#">العربية</a></li>
-                                            <li><a href="#">中文</a></li>
+                                            <li className="active"><a>English<span className="checked"></span></a></li>
+                                            <li><a>Deutsch</a></li>
+                                            <li><a>Nederlands</a></li>
+                                            <li><a>Русский</a></li>
+                                            <li><a>ქართული</a></li>
+                                            <li><a>עברית</a></li>
+                                            <li><a>العربية</a></li>
+                                            <li><a>中文</a></li>
                                         </ul>
                                     </div>
                                     <select>
@@ -82,29 +94,36 @@ class Server extends TestBase {
                                 <div className="search-button"></div>
                             </div>
                         </div>
-                        <section className="sdl-dita-delivery-publication-content">
-                            <div className="sdl-dita-delivery-page" style={{ overflow: "hidden" }}><span><div></div></span>
-                                <div className="sdl-dita-delivery-navigation-menu">
-                                    <nav className="sdl-dita-delivery-toc"><span><div></div></span><span className="separator"></span></nav>
+                        <div>
+                            <div/>
+                            <div/>
+                            <div/>
+                            <div/>
+                            <section className="sdl-dita-delivery-publication-content">
+                                <div className="sdl-dita-delivery-page">
+                                    <div className="sdl-dita-delivery-navigation-menu">
+                                        <nav className="sdl-dita-delivery-toc"><span><div></div></span><span className="separator"></span></nav>
+                                    </div>
+                                    <div className="sdl-dita-delivery-breadcrumbs">
+                                        <ul>
+                                            <li>
+                                                <a className="home" title="Home" href="#/home">Home</a><span className="separator"></span>
+                                            </li>
+                                            <li>
+                                                <a title="" href="#/123"></a><span className="separator"></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div/>
+                                    <div className="sdl-dita-delivery-content-navigation-wrapper">
+                                        <nav className="sdl-dita-delivery-content-navigation"></nav>
+                                    </div>
+                                    <article>
+                                        <article className="ltr page-content"></article>
+                                    </article>
                                 </div>
-                                <div className="sdl-dita-delivery-breadcrumbs">
-                                    <ul>
-                                        <li>
-                                            <a className="home" title="Home" href="#/home">Home</a><span className="separator"></span>
-                                        </li>
-                                        <li>
-                                            <a title="" href="#/123"></a><span className="separator"></span>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div className="sdl-dita-delivery-content-navigation-wrapper">
-                                    <nav className="sdl-dita-delivery-content-navigation"></nav>
-                                </div>
-                                <article>
-                                    <article className="page-content ltr"></article>
-                                </article>
-                            </div>
-                        </section>
+                            </section>
+                        </div>
                     </div>));
                 expect(app).toBe(expected);
             });
