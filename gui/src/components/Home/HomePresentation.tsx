@@ -168,7 +168,7 @@ export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
 
         // This is a HACK!!! Not a fan of it, but it is quick fix for now
         // Get child props params for recognize route - It is weird!
-        /* tslint:disable-line:no-any */
+        // tslint:disable-next-line:no-any
         const children = this.props.children as any;
         const isPublicationContent = children.props.params && children.props.params.publicationId;
         const hasPublication = isPublicationContent !== undefined;
