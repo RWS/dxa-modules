@@ -164,9 +164,14 @@ export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
      */
     public render(): JSX.Element {
         const { isNavOpen, searchIsOpen, searchIsOpening, searchIsActive, searchTitle } = this.state;
-        const { children, direction, publicationId } = this.props;
+        const { direction } = this.props;
 
-        const hasPublication = publicationId !== undefined;
+        // This is a HACK!!! Not a fan of it, but it is quick fix for now
+        // Get child props params for recognize route - It is weird!
+        /* tslint: disable:no-any */
+        const children = this.props.children as any;
+        const isPublicationContent = children.props.params && children.props.params.publicationId;
+        const hasPublication = isPublicationContent !== undefined;
 
         const appClass = ClassNames(direction || "ltr", "sdl-dita-delivery-app", {
             "open": hasPublication && isNavOpen,
