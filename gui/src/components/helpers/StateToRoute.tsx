@@ -65,6 +65,7 @@ export type Props = IPublicationCurrentState & ISyncParams;
 export class StateToRoutePresentation extends React.Component<Props, {}> {
     /**
      * Invoked immediately after the component's updates are flushed to the DOM. This method is not called for the initial render.
+     * Checks is we need to update location if route changed.
      */
     public shouldComponentUpdate(nextProps: Props): boolean {
         return !nextProps.dummy && this.propsToUrl(nextProps) !== this.propsToUrl(this.props);
@@ -72,10 +73,17 @@ export class StateToRoutePresentation extends React.Component<Props, {}> {
 
     /**
      * Invoked immediately after updating.
+     * Updates locating, decides if it need to add to histore or replace last item in a history.
      */
-    public componentDidUpdate(): void {
-        // need to use replace if only title was updated, to avoid 2 times back.
-        browserHistory.push(this.propsToUrl(this.props));
+    public componentDidUpdate(prevProps: Props): void {
+        const props = this.props;
+        if (prevProps.publicationId !== props.publicationId
+        || prevProps.anchor !== props.anchor
+        || prevProps.pageId !== "" && prevProps.pageId !== props.pageId) {
+            browserHistory.push(this.propsToUrl(props));
+        } else {
+            browserHistory.replace(this.propsToUrl(props));
+        }
     }
 
     /**
