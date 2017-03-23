@@ -7,6 +7,7 @@
   "components.searchbar.publication.placeholder": "Zoeken in ‘{0}’",
   "components.contentnavigation.title": "Inhoud",
   "components.tiles.more": "Bekijk meer",
+  "components.page.nothing.selected": "Gelieve een pagina te selecteren in de inhoudstafel.",
   "components.productfamilies.unknown.title": "Onbekende product",
   "components.productfamilies.unknown.description": "Publicaties die nog niet zijn gekoppeld aan een specifiek product",
   "components.productfamilies.no.published.publications": "Nog geen publicaties verschenen",

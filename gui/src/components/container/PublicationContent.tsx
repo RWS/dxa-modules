@@ -204,6 +204,11 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     let url = firstItem.url;
                     if (url && router) {
                         router.replace(url);
+                    } else {
+                        // The first item has no page so stop loading the page
+                        this.setState({
+                            isPageLoading: false
+                        });
                     }
                 }
             });
@@ -268,7 +273,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
      */
     public componentWillUpdate(nextProps: IPublicationContentProps, nextState: IPublicationContentState): void {
         if (nextState.selectedTocItem && !nextState.selectedTocItem.url) {
-            this._page.content = `<h1 class="title topictitle1">${nextState.selectedTocItem.title}</h1>`;
+            this._page.content = null;
             nextState.isPageLoading = false;
             return;
         }
