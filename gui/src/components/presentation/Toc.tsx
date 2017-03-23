@@ -281,7 +281,7 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
             children: null,
             load: load,
             isSelectable: true,
-            canBeActive: true
+            canBeActive: (taxonomy.url != null)
         }) as ITreeViewNode;
         taxonomyNode.taxonomy = taxonomy;
 
