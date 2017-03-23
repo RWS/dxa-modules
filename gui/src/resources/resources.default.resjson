@@ -7,6 +7,7 @@
   "components.searchbar.publication.placeholder": "Search in ‘{0}’",
   "components.contentnavigation.title": "Contents",
   "components.tiles.more": "View more",
+  "components.page.nothing.selected": "No page selected. Please select an item from the table of contents.",
   "components.productfamilies.no.published.publications": "No publications published yet",
   "components.productfamilies.view.all": "View all products",
   "components.publicationslist.view.all": "View all publications",

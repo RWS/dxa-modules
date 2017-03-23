@@ -54,7 +54,8 @@ class PublicationContentComponent extends TestBase {
                     {
                         id: "123",
                         title: "First element",
-                        hasChildNodes: false
+                        hasChildNodes: false,
+                        url: "some/url"
                     }
                 ]);
                 const publicationContent = this._renderComponent(target);
@@ -114,7 +115,8 @@ class PublicationContentComponent extends TestBase {
                     {
                         id: "1",
                         title: "First element",
-                        hasChildNodes: false
+                        hasChildNodes: false,
+                        url: "some/url"
                     },
                     {
                         id: "2",
@@ -161,14 +163,13 @@ class PublicationContentComponent extends TestBase {
                 }, 0);
             });
 
-            it("updates page content with title when a site map item without url is selected", (done: () => void): void => {
+            it("updates page content with no page selected message when a site map item without url is selected", (done: () => void): void => {
                 services.taxonomyService.setMockDataToc(null, []);
-                const title = "Some page";
                 const publicationContent = this._renderComponent(target);
                 publicationContent.setState({
                     selectedTocItem: {
                         id: "12345",
-                        title: title,
+                        title: "Some page",
                         hasChildNodes: true
                     }
                 });
@@ -180,9 +181,9 @@ class PublicationContentComponent extends TestBase {
                     expect(activityIndicators.length).toBe(0, "Activity indicator should not be rendered.");
                     const page = TestUtils.findRenderedComponentWithType(publicationContent, Page);
                     const pageNode = ReactDOM.findDOMNode(page) as HTMLElement;
-                    const pageTitleNode = pageNode.querySelector("h1") as HTMLElement;
-                    expect(pageTitleNode).not.toBeNull("Could not find page title.");
-                    expect(pageTitleNode.textContent).toBe(title);
+                    const pageContentNode = pageNode.querySelector(".page-content") as HTMLElement;
+                    expect(pageContentNode).not.toBeNull("Could not find page content.");
+                    expect(pageContentNode.textContent).toBe("mock-components.page.nothing.selected");
                     done();
                 }, 0);
             });

@@ -163,9 +163,9 @@ export class Page extends React.Component<IPageProps, IPageState> {
         const _goHome = (): void => props.onNavigate(path.getRootPath());
         const _retryHandler = () => url && props.onNavigate(url);
         const errorButtons = <div>
-                <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{"click": _goHome}}>{formatMessage("components.breadcrumbs.home")}</Button>
-                <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{"click": _retryHandler}}>{formatMessage("control.button.retry")}</Button>
-            </div>;
+            <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{ "click": _goHome }}>{formatMessage("components.breadcrumbs.home")}</Button>
+            <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{ "click": _retryHandler }}>{formatMessage("control.button.retry")}</Button>
+        </div>;
         const errorTitle = formatMessage("error.default.title");
         const errorMessages = [
             formatMessage("error.page.not.found"),
@@ -185,7 +185,8 @@ export class Page extends React.Component<IPageProps, IPageState> {
                             title={errorTitle}
                             messages={errorMessages}
                             buttons={errorButtons} />
-                        : <article className={"page-content ltr"} dangerouslySetInnerHTML={{ __html: props.content || "" }} />}
+                        : <article className={"page-content ltr"}
+                            dangerouslySetInnerHTML={{ __html: props.content || formatMessage("components.page.nothing.selected") }} />}
                 </article>
             </div >
         );

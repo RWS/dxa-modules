@@ -175,7 +175,11 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
                     </li>
                     <li>
                         <Link title={publicationTitle} to={`${Url.getPublicationUrl(publicationId, publicationTitle)}`}>{publicationTitle}</Link>
-                        <span className="separator" />
+                        {
+                            Array.isArray(itemPath) && itemPath.length > 0 ?
+                                <span className="separator" />
+                                : null
+                        }
                     </li>
                     {
                         Array.isArray(itemPath) && (
