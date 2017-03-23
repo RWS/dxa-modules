@@ -1,4 +1,4 @@
-/* tslint: disable:no-any */
+/* tslint:disable:no-any */
 
 /**
  * Redux combineReducers with allowed global state for subreducers
