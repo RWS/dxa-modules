@@ -1,8 +1,11 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { ErrorContent, IErrorContentProps } from "components/container/ErrorContent";
+import { ErrorContent } from "components/container/ErrorContent/ErrorContent";
+import { IErrorContentProps } from "components/container/ErrorContent/ErrorContentPresentation";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 import { TestBase } from "sdl-models";
+import { configureStore } from "store/Store";
+import { Provider } from "react-redux";
 
 class ErrorContentComponent extends TestBase {
 
@@ -50,7 +53,8 @@ class ErrorContentComponent extends TestBase {
     }
 
     private _renderComponent(props: IErrorContentProps, target: HTMLElement): void {
-        ReactDOM.render(<ComponentWithContext><ErrorContent {...props} /></ComponentWithContext>, target) as React.Component<{}, {}>;
+        const store = configureStore();
+        ReactDOM.render(<Provider store={store}><ComponentWithContext><ErrorContent {...props} /></ComponentWithContext></Provider>, target) as React.Component<{}, {}>;
     }
 }
 

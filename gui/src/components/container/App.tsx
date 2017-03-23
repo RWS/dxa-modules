@@ -4,7 +4,7 @@ import { IServices } from "interfaces/Services";
 import { Home } from "components/Home/Home";
 import { PublicationContent } from "components/PublicationContent/PublicationContent";
 import { ProductFamiliesList } from "components/container/ProductFamiliesList";
-import { ErrorContent } from "components/container/ErrorContent";
+import { ErrorContent } from "components/container/ErrorContent/ErrorContent";
 
 import { path } from "utils/Path";
 import { IWindow } from "interfaces/Window";

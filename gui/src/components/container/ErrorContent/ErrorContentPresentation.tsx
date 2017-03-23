@@ -24,6 +24,14 @@ export interface IErrorContentProps {
      * @type {IError}
      */
     error?: IError;
+
+    /**
+     * Content direction
+     *
+     * @type {("ltr" | "rtl")}
+     * @memberOf IErrorContentProps
+     */
+    direction?: "ltr" | "rtl";
 }
 
 /**
@@ -33,25 +41,21 @@ export interface IErrorContentProps {
  * @param {IErrorContentProps} props
  * @returns {JSX.Element}
  */
-export const ErrorContent: React.StatelessComponent<IErrorContentProps> = (props: IErrorContentProps, context: IAppContext): JSX.Element => {
-    const { formatMessage, getDirection } = context.services.localizationService;
+export const ErrorContentPresentation: React.StatelessComponent<IErrorContentProps> = (props: IErrorContentProps, context: IAppContext): JSX.Element => {
+    const { formatMessage } = context.services.localizationService;
     const _goHome = (): void => window.location.replace(path.getRootPath());
-    const languageDirection = getDirection("en");
 
     const errorButtons = <div>
             <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{"click": _goHome}}>{formatMessage("components.breadcrumbs.home")}</Button>
         </div>;
 
-    const error = props.error;
+    const { error, direction } = props;
     const errorMessages = [formatMessage("error.url.not.found"), formatMessage("error.default.message")];
     const errorTitle = error && error.statusCode ?
         `${error.statusCode} - ${formatMessage("error.default.title")}` :
         formatMessage("error.default.title");
 
-    const appClass = ClassNames({
-            [languageDirection]: true,
-            "sdl-dita-delivery-error-content": true
-        });
+    const appClass = ClassNames(direction, "sdl-dita-delivery-error-content");
 
     return (
         <section className={appClass}>
@@ -68,6 +72,6 @@ export const ErrorContent: React.StatelessComponent<IErrorContentProps> = (props
     );
 };
 
-ErrorContent.contextTypes = {
+ErrorContentPresentation.contextTypes = {
     services: React.PropTypes.object.isRequired
 } as React.ValidationMap<IAppContext>;
