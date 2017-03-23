@@ -140,7 +140,6 @@ class PublicationContentComponent extends TestBase {
                     // Check if routing was called with correct params
                     const store = this.store as Store<IState>;
                     const state = store.getState();
-                    console.log(state);
                     const {publicationId, pageId, anchor } = state.publication;
 
                     expect(publicationId).toBe(PUBLICATION_ID);
