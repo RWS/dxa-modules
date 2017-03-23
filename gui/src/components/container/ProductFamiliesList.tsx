@@ -93,9 +93,9 @@ export class ProductFamiliesList extends React.Component<{}, IProductFamiliesLis
                                     tiles={productFamilies.map((productFamily: IProductFamily) => {
                                         return {
                                             title: productFamily.title,
-                                            loadableContent: () => {
+                                            loadableContent: productFamily.description ? (() => {
                                                 return Promise.resolve(productFamily.description);
-                                            },
+                                            }) : undefined,
                                             hasWarning: productFamily.hasWarning,
                                             navigateTo: () => {
                                                 /* istanbul ignore else */
