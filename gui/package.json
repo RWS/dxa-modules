@@ -65,15 +65,15 @@
     "typescript": "~2.2.1",
     "typings-core": "~1.4.0",
     "url-loader": "~0.5.7",
-    "webpack": "~2.2.0",
-    "webpack-dev-middleware": "~1.9.0",
-    "webpack-hot-middleware": "~2.15.0",
+    "webpack": "~2.3.1",
+    "webpack-dev-middleware": "~1.10.1",
+    "webpack-hot-middleware": "~2.17.1",
     "webpack-visualizer-plugin": "~0.1.10",
     "yargs": "~4.8.1"
   },
   "scripts": {
     "start": "gulp serve",
-    "build": "gulp",
+    "build": "gulp -- --max_old_space_size=2048",
     "build-server": "gulp build:dist",
     "test": "gulp test",
     "install": "napa"
