@@ -280,7 +280,8 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
             parent: parentNode,
             children: null,
             load: load,
-            isSelectable: true
+            isSelectable: true,
+            canBeActive: (taxonomy.url != null)
         }) as ITreeViewNode;
         taxonomyNode.taxonomy = taxonomy;
 

@@ -64,7 +64,7 @@ class Server extends TestBase {
                                             <a className="home" title="Home" href="#/home">Home</a><span className="separator"></span>
                                         </li>
                                         <li>
-                                            <a title="" href="#/123"></a><span className="separator"></span>
+                                            <a title="" href="#/123"></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -72,7 +72,7 @@ class Server extends TestBase {
                                     <nav className="sdl-dita-delivery-content-navigation"></nav>
                                 </div>
                                 <article>
-                                    <article className="page-content ltr"></article>
+                                    <article className="page-content ltr">No page selected. Please select an item from the table of contents.</article>
                                 </article>
                             </div>
                         </section>
