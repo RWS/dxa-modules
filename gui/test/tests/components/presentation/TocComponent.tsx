@@ -154,7 +154,7 @@ class TocComponent extends TestBase {
                         expect(path).toEqual(activeItemPath);
                         done();
                     },
-                    onRetry: () => {}
+                    onRetry: () => { }
                 };
                 this._renderComponent(props, target);
             });
@@ -175,7 +175,7 @@ class TocComponent extends TestBase {
                             expect(path).toEqual([rootItems[0].id]);
                             done();
                         },
-                        onRetry: () => {}
+                        onRetry: () => { }
                     };
                     this._renderComponent(propsReset, target);
                 };
@@ -190,82 +190,48 @@ class TocComponent extends TestBase {
                         expect(path).toEqual(activeItemPath);
                         selectFirstRootNode();
                     },
-                    onRetry: () => {}
+                    onRetry: () => { }
                 };
                 this._renderComponent(props, target);
             });
 
-            // This test should be repurposed
-            // it("can not navigate between regular and abstract pages", (done: () => void): void => {
-            //     // tslint:disable-next-line:no-any
-            //     const treeView = TestUtils.findRenderedComponentWithType(toc, TreeView as any);
-            //     expect(treeView).not.toBeNull();
+            it("can not navigate between regular and abstract pages", (done: () => void): void => {
+                // tslint:disable-next-line:no-any
+                const treeView = TestUtils.findRenderedComponentWithType(toc, TreeView as any);
+                expect(treeView).not.toBeNull();
 
-            //     const switchBetweenChildNodes = (prevProps: ITocProps): void => {
-            //         const firstChildPath = [rootItems[0].id || "", "12345", "12345-nested"]; // regular one
-            //         const secondChildPath = [rootItems[0].id || "", "12345", "12345-nested2"]; // abstract one
-            //         let timesClicked = 0;
-            //         let runAfterOnSelectionChanged: () => void;
-            //         let onSelectionChangedSpy: jasmine.Spy;
-            //         prevProps.onSelectionChanged = (sitemapItem: ITaxonomy, path: string[]): void => {
-            //             if (timesClicked === 1) {
-            //                 expect(path).toEqual(secondChildPath);
-            //             } else if (timesClicked === 2) {
-            //                 expect(path).toEqual(firstChildPath);
-            //             } else {
-            //                 expect(path).toEqual(secondChildPath);
-            //                 expect(onSelectionChangedSpy).toHaveBeenCalledTimes(3);
-            //                 done();
-            //                 return;
-            //             }
-            //             runAfterOnSelectionChanged();
-            //         };
-            //         onSelectionChangedSpy = spyOn(prevProps, "onSelectionChanged").and.callThrough();
-            //         this._renderComponent(prevProps, target);
-            //         const domNode = ReactDOM.findDOMNode(treeView);
-            //         // Select second child by clicking on it
-            //         const selectSecondChildNode = (): void => {
-            //             const secondNestedChildNode = domNode.querySelectorAll(".content").item(3) as HTMLDivElement;
-            //             expect(secondNestedChildNode && secondNestedChildNode.textContent).toBe("NestedChild2");
-            //             timesClicked++;
-            //             secondNestedChildNode.click();
-            //         };
-            //         runAfterOnSelectionChanged = (): void => {
-            //             // Re-render to trigger componentWillReceiveProps update
-            //             // This is needed to test if _isExpanding is set correctly on an update
-            //             prevProps.activeItemPath = secondChildPath;
-            //             this._renderComponent(prevProps, target);
-            //             // Select the the first child again
-            //             const firstNestedChildNode = domNode.querySelectorAll(".content").item(2) as HTMLDivElement;
-            //             expect(firstNestedChildNode && firstNestedChildNode.textContent).toBe("NestedChild1");
-            //             timesClicked++;
-            //             runAfterOnSelectionChanged = (): void => {
-            //                 // Re-render to trigger componentWillReceiveProps update
-            //                 // This is needed to test if _isExpanding is set correctly on an update
-            //                 prevProps.activeItemPath = firstChildPath;
-            //                 this._renderComponent(prevProps, target);
-            //                 // Select second node again
-            //                 selectSecondChildNode();
-            //             };
-            //             firstNestedChildNode.click();
-            //         };
-            //         selectSecondChildNode();
-            //     };
+                const switchBetweenChildNodes = (prevProps: ITocProps): void => {
+                    const onSelectionChangedSpy = spyOn(prevProps, "onSelectionChanged").and.callThrough();
+                    this._renderComponent(prevProps, target);
+                    const domNode = ReactDOM.findDOMNode(treeView);
+                    // Select second child by clicking on it
+                    const selectSecondChildNode = (): void => {
+                        const secondNestedChildNode = domNode.querySelectorAll(".content").item(3) as HTMLDivElement;
+                        expect(secondNestedChildNode && secondNestedChildNode.textContent).toBe("NestedChild2");
+                        secondNestedChildNode.click();
+                        setTimeout((): void => {
+                            // Abstract items cannot be selected
+                            expect(onSelectionChangedSpy).not.toHaveBeenCalled();
+                            done();
+                        }, 100);
+                    };
+                    selectSecondChildNode();
+                };
 
-            //     // Set active item path to a child path
-            //     const activeItemPath = [rootItems[0].id || "", "12345", "12345-nested"];
-            //     const props: ITocProps = {
-            //         loadChildItems: loadChildItems,
-            //         rootItems: rootItems,
-            //         activeItemPath: activeItemPath,
-            //         onSelectionChanged: (sitemapItem: ITaxonomy, path: string[]): void => {
-            //             expect(path).toEqual(activeItemPath);
-            //             switchBetweenChildNodes(props);
-            //         },
-            //         onRetry: () => {}
-            //     };
-            //     this._renderComponent(props, target);
-            // });
+                // Set active item path to a child path
+                const activeItemPath = [rootItems[0].id || "", "12345", "12345-nested"];
+                const props: ITocProps = {
+                    loadChildItems: loadChildItems,
+                    rootItems: rootItems,
+                    activeItemPath: activeItemPath,
+                    onSelectionChanged: (sitemapItem: ITaxonomy, path: string[]): void => {
+                        expect(path).toEqual(activeItemPath);
+                        switchBetweenChildNodes(props);
+                    },
+                    onRetry: () => { }
+                };
+                this._renderComponent(props, target);
+            });
 
             it("correct error component rendering", (done: () => void): void => {
                 toc.setState({
