@@ -14,6 +14,13 @@ import "./ContentLanguageWarning.less";
  */
 export interface IContentLanguageWarningProps {
     /**
+     * Current publication language
+     *
+     * @type {string}
+     * @memberOf IContentLanguageWarningProps
+     */
+    contentLanguage: string;
+    /**
      * Current user interface language
      *
      * @type {string}
@@ -60,10 +67,11 @@ const noContent = (props: IContentLanguageWarningProps): JSX.Element => {
  * @returns {JSX.Element}
  */
 const thereIsContent = (props: IContentLanguageWarningProps): JSX.Element => {
+    const { contentLanguage, uiLanguage } = props;
     const { id: publicationId } = props.languagePublication;
     const { id: pageId } = props.languagePage;
     return <p>
-            {localization.formatMessage("warning.different.language.content", [localization.isoToName(props.uiLanguage)])}&nbsp;
+            {localization.formatMessage("warning.different.language.content", [localization.isoToName(contentLanguage), localization.isoToName(uiLanguage)])}&nbsp;
             <PageLink publicationId={publicationId} pageId={pageId}>
                 {localization.formatMessage("warning.change.language")}
             </PageLink>.

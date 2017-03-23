@@ -13,6 +13,7 @@ const mapStateToProps = (state: IState) => {
     const languagePage = getPageById(state, pageId);
 
     return {
+        contentLanguage,
         uiLanguage: state.language,
         match,
         languagePublication,
