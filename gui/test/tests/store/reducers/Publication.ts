@@ -10,7 +10,7 @@ import { publicationRouteChanged } from "store/actions/Actions";
 class PublicationReducer extends TestBase {
 
     public runTests(): void {
-        describe("Test Language reducer", (): void => {
+        xdescribe("Test Language reducer", (): void => {
             let store: Store<IState>;
 
             //this is basically resets store's state, because of "KARMA_RESET" reducer.
