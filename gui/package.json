@@ -72,10 +72,11 @@
     "yargs": "~4.8.1"
   },
   "scripts": {
-    "start": "gulp serve",
+    "start": "gulp serve -- --max_old_space_size=2048",
     "build": "gulp -- --max_old_space_size=2048",
-    "build-server": "gulp build:dist",
-    "test": "gulp test",
+    "build-server": "gulp build:dist -- --max_old_space_size=2048",
+    "test": "gulp test -- --max_old_space_size=2048",
+    "test-debug": "gulp serve:test -- --max_old_space_size=2048",
     "install": "napa"
   },
   "repository": {
