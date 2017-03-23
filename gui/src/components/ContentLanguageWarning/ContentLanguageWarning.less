@@ -1,25 +1,37 @@
 @import (reference) "~theme-styles";
 @import (reference) "../PublicationContent/PublicationContent.less";
 
-.content-language-warning {
-	margin-bottom: 15px;
-	margin-left: @tocWidth + @defaultMargin + @defaultMargin;
+.sdl-dita-delivery-content-language-warning {
+    margin-bottom: 15px;
+    margin-left: @tocWidth + @defaultMargin + @defaultMargin;
     margin-right: @contentNavWidth + @defaultMargin + @defaultMargin;
+    @media screen and (max-width: @screenLg) {
+        margin-right: @defaultMargin;
+    }
+    @media screen and (max-width: @screenMd) {
+        margin-left: @defaultMargin;
+    }
     .rtl & {
-	    margin-left: @contentNavWidth + @defaultMargin + @defaultMargin;
-    	margin-right: @tocWidth + @defaultMargin + @defaultMargin;
+        margin-left: @contentNavWidth + @defaultMargin + @defaultMargin;
+        margin-right: @tocWidth + @defaultMargin + @defaultMargin;
+        @media screen and (max-width: @screenLg) {
+            margin-left: @defaultMargin;
+        }
+        @media screen and (max-width: @screenMd) {
+            margin-right: @defaultMargin;
+        }
     }
     padding: 5px 15px;
     border: 1px solid @neutralColor5;
     border-radius: 4px;
     background-color: #FCF8E3;
-	color: @neutralColor4;
-	p {
-		.paragraph();
-		font-size: @h3Size;
-	    margin: 5px 0;
-	    a {
-	    	.anchor();
-	    }
-	}
+    color: @neutralColor4;
+    p {
+        .paragraph();
+        font-size: @h3Size;
+        margin: 5px 0;
+        a {
+            .anchor();
+        }
+    }
 }

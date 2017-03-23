@@ -84,5 +84,5 @@ const renderMessage = (props: IContentLanguageWarningProps): JSX.Element => {
  * Content Language Warining
  */
 export const ContentLanguageWarningPresentation = (props: IContentLanguageWarningProps): JSX.Element => {
-    return (props.match) ? <div /> : <div className="content-language-warning"> { renderMessage(props) } </div>;
+    return (props.match) ? <div /> : <div className="sdl-dita-delivery-content-language-warning"> { renderMessage(props) } </div>;
 };
