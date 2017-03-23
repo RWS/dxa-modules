@@ -4,8 +4,11 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const extractCSS = new ExtractTextPlugin('stylesheets/[name].css');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Visualizer = require('webpack-visualizer-plugin');
+const fs = require('fs-extra');
 
 module.exports = (isTest, isDebug) => {
+    const outDir = path.resolve(__dirname + '/dist/assets');
+    fs.ensureDirSync(outDir);
     const entries = {
         main: './src/Main.tsx',
         server: './src/Server.tsx',
@@ -21,7 +24,7 @@ module.exports = (isTest, isDebug) => {
     const config = {
         entry: isTest ? testEntries : entries,
         output: {
-            path: path.resolve(__dirname + '/dist/assets'),
+            path: outDir,
             publicPath: '/app/assets/',
             filename: '[name].bundle.js'
         },
