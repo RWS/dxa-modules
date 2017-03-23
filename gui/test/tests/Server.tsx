@@ -65,24 +65,20 @@ class Server extends TestBase {
                                     <div className="dropdown-menu">
                                         <div className="dropdown-arrow"></div>
                                         <ul className="dropdown-items">
-                                            <li className="active"><a>English<span className="checked"></span></a></li>
                                             <li><a>Deutsch</a></li>
-                                            <li><a>Nederlands</a></li>
-                                            <li><a>Русский</a></li>
-                                            <li><a>ქართული</a></li>
+                                            <li className="active"><a>English<span className="checked"></span></a></li>
                                             <li><a>עברית</a></li>
-                                            <li><a>العربية</a></li>
+                                            <li><a>日本語</a></li>
+                                            <li><a>Nederlands</a></li>
                                             <li><a>中文</a></li>
                                         </ul>
                                     </div>
                                     <select>
-                                        <option selected value="en">English</option>
                                         <option value="de">Deutsch</option>
-                                        <option value="nl">Nederlands</option>
-                                        <option value="ru">Русский</option>
-                                        <option value="ka">ქართული</option>
+                                        <option selected value="en">English</option>
                                         <option value="he">עברית</option>
-                                        <option value="ar">العربية</option>
+                                        <option value="ja">日本語</option>
+                                        <option value="nl">Nederlands</option>
                                         <option value="zh">中文</option>
                                     </select>
                                 </div>
