@@ -3,14 +3,18 @@ import { createAction, Action } from "redux-actions";
 import { IPageService } from "services/interfaces/PageService";
 import { IPublicationService } from "services/interfaces/PublicationService";
 import { IState } from "store/interfaces/State";
-import { PUBLICATIONS_LOADED, PAGE_LOADED, PAGE_LOADING, PAGE_ERROR } from "store/actions/Actions";
+import {PAGE_LOADED, PAGE_LOADING, PAGE_ERROR,
+    PUBLICATIONS_LOADED, PUBLICATIONS_LOADING, PUBLICATIONS_LOADING_ERROR } from "store/actions/Actions";
 
 export { Action };
 
 export const publicationsLoaded = createAction(PUBLICATIONS_LOADED, publications => publications);
 export const pageLoaded = createAction(PAGE_LOADED, pageInfo => pageInfo);
 export const pageLoading = createAction(PAGE_LOADING, pageId => pageId);
-export const pageError = createAction(PAGE_ERROR, (pageId, message) => ({ pageId, message }));
+export const pageError = createAction(PAGE_ERROR, (pageId: string, message: string) => ({ pageId, message }));
+
+export const publicationsLoading = createAction(PUBLICATIONS_LOADING);
+export const publicationsLoadingError = createAction(PUBLICATIONS_LOADING_ERROR);
 
 /**
  * Dispatcher function interface for page \ publications loading
@@ -37,9 +41,13 @@ export interface IDispatcherFunction {
  */
 export const fetchPublications = (publicationService: IPublicationService, productFamily?: string): IDispatcherFunction => {
     return dispatch => {
+        dispatch(publicationsLoading());
         publicationService
             .getPublications(productFamily)
-            .then((publications) => dispatch(publicationsLoaded(publications)));
+            .then(
+                (publications) => dispatch(publicationsLoaded(publications)),
+                (errorMessage) => dispatch(publicationsLoadingError(errorMessage))
+            );
     };
 };
 

@@ -3,20 +3,11 @@ import { connect } from "react-redux";
 import { withRouter, browserHistory } from "react-router";
 import { Url } from "utils/Url";
 import { getCurrentPub, getErrorMessage, getPageById, getPubById } from "store/reducers/Reducer";
-import { publicationRouteChanged } from "store/actions/Actions";
 import { IPublicationContentPropsParams } from "interfaces/PublicationContentPropsParams";
 import { IPublicationCurrentState, IState } from "store/interfaces/State";
 import { isDummyPage } from "utils/Page";
 
 export interface ISyncParams {
-    /**
-     * Function with the following format to execute when state changes
-     *     `@param   {IPublicationCurrentState}
-     *     `@returns {void}
-     *
-     * @memberOf ISyncParams
-     */
-    onStateChange: (publication: IPublicationCurrentState) => {};
     /**
      * Parameters
      *
@@ -122,15 +113,11 @@ const mapStateToProps = (state: IState) => {
     };
 };
 
-const mapDispatchToProps = {
-    onStateChange: publicationRouteChanged
-};
-
 /**
  * Connector of state to route component for Redux
  *
  * @export
  */
 export const StateToRoute = withRouter(
-    connect(mapStateToProps, mapDispatchToProps)(StateToRoutePresentation)
+    connect(mapStateToProps)(StateToRoutePresentation)
 );

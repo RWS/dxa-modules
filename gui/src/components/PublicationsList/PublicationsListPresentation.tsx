@@ -55,6 +55,8 @@ export interface IPublicationsListProps {
      * @interface IPublicationsListProps
      */
     publications: IPublication[];
+
+    isLoading: boolean;
 }
 
 /**
@@ -107,7 +109,7 @@ export class PublicationsListPresentation extends React.Component<IPublicationsL
      */
     public render(): JSX.Element {
         const { productFamily } = this.props.params;
-        const { publications } = this.props;
+        const { publications, isLoading} = this.props;
         const { error } = this.state;
         const { services, router } = this.context;
         const { formatMessage } = services.localizationService;
@@ -125,7 +127,7 @@ export class PublicationsListPresentation extends React.Component<IPublicationsL
                         title={formatMessage("error.default.title")}
                         messages={[formatMessage("error.publications.list.not.found"), formatMessage("error.publications.default.message")]}
                         buttons={errorButtons} />
-                    : publications
+                    : !isLoading
                         ? publications.length > 0
                             ? (<TilesList viewAllLabel={formatMessage("components.publicationslist.view.all")}
                                 tiles={publications.map((publication: IPublication) => {

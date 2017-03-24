@@ -17,7 +17,7 @@ import { configureStore } from "store/Store";
 import { PublicationContent } from "src/components/PublicationContent/PublicationContent";
 
 import { FetchPage } from "components/helpers/FetchPage";
-import { publicationRouteChanged } from "src/store/actions/Actions";
+import { updateCurrentPublication } from "src/store/actions/Actions";
 import { RouteToState } from "src/components/helpers/RouteToState";
 import { hashHistory, Router, Route } from "react-router";
 import { Store } from "redux";
@@ -110,9 +110,9 @@ class PublicationContentComponent extends TestBase {
                     const activityIndicators = TestUtils.scryRenderedComponentsWithType(publicationContent, ActivityIndicator as any);
                     expect(activityIndicators.length).toBe(0, "Activity indicator should not be rendered.");
                     const page = TestUtils.findRenderedComponentWithType(publicationContent, PagePresentation);
-                    // expect(page).not.toBeNull("Could not find page content."); page is an object, it's never equal to string
+                    expect(page).not.toBeNull("Could not find page content.");
                     const pageContentNode = ReactDOM.findDOMNode(page);
-                    // First node is toc, second breadcrumbs, third one is content navigation, fourth is page
+                    // First node is toc, second breadcrumbs, third is wrong lanauge warning, fourth one is content navigation, fifth is page
                     expect(pageContentNode.children.length).toBe(5);
                     expect(pageContentNode.children[4].children.length).toBe(1);
                     expect(pageContentNode.children[4].children[0].innerHTML).toBe(pageContent);
@@ -282,10 +282,7 @@ class PublicationContentComponent extends TestBase {
     private _renderComponent(target: HTMLElement, pageId?: string): PublicationContentPresentation {
         const store = this.store as Store<IState>;
 
-        store.dispatch(publicationRouteChanged({
-            publicationId: PUBLICATION_ID,
-            pageId: pageId || ""
-        }));
+        store.dispatch(updateCurrentPublication(PUBLICATION_ID, pageId));
 
         const comp = ReactDOM.render(
             (

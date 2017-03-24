@@ -2,7 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import { getCurrentPub } from "store/reducers/Reducer";
-import { publicationRouteChanged } from "store/actions/Actions";
+import { updateCurrentPublication } from "store/actions/Actions";
 import { IPublicationContentPropsParams } from "interfaces/PublicationContentPropsParams";
 import { IPublicationCurrentState, IState } from "store/interfaces/State";
 
@@ -90,7 +90,7 @@ export class RouteToStatePresentation extends React.Component<Props, {}> {
 const mapStateToProps = (state: IState) => getCurrentPub(state);
 
 const mapDispatchToProps = {
-    onRouteChange: publicationRouteChanged
+    onRouteChange: ({publicationId, pageId, anchor}: IPublicationCurrentState) => updateCurrentPublication(publicationId, pageId, anchor)
 };
 
 /**

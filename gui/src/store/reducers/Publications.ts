@@ -1,28 +1,10 @@
-import { PUBLICATIONS_LOADED } from "../actions/Actions";
+import { PUBLICATIONS_LOADED, PUBLICATIONS_LOADING } from "store/actions/Actions";
 import { IPublication } from "interfaces/Publication";
-import { handleAction, combineReducers } from "./CombineReducers";
+import { handleAction, combineReducers, combine } from "./CombineReducers";
+import { PUBLICATIONS_LOADING_ERROR } from "store/actions/Actions";
+import { IPublicationsMap, IPublicationsState } from "store/interfaces/State";
 
-/**
- * Publications dictionary based on id
- *
- * @export
- * @interface IPagesMap
- */
-export interface IPublicationsIdMap {
-    [id: string]: IPublication;
-};
-
-/**
- * Publications interface in the state
- *
- * @export
- * @interface IPageState
- */
-export interface IPublicationsState {
-    byId: IPublicationsIdMap;
-};
-
-const buildMap = (currentMap: IPublicationsIdMap, publications: IPublication[]) => Object.assign({}, ...publications.map(publication => ({[publication.id]: publication})));
+const buildMap = (currentMap: IPublicationsMap, publications: IPublication[]) => Object.assign({}, ...publications.map(publication => ({[publication.id]: publication})));
 
 const notFound = (id: string) => ({
     id,
@@ -31,12 +13,25 @@ const notFound = (id: string) => ({
 
 const byId = handleAction(
     PUBLICATIONS_LOADED,
-    (state: IPublicationsIdMap, payload: IPublication[]): IPublicationsIdMap => buildMap(state, payload),
+    (state: IPublicationsMap, payload: IPublication[]): IPublicationsMap => buildMap(state, payload),
     {}
 );
 
+const isLoading = combine(
+    handleAction(PUBLICATIONS_LOADING, () => true, false),
+    handleAction(PUBLICATIONS_LOADED, () => false, false),
+    handleAction(PUBLICATIONS_LOADING_ERROR, () => false, false)
+);
+
+const lastError = combine(
+    handleAction(PUBLICATIONS_LOADING_ERROR, (message: string) => message, ""),
+    handleAction(PUBLICATIONS_LOADED, () => "", "")
+);
+
 export const publications = combineReducers({
-    byId
+    byId,
+    isLoading,
+    lastError
 });
 
 // Selectors
@@ -51,3 +46,6 @@ export const getPubByIdAndLang = (state: IPublicationsState, hostPubId: string, 
     getPubList(state)
     .filter((publication: IPublication) => publication.versionRef === getPubById(state, hostPubId).versionRef)
     .find((publication: IPublication) => publication.language === language) || notFound(hostPubId);
+
+export const isLoadnig = (state: IPublicationsState): boolean => state.isLoading;
+export const getLastError = (state: IPublicationsState): string => state.lastError;

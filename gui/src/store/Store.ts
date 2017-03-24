@@ -19,7 +19,11 @@ const EMPTY_STATE: IState = {
         pageId: "",
         anchor: ""
     },
-    publications: {byId: {}},
+    publications: {
+        byId: {},
+        isLoading: false,
+        lastError: ""
+    },
     pages: {
         byId: {},
         loading: [],

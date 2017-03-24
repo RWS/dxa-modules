@@ -5,12 +5,12 @@ import { TestBase } from "sdl-models";
 import { IState } from "store/interfaces/State";
 import { configureStore } from "store/Store";
 import { getCurrentPub } from "store/reducers/Reducer";
-import { publicationRouteChanged } from "store/actions/Actions";
+import { updateCurrentPublication } from "store/actions/Actions";
 
 class PublicationReducer extends TestBase {
 
     public runTests(): void {
-        xdescribe("Test Language reducer", (): void => {
+        describe("Test Language reducer", (): void => {
             let store: Store<IState>;
 
             //this is basically resets store's state, because of "KARMA_RESET" reducer.
@@ -26,9 +26,9 @@ class PublicationReducer extends TestBase {
                 expect(anchor).toBe("");
             });
 
-            describe("Check publicationRouteChanged", (): void => {
+            describe("Check updateCurrentPublication", (): void => {
                 it("publicationId", (): void => {
-                    store.dispatch(publicationRouteChanged("11111"));
+                    store.dispatch(updateCurrentPublication("11111"));
                     const { publicationId, pageId, anchor } = getCurrentPub(store.getState());
                     expect(publicationId).toBe("11111");
                     expect(pageId).toBe("");
@@ -36,7 +36,7 @@ class PublicationReducer extends TestBase {
                 });
 
                 it("publicationId, pageId", (): void => {
-                    store.dispatch(publicationRouteChanged("11111", "22222"));
+                    store.dispatch(updateCurrentPublication("11111", "22222"));
                     const { publicationId, pageId, anchor } = getCurrentPub(store.getState());
                     expect(publicationId).toBe("11111");
                     expect(pageId).toBe("22222");
@@ -44,7 +44,7 @@ class PublicationReducer extends TestBase {
                 });
 
                 it("publicationId, pageId, anchor", (): void => {
-                    store.dispatch(publicationRouteChanged("11111", "22222", "anchor"));
+                    store.dispatch(updateCurrentPublication("11111", "22222", "anchor"));
                     const { publicationId, pageId, anchor } = getCurrentPub(store.getState());
                     expect(publicationId).toBe("11111");
                     expect(pageId).toBe("22222");

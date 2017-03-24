@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { PublicationContentPresentation } from "./PublicationContentPresentation";
-import { publicationRouteChanged } from "store/actions/Actions";
+import { updateCurrentPublication } from "store/actions/Actions";
 import { getCurrentPub, getPubById, getPageById, getErrorMessage, isPageLoading as isPageLoadingGetter } from "store/reducers/Reducer";
 import { IState } from "store/interfaces/State";
 import { isPage, isDummyPage } from "utils/Page";
@@ -24,7 +24,7 @@ const mapStateToProps = (state: IState) => {
 };
 
 const mapDispatchToProps = {
-    onPulicationChange: publicationRouteChanged
+    onPublicationChange: updateCurrentPublication
 };
 
 /**

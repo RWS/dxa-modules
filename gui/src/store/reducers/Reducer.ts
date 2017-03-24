@@ -18,7 +18,10 @@ export const mainReducer = combineReducers({
 export const getPubList = (state: IState): IPublication[] => Publications.getPubList(state.publications);
 export const getPubById = (state: IState, id: string): IPublication => Publications.getPubById(state.publications, id);
 export const getPubsByLang = (state: IState, language: string): IPublication[] => Publications.getPubsByLang(state.publications, language);
+
+//NOTE: don't like null here, should replace with dummy publication;
 export const getPubByIdAndLang = (state: IState, pubId: string, language: string): IPublication | null => Publications.getPubByIdAndLang(state.publications, pubId, language);
+export const isPubsLoading = (state: IState): boolean => Publications.isLoadnig(state.publications);
 
 // Pages selectors
 export const getPageById = (state: IState, pageId: string): IPage => Pages.getPageById(state.pages, pageId);

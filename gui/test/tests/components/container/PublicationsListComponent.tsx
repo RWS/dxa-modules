@@ -35,7 +35,7 @@ class PublicationsListComponent extends TestBase {
                 }
             });
 
-            xit("show loading indicator on initial render", (): void => {
+            it("show loading indicator on initial render", (): void => {
                 const publicationsList = this._renderComponent(target, []);
                 // tslint:disable-next-line:no-any
                 const activityIndicators = TestUtils.scryRenderedComponentsWithType(publicationsList, ActivityIndicator as any);
@@ -190,12 +190,15 @@ class PublicationsListComponent extends TestBase {
     }
 
     private _renderComponent(target: HTMLElement, publications: IPublication[], productFamily?: string): PublicationsListPresentation {
-        const store = configureStore({ publications});
+        const store = configureStore({});
         const comp = ReactDOM.render(
             (
                 <Provider store={store}> 
                     <ComponentWithContext {...services}>
-                        <PublicationsListPresentation publications={publications} params={{ productFamily: productFamily || "prod-family" }} />
+                        <PublicationsListPresentation
+                            publications={publications}
+                            isLoading={!publications.length}
+                            params={{ productFamily: productFamily || "prod-family"}} />
                     </ComponentWithContext>
                 </Provider>
             ), target) as React.Component<{}, {}>;

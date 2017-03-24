@@ -64,7 +64,7 @@ export interface IPublicationContentProps {
      * @type {Function}
      * @memberOf IPublicationContentProps
      */
-    onPulicationChange?: (publication: {}) => void;
+    onPublicationChange?: (publicationId: string, pageId: string) => void;
 }
 
 /**
@@ -283,7 +283,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
     }
 
     private _onTocSelectionChanged(sitemapItem: ITaxonomy, path: string[]): void {
-        const { onPulicationChange, pageId, publicationId } = this.props;
+        const { onPublicationChange, pageId, publicationId } = this.props;
 
         const updatedState: IPublicationContentState = {
             activeTocItemPath: path,
@@ -297,11 +297,8 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         const navPath = sitemapItem.url;
         const parsedUrl = navPath && Url.parsePageUrl(navPath);
         const pageHasChanged = parsedUrl && (pageId !== parsedUrl.pageId || publicationId !== parsedUrl.publicationId);
-        if (pageHasChanged && parsedUrl && onPulicationChange) {
-            onPulicationChange({
-                publicationId: parsedUrl.publicationId,
-                pageId: parsedUrl.pageId
-            });
+        if (pageHasChanged && parsedUrl && onPublicationChange) {
+            onPublicationChange(parsedUrl.publicationId, parsedUrl.pageId);
         }
     }
 

@@ -1,7 +1,7 @@
 import { getPubByIdAndLang } from "./Reducer";
 import { handleAction, combine } from "./CombineReducers";
 import { IPublicationCurrentState } from "store/interfaces/State";
-import { PUBLICATION_ROUTE_CHANGED, CHANGE_LANGUAGE } from "store/actions/Actions";
+import { UPDATE_CURRENT_PUBLICATION, CHANGE_LANGUAGE } from "store/actions/Actions";
 
 const initailPubState = (id: string = "") => ({
     publicationId: id,
@@ -10,7 +10,7 @@ const initailPubState = (id: string = "") => ({
 });
 
 const patchCurrentPulication = handleAction(
-    PUBLICATION_ROUTE_CHANGED,
+    UPDATE_CURRENT_PUBLICATION,
     (state: IPublicationCurrentState, newPublication: IPublicationCurrentState) => newPublication,
     initailPubState()
 );
