@@ -14,6 +14,7 @@
 @iconSearch: "\e01b";
 @iconClose: "\e00a";
 @iconBack: "\e04f";
+@iconSelect: "\e01C";
 .import-icon-font() {
     font-family: @iconFont;
     src: url('@{iconFontPath}/SDLfont.woff') format('woff');
@@ -93,4 +94,11 @@
     background-repeat: no-repeat;
     width: 24px;
     height: 24px;
+}
+
+.icon-select(@size: 24px) {
+    &:after {
+        .icon-font-default-style(@size);
+        content: @iconSelect;
+    }
 }
