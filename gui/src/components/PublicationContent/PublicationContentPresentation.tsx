@@ -187,15 +187,33 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
      * @returns {void}
      */
     public componentWillReceiveProps(nextProps: Pub): void {
-       const { page } = this.props;
+       const { page, publicationId } = this.props;
        const { publicationId: nextPubId, page: nextPage, errorMessage} = nextProps;
-       if (!isPage(nextPage)) {
-            this.fetchPublication(nextPubId);
-       } else if (isPage(nextPage) && nextPage.content !== page.content && !isDummyPage(nextPage)) {
-            this.fetchPage(nextPage);
-       } else if (errorMessage) {
-           this._onPageContentRetrievFailed(errorMessage);
-       }
+
+        if (publicationId === nextPubId) {
+            if (isPage(nextPage) && nextPage.content !== page.content && !isDummyPage(nextPage)) {
+                this.fetchPage(nextPage);
+            } else if (errorMessage) {
+              this._onPageContentRetrievFailed(errorMessage);
+            }
+        }
+    }
+
+    /**
+     *
+     * @param {Pub} prevProps
+     *
+     * @memberOf PublicationContentPresentation
+     */
+    public componentDidUpdate(prevProps: Pub): void {
+        const { page, publicationId } = this.props;
+
+        if (prevProps.publicationId !== publicationId) {
+            this.fetchPublication(publicationId);
+            if (isPage(page) && !isDummyPage(page)) {
+                this.fetchPage(page);
+            }
+        }
     }
 
     /**
@@ -294,7 +312,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         /* istanbul ignore else */
         const navPath = sitemapItem.url;
         const parsedUrl = navPath && Url.parsePageUrl(navPath);
-        const pageHasChanged = parsedUrl && (pageId !== parsedUrl.pageId || publicationId !== parsedUrl.publicationId);
+        const pageHasChanged = parsedUrl && (pageId !== parsedUrl.pageId && publicationId === parsedUrl.publicationId);
         if (pageHasChanged && parsedUrl && onPublicationChange) {
             onPublicationChange(parsedUrl.publicationId, parsedUrl.pageId);
         }
