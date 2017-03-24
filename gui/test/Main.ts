@@ -36,3 +36,4 @@ import "test/tests/utils/UrlUtil";
 
 // import "test/tests/store/reducers/Language";
 import "test/tests/store/reducers/Publication";
+import "test/tests/store/reducers/Publciations";

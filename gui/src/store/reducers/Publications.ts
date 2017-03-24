@@ -4,7 +4,7 @@ import { handleAction, combineReducers, combine } from "./CombineReducers";
 import { PUBLICATIONS_LOADING_ERROR } from "store/actions/Actions";
 import { IPublicationsMap, IPublicationsState } from "store/interfaces/State";
 
-const buildMap = (currentMap: IPublicationsMap, publications: IPublication[]) => Object.assign({}, ...publications.map(publication => ({[publication.id]: publication})));
+const buildMap = (currentMap: IPublicationsMap, publications: IPublication[]) => Object.assign({}, currentMap, ...publications.map(publication => ({[publication.id]: publication})));
 
 const notFound = (id: string) => ({
     id,

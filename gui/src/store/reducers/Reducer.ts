@@ -23,6 +23,8 @@ export const getPubsByLang = (state: IState, language: string): IPublication[] =
 export const getPubByIdAndLang = (state: IState, pubId: string, language: string): IPublication | null => Publications.getPubByIdAndLang(state.publications, pubId, language);
 export const isPubsLoading = (state: IState): boolean => Publications.isLoadnig(state.publications);
 
+export const getPubListErrorMessage = (state: IState) => Publications.getLastError(state.publications);
+
 // Pages selectors
 export const getPageById = (state: IState, pageId: string): IPage => Pages.getPageById(state.pages, pageId);
 export const getErrorMessage = (state: IState, pageId: string): string => Pages.getErrorMessage(state.pages, pageId);
