@@ -1,6 +1,6 @@
 import { IPublication } from "interfaces/Publication";
 
-const VERSION_REGEX = /^(.*)\((\d+(\.\d)*)\)$/i;
+const VERSION_REGEX = /^(.*)\((\d+(\.\d+)*)\)$/i;
 
 export default class Version {
 
@@ -145,10 +145,10 @@ export default class Version {
                 return true;
             }
 
-            if (v1parts[i] === v2parts[i]) {
+            if (Number(v1parts[i]) === Number(v2parts[i])) {
                 continue;
             }
-            else if (v1parts[i] > v2parts[i]) {
+            else if (Number(v1parts[i]) > Number(v2parts[i])) {
                 return true;
             }
             else {

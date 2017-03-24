@@ -194,7 +194,7 @@ describe(`Version tests.`, (): void => {
         ];
 
         expect(Version.sortProductReleaseVersionsByProductFamily("PF1", publications))
-            .toEqual(["PR v2", "PR v1.2.0", "PR v1.0.2", "PR v1", "PR v1.6.18", "PR v1.11.124", "PR vx"]);
+            .toEqual(["PR v2", "PR v1.11.124", "PR v1.6.18", "PR v1.2.0", "PR v1.0.2", "PR v1", "PR vx"]);
         expect(Version.sortProductReleaseVersionsByProductFamily("PF2", publications)).toEqual(["PR2.1"]);
         expect(Version.sortProductReleaseVersionsByProductFamily("PF3", publications)).toEqual(["PR3.1"]);
         expect(Version.sortProductReleaseVersionsByProductFamily("PF4", publications)).toEqual(["PR4.1"]);
@@ -206,7 +206,7 @@ describe(`Version tests.`, (): void => {
         expect(Version.sortProductReleaseVersionsByProductFamily("PF8", publications)).toEqual(["v1", null]);
         expect(Version.sortProductReleaseVersionsByProductFamily(null, publications)).toEqual([null]);
         expect(Version.sortProductReleaseVersions(publications)).toEqual([
-            "PR v2", "PR v1.2.0", "PR v1.0.2", "PR v1.6.18", "PR v1.11.124", "PR v1", "PR7.2", "PR7.1", "Web 8", "Tridion 2014", "Tridion 2013SP1",
+            "PR v2", "PR v1.11.124", "PR v1.6.18", "PR v1.2.0", "PR v1.0.2", "PR v1", "PR7.2", "PR7.1", "Web 8", "Tridion 2014", "Tridion 2013SP1",
             "Tridion 2013", "First", "PR vx", "PR2.1", "PR3.1", "PR4.1", "PR5.1", "Second", "PR7.3", "v1", "Tridion 98", null
         ]);
     });
