@@ -30,4 +30,5 @@ import "test/tests/utils/Slug";
 import "test/tests/utils/TcmId";
 import "test/tests/utils/UrlUtil";
 import "test/tests/utils/StringUtil";
+import "test/tests/utils/Version";
 import "test/tests/Server";

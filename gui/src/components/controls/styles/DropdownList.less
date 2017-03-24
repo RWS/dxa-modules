@@ -1,0 +1,46 @@
+/* Graphene overwrites for the DropdownList Control */
+
+@import (reference) "~theme-styles";
+div.sdl-dropdownlist {
+    @bgColor: #fff;
+    @itemHeight: 36px;
+    font-family: @fontFamily, @fontFamilyFallback;
+    font-size: @fontSize;
+    color: @neutralColor1;
+    border-color: @neutralColor4;
+    height: @itemHeight;
+    line-height: @itemHeight;
+    border-radius: 4px;
+    box-shadow: none;
+    padding: 0 10px;
+    cursor: pointer;
+    .icon-select(16px);
+    &.open {
+        border-color: @neutralColor4;
+    }
+    >ul {
+        border-color: @neutralColor4;
+        li {
+            height: @itemHeight;
+            line-height: @itemHeight;
+            margin: 0;
+            padding: 0 10px;
+            &.selected {
+                border-style: none;
+                background-color: @bgColor;
+            }
+            &:hover {
+                border-style: none;
+                color: @neutralColor6;
+                background-color: @accentColor1;
+            }
+            &:last-child {
+                margin: 0;
+            }
+        }
+    }
+    &:after {
+        background-image: none;
+        top: 0;
+    }
+}

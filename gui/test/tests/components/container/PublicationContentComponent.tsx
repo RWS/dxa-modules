@@ -5,8 +5,9 @@ import { PublicationContent } from "components/container/PublicationContent";
 import { Toc } from "components/presentation/Toc";
 import { Page } from "components/presentation/Page";
 import { ITaxonomy } from "interfaces/Taxonomy";
+import { IPublication } from "interfaces/Publication";
 import { IPage } from "interfaces/Page";
-import { ActivityIndicator, TreeView } from "sdl-controls-react-wrappers";
+import { ActivityIndicator, TreeView, DropdownList } from "sdl-controls-react-wrappers";
 import { TestBase } from "sdl-models";
 import { PageService } from "test/mocks/services/PageService";
 import { PublicationService } from "test/mocks/services/PublicationService";
@@ -101,10 +102,10 @@ class PublicationContentComponent extends TestBase {
                     const page = TestUtils.findRenderedComponentWithType(publicationContent, Page);
                     expect(page).not.toBeNull("Could not find page content.");
                     const pageContentNode = ReactDOM.findDOMNode(page);
-                    // First node is toc, second breadcrumbs, third one is content navigation, fourth is page
-                    expect(pageContentNode.children.length).toBe(4);
-                    expect(pageContentNode.children[3].children.length).toBe(1);
-                    expect(pageContentNode.children[3].children[0].innerHTML).toBe(pageContent);
+                    // First node is toc, second breadcrumbs, third one is version dropdown, fourth content navigation, fifth is page
+                    expect(pageContentNode.children.length).toBe(5);
+                    expect(pageContentNode.children[4].children.length).toBe(1);
+                    expect(pageContentNode.children[4].children[0].innerHTML).toBe(pageContent);
                     done();
                 }, 0);
             });
@@ -266,15 +267,57 @@ class PublicationContentComponent extends TestBase {
 
             });
 
+            it("can switch to another product release version of the same publication", (done: () => void): void => {
+                const publications: IPublication[] = [{
+                    id: "1",
+                    title: "Publication1",
+                    createdOn: new Date(),
+                    version: "1",
+                    logicalId: "GUID-1",
+                    productFamily: "PF",
+                    productReleaseVersion: "PR1"
+                }, {
+                    id: "2",
+                    title: "Publication2",
+                    createdOn: new Date(),
+                    version: "1",
+                    logicalId: "GUID-1",
+                    productFamily: "PF",
+                    productReleaseVersion: "PR2"
+                }];
+                services.publicationService.setMockDataPublications(null, publications, [{ title: "PF" }],
+                    [{ title: "PR1", value: "pr1" }, { title: "PR2", value: "pr2" }]);
+                const publicationContent = this._renderComponent(target, undefined, "1");
+
+                // Use a timeout to allow the DataStore to return a promise with the data
+                setTimeout((): void => {
+                    // tslint:disable-next-line:no-any
+                    const dropdownList = TestUtils.findRenderedComponentWithType(publicationContent, DropdownList as any);
+                    const dropdownListNode = ReactDOM.findDOMNode(dropdownList);
+                    const listItems = dropdownListNode.querySelectorAll("li");
+                    expect(listItems.length).toBe(2);
+
+                    // Spy on the router
+                    spyOn(publicationContent.context.router, "push").and.callFake((path: string): void => {
+                        // Check if routing was called with correct params
+                        expect(path).toBe(`/2/publication2`);
+                        done();
+                    });
+
+                    // Click on the second release version
+                    listItems[1].click();
+                }, 0);
+            });
+
         });
 
     }
 
-    private _renderComponent(target: HTMLElement, pageId?: string): PublicationContent {
+    private _renderComponent(target: HTMLElement, pageId?: string, publicationId?: string): PublicationContent {
         const comp = ReactDOM.render(
             (
                 <ComponentWithContext {...services}>
-                    <PublicationContent params={{ publicationId: PUBLICATION_ID, pageIdOrPublicationTitle: pageId || "pub-title" }} />
+                    <PublicationContent params={{ publicationId: publicationId || PUBLICATION_ID, pageIdOrPublicationTitle: pageId || "pub-title" }} />
                 </ComponentWithContext>
             ), target) as React.Component<{}, {}>;
         return TestUtils.findRenderedComponentWithType(comp, PublicationContent) as PublicationContent;

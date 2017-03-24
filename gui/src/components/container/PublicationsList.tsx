@@ -2,15 +2,15 @@ import * as React from "react";
 import { Promise } from "es6-promise";
 import { Link } from "react-router";
 import { IPublication } from "interfaces/Publication";
+import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 import { ITaxonomy } from "interfaces/Taxonomy";
 import { ActivityIndicator, Button } from "sdl-controls-react-wrappers";
 import { ButtonPurpose } from "sdl-controls";
 import { Error } from "components/presentation/Error";
 import { TilesList } from "components/container/TilesList";
 import { ITile } from "components/presentation/Tile";
-
 import { IAppContext } from "components/container/App";
-
+import { VersionSelector } from "components/presentation/VersionSelector";
 import { Url } from "utils/Url";
 
 import "components/container/styles/PublicationsList";
@@ -29,7 +29,13 @@ export interface IPublicationsListPropsParams {
      *
      * @type {string}
      */
-    productFamily?: string;
+    productFamily: string;
+    /**
+     * Product release version title
+     *
+     * @type {string}
+     */
+    productReleaseVersion?: string;
 }
 
 /**
@@ -61,6 +67,13 @@ export interface IPublicationsListState {
      */
     publications?: IPublication[];
     /**
+     * Available product release versions for the selected product family
+     *
+     * @type {IProductReleaseVersion[]}
+     * @memberOf IPublicationsListState
+     */
+    productReleaseVersions?: IProductReleaseVersion[];
+    /**
      * An error prevented the list from loading
      *
      * @type {string}
@@ -90,6 +103,7 @@ export class PublicationsList extends React.Component<IPublicationsListProps, IP
         super();
         this.state = {
             publications: undefined,
+            productReleaseVersions: [],
             error: undefined
         };
     }
@@ -98,9 +112,10 @@ export class PublicationsList extends React.Component<IPublicationsListProps, IP
      * Invoked once, both on the client and server, immediately before the initial rendering occurs.
      */
     public componentWillMount(): void {
+        const { productFamily, productReleaseVersion } = this.props.params;
 
         // Load the publications list
-        this._loadPublicationsList();
+        this._loadPublicationsList(productFamily, productReleaseVersion);
     }
 
     /**
@@ -109,15 +124,17 @@ export class PublicationsList extends React.Component<IPublicationsListProps, IP
      * @param {IPublicationContentProps} nextProps
      */
     public componentWillReceiveProps(nextProps: IPublicationsListProps): void {
-        const { productFamily } = this.props.params;
+        const { productFamily, productReleaseVersion } = this.props.params;
+        const { productFamily: nextProductFamily, productReleaseVersion: nextProductReleaseVersion } = nextProps.params;
 
-        if (nextProps.params.productFamily !== productFamily) {
+        if (nextProductFamily !== productFamily ||
+            nextProductReleaseVersion !== productReleaseVersion) {
             this.setState({
                 publications: undefined
             });
 
             // Load the publications list
-            this._loadPublicationsList();
+            this._loadPublicationsList(nextProductFamily, nextProductReleaseVersion);
         }
     }
 
@@ -127,11 +144,11 @@ export class PublicationsList extends React.Component<IPublicationsListProps, IP
      * @returns {JSX.Element}
      */
     public render(): JSX.Element {
-        const { productFamily } = this.props.params;
-        const { publications, error } = this.state;
+        const { productFamily, productReleaseVersion } = this.props.params;
+        const { publications, error, productReleaseVersions } = this.state;
         const { services, router } = this.context;
         const { formatMessage } = services.localizationService;
-        const _retryHandler = (): void => this._loadPublicationsList();
+        const _retryHandler = (): void => this._loadPublicationsList(productFamily, productReleaseVersion);
 
         const errorButtons = <div>
             <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{ "click": _retryHandler }}>{formatMessage("control.button.retry")}</Button>
@@ -139,6 +156,13 @@ export class PublicationsList extends React.Component<IPublicationsListProps, IP
         return (
             <section className={"sdl-dita-delivery-publications-list"}>
                 <h1>{productFamily}</h1>
+                <VersionSelector productReleaseVersions={productReleaseVersions || []}
+                    selectedProductReleaseVersion={productReleaseVersion}
+                    onChange={releaseVersion => {
+                        if (router) {
+                            router.push(Url.getProductFamilyUrl(productFamily, releaseVersion));
+                        }
+                    }} />
                 {
                     error ?
                         <Error
@@ -173,14 +197,25 @@ export class PublicationsList extends React.Component<IPublicationsListProps, IP
         this._isUnmounted = true;
     }
 
-    private _loadPublicationsList(): void {
+    private _loadPublicationsList(productFamily: string, productReleaseVersion?: string): void {
         const { publicationService } = this.context.services;
-        const { productFamily } = this.props.params;
 
-        // Get publications list
-        publicationService.getPublications(productFamily).then(
-            this._onPublicationsListRetrieved.bind(this),
-            this._onPublicationsListRetrieveFailed.bind(this));
+        const loadPublications = (releaseVersion?: string): void => {
+            // Get publications list
+            publicationService.getPublications(productFamily, releaseVersion).then(
+                this._onPublicationsListRetrieved.bind(this),
+                this._onPublicationsListRetrieveFailed.bind(this));
+        };
+
+        publicationService.getProductReleaseVersions(productFamily)
+            .then(releaseVersions => {
+                // In case product release version is not set take the latest version
+                loadPublications(productReleaseVersion || (releaseVersions[0] ? releaseVersions[0].title : productReleaseVersion));
+                this.setState({
+                    productReleaseVersions: releaseVersions
+                });
+            })
+            .catch(this._onPublicationsListRetrieveFailed.bind(this));
     }
 
     private _onPublicationsListRetrieved(publications: IPublication[]): void {

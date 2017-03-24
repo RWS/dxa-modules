@@ -5,10 +5,13 @@ export interface IPage {
     Regions: IRegion[];
 }
 export interface IPublication {
+    CreatedOn: string;
     Id: string;
+    LogicalId: string;
     ProductFamily?: string | null;
     ProductReleaseVersion?: string | null;
     Title: string;
+    Version: string;
 }
 export interface ISitemapItem {
     HasChildNodes: boolean;
