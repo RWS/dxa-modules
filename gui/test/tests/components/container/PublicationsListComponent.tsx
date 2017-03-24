@@ -193,7 +193,7 @@ class PublicationsListComponent extends TestBase {
         const store = configureStore({});
         const comp = ReactDOM.render(
             (
-                <Provider store={store}> 
+                <Provider store={store}>
                     <ComponentWithContext {...services}>
                         <PublicationsListPresentation
                             publications={publications}
