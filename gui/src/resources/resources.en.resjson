@@ -1,4 +1,4 @@
-﻿{
+{
   "app.language": "English",
   "app.publications": "Publications",
   "components.app.loading": "Loading",
@@ -7,6 +7,7 @@
   "components.searchbar.publication.placeholder": "Search in ‘{0}’",
   "components.contentnavigation.title": "Contents",
   "components.tiles.more": "View more",
+  "components.page.nothing.selected": "No page selected. Please select an item from the table of contents.",
   "components.productfamilies.unknown.title": "Unknown product",
   "components.productfamilies.unknown.description": "Publications which are not linked to a specific product yet",
   "components.productfamilies.no.published.publications": "No publications published yet",

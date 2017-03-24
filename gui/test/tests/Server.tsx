@@ -115,7 +115,7 @@ class Server extends TestBase {
                                         <nav className="sdl-dita-delivery-content-navigation"></nav>
                                     </div>
                                     <article>
-                                        <article className="ltr page-content"></article>
+                                        <article className="ltr page-content">No page selected. Please select an item from the table of contents.</article>
                                     </article>
                                 </div>
                             </section>

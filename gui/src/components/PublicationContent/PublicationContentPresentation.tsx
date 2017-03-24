@@ -211,13 +211,11 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         const { taxonomyService } = services;
         const { rootItems } = this._toc;
         const tocError = this._toc.error;
-
-        const content = selectedTocItem && !selectedTocItem.url ? `<h1 class="title topictitle1">${selectedTocItem.title}</h1>` : page.content;
         return (
             <section className={"sdl-dita-delivery-publication-content"}>
                 <Page
                     showActivityIndicator={isPageLoading}
-                    content={content}
+                    content={page.content}
                     error={errorMessage}
                     onNavigate={(url: string): void => {
                         /* istanbul ignore else */
@@ -414,7 +412,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         }
     }
 
-    private _loadTocRootItems(publicationId: string, path?: string[]): void {
+    private _loadTocRootItems(publicationId: string, path?: string[]): Promise<ITaxonomy[]> {
         const { services } = this.context;
         // Get the data for the Toc
         this._toc.rootItems = undefined;
@@ -425,7 +423,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
             isTocLoading: true
         });
 
-        services.taxonomyService.getSitemapRoot(publicationId).then(
+        return services.taxonomyService.getSitemapRoot(publicationId).then(
             items => {
                 /* istanbul ignore else */
                 if (!this._isUnmounted) {
@@ -436,6 +434,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                         isTocLoading: false
                     });
                 }
+                return items;
             },
             error => {
                 /* istanbul ignore else */
