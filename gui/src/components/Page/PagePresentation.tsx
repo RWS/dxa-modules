@@ -13,6 +13,7 @@ import { IAppContext } from "components/container/App";
 import "components/presentation/styles/Page";
 import "dita-ot/styles/commonltr";
 import "dita-ot/styles/commonrtl";
+import { IPageService } from "services/interfaces/PageService";
 
 /**
  * Page component props
@@ -28,6 +29,21 @@ export interface IPageProps {
      * @memberOf IPageProps
      */
     showActivityIndicator: boolean;
+
+    /**
+     * Page id 
+     * @type {string}
+     * @memberOf IPageProps
+     */
+    id?:  string;
+
+    /**
+     * publicationId
+     * @type {string}
+     * @memberOf IPageProps
+     */
+    publicationId?: string;
+
     /**
      * Page content
      *
@@ -86,6 +102,8 @@ export interface IPageProps {
      * @memberOf IPageProps
      */
     onNavigate(url: string): void;
+
+    fetchPage?(pageService: IPageService, publicationId: string, pageId: string): void;
 }
 
 /**
@@ -160,15 +178,15 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
      */
     public render(): JSX.Element {
         const props = this.props;
-        const { activeHeader, error, url, direction } = props;
+        const { activeHeader, error, direction } = props;
         const { navItems } = this.state;
         const { formatMessage } = this.context.services.localizationService;
         const activeNavItemId = activeHeader ? activeHeader.id : (navItems.length > 0 ? navItems[0].id : undefined);
         const _goHome = (): void => props.onNavigate(path.getRootPath());
-        const _retryHandler = () => url && props.onNavigate(url);
         const errorButtons = <div>
+            {/* Need to replace this button with PageLink then we don't need to pass onNaviate */}
             <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{ "click": _goHome }}>{formatMessage("components.breadcrumbs.home")}</Button>
-            <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{ "click": _retryHandler }}>{formatMessage("control.button.retry")}</Button>
+            <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{ "click": () => this.fetchPage() }}>{formatMessage("control.button.retry")}</Button>
         </div>;
         const errorTitle = formatMessage("error.default.title");
         const errorMessages = [
@@ -223,6 +241,15 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
 
         if (this._historyUnlisten) {
             this._historyUnlisten();
+        }
+    }
+
+    private fetchPage(): void {
+        const {fetchPage, publicationId, id = ""} = this.props;
+        if (fetchPage && publicationId) {
+            fetchPage(this.context.services.pageService, publicationId, id);
+        } else {
+            console.warn("fetchPage, publicatinoId, should be defined");
         }
     }
 
