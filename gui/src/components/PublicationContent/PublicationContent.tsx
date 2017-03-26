@@ -12,7 +12,7 @@ const mapStateToProps = (state: IState) => {
     const publication = getPubById(state, publicationId);
     const page = getPageById(state, pageId);
     const errorMessage = getErrorMessage(state, pageId);
-    const isPageLoading = isPage(page) && !isDummyPage(page) && isPageLoadingGetter(state, pageId);
+    const isPageLoading = isPage(page) && isDummyPage(page) && isPageLoadingGetter(state, pageId);
     const productReleaseVersions = getReleaseVersionsForPub(state, publicationId);
 
     return {
