@@ -13,14 +13,24 @@ const PUB_1: IPublication = {
     id: "1",
     title: "Пуб1",
     language: "ru",
-    versionRef: "0001"
+    versionRef: "0001",
+    createdOn: new Date(),
+    version: "1",
+    logicalId: "GUID-1",
+    productFamily: "PF",
+    productReleaseVersion: "PR1"
 };
 
 const PUB_2: IPublication = {
     id: "2",
     title: "Pub1",
     language: "en",
-    versionRef: "0001"
+    versionRef: "0001",
+    createdOn: new Date(),
+    version: "1",
+    logicalId: "GUID-2",
+    productFamily: "PF",
+    productReleaseVersion: "PR1"
 };
 class PublicationsReducer extends TestBase {
 

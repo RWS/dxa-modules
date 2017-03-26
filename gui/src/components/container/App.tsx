@@ -13,6 +13,7 @@ import { StateToRoute } from "../helpers/StateToRoute";
 import { FetchPublications } from "../helpers/FetchPublications";
 import { FetchPage } from "components/helpers/FetchPage";
 import { PublicationsList } from "../PublicationsList/PublicationsList";
+import { FetchProductReleaseVersions } from "../helpers/FetchProductReleaseVersions";
 
 export interface IAppProps {
     /**
@@ -81,7 +82,7 @@ export class App extends React.Component<IAppProps, {}> {
                         <IndexRedirect to="home" />
                         <Redirect from="home;jsessionid=*" to="home" />
                         <Route path="home" component={ProductFamiliesList} />
-                        <Route path="publications/:productFamily" component={PublicationsList} />
+                        <Route path="publications/:productFamily(/:productReleaseVersion)" component={PublicationsList} />
                         <Route path=":publicationId(/:pageIdOrPublicationTitle)(/:publicationTitle)(/:pageTitle)(/:pageAnchor)"
                             component={() => (
                                 <div>
@@ -89,6 +90,7 @@ export class App extends React.Component<IAppProps, {}> {
                                     <StateToRoute />
                                     <FetchPublications />
                                     <FetchPage />
+                                    <FetchProductReleaseVersions />
                                     <PublicationContent />
                                 </div>)} />
                     </Route>

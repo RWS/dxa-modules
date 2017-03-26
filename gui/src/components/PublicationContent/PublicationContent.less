@@ -16,14 +16,15 @@
             width: @tocWidth;
             position: absolute;
             left: 0;
-           .sdl-dita-delivery-app.rtl & {
+            .sdl-dita-delivery-app.rtl & {
                 right: 0;
             }
             nav.sdl-dita-delivery-toc {
                 width: @tocWidth - (@defaultMargin * 2);
                 margin-left: @defaultMargin;
                 margin-right: @defaultMargin;
-                > span:first-child, .sdl-treeview {
+                >span:first-child,
+                .sdl-treeview {
                     // Inherit max-height from toc panel, needed for scroll bar / separator using vertical space
                     max-height: inherit;
                     width: @tocWidth - (@defaultMargin * 2);
@@ -40,7 +41,6 @@
                         margin-right: @tocWidth - 5;
                         box-shadow: 5px 0px 10px 0px fade(@neutralColor1, 10);
                     }
-
                 }
             }
         }
@@ -52,7 +52,8 @@
             }
             overflow: auto;
         }
-        nav.sdl-dita-delivery-toc, nav.sdl-dita-delivery-content-navigation {
+        nav.sdl-dita-delivery-toc,
+        nav.sdl-dita-delivery-content-navigation {
             min-height: 100px;
         }
         @media screen and (min-width: (1+@screenMd)) {
@@ -73,7 +74,8 @@
                 height: 100%;
             }
         }
-        .sdl-dita-delivery-breadcrumbs {
+        .sdl-dita-delivery-breadcrumbs,
+        .sdl-dita-delivery-version-selector {
             padding-bottom: 15px;
             margin-left: @tocWidth + @defaultMargin;
             margin-right: @contentNavWidth + @defaultMargin;
@@ -91,15 +93,12 @@
             }
             min-height: 100px;
         }
-
         .sdl-dita-delivery-error {
             width: auto;
             max-width: none;
-
             @media screen and (max-width: @screenSm) {
                 margin: 19px 10px;
             }
-
             @media screen and (min-width: @screenSm) {
                 margin: 19px 10px 34px @tocWidth + @defaultMargin * 2;
                 .sdl-dita-delivery-app.rtl & {
@@ -113,7 +112,9 @@
 @media screen and (max-width: @screenLg) {
     .sdl-dita-delivery-publication-content {
         .sdl-dita-delivery-page {
-            .sdl-dita-delivery-breadcrumbs, article.page-content {
+            .sdl-dita-delivery-breadcrumbs,
+            .sdl-dita-delivery-version-selector,
+            article.page-content {
                 margin-right: 0;
                 .sdl-dita-delivery-app.rtl & {
                     margin-left: 0;
@@ -121,8 +122,8 @@
             }
             nav.sdl-dita-delivery-content-navigation {
                 float: none;
-                max-width: ~"calc(100% - @{tocWidth} - (@{defaultMargin} * 2))";
-                min-width: ~"calc(80% - @{tocWidth} - (@{defaultMargin} * 2))";
+                max-width:~"calc(100% - @{tocWidth} - (@{defaultMargin} * 2))";
+                min-width:~"calc(80% - @{tocWidth} - (@{defaultMargin} * 2))";
                 margin-left: @tocWidth + (@defaultMargin * 2);
                 .sdl-dita-delivery-app.rtl & {
                     float: none;
@@ -145,7 +146,6 @@
                     left: auto;
                     right: @tocWidth * -1;
                 }
-
                 &.open {
                     left: 0;
                     .sdl-dita-delivery-app.rtl & {
@@ -156,7 +156,8 @@
                 nav.sdl-dita-delivery-toc {
                     margin: 0;
                     height: 100%;
-                    > span:first-child, .sdl-treeview {
+                    >span:first-child,
+                    .sdl-treeview {
                         width: 100%;
                     }
                     .separator {
@@ -164,7 +165,10 @@
                     }
                 }
             }
-            .sdl-dita-delivery-breadcrumbs, article.page-content, nav.sdl-dita-delivery-content-navigation {
+            .sdl-dita-delivery-breadcrumbs,
+            .sdl-dita-delivery-version-selector,
+            article.page-content,
+            nav.sdl-dita-delivery-content-navigation {
                 margin-left: 0;
                 .sdl-dita-delivery-app.rtl & {
                     margin-right: 0;
@@ -174,8 +178,8 @@
                 padding-bottom: @defaultMargin;
             }
             nav.sdl-dita-delivery-content-navigation {
-                max-width: ~"calc(100% - @{defaultMargin})";
-                width: ~"calc(100% - @{defaultMargin})";
+                max-width:~"calc(100% - @{defaultMargin})";
+                width:~"calc(100% - @{defaultMargin})";
                 margin-left: @defaultMargin;
                 .sdl-dita-delivery-app.rtl & {
                     margin-left: 0;

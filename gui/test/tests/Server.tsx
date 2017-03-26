@@ -99,6 +99,7 @@ class Server extends TestBase {
                             <div/>
                             <div/>
                             <div/>
+                            <div/>
                             <section className="sdl-dita-delivery-publication-content">
                                 <div className="sdl-dita-delivery-page">
                                     <div className="sdl-dita-delivery-navigation-menu">
@@ -115,6 +116,7 @@ class Server extends TestBase {
                                         </ul>
                                     </div>
                                     <div/>
+                                    <div className="sdl-dita-delivery-version-selector"><label>Version:</label><span><div></div></span></div>
                                     <div className="sdl-dita-delivery-content-navigation-wrapper">
                                         <nav className="sdl-dita-delivery-content-navigation"></nav>
                                     </div>

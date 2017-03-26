@@ -7,7 +7,8 @@
     "CreatedOn": "2016-02-10T15:29:49Z",
     "Version": "3",
     "VersionRef": "647369",
-    "Language": "en"
+    "Language": "en",
+    "LogicalId": "GUID-789BBB3D-8A09-4916-8857-09A246CB6F59"
   },
   {
     "Id": "1601084",
@@ -17,7 +18,8 @@
     "CreatedOn": "2016-01-07T03:53:57Z",
     "Version": "8",
     "VersionRef": "517681",
-    "Language": "en"
+    "Language": "en",
+    "LogicalId": "GUID-CCB42D50-6BD0-462F-91DF-D415C9BA1CAA"
   },
   {
     "Id": "1611362",
@@ -27,7 +29,8 @@
     "CreatedOn": "2016-01-14T05:47:16Z",
     "Version": "1",
     "VersionRef": "566444",
-    "Language": "ja"
+    "Language": "ja",
+    "LogicalId": "GUID-E1A01DFF-EF3B-40F9-87BF-AB9DB7E97EE4"
   },
   {
     "Id": "1849903",
@@ -37,7 +40,8 @@
     "CreatedOn": "2017-01-26T08:31:35Z",
     "Version": "1",
     "VersionRef": "1849901",
-    "Language": "iw"
+    "Language": "iw",
+    "LogicalId": "GUID-244F3FD2-930C-4C44-80B4-8BE461DBF28A"
   },
   {
     "Id": "1881665",
@@ -47,7 +51,8 @@
     "CreatedOn": "2015-12-23T03:22:09Z",
     "Version": "1",
     "VersionRef": "346490",
-    "Language": "nl"
+    "Language": "nl",
+    "LogicalId": "GUID-789BBB3D-8A09-4916-8857-09A246CB6F59"
   },
   {
     "Id": "1961681",
@@ -57,7 +62,8 @@
     "CreatedOn": "2015-12-23T03:22:08Z",
     "Version": "1",
     "VersionRef": "346487",
-    "Language": "en"
+    "Language": "en",
+    "LogicalId": "GUID-5D6FA032-0189-4CB2-85E7-41455F86D612"
   },
   {
     "Id": "1961700",
@@ -67,7 +73,8 @@
     "CreatedOn": "2015-12-23T03:22:09Z",
     "Version": "1",
     "VersionRef": "346490",
-    "Language": "de"
+    "Language": "de",
+    "LogicalId": "GUID-789BBB3D-8A09-4916-8857-09A246CB6F59"
   },
   {
     "Id": "1961702",
@@ -77,6 +84,7 @@
     "CreatedOn": "2015-12-23T03:22:09Z",
     "Version": "1",
     "VersionRef": "346490",
-    "Language": "en"
+    "Language": "en",
+    "LogicalId": "GUID-789BBB3D-8A09-4916-8857-09A246CB6F59"
   }
 ]

@@ -1,7 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Promise } from "es6-promise";
-
 import { IAppContext } from "components/container/App";
 import { NavigationMenu } from "components/presentation/NavigationMenu";
 import { Toc } from "components/presentation/Toc";
@@ -9,6 +8,7 @@ import { Page } from "components/Page/Page";
 import { Breadcrumbs } from "components/presentation/Breadcrumbs";
 import { ContentLanguageWarning } from "components/ContentLanguageWarning/ContentLanguageWarning";
 
+import { VersionSelector } from "components/presentation/VersionSelector";
 import { Html, IHeader } from "utils/Html";
 import { TcmId } from "utils/TcmId";
 import { Url } from "utils/Url";
@@ -20,6 +20,9 @@ import { IPage } from "interfaces/Page";
 import { TaxonomyItemId } from "interfaces/TcmId";
 import { IPublication } from "interfaces/Publication";
 import { IPublicationCurrentState } from "store/interfaces/State";
+import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
+
+import Version from "utils/Version";
 
 import "./PublicationContent.less";
 
@@ -59,12 +62,22 @@ export interface IPublicationContentProps {
      */
     isPageLoading: boolean;
     /**
+     * Available product release versions for the selected publication
+     *
+     * @type {IProductReleaseVersion[]}
+     * @memberOf IPublicationsListState
+     */
+
+    productReleaseVersions: IProductReleaseVersion[];
+    productReleaseVersion: string;
+    /**
      * Function to execute when publication is changing
      *
      * @type {Function}
      * @memberOf IPublicationContentProps
      */
     onPublicationChange?: (publicationId: string, pageId: string) => void;
+    onReleaseVersionChanged?: (publicationId: string, releaseVersions: string) => void;
 }
 
 /**
@@ -92,12 +105,7 @@ export interface IPublicationContentState {
      * @type {string[]}
      */
     activeTocItemPath?: string[];
-    /**
-     * Title of the current publication
-     *
-     * @type {string}
-     */
-    publicationTitle?: string;
+
     /**
      * Active header inside the page
      *
@@ -223,12 +231,12 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
      */
     public render(): JSX.Element {
         const { activeTocItemPath, selectedTocItem, activePageHeader } = this.state;
-
         const { services, router } = this.context;
-        const { publicationId, pageId, page, publication, isPageLoading, errorMessage } = this.props;
+        const { publicationId, pageId, page, publication, isPageLoading, errorMessage, productReleaseVersion, productReleaseVersions } = this.props;
         const { taxonomyService } = services;
         const { rootItems } = this._toc;
         const tocError = this._toc.error;
+        const selectedProductReleaseVersion = productReleaseVersion ? Version.normalize(productReleaseVersion).toLowerCase().trim() : undefined;
         return (
             <section className={"sdl-dita-delivery-publication-content"}>
                 <Page
@@ -267,6 +275,9 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                         selectedItem={selectedTocItem}
                         />
                     <ContentLanguageWarning />
+                    <VersionSelector productReleaseVersions={productReleaseVersions}
+                        selectedProductReleaseVersion={selectedProductReleaseVersion}
+                        onChange={version => this._navigateToOtherReleaseVersion(publicationId, version)} />
                 </Page>
             </section>
         );
@@ -464,5 +475,11 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                 }
             }
         );
+    }
+
+    private _navigateToOtherReleaseVersion(publicationId: string, releaseVersion: string): void {
+       if (this.props.onReleaseVersionChanged) {
+           this.props.onReleaseVersionChanged(publicationId, releaseVersion);
+       }
     }
 }

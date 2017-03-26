@@ -28,6 +28,9 @@ const EMPTY_STATE: IState = {
         byId: {},
         loading: [],
         errors: {}
+    },
+    releaseVersions: {
+        byPubId: {}
     }
 };
 

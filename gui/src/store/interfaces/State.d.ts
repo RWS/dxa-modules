@@ -1,5 +1,14 @@
 import { IPublication } from "interfaces/Publication";
 import { IPage } from "interfaces/Page";
+import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
+
+export interface IProductReleaseVersionState {
+    byPubId: IProductReleaseVersionMap;
+}
+
+export interface IProductReleaseVersionMap {
+    [id: string]: IProductReleaseVersion[];
+}
 
 /**
  * Pages dictionary based on id
@@ -67,6 +76,7 @@ export interface IPublicationsMap {
  * @export
  * @interface IPageState
  */
+
 export interface IPublicationsState {
     byId: IPublicationsMap;
 
@@ -149,4 +159,6 @@ export interface IState {
      * @memberOf IState
      */
     pages: IPageState;
+
+    releaseVersions: IProductReleaseVersionState;
 }

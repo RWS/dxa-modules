@@ -319,12 +319,12 @@ export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
         const { publicationService, localizationService } = this.context.services;
         if (publicationId) {
             // Get publication title
-            publicationService.getPublicationTitle(publicationId).then(
-                title => {
+            publicationService.getPublicationById(publicationId).then(
+                pub => {
                     /* istanbul ignore else */
                     if (!this._isUnmounted) {
                         this.setState({
-                            searchTitle: localizationService.formatMessage("components.searchbar.publication.placeholder", [title || ""])
+                            searchTitle: localizationService.formatMessage("components.searchbar.publication.placeholder", [pub.title || ""])
                         });
                     }
                 },

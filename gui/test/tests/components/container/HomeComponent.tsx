@@ -1,4 +1,4 @@
-import * as React from "react";
+/*import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as TestUtils from "react-addons-test-utils";
 import { Router, Route } from "react-router";
@@ -111,6 +111,7 @@ class HomeComponent extends TestBase {
                                 anchor = ""
                                 page={dummyPage(pageId)}
                                 isPageLoading={isPageLoading}
+                                productReleaseVersions=[]
                                 errorMessage="" />
                         </HomePresentation></Provider>)} />
                     </Router>
@@ -119,4 +120,4 @@ class HomeComponent extends TestBase {
     }
 }
 
-new HomeComponent().runTests();
+new HomeComponent().runTests();*/

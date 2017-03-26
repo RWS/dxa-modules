@@ -3,7 +3,7 @@ import "sdl-controls-react-wrappers/dist/stylesheets/main";
 import "./configuration/Tests.less";
 import "babel-polyfill";
 
-// Import all tests
+// // Import all tests
 import "test/tests/components/container/AppComponent";
 import "test/tests/components/container/ErrorContentComponent";
 import "test/tests/components/container/HomeComponent";
@@ -37,3 +37,5 @@ import "test/tests/utils/UrlUtil";
 // import "test/tests/store/reducers/Language";
 import "test/tests/store/reducers/Publication";
 import "test/tests/store/reducers/Publciations";
+import "test/tests/utils/StringUtil";
+import "test/tests/utils/Version";

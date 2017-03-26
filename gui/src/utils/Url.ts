@@ -26,14 +26,19 @@ export class Url {
      *
      * @static
      * @param {string} productFamily product family
+     * @param {string} [productReleaseVersion] product release version
      * @returns {string}
      *
      * @memberOf Url
      */
-    public static getProductFamilyUrl(productFamily: string): string {
+    public static getProductFamilyUrl(productFamily: string, productReleaseVersion?: string): string {
         const rootPath = path.getRootPath();
         // Don't slugify product family as we need to be able to look it up again
-        return `${rootPath}publications/${encodeURIComponent(productFamily)}`;
+        const defaultUrl = `${rootPath}publications/${encodeURIComponent(productFamily)}`;
+        if (productReleaseVersion) {
+            return `${defaultUrl}/${encodeURIComponent(productReleaseVersion)}`;
+        }
+        return defaultUrl;
     }
 
     /**
@@ -133,9 +138,9 @@ export class Url {
         if (parts.length >= 2) {
             return {
                 publicationId: decodeURIComponent(parts[0]),
-                pageId: parts[1] ? decodeURIComponent(parts[1]) : parts[1],
-                publicationTitle: parts[2] ? decodeURIComponent(parts[2]) : parts[2],
-                pageTitle: parts[3] ? decodeURIComponent(parts[3]) : parts[3]
+                pageId: decodeURIComponent(parts[1]),
+                publicationTitle: parts[2] ? decodeURIComponent(parts[2]) : undefined,
+                pageTitle:  parts[3] ? decodeURIComponent(parts[3]) : undefined
             };
         }
         return undefined;

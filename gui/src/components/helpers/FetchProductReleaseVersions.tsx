@@ -1,11 +1,12 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { fetchPublications } from "store/actions/Api";
+import { fetchProductReleaseVersions } from "store/actions/Api";
 import { IAppContext } from "components/container/App";
 import { IPublicationService } from "services/interfaces/PublicationService";
 import { IState } from "store/interfaces/State";
+import { getCurrentPub } from "store/reducers/Reducer";
 
-export interface IFetchPublications {
+export interface IFetchProductRelease {
     /**
      * Fetch Publication function following type to load publications
      *     @param   {IPublicationService}
@@ -14,20 +15,20 @@ export interface IFetchPublications {
      *
      * @memberOf IFetchPublications
      */
-    fetch?: (publicationService: IPublicationService, productFamily?: string) => void;
+    fetch: (publicationService: IPublicationService, publicationId: string) => void;
     /**
      * Current product family
      *
      * @param {string}
      * @memberOf IFetchPublications
      */
-    productFamily?: string;
+    publicationId: string;
 }
 
 /**
  * Fetch publications component
  */
-class Fetch extends React.Component<IFetchPublications, {}> {
+class Fetch extends React.Component<IFetchProductRelease, {}> {
     /**
      * Context types
      */
@@ -40,18 +41,19 @@ class Fetch extends React.Component<IFetchPublications, {}> {
      */
     public context: IAppContext;
 
-    public shouldComponentUpdate(nextProps: IFetchPublications): boolean {
-        return this.props.productFamily !== nextProps.productFamily;
-    }
     /**
      * Invoked once, both on the client and server, immediately before the initial rendering occurs.
      */
-    public componentWillMount(): void {
-        this.fetchPublications(this.props);
+    public componentDidMount(): void {
+        this.fetchReleaseVersions(this.props);
+    }
+
+    public shouldComponentUpdate(nextProps: IFetchProductRelease): boolean {
+        return this.props.publicationId !== nextProps.publicationId;
     }
 
     public componentDidUpdate(): void {
-        this.fetchPublications(this.props);
+        this.fetchReleaseVersions(this.props);
     }
 
     /**
@@ -62,19 +64,21 @@ class Fetch extends React.Component<IFetchPublications, {}> {
     public render(): JSX.Element {
         return (<div />);
     }
-
-    private fetchPublications(props: IFetchPublications): void {
+    private fetchReleaseVersions(props: IFetchProductRelease): void {
         const { publicationService } = this.context.services;
-        if (this.props.fetch) {
-            this.props.fetch(publicationService, this.props.productFamily);
+
+        if (props.fetch && props.publicationId) {
+            props.fetch(publicationService, props.publicationId);
         }
     }
 }
 
-const mapStateToProps = (state: IState, ownProps: IFetchPublications): {} => ({});
+const mapStateToProps = (state: IState): {} => ({
+    publicationId: getCurrentPub(state).publicationId
+});
 
 const mapDispatchToProps = {
-    fetch: fetchPublications
+    fetch: fetchProductReleaseVersions
 };
 
 /**
@@ -82,4 +86,4 @@ const mapDispatchToProps = {
  *
  * @export
  */
-export const FetchPublications = connect(mapStateToProps, mapDispatchToProps)(Fetch);
+export const FetchProductReleaseVersions = connect(mapStateToProps, mapDispatchToProps)(Fetch);

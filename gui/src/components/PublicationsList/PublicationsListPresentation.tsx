@@ -13,6 +13,9 @@ import { Url } from "utils/Url";
 
 import { IPublication } from "interfaces/Publication";
 import { ITaxonomy } from "interfaces/Taxonomy";
+import { VersionSelector } from "components/presentation/VersionSelector";
+import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
+import { IPublicationService } from "services/interfaces/PublicationService";
 
 import "components/container/styles/PublicationsList";
 
@@ -31,7 +34,13 @@ export interface IPublicationsListPropsParams {
      * @type {string}
      * @memberOf IPublicationsListPropsParams
      */
-    productFamily?: string;
+    productFamily: string;
+    /**
+     * Product release version title
+     *
+     * @type {string}
+     */
+    productReleaseVersion?: string;
 }
 
 /**
@@ -56,7 +65,17 @@ export interface IPublicationsListProps {
      */
     publications: IPublication[];
 
+    /**
+     * Available product release versions for the selected product family
+     *
+     * @type {IProductReleaseVersion[]}
+     * @memberOf IPublicationsListState
+     */
+    productReleaseVersions: IProductReleaseVersion[];
+
     isLoading: boolean;
+
+    fetchProductReleaseVersionsByProductFamily?:  (publicationService: IPublicationService, productFamily: string) => void;
 }
 
 /**
@@ -102,19 +121,37 @@ export class PublicationsListPresentation extends React.Component<IPublicationsL
         };
     }
 
+    public componentDidMount(): void {
+        this.fetchReleaseVersions(this.props);
+    }
+
+    /**
+     * Invoked when a component is receiving new props. This method is not called for the initial render.
+     *
+     * @param {IPublicationContentProps} nextProps
+     */
+    public componentWillReceiveProps(nextProps: IPublicationsListProps): void {
+        const { productFamily } = this.props.params;
+        const { productFamily: nextProductFamily } = nextProps.params;
+
+        if (nextProductFamily !== productFamily) {
+            this.fetchReleaseVersions(nextProps);
+        }
+    }
+
     /**
      * Render the component
      *
      * @returns {JSX.Element}
      */
     public render(): JSX.Element {
-        const { productFamily } = this.props.params;
-        const { publications, isLoading} = this.props;
+        const { productFamily, productReleaseVersion } = this.props.params;
+        const { publications, isLoading, productReleaseVersions } = this.props;
         const { error } = this.state;
         const { services, router } = this.context;
         const { formatMessage } = services.localizationService;
         const _retryHandler = (): void => alert("Please update Retry handler");
-
+        console.log(productReleaseVersion);
         const errorButtons = <div>
             <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{ "click": _retryHandler }}>{formatMessage("control.button.retry")}</Button>
         </div>;
@@ -122,6 +159,13 @@ export class PublicationsListPresentation extends React.Component<IPublicationsL
             <section className={"sdl-dita-delivery-publications-list"}>
                 <FetchPublications productFamily={productFamily} />
                 <h1>{productFamily}</h1>
+                <VersionSelector productReleaseVersions={productReleaseVersions}
+                    selectedProductReleaseVersion={productReleaseVersion || "PufPuf"}
+                    onChange={releaseVersion => {
+                        if (router) {
+                            router.push(Url.getProductFamilyUrl(productFamily, releaseVersion));
+                        }
+                    }} />
                 {error
                     ? <Error
                         title={formatMessage("error.default.title")}
@@ -149,6 +193,13 @@ export class PublicationsListPresentation extends React.Component<IPublicationsL
                         : <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} />
                 }
             </section>);
+    }
+
+    private fetchReleaseVersions(props: IPublicationsListProps): void {
+        const { publicationService } = this.context.services;
+        if (props.fetchProductReleaseVersionsByProductFamily) {
+            props.fetchProductReleaseVersionsByProductFamily(publicationService, props.params.productFamily);
+        }
     }
 
     private _getLoadableContent(publicationId: string): Promise<JSX.Element[]> {
