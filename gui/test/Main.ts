@@ -21,6 +21,7 @@ import "test/tests/components/presentation/PageComponent";
 import "test/tests/components/presentation/SearchBarComponent";
 import "test/tests/components/presentation/TileComponent";
 import "test/tests/components/presentation/TocComponent";
+import "test/tests/components/PageLink/PageLinkComponent";
 import "test/tests/models/PublicationsModel";
 import "test/tests/Server";
 import "test/tests/services/client/PageService";
