@@ -4,6 +4,7 @@ import { language } from "store/reducers/Language";
 import { changeLanguage } from "store/actions/Actions";
 import { ILocalizationService, ILanguage } from "services/interfaces/LocalizationService";
 import { IState } from "store/interfaces/State";
+import { browserHistory } from "react-router";
 
 interface IDic { [path: string]: string; };
 interface IDics { [lang: string]: IDic; };
@@ -64,6 +65,7 @@ export class LocalizationService implements ILocalizationService {
             if (newLanguage !== this.language) {
                 this.language = newLanguage;
                 localStorage.setItem(LANGUAGE_LOCALSTORAGE, this.language);
+                this.reloadPage();
             }
         });
     }
@@ -130,6 +132,20 @@ export class LocalizationService implements ILocalizationService {
      */
     public getDirection(lang: string): "rtl" | "ltr" {
         return this.rtlLanguages.some((val: string) => val === lang) ? "rtl" : "ltr";
+    }
+
+    /**
+     * This method forces page to reload. It helps to refersh all components.
+     */
+    private reloadPage(): void {
+        const prevPathname = browserHistory.getCurrentLocation().pathname;
+
+        setTimeout(() => {
+            //don't need refresh is somebody changed path already it already.
+            if (prevPathname === browserHistory.getCurrentLocation().pathname) {
+                browserHistory.replace(prevPathname);
+            }
+        }, 200);
     }
 }
 
