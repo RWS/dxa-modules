@@ -31,7 +31,7 @@ export interface IPageProps {
     showActivityIndicator: boolean;
 
     /**
-     * Page id 
+     * Page id
      * @type {string}
      * @memberOf IPageProps
      */

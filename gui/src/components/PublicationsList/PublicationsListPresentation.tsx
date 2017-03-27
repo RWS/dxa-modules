@@ -150,7 +150,7 @@ export class PublicationsListPresentation extends React.Component<IPublicationsL
         const { error } = this.state;
         const { services, router } = this.context;
         const { formatMessage } = services.localizationService;
-        const _retryHandler = (): void => alert("Please update Retry handler");
+        const _retryHandler = (): void => { this.fetchReleaseVersions(this.props); };
         const errorButtons = <div>
             <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{ "click": _retryHandler }}>{formatMessage("control.button.retry")}</Button>
         </div>;
