@@ -203,8 +203,9 @@ export class PublicationContent extends React.Component<IPublicationContentProps
      * @param {IPublicationContentProps} nextProps
      */
     public componentWillReceiveProps(nextProps: IPublicationContentProps): void {
-        const { publicationId, pageIdOrPublicationTitle } = this.props.params;
+        const { pageIdOrPublicationTitle } = this.props.params;
         const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
+        const nextPublicationId = nextProps.params.publicationId;
         const nextpageIdOrPublicationTitle = nextProps.params.pageIdOrPublicationTitle;
         const nextPageId = TcmId.isValidPageId(nextpageIdOrPublicationTitle) ? nextpageIdOrPublicationTitle : null;
         const pageService = this.context.services.pageService;
@@ -220,7 +221,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
             this.setState({
                 isPageLoading: true
             });
-            pageService.getPageInfo(publicationId, nextPageId).then(
+            pageService.getPageInfo(nextPublicationId, nextPageId).then(
                 this._onPageContentRetrieved.bind(this),
                 this._onPageContentRetrievFailed.bind(this));
         }
