@@ -156,7 +156,7 @@ export class Publications extends LoadableObject {
         if (version === null) {
             return {
                 title: this._unknownProductReleaseVersion,
-                value: this._unknownProductFamilyDescription.trim().toLowerCase(),
+                value: this._unknownProductReleaseVersion.trim().toLowerCase(),
                 hasWarning: true
             };
         }
