@@ -19,8 +19,6 @@ import { PublicationContent } from "src/components/PublicationContent/Publicatio
 
 import { FetchPage } from "components/helpers/FetchPage";
 import { updateCurrentPublication } from "src/store/actions/Actions";
-import { RouteToState } from "src/components/helpers/RouteToState";
-import { hashHistory, Router, Route } from "react-router";
 import { Store } from "redux";
 import { IState } from "src/store/interfaces/State";
 import { FetchProductReleaseVersions } from "src/components/helpers/FetchProductReleaseVersions";
@@ -153,7 +151,6 @@ class PublicationContentComponent extends TestBase {
                     const store = this.store as Store<IState>;
                     const state = store.getState();
                     const {publicationId, pageId, anchor } = state.publication;
-
                     expect(publicationId).toBe(PUBLICATION_ID);
                     expect(pageId).toBe("12345");
                     expect(anchor).toBe("");
@@ -339,11 +336,6 @@ class PublicationContentComponent extends TestBase {
             (
                 <Provider store={store}>
                     <ComponentWithContext {...services}>
-                        <Router history={hashHistory}>
-                            <Route path=":publicationId(/:pageIdOrPublicationTitle)(/:publicationTitle)(/:pageTitle)(/:pageAnchor)"
-                                    component={RouteToState} />
-                            <Route path="*" component={() => <div/>} />
-                        </Router>
                         <FetchPage />
                         <FetchPublications />
                         <FetchProductReleaseVersions />

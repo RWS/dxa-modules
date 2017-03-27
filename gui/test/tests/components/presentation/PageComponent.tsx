@@ -11,6 +11,7 @@ import { configureStore } from "store/Store";
 import { Provider } from "react-redux";
 import { RouteToState } from "components/helpers/RouteToState";
 import { Page } from "components/Page/Page";
+import { PageService } from "test/mocks/services/PageService";
 
 class PageComponent extends TestBase {
 
@@ -88,14 +89,15 @@ class PageComponent extends TestBase {
             });
 
             it("click on retry button in error info", (): void => {
-                let path: string = "";
+                const fetch = jasmine.createSpy("fetchSpy");
                 const page = this._renderComponent({
+                    id: "0002",
+                    publicationId: "0001",
                     showActivityIndicator: false,
                     error: "Error!",
                     url: "url/to/page",
-                    onNavigate: (url: string): void => {
-                        path = url;
-                    }
+                    onNavigate: (url: string): void => {},
+                    fetchPage: fetch
                 }, target);
 
                 const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
@@ -104,9 +106,8 @@ class PageComponent extends TestBase {
                 expect(buttons.length).toEqual(2);
 
                 buttons.item(1).click();
-                setTimeout(() => {
-                    expect(path).toBe("url/to/page");
-                }, 0);
+                expect(fetch).toHaveBeenCalledWith(jasmine.any(PageService), "0001", "0002");
+
             });
 
             it("can show page content info", (): void => {

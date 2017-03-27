@@ -180,7 +180,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         this._onPageContentRetrieved(publicationId, page);
     }
 
-    public componentWillMount(): void {
+    public componentDidMount(): void {
         const { publicationId, page, errorMessage } = this.props;
         this.fetchPublication(publicationId);
 
@@ -189,6 +189,8 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         } else if (errorMessage) {
            this._onPageContentRetrievFailed(publicationId, errorMessage);
        }
+
+       this.addResizeHandlers();
     }
 
     /**
@@ -274,7 +276,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
     /**
      * Invoked once, only on the client (not on the server), immediately after the initial rendering occurs.
      */
-    public componentDidMount(): void {
+    public addResizeHandlers(): void {
         if (ReactDOM) {
             const domNode = ReactDOM.findDOMNode(this) as HTMLElement;
             if (domNode) {
