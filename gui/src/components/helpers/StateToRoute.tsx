@@ -2,7 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { withRouter, browserHistory } from "react-router";
 import { Url } from "utils/Url";
-import { getCurrentPub, getErrorMessage, getPageById, getPubById } from "store/reducers/Reducer";
+import { getCurrentPub, getPageById, getPubById } from "store/reducers/Reducer";
 import { IPublicationContentPropsParams } from "interfaces/PublicationContentPropsParams";
 import { IPublicationCurrentState, IState } from "store/interfaces/State";
 import { isDummyPage } from "utils/Page";
@@ -59,7 +59,9 @@ export class StateToRoutePresentation extends React.Component<Props, {}> {
      * Checks is we need to update location if route changed.
      */
     public shouldComponentUpdate(nextProps: Props): boolean {
-        return !nextProps.dummy && this.propsToUrl(nextProps) !== this.propsToUrl(this.props);
+
+        return this.propsToUrl(nextProps) !== this.propsToUrl(this.props)
+            && this.propsToUrl(nextProps) !== browserHistory.getCurrentLocation().pathname;
     }
 
     /**
@@ -68,11 +70,13 @@ export class StateToRoutePresentation extends React.Component<Props, {}> {
      */
     public componentDidUpdate(prevProps: Props): void {
         const props = this.props;
+
         if (prevProps.publicationId !== props.publicationId
         || prevProps.anchor !== props.anchor
         || prevProps.pageId !== "" && prevProps.pageId !== props.pageId) {
             browserHistory.push(this.propsToUrl(props));
         } else {
+            //No need to push to history if only titles have chagned.
             browserHistory.replace(this.propsToUrl(props));
         }
     }
@@ -108,8 +112,7 @@ const mapStateToProps = (state: IState) => {
         pageId,
         publicationTitle,
         anchor,
-        pageTitle:  !isDummyPage(page) ? page.title : "",
-        dummy: !getErrorMessage(state, pageId) && isDummyPage(page)
+        pageTitle: !isDummyPage(page) ? page.title : ""
     };
 };
 
