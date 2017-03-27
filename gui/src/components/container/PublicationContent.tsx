@@ -316,7 +316,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                         loadItemsPath={(itemId: string): Promise<IBreadcrumbItem[]> => {
                             let breadCrumbPath = [{
                                 title: productFamilyTitle,
-                                url: Url.getProductFamilyUrl(productFamilyTitle || "")
+                                url: Url.getProductFamilyUrl(productFamilyTitle || "", selectedProductReleaseVersion)
                             }, {
                                 title: publicationTitle,
                                 url: Url.getPublicationUrl(publicationId, publicationTitle)
