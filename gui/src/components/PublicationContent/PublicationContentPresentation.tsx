@@ -176,35 +176,19 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         }
     }
 
-    public fetchPage(page: IPage): void {
-        this._onPageContentRetrieved(page);
+    public fetchPage(publicationId: string, page: IPage): void {
+        this._onPageContentRetrieved(publicationId, page);
     }
 
     public componentWillMount(): void {
-        const { publicationId, page } = this.props;
+        const { publicationId, page, errorMessage } = this.props;
         this.fetchPublication(publicationId);
 
         if (isPage(page) && !isDummyPage(page)) {
-            this.fetchPage(page);
-        }
-    }
-    /**
-     * Invoked when a component is receiving new props. This method is not called for the initial render.
-     *
-     * @param {IPublicationContentProps} nextProps
-     * @returns {void}
-     */
-    public componentWillReceiveProps(nextProps: Pub): void {
-       const { page, publicationId } = this.props;
-       const { publicationId: nextPubId, page: nextPage, errorMessage} = nextProps;
-
-        if (publicationId === nextPubId) {
-            if (isPage(nextPage) && nextPage.content !== page.content && !isDummyPage(nextPage)) {
-                this.fetchPage(nextPage);
-            } else if (errorMessage) {
-              this._onPageContentRetrievFailed(errorMessage);
-            }
-        }
+            this.fetchPage(publicationId, page);
+        } else if (errorMessage) {
+           this._onPageContentRetrievFailed(publicationId, errorMessage);
+       }
     }
 
     /**
@@ -213,15 +197,19 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
      *
      * @memberOf PublicationContentPresentation
      */
-    public componentDidUpdate(prevProps: Pub): void {
-        const { page, publicationId } = this.props;
+    public componentWillReceiveProps(nextProps: Pub): void {
+       const { page, publicationId } = this.props;
+       const { publicationId: nextPubId, page: nextPage, errorMessage} = nextProps;
 
-        if (prevProps.publicationId !== publicationId) {
-            this.fetchPublication(publicationId);
-            if (isPage(page) && !isDummyPage(page)) {
-                this.fetchPage(page);
-            }
-        }
+       if (!isPage(nextPage) || nextPubId !== publicationId) {
+            this.fetchPublication(nextPubId);
+       }
+
+       if (isPage(nextPage) && !isDummyPage(nextPage) && nextPage.content !== page.content) {
+            this.fetchPage(nextPubId, nextPage);
+       } else if (errorMessage) {
+           this._onPageContentRetrievFailed(nextPubId, errorMessage);
+       }
     }
 
     /**
@@ -329,8 +317,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         }
     }
 
-    private _onPageContentRetrieved(pageInfo: IPage): void {
-        const { publicationId } = this.props;
+    private _onPageContentRetrieved(publicationId: string, pageInfo: IPage): void {
         const { activeTocItemPath, isTocLoading } = this.state;
 
         // Set the current active path for the tree
@@ -340,7 +327,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
             const firstSitemapId = pageInfo.sitemapIds[0];
             const taxonomyId = TcmId.getTaxonomyItemId(TaxonomyItemId.Toc, firstSitemapId) || firstSitemapId;
 
-            this._getActiveSitemapPath(pageInfo.id, taxonomyId, path => {
+            this._getActiveSitemapPath(publicationId, pageInfo.id, taxonomyId, path => {
                 /* istanbul ignore if */
                 if (this._isUnmounted) {
                     return;
@@ -359,8 +346,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         }
     }
 
-    private _onPageContentRetrievFailed(error: string): void {
-        const { publicationId } = this.props;
+    private _onPageContentRetrievFailed(publicationId: string, error: string): void {
         const { isTocLoading } = this.state;
 
         if (publicationId && isTocLoading) {
@@ -368,9 +354,8 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         }
     }
 
-    private _getActiveSitemapPath(pageId: string, sitemapId: string, done: (path: string[]) => void): void {
+    private _getActiveSitemapPath(publicationId: string, pageId: string, sitemapId: string, done: (path: string[]) => void): void {
         const { services } = this.context;
-        const { publicationId } = this.props;
 
         if (pageId) {
             services.taxonomyService.getSitemapPath(publicationId, pageId, sitemapId).then(

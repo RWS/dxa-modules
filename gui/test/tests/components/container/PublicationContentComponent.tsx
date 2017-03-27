@@ -23,9 +23,9 @@ import { RouteToState } from "src/components/helpers/RouteToState";
 import { hashHistory, Router, Route } from "react-router";
 import { Store } from "redux";
 import { IState } from "src/store/interfaces/State";
-import { FetchProductReleaseVersions } from "../../../../src/components/helpers/FetchProductReleaseVersions";
+import { FetchProductReleaseVersions } from "src/components/helpers/FetchProductReleaseVersions";
 import { getCurrentPub } from "store/reducers/Reducer";
-import { FetchPublications } from "../../../../src/components/helpers/FetchPublications";
+import { FetchPublications } from "src/components/helpers/FetchPublications";
 
 const services = {
     pageService: new PageService(),
