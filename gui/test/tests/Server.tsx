@@ -71,8 +71,6 @@ class Server extends TestBase {
                                             <li><a>日本語</a></li>
                                             <li><a>Nederlands</a></li>
                                             <li><a>中文</a></li>
-                                            <li><a>TEST Arabic</a></li>
-                                            <li><a>Test Ivrit</a></li>
                                         </ul>
                                     </div>
                                     <select>
@@ -82,8 +80,6 @@ class Server extends TestBase {
                                         <option value="ja">日本語</option>
                                         <option value="nl">Nederlands</option>
                                         <option value="zh">中文</option>
-                                        <option value="ar">TEST Arabic</option>
-                                        <option value="iw">Test Ivrit</option>
                                     </select>
                                 </div>
                                 <div className="sdl-dita-delivery-topbar-user"><span></span></div>

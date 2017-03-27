@@ -95,8 +95,6 @@ export class LocalizationService implements ILocalizationService {
         languages.push({"name": "日本語", "iso": "ja"});
         languages.push({"name": "Nederlands", "iso": "nl"});
         languages.push({"name": "中文", "iso": "zh"});
-        languages.push({"name": "TEST Arabic", "iso": "ar"});
-        languages.push({"name": "Test Ivrit", "iso": "iw"});
         return languages;
     }
 
