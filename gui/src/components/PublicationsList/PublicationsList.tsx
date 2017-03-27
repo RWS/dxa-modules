@@ -6,18 +6,23 @@ import { fetchProductReleaseVersionsByProductFamily } from "store/actions/Api";
 
 const mapStateToProps = (state: IState, ownParams: IPublicationsListProps) => {
     const { params } = ownParams;
+    const productReleaseVersions = getReleaseVersionsForPub(state, params.productFamily);
+    const firstInAlist = productReleaseVersions && productReleaseVersions.length ? productReleaseVersions[0].title : "";
+    const selectedProductVersion = params.productReleaseVersion ? params.productReleaseVersion : firstInAlist;
+
     //default filter with language and productFamily;
     let filter = { language: state.language, productFamily: params.productFamily };
 
-    if ( params.productReleaseVersion ) {
-        filter = {...filter, productReleaseVersion:  params.productReleaseVersion};
+    if ( selectedProductVersion ) {
+        filter = {...filter, productReleaseVersion: selectedProductVersion};
     }
     const publications = getPubList(state, filter);
     return {
         publications,
-        productReleaseVersions: getReleaseVersionsForPub(state, params.productFamily),
+        productReleaseVersions: productReleaseVersions,
         // dont' show spinner if there are publications cached
-        isLoading: publications.length === 0 && isPubsLoading(state)
+        isLoading: publications.length === 0 && isPubsLoading(state),
+        selectedProductVersion
     };
 };
 

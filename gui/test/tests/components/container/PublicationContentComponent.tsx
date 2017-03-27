@@ -291,7 +291,8 @@ class PublicationContentComponent extends TestBase {
                     version: "1",
                     logicalId: "GUID-1",
                     productFamily: "PF",
-                    productReleaseVersion: "PR1"
+                    productReleaseVersion: "PR1",
+                    language: "en"
                 }, {
                     id: "2",
                     title: "Publication2",
@@ -299,7 +300,8 @@ class PublicationContentComponent extends TestBase {
                     version: "1",
                     logicalId: "GUID-1",
                     productFamily: "PF",
-                    productReleaseVersion: "PR2"
+                    productReleaseVersion: "PR2",
+                    language: "en"
                 }];
                 services.publicationService.setMockDataPublications(null, publications, [{ title: "PF" }],
                     [{ title: "PR1", value: "pr1" }, { title: "PR2", value: "pr2" }]);
