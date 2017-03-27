@@ -330,7 +330,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
             const taxonomyId = TcmId.getTaxonomyItemId(TaxonomyItemId.Toc, firstSitemapId) || firstSitemapId;
 
             this._getActiveSitemapPath(publicationId, pageInfo.id, taxonomyId, path => {
-                /* istanbul ignore else */
+                /* istanbul ignore if */
                 if (this._isUnmounted) {
                     return;
                 }
@@ -380,7 +380,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
     }
 
     private _fixPanels(): void {
-        /* istanbul ignore else */
+        /* istanbul ignore if */
         if (this._isUnmounted) {
             return;
         }
@@ -404,7 +404,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
     }
 
     private _updatePanels(page: HTMLElement, toc: HTMLElement, contentNavigation: HTMLElement): void {
-        /* istanbul ignore else */
+        /* istanbul ignore if */
         if (!this._isUnmounted) {
             if (contentNavigation && page) {
                 // Update active title inside content navigation panel

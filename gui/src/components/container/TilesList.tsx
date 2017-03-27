@@ -91,7 +91,7 @@ export class TilesList extends React.Component<ITilesListProps, ITilesListState>
                     skin="graphene"
                     purpose={ButtonPurpose.CONFIRM}
                     events={{"click": () => {
-                        /* istanbul ignore else */
+                        /* istanbul ignore if */
                         if (!this._isUnmounted) {
                             this.setState({
                                 showAllItems: true

@@ -272,7 +272,7 @@ export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
 
     private _toggleNavigationMenu(): void {
         const { isNavOpen } = this.state;
-        /* istanbul ignore else */
+        /* istanbul ignore if */
         if (!this._isUnmounted) {
             this.setState({
                 isNavOpen: !isNavOpen
@@ -281,7 +281,7 @@ export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
     }
 
     private _onNavigated(location: HistoryModule.Location): void {
-        /* istanbul ignore else */
+        /* istanbul ignore if */
         if (!this._isUnmounted) {
             this.setState({
                 isNavOpen: false
@@ -291,7 +291,7 @@ export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
 
     private _toggleSearchPanel(): void {
         const { searchIsOpen } = this.state;
-        /* istanbul ignore else */
+        /* istanbul ignore if */
         if (!this._isUnmounted) {
             // Add animation to the main content to allow a smoot transition
             // This was hard to achieve using css only as the animation would also be triggered when for example scrolling back to the top
