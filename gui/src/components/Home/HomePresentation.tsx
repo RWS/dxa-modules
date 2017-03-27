@@ -200,7 +200,7 @@ export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
                     placeholderLabel={searchTitle || ""}
                     onSearch={query => console.log(query)}
                     onFocus={() => {
-                        /* istanbul ignore if */
+                        /* istanbul ignore else */
                         if (!this._isUnmounted) {
                             this.setState({
                                 searchIsActive: true
@@ -208,7 +208,7 @@ export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
                         }
                     } }
                     onBlur={() => {
-                        /* istanbul ignore if */
+                        /* istanbul ignore else */
                         if (!this._isUnmounted) {
                             this.setState({
                                 searchIsActive: false
@@ -272,7 +272,7 @@ export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
 
     private _toggleNavigationMenu(): void {
         const { isNavOpen } = this.state;
-        /* istanbul ignore if */
+        /* istanbul ignore else */
         if (!this._isUnmounted) {
             this.setState({
                 isNavOpen: !isNavOpen
@@ -281,7 +281,7 @@ export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
     }
 
     private _onNavigated(location: HistoryModule.Location): void {
-        /* istanbul ignore if */
+        /* istanbul ignore else */
         if (!this._isUnmounted) {
             this.setState({
                 isNavOpen: false
@@ -291,7 +291,7 @@ export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
 
     private _toggleSearchPanel(): void {
         const { searchIsOpen } = this.state;
-        /* istanbul ignore if */
+        /* istanbul ignore else */
         if (!this._isUnmounted) {
             // Add animation to the main content to allow a smoot transition
             // This was hard to achieve using css only as the animation would also be triggered when for example scrolling back to the top
@@ -303,7 +303,7 @@ export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
             if (isAnimated) {
                 const _onTransitionEnd = () => {
                     searchNode.removeEventListener("transitionend", _onTransitionEnd);
-                    /* istanbul ignore if */
+                    /* istanbul ignore else */
                     if (!this._isUnmounted) {
                         this.setState({
                             searchIsOpening: false
@@ -326,7 +326,7 @@ export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
             // Get publication title
             publicationService.getPublicationById(publicationId).then(
                 pub => {
-                    /* istanbul ignore if */
+                    /* istanbul ignore else */
                     if (!this._isUnmounted) {
                         this.setState({
                             searchTitle: localizationService.formatMessage("components.searchbar.publication.placeholder", [pub.title || ""])
@@ -334,7 +334,7 @@ export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
                     }
                 },
                 error => {
-                    /* istanbul ignore if */
+                    /* istanbul ignore else */
                     if (!this._isUnmounted) {
                         // TODO: improve error handling
                         this.setState({
@@ -343,7 +343,7 @@ export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
                     }
                 });
         } else {
-            /* istanbul ignore if */
+            /* istanbul ignore else */
             if (!this._isUnmounted) {
                 this.setState({
                     searchTitle: localizationService.formatMessage("components.searchbar.placeholder")
