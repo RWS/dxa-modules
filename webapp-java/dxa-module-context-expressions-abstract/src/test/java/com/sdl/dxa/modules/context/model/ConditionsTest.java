@@ -13,9 +13,9 @@ public class ConditionsTest {
     @Test
     public void shouldIsEmpty() throws Exception {
         assertTrue(new Conditions(null, null).isEmpty());
-        assertTrue(new Conditions(null, Collections.<String>emptySet()).isEmpty());
-        assertTrue(new Conditions(Collections.<String>emptySet(), null).isEmpty());
-        assertTrue(new Conditions(Collections.<String>emptySet(), Collections.<String>emptySet()).isEmpty());
+        assertTrue(new Conditions(null, Collections.emptySet()).isEmpty());
+        assertTrue(new Conditions(Collections.emptySet(), null).isEmpty());
+        assertTrue(new Conditions(Collections.emptySet(), Collections.emptySet()).isEmpty());
 
         assertFalse(new Conditions(null, Sets.newHashSet("test")).isEmpty());
         assertFalse(new Conditions(Sets.newHashSet("test"), null).isEmpty());

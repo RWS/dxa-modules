@@ -31,7 +31,7 @@ public class ContextExpressionEntityEvaluatorTest {
         ContextExpressionEntityEvaluator entityEvaluator = new ContextExpressionEntityEvaluator();
         ContextClaimsProvider contextClaimsProvider = mock(ContextClaimsProvider.class);
         when(contextClaimsProvider.getContextClaims(anyString())).thenReturn(
-                ImmutableMap.<String, Object>of(
+                ImmutableMap.of(
                         "cx.android", true,
                         "cx.apple", false,
                         "cx.samsung", true,
@@ -73,7 +73,7 @@ public class ContextExpressionEntityEvaluatorTest {
         ReflectionTestUtils.setField(evaluator, "contextExpressionsKey", CONTEXT_EXPRESSIONS_KEY);
 
         TestEntity entity = new TestEntity();
-        entity.setExtensionData(Collections.<String, Object>emptyMap());
+        entity.setExtensionData(Collections.emptyMap());
 
         //when
         boolean includeEntity = evaluator.includeEntity(entity);
@@ -120,7 +120,7 @@ public class ContextExpressionEntityEvaluatorTest {
         ReflectionTestUtils.setField(evaluator, "contextExpressionsKey", CONTEXT_EXPRESSIONS_KEY);
 
         TestEntity entity = new TestEntity();
-        entity.setExtensionData(ImmutableMap.<String, Object>of(CONTEXT_EXPRESSIONS_KEY, new Conditions(null, null)));
+        entity.setExtensionData(ImmutableMap.of(CONTEXT_EXPRESSIONS_KEY, new Conditions(null, null)));
 
         //when
         boolean includeEntity = evaluator.includeEntity(entity);
@@ -139,7 +139,7 @@ public class ContextExpressionEntityEvaluatorTest {
         ReflectionTestUtils.setField(evaluator, "contextClaimsProvider", contextClaimsProvider);
 
         TestEntity entity = new TestEntity();
-        entity.setExtensionData(ImmutableMap.<String, Object>of(CONTEXT_EXPRESSIONS_KEY,
+        entity.setExtensionData(ImmutableMap.of(CONTEXT_EXPRESSIONS_KEY,
                 new Conditions(newHashSet("contextepr.apple"), null)));
 
         //when
@@ -164,7 +164,7 @@ public class ContextExpressionEntityEvaluatorTest {
 
         private EntityModel entityWithCx(Set<String> includes, Set<String> excludes) {
             TestEntity entity = new TestEntity();
-            entity.setExtensionData(ImmutableMap.<String, Object>of(
+            entity.setExtensionData(ImmutableMap.of(
                     CONTEXT_EXPRESSIONS_KEY, new Conditions(includes, excludes)));
             return entity;
         }

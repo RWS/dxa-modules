@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.sdl.dxa.modules</groupId>
-    <artifactId>dxa-module-smarttarget</artifactId>
+    <artifactId>dxa-module-context-expressions-legacy</artifactId>
     <version>2.0.0-SNAPSHOT</version>
 
-    <name>DXA Modules - XO support, R2 implementation</name>
-    <description>R2 implementation of DXA XO support</description>
+    <name>DXA Modules - Context Expressions support, Legacy implementation</name>
+    <description>Legacy implementation of DXA Context Expressions support module</description>
 
     <scm>
         <url>https://github.com/sdl/dxa-modules</url>
@@ -59,23 +59,23 @@
 
         <dependency>
             <groupId>com.sdl.dxa.modules</groupId>
-            <artifactId>dxa-module-smarttarget-abstract</artifactId>
+            <artifactId>dxa-module-context-expressions-abstract</artifactId>
         </dependency>
 
         <dependency>
             <groupId>com.sdl.dxa</groupId>
-            <artifactId>dxa-r2-provider</artifactId>
+            <artifactId>dxa-dd4t-provider</artifactId>
         </dependency>
 
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>
         </dependency>
+
     </dependencies>
 
     <build>
