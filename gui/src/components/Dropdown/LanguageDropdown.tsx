@@ -1,18 +1,29 @@
 import { connect } from "react-redux";
-import { Dropdown, IDropdownValue } from "./Dropdown";
+import { Dropdown } from "./Dropdown";
 import { changeLanguage } from "store/actions/Actions";
 import { IState } from "store/interfaces/State";
 import { localization } from "services/common/LocalizationService";
+import { getPubList } from "store/reducers/Reducer";
+import { chain } from "lodash";
 
-const languages: Array<IDropdownValue> = localization.getLanguages().map(language => ({"text": language.name, "value": language.iso}));
+const knownLanguages = localization.getLanguages().map(language => language.iso);
 
-const mapStateToProps = (state: IState): {} => ({
-    selected: {
-        value: state.language,
-        text: localization.isoToName(state.language)
-    },
-    items: languages
-});
+const toDropdownFormat = (language: string) => ({"text": localization.isoToName(language), "value": language});
+
+const mapStateToProps = (state: IState): {} => {
+
+    const languages = chain(getPubList(state))
+        .filter(pub => pub.language)
+        .map(pub => pub.language)
+        .union(knownLanguages)
+        .map(toDropdownFormat)
+        .value();
+
+    return {
+        selected: toDropdownFormat(state.language),
+        items: languages
+    };
+};
 
 const mapDispatchToProps = {
     onChange: changeLanguage
