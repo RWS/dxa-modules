@@ -35,7 +35,8 @@ const mapStateToProps = (state: IState, ownParams: IPublicationsListProps) => {
         productReleaseVersions: productReleaseVersions,
         // dont' show spinner if there are publications cached
         isLoading: publications.length === 0 && isPubsLoading(state),
-        selectedProductVersion
+        selectedProductVersion,
+        uiLanguage: state.language
     };
 };
 

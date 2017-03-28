@@ -267,6 +267,7 @@ class PublicationsListComponent extends TestBase {
                             productReleaseVersions = {productReleaseVersions || []}
                             selectedProductVersion = {selectedProductVersion}
                             isLoading={!publications.length}
+                            uiLanguage = "en"
                             params={{ productFamily: productFamily || "prod-family" }} />
                     </ComponentWithContext>
                 </Provider>
