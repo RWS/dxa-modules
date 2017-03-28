@@ -7,6 +7,7 @@ import { SearchBar } from "components/presentation/SearchBar";
 
 import "components/container/styles/App";
 import "components/container/styles/Home";
+import { FetchPublications } from "components/helpers/FetchPublications";
 
 /**
  * Home state
@@ -184,6 +185,7 @@ export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
 
         return (
             <div className={appClass}>
+                <FetchPublications />
                 <div className={"sdl-dita-delivery-nav-mask"} onClick={isNavOpen && this._toggleNavigationMenu.bind(this)} />
                 <TopBar>
                     {
