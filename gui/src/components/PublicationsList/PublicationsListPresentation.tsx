@@ -73,6 +73,8 @@ export interface IPublicationsListProps {
      */
     productReleaseVersions: IProductReleaseVersion[];
 
+    selectedProductVersion: string;
+
     isLoading: boolean;
 
     fetchProductReleaseVersionsByProductFamily?:  (publicationService: IPublicationService, productFamily: string) => void;
@@ -145,13 +147,12 @@ export class PublicationsListPresentation extends React.Component<IPublicationsL
      * @returns {JSX.Element}
      */
     public render(): JSX.Element {
-        const { productFamily, productReleaseVersion } = this.props.params;
-        const { publications, isLoading, productReleaseVersions } = this.props;
+        const { productFamily } = this.props.params;
+        const { publications, isLoading, productReleaseVersions, selectedProductVersion } = this.props;
         const { error } = this.state;
         const { services, router } = this.context;
         const { formatMessage } = services.localizationService;
         const _retryHandler = (): void => { this.fetchReleaseVersions(this.props); };
-
         const defaultProductVersion = productReleaseVersions && productReleaseVersions.length ? productReleaseVersions[0].value : "";
         const errorButtons = <div>
             <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{ "click": _retryHandler }}>{formatMessage("control.button.retry")}</Button>
@@ -161,7 +162,7 @@ export class PublicationsListPresentation extends React.Component<IPublicationsL
                 <FetchPublications productFamily={productFamily} />
                 <h1>{productFamily}</h1>
                 <VersionSelector productReleaseVersions={productReleaseVersions}
-                    selectedProductReleaseVersion={productReleaseVersion || defaultProductVersion}
+                    selectedProductReleaseVersion={selectedProductVersion || defaultProductVersion}
                     onChange={releaseVersion => {
                         if (router) {
                             router.push(Url.getProductFamilyUrl(productFamily, releaseVersion));

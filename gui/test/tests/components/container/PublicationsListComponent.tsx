@@ -215,7 +215,8 @@ class PublicationsListComponent extends TestBase {
                     version: "1",
                     logicalId: "GUID-1",
                     productFamily: "PF",
-                    productReleaseVersion: "PR1"
+                    productReleaseVersion: "PR1",
+                    language: "en"
                 }, {
                     id: "2",
                     title: "Publication2",
@@ -223,7 +224,8 @@ class PublicationsListComponent extends TestBase {
                     version: "1",
                     logicalId: "GUID-1",
                     productFamily: "PF",
-                    productReleaseVersion: "PR2"
+                    productReleaseVersion: "PR2",
+                    language: "en"
                 }];
 
                 const publicationsList = this._renderComponent(target, publications, "PF",
@@ -253,8 +255,9 @@ class PublicationsListComponent extends TestBase {
     }
 
     private _renderComponent(target: HTMLElement, publications: IPublication[],
-                            productFamily?: string, productReleaseVersions?: IProductReleaseVersion[]): PublicationsListPresentation {
+                            productFamily?: string, productReleaseVersions: IProductReleaseVersion[] = []): PublicationsListPresentation {
         const store = configureStore({});
+        const selectedProductVersion = productReleaseVersions[0] ? productReleaseVersions[0].title : "";
         const comp = ReactDOM.render(
             (
                 <Provider store={store}>
@@ -262,6 +265,7 @@ class PublicationsListComponent extends TestBase {
                         <PublicationsListPresentation
                             publications={publications}
                             productReleaseVersions = {productReleaseVersions || []}
+                            selectedProductVersion = {selectedProductVersion}
                             isLoading={!publications.length}
                             params={{ productFamily: productFamily || "prod-family" }} />
                     </ComponentWithContext>

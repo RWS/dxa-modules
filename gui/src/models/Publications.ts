@@ -155,7 +155,7 @@ export class Publications extends LoadableObject {
     private _convertToProductReleaseVersion(version: string | null): IProductReleaseVersion {
         if (version === null) {
             return {
-                title: this._unknownProductFamilyDescription,
+                title: this._unknownProductReleaseVersion,
                 value: this._unknownProductReleaseVersion.trim().toLowerCase(),
                 hasWarning: true
             };
