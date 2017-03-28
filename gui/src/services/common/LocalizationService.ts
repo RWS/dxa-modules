@@ -24,6 +24,8 @@ const translate = (lang: string) => (path: string) => lang in Resources ? Resour
 
 const formatMessage = (resource: string, variables?: string[]) => Array.isArray(variables) ? String.format(resource, variables) : resource;
 
+/* This is default of fallback langauge for publcaitions */
+export const FALLBACK_LANGUAGE = "en";
 /**
  * Localization service
  *

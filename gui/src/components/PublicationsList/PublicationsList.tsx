@@ -3,6 +3,9 @@ import { PublicationsListPresentation, IPublicationsListProps } from "./Publicat
 import { getPubList, isPubsLoading, getReleaseVersionsForPub } from "store/reducers/Reducer";
 import { IState } from "store/interfaces/State";
 import { fetchProductReleaseVersionsByProductFamily } from "store/actions/Api";
+import { find, chain } from "lodash";
+import { IPublication } from "interfaces/Publication";
+import { FALLBACK_LANGUAGE } from "../../services/common/LocalizationService";
 
 const mapStateToProps = (state: IState, ownParams: IPublicationsListProps) => {
     const { params } = ownParams;
@@ -11,12 +14,21 @@ const mapStateToProps = (state: IState, ownParams: IPublicationsListProps) => {
     const selectedProductVersion = params.productReleaseVersion ? params.productReleaseVersion : firstInAlist;
 
     //default filter with language and productFamily;
-    let filter = { language: state.language, productFamily: params.productFamily };
+    let filter = { productFamily: params.productFamily };
 
     if ( selectedProductVersion ) {
         filter = {...filter, productReleaseVersion: selectedProductVersion};
     }
-    const publications = getPubList(state, filter);
+
+    //Groups publications but versionRef and find one we need by language and fallback language
+    const publications = chain(getPubList(state, filter))
+        .groupBy("versionRef")
+        .values()
+        .flatMap((pubsByRef: IPublication[]) => find(pubsByRef, {language: state.language})
+                                             || find(pubsByRef, {language: FALLBACK_LANGUAGE}))
+        .value()
+        .filter(publiction => publiction !== undefined);
+
     return {
         publications,
         productReleaseVersions: productReleaseVersions,
