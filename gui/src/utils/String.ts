@@ -36,4 +36,17 @@ export class String {
         }
         return str;
     }
+
+    /**
+     * Trim and normalize string to lowercase
+     *
+     * @static
+     * @param {string} str String to modify
+     * @returns {string}
+     *
+     * @memberOf String
+     */
+    public static normalize(str: string): string {
+        return str.toLowerCase().trim();
+    }
 }

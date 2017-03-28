@@ -4,13 +4,14 @@ import { getPubList, isPubsLoading, getReleaseVersionsForPub } from "store/reduc
 import { IState } from "store/interfaces/State";
 import { fetchProductReleaseVersionsByProductFamily } from "store/actions/Api";
 import { localization } from "services/common/LocalizationService";
+import { String } from "utils/String";
 
 const productFamily = (params: IPublicationsListPropsParams): string | null => {
-    return (params.productFamily === localization.formatMessage("productfamilies.unknown.title")) ? null : params.productFamily;
+    return (String.normalize(params.productFamily) === String.normalize(localization.formatMessage("productfamilies.unknown.title"))) ? null : params.productFamily;
 };
 
 const productReleaseVersion = (value: string): string | null => {
-    return (value === localization.formatMessage("productreleaseversions.unknown.title")) ? null : value;
+    return (String.normalize(value) === String.normalize(localization.formatMessage("productreleaseversions.unknown.title"))) ? null : value;
 };
 
 const mapStateToProps = (state: IState, ownProps: IPublicationsListProps) => {
@@ -38,6 +39,7 @@ const mapStateToProps = (state: IState, ownProps: IPublicationsListProps) => {
 const dispatchToProps = {
     fetchProductReleaseVersionsByProductFamily
 };
+
 /**
  * Connector of Publication List component for Redux
  *
