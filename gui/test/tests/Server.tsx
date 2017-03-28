@@ -73,9 +73,9 @@ class Server extends TestBase {
                                             <li><a>中文</a></li>
                                         </ul>
                                     </div>
-                                    <select>
+                                    <select defaultValue="en">
                                         <option value="de">Deutsch</option>
-                                        <option selected value="en">English</option>
+                                        <option value="en">English</option>
                                         <option value="he">עברית</option>
                                         <option value="ja">日本語</option>
                                         <option value="nl">Nederlands</option>

@@ -200,6 +200,7 @@ export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
                     placeholderLabel={searchTitle || ""}
                     onSearch={query => console.log(query)}
                     onFocus={() => {
+                        /* istanbul ignore else */
                         if (!this._isUnmounted) {
                             this.setState({
                                 searchIsActive: true
@@ -207,6 +208,7 @@ export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
                         }
                     } }
                     onBlur={() => {
+                        /* istanbul ignore else */
                         if (!this._isUnmounted) {
                             this.setState({
                                 searchIsActive: false
@@ -301,9 +303,12 @@ export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
             if (isAnimated) {
                 const _onTransitionEnd = () => {
                     searchNode.removeEventListener("transitionend", _onTransitionEnd);
-                    this.setState({
-                        searchIsOpening: false
-                    });
+                    /* istanbul ignore else */
+                    if (!this._isUnmounted) {
+                        this.setState({
+                            searchIsOpening: false
+                        });
+                    }
                 };
                 searchNode.addEventListener("transitionend", _onTransitionEnd);
             }
@@ -338,9 +343,12 @@ export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
                     }
                 });
         } else {
-            this.setState({
-                searchTitle: localizationService.formatMessage("components.searchbar.placeholder")
-            });
+            /* istanbul ignore else */
+            if (!this._isUnmounted) {
+                this.setState({
+                    searchTitle: localizationService.formatMessage("components.searchbar.placeholder")
+                });
+            }
         }
     }
 };
