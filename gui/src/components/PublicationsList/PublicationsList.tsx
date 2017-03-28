@@ -1,20 +1,29 @@
 import { connect } from "react-redux";
-import { PublicationsListPresentation, IPublicationsListProps } from "./PublicationsListPresentation";
+import { PublicationsListPresentation, IPublicationsListProps, IPublicationsListPropsParams } from "./PublicationsListPresentation";
 import { getPubList, isPubsLoading, getReleaseVersionsForPub } from "store/reducers/Reducer";
 import { IState } from "store/interfaces/State";
 import { fetchProductReleaseVersionsByProductFamily } from "store/actions/Api";
+import { localization } from "services/common/LocalizationService";
 
-const mapStateToProps = (state: IState, ownParams: IPublicationsListProps) => {
-    const { params } = ownParams;
+const productFamily = (params: IPublicationsListPropsParams): string | null => {
+    return (params.productFamily === localization.formatMessage("productfamilies.unknown.title")) ? null : params.productFamily;
+};
+
+const productReleaseVersion = (value: string): string | null => {
+    return (value === localization.formatMessage("productreleaseversions.unknown.title")) ? null : value;
+};
+
+const mapStateToProps = (state: IState, ownProps: IPublicationsListProps) => {
+    const { params } = ownProps;
     const productReleaseVersions = getReleaseVersionsForPub(state, params.productFamily);
     const firstInAlist = productReleaseVersions && productReleaseVersions.length ? productReleaseVersions[0].title : "";
     const selectedProductVersion = params.productReleaseVersion ? params.productReleaseVersion : firstInAlist;
 
     //default filter with language and productFamily;
-    let filter = { language: state.language, productFamily: params.productFamily };
+    let filter = { language: state.language, productFamily: productFamily(params)};
 
     if ( selectedProductVersion ) {
-        filter = {...filter, productReleaseVersion: selectedProductVersion};
+        filter = {...filter, productReleaseVersion: productReleaseVersion(selectedProductVersion)};
     }
     const publications = getPubList(state, filter);
     return {

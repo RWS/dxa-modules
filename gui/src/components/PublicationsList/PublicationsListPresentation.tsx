@@ -153,7 +153,6 @@ export class PublicationsListPresentation extends React.Component<IPublicationsL
         const { services, router } = this.context;
         const { formatMessage } = services.localizationService;
         const _retryHandler = (): void => { this.fetchReleaseVersions(this.props); };
-        const defaultProductVersion = productReleaseVersions && productReleaseVersions.length ? productReleaseVersions[0].value : "";
         const errorButtons = <div>
             <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{ "click": _retryHandler }}>{formatMessage("control.button.retry")}</Button>
         </div>;
@@ -162,7 +161,7 @@ export class PublicationsListPresentation extends React.Component<IPublicationsL
                 <FetchPublications productFamily={productFamily} />
                 <h1>{productFamily}</h1>
                 <VersionSelector productReleaseVersions={productReleaseVersions}
-                    selectedProductReleaseVersion={selectedProductVersion || defaultProductVersion}
+                    selectedProductReleaseVersion={selectedProductVersion}
                     onChange={releaseVersion => {
                         if (router) {
                             router.push(Url.getProductFamilyUrl(productFamily, releaseVersion));
