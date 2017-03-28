@@ -5,7 +5,7 @@ import { IState } from "store/interfaces/State";
 import { fetchProductReleaseVersionsByProductFamily } from "store/actions/Api";
 import { find, chain } from "lodash";
 import { IPublication } from "interfaces/Publication";
-import { FALLBACK_LANGUAGE } from "../../services/common/LocalizationService";
+import { DEFAULT_LANGUAGE } from "services/common/LocalizationService";
 
 const mapStateToProps = (state: IState, ownParams: IPublicationsListProps) => {
     const { params } = ownParams;
@@ -20,12 +20,13 @@ const mapStateToProps = (state: IState, ownParams: IPublicationsListProps) => {
         filter = {...filter, productReleaseVersion: selectedProductVersion};
     }
 
-    //Groups publications but versionRef and find one we need by language and fallback language
+    // Groups publications by versionRef
+    // find one we need by language or fallback language
     const publications = chain(getPubList(state, filter))
         .groupBy("versionRef")
         .values()
         .flatMap((pubsByRef: IPublication[]) => find(pubsByRef, {language: state.language})
-                                             || find(pubsByRef, {language: FALLBACK_LANGUAGE}))
+                                             || find(pubsByRef, {language: DEFAULT_LANGUAGE}))
         .value()
         .filter(publiction => publiction !== undefined);
 
