@@ -151,7 +151,8 @@ export class Tile extends React.Component<ITileProps, ITileState> {
         const { tile } = this.props;
         const nextTile = nextProps.tile;
 
-        // Update tile content if title changed and there was a warning
+        // Update tile content if title changed and there was a warning.
+        // It means that there was a language change of warning description label.
         if (tile.title !== nextTile.title && tile.hasWarning) {
             this._loadTileContent(nextTile);
         }
