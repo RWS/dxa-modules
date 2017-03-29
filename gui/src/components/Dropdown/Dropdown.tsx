@@ -128,6 +128,8 @@ export class Dropdown extends React.Component<IDropdownProps, IDropdownState> {
             status: DropdownToggleState.OFF
         };
 
+        this.onFocusout = this.onFocusout.bind(this);
+        this.toggleOff = this.toggleOff.bind(this);
         this.toggleOff();
     }
 
@@ -217,7 +219,16 @@ export class Dropdown extends React.Component<IDropdownProps, IDropdownState> {
     public componentDidMount(): void {
         const domNode = ReactDOM.findDOMNode(this);
         this._element = domNode as HTMLElement;
-        document.addEventListener("click", this.onFocusout.bind(this));
+        document.addEventListener("click", this.onFocusout);
+        window.addEventListener("resize", this.toggleOff);
+    }
+
+    /**
+     * Remove listeners when component about to be unmounted
+     */
+    public componentDidUnmount(): void {
+        document.removeEventListener("click", this.onFocusout);
+        window.removeEventListener("resize", this.toggleOff);
     }
 
     /**
@@ -227,7 +238,7 @@ export class Dropdown extends React.Component<IDropdownProps, IDropdownState> {
      */
     public render(): JSX.Element {
         const dropdownClasses = ClassNames("sdl-dita-delivery-dropdown", {
-            "open": this.state.status == DropdownToggleState.ON
+            "open": this.isOpen()
         });
 
         const items = this.props.items.map((item, index): JSX.Element => {
