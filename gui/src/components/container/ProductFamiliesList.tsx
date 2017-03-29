@@ -91,6 +91,8 @@ export class ProductFamiliesList extends React.Component<{}, IProductFamiliesLis
                             ? (productFamilies.length > 0)
                                 ? (<TilesList viewAllLabel={formatMessage("components.productfamilies.view.all")}
                                     tiles={productFamilies.map((productFamily: IProductFamily) => {
+                                        productFamily.title = productFamily.hasWarning ? formatMessage("productfamilies.unknown.title") : productFamily.title;
+                                        productFamily.description = productFamily.hasWarning ? formatMessage("productfamilies.unknown.description") : productFamily.description;
                                         return {
                                             title: productFamily.title,
                                             loadableContent: productFamily.description ? (() => {
