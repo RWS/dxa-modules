@@ -33,7 +33,7 @@ class Server extends TestBase {
                 expect(element.children.length).toBe(1);
                 const firstChild = element.children[0];
                 expect(firstChild.classList).toContain("sdl-dita-delivery-app");
-                expect(firstChild.childNodes.length).toBe(4);
+                expect(firstChild.childNodes.length).toBe(5);
             });
 
             it("renders correct static markup", (): void => {
@@ -47,6 +47,7 @@ class Server extends TestBase {
                 const app = ReactDOMServer.renderToStaticMarkup(<Provider store={this.store}><App history={hashHistory} services={services} /></Provider>);
                 const expected = ReactDOMServer.renderToStaticMarkup((
                     <div className="ltr sdl-dita-delivery-app">
+                        <div/>
                         <div className="sdl-dita-delivery-nav-mask"></div>
                         <div className="sdl-dita-delivery-topbar">
                             <header>
@@ -91,7 +92,6 @@ class Server extends TestBase {
                             </div>
                         </div>
                         <div className="sdl-dita-delivery-publication-content-wrapper">
-                            <div/>
                             <div/>
                             <div/>
                             <div/>

@@ -9,11 +9,10 @@ import { ErrorContent } from "components/container/ErrorContent/ErrorContent";
 import { path } from "utils/Path";
 import { IWindow } from "interfaces/Window";
 import { RouteToState } from "components/helpers/RouteToState";
-import { StateToRoute } from "../helpers/StateToRoute";
-import { FetchPublications } from "../helpers/FetchPublications";
+import { StateToRoute } from "components/helpers/StateToRoute";
 import { FetchPage } from "components/helpers/FetchPage";
-import { PublicationsList } from "../PublicationsList/PublicationsList";
-import { FetchProductReleaseVersions } from "../helpers/FetchProductReleaseVersions";
+import { PublicationsList } from "components/PublicationsList/PublicationsList";
+import { FetchProductReleaseVersions } from "components/helpers/FetchProductReleaseVersions";
 
 export interface IAppProps {
     /**
@@ -88,7 +87,6 @@ export class App extends React.Component<IAppProps, {}> {
                                 <div className="sdl-dita-delivery-publication-content-wrapper">
                                     <RouteToState />
                                     <StateToRoute />
-                                    <FetchPublications />
                                     <FetchPage />
                                     <FetchProductReleaseVersions />
                                     <PublicationContent />
