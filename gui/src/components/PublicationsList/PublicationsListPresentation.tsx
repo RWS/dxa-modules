@@ -163,7 +163,7 @@ export class PublicationsListPresentation extends React.Component<IPublicationsL
                 <FetchPublications productFamily={productFamily} />
                 <h1>{productFamily}</h1>
                 <VersionSelector productReleaseVersions={productReleaseVersions}
-                    selectedProductReleaseVersion={selectedProductVersion || ""}
+                    selectedProductReleaseVersion={selectedProductVersion}
                     onChange={releaseVersion => {
                         if (router) {
                             router.push(Url.getProductFamilyUrl(productFamily, releaseVersion));

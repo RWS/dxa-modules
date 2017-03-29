@@ -2,6 +2,7 @@ import * as React from "react";
 import { IAppContext } from "components/container/App";
 import { DropdownList } from "sdl-controls-react-wrappers";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
+import { String } from "utils/String";
 
 import "./styles/VersionSelector";
 import "components/controls/styles/DropdownList";
@@ -30,7 +31,7 @@ export const VersionSelector: React.StatelessComponent<IVersionSelectorProps> =
                 <label>{formatMessage("productreleaseversions.version.label")}</label>
                 <DropdownList propertyMappings={{ "text": "title" }}
                     selectedValue={selectedProductReleaseVersion
-                        ? selectedProductReleaseVersion.trim().toLowerCase() : undefined}
+                        ? String.normalize(selectedProductReleaseVersion) : undefined}
                     options={productReleaseVersions || []}
                     onChange={onChange}
                     skin="graphene" />

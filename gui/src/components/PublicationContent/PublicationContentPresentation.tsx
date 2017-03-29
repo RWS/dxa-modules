@@ -226,7 +226,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         const { taxonomyService } = services;
         const { rootItems } = this._toc;
         const tocError = this._toc.error;
-        const selectedProductReleaseVersion = productReleaseVersion ? Version.normalize(productReleaseVersion).toLowerCase().trim() : undefined;
+        const selectedProductReleaseVersion = productReleaseVersion ? Version.normalize(productReleaseVersion) : undefined;
         return (
             <section className={"sdl-dita-delivery-publication-content"}>
                 <Page

@@ -90,7 +90,7 @@ class Server extends TestBase {
                                 <div className="search-button"></div>
                             </div>
                         </div>
-                        <div>
+                        <div className="sdl-dita-delivery-publication-content-wrapper">
                             <div/>
                             <div/>
                             <div/>

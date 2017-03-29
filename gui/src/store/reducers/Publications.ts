@@ -48,7 +48,7 @@ const productReleaseVersionHack = (prop: string, obj: {}) => {
     }
     // tslint:disable-next-line:no-any
     let version = Version.normalize((obj as any)[prop]);
-    return version ? version.toLowerCase().trim() : null;
+    return version ? version : null;
 };
 
 /**

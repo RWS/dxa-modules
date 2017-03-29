@@ -5,6 +5,7 @@ import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 import { Api } from "utils/Api";
 import { Net, IWebRequest, LoadableObject } from "sdl-models";
 import { localization } from "services/common/LocalizationService";
+import { String } from "utils/String";
 import Version from "utils/Version";
 
 /**
@@ -33,25 +34,25 @@ export class Publications extends LoadableObject {
         let result: IPublication[] = this._publications.slice();
 
         if (productFamily) {
-            const normalizedProductFamily = productFamily.toLowerCase().trim();
-            const familyTitle = (normalizedProductFamily === this._unknownProductFamilyTitle.toLowerCase()) ? undefined : normalizedProductFamily;
+            const normalizedProductFamily = String.normalize(productFamily);
+            const familyTitle = (normalizedProductFamily === String.normalize(this._unknownProductFamilyTitle)) ? undefined : normalizedProductFamily;
             result = result.filter((publication: IPublication) => {
                 if (!familyTitle) {
                     return !publication.productFamily;
                 }
-                return (publication.productFamily && publication.productFamily.toLowerCase().trim()) === familyTitle;
+                return (publication.productFamily && String.normalize(publication.productFamily)) === familyTitle;
             });
         }
 
         if (productReleaseVersion) {
-            const normalizedProductReleaseVersion = productReleaseVersion.toLowerCase().trim();
-            const productReleaseVersionTitle = (normalizedProductReleaseVersion === this._unknownProductReleaseVersion.toLowerCase())
+            const normalizedProductReleaseVersion = String.normalize(productReleaseVersion);
+            const productReleaseVersionTitle = (normalizedProductReleaseVersion === String.normalize(this._unknownProductReleaseVersion))
                 ? undefined : normalizedProductReleaseVersion;
             result = result.filter((publication: IPublication) => {
                 if (!productReleaseVersionTitle) {
                     return !publication.productReleaseVersion;
                 }
-                const normalizedPublicationProductReleaseVersion = publication.productReleaseVersion && Version.normalize(publication.productReleaseVersion).toLowerCase().trim();
+                const normalizedPublicationProductReleaseVersion = publication.productReleaseVersion && Version.normalize(publication.productReleaseVersion);
                 return normalizedPublicationProductReleaseVersion === productReleaseVersionTitle;
             });
         }
@@ -156,13 +157,13 @@ export class Publications extends LoadableObject {
         if (version === null) {
             return {
                 title: this._unknownProductReleaseVersion,
-                value: this._unknownProductReleaseVersion.trim().toLowerCase(),
+                value: String.normalize(this._unknownProductReleaseVersion),
                 hasWarning: true
             };
         }
         return {
             title: version,
-            value: version.trim().toLowerCase()
+            value: String.normalize(version)
         };
     }
 }

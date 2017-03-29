@@ -85,7 +85,7 @@ export class App extends React.Component<IAppProps, {}> {
                         <Route path="publications/:productFamily(/:productReleaseVersion)" component={PublicationsList} />
                         <Route path=":publicationId(/:pageIdOrPublicationTitle)(/:publicationTitle)(/:pageTitle)(/:pageAnchor)"
                             component={() => (
-                                <div>
+                                <div className="sdl-dita-delivery-publication-content-wrapper">
                                     <RouteToState />
                                     <StateToRoute />
                                     <FetchPublications />
