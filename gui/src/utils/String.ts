@@ -47,6 +47,6 @@ export class String {
      * @memberOf String
      */
     public static normalize(str: string): string {
-        return str ? str.toLowerCase().trim() : "";
+        return str.toLowerCase().trim();
     }
 }

@@ -178,7 +178,7 @@ export default class Version {
     public static normalize(productReleaseVersion: string): string {
         const releaseVersionMatch = productReleaseVersion && productReleaseVersion.match(VERSION_REGEX);
         if (releaseVersionMatch) {
-            return String.normalize(releaseVersionMatch[1]);
+            return releaseVersionMatch[1] ? String.normalize(releaseVersionMatch[1]) : releaseVersionMatch[1];
         }
         return String.normalize(productReleaseVersion);
     }
