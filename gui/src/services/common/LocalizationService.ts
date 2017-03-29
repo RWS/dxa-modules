@@ -9,7 +9,8 @@ import { browserHistory } from "react-router";
 interface IDic { [path: string]: string; };
 interface IDics { [lang: string]: IDic; };
 
-const DEFAULT_LANGUAGE: string = "en";
+export const DEFAULT_LANGUAGE: string = "en";
+
 const LANGUAGE_LOCALSTORAGE: string =  "sdl-dita-delivery-app-langugae";
 // Need to be loaded or configured somehow.
 const Languages = ["en", "nl"];

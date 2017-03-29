@@ -77,6 +77,8 @@ export interface IPublicationsListProps {
 
     isLoading: boolean;
 
+    uiLanguage: string;
+
     fetchProductReleaseVersionsByProductFamily?:  (publicationService: IPublicationService, productFamily: string) => void;
 }
 
@@ -148,7 +150,7 @@ export class PublicationsListPresentation extends React.Component<IPublicationsL
      */
     public render(): JSX.Element {
         const { productFamily } = this.props.params;
-        const { publications, isLoading, productReleaseVersions, selectedProductVersion } = this.props;
+        const { publications, isLoading, productReleaseVersions, selectedProductVersion, uiLanguage } = this.props;
         const { error } = this.state;
         const { services, router } = this.context;
         const { formatMessage } = services.localizationService;
@@ -182,6 +184,7 @@ export class PublicationsListPresentation extends React.Component<IPublicationsL
                                         loadableContent: () => {
                                             return this._getLoadableContent(publication.id);
                                         },
+                                        hasWarning: publication.language && publication.language !== uiLanguage,
                                         navigateTo: () => {
                                             /* istanbul ignore else */
                                             if (router) {
