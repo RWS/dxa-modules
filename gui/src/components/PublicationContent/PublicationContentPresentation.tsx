@@ -182,7 +182,9 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
 
     public componentDidMount(): void {
         const { publicationId, page, errorMessage } = this.props;
-        this.fetchPublication(publicationId);
+        if (!isPage(page)) {
+            this.fetchPublication(publicationId);
+        }
 
         if (isPage(page) && !isDummyPage(page)) {
             this.fetchPage(publicationId, page);
