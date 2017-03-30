@@ -128,6 +128,8 @@ export class Dropdown extends React.Component<IDropdownProps, IDropdownState> {
             status: DropdownToggleState.OFF
         };
 
+        this.onFocusout = this.onFocusout.bind(this);
+        this.toggleOff = this.toggleOff.bind(this);
         this.toggleOff();
     }
 
@@ -146,6 +148,7 @@ export class Dropdown extends React.Component<IDropdownProps, IDropdownState> {
      * @returns {void}
      */
     public toggleOn(): void {
+        /* istanbul ignore if */
         if (!this.isOpen()) {
             this.setState({
                 status: DropdownToggleState.ON
@@ -159,6 +162,7 @@ export class Dropdown extends React.Component<IDropdownProps, IDropdownState> {
      * @returns {void}
      */
     public toggleOff(): void {
+        /* istanbul ignore if */
         if (this.isOpen()) {
             this.setState({
                 status: DropdownToggleState.OFF
@@ -217,7 +221,16 @@ export class Dropdown extends React.Component<IDropdownProps, IDropdownState> {
     public componentDidMount(): void {
         const domNode = ReactDOM.findDOMNode(this);
         this._element = domNode as HTMLElement;
-        document.addEventListener("click", this.onFocusout.bind(this));
+        document.addEventListener("click", this.onFocusout);
+        window.addEventListener("resize", this.toggleOff);
+    }
+
+    /**
+     * Remove listeners when component about to be unmounted
+     */
+    public componentWillUnmount(): void {
+        document.removeEventListener("click", this.onFocusout);
+        window.removeEventListener("resize", this.toggleOff);
     }
 
     /**
@@ -227,7 +240,7 @@ export class Dropdown extends React.Component<IDropdownProps, IDropdownState> {
      */
     public render(): JSX.Element {
         const dropdownClasses = ClassNames("sdl-dita-delivery-dropdown", {
-            "open": this.state.status == DropdownToggleState.ON
+            "open": this.isOpen()
         });
 
         const items = this.props.items.map((item, index): JSX.Element => {
@@ -277,8 +290,11 @@ export class Dropdown extends React.Component<IDropdownProps, IDropdownState> {
     }
 
     private onFocusout(event: MouseEvent): void {
-        const eventPath = event as IPathEvent;
-        if (eventPath && eventPath.path && eventPath.path.indexOf(this._element) == -1) {
+        const eventWithPath = event as IPathEvent;
+        const eventPath = eventWithPath.path || this.eventPath(event);
+
+        /* istanbul ignore if */
+        if (eventPath && eventPath.indexOf(this._element) == -1) {
             this.toggleOff();
         }
     }
@@ -288,6 +304,8 @@ export class Dropdown extends React.Component<IDropdownProps, IDropdownState> {
             selected: this.props.items[index]
         } as IDropdownState);
         this.toggleOff();
+
+        /* istanbul ignore if */
         if (this.props.onChange) {
             this.props.onChange(this.props.items[index].value);
         }
@@ -298,5 +316,25 @@ export class Dropdown extends React.Component<IDropdownProps, IDropdownState> {
         const items = this.props.items;
         const values = items.map((item: IDropdownValue) => item.value);
         return this.onClickItem(values.indexOf(selectedValue));
+    }
+
+    private eventPath(event: MouseEvent): (Element | Document | Window)[] {
+        const path: (Element | Document | Window)[] = [];
+        let currentElement = event.target as HTMLElement | null;
+
+        while (currentElement) {
+            path.push(currentElement);
+            currentElement = currentElement.parentElement;
+        }
+        /* istanbul ignore if */
+        if (path.indexOf(window) === -1 && path.indexOf(document) === -1) {
+            path.push(document);
+        }
+        /* istanbul ignore if */
+        if (path.indexOf(window) === -1) {
+            path.push(window);
+        }
+
+        return path;
     }
 }
