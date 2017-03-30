@@ -5,16 +5,17 @@ import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 import { IProductReleaseVersionState } from "../interfaces/State";
 
 type Payload = {
-    publicationId: string,
+    productFamily: string,
     releaseVersions: IProductReleaseVersion[]
 };
 
-const byPubId = handleAction(RESLEASE_VERSIONS_LOADED, (state: IProductReleaseVersionMap, payload: Payload) => {
-    return { ...state, [payload.publicationId]: payload.releaseVersions };
+const byProductFamily = handleAction(RELEASE_VERSIONS_LOADED, (state: IProductReleaseVersionMap, payload: Payload) => {
+    return { ...state, [payload.productFamily]: payload.releaseVersions };
 }, {});
 
 export const releaseVersions = combineReducers({
-    byPubId
+    byProductFamily
 });
 
-export const getReleaseVersionsForPub = (state: IProductReleaseVersionState, publicationId: string): IProductReleaseVersion[] => publicationId ? state.byPubId[publicationId] : [{title: "WTF?", value: "RRRRRR"}];
+export const getReleaseVersionsForPub = (state: IProductReleaseVersionState, productFamily: string): IProductReleaseVersion[] =>
+    productFamily ? state.byProductFamily[productFamily] : [{title: "WTF?", value: "RRRRRR"}];
