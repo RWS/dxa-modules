@@ -226,7 +226,7 @@ export class Dropdown extends React.Component<IDropdownProps, IDropdownState> {
     /**
      * Remove listeners when component about to be unmounted
      */
-    public componentDidUnmount(): void {
+    public componentWillUnmount(): void {
         document.removeEventListener("click", this.onFocusout);
         window.removeEventListener("resize", this.toggleOff);
     }
