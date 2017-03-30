@@ -1,5 +1,5 @@
 import { handleAction, combineReducers } from "./CombineReducers";
-import { RESLEASE_VERSIONS_LOADED } from "store/actions/Actions";
+import { RELEASE_VERSIONS_LOADED } from "store/actions/Actions";
 import { IProductReleaseVersionMap } from "store/interfaces/State";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 import { IProductReleaseVersionState } from "../interfaces/State";
