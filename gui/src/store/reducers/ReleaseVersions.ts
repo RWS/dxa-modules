@@ -3,6 +3,8 @@ import { RELEASE_VERSIONS_LOADED } from "store/actions/Actions";
 import { IProductReleaseVersionMap } from "store/interfaces/State";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 import { IProductReleaseVersionState } from "../interfaces/State";
+import { DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE } from "models/Publications";
+import { String } from "utils/String";
 
 type Payload = {
     productFamily: string,
@@ -18,4 +20,4 @@ export const releaseVersions = combineReducers({
 });
 
 export const getReleaseVersionsForPub = (state: IProductReleaseVersionState, productFamily: string): IProductReleaseVersion[] =>
-    productFamily ? state.byProductFamily[productFamily] : [{title: "WTF?", value: "RRRRRR"}];
+    productFamily ? state.byProductFamily[productFamily] : [{title: DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE, value: String.normalize(DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE)}];
