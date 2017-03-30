@@ -17,6 +17,8 @@ import { VersionSelector } from "components/presentation/VersionSelector";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 import { IPublicationService } from "services/interfaces/PublicationService";
 
+import { DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE } from "models/Publications";
+
 import "components/container/styles/PublicationsList";
 
 const SHOWN_TILE_ITEMS_COUNT = 5;
@@ -155,13 +157,14 @@ export class PublicationsListPresentation extends React.Component<IPublicationsL
         const { services, router } = this.context;
         const { formatMessage } = services.localizationService;
         const _retryHandler = (): void => { this.fetchReleaseVersions(this.props); };
+        const productFamilyTranslate = (productFamily === DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE) ? formatMessage("productfamilies.unknown.title") : productFamily;
         const errorButtons = <div>
             <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{ "click": _retryHandler }}>{formatMessage("control.button.retry")}</Button>
         </div>;
         return (
             <section className={"sdl-dita-delivery-publications-list"}>
                 <FetchPublications productFamily={productFamily} />
-                <h1>{productFamily}</h1>
+                <h1>{productFamilyTranslate}</h1>
                 <VersionSelector productReleaseVersions={productReleaseVersions}
                     selectedProductReleaseVersion={selectedProductVersion}
                     onChange={releaseVersion => {
