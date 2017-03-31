@@ -10,7 +10,7 @@ module.exports = (isTest, isDebug) => {
         main: './src/Main.tsx',
         server: './src/Server.tsx',
         lib: './src/Lib.ts',
-        vendor: ['classnames', 'es6-promise', 'react-router', 'ts-helpers', 'sdl-models', 'sdl-controls', 'sdl-controls-react-wrappers']
+        vendor: ['classnames', 'es6-promise', 'react-router', 'ts-helpers', 'sdl-models', 'sdl-controls', 'sdl-controls-react-wrappers', 'babel-polyfill']
     };
     const testEntries = Object.assign({
         test: './test/Main.ts',
@@ -86,9 +86,10 @@ module.exports = (isTest, isDebug) => {
                 hash: true,
                 excludeChunks: ['lib', 'test', 'server']
             }),
+            /* Disabled visualizer as it takes too much memory, only enable when needed
             new Visualizer({
                 filename: '../bundle.stats.html'
-            })
+            })*/
         ],
         // What information should be printed to the console
         stats: {

@@ -36,11 +36,11 @@ class PublicationServiceTests extends TestBase {
                 });
             });
 
-            it("returns a proper error when publication title cannot be retrieved", (done: () => void): void => {
+            it("returns a proper error when publication cannot be retrieved", (done: () => void): void => {
                 // Put this test first, otherwise the publication would be already in the cache and the spy would not work
                 const failMessage = "failure-retrieving-publication-title";
                 spyOn(window, "XMLHttpRequest").and.callFake(() => new FakeXMLHttpRequest(failMessage));
-                publicationService.getPublicationTitle(failMessage).then(() => {
+                publicationService.getPublicationById(failMessage).then(() => {
                     fail("An error was expected.");
                     done();
                 }).catch(error => {
@@ -70,6 +70,72 @@ class PublicationServiceTests extends TestBase {
                     if (families) {
                         expect(families.length).toBe(5);
                         expect(families[3].title).toBe("Mobile Phones");
+                        expect(spy).not.toHaveBeenCalled();
+                    }
+                    done();
+                }).catch(error => {
+                    fail(`Unexpected error: ${error}`);
+                    done();
+                });
+            });
+
+            it("can get product release versions", (done: () => void): void => {
+                publicationService.getProductFamilies().then(families => {
+                    publicationService.getProductReleaseVersions(families[0].title).then(releaseVersions => {
+                        expect(releaseVersions).toBeDefined();
+                        if (releaseVersions) {
+                            expect(releaseVersions.length).toBe(1);
+                            expect(releaseVersions[0].title).toBe("Penguins ");
+                        }
+                        done();
+                    }).catch(error => {
+                        fail(`Unexpected error: ${error}`);
+                        done();
+                    });
+                });
+            });
+
+            it("can get product release versions from memory", (done: () => void): void => {
+                const spy = spyOn(window, "XMLHttpRequest").and.callThrough();
+                publicationService.getProductFamilies().then(families => {
+                    publicationService.getProductReleaseVersions(families[0].title).then(releaseVersions => {
+                        expect(releaseVersions).toBeDefined();
+                        if (releaseVersions) {
+                            expect(releaseVersions.length).toBe(1);
+                            expect(releaseVersions[0].title).toBe("Penguins ");
+                            expect(spy).not.toHaveBeenCalled();
+                        }
+                        done();
+                    }).catch(error => {
+                        fail(`Unexpected error: ${error}`);
+                        done();
+                    });
+                });
+            });
+
+            it("can get product release versions for a publication id", (done: () => void): void => {
+                publicationService.getProductReleaseVersionsByPublicationId(publicationId).then(releaseVersions => {
+                    expect(releaseVersions).toBeDefined();
+                    if (releaseVersions) {
+                        expect(releaseVersions.length).toBe(2);
+                        expect(releaseVersions[0].title).toBe("MP 330 ");
+                        expect(releaseVersions[1].title).toBe("MP 330 2014");
+                    }
+                    done();
+                }).catch(error => {
+                    fail(`Unexpected error: ${error}`);
+                    done();
+                });
+            });
+
+            it("can get product release versions for a publication id from memory", (done: () => void): void => {
+                const spy = spyOn(window, "XMLHttpRequest").and.callThrough();
+                publicationService.getProductReleaseVersionsByPublicationId(publicationId).then(releaseVersions => {
+                    expect(releaseVersions).toBeDefined();
+                    if (releaseVersions) {
+                        expect(releaseVersions.length).toBe(2);
+                        expect(releaseVersions[0].title).toBe("MP 330 ");
+                        expect(releaseVersions[1].title).toBe("MP 330 2014");
                         expect(spy).not.toHaveBeenCalled();
                     }
                     done();
@@ -109,9 +175,9 @@ class PublicationServiceTests extends TestBase {
                 });
             });
 
-            it("can get a publication title", (done: () => void): void => {
-                publicationService.getPublicationTitle(publicationId).then(title => {
-                    expect(title).toBe("User Guide");
+            it("can get a publication by id", (done: () => void): void => {
+                publicationService.getPublicationById(publicationId).then(pub => {
+                    expect(pub.title).toBe("User Guide");
                     done();
                 }).catch(error => {
                     fail(`Unexpected error: ${error}`);
@@ -119,10 +185,10 @@ class PublicationServiceTests extends TestBase {
                 });
             });
 
-            it("can get a publication title from memory", (done: () => void): void => {
+            it("can get a publication by id from memory", (done: () => void): void => {
                 const spy = spyOn(window, "XMLHttpRequest").and.callThrough();
-                publicationService.getPublicationTitle(publicationId).then(title => {
-                    expect(title).toBe("User Guide");
+                publicationService.getPublicationById(publicationId).then(pub => {
+                    expect(pub.title).toBe("User Guide");
                     expect(spy).not.toHaveBeenCalled();
                     done();
                 }).catch(error => {
@@ -131,8 +197,8 @@ class PublicationServiceTests extends TestBase {
                 });
             });
 
-            it("returns a proper error when a publication title cannot be resolved", (done: () => void): void => {
-                publicationService.getPublicationTitle("does-not-exist").then(() => {
+            it("returns a proper error when a publication by id cannot be resolved", (done: () => void): void => {
+                publicationService.getPublicationById("does-not-exist").then(() => {
                     fail("An error was expected.");
                     done();
                 }).catch(error => {

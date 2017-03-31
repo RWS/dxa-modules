@@ -69,11 +69,9 @@ const TaxonomyType = {
 /**
  * Function that generates unique value every time it's called.
  */
-const getUniqueTaxonomyId = function (count: number): () => string {
-    return function(): string {
-        return `taxonomy-${count++}`;
-    };
-}(0);
+const getUniqueTaxonomyId = ((count: number): () => string => {
+    return (): string => `taxonomy-${count++}`;
+})(0);
 
 /**
  * Table of contents
@@ -152,9 +150,7 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
      */
     public componentWillMount(): void {
         const { error } = this.props;
-        this.setState({
-            error: error
-        });
+        this.setState({ error });
     }
 
     /**
@@ -276,7 +272,7 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
             id: taxonomy.id || getUniqueTaxonomyId(),
             name: taxonomy.title,
             isLeafNode: !taxonomy.hasChildNodes,
-            dataType: dataType,
+            dataType,
             parent: parentNode,
             children: null,
             load: load,

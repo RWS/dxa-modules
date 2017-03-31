@@ -8,10 +8,10 @@ class PublicationServiceTests extends TestBase {
 
         describe(`Data Store tests (Publications).`, (): void => {
 
-            it("can get a publication title", (done: () => void): void => {
+            it("can get a publication by id", (done: () => void): void => {
                 const publicationId = "ish:39137-1-1";
-                publicationService.getPublicationTitle(publicationId).then(title => {
-                    expect(title).toBe("MP330");
+                publicationService.getPublicationById(publicationId).then(pub => {
+                    expect(pub.title).toBe("MP330");
                     done();
                 }).catch(error => {
                     fail(`Unexpected error: ${error}`);

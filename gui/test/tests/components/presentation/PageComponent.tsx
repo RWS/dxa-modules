@@ -2,17 +2,16 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as TestUtils from "react-addons-test-utils";
 import { Router, Route, hashHistory } from "react-router";
-import { Page, IPageProps } from "components/presentation/Page";
+import { PagePresentation, IPageProps } from "components/Page/PagePresentation";
 import { Url } from "utils/Url";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 import { ActivityIndicator } from "sdl-controls-react-wrappers";
 import { TestBase } from "sdl-models";
-
-interface IProps {
-    params: {
-        pageAnchor?: string;
-    };
-}
+import { configureStore } from "store/Store";
+import { Provider } from "react-redux";
+import { RouteToState } from "components/helpers/RouteToState";
+import { Page } from "components/Page/Page";
+import { PageService } from "test/mocks/services/PageService";
 
 class PageComponent extends TestBase {
 
@@ -73,7 +72,7 @@ class PageComponent extends TestBase {
                 const page = this._renderComponent({
                     showActivityIndicator: false,
                     error: "Error!",
-                    onNavigate: (url): void => {
+                    onNavigate: (url: string): void => {
                         path = url;
                     }
                 }, target);
@@ -90,14 +89,15 @@ class PageComponent extends TestBase {
             });
 
             it("click on retry button in error info", (): void => {
-                let path: string = "";
+                const fetch = jasmine.createSpy("fetchSpy");
                 const page = this._renderComponent({
+                    id: "0002",
+                    publicationId: "0001",
                     showActivityIndicator: false,
                     error: "Error!",
                     url: "url/to/page",
-                    onNavigate: (url): void => {
-                        path = url;
-                    }
+                    onNavigate: (url: string): void => {},
+                    fetchPage: fetch
                 }, target);
 
                 const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
@@ -106,9 +106,8 @@ class PageComponent extends TestBase {
                 expect(buttons.length).toEqual(2);
 
                 buttons.item(1).click();
-                setTimeout(() => {
-                    expect(path).toBe("url/to/page");
-                }, 0);
+                expect(fetch).toHaveBeenCalledWith(jasmine.any(PageService), "0001", "0002");
+
             });
 
             it("can show page content info", (): void => {
@@ -252,7 +251,7 @@ class PageComponent extends TestBase {
         describe(`Page navigation tests.`, (): void => {
             const target = super.createTargetElement();
             const pageUrl = Url.getPageUrl("123", "456", "publication", "page");
-            let page: Page;
+            let page: PagePresentation;
 
             beforeEach(() => {
                 hashHistory.push(pageUrl);
@@ -319,7 +318,6 @@ class PageComponent extends TestBase {
 
             it("scrolls to same content item", (done: () => void): void => {
                 const spy = spyOn(window, "scrollTo").and.callThrough();
-
                 const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
                 expect(domNode).not.toBeNull();
 
@@ -332,7 +330,7 @@ class PageComponent extends TestBase {
                 hyperlinks.item(1).click();
 
                 setTimeout((): void => {
-                    expect(spy).toHaveBeenCalledTimes(3);
+                    expect(spy).toHaveBeenCalledTimes(2);
                     done();
                 }, 100);
             });
@@ -360,26 +358,35 @@ class PageComponent extends TestBase {
 
     }
 
-    private _renderComponent(props: IPageProps, target: HTMLElement, children?: {}): Page {
+    private _renderComponent(props: IPageProps, target: HTMLElement, children?: {}): PagePresentation {
+        const store = configureStore();
+
         const comp = ReactDOM.render(
-            <ComponentWithContext>
-                <Page {...props}>{children}</Page>
-            </ComponentWithContext>, target
+             <Provider store={store}>
+                <ComponentWithContext>
+                    <PagePresentation {...props}>{children}</PagePresentation>
+                </ComponentWithContext>
+              </Provider>, target
         ) as React.Component<{}, {}>;
-        return TestUtils.findRenderedComponentWithType(comp, Page) as Page;
+        return TestUtils.findRenderedComponentWithType(comp, PagePresentation) as PagePresentation;
     }
 
-    private _renderRoutedComponent(props: IPageProps, target: HTMLElement, children?: {}): Page {
+    private _renderRoutedComponent(props: IPageProps, target: HTMLElement, children?: {}): PagePresentation {
+        const store = configureStore();
+
         const comp = ReactDOM.render(
             <Router history={hashHistory}>
                 <Route path=":publicationId(/:pageIdOrPublicationTitle)(/:publicationTitle)(/:pageTitle)(/:pageAnchor)"
-                    component={(compProps: IProps) => (
-                        <ComponentWithContext>
-                            <Page anchor={compProps.params.pageAnchor} {...props}>{children}</Page>
-                        </ComponentWithContext>
+                    component={() => (
+                        <Provider store={store}>
+                            <ComponentWithContext>
+                                <RouteToState />
+                                <Page {...props}>{children}</Page>
+                            </ComponentWithContext>
+                        </Provider>
                     )} />
             </Router>, target) as React.Component<{}, {}>;
-        return TestUtils.findRenderedComponentWithType(comp, Page) as Page;
+        return TestUtils.findRenderedComponentWithType(comp, PagePresentation) as PagePresentation;
     }
 }
 

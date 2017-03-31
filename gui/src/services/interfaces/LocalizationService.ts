@@ -1,4 +1,23 @@
 /**
+ * Language
+ */
+export interface ILanguage {
+	/**
+	 * Language name written in its native form
+	 *
+	 * @type {string}
+	 * @memberOf ILanguage
+	 */
+    name: string;
+
+    /**
+     * ISO 639-1 language code
+     * @type {string}
+     */
+    iso: string;
+}
+
+/**
  * Localization service
  */
 export interface ILocalizationService {
@@ -12,6 +31,13 @@ export interface ILocalizationService {
      * @returns {string}
      */
     formatMessage(path: string, variables?: string[]): string;
+
+    /**
+     * Get list of all languages
+     *
+     * @returns {ILanguage[]}
+     */
+    getLanguages(): ILanguage[];
 
     /**
      *

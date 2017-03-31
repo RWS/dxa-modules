@@ -1,65 +1,30 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Promise } from "es6-promise";
-import { ITaxonomy } from "interfaces/Taxonomy";
-import { IPage } from "interfaces/Page";
-import { TaxonomyItemId } from "interfaces/TcmId";
-
 import { IAppContext } from "components/container/App";
 import { NavigationMenu } from "components/presentation/NavigationMenu";
 import { Toc } from "components/presentation/Toc";
-import { Page } from "components/presentation/Page";
+import { Page } from "components/Page/Page";
 import { Breadcrumbs } from "components/presentation/Breadcrumbs";
+import { ContentLanguageWarning } from "components/ContentLanguageWarning/ContentLanguageWarning";
 
+import { VersionSelector } from "components/presentation/VersionSelector";
 import { Html, IHeader } from "utils/Html";
 import { TcmId } from "utils/TcmId";
 import { Url } from "utils/Url";
 import { debounce } from "utils/Function";
+import { isDummyPage, isPage } from "utils/Page";
 
-import "components/container/styles/PublicationContent";
+import { ITaxonomy } from "interfaces/Taxonomy";
+import { IPage } from "interfaces/Page";
+import { TaxonomyItemId } from "interfaces/TcmId";
+import { IPublication } from "interfaces/Publication";
+import { IPublicationCurrentState } from "store/interfaces/State";
+import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 
-/**
- * PublicationContent component props params
- *
- * @export
- * @interface IPublicationContentPropsParams
- */
-export interface IPublicationContentPropsParams {
-    /**
-     * Id of the current publication
-     *
-     * @type {string}
-     */
-    publicationId: string;
+import Version from "utils/Version";
 
-    /**
-     * The page id or the title of the current publication
-     *
-     * @type {string}
-     */
-    pageIdOrPublicationTitle?: string;
-
-    /**
-     * Title of the current publication
-     *
-     * @type {string}
-     */
-    publicationTitle?: string;
-
-    /**
-     * Title of the current page
-     *
-     * @type {string}
-     */
-    pageTitle?: string;
-
-    /**
-     * Anchor within the current page
-     *
-     * @type {string}
-     */
-    pageAnchor?: string;
-}
+import "./PublicationContent.less";
 
 /**
  * PublicationContent component props
@@ -69,11 +34,50 @@ export interface IPublicationContentPropsParams {
  */
 export interface IPublicationContentProps {
     /**
-     * Publication content props parameters
+     * Publication
      *
-     * @type {IPublicationContentPropsParams}
+     * @type {IPublication}
+     * @memberOf IPublicationContentProps
      */
-    params: IPublicationContentPropsParams;
+    publication: IPublication;
+    /**
+     * Page
+     *
+     * @type {IPage}
+     * @memberOf IPublicationContentProps
+     */
+    page: IPage;
+    /**
+     * Possible error message while page loading
+     *
+     * @type {string}
+     * @memberOf IPublicationContentProps
+     */
+    errorMessage: string;
+    /**
+     * Is Page loading status
+     *
+     * @type {boolean}
+     * @memberOf IPublicationContentProps
+     */
+    isPageLoading: boolean;
+    /**
+     * Available product release versions for the selected publication
+     *
+     * @type {IProductReleaseVersion[]}
+     * @memberOf IPublicationsListState
+     */
+
+    productReleaseVersions: IProductReleaseVersion[];
+    productReleaseVersion: string;
+    /**
+     * Function to execute when publication is changing
+     *
+     * @type {Function}
+     * @memberOf IPublicationContentProps
+     */
+    onPublicationChange?: (publicationId: string, pageId: string) => void;
+    onReleaseVersionChanged?: (publicationId: string, releaseVersions: string) => void;
 }
 
 /**
@@ -96,23 +100,12 @@ export interface IPublicationContentState {
      */
     selectedTocItem?: ITaxonomy | null;
     /**
-     * Page is loading
-     *
-     * @type {boolean}
-     */
-    isPageLoading?: boolean;
-    /**
      * Current active item path in the TOC
      *
      * @type {string[]}
      */
     activeTocItemPath?: string[];
-    /**
-     * Title of the current publication
-     *
-     * @type {string}
-     */
-    publicationTitle?: string;
+
     /**
      * Active header inside the page
      *
@@ -122,40 +115,32 @@ export interface IPublicationContentState {
     activePageHeader?: IHeader;
 }
 
-interface ISelectedPage {
-    /**
-     * Content of the current selected page
-     *
-     * @type {string | null}
-     */
-    content?: string | null;
-    /**
-     * An error prevented the page from rendering
-     *
-     * @type {string | null}
-     */
-    error?: string | null;
-}
-
 interface IToc {
     /**
      * An error prevented the toc from rendering
      *
      * @type {string}
+     * @memberOf IToc
      */
     error?: string;
     /**
      * Root items
      *
      * @type {ITaxonomy[]}
+     * @memberOf IToc
      */
     rootItems?: ITaxonomy[];
 }
 
 /**
+ * Publication content props
+ */
+export type Pub = IPublicationContentProps & IPublicationCurrentState;
+
+/**
  * Publication + content component
  */
-export class PublicationContent extends React.Component<IPublicationContentProps, IPublicationContentState> {
+export class PublicationContentPresentation extends React.Component<Pub, IPublicationContentState> {
 
     public static contextTypes: React.ValidationMap<IAppContext> = {
         services: React.PropTypes.object.isRequired,
@@ -163,120 +148,72 @@ export class PublicationContent extends React.Component<IPublicationContentProps
     };
 
     public context: IAppContext;
-    private _page: ISelectedPage = {};
     private _toc: IToc = {};
     private _isUnmounted: boolean = false;
     private _topOffset: number = 0;
 
     /**
      * Creates an instance of App.
-     *
      */
     constructor() {
         super();
         this.state = {
             isTocLoading: true,
-            selectedTocItem: null,
-            isPageLoading: true
+            selectedTocItem: null
         };
+
+        this._fixPanels = this._fixPanels.bind(this);
     }
 
     /**
      * Invoked once, both on the client and server, immediately before the initial rendering occurs.
      */
-    public componentWillMount(): void {
-        const { publicationId, pageIdOrPublicationTitle } = this.props.params;
-        const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
-        const { router } = this.context;
-        const { publicationService, pageService } = this.context.services;
-
-        if (pageId) {
+    public fetchPublication(publicationId: string): void {
+       // this is temporary hack to move out loading data from this component
+        if (publicationId) {
             // Load the page
-            pageService.getPageInfo(publicationId, pageId).then(
-                this._onPageContentRetrieved.bind(this),
-                this._onPageContentRetrievFailed.bind(this));
-        } else {
-            // Select first page in a list of Pubs
-            this._loadTocRootItems(publicationId).then(items => {
-                /* istanbul ignore else */
-                if (!this._isUnmounted) {
-                    const firstItem = items[0];
-                    let url = firstItem.url;
-                    if (url && router) {
-                        router.replace(url);
-                    } else {
-                        // The first item has no page so stop loading the page
-                        this.setState({
-                            isPageLoading: false
-                        });
-                    }
-                }
-            });
-        }
-
-        // Get publication title
-        publicationService.getPublicationTitle(publicationId).then(
-            title => {
-                /* istanbul ignore else */
-                if (!this._isUnmounted) {
-                    this.setState({
-                        publicationTitle: title
-                    });
-                }
-            },
-            error => {
-                /* istanbul ignore else */
-                if (!this._isUnmounted) {
-                    // TODO: improve error handling
-                    this.setState({
-                        publicationTitle: error
-                    });
-                }
-            });
-    }
-
-    /**
-     * Invoked when a component is receiving new props. This method is not called for the initial render.
-     *
-     * @param {IPublicationContentProps} nextProps
-     */
-    public componentWillReceiveProps(nextProps: IPublicationContentProps): void {
-        const { publicationId, pageIdOrPublicationTitle } = this.props.params;
-        const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
-        const nextpageIdOrPublicationTitle = nextProps.params.pageIdOrPublicationTitle;
-        const nextPageId = TcmId.isValidPageId(nextpageIdOrPublicationTitle) ? nextpageIdOrPublicationTitle : null;
-        const pageService = this.context.services.pageService;
-
-        if (!nextPageId) {
-            // Navigate to the first page in the publication
-            this.setState({
-                activeTocItemPath: undefined
-            });
-
-        } else if (nextPageId !== pageId || (nextPageId === pageId && this._page.error)) {
-            // Load the page
-            this.setState({
-                isPageLoading: true
-            });
-            pageService.getPageInfo(publicationId, nextPageId).then(
-                this._onPageContentRetrieved.bind(this),
-                this._onPageContentRetrievFailed.bind(this));
+            this._loadTocRootItems(publicationId);
         }
     }
 
-    /**
-     * Invoked immediately before rendering when new props or state are being received.
-     * This method is not called for the initial render.
-     *
-     * @param {IPublicationContentProps} nextProps Next props
-     * @param {IPublicationContentState} nextState Next state
-     */
-    public componentWillUpdate(nextProps: IPublicationContentProps, nextState: IPublicationContentState): void {
-        if (nextState.selectedTocItem && !nextState.selectedTocItem.url) {
-            this._page.content = null;
-            nextState.isPageLoading = false;
-            return;
+    public fetchPage(publicationId: string, page: IPage): void {
+        this._onPageContentRetrieved(publicationId, page);
+    }
+
+    public componentDidMount(): void {
+        const { publicationId, page, errorMessage } = this.props;
+        if (!isPage(page)) {
+            this.fetchPublication(publicationId);
         }
+
+        if (isPage(page) && !isDummyPage(page)) {
+            this.fetchPage(publicationId, page);
+        } else if (errorMessage) {
+           this._onPageContentRetrievFailed(publicationId, errorMessage);
+       }
+
+       this.addResizeHandlers();
+    }
+
+    /**
+     *
+     * @param {Pub} prevProps
+     *
+     * @memberOf PublicationContentPresentation
+     */
+    public componentWillReceiveProps(nextProps: Pub): void {
+       const { page, publicationId } = this.props;
+       const { publicationId: nextPubId, page: nextPage, errorMessage} = nextProps;
+
+       if (!isPage(nextPage) || nextPubId !== publicationId) {
+            this.fetchPublication(nextPubId);
+       }
+
+       if (isPage(nextPage) && !isDummyPage(nextPage) && nextPage.content !== page.content) {
+            this.fetchPage(nextPubId, nextPage);
+       } else if (errorMessage) {
+           this._onPageContentRetrievFailed(nextPubId, errorMessage);
+       }
     }
 
     /**
@@ -285,34 +222,28 @@ export class PublicationContent extends React.Component<IPublicationContentProps
      * @returns {JSX.Element}
      */
     public render(): JSX.Element {
-        const { isPageLoading, activeTocItemPath, selectedTocItem, publicationTitle, activePageHeader } = this.state;
-        const { pageIdOrPublicationTitle, pageTitle, pageAnchor } = this.props.params;
-        const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
+        const { activeTocItemPath, selectedTocItem, activePageHeader } = this.state;
         const { services, router } = this.context;
-        const { publicationId } = this.props.params;
+        const { publicationId, pageId, page, publication, isPageLoading, errorMessage, productReleaseVersion, productReleaseVersions } = this.props;
         const { taxonomyService } = services;
-        const { content, error } = this._page;
         const { rootItems } = this._toc;
         const tocError = this._toc.error;
-
+        const selectedProductReleaseVersion = productReleaseVersion ? Version.normalize(productReleaseVersion) : undefined;
         return (
             <section className={"sdl-dita-delivery-publication-content"}>
                 <Page
-                    showActivityIndicator={isPageLoading || false}
-                    content={content}
-                    error={error}
+                    showActivityIndicator={isPageLoading}
+                    content={page.content}
+                    error={errorMessage}
                     onNavigate={(url: string): void => {
                         /* istanbul ignore else */
                         if (router) {
                             router.push(url);
                         }
-                    }}
+                    } }
                     url={pageId ?
-                        Url.getPageUrl(publicationId, pageId, publicationTitle, pageTitle || (selectedTocItem && selectedTocItem.title) || "") :
-                        Url.getPublicationUrl(publicationId, publicationTitle)}
-                    // Wait for the selected toc item to be set to set the anchor
-                    // This is needed to make sure components on top are rendered first (eg bread crumbs)
-                    anchor={selectedTocItem ? pageAnchor : undefined}
+                        Url.getPageUrl(publicationId, pageId, publication.title, page.title || (selectedTocItem && selectedTocItem.title) || "") :
+                        Url.getPublicationUrl(publicationId, publication.title)}
                     scrollOffset={this._topOffset}
                     activeHeader={activePageHeader}>
                     <NavigationMenu isOpen={false}>{/* TODO: use global state store */}
@@ -321,20 +252,24 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                             rootItems={rootItems}
                             loadChildItems={(parentId: string): Promise<ITaxonomy[]> => {
                                 return taxonomyService.getSitemapItems(publicationId, parentId);
-                            }}
+                            } }
                             onSelectionChanged={this._onTocSelectionChanged.bind(this)}
                             error={tocError}
-                            onRetry={() => this._loadTocRootItems(publicationId)}
-                        >
+                            onRetry={() => this._loadTocRootItems(publicationId) }
+                            >
                             <span className="separator" />
                         </Toc>
                     </NavigationMenu>
                     <Breadcrumbs
                         publicationId={publicationId}
-                        publicationTitle={publicationTitle || ""}
+                        publicationTitle={publication.title || ""}
                         loadItemsPath={taxonomyService.getSitemapPath.bind(taxonomyService)}
                         selectedItem={selectedTocItem}
-                    />
+                        />
+                    <ContentLanguageWarning />
+                    <VersionSelector productReleaseVersions={productReleaseVersions}
+                        selectedProductReleaseVersion={selectedProductReleaseVersion}
+                        onChange={version => this._navigateToOtherReleaseVersion(publicationId, version)} />
                 </Page>
             </section>
         );
@@ -343,7 +278,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
     /**
      * Invoked once, only on the client (not on the server), immediately after the initial rendering occurs.
      */
-    public componentDidMount(): void {
+    public addResizeHandlers(): void {
         if (ReactDOM) {
             const domNode = ReactDOM.findDOMNode(this) as HTMLElement;
             if (domNode) {
@@ -351,8 +286,8 @@ export class PublicationContent extends React.Component<IPublicationContentProps
             }
         }
 
-        window.addEventListener("scroll", this._fixPanels.bind(this));
-        window.addEventListener("resize", this._fixPanels.bind(this));
+        window.addEventListener("scroll", this._fixPanels);
+        window.addEventListener("resize", this._fixPanels);
         this._fixPanels();
     }
 
@@ -362,13 +297,12 @@ export class PublicationContent extends React.Component<IPublicationContentProps
     public componentWillUnmount(): void {
         this._isUnmounted = true;
 
-        window.removeEventListener("scroll", this._fixPanels.bind(this));
-        window.removeEventListener("resize", this._fixPanels.bind(this));
+        window.removeEventListener("scroll", this._fixPanels);
+        window.removeEventListener("resize", this._fixPanels);
     }
 
     private _onTocSelectionChanged(sitemapItem: ITaxonomy, path: string[]): void {
-        const { router } = this.context;
-        const { publicationTitle } = this.state;
+        const { onPublicationChange, pageId, publicationId } = this.props;
 
         const updatedState: IPublicationContentState = {
             activeTocItemPath: path,
@@ -379,33 +313,17 @@ export class PublicationContent extends React.Component<IPublicationContentProps
 
         // When the tree is expanding it is also calling the onTocSelectionChanged callback
         /* istanbul ignore else */
-        if (router) {
-            // Only navigate to pages which have a location
-            const navPath = sitemapItem.url;
-            if (navPath) {
-                let url = navPath;
-                const parsedUrl = Url.parsePageUrl(url);
-                if (parsedUrl && (!parsedUrl.pageTitle || !parsedUrl.publicationTitle)) {
-                    // Use the title of the sitemap item instead of the page
-                    // When using dynamic link resolving these should actually be equal
-                    url = Url.getPageUrl(parsedUrl.publicationId, parsedUrl.pageId, publicationTitle, sitemapItem.title);
-                }
-                if (router.getCurrentLocation().pathname !== url) {
-                    router.push(url);
-                }
-            }
+        const navPath = sitemapItem.url;
+        const parsedUrl = navPath && Url.parsePageUrl(navPath);
+        const pageHasChanged = parsedUrl && (pageId !== parsedUrl.pageId && publicationId === parsedUrl.publicationId);
+        if (pageHasChanged && parsedUrl && onPublicationChange) {
+            onPublicationChange(parsedUrl.publicationId, parsedUrl.pageId);
         }
     }
 
-    private _onPageContentRetrieved(pageInfo: IPage): void {
-        const { publicationId } = this.props.params;
+    private _onPageContentRetrieved(publicationId: string, pageInfo: IPage): void {
         const { activeTocItemPath, isTocLoading } = this.state;
-        const page = this._page;
-        page.error = null;
-        page.content = pageInfo.content;
-        this.setState({
-            isPageLoading: false
-        });
+
         // Set the current active path for the tree
         if (Array.isArray(pageInfo.sitemapIds) && pageInfo.sitemapIds.length > 0) {
             // Always take the first sitemap id
@@ -413,7 +331,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
             const firstSitemapId = pageInfo.sitemapIds[0];
             const taxonomyId = TcmId.getTaxonomyItemId(TaxonomyItemId.Toc, firstSitemapId) || firstSitemapId;
 
-            this._getActiveSitemapPath(pageInfo.id, taxonomyId, path => {
+            this._getActiveSitemapPath(publicationId, pageInfo.id, taxonomyId, path => {
                 /* istanbul ignore if */
                 if (this._isUnmounted) {
                     return;
@@ -432,25 +350,16 @@ export class PublicationContent extends React.Component<IPublicationContentProps
         }
     }
 
-    private _onPageContentRetrievFailed(error: string): void {
-        const { publicationId } = this.props.params;
+    private _onPageContentRetrievFailed(publicationId: string, error: string): void {
         const { isTocLoading } = this.state;
-        const page = this._page;
-        page.error = error;
-        page.content = null;
 
         if (publicationId && isTocLoading) {
             this._loadTocRootItems(publicationId);
         }
-
-        this.setState({
-            isPageLoading: false
-        });
     }
 
-    private _getActiveSitemapPath(pageId: string, sitemapId: string, done: (path: string[]) => void): void {
+    private _getActiveSitemapPath(publicationId: string, pageId: string, sitemapId: string, done: (path: string[]) => void): void {
         const { services } = this.context;
-        const { publicationId } = this.props.params;
 
         if (pageId) {
             services.taxonomyService.getSitemapPath(publicationId, pageId, sitemapId).then(
@@ -465,8 +374,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     if (!this._isUnmounted) {
                         this._toc.error = error;
                         this.setState({
-                            isTocLoading: false,
-                            isPageLoading: false
+                            isTocLoading: false
                         });
                     }
                 });
@@ -525,6 +433,14 @@ export class PublicationContent extends React.Component<IPublicationContentProps
     private _loadTocRootItems(publicationId: string, path?: string[]): Promise<ITaxonomy[]> {
         const { services } = this.context;
         // Get the data for the Toc
+        this._toc.rootItems = undefined;
+        this._toc.error = undefined;
+        this.setState({
+            activeTocItemPath: undefined,
+            selectedTocItem: null,
+            isTocLoading: true
+        });
+
         return services.taxonomyService.getSitemapRoot(publicationId).then(
             items => {
                 /* istanbul ignore else */
@@ -543,10 +459,16 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                 if (!this._isUnmounted) {
                     this._toc.error = error;
                     this.setState({
-                        isTocLoading: false,
-                        isPageLoading: false
+                        isTocLoading: false
                     });
                 }
-            });
+            }
+        );
+    }
+
+    private _navigateToOtherReleaseVersion(publicationId: string, releaseVersion: string): void {
+       if (this.props.onReleaseVersionChanged) {
+           this.props.onReleaseVersionChanged(publicationId, releaseVersion);
+       }
     }
 }

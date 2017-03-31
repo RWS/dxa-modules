@@ -1,17 +1,19 @@
+import * as ClassNames from "classnames";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import { ActivityIndicator, Button } from "sdl-controls-react-wrappers";
+import { ButtonPurpose } from "sdl-controls";
 import { Html, IHeader } from "utils/Html";
 import { Url } from "utils/Url";
 import { path } from "utils/Path";
 import { ContentNavigation, IContentNavigationItem } from "components/presentation/ContentNavigation";
-import { ActivityIndicator, Button } from "sdl-controls-react-wrappers";
-import { ButtonPurpose } from "sdl-controls";
-import { IAppContext } from "components/container/App";
 import { Error } from "components/presentation/Error";
+import { IAppContext } from "components/container/App";
 
 import "components/presentation/styles/Page";
 import "dita-ot/styles/commonltr";
 import "dita-ot/styles/commonrtl";
+import { IPageService } from "services/interfaces/PageService";
 
 /**
  * Page component props
@@ -24,12 +26,29 @@ export interface IPageProps {
      * Show activity indicator
      *
      * @type {boolean}
+     * @memberOf IPageProps
      */
     showActivityIndicator: boolean;
+
+    /**
+     * Page id
+     * @type {string}
+     * @memberOf IPageProps
+     */
+    id?:  string;
+
+    /**
+     * publicationId
+     * @type {string}
+     * @memberOf IPageProps
+     */
+    publicationId?: string;
+
     /**
      * Page content
      *
      * @type {string | null}
+     * @memberOf IPageProps
      */
     content?: string | null;
     /**
@@ -42,7 +61,7 @@ export interface IPageProps {
      * Url of the page
      *
      * @type {string}
-     * @memberOf IPublicationContentProps
+     * @memberOf IPageProps
      */
     url?: string;
     /**
@@ -70,13 +89,21 @@ export interface IPageProps {
      */
     activeHeader?: IHeader;
     /**
+     * UI language
+     *
+     * @type {string}
+     * @memberOf IPageProps
+     */
+    direction?: string;
+    /**
      * Called whenever navigation to another page is requested
      *
-     * @param {string} url Url
-     *
+     * @param {string}
      * @memberOf IPageProps
      */
     onNavigate(url: string): void;
+
+    fetchPage?(pageService: IPageService, publicationId: string, pageId: string): void;
 }
 
 /**
@@ -90,6 +117,7 @@ export interface IPageState {
      * Items used in content Navigation
      *
      * @type {IContentNavigationItem[]}
+     * @memberOf IPageState
      */
     navItems: IContentNavigationItem[];
 }
@@ -97,14 +125,12 @@ export interface IPageState {
 /**
  * Page component
  */
-export class Page extends React.Component<IPageProps, IPageState> {
-
+export class PagePresentation extends React.Component<IPageProps, IPageState> {
     /**
      * Context types
      *
      * @static
      * @type {React.ValidationMap<IAppContext>}
-     * @memberOf Breadcrumbs
      */
     public static contextTypes: React.ValidationMap<IAppContext> = {
         services: React.PropTypes.object.isRequired,
@@ -115,7 +141,6 @@ export class Page extends React.Component<IPageProps, IPageState> {
      * Global context
      *
      * @type {IAppContext}
-     * @memberOf Breadcrumbs
      */
     public context: IAppContext;
 
@@ -125,7 +150,6 @@ export class Page extends React.Component<IPageProps, IPageState> {
 
     /**
      * Creates an instance of Page.
-     *
      */
     constructor() {
         super();
@@ -151,26 +175,26 @@ export class Page extends React.Component<IPageProps, IPageState> {
      * Render the component
      *
      * @returns {JSX.Element}
-     *
-     * @memberOf Page
      */
     public render(): JSX.Element {
         const props = this.props;
-        const { activeHeader, error, url } = props;
+        const { activeHeader, error, direction } = props;
         const { navItems } = this.state;
         const { formatMessage } = this.context.services.localizationService;
         const activeNavItemId = activeHeader ? activeHeader.id : (navItems.length > 0 ? navItems[0].id : undefined);
         const _goHome = (): void => props.onNavigate(path.getRootPath());
-        const _retryHandler = () => url && props.onNavigate(url);
         const errorButtons = <div>
+            {/* Need to replace this button with PageLink then we don't need to pass onNaviate */}
             <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{ "click": _goHome }}>{formatMessage("components.breadcrumbs.home")}</Button>
-            <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{ "click": _retryHandler }}>{formatMessage("control.button.retry")}</Button>
+            <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{ "click": () => this.fetchPage() }}>{formatMessage("control.button.retry")}</Button>
         </div>;
         const errorTitle = formatMessage("error.default.title");
         const errorMessages = [
             formatMessage("error.page.not.found"),
             formatMessage("error.default.message")
         ];
+
+        const appClass = ClassNames(direction, "page-content");
 
         return (
             <div className={"sdl-dita-delivery-page"} style={props.showActivityIndicator ? { overflow: "hidden" } : {}} >
@@ -185,7 +209,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                             title={errorTitle}
                             messages={errorMessages}
                             buttons={errorButtons} />
-                        : <article className={"page-content ltr"}
+                        : <article className={appClass}
                             dangerouslySetInnerHTML={{ __html: props.content || formatMessage("components.page.nothing.selected") }} />}
                 </article>
             </div >
@@ -202,8 +226,6 @@ export class Page extends React.Component<IPageProps, IPageState> {
 
     /**
      * Invoked immediately after the component's updates are flushed to the DOM. This method is not called for the initial render.
-     *
-     * @memberOf Page
      */
     public componentDidUpdate(): void {
         this._enableHyperlinks();
@@ -222,12 +244,17 @@ export class Page extends React.Component<IPageProps, IPageState> {
         }
     }
 
+    private fetchPage(): void {
+        const {fetchPage, publicationId, id = ""} = this.props;
+        if (fetchPage && publicationId) {
+            fetchPage(this.context.services.pageService, publicationId, id);
+        } else {
+            console.warn("fetchPage, publicatinoId, should be defined");
+        }
+    }
+
     /**
      * Make hyperlinks navigate when clicked
-     *
-     * @private
-     *
-     * @memberOf Page
      */
     private _enableHyperlinks(): void {
         const props = this.props;
@@ -260,10 +287,6 @@ export class Page extends React.Component<IPageProps, IPageState> {
 
     /**
      * Collects headers links
-     *
-     * @private
-     *
-     * @memberOf Page
      */
     private _collectHeadersLinks(): void {
         const domNode = ReactDOM.findDOMNode(this);
@@ -294,10 +317,6 @@ export class Page extends React.Component<IPageProps, IPageState> {
 
     /**
      * Make hyperlinks navigation disabled
-     *
-     * @private
-     *
-     * @memberOf Page
      */
     private _disableHyperlinks(): void {
         this._hyperlinks.forEach(anchor => {
@@ -307,10 +326,6 @@ export class Page extends React.Component<IPageProps, IPageState> {
 
     /**
      * Jump to an anchor in the page
-     *
-     * @private
-     *
-     * @memberOf Page
      */
     private _jumpToAnchor(): void {
         const { anchor, scrollOffset } = this.props;
