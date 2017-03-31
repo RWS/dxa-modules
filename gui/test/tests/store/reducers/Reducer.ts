@@ -3,7 +3,7 @@ import { Store } from "redux";
 import { TestBase } from "sdl-models";
 
 import { IState } from "store/interfaces/State";
-import { getPubsByLang, getProductFamily, getProductReleaseVersion,
+import { getPubsByLang, normalizeProductFamily, normalizeProductReleaseVersion,
     translateProductReleaseVersion, translateProductReleaseVersions, getPubListRepresentatives } from "store/reducers/Reducer";
 import { DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE, DEFAULT_UNKNOWN_PRODUCT_RELEASE_VERSION } from "models/Publications";
 import { configureStore } from "store/Store";
@@ -26,18 +26,18 @@ class LanguageReducer extends TestBase {
                 expect(getPubsByLang(store.getState(), "en").length).toBe(0);
             });
 
-            it("Check getProductFamily transform", (): void => {
-                expect(getProductFamily({"productFamily": DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE})).toBe(null);
-                expect(getProductFamily({"productFamily": "Product family"})).toBe("Product family");
+            it("Check normalizeProductFamily transform", (): void => {
+                expect(normalizeProductFamily({"productFamily": DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE})).toBe(null);
+                expect(normalizeProductFamily({"productFamily": "Product family"})).toBe("Product family");
             });
 
-            it("Check getProductReleaseVersion transform", (): void => {
+            it("Check normalizeProductReleaseVersion transform", (): void => {
                 const nullParams = {"productReleaseVersion": DEFAULT_UNKNOWN_PRODUCT_RELEASE_VERSION};
                 const notNullParams = {"productReleaseVersion": "Product Value"};
-                expect(getProductReleaseVersion(<IPublicationsListPropsParams>nullParams)).toBe(null);
-                expect(getProductReleaseVersion("")).toBe("");
-                expect(getProductReleaseVersion(<IPublicationsListPropsParams>notNullParams)).toBe("Product Value");
-                expect(getProductReleaseVersion("Product Value")).toBe("Product Value");
+                expect(normalizeProductReleaseVersion(<IPublicationsListPropsParams>nullParams)).toBe(null);
+                expect(normalizeProductReleaseVersion("")).toBe("");
+                expect(normalizeProductReleaseVersion(<IPublicationsListPropsParams>notNullParams)).toBe("Product Value");
+                expect(normalizeProductReleaseVersion("Product Value")).toBe("Product Value");
             });
 
             it("Check product release version translation", (): void => {
