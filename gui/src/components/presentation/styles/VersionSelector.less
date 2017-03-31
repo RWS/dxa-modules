@@ -1,3 +1,4 @@
+@import (reference) "~theme-styles";
 .sdl-dita-delivery-version-selector {
     line-height: 36px;
     label {
@@ -9,8 +10,10 @@
         ul {
             /* This is needed to fix some issues with the positioning of the dropdown when opened */
             margin-top: 50px;
-            .search-open & {
-                margin-top: 200px;
+            @media screen and (min-width: (1+@screenSm)) {
+                .search-open & {
+                    margin-top: 200px;
+                }
             }
             left: auto !important;
             margin-left: -11px;
