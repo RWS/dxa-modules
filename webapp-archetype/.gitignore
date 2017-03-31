@@ -1,0 +1,13 @@
+# IDE
+.vscode
+.vs
+.idea
+*.iml
+
+# DXA logs
+logs/
+.vscode/
+
+# Build output
+dist/
+target/
