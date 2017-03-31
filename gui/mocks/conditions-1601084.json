@@ -1,0 +1,13 @@
+{
+  "Continents": [
+    "Antarctica",
+    "Africa",
+    "Oceania",
+    "South America"
+  ],
+  "Crafts": [
+    "DRAWING",
+    "ORIGAMI",
+    "SONG"
+  ]
+}

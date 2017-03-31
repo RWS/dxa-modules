@@ -3,48 +3,80 @@
     "Id": "1420746",
     "Title": "User Guide",
     "ProductFamily": "Mobile Phones",
-    "ProductReleaseVersion": "MP 330 2014"
+    "ProductReleaseVersion": "MP 330 2014",
+    "CreatedOn": "2016-02-10T15:29:49Z",
+    "Version": "3",
+    "VersionRef": "647369",
+    "Language": "en"
   },
   {
     "Id": "1601084",
     "Title": "Penguin guide",
     "ProductFamily": "Animals",
-    "ProductReleaseVersion": "Penguins (8.0.0)"
+    "ProductReleaseVersion": "Penguins (8.0.0)",
+    "CreatedOn": "2016-01-07T03:53:57Z",
+    "Version": "8",
+    "VersionRef": "517681",
+    "Language": "en"
   },
   {
     "Id": "1611362",
     "Title": "LS40-el",
     "ProductFamily": "Komori",
-    "ProductReleaseVersion": "Komori CMS 2010"
+    "ProductReleaseVersion": "Komori CMS 2010",
+    "CreatedOn": "2016-01-14T05:47:16Z",
+    "Version": "1",
+    "VersionRef": "566444",
+    "Language": "ja"
   },
   {
     "Id": "1849903",
     "Title": "בירה",
     "ProductFamily": "SDL Knowledge Center",
-    "ProductReleaseVersion": "Beer 2017"
+    "ProductReleaseVersion": "Beer 2017",
+    "CreatedOn": "2017-01-26T08:31:35Z",
+    "Version": "1",
+    "VersionRef": "1849901",
+    "Language": "iw"
   },
   {
     "Id": "1881665",
     "Title": "User Guide",
     "ProductFamily": "Mobile Phones",
-    "ProductReleaseVersion": "MP 330 (2.0.0)"
+    "ProductReleaseVersion": "Penguins (1.0.0)",
+    "CreatedOn": "2015-12-23T03:22:09Z",
+    "Version": "1",
+    "VersionRef": "346490",
+    "Language": "nl"
   },
   {
     "Id": "1961681",
     "Title": "McAfee Virtual Technician 4.2",
     "ProductFamily": "McAfee",
-    "ProductReleaseVersion": "McAfee Anti Virus 2008"
+    "ProductReleaseVersion": "McAfee Anti Virus 2008",
+    "CreatedOn": "2015-12-23T03:22:08Z",
+    "Version": "1",
+    "VersionRef": "346487",
+    "Language": "en"
   },
   {
     "Id": "1961700",
     "Title": "User Guide",
     "ProductFamily": "Mobile Phones",
-    "ProductReleaseVersion": "MP 330 (2.0.0)"
+    "ProductReleaseVersion": "Penguins (1.0.0)",
+    "CreatedOn": "2015-12-23T03:22:09Z",
+    "Version": "1",
+    "VersionRef": "346490",
+    "Language": "de"
   },
   {
     "Id": "1961702",
     "Title": "User Guide",
     "ProductFamily": "Mobile Phones",
-    "ProductReleaseVersion": "MP 330 (2.0.0)"
+    "ProductReleaseVersion": "Penguins (1.0.0)",
+    "CreatedOn": "2015-12-23T03:22:09Z",
+    "Version": "1",
+    "VersionRef": "346490",
+    "Language": "en"
   }
 ]
