@@ -6,6 +6,7 @@ import { getCurrentPub, getPubById, getPageById, getErrorMessage, isPageLoading 
 import { IState } from "store/interfaces/State";
 import { isPage, isDummyPage } from "utils/Page";
 import { getReleaseVersionsForPub } from "store/reducers/Reducer";
+import { notFound } from "store/reducers/Publications";
 
 const mapStateToProps = (state: IState) => {
     const { publicationId, pageId, anchor} = getCurrentPub(state);
@@ -14,6 +15,7 @@ const mapStateToProps = (state: IState) => {
     const errorMessage = getErrorMessage(state, pageId);
     const isPageLoading = isPage(page) && isDummyPage(page) && isPageLoadingGetter(state, pageId);
     const productReleaseVersions = getReleaseVersionsForPub(state, publicationId);
+    const isPublicationFound = JSON.stringify(publication) !== JSON.stringify(notFound(publication.id));
 
     return {
         publication,
@@ -24,7 +26,8 @@ const mapStateToProps = (state: IState) => {
         isPageLoading,
         errorMessage,
         productReleaseVersions,
-        productReleaseVersion: publication.productReleaseVersion || ""
+        productReleaseVersion: publication.productReleaseVersion || "",
+        isPublicationFound
     };
 };
 

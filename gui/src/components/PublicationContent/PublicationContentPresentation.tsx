@@ -67,8 +67,12 @@ export interface IPublicationContentProps {
      * @type {IProductReleaseVersion[]}
      * @memberOf IPublicationsListState
      */
-
     productReleaseVersions: IProductReleaseVersion[];
+    /**
+     *
+     * @type {string}
+     * @memberOf IPublicationContentProps
+     */
     productReleaseVersion: string;
     /**
      * Function to execute when publication is changing
@@ -77,7 +81,17 @@ export interface IPublicationContentProps {
      * @memberOf IPublicationContentProps
      */
     onPublicationChange?: (publicationId: string, pageId: string) => void;
+    /**
+     *
+     * @memberOf IPublicationContentProps
+     */
     onReleaseVersionChanged?: (publicationId: string, releaseVersions: string) => void;
+    /**
+     *
+     * @type {boolean}
+     * @memberOf IPublicationContentProps
+     */
+    isPublicationFound: boolean;
 }
 
 /**
@@ -224,8 +238,8 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
     public render(): JSX.Element {
         const { activeTocItemPath, selectedTocItem, activePageHeader } = this.state;
         const { services, router } = this.context;
-        const { publicationId, pageId, page, publication, isPageLoading, errorMessage, productReleaseVersion, productReleaseVersions } = this.props;
-        const { taxonomyService } = services;
+        const { publicationId, pageId, page, publication, isPageLoading, errorMessage, productReleaseVersion, productReleaseVersions, isPublicationFound } = this.props;
+        const { taxonomyService, localizationService } = services;
         const { rootItems } = this._toc;
         const tocError = this._toc.error;
         const selectedProductReleaseVersion = productReleaseVersion ? Version.normalize(productReleaseVersion) : undefined;
@@ -262,7 +276,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                     </NavigationMenu>
                     <Breadcrumbs
                         publicationId={publicationId}
-                        publicationTitle={publication.title || ""}
+                        publicationTitle={isPublicationFound ? publication.title || "" : localizationService.formatMessage("error.publication.not.found", [publication.id])}
                         loadItemsPath={taxonomyService.getSitemapPath.bind(taxonomyService)}
                         selectedItem={selectedTocItem}
                         />

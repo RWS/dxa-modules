@@ -9,7 +9,7 @@ const buildMap = (currentMap: IPublicationsMap, publications: IPublication[]) =>
     return Object.assign({}, currentMap, ...publications.map(publication => ({[publication.id]: publication})));
 };
 
-const notFound = (id: string): IPublication => ({
+export const notFound = (id: string): IPublication => ({
     id,
     title: "",
     logicalId: "",
