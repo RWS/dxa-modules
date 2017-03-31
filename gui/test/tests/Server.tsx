@@ -107,7 +107,7 @@ class Server extends TestBase {
                                                 <a className="home" title="Home" href="#/home">Home</a><span className="separator"></span>
                                             </li>
                                             <li>
-                                                <a title="" href="#/123"></a>
+                                                <a title="Unable to retrieve metadata for publication with id 123." href="#/123/unable-to-retrieve-metadata-for-publication-with-id-123-">Unable to retrieve metadata for publication with id 123.</a>
                                             </li>
                                         </ul>
                                     </div>
