@@ -86,9 +86,10 @@ module.exports = (isTest, isDebug) => {
                 hash: true,
                 excludeChunks: ['lib', 'test', 'server']
             }),
+            /* Disabled visualizer as it takes too much memory, only enable when needed
             new Visualizer({
                 filename: '../bundle.stats.html'
-            })
+            })*/
         ],
         // What information should be printed to the console
         stats: {
