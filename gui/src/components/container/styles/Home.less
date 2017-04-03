@@ -16,6 +16,9 @@
     .sdl-dita-delivery-topbar-expand-nav {
         display: none;
         margin: 0 0 0 15px;
+        .sdl-dita-delivery-app.rtl& {
+            margin: 0 15px 0 0;
+        }
         span {
             .icon-hamburger(21px);
         }
@@ -24,6 +27,7 @@
         }
     }
     .sdl-dita-delivery-topbar-expand-search {
+        max-height: @navBarHeight;
         text-align: right;
         span {
             .icon-search(21px);
@@ -107,7 +111,8 @@
     }
     &.search-is-opening {
         @media screen and (min-width: (1+@screenSm)) {
-            .sdl-dita-delivery-searchbar + section {
+            .sdl-dita-delivery-searchbar + section,
+            .sdl-dita-delivery-searchbar + .sdl-dita-delivery-publication-content-wrapper section {
                 transition: top .3s ease-out, height .3s ease-out, min-height .3s ease-out;
                 nav.sdl-dita-delivery-toc,
                 nav.sdl-dita-delivery-toc .separator,

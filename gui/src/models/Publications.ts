@@ -4,8 +4,12 @@ import { IProductFamily } from "interfaces/ProductFamily";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 import { Api } from "utils/Api";
 import { Net, IWebRequest, LoadableObject } from "sdl-models";
-
 import { localization } from "services/common/LocalizationService";
+import { String } from "utils/String";
+import Version from "utils/Version";
+
+export const DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE: string = "Unknown product";
+export const DEFAULT_UNKNOWN_PRODUCT_RELEASE_VERSION: string = "Unknown product release version";
 
 /**
  * Publications model
@@ -18,27 +22,45 @@ export class Publications extends LoadableObject {
 
     private _publications: IPublication[];
     private _productFamilies?: IProductFamily[];
-
-    private _unknownProductFamilyTitle: string = localization.formatMessage("components.productfamilies.unknown.title");
+    private _unknownProductFamilyDescription: string = localization.formatMessage("productfamilies.unknown.description");
+    private _unknownProductFamilyTitle: string = DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE;
+    private _unknownProductReleaseVersion: string = DEFAULT_UNKNOWN_PRODUCT_RELEASE_VERSION;
 
     /**
      * Get the Publications
      *
-     * @param {string} productFamily productFamily title
+     * @param {string} [productFamily] productFamily title
+     * @param {string} [productReleaseVersion] product release version title
      * @returns {IPublication[]}
      */
-    public getPublications(productFamily?: string): IPublication[] {
+    public getPublications(productFamily?: string, productReleaseVersion?: string): IPublication[] {
+        let result: IPublication[] = this._publications.slice();
+
         if (productFamily) {
-            const familyTitle = (productFamily === this._unknownProductFamilyTitle) ? undefined : productFamily;
-            return this._publications.filter((publication: IPublication) => {
+            const normalizedProductFamily = String.normalize(productFamily);
+            const familyTitle = (normalizedProductFamily === String.normalize(this._unknownProductFamilyTitle)) ? undefined : normalizedProductFamily;
+            result = result.filter((publication: IPublication) => {
                 if (!familyTitle) {
                     return !publication.productFamily;
                 }
-                return (publication.productFamily === familyTitle);
+                return (publication.productFamily && String.normalize(publication.productFamily)) === familyTitle;
             });
         }
 
-        return this._publications;
+        if (productReleaseVersion) {
+            const normalizedProductReleaseVersion = String.normalize(productReleaseVersion);
+            const productReleaseVersionTitle = (normalizedProductReleaseVersion === String.normalize(this._unknownProductReleaseVersion))
+                ? undefined : normalizedProductReleaseVersion;
+            result = result.filter((publication: IPublication) => {
+                if (!productReleaseVersionTitle) {
+                    return !publication.productReleaseVersion;
+                }
+                const normalizedPublicationProductReleaseVersion = publication.productReleaseVersion && Version.normalize(publication.productReleaseVersion);
+                return normalizedPublicationProductReleaseVersion === productReleaseVersionTitle;
+            });
+        }
+
+        return result;
     }
 
     /**
@@ -47,18 +69,25 @@ export class Publications extends LoadableObject {
      * @param {string} productFamily productFamily title
      * @returns {IProductReleaseVersion[]}
      */
-    public getProductReleaseVersions(productFamily?: string): IProductReleaseVersion[] {
+    public getProductReleaseVersions(productFamily: string): IProductReleaseVersion[] {
         const publicationsList = this.getPublications(productFamily);
-        return publicationsList.map((publication: IPublication) => {
-            return publication.productReleaseVersion;
-        }).filter((version: string, i: number, arr: string[]) => {
-            return arr.indexOf(version) == i;
-        }).map((version: string | undefined) => {
-            return {
-                // Only title now, description would go here later on
-                title: version
-            } as IProductReleaseVersion;
-        });
+        return Version.sortProductReleaseVersions(publicationsList).map(version => this._convertToProductReleaseVersion(version));
+    }
+
+    /**
+     * Get the Product Release Versions for a publication
+     *
+     * @param {string} publicationId Publication id
+     * @returns {IProductReleaseVersion[]}
+     */
+    public getProductReleaseVersionsByPublicationId(publicationId: string): IProductReleaseVersion[] | undefined {
+        const publicationsList = this.getPublications().filter(pub => pub.id === publicationId);
+        const publication = publicationsList[0];
+        if (publication) {
+            const publicationVersionsList = this.getPublications().filter(pub => pub.logicalId === publication.logicalId);
+            return Version.sortProductReleaseVersions(publicationVersionsList).map(version => this._convertToProductReleaseVersion(version));
+        }
+        return undefined;
     }
 
     /**
@@ -81,18 +110,18 @@ export class Publications extends LoadableObject {
                     return (left || "").toLowerCase().localeCompare((right || "").toLowerCase());
                 });
 
-                this._productFamilies = distinctFamilies.map((family: string | undefined) => {
+                this._productFamilies = distinctFamilies.map((family: string | undefined): IProductFamily => {
                     if (family === undefined) {
                         return {
-                            title: localization.formatMessage("components.productfamilies.unknown.title"),
-                            description: localization.formatMessage("components.productfamilies.unknown.description"),
+                            title: this._unknownProductFamilyTitle,
+                            description: this._unknownProductFamilyDescription,
                             hasWarning: true
-                        } as IProductFamily;
+                        };
                     } else {
                         return {
                             // Only title now, description would go here later on
                             title: family
-                        } as IProductFamily;
+                        };
                     }
                 });
             }
@@ -113,12 +142,31 @@ export class Publications extends LoadableObject {
                 id: item.Id,
                 title: item.Title,
                 productFamily: item.ProductFamily,
-                productReleaseVersion: item.ProductReleaseVersion
+                productReleaseVersion: item.ProductReleaseVersion,
+                versionRef: item.VersionRef,
+                language: item.Language,
+                createdOn: new Date(item.CreatedOn),
+                version: item.Version,
+                logicalId: item.LogicalId
             } as IPublication;
         });
 
         this._productFamilies = undefined;
 
         super._processLoadResult(result, webRequest);
+    }
+
+    private _convertToProductReleaseVersion(version: string | null): IProductReleaseVersion {
+        if (version === null) {
+            return {
+                title: DEFAULT_UNKNOWN_PRODUCT_RELEASE_VERSION,
+                value: String.normalize(DEFAULT_UNKNOWN_PRODUCT_RELEASE_VERSION),
+                hasWarning: true
+            };
+        }
+        return {
+            title: version,
+            value: String.normalize(version)
+        };
     }
 }

@@ -5,5 +5,17 @@
     position: relative;
     .sdl-dita-delivery-tiles-list {
         max-width: @screenXl;
+        .sdl-dita-delivery-tile {
+            height: 190px;
+            h3 {
+                height: 60px;
+            }
+            .tile-content {
+                text-align: center;
+            }
+            .tile-content:not(:empty) + span button {
+                margin: 10px auto;
+            }
+        }
     }
 }

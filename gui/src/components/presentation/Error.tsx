@@ -4,27 +4,27 @@ import "components/presentation/styles/Error";
 /**
  * Error component props
  *
- * @export 
+ * @export
  * @interface IErrorProps
  */
 export interface IErrorProps {
     /**
-     * Error title 
-     * 
+     * Error title
+     *
      * @type {string}
      * @memberOf IErrorProps
      */
     title: string;
     /**
      * Array of messages for error description
-     * 
+     *
      * @type {string[]}
      * @memberOf IErrorProps
      */
     messages: string[];
     /**
      * Buttons container for user reactions on an error
-     * 
+     *
      * @type {JSX.Element}
      * @memberOf IErrorProps
      */

@@ -9,6 +9,11 @@ import { TaxonomyService } from "services/server/TaxonomyService";
 import { localization } from "services/common/LocalizationService";
 import { hashHistory } from "react-router";
 
+import { Provider } from "react-redux";
+import { IState } from "store/interfaces/State";
+import { configureStore } from "store/Store";
+import { Store } from "redux";
+
 /**
  * Render the application to a string.
  *
@@ -26,6 +31,12 @@ export function renderToString(path: string): string {
         taxonomyService: new TaxonomyService()
     };
 
+    const store: Store<IState> = configureStore({});
+
+    localization.setStore(store);
+
     return ReactDOMServer.renderToString(
-        <App services={services} history={hashHistory} />);
+        <Provider store={store}>
+            <App services={services} history={hashHistory} />
+        </Provider>);
 };

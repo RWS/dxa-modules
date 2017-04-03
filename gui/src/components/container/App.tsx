@@ -1,14 +1,18 @@
 import * as React from "react";
 import { Router, Route, IndexRedirect, History, Redirect } from "react-router";
 import { IServices } from "interfaces/Services";
-import { Home } from "components/container/Home";
-import { PublicationContent } from "components/container/PublicationContent";
-import { PublicationsList } from "components/container/PublicationsList";
+import { Home } from "components/Home/Home";
+import { PublicationContent } from "components/PublicationContent/PublicationContent";
 import { ProductFamiliesList } from "components/container/ProductFamiliesList";
-import { ErrorContent } from "components/container/ErrorContent";
+import { ErrorContent } from "components/container/ErrorContent/ErrorContent";
 
 import { path } from "utils/Path";
 import { IWindow } from "interfaces/Window";
+import { RouteToState } from "components/helpers/RouteToState";
+import { StateToRoute } from "components/helpers/StateToRoute";
+import { FetchPage } from "components/helpers/FetchPage";
+import { PublicationsList } from "components/PublicationsList/PublicationsList";
+import { FetchProductReleaseVersions } from "components/helpers/FetchProductReleaseVersions";
 
 export interface IAppProps {
     /**
@@ -77,8 +81,16 @@ export class App extends React.Component<IAppProps, {}> {
                         <IndexRedirect to="home" />
                         <Redirect from="home;jsessionid=*" to="home" />
                         <Route path="home" component={ProductFamiliesList} />
-                        <Route path="publications/:productFamily" component={PublicationsList} />
-                        <Route path=":publicationId(/:pageIdOrPublicationTitle)(/:publicationTitle)(/:pageTitle)(/:pageAnchor)" component={PublicationContent} />
+                        <Route path="publications/:productFamily(/:productReleaseVersion)" component={PublicationsList} />
+                        <Route path=":publicationId(/:pageIdOrPublicationTitle)(/:publicationTitle)(/:pageTitle)(/:pageAnchor)"
+                            component={() => (
+                                <div className="sdl-dita-delivery-publication-content-wrapper">
+                                    <RouteToState />
+                                    <StateToRoute />
+                                    <FetchPage />
+                                    <FetchProductReleaseVersions />
+                                    <PublicationContent />
+                                </div>)} />
                     </Route>
                 </Router>
             );

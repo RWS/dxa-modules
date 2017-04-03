@@ -1,3 +1,4 @@
+import * as ClassNames from "classnames";
 import * as React from "react";
 import { path } from "utils/Path";
 import { SearchBar } from "components/presentation/SearchBar";
@@ -23,6 +24,14 @@ export interface IErrorContentProps {
      * @type {IError}
      */
     error?: IError;
+
+    /**
+     * Content direction
+     *
+     * @type {("ltr" | "rtl")}
+     * @memberOf IErrorContentProps
+     */
+    direction?: "ltr" | "rtl";
 }
 
 /**
@@ -32,7 +41,7 @@ export interface IErrorContentProps {
  * @param {IErrorContentProps} props
  * @returns {JSX.Element}
  */
-export const ErrorContent: React.StatelessComponent<IErrorContentProps> = (props: IErrorContentProps, context: IAppContext): JSX.Element => {
+export const ErrorContentPresentation: React.StatelessComponent<IErrorContentProps> = (props: IErrorContentProps, context: IAppContext): JSX.Element => {
     const { formatMessage } = context.services.localizationService;
     const _goHome = (): void => window.location.replace(path.getRootPath());
 
@@ -40,14 +49,16 @@ export const ErrorContent: React.StatelessComponent<IErrorContentProps> = (props
             <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{"click": _goHome}}>{formatMessage("components.breadcrumbs.home")}</Button>
         </div>;
 
-    const error = props.error;
+    const { error, direction } = props;
     const errorMessages = [formatMessage("error.url.not.found"), formatMessage("error.default.message")];
     const errorTitle = error && error.statusCode ?
         `${error.statusCode} - ${formatMessage("error.default.title")}` :
         formatMessage("error.default.title");
 
+    const appClass = ClassNames(direction, "sdl-dita-delivery-error-content");
+
     return (
-        <section className={"sdl-dita-delivery-error-content"}>
+        <section className={appClass}>
             <SearchBar
                 placeholderLabel={formatMessage("components.searchbar.placeholder")}
                 onSearch={query => console.log(query)} />
@@ -61,6 +72,6 @@ export const ErrorContent: React.StatelessComponent<IErrorContentProps> = (props
     );
 };
 
-ErrorContent.contextTypes = {
+ErrorContentPresentation.contextTypes = {
     services: React.PropTypes.object.isRequired
 } as React.ValidationMap<IAppContext>;

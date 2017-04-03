@@ -135,16 +135,16 @@ export class Html {
      * Get the active header in the document
      *
      * @static
-     * @param {HTMLElement} scrollContainter Element which is used for scrolling
+     * @param {HTMLElement} scrollContainer Element which is used for scrolling
      * @param {HTMLElement} element Source element to search in
      * @param {number} offsetTop Offset on the top. For example a header
      * @returns {(IHeader | undefined)}
      *
      * @memberOf Html
      */
-    public static getActiveHeader(scrollContainter: HTMLElement, element: HTMLElement, offsetTop: number): IHeader | undefined {
+    public static getActiveHeader(scrollContainer: HTMLElement, element: HTMLElement, offsetTop: number): IHeader | undefined {
         // In IE scrollTop is always 0
-        const top = (scrollContainter.scrollTop || document.documentElement.scrollTop || document.body.scrollTop || 0) - 10;
+        const top = (scrollContainer.scrollTop || document.documentElement.scrollTop || document.body.scrollTop || 0) - 10;
         const headers = element.querySelectorAll(HEADER_SELECTOR);
         for (let i = 0, length = headers.length; i < length; i++) {
             const headerEl = <HTMLElement>headers.item(i);
@@ -163,18 +163,18 @@ export class Html {
      * Scroll element into view
      *
      * @static
-     * @param {HTMLElement} scrollContainter Element which is used for scrolling
+     * @param {HTMLElement} scrollContainer Element which is used for scrolling
      * @param {HTMLElement} element Element which should be in view
      *
      * @memberOf Html
      */
-    public static scrollIntoView(scrollContainter: HTMLElement, element: HTMLElement): void {
+    public static scrollIntoView(scrollContainer: HTMLElement, element: HTMLElement): void {
         // In IE scrollTop is always 0
-        const scrollTop = scrollContainter.scrollTop || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        const scrollTop = scrollContainer.scrollTop || document.documentElement.scrollTop || document.body.scrollTop || 0;
         // Scroll when the element is out of view
-        if ((scrollTop < element.offsetTop && element.offsetTop > scrollContainter.clientHeight) // Below
+        if (element.offsetTop > (scrollContainer.clientHeight + scrollTop) // Below
             || element.offsetTop < scrollTop) { // Above
-            scrollContainter.scrollTop = element.offsetTop - element.clientHeight;
+            scrollContainer.scrollTop = element.offsetTop;
         }
     }
 

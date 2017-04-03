@@ -2,7 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as TestUtils from "react-addons-test-utils";
 import { App } from "components/container/App";
-import { PublicationContent } from "components/container/PublicationContent";
+import { PublicationContentPresentation } from "components/PublicationContent/PublicationContentPresentation";
 import { Url } from "utils/Url";
 import { TestBase } from "sdl-models";
 import { PageService } from "test/mocks/services/PageService";
@@ -10,6 +10,12 @@ import { PublicationService } from "test/mocks/services/PublicationService";
 import { TaxonomyService } from "test/mocks/services/TaxonomyService";
 import { localization } from "test/mocks/services/LocalizationService";
 import { hashHistory } from "react-router";
+import { isPage } from "utils/Page";
+import { configureStore } from "store/Store";
+import { Provider } from "react-redux";
+import { Store } from "redux";
+import { IState } from "store/interfaces/State";
+import { pageLoaded, publicationsLoaded } from "store/actions/Api";
 
 const services = {
     pageService: new PageService(),
@@ -19,9 +25,7 @@ const services = {
 };
 
 class AppComponent extends TestBase {
-
     public runTests(): void {
-
         describe(`App component tests.`, (): void => {
             const target = super.createTargetElement();
 
@@ -35,38 +39,39 @@ class AppComponent extends TestBase {
             });
 
             afterAll(() => {
-                target.parentElement.removeChild(target);
+                if (target.parentElement) {
+                    target.parentElement.removeChild(target);
+                }
             });
 
             it("renders publication content component on root", (): void => {
-                const onRender = function (this: PublicationContent): JSX.Element {
-                    const { publicationId, pageIdOrPublicationTitle, publicationTitle, pageTitle } = this.props.params;
+                const onRender = function (this: PublicationContentPresentation): JSX.Element {
+                    const { publicationId, pageId, publication, page } = this.props;
 
                     expect(publicationId).toBe("1420746");
-                    expect(pageIdOrPublicationTitle).toBe("publication-mp330");
-                    expect(publicationTitle).toBeUndefined();
-                    expect(pageTitle).toBeUndefined();
+                    expect(pageId).toBe("publication-mp330");
+                    expect(publication.title).toEqual("");
+                    expect(page.title).toEqual("");
 
                     return (<div />);
                 };
 
-                spyOn(PublicationContent.prototype, "render").and.callFake(onRender);
+                spyOn(PublicationContentPresentation.prototype, "render").and.callFake(onRender);
                 this._renderComponent(target);
             });
 
             it("renders publication content component when publication id and page id are set", (): void => {
-                const onRender = function (this: PublicationContent): JSX.Element {
-                    const { publicationId, pageIdOrPublicationTitle, publicationTitle, pageTitle } = this.props.params;
-
+                const onRender = function (this: PublicationContentPresentation): JSX.Element {
+                    const { publicationId, pageId, publication, page } = this.props;
                     if (publicationId === "pub-id-with-page") {
-                        expect(pageIdOrPublicationTitle).toBe("page-id");
-                        expect(publicationTitle).toBe("pub-title");
-                        expect(pageTitle).toBe("page-title");
+                        expect(pageId).toBe("0000001");
+                        expect(publication.title).toBe("pub-title");
+                        expect(page.title).toBe("page-title");
                     } else {
                         expect(publicationId).toBe("pub-id");
-                        expect(pageIdOrPublicationTitle).toBe("pub-title");
-                        expect(publicationTitle).toBeUndefined();
-                        expect(pageTitle).toBeUndefined();
+                        expect(publication.title).toBe("pub-title");
+                        expect(isPage(page)).toBeFalsy();
+                        expect(page.title).toBe("");
                     }
 
                     return (<div />);
@@ -74,23 +79,39 @@ class AppComponent extends TestBase {
 
                 const app = this._renderComponent(target);
 
-                spyOn(PublicationContent.prototype, "render").and.callFake(onRender);
+                spyOn(PublicationContentPresentation.prototype, "render").and.callFake(onRender);
 
                 // Publication content
                 hashHistory.push(Url.getPublicationUrl("pub-id", "pub-title"));
-                expect(TestUtils.findRenderedComponentWithType(app, PublicationContent)).not.toBeNull();
+                expect(TestUtils.findRenderedComponentWithType(app, PublicationContentPresentation)).not.toBeNull();
 
-                hashHistory.push(Url.getPageUrl("pub-id-with-page", "page-id", "pub-title", "page-title"));
-                expect(TestUtils.findRenderedComponentWithType(app, PublicationContent)).not.toBeNull();
+                hashHistory.push(Url.getPageUrl("pub-id-with-page", "0000001", "pub-title", "page-title"));
+                expect(TestUtils.findRenderedComponentWithType(app, PublicationContentPresentation)).not.toBeNull();
             });
         });
     }
 
     private _renderComponent(target: HTMLElement): App {
+        const store: Store<IState> = configureStore();
+
+        store.dispatch(publicationsLoaded([{
+            id: "pub-id-with-page",
+            title: "pub-title"
+        }, {
+            id: "pub-id",
+            title: "pub-title"
+        }]));
+
+        store.dispatch(pageLoaded({
+            id: "0000001",
+            title: "page-title",
+            content: "Page content"
+        }));
+
         return ReactDOM.render(
-            (
-                <App history={hashHistory} services={services} />
-            )
+                <Provider store={store}>
+                    <App history={hashHistory} services={services} />
+                </Provider>
             , target) as App;
     }
 }

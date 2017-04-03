@@ -19,7 +19,7 @@ export interface IPublication {
      * @type {string}
      * @memberOf IPublication
      */
-    title?: string;
+    title: string;
 
     /**
      * Publication product family
@@ -36,4 +36,35 @@ export interface IPublication {
      * @memberOf IPublication
      */
     productReleaseVersion?: string | null;
+
+    /**
+     * Publication verison
+     * Creation date
+     *
+     * @type {Date}
+     * @memberOf IPublication
+     */
+    createdOn: Date;
+
+    /**
+     * Version (eg 1, 1.1.1)
+     *
+     * @type {string}
+     * @memberOf IPublication
+     */
+    versionRef?: string;
+
+    /**
+     * Publication language
+     */
+    version: string;
+
+    /**
+     * Logical id
+     *
+     * @type {string}
+     * @memberOf IPublication
+     */
+    language?: string;
+    logicalId: string;
 }

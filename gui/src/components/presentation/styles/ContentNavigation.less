@@ -24,6 +24,9 @@
     ul {
         margin-top: 0;
         padding: 0 15px 0 0;
+        .sdl-dita-delivery-app.rtl & {
+            padding: 0 0 0 15px;
+        }
 
         li {
             background: fade(@accentColor2, 5%);
@@ -33,6 +36,10 @@
             margin-bottom: -1px;
             border: 1px solid @neutralColor5;
             border-left: 2px solid @accentColor1;
+            .sdl-dita-delivery-app.rtl & {
+                border: 1px solid @neutralColor5;
+                border-right: 2px solid @accentColor1;
+            }
 
             &:first-child {
                 border-top-left-radius: @outerBorderSize;
@@ -55,6 +62,7 @@
             a {
                 text-decoration: none;
                 color: @neutralColor1;
+                word-break: break-all;
                 &:hover {
                     color: @accentColor2;
                 }

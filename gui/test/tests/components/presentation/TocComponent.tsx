@@ -21,10 +21,12 @@ class TocComponent extends TestBase {
             const rootItems: ITaxonomy[] = [{
                 id: "root",
                 title: "Root1",
+                url: "root",
                 hasChildNodes: true
             }, {
                 id: "root-error",
                 title: "Root2",
+                url: "root-error",
                 hasChildNodes: true
             }];
             const loadChildItems = (parentId: string): Promise<ITaxonomy[]> => {
@@ -35,11 +37,13 @@ class TocComponent extends TestBase {
                             resolve([{
                                 id: "12345",
                                 title: "Child1",
+                                url: "12345",
                                 hasChildNodes: true
                             },
                             {
                                 id: "123456",
                                 title: "Child2",
+                                url: "123456",
                                 hasChildNodes: true
                             }]);
                         }, DELAY);
@@ -50,6 +54,7 @@ class TocComponent extends TestBase {
                             resolve([{
                                 id: "12345-nested",
                                 title: "NestedChild1",
+                                url: "12345-nested",
                                 hasChildNodes: false
                             },
                             {
@@ -83,7 +88,9 @@ class TocComponent extends TestBase {
             });
 
             afterAll(() => {
-                target.parentElement.removeChild(target);
+                if (target.parentElement) {
+                    target.parentElement.removeChild(target);
+                }
             });
 
             it("shows the root nodes on initial render", (): void => {
@@ -122,7 +129,8 @@ class TocComponent extends TestBase {
                 setTimeout((): void => {
                     const node = domNode.querySelector(".sdl-dita-delivery-toc-list-fail");
                     expect(node).not.toBeNull();
-                    expect(node.querySelector("p").textContent).toBe("mock-error.toc.items.not.found");
+                    const p = (node as HTMLElement).querySelector("p") as HTMLElement;
+                    expect(p.textContent).toBe("mock-error.toc.items.not.found");
                     done();
                 }, DELAY + 1);
             });
@@ -146,7 +154,7 @@ class TocComponent extends TestBase {
                         expect(path).toEqual(activeItemPath);
                         done();
                     },
-                    onRetry: () => {}
+                    onRetry: () => { }
                 };
                 this._renderComponent(props, target);
             });
@@ -167,7 +175,7 @@ class TocComponent extends TestBase {
                             expect(path).toEqual([rootItems[0].id]);
                             done();
                         },
-                        onRetry: () => {}
+                        onRetry: () => { }
                     };
                     this._renderComponent(propsReset, target);
                 };
@@ -182,63 +190,30 @@ class TocComponent extends TestBase {
                         expect(path).toEqual(activeItemPath);
                         selectFirstRootNode();
                     },
-                    onRetry: () => {}
+                    onRetry: () => { }
                 };
                 this._renderComponent(props, target);
             });
 
-            it("can navigate between abstract and regular pages", (done: () => void): void => {
+            it("can not navigate between regular and abstract pages", (done: () => void): void => {
                 // tslint:disable-next-line:no-any
                 const treeView = TestUtils.findRenderedComponentWithType(toc, TreeView as any);
                 expect(treeView).not.toBeNull();
 
                 const switchBetweenChildNodes = (prevProps: ITocProps): void => {
-                    const firstChildPath = [rootItems[0].id || "", "12345", "12345-nested"];
-                    const secondChildPath = [rootItems[0].id || "", "12345", "12345-nested2"];
-                    let timesClicked = 0;
-                    let runAfterOnSelectionChanged: () => void;
-                    let onSelectionChangedSpy: jasmine.Spy;
-                    prevProps.onSelectionChanged = (sitemapItem: ITaxonomy, path: string[]): void => {
-                        if (timesClicked === 1) {
-                            expect(path).toEqual(secondChildPath);
-                        } else if (timesClicked === 2) {
-                            expect(path).toEqual(firstChildPath);
-                        } else {
-                            expect(path).toEqual(secondChildPath);
-                            expect(onSelectionChangedSpy).toHaveBeenCalledTimes(3);
-                            done();
-                            return;
-                        }
-                        runAfterOnSelectionChanged();
-                    };
-                    onSelectionChangedSpy = spyOn(prevProps, "onSelectionChanged").and.callThrough();
+                    const onSelectionChangedSpy = spyOn(prevProps, "onSelectionChanged").and.callThrough();
                     this._renderComponent(prevProps, target);
                     const domNode = ReactDOM.findDOMNode(treeView);
                     // Select second child by clicking on it
                     const selectSecondChildNode = (): void => {
                         const secondNestedChildNode = domNode.querySelectorAll(".content").item(3) as HTMLDivElement;
                         expect(secondNestedChildNode && secondNestedChildNode.textContent).toBe("NestedChild2");
-                        timesClicked++;
                         secondNestedChildNode.click();
-                    };
-                    runAfterOnSelectionChanged = (): void => {
-                        // Re-render to trigger componentWillReceiveProps update
-                        // This is needed to test if _isExpanding is set correctly on an update
-                        prevProps.activeItemPath = secondChildPath;
-                        this._renderComponent(prevProps, target);
-                        // Select the the first child again
-                        const firstNestedChildNode = domNode.querySelectorAll(".content").item(2) as HTMLDivElement;
-                        expect(firstNestedChildNode && firstNestedChildNode.textContent).toBe("NestedChild1");
-                        timesClicked++;
-                        runAfterOnSelectionChanged = (): void => {
-                            // Re-render to trigger componentWillReceiveProps update
-                            // This is needed to test if _isExpanding is set correctly on an update
-                            prevProps.activeItemPath = firstChildPath;
-                            this._renderComponent(prevProps, target);
-                            // Select second node again
-                            selectSecondChildNode();
-                        };
-                        firstNestedChildNode.click();
+                        setTimeout((): void => {
+                            // Abstract items cannot be selected
+                            expect(onSelectionChangedSpy).not.toHaveBeenCalled();
+                            done();
+                        }, 100);
                     };
                     selectSecondChildNode();
                 };
@@ -253,7 +228,7 @@ class TocComponent extends TestBase {
                         expect(path).toEqual(activeItemPath);
                         switchBetweenChildNodes(props);
                     },
-                    onRetry: () => {}
+                    onRetry: () => { }
                 };
                 this._renderComponent(props, target);
             });
@@ -266,10 +241,11 @@ class TocComponent extends TestBase {
                 const element = document.querySelector(".sdl-dita-delivery-error-toc");
                 expect(element).not.toBeNull();
 
-                const message = element.querySelector(".sdl-dita-delivery-error-toc-message");
+                const message = (element as HTMLElement).querySelector(".sdl-dita-delivery-error-toc-message") as HTMLElement;
                 expect(message.textContent).toEqual("mock-error.toc.not.found");
 
-                element.querySelector("button").click();
+                const button = (element as HTMLElement).querySelector("button") as HTMLButtonElement;
+                button.click();
 
                 const element2 = document.querySelector(".sdl-dita-delivery-error-toc");
                 expect(element2).toBeNull();

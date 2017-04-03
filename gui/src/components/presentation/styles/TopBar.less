@@ -3,6 +3,8 @@
 @import (reference) "~theme-styles";
 
 @topBarHeight: 50px;
+@dropdownItemHeight: 35px;
+@dropdownMenuWidth: 170px;
 .sdl-dita-delivery-topbar {
     width: 100%;
     height: @topBarHeight;
@@ -17,6 +19,7 @@
         max-width: @screenXl;
         margin: 0 auto;
         width: 100%;
+        height: 100%;
         position: relative;
         border-spacing: 15px 0;
         /* New layout */
@@ -29,8 +32,16 @@
         > * {
             flex-grow: 0;
             margin-right: 15px;
+            .sdl-dita-delivery-app.rtl & {
+                margin-right: 0px;
+                margin-left: 15px;
+            }
             &:first-child {
                 margin-left: 15px;
+                .sdl-dita-delivery-app.rtl & {
+                    margin-left: 0px;
+                    margin-right: 15px;
+                }
             }
             span {
                 margin-right: 5px;
@@ -41,26 +52,107 @@
         }
         .sdl-dita-delivery-topbar-logo {
             .icon-company-logo();
+            max-height: @topBarHeight;
             background-size: 46px 21px;
             position: relative;
-            top: -4px;
             background-position: left center;
+            .sdl-dita-delivery-app.rtl & {
+                background-position: right center;
+            }
             a {
                 height: 100%;
                 width: 100%;
+                min-width: 45px;
                 display: inline-block;
             }
         }
         .sdl-dita-delivery-topbar-language {
+            max-height: @topBarHeight;
             text-align: right;
+            margin-right: 0;
+            .sdl-dita-delivery-app.rtl & {
+                text-align: left;
+            }
             span {
                 .icon-language(21px);
             }
         }
         .sdl-dita-delivery-topbar-user {
+            max-height: @topBarHeight;
             width: 24px;
             span {
                 .icon-user(21px);
+            }
+        }
+        .sdl-dita-delivery-dropdown {
+            .dropdown-toggle {
+                color: white;
+                padding: 5px 10px 5px 5px;
+                .rtl & {
+                    padding: 5px 5px 5px 10px;
+                }
+                .caret {
+                    .icon-arrow-down(15px);
+                }
+            }
+            .dropdown-menu {
+                .dropdown-items {
+                    background-color: white;
+                    box-shadow: 0 2px 0 0 @neutralColor5;
+                    padding: 10px 0;
+                    border: 1px solid @neutralColor5;
+                    border-radius: 4px;
+                    max-height: @dropdownItemHeight * 10 + (10 + 1) * 2; // 10 items + paddings + borders
+                    max-width: @dropdownMenuWidth;
+                    width: @dropdownMenuWidth;
+                    li {
+                       .import-regular-font();
+                        padding: 0 5px 0 18px;
+                        .rtl & {
+                            padding: 0 18px 0 5px;
+                        }
+                        font-size: 14px;
+                        line-height: 0;
+                        height: @dropdownItemHeight;
+                        border-color: @neutralColor5;
+                        a {
+                            color: @neutralColor4;
+                            line-height: @dropdownItemHeight;
+                        }
+                        &:hover {
+                            background-color: @accentColor1;
+                            a {
+                                color: white;
+                            }
+                        }
+                    }
+                    li.active {
+                        a {
+                            padding-right: 25px;
+                            .rtl & {
+                                padding-right: 0px;
+                                padding-left: 25px;
+                            }
+                            .checked {
+                                .icon-checked(18px);
+                                color: @accentColor1;
+                            }
+                        }
+                        &:hover {
+                            .checked {
+                                color: white;
+                            }
+                        }
+                    }
+                }
+                .dropdown-arrow:before {
+                    border-top: 8px solid transparent;
+                    border-left: 8px solid white;
+                }
+                .dropdown-arrow:after {
+                    border-top: 8px solid transparent;
+                    border-right: 8px solid white;
+                }
             }
         }
     }

@@ -81,7 +81,9 @@ class BreadcrumbsComponent extends TestBase {
             });
 
             afterAll(() => {
-                target.parentElement.removeChild(target);
+                if (target.parentElement) {
+                    target.parentElement.removeChild(target);
+                }
             });
 
             it("renders breadcumbs", (): void => {
