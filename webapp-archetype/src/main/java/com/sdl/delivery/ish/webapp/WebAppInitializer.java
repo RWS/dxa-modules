@@ -1,6 +1,7 @@
 package com.sdl.delivery.ish.webapp;
 
-import com.sdl.delivery.ish.webapp.controllers.PageController;
+import com.sdl.delivery.ish.webapp.module.SpringInitializer;
+import com.sdl.delivery.ish.webapp.module.controller.PageController;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
