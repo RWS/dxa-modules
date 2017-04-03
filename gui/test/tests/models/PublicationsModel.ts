@@ -3,6 +3,7 @@ import { TestBase } from "sdl-models";
 import { IPublication } from "interfaces/ServerModels";
 import { IPublication as IPublicationInterface } from "interfaces/Publication";
 import { localization } from "services/common/LocalizationService";
+import { DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE } from "models/Publications";
 
 const MOCK_DATA: IPublication[] = [
     {
@@ -79,7 +80,7 @@ class PublicationsModel extends TestBase {
                     expect(families.length).toBe(3);
                     expect(families[0].title).toBe("Family 1");
                     expect(families[1].title).toBe("Family 2");
-                    expect(families[2].title).toBe("Unknown product");
+                    expect(families[2].title).toBe(DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE);
                 }
             });
 
@@ -153,7 +154,7 @@ class PublicationsModel extends TestBase {
                     expect(families[3].title).toBe("Mulberry");
                     expect(families[4].title).toBe("Strawberry");
                     expect(families[5].title).toBe("Watermelonberry");
-                    expect(families[6].title).toBe("Unknown product");
+                    expect(families[6].title).toBe(DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE);
                 }
             });
 
