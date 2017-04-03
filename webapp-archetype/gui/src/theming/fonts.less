@@ -1,0 +1,32 @@
+@import (reference) "colors.less";
+
+// ---------------------------------------------------------------------------------------------------------------------
+// This file contains global LESS variables that can be used across the application when using fonts
+// ---------------------------------------------------------------------------------------------------------------------
+// Defined inside https://confluence.sdl.com/pages/viewpage.action?pageId=72917975
+
+@fontFamily: "Arial";
+@fontHeaderFamily: "Arial";
+@fontFamilyFallback: "Helvetica";
+@fontSize: 12px;
+@fontColor: @neutralColor1;
+
+.import-header-font() {
+    font-family: @fontHeaderFamily;
+    font-weight: normal;
+    font-style: normal;
+}
+
+.import-regular-font() {
+    font-family: @fontFamily;
+    font-weight: normal;
+    font-style: normal;
+}
+
+.header-font(@weight: 400, @size:20px, @height: 24px) {
+    font-family: @fontHeaderFamily, @fontFamilyFallback;
+    font-style: normal;
+    font-weight: @weight;
+    font-size: @size;
+    line-height: @height;
+}

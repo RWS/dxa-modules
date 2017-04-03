@@ -1,0 +1,66 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// This file contains global LESS mixins that can be used across the application when using icons
+// ---------------------------------------------------------------------------------------------------------------------
+
+@import (reference) "~sdl-icons/dist/icons-graphene.less";
+@import (reference) "~sdl-icons/dist/icons-carbon-2.0.less";
+@import (reference) "~sdl-icons/dist/icons-common.less";
+
+@iconFont: "SDLfont";
+@iconFontPath: "./fonts/SDLfont";
+@iconLanguage: "\e011";
+@iconHamburger: "\e007";
+@iconUser: "\e023";
+@iconArrowRight: "\e013";
+@iconSearch: "\e01b";
+
+.import-icon-font() {
+    font-family: @iconFont;
+    src: url('@{iconFontPath}/SDLfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.icon-font-default-style(@size: 24px) {
+    display: inline-block;
+    font-family: @iconFont; // shortening font declaration
+    font-size: @size;
+}
+
+.icon-company-logo() {
+    .icon-sdl-logo-white();
+    background-repeat: no-repeat;
+}
+
+.icon-hamburger(@size: 24px) {
+    .icon-font-default-style(@size);
+    &:before {
+        content: @iconHamburger;
+    }
+}
+
+.icon-language(@size: 24px) {
+    .icon-font-default-style(@size);
+    &:before {
+        content: @iconLanguage;
+    }
+}
+
+.icon-user(@size: 24px) {
+    .icon-font-default-style(@size);
+    &:before {
+        content: @iconUser;
+    }
+}
+
+.icon-arrow-right(@size: 24px) {
+    .icon-more-arrow-16-color();
+    transform: rotate(270deg);
+}
+
+.icon-search(@size: 24px) {
+    .icon-font-default-style(@size);
+    &:before {
+        content: @iconSearch;
+    }
+}
