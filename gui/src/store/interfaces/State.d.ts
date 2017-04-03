@@ -3,7 +3,7 @@ import { IPage } from "interfaces/Page";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 
 export interface IProductReleaseVersionState {
-    byPubId: IProductReleaseVersionMap;
+    byProductFamily: IProductReleaseVersionMap;
 }
 
 export interface IProductReleaseVersionMap {

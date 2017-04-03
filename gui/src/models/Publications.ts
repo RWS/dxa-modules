@@ -8,6 +8,9 @@ import { localization } from "services/common/LocalizationService";
 import { String } from "utils/String";
 import Version from "utils/Version";
 
+export const DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE: string = "Unknown product";
+export const DEFAULT_UNKNOWN_PRODUCT_RELEASE_VERSION: string = "Unknown product release version";
+
 /**
  * Publications model
  *
@@ -19,9 +22,9 @@ export class Publications extends LoadableObject {
 
     private _publications: IPublication[];
     private _productFamilies?: IProductFamily[];
-    private _unknownProductFamilyTitle: string = localization.formatMessage("productfamilies.unknown.title");
     private _unknownProductFamilyDescription: string = localization.formatMessage("productfamilies.unknown.description");
-    private _unknownProductReleaseVersion: string = localization.formatMessage("productreleaseversions.unknown.title");
+    private _unknownProductFamilyTitle: string = DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE;
+    private _unknownProductReleaseVersion: string = DEFAULT_UNKNOWN_PRODUCT_RELEASE_VERSION;
 
     /**
      * Get the Publications
@@ -156,8 +159,8 @@ export class Publications extends LoadableObject {
     private _convertToProductReleaseVersion(version: string | null): IProductReleaseVersion {
         if (version === null) {
             return {
-                title: this._unknownProductReleaseVersion,
-                value: String.normalize(this._unknownProductReleaseVersion),
+                title: DEFAULT_UNKNOWN_PRODUCT_RELEASE_VERSION,
+                value: String.normalize(DEFAULT_UNKNOWN_PRODUCT_RELEASE_VERSION),
                 hasWarning: true
             };
         }

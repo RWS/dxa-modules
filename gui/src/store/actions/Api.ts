@@ -4,7 +4,7 @@ import { IPublicationService } from "services/interfaces/PublicationService";
 
 import {PAGE_LOADED, PAGE_LOADING, PAGE_ERROR,
     PUBLICATIONS_LOADED, PUBLICATIONS_LOADING, PUBLICATIONS_LOADING_ERROR,
-    RESLEASE_VERSIONS_LOADING, RESLEASE_VERSIONS_LOADED } from "./Actions";
+    RELEASE_VERSIONS_LOADING, RELEASE_VERSIONS_LOADED } from "./Actions";
 
 import { getPubById, getPubList } from "store/reducers/Reducer";
 import { Dispatch } from "redux";
@@ -48,8 +48,8 @@ export const pageError = createAction(PAGE_ERROR, (pageId: string, message: stri
 export const publicationsLoading = createAction(PUBLICATIONS_LOADING);
 export const publicationsLoadingError = createAction(PUBLICATIONS_LOADING_ERROR);
 
-export const releaseVersionsLoading = createAction(RESLEASE_VERSIONS_LOADING, (pubId) => pubId);
-export const releaseVersionsLoaded = createAction(RESLEASE_VERSIONS_LOADED, (publicationId, releaseVersions) => ({publicationId, releaseVersions}));
+export const releaseVersionsLoading = createAction(RELEASE_VERSIONS_LOADING, (pubId) => pubId);
+export const releaseVersionsLoaded = createAction(RELEASE_VERSIONS_LOADED, (productFamily, releaseVersions) => ({productFamily, releaseVersions}));
 
 /**
  * Publications fetcher

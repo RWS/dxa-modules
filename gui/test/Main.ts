@@ -36,6 +36,7 @@ import "test/tests/utils/TcmId";
 import "test/tests/utils/UrlUtil";
 
 // import "test/tests/store/reducers/Language";
+import "test/tests/store/reducers/Reducer";
 import "test/tests/store/reducers/Publication";
 import "test/tests/store/reducers/Publciations";
 import "test/tests/utils/StringUtil";
