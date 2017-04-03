@@ -9,7 +9,7 @@ import { IAppContext } from "components/container/App";
 import { NavigationMenu } from "components/presentation/NavigationMenu";
 import { Toc } from "components/presentation/Toc";
 import { Page } from "components/presentation/Page";
-import { Breadcrumbs } from "components/presentation/Breadcrumbs";
+import { Breadcrumbs, IBreadcrumbItem } from "components/presentation/Breadcrumbs";
 import { VersionSelector } from "components/presentation/VersionSelector";
 import { Html, IHeader } from "utils/Html";
 import { TcmId } from "utils/TcmId";
@@ -114,6 +114,12 @@ export interface IPublicationContentState {
      * @type {string}
      */
     publicationTitle?: string;
+    /**
+     * Title of the current publication
+     *
+     * @type {string}
+     */
+    productFamilyTitle?: string;
     /**
      * Active header inside the page
      *
@@ -261,7 +267,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
      * @returns {JSX.Element}
      */
     public render(): JSX.Element {
-        const { isPageLoading, activeTocItemPath, selectedTocItem, publicationTitle,
+        const { isPageLoading, activeTocItemPath, selectedTocItem, publicationTitle, productFamilyTitle,
             activePageHeader, productReleaseVersions, selectedProductReleaseVersion } = this.state;
         const { pageIdOrPublicationTitle, pageTitle, pageAnchor } = this.props.params;
         const pageId = TcmId.isValidPageId(pageIdOrPublicationTitle) ? pageIdOrPublicationTitle : null;
@@ -307,10 +313,31 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                         </Toc>
                     </NavigationMenu>
                     <Breadcrumbs
-                        publicationId={publicationId}
-                        publicationTitle={publicationTitle || ""}
-                        loadItemsPath={taxonomyService.getSitemapPath.bind(taxonomyService)}
                         selectedItem={selectedTocItem}
+                        loadItemsPath={(itemId: string): Promise<IBreadcrumbItem[]> => {
+                            let breadCrumbPath = [{
+                                title: productFamilyTitle,
+                                url: Url.getProductFamilyUrl(productFamilyTitle || "", selectedProductReleaseVersion)
+                            }, {
+                                title: publicationTitle,
+                                url: Url.getPublicationUrl(publicationId, publicationTitle)
+                            }] as IBreadcrumbItem[];
+                            if (pageId) {
+                                return taxonomyService.getSitemapPath(publicationId, pageId, itemId || "").then(
+                                    path => {
+                                        breadCrumbPath.push(...path.map(item => {
+                                            return {
+                                                title: item.title,
+                                                url: item.url
+                                            } as IBreadcrumbItem;
+                                        }));
+                                        return breadCrumbPath;
+                                    }
+                                );
+                            } else {
+                                return Promise.resolve(breadCrumbPath);
+                            }
+                        }}
                     />
                     <VersionSelector productReleaseVersions={productReleaseVersions || []}
                         selectedProductReleaseVersion={selectedProductReleaseVersion}
@@ -582,6 +609,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     const normalizedVersion = pub.productReleaseVersion ? Version.normalize(pub.productReleaseVersion).toLowerCase().trim() : undefined;
                     this.setState({
                         publicationTitle: pub.title,
+                        productFamilyTitle: pub.productFamily || "",
                         selectedProductReleaseVersion: normalizedVersion
                     });
                 }
