@@ -1,0 +1,22 @@
+{
+  "GPRS": [
+    "Y"
+  ],
+  "LOUDSPEAKER": [
+    "Y"
+  ],
+  "BLUETOOTH": [
+    "Y"
+  ],
+  "MODEL": [
+    "330"
+  ],
+  "HEADSET": [
+    "Y"
+  ],
+  "GAMES": [
+    "SNAKE",
+    "WATERRAPIDS",
+    "DJ"
+  ]
+}
