@@ -98,9 +98,6 @@ class Server extends TestBase {
                                             <li>
                                                 <a className="home" title="Home" href="#/home">Home</a><span className="separator"></span>
                                             </li>
-                                            <li>
-                                                <a title="" href="#/123"></a>
-                                            </li>
                                         </ul>
                                     </div>
                                     <div/>
