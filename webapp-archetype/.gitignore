@@ -4,10 +4,14 @@
 .idea
 *.iml
 
+# gui
+gui/node
+gui/node_modules
+gui/dist
+gui/typings
+
 # DXA logs
 logs/
-.vscode/
 
 # Build output
-dist/
 target/

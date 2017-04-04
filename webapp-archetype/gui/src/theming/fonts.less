@@ -5,20 +5,24 @@
 // ---------------------------------------------------------------------------------------------------------------------
 // Defined inside https://confluence.sdl.com/pages/viewpage.action?pageId=72917975
 
-@fontFamily: "Arial";
-@fontHeaderFamily: "Arial";
-@fontFamilyFallback: "Helvetica";
-@fontSize: 12px;
+@fontFamily: "Calibri W01 Regular";
+@fontHeaderFamily: "Sommet Rounded W00 Regular";
+@fontFamilyPath: "./fonts/Calibri W01 Regular";
+@fontHeaderPath: "./fonts/Sommet Rounded W00 Regular";
+@fontFamilyFallback: "Arial";
+@fontSize: 14px;
 @fontColor: @neutralColor1;
 
 .import-header-font() {
     font-family: @fontHeaderFamily;
+    src: url('@{fontHeaderPath}/Sommet Rounded W00 Regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
 
 .import-regular-font() {
     font-family: @fontFamily;
+    src: url('@{fontFamilyPath}/Calibri W01 Regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }

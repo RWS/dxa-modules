@@ -2,7 +2,6 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Components, Services } from "sdl-dita-delivery-web-app-gui";
 import { browserHistory } from "react-router";
-import "./custom/custom-styles";
 
 const { App } = Components.AppComp;
 const { PageService, PublicationService, TaxonomyService } = Services.Client;
