@@ -10,7 +10,7 @@ interface IDic { [path: string]: string; };
 interface IDics { [lang: string]: IDic; };
 
 export const DEFAULT_LANGUAGE: string = "en";
-export const DEFAULT_LANGUAGES = ["en", "nl", "ja", "de", "zh"];
+export const DEFAULT_LANGUAGES = ["de", "en", "nl", "zh", "ja"];
 const LANGUAGE_LOCALSTORAGE: string =  "sdl-dita-delivery-app-langugae";
 
 const LanguageMap = require("resources/resources.languages.resjson") as ILanguage[];
