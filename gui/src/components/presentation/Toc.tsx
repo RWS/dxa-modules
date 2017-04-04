@@ -214,6 +214,9 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
             const parent = el.parentElement;
             ReactDOM.unmountComponentAtNode(parent);
             parent.remove();
+            // HACK; quick fix for KCWA-732, after changes in TreeView.
+            // for proper fix need to review current approach for error
+            parentNode.isExpanded = false;
         }
     }
 
