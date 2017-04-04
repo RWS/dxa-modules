@@ -1,6 +1,7 @@
 {
   "Id": "516760",
   "Meta": {
+    "conditionsused.generated.value": "{\"Continents\":[\"Antarctica\",\"Oceania\",\"South America\",\"Africa\"]}",
     "tocnaventries.generated.value": "ish:1601084-6-1024"
   },
   "Regions": [

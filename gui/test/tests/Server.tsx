@@ -66,21 +66,13 @@ class Server extends TestBase {
                                     <div className="dropdown-menu">
                                         <div className="dropdown-arrow"></div>
                                         <ul className="dropdown-items">
-                                            <li><a>Deutsch</a></li>
                                             <li className="active"><a>English<span className="checked"></span></a></li>
-                                            <li><a>עברית</a></li>
-                                            <li><a>日本語</a></li>
                                             <li><a>Nederlands</a></li>
-                                            <li><a>中文</a></li>
                                         </ul>
                                     </div>
                                     <select defaultValue="en">
-                                        <option value="de">Deutsch</option>
                                         <option value="en">English</option>
-                                        <option value="he">עברית</option>
-                                        <option value="ja">日本語</option>
                                         <option value="nl">Nederlands</option>
-                                        <option value="zh">中文</option>
                                     </select>
                                 </div>
                                 <div className="sdl-dita-delivery-topbar-user"><span></span></div>
@@ -105,9 +97,6 @@ class Server extends TestBase {
                                         <ul>
                                             <li>
                                                 <a className="home" title="Home" href="#/home">Home</a><span className="separator"></span>
-                                            </li>
-                                            <li>
-                                                <a title="" href="#/123"></a>
                                             </li>
                                         </ul>
                                     </div>

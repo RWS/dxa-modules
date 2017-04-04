@@ -1,6 +1,7 @@
 {
   "Id": "164257",
   "Meta": {
+    "conditionsused.generated.value": "{\"GPRS\":[\"Y\"],\"LOUDSPEAKER\":[\"Y\"],\"BLUETOOTH\":[\"Y\"]}",
     "tocnaventries.generated.value": "ish:1881665-8-1024"
   },
   "Regions": [
