@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.sdl.delivery.ish</groupId>
-    <artifactId>webapp-archetype</artifactId>
+    <artifactId>dd-webapp</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
