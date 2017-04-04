@@ -14,7 +14,8 @@
     "sdl-controls-react-wrappers": "~0.1.0-28",
     "sdl-models": "~0.1.0-6",
     "ts-helpers": "~1.1.2",
-    "classnames": "~2.2.5"
+    "classnames": "~2.2.5",
+    "prismjs": "^1.6.0"
   },
   "devDependencies": {
     "async": "~2.1.4",

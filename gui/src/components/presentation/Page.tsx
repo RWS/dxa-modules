@@ -1,5 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import * as Prism from "prismjs";
+
 import { Html, IHeader } from "utils/Html";
 import { Url } from "utils/Url";
 import { path } from "utils/Path";
@@ -12,6 +14,7 @@ import { Error } from "components/presentation/Error";
 import "components/presentation/styles/Page";
 import "dita-ot/styles/commonltr";
 import "dita-ot/styles/commonrtl";
+import "prismjs/themes/prism";
 
 /**
  * Page component props
@@ -120,6 +123,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
     public context: IAppContext;
 
     private _hyperlinks: { element: HTMLElement, handler: (e: Event) => void; }[] = [];
+    private _codeBlocks: HTMLElement[] = [];
     private _lastPageAnchor?: string;
     private _historyUnlisten: () => void;
 
@@ -196,7 +200,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
      * Invoked once, only on the client (not on the server), immediately after the initial rendering occurs.
      */
     public componentDidMount(): void {
-        this._enableHyperlinks();
+        this._postProcessHtml();
         this._collectHeadersLinks();
     }
 
@@ -206,7 +210,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
      * @memberOf Page
      */
     public componentDidUpdate(): void {
-        this._enableHyperlinks();
+        this._postProcessHtml();
         this._collectHeadersLinks();
         this._jumpToAnchor();
     }
@@ -223,16 +227,33 @@ export class Page extends React.Component<IPageProps, IPageState> {
     }
 
     /**
-     * Make hyperlinks navigate when clicked
+     * Post process HTML
      *
      * @private
      *
      * @memberOf Page
      */
-    private _enableHyperlinks(): void {
+    private _postProcessHtml(): void {
         const props = this.props;
         const domNode = ReactDOM.findDOMNode(this);
         if (domNode) {
+
+            //Highlight code blocks
+            const codeBlocks = this._codeBlocks;
+            const highlightBlocks = domNode.querySelectorAll(".page-content pre.codeblock code");
+            for (let i: number = 0, length: number = highlightBlocks.length; i < length; i++) {
+                const block = highlightBlocks.item(i) as HTMLElement;
+                const isAdded = codeBlocks.indexOf(block) > -1;
+                if (!isAdded) {
+                    if (!block.classList.contains("language-markup")) {
+                        block.classList.add("language-markup");
+                    }
+                    codeBlocks.push(block);
+                    Prism.highlightElement(block, false);
+                }
+            }
+
+            // Make hyperlinks navigate when clicked
             const anchors = domNode.querySelectorAll(".page-content a");
             const hyperlinks = this._hyperlinks;
             for (let i: number = 0, length: number = anchors.length; i < length; i++) {
