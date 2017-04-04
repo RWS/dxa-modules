@@ -30,7 +30,7 @@ const EMPTY_STATE: IState = {
         errors: {}
     },
     releaseVersions: {
-        byPubId: {}
+        byProductFamily: {}
     }
 };
 

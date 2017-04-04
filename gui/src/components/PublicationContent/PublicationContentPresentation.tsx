@@ -5,7 +5,7 @@ import { IAppContext } from "components/container/App";
 import { NavigationMenu } from "components/presentation/NavigationMenu";
 import { Toc } from "components/presentation/Toc";
 import { Page } from "components/Page/Page";
-import { Breadcrumbs } from "components/presentation/Breadcrumbs";
+import { Breadcrumbs, IBreadcrumbItem } from "components/presentation/Breadcrumbs";
 import { ContentLanguageWarning } from "components/ContentLanguageWarning/ContentLanguageWarning";
 
 import { VersionSelector } from "components/presentation/VersionSelector";
@@ -261,9 +261,32 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                         </Toc>
                     </NavigationMenu>
                     <Breadcrumbs
-                        publicationId={publicationId}
-                        publicationTitle={publication.title || ""}
-                        loadItemsPath={taxonomyService.getSitemapPath.bind(taxonomyService)}
+                        loadItemsPath={(itemId: string): Promise<IBreadcrumbItem[]> => {
+                            const publicationTitle = publication.title;
+                            const productFamilyTitle = publication.productFamily;
+                            let breadCrumbPath = [{
+                                title: productFamilyTitle,
+                                url: Url.getProductFamilyUrl(productFamilyTitle || "", selectedProductReleaseVersion)
+                            }, {
+                                title: publicationTitle,
+                                url: Url.getPublicationUrl(publicationId, publicationTitle)
+                            }] as IBreadcrumbItem[];
+                            if (pageId) {
+                                return taxonomyService.getSitemapPath(publicationId, pageId, itemId || "").then(
+                                    path => {
+                                        breadCrumbPath.push(...path.map(item => {
+                                            return {
+                                                title: item.title,
+                                                url: item.url
+                                            } as IBreadcrumbItem;
+                                        }));
+                                        return breadCrumbPath;
+                                    }
+                                );
+                            } else {
+                                return Promise.resolve(breadCrumbPath);
+                            }
+                        }}
                         selectedItem={selectedTocItem}
                         />
                     <ContentLanguageWarning />
