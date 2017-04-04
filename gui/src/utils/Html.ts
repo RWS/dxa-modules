@@ -166,7 +166,7 @@ export class Html {
      * @param {HTMLElement} scrollContainer Element which is used for scrolling
      * @param {HTMLElement} element Element which should be in view
      * @param {} options
-     *      - force {boolea} scroll to top of element even if you are in this element already
+     *      - force {boolean} scroll to top of element even if you are in this element already
      *
      * @memberOf Html
      */
