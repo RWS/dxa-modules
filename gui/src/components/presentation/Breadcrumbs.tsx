@@ -3,10 +3,30 @@ import { Promise } from "es6-promise";
 import { Link } from "react-router";
 import { ITaxonomy } from "interfaces/Taxonomy";
 import { IAppContext } from "components/container/App";
-import { Url } from "utils/Url";
 import { path } from "utils/Path";
 
 import "components/presentation/styles/Breadcrumbs";
+
+/**
+ * BreadcrumbItem
+ *
+ * @export
+ * @interface IBreadcrumbItem
+ */
+export interface IBreadcrumbItem {
+    /**
+     * Breadcrumb Title
+     *
+     * @type {string}
+     */
+    title: string;
+    /**
+     * Breadcrumb Url
+     *
+     * @type {string}
+     */
+    url?: string;
+}
 
 /**
  * Breadcrumbs props
@@ -16,18 +36,6 @@ import "components/presentation/styles/Breadcrumbs";
  */
 export interface IBreadcrumbsProps {
     /**
-     * Id of the current publication
-     *
-     * @type {string}
-     */
-    publicationId: string;
-    /**
-     * Title of the current publication
-     *
-     * @type {string}
-     */
-    publicationTitle: string;
-    /**
      * Current selected item
      *
      * @type {ITaxonomy}
@@ -36,7 +44,7 @@ export interface IBreadcrumbsProps {
     /**
      * Load items path for a specific item
      */
-    loadItemsPath: (publicationId: string, pageId: string, parentId: string) => Promise<ITaxonomy[]>;
+    loadItemsPath: (id: string) => Promise<IBreadcrumbItem[]>;
 }
 
 /**
@@ -49,9 +57,9 @@ export interface IBreadcrumbsState {
     /**
      * Current selected item path
      *
-     * @type {ITaxonomy}
+     * @type {IBreadcrumbItem}
      */
-    itemPath?: ITaxonomy[];
+    itemPath?: IBreadcrumbItem[];
 }
 
 /**
@@ -95,10 +103,9 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
      * Invoked once, both on the client and server, immediately before the initial rendering occurs.
      */
     public componentWillMount(): void {
-        const { publicationId, selectedItem, loadItemsPath } = this.props;
+        const { selectedItem, loadItemsPath } = this.props;
         if (selectedItem && selectedItem.id) {
-            const pageId = this._getPageId(selectedItem.url);
-            loadItemsPath(publicationId, pageId, selectedItem.id).then(
+            loadItemsPath(selectedItem.id).then(
                 path => {
                     /* istanbul ignore else */
                     if (!this._isUnmounted) {
@@ -118,15 +125,14 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
      * @param {IBreadcrumbsState} nextState Next state
      */
     public componentWillUpdate(nextProps: IBreadcrumbsProps, nextState: IBreadcrumbsState): void {
-        const { publicationId, selectedItem, loadItemsPath } = this.props;
+        const { selectedItem, loadItemsPath } = this.props;
         const { itemPath } = nextState;
         const currentId = selectedItem ? selectedItem.id : null;
         const nextItem = nextProps.selectedItem;
         const nextId = nextItem ? nextItem.id : null;
         if (nextItem && nextItem.url) {
             if (nextId && (currentId !== nextId)) {
-                const pageId = this._getPageId(nextItem.url);
-                loadItemsPath(nextProps.publicationId || publicationId, pageId || "", nextId).then(
+                loadItemsPath(nextId).then(
                     path => {
                         /* istanbul ignore else */
                         if (!this._isUnmounted) {
@@ -137,7 +143,7 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
                     });
             }
         } else if (currentId) {
-            const nextPath = nextItem ? [nextItem] : [];
+            const nextPath = nextItem ? [{ title: nextItem.title, url: nextItem.url } as IBreadcrumbItem] : [];
             if (!itemPath || (nextPath.join("") !== itemPath.join(""))) {
                 this.setState({
                     itemPath: nextPath
@@ -160,7 +166,6 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
      */
     public render(): JSX.Element {
         const { itemPath } = this.state;
-        const { publicationId, publicationTitle } = this.props;
         const { formatMessage } = this.context.services.localizationService;
         const { selectedItem } = this.props;
         const currentUrl = selectedItem ? selectedItem.url : null;
@@ -173,17 +178,9 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
                         <Link className="home" title={homeLabel} to={`${path.getRootPath()}home`}>{homeLabel}</Link>
                         <span className="separator" />
                     </li>
-                    <li>
-                        <Link title={publicationTitle} to={`${Url.getPublicationUrl(publicationId, publicationTitle)}`}>{publicationTitle}</Link>
-                        {
-                            Array.isArray(itemPath) && itemPath.length > 0 ?
-                                <span className="separator" />
-                                : null
-                        }
-                    </li>
                     {
                         Array.isArray(itemPath) && (
-                            itemPath.map((item: ITaxonomy, index: number) => {
+                            itemPath.map((item: IBreadcrumbItem, index: number) => {
                                 return (
                                     <li key={index}>
                                         {
@@ -204,10 +201,5 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
                 </ul>
             </div>
         );
-    }
-
-    private _getPageId(url?: string): string {
-        const parsedPageUrl = Url.parsePageUrl(url || "");
-        return (parsedPageUrl && parsedPageUrl.pageId) || "";
     }
 }
