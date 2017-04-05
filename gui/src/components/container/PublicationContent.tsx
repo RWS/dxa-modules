@@ -314,7 +314,7 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     </NavigationMenu>
                     <Breadcrumbs
                         selectedItem={selectedTocItem}
-                        loadItemsPath={(itemId: string): Promise<IBreadcrumbItem[]> => {
+                        loadItemPath={(breadcrumbItem: ITaxonomy): Promise<IBreadcrumbItem[]> => {
                             let breadCrumbPath = [{
                                 title: productFamilyTitle,
                                 url: Url.getProductFamilyUrl(productFamilyTitle || "", selectedProductReleaseVersion)
@@ -322,8 +322,9 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                                 title: publicationTitle,
                                 url: Url.getPublicationUrl(publicationId, publicationTitle)
                             }] as IBreadcrumbItem[];
-                            if (pageId) {
-                                return taxonomyService.getSitemapPath(publicationId, pageId, itemId || "").then(
+                            const parsedUrl = breadcrumbItem.url && Url.parsePageUrl(breadcrumbItem.url);
+                            if (parsedUrl && parsedUrl.pageId) {
+                                return taxonomyService.getSitemapPath(publicationId, parsedUrl.pageId, breadcrumbItem.id || "").then(
                                     path => {
                                         breadCrumbPath.push(...path.map(item => {
                                             return {
@@ -332,6 +333,9 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                                             } as IBreadcrumbItem;
                                         }));
                                         return breadCrumbPath;
+                                    },
+                                    siteMapError => {
+                                        return Promise.reject(siteMapError);
                                     }
                                 );
                             } else {
