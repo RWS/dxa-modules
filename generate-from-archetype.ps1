@@ -26,6 +26,14 @@ Execute-Command "npm" @("install", "--force")
 Pop-Location
 Write-Output "Force install npm packages finished"
 
+Write-Output "Copying theming directory"
+$archetTypeThemingDirectory = "webapp-archetype/gui/src/theming"
+if (Test-Path $archetTypeThemingDirectory) {
+    Remove-Item $archetTypeThemingDirectory -Recurse
+}
+Copy-Item -Path "gui/src/theming" -Destination $archetTypeThemingDirectory -Recurse
+Write-Output "Copying theming directory finished"
+
 Write-Output "Building archetype project"
 Execute-Command "mvn" @("-f", "webapp-archetype/pom.xml", "clean", "package")
 Write-Output "Building archetype project finished"
@@ -46,8 +54,10 @@ Execute-Command "mvn" @("archetype:generate", "-B", "-DarchetypeCatalog=local", 
     "-Dversion=$version", "-Dpackage=org.example")
 Write-Output "Creating example project from archetype finished"
 
+<#
 Write-Output "Building project generated from archetype"
 Execute-Command "mvn" @("-f", "webapp/pom.xml", "clean", "package")
 Write-Output "Building project generated from archetype finished"
+#>
 
 Push-Location $startLocation
