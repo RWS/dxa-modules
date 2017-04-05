@@ -1,6 +1,6 @@
 {
-  "name": "sdl-dita-delivery-web-app-gui",
-  "version": "1.0.0-SNAPSHOT",
+  "name": "@sdl/delivery-ish-dd-webapp-gui",
+  "version": "0.1.0-SNAPSHOT",
   "description": "GUI of the SDL Dita Delivery Web Application.",
   "main": "dist/lib/Lib.js",
   "typings": "dist/typings/src/Lib.d.ts",
