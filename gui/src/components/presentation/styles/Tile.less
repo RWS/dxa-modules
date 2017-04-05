@@ -6,26 +6,36 @@
     border-radius: 4px;
     display: flex;
     flex-flow: column nowrap;
-    > * {
-        flex: 0 0 auto;
-    }
-    h3 {
-        .header-font(300, 20px, 20px);
-        color: @neutralColor1;
-        text-align: center;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 50px;
-        margin: 5px auto;
-        &.exclamation-mark {
-            &::before {
-                .icon-exclamation-mark();
-                content: "";
-                margin-right: 10px;
+    .tile-header-wrapper {
+        margin: 0px 19px;
+        h3 {
+            .header-font(300, 20px, 24px);
+            color: @neutralColor1;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            height: 50px;
+            margin: 5px auto;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding-top: 15px;
+            &.exclamation-mark {
+                padding-left: 24px;
                 .sdl-dita-delivery-app.rtl & {
-                    margin-right: 0;
-                    margin-left: 10px;
+                    padding-right: 24px;
+                    padding-left: 0;
+                }
+                &::before {
+                    .icon-exclamation-mark();
+                    content: "";
+                    margin-right: 10px;
+                    display: inline-block;
+                    vertical-align: bottom;
+                    margin-left: -24px;
+                    .sdl-dita-delivery-app.rtl & {
+                        margin-right: -24px;
+                        margin-left: 10px
+                    }
                 }
             }
         }
