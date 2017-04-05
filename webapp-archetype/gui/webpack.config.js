@@ -34,7 +34,7 @@ module.exports = (isTest, isDebug) => {
             modules: [
                 path.resolve(__dirname),
                 path.resolve(__dirname, 'node_modules'),
-                path.resolve(__dirname, 'node_modules/sdl-dita-delivery-web-app-gui/dist/lib')
+                path.resolve(__dirname, 'node_modules/@sdl/delivery-ish-dd-webapp-gui/dist/lib')
             ],
             extensions: ['.ts', '.tsx', '.js', '.css', '.less', '.resjson']
         },
@@ -137,7 +137,7 @@ module.exports = (isTest, isDebug) => {
             }
         }
         config.plugins.push(new webpack.HotModuleReplacementPlugin());
-        config.plugins.push(new webpack.NoErrorsPlugin());
+        config.plugins.push(new webpack.NoEmitOnErrorsPlugin());
     }
 
     return config;

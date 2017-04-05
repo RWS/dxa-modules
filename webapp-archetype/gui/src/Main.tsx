@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { Components, Services } from "sdl-dita-delivery-web-app-gui";
+import { Components, Services } from "@sdl/delivery-ish-dd-webapp-gui";
 import { browserHistory } from "react-router";
 
 const { App } = Components.AppComp;

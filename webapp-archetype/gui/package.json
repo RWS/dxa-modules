@@ -5,7 +5,7 @@
   "dependencies": {
     "react": "~15.3.2",
     "react-dom": "~15.3.2",
-    "sdl-dita-delivery-web-app-gui": "1.0.0-SNAPSHOT"
+    "@sdl/delivery-ish-dd-webapp-gui": "0.1.0-SNAPSHOT"
   },
   "devDependencies": {
     "async": "~2.1.4",
@@ -17,7 +17,7 @@
     "fs-extra": "~0.30.0",
     "gulp": "~3.9.1",
     "gulp-debug": "~2.1.2",
-    "gulp-tslint": "~6.0.2",
+    "gulp-tslint": "~7.1.0",
     "html-webpack-plugin": "~2.26.0",
     "json-loader": "~0.5.4",
     "less": "~2.7.1",
@@ -28,13 +28,13 @@
     "sdl-icons": "1.1.0-9",
     "through2": "~2.0.1",
     "ts-loader": "~1.0.0",
-    "tslint": "~3.14.0",
-    "typescript": "~2.0.3",
+    "tslint": "~4.5.1",
+    "typescript": "~2.2.1",
     "typings-core": "~1.4.0",
     "url-loader": "~0.5.7",
-    "webpack": "~2.2.0",
-    "webpack-dev-middleware": "~1.9.0",
-    "webpack-hot-middleware": "~2.15.0",
+    "webpack": "~2.2.1",
+    "webpack-dev-middleware": "~1.10.1",
+    "webpack-hot-middleware": "~2.17.1",
     "webpack-visualizer-plugin": "~0.1.10",
     "yargs": "~4.8.1"
   },

@@ -4,7 +4,7 @@
     "paths": {
       "*": [
         "*",
-        "node_modules/sdl-dita-delivery-web-app-gui/dist/typings/src/*"
+        "node_modules/@sdl/delivery-ish-dd-webapp-gui/dist/typings/src/*"
       ]
     },
     "module": "es2015",
