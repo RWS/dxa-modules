@@ -47,7 +47,7 @@ class LanguageReducer extends TestBase {
 
             it("Check product release versions translation", (): void => {
                 let versions = [];
-                versions.push({value: DEFAULT_UNKNOWN_PRODUCT_RELEASE_VERSION, title: DEFAULT_UNKNOWN_PRODUCT_RELEASE_VERSION});
+                versions.push({value: String.normalize(DEFAULT_UNKNOWN_PRODUCT_RELEASE_VERSION), title: DEFAULT_UNKNOWN_PRODUCT_RELEASE_VERSION});
                 versions.push({value: "value", title: "title"});
                 expect(translateProductReleaseVersions(versions)).toEqual([{
                     value: String.normalize(DEFAULT_UNKNOWN_PRODUCT_RELEASE_VERSION),

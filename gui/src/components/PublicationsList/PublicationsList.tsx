@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { IState } from "store/interfaces/State";
 import { isPubsLoading, getReleaseVersionsForPub, normalizeProductFamily,
-    normalizeProductReleaseVersion, translateProductReleaseVersion, translateProductReleaseVersions,
+    normalizeProductReleaseVersion, translateProductReleaseVersions,
     getPubListRepresentatives } from "store/reducers/Reducer";
 import { fetchProductReleaseVersionsByProductFamily } from "store/actions/Api";
 import { PublicationsListPresentation, IPublicationsListProps } from "./PublicationsListPresentation";
@@ -23,7 +23,7 @@ const mapStateToProps = (state: IState, ownProps: IPublicationsListProps) => {
         productReleaseVersions: translateProductReleaseVersions(productReleaseVersions),
         // dont' show spinner if there are publications cached
         isLoading: publications.length === 0 && isPubsLoading(state),
-        selectedProductVersion: translateProductReleaseVersion(selectedProductVersion),
+        selectedProductVersion: selectedProductVersion,
         uiLanguage: state.language
     };
 };
