@@ -1,6 +1,6 @@
 {
   "name": "sdl-dita-delivery-custom-web-app-gui",
-  "version": "1.0.0-SNAPSHOT",
+  "version": "0.1.0-SNAPSHOT",
   "description": "Custom GUI of the SDL Dita Delivery Web Application.",
   "dependencies": {
     "react": "~15.3.2",

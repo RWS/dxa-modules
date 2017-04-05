@@ -22,7 +22,7 @@ module.exports = function (buildOptions, gulp, browserSync) {
             '/app/lib/react': isDebug ? './node_modules/react/dist/' : `${buildOptions.distPath}/lib/react`,
             '/app/lib/react-dom': isDebug ? './node_modules/react-dom/dist/' : `${buildOptions.distPath}/lib/react-dom`,
             // Application
-            '/app/gui/mocks': './node_modules/sdl-dita-delivery-web-app-gui/mocks',
+            '/app/gui/mocks': './node_modules/@sdl/delivery-ish-dd-webapp-gui/mocks',
             '/app': buildOptions.distPath
         };
 
