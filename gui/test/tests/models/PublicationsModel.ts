@@ -12,7 +12,9 @@ const MOCK_DATA: IPublication[] = [
         ProductFamily: "Family 1",
         CreatedOn: "",
         Version: "1",
-        LogicalId: "GUID-123"
+        LogicalId: "GUID-123",
+        VersionRef: "123",
+        Language: "en"
     },
     {
         Id: "Pub2",
@@ -21,7 +23,9 @@ const MOCK_DATA: IPublication[] = [
         CreatedOn: "",
         ProductReleaseVersion: "V1",
         Version: "1",
-        LogicalId: "GUID-123"
+        LogicalId: "GUID-123",
+        VersionRef: "123",
+        Language: "en"
     }, {
         Id: "Pub3",
         Title: "Pub3",
@@ -29,14 +33,18 @@ const MOCK_DATA: IPublication[] = [
         ProductReleaseVersion: null,
         CreatedOn: "",
         Version: "1",
-        LogicalId: "GUID-123"
+        LogicalId: "GUID-123",
+        VersionRef: "123",
+        Language: "en"
     },
     {
         Id: "Pub",
         Title: "Pub",
         CreatedOn: "",
         Version: "1",
-        LogicalId: "GUID-123"
+        LogicalId: "GUID-123",
+        VersionRef: "123",
+        Language: "en"
     },
     {
         Id: "Pub4",
@@ -44,7 +52,9 @@ const MOCK_DATA: IPublication[] = [
         ProductFamily: null,
         CreatedOn: "",
         Version: "1",
-        LogicalId: "GUID-123"
+        LogicalId: "GUID-123",
+        VersionRef: "123",
+        Language: "en"
     }
 ];
 

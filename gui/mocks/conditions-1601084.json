@@ -1,13 +1,21 @@
 {
-  "Continents": [
-    "Antarctica",
-    "Africa",
-    "Oceania",
-    "South America"
-  ],
-  "Crafts": [
-    "DRAWING",
-    "ORIGAMI",
-    "SONG"
-  ]
+  "Continents": {
+    "values": [
+      "Antarctica",
+      "Africa",
+      "Oceania",
+      "South America"
+    ],
+    "datatype": "Text",
+    "range": false
+  },
+  "Crafts": {
+    "values": [
+      "DRAWING",
+      "ORIGAMI",
+      "SONG"
+    ],
+    "datatype": "Text",
+    "range": false
+  }
 }
