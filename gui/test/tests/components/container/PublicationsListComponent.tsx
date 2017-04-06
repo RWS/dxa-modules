@@ -86,20 +86,34 @@ class PublicationsListComponent extends TestBase {
                     version: "1",
                     logicalId: "GUID-123",
                     productFamily: "prod-family"
+                }, {
+                    id: "4",
+                    title: "Publication 4",
+                    createdOn: new Date(),
+                    version: "1",
+                    logicalId: "GUID-123",
+                    productFamily: "prod-family-2"
                 }];
                 services.publicationService.setMockDataPublications(null, publications);
 
-                const publicationsList = this._renderComponent(target);
+                let publicationsList = this._renderComponent(target);
 
                 setTimeout((): void => {
-                    const h3 = TestUtils.scryRenderedDOMComponentsWithTag(publicationsList, "h3");
+                    let h3 = TestUtils.scryRenderedDOMComponentsWithTag(publicationsList, "h3");
                     expect(h3.length).toBe(3);
 
                     expect(h3[0].textContent).toBe(publications[0].title);
                     expect(h3[1].textContent).toBe(publications[1].title);
                     expect(h3[2].textContent).toBe(publications[2].title);
 
-                    done();
+                    publicationsList = this._renderComponent(target, "prod-family-2");
+                    setTimeout((): void => {
+                        h3 = TestUtils.scryRenderedDOMComponentsWithTag(publicationsList, "h3");
+                        expect(h3.length).toBe(1);
+                        expect(h3[0].textContent).toBe(publications[3].title);
+
+                        done();
+                    }, 500);
                 }, 500);
             });
 
