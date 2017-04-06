@@ -1,6 +1,5 @@
 package com.sdl.dxa.modules;
 
-import ams.com.sdl.dxa.modules.model.article.Article;
 import com.sdl.dxa.modules.model.TSI1757.Tsi1757TestEntity1;
 import com.sdl.dxa.modules.model.TSI1757.Tsi1757TestEntity2;
 import com.sdl.dxa.modules.model.TSI1757.Tsi1757TestEntity3;
@@ -10,6 +9,7 @@ import com.sdl.dxa.modules.model.TSI1758.Tsi1758TestEntity;
 import com.sdl.dxa.modules.model.TSI1856.Tsi1856TestEntity;
 import com.sdl.dxa.modules.model.TSI1946.Tsi1946TestEntity;
 import com.sdl.dxa.modules.model.TSI2315.CompLinkTest;
+import com.sdl.dxa.modules.model.TSI2315.TestEntity;
 import com.sdl.dxa.modules.model.TSI2316.Tsi2316TestEntity;
 import com.sdl.dxa.modules.model.TSI2316.Tsi2316TestKeyword;
 import com.sdl.dxa.modules.model.TSI811.Tsi811PageModel;
@@ -26,9 +26,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RegisteredViewModels({
-        // https://jira.sdl.com/browse/TSI-1619
-        @RegisteredViewModel(viewName = "Article", modelClass = Article.class),
-
         // https://jira.sdl.com/browse/TSI-1675
         @RegisteredViewModel(viewName = "EmbedParent", modelClass = EmbedParent.class),
         @RegisteredViewModel(modelClass = EmbedChild.class),
@@ -41,9 +38,6 @@ import org.springframework.stereotype.Component;
         @RegisteredViewModel(viewName = "TSI1758TestEmbedded2", modelClass = Tsi1758TestEmbedded2Entity.class),
         @RegisteredViewModel(viewName = "SimpleTestPage", modelClass = DefaultPageModel.class),
 
-        // https://jira.sdl.com/browse/TSI-1947
-        @RegisteredViewModel(viewName = "TSI1947Test", modelClass = Article.class),
-
         // https://jira.sdl.com/browse/TSI-811
         @RegisteredViewModel(viewName = "TSI811TestPage", modelClass = Tsi811PageModel.class),
         @RegisteredViewModel(viewName = "TSI811Test", modelClass = Tsi811TestEntity.class),
@@ -51,6 +45,9 @@ import org.springframework.stereotype.Component;
 
         // https://jira.sdl.com/browse/TSI-1946
         @RegisteredViewModel(viewName = "TSI1946Test", modelClass = Tsi1946TestEntity.class),
+
+        // https://jira.sdl.com/browse/TSI-1947
+        @RegisteredViewModel(viewName = "TSI1947Test", modelClass = TestEntity.class),
 
         // https://jira.sdl.com/browse/TSI-1757
         @RegisteredViewModel(viewName = "TSI1757Test3", modelClass = Tsi1757TestEntity3.class),
@@ -66,6 +63,7 @@ import org.springframework.stereotype.Component;
 
         // https://jira.sdl.com/browse/TSI-2315
         @RegisteredViewModel(viewName = "CompLinkTest", modelClass = CompLinkTest.class),
+        @RegisteredViewModel(modelClass = TestEntity.class)
 })
 public class TestModuleInitializer extends AbstractInitializer {
 

@@ -27,7 +27,7 @@ If you encounter any issues with the Digital Experience Accelerator, please reac
 
 Documentation
 -------------
-Documentation for most of the SDL DXA Modules can be found online in the SDL documentation portal: http://docs.sdl.com/sdldxamodules
+Documentation for most of the SDL DXA Modules can be found online in the SDL documentation portal: https://docs.sdl.com/SDLDXAModules2-CTP 
 
 
 Repositories

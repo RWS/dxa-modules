@@ -9,7 +9,7 @@
 
     <h4>CompLinkAsEntityModel (${entity.compLinkAsEntityModel.size()} values)</h4>
     <c:forEach items="${entity.compLinkAsEntityModel}" var="entityModel">
-        <div>Type: "${entityModel['class'].name}"</div>
+        <div>Type: "${entityModel['class'].simpleName}"</div>
         <div>Id: "${entityModel.id}"</div>
         <hr/>
     </c:forEach>

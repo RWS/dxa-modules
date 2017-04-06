@@ -23,6 +23,6 @@
     <div>PublishedKeyword.TextField: <pre>${entity.publishedKeyword.textField}</pre></div>
     <div>PublishedKeyword.NumberField: <pre>${entity.publishedKeyword.numberField}</pre></div>
     <div>PublishedKeyword.DateField: <pre>${entity.publishedKeyword.dateField}</pre></div>
-    <div>PublishedKeyword.CompLinkField: <pre>${entity.publishedKeyword.compLinkField}</pre></div>
+    <div>PublishedKeyword.CompLinkField: <pre>Link: ${entity.publishedKeyword.compLinkField.id}</pre></div>
     <div>PublishedKeyword.KeywordField: <pre>KeywordModel: ${entity.publishedKeyword.keywordField.id}</pre></div>
 </div>
