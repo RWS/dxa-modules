@@ -67,7 +67,7 @@ const mapStateToProps = (state: IState, ownProps: IPageLinkPresentationProps): I
     const publication = getPubById(state, ownProps.publicationId);
     const page = getPageById(state, ownProps.pageId || "fake");
     const publicationTitle = publication.title;
-    const pageTitle = isDummyPage(page) ? page.title : "";
+    const pageTitle = isDummyPage(page) ? "" : page.title;
 
     return {
         url: !ownProps.pageId ? Url.getPublicationUrl(publication.id, publicationTitle) : Url.getPageUrl(publication.id, page.id, publicationTitle, pageTitle),
