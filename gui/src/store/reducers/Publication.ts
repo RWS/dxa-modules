@@ -1,4 +1,4 @@
-import { getPubByIdAndLang } from "./Reducer";
+import { getPubForLang, getPubById } from "./Reducer";
 import { handleAction, combine } from "./CombineReducers";
 import { IPublicationCurrentState } from "store/interfaces/State";
 import { UPDATE_CURRENT_PUBLICATION, CHANGE_LANGUAGE } from "store/actions/Actions";
@@ -18,7 +18,9 @@ const patchCurrentPulication = handleAction(
 const updateByLanguage = handleAction(
     CHANGE_LANGUAGE,
     (state: IPublicationCurrentState, langauge: string, getState) => {
-        const newPub = getPubByIdAndLang(getState(), state.publicationId, langauge);
+        const globalState = getState();
+        const publication = getPubById(globalState, state.publicationId);
+        const newPub = getPubForLang(getState(), publication, langauge);
         return initailPubState(newPub ? newPub.id : state.publicationId);
     },
     initailPubState()

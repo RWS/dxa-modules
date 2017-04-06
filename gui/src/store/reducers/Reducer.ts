@@ -26,8 +26,7 @@ export const getPubListRepresentatives = (state: IState, filter: {}): IPublicati
 export const normalizeProductFamily = (params: IPublicationsListPropsParams): string | null => Publications.normalizeProductFamily(params);
 export const normalizeProductReleaseVersion = (params: IPublicationsListPropsParams | string): string | null | undefined => Publications.normalizeProductReleaseVersion(params);
 
-//NOTE: don't like null here, should replace with dummy publication;
-export const getPubByIdAndLang = (state: IState, pubId: string, language: string): IPublication | null => Publications.getPubByIdAndLang(state.publications, pubId, language);
+export const getPubForLang = (state: IState, publication: IPublication, language: string): IPublication => Publications.getPubForLang(state.publications, publication, language);
 export const isPubsLoading = (state: IState): boolean => Publications.isLoadnig(state.publications);
 
 export const getPubListErrorMessage = (state: IState) => Publications.getLastError(state.publications);
