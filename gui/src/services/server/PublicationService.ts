@@ -86,6 +86,23 @@ export class PublicationService implements IPublicationService {
     }
 
     /**
+     * Get the product family for a publication
+     *
+     * @param {string} publicationId Publication id
+     * @returns {Promise<IProductFamily>} Promise to return the product family
+     *
+     * @memberOf PublicationService
+     */
+    public getProductFamilyByPublicationId(publicationId: string): Promise<IProductFamily> {
+        const { error, productFamilies } = this._mockDataPublications;
+        if (error) {
+            return Promise.reject(error);
+        } else {
+            return Promise.resolve(productFamilies[0]);
+        }
+    }
+
+    /**
      * Get the list of product release versions for a publication
      * Are sorted by release time (latest to oldest)
      *

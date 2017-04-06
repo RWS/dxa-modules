@@ -122,6 +122,25 @@ export class PublicationService implements IPublicationService {
         }
     }
 
+    public getProductFamilyByPublicationId(publicationId: string): Promise<IProductFamily> {
+        const { error, productFamilies } = this._mockDataPublications;
+        if (fakeDelay) {
+            return new Promise((resolve: (productFamily?: IProductFamily) => void, reject: (error: string | null) => void) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(productFamilies[0]);
+                }
+            });
+        } else {
+            if (error) {
+                return Promise.reject(error);
+            } else {
+                return Promise.resolve(productFamilies[0]);
+            }
+        }
+    }
+
     public getProductReleaseVersionsByPublicationId(publicationId: string): Promise<IProductReleaseVersion[]> {
         return this.getProductReleaseVersions("");
     }

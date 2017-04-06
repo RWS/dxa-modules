@@ -613,7 +613,6 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     const normalizedVersion = pub.productReleaseVersion ? Version.normalize(pub.productReleaseVersion).toLowerCase().trim() : undefined;
                     this.setState({
                         publicationTitle: pub.title,
-                        productFamilyTitle: pub.productFamily || "",
                         selectedProductReleaseVersion: normalizedVersion
                     });
                 }
@@ -624,6 +623,26 @@ export class PublicationContent extends React.Component<IPublicationContentProps
                     // TODO: improve error handling
                     this.setState({
                         publicationTitle: error
+                    });
+                }
+            });
+
+        // Get product family
+        publicationService.getProductFamilyByPublicationId(publicationId).then(
+            productFamily => {
+                /* istanbul ignore else */
+                if (!this._isUnmounted) {
+                    this.setState({
+                        productFamilyTitle: productFamily.title
+                    });
+                }
+            },
+            error => {
+                /* istanbul ignore else */
+                if (!this._isUnmounted) {
+                    // TODO: improve error handling
+                    this.setState({
+                        productFamilyTitle: error
                     });
                 }
             });

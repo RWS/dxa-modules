@@ -2,10 +2,16 @@ import { PublicationService } from "services/client/PublicationService";
 import { TestBase } from "sdl-models";
 import { FakeXMLHttpRequest } from "test/mocks/XmlHttpRequest";
 
+class PublicationServiceInvalidatable extends PublicationService {
+    public ivalidate(): void {
+        PublicationService.PublicationsModel = undefined;
+    }
+}
+
 class PublicationServiceTests extends TestBase {
 
     public runTests(): void {
-        const publicationService = new PublicationService();
+        const publicationService = new PublicationServiceInvalidatable();
         const publicationId = "1961702";
 
         describe(`Publication service tests.`, (): void => {
@@ -50,6 +56,7 @@ class PublicationServiceTests extends TestBase {
             });
 
             it("can get product families", (done: () => void): void => {
+                publicationService.ivalidate();
                 publicationService.getProductFamilies().then(families => {
                     expect(families).toBeDefined();
                     if (families) {
@@ -79,8 +86,66 @@ class PublicationServiceTests extends TestBase {
                 });
             });
 
+            it("returns a proper error when product family for publication cannot be retrieved", (done: () => void): void => {
+                publicationService.ivalidate();
+                const failMessage = "failure-retrieving-product-family-for-publication";
+                spyOn(window, "XMLHttpRequest").and.callFake(() => new FakeXMLHttpRequest(failMessage));
+                publicationService.getProductFamilyByPublicationId(publicationId).then(() => {
+                    fail("An error was expected.");
+                    done();
+                }).catch(error => {
+                    expect(error).toContain(failMessage);
+                    done();
+                });
+            });
+
+            it("can get product family for publication id", (done: () => void): void => {
+                publicationService.getProductFamilyByPublicationId(publicationId).then(family => {
+                    expect(family).toBeDefined();
+                    if (family) {
+                        expect(family.title).toBe("Mobile Phones");
+                    }
+                    done();
+                }).catch(error => {
+                    fail(`Unexpected error: ${error}`);
+                    done();
+                });
+            });
+
+            it("can get product family for publication id from memory", (done: () => void): void => {
+                const spy = spyOn(window, "XMLHttpRequest").and.callThrough();
+                expect(spy).not.toHaveBeenCalled();
+                publicationService.getProductFamilyByPublicationId(publicationId).then(family => {
+                    expect(family).toBeDefined();
+                    if (family) {
+                        expect(family.title).toBe("Mobile Phones");
+                        expect(spy).not.toHaveBeenCalled();
+                    }
+                    done();
+                }).catch(error => {
+                    fail(`Unexpected error: ${error}`);
+                    done();
+                });
+            });
+
+            it("returns a proper error when release versions can not be retrieved", (done: () => void): void => {
+                publicationService.getProductFamilies().then(families => {
+                    publicationService.ivalidate();
+                    const failMessage = "failure-retrieving-release-versions";
+                    spyOn(window, "XMLHttpRequest").and.callFake(() => new FakeXMLHttpRequest(failMessage));
+                    publicationService.getProductReleaseVersions(families[0].title).then(releaseVersions => {
+                        fail("An error was expected.");
+                        done();
+                    }).catch(error => {
+                        expect(error).toContain(failMessage);
+                        done();
+                    });
+                });
+            });
+
             it("can get product release versions", (done: () => void): void => {
                 publicationService.getProductFamilies().then(families => {
+                    publicationService.ivalidate();
                     publicationService.getProductReleaseVersions(families[0].title).then(releaseVersions => {
                         expect(releaseVersions).toBeDefined();
                         if (releaseVersions) {
@@ -113,7 +178,21 @@ class PublicationServiceTests extends TestBase {
                 });
             });
 
+            it("returns a proper error when product release versions for publication cannot be retrieved", (done: () => void): void => {
+                publicationService.ivalidate();
+                const failMessage = "failure-retrieving-product-release-versions-for-publication";
+                spyOn(window, "XMLHttpRequest").and.callFake(() => new FakeXMLHttpRequest(failMessage));
+                publicationService.getProductReleaseVersionsByPublicationId(publicationId).then(() => {
+                    fail("An error was expected.");
+                    done();
+                }).catch(error => {
+                    expect(error).toContain(failMessage);
+                    done();
+                });
+            });
+
             it("can get product release versions for a publication id", (done: () => void): void => {
+                publicationService.ivalidate();
                 publicationService.getProductReleaseVersionsByPublicationId(publicationId).then(releaseVersions => {
                     expect(releaseVersions).toBeDefined();
                     if (releaseVersions) {
@@ -146,6 +225,7 @@ class PublicationServiceTests extends TestBase {
             });
 
             it("can get the publications", (done: () => void): void => {
+                publicationService.ivalidate();
                 publicationService.getPublications().then(publications => {
                     expect(publications).toBeDefined();
                     if (publications) {
@@ -176,6 +256,7 @@ class PublicationServiceTests extends TestBase {
             });
 
             it("can get a publication by id", (done: () => void): void => {
+                publicationService.ivalidate();
                 publicationService.getPublicationById(publicationId).then(pub => {
                     expect(pub.title).toBe("User Guide");
                     done();
@@ -208,7 +289,6 @@ class PublicationServiceTests extends TestBase {
             });
 
         });
-
     }
 }
 
