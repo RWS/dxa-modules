@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "*": [
+        "*",
+        "node_modules/@sdl/delivery-ish-dd-webapp-gui/dist/typings/src/*"
+      ]
+    },
+    "module": "es2015",
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "removeComments": false,
+    "preserveConstEnums": false,
+    "sourceMap": true,
+    "noEmitOnError": true,
+    "emitBOM": false,
+    "suppressImplicitAnyIndexErrors": false,
+    "target": "es5",
+    "declaration": false,
+    "experimentalDecorators": true,
+    "jsx": "react",
+    "strictNullChecks": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": false,
+    "noEmitHelpers": false
+  },
+  "compileOnSave": false, // Gulp does this for us
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}
