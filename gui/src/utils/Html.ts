@@ -173,6 +173,7 @@ export class Html {
     public static scrollIntoView(scrollContainer: HTMLElement, element: HTMLElement, options?: { force?: boolean }): void {
         // In IE scrollTop is always 0
         const scrollTop = scrollContainer.scrollTop || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        const offsetTop = element.offsetTop;
 
         // merge with default options
         const mergedOptions = Object.assign({
@@ -180,9 +181,26 @@ export class Html {
         }, options);
 
         // Scroll when the element is out of view
-        if (mergedOptions.force || element.offsetTop > (scrollContainer.clientHeight + scrollTop) // Below
-            || element.offsetTop < scrollTop) { // Above
-            scrollContainer.scrollTop = element.offsetTop;
+        if (mergedOptions.force || offsetTop > (scrollContainer.clientHeight + scrollTop) // Below
+            || offsetTop < scrollTop) { // Above
+            let failedToScroll: boolean;
+
+            scrollContainer.scrollTop = offsetTop;
+            failedToScroll = scrollContainer.scrollTop !== offsetTop;
+
+            if (failedToScroll) {
+                document.documentElement.scrollTop = offsetTop;
+            }
+            failedToScroll = failedToScroll && document.documentElement.scrollTop !== offsetTop;
+
+            if (failedToScroll) {
+                document.body.scrollTop = offsetTop;
+            }
+            failedToScroll = failedToScroll && document.body.scrollTop !== offsetTop;
+
+            if (failedToScroll) {
+                window.scroll(0, offsetTop);
+            }
         }
     }
 
