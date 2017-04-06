@@ -44,7 +44,7 @@ export interface IBreadcrumbsProps {
     /**
      * Load items path for a specific item
      */
-    loadItemsPath: (id: string) => Promise<IBreadcrumbItem[]>;
+    loadItemPath: (item: ITaxonomy) => Promise<IBreadcrumbItem[]>;
 }
 
 /**
@@ -60,6 +60,12 @@ export interface IBreadcrumbsState {
      * @type {IBreadcrumbItem}
      */
     itemPath?: IBreadcrumbItem[];
+    /**
+     * An error prevented the list from loading
+     *
+     * @type {string}
+     */
+    error?: string;
 }
 
 /**
@@ -95,7 +101,8 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
     constructor() {
         super();
         this.state = {
-            itemPath: []
+            itemPath: undefined,
+            error: undefined
         };
     }
 
@@ -103,14 +110,24 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
      * Invoked once, both on the client and server, immediately before the initial rendering occurs.
      */
     public componentWillMount(): void {
-        const { selectedItem, loadItemsPath } = this.props;
+        const { selectedItem, loadItemPath } = this.props;
         if (selectedItem && selectedItem.id) {
-            loadItemsPath(selectedItem.id).then(
+            loadItemPath(selectedItem).then(
                 path => {
                     /* istanbul ignore else */
                     if (!this._isUnmounted) {
                         this.setState({
-                            itemPath: path
+                            itemPath: path,
+                            error: undefined
+                        });
+                    }
+                },
+                error => {
+                    /* istanbul ignore else */
+                    if (!this._isUnmounted) {
+                        // TODO: improve error handling
+                        this.setState({
+                            error: error
                         });
                     }
                 });
@@ -125,19 +142,29 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
      * @param {IBreadcrumbsState} nextState Next state
      */
     public componentWillUpdate(nextProps: IBreadcrumbsProps, nextState: IBreadcrumbsState): void {
-        const { selectedItem, loadItemsPath } = this.props;
+        const { selectedItem, loadItemPath } = this.props;
         const { itemPath } = nextState;
         const currentId = selectedItem ? selectedItem.id : null;
         const nextItem = nextProps.selectedItem;
         const nextId = nextItem ? nextItem.id : null;
         if (nextItem && nextItem.url) {
             if (nextId && (currentId !== nextId)) {
-                loadItemsPath(nextId).then(
+                loadItemPath(nextItem).then(
                     path => {
                         /* istanbul ignore else */
                         if (!this._isUnmounted) {
                             this.setState({
-                                itemPath: path
+                                itemPath: path,
+                                error: undefined
+                            });
+                        }
+                    },
+                    error => {
+                        /* istanbul ignore else */
+                        if (!this._isUnmounted) {
+                            // TODO: improve error handling
+                            this.setState({
+                                error: error
                             });
                         }
                     });
@@ -165,7 +192,7 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
      * @returns {JSX.Element}
      */
     public render(): JSX.Element {
-        const { itemPath } = this.state;
+        const { itemPath, error } = this.state;
         const { formatMessage } = this.context.services.localizationService;
         const { selectedItem } = this.props;
         const currentUrl = selectedItem ? selectedItem.url : null;
@@ -179,7 +206,7 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
                         <span className="separator" />
                     </li>
                     {
-                        Array.isArray(itemPath) && (
+                        !error && Array.isArray(itemPath) && (
                             itemPath.map((item: IBreadcrumbItem, index: number) => {
                                 return (
                                     <li key={index}>

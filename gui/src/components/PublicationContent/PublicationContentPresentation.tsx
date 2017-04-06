@@ -261,7 +261,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                         </Toc>
                     </NavigationMenu>
                     <Breadcrumbs
-                        loadItemsPath={(itemId: string): Promise<IBreadcrumbItem[]> => {
+                        loadItemPath={(breadcrumbItem: ITaxonomy): Promise<IBreadcrumbItem[]> => {
                             const publicationTitle = publication.title;
                             const productFamilyTitle = publication.productFamily;
                             let breadCrumbPath = [{
@@ -271,8 +271,9 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                                 title: publicationTitle,
                                 url: Url.getPublicationUrl(publicationId, publicationTitle)
                             }] as IBreadcrumbItem[];
-                            if (pageId) {
-                                return taxonomyService.getSitemapPath(publicationId, pageId, itemId || "").then(
+                            const parsedUrl = breadcrumbItem.url && Url.parsePageUrl(breadcrumbItem.url);
+                            if (parsedUrl && parsedUrl.pageId) {
+                                return taxonomyService.getSitemapPath(publicationId, parsedUrl.pageId, breadcrumbItem.id || "").then(
                                     path => {
                                         breadCrumbPath.push(...path.map(item => {
                                             return {
@@ -281,6 +282,9 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                                             } as IBreadcrumbItem;
                                         }));
                                         return breadCrumbPath;
+                                    },
+                                    siteMapError => {
+                                        return Promise.reject(siteMapError);
                                     }
                                 );
                             } else {

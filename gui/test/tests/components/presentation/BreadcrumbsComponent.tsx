@@ -48,14 +48,14 @@ class BreadcrumbsComponent extends TestBase {
             const target = super.createTargetElement();
             let breadCrumbs: Breadcrumbs;
 
-            const loadItemsPath = (itemId: string): Promise<ITaxonomy[]> => {
+            const loadItemPath = (breadCrumbItem: ITaxonomy): Promise<ITaxonomy[]> => {
                 const itemsToReturn: IBreadcrumbItem[] = [];
                 for (let item of itemsPath) {
                     itemsToReturn.push({
                         title: item.title,
                         url: item.url
                     });
-                    if (item.id === itemId) {
+                    if (item.id === breadCrumbItem.id) {
                         break;
                     }
                 }
@@ -65,7 +65,7 @@ class BreadcrumbsComponent extends TestBase {
             beforeEach(() => {
                 hashHistory.push(itemsPath[2].url || "");
                 const props: IBreadcrumbsProps = {
-                    loadItemsPath: loadItemsPath
+                    loadItemPath: loadItemPath
                 };
                 breadCrumbs = this._renderComponent(props, target);
             });
