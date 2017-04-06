@@ -1,6 +1,6 @@
+import { connect } from "react-redux";
 import { IState } from "store/interfaces/State";
 import { ContentLanguageWarningPresentation } from "./ContentLanguageWarningPresentation";
-import { connect } from "react-redux";
 import { getCurrentPub, getPubById, getPubForLang } from "store/reducers/Reducer";
 
 const mapStateToProps = (state: IState) => {
@@ -9,7 +9,6 @@ const mapStateToProps = (state: IState) => {
     const publication = getPubById(state, publicationId);
     const contentLanguage = publication.language || state.language;
     const match = state.language === contentLanguage;
-    // const languagePublication1 = getPubByIdAndLang(state, publicationId, state.language);
     const languagePublication = getPubForLang(state, publication, state.language);
 
     return {
