@@ -150,7 +150,7 @@ class PublicationContentComponent extends TestBase {
                     // Check if routing was called with correct params
                     const store = this.store as Store<IState>;
                     const state = store.getState();
-                    const {publicationId, pageId, anchor } = state.publication;
+                    const { publicationId, pageId, anchor } = state.publication;
                     expect(publicationId).toBe(PUBLICATION_ID);
                     expect(pageId).toBe("12345");
                     expect(anchor).toBe("");
@@ -315,9 +315,16 @@ class PublicationContentComponent extends TestBase {
                     const listItems = dropdownListNode.querySelectorAll("li");
                     expect(listItems.length).toBe(2);
 
+                    /**
+                     * For some reason this listener is not properly cleaned up by redux, manually keeping track of it
+                     */
+                    let isUnsubscribed = false;
                     const unsubscribe = this.store.subscribe(() => {
-                        expect(getCurrentPub(this.store.getState()).publicationId).toBe("2");
+                        if (!isUnsubscribed) {
+                            expect(getCurrentPub(this.store.getState()).publicationId).toBe("2");
+                        }
                         unsubscribe();
+                        isUnsubscribed = true;
                         done();
                     });
                     // Click on the second release version
