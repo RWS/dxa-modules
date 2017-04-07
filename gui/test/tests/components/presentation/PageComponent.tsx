@@ -2,17 +2,17 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as TestUtils from "react-addons-test-utils";
 import { Router, Route, hashHistory } from "react-router";
-import { Page, IPageProps } from "components/presentation/Page";
+import { PagePresentation, IPageProps } from "components/Page/PagePresentation";
 import { Url } from "utils/Url";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 import { ActivityIndicator } from "sdl-controls-react-wrappers";
 import { TestBase } from "sdl-models";
-
-interface IProps {
-    params: {
-        pageAnchor?: string;
-    };
-}
+import { configureStore } from "store/Store";
+import { Provider } from "react-redux";
+import { RouteToState } from "components/helpers/RouteToState";
+import { Page } from "components/Page/Page";
+import { PageService } from "test/mocks/services/PageService";
+import { Html } from "utils/Html";
 
 class PageComponent extends TestBase {
 
@@ -35,7 +35,7 @@ class PageComponent extends TestBase {
             it("shows / hides activity indicator", (): void => {
                 // Show
                 let page = this._renderComponent({
-                    showActivityIndicator: true,
+                    isLoading: true,
                     onNavigate: (): void => { }
                 }, target);
                 // tslint:disable-next-line:no-any
@@ -44,7 +44,7 @@ class PageComponent extends TestBase {
 
                 // Hide
                 page = this._renderComponent({
-                    showActivityIndicator: false,
+                    isLoading: false,
                     onNavigate: (): void => { }
                 }, target);
                 // tslint:disable-next-line:no-any
@@ -54,7 +54,7 @@ class PageComponent extends TestBase {
 
             it("can show error info", (): void => {
                 const page = this._renderComponent({
-                    showActivityIndicator: false,
+                    isLoading: false,
                     error: "Error!",
                     onNavigate: (): void => { }
                 }, target);
@@ -71,9 +71,9 @@ class PageComponent extends TestBase {
             it("click on home button in error info", (): void => {
                 let path: string = "";
                 const page = this._renderComponent({
-                    showActivityIndicator: false,
+                    isLoading: false,
                     error: "Error!",
-                    onNavigate: (url): void => {
+                    onNavigate: (url: string): void => {
                         path = url;
                     }
                 }, target);
@@ -90,14 +90,15 @@ class PageComponent extends TestBase {
             });
 
             it("click on retry button in error info", (): void => {
-                let path: string = "";
+                const fetch = jasmine.createSpy("fetchSpy");
                 const page = this._renderComponent({
-                    showActivityIndicator: false,
+                    id: "0002",
+                    publicationId: "0001",
+                    isLoading: false,
                     error: "Error!",
                     url: "url/to/page",
-                    onNavigate: (url): void => {
-                        path = url;
-                    }
+                    onNavigate: (url: string): void => {},
+                    fetchPage: fetch
                 }, target);
 
                 const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
@@ -106,15 +107,14 @@ class PageComponent extends TestBase {
                 expect(buttons.length).toEqual(2);
 
                 buttons.item(1).click();
-                setTimeout(() => {
-                    expect(path).toBe("url/to/page");
-                }, 0);
+                expect(fetch).toHaveBeenCalledWith(jasmine.any(PageService), "0001", "0002");
+
             });
 
             it("can show page content info", (): void => {
                 const pageContent = "<div>Page content!</div>";
                 const page = this._renderComponent({
-                    showActivityIndicator: false,
+                    isLoading: false,
                     content: pageContent,
                     onNavigate: (): void => { }
                 }, target);
@@ -131,7 +131,7 @@ class PageComponent extends TestBase {
                 const navUrl = "/1234/56/publication-title/page-title";
                 const pageContent = `<div><a href="${navUrl}"/></div>`;
                 const page = this._renderComponent({
-                    showActivityIndicator: false,
+                    isLoading: false,
                     content: pageContent,
                     onNavigate: (url: string): void => {
                         expect(url).toBe(navUrl);
@@ -147,7 +147,7 @@ class PageComponent extends TestBase {
 
             it("does not handle external links", (): void => {
                 const pageProps: IPageProps = {
-                    showActivityIndicator: false,
+                    isLoading: false,
                     content: `<div>
                                 <a href="http://doc.sdl.com"/>
                                 <a href="doc.sdl.com"/>
@@ -181,7 +181,7 @@ class PageComponent extends TestBase {
 
             it("does handle internal links", (): void => {
                 const pageProps: IPageProps = {
-                    showActivityIndicator: false,
+                    isLoading: false,
                     content: `<div>
                                 <a href="/1656863/164363"/>
                                 <a href="/1656863/164363/"/>
@@ -210,7 +210,7 @@ class PageComponent extends TestBase {
 
             it("does not handle links that are not part of the page content", (): void => {
                 const pageProps: IPageProps = {
-                    showActivityIndicator: false,
+                    isLoading: false,
                     content: `<div />`,
                     onNavigate: (): void => {
                     }
@@ -233,7 +233,7 @@ class PageComponent extends TestBase {
 
             it("does not renders page navigation content, when page has no navigation items", (): void => {
                 const pageProps: IPageProps = {
-                    showActivityIndicator: false,
+                    isLoading: false,
                     content: `<div />`,
                     onNavigate: (): void => {
                     }
@@ -252,13 +252,13 @@ class PageComponent extends TestBase {
         describe(`Page navigation tests.`, (): void => {
             const target = super.createTargetElement();
             const pageUrl = Url.getPageUrl("123", "456", "publication", "page");
-            let page: Page;
+            let page: PagePresentation;
 
             beforeEach(() => {
                 hashHistory.push(pageUrl);
                 const margin = Array(100).join("<br/>");
                 const pageProps: IPageProps = {
-                    showActivityIndicator: false,
+                    isLoading: false,
                     content: `<div>
                                 <h1>header-1</h1>
                                 ${margin}
@@ -298,7 +298,7 @@ class PageComponent extends TestBase {
             });
 
             it("scrolls to page content item", (done: () => void): void => {
-                const spy = spyOn(window, "scrollTo").and.callThrough();
+                const spy = spyOn(Html, "scrollIntoView").and.callThrough();
 
                 const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
                 expect(domNode).not.toBeNull();
@@ -318,8 +318,7 @@ class PageComponent extends TestBase {
             });
 
             it("scrolls to same content item", (done: () => void): void => {
-                const spy = spyOn(window, "scrollTo").and.callThrough();
-
+                const spy = spyOn(Html, "scrollIntoView").and.callThrough();
                 const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
                 expect(domNode).not.toBeNull();
 
@@ -332,13 +331,13 @@ class PageComponent extends TestBase {
                 hyperlinks.item(1).click();
 
                 setTimeout((): void => {
-                    expect(spy).toHaveBeenCalledTimes(3);
+                    expect(spy).toHaveBeenCalledTimes(1);
                     done();
                 }, 100);
             });
 
             it("scrolls when page title is not specified", (done: () => void): void => {
-                const spy = spyOn(window, "scrollTo").and.callThrough();
+                const spy = spyOn(Html, "scrollIntoView").and.callThrough();
 
                 const pageUrlWithNoTitle = Url.getPageUrl("123", "456", "publication");
                 hashHistory.push(pageUrlWithNoTitle);
@@ -360,26 +359,35 @@ class PageComponent extends TestBase {
 
     }
 
-    private _renderComponent(props: IPageProps, target: HTMLElement, children?: {}): Page {
+    private _renderComponent(props: IPageProps, target: HTMLElement, children?: {}): PagePresentation {
+        const store = configureStore();
+
         const comp = ReactDOM.render(
-            <ComponentWithContext>
-                <Page {...props}>{children}</Page>
-            </ComponentWithContext>, target
+             <Provider store={store}>
+                <ComponentWithContext>
+                    <PagePresentation {...props}>{children}</PagePresentation>
+                </ComponentWithContext>
+              </Provider>, target
         ) as React.Component<{}, {}>;
-        return TestUtils.findRenderedComponentWithType(comp, Page) as Page;
+        return TestUtils.findRenderedComponentWithType(comp, PagePresentation) as PagePresentation;
     }
 
-    private _renderRoutedComponent(props: IPageProps, target: HTMLElement, children?: {}): Page {
+    private _renderRoutedComponent(props: IPageProps, target: HTMLElement, children?: {}): PagePresentation {
+        const store = configureStore();
+
         const comp = ReactDOM.render(
             <Router history={hashHistory}>
                 <Route path=":publicationId(/:pageIdOrPublicationTitle)(/:publicationTitle)(/:pageTitle)(/:pageAnchor)"
-                    component={(compProps: IProps) => (
-                        <ComponentWithContext>
-                            <Page anchor={compProps.params.pageAnchor} {...props}>{children}</Page>
-                        </ComponentWithContext>
+                    component={() => (
+                        <Provider store={store}>
+                            <ComponentWithContext>
+                                <RouteToState />
+                                <Page {...props}>{children}</Page>
+                            </ComponentWithContext>
+                        </Provider>
                     )} />
             </Router>, target) as React.Component<{}, {}>;
-        return TestUtils.findRenderedComponentWithType(comp, Page) as Page;
+        return TestUtils.findRenderedComponentWithType(comp, PagePresentation) as PagePresentation;
     }
 }
 

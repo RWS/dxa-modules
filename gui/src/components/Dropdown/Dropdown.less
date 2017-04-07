@@ -1,0 +1,116 @@
+@import (reference) "~theme-styles";
+
+.sdl-dita-delivery-dropdown {
+    position: relative;
+    select {
+        @media screen and (min-width: (1+@screenSm)) {
+            display: none;
+        }
+        @media screen and (max-width: @screenSm) {
+            display: inline-block;
+        }
+        width: 100%;
+        color: white;
+        border: 0px solid transparent;
+        background-color: transparent;
+        cursor: pointer;
+        outline: none;
+        option {
+            color: black;
+        }
+    }
+    .dropdown-toggle {
+        @media screen and (min-width: (1+@screenSm)) {
+            display: inline-block;
+        }
+        @media screen and (max-width: @screenSm) {
+            display: none;
+        }
+        cursor: pointer;
+        outline: none;
+        user-select: none;
+        white-space: nowrap;
+        background-color: transparent;
+        border: 0px solid transparent;
+        .caret {
+            margin-left: 6px;
+        }
+    }
+    &.open {
+        .dropdown-menu {
+            @media screen and (max-width: @screenSm) {
+                display: none;
+            }
+        }
+    }
+    .dropdown-menu {
+        display: none;
+        position: absolute;
+        top: 30px;
+        right: -11px;
+        .rtl & {
+            left: -11px;
+            right: auto;
+        }
+        .open& {
+            display: block;
+        }
+        .dropdown-items {
+            overflow-y: auto;
+            padding: 0;
+            box-sizing: border-box;
+            li {
+                box-sizing: border-box;
+                border-bottom: 1px solid transparent;
+                cursor: pointer;
+                a {
+                    display: block;
+                    white-space: nowrap;
+                    text-decoration: none;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+            }
+            li:last-child {
+                border-bottom: 0px solid transparent;
+            }
+            li.active {
+                a {
+                    position: relative;
+                    .checked {
+                        position: absolute;
+                        right: 0;
+                        .rtl & {
+                            left: 0;
+                            right: auto;
+                        }
+                        margin: 0;
+                    }
+                }
+            }
+        }
+        .dropdown-arrow {
+            position: absolute;
+            top: 15px;
+            width: 100%;
+        }
+        .dropdown-arrow:before,
+        .dropdown-arrow:after {
+            content: '';
+            position: absolute;
+            bottom: 100%;
+        }
+        .dropdown-arrow:before {
+            left: 80%;
+            .rtl & {
+                left: 20%;
+            }
+        }
+        .dropdown-arrow:after {
+            right: 20%;
+            .rtl & {
+                right: 80%;
+            }
+        }
+    }
+}

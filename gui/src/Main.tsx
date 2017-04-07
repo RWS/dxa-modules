@@ -9,6 +9,11 @@ import { TaxonomyService } from "services/client/TaxonomyService";
 import { localization } from "services/common/LocalizationService";
 import { browserHistory } from "react-router";
 
+import { Provider } from "react-redux";
+import { IState } from "store/interfaces/State";
+import { configureStore } from "store/Store";
+import { Store } from "redux";
+
 import "sdl-controls-react-wrappers/dist/stylesheets/main";
 
 const mainElement = document.getElementById("main-view-target");
@@ -23,13 +28,18 @@ const services: IServices = {
     taxonomyService: new TaxonomyService()
 };
 
+const store: Store<IState> = configureStore({});
+
+localization.setStore(store);
+
 const render = (AppComp: typeof App): void => {
     if (!mainElement) {
         console.error(`Unable to locate element to render application.`);
     } else {
         ReactDOM.render(
-            <AppComp services={services} history={browserHistory as ReactRouter.History} />,
-            mainElement);
+            <Provider store={store}>
+                <AppComp services={services} history={browserHistory as ReactRouter.History} />
+            </Provider>, mainElement);
     }
 };
 render(App);

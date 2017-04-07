@@ -89,14 +89,15 @@ describe(`Html utils tests.`, (): void => {
         function createLargePage(): HTMLElement {
             const element = document.createElement("div");
             const scrollContainer = document.createElement("div");
+            const style = `style="margin:0 0 1000px 0; padding: 0;"`;
             scrollContainer.style.height = "500px";
             scrollContainer.style.maxHeight = "500px";
             scrollContainer.style.overflow = "auto";
             element.id = "large-page";
-            element.innerHTML = `<h1 style="margin:0 0 1000px 0">Header</h1>
-                  <h2 style="margin:0 0 1000px 0">Header</h2>
-                  <h3 style="margin:0 0 1000px 0">Header</h3>
-                  <h4 style="margin:0 0 1000px 0">Header</h4>`;
+            element.innerHTML = `<h1 ${style}>Header</h1>
+                  <h2 ${style}>Header</h2>
+                  <h3 ${style}>Header</h3>
+                  <h4 ${style}>Header</h4>`;
             scrollContainer.appendChild(element);
             return scrollContainer;
         }

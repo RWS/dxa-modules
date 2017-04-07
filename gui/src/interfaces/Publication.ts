@@ -38,6 +38,7 @@ export interface IPublication {
     productReleaseVersion?: string | null;
 
     /**
+     * Publication verison
      * Creation date
      *
      * @type {Date}
@@ -51,6 +52,11 @@ export interface IPublication {
      * @type {string}
      * @memberOf IPublication
      */
+    versionRef?: string;
+
+    /**
+     * Publication language
+     */
     version: string;
 
     /**
@@ -59,5 +65,6 @@ export interface IPublication {
      * @type {string}
      * @memberOf IPublication
      */
+    language?: string;
     logicalId: string;
 }

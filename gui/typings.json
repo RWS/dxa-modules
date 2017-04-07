@@ -1,6 +1,7 @@
 {
   "name": "sdl-dita-delivery-web-app-gui",
   "globalDependencies": {
+    "classnames": "registry:dt/classnames#0.0.0+20161113184211",
     "jasmine": "registry:dt/jasmine#2.5.0+20161003201800",
     "react": "registry:dt/react#0.14.0+20161008064207",
     "react-addons-test-utils": "registry:dt/react-addons-test-utils#0.14.0+20160427035638",
@@ -9,10 +10,14 @@
     "react-router/history": "registry:dt/react-router/history#2.0.0+20160830150755",
     "source-map": "registry:dt/source-map#0.0.0+20161003134342",
     "uglify-js": "registry:dt/uglify-js#2.6.1+20160316155526",
-    "webpack-env": "github:DefinitelyTyped/DefinitelyTyped/webpack-env/index.d.ts#50f20d7af556db2da21e70de65f5c909ab5145ca",
-    "classnames": "registry:dt/classnames#0.0.0+20161113184211"
+    "webpack-env": "github:DefinitelyTyped/DefinitelyTyped/webpack-env/index.d.ts#50f20d7af556db2da21e70de65f5c909ab5145ca"
   },
   "dependencies": {
+    "deep-assign": "registry:dt/deep-assign#0.1.11+20161102140421",
+    "lodash": "registry:npm/lodash#4.0.0+20161015015725",
+    "react-redux": "registry:dt/react-redux#4.4.0+20170123203653",
+    "redux-actions": "github:DefinitelyTyped/DefinitelyTyped/redux-actions/index.d.ts#983c93531a0a732f2d0eca0148ac255ede0d40a6",
+    "redux-thunk": "registry:npm/redux-thunk#2.0.0+20160525185520",
     "webpack": "github:DefinitelyTyped/DefinitelyTyped/webpack/index.d.ts#df177d2915be6639a2d30d39805985ea9a3e10e6"
   }
 }

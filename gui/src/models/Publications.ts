@@ -5,7 +5,11 @@ import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 import { Api } from "utils/Api";
 import { Net, IWebRequest, LoadableObject } from "sdl-models";
 import { localization } from "services/common/LocalizationService";
+import { String } from "utils/String";
 import Version from "utils/Version";
+
+export const DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE: string = "Unknown product";
+export const DEFAULT_UNKNOWN_PRODUCT_RELEASE_VERSION: string = "Unknown product release version";
 
 /**
  * Publications model
@@ -18,9 +22,9 @@ export class Publications extends LoadableObject {
 
     private _publications: IPublication[];
     private _productFamilies?: IProductFamily[];
-    private _unknownProductFamilyTitle: string = localization.formatMessage("productfamilies.unknown.title");
     private _unknownProductFamilyDescription: string = localization.formatMessage("productfamilies.unknown.description");
-    private _unknownProductReleaseVersion: string = localization.formatMessage("productreleaseversions.unknown.title");
+    private _unknownProductFamilyTitle: string = DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE;
+    private _unknownProductReleaseVersion: string = DEFAULT_UNKNOWN_PRODUCT_RELEASE_VERSION;
 
     /**
      * Get the Publications
@@ -33,25 +37,25 @@ export class Publications extends LoadableObject {
         let result: IPublication[] = this._publications.slice();
 
         if (productFamily) {
-            const normalizedProductFamily = productFamily.toLowerCase().trim();
-            const familyTitle = (normalizedProductFamily === this._unknownProductFamilyTitle.toLowerCase()) ? undefined : normalizedProductFamily;
+            const normalizedProductFamily = String.normalize(productFamily);
+            const familyTitle = (normalizedProductFamily === String.normalize(this._unknownProductFamilyTitle)) ? undefined : normalizedProductFamily;
             result = result.filter((publication: IPublication) => {
                 if (!familyTitle) {
                     return !publication.productFamily;
                 }
-                return (publication.productFamily && publication.productFamily.toLowerCase().trim()) === familyTitle;
+                return (publication.productFamily && String.normalize(publication.productFamily)) === familyTitle;
             });
         }
 
         if (productReleaseVersion) {
-            const normalizedProductReleaseVersion = productReleaseVersion.toLowerCase().trim();
-            const productReleaseVersionTitle = (normalizedProductReleaseVersion === this._unknownProductReleaseVersion.toLowerCase())
+            const normalizedProductReleaseVersion = String.normalize(productReleaseVersion);
+            const productReleaseVersionTitle = (normalizedProductReleaseVersion === String.normalize(this._unknownProductReleaseVersion))
                 ? undefined : normalizedProductReleaseVersion;
             result = result.filter((publication: IPublication) => {
                 if (!productReleaseVersionTitle) {
                     return !publication.productReleaseVersion;
                 }
-                const normalizedPublicationProductReleaseVersion = publication.productReleaseVersion && Version.normalize(publication.productReleaseVersion).toLowerCase().trim();
+                const normalizedPublicationProductReleaseVersion = publication.productReleaseVersion && Version.normalize(publication.productReleaseVersion);
                 return normalizedPublicationProductReleaseVersion === productReleaseVersionTitle;
             });
         }
@@ -167,6 +171,8 @@ export class Publications extends LoadableObject {
                 title: item.Title,
                 productFamily: item.ProductFamily,
                 productReleaseVersion: item.ProductReleaseVersion,
+                versionRef: item.VersionRef,
+                language: item.Language,
                 createdOn: new Date(item.CreatedOn),
                 version: item.Version,
                 logicalId: item.LogicalId
@@ -181,14 +187,14 @@ export class Publications extends LoadableObject {
     private _convertToProductReleaseVersion(version: string | null): IProductReleaseVersion {
         if (version === null) {
             return {
-                title: this._unknownProductReleaseVersion,
-                value: this._unknownProductReleaseVersion.trim().toLowerCase(),
+                title: DEFAULT_UNKNOWN_PRODUCT_RELEASE_VERSION,
+                value: String.normalize(DEFAULT_UNKNOWN_PRODUCT_RELEASE_VERSION),
                 hasWarning: true
             };
         }
         return {
             title: version,
-            value: version.trim().toLowerCase()
+            value: String.normalize(version)
         };
     }
 }

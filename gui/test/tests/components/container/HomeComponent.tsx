@@ -1,14 +1,17 @@
-import * as React from "react";
+/*import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as TestUtils from "react-addons-test-utils";
 import { Router, Route } from "react-router";
-import { Home } from "components/container/Home";
-import { PublicationContent } from "components/container/PublicationContent";
+import { HomePresentation } from "components/Home/HomePresentation";
+import { PublicationContentPresentation } from "components/PublicationContent/PublicationContentPresentation";
 import { ActivityIndicator } from "sdl-controls-react-wrappers";
 import { TestBase } from "sdl-models";
 import { PublicationService } from "test/mocks/services/PublicationService";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 import { hashHistory } from "react-router";
+import { dummyPage } from "utils/Page";
+import { configureStore } from "store/Store";
+import { Provider } from "react-redux";
 
 const services = {
     publicationService: new PublicationService()
@@ -35,7 +38,7 @@ class HomeComponent extends TestBase {
 
             it("show loading indicator on initial render", (): void => {
                 services.publicationService.fakeDelay(true);
-                const app = this._renderComponent(target, "ish:123-1-1");
+                const app = this._renderComponent(target, "ish:123-1-1", true);
                 // tslint:disable-next-line:no-any
                 const activityIndicators = TestUtils.scryRenderedComponentsWithType(app, ActivityIndicator as any);
                 // One indicator for the toc, one for the page
@@ -59,7 +62,7 @@ class HomeComponent extends TestBase {
             it("can interact with search panel", (): void => {
                 const app = this._renderComponent(target);
                 const appNode = ReactDOM.findDOMNode(app);
-                const homeComp = TestUtils.findRenderedComponentWithType(app, Home);
+                const homeComp = TestUtils.findRenderedComponentWithType(app, HomePresentation);
                 const homeNode = ReactDOM.findDOMNode(homeComp);
 
                 const searchBarNode = appNode.querySelector(".sdl-dita-delivery-searchbar") as HTMLElement;
@@ -88,16 +91,33 @@ class HomeComponent extends TestBase {
         });
     }
 
-    private _renderComponent(target: HTMLElement, pubId?: string): ComponentWithContext {
+    private _renderComponent(target: HTMLElement, pubId?: string, loadingPage?: boolean): ComponentWithContext {
+        const publicationId = pubId || "";
+        const pageId = "";
+        const publication = {id: publicationId, title: ""};
+        const isPageLoading = loadingPage || false;
+
+        const store = configureStore();
+
         return ReactDOM.render(
             (
                 <ComponentWithContext {...services}>
                     <Router history={hashHistory}>
-                        <Route path="*" component={() => (<Home><PublicationContent params={{ publicationId: pubId || "" }} /></Home>)} />
+                        <Route path="*" component={() => (<Provider store={store}><HomePresentation publicationId={publicationId}>
+                            <PublicationContentPresentation
+                                publicationId={publicationId}
+                                publication={publication}
+                                pageId = {pageId}
+                                anchor = ""
+                                page={dummyPage(pageId)}
+                                isPageLoading={isPageLoading}
+                                productReleaseVersions=[]
+                                errorMessage="" />
+                        </HomePresentation></Provider>)} />
                     </Router>
                 </ComponentWithContext>
             ), target) as ComponentWithContext;
     }
 }
 
-new HomeComponent().runTests();
+new HomeComponent().runTests();*/

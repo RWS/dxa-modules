@@ -6,15 +6,18 @@
 @import (reference) "~sdl-icons/dist/icons-common.less";
 @iconFont: "SDLfont";
 @iconFontPath: "./fonts/SDLfont";
-@iconLanguage: "\e011";
-@iconHamburger: "\e007";
-@iconUser: "\e023";
 @iconArrowRight: "\e013";
+@iconArrowDown: "\e02B";
 @iconArrowLeft: "\e01a";
 @iconSearch: "\e01b";
 @iconClose: "\e00a";
 @iconBack: "\e04f";
+@iconChecked: "\e039";
+@iconHamburger: "\e007";
+@iconLanguage: "\e011";
+@iconUser: "\e023";
 @iconSelect: "\e01C";
+
 .import-icon-font() {
     font-family: @iconFont;
     src: url('@{iconFontPath}/SDLfont.woff') format('woff');
@@ -68,6 +71,13 @@
     }
 }
 
+.icon-arrow-down(@size: 24px) {
+    .icon-font-default-style(@size);
+    &:before {
+        content: @iconArrowDown;
+    }
+}
+
 .icon-arrow-left(@size: 24px) {
     .icon-font-default-style(@size);
     &:before {
@@ -86,6 +96,13 @@
     .icon-font-default-style(@size);
     &:before {
         content: @iconClose;
+    }
+}
+
+.icon-checked(@size: 24px) {
+    .icon-font-default-style(@size);
+    &:before {
+        content: @iconChecked;
     }
 }
 

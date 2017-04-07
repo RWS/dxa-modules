@@ -1,13 +1,14 @@
 import * as React from "react";
 import { Promise } from "es6-promise";
-import { IProductFamily } from "interfaces/ProductFamily";
-import { ActivityIndicator, Button } from "sdl-controls-react-wrappers";
 import { ButtonPurpose } from "sdl-controls";
+import { ActivityIndicator, Button } from "sdl-controls-react-wrappers";
+import { IProductFamily } from "interfaces/ProductFamily";
 import { IAppContext } from "components/container/App";
 import { TilesList } from "components/container/TilesList";
 import { ITile } from "components/presentation/Tile";
 import { Error } from "components/presentation/Error";
 import { Url } from "utils/Url";
+import { DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE } from "models/Publications";
 
 import "components/container/styles/ProductFamiliesList";
 
@@ -91,16 +92,17 @@ export class ProductFamiliesList extends React.Component<{}, IProductFamiliesLis
                             ? (productFamilies.length > 0)
                                 ? (<TilesList viewAllLabel={formatMessage("components.productfamilies.view.all")}
                                     tiles={productFamilies.map((productFamily: IProductFamily) => {
+                                        const title = productFamily.hasWarning ? formatMessage("productfamilies.unknown.title") : productFamily.title;
+                                        const titleUrl = productFamily.hasWarning ? DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE : productFamily.title;
+                                        const description = productFamily.hasWarning ? formatMessage("productfamilies.unknown.description") : productFamily.description;
                                         return {
-                                            title: productFamily.title,
-                                            loadableContent: productFamily.description ? (() => {
-                                                return Promise.resolve(productFamily.description);
-                                            }) : undefined,
+                                            title: title,
+                                            loadableContent: description ? () => Promise.resolve(description) : undefined,
                                             hasWarning: productFamily.hasWarning,
                                             navigateTo: () => {
                                                 /* istanbul ignore else */
                                                 if (router) {
-                                                    router.push(Url.getProductFamilyUrl(productFamily.title));
+                                                    router.push(Url.getProductFamilyUrl(titleUrl));
                                                 }
                                             }
                                         } as ITile;

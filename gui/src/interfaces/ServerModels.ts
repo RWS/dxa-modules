@@ -1,4 +1,9 @@
 ﻿
+export interface ICondition {
+    datatype: "Date" | "Number" | "Text" | "Version";
+    range: boolean;
+    values: string[];
+}
 export interface IPage {
     Id: string;
     Meta: { [key: string]: string | string[] | number | number[] | undefined | null };
@@ -7,11 +12,13 @@ export interface IPage {
 export interface IPublication {
     CreatedOn: string;
     Id: string;
+    Language: string;
     LogicalId: string;
     ProductFamily?: string | null;
     ProductReleaseVersion?: string | null;
     Title: string;
     Version: string;
+    VersionRef: string;
 }
 export interface ISitemapItem {
     HasChildNodes: boolean;

@@ -150,7 +150,15 @@ export class Tile extends React.Component<ITileProps, ITileState> {
     public componentWillUpdate(nextProps: ITileProps): void {
         const { tile } = this.props;
         const nextTile = nextProps.tile;
-        if (tile.title !== nextTile.title) {
+
+        // Update tile content if title changed and there was a warning.
+        // It means that there was a language change of warning description label.
+        if (tile.title !== nextTile.title && tile.hasWarning) {
+            this._loadTileContent(nextTile);
+        }
+
+        // Added publication id for a tile and check uniqueness by this id
+        if (tile.id !== nextTile.id) {
             this._loadTileContent(nextTile);
         }
     }
@@ -169,7 +177,9 @@ export class Tile extends React.Component<ITileProps, ITileState> {
         return (
             <div className="sdl-dita-delivery-tile">
                 <div className="tile-header-wrapper">
-                    <h3 className={tile.hasWarning ? "exclamation-mark" : ""}>{StringHelper.truncate(tile.title, TILE_TITLE_TRUNCATE)}</h3>
+                    <h3 className={tile.hasWarning ? "exclamation-mark" : ""}>
+                        <span>{StringHelper.truncate(tile.title, TILE_TITLE_TRUNCATE)}</span>
+                    </h3>
                 </div>
                 <hr />
                 <div className="tile-content">
@@ -232,7 +242,7 @@ export class Tile extends React.Component<ITileProps, ITileState> {
                             tileContentIsLoading: false
                         });
                     }
-                },
+                }
             );
         }
     }

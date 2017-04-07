@@ -1,4 +1,4 @@
-import { ILocalizationService } from "services/interfaces/LocalizationService";
+import { ILocalizationService, ILanguage } from "services/interfaces/LocalizationService";
 
 export class LocalizationService implements ILocalizationService {
     public formatMessage(path: string, variables?: string[]): string {
@@ -7,6 +7,13 @@ export class LocalizationService implements ILocalizationService {
             return message + variables.join("-");
         }
         return message;
+    }
+
+    public getLanguages(): ILanguage[] {
+        return [
+            { name: "English", iso: "en" },
+            { name: "Nederlands", iso: "nl" }
+        ];
     }
 
     /**
