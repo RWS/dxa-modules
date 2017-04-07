@@ -8,7 +8,7 @@ import { IServices } from "interfaces/Services";
 import { PageService } from "services/server/PageService";
 import { PublicationService } from "services/server/PublicationService";
 import { TaxonomyService } from "services/server/TaxonomyService";
-import { TestBase } from "sdl-models";
+import { TestBase } from "@sdl/models";
 import { configureStore } from "store/Store";
 import { Provider } from "react-redux";
 import { Store } from "redux";

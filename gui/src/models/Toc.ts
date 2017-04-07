@@ -1,7 +1,7 @@
 import { ISitemapItem } from "interfaces/ServerModels";
 import { ITaxonomy } from "interfaces/Taxonomy";
 import { Api } from "utils/Api";
-import { Net, IWebRequest, LoadableObject } from "sdl-models";
+import { Net, IWebRequest, LoadableObject } from "@sdl/models";
 
 /**
  * Toc model, used for interacting with the server and doing basic operations on the model itself.

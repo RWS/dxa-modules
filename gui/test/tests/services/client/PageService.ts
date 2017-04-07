@@ -1,5 +1,5 @@
 import { PageService } from "services/client/PageService";
-import { TestBase } from "sdl-models";
+import { TestBase } from "@sdl/models";
 
 class PageServiceTests extends TestBase {
 

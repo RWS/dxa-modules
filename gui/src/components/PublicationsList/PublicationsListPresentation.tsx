@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Promise } from "es6-promise";
 import { Link } from "react-router";
-import { ButtonPurpose } from "sdl-controls";
-import { ActivityIndicator, Button } from "sdl-controls-react-wrappers";
+import { ButtonPurpose } from "@sdl/controls";
+import { ActivityIndicator, Button } from "@sdl/controls-react-wrappers";
 
 import { Error } from "components/presentation/Error";
 import { TilesList } from "components/container/TilesList";

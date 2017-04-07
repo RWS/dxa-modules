@@ -3,7 +3,7 @@ import { IPublication } from "interfaces/Publication";
 import { IProductFamily } from "interfaces/ProductFamily";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 import { Api } from "utils/Api";
-import { Net, IWebRequest, LoadableObject } from "sdl-models";
+import { Net, IWebRequest, LoadableObject } from "@sdl/models";
 import { localization } from "services/common/LocalizationService";
 import { String } from "utils/String";
 import Version from "utils/Version";

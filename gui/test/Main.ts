@@ -1,5 +1,5 @@
 import "ts-helpers";
-import "sdl-controls-react-wrappers/dist/stylesheets/main";
+import "@sdl/controls-react-wrappers/dist/stylesheets/main";
 import "./configuration/Tests.less";
 import "babel-polyfill";
 

@@ -3,7 +3,7 @@ import * as ReactDOM from "react-dom";
 import { ErrorContent } from "components/container/ErrorContent/ErrorContent";
 import { IErrorContentProps } from "components/container/ErrorContent/ErrorContentPresentation";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
-import { TestBase } from "sdl-models";
+import { TestBase } from "@sdl/models";
 import { configureStore } from "store/Store";
 import { Provider } from "react-redux";
 

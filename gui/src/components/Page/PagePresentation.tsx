@@ -3,8 +3,8 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as Prism from "prismjs";
 
-import { ActivityIndicator, Button } from "sdl-controls-react-wrappers";
-import { ButtonPurpose } from "sdl-controls";
+import { ActivityIndicator, Button } from "@sdl/controls-react-wrappers";
+import { ButtonPurpose } from "@sdl/controls";
 import { Html, IHeader } from "utils/Html";
 import { Url } from "utils/Url";
 import { path } from "utils/Path";

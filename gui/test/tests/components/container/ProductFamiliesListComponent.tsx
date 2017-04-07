@@ -2,8 +2,8 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as TestUtils from "react-addons-test-utils";
 import { ProductFamiliesList } from "components/container/ProductFamiliesList";
-import { ActivityIndicator, Button } from "sdl-controls-react-wrappers";
-import { TestBase } from "sdl-models";
+import { ActivityIndicator, Button } from "@sdl/controls-react-wrappers";
+import { TestBase } from "@sdl/models";
 import { PublicationService } from "test/mocks/services/PublicationService";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 

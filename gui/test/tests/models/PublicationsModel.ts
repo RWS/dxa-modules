@@ -1,5 +1,5 @@
 import { Publications as PublicationsBase } from "models/Publications";
-import { TestBase } from "sdl-models";
+import { TestBase } from "@sdl/models";
 import { IPublication } from "interfaces/ServerModels";
 import { IPublication as IPublicationInterface } from "interfaces/Publication";
 import { localization } from "services/common/LocalizationService";

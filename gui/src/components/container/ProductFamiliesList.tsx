@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Promise } from "es6-promise";
-import { ButtonPurpose } from "sdl-controls";
-import { ActivityIndicator, Button } from "sdl-controls-react-wrappers";
+import { ButtonPurpose } from "@sdl/controls";
+import { ActivityIndicator, Button } from "@sdl/controls-react-wrappers";
 import { IProductFamily } from "interfaces/ProductFamily";
 import { IAppContext } from "components/container/App";
 import { TilesList } from "components/container/TilesList";

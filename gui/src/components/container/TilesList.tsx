@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Tile, ITile } from "components/presentation/Tile";
-import { Button } from "sdl-controls-react-wrappers";
-import { ButtonPurpose } from "sdl-controls";
+import { Button } from "@sdl/controls-react-wrappers";
+import { ButtonPurpose } from "@sdl/controls";
 import "components/container/styles/TilesList";
 
 const SHOWN_ITEMS_COUNT = 8;

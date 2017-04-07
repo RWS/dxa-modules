@@ -1,7 +1,7 @@
 import { ISitemapItem } from "interfaces/ServerModels";
 import { ITaxonomy } from "interfaces/Taxonomy";
 import { Api } from "utils/Api";
-import { Net, IWebRequest, LoadableObject } from "sdl-models";
+import { Net, IWebRequest, LoadableObject } from "@sdl/models";
 import { Url } from "utils/Url";
 import { localization } from "services/common/LocalizationService";
 
