@@ -69,7 +69,7 @@ export class RouteToStatePresentation extends React.Component<Props, {}> {
     private paramsToState(params: IPublicationContentPropsParams): IPublicationCurrentState {
         return {
             publicationId: params.publicationId,
-            pageId: /\d+/.test(params.pageIdOrPublicationTitle || "") ? params.pageIdOrPublicationTitle as string : "",
+            pageId: /^\d+$/.test(params.pageIdOrPublicationTitle || "") ? params.pageIdOrPublicationTitle as string : "",
             anchor: params.pageAnchor || ""
         };
     }
