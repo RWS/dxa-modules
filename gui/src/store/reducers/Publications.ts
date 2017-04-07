@@ -88,11 +88,13 @@ export const getPubById = (state: IPublicationsState, id: string): IPublication 
 
 export const getPubsByLang = (state: IPublicationsState, language: string) => getPubList(state, { language });
 
-export const getPubByIdAndLang = (state: IPublicationsState, hostPubId: string, language: string) => {
-    const currentVersionRef = getPubById(state, hostPubId).versionRef;
-    return getPubList(state)
-        .filter((publication: IPublication) => publication.versionRef === currentVersionRef)
-        .find((publication: IPublication) => publication.language === language) || notFound(hostPubId);
+export const getPubForLang = (state: IPublicationsState, publication: IPublication, language: string) => {
+    return getPubList(state, {
+        "!id": publication.id,
+        language,
+        versionRef: publication.versionRef,
+        productReleaseVersion: publication.productReleaseVersion
+    })[0] || notFound(publication.id);
 };
 
 export const getPubListRepresentatives = (state: IState, filter: {}): IPublication[] => {

@@ -30,13 +30,12 @@ export const translateProductReleaseVersion = (productReleaseVersion: string): s
 
 export const translateProductReleaseVersions = (versions: IProductReleaseVersion[]): IProductReleaseVersion[] => {
     return versions && versions.map(version => {
-        let { value, title } = version;
+        let { title } = version;
 
         if (String.normalize(version.value) === String.normalize(DEFAULT_UNKNOWN_PRODUCT_RELEASE_VERSION)) {
-            value = String.normalize(localization.formatMessage("productreleaseversions.unknown.title"));
             title = localization.formatMessage("productreleaseversions.unknown.title");
         };
 
-        return { ...version, value, title };
+        return { ...version, title };
     });
 };

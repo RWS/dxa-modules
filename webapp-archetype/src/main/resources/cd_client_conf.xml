@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ServiceConfig ConnectionTimeout="10000" CacheEnabled="true" CacheExpirationDuration="600" ServiceAvailabilityCheck="false">
+    <!-- Specify your CIS Environment's Discovery Service URL below -->
+    <DiscoveryService ServiceUri="${discovery_url:-http://localhost:8082}/discovery.svc"/>
+    
+    <!-- Remove the TokenService element if OAuth is disabled on your CIS Environment -->
+    <TokenService ClientId="${client_id}" ClientSecret="${client_secret}"/>
+</ServiceConfig>

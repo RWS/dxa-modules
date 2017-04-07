@@ -12,7 +12,6 @@ import { VersionSelector } from "components/presentation/VersionSelector";
 import { Html, IHeader } from "utils/Html";
 import { TcmId } from "utils/TcmId";
 import { Url } from "utils/Url";
-import { debounce } from "utils/Function";
 import { isDummyPage, isPage } from "utils/Page";
 
 import { ITaxonomy } from "interfaces/Taxonomy";
@@ -164,7 +163,6 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
     public context: IAppContext;
     private _toc: IToc = {};
     private _isUnmounted: boolean = false;
-    private _topOffset: number = 0;
 
     /**
      * Creates an instance of App.
@@ -246,7 +244,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         return (
             <section className={"sdl-dita-delivery-publication-content"}>
                 <Page
-                    showActivityIndicator={isPageLoading}
+                    isLoading={isPageLoading}
                     content={page.content}
                     error={errorMessage}
                     onNavigate={(url: string): void => {
@@ -258,7 +256,6 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                     url={pageId ?
                         Url.getPageUrl(publicationId, pageId, publication.title, page.title || (selectedTocItem && selectedTocItem.title) || "") :
                         Url.getPublicationUrl(publicationId, publication.title)}
-                    scrollOffset={this._topOffset}
                     activeHeader={activePageHeader}>
                     <NavigationMenu isOpen={false}>{/* TODO: use global state store */}
                         <Toc
@@ -275,7 +272,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                         </Toc>
                     </NavigationMenu>
                     <Breadcrumbs
-                        loadItemsPath={(itemId: string): Promise<IBreadcrumbItem[]> => {
+                        loadItemPath={(breadcrumbItem: ITaxonomy): Promise<IBreadcrumbItem[]> => {
                             const publicationTitle = isPublicationFound ?
                                 publication.title || "" :
                                 localizationService.formatMessage("error.publication.not.found", [publication.id]);
@@ -287,8 +284,9 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                                 title: publicationTitle,
                                 url: Url.getPublicationUrl(publicationId, publicationTitle)
                             }] as IBreadcrumbItem[];
-                            if (pageId) {
-                                return taxonomyService.getSitemapPath(publicationId, pageId, itemId || "").then(
+                            const parsedUrl = breadcrumbItem.url && Url.parsePageUrl(breadcrumbItem.url);
+                            if (parsedUrl && parsedUrl.pageId) {
+                                return taxonomyService.getSitemapPath(publicationId, parsedUrl.pageId, breadcrumbItem.id || "").then(
                                     path => {
                                         breadCrumbPath.push(...path.map(item => {
                                             return {
@@ -297,6 +295,9 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                                             } as IBreadcrumbItem;
                                         }));
                                         return breadCrumbPath;
+                                    },
+                                    siteMapError => {
+                                        return Promise.reject(siteMapError);
                                     }
                                 );
                             } else {
@@ -318,13 +319,6 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
      * Invoked once, only on the client (not on the server), immediately after the initial rendering occurs.
      */
     public addResizeHandlers(): void {
-        if (ReactDOM) {
-            const domNode = ReactDOM.findDOMNode(this) as HTMLElement;
-            if (domNode) {
-                this._topOffset = domNode.offsetTop;
-            }
-        }
-
         window.addEventListener("scroll", this._fixPanels);
         window.addEventListener("resize", this._fixPanels);
         this._fixPanels();
@@ -456,13 +450,6 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                         this.setState({
                             activePageHeader: header
                         });
-                        debounce((): void => {
-                            // Make sure the active link is in view
-                            const activeLinkEl = contentNavigation.querySelector("li.active") as HTMLElement;
-                            if (activeLinkEl) {
-                                Html.scrollIntoView(contentNavigation, activeLinkEl);
-                            }
-                        })();
                     }
                 }
             }

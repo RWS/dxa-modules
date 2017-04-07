@@ -1,22 +1,46 @@
 {
-  "GPRS": [
-    "Y"
-  ],
-  "LOUDSPEAKER": [
-    "Y"
-  ],
-  "BLUETOOTH": [
-    "Y"
-  ],
-  "MODEL": [
-    "330"
-  ],
-  "HEADSET": [
-    "Y"
-  ],
-  "GAMES": [
-    "SNAKE",
-    "WATERRAPIDS",
-    "DJ"
-  ]
+  "GPRS": {
+    "values": [
+      "Y"
+    ],
+    "datatype": "Text",
+    "range": false
+  },
+  "LOUDSPEAKER": {
+    "values": [
+      "Y"
+    ],
+    "datatype": "Text",
+    "range": false
+  },
+  "BLUETOOTH": {
+    "values": [
+      "Y"
+    ],
+    "datatype": "Text",
+    "range": false
+  },
+  "MODEL": {
+    "values": [
+      "330"
+    ],
+    "datatype": "Text",
+    "range": false
+  },
+  "HEADSET": {
+    "values": [
+      "Y"
+    ],
+    "datatype": "Text",
+    "range": false
+  },
+  "GAMES": {
+    "values": [
+      "SNAKE",
+      "WATERRAPIDS",
+      "DJ"
+    ],
+    "datatype": "Text",
+    "range": false
+  }
 }
