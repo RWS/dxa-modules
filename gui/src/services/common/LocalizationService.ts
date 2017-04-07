@@ -65,7 +65,19 @@ export class LocalizationService implements ILocalizationService {
 
             if (newLanguage !== this.language) {
                 this.language = newLanguage;
-                localStorage.setItem(LANGUAGE_LOCALSTORAGE, this.language);
+
+                // Safari and Chrome are supports LocalStorage, but we always get the QuotaExceededError in Safari|Chrome Private Browser Mode.
+                // Using try/catch for now, to prevent the rest of javascript from breaking
+                // Some others sollution that we can do in future:
+                //      - implement Fake LocalStorage for private browser mode;
+                //      - use third party library
+                //      - show message for user that browser does not support storing settings locally in Private Mode
+                try {
+                    localStorage.setItem(LANGUAGE_LOCALSTORAGE, this.language);
+                } catch (e) {
+                    console.warn(`LocalStorage exception: ${e}`);
+                }
+
                 this.reloadPage();
             }
         });
