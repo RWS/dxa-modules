@@ -4,8 +4,8 @@ import * as TestUtils from "react-addons-test-utils";
 import { Toc, ITocProps } from "components/presentation/Toc";
 import { ITaxonomy } from "interfaces/Taxonomy";
 import { Promise } from "es6-promise";
-import { TreeView } from "sdl-controls-react-wrappers";
-import { TestBase } from "sdl-models";
+import { TreeView } from "@sdl/controls-react-wrappers";
+import { TestBase } from "@sdl/models";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 
 const DELAY = 100;

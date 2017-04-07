@@ -1,7 +1,7 @@
 import * as ServerModels from "interfaces/ServerModels";
 import { IPage } from "interfaces/Page";
 import { Api } from "utils/Api";
-import { Net, IWebRequest, LoadableObject } from "sdl-models";
+import { Net, IWebRequest, LoadableObject } from "@sdl/models";
 
 /**
  * Page model

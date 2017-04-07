@@ -2,7 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as TestUtils from "react-addons-test-utils";
 import { SearchBar, ISearchBarProps } from "components/presentation/SearchBar";
-import { TestBase } from "sdl-models";
+import { TestBase } from "@sdl/models";
 
 class SearchBarComponent extends TestBase {
 

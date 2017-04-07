@@ -2,8 +2,8 @@ import * as React from "react";
 import { Promise } from "es6-promise";
 import { IAppContext } from "components/container/App";
 import { String as StringHelper } from "utils/String";
-import { ActivityIndicator, Button } from "sdl-controls-react-wrappers";
-import { ButtonPurpose } from "sdl-controls";
+import { ActivityIndicator, Button } from "@sdl/controls-react-wrappers";
+import { ButtonPurpose } from "@sdl/controls";
 
 import "components/presentation/styles/Tile";
 

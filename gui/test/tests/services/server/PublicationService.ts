@@ -1,5 +1,5 @@
 import { PublicationService } from "services/server/PublicationService";
-import { TestBase } from "sdl-models";
+import { TestBase } from "@sdl/models";
 
 class PublicationServiceTests extends TestBase {
 

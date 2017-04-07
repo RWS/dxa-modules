@@ -1,5 +1,5 @@
 import { Url } from "utils/Url";
-import { TestBase } from "sdl-models";
+import { TestBase } from "@sdl/models";
 
 class UrlUtil extends TestBase {
 

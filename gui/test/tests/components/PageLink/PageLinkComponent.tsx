@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { TestBase } from "sdl-models";
+import { TestBase } from "@sdl/models";
 import { Store } from "redux";
 import { IState } from "store/interfaces/State";
 import { configureStore } from "store/Store";

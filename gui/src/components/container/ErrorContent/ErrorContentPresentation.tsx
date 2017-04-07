@@ -4,8 +4,8 @@ import { path } from "utils/Path";
 import { SearchBar } from "components/presentation/SearchBar";
 import { Error } from "components/presentation/Error";
 import { IAppContext } from "components/container/App";
-import { Button } from "sdl-controls-react-wrappers";
-import { ButtonPurpose } from "sdl-controls";
+import { Button } from "@sdl/controls-react-wrappers";
+import { ButtonPurpose } from "@sdl/controls";
 
 import { IError } from "interfaces/Error";
 
