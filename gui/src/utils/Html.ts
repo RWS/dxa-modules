@@ -165,16 +165,42 @@ export class Html {
      * @static
      * @param {HTMLElement} scrollContainer Element which is used for scrolling
      * @param {HTMLElement} element Element which should be in view
+     * @param {} options
+     *      - force {boolean} scroll to top of element even if you are in this element already
      *
      * @memberOf Html
      */
-    public static scrollIntoView(scrollContainer: HTMLElement, element: HTMLElement): void {
+    public static scrollIntoView(scrollContainer: HTMLElement, element: HTMLElement, options?: { force?: boolean }): void {
         // In IE scrollTop is always 0
         const scrollTop = scrollContainer.scrollTop || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        const offsetTop = element.offsetTop;
+
+        // merge with default options
+        const mergedOptions = Object.assign({
+            force: false
+        }, options);
+
         // Scroll when the element is out of view
-        if (element.offsetTop > (scrollContainer.clientHeight + scrollTop) // Below
-            || element.offsetTop < scrollTop) { // Above
-            scrollContainer.scrollTop = element.offsetTop;
+        if (mergedOptions.force || offsetTop > (scrollContainer.clientHeight + scrollTop) // Below
+            || offsetTop < scrollTop) { // Above
+            let failedToScroll: boolean;
+
+            scrollContainer.scrollTop = offsetTop;
+            failedToScroll = scrollContainer.scrollTop !== offsetTop;
+
+            if (failedToScroll) {
+                document.documentElement.scrollTop = offsetTop;
+            }
+            failedToScroll = failedToScroll && document.documentElement.scrollTop !== offsetTop;
+
+            if (failedToScroll) {
+                document.body.scrollTop = offsetTop;
+            }
+            failedToScroll = failedToScroll && document.body.scrollTop !== offsetTop;
+
+            if (failedToScroll) {
+                window.scroll(0, offsetTop);
+            }
         }
     }
 

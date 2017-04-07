@@ -26,12 +26,12 @@ import "prismjs/themes/prism";
  */
 export interface IPageProps {
     /**
-     * Show activity indicator
+     * Page is loading
      *
      * @type {boolean}
      * @memberOf IPageProps
      */
-    showActivityIndicator: boolean;
+    isLoading: boolean;
 
     /**
      * Page id
@@ -75,14 +75,6 @@ export interface IPageProps {
      * @memberOf IPageProps
      */
     anchor?: string;
-    /**
-     * Scroll offset using for jumping to anchors
-     * For example when there is a topbar overlaying part of the component
-     *
-     * @type {number}
-     * @memberOf IPageProps
-     */
-    scrollOffset?: number;
     /**
      * Header which is active.
      * The header inside the page which is the first one visible in the view port.
@@ -167,7 +159,6 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
      */
     public componentWillMount(): void {
         const { router } = this.context;
-
         if (router) {
             this._historyUnlisten = router.listen(() => {
                 this._lastPageAnchor = undefined;
@@ -201,8 +192,8 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
         const appClass = ClassNames(direction, "page-content");
 
         return (
-            <div className={"sdl-dita-delivery-page"} style={props.showActivityIndicator ? { overflow: "hidden" } : {}} >
-                {props.showActivityIndicator ? <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} /> : null}
+            <div className={"sdl-dita-delivery-page"} style={props.isLoading ? { overflow: "hidden" } : {}} >
+                {props.isLoading ? <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} /> : null}
                 {props.children}
                 <div className={"sdl-dita-delivery-content-navigation-wrapper"}>
                     <ContentNavigation navItems={navItems} activeNavItemId={activeNavItemId} />
@@ -353,9 +344,9 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
      * Jump to an anchor in the page
      */
     private _jumpToAnchor(): void {
-        const { anchor, scrollOffset } = this.props;
+        const { anchor, isLoading } = this.props;
         // Keep track of the previous anchor to allow scrolling
-        if (anchor && (this._lastPageAnchor !== anchor)) {
+        if (!isLoading && anchor && (this._lastPageAnchor !== anchor)) {
             const domNode = ReactDOM.findDOMNode(this) as HTMLElement;
             if (domNode) {
                 const pageContentNode = domNode.querySelector(".page-content") as HTMLElement;
@@ -363,19 +354,9 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
                 if (header) {
                     this._lastPageAnchor = anchor;
 
-                    let offsetTop = 0;
-                    let currentNode = header;
-                    while (currentNode && currentNode.offsetParent) {
-                        offsetTop += currentNode.offsetTop;
-                        currentNode = currentNode.offsetParent as HTMLElement;
-                    }
-
-                    // TODO: make sure images are loaded before jumping to the anchor
-                    // Use a timeout to make sure all components are rendered
-                    setTimeout((): void => {
-                        const topPos = offsetTop - (scrollOffset || 0);
-                        window.scrollTo(0, topPos);
-                    }, 0);
+                    setTimeout(() => {
+                        Html.scrollIntoView(document.body, header, { force: true });
+                    }, 100);
                 }
             }
         }
