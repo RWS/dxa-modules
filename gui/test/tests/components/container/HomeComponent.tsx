@@ -113,7 +113,8 @@ class HomeComponent extends TestBase {
                                 isPageLoading={isPageLoading}
                                 productReleaseVersions={[]}
                                 productReleaseVersion={""}
-                                errorMessage="" />
+                                errorMessage=""
+                                isPublicationFound={true}/>
                         </HomePresentation></Provider>)} />
                     </Router>
                 </ComponentWithContext>
