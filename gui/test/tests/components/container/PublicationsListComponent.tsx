@@ -72,6 +72,7 @@ class PublicationsListComponent extends TestBase {
                     id: "1",
                     title: "Publication 1",
                     createdOn: new Date(),
+                    language: "en",
                     version: "1",
                     logicalId: "GUID-123",
                     productFamily: "prod-family"
@@ -79,6 +80,7 @@ class PublicationsListComponent extends TestBase {
                     id: "2",
                     title: "Publication 2",
                     createdOn: new Date(),
+                    language: "en",
                     version: "1",
                     logicalId: "GUID-123",
                     productFamily: "prod-family"
@@ -86,6 +88,7 @@ class PublicationsListComponent extends TestBase {
                     id: "3",
                     title: "Publication 3",
                     createdOn: new Date(),
+                    language: "en",
                     version: "1",
                     logicalId: "GUID-123",
                     productFamily: "prod-family"
@@ -93,13 +96,14 @@ class PublicationsListComponent extends TestBase {
                     id: "4",
                     title: "Publication 4",
                     createdOn: new Date(),
+                    language: "en",
                     version: "1",
                     logicalId: "GUID-123",
                     productFamily: "prod-family-2"
                 }];
                 services.publicationService.setMockDataPublications(null, publications);
 
-                let publicationsList = this._renderComponent(target);
+                let publicationsList = this._renderComponent(target, publications);
 
                 setTimeout((): void => {
                     let h3 = TestUtils.scryRenderedDOMComponentsWithTag(publicationsList, "h3");
@@ -109,7 +113,7 @@ class PublicationsListComponent extends TestBase {
                     expect(h3[1].textContent).toBe(publications[1].title);
                     expect(h3[2].textContent).toBe(publications[2].title);
 
-                    publicationsList = this._renderComponent(target, "prod-family-2");
+                    publicationsList = this._renderComponent(target, publications, "prod-family-2");
                     setTimeout((): void => {
                         h3 = TestUtils.scryRenderedDOMComponentsWithTag(publicationsList, "h3");
                         expect(h3.length).toBe(1);
