@@ -81,10 +81,6 @@
     "test-debug": "gulp serve:test -- --max_old_space_size=2048",
     "install": "napa"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://stash.sdl.com/scm/kcwa/web-app.git"
-  },
   "author": "jbevers@sdl.com",
   "license": "Apache-2.0",
   "napa": {
