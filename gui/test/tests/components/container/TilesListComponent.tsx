@@ -3,10 +3,10 @@ import * as ReactDOM from "react-dom";
 import * as TestUtils from "react-addons-test-utils";
 import { ITile } from "components/presentation/Tile";
 import { TilesList, ITilesListProps } from "components/container/TilesList";
-import { TestBase } from "sdl-models";
+import { TestBase } from "@sdl/models";
 import { LocalizationService } from "test/mocks/services/LocalizationService";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
-import { Button } from "sdl-controls-react-wrappers";
+import { Button } from "@sdl/controls-react-wrappers";
 
 const services = {
     localizationService: new LocalizationService()

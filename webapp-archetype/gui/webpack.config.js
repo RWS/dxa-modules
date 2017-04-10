@@ -8,7 +8,7 @@ const Visualizer = require('webpack-visualizer-plugin');
 module.exports = (isTest, isDebug) => {
     const entries = {
         main: './src/Main.tsx',
-        vendor: ['es6-promise', 'react-router', 'ts-helpers', 'sdl-models', 'sdl-controls', 'sdl-controls-react-wrappers']
+        vendor: ['es6-promise', 'react-router', 'ts-helpers', '@sdl/models', '@sdl/controls', '@sdl/controls-react-wrappers']
     };
     const testEntries = Object.assign({
     }, entries);
@@ -23,7 +23,7 @@ module.exports = (isTest, isDebug) => {
         },
         devtool: 'source-map',
         resolve: {
-            // Needed to resolve dependencies to react inside sdl-controls-react-wrappers
+            // Needed to resolve dependencies to react inside @sdl/controls-react-wrappers
             alias: {
                 React: 'react',
                 ReactDOM: 'react-dom',
@@ -61,7 +61,7 @@ module.exports = (isTest, isDebug) => {
             'react-dom': 'ReactDOM',
             'react-dom/server': 'ReactDOMServer',
             'react-addons-test-utils': 'React.addons.TestUtils',
-            // Map aliases from  sdl-controls-react-wrappers
+            // Map aliases from  @sdl/controls-react-wrappers
             React: 'React',
             ReactDOM: 'ReactDOM',
             ReactDOMServer: 'ReactDOMServer'
@@ -71,7 +71,7 @@ module.exports = (isTest, isDebug) => {
             new HtmlWebpackPlugin({
                 template: './src/index.html',
                 filename: '../index.html',
-                favicon: './node_modules/sdl-icons/icons/favicon.ico',
+                favicon: './node_modules/@sdl/icons/icons/favicon.ico',
                 hash: true,
                 excludeChunks: ['test', 'server']
             }),

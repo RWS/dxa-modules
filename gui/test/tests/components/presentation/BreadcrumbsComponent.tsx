@@ -9,7 +9,7 @@ import { hashHistory } from "react-router";
 import { Url } from "utils/Url";
 import { TcmId } from "utils/TcmId";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
-import { TestBase } from "sdl-models";
+import { TestBase } from "@sdl/models";
 import { TaxonomyItemId } from "interfaces/TcmId";
 
 interface IProps {

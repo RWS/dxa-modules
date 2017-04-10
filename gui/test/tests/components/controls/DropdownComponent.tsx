@@ -3,7 +3,7 @@ import * as ReactDOM from "react-dom";
 import * as TestUtils from "react-addons-test-utils";
 import { Dropdown, IDropdownProps } from "components/Dropdown/Dropdown";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
-import { TestBase } from "sdl-models";
+import { TestBase } from "@sdl/models";
 
 class ErrorContentComponent extends TestBase {
 

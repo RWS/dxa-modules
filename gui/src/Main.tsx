@@ -14,7 +14,7 @@ import { IState } from "store/interfaces/State";
 import { configureStore } from "store/Store";
 import { Store } from "redux";
 
-import "sdl-controls-react-wrappers/dist/stylesheets/main";
+import "@sdl/controls-react-wrappers/dist/stylesheets/main";
 
 const mainElement = document.getElementById("main-view-target");
 

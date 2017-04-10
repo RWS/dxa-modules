@@ -1,5 +1,5 @@
 import { Store } from "redux";
-import { String } from "sdl-models";
+import { String } from "@sdl/models";
 import { language } from "store/reducers/Language";
 import { changeLanguage } from "store/actions/Actions";
 import { ILocalizationService, ILanguage } from "services/interfaces/LocalizationService";
@@ -11,7 +11,7 @@ interface IDics { [lang: string]: IDic; };
 
 export const DEFAULT_LANGUAGE: string = "en";
 export const DEFAULT_LANGUAGES = ["de", "en", "nl", "zh", "ja"];
-const LANGUAGE_LOCALSTORAGE: string =  "sdl-dita-delivery-app-langugae";
+const LANGUAGE_LOCALSTORAGE: string =  "sdl-dita-delivery-app-language";
 
 const LanguageMap = require("resources/resources.languages.resjson") as ILanguage[];
 

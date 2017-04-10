@@ -1,7 +1,7 @@
 /**
  * Load global stylesheets
  */
-import "sdl-controls-react-wrappers/dist/stylesheets/main";
+import "@sdl/controls-react-wrappers/dist/stylesheets/main";
 
 /**
  * Components

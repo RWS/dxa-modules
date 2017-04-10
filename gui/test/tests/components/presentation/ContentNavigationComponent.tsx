@@ -2,7 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { ContentNavigation, IContentNavigationItem, IContentNavigationProps } from "components/presentation/ContentNavigation";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
-import { TestBase } from "sdl-models";
+import { TestBase } from "@sdl/models";
 
 class ContentNavigationComponent extends TestBase {
 

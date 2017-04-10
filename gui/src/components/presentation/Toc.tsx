@@ -2,8 +2,8 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Promise } from "es6-promise";
 import { ITaxonomy } from "interfaces/Taxonomy";
-import { Button, ActivityIndicator, TreeView } from "sdl-controls-react-wrappers";
-import { TreeView as TreeViewControl, ITreeViewNode as IBaseTreeViewNode, ButtonPurpose } from "sdl-controls";
+import { Button, ActivityIndicator, TreeView } from "@sdl/controls-react-wrappers";
+import { TreeView as TreeViewControl, ITreeViewNode as IBaseTreeViewNode, ButtonPurpose } from "@sdl/controls";
 import { IAppContext } from "components/container/App";
 import { ErrorToc } from "components/presentation/ErrorToc";
 

@@ -28,6 +28,7 @@ export const normalizeProductReleaseVersion = (params: IPublicationsListPropsPar
 
 export const getPubForLang = (state: IState, publication: IPublication, language: string): IPublication => Publications.getPubForLang(state.publications, publication, language);
 export const isPubsLoading = (state: IState): boolean => Publications.isLoadnig(state.publications);
+export const isPublicationFound = (state: IState, pubId: string): boolean => Publications.isPublicationFound(state.publications, pubId);
 
 export const getPubListErrorMessage = (state: IState) => Publications.getLastError(state.publications);
 

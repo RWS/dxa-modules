@@ -118,3 +118,6 @@ export const normalizeProductReleaseVersion = (params: IPublicationsListPropsPar
     const value = typeof params === "string" ? params : params.productReleaseVersion || "";
     return String.normalize(value) === String.normalize(DEFAULT_UNKNOWN_PRODUCT_RELEASE_VERSION) ? null : value;
 };
+
+export const isPublicationFound = (state: IPublicationsState, publicationId: string): boolean =>
+    JSON.stringify(getPubById(state, publicationId)) !== JSON.stringify(notFound(publicationId));

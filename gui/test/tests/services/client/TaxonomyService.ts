@@ -1,5 +1,5 @@
 import { TaxonomyService } from "services/client/TaxonomyService";
-import { TestBase } from "sdl-models";
+import { TestBase } from "@sdl/models";
 
 class TaxonomyServiceTests extends TestBase {
 

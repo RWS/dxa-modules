@@ -68,8 +68,12 @@ export interface IPublicationContentProps {
      * @type {IProductReleaseVersion[]}
      * @memberOf IPublicationsListState
      */
-
     productReleaseVersions: IProductReleaseVersion[];
+    /**
+     *
+     * @type {string}
+     * @memberOf IPublicationContentProps
+     */
     productReleaseVersion: string;
     /**
      * Function to execute when publication is changing
@@ -78,7 +82,17 @@ export interface IPublicationContentProps {
      * @memberOf IPublicationContentProps
      */
     onPublicationChange?: (publicationId: string, pageId: string) => void;
+    /**
+     *
+     * @memberOf IPublicationContentProps
+     */
     onReleaseVersionChanged?: (publicationId: string, releaseVersions: string) => void;
+    /**
+     *
+     * @type {boolean}
+     * @memberOf IPublicationContentProps
+     */
+    isPublicationFound: boolean;
 }
 
 /**
@@ -254,14 +268,16 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                             }}
                             onSelectionChanged={this._onTocSelectionChanged.bind(this)}
                             error={tocError}
-                            onRetry={() => this._loadTocRootItems(publicationId)}
-                        >
+                            onRetry={() => this._loadTocRootItems(publicationId) }
+                            >
                             <span className="separator" />
                         </Toc>
                     </NavigationMenu>
                     <Breadcrumbs
                         loadItemPath={(breadcrumbItem: ITaxonomy): Promise<IBreadcrumbItem[]> => {
-                            const publicationTitle = publication.title;
+                            const publicationTitle = isPublicationFound ?
+                                publication.title || "" :
+                                localizationService.formatMessage("error.publication.not.found", [publication.id]);
                             const productFamilyTitle = publication.productFamily;
                             let breadCrumbPath = [{
                                 title: productFamilyTitle || localizationService.formatMessage("productfamilies.unknown.title"),

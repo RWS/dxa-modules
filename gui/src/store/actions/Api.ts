@@ -53,7 +53,6 @@ export const publicationsLoadingError = createAction(PUBLICATIONS_LOADING_ERROR)
 export const releaseVersionsLoading = createAction(RELEASE_VERSIONS_LOADING, (pubId) => pubId);
 export const releaseVersionsLoaded = createAction(RELEASE_VERSIONS_LOADED, (productFamily, releaseVersions) => ({ productFamily, releaseVersions }));
 
-
 /**
  * Publications fetcher
  *

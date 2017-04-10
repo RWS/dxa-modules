@@ -1,6 +1,6 @@
 import { Store } from "redux";
 
-import { TestBase } from "sdl-models";
+import { TestBase } from "@sdl/models";
 
 import { IState } from "store/interfaces/State";
 import { getPubsByLang, normalizeProductFamily, normalizeProductReleaseVersion,

@@ -1,5 +1,5 @@
 import { PublicationService } from "services/client/PublicationService";
-import { TestBase } from "sdl-models";
+import { TestBase } from "@sdl/models";
 import { FakeXMLHttpRequest } from "test/mocks/XmlHttpRequest";
 
 class PublicationServiceInvalidatable extends PublicationService {
