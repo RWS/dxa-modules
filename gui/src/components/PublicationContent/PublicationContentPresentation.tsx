@@ -21,6 +21,8 @@ import { IPublication } from "interfaces/Publication";
 import { IPublicationCurrentState } from "store/interfaces/State";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 
+import { DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE } from "models/Publications";
+
 import Version from "utils/Version";
 
 import "./PublicationContent.less";
@@ -167,7 +169,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
      * Invoked once, both on the client and server, immediately before the initial rendering occurs.
      */
     public fetchPublication(publicationId: string): void {
-       // this is temporary hack to move out loading data from this component
+        // this is temporary hack to move out loading data from this component
         if (publicationId) {
             // Load the page
             this._loadTocRootItems(publicationId);
@@ -187,10 +189,10 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         if (isPage(page) && !isDummyPage(page)) {
             this.fetchPage(publicationId, page);
         } else if (errorMessage) {
-           this._onPageContentRetrievFailed(publicationId, errorMessage);
-       }
+            this._onPageContentRetrievFailed(publicationId, errorMessage);
+        }
 
-       this.addResizeHandlers();
+        this.addResizeHandlers();
     }
 
     /**
@@ -200,18 +202,18 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
      * @memberOf PublicationContentPresentation
      */
     public componentWillReceiveProps(nextProps: Pub): void {
-       const { page, publicationId } = this.props;
-       const { publicationId: nextPubId, page: nextPage, errorMessage} = nextProps;
+        const { page, publicationId } = this.props;
+        const { publicationId: nextPubId, page: nextPage, errorMessage } = nextProps;
 
-       if (!isPage(nextPage) || nextPubId !== publicationId) {
+        if (!isPage(nextPage) || nextPubId !== publicationId) {
             this.fetchPublication(nextPubId);
-       }
+        }
 
-       if (isPage(nextPage) && !isDummyPage(nextPage) && nextPage.content !== page.content) {
+        if (isPage(nextPage) && !isDummyPage(nextPage) && nextPage.content !== page.content) {
             this.fetchPage(nextPubId, nextPage);
-       } else if (errorMessage) {
-           this._onPageContentRetrievFailed(nextPubId, errorMessage);
-       }
+        } else if (errorMessage) {
+            this._onPageContentRetrievFailed(nextPubId, errorMessage);
+        }
     }
 
     /**
@@ -223,7 +225,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         const { activeTocItemPath, selectedTocItem, activePageHeader } = this.state;
         const { services, router } = this.context;
         const { publicationId, pageId, page, publication, isPageLoading, errorMessage, productReleaseVersion, productReleaseVersions } = this.props;
-        const { taxonomyService } = services;
+        const { taxonomyService, localizationService } = services;
         const { rootItems } = this._toc;
         const tocError = this._toc.error;
         const selectedProductReleaseVersion = productReleaseVersion ? Version.normalize(productReleaseVersion) : undefined;
@@ -238,7 +240,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                         if (router) {
                             router.push(url);
                         }
-                    } }
+                    }}
                     url={pageId ?
                         Url.getPageUrl(publicationId, pageId, publication.title, page.title || (selectedTocItem && selectedTocItem.title) || "") :
                         Url.getPublicationUrl(publicationId, publication.title)}
@@ -249,11 +251,11 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                             rootItems={rootItems}
                             loadChildItems={(parentId: string): Promise<ITaxonomy[]> => {
                                 return taxonomyService.getSitemapItems(publicationId, parentId);
-                            } }
+                            }}
                             onSelectionChanged={this._onTocSelectionChanged.bind(this)}
                             error={tocError}
-                            onRetry={() => this._loadTocRootItems(publicationId) }
-                            >
+                            onRetry={() => this._loadTocRootItems(publicationId)}
+                        >
                             <span className="separator" />
                         </Toc>
                     </NavigationMenu>
@@ -262,8 +264,8 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                             const publicationTitle = publication.title;
                             const productFamilyTitle = publication.productFamily;
                             let breadCrumbPath = [{
-                                title: productFamilyTitle,
-                                url: Url.getProductFamilyUrl(productFamilyTitle || "", selectedProductReleaseVersion)
+                                title: productFamilyTitle || localizationService.formatMessage("productfamilies.unknown.title"),
+                                url: Url.getProductFamilyUrl(productFamilyTitle || DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE, selectedProductReleaseVersion)
                             }, {
                                 title: publicationTitle,
                                 url: Url.getPublicationUrl(publicationId, publicationTitle)
@@ -289,7 +291,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                             }
                         }}
                         selectedItem={selectedTocItem}
-                        />
+                    />
                     <ContentLanguageWarning />
                     <VersionSelector productReleaseVersions={productReleaseVersions}
                         selectedProductReleaseVersion={selectedProductReleaseVersion}
@@ -477,8 +479,8 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
     }
 
     private _navigateToOtherReleaseVersion(publicationId: string, releaseVersion: string): void {
-       if (this.props.onReleaseVersionChanged) {
-           this.props.onReleaseVersionChanged(publicationId, releaseVersion);
-       }
+        if (this.props.onReleaseVersionChanged) {
+            this.props.onReleaseVersionChanged(publicationId, releaseVersion);
+        }
     }
 }

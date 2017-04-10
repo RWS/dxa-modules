@@ -86,48 +86,6 @@ class PublicationServiceTests extends TestBase {
                 });
             });
 
-            it("returns a proper error when product family for publication cannot be retrieved", (done: () => void): void => {
-                publicationService.ivalidate();
-                const failMessage = "failure-retrieving-product-family-for-publication";
-                spyOn(window, "XMLHttpRequest").and.callFake(() => new FakeXMLHttpRequest(failMessage));
-                publicationService.getProductFamilyByPublicationId(publicationId).then(() => {
-                    fail("An error was expected.");
-                    done();
-                }).catch(error => {
-                    expect(error).toContain(failMessage);
-                    done();
-                });
-            });
-
-            it("can get product family for publication id", (done: () => void): void => {
-                publicationService.getProductFamilyByPublicationId(publicationId).then(family => {
-                    expect(family).toBeDefined();
-                    if (family) {
-                        expect(family.title).toBe("Mobile Phones");
-                    }
-                    done();
-                }).catch(error => {
-                    fail(`Unexpected error: ${error}`);
-                    done();
-                });
-            });
-
-            it("can get product family for publication id from memory", (done: () => void): void => {
-                const spy = spyOn(window, "XMLHttpRequest").and.callThrough();
-                expect(spy).not.toHaveBeenCalled();
-                publicationService.getProductFamilyByPublicationId(publicationId).then(family => {
-                    expect(family).toBeDefined();
-                    if (family) {
-                        expect(family.title).toBe("Mobile Phones");
-                        expect(spy).not.toHaveBeenCalled();
-                    }
-                    done();
-                }).catch(error => {
-                    fail(`Unexpected error: ${error}`);
-                    done();
-                });
-            });
-
             it("returns a proper error when release versions can not be retrieved", (done: () => void): void => {
                 publicationService.getProductFamilies().then(families => {
                     publicationService.ivalidate();

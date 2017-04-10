@@ -124,41 +124,6 @@ export class PublicationService implements IPublicationService {
     }
 
     /**
-     * Get the product family for a publication
-     *
-     * @param {string} publicationId Publication id
-     * @returns {Promise<IProductFamily>} Promise to return the product family
-     *
-     * @memberOf PublicationService
-     */
-    public getProductFamilyByPublicationId(publicationId: string): Promise<IProductFamily> {
-        const publication = this.getPublicationsModel();
-        return new Promise((resolve: (productFamily?: IProductFamily) => void, reject: (error: string | null) => void) => {
-            if (publication.isLoaded()) {
-                resolve(publication.getProductFamilyByPublicationId(publicationId));
-            } else {
-                let removeEventListeners: () => void;
-                const onLoad = () => {
-                    removeEventListeners();
-                    resolve(publication.getProductFamilyByPublicationId(publicationId));
-                };
-                const onLoadFailed = (event: Event & { data: { error: string } }) => {
-                    removeEventListeners();
-                    reject(event.data.error);
-                };
-                removeEventListeners = (): void => {
-                    publication.removeEventListener("load", onLoad);
-                    publication.removeEventListener("loadfailed", onLoadFailed);
-                };
-
-                publication.addEventListener("load", onLoad);
-                publication.addEventListener("loadfailed", onLoadFailed);
-                publication.load();
-            }
-        });
-    }
-
-    /**
      * Get the list of product release versions for a product ProductFamily
      * Are sorted by release time (latest to oldest)
      *

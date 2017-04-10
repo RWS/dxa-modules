@@ -2,10 +2,10 @@ import { connect } from "react-redux";
 import { PublicationContentPresentation } from "./PublicationContentPresentation";
 import { updateCurrentPublication } from "store/actions/Actions";
 import { setCurrentPublicationByReleaseVersion } from "store/actions/Api";
-import { getCurrentPub, getPubById, getPageById, getErrorMessage, isPageLoading as isPageLoadingGetter } from "store/reducers/Reducer";
+import { getCurrentPub, getPubById, getPageById, getErrorMessage,
+    isPageLoading as isPageLoadingGetter, getReleaseVersionsForPub } from "store/reducers/Reducer";
 import { IState } from "store/interfaces/State";
 import { isPage, isDummyPage } from "utils/Page";
-import { getReleaseVersionsForPub } from "store/reducers/Reducer";
 
 const mapStateToProps = (state: IState) => {
     const { publicationId, pageId, anchor} = getCurrentPub(state);

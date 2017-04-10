@@ -5,8 +5,7 @@ import { IPublicationService } from "services/interfaces/PublicationService";
 import {
     PAGE_LOADED, PAGE_LOADING, PAGE_ERROR,
     PUBLICATIONS_LOADED, PUBLICATIONS_LOADING, PUBLICATIONS_LOADING_ERROR,
-    RELEASE_VERSIONS_LOADING, RELEASE_VERSIONS_LOADED,
-    PRODUCT_FAMILY_LOADING, PRODUCT_FAMILY_LOADED
+    RELEASE_VERSIONS_LOADING, RELEASE_VERSIONS_LOADED
 } from "./Actions";
 
 import { getPubById, getPubList } from "store/reducers/Reducer";
@@ -54,8 +53,6 @@ export const publicationsLoadingError = createAction(PUBLICATIONS_LOADING_ERROR)
 export const releaseVersionsLoading = createAction(RELEASE_VERSIONS_LOADING, (pubId) => pubId);
 export const releaseVersionsLoaded = createAction(RELEASE_VERSIONS_LOADED, (productFamily, releaseVersions) => ({ productFamily, releaseVersions }));
 
-export const productFamilyLoading = createAction(PRODUCT_FAMILY_LOADING, (pubId) => pubId);
-export const productFamilyLoaded = createAction(PRODUCT_FAMILY_LOADED, (pubId, productFamily) => ({ pubId, productFamily }));
 
 /**
  * Publications fetcher
@@ -120,18 +117,6 @@ export const fetchProductReleaseVersionsByProductFamily = (publicationService: I
             .then(
                 (releaseVersions) => dispatch(releaseVersionsLoaded(productFamily, releaseVersions)),
                 (errorMessage) => dispatch(releaseVersionsLoaded(productFamily, { title: errorMessage, value: "" }))
-            );
-    };
-};
-
-export const fetchProductFamily = (publicationService: IPublicationService, publicationId: string): IDispatcherFunction => {
-    return dispatch => {
-        dispatch(productFamilyLoading());
-        publicationService
-            .getProductFamilyByPublicationId(publicationId)
-            .then(
-                (productFamily) => dispatch(productFamilyLoaded(publicationId, productFamily)),
-                (errorMessage) => dispatch(productFamilyLoaded(publicationId, { title: errorMessage, value: "" }))
             );
     };
 };

@@ -208,24 +208,6 @@ class PublicationsModel extends TestBase {
                 }
             });
 
-            it("can resolve product family for publication", (): void => {
-                const productFamily = publicationModel.getProductFamilyByPublicationId("Pub3");
-                expect(productFamily).toBeDefined();
-                if (productFamily) {
-                    expect(productFamily.title).toBe("Family 2");
-                }
-            });
-
-            it("can resolve unknown product family for publication", (): void => {
-                const unknownProductFamilyTitle: string = localization.formatMessage("productfamilies.unknown.title");
-                const productFamily = publicationModel.getProductFamilyByPublicationId("Pub");
-                expect(productFamily).toBeDefined();
-                if (productFamily) {
-                    expect(productFamily.title).toBe(unknownProductFamilyTitle);
-                    expect(productFamily.hasWarning).toBe(true);
-                }
-            });
-
             it("can resolve product release versions for an unknown product family", (): void => {
                 const unknownProductFamilyTitle: string = localization.formatMessage("productfamilies.unknown.title");
                 const unknownProductReleaseVersionTitle: string = localization.formatMessage("productreleaseversions.unknown.title");

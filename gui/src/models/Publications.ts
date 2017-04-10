@@ -129,34 +129,6 @@ export class Publications extends LoadableObject {
         return this._productFamilies || [];
     }
 
-    /**
-     * Get the Product Family for a publication
-     *
-     * @param {string} publicationId Publication id
-     * @returns {IProductFamily | undefined}
-     */
-    public getProductFamilyByPublicationId(publicationId: string): IProductFamily | undefined {
-        var publicationsList = this.getPublications().filter(pub => pub.id === publicationId);
-        var publication = publicationsList[0];
-        if (publication) {
-            var family = publication.productFamily || undefined;
-            if (family === undefined) {
-                return {
-                    title: this._unknownProductFamilyTitle,
-                    description: this._unknownProductFamilyDescription,
-                    hasWarning: true
-                };
-            }
-            else {
-                return {
-                    // Only title now, description would go here later on
-                    title: family
-                };
-            }
-        }
-        return undefined;
-    };
-
     /* Overloads */
     protected _executeLoad(reload: boolean): void {
         const url = Api.getPublicationsUrl();

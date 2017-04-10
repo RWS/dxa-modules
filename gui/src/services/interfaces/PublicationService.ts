@@ -50,16 +50,6 @@ export interface IPublicationService {
     getProductReleaseVersions(productFamily: string): Promise<IProductReleaseVersion[]>;
 
     /**
-     * Get the product family for a publication
-     *
-     * @param {string} publicationId Publication id
-     * @returns {Promise<IProductFamily>} Promise to return the product family
-     *
-     * @memberOf PublicationService
-     */
-    getProductFamilyByPublicationId(publicationId: string): Promise<IProductFamily>;
-
-    /**
      * Get the list of product release versions for a publication
      * Are sorted by release time (latest to oldest)
      *
