@@ -16,6 +16,13 @@
     <name>DXA Modules - Context Expressions support, Legacy implementation</name>
     <description>Legacy implementation of DXA Context Expressions support module</description>
 
+    <scm>
+        <url>https://github.com/sdl/dxa-modules</url>
+        <connection>scm:git:git@github.com:sdl/dxa-modules.git</connection>
+        <developerConnection>scm:git:git@github.com:sdl/dxa-modules.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
     <dependencies>
 
         <dependency>

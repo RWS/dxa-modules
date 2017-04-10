@@ -16,6 +16,13 @@
     <name>DXA Modules - Test/Example reference implementation of DXA module</name>
     <description>Example/reference/test implementation of DXA module</description>
 
+    <scm>
+        <url>https://github.com/sdl/dxa-modules</url>
+        <connection>scm:git:git@github.com:sdl/dxa-modules.git</connection>
+        <developerConnection>scm:git:git@github.com:sdl/dxa-modules.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
     <dependencies>
         <dependency>
             <groupId>com.sdl.dxa</groupId>

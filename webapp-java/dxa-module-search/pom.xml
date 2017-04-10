@@ -14,6 +14,13 @@
     <name>DXA Modules - Search</name>
     <description>Implementation of DXA Search module</description>
 
+    <scm>
+        <url>https://github.com/sdl/dxa-modules</url>
+        <connection>scm:git:git@github.com:sdl/dxa-modules.git</connection>
+        <developerConnection>scm:git:git@github.com:sdl/dxa-modules.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
     <properties>
         <solr-solrj.version>5.3.1</solr-solrj.version>
         <aws-java-sdk.version>1.10.32</aws-java-sdk.version>

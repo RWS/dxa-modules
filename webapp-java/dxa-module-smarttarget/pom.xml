@@ -15,6 +15,13 @@
     <name>DXA Modules - XO support, R2 implementation</name>
     <description>R2 implementation of DXA XO support</description>
 
+    <scm>
+        <url>https://github.com/sdl/dxa-modules</url>
+        <connection>scm:git:git@github.com:sdl/dxa-modules.git</connection>
+        <developerConnection>scm:git:git@github.com:sdl/dxa-modules.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
     <dependencies>
 
         <dependency>
