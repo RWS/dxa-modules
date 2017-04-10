@@ -238,7 +238,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
     public render(): JSX.Element {
         const { activeTocItemPath, selectedTocItem, activePageHeader } = this.state;
         const { services, router } = this.context;
-        const { publicationId, pageId, page, publication, isPageLoading, errorMessage, productReleaseVersion, productReleaseVersions } = this.props;
+        const { publicationId, pageId, page, publication, isPageLoading, errorMessage, productReleaseVersion, productReleaseVersions, isPublicationFound } = this.props;
         const { taxonomyService, localizationService } = services;
         const { rootItems } = this._toc;
         const tocError = this._toc.error;
