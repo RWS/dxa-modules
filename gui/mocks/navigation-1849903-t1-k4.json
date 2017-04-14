@@ -7,9 +7,73 @@
     "HasChildNodes": true,
     "Items": [
       {
+        "Id": "t1-k2",
+        "Title": "בירה",
+        "Url": "/app/1849903/1845579/%d7%91%d7%99%d7%a8%d7%94/%d7%91%d7%99%d7%a8%d7%94",
+        "IsAbstract": false,
+        "HasChildNodes": false,
+        "Items": []
+      },
+      {
+        "Id": "t1-k3",
+        "Title": "היסטוריה",
+        "Url": "/app/1849903/1845583/%d7%91%d7%99%d7%a8%d7%94/%d7%94%d7%99%d7%a1%d7%98%d7%95%d7%a8%d7%99%d7%94",
+        "IsAbstract": false,
+        "HasChildNodes": false,
+        "Items": []
+      },
+      {
         "Id": "t1-k4",
         "Title": "תהליך ההכנה",
         "Url": "/app/1849903/1845587/%d7%91%d7%99%d7%a8%d7%94/%d7%aa%d7%94%d7%9c%d7%99%d7%9a-%d7%94%d7%94%d7%9b%d7%a0%d7%94",
+        "IsAbstract": false,
+        "HasChildNodes": false,
+        "Items": []
+      },
+      {
+        "Id": "t1-k5",
+        "Title": "חברות בירה",
+        "Url": "/app/1849903/1845591/%d7%91%d7%99%d7%a8%d7%94/%d7%97%d7%91%d7%a8%d7%95%d7%aa-%d7%91%d7%99%d7%a8%d7%94",
+        "IsAbstract": false,
+        "HasChildNodes": false,
+        "Items": []
+      },
+      {
+        "Id": "t1-k6",
+        "Title": "בירה ביתית",
+        "Url": "/app/1849903/1845595/%d7%91%d7%99%d7%a8%d7%94/%d7%91%d7%99%d7%a8%d7%94-%d7%91%d7%99%d7%aa%d7%99%d7%aa",
+        "IsAbstract": false,
+        "HasChildNodes": false,
+        "Items": []
+      },
+      {
+        "Id": "t1-k7",
+        "Title": "בירה ובריאות",
+        "Url": "/app/1849903/1845599/%d7%91%d7%99%d7%a8%d7%94/%d7%91%d7%99%d7%a8%d7%94-%d7%95%d7%91%d7%a8%d7%99%d7%90%d7%95%d7%aa",
+        "IsAbstract": false,
+        "HasChildNodes": false,
+        "Items": []
+      },
+      {
+        "Id": "t1-k8",
+        "Title": "לקריאה נוספת",
+        "Url": "/app/1849903/1845641/%d7%91%d7%99%d7%a8%d7%94/%d7%9c%d7%a7%d7%a8%d7%99%d7%90%d7%94-%d7%a0%d7%95%d7%a1%d7%a4%d7%aa",
+        "IsAbstract": false,
+        "HasChildNodes": false,
+        "Items": []
+      },
+      {
+        "Id": "t1-k9",
+        "Title": "קישורים חיצוניים",
+        "Url": "/app/1849903/1845646/%d7%91%d7%99%d7%a8%d7%94/%d7%a7%d7%99%d7%a9%d7%95%d7%a8%d7%99%d7%9d-%d7%97%d7%99%d7%a6%d7%95%d7%a0%d7%99%d7%99%d7%9d",
+        "IsAbstract": false,
+        "HasChildNodes": false,
+        "Items": []
+      },
+      {
+        "Id": "t1-k10",
+        "Title": "הערות שוליים",
+        "Url": "/app/1849903/1845651/%d7%91%d7%99%d7%a8%d7%94/%d7%94%d7%a2%d7%a8%d7%95%d7%aa-%d7%a9%d7%95%d7%9c%d7%99%d7%99%d7%9d",
         "IsAbstract": false,
         "HasChildNodes": false,
         "Items": []
