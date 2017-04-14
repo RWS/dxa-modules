@@ -1,6 +1,6 @@
 {
-  "name": "sdl-dita-delivery-web-app-gui",
-  "version": "1.0.0-SNAPSHOT",
+  "name": "@sdl/delivery-ish-dd-webapp-gui",
+  "version": "0.2.0-SNAPSHOT",
   "description": "GUI of the SDL Dita Delivery Web Application.",
   "main": "dist/lib/Lib.js",
   "typings": "dist/typings/src/Lib.d.ts",
@@ -10,6 +10,7 @@
     "es6-promise": "~4.0.5",
     "lodash": "^4.17.4",
     "napa": "~2.3.0",
+    "prismjs": "^1.6.0",
     "react": "~15.3.2",
     "react-dom": "~15.3.2",
     "react-redux": "^5.0.3",
@@ -18,9 +19,9 @@
     "redux-actions": "^1.2.2",
     "redux-devtools-extension": "^2.13.0",
     "redux-thunk": "^2.2.0",
-    "sdl-controls": "~0.1.0-30",
-    "sdl-controls-react-wrappers": "~0.1.0-28",
-    "sdl-models": "~0.1.0-6",
+    "@sdl/controls": "~0.1.0-30",
+    "@sdl/controls-react-wrappers": "~0.1.0-28",
+    "@sdl/models": "~0.1.0-6",
     "ts-helpers": "~1.1.2"
   },
   "devDependencies": {
@@ -59,7 +60,7 @@
     "react-addons-test-utils": "^15.3.2",
     "remap-istanbul": "~0.8.3",
     "run-sequence": "~1.2.1",
-    "sdl-icons": "1.1.0-9",
+    "@sdl/icons": "1.1.0-11",
     "through2": "~2.0.1",
     "ts-loader": "~1.0.0",
     "tslint": "~4.5.1",
@@ -79,10 +80,6 @@
     "test": "gulp test -- --max_old_space_size=2048",
     "test-debug": "gulp serve:test -- --max_old_space_size=2048",
     "install": "napa"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://stash.sdl.com/scm/kcwa/web-app.git"
   },
   "author": "jbevers@sdl.com",
   "license": "Apache-2.0",

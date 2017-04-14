@@ -1,19 +1,22 @@
 import * as ClassNames from "classnames";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { ActivityIndicator, Button } from "sdl-controls-react-wrappers";
-import { ButtonPurpose } from "sdl-controls";
+import * as Prism from "prismjs";
+
+import { ActivityIndicator, Button } from "@sdl/controls-react-wrappers";
+import { ButtonPurpose } from "@sdl/controls";
 import { Html, IHeader } from "utils/Html";
 import { Url } from "utils/Url";
 import { path } from "utils/Path";
 import { ContentNavigation, IContentNavigationItem } from "components/presentation/ContentNavigation";
 import { Error } from "components/presentation/Error";
 import { IAppContext } from "components/container/App";
+import { IPageService } from "services/interfaces/PageService";
 
 import "components/presentation/styles/Page";
 import "dita-ot/styles/commonltr";
 import "dita-ot/styles/commonrtl";
-import { IPageService } from "services/interfaces/PageService";
+import "prismjs/themes/prism";
 
 /**
  * Page component props
@@ -23,12 +26,12 @@ import { IPageService } from "services/interfaces/PageService";
  */
 export interface IPageProps {
     /**
-     * Show activity indicator
+     * Page is loading
      *
      * @type {boolean}
      * @memberOf IPageProps
      */
-    showActivityIndicator: boolean;
+    isLoading: boolean;
 
     /**
      * Page id
@@ -72,14 +75,6 @@ export interface IPageProps {
      * @memberOf IPageProps
      */
     anchor?: string;
-    /**
-     * Scroll offset using for jumping to anchors
-     * For example when there is a topbar overlaying part of the component
-     *
-     * @type {number}
-     * @memberOf IPageProps
-     */
-    scrollOffset?: number;
     /**
      * Header which is active.
      * The header inside the page which is the first one visible in the view port.
@@ -145,6 +140,7 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
     public context: IAppContext;
 
     private _hyperlinks: { element: HTMLElement, handler: (e: Event) => void; }[] = [];
+    private _codeBlocks: HTMLElement[] = [];
     private _lastPageAnchor?: string;
     private _historyUnlisten: () => void;
 
@@ -163,7 +159,6 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
      */
     public componentWillMount(): void {
         const { router } = this.context;
-
         if (router) {
             this._historyUnlisten = router.listen(() => {
                 this._lastPageAnchor = undefined;
@@ -197,8 +192,8 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
         const appClass = ClassNames(direction, "page-content");
 
         return (
-            <div className={"sdl-dita-delivery-page"} style={props.showActivityIndicator ? { overflow: "hidden" } : {}} >
-                {props.showActivityIndicator ? <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} /> : null}
+            <div className={"sdl-dita-delivery-page"} style={props.isLoading ? { overflow: "hidden" } : {}} >
+                {props.isLoading ? <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} /> : null}
                 {props.children}
                 <div className={"sdl-dita-delivery-content-navigation-wrapper"}>
                     <ContentNavigation navItems={navItems} activeNavItemId={activeNavItemId} />
@@ -220,7 +215,7 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
      * Invoked once, only on the client (not on the server), immediately after the initial rendering occurs.
      */
     public componentDidMount(): void {
-        this._enableHyperlinks();
+        this._postProcessHtml();
         this._collectHeadersLinks();
     }
 
@@ -228,7 +223,7 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
      * Invoked immediately after the component's updates are flushed to the DOM. This method is not called for the initial render.
      */
     public componentDidUpdate(): void {
-        this._enableHyperlinks();
+        this._postProcessHtml();
         this._collectHeadersLinks();
         this._jumpToAnchor();
     }
@@ -254,12 +249,33 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
     }
 
     /**
-     * Make hyperlinks navigate when clicked
+     * Post process HTML
+     *
+     * @private
+     *
+     * @memberOf Page
      */
-    private _enableHyperlinks(): void {
+    private _postProcessHtml(): void {
         const props = this.props;
         const domNode = ReactDOM.findDOMNode(this);
         if (domNode) {
+
+            //Highlight code blocks
+            const codeBlocks = this._codeBlocks;
+            const highlightBlocks = domNode.querySelectorAll(".page-content pre.codeblock code");
+            for (let i: number = 0, length: number = highlightBlocks.length; i < length; i++) {
+                const block = highlightBlocks.item(i) as HTMLElement;
+                const isAdded = codeBlocks.indexOf(block) > -1;
+                if (!isAdded) {
+                    if (!block.classList.contains("language-markup")) {
+                        block.classList.add("language-markup");
+                    }
+                    codeBlocks.push(block);
+                    Prism.highlightElement(block, false);
+                }
+            }
+
+            // Make hyperlinks navigate when clicked
             const anchors = domNode.querySelectorAll(".page-content a");
             const hyperlinks = this._hyperlinks;
             for (let i: number = 0, length: number = anchors.length; i < length; i++) {
@@ -328,9 +344,9 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
      * Jump to an anchor in the page
      */
     private _jumpToAnchor(): void {
-        const { anchor, scrollOffset } = this.props;
+        const { anchor, isLoading } = this.props;
         // Keep track of the previous anchor to allow scrolling
-        if (anchor && (this._lastPageAnchor !== anchor)) {
+        if (!isLoading && anchor && (this._lastPageAnchor !== anchor)) {
             const domNode = ReactDOM.findDOMNode(this) as HTMLElement;
             if (domNode) {
                 const pageContentNode = domNode.querySelector(".page-content") as HTMLElement;
@@ -338,19 +354,9 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
                 if (header) {
                     this._lastPageAnchor = anchor;
 
-                    let offsetTop = 0;
-                    let currentNode = header;
-                    while (currentNode && currentNode.offsetParent) {
-                        offsetTop += currentNode.offsetTop;
-                        currentNode = currentNode.offsetParent as HTMLElement;
-                    }
-
-                    // TODO: make sure images are loaded before jumping to the anchor
-                    // Use a timeout to make sure all components are rendered
-                    setTimeout((): void => {
-                        const topPos = offsetTop - (scrollOffset || 0);
-                        window.scrollTo(0, topPos);
-                    }, 0);
+                    setTimeout(() => {
+                        Html.scrollIntoView(document.body, header, { force: true });
+                    }, 100);
                 }
             }
         }

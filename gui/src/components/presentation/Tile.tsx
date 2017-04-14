@@ -2,8 +2,8 @@ import * as React from "react";
 import { Promise } from "es6-promise";
 import { IAppContext } from "components/container/App";
 import { String as StringHelper } from "utils/String";
-import { ActivityIndicator, Button } from "sdl-controls-react-wrappers";
-import { ButtonPurpose } from "sdl-controls";
+import { ActivityIndicator, Button } from "@sdl/controls-react-wrappers";
+import { ButtonPurpose } from "@sdl/controls";
 
 import "components/presentation/styles/Tile";
 
@@ -177,7 +177,9 @@ export class Tile extends React.Component<ITileProps, ITileState> {
         return (
             <div className="sdl-dita-delivery-tile">
                 <div className="tile-header-wrapper">
-                    <h3 className={tile.hasWarning ? "exclamation-mark" : ""}>{StringHelper.truncate(tile.title, TILE_TITLE_TRUNCATE)}</h3>
+                    <h3 className={tile.hasWarning ? "exclamation-mark" : ""}>
+                        <span>{StringHelper.truncate(tile.title, TILE_TITLE_TRUNCATE)}</span>
+                    </h3>
                 </div>
                 <hr />
                 <div className="tile-content">

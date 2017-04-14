@@ -1,11 +1,11 @@
-/*import * as React from "react";
+import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as TestUtils from "react-addons-test-utils";
 import { Router, Route } from "react-router";
 import { HomePresentation } from "components/Home/HomePresentation";
 import { PublicationContentPresentation } from "components/PublicationContent/PublicationContentPresentation";
-import { ActivityIndicator } from "sdl-controls-react-wrappers";
-import { TestBase } from "sdl-models";
+import { ActivityIndicator } from "@sdl/controls-react-wrappers";
+import { TestBase } from "@sdl/models";
 import { PublicationService } from "test/mocks/services/PublicationService";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 import { hashHistory } from "react-router";
@@ -21,7 +21,7 @@ class HomeComponent extends TestBase {
 
     public runTests(): void {
 
-        describe(`Home component tests.`, (): void => {
+        xdescribe(`Home component tests.`, (): void => {
             const target = super.createTargetElement();
 
             afterEach(() => {
@@ -94,7 +94,7 @@ class HomeComponent extends TestBase {
     private _renderComponent(target: HTMLElement, pubId?: string, loadingPage?: boolean): ComponentWithContext {
         const publicationId = pubId || "";
         const pageId = "";
-        const publication = {id: publicationId, title: ""};
+        const publication = { id: publicationId, title: "", createdOn: new Date(), version: "1", logicalId: "GUID-123" };
         const isPageLoading = loadingPage || false;
 
         const store = configureStore();
@@ -107,12 +107,14 @@ class HomeComponent extends TestBase {
                             <PublicationContentPresentation
                                 publicationId={publicationId}
                                 publication={publication}
-                                pageId = {pageId}
-                                anchor = ""
+                                pageId={pageId}
+                                anchor=""
                                 page={dummyPage(pageId)}
                                 isPageLoading={isPageLoading}
-                                productReleaseVersions=[]
-                                errorMessage="" />
+                                productReleaseVersions={[]}
+                                productReleaseVersion={""}
+                                errorMessage=""
+                                isPublicationFound={true}/>
                         </HomePresentation></Provider>)} />
                     </Router>
                 </ComponentWithContext>
@@ -120,4 +122,4 @@ class HomeComponent extends TestBase {
     }
 }
 
-new HomeComponent().runTests();*/
+new HomeComponent().runTests();

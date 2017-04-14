@@ -69,10 +69,9 @@ const noContent = (props: IContentLanguageWarningProps): JSX.Element => {
 const thereIsContent = (props: IContentLanguageWarningProps): JSX.Element => {
     const { contentLanguage, uiLanguage } = props;
     const { id: publicationId } = props.languagePublication;
-    const { id: pageId } = props.languagePage;
     return <p>
             {localization.formatMessage("warning.different.language.content", [localization.isoToName(contentLanguage), localization.isoToName(uiLanguage)])}&nbsp;
-            <PageLink publicationId={publicationId} pageId={pageId}>
+            <PageLink publicationId={publicationId}>
                 {localization.formatMessage("warning.change.language")}
             </PageLink>.
         </p>;

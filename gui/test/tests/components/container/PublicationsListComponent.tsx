@@ -2,8 +2,8 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as TestUtils from "react-addons-test-utils";
 import { PublicationsListPresentation } from "components/PublicationsList/PublicationsListPresentation";
-import { ActivityIndicator, Button, DropdownList } from "sdl-controls-react-wrappers";
-import { TestBase } from "sdl-models";
+import { ActivityIndicator, Button, DropdownList } from "@sdl/controls-react-wrappers";
+import { TestBase } from "@sdl/models";
 import { PublicationService } from "test/mocks/services/PublicationService";
 import { TaxonomyService } from "test/mocks/services/TaxonomyService";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
@@ -72,6 +72,7 @@ class PublicationsListComponent extends TestBase {
                     id: "1",
                     title: "Publication 1",
                     createdOn: new Date(),
+                    language: "en",
                     version: "1",
                     logicalId: "GUID-123",
                     productFamily: "prod-family"
@@ -79,6 +80,7 @@ class PublicationsListComponent extends TestBase {
                     id: "2",
                     title: "Publication 2",
                     createdOn: new Date(),
+                    language: "en",
                     version: "1",
                     logicalId: "GUID-123",
                     productFamily: "prod-family"
@@ -86,6 +88,7 @@ class PublicationsListComponent extends TestBase {
                     id: "3",
                     title: "Publication 3",
                     createdOn: new Date(),
+                    language: "en",
                     version: "1",
                     logicalId: "GUID-123",
                     productFamily: "prod-family"
@@ -101,7 +104,6 @@ class PublicationsListComponent extends TestBase {
                     expect(h3[0].textContent).toBe(publications[0].title);
                     expect(h3[1].textContent).toBe(publications[1].title);
                     expect(h3[2].textContent).toBe(publications[2].title);
-
                     done();
                 }, 500);
             });
@@ -255,7 +257,7 @@ class PublicationsListComponent extends TestBase {
     }
 
     private _renderComponent(target: HTMLElement, publications: IPublication[],
-                            productFamily?: string, productReleaseVersions: IProductReleaseVersion[] = []): PublicationsListPresentation {
+        productFamily?: string, productReleaseVersions: IProductReleaseVersion[] = []): PublicationsListPresentation {
         const store = configureStore({});
         const selectedProductVersion = productReleaseVersions[0] ? productReleaseVersions[0].title : "";
         const comp = ReactDOM.render(
@@ -264,10 +266,10 @@ class PublicationsListComponent extends TestBase {
                     <ComponentWithContext {...services}>
                         <PublicationsListPresentation
                             publications={publications}
-                            productReleaseVersions = {productReleaseVersions || []}
-                            selectedProductVersion = {selectedProductVersion}
+                            productReleaseVersions={productReleaseVersions || []}
+                            selectedProductVersion={selectedProductVersion}
                             isLoading={!publications.length}
-                            uiLanguage = "en"
+                            uiLanguage="en"
                             params={{ productFamily: productFamily || "prod-family" }} />
                     </ComponentWithContext>
                 </Provider>

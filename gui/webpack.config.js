@@ -10,7 +10,7 @@ module.exports = (isTest, isDebug) => {
         main: './src/Main.tsx',
         server: './src/Server.tsx',
         lib: './src/Lib.ts',
-        vendor: ['classnames', 'es6-promise', 'react-router', 'ts-helpers', 'sdl-models', 'sdl-controls', 'sdl-controls-react-wrappers', 'babel-polyfill']
+        vendor: ['classnames', 'es6-promise', 'react-router', 'ts-helpers', '@sdl/models', '@sdl/controls', '@sdl/controls-react-wrappers', 'babel-polyfill']
     };
     const testEntries = Object.assign({
         test: './test/Main.ts',
@@ -27,7 +27,7 @@ module.exports = (isTest, isDebug) => {
         },
         devtool: 'source-map',
         resolve: {
-            // Needed to resolve dependencies to react inside sdl-controls-react-wrappers
+            // Needed to resolve dependencies to react inside @sdl/controls-react-wrappers
             alias: {
                 React: 'react',
                 ReactDOM: 'react-dom',
@@ -72,7 +72,7 @@ module.exports = (isTest, isDebug) => {
             'react-dom': 'ReactDOM',
             'react-dom/server': 'ReactDOMServer',
             'react-addons-test-utils': 'React.addons.TestUtils',
-            // Map aliases from  sdl-controls-react-wrappers
+            // Map aliases from  @sdl/controls-react-wrappers
             React: 'React',
             ReactDOM: 'ReactDOM',
             ReactDOMServer: 'ReactDOMServer'
@@ -82,13 +82,14 @@ module.exports = (isTest, isDebug) => {
             new HtmlWebpackPlugin({
                 template: './src/index.html',
                 filename: '../index.html',
-                favicon: './node_modules/sdl-icons/icons/favicon.ico',
+                favicon: './node_modules/@sdl/icons/icons/favicon.ico',
                 hash: true,
                 excludeChunks: ['lib', 'test', 'server']
             }),
+            /* Disabled visualizer as it takes too much memory, only enable when needed
             new Visualizer({
                 filename: '../bundle.stats.html'
-            })
+            })*/
         ],
         // What information should be printed to the console
         stats: {

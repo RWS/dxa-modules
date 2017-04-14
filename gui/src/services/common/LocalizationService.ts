@@ -1,5 +1,5 @@
 import { Store } from "redux";
-import { String } from "sdl-models";
+import { String } from "@sdl/models";
 import { language } from "store/reducers/Language";
 import { changeLanguage } from "store/actions/Actions";
 import { ILocalizationService, ILanguage } from "services/interfaces/LocalizationService";
@@ -10,17 +10,17 @@ interface IDic { [path: string]: string; };
 interface IDics { [lang: string]: IDic; };
 
 export const DEFAULT_LANGUAGE: string = "en";
+export const DEFAULT_LANGUAGES = ["de", "en", "nl", "zh", "ja"];
+const LANGUAGE_LOCALSTORAGE: string =  "sdl-dita-delivery-app-language";
 
-const LANGUAGE_LOCALSTORAGE: string =  "sdl-dita-delivery-app-langugae";
-// Need to be loaded or configured somehow.
-const Languages = ["en", "nl"];
+const LanguageMap = require("resources/resources.languages.resjson") as ILanguage[];
 
 const loadDics = (langs: string[]): IDics => Object.assign({},
      ...langs.map(lang => require(`resources/resources.${lang}`))
     .map((dictionary: {}) => dictionary as IDic)
     .map((dictionary: IDic, index: number) => ({[langs[index]]: dictionary})));
 
-const Resources: IDics = loadDics(Languages);
+const Resources: IDics = loadDics(DEFAULT_LANGUAGES);
 const translate = (lang: string) => (path: string) => lang in Resources ? Resources[lang][path] : null;
 
 const formatMessage = (resource: string, variables?: string[]) => Array.isArray(variables) ? String.format(resource, variables) : resource;
@@ -65,7 +65,19 @@ export class LocalizationService implements ILocalizationService {
 
             if (newLanguage !== this.language) {
                 this.language = newLanguage;
-                localStorage.setItem(LANGUAGE_LOCALSTORAGE, this.language);
+
+                // Safari and Chrome are supports LocalStorage, but we always get the QuotaExceededError in Safari|Chrome Private Browser Mode.
+                // Using try/catch for now, to prevent the rest of javascript from breaking
+                // Some others sollution that we can do in future:
+                //      - implement Fake LocalStorage for private browser mode;
+                //      - use third party library
+                //      - show message for user that browser does not support storing settings locally in Private Mode
+                try {
+                    localStorage.setItem(LANGUAGE_LOCALSTORAGE, this.language);
+                } catch (e) {
+                    console.warn(`LocalStorage exception: ${e}`);
+                }
+
                 this.reloadPage();
             }
         });
@@ -89,14 +101,7 @@ export class LocalizationService implements ILocalizationService {
      * @returns {ILanguage[]}
      */
     public getLanguages(): ILanguage[] {
-        let languages = [];
-        languages.push({"name": "Deutsch", "iso": "de"});
-        languages.push({"name": "English", "iso": "en"});
-        languages.push({"name": "עברית", "iso": "he"});
-        languages.push({"name": "日本語", "iso": "ja"});
-        languages.push({"name": "Nederlands", "iso": "nl"});
-        languages.push({"name": "中文", "iso": "zh"});
-        return languages;
+        return DEFAULT_LANGUAGES.map((isoCode: string): ILanguage => ({"name": this.isoToName(isoCode), "iso": isoCode}));
     }
 
     /**
@@ -106,8 +111,7 @@ export class LocalizationService implements ILocalizationService {
      * @returns {string}
      */
     public isoToName(iso: string): string {
-        const languages = this.getLanguages();
-        const options = languages.filter((language: ILanguage) => language.iso == iso);
+        const options = LanguageMap.filter((language: ILanguage) => language.iso == iso);
         return options[0] && options[0].name || iso;
     }
 
@@ -118,8 +122,7 @@ export class LocalizationService implements ILocalizationService {
      * @returns {string}
      */
     public nameToIso(name: string): string {
-        const languages = this.getLanguages();
-        const options = languages.filter((language: ILanguage) => language.name == name);
+        const options = LanguageMap.filter((language: ILanguage) => language.name == name);
         return options[0] && options[0].iso || name;
     }
 

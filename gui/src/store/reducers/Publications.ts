@@ -1,15 +1,21 @@
+import { find, chain } from "lodash";
 import { PUBLICATIONS_LOADED, PUBLICATIONS_LOADING } from "store/actions/Actions";
 import { IPublication } from "interfaces/Publication";
 import { handleAction, combineReducers, combine } from "./CombineReducers";
 import { PUBLICATIONS_LOADING_ERROR } from "store/actions/Actions";
 import { IPublicationsMap, IPublicationsState } from "store/interfaces/State";
+import { DEFAULT_LANGUAGE } from "services/common/LocalizationService";
+import { DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE, DEFAULT_UNKNOWN_PRODUCT_RELEASE_VERSION } from "models/Publications";
+import { IPublicationsListPropsParams } from "components/PublicationsList/PublicationsListPresentation";
+import { IState } from "store/interfaces/State";
 import Version from "utils/Version";
+import { String } from "utils/String";
 
 const buildMap = (currentMap: IPublicationsMap, publications: IPublication[]) => {
     return Object.assign({}, currentMap, ...publications.map(publication => ({[publication.id]: publication})));
 };
 
-const notFound = (id: string): IPublication => ({
+export const notFound = (id: string): IPublication => ({
     id,
     title: "",
     logicalId: "",
@@ -82,12 +88,36 @@ export const getPubById = (state: IPublicationsState, id: string): IPublication 
 
 export const getPubsByLang = (state: IPublicationsState, language: string) => getPubList(state, { language });
 
-export const getPubByIdAndLang = (state: IPublicationsState, hostPubId: string, language: string) => {
-    const currentVersionRef = getPubById(state, hostPubId).versionRef;
-    return getPubList(state)
-        .filter((publication: IPublication) => publication.versionRef === currentVersionRef)
-        .find((publication: IPublication) => publication.language === language) || notFound(hostPubId);
+export const getPubForLang = (state: IPublicationsState, publication: IPublication, language: string) => {
+    return getPubList(state, {
+        "!id": publication.id,
+        language,
+        versionRef: publication.versionRef,
+        productReleaseVersion: publication.productReleaseVersion
+    })[0] || notFound(publication.id);
+};
+
+export const getPubListRepresentatives = (state: IState, filter: {}): IPublication[] => {
+    // Groups publications by versionRef
+    // find one we need by language or fallback language
+    return chain(getPubList(state.publications, filter))
+        .groupBy("versionRef")
+        .values()
+        .flatMap((pubsByRef: IPublication[]) => find(pubsByRef, {language: state.language})
+                                             || find(pubsByRef, {language: DEFAULT_LANGUAGE}))
+        .value()
+        .filter(publiction => publiction !== undefined);
 };
 
 export const isLoadnig = (state: IPublicationsState): boolean => state.isLoading;
 export const getLastError = (state: IPublicationsState): string => state.lastError;
+
+export const normalizeProductFamily = (params: IPublicationsListPropsParams): string | null =>
+    String.normalize(params.productFamily) === String.normalize(DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE) ? null : params.productFamily;
+export const normalizeProductReleaseVersion = (params: IPublicationsListPropsParams | string): string | null | undefined => {
+    const value = typeof params === "string" ? params : params.productReleaseVersion || "";
+    return String.normalize(value) === String.normalize(DEFAULT_UNKNOWN_PRODUCT_RELEASE_VERSION) ? null : value;
+};
+
+export const isPublicationFound = (state: IPublicationsState, publicationId: string): boolean =>
+    JSON.stringify(getPubById(state, publicationId)) !== JSON.stringify(notFound(publicationId));

@@ -2,10 +2,10 @@ import { connect } from "react-redux";
 import { PublicationContentPresentation } from "./PublicationContentPresentation";
 import { updateCurrentPublication } from "store/actions/Actions";
 import { setCurrentPublicationByReleaseVersion } from "store/actions/Api";
-import { getCurrentPub, getPubById, getPageById, getErrorMessage, isPageLoading as isPageLoadingGetter } from "store/reducers/Reducer";
+import { getCurrentPub, getPubById, getPageById, getErrorMessage,
+    isPageLoading as isPageLoadingGetter, isPublicationFound as  isPublicationFoundGetter, getReleaseVersionsForPub } from "store/reducers/Reducer";
 import { IState } from "store/interfaces/State";
 import { isPage, isDummyPage } from "utils/Page";
-import { getReleaseVersionsForPub } from "store/reducers/Reducer";
 
 const mapStateToProps = (state: IState) => {
     const { publicationId, pageId, anchor} = getCurrentPub(state);
@@ -14,6 +14,7 @@ const mapStateToProps = (state: IState) => {
     const errorMessage = getErrorMessage(state, pageId);
     const isPageLoading = isPage(page) && isDummyPage(page) && isPageLoadingGetter(state, pageId);
     const productReleaseVersions = getReleaseVersionsForPub(state, publicationId);
+    const isPublicationFound = isPublicationFoundGetter(state, publicationId);
 
     return {
         publication,
@@ -24,7 +25,8 @@ const mapStateToProps = (state: IState) => {
         isPageLoading,
         errorMessage,
         productReleaseVersions,
-        productReleaseVersion: publication.productReleaseVersion || ""
+        productReleaseVersion: publication.productReleaseVersion || "",
+        isPublicationFound
     };
 };
 

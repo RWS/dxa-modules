@@ -7,6 +7,10 @@ import { IPublicationContentPropsParams } from "interfaces/PublicationContentPro
 import { IPublicationCurrentState, IState } from "store/interfaces/State";
 import { isDummyPage } from "utils/Page";
 
+// Placeholder for titles in url, when title for url is not  avaible but required, for intance if there is anchor
+// but there is no pageTitle. There is pageTitle but there's no publication title.
+const TITLE_PLACEHOLDER: string = "_";
+
 export interface ISyncParams {
     /**
      * Parameters
@@ -91,7 +95,9 @@ export class StateToRoutePresentation extends React.Component<Props, {}> {
     }
 
     private propsToUrl(props: Props): string {
-        const { publicationId, pageId, publicationTitle, pageTitle, anchor } = props;
+        const { publicationId, pageId, publicationTitle: propsPublicationTitle, pageTitle: propsPageTitle, anchor } = props;
+        const pageTitle = anchor && !propsPageTitle ? TITLE_PLACEHOLDER : propsPageTitle;
+        const publicationTitle = (anchor || pageTitle) && !propsPublicationTitle ? TITLE_PLACEHOLDER : propsPublicationTitle;
 
         if (pageId) {
             const pageUrl = Url.getPageUrl(publicationId, pageId, publicationTitle, pageTitle);

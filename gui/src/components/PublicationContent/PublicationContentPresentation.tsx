@@ -5,14 +5,13 @@ import { IAppContext } from "components/container/App";
 import { NavigationMenu } from "components/presentation/NavigationMenu";
 import { Toc } from "components/presentation/Toc";
 import { Page } from "components/Page/Page";
-import { Breadcrumbs } from "components/presentation/Breadcrumbs";
+import { Breadcrumbs, IBreadcrumbItem } from "components/presentation/Breadcrumbs";
 import { ContentLanguageWarning } from "components/ContentLanguageWarning/ContentLanguageWarning";
 
 import { VersionSelector } from "components/presentation/VersionSelector";
 import { Html, IHeader } from "utils/Html";
 import { TcmId } from "utils/TcmId";
 import { Url } from "utils/Url";
-import { debounce } from "utils/Function";
 import { isDummyPage, isPage } from "utils/Page";
 
 import { ITaxonomy } from "interfaces/Taxonomy";
@@ -21,6 +20,8 @@ import { TaxonomyItemId } from "interfaces/TcmId";
 import { IPublication } from "interfaces/Publication";
 import { IPublicationCurrentState } from "store/interfaces/State";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
+
+import { DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE } from "models/Publications";
 
 import Version from "utils/Version";
 
@@ -67,8 +68,12 @@ export interface IPublicationContentProps {
      * @type {IProductReleaseVersion[]}
      * @memberOf IPublicationsListState
      */
-
     productReleaseVersions: IProductReleaseVersion[];
+    /**
+     *
+     * @type {string}
+     * @memberOf IPublicationContentProps
+     */
     productReleaseVersion: string;
     /**
      * Function to execute when publication is changing
@@ -77,7 +82,17 @@ export interface IPublicationContentProps {
      * @memberOf IPublicationContentProps
      */
     onPublicationChange?: (publicationId: string, pageId: string) => void;
+    /**
+     *
+     * @memberOf IPublicationContentProps
+     */
     onReleaseVersionChanged?: (publicationId: string, releaseVersions: string) => void;
+    /**
+     *
+     * @type {boolean}
+     * @memberOf IPublicationContentProps
+     */
+    isPublicationFound: boolean;
 }
 
 /**
@@ -150,7 +165,6 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
     public context: IAppContext;
     private _toc: IToc = {};
     private _isUnmounted: boolean = false;
-    private _topOffset: number = 0;
 
     /**
      * Creates an instance of App.
@@ -169,7 +183,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
      * Invoked once, both on the client and server, immediately before the initial rendering occurs.
      */
     public fetchPublication(publicationId: string): void {
-       // this is temporary hack to move out loading data from this component
+        // this is temporary hack to move out loading data from this component
         if (publicationId) {
             // Load the page
             this._loadTocRootItems(publicationId);
@@ -189,10 +203,10 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         if (isPage(page) && !isDummyPage(page)) {
             this.fetchPage(publicationId, page);
         } else if (errorMessage) {
-           this._onPageContentRetrievFailed(publicationId, errorMessage);
-       }
+            this._onPageContentRetrievFailed(publicationId, errorMessage);
+        }
 
-       this.addResizeHandlers();
+        this.addResizeHandlers();
     }
 
     /**
@@ -202,18 +216,18 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
      * @memberOf PublicationContentPresentation
      */
     public componentWillReceiveProps(nextProps: Pub): void {
-       const { page, publicationId } = this.props;
-       const { publicationId: nextPubId, page: nextPage, errorMessage} = nextProps;
+        const { page, publicationId } = this.props;
+        const { publicationId: nextPubId, page: nextPage, errorMessage } = nextProps;
 
-       if (!isPage(nextPage) || nextPubId !== publicationId) {
+        if (!isPage(nextPage) || nextPubId !== publicationId) {
             this.fetchPublication(nextPubId);
-       }
+        }
 
-       if (isPage(nextPage) && !isDummyPage(nextPage) && nextPage.content !== page.content) {
+        if (isPage(nextPage) && !isDummyPage(nextPage) && nextPage.content !== page.content) {
             this.fetchPage(nextPubId, nextPage);
-       } else if (errorMessage) {
-           this._onPageContentRetrievFailed(nextPubId, errorMessage);
-       }
+        } else if (errorMessage) {
+            this._onPageContentRetrievFailed(nextPubId, errorMessage);
+        }
     }
 
     /**
@@ -224,15 +238,15 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
     public render(): JSX.Element {
         const { activeTocItemPath, selectedTocItem, activePageHeader } = this.state;
         const { services, router } = this.context;
-        const { publicationId, pageId, page, publication, isPageLoading, errorMessage, productReleaseVersion, productReleaseVersions } = this.props;
-        const { taxonomyService } = services;
+        const { publicationId, pageId, page, publication, isPageLoading, errorMessage, productReleaseVersion, productReleaseVersions, isPublicationFound } = this.props;
+        const { taxonomyService, localizationService } = services;
         const { rootItems } = this._toc;
         const tocError = this._toc.error;
         const selectedProductReleaseVersion = productReleaseVersion ? Version.normalize(productReleaseVersion) : undefined;
         return (
             <section className={"sdl-dita-delivery-publication-content"}>
                 <Page
-                    showActivityIndicator={isPageLoading}
+                    isLoading={isPageLoading}
                     content={page.content}
                     error={errorMessage}
                     onNavigate={(url: string): void => {
@@ -240,11 +254,10 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                         if (router) {
                             router.push(url);
                         }
-                    } }
+                    }}
                     url={pageId ?
                         Url.getPageUrl(publicationId, pageId, publication.title, page.title || (selectedTocItem && selectedTocItem.title) || "") :
                         Url.getPublicationUrl(publicationId, publication.title)}
-                    scrollOffset={this._topOffset}
                     activeHeader={activePageHeader}>
                     <NavigationMenu isOpen={false}>{/* TODO: use global state store */}
                         <Toc
@@ -252,7 +265,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                             rootItems={rootItems}
                             loadChildItems={(parentId: string): Promise<ITaxonomy[]> => {
                                 return taxonomyService.getSitemapItems(publicationId, parentId);
-                            } }
+                            }}
                             onSelectionChanged={this._onTocSelectionChanged.bind(this)}
                             error={tocError}
                             onRetry={() => this._loadTocRootItems(publicationId) }
@@ -261,11 +274,40 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                         </Toc>
                     </NavigationMenu>
                     <Breadcrumbs
-                        publicationId={publicationId}
-                        publicationTitle={publication.title || ""}
-                        loadItemsPath={taxonomyService.getSitemapPath.bind(taxonomyService)}
+                        loadItemPath={(breadcrumbItem: ITaxonomy): Promise<IBreadcrumbItem[]> => {
+                            const publicationTitle = isPublicationFound ?
+                                publication.title || "" :
+                                localizationService.formatMessage("error.publication.not.found", [publication.id]);
+                            const productFamilyTitle = publication.productFamily;
+                            let breadCrumbPath = [{
+                                title: productFamilyTitle || localizationService.formatMessage("productfamilies.unknown.title"),
+                                url: Url.getProductFamilyUrl(productFamilyTitle || DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE, selectedProductReleaseVersion)
+                            }, {
+                                title: publicationTitle,
+                                url: Url.getPublicationUrl(publicationId, publicationTitle)
+                            }] as IBreadcrumbItem[];
+                            const parsedUrl = breadcrumbItem.url && Url.parsePageUrl(breadcrumbItem.url);
+                            if (parsedUrl && parsedUrl.pageId) {
+                                return taxonomyService.getSitemapPath(publicationId, parsedUrl.pageId, breadcrumbItem.id || "").then(
+                                    path => {
+                                        breadCrumbPath.push(...path.map(item => {
+                                            return {
+                                                title: item.title,
+                                                url: item.url
+                                            } as IBreadcrumbItem;
+                                        }));
+                                        return breadCrumbPath;
+                                    },
+                                    siteMapError => {
+                                        return Promise.reject(siteMapError);
+                                    }
+                                );
+                            } else {
+                                return Promise.resolve(breadCrumbPath);
+                            }
+                        }}
                         selectedItem={selectedTocItem}
-                        />
+                    />
                     <ContentLanguageWarning />
                     <VersionSelector productReleaseVersions={productReleaseVersions}
                         selectedProductReleaseVersion={selectedProductReleaseVersion}
@@ -279,13 +321,6 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
      * Invoked once, only on the client (not on the server), immediately after the initial rendering occurs.
      */
     public addResizeHandlers(): void {
-        if (ReactDOM) {
-            const domNode = ReactDOM.findDOMNode(this) as HTMLElement;
-            if (domNode) {
-                this._topOffset = domNode.offsetTop;
-            }
-        }
-
         window.addEventListener("scroll", this._fixPanels);
         window.addEventListener("resize", this._fixPanels);
         this._fixPanels();
@@ -417,13 +452,6 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                         this.setState({
                             activePageHeader: header
                         });
-                        debounce((): void => {
-                            // Make sure the active link is in view
-                            const activeLinkEl = contentNavigation.querySelector("li.active") as HTMLElement;
-                            if (activeLinkEl) {
-                                Html.scrollIntoView(contentNavigation, activeLinkEl);
-                            }
-                        })();
                     }
                 }
             }
@@ -467,8 +495,8 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
     }
 
     private _navigateToOtherReleaseVersion(publicationId: string, releaseVersion: string): void {
-       if (this.props.onReleaseVersionChanged) {
-           this.props.onReleaseVersionChanged(publicationId, releaseVersion);
-       }
+        if (this.props.onReleaseVersionChanged) {
+            this.props.onReleaseVersionChanged(publicationId, releaseVersion);
+        }
     }
 }

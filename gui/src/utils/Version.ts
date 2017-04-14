@@ -180,7 +180,8 @@ export default class Version {
         if (releaseVersionMatch) {
             return releaseVersionMatch[1] ? String.normalize(releaseVersionMatch[1]) : releaseVersionMatch[1];
         }
-        return String.normalize(productReleaseVersion);
+
+        return productReleaseVersion ? String.normalize(productReleaseVersion) : productReleaseVersion;
     }
 
     private static _distinct(collection: (string | null)[]): (string | null)[] {

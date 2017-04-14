@@ -1,5 +1,5 @@
 import { String as StringHelper } from "utils/String";
-import { TestBase } from "sdl-models";
+import { TestBase } from "@sdl/models";
 
 class StringUtil extends TestBase {
 

@@ -2,19 +2,18 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as TestUtils from "react-addons-test-utils";
 import { Router, Route } from "react-router";
-import { Breadcrumbs, IBreadcrumbsProps } from "components/presentation/Breadcrumbs";
+import { Breadcrumbs, IBreadcrumbsProps, IBreadcrumbItem } from "components/presentation/Breadcrumbs";
 import { ITaxonomy } from "interfaces/Taxonomy";
 import { Promise } from "es6-promise";
 import { hashHistory } from "react-router";
 import { Url } from "utils/Url";
 import { TcmId } from "utils/TcmId";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
-import { TestBase } from "sdl-models";
+import { TestBase } from "@sdl/models";
 import { TaxonomyItemId } from "interfaces/TcmId";
 
 interface IProps {
     params: {
-        publicationId: string;
         pageId?: string;
     };
 }
@@ -49,16 +48,14 @@ class BreadcrumbsComponent extends TestBase {
             const target = super.createTargetElement();
             let breadCrumbs: Breadcrumbs;
 
-            const data = {
-                publicationId: "ish:777-1-1",
-                publicationTitle: "Publication"
-            };
-
-            const loadItemsPath = (publicationId: string, pageId: string, parentId: string): Promise<ITaxonomy[]> => {
-                const itemsToReturn: ITaxonomy[] = [];
+            const loadItemPath = (breadCrumbItem: ITaxonomy): Promise<ITaxonomy[]> => {
+                const itemsToReturn: IBreadcrumbItem[] = [];
                 for (let item of itemsPath) {
-                    itemsToReturn.push(item);
-                    if (item.id === parentId) {
+                    itemsToReturn.push({
+                        title: item.title,
+                        url: item.url
+                    });
+                    if (item.id === breadCrumbItem.id) {
                         break;
                     }
                 }
@@ -68,9 +65,7 @@ class BreadcrumbsComponent extends TestBase {
             beforeEach(() => {
                 hashHistory.push(itemsPath[2].url || "");
                 const props: IBreadcrumbsProps = {
-                    publicationId: data.publicationId,
-                    publicationTitle: data.publicationTitle,
-                    loadItemsPath: loadItemsPath
+                    loadItemPath: loadItemPath
                 };
                 breadCrumbs = this._renderComponent(props, target);
             });
@@ -90,9 +85,8 @@ class BreadcrumbsComponent extends TestBase {
                 const domNode = ReactDOM.findDOMNode(breadCrumbs);
                 expect(domNode).not.toBeNull();
                 const nodes = domNode.querySelectorAll(".home, a");
-                expect(nodes.length).toBe(2);
+                expect(nodes.length).toBe(1);
                 expect(nodes.item(0).getAttribute("title")).toBe("mock-components.breadcrumbs.home");
-                expect(nodes.item(1).getAttribute("title")).toBe(data.publicationTitle);
             });
 
             it("renders breadcrumbs for selected item", (done: () => void): void => {
@@ -102,40 +96,15 @@ class BreadcrumbsComponent extends TestBase {
                 // Use a timeout to allow the DataStore to return a promise with the data
                 setTimeout((): void => {
                     const nodes = domNode.querySelectorAll(".home, .abstract, a");
-                    expect(nodes.length).toBe(4);
+                    expect(nodes.length).toBe(3);
                     expect(nodes.item(0).getAttribute("title")).toBe("mock-components.breadcrumbs.home");
-                    expect(nodes.item(1).textContent).toBe(data.publicationTitle);
-                    expect(nodes.item(2).textContent).toBe(itemsPath[0].title);
-                    expect(nodes.item(3).textContent).toBe(itemsPath[1].title);
+                    expect(nodes.item(1).textContent).toBe(itemsPath[0].title);
+                    expect(nodes.item(2).textContent).toBe(itemsPath[1].title);
 
                     // Last item is the selected item and should not highlighted with Link
                     const spanNodes = domNode.querySelectorAll("span.active");
                     expect(spanNodes.length).toBe(1);
                     expect(spanNodes.item(0).textContent).toBe(itemsPath[2].title);
-
-                    done();
-                }, 0);
-            });
-
-            it("navigates to publication root when a publication title breadcrumb is clicked", (done: () => void): void => {
-                const domNode = ReactDOM.findDOMNode(breadCrumbs) as HTMLElement;
-                expect(domNode).not.toBeNull();
-
-                // Use a timeout to allow the DataStore to return a promise with the data
-                setTimeout((): void => {
-                    const hyperlinksNodes = domNode.querySelectorAll("a");
-                    const hyperlink = hyperlinksNodes.item(0) as HTMLAnchorElement;
-
-                    expect(hyperlink).toBeDefined();
-
-                    // Update selected item, this will be used after hyperlink click triggers a re-render
-                    hyperlink.click();
-
-                    // Validate
-                    const updatedHyperlinksNodes = domNode.querySelectorAll(".home, a");
-                    expect(updatedHyperlinksNodes.length).toBe(2);
-                    expect(updatedHyperlinksNodes[0].textContent).toBe("mock-components.breadcrumbs.home");
-                    expect(updatedHyperlinksNodes[1].textContent).toBe(data.publicationTitle);
 
                     done();
                 }, 0);
@@ -148,9 +117,9 @@ class BreadcrumbsComponent extends TestBase {
                 // Use a timeout to allow the DataStore to return a promise with the data
                 setTimeout((): void => {
                     const hyperlinksNodes = domNode.querySelectorAll(".home, .abstract, a");
-                    expect(hyperlinksNodes.length).toBe(4);
+                    expect(hyperlinksNodes.length).toBe(3);
 
-                    const childHyperlink = hyperlinksNodes[3] as HTMLElement;
+                    const childHyperlink = hyperlinksNodes[2] as HTMLElement;
                     expect(childHyperlink).toBeDefined();
                     if (childHyperlink) {
                         childHyperlink.click();
@@ -160,15 +129,13 @@ class BreadcrumbsComponent extends TestBase {
                             // Validate
                             const selectedItem = itemsPath[1];
                             const updatedItems = domNode.querySelectorAll("li");
-                            expect(updatedItems.length).toBe(4);
+                            expect(updatedItems.length).toBe(3);
                             expect(updatedItems[0].querySelector(".home")).not.toBeNull();
                             expect(updatedItems[0].textContent).toBe("mock-components.breadcrumbs.home");
-                            expect(updatedItems[1].querySelector("a")).not.toBeNull();
-                            expect(updatedItems[1].textContent).toBe(data.publicationTitle);
-                            expect(updatedItems[2].querySelector(".abstract")).not.toBeNull();
-                            expect(updatedItems[2].textContent).toBe(itemsPath[0].title);
-                            expect(updatedItems[3].querySelector("a")).toBeNull();
-                            expect(updatedItems[3].textContent).toBe(selectedItem.title);
+                            expect(updatedItems[1].querySelector(".abstract")).not.toBeNull();
+                            expect(updatedItems[1].textContent).toBe(itemsPath[0].title);
+                            expect(updatedItems[2].querySelector("a")).toBeNull();
+                            expect(updatedItems[2].textContent).toBe(selectedItem.title);
 
                             done();
                         }, 0);

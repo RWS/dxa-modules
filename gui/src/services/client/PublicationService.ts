@@ -22,7 +22,7 @@ export class PublicationService implements IPublicationService {
      * @static
      * @type {Publications}
      */
-    private static PublicationsModel: Publications;
+    protected static PublicationsModel: Publications | undefined;
 
     /**
      * Get the list of publications
@@ -195,7 +195,7 @@ export class PublicationService implements IPublicationService {
         });
     }
 
-    private getPublicationsModel(): Publications {
+    protected getPublicationsModel(): Publications {
         if (!PublicationService.PublicationsModel) {
             PublicationService.PublicationsModel = new Publications();
         }

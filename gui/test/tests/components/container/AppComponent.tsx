@@ -4,7 +4,7 @@ import * as TestUtils from "react-addons-test-utils";
 import { App } from "components/container/App";
 import { PublicationContentPresentation } from "components/PublicationContent/PublicationContentPresentation";
 import { Url } from "utils/Url";
-import { TestBase } from "sdl-models";
+import { TestBase } from "@sdl/models";
 import { PageService } from "test/mocks/services/PageService";
 import { PublicationService } from "test/mocks/services/PublicationService";
 import { TaxonomyService } from "test/mocks/services/TaxonomyService";

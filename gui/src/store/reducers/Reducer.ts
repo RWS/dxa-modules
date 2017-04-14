@@ -8,6 +8,7 @@ import { IPublication } from "interfaces/Publication";
 import { IPage } from "interfaces/Page";
 import { combineReducers } from "./CombineReducers";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
+import { IPublicationsListPropsParams } from "components/PublicationsList/PublicationsListPresentation";
 
 export const mainReducer = combineReducers({
     language: Language.language,
@@ -21,10 +22,13 @@ export const mainReducer = combineReducers({
 export const getPubList = (state: IState, filter?: {}): IPublication[] => Publications.getPubList(state.publications, filter);
 export const getPubById = (state: IState, id: string): IPublication => Publications.getPubById(state.publications, id);
 export const getPubsByLang = (state: IState, language: string): IPublication[] => Publications.getPubsByLang(state.publications, language);
+export const getPubListRepresentatives = (state: IState, filter: {}): IPublication[] => Publications.getPubListRepresentatives(state, filter);
+export const normalizeProductFamily = (params: IPublicationsListPropsParams): string | null => Publications.normalizeProductFamily(params);
+export const normalizeProductReleaseVersion = (params: IPublicationsListPropsParams | string): string | null | undefined => Publications.normalizeProductReleaseVersion(params);
 
-//NOTE: don't like null here, should replace with dummy publication;
-export const getPubByIdAndLang = (state: IState, pubId: string, language: string): IPublication | null => Publications.getPubByIdAndLang(state.publications, pubId, language);
+export const getPubForLang = (state: IState, publication: IPublication, language: string): IPublication => Publications.getPubForLang(state.publications, publication, language);
 export const isPubsLoading = (state: IState): boolean => Publications.isLoadnig(state.publications);
+export const isPublicationFound = (state: IState, pubId: string): boolean => Publications.isPublicationFound(state.publications, pubId);
 
 export const getPubListErrorMessage = (state: IState) => Publications.getLastError(state.publications);
 
@@ -35,5 +39,9 @@ export const isPageLoading = (state: IState, pageId: string): boolean => Pages.i
 
 // State selectors
 export const getCurrentPub = (state: IState): IPublicationCurrentState => state.publication;
+export const getReleaseVersionsForPub = (state: IState, publicationId: string): IProductReleaseVersion[] =>
+    ReleaseVersions.getReleaseVersionsForPub(state.releaseVersions, publicationId);
 
-export const getReleaseVersionsForPub = (state: IState, publicationId: string): IProductReleaseVersion[] => ReleaseVersions.getReleaseVersionsForPub(state.releaseVersions, publicationId);
+// ReleaseVersions selector
+export const translateProductReleaseVersion = (productReleaseVersion: string): string => ReleaseVersions.translateProductReleaseVersion(productReleaseVersion);
+export const translateProductReleaseVersions = (versions: IProductReleaseVersion[]): IProductReleaseVersion[] => ReleaseVersions.translateProductReleaseVersions(versions);

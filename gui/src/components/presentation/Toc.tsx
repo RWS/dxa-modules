@@ -2,8 +2,8 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Promise } from "es6-promise";
 import { ITaxonomy } from "interfaces/Taxonomy";
-import { Button, ActivityIndicator, TreeView } from "sdl-controls-react-wrappers";
-import { TreeView as TreeViewControl, ITreeViewNode as IBaseTreeViewNode, ButtonPurpose } from "sdl-controls";
+import { Button, ActivityIndicator, TreeView } from "@sdl/controls-react-wrappers";
+import { TreeView as TreeViewControl, ITreeViewNode as IBaseTreeViewNode, ButtonPurpose } from "@sdl/controls";
 import { IAppContext } from "components/container/App";
 import { ErrorToc } from "components/presentation/ErrorToc";
 
@@ -214,6 +214,9 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
             const parent = el.parentElement;
             ReactDOM.unmountComponentAtNode(parent);
             parent.remove();
+            // HACK; quick fix for KCWA-732, after changes in TreeView.
+            // for proper fix need to review current approach for error
+            parentNode.isExpanded = false;
         }
     }
 

@@ -1,5 +1,5 @@
 {
-  "name": "sdl-dita-delivery-web-app-gui",
+  "name": "@sdl/dita-delivery-web-app-gui",
   "globalDependencies": {
     "classnames": "registry:dt/classnames#0.0.0+20161113184211",
     "jasmine": "registry:dt/jasmine#2.5.0+20161003201800",

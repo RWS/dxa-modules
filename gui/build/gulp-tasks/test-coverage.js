@@ -39,8 +39,9 @@ module.exports = function (buildOptions, gulp, runTests, singleRun) {
                 ignore: [
                     `${buildOptions.sourcesPath}**/*.d.ts`,
                     `${buildOptions.sourcesPath}/Main.tsx`,
-                    `${buildOptions.sourcesPath}/interfaces/*.ts`,
+                    `${buildOptions.sourcesPath}/interfaces/**/*.ts`,
                     `${buildOptions.sourcesPath}/services/interfaces/*.ts`,
+                    `${buildOptions.sourcesPath}/store/interfaces/*.ts`,
                     `${buildOptions.sourcesPath}/Lib.ts`
                 ]
             }).map(item => {
