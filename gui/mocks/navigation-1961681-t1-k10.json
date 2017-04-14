@@ -7,12 +7,36 @@
     "HasChildNodes": true,
     "Items": [
       {
+        "Id": "t1-k2",
+        "Title": "McAfee Virtual Technician",
+        "Url": "/app/1961681/345337/mcafee-virtual-technician-4-2/mcafee-virtual-technician",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": []
+      },
+      {
+        "Id": "t1-k5",
+        "Title": "How do I access MVT",
+        "Url": "/app/1961681/137296/mcafee-virtual-technician-4-2/how-do-i-access-mvt",
+        "IsAbstract": false,
+        "HasChildNodes": true,
+        "Items": []
+      },
+      {
         "Id": "t1-k8",
         "Title": "Technical support options",
         "Url": "/app/1961681/137347/mcafee-virtual-technician-4-2/technical-support-options",
         "IsAbstract": false,
         "HasChildNodes": true,
         "Items": [
+          {
+            "Id": "t1-k9",
+            "Title": "Home and Home Office",
+            "Url": "/app/1961681/137364/mcafee-virtual-technician-4-2/home-and-home-office",
+            "IsAbstract": false,
+            "HasChildNodes": false,
+            "Items": []
+          },
           {
             "Id": "t1-k10",
             "Title": "SmallMedium Enterprise",
