@@ -47,7 +47,6 @@ export class NavigationLinks extends LoadableObject {
         return this._path;
     }
 
-
     /**
      * Get the path including siblings
      *
