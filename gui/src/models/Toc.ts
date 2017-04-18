@@ -15,17 +15,23 @@ export class Toc extends LoadableObject {
     private _publicationId: string;
     private _parentId: string;
     private _sitemapItems: ITaxonomy[];
+    private _preLoaded: boolean = false;
 
     /**
      * Creates an instance of Toc.
      *
      * @param {string} publicationId Publication id
      * @param {string} parentId Parent sitemap item id, for the root item pass "root" as the parent id.
+     * @param {ITaxonomy[]} items Create a toc model which has the data prefetched.
      */
-    constructor(publicationId: string, parentId: string) {
+    constructor(publicationId: string, parentId: string, items?: ITaxonomy[]) {
         super();
         this._publicationId = publicationId;
         this._parentId = parentId;
+        if (items) {
+            this._sitemapItems = items;
+            this._preLoaded = true;
+        }
     }
 
     /**
@@ -39,8 +45,15 @@ export class Toc extends LoadableObject {
 
     /* Overloads */
     protected _executeLoad(reload: boolean): void {
-        const url = Api.getTocItemsUrl(this._publicationId, this._parentId);
-        Net.getRequest(url, this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
+        if (this._preLoaded) {
+            // Reset preloaded state, on the second load it should use build in caching mechanism of loadable object
+            // This is only needed to prevent the initial http request to be executed
+            this._preLoaded = false;
+            this._setLoaded();
+        } else {
+            const url = Api.getTocItemsUrl(this._publicationId, this._parentId);
+            Net.getRequest(url, this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
+        }
     }
 
     protected _processLoadResult(result: string, webRequest: IWebRequest): void {

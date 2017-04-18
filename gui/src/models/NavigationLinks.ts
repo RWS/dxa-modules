@@ -18,6 +18,7 @@ export class NavigationLinks extends LoadableObject {
     private _pageId: string;
     private _taxonomyId: string;
     private _path: ITaxonomy[] = [];
+    private _pathWithSiblings: { parentId: string, items: ITaxonomy[] }[] = [];
 
     /**
      * Creates an instance of NavigationLinks.
@@ -44,6 +45,18 @@ export class NavigationLinks extends LoadableObject {
      */
     public getPath(): ITaxonomy[] {
         return this._path;
+    }
+
+
+    /**
+     * Get the path including siblings
+     *
+     * @returns {{ parentId: string, items: ITaxonomy[] }[]} Full path, including siblings
+     *
+     * @memberOf NavigationLinks
+     */
+    public getPathWithSiblings(): { parentId: string, items: ITaxonomy[] }[] {
+        return this._pathWithSiblings;
     }
 
     /* Overloads */
@@ -73,7 +86,23 @@ export class NavigationLinks extends LoadableObject {
     private _calculatePath(navigationLinks: ISitemapItem[]): ITaxonomy[] {
         const path: ITaxonomy[] = [];
         if (navigationLinks && navigationLinks.length > 0) {
+            let parentId = navigationLinks[0].Id || "";
             let items: ISitemapItem[] = navigationLinks[0].Items;
+            const getTaxonomyItems = (sitemapItems: ISitemapItem[]): { parentId: string, items: ITaxonomy[] } => {
+                const children = sitemapItems.map(item => {
+                    return {
+                        id: item.Id,
+                        title: item.Title,
+                        url: item.Url,
+                        hasChildNodes: item.HasChildNodes
+                    };
+                }) as ITaxonomy[];
+                return {
+                    parentId: parentId,
+                    items: children
+                };
+            };
+            this._pathWithSiblings = this._pathWithSiblings.concat(getTaxonomyItems(items));
             while (items && items.length > 0) {
                 for (const item of items) {
                     if (item.Id && item.Id === this._taxonomyId) {
@@ -94,7 +123,9 @@ export class NavigationLinks extends LoadableObject {
                             url: item.Url,
                             hasChildNodes: item.HasChildNodes
                         });
+                        parentId = item.Id || "";
                         items = item.Items;
+                        this._pathWithSiblings = this._pathWithSiblings.concat(getTaxonomyItems(items));
                         break;
                     }
                 }
