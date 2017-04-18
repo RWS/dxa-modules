@@ -1,10 +1,17 @@
 import { TaxonomyService } from "services/client/TaxonomyService";
 import { TestBase } from "@sdl/models";
 
+class TaxonomyServiceInvalidatable extends TaxonomyService {
+    public ivalidate(): void {
+        TaxonomyService.NavigationLinksModels = {};
+        TaxonomyService.TocModels = {};
+    }
+}
+
 class TaxonomyServiceTests extends TestBase {
 
     public runTests(): void {
-        const taxonomyService = new TaxonomyService();
+        const taxonomyService = new TaxonomyServiceInvalidatable();
         const publicationId = "1961702";
 
         describe(`Taxonomy service tests.`, (): void => {
@@ -135,6 +142,38 @@ class TaxonomyServiceTests extends TestBase {
                     expect(error).toContain(pageId);
                     done();
                 });
+            });
+
+            it("does not perform extra http requests to fetch siblings for toc after locating a sitemap item", (done: () => void): void => {
+                const onError = (error: string) => {
+                    fail(`Unexpected error: ${error}`);
+                    done();
+                };
+                // Invalidate the service to make sure we start with an empty cache
+                taxonomyService.ivalidate();
+                // Retrieve path of item in toc
+                const taxonomyId = "t1-k18";
+                const pageId = "1961702";
+                taxonomyService.getSitemapPath(publicationId, pageId, taxonomyId).then(path => {
+                    expect(path).toBeDefined();
+                    if (path) {
+                        expect(path.length).toBe(3);
+                    }
+                    // Retrieve toc items up to the path of the current retrieved page
+                    // There should be no extra http requests as the data is already fetched as part of the locate
+                    const spy = spyOn(window, "XMLHttpRequest").and.callThrough();
+                    taxonomyService.getSitemapRoot(publicationId).then(rootItems => {
+                        expect(rootItems.length).toBe(9);
+                        taxonomyService.getSitemapItems(publicationId, rootItems[4].id || "").then(callFunctionsItems => {
+                            expect(callFunctionsItems.length).toBe(2);
+                            taxonomyService.getSitemapItems(publicationId, callFunctionsItems[0].id || "").then(makingACallItems => {
+                                expect(makingACallItems.length).toBe(2);
+                                expect(spy).not.toHaveBeenCalled();
+                                done();
+                            }).catch(onError);
+                        }).catch(onError);
+                    }).catch(onError);
+                }).catch(onError);
             });
 
         });

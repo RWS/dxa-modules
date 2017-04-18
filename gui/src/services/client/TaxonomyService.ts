@@ -23,7 +23,7 @@ export class TaxonomyService implements ITaxonomyService {
      * @static
      * @type {{ [publicationId: string]: { [parentId: string]: Toc } }}
      */
-    private static TocModels: { [publicationId: string]: { [parentId: string]: Toc } };
+    protected static TocModels: { [publicationId: string]: { [parentId: string]: Toc } };
 
     /**
      * Navigation links models
@@ -32,7 +32,7 @@ export class TaxonomyService implements ITaxonomyService {
      * @static
      * @type {{ [publicationId: string]: { [pageId: string]: NavigationLinks } }}
      */
-    private static NavigationLinksModels: { [publicationId: string]: { [pageId: string]: NavigationLinks } };
+    protected static NavigationLinksModels: { [publicationId: string]: { [pageId: string]: NavigationLinks } };
 
     /**
      * Get the root objects of the sitemap
