@@ -14,6 +14,7 @@ import { IAppContext } from "components/container/App";
 import { IPageService } from "services/interfaces/PageService";
 
 import "components/presentation/styles/Page";
+import "components/controls/styles/ActivityIndicator";
 import "dita-ot/styles/commonltr";
 import "dita-ot/styles/commonrtl";
 import "prismjs/themes/prism";

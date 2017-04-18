@@ -19,6 +19,7 @@ import { IPublicationService } from "services/interfaces/PublicationService";
 
 import { DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE } from "models/Publications";
 
+import "components/controls/styles/ActivityIndicator";
 import "components/container/styles/PublicationsList";
 
 const SHOWN_TILE_ITEMS_COUNT = 5;
