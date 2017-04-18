@@ -11,6 +11,7 @@ import { Url } from "utils/Url";
 import { DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE } from "models/Publications";
 
 import "components/controls/styles/ActivityIndicator";
+import "components/controls/styles/Button";
 import "components/container/styles/ProductFamiliesList";
 
 /**

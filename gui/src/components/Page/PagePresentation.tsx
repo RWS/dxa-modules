@@ -15,6 +15,7 @@ import { IPageService } from "services/interfaces/PageService";
 
 import "components/presentation/styles/Page";
 import "components/controls/styles/ActivityIndicator";
+import "components/controls/styles/Button";
 import "dita-ot/styles/commonltr";
 import "dita-ot/styles/commonrtl";
 import "prismjs/themes/prism";
