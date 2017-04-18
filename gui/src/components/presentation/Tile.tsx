@@ -5,6 +5,8 @@ import { String as StringHelper } from "utils/String";
 import { ActivityIndicator, Button } from "@sdl/controls-react-wrappers";
 import { ButtonPurpose } from "@sdl/controls";
 
+import "components/controls/styles/ActivityIndicator";
+import "components/controls/styles/Button";
 import "components/presentation/styles/Tile";
 
 const TILE_TITLE_TRUNCATE = 50;
