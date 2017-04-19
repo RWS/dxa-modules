@@ -10,6 +10,7 @@ import { ButtonPurpose } from "@sdl/controls";
 import { IError } from "interfaces/Error";
 
 import "components/container/styles/ErrorContent";
+import "components/controls/styles/Button";
 
 /**
  * Error content component props

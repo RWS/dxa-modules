@@ -4,6 +4,8 @@ import { Button } from "@sdl/controls-react-wrappers";
 import { ButtonPurpose } from "@sdl/controls";
 import { IAppContext } from "components/container/App";
 
+import "components/controls/styles/Button";
+
 /**
  * ErrorToc component props
  *
