@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as TestUtils from "react-addons-test-utils";
-import { App } from "components/container/App";
+import { App } from "components/container/App/App";
 import { PublicationContentPresentation } from "components/PublicationContent/PublicationContentPresentation";
 import { Url } from "utils/Url";
 import { TestBase } from "@sdl/models";

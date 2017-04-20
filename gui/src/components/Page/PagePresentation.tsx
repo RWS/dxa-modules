@@ -10,7 +10,7 @@ import { Url } from "utils/Url";
 import { path } from "utils/Path";
 import { ContentNavigation, IContentNavigationItem } from "components/presentation/ContentNavigation";
 import { Error } from "components/presentation/Error";
-import { IAppContext } from "components/container/App";
+import { IAppContext } from "components/container/App/App";
 import { IPageService } from "services/interfaces/PageService";
 
 import "components/presentation/styles/Page";

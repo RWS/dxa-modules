@@ -5,9 +5,9 @@ import { ButtonPurpose } from "@sdl/controls";
 import { ActivityIndicator, Button } from "@sdl/controls-react-wrappers";
 
 import { Error } from "components/presentation/Error";
-import { TilesList } from "components/container/TilesList";
+import { TilesList } from "components/container/TilesList/TilesList";
 import { ITile } from "components/presentation/Tile";
-import { IAppContext } from "components/container/App";
+import { IAppContext } from "components/container/App/App";
 import { FetchPublications } from "components/helpers/FetchPublications";
 import { Url } from "utils/Url";
 
@@ -21,7 +21,7 @@ import { DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE } from "models/Publications";
 
 import "components/controls/styles/ActivityIndicator";
 import "components/controls/styles/Button";
-import "components/container/styles/PublicationsList";
+import "./PublicationsList.less";
 
 const SHOWN_TILE_ITEMS_COUNT = 5;
 

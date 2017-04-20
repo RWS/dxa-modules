@@ -3,13 +3,13 @@ import * as React from "react";
 import { path } from "utils/Path";
 import { SearchBar } from "components/presentation/SearchBar";
 import { Error } from "components/presentation/Error";
-import { IAppContext } from "components/container/App";
+import { IAppContext } from "components/container/App/App";
 import { Button } from "@sdl/controls-react-wrappers";
 import { ButtonPurpose } from "@sdl/controls";
 
 import { IError } from "interfaces/Error";
 
-import "components/container/styles/ErrorContent";
+import "./ErrorContent.less";
 import "components/controls/styles/Button";
 
 /**

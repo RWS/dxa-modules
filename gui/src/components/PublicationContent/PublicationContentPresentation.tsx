@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Promise } from "es6-promise";
-import { IAppContext } from "components/container/App";
+import { IAppContext } from "components/container/App/App";
 import { NavigationMenu } from "components/presentation/NavigationMenu";
 import { Toc } from "components/presentation/Toc";
 import { Page } from "components/Page/Page";

@@ -4,7 +4,7 @@ import { Promise } from "es6-promise";
 import { ITaxonomy } from "interfaces/Taxonomy";
 import { Button, ActivityIndicator, TreeView } from "@sdl/controls-react-wrappers";
 import { TreeView as TreeViewControl, ITreeViewNode as IBaseTreeViewNode, ButtonPurpose } from "@sdl/controls";
-import { IAppContext } from "components/container/App";
+import { IAppContext } from "components/container/App/App";
 import { ErrorToc } from "components/presentation/ErrorToc";
 
 import "components/presentation/styles/Toc";

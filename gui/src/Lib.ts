@@ -6,7 +6,7 @@ import "@sdl/controls-react-wrappers/dist/stylesheets/main";
 /**
  * Components
  */
-import * as AppComp from "components/container/App";
+import * as AppComp from "components/container/App/App";
 import * as HomeComp from "components/Home/Home";
 import * as PublicationContentComp from "components/PublicationContent/PublicationContentPresentation";
 import * as PublicationsListComp from "components/PublicationsList/PublicationsListPresentation";
