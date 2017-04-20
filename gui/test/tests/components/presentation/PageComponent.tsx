@@ -2,7 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as TestUtils from "react-addons-test-utils";
 import { Router, Route, hashHistory } from "react-router";
-import { PagePresentation, IPageProps } from "components/Page/PagePresentation";
+import { PagePresentation, IPageProps } from "@sdl/dd/components/page";
 import { Url } from "utils/Url";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 import { ActivityIndicator } from "@sdl/controls-react-wrappers";

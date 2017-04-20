@@ -6,7 +6,7 @@ import { PUBLICATIONS_LOADING_ERROR } from "store/actions/Actions";
 import { IPublicationsMap, IPublicationsState } from "store/interfaces/State";
 import { DEFAULT_LANGUAGE } from "services/common/LocalizationService";
 import { DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE, DEFAULT_UNKNOWN_PRODUCT_RELEASE_VERSION } from "models/Publications";
-import { IPublicationsListPropsParams } from "components/PublicationsList/PublicationsListPresentation";
+import { IPublicationsListPropsParams } from "@sdl/dd/components/publications-list";
 import { IState } from "store/interfaces/State";
 import Version from "utils/Version";
 import { String } from "utils/String";

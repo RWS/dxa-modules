@@ -1,14 +1,14 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Promise } from "es6-promise";
-import { IAppContext } from "components/container/App/App";
-import { NavigationMenu } from "components/presentation/NavigationMenu";
-import { Toc } from "components/presentation/Toc";
+import { IAppContext } from "@sdl/dd/containers/app";
+import { NavigationMenu } from "@sdl/dd/presentations/navigation-menu";
+import { Toc } from "@sdl/dd/presentations/toc";
 import { Page } from "components/Page/Page";
-import { Breadcrumbs, IBreadcrumbItem } from "components/presentation/Breadcrumbs";
+import { Breadcrumbs, IBreadcrumbItem } from "@sdl/dd/presentations/breadcrumbs";
 import { ContentLanguageWarning } from "components/ContentLanguageWarning/ContentLanguageWarning";
 
-import { VersionSelector } from "components/presentation/VersionSelector";
+import { VersionSelector } from "@sdl/dd/presentations/version-selector";
 import { Html, IHeader } from "utils/Html";
 import { TcmId } from "utils/TcmId";
 import { Url } from "utils/Url";

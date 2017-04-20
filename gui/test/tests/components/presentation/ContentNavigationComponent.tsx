@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { ContentNavigation, IContentNavigationItem, IContentNavigationProps } from "components/presentation/ContentNavigation";
+import { ContentNavigation, IContentNavigationItem, IContentNavigationProps } from "@sdl/dd/presentations/content-navigation";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 import { TestBase } from "@sdl/models";
 

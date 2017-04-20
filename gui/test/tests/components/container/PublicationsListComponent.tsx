@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as TestUtils from "react-addons-test-utils";
-import { PublicationsListPresentation } from "components/PublicationsList/PublicationsListPresentation";
+import { PublicationsListPresentation } from "@sdl/dd/components/publications-list";
 import { ActivityIndicator, Button, DropdownList } from "@sdl/controls-react-wrappers";
 import { TestBase } from "@sdl/models";
 import { PublicationService } from "test/mocks/services/PublicationService";

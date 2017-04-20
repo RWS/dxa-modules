@@ -5,7 +5,7 @@ import { Store } from "redux";
 import { IState } from "store/interfaces/State";
 import { configureStore } from "store/Store";
 import { Provider } from "react-redux";
-import { PageLink } from "components/PageLink/PageLink";
+import { PageLink } from "@sdl/dd/components/page-link";
 import { publicationsLoaded } from "src/store/actions/Api";
 
 const TestPub = {

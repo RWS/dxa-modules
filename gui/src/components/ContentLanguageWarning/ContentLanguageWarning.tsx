@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { IState } from "store/interfaces/State";
-import { ContentLanguageWarningPresentation } from "./ContentLanguageWarningPresentation";
+import { ContentLanguageWarningPresentation } from "@sdl/dd/components/content-language-warning";
 import { getCurrentPub, getPubById, getPubForLang } from "store/reducers/Reducer";
 
 const mapStateToProps = (state: IState) => {

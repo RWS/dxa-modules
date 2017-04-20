@@ -6,17 +6,17 @@ import "@sdl/controls-react-wrappers/dist/stylesheets/main";
 /**
  * Components
  */
-import * as AppComp from "components/container/App/App";
+import * as AppComp from "@sdl/dd/containers/app";
 import * as HomeComp from "components/Home/Home";
-import * as PublicationContentComp from "components/PublicationContent/PublicationContentPresentation";
-import * as PublicationsListComp from "components/PublicationsList/PublicationsListPresentation";
+import * as PublicationContentComp from "@sdl/dd/components/publication-content";
+import * as PublicationsListComp from "@sdl/dd/components/publications-list";
 import * as BreadcrumbsComp from "components/presentation/Breadcrumbs";
-import * as ContentNavigationComp from "components/presentation/ContentNavigation";
-import * as NavigationMenuComp from "components/presentation/NavigationMenu";
+import * as ContentNavigationComp from "@sdl/dd/presentations/content-navigation";
+import * as NavigationMenuComp from "@sdl/dd/presentations/navigation-menu";
 import * as PageComp from "components/Page/Page";
-import * as SearchBarComp from "components/presentation/SearchBar";
-import * as TocComp from "components/presentation/Toc";
-import * as TopBarComp from "components/presentation/TopBar";
+import * as SearchBarComp from "@sdl/dd/presentations/search-bar";
+import * as TocComp from "@sdl/dd/presentations/toc";
+import * as TopBarComp from "@sdl/dd/presentations/top-bar";
 
 export const Components = {
     AppComp, HomeComp, PublicationContentComp, PublicationsListComp,

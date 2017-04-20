@@ -3,7 +3,7 @@ import { Router, Route, IndexRedirect, History, Redirect } from "react-router";
 import { IServices } from "interfaces/Services";
 import { Home } from "components/Home/Home";
 import { PublicationContent } from "components/PublicationContent/PublicationContent";
-import { ProductFamiliesList } from "components/container/ProductFamiliesList/ProductFamiliesList";
+import { ProductFamiliesList } from "@sdl/dd/containers/product-families-list";
 import { ErrorContent } from "components/container/ErrorContent/ErrorContent";
 
 import { path } from "utils/Path";

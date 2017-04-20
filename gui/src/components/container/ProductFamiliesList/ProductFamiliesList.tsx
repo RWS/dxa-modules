@@ -3,10 +3,10 @@ import { Promise } from "es6-promise";
 import { ButtonPurpose } from "@sdl/controls";
 import { ActivityIndicator, Button } from "@sdl/controls-react-wrappers";
 import { IProductFamily } from "interfaces/ProductFamily";
-import { IAppContext } from "components/container/App/App";
-import { TilesList } from "components/container/TilesList/TilesList";
+import { IAppContext } from "@sdl/dd/containers/app";
+import { TilesList } from "@sdl/dd/containers/tiles-list";
 import { ITile } from "components/presentation/Tile";
-import { Error } from "components/presentation/Error";
+import { Error } from "@sdl/dd/presentations/error";
 import { Url } from "utils/Url";
 import { DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE } from "models/Publications";
 

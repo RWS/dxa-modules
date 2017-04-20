@@ -1,7 +1,7 @@
 import "ts-helpers";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { App } from "components/container/App/App";
+import { App } from "@sdl/dd/containers/app";
 import { IServices } from "interfaces/Services";
 import { PageService } from "services/client/PageService";
 import { PublicationService } from "services/client/PublicationService";

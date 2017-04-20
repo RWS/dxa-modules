@@ -5,7 +5,31 @@
       "*": [
         "*",
         "src/*"
-      ]
+      ],
+      /* Presentations components */
+      "@sdl/dd/presentations/tile": ["src/components/presentation/Tile"],
+      "@sdl/dd/presentations/breadcrumbs": ["src/components/presentation/Breadcrumbs"],
+      "@sdl/dd/presentations/content-navigation": ["src/components/presentation/ContentNavigation"],
+      "@sdl/dd/presentations/error": ["src/components/presentation/Error"],
+      "@sdl/dd/presentations/error-toc": ["src/components/presentation/ErrorToc"],
+      "@sdl/dd/presentations/navigation-menu": ["src/components/presentation/NavigationMenu"],
+      "@sdl/dd/presentations/search-bar": ["src/components/presentation/SearchBar"],
+      "@sdl/dd/presentations/toc": ["src/components/presentation/Toc"],
+      "@sdl/dd/presentations/top-bar": ["src/components/presentation/TopBar"],
+      "@sdl/dd/presentations/version-selector": ["src/components/presentation/VersionSelector"],
+      /* Container components */
+      "@sdl/dd/containers/app": ["src/components/container/App/App"],
+      "@sdl/dd/containers/error-content": ["src/components/container/ErrorContent/ErrorContentPresentation"],
+      "@sdl/dd/containers/product-families-list": ["src/components/container/ProductFamiliesList/ProductFamiliesList"],
+      "@sdl/dd/containers/tiles-list": ["src/components/container/TilesList/TilesList"],
+      /* unsorted components */
+      "@sdl/dd/components/content-language-warning": ["src/components/ContentLanguageWarning/ContentLanguageWarningPresentation"],
+      "@sdl/dd/components/dropdown": ["src/components/Dropdown/Dropdown"],
+      "@sdl/dd/components/home": ["src/components/Home/HomePresentation"],
+      "@sdl/dd/components/page": ["src/components/Page/PagePresentation"],
+      "@sdl/dd/components/page-link": ["src/components/PageLink/PageLink"],
+      "@sdl/dd/components/publication-content": ["src/components/PublicationContent/PublicationContentPresentation"],
+      "@sdl/dd/components/publications-list": ["src/components/PublicationsList/PublicationsListPresentation"]
     },
     "module": "es2015",
     "moduleResolution": "node",

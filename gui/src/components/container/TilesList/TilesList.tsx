@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Tile, ITile } from "components/presentation/Tile";
+import { Tile, ITile } from "@sdl/dd/presentations/tile";
 import { Button } from "@sdl/controls-react-wrappers";
 import { ButtonPurpose } from "@sdl/controls";
 
