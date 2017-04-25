@@ -37,6 +37,30 @@ export const Components = {
     ContentLanguageWarningComp, DropdownComp, PageLinkComp
 };
 
+export * from "interfaces/Error";
+export * from "interfaces/Page";
+export * from "interfaces/ProductFamily";
+export * from "interfaces/ProductReleaseVersion";
+export * from "interfaces/Publication";
+export * from "interfaces/PublicationContentPropsParams";
+export * from "interfaces/Taxonomy";
+export * from "interfaces/TcmId";
+export * from "interfaces/Window";
+export * from "interfaces/Services";
+
+/**
+ * Models
+ *
+ */
+import * as NavigationLinksModel from "models/NavigationLinks";
+import * as PageModel from "models/Page";
+import * as PublicationsModel from "models/Publications";
+import * as TocModel from "models/Toc";
+
+export const Models = {
+    NavigationLinksModel, PageModel, PublicationsModel, TocModel
+};
+
 /**
  * Services
  */
