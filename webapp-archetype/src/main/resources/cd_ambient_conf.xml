@@ -5,6 +5,8 @@
 
     <ForwardedClaims CookieName="TAFContext">
         <Claim Uri="taf:session:preview:preview_session"/>
+        <Claim Uri="taf:request:parameters"/>
+        <Claim Uri="taf:ish:userconditions"/>
         <!--<Claim Uri="taf:claim:ambientdata:sessioncartridge:useragent:browser"/>
             <Claim Uri="taf:claim:ambientdata:footprintcartridge:acceptlanguage"/>
             <Claim Uri="taf:claim:ambientdata:footprintcartridge:recurringvisitor"/>
