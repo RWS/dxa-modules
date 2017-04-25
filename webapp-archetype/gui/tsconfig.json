@@ -5,7 +5,9 @@
       "*": [
         "*",
         "node_modules/@sdl/delivery-ish-dd-webapp-gui/dist/typings/src/*"
-      ]
+      ],
+      /* Components */
+      "@sdl/dd/*": ["node_modules/@sdl/delivery-ish-dd-webapp-gui/dist/typings/src/components/*"]
     },
     "module": "es2015",
     "moduleResolution": "node",
