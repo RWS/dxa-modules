@@ -1,9 +1,9 @@
 import * as ClassNames from "classnames";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { IAppContext } from "@sdl/dd/containers/app";
-import { TopBar } from "@sdl/dd/presentations/top-bar";
-import { SearchBar } from "@sdl/dd/presentations/search-bar";
+import { IAppContext } from "@sdl/dd/container/App/App";
+import { TopBar } from "@sdl/dd/presentation/TopBar";
+import { SearchBar } from "@sdl/dd/presentation/SearchBar";
 
 import "./Home.less";
 import { FetchPublications } from "components/helpers/FetchPublications";

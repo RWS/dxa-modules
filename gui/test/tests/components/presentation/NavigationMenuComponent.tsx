@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { NavigationMenu, INavigationMenuProps } from "@sdl/dd/presentations/navigation-menu";
+import { NavigationMenu, INavigationMenuProps } from "@sdl/dd/presentation/NavigationMenu";
 import { TestBase } from "@sdl/models";
 
 class NavigationMenuComponent extends TestBase {

@@ -37,32 +37,33 @@ module.exports = (isTest, isDebug) => {
                 'theme-styles.less': path.resolve(__dirname, 'src/theming/styles.less'),
 
                 // Controls aliases
+                '@sdl/dd': path.resolve(__dirname, 'src/components')
                 // Presentations
-                '@sdl/dd/presentations/tile': path.resolve(__dirname, 'src/components/presentation/Tile.tsx'),
-                '@sdl/dd/presentations/breadcrumbs': path.resolve(__dirname, 'src/components/presentation/Breadcrumbs.tsx'),
-                '@sdl/dd/presentations/content-navigation': path.resolve(__dirname, 'src/components/presentation/ContentNavigation.tsx'),
-                '@sdl/dd/presentations/error': path.resolve(__dirname, 'src/components/presentation/Error.tsx'),
-                '@sdl/dd/presentations/error-toc': path.resolve(__dirname, 'src/components/presentation/ErrorToc.tsx'),
-                '@sdl/dd/presentations/navigation-menu': path.resolve(__dirname, 'src/components/presentation/NavigationMenu.tsx'),
-                '@sdl/dd/presentations/search-bar': path.resolve(__dirname, 'src/components/presentation/SearchBar.tsx'),
-                '@sdl/dd/presentations/toc': path.resolve(__dirname, 'src/components/presentation/Toc.tsx'),
-                '@sdl/dd/presentations/top-bar': path.resolve(__dirname, 'src/components/presentation/TopBar.tsx'),
-                '@sdl/dd/presentations/version-selector': path.resolve(__dirname, 'src/components/presentation/VersionSelector.tsx'),
+                // '@sdl/dd/presentations/tile': path.resolve(__dirname, 'src/components/presentation/Tile.tsx'),
+                // '@sdl/dd/presentations/breadcrumbs': path.resolve(__dirname, 'src/components/presentation/Breadcrumbs.tsx'),
+                // '@sdl/dd/presentations/content-navigation': path.resolve(__dirname, 'src/components/presentation/ContentNavigation.tsx'),
+                // '@sdl/dd/presentations/error': path.resolve(__dirname, 'src/components/presentation/Error.tsx'),
+                // '@sdl/dd/presentations/error-toc': path.resolve(__dirname, 'src/components/presentation/ErrorToc.tsx'),
+                // '@sdl/dd/presentations/navigation-menu': path.resolve(__dirname, 'src/components/presentation/NavigationMenu.tsx'),
+                // '@sdl/dd/presentations/search-bar': path.resolve(__dirname, 'src/components/presentation/SearchBar.tsx'),
+                // '@sdl/dd/presentations/toc': path.resolve(__dirname, 'src/components/presentation/Toc.tsx'),
+                // '@sdl/dd/presentations/top-bar': path.resolve(__dirname, 'src/components/presentation/TopBar.tsx'),
+                // '@sdl/dd/presentations/version-selector': path.resolve(__dirname, 'src/components/presentation/VersionSelector.tsx'),
 
-                // Containers
-                '@sdl/dd/containers/app': path.resolve(__dirname, 'src/components/container/App/App.tsx'),
-                '@sdl/dd/containers/error-content': path.resolve(__dirname, 'src/components/container/ErrorContent/ErrorContentPresentation.tsx'),
-                '@sdl/dd/containers/product-families-list': path.resolve(__dirname, 'src/components/container/ProductFamiliesList/ProductFamiliesList.tsx'),
-                '@sdl/dd/containers/tiles-list': path.resolve(__dirname, 'src/components/container/TilesList/TilesList.tsx'),
+                // // Containers
+                // '@sdl/dd/containers/app': path.resolve(__dirname, 'src/components/container/App/App.tsx'),
+                // '@sdl/dd/containers/error-content': path.resolve(__dirname, 'src/components/container/ErrorContent/ErrorContentPresentation.tsx'),
+                // '@sdl/dd/containers/product-families-list': path.resolve(__dirname, 'src/components/container/ProductFamiliesList/ProductFamiliesList.tsx'),
+                // '@sdl/dd/containers/tiles-list': path.resolve(__dirname, 'src/components/container/TilesList/TilesList.tsx'),
 
-                // Unsorted
-                '@sdl/dd/components/content-language-warning': path.resolve(__dirname, 'src/components/ContentLanguageWarning/ContentLanguageWarningPresentation.tsx'),
-                '@sdl/dd/components/dropdown': path.resolve(__dirname, 'src/components/Dropdown/Dropdown.tsx'),
-                '@sdl/dd/components/home': path.resolve(__dirname, 'src/components/Home/HomePresentation.tsx'),
-                '@sdl/dd/components/page': path.resolve(__dirname, 'src/components/Page/PagePresentation.tsx'),
-                '@sdl/dd/components/page-link': path.resolve(__dirname, 'src/components/PageLink/PageLink.tsx'),
-                '@sdl/dd/components/publication-content': path.resolve(__dirname, 'src/components/PublicationContent/PublicationContentPresentation.tsx'),
-                '@sdl/dd/components/publications-list': path.resolve(__dirname, 'src/components/PublicationsList/PublicationsListPresentation.tsx')
+                // // Unsorted
+                // '@sdl/dd/components/content-language-warning': path.resolve(__dirname, 'src/components/ContentLanguageWarning/ContentLanguageWarningPresentation.tsx'),
+                    // '@sdl/dd/components/dropdown': path.resolve(__dirname, 'src/components/Dropdown/Dropdown.tsx'),
+                // '@sdl/dd/components/home': path.resolve(__dirname, 'src/components/Home/HomePresentation.tsx'),
+                // '@sdl/dd/components/page': path.resolve(__dirname, 'src/components/Page/PagePresentation.tsx'),
+                // '@sdl/dd/components/page-link': path.resolve(__dirname, 'src/components/PageLink/PageLink.tsx'),
+                // '@sdl/dd/components/publication-content': path.resolve(__dirname, 'src/components/PublicationContent/PublicationContentPresentation.tsx'),
+                // '@sdl/dd/components/publications-list': path.resolve(__dirname, 'src/components/PublicationsList/PublicationsListPresentation.tsx')
             },
             modules: [
                 path.resolve(__dirname),

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { IAppContext } from "@sdl/dd/containers/app";
+import { IAppContext } from "@sdl/dd/container/App/App";
 import { Link } from "react-router";
 import "components/presentation/styles/ContentNavigation";
 

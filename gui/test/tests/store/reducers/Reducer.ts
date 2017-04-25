@@ -7,7 +7,7 @@ import { getPubsByLang, normalizeProductFamily, normalizeProductReleaseVersion,
     translateProductReleaseVersion, translateProductReleaseVersions, getPubListRepresentatives } from "store/reducers/Reducer";
 import { DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE, DEFAULT_UNKNOWN_PRODUCT_RELEASE_VERSION } from "models/Publications";
 import { configureStore } from "store/Store";
-import { IPublicationsListPropsParams } from "@sdl/dd/components/publications-list";
+import { IPublicationsListPropsParams } from "@sdl/dd/PublicationsList/PublicationsListPresentation";
 import { String } from "utils/String";
 
 //This tests has side effects affects, for some reason it influences Server.tsx

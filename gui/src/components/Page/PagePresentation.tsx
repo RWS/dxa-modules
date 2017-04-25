@@ -8,9 +8,9 @@ import { ButtonPurpose } from "@sdl/controls";
 import { Html, IHeader } from "utils/Html";
 import { Url } from "utils/Url";
 import { path } from "utils/Path";
-import { ContentNavigation, IContentNavigationItem } from "@sdl/dd/presentations/content-navigation";
-import { Error } from "@sdl/dd/presentations/error";
-import { IAppContext } from "@sdl/dd/containers/app";
+import { ContentNavigation, IContentNavigationItem } from "@sdl/dd/presentation/ContentNavigation";
+import { Error } from "@sdl/dd/presentation/Error";
+import { IAppContext } from "@sdl/dd/container/App/App";
 import { IPageService } from "services/interfaces/PageService";
 
 import "components/presentation/styles/Page";

@@ -2,7 +2,7 @@ import * as React from "react";
 import "components/presentation/styles/ErrorToc";
 import { Button } from "@sdl/controls-react-wrappers";
 import { ButtonPurpose } from "@sdl/controls";
-import { IAppContext } from "@sdl/dd/containers/app";
+import { IAppContext } from "@sdl/dd/container/App/App";
 
 import "components/controls/styles/Button";
 

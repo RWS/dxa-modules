@@ -1,9 +1,9 @@
 import * as ClassNames from "classnames";
 import * as React from "react";
 import { path } from "utils/Path";
-import { SearchBar } from "@sdl/dd/presentations/search-bar";
-import { Error } from "@sdl/dd/presentations/error";
-import { IAppContext } from "@sdl/dd/containers/app";
+import { SearchBar } from "@sdl/dd/presentation/SearchBar";
+import { Error } from "@sdl/dd/presentation/Error";
+import { IAppContext } from "@sdl/dd/container/App/App";
 import { Button } from "@sdl/controls-react-wrappers";
 import { ButtonPurpose } from "@sdl/controls";
 
