@@ -4,16 +4,16 @@ import { Link } from "react-router";
 import { ButtonPurpose } from "@sdl/controls";
 import { ActivityIndicator, Button } from "@sdl/controls-react-wrappers";
 
-import { Error } from "@sdl/dd/presentations/error";
-import { TilesList } from "@sdl/dd/containers/tiles-list";
+import { Error } from "@sdl/dd/presentation/Error";
+import { TilesList } from "@sdl/dd/container/TilesList/TilesList";
 import { ITile } from "components/presentation/Tile";
-import { IAppContext } from "@sdl/dd/containers/app";
+import { IAppContext } from "@sdl/dd/container/App/App";
 import { FetchPublications } from "components/helpers/FetchPublications";
 import { Url } from "utils/Url";
 
 import { IPublication } from "interfaces/Publication";
 import { ITaxonomy } from "interfaces/Taxonomy";
-import { VersionSelector } from "@sdl/dd/presentations/version-selector";
+import { VersionSelector } from "@sdl/dd/presentation/VersionSelector";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 import { IPublicationService } from "services/interfaces/PublicationService";
 

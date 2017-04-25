@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { Error, IErrorProps } from "@sdl/dd/presentations/error";
+import { Error, IErrorProps } from "@sdl/dd/presentation/Error";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 import { TestBase } from "@sdl/models";
 import { Button } from "@sdl/controls-react-wrappers";

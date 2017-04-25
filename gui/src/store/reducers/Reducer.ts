@@ -8,7 +8,7 @@ import { IPublication } from "interfaces/Publication";
 import { IPage } from "interfaces/Page";
 import { combineReducers } from "./CombineReducers";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
-import { IPublicationsListPropsParams } from "@sdl/dd/components/publications-list";
+import { IPublicationsListPropsParams } from "@sdl/dd/PublicationsList/PublicationsListPresentation";
 
 export const mainReducer = combineReducers({
     language: Language.language,

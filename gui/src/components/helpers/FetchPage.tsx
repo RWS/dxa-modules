@@ -2,7 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { fetchPage } from "store/actions/Api";
 import { getCurrentPub } from "store/reducers/Reducer";
-import { IAppContext } from "@sdl/dd/containers/app";
+import { IAppContext } from "@sdl/dd/container/App/App";
 import { IPageService } from "services/interfaces/PageService";
 import { IState, IPublicationCurrentState } from "store/interfaces/State";
 
