@@ -4,21 +4,50 @@
 
     <groupId>com.sdl.delivery.ish</groupId>
     <artifactId>dd-webapp</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.0</version>
     <packaging>war</packaging>
 
     <name>webapp-archetype</name>
     <description>Example web application for DITA Delivery</description>
+    <url>http://www.sdl.com</url>
+
+    <organization>
+        <name>SDL Group</name>
+        <url>http://www.sdl.com/</url>
+    </organization>
+
+    <licenses>
+        <license>
+            <name>SDL Web Developer Software and Distribution Agreement</name>
+            <url>
+                https://community.sdl.com/developers/tridion_developer/w/wiki/864.sdl-web-developer-software-and-distribution-agreement
+            </url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>SDL Knowledge Center</name>
+            <email>artifact.publishers@sdl.com</email>
+            <organization>${project.organization.name}</organization>
+            <organizationUrl>${project.organization.url}</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <developerConnection>scm:git:ssh://git@${scm.connection.prefix.url}/tcd/common.git</developerConnection>
+        <url>https://${scm.web.prefix.url}/TCD/repos/common</url>
+    </scm>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <webapp.version>0.1.0-SNAPSHOT</webapp.version>
+        <webapp.version>0.1.0</webapp.version>
         <java.target.version>1.8</java.target.version>
         <maven.compiler.plugin.version>3.6.0</maven.compiler.plugin.version>
         <dxa-bom.version>1.8.0-SNAPSHOT</dxa-bom.version>
+        <maven.resources.plugin.version>3.0.2</maven.resources.plugin.version>
         <!-- GUI properties -->
         <frontend.maven.plugin.version>1.0</frontend.maven.plugin.version>
-        <npm.repo>https://nexus.sdl.com/content/groups/npm/</npm.repo>
         <node.version>v6.3.0</node.version>
         <npm.version>3.10.5</npm.version>
     </properties>
@@ -65,6 +94,15 @@
     </dependencies>
 
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>2.8.2</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
             <plugin>
                 <groupId>com.github.eirslett</groupId>
@@ -95,7 +133,7 @@
                             <goal>npm</goal>
                         </goals>
                         <configuration>
-                            <arguments>prune -registry=${npm.repo}</arguments>
+                            <arguments>prune</arguments>
                         </configuration>
                     </execution>
 
@@ -105,7 +143,7 @@
                             <goal>npm</goal>
                         </goals>
                         <configuration>
-                            <arguments>update -registry=${npm.repo}</arguments>
+                            <arguments>update</arguments>
                         </configuration>
                     </execution>
 
@@ -115,7 +153,7 @@
                             <goal>npm</goal>
                         </goals>
                         <configuration>
-                            <arguments>install -registry=${npm.repo} --unsafe-perm</arguments>
+                            <arguments>install --unsafe-perm</arguments>
                         </configuration>
                     </execution>
 
@@ -136,7 +174,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>3.0.2</version>
+                <version>${maven.resources.plugin.version}</version>
                 <executions>
                     <execution>
                         <id>copy-resources</id>

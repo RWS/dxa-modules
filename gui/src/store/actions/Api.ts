@@ -2,15 +2,17 @@ import { createAction, Action } from "redux-actions";
 import { IPageService } from "services/interfaces/PageService";
 import { IPublicationService } from "services/interfaces/PublicationService";
 
-import {PAGE_LOADED, PAGE_LOADING, PAGE_ERROR,
+import {
+    PAGE_LOADED, PAGE_LOADING, PAGE_ERROR,
     PUBLICATIONS_LOADED, PUBLICATIONS_LOADING, PUBLICATIONS_LOADING_ERROR,
-    RELEASE_VERSIONS_LOADING, RELEASE_VERSIONS_LOADED } from "./Actions";
+    RELEASE_VERSIONS_LOADING, RELEASE_VERSIONS_LOADED
+} from "./Actions";
 
 import { getPubById, getPubList } from "store/reducers/Reducer";
 import { Dispatch } from "redux";
 import { IState } from "store/interfaces/State";
 import { updateCurrentPublication } from "store/actions/Actions";
-export {getPubById, getPubList}
+export { getPubById, getPubList }
 
 export { Action };
 
@@ -49,7 +51,7 @@ export const publicationsLoading = createAction(PUBLICATIONS_LOADING);
 export const publicationsLoadingError = createAction(PUBLICATIONS_LOADING_ERROR);
 
 export const releaseVersionsLoading = createAction(RELEASE_VERSIONS_LOADING, (pubId) => pubId);
-export const releaseVersionsLoaded = createAction(RELEASE_VERSIONS_LOADED, (productFamily, releaseVersions) => ({productFamily, releaseVersions}));
+export const releaseVersionsLoaded = createAction(RELEASE_VERSIONS_LOADED, (productFamily, releaseVersions) => ({ productFamily, releaseVersions }));
 
 /**
  * Publications fetcher
@@ -59,15 +61,15 @@ export const releaseVersionsLoaded = createAction(RELEASE_VERSIONS_LOADED, (prod
  * @returns {Function}
  */
 export const fetchPublications = (publicationService: IPublicationService,
-                                 productFamily?: string,
-                                 productReleaseVersion?: string): IDispatcherFunction => {
+    productFamily?: string,
+    productReleaseVersion?: string): IDispatcherFunction => {
     return dispatch => {
         dispatch(publicationsLoading());
         publicationService
             .getPublications(productFamily, productReleaseVersion)
             .then(
-                (publications) => dispatch(publicationsLoaded(publications)),
-                (errorMessage) => dispatch(publicationsLoadingError(errorMessage))
+            (publications) => dispatch(publicationsLoaded(publications)),
+            (errorMessage) => dispatch(publicationsLoadingError(errorMessage))
             );
     };
 };
@@ -87,8 +89,8 @@ export const fetchPage = (pageService: IPageService, publicationId: string, page
         pageService
             .getPageInfo(publicationId, pageId)
             .then(
-                (page) => dispatch(pageLoaded(page)),
-                (errorMessage) => dispatch(pageError(pageId, errorMessage))
+            (page) => dispatch(pageLoaded(page)),
+            (errorMessage) => dispatch(pageError(pageId, errorMessage))
             );
     };
 };
@@ -101,21 +103,21 @@ export const fetchProductReleaseVersions = (publicationService: IPublicationServ
             .getProductReleaseVersionsByPublicationId(publicationId)
             .then(
                 (releaseVersions) => dispatch(releaseVersionsLoaded(publicationId, releaseVersions)),
-                (errorMessage) => dispatch(releaseVersionsLoaded(publicationId, {title: errorMessage, value: ""}))
+                (errorMessage) => dispatch(releaseVersionsLoaded(publicationId, { title: errorMessage, value: "" }))
             );
     };
 };
 
 export const fetchProductReleaseVersionsByProductFamily = (publicationService: IPublicationService, productFamily: string): IDispatcherFunction => {
-        return dispatch => {
-            dispatch(releaseVersionsLoading());
-            publicationService
-                .getProductReleaseVersions(productFamily)
-                .then(
-                    (releaseVersions) => dispatch(releaseVersionsLoaded(productFamily, releaseVersions)),
-                    (errorMessage) => dispatch(releaseVersionsLoaded(productFamily, {title: errorMessage, value: ""}))
-                );
-        };
+    return dispatch => {
+        dispatch(releaseVersionsLoading());
+        publicationService
+            .getProductReleaseVersions(productFamily)
+            .then(
+                (releaseVersions) => dispatch(releaseVersionsLoaded(productFamily, releaseVersions)),
+                (errorMessage) => dispatch(releaseVersionsLoaded(productFamily, { title: errorMessage, value: "" }))
+            );
+    };
 };
 
 /**
@@ -140,7 +142,7 @@ export const setCurrentPublicationByReleaseVersion = (publicaitonId: string, pro
 
         //try for find publicaitons for ui language if for content language not found
         if (!pubs.length && publication.language !== state.language) {
-                pubs = getPubList(state, {
+            pubs = getPubList(state, {
                 language: publication.language,
                 logicalId: publication.logicalId,
                 productReleaseVersion,

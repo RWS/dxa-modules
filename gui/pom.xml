@@ -7,7 +7,7 @@
     <parent>
         <artifactId>web-app</artifactId>
         <groupId>com.sdl.delivery.ish</groupId>
-        <version>0.1.0-SNAPSHOT</version>
+        <version>0.1.0</version>
     </parent>
 
     <artifactId>webapp-gui</artifactId>
@@ -15,6 +15,10 @@
     <description>DITA Delivery Web Application GUI components</description>
 
     <packaging>pom</packaging>
+
+    <properties>
+        <npm.repo>https://nexus.sdl.com/content/groups/npm/</npm.repo>
+    </properties>
 
     <build>
         <finalName>${project.artifactId}</finalName>
