@@ -60,7 +60,7 @@ export class App extends React.Component<IAppProps, {}> {
     };
 
     public getChildContext(): IAppContext {
-        const { services} = this.props;
+        const { services } = this.props;
         return {
             services: services
         };
@@ -72,7 +72,7 @@ export class App extends React.Component<IAppProps, {}> {
      * @returns {JSX.Element}
      */
     public render(): JSX.Element {
-        const { history } = this.props;
+        const { history, children } = this.props;
         const errorObj = (window as IWindow).SdlDitaDeliveryError;
         if (errorObj) {
             return <ErrorContent error={errorObj} />;
@@ -81,6 +81,7 @@ export class App extends React.Component<IAppProps, {}> {
                 <Router history={history}>
                     <Route path={path.getRootPath()} component={Home} >
                         <IndexRedirect to="home" />
+                        {children}
                         <Redirect from="home;jsessionid=*" to="home" />
                         <Route path="home" component={ProductFamiliesList} />
                         <Route path="publications/:productFamily(/:productReleaseVersion)" component={PublicationsList} />
