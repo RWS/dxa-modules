@@ -29,7 +29,9 @@ module.exports = (isTest, isDebug) => {
                 ReactDOM: 'react-dom',
                 ReactDOMServer: 'react-dom/server',
                 // Custom theme
-                'theme-styles.less': path.resolve(__dirname, 'src/theming/styles.less')
+                'theme-styles.less': path.resolve(__dirname, 'src/theming/styles.less'),
+                // Components aliases
+                '@sdl/dd': path.resolve(__dirname, 'node_modules/@sdl/delivery-ish-dd-webapp-gui/dist/lib/components')
             },
             modules: [
                 path.resolve(__dirname),
