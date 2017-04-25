@@ -4,9 +4,9 @@ import { Promise } from "es6-promise";
 import { IAppContext } from "@sdl/dd/container/App/App";
 import { NavigationMenu } from "@sdl/dd/presentation/NavigationMenu";
 import { Toc } from "@sdl/dd/presentation/Toc";
-import { Page } from "components/Page/Page";
+import { Page } from "@sdl/dd/Page/Page";
 import { Breadcrumbs, IBreadcrumbItem } from "@sdl/dd/presentation/Breadcrumbs";
-import { ContentLanguageWarning } from "components/ContentLanguageWarning/ContentLanguageWarning";
+import { ContentLanguageWarning } from "@sdl/dd/ContentLanguageWarning/ContentLanguageWarning";
 
 import { VersionSelector } from "@sdl/dd/presentation/VersionSelector";
 import { Html, IHeader } from "utils/Html";

@@ -5,7 +5,7 @@ import { ActivityIndicator, Button } from "@sdl/controls-react-wrappers";
 import { IProductFamily } from "interfaces/ProductFamily";
 import { IAppContext } from "@sdl/dd/container/App/App";
 import { TilesList } from "@sdl/dd/container/TilesList/TilesList";
-import { ITile } from "components/presentation/Tile";
+import { ITile } from "@sdl/dd/presentation/Tile";
 import { Error } from "@sdl/dd/presentation/Error";
 import { Url } from "utils/Url";
 import { DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE } from "models/Publications";

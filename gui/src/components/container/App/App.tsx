@@ -1,17 +1,17 @@
 import * as React from "react";
 import { Router, Route, IndexRedirect, History, Redirect } from "react-router";
 import { IServices } from "interfaces/Services";
-import { Home } from "components/Home/Home";
-import { PublicationContent } from "components/PublicationContent/PublicationContent";
+import { Home } from "@sdl/dd/Home/Home";
+import { PublicationContent } from "@sdl/dd/PublicationContent/PublicationContent";
 import { ProductFamiliesList } from "@sdl/dd/container/ProductFamiliesList/ProductFamiliesList";
-import { ErrorContent } from "components/container/ErrorContent/ErrorContent";
+import { ErrorContent } from "@sdl/dd/container/ErrorContent/ErrorContent";
+import { PublicationsList } from "@sdl/dd/PublicationsList/PublicationsList";
 
 import { path } from "utils/Path";
 import { IWindow } from "interfaces/Window";
 import { RouteToState } from "components/helpers/RouteToState";
 import { StateToRoute } from "components/helpers/StateToRoute";
 import { FetchPage } from "components/helpers/FetchPage";
-import { PublicationsList } from "components/PublicationsList/PublicationsList";
 import { FetchProductReleaseVersions } from "components/helpers/FetchProductReleaseVersions";
 
 import "./App.less";

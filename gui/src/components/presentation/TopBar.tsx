@@ -1,7 +1,7 @@
 import * as React from "react";
 import { IndexLink } from "react-router";
 import { path } from "utils/Path";
-import { LanguageDropdown } from "components/Dropdown/LanguageDropdown";
+import { LanguageDropdown } from "@sdl/dd/Dropdown/LanguageDropdown";
 import { IAppContext } from "@sdl/dd/container/App/App";
 
 import "./styles/TopBar";

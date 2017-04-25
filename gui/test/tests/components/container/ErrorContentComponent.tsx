@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { ErrorContent } from "components/container/ErrorContent/ErrorContent";
+import { ErrorContent } from "@sdl/dd/container/ErrorContent/ErrorContent";
 import { IErrorContentProps } from "@sdl/dd/container/ErrorContent/ErrorContentPresentation";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 import { TestBase } from "@sdl/models";

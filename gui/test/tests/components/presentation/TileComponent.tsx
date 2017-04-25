@@ -2,7 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as TestUtils from "react-addons-test-utils";
 import { Promise } from "es6-promise";
-import { Tile, ITileProps, ITile } from "components/presentation/Tile";
+import { Tile, ITileProps, ITile } from "@sdl/dd/presentation/Tile";
 import { TestBase } from "@sdl/models";
 import { LocalizationService } from "test/mocks/services/LocalizationService";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";

@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as TestUtils from "react-addons-test-utils";
-import { ITile } from "components/presentation/Tile";
+import { ITile } from "@sdl/dd/presentation/Tile";
 import { TilesList, ITilesListProps } from "@sdl/dd/container/TilesList/TilesList";
 import { TestBase } from "@sdl/models";
 import { LocalizationService } from "test/mocks/services/LocalizationService";

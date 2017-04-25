@@ -6,7 +6,7 @@ import { ActivityIndicator, Button } from "@sdl/controls-react-wrappers";
 
 import { Error } from "@sdl/dd/presentation/Error";
 import { TilesList } from "@sdl/dd/container/TilesList/TilesList";
-import { ITile } from "components/presentation/Tile";
+import { ITile } from "@sdl/dd/presentation/Tile";
 import { IAppContext } from "@sdl/dd/container/App/App";
 import { FetchPublications } from "components/helpers/FetchPublications";
 import { Url } from "utils/Url";

@@ -10,7 +10,7 @@ import { TestBase } from "@sdl/models";
 import { configureStore } from "store/Store";
 import { Provider } from "react-redux";
 import { RouteToState } from "components/helpers/RouteToState";
-import { Page } from "components/Page/Page";
+import { Page } from "@sdl/dd/Page/Page";
 import { PageService } from "test/mocks/services/PageService";
 import { Html } from "utils/Html";
 
