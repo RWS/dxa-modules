@@ -7,7 +7,7 @@
     <parent>
         <artifactId>web-app</artifactId>
         <groupId>com.sdl.delivery.ish</groupId>
-        <version>0.1.0</version>
+        <version>0.1.1</version>
     </parent>
 
     <artifactId>webapp-gui</artifactId>
