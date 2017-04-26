@@ -70,7 +70,8 @@ module.exports = function (buildOptions, gulp, browserSync) {
                     // Use main page for dynamic urls used for deep linking
                     // example: /39137/234/MP330/User-Guide (only the first number is mandatory)
                     const publicationContentRegex = /^\/app\/[0-9]+.*$/gi; // All urls starting with a number
-                    if (req.url.match(/^\/app(\/home(;jsessionid=[\w\d]+)?)?$/gi) || req.url.match(publicationContentRegex)) {
+                    const productFamiliesContentRegex = /^\/app\/publications.*$/gi; // All urls starting with a number
+                    if (req.url.match(/^\/app(\/home(;jsessionid=[\w\d]+)?)?$/gi) || req.url.match(publicationContentRegex) || req.url.match(productFamiliesContentRegex)) {
                         req.url = '/index.html';
                     }
 
