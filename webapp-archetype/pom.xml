@@ -4,7 +4,7 @@
 
     <groupId>com.sdl.delivery.ish</groupId>
     <artifactId>dd-webapp</artifactId>
-    <version>0.1.1</version>
+    <version>0.1.2</version>
     <packaging>war</packaging>
 
     <name>webapp-archetype</name>
@@ -48,7 +48,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <webapp.version>0.1.1</webapp.version>
+        <webapp.version>0.1.2</webapp.version>
         <java.target.version>1.8</java.target.version>
         <maven.compiler.plugin.version>3.6.0</maven.compiler.plugin.version>
         <dxa-bom.version>1.8.0-SNAPSHOT</dxa-bom.version>
