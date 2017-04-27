@@ -39,6 +39,13 @@
         <url>https://${scm.web.prefix.url}/TCD/repos/common</url>
     </scm>
 
+    <repositories>
+        <repository>
+            <id>local-project-repo</id>
+            <url>file:///${project.basedir}/local-project-repo</url>
+        </repository>
+    </repositories>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <webapp.version>0.1.1</webapp.version>
