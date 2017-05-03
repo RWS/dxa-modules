@@ -1,0 +1,66 @@
+.sdl-dialog-container {
+    position: fixed;
+    top: 0; right: 0; bottom: 0; left: 0;
+    z-index: 999; /* Need this because of top tool bar */
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    &:before {
+        content: "";
+        position: absolute;
+        top: 0; right: 0; bottom: 0; left: 0;
+        background: black;
+        opacity: .5;
+    }
+
+    .sdl-dialog {
+        position: relative; /**/
+        max-width: 80vw; min-width: 50vw; 
+        max-height: 80vh; min-height: 20vh;
+
+        background-color: #fff;
+        transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+        box-sizing: border-box;
+        font-family: Roboto, sans-serif;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 45px, rgba(0, 0, 0, 0.22) 0px 10px 18px;
+        border-radius: 2px;
+        overflow: hidden;
+
+        display: flex;
+        flex-direction: column;
+
+        .sdl-dialog-body {
+            flex-grow: 1;
+
+            font-size: 16px;
+            color: rgba(0, 0, 0, 0.6);
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        .sdl-dialog-toolbar {
+            padding: 14px 24px;
+            font-size: 14px;
+            line-height: 14px;
+            color: #5D6E7F;
+            background: #F6F6F6;
+        }
+
+        .sdl-dialog-title .h3 {
+            font-family: "Sommet Rounded W00 Regular", "Arial";
+            font-size: 20px;
+            line-height: 24px;
+    
+            margin: 0 auto;
+            padding: 15px 0px 10px;
+            color: #2E3447;
+        }
+
+        .sdl-dialog-actions {
+            border-top: 1px solid #e0e0e0;
+            padding: 10px 24px;
+        }
+    }
+}
