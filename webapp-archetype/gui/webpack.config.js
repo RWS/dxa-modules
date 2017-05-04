@@ -28,9 +28,12 @@ module.exports = (isTest, isDebug) => {
                 React: 'react',
                 ReactDOM: 'react-dom',
                 ReactDOMServer: 'react-dom/server',
-                // Custom theme
+              // Custom theme
                 'theme-styles.less': path.resolve(__dirname, 'src/theming/styles.less'),
+                // Custom components overwrites
+                // ...
                 // Components aliases
+                '@sdl/dd/base': path.resolve(__dirname, 'node_modules/@sdl/delivery-ish-dd-webapp-gui/dist/lib/components'),
                 '@sdl/dd': path.resolve(__dirname, 'node_modules/@sdl/delivery-ish-dd-webapp-gui/dist/lib/components')
             },
             modules: [
