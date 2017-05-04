@@ -90,7 +90,7 @@ export * from "store/interfaces/State";
  */
 import { Api } from "utils/Api";
 import { Html } from "utils/Html";
-import { Path } from "utils/Path";
+import { Path, path } from "utils/Path";
 import { slugify } from "utils/Slug";
 import { String } from "utils/String";
 import { TcmId } from "utils/TcmId";
@@ -98,5 +98,5 @@ import { Url } from "utils/Url";
 import Version from "utils/Version";
 
 export const Utils = {
-    Api, Html, Path, String, slugify, TcmId, Url, Version
+    Api, Html, Path, path, String, slugify, TcmId, Url, Version
 };
