@@ -3,6 +3,7 @@ import * as Pages from "./Pages";
 import * as Publication from "./Publication";
 import * as Publications from "./Publications";
 import * as ReleaseVersions from "./ReleaseVersions";
+import * as Conditions from "./Conditions";
 import { IState, IPublicationCurrentState } from "store/interfaces/State";
 import { IPublication } from "interfaces/Publication";
 import { IPage } from "interfaces/Page";
@@ -11,6 +12,7 @@ import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 import { IPublicationsListPropsParams } from "@sdl/dd/PublicationsList/PublicationsListPresentation";
 
 export const mainReducer = combineReducers({
+    conditions: Conditions.conditions,
     language: Language.language,
     pages: Pages.pages,
     publication: Publication.publication,

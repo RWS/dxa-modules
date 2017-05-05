@@ -14,7 +14,13 @@ export const PUBLICATIONS_LOADING_ERROR = "PUBLICATIONS_LOADING_ERROR";
 export const RELEASE_VERSIONS_LOADING = "RELEASE_VERSIONS_LOADING";
 export const RELEASE_VERSIONS_LOADED = "RELEASE_VERSIONS_LOADED";
 
+export const DIALOG_REQUEST_OPEN = "DIALOG_REQUEST_OPEN";
+export const DIALOG_REQUEST_CLOSE = "DIALOG_REQUEST_CLOSE";
+
 export const changeLanguage = createAction(CHANGE_LANGUAGE, language => language);
 export const publicationsLoaded = createAction(PUBLICATIONS_LOADED, publications => publications);
 export const updateCurrentPublication = createAction(UPDATE_CURRENT_PUBLICATION,
     (publicationId: string, pageId: string = "", anchor: string = "") => ({ publicationId, pageId, anchor }));
+
+export const dialogRequestOpen = createAction(DIALOG_REQUEST_OPEN);
+export const dialogRequestClose = createAction(DIALOG_REQUEST_CLOSE);

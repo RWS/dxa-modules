@@ -11,6 +11,7 @@ import "components/presentation/styles/Toc";
 import "components/controls/styles/ActivityIndicator";
 import "components/controls/styles/Button";
 import "components/controls/styles/TreeView";
+import { ConditionsDialog } from "../ConditionsDialog/ConditionsDialog";
 
 /**
  * Toc component props
@@ -131,19 +132,22 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
         const activeNodeIdPath = this._getNodeIdPath(props.activeItemPath, firstRootNode);
 
         return (
-            <nav className={"sdl-dita-delivery-toc"}>
-                {error ? <ErrorToc message={formatMessage("error.toc.not.found")} onRetry={_retryHandler} /> : null}
-                {
-                    props.rootItems ?
-                        <TreeView
-                            activeNodeIdPath={activeNodeIdPath}
-                            rootNodes={rootNodes}
-                            onSelectionChanged={this._onSelectionChanged.bind(this)}
-                            skin="graphene" />
-                        : !error ? <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} /> : null
-                }
-                {props.children}
-            </nav>
+            <div>
+                <ConditionsDialog />
+                <nav className={"sdl-dita-delivery-toc"}>
+                    {error ? <ErrorToc message={formatMessage("error.toc.not.found")} onRetry={_retryHandler} /> : null}
+                    {
+                        props.rootItems ?
+                            <TreeView
+                                activeNodeIdPath={activeNodeIdPath}
+                                rootNodes={rootNodes}
+                                onSelectionChanged={this._onSelectionChanged.bind(this)}
+                                skin="graphene" />
+                            : !error ? <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} /> : null
+                    }
+                    {props.children}
+                </nav>
+            </div>
         );
     }
 
@@ -231,7 +235,7 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
             <ul id={parentNode.id} className="sdl-dita-delivery-toc-list-fail">
                 <li style={{ paddingLeft: this._getIndent(parentNode) }}>
                     <p>{formatMessage("error.toc.items.not.found")}</p>
-                    <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{"click": _handleClick}}>{formatMessage("control.button.retry")}</Button>
+                    <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{ "click": _handleClick }}>{formatMessage("control.button.retry")}</Button>
                 </li>
             </ul>
         );
@@ -269,8 +273,8 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
      */
     private _createTaxonomyNode(taxonomy: ITaxonomy, {
             dataType = TaxonomyType.TOPIC,
-            parentNode = null,
-            load = () => {}
+        parentNode = null,
+        load = () => { }
         }: ITaxonomyNodeOptions = {}
     ): ITreeViewNode {
         const taxonomyNode = TreeViewControl.prototype.createNodeFromObject({

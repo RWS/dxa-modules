@@ -12,7 +12,6 @@ import { ContentNavigation, IContentNavigationItem } from "@sdl/dd/presentation/
 import { Error } from "@sdl/dd/presentation/Error";
 import { IAppContext } from "@sdl/dd/container/App/App";
 import { IPageService } from "services/interfaces/PageService";
-import Dialog from "components/Dialog/Dialog";
 
 import "components/presentation/styles/Page";
 import "components/controls/styles/ActivityIndicator";
@@ -201,12 +200,6 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
                 <div className={"sdl-dita-delivery-content-navigation-wrapper"}>
                     <ContentNavigation navItems={navItems} activeNavItemId={activeNavItemId} />
                 </div>
-                <Dialog>
-                    Wasdfasd
-                    <p>
-                        This is just a dialog
-                    </p>
-                </Dialog>
                 <article>
                     {error
                         ? <Error

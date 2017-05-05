@@ -6,6 +6,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    display: none;
+
+    &.sdl-dialog-open {
+        display: flex;
+    }
     
     &:before {
         content: "";
@@ -44,23 +50,45 @@
             padding: 14px 24px;
             font-size: 14px;
             line-height: 14px;
+
             color: #5D6E7F;
             background: #F6F6F6;
+            border-bottom: 1px solid #e0e0e0;
         }
 
-        .sdl-dialog-title .h3 {
-            font-family: "Sommet Rounded W00 Regular", "Arial";
-            font-size: 20px;
-            line-height: 24px;
-    
-            margin: 0 auto;
-            padding: 15px 0px 10px;
-            color: #2E3447;
+        .sdl-dialog-title {
+            h3 {
+                font-family: "Sommet Rounded W00 Regular", "Arial";
+                font-size: 20px;
+                font-weight: normal;
+                line-height: 24px;
+        
+                margin: 0 auto;
+                padding: 0;
+            }
+
+            p {
+                margin: .6em 0 0 0;
+                font-weight: 400;
+                font-size: 0.8em;
+            }
         }
 
         .sdl-dialog-actions {
             border-top: 1px solid #e0e0e0;
             padding: 10px 24px;
+
+            .sdl-button {
+                margin: 0 10px;
+
+                &:first-child {
+                    margin-left: 0;
+                }
+
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
         }
     }
 }
