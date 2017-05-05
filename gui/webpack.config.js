@@ -50,19 +50,19 @@ module.exports = (isTest, isDebug) => {
         module: {
             rules: [{
                 test: /\.(png|jpg|otf|woff(2)?|eot|ttf|svg)$/,
-                    loader: 'url-loader?limit=100000'
+                loader: 'url-loader?limit=100000'
             }, {
                 test: /\.css$/,
-                    loader: extractCSS.extract([cssLoader, 'postcss-loader'])
+                loader: extractCSS.extract([cssLoader, 'postcss-loader'])
             }, {
                 test: /\.less$/,
-                    loader: extractCSS.extract([cssLoader, 'postcss-loader', 'less-loader'])
+                loader: extractCSS.extract([cssLoader, 'postcss-loader', 'less-loader'])
             }, {
                 test: /\.tsx?$/,
-                    loader: ['ts-lib-loader', 'ts-loader']
+                loader: ['ts-lib-loader', 'ts-loader']
             }, {
                 test: /\.resjson$/,
-                    loader: 'json-loader'
+                loader: 'json-loader'
             }]
         },
         resolveLoader: {
@@ -116,7 +116,7 @@ module.exports = (isTest, isDebug) => {
         config.module.rules.push({
             enforce: 'post',
             test: /\.tsx?$/,
-                loader: 'istanbul-instrumenter-loader',
+            loader: 'istanbul-instrumenter-loader',
             query: {
                 esModules: true
             },
@@ -135,13 +135,18 @@ module.exports = (isTest, isDebug) => {
     }
 
     if (!isDebug) { // Only for production
-        config.plugins.push(new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false
-            },
-            sourceMap: false,
-            mangle: false
-        }));
+        config.plugins.push(
+            new webpack.DefinePlugin({
+                'process.env.NODE_ENV': JSON.stringify('production')
+            }),
+            new webpack.optimize.UglifyJsPlugin({
+                compress: {
+                    warnings: false
+                },
+                sourceMap: false,
+                mangle: false
+            })
+        );
     } else { // Only for debug
         // Hot Module Replacement (HMR)
         const hotMiddlewareScript = 'webpack-hot-middleware/client?path=/app/assets';
