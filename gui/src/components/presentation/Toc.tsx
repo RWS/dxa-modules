@@ -133,8 +133,8 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
 
         return (
             <div>
-                <ConditionsDialog />
                 <nav className={"sdl-dita-delivery-toc"}>
+                    <ConditionsDialog />
                     {error ? <ErrorToc message={formatMessage("error.toc.not.found")} onRetry={_retryHandler} /> : null}
                     {
                         props.rootItems ?

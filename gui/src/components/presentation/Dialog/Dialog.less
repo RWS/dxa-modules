@@ -1,3 +1,5 @@
+@import (reference) "~theme-styles";
+
 .sdl-dialog-container {
     position: fixed;
     top: 0; right: 0; bottom: 0; left: 0;
@@ -22,20 +24,26 @@
     }
 
     .sdl-dialog {
-        position: relative; /**/
-        max-width: 80vw; min-width: 50vw; 
-        max-height: 80vh; min-height: 20vh;
-
         background-color: #fff;
         transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
         box-sizing: border-box;
         font-family: Roboto, sans-serif;
-        box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 45px, rgba(0, 0, 0, 0.22) 0px 10px 18px;
-        border-radius: 2px;
         overflow: hidden;
-
         display: flex;
         flex-direction: column;
+
+        @media screen and (min-width: (1+@screenSm)) {
+            position: relative; /**/
+            max-width: 80vw; min-width: 50vw; 
+            max-height: 80vh; min-height: 20vh;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 45px, rgba(0, 0, 0, 0.22) 0px 10px 18px;
+            border-radius: 2px;
+        }
+
+        @media screen and (max-width: @screenSm) {
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+        }
 
         .sdl-dialog-body {
             flex-grow: 1;
@@ -72,11 +80,44 @@
                 font-weight: 400;
                 font-size: 0.8em;
             }
+
+            .sdl-dialog-close-btn {
+                display: none;
+            }
+
+            @media screen and (max-width: @screenSm) {
+                padding: 0;
+                h3 {
+                    margin: 0;
+                    padding: 14px 24px; 
+
+                    font-size: 19px;
+                    color: #F6F6F6;
+                    background-color: #25BD59;
+                }
+
+                p {
+                    margin: .8em .8em .6em 0.8em;
+                }
+
+                .sdl-dialog-close-btn {
+                    display: block;
+                    position: absolute;
+                    top: .8em; right: 1em;
+                    color: #F6F6F6;
+                    background-color: #25BD59;
+                    font-size: 1.3em;
+                }
+            }
         }
 
         .sdl-dialog-actions {
             border-top: 1px solid #e0e0e0;
             padding: 10px 24px;
+
+            @media screen and (max-width: @screenSm) {
+                padding: 10px;
+            }
 
             .sdl-button {
                 margin: 0 10px;

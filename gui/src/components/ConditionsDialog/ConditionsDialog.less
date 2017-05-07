@@ -1,0 +1,26 @@
+@import (reference) "~theme-styles";
+
+.sdl-conditions-dialog-presentation {
+    padding: 0px 16px 2px 16px;
+
+    @media screen and (max-width: @screenMd) {
+        margin-bottom: -10px;
+        padding-top: 16px;
+    }
+
+    .sdl-personalize-content {
+        position: relative;
+        min-height: 40px;
+        padding: 0 8px 0 42px;
+
+        &::before {
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+
+            content: "";
+            background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAASCAMAAABo+94fAAAAgVBMVEUAAAAktkkjvVgmvFgjvFomvVcmvlolvlgmvFkmvFokvVkkvlgmvFklvVglvVgmvlkkvlkmvFkmvVklvVglvVklvVklvVklvVgmvVklvFkkvVklvVklvVklvVklvlglvVkkvVklvlklvVklvVklvVkmvVklvVklvVklvVklvVn///8E1j3DAAAAKXRSTlMABzo9QUlKS1BYcHFydHyBjZWps7W6wcrMz9LV1t3e3+Di5OXq7vz9/uZHGx0AAAABYktHRCpTvtSeAAAAgUlEQVQY033QyRKCMBAE0FY2dwdxHVAU2fr/f5CDFhWSaB9fZbomg+RBJ/cYL3ryBAkn7P8xSfIGIObeYFVVPSC85KxPW7skZbE48mqXzPoV5gwAdianLJaf1xMOzznrbG0zEDU7YGQREdkYe7f+7/zkyneqEsnb1Soa576x66Y8ADWFIGOIic7eAAAAAElFTkSuQmCC");
+            background-position: 7px center;
+            background-repeat: no-repeat;
+        }
+    }
+}
