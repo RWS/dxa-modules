@@ -97,7 +97,12 @@ class Server extends TestBase {
                             <section className="sdl-dita-delivery-publication-content">
                                 <div className="sdl-dita-delivery-page">
                                     <div className="sdl-dita-delivery-navigation-menu">
-                                        <nav className="sdl-dita-delivery-toc"><span><div></div></span><span className="separator"></span></nav>
+                                        <nav className="sdl-dita-delivery-toc">
+                                        <div className="sdl-conditions-dialog-presentation">
+                                            <button className="sdl-button-text sdl-personalize-content">Personalize Content</button>
+                                            <div className="sdl-dialog-container"></div>
+                                        </div>
+                                        <span><div></div></span><span className="separator"></span></nav>
                                     </div>
                                     <div className="sdl-dita-delivery-breadcrumbs">
                                         <ul>

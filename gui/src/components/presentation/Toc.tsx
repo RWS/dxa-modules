@@ -132,22 +132,20 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
         const activeNodeIdPath = this._getNodeIdPath(props.activeItemPath, firstRootNode);
 
         return (
-            <div>
-                <nav className={"sdl-dita-delivery-toc"}>
-                    <ConditionsDialog />
-                    {error ? <ErrorToc message={formatMessage("error.toc.not.found")} onRetry={_retryHandler} /> : null}
-                    {
-                        props.rootItems ?
-                            <TreeView
-                                activeNodeIdPath={activeNodeIdPath}
-                                rootNodes={rootNodes}
-                                onSelectionChanged={this._onSelectionChanged.bind(this)}
-                                skin="graphene" />
-                            : !error ? <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} /> : null
-                    }
-                    {props.children}
-                </nav>
-            </div>
+            <nav className={"sdl-dita-delivery-toc"}>
+                <ConditionsDialog />
+                {error ? <ErrorToc message={formatMessage("error.toc.not.found")} onRetry={_retryHandler} /> : null}
+                {
+                    props.rootItems ?
+                        <TreeView
+                            activeNodeIdPath={activeNodeIdPath}
+                            rootNodes={rootNodes}
+                            onSelectionChanged={this._onSelectionChanged.bind(this)}
+                            skin="graphene" />
+                        : !error ? <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} /> : null
+                }
+                {props.children}
+            </nav>
         );
     }
 

@@ -68,11 +68,11 @@ class Dialog extends React.Component < IDialogProps, {} > {
 
         return <div className={className}>
             {onRequestClose && open && escHandler(onRequestClose)}
-            <div className={DIALOG_CLASS}>
+            {open && <div className={DIALOG_CLASS}>
                 {renderTitle(title, onRequestClose)}
                 {renderBody(children)}
                 {renderActions(actions)}
-            </div>
+            </div>}
         </div>;
     }
 }
