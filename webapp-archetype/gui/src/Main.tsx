@@ -1,10 +1,8 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { Components, Services } from "@sdl/delivery-ish-dd-webapp-gui";
+import { Components, Services, IState, configureStore } from "@sdl/delivery-ish-dd-webapp-gui";
 import { browserHistory } from "react-router";
 import { Provider } from "react-redux";
-import { IState } from "store/interfaces/State";
-import { configureStore } from "store/Store";
 import { Store } from "redux";
 
 const { App } = Components.AppComp;

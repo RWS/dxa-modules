@@ -50,7 +50,6 @@ export * from "interfaces/Services";
 
 /**
  * Models
- *
  */
 import * as NavigationLinksModel from "models/NavigationLinks";
 import * as PageModel from "models/Page";
@@ -78,3 +77,26 @@ export * from "services/interfaces/LocalizationService";
 export * from "services/interfaces/PageService";
 export * from "services/interfaces/PublicationService";
 export * from "services/interfaces/TaxonomyService";
+
+/**
+ * Store
+ */
+export { configureStore } from "store/Store";
+export * from "store/interfaces/Action";
+export * from "store/interfaces/State";
+
+/**
+ * Utils
+ */
+import { Api } from "utils/Api";
+import { Html } from "utils/Html";
+import { Path, path } from "utils/Path";
+import { slugify } from "utils/Slug";
+import { String } from "utils/String";
+import { TcmId } from "utils/TcmId";
+import { Url } from "utils/Url";
+import Version from "utils/Version";
+
+export const Utils = {
+    Api, Html, Path, path, String, slugify, TcmId, Url, Version
+};
