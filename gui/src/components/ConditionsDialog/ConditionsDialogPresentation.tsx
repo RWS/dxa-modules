@@ -1,6 +1,6 @@
 import * as React from "react";
-import Dialog from "components/presentation/Dialog/Dialog";
-import {IRequestHandler} from "../presentation/Dialog/Dialog";
+import Dialog, { IRequestHandler } from "components/presentation/Dialog/Dialog";
+import I18n from "components/helpers/I18n";
 import "./ConditionsDialog.less";
 
 export interface IConditionsDialogPresentationProps {
@@ -18,9 +18,8 @@ const actions = (props: IConditionsDialogPresentationProps) => <div>
 </div>;
 
 const title = (props: IConditionsDialogPresentationProps) => <div className="sdl-conditions-dialog-top-bar">
-    <h3 className="sdl-conditions-dialog-title">Personalize Content</h3>
-    <p className="sdl-conditions-dialog-subtitle">Brief description. Lorem Ipsum is
-        simply dummy text of the printing and typesetting industry.</p>
+    <h3><I18n data="components.conditions.dialog.title" /></h3>
+    <p><I18n data="components.conditions.dialog.description" /></p>
 </div>;
 
 export const ConditionsDialogPresentation = (props: IConditionsDialogPresentationProps) => (
@@ -28,7 +27,7 @@ export const ConditionsDialogPresentation = (props: IConditionsDialogPresentatio
         <button
             className="sdl-button-text sdl-personalize-content"
             onClick={props.requestOpen}>
-            Personalize Content
+            <I18n data="components.conditions.dialog.title" />
         </button>
         <Dialog
             actions={actions(props)}
