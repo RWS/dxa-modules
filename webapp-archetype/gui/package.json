@@ -39,8 +39,8 @@
     "yargs": "~4.8.1"
   },
   "scripts": {
-    "start": "gulp serve",
-    "build": "gulp",
+    "start": "gulp serve -- --max_old_space_size=2048",
+    "build": "gulp -- --max_old_space_size=2048",
     "build-server": "gulp build:dist"
   },
   "author": "noreply@sdl.com",
