@@ -47,7 +47,7 @@ class Server extends TestBase {
                 const app = ReactDOMServer.renderToStaticMarkup(<Provider store={this.store}><App history={hashHistory} services={services} /></Provider>);
                 const expected = ReactDOMServer.renderToStaticMarkup((
                     <div className="ltr sdl-dita-delivery-app">
-                        <div/>
+                        <div />
                         <div className="sdl-dita-delivery-nav-mask"></div>
                         <div className="sdl-dita-delivery-topbar">
                             <header>
@@ -55,7 +55,7 @@ class Server extends TestBase {
                                     <a href="#/home"></a>
                                 </div>
                                 <div className="spacer"></div>
-                                <div className="sdl-dita-delivery-topbar-expand-nav"><span/></div>
+                                <div className="sdl-dita-delivery-topbar-expand-nav"><span /></div>
                                 <div className="sdl-dita-delivery-topbar-expand-search"><span></span></div>
                                 <div className="sdl-dita-delivery-topbar-language"><span></span></div>
                                 <div className="sdl-dita-delivery-dropdown">
@@ -90,19 +90,21 @@ class Server extends TestBase {
                             </div>
                         </div>
                         <div className="sdl-dita-delivery-publication-content-wrapper">
-                            <div/>
-                            <div/>
-                            <div/>
-                            <div/>
+                            <div />
+                            <div />
+                            <div />
+                            <div />
                             <section className="sdl-dita-delivery-publication-content">
                                 <div className="sdl-dita-delivery-page">
                                     <div className="sdl-dita-delivery-navigation-menu">
                                         <nav className="sdl-dita-delivery-toc">
-                                        <div className="sdl-conditions-dialog-presentation">
-                                            <button className="sdl-button-text sdl-personalize-content">Personalize Content</button>
-                                            <div className="sdl-dialog-container"></div>
-                                        </div>
-                                        <span><div></div></span><span className="separator"></span></nav>
+                                            <div className="sdl-conditions-dialog-presentation">
+                                                <button className="sdl-button-text sdl-personalize-content">
+                                                    <span>Personalize Content</span>
+                                                </button>
+                                                <div className="sdl-dialog-container"></div>
+                                            </div>
+                                            <span><div></div></span><span className="separator"></span></nav>
                                     </div>
                                     <div className="sdl-dita-delivery-breadcrumbs">
                                         <ul>
@@ -111,7 +113,7 @@ class Server extends TestBase {
                                             </li>
                                         </ul>
                                     </div>
-                                    <div/>
+                                    <div />
                                     <div className="sdl-dita-delivery-version-selector"><label>Version:</label><span><div></div></span></div>
                                     <div className="sdl-dita-delivery-content-navigation-wrapper">
                                         <nav className="sdl-dita-delivery-content-navigation"></nav>
