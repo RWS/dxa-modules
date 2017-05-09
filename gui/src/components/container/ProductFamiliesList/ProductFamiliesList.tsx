@@ -3,14 +3,17 @@ import { Promise } from "es6-promise";
 import { ButtonPurpose } from "@sdl/controls";
 import { ActivityIndicator, Button } from "@sdl/controls-react-wrappers";
 import { IProductFamily } from "interfaces/ProductFamily";
-import { IAppContext } from "components/container/App";
-import { TilesList } from "components/container/TilesList";
-import { ITile } from "components/presentation/Tile";
-import { Error } from "components/presentation/Error";
+import { IAppContext } from "@sdl/dd/container/App/App";
+import { TilesList } from "@sdl/dd/container/TilesList/TilesList";
+import { ITile } from "@sdl/dd/presentation/Tile";
+import { Error } from "@sdl/dd/presentation/Error";
 import { Url } from "utils/Url";
 import { DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE } from "models/Publications";
 
-import "components/container/styles/ProductFamiliesList";
+import "components/controls/styles/ActivityIndicator";
+import "components/controls/styles/Button";
+
+import "./ProductFamiliesList.less";
 
 /**
  * Product Families list component state

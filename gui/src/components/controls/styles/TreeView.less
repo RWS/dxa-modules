@@ -23,7 +23,7 @@ div.sdl-treeview {
         li > div.node {
             > i.expand-collapse {
                 cursor: pointer;
-                .icon-plus-16x16-ico();
+                .icon-toc-expand();
             }
             > i.node {
                 display: none;
@@ -39,10 +39,10 @@ div.sdl-treeview {
             color: @accentColor1;
         }
         li.expanded > div.node > i.expand-collapse {
-            .icon-cross-16x16-ico();
+            .icon-toc-collapse();
         }
         li.leaf-node > div.node > i.expand-collapse {
-            .icon-dot-16x16-ico();
+            .icon-toc-leaf();
             visibility: visible;
             cursor: default;
         }

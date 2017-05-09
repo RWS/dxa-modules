@@ -2,7 +2,7 @@ import * as React from "react";
 import { Promise } from "es6-promise";
 import { Link } from "react-router";
 import { ITaxonomy } from "interfaces/Taxonomy";
-import { IAppContext } from "components/container/App";
+import { IAppContext } from "@sdl/dd/container/App/App";
 import { path } from "utils/Path";
 
 import "components/presentation/styles/Breadcrumbs";

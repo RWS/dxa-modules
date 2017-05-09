@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as TestUtils from "react-addons-test-utils";
-import { Toc, ITocProps } from "components/presentation/Toc";
+import { Toc, ITocProps } from "@sdl/dd/presentation/Toc";
 import { ITaxonomy } from "interfaces/Taxonomy";
 import { Promise } from "es6-promise";
 import { TreeView } from "@sdl/controls-react-wrappers";

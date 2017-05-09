@@ -2,7 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as TestUtils from "react-addons-test-utils";
 import { Router, Route } from "react-router";
-import { Breadcrumbs, IBreadcrumbsProps, IBreadcrumbItem } from "components/presentation/Breadcrumbs";
+import { Breadcrumbs, IBreadcrumbsProps, IBreadcrumbItem } from "@sdl/dd/presentation/Breadcrumbs";
 import { ITaxonomy } from "interfaces/Taxonomy";
 import { Promise } from "es6-promise";
 import { hashHistory } from "react-router";

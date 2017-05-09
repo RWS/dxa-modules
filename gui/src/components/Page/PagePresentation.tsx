@@ -8,12 +8,14 @@ import { ButtonPurpose } from "@sdl/controls";
 import { Html, IHeader } from "utils/Html";
 import { Url } from "utils/Url";
 import { path } from "utils/Path";
-import { ContentNavigation, IContentNavigationItem } from "components/presentation/ContentNavigation";
-import { Error } from "components/presentation/Error";
-import { IAppContext } from "components/container/App";
+import { ContentNavigation, IContentNavigationItem } from "@sdl/dd/presentation/ContentNavigation";
+import { Error } from "@sdl/dd/presentation/Error";
+import { IAppContext } from "@sdl/dd/container/App/App";
 import { IPageService } from "services/interfaces/PageService";
 
 import "components/presentation/styles/Page";
+import "components/controls/styles/ActivityIndicator";
+import "components/controls/styles/Button";
 import "dita-ot/styles/commonltr";
 import "dita-ot/styles/commonrtl";
 import "prismjs/themes/prism";

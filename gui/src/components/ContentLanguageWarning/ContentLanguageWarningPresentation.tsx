@@ -1,7 +1,7 @@
 import * as React from "react";
 import { IPublication } from "interfaces/Publication";
 import { IPage } from "interfaces/Page";
-import { PageLink } from "components/PageLink/PageLink";
+import { PageLink } from "@sdl/dd/PageLink/PageLink";
 import { localization } from "services/common/LocalizationService";
 
 import "./ContentLanguageWarning.less";

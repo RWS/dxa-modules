@@ -1,5 +1,5 @@
 import * as React from "react";
-import { IAppContext } from "components/container/App";
+import { IAppContext } from "@sdl/dd/container/App/App";
 import { DropdownList } from "@sdl/controls-react-wrappers";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 import { String } from "utils/String";

@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as ReactDOMServer from "react-dom/server";
 import { renderToString } from "Server";
-import { App } from "components/container/App";
+import { App } from "@sdl/dd/container/App/App";
 import { hashHistory } from "react-router";
 import { localization } from "services/common/LocalizationService";
 import { IServices } from "interfaces/Services";

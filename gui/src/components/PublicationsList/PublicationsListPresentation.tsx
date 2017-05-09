@@ -4,22 +4,24 @@ import { Link } from "react-router";
 import { ButtonPurpose } from "@sdl/controls";
 import { ActivityIndicator, Button } from "@sdl/controls-react-wrappers";
 
-import { Error } from "components/presentation/Error";
-import { TilesList } from "components/container/TilesList";
-import { ITile } from "components/presentation/Tile";
-import { IAppContext } from "components/container/App";
+import { Error } from "@sdl/dd/presentation/Error";
+import { TilesList } from "@sdl/dd/container/TilesList/TilesList";
+import { ITile } from "@sdl/dd/presentation/Tile";
+import { IAppContext } from "@sdl/dd/container/App/App";
 import { FetchPublications } from "components/helpers/FetchPublications";
 import { Url } from "utils/Url";
 
 import { IPublication } from "interfaces/Publication";
 import { ITaxonomy } from "interfaces/Taxonomy";
-import { VersionSelector } from "components/presentation/VersionSelector";
+import { VersionSelector } from "@sdl/dd/presentation/VersionSelector";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 import { IPublicationService } from "services/interfaces/PublicationService";
 
 import { DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE } from "models/Publications";
 
-import "components/container/styles/PublicationsList";
+import "components/controls/styles/ActivityIndicator";
+import "components/controls/styles/Button";
+import "./PublicationsList.less";
 
 const SHOWN_TILE_ITEMS_COUNT = 5;
 

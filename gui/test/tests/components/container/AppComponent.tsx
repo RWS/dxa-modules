@@ -1,8 +1,8 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as TestUtils from "react-addons-test-utils";
-import { App } from "components/container/App";
-import { PublicationContentPresentation } from "components/PublicationContent/PublicationContentPresentation";
+import { App } from "@sdl/dd/container/App/App";
+import { PublicationContentPresentation } from "@sdl/dd/PublicationContent/PublicationContentPresentation";
 import { Url } from "utils/Url";
 import { TestBase } from "@sdl/models";
 import { PageService } from "test/mocks/services/PageService";

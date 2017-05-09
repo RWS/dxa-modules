@@ -34,7 +34,10 @@ module.exports = (isTest, isDebug) => {
                 ReactDOMServer: 'react-dom/server',
                 // This alias is needed so customization can happen on top of the theming folder
                 // by using dependency injection techniques
-                'theme-styles.less': path.resolve(__dirname, 'src/theming/styles.less')
+                'theme-styles.less': path.resolve(__dirname, 'src/theming/styles.less'),
+
+                // Controls aliases
+                '@sdl/dd': path.resolve(__dirname, 'src/components')
             },
             modules: [
                 path.resolve(__dirname),
@@ -132,13 +135,18 @@ module.exports = (isTest, isDebug) => {
     }
 
     if (!isDebug) { // Only for production
-        config.plugins.push(new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false
-            },
-            sourceMap: false,
-            mangle: false
-        }));
+        config.plugins.push(
+            new webpack.DefinePlugin({
+                'process.env.NODE_ENV': JSON.stringify('production')
+            }),
+            new webpack.optimize.UglifyJsPlugin({
+                compress: {
+                    warnings: false
+                },
+                sourceMap: false,
+                mangle: false
+            })
+        );
     } else { // Only for debug
         // Hot Module Replacement (HMR)
         const hotMiddlewareScript = 'webpack-hot-middleware/client?path=/app/assets';

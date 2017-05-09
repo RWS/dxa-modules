@@ -2,7 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as TestUtils from "react-addons-test-utils";
 import { Router, Route, hashHistory } from "react-router";
-import { PagePresentation, IPageProps } from "components/Page/PagePresentation";
+import { PagePresentation, IPageProps } from "@sdl/dd/Page/PagePresentation";
 import { Url } from "utils/Url";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 import { ActivityIndicator } from "@sdl/controls-react-wrappers";
@@ -10,7 +10,7 @@ import { TestBase } from "@sdl/models";
 import { configureStore } from "store/Store";
 import { Provider } from "react-redux";
 import { RouteToState } from "components/helpers/RouteToState";
-import { Page } from "components/Page/Page";
+import { Page } from "@sdl/dd/Page/Page";
 import { PageService } from "test/mocks/services/PageService";
 import { Html } from "utils/Html";
 

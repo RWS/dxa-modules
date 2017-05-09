@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { fetchPublications } from "store/actions/Api";
-import { IAppContext } from "components/container/App";
+import { IAppContext } from "@sdl/dd/container/App/App";
 import { IPublicationService } from "services/interfaces/PublicationService";
 import { IState } from "store/interfaces/State";
 

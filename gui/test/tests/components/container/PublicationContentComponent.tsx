@@ -1,9 +1,9 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as TestUtils from "react-addons-test-utils";
-import { PublicationContentPresentation } from "components/PublicationContent/PublicationContentPresentation";
-import { Toc } from "components/presentation/Toc";
-import { PagePresentation } from "components/Page/PagePresentation";
+import { PublicationContentPresentation } from "@sdl/dd/PublicationContent/PublicationContentPresentation";
+import { Toc } from "@sdl/dd/presentation/Toc";
+import { PagePresentation } from "@sdl/dd/Page/PagePresentation";
 import { ITaxonomy } from "interfaces/Taxonomy";
 import { IPublication } from "interfaces/Publication";
 import { IPage } from "interfaces/Page";

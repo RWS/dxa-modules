@@ -5,7 +5,9 @@
       "*": [
         "*",
         "src/*"
-      ]
+      ],
+      /* Components */
+      "@sdl/dd/*": ["src/components/*"]
     },
     "module": "es2015",
     "moduleResolution": "node",

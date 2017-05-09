@@ -23,7 +23,7 @@ export class TaxonomyService implements ITaxonomyService {
      * @static
      * @type {{ [publicationId: string]: { [parentId: string]: Toc } }}
      */
-    private static TocModels: { [publicationId: string]: { [parentId: string]: Toc } };
+    protected static TocModels: { [publicationId: string]: { [parentId: string]: Toc } };
 
     /**
      * Navigation links models
@@ -32,7 +32,7 @@ export class TaxonomyService implements ITaxonomyService {
      * @static
      * @type {{ [publicationId: string]: { [pageId: string]: NavigationLinks } }}
      */
-    private static NavigationLinksModels: { [publicationId: string]: { [pageId: string]: NavigationLinks } };
+    protected static NavigationLinksModels: { [publicationId: string]: { [pageId: string]: NavigationLinks } };
 
     /**
      * Get the root objects of the sitemap
@@ -109,6 +109,11 @@ export class TaxonomyService implements ITaxonomyService {
                 const onLoad = () => {
                     removeEventListeners();
                     const path = navigationLinks.getPath();
+                    // Enhance toc models to include full path and child items
+                    const pathWithSiblings = navigationLinks.getPathWithSiblings();
+                    for (const level of pathWithSiblings) {
+                        this.addTocModel(publicationId, level.parentId, level.items);
+                    }
                     resolve(path);
                 };
                 const onLoadFailed = (event: Event & { data: { error: string } }) => {
@@ -128,12 +133,7 @@ export class TaxonomyService implements ITaxonomyService {
     }
 
     private getTocModel(publicationId: string, parentId: string): Toc {
-        if (!TaxonomyService.TocModels) {
-            TaxonomyService.TocModels = {};
-        }
-        if (!TaxonomyService.TocModels[publicationId]) {
-            TaxonomyService.TocModels[publicationId] = {};
-        }
+        this.ensureTocModel(publicationId);
         if (!TaxonomyService.TocModels[publicationId][parentId]) {
             TaxonomyService.TocModels[publicationId][parentId] = new Toc(publicationId, parentId);
         }
@@ -151,6 +151,23 @@ export class TaxonomyService implements ITaxonomyService {
             TaxonomyService.NavigationLinksModels[publicationId][taxonomyId] = new NavigationLinks(publicationId, pageId, taxonomyId);
         }
         return TaxonomyService.NavigationLinksModels[publicationId][taxonomyId];
+    }
+
+    private addTocModel(publicationId: string, parentId: string, items: ITaxonomy[]): Toc {
+        this.ensureTocModel(publicationId);
+        if (!TaxonomyService.TocModels[publicationId][parentId]) {
+            TaxonomyService.TocModels[publicationId][parentId] = new Toc(publicationId, parentId, items);
+        }
+        return TaxonomyService.TocModels[publicationId][parentId];
+    }
+
+    private ensureTocModel(publicationId: string): void {
+        if (!TaxonomyService.TocModels) {
+            TaxonomyService.TocModels = {};
+        }
+        if (!TaxonomyService.TocModels[publicationId]) {
+            TaxonomyService.TocModels[publicationId] = {};
+        }
     }
 
 }

@@ -1,10 +1,12 @@
 import * as React from "react";
 import { Promise } from "es6-promise";
-import { IAppContext } from "components/container/App";
+import { IAppContext } from "@sdl/dd/container/App/App";
 import { String as StringHelper } from "utils/String";
 import { ActivityIndicator, Button } from "@sdl/controls-react-wrappers";
 import { ButtonPurpose } from "@sdl/controls";
 
+import "components/controls/styles/ActivityIndicator";
+import "components/controls/styles/Button";
 import "components/presentation/styles/Tile";
 
 const TILE_TITLE_TRUNCATE = 50;
