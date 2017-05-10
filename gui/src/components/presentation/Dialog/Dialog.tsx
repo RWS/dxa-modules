@@ -25,14 +25,14 @@ export interface IDialogProps {
 };
 
 const renderTitle = (title: JSX.Element = <h3>Dialog</h3>,
-onRequestClose?: IRequestHandler): JSX.Element => (
-    <div className={ClassNames([TITLE_CLASS, TOOLBAR_CLASS])}>
-        {title}
-        {onRequestClose && <button
-            className={ClassNames([CLOSE_BTN_CLASS, "sdl-button-text"])}
-            onClick={onRequestClose}>&#9587;</button>}
-    </div>
-);
+    onRequestClose?: IRequestHandler): JSX.Element => (
+        <div className={ClassNames([TITLE_CLASS, TOOLBAR_CLASS])}>
+            {title}
+            {onRequestClose && <button
+                className={ClassNames([CLOSE_BTN_CLASS, "sdl-button-text"])}
+                onClick={onRequestClose}>&#9587;</button>}
+        </div>
+    );
 
 const renderBody = (body: JSX.Element = <p>Need body here</p>) => (
     <div className={BODY_CLASS}>
@@ -52,22 +52,32 @@ const handleKeyUp = (onRequestClose: IRequestHandler) => (e: KeyboardEvent) => {
     }
 };
 
-const escHandler = (onRequestClose: IRequestHandler) => <EventListener target="window" onKeyUp={handleKeyUp(onRequestClose)}/>;
+const escHandler = (onRequestClose: IRequestHandler) => <EventListener
+    target="window"
+    onKeyUp={handleKeyUp(onRequestClose)}
+/>;
 
-class Dialog extends React.Component < IDialogProps, {} > {
+const handleOutsideClick = (onRequestClose: IRequestHandler) => (event: React.MouseEvent) => {
+    //Check that clicked outside of dialog.
+    if (onRequestClose && event.target === event.currentTarget) {
+        onRequestClose();
+    }
+};
+
+class Dialog extends React.Component<IDialogProps, {}> {
     public render(): JSX.Element {
         const {
             children,
             title,
             actions,
-            onRequestClose,
+            onRequestClose = () => { },
             open = false
         } = this.props;
 
-        const className = ClassNames(CONTAINER_CLASS, {"sdl-dialog-open": open});
+        const className = ClassNames(CONTAINER_CLASS, { "sdl-dialog-open": open });
 
-        return <div className={className}>
-            {onRequestClose && open && escHandler(onRequestClose)}
+        return <div onClick={handleOutsideClick(onRequestClose)} className={className} >
+            {open && escHandler(onRequestClose)}
             {open && <div className={DIALOG_CLASS}>
                 {renderTitle(title, onRequestClose)}
                 {renderBody(children)}
