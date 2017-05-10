@@ -7,7 +7,7 @@ export interface II18nProps {
 
 const I18n: React.StatelessComponent<II18nProps> = (props: II18nProps, context: IAppContext) => {
     const { formatMessage } = context.services.localizationService;
-    return <span>{props.data ? formatMessage(props.data) : "<I18n /> is messing @data prop."}</span>;
+    return <span>{props.data ? formatMessage(props.data) : "<I18n /> is missing @data prop."}</span>;
 };
 
 I18n.contextTypes = {
