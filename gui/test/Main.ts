@@ -39,5 +39,6 @@ import "test/tests/utils/UrlUtil";
 import "test/tests/store/reducers/Reducer";
 import "test/tests/store/reducers/Publication";
 import "test/tests/store/reducers/Publciations";
+import "test/tests/store/reducers/Conditions";
 import "test/tests/utils/StringUtil";
 import "test/tests/utils/Version";
