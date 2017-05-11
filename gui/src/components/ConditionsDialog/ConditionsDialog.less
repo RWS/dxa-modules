@@ -13,6 +13,10 @@
         min-height: 40px;
         padding: 0 8px 0 42px;
 
+        .rtl & {
+            padding: 0 35px 0 8px;
+        }
+
         &::before {
             .icon-personalize-content-24x24();
             height: auto; width: auto;
@@ -22,7 +26,30 @@
             position: absolute;
             top: 0; right: 0; bottom: 0; left: 0;
             content: "";
+
+
+            .rtl & {
+                background-position: 100% center;
+            }
         }
         
+    }
+
+    .sdl-conditions-dialog-actions {
+        text-align: right;
+
+        .rtl & {
+            text-align: left;
+        }
+    }
+
+    .sdl-button-separator {
+        /* Let me know if know how to do it better */
+        margin: 0 8px 0 9px;
+        background: @neutralColor5;
+        display: inline-block;
+        vertical-align: bottom;
+        height: 37px;
+        width: 1px;
     }
 }

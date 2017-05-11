@@ -10,8 +10,9 @@ export interface IConditionsDialogPresentationProps {
     requestClose: IRequestHandler;
 }
 
-const actions = (props: IConditionsDialogPresentationProps) => <div>
+const actions = (props: IConditionsDialogPresentationProps) => <div className="sdl-conditions-dialog-actions">
     <button className="sdl-button graphene sdl-button-purpose-confirm">Personalize</button>
+    <span className="sdl-button-separator"> </span>
     <button
         onClick={props.requestClose}
         className="sdl-button graphene sdl-button-purpose-general">Cancel</button>

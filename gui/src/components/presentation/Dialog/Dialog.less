@@ -45,89 +45,77 @@
             position: absolute;
             top: 0; right: 0; bottom: 0; left: 0;
         }
+    }
 
-        .sdl-dialog-body {
-            flex-grow: 1;
+    .sdl-dialog-body {
+        flex-grow: 1;
 
-            font-size: 16px;
-            color: rgba(0, 0, 0, 0.6);
-            padding: 24px;
-            overflow-y: auto;
+        font-size: 16px;
+        color: rgba(0, 0, 0, 0.6);
+        padding: 24px;
+        overflow-y: auto;
+    }
+
+    .sdl-dialog-toolbar {
+        padding: 14px 24px;
+        font-size: 14px;
+        line-height: 14px;
+
+        color: @neutralColor4;
+        background: @neutralColor6;
+        border-bottom: @border;
+    }
+
+    .sdl-dialog-title {
+        h3 {
+            .header-font();
+            margin: 0 auto;
+            padding: 0;
         }
 
-        .sdl-dialog-toolbar {
-            padding: 14px 24px;
-            font-size: 14px;
-            line-height: 14px;
-
-            color: @neutralColor4;
-            background: @neutralColor6;
-            border-bottom: @border;
+        p {
+            margin: .6em 0 0 0;
+            font-weight: 400;
+            font-size: 0.8em;
         }
 
-        .sdl-dialog-title {
+        .sdl-dialog-close-btn {
+            display: none;
+        }
+
+        @media screen and (max-width: @screenSm) {
+            padding: 0;
             h3 {
-                .header-font();
-                margin: 0 auto;
-                padding: 0;
+                margin: 0;
+                padding: 14px 24px; 
+
+                text-align: center;
+                font-size: 19px;
+                color: @neutralColor6;
+                background-color: @accentColor1;
             }
 
             p {
-                margin: .6em 0 0 0;
-                font-weight: 400;
-                font-size: 0.8em;
+                margin: .8em .8em .6em 0.8em;
             }
 
             .sdl-dialog-close-btn {
-                display: none;
-            }
-
-            @media screen and (max-width: @screenSm) {
-                padding: 0;
-                h3 {
-                    margin: 0;
-                    padding: 14px 24px; 
-
-                    text-align: center;
-                    font-size: 19px;
-                    color: @neutralColor6;
-                    background-color: @accentColor1;
-                }
-
-                p {
-                    margin: .8em .8em .6em 0.8em;
-                }
-
-                .sdl-dialog-close-btn {
-                    display: block;
-                    position: absolute;
-                    top: .6em; right: 1em;
-                    color: @neutralColor6;
-                    background-color: @accentColor1;
-                    font-size: 1.3em;
-                }
+                display: block;
+                position: absolute;
+                top: .6em; right: 1em;
+                color: @neutralColor6;
+                background-color: @accentColor1;
+                font-size: 1.3em;
             }
         }
+    }
 
-        .sdl-dialog-actions {
-            border-top: @border;
-            padding: 10px 24px;
+    .sdl-dialog-actions {
+        border-top: @border;
+        padding: 10px 24px;
 
-            @media screen and (max-width: @screenSm) {
-                padding: 10px;
-            }
-
-            .sdl-button {
-                margin: 0 10px;
-
-                &:first-child {
-                    margin-left: 0;
-                }
-
-                &:last-child {
-                    margin-right: 0;
-                }
-            }
+        @media screen and (max-width: @screenSm) {
+            padding: 10px;
         }
     }
 }
