@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { PublicationContentPresentation } from "./PublicationContentPresentation";
+import { PublicationContentPresentation } from "@sdl/dd/PublicationContent/PublicationContentPresentation";
 import { updateCurrentPublication } from "store/actions/Actions";
 import { setCurrentPublicationByReleaseVersion } from "store/actions/Api";
 import { getCurrentPub, getPubById, getPageById, getErrorMessage,
