@@ -20,10 +20,10 @@ class TilesListComponent extends TestBase {
                 }
             });
 
-            it("Esc should trigger onRequestClose callback", (done: () => void): void => {
+            it("Click outside of Dialog should trigger onRequestClose", (): void => {
                 const onRequestCloseSpy = jasmine.createSpy("onRequestClose");
-                const component = this._renderComponent(target, onRequestCloseSpy);
-                TestUtils.Simulate.keyUp(ReactDOM.findDOMNode(component), { keyCode: 27 });
+                const component = this._renderComponent(target, onRequestCloseSpy, true);
+                TestUtils.Simulate.click(ReactDOM.findDOMNode(component));
                 expect(onRequestCloseSpy).toHaveBeenCalled();
             });
         });
