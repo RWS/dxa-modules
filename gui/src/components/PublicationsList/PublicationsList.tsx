@@ -4,7 +4,7 @@ import { isPubsLoading, getReleaseVersionsForPub, normalizeProductFamily,
     normalizeProductReleaseVersion, translateProductReleaseVersions,
     getPubListRepresentatives } from "store/reducers/Reducer";
 import { fetchProductReleaseVersionsByProductFamily } from "store/actions/Api";
-import { PublicationsListPresentation, IPublicationsListProps } from "./PublicationsListPresentation";
+import { PublicationsListPresentation, IPublicationsListProps } from "@sdl/dd/PublicationsList/PublicationsListPresentation";
 
 const mapStateToProps = (state: IState, ownProps: IPublicationsListProps) => {
     const { params } = ownProps;
