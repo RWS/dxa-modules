@@ -122,6 +122,10 @@ export interface IPublicationCurrentState {
     anchor: string;
 }
 
+export interface IConditions {
+    showDialog: boolean;
+}
+
 /**
  * State interface
  *
@@ -136,6 +140,8 @@ export interface IState {
      * @memberOf IState
      */
     language: string;
+
+    conditions: IConditions;
     /**
      * Current selected publication
      *

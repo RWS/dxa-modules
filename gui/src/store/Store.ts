@@ -14,6 +14,7 @@ const enhancer = composeEnhancers(applyMiddleware(thunk));
 // This is an empty initial state object, that helps to create store if don't want to fill all options
 const EMPTY_STATE: IState = {
     language: "",
+    conditions: { showDialog: false },
     publication: {
         publicationId: "",
         pageId: "",
@@ -49,4 +50,4 @@ const configureStore = (initialState: {} = {}): Store<IState> => {
     return store;
 };
 
-export {configureStore};
+export { configureStore };

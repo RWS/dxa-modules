@@ -7,6 +7,10 @@ import { Promise } from "es6-promise";
 import { TreeView } from "@sdl/controls-react-wrappers";
 import { TestBase } from "@sdl/models";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
+import { configureStore } from "store/Store";
+import { Store } from "redux";
+import { IState } from "store/interfaces/State";
+import { Provider } from "react-redux";
 
 const DELAY = 100;
 
@@ -256,10 +260,15 @@ class TocComponent extends TestBase {
     }
 
     private _renderComponent(props: ITocProps, target: HTMLElement): Toc {
+        const store: Store<IState> = configureStore();
+
         const comp = ReactDOM.render(
-            <ComponentWithContext>
-                <Toc {...props} />
-            </ComponentWithContext>, target) as React.Component<{}, {}>;
+                <ComponentWithContext>
+                    <Provider store={store}>
+                        <Toc {...props} />
+                    </Provider>
+                </ComponentWithContext>, target) as React.Component<{}, {}>;
+
         return TestUtils.findRenderedComponentWithType(comp, Toc) as Toc;
     }
 }

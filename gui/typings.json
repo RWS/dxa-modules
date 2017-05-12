@@ -15,6 +15,7 @@
   "dependencies": {
     "deep-assign": "registry:dt/deep-assign#0.1.11+20161102140421",
     "lodash": "registry:npm/lodash#4.0.0+20161015015725",
+    "react-event-listener": "registry:dt/react-event-listener#0.4.0+20170123203653",
     "react-redux": "registry:dt/react-redux#4.4.0+20170123203653",
     "redux-actions": "github:DefinitelyTyped/DefinitelyTyped/redux-actions/index.d.ts#983c93531a0a732f2d0eca0148ac255ede0d40a6",
     "redux-thunk": "registry:npm/redux-thunk#2.0.0+20160525185520",

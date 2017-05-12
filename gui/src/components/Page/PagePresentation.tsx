@@ -40,7 +40,7 @@ export interface IPageProps {
      * @type {string}
      * @memberOf IPageProps
      */
-    id?:  string;
+    id?: string;
 
     /**
      * publicationId
@@ -242,7 +242,7 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
     }
 
     private fetchPage(): void {
-        const {fetchPage, publicationId, id = ""} = this.props;
+        const { fetchPage, publicationId, id = "" } = this.props;
         if (fetchPage && publicationId) {
             fetchPage(this.context.services.pageService, publicationId, id);
         } else {

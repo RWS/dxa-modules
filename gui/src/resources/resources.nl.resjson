@@ -10,6 +10,7 @@
   "components.productfamilies.no.published.publications": "Nog geen publicaties gepubliceerd",
   "components.productfamilies.view.all": "Alle producten weergeven",
   "components.publicationslist.view.all": "Alle publicaties weergeven",
+  "components.conditions.dialog.title": "Personaliseren van content",
   "control.button.retry": "Opnieuw proberen",
   "error.default.message": "Als deze foutmelding nog steeds wordt weergegeven, klikt u op een van de koppelingen hieronder om naar de startpagina te gaan of de documentatie te zoeken die u nodig hebt.",
   "error.default.title": "Er is iets misgegaan.",
