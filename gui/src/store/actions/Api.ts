@@ -5,15 +5,17 @@ import { IPublicationService } from "services/interfaces/PublicationService";
 import {
     PAGE_LOADED, PAGE_LOADING, PAGE_ERROR,
     PUBLICATIONS_LOADED, PUBLICATIONS_LOADING, PUBLICATIONS_LOADING_ERROR,
-    RELEASE_VERSIONS_LOADING, RELEASE_VERSIONS_LOADED
+    RELEASE_VERSIONS_LOADING, RELEASE_VERSIONS_LOADED,
+    CONDITIONES_LOADED, CONDITIONES_LOADING, CONDITIONES_ERROR,
+    updateCurrentPublication
 } from "./Actions";
 
 import { getPubById, getPubList } from "store/reducers/Reducer";
 import { Dispatch } from "redux";
 import { IState } from "store/interfaces/State";
-import { updateCurrentPublication } from "store/actions/Actions";
-export { getPubById, getPubList }
+import { IConditionMap } from "store/interfaces/State";
 
+export { getPubById, getPubList }
 export { Action };
 
 /**
@@ -52,6 +54,10 @@ export const publicationsLoadingError = createAction(PUBLICATIONS_LOADING_ERROR)
 
 export const releaseVersionsLoading = createAction(RELEASE_VERSIONS_LOADING, (pubId) => pubId);
 export const releaseVersionsLoaded = createAction(RELEASE_VERSIONS_LOADED, (productFamily, releaseVersions) => ({ productFamily, releaseVersions }));
+
+export const conditionsLoading = createAction(CONDITIONES_LOADING, (pubId: string) => pubId);
+export const conditionsLoaded = createAction(CONDITIONES_LOADED, (pubId: string, conditions: IConditionMap) => ({pubId, conditions}));
+export const conditionsError = createAction(CONDITIONES_ERROR, (pubId: string, error: {}) => ({pubId, error}));
 
 /**
  * Publications fetcher
@@ -119,6 +125,18 @@ export const fetchProductReleaseVersionsByProductFamily = (publicationService: I
             );
     };
 };
+
+export const fetchConditions = (pubId: string): IDispatcherFunction => {
+    return dispatch => {
+        dispatch(conditionsLoading(pubId));
+        /* need something that works for server rendering */
+        fetch(`/mocks/conditions/${pubId}`).then(
+            data => dispatch(conditionsLoaded(pubId, data)),
+            error => dispatch(conditionsError(pubId, error))
+        );
+    };
+};
+
 
 /**
  * This functions tries to find publication by releaseVersion and publicationId
