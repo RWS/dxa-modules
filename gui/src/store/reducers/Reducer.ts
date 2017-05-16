@@ -3,8 +3,8 @@ import * as Pages from "./Pages";
 import * as Publication from "./Publication";
 import * as Publications from "./Publications";
 import * as ReleaseVersions from "./ReleaseVersions";
-import * as Conditions from "./Conditions";
-import { IState, IPublicationCurrentState } from "store/interfaces/State";
+import conditions, * as Conditions from "./conditions";
+import { IState, IPublicationCurrentState, IConditionMap } from "store/interfaces/State";
 import { IPublication } from "interfaces/Publication";
 import { IPage } from "interfaces/Page";
 import { combineReducers } from "./CombineReducers";
@@ -12,7 +12,7 @@ import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 import { IPublicationsListPropsParams } from "@sdl/dd/PublicationsList/PublicationsListPresentation";
 
 export const mainReducer = combineReducers({
-    conditions: Conditions.conditions,
+    conditions,
     language: Language.language,
     pages: Pages.pages,
     publication: Publication.publication,
@@ -33,6 +33,10 @@ export const isPubsLoading = (state: IState): boolean => Publications.isLoadnig(
 export const isPublicationFound = (state: IState, pubId: string): boolean => Publications.isPublicationFound(state.publications, pubId);
 
 export const getPubListErrorMessage = (state: IState) => Publications.getLastError(state.publications);
+
+//Conditions selector
+export const getConditionsByPubId = (state: IState, pubId: string): IConditionMap => Conditions.getByPubId(state.conditions, pubId);
+export const isConditionsDialogVisible = (state: IState) => Conditions.isDialogVisible(state.conditions);
 
 // Pages selectors
 export const getPageById = (state: IState, pageId: string): IPage => Pages.getPageById(state.pages, pageId);

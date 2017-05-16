@@ -56,8 +56,8 @@ export const releaseVersionsLoading = createAction(RELEASE_VERSIONS_LOADING, (pu
 export const releaseVersionsLoaded = createAction(RELEASE_VERSIONS_LOADED, (productFamily, releaseVersions) => ({ productFamily, releaseVersions }));
 
 export const conditionsLoading = createAction(CONDITIONES_LOADING, (pubId: string) => pubId);
-export const conditionsLoaded = createAction(CONDITIONES_LOADED, (pubId: string, conditions: IConditionMap) => ({pubId, conditions}));
-export const conditionsError = createAction(CONDITIONES_ERROR, (pubId: string, error: {}) => ({pubId, error}));
+export const conditionsLoaded = createAction(CONDITIONES_LOADED, (pubId: string, conditions: IConditionMap) => ({ pubId, conditions }));
+export const conditionsError = createAction(CONDITIONES_ERROR, (pubId: string, error: {}) => ({ pubId, error }));
 
 /**
  * Publications fetcher
@@ -108,8 +108,8 @@ export const fetchProductReleaseVersions = (publicationService: IPublicationServ
         publicationService
             .getProductReleaseVersionsByPublicationId(publicationId)
             .then(
-                (releaseVersions) => dispatch(releaseVersionsLoaded(publicationId, releaseVersions)),
-                (errorMessage) => dispatch(releaseVersionsLoaded(publicationId, { title: errorMessage, value: "" }))
+            (releaseVersions) => dispatch(releaseVersionsLoaded(publicationId, releaseVersions)),
+            (errorMessage) => dispatch(releaseVersionsLoaded(publicationId, { title: errorMessage, value: "" }))
             );
     };
 };
@@ -120,8 +120,8 @@ export const fetchProductReleaseVersionsByProductFamily = (publicationService: I
         publicationService
             .getProductReleaseVersions(productFamily)
             .then(
-                (releaseVersions) => dispatch(releaseVersionsLoaded(productFamily, releaseVersions)),
-                (errorMessage) => dispatch(releaseVersionsLoaded(productFamily, { title: errorMessage, value: "" }))
+            (releaseVersions) => dispatch(releaseVersionsLoaded(productFamily, releaseVersions)),
+            (errorMessage) => dispatch(releaseVersionsLoaded(productFamily, { title: errorMessage, value: "" }))
             );
     };
 };
@@ -130,13 +130,14 @@ export const fetchConditions = (pubId: string): IDispatcherFunction => {
     return dispatch => {
         dispatch(conditionsLoading(pubId));
         /* need something that works for server rendering */
-        fetch(`/mocks/conditions/${pubId}`).then(
+        fetch(`/app/gui/mocks/conditions-${pubId}.json`).then(
+            response => response.json()
+        ).then(
             data => dispatch(conditionsLoaded(pubId, data)),
             error => dispatch(conditionsError(pubId, error))
-        );
+            );
     };
 };
-
 
 /**
  * This functions tries to find publication by releaseVersion and publicationId

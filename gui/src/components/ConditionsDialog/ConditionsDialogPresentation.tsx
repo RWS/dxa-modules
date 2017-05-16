@@ -1,11 +1,14 @@
 import * as React from "react";
 import Dialog, { IRequestHandler } from "components/presentation/Dialog/Dialog";
+import { IConditionMap } from "store/interfaces/State";
 import I18n from "components/helpers/I18n";
+import ConditionsFetcher from "./ConditionsFetcher";
+
 import "./ConditionsDialog.less";
 
 export interface IConditionsDialogPresentationProps {
     open: boolean;
-
+    conditions: IConditionMap;
     requestOpen: IRequestHandler;
     requestClose: IRequestHandler;
 }
@@ -23,8 +26,9 @@ const title = (props: IConditionsDialogPresentationProps) => <div className="sdl
     <p><I18n data="components.conditions.dialog.description" /></p>
 </div>;
 
-export const ConditionsDialogPresentation = (props: IConditionsDialogPresentationProps) => (
-    <div className="sdl-conditions-dialog-presentation">
+export const ConditionsDialogPresentation = (props: IConditionsDialogPresentationProps) => {
+    return <div className="sdl-conditions-dialog-presentation">
+        <ConditionsFetcher />
         <button
             className="sdl-button-text sdl-personalize-content"
             onClick={props.requestOpen}>
@@ -35,10 +39,7 @@ export const ConditionsDialogPresentation = (props: IConditionsDialogPresentatio
             title={title(props)}
             open={props.open}
             onRequestClose={props.requestClose}>
-            <p>text</p>
-            <p>text</p>
-            <p>text</p>
-            <p>text</p>
+            <code>{JSON.stringify(props.conditions)}</code>
         </Dialog>
-    </div>
-);
+    </div>;
+};

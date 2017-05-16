@@ -18,7 +18,7 @@ const EMPTY_STATE: IState = {
         showDialog: false,
         byPubId: {},
         loading: [],
-        error: {}
+        errors: {}
     },
     publication: {
         publicationId: "",

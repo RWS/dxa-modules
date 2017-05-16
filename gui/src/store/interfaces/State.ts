@@ -1,5 +1,5 @@
 import { IPublication } from "interfaces/Publication";
-import { ICondition} from "interfaces/Condition";
+import { ICondition } from "interfaces/Condition";
 import { IPage } from "interfaces/Page";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 
@@ -129,9 +129,9 @@ export interface IPublicationCurrentState {
 
 export interface IConditions {
     showDialog: boolean;
-    byPubId: IConditionMap; 
+    byPubId: { [pubId: string]: IConditionMap };
     loading: string[];
-    error: {[pubId: string]: string};
+    errors: { [pubId: string]: string };
 }
 
 /**
