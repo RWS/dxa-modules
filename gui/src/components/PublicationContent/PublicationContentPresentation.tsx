@@ -268,8 +268,8 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                             }}
                             onSelectionChanged={this._onTocSelectionChanged.bind(this)}
                             error={tocError}
-                            onRetry={() => this._loadTocRootItems(publicationId) }
-                            >
+                            onRetry={() => this._loadTocRootItems(publicationId)}
+                        >
                             <span className="separator" />
                         </Toc>
                     </NavigationMenu>
@@ -348,7 +348,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
 
         // When the tree is expanding it is also calling the onTocSelectionChanged callback
         /* istanbul ignore else */
-        const navPath = sitemapItem.url;
+        const navPath = sitemapItem.url && sitemapItem.url.replace(/\/test/, "");
         const parsedUrl = navPath && Url.parsePageUrl(navPath);
         const pageHasChanged = parsedUrl && (pageId !== parsedUrl.pageId && publicationId === parsedUrl.publicationId);
         if (pageHasChanged && parsedUrl && onPublicationChange) {

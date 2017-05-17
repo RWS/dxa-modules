@@ -15,6 +15,8 @@ import { getPubById, getPubList } from "store/reducers/Reducer";
 import { Dispatch } from "redux";
 import { IState } from "store/interfaces/State";
 import { IConditionMap } from "store/reducers/conditions/IConditions";
+import { response2page } from "../../models/Page";
+import { IPage as IServerPage } from "interfaces/ServerModels";
 
 export { getPubById, getPubList }
 export { Action };
@@ -96,8 +98,8 @@ export const fetchPage1 = (pageService: IPageService, publicationId: string, pag
         pageService
             .getPageInfo(publicationId, pageId)
             .then(
-                (page) => dispatch(pageLoaded(page)),
-                (errorMessage) => dispatch(pageError(pageId, errorMessage))
+            (page) => dispatch(pageLoaded(page)),
+            (errorMessage) => dispatch(pageError(pageId, errorMessage))
             );
     };
 };
@@ -105,14 +107,15 @@ export const fetchPage1 = (pageService: IPageService, publicationId: string, pag
 export const fetchPage = (pageService: IPageService, publicationId: string, pageId: string, conditions: IConditionMap): IDispatcherFunction => {
     return dispatch => {
         if (0) {
-         pageService.getPageInfo(publicationId, pageId);
+            pageService.getPageInfo(publicationId, pageId);
         }
         dispatch(pageLoading(pageId));
-        axios.post(`/api/${publicationId}/${pageId}`, { conditions })
-        .then(
+        axios.post(`/api/page/${publicationId}/${pageId}`, { conditions })
+            .then((serverPage) => response2page(serverPage.data as IServerPage))
+            .then(
             (page) => dispatch(pageLoaded(page)),
             (errorMessage) => dispatch(pageError(pageId, errorMessage))
-        );
+            );
     };
 };
 

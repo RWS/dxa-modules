@@ -58,4 +58,9 @@ const configureStore = (initialState: {} = {}): Store<IState> => {
     return store;
 };
 
-export { configureStore };
+const getStore = () => {
+    //hack method onyl for TOC and conditions, (while we haven't moved it redux state)
+    //never use it otherwise
+    return store;
+}
+export { configureStore, getStore };
