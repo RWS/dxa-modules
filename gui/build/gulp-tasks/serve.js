@@ -13,6 +13,8 @@ module.exports = function (buildOptions, gulp, browserSync) {
     const fs = require('fs-extra');
     const webpackDevMiddleware = require('webpack-dev-middleware');
     const webpackHotMiddleware = require('webpack-hot-middleware');
+    const proxy = require("proxy-middleware");
+    const url = require('url');
 
     return function (cb, webpackInstance) {
         const webpackConfig = webpackInstance.config;
@@ -30,6 +32,9 @@ module.exports = function (buildOptions, gulp, browserSync) {
         };
 
         const port = buildOptions.ports.httpServer;
+        
+        const testServer = url.parse("http://ditadelivery01.ams.dev/test/api");
+        testServer.route = "/api";
         // Start browser sync
         var browserSyncOptions = {
             notify: false,
@@ -92,7 +97,8 @@ module.exports = function (buildOptions, gulp, browserSync) {
                     } else {
                         next();
                     }
-                }
+                },
+                proxy(testServer)
             ]
         };
 

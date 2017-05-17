@@ -16,9 +16,12 @@ const EMPTY_STATE: IState = {
     language: "",
     conditions: {
         showDialog: false,
-        byPubId: {},
-        loading: [],
-        errors: {}
+        allConditions: {
+            byPubId: {},
+            loading: [],
+            errors: {}
+        },
+        lastConditions: {}
     },
     publication: {
         publicationId: "",

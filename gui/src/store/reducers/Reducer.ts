@@ -4,12 +4,13 @@ import * as Publication from "./Publication";
 import * as Publications from "./Publications";
 import * as ReleaseVersions from "./ReleaseVersions";
 import conditions, * as Conditions from "./conditions";
-import { IState, IPublicationCurrentState, IConditionMap } from "store/interfaces/State";
+import { IState, IPublicationCurrentState } from "store/interfaces/State";
 import { IPublication } from "interfaces/Publication";
 import { IPage } from "interfaces/Page";
 import { combineReducers } from "./CombineReducers";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 import { IPublicationsListPropsParams } from "@sdl/dd/PublicationsList/PublicationsListPresentation";
+import { IConditionMap } from "./conditions/IConditions";
 
 export const mainReducer = combineReducers({
     conditions,
@@ -37,6 +38,7 @@ export const getPubListErrorMessage = (state: IState) => Publications.getLastErr
 //Conditions selector
 export const getConditionsByPubId = (state: IState, pubId: string): IConditionMap => Conditions.getByPubId(state.conditions, pubId);
 export const isConditionsDialogVisible = (state: IState) => Conditions.isDialogVisible(state.conditions);
+export const getLastConditions = (state: IState, pubId: string) => Conditions.getLastConditions(state.conditions, pubId);
 
 // Pages selectors
 export const getPageById = (state: IState, pageId: string): IPage => Pages.getPageById(state.pages, pageId);

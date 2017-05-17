@@ -1,27 +1,38 @@
 import * as React from "react";
 import Dialog, { IRequestHandler } from "components/presentation/Dialog/Dialog";
-import { IConditionMap } from "store/interfaces/State";
+
 import I18n from "components/helpers/I18n";
 import ConditionsFetcher from "./ConditionsFetcher";
 
 import "./ConditionsDialog.less";
+import { IConditionMap } from "store/reducers/conditions/IConditions";
 
 export interface IConditionsDialogPresentationProps {
-    open: boolean;
+    //unfortunatly we need pubId to pass to handlers
+    pubId: string;
+    isOpen: boolean;
     conditions: IConditionMap;
-    requestOpen: IRequestHandler;
-    requestClose: IRequestHandler;
+    open: IRequestHandler;
+    close: IRequestHandler;
+    apply: (pubId: string, conditions: IConditionMap) => void;
 }
 
-const actions = (props: IConditionsDialogPresentationProps) => <div className="sdl-conditions-dialog-actions">
-    <button className="sdl-button graphene sdl-button-purpose-confirm">Personalize</button>
+const submit = (props: IConditionsDialogPresentationProps) => {
+    props.close();
+    props.apply(props.pubId, props.conditions);
+};
+
+const getActions = (props: IConditionsDialogPresentationProps) => <div className="sdl-conditions-dialog-actions">
+    <button
+        onClick={() => submit(props)}
+        className="sdl-button graphene sdl-button-purpose-confirm">Personalize</button>
     <span className="sdl-button-separator"> </span>
     <button
-        onClick={props.requestClose}
+        onClick={props.close}
         className="sdl-button graphene sdl-button-purpose-general">Cancel</button>
 </div>;
 
-const title = (props: IConditionsDialogPresentationProps) => <div className="sdl-conditions-dialog-top-bar">
+const getTitle = (props: IConditionsDialogPresentationProps) => <div className="sdl-conditions-dialog-top-bar">
     <h3><I18n data="components.conditions.dialog.title" /></h3>
     <p><I18n data="components.conditions.dialog.description" /></p>
 </div>;
@@ -31,14 +42,14 @@ export const ConditionsDialogPresentation = (props: IConditionsDialogPresentatio
         <ConditionsFetcher />
         <button
             className="sdl-button-text sdl-personalize-content"
-            onClick={props.requestOpen}>
+            onClick={props.open}>
             <I18n data="components.conditions.dialog.title" />
         </button>
         <Dialog
-            actions={actions(props)}
-            title={title(props)}
-            open={props.open}
-            onRequestClose={props.requestClose}>
+            actions={getActions(props)}
+            title={getTitle(props)}
+            open={props.isOpen}
+            onRequestClose={props.close}>
             <code>{JSON.stringify(props.conditions)}</code>
         </Dialog>
     </div>;

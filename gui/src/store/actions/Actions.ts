@@ -1,5 +1,5 @@
 import { createAction, Action } from "redux-actions";
-import { IConditionMap } from "../interfaces/State";
+import { IConditionMap } from "store/reducers/conditions/IConditions";
 
 export { Action }
 
@@ -21,15 +21,15 @@ export const DIALOG_REQUEST_CLOSE = "DIALOG_REQUEST_CLOSE";
 export const CONDITIONES_LOADED = "CONDITIONES_LOADED";
 export const CONDITIONES_LOADING = "CONDITIONES_LOADING";
 export const CONDITIONES_ERROR = "CONDITIONES_ERROR";
-export const CONDITIONES_PUB_SAVE = "CONDITIONES_PUB_SAVE";
+export const CONDITIONS_APPLY = "CONDITIONS_APPLY";
 
 export const changeLanguage = createAction(CHANGE_LANGUAGE, language => language);
 export const publicationsLoaded = createAction(PUBLICATIONS_LOADED, publications => publications);
 export const updateCurrentPublication = createAction(UPDATE_CURRENT_PUBLICATION,
     (publicationId: string, pageId: string = "", anchor: string = "") => ({ publicationId, pageId, anchor }));
 
-export const dialogRequestOpen = createAction(DIALOG_REQUEST_OPEN);
-export const dialogRequestClose = createAction(DIALOG_REQUEST_CLOSE);
+export const dialogOpen = createAction(DIALOG_REQUEST_OPEN);
+export const dialogClose = createAction(DIALOG_REQUEST_CLOSE);
 
-export const savePubConditions = createAction(CONDITIONES_PUB_SAVE,
+export const applyConditions = createAction(CONDITIONS_APPLY,
     (pubId: string, conditions: IConditionMap) => ({ pubId, conditions }));

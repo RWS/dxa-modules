@@ -1,7 +1,7 @@
 import { IPublication } from "interfaces/Publication";
-import { ICondition } from "interfaces/Condition";
 import { IPage } from "interfaces/Page";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
+import { IConditionsState } from "store/reducers/conditions/IConditions";
 
 export interface IProductReleaseVersionState {
     byProductFamily: IProductReleaseVersionMap;
@@ -9,10 +9,6 @@ export interface IProductReleaseVersionState {
 
 export interface IProductReleaseVersionMap {
     [id: string]: IProductReleaseVersion[];
-}
-
-export interface IConditionMap {
-    [key: string]: ICondition;
 }
 
 /**
@@ -127,13 +123,6 @@ export interface IPublicationCurrentState {
     anchor: string;
 }
 
-export interface IConditions {
-    showDialog: boolean;
-    byPubId: { [pubId: string]: IConditionMap };
-    loading: string[];
-    errors: { [pubId: string]: string };
-}
-
 /**
  * State interface
  *
@@ -149,7 +138,7 @@ export interface IState {
      */
     language: string;
 
-    conditions: IConditions;
+    conditions: IConditionsState;
     /**
      * Current selected publication
      *
