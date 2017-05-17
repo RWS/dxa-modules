@@ -222,7 +222,9 @@ export class PublicationsListPresentation extends React.Component<IPublicationsL
                     const pagesToDisplay = items.filter(item => item.url).slice(0, SHOWN_TILE_ITEMS_COUNT);
                     resolve(pagesToDisplay.map((item: ITaxonomy, i: number) => {
                         //TODO get read of test.
-                        return <Link key={i} title={item.title} to={item.url ? item.url.replace(/\/test/, "") : ""}>{item.title}</Link>;
+                        const params = item.url && Url.parsePageUrl(item.url);
+                        const url = params && Url.getPageUrl(params.publicationId, params.pageId, params.publicationTitle, params.pageTitle);
+                        return <Link key={i} title={item.title} to={url || ""}>{item.title}</Link>;
                     }));
                 },
                 error => reject(formatMessage("error.publication.topics.not.found"))

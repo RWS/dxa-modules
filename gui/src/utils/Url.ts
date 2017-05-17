@@ -133,18 +133,17 @@ export class Url {
      *
      * @memberOf Url
      */
-    public static parsePageUrl(url: string, rootPath?: string): { publicationId: string, pageId: string, publicationTitle?: string, pageTitle?: string } | undefined {
+    public static parsePageUrl(url: string, rootPath?: string) {
         const rootPathValue = rootPath || path.getRootPath();
-        const parts = url.substring(rootPathValue.length).split("/");
-        if (parts.length >= 2) {
-            return {
-                publicationId: decodeURIComponent(parts[0]),
-                pageId: decodeURIComponent(parts[1]),
-                publicationTitle: parts[2] ? decodeURIComponent(parts[2]) : undefined,
-                pageTitle:  parts[3] ? decodeURIComponent(parts[3]) : undefined
-            };
-        }
-        return undefined;
+        const pageParh = url.substring(rootPathValue.length);
+        const params = /\/(\d+)\/(\d+)(?:\/([^\/]+))?(?:\/([^\/]+))?$/.exec(pageParh);
+
+        return params && params[2] && {
+            publicationId: decodeURIComponent(params[1]),
+            pageId: decodeURIComponent(params[2]),
+            publicationTitle: params[3] ? decodeURIComponent(params[3]) : undefined,
+            pageTitle:  params[4] ? decodeURIComponent(params[4]) : undefined
+        } || void 0;
     }
 
     private static _processTitle(title: string): string {
