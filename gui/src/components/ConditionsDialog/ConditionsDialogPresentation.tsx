@@ -7,7 +7,6 @@ import { IConditionMap } from "store/reducers/conditions/IConditions";
 
 import "./ConditionsDialog.less";
 
-
 export interface IConditionsDialogPresentationProps {
     //unfortunatly we need pubId to pass to handlers
     pubId: string;
@@ -23,22 +22,27 @@ const submit = (props: IConditionsDialogPresentationProps) => {
     props.apply(props.pubId, props.conditions);
 };
 
-const getActions = (props: IConditionsDialogPresentationProps) => <div className="sdl-conditions-dialog-actions">
-    <button
-        onClick={() => submit(props)}
-        className="sdl-button graphene sdl-button-purpose-confirm">Personalize</button>
-    <span className="sdl-button-separator"> </span>
-    <button
-        onClick={props.close}
-        className="sdl-button graphene sdl-button-purpose-general">Cancel</button>
-</div>;
+const getActions = (props: IConditionsDialogPresentationProps) =>
+    <div className="sdl-conditions-dialog-actions">
+        <button
+            onClick={() => submit(props)}
+            className="sdl-button graphene sdl-button-purpose-confirm">Personalize
+        </button>
+        <span className="sdl-button-separator"> </span>
+        <button
+            onClick={props.close}
+            className="sdl-button graphene sdl-button-purpose-general">Cancel
+        </button>
+    </div>;
 
-const getTitle = (props: IConditionsDialogPresentationProps) => <div className="sdl-conditions-dialog-top-bar">
-    <h3><I18n data="components.conditions.dialog.title" /></h3>
-    <p><I18n data="components.conditions.dialog.description" /></p>
-</div>;
+const getTitle = (props: IConditionsDialogPresentationProps) =>
+    <div className="sdl-conditions-dialog-top-bar">
+        <h3><I18n data="components.conditions.dialog.title" /></h3>
+        <p><I18n data="components.conditions.dialog.description" /></p>
+    </div>;
 
-const getControls = (conditions: IConditionMap) => <ol>
+const getConditions = (conditions: IConditionMap) =>
+    <ol>
     {
         Object.keys(conditions)
             .map(key => ({
@@ -53,11 +57,10 @@ const getControls = (conditions: IConditionMap) => <ol>
                 </li>
             ))
     }
-</ol>;
+    </ol>;
 
-
-export const ConditionsDialogPresentation = (props: IConditionsDialogPresentationProps) => {
-    return <div className="sdl-conditions-dialog-presentation">
+export const ConditionsDialogPresentation = (props: IConditionsDialogPresentationProps) =>
+    <div className="sdl-conditions-dialog-presentation">
         <ConditionsFetcher />
         <button
             className="sdl-button-text sdl-personalize-content"
@@ -69,7 +72,6 @@ export const ConditionsDialogPresentation = (props: IConditionsDialogPresentatio
             title={getTitle(props)}
             open={props.isOpen}
             onRequestClose={props.close}>
-            {getControls(props.conditions)}
+                {getConditions(props.conditions)}
         </Dialog>
     </div>;
-};
