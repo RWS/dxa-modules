@@ -76,5 +76,5 @@ export const ConditionsLabelManager: React.StatelessComponent<IConditionalLabelM
             getTranslation: getTranslation
         }}
         onChange={onChange}
-    />
+    />;
 };
