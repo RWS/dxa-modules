@@ -2,6 +2,7 @@ import axios from "axios";
 import { createAction, Action } from "redux-actions";
 import { IPageService } from "services/interfaces/PageService";
 import { IPublicationService } from "services/interfaces/PublicationService";
+import { Api } from "utils/Api";
 
 import {
     PAGE_LOADED, PAGE_LOADING, PAGE_ERROR,
@@ -110,7 +111,7 @@ export const fetchPage = (pageService: IPageService, publicationId: string, page
             pageService.getPageInfo(publicationId, pageId);
         }
         dispatch(pageLoading(pageId));
-        axios.post(`/api/page/${publicationId}/${pageId}`, { conditions })
+        axios.post(Api.getPageUrl(publicationId, pageId), { conditions })
             .then((serverPage) => response2page(serverPage.data as IServerPage))
             .then(
             (page) => dispatch(pageLoaded(page)),
@@ -155,7 +156,7 @@ export const fetchConditions = (pubId: string): IDispatcherFunction => {
     return dispatch => {
         dispatch(conditionsLoading(pubId));
         /* need something that works for server rendering */
-        fetch(`/api/conditions/${pubId}`).then(
+        fetch(Api.getConditionsUrl(pubId)).then(
             response => response.json()
         ).then(
             data => dispatch(conditionsLoaded(pubId, data)),
