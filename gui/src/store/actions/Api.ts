@@ -155,7 +155,6 @@ export const fetchConditions = (pubId: string): IDispatcherFunction => {
     return dispatch => {
         dispatch(conditionsLoading(pubId));
         /* need something that works for server rendering */
-        debugger;
         fetch(`/api/conditions/${pubId}`).then(
             response => response.json()
         ).then(

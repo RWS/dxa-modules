@@ -228,7 +228,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
             this.fetchPublication(nextPubId);
         }
 
-        if (isPage(nextPage) && !isDummyPage(nextPage) && 
+        if (isPage(nextPage) && !isDummyPage(nextPage) &&
             (nextPage.content !== page.content ||
                 MD5(nextProps.conditions) !== MD5(this.props.conditions))) {
             this.refreshToc(nextPubId, nextPage);
@@ -245,7 +245,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
     public render(): JSX.Element {
         const { activeTocItemPath, selectedTocItem, activePageHeader } = this.state;
         const { services, router } = this.context;
-        const { publicationId, 
+        const { publicationId,
             pageId,
             page,
             publication,

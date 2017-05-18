@@ -53,7 +53,6 @@ export class Url {
      */
     public static getPublicationUrl(publicationId: string, publicationTitle?: string): string {
         const rootPath = path.getRootPath();
-        debugger;
         let url = `${rootPath}${encodeURIComponent(publicationId)}`;
         if (publicationTitle) {
             url += `/${Url._processTitle(publicationTitle)}`;

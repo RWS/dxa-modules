@@ -3,9 +3,10 @@ import Dialog, { IRequestHandler } from "components/presentation/Dialog/Dialog";
 
 import I18n from "components/helpers/I18n";
 import ConditionsFetcher from "./ConditionsFetcher";
+import { IConditionMap } from "store/reducers/conditions/IConditions";
 
 import "./ConditionsDialog.less";
-import { IConditionMap } from "store/reducers/conditions/IConditions";
+
 
 export interface IConditionsDialogPresentationProps {
     //unfortunatly we need pubId to pass to handlers
@@ -37,6 +38,24 @@ const getTitle = (props: IConditionsDialogPresentationProps) => <div className="
     <p><I18n data="components.conditions.dialog.description" /></p>
 </div>;
 
+const getControls = (conditions: IConditionMap) => <ol>
+    {
+        Object.keys(conditions)
+            .map(key => ({
+                name: key,
+                value: conditions[key]
+            }))
+            /*.filter(condition => !condition.value.range)*/
+            .map(condition => (
+                <li>
+                    <h3>{condition.name}</h3>
+                    {condition.value.values.map(value => <p>{value}</p>)}
+                </li>
+            ))
+    }
+</ol>;
+
+
 export const ConditionsDialogPresentation = (props: IConditionsDialogPresentationProps) => {
     return <div className="sdl-conditions-dialog-presentation">
         <ConditionsFetcher />
@@ -50,7 +69,7 @@ export const ConditionsDialogPresentation = (props: IConditionsDialogPresentatio
             title={getTitle(props)}
             open={props.isOpen}
             onRequestClose={props.close}>
-            <code>{JSON.stringify(props.conditions)}</code>
+            {getControls(props.conditions)}
         </Dialog>
     </div>;
 };
