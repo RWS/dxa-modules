@@ -25,9 +25,9 @@ export const ConditionsLabelManager: React.StatelessComponent<IConditionalLabelM
     };
 
     const id2item = (id: ILabelManagerItem) => ({
-        id: id.id,
-        label: id.id,
-        description: id.id,
+        id: id.id || id.label,
+        label: id.id || id.label,
+        description: id.id || id.label,
         isInvalid: false
     });
 
