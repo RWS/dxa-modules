@@ -6,6 +6,10 @@ import { NavigationLinks } from "models/NavigationLinks";
 import { Promise } from "es6-promise";
 import { TcmId } from "utils/TcmId";
 import { TaxonomyItemId } from "interfaces/TcmId";
+import { IConditionMap } from "store/reducers/conditions/IConditions";
+import { getStore } from "store/Store";
+import { getLastConditions } from "store/reducers/Reducer";
+import { MD5 } from "object-hash";
 
 /**
  * Taxonomy service, interacts with the models to fetch the required data.
@@ -19,20 +23,20 @@ export class TaxonomyService implements ITaxonomyService {
     /**
      * Table of content models
      *
-     * @private
+     * @protected
      * @static
      * @type {{ [publicationId: string]: { [parentId: string]: Toc } }}
      */
-    protected static TocModels: { [publicationId: string]: { [parentId: string]: Toc } };
+    protected TocModels: { [key: string]: Toc } = {};
 
     /**
      * Navigation links models
      *
-     * @private
+     * @protected
      * @static
      * @type {{ [publicationId: string]: { [pageId: string]: NavigationLinks } }}
      */
-    protected static NavigationLinksModels: { [publicationId: string]: { [pageId: string]: NavigationLinks } };
+    protected NavigationLinksModels: { [publicationId: string]: { [pageId: string]: NavigationLinks } } = {};
 
     /**
      * Get the root objects of the sitemap
@@ -132,42 +136,44 @@ export class TaxonomyService implements ITaxonomyService {
         });
     }
 
+    //Hack while taxonomy data is not moved to redux state
+    private _getConditions(publicationId: string): IConditionMap {
+        return getLastConditions(getStore().getState(), publicationId);
+    }
+
+    private _getKey(publicationId: string, parentId: string): string {
+        return [publicationId, parentId, MD5(this._getConditions(publicationId))].join("@");
+    }
+
     private getTocModel(publicationId: string, parentId: string): Toc {
-        this.ensureTocModel(publicationId);
-        if (!TaxonomyService.TocModels[publicationId][parentId]) {
-            TaxonomyService.TocModels[publicationId][parentId] = new Toc(publicationId, parentId);
-        }
-        return TaxonomyService.TocModels[publicationId][parentId];
+        return this.get(publicationId, parentId) ||
+            this.keep(publicationId, parentId, new Toc(publicationId, parentId, this._getConditions(publicationId)));
+    }
+    private addTocModel(publicationId: string, parentId: string, items: ITaxonomy[]) {
+        const toc = new Toc(publicationId, parentId, this._getConditions(publicationId), items);
+        this.keep(publicationId, parentId, toc);
+        return toc;
+    }
+
+    private get(publicationId: string, parentId: string) {
+        const key = this._getKey(publicationId, parentId);
+        return this.TocModels[key];
+    }
+
+    private keep(publicationId: string, parentId: string, toc: Toc) {
+        const key = this._getKey(publicationId, parentId);
+        this.TocModels[key] = toc;
+        return toc;
     }
 
     private getNavigationLinksModel(publicationId: string, pageId: string, taxonomyId: string): NavigationLinks | undefined {
-        if (!TaxonomyService.NavigationLinksModels) {
-            TaxonomyService.NavigationLinksModels = {};
+        if (!this.NavigationLinksModels[publicationId]) {
+            this.NavigationLinksModels[publicationId] = {};
         }
-        if (!TaxonomyService.NavigationLinksModels[publicationId]) {
-            TaxonomyService.NavigationLinksModels[publicationId] = {};
+        if (!this.NavigationLinksModels[publicationId][taxonomyId]) {
+            this.NavigationLinksModels[publicationId][taxonomyId] = new NavigationLinks(publicationId, pageId, taxonomyId);
         }
-        if (!TaxonomyService.NavigationLinksModels[publicationId][taxonomyId]) {
-            TaxonomyService.NavigationLinksModels[publicationId][taxonomyId] = new NavigationLinks(publicationId, pageId, taxonomyId);
-        }
-        return TaxonomyService.NavigationLinksModels[publicationId][taxonomyId];
-    }
-
-    private addTocModel(publicationId: string, parentId: string, items: ITaxonomy[]): Toc {
-        this.ensureTocModel(publicationId);
-        if (!TaxonomyService.TocModels[publicationId][parentId]) {
-            TaxonomyService.TocModels[publicationId][parentId] = new Toc(publicationId, parentId, items);
-        }
-        return TaxonomyService.TocModels[publicationId][parentId];
-    }
-
-    private ensureTocModel(publicationId: string): void {
-        if (!TaxonomyService.TocModels) {
-            TaxonomyService.TocModels = {};
-        }
-        if (!TaxonomyService.TocModels[publicationId]) {
-            TaxonomyService.TocModels[publicationId] = {};
-        }
+        return this.NavigationLinksModels[publicationId][taxonomyId];
     }
 
 }

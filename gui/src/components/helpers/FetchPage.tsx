@@ -1,10 +1,12 @@
 import * as React from "react";
+import { MD5 } from "object-hash";
 import { connect } from "react-redux";
 import { fetchPage } from "store/actions/Api";
-import { getCurrentPub } from "store/reducers/Reducer";
+import { getCurrentPub, getLastConditions } from "store/reducers/Reducer";
 import { IAppContext } from "@sdl/dd/container/App/App";
 import { IPageService } from "services/interfaces/PageService";
 import { IState, IPublicationCurrentState } from "store/interfaces/State";
+import { IConditionMap } from "store/reducers/conditions/IConditions";
 
 export interface IFetchPage {
     /**
@@ -16,7 +18,7 @@ export interface IFetchPage {
      *
      * @memberOf IFetchPage
      */
-    fetch: (pageService: IPageService, publicationId: string, pageId: string) => void;
+    fetch: (pageService: IPageService, publicationId: string, pageId: string, conditions: IConditionMap) => void;
     /**
      * Current publication from Global State
      *
@@ -24,6 +26,7 @@ export interface IFetchPage {
      * @memberOf IFetchPage
      */
     currentPub: IPublicationCurrentState;
+    conditions: IConditionMap;
 };
 
 /**
@@ -53,7 +56,8 @@ class Fetch extends React.Component<IFetchPage, {}> {
      * Invoked immediately after the component's updates are flushed to the DOM. This method is not called for the initial render.
      */
     public shouldComponentUpdate(nextProps: IFetchPage): boolean {
-        return this.props.currentPub.pageId !== nextProps.currentPub.pageId;
+        return this.props.currentPub.pageId !== nextProps.currentPub.pageId
+            || MD5(this.props.conditions) !== MD5(nextProps.conditions);
     }
 
     /**
@@ -70,7 +74,7 @@ class Fetch extends React.Component<IFetchPage, {}> {
         const { publicationId, pageId } = this.props.currentPub;
         const { pageService } = this.context.services;
         if (pageId !== "") {
-            this.props.fetch(pageService, publicationId, pageId);
+            this.props.fetch(pageService, publicationId, pageId, this.props.conditions);
         }
     }
 
@@ -84,9 +88,14 @@ class Fetch extends React.Component<IFetchPage, {}> {
     }
 }
 
-const mapStateToProps = (state: IState): {} => ({
-    currentPub: getCurrentPub(state)
-});
+const mapStateToProps = (state: IState): {} => {
+    const currentPub = getCurrentPub(state);
+
+    return {
+        currentPub,
+        conditions: getLastConditions(state, currentPub.publicationId)
+    };
+};
 
 const mapDispatchToProps = {
     fetch: fetchPage

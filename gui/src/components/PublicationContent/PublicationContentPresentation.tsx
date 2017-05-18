@@ -26,6 +26,8 @@ import { DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE } from "models/Publications";
 import Version from "utils/Version";
 
 import "./PublicationContent.less";
+import { MD5 } from "object-hash";
+import { IConditionMap } from "store/reducers/conditions/IConditions";
 
 /**
  * PublicationContent component props
@@ -41,6 +43,7 @@ export interface IPublicationContentProps {
      * @memberOf IPublicationContentProps
      */
     publication: IPublication;
+
     /**
      * Page
      *
@@ -75,6 +78,7 @@ export interface IPublicationContentProps {
      * @memberOf IPublicationContentProps
      */
     productReleaseVersion: string;
+
     /**
      * Function to execute when publication is changing
      *
@@ -93,6 +97,7 @@ export interface IPublicationContentProps {
      * @memberOf IPublicationContentProps
      */
     isPublicationFound: boolean;
+    conditions: IConditionMap;
 }
 
 /**
@@ -190,7 +195,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         }
     }
 
-    public fetchPage(publicationId: string, page: IPage): void {
+    public refreshToc(publicationId: string, page: IPage): void {
         this._onPageContentRetrieved(publicationId, page);
     }
 
@@ -201,7 +206,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         }
 
         if (isPage(page) && !isDummyPage(page)) {
-            this.fetchPage(publicationId, page);
+            this.refreshToc(publicationId, page);
         } else if (errorMessage) {
             this._onPageContentRetrievFailed(publicationId, errorMessage);
         }
@@ -223,8 +228,10 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
             this.fetchPublication(nextPubId);
         }
 
-        if (isPage(nextPage) && !isDummyPage(nextPage) && nextPage.content !== page.content) {
-            this.fetchPage(nextPubId, nextPage);
+        if (isPage(nextPage) && !isDummyPage(nextPage) &&
+            (nextPage.content !== page.content ||
+                MD5(nextProps.conditions) !== MD5(this.props.conditions))) {
+            this.refreshToc(nextPubId, nextPage);
         } else if (errorMessage) {
             this._onPageContentRetrievFailed(nextPubId, errorMessage);
         }
@@ -238,10 +245,18 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
     public render(): JSX.Element {
         const { activeTocItemPath, selectedTocItem, activePageHeader } = this.state;
         const { services, router } = this.context;
-        const { publicationId, pageId, page, publication, isPageLoading, errorMessage, productReleaseVersion, productReleaseVersions, isPublicationFound } = this.props;
+        const { publicationId,
+            pageId,
+            page,
+            publication,
+            isPageLoading,
+            errorMessage,
+            productReleaseVersion,
+            productReleaseVersions,
+            isPublicationFound } = this.props;
+
         const { taxonomyService, localizationService } = services;
-        const { rootItems } = this._toc;
-        const tocError = this._toc.error;
+        const { rootItems, error: tocError } = this._toc;
         const selectedProductReleaseVersion = productReleaseVersion ? Version.normalize(productReleaseVersion) : undefined;
         return (
             <section className={"sdl-dita-delivery-publication-content"}>
@@ -268,8 +283,8 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                             }}
                             onSelectionChanged={this._onTocSelectionChanged.bind(this)}
                             error={tocError}
-                            onRetry={() => this._loadTocRootItems(publicationId) }
-                            >
+                            onRetry={() => this._loadTocRootItems(publicationId)}
+                        >
                             <span className="separator" />
                         </Toc>
                     </NavigationMenu>
@@ -348,8 +363,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
 
         // When the tree is expanding it is also calling the onTocSelectionChanged callback
         /* istanbul ignore else */
-        const navPath = sitemapItem.url;
-        const parsedUrl = navPath && Url.parsePageUrl(navPath);
+        const parsedUrl = sitemapItem.url && Url.parsePageUrl(sitemapItem.url);
         const pageHasChanged = parsedUrl && (pageId !== parsedUrl.pageId && publicationId === parsedUrl.publicationId);
         if (pageHasChanged && parsedUrl && onPublicationChange) {
             onPublicationChange(parsedUrl.publicationId, parsedUrl.pageId);

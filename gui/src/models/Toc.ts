@@ -2,6 +2,7 @@ import { ISitemapItem } from "interfaces/ServerModels";
 import { ITaxonomy } from "interfaces/Taxonomy";
 import { Api } from "utils/Api";
 import { Net, IWebRequest, LoadableObject } from "@sdl/models";
+import { IConditionMap } from "store/reducers/conditions/IConditions";
 
 /**
  * Toc model, used for interacting with the server and doing basic operations on the model itself.
@@ -14,6 +15,7 @@ export class Toc extends LoadableObject {
 
     private _publicationId: string;
     private _parentId: string;
+    private _conditions: IConditionMap;
     private _sitemapItems: ITaxonomy[];
     private _preLoaded: boolean = false;
 
@@ -24,10 +26,12 @@ export class Toc extends LoadableObject {
      * @param {string} parentId Parent sitemap item id, for the root item pass "root" as the parent id.
      * @param {ITaxonomy[]} items Create a toc model which has the data prefetched.
      */
-    constructor(publicationId: string, parentId: string, items?: ITaxonomy[]) {
+    constructor(publicationId: string, parentId: string, conditions: IConditionMap, items?: ITaxonomy[]) {
         super();
         this._publicationId = publicationId;
         this._parentId = parentId;
+        this._conditions = conditions;
+
         if (items) {
             this._sitemapItems = items;
             this._preLoaded = true;
@@ -52,7 +56,8 @@ export class Toc extends LoadableObject {
             this._setLoaded();
         } else {
             const url = Api.getTocItemsUrl(this._publicationId, this._parentId);
-            Net.getRequest(url, this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
+            const body = `conditions=${JSON.stringify(this._conditions)}`;
+            Net.postRequest(url, body, "application/x-www-form-urlencoded", this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
         }
     }
 

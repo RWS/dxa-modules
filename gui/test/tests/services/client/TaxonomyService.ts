@@ -3,8 +3,8 @@ import { TestBase } from "@sdl/models";
 
 class TaxonomyServiceInvalidatable extends TaxonomyService {
     public ivalidate(): void {
-        TaxonomyService.NavigationLinksModels = {};
-        TaxonomyService.TocModels = {};
+        this.NavigationLinksModels = {};
+        this.TocModels = {};
     }
 }
 

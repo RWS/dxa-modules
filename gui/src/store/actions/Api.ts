@@ -1,3 +1,4 @@
+import axios from "axios";
 import { createAction, Action } from "redux-actions";
 import { IPageService } from "services/interfaces/PageService";
 import { IPublicationService } from "services/interfaces/PublicationService";
@@ -5,15 +6,19 @@ import { IPublicationService } from "services/interfaces/PublicationService";
 import {
     PAGE_LOADED, PAGE_LOADING, PAGE_ERROR,
     PUBLICATIONS_LOADED, PUBLICATIONS_LOADING, PUBLICATIONS_LOADING_ERROR,
-    RELEASE_VERSIONS_LOADING, RELEASE_VERSIONS_LOADED
+    RELEASE_VERSIONS_LOADING, RELEASE_VERSIONS_LOADED,
+    CONDITIONES_LOADED, CONDITIONES_LOADING, CONDITIONES_ERROR,
+    updateCurrentPublication
 } from "./Actions";
 
 import { getPubById, getPubList } from "store/reducers/Reducer";
 import { Dispatch } from "redux";
 import { IState } from "store/interfaces/State";
-import { updateCurrentPublication } from "store/actions/Actions";
-export { getPubById, getPubList }
+import { IConditionMap } from "store/reducers/conditions/IConditions";
+import { response2page } from "../../models/Page";
+import { IPage as IServerPage } from "interfaces/ServerModels";
 
+export { getPubById, getPubList }
 export { Action };
 
 /**
@@ -53,6 +58,10 @@ export const publicationsLoadingError = createAction(PUBLICATIONS_LOADING_ERROR)
 export const releaseVersionsLoading = createAction(RELEASE_VERSIONS_LOADING, (pubId) => pubId);
 export const releaseVersionsLoaded = createAction(RELEASE_VERSIONS_LOADED, (productFamily, releaseVersions) => ({ productFamily, releaseVersions }));
 
+export const conditionsLoading = createAction(CONDITIONES_LOADING, (pubId: string) => pubId);
+export const conditionsLoaded = createAction(CONDITIONES_LOADED, (pubId: string, conditions: IConditionMap) => ({ pubId, conditions }));
+export const conditionsError = createAction(CONDITIONES_ERROR, (pubId: string, error: {}) => ({ pubId, error }));
+
 /**
  * Publications fetcher
  *
@@ -82,7 +91,7 @@ export const fetchPublications = (publicationService: IPublicationService,
  * @param {string} pageId
  * @returns {Function}
  */
-export const fetchPage = (pageService: IPageService, publicationId: string, pageId: string): IDispatcherFunction => {
+export const fetchPage1 = (pageService: IPageService, publicationId: string, pageId: string, conditions: IConditionMap): IDispatcherFunction => {
     return dispatch => {
         dispatch(pageLoading(pageId));
 
@@ -95,6 +104,28 @@ export const fetchPage = (pageService: IPageService, publicationId: string, page
     };
 };
 
+export const fetchPage = (pageService: IPageService, publicationId: string, pageId: string, conditions: IConditionMap): IDispatcherFunction => {
+    return dispatch => {
+        if (0) {
+            pageService.getPageInfo(publicationId, pageId);
+        }
+        dispatch(pageLoading(pageId));
+        axios.post(`/api/page/${publicationId}/${pageId}`, { conditions })
+            .then((serverPage) => response2page(serverPage.data as IServerPage))
+            .then(
+            (page) => dispatch(pageLoaded(page)),
+            (errorMessage) => dispatch(pageError(pageId, errorMessage))
+            );
+    };
+};
+
+// fetch(`/app/gui/mocks/conditions-${pubId}.json`).then(
+//             response => response.json()
+//         ).then(
+//             data => dispatch(conditionsLoaded(pubId, data)),
+//             error => dispatch(conditionsError(pubId, error))
+//             );
+
 export const fetchProductReleaseVersions = (publicationService: IPublicationService, publicationId: string): IDispatcherFunction => {
     return dispatch => {
         dispatch(releaseVersionsLoading());
@@ -102,8 +133,8 @@ export const fetchProductReleaseVersions = (publicationService: IPublicationServ
         publicationService
             .getProductReleaseVersionsByPublicationId(publicationId)
             .then(
-                (releaseVersions) => dispatch(releaseVersionsLoaded(publicationId, releaseVersions)),
-                (errorMessage) => dispatch(releaseVersionsLoaded(publicationId, { title: errorMessage, value: "" }))
+            (releaseVersions) => dispatch(releaseVersionsLoaded(publicationId, releaseVersions)),
+            (errorMessage) => dispatch(releaseVersionsLoaded(publicationId, { title: errorMessage, value: "" }))
             );
     };
 };
@@ -114,8 +145,21 @@ export const fetchProductReleaseVersionsByProductFamily = (publicationService: I
         publicationService
             .getProductReleaseVersions(productFamily)
             .then(
-                (releaseVersions) => dispatch(releaseVersionsLoaded(productFamily, releaseVersions)),
-                (errorMessage) => dispatch(releaseVersionsLoaded(productFamily, { title: errorMessage, value: "" }))
+            (releaseVersions) => dispatch(releaseVersionsLoaded(productFamily, releaseVersions)),
+            (errorMessage) => dispatch(releaseVersionsLoaded(productFamily, { title: errorMessage, value: "" }))
+            );
+    };
+};
+
+export const fetchConditions = (pubId: string): IDispatcherFunction => {
+    return dispatch => {
+        dispatch(conditionsLoading(pubId));
+        /* need something that works for server rendering */
+        fetch(`/api/conditions/${pubId}`).then(
+            response => response.json()
+        ).then(
+            data => dispatch(conditionsLoaded(pubId, data)),
+            error => dispatch(conditionsError(pubId, error))
             );
     };
 };

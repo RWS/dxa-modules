@@ -3,6 +3,29 @@ import { IPage } from "interfaces/Page";
 import { Api } from "utils/Api";
 import { Net, IWebRequest, LoadableObject } from "@sdl/models";
 
+
+export const response2page = (serverPage: ServerModels.IPage): IPage => {
+    let pageTitle = "";
+    let pageBody = "";
+    const regions = serverPage.Regions;
+    if (Array.isArray(regions) && regions.length > 0) {
+        const entities = regions[0].Entities;
+        if (Array.isArray(entities) && entities.length > 0) {
+            pageTitle = entities[0].topicTitle;
+            const topicBody = entities[0].topicBody;
+            if (topicBody && Array.isArray(topicBody.Fragments) && topicBody.Fragments.length > 0) {
+                pageBody = topicBody.Fragments[0].Html;
+            }
+        }
+    }
+    const navEntries = serverPage.Meta["tocnaventries.generated.value"];
+    return {
+        id: serverPage.Id,
+        title: pageTitle,
+        content: pageBody,
+        sitemapIds: typeof navEntries === "string" ? navEntries.split(", ") : navEntries
+    } as IPage;
+}
 /**
  * Page model
  *
@@ -45,28 +68,7 @@ export class Page extends LoadableObject {
     }
 
     protected _processLoadResult(result: string, webRequest: IWebRequest): void {
-        const page = (JSON.parse(result) as ServerModels.IPage);
-        let pageTitle = "";
-        let pageBody = "";
-        const regions = page.Regions;
-        if (Array.isArray(regions) && regions.length > 0) {
-            const entities = regions[0].Entities;
-            if (Array.isArray(entities) && entities.length > 0) {
-                pageTitle = entities[0].topicTitle;
-                const topicBody = entities[0].topicBody;
-                if (topicBody && Array.isArray(topicBody.Fragments) && topicBody.Fragments.length > 0) {
-                    pageBody = topicBody.Fragments[0].Html;
-                }
-            }
-        }
-        const navEntries = page.Meta["tocnaventries.generated.value"];
-        this._page = {
-            id: page.Id,
-            title: pageTitle,
-            content: pageBody,
-            sitemapIds: typeof navEntries === "string" ? navEntries.split(", ") : navEntries
-        } as IPage;
-
+        this._page = response2page((JSON.parse(result) as ServerModels.IPage));
         super._processLoadResult(result, webRequest);
     }
 }
