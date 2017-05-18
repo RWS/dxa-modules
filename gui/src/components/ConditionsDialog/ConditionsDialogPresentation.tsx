@@ -1,8 +1,9 @@
 import * as React from "react";
-import Dialog, { IRequestHandler } from "components/presentation/Dialog/Dialog";
-import I18n from "components/helpers/I18n";
+import { Dialog, IRequestHandler } from "components/presentation/Dialog/Dialog";
 import ConditionsFetcher from "./ConditionsFetcher";
-import { IConditionMap } from "store/reducers/conditions/IConditions";
+import { IConditionMap, ICondition } from "store/reducers/conditions/IConditions";
+import I18n from "components/helpers/I18n";
+import { ConditionsLabelManager } from "./ConditionsLabelManager";
 
 import "./ConditionsDialog.less";
 
@@ -16,45 +17,59 @@ export interface IConditionsDialogPresentationProps {
     apply: (pubId: string, conditions: IConditionMap) => void;
 }
 
+interface IX {
+    name: string;
+    value: ICondition;
+}
+
 const submit = (props: IConditionsDialogPresentationProps) => {
     props.close();
     props.apply(props.pubId, props.conditions);
 };
 
-const getActions = (props: IConditionsDialogPresentationProps) => <div className="sdl-conditions-dialog-actions">
-    <button
-        onClick={() => submit(props)}
-        className="sdl-button graphene sdl-button-purpose-confirm">Personalize</button>
-    <span className="sdl-button-separator"> </span>
-    <button
-        onClick={props.close}
-        className="sdl-button graphene sdl-button-purpose-general">Cancel</button>
-</div>;
+const getActions = (props: IConditionsDialogPresentationProps) =>
+    <div className="sdl-conditions-dialog-actions">
+        <button
+            onClick={() => submit(props)}
+            className="sdl-button graphene sdl-button-purpose-confirm">Personalize
+        </button>
+        <span className="sdl-button-separator"> </span>
+        <button
+            onClick={props.close}
+            className="sdl-button graphene sdl-button-purpose-general">Cancel
+        </button>
+    </div>;
 
-const getTitle = (props: IConditionsDialogPresentationProps) => <div className="sdl-conditions-dialog-top-bar">
-    <h3><I18n data="components.conditions.dialog.title" /></h3>
-    <p><I18n data="components.conditions.dialog.description" /></p>
-</div>;
+const getTitle = (props: IConditionsDialogPresentationProps) =>
+    <div className="sdl-conditions-dialog-top-bar">
+        <h3><I18n data="components.conditions.dialog.title" /></h3>
+        <p><I18n data="components.conditions.dialog.description" /></p>
+    </div>;
 
-const getControls = (conditions: IConditionMap) => <ol>
-    {
-        Object.keys(conditions)
-            .map(key => ({
-                name: key,
-                value: conditions[key]
-            }))
-            /*.filter(condition => !condition.value.range)*/
-            .map(condition => (
-                <li>
-                    <h3>{condition.name}</h3>
-                    {condition.value.values.map(value => <p>{value}</p>)}
-                </li>
-            ))
+const EventHandler = (object: {}[]): void => {
+    console.log("Change", object);
+};
+
+const getConditions = (conditions: IConditionMap) => (<ol>
+    {Object.keys(conditions)
+        .map(key => ({
+            name: key,
+            value: conditions[key]
+        }))
+        .map(({name, value: condition}: IX) => (
+            <li>
+                <h3>{name}</h3>
+                <ConditionsLabelManager
+                    condition={condition}
+                    onChange={EventHandler}
+                />
+            </li>
+        ))
     }
-</ol>;
+</ol>);
 
-export const ConditionsDialogPresentation = (props: IConditionsDialogPresentationProps) => {
-    return <div className="sdl-conditions-dialog-presentation">
+export const ConditionsDialogPresentation = (props: IConditionsDialogPresentationProps) =>
+    <div className="sdl-conditions-dialog-presentation">
         <ConditionsFetcher />
         <button
             className="sdl-button-text sdl-personalize-content"
@@ -66,7 +81,6 @@ export const ConditionsDialogPresentation = (props: IConditionsDialogPresentatio
             title={getTitle(props)}
             open={props.isOpen}
             onRequestClose={props.close}>
-            {getControls(props.conditions)}
+                {getConditions(props.conditions)}
         </Dialog>
     </div>;
-};

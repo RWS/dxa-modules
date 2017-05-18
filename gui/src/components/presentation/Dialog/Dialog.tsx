@@ -1,7 +1,8 @@
 import * as React from "react";
-import "./Dialog.less";
 import * as ClassNames from "classnames";
 import EventListener from "react-event-listener";
+
+import "./Dialog.less";
 
 const TITLE_CLASS = "sdl-dialog-title";
 const BODY_CLASS = "sdl-dialog-body";
@@ -24,15 +25,16 @@ export interface IDialogProps {
     onRequestClose?: IRequestHandler;
 };
 
-const renderTitle = (title: JSX.Element = <h3>Dialog</h3>,
-    onRequestClose?: IRequestHandler): JSX.Element => (
-        <div className={ClassNames([TITLE_CLASS, TOOLBAR_CLASS])}>
-            {title}
-            {onRequestClose && <button
+const renderTitle = (title: JSX.Element = <h3>Dialog</h3>, onRequestClose?: IRequestHandler): JSX.Element => (
+    <div className={ClassNames([TITLE_CLASS, TOOLBAR_CLASS])}>
+        {title}
+        {onRequestClose &&
+            <button
                 className={ClassNames([CLOSE_BTN_CLASS, "sdl-button-text"])}
-                onClick={onRequestClose}>&#9587;</button>}
-        </div>
-    );
+                onClick={onRequestClose}>&#9587;
+            </button>}
+    </div>
+);
 
 const renderBody = (body: JSX.Element = <p>Need body here</p>) => (
     <div className={BODY_CLASS}>
@@ -52,25 +54,26 @@ const handleKeyUp = (onRequestClose: IRequestHandler) => (e: KeyboardEvent) => {
     }
 };
 
-const escHandler = (onRequestClose: IRequestHandler) => <EventListener
-    target="window"
-    onKeyUp={handleKeyUp(onRequestClose)}
-/>;
+const escHandler = (onRequestClose: IRequestHandler) =>
+    <EventListener
+        target="window"
+        onKeyUp={handleKeyUp(onRequestClose)}
+    />;
 
 const handleOutsideClick = (onRequestClose: IRequestHandler) => (event: React.MouseEvent) => {
-    //Check that clicked outside of dialog.
+    // Check that clicked outside of dialog
     if (onRequestClose && event.target === event.currentTarget) {
         onRequestClose();
     }
 };
 
-class Dialog extends React.Component<IDialogProps, {}> {
+export class Dialog extends React.Component<IDialogProps, {}> {
     public render(): JSX.Element {
         const {
             children,
             title,
             actions,
-            onRequestClose = () => { },
+            onRequestClose = () => {},
             open = false
         } = this.props;
 
