@@ -4,7 +4,9 @@ import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 import { IProductFamily } from "interfaces/ProductFamily";
 import { localization } from "services/common/LocalizationService";
 import { Publications } from "models/Publications";
+import { Conditions } from "models/Conditions";
 import { Promise } from "es6-promise";
+import { ICondition } from "interfaces/ServerModels";
 
 /**
  * Publication service, interacts with the models to fetch the required data.
@@ -23,6 +25,16 @@ export class PublicationService implements IPublicationService {
      * @type {Publications}
      */
     protected static PublicationsModel: Publications | undefined;
+
+    /**
+     * Table of conditions models
+     *
+     * @protected
+     * @static
+     * @type {{ [publicationId: string]: Conditions }}
+     * @memberof PublicationService
+     */
+    protected static ConditionsModels: { [publicationId: string]: Conditions | undefined };
 
     /**
      * Get the list of publications
@@ -200,6 +212,62 @@ export class PublicationService implements IPublicationService {
             PublicationService.PublicationsModel = new Publications();
         }
         return PublicationService.PublicationsModel;
+    }
+
+    /**
+     * Get conditions for a publication
+     *
+     * @param {string} publicationId
+     * @returns {Promise<ICondition[]>}
+     *
+     * @memberof PublicationService
+     */
+    public getConditions(publicationId: string): Promise<ICondition[]> {
+        const conditions = this.getConditionsModel(publicationId);
+
+        return new Promise((resolve: (items?: ICondition[]) => void, reject: (error: string | null) => void) => {
+            if (conditions.isLoaded()) {
+                resolve(conditions.getConditons());
+            } else {
+                let removeEventListeners: () => void;
+                const onLoad = () => {
+                    removeEventListeners();
+                    resolve(conditions.getConditons());
+                };
+                const onLoadFailed = (event: Event & { data: {error: string } }) => {
+                    removeEventListeners();
+                    reject(event.data.error);
+                };
+                removeEventListeners = (): void => {
+                    conditions.removeEventListener("load", onLoad);
+                    conditions.removeEventListener("loadfailed", onLoadFailed);
+                };
+
+                conditions.addEventListener("load", onLoad);
+                conditions.addEventListener("loadfailed", onLoadFailed);
+                conditions.load();
+            }
+        });
+    }
+
+    protected getConditionsModel(publicationId: string): Conditions {
+        this.ensureConditionsModel(publicationId);
+
+        if (!PublicationService.ConditionsModels[publicationId]) {
+            PublicationService.ConditionsModels[publicationId] = new Conditions(publicationId);
+        }
+
+        return PublicationService.ConditionsModels[publicationId] as Conditions;
+    }
+
+    private ensureConditionsModel(publicationId: string): void {
+        if (!PublicationService.ConditionsModels) {
+            PublicationService.ConditionsModels = {};
+        }
+
+        if (!PublicationService.ConditionsModels[publicationId]) {
+            PublicationService.ConditionsModels[publicationId] = undefined;
+        }
     }
 
 }

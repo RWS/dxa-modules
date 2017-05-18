@@ -152,16 +152,24 @@ export const fetchProductReleaseVersionsByProductFamily = (publicationService: I
     };
 };
 
-export const fetchConditions = (pubId: string): IDispatcherFunction => {
+export const fetchConditions = (publicationService: IPublicationService, pubId: string): IDispatcherFunction => {
     return dispatch => {
         dispatch(conditionsLoading(pubId));
         /* need something that works for server rendering */
-        fetch(Api.getConditionsUrl(pubId)).then(
-            response => response.json()
-        ).then(
-            data => dispatch(conditionsLoaded(pubId, data)),
-            error => dispatch(conditionsError(pubId, error))
+
+        publicationService
+            .getConditions(pubId)
+            .then(
+                data => dispatch(conditionsLoaded(pubId, data)),
+                error => dispatch(conditionsError(pubId, error))
             );
+
+        // fetch(Api.getConditionsUrl(pubId)).then(
+        //     response => response.json()
+        // ).then(
+        //     data => dispatch(conditionsLoaded(pubId, data)),
+        //     error => dispatch(conditionsError(pubId, error))
+        //     );
     };
 };
 

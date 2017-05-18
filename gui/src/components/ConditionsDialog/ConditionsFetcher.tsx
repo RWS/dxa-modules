@@ -4,16 +4,24 @@ import { getCurrentPub } from "store/reducers/Reducer";
 import { IAppContext } from "@sdl/dd/container/App/App";
 import { IState } from "store/interfaces/State";
 import { fetchConditions } from "store/actions/Api";
+import { IPublicationService } from "services/interfaces/PublicationService";
 
 export interface IConditionsFetcher {
     pubId: string;
-    fetch: (pubId: string) => void;
+    fetch: (pubService: IPublicationService, pubId: string) => void;
 };
 
 /**
  * Fetch page component
  */
 class Fetch extends React.Component<IConditionsFetcher, {}> {
+
+    /**
+     * Context types
+     */
+    public static contextTypes: React.ValidationMap<IAppContext> = {
+        services: React.PropTypes.object.isRequired
+    };
 
     /**
      * Global context
@@ -46,7 +54,8 @@ class Fetch extends React.Component<IConditionsFetcher, {}> {
      */
     public fetchConditions(): void {
         const { pubId } = this.props;
-        this.props.fetch(pubId);
+        const { publicationService } = this.context.services;
+        this.props.fetch(publicationService, pubId);
     }
 
     /**

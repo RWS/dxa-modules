@@ -2,6 +2,7 @@ import { IPublicationService } from "services/interfaces/PublicationService";
 import { IPublication } from "interfaces/Publication";
 import { IProductFamily } from "interfaces/ProductFamily";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
+import { ICondition } from "interfaces/ServerModels";
 import { Promise } from "es6-promise";
 
 /**
@@ -31,6 +32,14 @@ export class PublicationService implements IPublicationService {
     } = {
         error: null,
         title: "MP330"
+    };
+
+    private _mockDataConditions: {
+        values: ICondition[];
+        error: string | null
+    } = {
+        values: [],
+        error: null
     };
 
     /**
@@ -117,6 +126,23 @@ export class PublicationService implements IPublicationService {
             return Promise.reject(error);
         } else {
             return Promise.resolve({ title });
+        }
+    }
+
+    /**
+     * Get conditions for a publication
+     *
+     * @param {string} publicationId
+     * @returns {Promise<ICondition[]>}
+     *
+     * @memberof PublicationService
+     */
+    public getConditions(publicationId: string): Promise<ICondition[]> {
+        const { error, values } = this._mockDataConditions;
+        if (error) {
+            return Promise.reject(error);
+        } else {
+            return Promise.resolve(values);
         }
     }
 }
