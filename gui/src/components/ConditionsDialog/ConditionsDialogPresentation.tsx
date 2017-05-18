@@ -1,9 +1,9 @@
 import * as React from "react";
-import Dialog, { IRequestHandler } from "components/presentation/Dialog/Dialog";
-
-import I18n from "components/helpers/I18n";
+import { Dialog, IRequestHandler } from "components/presentation/Dialog/Dialog";
 import ConditionsFetcher from "./ConditionsFetcher";
-import { IConditionMap } from "store/reducers/conditions/IConditions";
+import { IConditionMap, ICondition } from "store/reducers/conditions/IConditions";
+import I18n from "components/helpers/I18n";
+import { ConditionsLabelManager } from "./ConditionsLabelManager";
 
 import "./ConditionsDialog.less";
 
@@ -15,6 +15,11 @@ export interface IConditionsDialogPresentationProps {
     open: IRequestHandler;
     close: IRequestHandler;
     apply: (pubId: string, conditions: IConditionMap) => void;
+}
+
+interface IX {
+    name: string;
+    value: ICondition;
 }
 
 const submit = (props: IConditionsDialogPresentationProps) => {
@@ -41,23 +46,30 @@ const getTitle = (props: IConditionsDialogPresentationProps) =>
         <p><I18n data="components.conditions.dialog.description" /></p>
     </div>;
 
-const getConditions = (conditions: IConditionMap) =>
-    <ol>
-    {
-        Object.keys(conditions)
-            .map(key => ({
-                name: key,
-                value: conditions[key]
-            }))
-            /*.filter(condition => !condition.value.range)*/
-            .map(condition => (
-                <li>
-                    <h3>{condition.name}</h3>
-                    {condition.value.values.map(value => <p>{value}</p>)}
-                </li>
-            ))
+const EventHandler = (object: {}[]): void => {
+    console.log("Change", object);
+};
+
+const getConditions = (conditions: IConditionMap) => {
+
+    return <ol>
+    {Object.keys(conditions)
+        .map(key => ({
+            name: key,
+            value: conditions[key]
+        }))
+        .map(({name, value: condition}: IX) => (
+            <li>
+                <h3>{name}</h3>
+                <ConditionsLabelManager
+                    condition={condition}
+                    onChange={EventHandler}
+                />
+            </li>
+        ))
     }
     </ol>;
+};
 
 export const ConditionsDialogPresentation = (props: IConditionsDialogPresentationProps) =>
     <div className="sdl-conditions-dialog-presentation">
