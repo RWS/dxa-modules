@@ -3,7 +3,6 @@ import { IPage } from "interfaces/Page";
 import { Api } from "utils/Api";
 import { Net, IWebRequest, LoadableObject } from "@sdl/models";
 
-
 export const response2page = (serverPage: ServerModels.IPage): IPage => {
     let pageTitle = "";
     let pageBody = "";
@@ -25,7 +24,8 @@ export const response2page = (serverPage: ServerModels.IPage): IPage => {
         content: pageBody,
         sitemapIds: typeof navEntries === "string" ? navEntries.split(", ") : navEntries
     } as IPage;
-}
+};
+
 /**
  * Page model
  *

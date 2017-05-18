@@ -149,18 +149,19 @@ export class TaxonomyService implements ITaxonomyService {
         return this.get(publicationId, parentId) ||
             this.keep(publicationId, parentId, new Toc(publicationId, parentId, this._getConditions(publicationId)));
     }
-    private addTocModel(publicationId: string, parentId: string, items: ITaxonomy[]) {
+
+    private addTocModel(publicationId: string, parentId: string, items: ITaxonomy[]): Toc {
         const toc = new Toc(publicationId, parentId, this._getConditions(publicationId), items);
         this.keep(publicationId, parentId, toc);
         return toc;
     }
 
-    private get(publicationId: string, parentId: string) {
+    private get(publicationId: string, parentId: string): Toc | undefined {
         const key = this._getKey(publicationId, parentId);
         return this.TocModels[key];
     }
 
-    private keep(publicationId: string, parentId: string, toc: Toc) {
+    private keep(publicationId: string, parentId: string, toc: Toc): Toc {
         const key = this._getKey(publicationId, parentId);
         this.TocModels[key] = toc;
         return toc;

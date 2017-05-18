@@ -16,7 +16,7 @@ const mapStateToProps = (state: IState) => {
     const isPageLoading = isPage(page) && isDummyPage(page) && isPageLoadingGetter(state, pageId);
     const productReleaseVersions = getReleaseVersionsForPub(state, publicationId);
     const isPublicationFound = isPublicationFoundGetter(state, publicationId);
-    const conditions = getLastConditions(state, publicationId)
+    const conditions = getLastConditions(state, publicationId);
 
     return {
         publication,

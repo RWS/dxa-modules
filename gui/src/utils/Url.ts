@@ -13,6 +13,13 @@ const ITEM_URL_REGEX = /^\/\d+\/\d+($|\/).*$/i;
  */
 const TITLE_MAX_CHARS = 250;
 
+export interface IPageParams {
+    publicationId: string;
+    pageId: string;
+    publicationTitle?: string;
+    pageTitle?: string;
+}
+
 /**
  * Url helper methods
  *
@@ -132,7 +139,7 @@ export class Url {
      *
      * @memberOf Url
      */
-    public static parsePageUrl(url: string, rootPath?: string) {
+    public static parsePageUrl(url: string, rootPath?: string): IPageParams | undefined {
         const rootPathValue = rootPath || path.getRootPath();
         const pageParh = url.substring(rootPathValue.length);
         const params = /\/(\d+)\/(\d+)(?:\/([^\/]+))?(?:\/([^\/]+))?$/.exec(pageParh);
@@ -141,7 +148,7 @@ export class Url {
             publicationId: decodeURIComponent(params[1]),
             pageId: decodeURIComponent(params[2]),
             publicationTitle: params[3] ? decodeURIComponent(params[3]) : undefined,
-            pageTitle:  params[4] ? decodeURIComponent(params[4]) : undefined
+            pageTitle: params[4] ? decodeURIComponent(params[4]) : undefined
         } || void 0;
     }
 

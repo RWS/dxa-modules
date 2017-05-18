@@ -1,12 +1,10 @@
 import * as React from "react";
 import Dialog, { IRequestHandler } from "components/presentation/Dialog/Dialog";
-
 import I18n from "components/helpers/I18n";
 import ConditionsFetcher from "./ConditionsFetcher";
 import { IConditionMap } from "store/reducers/conditions/IConditions";
 
 import "./ConditionsDialog.less";
-
 
 export interface IConditionsDialogPresentationProps {
     //unfortunatly we need pubId to pass to handlers
@@ -54,7 +52,6 @@ const getControls = (conditions: IConditionMap) => <ol>
             ))
     }
 </ol>;
-
 
 export const ConditionsDialogPresentation = (props: IConditionsDialogPresentationProps) => {
     return <div className="sdl-conditions-dialog-presentation">
