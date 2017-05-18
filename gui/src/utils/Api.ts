@@ -94,4 +94,24 @@ export class Api {
         }
     }
 
+    /**
+     * Get conditions url
+     * Use this url to retrive all conditions of publication
+     *
+     * @static
+     * @param {string} publicationId Publication id
+     * @returns {string}
+     *
+     * @memberOf Api
+     */
+    public static getConditionsUrl(publicationId: string): string {
+        const encodedPubId = encodeURIComponent(publicationId);
+        /* istanbul ignore else */
+        if (mocksEnabled) {
+            return path.getAbsolutePath(`gui/mocks/conditions-${encodedPubId}.json`);
+        } else {
+            return path.getAbsolutePath(`api/conditions/${encodedPubId}`);
+        }
+    }
+
 }
