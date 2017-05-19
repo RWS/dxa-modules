@@ -13,7 +13,6 @@ export interface IConditionsErrorPayload {
 
 const byPubId = combine(
     handleAction(CONDITIONES_LOADED, (state, { conditions, pubId }) => {
-        debugger;
         return ({ ...state, [pubId]: conditions });
     }, {})
 );

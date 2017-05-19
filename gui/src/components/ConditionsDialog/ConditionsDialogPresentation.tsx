@@ -55,8 +55,8 @@ const getConditions = (props: IConditionsDialogPresentationProps) => (<ol>
             name: key,
             value: props.conditions[key]
         }))
-        .map(({name, value: condition}: IX) => (
-            <li>
+        .map(({ name, value: condition }: IX) => (
+            <li key={name}>
                 <h3>{name}</h3>
                 <ConditionsLabelManager
                     values={props.editingConditions[name] ? props.editingConditions[name].values : condition.values}
@@ -68,7 +68,7 @@ const getConditions = (props: IConditionsDialogPresentationProps) => (<ol>
                                 values: items.map(item => item.id)
                             }
                         });
-                        }}
+                    }}
                 />
             </li>
         ))
@@ -88,6 +88,6 @@ export const ConditionsDialogPresentation = (props: IConditionsDialogPresentatio
             title={getTitle(props)}
             open={props.isOpen}
             onRequestClose={props.close}>
-                {getConditions(props)}
+            {getConditions(props)}
         </Dialog>
     </div>;
