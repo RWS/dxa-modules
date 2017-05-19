@@ -49,31 +49,32 @@ const getTitle = (props: IConditionsDialogPresentationProps) =>
         <p><I18n data="components.conditions.dialog.description" /></p>
     </div>;
 
-const getConditions = (props: IConditionsDialogPresentationProps) => (<ol>
-    {Object.keys(props.conditions)
-        .map(key => ({
-            name: key,
-            value: props.conditions[key]
-        }))
-        .map(({ name, value: condition }: IX) => (
-            <li key={name}>
-                <h3>{name}</h3>
-                <ConditionsLabelManager
-                    values={props.editingConditions[name] ? props.editingConditions[name].values : condition.values}
-                    condition={condition}
-                    onChange={(items: ILabelManagerItem[]) => {
-                        props.change({
-                            [name]: {
-                                ...condition,
-                                values: items.map(item => item.id)
-                            }
-                        });
-                    }}
-                />
-            </li>
-        ))
-    }
-</ol>);
+const getConditions = (props: IConditionsDialogPresentationProps) => (
+    <ol className="sdl-conditions-dialog-list">
+        {Object.keys(props.conditions)
+            .map(key => ({
+                name: key,
+                value: props.conditions[key]
+            }))
+            .map(({ name, value: condition }: IX) => (
+                <li key={name}>
+                    <label className="sdl-conditions-dialog-condition-label">{name}</label>
+                    <ConditionsLabelManager
+                        values={props.editingConditions[name] ? props.editingConditions[name].values : condition.values}
+                        condition={condition}
+                        onChange={(items: ILabelManagerItem[]) => {
+                            props.change({
+                                [name]: {
+                                    ...condition,
+                                    values: items.map(item => item.id)
+                                }
+                            });
+                        }}
+                    />
+                </li>
+            ))
+        }
+    </ol>);
 
 export const ConditionsDialogPresentation = (props: IConditionsDialogPresentationProps) =>
     <div className="sdl-conditions-dialog-presentation">
