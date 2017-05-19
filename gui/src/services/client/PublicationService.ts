@@ -6,7 +6,7 @@ import { localization } from "services/common/LocalizationService";
 import { Publications } from "models/Publications";
 import { Conditions } from "models/Conditions";
 import { Promise } from "es6-promise";
-import { ICondition } from "interfaces/ServerModels";
+import { IConditionMap } from "store/reducers/conditions/IConditions";
 
 /**
  * Publication service, interacts with the models to fetch the required data.
@@ -218,14 +218,14 @@ export class PublicationService implements IPublicationService {
      * Get conditions for a publication
      *
      * @param {string} publicationId
-     * @returns {Promise<ICondition[]>}
+     * @returns {Promise<IConditionMap>}
      *
      * @memberof PublicationService
      */
-    public getConditions(publicationId: string): Promise<ICondition[]> {
+    public getConditions(publicationId: string): Promise<IConditionMap> {
         const conditions = this.getConditionsModel(publicationId);
 
-        return new Promise((resolve: (items?: ICondition[]) => void, reject: (error: string | null) => void) => {
+        return new Promise((resolve: (items?: IConditionMap) => void, reject: (error: string | null) => void) => {
             if (conditions.isLoaded()) {
                 resolve(conditions.getConditons());
             } else {

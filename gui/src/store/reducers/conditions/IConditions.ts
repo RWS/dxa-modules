@@ -26,4 +26,5 @@ export interface IConditionsState {
     showDialog: boolean;
     allConditions: IAllConditions;
     lastConditions: ILastConditions;
+    editingConditions: IConditionMap;
 }

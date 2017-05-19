@@ -1,10 +1,4 @@
-﻿
-export interface ICondition {
-    datatype: "Date" | "Number" | "Text" | "Version";
-    range: boolean;
-    values: string[];
-}
-export interface IPage {
+﻿export interface IPage {
     Id: string;
     Meta: { [key: string]: string | string[] | number | number[] | undefined | null };
     Regions: IRegion[];

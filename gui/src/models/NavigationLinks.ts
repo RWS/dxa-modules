@@ -4,6 +4,7 @@ import { Api } from "utils/Api";
 import { Net, IWebRequest, LoadableObject } from "@sdl/models";
 import { Url } from "utils/Url";
 import { localization } from "services/common/LocalizationService";
+import { IConditionMap } from "store/reducers/conditions/IConditions";
 
 /**
  * Navigation links model
@@ -19,6 +20,7 @@ export class NavigationLinks extends LoadableObject {
     private _taxonomyId: string;
     private _path: ITaxonomy[] = [];
     private _pathWithSiblings: { parentId: string, items: ITaxonomy[] }[] = [];
+    private _conditions: IConditionMap;
 
     /**
      * Creates an instance of NavigationLinks.
@@ -29,11 +31,12 @@ export class NavigationLinks extends LoadableObject {
      *
      * @memberOf NavigationLinks
      */
-    constructor(publicationId: string, pageId: string, taxonomyId: string) {
+    constructor(publicationId: string, pageId: string, taxonomyId: string, conditions: IConditionMap) {
         super();
         this._publicationId = publicationId;
         this._pageId = pageId;
         this._taxonomyId = taxonomyId;
+        this._conditions = conditions;
     }
 
     /**
@@ -61,7 +64,8 @@ export class NavigationLinks extends LoadableObject {
     /* Overloads */
     protected _executeLoad(reload: boolean): void {
         const url = Api.getNavigationLinksUrl(this._publicationId, this._taxonomyId);
-        Net.getRequest(url,
+        const body = `conditions=${JSON.stringify(this._conditions)}`;
+        Net.postRequest(url, body, "application/x-www-form-urlencoded",
             this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
     }
 

@@ -21,7 +21,8 @@ const EMPTY_STATE: IState = {
             loading: [],
             errors: {}
         },
-        lastConditions: {}
+        lastConditions: {},
+        editingConditions: {}
     },
     publication: {
         publicationId: "",

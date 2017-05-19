@@ -13,12 +13,15 @@ import "./ConditionsLabelManager.less";
  * @interface IDrodownProps
  */
 export interface IConditionalLabelManagerProps {
+    values: string[];
     condition: ICondition;
     onChange: (object: {}[]) => void;
 }
 
 export const ConditionsLabelManager: React.StatelessComponent<IConditionalLabelManagerProps> = (props: IConditionalLabelManagerProps): JSX.Element => {
-    const { condition, onChange } = props;
+    const { condition,
+        values,
+        onChange } = props;
 
     const getTranslation = (query: string): string => {
         return localization.formatMessage(query);
@@ -32,7 +35,7 @@ export const ConditionsLabelManager: React.StatelessComponent<IConditionalLabelM
     });
 
     return <LabelManager
-        value={condition.values.join()}
+        value={values.join()}
         itemData={(item: ILabelManagerItem, callback: (itemData: ILabelManagerItem | null) => void): void => callback(id2item(item))}
         typeahead={{
             load: (query: string, callback: (result: ITypeaheadSuggestion[]) => void): void => {

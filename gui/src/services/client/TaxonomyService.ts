@@ -36,7 +36,7 @@ export class TaxonomyService implements ITaxonomyService {
      * @static
      * @type {{ [publicationId: string]: { [pageId: string]: NavigationLinks } }}
      */
-    protected NavigationLinksModels: { [publicationId: string]: { [pageId: string]: NavigationLinks } } = {};
+    protected NavigationLinksModels: { [key: string]: NavigationLinks } = {};
 
     /**
      * Get the root objects of the sitemap
@@ -141,8 +141,8 @@ export class TaxonomyService implements ITaxonomyService {
         return getLastConditions(getStore().getState(), publicationId);
     }
 
-    private _getKey(publicationId: string, parentId: string): string {
-        return [publicationId, parentId, MD5(this._getConditions(publicationId))].join("@");
+    private _getKey(publicationId: string, ...rest: string[]): string {
+        return [publicationId, ...rest, MD5(this._getConditions(publicationId))].join("/");
     }
 
     private getTocModel(publicationId: string, parentId: string): Toc {
@@ -168,13 +168,11 @@ export class TaxonomyService implements ITaxonomyService {
     }
 
     private getNavigationLinksModel(publicationId: string, pageId: string, taxonomyId: string): NavigationLinks | undefined {
-        if (!this.NavigationLinksModels[publicationId]) {
-            this.NavigationLinksModels[publicationId] = {};
+        const key = this._getKey(publicationId, pageId, taxonomyId);
+        if (!this.NavigationLinksModels[key]) {
+            this.NavigationLinksModels[key] = new NavigationLinks(publicationId, pageId, taxonomyId, this._getConditions(publicationId));
         }
-        if (!this.NavigationLinksModels[publicationId][taxonomyId]) {
-            this.NavigationLinksModels[publicationId][taxonomyId] = new NavigationLinks(publicationId, pageId, taxonomyId);
-        }
-        return this.NavigationLinksModels[publicationId][taxonomyId];
+        return this.NavigationLinksModels[key];
     }
 
 }

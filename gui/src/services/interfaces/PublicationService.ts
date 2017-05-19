@@ -1,8 +1,8 @@
 import { IPublication } from "interfaces/Publication";
 import { IProductFamily } from "interfaces/ProductFamily";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
-import { ICondition } from "interfaces/ServerModels";
 import { Promise } from "es6-promise";
+import { IConditionMap } from "store/reducers/conditions/IConditions";
 
 /**
  * Publication related services
@@ -65,9 +65,9 @@ export interface IPublicationService {
      * Get the list of conditions for a publication
      *
      * @param {string} publicationId Publication id
-     * @returns {Promise<ICondition[]>} Promise to return the publication conditions
+     * @returns {Promise<IConditionMap>} Promise to return the publication conditions
      *
      * @memberof IPublicationService
      */
-    getConditions(publicationId: string): Promise<ICondition[]>;
+    getConditions(publicationId: string): Promise<IConditionMap>;
 }

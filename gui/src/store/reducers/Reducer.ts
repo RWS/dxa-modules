@@ -39,6 +39,7 @@ export const getPubListErrorMessage = (state: IState) => Publications.getLastErr
 export const getConditionsByPubId = (state: IState, pubId: string): IConditionMap => Conditions.getByPubId(state.conditions, pubId);
 export const isConditionsDialogVisible = (state: IState) => Conditions.isDialogVisible(state.conditions);
 export const getLastConditions = (state: IState, pubId: string) => Conditions.getLastConditions(state.conditions, pubId);
+export const getEditingConditions = (state: IState) => Conditions.getEditingConditions(state.conditions);
 
 // Pages selectors
 export const getPageById = (state: IState, pageId: string): IPage => Pages.getPageById(state.pages, pageId);

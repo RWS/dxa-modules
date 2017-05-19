@@ -2,8 +2,8 @@ import { IPublicationService } from "services/interfaces/PublicationService";
 import { IPublication } from "interfaces/Publication";
 import { IProductFamily } from "interfaces/ProductFamily";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
-import { ICondition } from "interfaces/ServerModels";
 import { Promise } from "es6-promise";
+import { IConditionMap } from "store/reducers/conditions/IConditions";
 
 /**
  * Publication Service for the server.
@@ -35,10 +35,10 @@ export class PublicationService implements IPublicationService {
     };
 
     private _mockDataConditions: {
-        values: ICondition[];
+        values: IConditionMap;
         error: string | null
     } = {
-        values: [],
+        values: {},
         error: null
     };
 
@@ -137,7 +137,7 @@ export class PublicationService implements IPublicationService {
      *
      * @memberof PublicationService
      */
-    public getConditions(publicationId: string): Promise<ICondition[]> {
+    public getConditions(publicationId: string): Promise<IConditionMap> {
         const { error, values } = this._mockDataConditions;
         if (error) {
             return Promise.reject(error);

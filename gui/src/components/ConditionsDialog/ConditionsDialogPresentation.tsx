@@ -3,18 +3,21 @@ import { Dialog, IRequestHandler } from "components/presentation/Dialog/Dialog";
 import ConditionsFetcher from "./ConditionsFetcher";
 import { IConditionMap, ICondition } from "store/reducers/conditions/IConditions";
 import I18n from "components/helpers/I18n";
-import { ConditionsLabelManager } from "./ConditionsLabelManager";
+import { ConditionsLabelManager } from "components/ConditionsLabelManager/ConditionsLabelManager";
 
 import "./ConditionsDialog.less";
+import { ILabelManagerItem } from "@sdl/controls";
 
 export interface IConditionsDialogPresentationProps {
     //unfortunatly we need pubId to pass to handlers
     pubId: string;
     isOpen: boolean;
     conditions: IConditionMap;
+    editingConditions: IConditionMap;
     open: IRequestHandler;
     close: IRequestHandler;
     apply: (pubId: string, conditions: IConditionMap) => void;
+    change: (conditions: IConditionMap) => void;
 }
 
 interface IX {
@@ -23,8 +26,8 @@ interface IX {
 }
 
 const submit = (props: IConditionsDialogPresentationProps) => {
+    props.apply(props.pubId, props.editingConditions);
     props.close();
-    props.apply(props.pubId, props.conditions);
 };
 
 const getActions = (props: IConditionsDialogPresentationProps) =>
@@ -46,22 +49,26 @@ const getTitle = (props: IConditionsDialogPresentationProps) =>
         <p><I18n data="components.conditions.dialog.description" /></p>
     </div>;
 
-const EventHandler = (object: {}[]): void => {
-    console.log("Change", object);
-};
-
-const getConditions = (conditions: IConditionMap) => (<ol>
-    {Object.keys(conditions)
+const getConditions = (props: IConditionsDialogPresentationProps) => (<ol>
+    {Object.keys(props.conditions)
         .map(key => ({
             name: key,
-            value: conditions[key]
+            value: props.conditions[key]
         }))
         .map(({name, value: condition}: IX) => (
             <li>
                 <h3>{name}</h3>
                 <ConditionsLabelManager
+                    values={props.editingConditions[name] ? props.editingConditions[name].values : condition.values}
                     condition={condition}
-                    onChange={EventHandler}
+                    onChange={(items: ILabelManagerItem[]) => {
+                        props.change({
+                            [name]: {
+                                ...condition,
+                                values: items.map(item => item.id)
+                            }
+                        });
+                        }}
                 />
             </li>
         ))
@@ -81,6 +88,6 @@ export const ConditionsDialogPresentation = (props: IConditionsDialogPresentatio
             title={getTitle(props)}
             open={props.isOpen}
             onRequestClose={props.close}>
-                {getConditions(props.conditions)}
+                {getConditions(props)}
         </Dialog>
     </div>;

@@ -2,8 +2,8 @@ import { IPublicationService } from "services/interfaces/PublicationService";
 import { IPublication } from "interfaces/Publication";
 import { IProductFamily } from "interfaces/ProductFamily";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
-import { ICondition } from "interfaces/ServerModels";
 import { Promise } from "es6-promise";
+import { IConditionMap } from "store/reducers/conditions/IConditions";
 
 let fakeDelay = false;
 const DELAY = 100;
@@ -31,10 +31,10 @@ export class PublicationService implements IPublicationService {
     };
 
     private _mockDataConditions: {
-        values: ICondition[];
+        values: IConditionMap;
         error: string | null
     } = {
-        values: [],
+        values: {},
         error: null
     };
 
@@ -135,10 +135,10 @@ export class PublicationService implements IPublicationService {
         return this.getProductReleaseVersions("");
     }
 
-    public getConditions(publicationId: string): Promise<ICondition[]> {
+    public getConditions(publicationId: string): Promise<IConditionMap> {
         const { error, values } = this._mockDataConditions;
         if (fakeDelay) {
-            return new Promise((resolve: (values?: ICondition[]) => void, reject: (error: string | null) => void) => {
+            return new Promise((resolve: (values?: IConditionMap) => void, reject: (error: string | null) => void) => {
                 setTimeout((): void => {
                     if (error) {
                         reject(error);

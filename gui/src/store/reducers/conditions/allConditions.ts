@@ -12,7 +12,10 @@ export interface IConditionsErrorPayload {
 };
 
 const byPubId = combine(
-    handleAction(CONDITIONES_LOADED, (state, { conditions, pubId }) => ({ ...state, [pubId]: conditions }), {})
+    handleAction(CONDITIONES_LOADED, (state, { conditions, pubId }) => {
+        debugger;
+        return ({ ...state, [pubId]: conditions });
+    }, {})
 );
 
 const loading = combine(

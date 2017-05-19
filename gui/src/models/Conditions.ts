@@ -1,6 +1,6 @@
-import { ICondition } from "interfaces/ServerModels";
 import { Api } from "utils/Api";
 import { Net, IWebRequest, LoadableObject } from "@sdl/models";
+import { IConditionMap } from "store/reducers/conditions/IConditions";
 
 /**
  *
@@ -10,17 +10,17 @@ import { Net, IWebRequest, LoadableObject } from "@sdl/models";
  */
 export class Conditions extends LoadableObject {
     private _publicationId: string;
-    private _conditions: ICondition[];
+    private _conditions: IConditionMap;
     private _preLoaded: boolean = false;
 
     /**
      * Creates an instance of Conditions.
      * @param {string} publicationId
-     * @param {ICondition[]} [items]
+     * @param {IConditionMap} [items]
      *
      * @memberof Conditions
      */
-    constructor(publicationId: string, items?: ICondition[]) {
+    constructor(publicationId: string, items?: IConditionMap) {
         super();
         this._publicationId = publicationId;
         if (items) {
@@ -32,14 +32,13 @@ export class Conditions extends LoadableObject {
     /**
      * Get list of conditions
      *
-     * @returns {ICondition[]}
+     * @returns {IConditionMap}
      *
      * @memberof Conditions
      */
-    public getConditons(): ICondition[] {
+    public getConditons(): IConditionMap {
         return this._conditions;
     }
-
     /* Overloads */
     protected _executeLoad(reload: boolean): void {
         if (this._preLoaded) {
@@ -52,17 +51,9 @@ export class Conditions extends LoadableObject {
             Net.getRequest(url, this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
         }
     }
-
     protected _processLoadResult(result: string, webRequest: IWebRequest): void {
         const res = JSON.parse(result);
-        this._conditions = Object.keys(res).map((key) => {
-            return {
-                datatype: res[key].datatype,
-                range: res[key].range,
-                values: res[key].values
-            } as ICondition;
-        });
-
+        this._conditions = res;
         super._processLoadResult(result, webRequest);
     }
 }

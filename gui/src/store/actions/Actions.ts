@@ -22,6 +22,7 @@ export const CONDITIONES_LOADED = "CONDITIONES_LOADED";
 export const CONDITIONES_LOADING = "CONDITIONES_LOADING";
 export const CONDITIONES_ERROR = "CONDITIONES_ERROR";
 export const CONDITIONS_APPLY = "CONDITIONS_APPLY";
+export const CONDITIONS_EDITING_CHANGE = "[Conditions] Change data in conditions editiong dialog";
 
 export const changeLanguage = createAction(CHANGE_LANGUAGE, language => language);
 export const publicationsLoaded = createAction(PUBLICATIONS_LOADED, publications => publications);
@@ -30,6 +31,7 @@ export const updateCurrentPublication = createAction(UPDATE_CURRENT_PUBLICATION,
 
 export const dialogOpen = createAction(DIALOG_REQUEST_OPEN);
 export const dialogClose = createAction(DIALOG_REQUEST_CLOSE);
+export const updateEditingConditions = createAction(CONDITIONS_EDITING_CHANGE, (conditions) => conditions);
 
 export const applyConditions = createAction(CONDITIONS_APPLY,
     (pubId: string, conditions: IConditionMap) => ({ pubId, conditions }));
