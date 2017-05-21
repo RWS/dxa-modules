@@ -3,8 +3,7 @@ import { connect } from "react-redux";
 import { ConditionsDialogPresentation } from "./ConditionsDialogPresentation";
 import { dialogOpen, dialogClose, applyConditions, updateEditingConditions} from "store/actions/Actions";
 import { getCurrentPub, isConditionsDialogVisible, getConditionsByPubId, getEditingConditions, getLastConditions } from "store/reducers/Reducer";
-import { MD5 } from "object-hash";
-const emptyObj = MD5({});
+import { isEmpty } from "lodash";
 
 const mapStateToProps = (state: IState) => {
     const { publicationId: pubId } = getCurrentPub(state);
@@ -15,7 +14,7 @@ const mapStateToProps = (state: IState) => {
         pubId,
         isOpen: isConditionsDialogVisible(state),
         conditions,
-        editingConditions: MD5(editingConditions) === emptyObj ? lastConditions : editingConditions
+        editingConditions: isEmpty(editingConditions) ? lastConditions : editingConditions
     };
 };
 
