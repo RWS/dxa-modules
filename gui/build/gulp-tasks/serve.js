@@ -30,15 +30,12 @@ module.exports = function(buildOptions, gulp, browserSync) {
         ? "./node_modules/react-dom/dist/"
         : `${buildOptions.distPath}/lib/react-dom`,
       // Application
-      "/gui/mocks": "./mocks/",
+      "/$mocks$/": "./mocks/",
       "/gui/theming": buildOptions.distPath + "theming/",
       "/": buildOptions.distPath
     };
 
     const port = buildOptions.ports.httpServer;
-
-    const testServer = url.parse("http://ditadelivery01.ams.dev/test/api");
-    testServer.route = "/api";
     // Start browser sync
     var browserSyncOptions = {
       notify: false,
@@ -73,7 +70,7 @@ module.exports = function(buildOptions, gulp, browserSync) {
         (req, res, next) => {
           // Don't cache mocks
           var url = req.url;
-          if (_.startsWith(url, "/gui/mocks/")) {
+          if (_.startsWith(url, "/$mocks$/")) {
             res.setHeader(
               "Cache-Control",
               "no-cache, no-store, must-revalidate"
@@ -98,7 +95,13 @@ module.exports = function(buildOptions, gulp, browserSync) {
 
           next();
         },
-        proxy(testServer)
+        ...(buildOptions.proxies || [])
+          .map(({from, to}) => {
+            const toUrl = url.parse(to);
+            toUrl.route = from;
+            return toUrl;
+          })
+          .map(proxy)
       ]
     };
 

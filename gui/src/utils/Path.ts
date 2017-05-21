@@ -37,7 +37,7 @@ export class Path {
      * @returns {string}
      */
     public getAbsolutePath(path: string): string {
-        return this._root + path;
+         return [this._root.replace(/\/$/, ""), path.replace(/^\//, "")].join("/");
     }
 
 }

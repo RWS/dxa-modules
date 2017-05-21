@@ -2,6 +2,7 @@ import { path } from "utils/Path";
 import { IWindow } from "interfaces/Window";
 
 const mocksEnabled: boolean = (window as IWindow).SdlDitaDeliveryMocksEnabled || false;
+const mocksEndPoint = `/$mocks$`;
 
 /**
  * Utilities for generating api urls
@@ -26,7 +27,7 @@ export class Api {
         const encodedSitemapItemId = encodeURIComponent(sitemapItemId);
         /* istanbul ignore else */
         if (mocksEnabled) {
-            return path.getAbsolutePath(`gui/mocks/navigation-${encodedPubId}-${encodedSitemapItemId}.json`);
+            return path.getAbsolutePath(`${mocksEndPoint}/navigation-${encodedPubId}-${encodedSitemapItemId}.json`);
         } else {
             return path.getAbsolutePath(`api/toc/${encodedPubId}/${encodedSitemapItemId}?includeAncestors=true`);
         }
@@ -48,7 +49,7 @@ export class Api {
         const encodedPageId = encodeURIComponent(pageId);
         /* istanbul ignore else */
         if (mocksEnabled) {
-            return path.getAbsolutePath(`gui/mocks/page-${encodedPubId}-${encodedPageId}.json`);
+            return path.getAbsolutePath(`${mocksEndPoint}/page-${encodedPubId}-${encodedPageId}.json`);
         } else {
             return path.getAbsolutePath(`api/page/${encodedPubId}/${encodedPageId}`);
         }
@@ -66,7 +67,7 @@ export class Api {
     public static getPublicationsUrl(): string {
         /* istanbul ignore else */
         if (mocksEnabled) {
-            return path.getAbsolutePath(`gui/mocks/publications.json`);
+            return path.getAbsolutePath(`${mocksEndPoint}/publications.json`);
         } else {
             return path.getAbsolutePath(`api/publications`);
         }
@@ -88,7 +89,7 @@ export class Api {
         const encodedSitemapItemId = encodeURIComponent(sitemapItemId);
         /* istanbul ignore else */
         if (mocksEnabled) {
-            return path.getAbsolutePath(`gui/mocks/toc-${encodedPubId}-${encodedSitemapItemId}.json`);
+            return path.getAbsolutePath(`${mocksEndPoint}/toc-${encodedPubId}-${encodedSitemapItemId}.json`);
         } else {
             return path.getAbsolutePath(`api/toc/${encodedPubId}/${encodedSitemapItemId}`);
         }
@@ -108,7 +109,7 @@ export class Api {
         const encodedPubId = encodeURIComponent(publicationId);
         /* istanbul ignore else */
         if (mocksEnabled) {
-            return path.getAbsolutePath(`gui/mocks/conditions-${encodedPubId}.json`);
+            return path.getAbsolutePath(`${mocksEndPoint}/conditions-${encodedPubId}.json`);
         } else {
             return path.getAbsolutePath(`api/conditions/${encodedPubId}`);
         }
