@@ -30,7 +30,7 @@ const services = {
     publicationService: new PublicationService(),
     taxonomyService: new TaxonomyService()
 };
-const PUBLICATION_ID = "ish:123-1-1";
+const PUBLICATION_ID = "12311";
 
 class PublicationContentComponent extends TestBase {
     private store: Store<IState>;
@@ -96,7 +96,7 @@ class PublicationContentComponent extends TestBase {
             });
 
             it("renders content for a specific page", (done: () => void): void => {
-                const pageContent = "<div>Page content!</div>";
+                const pageContent = "<div id=\"specific-content\">Page content!</div>";
                 services.taxonomyService.setMockDataToc(null, []);
                 services.pageService.setMockDataPage(null, {
                     id: "12345",
@@ -115,16 +115,7 @@ class PublicationContentComponent extends TestBase {
                     const page = TestUtils.findRenderedComponentWithType(publicationContent, PagePresentation);
                     expect(page).not.toBeNull("Could not find page content.");
                     const pageContentNode = ReactDOM.findDOMNode(page);
-                    // 1 toc
-                    // 2 breadcrumbs,
-                    // 3 wrong lanauge warning
-                    // 4 version dropdown
-                    // 5 content navigation
-                    // 6 page
-                    // NOTE: Why is it improtant to test order? Are we testing our functionality or react?
-                    expect(pageContentNode.children.length).toBe(6);
-                    expect(pageContentNode.children[5].children.length).toBe(1);
-                    expect(pageContentNode.children[5].children[0].innerHTML).toBe(pageContent);
+                    expect(pageContentNode.querySelector("#specific-content")).not.toBeNull("Should find rendered content");
                     done();
                 }, 0);
             });

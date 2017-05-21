@@ -140,9 +140,9 @@ export class Url {
      * @memberOf Url
      */
     public static parsePageUrl(url: string, rootPath?: string): IPageParams | undefined {
-        const rootPathValue = rootPath || path.getRootPath();
+        const rootPathValue = (rootPath || path.getRootPath()).replace(/\/$/, "");
         const pageParh = url.substring(rootPathValue.length);
-        const params = /\/(\d+)\/(\d+)(?:\/([^\/]+))?(?:\/([^\/]+))?$/.exec(pageParh);
+        const params = /\/([\d\-]+)\/([\d\-]+)(?:\/([^\/]+))?(?:\/([^\/]+))?$/.exec(pageParh);
 
         return params && params[2] && {
             publicationId: decodeURIComponent(params[1]),

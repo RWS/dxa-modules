@@ -1,8 +1,6 @@
-import axios from "axios";
 import { createAction, Action } from "redux-actions";
 import { IPageService } from "services/interfaces/PageService";
 import { IPublicationService } from "services/interfaces/PublicationService";
-import { Api } from "utils/Api";
 
 import {
     PAGE_LOADED, PAGE_LOADING, PAGE_ERROR,
@@ -16,8 +14,6 @@ import { getPubById, getPubList } from "store/reducers/Reducer";
 import { Dispatch } from "redux";
 import { IState } from "store/interfaces/State";
 import { IConditionMap } from "store/reducers/conditions/IConditions";
-import { response2page } from "../../models/Page";
-import { IPage as IServerPage } from "interfaces/ServerModels";
 
 export { getPubById, getPubList }
 export { Action };
@@ -92,40 +88,17 @@ export const fetchPublications = (publicationService: IPublicationService,
  * @param {string} pageId
  * @returns {Function}
  */
-export const fetchPage1 = (pageService: IPageService, publicationId: string, pageId: string, conditions: IConditionMap): IDispatcherFunction => {
-    return dispatch => {
-        dispatch(pageLoading(pageId));
-
-        pageService
-            .getPageInfo(publicationId, pageId)
-            .then(
-            (page) => dispatch(pageLoaded(page)),
-            (errorMessage) => dispatch(pageError(pageId, errorMessage))
-            );
-    };
-};
-
 export const fetchPage = (pageService: IPageService, publicationId: string, pageId: string, conditions: IConditionMap): IDispatcherFunction => {
     return dispatch => {
-        if (0) {
-            pageService.getPageInfo(publicationId, pageId);
-        }
         dispatch(pageLoading(pageId));
-        axios.post(Api.getPageUrl(publicationId, pageId), { conditions })
-            .then((serverPage) => response2page(serverPage.data as IServerPage))
+        pageService
+            .getPageInfo(publicationId, pageId, conditions)
             .then(
-            (page) => dispatch(pageLoaded(page)),
-            (errorMessage) => dispatch(pageError(pageId, errorMessage))
+                (page) => dispatch(pageLoaded(page)),
+                (errorMessage) => dispatch(pageError(pageId, errorMessage))
             );
     };
 };
-
-// fetch(`/app/gui/mocks/conditions-${pubId}.json`).then(
-//             response => response.json()
-//         ).then(
-//             data => dispatch(conditionsLoaded(pubId, data)),
-//             error => dispatch(conditionsError(pubId, error))
-//             );
 
 export const fetchProductReleaseVersions = (publicationService: IPublicationService, publicationId: string): IDispatcherFunction => {
     return dispatch => {

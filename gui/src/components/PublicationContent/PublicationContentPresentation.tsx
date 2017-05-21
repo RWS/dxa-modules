@@ -227,7 +227,6 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         if (!isPage(nextPage) || nextPubId !== publicationId) {
             this.fetchPublication(nextPubId);
         }
-
         if (isPage(nextPage) && !isDummyPage(nextPage) &&
             (nextPage.content !== page.content ||
                 MD5(nextProps.conditions) !== MD5(this.props.conditions))) {

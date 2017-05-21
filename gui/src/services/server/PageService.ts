@@ -1,6 +1,7 @@
 import { IPageService } from "services/interfaces/PageService";
 import { IPage } from "interfaces/Page";
 import { Promise } from "es6-promise";
+import { IConditionMap } from "../../store/reducers/conditions/IConditions";
 
 /**
  * Page service for the server.
@@ -33,7 +34,7 @@ export class PageService implements IPageService {
      *
      * @memberOf DataStoreServer
      */
-    public getPageInfo(publicationId: string, pageId: string): Promise<IPage> {
+    public getPageInfo(publicationId: string, pageId: string, conditions: IConditionMap = {}): Promise<IPage> {
         const { error, info } = this._mockDataPage;
         if (error) {
             return Promise.reject(error);

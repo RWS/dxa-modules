@@ -4,6 +4,7 @@ import ConditionsFetcher from "./ConditionsFetcher";
 import { IConditionMap, ICondition } from "store/reducers/conditions/IConditions";
 import I18n from "components/helpers/I18n";
 import { ConditionsLabelManager } from "components/ConditionsLabelManager/ConditionsLabelManager";
+import { isEmpty } from "lodash";
 
 import "./ConditionsDialog.less";
 import { ILabelManagerItem } from "@sdl/controls";
@@ -81,7 +82,8 @@ export const ConditionsDialogPresentation = (props: IConditionsDialogPresentatio
         <ConditionsFetcher />
         <button
             className="sdl-button-text sdl-personalize-content"
-            onClick={props.open}>
+            onClick={props.open}
+            disabled={isEmpty(props.conditions)}>
             <I18n data="components.conditions.dialog.title" />
         </button>
         <Dialog

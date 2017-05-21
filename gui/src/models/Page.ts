@@ -2,6 +2,7 @@ import * as ServerModels from "interfaces/ServerModels";
 import { IPage } from "interfaces/Page";
 import { Api } from "utils/Api";
 import { Net, IWebRequest, LoadableObject } from "@sdl/models";
+import { IConditionMap } from "store/reducers/conditions/IConditions";
 
 export const response2page = (serverPage: ServerModels.IPage): IPage => {
     let pageTitle = "";
@@ -37,6 +38,7 @@ export class Page extends LoadableObject {
 
     private _publicationId: string;
     private _pageId: string;
+    private _conditions: IConditionMap;
     private _page: IPage;
 
     /**
@@ -45,10 +47,11 @@ export class Page extends LoadableObject {
      * @param {string} publicationId Publication id
      * @param {string} pageId Page id
      */
-    constructor(publicationId: string, pageId: string) {
+    constructor(publicationId: string, pageId: string, conditions: IConditionMap = {}) {
         super();
         this._publicationId = publicationId;
         this._pageId = pageId;
+        this._conditions = conditions;
     }
 
     /**
@@ -63,7 +66,8 @@ export class Page extends LoadableObject {
     /* Overloads */
     protected _executeLoad(reload: boolean): void {
         const url = Api.getPageUrl(this._publicationId, this._pageId);
-        Net.getRequest(url,
+        const body = `conditions=${JSON.stringify(this._conditions)}`;
+        Net.postRequest(url, body, "application/x-www-form-urlencoded",
             this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
     }
 
