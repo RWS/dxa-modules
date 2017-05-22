@@ -45,7 +45,7 @@ export const getEditingConditions = (state: IState) => Conditions.getEditingCond
 // Pages selectors
 //helper for page selector (need to moved to pages)
 export const getPageKey = (state: IState, pubId: string, pageId: string, conditions?: IConditionMap) => {
-    return `${pageId}/${MD5(conditions || getLastConditions(state, pubId))}`;
+    return `${pubId}/${pageId}/${MD5(conditions || getLastConditions(state, pubId))}`;
 };
 export const getPageById = (state: IState, pubId: string, pageId: string, conditions?: IConditionMap): IPage => {
     return Pages.getPageById(state.pages, getPageKey(state, pubId, pageId, conditions));
