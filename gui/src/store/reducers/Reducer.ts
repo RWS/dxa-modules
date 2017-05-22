@@ -1,3 +1,4 @@
+import { MD5 } from "object-hash";
 import * as Language from "./Language";
 import * as Pages from "./Pages";
 import * as Publication from "./Publication";
@@ -42,14 +43,24 @@ export const getLastConditions = (state: IState, pubId: string) => Conditions.ge
 export const getEditingConditions = (state: IState) => Conditions.getEditingConditions(state.conditions);
 
 // Pages selectors
-export const getPageById = (state: IState, pageId: string): IPage => Pages.getPageById(state.pages, pageId);
-export const getErrorMessage = (state: IState, pageId: string): string => Pages.getErrorMessage(state.pages, pageId);
-export const isPageLoading = (state: IState, pageId: string): boolean => Pages.isPageLoading(state.pages, pageId);
+//helper for page selector (need to moved to pages)
+export const getPageKey = (state: IState, pubId: string, pageId: string, conditions?: IConditionMap) => {
+    return `${pageId}/${MD5(conditions || getLastConditions(state, pubId))}`;
+};
+export const getPageById = (state: IState, pubId: string, pageId: string, conditions?: IConditionMap): IPage => {
+    return Pages.getPageById(state.pages, getPageKey(state, pubId, pageId, conditions));
+};
+export const getErrorMessage = (state: IState, pubId: string, pageId: string, conditions?: IConditionMap): string => {
+    return Pages.getErrorMessage(state.pages, getPageKey(state, pubId, pageId, conditions));
+};
+export const isPageLoading = (state: IState, pubId: string, pageId: string, conditions?: IConditionMap): boolean => {
+    return Pages.isPageLoading(state.pages, getPageKey(state, pubId, pageId, conditions));
+};
 
 // State selectors
 export const getCurrentPub = (state: IState): IPublicationCurrentState => state.publication;
-export const getReleaseVersionsForPub = (state: IState, publicationId: string): IProductReleaseVersion[] =>
-    ReleaseVersions.getReleaseVersionsForPub(state.releaseVersions, publicationId);
+export const getReleaseVersionsForPub = (state: IState, pubId: string): IProductReleaseVersion[] =>
+    ReleaseVersions.getReleaseVersionsForPub(state.releaseVersions, pubId);
 
 // ReleaseVersions selector
 export const translateProductReleaseVersion = (productReleaseVersion: string): string => ReleaseVersions.translateProductReleaseVersion(productReleaseVersion);

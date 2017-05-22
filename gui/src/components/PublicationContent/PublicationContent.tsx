@@ -2,18 +2,20 @@ import { connect } from "react-redux";
 import { PublicationContentPresentation } from "@sdl/dd/PublicationContent/PublicationContentPresentation";
 import { updateCurrentPublication } from "store/actions/Actions";
 import { setCurrentPublicationByReleaseVersion } from "store/actions/Api";
-import { getCurrentPub, getPubById, getPageById, getErrorMessage,
-    isPageLoading as isPageLoadingGetter, isPublicationFound as  isPublicationFoundGetter, getReleaseVersionsForPub } from "store/reducers/Reducer";
+import {
+    getCurrentPub, getPubById, getPageById, getErrorMessage,
+    isPageLoading as isPageLoadingGetter, isPublicationFound as isPublicationFoundGetter, getReleaseVersionsForPub
+} from "store/reducers/Reducer";
 import { IState } from "store/interfaces/State";
 import { isPage, isDummyPage } from "utils/Page";
 import { getLastConditions } from "store/reducers/Reducer";
 
 const mapStateToProps = (state: IState) => {
-    const { publicationId, pageId, anchor} = getCurrentPub(state);
+    const { publicationId, pageId, anchor } = getCurrentPub(state);
     const publication = getPubById(state, publicationId);
-    const page = getPageById(state, pageId);
-    const errorMessage = getErrorMessage(state, pageId);
-    const isPageLoading = isPage(page) && isDummyPage(page) && isPageLoadingGetter(state, pageId);
+    const page = getPageById(state, publicationId, pageId);
+    const errorMessage = getErrorMessage(state, publicationId, pageId);
+    const isPageLoading = isPage(page) && isDummyPage(page) && isPageLoadingGetter(state, publicationId, pageId);
     const productReleaseVersions = getReleaseVersionsForPub(state, publicationId);
     const isPublicationFound = isPublicationFoundGetter(state, publicationId);
     const conditions = getLastConditions(state, publicationId);

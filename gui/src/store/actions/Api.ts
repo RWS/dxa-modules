@@ -1,3 +1,4 @@
+import { Dispatch } from "redux";
 import { createAction, Action } from "redux-actions";
 import { IPageService } from "services/interfaces/PageService";
 import { IPublicationService } from "services/interfaces/PublicationService";
@@ -10,11 +11,9 @@ import {
     updateCurrentPublication
 } from "./Actions";
 
-import { getPubById, getPubList } from "store/reducers/Reducer";
-import { Dispatch } from "redux";
+import { getPubById, getPubList, getLastConditions, getPageKey } from "store/reducers/Reducer";
 import { IState } from "store/interfaces/State";
 import { IConditionMap } from "store/reducers/conditions/IConditions";
-import { MD5 } from "object-hash";
 
 export { getPubById, getPubList }
 export { Action };
@@ -42,11 +41,11 @@ export interface IDispatcherFunction {
      * @type {Function}
      * @memberOf IDispatcherFunction
      */
-    (dispatch: Dispatch<IState>): void;
+    (dispatch: Dispatch<IState>, state: IState): void;
 }
 
 export const publicationsLoaded = createAction(PUBLICATIONS_LOADED, publications => publications);
-export const pageLoaded = createAction(PAGE_LOADED, (pageInfo, key) => ({page: pageInfo, key}));
+export const pageLoaded = createAction(PAGE_LOADED, (pageInfo, key) => ({ page: pageInfo, key }));
 export const pageLoading = createAction(PAGE_LOADING, key => key);
 export const pageError = createAction(PAGE_ERROR, (key: string, message: string) => ({ key, message }));
 
@@ -85,32 +84,33 @@ export const fetchPublications = (publicationService: IPublicationService,
  * Page fetcher
  *
  * @param {IPageService} pageService
- * @param {string} publicationId
+ * @param {string} pubId
  * @param {string} pageId
  * @returns {Function}
  */
-export const fetchPage = (pageService: IPageService, publicationId: string, pageId: string, conditions: IConditionMap): IDispatcherFunction => {
-    return dispatch => {
-        const key = `${pageId}/${MD5(pageId)}`;
+export const fetchPage = (pageService: IPageService, pubId: string, pageId: string, conditions?: IConditionMap): IDispatcherFunction => {
+    return (dispatch, state) => {
+        const pageCondtions = conditions || getLastConditions(state, pageId);
+        const key = getPageKey(state, pubId, pageId, pageCondtions);
         dispatch(pageLoading(key));
         pageService
-            .getPageInfo(publicationId, pageId, conditions)
+            .getPageInfo(pubId, pageId, pageCondtions)
             .then(
-                (page) => dispatch(pageLoaded(page)),
-                (errorMessage) => dispatch(pageError(pageId, errorMessage))
+            (page) => dispatch(pageLoaded(page, key)),
+            (errorMessage) => dispatch(pageError(key, errorMessage))
             );
     };
 };
 
-export const fetchProductReleaseVersions = (publicationService: IPublicationService, publicationId: string): IDispatcherFunction => {
+export const fetchProductReleaseVersions = (publicationService: IPublicationService, pubId: string): IDispatcherFunction => {
     return dispatch => {
         dispatch(releaseVersionsLoading());
 
         publicationService
-            .getProductReleaseVersionsByPublicationId(publicationId)
+            .getProductReleaseVersionsByPublicationId(pubId)
             .then(
-            (releaseVersions) => dispatch(releaseVersionsLoaded(publicationId, releaseVersions)),
-            (errorMessage) => dispatch(releaseVersionsLoaded(publicationId, { title: errorMessage, value: "" }))
+            (releaseVersions) => dispatch(releaseVersionsLoaded(pubId, releaseVersions)),
+            (errorMessage) => dispatch(releaseVersionsLoaded(pubId, { title: errorMessage, value: "" }))
             );
     };
 };
@@ -135,16 +135,9 @@ export const fetchConditions = (publicationService: IPublicationService, pubId: 
         publicationService
             .getConditions(pubId)
             .then(
-                data => dispatch(conditionsLoaded(pubId, data)),
-                error => dispatch(conditionsError(pubId, error))
+            data => dispatch(conditionsLoaded(pubId, data)),
+            error => dispatch(conditionsError(pubId, error))
             );
-
-        // fetch(Api.getConditionsUrl(pubId)).then(
-        //     response => response.json()
-        // ).then(
-        //     data => dispatch(conditionsLoaded(pubId, data)),
-        //     error => dispatch(conditionsError(pubId, error))
-        //     );
     };
 };
 
@@ -153,19 +146,19 @@ export const fetchConditions = (publicationService: IPublicationService, pubId: 
  * First it tries to find for publicaotn language, second for ui language, then takes any
  * NOTE: this function does not do any fetching, but I put it here because there is a very wired bug(state is always empty) if
  * I import getPubById and getPubList in ./Action files. (Cann't explain it);
- * @param publicaitonId
+ * @param pubId
  * @param releaseVersion
  */
-export const setCurrentPublicationByReleaseVersion = (publicaitonId: string, productReleaseVersion: string): IDispatcherAndStateFunction => {
+export const setCurrentPublicationByReleaseVersion = (pubId: string, productReleaseVersion: string): IDispatcherAndStateFunction => {
     return (dispatch, getState): void => {
         const state = getState();
-        const publication = getPubById(state, publicaitonId);
+        const publication = getPubById(state, pubId);
         //try to find for this language
         let pubs = getPubList(state, {
             language: publication.language,
             logicalId: publication.logicalId,
             productReleaseVersion,
-            "!id": publicaitonId
+            "!id": pubId
         });
 
         //try for find publicaitons for ui language if for content language not found
@@ -174,7 +167,7 @@ export const setCurrentPublicationByReleaseVersion = (publicaitonId: string, pro
                 language: publication.language,
                 logicalId: publication.logicalId,
                 productReleaseVersion,
-                "!id": publicaitonId
+                "!id": pubId
             });
         }
 
@@ -183,7 +176,7 @@ export const setCurrentPublicationByReleaseVersion = (publicaitonId: string, pro
             pubs = getPubList(state, {
                 logicalId: publication.logicalId,
                 productReleaseVersion,
-                "!id": publicaitonId
+                "!id": pubId
             });
         }
 
