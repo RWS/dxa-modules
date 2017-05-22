@@ -143,7 +143,7 @@ export class Url {
         const rootPathValue = (rootPath || path.getRootPath()).replace(/\/$/, "");
         const pageParh = url.substring(rootPathValue.length);
         const params = /\/([\d\-]+)(?:\/([\d\-]+))?(?:\/([^\/]+))?(?:\/([^\/]+))?$/.exec(pageParh);
-        console.log("params", url, params);
+
         return params && {
             publicationId: decodeURIComponent(params[1]),
             pageId: decodeURIComponent(params[2]),

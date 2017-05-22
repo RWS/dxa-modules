@@ -65,7 +65,6 @@ class AppComponent extends TestBase {
             it("renders publication content component when publication id and page id are set", (): void => {
                 const onRender = function (this: PublicationContentPresentation): JSX.Element {
                     const { publicationId, pageId, publication, page } = this.props;
-                    console.log(pageId, page);
                     if (publicationId === PUB_ID_WITH_PAGE) {
                         expect(pageId).toBe("0000001");
                         expect(publication.title).toBe("pub-title");
@@ -73,7 +72,6 @@ class AppComponent extends TestBase {
                     } else {
                         expect(publicationId).toBe(PUB_ID_NO_PAGE);
                         expect(publication.title).toBe("pub-title");
-                        console.log("page", page);
                         expect(isPage(page)).toBeFalsy();
                         expect(page.title).toBe("");
                     }
@@ -84,10 +82,6 @@ class AppComponent extends TestBase {
                 const app = this._renderComponent(target);
 
                 spyOn(PublicationContentPresentation.prototype, "render").and.callFake(onRender);
-                const url = Url.getPublicationUrl(PUB_ID_NO_PAGE, "pub-title");
-                console.log("!", Url.parsePageUrl(url));
-                const url2 = Url.getPublicationUrl(PUB_ID_NO_PAGE, "pub-title");
-                console.log("2", Url.parsePageUrl(url2));
 
                 // Publication content
                 hashHistory.push(Url.getPublicationUrl(PUB_ID_NO_PAGE, "pub-title"));

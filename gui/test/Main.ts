@@ -5,11 +5,11 @@ import "babel-polyfill";
 
 // // Import all tests
 import "test/tests/components/container/AppComponent";
-/*
+
 import "test/tests/components/container/ErrorContentComponent";
 import "test/tests/components/container/HomeComponent";
 import "test/tests/components/container/ProductFamiliesListComponent";
-// import "test/tests/components/container/PublicationContentComponent";
+import "test/tests/components/container/PublicationContentComponent";
 import "test/tests/components/container/PublicationsListComponent";
 import "test/tests/components/container/TilesListComponent";
 import "test/tests/components/container/TilesListComponent";
@@ -43,4 +43,3 @@ import "test/tests/store/reducers/Publciations";
 import "test/tests/store/reducers/Conditions";
 import "test/tests/utils/StringUtil";
 import "test/tests/utils/Version";
-*/
