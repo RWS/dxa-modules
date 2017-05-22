@@ -6,7 +6,7 @@ import { getCurrentPub, getPubById, getPageById, getErrorMessage,
     isPageLoading as isPageLoadingGetter, isPublicationFound as  isPublicationFoundGetter, getReleaseVersionsForPub } from "store/reducers/Reducer";
 import { IState } from "store/interfaces/State";
 import { isPage, isDummyPage } from "utils/Page";
-import { getLastConditions } from "../../store/reducers/Reducer";
+import { getLastConditions } from "store/reducers/Reducer";
 
 const mapStateToProps = (state: IState) => {
     const { publicationId, pageId, anchor} = getCurrentPub(state);

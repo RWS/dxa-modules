@@ -14,6 +14,7 @@ import { getPubById, getPubList } from "store/reducers/Reducer";
 import { Dispatch } from "redux";
 import { IState } from "store/interfaces/State";
 import { IConditionMap } from "store/reducers/conditions/IConditions";
+import { MD5 } from "object-hash";
 
 export { getPubById, getPubList }
 export { Action };
@@ -45,9 +46,9 @@ export interface IDispatcherFunction {
 }
 
 export const publicationsLoaded = createAction(PUBLICATIONS_LOADED, publications => publications);
-export const pageLoaded = createAction(PAGE_LOADED, pageInfo => pageInfo);
-export const pageLoading = createAction(PAGE_LOADING, pageId => pageId);
-export const pageError = createAction(PAGE_ERROR, (pageId: string, message: string) => ({ pageId, message }));
+export const pageLoaded = createAction(PAGE_LOADED, (pageInfo, key) => ({page: pageInfo, key}));
+export const pageLoading = createAction(PAGE_LOADING, key => key);
+export const pageError = createAction(PAGE_ERROR, (key: string, message: string) => ({ key, message }));
 
 export const publicationsLoading = createAction(PUBLICATIONS_LOADING);
 export const publicationsLoadingError = createAction(PUBLICATIONS_LOADING_ERROR);
@@ -90,7 +91,8 @@ export const fetchPublications = (publicationService: IPublicationService,
  */
 export const fetchPage = (pageService: IPageService, publicationId: string, pageId: string, conditions: IConditionMap): IDispatcherFunction => {
     return dispatch => {
-        dispatch(pageLoading(pageId));
+        const key = `${pageId}/${MD5(pageId)}`;
+        dispatch(pageLoading(key));
         pageService
             .getPageInfo(publicationId, pageId, conditions)
             .then(
