@@ -32,10 +32,12 @@ const buildOptions = {
   ports: {
     httpServer: 9005
   },
-  proxies: [{
-    from: "/api",
-    to: "http://ditadelivery01.ams.dev/test/api",
-  }]
+  proxies: [
+    {
+      from: "/api",
+      to: "http://ditadelivery01.ams.dev/api"
+    }
+  ]
 };
 let webpackInstance = {
   compiler: null,

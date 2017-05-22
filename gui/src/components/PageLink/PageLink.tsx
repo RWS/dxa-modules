@@ -60,12 +60,12 @@ export interface IPageLinkPresentationProps {
  * Page Link component
  */
 export const PageLinkPresentation = (props: IPageLinkPresentationProps): JSX.Element => {
-   return <a href={props.url} title={props.pageTitle || props.publicationTitle}>{props.children}</a>;
+    return <a href={props.url} title={props.pageTitle || props.publicationTitle}>{props.children}</a>;
 };
 
 const mapStateToProps = (state: IState, ownProps: IPageLinkPresentationProps): IPageLinkPresentationProps => {
     const publication = getPubById(state, ownProps.publicationId);
-    const page = getPageById(state, ownProps.pageId || "fake");
+    const page = getPageById(state, publication.id, ownProps.pageId || "fake");
     const publicationTitle = publication.title;
     const pageTitle = isDummyPage(page) ? "" : page.title;
 

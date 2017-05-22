@@ -76,8 +76,8 @@ export class StateToRoutePresentation extends React.Component<Props, {}> {
         const props = this.props;
 
         if (prevProps.publicationId !== props.publicationId
-        || prevProps.anchor !== props.anchor
-        || prevProps.pageId !== "" && prevProps.pageId !== props.pageId) {
+            || prevProps.anchor !== props.anchor
+            || prevProps.pageId !== "" && prevProps.pageId !== props.pageId) {
             browserHistory.push(this.propsToUrl(props));
         } else {
             //No need to push to history if only titles have chagned.
@@ -111,7 +111,7 @@ export class StateToRoutePresentation extends React.Component<Props, {}> {
 const mapStateToProps = (state: IState) => {
     const { publicationId, pageId, anchor } = getCurrentPub(state);
     const { title: publicationTitle } = getPubById(state, publicationId);
-    const page = getPageById(state, pageId);
+    const page = getPageById(state, publicationId, pageId);
 
     return {
         publicationId,
