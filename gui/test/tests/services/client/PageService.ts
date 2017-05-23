@@ -1,4 +1,4 @@
-import { PageService } from "services/server/PageService";
+import { PageService } from "services/client/PageService";
 import { TestBase } from "@sdl/models";
 import { IWindow } from "interfaces/Window";
 

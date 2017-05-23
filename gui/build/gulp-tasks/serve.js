@@ -1,4 +1,11 @@
 "use strict";
+const { startsWith } = require("lodash");
+const path = require("path");
+const fs = require("fs-extra");
+const webpackDevMiddleware = require("webpack-dev-middleware");
+const webpackHotMiddleware = require("webpack-hot-middleware");
+const proxy = require("proxy-middleware");
+const url = require("url");
 
 /**
  * Setup a server.
@@ -8,14 +15,6 @@
  * @param {Object} browserSync BrowserSync instance.
  */
 module.exports = function(buildOptions, gulp, browserSync) {
-  const _ = require("lodash");
-  const path = require("path");
-  const fs = require("fs-extra");
-  const webpackDevMiddleware = require("webpack-dev-middleware");
-  const webpackHotMiddleware = require("webpack-hot-middleware");
-  const proxy = require("proxy-middleware");
-  const url = require("url");
-
   return function(cb, webpackInstance) {
     const webpackConfig = webpackInstance.config;
     const webpackCompiler = webpackInstance.compiler;
@@ -70,7 +69,8 @@ module.exports = function(buildOptions, gulp, browserSync) {
         (req, res, next) => {
           // Don't cache mocks
           var url = req.url;
-          if (_.startsWith(url, "/$mocks$/")) {
+          if (startsWith(url, "/$mocks$/")) {
+            req.method = "GET";
             res.setHeader(
               "Cache-Control",
               "no-cache, no-store, must-revalidate"

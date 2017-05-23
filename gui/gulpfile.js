@@ -24,7 +24,7 @@ const buildOptions = {
     minCoverage: {
       // Minimum code coverage %
       statements: 80,
-      branches: 75,
+      branches: 70,
       functions: 80,
       lines: 80
     }
@@ -35,7 +35,7 @@ const buildOptions = {
   proxies: [
     {
       from: "/api",
-      to: "http://ditadelivery01.ams.dev/api"
+      to: "http://ditadelivery01.ams.dev/test/api"
     }
   ]
 };

@@ -19,8 +19,9 @@ module.exports = (buildOptions) => {
             configFile: configPath,
             singleRun: singleRun,
             proxies: {
+                '/$mocks$/': `${urlPrefix}/$mocks$/`,
                 // Browsers sync proxies
-                '/browser-sync/': urlPrefix + 'browser-sync-mock/'
+                '/browser-sync/': `${urlPrefix}/browser-sync-mock/`
             },
             browsers: browsersArg ? browsersArg.split(',') : ['PhantomJS'],
             preprocessors: {}
