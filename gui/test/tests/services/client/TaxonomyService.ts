@@ -1,5 +1,6 @@
 import { TaxonomyService } from "services/client/TaxonomyService";
 import { TestBase } from "@sdl/models";
+import { IWindow } from "interfaces/Window";
 
 class TaxonomyServiceInvalidatable extends TaxonomyService {
     public ivalidate(): void {
@@ -11,10 +12,20 @@ class TaxonomyServiceInvalidatable extends TaxonomyService {
 class TaxonomyServiceTests extends TestBase {
 
     public runTests(): void {
+        const win = (window as IWindow);
+        const mocksFlag = win.SdlDitaDeliveryMocksEnabled;
         const taxonomyService = new TaxonomyServiceInvalidatable();
         const publicationId = "1961702";
 
         describe(`Taxonomy service tests.`, (): void => {
+
+            beforeEach(() => {
+                win.SdlDitaDeliveryMocksEnabled = true;
+            });
+
+            afterEach(() => {
+                win.SdlDitaDeliveryMocksEnabled = mocksFlag;
+            });
 
             it("can get site map items for the root", (done: () => void): void => {
                 taxonomyService.getSitemapRoot(publicationId)

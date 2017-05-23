@@ -1,6 +1,7 @@
 import { PublicationService } from "services/client/PublicationService";
 import { TestBase } from "@sdl/models";
 import { FakeXMLHttpRequest } from "test/mocks/XmlHttpRequest";
+import { IWindow } from "../../../../src/interfaces/Window";
 
 class PublicationServiceInvalidatable extends PublicationService {
     public ivalidate(): void {
@@ -11,10 +12,19 @@ class PublicationServiceInvalidatable extends PublicationService {
 class PublicationServiceTests extends TestBase {
 
     public runTests(): void {
+        const win = (window as IWindow);
+        const mocksFlag = win.SdlDitaDeliveryMocksEnabled;
         const publicationService = new PublicationServiceInvalidatable();
         const publicationId = "1961702";
 
         describe(`Publication service tests.`, (): void => {
+            beforeEach(() => {
+                win.SdlDitaDeliveryMocksEnabled = true;
+            });
+
+            afterEach(() => {
+                win.SdlDitaDeliveryMocksEnabled = mocksFlag;
+            });
 
             it("returns a proper error when product families cannot be retrieved", (done: () => void): void => {
                 // Put this test first, otherwise the publication would be already in the cache and the spy would not work
