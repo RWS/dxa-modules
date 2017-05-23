@@ -13,7 +13,7 @@ import "./ConditionsLabelManager.less";
  * @interface IDrodownProps
  */
 export interface IConditionalLabelManagerProps {
-    values: string[];
+    values?: string[];
     condition: ICondition;
     onChange: (object: {}[]) => void;
 }
@@ -27,15 +27,26 @@ export const ConditionsLabelManager: React.StatelessComponent<IConditionalLabelM
         return localization.formatMessage(query);
     };
 
-    const id2item = (id: ILabelManagerItem) => ({
-        id: id.id || id.label,
-        label: id.id || id.label,
-        description: id.id || id.label,
-        isInvalid: false
-    });
+    const id2item = (id: ILabelManagerItem | string) => {
+        if (typeof id === "string") {
+            return ({
+                id: id,
+                label: id,
+                description: id,
+                isInvalid: false
+            });
+        } else {
+            return ({
+                id: id.id || id.label,
+                label: id.id || id.label,
+                description: id.id || id.label,
+                isInvalid: false
+            });
+        }
+    };
 
     return <LabelManager
-        value={values.join()}
+        value={values ? values.join() : undefined}
         itemData={(item: ILabelManagerItem, callback: (itemData: ILabelManagerItem | null) => void): void => callback(id2item(item))}
         typeahead={{
             load: (query: string, callback: (result: ITypeaheadSuggestion[]) => void): void => {
@@ -52,21 +63,18 @@ export const ConditionsLabelManager: React.StatelessComponent<IConditionalLabelM
                 const nodes: ILabelManagerTreeViewNode[] = [];
 
                 condition.values.forEach(function (value: string): void {
-                    const childNodes: ILabelManagerTreeViewNode[] = [];
                     const rootNode: ILabelManagerTreeViewNode =
                         TagsTreeView.createTagsTreeViewNodeFromObject({
                             id: value,
                             name: value,
                             parent: null,
                             children: null,
-                            isLeafNode: childNodes.length === 0,
-                            load: (node: ITreeViewNode, _callback: (nodes: ITreeViewNode[]) => void): void => {
-                                _callback(childNodes);
-                            },
+                            isLeafNode: true,
+                            load: (node: ITreeViewNode, _callback: (nodes: ITreeViewNode[]) => void): void => {},
                             isSelectable: true
                         });
-                    rootNode.isLeafNode = true;
                     rootNode.description = value;
+                    rootNode.isSelected = true;
                     if (rootNode.name.toLowerCase().indexOf(query.toLowerCase()) !== -1) {
                         nodes.push(rootNode);
                     }
