@@ -1,3 +1,4 @@
+import { isEmpty } from "lodash";
 import { ISitemapItem } from "interfaces/ServerModels";
 import { ITaxonomy } from "interfaces/Taxonomy";
 import { Api } from "utils/Api";
@@ -57,7 +58,9 @@ export class Toc extends LoadableObject {
         } else {
             const url = Api.getTocItemsUrl(this._publicationId, this._parentId);
             const body = `conditions=${JSON.stringify(this._conditions)}`;
-            Net.postRequest(url, body, "application/x-www-form-urlencoded", this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
+            isEmpty(this._conditions)
+                ? Net.getRequest(url, this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed))
+                : Net.postRequest(url, body, "application/x-www-form-urlencoded", this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
         }
     }
 

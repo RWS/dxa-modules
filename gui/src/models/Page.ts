@@ -1,4 +1,5 @@
 import * as ServerModels from "interfaces/ServerModels";
+import { isEmpty } from "lodash";
 import { IPage } from "interfaces/Page";
 import { Api } from "utils/Api";
 import { Net, IWebRequest, LoadableObject } from "@sdl/models";
@@ -67,8 +68,9 @@ export class Page extends LoadableObject {
     protected _executeLoad(reload: boolean): void {
         const url = Api.getPageUrl(this._publicationId, this._pageId);
         const body = `conditions=${JSON.stringify(this._conditions)}`;
-        Net.postRequest(url, body, "application/x-www-form-urlencoded",
-            this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
+        isEmpty(this._conditions)
+            ? Net.getRequest(url, this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed))
+            : Net.postRequest(url, body, "application/x-www-form-urlencoded", this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
     }
 
     protected _processLoadResult(result: string, webRequest: IWebRequest): void {

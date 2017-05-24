@@ -1,3 +1,4 @@
+import { isEmpty } from "lodash";
 import { ISitemapItem } from "interfaces/ServerModels";
 import { ITaxonomy } from "interfaces/Taxonomy";
 import { Api } from "utils/Api";
@@ -65,8 +66,9 @@ export class NavigationLinks extends LoadableObject {
     protected _executeLoad(reload: boolean): void {
         const url = Api.getNavigationLinksUrl(this._publicationId, this._taxonomyId);
         const body = `conditions=${JSON.stringify(this._conditions)}`;
-        Net.postRequest(url, body, "application/x-www-form-urlencoded",
-            this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
+        isEmpty(this._conditions)
+            ? Net.getRequest(url, this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed))
+            : Net.postRequest(url, body, "application/x-www-form-urlencoded", this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
     }
 
     protected _processLoadResult(result: string, webRequest: IWebRequest): void {
