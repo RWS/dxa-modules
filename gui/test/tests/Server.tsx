@@ -99,7 +99,8 @@ class Server extends TestBase {
                                     <div className="sdl-dita-delivery-navigation-menu">
                                         <nav className="sdl-dita-delivery-toc">
                                             <div className="sdl-conditions-dialog-presentation">
-                                                <button className="sdl-button-text sdl-personalize-content">
+                                                <div className="sdl-conditions-fetcher"></div>
+                                                <button className="sdl-button-text sdl-personalize-content" disabled>
                                                     <span>Personalize content</span>
                                                 </button>
                                                 <div className="sdl-dialog-container"></div>
