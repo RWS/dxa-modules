@@ -27,6 +27,7 @@ namespace Sdl.Web.Modules.Core.Models
         public int PageSize { get; set; }
 
         [SemanticProperty(IgnoreMapping = true)]
+        [JsonIgnore]
         public int CurrentPage 
         { 
             get 
