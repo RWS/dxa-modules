@@ -96,8 +96,8 @@ export const fetchPage = (pageService: IPageService, pubId: string, pageId: stri
         pageService
             .getPageInfo(pubId, pageId, pageCondtions)
             .then(
-            (page) => dispatch(pageLoaded(page, key)),
-            (errorMessage) => dispatch(pageError(key, errorMessage))
+                (page) => dispatch(pageLoaded(page, key)),
+                (errorMessage) => dispatch(pageError(key, errorMessage))
             );
     };
 };
@@ -109,8 +109,8 @@ export const fetchProductReleaseVersions = (publicationService: IPublicationServ
         publicationService
             .getProductReleaseVersionsByPublicationId(pubId)
             .then(
-            (releaseVersions) => dispatch(releaseVersionsLoaded(pubId, releaseVersions)),
-            (errorMessage) => dispatch(releaseVersionsLoaded(pubId, { title: errorMessage, value: "" }))
+                (releaseVersions) => dispatch(releaseVersionsLoaded(pubId, releaseVersions)),
+                (errorMessage) => dispatch(releaseVersionsLoaded(pubId, { title: errorMessage, value: "" }))
             );
     };
 };
@@ -121,8 +121,8 @@ export const fetchProductReleaseVersionsByProductFamily = (publicationService: I
         publicationService
             .getProductReleaseVersions(productFamily)
             .then(
-            (releaseVersions) => dispatch(releaseVersionsLoaded(productFamily, releaseVersions)),
-            (errorMessage) => dispatch(releaseVersionsLoaded(productFamily, { title: errorMessage, value: "" }))
+                (releaseVersions) => dispatch(releaseVersionsLoaded(productFamily, releaseVersions)),
+                (errorMessage) => dispatch(releaseVersionsLoaded(productFamily, { title: errorMessage, value: "" }))
             );
     };
 };
@@ -135,8 +135,8 @@ export const fetchConditions = (publicationService: IPublicationService, pubId: 
         publicationService
             .getConditions(pubId)
             .then(
-            data => dispatch(conditionsLoaded(pubId, data)),
-            error => dispatch(conditionsError(pubId, error))
+                data => dispatch(conditionsLoaded(pubId, data)),
+                error => dispatch(conditionsError(pubId, error))
             );
     };
 };

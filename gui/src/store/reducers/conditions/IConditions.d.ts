@@ -7,6 +7,11 @@ export interface ICondition {
 export interface IConditionMap {
     [key: string]: ICondition;
 }
+
+export interface IPostConditionMap {
+    [key: string]: string[];
+}
+
 export interface IConditionsPayload {
     pubId: string;
     conditions: IConditionMap;

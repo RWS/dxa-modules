@@ -3,7 +3,7 @@ import { isEmpty } from "lodash";
 import { IPage } from "interfaces/Page";
 import { Api } from "utils/Api";
 import { Net, IWebRequest, LoadableObject } from "@sdl/models";
-import { IConditionMap } from "store/reducers/conditions/IConditions";
+import { IConditionMap, IPostConditionMap } from "store/reducers/conditions/IConditions";
 
 export const response2page = (serverPage: ServerModels.IPage): IPage => {
     let pageTitle = "";
@@ -67,7 +67,13 @@ export class Page extends LoadableObject {
     /* Overloads */
     protected _executeLoad(reload: boolean): void {
         const url = Api.getPageUrl(this._publicationId, this._pageId);
-        const body = `conditions=${JSON.stringify(this._conditions)}`;
+        let postBody: IPostConditionMap = {};
+        for (let key in this._conditions) {
+            if (this._conditions.hasOwnProperty(key)) {
+                postBody[key] = this._conditions[key].values;
+            }
+        }
+        const body = `conditions=${JSON.stringify(postBody)}`;
         isEmpty(this._conditions)
             ? Net.getRequest(url, this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed))
             : Net.postRequest(url, body, "application/x-www-form-urlencoded", this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));

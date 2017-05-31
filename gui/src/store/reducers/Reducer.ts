@@ -36,14 +36,14 @@ export const isPublicationFound = (state: IState, pubId: string): boolean => Pub
 
 export const getPubListErrorMessage = (state: IState) => Publications.getLastError(state.publications);
 
-//Conditions selector
+// Conditions selector
 export const getConditionsByPubId = (state: IState, pubId: string): IConditionMap => Conditions.getByPubId(state.conditions, pubId);
 export const isConditionsDialogVisible = (state: IState) => Conditions.isDialogVisible(state.conditions);
 export const getLastConditions = (state: IState, pubId: string) => Conditions.getLastConditions(state.conditions, pubId);
 export const getEditingConditions = (state: IState) => Conditions.getEditingConditions(state.conditions);
 
 // Pages selectors
-//helper for page selector (need to moved to pages)
+// helper for page selector (need to moved to pages)
 export const getPageKey = (state: IState, pubId: string, pageId: string, conditions?: IConditionMap) => {
     return pageId ? `${pubId}/${pageId}/${MD5(conditions || getLastConditions(state, pubId))}` : "";
 };
