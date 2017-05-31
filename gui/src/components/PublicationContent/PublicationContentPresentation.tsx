@@ -231,8 +231,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         if (isPage(nextPage) && (MD5(nextProps.conditions) !== MD5(this.props.conditions))) {
             this.setState({
                 isTocLoading: true
-            });
-            this.refreshToc(nextPubId, nextPage);
+            }, () => this.refreshToc(nextPubId, nextPage));
         } else if (isPage(nextPage) && !isDummyPage(nextPage) && nextPage.content !== page.content) {
             this.refreshToc(nextPubId, nextPage);
         } else if (errorMessage) {
