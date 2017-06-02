@@ -3,7 +3,7 @@ import { ISitemapItem } from "interfaces/ServerModels";
 import { ITaxonomy } from "interfaces/Taxonomy";
 import { Api } from "utils/Api";
 import { Net, IWebRequest, LoadableObject } from "@sdl/models";
-import { IConditionMap, IPostConditionMap } from "store/reducers/conditions/IConditions";
+import { IConditionMap, IPostConditions, IPostConditionRequest } from "store/reducers/conditions/IConditions";
 
 /**
  * Toc model, used for interacting with the server and doing basic operations on the model itself.
@@ -57,12 +57,13 @@ export class Toc extends LoadableObject {
             this._setLoaded();
         } else {
             const url = Api.getTocItemsUrl(this._publicationId, this._parentId);
-            let postBody: IPostConditionMap = {};
+            let postConditions: IPostConditions = {};
             for (let key in this._conditions) {
                 if (this._conditions.hasOwnProperty(key)) {
-                    postBody[key] = this._conditions[key].values;
+                    postConditions[key] = this._conditions[key].values;
                 }
             }
+            const postBody: IPostConditionRequest = {publicationId: +this._publicationId, userConditions: postConditions};
             const body = `conditions=${JSON.stringify(postBody)}`;
             isEmpty(this._conditions)
                 ? Net.getRequest(url, this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed))

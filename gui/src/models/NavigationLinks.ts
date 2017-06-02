@@ -5,7 +5,7 @@ import { Api } from "utils/Api";
 import { Net, IWebRequest, LoadableObject } from "@sdl/models";
 import { Url } from "utils/Url";
 import { localization } from "services/common/LocalizationService";
-import { IConditionMap, IPostConditionMap } from "store/reducers/conditions/IConditions";
+import { IConditionMap, IPostConditionRequest, IPostConditions } from "store/reducers/conditions/IConditions";
 
 /**
  * Navigation links model
@@ -65,12 +65,13 @@ export class NavigationLinks extends LoadableObject {
     /* Overloads */
     protected _executeLoad(reload: boolean): void {
         const url = Api.getNavigationLinksUrl(this._publicationId, this._taxonomyId);
-        let postBody: IPostConditionMap = {};
+        let postConditions: IPostConditions = {};
         for (let key in this._conditions) {
             if (this._conditions.hasOwnProperty(key)) {
-                postBody[key] = this._conditions[key].values;
+                postConditions[key] = this._conditions[key].values;
             }
         }
+        const postBody: IPostConditionRequest = {publicationId: +this._publicationId, userConditions: postConditions};
         const body = `conditions=${JSON.stringify(postBody)}`;
         isEmpty(this._conditions)
             ? Net.getRequest(url, this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed))

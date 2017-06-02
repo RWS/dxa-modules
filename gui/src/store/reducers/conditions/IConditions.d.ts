@@ -8,8 +8,13 @@ export interface IConditionMap {
     [key: string]: ICondition;
 }
 
-export interface IPostConditionMap {
+export interface IPostConditions {
     [key: string]: string[];
+}
+
+export interface IPostConditionRequest {
+    publicationId: number;
+    userConditions: IPostConditions;
 }
 
 export interface IConditionsPayload {
