@@ -1,5 +1,6 @@
 @import (reference) "~theme-styles";
 .sdl-dita-delivery-breadcrumbs {
+    @circleSize: 20px;
     padding: 32px 0 30px 0;
     ul {
         width: auto;
@@ -47,6 +48,42 @@
                     padding-left: 0px;
                     padding-right: 30px;
                     background-position: right 6px;
+                }
+            }
+            &.dd-selector {
+                display: none;
+            }
+            @media screen and (max-width: @screenSm) {
+                display: none;
+                &.dd-selector, &:first-child, &:last-child {
+                    display: inline-block;
+                }
+                &.dd-selector {
+                    .sdl-dita-delivery-dropdown {
+                        display: inline-block;
+                        border-radius: @circleSize;
+                        width: @circleSize;
+                        height: @circleSize;
+                        line-height: @circleSize;
+                        border: 2px solid @accentColor1;
+                        .dropdown-toggle {
+                            font: inherit;
+                            color: inherit;
+                            display: inline-block;
+                            padding: 0;
+                            margin: 0;
+                            width: 100%;
+                            text-align: right;
+                        }
+                        select {
+                            position: absolute;
+                            top: 0;
+                            bottom: 0;
+                            left: 0;
+                            right: 0;
+                            color: transparent;
+                        }
+                    }
                 }
             }
         }
