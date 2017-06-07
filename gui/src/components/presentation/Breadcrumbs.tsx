@@ -251,19 +251,21 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
         // Render responcive breadcrumbs;
         const toDropdownFormat = (item: IBreadcrumbItem) => ({ "text": item.title, "value": item.url || "" });
         const itemsToRender = itemPath.filter(item => item.url != null);
-        (itemsToRender.length > 0) && breadCrumbs.push(
-            <li className="dd-selector" key={lindex++}>
-                <Dropdown
-                    placeHolder={itemsToRender.length.toString()}
-                    items={itemsToRender.map(toDropdownFormat)}
-                    onChange={(url: string) => {
-                        if (router) {
-                            router.push(url);
-                        }
-                    }} />
-                <span className="separator" />
-            </li>
-        );
+        if (itemsToRender.length > 0) {
+            breadCrumbs.push(
+                <li className="dd-selector" key={lindex++}>
+                    <Dropdown
+                        placeHolder={itemsToRender.length.toString()}
+                        items={itemsToRender.map(toDropdownFormat)}
+                        onChange={(url: string) => {
+                            if (router) {
+                                router.push(url);
+                            }
+                        }} />
+                    <span className="separator" />
+                </li>
+            );
+        }
 
         // Render last element, as it will be shown in both cases
         breadCrumbs.push(

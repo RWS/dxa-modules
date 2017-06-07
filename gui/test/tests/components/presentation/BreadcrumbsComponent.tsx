@@ -34,8 +34,19 @@ const itemsPath: ITaxonomy[] = [
     },
     {
         id: TcmId.getTaxonomyItemId(taxonomyItemId, "3"),
-        title: "Selected",
+        title: "Sub-Child",
         url: Url.getPageUrl("pub-id", "3"),
+        hasChildNodes: false
+    },
+    {
+        id: TcmId.getTaxonomyItemId(taxonomyItemId, "4"),
+        title: "Abstract-Child",
+        hasChildNodes: false
+    },
+    {
+        id: TcmId.getTaxonomyItemId(taxonomyItemId, "5"),
+        title: "Selected",
+        url: Url.getPageUrl("pub-id", "5"),
         hasChildNodes: false
     }
 ];
@@ -63,7 +74,7 @@ class BreadcrumbsComponent extends TestBase {
             };
 
             beforeEach(() => {
-                hashHistory.push(itemsPath[2].url || "");
+                hashHistory.push(itemsPath[4].url || "");
                 const props: IBreadcrumbsProps = {
                     loadItemPath: loadItemPath
                 };
@@ -95,16 +106,31 @@ class BreadcrumbsComponent extends TestBase {
 
                 // Use a timeout to allow the DataStore to return a promise with the data
                 setTimeout((): void => {
-                    const nodes = domNode.querySelectorAll(".home, .abstract, a");
-                    expect(nodes.length).toBe(3);
+                    const nodes = domNode.querySelectorAll(".home, .abstract, ul:not([class='dropdown-items']) > li > a");
+                    expect(nodes.length).toBe(5);
                     expect(nodes.item(0).getAttribute("title")).toBe("mock-components.breadcrumbs.home");
                     expect(nodes.item(1).textContent).toBe(itemsPath[0].title);
                     expect(nodes.item(2).textContent).toBe(itemsPath[1].title);
+                    expect(nodes.item(3).textContent).toBe(itemsPath[2].title);
+                    expect(nodes.item(4).textContent).toBe(itemsPath[3].title);
 
                     // Last item is the selected item and should not highlighted with Link
                     const spanNodes = domNode.querySelectorAll("span.active");
                     expect(spanNodes.length).toBe(1);
-                    expect(spanNodes.item(0).textContent).toBe(itemsPath[2].title);
+                    expect(spanNodes.item(0).textContent).toBe(itemsPath[4].title);
+
+                    // Check if responsive control is rendered
+                    const responsiveNode = domNode.querySelector("li.dd-selector");
+                    expect(responsiveNode).toBeDefined();
+                    if (responsiveNode) {
+                        const placeholderNode = responsiveNode.querySelector("button.dropdown-toggle");
+                        expect(placeholderNode && placeholderNode.textContent).toBe("2");
+
+                        const selectBoxOptions = responsiveNode.querySelectorAll("select option");
+                        expect(selectBoxOptions.length).toBe(2);
+                        expect(selectBoxOptions.item(0).textContent).toBe(itemsPath[1].title);
+                        expect(selectBoxOptions.item(1).textContent).toBe(itemsPath[2].title);
+                    }
 
                     done();
                 }, 0);
@@ -116,7 +142,7 @@ class BreadcrumbsComponent extends TestBase {
 
                 // Use a timeout to allow the DataStore to return a promise with the data
                 setTimeout((): void => {
-                    const hyperlinksNodes = domNode.querySelectorAll(".home, .abstract, a");
+                    const hyperlinksNodes = domNode.querySelectorAll("ul:not([class='dropdown-items']) > li > a");
                     expect(hyperlinksNodes.length).toBe(3);
 
                     const childHyperlink = hyperlinksNodes[2] as HTMLElement;
@@ -127,15 +153,46 @@ class BreadcrumbsComponent extends TestBase {
                         // Use a timeout to allow the promise with the data to be finished
                         setTimeout((): void => {
                             // Validate
-                            const selectedItem = itemsPath[1];
-                            const updatedItems = domNode.querySelectorAll("li");
-                            expect(updatedItems.length).toBe(3);
+                            const updatedItems = domNode.querySelectorAll("ul:not([class='dropdown-items']) > li:not([class='dd-selector'])");
+                            expect(updatedItems.length).toBe(4);
                             expect(updatedItems[0].querySelector(".home")).not.toBeNull();
                             expect(updatedItems[0].textContent).toBe("mock-components.breadcrumbs.home");
                             expect(updatedItems[1].querySelector(".abstract")).not.toBeNull();
                             expect(updatedItems[1].textContent).toBe(itemsPath[0].title);
-                            expect(updatedItems[2].querySelector("a")).toBeNull();
-                            expect(updatedItems[2].textContent).toBe(selectedItem.title);
+                            expect(updatedItems[2].textContent).toBe(itemsPath[1].title);
+                            expect(updatedItems[3].querySelector("a")).toBeNull();
+                            expect(updatedItems[3].textContent).toBe(itemsPath[2].title);
+
+                            done();
+                        }, 0);
+                    }
+                }, 0);
+            });
+
+            it("navigates to another item when a breadcrumb is selected from responsive view", (done: () => void): void => {
+                const domNode = ReactDOM.findDOMNode(breadCrumbs) as HTMLElement;
+                expect(domNode).not.toBeNull();
+
+                // Use a timeout to allow the DataStore to return a promise with the data
+                setTimeout((): void => {
+                    const selectBox = domNode.querySelector("li.dd-selector select") as HTMLSelectElement;
+                    expect(selectBox).toBeDefined();
+                    if (selectBox) {
+                        selectBox.selectedIndex = 1;
+                        TestUtils.Simulate.change(selectBox);
+
+                        // Use a timeout to allow the promise with the data to be finished
+                        setTimeout((): void => {
+                            // Validate
+                            const updatedItems = domNode.querySelectorAll("ul:not([class='dropdown-items']) > li:not([class='dd-selector'])");
+                            expect(updatedItems.length).toBe(4);
+                            expect(updatedItems[0].querySelector(".home")).not.toBeNull();
+                            expect(updatedItems[0].textContent).toBe("mock-components.breadcrumbs.home");
+                            expect(updatedItems[1].querySelector(".abstract")).not.toBeNull();
+                            expect(updatedItems[1].textContent).toBe(itemsPath[0].title);
+                            expect(updatedItems[2].textContent).toBe(itemsPath[1].title);
+                            expect(updatedItems[3].querySelector("a")).toBeNull();
+                            expect(updatedItems[3].textContent).toBe(itemsPath[2].title);
 
                             done();
                         }, 0);
