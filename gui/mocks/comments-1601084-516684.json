@@ -1,0 +1,50 @@
+[
+  {
+    "id": 3743,
+    "namespaceId": 0,
+    "itemPublicationId": 1601084,
+    "itemId": 516684,
+    "itemType": 64,
+    "score": 0,
+    "status": 0,
+    "creationDate": "9/8/2017 12:00:00 AM",
+    "lastModifiedDate": "7/2/2017 12:00:00 AM",
+    "content": "Test comment with some content. Id of this comment is 3743.",
+    "moderator": null,
+    "moderatedDate": null,
+    "parentId": 0,
+    "parent": null,
+    "children": null,
+    "user": {
+      "id": 0,
+      "name": "user 0",
+      "emailAddress": "user0@sdl.com",
+      "externalId": null
+    },
+    "idLong": 3743
+  },
+  {
+    "id": 16713,
+    "namespaceId": 0,
+    "itemPublicationId": 1601084,
+    "itemId": 516684,
+    "itemType": 64,
+    "score": 0,
+    "status": 0,
+    "creationDate": "8/16/2017 12:00:00 AM",
+    "lastModifiedDate": "6/21/2017 12:00:00 AM",
+    "content": "Test comment with some content. Id of this comment is 16713.",
+    "moderator": null,
+    "moderatedDate": null,
+    "parentId": 0,
+    "parent": null,
+    "children": null,
+    "user": {
+      "id": 2,
+      "name": "user 2",
+      "emailAddress": "user2@sdl.com",
+      "externalId": null
+    },
+    "idLong": 16713
+  }
+]
