@@ -3,6 +3,7 @@ import { IPublication } from "interfaces/Publication";
 import { IProductFamily } from "interfaces/ProductFamily";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 import { Promise } from "es6-promise";
+import { IConditionMap } from "store/reducers/conditions/IConditions";
 
 let fakeDelay = false;
 const DELAY = 100;
@@ -27,6 +28,14 @@ export class PublicationService implements IPublicationService {
     } = {
         error: null,
         title: "MP330"
+    };
+
+    private _mockDataConditions: {
+        values: IConditionMap;
+        error: string | null
+    } = {
+        values: {},
+        error: null
     };
 
     public getPublications(productFamily?: string, productReleaseVersion?: string): Promise<IPublication[]> {
@@ -124,6 +133,28 @@ export class PublicationService implements IPublicationService {
 
     public getProductReleaseVersionsByPublicationId(publicationId: string): Promise<IProductReleaseVersion[]> {
         return this.getProductReleaseVersions("");
+    }
+
+    public getConditions(publicationId: string): Promise<IConditionMap> {
+        const { error, values } = this._mockDataConditions;
+        if (fakeDelay) {
+            return new Promise((resolve: (values?: IConditionMap) => void, reject: (error: string | null) => void) => {
+                setTimeout((): void => {
+                    if (error) {
+                        reject(error);
+                    }
+                    else {
+                        resolve(values);
+                    }
+                }, DELAY);
+            });
+        } else {
+            if (error) {
+                return Promise.reject(error);
+            } else {
+                return Promise.resolve(values);
+            }
+        }
     }
 
     public setMockDataPublications(error: string | null, publications?: IPublication[],

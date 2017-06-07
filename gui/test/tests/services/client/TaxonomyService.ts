@@ -1,20 +1,34 @@
 import { TaxonomyService } from "services/client/TaxonomyService";
 import { TestBase } from "@sdl/models";
+import { IWindow } from "interfaces/Window";
+import { configureStore } from "store/Store";
 
+//TODO should use beforeEach new TaxonomyService()  instead;
 class TaxonomyServiceInvalidatable extends TaxonomyService {
     public ivalidate(): void {
-        TaxonomyService.NavigationLinksModels = {};
-        TaxonomyService.TocModels = {};
+        this.NavigationLinksModels = {};
+        this.TocModels = {};
     }
 }
 
 class TaxonomyServiceTests extends TestBase {
 
     public runTests(): void {
+        const win = (window as IWindow);
+        const mocksFlag = win.SdlDitaDeliveryMocksEnabled;
         const taxonomyService = new TaxonomyServiceInvalidatable();
         const publicationId = "1961702";
+        configureStore();
 
         describe(`Taxonomy service tests.`, (): void => {
+
+            beforeEach(() => {
+                win.SdlDitaDeliveryMocksEnabled = true;
+            });
+
+            afterEach(() => {
+                win.SdlDitaDeliveryMocksEnabled = mocksFlag;
+            });
 
             it("can get site map items for the root", (done: () => void): void => {
                 taxonomyService.getSitemapRoot(publicationId)
@@ -91,12 +105,12 @@ class TaxonomyServiceTests extends TestBase {
             });
 
             it("can get a path for a sitemap id", (done: () => void): void => {
-                const taxonomyId = "t1-k7";
-                const pageId = "1961702";
+                const taxonomyId = "t1-k16";
+                const pageId = "164468";
                 taxonomyService.getSitemapPath(publicationId, pageId, taxonomyId).then(path => {
                     expect(path).toBeDefined();
                     if (path) {
-                        expect(path.length).toBe(2);
+                        expect(path.length).toBe(1);
                     }
                     done();
                 }).catch(error => {
@@ -106,13 +120,13 @@ class TaxonomyServiceTests extends TestBase {
             });
 
             it("can get a path for a sitemap id from memory", (done: () => void): void => {
-                const taxonomyId = "t1-k7";
-                const pageId = "1961702";
+                const taxonomyId = "t1-k16";
+                const pageId = "164468";
                 const spy = spyOn(window, "XMLHttpRequest").and.callThrough();
                 taxonomyService.getSitemapPath(publicationId, pageId, taxonomyId).then(path => {
                     expect(path).toBeDefined();
                     if (path) {
-                        expect(path.length).toBe(2);
+                        expect(path.length).toBe(1);
                     }
                     expect(spy).not.toHaveBeenCalled();
                     done();
@@ -153,7 +167,7 @@ class TaxonomyServiceTests extends TestBase {
                 taxonomyService.ivalidate();
                 // Retrieve path of item in toc
                 const taxonomyId = "t1-k18";
-                const pageId = "1961702";
+                const pageId = "164363";
                 taxonomyService.getSitemapPath(publicationId, pageId, taxonomyId).then(path => {
                     expect(path).toBeDefined();
                     if (path) {
@@ -175,9 +189,7 @@ class TaxonomyServiceTests extends TestBase {
                     }).catch(onError);
                 }).catch(onError);
             });
-
         });
-
     }
 }
 

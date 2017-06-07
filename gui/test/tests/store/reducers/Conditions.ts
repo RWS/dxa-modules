@@ -4,7 +4,7 @@ import { TestBase } from "@sdl/models";
 
 import { IState } from "store/interfaces/State";
 import { configureStore } from "store/Store";
-import { dialogRequestOpen, dialogRequestClose } from "store/actions/Actions";
+import { dialogOpen, dialogClose } from "store/actions/Actions";
 
 class ConditionsReducer extends TestBase {
 
@@ -22,15 +22,15 @@ class ConditionsReducer extends TestBase {
                 expect(store.getState().conditions.showDialog).toBeFalsy();
             });
 
-            it("Actions dialogRequestOpen and dialogRequestClose should update state", () => {
-                store.dispatch(dialogRequestOpen());
+            it("Actions dialogOpen and dialogClose should update state", () => {
+                store.dispatch(dialogOpen());
                 expect(store.getState().conditions.showDialog).toBeTruthy();
 
-                store.dispatch(dialogRequestClose());
+                store.dispatch(dialogClose());
                 expect(store.getState().conditions.showDialog).toBeFalsy();
 
                 //second time just in case
-                store.dispatch(dialogRequestClose());
+                store.dispatch(dialogClose());
                 expect(store.getState().conditions.showDialog).toBeFalsy();
             });
         });

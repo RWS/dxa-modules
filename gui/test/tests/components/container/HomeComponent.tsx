@@ -114,7 +114,8 @@ class HomeComponent extends TestBase {
                                 productReleaseVersions={[]}
                                 productReleaseVersion={""}
                                 errorMessage=""
-                                isPublicationFound={true}/>
+                                isPublicationFound={true}
+                                conditions={{}}/>
                         </HomePresentation></Provider>)} />
                     </Router>
                 </ComponentWithContext>
