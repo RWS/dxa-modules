@@ -84,6 +84,7 @@ export * from "services/interfaces/TaxonomyService";
 export { configureStore } from "store/Store";
 export * from "store/interfaces/Action";
 export * from "store/interfaces/State";
+export * from "store/reducers/conditions/IConditions";
 
 /**
  * Utils
