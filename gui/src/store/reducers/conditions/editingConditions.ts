@@ -1,6 +1,6 @@
 import { combine, handleAction } from "../CombineReducers";
 import { DIALOG_REQUEST_CLOSE, CONDITIONS_EDITING_CHANGE} from "store/actions/Actions";
-import { IConditionMap } from "store/reducers/conditions/IConditions";
+import { IConditionMap } from "store/interfaces/Conditions";
 
 const emptyEditingConditions: IConditionMap = {};
 const editingConditions = combine(

@@ -13,7 +13,7 @@ import {
 
 import { getPubById, getPubList, getLastConditions, getPageKey } from "store/reducers/Reducer";
 import { IState } from "store/interfaces/State";
-import { IConditionMap } from "store/reducers/conditions/IConditions";
+import { IConditionMap } from "store/interfaces/Conditions";
 
 export { getPubById, getPubList }
 export { Action };

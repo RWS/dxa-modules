@@ -27,7 +27,7 @@ import Version from "utils/Version";
 
 import "./PublicationContent.less";
 import { MD5 } from "object-hash";
-import { IConditionMap } from "store/reducers/conditions/IConditions";
+import { IConditionMap } from "store/interfaces/Conditions";
 
 /**
  * PublicationContent component props

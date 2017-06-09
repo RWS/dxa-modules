@@ -1,6 +1,6 @@
 import { Api } from "utils/Api";
 import { Net, IWebRequest, LoadableObject } from "@sdl/models";
-import { IConditionMap } from "store/reducers/conditions/IConditions";
+import { IConditionMap } from "store/interfaces/Conditions";
 
 /**
  *

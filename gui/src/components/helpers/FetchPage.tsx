@@ -6,7 +6,7 @@ import { getCurrentPub, getLastConditions } from "store/reducers/Reducer";
 import { IAppContext } from "@sdl/dd/container/App/App";
 import { IPageService } from "services/interfaces/PageService";
 import { IState, IPublicationCurrentState } from "store/interfaces/State";
-import { IConditionMap } from "store/reducers/conditions/IConditions";
+import { IConditionMap } from "store/interfaces/Conditions";
 
 export interface IFetchPage {
     /**

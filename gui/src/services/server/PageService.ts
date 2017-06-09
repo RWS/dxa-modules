@@ -1,7 +1,7 @@
 import { IPageService } from "services/interfaces/PageService";
 import { IPage } from "interfaces/Page";
 import { Promise } from "es6-promise";
-import { IConditionMap } from "../../store/reducers/conditions/IConditions";
+import { IConditionMap } from "../../store/interfaces/Conditions";
 
 /**
  * Page service for the server.

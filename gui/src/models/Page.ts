@@ -3,7 +3,7 @@ import { isEmpty } from "lodash";
 import { IPage } from "interfaces/Page";
 import { Api } from "utils/Api";
 import { Net, IWebRequest, LoadableObject } from "@sdl/models";
-import { IConditionMap, IPostConditions, IPostConditionRequest } from "store/reducers/conditions/IConditions";
+import { IConditionMap, IPostConditions, IPostConditionRequest } from "store/interfaces/Conditions";
 
 export const response2page = (serverPage: ServerModels.IPage): IPage => {
     let pageTitle = "";

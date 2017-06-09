@@ -11,7 +11,7 @@ import { IPage } from "interfaces/Page";
 import { combineReducers } from "./CombineReducers";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 import { IPublicationsListPropsParams } from "@sdl/dd/PublicationsList/PublicationsListPresentation";
-import { IConditionMap } from "./conditions/IConditions";
+import { IConditionMap } from "store/interfaces/Conditions";
 
 export const mainReducer = combineReducers({
     conditions,

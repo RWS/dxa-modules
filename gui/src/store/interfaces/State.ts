@@ -1,7 +1,7 @@
 import { IPublication } from "interfaces/Publication";
 import { IPage } from "interfaces/Page";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
-import { IConditionsState } from "store/reducers/conditions/IConditions";
+import { IConditionsState } from "store/interfaces/Conditions";
 
 export interface IProductReleaseVersionState {
     byProductFamily: IProductReleaseVersionMap;

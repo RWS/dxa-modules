@@ -1,4 +1,4 @@
-import { ILastConditions, IConditionsPayload, IConditionMap } from "./IConditions";
+import { ILastConditions, IConditionsPayload, IConditionMap } from "store/interfaces/Conditions";
 import { handleAction } from "../CombineReducers";
 import { CONDITIONS_APPLY } from "store/actions/Actions";
 

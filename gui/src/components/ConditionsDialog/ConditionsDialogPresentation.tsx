@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Dialog, IRequestHandler } from "components/presentation/Dialog/Dialog";
 import ConditionsFetcher from "./ConditionsFetcher";
-import { IConditionMap, ICondition } from "store/reducers/conditions/IConditions";
+import { IConditionMap, ICondition } from "store/interfaces/Conditions";
 import I18n from "components/helpers/I18n";
 import { ConditionsLabelManager } from "components/ConditionsLabelManager/ConditionsLabelManager";
 import { isEmpty } from "lodash";

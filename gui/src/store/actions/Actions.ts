@@ -1,5 +1,5 @@
 import { createAction, Action } from "redux-actions";
-import { IConditionMap } from "store/reducers/conditions/IConditions";
+import { IConditionMap } from "store/interfaces/Conditions";
 
 export { Action }
 

@@ -6,7 +6,7 @@ import { localization } from "services/common/LocalizationService";
 import { Publications } from "models/Publications";
 import { Conditions } from "models/Conditions";
 import { Promise } from "es6-promise";
-import { IConditionMap } from "store/reducers/conditions/IConditions";
+import { IConditionMap } from "store/interfaces/Conditions";
 
 /**
  * Publication service, interacts with the models to fetch the required data.

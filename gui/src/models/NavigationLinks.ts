@@ -5,7 +5,7 @@ import { Api } from "utils/Api";
 import { Net, IWebRequest, LoadableObject } from "@sdl/models";
 import { Url } from "utils/Url";
 import { localization } from "services/common/LocalizationService";
-import { IConditionMap, IPostConditionRequest, IPostConditions } from "store/reducers/conditions/IConditions";
+import { IConditionMap, IPostConditionRequest, IPostConditions } from "store/interfaces/Conditions";
 
 /**
  * Navigation links model

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ICondition } from "store/reducers/conditions/IConditions";
+import { ICondition } from "store/interfaces/Conditions";
 import { LabelManager } from "@sdl/controls-react-wrappers";
 import { TagsTreeView, ILabelManagerTreeViewNode, IFilteredTreeViewNode, ITreeViewNode, ILabelManagerItem, ITypeaheadSuggestion } from "@sdl/controls";
 import { localization } from "services/common/LocalizationService";

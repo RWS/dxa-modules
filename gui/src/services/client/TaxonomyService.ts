@@ -6,7 +6,7 @@ import { NavigationLinks } from "models/NavigationLinks";
 import { Promise } from "es6-promise";
 import { TcmId } from "utils/TcmId";
 import { TaxonomyItemId } from "interfaces/TcmId";
-import { IConditionMap } from "store/reducers/conditions/IConditions";
+import { IConditionMap } from "store/interfaces/Conditions";
 import { getStore } from "store/Store";
 import { getLastConditions } from "store/reducers/Reducer";
 import { MD5 } from "object-hash";
