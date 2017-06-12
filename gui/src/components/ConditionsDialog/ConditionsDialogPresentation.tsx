@@ -7,6 +7,7 @@ import { ConditionsLabelManager } from "components/ConditionsLabelManager/Condit
 import { isEmpty } from "lodash";
 
 import "./ConditionsDialog.less";
+import "components/Input/Input.less";
 import { ILabelManagerItem } from "@sdl/controls";
 
 export interface IConditionsDialogPresentationProps {
@@ -74,7 +75,7 @@ const getConditions = (props: IConditionsDialogPresentationProps) => (
                         }}
                     /> }
 
-                    { condition.range && <input type="text"
+                    { condition.range && <input className="sdl-input-text small" type="text"
                         value={props.editingConditions[name] &&
                             JSON.stringify(props.editingConditions[name].values) != JSON.stringify(condition.values)
                             ? props.editingConditions[name].values[0]
