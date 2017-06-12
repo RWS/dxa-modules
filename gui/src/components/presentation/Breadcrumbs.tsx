@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as ReactDOM from "react-dom";
 import { Promise } from "es6-promise";
 import { Link } from "react-router";
 import { ITaxonomy } from "interfaces/Taxonomy";
@@ -68,6 +69,12 @@ export interface IBreadcrumbsState {
      * @type {string}
      */
     error?: string;
+    /**
+     * Number of shown element in breadcrumbs
+     *
+     * @type {number}
+     */
+    itemsToShow?: number;
 }
 
 /**
@@ -105,7 +112,8 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
         super();
         this.state = {
             itemPath: undefined,
-            error: undefined
+            error: undefined,
+            itemsToShow: 0
         };
     }
 
@@ -135,6 +143,11 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
                     }
                 });
         }
+    }
+
+    public componentDidMount(): void {
+        window.addEventListener("resize", this._recalculateHiddenPath.bind(this));
+        this._recalculateHiddenPath();
     }
 
     /**
@@ -182,11 +195,16 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
         }
     }
 
+    public componentDidUpdate(): void {
+        this._recalculateHiddenPath();
+    }
+
     /**
      * Component will unmount
      */
     public componentWillUnmount(): void {
         this._isUnmounted = true;
+        window.removeEventListener("resize", this._recalculateHiddenPath.bind(this));
     }
 
     /**
@@ -203,10 +221,9 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
 
         return (
             <div className={"sdl-dita-delivery-breadcrumbs"}>
-                <ul>
+                <ul className="breadcrumbs">
                     <li>
                         <Link className="home" title={homeLabel} to={`${path.getRootPath()}home`}>{homeLabel}</Link>
-                        <span className="separator" />
                     </li>
                     {
                         !error && Array.isArray(itemPath) && this._renderBreadcrumbs(itemPath, currentUrl || null)
@@ -216,6 +233,55 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
         );
     }
 
+    private _recalculateHiddenPath(): void {
+        /* istanbul ignore if */
+        if (!this._isUnmounted) {
+            let ticking = false;
+            // Set height of toc and content navigation panel to a maximum
+            const domNode = ReactDOM.findDOMNode(this) as HTMLElement;
+            if (domNode) {
+                let elementsToShow: HTMLElement[] = [];
+                const breadcrumbs = domNode.querySelector("ul.breadcrumbs") as HTMLElement;
+                const breadcrumbsContainer = breadcrumbs.parentElement as HTMLElement;
+                let lastElement = breadcrumbs.lastElementChild as HTMLElement;
+                const calc = () => elementsToShow.map(x => x.offsetWidth).reduce((x: number, y: number) => {
+                    return x + y;
+                }, 0);
+
+                const homeElement = breadcrumbs.firstElementChild && (breadcrumbs.firstElementChild as HTMLElement);
+                const ddSelectorElement = breadcrumbs.querySelector("li.dd-selector") as HTMLElement;
+                if (homeElement) {
+                    const offset = homeElement.clientWidth + (ddSelectorElement && ddSelectorElement.clientWidth);
+                    while (lastElement
+                        && (lastElement !== (ddSelectorElement || homeElement))
+                        && (offset + lastElement.offsetWidth + calc() < breadcrumbsContainer.clientWidth)) {
+                        elementsToShow.push(lastElement);
+                        lastElement = lastElement.previousElementSibling as HTMLElement;
+                    }
+
+                    // If there is no elements to show, then we should show at lest the last one.
+                    if (elementsToShow.length == 0) {
+                        elementsToShow.push(breadcrumbs.lastElementChild as HTMLElement);
+                    }
+
+                    if (!ticking && (this.state.itemsToShow != elementsToShow.length)) {
+                        requestAnimationFrame((): void => {
+                            /* istanbul ignore if */
+                            if (!this._isUnmounted) {
+                                this.setState({
+                                    itemsToShow: elementsToShow.length
+                                });
+                            }
+
+                            ticking = false;
+                        });
+                        ticking = true;
+                    }
+                }
+            }
+        }
+    }
+
     /**
      * Render the list of breadcrumbs
      *
@@ -223,34 +289,20 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
      */
     private _renderBreadcrumbs(itemPath: IBreadcrumbItem[], currentUrl: string | null): JSX.Element[] | null {
         const { router } = this.context;
+        const { itemsToShow } = this.state;
         // Working on items path copy;
         itemPath = itemPath.slice();
 
         // Isolate last element, so it will be rendered isolated
         const lastItem = itemPath.pop();
+        const shownItems: number = (itemsToShow != null && itemsToShow > 0) ? (itemsToShow - 1) : 0;
         let lindex = 0;
 
-        // Render breadcrumbs for Desktop;
-        let breadCrumbs: JSX.Element[] = itemPath.map(
-            (item: IBreadcrumbItem) => {
-                return (
-                    <li key={lindex++}>
-                        {
-                            (currentUrl !== item.url)
-                                ?
-                                (item.url) ?
-                                    <Link title={item.title} to={item.url}>{item.title}</Link>
-                                    :
-                                    <span className="abstract">{item.title}</span>
-                                : <span className="active">{item.title}</span>
-                        }
-                        <span className="separator" />
-                    </li>);
-            });
+        let breadCrumbs: JSX.Element[] = [];
 
-        // Render responcive breadcrumbs;
+        // Render responsive breadcrumbs;
         const toDropdownFormat = (item: IBreadcrumbItem) => ({ "text": item.title, "value": item.url || "" });
-        const itemsToRender = itemPath.filter(item => item.url != null);
+        const itemsToRender = itemPath.slice(0, itemPath.length - shownItems).filter(item => item.url != null);
         if (itemsToRender.length > 0) {
             breadCrumbs.push(
                 <li className="dd-selector" key={lindex++}>
@@ -262,10 +314,26 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
                                 router.push(url);
                             }
                         }} />
-                    <span className="separator" />
                 </li>
             );
         }
+
+        // Render breadcrumbs for Desktop;
+        breadCrumbs.push(...itemPath.map(
+            (item: IBreadcrumbItem, showIndex: number) => {
+                return (
+                    <li key={lindex++} style={(itemPath.length - 1 - showIndex) < shownItems ? { "position": "inherit" } : {}}>
+                        {
+                            (currentUrl !== item.url)
+                                ?
+                                (item.url) ?
+                                    <Link title={item.title} to={item.url}>{item.title}</Link>
+                                    :
+                                    <span className="abstract">{item.title}</span>
+                                : <span className="active">{item.title}</span>
+                        }
+                    </li>);
+            }));
 
         // Render last element, as it will be shown in both cases
         breadCrumbs.push(
