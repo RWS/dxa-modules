@@ -108,9 +108,7 @@ class Server extends TestBase {
                                     </div>
                                     <div className="sdl-dita-delivery-breadcrumbs">
                                         <ul className="breadcrumbs">
-                                            <li>
-                                                <a className="home" title="Home" href="/home">Home</a><span className="separator"></span>
-                                            </li>
+                                            <li><a className="home" title="Home" href="/home">Home</a></li>
                                         </ul>
                                     </div>
                                     <div />
