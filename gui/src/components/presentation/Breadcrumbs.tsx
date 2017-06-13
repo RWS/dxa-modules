@@ -234,52 +234,54 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
     }
 
     private _recalculateHiddenPath(): void {
+        const { itemsToShow } = this.state;
         /* istanbul ignore if */
         if (!this._isUnmounted) {
             let ticking = false;
-            // Set height of toc and content navigation panel to a maximum
             const domNode = ReactDOM.findDOMNode(this) as HTMLElement;
             if (domNode) {
-                let elementsToShow: HTMLElement[] = [];
-                const breadcrumbs = domNode.querySelector("ul.breadcrumbs") as HTMLElement;
-                const breadcrumbsContainer = breadcrumbs.parentElement as HTMLElement;
-                let lastElement = breadcrumbs.lastElementChild as HTMLElement;
-                const calc = () => elementsToShow.map(x => x.offsetWidth).reduce((x: number, y: number) => {
-                    return x + y;
-                }, 0);
-
-                const homeElement = breadcrumbs.firstElementChild && (breadcrumbs.firstElementChild as HTMLElement);
-                const ddSelectorElement = breadcrumbs.querySelector("li.dd-selector") as HTMLElement;
-                if (homeElement) {
-                    const offset = homeElement.clientWidth + (ddSelectorElement && ddSelectorElement.clientWidth);
-                    while (lastElement
-                        && (lastElement !== (ddSelectorElement || homeElement))
-                        && (offset + lastElement.offsetWidth + calc() < breadcrumbsContainer.clientWidth)) {
-                        elementsToShow.push(lastElement);
-                        lastElement = lastElement.previousElementSibling as HTMLElement;
-                    }
-
-                    // If there is no elements to show, then we should show at lest the last one.
-                    if (elementsToShow.length == 0) {
-                        elementsToShow.push(breadcrumbs.lastElementChild as HTMLElement);
-                    }
-
-                    if (!ticking && (this.state.itemsToShow != elementsToShow.length)) {
-                        requestAnimationFrame((): void => {
-                            /* istanbul ignore if */
-                            if (!this._isUnmounted) {
-                                this.setState({
-                                    itemsToShow: elementsToShow.length
-                                });
-                            }
-
-                            ticking = false;
-                        });
-                        ticking = true;
-                    }
+                const elementsToShow = this._getItemsToShow(domNode.querySelector("ul.breadcrumbs") as HTMLElement);
+                if (!ticking && (itemsToShow != elementsToShow.length)) {
+                    requestAnimationFrame((): void => {
+                        /* istanbul ignore if */
+                        if (!this._isUnmounted) {
+                            this.setState({
+                                itemsToShow: elementsToShow.length
+                            });
+                        }
+                        ticking = false;
+                    });
+                    ticking = true;
                 }
             }
         }
+    }
+
+    private _getItemsToShow(breadcrumbs: HTMLElement): HTMLElement[] {
+        let elementsToShow: HTMLElement[] = [];
+        const breadcrumbsContainer = breadcrumbs.parentElement as HTMLElement;
+        let lastElement = breadcrumbs.lastElementChild as HTMLElement;
+        const calc = () => elementsToShow.map(x => x.offsetWidth).reduce((x: number, y: number) => {
+            return x + y;
+        }, 0);
+
+        const homeElement = breadcrumbs.firstElementChild && (breadcrumbs.firstElementChild as HTMLElement);
+        const ddSelectorElement = breadcrumbs.querySelector("li.dd-selector") as HTMLElement;
+        if (homeElement) {
+            const offset = homeElement.clientWidth + (ddSelectorElement && ddSelectorElement.clientWidth);
+            while (lastElement
+                && (lastElement !== (ddSelectorElement || homeElement))
+                && (offset + lastElement.offsetWidth + calc() < breadcrumbsContainer.clientWidth)) {
+                elementsToShow.push(lastElement);
+                lastElement = lastElement.previousElementSibling as HTMLElement;
+            }
+
+            // If there is no elements to show, then we should show at lest the last one.
+            if (elementsToShow.length == 0) {
+                elementsToShow.push(breadcrumbs.lastElementChild as HTMLElement);
+            }
+        }
+        return elementsToShow;
     }
 
     /**
