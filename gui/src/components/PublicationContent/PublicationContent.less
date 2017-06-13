@@ -106,6 +106,15 @@
                 }
             }
         }
+
+        .sdl-dita-delivery-comments-list {
+            margin-left: @tocWidth + @defaultMargin;
+            margin-right: @contentNavWidth + @defaultMargin;
+            .sdl-dita-delivery-app.rtl & {
+                margin-left: @contentNavWidth + @defaultMargin;
+                margin-right: @tocWidth + @defaultMargin;
+            }
+        }
     }
 }
 
