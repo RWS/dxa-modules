@@ -311,8 +311,8 @@ export class Dropdown extends React.Component<IDropdownProps, IDropdownState> {
         }
     }
 
-    private onChangeSelect(event: React.FormEvent): void {
-        const selectedValue = (event.target as HTMLSelectElement).value;
+    private onChangeSelect(event: React.FormEvent<HTMLSelectElement>): void {
+        const selectedValue = event.currentTarget.value;
         const items = this.props.items;
         const values = items.map((item: IDropdownValue) => item.value);
         return this.onClickItem(values.indexOf(selectedValue));

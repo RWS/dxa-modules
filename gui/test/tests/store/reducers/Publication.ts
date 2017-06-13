@@ -28,7 +28,7 @@ class PublicationReducer extends TestBase {
 
             describe("Check updateCurrentPublication", (): void => {
                 it("publicationId", (): void => {
-                    store.dispatch(updateCurrentPublication("11111"));
+                    store.dispatch(updateCurrentPublication("11111", "", ""));
                     const { publicationId, pageId, anchor } = getCurrentPub(store.getState());
                     expect(publicationId).toBe("11111");
                     expect(pageId).toBe("");
@@ -36,7 +36,7 @@ class PublicationReducer extends TestBase {
                 });
 
                 it("publicationId, pageId", (): void => {
-                    store.dispatch(updateCurrentPublication("11111", "22222"));
+                    store.dispatch(updateCurrentPublication("11111", "22222", ""));
                     const { publicationId, pageId, anchor } = getCurrentPub(store.getState());
                     expect(publicationId).toBe("11111");
                     expect(pageId).toBe("22222");

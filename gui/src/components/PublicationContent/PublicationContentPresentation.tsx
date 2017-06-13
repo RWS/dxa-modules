@@ -1,5 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import { browserHistory } from "react-router";
 import { Promise } from "es6-promise";
 import { IAppContext } from "@sdl/dd/container/App/App";
 import { NavigationMenu } from "@sdl/dd/presentation/NavigationMenu";
@@ -163,8 +164,7 @@ export type Pub = IPublicationContentProps & IPublicationCurrentState;
 export class PublicationContentPresentation extends React.Component<Pub, IPublicationContentState> {
 
     public static contextTypes: React.ValidationMap<IAppContext> = {
-        services: React.PropTypes.object.isRequired,
-        router: React.PropTypes.object.isRequired
+        services: React.PropTypes.object.isRequired
     };
 
     public context: IAppContext;
@@ -246,7 +246,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
      */
     public render(): JSX.Element {
         const { activeTocItemPath, selectedTocItem, activePageHeader } = this.state;
-        const { services, router } = this.context;
+        const { services } = this.context;
         const { publicationId,
             pageId,
             page,
@@ -268,8 +268,8 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                     error={errorMessage}
                     onNavigate={(url: string): void => {
                         /* istanbul ignore else */
-                        if (router) {
-                            router.push(url);
+                        if (browserHistory) {
+                            browserHistory.push(url);
                         }
                     }}
                     url={pageId ?

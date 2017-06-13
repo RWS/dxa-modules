@@ -97,7 +97,7 @@ export const getPubForLang = (state: IPublicationsState, publication: IPublicati
     })[0] || notFound(publication.id);
 };
 
-export const getPubListRepresentatives = (state: IState, filter: {}): IPublication[] => {
+export const getPubListRepresentatives = (state: IState, filter: {}): (IPublication | undefined)[] => {
     // Groups publications by versionRef
     // find one we need by language or fallback language
     return chain(getPubList(state.publications, filter))

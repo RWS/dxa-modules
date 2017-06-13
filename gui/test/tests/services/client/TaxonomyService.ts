@@ -45,7 +45,7 @@ class TaxonomyServiceTests extends TestBase {
             });
 
             it("can get site map items from memory", (done: () => void): void => {
-                const spy = spyOn(window, "XMLHttpRequest").and.callThrough();
+                const spy = spyOn(XMLHttpRequest.prototype, "open").and.callThrough();
                 taxonomyService.getSitemapRoot(publicationId)
                     .then(items => {
                         expect(items).toBeDefined();
@@ -122,7 +122,7 @@ class TaxonomyServiceTests extends TestBase {
             it("can get a path for a sitemap id from memory", (done: () => void): void => {
                 const taxonomyId = "t1-k16";
                 const pageId = "164468";
-                const spy = spyOn(window, "XMLHttpRequest").and.callThrough();
+                const spy = spyOn(XMLHttpRequest.prototype, "open").and.callThrough();
                 taxonomyService.getSitemapPath(publicationId, pageId, taxonomyId).then(path => {
                     expect(path).toBeDefined();
                     if (path) {
@@ -175,7 +175,7 @@ class TaxonomyServiceTests extends TestBase {
                     }
                     // Retrieve toc items up to the path of the current retrieved page
                     // There should be no extra http requests as the data is already fetched as part of the locate
-                    const spy = spyOn(window, "XMLHttpRequest").and.callThrough();
+                    const spy = spyOn(XMLHttpRequest.prototype, "open").and.callThrough();
                     taxonomyService.getSitemapRoot(publicationId).then(rootItems => {
                         expect(rootItems.length).toBe(9);
                         taxonomyService.getSitemapItems(publicationId, rootItems[4].id || "").then(callFunctionsItems => {

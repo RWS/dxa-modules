@@ -2,7 +2,6 @@ import * as React from "react";
 import * as ReactDOMServer from "react-dom/server";
 import { renderToString } from "Server";
 import { App } from "@sdl/dd/container/App/App";
-import { hashHistory } from "react-router";
 import { localization } from "services/common/LocalizationService";
 import { IServices } from "interfaces/Services";
 import { PageService } from "services/server/PageService";
@@ -44,7 +43,7 @@ class Server extends TestBase {
                     taxonomyService: new TaxonomyService()
                 };
 
-                const app = ReactDOMServer.renderToStaticMarkup(<Provider store={this.store}><App history={hashHistory} services={services} /></Provider>);
+                const app = ReactDOMServer.renderToStaticMarkup(<Provider store={this.store}><App services={services} /></Provider>);
                 const expected = ReactDOMServer.renderToStaticMarkup((
                     <div className="ltr sdl-dita-delivery-app">
                         <div />
@@ -52,7 +51,7 @@ class Server extends TestBase {
                         <div className="sdl-dita-delivery-topbar">
                             <header>
                                 <div className="sdl-dita-delivery-topbar-logo" title="SDL">
-                                    <a href="#/home"></a>
+                                    <a href="/home"></a>
                                 </div>
                                 <div className="spacer"></div>
                                 <div className="sdl-dita-delivery-topbar-expand-nav"><span /></div>
@@ -110,7 +109,7 @@ class Server extends TestBase {
                                     <div className="sdl-dita-delivery-breadcrumbs">
                                         <ul className="breadcrumbs">
                                             <li>
-                                                <a className="home" title="Home" href="#/home">Home</a>
+                                                <a className="home" title="Home" href="/home">Home</a><span className="separator"></span>
                                             </li>
                                         </ul>
                                     </div>

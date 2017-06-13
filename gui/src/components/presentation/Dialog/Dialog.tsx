@@ -60,7 +60,7 @@ const escHandler = (onRequestClose: IRequestHandler) =>
         onKeyUp={handleKeyUp(onRequestClose)}
     />;
 
-const handleOutsideClick = (onRequestClose: IRequestHandler) => (event: React.MouseEvent) => {
+const handleOutsideClick = (onRequestClose: IRequestHandler) => (event: React.MouseEvent<HTMLElement>) => {
     // Check that clicked outside of dialog
     if (onRequestClose && event.target === event.currentTarget) {
         onRequestClose();

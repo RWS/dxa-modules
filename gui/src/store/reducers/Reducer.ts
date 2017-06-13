@@ -26,7 +26,7 @@ export const mainReducer = combineReducers({
 export const getPubList = (state: IState, filter?: {}): IPublication[] => Publications.getPubList(state.publications, filter);
 export const getPubById = (state: IState, id: string): IPublication => Publications.getPubById(state.publications, id);
 export const getPubsByLang = (state: IState, language: string): IPublication[] => Publications.getPubsByLang(state.publications, language);
-export const getPubListRepresentatives = (state: IState, filter: {}): IPublication[] => Publications.getPubListRepresentatives(state, filter);
+export const getPubListRepresentatives = (state: IState, filter: {}): (IPublication | undefined)[] => Publications.getPubListRepresentatives(state, filter);
 export const normalizeProductFamily = (params: IPublicationsListPropsParams): string | null => Publications.normalizeProductFamily(params);
 export const normalizeProductReleaseVersion = (params: IPublicationsListPropsParams | string): string | null | undefined => Publications.normalizeProductReleaseVersion(params);
 

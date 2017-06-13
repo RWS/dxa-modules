@@ -8,7 +8,7 @@ import { ActivityIndicator } from "@sdl/controls-react-wrappers";
 import { TestBase } from "@sdl/models";
 import { PublicationService } from "test/mocks/services/PublicationService";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
-import { hashHistory } from "react-router";
+import { browserHistory } from "react-router";
 import { dummyPage } from "utils/Page";
 import { configureStore } from "store/Store";
 import { Provider } from "react-redux";
@@ -102,7 +102,7 @@ class HomeComponent extends TestBase {
         return ReactDOM.render(
             (
                 <ComponentWithContext {...services}>
-                    <Router history={hashHistory}>
+                    <Router history={browserHistory}>
                         <Route path="*" component={() => (<Provider store={store}><HomePresentation publicationId={publicationId}>
                             <PublicationContentPresentation
                                 publicationId={publicationId}

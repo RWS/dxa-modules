@@ -176,7 +176,7 @@ class TocComponent extends TestBase {
                         rootItems: rootItems,
                         activeItemPath: undefined,
                         onSelectionChanged: (sitemapItem: ITaxonomy, path: string[]): void => {
-                            expect(path).toEqual([rootItems[0].id]);
+                            expect(path).toEqual([rootItems[0].id || ""]);
                             done();
                         },
                         onRetry: () => { }
