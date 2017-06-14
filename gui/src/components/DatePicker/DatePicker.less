@@ -1,0 +1,55 @@
+@import (reference) "~theme-styles";
+
+.sdl-dita-delivery-datepicker {
+    .react-datepicker& {
+        font-size: 11px;
+        font-family: "Calibri";
+        color: @neutralColor4;
+        border-radius: 4px;
+        box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.12);
+        border: 1px solid #E1E7EB;
+    }
+
+    .react-datepicker__header {
+        background-color: white;
+        border-bottom: 0px;
+    }
+
+    .react-datepicker__day-names {
+        text-transform: uppercase;
+    }
+
+    .react-datepicker__day-name {
+        color: #2A3B4C;
+    }
+
+    .react-datepicker__navigation {
+        top: 20px;
+    }
+
+    .react-datepicker__month {
+        margin: 0 15px 10px;
+    }
+
+    .react-datepicker__current-month {
+        padding: 10px 0;
+        font-size: 16px;
+        color: #2A3B4C;
+    }
+
+    .react-datepicker__day--selected,
+    .react-datepicker__day--keyboard-selected {
+        background-color: @accentColor1;
+        border-radius: 1.0rem;
+    }
+
+    .react-datepicker__day--outside-month {
+        color: lighten(@neutralColor4, 20%);
+    }
+
+    .react-datepicker__day:hover {
+        border-radius: 1.0rem;
+        background-color: lighten(@accentColor1, 5%); 
+        color: white;
+    }
+}
