@@ -4,7 +4,7 @@ import * as TestUtils from "react-addons-test-utils";
 import { TestBase } from "@sdl/models";
 import Dialog, { IRequestHandler } from "components/presentation/Dialog/Dialog";
 
-class TilesListComponent extends TestBase {
+class DialogComponent extends TestBase {
     public runTests(): void {
         describe("<Dialog />", (): void => {
             const target = super.createTargetElement();
@@ -40,4 +40,4 @@ class TilesListComponent extends TestBase {
     }
 }
 
-new TilesListComponent().runTests();
+new DialogComponent().runTests();
