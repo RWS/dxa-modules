@@ -26,11 +26,8 @@ class DatePickerComponent extends TestBase {
 
             it("Correct component render", (): void => {
                 const datepicker = this._renderComponent({}, target);
-                const datepickerNode = ReactDOM.findDOMNode(datepicker);
-                const datepickerContainer = datepickerNode.querySelector(".react-datepicker__input-container");
-                const datepickerInput = datepickerNode.querySelector(".react-datepicker__input-container > input");
-                expect(datepickerContainer).not.toBeNull();
-                expect(datepickerInput).not.toBeNull();
+                const datePickerСomponent = TestUtils.findRenderedComponentWithType(datepicker, DatePicker);
+                expect(datePickerСomponent).not.toBeNull();
             });
 
             it("Correct component initial state", (): void => {
