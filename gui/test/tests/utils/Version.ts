@@ -87,35 +87,35 @@ describe(`Version tests.`, (): void => {
                 productFamily: "SDL Web",
                 productReleaseVersion: "Web 8",
                 title: "Web 8",
-                createdOn: new Date((defaultPub.createdOn || new Date()).setFullYear(2016)),
+                createdOn: new Date(defaultPub.createdOn.setFullYear(2016)),
                 version: "4"
             },
             {
                 ...defaultPub,
                 productFamily: "SDL Web",
                 productReleaseVersion: "Tridion 98",
-                createdOn: new Date((defaultPub.createdOn || new Date()).setFullYear(1998)),
+                createdOn: new Date(defaultPub.createdOn.setFullYear(1998)),
                 version: "1"
             },
             {
                 ...defaultPub,
                 productFamily: "SDL Web",
                 productReleaseVersion: "Tridion 2013",
-                createdOn: new Date((defaultPub.createdOn || new Date()).setFullYear(2013)),
+                createdOn: new Date(defaultPub.createdOn.setFullYear(2013)),
                 version: "2"
             },
             {
                 ...defaultPub,
                 productFamily: "SDL Web",
                 productReleaseVersion: "Tridion 2013SP1",
-                createdOn: new Date((defaultPub.createdOn || new Date()).setFullYear(2015)),
+                createdOn: new Date(defaultPub.createdOn.setFullYear(2015)),
                 version: "2.1.1"
             },
             {
                 ...defaultPub,
                 productFamily: "SDL Web",
                 productReleaseVersion: "Tridion 2014",
-                createdOn: new Date((defaultPub.createdOn || new Date()).setFullYear(2014)),
+                createdOn: new Date(defaultPub.createdOn.setFullYear(2014)),
                 version: "3"
             },
             /**
@@ -144,7 +144,7 @@ describe(`Version tests.`, (): void => {
                 productFamily: "PF7",
                 productReleaseVersion: "PR7.1",
                 version: "1",
-                createdOn: new Date((defaultPub.createdOn || new Date()).setFullYear(2018))
+                createdOn: new Date(defaultPub.createdOn.setFullYear(2018))
             },
             {
                 ...defaultPub,
@@ -152,7 +152,7 @@ describe(`Version tests.`, (): void => {
                 productFamily: "PF7",
                 productReleaseVersion: "PR7.2",
                 version: "2",
-                createdOn: new Date((defaultPub.createdOn || new Date()).setFullYear(2019))
+                createdOn: new Date(defaultPub.createdOn.setFullYear(2019))
             },
             {
                 ...defaultPub,
@@ -160,7 +160,7 @@ describe(`Version tests.`, (): void => {
                 productFamily: "PF7",
                 productReleaseVersion: "PR7.1",
                 version: "1",
-                createdOn: new Date((defaultPub.createdOn || new Date()).setFullYear(2020))
+                createdOn: new Date(defaultPub.createdOn.setFullYear(2020))
             },
             {
                 ...defaultPub,
@@ -168,7 +168,7 @@ describe(`Version tests.`, (): void => {
                 productFamily: "PF7",
                 productReleaseVersion: "PR7.3",
                 version: "1",
-                createdOn: new Date((defaultPub.createdOn || new Date()).setFullYear(2012))
+                createdOn: new Date(defaultPub.createdOn.setFullYear(2012))
             },
             /**
              * Uncategorized, unknown

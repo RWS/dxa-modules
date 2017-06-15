@@ -100,12 +100,14 @@ class AppComponent extends TestBase {
             id: PUB_ID_WITH_PAGE,
             title: "pub-title",
             version: "1",
-            logicalId: "1-1"
+            logicalId: "1-1",
+            createdOn: new Date()
         }, {
             id: PUB_ID_NO_PAGE,
             title: "pub-title",
             version: "1",
-            logicalId: "1-2"
+            logicalId: "1-2",
+            createdOn: new Date()
         }]));
         store.dispatch(pageLoaded({
             id: "0000001",
