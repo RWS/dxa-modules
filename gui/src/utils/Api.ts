@@ -115,4 +115,32 @@ export class Api {
         }
     }
 
+    /**
+     * Get comments url
+     * Use this url to retrive all comments of page
+     *
+     * @static
+     * @param {string} publicationId
+     * @param {string} pageId
+     * @param {boolean} descending
+     * @param {number} top
+     * @param {number} skip
+     * @param {number[]} status
+     * @returns {string}
+     *
+     * @memberof Api
+     */
+    public static getCommentsUrl(publicationId: string, pageId: string, descending: boolean, top: number, skip: number, status: number[]): string {
+        const encodedPubId = encodeURIComponent(publicationId);
+        const encodedPageId = encodeURIComponent(pageId);
+
+        /* istanbul ignore else */
+        if (mocksEnabled()) {
+            // Get all comments for a page without any filtering
+            return path.getAbsolutePath(`${mocksEndPoint}/comments-${encodedPubId}-${encodedPageId}.json`);
+        } else {
+            return path.getAbsolutePath(`api/comments/${encodedPubId}/${encodedPageId}?descending=${descending}&top=${top}&skip=${skip}&status[]=${status}`);
+        }
+    }
+
 }

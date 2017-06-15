@@ -1,3 +1,4 @@
+import { IComment } from "interfaces/Comments";
 import { Dispatch } from "redux";
 import { createAction, Action } from "redux-actions";
 import { IPageService } from "services/interfaces/PageService";
@@ -8,6 +9,7 @@ import {
     PUBLICATIONS_LOADED, PUBLICATIONS_LOADING, PUBLICATIONS_LOADING_ERROR,
     RELEASE_VERSIONS_LOADING, RELEASE_VERSIONS_LOADED,
     CONDITIONES_LOADED, CONDITIONES_LOADING, CONDITIONES_ERROR,
+    COMMENTS_LOADING, COMMENTS_LOADED, COMMENTS_ERROR,
     updateCurrentPublication
 } from "./Actions";
 
@@ -58,6 +60,10 @@ export const releaseVersionsLoaded = createAction(RELEASE_VERSIONS_LOADED, (prod
 export const conditionsLoading = createAction(CONDITIONES_LOADING, (pubId: string) => pubId);
 export const conditionsLoaded = createAction(CONDITIONES_LOADED, (pubId: string, conditions: IConditionMap) => ({ pubId, conditions }));
 export const conditionsError = createAction(CONDITIONES_ERROR, (pubId: string, error: {}) => ({ pubId, error }));
+
+export const commentsLoading = createAction(COMMENTS_LOADING, (pageId: string) => pageId);
+export const commentsLoaded = createAction(COMMENTS_LOADED, (pageId: string, comments: IComment[]) => ({ pageId, comments }));
+export const commentsError = createAction(COMMENTS_ERROR, (pageId: string, error: {}) => ({ pageId, error }));
 
 /**
  * Publications fetcher
@@ -137,6 +143,22 @@ export const fetchConditions = (publicationService: IPublicationService, pubId: 
             .then(
                 data => dispatch(conditionsLoaded(pubId, data)),
                 error => dispatch(conditionsError(pubId, error))
+            );
+    };
+};
+
+export const fetchComments = (pageService: IPageService, publicationId: string, pageId: string,
+    descending: boolean, top: number, skip: number, status: number[]): IDispatcherFunction => {
+
+    return dispatch => {
+        dispatch(commentsLoading(pageId));
+        /* need something that works for server rendering */
+
+        pageService
+            .getComments(publicationId, pageId, descending, top, skip, status)
+            .then(
+                data => dispatch(commentsLoaded(pageId, data)),
+                error => dispatch(commentsError(pageId, error))
             );
     };
 };

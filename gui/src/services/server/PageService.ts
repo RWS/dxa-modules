@@ -1,7 +1,8 @@
+import { IComment } from "interfaces/Comments";
 import { IPageService } from "services/interfaces/PageService";
 import { IPage } from "interfaces/Page";
 import { Promise } from "es6-promise";
-import { IConditionMap } from "../../store/interfaces/Conditions";
+import { IConditionMap } from "store/interfaces/Conditions";
 
 /**
  * Page service for the server.
@@ -25,6 +26,14 @@ export class PageService implements IPageService {
         }
     };
 
+    private _mockDataComments: {
+        error: string | null;
+        values: IComment[];
+    } = {
+        error: null,
+        values: []
+    };
+
     /**
      * Get page information
      *
@@ -40,6 +49,15 @@ export class PageService implements IPageService {
             return Promise.reject(error);
         } else {
             return Promise.resolve(info);
+        }
+    }
+
+    public getComments(publicationId: string, pageId: string, descending: boolean, top: number, skip: number, status: number[]): Promise<IComment[]> {
+        const { error, values } = this._mockDataComments;
+        if (error) {
+            return Promise.reject(error);
+        } else {
+            return Promise.resolve(values);
         }
     }
 
