@@ -5,7 +5,7 @@ import { Dropdown, IDropdownProps } from "@sdl/dd/Dropdown/Dropdown";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 import { TestBase } from "@sdl/models";
 
-class ErrorContentComponent extends TestBase {
+class DropdownComponent extends TestBase {
 
     public runTests(): void {
 
@@ -141,4 +141,4 @@ class ErrorContentComponent extends TestBase {
     }
 }
 
-new ErrorContentComponent().runTests();
+new DropdownComponent().runTests();

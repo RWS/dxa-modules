@@ -3,6 +3,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as Prism from "prismjs";
 
+import { browserHistory } from "react-router";
 import { ActivityIndicator, Button } from "@sdl/controls-react-wrappers";
 import { ButtonPurpose } from "@sdl/controls";
 import { Html, IHeader } from "utils/Html";
@@ -130,8 +131,7 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
      * @type {React.ValidationMap<IAppContext>}
      */
     public static contextTypes: React.ValidationMap<IAppContext> = {
-        services: React.PropTypes.object.isRequired,
-        router: React.PropTypes.object.isRequired
+        services: React.PropTypes.object.isRequired
     };
 
     /**
@@ -160,9 +160,8 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
      * Invoked once, both on the client and server, immediately before the initial rendering occurs.
      */
     public componentWillMount(): void {
-        const { router } = this.context;
-        if (router) {
-            this._historyUnlisten = router.listen(() => {
+        if (browserHistory) {
+            this._historyUnlisten = browserHistory.listen(() => {
                 this._lastPageAnchor = undefined;
             });
         }

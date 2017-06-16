@@ -76,7 +76,7 @@ class PublicationsReducer extends TestBase {
                 });
 
                 it("Check that error puts loading state back to false", () => {
-                    store.dispatch(publicationsLoadingError());
+                    store.dispatch(publicationsLoadingError("Error Message"));
 
                     expect(isPubsLoading(store.getState())).toBeFalsy();
                 });

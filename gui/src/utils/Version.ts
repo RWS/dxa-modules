@@ -40,8 +40,7 @@ export default class Version {
             // Latest is first
             if (createdOnA.getTime() < createdOnB.getTime()) {
                 return 1;
-            }
-            if (createdOnA.getTime() > createdOnB.getTime()) {
+            } else if (createdOnA.getTime() > createdOnB.getTime()) {
                 return -1;
             }
             return 0;
@@ -80,7 +79,7 @@ export default class Version {
             }
 
             const sameVersion = a.version === b.version;
-            const sameCreatedOnDate = a.createdOn.getTime() === b.createdOn.getTime();
+            const sameCreatedOnDate = (a.createdOn.getTime() === b.createdOn.getTime());
             if (a.id === b.id && !sameVersion) {
                 return this.compareVersion(a.version, b.version) ? -1 : 1;
             } else if (!sameCreatedOnDate) {

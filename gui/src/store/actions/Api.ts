@@ -2,6 +2,8 @@ import { Dispatch } from "redux";
 import { createAction, Action } from "redux-actions";
 import { IPageService } from "services/interfaces/PageService";
 import { IPublicationService } from "services/interfaces/PublicationService";
+import { IPublication } from "interfaces/Publication";
+import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 
 import {
     PAGE_LOADED, PAGE_LOADING, PAGE_ERROR,
@@ -44,16 +46,17 @@ export interface IDispatcherFunction {
     (dispatch: Dispatch<IState>, state: IState): void;
 }
 
-export const publicationsLoaded = createAction(PUBLICATIONS_LOADED, publications => publications);
-export const pageLoaded = createAction(PAGE_LOADED, (pageInfo, key) => ({ page: pageInfo, key }));
-export const pageLoading = createAction(PAGE_LOADING, key => key);
+export const publicationsLoaded = createAction(PUBLICATIONS_LOADED, (publications: IPublication[]) => publications);
+export const pageLoaded = createAction(PAGE_LOADED, (pageInfo: {}, key: string) => ({ page: pageInfo, key }));
+export const pageLoading = createAction(PAGE_LOADING, (key: string) => key);
 export const pageError = createAction(PAGE_ERROR, (key: string, message: string) => ({ key, message }));
 
 export const publicationsLoading = createAction(PUBLICATIONS_LOADING);
-export const publicationsLoadingError = createAction(PUBLICATIONS_LOADING_ERROR);
+export const publicationsLoadingError = createAction(PUBLICATIONS_LOADING_ERROR, (errorMessage: string) => errorMessage);
 
-export const releaseVersionsLoading = createAction(RELEASE_VERSIONS_LOADING, (pubId) => pubId);
-export const releaseVersionsLoaded = createAction(RELEASE_VERSIONS_LOADED, (productFamily, releaseVersions) => ({ productFamily, releaseVersions }));
+export const releaseVersionsLoading = createAction(RELEASE_VERSIONS_LOADING, (pubId: string) => pubId);
+export const releaseVersionsLoaded = createAction(RELEASE_VERSIONS_LOADED,
+    (productFamily: string, releaseVersions: IProductReleaseVersion[]) => ({ productFamily, releaseVersions }));
 
 export const conditionsLoading = createAction(CONDITIONES_LOADING, (pubId: string) => pubId);
 export const conditionsLoaded = createAction(CONDITIONES_LOADED, (pubId: string, conditions: IConditionMap) => ({ pubId, conditions }));
@@ -104,25 +107,25 @@ export const fetchPage = (pageService: IPageService, pubId: string, pageId: stri
 
 export const fetchProductReleaseVersions = (publicationService: IPublicationService, pubId: string): IDispatcherFunction => {
     return dispatch => {
-        dispatch(releaseVersionsLoading());
+        dispatch(releaseVersionsLoading(pubId));
 
         publicationService
             .getProductReleaseVersionsByPublicationId(pubId)
             .then(
                 (releaseVersions) => dispatch(releaseVersionsLoaded(pubId, releaseVersions)),
-                (errorMessage) => dispatch(releaseVersionsLoaded(pubId, { title: errorMessage, value: "" }))
+                (errorMessage) => dispatch(releaseVersionsLoaded(pubId, [{ title: errorMessage, value: "" }]))
             );
     };
 };
 
 export const fetchProductReleaseVersionsByProductFamily = (publicationService: IPublicationService, productFamily: string): IDispatcherFunction => {
     return dispatch => {
-        dispatch(releaseVersionsLoading());
+        dispatch(releaseVersionsLoading(""));
         publicationService
             .getProductReleaseVersions(productFamily)
             .then(
                 (releaseVersions) => dispatch(releaseVersionsLoaded(productFamily, releaseVersions)),
-                (errorMessage) => dispatch(releaseVersionsLoaded(productFamily, { title: errorMessage, value: "" }))
+                (errorMessage) => dispatch(releaseVersionsLoaded(productFamily, [{ title: errorMessage, value: "" }]))
             );
     };
 };
@@ -181,7 +184,7 @@ export const setCurrentPublicationByReleaseVersion = (pubId: string, productRele
         }
 
         if (pubs[0]) {
-            dispatch(updateCurrentPublication(pubs[0].id));
+            dispatch(updateCurrentPublication(pubs[0].id, "", ""));
         }
     };
 };

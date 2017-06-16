@@ -7,7 +7,6 @@ import { PageService } from "services/client/PageService";
 import { PublicationService } from "services/client/PublicationService";
 import { TaxonomyService } from "services/client/TaxonomyService";
 import { localization } from "services/common/LocalizationService";
-import { browserHistory } from "react-router";
 
 import { Provider } from "react-redux";
 import { IState } from "store/interfaces/State";
@@ -38,7 +37,7 @@ const render = (AppComp: typeof App): void => {
     } else {
         ReactDOM.render(
             <Provider store={store}>
-                <AppComp services={services} history={browserHistory as ReactRouter.History} />
+                <AppComp services={services} />
             </Provider>, mainElement);
     }
 };

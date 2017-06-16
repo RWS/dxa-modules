@@ -3,7 +3,7 @@ import "@sdl/controls-react-wrappers/dist/stylesheets/main";
 import "./configuration/Tests.less";
 import "babel-polyfill";
 
-// // Import all tests
+// Import all tests
 import "test/tests/components/container/AppComponent";
 
 import "test/tests/components/container/ErrorContentComponent";
@@ -13,6 +13,7 @@ import "test/tests/components/container/PublicationContentComponent";
 import "test/tests/components/container/PublicationsListComponent";
 import "test/tests/components/container/TilesListComponent";
 import "test/tests/components/container/TilesListComponent";
+import "test/tests/components/controls/DatePickerComponent";
 import "test/tests/components/controls/DropdownComponent";
 import "test/tests/components/Dialog/DialogComponent";
 import "test/tests/components/PageLink/PageLinkComponent";

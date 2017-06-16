@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Promise } from "es6-promise";
-import { Link } from "react-router";
+import { Link, browserHistory } from "react-router";
 import { ITaxonomy } from "interfaces/Taxonomy";
 import { IAppContext } from "@sdl/dd/container/App/App";
 import { path } from "utils/Path";
@@ -90,8 +90,7 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
      * @memberOf Breadcrumbs
      */
     public static contextTypes: React.ValidationMap<IAppContext> = {
-        services: React.PropTypes.object.isRequired,
-        router: React.PropTypes.object.isRequired
+        services: React.PropTypes.object.isRequired
     };
 
     /**
@@ -290,7 +289,6 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
      * @returns {JSX.Element}
      */
     private _renderBreadcrumbs(itemPath: IBreadcrumbItem[], currentUrl: string | null): JSX.Element[] | null {
-        const { router } = this.context;
         const { itemsToShow } = this.state;
         // Working on items path copy;
         itemPath = itemPath.slice();
@@ -312,8 +310,8 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
                         placeHolder={itemsToRender.length.toString()}
                         items={itemsToRender.map(toDropdownFormat)}
                         onChange={(url: string) => {
-                            if (router) {
-                                router.push(url);
+                            if (browserHistory) {
+                                browserHistory.push(url);
                             }
                         }} />
                 </li>

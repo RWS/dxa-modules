@@ -7,7 +7,6 @@ import { PageService } from "services/server/PageService";
 import { PublicationService } from "services/server/PublicationService";
 import { TaxonomyService } from "services/server/TaxonomyService";
 import { localization } from "services/common/LocalizationService";
-import { hashHistory } from "react-router";
 
 import { Provider } from "react-redux";
 import { IState } from "store/interfaces/State";
@@ -37,6 +36,6 @@ export function renderToString(path: string): string {
 
     return ReactDOMServer.renderToString(
         <Provider store={store}>
-            <App services={services} history={hashHistory} />
+            <App services={services}/>
         </Provider>);
 };

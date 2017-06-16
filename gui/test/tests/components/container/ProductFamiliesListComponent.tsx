@@ -6,6 +6,7 @@ import { ActivityIndicator, Button } from "@sdl/controls-react-wrappers";
 import { TestBase } from "@sdl/models";
 import { PublicationService } from "test/mocks/services/PublicationService";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
+import { browserHistory } from "react-router";
 
 const services = {
     publicationService: new PublicationService()
@@ -121,7 +122,7 @@ class ProductFamiliesListComponent extends TestBase {
                 expect(domNode).not.toBeNull();
 
                 // Spy on the router
-                spyOn(productFamiliesList.context.router, "push").and.callFake((path: string): void => {
+                spyOn(browserHistory, "push").and.callFake((path: string): void => {
                     // Check if routing was called with correct params
                     expect(path).toBe(`/publications/Product%20Family`);
                     done();

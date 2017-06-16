@@ -40,7 +40,7 @@ class PageServiceTests extends TestBase {
 
             it("can get page info from memory", (done: () => void): void => {
                 const pageId = "164398";
-                const spy = spyOn(window, "XMLHttpRequest").and.callThrough();
+                const spy = spyOn(XMLHttpRequest.prototype, "open").and.callThrough();
                 pageService.getPageInfo(publicationId, pageId).then(pageInfo => {
                     expect(pageInfo).toBeDefined();
                     if (pageInfo) {

@@ -27,6 +27,7 @@ import * as ErrorContentComp from "@sdl/dd/container/ErrorContent/ErrorContentPr
 import * as ProductFamiliesListComp from "@sdl/dd/container/ProductFamiliesList/ProductFamiliesList";
 import * as ContentLanguageWarningComp from "@sdl/dd/ContentLanguageWarning/ContentLanguageWarningPresentation";
 import * as DropdownComp from "@sdl/dd/Dropdown/Dropdown";
+import * as DatePickerComp from "@sdl/dd/DatePicker/DatePicker";
 
 export const Components = {
     AppComp, HomeComp, PublicationContentComp, PublicationsListComp,
@@ -34,7 +35,7 @@ export const Components = {
     PageComp, SearchBarComp, TocComp, TopBarComp,
     TileComp, TilesListComp, ErrorComp, ErrorTocComp,
     VersionSelectorComp, ErrorContentComp, ProductFamiliesListComp,
-    ContentLanguageWarningComp, DropdownComp, PageLinkComp
+    ContentLanguageWarningComp, DropdownComp, DatePickerComp, PageLinkComp
 };
 
 export * from "interfaces/Error";

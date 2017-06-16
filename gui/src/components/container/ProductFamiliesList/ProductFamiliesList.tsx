@@ -1,4 +1,5 @@
 import * as React from "react";
+import { browserHistory } from "react-router";
 import { Promise } from "es6-promise";
 import { ButtonPurpose } from "@sdl/controls";
 import { ActivityIndicator, Button } from "@sdl/controls-react-wrappers";
@@ -42,8 +43,7 @@ export interface IProductFamiliesListState {
 export class ProductFamiliesList extends React.Component<{}, IProductFamiliesListState> {
 
     public static contextTypes: React.ValidationMap<IAppContext> = {
-        services: React.PropTypes.object.isRequired,
-        router: React.PropTypes.object.isRequired
+        services: React.PropTypes.object.isRequired
     };
 
     public context: IAppContext;
@@ -76,7 +76,7 @@ export class ProductFamiliesList extends React.Component<{}, IProductFamiliesLis
      */
     public render(): JSX.Element {
         const { productFamilies, error } = this.state;
-        const { services, router } = this.context;
+        const { services } = this.context;
         const { formatMessage } = services.localizationService;
 
         const errorButtons = <div>
@@ -104,8 +104,8 @@ export class ProductFamiliesList extends React.Component<{}, IProductFamiliesLis
                                             hasWarning: productFamily.hasWarning,
                                             navigateTo: () => {
                                                 /* istanbul ignore else */
-                                                if (router) {
-                                                    router.push(Url.getProductFamilyUrl(titleUrl));
+                                                if (browserHistory) {
+                                                    browserHistory.push(Url.getProductFamilyUrl(titleUrl));
                                                 }
                                             }
                                         } as ITile;
