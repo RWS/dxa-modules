@@ -1,6 +1,7 @@
 ﻿using Sdl.Web.Common.Models;
 using System;
 using System.ComponentModel.DataAnnotations;
+using Sdl.Web.Common;
 
 namespace Sdl.Web.Modules.AudienceManager.Models
 {
@@ -8,6 +9,7 @@ namespace Sdl.Web.Modules.AudienceManager.Models
     /// LoginForm entity
     /// </summary>
     [Serializable]
+    [DxaNoOutputCache]
     public class LoginForm : EntityModel
     {
         /// <summary>
