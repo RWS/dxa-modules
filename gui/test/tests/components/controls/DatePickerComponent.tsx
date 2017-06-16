@@ -42,7 +42,7 @@ class DatePickerComponent extends TestBase {
             it("Toggle component", (): void => {
                 const datepicker = this._renderComponent({}, target);
                 const datepickerNode = ReactDOM.findDOMNode(datepicker);
-                const datepickerInput = datepickerNode.querySelector(".react-datepicker__input-container > input") as HTMLInputElement;
+                const datepickerInput = datepickerNode.querySelector("input") as HTMLInputElement;
                 TestUtils.Simulate.click(datepickerInput);
                 const datepickerCalendar = document.querySelectorAll(".react-datepicker");
                 expect(datepickerCalendar.length).toBe(1);
