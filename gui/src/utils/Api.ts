@@ -97,7 +97,7 @@ export class Api {
 
     /**
      * Get conditions url
-     * Use this url to retrive all conditions of publication
+     * Use this url to retrieve all conditions of publication
      *
      * @static
      * @param {string} publicationId Publication id
@@ -117,7 +117,7 @@ export class Api {
 
     /**
      * Get comments url
-     * Use this url to retrive all comments of page
+     * Use this url to retrieve all comments of page
      *
      * @static
      * @param {string} publicationId

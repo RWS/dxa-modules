@@ -91,8 +91,8 @@ class PageServiceTests extends TestBase {
                         expect(comments[0].itemPublicationId).toBeDefined();
                         expect(comments[0].itemId).toBeDefined();
                         expect(comments[0].user).toBeDefined();
-                        expect(spy).not.toHaveBeenCalled();
                     }
+                    expect(spy).not.toHaveBeenCalled();
                     done();
                 }).catch(error => {
                     fail(`Unexpected error: ${error}`);

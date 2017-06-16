@@ -22,12 +22,10 @@ const loading = combine(
 
 const errors = handleAction(COMMENTS_ERROR, () => [], []);
 
-const comments = combineReducers({
+export const comments = combineReducers({
     byPageId,
     loading,
     errors
 });
 
 export const getByPageId = (state: IComments, pageId: string) => pageId in state.byPageId ? state.byPageId[pageId] : ([] as IComment[]);
-
-export default comments;

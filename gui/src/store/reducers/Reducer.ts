@@ -12,12 +12,12 @@ import { combineReducers } from "./CombineReducers";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 import { IPublicationsListPropsParams } from "@sdl/dd/PublicationsList/PublicationsListPresentation";
 import { IConditionMap } from "store/interfaces/Conditions";
-import comments , * as Comments from "./Comments";
+import * as Comments from "./Comments";
 import { IComment } from "interfaces/Comments";
 
 export const mainReducer = combineReducers({
     conditions,
-    comments,
+    comments: Comments.comments,
     language: Language.language,
     pages: Pages.pages,
     publication: Publication.publication,

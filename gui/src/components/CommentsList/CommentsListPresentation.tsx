@@ -12,7 +12,7 @@ export interface ICommentsListProps {
 export const CommentsListPresentation: React.StatelessComponent<ICommentsListProps> = (props: ICommentsListProps, context: IAppContext): JSX.Element => {
     const { formatMessage } = context.services.localizationService;
     const comments: IComment[] = props.comments;
-    let commentsCount: number = comments.length;
+    const commentsCount: number = comments.length;
 
     return (
         <div className="sdl-dita-delivery-comments-list">
