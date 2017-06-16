@@ -12,6 +12,7 @@
             padding: 0 15px;
             white-space: nowrap;
             display: inline-flex;
+            max-width: ~"calc(100% - 30px)";
             > li {
                 &:nth-child(n+3) {
                     &:not(:last-child) {
@@ -20,7 +21,6 @@
                         top: -1000px;
                     }
                 }
-
                 flex: 0 0 auto;
                 color: @neutralColor4;
                 display: inline-block;
