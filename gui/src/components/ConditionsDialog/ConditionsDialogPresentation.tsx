@@ -7,6 +7,7 @@ import { ConditionsLabelManager } from "components/ConditionsLabelManager/Condit
 import { isEmpty } from "lodash";
 
 import "./ConditionsDialog.less";
+import "components/Input/Input.less";
 import { ILabelManagerItem } from "@sdl/controls";
 
 export interface IConditionsDialogPresentationProps {
@@ -60,7 +61,8 @@ const getConditions = (props: IConditionsDialogPresentationProps) => (
             .map(({ name, value: condition }: IX) => (
                 <li key={name}>
                     <label className="sdl-conditions-dialog-condition-label">{name}</label>
-                    <ConditionsLabelManager
+
+                    { !condition.range && <ConditionsLabelManager
                         values={props.editingConditions[name] ? props.editingConditions[name].values : condition.values}
                         condition={condition}
                         onChange={(items: ILabelManagerItem[]) => {
@@ -71,7 +73,23 @@ const getConditions = (props: IConditionsDialogPresentationProps) => (
                                 }
                             });
                         }}
-                    />
+                    /> }
+
+                    { condition.range && <input className="sdl-input-text small" type="text"
+                        value={props.editingConditions[name] &&
+                            JSON.stringify(props.editingConditions[name].values) != JSON.stringify(condition.values)
+                            ? props.editingConditions[name].values[0]
+                            : ""}
+                        onChange={(evt: React.KeyboardEvent) => {
+                            let value = (evt.nativeEvent.target as HTMLInputElement).value;
+                            props.change({
+                                [name]: {
+                                    ...condition,
+                                    values: value === "" ? condition.values : [value]
+                                }
+                            });
+                        }}
+                    />}
                 </li>
             ))
         }
