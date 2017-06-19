@@ -123,8 +123,7 @@ class BreadcrumbsComponent extends TestBase {
                     const responsiveNode = domNode.querySelector("li.dd-selector");
                     expect(responsiveNode).toBeDefined();
                     if (responsiveNode) {
-                        const placeholderNode = responsiveNode.querySelector("button.dropdown-toggle");
-                        expect(placeholderNode && placeholderNode.textContent).toBe("2");
+                        expect(responsiveNode.getAttribute("data-items")).toBe("2");
 
                         const selectBoxOptions = responsiveNode.querySelectorAll("select option");
                         expect(selectBoxOptions.length).toBe(2);
