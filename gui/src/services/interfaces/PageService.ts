@@ -1,5 +1,6 @@
 import { IPage } from "interfaces/Page";
 import { Promise } from "es6-promise";
+import { IConditionMap } from "store/interfaces/Conditions";
 
 /**
  * Page related services
@@ -15,5 +16,5 @@ export interface IPageService {
      *
      * @memberOf IDataStore
      */
-    getPageInfo(publicationId: string, pageId: string): Promise<IPage>;
+    getPageInfo(publicationId: string, pageId: string, conditions: IConditionMap): Promise<IPage>;
 }

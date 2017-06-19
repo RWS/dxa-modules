@@ -2,6 +2,8 @@ import { IPageService } from "services/interfaces/PageService";
 import { IPage } from "interfaces/Page";
 import { Page } from "models/Page";
 import { Promise } from "es6-promise";
+import { IConditionMap } from "store/interfaces/Conditions";
+import { MD5 } from "object-hash";
 
 /**
  * Page service, interacts with the models to fetch the required data.
@@ -11,15 +13,14 @@ import { Promise } from "es6-promise";
  * @implements {ITaxonomyService}
  */
 export class PageService implements IPageService {
-
     /**
      * Page models
      *
      * @private
      * @static
-     * @type {{ [publicationId: string]: {  [pageId: string]: Page } }}
+     * @type { [key: string]: Page }
      */
-    private static PageModels: { [publicationId: string]: { [pageId: string]: Page } };
+    private PageModels: { [key: string]: Page } = {};
 
     /**
      * Get page information
@@ -30,8 +31,8 @@ export class PageService implements IPageService {
      *
      * @memberOf DataStoreClient
      */
-    public getPageInfo(publicationId: string, pageId: string): Promise<IPage> {
-        const page = this.getPageModel(publicationId, pageId);
+    public getPageInfo(publicationId: string, pageId: string, conditions?: IConditionMap): Promise<IPage> {
+        const page = this.getPageModel(publicationId, pageId, conditions);
         return new Promise((resolve: (info?: IPage) => void, reject: (error: string | null) => void) => {
             if (page.isLoaded()) {
                 resolve(page.getPage());
@@ -57,17 +58,16 @@ export class PageService implements IPageService {
         });
     }
 
-    private getPageModel(publicationId: string, pageId: string): Page {
-        if (!PageService.PageModels) {
-            PageService.PageModels = {};
+    private _getKey(...args: string[]): string {
+        return args.join("/");
+    }
+
+    private getPageModel(publicationId: string, pageId: string, conditions?: IConditionMap): Page {
+        const key = this._getKey(publicationId, pageId, MD5(conditions || "no-conditions"));
+        if (!this.PageModels[key]) {
+            this.PageModels[key] = new Page(publicationId, pageId, conditions);
         }
-        if (!PageService.PageModels[publicationId]) {
-            PageService.PageModels[publicationId] = {};
-        }
-        if (!PageService.PageModels[publicationId][pageId]) {
-            PageService.PageModels[publicationId][pageId] = new Page(publicationId, pageId);
-        }
-        return PageService.PageModels[publicationId][pageId];
+        return this.PageModels[key];
     }
 
 }

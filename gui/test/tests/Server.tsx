@@ -99,7 +99,8 @@ class Server extends TestBase {
                                     <div className="sdl-dita-delivery-navigation-menu">
                                         <nav className="sdl-dita-delivery-toc">
                                             <div className="sdl-conditions-dialog-presentation">
-                                                <button className="sdl-button-text sdl-personalize-content">
+                                                <div className="sdl-conditions-fetcher"></div>
+                                                <button className="sdl-button-text sdl-personalize-content" disabled>
                                                     <span>Personalize content</span>
                                                 </button>
                                                 <div className="sdl-dialog-container"></div>
@@ -107,9 +108,9 @@ class Server extends TestBase {
                                             <span><div></div></span><span className="separator"></span></nav>
                                     </div>
                                     <div className="sdl-dita-delivery-breadcrumbs">
-                                        <ul>
+                                        <ul className="breadcrumbs">
                                             <li>
-                                                <a className="home" title="Home" href="#/home">Home</a><span className="separator"></span>
+                                                <a className="home" title="Home" href="#/home">Home</a>
                                             </li>
                                         </ul>
                                     </div>

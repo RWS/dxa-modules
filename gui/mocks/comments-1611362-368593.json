@@ -1,0 +1,122 @@
+[
+  {
+    "id": 11880,
+    "namespaceId": 0,
+    "itemPublicationId": 1611362,
+    "itemId": 368593,
+    "itemType": 64,
+    "score": 0,
+    "status": 0,
+    "creationDate": "7/1/2017 12:00:00 AM",
+    "lastModifiedDate": "8/19/2017 12:00:00 AM",
+    "content": "Test comment with some content. Id of this comment is 11880.",
+    "moderator": null,
+    "moderatedDate": null,
+    "parentId": 0,
+    "parent": null,
+    "children": null,
+    "user": {
+      "id": 1,
+      "name": "user 1",
+      "emailAddress": "user1@sdl.com",
+      "externalId": null
+    },
+    "idLong": 11880
+  },
+  {
+    "id": 29142,
+    "namespaceId": 0,
+    "itemPublicationId": 1611362,
+    "itemId": 368593,
+    "itemType": 64,
+    "score": 0,
+    "status": 0,
+    "creationDate": "7/20/2017 12:00:00 AM",
+    "lastModifiedDate": "6/17/2017 12:00:00 AM",
+    "content": "Test comment with some content. Id of this comment is 29142.",
+    "moderator": null,
+    "moderatedDate": null,
+    "parentId": 0,
+    "parent": null,
+    "children": null,
+    "user": {
+      "id": 2,
+      "name": "user 2",
+      "emailAddress": "user2@sdl.com",
+      "externalId": null
+    },
+    "idLong": 29142
+  },
+  {
+    "id": 46582,
+    "namespaceId": 0,
+    "itemPublicationId": 1611362,
+    "itemId": 368593,
+    "itemType": 64,
+    "score": 0,
+    "status": 0,
+    "creationDate": "8/8/2017 12:00:00 AM",
+    "lastModifiedDate": "7/29/2017 12:00:00 AM",
+    "content": "Test comment with some content. Id of this comment is 46582.",
+    "moderator": null,
+    "moderatedDate": null,
+    "parentId": 0,
+    "parent": null,
+    "children": null,
+    "user": {
+      "id": 0,
+      "name": "user 0",
+      "emailAddress": "user0@sdl.com",
+      "externalId": null
+    },
+    "idLong": 46582
+  },
+  {
+    "id": 52887,
+    "namespaceId": 0,
+    "itemPublicationId": 1611362,
+    "itemId": 368593,
+    "itemType": 64,
+    "score": 0,
+    "status": 0,
+    "creationDate": "9/4/2017 12:00:00 AM",
+    "lastModifiedDate": "9/8/2017 12:00:00 AM",
+    "content": "Test comment with some content. Id of this comment is 52887.",
+    "moderator": null,
+    "moderatedDate": null,
+    "parentId": 0,
+    "parent": null,
+    "children": null,
+    "user": {
+      "id": 1,
+      "name": "user 1",
+      "emailAddress": "user1@sdl.com",
+      "externalId": null
+    },
+    "idLong": 52887
+  },
+  {
+    "id": 10929,
+    "namespaceId": 0,
+    "itemPublicationId": 1611362,
+    "itemId": 368593,
+    "itemType": 64,
+    "score": 0,
+    "status": 0,
+    "creationDate": "7/14/2017 12:00:00 AM",
+    "lastModifiedDate": "9/10/2017 12:00:00 AM",
+    "content": "Test comment with some content. Id of this comment is 10929.",
+    "moderator": null,
+    "moderatedDate": null,
+    "parentId": 0,
+    "parent": null,
+    "children": null,
+    "user": {
+      "id": 2,
+      "name": "user 2",
+      "emailAddress": "user2@sdl.com",
+      "externalId": null
+    },
+    "idLong": 10929
+  }
+]

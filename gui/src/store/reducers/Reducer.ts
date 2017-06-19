@@ -1,18 +1,20 @@
+import { MD5 } from "object-hash";
 import * as Language from "./Language";
 import * as Pages from "./Pages";
 import * as Publication from "./Publication";
 import * as Publications from "./Publications";
 import * as ReleaseVersions from "./ReleaseVersions";
-import * as Conditions from "./Conditions";
+import conditions, * as Conditions from "./conditions";
 import { IState, IPublicationCurrentState } from "store/interfaces/State";
 import { IPublication } from "interfaces/Publication";
 import { IPage } from "interfaces/Page";
 import { combineReducers } from "./CombineReducers";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 import { IPublicationsListPropsParams } from "@sdl/dd/PublicationsList/PublicationsListPresentation";
+import { IConditionMap } from "store/interfaces/Conditions";
 
 export const mainReducer = combineReducers({
-    conditions: Conditions.conditions,
+    conditions,
     language: Language.language,
     pages: Pages.pages,
     publication: Publication.publication,
@@ -34,15 +36,31 @@ export const isPublicationFound = (state: IState, pubId: string): boolean => Pub
 
 export const getPubListErrorMessage = (state: IState) => Publications.getLastError(state.publications);
 
+// Conditions selector
+export const getConditionsByPubId = (state: IState, pubId: string): IConditionMap => Conditions.getByPubId(state.conditions, pubId);
+export const isConditionsDialogVisible = (state: IState) => Conditions.isDialogVisible(state.conditions);
+export const getLastConditions = (state: IState, pubId: string) => Conditions.getLastConditions(state.conditions, pubId);
+export const getEditingConditions = (state: IState) => Conditions.getEditingConditions(state.conditions);
+
 // Pages selectors
-export const getPageById = (state: IState, pageId: string): IPage => Pages.getPageById(state.pages, pageId);
-export const getErrorMessage = (state: IState, pageId: string): string => Pages.getErrorMessage(state.pages, pageId);
-export const isPageLoading = (state: IState, pageId: string): boolean => Pages.isPageLoading(state.pages, pageId);
+// helper for page selector (need to moved to pages)
+export const getPageKey = (state: IState, pubId: string, pageId: string, conditions?: IConditionMap) => {
+    return pageId ? `${pubId}/${pageId}/${MD5(conditions || getLastConditions(state, pubId))}` : "";
+};
+export const getPageById = (state: IState, pubId: string, pageId: string, conditions?: IConditionMap): IPage => {
+    return Pages.getPageById(state.pages, getPageKey(state, pubId, pageId, conditions));
+};
+export const getErrorMessage = (state: IState, pubId: string, pageId: string, conditions?: IConditionMap): string => {
+    return Pages.getErrorMessage(state.pages, getPageKey(state, pubId, pageId, conditions));
+};
+export const isPageLoading = (state: IState, pubId: string, pageId: string, conditions?: IConditionMap): boolean => {
+    return Pages.isPageLoading(state.pages, getPageKey(state, pubId, pageId, conditions));
+};
 
 // State selectors
 export const getCurrentPub = (state: IState): IPublicationCurrentState => state.publication;
-export const getReleaseVersionsForPub = (state: IState, publicationId: string): IProductReleaseVersion[] =>
-    ReleaseVersions.getReleaseVersionsForPub(state.releaseVersions, publicationId);
+export const getReleaseVersionsForPub = (state: IState, pubId: string): IProductReleaseVersion[] =>
+    ReleaseVersions.getReleaseVersionsForPub(state.releaseVersions, pubId);
 
 // ReleaseVersions selector
 export const translateProductReleaseVersion = (productReleaseVersion: string): string => ReleaseVersions.translateProductReleaseVersion(productReleaseVersion);

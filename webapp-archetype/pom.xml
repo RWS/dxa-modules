@@ -77,6 +77,11 @@
             <artifactId>ish-module</artifactId>
             <version>${webapp.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.sdl.delivery.ish</groupId>
+            <artifactId>ish-ugc-module</artifactId>
+            <version>${webapp.version}</version>
+        </dependency>
 
         <!-- SDL Digital Experience Accelerator -->
         <dependency>

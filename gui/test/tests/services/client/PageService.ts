@@ -1,13 +1,23 @@
 import { PageService } from "services/client/PageService";
 import { TestBase } from "@sdl/models";
+import { IWindow } from "interfaces/Window";
 
 class PageServiceTests extends TestBase {
 
     public runTests(): void {
+        const win = (window as IWindow);
+        const mocksFlag = win.SdlDitaDeliveryMocksEnabled;
         const pageService = new PageService();
         const publicationId = "1961702";
 
         describe(`Page service tests.`, (): void => {
+            beforeEach(() => {
+                win.SdlDitaDeliveryMocksEnabled = true;
+            });
+
+            afterEach(() => {
+                win.SdlDitaDeliveryMocksEnabled = mocksFlag;
+            });
 
             it("can get page info", (done: () => void): void => {
                 const pageId = "164398";

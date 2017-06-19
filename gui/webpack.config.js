@@ -22,7 +22,7 @@ module.exports = (isTest, isDebug) => {
         entry: isTest ? testEntries : entries,
         output: {
             path: path.resolve(__dirname + '/dist/assets'),
-            publicPath: '/app/assets/',
+            publicPath: '/assets/',
             filename: '[name].bundle.js'
         },
         devtool: 'source-map',
@@ -149,7 +149,7 @@ module.exports = (isTest, isDebug) => {
         );
     } else { // Only for debug
         // Hot Module Replacement (HMR)
-        const hotMiddlewareScript = 'webpack-hot-middleware/client?path=/app/assets';
+        const hotMiddlewareScript = 'webpack-hot-middleware/client?path=/assets';
         for (let entryName in config.entry) {
             if (entryName !== 'vendor') {
                 let entryValue = config.entry[entryName];

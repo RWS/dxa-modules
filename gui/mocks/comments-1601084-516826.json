@@ -1,0 +1,98 @@
+[
+  {
+    "id": 13341,
+    "namespaceId": 0,
+    "itemPublicationId": 1601084,
+    "itemId": 516826,
+    "itemType": 64,
+    "score": 0,
+    "status": 0,
+    "creationDate": "8/1/2017 12:00:00 AM",
+    "lastModifiedDate": "7/2/2017 12:00:00 AM",
+    "content": "Test comment with some content. Id of this comment is 13341.",
+    "moderator": null,
+    "moderatedDate": null,
+    "parentId": 0,
+    "parent": null,
+    "children": null,
+    "user": {
+      "id": 2,
+      "name": "user 2",
+      "emailAddress": "user2@sdl.com",
+      "externalId": null
+    },
+    "idLong": 13341
+  },
+  {
+    "id": 25796,
+    "namespaceId": 0,
+    "itemPublicationId": 1601084,
+    "itemId": 516826,
+    "itemType": 64,
+    "score": 0,
+    "status": 0,
+    "creationDate": "7/2/2017 12:00:00 AM",
+    "lastModifiedDate": "9/13/2017 12:00:00 AM",
+    "content": "Test comment with some content. Id of this comment is 25796.",
+    "moderator": null,
+    "moderatedDate": null,
+    "parentId": 0,
+    "parent": null,
+    "children": null,
+    "user": {
+      "id": 2,
+      "name": "user 2",
+      "emailAddress": "user2@sdl.com",
+      "externalId": null
+    },
+    "idLong": 25796
+  },
+  {
+    "id": 94134,
+    "namespaceId": 0,
+    "itemPublicationId": 1601084,
+    "itemId": 516826,
+    "itemType": 64,
+    "score": 0,
+    "status": 0,
+    "creationDate": "7/26/2017 12:00:00 AM",
+    "lastModifiedDate": "7/2/2017 12:00:00 AM",
+    "content": "Test comment with some content. Id of this comment is 94134.",
+    "moderator": null,
+    "moderatedDate": null,
+    "parentId": 0,
+    "parent": null,
+    "children": null,
+    "user": {
+      "id": 2,
+      "name": "user 2",
+      "emailAddress": "user2@sdl.com",
+      "externalId": null
+    },
+    "idLong": 94134
+  },
+  {
+    "id": 33242,
+    "namespaceId": 0,
+    "itemPublicationId": 1601084,
+    "itemId": 516826,
+    "itemType": 64,
+    "score": 0,
+    "status": 0,
+    "creationDate": "6/23/2017 12:00:00 AM",
+    "lastModifiedDate": "7/15/2017 12:00:00 AM",
+    "content": "Test comment with some content. Id of this comment is 33242.",
+    "moderator": null,
+    "moderatedDate": null,
+    "parentId": 0,
+    "parent": null,
+    "children": null,
+    "user": {
+      "id": 1,
+      "name": "user 1",
+      "emailAddress": "user1@sdl.com",
+      "externalId": null
+    },
+    "idLong": 33242
+  }
+]

@@ -1,7 +1,8 @@
 import { path } from "utils/Path";
 import { IWindow } from "interfaces/Window";
 
-const mocksEnabled: boolean = (window as IWindow).SdlDitaDeliveryMocksEnabled || false;
+const mocksEnabled = (): boolean => (window as IWindow).SdlDitaDeliveryMocksEnabled || false;
+const mocksEndPoint = `/$mocks$`;
 
 /**
  * Utilities for generating api urls
@@ -25,8 +26,8 @@ export class Api {
         const encodedPubId = encodeURIComponent(publicationId);
         const encodedSitemapItemId = encodeURIComponent(sitemapItemId);
         /* istanbul ignore else */
-        if (mocksEnabled) {
-            return path.getAbsolutePath(`gui/mocks/navigation-${encodedPubId}-${encodedSitemapItemId}.json`);
+        if (mocksEnabled()) {
+            return path.getAbsolutePath(`${mocksEndPoint}/navigation-${encodedPubId}-${encodedSitemapItemId}.json`);
         } else {
             return path.getAbsolutePath(`api/toc/${encodedPubId}/${encodedSitemapItemId}?includeAncestors=true`);
         }
@@ -47,8 +48,8 @@ export class Api {
         const encodedPubId = encodeURIComponent(publicationId);
         const encodedPageId = encodeURIComponent(pageId);
         /* istanbul ignore else */
-        if (mocksEnabled) {
-            return path.getAbsolutePath(`gui/mocks/page-${encodedPubId}-${encodedPageId}.json`);
+        if (mocksEnabled()) {
+            return path.getAbsolutePath(`${mocksEndPoint}/page-${encodedPubId}-${encodedPageId}.json`);
         } else {
             return path.getAbsolutePath(`api/page/${encodedPubId}/${encodedPageId}`);
         }
@@ -65,8 +66,8 @@ export class Api {
      */
     public static getPublicationsUrl(): string {
         /* istanbul ignore else */
-        if (mocksEnabled) {
-            return path.getAbsolutePath(`gui/mocks/publications.json`);
+        if (mocksEnabled()) {
+            return path.getAbsolutePath(`${mocksEndPoint}/publications.json`);
         } else {
             return path.getAbsolutePath(`api/publications`);
         }
@@ -87,10 +88,30 @@ export class Api {
         const encodedPubId = encodeURIComponent(publicationId);
         const encodedSitemapItemId = encodeURIComponent(sitemapItemId);
         /* istanbul ignore else */
-        if (mocksEnabled) {
-            return path.getAbsolutePath(`gui/mocks/toc-${encodedPubId}-${encodedSitemapItemId}.json`);
+        if (mocksEnabled()) {
+            return path.getAbsolutePath(`${mocksEndPoint}/toc-${encodedPubId}-${encodedSitemapItemId}.json`);
         } else {
             return path.getAbsolutePath(`api/toc/${encodedPubId}/${encodedSitemapItemId}`);
+        }
+    }
+
+    /**
+     * Get conditions url
+     * Use this url to retrive all conditions of publication
+     *
+     * @static
+     * @param {string} publicationId Publication id
+     * @returns {string}
+     *
+     * @memberOf Api
+     */
+    public static getConditionsUrl(publicationId: string): string {
+        const encodedPubId = encodeURIComponent(publicationId);
+        /* istanbul ignore else */
+        if (mocksEnabled()) {
+            return path.getAbsolutePath(`${mocksEndPoint}/conditions-${encodedPubId}.json`);
+        } else {
+            return path.getAbsolutePath(`api/conditions/${encodedPubId}`);
         }
     }
 

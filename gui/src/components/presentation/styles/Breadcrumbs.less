@@ -1,54 +1,168 @@
-@import (reference) "~theme-styles";
-.sdl-dita-delivery-breadcrumbs {
-    padding: 32px 0 30px 0;
-    ul {
-        width: auto;
-        height: auto;
-        line-height: 30px;
-        margin: 0;
-        padding: 0 15px;
-        li {
-            color: @neutralColor4;
-            display: inline-block;
+    @import (reference) "~theme-styles";
+    .sdl-dita-delivery-breadcrumbs {
+        @circleSize: 20px;
+        @dropdownItemHeight: 35px;
+        @dropdownMenuWidth: 170px;
+        padding: 32px 0 30px 0;
+        position: relative;
+        ul.breadcrumbs {
+            height: auto;
             line-height: 30px;
-            vertical-align: middle;
-            a, a:visited, a:hover, a:active, a:link {
-                text-decoration: inherit;
-                color: inherit;
-            }
-            a:hover {
-                color: @accentColor1;
-            }
-            .separator {
-                .icon-arrow-right();
-                color: @accentColor1;
-                background-repeat: no-repeat;
-                height: 27px;
-                line-height: 27px;
-                float: right;
-                margin: 0 10px;
-                padding-top: 3px;
-                .sdl-dita-delivery-app.rtl & {
-                    .icon-arrow-left();
-                    float: left;
+            margin: 0;
+            padding: 0 15px;
+            white-space: nowrap;
+            display: inline-flex;
+            > li {
+                &:nth-child(n+3) {
+                    &:not(:last-child) {
+                        position: absolute;
+                        left: -1000px;
+                        top: -1000px;
+                    }
                 }
-            }
-            .active, .home, .abstract {
-                color: @neutralColor1;
-            }
-            .home {
+
+                flex: 0 0 auto;
+                color: @neutralColor4;
                 display: inline-block;
-                padding-left: 30px;
-                .icon-breadcrumb-home();
-                width: inherit;
-                height: inherit;
-                background-position: left 6px;
-                .sdl-dita-delivery-app.rtl & {
-                    padding-left: 0px;
-                    padding-right: 30px;
-                    background-position: right 6px;
+                vertical-align: middle;
+                &:not(:first-child) {
+                    .icon-arrow-right();
+                    &:after, &:before {
+                        color: @accentColor1;
+                        margin: 0 10px;
+                        float: left;
+                    }
+                    .sdl-dita-delivery-app.rtl & {
+                        .icon-arrow-left();
+                        &:before {
+                            float: right;
+                        }
+                    }
+                }
+                &:last-child {
+                    flex: 1 1 auto;
+                    min-width: 100px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+                a, a:visited, a:hover, a:active, a:link {
+                    text-decoration: inherit;
+                    color: inherit;
+                }
+                a:hover {
+                    color: @accentColor1;
+                }
+                .active, .home, .abstract {
+                    color: @neutralColor1;
+                }
+                .home {
+                    display: inline-block;
+                    padding-left: 30px;
+                    .icon-breadcrumb-home();
+                    width: inherit;
+                    height: inherit;
+                    background-position: left 6px;
+                    .sdl-dita-delivery-app.rtl & {
+                        padding-left: 0px;
+                        padding-right: 30px;
+                        background-position: right 6px;
+                    }
+                }
+                &.show {
+                    position: inherit;
+                    left: inherit;
+                    top: inherit;
+                }
+                &.dd-selector {
+                    .sdl-dita-delivery-dropdown {
+                        display: inline-block;
+                        border-radius: @circleSize;
+                        width: @circleSize;
+                        height: @circleSize;
+                        line-height: @circleSize;
+                        border: 2px solid @accentColor1;
+                        .dropdown-toggle {
+                            font: inherit;
+                            color: inherit;
+                            display: inline-block;
+                            padding: 0;
+                            margin: 0;
+                            width: 100%;
+                            text-align: right;
+                            .sdl-dita-delivery-app.rtl & {
+                                text-align: left;
+                            }
+                        }
+                        select {
+                            position: absolute;
+                            top: 0;
+                            bottom: 0;
+                            left: 0;
+                            right: 0;
+                            color: transparent;
+                        }
+                        .dropdown-menu {
+                            z-index: 1050;
+                            .dropdown-items {
+                                background-color: white;
+                                box-shadow: 0 2px 0 0 @neutralColor5;
+                                padding: 10px 0;
+                                border: 1px solid @neutralColor5;
+                                border-radius: 4px;
+                                max-height: @dropdownItemHeight * 10 + (10 + 1) * 2; // 10 items + paddings + borders
+                                max-width: @dropdownMenuWidth;
+                                width: @dropdownMenuWidth;
+                                li {
+                                    .import-regular-font();
+                                    padding: 0 5px 0 18px;
+                                    .rtl & {
+                                        padding: 0 18px 0 5px;
+                                    }
+                                    font-size: 14px;
+                                    line-height: 0;
+                                    height: @dropdownItemHeight;
+                                    border-color: @neutralColor5;
+                                    a {
+                                        color: @neutralColor4;
+                                        line-height: @dropdownItemHeight;
+                                    }
+                                    &:hover {
+                                        background-color: @accentColor1;
+                                        a {
+                                            color: white;
+                                        }
+                                    }
+                                }
+                                li.active {
+                                    a {
+                                        padding-right: 25px;
+                                        .rtl & {
+                                            padding-right: 0px;
+                                            padding-left: 25px;
+                                        }
+                                        .checked {
+                                            .icon-checked(18px);
+                                            color: @accentColor1;
+                                        }
+                                    }
+                                    &:hover {
+                                        .checked {
+                                            color: white;
+                                        }
+                                    }
+                                }
+                            }
+                            .dropdown-arrow:before {
+                                border-top: 8px solid transparent;
+                                border-left: 8px solid white;
+                            }
+                            .dropdown-arrow:after {
+                                border-top: 8px solid transparent;
+                                border-right: 8px solid white;
+                            }
+                        }
+                    }
                 }
             }
         }
     }
-}

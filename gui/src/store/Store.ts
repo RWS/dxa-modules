@@ -14,7 +14,16 @@ const enhancer = composeEnhancers(applyMiddleware(thunk));
 // This is an empty initial state object, that helps to create store if don't want to fill all options
 const EMPTY_STATE: IState = {
     language: "",
-    conditions: { showDialog: false },
+    conditions: {
+        showDialog: false,
+        allConditions: {
+            byPubId: {},
+            loading: [],
+            errors: {}
+        },
+        lastConditions: {},
+        editingConditions: {}
+    },
     publication: {
         publicationId: "",
         pageId: "",
@@ -50,4 +59,10 @@ const configureStore = (initialState: {} = {}): Store<IState> => {
     return store;
 };
 
-export { configureStore };
+const getStore = () => {
+    //hack method onyl for TOC and conditions, (while we haven't moved it redux state)
+    //never use it otherwise
+    return store as Store<IState>;
+};
+
+export { configureStore, getStore };
