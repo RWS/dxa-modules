@@ -2,6 +2,7 @@
 using Sdl.Web.Mvc.Controllers;
 using System.Web.Mvc;
 using System.Web.Security;
+using Sdl.Web.Common;
 using Sdl.Web.Common.Logging;
 using Sdl.Web.Common.Models;
 using WebMatrix.WebData;
@@ -13,6 +14,7 @@ namespace Sdl.Web.Modules.AudienceManager.Controllers
     /// Audience Manager Profile Controller
     /// </summary>
     [RoutePrefix("{localization}/api/profile")]
+    [DxaNoOutputCache]
     public class ProfileController : EntityController
     {
         protected override ViewModel EnrichModel(ViewModel model)
