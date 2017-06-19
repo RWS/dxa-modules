@@ -82,14 +82,12 @@ class Fetch extends React.Component<IFetchComments & IFetchCommentsProperties, {
      *
      * @memberof Fetch
      */
-    public getDefaultProps(): IFetchCommentsProperties {
-        return {
-            descending: false,
-            top: 0,
-            skip: 0,
-            status: [CommentStatus.SUBMITTED]
-        };
-    }
+    public defaultProps: IFetchCommentsProperties = {
+        descending: false,
+        top: 0,
+        skip: 0,
+        status: [CommentStatus.SUBMITTED]
+    };
 
     /**
      * Invoked once, only on the client (not on the server), immediately after the initial rendering occurs.
