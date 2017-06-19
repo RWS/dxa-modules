@@ -49,6 +49,15 @@ export interface IFetchCommentsProperties {
     status?: number[];
 };
 
+export const CommentStatus = {
+    SUBMITTED: 0,
+    FLAGGED_FOR_MODERATION: 1,
+    POSTED: 2,
+    REJECTED: 3,
+    FLAGGED_FOR_DELETION: 4,
+    RESUBMITTED: 5
+};
+
 /**
  * Fetch page component
  */
@@ -78,7 +87,7 @@ class Fetch extends React.Component<IFetchComments & IFetchCommentsProperties, {
             descending: false,
             top: 0,
             skip: 0,
-            status: [0]
+            status: [CommentStatus.SUBMITTED]
         };
     }
 
