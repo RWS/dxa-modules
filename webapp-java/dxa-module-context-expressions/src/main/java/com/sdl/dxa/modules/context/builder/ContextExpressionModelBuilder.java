@@ -23,8 +23,7 @@ public class ContextExpressionModelBuilder extends AbstractContextExpressionMode
     private String cxKeyR2 = "CX";
 
     @Override
-    @CachePut(cacheNames = "entities",
-            key = "@localizationAwareKeyGenerator.generate(#modelData.id, #modelData.schemaId, #originalEntityModel.class)",
+    @CachePut(cacheNames = "entities", key = "@entitiesCache.getKey(#modelData)",
             unless = "#originalEntityModel == null || #originalEntityModel.class.isAnnotationPresent(T(com.sdl.dxa.caching.NeverCached))")
     public <T extends EntityModel> T buildEntityModel(@Nullable T originalEntityModel, EntityModelData modelData, @Nullable Class<T> expectedClass) throws DxaException {
         log.trace("Context expression model builder for EMD {}, entity {} and expectedClass {}", modelData, originalEntityModel, expectedClass);
