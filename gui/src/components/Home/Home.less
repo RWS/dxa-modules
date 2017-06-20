@@ -64,6 +64,21 @@
             height: 100%;
             .sdl-dita-delivery-navigation-menu {
                 height: 100%;
+                .sdl-dita-delivery-toc {
+                    display: flex;
+                    flex-direction: column;
+                    .sdl-conditions-dialog-presentation {
+                        flex: 0 0 auto;
+                    }
+                    .sdl-conditions-dialog-presentation + span {
+                        flex: 1 1 100%;
+                        display: inherit;
+                        .sdl-treeview {
+                            max-height: 100%;
+                            height: auto;
+                        }
+                    }
+                }
             }
         }
     }
