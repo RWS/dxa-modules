@@ -1,12 +1,6 @@
-// FIX IT: Update with string enum when switch to TypeScript 2.4
-export class DataType {
-    public static Date: string = "Date";
-    public static Text: string = "Text";
-}
-
 export interface ICondition {
     values: string[];
-    datatype: DataType;
+    datatype: "Date" | "Text";
     range: boolean;
 }
 

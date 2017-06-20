@@ -4,7 +4,7 @@ import { ILabelManagerItem } from "@sdl/controls";
 import I18n from "@sdl/dd/helpers/I18n";
 import { ConditionsLabelManager } from "@sdl/dd/ConditionsLabelManager/ConditionsLabelManager";
 import { Dialog, IRequestHandler } from "@sdl/dd/presentation/Dialog/Dialog";
-import { IConditionMap, ICondition, DataType } from "store/interfaces/Conditions";
+import { IConditionMap, ICondition } from "store/interfaces/Conditions";
 import ConditionsFetcher from "@sdl/dd/ConditionsDialog/ConditionsFetcher";
 import { DatePicker } from "@sdl/dd/DatePicker/DatePicker";
 
@@ -111,8 +111,8 @@ const getConditions = (props: IConditionsDialogPresentationProps) => (
                 <li key={name}>
                     <label className="sdl-conditions-dialog-condition-label">{name}</label>
                     { !condition.range &&  getConditionsLabelManager(props, condition, name)}
-                    { condition.range && condition.datatype === DataType.Date && getDatePicker(props, condition, name)}
-                    { condition.range && condition.datatype !== DataType.Date && getInput(props, condition, name)}
+                    { condition.range && condition.datatype === "Date" && getDatePicker(props, condition, name)}
+                    { condition.range && condition.datatype !== "Date" && getInput(props, condition, name)}
                 </li>
             ))
         }
