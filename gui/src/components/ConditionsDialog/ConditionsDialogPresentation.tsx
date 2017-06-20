@@ -1,5 +1,5 @@
 import * as React from "react";
-import { isEmpty } from "lodash";
+import { isEmpty, isEqual } from "lodash";
 import { ILabelManagerItem } from "@sdl/controls";
 import I18n from "@sdl/dd/helpers/I18n";
 import { ConditionsLabelManager } from "@sdl/dd/ConditionsLabelManager/ConditionsLabelManager";
@@ -69,7 +69,7 @@ const getConditionsLabelManager = (props: IConditionsDialogPresentationProps, co
 const getInput = (props: IConditionsDialogPresentationProps, condition: ICondition, name: string) =>
     <input className="sdl-input-text small" type="text"
         value={props.editingConditions[name] &&
-            JSON.stringify(props.editingConditions[name].values) != JSON.stringify(condition.values)
+            !isEqual(props.editingConditions[name].values, condition.values)
             ? props.editingConditions[name].values[0]
             : ""}
         onChange={(evt: React.ChangeEvent<HTMLInputElement>) => {
@@ -86,7 +86,7 @@ const getInput = (props: IConditionsDialogPresentationProps, condition: IConditi
 const getDatePicker = (props: IConditionsDialogPresentationProps, condition: ICondition, name: string) =>
     <DatePicker
         value={props.editingConditions[name] &&
-            JSON.stringify(props.editingConditions[name].values) != JSON.stringify(condition.values)
+            !isEqual(props.editingConditions[name].values, condition.values)
             ? props.editingConditions[name].values[0]
             : ""}
         onChangeHandler={(value) => {
