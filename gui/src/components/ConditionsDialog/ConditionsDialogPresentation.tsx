@@ -5,7 +5,7 @@ import I18n from "@sdl/dd/helpers/I18n";
 import { ConditionsLabelManager } from "@sdl/dd/ConditionsLabelManager/ConditionsLabelManager";
 import { Dialog, IRequestHandler } from "@sdl/dd/presentation/Dialog/Dialog";
 import { IConditionMap, ICondition } from "store/interfaces/Conditions";
-import ConditionsFetcher from "./ConditionsFetcher";
+import ConditionsFetcher from "@sdl/dd/ConditionsDialog/ConditionsFetcher";
 import { DatePicker } from "@sdl/dd/DatePicker/DatePicker";
 
 import "./ConditionsDialog.less";
