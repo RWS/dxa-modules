@@ -17,8 +17,8 @@ export const CommentsListPresentation: React.StatelessComponent<ICommentsListPro
     return (
         <div className="sdl-dita-delivery-comments-list">
             <span>{formatMessage("components.commentslist.comments")} ({commentsCount})</span>
-            {comments.map(comment => {
-                return <Comment userName={comment.user.name} creationDate={comment.creationDate} content={comment.content} />;
+            {comments.map((comment, index) => {
+                return <Comment userName={comment.user.name} creationDate={comment.creationDate} content={comment.content} key={index}/>;
             })}
         </div>
     );

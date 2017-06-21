@@ -84,7 +84,7 @@ class PageServiceTests extends TestBase {
 
             it("can get comments from memory", (done: () => void): void => {
                 const pageId = "164398";
-                const spy = spyOn(window, "XMLHttpRequest").and.callThrough();
+                const spy = spyOn(XMLHttpRequest.prototype, "open").and.callThrough();
                 pageService.getComments(publicationId, pageId, false, 0, 0, [0]).then(comments => {
                     expect(comments).toBeDefined();
                     if (comments.length > 0) {
