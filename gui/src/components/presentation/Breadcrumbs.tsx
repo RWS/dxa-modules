@@ -305,9 +305,8 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
         const itemsToRender = itemPath.slice(0, itemPath.length - shownItems).filter(item => item.url != null);
         if (itemsToRender.length > 0) {
             breadCrumbs.push(
-                <li className="dd-selector" key={lindex++}>
+                <li className="dd-selector" key={lindex++} data-items={itemsToRender.length}>
                     <Dropdown
-                        placeHolder={itemsToRender.length.toString()}
                         items={itemsToRender.map(toDropdownFormat)}
                         onChange={(url: string) => {
                             if (browserHistory) {

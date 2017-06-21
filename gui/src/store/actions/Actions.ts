@@ -25,9 +25,14 @@ export const CONDITIONES_ERROR = "CONDITIONES_ERROR";
 export const CONDITIONS_APPLY = "CONDITIONS_APPLY";
 export const CONDITIONS_EDITING_CHANGE = "[Conditions] Change data in conditions editiong dialog";
 
-export const changeLanguage = createAction(CHANGE_LANGUAGE, (language: string) => language);
-export const publicationsLoaded = createAction(PUBLICATIONS_LOADED, (publications: IPublication[]) => publications);
-export const updateCurrentPublication = createAction(UPDATE_CURRENT_PUBLICATION, (publicationId: string, pageId: string, anchor: string) => ({ publicationId, pageId, anchor }));
+export const COMMENTS_LOADING = "COMMENTS_LOADING";
+export const COMMENTS_LOADED = "COMMENTS_LOADED";
+export const COMMENTS_ERROR = "COMMENTS_ERROR";
+
+export const changeLanguage = createAction(CHANGE_LANGUAGE, language => language);
+export const publicationsLoaded = createAction(PUBLICATIONS_LOADED, publications => publications);
+export const updateCurrentPublication = createAction(UPDATE_CURRENT_PUBLICATION,
+    (publicationId: string, pageId: string = "", anchor: string = "") => ({ publicationId, pageId, anchor }));
 
 export const dialogOpen = createAction(DIALOG_REQUEST_OPEN);
 export const dialogClose = createAction(DIALOG_REQUEST_CLOSE);

@@ -65,6 +65,41 @@ class PageServiceTests extends TestBase {
                 });
             });
 
+            it("can get comments", (done: () => void): void => {
+                const pageId = "164398";
+                pageService.getComments(publicationId, pageId, false, 0, 0, [0]).then(comments => {
+                    expect(comments).toBeDefined();
+                    if (comments.length > 0) {
+
+                        expect(comments[0].itemPublicationId).toBeDefined();
+                        expect(comments[0].itemId).toBeDefined();
+                        expect(comments[0].user).toBeDefined();
+                    }
+                    done();
+                }).catch(error => {
+                    fail(`Unexpected error: ${error}`);
+                    done();
+                });
+            });
+
+            it("can get comments from memory", (done: () => void): void => {
+                const pageId = "164398";
+                const spy = spyOn(window, "XMLHttpRequest").and.callThrough();
+                pageService.getComments(publicationId, pageId, false, 0, 0, [0]).then(comments => {
+                    expect(comments).toBeDefined();
+                    if (comments.length > 0) {
+                        expect(comments[0].itemPublicationId).toBeDefined();
+                        expect(comments[0].itemId).toBeDefined();
+                        expect(comments[0].user).toBeDefined();
+                    }
+                    expect(spy).not.toHaveBeenCalled();
+                    done();
+                }).catch(error => {
+                    fail(`Unexpected error: ${error}`);
+                    done();
+                });
+            });
+
         });
 
     }

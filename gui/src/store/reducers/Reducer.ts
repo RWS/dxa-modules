@@ -12,9 +12,12 @@ import { combineReducers } from "./CombineReducers";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 import { IPublicationsListPropsParams } from "@sdl/dd/PublicationsList/PublicationsListPresentation";
 import { IConditionMap } from "store/interfaces/Conditions";
+import * as Comments from "./Comments";
+import { IComment } from "interfaces/Comments";
 
 export const mainReducer = combineReducers({
     conditions,
+    comments: Comments.comments,
     language: Language.language,
     pages: Pages.pages,
     publication: Publication.publication,
@@ -65,3 +68,6 @@ export const getReleaseVersionsForPub = (state: IState, pubId: string): IProduct
 // ReleaseVersions selector
 export const translateProductReleaseVersion = (productReleaseVersion: string): string => ReleaseVersions.translateProductReleaseVersion(productReleaseVersion);
 export const translateProductReleaseVersions = (versions: IProductReleaseVersion[]): IProductReleaseVersion[] => ReleaseVersions.translateProductReleaseVersions(versions);
+
+// Comments selectors
+export const getCommentsByPageId = (state: IState, pageId: string): IComment[] => Comments.getByPageId(state.comments, pageId);

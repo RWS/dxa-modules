@@ -11,6 +11,8 @@ import * as HomeComp from "@sdl/dd/Home/Home";
 import * as PublicationContentComp from "@sdl/dd/PublicationContent/PublicationContentPresentation";
 import * as PublicationsListComp from "@sdl/dd/PublicationsList/PublicationsListPresentation";
 import * as BreadcrumbsComp from "@sdl/dd/presentation/Breadcrumbs";
+import * as CommentComp from "@sdl/dd/Comment/Comment";
+import * as CommentsListComp from "@sdl/dd/CommentsList/CommentsList";
 import * as ContentNavigationComp from "@sdl/dd/presentation/ContentNavigation";
 import * as NavigationMenuComp from "@sdl/dd/presentation/NavigationMenu";
 import * as PageComp from "@sdl/dd/Page/PagePresentation";
@@ -31,13 +33,14 @@ import * as DatePickerComp from "@sdl/dd/DatePicker/DatePicker";
 
 export const Components = {
     AppComp, HomeComp, PublicationContentComp, PublicationsListComp,
-    BreadcrumbsComp, ContentNavigationComp, NavigationMenuComp,
-    PageComp, SearchBarComp, TocComp, TopBarComp,
+    BreadcrumbsComp, CommentComp, CommentsListComp, ContentNavigationComp,
+    NavigationMenuComp, PageComp, SearchBarComp, TocComp, TopBarComp,
     TileComp, TilesListComp, ErrorComp, ErrorTocComp,
     VersionSelectorComp, ErrorContentComp, ProductFamiliesListComp,
     ContentLanguageWarningComp, DropdownComp, DatePickerComp, PageLinkComp
 };
 
+export * from "interfaces/Comments";
 export * from "interfaces/Error";
 export * from "interfaces/Page";
 export * from "interfaces/ProductFamily";
@@ -52,13 +55,14 @@ export * from "interfaces/Services";
 /**
  * Models
  */
+import * as Comments from "models/Comments";
 import * as NavigationLinksModel from "models/NavigationLinks";
 import * as PageModel from "models/Page";
 import * as PublicationsModel from "models/Publications";
 import * as TocModel from "models/Toc";
 
 export const Models = {
-    NavigationLinksModel, PageModel, PublicationsModel, TocModel
+    Comments, NavigationLinksModel, PageModel, PublicationsModel, TocModel
 };
 
 /**
@@ -85,6 +89,7 @@ export * from "services/interfaces/TaxonomyService";
 export { configureStore } from "store/Store";
 export * from "store/interfaces/Action";
 export * from "store/interfaces/State";
+export * from "store/interfaces/Comments";
 export * from "store/interfaces/Conditions";
 
 /**
