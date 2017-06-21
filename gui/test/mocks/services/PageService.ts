@@ -1,6 +1,7 @@
 import { IPageService } from "services/interfaces/PageService";
 import { IPage } from "interfaces/Page";
 import { Promise } from "es6-promise";
+import { IComment } from "interfaces/Comments";
 
 let fakeDelay = false;
 const DELAY = 100;
@@ -18,6 +19,14 @@ export class PageService implements IPageService {
             title: "Page title!",
             sitemapIds: null
         }
+    };
+
+    private _mockDataComments: {
+        values: IComment[];
+        error: string | null
+    } = {
+        values: [],
+        error: null
     };
 
     public getPageInfo(publicationId: string, pageId: string): Promise<IPage> {
@@ -38,6 +47,28 @@ export class PageService implements IPageService {
                 return Promise.reject(error);
             } else {
                 return Promise.resolve(info);
+            }
+        }
+    }
+
+    public getComments(publicationId: string, pageId: string, descending: boolean, top: number, skip: number, status: number[]): Promise<IComment[]> {
+        const { error, values } = this._mockDataComments;
+        if (fakeDelay) {
+            return new Promise((resolve: (values?: IComment[]) => void, reject: (error: string | null) => void) => {
+                setTimeout((): void => {
+                    if (error) {
+                        reject(error);
+                    }
+                    else {
+                        resolve(values);
+                    }
+                }, DELAY);
+            });
+        } else {
+            if (error) {
+                return Promise.reject(error);
+            } else {
+                return Promise.resolve(values);
             }
         }
     }

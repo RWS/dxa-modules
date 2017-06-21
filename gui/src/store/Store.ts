@@ -24,6 +24,11 @@ const EMPTY_STATE: IState = {
         lastConditions: {},
         editingConditions: {}
     },
+    comments: {
+        byPageId: {},
+        loading: [],
+        errors: {}
+    },
     publication: {
         publicationId: "",
         pageId: "",

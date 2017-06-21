@@ -106,6 +106,15 @@
                 }
             }
         }
+
+        .sdl-dita-delivery-comments-list {
+            margin-left: @tocWidth + @defaultMargin;
+            margin-right: @contentNavWidth + @defaultMargin;
+            .sdl-dita-delivery-app.rtl & {
+                margin-left: @contentNavWidth + @defaultMargin;
+                margin-right: @tocWidth + @defaultMargin;
+            }
+        }
     }
 }
 
@@ -114,7 +123,8 @@
         .sdl-dita-delivery-page {
             .sdl-dita-delivery-breadcrumbs,
             .sdl-dita-delivery-version-selector,
-            article.page-content {
+            article.page-content,
+            .sdl-dita-delivery-comments-list {
                 margin-right: 0;
                 .sdl-dita-delivery-app.rtl & {
                     margin-left: 0;
@@ -168,7 +178,8 @@
             .sdl-dita-delivery-breadcrumbs,
             .sdl-dita-delivery-version-selector,
             article.page-content,
-            nav.sdl-dita-delivery-content-navigation {
+            nav.sdl-dita-delivery-content-navigation,
+            .sdl-dita-delivery-comments-list {
                 margin-left: 0;
                 .sdl-dita-delivery-app.rtl & {
                     margin-right: 0;
