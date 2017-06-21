@@ -19,6 +19,15 @@ export interface IDatePickerProps {
      * @type {string}
      */
     locale?: string;
+    /**
+     * Default value
+     * @type {string}
+     */
+    value?: string;
+    /**
+     * Change handler
+     */
+    onChangeHandler?: (value: Moment.Moment) => undefined;
 }
 
 /**
@@ -28,7 +37,7 @@ export interface IDatePickerProps {
  * @interface IDatePickerState
  */
 export interface IDatePickerState {
-    startDate: Moment.Moment;
+    selectedDate?: Moment.Moment;
 }
 
 export class DatePicker extends React.Component<IDatePickerProps, IDatePickerState> {
@@ -39,7 +48,7 @@ export class DatePicker extends React.Component<IDatePickerProps, IDatePickerSta
     constructor() {
         super();
         this.state = {
-            startDate: Moment()
+            selectedDate: undefined
         };
         this.handleChange = this.handleChange.bind(this);
     }
@@ -52,9 +61,10 @@ export class DatePicker extends React.Component<IDatePickerProps, IDatePickerSta
     public render(): JSX.Element {
         return (
             <DatePickerComponent
-                selected={this.state.startDate}
+                selected={this.state.selectedDate || (this.props.value ? Moment(this.props.value, "YYYYMMDD") : undefined)}
                 onChange={this.handleChange}
                 calendarClassName="sdl-dita-delivery-datepicker"
+                className="sdl-input-text"
                 locale={this.props.locale}
             />
         );
@@ -62,8 +72,8 @@ export class DatePicker extends React.Component<IDatePickerProps, IDatePickerSta
 
     private handleChange(date: Moment.Moment): void {
         this.setState({
-            startDate: date
-        });
+            selectedDate: date
+        }, (this.props.onChangeHandler) ? this.props.onChangeHandler(date) : undefined);
     }
 }
 

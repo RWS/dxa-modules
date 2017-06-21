@@ -1,4 +1,4 @@
-import { find, chain } from "lodash";
+import { find, chain, isEqual } from "lodash";
 import { PUBLICATIONS_LOADED, PUBLICATIONS_LOADING } from "store/actions/Actions";
 import { IPublication } from "interfaces/Publication";
 import { handleAction, combineReducers, combine } from "./CombineReducers";
@@ -120,4 +120,4 @@ export const normalizeProductReleaseVersion = (params: IPublicationsListPropsPar
 };
 
 export const isPublicationFound = (state: IPublicationsState, publicationId: string): boolean =>
-    JSON.stringify(getPubById(state, publicationId)) !== JSON.stringify(notFound(publicationId));
+    !isEqual(getPubById(state, publicationId), notFound(publicationId));
