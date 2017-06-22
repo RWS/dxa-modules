@@ -122,6 +122,10 @@ class Server extends TestBase {
                                     <article>
                                         <article className="ltr page-content">No page selected. Please select an item from the table of contents.</article>
                                     </article>
+                                    <div className="sdl-comments-fetcher"/>
+                                    <div className="sdl-dita-delivery-comments-list">
+                                        <span>Comments (0)</span>
+                                    </div>
                                 </div>
                             </section>
                         </div>

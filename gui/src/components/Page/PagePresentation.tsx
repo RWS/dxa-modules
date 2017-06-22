@@ -10,6 +10,8 @@ import { Url } from "utils/Url";
 import { path } from "utils/Path";
 import { ContentNavigation, IContentNavigationItem } from "@sdl/dd/presentation/ContentNavigation";
 import { Error } from "@sdl/dd/presentation/Error";
+import FetchComments from "@sdl/dd/helpers/FetchComments";
+import { CommentsList } from "@sdl/dd/CommentsList/CommentsList";
 import { IAppContext } from "@sdl/dd/container/App/App";
 import { IPageService } from "services/interfaces/PageService";
 import { PostCommentPresentation } from "@sdl/dd/PostComment/PostCommentPresentation";
@@ -210,7 +212,9 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
                         : <article className={appClass}
                             dangerouslySetInnerHTML={{ __html: props.content || formatMessage("components.page.nothing.selected") }} />}
                 </article>
-                {!error && <PostCommentPresentation handleSubmit={(event) => { event.preventDefault(); event.stopPropagation(); alert("post comment"); }} />}
+                {!error && <PostCommentPresentation handleSubmit={(event) => { event.preventDefault(); event.stopPropagation(); }} />}
+                {!error && <FetchComments descending={true} /> }
+                {!error && <CommentsList /> }
             </div >
         );
     }

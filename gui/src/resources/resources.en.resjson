@@ -2,6 +2,7 @@
   "app.publications": "Publications",
   "components.app.loading": "Loading",
   "components.breadcrumbs.home": "Home",
+  "components.commentslist.comments": "Comments",
   "components.conditions.dialog.description": "Brief description. Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
   "components.conditions.dialog.title": "Personalize content",
   "components.contentnavigation.title": "Contents",

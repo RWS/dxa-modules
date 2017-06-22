@@ -4,6 +4,7 @@
   "components.breadcrumbs.home": "Startseite",
   "components.searchbar.placeholder": "Suche...",
   "components.searchbar.publication.placeholder": "Suche in ‘{0}’",
+  "components.commentslist.comments": "Bemerkungen",
   "components.contentnavigation.title": "Inhalte",
   "components.tiles.more": "Mehr anzeigen",
   "components.page.nothing.selected": "Keine Seite ausgewählt. Wählen Sie bitte ein Element aus dem Inhaltsverzeichnis aus.",
