@@ -6,6 +6,7 @@ import { Promise } from "es6-promise";
 import { IConditionMap } from "store/interfaces/Conditions";
 import { MD5 } from "object-hash";
 import { Comments } from "models/Comments";
+import { Comment } from "models/Comment";
 
 /**
  * Page service, interacts with the models to fetch the required data.
@@ -93,7 +94,7 @@ export class PageService implements IPageService {
                     removeEventListeners();
                     resolve(comments.getComments());
                 };
-                const onLoadFailed = (event: Event & { data: {error: string } }) => {
+                const onLoadFailed = (event: Event & { data: { error: string } }) => {
                     removeEventListeners();
                     reject(event.data.error);
                 };
@@ -106,6 +107,43 @@ export class PageService implements IPageService {
                 comments.addEventListener("loadfailed", onLoadFailed);
                 comments.load();
             }
+        });
+    }
+
+    /**
+     *
+     * @param {string} publicationId
+     * @param {string} pageId
+     * @param {IComment} commentData
+     * @returns {Promise<IComment>}
+     *
+     * @memberof PageService
+     */
+    public saveComment(publicationId: string, pageId: string, commentData: IComment): Promise<IComment> {
+        const comment = new Comment(publicationId, pageId, commentData);
+        return new Promise((resolve: (data?: IComment) => void, reject: (error: string | null) => void) => {
+            let removeEventListeners: () => void;
+            const onLoad = () => {
+                removeEventListeners();
+                resolve(commentData);
+            };
+            const onLoadFailed = (event: Event & { data: { error: string } }) => {
+                removeEventListeners();
+                reject(event.data.error);
+            };
+            removeEventListeners = (): void => {
+                comment.removeEventListener("load", onLoad);
+                comment.removeEventListener("loadfailed", onLoadFailed);
+                comment.removeEventListener("validatefailed", onLoadFailed);
+
+                // There is no further componen processing, so we don`t need to keep this component in mermory.
+                comment.dispose();
+            };
+
+            comment.addEventListener("load", onLoad);
+            comment.addEventListener("loadfailed", onLoadFailed);
+            comment.addEventListener("validatefailed", onLoadFailed);
+            comment.save();
         });
     }
 

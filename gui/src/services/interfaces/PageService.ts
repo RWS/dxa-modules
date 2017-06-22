@@ -33,4 +33,16 @@ export interface IPageService {
      * @memberof IPageService
      */
     getComments(publicationId: string, pageId: string, descending: boolean, top: number, skip: number, status: number[]): Promise<IComment[]>;
+
+    /**
+     * Save page comment
+     *
+     * @param {string} publicationId
+     * @param {string} pageId
+     * @param {IComment} comment
+     * @returns {Promise<IComment>}
+     *
+     * @memberof IPageService
+     */
+    saveComment(publicationId: string, pageId: string, comment: IComment): Promise<IComment>;
 }

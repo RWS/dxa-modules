@@ -1,6 +1,8 @@
 import { PageService } from "services/client/PageService";
 import { TestBase } from "@sdl/models";
 import { IWindow } from "interfaces/Window";
+import { IComment } from "interfaces/Comments";
+import { FakeXMLHttpRequest } from "test/mocks/XmlHttpRequest";
 
 class PageServiceTests extends TestBase {
 
@@ -99,9 +101,54 @@ class PageServiceTests extends TestBase {
                     done();
                 });
             });
-
         });
 
+        describe(`Page service tests. Page comments`, (): void => {
+            beforeEach(() => {
+                win.SdlDitaDeliveryMocksEnabled = false;
+            });
+
+            afterEach(() => {
+                win.SdlDitaDeliveryMocksEnabled = mocksFlag;
+            });
+
+            it("can save comment", (done: () => void): void => {
+                let fakeRequest = new FakeXMLHttpRequest("");
+                fakeRequest.status = 200;
+                const spy = spyOn(window, "XMLHttpRequest").and.callFake(() => fakeRequest);
+                pageService.saveComment(publicationId, "1", {
+                    id: 0,
+                    itemPublicationId: 5,
+                    itemId: 18,
+                    content: "Comment"
+                } as IComment).then(comment => {
+                    expect(comment).toBeDefined();
+                    expect(comment.id).toBe(0);
+                    expect(spy).toHaveBeenCalled();
+                    done();
+                }).catch(error => {
+                    fail(`Unexpected error: ${error}`);
+                    done();
+                });
+            });
+
+            it("show error when save comment failed", (done: () => void): void => {
+                const failMessage = "failure-saving-comment";
+                spyOn(window, "XMLHttpRequest").and.callFake(() => new FakeXMLHttpRequest(failMessage));
+                pageService.saveComment(publicationId, "1", {
+                    id: 0,
+                    itemPublicationId: 5,
+                    itemId: 18,
+                    content: "Comment"
+                } as IComment).then(() => {
+                    fail("An error was expected.");
+                    done();
+                }).catch(error => {
+                    expect(error).toContain(failMessage);
+                    done();
+                });
+            });
+        });
     }
 }
 

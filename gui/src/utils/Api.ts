@@ -1,5 +1,6 @@
 import { path } from "utils/Path";
 import { IWindow } from "interfaces/Window";
+import { IError } from "interfaces/Error";
 
 const mocksEnabled = (): boolean => (window as IWindow).SdlDitaDeliveryMocksEnabled || false;
 const mocksEndPoint = `/$mocks$`;
@@ -143,4 +144,30 @@ export class Api {
         }
     }
 
+    /**
+     * Get comment post url
+     * Use this url to post page comment
+     *
+     * @static
+     * @param {string} publicationId
+     * @param {string} pageId
+     * @returns {string}
+     *
+     * @memberof Api
+     */
+    public static getSaveCommentUrl(publicationId: string, pageId: string): string {
+        const encodedPubId = encodeURIComponent(publicationId);
+        const encodedPageId = encodeURIComponent(pageId);
+
+        /* istanbul ignore else */
+        if (mocksEnabled()) {
+            // Can`t set comments for mock
+            throw {
+                message: "Mocks are not allowed when posting comments",
+                statusCode: "500"
+            } as IError;
+        } else {
+            return path.getAbsolutePath(`api/comments/${encodedPubId}/${encodedPageId}`);
+        }
+    }
 }

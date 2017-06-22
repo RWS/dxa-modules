@@ -61,4 +61,23 @@ export class PageService implements IPageService {
         }
     }
 
+    /**
+     * Save page comment
+     *
+     * @param {string} publicationId
+     * @param {string} pageId
+     * @param {IComment} comment
+     * @returns {Promise<IComment[]>}
+     *
+     * @memberof IPageService
+     */
+    public saveComment(publicationId: string, pageId: string, comment: IComment): Promise<IComment> {
+        const { error } = this._mockDataComments;
+        if (error) {
+            return Promise.reject(error);
+        } else {
+            return Promise.resolve(comment);
+        }
+    }
+
 }

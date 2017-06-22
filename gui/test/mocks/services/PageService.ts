@@ -73,6 +73,28 @@ export class PageService implements IPageService {
         }
     }
 
+    public saveComment(publicationId: string, pageId: string, data: IComment): Promise<IComment> {
+        const { error, values } = this._mockDataComments;
+        if (fakeDelay) {
+            return new Promise((resolve: (value?: IComment)  => void, reject: (error: string | null) => void) => {
+                setTimeout((): void => {
+                    if (error) {
+                        reject(error);
+                    }
+                    else {
+                        resolve(values[0]);
+                    }
+                }, DELAY);
+            });
+        } else {
+            if (error) {
+                return Promise.reject(error);
+            } else {
+                return Promise.resolve(values[0]);
+            }
+        }
+    }
+
     public setMockDataPage(error: string | null, info?: IPage): void {
         this._mockDataPage = {
             error: error,
