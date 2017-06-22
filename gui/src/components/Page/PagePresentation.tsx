@@ -12,6 +12,7 @@ import { ContentNavigation, IContentNavigationItem } from "@sdl/dd/presentation/
 import { Error } from "@sdl/dd/presentation/Error";
 import { IAppContext } from "@sdl/dd/container/App/App";
 import { IPageService } from "services/interfaces/PageService";
+import { PostCommentPresentation } from "@sdl/dd/PostComment/PostCommentPresentation";
 
 import "components/presentation/styles/Page";
 import "components/controls/styles/ActivityIndicator";
@@ -209,6 +210,7 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
                         : <article className={appClass}
                             dangerouslySetInnerHTML={{ __html: props.content || formatMessage("components.page.nothing.selected") }} />}
                 </article>
+                {!error && <PostCommentPresentation handleSubmit={(event) => { event.preventDefault(); event.stopPropagation(); alert("post comment"); }} />}
             </div >
         );
     }

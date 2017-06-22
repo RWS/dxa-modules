@@ -15,6 +15,7 @@ import * as ContentNavigationComp from "@sdl/dd/presentation/ContentNavigation";
 import * as NavigationMenuComp from "@sdl/dd/presentation/NavigationMenu";
 import * as PageComp from "@sdl/dd/Page/PagePresentation";
 import * as PageLinkComp from "@sdl/dd/PageLink/PageLink";
+import * as PostCommentComp from "@sdl/dd/PostComment/PostCommentPresentation";
 import * as SearchBarComp from "@sdl/dd/presentation/SearchBar";
 import * as TocComp from "@sdl/dd/presentation/Toc";
 import * as TopBarComp from "@sdl/dd/presentation/TopBar";
@@ -34,7 +35,7 @@ export const Components = {
     PageComp, SearchBarComp, TocComp, TopBarComp,
     TileComp, TilesListComp, ErrorComp, ErrorTocComp,
     VersionSelectorComp, ErrorContentComp, ProductFamiliesListComp,
-    ContentLanguageWarningComp, DropdownComp, PageLinkComp
+    ContentLanguageWarningComp, DropdownComp, PageLinkComp, PostCommentComp
 };
 
 export * from "interfaces/Error";

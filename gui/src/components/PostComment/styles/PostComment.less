@@ -1,0 +1,56 @@
+@import (reference) "~theme-styles";
+
+@labelWidth: 125px;
+@inputWidth: 380px;
+
+.sdl-dita-delivery-postcomment {
+    padding: 0 15px;
+
+    > div {
+        margin-top: 15px;
+        max-width: calc(@labelWidth + @inputWidth);
+
+        > label {
+            display: inline-block;
+            min-width: @labelWidth;
+            vertical-align: top;
+            margin-top: 10px;
+            font-weight: bold;
+            > span {
+                color: @accentColor3;
+            }
+        }
+
+        .sdl-input-text,
+        .sdl-textarea {
+            max-width: @inputWidth;
+        }
+
+        .sdl-input-text ~ span,
+        .sdl-textarea ~ span {
+            display: none;
+        }
+
+        .sdl-input-text.error ~ span,
+        .sdl-textarea.error ~ span {
+            .import-regular-font();
+            font-size: @fontSize;
+            color: @accentColor3;
+            display: block;
+            margin-top: 10px;
+            text-align: right;
+            .sdl-dita-delivery-app.rtl & {
+                text-align: left;
+            }
+        }
+    }
+
+    >:last-child {
+        max-width: @inputWidth;
+        margin-left: @labelWidth;
+        .sdl-dita-delivery-app.rtl & {
+            margin-left: 0px;
+            margin-right: @labelWidth;
+        }
+    }
+}
