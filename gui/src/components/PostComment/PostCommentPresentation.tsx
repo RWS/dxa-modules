@@ -128,41 +128,40 @@ export class PostCommentPresentation extends React.Component<IPostCommentPresent
         };
 
         return (
-            <form className="sdl-dita-delivery-postcomment" onSubmit={this.props.handleSubmit}>
-                <div>
-                    <label htmlFor="name">{formatMessage("component.post.comment.name")}<span>*</span></label>
-                    <input className={getInputClassNames("name")}
-                        type="text"
-                        id="name"
-                        placeholder={formatMessage("component.post.comment.placeholder.name")}
-                        onChange={this.handleChange.bind(this)}
-                        onBlur={this.handleBlur.bind(this)} />
-                    <span>{formatMessage("component.post.comment.no.name")}</span>
-                </div>
-                <div>
-                    <label htmlFor="email">{formatMessage("component.post.comment.email")}<span>*</span></label>
-                    <input className={getInputClassNames("email")}
-                        type="text"
-                        id="email"
-                        placeholder={formatMessage("component.post.comment.placeholder.email")}
-                        onChange={this.handleChange.bind(this)}
-                        onBlur={this.handleBlur.bind(this)} />
-                    <span>{formatMessage("component.post.comment.no.email")}</span>
-                </div>
-                <div>
-                    <label htmlFor="comment">{formatMessage("component.post.comment.content")}<span>*</span></label>
-                    <textarea className={getTextareaClassNames("comment")}
-                        id="comment"
-                        placeholder={formatMessage("component.post.comment.placeholder.content")}
-                        onChange={this.handleChange.bind(this)}
-                        onBlur={this.handleBlur.bind(this)}></textarea>
-                    <span>{formatMessage("component.post.comment.no.content")}</span>
-                </div>
-                <div>
-                    <input className="sdl-button graphene sdl-button-purpose-confirm"
-                        type="submit" value={formatMessage("component.post.comment.submit")} disabled={isDisabled}/>
-                </div>
-            </form>
+            <div className="sdl-dita-delivery-postcomment">
+                <form onSubmit={this.props.handleSubmit} id="form">
+                    <div>
+                        <label htmlFor="name">{formatMessage("component.post.comment.name")}<span>*</span></label>
+                        <input className={getInputClassNames("name")}
+                            type="text"
+                            id="name"
+                            placeholder={formatMessage("component.post.comment.placeholder.name")}
+                            onChange={this.handleChange.bind(this)}
+                            onBlur={this.handleBlur.bind(this)} />
+                        <span>{formatMessage("component.post.comment.no.name")}</span>
+                    </div>
+                    <div>
+                        <label htmlFor="email">{formatMessage("component.post.comment.email")}<span>*</span></label>
+                        <input className={getInputClassNames("email")}
+                            type="text"
+                            id="email"
+                            placeholder={formatMessage("component.post.comment.placeholder.email")}
+                            onChange={this.handleChange.bind(this)}
+                            onBlur={this.handleBlur.bind(this)} />
+                        <span>{formatMessage("component.post.comment.no.email")}</span>
+                    </div>
+                    <div>
+                        <label htmlFor="comment">{formatMessage("component.post.comment.content")}<span>*</span></label>
+                        <textarea className={getTextareaClassNames("comment")}
+                            id="comment"
+                            placeholder={formatMessage("component.post.comment.placeholder.content")}
+                            onChange={this.handleChange.bind(this)}
+                            onBlur={this.handleBlur.bind(this)}></textarea>
+                        <span>{formatMessage("component.post.comment.no.content")}</span>
+                    </div>
+                </form>
+                <button type="submit" disabled={isDisabled} className="sdl-button graphene sdl-button-purpose-confirm" form="form" value="Submit">{formatMessage("component.post.comment.submit")}</button>
+            </div>
         );
     }
 }
