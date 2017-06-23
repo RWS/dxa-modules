@@ -63,7 +63,7 @@ public class TestModuleCacheConfiguration {
                             }
                             throw new CacheEntryListenerException("Cached a @NeverCached annotated model!");
                         } else {
-                            log.info("Cached view model is: '{}'", cacheEntryEvent.getValue().getClass());
+                            log.debug("Cached view model is: '{}'", cacheEntryEvent.getValue().getClass());
                         }
                     }
             );
