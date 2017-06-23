@@ -160,7 +160,9 @@ export class PostCommentPresentation extends React.Component<IPostCommentPresent
                         <span>{formatMessage("component.post.comment.no.content")}</span>
                     </div>
                 </form>
-                <button type="submit" disabled={isDisabled} className="sdl-button graphene sdl-button-purpose-confirm" form="form" value="Submit">{formatMessage("component.post.comment.submit")}</button>
+                <button type="submit" disabled={isDisabled} className="sdl-button graphene sdl-button-purpose-confirm" form="form" value="Submit">
+                    {formatMessage("component.post.comment.submit")}
+                </button>
             </div>
         );
     }
