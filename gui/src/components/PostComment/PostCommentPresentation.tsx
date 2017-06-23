@@ -55,6 +55,9 @@ export class PostCommentPresentation extends React.Component<IPostCommentPresent
                 comment: false
             }
         };
+
+        this.handleBlur = this.handleBlur.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     /**
@@ -136,8 +139,8 @@ export class PostCommentPresentation extends React.Component<IPostCommentPresent
                             type="text"
                             id="name"
                             placeholder={formatMessage("component.post.comment.placeholder.name")}
-                            onChange={this.handleChange.bind(this)}
-                            onBlur={this.handleBlur.bind(this)} />
+                            onChange={this.handleChange}
+                            onBlur={this.handleBlur} />
                         <span>{formatMessage("component.post.comment.no.name")}</span>
                     </div>
                     <div>
@@ -146,8 +149,8 @@ export class PostCommentPresentation extends React.Component<IPostCommentPresent
                             type="text"
                             id="email"
                             placeholder={formatMessage("component.post.comment.placeholder.email")}
-                            onChange={this.handleChange.bind(this)}
-                            onBlur={this.handleBlur.bind(this)} />
+                            onChange={this.handleChange}
+                            onBlur={this.handleBlur} />
                         <span>{formatMessage("component.post.comment.no.email")}</span>
                     </div>
                     <div>
@@ -155,8 +158,8 @@ export class PostCommentPresentation extends React.Component<IPostCommentPresent
                         <textarea className={getTextareaClassNames("comment")}
                             id="comment"
                             placeholder={formatMessage("component.post.comment.placeholder.content")}
-                            onChange={this.handleChange.bind(this)}
-                            onBlur={this.handleBlur.bind(this)}></textarea>
+                            onChange={this.handleChange}
+                            onBlur={this.handleBlur}></textarea>
                         <span>{formatMessage("component.post.comment.no.content")}</span>
                     </div>
                 </form>
