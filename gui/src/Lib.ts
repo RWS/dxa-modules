@@ -54,6 +54,7 @@ export * from "interfaces/Services";
 /**
  * Models
  */
+import * as Comment from "models/Comment";
 import * as Comments from "models/Comments";
 import * as NavigationLinksModel from "models/NavigationLinks";
 import * as PageModel from "models/Page";
@@ -61,7 +62,7 @@ import * as PublicationsModel from "models/Publications";
 import * as TocModel from "models/Toc";
 
 export const Models = {
-    Comments, NavigationLinksModel, PageModel, PublicationsModel, TocModel
+    Comment, Comments, NavigationLinksModel, PageModel, PublicationsModel, TocModel
 };
 
 /**
