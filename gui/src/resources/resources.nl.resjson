@@ -3,6 +3,8 @@
   "components.app.loading": "Laden",
   "components.breadcrumbs.home": "Start",
   "components.conditions.dialog.description": "Voorwaarden gebruikt in de huidige publicatie",
+  "components.conditions.dialog.personalize": "Personaliseer",
+  "components.conditions.dialog.cancel": "Annuleer",
   "components.searchbar.placeholder": "Zoeken...",
   "components.searchbar.publication.placeholder": "Zoeken in ‘{0}’",
   "components.contentnavigation.title": "Inhoud",

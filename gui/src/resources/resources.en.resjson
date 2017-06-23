@@ -5,6 +5,8 @@
   "components.commentslist.comments": "Comments",
   "components.conditions.dialog.description": "Conditions used in current publication",
   "components.conditions.dialog.title": "Personalize content",
+  "components.conditions.dialog.personalize": "Personalize",
+  "components.conditions.dialog.cancel": "Cancel",
   "components.contentnavigation.title": "Contents",
   "components.page.nothing.selected": "No page selected. Please select an item from the table of contents.",
   "components.productfamilies.no.published.publications": "No publications published yet",

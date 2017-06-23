@@ -36,12 +36,14 @@ const getActions = (props: IConditionsDialogPresentationProps) =>
     <div className="sdl-conditions-dialog-actions">
         <button
             onClick={() => submit(props)}
-            className="sdl-button graphene sdl-button-purpose-confirm">Personalize
+            className="sdl-button graphene sdl-button-purpose-confirm">
+            <I18n data="components.conditions.dialog.personalize" />
         </button>
         <span className="sdl-button-separator"> </span>
         <button
             onClick={props.close}
-            className="sdl-button graphene sdl-button-purpose-general">Cancel
+            className="sdl-button graphene sdl-button-purpose-general">
+            <I18n data="components.conditions.dialog.cancel" />
         </button>
     </div>;
 
