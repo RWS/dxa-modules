@@ -2,6 +2,7 @@ package com.sdl.dxa.modules.smarttarget.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.Function;
 import com.google.common.collect.Collections2;
 import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.api.model.EntityModel;
@@ -9,6 +10,7 @@ import com.sdl.webapp.common.api.model.entity.AbstractEntityModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import javax.annotation.Nullable;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -47,7 +49,13 @@ public class SmartTargetPromotion extends AbstractEntityModel {
 
     @JsonIgnore
     public Collection<EntityModel> getEntityModels() {
-        return Collections2.transform(this.items, SmartTargetItem::getEntity);
+        return Collections2.transform(this.items, new Function<SmartTargetItem, EntityModel>() {
+            @Nullable
+            @Override
+            public EntityModel apply(SmartTargetItem smartTargetItem) {
+                return smartTargetItem.getEntity();
+            }
+        });
     }
 
 }
