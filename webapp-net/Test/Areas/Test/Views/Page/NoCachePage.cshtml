@@ -1,4 +1,4 @@
-﻿@model CachingPageModel
+﻿@model NoCachePageModel
 <html>
     <head>
         <title>@Model.Title</title>
@@ -17,7 +17,9 @@
 
     </head>
     <body>
-        <h1>Rendered @Model with Page View "Test:SimpleTestPage"</h1>
+        <h1>Rendered @Model with Page View "Test:NoCachePage"</h1>
+
+        <h4>This page model is an example of disabling caching on page model level</h4>
 
         <div>
             @Html.DxaRegions()

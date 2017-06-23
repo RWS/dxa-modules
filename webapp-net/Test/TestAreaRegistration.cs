@@ -30,7 +30,7 @@ namespace Sdl.Web.Modules.Test
             RegisterViewModel("SimpleTestPage", typeof(PageModel));
             RegisterViewModel("TSI811TestPage", typeof(Tsi811PageModel));
             RegisterViewModel("TSI2285TestPage", typeof(Tsi2285PageModel));
-            RegisterViewModel("CachingPage", typeof(CachingPageModel));
+            RegisterViewModel("NoCachePage", typeof(NoCachePageModel));
 
             // Region Views
             RegisterViewModel("TestRegion1", typeof(RegionModel), "Region");
@@ -62,7 +62,7 @@ namespace Sdl.Web.Modules.Test
             RegisterViewModel("TSI1856Test", typeof(Tsi1856TestEntity));
             RegisterViewModel("TSI2316Test", typeof(Tsi2316TestEntity));
             RegisterViewModel("CompLinkTest", typeof(CompLinkTest));
-            RegisterViewModel("CachingEntity", typeof(CachingEntityModel));
+            RegisterViewModel("NoCacheEntity", typeof(NoCacheEntityModel));
 
             // Entity Models without associated View
             RegisterViewModel(typeof(TestEntityModel2));

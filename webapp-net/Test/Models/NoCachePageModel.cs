@@ -2,9 +2,9 @@
 
 namespace Sdl.Web.Modules.Test.Models
 {
-    public class CachingPageModel : PageModel
+    public class NoCachePageModel : PageModel
     {
-        public CachingPageModel(string id)
+        public NoCachePageModel(string id)
                 : base(id)
         {
         }

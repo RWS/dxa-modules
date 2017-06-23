@@ -64,9 +64,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\CachingEntityModel.cs" />
+    <Compile Include="Models\NoCacheEntityModel.cs" />
     <Compile Include="Models\CompLinkTest.cs" />
-    <Compile Include="Models\CachingPageModel.cs" />
+    <Compile Include="Models\NoCachePageModel.cs" />
     <Compile Include="Models\TestEntity.cs" />
     <Compile Include="Models\Tsi1856TestEntity.cs" />
     <Compile Include="Models\Tsi1757TestEntity.cs" />
@@ -93,7 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Areas\Test\Views\Entity\CachingEntity.cshtml" />
+    <None Include="Areas\Test\Views\Entity\NoCacheEntity.cshtml" />
     <None Include="Areas\Test\Views\Entity\CompLinkTest.cshtml" />
     <None Include="Areas\Test\Views\Entity\TSI1757Test3.cshtml" />
     <None Include="Areas\Test\Views\Entity\TSI1856Test.cshtml" />
@@ -115,7 +115,7 @@
     <None Include="Areas\Test\Views\Entity\TestEntity2.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestEntity1.cshtml" />
     <None Include="Areas\Test\Views\Page\CustomPageModelInheritedController.cshtml" />
-    <None Include="Areas\Test\Views\Page\CachingPage.cshtml" />
+    <None Include="Areas\Test\Views\Page\NoCachePage.cshtml" />
     <None Include="Areas\Test\Views\Page\TSI2285TestPage.cshtml" />
     <None Include="Areas\Test\Views\Page\TSI811TestPage.cshtml" />
     <None Include="Areas\Test\Views\Page\TestDxaEntityViewOverride.cshtml" />

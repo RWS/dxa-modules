@@ -3,8 +3,8 @@ using Sdl.Web.Common.Models;
 
 namespace Sdl.Web.Modules.Test.Models
 {
-    [SemanticEntity(EntityName = "CachingAttributeTest", Prefix = "test", Public = true)]
-    public class CachingEntityModel : EntityModel
+    [SemanticEntity(EntityName = "NoCachePropertyTest", Prefix = "test", Public = true)]
+    public class NoCacheEntityModel : EntityModel
     {
         [SemanticProperty("test:textField")]
         public string Text
