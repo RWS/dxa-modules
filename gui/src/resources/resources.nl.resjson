@@ -2,6 +2,7 @@
   "app.publications": "Publicaties",
   "components.app.loading": "Laden",
   "components.breadcrumbs.home": "Start",
+  "components.conditions.dialog.description": "Voorwaarden gebruikt in de huidige publicatie",
   "components.searchbar.placeholder": "Zoeken...",
   "components.searchbar.publication.placeholder": "Zoeken in ‘{0}’",
   "components.contentnavigation.title": "Inhoud",
