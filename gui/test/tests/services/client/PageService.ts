@@ -115,6 +115,7 @@ class PageServiceTests extends TestBase {
             it("can save comment", (done: () => void): void => {
                 let fakeRequest = new FakeXMLHttpRequest("");
                 fakeRequest.status = 200;
+                fakeRequest.responseText = `{"id":0}`;
                 const spy = spyOn(window, "XMLHttpRequest").and.callFake(() => fakeRequest);
                 pageService.saveComment({
                     publicationId: "1",

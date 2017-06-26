@@ -3,6 +3,7 @@ export class FakeXMLHttpRequest {
     public status: number = 500;
     public statusText: string = "";
     public onreadystatechange: () => void;
+    public responseText: string;
 
     public open = (): void => { };
     public send = (): void => { };
