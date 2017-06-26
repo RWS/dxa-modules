@@ -15,6 +15,11 @@
     line-height: @topBarHeight;
     position: fixed;
     z-index: 999;
+
+    .conditions-dialog-visible & {
+        z-index: 1;
+    }
+
     header {
         max-width: @screenXl;
         margin: 0 auto;

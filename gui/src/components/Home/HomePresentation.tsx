@@ -80,6 +80,12 @@ export interface IHomeProps {
      * @memberOf IHomeProps
      */
     direction?: string;
+
+    /**
+     * true if conidtiosn dialog is shown
+     * @type {boolean}
+     */
+    isConditionsDialogVisible?: boolean;
 }
 
 /**
@@ -164,7 +170,7 @@ export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
      */
     public render(): JSX.Element {
         const { isNavOpen, searchIsOpen, searchIsOpening, searchIsActive, searchTitle } = this.state;
-        const { direction } = this.props;
+        const { direction, isConditionsDialogVisible } = this.props;
 
         // This is a HACK!!! Not a fan of it, but it is quick fix for now
         // Get child props params for recognize route - It is weird!
@@ -177,7 +183,8 @@ export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
             "open": hasPublication && isNavOpen,
             "search-open": searchIsOpen,
             "search-is-opening": searchIsOpening,
-            "search-is-active": searchIsOpen && searchIsActive
+            "search-is-active": searchIsOpen && searchIsActive,
+            "conditions-dialog-visible": isConditionsDialogVisible
         });
 
         this._preventBodyScroll = (hasPublication && isNavOpen) || (searchIsOpen && searchIsActive) || false;
@@ -207,7 +214,7 @@ export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
                                 searchIsActive: true
                             });
                         }
-                    } }
+                    }}
                     onBlur={() => {
                         /* istanbul ignore else */
                         if (!this._isUnmounted) {
@@ -215,7 +222,7 @@ export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
                                 searchIsActive: false
                             });
                         }
-                    } } />
+                    }} />
                 {children}
             </div >
         );
