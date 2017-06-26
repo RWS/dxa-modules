@@ -12,7 +12,7 @@
   "component.post.comment.email":"E-Mail",
   "component.post.comment.content": "Bemerkungen",
   "component.post.comment.placeholder.name": "Name",
-  "component.post.comment.placeholder.email": "example@domain.com",
+  "component.post.comment.placeholder.email": "beispiel@domain.com",
   "component.post.comment.placeholder.content": "Schreibe einen Kommentar",
   "component.post.comment.no.name": "Name kann nicht leer sein",
   "component.post.comment.no.email": "E-Mail kann nicht leer sein",
