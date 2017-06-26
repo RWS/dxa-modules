@@ -14,7 +14,8 @@ import FetchComments from "@sdl/dd/helpers/FetchComments";
 import { CommentsList } from "@sdl/dd/CommentsList/CommentsList";
 import { IAppContext } from "@sdl/dd/container/App/App";
 import { IPageService } from "services/interfaces/PageService";
-import { PostCommentPresentation } from "@sdl/dd/PostComment/PostCommentPresentation";
+import { PostCommentPresentation , IPostCommentPresentationState} from "@sdl/dd/PostComment/PostCommentPresentation";
+import { IPostComment } from "interfaces/Comments";
 
 import "components/presentation/styles/Page";
 import "components/controls/styles/ActivityIndicator";
@@ -104,6 +105,8 @@ export interface IPageProps {
     onNavigate(url: string): void;
 
     fetchPage?(pageService: IPageService, publicationId: string, pageId: string): void;
+
+    saveComment?(pageService: IPageService, commentData: IPostComment): void;
 }
 
 /**
@@ -181,6 +184,7 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
         const { activeHeader, error, direction } = props;
         const { navItems } = this.state;
         const { formatMessage } = this.context.services.localizationService;
+        const { pageService } = this.context.services;
         const activeNavItemId = activeHeader ? activeHeader.id : (navItems.length > 0 ? navItems[0].id : undefined);
         const _goHome = (): void => props.onNavigate(path.getRootPath());
         const errorButtons = <div>
@@ -195,6 +199,22 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
         ];
 
         const appClass = ClassNames(direction, "page-content");
+
+        const handlePostComment = (event: React.FormEvent, data: IPostCommentPresentationState): void => {
+            event.preventDefault();
+
+            const { name, email, comment } = data;
+            if (props.saveComment) {
+                props.saveComment(pageService, {
+                    publicationId: props.publicationId as string,
+                    pageId: props.id as string,
+                    username: name,
+                    email: email,
+                    content: comment,
+                    parentId: 0
+                });
+            }
+        };
 
         return (
             <div className={"sdl-dita-delivery-page"} style={props.isLoading ? { overflow: "hidden" } : {}} >
@@ -212,7 +232,7 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
                         : <article className={appClass}
                             dangerouslySetInnerHTML={{ __html: props.content || formatMessage("components.page.nothing.selected") }} />}
                 </article>
-                {!error && <PostCommentPresentation handleSubmit={(event) => { event.preventDefault(); event.stopPropagation(); }} />}
+                {!error && <PostCommentPresentation handleSubmit={handlePostComment} />}
                 {!error && <FetchComments descending={true} /> }
                 {!error && <CommentsList /> }
             </div >

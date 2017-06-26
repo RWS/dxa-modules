@@ -6,7 +6,7 @@ import { IAppContext } from "@sdl/dd/container/App/App";
 import * as ClassNames from "classnames";
 
 export interface IPostCommentPresentationProps {
-    handleSubmit: (event: React.FormEvent) => void;
+    handleSubmit: (event: React.FormEvent, formData: IPostCommentPresentationState) => void;
 }
 
 export interface IPostCommentPresentationState {
@@ -58,6 +58,7 @@ export class PostCommentPresentation extends React.Component<IPostCommentPresent
 
         this.handleBlur = this.handleBlur.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     /**
@@ -69,6 +70,11 @@ export class PostCommentPresentation extends React.Component<IPostCommentPresent
     public handleChange(event: React.KeyboardEvent): void {
         const htmlElement = event.nativeEvent.target as HTMLInputElement;
         this.setState({ ...this.state, [htmlElement.getAttribute("id") as string]: htmlElement.value });
+    }
+
+    public handleSubmit(event: React.FormEvent): void {
+        this.props.handleSubmit(event, this.state);
+        (event.nativeEvent.target as HTMLFormElement).reset();
     }
 
     /**
@@ -132,7 +138,7 @@ export class PostCommentPresentation extends React.Component<IPostCommentPresent
 
         return (
             <div className="sdl-dita-delivery-postcomment">
-                <form onSubmit={this.props.handleSubmit} id="form">
+                <form onSubmit={this.handleSubmit} id="form">
                     <div>
                         <label htmlFor="name">{formatMessage("component.post.comment.name")}<span>*</span></label>
                         <input className={getInputClassNames("name")}

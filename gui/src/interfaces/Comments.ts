@@ -52,13 +52,13 @@ export interface IComment {
      * @type {string}
      * @memberof IComment
      */
-    creationDate: string;
+    creationDate: ICommentDate;
     /**
      *
      * @type {string}
      * @memberof IComment
      */
-    lastModifiedDate: string;
+    lastModifiedDate: ICommentDate;
     /**
      *
      * @type {string}
@@ -134,4 +134,106 @@ export interface IUser {
      * @memberof IUser
      */
     externalId: string;
+}
+
+export interface ICommentDate {
+    /**
+     *
+     * @type {number}
+     * @memberof ICommentDate
+     */
+    dayOfMonth: number;
+    /**
+     *
+     * @type {number}
+     * @memberof ICommentDate
+     */
+    hour: number;
+    /**
+     *
+     * @type {number}
+     * @memberof ICommentDate
+     */
+    minute: number;
+    /**
+     *
+     * @type {string}
+     * @memberof ICommentDate
+     */
+    month: string;
+    /**
+     *
+     * @type {number}
+     * @memberof ICommentDate
+     */
+    monthValue: number;
+    /**
+     *
+     * @type {number}
+     * @memberof ICommentDate
+     */
+    nano: number;
+    /**
+     *
+     * @type {number}
+     * @memberof ICommentDate
+     */
+    second: number;
+    /**
+     *
+     * @type {number}
+     * @memberof ICommentDate
+     */
+    year: number;
+    /**
+     *
+     * @type {string}
+     * @memberof ICommentDate
+     */
+    dayOfWeek: string;
+    /**
+     *
+     * @type {number}
+     * @memberof ICommentDate
+     */
+    dayOfYear: number;
+}
+
+export interface IPostComment {
+    /**
+     *
+     * @type {number}
+     * @memberof IPostComment
+     */
+    publicationId: string;
+    /**
+     *
+     * @type {number}
+     * @memberof IPostComment
+     */
+    pageId: string;
+    /**
+     *
+     * @type {string}
+     * @memberof IPostComment
+     */
+    username: string;
+    /**
+     *
+     * @type {string}
+     * @memberof IPostComment
+     */
+    email: string;
+    /**
+     *
+     * @type {string}
+     * @memberof IPostComment
+     */
+    content: string;
+    /**
+     *
+     * @type {number}
+     * @memberof IPostComment
+     */
+    parentId: number;
 }

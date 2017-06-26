@@ -50,6 +50,7 @@ export class LocalizationService implements ILocalizationService {
 
         this.formatMessage = this.formatMessage.bind(this);
         this.getDirection = this.getDirection.bind(this);
+        this.getLanguage = this.getLanguage.bind(this);
     }
 
     /**
@@ -134,6 +135,16 @@ export class LocalizationService implements ILocalizationService {
      */
     public getDirection(lang: string): "rtl" | "ltr" {
         return this.rtlLanguages.some((val: string) => val === lang) ? "rtl" : "ltr";
+    }
+
+    /**
+     * Return current language
+     *
+     * @returns {string}
+     * @memberof LocalizationService
+     */
+    public getLanguage(): string {
+        return this.language;
     }
 
     /**

@@ -27,6 +27,7 @@ const EMPTY_STATE: IState = {
     comments: {
         byPageId: {},
         loading: [],
+        saving: [],
         errors: {}
     },
     publication: {
