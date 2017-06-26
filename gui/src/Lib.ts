@@ -29,7 +29,7 @@ import * as ErrorContentComp from "@sdl/dd/container/ErrorContent/ErrorContentPr
 import * as ProductFamiliesListComp from "@sdl/dd/container/ProductFamiliesList/ProductFamiliesList";
 import * as ContentLanguageWarningComp from "@sdl/dd/ContentLanguageWarning/ContentLanguageWarningPresentation";
 import * as DropdownComp from "@sdl/dd/Dropdown/Dropdown";
-import * as DatePickerComp from "@sdl/dd/DatePicker/DatePicker";
+import * as DatePickerComp from "@sdl/dd/DatePicker/DatePickerPresentation";
 
 export const Components = {
     AppComp, HomeComp, PublicationContentComp, PublicationsListComp,
