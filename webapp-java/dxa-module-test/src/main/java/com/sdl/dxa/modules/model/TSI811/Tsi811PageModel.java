@@ -6,12 +6,14 @@ import com.sdl.webapp.common.api.model.PageModel;
 import com.sdl.webapp.common.api.model.page.DefaultPageModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import static com.sdl.webapp.common.api.mapping.semantic.config.SemanticVocabulary.SDL_CORE;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
 @SemanticEntity(entityName = "TSI811PageMetadataSchema", vocabulary = SDL_CORE)
+@NoArgsConstructor
 public class Tsi811PageModel extends DefaultPageModel {
 
     @JsonProperty("PageKeyword")
