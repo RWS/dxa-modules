@@ -14,6 +14,7 @@ import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
 import java.util.Map;
 
 @EqualsAndHashCode(callSuper = true)
@@ -31,8 +32,20 @@ public class SmartTargetPageModel extends DefaultPageModel implements PageModel.
     @Setter
     private Map<String, ExperimentCookie> newExperimentCookies;
 
-    public SmartTargetPageModel(PageModel pageModel) {
-        super(pageModel);
+    public SmartTargetPageModel(PageModel other) {
+        super(other);
+        if (other instanceof SmartTargetPageModel) {
+            SmartTargetPageModel smartTargetPageModel = (SmartTargetPageModel) other;
+            this.allowDuplicates = smartTargetPageModel.allowDuplicates;
+            if (smartTargetPageModel.newExperimentCookies != null) {
+                this.newExperimentCookies = new HashMap<>(smartTargetPageModel.newExperimentCookies);
+            }
+        }
+    }
+
+    @Override
+    public PageModel deepCopy() {
+        return new SmartTargetPageModel(this);
     }
 
     @Override
