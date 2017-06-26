@@ -2,6 +2,7 @@ package com.sdl.dxa.modules.smarttarget.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sdl.dxa.caching.NeverCached;
 import com.sdl.webapp.common.api.model.PageModel;
 import com.sdl.webapp.common.api.model.page.DefaultPageModel;
 import com.tridion.smarttarget.query.ExperimentCookie;
@@ -20,6 +21,7 @@ import java.util.Map;
 @EqualsAndHashCode(callSuper = true)
 @ToString
 @Slf4j
+@NeverCached(qualifier = "SmartTargetPageModel")
 public class SmartTargetPageModel extends DefaultPageModel implements PageModel.WithResponseData {
 
     @Getter

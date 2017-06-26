@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.sdl.dxa.caching.NeverCached;
 import com.sdl.webapp.common.util.ApplicationContextHolder;
 import com.tridion.smarttarget.analytics.tracking.ExperimentDimensions;
 import lombok.AccessLevel;
@@ -20,6 +21,7 @@ import java.io.IOException;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NeverCached(qualifier = "SmartTargetExperiment")
 public class SmartTargetExperiment extends SmartTargetPromotion {
 
     @JsonProperty("ExperimentDimensions")
