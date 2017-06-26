@@ -60,13 +60,16 @@ export class DatePicker extends React.Component<IDatePickerProps, IDatePickerSta
      */
     public render(): JSX.Element {
         return (
-            <DatePickerComponent
-                selected={this.state.selectedDate || (this.props.value ? Moment(this.props.value, "YYYYMMDD") : undefined)}
-                onChange={this.handleChange}
-                calendarClassName="sdl-dita-delivery-datepicker"
-                className="sdl-input-text"
-                locale={this.props.locale}
-            />
+            <div>
+                <DatePickerComponent
+                    selected={this.state.selectedDate || (this.props.value ? Moment(this.props.value, "YYYYMMDD") : undefined)}
+                    onChange={this.handleChange}
+                    calendarClassName="sdl-dita-delivery-datepicker"
+                    className="sdl-input-text"
+                    locale={this.props.locale}
+                />
+                <input type="date" className="sdl-input-text sdl-input-datepicker" />
+            </div>
         );
     }
 

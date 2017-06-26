@@ -1,7 +1,21 @@
 @import (reference) "~theme-styles";
 
-.react-datepicker__input-container {
-    display: block;
+@media screen and (min-width: (1+@screenSm)) {
+    .sdl-input-datepicker {
+        display: none;
+    }
+    .react-datepicker__input-container {
+        display: block;
+    }
+}
+
+@media screen and (max-width: @screenSm) {
+    .sdl-input-datepicker {
+        display: block;
+    }
+    .react-datepicker__input-container {
+        display: none;
+    }
 }
 
 .sdl-dita-delivery-datepicker {
