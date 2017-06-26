@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -55,11 +56,12 @@ public class TestModuleCacheConfiguration {
                         if (cacheEntryEvent.getValue().getClass().isAnnotationPresent(NeverCached.class)) {
                             log.error("Cached a @NeverCached annotated model: '{}'", cacheEntryEvent.getValue().getClass());
                             try {
-                                PrintWriter writer = new PrintWriter("../logs/NeverCachedException.txt", "UTF-8");
+                                String webAppRoot = new ClassPathResource(".").getFile().getAbsolutePath();
+                                PrintWriter writer = new PrintWriter(webAppRoot+"../../../NeverCachedException.jsp", "UTF-8");
                                 writer.println("This file is generated because a @NeverCached annotated model was found in cache. Check site logs for more information.");
                                 writer.close();
                             } catch (IOException e) {
-                                throw new RuntimeException("Unable to create a NeverCachedException.txt file.");
+                                throw new RuntimeException("Unable to create a NeverCachedException.jsp file.");
                             }
                             throw new CacheEntryListenerException("Cached a @NeverCached annotated model!");
                         } else {
