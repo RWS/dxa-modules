@@ -36,15 +36,14 @@ export class Comment extends LoadableObject {
     /* Overloads */
     protected _executeLoad(): void {
         const url = Api.getSaveCommentUrl();
-        const body = `${JSON.stringify(this._comment)}`;
+        const body = JSON.stringify(this._comment);
         Net.postRequest(url, body, "application/json",
             this.getDelegate(this._onLoad),
             this.getDelegate(this._onLoadFailed));
     }
 
     protected _processLoadResult(result: string, webRequest: IWebRequest): void {
-        const res = JSON.parse(result);
-        this._result = res;
+        this._result = JSON.parse(result);
         super._processLoadResult(result, webRequest);
     }
 }
