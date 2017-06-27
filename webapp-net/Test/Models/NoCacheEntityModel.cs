@@ -1,8 +1,10 @@
 ﻿using System;
+using Sdl.Web.Common;
 using Sdl.Web.Common.Models;
 
 namespace Sdl.Web.Modules.Test.Models
 {
+    [DxaNoCache]
     [SemanticEntity(EntityName = "NoCachePropertyTest", Prefix = "test", Public = true)]
     public class NoCacheEntityModel : EntityModel
     {
