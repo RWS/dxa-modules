@@ -31,7 +31,7 @@ const saving = combine(
 
 const errors = combine(
     handleAction(COMMENTS_ERROR, () => [], []),
-    handleAction(COMMENT_ERROR, () => [], [])
+    handleAction(COMMENT_ERROR, (state: string[], { pageId, error }: ICommentsErrorPayload) => Object.assign({}, state, { [pageId]: error.message }), {})
 );
 
 export const comments = combineReducers({
