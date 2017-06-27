@@ -2,10 +2,13 @@
 using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Models;
 using System.Collections.Generic;
+using Sdl.Web.Common;
 
 namespace Sdl.Web.Modules.SmartTarget.Models
 {
     [Serializable]
+    [DxaNoOutputCache]
+    [DxaNoCache]
     public class SmartTargetPromotion : EntityModel
     {
         private const string XpmMarkupFormat = "<!-- Start Promotion: {{ \"PromotionID\": \"{0}\", \"RegionID\" : \"{1}\"}} -->";

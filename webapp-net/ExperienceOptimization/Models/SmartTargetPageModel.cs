@@ -5,10 +5,13 @@ using Sdl.Web.Common.Models;
 using Tridion.SmartTarget.Query;
 using Tridion.SmartTarget.Utils;
 using System;
+using Sdl.Web.Common;
 
 namespace Sdl.Web.Modules.SmartTarget.Models
 {
     [Serializable]
+    [DxaNoOutputCache]
+    [DxaNoCache]
     public class SmartTargetPageModel : PageModelWithHttpResponseData
     {
         internal SmartTargetPageModel(PageModel pageModel) : base(pageModel.Id)

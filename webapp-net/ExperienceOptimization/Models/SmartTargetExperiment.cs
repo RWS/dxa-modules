@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Sdl.Web.Common;
 using Tridion.SmartTarget.Analytics;
 
 namespace Sdl.Web.Modules.SmartTarget.Models
 {
     [Serializable]
+    [DxaNoOutputCache]
+    [DxaNoCache]
     public class SmartTargetExperiment : SmartTargetPromotion
     {
         public ExperimentDimensions ExperimentDimensions { get; private set; }
