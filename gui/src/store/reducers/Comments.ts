@@ -42,3 +42,4 @@ export const comments = combineReducers({
 });
 
 export const getByPageId = (state: IComments, pageId: string) => pageId in state.byPageId ? state.byPageId[pageId] : ([] as IComment[]);
+export const getErrorMessage = (state: IComments, pageId: string): string => pageId in state.errors ? state.errors[pageId] : "";

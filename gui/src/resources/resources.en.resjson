@@ -17,6 +17,7 @@
   "component.post.comment.no.email": "E-mail can't be blank",
   "component.post.comment.no.content": "Comment can't be blank",
   "component.post.comment.submit": "Post comment",
+  "component.post.comment.post.error": "Oops something went wrong while trying to post your comment, try again and if the error persist please contact an administrator",
   "components.productfamilies.no.published.publications": "No publications published yet",
   "components.productfamilies.view.all": "View all products",
   "components.publicationslist.view.all": "View all publications",

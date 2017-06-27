@@ -14,7 +14,8 @@ import FetchComments from "@sdl/dd/helpers/FetchComments";
 import { CommentsList } from "@sdl/dd/CommentsList/CommentsList";
 import { IAppContext } from "@sdl/dd/container/App/App";
 import { IPageService } from "services/interfaces/PageService";
-import { PostCommentPresentation , IPostCommentPresentationState} from "@sdl/dd/PostComment/PostCommentPresentation";
+import { IPostCommentPresentationState} from "@sdl/dd/PostComment/PostCommentPresentation";
+import { PostComment} from "@sdl/dd/PostComment/PostComment";
 import { IPostComment } from "interfaces/Comments";
 
 import "components/presentation/styles/Page";
@@ -232,7 +233,7 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
                         : <article className={appClass}
                             dangerouslySetInnerHTML={{ __html: props.content || formatMessage("components.page.nothing.selected") }} />}
                 </article>
-                {!error && <PostCommentPresentation handleSubmit={handlePostComment} />}
+                {!error && <PostComment handleSubmit={handlePostComment} />}
                 {!error && <FetchComments descending={true} /> }
                 {!error && <CommentsList /> }
             </div >

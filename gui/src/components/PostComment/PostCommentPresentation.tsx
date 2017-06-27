@@ -9,6 +9,10 @@ export interface IPostCommentPresentationProps {
     handleSubmit: (event: React.FormEvent, formData: IPostCommentPresentationState) => void;
 }
 
+export interface IPostCommentPresentationDispatchProps {
+    error: string;
+}
+
 export interface IPostCommentPresentationState {
     name: string;
     email: string;
@@ -24,7 +28,8 @@ export interface IPC {
     [key: string]: boolean;
 }
 
-export class PostCommentPresentation extends React.Component<IPostCommentPresentationProps, IPostCommentPresentationState> {
+export class PostCommentPresentation extends
+    React.Component<IPostCommentPresentationProps & IPostCommentPresentationDispatchProps, IPostCommentPresentationState> {
 
     /**
      * Context types
@@ -112,6 +117,7 @@ export class PostCommentPresentation extends React.Component<IPostCommentPresent
      * @memberof PostCommentPresentation
      */
     public render(): JSX.Element {
+        const { error } = this.props;
         const {name, email, comment} = this.state;
         const { formatMessage } = this.context.services.localizationService;
         const errors: IPC = this.validateInput(name, email, comment);
@@ -172,6 +178,9 @@ export class PostCommentPresentation extends React.Component<IPostCommentPresent
                 <button type="submit" disabled={isDisabled} className="sdl-button graphene sdl-button-purpose-confirm" form="form" value="Submit">
                     {formatMessage("component.post.comment.submit")}
                 </button>
+                {error && <div className="sdl-dita-delivery-postcomment-error" >
+                    {formatMessage("component.post.comment.post.error")}
+                </div>}
             </div>
         );
     }
