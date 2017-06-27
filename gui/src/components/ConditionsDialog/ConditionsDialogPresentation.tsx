@@ -53,47 +53,45 @@ const getTitle = (props: IConditionsDialogPresentationProps) =>
         <p><I18n data="components.conditions.dialog.description" /></p>
     </div>;
 
+const changeWrapper = (name: string, condition: ICondition, change: (conditions: IConditionMap) => void) => (values: string[]) =>
+    change({
+        [name]: {
+            ...condition,
+            values: values
+        }
+    });
+
 const getConditions = (props: IConditionsDialogPresentationProps) => (
     <ol className="sdl-conditions-dialog-list">
-        {Object.keys(props.conditions)
-            .map(key => ({
-                name: key,
-                value: props.conditions[key]
-            }))
-            .map(({ name, value: condition }: IX) => (
-                <li key={name}>
-                    <label className="sdl-conditions-dialog-condition-label">{name}</label>
+        {Object.keys(props.conditions).map(key => ({
+            name: key,
+            value: props.conditions[key]
+        }))
+            .map(({ name, value: condition }: IX) => {
+                const change = changeWrapper(name, condition, props.change);
+                return (
+                    <li key={name}>
+                        <label className="sdl-conditions-dialog-condition-label">{name}</label>
 
-                    { !condition.range && <ConditionsLabelManager
-                        values={props.editingConditions[name] ? props.editingConditions[name].values : condition.values}
-                        condition={condition}
-                        onChange={(items: ILabelManagerItem[]) => {
-                            props.change({
-                                [name]: {
-                                    ...condition,
-                                    values: items.map(item => item.id)
-                                }
-                            });
-                        }}
-                    /> }
+                        {!condition.range && <ConditionsLabelManager
+                            values={props.editingConditions[name] ? props.editingConditions[name].values : condition.values}
+                            condition={condition}
+                            onChange={(items: ILabelManagerItem[]) => change(items.map(item => item.id))} />
+                        }
 
-                    { condition.range && <input className="sdl-input-text small" type="text"
-                        value={props.editingConditions[name] &&
-                            JSON.stringify(props.editingConditions[name].values) != JSON.stringify(condition.values)
-                            ? props.editingConditions[name].values[0]
-                            : ""}
-                        onChange={(evt: React.KeyboardEvent) => {
-                            let value = (evt.nativeEvent.target as HTMLInputElement).value;
-                            props.change({
-                                [name]: {
-                                    ...condition,
-                                    values: value === "" ? condition.values : [value]
-                                }
-                            });
-                        }}
-                    />}
-                </li>
-            ))
+                        {condition.range && <input className="sdl-input-text small" type="text"
+                            value={props.editingConditions[name] &&
+                                JSON.stringify(props.editingConditions[name].values) != JSON.stringify(condition.values)
+                                ? props.editingConditions[name].values[0]
+                                : ""}
+                            onChange={(evt: React.KeyboardEvent) => {
+                                const value = (evt.nativeEvent.target as HTMLInputElement).value;
+                                if (value) { change([value]); }
+                            }}
+                        />}
+                    </li>
+                );
+            })
         }
     </ol>);
 
