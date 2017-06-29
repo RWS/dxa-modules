@@ -174,10 +174,10 @@ export class PostCommentPresentation extends
                             onBlur={this.handleBlur}></textarea>
                         <span>{formatMessage("component.post.comment.no.content")}</span>
                     </div>
+                    <button type="submit" disabled={isDisabled} className="sdl-button graphene sdl-button-purpose-confirm" form="form" value="Submit">
+                        {formatMessage("component.post.comment.submit")}
+                    </button>
                 </form>
-                <button type="submit" disabled={isDisabled} className="sdl-button graphene sdl-button-purpose-confirm" form="form" value="Submit">
-                    {formatMessage("component.post.comment.submit")}
-                </button>
                 {error && <div className="sdl-dita-delivery-postcomment-error" >
                     {formatMessage("component.post.comment.post.error")}
                 </div>}
