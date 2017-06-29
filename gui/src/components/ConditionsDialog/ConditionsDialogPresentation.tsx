@@ -14,7 +14,7 @@ export interface IConditionsDialogPresentationProps {
     //unfortunatly we need pubId to pass to handlers
     pubId: string;
     isOpen: boolean;
-    conditions: IConditionMap;
+    allConditions: IConditionMap;
     editingConditions: IConditionMap;
     open: IRequestHandler;
     close: IRequestHandler;
@@ -63,9 +63,9 @@ const changeWrapper = (name: string, condition: ICondition, change: (conditions:
 
 const getConditions = (props: IConditionsDialogPresentationProps) => (
     <ol className="sdl-conditions-dialog-list">
-        {Object.keys(props.conditions).map(key => ({
+        {Object.keys(props.allConditions).map(key => ({
             name: key,
-            value: props.conditions[key]
+            value: props.allConditions[key]
         }))
             .map(({ name, value: condition }: IX) => {
                 const change = changeWrapper(name, condition, props.change);
@@ -101,7 +101,7 @@ export const ConditionsDialogPresentation = (props: IConditionsDialogPresentatio
         <button
             className="sdl-button-text sdl-personalize-content"
             onClick={props.open}
-            disabled={isEmpty(props.conditions)}>
+            disabled={isEmpty(props.allConditions)}>
             <I18n data="components.conditions.dialog.title" />
         </button>
         <Dialog
