@@ -1,6 +1,5 @@
 package com.sdl.dxa.modules.model.TSI2525;
 
-import com.sdl.dxa.caching.NeverCached;
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticEntity;
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticProperty;
 import com.sdl.webapp.common.api.model.entity.AbstractEntityModel;
@@ -12,9 +11,8 @@ import java.util.Date;
 import static com.sdl.webapp.common.api.mapping.semantic.config.SemanticVocabulary.SDL_CORE;
 
 @Data
-@NeverCached(qualifier = "NoCacheEntityModel")
 @SemanticEntity(entityName = "NoCachePropertyTest", vocabulary = SDL_CORE, prefix = "test")
-public class NoCacheEntityModel extends AbstractEntityModel {
+public class CacheEntityModel extends AbstractEntityModel {
 
     @SemanticProperty("test:textField")
     private String textField;
