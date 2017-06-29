@@ -51,15 +51,26 @@
                 }
             }
         }
+
+        > .sdl-button {
+            max-width: @inputWidth;
+            margin-left: @labelWidth;
+            margin-top: 10px;
+            .sdl-dita-delivery-app.rtl & {
+                margin-left: 0px;
+                margin-right: @labelWidth;
+            }
+        }
     }
 
-    > .sdl-button {
-        max-width: @inputWidth;
-        margin-left: @labelWidth;
-        margin-top: 10px;
-        .sdl-dita-delivery-app.rtl & {
-            margin-left: 0px;
-            margin-right: @labelWidth;
+    .sdl-dita-delivery-postcomment-error {
+        color: @accentColor7;
+        font-weight: bold;
+        margin-top: 15px;
+        &:before {
+            .import-icon-font();
+            content: @iconError;
+            margin-right: 10px;
         }
     }
 }

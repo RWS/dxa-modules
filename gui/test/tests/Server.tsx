@@ -142,10 +142,10 @@ class Server extends TestBase {
                                                 <textarea className="sdl-textarea" id="comment" placeholder="Write a comment"/>
                                                 <span>Comment can&#x27;t be blank</span>
                                             </div>
+                                            <button type="submit" disabled className="sdl-button graphene sdl-button-purpose-confirm" form="form" value="Submit">
+                                                Post comment
+                                            </button>
                                         </form>
-                                        <button type="submit" disabled className="sdl-button graphene sdl-button-purpose-confirm" form="form" value="Submit">
-                                            Post comment
-                                        </button>
                                     </div>
                                     <div className="sdl-comments-fetcher"/>
                                     <div className="sdl-dita-delivery-comments-list">

@@ -1,4 +1,4 @@
-import { IComment } from "interfaces/Comments";
+import { IComment, IPostComment } from "interfaces/Comments";
 import { Dispatch } from "redux";
 import { createAction, Action } from "redux-actions";
 import { IPageService } from "services/interfaces/PageService";
@@ -10,6 +10,7 @@ import {
     RELEASE_VERSIONS_LOADING, RELEASE_VERSIONS_LOADED,
     CONDITIONES_LOADED, CONDITIONES_LOADING, CONDITIONES_ERROR,
     COMMENTS_LOADING, COMMENTS_LOADED, COMMENTS_ERROR,
+    COMMENT_SAVING, COMMENT_ERROR, COMMENT_SAVED,
     updateCurrentPublication
 } from "./Actions";
 
@@ -64,6 +65,9 @@ export const conditionsError = createAction(CONDITIONES_ERROR, (pubId: string, e
 export const commentsLoading = createAction(COMMENTS_LOADING, (pageId: string) => pageId);
 export const commentsLoaded = createAction(COMMENTS_LOADED, (pageId: string, comments: IComment[]) => ({ pageId, comments }));
 export const commentsError = createAction(COMMENTS_ERROR, (pageId: string, error: {}) => ({ pageId, error }));
+export const commentSaving = createAction(COMMENT_SAVING, (pageId: string) => pageId);
+export const commentError = createAction(COMMENT_ERROR, (pageId: string, error: {}) => ({ pageId, error }));
+export const commentSaved = createAction(COMMENT_SAVED, (pageId: string, comment: IComment) => ({ pageId, comment }));
 
 /**
  * Publications fetcher
@@ -159,6 +163,20 @@ export const fetchComments = (pageService: IPageService, publicationId: string, 
             .then(
                 data => dispatch(commentsLoaded(pageId, data)),
                 error => dispatch(commentsError(pageId, error))
+            );
+    };
+};
+
+export const saveComment = (pageService: IPageService, commentData: IPostComment): IDispatcherFunction => {
+    const pageId = commentData.pageId;
+    return dispatch => {
+        dispatch(commentSaving(pageId));
+
+        pageService
+            .saveComment(commentData)
+            .then(
+                data => dispatch(commentSaved(pageId, data)),
+                error => dispatch(commentError(pageId, error))
             );
     };
 };

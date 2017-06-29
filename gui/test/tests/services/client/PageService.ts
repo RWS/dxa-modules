@@ -1,7 +1,7 @@
 import { PageService } from "services/client/PageService";
 import { TestBase } from "@sdl/models";
 import { IWindow } from "interfaces/Window";
-import { IComment } from "interfaces/Comments";
+import { IPostComment } from "interfaces/Comments";
 import { FakeXMLHttpRequest } from "test/mocks/XmlHttpRequest";
 
 class PageServiceTests extends TestBase {
@@ -115,13 +115,16 @@ class PageServiceTests extends TestBase {
             it("can save comment", (done: () => void): void => {
                 let fakeRequest = new FakeXMLHttpRequest("");
                 fakeRequest.status = 200;
+                fakeRequest.responseText = `{"id":0}`;
                 const spy = spyOn(window, "XMLHttpRequest").and.callFake(() => fakeRequest);
-                pageService.saveComment(publicationId, "1", {
-                    id: 0,
-                    itemPublicationId: 5,
-                    itemId: 18,
-                    content: "Comment"
-                } as IComment).then(comment => {
+                pageService.saveComment({
+                    publicationId: "1",
+                    pageId: "2",
+                    username: "tester",
+                    email: "test@sdl.com",
+                    content: "Comment",
+                    parentId: 0
+                } as IPostComment).then(comment => {
                     expect(comment).toBeDefined();
                     expect(comment.id).toBe(0);
                     expect(spy).toHaveBeenCalled();
@@ -135,12 +138,14 @@ class PageServiceTests extends TestBase {
             it("show error when save comment failed", (done: () => void): void => {
                 const failMessage = "failure-saving-comment";
                 spyOn(window, "XMLHttpRequest").and.callFake(() => new FakeXMLHttpRequest(failMessage));
-                pageService.saveComment(publicationId, "1", {
-                    id: 0,
-                    itemPublicationId: 5,
-                    itemId: 18,
-                    content: "Comment"
-                } as IComment).then(() => {
+                pageService.saveComment({
+                    publicationId: "1",
+                    pageId: "2",
+                    username: "tester",
+                    email: "test@sdl.com",
+                    content: "Comment",
+                    parentId: 0
+                } as IPostComment).then(() => {
                     fail("An error was expected.");
                     done();
                 }).catch(error => {

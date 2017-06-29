@@ -9,6 +9,11 @@ export interface ICommentsPayload {
     comments: IComment[];
 }
 
+export interface ICommentPayload {
+    pageId: string;
+    comment: IComment;
+}
+
 export interface ICommentsError {
     message: string;
 }
@@ -16,5 +21,6 @@ export interface ICommentsError {
 export interface IComments {
     byPageId: { [pageId: string]: IComment[]};
     loading: string[];
+    saving: string[];
     errors: { [pageId: string]: string };
 }
