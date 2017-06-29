@@ -48,9 +48,11 @@ export class PostCommentPresentation extends
      */
     public context: IAppContext;
 
+    private initialState: IPostCommentPresentationState;
+
     constructor() {
         super();
-        this.state = {
+        this.initialState = {
             name: "",
             email: "",
             comment: "",
@@ -60,6 +62,7 @@ export class PostCommentPresentation extends
                 comment: false
             }
         };
+        this.state = this.initialState;
 
         this.handleBlur = this.handleBlur.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -80,6 +83,7 @@ export class PostCommentPresentation extends
     public handleSubmit(event: React.FormEvent): void {
         this.props.handleSubmit(event, this.state);
         (event.nativeEvent.target as HTMLFormElement).reset();
+        this.resetState();
     }
 
     /**
@@ -183,5 +187,9 @@ export class PostCommentPresentation extends
                 </div>}
             </div>
         );
+    }
+
+    private resetState(): void {
+        this.setState(this.initialState);
     }
 }
