@@ -64,6 +64,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\CacheEntityModel.cs" />
     <Compile Include="Models\NoCacheEntityModel.cs" />
     <Compile Include="Models\CompLinkTest.cs" />
     <Compile Include="Models\NoCachePageModel.cs" />
@@ -93,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Areas\Test\Views\Entity\CacheEntity.cshtml" />
     <None Include="Areas\Test\Views\Entity\NoCacheEntity.cshtml" />
     <None Include="Areas\Test\Views\Entity\CompLinkTest.cshtml" />
     <None Include="Areas\Test\Views\Entity\TSI1757Test3.cshtml" />

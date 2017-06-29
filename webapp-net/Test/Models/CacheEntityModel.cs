@@ -4,10 +4,8 @@ using Sdl.Web.Common.Models;
 
 namespace Sdl.Web.Modules.Test.Models
 {
-    [DxaNoCache]
-    [DxaNoOutputCache]
     [SemanticEntity(EntityName = "NoCachePropertyTest", Prefix = "test", Public = true)]
-    public class NoCacheEntityModel : EntityModel
+    public class CacheEntityModel : EntityModel
     {
         [SemanticProperty("test:textField")]
         public string Text
