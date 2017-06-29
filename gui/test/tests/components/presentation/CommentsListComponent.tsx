@@ -66,7 +66,7 @@ class CommentsListComponent extends TestBase {
                 const renderedComments = commentsListNode.querySelectorAll(".sdl-dita-delivery-comment");
 
                 expect(commentsList).not.toBeNull;
-                title ? expect(title.textContent).toBe(`mock-components.commentslist.comments (${comments.length})`) : expect(title).not.toBeNull();
+                title ? expect(title.textContent).toBe(`mock-components.commentslist.comments${comments.length}`) : expect(title).not.toBeNull();
                 expect(renderedComments.length).toBe(1);
             });
 

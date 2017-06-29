@@ -12,6 +12,8 @@
   "components.publicationslist.view.all": "Alle publicaties weergeven",
   "components.conditions.dialog.title": "Personaliseren van content",
   "component.post.comment.post.error": "Oeps, er is iets fout gegaan tijdens het proberen om uw reactie te plaatsen, probeer het opnieuw en als de fout blijft bestaan, neem dan contact op met een beheerder",
+  "component.comments.list.more": "Meer reacties laden",
+  "component.comments.list.amount": "Weergeven {0} van {1} opmerkingen",
   "control.button.retry": "Opnieuw proberen",
   "error.default.message": "Als deze foutmelding nog steeds wordt weergegeven, klikt u op een van de koppelingen hieronder om naar de startpagina te gaan of de documentatie te zoeken die u nodig hebt.",
   "error.default.title": "Er is iets misgegaan.",
