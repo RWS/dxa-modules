@@ -60,7 +60,7 @@ export class CommentsListPresentation extends React.Component<ICommentsListProps
 
         return (
             <div className="sdl-dita-delivery-comments-list">
-                {totalCommentsCount > 0 && <span>{formatMessage("components.commentslist.comments", [displayedCommentsCount.toString()])}</span>}
+                {totalCommentsCount > 0 && <span>{formatMessage("components.commentslist.comments", [totalCommentsCount.toString()])}</span>}
                 {displayedComments.map((comment, index) => {
                     return <Comment key={comment.id} userName={comment.user.name} creationDate={calcCreationDate(comment.creationDate)} content={comment.content} />;
                 })}
