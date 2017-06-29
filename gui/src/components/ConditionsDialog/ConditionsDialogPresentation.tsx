@@ -86,7 +86,7 @@ const getConditions = (props: IConditionsDialogPresentationProps) => (
                                 : ""}
                             onChange={(evt: React.KeyboardEvent) => {
                                 const value = (evt.nativeEvent.target as HTMLInputElement).value;
-                                if (value) { change([value]); }
+                                change(value === "" ? condition.values : [value]);
                             }}
                         />}
                     </li>
