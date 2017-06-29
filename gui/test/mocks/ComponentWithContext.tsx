@@ -3,11 +3,13 @@ import { IServices } from "interfaces/Services";
 import { PageService } from "test/mocks/services/PageService";
 import { PublicationService } from "test/mocks/services/PublicationService";
 import { TaxonomyService } from "test/mocks/services/TaxonomyService";
+import { SearchService } from "test/mocks/services/SearchService";
 import { localization } from "test/mocks/services/LocalizationService";
 import { IPageService } from "services/interfaces/PageService";
 import { ILocalizationService } from "services/interfaces/LocalizationService";
 import { IPublicationService } from "services/interfaces/PublicationService";
 import { ITaxonomyService } from "services/interfaces/TaxonomyService";
+import { ISearchService } from "services/interfaces/SearchService";
 
 export interface IComponentWithContextContext {
     services: IServices;
@@ -19,6 +21,7 @@ export interface IComponentWithContextProps {
     pageService?: IPageService;
     publicationService?: IPublicationService;
     taxonomyService?: ITaxonomyService;
+    searchService?: ISearchService;
 }
 
 export interface IRouter {
@@ -38,7 +41,8 @@ const services: IServices = {
     pageService: new PageService(),
     publicationService: new PublicationService(),
     localizationService: localization,
-    taxonomyService: new TaxonomyService()
+    taxonomyService: new TaxonomyService(),
+    searchService: new SearchService()
 };
 
 export class ComponentWithContext extends React.Component<IComponentWithContextProps, {}> {
@@ -55,14 +59,15 @@ export class ComponentWithContext extends React.Component<IComponentWithContextP
     public context: IComponentWithContextContext;
 
     public getChildContext(): IComponentWithContextContext {
-        const { pageService, localizationService, publicationService, taxonomyService } = this.props;
+        const { pageService, localizationService, publicationService, taxonomyService, searchService } = this.props;
         let pathname = "";
         return {
             services: {
                 pageService: pageService || services.pageService,
                 localizationService: localizationService || services.localizationService,
                 publicationService: publicationService || services.publicationService,
-                taxonomyService: taxonomyService || services.taxonomyService
+                taxonomyService: taxonomyService || services.taxonomyService,
+                searchService: searchService || services.searchService
             },
             router: this.context.router || {
                 listen: (): void => { },

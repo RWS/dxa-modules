@@ -1,0 +1,81 @@
+[{
+    "Id": "ish_1176127-164155-16",
+    "Name": "udp-content-default",
+    "ItemType": "page",
+    "Fields": {
+      "FTITLE.logical.value": "connectors overview",
+      "ishlogicalref.object.id": 164151,
+      "FAUTHOR.lng.value": "admin",
+      "VERSION.version.value": "1",
+      "FDESCRIPTION.logical.value": "",
+      "ishtype.object.value": "ISHModule",
+      "ishversionref.object.id": 164152,
+      "CREATED-ON.lng.value": "2015-12-22T18:26:40Z",
+      "ishref.object.value": "GUID-03AB2EA1-F81B-4A22-8149-710094BE1081",
+      "FCHANGES.version.value": "Change1",
+      "MODIFIED-ON.lng.value": "2016-05-27T08:08:10Z",
+      "DOC-LANGUAGE.lng.value": [
+        "en"
+      ],
+      "READ-ACCESS.logical.element": null,
+      "FISHREVCOUNTER.lng.value": "2",
+      "ishlngref.object.id": 164155,
+      "ED.lng.value": "GUID-C10CD0F6-3EE9-40B6-9BBE-0FC3A225096E",
+      "FISHRELEASELABEL.version.value": [
+        "Publication MP330-v1-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2012/09/21 12:27:01",
+        "Publication MP330-v2-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2012/09/24 17:31:39",
+        "Publication MP660-v1-GUID-EB2E82F1-1C76-4032-815C-4E717140A081-2012/09/24 14:57:38",
+        "Publication MP660-v2-GUID-EB2E82F1-1C76-4032-815C-4E717140A081-2012/09/24 17:09:12",
+        "Publication MP330-v3-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2016/02/11 10:42:22"
+      ],
+      "FUSERGROUP.logical.element": null,
+      "FSTATUS.lng.value": "Released",
+      "publicationtitle.generated.value": "Publication MP330"
+    },
+    "Locale": "en",
+    "Highlighted": {
+
+    },
+    "Content": "Connectors overview Connectors overview Charger connector Connector for headsets, the connectivity cable and loopset Audio line-in connector for the audio cable to connect the phone to external audio equipment "
+  },
+  {
+    "Id": "ish_1176127-164163-16",
+    "Name": "udp-content-default",
+    "ItemType": "page",
+    "Fields": {
+      "FTITLE.logical.value": "listening to the radio",
+      "ishlogicalref.object.id": 164159,
+      "FAUTHOR.lng.value": "admin",
+      "VERSION.version.value": "1",
+      "FDESCRIPTION.logical.value": "",
+      "ishtype.object.value": "ISHModule",
+      "ishversionref.object.id": 164160,
+      "CREATED-ON.lng.value": "2015-12-22T18:26:42Z",
+      "ishref.object.value": "GUID-0B4A7CB0-DF4C-4753-B283-9F5F5FEA0D0E",
+      "FCHANGES.version.value": "Change1",
+      "MODIFIED-ON.lng.value": "2016-05-27T08:08:10Z",
+      "DOC-LANGUAGE.lng.value": [
+        "en"
+      ],
+      "READ-ACCESS.logical.element": null,
+      "FISHREVCOUNTER.lng.value": "2",
+      "ishlngref.object.id": 164163,
+      "ED.lng.value": "GUID-245074EA-6850-4B35-B8FD-094E20C48F7A",
+      "FISHRELEASELABEL.version.value": [
+        "Publication MP330-v1-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2012/09/21 12:27:01",
+        "Publication MP330-v2-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2012/09/24 17:31:39",
+        "Publication MP660-v1-GUID-EB2E82F1-1C76-4032-815C-4E717140A081-2012/09/24 14:57:38",
+        "Publication MP660-v2-GUID-EB2E82F1-1C76-4032-815C-4E717140A081-2012/09/24 17:09:12",
+        "Publication MP330-v3-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2016/02/11 10:42:22"
+      ],
+      "FUSERGROUP.logical.element": null,
+      "FSTATUS.lng.value": "Released",
+      "publicationtitle.generated.value": "Publication MP330"
+    },
+    "Locale": "en",
+    "Highlighted": {
+
+    },
+    "Content": "Listening to the radio Listening to the radio To listen to the radio on your phone connect a compatible headset to the phone. The lead of the headset functions as the antenna of the radio, so let it hang freely. Press the Music key and select Radio. To tune a channel, press and hold or and the channel search starts. Searching stops when a channel is found. "
+  }
+]

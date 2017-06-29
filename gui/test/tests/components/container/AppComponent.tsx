@@ -8,6 +8,7 @@ import { TestBase } from "@sdl/models";
 import { PageService } from "test/mocks/services/PageService";
 import { PublicationService } from "test/mocks/services/PublicationService";
 import { TaxonomyService } from "test/mocks/services/TaxonomyService";
+import { SearchService } from "test/mocks/services/SearchService";
 import { localization } from "test/mocks/services/LocalizationService";
 import { hashHistory } from "react-router";
 import { isPage } from "utils/Page";
@@ -22,7 +23,8 @@ const services = {
     pageService: new PageService(),
     publicationService: new PublicationService,
     localizationService: localization,
-    taxonomyService: new TaxonomyService()
+    taxonomyService: new TaxonomyService(),
+    searchService: new SearchService()
 };
 const PUB_ID_WITH_PAGE = "111-222-333-444";
 const PUB_ID_NO_PAGE = "555-666-777-888";

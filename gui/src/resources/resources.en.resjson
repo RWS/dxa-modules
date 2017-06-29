@@ -49,5 +49,8 @@
   "productreleaseversions.version.label": "Version:",
   "warning.change.language": "Switch",
   "warning.different.language.content": "Language of the shown publication is {0}. It's also available in your language: {1}.",
-  "warning.no.content": "Content of this publication is not available in selected language: {0}"
+  "warning.no.content": "Content of this publication is not available in selected language: {0}",
+  "search.results": "Search results",
+  "search.publication.results": "Search results for",
+  "search.count": "{0} results"
 }

@@ -32,5 +32,8 @@
   "productfamilies.unknown.title": "Onbekend product",
   "productfamilies.unknown.description": "Publicaties die nog niet aan een specifiek product zijn gekoppeld",
   "productreleaseversions.unknown.title": "Onbekende productversie",
-  "productreleaseversions.version.label": "Versie:"
+  "productreleaseversions.version.label": "Versie:",
+  "search.results": "Zoekresultaten",
+  "search.publication.results": "Zoekresultaten voor",
+  "search.count": "{0} uitslagen"
 }

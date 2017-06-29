@@ -46,6 +46,11 @@ const EMPTY_STATE: IState = {
     },
     releaseVersions: {
         byProductFamily: {}
+    },
+    searchResults: {
+        bySearchQuery: {},
+        loading: [],
+        errors: {}
     }
 };
 

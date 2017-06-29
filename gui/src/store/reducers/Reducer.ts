@@ -14,10 +14,13 @@ import { IPublicationsListPropsParams } from "@sdl/dd/PublicationsList/Publicati
 import { IConditionMap } from "store/interfaces/Conditions";
 import * as Comments from "./Comments";
 import { IComment } from "interfaces/Comments";
+import * as Search from "./Search";
+import { ISearchQuery, ISearchResult } from "interfaces/Search";
 
 export const mainReducer = combineReducers({
     conditions,
     comments: Comments.comments,
+    searchResults: Search.results,
     language: Language.language,
     pages: Pages.pages,
     publication: Publication.publication,
@@ -71,3 +74,16 @@ export const translateProductReleaseVersions = (versions: IProductReleaseVersion
 
 // Comments selectors
 export const getCommentsByPageId = (state: IState, pageId: string): IComment[] => Comments.getByPageId(state.comments, pageId);
+
+// Search selectors
+export const getSearchQueryKey = (query: ISearchQuery): string =>
+    `${query.publicationId}::${query.language}::${query.searchQuery}`;
+
+export const getSearchBySearchQuery = (state: IState, query: ISearchQuery): ISearchResult[] =>
+    Search.getBySearchQueryKey(state.searchResults, getSearchQueryKey(query));
+
+export const getSearchErrorMessage = (state: IState, query: ISearchQuery): string | undefined =>
+    Search.getSearchErrorMessage(state.searchResults, getSearchQueryKey(query));
+
+export const isSearchLoading = (state: IState, query: ISearchQuery): boolean =>
+    Search.isSearchLoading(state.searchResults, getSearchQueryKey(query));

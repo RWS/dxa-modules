@@ -170,4 +170,23 @@ export class Api {
             return path.getAbsolutePath(`api/comments/${encodedPubId}/${encodedPageId}`);
         }
     }
+
+    /**
+     * Get search url
+     * Use this url to search content
+     *
+     * @static
+     * @returns {string}
+     *
+     * @memberof Api
+     */
+    public static getSearchUrl(): string {
+        /* istanbul ignore else */
+        if (mocksEnabled()) {
+            // Get all comments for a page without any filtering
+            return path.getAbsolutePath(`${mocksEndPoint}/search.json`);
+        } else {
+            return path.getAbsolutePath("api/search");
+        }
+    }
 }
