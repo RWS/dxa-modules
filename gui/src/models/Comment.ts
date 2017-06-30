@@ -1,6 +1,7 @@
 import { Api } from "utils/Api";
 import { Net, IWebRequest, LoadableObject } from "@sdl/models";
-import { IPostComment, IComment } from "interfaces/Comments";
+import { IPostComment } from "interfaces/Comments";
+import { IComment } from "interfaces/ServerModels";
 
 export class Comment extends LoadableObject {
     private _comment: IPostComment;

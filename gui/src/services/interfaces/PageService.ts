@@ -1,4 +1,5 @@
-import { IComment, IPostComment } from "interfaces/Comments";
+import { IPostComment } from "interfaces/Comments";
+import { IComment } from "interfaces/ServerModels";
 import { IPage } from "interfaces/Page";
 import { Promise } from "es6-promise";
 import { IConditionMap } from "store/interfaces/Conditions";

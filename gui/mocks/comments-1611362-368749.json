@@ -1,6 +1,6 @@
 [
   {
-    "id": 46550,
+    "id": 28485,
     "namespaceId": 0,
     "itemPublicationId": 1611362,
     "itemId": 368749,
@@ -8,21 +8,43 @@
     "score": 0,
     "status": 0,
     "creationDate": {
-      "dayOfMonth": 3,
-      "hour": 22,
-      "minute": 48,
+      "dayOfMonth": 19,
+      "hour": 1,
+      "minute": 3,
       "month": "",
-      "monthValue": 2,
+      "monthValue": 6,
       "nano": 0,
-      "second": 21,
-      "year": 2010,
+      "second": 40,
+      "year": 2005,
       "dayOfWeek": "",
-      "dayOfYear": 277
+      "dayOfYear": 122
     },
-    "lastModifiedDate": null,
-    "content": "Test comment with some content. Id of this comment is 46550.",
+    "lastModifiedDate": {
+      "dayOfMonth": 19,
+      "hour": 1,
+      "minute": 3,
+      "month": "",
+      "monthValue": 6,
+      "nano": 0,
+      "second": 40,
+      "year": 2005,
+      "dayOfWeek": "",
+      "dayOfYear": 122
+    },
+    "content": "Test comment with some content. Id of this comment is 28485.",
     "moderator": null,
-    "moderatedDate": null,
+    "moderatedDate": {
+      "dayOfMonth": 19,
+      "hour": 1,
+      "minute": 3,
+      "month": "",
+      "monthValue": 6,
+      "nano": 0,
+      "second": 40,
+      "year": 2005,
+      "dayOfWeek": "",
+      "dayOfYear": 122
+    },
     "parentId": 0,
     "parent": null,
     "children": null,
@@ -32,41 +54,6 @@
       "emailAddress": "user1@sdl.com",
       "externalId": null
     },
-    "idLong": 46550
-  },
-  {
-    "id": 21187,
-    "namespaceId": 0,
-    "itemPublicationId": 1611362,
-    "itemId": 368749,
-    "itemType": 64,
-    "score": 0,
-    "status": 0,
-    "creationDate": {
-      "dayOfMonth": 2,
-      "hour": 2,
-      "minute": 35,
-      "month": "",
-      "monthValue": 9,
-      "nano": 0,
-      "second": 27,
-      "year": 2003,
-      "dayOfWeek": "",
-      "dayOfYear": 85
-    },
-    "lastModifiedDate": null,
-    "content": "Test comment with some content. Id of this comment is 21187.",
-    "moderator": null,
-    "moderatedDate": null,
-    "parentId": 0,
-    "parent": null,
-    "children": null,
-    "user": {
-      "id": 2,
-      "name": "user 2",
-      "emailAddress": "user2@sdl.com",
-      "externalId": null
-    },
-    "idLong": 21187
+    "idLong": 28485
   }
 ]

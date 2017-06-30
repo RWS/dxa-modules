@@ -1,6 +1,6 @@
 [
   {
-    "id": 11085,
+    "id": 25287,
     "namespaceId": 0,
     "itemPublicationId": 1881665,
     "itemId": 164341,
@@ -8,56 +8,43 @@
     "score": 0,
     "status": 0,
     "creationDate": {
-      "dayOfMonth": 21,
-      "hour": 2,
-      "minute": 20,
+      "dayOfMonth": 18,
+      "hour": 17,
+      "minute": 21,
       "month": "",
-      "monthValue": 2,
+      "monthValue": 6,
       "nano": 0,
-      "second": 55,
-      "year": 2011,
+      "second": 33,
+      "year": 2015,
       "dayOfWeek": "",
-      "dayOfYear": 209
+      "dayOfYear": 19
     },
-    "lastModifiedDate": null,
-    "content": "Test comment with some content. Id of this comment is 11085.",
-    "moderator": null,
-    "moderatedDate": null,
-    "parentId": 0,
-    "parent": null,
-    "children": null,
-    "user": {
-      "id": 2,
-      "name": "user 2",
-      "emailAddress": "user2@sdl.com",
-      "externalId": null
-    },
-    "idLong": 11085
-  },
-  {
-    "id": 2924,
-    "namespaceId": 0,
-    "itemPublicationId": 1881665,
-    "itemId": 164341,
-    "itemType": 64,
-    "score": 0,
-    "status": 0,
-    "creationDate": {
-      "dayOfMonth": 6,
-      "hour": 1,
-      "minute": 36,
+    "lastModifiedDate": {
+      "dayOfMonth": 18,
+      "hour": 17,
+      "minute": 21,
       "month": "",
-      "monthValue": 8,
+      "monthValue": 6,
       "nano": 0,
-      "second": 22,
-      "year": 2003,
+      "second": 33,
+      "year": 2015,
       "dayOfWeek": "",
-      "dayOfYear": 170
+      "dayOfYear": 19
     },
-    "lastModifiedDate": null,
-    "content": "Test comment with some content. Id of this comment is 2924.",
+    "content": "Test comment with some content. Id of this comment is 25287.",
     "moderator": null,
-    "moderatedDate": null,
+    "moderatedDate": {
+      "dayOfMonth": 18,
+      "hour": 17,
+      "minute": 21,
+      "month": "",
+      "monthValue": 6,
+      "nano": 0,
+      "second": 33,
+      "year": 2015,
+      "dayOfWeek": "",
+      "dayOfYear": 19
+    },
     "parentId": 0,
     "parent": null,
     "children": null,
@@ -67,10 +54,10 @@
       "emailAddress": "user1@sdl.com",
       "externalId": null
     },
-    "idLong": 2924
+    "idLong": 25287
   },
   {
-    "id": 87561,
+    "id": 13553,
     "namespaceId": 0,
     "itemPublicationId": 1881665,
     "itemId": 164341,
@@ -78,21 +65,43 @@
     "score": 0,
     "status": 0,
     "creationDate": {
-      "dayOfMonth": 5,
-      "hour": 3,
-      "minute": 45,
+      "dayOfMonth": 23,
+      "hour": 13,
+      "minute": 22,
       "month": "",
-      "monthValue": 1,
+      "monthValue": 11,
       "nano": 0,
-      "second": 57,
-      "year": 2012,
+      "second": 20,
+      "year": 2014,
       "dayOfWeek": "",
-      "dayOfYear": 231
+      "dayOfYear": 18
     },
-    "lastModifiedDate": null,
-    "content": "Test comment with some content. Id of this comment is 87561.",
+    "lastModifiedDate": {
+      "dayOfMonth": 23,
+      "hour": 13,
+      "minute": 22,
+      "month": "",
+      "monthValue": 11,
+      "nano": 0,
+      "second": 20,
+      "year": 2014,
+      "dayOfWeek": "",
+      "dayOfYear": 18
+    },
+    "content": "Test comment with some content. Id of this comment is 13553.",
     "moderator": null,
-    "moderatedDate": null,
+    "moderatedDate": {
+      "dayOfMonth": 23,
+      "hour": 13,
+      "minute": 22,
+      "month": "",
+      "monthValue": 11,
+      "nano": 0,
+      "second": 20,
+      "year": 2014,
+      "dayOfWeek": "",
+      "dayOfYear": 18
+    },
     "parentId": 0,
     "parent": null,
     "children": null,
@@ -102,111 +111,6 @@
       "emailAddress": "user1@sdl.com",
       "externalId": null
     },
-    "idLong": 87561
-  },
-  {
-    "id": 9398,
-    "namespaceId": 0,
-    "itemPublicationId": 1881665,
-    "itemId": 164341,
-    "itemType": 64,
-    "score": 0,
-    "status": 0,
-    "creationDate": {
-      "dayOfMonth": 27,
-      "hour": 14,
-      "minute": 41,
-      "month": "",
-      "monthValue": 4,
-      "nano": 0,
-      "second": 46,
-      "year": 2006,
-      "dayOfWeek": "",
-      "dayOfYear": 21
-    },
-    "lastModifiedDate": null,
-    "content": "Test comment with some content. Id of this comment is 9398.",
-    "moderator": null,
-    "moderatedDate": null,
-    "parentId": 0,
-    "parent": null,
-    "children": null,
-    "user": {
-      "id": 1,
-      "name": "user 1",
-      "emailAddress": "user1@sdl.com",
-      "externalId": null
-    },
-    "idLong": 9398
-  },
-  {
-    "id": 48836,
-    "namespaceId": 0,
-    "itemPublicationId": 1881665,
-    "itemId": 164341,
-    "itemType": 64,
-    "score": 0,
-    "status": 0,
-    "creationDate": {
-      "dayOfMonth": 29,
-      "hour": 11,
-      "minute": 13,
-      "month": "",
-      "monthValue": 3,
-      "nano": 0,
-      "second": 16,
-      "year": 2012,
-      "dayOfWeek": "",
-      "dayOfYear": 78
-    },
-    "lastModifiedDate": null,
-    "content": "Test comment with some content. Id of this comment is 48836.",
-    "moderator": null,
-    "moderatedDate": null,
-    "parentId": 0,
-    "parent": null,
-    "children": null,
-    "user": {
-      "id": 2,
-      "name": "user 2",
-      "emailAddress": "user2@sdl.com",
-      "externalId": null
-    },
-    "idLong": 48836
-  },
-  {
-    "id": 58473,
-    "namespaceId": 0,
-    "itemPublicationId": 1881665,
-    "itemId": 164341,
-    "itemType": 64,
-    "score": 0,
-    "status": 0,
-    "creationDate": {
-      "dayOfMonth": 13,
-      "hour": 14,
-      "minute": 32,
-      "month": "",
-      "monthValue": 4,
-      "nano": 0,
-      "second": 38,
-      "year": 2004,
-      "dayOfWeek": "",
-      "dayOfYear": 123
-    },
-    "lastModifiedDate": null,
-    "content": "Test comment with some content. Id of this comment is 58473.",
-    "moderator": null,
-    "moderatedDate": null,
-    "parentId": 0,
-    "parent": null,
-    "children": null,
-    "user": {
-      "id": 1,
-      "name": "user 1",
-      "emailAddress": "user1@sdl.com",
-      "externalId": null
-    },
-    "idLong": 58473
+    "idLong": 13553
   }
 ]

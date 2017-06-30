@@ -1,4 +1,5 @@
-import { IComment, IPostComment } from "interfaces/Comments";
+import { IPostComment } from "interfaces/Comments";
+import { IComment } from "interfaces/ServerModels";
 import { IPageService } from "services/interfaces/PageService";
 import { IPage } from "interfaces/Page";
 import { Page } from "models/Page";

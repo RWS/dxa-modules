@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { ICommentsListProps, CommentsListPresentation } from "@sdl/dd/CommentsList/CommentsListPresentation";
-import { IComment, IUser, ICommentDate } from "interfaces/Comments";
+import { IComment, IUser, ICommentDate } from "interfaces/ServerModels";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 import { TestBase } from "@sdl/models";
 
@@ -53,7 +53,18 @@ class CommentsListComponent extends TestBase {
                     } as ICommentDate,
                     content: "Test comment",
                     moderator: "",
-                    moderatedDate: "15.06.2017",
+                    moderatedDate: {
+                        dayOfMonth: 26,
+                        hour: 10,
+                        minute: 35,
+                        month: "JUNE",
+                        monthValue: 6,
+                        nano: 0,
+                        second: 39,
+                        year: 2017,
+                        dayOfWeek: "MONDAY",
+                        dayOfYear: 177
+                    } as ICommentDate,
                     parentId: 0,
                     parent: {} as IComment,
                     children: [],

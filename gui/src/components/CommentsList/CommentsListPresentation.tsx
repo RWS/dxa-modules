@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Comment } from "@sdl/dd/Comment/Comment";
-import { IComment, ICommentDate } from "interfaces/Comments";
+import { IComment, ICommentDate } from "interfaces/ServerModels";
 import { IAppContext } from "@sdl/dd/container/App/App";
 
 import "@sdl/dd/CommentsList/styles/CommentsList";
