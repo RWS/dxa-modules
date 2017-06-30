@@ -20,7 +20,7 @@ class CommentsListComponent extends TestBase {
             const totalComments = 7;
             const createComment = (): IComment => {
                 return {
-                    id: parseInt(`${Math.random() * 1000}`),
+                    id: parseInt(`${Math.random() * 1000}`, 10),
                     namespaceId: 1,
                     itemPublicationId: 1,
                     itemId: 1,
@@ -60,7 +60,7 @@ class CommentsListComponent extends TestBase {
                     user: user,
                     idLong: 0
                 } as IComment;
-            }
+            };
 
             const comments: IComment[] = [];
             for (let i = 0; i < totalComments; i++) {
