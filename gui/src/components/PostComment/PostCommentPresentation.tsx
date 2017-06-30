@@ -6,7 +6,7 @@ import { IAppContext } from "@sdl/dd/container/App/App";
 import * as ClassNames from "classnames";
 
 export interface IPostCommentPresentationProps {
-    handleSubmit: (event: React.FormEvent, formData: IPostCommentPresentationState) => void;
+    handleSubmit: (event: React.FormEvent<HTMLFormElement>, formData: IPostCommentPresentationState) => void;
 }
 
 export interface IPostCommentPresentationDispatchProps {
@@ -71,18 +71,18 @@ export class PostCommentPresentation extends
 
     /**
      *
-     * @param {React.KeyboardEvent} event
+     * @param {React.ChangeEvent} event
      *
      * @memberof PostCommentPresentation
      */
-    public handleChange(event: React.KeyboardEvent): void {
-        const htmlElement = event.nativeEvent.target as HTMLInputElement;
+    public handleChange(event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>): void {
+        const htmlElement = event.currentTarget;
         this.setState({ ...this.state, [htmlElement.getAttribute("id") as string]: htmlElement.value });
     }
 
-    public handleSubmit(event: React.FormEvent): void {
+    public handleSubmit(event: React.FormEvent<HTMLFormElement>): void {
         this.props.handleSubmit(event, this.state);
-        (event.nativeEvent.target as HTMLFormElement).reset();
+        event.currentTarget.reset();
         this.resetState();
     }
 
@@ -109,8 +109,8 @@ export class PostCommentPresentation extends
      *
      * @memberof PostCommentPresentation
      */
-    public handleBlur(event: React.FocusEvent): void {
-        const field = (event.nativeEvent.target as HTMLInputElement).getAttribute("id") as string;
+    public handleBlur(event: React.FocusEvent<HTMLElement>): void {
+        const field = event.currentTarget.getAttribute("id") as string;
         this.setState({...this.state, edited: { ...this.state.edited, [field]: true }});
     }
 

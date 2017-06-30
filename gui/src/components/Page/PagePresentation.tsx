@@ -176,7 +176,7 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
         }
     }
 
-    public handlePostComment = (event: React.FormEvent, data: IPostCommentPresentationState): void => {
+    public handlePostComment = (event: React.FormEvent<HTMLFormElement>, data: IPostCommentPresentationState): void => {
         const { pageService } = this.context.services;
         const { name, email, comment } = data;
         const props = this.props;
