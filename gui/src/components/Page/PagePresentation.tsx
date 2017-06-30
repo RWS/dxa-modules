@@ -211,9 +211,9 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
                         : <article className={appClass}
                             dangerouslySetInnerHTML={{ __html: props.content || formatMessage("components.page.nothing.selected") }} />}
                 </article>
-                {!error && <FetchComments descending={true} /> }
-                {!error && <CommentsList /> }
-            </div >
+                {!error && <FetchComments descending={true} />}
+                {!error && <CommentsList />}
+            </div>
         );
     }
 
