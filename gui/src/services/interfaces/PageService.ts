@@ -1,4 +1,4 @@
-import { IComment } from "interfaces/Comments";
+import { IComment, IPostComment } from "interfaces/Comments";
 import { IPage } from "interfaces/Page";
 import { Promise } from "es6-promise";
 import { IConditionMap } from "store/interfaces/Conditions";
@@ -33,4 +33,16 @@ export interface IPageService {
      * @memberof IPageService
      */
     getComments(publicationId: string, pageId: string, descending: boolean, top: number, skip: number, status: number[]): Promise<IComment[]>;
+
+    /**
+     * Save page comment
+     *
+     * @param {string} publicationId
+     * @param {string} pageId
+     * @param {IComment} comment
+     * @returns {Promise<IComment>}
+     *
+     * @memberof IPageService
+     */
+    saveComment(comment: IPostComment): Promise<IComment>;
 }

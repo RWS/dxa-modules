@@ -1,4 +1,4 @@
-import { IComment } from "interfaces/Comments";
+import { IComment, IPostComment } from "interfaces/Comments";
 import { IPageService } from "services/interfaces/PageService";
 import { IPage } from "interfaces/Page";
 import { Promise } from "es6-promise";
@@ -58,6 +58,25 @@ export class PageService implements IPageService {
             return Promise.reject(error);
         } else {
             return Promise.resolve(values);
+        }
+    }
+
+    /**
+     * Save page comment
+     *
+     * @param {string} publicationId
+     * @param {string} pageId
+     * @param {IComment} comment
+     * @returns {Promise<IComment[]>}
+     *
+     * @memberof IPageService
+     */
+    public saveComment(comment: IPostComment): Promise<IComment> {
+        const { error, values } = this._mockDataComments;
+        if (error) {
+            return Promise.reject(error);
+        } else {
+            return Promise.resolve(values[0]);
         }
     }
 

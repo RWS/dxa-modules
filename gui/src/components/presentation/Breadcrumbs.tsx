@@ -307,6 +307,7 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
             breadCrumbs.push(
                 <li className="dd-selector" key={lindex++} data-items={itemsToRender.length}>
                     <Dropdown
+                        placeHolder={`${itemsToRender.length}`}
                         items={itemsToRender.map(toDropdownFormat)}
                         onChange={(url: string) => {
                             if (browserHistory) {

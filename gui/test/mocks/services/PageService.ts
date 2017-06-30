@@ -1,7 +1,7 @@
 import { IPageService } from "services/interfaces/PageService";
 import { IPage } from "interfaces/Page";
 import { Promise } from "es6-promise";
-import { IComment } from "interfaces/Comments";
+import { IComment, IPostComment } from "interfaces/Comments";
 
 let fakeDelay = false;
 const DELAY = 100;
@@ -69,6 +69,28 @@ export class PageService implements IPageService {
                 return Promise.reject(error);
             } else {
                 return Promise.resolve(values);
+            }
+        }
+    }
+
+    public saveComment(data: IPostComment): Promise<IComment> {
+        const { error, values } = this._mockDataComments;
+        if (fakeDelay) {
+            return new Promise((resolve: (value?: IComment)  => void, reject: (error: string | null) => void) => {
+                setTimeout((): void => {
+                    if (error) {
+                        reject(error);
+                    }
+                    else {
+                        resolve(values[0]);
+                    }
+                }, DELAY);
+            });
+        } else {
+            if (error) {
+                return Promise.reject(error);
+            } else {
+                return Promise.resolve(values[0]);
             }
         }
     }
