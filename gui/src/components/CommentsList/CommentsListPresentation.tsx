@@ -15,6 +15,7 @@ export interface ICommentsListState {
 
 const DEFAULT_AMOUNT: number = 5;
 const INCREMENT: number = 10;
+const DATE_OPTIONS = { year: "numeric", month: "long", day: "numeric" };
 
 export class CommentsListPresentation extends React.Component<ICommentsListProps, ICommentsListState> {
     /**
@@ -49,8 +50,7 @@ export class CommentsListPresentation extends React.Component<ICommentsListProps
         let { showComments } = this.state;
 
         const calcCreationDate = (dateObject: ICommentDate): string => {
-            var options = { year: "numeric", month: "long", day: "numeric" };
-            const date = new Date(dateObject.year, dateObject.monthValue, dateObject.dayOfMonth).toLocaleString(getLanguage(), options);
+            const date = new Date(dateObject.year, dateObject.monthValue, dateObject.dayOfMonth).toLocaleString(getLanguage(), DATE_OPTIONS);
             return date;
         };
 
