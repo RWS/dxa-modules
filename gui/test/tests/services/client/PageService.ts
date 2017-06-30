@@ -4,6 +4,10 @@ import { IWindow } from "interfaces/Window";
 import { IPostComment } from "interfaces/Comments";
 import { FakeXMLHttpRequest } from "test/mocks/XmlHttpRequest";
 
+interface IXMLHttpRequestWindow extends Window {
+    XMLHttpRequest: {};
+}
+
 class PageServiceTests extends TestBase {
 
     public runTests(): void {
@@ -116,7 +120,7 @@ class PageServiceTests extends TestBase {
                 let fakeRequest = new FakeXMLHttpRequest("");
                 fakeRequest.status = 200;
                 fakeRequest.responseText = `{"id":0}`;
-                const spy = spyOn(XMLHttpRequest.prototype, "open").and.callFake(() => fakeRequest);
+                const spy = spyOn(window as IXMLHttpRequestWindow, "XMLHttpRequest").and.callFake(() => fakeRequest);
                 pageService.saveComment({
                     publicationId: "1",
                     pageId: "2",
@@ -137,7 +141,7 @@ class PageServiceTests extends TestBase {
 
             it("show error when save comment failed", (done: () => void): void => {
                 const failMessage = "failure-saving-comment";
-                spyOn(XMLHttpRequest.prototype, "open").and.callFake(() => new FakeXMLHttpRequest(failMessage));
+                spyOn(window as IXMLHttpRequestWindow, "XMLHttpRequest").and.callFake(() => new FakeXMLHttpRequest(failMessage));
                 pageService.saveComment({
                     publicationId: "1",
                     pageId: "2",
