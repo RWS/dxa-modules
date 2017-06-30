@@ -1,15 +1,26 @@
 [
   {
-    "id": 42409,
+    "id": 57885,
     "namespaceId": 0,
     "itemPublicationId": 1611362,
     "itemId": 368641,
     "itemType": 64,
     "score": 0,
     "status": 0,
-    "creationDate": "8/29/2017 12:00:00 AM",
-    "lastModifiedDate": "7/28/2017 12:00:00 AM",
-    "content": "Test comment with some content. Id of this comment is 42409.",
+    "creationDate": {
+      "dayOfMonth": 13,
+      "hour": 17,
+      "minute": 39,
+      "month": "",
+      "monthValue": 3,
+      "nano": 0,
+      "second": 13,
+      "year": 2016,
+      "dayOfWeek": "",
+      "dayOfYear": 364
+    },
+    "lastModifiedDate": null,
+    "content": "Test comment with some content. Id of this comment is 57885.",
     "moderator": null,
     "moderatedDate": null,
     "parentId": 0,
@@ -21,19 +32,30 @@
       "emailAddress": "user0@sdl.com",
       "externalId": null
     },
-    "idLong": 42409
+    "idLong": 57885
   },
   {
-    "id": 30906,
+    "id": 74688,
     "namespaceId": 0,
     "itemPublicationId": 1611362,
     "itemId": 368641,
     "itemType": 64,
     "score": 0,
     "status": 0,
-    "creationDate": "7/18/2017 12:00:00 AM",
-    "lastModifiedDate": "6/19/2017 12:00:00 AM",
-    "content": "Test comment with some content. Id of this comment is 30906.",
+    "creationDate": {
+      "dayOfMonth": 13,
+      "hour": 12,
+      "minute": 59,
+      "month": "",
+      "monthValue": 1,
+      "nano": 0,
+      "second": 40,
+      "year": 2014,
+      "dayOfWeek": "",
+      "dayOfYear": 45
+    },
+    "lastModifiedDate": null,
+    "content": "Test comment with some content. Id of this comment is 74688.",
     "moderator": null,
     "moderatedDate": null,
     "parentId": 0,
@@ -45,6 +67,111 @@
       "emailAddress": "user2@sdl.com",
       "externalId": null
     },
-    "idLong": 30906
+    "idLong": 74688
+  },
+  {
+    "id": 47485,
+    "namespaceId": 0,
+    "itemPublicationId": 1611362,
+    "itemId": 368641,
+    "itemType": 64,
+    "score": 0,
+    "status": 0,
+    "creationDate": {
+      "dayOfMonth": 11,
+      "hour": 4,
+      "minute": 50,
+      "month": "",
+      "monthValue": 10,
+      "nano": 0,
+      "second": 34,
+      "year": 2010,
+      "dayOfWeek": "",
+      "dayOfYear": 75
+    },
+    "lastModifiedDate": null,
+    "content": "Test comment with some content. Id of this comment is 47485.",
+    "moderator": null,
+    "moderatedDate": null,
+    "parentId": 0,
+    "parent": null,
+    "children": null,
+    "user": {
+      "id": 0,
+      "name": "user 0",
+      "emailAddress": "user0@sdl.com",
+      "externalId": null
+    },
+    "idLong": 47485
+  },
+  {
+    "id": 60261,
+    "namespaceId": 0,
+    "itemPublicationId": 1611362,
+    "itemId": 368641,
+    "itemType": 64,
+    "score": 0,
+    "status": 0,
+    "creationDate": {
+      "dayOfMonth": 12,
+      "hour": 21,
+      "minute": 51,
+      "month": "",
+      "monthValue": 8,
+      "nano": 0,
+      "second": 49,
+      "year": 2014,
+      "dayOfWeek": "",
+      "dayOfYear": 194
+    },
+    "lastModifiedDate": null,
+    "content": "Test comment with some content. Id of this comment is 60261.",
+    "moderator": null,
+    "moderatedDate": null,
+    "parentId": 0,
+    "parent": null,
+    "children": null,
+    "user": {
+      "id": 0,
+      "name": "user 0",
+      "emailAddress": "user0@sdl.com",
+      "externalId": null
+    },
+    "idLong": 60261
+  },
+  {
+    "id": 70615,
+    "namespaceId": 0,
+    "itemPublicationId": 1611362,
+    "itemId": 368641,
+    "itemType": 64,
+    "score": 0,
+    "status": 0,
+    "creationDate": {
+      "dayOfMonth": 20,
+      "hour": 12,
+      "minute": 0,
+      "month": "",
+      "monthValue": 7,
+      "nano": 0,
+      "second": 44,
+      "year": 2006,
+      "dayOfWeek": "",
+      "dayOfYear": 249
+    },
+    "lastModifiedDate": null,
+    "content": "Test comment with some content. Id of this comment is 70615.",
+    "moderator": null,
+    "moderatedDate": null,
+    "parentId": 0,
+    "parent": null,
+    "children": null,
+    "user": {
+      "id": 1,
+      "name": "user 1",
+      "emailAddress": "user1@sdl.com",
+      "externalId": null
+    },
+    "idLong": 70615
   }
 ]

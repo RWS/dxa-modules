@@ -1,1 +1,177 @@
-[]
+[
+  {
+    "id": 98288,
+    "namespaceId": 0,
+    "itemPublicationId": 1961681,
+    "itemId": 137364,
+    "itemType": 64,
+    "score": 0,
+    "status": 0,
+    "creationDate": {
+      "dayOfMonth": 2,
+      "hour": 18,
+      "minute": 32,
+      "month": "",
+      "monthValue": 3,
+      "nano": 0,
+      "second": 14,
+      "year": 2007,
+      "dayOfWeek": "",
+      "dayOfYear": 313
+    },
+    "lastModifiedDate": null,
+    "content": "Test comment with some content. Id of this comment is 98288.",
+    "moderator": null,
+    "moderatedDate": null,
+    "parentId": 0,
+    "parent": null,
+    "children": null,
+    "user": {
+      "id": 0,
+      "name": "user 0",
+      "emailAddress": "user0@sdl.com",
+      "externalId": null
+    },
+    "idLong": 98288
+  },
+  {
+    "id": 91663,
+    "namespaceId": 0,
+    "itemPublicationId": 1961681,
+    "itemId": 137364,
+    "itemType": 64,
+    "score": 0,
+    "status": 0,
+    "creationDate": {
+      "dayOfMonth": 3,
+      "hour": 19,
+      "minute": 24,
+      "month": "",
+      "monthValue": 2,
+      "nano": 0,
+      "second": 42,
+      "year": 2008,
+      "dayOfWeek": "",
+      "dayOfYear": 173
+    },
+    "lastModifiedDate": null,
+    "content": "Test comment with some content. Id of this comment is 91663.",
+    "moderator": null,
+    "moderatedDate": null,
+    "parentId": 0,
+    "parent": null,
+    "children": null,
+    "user": {
+      "id": 1,
+      "name": "user 1",
+      "emailAddress": "user1@sdl.com",
+      "externalId": null
+    },
+    "idLong": 91663
+  },
+  {
+    "id": 67043,
+    "namespaceId": 0,
+    "itemPublicationId": 1961681,
+    "itemId": 137364,
+    "itemType": 64,
+    "score": 0,
+    "status": 0,
+    "creationDate": {
+      "dayOfMonth": 17,
+      "hour": 11,
+      "minute": 55,
+      "month": "",
+      "monthValue": 3,
+      "nano": 0,
+      "second": 49,
+      "year": 2011,
+      "dayOfWeek": "",
+      "dayOfYear": 27
+    },
+    "lastModifiedDate": null,
+    "content": "Test comment with some content. Id of this comment is 67043.",
+    "moderator": null,
+    "moderatedDate": null,
+    "parentId": 0,
+    "parent": null,
+    "children": null,
+    "user": {
+      "id": 1,
+      "name": "user 1",
+      "emailAddress": "user1@sdl.com",
+      "externalId": null
+    },
+    "idLong": 67043
+  },
+  {
+    "id": 95150,
+    "namespaceId": 0,
+    "itemPublicationId": 1961681,
+    "itemId": 137364,
+    "itemType": 64,
+    "score": 0,
+    "status": 0,
+    "creationDate": {
+      "dayOfMonth": 1,
+      "hour": 15,
+      "minute": 25,
+      "month": "",
+      "monthValue": 2,
+      "nano": 0,
+      "second": 0,
+      "year": 2013,
+      "dayOfWeek": "",
+      "dayOfYear": 272
+    },
+    "lastModifiedDate": null,
+    "content": "Test comment with some content. Id of this comment is 95150.",
+    "moderator": null,
+    "moderatedDate": null,
+    "parentId": 0,
+    "parent": null,
+    "children": null,
+    "user": {
+      "id": 1,
+      "name": "user 1",
+      "emailAddress": "user1@sdl.com",
+      "externalId": null
+    },
+    "idLong": 95150
+  },
+  {
+    "id": 79983,
+    "namespaceId": 0,
+    "itemPublicationId": 1961681,
+    "itemId": 137364,
+    "itemType": 64,
+    "score": 0,
+    "status": 0,
+    "creationDate": {
+      "dayOfMonth": 14,
+      "hour": 18,
+      "minute": 25,
+      "month": "",
+      "monthValue": 10,
+      "nano": 0,
+      "second": 20,
+      "year": 2011,
+      "dayOfWeek": "",
+      "dayOfYear": 246
+    },
+    "lastModifiedDate": null,
+    "content": "Test comment with some content. Id of this comment is 79983.",
+    "moderator": null,
+    "moderatedDate": null,
+    "parentId": 0,
+    "parent": null,
+    "children": null,
+    "user": {
+      "id": 1,
+      "name": "user 1",
+      "emailAddress": "user1@sdl.com",
+      "externalId": null
+    },
+    "idLong": 79983
+  }
+]

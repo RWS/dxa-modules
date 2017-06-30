@@ -1,39 +1,26 @@
 [
   {
-    "id": 3743,
+    "id": 49748,
     "namespaceId": 0,
     "itemPublicationId": 1601084,
     "itemId": 516241,
     "itemType": 64,
     "score": 0,
     "status": 0,
-    "creationDate": "9/8/2017 12:00:00 AM",
-    "lastModifiedDate": "7/2/2017 12:00:00 AM",
-    "content": "Test comment with some content. Id of this comment is 3743.",
-    "moderator": null,
-    "moderatedDate": null,
-    "parentId": 0,
-    "parent": null,
-    "children": null,
-    "user": {
-      "id": 0,
-      "name": "user 0",
-      "emailAddress": "user0@sdl.com",
-      "externalId": null
+    "creationDate": {
+      "dayOfMonth": 4,
+      "hour": 6,
+      "minute": 31,
+      "month": "",
+      "monthValue": 3,
+      "nano": 0,
+      "second": 29,
+      "year": 2016,
+      "dayOfWeek": "",
+      "dayOfYear": 16
     },
-    "idLong": 3743
-  },
-  {
-    "id": 16713,
-    "namespaceId": 0,
-    "itemPublicationId": 1601084,
-    "itemId": 516241,
-    "itemType": 64,
-    "score": 0,
-    "status": 0,
-    "creationDate": "8/16/2017 12:00:00 AM",
-    "lastModifiedDate": "6/21/2017 12:00:00 AM",
-    "content": "Test comment with some content. Id of this comment is 16713.",
+    "lastModifiedDate": null,
+    "content": "Test comment with some content. Id of this comment is 49748.",
     "moderator": null,
     "moderatedDate": null,
     "parentId": 0,
@@ -45,6 +32,6 @@
       "emailAddress": "user2@sdl.com",
       "externalId": null
     },
-    "idLong": 16713
+    "idLong": 49748
   }
 ]
