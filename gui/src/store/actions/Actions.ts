@@ -28,10 +28,6 @@ export const COMMENTS_LOADING = "COMMENTS_LOADING";
 export const COMMENTS_LOADED = "COMMENTS_LOADED";
 export const COMMENTS_ERROR = "COMMENTS_ERROR";
 
-export const SEARCH_LOADING = "SEARCH_LOADING";
-export const SEARCH_LOADED = "SEARCH_LOADED";
-export const SEARCH_ERROR = "SEARCH_ERROR";
-
 export const changeLanguage = createAction(CHANGE_LANGUAGE, language => language);
 export const publicationsLoaded = createAction(PUBLICATIONS_LOADED, publications => publications);
 export const updateCurrentPublication = createAction(UPDATE_CURRENT_PUBLICATION,

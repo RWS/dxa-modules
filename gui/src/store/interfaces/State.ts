@@ -3,7 +3,6 @@ import { IPage } from "interfaces/Page";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 import { IConditionsState } from "store/interfaces/Conditions";
 import { IComments } from "store/interfaces/Comments";
-import { ISearchResults } from "store/interfaces/Search";
 
 export interface IProductReleaseVersionState {
     byProductFamily: IProductReleaseVersionMap;
@@ -186,12 +185,4 @@ export interface IState {
      * @memberof IState
      */
     releaseVersions: IProductReleaseVersionState;
-
-    /**
-     * Search results
-     *
-     * @type {ISearchResultsState}
-     * @memberof IState
-     */
-    searchResults: ISearchResults;
 }

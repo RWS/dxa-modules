@@ -68,4 +68,44 @@ export interface ISearchResult {
      * @memberOf ISearchResult
      */
     content: string;
+
+    /**
+     * product family title
+     *
+     * @type {string}
+     * @memberOf ISearchResult
+     */
+    productFamilyTitle?: string;
+
+    /**
+     * product release version title
+     *
+     * @type {string}
+     * @memberOf ISearchResult
+     */
+    productReleaseVersionTitle?: string;
+
+    /**
+     * Page title
+     *
+     * @type {string}
+     * @memberOf ISearchResult
+     */
+    pageTitle?: string;
+
+    /**
+     * content language
+     *
+     * @type {string}
+     * @memberOf ISearchResult
+     */
+    language?: string;
+
+    /**
+     * last modified date
+     *
+     * @type {string}
+     * @memberof Date
+     */
+    lastModifiedDate?: Date;
 }

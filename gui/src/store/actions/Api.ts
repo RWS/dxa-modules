@@ -3,8 +3,6 @@ import { Dispatch } from "redux";
 import { createAction, Action } from "redux-actions";
 import { IPageService } from "services/interfaces/PageService";
 import { IPublicationService } from "services/interfaces/PublicationService";
-import { ISearchService } from "services/interfaces/SearchService";
-import { ISearchQuery, ISearchResult } from "interfaces/Search";
 
 import {
     PAGE_LOADED, PAGE_LOADING, PAGE_ERROR,
@@ -12,7 +10,6 @@ import {
     RELEASE_VERSIONS_LOADING, RELEASE_VERSIONS_LOADED,
     CONDITIONES_LOADED, CONDITIONES_LOADING, CONDITIONES_ERROR,
     COMMENTS_LOADING, COMMENTS_LOADED, COMMENTS_ERROR,
-    SEARCH_LOADING, SEARCH_LOADED, SEARCH_ERROR,
     updateCurrentPublication
 } from "./Actions";
 
@@ -67,10 +64,6 @@ export const conditionsError = createAction(CONDITIONES_ERROR, (pubId: string, e
 export const commentsLoading = createAction(COMMENTS_LOADING, (pageId: string) => pageId);
 export const commentsLoaded = createAction(COMMENTS_LOADED, (pageId: string, comments: IComment[]) => ({ pageId, comments }));
 export const commentsError = createAction(COMMENTS_ERROR, (pageId: string, error: {}) => ({ pageId, error }));
-
-export const searchResultsLoading = createAction(SEARCH_LOADING, (query: ISearchQuery) => query);
-export const searchResultsLoaded = createAction(SEARCH_LOADED, (query: ISearchQuery, results: ISearchResult[]) => ({ query, results }));
-export const searchResultsError = createAction(SEARCH_ERROR, (query: ISearchQuery, error: {}) => ({ query, error }));
 
 /**
  * Publications fetcher
@@ -166,25 +159,6 @@ export const fetchComments = (pageService: IPageService, publicationId: string, 
             .then(
                 data => dispatch(commentsLoaded(pageId, data)),
                 error => dispatch(commentsError(pageId, error))
-            );
-    };
-};
-
-/**
- * Search results fetcher
- * @param {ISearchService} seacrhService
- * @param {ISearchQuery} searchQuery
- * @returns {Function}
- */
-export const fetchSearchResults = (seacrhService: ISearchService, searchQuery: ISearchQuery): IDispatcherFunction => {
-    return dispatch => {
-        dispatch(searchResultsLoading(searchQuery));
-        /* need something that works for server rendering */
-        seacrhService
-            .getSearchResults(searchQuery)
-            .then(
-                data => dispatch(searchResultsLoaded(searchQuery, data)),
-                error => dispatch(searchResultsError(searchQuery, error))
             );
     };
 };

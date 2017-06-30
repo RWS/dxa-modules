@@ -35,5 +35,5 @@
   "productreleaseversions.version.label": "Versie:",
   "search.results": "Zoekresultaten",
   "search.publication.results": "Zoekresultaten voor",
-  "search.count": "{0} uitslagen"
+  "search.results.total": "{0} uitslagen"
 }

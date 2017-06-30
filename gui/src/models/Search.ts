@@ -1,3 +1,4 @@
+import { ISearchResult as IServerSearchResult } from "interfaces/ServerModels";
 import { ISearchQuery, ISearchResult } from "interfaces/Search";
 import { Api } from "utils/Api";
 import { Net, IWebRequest, LoadableObject } from "@sdl/models";
@@ -33,8 +34,22 @@ export class Search extends LoadableObject {
     }
 
     protected _processLoadResult(result: string, webRequest: IWebRequest): void {
-        const res = JSON.parse(result);
-        this._results = res;
+        this._results = (JSON.parse(result) as IServerSearchResult[]).map((item: IServerSearchResult) => {
+            return {
+                id: item.Id,
+                content: item.Content,
+                language: item.Locale,
+                //lastModifiedDate: new Date(item.Fields["MODIFIED-ON.lng.value"]),
+                //publicationTitle : item.Fields["publicationtitle.generated.value"],
+                lastModifiedDate: new Date("2016-05-27T08:08:10Z"),
+                publicationTitle: "Publication MP330",
+
+                /* TMP value */
+                pageTitle: "-pageTitle-",
+                productFamilyTitle: "-productFamilyTitle-",
+                productReleaseVersionTitle: "-productReleaseVersionTitle-"
+            } as ISearchResult;
+        });
         super._processLoadResult(result, webRequest);
     }
 }

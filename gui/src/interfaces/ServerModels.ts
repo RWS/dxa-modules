@@ -22,6 +22,12 @@ export interface ISitemapItem {
     Title: string;
     Url?: string;
 }
+export interface ISearchResult {
+    Id: string;
+    Content: string;
+    Locale: string;
+    Fields: IKeyValuePair<string, string>;
+}
 export interface IKeyValuePair<TKey, TValue> {
     Key: TKey;
     Value: TValue;
