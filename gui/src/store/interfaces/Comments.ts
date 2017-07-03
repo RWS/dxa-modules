@@ -1,4 +1,4 @@
-import { IComment } from "interfaces/Comments";
+import { IComment } from "interfaces/ServerModels";
 
 export interface ICommentsMap {
     [key: string]: IComment;

@@ -27,22 +27,14 @@ export const ConditionsLabelManager: React.StatelessComponent<IConditionalLabelM
         return localization.formatMessage(query);
     };
 
-    const id2item = (id: ILabelManagerItem | string) => {
-        if (typeof id === "string") {
-            return ({
-                id: id,
-                label: id,
-                description: id,
-                isInvalid: false
-            });
-        } else {
-            return ({
-                id: id.id || id.label,
-                label: id.id || id.label,
-                description: id.id || id.label,
-                isInvalid: false
-            });
-        }
+    const id2item = (item: ILabelManagerItem | string) => {
+        const id = typeof item === "string" ? item : item.id || item.label;
+        return {
+            id: id,
+            label: id,
+            description: id,
+            isInvalid: false
+        };
     };
 
     return <LabelManager

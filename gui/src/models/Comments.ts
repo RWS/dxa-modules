@@ -1,6 +1,6 @@
 import { Api } from "utils/Api";
 import { Net, IWebRequest, LoadableObject } from "@sdl/models";
-import { IComment } from "interfaces/Comments";
+import { IComment } from "interfaces/ServerModels";
 
 export class Comments extends LoadableObject {
     private _publicationId: string;

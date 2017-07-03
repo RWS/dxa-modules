@@ -11,7 +11,20 @@
         display: block;
     }
 
-    > .sdl-dita-delivery-comment:last-child {
-        border-bottom: none;
+    .sdl-dita-delivery-comment:first-of-type {
+        border-top: none;
+    }
+
+    .sdl-dita-delivery-comments-list-more {
+        text-align: center;
+        margin-top: 15px;
+
+        div {
+            margin: 10px 0;
+            font-size: @fontSize + 2;
+            font-family: @fontFamily;
+            color: @neutralColor10;
+            line-height: 30px;
+        }
     }
 }

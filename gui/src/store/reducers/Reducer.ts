@@ -13,7 +13,7 @@ import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 import { IPublicationsListPropsParams } from "@sdl/dd/PublicationsList/PublicationsListPresentation";
 import { IConditionMap } from "store/interfaces/Conditions";
 import * as Comments from "./Comments";
-import { IComment } from "interfaces/Comments";
+import { IComment } from "interfaces/ServerModels";
 
 export const mainReducer = combineReducers({
     conditions,
@@ -40,7 +40,7 @@ export const isPublicationFound = (state: IState, pubId: string): boolean => Pub
 export const getPubListErrorMessage = (state: IState) => Publications.getLastError(state.publications);
 
 // Conditions selector
-export const getConditionsByPubId = (state: IState, pubId: string): IConditionMap => Conditions.getByPubId(state.conditions, pubId);
+export const getAllConditionsByPubId = (state: IState, pubId: string): IConditionMap => Conditions.getAllByPubId(state.conditions, pubId);
 export const isConditionsDialogVisible = (state: IState) => Conditions.isDialogVisible(state.conditions);
 export const getLastConditions = (state: IState, pubId: string) => Conditions.getLastConditions(state.conditions, pubId);
 export const getEditingConditions = (state: IState) => Conditions.getEditingConditions(state.conditions);

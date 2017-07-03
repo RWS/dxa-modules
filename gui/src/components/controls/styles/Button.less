@@ -43,10 +43,15 @@ button.sdl-button {
     padding: 0;
     border: none;
     outline: none;
-    background: inherit;
+    background: transparent;
     color: inherit;
 
     &:hover {
         cursor: pointer;
+    }
+    &:focus span {
+        position: relative;
+        top: 0;
+        left: 0;
     }
 }
