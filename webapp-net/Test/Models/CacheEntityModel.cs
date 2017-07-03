@@ -28,6 +28,6 @@ namespace Sdl.Web.Modules.Test.Models
             set;
         }
 
-        public DateTime dateNow = DateTime.Now;
+        public String DateNow = DateTime.Now.ToString("MM/dd/yy HH:mm:ss");
     }
 }

@@ -7,6 +7,7 @@ import com.sdl.webapp.common.api.model.entity.AbstractEntityModel;
 import lombok.Data;
 import org.joda.time.DateTime;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static com.sdl.webapp.common.api.mapping.semantic.config.SemanticVocabulary.SDL_CORE;
@@ -25,5 +26,5 @@ public class NoCacheEntityModel extends AbstractEntityModel {
     @SemanticProperty("test:dateField")
     private DateTime dateField;
 
-    private Date dateNow = new Date();
+    private String dateNow = new SimpleDateFormat("MM/dd/yy HH:mm:ss").format(new Date());
 }
