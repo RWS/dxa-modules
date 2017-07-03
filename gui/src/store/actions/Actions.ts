@@ -24,6 +24,9 @@ export const CONDITIONES_ERROR = "CONDITIONES_ERROR";
 export const CONDITIONS_APPLY = "CONDITIONS_APPLY";
 export const CONDITIONS_EDITING_CHANGE = "[Conditions] Change data in conditions editiong dialog";
 
+export const COMMENT_SAVING = "COMMENT_SAVING";
+export const COMMENT_ERROR = "COMMENT_ERROR";
+export const COMMENT_SAVED = "COMMENT_SAVED";
 export const COMMENTS_LOADING = "COMMENTS_LOADING";
 export const COMMENTS_LOADED = "COMMENTS_LOADED";
 export const COMMENTS_ERROR = "COMMENTS_ERROR";

@@ -13,7 +13,7 @@ import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 import { IPublicationsListPropsParams } from "@sdl/dd/PublicationsList/PublicationsListPresentation";
 import { IConditionMap } from "store/interfaces/Conditions";
 import * as Comments from "./Comments";
-import { IComment } from "interfaces/Comments";
+import { IComment } from "interfaces/ServerModels";
 
 export const mainReducer = combineReducers({
     conditions,
@@ -71,3 +71,4 @@ export const translateProductReleaseVersions = (versions: IProductReleaseVersion
 
 // Comments selectors
 export const getCommentsByPageId = (state: IState, pageId: string): IComment[] => Comments.getByPageId(state.comments, pageId);
+export const getCommentErrorMessage = (state: IState, pageId: string): string => Comments.getErrorMessage(state.comments, pageId);

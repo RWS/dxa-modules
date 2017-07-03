@@ -1,4 +1,4 @@
-import { IComment } from "interfaces/Comments";
+import { IComment } from "interfaces/ServerModels";
 
 export interface ICommentsMap {
     [key: string]: IComment;
@@ -9,6 +9,11 @@ export interface ICommentsPayload {
     comments: IComment[];
 }
 
+export interface ICommentPayload {
+    pageId: string;
+    comment: IComment;
+}
+
 export interface ICommentsError {
     message: string;
 }
@@ -16,5 +21,6 @@ export interface ICommentsError {
 export interface IComments {
     byPageId: { [pageId: string]: IComment[]};
     loading: string[];
+    saving: string[];
     errors: { [pageId: string]: string };
 }

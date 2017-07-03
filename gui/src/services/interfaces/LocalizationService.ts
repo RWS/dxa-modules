@@ -47,4 +47,12 @@ export interface ILocalizationService {
      * @memberOf ILocalizationService
      */
     getDirection(lang: string): "rtl" | "ltr";
+
+    /**
+     * Return current language
+     *
+     * @returns {string}
+     * @memberof ILocalizationService
+     */
+    getLanguage(): string;
 }

@@ -14,6 +14,9 @@ import FetchComments from "@sdl/dd/helpers/FetchComments";
 import { CommentsList } from "@sdl/dd/CommentsList/CommentsList";
 import { IAppContext } from "@sdl/dd/container/App/App";
 import { IPageService } from "services/interfaces/PageService";
+import { IPostCommentPresentationState } from "@sdl/dd/PostComment/PostCommentPresentation";
+import { PostComment } from "@sdl/dd/PostComment/PostComment";
+import { IPostComment } from "interfaces/Comments";
 
 import "components/presentation/styles/Page";
 import "components/controls/styles/ActivityIndicator";
@@ -103,6 +106,8 @@ export interface IPageProps {
     onNavigate(url: string): void;
 
     fetchPage?(pageService: IPageService, publicationId: string, pageId: string): void;
+
+    saveComment?(pageService: IPageService, commentData: IPostComment): void;
 }
 
 /**
@@ -156,6 +161,8 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
         this.state = {
             navItems: []
         };
+
+        this.handlePostComment = this.handlePostComment.bind(this);
     }
 
     /**
@@ -166,6 +173,24 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
         if (router) {
             this._historyUnlisten = router.listen(() => {
                 this._lastPageAnchor = undefined;
+            });
+        }
+    }
+
+    public handlePostComment = (event: React.FormEvent, data: IPostCommentPresentationState): void => {
+        const { pageService } = this.context.services;
+        const { name, email, comment } = data;
+        const props = this.props;
+
+        event.preventDefault();
+        if (props.saveComment) {
+            props.saveComment(pageService, {
+                publicationId: props.publicationId as string,
+                pageId: props.id as string,
+                username: name,
+                email: email,
+                content: comment,
+                parentId: 0
             });
         }
     }
@@ -211,9 +236,10 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
                         : <article className={appClass}
                             dangerouslySetInnerHTML={{ __html: props.content || formatMessage("components.page.nothing.selected") }} />}
                 </article>
+                {!error && <PostComment handleSubmit={this.handlePostComment} />}
                 {!error && <FetchComments descending={true} />}
                 {!error && <CommentsList />}
-            </div>
+            </div >
         );
     }
 

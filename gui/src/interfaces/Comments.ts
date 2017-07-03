@@ -1,137 +1,38 @@
-/**
- * Comment interface
- *
- * @export
- * @interface IComment
- */
-export interface IComment {
+export interface IPostComment {
     /**
      *
      * @type {number}
-     * @memberof IComment
+     * @memberof IPostComment
      */
-    id: number;
+    publicationId: string;
     /**
      *
      * @type {number}
-     * @memberof IComment
+     * @memberof IPostComment
      */
-    namespaceId: number;
-    /**
-     *
-     * @type {number}
-     * @memberof IComment
-     */
-    itemPublicationId: number;
-    /**
-     *
-     * @type {number}
-     * @memberof IComment
-     */
-    itemId: number;
-    /**
-     *
-     * @type {number}
-     * @memberof IComment
-     */
-    itemType: number;
-    /**
-     *
-     * @type {number}
-     * @memberof IComment
-     */
-    score: number;
-    /**
-     *
-     * @type {number}
-     * @memberof IComment
-     */
-    status: number;
+    pageId: string;
     /**
      *
      * @type {string}
-     * @memberof IComment
+     * @memberof IPostComment
      */
-    creationDate: string;
+    username: string;
     /**
      *
      * @type {string}
-     * @memberof IComment
+     * @memberof IPostComment
      */
-    lastModifiedDate: string;
+    email: string;
     /**
      *
      * @type {string}
-     * @memberof IComment
+     * @memberof IPostComment
      */
     content: string;
     /**
      *
-     * @type {string}
-     * @memberof IComment
-     */
-    moderator: string;
-    /**
-     *
-     * @type {string}
-     * @memberof IComment
-     */
-    moderatedDate: string;
-    /**
-     *
      * @type {number}
-     * @memberof IComment
+     * @memberof IPostComment
      */
     parentId: number;
-    /**
-     *
-     * @type {IComment}
-     * @memberof IComment
-     */
-    parent: IComment;
-    /**
-     *
-     * @type {IComment[]}
-     * @memberof IComment
-     */
-    children: IComment[];
-    /**
-     *
-     * @type {IUser}
-     * @memberof IComment
-     */
-    user: IUser;
-    /**
-     *
-     * @type {number}
-     * @memberof IComment
-     */
-    idLong: number;
-}
-
-export interface IUser {
-    /**
-     *
-     * @type {number}
-     * @memberof IUser
-     */
-    id: number;
-    /**
-     *
-     * @type {string}
-     * @memberof IUser
-     */
-    name: string;
-    /**
-     *
-     * @type {string}
-     * @memberof IUser
-     */
-    emailAddress: string;
-    /**
-     *
-     * @type {string}
-     * @memberof IUser
-     */
-    externalId: string;
 }
