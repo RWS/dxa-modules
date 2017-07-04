@@ -24,5 +24,10 @@
     <div>PublishedKeyword.NumberField: <pre>${entity.publishedKeyword.numberField}</pre></div>
     <div>PublishedKeyword.DateField: <pre>${entity.publishedKeyword.dateField}</pre></div>
     <div>PublishedKeyword.CompLinkField: <pre>Link: ${entity.publishedKeyword.compLinkField.id}</pre></div>
+    <div>PublishedKeyword.LinkedEntity: <pre>Article: ${entity.publishedKeyword.linkedEntity.id}</pre></div>
+    <div>PublishedKeyword.LinkedEntity.Headline: <pre>${entity.publishedKeyword.linkedEntity.headline}</pre></div>
+    <div>PublishedKeyword.LinkedEntity.ArticleBody.Content:
+        <pre><c:forEach items="${entity.publishedKeyword.linkedEntity.articleBody[0].content.fragments}" var="fragment"><c:out value="${fragment.toHtmlElement().renderHtml()}"/></c:forEach></pre>
+    </div>
     <div>PublishedKeyword.KeywordField: <pre>KeywordModel: ${entity.publishedKeyword.keywordField.id}</pre></div>
 </div>

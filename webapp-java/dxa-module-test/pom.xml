@@ -52,6 +52,11 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.sdl.dxa.modules</groupId>
+            <artifactId>dxa-module-core</artifactId>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <build>
