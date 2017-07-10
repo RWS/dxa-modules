@@ -45,8 +45,11 @@ public class CidResponsiveMediaUrlBuilder implements MediaHelper.ResponsiveMedia
     }
 
     private static class CidBuilder extends Builder {
+
         private HttpServletRequest servletRequest;
+
         private String mapping;
+
         private String appHostMapping;
 
         private CidBuilder(HttpServletRequest servletRequest, String mapping, String appHostMapping) {
@@ -57,14 +60,25 @@ public class CidResponsiveMediaUrlBuilder implements MediaHelper.ResponsiveMedia
 
         @Override
         public String buildInternal() {
-            String hostname = this.appHostMapping != null ? this.appHostMapping :
-                    servletRequest.getLocalName() + ':' + servletRequest.getServerPort();
+            String localName = servletRequest.getLocalName();
 
-            return String.format(mapping + "/scale/%sx%s/%s%s",
+            if (isIPv6Localhost(localName)) {
+                localName = "localhost";
+            }
+
+            String hostname = this.appHostMapping != null ? this.appHostMapping :
+                    localName + ':' + servletRequest.getServerPort();
+
+            return String.format("%s/scale/%sx%s/%s%s",
+                    mapping,
                     getWidth(),
                     isZeroAspect() ? "" : getHeight(),
                     hostname,
                     getBaseUrl());
+        }
+
+        private boolean isIPv6Localhost(String localName) {
+            return "0:0:0:0:0:0:0:1".equals(localName) || "::1".equals(localName) || "0000:0000:0000:0000:0000:0000:0000:0001".equals(localName);
         }
     }
 }
