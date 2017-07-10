@@ -17,6 +17,7 @@
 @iconLanguage: "\e011";
 @iconUser: "\e023";
 @iconSelect: "\e01C";
+@iconFlag: "\e006";
 .import-icon-font() {
     font-family: @iconFont;
     src: url('@{iconFontPath}/SDLfont.woff') format('woff');
@@ -139,4 +140,11 @@
 .background-search-bar() {
     background-image: url("images/search-bar-background.jpg");
     background-repeat: no-repeat;
+}
+
+.icon-flag(@size: 24px) {
+    .icon-font-default-style(@size);
+    &:before {
+        content: @iconFlag;
+    }
 }

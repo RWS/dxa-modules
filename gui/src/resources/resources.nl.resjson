@@ -34,6 +34,16 @@
   "productreleaseversions.unknown.title": "Onbekende productversie",
   "productreleaseversions.version.label": "Versie:",
   "search.results": "Zoekresultaten",
-  "search.publication.results": "Zoekresultaten voor",
-  "search.results.total": "{0} uitslagen"
+  "search.results.filter": "Filter resultaten",
+  "search.results.filter.contains": "Document dat bevat",
+  "search.results.filter.words": "Deze woorden",
+  "search.results.apply": "Filters toepassen",
+  "search.results.clear": "Verwijder filters",
+  "search.results.more": "Meer resultaten laden",
+  "search.result.language": "Taal: {0}",
+  "search.result.last.updated": "Laatst bijgewerkt: {0}",
+  "search.publication.results": "Zoekresultaten voor {0}",
+  "search.results.bookmark": "Voeg toe aan bladwijzers",
+  "search.results.total": "{0} uitslagen",
+  "search.results.shown": "Met {0} van {1} resultaten"
 }

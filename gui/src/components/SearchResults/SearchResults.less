@@ -1,14 +1,134 @@
 @import (reference) "~theme-styles";
+@filterWidth: 300px;
+@defaultMargin: 15px;
 .sdl-dita-delivery-search-results {
     position: relative;
-    background-color: @neutralColor6;
+    max-width: @screenXl;
+    margin: 0 auto;
     h1 {
-        .header-font(300, @h1Size, 50px);
-        padding-top: 15px;
-        text-indent: 20px;
+        .header-font(300, @h1Size, @h1Size * 2);
+        padding-top: @h1Size + 10px;
+        margin: 0 15px;
     }
-    > * {
-        max-width: @screenXl;
-        margin: 0 auto;
+    .search-results-list {
+        margin: 0 15px;
+        > * {
+            margin: 0;
+            padding: 0;
+        }
+        h4 {
+            .header-font(600, 14px, 24px);
+            margin-bottom: 20px;
+        }
+        ul {
+            li {
+                margin: 10px -15px;
+                padding: 15px;
+                display: inline-block;
+                h3 {
+                    .header-font(600, @h3Size, @h1Size);
+                    color: @accentColor2;
+                    margin-top: 0;
+                    button {
+                        border: none;
+                        background: none;
+                        color: @accentColor1;
+                        float: right;
+                        line-height: @h1Size;
+                        .icon-flag(18px);
+                        .rtl & {
+                            float: left;
+                        }
+                        &:hover {
+                            cursor: pointer;
+                        }
+                    }
+                }
+                nav {
+                    height: auto;
+                    line-height: 24px;
+                    white-space: nowrap;
+                    display: inline-flex;
+                    max-width: 100%;
+                    a {
+                        flex: 0 0 auto;
+                        color: @neutralColor4;
+                        text-decoration: inherit;
+                        display: inline-block;
+                        vertical-align: middle;
+                        &:not(:first-child) {
+                            .icon-arrow-right(18px);
+                            &:before {
+                                color: @accentColor1;
+                                margin: 0 10px;
+                                float: left;
+                            }
+                            .rtl & {
+                                .icon-arrow-left(18px);
+                                &:before {
+                                    float: right;
+                                }
+                            }
+                        }
+                        &:last-child {
+                            flex: 1 1 auto;
+                            min-width: 100px;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                        }
+                        a:hover {
+                            color: @accentColor1;
+                        }
+                    }
+                }
+                p {
+                    position: relative;
+                    overflow: hidden;
+                    line-height: 24px;
+                    height: 24px*3; // Show only three lines of text
+                    color: @neutralColor1;
+                    margin: 10px 0;
+                    &:after {
+                        content: "";
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        left: 0;
+                        bottom: 0;
+                        background: linear-gradient(transparent, #FFFFFF);
+                    }
+                }
+                span {
+                    color: @neutralColor4;
+                }
+                &:focus {
+                    outline: none;
+                    border: none;
+                    border-radius: 5px;
+                    @media screen and (min-width: (1+@screenLg)) {
+                        box-shadow: 0px 0px 0px 1px @neutralColor5;
+                    }
+
+                    p {
+                        height: auto;
+                        &:after {
+                            background: none;
+                        }
+                    }
+                }
+            }
+        }
+
+        /* Bottom  wraper */
+        div {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            color: @neutralColor4;
+            margin: 10px;
+            button {
+                margin-bottom: 20px;
+            }
+        }
     }
 }

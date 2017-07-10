@@ -42,12 +42,12 @@ export class Search extends LoadableObject {
                 //lastModifiedDate: new Date(item.Fields["MODIFIED-ON.lng.value"]),
                 //publicationTitle : item.Fields["publicationtitle.generated.value"],
                 lastModifiedDate: new Date("2016-05-27T08:08:10Z"),
-                publicationTitle: "Publication MP330",
+                publicationTitle: "Publication MP330 [!placeholder!]",
 
                 /* TMP value */
-                pageTitle: "-pageTitle-",
-                productFamilyTitle: "-productFamilyTitle-",
-                productReleaseVersionTitle: "-productReleaseVersionTitle-"
+                pageTitle: "SDL Web Cloud [!placeholder!]",
+                productFamilyTitle: "SDL Web [!PH!]",
+                productReleaseVersionTitle: "2011 SP1 [!PH!]-"
             } as ISearchResult;
         });
         super._processLoadResult(result, webRequest);

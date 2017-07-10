@@ -82,6 +82,14 @@ export interface ISearchResultsState {
      * @memberOf ISearchResultsState
      */
     searchResults?: ISearchResult[];
+
+    /**
+     * Search results hits
+     *
+     * @type {number}
+     * @memberOf ISearchResultsState
+     */
+    searchResultsHits?: number;
 }
 
 /**
@@ -107,6 +115,7 @@ export class SearchResults extends React.Component<ISearchResultsProps, ISearchR
         this.state = {
             isLoading: undefined,
             searchResults: undefined,
+            searchResultsHits: 100,
             error: undefined
         };
     }
@@ -119,12 +128,25 @@ export class SearchResults extends React.Component<ISearchResultsProps, ISearchR
     }
 
     /**
+     * Invoked immediately before rendering when new props or state are being received.
+     * This method is not called for the initial render.
+     *
+     * @param {ISearchResultsProps} nextProps Next props
+     */
+    public componentWillUpdate(nextProps: ISearchResultsProps): void {
+        if (nextProps.params.searchQuery !== this.props.params.searchQuery) {
+            this._fetchSearchResults();
+        }
+    }
+
+    /**
      * Render the component
      *
      * @returns {JSX.Element}
      */
     public render(): JSX.Element {
-        const { searchResults, isLoading, error } = this.state;
+        const { publicationId } = this.props.params;
+        const { searchResults, searchResultsHits, isLoading, error } = this.state;
         const { formatMessage } = this.context.services.localizationService;
         const errorButtons = <div>
             <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{ "click": () => this._fetchSearchResults() }}>{formatMessage("control.button.retry")}</Button>
@@ -132,22 +154,35 @@ export class SearchResults extends React.Component<ISearchResultsProps, ISearchR
 
         return (
             <section className={"sdl-dita-delivery-search-results"}>
-                <h1>{formatMessage("search.results", ["Pub Title"])}</h1>
-                <h4>{formatMessage("search.results.total", [(searchResults && searchResults.length || 0).toString()])}</h4>
-                {error
-                    ? <Error
-                        title={formatMessage("error.default.title")}
-                        messages={[formatMessage("error.publications.list.not.found"), formatMessage("error.publications.default.message")]}
-                        buttons={errorButtons} />
-                    : !isLoading
-                        ? (searchResults && searchResults.length > 0)
-                            ? <ul className="seach-results">{
-                                searchResults.map((x: ISearchResult, i: number) => {
-                                    return <li key={i}>{this._renderSearchResult(x)}</li>;
-                                })}
-                            </ul>
-                            : <div className={"no-available-publications-label"}>{formatMessage("components.productfamilies.no.published.publications")}</div>
-                        : <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} />
+                <h1>{
+                    publicationId
+                        ? formatMessage("search.publication.results", ["" + publicationId])
+                        : formatMessage("search.results")
+                }</h1>
+                {
+                    error
+                        ? <Error
+                            title={formatMessage("error.default.title")}
+                            messages={[formatMessage("error.publications.list.not.found"), formatMessage("error.publications.default.message")]}
+                            buttons={errorButtons} />
+                        : (!isLoading && searchResults)
+                            ? <div className={"search-results-list"}>
+                                <h4>{formatMessage("search.results.total", [searchResults.length.toString()])}</h4>
+                                <ul>
+                                    {searchResults.map((x: ISearchResult, i: number) => this._renderSearchResult(i, x))}
+                                </ul>
+                                <div>
+                                    <Button
+                                        skin="graphene"
+                                        purpose={ButtonPurpose.GHOST}
+                                        events={{"click": () => {
+
+                                        }}}>{formatMessage("search.results.more")}
+                                    </Button>
+                                    {formatMessage("search.results.shown", [searchResults.length.toString(), (searchResultsHits || 0).toString()])}
+                                </div>
+                            </div>
+                            : <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} />
                 }
             </section>);
     }
@@ -164,17 +199,23 @@ export class SearchResults extends React.Component<ISearchResultsProps, ISearchR
      *
      * @returns {JSX.Element}
      */
-    private _renderSearchResult(searchResult: ISearchResult): JSX.Element {
-        return <div className="search-result">
-            <h2>{searchResult.pageTitle}</h2>
+    private _renderSearchResult(i: number, searchResult: ISearchResult): JSX.Element {
+        const { formatMessage } = this.context.services.localizationService;
+        const modifiedDate = searchResult.lastModifiedDate && new Date(searchResult.lastModifiedDate).toLocaleString(/*getLanguage(), options*/);
+        return <li key={i} tabIndex={i}>
+            <h3>{searchResult.pageTitle}<button title={formatMessage("search.results.bookmark")} onClick={() => this._addToBookmarks() }/></h3>
             <nav>
                 <a href="">{searchResult.productFamilyTitle}</a>
                 <a href="">{searchResult.productReleaseVersionTitle}</a>
                 <a href="">{searchResult.pageTitle}</a>
             </nav>
-            <p>{searchResult.content}</p>
-            <span>{searchResult.lastModifiedDate} &emsp; {searchResult.language}</span>
-        </div>;
+            <p>{[...Array(20)].join(searchResult.content + " ")}</p>
+            <span>{
+                `${formatMessage("search.result.last.updated", [modifiedDate || ""])}`
+                } &emsp; {
+                `${formatMessage("search.result.language", [searchResult.language || ""])}`
+            }</span>
+        </li>;
     }
 
     /**
@@ -213,5 +254,12 @@ export class SearchResults extends React.Component<ISearchResultsProps, ISearchR
                     });
                 }
             });
+    }
+
+    /**
+     * fetch search results
+     */
+    private _addToBookmarks(): void {
+        alert("Add to bookmarks");
     }
 }

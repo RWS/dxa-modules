@@ -51,6 +51,16 @@
   "warning.different.language.content": "Language of the shown publication is {0}. It's also available in your language: {1}.",
   "warning.no.content": "Content of this publication is not available in selected language: {0}",
   "search.results": "Search results",
-  "search.publication.results": "Search results for",
-  "search.results.total": "{0} results"
+  "search.results.filter": "Filter results",
+  "search.results.filter.contains": "Document that contain",
+  "search.results.filter.words": "These words",
+  "search.results.apply": "Apply filters",
+  "search.results.clear": "Clear filters",
+  "search.results.more": "Load more results",
+  "search.publication.results": "Search results for {0}",
+  "search.result.language": "Language: {0}",
+  "search.result.last.updated": "Last updated: {0}",
+  "search.results.bookmark": "Add to bookmarks",
+  "search.results.total": "{0} results",
+  "search.results.shown": "Showing {0} of {1} results"
 }
