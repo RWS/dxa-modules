@@ -11,6 +11,8 @@ export interface IPostCommentPresentationProps {
 
 export interface IPostCommentPresentationDispatchProps {
     error: string;
+    pageId: string;
+    isCommentSaving: boolean;
 }
 
 export interface IPostCommentPresentationState {
@@ -48,6 +50,8 @@ export class PostCommentPresentation extends
      */
     public context: IAppContext;
 
+    public form: HTMLFormElement;
+
     private initialState: IPostCommentPresentationState;
 
     constructor() {
@@ -80,10 +84,28 @@ export class PostCommentPresentation extends
         this.setState({ ...this.state, [htmlElement.getAttribute("id") as string]: htmlElement.value });
     }
 
+    /**
+     *
+     * @param {React.FormEvent<HTMLFormElement>} event
+     * @memberof PostCommentPresentation
+     */
     public handleSubmit(event: React.FormEvent<HTMLFormElement>): void {
         this.props.handleSubmit(event, this.state);
-        event.currentTarget.reset();
-        this.resetState();
+        this.form = event.currentTarget;
+    }
+
+    /**
+     *
+     * @param {IPostCommentPresentationDispatchProps} nextProps
+     * @memberof PostCommentPresentation
+     */
+    public componentWillReceiveProps(nextProps: IPostCommentPresentationDispatchProps): void {
+        if (!nextProps.isCommentSaving && !nextProps.error) {
+            if (this.form) {
+                this.form.reset();
+            }
+            this.resetState();
+        }
     }
 
     /**

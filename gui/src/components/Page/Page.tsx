@@ -3,7 +3,7 @@ import { PagePresentation, IPageProps } from "./PagePresentation";
 import { IState } from "store/interfaces/State";
 import { getCurrentPub, getPubById } from "store/reducers/Reducer";
 import { localization } from "services/common/LocalizationService";
-import { fetchPage, saveComment } from "store/actions/Api";
+import { fetchPage } from "store/actions/Api";
 
 const mapStateToProps = (state: IState, ownProps: IPageProps): {} => {
     const { publicationId, pageId, anchor } = getCurrentPub(state);
@@ -17,8 +17,7 @@ const mapStateToProps = (state: IState, ownProps: IPageProps): {} => {
 };
 
 const mapDispatchToState = {
-    fetchPage,
-    saveComment
+    fetchPage
 };
 
 /**

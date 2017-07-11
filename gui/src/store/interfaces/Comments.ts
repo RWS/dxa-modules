@@ -18,9 +18,14 @@ export interface ICommentsError {
     message: string;
 }
 
+export interface ICommentErrorsMap {
+    [pageId: string]: string;
+}
+
 export interface IComments {
     byPageId: { [pageId: string]: IComment[]};
     loading: string[];
     saving: string[];
-    errors: { [pageId: string]: string };
+    errors: ICommentErrorsMap;
+    postErrors: ICommentErrorsMap;
 }

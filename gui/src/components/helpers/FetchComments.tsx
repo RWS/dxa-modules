@@ -131,7 +131,7 @@ const mapDispatchToProps = {
     fetch: fetchCommentsApi
 };
 
-const FetchComments = connect(mapStateToProps, mapDispatchToProps)(Fetch);
+export const FetchComments = connect(mapStateToProps, mapDispatchToProps)(Fetch);
 
 FetchComments.defaultProps = {
     descending: false,
@@ -139,5 +139,3 @@ FetchComments.defaultProps = {
     skip: 0,
     status: [CommentStatus.SUBMITTED]
 };
-
-export default FetchComments;
