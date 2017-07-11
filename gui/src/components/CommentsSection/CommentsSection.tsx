@@ -1,6 +1,6 @@
 import { IState } from "store/interfaces/State";
 import { connect } from "react-redux";
-import { CommentSectionsPresentation } from "@sdl/dd/CommentsSection/CommentsSectionPresentation";
+import { CommentsSectionsPresentation } from "@sdl/dd/CommentsSection/CommentsSectionPresentation";
 import { getCurrentPub, getCommentErrorMessage } from "store/reducers/Reducer";
 import { saveComment, fetchComments } from "store/actions/Api";
 
@@ -18,4 +18,4 @@ const mapDispatchToState = {
 
 export const CommentsSection = connect(
     mapStateToProps, mapDispatchToState
-)(CommentSectionsPresentation);
+)(CommentsSectionsPresentation);

@@ -57,10 +57,10 @@ export interface ICommentsSectionProps {
 /**
  *
  * @export
- * @class CommentSectionsPresentation
+ * @class CommentsSectionsPresentation
  * @extends {React.Component<ICommentsSectionProps, {}>}
  */
-export class CommentSectionsPresentation extends React.Component<ICommentsSectionProps, {}> {
+export class CommentsSectionsPresentation extends React.Component<ICommentsSectionProps, {}> {
     /**
      * Context types
      *
@@ -79,8 +79,8 @@ export class CommentSectionsPresentation extends React.Component<ICommentsSectio
     public context: IAppContext;
 
     /**
-     * Creates an instance of CommentSectionsPresentation.
-     * @memberof CommentSectionsPresentation
+     * Creates an instance of CommentsSectionsPresentation.
+     * @memberof CommentsSectionsPresentation
      */
     constructor() {
         super();
@@ -91,7 +91,7 @@ export class CommentSectionsPresentation extends React.Component<ICommentsSectio
 
     /**
      *
-     * @memberof CommentSectionsPresentation
+     * @memberof CommentsSectionsPresentation
      */
     public handlePostComment = (event: React.FormEvent<HTMLFormElement>, data: IPostCommentPresentationState): void => {
         const { pageService } = this.context.services;
@@ -114,7 +114,7 @@ export class CommentSectionsPresentation extends React.Component<ICommentsSectio
     /**
      *
      * @returns {JSX.Element}
-     * @memberof CommentSectionsPresentation
+     * @memberof CommentsSectionsPresentation
      */
     public render(): JSX.Element {
         const { error } = this.props;
@@ -145,7 +145,7 @@ export class CommentSectionsPresentation extends React.Component<ICommentsSectio
     /**
      *
      * @private
-     * @memberof CommentSectionsPresentation
+     * @memberof CommentsSectionsPresentation
      */
     private fetchComments(): void {
         const { fetchComments, publicationId, pageId } = this.props;
