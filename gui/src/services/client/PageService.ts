@@ -86,7 +86,7 @@ export class PageService implements IPageService {
     public getComments(publicationId: string, pageId: string, descending: boolean, top: number, skip: number, status: number[]): Promise<IComment[]> {
         const comments = this.getCommentsModel(publicationId, pageId, descending, top, skip, status);
 
-        return new Promise((resolve: (items?: IComment[]) => void, reject: (error: {} | null) => void) => {
+        return new Promise((resolve: (items?: IComment[]) => void, reject: (error: string | null) => void) => {
             if (comments.isLoaded()) {
                 resolve(comments.getComments());
             } else {
@@ -97,7 +97,7 @@ export class PageService implements IPageService {
                 };
                 const onLoadFailed = (event: Event & { data: { error: string } }) => {
                     removeEventListeners();
-                    reject({ message: event.data.error });
+                    reject(event.data.error);
                 };
                 removeEventListeners = (): void => {
                     comments.removeEventListener("load", onLoad);
@@ -122,7 +122,7 @@ export class PageService implements IPageService {
      */
     public saveComment(commentData: IPostComment): Promise<IComment> {
         const comment = new Comment(commentData);
-        return new Promise((resolve: (data?: IComment) => void, reject: (error: {} | null) => void) => {
+        return new Promise((resolve: (data?: IComment) => void, reject: (error: string | null) => void) => {
             let removeEventListeners: () => void;
             const onLoad = () => {
                 removeEventListeners();
@@ -130,7 +130,7 @@ export class PageService implements IPageService {
             };
             const onLoadFailed = (event: Event & { data: { error: string } }) => {
                 removeEventListeners();
-                reject({ message: event.data.error });
+                reject(event.data.error);
             };
             removeEventListeners = (): void => {
                 comment.removeEventListener("load", onLoad);

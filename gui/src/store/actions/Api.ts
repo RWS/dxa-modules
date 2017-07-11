@@ -166,7 +166,7 @@ export const fetchComments = (pageService: IPageService, publicationId: string, 
             .getComments(publicationId, pageId, descending, top, skip, status)
             .then(
                 data => dispatch(commentsLoaded(pageId, data)),
-                error => dispatch(commentsError(pageId, error))
+                error => dispatch(commentsError(pageId, { message: error }))
             );
     };
 };
@@ -180,7 +180,7 @@ export const saveComment = (pageService: IPageService, commentData: IPostComment
             .saveComment(commentData)
             .then(
                 data => dispatch(commentSaved(pageId, data)),
-                error => dispatch(commentError(pageId, error))
+                error => dispatch(commentError(pageId, { message: error }))
             );
     };
 };
