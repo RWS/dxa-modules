@@ -104,7 +104,7 @@ class Server extends TestBase {
                                                     <span>Personalize content</span>
                                                 </button>
                                                 <div className="sdl-dialog-container">
-                                                    <div className="sdl-dialog-wrapper-ie"></div>
+                                                    <div className="sdl-dialog-wrapper"></div>
                                                 </div>
                                             </div>
                                             <span><div></div></span><span className="separator"></span></nav>
