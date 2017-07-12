@@ -11,6 +11,7 @@ import { IPublication } from "interfaces/Publication";
 import { configureStore } from "store/Store";
 import { Provider } from "react-redux";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
+import { browserHistory } from "react-router";
 
 const services = {
     publicationService: new PublicationService(),
@@ -124,7 +125,7 @@ class PublicationsListComponent extends TestBase {
                 expect(domNode).not.toBeNull();
 
                 // Spy on the router
-                spyOn(publicationsList.context.router, "push").and.callFake((path: string): void => {
+                spyOn(browserHistory, "push").and.callFake((path: string): void => {
                     // Check if routing was called with correct params
                     expect(path).toBe(`/0/publication`);
                     done();
@@ -242,7 +243,7 @@ class PublicationsListComponent extends TestBase {
                     expect(listItems.length).toBe(2);
 
                     // Spy on the router
-                    spyOn(publicationsList.context.router, "push").and.callFake((path: string): void => {
+                    spyOn(browserHistory, "push").and.callFake((path: string): void => {
                         // Check if routing was called with correct params
                         expect(path).toBe(`/publications/PF/pr2`);
                         done();

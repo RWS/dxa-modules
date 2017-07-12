@@ -1,4 +1,5 @@
 import * as React from "react";
+import { isEqual } from "lodash";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import { getCurrentPub } from "store/reducers/Reducer";
@@ -103,5 +104,5 @@ export const RouteToState = withRouter(
 );
 
 function compareProps(props1: {}, props2: {}): boolean {
-    return JSON.stringify(props1) === JSON.stringify(props2); //magic :)
+    return isEqual(props1, props2);
 }

@@ -12,6 +12,7 @@
             padding: 0 15px;
             white-space: nowrap;
             display: inline-flex;
+            max-width: ~"calc(100% - 30px)";
             > li {
                 &:nth-child(n+3) {
                     &:not(:last-child) {
@@ -20,14 +21,13 @@
                         top: -1000px;
                     }
                 }
-
                 flex: 0 0 auto;
                 color: @neutralColor4;
                 display: inline-block;
                 vertical-align: middle;
                 &:not(:first-child) {
                     .icon-arrow-right();
-                    &:after, &:before {
+                    &:before {
                         color: @accentColor1;
                         margin: 0 10px;
                         float: left;
@@ -74,37 +74,29 @@
                     top: inherit;
                 }
                 &.dd-selector {
+                    position: relative;
                     .sdl-dita-delivery-dropdown {
                         display: inline-block;
-                        border-radius: @circleSize;
-                        width: @circleSize;
-                        height: @circleSize;
-                        line-height: @circleSize;
-                        border: 2px solid @accentColor1;
-                        .dropdown-toggle {
-                            font: inherit;
-                            color: inherit;
-                            display: inline-block;
+                        width: @circleSize + 10px;
+                        height: 100%;
+                        position: absolute;
+                        top: 0;
+                        bottom: 0;
+                        select, .dropdown-toggle {
                             padding: 0;
                             margin: 0;
                             width: 100%;
+                            height: 100%;
                             text-align: right;
+                            color: transparent;
                             .sdl-dita-delivery-app.rtl & {
                                 text-align: left;
                             }
                         }
-                        select {
-                            position: absolute;
-                            top: 0;
-                            bottom: 0;
-                            left: 0;
-                            right: 0;
-                            color: transparent;
-                        }
                         .dropdown-menu {
                             z-index: 1050;
                             .dropdown-items {
-                                background-color: white;
+                                background-color: @neutralColor6;
                                 box-shadow: 0 2px 0 0 @neutralColor5;
                                 padding: 10px 0;
                                 border: 1px solid @neutralColor5;
@@ -112,6 +104,7 @@
                                 max-height: @dropdownItemHeight * 10 + (10 + 1) * 2; // 10 items + paddings + borders
                                 max-width: @dropdownMenuWidth;
                                 width: @dropdownMenuWidth;
+                                margin-top: 14px;
                                 li {
                                     .import-regular-font();
                                     padding: 0 5px 0 18px;
@@ -129,38 +122,40 @@
                                     &:hover {
                                         background-color: @accentColor1;
                                         a {
-                                            color: white;
+                                            color: @neutralColor6;
                                         }
                                     }
                                 }
                                 li.active {
                                     a {
-                                        padding-right: 25px;
-                                        .rtl & {
-                                            padding-right: 0px;
-                                            padding-left: 25px;
-                                        }
                                         .checked {
-                                            .icon-checked(18px);
-                                            color: @accentColor1;
-                                        }
-                                    }
-                                    &:hover {
-                                        .checked {
-                                            color: white;
+                                            display: none;
                                         }
                                     }
                                 }
                             }
                             .dropdown-arrow:before {
                                 border-top: 8px solid transparent;
-                                border-left: 8px solid white;
+                                border-left: 8px solid @neutralColor6;
                             }
                             .dropdown-arrow:after {
                                 border-top: 8px solid transparent;
-                                border-right: 8px solid white;
+                                border-right: 8px solid @neutralColor6;
                             }
                         }
+                    }
+                    &:after {
+                        font: inherit;
+                        color: inherit;
+                        margin: 2px 0;
+                        float: right;
+                        border-radius: @circleSize;
+                        width: @circleSize;
+                        height: @circleSize;
+                        line-height: @circleSize;
+                        border: 2px solid @accentColor1;
+                        text-align: center;
+                        content: attr(data-items);
                     }
                 }
             }

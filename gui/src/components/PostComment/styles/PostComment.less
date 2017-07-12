@@ -1,0 +1,76 @@
+@import (reference) "~theme-styles";
+
+@labelWidth: 125px;
+@inputWidth: 380px;
+
+.sdl-dita-delivery-postcomment {
+    padding: 0 15px;
+
+    form {
+        > div {
+            margin-top: 5px;
+            max-width: calc(@labelWidth + @inputWidth);
+
+            > label {
+                display: inline-block;
+                min-width: @labelWidth;
+                vertical-align: top;
+                margin-top: 10px;
+                font-size: @fontSize + 2;
+                font-weight: bold;
+                > span {
+                    color: @accentColor7;
+                }
+            }
+
+            .sdl-input-text,
+            .sdl-textarea {
+                max-width: @inputWidth;
+            }
+
+            .sdl-input-text ~ span,
+            .sdl-textarea ~ span {
+                display: none;
+            }
+
+            .sdl-input-text.error,
+            .sdl-textarea.error {
+                border-color: @accentColor3;
+            }
+
+            .sdl-input-text.error ~ span,
+            .sdl-textarea.error ~ span {
+                .import-regular-font();
+                font-size: @fontSize + 2;
+                color: @accentColor7;
+                display: block;
+                margin-top: 10px;
+                text-align: right;
+                .sdl-dita-delivery-app.rtl & {
+                    text-align: left;
+                }
+            }
+        }
+
+        > .sdl-button {
+            max-width: @inputWidth;
+            margin-left: @labelWidth;
+            margin-top: 10px;
+            .sdl-dita-delivery-app.rtl & {
+                margin-left: 0px;
+                margin-right: @labelWidth;
+            }
+        }
+    }
+
+    .sdl-dita-delivery-postcomment-error {
+        color: @accentColor7;
+        font-weight: bold;
+        margin-top: 15px;
+        &:before {
+            .import-icon-font();
+            content: @iconError;
+            margin-right: 10px;
+        }
+    }
+}

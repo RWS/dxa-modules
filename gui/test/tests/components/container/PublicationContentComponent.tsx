@@ -144,7 +144,7 @@ class PublicationContentComponent extends TestBase {
                     const { publicationId, pageId, anchor } = state.publication;
                     expect(publicationId).toBe(PUBLICATION_ID);
                     expect(pageId).toBe("12345");
-                    expect(anchor).toBe("");
+                    expect(anchor).toBeUndefined();
 
                     // A page load was triggered by changing the selected item in the Toc
                     const page = TestUtils.findRenderedComponentWithType(publicationContent, PagePresentation);
@@ -330,7 +330,7 @@ class PublicationContentComponent extends TestBase {
     private _renderComponent(target: HTMLElement, pageId?: string, publicationId?: string): PublicationContentPresentation {
         const store = this.store as Store<IState>;
 
-        store.dispatch(updateCurrentPublication(publicationId || PUBLICATION_ID, pageId));
+        store.dispatch(updateCurrentPublication(publicationId || PUBLICATION_ID, pageId || "", ""));
 
         const comp = ReactDOM.render(
             (

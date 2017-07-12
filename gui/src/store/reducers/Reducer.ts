@@ -12,9 +12,12 @@ import { combineReducers } from "./CombineReducers";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 import { IPublicationsListPropsParams } from "@sdl/dd/PublicationsList/PublicationsListPresentation";
 import { IConditionMap } from "store/interfaces/Conditions";
+import * as Comments from "./Comments";
+import { IComment } from "interfaces/ServerModels";
 
 export const mainReducer = combineReducers({
     conditions,
+    comments: Comments.comments,
     language: Language.language,
     pages: Pages.pages,
     publication: Publication.publication,
@@ -26,7 +29,7 @@ export const mainReducer = combineReducers({
 export const getPubList = (state: IState, filter?: {}): IPublication[] => Publications.getPubList(state.publications, filter);
 export const getPubById = (state: IState, id: string): IPublication => Publications.getPubById(state.publications, id);
 export const getPubsByLang = (state: IState, language: string): IPublication[] => Publications.getPubsByLang(state.publications, language);
-export const getPubListRepresentatives = (state: IState, filter: {}): IPublication[] => Publications.getPubListRepresentatives(state, filter);
+export const getPubListRepresentatives = (state: IState, filter: {}): (IPublication | undefined)[] => Publications.getPubListRepresentatives(state, filter);
 export const normalizeProductFamily = (params: IPublicationsListPropsParams): string | null => Publications.normalizeProductFamily(params);
 export const normalizeProductReleaseVersion = (params: IPublicationsListPropsParams | string): string | null | undefined => Publications.normalizeProductReleaseVersion(params);
 
@@ -37,7 +40,7 @@ export const isPublicationFound = (state: IState, pubId: string): boolean => Pub
 export const getPubListErrorMessage = (state: IState) => Publications.getLastError(state.publications);
 
 // Conditions selector
-export const getConditionsByPubId = (state: IState, pubId: string): IConditionMap => Conditions.getByPubId(state.conditions, pubId);
+export const getAllConditionsByPubId = (state: IState, pubId: string): IConditionMap => Conditions.getAllByPubId(state.conditions, pubId);
 export const isConditionsDialogVisible = (state: IState) => Conditions.isDialogVisible(state.conditions);
 export const getLastConditions = (state: IState, pubId: string) => Conditions.getLastConditions(state.conditions, pubId);
 export const getEditingConditions = (state: IState) => Conditions.getEditingConditions(state.conditions);
@@ -65,3 +68,7 @@ export const getReleaseVersionsForPub = (state: IState, pubId: string): IProduct
 // ReleaseVersions selector
 export const translateProductReleaseVersion = (productReleaseVersion: string): string => ReleaseVersions.translateProductReleaseVersion(productReleaseVersion);
 export const translateProductReleaseVersions = (versions: IProductReleaseVersion[]): IProductReleaseVersion[] => ReleaseVersions.translateProductReleaseVersions(versions);
+
+// Comments selectors
+export const getCommentsByPageId = (state: IState, pageId: string): IComment[] => Comments.getByPageId(state.comments, pageId);
+export const getCommentErrorMessage = (state: IState, pageId: string): string => Comments.getErrorMessage(state.comments, pageId);

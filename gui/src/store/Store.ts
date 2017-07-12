@@ -24,6 +24,12 @@ const EMPTY_STATE: IState = {
         lastConditions: {},
         editingConditions: {}
     },
+    comments: {
+        byPageId: {},
+        loading: [],
+        saving: [],
+        errors: {}
+    },
     publication: {
         publicationId: "",
         pageId: "",
@@ -45,7 +51,7 @@ const EMPTY_STATE: IState = {
 };
 
 //need this to reset state for tests
-const resetState = createAction("KARMA_RESET", state => state);
+const resetState = createAction("KARMA_RESET", (state: IState) => state);
 const resetStateReducer = handleAction("KARMA_RESET", (state: IState, newState: IState): IState => newState, {});
 
 let store: Store<IState> | undefined;

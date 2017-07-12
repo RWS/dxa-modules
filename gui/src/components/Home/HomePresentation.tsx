@@ -1,6 +1,7 @@
 import * as ClassNames from "classnames";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import { browserHistory } from "react-router";
 import { IAppContext } from "@sdl/dd/container/App/App";
 import { TopBar } from "@sdl/dd/presentation/TopBar";
 import { SearchBar } from "@sdl/dd/presentation/SearchBar";
@@ -80,6 +81,12 @@ export interface IHomeProps {
      * @memberOf IHomeProps
      */
     direction?: string;
+
+    /**
+     * true if conidtiosn dialog is shown
+     * @type {boolean}
+     */
+    isConditionsDialogVisible?: boolean;
 }
 
 /**
@@ -88,8 +95,7 @@ export interface IHomeProps {
 export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
 
     public static contextTypes: React.ValidationMap<IAppContext> = {
-        services: React.PropTypes.object.isRequired,
-        router: React.PropTypes.object.isRequired
+        services: React.PropTypes.object.isRequired
     };
 
     public context: IAppContext;
@@ -119,10 +125,9 @@ export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
      * Invoked once, both on the client and server, immediately before the initial rendering occurs.
      */
     public componentWillMount(): void {
-        const { router } = this.context;
         const { publicationId } = this.props;
-        if (router) {
-            this._historyUnlisten = router.listen(this._onNavigated.bind(this));
+        if (browserHistory) {
+            this._historyUnlisten = browserHistory.listen(this._onNavigated.bind(this));
         }
 
         this._updateSearchPlaceholder(publicationId);
@@ -164,7 +169,7 @@ export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
      */
     public render(): JSX.Element {
         const { isNavOpen, searchIsOpen, searchIsOpening, searchIsActive, searchTitle } = this.state;
-        const { direction } = this.props;
+        const { direction, isConditionsDialogVisible } = this.props;
 
         // This is a HACK!!! Not a fan of it, but it is quick fix for now
         // Get child props params for recognize route - It is weird!
@@ -177,7 +182,8 @@ export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
             "open": hasPublication && isNavOpen,
             "search-open": searchIsOpen,
             "search-is-opening": searchIsOpening,
-            "search-is-active": searchIsOpen && searchIsActive
+            "search-is-active": searchIsOpen && searchIsActive,
+            "conditions-dialog-visible": isConditionsDialogVisible
         });
 
         this._preventBodyScroll = (hasPublication && isNavOpen) || (searchIsOpen && searchIsActive) || false;
@@ -207,7 +213,7 @@ export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
                                 searchIsActive: true
                             });
                         }
-                    } }
+                    }}
                     onBlur={() => {
                         /* istanbul ignore else */
                         if (!this._isUnmounted) {
@@ -215,7 +221,7 @@ export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
                                 searchIsActive: false
                             });
                         }
-                    } } />
+                    }} />
                 {children}
             </div >
         );
@@ -281,7 +287,7 @@ export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
         }
     }
 
-    private _onNavigated(location: HistoryModule.Location): void {
+    private _onNavigated(location: Location): void {
         /* istanbul ignore if */
         if (!this._isUnmounted) {
             this.setState({

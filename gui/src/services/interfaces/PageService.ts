@@ -1,3 +1,5 @@
+import { IPostComment } from "interfaces/Comments";
+import { IComment } from "interfaces/ServerModels";
 import { IPage } from "interfaces/Page";
 import { Promise } from "es6-promise";
 import { IConditionMap } from "store/interfaces/Conditions";
@@ -17,4 +19,31 @@ export interface IPageService {
      * @memberOf IDataStore
      */
     getPageInfo(publicationId: string, pageId: string, conditions: IConditionMap): Promise<IPage>;
+
+    /**
+     * Get comments of page
+     *
+     * @param {string} publicationId
+     * @param {string} pageId
+     * @param {boolean} descending
+     * @param {number} top
+     * @param {number} skip
+     * @param {number[]} status
+     * @returns {Promise<IComment[]>}
+     *
+     * @memberof IPageService
+     */
+    getComments(publicationId: string, pageId: string, descending: boolean, top: number, skip: number, status: number[]): Promise<IComment[]>;
+
+    /**
+     * Save page comment
+     *
+     * @param {string} publicationId
+     * @param {string} pageId
+     * @param {IComment} comment
+     * @returns {Promise<IComment>}
+     *
+     * @memberof IPageService
+     */
+    saveComment(comment: IPostComment): Promise<IComment>;
 }

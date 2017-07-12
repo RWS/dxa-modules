@@ -1,5 +1,6 @@
 import { path } from "utils/Path";
 import { IWindow } from "interfaces/Window";
+import { IError } from "interfaces/Error";
 
 const mocksEnabled = (): boolean => (window as IWindow).SdlDitaDeliveryMocksEnabled || false;
 const mocksEndPoint = `/$mocks$`;
@@ -97,7 +98,7 @@ export class Api {
 
     /**
      * Get conditions url
-     * Use this url to retrive all conditions of publication
+     * Use this url to retrieve all conditions of publication
      *
      * @static
      * @param {string} publicationId Publication id
@@ -115,4 +116,55 @@ export class Api {
         }
     }
 
+    /**
+     * Get comments url
+     * Use this url to retrieve all comments of page
+     *
+     * @static
+     * @param {string} publicationId
+     * @param {string} pageId
+     * @param {boolean} descending
+     * @param {number} top
+     * @param {number} skip
+     * @param {number[]} status
+     * @returns {string}
+     *
+     * @memberof Api
+     */
+    public static getCommentsUrl(publicationId: string, pageId: string, descending: boolean, top: number, skip: number, status: number[]): string {
+        const encodedPubId = encodeURIComponent(publicationId);
+        const encodedPageId = encodeURIComponent(pageId);
+
+        /* istanbul ignore else */
+        if (mocksEnabled()) {
+            // Get all comments for a page without any filtering
+            return path.getAbsolutePath(`${mocksEndPoint}/comments-${encodedPubId}-${encodedPageId}.json`);
+        } else {
+            return path.getAbsolutePath(`api/comments/${encodedPubId}/${encodedPageId}?descending=${descending}&top=${top}&skip=${skip}&status[]=${status}`);
+        }
+    }
+
+    /**
+     * Get comment post url
+     * Use this url to post page comment
+     *
+     * @static
+     * @param {string} publicationId
+     * @param {string} pageId
+     * @returns {string}
+     *
+     * @memberof Api
+     */
+    public static getSaveCommentUrl(): string {
+        /* istanbul ignore else */
+        if (mocksEnabled()) {
+            // Can`t set comments for mock
+            throw {
+                message: "Mocks are not allowed when posting comments",
+                statusCode: "500"
+            } as IError;
+        } else {
+            return path.getAbsolutePath(`api/comments/add`);
+        }
+    }
 }

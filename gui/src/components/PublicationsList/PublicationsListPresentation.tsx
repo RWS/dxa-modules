@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Promise } from "es6-promise";
-import { Link } from "react-router";
+import { Link, browserHistory } from "react-router";
 import { ButtonPurpose } from "@sdl/controls";
 import { ActivityIndicator, Button } from "@sdl/controls-react-wrappers";
 
@@ -110,8 +110,7 @@ export class PublicationsListPresentation extends React.Component<IPublicationsL
      * Context types
      */
     public static contextTypes: React.ValidationMap<IAppContext> = {
-        services: React.PropTypes.object.isRequired,
-        router: React.PropTypes.object.isRequired
+        services: React.PropTypes.object.isRequired
     };
 
     /**
@@ -156,7 +155,7 @@ export class PublicationsListPresentation extends React.Component<IPublicationsL
         const { productFamily } = this.props.params;
         const { publications, isLoading, productReleaseVersions, selectedProductVersion, uiLanguage } = this.props;
         const { error } = this.state;
-        const { services, router } = this.context;
+        const { services } = this.context;
         const { formatMessage } = services.localizationService;
         const _retryHandler = (): void => { this.fetchReleaseVersions(this.props); };
         const translatedProductFamily = (productFamily === DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE) ? formatMessage("productfamilies.unknown.title") : productFamily;
@@ -170,8 +169,8 @@ export class PublicationsListPresentation extends React.Component<IPublicationsL
                 <VersionSelector productReleaseVersions={productReleaseVersions}
                     selectedProductReleaseVersion={selectedProductVersion}
                     onChange={releaseVersion => {
-                        if (router) {
-                            router.push(Url.getProductFamilyUrl(productFamily, releaseVersion));
+                        if (browserHistory) {
+                            browserHistory.push(Url.getProductFamilyUrl(productFamily, releaseVersion));
                         }
                     }} />
                 {error
@@ -192,8 +191,8 @@ export class PublicationsListPresentation extends React.Component<IPublicationsL
                                         hasWarning: publication.language && publication.language !== uiLanguage,
                                         navigateTo: () => {
                                             /* istanbul ignore else */
-                                            if (router) {
-                                                router.push(Url.getPublicationUrl(publication.id, publication.title));
+                                            if (browserHistory) {
+                                                browserHistory.push(Url.getPublicationUrl(publication.id, publication.title));
                                             }
                                         }
                                     } as ITile;

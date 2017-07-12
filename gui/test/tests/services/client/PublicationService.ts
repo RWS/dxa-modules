@@ -3,6 +3,10 @@ import { TestBase } from "@sdl/models";
 import { FakeXMLHttpRequest } from "test/mocks/XmlHttpRequest";
 import { IWindow } from "../../../../src/interfaces/Window";
 
+interface IXMLHttpRequestWindow extends Window {
+    XMLHttpRequest: {};
+}
+
 class PublicationServiceInvalidatable extends PublicationService {
     public ivalidate(): void {
         PublicationService.PublicationsModel = undefined;
@@ -29,7 +33,7 @@ class PublicationServiceTests extends TestBase {
             it("returns a proper error when product families cannot be retrieved", (done: () => void): void => {
                 // Put this test first, otherwise the publication would be already in the cache and the spy would not work
                 const failMessage = "failure-retrieving-publications-families";
-                spyOn(window, "XMLHttpRequest").and.callFake(() => new FakeXMLHttpRequest(failMessage));
+                spyOn(window as IXMLHttpRequestWindow, "XMLHttpRequest").and.callFake(() => new FakeXMLHttpRequest(failMessage));
                 publicationService.getProductFamilies().then(() => {
                     fail("An error was expected.");
                     done();
@@ -42,7 +46,7 @@ class PublicationServiceTests extends TestBase {
             it("returns a proper error when publications cannot be retrieved", (done: () => void): void => {
                 // Put this test first, otherwise the publication would be already in the cache and the spy would not work
                 const failMessage = "failure-retrieving-publications";
-                spyOn(window, "XMLHttpRequest").and.callFake(() => new FakeXMLHttpRequest(failMessage));
+                spyOn(window as IXMLHttpRequestWindow, "XMLHttpRequest").and.callFake(() => new FakeXMLHttpRequest(failMessage));
                 publicationService.getPublications().then(() => {
                     fail("An error was expected.");
                     done();
@@ -55,7 +59,7 @@ class PublicationServiceTests extends TestBase {
             it("returns a proper error when publication cannot be retrieved", (done: () => void): void => {
                 // Put this test first, otherwise the publication would be already in the cache and the spy would not work
                 const failMessage = "failure-retrieving-publication-title";
-                spyOn(window, "XMLHttpRequest").and.callFake(() => new FakeXMLHttpRequest(failMessage));
+                spyOn(window as IXMLHttpRequestWindow, "XMLHttpRequest").and.callFake(() => new FakeXMLHttpRequest(failMessage));
                 publicationService.getPublicationById(failMessage).then(() => {
                     fail("An error was expected.");
                     done();
@@ -81,7 +85,7 @@ class PublicationServiceTests extends TestBase {
             });
 
             it("can get product families from memory", (done: () => void): void => {
-                const spy = spyOn(window, "XMLHttpRequest").and.callThrough();
+                const spy = spyOn(window as IXMLHttpRequestWindow, "XMLHttpRequest").and.callThrough();
                 publicationService.getProductFamilies().then(families => {
                     expect(families).toBeDefined();
                     if (families) {
@@ -100,7 +104,7 @@ class PublicationServiceTests extends TestBase {
                 publicationService.getProductFamilies().then(families => {
                     publicationService.ivalidate();
                     const failMessage = "failure-retrieving-release-versions";
-                    spyOn(window, "XMLHttpRequest").and.callFake(() => new FakeXMLHttpRequest(failMessage));
+                    spyOn(window as IXMLHttpRequestWindow, "XMLHttpRequest").and.callFake(() => new FakeXMLHttpRequest(failMessage));
                     publicationService.getProductReleaseVersions(families[0].title).then(releaseVersions => {
                         fail("An error was expected.");
                         done();
@@ -129,7 +133,7 @@ class PublicationServiceTests extends TestBase {
             });
 
             it("can get product release versions from memory", (done: () => void): void => {
-                const spy = spyOn(window, "XMLHttpRequest").and.callThrough();
+                const spy = spyOn(window as IXMLHttpRequestWindow, "XMLHttpRequest").and.callThrough();
                 publicationService.getProductFamilies().then(families => {
                     publicationService.getProductReleaseVersions(families[0].title).then(releaseVersions => {
                         expect(releaseVersions).toBeDefined();
@@ -149,7 +153,7 @@ class PublicationServiceTests extends TestBase {
             it("returns a proper error when product release versions for publication cannot be retrieved", (done: () => void): void => {
                 publicationService.ivalidate();
                 const failMessage = "failure-retrieving-product-release-versions-for-publication";
-                spyOn(window, "XMLHttpRequest").and.callFake(() => new FakeXMLHttpRequest(failMessage));
+                spyOn(window as IXMLHttpRequestWindow, "XMLHttpRequest").and.callFake(() => new FakeXMLHttpRequest(failMessage));
                 publicationService.getProductReleaseVersionsByPublicationId(publicationId).then(() => {
                     fail("An error was expected.");
                     done();
@@ -176,7 +180,7 @@ class PublicationServiceTests extends TestBase {
             });
 
             it("can get product release versions for a publication id from memory", (done: () => void): void => {
-                const spy = spyOn(window, "XMLHttpRequest").and.callThrough();
+                const spy = spyOn(window as IXMLHttpRequestWindow, "XMLHttpRequest").and.callThrough();
                 publicationService.getProductReleaseVersionsByPublicationId(publicationId).then(releaseVersions => {
                     expect(releaseVersions).toBeDefined();
                     if (releaseVersions) {
@@ -208,7 +212,7 @@ class PublicationServiceTests extends TestBase {
             });
 
             it("can get the publications from memory", (done: () => void): void => {
-                const spy = spyOn(window, "XMLHttpRequest").and.callThrough();
+                const spy = spyOn(window as IXMLHttpRequestWindow, "XMLHttpRequest").and.callThrough();
                 publicationService.getPublications().then(publications => {
                     expect(publications).toBeDefined();
                     if (publications) {
@@ -235,7 +239,7 @@ class PublicationServiceTests extends TestBase {
             });
 
             it("can get a publication by id from memory", (done: () => void): void => {
-                const spy = spyOn(window, "XMLHttpRequest").and.callThrough();
+                const spy = spyOn(window as IXMLHttpRequestWindow, "XMLHttpRequest").and.callThrough();
                 publicationService.getPublicationById(publicationId).then(pub => {
                     expect(pub.title).toBe("User Guide");
                     expect(spy).not.toHaveBeenCalled();

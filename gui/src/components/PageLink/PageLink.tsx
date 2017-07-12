@@ -53,7 +53,7 @@ export interface IPageLinkPresentationProps {
      * @type {[type]}
      * @memberOf IPageLinkPresentationProps
      */
-    children?: JSX.Element[];
+    children?: JSX.Element;
 };
 
 /**

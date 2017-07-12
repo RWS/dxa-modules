@@ -2,7 +2,6 @@ import * as React from "react";
 import * as ReactDOMServer from "react-dom/server";
 import { renderToString } from "Server";
 import { App } from "@sdl/dd/container/App/App";
-import { hashHistory } from "react-router";
 import { localization } from "services/common/LocalizationService";
 import { IServices } from "interfaces/Services";
 import { PageService } from "services/server/PageService";
@@ -44,7 +43,7 @@ class Server extends TestBase {
                     taxonomyService: new TaxonomyService()
                 };
 
-                const app = ReactDOMServer.renderToStaticMarkup(<Provider store={this.store}><App history={hashHistory} services={services} /></Provider>);
+                const app = ReactDOMServer.renderToStaticMarkup(<Provider store={this.store}><App services={services} /></Provider>);
                 const expected = ReactDOMServer.renderToStaticMarkup((
                     <div className="ltr sdl-dita-delivery-app">
                         <div />
@@ -52,7 +51,7 @@ class Server extends TestBase {
                         <div className="sdl-dita-delivery-topbar">
                             <header>
                                 <div className="sdl-dita-delivery-topbar-logo" title="SDL">
-                                    <a href="#/home"></a>
+                                    <a href="/home"></a>
                                 </div>
                                 <div className="spacer"></div>
                                 <div className="sdl-dita-delivery-topbar-expand-nav"><span /></div>
@@ -109,9 +108,7 @@ class Server extends TestBase {
                                     </div>
                                     <div className="sdl-dita-delivery-breadcrumbs">
                                         <ul className="breadcrumbs">
-                                            <li>
-                                                <a className="home" title="Home" href="#/home">Home</a>
-                                            </li>
+                                            <li><a className="home" title="Home" href="/home">Home</a></li>
                                         </ul>
                                     </div>
                                     <div />
@@ -122,6 +119,33 @@ class Server extends TestBase {
                                     <article>
                                         <article className="ltr page-content">No page selected. Please select an item from the table of contents.</article>
                                     </article>
+                                    <div className="sdl-dita-delivery-postcomment">
+                                        <form id="form">
+                                            <div>
+                                                <label htmlFor="name">Your name<span>*</span>
+                                                </label>
+                                                <input type="text" className="sdl-input-text" id="name" placeholder="Name"/>
+                                                <span>Name can&#x27;t be blank</span>
+                                            </div>
+                                            <div>
+                                                <label htmlFor="email">E-mail<span>*</span>
+                                                </label>
+                                                <input type="text" className="sdl-input-text" id="email" placeholder="example@domain.com"/>
+                                                <span>E-mail can&#x27;t be blank</span>
+                                            </div>
+                                            <div>
+                                                <label htmlFor="comment">Comments<span>*</span>
+                                                </label>
+                                                <textarea className="sdl-textarea" id="comment" placeholder="Write a comment"/>
+                                                <span>Comment can&#x27;t be blank</span>
+                                            </div>
+                                            <button type="submit" disabled className="sdl-button graphene sdl-button-purpose-confirm" form="form" value="Submit">
+                                                Post comment
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <div className="sdl-comments-fetcher"/>
+                                    <div className="sdl-dita-delivery-comments-list" />
                                 </div>
                             </section>
                         </div>

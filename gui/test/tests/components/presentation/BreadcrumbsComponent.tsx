@@ -5,7 +5,7 @@ import { Router, Route } from "react-router";
 import { Breadcrumbs, IBreadcrumbsProps, IBreadcrumbItem } from "@sdl/dd/presentation/Breadcrumbs";
 import { ITaxonomy } from "interfaces/Taxonomy";
 import { Promise } from "es6-promise";
-import { hashHistory } from "react-router";
+import { browserHistory } from "react-router";
 import { Url } from "utils/Url";
 import { TcmId } from "utils/TcmId";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
@@ -74,7 +74,7 @@ class BreadcrumbsComponent extends TestBase {
             };
 
             beforeEach(() => {
-                hashHistory.push(itemsPath[4].url || "");
+                browserHistory.push(itemsPath[4].url || "");
                 const props: IBreadcrumbsProps = {
                     loadItemPath: loadItemPath
                 };
@@ -123,8 +123,7 @@ class BreadcrumbsComponent extends TestBase {
                     const responsiveNode = domNode.querySelector("li.dd-selector");
                     expect(responsiveNode).toBeDefined();
                     if (responsiveNode) {
-                        const placeholderNode = responsiveNode.querySelector("button.dropdown-toggle");
-                        expect(placeholderNode && placeholderNode.textContent).toBe("2");
+                        expect(responsiveNode.getAttribute("data-items")).toBe("2");
 
                         const selectBoxOptions = responsiveNode.querySelectorAll("select option");
                         expect(selectBoxOptions.length).toBe(2);
@@ -212,7 +211,7 @@ class BreadcrumbsComponent extends TestBase {
         };
 
         const comp = ReactDOM.render(
-            <Router history={hashHistory}>
+            <Router history={browserHistory}>
                 <Route path=":publicationId(/:pageId)" component={(compProps: IProps) =>
                     (<ComponentWithContext><Breadcrumbs selectedItem={getSelectedItem(compProps.params.pageId)} {...props} /></ComponentWithContext>)} />
             </Router>, target) as React.Component<{}, {}>;

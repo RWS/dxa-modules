@@ -24,7 +24,7 @@ const TestPub = {
 // };
 
 /* Fake test, but good coverage :) */
-class TilesListComponent extends TestBase {
+class PageLinkComponent extends TestBase {
     private store: Store<IState>;
     public runTests(): void {
         describe("<PageLink />", (): void => {
@@ -63,4 +63,4 @@ class TilesListComponent extends TestBase {
     }
 }
 
-new TilesListComponent().runTests();
+new PageLinkComponent().runTests();

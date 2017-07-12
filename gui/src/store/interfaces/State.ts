@@ -2,6 +2,7 @@ import { IPublication } from "interfaces/Publication";
 import { IPage } from "interfaces/Page";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 import { IConditionsState } from "store/interfaces/Conditions";
+import { IComments } from "store/interfaces/Comments";
 
 export interface IProductReleaseVersionState {
     byProductFamily: IProductReleaseVersionMap;
@@ -138,7 +139,21 @@ export interface IState {
      */
     language: string;
 
+    /**
+     * Conditions
+     *
+     * @type {IConditionsState}
+     * @memberof IState
+     */
     conditions: IConditionsState;
+
+    /**
+     * Comments
+     *
+     * @type {IComments}
+     * @memberof IState
+     */
+    comments: IComments;
     /**
      * Current selected publication
      *
@@ -163,5 +178,11 @@ export interface IState {
      */
     pages: IPageState;
 
+    /**
+     * Release versions
+     *
+     * @type {IProductReleaseVersionState}
+     * @memberof IState
+     */
     releaseVersions: IProductReleaseVersionState;
 }

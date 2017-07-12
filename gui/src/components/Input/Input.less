@@ -24,8 +24,22 @@
         color: #BFCDD4;
 
     }
+    &::placeholder {
+        color: #9BA9B6;
+        opacity: 1;
+    }
+    &.error::placeholder {
+        color: @accentColor7;
+        opacity: 1;
+    }
     &.small {
+        margin: 5px 0;
         height: 28px;
         font-size: @fontSize;
+    }
+    &[type="date"] {
+        padding-top: 7px;
+        width: 100%;
+        -webkit-appearance: none;
     }
 }
