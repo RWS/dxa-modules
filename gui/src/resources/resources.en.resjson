@@ -22,7 +22,7 @@
   "component.post.comment.post.error": "Oops, something went wrong while trying to post your comment. Try again and if the error persists, please contact an administrator.",
   "component.comments.list.more": "Load more comments",
   "component.comments.list.amount": "Showing {0} of {1} comments",
-  "component.comments.list.error": "We couldn't load comments due to some error. If the error persists, please contact an administrator.",
+  "component.comments.list.error": "We couldn't load comments due to server errors. Please contact an administrator if error persists.",
   "components.productfamilies.no.published.publications": "No publications published yet",
   "components.productfamilies.view.all": "View all products",
   "components.publicationslist.view.all": "View all publications",
