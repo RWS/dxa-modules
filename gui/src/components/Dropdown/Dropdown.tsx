@@ -270,7 +270,7 @@ export class Dropdown extends React.Component<IDropdownProps, IDropdownState> {
                         {items}
                     </ul>
                 </div>
-                <select onChange={this.onChangeSelect.bind(this)}>
+                <select defaultValue={this.state.selected && this.state.selected.value || undefined} onChange={this.onChangeSelect.bind(this)}>
                     {options}
                 </select>
             </div>
