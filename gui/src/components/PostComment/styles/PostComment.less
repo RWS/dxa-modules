@@ -4,7 +4,7 @@
 @inputWidth: 380px;
 
 .sdl-dita-delivery-postcomment {
-    padding: 0 15px;
+    padding: 0 15px 10px;
 
     form {
         > div {
@@ -72,6 +72,11 @@
             .import-icon-font();
             content: @iconError;
             margin-right: 10px;
+            display: inline-block;
+            .sdl-dita-delivery-app.rtl & {
+                margin-left: 10px;
+                margin-right: 0;
+            }
         }
     }
 }
