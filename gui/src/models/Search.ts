@@ -60,7 +60,7 @@ export class Search extends LoadableObject {
                     publicationId: item.PublicationId,
                     publicationTitle: item.PublicationTitle,
                     pageId: TcmId.getItemIdFromTaxonomyItemId(item.Id),
-                    pageTitle: item.PageTitle,
+                    pageTitle: item.Fields["FTITLE.logical.value"],
                     productFamilyTitle: item.ProductFamilyName,
                     productReleaseVersionTitle: item.ProductReleaseName
                 } as ISearchQueryResult;

@@ -32,6 +32,7 @@ import * as TilesListComp from "@sdl/dd/presentation/TopBar";
 import * as TocComp from "@sdl/dd/presentation/Toc";
 import * as TopBarComp from "@sdl/dd/presentation/TopBar";
 import * as VersionSelectorComp from "@sdl/dd/presentation/VersionSelector";
+import * as SearchResultsComp from "@sdl/dd/SearchResults/SearchResults";
 
 export const Components = {
     AppComp, BreadcrumbsComp, CommentComp, CommentsListComp, CommentsSectionComp,
@@ -39,7 +40,7 @@ export const Components = {
     ErrorComp, ErrorContentComp, ErrorTocComp, HomeComp, NavigationMenuComp,
     PageComp, PageLinkComp, PostCommentComp, ProductFamiliesListComp,
     PublicationContentComp, PublicationsListComp, SearchBarComp, TileComp,
-    TilesListComp, TocComp, TopBarComp, VersionSelectorComp
+    TilesListComp, TocComp, TopBarComp, VersionSelectorComp, SearchResultsComp
 };
 
 export * from "interfaces/Comments";
@@ -53,6 +54,7 @@ export * from "interfaces/Services";
 export * from "interfaces/Taxonomy";
 export * from "interfaces/TcmId";
 export * from "interfaces/Window";
+export * from "interfaces/Search";
 
 /**
  * Models
@@ -63,9 +65,10 @@ import * as NavigationLinksModel from "models/NavigationLinks";
 import * as PageModel from "models/Page";
 import * as PublicationsModel from "models/Publications";
 import * as TocModel from "models/Toc";
+import * as SearchModel from "models/Search";
 
 export const Models = {
-    Comment, Comments, NavigationLinksModel, PageModel, PublicationsModel, TocModel
+    Comment, Comments, NavigationLinksModel, PageModel, PublicationsModel, TocModel, SearchModel
 };
 
 /**
@@ -74,10 +77,11 @@ export const Models = {
 import { PageService } from "services/client/PageService";
 import { PublicationService } from "services/client/PublicationService";
 import { TaxonomyService } from "services/client/TaxonomyService";
+import { SearchService } from "services/client/SearchService";
 import { LocalizationService, localization } from "services/common/LocalizationService";
 
 export const Services = {
-    Client: { PageService, PublicationService, TaxonomyService },
+    Client: { PageService, PublicationService, TaxonomyService, SearchService },
     Common: { LocalizationService, localization }
 };
 

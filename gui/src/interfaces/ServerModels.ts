@@ -84,6 +84,7 @@ export interface ISearchResult {
     PublicationTitle?: string;
     ProductFamilyName?: string;
     ProductReleaseName?: string;
+    Fields: { [key: string]: string | string[] | number | number[] | undefined | null };
 }
 export interface IKeyValuePair<TKey, TValue> {
     Key: TKey;

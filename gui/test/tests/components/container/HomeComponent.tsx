@@ -59,7 +59,8 @@ class HomeComponent extends TestBase {
                 }, 0);
             });
 
-            it("can interact with search panel", (): void => {
+            it("can interact with search panel", (done: () => void): void => {
+                const searchQuery = "search on button click";
                 const app = this._renderComponent(target);
                 const appNode = ReactDOM.findDOMNode(app);
                 const homeComp = TestUtils.findRenderedComponentWithType(app, HomePresentation);
@@ -75,6 +76,8 @@ class HomeComponent extends TestBase {
                 expect(homeNode.classList).toContain("search-open");
                 expect(homeNode.classList).not.toContain("search-is-opening");
                 const inputElement = (searchBarNode as HTMLElement).querySelector("input") as HTMLInputElement;
+                inputElement.value = searchQuery;
+
                 const overlayNode = appNode.querySelector(".sdl-dita-delivery-nav-mask") as HTMLElement;
                 expect(getComputedStyle(overlayNode).display).toBe("none");
                 TestUtils.Simulate.focus(inputElement);
@@ -87,6 +90,13 @@ class HomeComponent extends TestBase {
 
                 expect(homeNode.classList).not.toContain("search-open");
                 expect(homeNode.classList).not.toContain("search-is-opening");
+
+                TestUtils.Simulate.click(document.querySelector(".sdl-dita-delivery-searchbar .search-button") as HTMLInputElement);
+                spyOn(browserHistory, "push").and.callFake((path: string): void => {
+                    // Check if routing was called with correct params
+                    expect(path).toBe(`/search/${encodeURIComponent(searchQuery)}`);
+                    done();
+                });
             });
         });
     }

@@ -153,7 +153,7 @@ export class SearchResults extends React.Component<ISearchResultsProps, ISearchR
 
         return (
             <section className={"sdl-dita-delivery-search-results"}>
-                <h1>{formatMessage("search.publication.results", [searchQuery])}</h1>
+                <h1>{formatMessage("search.publication.results")} <strong>{searchQuery}</strong></h1>
                 {
                     error
                         ? <Error
@@ -161,26 +161,34 @@ export class SearchResults extends React.Component<ISearchResultsProps, ISearchR
                             messages={[formatMessage("error.publications.list.not.found"), formatMessage("error.publications.default.message")]}
                             buttons={errorButtons} />
                         : (!isLoading && searchResults)
-                            ? <div className={"search-results-list"}>
-                                <h4>{formatMessage("search.results.total", [searchResults.hits.toString()])}</h4>
-                                <ul>
-                                    {searchResults.queryResults.map((x: ISearchQueryResult, i: number) => this._renderSearchResult(i, x))}
-                                </ul>
-                                {!(searchResults.queryResults.length < (searchResults.hits || 0)) &&
-                                    <div>
-                                        <Button
-                                            skin="graphene"
-                                            purpose={ButtonPurpose.GHOST}
-                                            events={{
-                                                "click": () => this.setState({
-                                                    startIndex: (startIndex || 0) + SHOWN_ITEMS_INCREMENT
-                                                })
-                                            }}>{formatMessage("search.results.more")}
-                                        </Button>
-                                        {formatMessage("search.results.shown", [searchResults.queryResults.length.toString(), searchResults.hits.toString()])}
-                                    </div>
-                                }
-                            </div>
+                            ? (searchResults.hits == 0)
+                                ? <div className={"search-results-list-empty"}>
+                                    {formatMessage("search.no.results")}
+                                    <ul>
+                                        <li>{formatMessage("search.no.results.spelling")}</li>
+                                        <li>{formatMessage("search.no.results.quotation")}</li>
+                                    </ul>
+                                </div>
+                                : <div className={"search-results-list"}>
+                                    <h4>{formatMessage("search.results.total", [searchResults.hits.toString()])}</h4>
+                                    <ul>
+                                        {searchResults.queryResults.map((x: ISearchQueryResult, i: number) => this._renderSearchResult(i, x))}
+                                    </ul>
+                                    {(searchResults.queryResults.length < (searchResults.hits || 0)) &&
+                                        <div>
+                                            <Button
+                                                skin="graphene"
+                                                purpose={ButtonPurpose.GHOST}
+                                                events={{
+                                                    "click": () => this.setState({
+                                                        startIndex: (startIndex || 0) + SHOWN_ITEMS_INCREMENT
+                                                    })
+                                                }}>{formatMessage("search.results.more")}
+                                            </Button>
+                                            {formatMessage("search.results.shown", [searchResults.queryResults.length.toString(), searchResults.hits.toString()])}
+                                        </div>
+                                    }
+                                </div>
                             : <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} />
                 }
             </section>);
@@ -210,7 +218,7 @@ export class SearchResults extends React.Component<ISearchResultsProps, ISearchR
                     <a href={Url.getProductFamilyUrl(searchResult.productFamilyTitle, searchResult.productReleaseVersionTitle)}>{searchResult.productFamilyTitle}</a>}
                 {searchResult.productFamilyTitle && searchResult.productReleaseVersionTitle &&
                     <a href={Url.getProductFamilyUrl(searchResult.productFamilyTitle, searchResult.productReleaseVersionTitle)}>{searchResult.productReleaseVersionTitle}</a>}
-                <a href={Url.getPageUrl(searchResult.publicationId, searchResult.pageId, searchResult.publicationTitle, searchResult.pageTitle)}>{searchResult.pageTitle}</a>
+                <a href={Url.getPublicationUrl(searchResult.publicationId, searchResult.publicationTitle)}>{searchResult.publicationTitle}</a>
             </nav>
             <p>{searchResult.content}</p>
             <span>{

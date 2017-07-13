@@ -47,6 +47,9 @@
   "productreleaseversions.unknown.title": "Onbekende productversie",
   "productreleaseversions.version.label": "Versie:",
   "search.results": "Zoekresultaten",
+  "search.no.results":"Geen resultaten gevonden.",
+  "search.no.results.spelling":"Zorg ervoor dat uw spelling correct is.",
+  "search.no.results.quotation":"Verwijder aanhalingstekens rond zinnen om elk woord afzonderlijk te zoeken: \"gebruikershandleiding\" geeft minder resultaten dan de gebruikershandleiding.",
   "search.results.filter": "Filter resultaten",
   "search.results.filter.contains": "Document dat bevat",
   "search.results.filter.words": "Deze woorden",
@@ -55,7 +58,7 @@
   "search.results.more": "Meer resultaten laden",
   "search.result.language": "Taal: {0}",
   "search.result.last.updated": "Laatst bijgewerkt: {0}",
-  "search.publication.results": "Zoekresultaten voor {0}",
+  "search.publication.results": "Zoekresultaten voor",
   "search.results.bookmark": "Voeg toe aan bladwijzers",
   "search.results.total": "{0} uitslagen",
   "search.results.shown": "Met {0} van {1} resultaten"
