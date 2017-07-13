@@ -10,6 +10,7 @@ import * as AppComp from "@sdl/dd/container/App/App";
 import * as BreadcrumbsComp from "@sdl/dd/presentation/Breadcrumbs";
 import * as CommentComp from "@sdl/dd/Comment/Comment";
 import * as CommentsListComp from "@sdl/dd/CommentsList/CommentsList";
+import * as CommentsSectionComp from "@sdl/dd/CommentsSection/CommentsSection";
 import * as ContentLanguageWarningComp from "@sdl/dd/ContentLanguageWarning/ContentLanguageWarningPresentation";
 import * as ContentNavigationComp from "@sdl/dd/presentation/ContentNavigation";
 import * as DatePickerComp from "@sdl/dd/DatePicker/DatePickerPresentation";
@@ -33,7 +34,7 @@ import * as TopBarComp from "@sdl/dd/presentation/TopBar";
 import * as VersionSelectorComp from "@sdl/dd/presentation/VersionSelector";
 
 export const Components = {
-    AppComp, BreadcrumbsComp, CommentComp, CommentsListComp,
+    AppComp, BreadcrumbsComp, CommentComp, CommentsListComp, CommentsSectionComp,
     ContentLanguageWarningComp, ContentNavigationComp, DatePickerComp, DropdownComp,
     ErrorComp, ErrorContentComp, ErrorTocComp, HomeComp, NavigationMenuComp,
     PageComp, PageLinkComp, PostCommentComp, ProductFamiliesListComp,

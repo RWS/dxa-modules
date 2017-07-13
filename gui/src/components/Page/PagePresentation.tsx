@@ -11,13 +11,9 @@ import { Url } from "utils/Url";
 import { path } from "utils/Path";
 import { ContentNavigation, IContentNavigationItem } from "@sdl/dd/presentation/ContentNavigation";
 import { Error } from "@sdl/dd/presentation/Error";
-import FetchComments from "@sdl/dd/helpers/FetchComments";
-import { CommentsList } from "@sdl/dd/CommentsList/CommentsList";
+import { CommentsSection } from "@sdl/dd/CommentsSection/CommentsSection";
 import { IAppContext } from "@sdl/dd/container/App/App";
 import { IPageService } from "services/interfaces/PageService";
-import { IPostCommentPresentationState } from "@sdl/dd/PostComment/PostCommentPresentation";
-import { PostComment } from "@sdl/dd/PostComment/PostComment";
-import { IPostComment } from "interfaces/Comments";
 
 import "components/presentation/styles/Page";
 import "components/controls/styles/ActivityIndicator";
@@ -107,8 +103,6 @@ export interface IPageProps {
     onNavigate(url: string): void;
 
     fetchPage?(pageService: IPageService, publicationId: string, pageId: string): void;
-
-    saveComment?(pageService: IPageService, commentData: IPostComment): void;
 }
 
 /**
@@ -161,8 +155,6 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
         this.state = {
             navItems: []
         };
-
-        this.handlePostComment = this.handlePostComment.bind(this);
     }
 
     /**
@@ -176,24 +168,6 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
         }
     }
 
-    public handlePostComment = (event: React.FormEvent<HTMLFormElement>, data: IPostCommentPresentationState): void => {
-        const { pageService } = this.context.services;
-        const { name, email, comment } = data;
-        const props = this.props;
-
-        event.preventDefault();
-        if (props.saveComment) {
-            props.saveComment(pageService, {
-                publicationId: props.publicationId as string,
-                pageId: props.id as string,
-                username: name,
-                email: email,
-                content: comment,
-                parentId: 0
-            });
-        }
-    }
-
     /**
      * Render the component
      *
@@ -201,7 +175,7 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
      */
     public render(): JSX.Element {
         const props = this.props;
-        const { activeHeader, error, direction } = props;
+        const { activeHeader, error, direction, id } = props;
         const { navItems } = this.state;
         const { formatMessage } = this.context.services.localizationService;
         const activeNavItemId = activeHeader ? activeHeader.id : (navItems.length > 0 ? navItems[0].id : undefined);
@@ -216,6 +190,7 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
             formatMessage("error.page.not.found"),
             formatMessage("error.default.message")
         ];
+        const showCommentsComponents = !error && id;
 
         const appClass = ClassNames(direction, "page-content");
 
@@ -235,9 +210,7 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
                         : <article className={appClass}
                             dangerouslySetInnerHTML={{ __html: props.content || formatMessage("components.page.nothing.selected") }} />}
                 </article>
-                {!error && <PostComment handleSubmit={this.handlePostComment} />}
-                {!error && <FetchComments descending={true} />}
-                {!error && <CommentsList />}
+                {showCommentsComponents && <CommentsSection />}
             </div >
         );
     }
