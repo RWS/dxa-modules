@@ -42,7 +42,7 @@ export const ConditionsLabelManager: React.StatelessComponent<IConditionalLabelM
         itemData={(item: ILabelManagerItem, callback: (itemData: ILabelManagerItem | null) => void): void => callback(id2item(item))}
         typeahead={{
             load: (query: string, callback: (result: ITypeaheadSuggestion[]) => void): void => {
-                const filtered = condition.values.filter(value => value.indexOf(query) >= 0);
+                const filtered = condition.values.filter(value => value.toLowerCase().indexOf(query.toLowerCase()) >= 0);
                 callback(filtered.map((value: string) => ({
                     label: value,
                     description: value

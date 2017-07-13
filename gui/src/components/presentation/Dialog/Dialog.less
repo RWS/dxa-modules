@@ -2,10 +2,14 @@
 
 @border: 1px solid @neutralColor5;
 
+.sdl-dialog-wrapper {
+    display: flex;  /* Fix for IE only to display a scrollbar */
+}
+
 .sdl-dialog-container {
     position: fixed;
     top: 0; right: 0; bottom: 0; left: 0;
-    z-index: 1000; /* Need this because of top tool bar */
+    z-index: 10; /* Need this because of top tool bar */
 
     display: flex;
     align-items: center;
@@ -34,9 +38,10 @@
         flex-direction: column;
 
         @media screen and (min-width: (1+@screenSm)) {
-            position: relative; /**/
+            position: relative;
             width: 60vw;
-            max-height: 80vh; min-height: 20vh;
+            max-height: 80vh; 
+            min-height: 20vh;
             box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 45px, rgba(0, 0, 0, 0.22) 0px 10px 18px;
             border-radius: 2px;
         }
@@ -102,10 +107,15 @@
             .sdl-dialog-close-btn {
                 display: block;
                 position: absolute;
-                top: .6em; right: 1em;
+                top: .6em; 
+                right: 1em;
                 color: @neutralColor6;
                 background-color: @accentColor1;
                 font-size: 1.3em;
+                .sdl-dita-delivery-app.rtl & {
+                    right: auto;
+                    left: 1em;
+                }
             }
         }
     }
