@@ -63,7 +63,7 @@
         PublicationId: number;
         PublicationTitle: string;
     }
-    export interface ISearchResultsList {
+    export interface ISearchResults {
         Count: number;
         Hits: number;
         QueryResults: ISearchResult[];
