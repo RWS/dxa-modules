@@ -5,7 +5,6 @@
  * @interface ISearchQuery
  */
 export interface ISearchQuery {
-
     /**
      * Publication Id
      *
@@ -15,7 +14,7 @@ export interface ISearchQuery {
 
     publicationId?: string;
     /**
-     * Taxonomy title
+     * Search query
      *
      * @type {string}
      * @memberOf ISearchQuery
@@ -48,12 +47,35 @@ export interface ISearchQuery {
 }
 
 /**
+ * Search resuls interface
+ *
+ * @export
+ * @interface ISearchQueryResults
+ */
+export interface ISearchQueryResults {
+    /**
+     * Search total results
+     *
+     * @type {number}
+     * @memberOf ISearchQueryResults
+     */
+    hits: number;
+    /**
+     * search query results
+     *
+     * @type {string}
+     * @memberOf ISearchQueryResults
+     */
+    queryResults: ISearchQueryResult[];
+}
+
+/**
  * Search resul interface
  *
  * @export
- * @interface ISearchResult
+ * @interface ISearchQueryResult
  */
-export interface ISearchResult {
+export interface ISearchQueryResult {
     /**
      * item Id
      *
@@ -61,6 +83,7 @@ export interface ISearchResult {
      * @memberOf ISearchResult
      */
     id: string;
+
     /**
      * Taxonomy title
      *
@@ -86,12 +109,36 @@ export interface ISearchResult {
     productReleaseVersionTitle?: string;
 
     /**
+     * Publication id
+     *
+     * @type {string}
+     * @memberOf ISearchResult
+     */
+    publicationId: string;
+
+    /**
+     * Publication title
+     *
+     * @type {string}
+     * @memberOf ISearchResult
+     */
+    publicationTitle: string;
+
+    /**
+     * Page id
+     *
+     * @type {string}
+     * @memberOf ISearchResult
+     */
+    pageId: string;
+
+    /**
      * Page title
      *
      * @type {string}
      * @memberOf ISearchResult
      */
-    pageTitle?: string;
+    pageTitle: string;
 
     /**
      * content language

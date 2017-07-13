@@ -3,7 +3,8 @@
 @defaultMargin: 15px;
 .sdl-dita-delivery-search-results {
     position: relative;
-    max-width: @screenXl;
+    // As filter is not yet in use, we distribute its width to the search screen margins
+    max-width: @screenXl - @filterWidth;
     margin: 0 auto;
     h1 {
         .header-font(300, @h1Size, @h1Size * 2);

@@ -1,5 +1,5 @@
 import { ISearchService } from "services/interfaces/SearchService";
-import { ISearchQuery, ISearchResult } from "interfaces/Search";
+import { ISearchQuery, ISearchQueryResults } from "interfaces/Search";
 
 import { Search } from "models/Search";
 import { Promise } from "es6-promise";
@@ -18,23 +18,23 @@ export class SearchService implements ISearchService {
      *
      * @private
      * @static
-     * @type {Search}
+     * @type {{ [publicationId: string]: { [searchQuery: string]: Search } }}
      */
-    protected static SearchModel: Search | undefined;
+    protected static SearchModel:
+    { [key: string]: Search } = {};
 
     /**
-     * Get the site map items for a parent
+     * Get search results
      *
-     * @param {string} publicationId Publication Id
-     * @param {string} parentId The parent Id
-     * @returns {Promise<ISearchResult[]>} Promise to return Items
+     * @param {ISearchQuery} query Search query
+     * @returns {Promise<ISearchQueryResults>} Promise to return Items
      *
      * @memberOf DataStoreClient
      */
-    public getSearchResults(query: ISearchQuery): Promise<ISearchResult[]> {
-        const search = this.getSearchModel();
+    public getSearchResults(query: ISearchQuery): Promise<ISearchQueryResults> {
+        const search = this.getSearchModel(query);
 
-        return new Promise((resolve: (items?: ISearchResult[]) => void, reject: (error: string | null) => void) => {
+        return new Promise((resolve: (items?: ISearchQueryResults) => void, reject: (error: string | null) => void) => {
             let removeEventListeners: () => void;
             const onLoad = () => {
                 removeEventListeners();
@@ -51,14 +51,22 @@ export class SearchService implements ISearchService {
 
             search.addEventListener("load", onLoad);
             search.addEventListener("loadfailed", onLoadFailed);
-            search.load();
+            search.load(true);
         });
     }
 
-    protected getSearchModel(): Search {
+    private getSearchModel(query: ISearchQuery): Search {
         if (!SearchService.SearchModel) {
-            SearchService.SearchModel = new Search();
+            SearchService.SearchModel = {};
         }
-        return SearchService.SearchModel;
+        const key = this._getKey(query);
+        if (!SearchService.SearchModel[key]) {
+            SearchService.SearchModel[key] = new Search(query);
+        }
+        return SearchService.SearchModel[key] as Search;
+    }
+
+    private _getKey(query: ISearchQuery): string {
+        return [query.publicationId || "", query.searchQuery].join("||");
     }
 }

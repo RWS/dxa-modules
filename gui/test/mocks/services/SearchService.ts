@@ -1,5 +1,5 @@
 import { ISearchService } from "services/interfaces/SearchService";
-import { ISearchQuery, ISearchResult } from "interfaces/Search";
+import { ISearchQuery, ISearchQueryResults } from "interfaces/Search";
 import { Promise } from "es6-promise";
 
 let fakeDelay = false;
@@ -9,16 +9,16 @@ export class SearchService implements ISearchService {
 
     private _mockDataToc: {
         error: string | null;
-        items: ISearchResult[]
+        items: ISearchQueryResults | undefined
     } = {
         error: null,
-        items: []
+        items: undefined
     };
 
-    public getSearchResults(query: ISearchQuery): Promise<ISearchResult[]> {
+    public getSearchResults(query: ISearchQuery): Promise<ISearchQueryResults> {
         const { error, items } = this._mockDataToc;
         if (fakeDelay) {
-            return new Promise((resolve: (items?: ISearchResult[]) => void, reject: (error: string | null) => void) => {
+            return new Promise((resolve: (items?: ISearchQueryResults) => void, reject: (error: string | null) => void) => {
                 setTimeout((): void => {
                     if (error) {
                         reject(error);
@@ -37,10 +37,10 @@ export class SearchService implements ISearchService {
         }
     }
 
-    public setMockDataToc(error: string | null, items?: ISearchResult[]): void {
+    public setMockDataToc(error: string | null, result?: ISearchQueryResults): void {
         this._mockDataToc = {
             error: error,
-            items: items || []
+            items: result || undefined
         };
     }
 

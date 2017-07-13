@@ -1,5 +1,5 @@
 import { ISearchService } from "services/interfaces/SearchService";
-import { ISearchQuery, ISearchResult } from "interfaces/Search";
+import { ISearchQuery, ISearchQueryResults } from "interfaces/Search";
 import { Promise } from "es6-promise";
 
 /**
@@ -13,21 +13,21 @@ export class SearchService implements ISearchService {
 
     private _mockDataToc: {
         error: string | null;
-        children: ISearchResult[]
+        children: ISearchQueryResults | undefined
     } = {
         error: null,
-        children: []
+        children: undefined
     };
 
     /**
      * Get search results
      *
      * @param {query} query Search query
-     * @returns {Promise<ISearchResult[]>} Promise to return Items
+     * @returns {Promise<ISearchQueryResults>} Promise to return Results
      *
      * @memberOf DataStoreClient
      */
-    public getSearchResults(query: ISearchQuery): Promise<ISearchResult[]> {
+    public getSearchResults(query: ISearchQuery): Promise<ISearchQueryResults> {
         const { error, children } = this._mockDataToc;
         if (error) {
             return Promise.reject(error);

@@ -1,81 +1,66 @@
-[{
-    "Id": "ish_1176127-164155-16",
-    "Name": "udp-content-default",
-    "ItemType": "page",
-    "Fields": {
-      "FTITLE.logical.value": "connectors overview",
-      "ishlogicalref.object.id": 164151,
-      "FAUTHOR.lng.value": "admin",
-      "VERSION.version.value": "1",
-      "FDESCRIPTION.logical.value": "",
-      "ishtype.object.value": "ISHModule",
-      "ishversionref.object.id": 164152,
-      "CREATED-ON.lng.value": "2015-12-22T18:26:40Z",
-      "ishref.object.value": "GUID-03AB2EA1-F81B-4A22-8149-710094BE1081",
-      "FCHANGES.version.value": "Change1",
-      "MODIFIED-ON.lng.value": "2016-05-27T08:08:10Z",
-      "DOC-LANGUAGE.lng.value": [
-        "en"
-      ],
-      "READ-ACCESS.logical.element": null,
-      "FISHREVCOUNTER.lng.value": "2",
-      "ishlngref.object.id": 164155,
-      "ED.lng.value": "GUID-C10CD0F6-3EE9-40B6-9BBE-0FC3A225096E",
-      "FISHRELEASELABEL.version.value": [
-        "Publication MP330-v1-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2012/09/21 12:27:01",
-        "Publication MP330-v2-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2012/09/24 17:31:39",
-        "Publication MP660-v1-GUID-EB2E82F1-1C76-4032-815C-4E717140A081-2012/09/24 14:57:38",
-        "Publication MP660-v2-GUID-EB2E82F1-1C76-4032-815C-4E717140A081-2012/09/24 17:09:12",
-        "Publication MP330-v3-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2016/02/11 10:42:22"
-      ],
-      "FUSERGROUP.logical.element": null,
-      "FSTATUS.lng.value": "Released",
-      "publicationtitle.generated.value": "Publication MP330"
+{
+  "Hits": 5,
+  "Count": 10,
+  "StartIndex": 0,
+  "QueryResults": [{
+      "Id": "ish_2261715-164171-16",
+      "Locale": "en",
+      "Highlighted": {},
+      "Content": "General Packet Radio Service (GPRS)                   General Packet Radio Service (GPRS)                                 GPRS technology allows mobile phones to be used for sending and receiving data over the mobile network (network service).                           GPRS technology allows mobile phones to be used for sending and receiving data over the mobile network (network service).            GPRS as such is a data bearer that enables wireless access to data networks like the Internet. The applications that may use            GPRS are WAP services, MMS and SMS messaging, and Java application downloading.                                    Before you can use GPRS technology                                          Contact your network operator or service provider for availability, pricing and subscription to the GPRS service.                                             Save the GPRS settings for each of the applications used over GPRS.                                                                                                                                                   Parent topic: Your phone                                       General Packet Radio Service (GPRS)                   General Packet Radio Service (GPRS)                                 GPRS technology allows mobile phones to be used for sending and receiving data over the mobile network (network service).                           GPRS technology allows mobile phones to be used for sending and receiving data over the mobile network (network service).            GPRS as such is a data bearer that enables wireless access to data networks like the Internet. The applications that may use            GPRS are WAP services, MMS and SMS messaging, and Java application downloading.                                    Before you can use GPRS technology                                          Contact your network operator or service provider for availability, pricing and subscription to the GPRS service.                                             Save the GPRS settings for each of the applications used over GPRS.                                                                                                                                                   Parent topic: Your phone                                       General Packet Radio Service (GPRS)                   General Packet Radio Service (GPRS)                                 GPRS technology allows mobile phones to be used for sending and receiving data over the mobile network (network service).                           GPRS technology allows mobile phones to be used for sending and receiving data over the mobile network (network service).            GPRS as such is a data bearer that enables wireless access to data networks like the Internet. The applications that may use            GPRS are WAP services, MMS and SMS messaging, and Java application downloading.                                    Before you can use GPRS technology                                          Contact your network operator or service provider for availability, pricing and subscription to the GPRS service.                                             Save the GPRS settings for each of the applications used over GPRS.                                                                                                                                                   Parent topic: Your phone                                       General Packet Radio Service (GPRS)                   General Packet Radio Service (GPRS)                                 GPRS technology allows mobile phones to be used for sending and receiving data over the mobile network (network service).                           GPRS technology allows mobile phones to be used for sending and receiving data over the mobile network (network service).            GPRS as such is a data bearer that enables wireless access to data networks like the Internet. The applications that may use            GPRS are WAP services, MMS and SMS messaging, and Java application downloading.                                    Before you can use GPRS technology                                          Contact your network operator or service provider for availability, pricing and subscription to the GPRS service.                                             Save the GPRS settings for each of the applications used over GPRS.                                                                                                                                                   Parent topic: Your phone                                       General Packet Radio Service (GPRS)                   General Packet Radio Service (GPRS)                                 GPRS technology allows mobile phones to be used for sending and receiving data over the mobile network (network service).                           GPRS technology allows mobile phones to be used for sending and receiving data over the mobile network (network service).            GPRS as such is a data bearer that enables wireless access to data networks like the Internet. The applications that may use            GPRS are WAP services, MMS and SMS messaging, and Java application downloading.                                    Before you can use GPRS technology                                          Contact your network operator or service provider for availability, pricing and subscription to the GPRS service.                                             Save the GPRS settings for each of the applications used over GPRS.                                                                                                                                                   Parent topic: Your phone                                       ",
+      "CreatedDate": "2015-12-23T04:56:43+0000",
+      "ModifiedDate": "2016-04-08T15:11:23+0000",
+      "PublicationId": 2261715,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
     },
-    "Locale": "en",
-    "Highlighted": {
-
+    {
+      "Id": "ish_2261715-164255-16",
+      "Locale": "en",
+      "Highlighted": {},
+      "Content": "Essential indicators in standby mode                   Essential indicators in standby mode                                                             You have received one or several text or picture messages.                                     You have received one or several multimedia messages.                                     You have received one or several voice messages.                                    The phone’s keypad is locked.                                     A GPRS connection is established. The indicator is shown on the top left of the display.                                      The GPRS connection is suspended (on hold), for example if there is an incoming or outgoing call during a GPRS connection.                                     The stopwatch timing is running in the background.                                     The loudspeaker has been activated.                                     Indicates that Bluetooth is active.                                    Indicates that data is transmitted via Bluetooth.                                                                                             Parent topic: Your phone                                                Related concepts                                    Standby mode                                    Related tasks                                    Installing the SIM card and the battery                        Charging the battery                                    Related information                                    Connectors overview                           ",
+      "CreatedDate": "2015-12-23T04:56:55+0000",
+      "ModifiedDate": "2016-04-08T15:11:47+0000",
+      "PublicationId": 2261715,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
     },
-    "Content": "Connectors overview Connectors overview Charger connector Connector for headsets, the connectivity cable and loopset Audio line-in connector for the audio cable to connect the phone to external audio equipment "
-  },
-  {
-    "Id": "ish_1176127-164163-16",
-    "Name": "udp-content-default",
-    "ItemType": "page",
-    "Fields": {
-      "FTITLE.logical.value": "listening to the radio",
-      "ishlogicalref.object.id": 164159,
-      "FAUTHOR.lng.value": "admin",
-      "VERSION.version.value": "1",
-      "FDESCRIPTION.logical.value": "",
-      "ishtype.object.value": "ISHModule",
-      "ishversionref.object.id": 164160,
-      "CREATED-ON.lng.value": "2015-12-22T18:26:42Z",
-      "ishref.object.value": "GUID-0B4A7CB0-DF4C-4753-B283-9F5F5FEA0D0E",
-      "FCHANGES.version.value": "Change1",
-      "MODIFIED-ON.lng.value": "2016-05-27T08:08:10Z",
-      "DOC-LANGUAGE.lng.value": [
-        "en"
-      ],
-      "READ-ACCESS.logical.element": null,
-      "FISHREVCOUNTER.lng.value": "2",
-      "ishlngref.object.id": 164163,
-      "ED.lng.value": "GUID-245074EA-6850-4B35-B8FD-094E20C48F7A",
-      "FISHRELEASELABEL.version.value": [
-        "Publication MP330-v1-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2012/09/21 12:27:01",
-        "Publication MP330-v2-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2012/09/24 17:31:39",
-        "Publication MP660-v1-GUID-EB2E82F1-1C76-4032-815C-4E717140A081-2012/09/24 14:57:38",
-        "Publication MP660-v2-GUID-EB2E82F1-1C76-4032-815C-4E717140A081-2012/09/24 17:09:12",
-        "Publication MP330-v3-GUID-789BBB3D-8A09-4916-8857-09A246CB6F59-2016/02/11 10:42:22"
-      ],
-      "FUSERGROUP.logical.element": null,
-      "FSTATUS.lng.value": "Released",
-      "publicationtitle.generated.value": "Publication MP330"
+    {
+      "Id": "ish_2261715-1642531-16",
+      "Locale": "en",
+      "Highlighted": {},
+      "Content": "Your phone                   Your phone                                                                                                                                                Keys overview                                                   Connectors overview                                                   Standby mode               When the phone is ready for use, and you have not keyed in any characters, the phone is in standby mode. The name of the service               provider/logo appears in the display.                                    Essential indicators in standby mode                                                   Screen saver               The phone automatically activates the screen saver, a digital clock view, for power saving in standby mode.                                    General Packet Radio Service (GPRS)               GPRS technology allows mobile phones to be used for sending and receiving data over the mobile network (network service).                                    Bluetooth Connection               You can transfer data from your phone to another compatible device, for example, a phone, a headset using Bluetooth technology.                                                   ",
+      "CreatedDate": "2015-12-23T04:56:51+0000",
+      "ModifiedDate": "2016-04-08T15:11:39+0000",
+      "PublicationId": 2261715,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
     },
-    "Locale": "en",
-    "Highlighted": {
-
+    {
+      "Id": "ish_2261715-16457231-16",
+      "Locale": "en",
+      "Highlighted": {},
+      "Content": "Your phone                   Your phone                                                                                                                                                Keys overview                                                   Connectors overview                                                   Standby mode               When the phone is ready for use, and you have not keyed in any characters, the phone is in standby mode. The name of the service               provider/logo appears in the display.                                    Essential indicators in standby mode                                                   Screen saver               The phone automatically activates the screen saver, a digital clock view, for power saving in standby mode.                                    General Packet Radio Service (GPRS)               GPRS technology allows mobile phones to be used for sending and receiving data over the mobile network (network service).                                    Bluetooth Connection               You can transfer data from your phone to another compatible device, for example, a phone, a headset using Bluetooth technology.                                                   ",
+      "CreatedDate": "2015-12-23T04:56:51+0000",
+      "ModifiedDate": "2016-04-08T15:11:39+0000",
+      "PublicationId": 2261715,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
     },
-    "Content": "Listening to the radio Listening to the radio To listen to the radio on your phone connect a compatible headset to the phone. The lead of the headset functions as the antenna of the radio, so let it hang freely. Press the Music key and select Radio. To tune a channel, press and hold or and the channel search starts. Searching stops when a channel is found. "
-  }
-]
+    {
+      "Id": "ish_2261715-169874231-16",
+      "Locale": "en",
+      "Highlighted": {},
+      "Content": "Your phone                   Your phone                                                                                                                                                Keys overview                                                   Connectors overview                                                   Standby mode               When the phone is ready for use, and you have not keyed in any characters, the phone is in standby mode. The name of the service               provider/logo appears in the display.                                    Essential indicators in standby mode                                                   Screen saver               The phone automatically activates the screen saver, a digital clock view, for power saving in standby mode.                                    General Packet Radio Service (GPRS)               GPRS technology allows mobile phones to be used for sending and receiving data over the mobile network (network service).                                    Bluetooth Connection               You can transfer data from your phone to another compatible device, for example, a phone, a headset using Bluetooth technology.                                                   ",
+      "CreatedDate": "2015-12-23T04:56:51+0000",
+      "ModifiedDate": "2016-04-08T15:11:39+0000",
+      "PublicationId": 2261715,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
+    }
+  ]
+}

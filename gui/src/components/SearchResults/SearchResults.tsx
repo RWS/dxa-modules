@@ -1,19 +1,15 @@
 import * as React from "react";
-// import { Promise } from "es6-promise";
-// import { Link } from "react-router";
 import { ButtonPurpose } from "@sdl/controls";
 import { ActivityIndicator, Button } from "@sdl/controls-react-wrappers";
-
 import { Error } from "@sdl/dd/presentation/Error";
-
 import { IAppContext } from "@sdl/dd/container/App/App";
-// import { Url } from "utils/Url";
-
-import { ISearchResult, ISearchQuery } from "interfaces/Search";
-//import { ISearchService } from "services/interfaces/SearchService";
+import { ISearchQueryResults, ISearchQueryResult, ISearchQuery } from "interfaces/Search";
+import { Url } from "utils/Url";
 
 import "components/controls/styles/ActivityIndicator";
 import "./SearchResults.less";
+
+const SHOWN_ITEMS_INCREMENT = 10;
 
 /**
  *  Search results component props params
@@ -78,18 +74,18 @@ export interface ISearchResultsState {
     /**
      * Search results list
      *
-     * @type {ISearchResult[]}
+     * @type {ISearchQueryResults}
      * @memberOf ISearchResultsState
      */
-    searchResults?: ISearchResult[];
+    searchResults?: ISearchQueryResults;
 
     /**
-     * Search results hits
+     * Search results start index
      *
      * @type {number}
      * @memberOf ISearchResultsState
      */
-    searchResultsHits?: number;
+    startIndex?: number;
 }
 
 /**
@@ -98,8 +94,7 @@ export interface ISearchResultsState {
 export class SearchResults extends React.Component<ISearchResultsProps, ISearchResultsState> {
 
     public static contextTypes: React.ValidationMap<IAppContext> = {
-        services: React.PropTypes.object.isRequired,
-        router: React.PropTypes.object.isRequired
+        services: React.PropTypes.object.isRequired
     };
 
     public context: IAppContext;
@@ -115,7 +110,7 @@ export class SearchResults extends React.Component<ISearchResultsProps, ISearchR
         this.state = {
             isLoading: undefined,
             searchResults: undefined,
-            searchResultsHits: 100,
+            startIndex: 0,
             error: undefined
         };
     }
@@ -133,8 +128,12 @@ export class SearchResults extends React.Component<ISearchResultsProps, ISearchR
      *
      * @param {ISearchResultsProps} nextProps Next props
      */
-    public componentWillUpdate(nextProps: ISearchResultsProps): void {
-        if (nextProps.params.searchQuery !== this.props.params.searchQuery) {
+    public componentWillUpdate(nextProps: ISearchResultsProps, nextState: ISearchResultsState): void {
+        const { publicationId, searchQuery } = this.props.params;
+        const { startIndex } = this.state;
+        if ((nextProps.params.searchQuery !== searchQuery) ||
+            (nextProps.params.publicationId !== publicationId) ||
+            (nextState.startIndex !== startIndex)) {
             this._fetchSearchResults();
         }
     }
@@ -145,8 +144,8 @@ export class SearchResults extends React.Component<ISearchResultsProps, ISearchR
      * @returns {JSX.Element}
      */
     public render(): JSX.Element {
-        const { publicationId } = this.props.params;
-        const { searchResults, searchResultsHits, isLoading, error } = this.state;
+        const { searchQuery } = this.props.params;
+        const { searchResults, isLoading, error, startIndex } = this.state;
         const { formatMessage } = this.context.services.localizationService;
         const errorButtons = <div>
             <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{ "click": () => this._fetchSearchResults() }}>{formatMessage("control.button.retry")}</Button>
@@ -154,11 +153,7 @@ export class SearchResults extends React.Component<ISearchResultsProps, ISearchR
 
         return (
             <section className={"sdl-dita-delivery-search-results"}>
-                <h1>{
-                    publicationId
-                        ? formatMessage("search.publication.results", ["" + publicationId])
-                        : formatMessage("search.results")
-                }</h1>
+                <h1>{formatMessage("search.publication.results", [searchQuery])}</h1>
                 {
                     error
                         ? <Error
@@ -167,20 +162,24 @@ export class SearchResults extends React.Component<ISearchResultsProps, ISearchR
                             buttons={errorButtons} />
                         : (!isLoading && searchResults)
                             ? <div className={"search-results-list"}>
-                                <h4>{formatMessage("search.results.total", [searchResults.length.toString()])}</h4>
+                                <h4>{formatMessage("search.results.total", [searchResults.hits.toString()])}</h4>
                                 <ul>
-                                    {searchResults.map((x: ISearchResult, i: number) => this._renderSearchResult(i, x))}
+                                    {searchResults.queryResults.map((x: ISearchQueryResult, i: number) => this._renderSearchResult(i, x))}
                                 </ul>
-                                <div>
-                                    <Button
-                                        skin="graphene"
-                                        purpose={ButtonPurpose.GHOST}
-                                        events={{"click": () => {
-
-                                        }}}>{formatMessage("search.results.more")}
-                                    </Button>
-                                    {formatMessage("search.results.shown", [searchResults.length.toString(), (searchResultsHits || 0).toString()])}
-                                </div>
+                                {!(searchResults.queryResults.length < (searchResults.hits || 0)) &&
+                                    <div>
+                                        <Button
+                                            skin="graphene"
+                                            purpose={ButtonPurpose.GHOST}
+                                            events={{
+                                                "click": () => this.setState({
+                                                    startIndex: (startIndex || 0) + SHOWN_ITEMS_INCREMENT
+                                                })
+                                            }}>{formatMessage("search.results.more")}
+                                        </Button>
+                                        {formatMessage("search.results.shown", [searchResults.queryResults.length.toString(), searchResults.hits.toString()])}
+                                    </div>
+                                }
                             </div>
                             : <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} />
                 }
@@ -199,22 +198,26 @@ export class SearchResults extends React.Component<ISearchResultsProps, ISearchR
      *
      * @returns {JSX.Element}
      */
-    private _renderSearchResult(i: number, searchResult: ISearchResult): JSX.Element {
+    private _renderSearchResult(i: number, searchResult: ISearchQueryResult): JSX.Element {
         const { formatMessage } = this.context.services.localizationService;
-        const modifiedDate = searchResult.lastModifiedDate && new Date(searchResult.lastModifiedDate).toLocaleString(/*getLanguage(), options*/);
+        const modifiedDate = searchResult.lastModifiedDate && new Date(searchResult.lastModifiedDate).toLocaleString();
         return <li key={i} tabIndex={i}>
-            <h3>{searchResult.pageTitle}<button title={formatMessage("search.results.bookmark")} onClick={() => this._addToBookmarks() }/></h3>
+            <h3>{searchResult.pageTitle}<button title={formatMessage("search.results.bookmark")} onClick={() => this._addToBookmarks(
+                Url.getPageUrl(searchResult.publicationId, searchResult.pageId, searchResult.publicationTitle, searchResult.pageTitle),
+                searchResult.pageTitle)} /></h3>
             <nav>
-                <a href="">{searchResult.productFamilyTitle}</a>
-                <a href="">{searchResult.productReleaseVersionTitle}</a>
-                <a href="">{searchResult.pageTitle}</a>
+                {searchResult.productFamilyTitle &&
+                    <a href={Url.getProductFamilyUrl(searchResult.productFamilyTitle, searchResult.productReleaseVersionTitle)}>{searchResult.productFamilyTitle}</a>}
+                {searchResult.productFamilyTitle && searchResult.productReleaseVersionTitle &&
+                    <a href={Url.getProductFamilyUrl(searchResult.productFamilyTitle, searchResult.productReleaseVersionTitle)}>{searchResult.productReleaseVersionTitle}</a>}
+                <a href={Url.getPageUrl(searchResult.publicationId, searchResult.pageId, searchResult.publicationTitle, searchResult.pageTitle)}>{searchResult.pageTitle}</a>
             </nav>
-            <p>{[...Array(20)].join(searchResult.content + " ")}</p>
+            <p>{searchResult.content}</p>
             <span>{
                 `${formatMessage("search.result.last.updated", [modifiedDate || ""])}`
-                } &emsp; {
-                `${formatMessage("search.result.language", [searchResult.language || ""])}`
-            }</span>
+            } &emsp; {
+                    `${formatMessage("search.result.language", [searchResult.language || ""])}`
+                }</span>
         </li>;
     }
 
@@ -223,6 +226,7 @@ export class SearchResults extends React.Component<ISearchResultsProps, ISearchR
      */
     private _fetchSearchResults(): void {
         const { publicationId, searchQuery } = this.props.params;
+        const { startIndex } = this.state;
         const { searchService } = this.context.services;
 
         this.setState({
@@ -232,7 +236,8 @@ export class SearchResults extends React.Component<ISearchResultsProps, ISearchR
         // Get search results families list
         searchService.getSearchResults({
             publicationId,
-            searchQuery
+            searchQuery,
+            startIndex
         } as ISearchQuery).then(
             searchResults => {
                 /* istanbul ignore else */
@@ -257,9 +262,10 @@ export class SearchResults extends React.Component<ISearchResultsProps, ISearchR
     }
 
     /**
-     * fetch search results
+     * Add to bookmarks
      */
-    private _addToBookmarks(): void {
-        alert("Add to bookmarks");
+    private _addToBookmarks(url: string, title: string): void {
+        // there is no nice crossbrowser solution.
+        console.log("Add to bookmark");
     }
 }

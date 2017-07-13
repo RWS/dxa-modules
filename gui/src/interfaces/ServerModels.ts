@@ -37,7 +37,7 @@ export interface ICondition {
 }
 export interface IPage {
     Id: string;
-    Meta: { [key: string ]: string | string[] | number | number[] | undefined | null };
+    Meta: { [key: string]: string | string[] | number | number[] | undefined | null };
     Regions: IRegion[];
 }
 export interface IPublication {
@@ -65,11 +65,25 @@ export interface IUser {
     id: number;
     name: string;
 }
+export interface ISearchResults {
+    Hits: number;
+    Count: number;
+    StartIndex: number;
+    QueryResults: ISearchResult[];
+}
 export interface ISearchResult {
     Id: string;
-    Content: string;
     Locale: string;
-    Fields: IKeyValuePair<string, string>;
+    Highlighted?: string;
+    Content: string;
+    CreatedDate?: string;
+    ModifiedDate?: string;
+    PageId?: string;
+    PageTitle?: string;
+    PublicationId?: string;
+    PublicationTitle?: string;
+    ProductFamilyName?: string;
+    ProductReleaseName?: string;
 }
 export interface IKeyValuePair<TKey, TValue> {
     Key: TKey;
