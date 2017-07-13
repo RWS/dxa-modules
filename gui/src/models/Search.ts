@@ -57,7 +57,7 @@ export class Search extends LoadableObject {
                     content: item.Content,
                     language: item.Locale,
                     lastModifiedDate: item.ModifiedDate,
-                    publicationId: item.PublicationId,
+                    publicationId: item.PublicationId.toString(),
                     publicationTitle: item.PublicationTitle,
                     pageId: TcmId.getItemIdFromTaxonomyItemId(item.Id),
                     pageTitle: item.Fields["FTITLE.logical.value"],
