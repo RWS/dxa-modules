@@ -29,8 +29,8 @@ class PageServiceTests extends TestBase {
                 searchService.getSearchResults(query).then(searchResults => {
                     expect(searchResults).toBeDefined();
                     if (searchResults) {
-                        expect(searchResults.hits).toBe(5);
-                        expect(searchResults.queryResults.length).toBe(5);
+                        expect(searchResults.hits).toBe(352);
+                        expect(searchResults.queryResults.length).toBe(10);
                     }
                     done();
                 }).catch(error => {
@@ -48,8 +48,8 @@ class PageServiceTests extends TestBase {
                 searchService.getSearchResults(query).then(searchResults => {
                     expect(searchResults).toBeDefined();
                     if (searchResults) {
-                        expect(searchResults.hits).toBe(5);
-                        expect(searchResults.queryResults.length).toBe(5);
+                        expect(searchResults.hits).toBe(352);
+                        expect(searchResults.queryResults.length).toBe(10);
                         expect(spy).toHaveBeenCalled();
                     }
                     done();
