@@ -18,6 +18,7 @@
   "component.post.comment.post.error": "Oeps, er is iets fout gegaan tijdens het proberen om uw reactie te plaatsen, probeer het opnieuw en als de fout blijft bestaan, neem dan contact op met een beheerder",
   "component.comments.list.more": "Meer reacties laden",
   "component.comments.list.amount": "Weergeven {0} van {1} opmerkingen",
+  "component.comments.list.error": "We konden geen reacties laden door sommige fouten. Probeer opnieuw en als de fout blijft bestaan, neem dan contact op met een beheerder.",
   "control.button.retry": "Opnieuw proberen",
   "controls.labelmanager.nomatches": "Geen overeenkomsten",
   "controls.labelmanager.placeholder": "Voeg tag toe",

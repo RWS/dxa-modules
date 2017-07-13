@@ -72,3 +72,5 @@ export const translateProductReleaseVersions = (versions: IProductReleaseVersion
 // Comments selectors
 export const getCommentsByPageId = (state: IState, pageId: string): IComment[] => Comments.getByPageId(state.comments, pageId);
 export const getCommentErrorMessage = (state: IState, pageId: string): string => Comments.getErrorMessage(state.comments, pageId);
+export const getPostCommentErrorMessage = (state: IState, pageId: string): string => Comments.getPostErrorMessage(state.comments, pageId);
+export const isCommentSaving = (state: IState, pageId: string): boolean => Comments.isSaving(state.comments, pageId);

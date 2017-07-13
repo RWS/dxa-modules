@@ -28,7 +28,8 @@ const EMPTY_STATE: IState = {
         byPageId: {},
         loading: [],
         saving: [],
-        errors: {}
+        errors: {},
+        postErrors: {}
     },
     publication: {
         publicationId: "",

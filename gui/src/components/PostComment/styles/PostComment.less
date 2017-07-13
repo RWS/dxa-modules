@@ -4,7 +4,7 @@
 @inputWidth: 380px;
 
 .sdl-dita-delivery-postcomment {
-    padding: 0 15px;
+    padding: 0 15px 10px;
 
     form {
         > div {
@@ -15,7 +15,7 @@
                 display: inline-block;
                 min-width: @labelWidth;
                 vertical-align: top;
-                margin-top: 10px;
+                margin-top: 20px;
                 font-size: @fontSize + 2;
                 font-weight: bold;
                 > span {
@@ -26,6 +26,7 @@
             .sdl-input-text,
             .sdl-textarea {
                 max-width: @inputWidth;
+                margin-top: 10px;
             }
 
             .sdl-input-text ~ span,
@@ -71,6 +72,11 @@
             .import-icon-font();
             content: @iconError;
             margin-right: 10px;
+            display: inline-block;
+            .sdl-dita-delivery-app.rtl & {
+                margin-left: 10px;
+                margin-right: 0;
+            }
         }
     }
 }

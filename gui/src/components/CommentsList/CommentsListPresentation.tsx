@@ -50,7 +50,7 @@ export class CommentsListPresentation extends React.Component<ICommentsListProps
         let { showComments } = this.state;
 
         const calcCreationDate = (dateObject: ICommentDate): string => {
-            const date = new Date(dateObject.year, dateObject.monthValue, dateObject.dayOfMonth).toLocaleString(getLanguage(), DATE_OPTIONS);
+            const date = new Date(dateObject.year, dateObject.monthValue - 1, dateObject.dayOfMonth).toLocaleString(getLanguage(), DATE_OPTIONS);
             return date;
         };
 
