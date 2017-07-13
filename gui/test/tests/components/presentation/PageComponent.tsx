@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as TestUtils from "react-addons-test-utils";
-import { Router, Route, hashHistory } from "react-router";
+import { Router, Route, browserHistory } from "react-router";
 import { PagePresentation, IPageProps } from "@sdl/dd/Page/PagePresentation";
 import { Url } from "utils/Url";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
@@ -255,7 +255,7 @@ class PageComponent extends TestBase {
             let page: PagePresentation;
 
             beforeEach(() => {
-                hashHistory.push(pageUrl);
+                browserHistory.push(pageUrl);
                 const margin = Array(100).join("<br/>");
                 const pageProps: IPageProps = {
                     isLoading: false,
@@ -340,7 +340,7 @@ class PageComponent extends TestBase {
                 const spy = spyOn(Html, "scrollIntoView").and.callThrough();
 
                 const pageUrlWithNoTitle = Url.getPageUrl("123", "456", "publication");
-                hashHistory.push(pageUrlWithNoTitle);
+                browserHistory.push(pageUrlWithNoTitle);
 
                 const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
                 expect(domNode).not.toBeNull();
@@ -376,7 +376,7 @@ class PageComponent extends TestBase {
         const store = configureStore();
 
         const comp = ReactDOM.render(
-            <Router history={hashHistory}>
+            <Router history={browserHistory}>
                 <Route path=":publicationId(/:pageIdOrPublicationTitle)(/:publicationTitle)(/:pageTitle)(/:pageAnchor)"
                     component={() => (
                         <Provider store={store}>

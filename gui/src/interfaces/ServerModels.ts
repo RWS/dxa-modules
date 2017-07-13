@@ -1,6 +1,43 @@
-﻿export interface IPage {
+﻿
+export interface IComment {
+    children: IComment[];
+    content: string;
+    creationDate: ICommentDate;
+    id: number;
+    idLong: number;
+    itemId: number;
+    itemPublicationId: number;
+    itemType: number;
+    lastModifiedDate: ICommentDate;
+    moderatedDate: ICommentDate;
+    moderator: string;
+    namespaceId: number;
+    parent: IComment;
+    parentId: number;
+    score: number;
+    status: number;
+    user: IUser;
+}
+export interface ICommentDate {
+    dayOfMonth: number;
+    dayOfWeek: string;
+    dayOfYear: number;
+    hour: number;
+    minute: number;
+    month: string;
+    monthValue: number;
+    nano: number;
+    second: number;
+    year: number;
+}
+export interface ICondition {
+    datatype: "Date" | "Number" | "Text" | "Version";
+    range: boolean;
+    values: string[];
+}
+export interface IPage {
     Id: string;
-    Meta: { [key: string]: string | string[] | number | number[] | undefined | null };
+    Meta: { [key: string ]: string | string[] | number | number[] | undefined | null };
     Regions: IRegion[];
 }
 export interface IPublication {
@@ -21,6 +58,12 @@ export interface ISitemapItem {
     Items: ISitemapItem[];
     Title: string;
     Url?: string;
+}
+export interface IUser {
+    emailAddress: string;
+    externalId: string;
+    id: number;
+    name: string;
 }
 export interface ISearchResult {
     Id: string;

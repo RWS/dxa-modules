@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Router, Route, IndexRedirect, History, Redirect } from "react-router";
+import { Router, Route, IndexRedirect, browserHistory, Redirect } from "react-router";
 import { IServices } from "interfaces/Services";
 import { Home } from "@sdl/dd/Home/Home";
 import { PublicationContent } from "@sdl/dd/PublicationContent/PublicationContent";
@@ -25,23 +25,9 @@ export interface IAppProps {
      * @memberOf IAppProps
      */
     services: IServices;
-    /**
-     * History
-     *
-     * @type {History}
-     * @memberOf IAppProps
-     */
-    history: History;
 }
 
 export interface IAppContext {
-    /**
-     * Router
-     *
-     * @type {ReactRouter.RouterOnContext}
-     * @memberOf IAppContext
-     */
-    router?: ReactRouter.RouterOnContext;
     /**
      * Services
      *
@@ -73,13 +59,13 @@ export class App extends React.Component<IAppProps, {}> {
      * @returns {JSX.Element}
      */
     public render(): JSX.Element {
-        const { history, children } = this.props;
+        const { children } = this.props;
         const errorObj = (window as IWindow).SdlDitaDeliveryError;
         if (errorObj) {
             return <ErrorContent error={errorObj} />;
         } else {
             return (
-                <Router history={history}>
+                <Router history={browserHistory}>
                     <Route path={path.getRootPath()} component={Home} >
                         <IndexRedirect to="home" />
                         {children}

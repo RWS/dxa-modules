@@ -72,7 +72,7 @@ const thereIsContent = (props: IContentLanguageWarningProps): JSX.Element => {
     return <p>
             {localization.formatMessage("warning.different.language.content", [localization.isoToName(contentLanguage), localization.isoToName(uiLanguage)])}&nbsp;
             <PageLink publicationId={publicationId}>
-                {localization.formatMessage("warning.change.language")}
+                <span>{localization.formatMessage("warning.change.language")}</span>
             </PageLink>.
         </p>;
 };

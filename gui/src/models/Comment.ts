@@ -1,16 +1,14 @@
 import { Api } from "utils/Api";
-import { Net, LoadableObject } from "@sdl/models";
-import { IComment } from "interfaces/Comments";
+import { Net, IWebRequest, LoadableObject } from "@sdl/models";
+import { IPostComment } from "interfaces/Comments";
+import { IComment } from "interfaces/ServerModels";
 
 export class Comment extends LoadableObject {
-    private _publicationId: string;
-    private _pageId: string;
-    private _comment: IComment;
+    private _comment: IPostComment;
+    private _result: IComment;
 
-    constructor(publicationId: string, pageId: string, comment: IComment) {
+    constructor(comment: IPostComment) {
         super();
-        this._publicationId = publicationId;
-        this._pageId = pageId;
         this._comment = comment;
     }
 
@@ -25,6 +23,10 @@ export class Comment extends LoadableObject {
         }
     };
 
+    public getComment(): IComment {
+        return this._result;
+    };
+
     public save(): void {
         if (this.validate()) {
             this._setLoading();
@@ -33,12 +35,16 @@ export class Comment extends LoadableObject {
     };
 
     /* Overloads */
-
     protected _executeLoad(): void {
-        const url = Api.getSaveCommentUrl(this._publicationId, this._pageId);
-        const body = `conditions=${JSON.stringify(this._comment)}`;
+        const url = Api.getSaveCommentUrl();
+        const body = JSON.stringify(this._comment);
         Net.postRequest(url, body, "application/json",
             this.getDelegate(this._onLoad),
             this.getDelegate(this._onLoadFailed));
+    }
+
+    protected _processLoadResult(result: string, webRequest: IWebRequest): void {
+        this._result = JSON.parse(result);
+        super._processLoadResult(result, webRequest);
     }
 }

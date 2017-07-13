@@ -21,14 +21,13 @@ const updateByLanguage = handleAction(
     CHANGE_LANGUAGE,
     (state: IPublicationCurrentState, langauge: string, getState) => {
         const globalState = getState();
-        const result = chain([state.publicationId])
+        return chain([state.publicationId])
                .map(pubId => getPubById(globalState, pubId))
                .map((publication: IPublication) => getPubForLang(globalState, publication, langauge))
                .map((publication: IPublication) => publication.id)
                .map(initailPubState)
-               .first()
-               .value();
-        return result;
+               .values()
+               .value()[0];
     },
     initailPubState()
 );

@@ -20,13 +20,13 @@ export interface ISearchBarProps {
      *
      * @memberOf ISearchBarProps
      */
-    onFocus?: (e: React.FocusEvent) => void;
+    onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
     /**
      * Called whenever a search looses its focus
      *
      * @memberOf ISearchBarProps
      */
-    onBlur?: (e: React.FocusEvent) => void;
+    onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
 
     /**
      * Placeholder label
@@ -43,8 +43,8 @@ export interface ISearchBarProps {
 export const SearchBar: React.StatelessComponent<ISearchBarProps> = (props: ISearchBarProps): JSX.Element => {
     let value = "";
 
-    function _onKeyUp(e: React.KeyboardEvent): void {
-        value = (e.nativeEvent.target as HTMLInputElement).value;
+    function _onKeyUp(e: React.KeyboardEvent<HTMLInputElement>): void {
+        value = e.currentTarget.value;
         if (e.keyCode === 13) { // Enter key
             _search();
         }

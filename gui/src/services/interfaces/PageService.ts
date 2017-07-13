@@ -1,4 +1,5 @@
-import { IComment } from "interfaces/Comments";
+import { IPostComment } from "interfaces/Comments";
+import { IComment } from "interfaces/ServerModels";
 import { IPage } from "interfaces/Page";
 import { Promise } from "es6-promise";
 import { IConditionMap } from "store/interfaces/Conditions";
@@ -44,5 +45,5 @@ export interface IPageService {
      *
      * @memberof IPageService
      */
-    saveComment(publicationId: string, pageId: string, comment: IComment): Promise<IComment>;
+    saveComment(comment: IPostComment): Promise<IComment>;
 }

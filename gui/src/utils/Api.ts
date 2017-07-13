@@ -155,10 +155,7 @@ export class Api {
      *
      * @memberof Api
      */
-    public static getSaveCommentUrl(publicationId: string, pageId: string): string {
-        const encodedPubId = encodeURIComponent(publicationId);
-        const encodedPageId = encodeURIComponent(pageId);
-
+    public static getSaveCommentUrl(): string {
         /* istanbul ignore else */
         if (mocksEnabled()) {
             // Can`t set comments for mock
@@ -167,7 +164,7 @@ export class Api {
                 statusCode: "500"
             } as IError;
         } else {
-            return path.getAbsolutePath(`api/comments/${encodedPubId}/${encodedPageId}`);
+            return path.getAbsolutePath(`api/comments/add`);
         }
     }
 

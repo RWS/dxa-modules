@@ -1,7 +1,6 @@
 @import (reference) "~theme-styles";
 
 .sdl-input-text {
-    margin-top: 10px;
     height: 34px;
     font-size: calc(@fontSize + 2);
     font-family: @fontFamily;
@@ -34,7 +33,13 @@
         opacity: 1;
     }
     &.small {
+        margin: 5px 0;
         height: 28px;
         font-size: @fontSize;
+    }
+    &[type="date"] {
+        padding-top: 7px;
+        width: 100%;
+        -webkit-appearance: none;
     }
 }

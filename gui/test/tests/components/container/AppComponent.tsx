@@ -10,7 +10,7 @@ import { PublicationService } from "test/mocks/services/PublicationService";
 import { TaxonomyService } from "test/mocks/services/TaxonomyService";
 import { SearchService } from "test/mocks/services/SearchService";
 import { localization } from "test/mocks/services/LocalizationService";
-import { hashHistory } from "react-router";
+import { browserHistory } from "react-router";
 import { isPage } from "utils/Page";
 import { configureStore } from "store/Store";
 import { Provider } from "react-redux";
@@ -39,7 +39,7 @@ class AppComponent extends TestBase {
             });
 
             beforeAll(() => {
-                hashHistory.push("");
+                browserHistory.push("");
             });
 
             afterAll(() => {
@@ -86,10 +86,10 @@ class AppComponent extends TestBase {
                 spyOn(PublicationContentPresentation.prototype, "render").and.callFake(onRender);
 
                 // Publication content
-                hashHistory.push(Url.getPublicationUrl(PUB_ID_NO_PAGE, "pub-title"));
+                browserHistory.push(Url.getPublicationUrl(PUB_ID_NO_PAGE, "pub-title"));
                 expect(TestUtils.findRenderedComponentWithType(app, PublicationContentPresentation)).not.toBeNull();
 
-                hashHistory.push(Url.getPageUrl(PUB_ID_WITH_PAGE, "0000001", "pub-title", "page-title"));
+                browserHistory.push(Url.getPageUrl(PUB_ID_WITH_PAGE, "0000001", "pub-title", "page-title"));
                 expect(TestUtils.findRenderedComponentWithType(app, PublicationContentPresentation)).not.toBeNull();
             });
         });
@@ -100,10 +100,16 @@ class AppComponent extends TestBase {
 
         store.dispatch(publicationsLoaded([{
             id: PUB_ID_WITH_PAGE,
-            title: "pub-title"
+            title: "pub-title",
+            version: "1",
+            logicalId: "1-1",
+            createdOn: new Date()
         }, {
             id: PUB_ID_NO_PAGE,
-            title: "pub-title"
+            title: "pub-title",
+            version: "1",
+            logicalId: "1-2",
+            createdOn: new Date()
         }]));
         store.dispatch(pageLoaded({
             id: "0000001",
@@ -113,7 +119,7 @@ class AppComponent extends TestBase {
 
         return ReactDOM.render(
             <Provider store={store}>
-                <App history={hashHistory} services={services} />
+                <App services={services} />
             </Provider>
             , target) as App;
     }

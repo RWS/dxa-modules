@@ -1,4 +1,5 @@
-import { IComment } from "interfaces/Comments";
+import { IPostComment } from "interfaces/Comments";
+import { IComment } from "interfaces/ServerModels";
 import { IPageService } from "services/interfaces/PageService";
 import { IPage } from "interfaces/Page";
 import { Page } from "models/Page";
@@ -119,13 +120,13 @@ export class PageService implements IPageService {
      *
      * @memberof PageService
      */
-    public saveComment(publicationId: string, pageId: string, commentData: IComment): Promise<IComment> {
-        const comment = new Comment(publicationId, pageId, commentData);
+    public saveComment(commentData: IPostComment): Promise<IComment> {
+        const comment = new Comment(commentData);
         return new Promise((resolve: (data?: IComment) => void, reject: (error: string | null) => void) => {
             let removeEventListeners: () => void;
             const onLoad = () => {
                 removeEventListeners();
-                resolve(commentData);
+                resolve(comment.getComment());
             };
             const onLoadFailed = (event: Event & { data: { error: string } }) => {
                 removeEventListeners();

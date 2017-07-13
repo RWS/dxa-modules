@@ -1,6 +1,6 @@
 export interface ICondition {
     values: string[];
-    datatype: "Text" | "Date";
+    datatype: "Date" | "Text";
     range: boolean;
 }
 

@@ -1,4 +1,4 @@
-import { find, chain } from "lodash";
+import { find, chain, isEqual } from "lodash";
 import { PUBLICATIONS_LOADED, PUBLICATIONS_LOADING } from "store/actions/Actions";
 import { IPublication } from "interfaces/Publication";
 import { handleAction, combineReducers, combine } from "./CombineReducers";
@@ -97,7 +97,7 @@ export const getPubForLang = (state: IPublicationsState, publication: IPublicati
     })[0] || notFound(publication.id);
 };
 
-export const getPubListRepresentatives = (state: IState, filter: {}): IPublication[] => {
+export const getPubListRepresentatives = (state: IState, filter: {}): (IPublication | undefined)[] => {
     // Groups publications by versionRef
     // find one we need by language or fallback language
     return chain(getPubList(state.publications, filter))
@@ -120,4 +120,4 @@ export const normalizeProductReleaseVersion = (params: IPublicationsListPropsPar
 };
 
 export const isPublicationFound = (state: IPublicationsState, publicationId: string): boolean =>
-    JSON.stringify(getPubById(state, publicationId)) !== JSON.stringify(notFound(publicationId));
+    !isEqual(getPubById(state, publicationId), notFound(publicationId));

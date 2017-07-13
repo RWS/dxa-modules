@@ -6,7 +6,11 @@ import { IAppContext } from "@sdl/dd/container/App/App";
 import * as ClassNames from "classnames";
 
 export interface IPostCommentPresentationProps {
-    handleSubmit: (event: React.FormEvent) => void;
+    handleSubmit: (event: React.FormEvent<HTMLFormElement>, formData: IPostCommentPresentationState) => void;
+}
+
+export interface IPostCommentPresentationDispatchProps {
+    error: string;
 }
 
 export interface IPostCommentPresentationState {
@@ -24,7 +28,8 @@ export interface IPC {
     [key: string]: boolean;
 }
 
-export class PostCommentPresentation extends React.Component<IPostCommentPresentationProps, IPostCommentPresentationState> {
+export class PostCommentPresentation extends
+    React.Component<IPostCommentPresentationProps & IPostCommentPresentationDispatchProps, IPostCommentPresentationState> {
 
     /**
      * Context types
@@ -43,9 +48,11 @@ export class PostCommentPresentation extends React.Component<IPostCommentPresent
      */
     public context: IAppContext;
 
+    private initialState: IPostCommentPresentationState;
+
     constructor() {
         super();
-        this.state = {
+        this.initialState = {
             name: "",
             email: "",
             comment: "",
@@ -55,20 +62,28 @@ export class PostCommentPresentation extends React.Component<IPostCommentPresent
                 comment: false
             }
         };
+        this.state = this.initialState;
 
         this.handleBlur = this.handleBlur.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     /**
      *
-     * @param {React.KeyboardEvent} event
+     * @param {React.ChangeEvent} event
      *
      * @memberof PostCommentPresentation
      */
-    public handleChange(event: React.KeyboardEvent): void {
-        const htmlElement = event.nativeEvent.target as HTMLInputElement;
+    public handleChange(event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>): void {
+        const htmlElement = event.currentTarget;
         this.setState({ ...this.state, [htmlElement.getAttribute("id") as string]: htmlElement.value });
+    }
+
+    public handleSubmit(event: React.FormEvent<HTMLFormElement>): void {
+        this.props.handleSubmit(event, this.state);
+        event.currentTarget.reset();
+        this.resetState();
     }
 
     /**
@@ -94,8 +109,8 @@ export class PostCommentPresentation extends React.Component<IPostCommentPresent
      *
      * @memberof PostCommentPresentation
      */
-    public handleBlur(event: React.FocusEvent): void {
-        const field = (event.nativeEvent.target as HTMLInputElement).getAttribute("id") as string;
+    public handleBlur(event: React.FocusEvent<HTMLElement>): void {
+        const field = event.currentTarget.getAttribute("id") as string;
         this.setState({...this.state, edited: { ...this.state.edited, [field]: true }});
     }
 
@@ -106,6 +121,7 @@ export class PostCommentPresentation extends React.Component<IPostCommentPresent
      * @memberof PostCommentPresentation
      */
     public render(): JSX.Element {
+        const { error } = this.props;
         const {name, email, comment} = this.state;
         const { formatMessage } = this.context.services.localizationService;
         const errors: IPC = this.validateInput(name, email, comment);
@@ -132,7 +148,7 @@ export class PostCommentPresentation extends React.Component<IPostCommentPresent
 
         return (
             <div className="sdl-dita-delivery-postcomment">
-                <form onSubmit={this.props.handleSubmit} id="form">
+                <form onSubmit={this.handleSubmit} id="form">
                     <div>
                         <label htmlFor="name">{formatMessage("component.post.comment.name")}<span>*</span></label>
                         <input className={getInputClassNames("name")}
@@ -162,11 +178,18 @@ export class PostCommentPresentation extends React.Component<IPostCommentPresent
                             onBlur={this.handleBlur}></textarea>
                         <span>{formatMessage("component.post.comment.no.content")}</span>
                     </div>
+                    <button type="submit" disabled={isDisabled} className="sdl-button graphene sdl-button-purpose-confirm" form="form" value="Submit">
+                        {formatMessage("component.post.comment.submit")}
+                    </button>
                 </form>
-                <button type="submit" disabled={isDisabled} className="sdl-button graphene sdl-button-purpose-confirm" form="form" value="Submit">
-                    {formatMessage("component.post.comment.submit")}
-                </button>
+                {error && <div className="sdl-dita-delivery-postcomment-error" >
+                    {formatMessage("component.post.comment.post.error")}
+                </div>}
             </div>
         );
+    }
+
+    private resetState(): void {
+        this.setState(this.initialState);
     }
 }

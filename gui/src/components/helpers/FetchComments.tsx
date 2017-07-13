@@ -76,20 +76,6 @@ class Fetch extends React.Component<IFetchComments & IFetchCommentsProperties, {
     public context: IAppContext;
 
     /**
-     * Default values
-     *
-     * @returns {IFetchCommentsProperties}
-     *
-     * @memberof Fetch
-     */
-    public defaultProps: IFetchCommentsProperties = {
-        descending: false,
-        top: 0,
-        skip: 0,
-        status: [CommentStatus.SUBMITTED]
-    };
-
-    /**
      * Invoked once, only on the client (not on the server), immediately after the initial rendering occurs.
      */
     public componentDidMount(): void {
@@ -146,5 +132,12 @@ const mapDispatchToProps = {
 };
 
 const FetchComments = connect(mapStateToProps, mapDispatchToProps)(Fetch);
+
+FetchComments.defaultProps = {
+    descending: false,
+    top: 0,
+    skip: 0,
+    status: [CommentStatus.SUBMITTED]
+};
 
 export default FetchComments;

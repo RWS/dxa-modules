@@ -1,65 +1,50 @@
 [
   {
-    "id": 545,
+    "id": 28485,
     "namespaceId": 0,
     "itemPublicationId": 1611362,
     "itemId": 368613,
     "itemType": 64,
     "score": 0,
     "status": 0,
-    "creationDate": "9/4/2017 12:00:00 AM",
-    "lastModifiedDate": "9/10/2017 12:00:00 AM",
-    "content": "Test comment with some content. Id of this comment is 545.",
-    "moderator": null,
-    "moderatedDate": null,
-    "parentId": 0,
-    "parent": null,
-    "children": null,
-    "user": {
-      "id": 0,
-      "name": "user 0",
-      "emailAddress": "user0@sdl.com",
-      "externalId": null
+    "creationDate": {
+      "dayOfMonth": 19,
+      "hour": 1,
+      "minute": 3,
+      "month": "",
+      "monthValue": 6,
+      "nano": 0,
+      "second": 40,
+      "year": 2005,
+      "dayOfWeek": "",
+      "dayOfYear": 122
     },
-    "idLong": 545
-  },
-  {
-    "id": 45545,
-    "namespaceId": 0,
-    "itemPublicationId": 1611362,
-    "itemId": 368613,
-    "itemType": 64,
-    "score": 0,
-    "status": 0,
-    "creationDate": "8/2/2017 12:00:00 AM",
-    "lastModifiedDate": "8/21/2017 12:00:00 AM",
-    "content": "Test comment with some content. Id of this comment is 45545.",
-    "moderator": null,
-    "moderatedDate": null,
-    "parentId": 0,
-    "parent": null,
-    "children": null,
-    "user": {
-      "id": 2,
-      "name": "user 2",
-      "emailAddress": "user2@sdl.com",
-      "externalId": null
+    "lastModifiedDate": {
+      "dayOfMonth": 19,
+      "hour": 1,
+      "minute": 3,
+      "month": "",
+      "monthValue": 6,
+      "nano": 0,
+      "second": 40,
+      "year": 2005,
+      "dayOfWeek": "",
+      "dayOfYear": 122
     },
-    "idLong": 45545
-  },
-  {
-    "id": 22841,
-    "namespaceId": 0,
-    "itemPublicationId": 1611362,
-    "itemId": 368613,
-    "itemType": 64,
-    "score": 0,
-    "status": 0,
-    "creationDate": "7/29/2017 12:00:00 AM",
-    "lastModifiedDate": "6/21/2017 12:00:00 AM",
-    "content": "Test comment with some content. Id of this comment is 22841.",
+    "content": "Test comment with some content. Id of this comment is 28485.",
     "moderator": null,
-    "moderatedDate": null,
+    "moderatedDate": {
+      "dayOfMonth": 19,
+      "hour": 1,
+      "minute": 3,
+      "month": "",
+      "monthValue": 6,
+      "nano": 0,
+      "second": 40,
+      "year": 2005,
+      "dayOfWeek": "",
+      "dayOfYear": 122
+    },
     "parentId": 0,
     "parent": null,
     "children": null,
@@ -69,6 +54,6 @@
       "emailAddress": "user1@sdl.com",
       "externalId": null
     },
-    "idLong": 22841
+    "idLong": 28485
   }
 ]

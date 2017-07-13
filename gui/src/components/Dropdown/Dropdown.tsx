@@ -270,7 +270,7 @@ export class Dropdown extends React.Component<IDropdownProps, IDropdownState> {
                         {items}
                     </ul>
                 </div>
-                <select value={this.state.selected && this.state.selected.value || undefined} onChange={this.onChangeSelect.bind(this)}>
+                <select defaultValue={this.state.selected && this.state.selected.value || undefined} onChange={this.onChangeSelect.bind(this)}>
                     {options}
                 </select>
             </div>
@@ -311,8 +311,8 @@ export class Dropdown extends React.Component<IDropdownProps, IDropdownState> {
         }
     }
 
-    private onChangeSelect(event: React.FormEvent): void {
-        const selectedValue = (event.target as HTMLSelectElement).value;
+    private onChangeSelect(event: React.FormEvent<HTMLSelectElement>): void {
+        const selectedValue = event.currentTarget.value;
         const items = this.props.items;
         const values = items.map((item: IDropdownValue) => item.value);
         return this.onClickItem(values.indexOf(selectedValue));
