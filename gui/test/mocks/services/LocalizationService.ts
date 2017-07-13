@@ -24,7 +24,7 @@ export class LocalizationService implements ILocalizationService {
      * @memberOf LocalizationService
      */
     public getDirection(lang: string): "rtl" | "ltr" {
-        return ["ar", "dv", "fa", "ff", "he", "iw", "ps", "ur"].some((val: string) => val === lang) ? "rtl" : "ltr";
+        return ["ar", "dv", "fa", "he", "iw", "ps", "ur"].some((val: string) => val === lang) ? "rtl" : "ltr";
     }
 
     public getLanguage(): string {

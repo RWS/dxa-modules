@@ -38,7 +38,7 @@ export class LocalizationService implements ILocalizationService {
      * @type {string[]}
      * @memberOf LocalizationService
      */
-    public rtlLanguages: string[] = ["ar", "dv", "fa", "ff", "he", "iw", "ps", "ur"];
+    public rtlLanguages: string[] = ["ar", "dv", "fa", "he", "iw", "ps", "ur"];
 
     private language: string;
 
