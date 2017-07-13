@@ -11,6 +11,7 @@ const CONTAINER_CLASS = "sdl-dialog-container";
 const DIALOG_CLASS = "sdl-dialog";
 const TOOLBAR_CLASS = "sdl-dialog-toolbar";
 const CLOSE_BTN_CLASS = "sdl-dialog-close-btn";
+const DIALOG_WRAPPER_CLASS = "sdl-dialog-wrapper";
 
 export type Elm = JSX.Element | string;
 export interface IRequestHandler {
@@ -80,12 +81,14 @@ export class Dialog extends React.Component<IDialogProps, {}> {
         const className = ClassNames(CONTAINER_CLASS, { "sdl-dialog-open": open });
 
         return <div onClick={handleOutsideClick(onRequestClose)} className={className} >
-            {open && escHandler(onRequestClose)}
-            {open && <div className={DIALOG_CLASS}>
-                {renderTitle(title, onRequestClose)}
-                {renderBody(children)}
-                {renderActions(actions)}
-            </div>}
+            <div className={DIALOG_WRAPPER_CLASS}>
+                {open && escHandler(onRequestClose)}
+                {open && <div className={DIALOG_CLASS}>
+                    {renderTitle(title, onRequestClose)}
+                    {renderBody(children)}
+                    {renderActions(actions)}
+                </div>}
+            </div>
         </div>;
     }
 }

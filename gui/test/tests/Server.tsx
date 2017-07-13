@@ -102,7 +102,9 @@ class Server extends TestBase {
                                                 <button className="sdl-button-text sdl-personalize-content" disabled>
                                                     <span>Personalize content</span>
                                                 </button>
-                                                <div className="sdl-dialog-container"></div>
+                                                <div className="sdl-dialog-container">
+                                                    <div className="sdl-dialog-wrapper"></div>
+                                                </div>
                                             </div>
                                             <span><div></div></span><span className="separator"></span></nav>
                                     </div>
