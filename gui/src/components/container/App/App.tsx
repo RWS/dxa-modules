@@ -6,6 +6,7 @@ import { PublicationContent } from "@sdl/dd/PublicationContent/PublicationConten
 import { ProductFamiliesList } from "@sdl/dd/container/ProductFamiliesList/ProductFamiliesList";
 import { ErrorContent } from "@sdl/dd/container/ErrorContent/ErrorContent";
 import { PublicationsList } from "@sdl/dd/PublicationsList/PublicationsList";
+import { SearchResults } from "@sdl/dd/SearchResults/SearchResults";
 
 import { path } from "utils/Path";
 import { IWindow } from "interfaces/Window";
@@ -71,6 +72,8 @@ export class App extends React.Component<IAppProps, {}> {
                         <Redirect from="home;jsessionid=*" to="home" />
                         <Route path="home" component={ProductFamiliesList} />
                         <Route path="publications/:productFamily(/:productReleaseVersion)" component={PublicationsList} />
+                        <Route path="search/:searchQuery" component={SearchResults} />
+                        <Route path="search/:publicationId/:searchQuery" component={SearchResults} />
                         <Route path=":publicationId(/:pageIdOrPublicationTitle)(/:publicationTitle)(/:pageTitle)(/:pageAnchor)"
                             component={() => (
                                 <div className="sdl-dita-delivery-publication-content-wrapper">

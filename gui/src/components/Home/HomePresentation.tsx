@@ -5,6 +5,7 @@ import { browserHistory } from "react-router";
 import { IAppContext } from "@sdl/dd/container/App/App";
 import { TopBar } from "@sdl/dd/presentation/TopBar";
 import { SearchBar } from "@sdl/dd/presentation/SearchBar";
+import { Url } from "utils/Url";
 
 import "./Home.less";
 import { FetchPublications } from "components/helpers/FetchPublications";
@@ -188,6 +189,22 @@ export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
 
         this._preventBodyScroll = (hasPublication && isNavOpen) || (searchIsOpen && searchIsActive) || false;
 
+        const onFocus = () => {
+            if (!this._isUnmounted) {
+                this.setState({
+                    searchIsActive: true
+                });
+            }
+        };
+
+        const onBlur = () => {
+            if (!this._isUnmounted) {
+                this.setState({
+                    searchIsActive: false
+                });
+            }
+        };
+
         return (
             <div className={appClass}>
                 <FetchPublications />
@@ -205,23 +222,16 @@ export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
                 </TopBar>
                 <SearchBar
                     placeholderLabel={searchTitle || ""}
-                    onSearch={query => console.log(query)}
-                    onFocus={() => {
-                        /* istanbul ignore else */
-                        if (!this._isUnmounted) {
-                            this.setState({
-                                searchIsActive: true
-                            });
+                    onSearch={
+                        query => {
+                            if (browserHistory) {
+                                browserHistory.push(Url.getSearchUrl(query, children.props.params && children.props.params.publicationId));
+                            }
+                            onBlur();
                         }
-                    }}
-                    onBlur={() => {
-                        /* istanbul ignore else */
-                        if (!this._isUnmounted) {
-                            this.setState({
-                                searchIsActive: false
-                            });
-                        }
-                    }} />
+                    }
+                    onFocus={onFocus}
+                    onBlur={onBlur} />
                 {children}
             </div >
         );

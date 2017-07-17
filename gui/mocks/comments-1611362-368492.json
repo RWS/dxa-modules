@@ -1,1 +1,116 @@
-[]
+[
+  {
+    "id": 44596,
+    "namespaceId": 0,
+    "itemPublicationId": 1611362,
+    "itemId": 368492,
+    "itemType": 64,
+    "score": 0,
+    "status": 0,
+    "creationDate": {
+      "dayOfMonth": 22,
+      "hour": 4,
+      "minute": 6,
+      "month": "",
+      "monthValue": 6,
+      "nano": 0,
+      "second": 18,
+      "year": 2005,
+      "dayOfWeek": "",
+      "dayOfYear": 350
+    },
+    "lastModifiedDate": {
+      "dayOfMonth": 22,
+      "hour": 4,
+      "minute": 6,
+      "month": "",
+      "monthValue": 6,
+      "nano": 0,
+      "second": 18,
+      "year": 2005,
+      "dayOfWeek": "",
+      "dayOfYear": 350
+    },
+    "content": "Test comment with some content. Id of this comment is 44596.",
+    "moderator": null,
+    "moderatedDate": {
+      "dayOfMonth": 22,
+      "hour": 4,
+      "minute": 6,
+      "month": "",
+      "monthValue": 6,
+      "nano": 0,
+      "second": 18,
+      "year": 2005,
+      "dayOfWeek": "",
+      "dayOfYear": 350
+    },
+    "parentId": 0,
+    "parent": null,
+    "children": null,
+    "user": {
+      "id": 0,
+      "name": "user 0",
+      "emailAddress": "user0@sdl.com",
+      "externalId": null
+    },
+    "idLong": 44596
+  },
+  {
+    "id": 4702,
+    "namespaceId": 0,
+    "itemPublicationId": 1611362,
+    "itemId": 368492,
+    "itemType": 64,
+    "score": 0,
+    "status": 0,
+    "creationDate": {
+      "dayOfMonth": 22,
+      "hour": 8,
+      "minute": 13,
+      "month": "",
+      "monthValue": 4,
+      "nano": 0,
+      "second": 58,
+      "year": 2007,
+      "dayOfWeek": "",
+      "dayOfYear": 263
+    },
+    "lastModifiedDate": {
+      "dayOfMonth": 22,
+      "hour": 8,
+      "minute": 13,
+      "month": "",
+      "monthValue": 4,
+      "nano": 0,
+      "second": 58,
+      "year": 2007,
+      "dayOfWeek": "",
+      "dayOfYear": 263
+    },
+    "content": "Test comment with some content. Id of this comment is 4702.",
+    "moderator": null,
+    "moderatedDate": {
+      "dayOfMonth": 22,
+      "hour": 8,
+      "minute": 13,
+      "month": "",
+      "monthValue": 4,
+      "nano": 0,
+      "second": 58,
+      "year": 2007,
+      "dayOfWeek": "",
+      "dayOfYear": 263
+    },
+    "parentId": 0,
+    "parent": null,
+    "children": null,
+    "user": {
+      "id": 1,
+      "name": "user 1",
+      "emailAddress": "user1@sdl.com",
+      "externalId": null
+    },
+    "idLong": 4702
+  }
+]

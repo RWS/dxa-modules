@@ -7,6 +7,7 @@ import { IServices } from "interfaces/Services";
 import { PageService } from "services/server/PageService";
 import { PublicationService } from "services/server/PublicationService";
 import { TaxonomyService } from "services/server/TaxonomyService";
+import { SearchService } from "services/server/SearchService";
 import { TestBase } from "@sdl/models";
 import { configureStore } from "store/Store";
 import { Provider } from "react-redux";
@@ -40,7 +41,8 @@ class Server extends TestBase {
                     pageService: new PageService(),
                     publicationService: new PublicationService(),
                     localizationService: localization,
-                    taxonomyService: new TaxonomyService()
+                    taxonomyService: new TaxonomyService(),
+                    searchService: new SearchService()
                 };
 
                 const app = ReactDOMServer.renderToStaticMarkup(<Provider store={this.store}><App services={services} /></Provider>);

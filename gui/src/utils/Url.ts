@@ -128,6 +128,26 @@ export class Url {
     }
 
     /**
+     * Get search url
+     *
+     * @static
+     * @param {string} searchQuery The search query
+     * @param {string} publicationId publication id for search
+     * @returns {string}
+     *
+     * @memberOf Url
+     */
+    public static getSearchUrl(searchQuery: string, publicationId?: string): string {
+        const rootPath = path.getRootPath();
+        let defaultUrl = `${rootPath}search`;
+        if (publicationId) {
+            defaultUrl = `${defaultUrl}/${encodeURIComponent(publicationId)}`;
+        }
+
+        return `${defaultUrl}/${encodeURIComponent(searchQuery)}`;
+    }
+
+    /**
      * Parse a page url
      * Format of a page url is "<context><pub-id>/<page-id>/<publication-title>/<page-title>"
      *

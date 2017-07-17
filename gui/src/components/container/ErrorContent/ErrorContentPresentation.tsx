@@ -1,11 +1,13 @@
 import * as ClassNames from "classnames";
 import * as React from "react";
+import { browserHistory } from "react-router";
 import { path } from "utils/Path";
 import { SearchBar } from "@sdl/dd/presentation/SearchBar";
 import { Error } from "@sdl/dd/presentation/Error";
 import { IAppContext } from "@sdl/dd/container/App/App";
 import { Button } from "@sdl/controls-react-wrappers";
 import { ButtonPurpose } from "@sdl/controls";
+import { Url } from "utils/Url";
 
 import { IError } from "interfaces/Error";
 
@@ -47,8 +49,8 @@ export const ErrorContentPresentation: React.StatelessComponent<IErrorContentPro
     const _goHome = (): void => window.location.replace(path.getRootPath());
 
     const errorButtons = <div>
-            <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{"click": _goHome}}>{formatMessage("components.breadcrumbs.home")}</Button>
-        </div>;
+        <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{ "click": _goHome }}>{formatMessage("components.breadcrumbs.home")}</Button>
+    </div>;
 
     const { error, direction } = props;
     const errorMessages = [formatMessage("error.url.not.found"), formatMessage("error.default.message")];
@@ -62,7 +64,11 @@ export const ErrorContentPresentation: React.StatelessComponent<IErrorContentPro
         <section className={appClass}>
             <SearchBar
                 placeholderLabel={formatMessage("components.searchbar.placeholder")}
-                onSearch={query => console.log(query)} />
+                onSearch={query => {
+                    if (browserHistory) {
+                        browserHistory.push(Url.getSearchUrl(query));
+                    }
+                }} />
             <div className={"sdl-dita-delivery-error-page"}>
                 <Error
                     title={errorTitle}

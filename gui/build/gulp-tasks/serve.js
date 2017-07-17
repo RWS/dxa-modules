@@ -85,10 +85,12 @@ module.exports = function(buildOptions, gulp, browserSync) {
           // example: /39137/234/MP330/User-Guide (only the first number is mandatory)
           const publicationContentRegex = /^\/[0-9]+.*$/gi; // All urls starting with a number
           const productFamiliesContentRegex = /^\/publications.*$/gi; // All urls starting with a number
+          const searchContentRegex = /^\/search.*$/gi; // All urls starting with a search
           if (
             req.url.match(/^(\/home(;jsessionid=[\w\d]+)?)?$/gi) ||
             req.url.match(publicationContentRegex) ||
-            req.url.match(productFamiliesContentRegex)
+            req.url.match(productFamiliesContentRegex) ||
+            req.url.match(searchContentRegex)
           ) {
             req.url = "/index.html";
           }
