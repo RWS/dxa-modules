@@ -72,6 +72,7 @@ class SearchResultsComponent extends TestBase {
                 services.searchService.setMockDataSearch(null,
                     {
                         hits: 0,
+                        startIndex: 0,
                         queryResults: []
                     });
                 const searchResults = this._renderComponent(target);
@@ -109,6 +110,7 @@ class SearchResultsComponent extends TestBase {
                 services.searchService.setMockDataSearch(null,
                     {
                         hits: 100,
+                        startIndex: 0,
                         queryResults
                     });
 

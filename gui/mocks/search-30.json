@@ -1,12 +1,12 @@
 {
   "Hits": 352,
-  "Count": 0,
-  "StartIndex": 0,
+  "Count": 10,
+  "StartIndex": 30,
   "QueryResults": [
     {
       "Id": "ish_1420746-164163-16",
       "Fields": {
-        "FTITLE.logical.value": "listening to the radio"
+        "FTITLE.logical.value": " - 4 -listening to the radio"
       },
       "Locale": "en",
       "Highlighted": null,
@@ -21,7 +21,7 @@
     {
       "Id": "ish_1420746-164398-16",
       "Fields": {
-        "FTITLE.logical.value": "getting started"
+        "FTITLE.logical.value": " - 4 -getting started"
       },
       "Locale": "en",
       "Highlighted": null,
@@ -36,7 +36,7 @@
     {
       "Id": "ish_1420746-164428-16",
       "Fields": {
-        "FTITLE.logical.value": "searching for a contact"
+        "FTITLE.logical.value": " - 4 -searching for a contact"
       },
       "Locale": "en",
       "Highlighted": null,
@@ -51,7 +51,7 @@
     {
       "Id": "ish_1420746-164390-16",
       "Fields": {
-        "FTITLE.logical.value": "multimedia messages"
+        "FTITLE.logical.value": " - 4 -multimedia messages"
       },
       "Locale": "en",
       "Highlighted": null,
@@ -66,7 +66,7 @@
     {
       "Id": "ish_1420746-164271-16",
       "Fields": {
-        "FTITLE.logical.value": "installing sim card and battery"
+        "FTITLE.logical.value": " - 4 -installing sim card and battery"
       },
       "Locale": "en",
       "Highlighted": null,
@@ -81,7 +81,7 @@
     {
       "Id": "ish_1420746-164363-16",
       "Fields": {
-        "FTITLE.logical.value": "speed dialling"
+        "FTITLE.logical.value": " - 4 -speed dialling"
       },
       "Locale": "en",
       "Highlighted": null,
@@ -96,7 +96,7 @@
     {
       "Id": "ish_1420746-164339-16",
       "Fields": {
-        "FTITLE.logical.value": "listening to music"
+        "FTITLE.logical.value": " - 4 -listening to music"
       },
       "Locale": "en",
       "Highlighted": null,
@@ -111,7 +111,7 @@
     {
       "Id": "ish_1420746-164331-16",
       "Fields": {
-        "FTITLE.logical.value": "voice dialling"
+        "FTITLE.logical.value": " - 4 -voice dialling"
       },
       "Locale": "en",
       "Highlighted": null,
@@ -126,7 +126,7 @@
     {
       "Id": "ish_1420746-164255-16",
       "Fields": {
-        "FTITLE.logical.value": "essential indicators in standby mode"
+        "FTITLE.logical.value": " - 4 -essential indicators in standby mode"
       },
       "Locale": "en",
       "Highlighted": null,
@@ -141,7 +141,7 @@
     {
       "Id": "ish_1420746-164468-16",
       "Fields": {
-        "FTITLE.logical.value": "call functions"
+        "FTITLE.logical.value": " - 4 -call functions"
       },
       "Locale": "en",
       "Highlighted": null,

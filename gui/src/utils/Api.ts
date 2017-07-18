@@ -177,15 +177,20 @@ export class Api {
      *
      * @static
      * @param {string} publicationId
+     * @param {number} startIndex
      * @returns {string}
      *
      * @memberof Api
      */
-    public static getSearchUrl(publicationId?: string): string {
+    public static getSearchUrl(startIndex: number, publicationId?: string): string {
         /* istanbul ignore else */
         if (mocksEnabled()) {
-            // Get all comments for a page without any filtering
-            return path.getAbsolutePath(`${mocksEndPoint}/search-${publicationId}.json`);
+            // Get search results for publication
+            if (publicationId) {
+                return path.getAbsolutePath(`${mocksEndPoint}/search-${publicationId}-${startIndex}.json`);
+            } else {
+                return path.getAbsolutePath(`${mocksEndPoint}/search-${startIndex}.json`);
+            }
         } else {
             return path.getAbsolutePath("api/search");
         }

@@ -67,6 +67,6 @@ export class SearchService implements ISearchService {
     }
 
     private _getKey(query: ISearchQuery): string {
-        return [query.publicationId || "", query.searchQuery].join("||");
+        return [query.publicationId || 0, query.searchQuery, query.startIndex || 0].join("||");
     }
 }

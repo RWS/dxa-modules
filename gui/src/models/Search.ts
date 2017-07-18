@@ -41,13 +41,13 @@ export class Search extends LoadableObject {
     protected _executeLoad(reload: boolean): void {
         const query = this._query;
         Net.postRequest(
-            Api.getSearchUrl(query.publicationId),
+            Api.getSearchUrl(query.startIndex, query.publicationId),
             JSON.stringify({
                 "PublicationId": query.publicationId,
                 "Language": query.language,
                 "SearchQuery": query.searchQuery,
                 "StartIndex": query.startIndex,
-                "Count": query.count,
+                "Count": query.count
             }),
             API_REQUEST_TYPE_JSON,
             this.getDelegate(this._onLoad),
@@ -58,6 +58,7 @@ export class Search extends LoadableObject {
         const r = JSON.parse(result) as ISearchResults;
         this._results = {
             hits: r.Hits,
+            startIndex: r.StartIndex,
             queryResults: r.QueryResults.map((item: ISearchResult) => {
                 return {
                     id: item.Id,

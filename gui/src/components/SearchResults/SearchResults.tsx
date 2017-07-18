@@ -3,7 +3,7 @@ import { ButtonPurpose } from "@sdl/controls";
 import { ActivityIndicator, Button } from "@sdl/controls-react-wrappers";
 import { Error } from "@sdl/dd/presentation/Error";
 import { IAppContext } from "@sdl/dd/container/App/App";
-import { ISearchQueryResults, ISearchQueryResult, ISearchQuery } from "interfaces/Search";
+import { ISearchQueryResult, ISearchQuery } from "interfaces/Search";
 import { Url } from "utils/Url";
 
 import "components/controls/styles/ActivityIndicator";
@@ -77,7 +77,15 @@ export interface ISearchResultsState {
      * @type {ISearchQueryResults}
      * @memberOf ISearchResultsState
      */
-    searchResults?: ISearchQueryResults;
+    searchResults?: ISearchQueryResult[];
+
+    /**
+     * Search results hits
+     *
+     * @type {number}
+     * @memberOf ISearchResultsState
+     */
+    searchResultsHits?: number;
 
     /**
      * Search results start index
@@ -85,7 +93,7 @@ export interface ISearchResultsState {
      * @type {number}
      * @memberOf ISearchResultsState
      */
-    startIndex?: number;
+    startIndex: number;
 }
 
 /**
@@ -110,6 +118,7 @@ export class SearchResults extends React.Component<ISearchResultsProps, ISearchR
         this.state = {
             isLoading: undefined,
             searchResults: undefined,
+            searchResultsHits: 0,
             startIndex: 0,
             error: undefined
         };
@@ -135,17 +144,19 @@ export class SearchResults extends React.Component<ISearchResultsProps, ISearchR
      * This method is not called for the initial render.
      *
      * @param {ISearchResultsProps} nextProps Next props
+     * @param {ISearchResultsState} nextState Next state
      */
     public componentWillUpdate(nextProps: ISearchResultsProps, nextState: ISearchResultsState): void {
         const { publicationId, searchQuery } = this.props.params;
         const { startIndex } = this.state;
-        if ((nextProps.params.searchQuery !== searchQuery) ||
-            (nextProps.params.publicationId !== publicationId) ||
+        const isNewSearch = (nextProps.params.searchQuery !== searchQuery) ||
+            (nextProps.params.publicationId !== publicationId);
+        if (isNewSearch ||
             (nextState.startIndex !== startIndex)) {
             this._fetchSearchResults({
                 publicationId: nextProps.params.publicationId,
                 searchQuery: nextProps.params.searchQuery,
-                startIndex: nextState.startIndex
+                startIndex: isNewSearch ? 0 : nextState.startIndex
             } as ISearchQuery);
         }
     }
@@ -157,8 +168,9 @@ export class SearchResults extends React.Component<ISearchResultsProps, ISearchR
      */
     public render(): JSX.Element {
         const { searchQuery, publicationId } = this.props.params;
-        const { searchResults, isLoading, error, startIndex } = this.state;
+        const { searchResults, searchResultsHits, isLoading, error, startIndex } = this.state;
         const { formatMessage } = this.context.services.localizationService;
+        const hits = searchResultsHits || 0;
         const query = {
             publicationId,
             searchQuery,
@@ -178,7 +190,7 @@ export class SearchResults extends React.Component<ISearchResultsProps, ISearchR
                             messages={[formatMessage("error.publications.list.not.found"), formatMessage("error.publications.default.message")]}
                             buttons={errorButtons} />
                         : (!isLoading && searchResults)
-                            ? (searchResults.hits == 0)
+                            ? (hits == 0)
                                 ? <div className={"search-results-list-empty"}>
                                     {formatMessage("search.no.results")}
                                     <ul>
@@ -187,11 +199,11 @@ export class SearchResults extends React.Component<ISearchResultsProps, ISearchR
                                     </ul>
                                 </div>
                                 : <div className={"search-results-list"}>
-                                    <h4>{formatMessage("search.results.total", [searchResults.hits.toString()])}</h4>
+                                    <h4>{formatMessage("search.results.total", [hits.toString()])}</h4>
                                     <ul>
-                                        {searchResults.queryResults.map((x: ISearchQueryResult, i: number) => this._renderSearchResult(i, x))}
+                                        {searchResults.map((x: ISearchQueryResult, i: number) => this._renderSearchResult(i, x))}
                                     </ul>
-                                    {(searchResults.queryResults.length < (searchResults.hits || 0)) &&
+                                    {(searchResults.length < hits) &&
                                         <div>
                                             <Button
                                                 skin="graphene"
@@ -202,7 +214,7 @@ export class SearchResults extends React.Component<ISearchResultsProps, ISearchR
                                                     })
                                                 }}>{formatMessage("search.results.more")}
                                             </Button>
-                                            {formatMessage("search.results.shown", [searchResults.queryResults.length.toString(), searchResults.hits.toString()])}
+                                            {formatMessage("search.results.shown", [searchResults.length.toString(), hits.toString()])}
                                         </div>
                                     }
                                 </div>
@@ -251,6 +263,7 @@ export class SearchResults extends React.Component<ISearchResultsProps, ISearchR
      */
     private _fetchSearchResults(query: ISearchQuery): void {
         const { searchService } = this.context.services;
+        const { searchResults } = this.state;
 
         this.setState({
             isLoading: true
@@ -258,12 +271,14 @@ export class SearchResults extends React.Component<ISearchResultsProps, ISearchR
 
         // Get search results families list
         searchService.getSearchResults(query).then(
-            searchResults => {
+            result => {
                 /* istanbul ignore else */
                 if (!this._isUnmounted) {
                     this.setState({
                         isLoading: false,
-                        searchResults: searchResults,
+                        searchResults: (result.startIndex === 0) ? result.queryResults : (searchResults || []).concat(...result.queryResults),
+                        searchResultsHits: result.hits,
+                        startIndex: result.startIndex,
                         error: undefined
                     });
                 }

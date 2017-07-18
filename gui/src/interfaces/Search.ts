@@ -61,6 +61,13 @@ export interface ISearchQueryResults {
      */
     hits: number;
     /**
+     * search start index
+     *
+     * @type {number}
+     * @memberOf ISearchQueryResults
+     */
+    startIndex: number;
+    /**
      * search query results
      *
      * @type {string}
