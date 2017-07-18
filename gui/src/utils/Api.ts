@@ -5,6 +5,9 @@ import { IError } from "interfaces/Error";
 const mocksEnabled = (): boolean => (window as IWindow).SdlDitaDeliveryMocksEnabled || false;
 const mocksEndPoint = `/$mocks$`;
 
+export const API_REQUEST_TYPE_JSON = "application/json";
+export const API_REQUEST_TYPE_FORM = "application/x-www-form-urlencoded";
+
 /**
  * Utilities for generating api urls
  *
@@ -173,15 +176,16 @@ export class Api {
      * Use this url to search content
      *
      * @static
+     * @param {string} publicationId
      * @returns {string}
      *
      * @memberof Api
      */
-    public static getSearchUrl(): string {
+    public static getSearchUrl(publicationId?: string): string {
         /* istanbul ignore else */
         if (mocksEnabled()) {
             // Get all comments for a page without any filtering
-            return path.getAbsolutePath(`${mocksEndPoint}/search.json`);
+            return path.getAbsolutePath(`${mocksEndPoint}/search-${publicationId}.json`);
         } else {
             return path.getAbsolutePath("api/search");
         }

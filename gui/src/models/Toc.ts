@@ -1,7 +1,7 @@
 import { isEmpty } from "lodash";
 import { ISitemapItem } from "interfaces/ServerModels";
 import { ITaxonomy } from "interfaces/Taxonomy";
-import { Api } from "utils/Api";
+import { Api, API_REQUEST_TYPE_FORM } from "utils/Api";
 import { Net, IWebRequest, LoadableObject } from "@sdl/models";
 import { IConditionMap, IPostConditions, IPostConditionRequest } from "store/interfaces/Conditions";
 
@@ -63,11 +63,11 @@ export class Toc extends LoadableObject {
                     postConditions[key] = this._conditions[key].values;
                 }
             }
-            const postBody: IPostConditionRequest = {publicationId: +this._publicationId, userConditions: postConditions};
+            const postBody: IPostConditionRequest = { publicationId: +this._publicationId, userConditions: postConditions };
             const body = `conditions=${JSON.stringify(postBody)}`;
             isEmpty(this._conditions)
                 ? Net.getRequest(url, this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed))
-                : Net.postRequest(url, body, "application/x-www-form-urlencoded", this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
+                : Net.postRequest(url, body, API_REQUEST_TYPE_FORM, this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
         }
     }
 

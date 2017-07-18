@@ -1,6 +1,6 @@
 import { ISearchResults, ISearchResult } from "interfaces/ServerModels";
 import { ISearchQuery, ISearchQueryResult, ISearchQueryResults } from "interfaces/Search";
-import { Api } from "utils/Api";
+import { Api, API_REQUEST_TYPE_JSON } from "utils/Api";
 import { Net, IWebRequest, LoadableObject } from "@sdl/models";
 import { TcmId } from "utils/TcmId";
 
@@ -39,10 +39,17 @@ export class Search extends LoadableObject {
 
     /* Overloads */
     protected _executeLoad(reload: boolean): void {
+        const query = this._query;
         Net.postRequest(
-            Api.getSearchUrl(),
-            JSON.stringify(this._query),
-            "application/json",
+            Api.getSearchUrl(query.publicationId),
+            JSON.stringify({
+                "PublicationId": query.publicationId,
+                "Language": query.language,
+                "SearchQuery": query.searchQuery,
+                "StartIndex": query.startIndex,
+                "Count": query.count,
+            }),
+            API_REQUEST_TYPE_JSON,
             this.getDelegate(this._onLoad),
             this.getDelegate(this._onLoadFailed));
     }

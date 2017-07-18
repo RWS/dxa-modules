@@ -119,7 +119,15 @@ export class SearchResults extends React.Component<ISearchResultsProps, ISearchR
      * Invoked once, both on the client and server, immediately before the initial rendering occurs.
      */
     public componentWillMount(): void {
-        this._fetchSearchResults();
+        const { publicationId, searchQuery } = this.props.params;
+        const { startIndex } = this.state;
+        const query = {
+            publicationId,
+            searchQuery,
+            startIndex
+        } as ISearchQuery;
+
+        this._fetchSearchResults(query);
     }
 
     /**
@@ -134,7 +142,11 @@ export class SearchResults extends React.Component<ISearchResultsProps, ISearchR
         if ((nextProps.params.searchQuery !== searchQuery) ||
             (nextProps.params.publicationId !== publicationId) ||
             (nextState.startIndex !== startIndex)) {
-            this._fetchSearchResults();
+            this._fetchSearchResults({
+                publicationId: nextProps.params.publicationId,
+                searchQuery: nextProps.params.searchQuery,
+                startIndex: nextState.startIndex
+            } as ISearchQuery);
         }
     }
 
@@ -144,11 +156,16 @@ export class SearchResults extends React.Component<ISearchResultsProps, ISearchR
      * @returns {JSX.Element}
      */
     public render(): JSX.Element {
-        const { searchQuery } = this.props.params;
+        const { searchQuery, publicationId } = this.props.params;
         const { searchResults, isLoading, error, startIndex } = this.state;
         const { formatMessage } = this.context.services.localizationService;
+        const query = {
+            publicationId,
+            searchQuery,
+            startIndex
+        } as ISearchQuery;
         const errorButtons = <div>
-            <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{ "click": () => this._fetchSearchResults() }}>{formatMessage("control.button.retry")}</Button>
+            <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{ "click": () => this._fetchSearchResults(query) }}>{formatMessage("control.button.retry")}</Button>
         </div>;
 
         return (
@@ -232,9 +249,7 @@ export class SearchResults extends React.Component<ISearchResultsProps, ISearchR
     /**
      * fetch search results
      */
-    private _fetchSearchResults(): void {
-        const { publicationId, searchQuery } = this.props.params;
-        const { startIndex } = this.state;
+    private _fetchSearchResults(query: ISearchQuery): void {
         const { searchService } = this.context.services;
 
         this.setState({
@@ -242,11 +257,7 @@ export class SearchResults extends React.Component<ISearchResultsProps, ISearchR
         });
 
         // Get search results families list
-        searchService.getSearchResults({
-            publicationId,
-            searchQuery,
-            startIndex
-        } as ISearchQuery).then(
+        searchService.getSearchResults(query).then(
             searchResults => {
                 /* istanbul ignore else */
                 if (!this._isUnmounted) {

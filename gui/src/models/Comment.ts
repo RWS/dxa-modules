@@ -1,4 +1,4 @@
-import { Api } from "utils/Api";
+import { Api, API_REQUEST_TYPE_JSON } from "utils/Api";
 import { Net, IWebRequest, LoadableObject } from "@sdl/models";
 import { IPostComment } from "interfaces/Comments";
 import { IComment } from "interfaces/ServerModels";
@@ -38,7 +38,7 @@ export class Comment extends LoadableObject {
     protected _executeLoad(): void {
         const url = Api.getSaveCommentUrl();
         const body = JSON.stringify(this._comment);
-        Net.postRequest(url, body, "application/json",
+        Net.postRequest(url, body, API_REQUEST_TYPE_JSON,
             this.getDelegate(this._onLoad),
             this.getDelegate(this._onLoadFailed));
     }
