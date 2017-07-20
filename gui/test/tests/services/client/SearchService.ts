@@ -11,6 +11,7 @@ class PageServiceTests extends TestBase {
         const searchService = new SearchService();
         const startIndex = 0;
         const _testQuery = "SDL: WEB";
+        const _testLocale = "en";
 
         describe("Search service tests.", (): void => {
             beforeEach(() => {
@@ -24,12 +25,13 @@ class PageServiceTests extends TestBase {
             it("can get search results", (done: () => void): void => {
                 const query = {
                     startIndex,
+                    locale: _testLocale,
                     searchQuery: _testQuery
                 } as ISearchQuery;
                 searchService.getSearchResults(query).then(searchResults => {
                     expect(searchResults).toBeDefined();
                     if (searchResults) {
-                        expect(searchResults.hits).toBe(352);
+                        expect(searchResults.hits).toBe(148);
                         expect(searchResults.queryResults.length).toBe(10);
                     }
                     done();
@@ -42,13 +44,14 @@ class PageServiceTests extends TestBase {
             it("is not cached in memory", (done: () => void): void => {
                 const query = {
                     startIndex,
+                    locale: _testLocale,
                     searchQuery: _testQuery
                 } as ISearchQuery;
                 const spy = spyOn(XMLHttpRequest.prototype, "open").and.callThrough();
                 searchService.getSearchResults(query).then(searchResults => {
                     expect(searchResults).toBeDefined();
                     if (searchResults) {
-                        expect(searchResults.hits).toBe(352);
+                        expect(searchResults.hits).toBe(148);
                         expect(searchResults.queryResults.length).toBe(10);
                         expect(spy).toHaveBeenCalled();
                     }
