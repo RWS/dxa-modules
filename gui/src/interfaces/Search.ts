@@ -43,7 +43,7 @@ export interface ISearchQuery {
      * @type {string}
      * @memberOf ISearchQuery
      */
-    language: string;
+    locale: string;
 }
 
 /**

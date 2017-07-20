@@ -1,11 +1,11 @@
 {
   "Hits": 9,
-  "Count": 0,
+  "Count": 10,
   "StartIndex": 0,
   "QueryResults": [
     {
       "Id": "ish_1849903-1845583-16",
-      "Fields": {
+      "Meta": {
         "FTITLE.logical.value": "היסטוריה"
       },
       "Locale": "iw",
@@ -20,7 +20,7 @@
     },
     {
       "Id": "ish_1849903-1845646-16",
-      "Fields": {
+      "Meta": {
         "FTITLE.logical.value": "קישורים חיצוניים"
       },
       "Locale": "iw",
@@ -35,7 +35,7 @@
     },
     {
       "Id": "ish_1849903-1845651-16",
-      "Fields": {
+      "Meta": {
         "FTITLE.logical.value": "הערות שוליים"
       },
       "Locale": "iw",
@@ -50,7 +50,7 @@
     },
     {
       "Id": "ish_1849903-1845591-16",
-      "Fields": {
+      "Meta": {
         "FTITLE.logical.value": "חברות בירה"
       },
       "Locale": "iw",
@@ -65,7 +65,7 @@
     },
     {
       "Id": "ish_1849903-1845599-16",
-      "Fields": {
+      "Meta": {
         "FTITLE.logical.value": "בירה ובריאות"
       },
       "Locale": "iw",
@@ -80,7 +80,7 @@
     },
     {
       "Id": "ish_1849903-1845587-16",
-      "Fields": {
+      "Meta": {
         "FTITLE.logical.value": "תהליך ההכנה"
       },
       "Locale": "iw",
@@ -95,7 +95,7 @@
     },
     {
       "Id": "ish_1849903-1845595-16",
-      "Fields": {
+      "Meta": {
         "FTITLE.logical.value": "בירה ביתית"
       },
       "Locale": "iw",
@@ -110,7 +110,7 @@
     },
     {
       "Id": "ish_1849903-1845641-16",
-      "Fields": {
+      "Meta": {
         "FTITLE.logical.value": "לקריאה נוספת"
       },
       "Locale": "iw",
@@ -125,7 +125,7 @@
     },
     {
       "Id": "ish_1849903-1845579-16",
-      "Fields": {
+      "Meta": {
         "FTITLE.logical.value": "בירה"
       },
       "Locale": "iw",

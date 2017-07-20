@@ -1,0 +1,157 @@
+{
+  "Hits": 148,
+  "Count": 10,
+  "StartIndex": 20,
+  "QueryResults": [
+    {
+      "Id": "ish_1420746-164444-16",
+      "Meta": {
+        "FTITLE.logical.value": "editing a contact"
+      },
+      "Locale": "en",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      Editing a contact\n      \n      \n      \n         \n         \n            \n               Search for the contact you want to edit and press Detail. \n               \n            \n            \n            \n               Scroll to the name, number or text item you want to edit, and press Options. \n               \n            \n            \n            \n               Select Edit Name, Edit Number, or Edit Detail, and edit the name, number, or text and press OK.\n               \n            \n            \n         \n         \n         \n      \n      \n      \n      \n         \n         \n            \n            Parent topic: Phone book\n            \n         \n         \n      \n   ",
+      "CreatedDate": "23.12.2015 4:57:22",
+      "ModifiedDate": "08.04.2016 15:12:44",
+      "PublicationId": 1420746,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": "Mobile Phones",
+      "ProductReleaseName": "MP 330 2014"
+    },
+    {
+      "Id": "ish_1420746-164155-16",
+      "Meta": {
+        "FTITLE.logical.value": "connectors overview"
+      },
+      "Locale": "en",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      Connectors overview\n      \n      \n      \n      \n         \n         \n         \n         \n            \n            \n            \n               \n               Charger connector\n               \n               \n               Connector for headsets, the connectivity cable and loopset\n               \n               \n               Audio line-in connector for the audio cable to connect the phone to external audio equipment\n               \n               \n            \n            \n            \n         \n         \n         \n         \n      \n      \n      \n      \n         \n         \n            \n            Parent topic: Your phone\n            \n         \n         \n         \n         Related concepts\n            \n            \n            Standby mode\n         \n         \n         \n         Related tasks\n            \n            \n            Installing the SIM card and the battery\n            \n            Charging the battery\n         \n         \n         \n         Related information\n            \n            \n            Essential indicators in standby mode\n         \n         \n      \n   ",
+      "CreatedDate": "23.12.2015 4:56:40",
+      "ModifiedDate": "08.04.2016 15:11:18",
+      "PublicationId": 1420746,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": "Mobile Phones",
+      "ProductReleaseName": "MP 330 2014"
+    },
+    {
+      "Id": "ish_1420746-164436-16",
+      "Meta": {
+        "FTITLE.logical.value": "screen saver"
+      },
+      "Locale": "en",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      Screen saver\n      \n      \n      \n      \n         The phone automatically activates the screen saver, a digital clock view, for power saving in standby mode.\n         \n         \n         It is activated when no function of the phone has been used for a certain time. Press any key to deactivate the screen saver.\n            Screen saver is also deactivated when the phone is out of the network coverage area.\n         \n         \n         \n         Note that the screen saver overrides all the graphics and texts on the display in standby mode.\n         \n         \n      \n      \n      \n      \n         \n         \n            \n            Parent topic: Your phone\n            \n         \n         \n      \n   ",
+      "CreatedDate": "23.12.2015 4:57:21",
+      "ModifiedDate": "08.04.2016 15:12:42",
+      "PublicationId": 1420746,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": "Mobile Phones",
+      "ProductReleaseName": "MP 330 2014"
+    },
+    {
+      "Id": "ish_1420746-164301-16",
+      "Meta": {
+        "FTITLE.logical.value": "phone book"
+      },
+      "Locale": "en",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      Phone book\n      \n      \n      \n      \n         You can save your contacts in the phone’s memory (internal phone book) and in the SIM card’s memory (SIM phone book).\n         \n         \n         \n         \n         \n      \n      \n      \n      \n         \n         \n            \n            Saving names and numbers\n               \n            \n            \n            Searching for a contact\n               \n            \n            \n            Editing a contact\n               \n            \n            \n         \n         \n      \n   ",
+      "CreatedDate": "23.12.2015 4:57:02",
+      "ModifiedDate": "08.04.2016 15:12:01",
+      "PublicationId": 1420746,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": "Mobile Phones",
+      "ProductReleaseName": "MP 330 2014"
+    },
+    {
+      "Id": "ish_1420746-164090-16",
+      "Meta": {
+        "FTITLE.logical.value": "mp safety notes"
+      },
+      "Locale": "en",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      Safety Information\n      \n      \n      \n      \n         This library groups a set of safety warnings and precautions.\n         \n         \n         Note: \n            \n             ROAD SAFETY COMES FIRST\n            \n            \n            \n            Don't use a hand-held phone while driving.\n            \n            \n         \n         \n         \n         Note: \n            \n            INTERFERENCE\n            \n            \n            \n            All wireless phones may get interference, which could affect performance.\n            \n            \n         \n         \n         \n         Note: \n            \n             SWITCH OFF IN HOSPITALS\n            \n            \n            \n            Follow any regulations or rules. Switch the phone off near medical equipment.\n            \n            \n         \n         \n         \n         Note: \n            \n            SWITCH OFF IN AIRCRAFT\n            \n            \n            \n            Wireless devices can cause interference in aircraft.\n            \n            \n         \n         \n         \n         Note: \n            \n            SWITCH OFF WHEN REFUELLING\n            \n            \n            \n            Don't use the phone at a refuelling point. Don't use near fuel or chemicals.\n            \n            \n         \n         \n         \n         Note: \n            \n            SWITCH OFF NEAR BLASTING\n            \n            \n            \n            Don't use the phone where blasting is in progress. Observe restrictions, and follow any regulations or rules.\n            \n            \n         \n         \n         \n         Note: \n            \n            QUALIFIED SERVICE\n            \n            \n            \n            Only qualified personnel may install or repair phone equipment.\n            \n            \n         \n         \n         \n         Note: \n            \n            ACCESSORIES AND BATTERIES\n            \n            \n            \n            Only use approved accessories and batteries. Do not connect incompatible products.\n            \n            \n         \n         \n         \n         Note: \n            \n            CONNECTING TO OTHER DEVICES\n            \n            \n            \n            When connecting to any other device, read its user's guide for detailed safety instructions. Do not connect incompatible products.\n               \n            \n            \n            \n         \n         \n         \n         Note: \n            \n            BACKUP COPIES\n            \n            \n            \n            Remember to make backup copies of all important data.\n            \n            \n         \n         \n         \n         Note: \n            \n            WATER-RESISTANCE\n            \n            \n            \n            Your phone is not water-resistant. Keep it dry.\n            \n            \n         \n         \n         \n         \n      \n      \n      \n   ",
+      "CreatedDate": "23.12.2015 4:56:32",
+      "ModifiedDate": "08.04.2016 15:10:57",
+      "PublicationId": 1420746,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": "Mobile Phones",
+      "ProductReleaseName": "MP 330 2014"
+    },
+    {
+      "Id": "ish_1420746-164223-16",
+      "Meta": {
+        "FTITLE.logical.value": "introduction"
+      },
+      "Locale": "en",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      Dear Customer\n      \n      \n      \n         \n         \n            \n            In purchasing this mobile phone, you have decided on a quality product. The features of your machine meet the many needs that\n               arise in modern mobile communication.\n            \n            \n         \n         \n         \n         \n            \n            Please read the user manual carefully and follow the safety instructions to ensure proper operation of your phone. Your phone\n               is identified by its IMEI number. Write this number down, and do not keep it with your phone, because you may be asked for\n               it in the event of your phone being stolen, in order to prevent it from being used, even with a different SIM card. In order\n               to display the IMEI on your phone’screen, type: *#06#. \n            \n            \n            \n         \n         \n         \n         \n            \n            Bluetooth technology enables cost-free wireless connections between electronic devices within a maximum range of 10 metres.\n               A Bluetooth connection can be used to send images, videos, texts, business cards, calendar notes, or to connect wirelessly\n               to devices using Bluetooth technology, such as computers.\n            \n            \n            \n         \n         \n         \n         \n            \n            You should only use original consumables — your guarantee does not cover damage to your product caused by the use of any other\n               consumables. \n            \n            \n            \n            As part of our continuing quest for total customer satisfaction, all of our products are made with ease-of-use and reliability\n               in mind.\n            \n            \n            \n         \n         \n         \n      \n      \n      \n   ",
+      "CreatedDate": "23.12.2015 4:56:50",
+      "ModifiedDate": "08.04.2016 15:11:36",
+      "PublicationId": 1420746,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": "Mobile Phones",
+      "ProductReleaseName": "MP 330 2014"
+    },
+    {
+      "Id": "ish_1420746-164355-16",
+      "Meta": {
+        "FTITLE.logical.value": "keypad locking"
+      },
+      "Locale": "en",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      Locking the keypad\n      \n      \n      \n      \n         You can lock the keypad to prevent the keys being accidentally pressed, for example, when your phone is in your bag.\n         \n         \n         \n            \n            Locking the keypad \n               In standby mode, press Menu and then within 1.5 seconds. \n               \n               \n            \n            \n            \n            Unlocking the keypad \n                Press Unlock and then within 1.5 seconds.\n               \n               \n            \n            \n            \n         \n         \n         \n      \n      \n      \n      \n         \n         \n            \n            Parent topic: Getting started\n            \n         \n         \n      \n   ",
+      "CreatedDate": "23.12.2015 4:57:10",
+      "ModifiedDate": "08.04.2016 15:12:18",
+      "PublicationId": 1420746,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": "Mobile Phones",
+      "ProductReleaseName": "MP 330 2014"
+    },
+    {
+      "Id": "ish_1420746-164195-16",
+      "Meta": {
+        "FTITLE.logical.value": "answering or rejecting a call"
+      },
+      "Locale": "en",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      Answering or rejecting a call\n      \n      \n      \n      \n         \n         \n         \n         Note that when somebody is calling you, the phone shows the caller’s name, phone number or the text Private Number or Call. If more than one name is found in the phone book with the same phone number as the caller’s number, only the phone number\n            will be displayed, if this is available.\n         \n         \n         \n         \n            \n               Press to answer the incoming call and press  to end the call.\n               \n            \n            \n            \n               Press  to reject the incoming call.\n               \n            \n            \n         \n         \n         \n         If a compatible headset is connected to the phone, you can answer and end a call by pressing the headset key.\n         \n         \n      \n      \n      \n      \n         \n         \n            \n            Parent topic: Call functions\n            \n         \n         \n         \n         Related tasks\n            \n            \n            Making a call\n            \n            Voice dialling\n         \n         \n         \n         Related information\n            \n            \n            Speed Dialling\n            \n            Call functions\n            \n            Keys overview\n         \n         \n      \n   ",
+      "CreatedDate": "23.12.2015 4:56:46",
+      "ModifiedDate": "08.04.2016 15:11:31",
+      "PublicationId": 1420746,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": "Mobile Phones",
+      "ProductReleaseName": "MP 330 2014"
+    },
+    {
+      "Id": "ish_1420746-164290-16",
+      "Meta": {
+        "FTITLE.logical.value": "charging the battery"
+      },
+      "Locale": "en",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      Charging the battery\n      \n      \n      \n         \n         \n            \n               Connect the lead from the charger to the socket of your phone.\n               \n               \n                  \n                  \n                  \n               \n               \n            \n            \n            \n               Connect the charger to an AC wall socket.\n               \n               The text Charging is displayed briefly if the phone is switched on. If the battery is completely flat, it may take a few minutes\n                  before the charging indicator appears on the display or any calls can be made.\n               \n               \n            \n            \n         \n         \n         \n         \n            \n            You can use the phone while the charger is connected.\n            \n            \n         \n         \n         \n      \n      \n      \n      \n         \n         \n            \n            Parent topic: Getting started\n            \n         \n         \n         \n         Related concepts\n            \n            \n            Standby mode\n         \n         \n         \n         Related tasks\n            \n            \n            Installing the SIM card and the battery\n         \n         \n         \n         Related information\n            \n            \n            Connectors overview\n            \n            Essential indicators in standby mode\n         \n         \n      \n   ",
+      "CreatedDate": "23.12.2015 4:57:00",
+      "ModifiedDate": "08.04.2016 15:11:58",
+      "PublicationId": 1420746,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": "Mobile Phones",
+      "ProductReleaseName": "MP 330 2014"
+    },
+    {
+      "Id": "ish_1420746-164406-16",
+      "Meta": {
+        "FTITLE.logical.value": "dj game"
+      },
+      "Locale": "en",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      DJ Game\n      \n      \n      \n      \n         \n         \n         \n         In this game you play a budding DJ in his quest for fame and fortune. \n         \n         \n         Guide him throughthe city collecting records and practicing his scratching to get ready for performing in clubs.\n         \n         \n         Once you have the skills you will be requested to play in the coolest club in town. Will it be your breakthrough? It's all\n            up to you!\n         \n         \n         \n      \n      \n      \n      \n         \n         \n            \n            Parent topic: Games\n            \n         \n         \n      \n   ",
+      "CreatedDate": "23.12.2015 4:57:17",
+      "ModifiedDate": "08.04.2016 15:12:34",
+      "PublicationId": 1420746,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": "Mobile Phones",
+      "ProductReleaseName": "MP 330 2014"
+    }
+  ]
+}

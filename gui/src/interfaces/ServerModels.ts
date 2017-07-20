@@ -1,4 +1,5 @@
-﻿export interface IComment {
+﻿
+    export interface IComment {
         children: IComment[];
         content: string;
         creationDate: ICommentDate;
@@ -50,13 +51,20 @@
         Version: string;
         VersionRef: string;
     }
+    export interface ISearchRequestQuery {
+        Count: number;
+        Language: string;
+        PublicationId: number;
+        SearchQuery: string;
+        StartIndex: number;
+    }
     export interface ISearchResult {
         Content: string;
         CreatedDate: string;
-        Fields: { [key: string ]: string | string[] | number | number[] | undefined | null };
         Highlighted?: string;
         Id: string;
         Locale: string;
+        Meta: { [key: string ]: string | string[] | number | number[] | undefined | null };
         ModifiedDate?: string;
         ProductFamilyName?: string;
         ProductReleaseName?: string;

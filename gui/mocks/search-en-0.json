@@ -1,12 +1,12 @@
 {
-  "Hits": 352,
+  "Hits": 148,
   "Count": 10,
-  "StartIndex": 20,
+  "StartIndex": 0,
   "QueryResults": [
     {
       "Id": "ish_1420746-164163-16",
-      "Fields": {
-        "FTITLE.logical.value": " - 3 -listening to the radio"
+      "Meta": {
+        "FTITLE.logical.value": "listening to the radio"
       },
       "Locale": "en",
       "Highlighted": null,
@@ -20,8 +20,8 @@
     },
     {
       "Id": "ish_1420746-164398-16",
-      "Fields": {
-        "FTITLE.logical.value": " - 3 -getting started"
+      "Meta": {
+        "FTITLE.logical.value": "getting started"
       },
       "Locale": "en",
       "Highlighted": null,
@@ -35,8 +35,8 @@
     },
     {
       "Id": "ish_1420746-164428-16",
-      "Fields": {
-        "FTITLE.logical.value": " - 3 -searching for a contact"
+      "Meta": {
+        "FTITLE.logical.value": "searching for a contact"
       },
       "Locale": "en",
       "Highlighted": null,
@@ -50,8 +50,8 @@
     },
     {
       "Id": "ish_1420746-164390-16",
-      "Fields": {
-        "FTITLE.logical.value": " - 3 -multimedia messages"
+      "Meta": {
+        "FTITLE.logical.value": "multimedia messages"
       },
       "Locale": "en",
       "Highlighted": null,
@@ -65,8 +65,8 @@
     },
     {
       "Id": "ish_1420746-164271-16",
-      "Fields": {
-        "FTITLE.logical.value": " - 3 -installing sim card and battery"
+      "Meta": {
+        "FTITLE.logical.value": "installing sim card and battery"
       },
       "Locale": "en",
       "Highlighted": null,
@@ -80,8 +80,8 @@
     },
     {
       "Id": "ish_1420746-164363-16",
-      "Fields": {
-        "FTITLE.logical.value": " - 3 -speed dialling"
+      "Meta": {
+        "FTITLE.logical.value": "speed dialling"
       },
       "Locale": "en",
       "Highlighted": null,
@@ -95,8 +95,8 @@
     },
     {
       "Id": "ish_1420746-164339-16",
-      "Fields": {
-        "FTITLE.logical.value": " - 3 -listening to music"
+      "Meta": {
+        "FTITLE.logical.value": "listening to music"
       },
       "Locale": "en",
       "Highlighted": null,
@@ -110,8 +110,8 @@
     },
     {
       "Id": "ish_1420746-164331-16",
-      "Fields": {
-        "FTITLE.logical.value": " - 3 -voice dialling"
+      "Meta": {
+        "FTITLE.logical.value": "voice dialling"
       },
       "Locale": "en",
       "Highlighted": null,
@@ -125,8 +125,8 @@
     },
     {
       "Id": "ish_1420746-164255-16",
-      "Fields": {
-        "FTITLE.logical.value": " - 3 -essential indicators in standby mode"
+      "Meta": {
+        "FTITLE.logical.value": "essential indicators in standby mode"
       },
       "Locale": "en",
       "Highlighted": null,
@@ -140,8 +140,8 @@
     },
     {
       "Id": "ish_1420746-164468-16",
-      "Fields": {
-        "FTITLE.logical.value": " - 3 -call functions"
+      "Meta": {
+        "FTITLE.logical.value": "call functions"
       },
       "Locale": "en",
       "Highlighted": null,

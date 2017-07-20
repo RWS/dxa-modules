@@ -1,4 +1,4 @@
-import { ISearchResults, ISearchResult } from "interfaces/ServerModels";
+import { ISearchResults, ISearchResult, ISearchRequestQuery } from "interfaces/ServerModels";
 import { ISearchQuery, ISearchQueryResult, ISearchQueryResults } from "interfaces/Search";
 import { Api, API_REQUEST_TYPE_JSON } from "utils/Api";
 import { Net, IWebRequest, LoadableObject } from "@sdl/models";
@@ -41,14 +41,14 @@ export class Search extends LoadableObject {
     protected _executeLoad(reload: boolean): void {
         const query = this._query;
         Net.postRequest(
-            Api.getSearchUrl(query.startIndex, query.publicationId),
+            Api.getSearchUrl(query.locale, query.startIndex, query.publicationId),
             JSON.stringify({
-                "PublicationId": query.publicationId,
-                "Language": query.language,
-                "SearchQuery": query.searchQuery,
-                "StartIndex": query.startIndex,
-                "Count": query.count
-            }),
+                PublicationId: Number(query.publicationId),
+                Language: query.locale,
+                SearchQuery: query.searchQuery,
+                StartIndex: query.startIndex,
+                Count: query.count
+            } as ISearchRequestQuery),
             API_REQUEST_TYPE_JSON,
             this.getDelegate(this._onLoad),
             this.getDelegate(this._onLoadFailed));
@@ -68,7 +68,7 @@ export class Search extends LoadableObject {
                     publicationId: item.PublicationId.toString(),
                     publicationTitle: item.PublicationTitle,
                     pageId: TcmId.getItemIdFromTaxonomyItemId(item.Id),
-                    pageTitle: item.Fields["FTITLE.logical.value"],
+                    pageTitle: item.Meta["FTITLE.logical.value"],
                     productFamilyTitle: item.ProductFamilyName,
                     productReleaseVersionTitle: item.ProductReleaseName
                 } as ISearchQueryResult;

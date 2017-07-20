@@ -262,7 +262,7 @@ export class SearchResults extends React.Component<ISearchResultsProps, ISearchR
      * fetch search results
      */
     private _fetchSearchResults(query: ISearchQuery): void {
-        const { searchService } = this.context.services;
+        const { searchService, localizationService } = this.context.services;
         const { searchResults } = this.state;
 
         this.setState({
@@ -270,7 +270,10 @@ export class SearchResults extends React.Component<ISearchResultsProps, ISearchR
         });
 
         // Get search results families list
-        searchService.getSearchResults(query).then(
+        searchService.getSearchResults({
+            ...query,
+            locale: localizationService.getLanguage()
+        }).then(
             result => {
                 /* istanbul ignore else */
                 if (!this._isUnmounted) {

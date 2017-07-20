@@ -176,20 +176,21 @@ export class Api {
      * Use this url to search content
      *
      * @static
+     * @param {string} locale
      * @param {string} publicationId
      * @param {number} startIndex
      * @returns {string}
      *
      * @memberof Api
      */
-    public static getSearchUrl(startIndex: number, publicationId?: string): string {
+    public static getSearchUrl(locale: string, startIndex: number, publicationId?: string): string {
         /* istanbul ignore else */
         if (mocksEnabled()) {
             // Get search results for publication
             if (publicationId) {
-                return path.getAbsolutePath(`${mocksEndPoint}/search-${publicationId}-${startIndex}.json`);
+                return path.getAbsolutePath(`${mocksEndPoint}/search-${locale}-${publicationId}-${startIndex}.json`);
             } else {
-                return path.getAbsolutePath(`${mocksEndPoint}/search-${startIndex}.json`);
+                return path.getAbsolutePath(`${mocksEndPoint}/search-${locale}-${startIndex}.json`);
             }
         } else {
             return path.getAbsolutePath("api/search");

@@ -1,0 +1,157 @@
+{
+  "Hits": 38,
+  "Count": 10,
+  "StartIndex": 20,
+  "QueryResults": [
+    {
+      "Id": "ish_1881665-164454-16",
+      "Meta": {
+        "FTITLE.logical.value": "deleting messages"
+      },
+      "Locale": "nl",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      Berichten verwijderen\n      \n      \n      \n         \n         \n            \n               Als u tekstberichten wilt verwijderen, drukt u Menu en selecteer Berichten, Tekstberichten en Berichten verwijd..\n               \n            \n            \n            \n               Als u alle berichten uit een map wilt verwijderen, selecteert u de betreffende map en drukt u op OK. Als de map ongelezen berichten bevat, wordt gevraagd of u ook deze wilt verwijderen. \n               \n            \n            \n         \n         \n         \n      \n      \n      \n      \n      \n         \n         \n            \n            Hoofdonderwerp: Berichten\n            \n         \n         \n      \n   ",
+      "CreatedDate": "22.12.2015 18:27:24",
+      "ModifiedDate": "23.12.2015 3:21:49",
+      "PublicationId": 1881665,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": "Mobile Phones",
+      "ProductReleaseName": "MP 330 (2.0.0)"
+    },
+    {
+      "Id": "ish_1881665-164392-16",
+      "Meta": {
+        "FTITLE.logical.value": "multimedia messages"
+      },
+      "Locale": "nl",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      Multimediaberichten\n      \n      \n      \n      \n         Multimediaberichten kunnen tekst, afbeeldingen en geluid bevatten.\n         \n         \n         De telefoon kan multimediaberichten met geluid wel ontvangen maar niet verzenden. De telefoon ondersteunt multimediaberichten\n            van maximaal 45 kB. Als een bericht groter dan 45 kB is, kunt u het bericht waarschijnlijk niet ontvangen. Afhankelijk van\n            uw netwerk, ontvangt u een tekstbericht waarin een internetadres is opgenomen waar u het multimediabericht kunt bekijken.\n         \n         \n         \n         Als het bericht een afbeelding bevat, wordt deze aangepast aan het display.\n         \n         \n         De volgende indelingen voor multimediaberichten worden ondersteund:\n         \n         \n         \n            \n            Afbeelding: JPEG, GIF, PNG en BMP.\n            \n            \n            Geluid: MIDI, Scalable Polyphonic MIDI (SP-MIDI), monofone beltonen (RGN) en WB-AMR.\n            \n            \n         \n         \n         \n      \n      \n      \n      \n         \n         \n            \n            Hoofdonderwerp: Berichten\n            \n         \n         \n      \n   ",
+      "CreatedDate": "22.12.2015 18:27:15",
+      "ModifiedDate": "23.12.2015 3:21:37",
+      "PublicationId": 1881665,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": "Mobile Phones",
+      "ProductReleaseName": "MP 330 (2.0.0)"
+    },
+    {
+      "Id": "ish_1881665-164400-16",
+      "Meta": {
+        "FTITLE.logical.value": "getting started"
+      },
+      "Locale": "nl",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      Aan de slag\n      \n      \n      \n      \n         \n         \n         \n         \n         \n         \n      \n      \n      \n      \n      \n         \n         \n            \n            De SIM-kaart en de batterij installeren\n               \n            \n            \n            De batterij opladen.\n               \n            \n            \n            Toetsen blokkeren\n               U kunt de toetsen blokkeren om te voorkomen dat toetsen per ongeluk worden ingedrukt, bijvoorbeeld als u de telefoon in uw\n               tas hebt.\n            \n            \n         \n         \n      \n   ",
+      "CreatedDate": "22.12.2015 18:27:16",
+      "ModifiedDate": "23.12.2015 3:21:39",
+      "PublicationId": 1881665,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": "Mobile Phones",
+      "ProductReleaseName": "MP 330 (2.0.0)"
+    },
+    {
+      "Id": "ish_1881665-164257-16",
+      "Meta": {
+        "FTITLE.logical.value": "essential indicators in standby mode"
+      },
+      "Locale": "nl",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      Belangrijke indicatoren in de standby-modus\n      \n      \n      \n      \n         \n         \n         \n          U hebt een of meer tekst- of afbeeldingberichten ontvangen.\n         \n         \n         \n          U hebt een of meer multimediaberichten ontvangen.\n         \n         \n         \n          U hebt een of meer spraakberichten ontvangen.\n         \n         \n         \n         De toetsen van de telefoon zijn geblokkeerd.\n         \n         \n         \n          Er is een GPRS-verbinding tot stand gebracht. De indicator wordt linksboven in het display weergegeven. \n         \n         \n         \n          De GPRS-verbinding is tijdelijk onderbroken, bijvoorbeeld bij een inkomende of uitgaande oproep tijdens een GPRS-verbinding.\n         \n         \n         \n          De tijdsopname met de stopwatch wordt uitgevoerd in de achtergrond.\n         \n         \n         \n         De luidspreker is ingeschakeld.\n         \n         \n         \n         Geeft aan dat Bluetooth actief is.\n         \n         \n         \n         Geeft datatransmissie via Bluetooth aan.\n         \n         \n         \n      \n      \n      \n      \n         \n         \n            \n            Hoofdonderwerp: De telefoon\n            \n         \n         \n         \n         Verwante onderwerpen\n            \n            \n            Standby-modus\n         \n         \n         \n         Verwante taken\n            \n            \n            De SIM-kaart en de batterij installeren\n            \n            De batterij opladen.\n         \n         \n         \n         Verwante informatie\n            \n            \n            Aansluitingen\n         \n         \n      \n   ",
+      "CreatedDate": "22.12.2015 18:26:55",
+      "ModifiedDate": "23.12.2015 3:21:13",
+      "PublicationId": 1881665,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": "Mobile Phones",
+      "ProductReleaseName": "MP 330 (2.0.0)"
+    },
+    {
+      "Id": "ish_1881665-164157-16",
+      "Meta": {
+        "FTITLE.logical.value": "connectors overview"
+      },
+      "Locale": "nl",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      Aansluitingen\n      \n      \n      \n      \n         \n         \n         \n         \n            \n            \n            \n               \n               Aansluiting voor de lader\n               \n               \n               Aansluiting voor hoofdtelefoon, verbindingskabel en hoorapparaat.\n               \n               \n               Audio lijn-in-aansluiting voor de audiokabel om de telefoon aan te sluiten op externe audioapparatuur.\n               \n               \n            \n            \n            \n         \n         \n         \n         \n      \n      \n      \n      \n         \n         \n            \n            Hoofdonderwerp: De telefoon\n            \n         \n         \n         \n         Verwante onderwerpen\n            \n            \n            Standby-modus\n         \n         \n         \n         Verwante taken\n            \n            \n            De SIM-kaart en de batterij installeren\n            \n            De batterij opladen.\n            \n            Belangrijke indicatoren in de standby-modus\n         \n         \n      \n   ",
+      "CreatedDate": "22.12.2015 18:26:41",
+      "ModifiedDate": "23.12.2015 3:20:56",
+      "PublicationId": 1881665,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": "Mobile Phones",
+      "ProductReleaseName": "MP 330 (2.0.0)"
+    },
+    {
+      "Id": "ish_1881665-164365-16",
+      "Meta": {
+        "FTITLE.logical.value": "speed dialling"
+      },
+      "Locale": "nl",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      Snelkeuzetoetsen\n      \n      \n      \n      \n         Voordat u snelkeuze kunt gebruiken, moet u een telefoonnummer programmeren onder een van de snelkeuzetoetsen (van  tot  .\n         \n         \n         \n         U kunt het nummer dan op een van de volgende manieren kiezen:\n         \n         \n         \n            \n            Druk op de gewenste snelkeuzetoets en vervolgens op \n            \n            \n            Als Snelkeuze is ingeschakeld, houdt u de gewenste snelkeuzetoets ingedrukt totdat het nummer is gekozen.\n            \n            \n         \n         \n         \n      \n      \n      \n      \n         \n         \n            \n            Hoofdonderwerp: Opbellen\n            \n         \n         \n         \n         Verwante taken\n            \n            \n            Opbellen\n            \n            Voicedialling\n            \n            Inkomende oproepen beantwoorden of weigeren\n         \n         \n         \n         Verwante informatie\n            \n            \n            Algemene functies\n            \n            Toetsen\n         \n         \n      \n   ",
+      "CreatedDate": "22.12.2015 18:27:11",
+      "ModifiedDate": "23.12.2015 3:21:33",
+      "PublicationId": 1881665,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": "Mobile Phones",
+      "ProductReleaseName": "MP 330 (2.0.0)"
+    },
+    {
+      "Id": "ish_1881665-164470-16",
+      "Meta": {
+        "FTITLE.logical.value": "call functions"
+      },
+      "Locale": "nl",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      Algemene functies\n      \n      \n      \n      \n         \n         \n         \n         \n         \n         \n      \n      \n      \n      \n         \n         \n            \n            Opbellen\n               \n            \n            \n            Inkomende oproepen beantwoorden of weigeren\n               \n            \n            \n         \n         \n         \n         Verwante taken\n            \n            \n            Opbellen\n            \n            Voicedialling\n            \n            Inkomende oproepen beantwoorden of weigeren\n         \n         \n         \n         Verwante informatie\n            \n            \n            Snelkeuzetoetsen\n            \n            Toetsen\n         \n         \n      \n   ",
+      "CreatedDate": "22.12.2015 18:27:26",
+      "ModifiedDate": "23.12.2015 3:21:51",
+      "PublicationId": 1881665,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": "Mobile Phones",
+      "ProductReleaseName": "MP 330 (2.0.0)"
+    },
+    {
+      "Id": "ish_1881665-164381-16",
+      "Meta": {
+        "FTITLE.logical.value": "launching a game"
+      },
+      "Locale": "nl",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      Een spelletje starten\n      \n      \n      \n      \n         De telefoon bevat enkele Java-toepassingen en -spelletjes en ondersteunt het downloaden van nieuwe toepassingen en spelletjes\n            van verschillende WAPdiensten.\n         \n         \n         \n         \n            \n               Druk op Menu en selecteer Spelletjes en Selecteer Spel.\n               \n            \n            \n            \n               Scroll to a game or a game set (name depends on the game).\n               \n            \n            \n            \n               Druk op Opties en selecteer OK of druk op . Als u één spelletje hebt geselecteerd, wordt dit gestart. Als u een set hebt geselecteerd, wordt een lijst met de spelletjes\n                  in de set weergegeven. Als u een spelletje wilt starten, gaat u naar het gewenste spelletje, drukt u op Opties en selecteer OKof druk op .\n               \n            \n            \n         \n         \n         \n         \n            \n            Waarschuwing: Bepaalde spelletjes gebruiken veel batterijcapaciteit (mogelijk moet u de telefoon aansluiten op de lader).\n            \n            \n            \n         \n         \n         \n      \n      \n      \n      \n         \n         \n            \n            Hoofdonderwerp: Spelletjes\n            \n         \n         \n      \n   ",
+      "CreatedDate": "22.12.2015 18:27:13",
+      "ModifiedDate": "23.12.2015 3:21:35",
+      "PublicationId": 1881665,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": "Mobile Phones",
+      "ProductReleaseName": "MP 330 (2.0.0)"
+    },
+    {
+      "Id": "ish_1881665-164249-16",
+      "Meta": {
+        "FTITLE.logical.value": "for your safety"
+      },
+      "Locale": "nl",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      Voor uw veiligheid\n      \n      \n      \n      \n         Lees deze eenvoudige richtlijnen. Het overtreden van de regels kan gevaarlijk of onwettig zijn. Meer informatie vindt u in\n            deze handleiding.\n         \n         \n         \n         \n         \n            \n               \n                  \n                  \n               \n               \n                  \n                  \n                     \n                     \n                        \n                        \n                        \n                     \n                     \n                     \n                     \n                        \n                        VERKEERSVEILIGHEID HEEFT VOORRANG\n                        \n                        \n                        Gebruik geen telefoon terwijl u een auto bestuurt.\n                        \n                        \n                     \n                     \n                     \n                  \n                  \n                  \n                  \n                     \n                     \n                        \n                        \n                     \n                     \n                     \n                     \n                        \n                        INTERFERENTIE\n                        \n                        \n                        Alle draadloze telefoons zijn gevoelig voor storing die de werking van de telefoon kunnen beïnvloeden.\n                        \n                        \n                     \n                     \n                     \n                  \n                  \n                  \n                  \n                     \n                     \n                        \n                        \n                     \n                     \n                     \n                     \n                        \n                        SCHAKEL DE TELEFOON UIT IN ZIEKENHUIZEN\n                        \n                        \n                        Volg alle regels en aanwijzingen op. Schakel de telefoon uit in de nabijheid van medische apparatuur.\n                        \n                        \n                     \n                     \n                     \n                  \n                  \n                  \n                  \n                     \n                     \n                        \n                        \n                     \n                     \n                     \n                     \n                        \n                        SCHAKEL DE TELEFOON UIT IN VLIEGTUIGEN\n                        \n                        \n                        Draadloze telefoons kunnen storingen veroorzaken.\n                        \n                        \n                     \n                     \n                     \n                  \n                  \n                  \n                  \n                     \n                     \n                        \n                        \n                     \n                     \n                     \n                     \n                        \n                        SCHAKEL DE TELEFOON UIT TIJDENS HET TANKEN\n                        \n                        \n                        Gebruik de telefoon niet in een benzinestation. Gebruik de telefoon niet in de nabijheid van benzine of chemicaliën.\n                        \n                        \n                     \n                     \n                     \n                  \n                  \n                  \n                  \n                     \n                     \n                        \n                        \n                     \n                     \n                     \n                     \n                        \n                        SCHAKEL DE TELEFOON UIT IN DE BUURT VAN EXPLOSIEVEN\n                        \n                        \n                        Gebruik de telefoon niet waar explosieven worden gebruikt. Houd u aan beperkende maatregelen en volg eventuele voorschriften\n                           of regels op.\n                        \n                        \n                        \n                     \n                     \n                     \n                  \n                  \n                  \n                  \n                     \n                     \n                        \n                        \n                     \n                     \n                     \n                     \n                        \n                        DESKUNDIG ONDERHOUD\n                        \n                        \n                        Laat alleen bevoegd personeel het apparaat installeren of repareren.\n                        \n                        \n                     \n                     \n                     \n                  \n                  \n                  \n                  \n                     \n                     \n                        \n                        \n                     \n                     \n                     \n                     \n                        \n                        ACCESSOIRES EN BATTERIJEN\n                        \n                        \n                        Gebruik alleen goedgekeurde accessoires en batterijen. Sluit geen ongeschikte producten aan.\n                        \n                        \n                     \n                     \n                     \n                  \n                  \n                  \n                  \n                     \n                     \n                        \n                        \n                     \n                     \n                     \n                     \n                        \n                        AANSLUITEN OP ANDERE APPARATEN \n                        \n                        \n                        Wanneer u het apparaat op een ander apparaat aansluit, moet u de gebruikershandleiding van dat apparaat lezen voor gedetailleerde\n                           veiligheidsinstructies. Sluit geen ongeschikte producten aan. \n                        \n                        \n                        \n                     \n                     \n                     \n                  \n                  \n                  \n                  \n                     \n                     \n                        \n                        \n                     \n                     \n                     \n                     \n                        \n                        MAAK BACK-UPS\n                        \n                        \n                        Vergeet niet om een back-up te maken van alle belangrijke gegevens. \n                        \n                        \n                     \n                     \n                     \n                  \n                  \n                  \n                  \n                     \n                     \n                        \n                        \n                     \n                     \n                     \n                     \n                        \n                        WATERBESTENDIGHEID\n                        \n                        \n                        De telefoon is niet waterbestendig. Houd het apparaat droog.\n                        \n                        \n                     \n                     \n                     \n                  \n                  \n                  \n               \n               \n            \n            \n         \n         \n         \n      \n      \n      \n   ",
+      "CreatedDate": "22.12.2015 18:26:54",
+      "ModifiedDate": "23.12.2015 3:21:12",
+      "PublicationId": 1881665,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": "Mobile Phones",
+      "ProductReleaseName": "MP 330 (2.0.0)"
+    },
+    {
+      "Id": "ish_1881665-164273-16",
+      "Meta": {
+        "FTITLE.logical.value": "installing sim card and battery"
+      },
+      "Locale": "nl",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      De SIM-kaart en de batterij installeren\n      \n      \n      \n         \n         \n            \n            \n               \n               Houd alle kleine SIM-kaarten buiten bereik van kleine kinderen.\n               \n               \n               De SIM-kaart en de contactpunten van de kaart kunnen gemakkelijk door krassen of buigen worden beschadigd. Wees daarom voorzichtig\n                  wanneer u de kaart vastpakt, plaatst of verwijdert.\n               \n               \n               \n               Voordat u de covers verwijdert, moet u altijd de telefoon uitschakelen en loskoppelen van de lader of ander apparaat. Zorg\n                  er altijd voor dat u de covers weer bevestigt voordat u de telefoon opbergt of gebruikt.\n               \n               \n               \n            \n            \n            \n         \n         \n         \n         \n            \n               Verwijder de cover voor de achterkant.\n               \n            \n            \n            \n               Verwijder de batterij door deze bij de uitsparing uit de telefoon te tillen.\n               \n            \n            \n            \n               Plaats de SIM-kaart in de SIM-kaarthouder.\n               \n               Plaats de SIM-kaart op de juiste manier en let erop dat de gemarkeerde hoek van de kaart naar boven is gekeerd en dat de goudkleurige\n                  contactpunten naar de aansluitingen van de telefoon zijn gekeerd.\n               \n               \n            \n            \n            \n               Sluit en vergrendel de SIM-kaarthouder.\n               \n            \n            \n            \n               Plaats de batterij terug. \n               \n               \n                  \n                  Opmerking: \n                     \n                     ACCESSOIRES EN BATTERIJEN\n                     \n                     \n                     \n                     Gebruik enkel goedgekeurde batterijen en accessoires. Sluit geen ongeschikte producten aan.\n                     \n                     \n                  \n                  \n                  \n               \n               \n            \n            \n            \n               Plaats de cover voor de achterkant terug. \n               \n               \n                  \n                  Plaats eerst de palletjes van de cover in de daarvoor bestemde uitsparingen in de telefoon. Schuif de cover totdat deze vastklikt.\n                  \n                  \n               \n               \n            \n            \n         \n         \n         \n      \n      \n      \n      \n         \n         \n            \n            Hoofdonderwerp: Aan de slag\n            \n         \n         \n         \n         Verwante onderwerpen\n            \n            \n            Standby-modus\n         \n         \n         \n         Verwante taken\n            \n            \n            De batterij opladen.\n            \n            Belangrijke indicatoren in de standby-modus\n         \n         \n         \n         Verwante informatie\n            \n            \n            Aansluitingen\n         \n         \n      \n   ",
+      "CreatedDate": "22.12.2015 18:26:58",
+      "ModifiedDate": "23.12.2015 3:21:16",
+      "PublicationId": 1881665,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": "Mobile Phones",
+      "ProductReleaseName": "MP 330 (2.0.0)"
+    }
+  ]
+}

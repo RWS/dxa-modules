@@ -1,0 +1,157 @@
+{
+  "Hits": 38,
+  "Count": 10,
+  "StartIndex": 10,
+  "QueryResults": [
+    {
+      "Id": "ish_1961702-164255-16",
+      "Meta": {
+        "FTITLE.logical.value": "essential indicators in standby mode"
+      },
+      "Locale": "en",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      Essential indicators in standby mode\n      \n      \n      \n      \n         \n         \n         \n          You have received one or several text or picture messages.\n         \n         \n         \n          You have received one or several multimedia messages.\n         \n         \n         \n          You have received one or several voice messages.\n         \n         \n         \n         The phone’s keypad is locked.\n         \n         \n         \n          A GPRS connection is established. The indicator is shown on the top left of the display. \n         \n         \n         \n          The GPRS connection is suspended (on hold), for example if there is an incoming or outgoing call during a GPRS connection.\n         \n         \n         \n          The stopwatch timing is running in the background.\n         \n         \n         \n          The loudspeaker has been activated.\n         \n         \n         \n          Indicates that Bluetooth is active.\n         \n         \n         \n         Indicates that data is transmitted via Bluetooth.\n         \n         \n         \n      \n      \n      \n      \n         \n         \n            \n            Parent topic: Your phone\n            \n         \n         \n         \n         Related concepts\n            \n            \n            Standby mode\n         \n         \n         \n         Related tasks\n            \n            \n            Installing the SIM card and the battery\n            \n            Charging the battery\n         \n         \n         \n         Related information\n            \n            \n            Connectors overview\n         \n         \n      \n   ",
+      "CreatedDate": "22.12.2015 18:26:55",
+      "ModifiedDate": "23.12.2015 3:21:13",
+      "PublicationId": 1961702,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": "Mobile Phones",
+      "ProductReleaseName": "MP 330 (2.0.0)"
+    },
+    {
+      "Id": "ish_1961702-164282-16",
+      "Meta": {
+        "FTITLE.logical.value": "keys overview"
+      },
+      "Locale": "en",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      Keys overview\n      \n      \n      \n         \n         \n            \n            \n            \n               \n               Power key - Switches the phone on and off. Enables changing the profile when pressed briefly in standby mode.\n               \n               \n               Volume key - For adjusting the volume of the earpiece, the headset and the loudspeaker.\n               \n               \n               Music key - Shortcut key to quickly turn the Music player and Radio on and off.\n               \n               \n               4-way scroll key - Enables scrolling through names, phone numbers, menus or settings. Also enables, for example, channel search\n                  in the radio, adjusting the music settings, and the use of music functions, such as play, stop, fast forward and rewind.\n               \n               \n               \n               Recording key - To start recording when the radio is on or external audio equipment is connected to the phone.\n               \n               \n               Selection keys - The function of the keys depends on the guiding text shown on the display above the keys.\n                   dials a phone number, and answers a call. In standby mode it shows the most recently called numbers.\n                  \n                  \n                   ends an active call. Exits from any function.\n                  \n                  \n               \n               \n               \n                -  enter numbers and characters. \n               \n               \n               \n            \n            \n            \n         \n         \n         \n         \n      \n      \n      \n      \n         \n         \n            \n            Parent topic: Your phone\n            \n         \n         \n         \n         Related tasks\n            \n            \n            Making a call\n            \n            Voice dialling\n            \n            Answering or rejecting a call\n         \n         \n         \n         Related information\n            \n            \n            Call functions\n            \n            Speed Dialling\n         \n         \n      \n   ",
+      "CreatedDate": "22.12.2015 18:26:59",
+      "ModifiedDate": "23.12.2015 3:21:18",
+      "PublicationId": 1961702,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": "Mobile Phones",
+      "ProductReleaseName": "MP 330 (2.0.0)"
+    },
+    {
+      "Id": "ish_1961702-164428-16",
+      "Meta": {
+        "FTITLE.logical.value": "searching for a contact"
+      },
+      "Locale": "en",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      Searching for a contact\n      \n      \n      \n         \n         \n            \n               Press Contacts (or press Go to and select Contacts) and select Search.\n               \n            \n            \n            \n               You can key in the first characters of the contact’s name you are searching for in the search field. Press  and  to scroll through the contacts in the list, and  and  to move the cursor in the search field.\n               \n            \n            \n            \n               Scroll to the contact you want, and press Detail. Scroll to view the details of the selected contact.\n               \n               Tip: To quickly find a contact, press  or  in standby mode. Key in the first letter(s) of the name, and/or scroll to the contact you want.\n               \n               \n            \n            \n         \n         \n         \n      \n      \n      \n      \n         \n         \n            \n            Parent topic: Phone book\n            \n         \n         \n      \n   ",
+      "CreatedDate": "22.12.2015 18:27:20",
+      "ModifiedDate": "23.12.2015 3:21:44",
+      "PublicationId": 1961702,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": "Mobile Phones",
+      "ProductReleaseName": "MP 330 (2.0.0)"
+    },
+    {
+      "Id": "ish_1961702-164398-16",
+      "Meta": {
+        "FTITLE.logical.value": "getting started"
+      },
+      "Locale": "en",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      Getting started\n      \n      \n      \n      \n         \n         \n         \n         \n         \n         \n      \n      \n      \n      \n      \n         \n         \n            \n            Installing the SIM card and the battery\n               \n            \n            \n            Charging the battery\n               \n            \n            \n            Locking the keypad\n               You can lock the keypad to prevent the keys being accidentally pressed, for example, when your phone is in your bag.\n            \n            \n         \n         \n      \n   ",
+      "CreatedDate": "22.12.2015 18:27:16",
+      "ModifiedDate": "23.12.2015 3:21:38",
+      "PublicationId": 1961702,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": "Mobile Phones",
+      "ProductReleaseName": "MP 330 (2.0.0)"
+    },
+    {
+      "Id": "ish_1961702-164436-16",
+      "Meta": {
+        "FTITLE.logical.value": "screen saver"
+      },
+      "Locale": "en",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      Screen saver\n      \n      \n      \n      \n         The phone automatically activates the screen saver, a digital clock view, for power saving in standby mode.\n         \n         \n         It is activated when no function of the phone has been used for a certain time. Press any key to deactivate the screen saver.\n            Screen saver is also deactivated when the phone is out of the network coverage area.\n         \n         \n         \n         Note that the screen saver overrides all the graphics and texts on the display in standby mode.\n         \n         \n      \n      \n      \n      \n         \n         \n            \n            Parent topic: Your phone\n            \n         \n         \n      \n   ",
+      "CreatedDate": "22.12.2015 18:27:21",
+      "ModifiedDate": "23.12.2015 3:21:45",
+      "PublicationId": 1961702,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": "Mobile Phones",
+      "ProductReleaseName": "MP 330 (2.0.0)"
+    },
+    {
+      "Id": "ish_1961702-164223-16",
+      "Meta": {
+        "FTITLE.logical.value": "introduction"
+      },
+      "Locale": "en",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      Dear Customer\n      \n      \n      \n         \n         \n            \n            In purchasing this mobile phone, you have decided on a quality product. The features of your machine meet the many needs that\n               arise in modern mobile communication.\n            \n            \n         \n         \n         \n         \n            \n            Please read the user manual carefully and follow the safety instructions to ensure proper operation of your phone. Your phone\n               is identified by its IMEI number. Write this number down, and do not keep it with your phone, because you may be asked for\n               it in the event of your phone being stolen, in order to prevent it from being used, even with a different SIM card. In order\n               to display the IMEI on your phone’screen, type: *#06#. \n            \n            \n            \n         \n         \n         \n         \n            \n            Bluetooth technology enables cost-free wireless connections between electronic devices within a maximum range of 10 metres.\n               A Bluetooth connection can be used to send images, videos, texts, business cards, calendar notes, or to connect wirelessly\n               to devices using Bluetooth technology, such as computers.\n            \n            \n            \n         \n         \n         \n         \n            \n            You should only use original consumables — your guarantee does not cover damage to your product caused by the use of any other\n               consumables. \n            \n            \n            \n            As part of our continuing quest for total customer satisfaction, all of our products are made with ease-of-use and reliability\n               in mind.\n            \n            \n            \n         \n         \n         \n      \n      \n      \n   ",
+      "CreatedDate": "22.12.2015 18:26:50",
+      "ModifiedDate": "21.11.2016 11:38:00",
+      "PublicationId": 1961702,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": "Mobile Phones",
+      "ProductReleaseName": "MP 330 (2.0.0)"
+    },
+    {
+      "Id": "ish_1961702-164379-16",
+      "Meta": {
+        "FTITLE.logical.value": "launching a game"
+      },
+      "Locale": "en",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      Launching a game\n      \n      \n      \n      \n         The phone includes some Java applications and games, and supports downloading new applications and games from different WAP\n            services.\n         \n         \n         \n         \n            \n               Press Menu, and select Games and Select Game.\n               \n            \n            \n            \n               Scroll to a game or a game set (name depends on the game).\n               \n            \n            \n            \n               Press Options and select OK or press . If the selection is a single game it will be launched. Otherwise, a list of games in the selected game set is displayed.\n                  To launch a single game, scroll to the desired game and press Options and select OK, or press .\n               \n            \n            \n         \n         \n         \n         \n            \n            Attention: Note that running some games may consume the phone’s battery faster (and you may need to connect the phone to the charger).\n            \n            \n            \n         \n         \n         \n      \n      \n      \n      \n         \n         \n            \n            Parent topic: Games\n            \n         \n         \n      \n   ",
+      "CreatedDate": "22.12.2015 18:27:13",
+      "ModifiedDate": "23.12.2015 3:21:35",
+      "PublicationId": 1961702,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": "Mobile Phones",
+      "ProductReleaseName": "MP 330 (2.0.0)"
+    },
+    {
+      "Id": "ish_1961702-164479-16",
+      "Meta": {
+        "FTITLE.logical.value": "messages"
+      },
+      "Locale": "en",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      Messages\n      \n      \n      \n      \n         \n         \n         \n         You can read, write, send and save text, multimedia, and e-mail messages. All messages are organised into folders. Text, multimedia,\n            and e-mail messaging are network services. Before you can send any text, picture, or e-mail message, you need to save your\n            message centre number.\n         \n         \n         \n      \n      \n      \n      \n         \n         \n            \n            Text Messages\n               Your phone supports sending and receiving multi-part messages, which consist of several ordinary text messages.\n            \n            \n            Multimedia messages\n               A multimedia message can contain text, picture and sound.\n            \n            \n            Voice mailbox\n               Voice mailbox is a network service and you may need to subscribe to it.\n            \n            \n            Deleting messages\n               \n            \n            \n         \n         \n      \n   ",
+      "CreatedDate": "22.12.2015 18:27:28",
+      "ModifiedDate": "23.12.2015 3:21:53",
+      "PublicationId": 1961702,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": "Mobile Phones",
+      "ProductReleaseName": "MP 330 (2.0.0)"
+    },
+    {
+      "Id": "ish_1961702-164231-16",
+      "Meta": {
+        "FTITLE.logical.value": "your phone"
+      },
+      "Locale": "en",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      Your phone\n      \n      \n      \n      \n         \n         \n         \n         \n         \n         \n      \n      \n      \n      \n         \n         \n            \n            Keys overview\n               \n            \n            \n            Connectors overview\n               \n            \n            \n            Standby mode\n               When the phone is ready for use, and you have not keyed in any characters, the phone is in standby mode. The name of the service\n               provider/logo appears in the display.\n            \n            \n            Essential indicators in standby mode\n               \n            \n            \n            Screen saver\n               The phone automatically activates the screen saver, a digital clock view, for power saving in standby mode.\n            \n            \n            General Packet Radio Service (GPRS)\n               GPRS technology allows mobile phones to be used for sending and receiving data over the mobile network (network service).\n            \n            \n            Bluetooth Connection\n               You can transfer data from your phone to another compatible device, for example, a phone, a headset using Bluetooth technology.\n            \n            \n         \n         \n      \n   ",
+      "CreatedDate": "22.12.2015 18:26:51",
+      "ModifiedDate": "23.12.2015 3:21:08",
+      "PublicationId": 1961702,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": "Mobile Phones",
+      "ProductReleaseName": "MP 330 (2.0.0)"
+    },
+    {
+      "Id": "ish_1961702-164347-16",
+      "Meta": {
+        "FTITLE.logical.value": "water rapids"
+      },
+      "Locale": "en",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      Water Rapids\n      \n      \n      \n      \n         Steer your raft down six rivers.\n         \n         \n         \n         Reach the end of each river to advance to the next.\n         \n         \n         Navigate through rapids and waterfalls to score points and touch flags for bonus points.\n         \n         \n         Paddle your raft with key  and .\n         \n         \n         \n         Rotate you raft with keys  and .\n         \n         \n         \n         You have four rafts in the beginning and you lose a raft each time you capsize or fall onto land.\n         \n         \n      \n      \n      \n      \n         \n         \n            \n            Parent topic: Games\n            \n         \n         \n      \n   ",
+      "CreatedDate": "22.12.2015 18:27:08",
+      "ModifiedDate": "23.12.2015 3:21:29",
+      "PublicationId": 1961702,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": "Mobile Phones",
+      "ProductReleaseName": "MP 330 (2.0.0)"
+    }
+  ]
+}
