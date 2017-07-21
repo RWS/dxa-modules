@@ -188,7 +188,7 @@ export class Api {
         if (mocksEnabled()) {
             // Get search results for publication
             if (publicationId) {
-                return path.getAbsolutePath(`${mocksEndPoint}/search-${locale}-${publicationId}-${startIndex}.json`);
+                return path.getAbsolutePath(`${mocksEndPoint}/search-${publicationId}-${locale}-${startIndex}.json`);
             } else {
                 return path.getAbsolutePath(`${mocksEndPoint}/search-${locale}-${startIndex}.json`);
             }

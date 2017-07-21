@@ -158,8 +158,8 @@ export interface ISearchQueryResult {
     /**
      * last modified date
      *
-     * @type {string}
-     * @memberof Date
+     * @type {Date}
+     * @memberof ISearchResult
      */
-    lastModifiedDate?: Date;
+    lastModifiedDate: Date;
 }

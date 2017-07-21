@@ -64,7 +64,7 @@ export class Search extends LoadableObject {
                     id: item.Id,
                     content: item.Content,
                     language: item.Locale,
-                    lastModifiedDate: item.ModifiedDate,
+                    lastModifiedDate: new Date(item.ModifiedDate || 0),
                     publicationId: item.PublicationId.toString(),
                     publicationTitle: item.PublicationTitle,
                     pageId: TcmId.getItemIdFromTaxonomyItemId(item.Id),
