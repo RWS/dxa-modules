@@ -13,8 +13,8 @@
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <SdlDxaDataModelPackageVersion>2.0.0-alpha-201703201047</SdlDxaDataModelPackageVersion>
-    <DxaFrameworkVersion>2.0.0-alpha-201706262008</DxaFrameworkVersion>
+    <SdlDxaDataModelPackageVersion>2.0.0-beta-201707211209</SdlDxaDataModelPackageVersion>
+    <DxaFrameworkVersion>2.0.0-beta-201707211152</DxaFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
