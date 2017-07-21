@@ -41,10 +41,10 @@ export interface ISearchBarProps {
  * Search bar component
  */
 export const SearchBar: React.StatelessComponent<ISearchBarProps> = (props: ISearchBarProps): JSX.Element => {
-    let value = "";
+    let _input: HTMLInputElement;
 
     function _onKeyUp(e: React.KeyboardEvent<HTMLInputElement>): void {
-        value = e.currentTarget.value;
+        _input.value = e.currentTarget.value;
         if (e.keyCode === 13) { // Enter key
             _search();
         }
@@ -52,17 +52,19 @@ export const SearchBar: React.StatelessComponent<ISearchBarProps> = (props: ISea
 
     function _search(): void {
         if (typeof props.onSearch === "function") {
-            props.onSearch(value);
+            props.onSearch(_input.value);
         }
     }
 
     return (
         <div className="sdl-dita-delivery-searchbar">
             <div className="input-area">
-                <input type="text" placeholder={props.placeholderLabel}
-                onKeyUp={_onKeyUp}
-                onFocus={props.onFocus}
-                onBlur={props.onBlur}
+                <input type="text"
+                    placeholder={props.placeholderLabel}
+                    ref={(input: HTMLInputElement) => _input = input}
+                    onKeyUp={_onKeyUp}
+                    onFocus={props.onFocus}
+                    onBlur={props.onBlur}
                 />
                 <div className="search-button" onClick={_search} />
             </div>
