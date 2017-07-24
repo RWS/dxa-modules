@@ -3,6 +3,7 @@ import * as ReactDOM from "react-dom";
 import * as TestUtils from "react-addons-test-utils";
 import { SearchBar, ISearchBarProps } from "@sdl/dd/presentation/SearchBar";
 import { TestBase } from "@sdl/models";
+import { KeyCodes } from "utils/Keys";
 
 class SearchBarComponent extends TestBase {
 
@@ -43,7 +44,7 @@ class SearchBarComponent extends TestBase {
                 const input = document.querySelector(".sdl-dita-delivery-searchbar input") as HTMLInputElement;
                 input.value = searchQuery;
                 TestUtils.Simulate.keyUp(input, {
-                    keyCode: 13
+                    keyCode: KeyCodes.Enter
                 });
             });
 
