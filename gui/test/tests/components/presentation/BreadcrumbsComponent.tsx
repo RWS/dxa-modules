@@ -23,29 +23,29 @@ const taxonomyItemId: TaxonomyItemId = TaxonomyItemId.Toc;
 const itemsPath: ITaxonomy[] = [
     {
         id: TcmId.getTaxonomyItemId(taxonomyItemId, "1"),
-        title: "Root",
+        title: "Root Item",
         hasChildNodes: false
     },
     {
         id: TcmId.getTaxonomyItemId(taxonomyItemId, "2"),
-        title: "Child",
+        title: "Child Item",
         url: Url.getPageUrl("pub-id", "2"),
         hasChildNodes: false
     },
     {
         id: TcmId.getTaxonomyItemId(taxonomyItemId, "3"),
-        title: "Sub-Child",
+        title: "Sub-Child Item",
         url: Url.getPageUrl("pub-id", "3"),
         hasChildNodes: false
     },
     {
         id: TcmId.getTaxonomyItemId(taxonomyItemId, "4"),
-        title: "Abstract-Child",
+        title: "Abstract-Child Item",
         hasChildNodes: false
     },
     {
         id: TcmId.getTaxonomyItemId(taxonomyItemId, "5"),
-        title: "Selected",
+        title: "Selected Item",
         url: Url.getPageUrl("pub-id", "5"),
         hasChildNodes: false
     }
