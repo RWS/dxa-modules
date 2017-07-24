@@ -169,6 +169,20 @@ class BreadcrumbsComponent extends TestBase {
             });
 
             it("navigates to another item when a breadcrumb is selected from responsive view", (done: () => void): void => {
+
+                breadCrumbs = this._renderComponent({
+                    loadItemPath: (breadCrumbItem: ITaxonomy): Promise<ITaxonomy[]> => {
+                        const itemsToReturn: IBreadcrumbItem[] = [...Array(50)].map((n, i) => {
+                            return {
+                                title: `Tile ${i}`,
+                                url: Url.getPageUrl("pub-id", i.toString())
+                            } as IBreadcrumbItem;
+                        });
+
+                        return Promise.resolve(itemsToReturn);
+                    }
+                }, target);
+
                 const domNode = ReactDOM.findDOMNode(breadCrumbs) as HTMLElement;
                 expect(domNode).not.toBeNull();
 
