@@ -33,4 +33,15 @@
             }
         }
     }
+
+    .sdl-activityindicator {
+        .sdl-activityindicator-child {
+            /*
+                We have to overwrite this implementation, as SDLUI contol sets the
+                style on element itself, which is not possible to overwrite via css
+            */
+            z-index: 1 !important;
+            position: fixed;
+        }
+    }
 }
