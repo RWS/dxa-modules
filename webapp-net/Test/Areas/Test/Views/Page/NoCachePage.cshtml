@@ -1,0 +1,36 @@
+﻿@model NoCachePageModel
+<html>
+    <head>
+        <title>@Model.Title</title>
+        <style>
+            .region { border: solid thick; }
+            .entity { border: solid thin; }
+            .embeddedEntity { border: dashed thin; }
+            .alert { color: red }
+            td { border: solid thin; }
+        </style>
+        
+        @foreach (var meta in Model.Meta)
+        {
+            <meta name="@meta.Key" content="@meta.Value"/>
+        }
+
+    </head>
+    <body>
+        <h1>Rendered @Model with Page View "Test:NoCachePage"</h1>
+
+        <h4>This page model is an example of disabling caching on page model level</h4>
+
+        <div>
+            @Html.DxaRegions()
+        </div>
+        
+        <!-- Epilogue -->
+        <script src="@Url.VersionedContent("/assets/scripts/main.js")"></script>
+        @if (WebRequestContext.IsPreview)
+        {
+            <script src="@Url.VersionedContent("/assets/scripts/xpm.js")"></script>
+        }
+        @Html.DxaPageMarkup()
+    </body>
+</html>

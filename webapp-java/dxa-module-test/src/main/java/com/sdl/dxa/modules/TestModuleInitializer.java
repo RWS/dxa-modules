@@ -12,6 +12,9 @@ import com.sdl.dxa.modules.model.TSI2315.CompLinkTest;
 import com.sdl.dxa.modules.model.TSI2315.TestEntity;
 import com.sdl.dxa.modules.model.TSI2316.Tsi2316TestEntity;
 import com.sdl.dxa.modules.model.TSI2316.Tsi2316TestKeyword;
+import com.sdl.dxa.modules.model.TSI2525.CacheEntityModel;
+import com.sdl.dxa.modules.model.TSI2525.NoCacheEntityModel;
+import com.sdl.dxa.modules.model.TSI2525.NoCachePageModel;
 import com.sdl.dxa.modules.model.TSI811.Tsi811PageModel;
 import com.sdl.dxa.modules.model.TSI811.Tsi811TestEntity;
 import com.sdl.dxa.modules.model.TSI811.Tsi811TestKeyword;
@@ -63,7 +66,12 @@ import org.springframework.stereotype.Component;
 
         // https://jira.sdl.com/browse/TSI-2315
         @RegisteredViewModel(viewName = "CompLinkTest", modelClass = CompLinkTest.class),
-        @RegisteredViewModel(modelClass = TestEntity.class)
+        @RegisteredViewModel(modelClass = TestEntity.class),
+
+        // https://jira.sdl.com/browse/TSI-2525
+        @RegisteredViewModel(viewName = "NoCacheEntity", modelClass = NoCacheEntityModel.class),
+        @RegisteredViewModel(viewName = "CacheEntity", modelClass = CacheEntityModel.class),
+        @RegisteredViewModel(viewName = "NoCachePage", modelClass = NoCachePageModel.class),
 })
 public class TestModuleInitializer extends AbstractInitializer {
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using Sdl.Web.Common;
 using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Models;
 

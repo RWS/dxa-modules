@@ -8,6 +8,7 @@ import com.sdl.webapp.common.exceptions.DxaException;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
@@ -22,6 +23,8 @@ public class ContextExpressionModelBuilder extends AbstractContextExpressionMode
     private String cxKeyR2 = "CX";
 
     @Override
+    @CachePut(cacheNames = "entities", key = "@entitiesCache.getSpecificKey(#modelData)",
+            unless = "#originalEntityModel == null || #originalEntityModel.class.isAnnotationPresent(T(com.sdl.dxa.caching.NeverCached))")
     public <T extends EntityModel> T buildEntityModel(@Nullable T originalEntityModel, EntityModelData modelData, @Nullable Class<T> expectedClass) throws DxaException {
         log.trace("Context expression model builder for EMD {}, entity {} and expectedClass {}", modelData, originalEntityModel, expectedClass);
 

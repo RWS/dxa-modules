@@ -1,5 +1,6 @@
 ﻿using System;
 using Sdl.Web.Common.Models;
+using Sdl.Web.Modules.Core.Models;
 
 namespace Sdl.Web.Modules.Test.Models
 {
@@ -24,6 +25,9 @@ namespace Sdl.Web.Modules.Test.Models
 
         [SemanticProperty("CompLinkField")]
         public Link CompLinkField { get; set; }
+
+        [SemanticProperty("CompLinkField")]
+        public Article LinkedEntity { get; set; }
 
         [SemanticProperty("KeywordField")]
         public KeywordModel KeywordField { get; set; }

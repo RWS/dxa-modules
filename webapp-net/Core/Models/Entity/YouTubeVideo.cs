@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Xml;
+using Newtonsoft.Json;
 using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Models;
 
@@ -12,7 +13,9 @@ namespace Sdl.Web.Modules.Core.Models
         public string Headline { get; set; }
         public string YouTubeId { get; set; }
         // TODO: determine correct width and height or allow to be set
+        [JsonIgnore]
         public int Width { get { return 640; } }
+        [JsonIgnore]
         public int Height { get { return 390; } }
 
         /// <summary>

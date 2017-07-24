@@ -19,14 +19,19 @@ namespace Sdl.Web.Modules.Core.Models
         [SemanticProperty("il:headline")]
         public string Headline { get; set; }
 
+        [SemanticProperty("s:link")]
         [SemanticProperty("il:link")]
         public Link Link { get; set; }
 
+        [SemanticProperty("s:contentType")]
+        [SemanticProperty("il:contentType")]
         public Tag ContentType { get; set; }
+
         public Tag Sort { get; set; }
         public int PageSize { get; set; }
 
         [SemanticProperty(IgnoreMapping = true)]
+        [JsonIgnore]
         public int CurrentPage 
         { 
             get 

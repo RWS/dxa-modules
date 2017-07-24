@@ -1,9 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Sdl.Web.Common.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using Sdl.Web.Common;
 
 namespace Sdl.Web.Modules.AudienceManager.Models
 {
@@ -11,6 +9,7 @@ namespace Sdl.Web.Modules.AudienceManager.Models
     /// CurrentUserWidget entity
     /// </summary>
     [Serializable]
+    [DxaNoOutputCache]
     public class CurrentUserWidget : EntityModel
     {
         /// <summary>

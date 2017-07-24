@@ -15,7 +15,7 @@
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <DxaFrameworkVersion>2.0.0-alpha-201703071712</DxaFrameworkVersion>
+    <DxaFrameworkVersion>2.0.0-beta-201707211152</DxaFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -64,7 +64,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\CacheEntityModel.cs" />
+    <Compile Include="Models\NoCacheEntityModel.cs" />
     <Compile Include="Models\CompLinkTest.cs" />
+    <Compile Include="Models\NoCachePageModel.cs" />
     <Compile Include="Models\TestEntity.cs" />
     <Compile Include="Models\Tsi1856TestEntity.cs" />
     <Compile Include="Models\Tsi1757TestEntity.cs" />
@@ -91,6 +94,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Areas\Test\Views\Entity\CacheEntity.cshtml" />
+    <None Include="Areas\Test\Views\Entity\NoCacheEntity.cshtml" />
     <None Include="Areas\Test\Views\Entity\CompLinkTest.cshtml" />
     <None Include="Areas\Test\Views\Entity\TSI1757Test3.cshtml" />
     <None Include="Areas\Test\Views\Entity\TSI1856Test.cshtml" />
@@ -112,6 +117,7 @@
     <None Include="Areas\Test\Views\Entity\TestEntity2.cshtml" />
     <None Include="Areas\Test\Views\Entity\TestEntity1.cshtml" />
     <None Include="Areas\Test\Views\Page\CustomPageModelInheritedController.cshtml" />
+    <None Include="Areas\Test\Views\Page\NoCachePage.cshtml" />
     <None Include="Areas\Test\Views\Page\TSI2285TestPage.cshtml" />
     <None Include="Areas\Test\Views\Page\TSI811TestPage.cshtml" />
     <None Include="Areas\Test\Views\Page\TestDxaEntityViewOverride.cshtml" />
@@ -138,6 +144,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core\Sdl.Web.Modules.Core.csproj">
+      <Project>{32943BD1-4891-4B03-AFCD-296658F61581}</Project>
+      <Name>Sdl.Web.Modules.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ExperienceOptimization\Sdl.Web.Modules.SmartTarget.csproj">
       <Project>{492157de-3114-48e5-9a23-965d5fe4da74}</Project>
       <Name>Sdl.Web.Modules.SmartTarget</Name>
