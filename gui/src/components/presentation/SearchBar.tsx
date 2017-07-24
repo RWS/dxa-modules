@@ -44,14 +44,16 @@ export const SearchBar: React.StatelessComponent<ISearchBarProps> = (props: ISea
     let _input: HTMLInputElement;
 
     function _onKeyUp(e: React.KeyboardEvent<HTMLInputElement>): void {
-        _input.value = e.currentTarget.value;
-        if (e.keyCode === 13) { // Enter key
+        if (e.keyCode === 27) { // Enter key
+            // Blur
+        } else if (e.keyCode === 13) { // Enter key
             _search();
         }
     }
 
     function _search(): void {
-        if (typeof props.onSearch === "function") {
+        const searchQuery = _input.value;
+        if ((typeof props.onSearch === "function") && searchQuery) {
             props.onSearch(_input.value);
         }
     }

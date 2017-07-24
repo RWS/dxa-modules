@@ -301,7 +301,10 @@ export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
         /* istanbul ignore if */
         if (!this._isUnmounted) {
             this.setState({
-                isNavOpen: false
+                isNavOpen: false,
+                searchIsOpening: false,
+                searchIsActive: false,
+                searchIsOpen: false
             });
         }
     }

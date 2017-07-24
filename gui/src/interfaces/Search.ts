@@ -161,5 +161,5 @@ export interface ISearchQueryResult {
      * @type {Date}
      * @memberof ISearchResult
      */
-    lastModifiedDate: Date;
+    lastModifiedDate?: Date;
 }

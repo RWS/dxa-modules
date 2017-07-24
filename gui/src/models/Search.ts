@@ -60,11 +60,12 @@ export class Search extends LoadableObject {
             hits: r.Hits,
             startIndex: r.StartIndex,
             queryResults: r.QueryResults.map((item: ISearchResult) => {
+                const modifiedDate = Date.parse(item.ModifiedDate || "");
                 return {
                     id: item.Id,
                     content: item.Content,
                     language: item.Locale,
-                    lastModifiedDate: new Date(item.ModifiedDate || 0),
+                    lastModifiedDate: isNaN(modifiedDate) ? null : new Date(modifiedDate),
                     publicationId: item.PublicationId.toString(),
                     publicationTitle: item.PublicationTitle,
                     pageId: TcmId.getItemIdFromTaxonomyItemId(item.Id),

@@ -183,45 +183,42 @@ export class SearchResults extends React.Component<ISearchResultsProps, ISearchR
         return (
             <section className={"sdl-dita-delivery-search-results"}>
                 <h1>{formatMessage("search.publication.results")} <strong>{searchQuery}</strong></h1>
-                {
-                    isLoading && (<ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} />)
-                }
-                {
-                    error
-                        ? <Error
-                            title={formatMessage("error.default.title")}
-                            messages={[formatMessage("error.publications.list.not.found"), formatMessage("error.publications.default.message")]}
-                            buttons={errorButtons} />
-                        : searchResults && (hits > 0)
-                            ? <div className={"search-results-list"}>
-                                <h4>{formatMessage("search.results.total", [hits.toString()])}</h4>
-                                {
-                                    searchResults.map((x: ISearchQueryResult, i: number) => {
-                                        return <SearchResultItem key={i} index={i} searchResult={x} />;
-                                    })
-                                }
-                                {(searchResults.length < hits) &&
-                                    <div className="search-results-buttons-wrapper">
-                                        <Button
-                                            skin="graphene"
-                                            purpose={ButtonPurpose.GHOST}
-                                            events={{
-                                                "click": () => this.setState({
-                                                    startIndex: (startIndex || 0) + SHOWN_ITEMS_INCREMENT
-                                                })
-                                            }}>{formatMessage("search.results.more")}
-                                        </Button>
-                                        {formatMessage("search.results.shown", [searchResults.length.toString(), hits.toString()])}
-                                    </div>
-                                }
-                            </div>
-                            : <div className={"search-results-list-empty"}>
-                                {formatMessage("search.no.results")}
-                                <ul>
-                                    <li>{formatMessage("search.no.results.spelling")}</li>
-                                    <li>{formatMessage("search.no.results.quotation")}</li>
-                                </ul>
-                            </div>
+                {isLoading && <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} />}
+                {error
+                    ? <Error
+                        title={formatMessage("error.default.title")}
+                        messages={[formatMessage("error.publications.list.not.found"), formatMessage("error.publications.default.message")]}
+                        buttons={errorButtons} />
+                    : searchResults && (hits > 0)
+                        ? <div className={"search-results-list"}>
+                            <h4>{formatMessage("search.results.total", [hits.toString()])}</h4>
+                            {
+                                searchResults.map((x: ISearchQueryResult, i: number) => {
+                                    return <SearchResultItem key={i} index={i} searchResult={x} />;
+                                })
+                            }
+                            {(searchResults.length < hits) &&
+                                <div className="search-results-buttons-wrapper">
+                                    <Button
+                                        skin="graphene"
+                                        purpose={ButtonPurpose.GHOST}
+                                        events={{
+                                            "click": () => this.setState({
+                                                startIndex: (startIndex || 0) + SHOWN_ITEMS_INCREMENT
+                                            })
+                                        }}>{formatMessage("search.results.more")}
+                                    </Button>
+                                    {formatMessage("search.results.shown", [searchResults.length.toString(), hits.toString()])}
+                                </div>
+                            }
+                        </div>
+                        : <div className={"search-results-list-empty"}>
+                            {formatMessage("search.no.results")}
+                            <ul>
+                                <li>{formatMessage("search.no.results.spelling")}</li>
+                                <li>{formatMessage("search.no.results.quotation")}</li>
+                            </ul>
+                        </div>
                 }
             </section>);
     }
