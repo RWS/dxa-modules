@@ -78,6 +78,17 @@ class CommentsListComponent extends TestBase {
                 comments.push(createComment());
             }
 
+            afterEach(() => {
+                const domNode = ReactDOM.findDOMNode(target);
+                ReactDOM.unmountComponentAtNode(domNode);
+            });
+
+            afterAll(() => {
+                if (target.parentElement) {
+                    target.parentElement.removeChild(target);
+                }
+            });
+
             it("Correct component render", (): void => {
                 const commentsList = this._renderComponent({comments}, target);
                 const commentsListNode = ReactDOM.findDOMNode(commentsList);
