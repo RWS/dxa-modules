@@ -42,9 +42,9 @@ export const SearchResultItem: React.StatelessComponent<ISearchResultItemProps> 
             bottomInfo.push(`${formatMessage("search.result.last.updated", [new Intl.DateTimeFormat(getLanguage()).format(modifiedDate)])}`);
         }
 
-        const language = localizationService.getLanguages().filter(x => x.iso == searchResult.language)[0].name;
-        if (language) {
-            bottomInfo.push(`${formatMessage("search.result.language", [language])}`);
+        const language = localizationService.getLanguages().filter(x => x.iso == searchResult.language)[0];
+        if (language && language.name) {
+            bottomInfo.push(`${formatMessage("search.result.language", [language.name])}`);
         }
 
         return (

@@ -1,5 +1,6 @@
 import * as React from "react";
 import "components/presentation/styles/SearchBar";
+import { KeyCodes } from "utils/Keys";
 
 /**
  * Search bar component props
@@ -44,9 +45,9 @@ export const SearchBar: React.StatelessComponent<ISearchBarProps> = (props: ISea
     let _input: HTMLInputElement;
 
     function _onKeyUp(e: React.KeyboardEvent<HTMLInputElement>): void {
-        if (e.keyCode === 27) { // Enter key
+        if (e.keyCode === KeyCodes.ESC) {
             // Blur
-        } else if (e.keyCode === 13) { // Enter key
+        } else if (e.keyCode === KeyCodes.Enter) { // Enter key
             _search();
         }
     }

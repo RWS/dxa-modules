@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as ClassNames from "classnames";
 import EventListener from "react-event-listener";
+import { KeyCodes } from "utils/Keys";
 
 import "./Dialog.less";
 
@@ -50,7 +51,7 @@ const renderActions = (actions?: JSX.Element) => actions && (
 );
 
 const handleKeyUp = (onRequestClose: IRequestHandler) => (e: KeyboardEvent) => {
-    if (e.keyCode === 27) {
+    if (e.keyCode === KeyCodes.ESC) {
         onRequestClose();
     }
 };

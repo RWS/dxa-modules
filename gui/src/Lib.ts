@@ -109,8 +109,9 @@ import { slugify } from "utils/Slug";
 import { String } from "utils/String";
 import { TcmId } from "utils/TcmId";
 import { Url } from "utils/Url";
+import { KeyCodes } from "utils/Keys";
 import Version from "utils/Version";
 
 export const Utils = {
-    Api, Html, Path, path, slugify, String, TcmId, Url, Version
+    Api, Html, Path, path, slugify, String, TcmId, Url, KeyCodes, Version
 };
