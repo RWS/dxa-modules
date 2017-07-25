@@ -61,7 +61,7 @@ export class Search extends LoadableObject {
             startIndex: r.StartIndex,
             queryResults: r.QueryResults.map((item: ISearchResult) => {
                 const modifiedDate = Date.parse(item.ModifiedDate || "");
-                const parsedId = TcmId.parseId(item.Id.replace("_", ":"))
+                const parsedId = TcmId.parseId(item.Id.replace("_", ":"));
                 return {
                     id: item.Id,
                     content: item.Content,
