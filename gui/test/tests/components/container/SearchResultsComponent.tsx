@@ -7,6 +7,8 @@ import { TestBase } from "@sdl/models";
 import { SearchService } from "test/mocks/services/SearchService";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 
+import { ISearchQueryResults, ISearchQueryResult } from "interfaces/Search";
+
 const services = {
     searchService: new SearchService()
 };
@@ -91,32 +93,35 @@ class SearchResultsComponent extends TestBase {
             });
 
             it("shows load more when more than 10 results found", (done: () => void): void => {
-                let queryResults = [];
-                for (let i: number = 0, length: number = 10; i < length; i++) {
-                    const publicationId = "42";
-                    const pageId = i.toString();
-                    queryResults.push({
-                        id: `ish:${publicationId}-${pageId}-1`,
-                        content: TEST_CONTENT,
-                        language: "en",
-                        lastModifiedDate: new Date(),
-                        publicationId,
-                        publicationTitle: `Publication Title-${i}`,
-                        pageId,
-                        pageTitle: `Page Title-${i}`
-                    });
-                }
 
                 services.searchService.setMockDataSearch(null,
                     {
                         hits: 100,
                         startIndex: 0,
-                        queryResults
-                    });
+                        queryResults: Array.apply(null, Array(10)).map((n: undefined, i: number) => {
+                            const publicationId = "42";
+                            const pageId = i.toString();
+                            return {
+                                id: `ish:${publicationId}-${pageId}-1`,
+                                content: TEST_CONTENT,
+                                language: "en",
+                                lastModifiedDate: new Date(),
+                                publicationId,
+                                publicationTitle: `Publication Title-${i}`,
+                                pageId,
+                                pageTitle: `Page Title-${i}`
+                            } as ISearchQueryResult;
+                        })
+                    } as ISearchQueryResults);
 
-                const searchResults = this._renderComponent(target);
+                const searchResults = this._renderComponent(target/*, "3310", "pub-10"*/);
 
                 setTimeout((): void => {
+
+                    // tslint:disable-next-line:no-any
+                    const activityIndicators = TestUtils.scryRenderedComponentsWithType(searchResults, ActivityIndicator as any);
+                    expect(activityIndicators.length).toBe(0, "Activity indicator should not be rendered.");
+
                     const items = TestUtils.scryRenderedDOMComponentsWithTag(searchResults, "h3");
                     expect(items.length).toBe(10);
                     items.forEach((x: HTMLElement, i: number) => {

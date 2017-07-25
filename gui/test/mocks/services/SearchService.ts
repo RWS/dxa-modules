@@ -3,28 +3,28 @@ import { ISearchQuery, ISearchQueryResults } from "interfaces/Search";
 import { Promise } from "es6-promise";
 
 let fakeDelay = false;
-const DELAY = 100;
+const DELAY = 10;
 
 export class SearchService implements ISearchService {
 
     private _mockDataSearch: {
         error: string | null;
-        items: ISearchQueryResults | undefined
+        result: ISearchQueryResults | undefined
     } = {
         error: null,
-        items: undefined
+        result: undefined
     };
 
     public getSearchResults(query: ISearchQuery): Promise<ISearchQueryResults> {
-        const { error, items } = this._mockDataSearch;
+        const { error, result } = this._mockDataSearch;
         if (fakeDelay) {
-            return new Promise((resolve: (items?: ISearchQueryResults) => void, reject: (error: string | null) => void) => {
+            return new Promise((resolve: (result?: ISearchQueryResults) => void, reject: (error: string | null) => void) => {
                 setTimeout((): void => {
                     if (error) {
                         reject(error);
                     }
                     else {
-                        resolve(items);
+                        resolve(result);
                     }
                 }, DELAY);
             });
@@ -32,7 +32,7 @@ export class SearchService implements ISearchService {
             if (error) {
                 return Promise.reject(error);
             } else {
-                return Promise.resolve(items);
+                return Promise.resolve(result);
             }
         }
     }
@@ -40,7 +40,7 @@ export class SearchService implements ISearchService {
     public setMockDataSearch(error: string | null, result?: ISearchQueryResults): void {
         this._mockDataSearch = {
             error: error,
-            items: result || undefined
+            result
         };
     }
 
