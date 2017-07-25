@@ -167,21 +167,43 @@ class BreadcrumbsComponent extends TestBase {
                     }
                 }, 0);
             });
+        });
+
+        describe(`Breadcrumbs tests. Responsive view.`, (): void => {
+            const target = super.createTargetElement();
+            let breadCrumbs: Breadcrumbs;
+
+            const loadItemPath = (breadCrumbItem: ITaxonomy): Promise<ITaxonomy[]> => {
+                const itemsToReturn: IBreadcrumbItem[] = Array.apply(null, Array(50)).map((n: undefined, i: number) => {
+                    return {
+                        title: `Tile ${i}`,
+                        url: Url.getPageUrl("pub-id", i.toString())
+                    } as IBreadcrumbItem;
+                });
+
+                return Promise.resolve(itemsToReturn);
+            };
+
+            beforeEach(() => {
+                browserHistory.push(itemsPath[4].url || "");
+                const props: IBreadcrumbsProps = {
+                    loadItemPath: loadItemPath
+                };
+                breadCrumbs = this._renderComponent(props, target);
+            });
+
+            afterEach(() => {
+                const domNode = ReactDOM.findDOMNode(target);
+                ReactDOM.unmountComponentAtNode(domNode);
+            });
+
+            afterAll(() => {
+                if (target.parentElement) {
+                    target.parentElement.removeChild(target);
+                }
+            });
 
             it("navigates to another item when a breadcrumb is selected from responsive view", (done: () => void): void => {
-
-                breadCrumbs = this._renderComponent({
-                    loadItemPath: (breadCrumbItem: ITaxonomy): Promise<ITaxonomy[]> => {
-                        const itemsToReturn: IBreadcrumbItem[] = [...Array(50)].map((n, i) => {
-                            return {
-                                title: `Tile ${i}`,
-                                url: Url.getPageUrl("pub-id", i.toString())
-                            } as IBreadcrumbItem;
-                        });
-
-                        return Promise.resolve(itemsToReturn);
-                    }
-                }, target);
 
                 const domNode = ReactDOM.findDOMNode(breadCrumbs) as HTMLElement;
                 expect(domNode).not.toBeNull();
@@ -198,15 +220,11 @@ class BreadcrumbsComponent extends TestBase {
                         setTimeout((): void => {
                             // Validate
                             const updatedItems = domNode.querySelectorAll("ul:not([class='dropdown-items']) > li:not([class='dd-selector'])");
-                            expect(updatedItems.length).toBe(4);
+                            expect(updatedItems.length).toBe(2);
                             expect(updatedItems[0].querySelector(".home")).not.toBeNull();
                             expect(updatedItems[0].textContent).toBe("mock-components.breadcrumbs.home");
                             expect(updatedItems[1].querySelector(".abstract")).not.toBeNull();
                             expect(updatedItems[1].textContent).toBe(itemsPath[0].title);
-                            expect(updatedItems[2].textContent).toBe(itemsPath[1].title);
-                            expect(updatedItems[3].querySelector("a")).toBeNull();
-                            expect(updatedItems[3].textContent).toBe(itemsPath[2].title);
-
                             done();
                         }, 0);
                     }
