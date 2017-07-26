@@ -45,6 +45,8 @@ class Server extends TestBase {
                     searchService: new SearchService()
                 };
 
+                const localize = services.localizationService.formatMessage;
+
                 const app = ReactDOMServer.renderToStaticMarkup(<Provider store={this.store}><App services={services} /></Provider>);
                 const expected = ReactDOMServer.renderToStaticMarkup((
                     <div className="ltr sdl-dita-delivery-app">
@@ -102,7 +104,7 @@ class Server extends TestBase {
                                             <div className="sdl-conditions-dialog-presentation">
                                                 <div className="sdl-conditions-fetcher"></div>
                                                 <button className="sdl-button-text sdl-personalize-content" disabled>
-                                                    <span>Personalize content</span>
+                                                    <span>{localize("components.conditions.dialog.title")}</span>
                                                 </button>
                                                 <div className="sdl-dialog-container">
                                                     <div className="sdl-dialog-wrapper"></div>
@@ -112,45 +114,45 @@ class Server extends TestBase {
                                     </div>
                                     <div className="sdl-dita-delivery-breadcrumbs">
                                         <ul className="breadcrumbs">
-                                            <li><a className="home" title="Home" href="/home">Home</a></li>
+                                            <li><a className="home" title="Home" href="/home">{localize("components.breadcrumbs.home")}</a></li>
                                         </ul>
                                     </div>
                                     <div />
-                                    <div className="sdl-dita-delivery-version-selector"><label>Version:</label><span><div></div></span></div>
+                                    <div className="sdl-dita-delivery-version-selector"><label>{localize("productreleaseversions.version.label")}</label><span><div></div></span></div>
                                     <div className="sdl-dita-delivery-content-navigation-wrapper">
                                         <nav className="sdl-dita-delivery-content-navigation"></nav>
                                     </div>
                                     <article>
-                                        <article className="ltr page-content">No page selected. Please select an item from the table of contents.</article>
+                                        <article className="ltr page-content">{localize("components.page.nothing.selected")}</article>
                                     </article>
                                     <div className="sdl-dita-delivery-comments-section">
                                         <div>
                                             <div className="sdl-dita-delivery-postcomment">
                                                 <form id="form">
                                                     <div>
-                                                        <label htmlFor="name">Your name<span>*</span>
+                                                        <label htmlFor="name">{localize("component.post.comment.name")}<span>*</span>
                                                         </label>
-                                                        <input type="text" className="sdl-input-text" id="name" placeholder="Name"/>
-                                                        <span>Name can&#x27;t be blank</span>
+                                                        <input type="text" className="sdl-input-text" id="name" placeholder="Name" />
+                                                        <span>{localize("component.post.comment.no.name")}</span>
                                                     </div>
                                                     <div>
-                                                        <label htmlFor="email">Email<span>*</span>
+                                                        <label htmlFor="email">{localize("component.post.comment.email")}<span>*</span>
                                                         </label>
-                                                        <input type="text" className="sdl-input-text" id="email" placeholder="Email address"/>
-                                                        <span>Email can&#x27;t be blank</span>
+                                                        <input type="text" className="sdl-input-text" id="email" placeholder="Email address" />
+                                                        <span>{localize("component.post.comment.no.email")}</span>
                                                     </div>
                                                     <div>
-                                                        <label htmlFor="comment">Comments<span>*</span>
+                                                        <label htmlFor="comment">{localize("component.post.comment.content")}<span>*</span>
                                                         </label>
-                                                        <textarea className="sdl-textarea" id="comment" placeholder="Your message"/>
-                                                        <span>Comment can&#x27;t be blank</span>
+                                                        <textarea className="sdl-textarea" id="comment" placeholder="Your message" />
+                                                        <span>{localize("component.post.comment.no.content")}</span>
                                                     </div>
                                                     <button type="submit" disabled className="sdl-button graphene sdl-button-purpose-confirm" form="form" value="Submit">
-                                                        Provide your feedback
+                                                        {localize("component.post.comment.submit")}
                                                     </button>
                                                 </form>
                                             </div>
-                                            <div className="sdl-comments-fetcher"/>
+                                            <div className="sdl-comments-fetcher" />
                                             <div className="sdl-dita-delivery-comments-list" />
                                         </div>
                                     </div>
