@@ -118,7 +118,12 @@ class Server extends TestBase {
                                         </ul>
                                     </div>
                                     <div />
-                                    <div className="sdl-dita-delivery-version-selector"><label>{localize("productreleaseversions.version.label")}</label><span><div></div></span></div>
+                                    <div className="sdl-dita-delivery-version-selector">
+                                        <label>{localize("productreleaseversions.version.label")}</label>
+                                        <span>
+                                            <div/>
+                                        </span>
+                                    </div>
                                     <div className="sdl-dita-delivery-content-navigation-wrapper">
                                         <nav className="sdl-dita-delivery-content-navigation"></nav>
                                     </div>
@@ -132,19 +137,22 @@ class Server extends TestBase {
                                                     <div>
                                                         <label htmlFor="name">{localize("component.post.comment.name")}<span>*</span>
                                                         </label>
-                                                        <input type="text" className="sdl-input-text" id="name" placeholder={localize("component.post.comment.placeholder.name")} />
+                                                        <input type="text" className="sdl-input-text" id="name"
+                                                            placeholder={localize("component.post.comment.placeholder.name")} />
                                                         <span>{localize("component.post.comment.no.name")}</span>
                                                     </div>
                                                     <div>
                                                         <label htmlFor="email">{localize("component.post.comment.email")}<span>*</span>
                                                         </label>
-                                                        <input type="text" className="sdl-input-text" id="email" placeholder={localize("component.post.comment.placeholder.email")} />
+                                                        <input type="text" className="sdl-input-text" id="email"
+                                                            placeholder={localize("component.post.comment.placeholder.email")} />
                                                         <span>{localize("component.post.comment.no.email")}</span>
                                                     </div>
                                                     <div>
                                                         <label htmlFor="comment">{localize("component.post.comment.content")}<span>*</span>
                                                         </label>
-                                                        <textarea className="sdl-textarea" id="comment" placeholder={localize("component.post.comment.placeholder.content")} />
+                                                        <textarea className="sdl-textarea" id="comment"
+                                                            placeholder={localize("component.post.comment.placeholder.content")} />
                                                         <span>{localize("component.post.comment.no.content")}</span>
                                                     </div>
                                                     <button type="submit" disabled className="sdl-button graphene sdl-button-purpose-confirm" form="form" value="Submit">
