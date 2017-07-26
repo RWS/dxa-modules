@@ -136,13 +136,13 @@ class Server extends TestBase {
                                                     <div>
                                                         <label htmlFor="email">Email<span>*</span>
                                                         </label>
-                                                        <input type="text" className="sdl-input-text" id="email" placeholder="example@domain.com"/>
+                                                        <input type="text" className="sdl-input-text" id="email" placeholder="Email address"/>
                                                         <span>Email can&#x27;t be blank</span>
                                                     </div>
                                                     <div>
                                                         <label htmlFor="comment">Comments<span>*</span>
                                                         </label>
-                                                        <textarea className="sdl-textarea" id="comment" placeholder="Write a comment"/>
+                                                        <textarea className="sdl-textarea" id="comment" placeholder="Your message"/>
                                                         <span>Comment can&#x27;t be blank</span>
                                                     </div>
                                                     <button type="submit" disabled className="sdl-button graphene sdl-button-purpose-confirm" form="form" value="Submit">
