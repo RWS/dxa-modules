@@ -61,6 +61,13 @@
                 margin-left: 0px;
                 margin-right: @labelWidth;
             }
+			
+			@media screen and (max-width: (@screenSm - 10)) {
+                margin-left: 0;
+				.sdl-dita-delivery-app.rtl & {
+					margin-right: 0;
+				}
+            }
         }
     }
 
