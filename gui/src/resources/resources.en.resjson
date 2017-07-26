@@ -16,7 +16,7 @@
   "component.post.comment.placeholder.email": "Email address",
   "component.post.comment.placeholder.content": "Your message",
   "component.post.comment.no.name": "Name can't be blank",
-  "component.post.comment.no.email": "E-mail can't be blank",
+  "component.post.comment.no.email": "Email can't be blank",
   "component.post.comment.no.content": "Comment can't be blank",
   "component.post.comment.submit": "Provide your feedback",
   "component.post.comment.post.error": "Oops, something went wrong while trying to post your comment. Try again and if the error persists, please contact an administrator.",
