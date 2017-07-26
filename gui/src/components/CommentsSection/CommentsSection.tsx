@@ -6,7 +6,7 @@ import { saveComment, fetchComments } from "store/actions/Api";
 
 const mapStateToProps = (state: IState) => {
     const { pageId, publicationId } = getCurrentPub(state);
-    const error = getCommentErrorMessage(state, pageId);
+    const error = getCommentErrorMessage(state, publicationId, pageId);
 
     return { pageId, publicationId, error };
 };

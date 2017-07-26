@@ -1,10 +1,10 @@
 import { IComment } from "interfaces/ServerModels";
 import { COMMENTS_LOADED, COMMENTS_LOADING, COMMENTS_ERROR, COMMENT_SAVING, COMMENT_ERROR, COMMENT_SAVED, PAGE_LOADED } from "store/actions/Actions";
 import { combineReducers, handleAction, combine } from "./CombineReducers";
-import { ICommentsPayload, ICommentsError, IComments, ICommentPayload , ICommentErrorsMap} from "store/interfaces/Comments";
+import { ICommentsPayload, ICommentsError, IComments, ICommentPayload, ICommentErrorsMap } from "store/interfaces/Comments";
 
 export interface ICommentsErrorPayload {
-    pageId: string;
+    key: string;
     error: ICommentsError;
 };
 
@@ -17,47 +17,47 @@ const removeByKey = (myObj: ICommentErrorsMap, deleteKey: string) => {
         }, {});
 };
 
-const byPageId = combine(
-    handleAction(COMMENTS_LOADED, (state, { comments, pageId }) => {
-        return ({ ...state, [pageId]: comments });
+const byId = combine(
+    handleAction(COMMENTS_LOADED, (state, { comments, key }) => {
+        return ({ ...state, [key]: comments });
     }, {}),
-    handleAction(COMMENT_SAVED, (state, { comment, pageId }) => {
-        return ({ ...state, [pageId]: state[pageId].concat(comment).sort((a: IComment, b: IComment) => b.id - a.id) });
+    handleAction(COMMENT_SAVED, (state, { comment, key }) => {
+        return ({ ...state, [key]: state[key].concat(comment).sort((a: IComment, b: IComment) => b.id - a.id) });
     }, {})
 );
 
 const loading = combine(
-    handleAction(COMMENTS_LOADING, (state: string[], pageId: string) => [...state, pageId], []),
-    handleAction(COMMENTS_LOADED, (state: string[], { pageId }: ICommentsPayload) => state.filter((id) => id !== pageId), []),
-    handleAction(COMMENTS_ERROR, (state: string[], { pageId, error }: ICommentsErrorPayload) => state.filter((id) => id !== pageId), [])
+    handleAction(COMMENTS_LOADING, (state: string[], key: string) => [...state, key], []),
+    handleAction(COMMENTS_LOADED, (state: string[], { key }: ICommentsPayload) => state.filter((k) => key !== k), []),
+    handleAction(COMMENTS_ERROR, (state: string[], { key, error }: ICommentsErrorPayload) => state.filter((k) => key !== k), [])
 );
 
 const saving = combine(
-    handleAction(COMMENT_SAVING, (state: string[], pageId: string) => [...state, pageId], []),
-    handleAction(COMMENT_SAVED, (state: string[], { pageId }: ICommentPayload) => state.filter((id) => id !== pageId), []),
-    handleAction(COMMENT_ERROR, (state: string[], { key }: ICommentErrorsMap) => state.filter((id) => id !== key), [])
+    handleAction(COMMENT_SAVING, (state: string[], key: string) => [...state, key], []),
+    handleAction(COMMENT_SAVED, (state: string[], { key }: ICommentPayload) => state.filter((k) => key !== k), []),
+    handleAction(COMMENT_ERROR, (state: string[], { key }: ICommentErrorsMap) => state.filter((k) => key !== k), [])
 );
 
 const errors = combine(
-    handleAction(COMMENTS_ERROR, (state: ICommentErrorsMap, { pageId, error }: ICommentsErrorPayload) => Object.assign({}, state, { [pageId]: error.message }), {}),
-    handleAction(COMMENTS_LOADED, (state: ICommentErrorsMap, { pageId }) => removeByKey(state, pageId), {})
+    handleAction(COMMENTS_ERROR, (state: ICommentErrorsMap, { key, error }: ICommentsErrorPayload) => Object.assign({}, state, { [key]: error.message }), {}),
+    handleAction(COMMENTS_LOADED, (state: ICommentErrorsMap, { key }) => removeByKey(state, key), {})
 );
 
 const postErrors = combine(
-    handleAction(COMMENT_ERROR, (state: ICommentErrorsMap, { pageId, error }: ICommentsErrorPayload) => Object.assign({}, state, { [pageId]: error.message }), {}),
-    handleAction(COMMENT_SAVED, (state: ICommentErrorsMap, { pageId }) => removeByKey(state, pageId), {}),
+    handleAction(COMMENT_ERROR, (state: ICommentErrorsMap, { key, error }: ICommentsErrorPayload) => Object.assign({}, state, { [key]: error.message }), {}),
+    handleAction(COMMENT_SAVED, (state: ICommentErrorsMap, { key }) => removeByKey(state, key), {}),
     handleAction(PAGE_LOADED, (state: ICommentErrorsMap, { page }) => removeByKey(state, page.id), {})
 );
 
 export const comments = combineReducers({
-    byPageId,
+    byId,
     loading,
     saving,
     errors,
     postErrors
 });
 
-export const getByPageId = (state: IComments, pageId: string) => pageId in state.byPageId ? state.byPageId[pageId] : ([] as IComment[]);
-export const getErrorMessage = (state: IComments, pageId: string): string => pageId in state.errors ? state.errors[pageId] : "";
-export const getPostErrorMessage = (state: IComments, pageId: string): string => pageId in state.postErrors ? state.postErrors[pageId] : "";
-export const isSaving = (state: IComments, pageId: string): boolean => state.saving.includes(pageId);
+export const getById = (state: IComments, id: string) => (id in state.byId) ? state.byId[id] : ([] as IComment[]);
+export const getErrorMessage = (state: IComments, id: string): string => id in state.errors ? state.errors[id] : "";
+export const getPostErrorMessage = (state: IComments, id: string): string => id in state.postErrors ? state.postErrors[id] : "";
+export const isSaving = (state: IComments, id: string): boolean => state.saving.includes(id);
