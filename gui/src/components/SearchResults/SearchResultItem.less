@@ -8,7 +8,7 @@
         margin: 5px 0 10px;
         a {
             .header-font(600, @h3Size, @h1Size);
-            color: @accentColor2;
+            color: @accentColor8;
             text-decoration: inherit;
         }
         button {
@@ -24,6 +24,9 @@
             &:hover {
                 cursor: pointer;
             }
+
+            /* Bookmark functionality is under discussion now. Hide it temporary*/
+            display: none;
         }
     }
     nav {
@@ -95,7 +98,8 @@
         }
         p {
             height: auto;
-            max-height: none;
+            max-height: 24px*12; // Show only three lines of text
+            overflow-y: auto;
             &:after {
                 background: none;
             }

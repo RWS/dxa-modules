@@ -8,11 +8,6 @@ import { Link } from "react-router";
 import "./SearchResultItem.less";
 
 /**
- * Options used to convert date
- */
-const DATE_OPTIONS = { year: "numeric", month: "numeric", day: "numeric" };
-
-/**
  * SearchResultItem props
  *
  * @export
@@ -44,7 +39,7 @@ export const SearchResultItem: React.StatelessComponent<ISearchResultItemProps> 
         let bottomInfo: string[] = [];
         const modifiedDate = searchResult.lastModifiedDate;
         if (modifiedDate) {
-            bottomInfo.push(`${formatMessage("search.result.last.updated", [modifiedDate.toLocaleString(getLanguage(), DATE_OPTIONS)])}`);
+            bottomInfo.push(`${formatMessage("search.result.last.updated", [modifiedDate.toLocaleDateString(getLanguage())])}`);
         }
 
         const language = localizationService.getLanguages().filter(x => x.iso == searchResult.language)[0];

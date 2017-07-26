@@ -241,7 +241,7 @@ export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
      * Invoked immediately after updating.
      */
     public componentDidUpdate(prevProp: {}, prevState: IHomeState): void {
-        const { isNavOpen } = this.state;
+        const { isNavOpen, searchIsOpen } = this.state;
 
         if (prevState.isNavOpen !== isNavOpen) {
             // HACK: we should use some global state store to achieve this
@@ -262,6 +262,14 @@ export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
             }
             else {
                 document.body.style.removeProperty("overflow");
+            }
+        }
+
+        if (prevState.searchIsOpen === false && (prevState.searchIsOpen !== searchIsOpen)) {
+            const domNode = ReactDOM.findDOMNode(this);
+            const searchInput = domNode && domNode.querySelector(".sdl-dita-delivery-searchbar input") as HTMLInputElement;
+            if (searchInput) {
+                searchInput.focus();
             }
         }
     }

@@ -61,6 +61,7 @@ export class Search extends LoadableObject {
             startIndex: r.StartIndex,
             queryResults: r.QueryResults.map((item: ISearchResult) => {
                 const modifiedDate = Date.parse(item.ModifiedDate || "");
+                const parsedId = TcmId.parseId(item.Id.replace("_", ":"));
                 return {
                     id: item.Id,
                     content: item.Content,
@@ -68,7 +69,7 @@ export class Search extends LoadableObject {
                     lastModifiedDate: isNaN(modifiedDate) ? null : new Date(modifiedDate),
                     publicationId: item.PublicationId.toString(),
                     publicationTitle: item.PublicationTitle,
-                    pageId: TcmId.getItemIdFromTaxonomyItemId(item.Id),
+                    pageId: parsedId && parsedId.itemId,
                     pageTitle: item.Meta["FTITLE.logical.value"],
                     productFamilyTitle: item.ProductFamilyName,
                     productReleaseVersionTitle: item.ProductReleaseName
