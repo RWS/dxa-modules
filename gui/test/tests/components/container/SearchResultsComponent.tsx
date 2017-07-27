@@ -9,6 +9,8 @@ import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 
 import { ISearchQueryResults, ISearchQueryResult } from "interfaces/Search";
 
+import { RENDER_DELAY, ASYNC_TEST_DELAY } from "test/Constants";
+
 const services = {
     searchService: new SearchService()
 };
@@ -67,7 +69,7 @@ class SearchResultsComponent extends TestBase {
                     expect(buttons.length).toEqual(1);
 
                     done();
-                }, 100);
+                }, ASYNC_TEST_DELAY);
             });
 
             it("shows no-results message when search results returns no result", (done: () => void): void => {
@@ -89,7 +91,7 @@ class SearchResultsComponent extends TestBase {
                     expect(errorElement).not.toBeNull("Error dialog not found");
                     expect(errorElement.textContent).toContain("mock-search.no.results");
                     done();
-                }, 0);
+                }, RENDER_DELAY);
             });
 
             it("shows load more when more than 10 results found", (done: () => void): void => {
@@ -133,7 +135,7 @@ class SearchResultsComponent extends TestBase {
                     expect(button).toBeDefined();
 
                     done();
-                }, 0);
+                }, RENDER_DELAY);
             });
 
         });

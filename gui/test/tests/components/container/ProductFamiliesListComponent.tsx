@@ -8,6 +8,8 @@ import { PublicationService } from "test/mocks/services/PublicationService";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 import { browserHistory } from "react-router";
 
+import { RENDER_DELAY, ASYNC_DELAY } from "test/Constants";
+
 const services = {
     publicationService: new PublicationService()
 };
@@ -58,7 +60,7 @@ class ProductFamiliesListComponent extends TestBase {
                     expect(buttons.length).toEqual(1);
 
                     done();
-                }, 200);
+                }, ASYNC_DELAY);
             });
 
             it("Retries loading when error retry button is clicked", (done: () => void): void => {
@@ -85,8 +87,8 @@ class ProductFamiliesListComponent extends TestBase {
                         expect(headers[0].textContent).toBe(productFamilies[0].title);
 
                         done();
-                    }, 0);
-                }, 0);
+                    }, RENDER_DELAY);
+                }, RENDER_DELAY);
             });
 
             it("renders product families tiles", (done: () => void): void => {
@@ -108,7 +110,7 @@ class ProductFamiliesListComponent extends TestBase {
                     expect(hyperlinks[1].textContent).toBe(productFamilies[1].title);
 
                     done();
-                }, 500);
+                }, ASYNC_DELAY);
             });
 
             it("navigates to publications list when a product family `view more` button is clicked", (done: () => void): void => {
@@ -135,7 +137,7 @@ class ProductFamiliesListComponent extends TestBase {
                     expect(button).toBeDefined();
                     const buttonEl = ReactDOM.findDOMNode(button).querySelector("button") as HTMLElement;
                     buttonEl.click();
-                }, 0);
+                }, RENDER_DELAY);
             });
 
         });

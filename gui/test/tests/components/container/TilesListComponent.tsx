@@ -8,6 +8,8 @@ import { LocalizationService } from "test/mocks/services/LocalizationService";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 import { Button } from "@sdl/controls-react-wrappers";
 
+import { RENDER_DELAY } from "test/Constants";
+
 const services = {
     localizationService: new LocalizationService()
 };
@@ -82,7 +84,7 @@ class TilesListComponent extends TestBase {
                     expect(TestUtils.scryRenderedComponentsWithType(tilesList, Button as any).length).toBe(0);
 
                     done();
-                }, 0);
+                }, RENDER_DELAY);
             });
         });
     }

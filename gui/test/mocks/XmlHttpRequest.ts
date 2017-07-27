@@ -1,3 +1,5 @@
+import { ASYNC_DELAY } from "test/Constants";
+
 export class FakeXMLHttpRequest {
     public readyState: number = 0;
     public status: number = 500;
@@ -17,6 +19,6 @@ export class FakeXMLHttpRequest {
             if (typeof this.onreadystatechange === "function") {
                 this.onreadystatechange();
             }
-        }, 100);
+        }, ASYNC_DELAY);
     }
 }

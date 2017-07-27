@@ -1,5 +1,5 @@
 import { CONDITIONES_LOADED, CONDITIONES_LOADING, CONDITIONES_ERROR } from "store/actions/Actions";
-import { combineReducers, handleAction, combine } from "../CombineReducers";
+import { combineReducers, handleAction, combine } from "store/reducers/CombineReducers";
 import { IConditionMap, IAllConditions, IConditionsPayload } from "store/interfaces/Conditions";
 
 export interface IConditionsError {

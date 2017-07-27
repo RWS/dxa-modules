@@ -1,7 +1,7 @@
 import { PublicationService } from "services/client/PublicationService";
 import { TestBase } from "@sdl/models";
 import { FakeXMLHttpRequest } from "test/mocks/XmlHttpRequest";
-import { IWindow } from "../../../../src/interfaces/Window";
+import { IWindow } from "interfaces/Window";
 
 interface IXMLHttpRequestWindow extends Window {
     XMLHttpRequest: {};

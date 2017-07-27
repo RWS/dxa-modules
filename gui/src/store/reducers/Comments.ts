@@ -1,6 +1,6 @@
 import { IComment } from "interfaces/ServerModels";
 import { COMMENTS_LOADED, COMMENTS_LOADING, COMMENTS_ERROR, COMMENT_SAVING, COMMENT_ERROR, COMMENT_SAVED, PAGE_LOADED } from "store/actions/Actions";
-import { combineReducers, handleAction, combine } from "./CombineReducers";
+import { combineReducers, handleAction, combine } from "store/reducers/CombineReducers";
 import { ICommentsPayload, ICommentsError, IComments, ICommentPayload, ICommentErrorsMap } from "store/interfaces/Comments";
 
 export interface ICommentsErrorPayload {

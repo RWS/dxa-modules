@@ -1,4 +1,4 @@
-import { CdItemTypes, ITcmId as TcmIdModel, TaxonomyItemId } from "../interfaces/TcmId";
+import { CdItemTypes, ITcmId as TcmIdModel, TaxonomyItemId } from "interfaces/TcmId";
 
 /**
  * Regex to parse tcm uri

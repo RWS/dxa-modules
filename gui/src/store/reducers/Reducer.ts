@@ -8,7 +8,7 @@ import conditions, * as Conditions from "./conditions";
 import { IState, IPublicationCurrentState } from "store/interfaces/State";
 import { IPublication } from "interfaces/Publication";
 import { IPage } from "interfaces/Page";
-import { combineReducers } from "./CombineReducers";
+import { combineReducers } from "store/reducers/CombineReducers";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 import { IPublicationsListPropsParams } from "@sdl/dd/PublicationsList/PublicationsListPresentation";
 import { IConditionMap } from "store/interfaces/Conditions";

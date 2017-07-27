@@ -1,7 +1,7 @@
 import { find, chain, isEqual } from "lodash";
 import { PUBLICATIONS_LOADED, PUBLICATIONS_LOADING } from "store/actions/Actions";
 import { IPublication } from "interfaces/Publication";
-import { handleAction, combineReducers, combine } from "./CombineReducers";
+import { handleAction, combineReducers, combine } from "store/reducers/CombineReducers";
 import { PUBLICATIONS_LOADING_ERROR } from "store/actions/Actions";
 import { IPublicationsMap, IPublicationsState } from "store/interfaces/State";
 import { DEFAULT_LANGUAGE } from "services/common/LocalizationService";

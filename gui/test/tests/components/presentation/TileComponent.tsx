@@ -8,6 +8,8 @@ import { LocalizationService } from "test/mocks/services/LocalizationService";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 import { ActivityIndicator } from "@sdl/controls-react-wrappers";
 
+import { RENDER_DELAY } from "test/Constants";
+
 const services = {
     localizationService: new LocalizationService()
 };
@@ -66,7 +68,7 @@ class TileComponent extends TestBase {
                         + "exclusively in the southern hemisphere, especially in Antarctica. Highly adapted for life...");
 
                     done();
-                }, 0);
+                }, RENDER_DELAY);
             });
 
             it("shows error if title content can`t be loaded and can retry load content", (done: () => void): void => {
@@ -95,7 +97,7 @@ class TileComponent extends TestBase {
                     const retryButtonNode = appNode.querySelector(".sdl-dita-delivery-tile button") as HTMLElement;
                     expect(retryButtonNode).not.toBeNull();
                     retryButtonNode.click();
-                }, 0);
+                }, RENDER_DELAY);
 
             });
 

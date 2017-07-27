@@ -14,6 +14,8 @@ import { Page } from "@sdl/dd/Page/Page";
 import { PageService } from "test/mocks/services/PageService";
 import { Html } from "utils/Html";
 
+import { RENDER_DELAY } from "test/Constants";
+
 class PageComponent extends TestBase {
 
     public runTests(): void {
@@ -86,7 +88,7 @@ class PageComponent extends TestBase {
                 buttons.item(0).click();
                 setTimeout(() => {
                     expect(path).toBe("/");
-                }, 0);
+                }, RENDER_DELAY);
             });
 
             it("click on retry button in error info", (): void => {
@@ -314,7 +316,7 @@ class PageComponent extends TestBase {
                     // Scroll position is changed
                     expect(spy).not.toHaveBeenCalledWith(0, 0);
                     done();
-                }, 100);
+                }, 100 + RENDER_DELAY);
             });
 
             it("scrolls to same content item", (done: () => void): void => {
@@ -333,7 +335,7 @@ class PageComponent extends TestBase {
                 setTimeout((): void => {
                     expect(spy).toHaveBeenCalledTimes(1);
                     done();
-                }, 100);
+                }, 100 + RENDER_DELAY);
             });
 
             it("scrolls when page title is not specified", (done: () => void): void => {
@@ -353,7 +355,7 @@ class PageComponent extends TestBase {
                 setTimeout((): void => {
                     expect(spy).toHaveBeenCalledTimes(1);
                     done();
-                }, 100);
+                }, 100 + RENDER_DELAY);
             });
         });
 
