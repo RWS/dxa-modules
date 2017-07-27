@@ -122,7 +122,7 @@ export class PageService implements IPageService {
      */
     public saveComment(commentData: IPostComment): Promise<IComment> {
         // We need this list to invalidate the date further. So far only pubId and pageId combination is used as key
-        const comments = this.getCommentsModel(commentData.publicationId, commentData.pageId, false, false, 0, []);
+        const comments = this.getCommentsModel(commentData.publicationId, commentData.pageId, false, 0, 0, []);
         const comment = new Comment(commentData);
         return new Promise((resolve: (data?: IComment) => void, reject: (error: string | null) => void) => {
             let removeEventListeners: () => void;
