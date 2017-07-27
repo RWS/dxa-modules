@@ -13,6 +13,8 @@ import { dummyPage } from "utils/Page";
 import { configureStore } from "store/Store";
 import { Provider } from "react-redux";
 
+import { RENDER_DELAY } from "test/Constants";
+
 const services = {
     publicationService: new PublicationService()
 };
@@ -56,7 +58,7 @@ class HomeComponent extends TestBase {
                     const input = homeNode.querySelector(".sdl-dita-delivery-searchbar input") as HTMLInputElement;
                     expect(input.getAttribute("placeholder")).toContain(errorMessage);
                     done();
-                }, 0);
+                }, RENDER_DELAY);
             });
 
             it("can interact with search panel", (done: () => void): void => {

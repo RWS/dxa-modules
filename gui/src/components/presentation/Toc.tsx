@@ -6,12 +6,12 @@ import { Button, ActivityIndicator, TreeView } from "@sdl/controls-react-wrapper
 import { TreeView as TreeViewControl, ITreeViewNode as IBaseTreeViewNode, ButtonPurpose } from "@sdl/controls";
 import { IAppContext } from "@sdl/dd/container/App/App";
 import { ErrorToc } from "@sdl/dd/presentation/ErrorToc";
+import { ConditionsDialog } from "@sdl/dd/ConditionsDialog/ConditionsDialog";
 
 import "components/presentation/styles/Toc";
 import "components/controls/styles/ActivityIndicator";
 import "components/controls/styles/Button";
 import "components/controls/styles/TreeView";
-import { ConditionsDialog } from "../ConditionsDialog/ConditionsDialog";
 
 /**
  * Toc component props

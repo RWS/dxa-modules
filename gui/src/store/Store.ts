@@ -2,9 +2,9 @@ import * as deepAssign from "deep-assign";
 import { applyMiddleware, compose, createStore, Store } from "redux";
 import thunk from "redux-thunk";
 import { IWindow } from "interfaces/Window";
-import { IState } from "./interfaces/State";
-import { mainReducer } from "./reducers/Reducer";
-import { handleAction, combine } from "./reducers/CombineReducers";
+import { IState } from "store/interfaces/State";
+import { mainReducer } from "store/reducers/Reducer";
+import { handleAction, combine } from "store/reducers/CombineReducers";
 import { createAction } from "redux-actions";
 
 const globalWindow = window as IWindow;

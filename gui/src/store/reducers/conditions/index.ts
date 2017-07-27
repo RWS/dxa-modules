@@ -1,4 +1,4 @@
-import { combineReducers } from "./../CombineReducers";
+import { combineReducers } from "store/reducers/CombineReducers";
 import { IConditionsState, IConditionMap } from "store/interfaces/Conditions";
 
 import showDialog, * as ShowDialog from "./showDialog";

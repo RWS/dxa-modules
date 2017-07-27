@@ -13,6 +13,8 @@ import { Provider } from "react-redux";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 import { browserHistory } from "react-router";
 
+import { RENDER_DELAY, ASYNC_TEST_DELAY } from "test/Constants";
+
 const services = {
     publicationService: new PublicationService(),
     taxonomyService: new TaxonomyService()
@@ -64,7 +66,7 @@ class PublicationsListComponent extends TestBase {
                     expect(buttons.length).toEqual(1);
 
                     done();
-                }, 500);
+                }, ASYNC_TEST_DELAY);
             });
 
             it("renders only publications associated with product family", (done: () => void): void => {
@@ -106,7 +108,7 @@ class PublicationsListComponent extends TestBase {
                     expect(h3[1].textContent).toBe(publications[1].title);
                     expect(h3[2].textContent).toBe(publications[2].title);
                     done();
-                }, 500);
+                }, ASYNC_TEST_DELAY);
             });
 
             it("navigates to publication when a publication title is clicked", (done: () => void): void => {
@@ -138,7 +140,7 @@ class PublicationsListComponent extends TestBase {
                     expect(button).toBeDefined();
                     const buttonEl = ReactDOM.findDOMNode(button).querySelector("button") as HTMLButtonElement;
                     buttonEl.click();
-                }, 0);
+                }, RENDER_DELAY);
             });
 
             it("shows first 5 topic titles in the root map of the publication", (done: () => void): void => {
@@ -207,7 +209,7 @@ class PublicationsListComponent extends TestBase {
                     expect(links[3].textContent).toBe("Title 5");
                     expect(links[4].textContent).toBe("Title 6");
                     done();
-                }, 0);
+                }, RENDER_DELAY);
             });
 
             it("can filter on publication release version", (done: () => void): void => {
@@ -251,7 +253,7 @@ class PublicationsListComponent extends TestBase {
 
                     // Click on the second release version
                     listItems[1].click();
-                }, 0);
+                }, RENDER_DELAY);
             });
 
         });

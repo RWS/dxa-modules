@@ -3,6 +3,8 @@ import * as ReactDOM from "react-dom";
 import { NavigationMenu, INavigationMenuProps } from "@sdl/dd/presentation/NavigationMenu";
 import { TestBase } from "@sdl/models";
 
+import { RENDER_DELAY } from "test/Constants";
+
 class NavigationMenuComponent extends TestBase {
 
     public runTests(): void {
@@ -49,7 +51,7 @@ class NavigationMenuComponent extends TestBase {
                         expect(parseInt(left, 10)).toBe(0);
                     }
                     done();
-                }, 310);
+                }, RENDER_DELAY);
             });
         });
     }

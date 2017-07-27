@@ -15,7 +15,7 @@ import {
     COMMENTS_LOADING, COMMENTS_LOADED, COMMENTS_ERROR,
     COMMENT_SAVING, COMMENT_ERROR, COMMENT_SAVED,
     updateCurrentPublication
-} from "./Actions";
+} from "store/actions/Actions";
 
 import { getPubById, getPubList, getLastConditions, getPageKey } from "store/reducers/Reducer";
 import { IState } from "store/interfaces/State";

@@ -5,8 +5,9 @@ import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 import { Promise } from "es6-promise";
 import { IConditionMap } from "store/interfaces/Conditions";
 
+import { ASYNC_DELAY } from "test/Constants";
+
 let fakeDelay = false;
-const DELAY = 100;
 
 export class PublicationService implements IPublicationService {
 
@@ -98,7 +99,7 @@ export class PublicationService implements IPublicationService {
                             title
                         });
                     }
-                }, DELAY);
+                }, ASYNC_DELAY);
             });
         } else {
             if (error) {
@@ -146,7 +147,7 @@ export class PublicationService implements IPublicationService {
                     else {
                         resolve(values);
                     }
-                }, DELAY);
+                }, ASYNC_DELAY);
             });
         } else {
             if (error) {

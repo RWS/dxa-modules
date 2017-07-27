@@ -4,8 +4,9 @@ import { Promise } from "es6-promise";
 import { IPostComment } from "interfaces/Comments";
 import { IComment } from "interfaces/ServerModels";
 
+import { ASYNC_DELAY } from "test/Constants";
+
 let fakeDelay = false;
-const DELAY = 100;
 
 export class PageService implements IPageService {
 
@@ -41,7 +42,7 @@ export class PageService implements IPageService {
                     else {
                         resolve(info);
                     }
-                }, DELAY);
+                }, ASYNC_DELAY);
             });
         } else {
             if (error) {
@@ -63,7 +64,7 @@ export class PageService implements IPageService {
                     else {
                         resolve(values);
                     }
-                }, DELAY);
+                }, ASYNC_DELAY);
             });
         } else {
             if (error) {
@@ -85,7 +86,7 @@ export class PageService implements IPageService {
                     else {
                         resolve(values[0]);
                     }
-                }, DELAY);
+                }, ASYNC_DELAY);
             });
         } else {
             if (error) {
