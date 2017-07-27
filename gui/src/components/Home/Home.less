@@ -75,6 +75,8 @@
                     .sdl-conditions-dialog-presentation + span {
                         flex: 1 1 100%;
                         display: inherit;
+                        // FF fix. See https://stackoverflow.com/questions/28636832#28639686
+                        min-height: 0;
                         .sdl-treeview {
                             max-height: 100%;
                             height: auto;
