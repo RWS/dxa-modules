@@ -1,5 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import * as PropTypes from "prop-types";
 import { Promise } from "es6-promise";
 import { Link, browserHistory } from "react-router";
 import { ITaxonomy } from "interfaces/Taxonomy";
@@ -90,7 +91,7 @@ export class Breadcrumbs extends React.Component<IBreadcrumbsProps, IBreadcrumbs
      * @memberOf Breadcrumbs
      */
     public static contextTypes: React.ValidationMap<IAppContext> = {
-        services: React.PropTypes.object.isRequired
+        services: PropTypes.object.isRequired
     };
 
     /**

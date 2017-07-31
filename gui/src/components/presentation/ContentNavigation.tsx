@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as PropTypes from "prop-types";
 import { IAppContext } from "@sdl/dd/container/App/App";
 import { Link } from "react-router";
 import "components/presentation/styles/ContentNavigation";
@@ -86,5 +87,5 @@ export const ContentNavigation: React.StatelessComponent<IContentNavigationProps
 };
 
 ContentNavigation.contextTypes = {
-    services: React.PropTypes.object
+    services: PropTypes.object
 } as React.ValidationMap<IAppContext>;

@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as PropTypes from "prop-types";
 import "@sdl/dd/PostComment/styles/PostComment";
 import "@sdl/dd/Input/Input";
 import "@sdl/dd/Textarea/Textarea";
@@ -40,7 +41,7 @@ export class PostCommentPresentation extends
      * @type {React.ValidationMap<IAppContext>}
      */
     public static contextTypes: React.ValidationMap<IAppContext> = {
-        services: React.PropTypes.object.isRequired
+        services: PropTypes.object.isRequired
     };
 
     /**

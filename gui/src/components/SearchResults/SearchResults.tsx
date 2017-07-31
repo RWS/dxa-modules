@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as PropTypes from "prop-types";
 import { ButtonPurpose } from "@sdl/controls";
 import { ActivityIndicator, Button } from "@sdl/controls-react-wrappers";
 import { Error } from "@sdl/dd/presentation/Error";
@@ -102,7 +103,7 @@ export interface ISearchResultsState {
 export class SearchResults extends React.Component<ISearchResultsProps, ISearchResultsState> {
 
     public static contextTypes: React.ValidationMap<IAppContext> = {
-        services: React.PropTypes.object.isRequired
+        services: PropTypes.object.isRequired
     };
 
     public context: IAppContext;

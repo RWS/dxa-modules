@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as PropTypes from "prop-types";
 import { Router, Route, IndexRedirect, browserHistory, Redirect } from "react-router";
 import { IServices } from "interfaces/Services";
 import { Home } from "@sdl/dd/Home/Home";
@@ -43,7 +44,7 @@ export interface IAppContext {
 export class App extends React.Component<IAppProps, {}> {
 
     public static childContextTypes: React.ValidationMap<IAppContext> = {
-        services: React.PropTypes.object
+        services: PropTypes.object
     };
 
     public getChildContext(): IAppContext {

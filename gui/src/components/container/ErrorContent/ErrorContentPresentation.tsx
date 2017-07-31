@@ -1,5 +1,6 @@
 import * as ClassNames from "classnames";
 import * as React from "react";
+import * as PropTypes from "prop-types";
 import { browserHistory } from "react-router";
 import { path } from "utils/Path";
 import { SearchBar } from "@sdl/dd/presentation/SearchBar";
@@ -80,5 +81,5 @@ export const ErrorContentPresentation: React.StatelessComponent<IErrorContentPro
 };
 
 ErrorContentPresentation.contextTypes = {
-    services: React.PropTypes.object.isRequired
+    services: PropTypes.object.isRequired
 } as React.ValidationMap<IAppContext>;

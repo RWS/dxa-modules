@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as PropTypes from "prop-types";
 import "components/presentation/styles/ErrorToc";
 import { Button } from "@sdl/controls-react-wrappers";
 import { ButtonPurpose } from "@sdl/controls";
@@ -52,5 +53,5 @@ export const ErrorToc: React.StatelessComponent<IErrorTocProps> = (props: IError
 };
 
 ErrorToc.contextTypes = {
-    services: React.PropTypes.object.isRequired
+    services: PropTypes.object.isRequired
 } as React.ValidationMap<IAppContext>;

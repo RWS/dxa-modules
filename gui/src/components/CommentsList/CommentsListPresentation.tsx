@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as PropTypes from "prop-types";
 import { Comment } from "@sdl/dd/Comment/Comment";
 import { IComment, ICommentDate } from "interfaces/ServerModels";
 import { IAppContext } from "@sdl/dd/container/App/App";
@@ -25,7 +26,7 @@ export class CommentsListPresentation extends React.Component<ICommentsListProps
      * @type {React.ValidationMap<IAppContext>}
      */
     public static contextTypes: React.ValidationMap<IAppContext> = {
-        services: React.PropTypes.object.isRequired
+        services: PropTypes.object.isRequired
     };
 
     /**

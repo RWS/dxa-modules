@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as PropTypes from "prop-types";
 import { IndexLink } from "react-router";
 import { path } from "utils/Path";
 import { LanguageDropdown } from "@sdl/dd/Dropdown/LanguageDropdown";
@@ -49,5 +50,5 @@ export const TopBar: React.StatelessComponent<ITopBarProps> = (props: ITopBarPro
 };
 
 TopBar.contextTypes = {
-    services: React.PropTypes.object.isRequired
+    services: PropTypes.object.isRequired
 } as React.ValidationMap<IAppContext>;

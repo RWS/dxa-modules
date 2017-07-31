@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as PropTypes from "prop-types";
 import { Promise } from "es6-promise";
 import { Link, browserHistory } from "react-router";
 import { ButtonPurpose } from "@sdl/controls";
@@ -110,7 +111,7 @@ export class PublicationsListPresentation extends React.Component<IPublicationsL
      * Context types
      */
     public static contextTypes: React.ValidationMap<IAppContext> = {
-        services: React.PropTypes.object.isRequired
+        services: PropTypes.object.isRequired
     };
 
     /**

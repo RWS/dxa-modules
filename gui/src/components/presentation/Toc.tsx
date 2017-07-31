@@ -1,5 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import * as PropTypes from "prop-types";
 import { Promise } from "es6-promise";
 import { ITaxonomy } from "interfaces/Taxonomy";
 import { Button, ActivityIndicator, TreeView } from "@sdl/controls-react-wrappers";
@@ -89,7 +90,7 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
      * @memberOf Breadcrumbs
      */
     public static contextTypes: React.ValidationMap<IAppContext> = {
-        services: React.PropTypes.object.isRequired
+        services: PropTypes.object.isRequired
     };
 
     /**
