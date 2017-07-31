@@ -113,20 +113,23 @@ class HomeComponent extends TestBase {
             (
                 <ComponentWithContext {...services}>
                     <Router history={browserHistory}>
-                        <Route path="*" component={() => (<Provider store={store}><HomePresentation publicationId={publicationId}>
-                            <PublicationContentPresentation
-                                publicationId={publicationId}
-                                publication={publication}
-                                pageId={pageId}
-                                anchor=""
-                                page={dummyPage(pageId)}
-                                isPageLoading={isPageLoading}
-                                productReleaseVersions={[]}
-                                productReleaseVersion={""}
-                                errorMessage=""
-                                isPublicationFound={true}
-                                conditions={{}}/>
-                        </HomePresentation></Provider>)} />
+                        <Route path="*" component={() => (
+                            <Provider store={store}>
+                                <HomePresentation params={{ publicationId }}>
+                                    <PublicationContentPresentation
+                                        publicationId={publicationId}
+                                        publication={publication}
+                                        pageId={pageId}
+                                        anchor=""
+                                        page={dummyPage(pageId)}
+                                        isPageLoading={isPageLoading}
+                                        productReleaseVersions={[]}
+                                        productReleaseVersion={""}
+                                        errorMessage=""
+                                        isPublicationFound={true}
+                                        conditions={{}} />
+                                </HomePresentation>
+                            </Provider>)} />
                     </Router>
                 </ComponentWithContext>
             ), target) as ComponentWithContext;
