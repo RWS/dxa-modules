@@ -1,12 +1,12 @@
 import { connect } from "react-redux";
-import { HomePresentation } from "./HomePresentation";
+import { HomePresentation, IHomeProps } from "./HomePresentation";
 import { IState } from "store/interfaces/State";
-import { getCurrentPub, isConditionsDialogVisible } from "store/reducers/Reducer";
+import { isConditionsDialogVisible } from "store/reducers/Reducer";
 import { localization } from "services/common/LocalizationService";
 
-const mapStateToProps = (state: IState): {} => ({
+const mapStateToProps = (state: IState, ownProps: IHomeProps): {} => ({
     direction: localization.getDirection(state.language),
-    publicationId: getCurrentPub(state).publicationId,
+    publicationId: ownProps.params.publicationId,
     isConditionsDialogVisible: isConditionsDialogVisible(state)
 });
 

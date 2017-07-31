@@ -54,6 +54,21 @@ export interface IHomeState {
 }
 
 /**
+ * Home props params
+ *
+ * @export
+ * @interface IHomePropsParams
+ */
+export interface IHomePropsParams {
+    /**
+     * Selected publication Id
+     *
+     * @type {string}
+     */
+    publicationId: string;
+}
+
+/**
  * Home props
  *
  * @export
@@ -61,11 +76,11 @@ export interface IHomeState {
  */
 export interface IHomeProps {
     /**
-     * Selected publication Id
+     * Home props params
      *
      * @type {string}
      */
-    publicationId: string;
+    params: IHomePropsParams;
 
     /**
      * Children
@@ -126,7 +141,7 @@ export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
      * Invoked once, both on the client and server, immediately before the initial rendering occurs.
      */
     public componentWillMount(): void {
-        const { publicationId } = this.props;
+        const { publicationId } = this.props.params;
         if (browserHistory) {
             this._historyUnlisten = browserHistory.listen(this._onNavigated.bind(this));
         }
@@ -151,8 +166,8 @@ export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
      * @param {IHomeState} nextState Next state
      */
     public componentWillUpdate(nextProps: IHomeProps, nextState: IHomeState): void {
-        const { publicationId } = this.props;
-        const { publicationId: nextPublicationId } = nextProps;
+        const { publicationId } = this.props.params;
+        const { publicationId: nextPublicationId } = nextProps.params;
 
         if (nextPublicationId !== publicationId) {
             this._updateSearchPlaceholder(nextPublicationId);
@@ -160,7 +175,7 @@ export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
     }
 
     public componentWillReceiveProps(nextProps: IHomeProps): void {
-        this._updateSearchPlaceholder(nextProps.publicationId);
+        this._updateSearchPlaceholder(nextProps.params.publicationId);
     }
 
     /**
@@ -170,14 +185,10 @@ export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
      */
     public render(): JSX.Element {
         const { isNavOpen, searchIsOpen, searchIsOpening, searchIsActive, searchTitle } = this.state;
-        const { direction, isConditionsDialogVisible } = this.props;
+        const { direction, isConditionsDialogVisible, children, params } = this.props;
 
-        // This is a HACK!!! Not a fan of it, but it is quick fix for now
-        // Get child props params for recognize route - It is weird!
-        // tslint:disable-next-line:no-any
-        const children = this.props.children as any;
-        const isPublicationContent = children.props.params && children.props.params.publicationId;
-        const hasPublication = isPublicationContent !== undefined;
+        const publicationId = params.publicationId;
+        const hasPublication = publicationId !== undefined;
 
         const appClass = ClassNames(direction || "ltr", "sdl-dita-delivery-app", {
             "open": hasPublication && isNavOpen,
@@ -225,7 +236,7 @@ export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
                     onSearch={
                         query => {
                             if (browserHistory) {
-                                browserHistory.push(Url.getSearchUrl(query, children.props.params && children.props.params.publicationId));
+                                browserHistory.push(Url.getSearchUrl(query, publicationId));
                             }
                             onBlur();
                         }
