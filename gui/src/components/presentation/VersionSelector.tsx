@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as PropTypes from "prop-types";
 import { IAppContext } from "@sdl/dd/container/App/App";
 import { DropdownList } from "@sdl/controls-react-wrappers";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
@@ -40,5 +41,5 @@ export const VersionSelector: React.StatelessComponent<IVersionSelectorProps> =
     };
 
 VersionSelector.contextTypes = {
-    services: React.PropTypes.object.isRequired
+    services: PropTypes.object.isRequired
 } as React.ValidationMap<IAppContext>;

@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as PropTypes from "prop-types";
 import { IServices } from "interfaces/Services";
 import { PageService } from "test/mocks/services/PageService";
 import { PublicationService } from "test/mocks/services/PublicationService";
@@ -48,12 +49,12 @@ const services: IServices = {
 export class ComponentWithContext extends React.Component<IComponentWithContextProps, {}> {
 
     public static childContextTypes: React.ValidationMap<IComponentWithContextContext> = {
-        services: React.PropTypes.object,
-        router: React.PropTypes.object
+        services: PropTypes.object,
+        router: PropTypes.object
     };
 
     public static contextTypes: React.ValidationMap<IComponentWithContextContext> = {
-        router: React.PropTypes.object
+        router: PropTypes.object
     };
 
     public context: IComponentWithContextContext;

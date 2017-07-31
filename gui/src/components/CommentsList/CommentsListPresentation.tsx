@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as PropTypes from "prop-types";
 import { Comment } from "@sdl/dd/Comment/Comment";
 import { IComment, ICommentDate } from "interfaces/ServerModels";
 import { IAppContext } from "@sdl/dd/container/App/App";
@@ -26,7 +27,7 @@ export class CommentsListPresentation extends React.Component<ICommentsListProps
      * @type {React.ValidationMap<IAppContext>}
      */
     public static contextTypes: React.ValidationMap<IAppContext> = {
-        services: React.PropTypes.object.isRequired
+        services: PropTypes.object.isRequired
     };
 
     /**
@@ -65,9 +66,9 @@ export class CommentsListPresentation extends React.Component<ICommentsListProps
                 {displayedComments.map((comment, index) => {
                     return <Comment
                         key={comment.id}
-                        content={unescape(comment.content)}
-                        creationDate={calcCreationDate(comment.creationDate)}
-                        userName={unescape(comment.user.name)} />;
+                        content={unescape(comment.content) }
+                        creationDate={calcCreationDate(comment.creationDate) }
+                        userName={unescape(comment.user.name) } />;
                 })}
                 {totalCommentsCount > displayedCommentsCount && <div className="sdl-dita-delivery-comments-list-more">
                     <button className="sdl-button graphene sdl-button-purpose-ghost" onClick={this.showMoreComments}>{formatMessage("component.comments.list.more")}</button>

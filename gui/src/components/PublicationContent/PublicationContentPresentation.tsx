@@ -1,5 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import * as PropTypes from "prop-types";
 import { browserHistory } from "react-router";
 import { Promise } from "es6-promise";
 import { IAppContext } from "@sdl/dd/container/App/App";
@@ -164,7 +165,7 @@ export type Pub = IPublicationContentProps & IPublicationCurrentState;
 export class PublicationContentPresentation extends React.Component<Pub, IPublicationContentState> {
 
     public static contextTypes: React.ValidationMap<IAppContext> = {
-        services: React.PropTypes.object.isRequired
+        services: PropTypes.object.isRequired
     };
 
     public context: IAppContext;

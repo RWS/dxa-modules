@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as PropTypes from "prop-types";
 import { IAppContext } from "@sdl/dd/container/App/App";
 import { FetchComments, IFetchCommentsProperties } from "@sdl/dd/helpers/FetchComments";
 import { CommentsList } from "@sdl/dd/CommentsList/CommentsList";
@@ -68,7 +69,7 @@ export class CommentsSectionsPresentation extends React.Component<ICommentsSecti
      * @type {React.ValidationMap<IAppContext>}
      */
     public static contextTypes: React.ValidationMap<IAppContext> = {
-        services: React.PropTypes.object.isRequired
+        services: PropTypes.object.isRequired
     };
 
     /**

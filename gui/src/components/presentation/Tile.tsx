@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as PropTypes from "prop-types";
 import { Promise } from "es6-promise";
 import { IAppContext } from "@sdl/dd/container/App/App";
 import { String as StringHelper } from "utils/String";
@@ -108,7 +109,7 @@ export class Tile extends React.Component<ITileProps, ITileState> {
      * @memberOf Tile
      */
     public static contextTypes: React.ValidationMap<IAppContext> = {
-        services: React.PropTypes.object.isRequired
+        services: PropTypes.object.isRequired
     };
 
     /**

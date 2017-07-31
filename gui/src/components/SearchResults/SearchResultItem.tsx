@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as PropTypes from "prop-types";
 import { IAppContext } from "@sdl/dd/container/App/App";
 import { ISearchQueryResult } from "interfaces/Search";
 
@@ -82,5 +83,5 @@ export const SearchResultItem: React.StatelessComponent<ISearchResultItemProps> 
     };
 
 SearchResultItem.contextTypes = {
-    services: React.PropTypes.object.isRequired
+    services: PropTypes.object.isRequired
 } as React.ValidationMap<IAppContext>;

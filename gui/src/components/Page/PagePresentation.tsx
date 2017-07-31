@@ -2,6 +2,7 @@ import * as ClassNames from "classnames";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as Prism from "prismjs";
+import * as PropTypes from "prop-types";
 
 import { browserHistory } from "react-router";
 import { ActivityIndicator, Button } from "@sdl/controls-react-wrappers";
@@ -132,7 +133,7 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
      * @type {React.ValidationMap<IAppContext>}
      */
     public static contextTypes: React.ValidationMap<IAppContext> = {
-        services: React.PropTypes.object.isRequired
+        services: PropTypes.object.isRequired
     };
 
     /**

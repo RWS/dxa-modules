@@ -1,6 +1,7 @@
 import * as ClassNames from "classnames";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import * as PropTypes from "prop-types";
 import { browserHistory } from "react-router";
 import { IAppContext } from "@sdl/dd/container/App/App";
 import { TopBar } from "@sdl/dd/presentation/TopBar";
@@ -111,7 +112,7 @@ export interface IHomeProps {
 export class HomePresentation extends React.Component<IHomeProps, IHomeState> {
 
     public static contextTypes: React.ValidationMap<IAppContext> = {
-        services: React.PropTypes.object.isRequired
+        services: PropTypes.object.isRequired
     };
 
     public context: IAppContext;

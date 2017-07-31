@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as PropTypes from "prop-types";
 import { browserHistory } from "react-router";
 import { Promise } from "es6-promise";
 import { ButtonPurpose } from "@sdl/controls";
@@ -43,7 +44,7 @@ export interface IProductFamiliesListState {
 export class ProductFamiliesList extends React.Component<{}, IProductFamiliesListState> {
 
     public static contextTypes: React.ValidationMap<IAppContext> = {
-        services: React.PropTypes.object.isRequired
+        services: PropTypes.object.isRequired
     };
 
     public context: IAppContext;

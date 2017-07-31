@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { fetchPublications } from "store/actions/Api";
 import { IAppContext } from "@sdl/dd/container/App/App";
@@ -32,7 +33,7 @@ class Fetch extends React.Component<IFetchPublications, {}> {
      * Context types
      */
     public static contextTypes: React.ValidationMap<IAppContext> = {
-        services: React.PropTypes.object.isRequired
+        services: PropTypes.object.isRequired
     };
 
     /**
