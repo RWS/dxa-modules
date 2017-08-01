@@ -102,9 +102,10 @@ export const fetchPublications = (publicationService: IPublicationService,
  * @param {string} pageId
  * @returns {Function}
  */
-export const fetchPage = (pageService: IPageService, pubId: string, pageId: string, conditions?: IConditionMap): IDispatcherFunction => {
-    return (dispatch, state) => {
-        const pageCondtions = conditions || getLastConditions(state, pageId);
+export const fetchPage = (pageService: IPageService, pubId: string, pageId: string, conditions?: IConditionMap): IDispatcherAndStateFunction => {
+    return (dispatch, getState): void => {
+        const state = getState();
+        const pageCondtions = conditions || getLastConditions(state, pubId);
         const key = getPageKey(state, pubId, pageId, pageCondtions);
         dispatch(pageLoading(key));
         pageService
