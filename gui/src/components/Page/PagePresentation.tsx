@@ -155,6 +155,8 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
         this.state = {
             navItems: []
         };
+
+        this.fetchPage = this.fetchPage.bind(this);
     }
 
     /**
