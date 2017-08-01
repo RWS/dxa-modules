@@ -70,7 +70,15 @@ export const translateProductReleaseVersion = (productReleaseVersion: string): s
 export const translateProductReleaseVersions = (versions: IProductReleaseVersion[]): IProductReleaseVersion[] => ReleaseVersions.translateProductReleaseVersions(versions);
 
 // Comments selectors
-export const getCommentsByPageId = (state: IState, pageId: string): IComment[] => Comments.getByPageId(state.comments, pageId);
-export const getCommentErrorMessage = (state: IState, pageId: string): string => Comments.getErrorMessage(state.comments, pageId);
-export const getPostCommentErrorMessage = (state: IState, pageId: string): string => Comments.getPostErrorMessage(state.comments, pageId);
-export const isCommentSaving = (state: IState, pageId: string): boolean => Comments.isSaving(state.comments, pageId);
+export const getCommentsKey = (pubId: string, pageId: string) => {
+    return `${pubId}|${pageId}`;
+};
+
+export const getComments = (state: IState, pubId: string, pageId: string): IComment[] =>
+    Comments.getById(state.comments, getCommentsKey(pubId, pageId));
+export const getCommentErrorMessage = (state: IState, pubId: string, pageId: string): string =>
+    Comments.getErrorMessage(state.comments, getCommentsKey(pubId, pageId));
+export const getPostCommentErrorMessage = (state: IState, pubId: string, pageId: string): string =>
+    Comments.getPostErrorMessage(state.comments, getCommentsKey(pubId, pageId));
+export const isCommentSaving = (state: IState, pubId: string, pageId: string): boolean =>
+    Comments.isSaving(state.comments, getCommentsKey(pubId, pageId));

@@ -5,12 +5,12 @@ export interface ICommentsMap {
 }
 
 export interface ICommentsPayload {
-    pageId: string;
+    key: string;
     comments: IComment[];
 }
 
 export interface ICommentPayload {
-    pageId: string;
+    key: string;
     comment: IComment;
 }
 
@@ -19,11 +19,11 @@ export interface ICommentsError {
 }
 
 export interface ICommentErrorsMap {
-    [pageId: string]: string;
+    [key: string]: string;
 }
 
 export interface IComments {
-    byPageId: { [pageId: string]: IComment[]};
+    byId: { [key: string]: IComment[]};
     loading: string[];
     saving: string[];
     errors: ICommentErrorsMap;
