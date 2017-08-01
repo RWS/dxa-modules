@@ -25,7 +25,7 @@ const EMPTY_STATE: IState = {
         editingConditions: {}
     },
     comments: {
-        byPageId: {},
+        byId: {},
         loading: [],
         saving: [],
         errors: {},

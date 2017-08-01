@@ -22,9 +22,9 @@ export class PageService implements IPageService {
      *
      * @protected
      * @static
-     * @type {{ [pageId: string]: Comments }}
+     * @type {{ [key: string]: Comments }}
      */
-    protected static CommentsModels: { [pageId: string]: Comments | undefined };
+    protected static CommentsModels: { [key: string]: Comments | undefined };
 
     /**
      * Page models
@@ -121,11 +121,14 @@ export class PageService implements IPageService {
      * @memberof PageService
      */
     public saveComment(commentData: IPostComment): Promise<IComment> {
+        // We need this list to invalidate the date further. So far only pubId and pageId combination is used as key
+        const comments = this.getCommentsModel(commentData.publicationId, commentData.pageId, false, 0, 0, []);
         const comment = new Comment(commentData);
         return new Promise((resolve: (data?: IComment) => void, reject: (error: string | null) => void) => {
             let removeEventListeners: () => void;
             const onLoad = () => {
                 removeEventListeners();
+                comments.unload();
                 resolve(comment.getComment());
             };
             const onLoadFailed = (event: Event & { data: { error: string } }) => {
@@ -161,22 +164,23 @@ export class PageService implements IPageService {
     }
 
     private getCommentsModel(publicationId: string, pageId: string, descending: boolean, top: number, skip: number, status: number[]): Comments {
-        this.ensureCommentsModel(pageId);
+        const key = this._getKey(publicationId, pageId);
+        this.ensureCommentsModel(key);
 
-        if (!PageService.CommentsModels[pageId]) {
-            PageService.CommentsModels[pageId] = new Comments(publicationId, pageId, descending, top, skip, status);
+        if (!PageService.CommentsModels[key]) {
+            PageService.CommentsModels[key] = new Comments(publicationId, pageId, descending, top, skip, status);
         }
 
-        return PageService.CommentsModels[pageId] as Comments;
+        return PageService.CommentsModels[key] as Comments;
     }
 
-    private ensureCommentsModel(pageId: string): void {
+    private ensureCommentsModel(key: string): void {
         if (!PageService.CommentsModels) {
             PageService.CommentsModels = {};
         }
 
-        if (!PageService.CommentsModels[pageId]) {
-            PageService.CommentsModels[pageId] = undefined;
+        if (!PageService.CommentsModels[key]) {
+            PageService.CommentsModels[key] = undefined;
         }
     }
 

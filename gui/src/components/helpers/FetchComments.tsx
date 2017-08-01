@@ -87,7 +87,8 @@ class Fetch extends React.Component<IFetchComments & IFetchCommentsProperties, {
      * Invoked immediately after the component's updates are flushed to the DOM. This method is not called for the initial render.
      */
     public shouldComponentUpdate(nextProps: IFetchComments): boolean {
-        return this.props.pageId !== nextProps.pageId;
+        const { pageId, publicationId } = this.props;
+        return (pageId !== nextProps.pageId) || (publicationId !== nextProps.publicationId);
     }
 
     /**
