@@ -22,9 +22,9 @@ export class PageService implements IPageService {
      *
      * @protected
      * @static
-     * @type {{ [pageId: string]: Comments }}
+     * @type {{ [key: string]: Comments }}
      */
-    protected static CommentsModels: { [pageId: string]: Comments | undefined };
+    protected static CommentsModels: { [key: string]: Comments | undefined };
 
     /**
      * Page models
@@ -161,22 +161,23 @@ export class PageService implements IPageService {
     }
 
     private getCommentsModel(publicationId: string, pageId: string, descending: boolean, top: number, skip: number, status: number[]): Comments {
-        this.ensureCommentsModel(pageId);
+        const key = this._getKey(publicationId, pageId);
+        this.ensureCommentsModel(key);
 
-        if (!PageService.CommentsModels[pageId]) {
-            PageService.CommentsModels[pageId] = new Comments(publicationId, pageId, descending, top, skip, status);
+        if (!PageService.CommentsModels[key]) {
+            PageService.CommentsModels[key] = new Comments(publicationId, pageId, descending, top, skip, status);
         }
 
-        return PageService.CommentsModels[pageId] as Comments;
+        return PageService.CommentsModels[key] as Comments;
     }
 
-    private ensureCommentsModel(pageId: string): void {
+    private ensureCommentsModel(key: string): void {
         if (!PageService.CommentsModels) {
             PageService.CommentsModels = {};
         }
 
-        if (!PageService.CommentsModels[pageId]) {
-            PageService.CommentsModels[pageId] = undefined;
+        if (!PageService.CommentsModels[key]) {
+            PageService.CommentsModels[key] = undefined;
         }
     }
 

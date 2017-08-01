@@ -17,7 +17,7 @@ import {
     updateCurrentPublication
 } from "./Actions";
 
-import { getPubById, getPubList, getLastConditions, getPageKey } from "store/reducers/Reducer";
+import { getPubById, getPubList, getLastConditions, getPageKey, getCommentsKey } from "store/reducers/Reducer";
 import { IState } from "store/interfaces/State";
 import { IConditionMap } from "store/interfaces/Conditions";
 
@@ -66,12 +66,12 @@ export const conditionsLoading = createAction(CONDITIONES_LOADING, (pubId: strin
 export const conditionsLoaded = createAction(CONDITIONES_LOADED, (pubId: string, conditions: IConditionMap) => ({ pubId, conditions }));
 export const conditionsError = createAction(CONDITIONES_ERROR, (pubId: string, error: {}) => ({ pubId, error }));
 
-export const commentsLoading = createAction(COMMENTS_LOADING, (pageId: string) => pageId);
-export const commentsLoaded = createAction(COMMENTS_LOADED, (pageId: string, comments: IComment[]) => ({ pageId, comments }));
-export const commentsError = createAction(COMMENTS_ERROR, (pageId: string, error: {}) => ({ pageId, error }));
-export const commentSaving = createAction(COMMENT_SAVING, (pageId: string) => pageId);
-export const commentError = createAction(COMMENT_ERROR, (pageId: string, error: {}) => ({ pageId, error }));
-export const commentSaved = createAction(COMMENT_SAVED, (pageId: string, comment: IComment) => ({ pageId, comment }));
+export const commentsLoading = createAction(COMMENTS_LOADING, (key: string) => key);
+export const commentsLoaded = createAction(COMMENTS_LOADED, (key: string, comments: IComment[]) => ({ key, comments }));
+export const commentsError = createAction(COMMENTS_ERROR, (key: string, error: {}) => ({ key, error }));
+export const commentSaving = createAction(COMMENT_SAVING, (key: string) => key);
+export const commentError = createAction(COMMENT_ERROR, (key: string, error: {}) => ({ key, error }));
+export const commentSaved = createAction(COMMENT_SAVED, (key: string, comment: IComment) => ({ key, comment }));
 
 /**
  * Publications fetcher
@@ -110,8 +110,8 @@ export const fetchPage = (pageService: IPageService, pubId: string, pageId: stri
         pageService
             .getPageInfo(pubId, pageId, pageCondtions)
             .then(
-                (page) => dispatch(pageLoaded(page, key)),
-                (errorMessage) => dispatch(pageError(key, errorMessage))
+            (page) => dispatch(pageLoaded(page, key)),
+            (errorMessage) => dispatch(pageError(key, errorMessage))
             );
     };
 };
@@ -123,8 +123,8 @@ export const fetchProductReleaseVersions = (publicationService: IPublicationServ
         publicationService
             .getProductReleaseVersionsByPublicationId(pubId)
             .then(
-                (releaseVersions) => dispatch(releaseVersionsLoaded(pubId, releaseVersions)),
-                (errorMessage) => dispatch(releaseVersionsLoaded(pubId, [{ title: errorMessage, value: "" }]))
+            (releaseVersions) => dispatch(releaseVersionsLoaded(pubId, releaseVersions)),
+            (errorMessage) => dispatch(releaseVersionsLoaded(pubId, [{ title: errorMessage, value: "" }]))
             );
     };
 };
@@ -135,8 +135,8 @@ export const fetchProductReleaseVersionsByProductFamily = (publicationService: I
         publicationService
             .getProductReleaseVersions(productFamily)
             .then(
-                (releaseVersions) => dispatch(releaseVersionsLoaded(productFamily, releaseVersions)),
-                (errorMessage) => dispatch(releaseVersionsLoaded(productFamily, [{ title: errorMessage, value: "" }]))
+            (releaseVersions) => dispatch(releaseVersionsLoaded(productFamily, releaseVersions)),
+            (errorMessage) => dispatch(releaseVersionsLoaded(productFamily, [{ title: errorMessage, value: "" }]))
             );
     };
 };
@@ -149,38 +149,39 @@ export const fetchConditions = (publicationService: IPublicationService, pubId: 
         publicationService
             .getConditions(pubId)
             .then(
-                data => dispatch(conditionsLoaded(pubId, data)),
-                error => dispatch(conditionsError(pubId, error))
+            data => dispatch(conditionsLoaded(pubId, data)),
+            error => dispatch(conditionsError(pubId, error))
             );
     };
 };
 
 export const fetchComments = (pageService: IPageService, publicationId: string, pageId: string,
     descending: boolean, top: number, skip: number, status: number[]): IDispatcherFunction => {
-
+    const key = getCommentsKey(publicationId, pageId);
     return dispatch => {
-        dispatch(commentsLoading(pageId));
+        dispatch(commentsLoading(key));
         /* need something that works for server rendering */
 
         pageService
             .getComments(publicationId, pageId, descending, top, skip, status)
             .then(
-                data => dispatch(commentsLoaded(pageId, data)),
-                error => dispatch(commentsError(pageId, { message: error }))
+            data => dispatch(commentsLoaded(key, data)),
+            error => dispatch(commentsError(key, { message: error }))
             );
     };
 };
 
 export const saveComment = (pageService: IPageService, commentData: IPostComment): IDispatcherFunction => {
-    const pageId = commentData.pageId;
+    const { pageId, publicationId } = commentData;
+    const key = getCommentsKey(publicationId, pageId);
     return dispatch => {
-        dispatch(commentSaving(pageId));
+        dispatch(commentSaving(key));
 
         pageService
             .saveComment(commentData)
             .then(
-                data => dispatch(commentSaved(pageId, data)),
-                error => dispatch(commentError(pageId, { message: error }))
+            data => dispatch(commentSaved(key, data)),
+            error => dispatch(commentError(key, { message: error }))
             );
     };
 };
