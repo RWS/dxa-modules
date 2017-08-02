@@ -17,7 +17,7 @@ const EMPTY_STATE: IState = {
     conditions: {
         showDialog: false,
         allConditions: {
-            byId: {},
+            byPubId: {},
             loading: [],
             errors: {}
         },
@@ -25,7 +25,7 @@ const EMPTY_STATE: IState = {
         editingConditions: {}
     },
     comments: {
-        byPageId: {},
+        byId: {},
         loading: [],
         saving: [],
         errors: {},
