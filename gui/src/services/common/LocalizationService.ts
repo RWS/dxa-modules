@@ -39,9 +39,9 @@ export class LocalizationService implements ILocalizationService {
      * @memberOf LocalizationService
      */
     public rtlLanguages: string[] = ["ar", "dv", "fa", "he", "iw", "ps", "ur",
-	                                 "ar-ae", "ar-bh", "ar-dz", "ar-eg", "ar-iq", "ar-jo", "ar-kw", "ar-lb",
-	                                 "ar-ly", "ar-ma", "ar-om", "ar-qa", "ar-sa", "ar-sy", "ar-tn", "ar-ye",
-	                                 "dv-mv", "fa-ir", "he-il", "ps-ar", "ur-pk"];
+                                     "ar-ae", "ar-bh", "ar-dz", "ar-eg", "ar-iq", "ar-jo", "ar-kw", "ar-lb",
+                                     "ar-ly", "ar-ma", "ar-om", "ar-qa", "ar-sa", "ar-sy", "ar-tn", "ar-ye",
+                                     "dv-mv", "fa-ir", "he-il", "ps-ar", "ur-pk"];
 
     private language: string;
 
