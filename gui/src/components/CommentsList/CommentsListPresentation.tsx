@@ -3,6 +3,7 @@ import * as PropTypes from "prop-types";
 import { Comment } from "@sdl/dd/Comment/Comment";
 import { IComment, ICommentDate } from "interfaces/ServerModels";
 import { IAppContext } from "@sdl/dd/container/App/App";
+import { unescape } from "lodash";
 
 import "@sdl/dd/CommentsList/styles/CommentsList";
 
@@ -61,13 +62,17 @@ export class CommentsListPresentation extends React.Component<ICommentsListProps
 
         return (
             <div className="sdl-dita-delivery-comments-list">
-                {totalCommentsCount > 0 && <span>{formatMessage("components.commentslist.comments", [totalCommentsCount.toString()])}</span>}
+                {totalCommentsCount > 0 && <span>{formatMessage("components.commentslist.comments", [totalCommentsCount.toString()]) }</span>}
                 {displayedComments.map((comment, index) => {
-                    return <Comment key={comment.id} userName={comment.user.name} creationDate={calcCreationDate(comment.creationDate)} content={comment.content} />;
-                })}
+                    return <Comment
+                        key={comment.id}
+                        content={unescape(comment.content) }
+                        creationDate={calcCreationDate(comment.creationDate) }
+                        userName={unescape(comment.user.name) } />;
+                }) }
                 {totalCommentsCount > displayedCommentsCount && <div className="sdl-dita-delivery-comments-list-more">
-                    <button className="sdl-button graphene sdl-button-purpose-ghost" onClick={this.showMoreComments}>{formatMessage("component.comments.list.more")}</button>
-                    <div>{formatMessage("component.comments.list.amount", [displayedCommentsCount.toString(), totalCommentsCount.toString()])}</div>
+                    <button className="sdl-button graphene sdl-button-purpose-ghost" onClick={this.showMoreComments}>{formatMessage("component.comments.list.more") }</button>
+                    <div>{formatMessage("component.comments.list.amount", [displayedCommentsCount.toString(), totalCommentsCount.toString()]) }</div>
                 </div>}
             </div>
         );
