@@ -8,7 +8,7 @@ import { union } from "lodash";
 
 const knownLanguages = localization.getLanguages().map(language => language.iso);
 
-const toDropdownFormat = (language: string) => ({"text": localization.isoToName(language), "value": language});
+const toDropdownFormat = (language: string) => ({"text": localization.isoToName(language), "value": language, "direction": localization.getDirection(language)});
 
 const mapStateToProps = (state: IState): {} => {
     const pubsLanguages = getPubList(state)
@@ -18,7 +18,7 @@ const mapStateToProps = (state: IState): {} => {
 
     return {
         selected: toDropdownFormat(state.language),
-        items:  union(knownLanguages, pubsLanguages).map(toDropdownFormat)
+        items: union(knownLanguages, pubsLanguages).map(toDropdownFormat)
     };
 };
 
