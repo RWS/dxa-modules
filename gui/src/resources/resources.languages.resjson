@@ -239,7 +239,7 @@
   {"name": "Bahasa Indonesia (Indonesia)", "iso": "id-id"},
   {"name": "italiano (Svizzera)", "iso": "it-ch"},
   {"name": "italiano (Italia)", "iso": "it-it"},
-  {"name": "日本語 (日本)", "iso": "ja-jp"},
+  {"name": "日本語（日本）", "iso": "ja-jp"},
   {"name": "Қазақ (Қазақстан)", "iso": "kk-kz"},
   {"name": "ಕನ್ನಡ (ಭಾರತ)", "iso": "kn-in"},
   {"name": "한국어(한국)", "iso": "ko-kr"},
@@ -283,9 +283,9 @@
   {"name": "O'zbekcha (O'zbekiston)", "iso": "uz-latn"},
   {"name": "Tiếng Việt (Việt Nam)", "iso": "vi-vn"},
   {"name": "isiXhosa (uMzantsi Afrika)", "iso": "xh-za"},
-  {"name": "中文 (中华人民共和国)", "iso": "zh-cn"},
-  {"name": "中文 (香港特別行政區)", "iso": "zh-hk"},
-  {"name": "中文 (新加坡共和国)", "iso": "zh-sg"},
-  {"name": "中文 (台灣)", "iso": "zh-tw"},
+  {"name": "中文（中华人民共和国）", "iso": "zh-cn"},
+  {"name": "中文（香港特別行政區）", "iso": "zh-hk"},
+  {"name": "中文（新加坡共和国）", "iso": "zh-sg"},
+  {"name": "中文（台灣)", "iso": "zh-tw"},
   {"name": "isiZulu (iNingizimu Afrika)", "iso": "zu-za"}
 ]
