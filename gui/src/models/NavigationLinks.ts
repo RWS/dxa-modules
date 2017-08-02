@@ -7,6 +7,20 @@ import { Url } from "utils/Url";
 import { localization } from "services/common/LocalizationService";
 import { IConditionMap, IPostConditionRequest, IPostConditions } from "store/interfaces/Conditions";
 
+const toTaxonomy: (item: ISitemapItem) =>
+    ITaxonomy = (item: ISitemapItem) => ({
+        id: item.Id,
+        title: item.Title,
+        url: item.Url,
+        hasChildNodes: item.HasChildNodes
+    });
+
+const getTaxonomyItems: (parentId: string, sitemapItems: ISitemapItem[]) =>
+    { parentId: string, items: ITaxonomy[] } = (parentId: string, sitemapItems: ISitemapItem[]) => ({
+        parentId,
+        items: sitemapItems.map(toTaxonomy)
+    });
+
 /**
  * Navigation links model
  *
@@ -95,107 +109,31 @@ export class NavigationLinks extends LoadableObject {
         super._processLoadResult(result, webRequest);
     }
 
-    // private _calculatePath(navigationLinks: ISitemapItem[]): ITaxonomy[] {
-    //     const path: ITaxonomy[] = [];
-    //     if (navigationLinks && navigationLinks.length > 0) {
-    //         let parentId = navigationLinks[0].Id || "";
-    //         let items: ISitemapItem[] = navigationLinks[0].Items;
-    //         const getTaxonomyItems = (sitemapItems: ISitemapItem[]): { parentId: string, items: ITaxonomy[] } => {
-    //             const children = sitemapItems.map(item => {
-    //                 return {
-    //                     id: item.Id,
-    //                     title: item.Title,
-    //                     url: item.Url,
-    //                     hasChildNodes: item.HasChildNodes
-    //                 };
-    //             }) as ITaxonomy[];
-    //             return {
-    //                 parentId: parentId,
-    //                 items: children
-    //             };
-    //         };
-    //         this._pathWithSiblings = this._pathWithSiblings.concat(getTaxonomyItems(items));
-    //         while (items && items.length > 0) {
-    //             for (const item of items) {
-    //                 if (item.Id && item.Id === this._taxonomyId) {
-    //                     path.push({
-    //                         id: item.Id,
-    //                         title: item.Title,
-    //                         url: item.Url,
-    //                         hasChildNodes: item.HasChildNodes
-    //                     });
-    //                     return path;
-    //                 }
-    //                 // If there is a child which has child items the node is nested in a deeper level
-    //                 // No need to loop over the entire collection
-    //                 if (item.Items.length > 0) {
-    //                     path.push({
-    //                         id: item.Id,
-    //                         title: item.Title,
-    //                         url: item.Url,
-    //                         hasChildNodes: item.HasChildNodes
-    //                     });
-    //                     parentId = item.Id || "";
-    //                     items = item.Items;
-    //                     this._pathWithSiblings = this._pathWithSiblings.concat(getTaxonomyItems(items));
-    //                     break;
-    //                 }
-    //             }
-    //         }
-    //     }
-    //     return path;
-    // }
-
-    private(navigationLinks: ISitemapItem[]): ITaxonomy[] {
-
     private _calculatePath(navigationLinks: ISitemapItem[]): ITaxonomy[] {
         const path: ITaxonomy[] = [];
         if (navigationLinks && navigationLinks.length > 0) {
-            let parentId = navigationLinks[0].Id || "";
-            let items: ISitemapItem[] = navigationLinks[0].Items;
-            this._pathWithSiblings = this._pathWithSiblings.concat({ parentId, items: this._getTaxonomyItems(items) });
-            return this._getPathFromItems(items, parentId);
+            this._calculateChildPath(path, navigationLinks[0]);
         }
         return path;
     }
 
-    private _getTaxonomyItems(sitemapItems: ISitemapItem[]): ITaxonomy[] {
-        return sitemapItems.map(item => ({
-            id: item.Id,
-            title: item.Title,
-            url: item.Url,
-            hasChildNodes: item.HasChildNodes
-        } as ITaxonomy));
-    }
+    private _calculateChildPath(path: ITaxonomy[], item: ISitemapItem): void {
+        let parentId = item.Id || "";
+        let items: ISitemapItem[] = item.Items;
+        this._pathWithSiblings = this._pathWithSiblings.concat(getTaxonomyItems(parentId, items));
 
-    private _getPathFromItems(items: ISitemapItem[], parentId: string): ITaxonomy[] {
-        const path: ITaxonomy[] = [];
         for (const item of items) {
             if (item.Id && item.Id === this._taxonomyId) {
-                path.push({
-                    id: item.Id,
-                    title: item.Title,
-                    url: item.Url,
-                    hasChildNodes: item.HasChildNodes
-                });
-                return path;
+                path.push(toTaxonomy(item));
+                break;
             }
             // If there is a child which has child items the node is nested in a deeper level
             // No need to loop over the entire collection
-            const childItems = item.Items;
-            if (childItems.length > 0) {
-                path.push({
-                    id: item.Id,
-                    title: item.Title,
-                    url: item.Url,
-                    hasChildNodes: item.HasChildNodes
-                });
-                parentId = item.Id || "";
-                path.push(...this._getPathFromItems(childItems, parentId))
-                this._pathWithSiblings = this._pathWithSiblings.concat({ parentId, items: this._getTaxonomyItems(items) });
+            if (item.Items.length > 0) {
+                path.push(toTaxonomy(item));
+                this._calculateChildPath(path, item)
                 break;
             }
         }
-        return path;
     }
 }
