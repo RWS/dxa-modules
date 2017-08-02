@@ -117,9 +117,9 @@ export class NavigationLinks extends LoadableObject {
         return path;
     }
 
-    private _calculateChildPath(path: ITaxonomy[], item: ISitemapItem): void {
-        let parentId = item.Id || "";
-        let items: ISitemapItem[] = item.Items;
+    private _calculateChildPath(path: ITaxonomy[], parentItem: ISitemapItem): void {
+        const parentId = parentItem.Id || "";
+        const items: ISitemapItem[] = parentItem.Items;
         this._pathWithSiblings = this._pathWithSiblings.concat(getTaxonomyItems(parentId, items));
 
         for (const item of items) {
@@ -131,7 +131,7 @@ export class NavigationLinks extends LoadableObject {
             // No need to loop over the entire collection
             if (item.Items.length > 0) {
                 path.push(toTaxonomy(item));
-                this._calculateChildPath(path, item)
+                this._calculateChildPath(path, item);
                 break;
             }
         }
