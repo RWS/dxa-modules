@@ -6,7 +6,7 @@ import { ActivityIndicator, Button } from "@sdl/controls-react-wrappers";
 import { IProductFamily } from "interfaces/ProductFamily";
 import { IAppContext } from "@sdl/dd/container/App/App";
 import { TilesList } from "@sdl/dd/container/TilesList/TilesList";
-import { ITile } from "@sdl/dd/presentation/Tile";
+import { ITile, WARNING_TYPES } from "@sdl/dd/presentation/Tile";
 import { Error } from "@sdl/dd/presentation/Error";
 import { Url } from "utils/Url";
 import { DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE } from "models/Publications";
@@ -102,6 +102,7 @@ export class ProductFamiliesList extends React.Component<{}, IProductFamiliesLis
                                             title: title,
                                             loadableContent: description ? () => Promise.resolve(description) : undefined,
                                             hasWarning: productFamily.hasWarning,
+                                            warningType: WARNING_TYPES.CRITICAL,
                                             navigateTo: () => {
                                                 /* istanbul ignore else */
                                                 if (browserHistory) {

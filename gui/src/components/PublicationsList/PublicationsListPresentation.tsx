@@ -6,7 +6,7 @@ import { ActivityIndicator, Button } from "@sdl/controls-react-wrappers";
 
 import { Error } from "@sdl/dd/presentation/Error";
 import { TilesList } from "@sdl/dd/container/TilesList/TilesList";
-import { ITile } from "@sdl/dd/presentation/Tile";
+import { ITile, WARNING_TYPES } from "@sdl/dd/presentation/Tile";
 import { IAppContext } from "@sdl/dd/container/App/App";
 import { FetchPublications } from "components/helpers/FetchPublications";
 import { Url } from "utils/Url";
@@ -189,6 +189,7 @@ export class PublicationsListPresentation extends React.Component<IPublicationsL
                                             return this._getLoadableContent(publication.id);
                                         },
                                         hasWarning: publication.language && publication.language !== uiLanguage,
+                                        warningType: WARNING_TYPES.INFO,
                                         navigateTo: () => {
                                             /* istanbul ignore else */
                                             if (browserHistory) {

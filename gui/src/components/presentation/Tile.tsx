@@ -4,6 +4,7 @@ import { IAppContext } from "@sdl/dd/container/App/App";
 import { String as StringHelper } from "utils/String";
 import { ActivityIndicator, Button } from "@sdl/controls-react-wrappers";
 import { ButtonPurpose } from "@sdl/controls";
+import * as ClassNames from "classnames";
 
 import "components/controls/styles/ActivityIndicator";
 import "components/controls/styles/Button";
@@ -11,6 +12,11 @@ import "components/presentation/styles/Tile";
 
 const TILE_TITLE_TRUNCATE = 50;
 const TILE_DESCRIPTION_TRUNCATE = 200;
+
+export const WARNING_TYPES = {
+    CRITICAL: 0,
+    INFO: 1
+};
 
 /**
  * Tile item interface
@@ -52,6 +58,14 @@ export interface ITile {
      * @memberOf ITile
      */
     hasWarning?: boolean;
+
+    /**
+     * Type of the warning
+     *
+     * @type {number}
+     * @memberof ITile
+     */
+    warningType?: number;
 }
 
 /**
@@ -173,13 +187,22 @@ export class Tile extends React.Component<ITileProps, ITileState> {
     public render(): JSX.Element {
         const { loadedTileContent, tileContentIsLoading, error } = this.state;
         const { tile } = this.props;
-        const { formatMessage } = this.context.services.localizationService;
+        const { formatMessage, getLanguage, isoToName } = this.context.services.localizationService;
         const tileNavigate = tile.navigateTo;
+
+        const warningClasses = ClassNames({
+            "exclamation-mark": tile.hasWarning && tile.warningType === WARNING_TYPES.CRITICAL,
+            "warning-mark": tile.hasWarning && tile.warningType === WARNING_TYPES.INFO
+        });
+
+        const warningTitle = tile.warningType === WARNING_TYPES.CRITICAL ?
+            formatMessage("productfamilies.unknown.description") :
+            formatMessage("warning.no.content", [isoToName(getLanguage())]);
 
         return (
             <div className="sdl-dita-delivery-tile">
                 <div className="tile-header-wrapper">
-                    <h3 className={tile.hasWarning ? "exclamation-mark" : ""}>
+                    <h3 className={warningClasses} title={warningTitle}>
                         <span>{StringHelper.truncate(tile.title, TILE_TITLE_TRUNCATE)}</span>
                     </h3>
                 </div>
