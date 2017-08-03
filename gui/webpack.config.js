@@ -50,7 +50,7 @@ module.exports = (isTest, isDebug) => {
         module: {
             rules: [{
                 test: /\.(png|jpg|otf|woff(2)?|eot|ttf|svg)$/,
-                loader: 'url-loader?limit=100000'
+                loader: 'url-loader?limit=200000'
             }, {
                 test: /\.css$/,
                 loader: extractCSS.extract([cssLoader, 'postcss-loader'])
