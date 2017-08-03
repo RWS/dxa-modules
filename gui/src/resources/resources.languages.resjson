@@ -286,6 +286,6 @@
   {"name": "中文（中华人民共和国）", "iso": "zh-cn"},
   {"name": "中文（香港特別行政區）", "iso": "zh-hk"},
   {"name": "中文（新加坡共和国）", "iso": "zh-sg"},
-  {"name": "中文（台灣)", "iso": "zh-tw"},
+  {"name": "中文（台灣）", "iso": "zh-tw"},
   {"name": "isiZulu (iNingizimu Afrika)", "iso": "zu-za"}
 ]
