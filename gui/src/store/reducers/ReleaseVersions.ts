@@ -1,8 +1,7 @@
-import { handleAction, combineReducers } from "./CombineReducers";
+import { handleAction, combineReducers } from "store/reducers/CombineReducers";
 import { RELEASE_VERSIONS_LOADED } from "store/actions/Actions";
-import { IProductReleaseVersionMap } from "store/interfaces/State";
+import { IProductReleaseVersionMap, IProductReleaseVersionState } from "store/interfaces/State";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
-import { IProductReleaseVersionState } from "../interfaces/State";
 import { DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE, DEFAULT_UNKNOWN_PRODUCT_RELEASE_VERSION } from "models/Publications";
 import { localization } from "services/common/LocalizationService";
 import { String } from "utils/String";

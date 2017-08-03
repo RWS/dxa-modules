@@ -6,6 +6,8 @@ import { TestBase } from "@sdl/models";
 import { Button } from "@sdl/controls-react-wrappers";
 import { ButtonPurpose } from "@sdl/controls";
 
+import { RENDER_DELAY } from "test/Constants";
+
 class ErrorComponent extends TestBase {
 
     public runTests(): void {
@@ -65,7 +67,7 @@ class ErrorComponent extends TestBase {
                     expect(onClickHome).toHaveBeenCalled();
                     expect(onClickReturn).toHaveBeenCalled();
                     done();
-                }, 100);
+                }, RENDER_DELAY);
             });
         });
     }

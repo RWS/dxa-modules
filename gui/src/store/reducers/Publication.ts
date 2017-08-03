@@ -1,6 +1,6 @@
 import { chain } from "lodash";
-import { getPubForLang, getPubById } from "./Reducer";
-import { handleAction, combine } from "./CombineReducers";
+import { getPubForLang, getPubById } from "store/reducers/Reducer";
+import { handleAction, combine } from "store/reducers/CombineReducers";
 import { IPublicationCurrentState } from "store/interfaces/State";
 import { UPDATE_CURRENT_PUBLICATION, CHANGE_LANGUAGE } from "store/actions/Actions";
 import { IPublication } from "interfaces/Publication";

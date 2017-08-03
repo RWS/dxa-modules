@@ -25,6 +25,8 @@ import { FetchProductReleaseVersions } from "src/components/helpers/FetchProduct
 import { getCurrentPub } from "store/reducers/Reducer";
 import { FetchPublications } from "src/components/helpers/FetchPublications";
 
+import { RENDER_DELAY, ASYNC_TEST_DELAY } from "test/Constants";
+
 const services = {
     pageService: new PageService(),
     publicationService: new PublicationService(),
@@ -92,7 +94,7 @@ class PublicationContentComponent extends TestBase {
                     expect(nodes.length).toBe(1);
                     expect(nodes.item(0).textContent).toBe("First element");
                     done();
-                }, 0);
+                }, RENDER_DELAY);
             });
 
             it("renders content for a specific page", (done: () => void): void => {
@@ -117,7 +119,7 @@ class PublicationContentComponent extends TestBase {
                     const pageContentNode = ReactDOM.findDOMNode(page);
                     expect(pageContentNode.querySelector("#specific-content")).not.toBeNull("Should find rendered content");
                     done();
-                }, 0);
+                }, RENDER_DELAY);
             });
 
             it("updates page content when item is selected from toc", (done: () => void): void => {
@@ -166,8 +168,8 @@ class PublicationContentComponent extends TestBase {
                     const treeView = TestUtils.findRenderedComponentWithType(toc, TreeView as any);
                     const treeNode = ReactDOM.findDOMNode(treeView) as HTMLElement;
                     (treeNode.querySelectorAll(".content")[1] as HTMLDivElement).click();
-                    setTimeout(checkLoadedPage, 110);
-                }, 0);
+                    setTimeout(checkLoadedPage, 100 + ASYNC_TEST_DELAY);
+                }, RENDER_DELAY);
             });
 
             it("updates page content with no page selected message when a site map item without url is selected", (done: () => void): void => {
@@ -192,7 +194,7 @@ class PublicationContentComponent extends TestBase {
                     expect(pageContentNode).not.toBeNull("Could not find page content.");
                     expect(pageContentNode.textContent).toBe("mock-components.page.nothing.selected");
                     done();
-                }, 0);
+                }, RENDER_DELAY);
             });
 
             it("shows an error message when page info fails to load", (done: () => void): void => {
@@ -221,7 +223,7 @@ class PublicationContentComponent extends TestBase {
                     const buttons = (errorElement as HTMLElement).querySelectorAll(".sdl-dita-delivery-button-group button");
                     expect(buttons.length).toEqual(2);
                     done();
-                }, 0);
+                }, RENDER_DELAY);
             });
 
             it("updates the toc when the current publiction state changes", (done: () => void): void => {
@@ -263,7 +265,7 @@ class PublicationContentComponent extends TestBase {
                         expect(tocItems.childNodes.length).toBe(2);
                         expect((tocItems.querySelector(".active") as HTMLElement).textContent).toBe(item.title);
                         ready();
-                    }, 0);
+                    }, RENDER_DELAY);
                 };
 
                 assert(first, (): void => {
@@ -320,7 +322,7 @@ class PublicationContentComponent extends TestBase {
                     });
                     // Click on the second release version
                     listItems[1].click();
-                }, 0);
+                }, RENDER_DELAY);
             });
 
         });

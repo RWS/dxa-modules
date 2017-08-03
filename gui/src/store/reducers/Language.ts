@@ -1,5 +1,5 @@
 import { CHANGE_LANGUAGE } from "store/actions/Actions";
-import { handleAction } from "./CombineReducers";
+import { handleAction } from "store/reducers/CombineReducers";
 
 export const language = handleAction(
     CHANGE_LANGUAGE,

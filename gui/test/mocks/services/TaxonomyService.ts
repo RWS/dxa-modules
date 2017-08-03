@@ -3,8 +3,9 @@ import { ITaxonomy } from "interfaces/Taxonomy";
 import { Promise } from "es6-promise";
 import { TcmId } from "utils/TcmId";
 
+import { ASYNC_DELAY } from "test/Constants";
+
 let fakeDelay = false;
-const DELAY = 100;
 
 export class TaxonomyService implements ITaxonomyService {
 
@@ -31,7 +32,7 @@ export class TaxonomyService implements ITaxonomyService {
                     else {
                         resolve(items);
                     }
-                }, DELAY);
+                }, ASYNC_DELAY);
             });
         } else {
             if (error) {

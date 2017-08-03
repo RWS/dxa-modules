@@ -1,4 +1,4 @@
-import { combine, handleAction } from "../CombineReducers";
+import { combine, handleAction } from "store/reducers/CombineReducers";
 import { DIALOG_REQUEST_OPEN, DIALOG_REQUEST_CLOSE } from "store/actions/Actions";
 
 const showDialog = combine(

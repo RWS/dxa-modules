@@ -1,4 +1,4 @@
-import { combineReducers, handleAction, combine } from "./CombineReducers";
+import { combineReducers, handleAction, combine } from "store/reducers/CombineReducers";
 import { IPage } from "interfaces/Page";
 import { dummyPage } from "utils/Page";
 import { PAGE_LOADED, PAGE_LOADING, PAGE_ERROR } from "store/actions/Actions";

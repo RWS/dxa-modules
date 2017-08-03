@@ -12,6 +12,8 @@ import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 import { TestBase } from "@sdl/models";
 import { TaxonomyItemId } from "interfaces/TcmId";
 
+import { RENDER_DELAY } from "test/Constants";
+
 interface IProps {
     params: {
         pageId?: string;
@@ -132,7 +134,7 @@ class BreadcrumbsComponent extends TestBase {
                     }
 
                     done();
-                }, 0);
+                }, RENDER_DELAY);
             });
 
             it("navigates to another item when a breadcrumb is clicked", (done: () => void): void => {
@@ -163,9 +165,9 @@ class BreadcrumbsComponent extends TestBase {
                             expect(updatedItems[3].textContent).toBe(itemsPath[2].title);
 
                             done();
-                        }, 0);
+                        }, RENDER_DELAY);
                     }
-                }, 0);
+                }, RENDER_DELAY);
             });
         });
 
@@ -204,7 +206,6 @@ class BreadcrumbsComponent extends TestBase {
             });
 
             it("navigates to another item when a breadcrumb is selected from responsive view", (done: () => void): void => {
-
                 const domNode = ReactDOM.findDOMNode(breadCrumbs) as HTMLElement;
                 expect(domNode).not.toBeNull();
 
@@ -226,9 +227,9 @@ class BreadcrumbsComponent extends TestBase {
                             expect(updatedItems[1].querySelector(".abstract")).not.toBeNull();
                             expect(updatedItems[1].textContent).toBe(itemsPath[0].title);
                             done();
-                        }, 0);
+                        }, RENDER_DELAY);
                     }
-                }, 0);
+                }, RENDER_DELAY);
             });
         });
     }

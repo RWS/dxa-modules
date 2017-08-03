@@ -1,9 +1,9 @@
 import { ISearchService } from "services/interfaces/SearchService";
 import { ISearchQuery, ISearchQueryResults } from "interfaces/Search";
 import { Promise } from "es6-promise";
+import { ASYNC_DELAY } from "test/Constants";
 
 let fakeDelay = false;
-const DELAY = 10;
 
 export class SearchService implements ISearchService {
 
@@ -26,7 +26,7 @@ export class SearchService implements ISearchService {
                     else {
                         resolve(result);
                     }
-                }, DELAY);
+                }, ASYNC_DELAY);
             });
         } else {
             if (error) {

@@ -1,4 +1,4 @@
-import { combine, handleAction } from "../CombineReducers";
+import { combine, handleAction } from "store/reducers/CombineReducers";
 import { DIALOG_REQUEST_CLOSE, CONDITIONS_EDITING_CHANGE} from "store/actions/Actions";
 import { IConditionMap } from "store/interfaces/Conditions";
 
