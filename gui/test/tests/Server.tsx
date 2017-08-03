@@ -69,11 +69,11 @@ class Server extends TestBase {
                                     <div className="dropdown-menu">
                                         <div className="dropdown-arrow"></div>
                                         <ul className="dropdown-items">
-                                            <li><a style="direction: ltr;">Deutsch</a></li>
-                                            <li className="active"><a style="direction: ltr;">English<span className="checked"></span></a></li>
-                                            <li><a style="direction: ltr;">Nederlands</a></li>
-                                            <li><a style="direction: ltr;">中文</a></li>
-                                            <li><a style="direction: ltr;">日本語</a></li>
+                                            <li><a style={{"direction": "ltr"}}>Deutsch</a></li>
+                                            <li className="active"><a style={{"direction": "ltr"}}>English<span className="checked"></span></a></li>
+                                            <li><a style={{"direction": "ltr"}}>Nederlands</a></li>
+                                            <li><a style={{"direction": "ltr"}}>中文</a></li>
+                                            <li><a style={{"direction": "ltr"}}>日本語</a></li>
                                         </ul>
                                     </div>
                                     <select defaultValue="en">
