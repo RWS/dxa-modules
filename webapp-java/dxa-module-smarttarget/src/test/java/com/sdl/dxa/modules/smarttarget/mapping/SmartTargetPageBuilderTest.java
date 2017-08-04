@@ -43,6 +43,17 @@ public class SmartTargetPageBuilderTest {
     @InjectMocks
     private SmartTargetPageBuilder pageBuilder;
 
+    @SuppressWarnings("Duplicates")
+    private static PageModel createPageModel(RegionModel... regionModels) throws DxaException {
+        PageModel pageModel = new DefaultPageModel();
+
+        RegionModelSetImpl regionModelSet = new RegionModelSetImpl();
+        Collections.addAll(regionModelSet, regionModels);
+        pageModel.setRegions(regionModelSet);
+
+        return pageModel;
+    }
+
     @Before
     public void init() {
         Mockito.when(webRequestContext.getLocalization()).thenReturn(localization);
@@ -53,7 +64,7 @@ public class SmartTargetPageBuilderTest {
     public void shouldReturnNullIfPageModelIsNull() throws ContentProviderException {
         //when, then
         //noinspection ConstantConditions
-        assertNull(pageBuilder.buildPageModel(null, new PageModelData("", null, null, null, null)));
+        assertNull(pageBuilder.buildPageModel(null, new PageModelData("", null, null, null, null, null)));
     }
 
     @Test
@@ -64,7 +75,7 @@ public class SmartTargetPageBuilderTest {
         PageModel expected = createPageModel(new RegionModelImpl("test"));
 
         //when
-        PageModel page2 = pageBuilder.buildPageModel(pageModel, new PageModelData("", null, null, null, null));
+        PageModel page2 = pageBuilder.buildPageModel(pageModel, new PageModelData("", null, null, null, null, null));
 
         //then
         Assert.assertEquals(expected, pageModel);
@@ -86,7 +97,7 @@ public class SmartTargetPageBuilderTest {
         PageModel expected = createPageModel(new SmartTargetRegion("test"));
 
         //when
-        PageModel pageR2 = pageBuilder.buildPageModel(pageModel, new PageModelData("", null, null, null, ""));
+        PageModel pageR2 = pageBuilder.buildPageModel(pageModel, new PageModelData("", null, null, null, null, ""));
 
         //then
         Assert.assertEquals(expected, pageModel);
@@ -100,7 +111,7 @@ public class SmartTargetPageBuilderTest {
         RegionModelData regionModelData = RegionModelData.builder().name("test").metadata(new ContentModelData() {{
             put("maxItems", maxItemsValue);
         }}).build();
-        PageModelData pageModelData = new PageModelData("id", Collections.emptyMap(), "title", Lists.newArrayList(regionModelData), "");
+        PageModelData pageModelData = new PageModelData("id", Collections.emptyMap(), null, "title", Lists.newArrayList(regionModelData), "");
 
         SmartTargetPageModel stPageModel = Mockito.mock(SmartTargetPageModel.class);
         Mockito.when(stPageModel.setAllowDuplicates(Matchers.anyBoolean())).thenReturn(stPageModel);
@@ -115,16 +126,5 @@ public class SmartTargetPageBuilderTest {
         //then
         Assert.assertEquals(42, smartTargetRegion.getMaxItems());
         Mockito.verify(pageBuilder).processQueryAndPromotions(Matchers.eq(localization), Matchers.eq(page), Matchers.eq("SmartTarget:Entity:Promotion"));
-    }
-
-    @SuppressWarnings("Duplicates")
-    private static PageModel createPageModel(RegionModel... regionModels) throws DxaException {
-        PageModel pageModel = new DefaultPageModel();
-
-        RegionModelSetImpl regionModelSet = new RegionModelSetImpl();
-        Collections.addAll(regionModelSet, regionModels);
-        pageModel.setRegions(regionModelSet);
-
-        return pageModel;
     }
 }
