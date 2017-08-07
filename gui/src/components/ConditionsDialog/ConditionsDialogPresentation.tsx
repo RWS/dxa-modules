@@ -57,23 +57,23 @@ export class ConditionsDialogPresentation extends React.Component<IConditionsDia
                     <I18n data="components.conditions.dialog.title" />
                 </button>
                 <Dialog
-                    actions={this.getActions()}
-                    title={this.getTitle()}
+                    actions={this._getActions()}
+                    title={this._getTitle()}
                     open={props.isOpen}
                     onRequestClose={props.close}>
-                    {this.getConditions()}
+                    {this._getConditions()}
                 </Dialog>
             </div>
         );
     }
 
-    private submit = () => {
+    private _submit = () => {
         const props = this.props;
         props.apply(props.pubId, props.editingConditions);
         props.close();
     }
 
-    private changeWrapper = (name: string, condition: ICondition, change: (conditions: IConditionMap) => void) => (values: string[]) =>
+    private _changeWrapper = (name: string, condition: ICondition, change: (conditions: IConditionMap) => void) => (values: string[]) =>
         change({
             [name]: {
                 ...condition,
@@ -81,10 +81,10 @@ export class ConditionsDialogPresentation extends React.Component<IConditionsDia
             }
         })
 
-    private getActions = () => {
+    private _getActions = () => {
         return (<div className="sdl-conditions-dialog-actions">
             <button
-                onClick={() => this.submit()}
+                onClick={() => this._submit()}
                 className="sdl-button graphene sdl-button-purpose-confirm">
                 <I18n data="components.conditions.dialog.personalize" />
             </button>
@@ -97,16 +97,16 @@ export class ConditionsDialogPresentation extends React.Component<IConditionsDia
         </div>);
     }
 
-    private getTitle = () => {
+    private _getTitle = () => {
         return (<div className="sdl-conditions-dialog-top-bar">
             <h3><I18n data="components.conditions.dialog.title" /></h3>
             <p><I18n data="components.conditions.dialog.description" /></p>
         </div>);
     }
 
-    private getConditionsLabelManager = (condition: ICondition, name: string) => {
+    private _getConditionsLabelManager = (condition: ICondition, name: string) => {
         const props = this.props;
-        const change = this.changeWrapper(name, condition, props.change);
+        const change = this._changeWrapper(name, condition, props.change);
         return (
             <ConditionsLabelManager
                 values={props.editingConditions[name] ? props.editingConditions[name].values : condition.values}
@@ -116,24 +116,24 @@ export class ConditionsDialogPresentation extends React.Component<IConditionsDia
         );
     }
 
-    private getInput = (condition: ICondition, name: string) => {
+    private _getInput = (condition: ICondition, name: string) => {
         const props = this.props;
-        const change = this.changeWrapper(name, condition, props.change);
+        const change = this._changeWrapper(name, condition, props.change);
         return (
             <input className="sdl-input-text small" type="text"
                 value={this.state.inputCondition[name] ? this.state.inputCondition[name] : ""}
                 onChange={(evt: React.ChangeEvent<HTMLInputElement>) => {
                     let value = evt.currentTarget.value as string;
-                    change(value === "" ? [""] : [value]);
-                    this.setState({ ...this.state, inputCondition: {[name]: value }});
+                    change([value]);
+                    this.setState({inputCondition: { ...this.state.inputCondition, [name]: value }});
                 }}
             />
         );
     }
 
-    private getDatePicker = (condition: ICondition, name: string) => {
+    private _getDatePicker = (condition: ICondition, name: string) => {
         const props = this.props;
-        const change = this.changeWrapper(name, condition, props.change);
+        const change = this._changeWrapper(name, condition, props.change);
         return (
             <DatePicker
                 value={props.editingConditions[name] &&
@@ -148,7 +148,7 @@ export class ConditionsDialogPresentation extends React.Component<IConditionsDia
         );
     }
 
-    private getConditions = () => {
+    private _getConditions = () => {
         const props = this.props;
         return (<ol className="sdl-conditions-dialog-list">
             {Object.keys(props.allConditions)
@@ -160,9 +160,9 @@ export class ConditionsDialogPresentation extends React.Component<IConditionsDia
                     return (
                         <li key={name}>
                             <label className="sdl-conditions-dialog-condition-label">{name}</label>
-                            { !condition.range &&  this.getConditionsLabelManager(condition, name)}
-                            { condition.range && condition.datatype === "Date" && this.getDatePicker(condition, name)}
-                            { condition.range && condition.datatype !== "Date" && this.getInput(condition, name)}
+                            { !condition.range &&  this._getConditionsLabelManager(condition, name)}
+                            { condition.range && condition.datatype === "Date" && this._getDatePicker(condition, name)}
+                            { condition.range && condition.datatype !== "Date" && this._getInput(condition, name)}
                         </li>
                     );
                 })
