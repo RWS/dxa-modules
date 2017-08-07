@@ -44,6 +44,13 @@ export interface ISearchResultsProps {
     /**
      * Search resultst props parameters
      *
+     * @type {string}
+     * @interface ISearchResultsProps
+     */
+    locale: string;
+    /**
+     * Search resultst props parameters
+     *
      * @type {ISearchResultsPropsParams}
      * @interface ISearchResultsProps
      */
@@ -148,10 +155,12 @@ export class SearchResults extends React.Component<ISearchResultsProps, ISearchR
      * @param {ISearchResultsState} nextState Next state
      */
     public componentWillUpdate(nextProps: ISearchResultsProps, nextState: ISearchResultsState): void {
-        const { publicationId, searchQuery } = this.props.params;
+        const { locale, params } = this.props;
+        const { publicationId, searchQuery } = params;
         const { startIndex } = this.state;
         const isNewSearch = (nextProps.params.searchQuery !== searchQuery) ||
-            (nextProps.params.publicationId !== publicationId);
+            (nextProps.params.publicationId !== publicationId) ||
+            (nextProps.locale !== locale);
         if (isNewSearch ||
             (nextState.startIndex !== startIndex)) {
             this._fetchSearchResults({

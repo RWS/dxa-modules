@@ -15,6 +15,7 @@ const services = {
     searchService: new SearchService()
 };
 
+const TEST_LOCALE = "en";
 const TEST_QUERY = "TEST QUERY";
 const TEST_CONTENT = `General Packet Radio Service (GPRS)General Packet Radio Service (GPRS) GPRS technology allows mobile phones to be used for
 sending and receiving data over the mobile network (network service). GPRS technology allows mobile phones to be used for sending and receiving
@@ -146,6 +147,7 @@ class SearchResultsComponent extends TestBase {
             (
                 <ComponentWithContext {...services}>
                     <SearchResults
+                        locale={TEST_LOCALE}
                         params={{ publicationId: publicationId || "", searchQuery: searchQuery || TEST_QUERY }} />
                 </ComponentWithContext>
             ), target) as React.Component<{}, {}>;

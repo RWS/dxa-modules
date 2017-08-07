@@ -3,6 +3,7 @@ import { ISearchQuery, ISearchQueryResults } from "interfaces/Search";
 
 import { Search } from "models/Search";
 import { Promise } from "es6-promise";
+import { MD5 } from "object-hash";
 
 /**
  * Search service, interacts with the models to fetch the required data.
@@ -67,6 +68,9 @@ export class SearchService implements ISearchService {
     }
 
     private _getKey(query: ISearchQuery): string {
-        return [query.publicationId || 0, query.searchQuery, query.startIndex || 0].join("||");
+        return [query.publicationId,
+        query.locale,
+        MD5(query.searchQuery),
+        query.startIndex].join("::");
     }
 }
