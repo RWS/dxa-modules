@@ -77,7 +77,7 @@ export class ConditionsDialogPresentation extends React.Component<IConditionsDia
         change({
             [name]: {
                 ...condition,
-                values: values
+                values
             }
         })
 
