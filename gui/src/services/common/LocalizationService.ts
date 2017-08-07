@@ -115,7 +115,7 @@ export class LocalizationService implements ILocalizationService {
      * @returns {string}
      */
     public isoToName(iso: string): string {
-        const options = LanguageMap.filter((language: ILanguage) => language.iso == iso);
+        const options = LanguageMap.filter((language: ILanguage) => language.iso.toLowerCase() == iso.toLowerCase());
         return options[0] && options[0].name || iso;
     }
 
@@ -126,7 +126,7 @@ export class LocalizationService implements ILocalizationService {
      * @returns {string}
      */
     public nameToIso(name: string): string {
-        const options = LanguageMap.filter((language: ILanguage) => language.name == name);
+        const options = LanguageMap.filter((language: ILanguage) => language.name.toLowerCase() == name.toLowerCase());
         return options[0] && options[0].iso || name;
     }
 
@@ -137,7 +137,7 @@ export class LocalizationService implements ILocalizationService {
      * @returns {("rtl" | "ltr")}
      */
     public getDirection(lang: string): "rtl" | "ltr" {
-        return this.rtlLanguages.some((val: string) => val === lang) ? "rtl" : "ltr";
+        return this.rtlLanguages.some((val: string) => val.toLowerCase() === lang.toLowerCase()) ? "rtl" : "ltr";
     }
 
     /**
