@@ -6,7 +6,7 @@ import { ActivityIndicator, Button } from "@sdl/controls-react-wrappers";
 import { IProductFamily } from "interfaces/ProductFamily";
 import { IAppContext } from "@sdl/dd/container/App/App";
 import { TilesList } from "@sdl/dd/container/TilesList/TilesList";
-import { ITile, WARNING_TYPES } from "@sdl/dd/presentation/Tile";
+import { ITile, INFO_TYPES } from "@sdl/dd/presentation/Tile";
 import { Error } from "@sdl/dd/presentation/Error";
 import { Url } from "utils/Url";
 import { DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE } from "models/Publications";
@@ -98,11 +98,13 @@ export class ProductFamiliesList extends React.Component<{}, IProductFamiliesLis
                                         const title = productFamily.hasWarning ? formatMessage("productfamilies.unknown.title") : productFamily.title;
                                         const titleUrl = productFamily.hasWarning ? DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE : productFamily.title;
                                         const description = productFamily.hasWarning ? formatMessage("productfamilies.unknown.description") : productFamily.description;
+                                        const info = productFamily.hasWarning
+                                            ? { message: formatMessage("productfamilies.unknown.description"), type: INFO_TYPES.WARNING }
+                                            : undefined;
                                         return {
                                             title: title,
                                             loadableContent: description ? () => Promise.resolve(description) : undefined,
-                                            hasWarning: productFamily.hasWarning,
-                                            warningType: WARNING_TYPES.CRITICAL,
+                                            info,
                                             navigateTo: () => {
                                                 /* istanbul ignore else */
                                                 if (browserHistory) {

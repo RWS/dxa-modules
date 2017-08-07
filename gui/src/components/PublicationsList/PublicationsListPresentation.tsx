@@ -6,7 +6,7 @@ import { ActivityIndicator, Button } from "@sdl/controls-react-wrappers";
 
 import { Error } from "@sdl/dd/presentation/Error";
 import { TilesList } from "@sdl/dd/container/TilesList/TilesList";
-import { ITile, WARNING_TYPES } from "@sdl/dd/presentation/Tile";
+import { ITile, INFO_TYPES } from "@sdl/dd/presentation/Tile";
 import { IAppContext } from "@sdl/dd/container/App/App";
 import { FetchPublications } from "components/helpers/FetchPublications";
 import { Url } from "utils/Url";
@@ -156,7 +156,7 @@ export class PublicationsListPresentation extends React.Component<IPublicationsL
         const { publications, isLoading, productReleaseVersions, selectedProductVersion, uiLanguage } = this.props;
         const { error } = this.state;
         const { services } = this.context;
-        const { formatMessage } = services.localizationService;
+        const { formatMessage, isoToName, getLanguage } = services.localizationService;
         const _retryHandler = (): void => { this.fetchReleaseVersions(this.props); };
         const translatedProductFamily = (productFamily === DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE) ? formatMessage("productfamilies.unknown.title") : productFamily;
         const errorButtons = <div>
@@ -182,14 +182,16 @@ export class PublicationsListPresentation extends React.Component<IPublicationsL
                         ? publications.length > 0
                             ? (<TilesList viewAllLabel={formatMessage("components.publicationslist.view.all")}
                                 tiles={publications.map((publication: IPublication) => {
+                                    const info = publication.language && publication.language !== uiLanguage
+                                        ? {message: formatMessage("warning.no.content", [isoToName(getLanguage())]), type: INFO_TYPES.DEFAULT}
+                                        : undefined;
                                     return {
                                         title: publication.title,
                                         id: publication.id,
                                         loadableContent: () => {
                                             return this._getLoadableContent(publication.id);
                                         },
-                                        hasWarning: publication.language && publication.language !== uiLanguage,
-                                        warningType: WARNING_TYPES.INFO,
+                                        info,
                                         navigateTo: () => {
                                             /* istanbul ignore else */
                                             if (browserHistory) {
