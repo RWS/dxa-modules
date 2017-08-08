@@ -55,8 +55,7 @@ export class Publications extends LoadableObject {
                 if (!productReleaseVersionTitle) {
                     return !publication.productReleaseVersion;
                 }
-                const normalizedPublicationProductReleaseVersion = publication.productReleaseVersion && Version.normalize(publication.productReleaseVersion);
-                return normalizedPublicationProductReleaseVersion === productReleaseVersionTitle;
+                return Version.normalize(publication.productReleaseVersion) === productReleaseVersionTitle;
             });
         }
 
