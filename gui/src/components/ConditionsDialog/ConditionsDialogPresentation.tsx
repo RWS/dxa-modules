@@ -11,8 +11,21 @@ import { DatePicker } from "@sdl/dd/DatePicker/DatePicker";
 import "./ConditionsDialog.less";
 import "components/Input/Input.less";
 
+interface IConditionSimpleMap {
+    name: string;
+    value: ICondition;
+}
+
+export interface IInputCondition {
+    [name: string]: string;
+}
+
+export interface IConditionsDialogPresentationState {
+    inputCondition: IInputCondition;
+}
+
 export interface IConditionsDialogPresentationProps {
-    //unfortunatly we need pubId to pass to handlers
+    // unfortunatly we need pubId to pass to handlers
     pubId: string;
     isOpen: boolean;
     allConditions: IConditionMap;
@@ -23,122 +36,137 @@ export interface IConditionsDialogPresentationProps {
     change: (conditions: IConditionMap) => void;
 }
 
-interface IX {
-    name: string;
-    value: ICondition;
+export class ConditionsDialogPresentation extends React.Component<IConditionsDialogPresentationProps, IConditionsDialogPresentationState> {
+
+    constructor() {
+        super();
+        this.state = {
+            inputCondition : { }
+        };
+    }
+
+    public render(): JSX.Element {
+        const props = this.props;
+        return (
+            <div className="sdl-conditions-dialog-presentation">
+                <ConditionsFetcher />
+                <button
+                    className="sdl-button-text sdl-personalize-content"
+                    onClick={props.open}
+                    disabled={isEmpty(props.allConditions)}>
+                    <I18n data="components.conditions.dialog.title" />
+                </button>
+                <Dialog
+                    actions={this._getActions()}
+                    title={this._getTitle()}
+                    open={props.isOpen}
+                    onRequestClose={props.close}>
+                    {this._getConditions()}
+                </Dialog>
+            </div>
+        );
+    }
+
+    private _submit = () => {
+        const props = this.props;
+        props.apply(props.pubId, props.editingConditions);
+        props.close();
+    }
+
+    private _changeWrapper = (name: string, condition: ICondition, change: (conditions: IConditionMap) => void) => (values: string[]) =>
+        change({
+            [name]: {
+                ...condition,
+                values
+            }
+        })
+
+    private _getActions = () => {
+        return (<div className="sdl-conditions-dialog-actions">
+            <button
+                onClick={() => this._submit()}
+                className="sdl-button graphene sdl-button-purpose-confirm">
+                <I18n data="components.conditions.dialog.personalize" />
+            </button>
+            <span className="sdl-button-separator"> </span>
+            <button
+                onClick={this.props.close}
+                className="sdl-button graphene sdl-button-purpose-general">
+                <I18n data="components.conditions.dialog.cancel" />
+            </button>
+        </div>);
+    }
+
+    private _getTitle = () => {
+        return (<div className="sdl-conditions-dialog-top-bar">
+            <h3><I18n data="components.conditions.dialog.title" /></h3>
+            <p><I18n data="components.conditions.dialog.description" /></p>
+        </div>);
+    }
+
+    private _getConditionsLabelManager = (condition: ICondition, name: string) => {
+        const props = this.props;
+        const change = this._changeWrapper(name, condition, props.change);
+        return (
+            <ConditionsLabelManager
+                values={props.editingConditions[name] ? props.editingConditions[name].values : condition.values}
+                condition={condition}
+                onChange={(items: ILabelManagerItem[]) => change(items.map(item => item.id))}
+            />
+        );
+    }
+
+    private _getInput = (condition: ICondition, name: string) => {
+        const props = this.props;
+        const change = this._changeWrapper(name, condition, props.change);
+        return (
+            <input className="sdl-input-text small" type="text"
+                value={this.state.inputCondition[name] ? this.state.inputCondition[name] : ""}
+                onChange={(evt: React.ChangeEvent<HTMLInputElement>) => {
+                    let value = evt.currentTarget.value as string;
+                    change([value]);
+                    this.setState({inputCondition: { ...this.state.inputCondition, [name]: value }});
+                }}
+            />
+        );
+    }
+
+    private _getDatePicker = (condition: ICondition, name: string) => {
+        const props = this.props;
+        const change = this._changeWrapper(name, condition, props.change);
+        return (
+            <DatePicker
+                value={props.editingConditions[name] &&
+                    !isEqual(props.editingConditions[name].values, condition.values)
+                    ? props.editingConditions[name].values[0]
+                    : ""}
+                onChangeHandler={(value) => {
+                    change(!value ? condition.values : [value.format("YYYYMMDD")]);
+                    return undefined;
+                }}
+            />
+        );
+    }
+
+    private _getConditions = () => {
+        const props = this.props;
+        return (<ol className="sdl-conditions-dialog-list">
+            {Object.keys(props.allConditions)
+                .map(key => ({
+                    name: key,
+                    value: props.allConditions[key]
+                }))
+                .map(({ name, value: condition }: IConditionSimpleMap) => {
+                    return (
+                        <li key={name}>
+                            <label className="sdl-conditions-dialog-condition-label">{name}</label>
+                            { !condition.range &&  this._getConditionsLabelManager(condition, name)}
+                            { condition.range && condition.datatype === "Date" && this._getDatePicker(condition, name)}
+                            { condition.range && condition.datatype !== "Date" && this._getInput(condition, name)}
+                        </li>
+                    );
+                })
+            }
+        </ol>);
+    }
 }
-
-const submit = (props: IConditionsDialogPresentationProps) => {
-    props.apply(props.pubId, props.editingConditions);
-    props.close();
-};
-
-const getActions = (props: IConditionsDialogPresentationProps) =>
-    <div className="sdl-conditions-dialog-actions">
-        <button
-            onClick={() => submit(props)}
-            className="sdl-button graphene sdl-button-purpose-confirm">
-            <I18n data="components.conditions.dialog.personalize" />
-        </button>
-        <span className="sdl-button-separator"> </span>
-        <button
-            onClick={props.close}
-            className="sdl-button graphene sdl-button-purpose-general">
-            <I18n data="components.conditions.dialog.cancel" />
-        </button>
-    </div>;
-
-const getTitle = (props: IConditionsDialogPresentationProps) =>
-    <div className="sdl-conditions-dialog-top-bar">
-        <h3><I18n data="components.conditions.dialog.title" /></h3>
-        <p><I18n data="components.conditions.dialog.description" /></p>
-    </div>;
-
-const changeWrapper = (name: string, condition: ICondition, change: (conditions: IConditionMap) => void) => (values: string[]) =>
-    change({
-        [name]: {
-            ...condition,
-            values: values
-        }
-});
-
-const getConditionsLabelManager = (props: IConditionsDialogPresentationProps, condition: ICondition, name: string) => {
-    const change = changeWrapper(name, condition, props.change);
-    return (
-        <ConditionsLabelManager
-            values={props.editingConditions[name] ? props.editingConditions[name].values : condition.values}
-            condition={condition}
-            onChange={(items: ILabelManagerItem[]) => change(items.map(item => item.id))}
-        />
-    );
-};
-
-const getInput = (props: IConditionsDialogPresentationProps, condition: ICondition, name: string) => {
-    const change = changeWrapper(name, condition, props.change);
-    return (
-        <input className="sdl-input-text small" type="text"
-            value={props.editingConditions[name] &&
-                !isEqual(props.editingConditions[name].values, condition.values)
-                ? props.editingConditions[name].values[0]
-                : ""}
-            onChange={(evt: React.ChangeEvent<HTMLInputElement>) => {
-                let value = evt.currentTarget.value;
-                change(value === "" ? condition.values : [value]);
-            }}
-        />
-    );
-};
-
-const getDatePicker = (props: IConditionsDialogPresentationProps, condition: ICondition, name: string) => {
-    const change = changeWrapper(name, condition, props.change);
-    return (
-        <DatePicker
-            value={props.editingConditions[name] &&
-                !isEqual(props.editingConditions[name].values, condition.values)
-                ? props.editingConditions[name].values[0]
-                : ""}
-            onChangeHandler={(value) => {
-                change(!value ? condition.values : [value.format("YYYYMMDD")]);
-                return undefined;
-            }}
-        />
-    );
-};
-
-const getConditions = (props: IConditionsDialogPresentationProps) => (
-    <ol className="sdl-conditions-dialog-list">
-        {Object.keys(props.allConditions)
-            .map(key => ({
-                name: key,
-                value: props.allConditions[key]
-            }))
-            .map(({ name, value: condition }: IX) => {
-                return (
-                    <li key={name}>
-                        <label className="sdl-conditions-dialog-condition-label">{name}</label>
-                        { !condition.range &&  getConditionsLabelManager(props, condition, name)}
-                        { condition.range && condition.datatype === "Date" && getDatePicker(props, condition, name)}
-                        { condition.range && condition.datatype !== "Date" && getInput(props, condition, name)}
-                    </li>
-                );
-            })
-        }
-    </ol>);
-
-export const ConditionsDialogPresentation = (props: IConditionsDialogPresentationProps) =>
-    <div className="sdl-conditions-dialog-presentation">
-        <ConditionsFetcher />
-        <button
-            className="sdl-button-text sdl-personalize-content"
-            onClick={props.open}
-            disabled={isEmpty(props.allConditions)}>
-            <I18n data="components.conditions.dialog.title" />
-        </button>
-        <Dialog
-            actions={getActions(props)}
-            title={getTitle(props)}
-            open={props.isOpen}
-            onRequestClose={props.close}>
-            {getConditions(props)}
-        </Dialog>
-    </div>;
