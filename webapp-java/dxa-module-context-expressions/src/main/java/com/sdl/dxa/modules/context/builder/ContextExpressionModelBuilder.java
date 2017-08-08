@@ -2,13 +2,14 @@ package com.sdl.dxa.modules.context.builder;
 
 import com.sdl.dxa.api.datamodel.model.EntityModelData;
 import com.sdl.dxa.api.datamodel.model.util.ListWrapper;
+import com.sdl.dxa.caching.wrapper.EntitiesCache;
 import com.sdl.dxa.tridion.mapping.EntityModelBuilder;
 import com.sdl.webapp.common.api.model.EntityModel;
 import com.sdl.webapp.common.exceptions.DxaException;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.Nullable;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
@@ -22,9 +23,10 @@ public class ContextExpressionModelBuilder extends AbstractContextExpressionMode
     @Value("${dxa.modules.contextexpr.r2.extension_data_map_key}")
     private String cxKeyR2 = "CX";
 
+    @Autowired
+    private EntitiesCache entitiesCache;
+
     @Override
-    @CachePut(cacheNames = "entities", key = "@entitiesCache.getSpecificKey(#modelData)",
-            unless = "#originalEntityModel == null || #originalEntityModel.class.isAnnotationPresent(T(com.sdl.dxa.caching.NeverCached))")
     public <T extends EntityModel> T buildEntityModel(@Nullable T originalEntityModel, EntityModelData modelData, @Nullable Class<T> expectedClass) throws DxaException {
         log.trace("Context expression model builder for EMD {}, entity {} and expectedClass {}", modelData, originalEntityModel, expectedClass);
 
@@ -37,8 +39,21 @@ public class ContextExpressionModelBuilder extends AbstractContextExpressionMode
             return originalEntityModel;
         }
 
+        Object cacheKey = entitiesCache.getSpecificKey(modelData);
+        if(entitiesCache.containsKey(cacheKey)) {
+            //noinspection unchecked
+            T modelInCache = (T) entitiesCache.get(cacheKey);
+
+            if (!modelInCache.getExtensionData().isEmpty() && extensionData.equals(modelInCache.getExtensionData())) {
+                return modelInCache;
+            }
+        }
+
         //noinspection unchecked
-        return applyConditions(originalEntityModel, getConditions(extensionData, includeKey), getConditions(extensionData, excludeKey));
+        T processedModel = applyConditions(originalEntityModel, getConditions(extensionData, includeKey), getConditions(extensionData, excludeKey));
+        entitiesCache.addAndGet(cacheKey, processedModel);
+
+        return processedModel;
     }
 
     //cast is not type safe but we only expect there a ListWrapper of Strings, so let's pretend
