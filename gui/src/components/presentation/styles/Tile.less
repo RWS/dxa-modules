@@ -38,6 +38,24 @@
                     }
                 }
             }
+            &.info-mark {
+                padding-left: 16px;
+                .sdl-dita-delivery-app.rtl & {
+                    padding-right: 16px;
+                    padding-left: 0;
+                }
+                &::before {
+                    .icon-info-mark();
+                    content: "";
+                    margin-right: 10px;
+                    display: inline-block;
+                    margin-left: -16px;
+                    .sdl-dita-delivery-app.rtl & {
+                        margin-right: -16px;
+                        margin-left: 10px
+                    }
+                }
+            }
         }
     }
     hr {

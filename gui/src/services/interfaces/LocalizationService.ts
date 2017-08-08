@@ -55,4 +55,13 @@ export interface ILocalizationService {
      * @memberof ILocalizationService
      */
     getLanguage(): string;
+
+    /**
+     * Get pretty name by iso code
+     *
+     * @param {string} iso
+     * @returns {string}
+     * @memberof ILocalizationService
+     */
+    isoToName(iso: string): string;
 }

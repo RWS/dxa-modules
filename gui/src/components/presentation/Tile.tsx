@@ -5,6 +5,7 @@ import { IAppContext } from "@sdl/dd/container/App/App";
 import { String as StringHelper } from "utils/String";
 import { ActivityIndicator, Button } from "@sdl/controls-react-wrappers";
 import { ButtonPurpose } from "@sdl/controls";
+import * as ClassNames from "classnames";
 
 import "components/controls/styles/ActivityIndicator";
 import "components/controls/styles/Button";
@@ -12,6 +13,12 @@ import "components/presentation/styles/Tile";
 
 const TILE_TITLE_TRUNCATE = 50;
 const TILE_DESCRIPTION_TRUNCATE = 200;
+
+export const INFO_TYPES = {
+    DEFAULT: 0,
+    WARNING: 1,
+    CRITICAL: 2
+};
 
 /**
  * Tile item interface
@@ -46,13 +53,32 @@ export interface ITile {
      * @memberOf ITile
      */
     loadableContent?: () => Promise<string | JSX.Element | JSX.Element[]>;
-
     /**
-     * If tile has a warning
      *
-     * @memberOf ITile
+     * @type {ITileInfo}
+     * @memberof ITile
      */
-    hasWarning?: boolean;
+    info?: ITileInfo;
+}
+
+/**
+ *
+ * @export
+ * @interface ITileInfo
+ */
+export interface ITileInfo {
+    /**
+     *
+     * @type {string}
+     * @memberof ITileInfo
+     */
+    message: string;
+    /**
+     *
+     * @type {number}
+     * @memberof ITileInfo
+     */
+    type: number;
 }
 
 /**
@@ -154,9 +180,9 @@ export class Tile extends React.Component<ITileProps, ITileState> {
         const { tile } = this.props;
         const nextTile = nextProps.tile;
 
-        // Update tile content if title changed and there was a warning.
+        // Update tile content if title changed and there was a info message.
         // It means that there was a language change of warning description label.
-        if (tile.title !== nextTile.title && tile.hasWarning) {
+        if (tile.title !== nextTile.title && tile.info) {
             this._loadTileContent(nextTile);
         }
 
@@ -177,10 +203,17 @@ export class Tile extends React.Component<ITileProps, ITileState> {
         const { formatMessage } = this.context.services.localizationService;
         const tileNavigate = tile.navigateTo;
 
+        const infoClasses = ClassNames({
+            "exclamation-mark": tile.info && tile.info.type === INFO_TYPES.WARNING,
+            "info-mark": tile.info && tile.info.type === INFO_TYPES.DEFAULT
+        });
+
+        const infoTitle = tile.info && tile.info.message;
+
         return (
             <div className="sdl-dita-delivery-tile">
                 <div className="tile-header-wrapper">
-                    <h3 className={tile.hasWarning ? "exclamation-mark" : ""}>
+                    <h3 className={infoClasses} title={infoTitle}>
                         <span>{StringHelper.truncate(tile.title, TILE_TITLE_TRUNCATE)}</span>
                     </h3>
                 </div>
