@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.sdl.dxa.api.datamodel.model.EntityModelData;
 import com.sdl.dxa.api.datamodel.model.util.ListWrapper;
+import com.sdl.dxa.caching.LocalizationAwareKeyGenerator;
 import com.sdl.dxa.caching.wrapper.EntitiesCache;
 import com.sdl.dxa.modules.context.model.Conditions;
 import com.sdl.webapp.common.api.model.EntityModel;
@@ -17,21 +18,19 @@ import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.Collections;
 
-import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class ContextExpressionModelBuilderTest {
 
-    public ContextExpressionModelBuilder builder;
+    private ContextExpressionModelBuilder builder;
 
     @Before
     public void init() {
-        EntitiesCache cache = mock(EntitiesCache.class);
-        when(cache.getSpecificKey(anyObject())).thenReturn(new Object());
+
+        EntitiesCache cache = new EntitiesCache();
+        cache.setKeyGenerator(mock(LocalizationAwareKeyGenerator.class));
 
         builder = new ContextExpressionModelBuilder();
-
         ReflectionTestUtils.setField(builder, "entitiesCache", cache);
         ReflectionTestUtils.setField(builder, "cxKeyR2", "CX");
     }

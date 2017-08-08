@@ -50,10 +50,7 @@ public class ContextExpressionModelBuilder extends AbstractContextExpressionMode
         }
 
         //noinspection unchecked
-        T processedModel = applyConditions(originalEntityModel, getConditions(extensionData, includeKey), getConditions(extensionData, excludeKey));
-        entitiesCache.addAndGet(cacheKey, processedModel);
-
-        return processedModel;
+        return (T) entitiesCache.addAndGet(cacheKey, applyConditions(originalEntityModel, getConditions(extensionData, includeKey), getConditions(extensionData, excludeKey)));
     }
 
     //cast is not type safe but we only expect there a ListWrapper of Strings, so let's pretend
