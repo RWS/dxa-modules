@@ -38,7 +38,10 @@ export class LocalizationService implements ILocalizationService {
      * @type {string[]}
      * @memberOf LocalizationService
      */
-    public rtlLanguages: string[] = ["ar", "dv", "fa", "he", "iw", "ps", "ur"];
+    public rtlLanguages: string[] = ["ar", "dv", "fa", "he", "iw", "ps", "ur",
+                                     "ar-ae", "ar-bh", "ar-dz", "ar-eg", "ar-iq", "ar-jo", "ar-kw", "ar-lb",
+                                     "ar-ly", "ar-ma", "ar-om", "ar-qa", "ar-sa", "ar-sy", "ar-tn", "ar-ye",
+                                     "dv-mv", "fa-ir", "he-il", "ps-ar", "ur-pk"];
 
     private language: string;
 
@@ -112,7 +115,7 @@ export class LocalizationService implements ILocalizationService {
      * @returns {string}
      */
     public isoToName(iso: string): string {
-        const options = LanguageMap.filter((language: ILanguage) => language.iso == iso);
+        const options = LanguageMap.filter((language: ILanguage) => language.iso.toLowerCase() == iso.toLowerCase());
         return options[0] && options[0].name || iso;
     }
 
@@ -123,7 +126,7 @@ export class LocalizationService implements ILocalizationService {
      * @returns {string}
      */
     public nameToIso(name: string): string {
-        const options = LanguageMap.filter((language: ILanguage) => language.name == name);
+        const options = LanguageMap.filter((language: ILanguage) => language.name.toLowerCase() == name.toLowerCase());
         return options[0] && options[0].iso || name;
     }
 
@@ -134,7 +137,7 @@ export class LocalizationService implements ILocalizationService {
      * @returns {("rtl" | "ltr")}
      */
     public getDirection(lang: string): "rtl" | "ltr" {
-        return this.rtlLanguages.some((val: string) => val === lang) ? "rtl" : "ltr";
+        return this.rtlLanguages.some((val: string) => val.toLowerCase() === lang.toLowerCase()) ? "rtl" : "ltr";
     }
 
     /**

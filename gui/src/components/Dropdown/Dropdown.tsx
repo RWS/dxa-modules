@@ -30,6 +30,12 @@ export interface IDropdownValue {
      * @type {string}
      */
     value: string;
+    /**
+     * Value's direction of dropdown item
+     *
+     * @type {string}
+     */
+    direction?: string;
 }
 
 /**
@@ -244,15 +250,20 @@ export class Dropdown extends React.Component<IDropdownProps, IDropdownState> {
         });
 
         const items = this.props.items.map((item, index): JSX.Element => {
+            const itemStyle = item.direction ? {direction: item.direction} : undefined;
             if (this.state.selected && item.value == this.state.selected.value) {
                 return (<li key={item.value} className="active">
-                        <a>
+                        <a style={itemStyle}>
                             {item.text}
                             <span className="checked"/>
                         </a>
                     </li>);
             } else {
-                return (<li key={item.value} onClick={this.onClickItem.bind(this, index)}><a>{item.text}</a></li>);
+                return (
+                    <li key={item.value} onClick={this.onClickItem.bind(this, index)}>
+                        <a style={itemStyle}>{item.text}</a>
+                    </li>
+                );
             }
         });
         const options = this.props.items.map(item => <option key={item.value} value={item.value}>{item.text}</option>);
