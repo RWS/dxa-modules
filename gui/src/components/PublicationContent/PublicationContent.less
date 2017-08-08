@@ -33,13 +33,12 @@
                     position: absolute;
                     top: 0;
                     bottom: 0;
-                    margin-left: @tocWidth - 5;
-                    width: 10px;
-                    box-shadow: -5px 0px 10px 0px fade(@neutralColor1, 10);
+                    margin: 0;
+                    width: @tocWidth - 15;
+                    z-index: -1;
+                    box-shadow: 5px 0px 10px 0px fade(@neutralColor1, 10);
                     .sdl-dita-delivery-app.rtl & {
-                        margin-left: 0;
-                        margin-right: @tocWidth - 5;
-                        box-shadow: 5px 0px 10px 0px fade(@neutralColor1, 10);
+                        box-shadow: -5px 0px 10px 0px fade(@neutralColor1, 10);
                     }
                 }
             }
