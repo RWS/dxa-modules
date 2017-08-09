@@ -12,7 +12,7 @@ import Version from "utils/Version";
 import { String } from "utils/String";
 
 const buildMap = (currentMap: IPublicationsMap, publications: IPublication[]) => {
-    return Object.assign({}, currentMap, ...publications.map(publication => ({[publication.id]: publication})));
+    return Object.assign({}, currentMap, ...publications.map(publication => ({ [publication.id]: publication })));
 };
 
 export const notFound = (id: string): IPublication => ({
@@ -48,13 +48,17 @@ export const publications = combineReducers({
 
 // Selectors
 const productReleaseVersionHack = (prop: string, obj: {}) => {
-    if (prop !== "productReleaseVersion") {
-         // tslint:disable-next-line:no-any
-        return (obj as any)[prop];
-    }
     // tslint:disable-next-line:no-any
-    let version = Version.normalize((obj as any)[prop]);
-    return version ? version : null;
+    let value = (obj as any)[prop];
+    return (prop !== "productReleaseVersion")
+        ? value
+        : Version.normalize(value);
+};
+
+const normalizeValue = (value: string, defaultLabel: string): string | null => {
+    return (String.normalize(value) === String.normalize(defaultLabel))
+        ? null
+        : value;
 };
 
 /**
@@ -75,12 +79,12 @@ export const getPubList = (state: IPublicationsState, filter: {} = {}): IPublica
             return keys.every(prop => {
                 const propName = /^\!(.+)/.test(prop) ? RegExp.$1 : prop;
                 if (propName in publication === false) {
-                    console.warn(`There is not property ${prop} in`, publication);
+                    console.warn(`There is no property ${prop} in`, publication);
                 }
 
                 const valueFilter = productReleaseVersionHack(propName, filter);
                 const valueObj = productReleaseVersionHack(propName, publication);
-                return propName === prop ? valueFilter === valueObj :  valueFilter !== valueObj;
+                return propName === prop ? valueFilter === valueObj : valueFilter !== valueObj;
             });
         });
 };
@@ -103,8 +107,8 @@ export const getPubListRepresentatives = (state: IState, filter: {}): (IPublicat
     return chain(getPubList(state.publications, filter))
         .groupBy("versionRef")
         .values()
-        .flatMap((pubsByRef: IPublication[]) => find(pubsByRef, {language: state.language})
-                                             || find(pubsByRef, {language: DEFAULT_LANGUAGE}))
+        .flatMap((pubsByRef: IPublication[]) => find(pubsByRef, { language: state.language })
+                                             || find(pubsByRef, { language: DEFAULT_LANGUAGE }))
         .value()
         .filter(publiction => publiction !== undefined);
 };
@@ -113,10 +117,13 @@ export const isLoadnig = (state: IPublicationsState): boolean => state.isLoading
 export const getLastError = (state: IPublicationsState): string => state.lastError;
 
 export const normalizeProductFamily = (params: IPublicationsListPropsParams): string | null =>
-    String.normalize(params.productFamily) === String.normalize(DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE) ? null : params.productFamily;
-export const normalizeProductReleaseVersion = (params: IPublicationsListPropsParams | string): string | null | undefined => {
-    const value = typeof params === "string" ? params : params.productReleaseVersion || "";
-    return String.normalize(value) === String.normalize(DEFAULT_UNKNOWN_PRODUCT_RELEASE_VERSION) ? null : value;
+    normalizeValue(params.productFamily, DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE);
+
+export const normalizeProductReleaseVersion = (params: IPublicationsListPropsParams | string): string | null => {
+    const value = (typeof params === "string")
+        ? params
+        : params.productReleaseVersion || "";
+    return normalizeValue(value, DEFAULT_UNKNOWN_PRODUCT_RELEASE_VERSION);
 };
 
 export const isPublicationFound = (state: IPublicationsState, publicationId: string): boolean =>
