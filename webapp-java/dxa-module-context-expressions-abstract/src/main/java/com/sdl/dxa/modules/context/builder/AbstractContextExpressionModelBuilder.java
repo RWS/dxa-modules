@@ -34,7 +34,7 @@ public abstract class AbstractContextExpressionModelBuilder implements Ordered {
         return 0;
     }
 
-    <T extends EntityModel> boolean hasAlreadyPassed(T originalEntityModel) {
+    protected <T extends EntityModel> boolean hasAlreadyPassed(T originalEntityModel) {
         Map<String, Object> extensionData = originalEntityModel.getExtensionData();
 
         return extensionData != null && !extensionData.isEmpty() && extensionData.containsKey(contextExpressionsKey);

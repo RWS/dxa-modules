@@ -26,7 +26,7 @@ public class ContextExpressionModelBuilder extends AbstractContextExpressionMode
     private final EntitiesCache entitiesCache;
 
     @Autowired
-    public ContextExpressionModelBuilder(@Autowired EntitiesCache entitiesCache) {
+    public ContextExpressionModelBuilder(EntitiesCache entitiesCache) {
         this.entitiesCache = entitiesCache;
     }
 
