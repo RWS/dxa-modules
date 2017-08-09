@@ -23,8 +23,12 @@ public class ContextExpressionModelBuilder extends AbstractContextExpressionMode
     @Value("${dxa.modules.contextexpr.r2.extension_data_map_key}")
     private String cxKeyR2 = "CX";
 
+    private final EntitiesCache entitiesCache;
+
     @Autowired
-    private EntitiesCache entitiesCache;
+    public ContextExpressionModelBuilder(@Autowired EntitiesCache entitiesCache) {
+        this.entitiesCache = entitiesCache;
+    }
 
     @Override
     public <T extends EntityModel> T buildEntityModel(@Nullable T originalEntityModel, EntityModelData modelData, @Nullable Class<T> expectedClass) throws DxaException {
@@ -43,8 +47,7 @@ public class ContextExpressionModelBuilder extends AbstractContextExpressionMode
         if(entitiesCache.containsKey(cacheKey)) {
             //noinspection unchecked
             T modelInCache = (T) entitiesCache.get(cacheKey);
-
-            if (!modelInCache.getExtensionData().isEmpty() && extensionData.equals(modelInCache.getExtensionData())) {
+            if (hasAlreadyPassed(modelInCache)) {
                 return modelInCache;
             }
         }

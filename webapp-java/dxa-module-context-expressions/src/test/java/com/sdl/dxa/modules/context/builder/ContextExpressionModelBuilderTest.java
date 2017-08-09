@@ -26,11 +26,10 @@ public class ContextExpressionModelBuilderTest {
 
     @Before
     public void init() {
-
         EntitiesCache cache = new EntitiesCache();
         cache.setKeyGenerator(mock(LocalizationAwareKeyGenerator.class));
 
-        builder = new ContextExpressionModelBuilder();
+        builder = new ContextExpressionModelBuilder(cache);
         ReflectionTestUtils.setField(builder, "entitiesCache", cache);
         ReflectionTestUtils.setField(builder, "cxKeyR2", "CX");
     }
