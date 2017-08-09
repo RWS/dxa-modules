@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.Ordered;
 
 import java.util.Collection;
+import java.util.Map;
 
 import static com.google.common.collect.Sets.newHashSet;
 
@@ -31,5 +32,11 @@ public abstract class AbstractContextExpressionModelBuilder implements Ordered {
     @Override
     public int getOrder() {
         return 0;
+    }
+
+    protected <T extends EntityModel> boolean hasAlreadyPassed(T originalEntityModel) {
+        Map<String, Object> extensionData = originalEntityModel.getExtensionData();
+
+        return extensionData != null && !extensionData.isEmpty() && extensionData.containsKey(contextExpressionsKey);
     }
 }
