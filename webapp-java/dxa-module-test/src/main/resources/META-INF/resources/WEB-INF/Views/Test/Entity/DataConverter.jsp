@@ -23,11 +23,4 @@
             <li>${value}</li>
         </c:forEach>
     </ul>
-
-    <p>
-        GetRequestParams:
-        <c:forEach items="${entity.requestParameters}" var="item">
-            ${item.key} - ${item.value[0]}
-        </c:forEach>
-    </p>
 </div>
