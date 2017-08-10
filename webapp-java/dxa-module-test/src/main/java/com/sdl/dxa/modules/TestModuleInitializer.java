@@ -18,6 +18,7 @@ import com.sdl.dxa.modules.model.TSI2525.NoCachePageModel;
 import com.sdl.dxa.modules.model.TSI811.Tsi811PageModel;
 import com.sdl.dxa.modules.model.TSI811.Tsi811TestEntity;
 import com.sdl.dxa.modules.model.TSI811.Tsi811TestKeyword;
+import com.sdl.dxa.modules.model.dataconversion.DataConverterModel;
 import com.sdl.dxa.modules.model.ecl.EclTest;
 import com.sdl.dxa.modules.model.embed.EmbedChild;
 import com.sdl.dxa.modules.model.embed.EmbedParent;
@@ -72,6 +73,9 @@ import org.springframework.stereotype.Component;
         @RegisteredViewModel(viewName = "NoCacheEntity", modelClass = NoCacheEntityModel.class),
         @RegisteredViewModel(viewName = "CacheEntity", modelClass = CacheEntityModel.class),
         @RegisteredViewModel(viewName = "NoCachePage", modelClass = NoCachePageModel.class),
+
+        // DD4T / R2 Data Converter
+        @RegisteredViewModel(viewName = "DataConverter", modelClass = DataConverterModel.class)
 })
 public class TestModuleInitializer extends AbstractInitializer {
 
