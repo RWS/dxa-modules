@@ -11,7 +11,6 @@
     <p>DD4TJsonUrl: ${entity.dd4tJsonUrl}</p>
 
     <p>
-        <%-- Performing conversion to: <c:out value="${entity.requestParameters['modelType'][0]}"/> --%>
         Performing conversion to: ${entity.modelType}
     </p>
 
