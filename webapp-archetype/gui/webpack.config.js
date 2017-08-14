@@ -62,7 +62,7 @@ module.exports = (isTest, isDebug) => {
       rules: [
         {
           test: /\.(png|jpg|otf|woff(2)?|eot|ttf|svg)$/,
-          loader: 'url-loader?limit=200000'
+          loader: "url-loader?limit=200000"
         },
         {
           test: /\.css$/,
@@ -152,6 +152,9 @@ module.exports = (isTest, isDebug) => {
   if (!isDebug) {
     // Only for production
     config.plugins.push(
+      new webpack.DefinePlugin({
+        "process.env.NODE_ENV": JSON.stringify("production")
+      }),
       new webpack.optimize.UglifyJsPlugin({
         compress: {
           warnings: false

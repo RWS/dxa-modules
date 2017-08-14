@@ -1,12 +1,11 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Components, Services, IState, configureStore } from "@sdl/delivery-ish-dd-webapp-gui";
-import { browserHistory } from "react-router";
 import { Provider } from "react-redux";
 import { Store } from "redux";
 
 const { App } = Components.AppComp;
-const { PageService, PublicationService, TaxonomyService } = Services.Client;
+const { PageService, PublicationService, TaxonomyService, SearchService } = Services.Client;
 const { localization} = Services.Common;
 
 const mainElement = document.getElementById("main-view-target");
@@ -18,7 +17,8 @@ const services = {
     pageService: new PageService(),
     publicationService: new PublicationService(),
     localizationService: localization,
-    taxonomyService: new TaxonomyService()
+    taxonomyService: new TaxonomyService(),
+    searchService: new SearchService()
 };
 
 const store: Store<IState> = configureStore({});
@@ -31,7 +31,7 @@ const render = (AppComp: typeof App): void => {
     } else {
         ReactDOM.render(
             <Provider store={store}>
-                <AppComp services={services} history={browserHistory as ReactRouter.History} />
+                <AppComp services={services}/>
             </Provider>, mainElement);
     }
 };
