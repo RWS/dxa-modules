@@ -141,6 +141,9 @@ public class DataConverterModel extends AbstractEntityModel {
         }
         jsonDiffResults.put("testPassed", String.valueOf(jsonCompareResult.passed()));
         jsonDiffResults.put("compareMessage", jsonCompareResult.getMessage().split(";"));
+        jsonDiffResults.put("fieldFailures", jsonCompareResult.getFieldFailures());
+        jsonDiffResults.put("fieldMissing", jsonCompareResult.getFieldMissing());
+        jsonDiffResults.put("fieldUnexpected", jsonCompareResult.getFieldUnexpected());
         return jsonDiffResults;
     }
 }
