@@ -3,6 +3,7 @@
 .vs
 .idea
 *.iml
+*.log
 
 # gui
 gui/node
