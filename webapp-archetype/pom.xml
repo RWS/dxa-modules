@@ -51,7 +51,8 @@
         <webapp.version>1.0.0</webapp.version>
         <java.target.version>1.8</java.target.version>
         <maven.compiler.plugin.version>3.6.0</maven.compiler.plugin.version>
-        <dxa-bom.version>1.8.0-SNAPSHOT</dxa-bom.version>
+        <dxa.version>1.8.0-SNAPSHOT</dxa.version>
+        <cd-cil.version>10.0.0-1006</cd-cil.version>
         <maven.resources.plugin.version>3.0.2</maven.resources.plugin.version>
         <!-- GUI properties -->
         <frontend.maven.plugin.version>1.0</frontend.maven.plugin.version>
@@ -64,7 +65,7 @@
             <dependency>
                 <groupId>com.sdl.dxa</groupId>
                 <artifactId>dxa-bom</artifactId>
-                <version>${dxa-bom.version}</version>
+                <version>${dxa.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -82,6 +83,11 @@
             <artifactId>ish-ugc-module</artifactId>
             <version>${webapp.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.sdl.delivery.ish</groupId>
+            <artifactId>ish-search</artifactId>
+            <version>${webapp.version}</version>
+        </dependency>
 
         <!-- SDL Digital Experience Accelerator -->
         <dependency>
@@ -95,7 +101,36 @@
         <dependency>
             <groupId>com.sdl.dxa</groupId>
             <artifactId>dxa-web8-provider</artifactId>
+            <version>${dxa.version}</version>
+            <scope>runtime</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.sdl.web</groupId>
+                    <artifactId>cil</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
+        <dependency>
+            <groupId>com.sdl.delivery</groupId>
+            <artifactId>cil</artifactId>
+            <version>${cd-cil.version}</version>
+            <type>pom</type>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.vs.ezlicrun</groupId>
+                    <artifactId>easylicense</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.tridion</groupId>
+                    <artifactId>cd_broker</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.sdl.web</groupId>
+                    <artifactId>web-ambient-engine</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
 
         <dependency>
             <groupId>javax.servlet</groupId>
