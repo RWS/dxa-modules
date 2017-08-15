@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "description": "Custom GUI of the SDL Dita Delivery Web Application.",
   "dependencies": {
-    "react": "~15.5.1",
-    "react-dom": "~15.5.1",
-    "@types/react": "^15.0.27",
-    "@types/react-dom": "^15.5.0",
-    "@types/react-redux": "4.4.40",
-    "@sdl/delivery-ish-dd-webapp-gui": "1.0.0"
+    "@sdl/delivery-ish-dd-webapp-gui": "^1.0.0",
+    "@types/react": "^15.6.1",
+    "@types/react-dom": "^15.5.2",
+    "@types/react-redux": "^4.4.47",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
   },
   "devDependencies": {
     "@sdl/icons": "~1.1.0-14",
@@ -44,7 +44,7 @@
   "scripts": {
     "start": "gulp serve -- --max_old_space_size=2048",
     "build": "gulp -- --max_old_space_size=2048",
-    "build-server": "gulp build:dist"
+    "build-server": "gulp build:dist -- --max_old_space_size=2048"
   },
   "author": "noreply@sdl.com",
   "license": "Apache-2.0",
