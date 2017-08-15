@@ -11,6 +11,8 @@
       "@sdl/dd/*": ["node_modules/@sdl/delivery-ish-dd-webapp-gui/dist/typings/src/components/*"]
     },
     "module": "es2015",
+    /* Temporary fix for mismatched TS libs */
+    "skipLibCheck": true,
     "moduleResolution": "node",
     "noImplicitAny": true,
     "allowUnreachableCode": false,
