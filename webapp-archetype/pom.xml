@@ -1,24 +1,30 @@
-<project 
-    xmlns="http://maven.apache.org/POM/4.0.0" 
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>com.sdl.delivery.ish</groupId>
     <artifactId>dd-webapp</artifactId>
     <version>1.1.0-SNAPSHOT</version>
     <packaging>war</packaging>
+
     <name>custom-webapp</name>
     <description>Example web application for DITA Delivery</description>
     <url>http://www.sdl.com</url>
+
     <organization>
         <name>SDL Group</name>
         <url>http://www.sdl.com/</url>
     </organization>
+
     <licenses>
         <license>
             <name>SDL Web Developer Software and Distribution Agreement</name>
-            <url>                https://community.sdl.com/developers/tridion_developer/w/wiki/864.sdl-web-developer-software-and-distribution-agreement            </url>
+            <url>
+                https://community.sdl.com/developers/tridion_developer/w/wiki/864.sdl-web-developer-software-and-distribution-agreement
+            </url>
         </license>
     </licenses>
+
     <developers>
         <developer>
             <name>SDL Knowledge Center</name>
@@ -27,16 +33,19 @@
             <organizationUrl>${project.organization.url}</organizationUrl>
         </developer>
     </developers>
+
     <scm>
         <developerConnection>scm:git:ssh://git@${scm.connection.prefix.url}/tcd/common.git</developerConnection>
         <url>https://${scm.web.prefix.url}/TCD/repos/common</url>
     </scm>
+
     <repositories>
         <repository>
             <id>local-project-repo</id>
             <url>file:///${project.basedir}/local-project-repo</url>
         </repository>
     </repositories>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <webapp.version>1.1.0-SNAPSHOT</webapp.version>
@@ -50,6 +59,7 @@
         <node.version>v6.3.0</node.version>
         <npm.version>3.10.5</npm.version>
     </properties>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -118,12 +128,15 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>3.1.0</version>
         </dependency>
+
     </dependencies>
+
     <build>
         <pluginManagement>
             <plugins>
@@ -139,11 +152,13 @@
                 <groupId>com.github.eirslett</groupId>
                 <artifactId>frontend-maven-plugin</artifactId>
                 <version>${frontend.maven.plugin.version}</version>
+
                 <configuration>
                     <nodeVersion>${node.version}</nodeVersion>
                     <npmVersion>${npm.version}</npmVersion>
                     <workingDirectory>gui</workingDirectory>
                 </configuration>
+
                 <executions>
                     <execution>
                         <!-- optional: you don't really need execution ids,
@@ -155,6 +170,7 @@
                         <!-- optional: default phase is "generate-resources" -->
                         <phase>generate-resources</phase>
                     </execution>
+
                     <execution>
                         <id>npm prune</id>
                         <goals>
@@ -164,6 +180,7 @@
                             <arguments>prune</arguments>
                         </configuration>
                     </execution>
+
                     <execution>
                         <id>npm update</id>
                         <goals>
@@ -173,6 +190,7 @@
                             <arguments>update</arguments>
                         </configuration>
                     </execution>
+
                     <execution>
                         <id>npm install</id>
                         <goals>
@@ -182,13 +200,16 @@
                             <arguments>install --unsafe-perm</arguments>
                         </configuration>
                     </execution>
+
                     <execution>
                         <id>build script</id>
                         <goals>
                             <goal>npm</goal>
                         </goals>
+
                         <!-- optional: the default phase is "generate-resources" -->
                         <phase>generate-resources</phase>
+
                         <configuration>
                             <arguments>run-script build-server</arguments>
                         </configuration>
