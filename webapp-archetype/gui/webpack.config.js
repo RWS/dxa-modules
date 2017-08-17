@@ -36,8 +36,8 @@ module.exports = (isTest, isDebug) => {
         ReactDOMServer: "react-dom/server",
         // Custom theme
         "theme-styles.less": path.resolve(
-            __dirname,
-            "node_modules/@sdl/delivery-ish-dd-webapp-gui/src/theming/styles.less"
+          __dirname,
+          "node_modules/@sdl/delivery-ish-dd-webapp-gui/src/theming/styles.less"
         ),
         // Custom components overwrites
         // ...
