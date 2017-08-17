@@ -3,7 +3,7 @@ const webpack = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const extractCSS = new ExtractTextPlugin("stylesheets/[name].css");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const Visualizer = require("webpack-visualizer-plugin");
+//const Visualizer = require("webpack-visualizer-plugin");
 
 module.exports = (isTest, isDebug) => {
   const entries = {
@@ -108,9 +108,10 @@ module.exports = (isTest, isDebug) => {
         hash: true,
         excludeChunks: ["test", "server"]
       }),
+	  /* Disabled visualizer as it takes too much memory, only enable when needed
       new Visualizer({
         filename: "../bundle.stats.html"
-      })
+      })*/
     ],
     // What information should be printed to the console
     stats: {
