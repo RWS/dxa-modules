@@ -11,8 +11,6 @@
       "@sdl/dd/*": ["node_modules/@sdl/delivery-ish-dd-webapp-gui/dist/typings/src/components/*"]
     },
     "module": "es2015",
-    /* Temporary fix for mismatched TS libs */
-    "skipLibCheck": true,
     "moduleResolution": "node",
     "noImplicitAny": true,
     "allowUnreachableCode": false,
@@ -27,14 +25,15 @@
     "emitBOM": false,
     "suppressImplicitAnyIndexErrors": false,
     "target": "es5",
-    "declaration": false,
+     "lib": ["es6", "es5", "dom", "dom.iterable", "scripthost", "es2016.array.include", "es2017.object"],
+    "declaration": true,
+    "declarationDir": "../typings/",
     "experimentalDecorators": true,
     "jsx": "react",
     "strictNullChecks": true,
     "noImplicitThis": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": false,
-    "noEmitHelpers": false
+    "noUnusedParameters": false
   },
   "compileOnSave": false, // Gulp does this for us
   "exclude": [
