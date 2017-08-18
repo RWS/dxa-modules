@@ -71,6 +71,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
     <dependencies>
         <dependency>
             <groupId>com.sdl.delivery.ish</groupId>
