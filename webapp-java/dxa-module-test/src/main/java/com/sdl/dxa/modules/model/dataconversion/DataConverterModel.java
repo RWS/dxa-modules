@@ -41,11 +41,13 @@ public class DataConverterModel extends AbstractEntityModel {
 
     private static final String DD4T_PUB_ID_PARAM_NAME = "dd4tPubId";
 
+    private static final String R2_CONTEXT_PATH = "r2Path";
+
+    private static final String DD4T_CONTEXT_PATH = "dd4tPath";
+
     private static final String MODEL_SERVICE_HOST_PARAM_NAME = "modelServiceHost";
 
-    private static final String R2_JSON_URL_FORMAT = "http://%s:8998/PageModel/tcm/%s/index?modelType=%s";
-
-    private static final String DD4T_JSON_FORMAT = "http://%s:8998/PageModel/tcm/%s/example-legacy/index?modelType=%s";
+    private static final String JSON_URL_FORMAT = "http://%s:8998/PageModel/tcm/%s/%s?modelType=%s";
 
     private static final String MISSING_PARAMETER_MESSAGE_FORMAT = "Expected '%s' parameter is missing in the query string: %s";
 
@@ -65,12 +67,12 @@ public class DataConverterModel extends AbstractEntityModel {
 
     // Constructs URL for R2 Data Model JSON
     public String getR2JsonUrl() {
-        return String.format(R2_JSON_URL_FORMAT, getModelServiceHost(), getR2PubId(), getModelType());
+        return String.format(JSON_URL_FORMAT, getModelServiceHost(), getR2PubId(), getR2ContextPath(), getModelType());
     }
 
     // Constructs URL for DD4T (Legacy) Data Model JSON
     public String getDd4tJsonUrl() {
-        return String.format(DD4T_JSON_FORMAT, getModelServiceHost(), getDd4tPubId(), getModelType());
+        return String.format(JSON_URL_FORMAT, getModelServiceHost(), getDd4tPubId(), getDd4TContextPath(), getModelType());
     }
 
     // Gets Model Type from the request parameters
@@ -118,6 +120,24 @@ public class DataConverterModel extends AbstractEntityModel {
             return getRequestParameters().get(MODEL_SERVICE_HOST_PARAM_NAME)[0];
         } else {
             throw new IllegalArgumentException(String.format(MISSING_PARAMETER_MESSAGE_FORMAT, MODEL_SERVICE_HOST_PARAM_NAME, getQueryString()));
+        }
+    }
+
+    // Gets context path for the page (including R2 Publication Context path)
+    private String getR2ContextPath() {
+        if (getRequestParameters().containsKey(R2_CONTEXT_PATH)) {
+            return getRequestParameters().get(R2_CONTEXT_PATH)[0];
+        } else {
+            throw new IllegalArgumentException(String.format(MISSING_PARAMETER_MESSAGE_FORMAT, R2_CONTEXT_PATH, getQueryString()));
+        }
+    }
+
+    // Gets context path for the page (including R2 Publication Context path)
+    private String getDd4TContextPath() {
+        if (getRequestParameters().containsKey(DD4T_CONTEXT_PATH)) {
+            return getRequestParameters().get(DD4T_CONTEXT_PATH)[0];
+        } else {
+            throw new IllegalArgumentException(String.format(MISSING_PARAMETER_MESSAGE_FORMAT, DD4T_CONTEXT_PATH, getQueryString()));
         }
     }
 
