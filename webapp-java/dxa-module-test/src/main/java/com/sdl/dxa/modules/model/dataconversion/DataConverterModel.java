@@ -32,7 +32,6 @@ import static org.skyscreamer.jsonassert.JSONCompare.compareJSON;
 @RequestMapping
 @Slf4j
 @NeverCached(qualifier = "DataConverterModel")
-@SemanticEntity(entityName = "Content")
 public class DataConverterModel extends AbstractEntityModel {
 
     private static final String MODEL_TYPE_PARAM_NAME = "modelType";
@@ -50,10 +49,6 @@ public class DataConverterModel extends AbstractEntityModel {
     private static final String JSON_URL_FORMAT = "http://%s:8998/PageModel/tcm/%s/%s?modelType=%s";
 
     private static final String MISSING_PARAMETER_MESSAGE_FORMAT = "Expected '%s' parameter is missing in the query string: %s";
-
-    @SemanticProperty("SingleLineText")
-    @JsonProperty("SingleLineText")
-    public String singleLineText;
 
     // Gets a map with current request parameters
     public Map<String, String[]> getRequestParameters() {
