@@ -128,5 +128,5 @@ const mapStateToProps = (state: IState) => {
  * @export
  */
 export const StateToRoute = withRouter(
-    connect(mapStateToProps)(StateToRoutePresentation)
+    connect<any, any, any>(mapStateToProps)(StateToRoutePresentation)
 );
