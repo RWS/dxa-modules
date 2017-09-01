@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { ICommentProps, Comment } from "@sdl/dd/Comment/Comment";
+import { IComment } from "interfaces/ServerModels";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 import { TestBase } from "@sdl/models";
 
@@ -13,9 +14,10 @@ class CommentComponent extends TestBase {
             const userName: string = "tester";
             const creationDate: string = "15.06.2017";
             const content: string = "Test comment";
+            const replies: IComment[] = [];
 
             it("Correct component render", (): void => {
-                const commentComponent = this._renderComponent({userName, creationDate, content}, target);
+                const commentComponent = this._renderComponent({userName, creationDate, content, replies}, target);
                 const commentNode = ReactDOM.findDOMNode(commentComponent);
                 const name = commentNode.querySelector(".sdl-dita-delivery-comment-username");
                 const date = commentNode.querySelector(".sdl-dita-delivery-comment-date");

@@ -50,7 +50,7 @@
     "ts-helpers": "~1.1.2"
   },
   "devDependencies": {
-    "@sdl/icons": "1.1.0-14",
+    "@sdl/icons": "1.1.0-16",
     "async": "~2.1.4",
     "autoprefixer": "~6.7.0",
     "babel-polyfill": "^6.23.0",
@@ -81,6 +81,7 @@
     "karma-phantomjs-launcher": "~1.0.2",
     "less": "~2.7.1",
     "less-loader": "~2.2.3",
+    "napa": "^2.3.0",
     "postcss-loader": "~1.2.2",
     "proxy-middleware": "^0.15.0",
     "react-addons-test-utils": "^15.5.1",
@@ -109,6 +110,6 @@
   "author": "jbevers@sdl.com",
   "license": "Apache-2.0",
   "napa": {
-    "dita-ot": "dita-ot/dita-ot#ff8fbfd1d1dc69773e0af1cd726408b651eba1ec"
+    "dita-ot": "https://github.com/dita-ot/dita-ot.git"
   }
 }

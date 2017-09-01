@@ -20,6 +20,8 @@
   "component.post.comment.no.content": "Comment can't be blank",
   "component.post.comment.submit": "Provide your feedback",
   "component.post.comment.post.error": "Oops, something went wrong while trying to post your comment. Try again and if the error persists, please contact an administrator.",
+  "component.post.comment.reply": "Reply",
+  "component.post.comment.showreplies": "Show {0} replies", 
   "component.comments.list.more": "Load more comments",
   "component.comments.list.amount": "Showing {0} of {1} comments",
   "component.comments.list.error": "We couldn't load comments due to server errors. Please contact an administrator if error persists.",

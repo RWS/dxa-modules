@@ -68,7 +68,9 @@ export class CommentsListPresentation extends React.Component<ICommentsListProps
                         key={comment.id}
                         content={unescape(comment.content) }
                         creationDate={calcCreationDate(comment.creationDate) }
-                        userName={unescape(comment.user.name) } />;
+                        userName={unescape(comment.user.name) }
+                        replies={comment.children}
+                         />;
                 })}
                 {totalCommentsCount > displayedCommentsCount && <div className="sdl-dita-delivery-comments-list-more">
                     <button className="sdl-button graphene sdl-button-purpose-ghost" onClick={this.showMoreComments}>{formatMessage("component.comments.list.more")}</button>
