@@ -16,7 +16,7 @@
     </NuGetPackageImportStamp>
     <SdlDeliveryVersion>8.5.0</SdlDeliveryVersion>
     <SdlDxaDataModelPackageVersion>2.0.0-beta-201707211209</SdlDxaDataModelPackageVersion>
-    <DxaFrameworkVersion>2.0.0-beta-201708151247</DxaFrameworkVersion>
+    <DxaFrameworkVersion>2.0.0-beta-201709041826</DxaFrameworkVersion>
     <ExperienceManagerVersion>8.5.0</ExperienceManagerVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -51,7 +51,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Sdl.Web.Legacy.Model">
-      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.2.0.0-beta-201708151247\lib\net452\Sdl.Web.Legacy.Model.dll</HintPath>
+      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net452\Sdl.Web.Legacy.Model.dll</HintPath>
     </Reference>
     <Reference Include="Sdl.Web.Mvc">
       <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net452\Sdl.Web.Mvc.dll</HintPath>
