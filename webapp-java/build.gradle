@@ -27,7 +27,7 @@ task help(type: MavenHelpTask)
 task buildModules(type: MavenBuildTask) {
     configurations = [
             [
-                    "dxa-module-smarttarget-abstract",
+                    "dxa-module-smarttarget",
                     "dxa-module-context-expressions-abstract",
                     "dxa-module-audience-manager",
                     "dxa-module-cid",
@@ -39,7 +39,6 @@ task buildModules(type: MavenBuildTask) {
                     "dxa-module-test"
             ],
             [
-                    "dxa-module-smarttarget",
                     "dxa-module-context-expressions",
             ]
     ]

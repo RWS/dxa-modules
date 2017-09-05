@@ -44,8 +44,8 @@ public class SmartTargetRegion extends RegionModelImpl {
     /**
      * <p>Constructor for SmartTargetRegion.</p>
      *
-     * @param name a {@link java.lang.String} object.
-     * @throws com.sdl.webapp.common.exceptions.DxaException if any.
+     * @param name a {@link String} object.
+     * @throws DxaException if any.
      */
     public SmartTargetRegion(String name) throws DxaException {
         super(name);
@@ -54,9 +54,9 @@ public class SmartTargetRegion extends RegionModelImpl {
     /**
      * <p>Constructor for SmartTargetRegion.</p>
      *
-     * @param name              a {@link java.lang.String} object.
-     * @param qualifiedViewName a {@link java.lang.String} object.
-     * @throws com.sdl.webapp.common.exceptions.DxaException if any.
+     * @param name              a {@link String} object.
+     * @param qualifiedViewName a {@link String} object.
+     * @throws DxaException if any.
      */
     public SmartTargetRegion(String name, String qualifiedViewName) throws DxaException {
         super(name, qualifiedViewName);
@@ -65,8 +65,8 @@ public class SmartTargetRegion extends RegionModelImpl {
     /**
      * <p>Constructor for SmartTargetRegion.</p>
      *
-     * @param mvcData a {@link com.sdl.webapp.common.api.model.MvcData} object.
-     * @throws com.sdl.webapp.common.exceptions.DxaException if any.
+     * @param mvcData a {@link MvcData} object.
+     * @throws DxaException if any.
      */
     public SmartTargetRegion(MvcData mvcData) throws DxaException {
         super(mvcData);

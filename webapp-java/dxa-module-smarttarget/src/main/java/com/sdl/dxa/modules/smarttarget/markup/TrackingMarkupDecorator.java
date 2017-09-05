@@ -42,6 +42,11 @@ public class TrackingMarkupDecorator implements MarkupDecorator {
         return markup;
     }
 
+    @Override
+    public int getPriority() {
+        return 1;
+    }
+
     String processMarkupByAnalytics(HtmlNode markup, ViewModel model) {
         SmartTargetExperiment experiment = (SmartTargetExperiment) model;
         try {
@@ -51,10 +56,5 @@ public class TrackingMarkupDecorator implements MarkupDecorator {
             log.warn("Exception while adding tracking to experiment links", e);
             return markup.toHtml();
         }
-    }
-
-    @Override
-    public int getPriority() {
-        return 1;
     }
 }
