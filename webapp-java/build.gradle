@@ -40,9 +40,7 @@ task buildModules(type: MavenBuildTask) {
             ],
             [
                     "dxa-module-smarttarget",
-                    "dxa-module-smarttarget-legacy",
                     "dxa-module-context-expressions",
-                    "dxa-module-context-expressions-legacy"
             ]
     ]
 

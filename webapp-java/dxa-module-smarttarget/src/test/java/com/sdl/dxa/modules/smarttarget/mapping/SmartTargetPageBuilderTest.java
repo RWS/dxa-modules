@@ -43,7 +43,6 @@ public class SmartTargetPageBuilderTest {
     @InjectMocks
     private SmartTargetPageBuilder pageBuilder;
 
-    @SuppressWarnings("Duplicates")
     private static PageModel createPageModel(RegionModel... regionModels) throws DxaException {
         PageModel pageModel = new DefaultPageModel();
 
