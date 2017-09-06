@@ -24,12 +24,6 @@
     </scm>
 
     <dependencies>
-
-        <dependency>
-            <groupId>com.sdl.dxa.modules</groupId>
-            <artifactId>dxa-module-context-expressions-abstract</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>com.sdl.dxa</groupId>
             <artifactId>dxa-r2-provider</artifactId>
