@@ -2,7 +2,6 @@ package com.sdl.dxa.modules.smarttarget.model.entity;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sdl.dxa.DxaSpringInitialization;
-import com.sdl.dxa.modules.smarttarget.SmartTargetInitializer;
 import com.sdl.dxa.modules.smarttarget.markup.TrackingMarkupDecorator;
 import com.sdl.webapp.common.util.ApplicationContextHolder;
 import com.tridion.smarttarget.analytics.tracking.ExperimentDimensions;
@@ -74,7 +73,7 @@ public class SmartTargetExperimentTest {
 
     @Configuration
     @Profile("test")
-    public static class SpringConfigurationContext extends SmartTargetInitializer {
+    public static class SpringConfigurationContext {
         @Bean
         public ObjectMapper objectMapper() {
             return new DxaSpringInitialization().objectMapper();
@@ -85,7 +84,7 @@ public class SmartTargetExperimentTest {
             return new ApplicationContextHolder();
         }
 
-        @Override
+        @Bean
         public TrackingMarkupDecorator trackingMarkupDecorator() {
             return null;
         }
