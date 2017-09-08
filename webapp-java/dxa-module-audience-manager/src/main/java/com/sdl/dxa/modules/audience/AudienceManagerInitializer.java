@@ -2,7 +2,7 @@ package com.sdl.dxa.modules.audience;
 
 import com.sdl.dxa.modules.audience.model.CurrentUserWidget;
 import com.sdl.dxa.modules.audience.model.LoginForm;
-import com.sdl.webapp.common.api.mapping.views.AbstractInitializer;
+import com.sdl.webapp.common.api.mapping.views.AbstractModuleInitializer;
 import com.sdl.webapp.common.api.mapping.views.ModuleInfo;
 import com.sdl.webapp.common.api.mapping.views.RegisteredViewModel;
 import com.sdl.webapp.common.api.mapping.views.RegisteredViewModels;
@@ -49,7 +49,7 @@ public class AudienceManagerInitializer { //NOSONAR
             @RegisteredViewModel(viewName = "LoginForm", modelClass = LoginForm.class, controllerName = "Profile"),
             @RegisteredViewModel(viewName = "CurrentUserWidget", modelClass = CurrentUserWidget.class, controllerName = "Profile")
     })
-    public static class ModuleInitializer extends AbstractInitializer {
+    public static class ModuleInitializer extends AbstractModuleInitializer {
 
         @Override
         protected String getAreaName() {

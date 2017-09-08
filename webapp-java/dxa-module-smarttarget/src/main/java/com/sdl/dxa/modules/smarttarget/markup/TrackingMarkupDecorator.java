@@ -43,7 +43,7 @@ public class TrackingMarkupDecorator implements MarkupDecorator {
     }
 
     @Override
-    public int getPriority() {
+    public int getOrder() {
         return 1;
     }
 

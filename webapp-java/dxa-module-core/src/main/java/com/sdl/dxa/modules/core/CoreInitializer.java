@@ -1,4 +1,4 @@
-package com.sdl.dxa.core;
+package com.sdl.dxa.modules.core;
 
 import com.sdl.dxa.modules.core.model.entity.Article;
 import com.sdl.dxa.modules.core.model.entity.ContentList;
@@ -11,7 +11,7 @@ import com.sdl.dxa.modules.core.model.entity.Place;
 import com.sdl.dxa.modules.core.model.entity.TagLinkList;
 import com.sdl.dxa.modules.core.model.entity.Teaser;
 import com.sdl.dxa.modules.core.model.entity.YouTubeVideo;
-import com.sdl.webapp.common.api.mapping.views.AbstractInitializer;
+import com.sdl.webapp.common.api.mapping.views.AbstractModuleInitializer;
 import com.sdl.webapp.common.api.mapping.views.ModuleInfo;
 import com.sdl.webapp.common.api.mapping.views.RegisteredViewModel;
 import com.sdl.webapp.common.api.mapping.views.RegisteredViewModels;
@@ -24,8 +24,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 @org.springframework.context.annotation.Configuration
-//todo dxa2 move to com.sdl.dxa.modules.*
-@ComponentScan("com.sdl.dxa.core")
+@ComponentScan("com.sdl.dxa.modules.core")
 public class CoreInitializer {
 
     @RegisteredViewModels({
@@ -80,7 +79,7 @@ public class CoreInitializer {
     })
     @Component
     @ModuleInfo(name = "Core module", areaName = "Core", description = "Core DXA module which contains basic views")
-    public static class CoreViewInitializer extends AbstractInitializer {
+    public static class CoreModuleInitializer extends AbstractModuleInitializer {
         @Override
         protected String getAreaName() {
             return "Core";
