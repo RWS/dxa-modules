@@ -106,7 +106,7 @@
     "test-debug": "gulp serve:test -- --max_old_space_size=2048",
     "install": "napa"
   },
-  "author": "jbevers@sdl.com",
+  "author": "jbevers@sdl.com, oorlov@sdl.com",
   "license": "Apache-2.0",
   "napa": {
     "dita-ot": "dita-ot/dita-ot#ff8fbfd1d1dc69773e0af1cd726408b651eba1ec"
