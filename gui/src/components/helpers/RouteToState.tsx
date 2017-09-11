@@ -100,7 +100,8 @@ const mapDispatchToProps = {
  * @export
  */
 export const RouteToState = withRouter(
-    connect(mapStateToProps, mapDispatchToProps)(RouteToStatePresentation)
+    // tslint:disable-next-line:no-any
+    connect<any, any, any>(mapStateToProps, mapDispatchToProps)(RouteToStatePresentation)
 );
 
 function compareProps(props1: {}, props2: {}): boolean {

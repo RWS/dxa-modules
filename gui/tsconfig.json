@@ -1,43 +1,36 @@
 {
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "*": [
-        "*",
-        "src/*"
-      ],
-      /* Components */
-      "@sdl/dd/*": ["src/components/*"]
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "*": ["*", "src/*"],
+            /* Components */
+            "@sdl/dd/*": ["src/components/*"]
+        },
+        "module": "es2015",
+        "moduleResolution": "node",
+        "noImplicitAny": true,
+        "allowUnreachableCode": false,
+        "allowUnusedLabels": false,
+        "forceConsistentCasingInFileNames": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitReturns": true,
+        "removeComments": false,
+        "preserveConstEnums": false,
+        "sourceMap": true,
+        "noEmitOnError": true,
+        "emitBOM": false,
+        "suppressImplicitAnyIndexErrors": false,
+        "target": "es5",
+        "lib": ["es6", "es5", "dom", "dom.iterable", "scripthost", "es2016.array.include", "es2017.object"],
+        "experimentalDecorators": true,
+        "jsx": "react",
+        "typeRoots": ["node_modules/@types"],
+        "strictNullChecks": true,
+        "noImplicitThis": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": false,
+        "noEmitHelpers": true
     },
-    "module": "es2015",
-    "moduleResolution": "node",
-    "noImplicitAny": true,
-    "allowUnreachableCode": false,
-    "allowUnusedLabels": false,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitReturns": true,
-    "removeComments": false,
-    "preserveConstEnums": false,
-    "sourceMap": true,
-    "noEmitOnError": true,
-    "emitBOM": false,
-    "suppressImplicitAnyIndexErrors": false,
-    "target": "es5",
-    "lib": ["es6", "es5", "dom", "dom.iterable", "scripthost", "es2016.array.include", "es2017.object"],
-    "declaration": true,
-    "declarationDir": "../typings/",
-    "experimentalDecorators": true,
-    "jsx": "react",
-    "strictNullChecks": true,
-    "noImplicitThis": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": false,
-    "noEmitHelpers": true
-  },
-  "compileOnSave": false, // Gulp does this for us
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+    "compileOnSave": false, // Gulp does this for us
+    "exclude": ["node_modules", "dist"]
 }

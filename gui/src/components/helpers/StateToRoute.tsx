@@ -128,5 +128,6 @@ const mapStateToProps = (state: IState) => {
  * @export
  */
 export const StateToRoute = withRouter(
-    connect(mapStateToProps)(StateToRoutePresentation)
+    // tslint:disable-next-line:no-any
+    connect<any, any, any>(mapStateToProps)(StateToRoutePresentation)
 );
