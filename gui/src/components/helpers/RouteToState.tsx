@@ -100,7 +100,7 @@ const mapDispatchToProps = {
  * @export
  */
 export const RouteToState = withRouter(
-    connect<any, any, any>(mapStateToProps, mapDispatchToProps)(RouteToStatePresentation)
+    connect(mapStateToProps, mapDispatchToProps)(RouteToStatePresentation)
 );
 
 function compareProps(props1: {}, props2: {}): boolean {
