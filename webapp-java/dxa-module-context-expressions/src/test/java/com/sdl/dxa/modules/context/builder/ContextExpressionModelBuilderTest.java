@@ -13,7 +13,6 @@ import com.sdl.webapp.common.exceptions.DxaException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.Collections;
@@ -77,6 +76,12 @@ public class ContextExpressionModelBuilderTest {
         org.junit.Assert.assertTrue(conditions.getIncludes().contains("include2"));
 
     }
+
+    @Test
+    public void shouldNotHaveHighPriority() {
+        Assert.assertTrue(builder.getOrder() >= 0);
+    }
+
     private static class TestEntity extends AbstractEntityModel {
 
     }

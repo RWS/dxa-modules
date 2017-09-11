@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
@@ -12,8 +12,8 @@
     <groupId>com.sdl.dxa.modules</groupId>
     <artifactId>dxa-module-smarttarget</artifactId>
 
-    <name>DXA Modules - XO support, R2 implementation</name>
-    <description>R2 implementation of DXA XO support</description>
+    <name>DXA Modules - XO support</name>
+    <description>Implementation of DXA XO support</description>
 
     <scm>
         <url>https://github.com/sdl/dxa-modules</url>
@@ -23,25 +23,59 @@
     </scm>
 
     <dependencies>
-
-        <dependency>
-            <groupId>com.sdl.dxa.modules</groupId>
-            <artifactId>dxa-module-smarttarget-abstract</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>com.sdl.dxa</groupId>
-            <artifactId>dxa-r2-provider</artifactId>
+            <artifactId>dxa-common-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sdl.dxa</groupId>
+            <artifactId>dxa-tridion-provider</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.sdl.web</groupId>
+            <artifactId>cil</artifactId>
+            <type>pom</type>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-library</artifactId>
         </dependency>
     </dependencies>
 

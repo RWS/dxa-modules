@@ -22,7 +22,7 @@ import com.sdl.dxa.modules.model.dataconversion.DataConverterModel;
 import com.sdl.dxa.modules.model.ecl.EclTest;
 import com.sdl.dxa.modules.model.embed.EmbedChild;
 import com.sdl.dxa.modules.model.embed.EmbedParent;
-import com.sdl.webapp.common.api.mapping.views.AbstractInitializer;
+import com.sdl.webapp.common.api.mapping.views.AbstractModuleInitializer;
 import com.sdl.webapp.common.api.mapping.views.RegisteredViewModel;
 import com.sdl.webapp.common.api.mapping.views.RegisteredViewModels;
 import com.sdl.webapp.common.api.model.page.DefaultPageModel;
@@ -77,7 +77,7 @@ import org.springframework.stereotype.Component;
         // DD4T / R2 Data Converter
         @RegisteredViewModel(viewName = "DataConverter", modelClass = DataConverterModel.class)
 })
-public class TestModuleInitializer extends AbstractInitializer {
+public class TestModuleInitializer extends AbstractModuleInitializer {
 
     @Override
     protected String getAreaName() {

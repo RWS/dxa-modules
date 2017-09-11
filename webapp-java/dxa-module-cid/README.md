@@ -10,7 +10,7 @@ then contact SDL if you want to use CID.
 You can also choose to not use CID. The web application will then use a different implementation of `MediaHelper` to
 resize images.
 
-In the module `webapp-common-impl` there is a Spring factory bean `MediaHelperFactory` that automatically chooses the
+In the `dxa-common-api` there is a Spring factory bean `MediaHelperFactory` that automatically chooses the
 implementation of `MediaHelper` to use. It does this by checking if the CID-specific implementation is available in the
 classpath. If it is, it will use the CID-specific implementation, otherwise it will use the default implementation.
 
@@ -24,4 +24,4 @@ you can compile the web application with support for CID by compiling the projec
 If you do not want to use CID, simply leave off `-P cid`.
 
 Note that if you do use CID, you will have to edit the configuration file `cd_ambient_conf` in
-`example-webapp\src\main\resources` to enable the CID Ambient Data Framework cartridge.
+`dxa-webapp\src\main\resources` to enable the CID Ambient Data Framework cartridge.

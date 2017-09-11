@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -13,8 +13,8 @@
     <groupId>com.sdl.dxa.modules</groupId>
     <artifactId>dxa-module-context-expressions</artifactId>
 
-    <name>DXA Modules - Context Expressions support, R2 implementation</name>
-    <description>R2 implementation of DXA Context Expressions support module</description>
+    <name>DXA Modules - Context Expressions support</name>
+    <description>Implementation of DXA Context Expressions support module</description>
 
     <scm>
         <url>https://github.com/sdl/dxa-modules</url>
@@ -26,13 +26,18 @@
     <dependencies>
 
         <dependency>
-            <groupId>com.sdl.dxa.modules</groupId>
-            <artifactId>dxa-module-context-expressions-abstract</artifactId>
+            <groupId>com.sdl.dxa</groupId>
+            <artifactId>dxa-common-api</artifactId>
         </dependency>
 
         <dependency>
             <groupId>com.sdl.dxa</groupId>
-            <artifactId>dxa-r2-provider</artifactId>
+            <artifactId>dxa-tridion-provider</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
         </dependency>
 
         <dependency>
@@ -46,10 +51,6 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.sdl.dxa</groupId>
-            <artifactId>dxa-common-api</artifactId>
         </dependency>
     </dependencies>
 

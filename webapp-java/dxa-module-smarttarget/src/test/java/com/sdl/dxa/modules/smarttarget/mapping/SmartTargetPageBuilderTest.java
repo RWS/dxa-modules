@@ -15,6 +15,11 @@ import com.sdl.webapp.common.api.model.page.DefaultPageModel;
 import com.sdl.webapp.common.api.model.region.RegionModelImpl;
 import com.sdl.webapp.common.api.model.region.RegionModelSetImpl;
 import com.sdl.webapp.common.exceptions.DxaException;
+import com.tridion.smarttarget.SmartTargetException;
+import com.tridion.smarttarget.utils.TcmUri;
+import junit.framework.TestCase;
+import org.hamcrest.BaseMatcher;
+import org.hamcrest.Description;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,7 +48,6 @@ public class SmartTargetPageBuilderTest {
     @InjectMocks
     private SmartTargetPageBuilder pageBuilder;
 
-    @SuppressWarnings("Duplicates")
     private static PageModel createPageModel(RegionModel... regionModels) throws DxaException {
         PageModel pageModel = new DefaultPageModel();
 
@@ -58,6 +62,40 @@ public class SmartTargetPageBuilderTest {
     public void init() {
         Mockito.when(webRequestContext.getLocalization()).thenReturn(localization);
         Mockito.when(localization.getId()).thenReturn("1");
+    }
+
+    @Test
+    public void shouldExpectPageModelIdAsIntegerID() throws SmartTargetException {
+        //given
+        SmartTargetPageModel model = new SmartTargetPageModel(new DefaultPageModel());
+        model.setId("128");
+        BaseMatcher<TcmUri> uriMatcher = new BaseMatcher<TcmUri>() {
+            @Override
+            public boolean matches(Object item) {
+                TcmUri uri = (TcmUri) item;
+                return uri.getItemId() == 128 && uri.getPublicationId() == 1;
+            }
+
+            @Override
+            public void describeTo(Description description) {
+                description.appendText("TCM URI is parsed successfully");
+            }
+        };
+
+        Mockito.doReturn(null).when(pageBuilder).executeSmartTargetQuery(Matchers.any(SmartTargetPageModel.class), Matchers.any(TcmUri.class));
+
+        //when
+        pageBuilder.processQueryAndPromotions(localization, model, null);
+
+        //then
+        Mockito.verify(pageBuilder).executeSmartTargetQuery(Matchers.any(SmartTargetPageModel.class), Matchers.argThat(uriMatcher));
+    }
+
+    @Test
+    public void shouldHavePositiveePriority() {
+        //then
+        //lower is more priority
+        TestCase.assertTrue(this.pageBuilder.getOrder() >= 0);
     }
 
     @Test

@@ -4,7 +4,7 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.sdl.dxa.modules.search.model.SearchBox;
 import com.sdl.dxa.modules.search.model.SearchItem;
 import com.sdl.dxa.modules.search.model.SearchQuery;
-import com.sdl.webapp.common.api.mapping.views.AbstractInitializer;
+import com.sdl.webapp.common.api.mapping.views.AbstractModuleInitializer;
 import com.sdl.webapp.common.api.mapping.views.ModuleInfo;
 import com.sdl.webapp.common.api.mapping.views.RegisteredViewModel;
 import com.sdl.webapp.common.api.mapping.views.RegisteredViewModels;
@@ -27,7 +27,7 @@ public class SearchModuleInitializer {
     @ModuleInfo(name = "Search Module", areaName = "Search", description = "Support for SOLR and AWS searches, " +
             "Spring profiles for activation should be set explicitly: search.solr, search.aws")
     @Component
-    public static class SearchViewsInitializer extends AbstractInitializer {
+    public static class SearchViewsInitializer extends AbstractModuleInitializer {
         @Override
         protected String getAreaName() {
             return "Search";
