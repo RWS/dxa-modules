@@ -12,6 +12,7 @@
     "@types/react": "^15.6.1",
     "@types/react-dom": "^15.5.2",
     "@types/react-redux": "^4.4.47",
+    "es6-promise": "~4.0.5",
     "async": "~2.1.4",
     "autoprefixer": "~6.7.0",
     "babel-polyfill": "^6.23.0",

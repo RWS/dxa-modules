@@ -12,6 +12,7 @@ module.exports = (isTest, isDebug) => {
       "es6-promise",
       "react-router",
       "ts-helpers",
+      "babel-polyfill",
       "@sdl/models",
       "@sdl/controls",
       "@sdl/controls-react-wrappers"
@@ -44,7 +45,7 @@ module.exports = (isTest, isDebug) => {
         // Components aliases
         "@sdl/dd/base": path.resolve(
           __dirname,
-          "node_modules/@sdl/delivery-ish-dd-webapp-gui/dist/lib/components"
+          "./src/theming/styles.less"
         ),
         "@sdl/dd": path.resolve(
           __dirname,
