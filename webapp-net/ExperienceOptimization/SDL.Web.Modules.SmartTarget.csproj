@@ -16,7 +16,7 @@
     </NuGetPackageImportStamp>
     <SdlDeliveryVersion>8.5.0</SdlDeliveryVersion>
     <SdlDxaDataModelPackageVersion>2.0.0-beta-201707211209</SdlDxaDataModelPackageVersion>
-    <DxaFrameworkVersion>2.0.0-beta-201709041826</DxaFrameworkVersion>
+    <DxaFrameworkVersion>2.0.0-beta-201709111550</DxaFrameworkVersion>
     <ExperienceManagerVersion>8.5.0</ExperienceManagerVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

@@ -7,7 +7,6 @@ using Sdl.Web.Common.Logging;
 using Sdl.Web.Common.Models;
 using Sdl.Web.DataModel;
 using Sdl.Web.Tridion.Mapping;
-using Sdl.Web.Tridion.R2Mapping;
 using IPage = DD4T.ContentModel.IPage;
 
 namespace Sdl.Web.Modules.ContextExpressions

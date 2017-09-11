@@ -11,7 +11,6 @@ using Sdl.Web.DataModel;
 using Sdl.Web.Modules.SmartTarget.Models;
 using Sdl.Web.Tridion.ContentManager;
 using Sdl.Web.Tridion.Mapping;
-using Sdl.Web.Tridion.R2Mapping;
 using Tridion.ContentDelivery.AmbientData;
 using Tridion.SmartTarget.Analytics;
 using Tridion.SmartTarget.Query;
