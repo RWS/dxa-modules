@@ -10,7 +10,7 @@
     "@sdl/models": "~0.1.0-6",
     "@types/classnames": "^2.2.0",
     "@types/deep-assign": "^0.1.0",
-    "@types/history": "^3.0.2",
+    "@types/history": "~3.0.2",
     "@types/jasmine": "^2.5.51",
     "@types/lodash": "^4.14.65",
     "@types/moment": "^2.13.0",
