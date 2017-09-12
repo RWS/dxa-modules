@@ -27,7 +27,7 @@ export class SearchService implements ISearchService {
      *
      * @memberOf DataStoreClient
      */
-    public getSearchResults(query: ISearchQuery): Promise<ISearchQueryResults> {
+    public getSearchResults(query: ISearchQuery): Promise<ISearchQueryResults | undefined> {
         const { error, children } = this._mockDataToc;
         if (error) {
             return Promise.reject(error);

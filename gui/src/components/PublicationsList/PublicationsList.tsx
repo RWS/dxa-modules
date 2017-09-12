@@ -1,8 +1,13 @@
 import { connect } from "react-redux";
 import { IState } from "store/interfaces/State";
-import { isPubsLoading, getReleaseVersionsForPub, normalizeProductFamily,
-    normalizeProductReleaseVersion, translateProductReleaseVersions,
-    getPubListRepresentatives } from "store/reducers/Reducer";
+import {
+    isPubsLoading,
+    getReleaseVersionsForPub,
+    normalizeProductFamily,
+    normalizeProductReleaseVersion,
+    translateProductReleaseVersions,
+    getPubListRepresentatives
+} from "store/reducers/Reducer";
 import { fetchProductReleaseVersionsByProductFamily } from "store/actions/Api";
 import { PublicationsListPresentation, IPublicationsListProps } from "@sdl/dd/PublicationsList/PublicationsListPresentation";
 
@@ -13,10 +18,11 @@ const mapStateToProps = (state: IState, ownProps: IPublicationsListProps) => {
     const selectedProductVersion = params.productReleaseVersion ? params.productReleaseVersion : firstInAlist;
 
     let filter = { productFamily: normalizeProductFamily(params) };
-    if ( selectedProductVersion ) {
-        filter = {...filter, productReleaseVersion: normalizeProductReleaseVersion(selectedProductVersion)};
-    }
-    const publications = getPubListRepresentatives(state, filter);
+
+    const publications = getPubListRepresentatives(
+        state,
+        selectedProductVersion ? { ...filter, productReleaseVersion: normalizeProductReleaseVersion(selectedProductVersion) } : filter
+    );
 
     return {
         publications,

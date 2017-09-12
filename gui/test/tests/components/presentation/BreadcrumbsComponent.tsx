@@ -61,7 +61,7 @@ class BreadcrumbsComponent extends TestBase {
             const target = super.createTargetElement();
             let breadCrumbs: Breadcrumbs;
 
-            const loadItemPath = (breadCrumbItem: ITaxonomy): Promise<ITaxonomy[]> => {
+            const loadItemPath = (breadCrumbItem: ITaxonomy): Promise<IBreadcrumbItem[]> => {
                 const itemsToReturn: IBreadcrumbItem[] = [];
                 for (let item of itemsPath) {
                     itemsToReturn.push({
@@ -175,7 +175,7 @@ class BreadcrumbsComponent extends TestBase {
             const target = super.createTargetElement();
             let breadCrumbs: Breadcrumbs;
 
-            const loadItemPath = (breadCrumbItem: ITaxonomy): Promise<ITaxonomy[]> => {
+            const loadItemPath = (breadCrumbItem: ITaxonomy): Promise<IBreadcrumbItem[]> => {
                 const itemsToReturn: IBreadcrumbItem[] = Array.apply(null, Array(50)).map((n: undefined, i: number) => {
                     return {
                         title: `Tile ${i}`,
