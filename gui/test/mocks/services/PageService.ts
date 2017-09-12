@@ -31,7 +31,7 @@ export class PageService implements IPageService {
         error: null
     };
 
-    public getPageInfo(publicationId: string, pageId: string): Promise<IPage | undefined> {
+    public getPageInfo(publicationId: string, pageId: string): Promise<IPage> {
         const { error, info } = this._mockDataPage;
         if (fakeDelay) {
             return new Promise((resolve: (info?: IPage) => void, reject: (error: string | null) => void) => {
@@ -45,7 +45,7 @@ export class PageService implements IPageService {
                 }, ASYNC_DELAY);
             });
         } else {
-            if (error) {
+            if (error || !info) {
                 return Promise.reject(error);
             } else {
                 return Promise.resolve(info);

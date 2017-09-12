@@ -5,9 +5,9 @@
     "main": "dist/lib/Lib.js",
     "typings": "dist/typings/src/Lib.d.ts",
     "dependencies": {
-        "@sdl/controls": "0.1.0-49",
-        "@sdl/controls-react-wrappers": "0.1.0-59",
-        "@sdl/models": "0.1.0-10",
+        "@sdl/controls": "~0.1.0-49",
+        "@sdl/controls-react-wrappers": "~0.1.0-59",
+        "@sdl/models": "~0.1.0-10",
         "@types/classnames": "^2.2.0",
         "@types/deep-assign": "^0.1.0",
         "@types/history": "^3.0.2",

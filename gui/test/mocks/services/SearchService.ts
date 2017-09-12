@@ -15,7 +15,7 @@ export class SearchService implements ISearchService {
         result: undefined
     };
 
-    public getSearchResults(query: ISearchQuery): Promise<ISearchQueryResults | undefined> {
+    public getSearchResults(query: ISearchQuery): Promise<ISearchQueryResults> {
         const { error, result } = this._mockDataSearch;
         if (fakeDelay) {
             return new Promise((resolve: (result?: ISearchQueryResults) => void, reject: (error: string | null) => void) => {
