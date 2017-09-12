@@ -12,6 +12,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.util.Collections;
 
 @Slf4j
@@ -20,6 +21,15 @@ public class TrackingMarkupDecorator implements MarkupDecorator {
 
     @Setter
     private AnalyticsManager analyticsManager;
+
+    @PostConstruct
+    public void init() {
+        try {
+            this.setAnalyticsManager(AnalyticsManager.getConfiguredAnalyticsManager());
+        } catch (SmartTargetException e) {
+            log.warn("Analytics manager for XO markup decorator can't be initialized. Do you have a proper configuration?", e);
+        }
+    }
 
     @Override
     public HtmlNode process(HtmlNode markup, ViewModel model, WebRequestContext webRequestContext) {
