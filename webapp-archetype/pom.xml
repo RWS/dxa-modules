@@ -57,7 +57,7 @@
         <!-- GUI properties -->
         <frontend.maven.plugin.version>1.0</frontend.maven.plugin.version>
         <node.version>v6.11.2</node.version>
-        <npm.version>5.4.1</npm.version>
+        <npm.version>4.6.1</npm.version>
     </properties>
 
     <dependencyManagement>
