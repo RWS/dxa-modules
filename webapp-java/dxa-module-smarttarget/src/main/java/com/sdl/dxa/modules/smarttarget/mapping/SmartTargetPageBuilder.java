@@ -42,6 +42,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.Ordered;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
@@ -52,6 +53,7 @@ import java.util.List;
 import java.util.Map;
 
 @Slf4j
+@Component
 public class SmartTargetPageBuilder implements Ordered, PageModelBuilder {
 
     private static final String DUPLICATION_ON_SAME_PAGE_KEY = "allowDuplicationOnSamePage";
