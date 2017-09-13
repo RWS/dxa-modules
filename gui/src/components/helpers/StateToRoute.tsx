@@ -63,7 +63,6 @@ export class StateToRoutePresentation extends React.Component<Props, {}> {
      * Checks is we need to update location if route changed.
      */
     public shouldComponentUpdate(nextProps: Props): boolean {
-
         return this.propsToUrl(nextProps) !== this.propsToUrl(this.props)
             && this.propsToUrl(nextProps) !== browserHistory.getCurrentLocation().pathname;
     }
@@ -77,7 +76,7 @@ export class StateToRoutePresentation extends React.Component<Props, {}> {
 
         if (prevProps.publicationId !== props.publicationId
             || prevProps.anchor !== props.anchor
-            || prevProps.pageId !== "" && prevProps.pageId !== props.pageId) {
+            || (prevProps.pageId !== "" && prevProps.pageId !== props.pageId)) {
             browserHistory.push(this.propsToUrl(props));
         } else {
             //No need to push to history if only titles have chagned.
@@ -91,7 +90,7 @@ export class StateToRoutePresentation extends React.Component<Props, {}> {
      * @returns {JSX.Element}
      */
     public render(): JSX.Element {
-        return (<div />);
+        return <div />;
     }
 
     private propsToUrl(props: Props): string {
@@ -128,5 +127,6 @@ const mapStateToProps = (state: IState) => {
  * @export
  */
 export const StateToRoute = withRouter(
-    connect(mapStateToProps)(StateToRoutePresentation)
+    // tslint:disable-next-line:no-any
+    connect<any, any, any>(mapStateToProps)(StateToRoutePresentation)
 );

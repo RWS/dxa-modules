@@ -91,7 +91,7 @@ export class RouteToStatePresentation extends React.Component<Props, {}> {
 const mapStateToProps = (state: IState) => getCurrentPub(state);
 
 const mapDispatchToProps = {
-    onRouteChange: ({publicationId, pageId, anchor}: IPublicationCurrentState) => updateCurrentPublication(publicationId, pageId, anchor)
+    onRouteChange: ({ publicationId, pageId, anchor }: IPublicationCurrentState) => updateCurrentPublication(publicationId, pageId, anchor)
 };
 
 /**
@@ -100,7 +100,8 @@ const mapDispatchToProps = {
  * @export
  */
 export const RouteToState = withRouter(
-    connect(mapStateToProps, mapDispatchToProps)(RouteToStatePresentation)
+    // tslint:disable-next-line:no-any
+    connect<any, any, any>(mapStateToProps, mapDispatchToProps)(RouteToStatePresentation)
 );
 
 function compareProps(props1: {}, props2: {}): boolean {
