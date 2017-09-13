@@ -46,7 +46,7 @@ module.exports = (isTest, isDebug) => {
         ReactDOMServer: "react-dom/server",
         // This alias is needed so customization can happen on top of the theming folder
         // by using dependency injection techniques
-        "theme-styles.less": path.resolve(__dirname, "src/theming/styles.less"),
+        "theme-styles": path.resolve(__dirname, "src/theming/styles.less"),
 
         // Controls aliases
         "@sdl/dd": path.resolve(__dirname, "src/components")
