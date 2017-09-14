@@ -1,6 +1,6 @@
 [
   {
-    "id": 81883,
+    "id": 1437168300,
     "namespaceId": 0,
     "itemPublicationId": 1420746,
     "itemId": 164223,
@@ -8,42 +8,99 @@
     "score": 0,
     "status": 0,
     "creationDate": {
-      "dayOfMonth": 15,
-      "hour": 2,
-      "minute": 21,
+      "dayOfMonth": 0,
+      "hour": 6,
+      "minute": 0,
       "month": "",
-      "monthValue": 10,
+      "monthValue": 1,
       "nano": 0,
-      "second": 31,
-      "year": 2001,
+      "second": 0,
+      "year": 2013,
       "dayOfWeek": "",
-      "dayOfYear": 132
+      "dayOfYear": 146
     },
     "lastModifiedDate": {
-      "dayOfMonth": 15,
-      "hour": 2,
-      "minute": 21,
+      "dayOfMonth": 0,
+      "hour": 6,
+      "minute": 0,
       "month": "",
-      "monthValue": 10,
+      "monthValue": 1,
       "nano": 0,
-      "second": 31,
-      "year": 2001,
+      "second": 0,
+      "year": 2013,
       "dayOfWeek": "",
-      "dayOfYear": 132
+      "dayOfYear": 146
     },
-    "content": "Test comment with some content. Id of this comment is 81883.",
+    "content": "Test comment with some content. Id of this comment is 1437168300.",
     "moderator": null,
     "moderatedDate": {
-      "dayOfMonth": 15,
-      "hour": 2,
-      "minute": 21,
+      "dayOfMonth": 0,
+      "hour": 6,
+      "minute": 0,
       "month": "",
-      "monthValue": 10,
+      "monthValue": 1,
       "nano": 0,
-      "second": 31,
-      "year": 2001,
+      "second": 0,
+      "year": 2013,
       "dayOfWeek": "",
-      "dayOfYear": 132
+      "dayOfYear": 146
+    },
+    "parentId": 0,
+    "parent": null,
+    "children": null,
+    "user": {
+      "id": 1,
+      "name": "user 1",
+      "emailAddress": "user1@sdl.com",
+      "externalId": null
+    },
+    "idLong": 1437168300
+  },
+  {
+    "id": 1437168301,
+    "namespaceId": 0,
+    "itemPublicationId": 1420746,
+    "itemId": 164223,
+    "itemType": 64,
+    "score": 0,
+    "status": 0,
+    "creationDate": {
+      "dayOfMonth": 1,
+      "hour": 7,
+      "minute": 1,
+      "month": "",
+      "monthValue": 2,
+      "nano": 0,
+      "second": 1,
+      "year": 2014,
+      "dayOfWeek": "",
+      "dayOfYear": 147
+    },
+    "lastModifiedDate": {
+      "dayOfMonth": 1,
+      "hour": 7,
+      "minute": 1,
+      "month": "",
+      "monthValue": 2,
+      "nano": 0,
+      "second": 1,
+      "year": 2014,
+      "dayOfWeek": "",
+      "dayOfYear": 147
+    },
+    "content": "Test comment with some content. Id of this comment is 1437168301.",
+    "moderator": null,
+    "moderatedDate": {
+      "dayOfMonth": 1,
+      "hour": 7,
+      "minute": 1,
+      "month": "",
+      "monthValue": 2,
+      "nano": 0,
+      "second": 1,
+      "year": 2014,
+      "dayOfWeek": "",
+      "dayOfYear": 147
     },
     "parentId": 0,
     "parent": null,
@@ -54,10 +111,10 @@
       "emailAddress": "user2@sdl.com",
       "externalId": null
     },
-    "idLong": 81883
+    "idLong": 1437168301
   },
   {
-    "id": 92641,
+    "id": 1437168302,
     "namespaceId": 0,
     "itemPublicationId": 1420746,
     "itemId": 164223,
@@ -65,52 +122,52 @@
     "score": 0,
     "status": 0,
     "creationDate": {
-      "dayOfMonth": 19,
-      "hour": 21,
-      "minute": 21,
+      "dayOfMonth": 2,
+      "hour": 8,
+      "minute": 2,
       "month": "",
-      "monthValue": 2,
+      "monthValue": 3,
       "nano": 0,
-      "second": 11,
-      "year": 2016,
+      "second": 2,
+      "year": 2015,
       "dayOfWeek": "",
-      "dayOfYear": 106
+      "dayOfYear": 148
     },
     "lastModifiedDate": {
-      "dayOfMonth": 19,
-      "hour": 21,
-      "minute": 21,
+      "dayOfMonth": 2,
+      "hour": 8,
+      "minute": 2,
       "month": "",
-      "monthValue": 2,
+      "monthValue": 3,
       "nano": 0,
-      "second": 11,
-      "year": 2016,
+      "second": 2,
+      "year": 2015,
       "dayOfWeek": "",
-      "dayOfYear": 106
+      "dayOfYear": 148
     },
-    "content": "Test comment with some content. Id of this comment is 92641.",
+    "content": "Test comment with some content. Id of this comment is 1437168302.",
     "moderator": null,
     "moderatedDate": {
-      "dayOfMonth": 19,
-      "hour": 21,
-      "minute": 21,
+      "dayOfMonth": 2,
+      "hour": 8,
+      "minute": 2,
       "month": "",
-      "monthValue": 2,
+      "monthValue": 3,
       "nano": 0,
-      "second": 11,
-      "year": 2016,
+      "second": 2,
+      "year": 2015,
       "dayOfWeek": "",
-      "dayOfYear": 106
+      "dayOfYear": 148
     },
     "parentId": 0,
     "parent": null,
     "children": null,
     "user": {
-      "id": 0,
-      "name": "user 0",
-      "emailAddress": "user0@sdl.com",
+      "id": 3,
+      "name": "user 3",
+      "emailAddress": "user3@sdl.com",
       "externalId": null
     },
-    "idLong": 92641
+    "idLong": 1437168302
   }
 ]
