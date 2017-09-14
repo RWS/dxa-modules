@@ -10,4 +10,7 @@ import lombok.EqualsAndHashCode;
 @NeverCached(qualifier = "NoCachePageModel")
 public class NoCachePageModel extends DefaultPageModel {
 
+    public NoCachePageModel() throws ClassNotFoundException {
+        TestCacheListenerExtender.registerListeners();
+    }
 }

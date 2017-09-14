@@ -27,4 +27,8 @@ public class NoCacheEntityModel extends AbstractEntityModel {
     private DateTime dateField;
 
     private String dateNow = new SimpleDateFormat("MM/dd/yy HH:mm:ss").format(new Date());
+
+    public NoCacheEntityModel() throws ClassNotFoundException {
+        TestCacheListenerExtender.registerListeners();
+    }
 }
