@@ -1,18 +1,10 @@
 import * as React from "react";
-import I18n from "@sdl/dd/helpers/I18n";
+import * as PropTypes from "prop-types";
 import { IAppContext } from "@sdl/dd/container/App/App";
 import { IComment } from "interfaces/ServerModels";
-import "components/comment/styles/Comment";
+import { unescape } from "lodash";
 
-// import { connect } from "react-redux";
-// import { CommentPresentation, ICommentProps } from "@sdl/dd/Comment/CommentPresentation";
-/*
-const mapCommentProps = (commentProps: ICommentProps) => {
-    return commentProps;
-};
-
-export const Comment = connect(mapCommentProps)(CommentPresentation);
-*/
+import "components/Comment/Comment.less";
 
 /**
  * User comment interface
@@ -21,17 +13,57 @@ export const Comment = connect(mapCommentProps)(CommentPresentation);
  * @interface ICommentProps
  */
 export interface ICommentProps {
+    /**
+     * Commenter name
+     *
+     * @type {string}
+     * @memberOf ICommentProps
+     */
     userName: string;
+    /**
+     * Comment creating date
+     *
+     * @type {string}
+     * @memberOf ICommentProps
+     */
     creationDate: string;
+    /**
+     * Comment content
+     *
+     * @type {string}
+     * @memberOf ICommentProps
+     */
     content: string;
+    /**
+     * Comment replies
+     *
+     * @type {IComment[]}
+     * @memberOf ICommentProps
+     */
     replies: IComment[];
+    /**
+     * If comment can have replies
+     *
+     * @type {boolean}
+     * @memberOf ICommentProps
+     */
+    noReplies?: boolean;
 }
 
 export interface ICommentState {
+    /**
+     * If replies are shown
+     *
+     * @type {boolean}
+     * @memberOf ICommentState
+     */
     showReplies: boolean;
 }
 
 export class Comment extends React.Component<ICommentProps, ICommentState> {
+    public static contextTypes: React.ValidationMap<IAppContext> = {
+        services: PropTypes.object.isRequired
+    };
 
     /**
      * Global context
@@ -48,34 +80,51 @@ export class Comment extends React.Component<ICommentProps, ICommentState> {
     }
 
     public render(): JSX.Element {
-        let {userName, creationDate, content, replies} = this.props;
+        let { userName, creationDate, content, replies, noReplies } = this.props;
         const { formatMessage } = this.context.services.localizationService;
         const { showReplies } = this.state;
+
+        const repliesCount = (replies && replies.length) || 0;
 
         return (
             <div className="sdl-dita-delivery-comment">
                 <div className="sdl-dita-delivery-comment-username">{userName}</div>
                 <div className="sdl-dita-delivery-comment-date">{creationDate}</div>
                 <div className="sdl-dita-delivery-comment-content">{content}</div>
-                <div className="sdl-dita-delivery-comment-reply-showreplies-block">
-                    <div className="sdl-dita-delivery-comment-reply-button" onClick={() => alert("asdf")}>
-                        <div className="reply-icon" />
-                        <div className="reply-label"><I18n data="component.post.comment.reply"/></div>
+                {!noReplies && (
+                    <div className="sdl-dita-delivery-comment-replies">
+                        <button className="sdl-button graphene reply-comment"
+                            onClick={() => console.log("Reply dialog open")}>
+                            {formatMessage("component.post.comment.reply")}
+                        </button>
+                        {repliesCount > 0 && (
+                            <button
+                                className="sdl-button graphene show-replies"
+                                onClick={() => {
+                                    this.setState({ showReplies: !showReplies });
+                                }}>
+                                {formatMessage("components.commentslist.comments", [repliesCount.toString()])}
+                            </button>
+                        )}
+                        {showReplies && (
+                            <div className="replies">
+                                {replies.map((reply, index) => {
+                                    return (
+                                        <Comment
+                                            key={reply.id}
+                                            content={unescape(reply.content)}
+                                            creationDate={creationDate /*calcCreationDate(reply.creationDate) */}
+                                            userName={unescape(reply.user.name)}
+                                            replies={[]}
+                                            noReplies={true}
+                                        />
+                                    );
+                                })}
+                            </div>
+                        )}
                     </div>
-                    {replies.length > 0 ?
-                        <div className="sdl-dita-delivery-comment-show-replies" onClick={() => { this.setState({showReplies: !showReplies}); }}>
-                        <div className="show-replies-icon"/>
-                        <div className="show-replies-label"><I18n data={formatMessage("components.commentslist.comments", [replies.length.toString()])} /></div>
-                    </div>
-                    : null}
-                    {showReplies
-                    ?
-                        <div>showReplies</div>
-                    :
-                        <div>No replies</div>
-                    }
-                </div>
+                )}
             </div>
         );
-    };
+    }
 }
