@@ -3,6 +3,7 @@
 @labelWidth: 125px;
 @inputWidth: 380px;
 
+.sdl-dita-delivery-postreply,
 .sdl-dita-delivery-postcomment {
     padding: 0 15px 10px;
 
@@ -57,16 +58,17 @@
             max-width: @inputWidth;
             margin-left: @labelWidth;
             margin-top: 10px;
+            vertical-align: middle;
             .sdl-dita-delivery-app.rtl & {
                 margin-left: 0px;
                 margin-right: @labelWidth;
             }
-			
-			@media screen and (max-width: (@screenSm - 10)) {
+
+            @media screen and (max-width: (@screenSm - 10)) {
                 margin-left: 0;
-				.sdl-dita-delivery-app.rtl & {
-					margin-right: 0;
-				}
+                .sdl-dita-delivery-app.rtl & {
+                    margin-right: 0;
+                }
             }
         }
     }
@@ -83,6 +85,24 @@
             .sdl-dita-delivery-app.rtl & {
                 margin-left: 10px;
                 margin-right: 0;
+            }
+        }
+    }
+}
+
+.sdl-dita-delivery-postreply {
+    padding: 0;
+    form {
+        > div {
+            .sdl-textarea {
+                max-width: 100%;
+                min-height: auto;
+            }
+        }
+        > .sdl-button {
+            margin-left: 0;
+            & + button {
+                margin-left: 20px;
             }
         }
     }
