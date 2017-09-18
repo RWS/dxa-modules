@@ -165,7 +165,9 @@
         .icon-font-default-style(@size);
         content: @iconReply;
         color: @color;
-        transform: scale(-1, 1);
+        .ltr & {
+            transform: scale(-1, 1);
+        }
     }
 }
 

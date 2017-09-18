@@ -21,12 +21,19 @@
         line-height: 30px;
     }
     .sdl-dita-delivery-comment-replies {
-        .sdl-button {
-            height: 0;
+        .sdl-button.graphene.sdl-button-purpose-ghost {
             border: none;
+            padding: 0;
             color: @neutralColor10;
             font-size: 14px;
-
+            &:before{
+                width: 30px;
+            }
+            margin-right: 25px;
+            .rtl & {
+                margin-right: 0;
+                margin-left: 25px;
+            }
             &.reply-comment {
                 .icon-reply(20px, @accentColor1);
             }

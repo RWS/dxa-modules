@@ -93,13 +93,13 @@ export class Comment extends React.Component<ICommentProps, ICommentState> {
                 <div className="sdl-dita-delivery-comment-content">{content}</div>
                 {!noReplies && (
                     <div className="sdl-dita-delivery-comment-replies">
-                        <button className="sdl-button graphene reply-comment"
+                        <button className="sdl-button graphene sdl-button-purpose-ghost reply-comment"
                             onClick={() => console.log("Reply dialog open")}>
                             {formatMessage("component.post.comment.reply")}
                         </button>
                         {repliesCount > 0 && (
                             <button
-                                className="sdl-button graphene show-replies"
+                                className="sdl-button graphene sdl-button-purpose-ghost show-replies"
                                 onClick={() => {
                                     this.setState({ showReplies: !showReplies });
                                 }}>
