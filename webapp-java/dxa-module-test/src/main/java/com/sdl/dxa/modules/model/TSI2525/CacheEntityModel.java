@@ -25,4 +25,8 @@ public class CacheEntityModel extends AbstractEntityModel {
     private DateTime dateField;
 
     private String dateNow = new SimpleDateFormat("MM/dd/yy HH:mm:ss").format(new Date());
+
+    public CacheEntityModel() throws ClassNotFoundException {
+        TestCacheListenerExtender.registerListeners();
+    }
 }

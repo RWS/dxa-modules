@@ -2,6 +2,7 @@ package com.sdl.dxa.modules.context.builder;
 
 import com.sdl.dxa.api.datamodel.model.EntityModelData;
 import com.sdl.dxa.api.datamodel.model.util.ListWrapper;
+import com.sdl.dxa.caching.LocalizationAwareCacheKey;
 import com.sdl.dxa.caching.wrapper.EntitiesCache;
 import com.sdl.dxa.modules.context.model.Conditions;
 import com.sdl.dxa.tridion.mapping.EntityModelBuilder;
@@ -51,7 +52,7 @@ public class ContextExpressionModelBuilder implements EntityModelBuilder, Ordere
             return originalEntityModel;
         }
 
-        Object cacheKey = entitiesCache.getSpecificKey(modelData);
+        LocalizationAwareCacheKey cacheKey = entitiesCache.getSpecificKey(modelData);
         if (entitiesCache.containsKey(cacheKey)) {
             //noinspection unchecked
             T modelInCache = (T) entitiesCache.get(cacheKey);
