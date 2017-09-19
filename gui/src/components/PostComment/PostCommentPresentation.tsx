@@ -293,7 +293,7 @@ export class PostCommentReplyPresentation extends PostCommentPresentation {
 
         return (
             <div className="sdl-dita-delivery-postreply">
-                <form onSubmit={this.handleSubmit} onReset={this.handleReset} id="form">
+                <form onSubmit={this.handleSubmit} onReset={this.handleReset} id="reply-form">
                     <div>
                         <textarea
                             className={getTextareaClassNames("comment")}
@@ -304,7 +304,7 @@ export class PostCommentReplyPresentation extends PostCommentPresentation {
                         />
                         <span>{formatMessage("component.post.comment.no.content")}</span>
                     </div>
-                    <button type="submit" disabled={isDisabled} className="sdl-button graphene sdl-button-purpose-confirm" form="form" value="Submit">
+                    <button type="submit" disabled={isDisabled} className="sdl-button graphene sdl-button-purpose-confirm" form="reply-form" value="Submit">
                         {formatMessage("component.post.reply.submit")}
                     </button>
                     <button type="reset" className="sdl-button graphene" value="Cancel">

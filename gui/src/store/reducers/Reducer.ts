@@ -70,8 +70,8 @@ export const translateProductReleaseVersion = (productReleaseVersion: string): s
 export const translateProductReleaseVersions = (versions: IProductReleaseVersion[]): IProductReleaseVersion[] => ReleaseVersions.translateProductReleaseVersions(versions);
 
 // Comments selectors
-export const getCommentsKey = (pubId: string, pageId: string) => {
-    return `${pubId}|${pageId}`;
+export const getCommentsKey = (pubId: string, pageId: string, parentId?: number) => {
+    return `${pubId}|${pageId}|${(parentId || 0).toString()}`;
 };
 
 export const getComments = (state: IState, pubId: string, pageId: string): IComment[] =>
