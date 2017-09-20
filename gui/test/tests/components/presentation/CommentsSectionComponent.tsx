@@ -22,27 +22,13 @@ class CommentsSectionComponent extends TestBase {
             });
 
             it("Correct component render", (): void => {
-                const commentsSection = this._renderComponent({publicationId: "1", pageId: "1", error: ""}, target);
+                const commentsSection = this._renderComponent({publicationId: "1", pageId: "1"}, target);
                 const commentsSectionNode = ReactDOM.findDOMNode(commentsSection);
                 const commentsListNode = commentsSectionNode.querySelector(".sdl-dita-delivery-comments-list");
                 const postCommentNode = commentsSectionNode.querySelector(".sdl-dita-delivery-postcomment");
 
                 expect(commentsListNode).not.toBeNull();
                 expect(postCommentNode).not.toBeNull();
-            });
-
-            it("Correct error render ", (): void => {
-                const commentsSection = this._renderComponent({publicationId: "1", pageId: "1", error: "Error message"}, target);
-                const commentsSectionNode = ReactDOM.findDOMNode(commentsSection);
-                const commentsListNode = commentsSectionNode.querySelector(".sdl-dita-delivery-comments-list");
-                const postCommentNode = commentsSectionNode.querySelector(".sdl-dita-delivery-postcomment");
-                const errorNode = commentsSectionNode.querySelector(".sdl-dita-delivery-error") as HTMLElement;
-                const errorButton = errorNode.querySelectorAll(".sdl-button") as NodeListOf<HTMLButtonElement>;
-
-                expect(commentsListNode).toBeNull();
-                expect(postCommentNode).toBeNull();
-                expect(errorNode).not.toBeNull();
-                expect(errorButton.length).toBe(1);
             });
         });
     }

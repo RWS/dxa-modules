@@ -4,16 +4,67 @@ import "@sdl/dd/PostComment/styles/PostComment";
 import "@sdl/dd/Input/Input";
 import "@sdl/dd/Textarea/Textarea";
 import { IAppContext } from "@sdl/dd/container/App/App";
+import { IPostComment } from "interfaces/Comments";
 import * as ClassNames from "classnames";
 
 export interface IPostCommentPresentationProps {
-    handleSubmit: (event: React.FormEvent<HTMLFormElement>, formData: IPostCommentPresentationState) => void;
+    /**
+     * Comment parent id if exists
+     *
+     * @type {number}
+     * @memberOf IPostCommentPresentationProps
+     */
+    parentId?: number;
+
+    /**
+     * Comment submit handler
+     *
+     * @param {React.FormEvent<HTMLFormElement>} event
+     * @param {IPostComment} commentData
+     * @memberof IPostCommentPresentationProps
+     */
+    handleSubmit: (event: React.FormEvent<HTMLFormElement>, commentData: IPostComment) => void;
+
+    /**
+     * Comment form reset handler
+     *
+     * @param {React.FormEvent<HTMLFormElement>} event
+     * @memberof IPostCommentPresentationProps
+     */
     handleReset?: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 
 export interface IPostCommentPresentationDispatchProps {
-    error: string;
+    /**
+     * An error prevented the comment from posting
+     *
+     * @type {string | null}
+     * @memberOf IPostCommentPresentationDispatchProps
+     */
+    error: string | null;
+
+    /**
+     * Comment page Id
+     *
+     * @type {string}
+     * @memberOf IPostCommentPresentationProps
+     */
     pageId: string;
+
+    /**
+     * Comment publication Id
+     *
+     * @type {string}
+     * @memberOf IPostCommentPresentationProps
+     */
+    publicationId: string;
+
+    /**
+     * If comment is saving
+     *
+     * @type {boolean}
+     * @memberOf IPostCommentPresentationProps
+     */
     isCommentSaving: boolean;
 }
 
@@ -21,6 +72,7 @@ export interface IPostCommentPresentationState {
     name: string;
     email: string;
     comment: string;
+    parentId: number;
     edited: {
         name: boolean;
         email: boolean;
@@ -52,7 +104,7 @@ export class PostCommentPresentation extends React.Component<IPostCommentPresent
 
     public form: HTMLFormElement;
 
-    private initialState: IPostCommentPresentationState;
+    protected initialState: IPostCommentPresentationState;
 
     constructor() {
         super();
@@ -60,6 +112,7 @@ export class PostCommentPresentation extends React.Component<IPostCommentPresent
             name: "",
             email: "",
             comment: "",
+            parentId: 0,
             edited: {
                 name: false,
                 email: false,
@@ -91,7 +144,9 @@ export class PostCommentPresentation extends React.Component<IPostCommentPresent
      * @memberof PostCommentPresentation
      */
     public handleSubmit(event: React.FormEvent<HTMLFormElement>): void {
-        this.props.handleSubmit(event, this.state);
+        const { handleSubmit } = this.props;
+
+        handleSubmit(event, this.getCommentData());
         this.form = event.currentTarget;
     }
 
@@ -101,9 +156,9 @@ export class PostCommentPresentation extends React.Component<IPostCommentPresent
      * @memberof PostCommentPresentation
      */
     public handleReset(event: React.FormEvent<HTMLFormElement>): void {
-        const {handleReset} = this.props;
+        const { handleReset } = this.props;
         if (handleReset) {
-            handleReset(event)
+            handleReset(event);
         }
         this.resetState();
     }
@@ -232,6 +287,20 @@ export class PostCommentPresentation extends React.Component<IPostCommentPresent
         );
     }
 
+    protected getCommentData(): IPostComment {
+        const { name, email, comment } = this.state;
+        const { publicationId, pageId } = this.props;
+
+        return {
+            publicationId,
+            pageId,
+            username: name,
+            email,
+            content: comment,
+            parentId: 0
+        };
+    }
+
     private resetState(): void {
         this.setState(this.initialState);
     }
@@ -275,7 +344,7 @@ export class PostCommentReplyPresentation extends PostCommentPresentation {
      * @memberof PostCommentReplyPresentation
      */
     public render(): JSX.Element {
-        const { error } = this.props;
+        const { error, parentId } = this.props;
         const { comment } = this.state;
         const { formatMessage } = this.context.services.localizationService;
         const errors: IPC = this.validateInput(comment);
@@ -293,7 +362,7 @@ export class PostCommentReplyPresentation extends PostCommentPresentation {
 
         return (
             <div className="sdl-dita-delivery-postreply">
-                <form onSubmit={this.handleSubmit} onReset={this.handleReset} id="reply-form">
+                <form onSubmit={this.handleSubmit} onReset={this.handleReset} id={`reply-form-${parentId}`}>
                     <div>
                         <textarea
                             className={getTextareaClassNames("comment")}
@@ -304,7 +373,7 @@ export class PostCommentReplyPresentation extends PostCommentPresentation {
                         />
                         <span>{formatMessage("component.post.comment.no.content")}</span>
                     </div>
-                    <button type="submit" disabled={isDisabled} className="sdl-button graphene sdl-button-purpose-confirm" form="reply-form" value="Submit">
+                    <button type="submit" disabled={isDisabled} className="sdl-button graphene sdl-button-purpose-confirm" form={`reply-form-${parentId}`} value="Submit">
                         {formatMessage("component.post.reply.submit")}
                     </button>
                     <button type="reset" className="sdl-button graphene" value="Cancel">
@@ -314,5 +383,14 @@ export class PostCommentReplyPresentation extends PostCommentPresentation {
                 {error && <div className="sdl-dita-delivery-postcomment-error">{formatMessage("component.post.comment.post.error")}</div>}
             </div>
         );
+    }
+
+    /**
+     *
+     * @memberof PostCommentPresentation
+     */
+    protected getCommentData(): IPostComment {
+        const parentId = this.props.parentId || 0;
+        return { ...super.getCommentData(), parentId };
     }
 }

@@ -2,13 +2,32 @@ import * as React from "react";
 import * as PropTypes from "prop-types";
 import { Comment } from "@sdl/dd/Comment/Comment";
 import { IComment, ICommentDate } from "interfaces/ServerModels";
+import { FetchComments, IFetchCommentsProperties } from "@sdl/dd/helpers/FetchComments";
 import { IAppContext } from "@sdl/dd/container/App/App";
-import { PostCommentReply } from "@sdl/dd/PostComment/PostComment";
+import { PostCommentReply } from "@sdl/dd/PostComment/PostCommentReply";
 import { unescape } from "lodash";
+import { IPageService } from "services/interfaces/PageService";
+import { IPostComment } from "interfaces/Comments";
+
+import { Error } from "@sdl/dd/presentation/Error";
+import { Button } from "@sdl/controls-react-wrappers";
+import { ButtonPurpose } from "@sdl/controls";
 
 import "@sdl/dd/CommentsList/styles/CommentsList";
 
 export interface ICommentsListProps {
+    /**
+     *
+     * @type {string}
+     * @memberof ICommentsSectionProps
+     */
+    publicationId: string;
+    /**
+     *
+     * @type {string}
+     * @memberof ICommentsSectionProps
+     */
+    pageId: string;
     /**
      * Comments list
      *
@@ -16,6 +35,31 @@ export interface ICommentsListProps {
      * @memberOf ICommentsListProps
      */
     comments: IComment[];
+    /**
+     *
+     * @type {string}
+     * @memberof ICommentsSectionProps
+     */
+    error: string;
+    /**
+     *
+     * @param {IPageService} pageService
+     * @param {IPostComment} commentData
+     * @memberof ICommentsSectionProps
+     */
+    saveReply?(pageService: IPageService, commentData: IPostComment): void;
+    /**
+     *
+     * @param {IPageService} pageService
+     * @param {string} publicationId
+     * @param {string} pageId
+     * @param {boolean} descending
+     * @param {number} top
+     * @param {number} skip
+     * @param {number[]} status
+     * @memberof ICommentsSectionProps
+     */
+    fetchComments?(pageService: IPageService, publicationId: string, pageId: string, descending: boolean, top: number, skip: number, status: number[]): void;
 }
 
 export interface ICommentsListState {
@@ -44,7 +88,7 @@ export interface ICommentsListState {
     showCommentPostReply: { [key: number]: boolean };
 }
 
-const DEFAULT_AMOUNT: number = 5;
+export const DEFAULT_AMOUNT: number = 5;
 const INCREMENT: number = 10;
 const DATE_OPTIONS = { year: "numeric", month: "long", day: "numeric" };
 
@@ -67,9 +111,8 @@ export class CommentsListPresentation extends React.Component<ICommentsListProps
     public context: IAppContext;
 
     public static calcCreationDate = (dateObject: ICommentDate, language: string): string => {
-        const date = new Date(dateObject.year, dateObject.monthValue - 1, dateObject.dayOfMonth).toLocaleString(language, DATE_OPTIONS);
-        return date;
-    };
+        return new Date(dateObject.year, dateObject.monthValue - 1, dateObject.dayOfMonth).toLocaleString(language, DATE_OPTIONS);
+    }
 
     constructor() {
         super();
@@ -79,12 +122,13 @@ export class CommentsListPresentation extends React.Component<ICommentsListProps
             showCommentPostReply: []
         };
 
-        this.showMoreComments = this.showMoreComments.bind(this);
+        this._fetchComments = this._fetchComments.bind(this);
+        this._showMoreComments = this._showMoreComments.bind(this);
     }
 
     public render(): JSX.Element {
         const { formatMessage, getLanguage } = this.context.services.localizationService;
-        const { comments } = this.props;
+        const { comments, error } = this.props;
         let { showComments } = this.state;
 
         const displayedComments = comments.slice(0, showComments);
@@ -92,8 +136,21 @@ export class CommentsListPresentation extends React.Component<ICommentsListProps
         const displayedCommentsCount: number = displayedComments.length;
         const language = getLanguage();
 
-        return (
+        const errorButtons = (
+            <div>
+                <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{ click: this._fetchComments }}>
+                    {formatMessage("control.button.retry")}
+                </Button>
+            </div>
+        );
+        const errorTitle = formatMessage("error.default.title");
+        const errorMessages = [formatMessage("component.comments.list.error")];
+
+        return error ? (
+            <Error title={errorTitle} messages={errorMessages} buttons={errorButtons} />
+        ) : (
             <div className="sdl-dita-delivery-comments-list">
+                <FetchComments descending={true} />
                 {totalCommentsCount > 0 && <span>{formatMessage("components.commentslist.comments", [totalCommentsCount.toString()])}</span>}
                 {displayedComments.map((comment, index) => {
                     return (
@@ -109,7 +166,7 @@ export class CommentsListPresentation extends React.Component<ICommentsListProps
                 })}
                 {totalCommentsCount > displayedCommentsCount && (
                     <div className="sdl-dita-delivery-comments-list-more">
-                        <button className="sdl-button graphene sdl-button-purpose-ghost" onClick={this.showMoreComments}>
+                        <button className="sdl-button graphene sdl-button-purpose-ghost" onClick={this._showMoreComments}>
                             {formatMessage("component.comments.list.more")}
                         </button>
                         <div>{formatMessage("component.comments.list.amount", [displayedCommentsCount.toString(), totalCommentsCount.toString()])}</div>
@@ -117,12 +174,6 @@ export class CommentsListPresentation extends React.Component<ICommentsListProps
                 )}
             </div>
         );
-    }
-
-    private showMoreComments(): void {
-        this.setState((prevState: ICommentsListState, props: ICommentsListProps) => {
-            return { showComments: prevState.showComments + INCREMENT };
-        });
     }
 
     private _renderCommentReplies(id: number, replies: IComment[]): JSX.Element {
@@ -156,7 +207,11 @@ export class CommentsListPresentation extends React.Component<ICommentsListProps
                 )}
                 {showCommentPostReply[id] && (
                     <PostCommentReply
-                        handleSubmit={() => {}}
+                        key={id}
+                        parentId={id}
+                        handleSubmit={(e, d) => {
+                            this._handlePostReply(e, d);
+                        }}
                         handleReset={() => {
                             showCommentPostReply[id] = false;
                             this.setState({ showCommentPostReply });
@@ -179,5 +234,44 @@ export class CommentsListPresentation extends React.Component<ICommentsListProps
                 )}
             </div>
         );
+    }
+
+    /**
+     *
+     * @memberof CommentsListPresentation
+     */
+    private _showMoreComments(): void {
+        this.setState((prevState: ICommentsListState, props: ICommentsListProps) => {
+            return { showComments: prevState.showComments + INCREMENT };
+        });
+    }
+
+    /**
+     *
+     * @memberof CommentsListPresentation
+     */
+    private _handlePostReply = (event: React.FormEvent<HTMLFormElement>, data: IPostComment): void => {
+        const { saveReply } = this.props;
+        const { pageService } = this.context.services;
+
+        event.preventDefault();
+        if (saveReply) {
+            saveReply(pageService, data);
+        }
+    }
+
+    /**
+     *
+     * @private
+     * @memberof CommentsSectionsPresentation
+     */
+    private _fetchComments(): void {
+        const { fetchComments, publicationId, pageId } = this.props;
+        const { pageService } = this.context.services;
+        const { top, skip, status } = FetchComments.defaultProps as IFetchCommentsProperties;
+
+        if (fetchComments && publicationId && pageId) {
+            fetchComments(pageService, publicationId, pageId, true, top as number, skip as number, status as number[]);
+        }
     }
 }

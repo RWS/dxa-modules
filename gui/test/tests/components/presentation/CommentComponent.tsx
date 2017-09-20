@@ -11,22 +11,23 @@ class CommentComponent extends TestBase {
 
         describe(`Comment component tests.`, (): void => {
             const target = super.createTargetElement();
-            const userName: string = "tester";
-            const creationDate: string = "15.06.2017";
-            const content: string = "Test comment";
-            //const replies: IComment[] = [];
+            const commentTestData = {
+                userName: "tester",
+                creationDate: "15.06.2017",
+                content: "Test comment"
+            };
 
-            it("Correct component render", (): void => {
-                const commentComponent = this._renderComponent({userName, creationDate, content/*, replies*/}, target);
+            it("renders comment", (): void => {
+                const commentComponent = this._renderComponent(commentTestData, target);
                 const commentNode = ReactDOM.findDOMNode(commentComponent);
                 const name = commentNode.querySelector(".sdl-dita-delivery-comment-username");
                 const date = commentNode.querySelector(".sdl-dita-delivery-comment-date");
                 const comment = commentNode.querySelector(".sdl-dita-delivery-comment-content");
 
                 expect(commentComponent).not.toBeNull;
-                name ? expect(name.textContent).toBe("tester") : expect(name).not.toBeNull();
-                date ? expect(date && date.textContent).toBe("15.06.2017") : expect(date).not.toBeNull();
-                comment ? expect(comment && comment.textContent).toBe("Test comment") : expect(comment).not.toBeNull();
+                expect(name && name.textContent).toBe(commentTestData.userName);
+                expect(date && date.textContent).toBe(commentTestData.creationDate);
+                expect(comment && comment.textContent).toBe(commentTestData.content);
             });
 
         });
