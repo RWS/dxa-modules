@@ -160,8 +160,9 @@ class Server extends TestBase {
                                                     </button>
                                                 </form>
                                             </div>
-                                            <div className="sdl-comments-fetcher" />
-                                            <div className="sdl-dita-delivery-comments-list" />
+                                            <div className="sdl-dita-delivery-comments-list">
+                                                <div className="sdl-comments-fetcher" />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

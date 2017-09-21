@@ -1,5 +1,9 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { configureStore } from "store/Store";
+import { IState } from "store/interfaces/State";
+import { Store } from "redux";
 import { ICommentsListProps, CommentsListPresentation, DEFAULT_AMOUNT } from "@sdl/dd/CommentsList/CommentsListPresentation";
 import { IComment, IUser, ICommentDate } from "interfaces/ServerModels";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
@@ -72,7 +76,7 @@ class CommentsListComponent extends TestBase {
             };
 
             const defaultProps = {
-                comments: [...Array(TOTAL_COMPONENTS)].map(() => createComment()),
+                comments: Array(TOTAL_COMPONENTS).join(",").split(",").map(() => createComment()),
                 publicationId: "1",
                 pageId: "1",
                 error: ""
@@ -131,9 +135,12 @@ class CommentsListComponent extends TestBase {
     }
 
     private _renderComponent(props: ICommentsListProps, target: HTMLElement): ComponentWithContext {
+        const store: Store<IState> = configureStore();
         return ReactDOM.render(
             <ComponentWithContext>
+            <Provider store={store}>
                 <CommentsListPresentation {...props} />
+                </Provider>
             </ComponentWithContext>,
             target
         ) as ComponentWithContext;
