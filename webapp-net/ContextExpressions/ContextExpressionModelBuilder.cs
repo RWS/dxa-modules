@@ -73,28 +73,18 @@ namespace Sdl.Web.Modules.ContextExpressions
             using (new Tracer(entityModel, entityModelData, baseModelType, localization))
             {
                 IDictionary<string, object> extensionData = entityModel.ExtensionData;
-                if (extensionData == null)
+                if (extensionData == null) return;
+                object contextExpression;
+                extensionData.TryGetValue("ContextExpressions", out contextExpression);
+                if (contextExpression == null) return;
+                ContentModelData contextExpressionData = (ContentModelData) contextExpression;
+                ContextExpressionConditions cxConditions = new ContextExpressionConditions
                 {
-                    return;
-                }
-
-                object cxIncludes;
-                object cxExcludes;
-                extensionData.TryGetValue("CX.Include", out cxIncludes);
-                extensionData.TryGetValue("CX.Exclude", out cxExcludes);
-
-                if ((cxIncludes != null) || (cxExcludes != null))
-                {
-                    ContextExpressionConditions cxConditions = new ContextExpressionConditions
-                    {
-                        Include = (string[]) cxIncludes,
-                        Exclude = (string[]) cxExcludes
-                    };
-
-                    extensionData.Add(Constants.ContextExpressionsKey, cxConditions);
-                    extensionData.Remove("CX.Include");
-                    extensionData.Remove("CX.Exclude");
-                }
+                    Include = (string[])contextExpressionData["Include"],
+                    Exclude = (string[])contextExpressionData["Exclude"]
+                };
+                extensionData.Add(Constants.ContextExpressionsKey, cxConditions);
+                extensionData.Remove("ContextExpressions");
             }
         }
         #endregion
