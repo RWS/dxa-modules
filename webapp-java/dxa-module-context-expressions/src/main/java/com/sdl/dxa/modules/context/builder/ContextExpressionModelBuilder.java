@@ -1,5 +1,6 @@
 package com.sdl.dxa.modules.context.builder;
 
+import com.sdl.dxa.api.datamodel.model.ContentModelData;
 import com.sdl.dxa.api.datamodel.model.EntityModelData;
 import com.sdl.dxa.api.datamodel.model.util.ListWrapper;
 import com.sdl.dxa.caching.LocalizationAwareCacheKey;
@@ -31,9 +32,6 @@ public class ContextExpressionModelBuilder implements EntityModelBuilder, Ordere
     @Value("${dxa.modules.contextexpr.extension_data_map_key}")
     private String contextExpressionsKey = "ContextExpressions";
 
-    @Value("${dxa.modules.contextexpr.r2.extension_data_map_key}")
-    private String cxKeyR2 = "CX";
-
     @Autowired
     public ContextExpressionModelBuilder(EntitiesCache entitiesCache) {
         this.entitiesCache = entitiesCache;
@@ -42,13 +40,20 @@ public class ContextExpressionModelBuilder implements EntityModelBuilder, Ordere
     @Override
     public <T extends EntityModel> T buildEntityModel(@Nullable T originalEntityModel, EntityModelData modelData, @Nullable Class<T> expectedClass) throws DxaException {
         log.trace("Context expression model builder for EMD {}, entity {} and expectedClass {}", modelData, originalEntityModel, expectedClass);
+        Map<String, Object> modelExtensionData = modelData.getExtensionData();
 
-        String includeKey = cxKeyR2 + ".Include";
-        String excludeKey = cxKeyR2 + ".Exclude";
-
-        Map<String, Object> extensionData = modelData.getExtensionData();
-        if (extensionData == null || (!extensionData.containsKey(includeKey) && !extensionData.containsKey(excludeKey))) {
+        if (modelExtensionData == null || !modelExtensionData.containsKey(contextExpressionsKey)) {
             log.debug("ContextExpressions not found in {}", modelData);
+            return originalEntityModel;
+
+        }
+
+        ContentModelData cxExtensionData = (ContentModelData) modelExtensionData.get(contextExpressionsKey);
+        String includeKey = "Include";
+        String excludeKey = "Exclude";
+
+        if (cxExtensionData == null || (!cxExtensionData.containsKey(includeKey) && !cxExtensionData.containsKey(excludeKey))) {
+            log.debug("ContextExpressions section is empty in {}", modelData);
             return originalEntityModel;
         }
 
@@ -64,8 +69,8 @@ public class ContextExpressionModelBuilder implements EntityModelBuilder, Ordere
         //noinspection unchecked
         return (T) entitiesCache.addAndGet(cacheKey,
                 applyConditions(originalEntityModel,
-                        getConditions(extensionData, includeKey),
-                        getConditions(extensionData, excludeKey)));
+                        getConditions(cxExtensionData, includeKey),
+                        getConditions(cxExtensionData, excludeKey)));
     }
 
     @Override
