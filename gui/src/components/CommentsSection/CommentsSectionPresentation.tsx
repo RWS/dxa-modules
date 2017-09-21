@@ -87,11 +87,10 @@ export class CommentsSectionsPresentation extends React.Component<ICommentsSecti
     public render(): JSX.Element {
         return (
             <div className="sdl-dita-delivery-comments-section">
-
-                    <div>
-                        <PostComment handleSubmit={this.handlePostComment} />
-                        <CommentsList />
-                    </div>
+                <div>
+                    <PostComment handleSubmit={this.handlePostComment} />
+                    <CommentsList />
+                </div>
             </div>
         );
     }

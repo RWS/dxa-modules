@@ -1,7 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { ICommentProps, Comment } from "@sdl/dd/Comment/Comment";
-//import { IComment } from "interfaces/ServerModels";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 import { TestBase } from "@sdl/models";
 
@@ -28,6 +27,13 @@ class CommentComponent extends TestBase {
                 expect(name && name.textContent).toBe(commentTestData.userName);
                 expect(date && date.textContent).toBe(commentTestData.creationDate);
                 expect(comment && comment.textContent).toBe(commentTestData.content);
+            });
+
+            it("renders comment with children", (): void => {
+                const testClassName = "test-child";
+                const commentComponent = this._renderComponent({...commentTestData, children : <div id={testClassName} />}, target);
+                const commentNode = ReactDOM.findDOMNode(commentComponent);
+                expect(commentNode.querySelector(`.${testClassName}`)).not.toBeNull;
             });
 
         });

@@ -22,6 +22,7 @@ import "test/tests/components/presentation/BreadcrumbsComponent";
 import "test/tests/components/presentation/CommentComponent";
 import "test/tests/components/presentation/CommentsListComponent";
 import "test/tests/components/presentation/CommentsSectionComponent";
+import "test/tests/components/presentation/PostCommentComponent";
 import "test/tests/components/presentation/ContentNavigationComponent";
 import "test/tests/components/presentation/ErrorComponent";
 import "test/tests/components/presentation/NavigationMenuComponent";
