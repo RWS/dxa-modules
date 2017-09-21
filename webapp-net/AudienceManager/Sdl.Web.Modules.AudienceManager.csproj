@@ -18,8 +18,8 @@
     </FileUpgradeFlags>
     <OldToolsVersion>12.0</OldToolsVersion>
     <UpgradeBackupLocation />
-    <DxaFrameworkVersion>1.7.0</DxaFrameworkVersion>
-    <SdlDeliveryVersion>8.5.0</SdlDeliveryVersion>
+    <DxaFrameworkVersion>1.8.0</DxaFrameworkVersion>
+    <SdlDeliveryVersion>10.1.0</SdlDeliveryVersion>
     <AudienceManagerVersion>8.5.0</AudienceManagerVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

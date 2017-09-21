@@ -13,8 +13,8 @@
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <DxaFrameworkVersion>1.7.0</DxaFrameworkVersion>
-    <ContextClientVersion>8.5.0</ContextClientVersion>
+    <DxaFrameworkVersion>1.8.0</DxaFrameworkVersion>
+    <ContextClientVersion>10.1.0</ContextClientVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
