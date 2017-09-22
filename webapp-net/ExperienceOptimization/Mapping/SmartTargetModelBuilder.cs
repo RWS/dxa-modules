@@ -19,6 +19,7 @@ using Tridion.SmartTarget.Utils;
 using IPage = DD4T.ContentModel.IPage;
 using MvcData = Sdl.Web.Common.Models.MvcData;
 using TcmUri = Tridion.SmartTarget.Utils.TcmUri;
+using System.Globalization;
 
 namespace Sdl.Web.Modules.SmartTarget.Mapping
 {
@@ -144,7 +145,7 @@ namespace Sdl.Web.Modules.SmartTarget.Mapping
                     int maxItems = 100; // Default
                     if ((regionModelData.Metadata != null) && regionModelData.Metadata.ContainsKey("maxItems"))
                     {
-                        maxItems = Convert.ToInt32(regionModelData.Metadata["maxItems"]);
+                        maxItems = GetInt(regionModelData.Metadata["maxItems"]);
                     }
                     smartTargetRegion.MaxItems = maxItems;
                 }
@@ -295,8 +296,6 @@ namespace Sdl.Web.Modules.SmartTarget.Mapping
         /// </remarks>
         private static bool GetAllowDuplicatesOnSamePage(PageModelData pageModelData, Localization localization)
         {
-
-
             object allowDups;
             if ((pageModelData.Metadata == null) || !pageModelData.Metadata.TryGetValue(AllowDuplicatesFieldName, out allowDups))
             {
@@ -335,5 +334,13 @@ namespace Sdl.Web.Modules.SmartTarget.Mapping
             return Convert.ToBoolean(allowDuplicates);
         }
 
+        private static int GetInt(object value)
+        {       
+            if (value is string && ((string)value).Contains("."))
+            {
+                return (int)(double)Convert.ChangeType(value, typeof(double), CultureInfo.InvariantCulture.NumberFormat);
+            }
+            return Convert.ToInt32(value);
+        }
     }
 }
