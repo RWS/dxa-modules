@@ -20,6 +20,8 @@
   "component.post.comment.no.content": "评论不能为空",
   "component.post.comment.submit": "提供您的反馈",
   "component.post.comment.post.error": "很抱歉，尝试发布您的评论时出错。请重试，如果仍然出现错误，请联系管理员。",
+  "component.post.comment.reply": "Reply",
+  "component.post.comment.showreplies": "Show {0} replies", 
   "component.comments.list.more": "加载更多评论",
   "component.comments.list.amount": "正在显示 {0} 条评论，共 {1} 条评论",
   "component.comments.list.error": "因为服务器错误，无法加载评论。如果错误仍然存在，请联系管理员。",

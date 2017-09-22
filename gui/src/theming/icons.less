@@ -16,9 +16,12 @@
 @iconHamburger: "\e007";
 @iconLanguage: "\e011";
 @iconUser: "\e023";
-@iconSelect: "\e01C";
+@iconSelect: "\e01c";
 @iconError: "\e02e";
 @iconFlag: "\e006";
+@iconReply: "\e04c";
+@iconReplies: "\e043";
+
 .import-icon-font() {
     font-family: @iconFont;
     src: url('@{iconFontPath}/SDLfont.woff') format('woff');
@@ -154,5 +157,24 @@
     .icon-font-default-style(@size);
     &:before {
         content: @iconFlag;
+    }
+}
+
+.icon-reply(@size: 24px, @color) {
+    &:before {
+        .icon-font-default-style(@size);
+        content: @iconReply;
+        color: @color;
+        .ltr & {
+            transform: scale(-1, 1);
+        }
+    }
+}
+
+.icon-replies(@size: 24px, @color) {
+    &:before {
+        .icon-font-default-style(@size);
+        content: @iconReplies;
+        color: @color;
     }
 }

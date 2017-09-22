@@ -20,6 +20,8 @@
   "component.post.comment.no.content": "Kommentar darf nicht leer sein",
   "component.post.comment.submit": "Feedback geben",
   "component.post.comment.post.error": "Bei der Veröffentlichung Ihres Kommentars ist leider ein Fehler aufgetreten. Versuchen Sie es erneut und wenden Sie sich an einen Administrator, falls der Fehler weiterhin besteht.",
+  "component.post.comment.reply": "Reply",
+  "component.post.comment.showreplies": "Show {0} replies", 
   "component.comments.list.more": "Weitere Kommentare laden",
   "component.comments.list.amount": "Kommentar {0} von {1} wird angezeigt",
   "component.comments.list.error": "Die Kommentare können aufgrund eines Serverfehlers nicht geladen werden. Wenden Sie sich bitte an einen Administrator, falls der Fehler weiterhin besteht.",
