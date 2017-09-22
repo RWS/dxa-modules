@@ -78,11 +78,15 @@ namespace Sdl.Web.Modules.ContextExpressions
                 extensionData.TryGetValue("ContextExpressions", out contextExpression);
                 if (contextExpression == null) return;
                 ContentModelData contextExpressionData = (ContentModelData) contextExpression;
-                ContextExpressionConditions cxConditions = new ContextExpressionConditions
+                ContextExpressionConditions cxConditions = new ContextExpressionConditions();
+                if (contextExpressionData.ContainsKey("Include"))
                 {
-                    Include = (string[])contextExpressionData["Include"],
-                    Exclude = (string[])contextExpressionData["Exclude"]
-                };
+                    cxConditions.Include = (string[])contextExpressionData["Include"];
+                }
+                if (contextExpressionData.ContainsKey("Exclude"))
+                {
+                    cxConditions.Exclude = (string[])contextExpressionData["Exclude"];
+                }
                 extensionData.Add(Constants.ContextExpressionsKey, cxConditions);
                 extensionData.Remove("ContextExpressions");
             }
