@@ -8,7 +8,7 @@
     "react-dom": "~15.5.1",
   },
   "devDependencies": {
-    "@sdl/controls": "~0.1.0-49",
+    "@sdl/icons": "~1.1.0-16",
     "@types/react": "^15.0.27",
     "@types/react-dom": "^15.5.0",
     "@types/react-redux": "^4.4.47",

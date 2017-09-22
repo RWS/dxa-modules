@@ -70,15 +70,15 @@ export const translateProductReleaseVersion = (productReleaseVersion: string): s
 export const translateProductReleaseVersions = (versions: IProductReleaseVersion[]): IProductReleaseVersion[] => ReleaseVersions.translateProductReleaseVersions(versions);
 
 // Comments selectors
-export const getCommentsKey = (pubId: string, pageId: string) => {
-    return `${pubId}|${pageId}`;
+export const getCommentsKey = (pubId: string, pageId: string, parentId?: number) => {
+    return `${pubId}|${pageId}|${(parentId || 0).toString()}`;
 };
 
 export const getComments = (state: IState, pubId: string, pageId: string): IComment[] =>
     Comments.getById(state.comments, getCommentsKey(pubId, pageId));
-export const getCommentErrorMessage = (state: IState, pubId: string, pageId: string): string =>
-    Comments.getErrorMessage(state.comments, getCommentsKey(pubId, pageId));
-export const getPostCommentErrorMessage = (state: IState, pubId: string, pageId: string): string =>
-    Comments.getPostErrorMessage(state.comments, getCommentsKey(pubId, pageId));
-export const isCommentSaving = (state: IState, pubId: string, pageId: string): boolean =>
-    Comments.isSaving(state.comments, getCommentsKey(pubId, pageId));
+export const getCommentErrorMessage = (state: IState, pubId: string, pageId: string, parentId?: number): string =>
+    Comments.getErrorMessage(state.comments, getCommentsKey(pubId, pageId, parentId));
+export const getPostCommentErrorMessage = (state: IState, pubId: string, pageId: string, parentId?: number): string =>
+    Comments.getPostErrorMessage(state.comments, getCommentsKey(pubId, pageId, parentId));
+export const isCommentSaving = (state: IState, pubId: string, pageId: string, parentId?: number): boolean =>
+    Comments.isSaving(state.comments, getCommentsKey(pubId, pageId, parentId));
