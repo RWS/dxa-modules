@@ -2,6 +2,7 @@ package com.sdl.dxa.modules.context.builder;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
+import com.sdl.dxa.api.datamodel.model.ContentModelData;
 import com.sdl.dxa.api.datamodel.model.EntityModelData;
 import com.sdl.dxa.api.datamodel.model.util.ListWrapper;
 import com.sdl.dxa.caching.wrapper.EntitiesCache;
@@ -35,7 +36,6 @@ public class ContextExpressionModelBuilderTest {
 
         builder = new ContextExpressionModelBuilder(cache);
         ReflectionTestUtils.setField(builder, "entitiesCache", cache);
-        ReflectionTestUtils.setField(builder, "cxKeyR2", "CX");
     }
 
     @Test
@@ -67,7 +67,7 @@ public class ContextExpressionModelBuilderTest {
 
         TestEntity testEntity = new TestEntity();
         EntityModelData entityModelData = EntityModelData.builder()
-                .extensionData(ImmutableMap.of("CX.Include", includesList, "CX.Exclude", excludesList))
+                .extensionData(ImmutableMap.of("ContextExpressions", new ContentModelData(ImmutableMap.of("Include", includesList, "Exclude", excludesList))))
                 .build();
 
         //when
