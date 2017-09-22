@@ -31,7 +31,7 @@
         "es6-promise": "~4.1.1",
         "history": "^3.3.0",
         "lodash": "^4.17.4",
-        "napa": "~3.0.0",
+        "napa": "~2.3.0",
         "object-hash": "^1.1.8",
         "prismjs": "^1.6.0",
         "prop-types": "^15.5.10",
@@ -106,6 +106,6 @@
     "author": "jbevers@sdl.com, oorlov@sdl.com",
     "license": "Apache-2.0",
     "napa": {
-        "dita-ot": "https://github.com/dita-ot/dita-ot.git"
+        "dita-ot": "dita-ot/dita-ot#v2.5.3"
     }
 }
