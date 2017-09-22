@@ -32,5 +32,13 @@ export interface IWindow extends Window {
      */
     SdlDitaDeliveryError: IError;
 
+    /**
+     * Set to true when comenting is disabled
+     *
+     * @type {boolean}
+     * @memberOf IWindow
+     */
+    SdlDitaDeliveryCommentingIsEnabled?: boolean;
+
     __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: (storeEnchancer: GenericStoreEnhancer) => GenericStoreEnhancer;
 }
