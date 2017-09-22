@@ -92,7 +92,7 @@ public class ContextExpressionModelBuilder implements EntityModelBuilder, Ordere
     private <T extends EntityModel> boolean hasAlreadyPassed(T originalEntityModel) {
         Map<String, Object> extensionData = originalEntityModel.getExtensionData();
 
-        return extensionData != null && !extensionData.isEmpty() && extensionData.containsKey(contextExpressionsKey);
+        return extensionData != null && !extensionData.isEmpty() && extensionData.get(contextExpressionsKey) instanceof Conditions;
     }
 
     //cast is not type safe but we only expect there a ListWrapper of Strings, so let's pretend
