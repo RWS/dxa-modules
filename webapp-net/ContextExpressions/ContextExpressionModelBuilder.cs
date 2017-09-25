@@ -81,11 +81,25 @@ namespace Sdl.Web.Modules.ContextExpressions
                 ContextExpressionConditions cxConditions = new ContextExpressionConditions();
                 if (contextExpressionData.ContainsKey("Include"))
                 {
-                    cxConditions.Include = (string[])contextExpressionData["Include"];
+                    if (contextExpressionData["Include"] is string[])
+                    {
+                        cxConditions.Include = (string[]) contextExpressionData["Include"];
+                    }
+                    else
+                    {
+                        cxConditions.Include = new string[] {(string) contextExpressionData["Include"]};
+                    }
                 }
                 if (contextExpressionData.ContainsKey("Exclude"))
                 {
-                    cxConditions.Exclude = (string[])contextExpressionData["Exclude"];
+                    if (contextExpressionData["Exclude"] is string[])
+                    {
+                        cxConditions.Exclude = (string[]) contextExpressionData["Exclude"];
+                    }
+                    else
+                    {
+                        cxConditions.Exclude = new string[] { (string)contextExpressionData["Exclude"] };
+                    }
                 }
                 extensionData.Remove("ContextExpressions");
                 extensionData.Add(Constants.ContextExpressionsKey, cxConditions);               
