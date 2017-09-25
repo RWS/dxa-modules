@@ -87,8 +87,8 @@ namespace Sdl.Web.Modules.ContextExpressions
                 {
                     cxConditions.Exclude = (string[])contextExpressionData["Exclude"];
                 }
-                extensionData.Add(Constants.ContextExpressionsKey, cxConditions);
                 extensionData.Remove("ContextExpressions");
+                extensionData.Add(Constants.ContextExpressionsKey, cxConditions);               
             }
         }
         #endregion
