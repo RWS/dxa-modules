@@ -151,7 +151,13 @@ export class CommentsListPresentation extends React.Component<ICommentsListProps
         ) : (
             <div className="sdl-dita-delivery-comments-list">
                 <FetchComments descending={true} />
-                {totalCommentsCount > 0 && <span>{formatMessage("components.commentslist.comments", [totalCommentsCount.toString()])}</span>}
+                {totalCommentsCount > 0 && (
+                    <span>{formatMessage(
+                        totalCommentsCount === 1
+                        ? "components.commentslist.comment"
+                        : "components.commentslist.comments",
+                        [totalCommentsCount.toString()])}</span>
+                )}
                 {displayedComments.map((comment, index) => {
                     return (
                         <Comment
@@ -202,11 +208,14 @@ export class CommentsListPresentation extends React.Component<ICommentsListProps
                             this.setState({ showCommentReplies });
                         }}
                     >
-                        {formatMessage(showCommentReplies[id] == true
-                            ? "component.post.comment.hidereplies"
-                            : "components.commentslist.comments",
-                            [repliesCount.toString()])
-                        }
+                        {formatMessage(
+                            showCommentReplies[id] == true
+                                ? "component.post.comment.hidereplies"
+                                : repliesCount === 1
+                                    ? "component.post.comment.showreply"
+                                    : "component.post.comment.showreplies",
+                            [repliesCount.toString()]
+                        )}
                     </button>
                 )}
                 {showCommentPostReply[id] && (
@@ -228,7 +237,7 @@ export class CommentsListPresentation extends React.Component<ICommentsListProps
                                     key={reply.id}
                                     content={unescape(reply.content)}
                                     creationDate={CommentsListPresentation.calcCreationDate(reply.creationDate, language)}
-                                    userName={unescape(reply.user.name)}
+                                    userName={unescape(reply.user.name || formatMessage("component.post.comment.reply.anonymous"))}
                                 />
                             );
                         })}

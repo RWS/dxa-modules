@@ -155,6 +155,8 @@ class CommentsListComponent extends TestBase {
                         done();
                     }, RENDER_DELAY);
                 }, RENDER_DELAY);
+
+                // Reset functionality is not available yet. TestUtils.Simulate.reset() is no supported.
             });
 
             it("can expand/colapse comment replies", (done: () => void): void => {
@@ -175,7 +177,6 @@ class CommentsListComponent extends TestBase {
 
                 setTimeout((): void => {
                     expect(comment.querySelectorAll(".sdl-dita-delivery-comment").length).toBe(repliesCount);
-
                     TestUtils.Simulate.click(showReplyButtonNode);
                     setTimeout((): void => {
                         expect(comment.querySelectorAll(".sdl-dita-delivery-comment").length).toBe(0);
