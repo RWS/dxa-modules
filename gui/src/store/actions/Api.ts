@@ -205,14 +205,15 @@ export const saveComment = (pageService: IPageService, commentData: IPostComment
 
 export const saveReply = (pageService: IPageService, commentData: IPostComment): IDispatcherFunction => {
     const { pageId, publicationId, parentId } = commentData;
-    const key = getCommentsKey(publicationId, pageId, parentId);
+    const commentsKey = getCommentsKey(publicationId, pageId);
+    const replyKey = getCommentsKey(publicationId, pageId, parentId);
     return dispatch => {
-        dispatch(commentSaving(key));
+        dispatch(commentSaving(commentsKey));
 
         pageService.saveComment(commentData)
         .then(
-            data => dispatch(commentSaved(key, data)),
-            error => dispatch(commentError(key, { message: error }))
+            data => dispatch(commentSaved(commentsKey, data)),
+            error => dispatch(commentError(replyKey, { message: error }))
         );
     };
 };

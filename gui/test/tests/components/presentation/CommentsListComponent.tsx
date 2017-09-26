@@ -177,6 +177,7 @@ class CommentsListComponent extends TestBase {
 
                 setTimeout((): void => {
                     expect(comment.querySelectorAll(".sdl-dita-delivery-comment").length).toBe(repliesCount);
+
                     TestUtils.Simulate.click(showReplyButtonNode);
                     setTimeout((): void => {
                         expect(comment.querySelectorAll(".sdl-dita-delivery-comment").length).toBe(0);
