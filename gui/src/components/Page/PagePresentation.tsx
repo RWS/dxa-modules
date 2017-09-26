@@ -23,6 +23,10 @@ import "dita-ot/styles/commonltr";
 import "dita-ot/styles/commonrtl";
 import "prismjs/themes/prism";
 
+import { IWindow } from "interfaces/Window";
+
+const commentingIsEnabled: boolean = (window as IWindow).SdlDitaDeliveryCommentingIsEnabled || false;
+
 /**
  * Page component props
  *
@@ -193,7 +197,7 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
             formatMessage("error.page.not.found"),
             formatMessage("error.default.message")
         ];
-        const showCommentsComponents = !error && id;
+        const showCommentsComponents = commentingIsEnabled && (!error && id);
 
         const appClass = ClassNames(direction, "page-content");
 
