@@ -22,6 +22,7 @@
   "component.post.comment.post.error": "Oops, something went wrong while trying to post your comment. Try again and if the error persists, please contact an administrator.",
   "component.post.comment.reply": "Reply",
   "component.post.comment.showreplies": "Show {0} replies",
+  "component.post.comment.hidereplies": "Hide all replies",
   "component.post.reply.submit": "Post reply",
   "component.post.reply.placeholder": "Write a reply...",
   "component.comments.list.more": "Load more comments",

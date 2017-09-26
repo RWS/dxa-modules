@@ -202,16 +202,18 @@ export class CommentsListPresentation extends React.Component<ICommentsListProps
                             this.setState({ showCommentReplies });
                         }}
                     >
-                        {formatMessage("components.commentslist.comments", [repliesCount.toString()])}
+                        {formatMessage(showCommentReplies[id] == true
+                            ? "component.post.comment.hidereplies"
+                            : "components.commentslist.comments",
+                            [repliesCount.toString()])
+                        }
                     </button>
                 )}
                 {showCommentPostReply[id] && (
                     <PostCommentReply
                         key={id}
                         parentId={id}
-                        handleSubmit={(e, d) => {
-                            this._handlePostReply(e, d);
-                        }}
+                        handleSubmit={this._handlePostReply}
                         handleReset={() => {
                             showCommentPostReply[id] = false;
                             this.setState({ showCommentPostReply });

@@ -22,6 +22,7 @@
   "component.post.comment.post.error": "Er is iets misgegaan bij het plaatsen van uw opmerking. Probeer het opnieuw en neem contact op met een beheerder als de fout zich blijft voordoen.",
   "component.post.comment.reply": "Antwoord",
   "component.post.comment.showreplies": "Toon {0} antwoorden",
+  "component.post.comment.hidereplies": "Verberg alle antwoorden",
   "component.post.reply.submit": "Antwoord bericht",
   "component.post.reply.placeholder": "Schrijf een antwoord...",
   "component.comments.list.more": "Meer opmerkingen laden",
