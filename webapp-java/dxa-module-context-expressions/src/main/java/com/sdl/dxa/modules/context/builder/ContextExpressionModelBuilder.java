@@ -98,6 +98,18 @@ public class ContextExpressionModelBuilder implements EntityModelBuilder, Ordere
     //cast is not type safe but we only expect there a ListWrapper of Strings, so let's pretend
     @SuppressWarnings("unchecked")
     private Collection<String> getConditions(Map<String, Object> extensionData, String key) {
-        return extensionData.containsKey(key) ? ((ListWrapper<String>) extensionData.get(key)).getValues() : Collections.emptyList();
+        if (!extensionData.containsKey(key)) {
+            log.trace("No values for {}", key);
+            return Collections.emptyList();
+        }
+        Object cxValue = extensionData.get(key);
+        if (cxValue instanceof String) {
+            return Collections.singletonList((String) cxValue);
+        } else if (cxValue instanceof ListWrapper && !((ListWrapper) cxValue).empty() && ((ListWrapper) cxValue).get(0) instanceof String) {
+            return ((ListWrapper<String>) cxValue).getValues();
+        } else {
+            log.warn("Found something unexpected in CX: {} for key {}, returning empty collection", cxValue, key);
+            return Collections.emptyList();
+        }
     }
 }
