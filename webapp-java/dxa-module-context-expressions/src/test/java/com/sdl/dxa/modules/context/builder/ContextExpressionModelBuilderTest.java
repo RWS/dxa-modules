@@ -17,6 +17,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.Collections;
 
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyVararg;
 import static org.mockito.Mockito.doReturn;
@@ -75,16 +76,52 @@ public class ContextExpressionModelBuilderTest {
 
         //then
         Conditions conditions = (Conditions) entityR2.getExtensionData().get("ContextExpressions");
-        org.junit.Assert.assertTrue(conditions.getExcludes().contains("exclude1"));
-        org.junit.Assert.assertTrue(conditions.getExcludes().contains("exclude2"));
-        org.junit.Assert.assertTrue(conditions.getIncludes().contains("include1"));
-        org.junit.Assert.assertTrue(conditions.getIncludes().contains("include2"));
+        assertTrue(conditions.getExcludes().contains("exclude1"));
+        assertTrue(conditions.getExcludes().contains("exclude2"));
+        assertTrue(conditions.getIncludes().contains("include1"));
+        assertTrue(conditions.getIncludes().contains("include2"));
 
     }
 
     @Test
+    public void shouldSupportSingleValue_InCX() throws DxaException {
+        //given
+        TestEntity testEntity = new TestEntity();
+        EntityModelData entityModelData = EntityModelData.builder()
+                .extensionData(ImmutableMap.of("ContextExpressions", new ContentModelData(ImmutableMap.of("Include", "include1", "Exclude", "exclude1"))))
+                .build();
+        //when
+        TestEntity entityR2 = builder.buildEntityModel(testEntity, entityModelData, null);
+
+        //then
+        Conditions conditions = (Conditions) entityR2.getExtensionData().get("ContextExpressions");
+        assertTrue(conditions.getIncludes().contains("include1"));
+        assertTrue(conditions.getExcludes().contains("exclude1"));
+    }
+
+    @Test
+    public void shouldSupportLists_EvenWithSingleValue_InCX() throws DxaException {
+        //given
+        ListWrapper<String> includesList = new ListWrapper<>(Lists.newArrayList("include1"));
+        ListWrapper<String> excludesList = new ListWrapper<>(Lists.newArrayList("exclude1"));
+
+        TestEntity testEntity = new TestEntity();
+        EntityModelData entityModelData = EntityModelData.builder()
+                .extensionData(ImmutableMap.of("ContextExpressions", new ContentModelData(ImmutableMap.of("Include", includesList, "Exclude", excludesList))))
+                .build();
+
+        //when
+        EntityModel entityR2 = builder.buildEntityModel(testEntity, entityModelData, null);
+
+        //then
+        Conditions conditions = (Conditions) entityR2.getExtensionData().get("ContextExpressions");
+        assertTrue(conditions.getIncludes().contains("include1"));
+        assertTrue(conditions.getExcludes().contains("exclude1"));
+    }
+
+    @Test
     public void shouldNotHaveHighPriority() {
-        Assert.assertTrue(builder.getOrder() >= 0);
+        assertTrue(builder.getOrder() >= 0);
     }
 
     private static class TestEntity extends AbstractEntityModel {
