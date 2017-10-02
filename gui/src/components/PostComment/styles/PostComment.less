@@ -1,7 +1,6 @@
 @import (reference) "~theme-styles";
 
 @labelWidth: 125px;
-@inputWidth: 380px;
 
 .sdl-dita-delivery-postreply,
 .sdl-dita-delivery-postcomment {
@@ -10,7 +9,7 @@
     form {
         > div {
             margin-top: 5px;
-            max-width: calc(@labelWidth + @inputWidth);
+            max-width: 100%;
 
             > label {
                 display: inline-block;
@@ -26,7 +25,6 @@
 
             .sdl-input-text,
             .sdl-textarea {
-                max-width: @inputWidth;
                 margin-top: 10px;
             }
 
@@ -55,10 +53,13 @@
         }
 
         > .sdl-button {
-            max-width: @inputWidth;
-            margin-left: @labelWidth;
             margin-top: 10px;
             vertical-align: middle;
+            margin-left: 0;
+            & + button {
+                margin-left: 20px;
+            }
+
             .sdl-dita-delivery-app.rtl & {
                 margin-left: 0px;
                 margin-right: @labelWidth;
@@ -97,12 +98,6 @@
             .sdl-textarea {
                 max-width: 100%;
                 min-height: auto;
-            }
-        }
-        > .sdl-button {
-            margin-left: 0;
-            & + button {
-                margin-left: 20px;
             }
         }
     }

@@ -135,28 +135,25 @@ class Server extends TestBase {
                                             <div className="sdl-dita-delivery-postcomment">
                                                 <form id="form">
                                                     <div>
-                                                        <label htmlFor="name">{localize("component.post.comment.name")}<span>*</span>
-                                                        </label>
                                                         <input type="text" className="sdl-input-text" id="name"
                                                             placeholder={localize("component.post.comment.placeholder.name")} />
                                                         <span>{localize("component.post.comment.no.name")}</span>
                                                     </div>
                                                     <div>
-                                                        <label htmlFor="email">{localize("component.post.comment.email")}<span>*</span>
-                                                        </label>
                                                         <input type="text" className="sdl-input-text" id="email"
                                                             placeholder={localize("component.post.comment.placeholder.email")} />
                                                         <span>{localize("component.post.comment.no.email")}</span>
                                                     </div>
                                                     <div>
-                                                        <label htmlFor="comment">{localize("component.post.comment.content")}<span>*</span>
-                                                        </label>
                                                         <textarea className="sdl-textarea" id="comment"
                                                             placeholder={localize("component.post.comment.placeholder.content")} />
                                                         <span>{localize("component.post.comment.no.content")}</span>
                                                     </div>
                                                     <button type="submit" disabled className="sdl-button graphene sdl-button-purpose-confirm" form="form" value="Submit">
                                                         {localize("component.post.comment.submit")}
+                                                    </button>
+                                                    <button type="reset" className="sdl-button graphene" value="Cancel">
+                                                        {localize("components.conditions.dialog.cancel")}
                                                     </button>
                                                 </form>
                                             </div>

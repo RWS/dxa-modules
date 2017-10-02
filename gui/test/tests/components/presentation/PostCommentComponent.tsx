@@ -55,7 +55,7 @@ class PostCommentComponent extends TestBase {
             it("renders post comment form", (): void => {
                 const postComment = this._renderPostCommentComponent(defaultProps, target);
                 const postCommentNode = ReactDOM.findDOMNode(postComment);
-                expect(postCommentNode.querySelectorAll("input, textarea, button").length).toBe(4);
+                expect(postCommentNode.querySelectorAll("input, textarea, button").length).toBe(5);
             });
 
             it("validates comment form", (): void => {

@@ -233,12 +233,8 @@ export class PostCommentPresentation extends React.Component<IPostCommentPresent
 
         return (
             <div className="sdl-dita-delivery-postcomment">
-                <form onSubmit={this.handleSubmit} id="form">
+                <form onSubmit={this.handleSubmit} onReset={this.handleReset} id="form">
                     <div>
-                        <label htmlFor="name">
-                            {formatMessage("component.post.comment.name")}
-                            <span>*</span>
-                        </label>
                         <input
                             className={getInputClassNames("name")}
                             type="text"
@@ -250,10 +246,6 @@ export class PostCommentPresentation extends React.Component<IPostCommentPresent
                         <span>{formatMessage("component.post.comment.no.name")}</span>
                     </div>
                     <div>
-                        <label htmlFor="email">
-                            {formatMessage("component.post.comment.email")}
-                            <span>*</span>
-                        </label>
                         <input
                             className={getInputClassNames("email")}
                             type="text"
@@ -265,10 +257,6 @@ export class PostCommentPresentation extends React.Component<IPostCommentPresent
                         <span>{formatMessage("component.post.comment.no.email")}</span>
                     </div>
                     <div>
-                        <label htmlFor="comment">
-                            {formatMessage("component.post.comment.content")}
-                            <span>*</span>
-                        </label>
                         <textarea
                             className={getTextareaClassNames("comment")}
                             id="comment"
@@ -280,6 +268,9 @@ export class PostCommentPresentation extends React.Component<IPostCommentPresent
                     </div>
                     <button type="submit" disabled={isDisabled} className="sdl-button graphene sdl-button-purpose-confirm" form="form" value="Submit">
                         {formatMessage("component.post.comment.submit")}
+                    </button>
+                    <button type="reset" className="sdl-button graphene" value="Cancel">
+                        {formatMessage("components.conditions.dialog.cancel")}
                     </button>
                 </form>
                 {error && <div className="sdl-dita-delivery-postcomment-error">{formatMessage("component.post.comment.post.error")}</div>}
