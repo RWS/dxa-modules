@@ -7,7 +7,6 @@ using Sdl.Web.Common.Logging;
 using Sdl.Web.Common.Models;
 using Sdl.Web.DataModel;
 using Sdl.Web.Tridion.Mapping;
-using Sdl.Web.Tridion.R2Mapping;
 using IPage = DD4T.ContentModel.IPage;
 
 namespace Sdl.Web.Modules.ContextExpressions
@@ -74,28 +73,36 @@ namespace Sdl.Web.Modules.ContextExpressions
             using (new Tracer(entityModel, entityModelData, baseModelType, localization))
             {
                 IDictionary<string, object> extensionData = entityModel.ExtensionData;
-                if (extensionData == null)
+                if (extensionData == null) return;
+                object contextExpression;
+                extensionData.TryGetValue("ContextExpressions", out contextExpression);
+                if (contextExpression == null) return;
+                ContentModelData contextExpressionData = (ContentModelData) contextExpression;
+                ContextExpressionConditions cxConditions = new ContextExpressionConditions();
+                if (contextExpressionData.ContainsKey("Include"))
                 {
-                    return;
-                }
-
-                object cxIncludes;
-                object cxExcludes;
-                extensionData.TryGetValue("CX.Include", out cxIncludes);
-                extensionData.TryGetValue("CX.Exclude", out cxExcludes);
-
-                if ((cxIncludes != null) || (cxExcludes != null))
-                {
-                    ContextExpressionConditions cxConditions = new ContextExpressionConditions
+                    if (contextExpressionData["Include"] is string[])
                     {
-                        Include = (string[]) cxIncludes,
-                        Exclude = (string[]) cxExcludes
-                    };
-
-                    extensionData.Add(Constants.ContextExpressionsKey, cxConditions);
-                    extensionData.Remove("CX.Include");
-                    extensionData.Remove("CX.Exclude");
+                        cxConditions.Include = (string[]) contextExpressionData["Include"];
+                    }
+                    else
+                    {
+                        cxConditions.Include = new string[] {(string) contextExpressionData["Include"]};
+                    }
                 }
+                if (contextExpressionData.ContainsKey("Exclude"))
+                {
+                    if (contextExpressionData["Exclude"] is string[])
+                    {
+                        cxConditions.Exclude = (string[]) contextExpressionData["Exclude"];
+                    }
+                    else
+                    {
+                        cxConditions.Exclude = new string[] { (string)contextExpressionData["Exclude"] };
+                    }
+                }
+                extensionData.Remove("ContextExpressions");
+                extensionData.Add(Constants.ContextExpressionsKey, cxConditions);               
             }
         }
         #endregion

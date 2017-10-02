@@ -13,8 +13,8 @@
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <DxaFrameworkVersion>2.0.0-beta-201707211152</DxaFrameworkVersion>
-    <ContextClientVersion>8.5.0</ContextClientVersion>
+    <DxaFrameworkVersion>2.0.0-beta-201709281140</DxaFrameworkVersion>
+    <ContextClientVersion>10.1.0</ContextClientVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -62,7 +62,7 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.1.2\lib\net45\System.Web.Mvc.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Xml" />

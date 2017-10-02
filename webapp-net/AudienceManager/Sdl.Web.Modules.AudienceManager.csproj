@@ -18,8 +18,8 @@
     </FileUpgradeFlags>
     <OldToolsVersion>12.0</OldToolsVersion>
     <UpgradeBackupLocation />
-    <DxaFrameworkVersion>2.0.0-beta-201707211152</DxaFrameworkVersion>
-    <SdlDeliveryVersion>8.5.0</SdlDeliveryVersion>
+    <DxaFrameworkVersion>2.0.0-beta-201709281140</DxaFrameworkVersion>
+    <SdlDeliveryVersion>10.1.0</SdlDeliveryVersion>
     <AudienceManagerVersion>8.5.0</AudienceManagerVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -44,7 +44,7 @@
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.10.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Sdl.Web.Common">
       <SpecificVersion>False</SpecificVersion>
@@ -63,11 +63,11 @@
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.Mvc">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.1.2\lib\net45\System.Web.Mvc.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
       <Private>$(CopyLocal)</Private>
     </Reference>
     <Reference Include="System.Web.WebPages">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.1.2\lib\net45\System.Web.WebPages.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
