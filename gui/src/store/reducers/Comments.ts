@@ -2,6 +2,7 @@ import { IComment } from "interfaces/ServerModels";
 import { COMMENTS_LOADED, COMMENTS_LOADING, COMMENTS_ERROR, COMMENT_SAVING, COMMENT_ERROR, COMMENT_SAVED, PAGE_LOADED } from "store/actions/Actions";
 import { combineReducers, handleAction, combine } from "store/reducers/CombineReducers";
 import { ICommentsPayload, ICommentsError, IComments, ICommentPayload, ICommentErrorsMap } from "store/interfaces/Comments";
+import { cloneDeep } from "lodash";
 
 export interface ICommentsErrorPayload {
     key: string;
@@ -28,9 +29,8 @@ const byId = combine(
     handleAction(
         COMMENT_SAVED,
         (state, { comment, key }) => {
-            const stateComments = state[key] as IComment[];
-            const savedCommentParentId = (comment as IComment).parentId;
-            const parentItem = stateComments.find((c: IComment) => c.id == savedCommentParentId) as IComment;
+            const stateComments = cloneDeep(state[key] as IComment[]);
+            const parentItem = stateComments.find((c: IComment) => c.id == (comment as IComment).parentId) as IComment;
             if (parentItem) {
                 parentItem.children = parentItem.children.concat(comment).sort((a: IComment, b: IComment) => b.id - a.id);
                 return { ...state, [key]: stateComments };
