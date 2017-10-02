@@ -1,7 +1,5 @@
 @import (reference) "~theme-styles";
 
-@labelWidth: 125px;
-
 .sdl-dita-delivery-postreply,
 .sdl-dita-delivery-postcomment {
     padding: 0 15px 10px;
@@ -13,7 +11,6 @@
 
             > label {
                 display: inline-block;
-                min-width: @labelWidth;
                 vertical-align: top;
                 margin-top: 20px;
                 font-size: @fontSize + 2;
@@ -58,17 +55,9 @@
             margin-left: 0;
             & + button {
                 margin-left: 20px;
-            }
-
-            .sdl-dita-delivery-app.rtl & {
-                margin-left: 0px;
-                margin-right: @labelWidth;
-            }
-
-            @media screen and (max-width: (@screenSm - 10)) {
-                margin-left: 0;
                 .sdl-dita-delivery-app.rtl & {
-                    margin-right: 0;
+                    margin-right: 20px;
+                    margin-left: 0;
                 }
             }
         }
@@ -96,7 +85,6 @@
     form {
         > div {
             .sdl-textarea {
-                max-width: 100%;
                 min-height: auto;
             }
         }
