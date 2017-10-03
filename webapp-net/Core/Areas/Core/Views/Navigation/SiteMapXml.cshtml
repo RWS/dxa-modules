@@ -14,7 +14,7 @@
         if (item.Type == "Page" && item.Url.StartsWith("/"))
         {
             <url>
-                <loc>@item.Url</loc>
+                <loc>@HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority).ToLowerInvariant()@item.Url</loc>
                 <lastmod>@item.PublishedDate</lastmod>
             </url>
         }
