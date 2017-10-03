@@ -10,7 +10,6 @@ import com.tridion.marketingsolution.profile.Contact;
 import com.tridion.marketingsolution.profile.ContactDoesNotExistException;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,12 +27,9 @@ public class AudienceManagerServiceImpl implements AudienceManagerService {
 
     private final WebRequestContext webRequestContext;
 
-    private final HttpServletRequest servletRequest;
-
     @Autowired
-    public AudienceManagerServiceImpl(WebRequestContext webRequestContext, HttpServletRequest servletRequest) {
+    public AudienceManagerServiceImpl(WebRequestContext webRequestContext) {
         this.webRequestContext = webRequestContext;
-        this.servletRequest = servletRequest;
     }
 
     @Override
