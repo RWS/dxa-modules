@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Configuration;
-using System.Web.Hosting;
-using FiftyOne.Foundation.Mobile.Detection.Entities.Stream;
-using FiftyOne.Foundation.Mobile.Detection.Factories;
-using Sdl.Web.Mvc.Configuration;
+﻿using System.Web.Hosting;
 
 namespace Sdl.Web.Modules.Degrees51
 {    

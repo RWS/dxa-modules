@@ -14,6 +14,6 @@ namespace Sdl.Web.Modules.Core.Models
         [SemanticProperty("s:latitude")]
         [SemanticProperty("l:latitude")]
         public double Latitude { get; set; }
-        public String Query { get; set; } 
+        public string Query { get; set; } 
     }
 }

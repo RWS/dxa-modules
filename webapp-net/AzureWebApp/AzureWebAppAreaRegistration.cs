@@ -4,18 +4,11 @@ namespace Sdl.Web.Modules.AzureWebApp
 {
     public class AzureWebAppAreaRegistration : BaseAreaRegistration
     {
-        public override string AreaName
-        {
-            get
-            {
-                return "AzureWebApp";
-            }
-        }
+        public override string AreaName => "AzureWebApp";
 
         protected override void RegisterAllViewModels()
         {
             // This Module doesn't define any Views (yet).
         }
     }
-
 }

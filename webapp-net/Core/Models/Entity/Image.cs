@@ -36,8 +36,8 @@ namespace Sdl.Web.Modules.Core.Models
             string dataAspect = (Math.Truncate(aspect * 100) / 100).ToString(CultureInfo.InvariantCulture);
             string widthAttr = string.IsNullOrEmpty(widthFactor) ? null : string.Format("width=\"{0}\"", widthFactor);
             string classAttr = string.IsNullOrEmpty(cssClass) ? null : string.Format("class=\"{0}\"", cssClass);
-            return string.Format("<img src=\"{0}\" alt=\"{1}\" data-aspect=\"{2}\" {3}{4}/>",
-                responsiveImageUrl, AlternateText, dataAspect, widthAttr, classAttr);
+            return
+                $"<img src=\"{responsiveImageUrl}\" alt=\"{AlternateText}\" data-aspect=\"{dataAspect}\" {widthAttr}{classAttr}/>";
         }
 
         /// <summary>
@@ -47,7 +47,6 @@ namespace Sdl.Web.Modules.Core.Models
         public override void ReadFromXhtmlElement(XmlElement xhtmlElement)
         {
             base.ReadFromXhtmlElement(xhtmlElement);
-
             AlternateText = xhtmlElement.GetAttribute("alt");
         }
 

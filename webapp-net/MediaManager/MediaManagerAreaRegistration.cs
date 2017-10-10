@@ -5,13 +5,7 @@ namespace Sdl.Web.Modules.MediaManager
 {
     public class MediaManagerAreaRegistration : BaseAreaRegistration 
     {
-        public override string AreaName 
-        {
-            get 
-            {
-                return "MediaManager";
-            }
-        }
+        public override string AreaName => "MediaManager";
 
         protected override void RegisterAllViewModels()
         {

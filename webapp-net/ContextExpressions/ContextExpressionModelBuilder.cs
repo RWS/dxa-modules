@@ -20,7 +20,6 @@ namespace Sdl.Web.Modules.ContextExpressions
     /// </remarks>
     public class ContextExpressionModelBuilder : IModelBuilder, IEntityModelBuilder
     {
-
         #region IModelBuilder members
         public void BuildPageModel(ref PageModel pageModel, IPage page, IEnumerable<IPage> includes, Localization localization)
         {

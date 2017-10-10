@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Net.Mime;
 using System.ServiceModel.Syndication;
 using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Models;

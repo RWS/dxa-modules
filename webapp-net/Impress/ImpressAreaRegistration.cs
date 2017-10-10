@@ -6,13 +6,7 @@ namespace Sdl.Web.Modules.Impress
 {
     public class ImpressAreaRegistration : BaseAreaRegistration 
     {
-        public override string AreaName
-        {
-            get
-            {
-                return "Impress";
-            }
-        }
+        public override string AreaName => "Impress";
 
         protected override void RegisterAllViewModels()
         {

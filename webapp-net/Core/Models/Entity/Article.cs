@@ -1,7 +1,6 @@
 ﻿using Sdl.Web.Common.Models;
 using System;
 using System.Collections.Generic;
-using System.Net.Mime;
 using System.ServiceModel.Syndication;
 using Sdl.Web.Common.Configuration;
 

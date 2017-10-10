@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Configuration;
-using FiftyOne.Foundation.Mobile.Detection.Entities.Stream;
-using FiftyOne.Foundation.Mobile.Detection.Factories;
 using Sdl.Web.Common.Logging;
 using Sdl.Web.Mvc.Configuration;
 
@@ -16,15 +10,9 @@ namespace Sdl.Web.Modules.Degrees51
 {
     public class Degrees51AreaRegistration : BaseAreaRegistration
     {
-        public static readonly string LITE_URI = "https://github.com/51Degrees/dotNET-Device-Detection/blob/master/data/51Degrees-LiteV3.2.dat?raw=true";
+        public static readonly string LiteUri = "https://github.com/51Degrees/dotNET-Device-Detection/blob/master/data/51Degrees-LiteV3.2.dat?raw=true";
 
-        public override string AreaName
-        {
-            get
-            {
-                return "Degrees51";
-            }
-        }
+        public override string AreaName => "Degrees51";
 
         /// <summary>
         /// Attempt to download the Lite dataset from 51Degrees if no dataset exists.
@@ -33,7 +21,7 @@ namespace Sdl.Web.Modules.Degrees51
         {
             try
             {
-                string liteUri = WebConfigurationManager.AppSettings["fiftyOneDegrees.lite.dataset"] ?? LITE_URI;
+                string liteUri = WebConfigurationManager.AppSettings["fiftyOneDegrees.lite.dataset"] ?? LiteUri;
                 // we need to read the BinaryFilePath to find out where 51degree's is looking for its dataset but unfortunatly this is an
                 // internal property so we use reflection to get it.
                 var configSection = WebConfigurationManager.GetWebApplicationSection("fiftyOne/detection");
@@ -52,11 +40,11 @@ namespace Sdl.Web.Modules.Degrees51
                 }
                 FileInfo fileInfo = new FileInfo(path);
 
-                Log.Info(string.Format("Checking if 51 Degrees DataSet is available at '{0}'", path));
+                Log.Info($"Checking if 51 Degrees DataSet is available at '{path}'");
                 // check if dataset file exists              
                 if (!fileInfo.Exists)
                 {
-                    Log.Info(string.Format("51 Degrees DataSet not available. Downloading Lite version at '{0}'", liteUri));
+                    Log.Info($"51 Degrees DataSet not available. Downloading Lite version at '{liteUri}'");
                     if (!Directory.Exists(fileInfo.DirectoryName))
                     {
                         Directory.CreateDirectory(fileInfo.DirectoryName);

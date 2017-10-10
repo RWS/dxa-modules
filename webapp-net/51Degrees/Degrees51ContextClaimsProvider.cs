@@ -1,20 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
-using System.Net;
 using System.Threading;
 using System.Web;
-using System.Web.Configuration;
 using FiftyOne.Foundation.Mobile.Detection;
-using FiftyOne.Foundation.Mobile.Detection.Entities.Stream;
-using FiftyOne.Foundation.Mobile.Detection.Factories;
-using Sdl.Web.Common;
 using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Interfaces;
 using Sdl.Web.Common.Logging;
 using Sdl.Web.Context.Api.Types;
-using Sdl.Web.Mvc.Configuration;
 
 namespace Sdl.Web.Modules.Degrees51
 {
@@ -39,7 +32,7 @@ namespace Sdl.Web.Modules.Degrees51
     /// </summary>
     public class Degrees51ContextClaimsProvider : IContextClaimsProvider
     {            
-        private IAspectMap[] _properties;
+        private readonly IAspectMap[] _properties;
         public Degrees51ContextClaimsProvider()
         {        
             // perform mapping of 51 degrees to context claims
@@ -47,9 +40,7 @@ namespace Sdl.Web.Modules.Degrees51
             { 
                new AspectMap<string> { Aspect = "os", Name = "vendor", Build = ()=>GetProperty<string>("PlatformVendor") },
                new AspectMap<string> { Aspect = "os", Name = "model", Build = ()=>GetProperty<string>("PlatformName") },
-               new AspectMap<GenericVersion> { Aspect = "os", Name = "version", Build = ()=> {
-                   return new GenericVersion(GetProperty<int>("PlatformVersion"));
-               } },
+               new AspectMap<GenericVersion> { Aspect = "os", Name = "version", Build = ()=> new GenericVersion(GetProperty<int>("PlatformVersion"))},
                new AspectMap<string> { Aspect = "userRequest", Name = "fullUrl", Build = ()=>"" },
                new AspectMap<bool> { Aspect = "ui", Name = "android", Build = ()=> {
                     string p = GetProperty<string>("PlatformVendor");
@@ -70,29 +61,17 @@ namespace Sdl.Web.Modules.Degrees51
                        h.Add("css30");
                    return h;
                }},
-               new AspectMap<HashSet<string>> { Aspect = "browser", Name = "inputModeSupport", Build = ()=> {
-                   return new HashSet<string>{"useInputmodeAttribute"};
-               }},
-               new AspectMap<GenericVersion> { Aspect = "browser", Name = "jsVersion", Build = ()=> {
-                   return new GenericVersion(0);
-               }},
-               new AspectMap<GenericVersion> { Aspect = "browser", Name = "cssVersion", Build = ()=> {
-                   return new GenericVersion(0);
-               }},
-               new AspectMap<GenericVersion> { Aspect = "browser", Name = "version", Build = ()=> {
-                   return new GenericVersion(0);
-               }},
+               new AspectMap<HashSet<string>> { Aspect = "browser", Name = "inputModeSupport", Build = ()=> new HashSet<string>{"useInputmodeAttribute"}},
+               new AspectMap<GenericVersion> { Aspect = "browser", Name = "jsVersion", Build = ()=> new GenericVersion(0)},
+               new AspectMap<GenericVersion> { Aspect = "browser", Name = "cssVersion", Build = ()=> new GenericVersion(0)},
+               new AspectMap<GenericVersion> { Aspect = "browser", Name = "version", Build = ()=> new GenericVersion(0)},
                new AspectMap<HashSet<string>> { Aspect = "browser", Name = "scriptSupport", Build = ()=> {
                    HashSet<string> h = new HashSet<string>();
                    if (GetProperty<bool>("Javascript")) h.Add("Javascript");
                    return h;
                }},
-               new AspectMap<HashSet<string>> { Aspect = "browser", Name = "inputDevices", Build = ()=> {
-                    return new HashSet<string>();  
-               }},
-               new AspectMap<HashSet<string>> { Aspect = "browser", Name = "imageFormatSupport", Build = ()=> {
-                   return new HashSet<string>(); 
-               }},
+               new AspectMap<HashSet<string>> { Aspect = "browser", Name = "inputDevices", Build = ()=> new HashSet<string>()},
+               new AspectMap<HashSet<string>> { Aspect = "browser", Name = "imageFormatSupport", Build = ()=> new HashSet<string>()},
                new AspectMap<HashSet<string>> { Aspect = "browser", Name = "markupSupport", Build = ()=> {
                    HashSet<string> h = new HashSet<string>(); 
                    if(GetProperty<bool>("Html5"))
@@ -105,10 +84,7 @@ namespace Sdl.Web.Modules.Degrees51
                new AspectMap<string> { Aspect = "browser", Name = "preferredHtmlContentType", Build = ()=>GetProperty<string>("") },
                new AspectMap<string> { Aspect = "browser", Name = "variant", Build = ()=>GetProperty<string>("") },
                new AspectMap<string> { Aspect = "browser", Name = "model", Build = ()=>GetProperty<string>("BrowserName") },
-               new AspectMap<string> { Aspect = "browser", Name = "modelAndOS", Build = ()=>
-               {
-                   return string.Format("{0} {1} {2}", GetProperty<string>("PlatformName"), GetProperty<string>("PlatformVersion"), GetProperty<string>("BrowserName"));
-               }},
+               new AspectMap<string> { Aspect = "browser", Name = "modelAndOS", Build = ()=> $"{GetProperty<string>("PlatformName")} {GetProperty<string>("PlatformVersion")} {GetProperty<string>("BrowserName")}"},
                new AspectMap<string> { Aspect = "userHttp", Name = "cacheControl", Build = ()=> "" },
                new AspectMap<string> { Aspect = "userServer", Name = "remoteUser", Build = ()=> "" },
                new AspectMap<string> { Aspect = "userServer", Name = "serverPort", Build = ()=> "" },
@@ -118,15 +94,9 @@ namespace Sdl.Web.Modules.Degrees51
                new AspectMap<bool> { Aspect = "device", Name = "4g", Build = ()=>false },
                new AspectMap<int> { Aspect = "device", Name = "displayHeight", Build = ()=>GetContextProperty<int>("dh") },
                new AspectMap<int> { Aspect = "device", Name = "displayWidth", Build = ()=>GetContextProperty<int>("dw") },
-               new AspectMap<int> { Aspect = "device", Name = "pixelDensity", Build = ()=>
-               {
-                   // todo: unable to get a value for this currently
-                   return 1;
-               }},
+               new AspectMap<int> { Aspect = "device", Name = "pixelDensity", Build = ()=> 1},
                new AspectMap<double> { Aspect = "device", Name = "pixelRatio", Build = ()=>GetContextProperty<double>("dpr") },
-               new AspectMap<GenericVersion> { Aspect = "device", Name = "version", Build = ()=>{
-                   return new GenericVersion(0);
-               }},
+               new AspectMap<GenericVersion> { Aspect = "device", Name = "version", Build = ()=> new GenericVersion(0)},
                new AspectMap<HashSet<string>> { Aspect = "device", Name = "inputDevices", Build = ()=> {
                    HashSet<string> h = new HashSet<string>();                
                    if(GetProperty<string>("DeviceType").Equals("desktop", StringComparison.InvariantCultureIgnoreCase))
@@ -154,7 +124,7 @@ namespace Sdl.Web.Modules.Degrees51
                 int h = key.GetHashCode();
                 if(WebProvider.ActiveProvider!=null)
                 {
-                    Log.Info(string.Format("Current 51 Degrees DataSet name: '{0}'", WebProvider.ActiveProvider.DataSet.Name));
+                    Log.Info($"Current 51 Degrees DataSet name: '{WebProvider.ActiveProvider.DataSet.Name}'");
                 }
                 return !HttpContext.Current.Items.Contains(key.GetHashCode()) && (WebProvider.ActiveProvider == null || WebProvider.ActiveProvider.DataSet.Name == "Lite");
             }
@@ -193,7 +163,7 @@ namespace Sdl.Web.Modules.Degrees51
                 Log.Error("An error occured when attempted to access the 51degrees.licenseKey configuration setting.", ex);
                 if (WebProvider.ActiveProvider != null)
                 {
-                    Log.Info(string.Format("Current 51 Degrees DataSet name: '{0}'", WebProvider.ActiveProvider.DataSet.Name));
+                    Log.Info($"Current 51 Degrees DataSet name: '{WebProvider.ActiveProvider.DataSet.Name}'");
                 }
             }
             
@@ -202,7 +172,7 @@ namespace Sdl.Web.Modules.Degrees51
             foreach (IAspectMap x in _properties)
             {
                 object v = x.Value;
-                claims.Add(string.Format("{0}.{1}", x.Aspect, x.Name), v);
+                claims.Add($"{x.Aspect}.{x.Name}", v);
             }
 
             return claims;
@@ -251,7 +221,7 @@ namespace Sdl.Web.Modules.Degrees51
                 }
                 catch (Exception ex)
                 {
-                    Log.Error(string.Format("Failed to read property '{0}' from 51 Degrees.", propertyName), ex);
+                    Log.Error($"Failed to read property '{propertyName}' from 51 Degrees.", ex);
                 }
             }
             return default(T);
@@ -270,14 +240,9 @@ namespace Sdl.Web.Modules.Degrees51
             public string Aspect { get; set; }
             public string Name { get; set; }
             public Func<object> Build { get; set; }
-            public object Value
-            {
-                get
-                {
-                    return ValueInternal;
-                }
-            }
-            protected T ValueInternal
+            public object Value => ValueInternal;
+
+            private T ValueInternal
             {
                 get
                 {

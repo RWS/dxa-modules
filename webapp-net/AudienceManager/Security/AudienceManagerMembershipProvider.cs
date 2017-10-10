@@ -239,11 +239,8 @@ namespace Sdl.Web.Modules.AudienceManager.Security
                 userProfile.SetAsCurrentVisitor();
                 return true;
             }
-            else
-            {
-                UserProfile.ClearCurrentVisitor();
-                return false;
-            }
+            UserProfile.ClearCurrentVisitor();
+            return false;
         }
     }
 }

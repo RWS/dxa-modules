@@ -10,7 +10,6 @@ namespace Sdl.Web.Modules.AudienceManager
     public class UserProfile
     {
         private const string EncryptedPrefix = "encrypted:";
-
         private readonly Contact _contact;
         private readonly string _userNameField;
         private readonly string _passwordField;
@@ -22,30 +21,12 @@ namespace Sdl.Web.Modules.AudienceManager
             _passwordField = passwordField;
         }
 
-        public Contact Contact
-        {
-            get
-            {
-                return _contact;
-            }
-        }
+        public Contact Contact => _contact;
 
-        public string UserName
-        {
-            get
-            {
-                return GetExtendedDetail(_userNameField);
-            }
-        }
+        public string UserName => GetExtendedDetail(_userNameField);
 
-        public string Password
-        {
-            get
-            {
-                return GetExtendedDetail(_passwordField);
-            }
-        }
-   
+        public string Password => GetExtendedDetail(_passwordField);
+
         public bool VerifyPassword(string password)
         {
             // passwords are stored in plaintext. any contacts made through the webapp will not store the 
@@ -55,16 +36,13 @@ namespace Sdl.Web.Modules.AudienceManager
             {
                 return Digests.CheckPassword(password, storedPassword.Substring(EncryptedPrefix.Length));
             }
-            else
-            {
-                return password.Equals(storedPassword);
-            }
+            return password.Equals(storedPassword);
         }
 
         private string GetExtendedDetail(string fieldName)
         {
             ExtendedDetail detail = _contact.ExtendedDetails[fieldName];
-            return detail != null ? detail.StringValue : null;
+            return detail?.StringValue;
         }
 
         public static void ClearCurrentVisitor()

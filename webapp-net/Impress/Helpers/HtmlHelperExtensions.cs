@@ -1,5 +1,4 @@
 ﻿using Sdl.Web.Common.Models;
-using System;
 using System.Web.Mvc;
 
 namespace Sdl.Web.Modules.Impress.Helpers
@@ -14,11 +13,11 @@ namespace Sdl.Web.Modules.Impress.Helpers
         /// <returns>The background image style attribute, or empty string if no image available</returns>
         public static MvcHtmlString BgImgStyle(this HtmlHelper htmlHelper, MediaItem image)
         {
-            if (image == null || String.IsNullOrEmpty(image.Url))
+            if (string.IsNullOrEmpty(image?.Url))
             {
                 return null;
             }
-            return new MvcHtmlString(String.Format("style=\"background-image:url('{0}');\"", image.Url));
+            return new MvcHtmlString($"style=\"background-image:url('{image.Url}');\"");
         }
     }
 }

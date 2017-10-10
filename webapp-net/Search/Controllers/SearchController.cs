@@ -35,7 +35,7 @@ namespace Sdl.Web.Modules.Search.Controllers
                 SearchQuery searchQuery = model as SearchQuery;
                 if (searchQuery == null || !searchQuery.GetType().IsGenericType)
                 {
-                    throw new DxaSearchException(String.Format("Unexpected View Model: '{0}'. Expecting type SearchQuery<T>.", model));
+                    throw new DxaSearchException($"Unexpected View Model: '{model}'. Expecting type SearchQuery<T>.");
                 }
 
                 NameValueCollection queryString = Request.QueryString;

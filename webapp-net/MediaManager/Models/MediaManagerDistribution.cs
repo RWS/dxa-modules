@@ -43,7 +43,8 @@ namespace Sdl.Web.Modules.MediaManager.Models
             get
             {
                 Uri directLinkUrl = new Uri(Url, UriKind.Absolute);
-                return string.Format("{0}/json/{1}", directLinkUrl.GetComponents(UriComponents.SchemeAndServer, UriFormat.UriEscaped), GlobalId);
+                return
+                    $"{directLinkUrl.GetComponents(UriComponents.SchemeAndServer, UriFormat.UriEscaped)}/json/{GlobalId}";
             }
         }
 

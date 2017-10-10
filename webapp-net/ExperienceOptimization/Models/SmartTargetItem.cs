@@ -18,17 +18,7 @@ namespace Sdl.Web.Modules.SmartTarget.Models
         /// <remarks>
         /// The Entity Model is lazy loaded. That is: it is loaded only if this property is accessed.
         /// </remarks>
-        public EntityModel Entity 
-        {
-            get
-            {
-                if (_entity == null)
-                {
-                    _entity = SiteConfiguration.ContentProvider.GetEntityModel(EntityId, _localization);
-                }
-                return _entity;
-            }
-        }
+        public EntityModel Entity => _entity ?? (_entity = SiteConfiguration.ContentProvider.GetEntityModel(EntityId, _localization));
 
         public SmartTargetItem(string entityId, Localization localization)
         {

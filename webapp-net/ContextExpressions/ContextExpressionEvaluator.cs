@@ -5,7 +5,6 @@ using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Interfaces;
 using Sdl.Web.Common.Logging;
 using Sdl.Web.Common.Models;
-using Sdl.Web.Tridion.Context;
 
 namespace Sdl.Web.Modules.ContextExpressions
 {
@@ -93,13 +92,13 @@ namespace Sdl.Web.Modules.ContextExpressions
                     object claimValue;
                     if (!contextClaims.TryGetValue(name, out claimValue))
                     {
-                        throw new ContextExpressionException(string.Format("No Context Claim found for Context Expression '{0}'", name));
+                        throw new ContextExpressionException($"No Context Claim found for Context Expression '{name}'");
                     }
 
                     if (!(claimValue is bool))
                     {
                         throw new ContextExpressionException(
-                            string.Format("Context Claim '{0}' is of type '{1}', but expected a boolean value for Context Expression.", name, claimValue.GetType().Name)
+                            $"Context Claim '{name}' is of type '{claimValue.GetType().Name}', but expected a boolean value for Context Expression."
                             );
                     }
 
