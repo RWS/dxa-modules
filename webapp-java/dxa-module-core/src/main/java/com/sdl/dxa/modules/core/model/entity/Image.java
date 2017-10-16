@@ -75,4 +75,14 @@ public class Image extends MediaItem {
                 .defaults(DefaultsMvcData.ENTITY)
                 .create();
     }
+
+    @Override
+    public String toString() {
+        try {
+            return this.toHtmlElement().renderHtml();
+        } catch (DxaException e) {
+            log.warn("Could not render element.", e);
+            return "";
+        }
+    }
 }
