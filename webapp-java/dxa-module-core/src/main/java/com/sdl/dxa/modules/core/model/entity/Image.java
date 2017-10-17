@@ -81,7 +81,7 @@ public class Image extends MediaItem {
         try {
             return this.toHtmlElement().renderHtml();
         } catch (DxaException e) {
-            log.warn("Could not render element.", e);
+            log.warn("Could not render image with URL {}.", this.getUrl());
             return "";
         }
     }
