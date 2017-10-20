@@ -222,7 +222,12 @@ export class CommentsListPresentation extends React.Component<ICommentsListProps
                     <PostCommentReply
                         key={id}
                         parentId={id}
-                        handleSubmit={this._handlePostReply}
+                        handleSubmit={(event: React.FormEvent<HTMLFormElement>, data: IPostComment) => {
+                            this._handlePostReply(event, data);
+                            // After comment is posted, open the replies list
+                            showCommentReplies[id] = true;
+                            this.setState({ showCommentReplies });
+                        }}
                         handleReset={() => {
                             showCommentPostReply[id] = false;
                             this.setState({ showCommentPostReply });
