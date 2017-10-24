@@ -47,7 +47,7 @@ public class Image extends MediaItem {
     }
 
     private boolean isScalable() {
-        return this.getMimeType().equalsIgnoreCase(MimeUtils.getMimeTypeByHash("svg"));
+        return this.getMimeType().equalsIgnoreCase(MimeUtils.getMimeType("svg"));
     }
 
     @Override
