@@ -57,7 +57,7 @@ public class Image extends MediaItem {
             throw new DxaException("URL is null for image component: " + this);
         }
 
-        String url = this.isResizable() ? getUrl() : getMediaHelper().getResponsiveImageUrl(getUrl(), widthFactor, aspect, containerSize);
+        String url = this.isResizable() ? getMediaHelper().getResponsiveImageUrl(getUrl(), widthFactor, aspect, containerSize) : getUrl();
         return img(url)
                 .withAlt(this.alternateText)
                 .withClass(cssClass)
