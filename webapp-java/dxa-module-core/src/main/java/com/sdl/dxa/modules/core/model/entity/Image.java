@@ -46,8 +46,8 @@ public class Image extends MediaItem {
         return toHtmlElement(widthFactor, aspect, cssClass, containerSize, "");
     }
 
-    private boolean isScalable() {
-        return this.getMimeType().equalsIgnoreCase(MimeUtils.getMimeType("svg"));
+    private boolean isResizable() {
+        return !this.getMimeType().equalsIgnoreCase(MimeUtils.getMimeType("svg"));
     }
 
     @Override
@@ -57,7 +57,7 @@ public class Image extends MediaItem {
             throw new DxaException("URL is null for image component: " + this);
         }
 
-        String url = this.isScalable() ? getUrl() : getMediaHelper().getResponsiveImageUrl(getUrl(), widthFactor, aspect, containerSize);
+        String url = this.isResizable() ? getUrl() : getMediaHelper().getResponsiveImageUrl(getUrl(), widthFactor, aspect, containerSize);
         return img(url)
                 .withAlt(this.alternateText)
                 .withClass(cssClass)
