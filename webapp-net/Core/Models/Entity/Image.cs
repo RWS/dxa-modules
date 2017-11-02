@@ -11,9 +11,17 @@ namespace Sdl.Web.Modules.Core.Models
     [Serializable]
     public class Image : MediaItem
     {
+        private string _altTxt;
+
         [SemanticProperty("s:name")]
         [SemanticProperty("c:altText")]
-        public string AlternateText { get; set; }
+        public string AlternateText
+        {
+            // We do this so we can return an empty string if alt is not provided. This is due to the accessibility 
+            // specs stating that an altText attribute MUST be present.
+            get { return _altTxt ?? string.Empty; }
+            set { _altTxt = value; }
+        }
 
         /// <summary>
         /// Renders an HTML representation of the Media Item.
