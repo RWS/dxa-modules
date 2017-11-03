@@ -5,7 +5,7 @@
   "dependencies": {
     "@sdl/delivery-ish-dd-webapp-gui": "1.1.0-SNAPSHOT",
     "react": "~15.5.1",
-    "react-dom": "~15.5.1",
+    "react-dom": "~15.5.1"
   },
   "devDependencies": {
     "@sdl/icons": "~1.1.0-16",

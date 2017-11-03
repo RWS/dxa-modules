@@ -22,6 +22,8 @@
         "suppressImplicitAnyIndexErrors": false,
         "target": "es5",
         "lib": ["es6", "es5", "dom", "dom.iterable", "scripthost", "es2016.array.include", "es2017.object"],
+        "declaration": true,
+        "declarationDir": "../typings/",
         "experimentalDecorators": true,
         "jsx": "react",
         "typeRoots": ["node_modules/@types"],
