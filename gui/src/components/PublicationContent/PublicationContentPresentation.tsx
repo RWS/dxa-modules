@@ -280,6 +280,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                     <NavigationMenu isOpen={false}>{/* TODO: use global state store */}
                         <Toc
                             activeItemPath={activeTocItemPath}
+                            publicationId={publicationId}
                             rootItems={rootItems}
                             loadChildItems={(parentId: string): Promise<ITaxonomy[]> => {
                                 return taxonomyService.getSitemapItems(publicationId, parentId);

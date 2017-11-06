@@ -77,6 +77,7 @@ class TocComponent extends TestBase {
                 const props: ITocProps = {
                     loadChildItems: loadChildItems,
                     rootItems: rootItems,
+                    publicationId: "0",
                     onRetry: () => {
                         toc.setState({
                             error: null
@@ -154,6 +155,7 @@ class TocComponent extends TestBase {
                     loadChildItems: loadChildItems,
                     rootItems: rootItems,
                     activeItemPath: activeItemPath,
+                    publicationId: "0",
                     onSelectionChanged: (sitemapItem: ITaxonomy, path: string[]): void => {
                         expect(path).toEqual(activeItemPath);
                         done();
@@ -175,6 +177,7 @@ class TocComponent extends TestBase {
                         loadChildItems: loadChildItems,
                         rootItems: rootItems,
                         activeItemPath: undefined,
+                        publicationId: "0",
                         onSelectionChanged: (sitemapItem: ITaxonomy, path: string[]): void => {
                             expect(path).toEqual([rootItems[0].id || ""]);
                             done();
@@ -190,6 +193,7 @@ class TocComponent extends TestBase {
                     loadChildItems: loadChildItems,
                     rootItems: rootItems,
                     activeItemPath: activeItemPath,
+                    publicationId: "0",
                     onSelectionChanged: (sitemapItem: ITaxonomy, path: string[]): void => {
                         expect(path).toEqual(activeItemPath);
                         selectFirstRootNode();
@@ -228,6 +232,7 @@ class TocComponent extends TestBase {
                     loadChildItems: loadChildItems,
                     rootItems: rootItems,
                     activeItemPath: activeItemPath,
+                    publicationId: "0",
                     onSelectionChanged: (sitemapItem: ITaxonomy, path: string[]): void => {
                         expect(path).toEqual(activeItemPath);
                         switchBetweenChildNodes(props);
