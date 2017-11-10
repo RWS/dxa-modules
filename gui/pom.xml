@@ -17,7 +17,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <npm.repo>https://nexus.sdl.com/content/groups/npm/</npm.repo>
+        <npm.repo>https://registry.npmjs.org/</npm.repo>
     </properties>
 
     <build>
