@@ -177,22 +177,18 @@ class TocComponent extends TestBase {
                 const selectFirstRootNode = (): void => {
                     // Reload toc and make active item path undefined
                     // Expected is that the first root node is selected
-                    const propsReset: ITocProps = {
-                        loadChildItems: loadChildItems,
-                        rootItems: rootItems,
-                        activeItemPath: activeItemPath,
+                    this._renderComponent({
                         publicationId: "1",
                         onSelectionChanged: (sitemapItem: ITaxonomy, path: string[]): void => {
                             expect(path).toEqual(activeItemPath);
                             done();
                         },
                         onRetry: () => { }
-                    };
-                    this._renderComponent(propsReset, target);
+                    } as ITocProps, target);
                 };
 
                 // Set active item path to a child path
-                const props: ITocProps = {
+                this._renderComponent( {
                     loadChildItems: loadChildItems,
                     rootItems: rootItems,
                     activeItemPath: activeItemPath,
@@ -202,8 +198,7 @@ class TocComponent extends TestBase {
                         selectFirstRootNode();
                     },
                     onRetry: () => { }
-                };
-                this._renderComponent(props, target);
+                } as ITocProps, target);
             });
 
             it("selects first root node when setting active item path to undefined", (done: () => void): void => {
