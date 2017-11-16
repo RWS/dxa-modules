@@ -1,7 +1,6 @@
 import { Store } from "redux";
 import { String } from "@sdl/models";
 import { language } from "store/reducers/Language";
-import { changeLanguage } from "store/actions/Actions";
 import { ILocalizationService, ILanguage } from "services/interfaces/LocalizationService";
 import { IState } from "store/interfaces/State";
 import { browserHistory } from "react-router";
@@ -11,7 +10,6 @@ interface IDics { [lang: string]: IDic; };
 
 export const DEFAULT_LANGUAGE: string = "en";
 export const DEFAULT_LANGUAGES = ["de", "en", "nl", "zh", "ja"];
-const LANGUAGE_LOCALSTORAGE: string =  "sdl-dita-delivery-app-language";
 
 const LanguageMap = require("resources/resources.languages.resjson") as ILanguage[];
 
@@ -49,7 +47,7 @@ export class LocalizationService implements ILocalizationService {
      * Creates an instance of LocalizationService.
      */
     public constructor() {
-        this.language = localStorage.getItem(LANGUAGE_LOCALSTORAGE) || DEFAULT_LANGUAGE;
+        this.language = DEFAULT_LANGUAGE;
 
         this.formatMessage = this.formatMessage.bind(this);
         this.getDirection = this.getDirection.bind(this);
@@ -63,25 +61,11 @@ export class LocalizationService implements ILocalizationService {
      * @returns void
      */
     public setStore(store: Store<IState>): void {
-        store.dispatch(changeLanguage(this.language));
         store.subscribe((): void => {
             const newLanguage = store.getState().language;
 
             if (newLanguage !== this.language) {
                 this.language = newLanguage;
-
-                // Safari and Chrome are supports LocalStorage, but we always get the QuotaExceededError in Safari|Chrome Private Browser Mode.
-                // Using try/catch for now, to prevent the rest of javascript from breaking
-                // Some others sollution that we can do in future:
-                //      - implement Fake LocalStorage for private browser mode;
-                //      - use third party library
-                //      - show message for user that browser does not support storing settings locally in Private Mode
-                try {
-                    localStorage.setItem(LANGUAGE_LOCALSTORAGE, this.language);
-                } catch (e) {
-                    console.warn(`LocalStorage exception: ${e}`);
-                }
-
                 this.reloadPage();
             }
         });
