@@ -16,7 +16,8 @@ import "test/tests/components/container/TilesListComponent";
 import "test/tests/components/container/TilesListComponent";
 import "test/tests/components/controls/DatePickerComponent";
 import "test/tests/components/controls/DropdownComponent";
-import "test/tests/components/Dialog/DialogComponent";
+import "test/tests/components/dialogs/DialogComponent";
+import "test/tests/components/dialogs/ConditionsDialogComponent";
 import "test/tests/components/PageLink/PageLinkComponent";
 import "test/tests/components/presentation/BreadcrumbsComponent";
 import "test/tests/components/presentation/CommentComponent";
@@ -49,4 +50,5 @@ import "test/tests/utils/StringUtil";
 import "test/tests/utils/TcmId";
 import "test/tests/utils/UrlUtil";
 import "test/tests/utils/Version";
+
 import "test/tests/Server";
