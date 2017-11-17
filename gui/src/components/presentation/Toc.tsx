@@ -173,7 +173,7 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
         const { rootItems, publicationId } = this.props;
         const currentRootNodes = this._convertToTreeViewNodes(rootItems || []);
         const currentFirstRootNode = currentRootNodes.length > 0 ? currentRootNodes[0] : null;
-        if (publicationId == nextProps.publicationId) {
+        if (publicationId !== nextProps.publicationId) {
             this._currentActiveNode = null;
         }
         const activeNodePath = this._currentActiveNode ? this._currentActiveNode.getPath().split("/") : undefined;
