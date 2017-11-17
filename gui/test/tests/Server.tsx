@@ -63,20 +63,19 @@ class Server extends TestBase {
                                 <div className="sdl-dita-delivery-topbar-language"><span></span></div>
                                 <div className="sdl-dita-delivery-dropdown">
                                     <button className="dropdown-toggle" type="button" data-toggle="dropdown">
-                                        English
                                         <span className="caret"></span>
                                     </button>
                                     <div className="dropdown-menu">
                                         <div className="dropdown-arrow"></div>
                                         <ul className="dropdown-items">
                                             <li><a style={{"direction": "ltr"}}>Deutsch</a></li>
-                                            <li className="active"><a style={{"direction": "ltr"}}>English<span className="checked"></span></a></li>
+                                            <li><a style={{"direction": "ltr"}}>English</a></li>
                                             <li><a style={{"direction": "ltr"}}>Nederlands</a></li>
                                             <li><a style={{"direction": "ltr"}}>中文</a></li>
                                             <li><a style={{"direction": "ltr"}}>日本語</a></li>
                                         </ul>
                                     </div>
-                                    <select defaultValue="en">
+                                    <select>
                                         <option value="de">Deutsch</option>
                                         <option value="en">English</option>
                                         <option value="nl">Nederlands</option>

@@ -174,6 +174,15 @@ class TocComponent extends TestBase {
 
                 const activeItemPath = [rootItems[0].id || "", "12345", "12345-nested"];
 
+                const timeoutPathChecker = (path: string[], callback: () => void) => {
+                    setTimeout((): void => {
+                        expect(path).toEqual(activeItemPath);
+                        if (callback) {
+                            callback();
+                        }
+                    }, ASYNC_TEST_DELAY);
+                };
+
                 const selectFirstRootNode = (): void => {
                     // Reload toc and make active item path undefined
                     // Expected is that the first root node is selected
@@ -183,8 +192,7 @@ class TocComponent extends TestBase {
                         activeItemPath: activeItemPath,
                         publicationId: "1",
                         onSelectionChanged: (sitemapItem: ITaxonomy, path: string[]): void => {
-                            expect(path).toEqual(activeItemPath);
-                            done();
+                            timeoutPathChecker(path, done);
                         },
                         onRetry: () => { }
                     };
@@ -198,8 +206,7 @@ class TocComponent extends TestBase {
                     activeItemPath: activeItemPath,
                     publicationId: "0",
                     onSelectionChanged: (sitemapItem: ITaxonomy, path: string[]): void => {
-                        expect(path).toEqual(activeItemPath);
-                        selectFirstRootNode();
+                        timeoutPathChecker(path, selectFirstRootNode);
                     },
                     onRetry: () => { }
                 };
