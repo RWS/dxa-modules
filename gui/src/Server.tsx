@@ -9,6 +9,8 @@ import { TaxonomyService } from "services/server/TaxonomyService";
 import { SearchService } from "services/server/SearchService";
 import { localization } from "services/common/LocalizationService";
 
+import { DEFAULT_LANGUAGE } from "services/common/LocalizationService";
+
 import { Provider } from "react-redux";
 import { IState } from "store/interfaces/State";
 import { configureStore } from "store/Store";
@@ -32,12 +34,13 @@ export function renderToString(path: string): string {
         searchService: new SearchService()
     };
 
-    const store: Store<IState> = configureStore({});
+    const store: Store<IState> = configureStore({ language: DEFAULT_LANGUAGE });
 
     localization.setStore(store);
 
     return ReactDOMServer.renderToString(
         <Provider store={store}>
-            <App services={services}/>
-        </Provider>);
-};
+            <App services={services} />
+        </Provider>
+    );
+}
