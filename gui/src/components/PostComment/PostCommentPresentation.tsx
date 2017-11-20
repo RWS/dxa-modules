@@ -7,6 +7,8 @@ import { IAppContext } from "@sdl/dd/container/App/App";
 import { IPostComment } from "interfaces/Comments";
 import * as ClassNames from "classnames";
 
+import { Url } from "utils/Url";
+
 export interface IPostCommentPresentationProps {
     /**
      * Comment parent id if exists
@@ -52,6 +54,14 @@ export interface IPostCommentPresentationDispatchProps {
     pageId: string;
 
     /**
+     * Comment page Title
+     *
+     * @type {string}
+     * @memberOf IPostCommentPresentationProps
+     */
+    pageTitle: string | undefined;
+
+    /**
      * Comment publication Id
      *
      * @type {string}
@@ -60,12 +70,28 @@ export interface IPostCommentPresentationDispatchProps {
     publicationId: string;
 
     /**
+     * Comment publication Title
+     *
+     * @type {string}
+     * @memberOf IPostCommentPresentationProps
+     */
+    publicationTitle: string | undefined;
+
+    /**
      * If comment is saving
      *
      * @type {boolean}
      * @memberOf IPostCommentPresentationProps
      */
     isCommentSaving: boolean;
+
+    /**
+     * Comment publication language
+     *
+     * @type {string}
+     * @memberOf IPostCommentPresentationProps
+     */
+    language: string;
 }
 
 export interface IPostCommentPresentationState {
@@ -84,7 +110,10 @@ export interface IPC {
     [key: string]: boolean;
 }
 
-export class PostCommentPresentation extends React.Component<IPostCommentPresentationProps & IPostCommentPresentationDispatchProps, IPostCommentPresentationState> {
+export class PostCommentPresentation extends React.Component<
+    IPostCommentPresentationProps & IPostCommentPresentationDispatchProps,
+    IPostCommentPresentationState
+> {
     /**
      * Context types
      *
@@ -135,7 +164,10 @@ export class PostCommentPresentation extends React.Component<IPostCommentPresent
      */
     public handleChange(event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>): void {
         const htmlElement = event.currentTarget;
-        this.setState({ ...this.state, [htmlElement.getAttribute("id") as string]: htmlElement.value });
+        this.setState({
+            ...this.state,
+            [htmlElement.getAttribute("id") as string]: htmlElement.value
+        });
     }
 
     /**
@@ -202,7 +234,10 @@ export class PostCommentPresentation extends React.Component<IPostCommentPresent
      */
     public handleBlur(event: React.FocusEvent<HTMLElement>): void {
         const field = event.currentTarget.getAttribute("id") as string;
-        this.setState({ ...this.state, edited: { ...this.state.edited, [field]: true } });
+        this.setState({
+            ...this.state,
+            edited: { ...this.state.edited, [field]: true }
+        });
     }
 
     /**
@@ -233,58 +268,101 @@ export class PostCommentPresentation extends React.Component<IPostCommentPresent
 
         return (
             <div className="sdl-dita-delivery-postcomment">
-                <form onSubmit={this.handleSubmit} onReset={this.handleReset} id="form">
+                <form
+                    onSubmit={this.handleSubmit}
+                    onReset={this.handleReset}
+                    id="form"
+                >
                     <div>
                         <input
                             className={getInputClassNames("name")}
                             type="text"
                             id="name"
-                            placeholder={formatMessage("component.post.comment.placeholder.name")}
+                            placeholder={formatMessage(
+                                "component.post.comment.placeholder.name"
+                            )}
                             onChange={this.handleChange}
                             onBlur={this.handleBlur}
                         />
-                        <span>{formatMessage("component.post.comment.no.name")}</span>
+                        <span>
+                            {formatMessage("component.post.comment.no.name")}
+                        </span>
                     </div>
                     <div>
                         <input
                             className={getInputClassNames("email")}
                             type="text"
                             id="email"
-                            placeholder={formatMessage("component.post.comment.placeholder.email")}
+                            placeholder={formatMessage(
+                                "component.post.comment.placeholder.email"
+                            )}
                             onChange={this.handleChange}
                             onBlur={this.handleBlur}
                         />
-                        <span>{formatMessage("component.post.comment.no.email")}</span>
+                        <span>
+                            {formatMessage("component.post.comment.no.email")}
+                        </span>
                     </div>
                     <div>
                         <textarea
                             className={getTextareaClassNames("comment")}
                             id="comment"
-                            placeholder={formatMessage("component.post.comment.placeholder.content")}
+                            placeholder={formatMessage(
+                                "component.post.comment.placeholder.content"
+                            )}
                             onChange={this.handleChange}
                             onBlur={this.handleBlur}
                         />
-                        <span>{formatMessage("component.post.comment.no.content")}</span>
+                        <span>
+                            {formatMessage("component.post.comment.no.content")}
+                        </span>
                     </div>
-                    <button type="submit" disabled={isDisabled} className="sdl-button graphene sdl-button-purpose-confirm" form="form" value="Submit">
+                    <button
+                        type="submit"
+                        disabled={isDisabled}
+                        className="sdl-button graphene sdl-button-purpose-confirm"
+                        form="form"
+                        value="Submit"
+                    >
                         {formatMessage("component.post.comment.submit")}
                     </button>
-                    <button type="reset" className="sdl-button graphene" value="Cancel">
+                    <button
+                        type="reset"
+                        className="sdl-button graphene"
+                        value="Cancel"
+                    >
                         {formatMessage("components.conditions.dialog.cancel")}
                     </button>
                 </form>
-                {error && <div className="sdl-dita-delivery-postcomment-error">{formatMessage("component.post.comment.post.error")}</div>}
+                {error && (
+                    <div className="sdl-dita-delivery-postcomment-error">
+                        {formatMessage("component.post.comment.post.error")}
+                    </div>
+                )}
             </div>
         );
     }
 
     protected getCommentData(): IPostComment {
         const { name, email, comment } = this.state;
-        const { publicationId, pageId } = this.props;
+        const { getLanguage } = this.context.services.localizationService;
+        const {
+            publicationId,
+            publicationTitle,
+            pageId,
+            pageTitle
+        } = this.props;
+
+        const language = getLanguage();
 
         return {
             publicationId,
+            publicationTitle,
+            publicationUrl: Url.getPublicationUrl(publicationId, publicationTitle),
             pageId,
+            pageTitle,
+            pageUrl: Url.getPageUrl(publicationId, pageId, publicationTitle, pageTitle),
+            language,
             username: name,
             email,
             content: comment,
@@ -353,25 +431,47 @@ export class PostCommentReplyPresentation extends PostCommentPresentation {
 
         return (
             <div className="sdl-dita-delivery-postreply">
-                <form onSubmit={this.handleSubmit} onReset={this.handleReset} id={`reply-form-${parentId}`}>
+                <form
+                    onSubmit={this.handleSubmit}
+                    onReset={this.handleReset}
+                    id={`reply-form-${parentId}`}
+                >
                     <div>
                         <textarea
                             className={getTextareaClassNames("comment")}
                             id="comment"
-                            placeholder={formatMessage("component.post.reply.placeholder")}
+                            placeholder={formatMessage(
+                                "component.post.reply.placeholder"
+                            )}
                             onChange={this.handleChange}
                             onBlur={this.handleBlur}
                         />
-                        <span>{formatMessage("component.post.comment.no.content")}</span>
+                        <span>
+                            {formatMessage("component.post.comment.no.content")}
+                        </span>
                     </div>
-                    <button type="submit" disabled={isDisabled} className="sdl-button graphene sdl-button-purpose-confirm" form={`reply-form-${parentId}`} value="Submit">
+                    <button
+                        type="submit"
+                        disabled={isDisabled}
+                        className="sdl-button graphene sdl-button-purpose-confirm"
+                        form={`reply-form-${parentId}`}
+                        value="Submit"
+                    >
                         {formatMessage("component.post.reply.submit")}
                     </button>
-                    <button type="reset" className="sdl-button graphene" value="Cancel">
+                    <button
+                        type="reset"
+                        className="sdl-button graphene"
+                        value="Cancel"
+                    >
                         {formatMessage("components.conditions.dialog.cancel")}
                     </button>
                 </form>
-                {error && <div className="sdl-dita-delivery-postcomment-error">{formatMessage("component.post.comment.post.error")}</div>}
+                {error && (
+                    <div className="sdl-dita-delivery-postcomment-error">
+                        {formatMessage("component.post.comment.post.error")}
+                    </div>
+                )}
             </div>
         );
     }
