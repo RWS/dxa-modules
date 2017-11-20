@@ -40,5 +40,6 @@ export interface IWindow extends Window {
      */
     SdlDitaDeliveryCommentingIsEnabled?: boolean;
 
-    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: (storeEnchancer: GenericStoreEnhancer) => GenericStoreEnhancer;
+    // TODO: Interface should be improved to be more generic, as a reference see `compose` implementation at `*\node_modules\redux\index.d.ts[368]`
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: (storeEnchancer: GenericStoreEnhancer, storeEnchancer2?: GenericStoreEnhancer) => GenericStoreEnhancer;
 }
