@@ -293,8 +293,7 @@ class PublicationContentComponent extends TestBase {
 
                 // Use a timeout to allow the DataStore to return a promise with the data
                 setTimeout((): void => {
-                    const dropdownList = TestUtils.findRenderedComponentWithType(publicationContent, DropdownList as any);
-                    expect(dropdownList).toBeUndefined();
+                    expect(TestUtils.scryRenderedComponentsWithType(publicationContent, DropdownList as any).length).toBe(0, "Version selector should not be rendered.");
                     done();
                 }, RENDER_DELAY);
             });
