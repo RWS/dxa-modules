@@ -15,7 +15,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <SdlDeliveryVersion>10.1.0</SdlDeliveryVersion>
-    <SdlDxaDataModelPackageVersion>2.0.0-beta-201711161215</SdlDxaDataModelPackageVersion>
+    <SdlDxaDataModelPackageVersion>2.0.0-beta-201711211302</SdlDxaDataModelPackageVersion>
     <DxaFrameworkVersion>2.0.0-beta-201711161259</DxaFrameworkVersion>
     <ExperienceManagerVersion>8.5.0</ExperienceManagerVersion>
   </PropertyGroup>
