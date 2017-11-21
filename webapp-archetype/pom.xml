@@ -52,7 +52,7 @@
         <java.target.version>1.8</java.target.version>
         <maven.compiler.plugin.version>3.6.0</maven.compiler.plugin.version>
         <dxa.version>1.8.0-SNAPSHOT</dxa.version>
-        <cd-cil.version>10.1.0-1017</cd-cil.version>
+        <cd-cil.version>10.1.0-1019</cd-cil.version>
         <maven.resources.plugin.version>3.0.2</maven.resources.plugin.version>
         <!-- GUI properties -->
         <frontend.maven.plugin.version>1.0</frontend.maven.plugin.version>
