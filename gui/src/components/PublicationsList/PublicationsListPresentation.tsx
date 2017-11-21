@@ -167,13 +167,15 @@ export class PublicationsListPresentation extends React.Component<IPublicationsL
             <section className={"sdl-dita-delivery-publications-list"}>
                 <FetchPublications productFamily={productFamily} />
                 <h1>{translatedProductFamily}</h1>
-                <VersionSelector productReleaseVersions={productReleaseVersions}
-                    selectedProductReleaseVersion={selectedProductVersion}
-                    onChange={releaseVersion => {
-                        if (browserHistory) {
-                            browserHistory.push(Url.getProductFamilyUrl(productFamily, releaseVersion));
-                        }
-                    }} />
+                { (productReleaseVersions || []).length > 1 &&
+                    <VersionSelector productReleaseVersions={productReleaseVersions}
+                                 selectedProductReleaseVersion={selectedProductVersion}
+                                 onChange={releaseVersion => {
+                                     if (browserHistory) {
+                                         browserHistory.push(Url.getProductFamilyUrl(productFamily, releaseVersion));
+                                     }
+                                 }}/>
+                }
                 {error
                     ? <Error
                         title={formatMessage("error.default.title")}
