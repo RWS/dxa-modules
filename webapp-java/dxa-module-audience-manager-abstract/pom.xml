@@ -10,7 +10,7 @@
 
     <groupId>com.sdl.dxa.modules</groupId>
     <artifactId>dxa-module-audience-manager-abstract</artifactId>
-    <version>1.8.0-SNAPSHOT</version>
+    <version>1.8.0</version>
 
     <name>DXA Modules - Audience Manager abstract</name>
     <description>Implementation of common code of DXA Audience Manager module</description>
@@ -44,7 +44,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java-version>1.8</java-version>
-        <dxa-bom.version>1.8.0-SNAPSHOT</dxa-bom.version>
+        <dxa-bom.version>1.8.0</dxa-bom.version>
     </properties>
 
     <dependencyManagement>
