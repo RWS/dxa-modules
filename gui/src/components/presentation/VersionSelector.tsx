@@ -27,20 +27,17 @@ export const VersionSelector: React.StatelessComponent<IVersionSelectorProps> =
     (props: IVersionSelectorProps, context: IAppContext): JSX.Element => {
         const { selectedProductReleaseVersion, productReleaseVersions, onChange } = props;
         const { formatMessage } = context.services.localizationService;
-        var availableProductVersions = (productReleaseVersions || []);
-        return (availableProductVersions).length<2
-            ?   <div className="sdl-dita-delivery-version-selector"/>
-            :
-                <div className="sdl-dita-delivery-version-selector">
-                    <label>{formatMessage("productreleaseversions.version.label")}</label>
-                    <DropdownList propertyMappings={{ "text": "title" }}
-                        selectedValue={selectedProductReleaseVersion
-                            ? String.normalize(selectedProductReleaseVersion || "")
-                            : undefined}
-                        options={availableProductVersions}
-                        onChange={onChange}
-                        skin="graphene" />
-                </div>;
+        return (
+            <div className="sdl-dita-delivery-version-selector">
+                <label>{formatMessage("productreleaseversions.version.label")}</label>
+                <DropdownList propertyMappings={{ "text": "title" }}
+                    selectedValue={selectedProductReleaseVersion
+                        ? String.normalize(selectedProductReleaseVersion) : undefined}
+                    options={productReleaseVersions || []}
+                    onChange={onChange}
+                    skin="graphene" />
+            </div>
+        );
     };
 
 VersionSelector.contextTypes = {
