@@ -288,15 +288,12 @@ class PublicationContentComponent extends TestBase {
                     language: "en"
                 }];
                 services.publicationService.setMockDataPublications(null, publications, [{ title: "PF" }],
-                    [{ title: "PR1", value: "pr1" }, { title: "PR2", value: "pr2" }]);
+                    [{ title: "PR1", value: "pr1" }]);
                 const publicationContent = this._renderComponent(target, undefined, "1");
 
                 // Use a timeout to allow the DataStore to return a promise with the data
                 setTimeout((): void => {
-                    // tslint:disable-next-line:no-any
-                    const dropdownList = TestUtils.findRenderedComponentWithType(publicationContent, DropdownList as any);
-                    // const dropdownListNode = ReactDOM.findDOMNode(dropdownList);
-                    expect(dropdownList).toBeUndefined();
+                    expect(TestUtils.scryRenderedComponentsWithType(publicationContent, DropdownList as any).length).toBe(0, "Version selector should not be rendered.");
                     done();
                 }, RENDER_DELAY);
             });
