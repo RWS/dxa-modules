@@ -295,6 +295,7 @@ class PublicationContentComponent extends TestBase {
                 setTimeout((): void => {
                     // tslint:disable-next-line:no-any
                     const dropdownList = TestUtils.findRenderedComponentWithType(publicationContent, DropdownList as any);
+                    // const dropdownListNode = ReactDOM.findDOMNode(dropdownList);
                     expect(dropdownList).toBeUndefined();
                     done();
                 }, RENDER_DELAY);
