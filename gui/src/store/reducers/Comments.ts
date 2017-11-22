@@ -29,7 +29,7 @@ const byId = combine(
     handleAction(
         COMMENT_SAVED,
         (state, { comment, key }) => {
-            const stateComments = cloneDeep(state[key] as IComment[]);
+            const stateComments = cloneDeep(state[key] as IComment[]) || [];
             const parentItem = stateComments.find((c: IComment) => c.id == (comment as IComment).parentId) as IComment;
             if (parentItem) {
                 parentItem.children = parentItem.children.concat(comment).sort((a: IComment, b: IComment) => b.id - a.id);
@@ -77,3 +77,4 @@ export const getById = (state: IComments, id: string) => (id in state.byId ? sta
 export const getErrorMessage = (state: IComments, id: string): string => (id in state.errors ? state.errors[id] : "");
 export const getPostErrorMessage = (state: IComments, id: string): string => (id in state.postErrors ? state.postErrors[id] : "");
 export const isSaving = (state: IComments, id: string): boolean => state.saving.includes(id);
+export const areLoading = (state: IComments, id: string): boolean => state.loading.includes(id);
