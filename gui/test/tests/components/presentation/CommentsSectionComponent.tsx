@@ -1,5 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import * as TestUtils from "react-addons-test-utils";
 import { CommentsSectionsPresentation, ICommentsSectionProps } from "@sdl/dd/CommentsSection/CommentsSectionPresentation";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 import { TestBase } from "@sdl/models";
@@ -7,6 +8,7 @@ import { Provider } from "react-redux";
 import { configureStore } from "store/Store";
 import { Store } from "redux";
 import { IState } from "store/interfaces/State";
+import { IPostComment } from "interfaces/Comments";
 
 class CommentsSectionComponent extends TestBase {
     public runTests(): void {
@@ -32,6 +34,18 @@ class CommentsSectionComponent extends TestBase {
 
                 expect(commentsListNode).not.toBeNull();
                 expect(postCommentNode).not.toBeNull();
+            });
+
+            it("handles post save comment action", (done: () => void): void => {
+                const commentsSection = this._renderComponent({
+                    ...defaultProps,
+                    saveComment: (service: {}, commentData: IPostComment) => {
+                        expect(commentData).toBeDefined();
+                        done();
+                    }
+                }, target);
+
+                TestUtils.Simulate.submit(TestUtils.findRenderedDOMComponentWithTag(commentsSection, "form") as HTMLFormElement);
             });
         });
     }

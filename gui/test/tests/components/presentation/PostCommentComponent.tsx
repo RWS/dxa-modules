@@ -31,7 +31,7 @@ const defaultProps: IPostCommentPresentationProps & IPostCommentPresentationDisp
     handleSubmit: () => {},
     handleReset: () => {},
     error: "",
-    isCommentSaving: false
+    commentIsSaving: false
 };
 
 class PostCommentComponent extends TestBase {

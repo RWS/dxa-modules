@@ -38,6 +38,7 @@ import "test/tests/services/client/TaxonomyService";
 import "test/tests/services/client/SearchService";
 import "test/tests/services/server/PublicationService";
 import "test/tests/store/reducers/Conditions";
+import "test/tests/store/reducers/Comments";
 import "test/tests/store/reducers/Language";
 import "test/tests/store/reducers/Publciations";
 import "test/tests/store/reducers/Publication";

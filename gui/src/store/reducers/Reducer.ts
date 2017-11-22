@@ -76,9 +76,11 @@ export const getCommentsKey = (pubId: string, pageId: string, parentId?: number)
 
 export const getComments = (state: IState, pubId: string, pageId: string): IComment[] =>
     Comments.getById(state.comments, getCommentsKey(pubId, pageId));
+export const commentsAreLoading = (state: IState, pubId: string, pageId: string, parentId?: number): boolean =>
+    Comments.areLoading(state.comments, getCommentsKey(pubId, pageId, parentId));
 export const getCommentErrorMessage = (state: IState, pubId: string, pageId: string, parentId?: number): string =>
     Comments.getErrorMessage(state.comments, getCommentsKey(pubId, pageId, parentId));
 export const getPostCommentErrorMessage = (state: IState, pubId: string, pageId: string, parentId?: number): string =>
     Comments.getPostErrorMessage(state.comments, getCommentsKey(pubId, pageId, parentId));
-export const isCommentSaving = (state: IState, pubId: string, pageId: string, parentId?: number): boolean =>
+export const commentIsSaving = (state: IState, pubId: string, pageId: string, parentId?: number): boolean =>
     Comments.isSaving(state.comments, getCommentsKey(pubId, pageId, parentId));
