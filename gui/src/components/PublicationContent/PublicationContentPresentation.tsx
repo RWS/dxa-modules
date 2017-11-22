@@ -328,9 +328,20 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                         selectedItem={selectedTocItem}
                     />
                     <ContentLanguageWarning />
-                    <VersionSelector productReleaseVersions={productReleaseVersions}
-                        selectedProductReleaseVersion={selectedProductReleaseVersion}
-                        onChange={version => this._navigateToOtherReleaseVersion(publicationId, version)} />
+                    { Array.isArray(productReleaseVersions) &&
+                        productReleaseVersions.length > 1 && (
+                            <VersionSelector
+                                productReleaseVersions={productReleaseVersions}
+                                selectedProductReleaseVersion={
+                                    selectedProductReleaseVersion
+                                }
+                                onChange={version =>
+                                    this._navigateToOtherReleaseVersion(
+                                        publicationId,
+                                        version
+                                    )}
+                            />
+                        )}
                 </Page>
             </section>
         );

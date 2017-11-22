@@ -117,12 +117,6 @@ class Server extends TestBase {
                                         </ul>
                                     </div>
                                     <div />
-                                    <div className="sdl-dita-delivery-version-selector">
-                                        <label>{localize("productreleaseversions.version.label")}</label>
-                                        <span>
-                                            <div/>
-                                        </span>
-                                    </div>
                                     <div className="sdl-dita-delivery-content-navigation-wrapper">
                                         <nav className="sdl-dita-delivery-content-navigation"></nav>
                                     </div>
