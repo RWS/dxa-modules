@@ -102,7 +102,7 @@ public class SmartTargetPageBuilderTest {
     public void shouldReturnNullIfPageModelIsNull() throws ContentProviderException {
         //when, then
         //noinspection ConstantConditions
-        assertNull(pageBuilder.buildPageModel(null, new PageModelData("", null, null, null, null, null, null)));
+        assertNull(pageBuilder.buildPageModel(null, new PageModelData("", null, null, null, null, null, null, null)));
     }
 
     @Test
@@ -113,7 +113,7 @@ public class SmartTargetPageBuilderTest {
         PageModel expected = createPageModel(new RegionModelImpl("test"));
 
         //when
-        PageModel page2 = pageBuilder.buildPageModel(pageModel, new PageModelData("", null, null, null, null, null, null));
+        PageModel page2 = pageBuilder.buildPageModel(pageModel, new PageModelData("", null, null, null, null, null, null, null));
 
         //then
         Assert.assertEquals(expected, pageModel);
@@ -135,7 +135,7 @@ public class SmartTargetPageBuilderTest {
         PageModel expected = createPageModel(new SmartTargetRegion("test"));
 
         //when
-        PageModel pageR2 = pageBuilder.buildPageModel(pageModel, new PageModelData("", null, null, null, null, null, ""));
+        PageModel pageR2 = pageBuilder.buildPageModel(pageModel, new PageModelData("", null, null, null, null, null, null, ""));
 
         //then
         Assert.assertEquals(expected, pageModel);
@@ -149,7 +149,7 @@ public class SmartTargetPageBuilderTest {
         RegionModelData regionModelData = RegionModelData.builder().name("test").metadata(new ContentModelData() {{
             put("maxItems", maxItemsValue);
         }}).build();
-        PageModelData pageModelData = new PageModelData("id", null, Collections.emptyMap(), null, "title", Lists.newArrayList(regionModelData), "");
+        PageModelData pageModelData = new PageModelData("id", null, Collections.emptyMap(), null, "title", Lists.newArrayList(regionModelData), null, "");
 
         SmartTargetPageModel stPageModel = Mockito.mock(SmartTargetPageModel.class);
         Mockito.when(stPageModel.setAllowDuplicates(Matchers.anyBoolean())).thenReturn(stPageModel);
