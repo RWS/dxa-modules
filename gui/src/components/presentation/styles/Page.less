@@ -1,11 +1,13 @@
 @import (reference) "~theme-styles";
-
+@tocWidth: 300px;
+@contentNavWidth: 210px;
+@defaultMargin: 15px;
 .sdl-dita-delivery-page {
 
     .page-content {
         padding: 0 15px 10px 15px;
         color: @neutralColor4;
-        overflow-x: auto;
+        max-width: @screenXl - @tocWidth - (@defaultMargin * 2);
 
         h1, h1.title, h1.topictitle1 {
             .header-h1();
@@ -21,6 +23,9 @@
         }
         a {
             .anchor();
+        }
+        .tablenoborder {
+            overflow:auto;
         }
         table {
             .table();
