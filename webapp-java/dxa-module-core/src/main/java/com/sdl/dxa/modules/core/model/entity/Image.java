@@ -10,6 +10,7 @@ import com.sdl.webapp.common.api.model.mvcdata.DefaultsMvcData;
 import com.sdl.webapp.common.api.model.mvcdata.MvcDataCreator;
 import com.sdl.webapp.common.exceptions.DxaException;
 import com.sdl.webapp.common.markup.html.HtmlElement;
+import com.sdl.webapp.common.util.MimeUtils;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
@@ -45,6 +46,10 @@ public class Image extends MediaItem {
         return toHtmlElement(widthFactor, aspect, cssClass, containerSize, "");
     }
 
+    private boolean isResizable() {
+        return !this.getMimeType().equalsIgnoreCase(MimeUtils.getMimeType("svg"));
+    }
+
     @Override
     public HtmlElement toHtmlElement(String widthFactor, double aspect, String cssClass, int containerSize, String contextPath) throws DxaException {
         if (isEmpty(getUrl())) {
@@ -52,7 +57,8 @@ public class Image extends MediaItem {
             throw new DxaException("URL is null for image component: " + this);
         }
 
-        return img(getMediaHelper().getResponsiveImageUrl(getUrl(), widthFactor, aspect, containerSize))
+        String url = this.isResizable() ? getMediaHelper().getResponsiveImageUrl(getUrl(), widthFactor, aspect, containerSize) : getUrl();
+        return img(url)
                 .withAlt(this.alternateText)
                 .withClass(cssClass)
                 .withAttribute("data-aspect", String.valueOf(Math.round(aspect * 100) / 100))
@@ -66,6 +72,16 @@ public class Image extends MediaItem {
 
         this.alternateText = xhtmlElement.getAttributes().getNamedItem("alt").getNodeValue();
         this.setMvcData(getMvcData());
+    }
+
+    @Override
+    public String toString() {
+        try {
+            return this.toHtmlElement().renderHtml();
+        } catch (DxaException e) {
+            log.warn("Could not render image with URL {}.", this.getUrl());
+            return "";
+        }
     }
 
     @Override

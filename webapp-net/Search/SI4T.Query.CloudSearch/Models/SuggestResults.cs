@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace SI4T.Query.CloudSearch.Models
 {
     public class SuggestResults
     {
-        public List<String> Matches { get; set; }
+        public List<string> Matches { get; set; }
         public bool HasError { get; set; }
         public string ErrorDetail { get; set; }
 

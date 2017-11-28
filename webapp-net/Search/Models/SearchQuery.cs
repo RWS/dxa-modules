@@ -107,6 +107,5 @@ namespace Sdl.Web.Modules.Search.Models
                 return base.Results.Cast<TResult>().ToList();
             }
         }
-
     }
 }

@@ -14,7 +14,6 @@ namespace Sdl.Web.Modules.AzureWebApp
     /// </summary>
     public class AzureUnknownLocalizationHandler : IUnknownLocalizationHandler
     {
-
         #region IUnknownLocalizationHandler members
         /// <summary>
         /// Handles a Request for an Unknown Localization (i.e. the request URL doesn't map to a Publication).

@@ -5,13 +5,7 @@ namespace Sdl.Web.Modules.SmartTarget
 {
     public class SmartTargetAreaRegistration : BaseAreaRegistration
     {
-        public override string AreaName
-        {
-            get
-            {
-                return "SmartTarget";
-            }
-        }
+        public override string AreaName => "SmartTarget";
 
         protected override void RegisterAllViewModels()
         {

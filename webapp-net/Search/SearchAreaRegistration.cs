@@ -5,10 +5,7 @@ namespace Sdl.Web.Modules.Search
 {
     public class SearchAreaRegistration : BaseAreaRegistration
     {
-        public override string AreaName
-        {
-            get { return "Search"; }
-        }
+        public override string AreaName => "Search";
 
         protected override void RegisterAllViewModels()
         {

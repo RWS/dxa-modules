@@ -94,7 +94,7 @@ namespace Sdl.Web.Modules.AzureWebApp
                 }
                 catch (Exception ex)
                 {
-                    throw new DxaException(string.Format("An error occured while communicating with '{0}'", ttmFacadeUrl), ex);
+                    throw new DxaException($"An error occured while communicating with '{ttmFacadeUrl}'", ex);
                 }
             }
         }

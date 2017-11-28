@@ -21,7 +21,7 @@ namespace Sdl.Web.Modules.SmartTarget.Models
 
         public override string GetXpmMarkup(Localization localization)
         {
-            return (XpmMetadata == null) ? String.Empty : String.Format(XpmMarkupFormat, XpmMetadata["PromotionID"], XpmMetadata["RegionID"]);
+            return (XpmMetadata == null) ? string.Empty : string.Format(XpmMarkupFormat, XpmMetadata["PromotionID"], XpmMetadata["RegionID"]);
         }
     }
 }

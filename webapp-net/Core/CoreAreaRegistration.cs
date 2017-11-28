@@ -6,13 +6,7 @@ namespace Sdl.Web.Modules.Core
 {
     public class CoreAreaRegistration : BaseAreaRegistration
     {
-        public override string AreaName
-        {
-            get
-            {
-                return "Core";
-            }
-        }
+        public override string AreaName => "Core";
 
         protected override void RegisterAllViewModels()
         {

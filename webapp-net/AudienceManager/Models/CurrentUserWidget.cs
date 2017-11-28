@@ -17,26 +17,14 @@ namespace Sdl.Web.Modules.AudienceManager.Models
         /// </summary>
         [SemanticProperty(IgnoreMapping = true)]
         [JsonIgnore]
-        public bool IsLoggedIn
-        {
-            get
-            {
-                return UserProfileFactory.CurrentLoggedInUser != null;
-            }
-        }
+        public bool IsLoggedIn => UserProfileFactory.CurrentLoggedInUser != null;
 
         /// <summary>
         /// UserName of currently logged in user
         /// </summary>
         [SemanticProperty(IgnoreMapping = true)]
         [JsonIgnore]
-        public string UserName
-        {
-            get
-            {
-                return UserProfileFactory.CurrentLoggedInUser.UserName;
-            }
-        }
+        public string UserName => UserProfileFactory.CurrentLoggedInUser.UserName;
 
         /// <summary>
         /// Link to login form

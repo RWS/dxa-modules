@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Globalization;
 using System.Linq;
-using System.Text.RegularExpressions;
-using System.Web;
-using System.Xml.Linq;
 using Amazon.CloudSearchDomain;
 using Amazon.CloudSearchDomain.Model;
 using SI4T.Query.CloudSearch.Models;
@@ -143,31 +140,31 @@ namespace SI4T.Query.CloudSearch
                 if (parameters["q"] != null)
                 {
                     request.QueryParser = QueryParser.Structured;
-                    request.Query = String.Format("(prefix field={0} '{1}')", suggestFieldName, parameters["q"].ToLower());
+                    request.Query = $"(prefix field={suggestFieldName} '{parameters["q"].ToLower()}')";
                 }
 
                 if (displayFieldName == null)
                 {
-                    request.Facet = String.Format("{{'{0}':{{'sort':'bucket'}}}}", suggestFieldName);
+                    request.Facet = $"{{'{suggestFieldName}':{{'sort':'bucket'}}}}";
                     request.Return = "_no_fields";
                 }
                 else
                 {
                     request.Return = displayFieldName;
-                    request.Sort = String.Format("{0} asc", displayFieldName);
+                    request.Sort = $"{displayFieldName} asc";
                 }
 
-                if (!String.IsNullOrEmpty(parameters["fq"]))
+                if (!string.IsNullOrEmpty(parameters["fq"]))
                 {
                     string filters = string.Empty;
                     foreach (string filterString in parameters["fq"].Split(','))
                     {
                         if (filterString.Contains(":"))
                         {
-                            filters += (String.Format(" {0}:'{1}'", filterString.Split(':')[0], filterString.Split(':')[1]));
+                            filters += ($" {filterString.Split(':')[0]}:'{filterString.Split(':')[1]}'");
                         }
                     }
-                    request.FilterQuery = String.Format("(and{0})", filters);
+                    request.FilterQuery = $"(and{filters})";
                 }
 
                 request.Size = parameters["size"] != null ? Convert.ToInt32(parameters["size"]) : this.DefaultPageSize;
@@ -202,7 +199,7 @@ namespace SI4T.Query.CloudSearch
             string start = parameters["start"] ?? "1";
             string rows = parameters["rows"] ?? DefaultPageSize.ToString(CultureInfo.InvariantCulture);
             string facet = parameters["facet"];
-            if (!String.IsNullOrEmpty(facet))
+            if (!string.IsNullOrEmpty(facet))
             {
                 string facets = string.Join(", ", Array.ConvertAll(facet.Split(',').ToArray(), i => String.Format("\"{0}\":{{\"sort\":\"bucket\",\"size\":" + MaxNumberOfFacets +"}}", i.ToString())));
                 facet = "{" + facets + "}";
@@ -266,7 +263,7 @@ namespace SI4T.Query.CloudSearch
                 }
             }
 
-            if (String.IsNullOrEmpty(result.Summary) && hit.Highlights.ContainsKey("body"))
+            if (string.IsNullOrEmpty(result.Summary) && hit.Highlights.ContainsKey("body"))
             {
                 // If no summary field is present in the index, use the highlight fragment from the body field instead.
                 string autoSummary = hit.Highlights["body"];
@@ -281,6 +278,5 @@ namespace SI4T.Query.CloudSearch
 
             return result;
         }
-
     }
 }

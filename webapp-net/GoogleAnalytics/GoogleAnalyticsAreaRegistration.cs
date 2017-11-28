@@ -4,13 +4,7 @@ namespace Sdl.Web.Modules.GoogleAnalytics
 {
     public class GoogleAnalyticsAreaRegistration : BaseAreaRegistration 
     {
-        public override string AreaName 
-        {
-            get 
-            {
-                return "GoogleAnalytics";
-            }
-        }
+        public override string AreaName => "GoogleAnalytics";
 
         protected override void RegisterAllViewModels()
         {

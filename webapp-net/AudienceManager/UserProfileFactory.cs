@@ -57,7 +57,6 @@ namespace Sdl.Web.Modules.AudienceManager
                     return null;
                 }
 
-
                 Localization localization = WebRequestContext.Localization;
 
                 // Audience Manager reads the context Publication ID from ADF:
