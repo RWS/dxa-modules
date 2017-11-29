@@ -31,7 +31,8 @@ const mapStateToProps = (state: IState) => {
         productReleaseVersions,
         productReleaseVersion: publication.productReleaseVersion || "",
         isPublicationFound,
-        conditions
+        conditions,
+        splitterPosition: state.splitterPosition
     };
 };
 

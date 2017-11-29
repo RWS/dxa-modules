@@ -75,7 +75,8 @@ const EMPTY_STATE: IState = {
     },
     releaseVersions: {
         byProductFamily: {}
-    }
+    },
+    splitterPosition: 0
 };
 
 //need this to reset state for tests

@@ -185,4 +185,12 @@ export interface IState {
      * @memberof IState
      */
     releaseVersions: IProductReleaseVersionState;
+
+    /**
+     * Splitter position
+     *
+     * @type {number}
+     * @memberOf IState
+     */
+    splitterPosition: number;
 }

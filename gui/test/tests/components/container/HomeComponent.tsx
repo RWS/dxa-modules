@@ -129,6 +129,7 @@ class HomeComponent extends TestBase {
                                         productReleaseVersion={""}
                                         errorMessage=""
                                         isPublicationFound={true}
+                                        splitterPosition={0}
                                         conditions={{}} />
                                 </HomePresentation>
                             </Provider>)} />

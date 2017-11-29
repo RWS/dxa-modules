@@ -109,7 +109,7 @@ class Server extends TestBase {
                                                     <div className="sdl-dialog-wrapper"></div>
                                                 </div>
                                             </div>
-                                            <span><div></div></span><span className="separator"></span></nav>
+                                            <span><div></div></span><span className="sdl-dita-delivery-splitter separator"></span></nav>
                                     </div>
                                     <div className="sdl-dita-delivery-breadcrumbs">
                                         <ul className="breadcrumbs">
