@@ -8,6 +8,7 @@ import {
     IPostCommentPresentationDispatchProps
 } from "@sdl/dd/PostComment/PostCommentPresentation";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
+import { Url } from "utils/Url";
 
 import { TestBase } from "@sdl/models";
 import { Provider } from "react-redux";
@@ -20,20 +21,24 @@ interface ITestData {
     [key: string]: string;
 }
 
+const defaultProps: IPostCommentPresentationProps & IPostCommentPresentationDispatchProps = {
+    publicationId: "pub0",
+    publicationTitle: "Pub Title 0",
+    pageId: "page0",
+    pageTitle: "Page Title 0",
+    language: "en",
+    parentId: 0,
+    handleSubmit: () => {},
+    handleReset: () => {},
+    error: "",
+    isCommentSaving: false
+};
+
 class PostCommentComponent extends TestBase {
+
     public runTests(): void {
         describe(`post comments tests.`, (): void => {
             const target = super.createTargetElement();
-
-            const defaultProps = {
-                publicationId: "1",
-                pageId: "1",
-                parentId: 0,
-                handleSubmit: () => {},
-                handleReset: () => {},
-                error: "",
-                isCommentSaving: false
-            };
 
             const testData: ITestData = {
                 name: "Test",
@@ -79,6 +84,20 @@ class PostCommentComponent extends TestBase {
                             expect(commentData.username).toBe(testData.name);
                             expect(commentData.email).toBe(testData.email);
                             expect(commentData.content).toBe(testData.comment);
+
+                            // Check comment metadata
+                            expect(commentData.publicationId).toBe(defaultProps.publicationId);
+                            expect(commentData.publicationTitle).toBe(defaultProps.publicationTitle);
+                            expect(commentData.publicationUrl).toBe(Url.getPublicationUrl(defaultProps.publicationId, defaultProps.publicationTitle));
+
+                            expect(commentData.pageId).toBe(defaultProps.pageId);
+                            expect(commentData.pageTitle).toBe(defaultProps.pageTitle);
+                            expect(commentData.pageUrl).toBe(Url.getPageUrl(
+                                defaultProps.publicationId, defaultProps.pageId,
+                                defaultProps.publicationTitle, defaultProps.pageTitle
+                            ));
+
+                            expect(commentData.language).toBe(defaultProps.language);
                             done();
                         }
                     },
@@ -118,16 +137,6 @@ class PostCommentComponent extends TestBase {
 
         describe(`post comment replies tests`, (): void => {
             const target = super.createTargetElement();
-
-            const defaultProps = {
-                publicationId: "1",
-                pageId: "1",
-                parentId: 0,
-                handleSubmit: () => {},
-                handleReset: () => {},
-                error: "",
-                isCommentSaving: false
-            };
 
             const testContent = "Test Reply";
 

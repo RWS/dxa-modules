@@ -226,7 +226,7 @@ class PublicationContentComponent extends TestBase {
                 }, RENDER_DELAY);
             });
 
-            it("updates the toc when the current publiction state changes", (done: () => void): void => {
+            it("updates the toc when the current publication state changes", (done: () => void): void => {
                 const first: ITaxonomy = {
                     id: "1",
                     title: "First page!",
@@ -274,6 +274,29 @@ class PublicationContentComponent extends TestBase {
                     assert(second, done);
                 });
 
+            });
+
+            it("Selector for another product release version is not shown when there is only 1 version of publication", (done: () => void): void => {
+                const publications: IPublication[] = [{
+                    id: "1",
+                    title: "Publication1",
+                    createdOn: new Date(),
+                    version: "1",
+                    logicalId: "GUID-1",
+                    productFamily: "PF",
+                    productReleaseVersion: "PR1",
+                    language: "en"
+                }];
+                services.publicationService.setMockDataPublications(null, publications, [{ title: "PF" }],
+                    [{ title: "PR1", value: "pr1" }]);
+                const publicationContent = this._renderComponent(target, undefined, "1");
+
+                // Use a timeout to allow the DataStore to return a promise with the data
+                setTimeout((): void => {
+                    const dropdownList = TestUtils.scryRenderedDOMComponentsWithClass(publicationContent, "sdl-dita-delivery-version-selector");
+                    expect(dropdownList.length).toBe(0, "Version selector should not be rendered.");
+                    done();
+                }, RENDER_DELAY);
             });
 
             it("can switch to another product release version of the same publication", (done: () => void): void => {
