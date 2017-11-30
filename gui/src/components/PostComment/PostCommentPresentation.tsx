@@ -358,10 +358,10 @@ export class PostCommentPresentation extends React.Component<
         return {
             publicationId,
             publicationTitle,
-            publicationUrl: Url.getPublicationUrl(publicationId, publicationTitle),
+            publicationUrl: window.location.origin + Url.getPublicationUrl(publicationId, publicationTitle),
             pageId,
             pageTitle,
-            pageUrl: Url.getPageUrl(publicationId, pageId, publicationTitle, pageTitle),
+            pageUrl: window.location.origin + Url.getPageUrl(publicationId, pageId, publicationTitle, pageTitle),
             language,
             username: name,
             email,
