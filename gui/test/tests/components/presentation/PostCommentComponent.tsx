@@ -31,7 +31,7 @@ const defaultProps: IPostCommentPresentationProps & IPostCommentPresentationDisp
     handleSubmit: () => {},
     handleReset: () => {},
     error: "",
-    isCommentSaving: false
+    commentIsSaving: false
 };
 
 class PostCommentComponent extends TestBase {
@@ -88,11 +88,11 @@ class PostCommentComponent extends TestBase {
                             // Check comment metadata
                             expect(commentData.publicationId).toBe(defaultProps.publicationId);
                             expect(commentData.publicationTitle).toBe(defaultProps.publicationTitle);
-                            expect(commentData.publicationUrl).toBe(Url.getPublicationUrl(defaultProps.publicationId, defaultProps.publicationTitle));
+                            expect(commentData.publicationUrl).toContain(Url.getPublicationUrl(defaultProps.publicationId, defaultProps.publicationTitle));
 
                             expect(commentData.pageId).toBe(defaultProps.pageId);
                             expect(commentData.pageTitle).toBe(defaultProps.pageTitle);
-                            expect(commentData.pageUrl).toBe(Url.getPageUrl(
+                            expect(commentData.pageUrl).toContain(Url.getPageUrl(
                                 defaultProps.publicationId, defaultProps.pageId,
                                 defaultProps.publicationTitle, defaultProps.pageTitle
                             ));

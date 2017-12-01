@@ -6,6 +6,7 @@ import { configureStore } from "store/Store";
 import { IState } from "store/interfaces/State";
 import { Store } from "redux";
 import { ICommentsListProps, CommentsListPresentation, DEFAULT_AMOUNT } from "@sdl/dd/CommentsList/CommentsListPresentation";
+import { IPostComment } from "interfaces/Comments";
 import { IComment, IUser, ICommentDate } from "interfaces/ServerModels";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 import { TestBase } from "@sdl/models";
@@ -111,15 +112,21 @@ class CommentsListComponent extends TestBase {
                 expect(renderedComments.length).toBe(DEFAULT_AMOUNT);
             });
 
-            it("renders component error", (): void => {
-                const commentsList = this._renderComponent({ ...defaultProps, error: "Error message" }, target);
-                expect(commentsList).not.toBeNull();
-                const commentsListNode = ReactDOM.findDOMNode(commentsList);
+            it("renders component error and retries when retry button is clicked", (done: () => void): void => {
+                const commentsList = this._renderComponent({
+                    ...defaultProps,
+                    error: "Error message",
+                    fetchComments: (service: {}, publicationId: string, pageId: string) => {
+                        expect(publicationId).toBe(defaultProps.publicationId);
+                        expect(pageId).toBe(defaultProps.pageId);
+                        done();
+                    }}, target);
 
-                const errorNode = commentsListNode.querySelector(".sdl-dita-delivery-error") as HTMLElement;
-                const errorButton = errorNode.querySelectorAll(".sdl-button") as NodeListOf<HTMLButtonElement>;
-                expect(errorNode).not.toBeNull();
-                expect(errorButton.length).toBe(1);
+                expect(commentsList).not.toBeNull();
+
+                const commentsListNode = ReactDOM.findDOMNode(commentsList);
+                const errorButton = commentsListNode.querySelector(".sdl-dita-delivery-error button.sdl-button") as HTMLButtonElement;
+                errorButton.click();
             });
 
             it("loads more when load more button is clicked", (): void => {
@@ -137,26 +144,65 @@ class CommentsListComponent extends TestBase {
                 expect(loadMoreButton).toBeNull();
             });
 
-            it("can expand/colapse comment post reply dialog", (done: () => void): void => {
+            it("can expand/collapse comment post reply dialog", (done: () => void): void => {
                 const commentsList = this._renderComponent(defaultProps, target);
 
+                // Select first Comment
                 const comment = TestUtils.scryRenderedDOMComponentsWithClass(commentsList, "sdl-dita-delivery-comment")[0];
                 expect(comment).not.toBeNull();
+                const commentOpenReplyButton = comment.querySelector("button") as HTMLButtonElement;
 
-                const replyButtonNode = comment.querySelector("button") as HTMLButtonElement;
-                expect(replyButtonNode).toBeDefined();
-                TestUtils.Simulate.click(replyButtonNode);
+                // 1. Expand Dialog
+                const expandDialogStep = (onDoneCallBack: () => void): void => {
+                    TestUtils.Simulate.click(commentOpenReplyButton);
+                    setTimeout((): void => {
+                        expect(comment.querySelector(".sdl-textarea")).toBeDefined();
+                        onDoneCallBack();
+                    }, RENDER_DELAY);
+                };
 
-                setTimeout((): void => {
-                    expect(comment.querySelector(".sdl-textarea")).toBeDefined();
-                    TestUtils.Simulate.click(replyButtonNode);
+                // 4. collapse Dialog
+                const collapseDialogStep = (onDoneCallBack: () => void): void => {
+                    TestUtils.Simulate.click(commentOpenReplyButton);
                     setTimeout((): void => {
                         expect(comment.querySelector(".sdl-textarea")).toBeNull();
-                        done();
+                        onDoneCallBack();
                     }, RENDER_DELAY);
-                }, RENDER_DELAY);
+                };
 
-                // Reset functionality is not available yet. TestUtils.Simulate.reset() is no supported.
+                expandDialogStep(() => {
+                    collapseDialogStep(() => {
+                        done();
+                    });
+                });
+            });
+
+            it("can post/reset comment post reply", (done: () => void): void => {
+                const testCommentIndex = 0;
+                const commentsList = this._renderComponent({
+                    ...defaultProps,
+                    saveReply: (service: {}, commentData: IPostComment) => {
+                        expect(commentData.parentId).toBe(defaultProps.comments[testCommentIndex].id);
+                        done();
+                    }}, target);
+
+                // Select first Comment
+                const comment = TestUtils.scryRenderedDOMComponentsWithClass(commentsList, "sdl-dita-delivery-comment")[testCommentIndex];
+                expect(comment).not.toBeNull();
+                TestUtils.Simulate.click(comment.querySelector("button") as HTMLButtonElement);
+
+                // 1. Expand Dialog
+                setTimeout((): void => {
+                    const dialogForm = comment.querySelector("form") as HTMLFormElement;
+                    expect(dialogForm).toBeDefined();
+
+                    // 2. Reset the form
+                    // TestUtils.Simulate.reset is not supported yet, so as reset event propagation.
+                    // We can`t test this functionality yet.
+
+                    // 3. Submit the form
+                    TestUtils.Simulate.submit(dialogForm);
+                }, RENDER_DELAY);
             });
 
             it("can expand/colapse comment replies", (done: () => void): void => {

@@ -6,7 +6,7 @@ import {
     IPostCommentPresentationDispatchProps
 } from "@sdl/dd/PostComment/PostCommentPresentation";
 import { getCurrentPub, getPubById, getPageById } from "store/reducers/Reducer";
-import { getPostCommentErrorMessage, isCommentSaving as isCommentSavingSelector } from "store/reducers/Reducer";
+import { getPostCommentErrorMessage, commentIsSaving as commentIsSavingSelector } from "store/reducers/Reducer";
 
 const mapStateToProps = (state: IState, ownProps: IPostCommentPresentationProps): IPostCommentPresentationDispatchProps => {
     const { pageId, publicationId } = getCurrentPub(state);
@@ -14,7 +14,7 @@ const mapStateToProps = (state: IState, ownProps: IPostCommentPresentationProps)
     const { title: pageTitle } = getPageById(state, publicationId, pageId);
 
     const error = getPostCommentErrorMessage(state, publicationId, pageId);
-    const isCommentSaving = isCommentSavingSelector(state, publicationId, pageId);
+    const commentIsSaving = commentIsSavingSelector(state, publicationId, pageId);
 
     return {
         error,
@@ -23,7 +23,7 @@ const mapStateToProps = (state: IState, ownProps: IPostCommentPresentationProps)
         publicationId,
         publicationTitle,
         language: state.language,
-        isCommentSaving
+        commentIsSaving
     };
 };
 
