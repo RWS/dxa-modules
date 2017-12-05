@@ -194,4 +194,12 @@ export interface IState {
      * @memberof IState
      */
     productFamilies: IProductFamily[];
+
+    /**
+     * Splitter position
+     *
+     * @type {number}
+     * @memberOf IState
+     */
+    splitterPosition: number;
 }

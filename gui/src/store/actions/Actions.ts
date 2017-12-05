@@ -34,6 +34,8 @@ export const COMMENTS_LOADING = "COMMENTS_LOADING";
 export const COMMENTS_LOADED = "COMMENTS_LOADED";
 export const COMMENTS_ERROR = "COMMENTS_ERROR";
 
+export const SPLITTER_POSITION_CHANGE = "SPLITTER_POSITION_CHANGE";
+
 export const changeLanguage = createAction(CHANGE_LANGUAGE, (language: string) => language);
 export const publicationsLoaded = createAction(PUBLICATIONS_LOADED, (publications: IPublication[]) => publications);
 export const updateCurrentPublication = createAction(UPDATE_CURRENT_PUBLICATION, (publicationId: string, pageId: string, anchor: string) => ({ publicationId, pageId, anchor }));
@@ -43,3 +45,5 @@ export const dialogClose = createAction(DIALOG_REQUEST_CLOSE);
 export const updateEditingConditions = createAction(CONDITIONS_EDITING_CHANGE, (conditions: IConditionMap) => conditions);
 
 export const applyConditions = createAction(CONDITIONS_APPLY, (pubId: string, conditions: IConditionMap) => ({ pubId, conditions }));
+
+export const splitterPositionChange = createAction(SPLITTER_POSITION_CHANGE, (positionX: number) => positionX);

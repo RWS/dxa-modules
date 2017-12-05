@@ -9,6 +9,7 @@ import { Toc } from "@sdl/dd/presentation/Toc";
 import { Page } from "@sdl/dd/Page/Page";
 import { Breadcrumbs, IBreadcrumbItem } from "@sdl/dd/presentation/Breadcrumbs";
 import { ContentLanguageWarning } from "@sdl/dd/ContentLanguageWarning/ContentLanguageWarning";
+import { Splitter } from "@sdl/dd/Splitter/Splitter";
 
 import { VersionSelector } from "@sdl/dd/presentation/VersionSelector";
 import { Html, IHeader } from "utils/Html";
@@ -99,7 +100,20 @@ export interface IPublicationContentProps {
      * @memberOf IPublicationContentProps
      */
     isPublicationFound: boolean;
+
+    /**
+     *
+     * @type {IConditionMap}
+     * @memberOf IPublicationContentProps
+     */
     conditions: IConditionMap;
+
+    /**
+     *
+     * @type {number}
+     * @memberOf IPublicationContentProps
+     */
+    splitterPosition: number;
 }
 
 /**
@@ -135,6 +149,14 @@ export interface IPublicationContentState {
      * @memberOf IPublicationContentState
      */
     activePageHeader?: IHeader;
+
+    /**
+     * Relative splitter position
+     *
+     * @type {number}
+     * @memberOf IPublicationContentState
+     */
+    splitterPositionX?: number | null;
 }
 
 interface IToc {
@@ -289,7 +311,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                             error={tocError}
                             onRetry={() => this._loadTocRootItems(publicationId)}
                         >
-                            <span className="separator" />
+                            <Splitter />
                         </Toc>
                     </NavigationMenu>
                     <Breadcrumbs
@@ -472,17 +494,35 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
     private _updatePanels(page: HTMLElement, toc: HTMLElement, contentNavigation: HTMLElement): void {
         /* istanbul ignore if */
         if (!this._isUnmounted) {
+            let tmpState = {};
             if (contentNavigation && page) {
                 // Update active title inside content navigation panel
                 const pageContent = page.querySelector(".page-content") as HTMLElement;
                 if (pageContent) {
-                    const header = Html.getActiveHeader(document.body, pageContent, 0);
-                    if (header && header !== this.state.activePageHeader) {
-                        this.setState({
-                            activePageHeader: header
-                        });
+                    const activePageHeader = Html.getActiveHeader(document.body, pageContent, 0);
+                    if (activePageHeader && activePageHeader !== this.state.activePageHeader) {
+                        Object.assign(tmpState, { activePageHeader });
                     }
                 }
+
+                const { splitterPosition } = this.props;
+                const breadcrumbs = page.querySelector(".sdl-dita-delivery-breadcrumbs") as HTMLElement;
+                const commentsSection = page.querySelector(".sdl-dita-delivery-comments-section") as HTMLElement;
+                const tocMargin = parseInt(getComputedStyle(toc).marginRight || "", 10);
+                toc.style.width = splitterPosition ? (splitterPosition - tocMargin) + "px" : null;
+                [
+                    commentsSection,
+                    breadcrumbs,
+                    pageContent
+                ].forEach((el: HTMLElement) => {
+                    if (el) {
+                        el.style.marginLeft = splitterPosition ? (splitterPosition + tocMargin * 2) + "px" : null;
+                    }
+                });
+            }
+
+            if (Object.keys(tmpState).length > 0) {
+                this.setState(tmpState);
             }
         }
     }

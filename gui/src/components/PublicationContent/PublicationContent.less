@@ -13,7 +13,6 @@
         margin: 0 auto;
         position: relative;
         .sdl-dita-delivery-navigation-menu {
-            width: @tocWidth;
             position: absolute;
             left: 0;
             .sdl-dita-delivery-app.rtl & {
@@ -23,19 +22,22 @@
                 width: @tocWidth - (@defaultMargin * 2);
                 margin-left: @defaultMargin;
                 margin-right: @defaultMargin;
+
                 >span:first-child,
                 .sdl-treeview {
                     // Inherit max-height from toc panel, needed for scroll bar / separator using vertical space
                     max-height: inherit;
-                    width: @tocWidth - (@defaultMargin * 2);
                 }
-                .separator {
+                .separator.sdl-dita-delivery-splitter {
                     position: absolute;
-                    top: 0;
-                    bottom: 0;
-                    margin: 0;
-                    width: @tocWidth - 15;
+                    // We need to compensate navigation menu margins
+                    top: -32px;
+                    left: 0;
+                    height:~"calc(100% + (32px * 2))";
+                    right: -15px;
                     z-index: -1;
+                    max-width: @tocWidth + (@tocWidth / 2);
+                    min-width: @tocWidth / 2;
                     box-shadow: 5px 0px 10px 0px fade(@neutralColor1, 10);
                     .sdl-dita-delivery-app.rtl & {
                         box-shadow: -5px 0px 10px 0px fade(@neutralColor1, 10);
