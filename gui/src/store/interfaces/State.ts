@@ -1,5 +1,6 @@
 import { IPublication } from "interfaces/Publication";
 import { IPage } from "interfaces/Page";
+import { IProductFamily } from "interfaces/ProductFamily";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 import { IConditionsState } from "store/interfaces/Conditions";
 import { IComments } from "store/interfaces/Comments";
@@ -89,7 +90,7 @@ export interface IPublicationsState {
     isLoading: boolean;
 
     /**
-     * It's called lastError, because it might happen that some  publications were loaded soem not
+     * It's called lastError, because it might happen that some publications were loaded some not
      */
     lastError: string;
 }
@@ -185,4 +186,12 @@ export interface IState {
      * @memberof IState
      */
     releaseVersions: IProductReleaseVersionState;
+
+    /**
+     * Product families
+     *
+     * @type {IProductFamilies[]}
+     * @memberof IState
+     */
+    productFamilies: IProductFamily[];
 }

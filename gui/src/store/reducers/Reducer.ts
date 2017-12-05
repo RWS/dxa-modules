@@ -5,6 +5,7 @@ import * as Publication from "./Publication";
 import * as Publications from "./Publications";
 import * as ReleaseVersions from "./ReleaseVersions";
 import conditions, * as Conditions from "./conditions";
+import productFamilies from "./ProductFamilies";
 import { IState, IPublicationCurrentState } from "store/interfaces/State";
 import { IPublication } from "interfaces/Publication";
 import { IPage } from "interfaces/Page";
@@ -22,7 +23,8 @@ export const mainReducer = combineReducers({
     pages: Pages.pages,
     publication: Publication.publication,
     publications: Publications.publications,
-    releaseVersions: ReleaseVersions.releaseVersions
+    releaseVersions: ReleaseVersions.releaseVersions,
+    productFamilies
 });
 
 // Publications selectors

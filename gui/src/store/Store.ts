@@ -75,7 +75,8 @@ const EMPTY_STATE: IState = {
     },
     releaseVersions: {
         byProductFamily: {}
-    }
+    },
+    productFamilies: []
 };
 
 //need this to reset state for tests

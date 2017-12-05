@@ -7,6 +7,8 @@ import { Store } from "redux";
 import { IState } from "store/interfaces/State";
 import { Provider } from "react-redux";
 import { IConditionMap, ICondition } from "store/interfaces/Conditions";
+import { PublicationService } from "test/mocks/services/PublicationService";
+import { updateCurrentPublication } from "src/store/actions/Actions";
 
 import { TestBase } from "@sdl/models";
 
@@ -15,7 +17,15 @@ import {
     IConditionsDialogPresentationProps
 } from "components/ConditionsDialog/ConditionsDialogPresentation";
 
+import { RENDER_DELAY } from "test/Constants";
+
+const services = {
+    publicationService: new PublicationService()
+};
+
 class ConditionsDialogComponent extends TestBase {
+    private store: Store<IState>;
+
     public runTests(): void {
         describe("<ConditionsDialog />", (): void => {
             const target = super.createTargetElement();
@@ -30,6 +40,10 @@ class ConditionsDialogComponent extends TestBase {
                 apply: (pubId: string, conditions: IConditionMap) => {},
                 change: (conditions: IConditionMap) => {}
             };
+
+            beforeEach(() => {
+                this.store = configureStore();
+            });
 
             afterEach(() => {
                 const domNode = ReactDOM.findDOMNode(target);
@@ -67,6 +81,23 @@ class ConditionsDialogComponent extends TestBase {
                 const inputConditions = appNode.querySelectorAll("li label.sdl-conditions-dialog-condition-label");
                 expect(inputConditions.length).toBe(2);
             });
+
+            it("handles conditions loading error", (done: () => void): void => {
+                const errorMessage = "Conditions are invalid";
+                const publicationId = "42";
+                this.store.dispatch(updateCurrentPublication(publicationId, "", ""));
+
+                services.publicationService.setMockDataConditions(errorMessage);
+                const component = this._renderComponent(defaultProps, target);
+                const appNode = ReactDOM.findDOMNode(component) as HTMLElement;
+
+                setTimeout((): void => {
+                    expect(appNode).toBeDefined();
+                    expect(this.store.getState().conditions.allConditions.errors[publicationId]).toBe(errorMessage);
+                    done();
+                }, RENDER_DELAY);
+
+            });
         });
     }
 
@@ -74,11 +105,9 @@ class ConditionsDialogComponent extends TestBase {
         props: IConditionsDialogPresentationProps,
         target: HTMLElement
     ): ConditionsDialogPresentation {
-        const store: Store<IState> = configureStore();
-
         const comp = ReactDOM.render(
-            <ComponentWithContext>
-                <Provider store={store}>
+            <ComponentWithContext {...services}>
+                <Provider store={this.store}>
                     <ConditionsDialogPresentation {...props} />
                 </Provider>
             </ComponentWithContext>,
