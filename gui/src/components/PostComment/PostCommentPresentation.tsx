@@ -83,7 +83,7 @@ export interface IPostCommentPresentationDispatchProps {
      * @type {boolean}
      * @memberOf IPostCommentPresentationProps
      */
-    isCommentSaving: boolean;
+    commentIsSaving: boolean;
 
     /**
      * Comment publication language
@@ -201,7 +201,7 @@ export class PostCommentPresentation extends React.Component<
      * @memberof PostCommentPresentation
      */
     public componentWillReceiveProps(nextProps: IPostCommentPresentationDispatchProps): void {
-        if (!nextProps.isCommentSaving && !nextProps.error) {
+        if (!nextProps.commentIsSaving && !nextProps.error) {
             if (this.form) {
                 this.form.reset();
             }
@@ -358,10 +358,10 @@ export class PostCommentPresentation extends React.Component<
         return {
             publicationId,
             publicationTitle,
-            publicationUrl: Url.getPublicationUrl(publicationId, publicationTitle),
+            publicationUrl: window.location.origin + Url.getPublicationUrl(publicationId, publicationTitle),
             pageId,
             pageTitle,
-            pageUrl: Url.getPageUrl(publicationId, pageId, publicationTitle, pageTitle),
+            pageUrl: window.location.origin + Url.getPageUrl(publicationId, pageId, publicationTitle, pageTitle),
             language,
             username: name,
             email,

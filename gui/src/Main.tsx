@@ -14,6 +14,8 @@ import { IState } from "store/interfaces/State";
 import { configureStore } from "store/Store";
 import { Store } from "redux";
 
+import { DEFAULT_LANGUAGE } from "services/common/LocalizationService";
+
 import "@sdl/controls-react-wrappers/dist/stylesheets/main";
 
 const mainElement = document.getElementById("main-view-target");
@@ -29,7 +31,7 @@ const services: IServices = {
     searchService: new SearchService()
 };
 
-const store: Store<IState> = configureStore({});
+const store: Store<IState> = configureStore({ language: DEFAULT_LANGUAGE });
 
 localization.setStore(store);
 
@@ -40,7 +42,9 @@ const render = (AppComp: typeof App): void => {
         ReactDOM.render(
             <Provider store={store}>
                 <AppComp services={services} />
-            </Provider>, mainElement);
+            </Provider>,
+            mainElement
+        );
     }
 };
 render(App);
@@ -49,7 +53,9 @@ render(App);
 if (module.hot) {
     module.hot.accept("./components/container/App/App", () => {
         // If we receive a HMR request for our App container, then reload it using require (we can't do this dynamically with import)
-        const NextApp = (require("./components/container/App/App") as { App: typeof App }).App;
+        const NextApp = (require("./components/container/App/App") as {
+            App: typeof App;
+        }).App;
         render(NextApp);
     });
 }
