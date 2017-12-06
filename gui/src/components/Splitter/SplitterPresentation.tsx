@@ -162,9 +162,9 @@ export class SplitterPresentation extends React.Component<
     }
 
     private _dragMove(e: MouseEvent | TouchEvent): void {
-        e.preventDefault();
         const { isDragging } = this.state;
         if (!this._isUnmounted && isDragging) {
+            e.preventDefault();
             const { left } = this._splitterElement.getBoundingClientRect();
             const width = this._getClientX(e) - left + 3;
             this.setState({

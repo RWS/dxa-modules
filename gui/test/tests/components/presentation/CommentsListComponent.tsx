@@ -79,10 +79,7 @@ class CommentsListComponent extends TestBase {
             };
 
             const defaultProps = {
-                comments: Array(TOTAL_COMPONENTS)
-                    .join(",")
-                    .split(",")
-                    .map(() => createComment()),
+                comments: Array(TOTAL_COMPONENTS).fill(null).map(createComment),
                 publicationId: "1",
                 pageId: "1",
                 error: ""
@@ -208,10 +205,7 @@ class CommentsListComponent extends TestBase {
             it("can expand/colapse comment replies", (done: () => void): void => {
                 const repliesCount = 3;
                 const nestedProps = { ...defaultProps };
-                nestedProps.comments[2].children = Array(repliesCount)
-                    .join(",")
-                    .split(",")
-                    .map(() => createComment());
+                nestedProps.comments[2].children = Array(repliesCount).fill(null).map(createComment);
                 const commentsList = this._renderComponent(defaultProps, target);
 
                 const comment = TestUtils.scryRenderedDOMComponentsWithClass(commentsList, "sdl-dita-delivery-comment")[2];

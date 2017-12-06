@@ -56,7 +56,7 @@ class TilesListComponent extends TestBase {
 
             it("renders only first 8 items, and expands when view all is clicked", (done: () => void): void => {
                 const tilesCount = 50;
-                const tilesItems: ITile[] = Array(tilesCount).join(",").split(",").map((n, i) => {
+                const tilesItems: ITile[] = Array(tilesCount).fill(null).map((n, i) => {
                     return {
                         id: `id-${i}`,
                         title: `Tile ${i}`,

@@ -129,6 +129,27 @@ class PageComponent extends TestBase {
                 expect(pageContentNode.innerHTML).toBe(pageContent);
             });
 
+            it("wide tables does not affect page content width", (done: () => void): void => {
+                const tdsCount = 100;
+                const page = this._renderComponent({
+                    isLoading: false,
+                    content: `<div class="tablenoborder"><table><tr>${Array(tdsCount).fill("LONG_TD_PLACEHOLDER").map((i) => `<td>${i}</td>`).join("")}</tr></table></div>`,
+                    onNavigate: (): void => { }
+                }, target);
+
+                const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
+                expect(domNode).not.toBeNull();
+
+                setTimeout((): void => {
+                    const pageContentNode = domNode.querySelector(".page-content") as HTMLElement;
+                    expect(pageContentNode).not.toBeNull("Could not find page content.");
+                    const tableCells = pageContentNode.querySelectorAll(".tablenoborder td");
+                    expect(tableCells.length).toBe(tdsCount);
+                    expect(pageContentNode.scrollWidth).toBe(pageContentNode.offsetWidth);
+                    done();
+                }, RENDER_DELAY);
+            });
+
             it("navigates to another page when internal hyperlink is clicked", (done: () => void): void => {
                 const navUrl = "/1234/56/publication-title/page-title";
                 const pageContent = `<div><a href="${navUrl}"/></div>`;

@@ -13,7 +13,6 @@ import "test/tests/components/container/PublicationContentComponent";
 import "test/tests/components/container/PublicationsListComponent";
 import "test/tests/components/container/SearchResultsComponent";
 import "test/tests/components/container/TilesListComponent";
-import "test/tests/components/container/TilesListComponent";
 import "test/tests/components/controls/DatePickerComponent";
 import "test/tests/components/controls/DropdownComponent";
 import "test/tests/components/controls/SplitterComponent";
