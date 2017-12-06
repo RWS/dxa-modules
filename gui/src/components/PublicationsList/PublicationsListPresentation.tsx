@@ -74,39 +74,58 @@ export interface IPublicationsListProps {
      * Available product release versions for the selected product family
      *
      * @type {IProductReleaseVersion[]}
-     * @memberOf IPublicationsListState
+     * @memberOf IPublicationsListProps
      */
     productReleaseVersions: IProductReleaseVersion[];
 
+    /**
+     * Selected product release version
+     *
+     * @type {string}
+     * @memberOf IPublicationsListProps
+     */
     selectedProductVersion: string;
 
-    isLoading: boolean;
-
-    uiLanguage: string;
-
-    fetchProductReleaseVersionsByProductFamily?: (publicationService: IPublicationService, productFamily: string) => void;
-}
-
-/**
- * PublicationsList component state
- *
- * @export
- * @interface IPublicationsListState
- */
-export interface IPublicationsListState {
     /**
      * An error prevented the list from loading
      *
      * @type {string}
-     * @memberOf IPublicationsListState
+     * @memberOf IPublicationsListProps
      */
-    error?: string;
+    error: string;
+
+    /**
+     * If publications lis is loading
+     *
+     * @type {boolean}
+     * @memberOf IPublicationsListProps
+     */
+    isLoading: boolean;
+
+    /**
+     * Language of user interface
+     *
+     * @type {string}
+     * @memberOf IPublicationsListProps
+     */
+    uiLanguage: string;
+
+    /**
+     * Callback to fetch publication release verions by product family
+     *
+     * @type {Function}
+     * @memberOf IPublicationsListProps
+     */
+    fetchProductReleaseVersionsByProductFamily?: (
+        publicationService: IPublicationService,
+        productFamily: string
+    ) => void;
 }
 
 /**
  * Publications list component
  */
-export class PublicationsListPresentation extends React.Component<IPublicationsListProps, IPublicationsListState> {
+export class PublicationsListPresentation extends React.Component<IPublicationsListProps, {}> {
     /**
      * Context types
      */
@@ -119,18 +138,16 @@ export class PublicationsListPresentation extends React.Component<IPublicationsL
      */
     public context: IAppContext;
 
-    /**
-     * Creates an instance of Publications list component.
-     */
     constructor() {
         super();
-        this.state = {
-            error: undefined
-        };
+        this._fetchReleaseVersions = this._fetchReleaseVersions.bind(this);
     }
 
+    /**
+     * Invoked once, only on the client (not on the server), immediately after the initial rendering occurs.
+     */
     public componentDidMount(): void {
-        this.fetchReleaseVersions(this.props);
+        this._fetchReleaseVersions(this.props);
     }
 
     /**
@@ -143,7 +160,7 @@ export class PublicationsListPresentation extends React.Component<IPublicationsL
         const { productFamily: nextProductFamily } = nextProps.params;
 
         if (nextProductFamily !== productFamily) {
-            this.fetchReleaseVersions(nextProps);
+            this._fetchReleaseVersions(nextProps);
         }
     }
 
@@ -154,72 +171,98 @@ export class PublicationsListPresentation extends React.Component<IPublicationsL
      */
     public render(): JSX.Element {
         const { productFamily } = this.props.params;
-        const { publications, isLoading, productReleaseVersions, selectedProductVersion, uiLanguage } = this.props;
-        const { error } = this.state;
+        const {
+            publications,
+            isLoading,
+            productReleaseVersions,
+            selectedProductVersion,
+            uiLanguage,
+            error
+        } = this.props;
         const { services } = this.context;
         const { formatMessage, isoToName, getLanguage } = services.localizationService;
-        const _retryHandler = (): void => { this.fetchReleaseVersions(this.props); };
-        const translatedProductFamily = (productFamily === DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE) ? formatMessage("productfamilies.unknown.title") : productFamily;
-        const errorButtons = <div>
-            <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{ "click": _retryHandler }}>{formatMessage("control.button.retry")}</Button>
-        </div>;
+        const _retryHandler = (): void => {
+            this._fetchReleaseVersions(this.props);
+        };
+        const translatedProductFamily =
+            productFamily === DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE
+                ? formatMessage("productfamilies.unknown.title")
+                : productFamily;
+        const errorButtons = (
+            <div>
+                <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{ click: _retryHandler }}>
+                    {formatMessage("control.button.retry")}
+                </Button>
+            </div>
+        );
         return (
             <section className={"sdl-dita-delivery-publications-list"}>
                 <FetchPublications productFamily={productFamily} />
                 <h1>{translatedProductFamily}</h1>
-                { Array.isArray(productReleaseVersions) &&
+                {Array.isArray(productReleaseVersions) &&
                     productReleaseVersions.length > 1 && (
                         <VersionSelector
                             productReleaseVersions={productReleaseVersions}
-                            selectedProductReleaseVersion={
-                                selectedProductVersion
-                            }
+                            selectedProductReleaseVersion={selectedProductVersion}
                             onChange={releaseVersion => {
                                 if (browserHistory) {
-                                    browserHistory.push(
-                                        Url.getProductFamilyUrl(
-                                            productFamily,
-                                            releaseVersion
-                                        )
-                                    );
+                                    browserHistory.push(Url.getProductFamilyUrl(productFamily, releaseVersion));
                                 }
                             }}
                         />
                     )}
-                {error
-                    ? <Error
+                {error ? (
+                    <Error
                         title={formatMessage("error.default.title")}
-                        messages={[formatMessage("error.publications.list.not.found"), formatMessage("error.publications.default.message")]}
-                        buttons={errorButtons} />
-                    : !isLoading
-                        ? publications.length > 0
-                            ? (<TilesList viewAllLabel={formatMessage("components.publicationslist.view.all")}
-                                tiles={publications.map((publication: IPublication) => {
-                                    const info = publication.language && publication.language !== uiLanguage
-                                        ? {message: formatMessage("warning.no.content", [isoToName(getLanguage())]), type: INFO_TYPES.DEFAULT}
+                        messages={[
+                            formatMessage("error.publications.list.not.found"),
+                            formatMessage("error.publications.default.message")
+                        ]}
+                        buttons={errorButtons}
+                    />
+                ) : !isLoading ? (
+                    publications.length > 0 ? (
+                        <TilesList
+                            viewAllLabel={formatMessage("components.publicationslist.view.all")}
+                            tiles={publications.map((publication: IPublication) => {
+                                const info =
+                                    publication.language && publication.language !== uiLanguage
+                                        ? {
+                                              message: formatMessage("warning.no.content", [isoToName(getLanguage())]),
+                                              type: INFO_TYPES.DEFAULT
+                                          }
                                         : undefined;
-                                    return {
-                                        title: publication.title,
-                                        id: publication.id,
-                                        loadableContent: () => {
-                                            return this._getLoadableContent(publication.id);
-                                        },
-                                        info,
-                                        navigateTo: () => {
-                                            /* istanbul ignore else */
-                                            if (browserHistory) {
-                                                browserHistory.push(Url.getPublicationUrl(publication.id, publication.title));
-                                            }
+                                return {
+                                    title: publication.title,
+                                    id: publication.id,
+                                    loadableContent: () => {
+                                        return this._getLoadableContent(publication.id);
+                                    },
+                                    info,
+                                    navigateTo: () => {
+                                        /* istanbul ignore else */
+                                        if (browserHistory) {
+                                            browserHistory.push(
+                                                Url.getPublicationUrl(publication.id, publication.title)
+                                            );
                                         }
-                                    } as ITile;
-                                })} />)
-                            : <div className={"no-available-publications-label"}>{formatMessage("components.productfamilies.no.published.publications")}</div>
-                        : <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} />
-                }
-            </section>);
+                                    }
+                                } as ITile;
+                            })}
+                        />
+                    ) : (
+                        <div className={"no-available-publications-label"}>
+                            {formatMessage("components.productfamilies.no.published.publications")}
+                        </div>
+                    )
+                ) : (
+                    <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} />
+                )}
+            </section>
+        );
     }
 
-    private fetchReleaseVersions(props: IPublicationsListProps): void {
+    private _fetchReleaseVersions(props: IPublicationsListProps): void {
         const { publicationService } = this.context.services;
         if (props.fetchProductReleaseVersionsByProductFamily) {
             props.fetchProductReleaseVersionsByProductFamily(publicationService, props.params.productFamily);
@@ -235,12 +278,25 @@ export class PublicationsListPresentation extends React.Component<IPublicationsL
             return services.taxonomyService.getSitemapRoot(publicationId).then(
                 items => {
                     const pagesToDisplay = items.filter(item => item.url).slice(0, SHOWN_TILE_ITEMS_COUNT);
-                    resolve(pagesToDisplay.map((item: ITaxonomy, i: number) => {
-                        //TODO get read of test.
-                        const params = item.url && Url.parsePageUrl(item.url);
-                        const url = params && Url.getPageUrl(params.publicationId, params.pageId, params.publicationTitle, params.pageTitle);
-                        return <Link key={i} title={item.title} to={url || ""}>{item.title}</Link>;
-                    }));
+                    resolve(
+                        pagesToDisplay.map((item: ITaxonomy, i: number) => {
+                            //TODO get read of test.
+                            const params = item.url && Url.parsePageUrl(item.url);
+                            const url =
+                                params &&
+                                Url.getPageUrl(
+                                    params.publicationId,
+                                    params.pageId,
+                                    params.publicationTitle,
+                                    params.pageTitle
+                                );
+                            return (
+                                <Link key={i} title={item.title} to={url || ""}>
+                                    {item.title}
+                                </Link>
+                            );
+                        })
+                    );
                 },
                 error => reject(formatMessage("error.publication.topics.not.found"))
             );

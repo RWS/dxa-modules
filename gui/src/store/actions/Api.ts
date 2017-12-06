@@ -5,6 +5,7 @@ import { createAction, Action } from "redux-actions";
 import { IPageService } from "services/interfaces/PageService";
 import { IPublicationService } from "services/interfaces/PublicationService";
 import { IPublication } from "interfaces/Publication";
+import { IProductFamily } from "interfaces/ProductFamily";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 
 import {
@@ -16,9 +17,10 @@ import {
     PUBLICATIONS_LOADING_ERROR,
     RELEASE_VERSIONS_LOADING,
     RELEASE_VERSIONS_LOADED,
-    CONDITIONES_LOADED,
-    CONDITIONES_LOADING,
-    CONDITIONES_ERROR,
+    PRODUCT_FAMILIES_LOADED,
+    CONDITIONS_LOADED,
+    CONDITIONS_LOADING,
+    CONDITIONS_ERROR,
     COMMENTS_LOADING,
     COMMENTS_LOADED,
     COMMENTS_ERROR,
@@ -67,21 +69,36 @@ export const pageLoading = createAction(PAGE_LOADING, (key: string) => key);
 export const pageError = createAction(PAGE_ERROR, (key: string, message: string) => ({ key, message }));
 
 export const publicationsLoading = createAction(PUBLICATIONS_LOADING);
-export const publicationsLoadingError = createAction(PUBLICATIONS_LOADING_ERROR, (errorMessage: string) => errorMessage);
+export const publicationsLoadingError = createAction(
+    PUBLICATIONS_LOADING_ERROR,
+    (errorMessage: string) => errorMessage
+);
+
+export const productFamiliesLoaded = createAction(
+    PRODUCT_FAMILIES_LOADED,
+    (productFamilies: IProductFamily[]) => productFamilies
+);
 
 export const releaseVersionsLoading = createAction(RELEASE_VERSIONS_LOADING, (pubId: string) => pubId);
-export const releaseVersionsLoaded = createAction(RELEASE_VERSIONS_LOADED, (productFamily: string, releaseVersions: IProductReleaseVersion[]) => ({
-    productFamily,
-    releaseVersions
+export const releaseVersionsLoaded = createAction(
+    RELEASE_VERSIONS_LOADED,
+    (productFamily: string, releaseVersions: IProductReleaseVersion[]) => ({
+        productFamily,
+        releaseVersions
+    })
+);
+
+export const conditionsLoading = createAction(CONDITIONS_LOADING, (pubId: string) => pubId);
+export const conditionsLoaded = createAction(CONDITIONS_LOADED, (pubId: string, conditions: IConditionMap) => ({
+    pubId,
+    conditions
 }));
 
-export const conditionsLoading = createAction(CONDITIONES_LOADING, (pubId: string) => pubId);
-export const conditionsLoaded = createAction(CONDITIONES_LOADED, (pubId: string, conditions: IConditionMap) => ({ pubId, conditions }));
-export const conditionsError = createAction(CONDITIONES_ERROR, (pubId: string, error: {}) => ({ pubId, error }));
-
+export const conditionsError = createAction(CONDITIONS_ERROR, (pubId: string, error: {}) => ({ pubId, error }));
 export const commentsLoading = createAction(COMMENTS_LOADING, (key: string) => key);
 export const commentsLoaded = createAction(COMMENTS_LOADED, (key: string, comments: IComment[]) => ({ key, comments }));
 export const commentsError = createAction(COMMENTS_ERROR, (key: string, error: {}) => ({ key, error }));
+
 export const commentSaving = createAction(COMMENT_SAVING, (key: string) => key);
 export const commentError = createAction(COMMENT_ERROR, (key: string, error: {}) => ({ key, error }));
 export const commentSaved = createAction(COMMENT_SAVED, (key: string, comment: IComment) => ({ key, comment }));
@@ -93,7 +110,11 @@ export const commentSaved = createAction(COMMENT_SAVED, (key: string, comment: I
  * @param {string} productFamily
  * @returns {Function}
  */
-export const fetchPublications = (publicationService: IPublicationService, productFamily?: string, productReleaseVersion?: string): IDispatcherFunction => {
+export const fetchPublications = (
+    publicationService: IPublicationService,
+    productFamily?: string,
+    productReleaseVersion?: string
+): IDispatcherFunction => {
     return dispatch => {
         dispatch(publicationsLoading());
         publicationService
@@ -113,13 +134,19 @@ export const fetchPublications = (publicationService: IPublicationService, produ
  * @param {string} pageId
  * @returns {Function}
  */
-export const fetchPage = (pageService: IPageService, pubId: string, pageId: string, conditions?: IConditionMap): IDispatcherAndStateFunction => {
+export const fetchPage = (
+    pageService: IPageService,
+    pubId: string,
+    pageId: string,
+    conditions?: IConditionMap
+): IDispatcherAndStateFunction => {
     return (dispatch, getState): void => {
         const state = getState();
         const pageCondtions = conditions || getLastConditions(state, pubId);
         const key = getPageKey(state, pubId, pageId, pageCondtions);
         dispatch(pageLoading(key));
-        pageService.getPageInfo(pubId, pageId, pageCondtions)
+        pageService
+            .getPageInfo(pubId, pageId, pageCondtions)
             .then(
                 page => dispatch(pageLoaded(page, key)),
                 errorMessage => dispatch(pageError(key, errorMessage))
@@ -127,7 +154,10 @@ export const fetchPage = (pageService: IPageService, pubId: string, pageId: stri
     };
 };
 
-export const fetchProductReleaseVersions = (publicationService: IPublicationService, pubId: string): IDispatcherFunction => {
+export const fetchProductReleaseVersions = (
+    publicationService: IPublicationService,
+    pubId: string
+): IDispatcherFunction => {
     return dispatch => {
         dispatch(releaseVersionsLoading(pubId));
 
@@ -140,7 +170,22 @@ export const fetchProductReleaseVersions = (publicationService: IPublicationServ
     };
 };
 
-export const fetchProductReleaseVersionsByProductFamily = (publicationService: IPublicationService, productFamily: string): IDispatcherFunction => {
+export const fetchProductFamilies = (publicationService: IPublicationService): IDispatcherFunction => {
+    return dispatch => {
+        dispatch(publicationsLoading());
+        publicationService
+            .getProductFamilies()
+            .then(
+                productFamilies => dispatch(productFamiliesLoaded(productFamilies)),
+                errorMessage => dispatch(publicationsLoadingError(errorMessage))
+            );
+    };
+};
+
+export const fetchProductReleaseVersionsByProductFamily = (
+    publicationService: IPublicationService,
+    productFamily: string
+): IDispatcherFunction => {
     return dispatch => {
         dispatch(releaseVersionsLoading(""));
         publicationService
@@ -195,11 +240,11 @@ export const saveComment = (pageService: IPageService, commentData: IPostComment
     return dispatch => {
         dispatch(commentSaving(key));
 
-        pageService.saveComment(commentData)
-        .then(
-            data => dispatch(commentSaved(key, data)),
-            error => dispatch(commentError(key, { message: error }))
-        );
+        pageService
+            .saveComment(commentData)
+            .then(
+                data => dispatch(commentSaved(key, data)),
+                error => dispatch(commentError(key, { message: error })));
     };
 };
 
@@ -210,11 +255,12 @@ export const saveReply = (pageService: IPageService, commentData: IPostComment):
     return dispatch => {
         dispatch(commentSaving(commentsKey));
 
-        pageService.saveComment(commentData)
-        .then(
-            data => dispatch(commentSaved(commentsKey, data)),
-            error => dispatch(commentError(replyKey, { message: error }))
-        );
+        pageService
+            .saveComment(commentData)
+            .then(
+                data => dispatch(commentSaved(commentsKey, data)),
+                error => dispatch(commentError(replyKey, { message: error }))
+            );
     };
 };
 
@@ -226,7 +272,10 @@ export const saveReply = (pageService: IPageService, commentData: IPostComment):
  * @param pubId
  * @param releaseVersion
  */
-export const setCurrentPublicationByReleaseVersion = (pubId: string, productReleaseVersion: string): IDispatcherAndStateFunction => {
+export const setCurrentPublicationByReleaseVersion = (
+    pubId: string,
+    productReleaseVersion: string
+): IDispatcherAndStateFunction => {
     return (dispatch, getState): void => {
         const state = getState();
         const publication = getPubById(state, pubId);

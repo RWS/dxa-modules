@@ -2,11 +2,7 @@ import { Store } from "redux";
 import { TestBase } from "@sdl/models";
 import { IState } from "store/interfaces/State";
 import { configureStore } from "store/Store";
-import {
-    dialogOpen,
-    dialogClose,
-    applyConditions
-} from "store/actions/Actions";
+import { dialogOpen, dialogClose, applyConditions, updateEditingConditions } from "store/actions/Actions";
 import { IConditionMap, ICondition } from "store/interfaces/Conditions";
 
 class ConditionsReducer extends TestBase {
@@ -36,6 +32,24 @@ class ConditionsReducer extends TestBase {
                 expect(store.getState().conditions.showDialog).toBeFalsy();
             });
 
+            it("Actions updateEditingConditions updates state with editing condition", () => {
+                const editingConditions: IConditionMap = {
+                    Techs: {
+                        values: ["localStorage"],
+                        datatype: "Text",
+                        range: false
+                    } as ICondition
+                };
+
+                //second time just in case
+                store.dispatch(updateEditingConditions(editingConditions));
+                expect(store.getState().conditions.editingConditions).toEqual(editingConditions);
+
+                //invalidates conditions when dialog is closed
+                store.dispatch(dialogClose());
+                expect(Object.keys(store.getState().conditions.editingConditions).length).toBe(0);
+            });
+
             it("preserves lastConditions in localStorage, when apply conditions buttin is clicked", (
                 done: () => void
             ): void => {
@@ -47,10 +61,7 @@ class ConditionsReducer extends TestBase {
                         range: false
                     } as ICondition
                 };
-                spyOn(
-                    window.localStorage,
-                    "setItem"
-                ).and.callFake((key: string, persistedData: string): void => {
+                spyOn(window.localStorage, "setItem").and.callFake((key: string, persistedData: string): void => {
                     // Check if routing was called with correct params
                     expect(persistedData).toContain(
                         JSON.stringify({

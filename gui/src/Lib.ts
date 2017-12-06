@@ -23,7 +23,7 @@ import * as NavigationMenuComp from "@sdl/dd/presentation/NavigationMenu";
 import * as PageComp from "@sdl/dd/Page/PagePresentation";
 import * as PageLinkComp from "@sdl/dd/PageLink/PageLink";
 import * as PostCommentComp from "@sdl/dd/PostComment/PostCommentPresentation";
-import * as ProductFamiliesListComp from "@sdl/dd/container/ProductFamiliesList/ProductFamiliesList";
+import * as ProductFamiliesListComp from "@sdl/dd/container/ProductFamiliesList/ProductFamiliesListPresentation";
 import * as PublicationContentComp from "@sdl/dd/PublicationContent/PublicationContentPresentation";
 import * as PublicationsListComp from "@sdl/dd/PublicationsList/PublicationsListPresentation";
 import * as SearchBarComp from "@sdl/dd/presentation/SearchBar";

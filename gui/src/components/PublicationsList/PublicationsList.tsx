@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 import { IState } from "store/interfaces/State";
 import {
     isPubsLoading,
+    getPubListErrorMessage,
     getReleaseVersionsForPub,
     normalizeProductFamily,
     normalizeProductReleaseVersion,
@@ -13,6 +14,7 @@ import { PublicationsListPresentation, IPublicationsListProps } from "@sdl/dd/Pu
 
 const mapStateToProps = (state: IState, ownProps: IPublicationsListProps) => {
     const { params } = ownProps;
+    const error = getPubListErrorMessage(state);
     const productReleaseVersions = getReleaseVersionsForPub(state, params.productFamily);
     const firstInAlist = productReleaseVersions && productReleaseVersions.length ? productReleaseVersions[0].title : "";
     const selectedProductVersion = params.productReleaseVersion ? params.productReleaseVersion : firstInAlist;
@@ -25,11 +27,12 @@ const mapStateToProps = (state: IState, ownProps: IPublicationsListProps) => {
     );
 
     return {
+        error,
         publications,
         productReleaseVersions: translateProductReleaseVersions(productReleaseVersions),
         // dont' show spinner if there are publications cached
         isLoading: publications.length === 0 && isPubsLoading(state),
-        selectedProductVersion: selectedProductVersion,
+        selectedProductVersion,
         uiLanguage: state.language
     };
 };

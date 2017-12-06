@@ -10,7 +10,6 @@ import { ASYNC_DELAY } from "test/Constants";
 let fakeDelay = false;
 
 export class PublicationService implements IPublicationService {
-
     private _mockDataPublications: {
         error: string | null;
         publications: IPublication[];
@@ -24,8 +23,8 @@ export class PublicationService implements IPublicationService {
     };
 
     private _mockDataPublication: {
-        error: string | null,
-        title: string
+        error: string | null;
+        title: string;
     } = {
         error: null,
         title: "MP330"
@@ -33,7 +32,7 @@ export class PublicationService implements IPublicationService {
 
     private _mockDataConditions: {
         values: IConditionMap;
-        error: string | null
+        error: string | null;
     } = {
         values: {},
         error: null
@@ -45,17 +44,21 @@ export class PublicationService implements IPublicationService {
         if (productFamily) {
             filteredPublications = filteredPublications.filter(pub => pub.productFamily === productFamily);
             if (productReleaseVersion) {
-                filteredPublications = filteredPublications.filter(pub => pub.productReleaseVersion === productReleaseVersion);
+                filteredPublications = filteredPublications.filter(
+                    pub => pub.productReleaseVersion === productReleaseVersion
+                );
             }
         }
         if (fakeDelay) {
-            return new Promise((resolve: (publications?: IPublication[]) => void, reject: (error: string | null) => void) => {
-                if (error) {
-                    reject(error);
-                } else {
-                    resolve(filteredPublications);
+            return new Promise(
+                (resolve: (publications?: IPublication[]) => void, reject: (error: string | null) => void) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        resolve(filteredPublications);
+                    }
                 }
-            });
+            );
         } else {
             if (error) {
                 return Promise.reject(error);
@@ -68,13 +71,15 @@ export class PublicationService implements IPublicationService {
     public getProductFamilies(): Promise<IProductFamily[]> {
         const { error, productFamilies } = this._mockDataPublications;
         if (fakeDelay) {
-            return new Promise((resolve: (productFamilies?: IProductFamily[]) => void, reject: (error: string | null) => void) => {
-                if (error) {
-                    reject(error);
-                } else {
-                    resolve(productFamilies);
+            return new Promise(
+                (resolve: (productFamilies?: IProductFamily[]) => void, reject: (error: string | null) => void) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        resolve(productFamilies);
+                    }
                 }
-            });
+            );
         } else {
             if (error) {
                 return Promise.reject(error);
@@ -92,8 +97,7 @@ export class PublicationService implements IPublicationService {
                 setTimeout((): void => {
                     if (error) {
                         reject(error);
-                    }
-                    else {
+                    } else {
                         resolve({
                             ...publication,
                             title
@@ -116,13 +120,18 @@ export class PublicationService implements IPublicationService {
     public getProductReleaseVersions(productFamily: string): Promise<IProductReleaseVersion[]> {
         const { error, productReleaseVersions } = this._mockDataPublications;
         if (fakeDelay) {
-            return new Promise((resolve: (productReleaseVersions?: IProductReleaseVersion[]) => void, reject: (error: string | null) => void) => {
-                if (error) {
-                    reject(error);
-                } else {
-                    resolve(productReleaseVersions);
+            return new Promise(
+                (
+                    resolve: (productReleaseVersions?: IProductReleaseVersion[]) => void,
+                    reject: (error: string | null) => void
+                ) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        resolve(productReleaseVersions);
+                    }
                 }
-            });
+            );
         } else {
             if (error) {
                 return Promise.reject(error);
@@ -143,8 +152,7 @@ export class PublicationService implements IPublicationService {
                 setTimeout((): void => {
                     if (error) {
                         reject(error);
-                    }
-                    else {
+                    } else {
                         resolve(values);
                     }
                 }, ASYNC_DELAY);
@@ -158,22 +166,34 @@ export class PublicationService implements IPublicationService {
         }
     }
 
-    public setMockDataPublications(error: string | null, publications?: IPublication[],
-        productFamilies?: IProductFamily[], productReleaseVersions?: IProductReleaseVersion[]): void {
+    public setMockDataPublications(
+        error: string | null,
+        publications: IPublication[] = [],
+        productFamilies: IProductFamily[] = [],
+        productReleaseVersions: IProductReleaseVersion[] = []
+    ): void {
         this._mockDataPublications = {
             error: error,
-            publications: publications || [],
-            productFamilies: productFamilies || [],
-            productReleaseVersions: productReleaseVersions || []
+            publications,
+            productFamilies,
+            productReleaseVersions
         };
     }
 
-    public setMockDataPublication(error: string | null, title?: string): void {
+    public setMockDataPublication(error: string | null, title: string = ""): void {
         this._mockDataPublication = {
-            error: error,
-            title: title || ""
+            error,
+            title
         };
     }
+
+    public setMockDataConditions(error: string | null, values: IConditionMap = {}): void {
+        this._mockDataConditions = {
+            error,
+            values
+        };
+    }
+
     public fakeDelay(value: boolean): void {
         fakeDelay = value;
     }
