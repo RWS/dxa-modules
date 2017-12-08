@@ -147,7 +147,8 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
      */
     public context: IAppContext;
 
-    private _hyperlinks: { element: HTMLElement, handler: (e: Event) => void; }[] = [];
+    private _hyperlinks: { element: HTMLElement; handler: (e: Event) => void }[] = [];
+    private _scripts: HTMLElement[] = [];
     private _codeBlocks: HTMLElement[] = [];
     private _lastPageAnchor?: string;
     private _historyUnlisten: () => void;
@@ -185,40 +186,48 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
         const { activeHeader, error, direction, id } = props;
         const { navItems } = this.state;
         const { formatMessage } = this.context.services.localizationService;
-        const activeNavItemId = activeHeader ? activeHeader.id : (navItems.length > 0 ? navItems[0].id : undefined);
+        const activeNavItemId = activeHeader ? activeHeader.id : navItems.length > 0 ? navItems[0].id : undefined;
         const _goHome = (): void => props.onNavigate(path.getRootPath());
-        const errorButtons = <div>
-            {/* Need to replace this button with PageLink then we don't need to pass onNaviate */}
-            <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{ "click": _goHome }}>{formatMessage("components.breadcrumbs.home")}</Button>
-            <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{ "click": () => this.fetchPage() }}>{formatMessage("control.button.retry")}</Button>
-        </div>;
+        const errorButtons = (
+            <div>
+                {/* Need to replace this button with PageLink then we don't need to pass onNaviate */}
+                <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{ click: _goHome }}>
+                    {formatMessage("components.breadcrumbs.home")}
+                </Button>
+                <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{ click: () => this.fetchPage() }}>
+                    {formatMessage("control.button.retry")}
+                </Button>
+            </div>
+        );
         const errorTitle = formatMessage("error.default.title");
-        const errorMessages = [
-            formatMessage("error.page.not.found"),
-            formatMessage("error.default.message")
-        ];
+        const errorMessages = [formatMessage("error.page.not.found"), formatMessage("error.default.message")];
         const showCommentsComponents = commentingIsEnabled && (!error && id);
 
         const appClass = ClassNames(direction, "page-content");
 
         return (
-            <div className={"sdl-dita-delivery-page"} style={props.isLoading ? { overflow: "hidden" } : {}} >
-                {props.isLoading ? <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} /> : null}
+            <div className={"sdl-dita-delivery-page"} style={props.isLoading ? { overflow: "hidden" } : {}}>
+                {props.isLoading ? (
+                    <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} />
+                ) : null}
                 {props.children}
                 <div className={"sdl-dita-delivery-content-navigation-wrapper"}>
                     <ContentNavigation navItems={navItems} activeNavItemId={activeNavItemId} />
                 </div>
                 <article>
-                    {error
-                        ? <Error
-                            title={errorTitle}
-                            messages={errorMessages}
-                            buttons={errorButtons} />
-                        : <article className={appClass}
-                            dangerouslySetInnerHTML={{ __html: props.content || formatMessage("components.page.nothing.selected") }} />}
+                    {error ? (
+                        <Error title={errorTitle} messages={errorMessages} buttons={errorButtons} />
+                    ) : (
+                        <article
+                            className={appClass}
+                            dangerouslySetInnerHTML={{
+                                __html: props.content || formatMessage("components.page.nothing.selected")
+                            }}
+                        />
+                    )}
                 </article>
                 {showCommentsComponents && <CommentsSection />}
-            </div >
+            </div>
         );
     }
 
@@ -269,11 +278,12 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
     private _postProcessHtml(): void {
         const props = this.props;
         const domNode = ReactDOM.findDOMNode(this);
-        if (domNode) {
-
+        const pageContentNode = domNode.querySelector(".page-content");
+        if (pageContentNode) {
             //Highlight code blocks
             const codeBlocks = this._codeBlocks;
-            const highlightBlocks = domNode.querySelectorAll(".page-content pre.codeblock code");
+
+            const highlightBlocks = pageContentNode.querySelectorAll(".page-content pre.codeblock code");
             for (let i: number = 0, length: number = highlightBlocks.length; i < length; i++) {
                 const block = highlightBlocks.item(i) as HTMLElement;
                 const isAdded = codeBlocks.indexOf(block) > -1;
@@ -287,7 +297,7 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
             }
 
             // Make hyperlinks navigate when clicked
-            const anchors = domNode.querySelectorAll(".page-content a");
+            const anchors = pageContentNode.querySelectorAll("a");
             const hyperlinks = this._hyperlinks;
             for (let i: number = 0, length: number = anchors.length; i < length; i++) {
                 const anchor = anchors.item(i) as HTMLAnchorElement;
@@ -309,6 +319,45 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
                     }
                 }
             }
+
+            // If script evaluable option is enabled, we have to evaluate all the scripts inserted in app
+            if ((window as IWindow).SdlDitaDeliveryContentIsEvaluable) {
+                const scripts = this._scripts;
+                // Make hyperlinks navigate when clicked
+                const pageScripts = pageContentNode.querySelectorAll("script");
+                for (let i: number = 0, length: number = pageScripts.length; i < length; i++) {
+                    const script = pageScripts.item(i) as HTMLElement;
+                    if (!scripts.includes(script)) {
+                        console.log(scripts, script);
+                        const parentNode = script.parentNode;
+                        if (parentNode) {
+                            const newScriptNode = document.createElement("script");
+                            if (script.hasAttributes()) {
+                                for (
+                                    let attrI: number = 0, attributes = script.attributes, attrLength: number = attributes.length;
+                                    attrI < attrLength;
+                                    attrI++
+                                ) {
+                                    const attribute = attributes.item(attrI);
+                                    const {name, localName, namespaceURI} = attribute;
+                                    if (namespaceURI) {
+                                        newScriptNode.setAttributeNodeNS(script.getAttributeNodeNS(namespaceURI, localName || name).cloneNode(true) as Attr);
+                                    } else {
+                                        newScriptNode.setAttributeNode(script.getAttributeNode(name).cloneNode(true) as Attr);
+                                    }
+                                }
+                            }
+
+                            if (script.innerHTML) {
+                                newScriptNode.innerHTML = script.innerHTML;
+                            }
+
+                            scripts.push(newScriptNode);
+                            parentNode.replaceChild(newScriptNode, script);
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -321,20 +370,22 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
             const { navItems } = this.state;
             const { url } = this.props;
             const pageContentNode = domNode.querySelector(".page-content") as HTMLElement;
-            const headerLinks = pageContentNode ? Html.getHeaderLinks(pageContentNode).filter((item: IHeader) => {
-                // We only need level 2 and 3 for items rendered in conten navigation
-                return (item.importancy == 2) || (item.importancy == 3);
-            }) : [];
+            const headerLinks = pageContentNode
+                ? Html.getHeaderLinks(pageContentNode).filter((item: IHeader) => {
+                      // We only need level 2 and 3 for items rendered in conten navigation
+                      return item.importancy == 2 || item.importancy == 3;
+                  })
+                : [];
             const updatedNavItems: IContentNavigationItem[] = headerLinks.map(item => {
                 return {
                     id: item.id,
                     title: item.title,
                     indention: Number(item.importancy == 3),
-                    url: url ? Url.getAnchorUrl(url, item.id) : ("#" + item.id)
+                    url: url ? Url.getAnchorUrl(url, item.id) : "#" + item.id
                 };
             });
 
-            if (navItems.map((i) => i.url).join("") !== updatedNavItems.map((i) => i.url).join("")) {
+            if (navItems.map(i => i.url).join("") !== updatedNavItems.map(i => i.url).join("")) {
                 this.setState({
                     navItems: updatedNavItems
                 });
@@ -357,7 +408,7 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
     private _jumpToAnchor(): void {
         const { anchor, isLoading } = this.props;
         // Keep track of the previous anchor to allow scrolling
-        if (!isLoading && anchor && (this._lastPageAnchor !== anchor)) {
+        if (!isLoading && anchor && this._lastPageAnchor !== anchor) {
             const domNode = ReactDOM.findDOMNode(this) as HTMLElement;
             if (domNode) {
                 const pageContentNode = domNode.querySelector(".page-content") as HTMLElement;

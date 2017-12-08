@@ -13,13 +13,12 @@ import { RouteToState } from "components/helpers/RouteToState";
 import { Page } from "@sdl/dd/Page/Page";
 import { PageService } from "test/mocks/services/PageService";
 import { Html } from "utils/Html";
+import { IWindow } from "interfaces/Window";
 
 import { RENDER_DELAY } from "test/Constants";
 
 class PageComponent extends TestBase {
-
     public runTests(): void {
-
         describe(`Page component tests.`, (): void => {
             const target = super.createTargetElement();
 
@@ -36,53 +35,69 @@ class PageComponent extends TestBase {
 
             it("shows / hides activity indicator", (): void => {
                 // Show
-                let page = this._renderComponent({
-                    isLoading: true,
-                    onNavigate: (): void => { }
-                }, target);
+                let page = this._renderComponent(
+                    {
+                        isLoading: true,
+                        onNavigate: (): void => {}
+                    },
+                    target
+                );
                 // tslint:disable-next-line:no-any
                 const activityIndicator = TestUtils.findRenderedComponentWithType(page, ActivityIndicator as any);
                 expect(activityIndicator).not.toBeNull("Could not find activity indicator.");
 
                 // Hide
-                page = this._renderComponent({
-                    isLoading: false,
-                    onNavigate: (): void => { }
-                }, target);
+                page = this._renderComponent(
+                    {
+                        isLoading: false,
+                        onNavigate: (): void => {}
+                    },
+                    target
+                );
                 // tslint:disable-next-line:no-any
                 const activityIndicators = TestUtils.scryRenderedComponentsWithType(page, ActivityIndicator as any);
                 expect(activityIndicators.length).toBe(0, "Activity indicator should have been removed.");
             });
 
             it("can show error info", (): void => {
-                const page = this._renderComponent({
-                    isLoading: false,
-                    error: "Error!",
-                    onNavigate: (): void => { }
-                }, target);
+                const page = this._renderComponent(
+                    {
+                        isLoading: false,
+                        error: "Error!",
+                        onNavigate: (): void => {}
+                    },
+                    target
+                );
                 const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
 
                 const errorElement = domNode.querySelector(".sdl-dita-delivery-error") as HTMLElement;
                 expect(errorElement).not.toBeNull("Error dialog not found");
                 const errorTitle = errorElement.querySelector("h1") as HTMLElement;
                 expect(errorTitle.textContent).toEqual("mock-error.default.title");
-                const buttons = errorElement.querySelectorAll(".sdl-dita-delivery-button-group button") as NodeListOf<HTMLButtonElement>;
+                const buttons = errorElement.querySelectorAll(".sdl-dita-delivery-button-group button") as NodeListOf<
+                    HTMLButtonElement
+                >;
                 expect(buttons.length).toEqual(2);
             });
 
             it("click on home button in error info", (): void => {
                 let path: string = "";
-                const page = this._renderComponent({
-                    isLoading: false,
-                    error: "Error!",
-                    onNavigate: (url: string): void => {
-                        path = url;
-                    }
-                }, target);
+                const page = this._renderComponent(
+                    {
+                        isLoading: false,
+                        error: "Error!",
+                        onNavigate: (url: string): void => {
+                            path = url;
+                        }
+                    },
+                    target
+                );
 
                 const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
                 const errorElement = domNode.querySelector(".sdl-dita-delivery-error") as HTMLElement;
-                const buttons = errorElement.querySelectorAll(".sdl-dita-delivery-button-group button") as NodeListOf<HTMLButtonElement>;
+                const buttons = errorElement.querySelectorAll(".sdl-dita-delivery-button-group button") as NodeListOf<
+                    HTMLButtonElement
+                >;
                 expect(buttons.length).toEqual(2);
 
                 buttons.item(0).click();
@@ -93,33 +108,40 @@ class PageComponent extends TestBase {
 
             it("click on retry button in error info", (): void => {
                 const fetch = jasmine.createSpy("fetchSpy");
-                const page = this._renderComponent({
-                    id: "0002",
-                    publicationId: "0001",
-                    isLoading: false,
-                    error: "Error!",
-                    url: "url/to/page",
-                    onNavigate: (url: string): void => {},
-                    fetchPage: fetch
-                }, target);
+                const page = this._renderComponent(
+                    {
+                        id: "0002",
+                        publicationId: "0001",
+                        isLoading: false,
+                        error: "Error!",
+                        url: "url/to/page",
+                        onNavigate: (url: string): void => {},
+                        fetchPage: fetch
+                    },
+                    target
+                );
 
                 const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
                 const errorElement = domNode.querySelector(".sdl-dita-delivery-error") as HTMLElement;
-                const buttons = errorElement.querySelectorAll(".sdl-dita-delivery-button-group button") as NodeListOf<HTMLButtonElement>;
+                const buttons = errorElement.querySelectorAll(".sdl-dita-delivery-button-group button") as NodeListOf<
+                    HTMLButtonElement
+                >;
                 expect(buttons.length).toEqual(2);
 
                 buttons.item(1).click();
                 expect(fetch).toHaveBeenCalledWith(jasmine.any(PageService), "0001", "0002");
-
             });
 
             it("can show page content info", (): void => {
                 const pageContent = "<div>Page content!</div>";
-                const page = this._renderComponent({
-                    isLoading: false,
-                    content: pageContent,
-                    onNavigate: (): void => { }
-                }, target);
+                const page = this._renderComponent(
+                    {
+                        isLoading: false,
+                        content: pageContent,
+                        onNavigate: (): void => {}
+                    },
+                    target
+                );
 
                 const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
                 expect(domNode).not.toBeNull();
@@ -132,14 +154,17 @@ class PageComponent extends TestBase {
             it("navigates to another page when internal hyperlink is clicked", (done: () => void): void => {
                 const navUrl = "/1234/56/publication-title/page-title";
                 const pageContent = `<div><a href="${navUrl}"/></div>`;
-                const page = this._renderComponent({
-                    isLoading: false,
-                    content: pageContent,
-                    onNavigate: (url: string): void => {
-                        expect(url).toBe(navUrl);
-                        done();
-                    }
-                }, target);
+                const page = this._renderComponent(
+                    {
+                        isLoading: false,
+                        content: pageContent,
+                        onNavigate: (url: string): void => {
+                            expect(url).toBe(navUrl);
+                            done();
+                        }
+                    },
+                    target
+                );
 
                 const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
                 expect(domNode).not.toBeNull();
@@ -158,8 +183,7 @@ class PageComponent extends TestBase {
                                 <a href="/12a34/5c"/>
                                 <a href="/12/3d4/56/78/9"/>
                             </div>`,
-                    onNavigate: (): void => {
-                    }
+                    onNavigate: (): void => {}
                 };
                 const spy = spyOn(pageProps, "onNavigate").and.callThrough();
                 const page = this._renderComponent(pageProps, target);
@@ -191,8 +215,7 @@ class PageComponent extends TestBase {
                                 <a href="/1656863/164363/publication-mp330/"/>
                                 <a href="/1656863/164363/publication-mp330/speed-dialling"/>
                             </div>`,
-                    onNavigate: (): void => {
-                    }
+                    onNavigate: (): void => {}
                 };
                 const spy = spyOn(pageProps, "onNavigate").and.callThrough();
                 const page = this._renderComponent(pageProps, target);
@@ -214,11 +237,19 @@ class PageComponent extends TestBase {
                 const pageProps: IPageProps = {
                     isLoading: false,
                     content: `<div />`,
-                    onNavigate: (): void => {
-                    }
+                    onNavigate: (): void => {}
                 };
                 const spy = spyOn(pageProps, "onNavigate").and.callThrough();
-                const page = this._renderComponent(pageProps, target, (<a href="/1656863/164363" onClick={(e): void => { e.preventDefault(); } } />));
+                const page = this._renderComponent(
+                    pageProps,
+                    target,
+                    <a
+                        href="/1656863/164363"
+                        onClick={(e): void => {
+                            e.preventDefault();
+                        }}
+                    />
+                );
 
                 const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
                 expect(domNode).not.toBeNull();
@@ -237,18 +268,18 @@ class PageComponent extends TestBase {
                 const pageProps: IPageProps = {
                     isLoading: false,
                     content: `<div />`,
-                    onNavigate: (): void => {
-                    }
+                    onNavigate: (): void => {}
                 };
                 const page = this._renderComponent(pageProps, target);
 
                 const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
                 expect(domNode).not.toBeNull();
 
-                const contentNavigationNode = domNode.querySelector(".sdl-dita-delivery-content-navigation") as HTMLElement;
+                const contentNavigationNode = domNode.querySelector(
+                    ".sdl-dita-delivery-content-navigation"
+                ) as HTMLElement;
                 expect(contentNavigationNode.childNodes.length).toBe(0);
             });
-
         });
 
         describe(`Page navigation tests.`, (): void => {
@@ -271,8 +302,7 @@ class PageComponent extends TestBase {
                                 <h4>header-4</h4>
                             </div>`,
                     url: pageUrl,
-                    onNavigate: (): void => {
-                    }
+                    onNavigate: (): void => {}
                 };
                 page = this._renderRoutedComponent(pageProps, target);
             });
@@ -292,7 +322,9 @@ class PageComponent extends TestBase {
                 const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
                 expect(domNode).not.toBeNull();
 
-                const hyperlinks = domNode.querySelectorAll(".sdl-dita-delivery-content-navigation a") as NodeListOf<HTMLAnchorElement>;
+                const hyperlinks = domNode.querySelectorAll(".sdl-dita-delivery-content-navigation a") as NodeListOf<
+                    HTMLAnchorElement
+                >;
                 expect(hyperlinks.length).toBe(2);
 
                 expect(hyperlinks.item(0).textContent).toBe("header-2");
@@ -305,7 +337,9 @@ class PageComponent extends TestBase {
                 const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
                 expect(domNode).not.toBeNull();
 
-                const hyperlinks = domNode.querySelectorAll(".sdl-dita-delivery-content-navigation a") as NodeListOf<HTMLAnchorElement>;
+                const hyperlinks = domNode.querySelectorAll(".sdl-dita-delivery-content-navigation a") as NodeListOf<
+                    HTMLAnchorElement
+                >;
                 expect(hyperlinks.length).toBe(2);
 
                 // We only need last item
@@ -324,7 +358,9 @@ class PageComponent extends TestBase {
                 const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
                 expect(domNode).not.toBeNull();
 
-                const hyperlinks = domNode.querySelectorAll(".sdl-dita-delivery-content-navigation a") as NodeListOf<HTMLAnchorElement>;
+                const hyperlinks = domNode.querySelectorAll(".sdl-dita-delivery-content-navigation a") as NodeListOf<
+                    HTMLAnchorElement
+                >;
                 expect(hyperlinks.length).toBe(2);
 
                 // We only need last item
@@ -347,7 +383,9 @@ class PageComponent extends TestBase {
                 const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
                 expect(domNode).not.toBeNull();
 
-                const hyperlinks = domNode.querySelectorAll(".sdl-dita-delivery-content-navigation a") as NodeListOf<HTMLAnchorElement>;
+                const hyperlinks = domNode.querySelectorAll(".sdl-dita-delivery-content-navigation a") as NodeListOf<
+                    HTMLAnchorElement
+                >;
                 expect(hyperlinks.length).toBe(2);
 
                 // We only need last item
@@ -359,17 +397,81 @@ class PageComponent extends TestBase {
             });
         });
 
+        describe(`Page content evaluation tests.`, (): void => {
+            const target = super.createTargetElement();
+
+            const win = window as IWindow;
+            const isEvaluableFlag = win.SdlDitaDeliveryContentIsEvaluable;
+            const consoleMessage = "RUN";
+
+            const defaultProps = {
+                isLoading: false,
+                content: `
+                <div>
+                    <script xmlns="http://www.w3.org/1999/xhtml" type="text/javascript">
+                        console.info("${consoleMessage}");
+                    </script>
+                </div>`,
+                onNavigate: (): void => {}
+            };
+
+            afterEach(() => {
+                const domNode = ReactDOM.findDOMNode(target);
+                ReactDOM.unmountComponentAtNode(domNode);
+            });
+
+            afterAll(() => {
+                if (target.parentElement) {
+                    target.parentElement.removeChild(target);
+                }
+
+                win.SdlDitaDeliveryMocksEnabled = isEvaluableFlag;
+            });
+
+            it("evaluates page content scripts when evluable flag is enabled", (done: () => void): void => {
+                win.SdlDitaDeliveryContentIsEvaluable = true;
+                const spy = spyOn(console, "info");
+                const page = this._renderComponent(defaultProps, target);
+
+                const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
+                setTimeout((): void => {
+                    expect(win.SdlDitaDeliveryContentIsEvaluable).toBeTruthy();
+
+                    const pageContentNode = domNode.querySelector(".page-content") as HTMLElement;
+                    expect(pageContentNode.innerHTML).toBe(defaultProps.content);
+                    expect(spy).toHaveBeenCalledWith(consoleMessage);
+                    done();
+                }, RENDER_DELAY);
+            });
+
+            it("does not evaluates page content scripts when evluable flag is disabled", (done: () => void): void => {
+                win.SdlDitaDeliveryContentIsEvaluable = false;
+                const spy = spyOn(console, "info");
+                const page = this._renderComponent(defaultProps, target);
+
+                const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
+                setTimeout((): void => {
+                    expect(win.SdlDitaDeliveryContentIsEvaluable).toBeFalsy();
+
+                    const pageContentNode = domNode.querySelector(".page-content") as HTMLElement;
+                    expect(pageContentNode.innerHTML).toBe(defaultProps.content);
+                    expect(spy).not.toHaveBeenCalled();
+                    done();
+                }, RENDER_DELAY);
+            });
+        });
     }
 
     private _renderComponent(props: IPageProps, target: HTMLElement, children?: {}): PagePresentation {
         const store = configureStore();
 
         const comp = ReactDOM.render(
-             <Provider store={store}>
+            <Provider store={store}>
                 <ComponentWithContext>
                     <PagePresentation {...props}>{children}</PagePresentation>
                 </ComponentWithContext>
-              </Provider>, target
+            </Provider>,
+            target
         ) as React.Component<{}, {}>;
         return TestUtils.findRenderedComponentWithType(comp, PagePresentation) as PagePresentation;
     }
@@ -379,7 +481,8 @@ class PageComponent extends TestBase {
 
         const comp = ReactDOM.render(
             <Router history={browserHistory}>
-                <Route path=":publicationId(/:pageIdOrPublicationTitle)(/:publicationTitle)(/:pageTitle)(/:pageAnchor)"
+                <Route
+                    path=":publicationId(/:pageIdOrPublicationTitle)(/:publicationTitle)(/:pageTitle)(/:pageAnchor)"
                     component={() => (
                         <Provider store={store}>
                             <ComponentWithContext>
@@ -387,8 +490,11 @@ class PageComponent extends TestBase {
                                 <Page {...props}>{children}</Page>
                             </ComponentWithContext>
                         </Provider>
-                    )} />
-            </Router>, target) as React.Component<{}, {}>;
+                    )}
+                />
+            </Router>,
+            target
+        ) as React.Component<{}, {}>;
         return TestUtils.findRenderedComponentWithType(comp, PagePresentation) as PagePresentation;
     }
 }
