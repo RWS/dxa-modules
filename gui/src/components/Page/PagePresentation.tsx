@@ -276,86 +276,110 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
      * @memberOf Page
      */
     private _postProcessHtml(): void {
-        const props = this.props;
         const domNode = ReactDOM.findDOMNode(this);
-        const pageContentNode = domNode.querySelector(".page-content");
+        const pageContentNode = domNode.querySelector(".page-content") as HTMLElement;
         if (pageContentNode) {
             //Highlight code blocks
-            const codeBlocks = this._codeBlocks;
-
-            const highlightBlocks = pageContentNode.querySelectorAll(".page-content pre.codeblock code");
-            for (let i: number = 0, length: number = highlightBlocks.length; i < length; i++) {
-                const block = highlightBlocks.item(i) as HTMLElement;
-                const isAdded = codeBlocks.indexOf(block) > -1;
-                if (!isAdded) {
-                    if (!block.classList.contains("language-markup")) {
-                        block.classList.add("language-markup");
-                    }
-                    codeBlocks.push(block);
-                    Prism.highlightElement(block, false);
-                }
-            }
+            this._highlightCodeBlocks(pageContentNode);
 
             // Make hyperlinks navigate when clicked
-            const anchors = pageContentNode.querySelectorAll("a");
-            const hyperlinks = this._hyperlinks;
-            for (let i: number = 0, length: number = anchors.length; i < length; i++) {
-                const anchor = anchors.item(i) as HTMLAnchorElement;
-                const alreadyAdded = hyperlinks.filter(hyperlink => hyperlink.element === anchor).length === 1;
-                if (!alreadyAdded) {
-                    const itemUrl = anchor.getAttribute("href");
-                    if (Url.itemUrlIsValid(itemUrl)) {
-                        const onClick = (e: Event): void => {
-                            if (itemUrl) {
-                                props.onNavigate(itemUrl);
-                            }
-                            e.preventDefault();
-                        };
-                        hyperlinks.push({
-                            element: anchor,
-                            handler: onClick
-                        });
-                        anchor.addEventListener("click", onClick);
-                    }
-                }
-            }
+            this._processContentLinks(pageContentNode);
 
             // If script evaluable option is enabled, we have to evaluate all the scripts inserted in app
             if ((window as IWindow).SdlDitaDeliveryContentIsEvaluable) {
-                const scripts = this._scripts;
-                // Make hyperlinks navigate when clicked
-                const pageScripts = pageContentNode.querySelectorAll("script");
-                for (let i: number = 0, length: number = pageScripts.length; i < length; i++) {
-                    const script = pageScripts.item(i) as HTMLElement;
-                    if (!scripts.includes(script)) {
-                        console.log(scripts, script);
-                        const parentNode = script.parentNode;
-                        if (parentNode) {
-                            const newScriptNode = document.createElement("script");
-                            if (script.hasAttributes()) {
-                                for (
-                                    let attrI: number = 0, attributes = script.attributes, attrLength: number = attributes.length;
-                                    attrI < attrLength;
-                                    attrI++
-                                ) {
-                                    const attribute = attributes.item(attrI);
-                                    const {name, localName, namespaceURI} = attribute;
-                                    if (namespaceURI) {
-                                        newScriptNode.setAttributeNodeNS(script.getAttributeNodeNS(namespaceURI, localName || name).cloneNode(true) as Attr);
-                                    } else {
-                                        newScriptNode.setAttributeNode(script.getAttributeNode(name).cloneNode(true) as Attr);
-                                    }
-                                }
-                            }
+                this._evaluateContentScripts(pageContentNode);
+            }
+        }
+    }
 
-                            if (script.innerHTML) {
-                                newScriptNode.innerHTML = script.innerHTML;
-                            }
+    /**
+     * Highlight сode blocks if there are any.
+     */
+    private _highlightCodeBlocks(pageContentNode: HTMLElement): void {
+        const codeBlocks = this._codeBlocks;
+        const highlightBlocks = pageContentNode.querySelectorAll(".page-content pre.codeblock code");
+        for (let i: number = 0, length: number = highlightBlocks.length; i < length; i++) {
+            const block = highlightBlocks.item(i) as HTMLElement;
+            const isAdded = codeBlocks.indexOf(block) > -1;
+            if (!isAdded) {
+                if (!block.classList.contains("language-markup")) {
+                    block.classList.add("language-markup");
+                }
+                codeBlocks.push(block);
+                Prism.highlightElement(block, false);
+            }
+        }
+    }
 
-                            scripts.push(newScriptNode);
-                            parentNode.replaceChild(newScriptNode, script);
+    /**
+     * Make hyperlinks navigate when clicked
+     */
+    private _processContentLinks(pageContentNode: HTMLElement): void {
+        const props = this.props;
+        const anchors = pageContentNode.querySelectorAll("a");
+        const hyperlinks = this._hyperlinks;
+        for (let i: number = 0, length: number = anchors.length; i < length; i++) {
+            const anchor = anchors.item(i) as HTMLAnchorElement;
+            const alreadyAdded = hyperlinks.filter(hyperlink => hyperlink.element === anchor).length === 1;
+            if (!alreadyAdded) {
+                const itemUrl = anchor.getAttribute("href");
+                if (Url.itemUrlIsValid(itemUrl)) {
+                    const onClick = (e: Event): void => {
+                        if (itemUrl) {
+                            props.onNavigate(itemUrl);
+                        }
+                        e.preventDefault();
+                    };
+                    hyperlinks.push({
+                        element: anchor,
+                        handler: onClick
+                    });
+                    anchor.addEventListener("click", onClick);
+                }
+            }
+        }
+    }
+
+    /**
+     * Evaluate code inside page content if there are any.
+     */
+    private _evaluateContentScripts(pageContentNode: HTMLElement): void {
+        const scripts = this._scripts;
+        // Make hyperlinks navigate when clicked
+        const pageScripts = pageContentNode.querySelectorAll("script");
+        for (let i: number = 0, length: number = pageScripts.length; i < length; i++) {
+            const script = pageScripts.item(i) as HTMLElement;
+            if (!scripts.includes(script)) {
+                console.log(scripts, script);
+                const parentNode = script.parentNode;
+                if (parentNode) {
+                    const newScriptNode = document.createElement("script");
+                    if (script.hasAttributes()) {
+                        for (
+                            let attrI: number = 0,
+                                attributes = script.attributes,
+                                attrLength: number = attributes.length;
+                            attrI < attrLength;
+                            attrI++
+                        ) {
+                            const attribute = attributes.item(attrI);
+                            const { name, localName, namespaceURI } = attribute;
+                            if (namespaceURI) {
+                                newScriptNode.setAttributeNodeNS(script
+                                    .getAttributeNodeNS(namespaceURI, localName || name)
+                                    .cloneNode(true) as Attr);
+                            } else {
+                                newScriptNode.setAttributeNode(script.getAttributeNode(name).cloneNode(true) as Attr);
+                            }
                         }
                     }
+
+                    if (script.innerHTML) {
+                        newScriptNode.innerHTML = script.innerHTML;
+                    }
+
+                    scripts.push(newScriptNode);
+                    parentNode.replaceChild(newScriptNode, script);
                 }
             }
         }
