@@ -48,10 +48,7 @@ export interface ISplitterState {
 /**
  * Dropdown
  */
-export class SplitterPresentation extends React.Component<
-    ISplitterProps,
-    ISplitterState
-> {
+export class SplitterPresentation extends React.Component<ISplitterProps, ISplitterState> {
     private _isUnmounted: boolean = false;
     private _splitterElement: HTMLElement;
 
@@ -71,10 +68,7 @@ export class SplitterPresentation extends React.Component<
         this._dragMove = this._dragMove.bind(this);
         this._windowResize = this._windowResize.bind(this);
 
-        this._onSplitterPositionChanged = throttle(
-            this._onSplitterPositionChanged.bind(this),
-            50
-        );
+        this._onSplitterPositionChanged = throttle(this._onSplitterPositionChanged.bind(this), 50);
     }
 
     /**
@@ -109,12 +103,7 @@ export class SplitterPresentation extends React.Component<
      */
     public render(): JSX.Element {
         const { width } = this.state;
-        return (
-            <span
-                style={width ? { width } : {}}
-                className={"sdl-dita-delivery-splitter separator"}
-            />
-        );
+        return <span style={width ? { width } : {}} className={"sdl-dita-delivery-splitter separator"} />;
     }
 
     /**
@@ -143,7 +132,7 @@ export class SplitterPresentation extends React.Component<
         }
     }
 
-    private _dragStart(e: MouseEvent | TouchEvent ): void {
+    private _dragStart(e: MouseEvent | TouchEvent): void {
         if (!this._isUnmounted) {
             e.preventDefault();
             this.setState({
@@ -152,8 +141,9 @@ export class SplitterPresentation extends React.Component<
         }
     }
 
-    private _dragEnd(e: MouseEvent | TouchEvent ): void {
-        if (!this._isUnmounted) {
+    private _dragEnd(e: MouseEvent | TouchEvent): void {
+        const { isDragging } = this.state;
+        if (!this._isUnmounted && isDragging) {
             e.preventDefault();
             this.setState({
                 isDragging: false
@@ -194,7 +184,7 @@ export class SplitterPresentation extends React.Component<
 
     private _onSplitterPositionChanged(newSplitterPosition: number): void {
         const { splitterPositionChange, splitterPosition } = this.props;
-        if (typeof splitterPositionChange === "function" && (newSplitterPosition !== splitterPosition)) {
+        if (typeof splitterPositionChange === "function" && newSplitterPosition !== splitterPosition) {
             splitterPositionChange(newSplitterPosition);
             window.dispatchEvent(new Event("resize"));
         }
