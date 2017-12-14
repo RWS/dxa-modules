@@ -16,12 +16,13 @@ import { CommentsSection } from "@sdl/dd/CommentsSection/CommentsSection";
 import { IAppContext } from "@sdl/dd/container/App/App";
 import { IPageService } from "services/interfaces/PageService";
 
-import "components/presentation/styles/Page";
 import "components/controls/styles/ActivityIndicator";
 import "components/controls/styles/Button";
 import "dita-ot/styles/commonltr";
 import "dita-ot/styles/commonrtl";
 import "prismjs/themes/prism";
+
+import "./Page.less";
 
 import { IWindow } from "interfaces/Window";
 
@@ -147,7 +148,7 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
      */
     public context: IAppContext;
 
-    private _hyperlinks: { element: HTMLElement, handler: (e: Event) => void; }[] = [];
+    private _hyperlinks: { element: HTMLElement; handler: (e: Event) => void }[] = [];
     private _codeBlocks: HTMLElement[] = [];
     private _lastPageAnchor?: string;
     private _historyUnlisten: () => void;
@@ -185,40 +186,50 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
         const { activeHeader, error, direction, id } = props;
         const { navItems } = this.state;
         const { formatMessage } = this.context.services.localizationService;
-        const activeNavItemId = activeHeader ? activeHeader.id : (navItems.length > 0 ? navItems[0].id : undefined);
+        const activeNavItemId = activeHeader ? activeHeader.id : navItems.length > 0 ? navItems[0].id : undefined;
         const _goHome = (): void => props.onNavigate(path.getRootPath());
-        const errorButtons = <div>
-            {/* Need to replace this button with PageLink then we don't need to pass onNaviate */}
-            <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{ "click": _goHome }}>{formatMessage("components.breadcrumbs.home")}</Button>
-            <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{ "click": () => this.fetchPage() }}>{formatMessage("control.button.retry")}</Button>
-        </div>;
+        const errorButtons = (
+            <div>
+                {/* Need to replace this button with PageLink then we don't need to pass onNaviate */}
+                <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{ click: _goHome }}>
+                    {formatMessage("components.breadcrumbs.home")}
+                </Button>
+                <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{ click: () => this.fetchPage() }}>
+                    {formatMessage("control.button.retry")}
+                </Button>
+            </div>
+        );
         const errorTitle = formatMessage("error.default.title");
-        const errorMessages = [
-            formatMessage("error.page.not.found"),
-            formatMessage("error.default.message")
-        ];
+        const errorMessages = [formatMessage("error.page.not.found"), formatMessage("error.default.message")];
         const showCommentsComponents = commentingIsEnabled && (!error && id);
 
         const appClass = ClassNames(direction, "page-content");
 
         return (
-            <div className={"sdl-dita-delivery-page"} style={props.isLoading ? { overflow: "hidden" } : {}} >
-                {props.isLoading ? <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} /> : null}
-                {props.children}
-                <div className={"sdl-dita-delivery-content-navigation-wrapper"}>
-                    <ContentNavigation navItems={navItems} activeNavItemId={activeNavItemId} />
+            <div className={"sdl-dita-delivery-page"} style={props.isLoading ? { overflow: "hidden" } : {}}>
+                {navItems.length > 0 && (
+                    <div className={"sdl-dita-delivery-content-navigation-wrapper"}>
+                        <ContentNavigation navItems={navItems} activeNavItemId={activeNavItemId} />
+                    </div>
+                )}
+                <div className={"sdl-dita-delivery-page-content"}>
+                    {props.isLoading ? (
+                        <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} />
+                    ) : null}
+                    {props.children}
+                    {error ? (
+                        <Error title={errorTitle} messages={errorMessages} buttons={errorButtons} />
+                    ) : (
+                        <article
+                            className={appClass}
+                            dangerouslySetInnerHTML={{
+                                __html: props.content || formatMessage("components.page.nothing.selected")
+                            }}
+                        />
+                    )}
+                    {showCommentsComponents && <CommentsSection />}
                 </div>
-                <article>
-                    {error
-                        ? <Error
-                            title={errorTitle}
-                            messages={errorMessages}
-                            buttons={errorButtons} />
-                        : <article className={appClass}
-                            dangerouslySetInnerHTML={{ __html: props.content || formatMessage("components.page.nothing.selected") }} />}
-                </article>
-                {showCommentsComponents && <CommentsSection />}
-            </div >
+            </div>
         );
     }
 
@@ -270,7 +281,6 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
         const props = this.props;
         const domNode = ReactDOM.findDOMNode(this);
         if (domNode) {
-
             //Highlight code blocks
             const codeBlocks = this._codeBlocks;
             const highlightBlocks = domNode.querySelectorAll(".page-content pre.codeblock code");
@@ -321,20 +331,22 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
             const { navItems } = this.state;
             const { url } = this.props;
             const pageContentNode = domNode.querySelector(".page-content") as HTMLElement;
-            const headerLinks = pageContentNode ? Html.getHeaderLinks(pageContentNode).filter((item: IHeader) => {
-                // We only need level 2 and 3 for items rendered in conten navigation
-                return (item.importancy == 2) || (item.importancy == 3);
-            }) : [];
+            const headerLinks = pageContentNode
+                ? Html.getHeaderLinks(pageContentNode).filter((item: IHeader) => {
+                      // We only need level 2 and 3 for items rendered in conten navigation
+                      return item.importancy == 2 || item.importancy == 3;
+                  })
+                : [];
             const updatedNavItems: IContentNavigationItem[] = headerLinks.map(item => {
                 return {
                     id: item.id,
                     title: item.title,
                     indention: Number(item.importancy == 3),
-                    url: url ? Url.getAnchorUrl(url, item.id) : ("#" + item.id)
+                    url: url ? Url.getAnchorUrl(url, item.id) : "#" + item.id
                 };
             });
 
-            if (navItems.map((i) => i.url).join("") !== updatedNavItems.map((i) => i.url).join("")) {
+            if (navItems.map(i => i.url).join("") !== updatedNavItems.map(i => i.url).join("")) {
                 this.setState({
                     navItems: updatedNavItems
                 });
@@ -357,7 +369,7 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
     private _jumpToAnchor(): void {
         const { anchor, isLoading } = this.props;
         // Keep track of the previous anchor to allow scrolling
-        if (!isLoading && anchor && (this._lastPageAnchor !== anchor)) {
+        if (!isLoading && anchor && this._lastPageAnchor !== anchor) {
             const domNode = ReactDOM.findDOMNode(this) as HTMLElement;
             if (domNode) {
                 const pageContentNode = domNode.querySelector(".page-content") as HTMLElement;

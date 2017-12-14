@@ -46,7 +46,7 @@
     .sdl-dita-delivery-publications-list,
     .sdl-dita-delivery-publication-content {
         top: @navBarHeight;
-        min-height:~"calc(100% - @{navBarHeight})";
+        min-height: ~"calc(100% - @{navBarHeight})";
         .no-available-publications-label {
             text-align: center;
             .header-font(400, 28px, 40px);
@@ -61,26 +61,22 @@
         }
     }
     .sdl-dita-delivery-publication-content {
-        height:~"calc(100% - @{navBarHeight})";
-        .sdl-dita-delivery-page {
-            height: 100%;
-            .sdl-dita-delivery-navigation-menu {
-                height: 100%;
-                .sdl-dita-delivery-toc {
-                    display: flex;
-                    flex-direction: column;
-                    .sdl-conditions-dialog-presentation {
-                        flex: 0 0 auto;
-                    }
-                    .sdl-conditions-dialog-presentation + span {
-                        flex: 1 1 100%;
-                        display: inherit;
-                        // FF fix. See https://stackoverflow.com/questions/28636832#28639686
-                        min-height: 0;
-                        .sdl-treeview {
-                            max-height: 100%;
-                            height: auto;
-                        }
+        height: ~"calc(100% - @{navBarHeight})";
+        .sdl-dita-delivery-navigation-menu {
+            .sdl-dita-delivery-toc {
+                display: flex;
+                flex-direction: column;
+                .sdl-conditions-dialog-presentation {
+                    flex: 0 0 auto;
+                }
+                .sdl-conditions-dialog-presentation + span {
+                    flex: 1 1 100%;
+                    display: inherit;
+                    // FF fix. See https://stackoverflow.com/questions/28636832#28639686
+                    min-height: 0;
+                    .sdl-treeview {
+                        max-height: 100%;
+                        height: auto;
                     }
                 }
             }
@@ -98,7 +94,7 @@
         }
         &.search-is-active {
             .sdl-dita-delivery-nav-mask {
-                opacity: .75;
+                opacity: 0.75;
                 display: block;
                 z-index: 7;
                 background-color: @neutralColor12;
@@ -108,11 +104,11 @@
     &.search-is-opening {
         .sdl-dita-delivery-searchbar + section,
         .sdl-dita-delivery-searchbar + .sdl-dita-delivery-publication-content-wrapper section {
-            transition: top .3s ease-out, height .3s ease-out, min-height .3s ease-out;
+            transition: top 0.3s ease-out, height 0.3s ease-out, min-height 0.3s ease-out, max-height 0.3s ease-out;
             nav.sdl-dita-delivery-toc,
             nav.sdl-dita-delivery-toc .separator,
             nav.sdl-dita-delivery-content-navigation {
-                transition: top .3s ease-out, height .3s ease-out;
+                transition: top 0.3s ease-out, height 0.3s ease-out, min-height 0.3s ease-out, max-height 0.3s ease-out;
             }
         }
     }
@@ -121,8 +117,8 @@
         // Search panel is open
         &.search-open {
             .sdl-dita-delivery-topbar {
-                header>* {
-                    display: none
+                header > * {
+                    display: none;
                 }
                 .sdl-dita-delivery-topbar-expand-search {
                     display: inline-block;
@@ -161,7 +157,7 @@
     // Screen resolution above small
     @media screen and (min-width: (1+@screenSm)) {
         .sdl-dita-delivery-searchbar {
-            transition: top .3s ease-out;
+            transition: top 0.3s ease-out;
         }
         // Search panel is open
         &.search-open {
@@ -170,13 +166,11 @@
             .sdl-dita-delivery-publications-list,
             .sdl-dita-delivery-publication-content {
                 top: @searchBarHeight + @navBarHeight;
-                height:~"calc(100% - (@{searchBarHeight} + @{navBarHeight}))";
-                min-height:~"calc(100% - (@{searchBarHeight} + @{navBarHeight}))";
-                .sdl-dita-delivery-page {
-                    .sdl-dita-delivery-navigation-menu {
-                        nav.sdl-dita-delivery-toc {
-                            top: @searchBarHeight + @navBarHeight;
-                        }
+                max-height: ~"calc(100% - (@{searchBarHeight} + @{navBarHeight}))";
+                min-height: ~"calc(100% - (@{searchBarHeight} + @{navBarHeight}))";
+                .sdl-dita-delivery-navigation-menu {
+                    nav.sdl-dita-delivery-toc {
+                        top: @searchBarHeight + @navBarHeight;
                     }
                 }
             }
@@ -197,11 +191,9 @@
             }
         }
         .sdl-dita-delivery-publication-content {
-            .sdl-dita-delivery-page {
-                .sdl-dita-delivery-navigation-menu {
-                    nav.sdl-dita-delivery-toc {
-                        height: 100%;
-                    }
+            .sdl-dita-delivery-navigation-menu {
+                nav.sdl-dita-delivery-toc {
+                    height: 100%;
                 }
             }
         }
@@ -210,16 +202,21 @@
     // Screen resolution above Medium
     @media screen and (min-width: (1+@screenMd)) {
         .sdl-dita-delivery-publication-content {
-            .sdl-dita-delivery-page {
+            .sdl-dita-delivery-navigation-menu {
+                nav.sdl-dita-delivery-toc {
+                    position: fixed;
+                    top: @navBarHeight;
+                    max-height: ~"calc(100% - 64px - @{navBarHeight})";
+                    z-index: 1;
+                }
+            }
+        }
+        &.search-open {
+            .sdl-dita-delivery-publication-content {
                 .sdl-dita-delivery-navigation-menu {
                     nav.sdl-dita-delivery-toc {
-                        position: fixed;
-                        top: @navBarHeight;
-                        /*  HACK: As a correct behaviour we should use max-height here,
-                            but Chrome is not taking calc() values into account in this case*/
-                        // max-height: ~"calc(100% - 64px - @{navBarHeight})";
-                        height:~"calc(100% - 64px - @{navBarHeight})";
-                        z-index: 1;
+                        max-height: ~"calc(100% - 64px - (@{searchBarHeight} + @{navBarHeight}))";
+                        top: @searchBarHeight + @navBarHeight;
                     }
                 }
             }
@@ -232,7 +229,7 @@
             .sdl-dita-delivery-page {
                 nav.sdl-dita-delivery-content-navigation {
                     position: fixed;
-                    height:~"calc(100% - 64px - @{navBarHeight})";
+                    height: ~"calc(100% - 64px - @{navBarHeight})";
                     top: @navBarHeight;
                 }
             }
@@ -241,7 +238,7 @@
             .sdl-dita-delivery-publication-content {
                 .sdl-dita-delivery-page {
                     nav.sdl-dita-delivery-content-navigation {
-                        height:~"calc(100% - 64px - (@{searchBarHeight} + @{navBarHeight}))";
+                        height: ~"calc(100% - 64px - (@{searchBarHeight} + @{navBarHeight}))";
                         top: @searchBarHeight + @navBarHeight;
                     }
                 }

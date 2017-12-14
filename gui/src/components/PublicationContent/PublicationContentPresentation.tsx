@@ -9,7 +9,7 @@ import { Toc } from "@sdl/dd/presentation/Toc";
 import { Page } from "@sdl/dd/Page/Page";
 import { Breadcrumbs, IBreadcrumbItem } from "@sdl/dd/presentation/Breadcrumbs";
 import { ContentLanguageWarning } from "@sdl/dd/ContentLanguageWarning/ContentLanguageWarning";
-import { Splitter } from "@sdl/dd/Splitter/Splitter";
+//import { Splitter } from "@sdl/dd/Splitter/Splitter";
 
 import { VersionSelector } from "@sdl/dd/presentation/VersionSelector";
 import { Html, IHeader } from "utils/Html";
@@ -185,7 +185,6 @@ export type Pub = IPublicationContentProps & IPublicationCurrentState;
  * Publication + content component
  */
 export class PublicationContentPresentation extends React.Component<Pub, IPublicationContentState> {
-
     public static contextTypes: React.ValidationMap<IAppContext> = {
         services: PropTypes.object.isRequired
     };
@@ -251,10 +250,13 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
             this.fetchPublication(nextPubId);
         }
 
-        if (isPage(nextPage) && (MD5(nextProps.conditions) !== MD5(this.props.conditions))) {
-            this.setState({
-                isTocLoading: true
-            }, () => this.refreshToc(nextPubId, nextPage));
+        if (isPage(nextPage) && MD5(nextProps.conditions) !== MD5(this.props.conditions)) {
+            this.setState(
+                {
+                    isTocLoading: true
+                },
+                () => this.refreshToc(nextPubId, nextPage)
+            );
         } else if (isPage(nextPage) && !isDummyPage(nextPage) && nextPage.content !== page.content) {
             this.refreshToc(nextPubId, nextPage);
         } else if (errorMessage) {
@@ -270,7 +272,8 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
     public render(): JSX.Element {
         const { activeTocItemPath, selectedTocItem, activePageHeader } = this.state;
         const { services } = this.context;
-        const { publicationId,
+        const {
+            publicationId,
             pageId,
             page,
             publication,
@@ -278,13 +281,29 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
             errorMessage,
             productReleaseVersion,
             productReleaseVersions,
-            isPublicationFound } = this.props;
+            isPublicationFound
+        } = this.props;
 
         const { taxonomyService, localizationService } = services;
         const { rootItems, error: tocError } = this._toc;
         const selectedProductReleaseVersion = Version.normalize(productReleaseVersion);
         return (
             <section className={"sdl-dita-delivery-publication-content"}>
+                <NavigationMenu isOpen={false}>
+                    {/* TODO: use global state store */}
+                    <Toc
+                        activeItemPath={activeTocItemPath}
+                        publicationId={publicationId}
+                        rootItems={rootItems}
+                        loadChildItems={(parentId: string): Promise<ITaxonomy[]> => {
+                            return taxonomyService.getSitemapItems(publicationId, parentId);
+                        }}
+                        onSelectionChanged={this._onTocSelectionChanged.bind(this)}
+                        error={tocError}
+                        onRetry={() => this._loadTocRootItems(publicationId)}>
+                        {/*  <Splitter /> */}
+                    </Toc>
+                </NavigationMenu>
                 <Page
                     isLoading={isPageLoading}
                     content={page.content}
@@ -295,54 +314,58 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                             browserHistory.push(url);
                         }
                     }}
-                    url={pageId ?
-                        Url.getPageUrl(publicationId, pageId, publication.title, page.title || (selectedTocItem && selectedTocItem.title) || "") :
-                        Url.getPublicationUrl(publicationId, publication.title)}
+                    url={
+                        pageId
+                            ? Url.getPageUrl(
+                                  publicationId,
+                                  pageId,
+                                  publication.title,
+                                  page.title || (selectedTocItem && selectedTocItem.title) || ""
+                              )
+                            : Url.getPublicationUrl(publicationId, publication.title)
+                    }
                     activeHeader={activePageHeader}>
-                    <NavigationMenu isOpen={false}>{/* TODO: use global state store */}
-                        <Toc
-                            activeItemPath={activeTocItemPath}
-                            publicationId={publicationId}
-                            rootItems={rootItems}
-                            loadChildItems={(parentId: string): Promise<ITaxonomy[]> => {
-                                return taxonomyService.getSitemapItems(publicationId, parentId);
-                            }}
-                            onSelectionChanged={this._onTocSelectionChanged.bind(this)}
-                            error={tocError}
-                            onRetry={() => this._loadTocRootItems(publicationId)}
-                        >
-                            <Splitter />
-                        </Toc>
-                    </NavigationMenu>
                     <Breadcrumbs
                         loadItemPath={(breadcrumbItem: ITaxonomy): Promise<IBreadcrumbItem[]> => {
-                            const publicationTitle = isPublicationFound ?
-                                publication.title || "" :
-                                localizationService.formatMessage("error.publication.not.found", [publication.id]);
+                            const publicationTitle = isPublicationFound
+                                ? publication.title || ""
+                                : localizationService.formatMessage("error.publication.not.found", [publication.id]);
                             const productFamilyTitle = publication.productFamily;
-                            let breadCrumbPath = [{
-                                title: productFamilyTitle || localizationService.formatMessage("productfamilies.unknown.title"),
-                                url: Url.getProductFamilyUrl(productFamilyTitle || DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE, selectedProductReleaseVersion)
-                            }, {
-                                title: publicationTitle,
-                                url: Url.getPublicationUrl(publicationId, publicationTitle)
-                            }] as IBreadcrumbItem[];
+                            let breadCrumbPath = [
+                                {
+                                    title:
+                                        productFamilyTitle ||
+                                        localizationService.formatMessage("productfamilies.unknown.title"),
+                                    url: Url.getProductFamilyUrl(
+                                        productFamilyTitle || DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE,
+                                        selectedProductReleaseVersion
+                                    )
+                                },
+                                {
+                                    title: publicationTitle,
+                                    url: Url.getPublicationUrl(publicationId, publicationTitle)
+                                }
+                            ] as IBreadcrumbItem[];
                             const parsedUrl = breadcrumbItem.url && Url.parsePageUrl(breadcrumbItem.url);
                             if (parsedUrl && parsedUrl.pageId) {
-                                return taxonomyService.getSitemapPath(publicationId, parsedUrl.pageId, breadcrumbItem.id || "").then(
-                                    path => {
-                                        breadCrumbPath.push(...path.map(item => {
-                                            return {
-                                                title: item.title,
-                                                url: item.url
-                                            } as IBreadcrumbItem;
-                                        }));
-                                        return breadCrumbPath;
-                                    },
-                                    siteMapError => {
-                                        return Promise.reject(siteMapError);
-                                    }
-                                );
+                                return taxonomyService
+                                    .getSitemapPath(publicationId, parsedUrl.pageId, breadcrumbItem.id || "")
+                                    .then(
+                                        path => {
+                                            breadCrumbPath.push(
+                                                ...path.map(item => {
+                                                    return {
+                                                        title: item.title,
+                                                        url: item.url
+                                                    } as IBreadcrumbItem;
+                                                })
+                                            );
+                                            return breadCrumbPath;
+                                        },
+                                        siteMapError => {
+                                            return Promise.reject(siteMapError);
+                                        }
+                                    );
                             } else {
                                 return Promise.resolve(breadCrumbPath);
                             }
@@ -350,18 +373,12 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                         selectedItem={selectedTocItem}
                     />
                     <ContentLanguageWarning />
-                    { Array.isArray(productReleaseVersions) &&
+                    {Array.isArray(productReleaseVersions) &&
                         productReleaseVersions.length > 1 && (
                             <VersionSelector
                                 productReleaseVersions={productReleaseVersions}
-                                selectedProductReleaseVersion={
-                                    selectedProductReleaseVersion
-                                }
-                                onChange={version =>
-                                    this._navigateToOtherReleaseVersion(
-                                        publicationId,
-                                        version
-                                    )}
+                                selectedProductReleaseVersion={selectedProductReleaseVersion}
+                                onChange={version => this._navigateToOtherReleaseVersion(publicationId, version)}
                             />
                         )}
                 </Page>
@@ -444,7 +461,12 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         }
     }
 
-    private _getActiveSitemapPath(publicationId: string, pageId: string, sitemapId: string, done: (path: string[]) => void): void {
+    private _getActiveSitemapPath(
+        publicationId: string,
+        pageId: string,
+        sitemapId: string,
+        done: (path: string[]) => void
+    ): void {
         const { services } = this.context;
 
         if (pageId) {
@@ -463,7 +485,8 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                             isTocLoading: false
                         });
                     }
-                });
+                }
+            );
         }
     }
 
@@ -505,20 +528,12 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                     }
                 }
 
-                const { splitterPosition } = this.props;
-                const breadcrumbs = page.querySelector(".sdl-dita-delivery-breadcrumbs") as HTMLElement;
-                const commentsSection = page.querySelector(".sdl-dita-delivery-comments-section") as HTMLElement;
                 const tocMargin = parseInt(getComputedStyle(toc).marginRight || "", 10);
-                toc.style.width = splitterPosition ? (splitterPosition - tocMargin) + "px" : null;
-                [
-                    commentsSection,
-                    breadcrumbs,
-                    pageContent
-                ].forEach((el: HTMLElement) => {
-                    if (el) {
-                        el.style.marginLeft = splitterPosition ? (splitterPosition + tocMargin * 2) + "px" : null;
-                    }
-                });
+                const tocParent = toc.parentNode as HTMLElement;
+                if (tocParent) {
+                    const { splitterPosition } = this.props;
+                    tocParent.style.width = splitterPosition ? splitterPosition - tocMargin + "px" : null;
+                }
             }
 
             if (Object.keys(tmpState).length > 0) {
