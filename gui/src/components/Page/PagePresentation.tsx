@@ -16,12 +16,13 @@ import { CommentsSection } from "@sdl/dd/CommentsSection/CommentsSection";
 import { IAppContext } from "@sdl/dd/container/App/App";
 import { IPageService } from "services/interfaces/PageService";
 
-import "components/presentation/styles/Page";
 import "components/controls/styles/ActivityIndicator";
 import "components/controls/styles/Button";
 import "dita-ot/styles/commonltr";
 import "dita-ot/styles/commonrtl";
 import "prismjs/themes/prism";
+
+import "./Page.less";
 
 import { IWindow } from "interfaces/Window";
 
@@ -207,14 +208,16 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
 
         return (
             <div className={"sdl-dita-delivery-page"} style={props.isLoading ? { overflow: "hidden" } : {}}>
-                {props.isLoading ? (
-                    <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} />
-                ) : null}
-                {props.children}
-                <div className={"sdl-dita-delivery-content-navigation-wrapper"}>
-                    <ContentNavigation navItems={navItems} activeNavItemId={activeNavItemId} />
-                </div>
-                <article>
+                {navItems.length > 0 && (
+                    <div className={"sdl-dita-delivery-content-navigation-wrapper"}>
+                        <ContentNavigation navItems={navItems} activeNavItemId={activeNavItemId} />
+                    </div>
+                )}
+                <div className={"sdl-dita-delivery-page-content"}>
+                    {props.isLoading ? (
+                        <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} />
+                    ) : null}
+                    {props.children}
                     {error ? (
                         <Error title={errorTitle} messages={errorMessages} buttons={errorButtons} />
                     ) : (
@@ -225,8 +228,8 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
                             }}
                         />
                     )}
-                </article>
-                {showCommentsComponents && <CommentsSection />}
+                    {showCommentsComponents && <CommentsSection />}
+                </div>
             </div>
         );
     }
