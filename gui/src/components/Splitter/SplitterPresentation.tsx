@@ -23,6 +23,12 @@ export interface ISplitterProps {
      * @type {}
      */
     splitterPositionChange?: (splitterPositionX: number) => void;
+
+    /**
+     * If splitter is in left to right content
+     * @type {}
+     */
+    isLtr: boolean;
 }
 
 /**
@@ -42,7 +48,7 @@ export interface ISplitterState {
      * Splitter width
      * @type {number}
      */
-    width: number;
+    splitterOffset: number;
 }
 
 /**
@@ -56,17 +62,17 @@ export class SplitterPresentation extends React.Component<ISplitterProps, ISplit
      * Creates an instance of Dropdown
      *
      */
-    constructor() {
+    constructor(props: ISplitterProps) {
         super();
         this.state = {
             isDragging: false,
-            width: 0
+            splitterOffset: props.splitterPosition
         };
 
         this._dragStart = this._dragStart.bind(this);
         this._dragEnd = this._dragEnd.bind(this);
         this._dragMove = this._dragMove.bind(this);
-        this._windowResize = this._windowResize.bind(this);
+        this._touchDragMove = this._touchDragMove.bind(this);
 
         this._onSplitterPositionChanged = throttle(this._onSplitterPositionChanged.bind(this), 50);
     }
@@ -84,14 +90,11 @@ export class SplitterPresentation extends React.Component<ISplitterProps, ISplit
 
         // On drag
         window.addEventListener("mousemove", this._dragMove);
-        window.addEventListener("touchmove", this._dragMove);
+        window.addEventListener("touchmove", this._touchDragMove);
 
         // On drag End
         window.addEventListener("mouseup", this._dragEnd);
         window.addEventListener("touchend", this._dragEnd);
-
-        // On window resize
-        window.addEventListener("resize", this._windowResize);
 
         this._splitterElement = handle;
     }
@@ -102,8 +105,7 @@ export class SplitterPresentation extends React.Component<ISplitterProps, ISplit
      * @returns {JSX.Element}
      */
     public render(): JSX.Element {
-        const { width } = this.state;
-        return <span style={width ? { width } : {}} className={"sdl-dita-delivery-splitter separator"} />;
+        return <span className={"sdl-dita-delivery-splitter"} />;
     }
 
     /**
@@ -117,7 +119,7 @@ export class SplitterPresentation extends React.Component<ISplitterProps, ISplit
         handle.removeEventListener("touchstart", this._dragStart);
 
         window.removeEventListener("mousemove", this._dragMove);
-        window.removeEventListener("touchmove", this._dragMove);
+        window.removeEventListener("touchmove", this._touchDragMove);
 
         window.removeEventListener("mouseup", this._dragEnd);
         window.removeEventListener("touchend", this._dragEnd);
@@ -127,8 +129,8 @@ export class SplitterPresentation extends React.Component<ISplitterProps, ISplit
 
     public componentDidUpdate(): void {
         if (!this._isUnmounted) {
-            const { width } = this._splitterElement.getBoundingClientRect();
-            this._onSplitterPositionChanged(width);
+            const { splitterOffset } = this.state;
+            this._onSplitterPositionChanged(splitterOffset);
         }
     }
 
@@ -151,23 +153,37 @@ export class SplitterPresentation extends React.Component<ISplitterProps, ISplit
         }
     }
 
-    private _dragMove(e: MouseEvent | TouchEvent): void {
+    private _dragMove(e: MouseEvent): void {
         const { isDragging } = this.state;
         if (!this._isUnmounted && isDragging) {
             e.preventDefault();
-            const { left } = this._splitterElement.getBoundingClientRect();
-            const width = this._getClientX(e) - left + 3;
-            this.setState({
-                width
-            });
+            this._setMoveOffset(e.clientX);
         }
     }
 
-    private _getClientX(e: MouseEvent | TouchEvent): number {
-        if (e instanceof TouchEvent) {
-            return e.touches[0].clientX;
+    // Weird FF issue
+    private _touchDragMove(e: TouchEvent): void {
+        const { isDragging } = this.state;
+        if (!this._isUnmounted && isDragging) {
+            e.preventDefault();
+            this._setMoveOffset(e.touches[0].clientX);
         }
-        return e.clientX;
+    }
+
+    private _setMoveOffset(clientX: number): void {
+        const splitterElement = this._splitterElement;
+        const { isLtr } = this.props;
+        const { left } = splitterElement.getBoundingClientRect();
+        let offset = 0,
+            prevSibling = splitterElement;
+        while ((prevSibling = prevSibling.previousElementSibling as HTMLElement)) {
+            offset += prevSibling.offsetWidth;
+        }
+
+        const splitterOffset = Math.floor(offset - (isLtr ? left - clientX : clientX - left));
+        this.setState({
+            splitterOffset
+        });
     }
 
     private _windowResize(): void {
@@ -175,17 +191,16 @@ export class SplitterPresentation extends React.Component<ISplitterProps, ISplit
             const handle = this._splitterElement;
             if (handle && handle.offsetParent === null) {
                 this.setState({
-                    isDragging: false,
-                    width: 0
+                    isDragging: false
                 });
             }
         }
     }
 
-    private _onSplitterPositionChanged(newSplitterPosition: number): void {
+    private _onSplitterPositionChanged(newSplitterOffset: number): void {
         const { splitterPositionChange, splitterPosition } = this.props;
-        if (typeof splitterPositionChange === "function" && newSplitterPosition !== splitterPosition) {
-            splitterPositionChange(newSplitterPosition);
+        if (typeof splitterPositionChange === "function" && newSplitterOffset !== splitterPosition) {
+            splitterPositionChange(newSplitterOffset);
             window.dispatchEvent(new Event("resize"));
         }
     }

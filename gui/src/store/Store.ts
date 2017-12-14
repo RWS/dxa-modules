@@ -76,7 +76,7 @@ const EMPTY_STATE: IState = {
     releaseVersions: {
         byProductFamily: {}
     },
-    splitterPosition: 0,
+    splitterPosition: 300,
     productFamilies: []
 };
 

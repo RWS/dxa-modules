@@ -2,9 +2,11 @@ import { connect } from "react-redux";
 import { IState } from "store/interfaces/State";
 import { splitterPositionChange } from "store/actions/Actions";
 import { SplitterPresentation } from "@sdl/dd/Splitter/SplitterPresentation";
+import { localization } from "services/common/LocalizationService";
 
 const mapStateToProps = (state: IState) => ({
-        splitterPosition: state.splitterPosition
+        splitterPosition: state.splitterPosition,
+        isLtr: localization.getDirection(state.language) !== "rtl"
 });
 
 const dispatchToProps = {

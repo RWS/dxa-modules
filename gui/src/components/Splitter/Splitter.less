@@ -2,13 +2,11 @@
 
 .sdl-dita-delivery-splitter {
     height: 100%;
+    cursor: col-resize;
     &:after {
         content: "";
-        cursor: col-resize;
         .background-splitter();
-        width: 5px;
         height: 100%;
-        position: absolute;
-        right: 0;
+        width: 5px;
     }
 }

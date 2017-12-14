@@ -1,10 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as TestUtils from "react-addons-test-utils";
-import {
-    SplitterPresentation,
-    ISplitterProps
-} from "@sdl/dd/Splitter/SplitterPresentation";
+import { SplitterPresentation, ISplitterProps } from "@sdl/dd/Splitter/SplitterPresentation";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 import { TestBase } from "@sdl/models";
 
@@ -13,7 +10,8 @@ class SplitterComponent extends TestBase {
         describe(`Splitter component tests.`, (): void => {
             const target = super.createTargetElement();
             const defaultProps: ISplitterProps = {
-                splitterPosition: 100
+                splitterPosition: 100,
+                isLtr: true
             };
 
             afterEach(() => {
@@ -84,10 +82,7 @@ class SplitterComponent extends TestBase {
         });
     }
 
-    private _renderComponent(
-        props: ISplitterProps,
-        target: HTMLElement
-    ): ComponentWithContext {
+    private _renderComponent(props: ISplitterProps, target: HTMLElement): ComponentWithContext {
         return ReactDOM.render(
             <ComponentWithContext>
                 <SplitterPresentation {...props} />
