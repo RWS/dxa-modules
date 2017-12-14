@@ -9,7 +9,7 @@ import { Toc } from "@sdl/dd/presentation/Toc";
 import { Page } from "@sdl/dd/Page/Page";
 import { Breadcrumbs, IBreadcrumbItem } from "@sdl/dd/presentation/Breadcrumbs";
 import { ContentLanguageWarning } from "@sdl/dd/ContentLanguageWarning/ContentLanguageWarning";
-//import { Splitter } from "@sdl/dd/Splitter/Splitter";
+import { Splitter } from "@sdl/dd/Splitter/Splitter";
 
 import { VersionSelector } from "@sdl/dd/presentation/VersionSelector";
 import { Html, IHeader } from "utils/Html";
@@ -300,10 +300,10 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                         }}
                         onSelectionChanged={this._onTocSelectionChanged.bind(this)}
                         error={tocError}
-                        onRetry={() => this._loadTocRootItems(publicationId)}>
-                        {/*  <Splitter /> */}
-                    </Toc>
+                        onRetry={() => this._loadTocRootItems(publicationId)}
+                    />
                 </NavigationMenu>
+                <Splitter />
                 <Page
                     isLoading={isPageLoading}
                     content={page.content}
@@ -518,21 +518,24 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         /* istanbul ignore if */
         if (!this._isUnmounted) {
             let tmpState = {};
-            if (contentNavigation && page) {
+            if (page) {
                 // Update active title inside content navigation panel
                 const pageContent = page.querySelector(".page-content") as HTMLElement;
                 if (pageContent) {
-                    const activePageHeader = Html.getActiveHeader(document.body, pageContent, 0);
-                    if (activePageHeader && activePageHeader !== this.state.activePageHeader) {
-                        Object.assign(tmpState, { activePageHeader });
+                    if (contentNavigation) {
+                        const activePageHeader = Html.getActiveHeader(document.body, pageContent, 0);
+                        if (activePageHeader && activePageHeader !== this.state.activePageHeader) {
+                            Object.assign(tmpState, { activePageHeader });
+                        }
                     }
                 }
 
-                const tocMargin = parseInt(getComputedStyle(toc).marginRight || "", 10);
                 const tocParent = toc.parentNode as HTMLElement;
                 if (tocParent) {
                     const { splitterPosition } = this.props;
-                    tocParent.style.width = splitterPosition ? splitterPosition - tocMargin + "px" : null;
+                    tocParent.style.flexBasis = splitterPosition + "px";
+                    // 30px is the margins. It is easier to hardcode this values than for the browser to recalculate it all the time.
+                    toc.style.width = (tocParent.getBoundingClientRect().width - 30) + "px";
                 }
             }
 
@@ -579,8 +582,9 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
     }
 
     private _navigateToOtherReleaseVersion(publicationId: string, releaseVersion: string): void {
-        if (this.props.onReleaseVersionChanged) {
-            this.props.onReleaseVersionChanged(publicationId, releaseVersion);
+        const { onReleaseVersionChanged } = this.props;
+        if (onReleaseVersionChanged) {
+            onReleaseVersionChanged(publicationId, releaseVersion);
         }
     }
 }
