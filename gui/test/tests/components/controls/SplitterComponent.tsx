@@ -63,22 +63,6 @@ class SplitterComponent extends TestBase {
                 TestUtils.Simulate.mouseMove(splitterNode);
                 TestUtils.Simulate.mouseUp(splitterNode);
             });
-
-            it("changes position on resize", (done: () => void): void => {
-                const splitter = this._renderComponent(
-                    {
-                        ...defaultProps,
-                        splitterPositionChange: (position: number) => {
-                            expect(position).toBe(0);
-                            done();
-                        }
-                    },
-                    target
-                );
-                const splitterNode = ReactDOM.findDOMNode(splitter) as HTMLElement;
-                splitterNode.style.display = "none";
-                window.dispatchEvent(new Event("resize"));
-            });
         });
     }
 

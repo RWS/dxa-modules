@@ -38,7 +38,7 @@ class NavigationMenuComponent extends TestBase {
                 }, target);
                 const element = document.querySelector(".sdl-dita-delivery-navigation-menu") as HTMLElement;
                 expect(element.classList).not.toContain("open");
-                expect(getComputedStyle(element).left).toBe("-500px");
+                expect(getComputedStyle(element).left).toBe("-300px");
                 this._renderComponent({
                     isOpen: true
                 }, target);
