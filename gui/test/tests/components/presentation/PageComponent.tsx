@@ -299,7 +299,7 @@ class PageComponent extends TestBase {
                 const contentNavigationNode = domNode.querySelector(
                     ".sdl-dita-delivery-content-navigation"
                 ) as HTMLElement;
-                expect(contentNavigationNode.childNodes.length).toBe(0);
+                expect(contentNavigationNode).toBeNull();
             });
         });
 

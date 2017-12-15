@@ -14,8 +14,8 @@ class SplitterPositionReducer extends TestBase {
                 store = configureStore();
             });
 
-            it("Should no have default position set", (): void => {
-                expect(store.getState().splitterPosition).toBe(0);
+            it("Should have default position set", (): void => {
+                expect(store.getState().splitterPosition).not.toBe(0);
             });
 
             it("splitterPositionChange event should change splitter position", (): void => {
