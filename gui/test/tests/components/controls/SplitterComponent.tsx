@@ -14,6 +14,29 @@ class SplitterComponent extends TestBase {
                 isLtr: true
             };
 
+            // Workaround for Mouse event in PhantomJS
+            const _createMouseEvent = (eventName: string, clientX: number = 0): MouseEvent => {
+                const mouseEvent = document.createEvent("MouseEvent");
+                mouseEvent.initMouseEvent(
+                    eventName, //type
+                    true, //canBubble
+                    false, //cancelable
+                    window, //view
+                    1, //detail
+                    42, //screenX
+                    42, //screenY
+                    clientX, //clientX
+                    42, //clientY
+                    false, //ctrlKey
+                    false, //altKey
+                    false, //shiftKey
+                    false, //metaKey
+                    0, //button
+                    null //relatedTarget
+                );
+                return mouseEvent;
+            };
+
             afterEach(() => {
                 const domNode = ReactDOM.findDOMNode(target);
                 ReactDOM.unmountComponentAtNode(domNode);
@@ -32,6 +55,7 @@ class SplitterComponent extends TestBase {
                 expect(splitterNode).toBeDefined();
             });
 
+            // Touch Eventd are not supported by PhantomJS
             xit("changes position on touch events dragging", (done: () => void): void => {
                 const splitter = this._renderComponent(
                     {
@@ -48,7 +72,7 @@ class SplitterComponent extends TestBase {
                 TestUtils.Simulate.touchEnd(splitterNode);
             });
 
-            xit("changes position on mouse events dragging", (done: () => void): void => {
+            it("changes position on mouse events dragging", (done: () => void): void => {
                 const splitter = this._renderComponent(
                     {
                         ...defaultProps,
@@ -58,10 +82,10 @@ class SplitterComponent extends TestBase {
                     },
                     target
                 );
-                const splitterNode = ReactDOM.findDOMNode(splitter);
-                TestUtils.Simulate.mouseDown(splitterNode);
-                TestUtils.Simulate.mouseMove(splitterNode);
-                TestUtils.Simulate.mouseUp(splitterNode);
+                const node = ReactDOM.findDOMNode(splitter).querySelector(".sdl-dita-delivery-splitter") as HTMLElement;
+                node.dispatchEvent(_createMouseEvent("mousedown"));
+                window.dispatchEvent(_createMouseEvent("mousemove", 42));
+                window.dispatchEvent(_createMouseEvent("mouseup"));
             });
         });
     }
