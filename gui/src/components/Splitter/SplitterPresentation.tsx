@@ -187,7 +187,8 @@ export class SplitterPresentation extends React.Component<ISplitterProps, ISplit
     }
 
     private _windowResize(): void {
-        if (!this._isUnmounted) {
+        const { isDragging } = this.state;
+        if (!this._isUnmounted && isDragging) {
             const handle = this._splitterElement;
             if (handle && handle.offsetParent === null) {
                 this.setState({
