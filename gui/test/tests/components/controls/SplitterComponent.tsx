@@ -55,7 +55,7 @@ class SplitterComponent extends TestBase {
                 expect(splitterNode).toBeDefined();
             });
 
-            // Touch Eventd are not supported by PhantomJS
+            // Touch Events are not supported by PhantomJS
             xit("changes position on touch events dragging", (done: () => void): void => {
                 const splitter = this._renderComponent(
                     {
