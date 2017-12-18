@@ -123,8 +123,6 @@ export class SplitterPresentation extends React.Component<ISplitterProps, ISplit
 
         window.removeEventListener("mouseup", this._dragEnd);
         window.removeEventListener("touchend", this._dragEnd);
-
-        window.removeEventListener("resize", this._windowResize);
     }
 
     public componentDidUpdate(): void {
@@ -184,18 +182,6 @@ export class SplitterPresentation extends React.Component<ISplitterProps, ISplit
         this.setState({
             splitterOffset
         });
-    }
-
-    private _windowResize(): void {
-        const { isDragging } = this.state;
-        if (!this._isUnmounted && isDragging) {
-            const handle = this._splitterElement;
-            if (handle && handle.offsetParent === null) {
-                this.setState({
-                    isDragging: false
-                });
-            }
-        }
     }
 
     private _onSplitterPositionChanged(newSplitterOffset: number): void {
