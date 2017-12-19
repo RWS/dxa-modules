@@ -7,6 +7,73 @@ const VERSION_REGEX = /^(.*)\((\d+(\.\d+)*)\)$/i;
 export default class Version {
 
     /**
+     * Sort product family versions. The more version, the higher in list. Products without number in its family are left unsorted.
+     *
+     * Logic to sort product family versions
+     * 1. If the product family contains a version number between brackets at the end use this eg SDL Knowledge Center 2013 (11.0.4) => use 11.0.4 as version
+     * 2. If there is no version info in the product release version sort based on publication version (eg if SDL Web 8 is used on version 3 and SDL Tridion 2013 on version 2
+     * we know that SDL Web 8 is last)
+     * 3. If a version is used on many publications and order could not be defined they as they are
+     * @static
+     * @param {string | null} productFamily Product family
+     * @param {IPublication[]} publications The list of publications
+     * @returns {string | null} A sorted list of product families
+     *
+     * @memberOf Version
+     */
+    public static sortProductFamilyVersions(publications: IPublication[]): (string | null)[] {
+        const sortByMostVersions = (a: IPublication, b: IPublication): number => {
+            if (a.productFamily === b.productFamily) {
+                // In this case the family with the most versions / release combinations is considered to the ordered higher
+                const productAFamilyVersions = this._distinct(publications.filter(pub => pub.id === a.id).map(pub => pub.productFamily || null));
+                const productBFamilyVersions = this._distinct(publications.filter(pub => pub.id === b.id).map(pub => pub.productFamily || null));
+                if (productAFamilyVersions.length !== productBFamilyVersions.length) {
+                    return productAFamilyVersions.length > productBFamilyVersions.length ? -1 : 1;
+                }
+            }
+            return 0;
+        };
+
+        const sort = (a: IPublication, b: IPublication) => {
+            const versionInTitleA = a.productFamily && a.productFamily.match(VERSION_REGEX);
+            const versionInTitleB = b.productFamily && b.productFamily.match(VERSION_REGEX);
+
+            if (versionInTitleA && versionInTitleB) {
+                return this.compareVersion(versionInTitleA[2], versionInTitleB[2]) ? -1 : 1;
+            } else if (versionInTitleA) {
+                return 1;
+            } else if (versionInTitleB) {
+                return -1;
+            }
+            return 0;
+        };
+
+        // First remove the duplicates, the one with the most versions is kept
+        const foundProductFamilyVersions: (string | null)[] = [];
+        const pubsWithDistinctFamilyVersions = publications.sort(sortByMostVersions).filter(pub => {
+            if (foundProductFamilyVersions.indexOf(pub.productFamily || null) === -1) {
+                foundProductFamilyVersions.push(pub.productFamily || null);
+                return true;
+            }
+            return false;
+        });
+
+        const orderedPubs = pubsWithDistinctFamilyVersions.sort(sort);
+
+        // Convert to a product family version (remove version from end if it's in the correct format)
+        const familyVersions = orderedPubs.map(pub => {
+            const familyVersion = pub.productFamily || null;
+            const familyVersionMatch = familyVersion && familyVersion.match(VERSION_REGEX);
+            if (familyVersionMatch) {
+                return familyVersionMatch[1];
+            }
+            return familyVersion;
+        });
+        // Take distinct product families
+        return this._distinct(familyVersions);
+    }
+
+    /**
      * Sort product release versions. Most recent first, oldest last.
      *
      * Logic to sort product release versions
