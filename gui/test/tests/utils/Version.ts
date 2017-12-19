@@ -192,7 +192,6 @@ describe(`Version tests.`, (): void => {
                 title: "family no release version"
             }
         ];
-
         expect(Version.sortProductReleaseVersionsByProductFamily("PF1", publications))
             .toEqual(["PR v2", "PR v1.11.124", "PR v1.6.18", "PR v1.2.0", "PR v1.0.2", "PR v1", "PR vx"]);
         expect(Version.sortProductReleaseVersionsByProductFamily("PF2", publications)).toEqual(["PR2.1"]);
@@ -209,6 +208,63 @@ describe(`Version tests.`, (): void => {
             "PR v2", "PR v1.11.124", "PR v1.6.18", "PR v1.2.0", "PR v1.0.2", "PR v1", "PR7.2", "PR7.1", "Web 8", "Tridion 2014", "Tridion 2013SP1",
             "Tridion 2013", "First", "PR vx", "PR2.1", "PR3.1", "PR4.1", "PR5.1", "Second", "PR7.3", "v1", "Tridion 98", null
         ]);
+    });
+
+    it("sorts product family version correctly", (): void => {
+        const defaultPub: IPublication = {
+            id: "1",
+            title: "Title1",
+            createdOn: new Date(),
+            version: "1",
+            logicalId: "GUID-123"
+        };
+        const publications: IPublication[] = [
+            /**
+             * With version number between braces at the end
+             */
+            {
+                ...defaultPub,
+                productFamily: "PF Second (2.0)",
+                productReleaseVersion: "PR v3(3)"
+            },
+            {
+                ...defaultPub,
+                productFamily: "PF First (1.0.0)",
+                productReleaseVersion: "PR v4.2(4)"
+            },
+            {
+                ...defaultPub,
+                productFamily: "PF Last (3.0)",
+                productReleaseVersion: "PR v2(2)"
+            },
+            {
+                ...defaultPub,
+                productFamily: "PF Other ()",
+                productReleaseVersion: "PR v5.2(5.2.0)"
+            },
+            {
+                ...defaultPub,
+                productFamily: "PF First (1.0)",
+                productReleaseVersion: "PR v4(4)"
+            },
+            {
+                ...defaultPub,
+                productFamily: "PF First (1)",
+                productReleaseVersion: "PR v4.1(4)"
+            },
+            {
+                ...defaultPub,
+                productFamily: "PF Last (3.0)",
+                productReleaseVersion: "PR v1(1)"
+            },
+            {
+                ...defaultPub,
+                productFamily: "PF Other ()",
+                productReleaseVersion: "PR v5.0(5.0.1)"
+            }
+        ];
+        expect(Version.sortProductFamilyVersions(publications))
+            .toEqual(["PF First ", "PF Second ", "PF Last ", "PF Other ()"]);
     });
 
     it("compares versions correctly", (): void => {

@@ -34,7 +34,7 @@ export default class Version {
             return 0;
         };
 
-        const sort = (a: IPublication, b: IPublication) => {
+        const sort = (a: IPublication, b: IPublication): number => {
             const versionInTitleA = a.productFamily && a.productFamily.match(VERSION_REGEX);
             const versionInTitleB = b.productFamily && b.productFamily.match(VERSION_REGEX);
 
@@ -68,7 +68,7 @@ export default class Version {
                 return familyVersionMatch[1];
             }
             return familyVersion;
-        });
+        }).reverse();
         // Take distinct product families
         return this._distinct(familyVersions);
     }
