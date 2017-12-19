@@ -33,12 +33,13 @@ import * as TocComp from "@sdl/dd/presentation/Toc";
 import * as TopBarComp from "@sdl/dd/presentation/TopBar";
 import * as VersionSelectorComp from "@sdl/dd/presentation/VersionSelector";
 import * as SearchResultsComp from "@sdl/dd/SearchResults/SearchResults";
+import * as SplitterComp from "@sdl/dd/Splitter/SplitterPresentation";
 
 export const Components = {
     AppComp, BreadcrumbsComp, CommentComp, CommentsListComp, CommentsSectionComp,
     ContentLanguageWarningComp, ContentNavigationComp, DatePickerComp, DropdownComp,
     ErrorComp, ErrorContentComp, ErrorTocComp, HomeComp, NavigationMenuComp,
-    PageComp, PageLinkComp, PostCommentComp, ProductFamiliesListComp,
+    PageComp, PageLinkComp, PostCommentComp, ProductFamiliesListComp, SplitterComp,
     PublicationContentComp, PublicationsListComp, SearchBarComp, TileComp,
     TilesListComp, TocComp, TopBarComp, VersionSelectorComp, SearchResultsComp
 };
