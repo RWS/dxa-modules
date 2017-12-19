@@ -58,7 +58,6 @@
             flex: 0 0 @contentNavWidth;
 
             .sdl-dita-delivery-content-navigation {
-                // width: @contentNavWidth;
                 overflow: auto;
             }
         }
@@ -94,8 +93,16 @@
 @media screen and (min-width: (1+@screenLg)) {
     .sdl-dita-delivery-publication-content {
         .sdl-dita-delivery-page {
+            flex-wrap: nowrap;
+            .sdl-dita-delivery-page-content {
+                max-width: ~"calc(100% - @{contentNavWidth})";
+            }
+
             .sdl-dita-delivery-content-navigation-wrapper {
                 height: 100%;
+                .sdl-dita-delivery-content-navigation {
+                    width: @contentNavWidth;
+                }
             }
         }
     }
@@ -145,10 +152,10 @@
         .sdl-dita-delivery-navigation-menu {
             position: fixed;
             top: 0;
-            left: @tocWidth * -1;
+            left: (@tocWidth + (@tocWidth / 2)) * -1;
             .sdl-dita-delivery-app.rtl & {
                 left: auto;
-                right: @tocWidth * -1;
+                right: (@tocWidth + (@tocWidth / 2)) * -1;
             }
             &.open {
                 left: 0;
