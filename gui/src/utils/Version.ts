@@ -25,7 +25,6 @@ export default class Version {
         const sort = (a: IPublication, b: IPublication): number => {
             const versionInTitleA = a.productFamily && a.productFamily.match(VERSION_REGEX);
             const versionInTitleB = b.productFamily && b.productFamily.match(VERSION_REGEX);
-
             if (versionInTitleA && versionInTitleB) {
                 return this.compareVersion(versionInTitleA[2], versionInTitleB[2]) ? 1 : -1;
             } else if (versionInTitleA) {
