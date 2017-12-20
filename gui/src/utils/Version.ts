@@ -5,7 +5,6 @@ import { String } from "utils/String";
 const VERSION_REGEX = /^(.*)\((\d+(\.\d+)*)\)$/i;
 
 export default class Version {
-
     /**
      * Sort product family versions. The more version, the higher in list. Products without number in its family are left unsorted.
      *
@@ -23,24 +22,35 @@ export default class Version {
      */
     public static sortProductFamilyVersions(publications: IPublication[]): (string | null)[] {
         const sort = (a: IPublication, b: IPublication): number => {
-            const versionInFamilyA = a.productFamily && a.productFamily.match(VERSION_REGEX);
-            const versionInFamilyB = b.productFamily && b.productFamily.match(VERSION_REGEX);
-            if (versionInFamilyA && versionInFamilyB) {
-                return this.compareVersion(versionInFamilyA[2], versionInFamilyB[2]) ? 1 : -1;
-            }
-            if (versionInFamilyA) {
+            if (a.productFamily && b.productFamily) {
+                const versionInFamilyA = a.productFamily && a.productFamily.match(VERSION_REGEX);
+                const versionInFamilyB = b.productFamily && b.productFamily.match(VERSION_REGEX);
+                if (versionInFamilyA && versionInFamilyB) {
+                    return this.compareVersion(versionInFamilyA[2], versionInFamilyB[2]) ? 1 : -1;
+                } else if (versionInFamilyA) {
+                    return -1;
+                } else if (versionInFamilyB) {
+                    return 1;
+                }
+                return a.productFamily.toLowerCase().localeCompare(b.productFamily.toLowerCase());
+            } else if (!a.productFamily && !b.productFamily) {
+                return 0;
+            } else if (a.productFamily) {
                 return -1;
-            }
-            if (versionInFamilyB) {
+            } else if (b.productFamily) {
                 return 1;
             }
-            return (a.productFamily || "").toLowerCase().localeCompare((b.productFamily || "").toLowerCase());
+            return 0;
         };
         const sortByMostVersions = (a: IPublication, b: IPublication): number => {
             if (a.productFamily === b.productFamily) {
                 // In this case the family with the most versions / release combinations is considered to the ordered higher
-                const productAFamilyVersions = this._distinct(publications.filter(pub => pub.id === a.id).map(pub => pub.productFamily || ""));
-                const productBFamilyVersions = this._distinct(publications.filter(pub => pub.id === b.id).map(pub => pub.productFamily || ""));
+                const productAFamilyVersions = this._distinct(
+                    publications.filter(pub => pub.id === a.id).map(pub => pub.productFamily || "")
+                );
+                const productBFamilyVersions = this._distinct(
+                    publications.filter(pub => pub.id === b.id).map(pub => pub.productFamily || "")
+                );
                 if (productAFamilyVersions.length !== productBFamilyVersions.length) {
                     return productAFamilyVersions.length > productBFamilyVersions.length ? -1 : 1;
                 }
@@ -113,8 +123,12 @@ export default class Version {
         const sortByMostVersions = (a: IPublication, b: IPublication): number => {
             if (a.productReleaseVersion === b.productReleaseVersion) {
                 // In this case the publication with the most versions / release combinations is considered to the ordered higher
-                const publicationsAReleaseVersions = this._distinct(publications.filter(pub => pub.id === a.id).map(pub => pub.productReleaseVersion || null));
-                const publicationsBReleaseVersions = this._distinct(publications.filter(pub => pub.id === b.id).map(pub => pub.productReleaseVersion || null));
+                const publicationsAReleaseVersions = this._distinct(
+                    publications.filter(pub => pub.id === a.id).map(pub => pub.productReleaseVersion || null)
+                );
+                const publicationsBReleaseVersions = this._distinct(
+                    publications.filter(pub => pub.id === b.id).map(pub => pub.productReleaseVersion || null)
+                );
                 if (publicationsAReleaseVersions.length !== publicationsBReleaseVersions.length) {
                     return publicationsAReleaseVersions.length > publicationsBReleaseVersions.length ? -1 : 1;
                 }
@@ -143,7 +157,7 @@ export default class Version {
             }
 
             const sameVersion = a.version === b.version;
-            const sameCreatedOnDate = (a.createdOn.getTime() === b.createdOn.getTime());
+            const sameCreatedOnDate = a.createdOn.getTime() === b.createdOn.getTime();
             if (a.id === b.id && !sameVersion) {
                 return this.compareVersion(a.version, b.version) ? -1 : 1;
             } else if (!sameCreatedOnDate) {
@@ -188,7 +202,10 @@ export default class Version {
      *
      * @memberOf Version
      */
-    public static sortProductReleaseVersionsByProductFamily(productFamily: string | null, publications: IPublication[]): (string | null)[] {
+    public static sortProductReleaseVersionsByProductFamily(
+        productFamily: string | null,
+        publications: IPublication[]
+    ): (string | null)[] {
         const pubsForFamily = publications.filter(p => p.productFamily === productFamily);
         return this.sortProductReleaseVersions(pubsForFamily);
     }
@@ -211,11 +228,9 @@ export default class Version {
 
             if (Number(v1parts[i]) === Number(v2parts[i])) {
                 continue;
-            }
-            else if (Number(v1parts[i]) > Number(v2parts[i])) {
+            } else if (Number(v1parts[i]) > Number(v2parts[i])) {
                 return true;
-            }
-            else {
+            } else {
                 return false;
             }
         }
