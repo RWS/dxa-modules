@@ -22,6 +22,19 @@ export default class Version {
      * @memberOf Version
      */
     public static sortProductFamilyVersions(publications: IPublication[]): (string | null)[] {
+        const sort = (a: IPublication, b: IPublication): number => {
+            const versionInTitleA = a.productFamily && a.productFamily.match(VERSION_REGEX);
+            const versionInTitleB = b.productFamily && b.productFamily.match(VERSION_REGEX);
+
+            if (versionInTitleA && versionInTitleB) {
+                return this.compareVersion(versionInTitleA[2], versionInTitleB[2]) ? 1 : -1;
+            } else if (versionInTitleA) {
+                return -1;
+            } else if (versionInTitleB) {
+                return 1;
+            }
+            return (a.productFamily || "").toLowerCase().localeCompare((b.productFamily || "").toLowerCase());
+        };
         const sortByMostVersions = (a: IPublication, b: IPublication): number => {
             if (a.productFamily === b.productFamily) {
                 // In this case the family with the most versions / release combinations is considered to the ordered higher
@@ -31,23 +44,8 @@ export default class Version {
                     return productAFamilyVersions.length > productBFamilyVersions.length ? -1 : 1;
                 }
             }
-            return 0;
+            return sort(a, b);
         };
-
-        const sort = (a: IPublication, b: IPublication): number => {
-            const versionInTitleA = a.productFamily && a.productFamily.match(VERSION_REGEX);
-            const versionInTitleB = b.productFamily && b.productFamily.match(VERSION_REGEX);
-
-            if (versionInTitleA && versionInTitleB) {
-                return this.compareVersion(versionInTitleA[2], versionInTitleB[2]) ? -1 : 1;
-            } else if (versionInTitleA) {
-                return 1;
-            } else if (versionInTitleB) {
-                return -1;
-            }
-            return 0;
-        };
-
         // First remove the duplicates, the one with the most versions is kept
         const foundProductFamilyVersions: (string | null)[] = [];
         const pubsWithDistinctFamilyVersions = publications.sort(sortByMostVersions).filter(pub => {
@@ -68,7 +66,7 @@ export default class Version {
                 return familyVersionMatch[1];
             }
             return familyVersion;
-        }).reverse();
+        });
         // Take distinct product families
         return this._distinct(familyVersions);
     }

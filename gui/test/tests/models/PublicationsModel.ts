@@ -88,9 +88,9 @@ class PublicationsModel extends TestBase {
                 expect(families).toBeDefined();
                 if (families) {
                     expect(families.length).toBe(3);
-                    expect(families[0].title).toBe("Family 1");
-                    expect(families[1].title).toBe("Family 2");
-                    expect(families[2].title).toBe(DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE);
+                    expect(families[0].title).toBe(DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE);
+                    expect(families[1].title).toBe("Family 1");
+                    expect(families[2].title).toBe("Family 2");
                 }
             });
 
@@ -158,13 +158,13 @@ class PublicationsModel extends TestBase {
                 expect(families).toBeDefined();
                 if (families) {
                     expect(families.length).toBe(7);
-                    expect(families[0].title).toBe("Blackberry");
-                    expect(families[1].title).toBe("blueberry");
-                    expect(families[2].title).toBe("elderberry");
-                    expect(families[3].title).toBe("Mulberry");
-                    expect(families[4].title).toBe("Strawberry");
-                    expect(families[5].title).toBe("Watermelonberry");
-                    expect(families[6].title).toBe(DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE);
+                    expect(families[0].title).toBe(DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE);
+                    expect(families[1].title).toBe("Blackberry");
+                    expect(families[2].title).toBe("blueberry");
+                    expect(families[3].title).toBe("elderberry");
+                    expect(families[4].title).toBe("Mulberry");
+                    expect(families[5].title).toBe("Strawberry");
+                    expect(families[6].title).toBe("Watermelonberry");
                 }
             });
 
