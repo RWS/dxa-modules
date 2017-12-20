@@ -259,6 +259,11 @@ describe(`Version tests.`, (): void => {
             },
             {
                 ...defaultPub,
+                productFamily: "",
+                productReleaseVersion: "PR v6.0(6.1.1)"
+            },
+            {
+                ...defaultPub,
                 productFamily: "PF Other ()",
                 productReleaseVersion: "PR v5.0(5.0.1)"
             },
@@ -274,7 +279,7 @@ describe(`Version tests.`, (): void => {
             }
         ];
         expect(Version.sortProductFamilyVersions(publications))
-            .toEqual(["PF First ", "PF Second ", "PF Last ", "PF First (1.2.)", "PF Other ()"]);
+            .toEqual(["PF First ", "PF Second ", "PF Last ", "PF First (1.2.)", "PF Other ()", null]);
     });
 
     it("compares versions correctly", (): void => {

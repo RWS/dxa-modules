@@ -22,25 +22,25 @@ export default class Version {
      */
     public static sortProductFamilyVersions(publications: IPublication[]): (string | null)[] {
         const sort = (a: IPublication, b: IPublication): number => {
+            if (!a.productFamily && !b.productFamily) {
+                return 0;
+            }
             if (a.productFamily && b.productFamily) {
-                const versionInFamilyA = a.productFamily && a.productFamily.match(VERSION_REGEX);
-                const versionInFamilyB = b.productFamily && b.productFamily.match(VERSION_REGEX);
+                const versionInFamilyA = a.productFamily.match(VERSION_REGEX);
+                const versionInFamilyB = b.productFamily.match(VERSION_REGEX);
+                if (!versionInFamilyA && !versionInFamilyB) {
+                    return a.productFamily.toLowerCase().localeCompare(b.productFamily.toLowerCase());
+                }
                 if (versionInFamilyA && versionInFamilyB) {
                     return this.compareVersion(versionInFamilyA[2], versionInFamilyB[2]) ? 1 : -1;
-                } else if (versionInFamilyA) {
-                    return -1;
-                } else if (versionInFamilyB) {
-                    return 1;
                 }
-                return a.productFamily.toLowerCase().localeCompare(b.productFamily.toLowerCase());
-            } else if (!a.productFamily && !b.productFamily) {
-                return 0;
+                if (versionInFamilyA) {
+                    return -1;
+                }
             } else if (a.productFamily) {
                 return -1;
-            } else if (b.productFamily) {
-                return 1;
             }
-            return 0;
+            return 1;
         };
         const sortByMostVersions = (a: IPublication, b: IPublication): number => {
             if (a.productFamily === b.productFamily) {
