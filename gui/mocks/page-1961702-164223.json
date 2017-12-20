@@ -1,6 +1,7 @@
 {
   "Id": "164223",
   "Meta": {
+    "ishlogicalref.object.id": 164219,
     "conditionsused.generated.value": "{\"MODEL\":[\"330\"],\"BLUETOOTH\":[\"Y\"]}",
     "tocnaventries.generated.value": "ish:1961702-2-1024"
   },
