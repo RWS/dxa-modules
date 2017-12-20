@@ -23,13 +23,15 @@ export default class Version {
      */
     public static sortProductFamilyVersions(publications: IPublication[]): (string | null)[] {
         const sort = (a: IPublication, b: IPublication): number => {
-            const versionInTitleA = a.productFamily && a.productFamily.match(VERSION_REGEX);
-            const versionInTitleB = b.productFamily && b.productFamily.match(VERSION_REGEX);
-            if (versionInTitleA && versionInTitleB) {
-                return this.compareVersion(versionInTitleA[2], versionInTitleB[2]) ? 1 : -1;
-            } else if (versionInTitleA) {
+            const versionInFamilyA = a.productFamily && a.productFamily.match(VERSION_REGEX);
+            const versionInFamilyB = b.productFamily && b.productFamily.match(VERSION_REGEX);
+            if (versionInFamilyA && versionInFamilyB) {
+                return this.compareVersion(versionInFamilyA[2], versionInFamilyB[2]) ? 1 : -1;
+            }
+            if (versionInFamilyA) {
                 return -1;
-            } else if (versionInTitleB) {
+            }
+            if (versionInFamilyB) {
                 return 1;
             }
             return (a.productFamily || "").toLowerCase().localeCompare((b.productFamily || "").toLowerCase());
@@ -37,8 +39,8 @@ export default class Version {
         const sortByMostVersions = (a: IPublication, b: IPublication): number => {
             if (a.productFamily === b.productFamily) {
                 // In this case the family with the most versions / release combinations is considered to the ordered higher
-                const productAFamilyVersions = this._distinct(publications.filter(pub => pub.id === a.id).map(pub => pub.productFamily || null));
-                const productBFamilyVersions = this._distinct(publications.filter(pub => pub.id === b.id).map(pub => pub.productFamily || null));
+                const productAFamilyVersions = this._distinct(publications.filter(pub => pub.id === a.id).map(pub => pub.productFamily || ""));
+                const productBFamilyVersions = this._distinct(publications.filter(pub => pub.id === b.id).map(pub => pub.productFamily || ""));
                 if (productAFamilyVersions.length !== productBFamilyVersions.length) {
                     return productAFamilyVersions.length > productBFamilyVersions.length ? -1 : 1;
                 }
@@ -48,17 +50,14 @@ export default class Version {
         // First remove the duplicates, the one with the most versions is kept
         const foundProductFamilyVersions: (string | null)[] = [];
         const pubsWithDistinctFamilyVersions = publications.sort(sortByMostVersions).filter(pub => {
-            if (foundProductFamilyVersions.indexOf(pub.productFamily || null) === -1) {
-                foundProductFamilyVersions.push(pub.productFamily || null);
+            if (foundProductFamilyVersions.indexOf(pub.productFamily || "") === -1) {
+                foundProductFamilyVersions.push(pub.productFamily || "");
                 return true;
             }
             return false;
         });
-
-        const orderedPubs = pubsWithDistinctFamilyVersions.sort(sort);
-
         // Convert to a product family version (remove version from end if it's in the correct format)
-        const familyVersions = orderedPubs.map(pub => {
+        const familyVersions = pubsWithDistinctFamilyVersions.map(pub => {
             const familyVersion = pub.productFamily || null;
             const familyVersionMatch = familyVersion && familyVersion.match(VERSION_REGEX);
             if (familyVersionMatch) {
