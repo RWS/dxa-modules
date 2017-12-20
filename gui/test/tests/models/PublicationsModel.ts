@@ -49,6 +49,7 @@ const MOCK_DATA: IPublication[] = [
     {
         Id: "Pub4",
         Title: "Pub4",
+        ProductFamily: null,
         CreatedOn: "",
         Version: "1",
         LogicalId: "GUID-123",
@@ -87,9 +88,9 @@ class PublicationsModel extends TestBase {
                 expect(families).toBeDefined();
                 if (families) {
                     expect(families.length).toBe(3);
-                    expect(families[0].title).toBe(DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE);
-                    expect(families[1].title).toBe("Family 1");
-                    expect(families[2].title).toBe("Family 2");
+                    expect(families[0].title).toBe("Family 1");
+                    expect(families[1].title).toBe("Family 2");
+                    expect(families[2].title).toBe(DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE);
                 }
             });
 
@@ -140,14 +141,13 @@ class PublicationsModel extends TestBase {
                     }, {
                         id: "7",
                         title: "Salat item 7",
-                        productFamily: "Mulberry",
                         createdOn: new Date(),
                         version: "1",
                         logicalId: "GUID-123"
                     }, {
                         id: "8",
                         title: "Salat item 8",
-                        productFamily: "Mulberry",
+                        productFamily: null,
                         createdOn: new Date(),
                         version: "1",
                         logicalId: "GUID-123"
@@ -157,13 +157,14 @@ class PublicationsModel extends TestBase {
                 const families = publicationModel.getProductFamilies();
                 expect(families).toBeDefined();
                 if (families) {
-                    expect(families.length).toBe(6);
+                    expect(families.length).toBe(7);
                     expect(families[0].title).toBe("Blackberry");
                     expect(families[1].title).toBe("blueberry");
                     expect(families[2].title).toBe("elderberry");
                     expect(families[3].title).toBe("Mulberry");
                     expect(families[4].title).toBe("Strawberry");
                     expect(families[5].title).toBe("Watermelonberry");
+                    expect(families[6].title).toBe(DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE);
                 }
             });
 
