@@ -188,7 +188,14 @@ export class SplitterPresentation extends React.Component<ISplitterProps, ISplit
         const { splitterPositionChange, splitterPosition } = this.props;
         if (typeof splitterPositionChange === "function" && newSplitterOffset !== splitterPosition) {
             splitterPositionChange(newSplitterOffset);
-            window.dispatchEvent(new Event("resize"));
+            let resizeEvent;
+            if (typeof Event === "function") {
+                resizeEvent = new Event("resize");
+            } else {
+                resizeEvent = document.createEvent("Event");
+                resizeEvent.initEvent("resize", true, true);
+            }
+            window.dispatchEvent(resizeEvent);
         }
     }
 }
