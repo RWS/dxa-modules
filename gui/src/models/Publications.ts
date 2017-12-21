@@ -98,19 +98,11 @@ export class Publications extends LoadableObject {
         if (!this._productFamilies) {
             const publications = this.getPublications();
             if (publications) {
-                let distinctFamilies: (string | undefined)[] = publications.map((publication: IPublication) => {
-                    return publication.productFamily || undefined;
-                }).filter((family: string, i: number, arr: string[]) => {
-                    return arr.indexOf(family) == i;
-                });
+                // Implementing sort
+                let distinctFamilies = Version.sortProductFamilyVersions(publications);
 
-                // Implementing case in-sensetive sort
-                distinctFamilies.sort((left: string | undefined, right: string | undefined) => {
-                    return (left || "").toLowerCase().localeCompare((right || "").toLowerCase());
-                });
-
-                this._productFamilies = distinctFamilies.map((family: string | undefined): IProductFamily => {
-                    if (family === undefined) {
+                this._productFamilies = distinctFamilies.map((family: string | null): IProductFamily => {
+                    if (family === null) {
                         return {
                             title: this._unknownProductFamilyTitle,
                             description: this._unknownProductFamilyDescription,
