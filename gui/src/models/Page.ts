@@ -19,11 +19,13 @@ export const response2page = (serverPage: ServerModels.IPage): IPage => {
             }
         }
     }
+    const logicalId = serverPage.Meta["ishlogicalref.object.id"];
     const navEntries = serverPage.Meta["tocnaventries.generated.value"];
     return {
         id: serverPage.Id,
         title: pageTitle,
         content: pageBody,
+        logicalId,
         sitemapIds: typeof navEntries === "string" ? navEntries.split(", ") : navEntries
     } as IPage;
 };

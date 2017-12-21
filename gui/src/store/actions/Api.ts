@@ -274,7 +274,8 @@ export const saveReply = (pageService: IPageService, commentData: IPostComment):
  */
 export const setCurrentPublicationByReleaseVersion = (
     pubId: string,
-    productReleaseVersion: string
+    productReleaseVersion: string,
+    pageId?: string
 ): IDispatcherAndStateFunction => {
     return (dispatch, getState): void => {
         const state = getState();

@@ -93,7 +93,7 @@ export interface IPublicationContentProps {
      *
      * @memberOf IPublicationContentProps
      */
-    onReleaseVersionChanged?: (publicationId: string, releaseVersions: string) => void;
+    onReleaseVersionChanged?: (publicationId: string, releaseVersions: string, pageId: string) => void;
     /**
      *
      * @type {boolean}
@@ -378,7 +378,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                             <VersionSelector
                                 productReleaseVersions={productReleaseVersions}
                                 selectedProductReleaseVersion={selectedProductReleaseVersion}
-                                onChange={version => this._navigateToOtherReleaseVersion(publicationId, version)}
+                                onChange={version => this._navigateToOtherReleaseVersion(publicationId, version, pageId)}
                             />
                         )}
                 </Page>
@@ -581,10 +581,10 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         );
     }
 
-    private _navigateToOtherReleaseVersion(publicationId: string, releaseVersion: string): void {
+    private _navigateToOtherReleaseVersion(publicationId: string, releaseVersion: string, pageId: string): void {
         const { onReleaseVersionChanged } = this.props;
         if (onReleaseVersionChanged) {
-            onReleaseVersionChanged(publicationId, releaseVersion);
+            onReleaseVersionChanged(publicationId, releaseVersion, pageId);
         }
     }
 }

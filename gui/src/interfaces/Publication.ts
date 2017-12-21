@@ -66,5 +66,12 @@ export interface IPublication {
      * @memberOf IPublication
      */
     language?: string;
+
+    /**
+     * Logical ID
+     *
+     * @type {string}
+     * @memberOf IPublication
+     */
     logicalId: string;
 }
