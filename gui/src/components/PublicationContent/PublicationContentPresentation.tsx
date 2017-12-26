@@ -549,8 +549,12 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                 if (tocParent) {
                     const { splitterPosition } = this.props;
                     tocParent.style.flexBasis = splitterPosition + "px";
-                    // 30px is the margins. It is easier to hardcode this values than for the browser to recalculate it all the time.
-                    toc.style.width = tocParent.getBoundingClientRect().width - 30 + "px";
+                    if (toc.offsetParent != toc.parentNode) {
+                        // 30px is the margins. It is easier to hardcode this values than for the browser to recalculate it all the time.
+                        toc.setAttribute("style", `width: ${tocParent.getBoundingClientRect().width - 30}px`);
+                    } else {
+                        toc.removeAttribute("style");
+                    }
                 }
             }
 
