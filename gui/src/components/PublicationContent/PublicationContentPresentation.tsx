@@ -23,6 +23,7 @@ import { TaxonomyItemId } from "interfaces/TcmId";
 import { IPublication } from "interfaces/Publication";
 import { IPublicationCurrentState } from "store/interfaces/State";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
+import { IPageService } from "services/interfaces/PageService";
 
 import { DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE } from "models/Publications";
 
@@ -93,7 +94,18 @@ export interface IPublicationContentProps {
      *
      * @memberOf IPublicationContentProps
      */
-    onReleaseVersionChanged?: (publicationId: string, releaseVersions: string, pageId: string) => void;
+    onReleaseVersionChanged?: (publicationId: string, releaseVersions: string) => void;
+    /**
+     *
+     * @memberOf IPublicationContentProps
+     */
+    onPageReleaseVersionChanged?: (
+        pageService: IPageService,
+        publicationId: string,
+        releaseVersions: string,
+        logicalId: string,
+        conditions: IConditionMap
+    ) => void;
     /**
      *
      * @type {boolean}
@@ -204,6 +216,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         };
 
         this._fixPanels = this._fixPanels.bind(this);
+        this._navigateToOtherReleaseVersion = this._navigateToOtherReleaseVersion.bind(this);
     }
 
     /**
@@ -378,7 +391,9 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                             <VersionSelector
                                 productReleaseVersions={productReleaseVersions}
                                 selectedProductReleaseVersion={selectedProductReleaseVersion}
-                                onChange={version => this._navigateToOtherReleaseVersion(publicationId, version, pageId)}
+                                onChange={(version: string) =>
+                                    this._navigateToOtherReleaseVersion(version, page.logicalId)
+                                }
                             />
                         )}
                 </Page>
@@ -535,7 +550,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                     const { splitterPosition } = this.props;
                     tocParent.style.flexBasis = splitterPosition + "px";
                     // 30px is the margins. It is easier to hardcode this values than for the browser to recalculate it all the time.
-                    toc.style.width = (tocParent.getBoundingClientRect().width - 30) + "px";
+                    toc.style.width = tocParent.getBoundingClientRect().width - 30 + "px";
                 }
             }
 
@@ -581,10 +596,14 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         );
     }
 
-    private _navigateToOtherReleaseVersion(publicationId: string, releaseVersion: string, pageId: string): void {
-        const { onReleaseVersionChanged } = this.props;
-        if (onReleaseVersionChanged) {
-            onReleaseVersionChanged(publicationId, releaseVersion, pageId);
+    private _navigateToOtherReleaseVersion(releaseVersion: string, logicalId?: string): void {
+        const { onReleaseVersionChanged, onPageReleaseVersionChanged, publicationId, conditions } = this.props;
+
+        if (logicalId && onPageReleaseVersionChanged) {
+            const { services } = this.context;
+            onPageReleaseVersionChanged(services.pageService, publicationId, releaseVersion, logicalId, conditions);
+        } else if (onReleaseVersionChanged) {
+            onReleaseVersionChanged(publicationId, releaseVersion);
         }
     }
 }

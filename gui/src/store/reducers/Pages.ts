@@ -26,12 +26,16 @@ const byId = handleAction(
 
 const loading = combine(
     handleAction(PAGE_LOADING, (state: string[], pageId: string) => [...state, pageId], []),
-    handleAction(PAGE_LOADED, (state: string[], { key }: IPageLoadedPayload) => state.filter((id) => id !== key), []),
-    handleAction(PAGE_ERROR, (state: string[], { key }: IPageErrorsMap) => state.filter((id) => id !== key), [])
+    handleAction(PAGE_LOADED, (state: string[], { key }: IPageLoadedPayload) => state.filter(id => id !== key), []),
+    handleAction(PAGE_ERROR, (state: string[], { key }: IPageErrorsMap) => state.filter(id => id !== key), [])
 );
 
 const errors = combine(
-    handleAction(PAGE_ERROR, (state: IPageErrorsMap, error) => Object.assign({}, state, { [error.key]: error.message }), {}),
+    handleAction(
+        PAGE_ERROR,
+        (state: IPageErrorsMap, error) => Object.assign({}, state, { [error.key]: error.message }),
+        {}
+    ),
     handleAction(PAGE_LOADING, (state: IPageErrorsMap, pageId: string) => removeByKey(state, pageId), {})
 );
 
@@ -45,5 +49,5 @@ export const pages = combineReducers({
 export const getPageById = (state: IPageState, id: string): IPage => {
     return id in state.byId ? state.byId[id] : dummyPage(id);
 };
-export const getErrorMessage = (state: IPageState, id: string): string => id in state.errors ? state.errors[id] : "";
+export const getErrorMessage = (state: IPageState, id: string): string => (id in state.errors ? state.errors[id] : "");
 export const isPageLoading = (state: IPageState, id: string): boolean => state.loading.includes(id);

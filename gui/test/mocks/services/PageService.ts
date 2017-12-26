@@ -53,6 +53,28 @@ export class PageService implements IPageService {
         }
     }
 
+    public getPageInfoByLogicalId(publicationId: string, logicalId: string): Promise<IPage> {
+        const { error, info } = this._mockDataPage;
+        if (fakeDelay) {
+            return new Promise((resolve: (info?: IPage) => void, reject: (error: string | null) => void) => {
+                setTimeout((): void => {
+                    if (error) {
+                        reject(error);
+                    }
+                    else {
+                        resolve(info);
+                    }
+                }, ASYNC_DELAY);
+            });
+        } else {
+            if (error || !info) {
+                return Promise.reject(error);
+            } else {
+                return Promise.resolve(info);
+            }
+        }
+    }
+
     public getComments(publicationId: string, pageId: string, descending: boolean, top: number, skip: number, status: number[]): Promise<IComment[]> {
         const { error, values } = this._mockDataComments;
         if (fakeDelay) {

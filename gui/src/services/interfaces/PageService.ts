@@ -14,11 +14,24 @@ export interface IPageService {
      *
      * @param {string} publicationId Publication Id
      * @param {string} pageId The page id
+     * @param {IConditionMap} conditions The page conditions
      * @returns {Promise<IPage>} Promise to return the the content
      *
      * @memberOf IDataStore
      */
     getPageInfo(publicationId: string, pageId: string, conditions: IConditionMap): Promise<IPage>;
+
+    /**
+     * Get page information
+     *
+     * @param {string} publicationId Publication Id
+     * @param {string} logicalId The page logical id
+     * @param {IConditionMap} conditions The page conditions
+     * @returns {Promise<IPage>} Promise to return the the content
+     *
+     * @memberOf IDataStore
+     */
+    getPageInfoByLogicalId(publicationId: string, logicalId: string, conditions: IConditionMap): Promise<IPage>;
 
     /**
      * Get comments of page

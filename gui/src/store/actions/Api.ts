@@ -30,9 +30,16 @@ import {
     updateCurrentPublication
 } from "store/actions/Actions";
 
-import { getPubById, getPubList, getLastConditions, getPageKey, getCommentsKey } from "store/reducers/Reducer";
+import {
+    getPubById,
+    getPubList,
+    getLastConditions,
+    getPageKey,
+    getCommentsKey
+} from "store/reducers/Reducer";
 import { IState } from "store/interfaces/State";
 import { IConditionMap } from "store/interfaces/Conditions";
+//import { isDummyPage } from "utils/Page";
 
 export { getPubById, getPubList };
 export { Action };
@@ -308,7 +315,49 @@ export const setCurrentPublicationByReleaseVersion = (
         }
 
         if (pubs[0]) {
-            dispatch(updateCurrentPublication(pubs[0].id, "", ""));
+            dispatch(updateCurrentPublication(pubs[0].id, pageId || "", ""));
         }
+    };
+};
+
+/**
+ * This functions fetches thepage by releaseVersion and publicationId
+ * @param {IPageService} pageService
+ * @param pubId
+ * @param releaseVersion
+ * @param logicalId
+ */
+export const setCurrentPageByReleaseVersion = (
+    pageService: IPageService,
+    pubId: string,
+    productReleaseVersion: string,
+    logicalId: string,
+    conditions: IConditionMap
+): IDispatcherAndStateFunction => {
+    return (dispatch, getState): void => {
+        const state = getState();
+
+        // Searching for Publication with associated release version
+        const publication = getPubById(state, pubId);
+        const publicationsList = getPubList(state, {
+            logicalId: publication.logicalId,
+            productReleaseVersion,
+            "!id": pubId
+        });
+
+        const nextPub =
+            publicationsList.find(x => x.language === publication.language) ||
+            publicationsList.find(x => x.language === state.language) ||
+            publicationsList[0];
+
+        // Release version Publication Id
+        const nextPubId = nextPub.id;
+
+        pageService
+            .getPageInfoByLogicalId(nextPubId, logicalId, conditions)
+            .then(
+                page => dispatch(updateCurrentPublication(nextPubId, page.id, "")),
+                errorMessage => dispatch(updateCurrentPublication(nextPubId, "", ""))
+            );
     };
 };

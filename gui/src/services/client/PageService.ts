@@ -2,7 +2,7 @@ import { IPostComment } from "interfaces/Comments";
 import { IComment } from "interfaces/ServerModels";
 import { IPageService } from "services/interfaces/PageService";
 import { IPage } from "interfaces/Page";
-import { Page } from "models/Page";
+import { Page, PageByLogicalId } from "models/Page";
 import { Promise } from "es6-promise";
 import { IConditionMap } from "store/interfaces/Conditions";
 import { MD5 } from "object-hash";
@@ -46,6 +46,43 @@ export class PageService implements IPageService {
      */
     public getPageInfo(publicationId: string, pageId: string, conditions?: IConditionMap): Promise<IPage> {
         const page = this.getPageModel(publicationId, pageId, conditions);
+        return new Promise((resolve: (info?: IPage) => void, reject: (error: string | null) => void) => {
+            if (page.isLoaded()) {
+                resolve(page.getPage());
+            } else {
+                let removeEventListeners: () => void;
+                const onLoad = () => {
+                    removeEventListeners();
+                    resolve(page.getPage());
+                };
+                const onLoadFailed = (event: Event & { data: { error: string } }) => {
+                    removeEventListeners();
+                    reject(event.data.error);
+                };
+                removeEventListeners = (): void => {
+                    page.removeEventListener("load", onLoad);
+                    page.removeEventListener("loadfailed", onLoadFailed);
+                };
+
+                page.addEventListener("load", onLoad);
+                page.addEventListener("loadfailed", onLoadFailed);
+                page.load();
+            }
+        });
+    }
+
+    /**
+     * Get page information
+     *
+     * @param {string} publicationId Publication Id
+     * @param {string} logicalId The page logical Id
+     * @returns {Promise<IPage>} Promise to return the content
+     *
+     * @memberOf DataStoreClient
+     */
+    public getPageInfoByLogicalId(publicationId: string, logicalId: string, conditions?: IConditionMap): Promise<IPage> {
+        // We don`t need to add this to the models list, as once its loaded, it would be available by Logical Id
+        const page = new PageByLogicalId(publicationId, logicalId, conditions);
         return new Promise((resolve: (info?: IPage) => void, reject: (error: string | null) => void) => {
             if (page.isLoaded()) {
                 resolve(page.getPage());

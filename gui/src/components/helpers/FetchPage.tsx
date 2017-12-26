@@ -57,7 +57,10 @@ class Fetch extends React.Component<IFetchPage, {}> {
      * Invoked immediately after the component's updates are flushed to the DOM. This method is not called for the initial render.
      */
     public shouldComponentUpdate(nextProps: IFetchPage): boolean {
-        return this.props.currentPub.pageId !== nextProps.currentPub.pageId
+        const prevPub = this.props.currentPub;
+        const nextPub = nextProps.currentPub;
+        return prevPub.pageId !== nextPub.pageId
+            || prevPub.publicationId !== nextPub.publicationId
             || MD5(this.props.conditions) !== MD5(nextProps.conditions);
     }
 

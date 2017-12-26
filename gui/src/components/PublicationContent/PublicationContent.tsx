@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { PublicationContentPresentation } from "@sdl/dd/PublicationContent/PublicationContentPresentation";
 import { updateCurrentPublication } from "store/actions/Actions";
-import { setCurrentPublicationByReleaseVersion } from "store/actions/Api";
+import { setCurrentPublicationByReleaseVersion, setCurrentPageByReleaseVersion } from "store/actions/Api";
 import {
     getCurrentPub, getPubById, getPageById, getErrorMessage,
     isPageLoading as isPageLoadingGetter, isPublicationFound as isPublicationFoundGetter, getReleaseVersionsForPub
@@ -38,7 +38,8 @@ const mapStateToProps = (state: IState) => {
 
 const mapDispatchToProps = {
     onPublicationChange: updateCurrentPublication,
-    onReleaseVersionChanged: setCurrentPublicationByReleaseVersion
+    onReleaseVersionChanged: setCurrentPublicationByReleaseVersion,
+    onPageReleaseVersionChanged: setCurrentPageByReleaseVersion
 };
 
 /**
