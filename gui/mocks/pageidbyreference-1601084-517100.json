@@ -1,0 +1,25 @@
+{
+  "Id": "517118",
+  "Meta": {
+    "ishlogicalref.object.id": 517100,
+    "conditionsused.generated.value": null,
+    "tocnaventries.generated.value": "ish:1601084-7-1024"
+  },
+  "Regions": [
+    {
+      "Entities": [
+        {
+          "Id": "517118",
+          "topicTitle": "Taxonomy",
+          "topicBody": {
+            "Fragments": [
+              {
+                "Html": "\n       \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-E5B29D71-D9D2-41F3-9670-B1E8AC8DBA0F__GUID-AC0AB33D-A5E3-4E2C-B9E5-EB54931613BA\" xmlns=\"http://www.w3.org/1999/xhtml\">Taxonomy</h1>\n      \n      \n      \n      <div class=\"body conbody\" xmlns=\"http://www.w3.org/1999/xhtml\"> \n         \t \n         <p class=\"p\">Some recent sources apply the phylogenetic taxon Spheniscidae to what here is referred to as Spheniscinae. \n            \t \n         </p>\n         \n         \t \n         <p class=\"p\">Furthermore, they restrict the phylogenetic taxon Sphenisciformes to flightless taxa, and establish the phylogenetic taxon\n            Pansphenisciformes as equivalent to the Linnean taxon Sphenisciformes, i.e., including any flying basal \"proto-penguins\" to\n            be discovered eventually. Given that neither the relationships of the penguin subfamilies to each other nor the placement\n            of the penguins in the avian phylogeny is presently resolved, this is confusing, so the established Linnean system is thus\n            followed here. \n            \t \n         </p>\n         \n         \t \n         <div class=\"p\">See also: \n            \t \n            <ul class=\"ul\" id=\"GUID-E5B29D71-D9D2-41F3-9670-B1E8AC8DBA0F__UL_D0F2745859E54A30B0FB40C1F2544821\"> \n               \t\t\n               <li class=\"li\" id=\"GUID-E5B29D71-D9D2-41F3-9670-B1E8AC8DBA0F__LI_276F9738274443E48B797E3F679E0BCD\"><a class=\"xref\" href=\"http://en.wikipedia.org/wiki/Phylogenetic_taxonomy\" target=\"_blank\">Phylogenetic taxonomy on Wikipedia</a> \n                  \t\t\n               </li>\n               \n               \t\t\n               <li class=\"li\" id=\"GUID-E5B29D71-D9D2-41F3-9670-B1E8AC8DBA0F__LI_0C4AA3CBC8654648AB3621D6EACF9EA3\"><a class=\"xref\" href=\"http://en.wikipedia.org/wiki/Linnean_taxonomy\" target=\"_blank\">Linnaean taxonomy on Wikipedia</a> \n                  \t\t\n               </li>\n               \n               \t \n            </ul>\n            \n            \t \n         </div>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Parent topic:</strong> <a class=\"link\" href=\"/app/1601084/516088/penguin-guide/systematics-and-evolution\">Systematics and evolution</a></div>\n            \n         </div>\n         \n      </div>\n   "
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
