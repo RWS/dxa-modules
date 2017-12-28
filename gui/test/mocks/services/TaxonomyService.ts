@@ -8,10 +8,9 @@ import { ASYNC_DELAY } from "test/Constants";
 let fakeDelay = false;
 
 export class TaxonomyService implements ITaxonomyService {
-
     private _mockDataToc: {
         error: string | null;
-        items: ITaxonomy[]
+        items: ITaxonomy[];
     } = {
         error: null,
         items: []
@@ -28,8 +27,7 @@ export class TaxonomyService implements ITaxonomyService {
                 setTimeout((): void => {
                     if (error) {
                         reject(error);
-                    }
-                    else {
+                    } else {
                         resolve(items);
                     }
                 }, ASYNC_DELAY);
@@ -44,13 +42,24 @@ export class TaxonomyService implements ITaxonomyService {
     }
 
     public getSitemapPath(publicationId: string, pageId: string, taxonomyId: string): Promise<ITaxonomy[]> {
-        const tocItems = this._mockDataToc.items;
-        if (Array.isArray(tocItems)) {
-            // Only first level is supported
-            const path = tocItems.filter(item => item.id === TcmId.getItemIdFromTaxonomyItemId(taxonomyId));
-            return Promise.resolve(path);
+        const { error, items } = this._mockDataToc;
+        const path = items.filter(item => item.id === TcmId.getItemIdFromTaxonomyItemId(taxonomyId));
+        if (fakeDelay) {
+            return new Promise((resolve: (items?: ITaxonomy[]) => void, reject: (error: string | null) => void) => {
+                setTimeout((): void => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        resolve(path);
+                    }
+                }, ASYNC_DELAY);
+            });
         } else {
-            return Promise.reject("Unable to resolve path.");
+            if (error) {
+                return Promise.reject(error);
+            } else {
+                return Promise.resolve(path);
+            }
         }
     }
 

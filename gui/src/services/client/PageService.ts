@@ -80,31 +80,31 @@ export class PageService implements IPageService {
      *
      * @memberOf DataStoreClient
      */
-    public getPageInfoByLogicalId(publicationId: string, logicalId: string, conditions?: IConditionMap): Promise<IPage> {
-        // We don`t need to add this to the models list, as once its loaded, it would be available by Logical Id
+    public getPageInfoByLogicalId(
+        publicationId: string,
+        logicalId: string,
+        conditions?: IConditionMap
+    ): Promise<IPage> {
+        // We don`t need to add this to the models list, as once its loaded, page would be available by Logical Id
         const page = new PageByLogicalId(publicationId, logicalId, conditions);
         return new Promise((resolve: (info?: IPage) => void, reject: (error: string | null) => void) => {
-            if (page.isLoaded()) {
+            let removeEventListeners: () => void;
+            const onLoad = () => {
+                removeEventListeners();
                 resolve(page.getPage());
-            } else {
-                let removeEventListeners: () => void;
-                const onLoad = () => {
-                    removeEventListeners();
-                    resolve(page.getPage());
-                };
-                const onLoadFailed = (event: Event & { data: { error: string } }) => {
-                    removeEventListeners();
-                    reject(event.data.error);
-                };
-                removeEventListeners = (): void => {
-                    page.removeEventListener("load", onLoad);
-                    page.removeEventListener("loadfailed", onLoadFailed);
-                };
+            };
+            const onLoadFailed = (event: Event & { data: { error: string } }) => {
+                removeEventListeners();
+                reject(event.data.error);
+            };
+            removeEventListeners = (): void => {
+                page.removeEventListener("load", onLoad);
+                page.removeEventListener("loadfailed", onLoadFailed);
+            };
 
-                page.addEventListener("load", onLoad);
-                page.addEventListener("loadfailed", onLoadFailed);
-                page.load();
-            }
+            page.addEventListener("load", onLoad);
+            page.addEventListener("loadfailed", onLoadFailed);
+            page.load();
         });
     }
 
@@ -120,7 +120,14 @@ export class PageService implements IPageService {
      *
      * @memberof PageService
      */
-    public getComments(publicationId: string, pageId: string, descending: boolean, top: number, skip: number, status: number[]): Promise<IComment[]> {
+    public getComments(
+        publicationId: string,
+        pageId: string,
+        descending: boolean,
+        top: number,
+        skip: number,
+        status: number[]
+    ): Promise<IComment[]> {
         const comments = this.getCommentsModel(publicationId, pageId, descending, top, skip, status);
 
         return new Promise((resolve: (items?: IComment[]) => void, reject: (error: string | null) => void) => {
@@ -200,7 +207,14 @@ export class PageService implements IPageService {
         return this.PageModels[key];
     }
 
-    private getCommentsModel(publicationId: string, pageId: string, descending: boolean, top: number, skip: number, status: number[]): Comments {
+    private getCommentsModel(
+        publicationId: string,
+        pageId: string,
+        descending: boolean,
+        top: number,
+        skip: number,
+        status: number[]
+    ): Comments {
         const key = this._getKey(publicationId, pageId);
         this.ensureCommentsModel(key);
 
@@ -220,5 +234,4 @@ export class PageService implements IPageService {
             PageService.CommentsModels[key] = undefined;
         }
     }
-
 }

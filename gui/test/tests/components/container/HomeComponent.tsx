@@ -20,10 +20,8 @@ const services = {
 };
 
 class HomeComponent extends TestBase {
-
     public runTests(): void {
-
-        xdescribe(`Home component tests.`, (): void => {
+        describe(`Home component tests.`, (): void => {
             const target = super.createTargetElement();
 
             afterEach(() => {
@@ -38,13 +36,29 @@ class HomeComponent extends TestBase {
                 }
             });
 
-            it("show loading indicator on initial render", (): void => {
+            it("shows loading indicator on initial render", (): void => {
                 services.publicationService.fakeDelay(true);
                 const app = this._renderComponent(target, "ish:123-1-1", true);
                 // tslint:disable-next-line:no-any
                 const activityIndicators = TestUtils.scryRenderedComponentsWithType(app, ActivityIndicator as any);
                 // One indicator for the toc, one for the page
                 expect(activityIndicators.length).toBe(2, "Could not find activity indicators.");
+            });
+
+            // TODO: Errors are not handled on home page yet
+            xit("shows an error when list publications are failed to load", (done: () => void): void => {
+                const publicationsLoadError = "Publications are not loaded";
+                services.publicationService.fakeDelay(true);
+                services.publicationService.setMockDataPublications(publicationsLoadError);
+                const app = this._renderComponent(target);
+                const homeNode = ReactDOM.findDOMNode(app);
+
+                // Use a timeout to allow the DataStore to return a promise with the data
+                setTimeout((): void => {
+                    const input = homeNode.querySelector(".sdl-dita-delivery-searchbar input") as HTMLInputElement;
+                    expect(input.getAttribute("placeholder")).toContain(publicationsLoadError);
+                    done();
+                }, RENDER_DELAY);
             });
 
             it("shows an error message in the search bar when the publication title failed to load", (done: () => void): void => {
@@ -81,24 +95,26 @@ class HomeComponent extends TestBase {
                 inputElement.value = searchQuery;
 
                 const overlayNode = appNode.querySelector(".sdl-dita-delivery-nav-mask") as HTMLElement;
-                expect(getComputedStyle(overlayNode).display).toBe("none");
+
                 TestUtils.Simulate.focus(inputElement);
+                expect(getComputedStyle(overlayNode).display).toBe("block", "Overlay should be visible after focus");
 
-                expect(getComputedStyle(overlayNode).display).toBe("block");
                 TestUtils.Simulate.blur(inputElement);
-
-                expect(getComputedStyle(overlayNode).display).toBe("none");
+                expect(getComputedStyle(overlayNode).display).toBe("none", "Overlay should go away after blur");
                 TestUtils.Simulate.click(toggleSearchButtonNode as HTMLElement);
 
-                expect(homeNode.classList).not.toContain("search-open");
-                expect(homeNode.classList).not.toContain("search-is-opening");
-
-                TestUtils.Simulate.click(document.querySelector(".sdl-dita-delivery-searchbar .search-button") as HTMLInputElement);
                 spyOn(browserHistory, "push").and.callFake((path: string): void => {
                     // Check if routing was called with correct params
                     expect(path).toBe(`/search/${encodeURIComponent(searchQuery)}`);
+                    expect(homeNode.classList).not.toContain("search-open");
+                    expect(homeNode.classList).not.toContain("search-is-opening");
                     done();
                 });
+
+                const searchButton = document.querySelector(
+                    ".sdl-dita-delivery-searchbar .search-button"
+                ) as HTMLElement;
+                TestUtils.Simulate.click(searchButton);
             });
         });
     }
@@ -106,16 +122,23 @@ class HomeComponent extends TestBase {
     private _renderComponent(target: HTMLElement, pubId?: string, loadingPage?: boolean): ComponentWithContext {
         const publicationId = pubId || "";
         const pageId = "";
-        const publication = { id: publicationId, title: "", createdOn: new Date(), version: "1", logicalId: "GUID-123" };
+        const publication = {
+            id: publicationId,
+            title: "",
+            createdOn: new Date(),
+            version: "1",
+            logicalId: "GUID-123"
+        };
         const isPageLoading = loadingPage || false;
 
         const store = configureStore();
 
         return ReactDOM.render(
-            (
-                <ComponentWithContext {...services}>
-                    <Router history={browserHistory}>
-                        <Route path="*" component={() => (
+            <ComponentWithContext {...services}>
+                <Router history={browserHistory}>
+                    <Route
+                        path="*"
+                        component={() => (
                             <Provider store={store}>
                                 <HomePresentation params={{ publicationId }}>
                                     <PublicationContentPresentation
@@ -130,12 +153,16 @@ class HomeComponent extends TestBase {
                                         errorMessage=""
                                         isPublicationFound={true}
                                         splitterPosition={0}
-                                        conditions={{}} />
+                                        conditions={{}}
+                                    />
                                 </HomePresentation>
-                            </Provider>)} />
-                    </Router>
-                </ComponentWithContext>
-            ), target) as ComponentWithContext;
+                            </Provider>
+                        )}
+                    />
+                </Router>
+            </ComponentWithContext>,
+            target
+        ) as ComponentWithContext;
     }
 }
 

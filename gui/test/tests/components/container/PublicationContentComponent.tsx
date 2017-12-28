@@ -37,7 +37,6 @@ const PUBLICATION_ID = "12311";
 class PublicationContentComponent extends TestBase {
     private store: Store<IState>;
     public runTests(): void {
-
         describe(`PublicationContent component tests.`, (): void => {
             const target = super.createTargetElement();
 
@@ -60,8 +59,11 @@ class PublicationContentComponent extends TestBase {
             it("show loading indicator on initial render", (): void => {
                 services.taxonomyService.fakeDelay(true);
                 const publicationContent = this._renderComponent(target);
-                // tslint:disable-next-line:no-any
-                const activityIndicators = TestUtils.scryRenderedComponentsWithType(publicationContent, ActivityIndicator as any);
+                const activityIndicators = TestUtils.scryRenderedComponentsWithType(
+                    publicationContent,
+                    // tslint:disable-next-line:no-any
+                    ActivityIndicator as any
+                );
                 // Don't show page loading indicator, because no page is loading
                 expect(activityIndicators.length).toBe(1, "Toc loading indicator is rendered");
             });
@@ -82,8 +84,11 @@ class PublicationContentComponent extends TestBase {
                 setTimeout((): void => {
                     // Toc is ready
                     const toc = TestUtils.findRenderedComponentWithType(publicationContent, Toc);
-                    // tslint:disable-next-line:no-any
-                    const activityIndicatorsToc = TestUtils.scryRenderedComponentsWithType(toc, ActivityIndicator as any);
+                    const activityIndicatorsToc = TestUtils.scryRenderedComponentsWithType(
+                        toc,
+                        // tslint:disable-next-line:no-any
+                        ActivityIndicator as any
+                    );
                     expect(activityIndicatorsToc.length).toBe(0, "Activity indicator should not be rendered.");
 
                     // Check if tree view nodes are there
@@ -97,8 +102,38 @@ class PublicationContentComponent extends TestBase {
                 }, RENDER_DELAY);
             });
 
+            it("shows error if toc can not be loaded", (done: () => void): void => {
+                const tocError = "SiteMaps items will not be loaded error";
+                services.taxonomyService.setMockDataToc(tocError, []);
+
+                const publicationContent = this._renderComponent(target);
+                // Use a timeout to allow the DataStore to return a promise with the data
+                setTimeout((): void => {
+                    // Toc is ready
+                    const toc = TestUtils.findRenderedComponentWithType(publicationContent, Toc);
+                    const activityIndicatorsToc = TestUtils.scryRenderedComponentsWithType(
+                        toc,
+                        // tslint:disable-next-line:no-any
+                        ActivityIndicator as any
+                    );
+                    expect(activityIndicatorsToc.length).toBe(0, "Activity indicator should not be rendered.");
+
+                    const domNode = ReactDOM.findDOMNode(toc) as HTMLElement;
+                    const errorElement = domNode.querySelector(".sdl-dita-delivery-error-toc") as HTMLElement;
+                    expect(errorElement).not.toBeNull("Error dialog not found");
+                    const errorTitle = errorElement.querySelector(
+                        ".sdl-dita-delivery-error-toc-message"
+                    ) as HTMLElement;
+                    expect(errorTitle.textContent).toEqual("mock-error.toc.not.found");
+                    const buttons = errorElement.querySelectorAll("button");
+                    expect(buttons.length).toEqual(1);
+
+                    done();
+                }, RENDER_DELAY);
+            });
+
             it("renders content for a specific page", (done: () => void): void => {
-                const pageContent = "<div id=\"specific-content\">Page content!</div>";
+                const pageContent = '<div id="specific-content">Page content!</div>';
                 services.taxonomyService.setMockDataToc(null, []);
                 services.pageService.setMockDataPage(null, {
                     id: "12345",
@@ -111,13 +146,18 @@ class PublicationContentComponent extends TestBase {
 
                 // Use a timeout to allow the DataStore to return a promise with the data
                 setTimeout((): void => {
-                    // tslint:disable-next-line:no-any
-                    const activityIndicators = TestUtils.scryRenderedComponentsWithType(publicationContent, ActivityIndicator as any);
+                    const activityIndicators = TestUtils.scryRenderedComponentsWithType(
+                        publicationContent,
+                        // tslint:disable-next-line:no-any
+                        ActivityIndicator as any
+                    );
                     expect(activityIndicators.length).toBe(0, "Activity indicator should not be rendered.");
                     const page = TestUtils.findRenderedComponentWithType(publicationContent, PagePresentation);
                     expect(page).not.toBeNull("Could not find page content.");
                     const pageContentNode = ReactDOM.findDOMNode(page);
-                    expect(pageContentNode.querySelector("#specific-content")).not.toBeNull("Should find rendered content");
+                    expect(pageContentNode.querySelector("#specific-content")).not.toBeNull(
+                        "Should find rendered content"
+                    );
                     done();
                 }, RENDER_DELAY);
             });
@@ -159,8 +199,12 @@ class PublicationContentComponent extends TestBase {
                 setTimeout((): void => {
                     // Toc is ready
                     const toc = TestUtils.findRenderedComponentWithType(publicationContent, Toc);
-                    // tslint:disable-next-line:no-any
-                    const activityIndicatorsToc = TestUtils.scryRenderedComponentsWithType(toc, ActivityIndicator as any);
+
+                    const activityIndicatorsToc = TestUtils.scryRenderedComponentsWithType(
+                        toc,
+                        // tslint:disable-next-line:no-any
+                        ActivityIndicator as any
+                    );
                     expect(activityIndicatorsToc.length).toBe(0, "Activity indicator should not be rendered.");
 
                     // Click second element inside toc
@@ -185,8 +229,11 @@ class PublicationContentComponent extends TestBase {
 
                 // Use a timeout to allow the DataStore to return a promise with the data
                 setTimeout((): void => {
-                    // tslint:disable-next-line:no-any
-                    const activityIndicators = TestUtils.scryRenderedComponentsWithType(publicationContent, ActivityIndicator as any);
+                    const activityIndicators = TestUtils.scryRenderedComponentsWithType(
+                        publicationContent,
+                        // tslint:disable-next-line:no-any
+                        ActivityIndicator as any
+                    );
                     expect(activityIndicators.length).toBe(0, "Activity indicator should not be rendered.");
                     const page = TestUtils.findRenderedComponentWithType(publicationContent, PagePresentation);
                     const pageNode = ReactDOM.findDOMNode(page) as HTMLElement;
@@ -198,20 +245,25 @@ class PublicationContentComponent extends TestBase {
             });
 
             it("shows an error message when page info fails to load", (done: () => void): void => {
-                services.taxonomyService.setMockDataToc(null, [{
-                    id: "123456",
-                    title: "Some page",
-                    url: "page-url",
-                    hasChildNodes: true
-                }]);
+                services.taxonomyService.setMockDataToc(null, [
+                    {
+                        id: "123456",
+                        title: "Some page",
+                        url: "page-url",
+                        hasChildNodes: true
+                    }
+                ]);
                 services.pageService.setMockDataPage("Page failed to load!");
                 const publicationContent = this._renderComponent(target, "123");
 
                 // Wait for the tree view to select the first node
                 // Treeview uses debouncing for node selection so a timeout is required
                 setTimeout((): void => {
-                    // tslint:disable-next-line:no-any
-                    const activityIndicators = TestUtils.scryRenderedComponentsWithType(publicationContent, ActivityIndicator as any);
+                    const activityIndicators = TestUtils.scryRenderedComponentsWithType(
+                        publicationContent,
+                        // tslint:disable-next-line:no-any
+                        ActivityIndicator as any
+                    );
                     expect(activityIndicators.length).toBe(0, "Activity indicator should not be rendered.");
                     const page = TestUtils.findRenderedComponentWithType(publicationContent, PagePresentation);
 
@@ -220,7 +272,9 @@ class PublicationContentComponent extends TestBase {
                     expect(errorElement).not.toBeNull("Error dialog not found");
                     const errorTitle = (errorElement as HTMLElement).querySelector("h1") as HTMLElement;
                     expect(errorTitle.textContent).toEqual("mock-error.default.title");
-                    const buttons = (errorElement as HTMLElement).querySelectorAll(".sdl-dita-delivery-button-group button");
+                    const buttons = (errorElement as HTMLElement).querySelectorAll(
+                        ".sdl-dita-delivery-button-group button"
+                    );
                     expect(buttons.length).toEqual(2);
                     done();
                 }, RENDER_DELAY);
@@ -273,60 +327,79 @@ class PublicationContentComponent extends TestBase {
                     publicationContent = this._renderComponent(target, second.id);
                     assert(second, done);
                 });
-
             });
 
-            it("Selector for another product release version is not shown when there is only 1 version of publication", (done: () => void): void => {
-                const publications: IPublication[] = [{
-                    id: "1",
-                    title: "Publication1",
-                    createdOn: new Date(),
-                    version: "1",
-                    logicalId: "GUID-1",
-                    productFamily: "PF",
-                    productReleaseVersion: "PR1",
-                    language: "en"
-                }];
-                services.publicationService.setMockDataPublications(null, publications, [{ title: "PF" }],
-                    [{ title: "PR1", value: "pr1" }]);
+            it("selector for another product release version is not shown when there is only 1 version of publication", (done: () => void): void => {
+                const publications: IPublication[] = [
+                    {
+                        id: "1",
+                        title: "Publication1",
+                        createdOn: new Date(),
+                        version: "1",
+                        logicalId: "GUID-1",
+                        productFamily: "PF",
+                        productReleaseVersion: "PR1",
+                        language: "en"
+                    }
+                ];
+                services.publicationService.setMockDataPublications(
+                    null,
+                    publications,
+                    [{ title: "PF" }],
+                    [{ title: "PR1", value: "pr1" }]
+                );
                 const publicationContent = this._renderComponent(target, undefined, "1");
 
                 // Use a timeout to allow the DataStore to return a promise with the data
                 setTimeout((): void => {
-                    const dropdownList = TestUtils.scryRenderedDOMComponentsWithClass(publicationContent, "sdl-dita-delivery-version-selector");
+                    const dropdownList = TestUtils.scryRenderedDOMComponentsWithClass(
+                        publicationContent,
+                        "sdl-dita-delivery-version-selector"
+                    );
                     expect(dropdownList.length).toBe(0, "Version selector should not be rendered.");
                     done();
                 }, RENDER_DELAY);
             });
 
             it("can switch to another product release version of the same publication", (done: () => void): void => {
-                const publications: IPublication[] = [{
-                    id: "1",
-                    title: "Publication1",
-                    createdOn: new Date(),
-                    version: "1",
-                    logicalId: "GUID-1",
-                    productFamily: "PF",
-                    productReleaseVersion: "PR1",
-                    language: "en"
-                }, {
-                    id: "2",
-                    title: "Publication2",
-                    createdOn: new Date(),
-                    version: "1",
-                    logicalId: "GUID-1",
-                    productFamily: "PF",
-                    productReleaseVersion: "PR2",
-                    language: "en"
-                }];
-                services.publicationService.setMockDataPublications(null, publications, [{ title: "PF" }],
-                    [{ title: "PR1", value: "pr1" }, { title: "PR2", value: "pr2" }]);
+                const publications: IPublication[] = [
+                    {
+                        id: "1",
+                        title: "Publication1",
+                        createdOn: new Date(),
+                        version: "1",
+                        logicalId: "GUID-1",
+                        productFamily: "PF",
+                        productReleaseVersion: "PR1",
+                        language: "en"
+                    },
+                    {
+                        id: "2",
+                        title: "Publication2",
+                        createdOn: new Date(),
+                        version: "1",
+                        logicalId: "GUID-1",
+                        productFamily: "PF",
+                        productReleaseVersion: "PR2",
+                        language: "es"
+                    }
+                ];
+                services.publicationService.setMockDataPublications(
+                    null,
+                    publications,
+                    [{ title: "PF" }],
+                    [{ title: "PR1", value: "pr1" }, { title: "PR2", value: "pr2" }]
+                );
+
                 const publicationContent = this._renderComponent(target, undefined, "1");
 
                 // Use a timeout to allow the DataStore to return a promise with the data
                 setTimeout((): void => {
-                    // tslint:disable-next-line:no-any
-                    const dropdownList = TestUtils.findRenderedComponentWithType(publicationContent, DropdownList as any);
+                    const dropdownList = TestUtils.findRenderedComponentWithType(
+                        publicationContent,
+                        // tslint:disable-next-line:no-any
+                        DropdownList as any
+                    );
                     const dropdownListNode = ReactDOM.findDOMNode(dropdownList);
                     const listItems = dropdownListNode.querySelectorAll("li");
                     expect(listItems.length).toBe(2);
@@ -348,29 +421,105 @@ class PublicationContentComponent extends TestBase {
                 }, RENDER_DELAY);
             });
 
-        });
+            it("can switch to another product release version of the same page", (done: () => void): void => {
+                const publications: IPublication[] = [
+                    {
+                        id: "1",
+                        title: "Publication1",
+                        createdOn: new Date(),
+                        version: "1",
+                        logicalId: "GUID-1",
+                        productFamily: "PF",
+                        productReleaseVersion: "PR1",
+                        language: "en"
+                    },
+                    {
+                        id: "2",
+                        title: "Publication2",
+                        createdOn: new Date(),
+                        version: "1",
+                        logicalId: "GUID-1",
+                        productFamily: "PF",
+                        productReleaseVersion: "PR2",
+                        language: "es"
+                    }
+                ];
+                services.publicationService.setMockDataPublications(
+                    null,
+                    publications,
+                    [{ title: "PF" }],
+                    [{ title: "PR1", value: "pr1" }, { title: "PR2", value: "pr2" }]
+                );
 
+                const mockPageId = "71";
+                services.pageService.setMockDataPage(null, {
+                    id: mockPageId,
+                    logicalId: "79",
+                    content: "Content",
+                    title: "Title!",
+                    sitemapIds: null
+                });
+
+                const publicationContent = this._renderComponent(target, mockPageId, publications[0].id);
+
+                // Use a timeout to allow the DataStore to return a promise with the data
+                setTimeout((): void => {
+                    const dropdownList = TestUtils.findRenderedComponentWithType(
+                        publicationContent,
+                        // tslint:disable-next-line:no-any
+                        DropdownList as any
+                    );
+                    const dropdownListNode = ReactDOM.findDOMNode(dropdownList);
+                    const listItems = dropdownListNode.querySelectorAll("li");
+                    expect(listItems.length).toBe(2);
+
+                    /**
+                     * For some reason this listener is not properly cleaned up by redux, manually keeping track of it
+                     */
+                    const listItemIndex = 1;
+                    let isUnsubscribed = false;
+                    const unsubscribe = this.store.subscribe(() => {
+                        if (!isUnsubscribed) {
+                            const { publicationId, pageId } = getCurrentPub(this.store.getState());
+                            expect(publicationId).toBe(publications[listItemIndex].id);
+                            expect(pageId).toBe(mockPageId);
+                        }
+                        unsubscribe();
+                        isUnsubscribed = true;
+                        done();
+                    });
+                    // Click on the second release version
+                    listItems[listItemIndex].click();
+                }, RENDER_DELAY);
+            });
+        });
     }
 
-    private _renderComponent(target: HTMLElement, pageId?: string, publicationId?: string): PublicationContentPresentation {
+    private _renderComponent(
+        target: HTMLElement,
+        pageId?: string,
+        publicationId?: string
+    ): PublicationContentPresentation {
         const store = this.store as Store<IState>;
 
         store.dispatch(updateCurrentPublication(publicationId || PUBLICATION_ID, pageId || "", ""));
 
         const comp = ReactDOM.render(
-            (
-                <Provider store={store}>
-                    <ComponentWithContext {...services}>
-                        <FetchPage />
-                        <FetchPublications />
-                        <FetchProductReleaseVersions />
-                        <PublicationContent />
-                    </ComponentWithContext>
-                </Provider>
-            ), target) as React.Component<{}, {}>;
-        return TestUtils.findRenderedComponentWithType(comp, PublicationContentPresentation) as PublicationContentPresentation;
+            <Provider store={store}>
+                <ComponentWithContext {...services}>
+                    <FetchPage />
+                    <FetchPublications />
+                    <FetchProductReleaseVersions />
+                    <PublicationContent />
+                </ComponentWithContext>
+            </Provider>,
+            target
+        ) as React.Component<{}, {}>;
+        return TestUtils.findRenderedComponentWithType(
+            comp,
+            PublicationContentPresentation
+        ) as PublicationContentPresentation;
     }
-
 }
 
 new PublicationContentComponent().runTests();
