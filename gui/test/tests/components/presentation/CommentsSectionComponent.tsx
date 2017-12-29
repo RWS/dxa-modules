@@ -13,6 +13,8 @@ import { PageService } from "test/mocks/services/PageService";
 import { IComment, ICommentDate, IUser } from "interfaces/ServerModels";
 import { getComments, getPostCommentErrorMessage } from "store/reducers/Reducer";
 
+import { ASYNC_TEST_DELAY } from "test/Constants";
+
 const services = {
     pageService: new PageService()
 };
@@ -29,15 +31,20 @@ class CommentsSectionComponent extends TestBase {
                 pageId: "1"
             };
 
+            beforeEach(() => {
+                const store = (this.store = configureStore());
+                store.dispatch(updateCurrentPublication(defaultProps.publicationId, defaultProps.pageId, ""));
+            });
+
+            afterEach(() => {
+                const domNode = ReactDOM.findDOMNode(target);
+                ReactDOM.unmountComponentAtNode(domNode);
+            });
+
             afterAll(() => {
                 if (target.parentElement) {
                     target.parentElement.removeChild(target);
                 }
-            });
-
-            beforeEach(() => {
-                const store = (this.store = configureStore());
-                store.dispatch(updateCurrentPublication(defaultProps.publicationId, defaultProps.pageId, ""));
             });
 
             it("renders component", (): void => {
@@ -79,9 +86,12 @@ class CommentsSectionComponent extends TestBase {
                     "form"
                 ) as HTMLFormElement);
 
-                expect(getComments(this.store.getState(), defaultProps.publicationId, defaultProps.pageId)[0].id).toBe(
-                    testComment.id
-                );
+                setTimeout((): void => {
+                    expect(
+                        getComments(this.store.getState(), defaultProps.publicationId, defaultProps.pageId)[0].id
+                    ).toBe(testComment.id);
+                    done();
+                }, ASYNC_TEST_DELAY);
             });
 
             it("handles save comment error action", (done: () => void): void => {
@@ -95,9 +105,16 @@ class CommentsSectionComponent extends TestBase {
                     "form"
                 ) as HTMLFormElement);
 
-                expect(
-                    getPostCommentErrorMessage(this.store.getState(), defaultProps.publicationId, defaultProps.pageId)
-                ).toBe(testCommentError);
+                setTimeout((): void => {
+                    expect(
+                        getPostCommentErrorMessage(
+                            this.store.getState(),
+                            defaultProps.publicationId,
+                            defaultProps.pageId
+                        )
+                    ).toBe(testCommentError);
+                    done();
+                }, ASYNC_TEST_DELAY);
             });
         });
     }

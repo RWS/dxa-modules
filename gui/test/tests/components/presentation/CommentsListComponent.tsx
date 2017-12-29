@@ -10,9 +10,10 @@ import { CommentsList } from "@sdl/dd/CommentsList/CommentsList";
 import { IComment, IUser, ICommentDate } from "interfaces/ServerModels";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 import { TestBase } from "@sdl/models";
-import { RENDER_DELAY } from "test/Constants";
+import { RENDER_DELAY, ASYNC_DELAY } from "test/Constants";
 import { updateCurrentPublication } from "src/store/actions/Actions";
 import { PageService } from "test/mocks/services/PageService";
+import { getComments } from "store/reducers/Reducer";
 
 const services = {
     pageService: new PageService()
@@ -89,7 +90,7 @@ class CommentsListComponent extends TestBase {
                     );
                     expect(renderedComments.length).toBe(DEFAULT_AMOUNT);
                     done();
-                }, RENDER_DELAY);
+                }, ASYNC_DELAY);
             });
 
             it("renders component error and retries when retry button is clicked", (done: () => void): void => {
@@ -105,7 +106,7 @@ class CommentsListComponent extends TestBase {
                     ) as HTMLButtonElement;
                     errorButton.click();
                     done();
-                }, RENDER_DELAY);
+                }, ASYNC_DELAY);
             });
 
             it("loads more when load more button is clicked", (done: () => void): void => {
@@ -127,7 +128,7 @@ class CommentsListComponent extends TestBase {
                     ) as HTMLButtonElement;
                     expect(loadMoreButton).toBeNull();
                     done();
-                }, RENDER_DELAY);
+                }, ASYNC_DELAY);
             });
 
             it("can expand/collapse comment post reply dialog", (done: () => void): void => {
@@ -164,7 +165,7 @@ class CommentsListComponent extends TestBase {
                             done();
                         });
                     });
-                }, RENDER_DELAY);
+                }, ASYNC_DELAY);
             });
 
             it("can post/reset comment post reply", (done: () => void): void => {
@@ -183,7 +184,11 @@ class CommentsListComponent extends TestBase {
                     setTimeout((): void => {
                         const dialogForm = comment.querySelector("form") as HTMLFormElement;
                         expect(dialogForm).toBeDefined();
-                        const formId = dialogForm.id;
+                        const commentsCount = getComments(
+                            this.store.getState(),
+                            defaultProps.publicationId,
+                            defaultProps.publicationId
+                        ).length;
 
                         // 2. Reset the form
                         // TestUtils.Simulate.reset is not supported yet, so as reset event propagation.
@@ -193,16 +198,22 @@ class CommentsListComponent extends TestBase {
                         TestUtils.Simulate.submit(dialogForm);
                         setTimeout((): void => {
                             // On form submit replies should be shown
-                            expect(ReactDOM.findDOMNode(commentsList).querySelector(`form#${formId}`) as HTMLFormElement).not.toBeDefined();
+                            expect(
+                                getComments(
+                                    this.store.getState(),
+                                    defaultProps.publicationId,
+                                    defaultProps.publicationId
+                                ).length
+                            ).toBe(commentsCount + 1);
                             done();
                         }, RENDER_DELAY);
                     }, RENDER_DELAY);
-                }, RENDER_DELAY);
+                }, ASYNC_DELAY);
             });
 
             it("can expand/colapse comment replies", (done: () => void): void => {
                 const repliesCount = 3;
-                const nestedComments = [ ...defaultProps.comments ];
+                const nestedComments = [...defaultProps.comments];
                 nestedComments[2].children = Array(repliesCount)
                     .fill(null)
                     .map(createComment);
@@ -230,7 +241,7 @@ class CommentsListComponent extends TestBase {
                             done();
                         }, RENDER_DELAY);
                     }, RENDER_DELAY);
-                }, RENDER_DELAY);
+                }, ASYNC_DELAY);
             });
         });
     }

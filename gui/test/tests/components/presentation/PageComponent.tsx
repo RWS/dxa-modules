@@ -301,6 +301,30 @@ class PageComponent extends TestBase {
                 ) as HTMLElement;
                 expect(contentNavigationNode).toBeNull();
             });
+
+            it("highlights code blocks in page content", (done: () => void): void => {
+                const pageProps: IPageProps = {
+                    isLoading: false,
+                    content: `<div>
+                                <pre class="codeblock">
+                                    <code class="language-js">
+                                        console.log("Test works");
+                                    </code>
+                                </pre>
+                            </div>`,
+                    onNavigate: (): void => {}
+                };
+
+                const page = this._renderComponent(pageProps, target);
+                const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
+                expect(domNode).not.toBeNull();
+
+                setTimeout((): void => {
+                    const logFunctionNode = domNode.querySelector(".page-content .codeblock code.language-js span.function") as HTMLElement;
+                    expect(logFunctionNode && logFunctionNode.textContent).toBe("log", "Styling are not applied");
+                    done();
+                }, RENDER_DELAY);
+            });
         });
 
         describe(`Page navigation tests.`, (): void => {

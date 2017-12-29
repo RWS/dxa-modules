@@ -266,8 +266,6 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
         const { fetchPage, publicationId, id = "" } = this.props;
         if (fetchPage && publicationId) {
             fetchPage(this.context.services.pageService, publicationId, id);
-        } else {
-            console.warn("fetchPage, publicatinoId, should be defined");
         }
     }
 
