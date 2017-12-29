@@ -1,0 +1,19 @@
+﻿@model Tsi2844TestEntity
+<div class="entity" @Html.DxaEntityMarkup()>
+    <h3>Rendered @Model with Entity View "Test:TSI2844Test"</h3>
+
+    SingleLineText: 
+    <div @Html.DxaPropertyMarkup(() => Model.SingleLineText)>
+        '@Model.SingleLineText'
+    </div>
+
+    MetadataTextField: 
+    <div @Html.DxaPropertyMarkup(() => Model.MetadataTextField)>
+        '@Model.MetadataTextField'
+    </div>
+
+    FolderMetadataTextField:
+    <div @Html.DxaPropertyMarkup(() => Model.FolderMetadataTextField)>
+        '@Model.FolderMetadataTextField'
+    </div>
+</div>
