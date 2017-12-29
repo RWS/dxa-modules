@@ -36,7 +36,7 @@ const isLoading = combine(
 );
 
 const lastError = combine(
-    handleAction(PUBLICATIONS_LOADING_ERROR, (message: string) => message, ""),
+    handleAction(PUBLICATIONS_LOADING_ERROR, (state, message: string) => message, ""),
     handleAction(PUBLICATIONS_LOADED, () => "", "")
 );
 

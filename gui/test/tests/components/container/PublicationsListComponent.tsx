@@ -1,10 +1,15 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as TestUtils from "react-addons-test-utils";
+import { Store } from "redux";
+import { Provider } from "react-redux";
+import { browserHistory } from "react-router";
 import {
     PublicationsListPresentation,
-    IPublicationsListProps
+    IPublicationsListProps,
+    IPublicationsListPropsParams
 } from "@sdl/dd/PublicationsList/PublicationsListPresentation";
+import { PublicationsList } from "@sdl/dd/PublicationsList/PublicationsList";
 import { ActivityIndicator, Button, DropdownList } from "@sdl/controls-react-wrappers";
 import { TestBase } from "@sdl/models";
 import { PublicationService } from "test/mocks/services/PublicationService";
@@ -12,8 +17,7 @@ import { TaxonomyService } from "test/mocks/services/TaxonomyService";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 import { IPublication } from "interfaces/Publication";
 import { configureStore } from "store/Store";
-import { Provider } from "react-redux";
-import { browserHistory } from "react-router";
+import { IState } from "src/store/interfaces/State";
 
 import { RENDER_DELAY, ASYNC_TEST_DELAY } from "test/Constants";
 
@@ -23,19 +27,15 @@ const services = {
 };
 
 class PublicationsListComponent extends TestBase {
+    private store: Store<IState>;
     public runTests(): void {
-        const defaultProps: IPublicationsListProps = {
-            error: "",
-            publications: [],
-            productReleaseVersions: [],
-            selectedProductVersion: "",
-            isLoading: false,
-            uiLanguage: "en",
-            params: { productFamily: "prod-family" }
-        };
-
         describe(`PublicationsList component tests.`, (): void => {
             const target = super.createTargetElement();
+
+            beforeEach(() => {
+                this.store = configureStore();
+                services.publicationService.fakeDelay(true);
+            });
 
             afterEach(() => {
                 const domNode = ReactDOM.findDOMNode(target);
@@ -50,7 +50,8 @@ class PublicationsListComponent extends TestBase {
             });
 
             it("show loading indicator on initial render", (): void => {
-                const publicationsList = this._renderComponent(target, { ...defaultProps, isLoading: true });
+                //const publicationsList = this._renderComponent(target, { ...defaultProps, isLoading: true });
+                const publicationsList = this._renderComponent(target);
 
                 const activityIndicators = TestUtils.scryRenderedComponentsWithType(
                     publicationsList,
@@ -60,68 +61,63 @@ class PublicationsListComponent extends TestBase {
                 expect(activityIndicators.length).toBe(1, "Could not find activity indicators.");
             });
 
-            it("shows an error message when publications list fails to load", (): void => {
-                const error = "Publications list failed to load!";
-                const publicationsList = this._renderComponent(target, { ...defaultProps, error });
-                const activityIndicators = TestUtils.scryRenderedComponentsWithType(
-                    publicationsList,
-                    // tslint:disable-next-line:no-any
-                    ActivityIndicator as any
-                );
-                expect(activityIndicators.length).toBe(0, "Activity indicator should not be rendered.");
+            it("shows an error message when publications list fails to load", (done: () => void): void => {
+                const publicationsLoadError = "Publications list failed to load!";
+                services.publicationService.setMockDataPublications(publicationsLoadError);
 
-                const domNode = ReactDOM.findDOMNode(publicationsList) as HTMLElement;
-                const errorElement = domNode.querySelector(".sdl-dita-delivery-error");
-                expect(errorElement).not.toBeNull("Error dialog not found");
-                const errorTitle = (errorElement as HTMLElement).querySelector("h1") as HTMLElement;
-                expect(errorTitle.textContent).toEqual("mock-error.default.title");
-                const buttons = (errorElement as HTMLElement).querySelectorAll(
-                    ".sdl-dita-delivery-button-group button"
-                );
-                expect(buttons.length).toEqual(1);
+                const publicationsList = this._renderComponent(target);
+
+                setTimeout((): void => {
+                    const activityIndicators = TestUtils.scryRenderedComponentsWithType(
+                        publicationsList,
+                        // tslint:disable-next-line:no-any
+                        ActivityIndicator as any
+                    );
+                    expect(activityIndicators.length).toBe(0, "Activity indicator should not be rendered.");
+
+                    const domNode = ReactDOM.findDOMNode(publicationsList) as HTMLElement;
+                    const errorElement = domNode.querySelector(".sdl-dita-delivery-error");
+                    expect(errorElement).not.toBeNull("Error dialog not found");
+                    const errorTitle = (errorElement as HTMLElement).querySelector("h1") as HTMLElement;
+                    expect(errorTitle.textContent).toEqual("mock-error.default.title");
+                    const buttons = (errorElement as HTMLElement).querySelectorAll(
+                        ".sdl-dita-delivery-button-group button"
+                    );
+                    expect(buttons.length).toEqual(1);
+
+                    done();
+                }, RENDER_DELAY);
             });
 
             it("renders only publications associated with product family", (done: () => void): void => {
-                services.publicationService.fakeDelay(true);
-                const publications: IPublication[] = [
-                    {
-                        id: "1",
-                        title: "Publication 1",
+                const publications: IPublication[] = Array(3)
+                    .fill(null)
+                    .map((n, i) => ({
+                        id: `id-${i}`,
+                        title: `Publication ${i}`,
                         createdOn: new Date(),
                         language: "en",
                         version: "1",
-                        logicalId: "GUID-123",
+                        logicalId: `GUID-${i}`,
+                        versionRef: `${i}`,
                         productFamily: "prod-family"
-                    },
-                    {
-                        id: "2",
-                        title: "Publication 2",
-                        createdOn: new Date(),
-                        language: "en",
-                        version: "1",
-                        logicalId: "GUID-123",
-                        productFamily: "prod-family"
-                    },
-                    {
-                        id: "3",
-                        title: "Publication 3",
-                        createdOn: new Date(),
-                        language: "en",
-                        version: "1",
-                        logicalId: "GUID-123",
-                        productFamily: "prod-family"
-                    }
-                ];
+                    }));
 
-                const publicationsList = this._renderComponent(target, { ...defaultProps, publications });
+                services.publicationService.setMockDataPublications(null, publications, [{ title: "prod-family" }]);
+
+                this._renderComponent(target);
 
                 setTimeout((): void => {
-                    const h3 = TestUtils.scryRenderedDOMComponentsWithTag(publicationsList, "h3");
+                    const domNode = ReactDOM.findDOMNode(target);
+                    const h3 = domNode.querySelectorAll("h3");
                     expect(h3.length).toBe(3);
 
                     expect(h3[0].textContent).toBe(publications[0].title);
                     expect(h3[1].textContent).toBe(publications[1].title);
                     expect(h3[2].textContent).toBe(publications[2].title);
+
+                    // TODO: Check if product family is changed
+
                     done();
                 }, ASYNC_TEST_DELAY);
             });
@@ -132,143 +128,125 @@ class PublicationsListComponent extends TestBase {
                         id: "0",
                         title: "Publication",
                         createdOn: new Date(),
+                        language: "en",
                         version: "1",
                         logicalId: "GUID-123",
                         productFamily: "prod-family"
                     }
                 ];
 
-                const publicationsList = this._renderComponent(target, { ...defaultProps, publications });
-                const domNode = ReactDOM.findDOMNode(publicationsList) as HTMLElement;
-                expect(domNode).not.toBeNull();
-
-                // Spy on the router
-                spyOn(browserHistory, "push").and.callFake((path: string): void => {
-                    // Check if routing was called with correct params
-                    expect(path).toBe(`/0/publication`);
-                    done();
-                });
-
-                // Use a timeout to allow the DataStore to return a promise with the data
+                services.publicationService.setMockDataPublications(null, publications, [{ title: "prod-family" }]);
+                const publicationsList = this._renderComponent(target);
                 setTimeout((): void => {
-                    // tslint:disable-next-line:no-any
-                    const button = TestUtils.findRenderedComponentWithType(publicationsList, Button as any);
-                    expect(button).toBeDefined();
-                    const buttonEl = ReactDOM.findDOMNode(button).querySelector("button") as HTMLButtonElement;
-                    buttonEl.click();
-                }, RENDER_DELAY);
+                    const domNode = ReactDOM.findDOMNode(publicationsList) as HTMLElement;
+                    expect(domNode).not.toBeNull();
+
+                    // Spy on the router
+                    spyOn(browserHistory, "push").and.callFake((path: string): void => {
+                        // Check if routing was called with correct params
+                        expect(path).toBe(`/0/publication`);
+                        done();
+                    });
+
+                    // Use a timeout to allow the DataStore to return a promise with the data
+                    setTimeout((): void => {
+                        // tslint:disable-next-line:no-any
+                        const button = TestUtils.findRenderedComponentWithType(publicationsList, Button as any);
+                        expect(button).toBeDefined();
+                        const buttonEl = ReactDOM.findDOMNode(button).querySelector("button") as HTMLButtonElement;
+                        buttonEl.click();
+                    }, RENDER_DELAY);
+                }, ASYNC_TEST_DELAY);
             });
 
             it("shows first 5 topic titles in the root map of the publication", (done: () => void): void => {
-                const publications: IPublication[] = [
-                    {
-                        id: "0",
-                        title: "Publication",
-                        createdOn: new Date(),
-                        version: "1",
-                        logicalId: "GUID-123",
-                        productFamily: "prod-family"
-                    }
-                ];
+                services.publicationService.setMockDataPublications(
+                    null,
+                    [
+                        {
+                            id: "0",
+                            title: "Publication",
+                            createdOn: new Date(),
+                            language: "en",
+                            version: "1",
+                            logicalId: "GUID-123",
+                            productFamily: "prod-family"
+                        }
+                    ],
+                    [{ title: "prod-family" }]
+                );
 
-                services.taxonomyService.setMockDataToc(null, [
-                    {
-                        id: "1",
-                        title: "Title 1",
-                        url: "/url-1",
-                        hasChildNodes: false
-                    },
-                    {
-                        id: "2",
-                        title: "Title 2",
-                        url: "/url-2",
-                        hasChildNodes: false
-                    },
-                    {
-                        id: "3",
-                        title: "Title 3",
-                        hasChildNodes: false
-                    },
-                    {
-                        id: "4",
-                        title: "Title 4",
-                        url: "/url-4",
-                        hasChildNodes: false
-                    },
-                    {
-                        id: "5",
-                        title: "Title 5",
-                        url: "/url-5",
-                        hasChildNodes: false
-                    },
-                    {
-                        id: "6",
-                        title: "Title 6",
-                        url: "/url-6",
-                        hasChildNodes: false
-                    },
-                    {
-                        id: "7",
-                        title: "Title 7",
-                        url: "/url-7",
-                        hasChildNodes: false
-                    }
-                ]);
+                services.taxonomyService.setMockDataToc(
+                    null,
+                    Array(7)
+                        .fill(null)
+                        .map((n, i) => ({
+                            id: `id-${i}`,
+                            title: `Title ${i}`,
+                            description: `Tile ${i} Description`,
+                            url: i == 3 ? undefined : `/url-${i}`,
+                            hasChildNodes: false
+                        }))
+                );
 
-                const publicationsList = this._renderComponent(target, { ...defaultProps, publications });
+                //const publicationsList = this._renderComponent(target, { ...defaultProps, publications });
+                const publicationsList = this._renderComponent(target);
 
                 setTimeout((): void => {
                     const links = TestUtils.scryRenderedDOMComponentsWithTag(publicationsList, "a");
                     expect(links.length).toBe(5);
                     // Title 3 is not added as it has no url to a page
-                    expect(links[0].textContent).toBe("Title 1");
-                    expect(links[1].textContent).toBe("Title 2");
-                    expect(links[2].textContent).toBe("Title 4");
-                    expect(links[3].textContent).toBe("Title 5");
-                    expect(links[4].textContent).toBe("Title 6");
+                    expect(links[0].textContent).toBe("Title 0");
+                    expect(links[1].textContent).toBe("Title 1");
+                    expect(links[2].textContent).toBe("Title 2");
+                    expect(links[3].textContent).toBe("Title 4");
+                    expect(links[4].textContent).toBe("Title 5");
                     done();
                 }, RENDER_DELAY);
             });
 
             it("can filter on publication release version", (done: () => void): void => {
-                const publications: IPublication[] = [
-                    {
-                        id: "1",
-                        title: "Publication1",
-                        createdOn: new Date(),
-                        version: "1",
-                        logicalId: "GUID-1",
-                        productFamily: "PF",
-                        productReleaseVersion: "PR1",
-                        language: "en"
-                    },
-                    {
-                        id: "2",
-                        title: "Publication2",
-                        createdOn: new Date(),
-                        version: "1",
-                        logicalId: "GUID-1",
-                        productFamily: "PF",
-                        productReleaseVersion: "PR2",
-                        language: "en"
-                    }
+                const productFamily = "prod-family-test";
+                const productFamilies = [{ title: productFamily }];
+                const productReleaseVersins = [
+                    { title: "Release version 1", value: "prod-release-version-1" },
+                    { title: "Release version 2", value: "prod-release-version-2" }
                 ];
-
-                const productFamily = "PF";
-                const productReleaseVersions = [{ title: "PR1", value: "pr1" }, { title: "PR2", value: "pr2" }];
+                services.publicationService.setMockDataPublications(
+                    null,
+                    [
+                        {
+                            id: "1",
+                            title: "Publication1",
+                            createdOn: new Date(),
+                            version: "1",
+                            logicalId: "GUID-1",
+                            productFamily,
+                            productReleaseVersion: productReleaseVersins[0].value,
+                            language: "en"
+                        },
+                        {
+                            id: "2",
+                            title: "Publication2",
+                            createdOn: new Date(),
+                            version: "1",
+                            logicalId: "GUID-1",
+                            productFamily,
+                            productReleaseVersion: productReleaseVersins[1].value,
+                            language: "en"
+                        }
+                    ],
+                    productFamilies,
+                    productReleaseVersins
+                );
 
                 const publicationsList = this._renderComponent(target, {
-                    ...defaultProps,
-                    publications,
-                    selectedProductVersion: productReleaseVersions[0].title,
-                    params: {
-                        productFamily
-                    },
-                    productReleaseVersions
+                    productFamily
                 });
 
                 // Wait for services to return data
                 setTimeout((): void => {
+                    const releaseVersion = 1;
                     // tslint:disable-next-line:no-any
                     const dropdownList = TestUtils.findRenderedComponentWithType(publicationsList, DropdownList as any);
                     const dropdownListNode = ReactDOM.findDOMNode(dropdownList);
@@ -278,23 +256,34 @@ class PublicationsListComponent extends TestBase {
                     // Spy on the router
                     spyOn(browserHistory, "push").and.callFake((path: string): void => {
                         // Check if routing was called with correct params
-                        expect(path).toBe(`/publications/PF/pr2`);
+                        expect(path).toBe(
+                            `/publications/${productFamily}/${productReleaseVersins[releaseVersion].value}`
+                        );
                         done();
                     });
 
                     // Click on the second release version
-                    listItems[1].click();
+                    listItems[releaseVersion].click();
                 }, RENDER_DELAY);
             });
         });
     }
 
-    private _renderComponent(target: HTMLElement, props: IPublicationsListProps): PublicationsListPresentation {
-        const store = configureStore({});
+    private _renderComponent(target: HTMLElement, params?: IPublicationsListPropsParams): PublicationsListPresentation {
+        const store = this.store as Store<IState>;
+        const defaultProps: IPublicationsListProps = {
+            error: "",
+            publications: [],
+            productReleaseVersions: [],
+            selectedProductVersion: "",
+            isLoading: false,
+            uiLanguage: store.getState().language,
+            params: params || ({ productFamily: "prod-family" } as IPublicationsListPropsParams)
+        };
         const comp = ReactDOM.render(
             <Provider store={store}>
                 <ComponentWithContext {...services}>
-                    <PublicationsListPresentation {...props} />
+                    <PublicationsList {...defaultProps} />
                 </ComponentWithContext>
             </Provider>,
             target

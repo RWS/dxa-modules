@@ -69,7 +69,6 @@ class PublicationContentComponent extends TestBase {
             });
 
             it("shows toc", (done: () => void): void => {
-                // services.taxonomyService.fakeDelay(true);
                 services.taxonomyService.setMockDataToc(null, [
                     {
                         id: "123",
@@ -501,7 +500,6 @@ class PublicationContentComponent extends TestBase {
         publicationId?: string
     ): PublicationContentPresentation {
         const store = this.store as Store<IState>;
-
         store.dispatch(updateCurrentPublication(publicationId || PUBLICATION_ID, pageId || "", ""));
 
         const comp = ReactDOM.render(
