@@ -23,7 +23,7 @@ const buildOptions = {
     minCoverage: {
       // Minimum code coverage %
       statements: 80,
-      branches: 70,
+      branches: 78,
       functions: 80,
       lines: 80
     }
