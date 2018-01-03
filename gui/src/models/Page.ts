@@ -67,7 +67,7 @@ export class Page extends LoadableObject {
 
     /* Overloads */
     protected _executeLoad(reload: boolean): void {
-        const url = this._getApiRequestUrl();
+        const url = Api.getPageUrl(this._publicationId, this._pageId);
         let postConditions: IPostConditions = {};
         for (let key in this._conditions) {
             if (this._conditions.hasOwnProperty(key)) {
@@ -90,39 +90,5 @@ export class Page extends LoadableObject {
     protected _processLoadResult(result: string, webRequest: IWebRequest): void {
         this._page = response2page(JSON.parse(result) as ServerModels.IPage);
         super._processLoadResult(result, webRequest);
-    }
-
-    protected _getApiRequestUrl(): string {
-        return Api.getPageUrl(this._publicationId, this._pageId);
-    }
-}
-
-/**
- * Page model
- *
- * @export
- * @class Page
- * @extends {LoadableObject}
- */
-export class PageByLogicalId extends Page {
-    private _logicalId: string;
-    /**
-     * Creates an instance of Page.
-     *
-     * @param {string} publicationId Publication id
-     * @param {string} pageId Page id
-     */
-    constructor(publicationId: string, logicalId: string, conditions: IConditionMap = {}) {
-        super(publicationId, "", conditions);
-        this._logicalId = logicalId;
-    }
-
-    protected _getApiRequestUrl(): string {
-        return Api.getPageIdByReferenceUrl(this._publicationId, this._logicalId);
-    }
-
-    protected _processLoadResult(result: string, webRequest: IWebRequest): void {
-        super._processLoadResult(result, webRequest);
-        this._pageId = this._page.id;
     }
 }

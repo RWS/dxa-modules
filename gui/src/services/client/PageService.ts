@@ -2,12 +2,14 @@ import { IPostComment } from "interfaces/Comments";
 import { IComment } from "interfaces/ServerModels";
 import { IPageService } from "services/interfaces/PageService";
 import { IPage } from "interfaces/Page";
-import { Page, PageByLogicalId } from "models/Page";
+import { Page } from "models/Page";
+import { PageIdByLogicalId } from "models/PageIdByLogicalId";
 import { Promise } from "es6-promise";
 import { IConditionMap } from "store/interfaces/Conditions";
 import { MD5 } from "object-hash";
 import { Comments } from "models/Comments";
 import { Comment } from "models/Comment";
+import { localization } from "services/common/LocalizationService";
 
 /**
  * Page service, interacts with the models to fetch the required data.
@@ -86,25 +88,30 @@ export class PageService implements IPageService {
         conditions?: IConditionMap
     ): Promise<IPage> {
         // We don`t need to add this to the models list, as once its loaded, page would be available by Logical Id
-        const page = new PageByLogicalId(publicationId, logicalId, conditions);
+        const pageIdByLogicalId = new PageIdByLogicalId(publicationId, logicalId);
         return new Promise((resolve: (info?: IPage) => void, reject: (error: string | null) => void) => {
             let removeEventListeners: () => void;
             const onLoad = () => {
                 removeEventListeners();
-                resolve(page.getPage());
+                const pageId = pageIdByLogicalId.getPageId();
+                if (pageId) {
+                    this.getPageInfo(publicationId, pageIdByLogicalId.getPageId(), conditions).then(resolve, reject);
+                } else {
+                    reject(localization.formatMessage("error.page.not.found", [pageId]));
+                }
             };
             const onLoadFailed = (event: Event & { data: { error: string } }) => {
                 removeEventListeners();
                 reject(event.data.error);
             };
             removeEventListeners = (): void => {
-                page.removeEventListener("load", onLoad);
-                page.removeEventListener("loadfailed", onLoadFailed);
+                pageIdByLogicalId.removeEventListener("load", onLoad);
+                pageIdByLogicalId.removeEventListener("loadfailed", onLoadFailed);
             };
 
-            page.addEventListener("load", onLoad);
-            page.addEventListener("loadfailed", onLoadFailed);
-            page.load();
+            pageIdByLogicalId.addEventListener("load", onLoad);
+            pageIdByLogicalId.addEventListener("loadfailed", onLoadFailed);
+            pageIdByLogicalId.load();
         });
     }
 
