@@ -63,7 +63,7 @@
         }
 
         .sdl-dita-delivery-page-content {
-            flex: 1 1;
+            flex: 1 1 auto;
             width: 100%;
 
             .sdl-dita-delivery-breadcrumbs,
@@ -96,6 +96,8 @@
             flex-wrap: nowrap;
             .sdl-dita-delivery-page-content {
                 width: ~"calc(100% - @{contentNavWidth})";
+                // another FF fix. See https://stackoverflow.com/questions/28636832#28639686
+                min-width: 0;
             }
 
             .sdl-dita-delivery-content-navigation-wrapper {
