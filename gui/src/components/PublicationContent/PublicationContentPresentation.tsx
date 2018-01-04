@@ -259,21 +259,23 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         const { page, publicationId } = this.props;
         const { publicationId: nextPubId, page: nextPage, errorMessage } = nextProps;
 
-        if (!isPage(nextPage) || nextPubId !== publicationId) {
+        if (!isPage(nextPage)) {
             this.fetchPublication(nextPubId);
         }
 
-        if (isPage(nextPage) && MD5(nextProps.conditions) !== MD5(this.props.conditions)) {
-            this.setState(
-                {
-                    isTocLoading: true
-                },
-                () => this.refreshToc(nextPubId, nextPage)
-            );
-        } else if (isPage(nextPage) && !isDummyPage(nextPage) && nextPage.content !== page.content) {
-            this.refreshToc(nextPubId, nextPage);
-        } else if (errorMessage) {
+        if (errorMessage) {
             this._onPageContentRetrievFailed(nextPubId, errorMessage);
+        } else if (isPage(nextPage)) {
+            if (nextPubId !== publicationId || MD5(nextProps.conditions) !== MD5(this.props.conditions)) {
+                this.setState(
+                    {
+                        isTocLoading: true
+                    },
+                    () => this.refreshToc(nextPubId, nextPage)
+                );
+            } else if (!isDummyPage(nextPage) && nextPage.content !== page.content) {
+                this.refreshToc(nextPubId, nextPage);
+            }
         }
     }
 
