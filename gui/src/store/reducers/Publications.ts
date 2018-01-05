@@ -50,7 +50,7 @@ export const publications = combineReducers({
 const productReleaseVersionHack = (prop: string, obj: {}) => {
     // tslint:disable-next-line:no-any
     let value = (obj as any)[prop];
-    return (prop !== "productReleaseVersion")
+    return (!["productReleaseVersion", "productFamily"].includes(prop))
         ? value
         : Version.normalize(value);
 };
