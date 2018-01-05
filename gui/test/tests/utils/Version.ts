@@ -279,7 +279,7 @@ describe(`Version tests.`, (): void => {
             }
         ];
         expect(Version.sortProductFamilyVersions(publications))
-            .toEqual(["PF First ", "PF Second ", "PF Last ", "PF First (1.2.)", "PF Other ()", null]);
+            .toEqual(["PF First", "PF Second", "PF Last", "PF First (1.2.)", "PF Other ()", null]);
     });
 
     it("compares versions correctly", (): void => {

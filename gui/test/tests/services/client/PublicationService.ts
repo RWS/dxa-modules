@@ -122,7 +122,7 @@ class PublicationServiceTests extends TestBase {
                         expect(releaseVersions).toBeDefined();
                         if (releaseVersions) {
                             expect(releaseVersions.length).toBe(1);
-                            expect(releaseVersions[0].title).toBe("Penguins ");
+                            expect(releaseVersions[0].title).toBe("Penguins");
                         }
                         done();
                     }).catch(error => {
@@ -139,7 +139,7 @@ class PublicationServiceTests extends TestBase {
                         expect(releaseVersions).toBeDefined();
                         if (releaseVersions) {
                             expect(releaseVersions.length).toBe(1);
-                            expect(releaseVersions[0].title).toBe("Penguins ");
+                            expect(releaseVersions[0].title).toBe("Penguins");
                             expect(spy).not.toHaveBeenCalled();
                         }
                         done();
@@ -169,7 +169,7 @@ class PublicationServiceTests extends TestBase {
                     expect(releaseVersions).toBeDefined();
                     if (releaseVersions) {
                         expect(releaseVersions.length).toBe(2);
-                        expect(releaseVersions[0].title).toBe("MP 330 ");
+                        expect(releaseVersions[0].title).toBe("MP 330");
                         expect(releaseVersions[1].title).toBe("MP 330 2014");
                     }
                     done();
@@ -185,7 +185,7 @@ class PublicationServiceTests extends TestBase {
                     expect(releaseVersions).toBeDefined();
                     if (releaseVersions) {
                         expect(releaseVersions.length).toBe(2);
-                        expect(releaseVersions[0].title).toBe("MP 330 ");
+                        expect(releaseVersions[0].title).toBe("MP 330");
                         expect(releaseVersions[1].title).toBe("MP 330 2014");
                         expect(spy).not.toHaveBeenCalled();
                     }

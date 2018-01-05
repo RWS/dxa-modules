@@ -68,12 +68,12 @@ export default class Version {
         });
         // Convert to a product family version (remove version from end if it's in the correct format)
         const familyVersions = pubsWithDistinctFamilyVersions.map(pub => {
-            const familyVersion = pub.productFamily || null;
+            let familyVersion = pub.productFamily || null;
             const familyVersionMatch = familyVersion && familyVersion.match(VERSION_REGEX);
             if (familyVersionMatch) {
-                return familyVersionMatch[1];
+                familyVersion =  familyVersionMatch[1];
             }
-            return familyVersion;
+            return familyVersion && familyVersion.trim();
         });
         // Take distinct product families
         return this._distinct(familyVersions);
@@ -181,12 +181,12 @@ export default class Version {
 
         // Convert to a product release version (remove version from end if it's in the correct format)
         const releaseVersions = orderedPubs.map(pub => {
-            const releaseVersion = pub.productReleaseVersion || null;
+            let releaseVersion = pub.productReleaseVersion || null;
             const releaseVersionMatch = releaseVersion && releaseVersion.match(VERSION_REGEX);
             if (releaseVersionMatch) {
-                return releaseVersionMatch[1];
+                releaseVersion = releaseVersionMatch[1];
             }
-            return releaseVersion;
+            return releaseVersion && releaseVersion.trim();
         });
         // Take distinct product release versions
         return this._distinct(releaseVersions);
