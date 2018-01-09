@@ -5,12 +5,11 @@ import { IErrorContentProps } from "@sdl/dd/container/ErrorContent/ErrorContentP
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 import { TestBase } from "@sdl/models";
 import { configureStore } from "store/Store";
+import { browserHistory } from "react-router";
 import { Provider } from "react-redux";
 
 class ErrorContentComponent extends TestBase {
-
     public runTests(): void {
-
         describe(`Error page component tests.`, (): void => {
             const target = super.createTargetElement();
 
@@ -25,7 +24,7 @@ class ErrorContentComponent extends TestBase {
                 }
             });
 
-            it("Correct component render", (): void => {
+            it("Correct component render", (done: () => void): void => {
                 this._renderComponent({}, target);
                 const errorPageElement = document.querySelector(".sdl-dita-delivery-error-page") as HTMLButtonElement;
                 const errorButton = errorPageElement.querySelectorAll(".sdl-button") as NodeListOf<HTMLButtonElement>;
@@ -35,14 +34,23 @@ class ErrorContentComponent extends TestBase {
 
                 expect(searchBar).not.toBeNull();
                 expect(errorPageElement).not.toBeNull();
-                expect(errorButton.length).toBe(1);
-                expect(errorButton.length).toBe(1);
+
                 expect(errorTitle.item(0).textContent).toBe("mock-error.default.title");
                 expect(errorMessage.item(0).textContent).toBe("mock-error.url.not.found");
+
+                spyOn(browserHistory, "push").and.callFake((): void => {
+                    done();
+                });
+
+                expect(errorButton.length).toBe(1);
+                errorButton[0].click();
             });
 
             it("Shows the status code when provided", (): void => {
-                this._renderComponent({ error: { message: "Something went serioursly wrong!", statusCode: "500" } }, target);
+                this._renderComponent(
+                    { error: { message: "Something went serioursly wrong!", statusCode: "500" } },
+                    target
+                );
                 const errorPageElement = document.querySelector(".sdl-dita-delivery-error-page") as HTMLElement;
                 const errorTitle = errorPageElement.querySelectorAll("h1");
 
@@ -54,7 +62,14 @@ class ErrorContentComponent extends TestBase {
 
     private _renderComponent(props: IErrorContentProps, target: HTMLElement): void {
         const store = configureStore();
-        ReactDOM.render(<Provider store={store}><ComponentWithContext><ErrorContent {...props} /></ComponentWithContext></Provider>, target) as React.Component<{}, {}>;
+        ReactDOM.render(
+            <Provider store={store}>
+                <ComponentWithContext>
+                    <ErrorContent {...props} />
+                </ComponentWithContext>
+            </Provider>,
+            target
+        ) as React.Component<{}, {}>;
     }
 }
 

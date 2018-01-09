@@ -26,16 +26,31 @@ class DialogComponent extends TestBase {
                 TestUtils.Simulate.click(ReactDOM.findDOMNode(component));
                 expect(onRequestCloseSpy).toHaveBeenCalled();
             });
+
+            it("triggers onRequestClose when ESC button is clicked", (): void => {
+                const onRequestCloseSpy = jasmine.createSpy("onRequestClose");
+                this._renderComponent(target, onRequestCloseSpy, true);
+
+                // Workaround to dispatch Esc keyup event.
+                var event = document.createEvent("Event");
+                event.initEvent("keyup", true, false);
+                Object.defineProperty(event, "keyCode", { value: 27 });
+                window.dispatchEvent(event);
+
+                expect(onRequestCloseSpy).toHaveBeenCalled();
+            });
         });
     }
 
-    private _renderComponent(target: HTMLElement,
-        onRequestClose: IRequestHandler = () => { },
-        open: boolean = true): Dialog {
-
-        const comp = ReactDOM.render(
-            <Dialog open={open} onRequestClose={onRequestClose} />
-            , target) as React.Component<{}, {}>;
+    private _renderComponent(
+        target: HTMLElement,
+        onRequestClose: IRequestHandler = () => {},
+        open: boolean = true
+    ): Dialog {
+        const comp = ReactDOM.render(<Dialog open={open} onRequestClose={onRequestClose} />, target) as React.Component<
+            {},
+            {}
+        >;
         return TestUtils.findRenderedComponentWithType(comp, Dialog);
     }
 }
