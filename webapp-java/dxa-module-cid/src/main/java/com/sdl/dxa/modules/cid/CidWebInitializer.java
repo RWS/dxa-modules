@@ -34,7 +34,7 @@ public class CidWebInitializer implements WebApplicationInitializer {
             log.warn("Class {} for CID module is expected to be either Filter of Servlet but is", className);
         }
 
-        String sessionIdName = InitializationUtils.loadDxaProperties().getProperty("dxa.web.sessionid.name");
+        String sessionIdName = InitializationUtils.loadDxaProperties().getProperty("dxa.modules.cid.sessionid.name");
         servletContext.getSessionCookieConfig().setName(sessionIdName);
         log.info("Set default SESSIONID to {}", sessionIdName);
     }
