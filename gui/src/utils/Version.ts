@@ -1,5 +1,5 @@
 import { IPublication } from "interfaces/Publication";
-import { DEFAULT_UNKNOWN_PRODUCT_RELEASE_VERSION } from "models/Publications";
+import { DEFAULT_UNKNOWN_PRODUCT_RELEASE_VERSION, DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE } from "models/Publications";
 import { String } from "utils/String";
 
 const VERSION_REGEX = /^(.*)\((\d+(\.\d+)*)\)$/i;
@@ -71,7 +71,7 @@ export default class Version {
             let familyVersion = pub.productFamily || null;
             const familyVersionMatch = familyVersion && familyVersion.match(VERSION_REGEX);
             if (familyVersionMatch) {
-                familyVersion =  familyVersionMatch[1];
+                familyVersion = familyVersionMatch[1];
             }
             return familyVersion && familyVersion.trim();
         });
@@ -244,6 +244,20 @@ export default class Version {
     }
 
     /**
+     * Normalize a product family value
+     * Removes for example a version at the end of a value eg RV (1.0.0) become RV
+     *
+     * @static
+     * @param {string | null | undefined} productFamily Product family
+     * @returns {string} Normalized product family name
+     *
+     * @memberOf Version
+     */
+    public static normalizeProductFamily(productFamilyName: string | null | undefined): string {
+        return Version.normalize(productFamilyName) || String.normalize(DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE);
+    }
+
+    /**
      * Normalize a product release version
      * Removes for example a version at the end of a value eg RV (1.0.0) become RV
      *
@@ -253,15 +267,27 @@ export default class Version {
      *
      * @memberOf Version
      */
-    public static normalize(productReleaseVersion: string | null | undefined): string {
-        if (productReleaseVersion) {
-            const releaseVersionMatch = productReleaseVersion.match(VERSION_REGEX);
-            return releaseVersionMatch
-                ? String.normalize(releaseVersionMatch[1])
-                : String.normalize(productReleaseVersion);
+    public static normalizeReleaseVersion(productReleaseVersion: string | null | undefined): string {
+        return Version.normalize(productReleaseVersion) || String.normalize(DEFAULT_UNKNOWN_PRODUCT_RELEASE_VERSION);
+    }
+
+    /**
+     * Normalize version value
+     * Removes for example a version at the end of a value eg RV (1.0.0) become RV
+     *
+     * @static
+     * @param {string | null | undefined} version Product version
+     * @returns {string} Normalized version
+     *
+     * @memberOf Version
+     */
+    private static normalize(version: string | null | undefined): string | null {
+        if (version) {
+            const versionMatch = version.match(VERSION_REGEX);
+            return versionMatch ? String.normalize(versionMatch[1]) : String.normalize(version);
         }
 
-        return String.normalize(DEFAULT_UNKNOWN_PRODUCT_RELEASE_VERSION);
+        return null;
     }
 
     private static _distinct(collection: (string | null)[]): (string | null)[] {

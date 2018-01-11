@@ -280,7 +280,6 @@ export class PublicationsListPresentation extends React.Component<IPublicationsL
                     const pagesToDisplay = items.filter(item => item.url).slice(0, SHOWN_TILE_ITEMS_COUNT);
                     resolve(
                         pagesToDisplay.map((item: ITaxonomy, i: number) => {
-                            //TODO get read of test.
                             const params = item.url && Url.parsePageUrl(item.url);
                             const url =
                                 params &&

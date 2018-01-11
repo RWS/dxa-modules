@@ -18,7 +18,7 @@ import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 import { IPublication } from "interfaces/Publication";
 import { configureStore } from "store/Store";
 import { IState } from "src/store/interfaces/State";
-
+import { DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE } from "models/Publications";
 import { RENDER_DELAY, ASYNC_TEST_DELAY } from "test/Constants";
 
 const services = {
@@ -90,35 +90,51 @@ class PublicationsListComponent extends TestBase {
             });
 
             it("renders only publications associated with product family", (done: () => void): void => {
+                const prodFamily = "prod-family";
+                //const prodReleaseVersion = "product-release-version";
+                const createPublication = (productFamily: string | undefined, pubId: number): IPublication => ({
+                    id: `id-${pubId}`,
+                    title: `Publication ${pubId}`,
+                    createdOn: new Date(),
+                    language: "en",
+                    version: "1",
+                    logicalId: `GUID-${pubId}`,
+                    versionRef: `${pubId}`,
+                    productFamily: productFamily
+                    //, productReleaseVersion: prodReleaseVersion
+                });
                 const publications: IPublication[] = Array(3)
-                    .fill(null)
-                    .map((n, i) => ({
-                        id: `id-${i}`,
-                        title: `Publication ${i}`,
-                        createdOn: new Date(),
-                        language: "en",
-                        version: "1",
-                        logicalId: `GUID-${i}`,
-                        versionRef: `${i}`,
-                        productFamily: "prod-family"
-                    }));
+                    .fill(prodFamily)
+                    .map((pf, i) => createPublication(pf, i))
+                    .concat(createPublication(DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE, 197));
 
-                services.publicationService.setMockDataPublications(null, publications, [{ title: "prod-family" }]);
+                services.publicationService.setMockDataPublications(
+                    null,
+                    publications,
+                    [{ title: prodFamily }, { title: DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE }]
+                    //, [{ title: prodReleaseVersion, value: prodReleaseVersion }]
+                );
 
                 this._renderComponent(target);
 
                 setTimeout((): void => {
-                    const domNode = ReactDOM.findDOMNode(target);
-                    const h3 = domNode.querySelectorAll("h3");
+                    const h3 = ReactDOM.findDOMNode(target).querySelectorAll("h3");
                     expect(h3.length).toBe(3);
 
                     expect(h3[0].textContent).toBe(publications[0].title);
                     expect(h3[1].textContent).toBe(publications[1].title);
                     expect(h3[2].textContent).toBe(publications[2].title);
 
-                    // TODO: Check if product family is changed
+                    // Check if product family can be changed
+                    this._renderComponent(target, { productFamily: DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE });
 
-                    done();
+                    setTimeout((): void => {
+                        const domNode = ReactDOM.findDOMNode(target);
+                        const updatedH3 = domNode.querySelectorAll("h3");
+                        expect(updatedH3.length).toBe(1);
+                        expect(updatedH3[0].textContent).toBe(publications[3].title);
+                        done();
+                    }, ASYNC_TEST_DELAY);
                 }, ASYNC_TEST_DELAY);
             });
 
@@ -189,7 +205,6 @@ class PublicationsListComponent extends TestBase {
                         }))
                 );
 
-                //const publicationsList = this._renderComponent(target, { ...defaultProps, publications });
                 const publicationsList = this._renderComponent(target);
 
                 setTimeout((): void => {
@@ -202,7 +217,44 @@ class PublicationsListComponent extends TestBase {
                     expect(links[3].textContent).toBe("Title 4");
                     expect(links[4].textContent).toBe("Title 5");
                     done();
-                }, RENDER_DELAY);
+                }, ASYNC_TEST_DELAY);
+            });
+
+            it("shows an error if topic titles can`t be retrieved", (done: () => void): void => {
+                services.publicationService.setMockDataPublications(
+                    null,
+                    [
+                        {
+                            id: "0",
+                            title: "Publication",
+                            createdOn: new Date(),
+                            language: "en",
+                            version: "1",
+                            logicalId: "GUID-123",
+                            productFamily: "prod-family"
+                        }
+                    ],
+                    [{ title: "prod-family" }],
+                    []
+                );
+
+                const tocError = "TOC is failed to load!";
+                services.taxonomyService.setMockDataToc(tocError);
+
+                const publicationsList = this._renderComponent(target);
+
+                setTimeout((): void => {
+                    const tiles = TestUtils.scryRenderedDOMComponentsWithClass(
+                        publicationsList,
+                        "sdl-dita-delivery-tile"
+                    );
+                    expect(tiles.length).toBe(1);
+                    expect(
+                        ((tiles[0] as HTMLElement).querySelector(".tile-content .error-message") as HTMLSpanElement)
+                            .textContent
+                    ).toBe("mock-error.publication.topics.not.found");
+                    done();
+                }, ASYNC_TEST_DELAY);
             });
 
             it("can filter on publication release version", (done: () => void): void => {

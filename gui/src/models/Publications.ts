@@ -47,7 +47,7 @@ export class Publications extends LoadableObject {
                 if (!familyTitle) {
                     return !publication.productFamily;
                 }
-                return (publication.productFamily && Version.normalize(publication.productFamily)) === familyTitle;
+                return (publication.productFamily && Version.normalizeProductFamily(publication.productFamily)) === familyTitle;
             });
         }
 
@@ -61,7 +61,7 @@ export class Publications extends LoadableObject {
                 if (!productReleaseVersionTitle) {
                     return !publication.productReleaseVersion;
                 }
-                return Version.normalize(publication.productReleaseVersion) === productReleaseVersionTitle;
+                return Version.normalizeReleaseVersion(publication.productReleaseVersion) === productReleaseVersionTitle;
             });
         }
 

@@ -47,18 +47,21 @@ export const publications = combineReducers({
 });
 
 // Selectors
-const productReleaseVersionHack = (prop: string, obj: {}) => {
+const normalizeVersionHack = (prop: string, obj: {}) => {
     // tslint:disable-next-line:no-any
     let value = (obj as any)[prop];
-    return (!["productReleaseVersion", "productFamily"].includes(prop))
-        ? value
-        : Version.normalize(value);
+    switch (prop) {
+        case "productReleaseVersion":
+            return Version.normalizeReleaseVersion(value);
+        case "productFamily":
+            return Version.normalizeProductFamily(value);
+        default:
+            return value;
+    }
 };
 
 const normalizeValue = (value: string, defaultLabel: string): string | null => {
-    return (String.normalize(value) === String.normalize(defaultLabel))
-        ? null
-        : value;
+    return String.normalize(value) === String.normalize(defaultLabel) ? null : value;
 };
 
 /**
@@ -74,31 +77,33 @@ const normalizeValue = (value: string, defaultLabel: string): string | null => {
  */
 export const getPubList = (state: IPublicationsState, filter: {} = {}): IPublication[] => {
     const keys = Object.keys(filter);
-    return Object.values(state.byId)
-        .filter((publication) => {
-            return keys.every(prop => {
-                const propName = /^\!(.+)/.test(prop) ? RegExp.$1 : prop;
-                if (propName in publication === false) {
-                    console.warn(`There is no property ${prop} in`, publication);
-                }
+    return Object.values(state.byId).filter(publication => {
+        return keys.every(prop => {
+            const propName = /^\!(.+)/.test(prop) ? RegExp.$1 : prop;
+            if (propName in publication === false) {
+                console.warn(`There is no property ${prop} in`, publication);
+            }
 
-                const valueFilter = productReleaseVersionHack(propName, filter);
-                const valueObj = productReleaseVersionHack(propName, publication);
-                return propName === prop ? valueFilter === valueObj : valueFilter !== valueObj;
-            });
+            const valueFilter = normalizeVersionHack(propName, filter);
+            const valueObj = normalizeVersionHack(propName, publication);
+            return propName === prop ? valueFilter === valueObj : valueFilter !== valueObj;
         });
+    });
 };
-export const getPubById = (state: IPublicationsState, id: string): IPublication => id in state.byId ? state.byId[id] : notFound(id);
+export const getPubById = (state: IPublicationsState, id: string): IPublication =>
+    id in state.byId ? state.byId[id] : notFound(id);
 
 export const getPubsByLang = (state: IPublicationsState, language: string) => getPubList(state, { language });
 
 export const getPubForLang = (state: IPublicationsState, publication: IPublication, language: string) => {
-    return getPubList(state, {
-        "!id": publication.id,
-        language,
-        versionRef: publication.versionRef,
-        productReleaseVersion: publication.productReleaseVersion
-    })[0] || notFound(publication.id);
+    return (
+        getPubList(state, {
+            "!id": publication.id,
+            language,
+            versionRef: publication.versionRef,
+            productReleaseVersion: publication.productReleaseVersion
+        })[0] || notFound(publication.id)
+    );
 };
 
 export const getPubListRepresentatives = (state: IState, filter: {}): (IPublication | undefined)[] => {
@@ -107,8 +112,10 @@ export const getPubListRepresentatives = (state: IState, filter: {}): (IPublicat
     return chain(getPubList(state.publications, filter))
         .groupBy("versionRef")
         .values()
-        .flatMap((pubsByRef: IPublication[]) => find(pubsByRef, { language: state.language })
-                                             || find(pubsByRef, { language: DEFAULT_LANGUAGE }))
+        .flatMap(
+            (pubsByRef: IPublication[]) =>
+                find(pubsByRef, { language: state.language }) || find(pubsByRef, { language: DEFAULT_LANGUAGE })
+        )
         .value()
         .filter(publiction => publiction !== undefined);
 };
@@ -120,9 +127,7 @@ export const normalizeProductFamily = (params: IPublicationsListPropsParams): st
     normalizeValue(params.productFamily, DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE);
 
 export const normalizeProductReleaseVersion = (params: IPublicationsListPropsParams | string): string | null => {
-    const value = (typeof params === "string")
-        ? params
-        : params.productReleaseVersion || "";
+    const value = typeof params === "string" ? params : params.productReleaseVersion || "";
     return normalizeValue(value, DEFAULT_UNKNOWN_PRODUCT_RELEASE_VERSION);
 };
 
