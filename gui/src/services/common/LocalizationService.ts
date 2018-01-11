@@ -109,10 +109,11 @@ export class LocalizationService implements ILocalizationService {
      * @param   {string} name
      * @returns {string}
      */
-    public nameToIso(name: string): string {
-        const options = LanguageMap.filter((language: ILanguage) => language.name.toLowerCase() == name.toLowerCase());
-        return options[0] && options[0].iso || name;
-    }
+    // The method below is not used. Uncomment when it would get required.
+    // public nameToIso(name: string): string {
+    //     const options = LanguageMap.filter((language: ILanguage) => language.name.toLowerCase() == name.toLowerCase());
+    //     return options[0] && options[0].iso || name;
+    // }
 
     /**
      * Determine language direction

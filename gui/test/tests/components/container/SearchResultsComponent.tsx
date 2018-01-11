@@ -25,9 +25,7 @@ Contact your network operator or service provider for availability, pricing and 
 of the applications used over GPRS. Parent topic: Your phone`;
 
 class SearchResultsComponent extends TestBase {
-
     public runTests(): void {
-
         describe(`SearchResults component tests.`, (): void => {
             const target = super.createTargetElement();
 
@@ -45,8 +43,11 @@ class SearchResultsComponent extends TestBase {
 
             it("show loading indicator on initial render", (): void => {
                 const searchResults = this._renderComponent(target);
-                // tslint:disable-next-line:no-any
-                const activityIndicators = TestUtils.scryRenderedComponentsWithType(searchResults, ActivityIndicator as any);
+                const activityIndicators = TestUtils.scryRenderedComponentsWithType(
+                    searchResults,
+                    // tslint:disable-next-line:no-any
+                    ActivityIndicator as any
+                );
                 expect(activityIndicators.length).toBe(1, "Could not find activity indicators.");
             });
 
@@ -57,8 +58,11 @@ class SearchResultsComponent extends TestBase {
                 const searchResults = this._renderComponent(target);
 
                 setTimeout((): void => {
-                    // tslint:disable-next-line:no-any
-                    const activityIndicators = TestUtils.scryRenderedComponentsWithType(searchResults, ActivityIndicator as any);
+                    const activityIndicators = TestUtils.scryRenderedComponentsWithType(
+                        searchResults,
+                        // tslint:disable-next-line:no-any
+                        ActivityIndicator as any
+                    );
                     expect(activityIndicators.length).toBe(0, "Activity indicator should not be rendered.");
 
                     const domNode = ReactDOM.findDOMNode(searchResults) as HTMLElement;
@@ -66,7 +70,9 @@ class SearchResultsComponent extends TestBase {
                     expect(errorElement).not.toBeNull("Error dialog not found");
                     const errorTitle = (errorElement as HTMLElement).querySelector("h1") as HTMLElement;
                     expect(errorTitle.textContent).toEqual("mock-error.default.title");
-                    const buttons = (errorElement as HTMLElement).querySelectorAll(".sdl-dita-delivery-button-group button");
+                    const buttons = (errorElement as HTMLElement).querySelectorAll(
+                        ".sdl-dita-delivery-button-group button"
+                    );
                     expect(buttons.length).toEqual(1);
 
                     done();
@@ -74,17 +80,19 @@ class SearchResultsComponent extends TestBase {
             });
 
             it("shows no-results message when search results returns no result", (done: () => void): void => {
-                services.searchService.setMockDataSearch(null,
-                    {
-                        hits: 0,
-                        startIndex: 0,
-                        queryResults: []
-                    });
+                services.searchService.setMockDataSearch(null, {
+                    hits: 0,
+                    startIndex: 0,
+                    queryResults: []
+                });
                 const searchResults = this._renderComponent(target);
 
                 setTimeout((): void => {
-                    // tslint:disable-next-line:no-any
-                    const activityIndicators = TestUtils.scryRenderedComponentsWithType(searchResults, ActivityIndicator as any);
+                    const activityIndicators = TestUtils.scryRenderedComponentsWithType(
+                        searchResults,
+                        // tslint:disable-next-line:no-any
+                        ActivityIndicator as any
+                    );
                     expect(activityIndicators.length).toBe(0, "Activity indicator should not be rendered.");
 
                     const domNode = ReactDOM.findDOMNode(searchResults) as HTMLElement;
@@ -96,39 +104,61 @@ class SearchResultsComponent extends TestBase {
             });
 
             it("shows load more when more than 10 results found", (done: () => void): void => {
+                const getSearcheResultItem = (publicationId: string, pageId: string): ISearchQueryResult => ({
+                    id: `ish:${publicationId}-${pageId}-1`,
+                    content: TEST_CONTENT,
+                    language: "en",
+                    lastModifiedDate: new Date(),
+                    publicationId,
+                    publicationTitle: `Publication Title-${pageId}`,
+                    pageId,
+                    pageTitle: `Page Title-${pageId}`
+                });
 
-                services.searchService.setMockDataSearch(null,
-                    {
-                        hits: 100,
-                        startIndex: 0,
-                        queryResults: Array.apply(null, Array(10)).map((n: undefined, i: number) => {
-                            const publicationId = "42";
-                            const pageId = i.toString();
-                            return {
-                                id: `ish:${publicationId}-${pageId}-1`,
-                                content: TEST_CONTENT,
-                                language: "en",
-                                lastModifiedDate: new Date(),
-                                publicationId,
-                                publicationTitle: `Publication Title-${i}`,
-                                pageId,
-                                pageTitle: `Page Title-${i}`
-                            } as ISearchQueryResult;
-                        })
-                    } as ISearchQueryResults);
+                const publicationWithProductFamily = {
+                    ...getSearcheResultItem("47", "1000"),
+                    productFamilyTitle: "Product Family",
+                    productReleaseVersionTitle: "Product Release"
+                };
 
-                const searchResults = this._renderComponent(target/*, "3310", "pub-10"*/);
+                services.searchService.setMockDataSearch(null, {
+                    hits: 100,
+                    startIndex: 0,
+                    queryResults: [
+                        ...Array(10)
+                            .fill(42)
+                            .map((publicationId: number, pageId: number) =>
+                                getSearcheResultItem(publicationId.toString(), pageId.toString())
+                            ),
+                        publicationWithProductFamily
+                    ]
+                } as ISearchQueryResults);
+
+                const searchResults = this._renderComponent(target /*, "3310", "pub-10"*/);
 
                 setTimeout((): void => {
-
-                    // tslint:disable-next-line:no-any
-                    const activityIndicators = TestUtils.scryRenderedComponentsWithType(searchResults, ActivityIndicator as any);
+                    const activityIndicators = TestUtils.scryRenderedComponentsWithType(
+                        searchResults,
+                        // tslint:disable-next-line:no-any
+                        ActivityIndicator as any
+                    );
                     expect(activityIndicators.length).toBe(0, "Activity indicator should not be rendered.");
 
                     const items = TestUtils.scryRenderedDOMComponentsWithTag(searchResults, "h3");
-                    expect(items.length).toBe(10);
+                    expect(items.length).toBe(11);
                     items.forEach((x: HTMLElement, i: number) => {
-                        expect(x.textContent).toBe(`Page Title-${i}`);
+                        if (i < items.length - 1) {
+                            expect(x.textContent).toBe(`Page Title-${i}`);
+                        } else {
+                            expect(x.textContent).toBe(publicationWithProductFamily.pageTitle);
+                            const links = (x.parentElement as HTMLElement).querySelectorAll("nav a") as NodeListOf<
+                                HTMLAnchorElement
+                            >;
+                            expect(links.length).toBe(3);
+                            expect(links[0].title).toBe(publicationWithProductFamily.productFamilyTitle);
+                            expect(links[1].title).toBe(publicationWithProductFamily.productReleaseVersionTitle);
+                            expect(links[2].title).toBe(publicationWithProductFamily.publicationTitle);
+                        }
                     });
 
                     // tslint:disable-next-line:no-any
@@ -138,19 +168,19 @@ class SearchResultsComponent extends TestBase {
                     done();
                 }, RENDER_DELAY);
             });
-
         });
     }
 
     private _renderComponent(target: HTMLElement, searchQuery?: string, publicationId?: string): SearchResults {
         const comp = ReactDOM.render(
-            (
-                <ComponentWithContext {...services}>
-                    <SearchResults
-                        locale={TEST_LOCALE}
-                        params={{ publicationId: publicationId || "", searchQuery: searchQuery || TEST_QUERY }} />
-                </ComponentWithContext>
-            ), target) as React.Component<{}, {}>;
+            <ComponentWithContext {...services}>
+                <SearchResults
+                    locale={TEST_LOCALE}
+                    params={{ publicationId: publicationId || "", searchQuery: searchQuery || TEST_QUERY }}
+                />
+            </ComponentWithContext>,
+            target
+        ) as React.Component<{}, {}>;
         return TestUtils.findRenderedComponentWithType(comp, SearchResults) as SearchResults;
     }
 }
