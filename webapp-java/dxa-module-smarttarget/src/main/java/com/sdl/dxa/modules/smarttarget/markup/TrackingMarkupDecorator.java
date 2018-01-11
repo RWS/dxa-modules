@@ -61,6 +61,7 @@ public class TrackingMarkupDecorator implements MarkupDecorator {
         SmartTargetExperiment experiment = (SmartTargetExperiment) model;
         try {
             this.analyticsManager.trackView(experiment.getExperimentDimensions(), Collections.emptyMap());
+            this.analyticsManager.trackConversion(experiment.getExperimentDimensions(), Collections.emptyMap());
             return this.analyticsManager.addTrackingToLinks(markup.toHtml(),
                     experiment.getExperimentDimensions(), Collections.emptyMap());
         } catch (SmartTargetException e) {
