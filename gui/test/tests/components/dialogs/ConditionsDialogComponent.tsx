@@ -14,7 +14,7 @@ import { PublicationService } from "test/mocks/services/PublicationService";
 import { updateCurrentPublication, updateEditingConditions } from "src/store/actions/Actions";
 import { ConditionsDialogPresentation } from "components/ConditionsDialog/ConditionsDialogPresentation";
 import { ConditionsDialog } from "components/ConditionsDialog/ConditionsDialog";
-import { RENDER_DELAY } from "test/Constants";
+import { RENDER_DELAY, ASYNC_DELAY } from "test/Constants";
 import { TestBase } from "@sdl/models";
 import { LabelManager } from "@sdl/controls-react-wrappers";
 
@@ -150,7 +150,6 @@ class ConditionsDialogComponent extends TestBase {
                 const component = this._renderComponent(target);
 
                 setTimeout((): void => {
-                    //const state = this.store.getState();
                     expect(Object.keys(getEditingConditions(store.getState())).length).toBe(0);
 
                     const datePicker = TestUtils.findRenderedComponentWithType(component, ReactDatePicker);
@@ -160,7 +159,6 @@ class ConditionsDialogComponent extends TestBase {
                     ) as HTMLInputElement;
                     expect(inputField).toBeDefined();
 
-                    //datePicker.setState({ preSelection: "01/01/2018" });
                     TestUtils.Simulate.focus(inputField);
                     TestUtils.Simulate.keyDown(inputField, { key: "Enter" });
 
@@ -172,7 +170,7 @@ class ConditionsDialogComponent extends TestBase {
                 }, RENDER_DELAY);
             });
 
-            it("Renders labels manager control, with predefined values", (done: () => void): void => {
+            it("Renders labels manager control", (done: () => void): void => {
                 const store = this.store;
 
                 const Techs = sampleConditions.Techs;
@@ -193,15 +191,73 @@ class ConditionsDialogComponent extends TestBase {
                     // tslint:disable-next-line:no-any
                     const labelManager = TestUtils.findRenderedComponentWithType(component, LabelManager as any);
                     expect(labelManager).toBeDefined("Label manager control should be defined");
-                    const labels = ReactDOM.findDOMNode(labelManager).querySelectorAll(
-                        "li.sdl-labelmanager-item .tag-value"
-                    ) as NodeListOf<HTMLSpanElement>;
-                    expect(labels.length).toBe(1);
-                    expect(labels[0].textContent).toBe(selectedValue);
+                    const labelManagerNode = ReactDOM.findDOMNode(labelManager);
+                    const tags = labelManagerNode.querySelectorAll("li.sdl-labelmanager-item .tag-value");
+                    expect(tags.length).toBe(1);
+                    expect(tags[0].textContent).toBe(selectedValue);
 
-                    // Changed conditions are going to editing conditions first
-                    // expect(getEditingConditions(store.getState()).Techs.values[0]).toBeDefined();
-                    done();
+                    // Case 1. Can open tree view and select Item from there
+                    const case1 = (callback: () => void) => {
+                        const toggleButton = labelManagerNode.querySelector(".sdl-button") as HTMLButtonElement;
+                        // Toggle On
+                        toggleButton.click();
+
+                        setTimeout((): void => {
+                            const labelsTreeView = document.querySelector(".sdl-labelmanager-tree") as HTMLElement;
+                            expect(labelsTreeView).toBeDefined();
+                            const labels = labelsTreeView.querySelectorAll("li[data-type=Tag] .content span");
+                            expect(labels.length).toBe(Techs.values.length);
+
+                            const firstLabel = labels[0] as HTMLElement;
+                            expect(firstLabel.textContent).toBe(Techs.values[0]);
+                            firstLabel.click();
+                            firstLabel.click();
+
+                            setTimeout((): void => {
+                                expect(
+                                    labelManagerNode.querySelectorAll("li.sdl-labelmanager-item .tag-value").length
+                                ).toBe(2);
+
+                                // Toggle Off
+                                toggleButton.click();
+
+                                callback();
+                            }, RENDER_DELAY);
+                        }, RENDER_DELAY);
+                    };
+
+                    // Case 2. Can open Typeahead
+                    const case2 = (callback: () => void) => {
+                        const typeAheadInput = labelManagerNode.querySelector(
+                            ".sdl-typeahead-input"
+                        ) as HTMLInputElement;
+                        expect(typeAheadInput).toBeDefined();
+                        typeAheadInput.dispatchEvent(new Event("focus"));
+
+                        setTimeout((): void => {
+                            typeAheadInput.value = "re";
+                            typeAheadInput.dispatchEvent(new Event("keyup"));
+
+                            setTimeout((): void => {
+                                const labelsTreeView = document.querySelector(
+                                    ".sdl-typeahead-dropdown "
+                                ) as Element;
+                                expect(labelsTreeView).toBeDefined();
+                                const labels = labelsTreeView.querySelectorAll(".suggestion");
+                                expect(labels.length).toBe(2);
+                                expect(labels[0].getAttribute("tooltip")).toBe("React");
+                                expect(labels[1].getAttribute("tooltip")).toBe("Redux");
+
+                                callback();
+                            }, 500 + ASYNC_DELAY);
+                        }, 10 + ASYNC_DELAY);
+                    };
+
+                    case1(() => {
+                        case2(() => {
+                            done();
+                        });
+                    });
                 }, RENDER_DELAY);
             });
 

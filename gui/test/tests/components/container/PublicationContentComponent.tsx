@@ -19,6 +19,8 @@ import { PublicationContent } from "src/components/PublicationContent/Publicatio
 
 import { FetchPage } from "components/helpers/FetchPage";
 import { updateCurrentPublication } from "src/store/actions/Actions";
+import { changeLanguage } from "store/actions/Actions";
+
 import { Store } from "redux";
 import { IState } from "src/store/interfaces/State";
 import { FetchProductReleaseVersions } from "src/components/helpers/FetchProductReleaseVersions";
@@ -275,6 +277,58 @@ class PublicationContentComponent extends TestBase {
                         ".sdl-dita-delivery-button-group button"
                     );
                     expect(buttons.length).toEqual(2);
+                    done();
+                }, RENDER_DELAY);
+            });
+
+            it("shows warning if publication language and content language does not match", (done: () => void): void => {
+                this.store.dispatch(changeLanguage("nl"));
+                const pubEsId = "8742";
+                const pubNlId = "8748";
+
+                const publications = [
+                    {
+                        id: pubEsId,
+                        title: `Publication${pubEsId}`,
+                        createdOn: new Date(),
+                        version: `${pubEsId}`,
+                        logicalId: `GUID-${pubEsId}`,
+                        productFamily: "PF",
+                        productReleaseVersion: "PR1",
+                        language: "es"
+                    },
+                    {
+                        id: pubNlId,
+                        title: `Publication${pubNlId}`,
+                        createdOn: new Date(),
+                        version: `${pubNlId}`,
+                        logicalId: `GUID-${pubNlId}`,
+                        productFamily: "PF",
+                        productReleaseVersion: "PR1",
+                        language: "nl"
+                    }
+                ];
+
+                services.publicationService.setMockDataPublications(
+                    null,
+                    publications,
+                    [{ title: "PF" }],
+                    [{ title: "PR1", value: "pr1" }]
+                );
+                const publicationContent = this._renderComponent(target, "", pubEsId);
+
+                // Wait for the tree view to select the first node
+                // Treeview uses debouncing for node selection so a timeout is required
+                setTimeout((): void => {
+                    const page = TestUtils.findRenderedComponentWithType(publicationContent, PagePresentation);
+                    const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
+                    const warningElement = domNode.querySelector(
+                        ".sdl-dita-delivery-content-language-warning"
+                    ) as Element;
+                    expect(warningElement).not.toBeNull("Warning message is not found");
+                    const switchLink = warningElement.querySelector("a") as HTMLAnchorElement;
+                    expect(switchLink).toBeDefined();
+                    expect(switchLink.title).toEqual(publications[1].title);
                     done();
                 }, RENDER_DELAY);
             });
