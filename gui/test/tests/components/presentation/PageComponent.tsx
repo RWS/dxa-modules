@@ -342,7 +342,7 @@ class PageComponent extends TestBase {
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAABCAQAAABN/Pf1AAAADUlEQVR42mNk+M+AAQATFwEB/YopsAAAAABJRU5ErkJggg=="
                                 />
                                 <br/>
-                                <img id="img-100x1"
+                                <img id="img-1000x1" style="width: 100px"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA+gAAAABCAYAAABNAIQzAAAAHklEQVR42u3CQREAAAgDoNk/tLOFHzhmkwsAAAB8Kj7WAgBDnCYvAAAAAElFTkSuQmCC"
                                 />
                             </div>`,
@@ -379,11 +379,6 @@ class PageComponent extends TestBase {
 
             it("opens image in new tab if it can be opened in lightbox", (done: () => void): void => {
                 const imgTitle = "img-10000x1";
-                spyOn(window, "open").and.callFake((url: string, title: string): void => {
-                    // Check if routing was called with correct params
-                    expect(title).toBe(imgTitle);
-                    done();
-                });
                 const img10000x1 =
                     "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAJxAAAAABCA" +
                     "YAAAB43rQLAAAAQ0lEQVR42u3BAQ0AAAQAMLKooZ/YbHL8z5reAAAAAAA" +
@@ -402,11 +397,29 @@ class PageComponent extends TestBase {
                 expect(domNode).not.toBeNull();
 
                 setTimeout((): void => {
-                    const imgs = domNode.querySelectorAll("img") as NodeListOf<HTMLImageElement>;
-                    expect(imgs.length).toBe(1);
                     // Opens image in new window
-                    const imageInLightbox = imgs[0];
+                    const imageInLightbox = domNode.querySelector("img") as HTMLImageElement;
                     expect(imageInLightbox.classList).toContain("sdl-expandable-image");
+
+                    spyOn(window, "open").and.callFake((url: string, title: string): void => {
+                        // Check if routing was called with correct params
+                        expect(title).toBe(imgTitle);
+                        // if (imageInLightbox.parentElement) {
+                        //     imageInLightbox.parentElement.style.width = "500px";
+                        // }
+
+                        // //const resizeEvent = document.createEvent("Event");
+                        // //resizeEvent.initEvent("resize", true, true);
+                        // window.dispatchEvent(new Event("resize"));
+
+                        // setTimeout((): void => {
+                        //     expect((domNode.querySelector("img") as HTMLImageElement).classList).not.toContain(
+                        //         "sdl-expandable-image"
+                        //     );
+                        done();
+                        //});
+                    });
+
                     imageInLightbox.click();
                 }, RENDER_DELAY);
             });
