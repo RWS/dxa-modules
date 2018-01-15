@@ -153,11 +153,17 @@ class PageComponent extends TestBase {
 
             it("wide tables does not affect page content width", (done: () => void): void => {
                 const tdsCount = 100;
-                const page = this._renderComponent({
-                    isLoading: false,
-                    content: `<div class="tablenoborder"><table><tr>${Array(tdsCount).fill("LONG_TD_PLACEHOLDER").map((i) => `<td>${i}</td>`).join("")}</tr></table></div>`,
-                    onNavigate: (): void => { }
-                }, target);
+                const page = this._renderComponent(
+                    {
+                        isLoading: false,
+                        content: `<div class="tablenoborder"><table><tr>${Array(tdsCount)
+                            .fill("LONG_TD_PLACEHOLDER")
+                            .map(i => `<td>${i}</td>`)
+                            .join("")}</tr></table></div>`,
+                        onNavigate: (): void => {}
+                    },
+                    target
+                );
 
                 const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
                 expect(domNode).not.toBeNull();
@@ -320,9 +326,88 @@ class PageComponent extends TestBase {
                 expect(domNode).not.toBeNull();
 
                 setTimeout((): void => {
-                    const logFunctionNode = domNode.querySelector(".page-content .codeblock code.language-js span.function") as HTMLElement;
+                    const logFunctionNode = domNode.querySelector(
+                        ".page-content .codeblock code.language-js span.function"
+                    ) as HTMLElement;
                     expect(logFunctionNode && logFunctionNode.textContent).toBe("log", "Styling are not applied");
                     done();
+                }, RENDER_DELAY);
+            });
+
+            it("resolves big images on screen", (done: () => void): void => {
+                const pageProps: IPageProps = {
+                    isLoading: false,
+                    content: `<div style="width: 500px">
+                                <img id="img-10x1"
+                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAABCAQAAABN/Pf1AAAADUlEQVR42mNk+M+AAQATFwEB/YopsAAAAABJRU5ErkJggg=="
+                                />
+                                <br/>
+                                <img id="img-100x1"
+                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA+gAAAABCAYAAABNAIQzAAAAHklEQVR42u3CQREAAAgDoNk/tLOFHzhmkwsAAAB8Kj7WAgBDnCYvAAAAAElFTkSuQmCC"
+                                />
+                            </div>`,
+                    onNavigate: (): void => {}
+                };
+
+                const page = this._renderComponent(pageProps, target);
+                const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
+                expect(domNode).not.toBeNull();
+
+                setTimeout((): void => {
+                    const imgs = domNode.querySelectorAll("img") as NodeListOf<HTMLImageElement>;
+                    expect(imgs.length).toBe(2);
+                    expect(imgs[0].classList).not.toContain("sdl-expandable-image");
+                    // Opens image in lightbox on click
+                    const imageInLightbox = imgs[1];
+                    expect(imageInLightbox.classList).toContain("sdl-expandable-image");
+                    imageInLightbox.click();
+
+                    setTimeout((): void => {
+                        const previwImage = domNode.querySelector(
+                            ".sdl-image-lightbox-preview-wrapper img"
+                        ) as HTMLImageElement;
+                        expect(previwImage.src).toBe(imageInLightbox.src);
+                        // It closes on image click
+                        previwImage.click();
+                        setTimeout((): void => {
+                            expect(domNode.querySelector(".sdl-image-lightbox-preview-wrapper")).toBeNull();
+                            done();
+                        }, RENDER_DELAY);
+                    }, RENDER_DELAY);
+                }, RENDER_DELAY);
+            });
+
+            it("opens image in new tab if it can be opened in lightbox", (done: () => void): void => {
+                const imgTitle = "img-10000x1";
+                spyOn(window, "open").and.callFake((url: string, title: string): void => {
+                    // Check if routing was called with correct params
+                    expect(title).toBe(imgTitle);
+                    done();
+                });
+                const img10000x1 =
+                    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAJxAAAAABCA" +
+                    "YAAAB43rQLAAAAQ0lEQVR42u3BAQ0AAAQAMLKooZ/YbHL8z5reAAAAAAA" +
+                    "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA3gFLLQHn34E1CgAAAABJRU5ErkJggg==";
+
+                const pageProps: IPageProps = {
+                    isLoading: false,
+                    content: `<div style="width: 95%; height: 100%; overflow: hidden;">
+                            <img style="width: 100%;" id="img-10000x1" title="${imgTitle}" src="${img10000x1}"/>
+                        </div>`,
+                    onNavigate: (): void => {}
+                };
+
+                const page = this._renderComponent(pageProps, target);
+                const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
+                expect(domNode).not.toBeNull();
+
+                setTimeout((): void => {
+                    const imgs = domNode.querySelectorAll("img") as NodeListOf<HTMLImageElement>;
+                    expect(imgs.length).toBe(1);
+                    // Opens image in new window
+                    const imageInLightbox = imgs[0];
+                    expect(imageInLightbox.classList).toContain("sdl-expandable-image");
+                    imageInLightbox.click();
                 }, RENDER_DELAY);
             });
         });

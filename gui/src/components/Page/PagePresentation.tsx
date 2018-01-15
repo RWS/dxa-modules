@@ -132,7 +132,7 @@ export interface IPageState {
      * @type {string}
      * @memberOf IPageState
      */
-    dialogImage: string | null;
+    dialogImageSrc: string | null;
 }
 
 /**
@@ -171,7 +171,7 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
         super();
         this.state = {
             navItems: [],
-            dialogImage: null
+             dialogImageSrc: null
         };
 
         this.fetchPage = this.fetchPage.bind(this);
@@ -196,7 +196,7 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
     public render(): JSX.Element {
         const props = this.props;
         const { activeHeader, error, direction, id } = props;
-        const { navItems, dialogImage } = this.state;
+        const { navItems,  dialogImageSrc } = this.state;
         const { formatMessage } = this.context.services.localizationService;
         const activeNavItemId = activeHeader ? activeHeader.id : navItems.length > 0 ? navItems[0].id : undefined;
         const _goHome = (): void => props.onNavigate(path.getRootPath());
@@ -241,11 +241,11 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
                     )}
                     {showCommentsComponents && <CommentsSection />}
                 </div>
-                {dialogImage !== null && (
+                { dialogImageSrc !== null && (
                     <div
                         className="sdl-image-lightbox-preview-wrapper"
-                        onClick={() => this.setState({ dialogImage: null })}>
-                        <img src={dialogImage} />
+                        onClick={() => this.setState({  dialogImageSrc: null })}>
+                        <img src={ dialogImageSrc} />
                     </div>
                 )}
             </div>
@@ -369,22 +369,22 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
         const processedImages = this._contentImages;
         for (let i: number = 0, length: number = images.length; i < length; i++) {
             const img = images.item(i);
-            const dialogImage = img.src;
+            const  dialogImageSrc = img.src;
             const { clientWidth, naturalWidth, clientHeight, naturalHeight } = img;
             const isImageToProcess = clientWidth !== naturalWidth || clientHeight !== naturalHeight;
             const alreadyProcessedImg = processedImages.find(x => x.element === img);
             if (isImageToProcess && !alreadyProcessedImg) {
                 const clickHandler = (e: Event): void => {
-                    if (dialogImage) {
+                    if ( dialogImageSrc) {
                         // if small screen resolution
                         const { clientWidth: docClientWidth } = document.documentElement;
                         // If there is at least 30% of space to expand an imag, then expand it in lightbox
                         if (docClientWidth > img.clientWidth * 1.3) {
                             this.setState({
-                                dialogImage
+                                 dialogImageSrc
                             });
                         } else {
-                            window.open(dialogImage, img.title);
+                            window.open( dialogImageSrc, img.title);
                         }
                     }
                     e.preventDefault();
