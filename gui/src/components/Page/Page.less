@@ -1,21 +1,28 @@
 @import (reference) "~theme-styles";
 
 .sdl-dita-delivery-page {
-
     .page-content {
         padding: 0 15px 10px 15px;
         color: @neutralColor4;
 
-        h1, h1.title, h1.topictitle1 {
+        h1,
+        h1.title,
+        h1.topictitle1 {
             .header-h1();
         }
-        h2, h2.title, h2.topictitle2 {
+        h2,
+        h2.title,
+        h2.topictitle2 {
             .header-h2();
         }
-        h3, h3.title, h3.sectiontitle {
+        h3,
+        h3.title,
+        h3.sectiontitle {
             .header-h3();
         }
-        p, div.section, div.p {
+        p,
+        div.section,
+        div.p {
             .paragraph();
         }
         a {
@@ -28,13 +35,18 @@
 
         table {
             .table();
-            th, th.entry, th.entry.cell-norowborder, th.entry.nocellnorowborder {
+            th,
+            th.entry,
+            th.entry.cell-norowborder,
+            th.entry.nocellnorowborder {
                 .table-header();
             }
-            tr, tr.row {
+            tr,
+            tr.row {
                 .table-row();
             }
-            td, td.entry {
+            td,
+            td.entry {
                 .table-cell();
                 img {
                     max-width: inherit;
@@ -44,12 +56,52 @@
         ul {
             .unordered-list();
         }
-        ol, ol.steps {
+        ol,
+        ol.steps {
             .ordered-list();
         }
         img {
             max-width: 100%;
+            &.sdl-expandable-image {
+                transition: box-shadow 0.3s ease-out;
+                &:hover {
+                    cursor: pointer;
+                    box-shadow: 0px 0px 10px 0px @neutralColor1;
+                }
+            }
         }
     }
 
+    .sdl-image-lightbox-preview-wrapper {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 10; /* Need this because of top tool bar */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        &:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: @neutralColor1;
+            opacity: 0.5;
+        }
+
+        img {
+            overflow: hidden;
+            position: relative;
+            max-height: 95vh;
+            max-width: 95vw;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 45px, rgba(0, 0, 0, 0.22) 0px 10px 18px;
+            border-radius: 2px;
+        }
+    }
 }
