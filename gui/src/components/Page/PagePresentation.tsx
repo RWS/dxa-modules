@@ -369,16 +369,13 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
         const processedImages = this._contentImages;
 
         for (let i: number = 0, length: number = images.length; i < length; i++) {
-            new Promise((resolve, reject) => {
+            new Promise((resolve: (img: HTMLImageElement) => void) => {
                 const img = images.item(i);
                 if (img.complete) {
                     resolve(img);
                 } else {
                     img.onload = () => {
                         resolve(img);
-                    };
-                    img.onerror = () => {
-                        reject(img);
                     };
                 }
             }).then((img: HTMLImageElement) => {
