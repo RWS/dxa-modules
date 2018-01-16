@@ -15,7 +15,7 @@ import { PageService } from "test/mocks/services/PageService";
 import { Html } from "utils/Html";
 import { IWindow } from "interfaces/Window";
 
-import { RENDER_DELAY } from "test/Constants";
+import { RENDER_DELAY, ASYNC_DELAY } from "test/Constants";
 
 class PageComponent extends TestBase {
     public runTests(): void {
@@ -153,11 +153,17 @@ class PageComponent extends TestBase {
 
             it("wide tables does not affect page content width", (done: () => void): void => {
                 const tdsCount = 100;
-                const page = this._renderComponent({
-                    isLoading: false,
-                    content: `<div class="tablenoborder"><table><tr>${Array(tdsCount).fill("LONG_TD_PLACEHOLDER").map((i) => `<td>${i}</td>`).join("")}</tr></table></div>`,
-                    onNavigate: (): void => { }
-                }, target);
+                const page = this._renderComponent(
+                    {
+                        isLoading: false,
+                        content: `<div class="tablenoborder"><table><tr>${Array(tdsCount)
+                            .fill("LONG_TD_PLACEHOLDER")
+                            .map(i => `<td>${i}</td>`)
+                            .join("")}</tr></table></div>`,
+                        onNavigate: (): void => {}
+                    },
+                    target
+                );
 
                 const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
                 expect(domNode).not.toBeNull();
@@ -320,10 +326,137 @@ class PageComponent extends TestBase {
                 expect(domNode).not.toBeNull();
 
                 setTimeout((): void => {
-                    const logFunctionNode = domNode.querySelector(".page-content .codeblock code.language-js span.function") as HTMLElement;
+                    const logFunctionNode = domNode.querySelector(
+                        ".page-content .codeblock code.language-js span.function"
+                    ) as HTMLElement;
                     expect(logFunctionNode && logFunctionNode.textContent).toBe("log", "Styling are not applied");
                     done();
                 }, RENDER_DELAY);
+            });
+
+            it("does not highlights code blocks in page if there are any html tags", (done: () => void): void => {
+                const pageProps: IPageProps = {
+                    isLoading: false,
+                    content: `<div>
+                                <pre class="pre codeblock">
+                                    <code>
+                                        This is the codeblock, &lt;var class="keyword varname"&gt;This is the varname,&lt;/var&gt; the end
+                                    </code>
+                                </pre>
+                                <pre class="pre codeblock">
+                                    <code>
+                                        This is the codeblock, <var class="keyword varname">This is the varname,</var> the end<
+                                    /code>
+                                </pre>
+                            </div>`,
+                    onNavigate: (): void => {}
+                };
+
+                const page = this._renderComponent(pageProps, target);
+                const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
+                expect(domNode).not.toBeNull();
+
+                setTimeout((): void => {
+                    const codeBlocks = domNode.querySelectorAll(".page-content .codeblock code") as NodeListOf<HTMLElement>;
+                    expect(codeBlocks.length).toBe(2);
+                    expect(codeBlocks[0].querySelectorAll("span.tag").length).toBeGreaterThan(0, "Styling should be applied");
+                    expect(codeBlocks[1].querySelectorAll("span.tag").length).toBe(0, "Styling should not be applied");
+                    done();
+                }, RENDER_DELAY);
+            });
+
+            it("can open big images in lightbox", (done: () => void): void => {
+                const pageProps: IPageProps = {
+                    isLoading: false,
+                    content: `<div style="width: 500px">
+                                <img id="img-10x1"
+                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAABCAQAAABN/Pf1AAAADUlEQVR42mNk+M+AAQATFwEB/YopsAAAAABJRU5ErkJggg=="
+                                />
+                                <br/>
+                                <img id="img-1000x1" style="width: 100px"
+                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA+gAAAABCAYAAABNAIQzAAAAHklEQVR42u3CQREAAAgDoNk/tLOFHzhmkwsAAAB8Kj7WAgBDnCYvAAAAAElFTkSuQmCC"
+                                />
+                            </div>`,
+                    onNavigate: (): void => {}
+                };
+
+                const page = this._renderComponent(pageProps, target);
+                const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
+                expect(domNode).not.toBeNull();
+
+                setTimeout((): void => {
+                    expect((domNode.querySelector("#img-10x1") as HTMLImageElement).classList).not.toContain(
+                        "sdl-expandable-image",
+                        "Small images should not be expandable"
+                    );
+                    // Opens image in lightbox on click
+                    const imageInLightbox = domNode.querySelector("#img-1000x1") as HTMLImageElement;
+                    expect(imageInLightbox.classList).toContain(
+                        "sdl-expandable-image",
+                        "Big images should be expandable"
+                    );
+                    imageInLightbox.click();
+
+                    setTimeout((): void => {
+                        const previwImage = domNode.querySelector(
+                            ".sdl-image-lightbox-preview-wrapper img"
+                        ) as HTMLImageElement;
+                        expect(previwImage.src).toBe(imageInLightbox.src);
+                        // It closes on image click
+                        previwImage.click();
+                        setTimeout((): void => {
+                            expect(domNode.querySelector(".sdl-image-lightbox-preview-wrapper")).toBeNull();
+                            if (imageInLightbox.parentElement) {
+                                imageInLightbox.style.width =
+                                imageInLightbox.parentElement.style.width = "1000px";
+                            }
+                            page.forceUpdate();
+                            setTimeout((): void => {
+                                expect(
+                                    (domNode.querySelector("#img-1000x1") as HTMLImageElement).classList
+                                ).not.toContain(
+                                    "sdl-expandable-image",
+                                    "If screen in big enought to fix big image, it should not be expandable"
+                                );
+                                done();
+                            }, RENDER_DELAY);
+                        }, RENDER_DELAY);
+                    }, RENDER_DELAY);
+                }, ASYNC_DELAY);
+            });
+
+            it("opens image in new tab if it can be opened in lightbox", (done: () => void): void => {
+                const imgTitle = "img-10000x1";
+                const img10000x1 =
+                    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAJxAAAAABCA" +
+                    "YAAAB43rQLAAAAQ0lEQVR42u3BAQ0AAAQAMLKooZ/YbHL8z5reAAAAAAA" +
+                    "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA3gFLLQHn34E1CgAAAABJRU5ErkJggg==";
+
+                const pageProps: IPageProps = {
+                    isLoading: false,
+                    content: `<div style="width: 95%; height: 100%; overflow: hidden;">
+                            <img style="width: 100%;" id="img-10000x1" title="${imgTitle}" src="${img10000x1}"/>
+                        </div>`,
+                    onNavigate: (): void => {}
+                };
+
+                const page = this._renderComponent(pageProps, target);
+                const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
+                expect(domNode).not.toBeNull();
+
+                setTimeout((): void => {
+                    // Opens image in new window
+                    const imageInLightbox = domNode.querySelector("img") as HTMLImageElement;
+                    expect(imageInLightbox.classList).toContain("sdl-expandable-image");
+
+                    spyOn(window, "open").and.callFake((url: string, title: string): void => {
+                        // Check if routing was called with correct params
+                        expect(title).toBe(imgTitle);
+                        done();
+                    });
+
+                    imageInLightbox.click();
+                }, ASYNC_DELAY);
             });
         });
 

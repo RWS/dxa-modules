@@ -30,6 +30,7 @@ module.exports = function(buildOptions, gulp, browserSync) {
         : `${buildOptions.distPath}/lib/react-dom`,
       // Application
       "/$mocks$/": "./mocks/",
+      "/app/gui/mocks/": "./mocks/",
       "/gui/theming": buildOptions.distPath + "theming/",
       "/": buildOptions.distPath
     };

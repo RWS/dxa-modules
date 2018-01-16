@@ -125,6 +125,14 @@ export interface IPageState {
      * @memberOf IPageState
      */
     navItems: IContentNavigationItem[];
+
+    /**
+     * Image to display
+     *
+     * @type {string}
+     * @memberOf IPageState
+     */
+    dialogImageSrc: string | null;
 }
 
 /**
@@ -148,9 +156,11 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
      */
     public context: IAppContext;
 
-    private _hyperlinks: { element: HTMLElement; handler: (e: Event) => void }[] = [];
+    private _hyperlinks: { element: HTMLElement; clickHandler: (e: Event) => void }[] = [];
     private _scripts: HTMLElement[] = [];
     private _codeBlocks: HTMLElement[] = [];
+    private _contentImages: { element: HTMLImageElement; clickHandler: (e: Event) => void }[] = [];
+
     private _lastPageAnchor?: string;
     private _historyUnlisten: () => void;
 
@@ -160,7 +170,8 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
     constructor() {
         super();
         this.state = {
-            navItems: []
+            navItems: [],
+            dialogImageSrc: null
         };
 
         this.fetchPage = this.fetchPage.bind(this);
@@ -185,7 +196,7 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
     public render(): JSX.Element {
         const props = this.props;
         const { activeHeader, error, direction, id } = props;
-        const { navItems } = this.state;
+        const { navItems, dialogImageSrc } = this.state;
         const { formatMessage } = this.context.services.localizationService;
         const activeNavItemId = activeHeader ? activeHeader.id : navItems.length > 0 ? navItems[0].id : undefined;
         const _goHome = (): void => props.onNavigate(path.getRootPath());
@@ -230,6 +241,13 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
                     )}
                     {showCommentsComponents && <CommentsSection />}
                 </div>
+                {dialogImageSrc !== null && (
+                    <div
+                        className="sdl-image-lightbox-preview-wrapper"
+                        onClick={() => this.setState({ dialogImageSrc: null })}>
+                        <img src={dialogImageSrc} />
+                    </div>
+                )}
             </div>
         );
     }
@@ -239,7 +257,6 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
      */
     public componentDidMount(): void {
         this._postProcessHtml();
-        this._collectHeadersLinks();
     }
 
     /**
@@ -247,7 +264,6 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
      */
     public componentDidUpdate(): void {
         this._postProcessHtml();
-        this._collectHeadersLinks();
         this._jumpToAnchor();
     }
 
@@ -279,12 +295,16 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
     private _postProcessHtml(): void {
         const domNode = ReactDOM.findDOMNode(this);
         const pageContentNode = domNode.querySelector(".page-content") as HTMLElement;
+        this._collectHeadersLinks(pageContentNode);
         if (pageContentNode) {
             //Highlight code blocks
             this._highlightCodeBlocks(pageContentNode);
 
             // Make hyperlinks navigate when clicked
             this._processContentLinks(pageContentNode);
+
+            // Make images expandable when clicked
+            this._processContentImages(pageContentNode);
 
             // If script evaluable option is enabled, we have to evaluate all the scripts inserted in app
             if ((window as IWindow).SdlDitaDeliveryContentIsEvaluable) {
@@ -298,16 +318,19 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
      */
     private _highlightCodeBlocks(pageContentNode: HTMLElement): void {
         const codeBlocks = this._codeBlocks;
-        const highlightBlocks = pageContentNode.querySelectorAll(".page-content pre.codeblock code");
+        const highlightBlocks = pageContentNode.querySelectorAll("pre.codeblock code");
         for (let i: number = 0, length: number = highlightBlocks.length; i < length; i++) {
             const block = highlightBlocks.item(i) as HTMLElement;
             const isAdded = codeBlocks.indexOf(block) > -1;
             if (!isAdded) {
-                if (!block.classList.contains("language-markup")) {
-                    block.classList.add("language-markup");
+                const pre = block && (block.parentElement as HTMLPreElement);
+                if (!pre.classList.contains("language-markup")) {
+                    pre.classList.add("language-markup");
                 }
                 codeBlocks.push(block);
-                Prism.highlightElement(block, false);
+                if (block.childElementCount === 0) {
+                    Prism.highlightElement(block, false);
+                }
             }
         }
     }
@@ -325,7 +348,7 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
             if (!alreadyAdded) {
                 const itemUrl = anchor.getAttribute("href");
                 if (Url.itemUrlIsValid(itemUrl)) {
-                    const onClick = (e: Event): void => {
+                    const clickHandler = (e: Event): void => {
                         if (itemUrl) {
                             props.onNavigate(itemUrl);
                         }
@@ -333,14 +356,69 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
                     };
                     hyperlinks.push({
                         element: anchor,
-                        handler: onClick
+                        clickHandler
                     });
-                    anchor.addEventListener("click", onClick);
+                    anchor.addEventListener("click", clickHandler);
                 }
             }
         }
     }
 
+    /**
+     * Make images expandable to the full screen
+     */
+    private _processContentImages(pageContentNode: HTMLElement): void {
+        const images = pageContentNode.querySelectorAll("img") as NodeListOf<HTMLImageElement>;
+        const processedImages = this._contentImages;
+
+        for (let i: number = 0, length: number = images.length; i < length; i++) {
+            new Promise((resolve: (img: HTMLImageElement) => void) => {
+                const img = images.item(i);
+                if (img.complete) {
+                    resolve(img);
+                } else {
+                    img.onload = () => {
+                        resolve(img);
+                    };
+                }
+            }).then((img: HTMLImageElement) => {
+                const dialogImageSrc = img.src;
+                const { clientWidth, naturalWidth, clientHeight, naturalHeight } = img;
+                const isImageToProcess = clientWidth < naturalWidth || clientHeight < naturalHeight;
+                const alreadyProcessedImg = processedImages.find(x => x.element === img);
+                if (isImageToProcess && !alreadyProcessedImg) {
+                    const clickHandler = (e: Event): void => {
+                        if (dialogImageSrc) {
+                            // If there is at least 30% of space to expand an imag, then expand it in lightbox
+                            if (document.documentElement.clientWidth > img.clientWidth * 1.3) {
+                                this.setState({
+                                    dialogImageSrc
+                                });
+                            } else {
+                                window.open(dialogImageSrc, img.title);
+                            }
+                        }
+                        e.preventDefault();
+                    };
+                    processedImages.push({
+                        element: img,
+                        clickHandler
+                    });
+                    img.addEventListener("click", clickHandler);
+                    if (!img.classList.contains("sdl-expandable-image")) {
+                        img.classList.add("sdl-expandable-image");
+                    }
+                } else if (!isImageToProcess && alreadyProcessedImg) {
+                    const el = alreadyProcessedImg.element;
+                    if (el.classList.contains("sdl-expandable-image")) {
+                        el.classList.remove("sdl-expandable-image");
+                    }
+                    el.removeEventListener("click", alreadyProcessedImg.clickHandler);
+                    processedImages.splice(processedImages.indexOf(alreadyProcessedImg), 1);
+                }
+            });
+        }
+    }
     /**
      * Evaluate code inside page content if there are any.
      */
@@ -351,7 +429,6 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
         for (let i: number = 0, length: number = pageScripts.length; i < length; i++) {
             const script = pageScripts.item(i) as HTMLElement;
             if (!scripts.includes(script)) {
-                console.log(scripts, script);
                 const parentNode = script.parentNode;
                 if (parentNode) {
                     const newScriptNode = document.createElement("script");
@@ -389,32 +466,29 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
     /**
      * Collects headers links
      */
-    private _collectHeadersLinks(): void {
-        const domNode = ReactDOM.findDOMNode(this);
-        if (domNode) {
-            const { navItems } = this.state;
+    private _collectHeadersLinks(pageContentNode: HTMLElement): void {
+        const { navItems } = this.state;
+        let updatedItems: IContentNavigationItem[] = [];
+        if (pageContentNode) {
             const { url } = this.props;
-            const pageContentNode = domNode.querySelector(".page-content") as HTMLElement;
-            const headerLinks = pageContentNode
-                ? Html.getHeaderLinks(pageContentNode).filter((item: IHeader) => {
-                      // We only need level 2 and 3 for items rendered in conten navigation
-                      return item.importancy == 2 || item.importancy == 3;
-                  })
-                : [];
-            const updatedNavItems: IContentNavigationItem[] = headerLinks.map(item => {
-                return {
+            updatedItems = Html.getHeaderLinks(pageContentNode)
+                .filter(
+                    (item: IHeader) => item.importancy == 2 || item.importancy == 3 // We only need level 2 and 3 for items rendered in conten navigation
+                )
+                .map(item => ({
                     id: item.id,
                     title: item.title,
                     indention: Number(item.importancy == 3),
                     url: url ? Url.getAnchorUrl(url, item.id) : "#" + item.id
-                };
+                }));
+        }
+        if (
+            navItems.length != updatedItems.length ||
+            !navItems.every((item, index) => (item && item.id) == (updatedItems[index] && updatedItems[index].id))
+        ) {
+            this.setState({
+                navItems: updatedItems
             });
-
-            if (navItems.map(i => i.url).join("") !== updatedNavItems.map(i => i.url).join("")) {
-                this.setState({
-                    navItems: updatedNavItems
-                });
-            }
         }
     }
 
@@ -423,7 +497,11 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
      */
     private _disableHyperlinks(): void {
         this._hyperlinks.forEach(anchor => {
-            anchor.element.removeEventListener("click", anchor.handler);
+            anchor.element.removeEventListener("click", anchor.clickHandler);
+        });
+
+        this._contentImages.forEach(img => {
+            img.element.removeEventListener("click", img.clickHandler);
         });
     }
 
