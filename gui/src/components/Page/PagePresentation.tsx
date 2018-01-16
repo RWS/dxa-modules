@@ -323,11 +323,14 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
             const block = highlightBlocks.item(i) as HTMLElement;
             const isAdded = codeBlocks.indexOf(block) > -1;
             if (!isAdded) {
-                if (!block.classList.contains("language-markup")) {
-                    block.classList.add("language-markup");
+                const pre = block && (block.parentElement as HTMLPreElement);
+                if (!pre.classList.contains("language-markup")) {
+                    pre.classList.add("language-markup");
                 }
                 codeBlocks.push(block);
-                Prism.highlightElement(block, false);
+                if (block.childElementCount === 0) {
+                    Prism.highlightElement(block, false);
+                }
             }
         }
     }
