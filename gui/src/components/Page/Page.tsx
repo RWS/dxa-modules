@@ -6,13 +6,13 @@ import { localization } from "services/common/LocalizationService";
 import { fetchPage } from "store/actions/Api";
 
 const mapStateToProps = (state: IState, ownProps: IPageProps): {} => {
-    const { publicationId, pageId, anchor } = getCurrentPub(state);
+    const { publicationId, pageId: id, anchor } = getCurrentPub(state);
     const pub = getPubById(state, publicationId);
     return {
-        id: pageId,
+        id,
         publicationId,
         direction: localization.getDirection(pub.language || state.language),
-        anchor: anchor
+        anchor
     };
 };
 

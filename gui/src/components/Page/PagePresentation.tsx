@@ -171,7 +171,7 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
         super();
         this.state = {
             navItems: [],
-             dialogImageSrc: null
+            dialogImageSrc: null
         };
 
         this.fetchPage = this.fetchPage.bind(this);
@@ -196,7 +196,7 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
     public render(): JSX.Element {
         const props = this.props;
         const { activeHeader, error, direction, id } = props;
-        const { navItems,  dialogImageSrc } = this.state;
+        const { navItems, dialogImageSrc } = this.state;
         const { formatMessage } = this.context.services.localizationService;
         const activeNavItemId = activeHeader ? activeHeader.id : navItems.length > 0 ? navItems[0].id : undefined;
         const _goHome = (): void => props.onNavigate(path.getRootPath());
@@ -241,11 +241,11 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
                     )}
                     {showCommentsComponents && <CommentsSection />}
                 </div>
-                { dialogImageSrc !== null && (
+                {dialogImageSrc !== null && (
                     <div
                         className="sdl-image-lightbox-preview-wrapper"
-                        onClick={() => this.setState({  dialogImageSrc: null })}>
-                        <img src={ dialogImageSrc} />
+                        onClick={() => this.setState({ dialogImageSrc: null })}>
+                        <img src={dialogImageSrc} />
                     </div>
                 )}
             </div>
@@ -367,44 +367,56 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
     private _processContentImages(pageContentNode: HTMLElement): void {
         const images = pageContentNode.querySelectorAll("img") as NodeListOf<HTMLImageElement>;
         const processedImages = this._contentImages;
+
         for (let i: number = 0, length: number = images.length; i < length; i++) {
-            const img = images.item(i);
-            const  dialogImageSrc = img.src;
-            const { clientWidth, naturalWidth, clientHeight, naturalHeight } = img;
-            const isImageToProcess = clientWidth !== naturalWidth || clientHeight !== naturalHeight;
-            const alreadyProcessedImg = processedImages.find(x => x.element === img);
-            if (isImageToProcess && !alreadyProcessedImg) {
-                const clickHandler = (e: Event): void => {
-                    if ( dialogImageSrc) {
-                        // if small screen resolution
-                        const { clientWidth: docClientWidth } = document.documentElement;
-                        // If there is at least 30% of space to expand an imag, then expand it in lightbox
-                        if (docClientWidth > img.clientWidth * 1.3) {
-                            this.setState({
-                                 dialogImageSrc
-                            });
-                        } else {
-                            window.open( dialogImageSrc, img.title);
+            new Promise((resolve, reject) => {
+                const img = images.item(i);
+                if (img.complete) {
+                    resolve(img);
+                } else {
+                    img.onload = () => {
+                        resolve(img);
+                    };
+                    img.onerror = () => {
+                        reject(img);
+                    };
+                }
+            }).then((img: HTMLImageElement) => {
+                const dialogImageSrc = img.src;
+                const { clientWidth, naturalWidth, clientHeight, naturalHeight } = img;
+                const isImageToProcess = clientWidth < naturalWidth || clientHeight < naturalHeight;
+                const alreadyProcessedImg = processedImages.find(x => x.element === img);
+                if (isImageToProcess && !alreadyProcessedImg) {
+                    const clickHandler = (e: Event): void => {
+                        if (dialogImageSrc) {
+                            // If there is at least 30% of space to expand an imag, then expand it in lightbox
+                            if (document.documentElement.clientWidth > img.clientWidth * 1.3) {
+                                this.setState({
+                                    dialogImageSrc
+                                });
+                            } else {
+                                window.open(dialogImageSrc, img.title);
+                            }
                         }
+                        e.preventDefault();
+                    };
+                    processedImages.push({
+                        element: img,
+                        clickHandler
+                    });
+                    img.addEventListener("click", clickHandler);
+                    if (!img.classList.contains("sdl-expandable-image")) {
+                        img.classList.add("sdl-expandable-image");
                     }
-                    e.preventDefault();
-                };
-                processedImages.push({
-                    element: img,
-                    clickHandler
-                });
-                img.addEventListener("click", clickHandler);
-                if (!img.classList.contains("sdl-expandable-image")) {
-                    img.classList.add("sdl-expandable-image");
+                } else if (!isImageToProcess && alreadyProcessedImg) {
+                    const el = alreadyProcessedImg.element;
+                    if (el.classList.contains("sdl-expandable-image")) {
+                        el.classList.remove("sdl-expandable-image");
+                    }
+                    el.removeEventListener("click", alreadyProcessedImg.clickHandler);
+                    processedImages.splice(processedImages.indexOf(alreadyProcessedImg), 1);
                 }
-            } else if (!isImageToProcess && alreadyProcessedImg) {
-                const el = alreadyProcessedImg.element;
-                if (el.classList.contains("sdl-expandable-image")) {
-                    el.classList.remove("sdl-expandable-image");
-                }
-                el.removeEventListener("click", alreadyProcessedImg.clickHandler);
-                processedImages.splice(processedImages.indexOf(alreadyProcessedImg), 1);
-            }
+            });
         }
     }
     /**
@@ -417,7 +429,6 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
         for (let i: number = 0, length: number = pageScripts.length; i < length; i++) {
             const script = pageScripts.item(i) as HTMLElement;
             if (!scripts.includes(script)) {
-                console.log(scripts, script);
                 const parentNode = script.parentNode;
                 if (parentNode) {
                     const newScriptNode = document.createElement("script");

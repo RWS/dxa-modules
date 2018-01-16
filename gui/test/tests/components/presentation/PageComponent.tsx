@@ -15,7 +15,7 @@ import { PageService } from "test/mocks/services/PageService";
 import { Html } from "utils/Html";
 import { IWindow } from "interfaces/Window";
 
-import { RENDER_DELAY } from "test/Constants";
+import { RENDER_DELAY, ASYNC_DELAY } from "test/Constants";
 
 class PageComponent extends TestBase {
     public runTests(): void {
@@ -334,7 +334,7 @@ class PageComponent extends TestBase {
                 }, RENDER_DELAY);
             });
 
-            it("resolves big images on screen", (done: () => void): void => {
+            it("can open big images in lightbox", (done: () => void): void => {
                 const pageProps: IPageProps = {
                     isLoading: false,
                     content: `<div style="width: 500px">
@@ -354,12 +354,16 @@ class PageComponent extends TestBase {
                 expect(domNode).not.toBeNull();
 
                 setTimeout((): void => {
-                    const imgs = domNode.querySelectorAll("img") as NodeListOf<HTMLImageElement>;
-                    expect(imgs.length).toBe(2);
-                    expect(imgs[0].classList).not.toContain("sdl-expandable-image");
+                    expect((domNode.querySelector("#img-10x1") as HTMLImageElement).classList).not.toContain(
+                        "sdl-expandable-image",
+                        "Small images should not be expandable"
+                    );
                     // Opens image in lightbox on click
-                    const imageInLightbox = imgs[1];
-                    expect(imageInLightbox.classList).toContain("sdl-expandable-image");
+                    const imageInLightbox = domNode.querySelector("#img-1000x1") as HTMLImageElement;
+                    expect(imageInLightbox.classList).toContain(
+                        "sdl-expandable-image",
+                        "Big images should be expandable"
+                    );
                     imageInLightbox.click();
 
                     setTimeout((): void => {
@@ -371,10 +375,23 @@ class PageComponent extends TestBase {
                         previwImage.click();
                         setTimeout((): void => {
                             expect(domNode.querySelector(".sdl-image-lightbox-preview-wrapper")).toBeNull();
-                            done();
+                            if (imageInLightbox.parentElement) {
+                                imageInLightbox.style.width =
+                                imageInLightbox.parentElement.style.width = "1000px";
+                            }
+                            page.forceUpdate();
+                            setTimeout((): void => {
+                                expect(
+                                    (domNode.querySelector("#img-1000x1") as HTMLImageElement).classList
+                                ).not.toContain(
+                                    "sdl-expandable-image",
+                                    "If screen in big enought to fix big image, it should not be expandable"
+                                );
+                                done();
+                            }, RENDER_DELAY);
                         }, RENDER_DELAY);
                     }, RENDER_DELAY);
-                }, RENDER_DELAY);
+                }, ASYNC_DELAY);
             });
 
             it("opens image in new tab if it can be opened in lightbox", (done: () => void): void => {
@@ -404,24 +421,11 @@ class PageComponent extends TestBase {
                     spyOn(window, "open").and.callFake((url: string, title: string): void => {
                         // Check if routing was called with correct params
                         expect(title).toBe(imgTitle);
-                        // if (imageInLightbox.parentElement) {
-                        //     imageInLightbox.parentElement.style.width = "500px";
-                        // }
-
-                        // //const resizeEvent = document.createEvent("Event");
-                        // //resizeEvent.initEvent("resize", true, true);
-                        // window.dispatchEvent(new Event("resize"));
-
-                        // setTimeout((): void => {
-                        //     expect((domNode.querySelector("img") as HTMLImageElement).classList).not.toContain(
-                        //         "sdl-expandable-image"
-                        //     );
                         done();
-                        //});
                     });
 
                     imageInLightbox.click();
-                }, RENDER_DELAY);
+                }, ASYNC_DELAY);
             });
         });
 
