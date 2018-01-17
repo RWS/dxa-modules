@@ -386,7 +386,7 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
                 const { clientWidth, naturalWidth, clientHeight, naturalHeight } = img;
                 const isImageToProcess = clientWidth < naturalWidth || clientHeight < naturalHeight;
                 const alreadyProcessedImg = processedImages.find(x => x.element === img);
-                if (isImageToProcess && !alreadyProcessedImg) {
+                if (isImageToProcess && !alreadyProcessedImg && !img.getAttribute("width")) {
                     const clickHandler = (e: Event): void => {
                         if (dialogImageSrc) {
                             // If there is at least 30% of space to expand an imag, then expand it in lightbox
@@ -407,6 +407,11 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
                     img.addEventListener("click", clickHandler);
                     if (!img.classList.contains("sdl-expandable-image")) {
                         img.classList.add("sdl-expandable-image");
+                    }
+                } else if (!alreadyProcessedImg && img.getAttribute("width")) {
+                    img.setAttribute("max-width", "unset");
+                    if (img.parentElement) {
+                        img.parentElement.style.setProperty("overflow-x", "auto");
                     }
                 } else if (!isImageToProcess && alreadyProcessedImg) {
                     const el = alreadyProcessedImg.element;
