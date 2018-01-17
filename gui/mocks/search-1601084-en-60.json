@@ -15,8 +15,8 @@
       "ModifiedDate": "07.01.2016 3:47:08",
       "PublicationId": 1601084,
       "PublicationTitle": "Penguin guide",
-      "ProductFamilyName": "Animals",
-      "ProductReleaseName": "Penguins (8.0.0)"
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
     },
     {
       "Id": "ish_1601084-516826-16",
@@ -30,8 +30,8 @@
       "ModifiedDate": "07.01.2016 3:50:30",
       "PublicationId": 1601084,
       "PublicationTitle": "Penguin guide",
-      "ProductFamilyName": "Animals",
-      "ProductReleaseName": "Penguins (8.0.0)"
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
     },
     {
       "Id": "ish_1601084-515851-16",
@@ -45,8 +45,8 @@
       "ModifiedDate": "07.01.2016 3:46:56",
       "PublicationId": 1601084,
       "PublicationTitle": "Penguin guide",
-      "ProductFamilyName": "Animals",
-      "ProductReleaseName": "Penguins (8.0.0)"
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
     }
   ]
 }
