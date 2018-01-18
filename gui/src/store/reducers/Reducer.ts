@@ -1,13 +1,13 @@
 import { MD5 } from "object-hash";
 import * as Language from "./Language";
 import * as Pages from "./Pages";
-import * as Publication from "./Publication";
+import * as Location from "./Location";
 import * as Publications from "./Publications";
 import * as ReleaseVersions from "./ReleaseVersions";
 import splitterPosition from "./SplitterPosition";
 import conditions, * as Conditions from "./conditions";
 import productFamilies from "./ProductFamilies";
-import { IState, IPublicationCurrentState } from "store/interfaces/State";
+import { IState, ICurrentLocationState } from "store/interfaces/State";
 import { IPublication } from "interfaces/Publication";
 import { IPage } from "interfaces/Page";
 import { combineReducers } from "store/reducers/CombineReducers";
@@ -22,7 +22,7 @@ export const mainReducer = combineReducers({
     comments: Comments.comments,
     language: Language.language,
     pages: Pages.pages,
-    publication: Publication.publication,
+    currentLocation: Location.currentLocation,
     publications: Publications.publications,
     releaseVersions: ReleaseVersions.releaseVersions,
     productFamilies,
@@ -65,7 +65,7 @@ export const isPageLoading = (state: IState, pubId: string, pageId: string, cond
 };
 
 // State selectors
-export const getCurrentPub = (state: IState): IPublicationCurrentState => state.publication;
+export const getCurrentLocation = (state: IState): ICurrentLocationState => state.currentLocation;
 export const getReleaseVersionsForPub = (state: IState, pubId: string): IProductReleaseVersion[] =>
     ReleaseVersions.getReleaseVersionsForPub(state.releaseVersions, pubId);
 

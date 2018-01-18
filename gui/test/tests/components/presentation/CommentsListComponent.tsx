@@ -11,7 +11,7 @@ import { IComment, IUser, ICommentDate } from "interfaces/ServerModels";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 import { TestBase } from "@sdl/models";
 import { RENDER_DELAY, ASYNC_DELAY } from "test/Constants";
-import { updateCurrentPublication } from "src/store/actions/Actions";
+import { updateCurrentLocation } from "src/store/actions/Actions";
 import { PageService } from "test/mocks/services/PageService";
 import { getComments } from "store/reducers/Reducer";
 
@@ -59,7 +59,7 @@ class CommentsListComponent extends TestBase {
 
             beforeEach(() => {
                 const store = (this.store = configureStore());
-                store.dispatch(updateCurrentPublication(defaultProps.publicationId, defaultProps.pageId, ""));
+                store.dispatch(updateCurrentLocation(defaultProps.publicationId, defaultProps.pageId, "", ""));
                 services.pageService.setMockDataComments(null, defaultProps.comments);
             });
 

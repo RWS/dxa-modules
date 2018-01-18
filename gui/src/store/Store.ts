@@ -17,17 +17,11 @@ import { merge } from "lodash";
 const LOCALSTORAGE_KEY: string = "sdl-dita-delivery-app";
 
 const globalWindow = window as IWindow;
-const composeEnhancers =
-    globalWindow.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = globalWindow.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const storage = compose(
-    localStorageFilter(["language", "conditions.lastConditions"])
-)(adapter(window.localStorage));
+const storage = compose(localStorageFilter(["language", "conditions.lastConditions"]))(adapter(window.localStorage));
 
-const enhancer = composeEnhancers(
-    applyMiddleware(thunk),
-    persistState(storage, LOCALSTORAGE_KEY)
-);
+const enhancer = composeEnhancers(applyMiddleware(thunk), persistState(storage, LOCALSTORAGE_KEY));
 
 const persistMainReducer = compose(
     (() =>
@@ -58,9 +52,10 @@ const EMPTY_STATE: IState = {
         errors: {},
         postErrors: {}
     },
-    publication: {
+    currentLocation: {
         publicationId: "",
         pageId: "",
+        taxonomyId: "",
         anchor: ""
     },
     publications: {
@@ -82,21 +77,13 @@ const EMPTY_STATE: IState = {
 
 //need this to reset state for tests
 const resetState = createAction("KARMA_RESET", (state: IState) => state);
-const resetStateReducer = handleAction(
-    "KARMA_RESET",
-    (state: IState, newState: IState): IState => newState,
-    {}
-);
+const resetStateReducer = handleAction("KARMA_RESET", (state: IState, newState: IState): IState => newState, {});
 
 let store: Store<IState> | undefined;
 const configureStore = (initialState: {} = {}): Store<IState> => {
     const state = deepAssign({}, EMPTY_STATE, initialState);
     if (store === undefined) {
-        store = createStore(
-            combine(resetStateReducer, persistMainReducer),
-            state,
-            enhancer
-        );
+        store = createStore(combine(resetStateReducer, persistMainReducer), state, enhancer);
     } else {
         store.dispatch(resetState(state));
     }

@@ -11,7 +11,7 @@ import { getEditingConditions, getLastConditions } from "store/reducers/Reducer"
 import { dialogOpen } from "store/actions/Actions";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 import { PublicationService } from "test/mocks/services/PublicationService";
-import { updateCurrentPublication, updateEditingConditions } from "src/store/actions/Actions";
+import { updateCurrentLocation, updateEditingConditions } from "src/store/actions/Actions";
 import { ConditionsDialogPresentation } from "components/ConditionsDialog/ConditionsDialogPresentation";
 import { ConditionsDialog } from "components/ConditionsDialog/ConditionsDialog";
 import { RENDER_DELAY, ASYNC_DELAY } from "test/Constants";
@@ -50,7 +50,7 @@ class ConditionsDialogComponent extends TestBase {
 
             beforeEach(() => {
                 const store = (this.store = configureStore());
-                store.dispatch(updateCurrentPublication(defaultPublicationId, "", ""));
+                store.dispatch(updateCurrentLocation(defaultPublicationId, "", "", ""));
                 store.dispatch(dialogOpen());
             });
 
@@ -266,7 +266,7 @@ class ConditionsDialogComponent extends TestBase {
                 const publicationId = "42";
                 const store = this.store;
 
-                store.dispatch(updateCurrentPublication(publicationId, "", ""));
+                store.dispatch(updateCurrentLocation(publicationId, "", "", ""));
 
                 services.publicationService.setMockDataConditions(errorMessage);
                 const component = this._renderComponent(target);

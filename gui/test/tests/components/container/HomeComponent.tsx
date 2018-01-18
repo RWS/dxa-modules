@@ -145,6 +145,7 @@ class HomeComponent extends TestBase {
                                         publicationId={publicationId}
                                         publication={publication}
                                         pageId={pageId}
+                                        taxonomyId=""
                                         anchor=""
                                         page={dummyPage(pageId)}
                                         isPageLoading={isPageLoading}

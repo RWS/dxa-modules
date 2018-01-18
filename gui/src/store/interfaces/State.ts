@@ -96,31 +96,38 @@ export interface IPublicationsState {
 }
 
 /**
- * State's current publication interface
+ * State's current location interface
  *
  * @export
- * @interface IPublicationCurrentState
+ * @interface ICurrentLocationState
  */
-export interface IPublicationCurrentState {
+export interface ICurrentLocationState {
     /**
      * Current publication id
      *
      * @type {string}
-     * @memberOf IPublicationCurrentState
+     * @memberOf ICurrentLocationState
      */
     publicationId: string;
     /**
      * Current page id
      *
      * @type {string}
-     * @memberOf IPublicationCurrentState
+     * @memberOf ICurrentLocationState
      */
     pageId: string;
+    /**
+     * Current page id
+     *
+     * @type {string}
+     * @memberOf ICurrentLocationState
+     */
+    taxonomyId: string;
     /**
      * Current anchor pointer
      *
      * @type {string}
-     * @memberOf IPublicationCurrentState
+     * @memberOf ICurrentLocationState
      */
     anchor: string;
 }
@@ -156,12 +163,12 @@ export interface IState {
      */
     comments: IComments;
     /**
-     * Current selected publication
+     * Current selected location
      *
      * @type {IPublicationState}
      * @memberOf IState
      */
-    publication: IPublicationCurrentState;
+    currentLocation: ICurrentLocationState;
 
     /**
      * Publications and state

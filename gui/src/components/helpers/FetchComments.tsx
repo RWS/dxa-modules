@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getCurrentPub } from "store/reducers/Reducer";
+import { getCurrentLocation } from "store/reducers/Reducer";
 import { IAppContext } from "@sdl/dd/container/App/App";
 import { IState } from "store/interfaces/State";
 import { fetchComments as fetchCommentsApi } from "store/actions/Api";
@@ -125,8 +125,8 @@ class Fetch extends React.Component<IFetchComments & IFetchCommentsProperties, {
  * @param {IFetchCommentsProperties} ownProps
  */
 const mapStateToProps = (state: IState, ownProps: IFetchCommentsProperties) => ({
-    publicationId: getCurrentPub(state).publicationId,
-    pageId: getCurrentPub(state).pageId
+    publicationId: getCurrentLocation(state).publicationId,
+    pageId: getCurrentLocation(state).pageId
 });
 
 const mapDispatchToProps = {

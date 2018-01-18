@@ -27,7 +27,7 @@ import {
     COMMENT_SAVING,
     COMMENT_ERROR,
     COMMENT_SAVED,
-    updateCurrentPublication
+    updateCurrentLocation
 } from "store/actions/Actions";
 
 import {
@@ -315,7 +315,7 @@ export const setCurrentPublicationByReleaseVersion = (
         }
 
         if (pubs[0]) {
-            dispatch(updateCurrentPublication(pubs[0].id, pageId || "", ""));
+            dispatch(updateCurrentLocation(pubs[0].id, pageId || "", "", ""));
         }
     };
 };
@@ -356,8 +356,8 @@ export const setCurrentPageByReleaseVersion = (
         pageService
             .getPageInfoByLogicalId(nextPubId, logicalId, conditions)
             .then(
-                page => dispatch(updateCurrentPublication(nextPubId, page.id, "")),
-                errorMessage => dispatch(updateCurrentPublication(nextPubId, "", ""))
+                page => dispatch(updateCurrentLocation(nextPubId, page.id, "", "")),
+                errorMessage => dispatch(updateCurrentLocation(nextPubId, "", "", ""))
             );
     };
 };

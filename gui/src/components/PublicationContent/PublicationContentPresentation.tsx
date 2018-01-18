@@ -21,7 +21,7 @@ import { ITaxonomy } from "interfaces/Taxonomy";
 import { IPage } from "interfaces/Page";
 import { TaxonomyItemId } from "interfaces/TcmId";
 import { IPublication } from "interfaces/Publication";
-import { IPublicationCurrentState } from "store/interfaces/State";
+import { ICurrentLocationState } from "store/interfaces/State";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 import { IPageService } from "services/interfaces/PageService";
 
@@ -82,14 +82,13 @@ export interface IPublicationContentProps {
      * @memberOf IPublicationContentProps
      */
     productReleaseVersion: string;
-
     /**
      * Function to execute when publication is changing
      *
      * @type {Function}
      * @memberOf IPublicationContentProps
      */
-    onPublicationChange?: (publicationId: string, pageId: string) => void;
+    onPublicationChange?: (publicationId: string, pageId: string, taxomonyId?: string) => void;
     /**
      *
      * @memberOf IPublicationContentProps
@@ -191,7 +190,7 @@ interface IToc {
 /**
  * Publication content props
  */
-export type Pub = IPublicationContentProps & IPublicationCurrentState;
+export type Pub = IPublicationContentProps & ICurrentLocationState;
 
 /**
  * Publication + content component
@@ -230,8 +229,8 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         }
     }
 
-    public refreshToc(publicationId: string, page: IPage): void {
-        this._onPageContentRetrieved(publicationId, page);
+    public refreshToc(publicationId: string, page: IPage, taxonomyId?: string): void {
+        this._onPageContentRetrieved(publicationId, page, taxonomyId);
     }
 
     public componentDidMount(): void {
@@ -257,7 +256,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
      */
     public componentWillReceiveProps(nextProps: Pub): void {
         const { page, publicationId } = this.props;
-        const { publicationId: nextPubId, page: nextPage, errorMessage } = nextProps;
+        const { publicationId: nextPubId, page: nextPage, taxonomyId: nextTaxonomyId, errorMessage } = nextProps;
 
         if (!isPage(nextPage)) {
             this.fetchPublication(nextPubId);
@@ -274,7 +273,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                     () => this.refreshToc(nextPubId, nextPage)
                 );
             } else if (!isDummyPage(nextPage) && nextPage.content !== page.content) {
-                this.refreshToc(nextPubId, nextPage);
+                this.refreshToc(nextPubId, nextPage, nextTaxonomyId);
             }
         }
     }
@@ -435,13 +434,16 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         // When the tree is expanding it is also calling the onTocSelectionChanged callback
         /* istanbul ignore else */
         const parsedUrl = sitemapItem.url && Url.parsePageUrl(sitemapItem.url);
-        const pageHasChanged = parsedUrl && (pageId !== parsedUrl.pageId && publicationId === parsedUrl.publicationId);
-        if (pageHasChanged && parsedUrl && onPublicationChange) {
-            onPublicationChange(parsedUrl.publicationId, parsedUrl.pageId);
+        if (parsedUrl) {
+            const { pageId: parsedPageId, publicationId: parsedPubId } = parsedUrl;
+            const pageHasChanged = pageId !== parsedPageId && publicationId === parsedPubId;
+            if (pageHasChanged && onPublicationChange) {
+                onPublicationChange(parsedPubId, parsedPageId, sitemapItem.id);
+            }
         }
     }
 
-    private _onPageContentRetrieved(publicationId: string, pageInfo: IPage): void {
+    private _onPageContentRetrieved(publicationId: string, pageInfo: IPage, taxonomyId?: string): void {
         const { activeTocItemPath, isTocLoading } = this.state;
 
         // Set the current active path for the tree
@@ -449,7 +451,8 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
             // Always take the first sitemap id
             // There is no proper way for having a deep link to the second/third/... occurance inside the toc
             const firstSitemapId = pageInfo.sitemapIds[0];
-            const taxonomyId = TcmId.getTaxonomyItemId(TaxonomyItemId.Toc, firstSitemapId) || firstSitemapId;
+
+            taxonomyId = taxonomyId || TcmId.getTaxonomyItemId(TaxonomyItemId.Toc, firstSitemapId) || firstSitemapId;
 
             this._getActiveSitemapPath(publicationId, pageInfo.id, taxonomyId, path => {
                 /* istanbul ignore if */

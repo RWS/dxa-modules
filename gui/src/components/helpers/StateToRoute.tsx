@@ -2,9 +2,9 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { withRouter, browserHistory } from "react-router";
 import { Url } from "utils/Url";
-import { getCurrentPub, getPageById, getPubById } from "store/reducers/Reducer";
+import { getCurrentLocation, getPageById, getPubById } from "store/reducers/Reducer";
 import { IPublicationContentPropsParams } from "interfaces/PublicationContentPropsParams";
-import { IPublicationCurrentState, IState } from "store/interfaces/State";
+import { ICurrentLocationState, IState } from "store/interfaces/State";
 import { isDummyPage } from "utils/Page";
 
 // Placeholder for titles in url, when title for url is not  avaible but required, for intance if there is anchor
@@ -52,7 +52,7 @@ export interface ISyncParams {
 /**
  * State to route props
  */
-export type Props = IPublicationCurrentState & ISyncParams;
+export type Props = ICurrentLocationState & ISyncParams;
 
 /**
  * State to route component
@@ -108,7 +108,7 @@ export class StateToRoutePresentation extends React.Component<Props, {}> {
 }
 
 const mapStateToProps = (state: IState) => {
-    const { publicationId, pageId, anchor } = getCurrentPub(state);
+    const { publicationId, pageId, anchor } = getCurrentLocation(state);
     const { title: publicationTitle } = getPubById(state, publicationId);
     const page = getPageById(state, publicationId, pageId);
 

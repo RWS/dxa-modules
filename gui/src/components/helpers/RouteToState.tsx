@@ -2,20 +2,20 @@ import * as React from "react";
 import { isEqual } from "lodash";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
-import { getCurrentPub } from "store/reducers/Reducer";
-import { updateCurrentPublication } from "store/actions/Actions";
+import { getCurrentLocation } from "store/reducers/Reducer";
+import { updateCurrentLocation } from "store/actions/Actions";
 import { IPublicationContentPropsParams } from "interfaces/PublicationContentPropsParams";
-import { IPublicationCurrentState, IState } from "store/interfaces/State";
+import { ICurrentLocationState, IState } from "store/interfaces/State";
 
 export interface ISyncParams {
     /**
      * Function with the following format to execute when route changes
-     *     `@param   {IPublicationCurrentState}
-     *     `@returns {void}
+     * @param   {ICurrentLocationState}
+     * @returns {void}
      *
      * @memberOf ISyncParams
      */
-    onRouteChange: (publication: IPublicationCurrentState) => {};
+    onRouteChange: (location: ICurrentLocationState) => {};
     /**
      * Parameters
      *
@@ -28,7 +28,7 @@ export interface ISyncParams {
 /**
  * Route to state props
  */
-export type Props = IPublicationCurrentState & ISyncParams;
+export type Props = ICurrentLocationState & ISyncParams;
 
 /**
  * Route to state component
@@ -67,10 +67,11 @@ export class RouteToStatePresentation extends React.Component<Props, {}> {
         return <div />;
     }
 
-    private paramsToState(params: IPublicationContentPropsParams): IPublicationCurrentState {
+    private paramsToState(params: IPublicationContentPropsParams): ICurrentLocationState {
         return {
             publicationId: params.publicationId,
             pageId: /^\d+$/.test(params.pageIdOrPublicationTitle || "") ? params.pageIdOrPublicationTitle as string : "",
+            taxonomyId: "",
             anchor: params.pageAnchor || ""
         };
     }
@@ -88,10 +89,10 @@ export class RouteToStatePresentation extends React.Component<Props, {}> {
     }
 }
 
-const mapStateToProps = (state: IState) => getCurrentPub(state);
+const mapStateToProps = (state: IState) => getCurrentLocation(state);
 
 const mapDispatchToProps = {
-    onRouteChange: ({ publicationId, pageId, anchor }: IPublicationCurrentState) => updateCurrentPublication(publicationId, pageId, anchor)
+    onRouteChange: ({ publicationId, pageId, taxonomyId, anchor }: ICurrentLocationState) => updateCurrentLocation(publicationId, pageId, taxonomyId, anchor)
 };
 
 /**
