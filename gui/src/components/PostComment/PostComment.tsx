@@ -5,11 +5,11 @@ import {
     IPostCommentPresentationProps,
     IPostCommentPresentationDispatchProps
 } from "@sdl/dd/PostComment/PostCommentPresentation";
-import { getCurrentPub, getPubById, getPageById } from "store/reducers/Reducer";
+import { getCurrentLocation, getPubById, getPageById } from "store/reducers/Reducer";
 import { getPostCommentErrorMessage, commentIsSaving as commentIsSavingSelector } from "store/reducers/Reducer";
 
 const mapStateToProps = (state: IState, ownProps: IPostCommentPresentationProps): IPostCommentPresentationDispatchProps => {
-    const { pageId, publicationId } = getCurrentPub(state);
+    const { pageId, publicationId } = getCurrentLocation(state);
     const { title: publicationTitle } = getPubById(state, publicationId);
     const { title: pageTitle } = getPageById(state, publicationId, pageId);
 

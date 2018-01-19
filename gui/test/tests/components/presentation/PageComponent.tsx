@@ -334,6 +334,37 @@ class PageComponent extends TestBase {
                 }, RENDER_DELAY);
             });
 
+            it("does not highlights code blocks in page if there are any html tags", (done: () => void): void => {
+                const pageProps: IPageProps = {
+                    isLoading: false,
+                    content: `<div>
+                                <pre class="pre codeblock">
+                                    <code>
+                                        This is the codeblock, &lt;var class="keyword varname"&gt;This is the varname,&lt;/var&gt; the end
+                                    </code>
+                                </pre>
+                                <pre class="pre codeblock">
+                                    <code>
+                                        This is the codeblock, <var class="keyword varname">This is the varname,</var> the end<
+                                    /code>
+                                </pre>
+                            </div>`,
+                    onNavigate: (): void => {}
+                };
+
+                const page = this._renderComponent(pageProps, target);
+                const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
+                expect(domNode).not.toBeNull();
+
+                setTimeout((): void => {
+                    const codeBlocks = domNode.querySelectorAll(".page-content .codeblock code") as NodeListOf<HTMLElement>;
+                    expect(codeBlocks.length).toBe(2);
+                    expect(codeBlocks[0].querySelectorAll("span.tag").length).toBeGreaterThan(0, "Styling should be applied");
+                    expect(codeBlocks[1].querySelectorAll("span.tag").length).toBe(0, "Styling should not be applied");
+                    done();
+                }, RENDER_DELAY);
+            });
+
             it("can open big images in lightbox", (done: () => void): void => {
                 const pageProps: IPageProps = {
                     isLoading: false,

@@ -8,7 +8,7 @@ import { Provider } from "react-redux";
 import { configureStore } from "store/Store";
 import { Store } from "redux";
 import { IState } from "store/interfaces/State";
-import { updateCurrentPublication } from "src/store/actions/Actions";
+import { updateCurrentLocation } from "src/store/actions/Actions";
 import { PageService } from "test/mocks/services/PageService";
 import { IComment, ICommentDate, IUser } from "interfaces/ServerModels";
 import { getComments, getPostCommentErrorMessage } from "store/reducers/Reducer";
@@ -33,7 +33,7 @@ class CommentsSectionComponent extends TestBase {
 
             beforeEach(() => {
                 const store = (this.store = configureStore());
-                store.dispatch(updateCurrentPublication(defaultProps.publicationId, defaultProps.pageId, ""));
+                store.dispatch(updateCurrentLocation(defaultProps.publicationId, defaultProps.pageId, "", ""));
             });
 
             afterEach(() => {

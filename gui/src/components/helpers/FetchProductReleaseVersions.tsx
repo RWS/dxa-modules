@@ -5,7 +5,7 @@ import { fetchProductReleaseVersions } from "store/actions/Api";
 import { IAppContext } from "@sdl/dd/container/App/App";
 import { IPublicationService } from "services/interfaces/PublicationService";
 import { IState } from "store/interfaces/State";
-import { getCurrentPub } from "store/reducers/Reducer";
+import { getCurrentLocation } from "store/reducers/Reducer";
 
 export interface IFetchProductRelease {
     /**
@@ -75,7 +75,7 @@ class Fetch extends React.Component<IFetchProductRelease, {}> {
 }
 
 const mapStateToProps = (state: IState): {} => ({
-    publicationId: getCurrentPub(state).publicationId
+    publicationId: getCurrentLocation(state).publicationId
 });
 
 const mapDispatchToProps = {

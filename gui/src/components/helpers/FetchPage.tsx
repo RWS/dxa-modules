@@ -3,10 +3,10 @@ import * as PropTypes from "prop-types";
 import { MD5 } from "object-hash";
 import { connect } from "react-redux";
 import { fetchPage } from "store/actions/Api";
-import { getCurrentPub, getLastConditions } from "store/reducers/Reducer";
+import { getCurrentLocation, getLastConditions } from "store/reducers/Reducer";
 import { IAppContext } from "@sdl/dd/container/App/App";
 import { IPageService } from "services/interfaces/PageService";
-import { IState, IPublicationCurrentState } from "store/interfaces/State";
+import { IState, ICurrentLocationState } from "store/interfaces/State";
 import { IConditionMap } from "store/interfaces/Conditions";
 
 export interface IFetchPage {
@@ -21,12 +21,12 @@ export interface IFetchPage {
      */
     fetch: (pageService: IPageService, publicationId: string, pageId: string, conditions: IConditionMap) => void;
     /**
-     * Current publication from Global State
+     * Current location from Global State
      *
-     * @type {IPublicationCurrentState}
+     * @type {ICurrentLocationState}
      * @memberOf IFetchPage
      */
-    currentPub: IPublicationCurrentState;
+    currentPub: ICurrentLocationState;
     conditions: IConditionMap;
 };
 
@@ -93,7 +93,7 @@ class Fetch extends React.Component<IFetchPage, {}> {
 }
 
 const mapStateToProps = (state: IState): {} => {
-    const currentPub = getCurrentPub(state);
+    const currentPub = getCurrentLocation(state);
 
     return {
         currentPub,

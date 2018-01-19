@@ -18,13 +18,13 @@ import { configureStore } from "store/Store";
 import { PublicationContent } from "src/components/PublicationContent/PublicationContent";
 
 import { FetchPage } from "components/helpers/FetchPage";
-import { updateCurrentPublication } from "src/store/actions/Actions";
+import { updateCurrentLocation } from "src/store/actions/Actions";
 import { changeLanguage } from "store/actions/Actions";
 
 import { Store } from "redux";
 import { IState } from "src/store/interfaces/State";
 import { FetchProductReleaseVersions } from "src/components/helpers/FetchProductReleaseVersions";
-import { getCurrentPub } from "store/reducers/Reducer";
+import { getCurrentLocation } from "store/reducers/Reducer";
 import { FetchPublications } from "src/components/helpers/FetchPublications";
 
 import { RENDER_DELAY, ASYNC_TEST_DELAY } from "test/Constants";
@@ -184,7 +184,7 @@ class PublicationContentComponent extends TestBase {
                     // Check if routing was called with correct params
                     const store = this.store as Store<IState>;
                     const state = store.getState();
-                    const { publicationId, pageId, anchor } = state.publication;
+                    const { publicationId, pageId, anchor } = state.currentLocation;
                     expect(publicationId).toBe(PUBLICATION_ID);
                     expect(pageId).toBe("12345");
                     expect(anchor).toBeUndefined();
@@ -468,7 +468,7 @@ class PublicationContentComponent extends TestBase {
                     let isUnsubscribed = false;
                     const unsubscribe = this.store.subscribe(() => {
                         if (!isUnsubscribed) {
-                            expect(getCurrentPub(this.store.getState()).publicationId).toBe("2");
+                            expect(getCurrentLocation(this.store.getState()).publicationId).toBe("2");
                         }
                         unsubscribe();
                         isUnsubscribed = true;
@@ -538,7 +538,7 @@ class PublicationContentComponent extends TestBase {
                     let isUnsubscribed = false;
                     const unsubscribe = this.store.subscribe(() => {
                         if (!isUnsubscribed) {
-                            const { publicationId, pageId } = getCurrentPub(this.store.getState());
+                            const { publicationId, pageId } = getCurrentLocation(this.store.getState());
                             expect(publicationId).toBe(publications[listItemIndex].id);
                             expect(pageId).toBe(mockPageId);
                         }
@@ -559,7 +559,7 @@ class PublicationContentComponent extends TestBase {
         publicationId?: string
     ): PublicationContentPresentation {
         const store = this.store as Store<IState>;
-        store.dispatch(updateCurrentPublication(publicationId || PUBLICATION_ID, pageId || "", ""));
+        store.dispatch(updateCurrentLocation(publicationId || PUBLICATION_ID, pageId || "", "", ""));
 
         const comp = ReactDOM.render(
             <Provider store={store}>
