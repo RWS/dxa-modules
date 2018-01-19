@@ -9,9 +9,10 @@ const MOCK_DATA: IPublication[] = [
     {
         Id: "Pub1",
         Title: "Pub1",
-        ProductFamily: "Family 1",
+        ProductFamily: ["Family 1"],
         CreatedOn: "",
         Version: "1",
+        LogicalRef: "123",
         LogicalId: "GUID-123",
         VersionRef: "123",
         Language: "en"
@@ -19,10 +20,11 @@ const MOCK_DATA: IPublication[] = [
     {
         Id: "Pub2",
         Title: "Pub2",
-        ProductFamily: "Family 2",
+        ProductFamily: ["Family 2"],
+        ProductReleaseVersion: ["V1"],
         CreatedOn: "",
-        ProductReleaseVersion: "V1",
         Version: "1",
+        LogicalRef: "123",
         LogicalId: "GUID-123",
         VersionRef: "123",
         Language: "en"
@@ -30,10 +32,11 @@ const MOCK_DATA: IPublication[] = [
     {
         Id: "Pub3",
         Title: "Pub3",
-        ProductFamily: "Family 2",
+        ProductFamily: ["Family 2"],
         ProductReleaseVersion: null,
         CreatedOn: "",
         Version: "1",
+        LogicalRef: "123",
         LogicalId: "GUID-123",
         VersionRef: "123",
         Language: "en"
@@ -43,6 +46,7 @@ const MOCK_DATA: IPublication[] = [
         Title: "Pub",
         CreatedOn: "",
         Version: "1",
+        LogicalRef: "123",
         LogicalId: "GUID-123",
         VersionRef: "123",
         Language: "en"
@@ -53,6 +57,7 @@ const MOCK_DATA: IPublication[] = [
         ProductFamily: null,
         CreatedOn: "",
         Version: "1",
+        LogicalRef: "123",
         LogicalId: "GUID-123",
         VersionRef: "123",
         Language: "en"
@@ -107,11 +112,11 @@ class PublicationsModel extends TestBase {
                     berries.map((family, i) => ({
                         id: `${i}`,
                         title: `Title - ${i}`,
-                        productFamily: family,
+                        productFamily: [family],
                         createdOn: new Date(),
                         version: "1",
                         logicalId: `GUID-${i}`
-                    }))
+                    } as IPublicationInterface))
                 );
 
                 const families = publicationModel.getProductFamilies();

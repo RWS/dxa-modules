@@ -17,38 +17,38 @@ describe(`Version tests.`, (): void => {
              */
             {
                 ...defaultPub,
-                productFamily: "PF1",
-                productReleaseVersion: "PR v1(1)"
+                productFamily: ["PF1"],
+                productReleaseVersion: ["PR v1(1)"]
             },
             {
                 ...defaultPub,
-                productFamily: "PF1",
-                productReleaseVersion: "PR v2(2)"
+                productFamily: ["PF1"],
+                productReleaseVersion: ["PR v2(2)"]
             },
             {
                 ...defaultPub,
-                productFamily: "PF1",
-                productReleaseVersion: "PR v1.2.0(1.2.0)"
+                productFamily: ["PF1"],
+                productReleaseVersion: ["PR v1.2.0(1.2.0)"]
             },
             {
                 ...defaultPub,
-                productFamily: "PF1",
-                productReleaseVersion: "PR v1.0.2(1.0.2)"
+                productFamily: ["PF1"],
+                productReleaseVersion: ["PR v1.0.2(1.0.2)"]
             },
             {
                 ...defaultPub,
-                productFamily: "PF1",
-                productReleaseVersion: "PR v1.6.18(1.6.18)"
+                productFamily: ["PF1"],
+                productReleaseVersion: ["PR v1.6.18(1.6.18)"]
             },
             {
                 ...defaultPub,
-                productFamily: "PF1",
-                productReleaseVersion: "PR v1.11.124(1.11.124)"
+                productFamily: ["PF1"],
+                productReleaseVersion: ["PR v1.11.124(1.11.124)"]
             },
             {
                 ...defaultPub,
-                productFamily: "PF1",
-                productReleaseVersion: "PR vx",
+                productFamily: ["PF1"],
+                productReleaseVersion: ["PR vx"],
                 title: "PR vx"
             },
             /**
@@ -56,26 +56,26 @@ describe(`Version tests.`, (): void => {
              */
             {
                 ...defaultPub,
-                productFamily: "PF2",
-                productReleaseVersion: "PR2.1",
+                productFamily: ["PF2"],
+                productReleaseVersion: ["PR2.1"],
                 title: "PR2.1"
             },
             {
                 ...defaultPub,
-                productFamily: "PF3",
-                productReleaseVersion: "PR3.1",
+                productFamily: ["PF3"],
+                productReleaseVersion: ["PR3.1"],
                 title: "PR3.1"
             },
             {
                 ...defaultPub,
-                productFamily: "PF4",
-                productReleaseVersion: "PR4.1",
+                productFamily: ["PF4"],
+                productReleaseVersion: ["PR4.1"],
                 title: "PR4.1"
             },
             {
                 ...defaultPub,
-                productFamily: "PF5",
-                productReleaseVersion: "PR5.1",
+                productFamily: ["PF5"],
+                productReleaseVersion: ["PR5.1"],
                 title: "PR5.1"
             },
             /**
@@ -84,37 +84,37 @@ describe(`Version tests.`, (): void => {
              */
             {
                 ...defaultPub,
-                productFamily: "SDL Web",
-                productReleaseVersion: "Web 8",
+                productFamily: ["SDL Web"],
+                productReleaseVersion: ["Web 8"],
                 title: "Web 8",
                 createdOn: new Date(defaultPub.createdOn.setFullYear(2016)),
                 version: "4"
             },
             {
                 ...defaultPub,
-                productFamily: "SDL Web",
-                productReleaseVersion: "Tridion 98",
+                productFamily: ["SDL Web"],
+                productReleaseVersion: ["Tridion 98"],
                 createdOn: new Date(defaultPub.createdOn.setFullYear(1998)),
                 version: "1"
             },
             {
                 ...defaultPub,
-                productFamily: "SDL Web",
-                productReleaseVersion: "Tridion 2013",
+                productFamily: ["SDL Web"],
+                productReleaseVersion: ["Tridion 2013"],
                 createdOn: new Date(defaultPub.createdOn.setFullYear(2013)),
                 version: "2"
             },
             {
                 ...defaultPub,
-                productFamily: "SDL Web",
-                productReleaseVersion: "Tridion 2013SP1",
+                productFamily: ["SDL Web"],
+                productReleaseVersion: ["Tridion 2013SP1"],
                 createdOn: new Date(defaultPub.createdOn.setFullYear(2015)),
                 version: "2.1.1"
             },
             {
                 ...defaultPub,
-                productFamily: "SDL Web",
-                productReleaseVersion: "Tridion 2014",
+                productFamily: ["SDL Web"],
+                productReleaseVersion: ["Tridion 2014"],
                 createdOn: new Date(defaultPub.createdOn.setFullYear(2014)),
                 version: "3"
             },
@@ -123,16 +123,16 @@ describe(`Version tests.`, (): void => {
              */
             {
                 ...defaultPub,
-                productFamily: "PF6",
+                productFamily: ["PF6"],
                 title: "Second",
-                productReleaseVersion: "Second",
+                productReleaseVersion: ["Second"],
                 version: "1"
             },
             {
                 ...defaultPub,
-                productFamily: "PF6",
+                productFamily: ["PF6"],
                 title: "First",
-                productReleaseVersion: "First",
+                productReleaseVersion: ["First"],
                 version: "1"
             },
             /**
@@ -141,32 +141,32 @@ describe(`Version tests.`, (): void => {
             {
                 ...defaultPub,
                 id: "2",
-                productFamily: "PF7",
-                productReleaseVersion: "PR7.1",
+                productFamily: ["PF7"],
+                productReleaseVersion: ["PR7.1"],
                 version: "1",
                 createdOn: new Date(defaultPub.createdOn.setFullYear(2018))
             },
             {
                 ...defaultPub,
                 id: "2",
-                productFamily: "PF7",
-                productReleaseVersion: "PR7.2",
+                productFamily: ["PF7"],
+                productReleaseVersion: ["PR7.2"],
                 version: "2",
                 createdOn: new Date(defaultPub.createdOn.setFullYear(2019))
             },
             {
                 ...defaultPub,
                 id: "3",
-                productFamily: "PF7",
-                productReleaseVersion: "PR7.1",
+                productFamily: ["PF7"],
+                productReleaseVersion: ["PR7.1"],
                 version: "1",
                 createdOn: new Date(defaultPub.createdOn.setFullYear(2020))
             },
             {
                 ...defaultPub,
                 id: "4",
-                productFamily: "PF7",
-                productReleaseVersion: "PR7.3",
+                productFamily: ["PF7"],
+                productReleaseVersion: ["PR7.3"],
                 version: "1",
                 createdOn: new Date(defaultPub.createdOn.setFullYear(2012))
             },
@@ -181,13 +181,13 @@ describe(`Version tests.`, (): void => {
             },
             {
                 ...defaultPub,
-                productFamily: "PF8",
-                productReleaseVersion: "v1",
+                productFamily: ["PF8"],
+                productReleaseVersion: ["v1"],
                 title: "v1"
             },
             {
                 ...defaultPub,
-                productFamily: "PF8",
+                productFamily: ["PF8"],
                 productReleaseVersion: null,
                 title: "family no release version"
             }
@@ -216,6 +216,7 @@ describe(`Version tests.`, (): void => {
             title: "Title1",
             createdOn: new Date(),
             version: "1",
+            versionRef: "1",
             logicalId: "GUID-123"
         };
         const publications: IPublication[] = [
@@ -224,58 +225,58 @@ describe(`Version tests.`, (): void => {
              */
             {
                 ...defaultPub,
-                productFamily: "PF Second (2.0)",
-                productReleaseVersion: "PR v3(3)"
+                productFamily: ["PF Second (2.0)"],
+                productReleaseVersion: ["PR v3(3)"]
             },
             {
                 ...defaultPub,
-                productFamily: "PF First (1.0.0)",
-                productReleaseVersion: "PR v4.2(4)"
+                productFamily: ["PF First (1.0.0)"],
+                productReleaseVersion: ["PR v4.2(4)"]
             },
             {
                 ...defaultPub,
-                productFamily: "PF Last (3.0)",
-                productReleaseVersion: "PR v2(2)"
+                productFamily: ["PF Last (3.0)"],
+                productReleaseVersion: ["PR v2(2)"]
             },
             {
                 ...defaultPub,
-                productFamily: "PF Other ()",
-                productReleaseVersion: "PR v5.2(5.2.0)"
+                productFamily: ["PF Other ()"],
+                productReleaseVersion: ["PR v5.2(5.2.0)"]
             },
             {
                 ...defaultPub,
-                productFamily: "PF First (1.0)",
-                productReleaseVersion: "PR v4(4)"
+                productFamily: ["PF First (1.0)"],
+                productReleaseVersion: ["PR v4(4)"]
             },
             {
                 ...defaultPub,
-                productFamily: "PF First (1)",
-                productReleaseVersion: "PR v4.1(4)"
+                productFamily: ["PF First (1)"],
+                productReleaseVersion: ["PR v4.1(4)"]
             },
             {
                 ...defaultPub,
-                productFamily: "PF Last (3.0)",
-                productReleaseVersion: "PR v1(1)"
+                productFamily: ["PF Last (3.0)"],
+                productReleaseVersion: ["PR v1(1)"]
             },
             {
                 ...defaultPub,
-                productFamily: "",
-                productReleaseVersion: "PR v6.0(6.1.1)"
+                productFamily: [""],
+                productReleaseVersion: ["PR v6.0(6.1.1)"]
             },
             {
                 ...defaultPub,
-                productFamily: "PF Other ()",
-                productReleaseVersion: "PR v5.0(5.0.1)"
+                productFamily: ["PF Other ()"],
+                productReleaseVersion: ["PR v5.0(5.0.1)"]
             },
             {
                 ...defaultPub,
-                productFamily: "PF First (1.1.4)",
-                productReleaseVersion: "PR v4.3(4)"
+                productFamily: ["PF First (1.1.4)"],
+                productReleaseVersion: ["PR v4.3(4)"]
             },
             {
                 ...defaultPub,
-                productFamily: "PF First (1.2.)",
-                productReleaseVersion: "PR v4.4(4)"
+                productFamily: ["PF First (1.2.)"],
+                productReleaseVersion: ["PR v4.4(4)"]
             }
         ];
         expect(Version.sortProductFamilyVersions(publications))
@@ -283,16 +284,17 @@ describe(`Version tests.`, (): void => {
     });
 
     it("compares versions correctly", (): void => {
-        expect(Version.compareVersion("1", "2")).toEqual(false);
-        expect(Version.compareVersion("1.1.1", "2")).toEqual(false);
-        expect(Version.compareVersion("1.1.1.1.2", "2")).toEqual(false);
-        expect(Version.compareVersion("1.1.1.1.2", "1.1.2")).toEqual(false);
-        expect(Version.compareVersion("1.6.8", "1.11.8")).toEqual(false);
-        expect(Version.compareVersion("1", "1")).toEqual(true);
-        expect(Version.compareVersion("2", "1")).toEqual(true);
-        expect(Version.compareVersion("2", "1.1.2")).toEqual(true);
-        expect(Version.compareVersion("2.1.1", "1.1.2")).toEqual(true);
-        expect(Version.compareVersion("1.11.8", "1.6.8")).toEqual(true);
+        expect(Version.compareVersion("1", "2")).toEqual(-1);
+        expect(Version.compareVersion("1.1.1", "2")).toEqual(-1);
+        expect(Version.compareVersion("1.1.1.1.2", "2")).toEqual(-1);
+        expect(Version.compareVersion("1.1.1.1.2", "1.1.2")).toEqual(-1);
+        expect(Version.compareVersion("1.6.8", "1.11.8")).toEqual(-1);
+        expect(Version.compareVersion("1", "1")).toEqual(1);
+        expect(Version.compareVersion("2", "1")).toEqual(1);
+        expect(Version.compareVersion("2", "1.1.2")).toEqual(1);
+        expect(Version.compareVersion("2.1.1", "1.1.2")).toEqual(1);
+        expect(Version.compareVersion("1.11.8", "1.6.8")).toEqual(1);
+        expect(Version.compareVersion("1.11.8", "1.11.8")).toEqual(0);
     });
 
 });

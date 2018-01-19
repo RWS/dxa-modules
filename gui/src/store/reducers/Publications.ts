@@ -69,7 +69,7 @@ const normalizeValue = (value: string, defaultLabel: string): string | null => {
  * You can filter list of publications that  you need for different usecases
  * Example: getPubList(state, {
  *  language: "en",
- *  productFamily: "Kupchino"
+ *  productFamily: ["Kupchino"]
  *  "!id": "myId"
  * });
  * @param state

@@ -42,10 +42,14 @@ export class PublicationService implements IPublicationService {
         const { error, publications } = this._mockDataPublications;
         let filteredPublications = publications;
         if (productFamily) {
-            filteredPublications = filteredPublications.filter(pub => pub.productFamily === productFamily);
+            filteredPublications = filteredPublications.filter(
+                pub => Array.isArray(pub.productFamily) && pub.productFamily.includes(productFamily)
+            );
             if (productReleaseVersion) {
                 filteredPublications = filteredPublications.filter(
-                    pub => pub.productReleaseVersion === productReleaseVersion
+                    pub =>
+                        Array.isArray(pub.productReleaseVersion) &&
+                        pub.productReleaseVersion.includes(productReleaseVersion)
                 );
             }
         }

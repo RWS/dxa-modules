@@ -294,8 +294,8 @@ class PublicationContentComponent extends TestBase {
                         version: `${pubEsId}`,
                         versionRef: "0",
                         logicalId: `GUID-${pubEsId}`,
-                        productFamily: "PF",
-                        productReleaseVersion: "PR1",
+                        productFamily: ["PF"],
+                        productReleaseVersion: ["PR1"],
                         language: "es"
                     },
                     {
@@ -305,8 +305,8 @@ class PublicationContentComponent extends TestBase {
                         version: `${pubNlId}`,
                         versionRef: "0",
                         logicalId: `GUID-${pubNlId}`,
-                        productFamily: "PF",
-                        productReleaseVersion: "PR1",
+                        productFamily: ["PF"],
+                        productReleaseVersion: ["PR1"],
                         language: "nl"
                     }
                 ];
@@ -393,8 +393,8 @@ class PublicationContentComponent extends TestBase {
                         version: "1",
                         versionRef: "1",
                         logicalId: "GUID-1",
-                        productFamily: "PF",
-                        productReleaseVersion: "PR1",
+                        productFamily: ["PF"],
+                        productReleaseVersion: ["PR1"],
                         language: "en"
                     }
                 ];
@@ -426,8 +426,8 @@ class PublicationContentComponent extends TestBase {
                         version: "1",
                         versionRef: "1",
                         logicalId: "GUID-1",
-                        productFamily: "PF",
-                        productReleaseVersion: "PR1",
+                        productFamily: ["PF"],
+                        productReleaseVersion: ["PR1"],
                         language: "en"
                     },
                     {
@@ -437,8 +437,8 @@ class PublicationContentComponent extends TestBase {
                         version: "1",
                         versionRef: "1",
                         logicalId: "GUID-1",
-                        productFamily: "PF",
-                        productReleaseVersion: "PR2",
+                        productFamily: ["PF"],
+                        productReleaseVersion: ["PR2"],
                         language: "es"
                     }
                 ];
@@ -487,8 +487,8 @@ class PublicationContentComponent extends TestBase {
                         createdOn: new Date(),
                         version: "1",
                         logicalId: "GUID-1",
-                        productFamily: "PF",
-                        productReleaseVersion: "PR1",
+                        productFamily: ["PF"],
+                        productReleaseVersion: ["PR1"],
                         language: "en"
                     },
                     {
@@ -497,8 +497,8 @@ class PublicationContentComponent extends TestBase {
                         createdOn: new Date(),
                         version: "1",
                         logicalId: "GUID-1",
-                        productFamily: "PF",
-                        productReleaseVersion: "PR2",
+                        productFamily: ["PF"],
+                        productReleaseVersion: ["PR2"],
                         language: "es"
                     }
                 ];

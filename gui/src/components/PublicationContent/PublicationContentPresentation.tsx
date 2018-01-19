@@ -344,7 +344,8 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                             const publicationTitle = isPublicationFound
                                 ? publication.title || ""
                                 : localizationService.formatMessage("error.publication.not.found", [publication.id]);
-                            const productFamilyTitle = publication.productFamily;
+                            // TODO: fix the way to retrieve family Title
+                            const productFamilyTitle = Array.isArray(publication.productFamily) ? publication.productFamily[0] : null;
                             let breadCrumbPath = [
                                 {
                                     title:

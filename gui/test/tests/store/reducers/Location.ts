@@ -7,9 +7,9 @@ import { configureStore } from "store/Store";
 import { getCurrentLocation } from "store/reducers/Reducer";
 import { updateCurrentLocation } from "store/actions/Actions";
 
-class PublicationReducer extends TestBase {
+class LocationReducer extends TestBase {
     public runTests(): void {
-        describe("Test Language reducer", (): void => {
+        describe("Test Locations reducer", (): void => {
             let store: Store<IState>;
 
             //this is basically resets store's state, because of "KARMA_RESET" reducer.
@@ -63,4 +63,4 @@ class PublicationReducer extends TestBase {
     }
 }
 
-new PublicationReducer().runTests();
+new LocationReducer().runTests();
