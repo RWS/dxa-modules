@@ -458,6 +458,41 @@ class PageComponent extends TestBase {
                     imageInLightbox.click();
                 }, ASYNC_DELAY);
             });
+
+            /*it("horizontal scrollbar for image with fixed size", (done: () => void): void => {
+                const imgTitle = "img-10000x1";
+                const img10000x1 =
+                    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAJxAAAAABCA" +
+                    "YAAAB43rQLAAAAQ0lEQVR42u3BAQ0AAAQAMLKooZ/YbHL8z5reAAAAAAA" +
+                    "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA3gFLLQHn34E1CgAAAABJRU5ErkJggg==";
+
+                const pageProps: IPageProps = {
+                    isLoading: false,
+                    content: `<div style="display: block; width: 10px">
+                            <img id="img-10000x1" title="${imgTitle}" src="${img10000x1}" width="400px" height="200px"/>
+                        </div>`,
+                    onNavigate: (): void => {}
+                };
+
+                const page = this._renderComponent(pageProps, target);
+                const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
+                expect(domNode).not.toBeNull();
+
+                setTimeout((): void => {
+                    // Opens image in new window
+                    const fixedImage = domNode.querySelector("img") as HTMLImageElement;
+
+                    expect(fixedImage.parentElement).not.toBeNull("Expected that image has parent div");
+                    if (fixedImage.parentElement) {
+                        var parentDiv = fixedImage.parentElement;
+                        expect(parentDiv.scrollWidth).toBeGreaterThan(parentDiv.clientWidth,
+                                "Expected that image is bigger than parent div");
+                        expect(parentDiv.classList).toContain("sdl-div-with-fixed-size-image");
+                    }
+
+                    done();
+                }, ASYNC_DELAY);
+            });*/
         });
 
         describe(`Page navigation tests.`, (): void => {
