@@ -175,6 +175,7 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
         };
 
         this.fetchPage = this.fetchPage.bind(this);
+        this._postProcessHtml = this._postProcessHtml.bind(this);
     }
 
     /**
@@ -257,6 +258,7 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
      */
     public componentDidMount(): void {
         this._postProcessHtml();
+        window.addEventListener("resize", this._postProcessHtml);
     }
 
     /**
@@ -276,6 +278,7 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
         if (this._historyUnlisten) {
             this._historyUnlisten();
         }
+        window.removeEventListener("resize", this._postProcessHtml);
     }
 
     private fetchPage(): void {
@@ -389,7 +392,7 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
                 if (isImageToProcess && !alreadyProcessedImg) {
                     const clickHandler = (e: Event): void => {
                         if (dialogImageSrc) {
-                            // If there is at least 30% of space to expand an imag, then expand it in lightbox
+                            // If there is at least 30% of space to expand an image, then expand it in lightbox
                             if (document.documentElement.clientWidth > img.clientWidth * 1.3) {
                                 this.setState({
                                     dialogImageSrc
@@ -410,11 +413,9 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
                     }
                 } else if (!isImageToProcess && alreadyProcessedImg) {
                     const el = alreadyProcessedImg.element;
-                    if (el.classList.contains("sdl-expandable-image")) {
-                        el.classList.remove("sdl-expandable-image");
-                    }
-                    el.removeEventListener("click", alreadyProcessedImg.clickHandler);
                     processedImages.splice(processedImages.indexOf(alreadyProcessedImg), 1);
+                    el.removeEventListener("click", alreadyProcessedImg.clickHandler);
+                    el.classList.remove("sdl-expandable-image");
                 }
             });
         }
