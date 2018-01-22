@@ -435,7 +435,7 @@ class PageComponent extends TestBase {
                                 <br/>
                                 <img id="img-1000x1" style="width: 400px"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA+gAAAABCAYAAABNAIQzAAAAHklEQVR42u3CQREAAAgDoNk/tLOFHzhmkwsAAAB8Kj7WAgBDnCYvAAAAAElFTkSuQmCC"
-                                />                            
+                                />
                             </div>`,
                     onNavigate: (): void => {}
                 };
