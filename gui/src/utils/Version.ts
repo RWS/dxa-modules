@@ -113,7 +113,13 @@ export default class Version {
             const latestDates: { [releaseVersion: string]: number } = {};
             const getLatestDate = (releaseVersion: string): number => {
                 if (!latestDates[releaseVersion]) {
-                    latestDates[releaseVersion] = Math.min(...pubs.map(p => p.createdOn.getTime()));
+                    latestDates[releaseVersion] = Math.max(
+                        ...pubs
+                            .filter(
+                                pub => pub.productReleaseVersion && pub.productReleaseVersion.includes(releaseVersion)
+                            )
+                            .map(p => p.createdOn.getTime())
+                    );
                 }
                 return latestDates[releaseVersion];
             };
@@ -141,7 +147,13 @@ export default class Version {
             const highestPublicationsVersions: { [releaseVersion: string]: number } = {};
             const getHighestVersion = (releaseVersion: string): number => {
                 if (!highestPublicationsVersions[releaseVersion]) {
-                    highestPublicationsVersions[releaseVersion] = Math.max(...pubs.map(p => +p.version || 0));
+                    highestPublicationsVersions[releaseVersion] = Math.max(
+                        ...pubs
+                            .filter(
+                                pub => pub.productReleaseVersion && pub.productReleaseVersion.includes(releaseVersion)
+                            )
+                            .map(p => +p.version || 0)
+                    );
                 }
                 return highestPublicationsVersions[releaseVersion];
             };
@@ -164,7 +176,7 @@ export default class Version {
             return 0;
         };
 
-        const byTitlesComparer = (version1: string, version2: string): ValuesComparerResult => {
+        const byVersionComparer = (version1: string, version2: string): ValuesComparerResult => {
             if (version1 && version2) {
                 return (
                     // 1. If the release version contains a version number between brackets at the end use
@@ -177,7 +189,9 @@ export default class Version {
                     // 3. If a release version is used on many publications and order could not be defined by publication version the
                     //  creation date metadata of the publication version is used (most recent data is latest release version)
                     byLatestCreatedOnDateComparer(version1, version2) ||
+                    // 4. If a latest created on dates are equal, then compare by most publications occurances
                     byMostPublicationsComparer(version1, version2) ||
+                    // 5. Eventually, compare by Title
                     byTitleComparer(version1, version2)
                 );
             } else if (!version1) {
@@ -194,7 +208,7 @@ export default class Version {
             // First, get flatten list of release versions
             [].concat
                 .apply([], publications.map(pub => pub.productReleaseVersion || null))
-                .sort(byTitlesComparer)
+                .sort(byVersionComparer)
                 // Convert to a product release version (remove version from end if it's in the correct format)
                 .map((releaseVersion: string) => {
                     const releaseVersionMatch = releaseVersion && releaseVersion.match(VERSION_REGEX);
@@ -205,102 +219,6 @@ export default class Version {
                 })
         );
     }
-    // public static sortProductReleaseVersions(publications: IPublication[]): (string | null)[] {
-    //     const sortByTitle = (a: IPublication, b: IPublication) => {
-    //         const titleA = a.title.toUpperCase();
-    //         const titleB = b.title.toUpperCase();
-    //         if (titleA < titleB) {
-    //             return -1;
-    //         }
-    //         if (titleA > titleB) {
-    //             return 1;
-    //         }
-    //         return 0;
-    //     };
-
-    //     const sortByCreatedOnDate = (a: IPublication, b: IPublication) => {
-    //         const createdOnA = a.createdOn;
-    //         const createdOnB = b.createdOn;
-    //         // Latest is first
-    //         if (createdOnA.getTime() < createdOnB.getTime()) {
-    //             return 1;
-    //         } else if (createdOnA.getTime() > createdOnB.getTime()) {
-    //             return -1;
-    //         }
-    //         return 0;
-    //     };
-
-    //     const sortByMostVersions = (a: IPublication, b: IPublication): number => {
-    //         if (a.productReleaseVersion === b.productReleaseVersion) {
-    //             // In this case the publication with the most versions / release combinations is considered to the ordered higher
-    //             const publicationsAReleaseVersions = this._distinct(
-    //                 publications.filter(pub => pub.id === a.id).map(pub => pub.productReleaseVersion || null)
-    //             );
-    //             const publicationsBReleaseVersions = this._distinct(
-    //                 publications.filter(pub => pub.id === b.id).map(pub => pub.productReleaseVersion || null)
-    //             );
-    //             if (publicationsAReleaseVersions.length !== publicationsBReleaseVersions.length) {
-    //                 return publicationsAReleaseVersions.length > publicationsBReleaseVersions.length ? -1 : 1;
-    //             }
-    //         }
-    //         return 0;
-    //     };
-
-    //     const sort = (a: IPublication, b: IPublication) => {
-    //         const versionInTitleA = a.productReleaseVersion && a.productReleaseVersion.match(VERSION_REGEX);
-    //         const versionInTitleB = b.productReleaseVersion && b.productReleaseVersion.match(VERSION_REGEX);
-
-    //         if (versionInTitleA && versionInTitleB) {
-    //             return this.compareVersion(versionInTitleA[2], versionInTitleB[2]) ? -1 : 1;
-    //         } else if (versionInTitleA) {
-    //             return -1;
-    //         } else if (versionInTitleB) {
-    //             return 1;
-    //         }
-
-    //         if (!a.productReleaseVersion && !b.productReleaseVersion) {
-    //             return 0;
-    //         } else if (!a.productReleaseVersion) {
-    //             return 1;
-    //         } else if (!b.productReleaseVersion) {
-    //             return -1;
-    //         }
-
-    //         const sameVersion = a.version === b.version;
-    //         const sameCreatedOnDate = a.createdOn.getTime() === b.createdOn.getTime();
-    //         if (a.id === b.id && !sameVersion) {
-    //             return this.compareVersion(a.version, b.version) ? -1 : 1;
-    //         } else if (!sameCreatedOnDate) {
-    //             return sortByCreatedOnDate(a, b);
-    //         } else {
-    //             return sortByTitle(a, b);
-    //         }
-    //     };
-
-    //     // First remove the duplicates, the one with the most versions is kept
-    //     const foundReleaseVersions: (string | null)[] = [];
-    //     const pubsWithDistinctReleaseVersions = publications.sort(sortByMostVersions).filter(pub => {
-    //         if (foundReleaseVersions.indexOf(pub.productReleaseVersion || null) === -1) {
-    //             foundReleaseVersions.push(pub.productReleaseVersion || null);
-    //             return true;
-    //         }
-    //         return false;
-    //     });
-
-    //     const orderedPubs = pubsWithDistinctReleaseVersions.sort(sort);
-
-    //     // Convert to a product release version (remove version from end if it's in the correct format)
-    //     const releaseVersions = orderedPubs.map(pub => {
-    //         let releaseVersion = pub.productReleaseVersion || null;
-    //         const releaseVersionMatch = releaseVersion && releaseVersion.match(VERSION_REGEX);
-    //         if (releaseVersionMatch) {
-    //             releaseVersion = releaseVersionMatch[1];
-    //         }
-    //         return releaseVersion && releaseVersion.trim();
-    //     });
-    //     // Take distinct product release versions
-    //     return this._distinct(releaseVersions);
-    // }
 
     /**
      * Sort product release versions by product family. Most recent first, oldest last.
