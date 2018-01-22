@@ -435,7 +435,7 @@ class PageComponent extends TestBase {
                                 <br/>
                                 <img id="img-1000x1" style="width: 400px"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA+gAAAABCAYAAABNAIQzAAAAHklEQVR42u3CQREAAAgDoNk/tLOFHzhmkwsAAAB8Kj7WAgBDnCYvAAAAAElFTkSuQmCC"
-                                />
+                                />                            
                             </div>`,
                     onNavigate: (): void => {}
                 };
@@ -445,16 +445,40 @@ class PageComponent extends TestBase {
                 expect(domNode).not.toBeNull();
 
                 setTimeout((): void => {
-                    expect((domNode.querySelector("#img-10x1") as HTMLImageElement).classList).not.toContain(
+                    let smallImageNotExpandable = domNode.querySelector("#img-10x1") as HTMLImageElement;
+                    expect((smallImageNotExpandable).classList).not.toContain(
                         "sdl-expandable-image",
                         "Small images should not be expandable"
                     );
-                    // Opens image in lightbox on click
                     const imageInLightbox = domNode.querySelector("#img-1000x1") as HTMLImageElement;
-                    expect(imageInLightbox.classList).toContain(
+                    expect(imageInLightbox.classList).not.toContain(
                         "sdl-expandable-image",
                         "Big images should be expandable"
                     );
+                    window.resizeTo(100, 100);
+
+                    setTimeout((): void => {
+                        expect(domNode.querySelector(".sdl-image-lightbox-preview-wrapper")).toBeNull();
+
+                        setTimeout((): void => {
+                            expect(
+                                (domNode.querySelector("#img-1000x1") as HTMLImageElement).classList
+                            ).toContain(
+                                "sdl-expandable-image",
+                                "Screen is not big enough to fit big image, it should be expandable"
+                            );
+                            window.resizeTo(500, 500);
+                            setTimeout((): void => {
+                                expect(
+                                    (domNode.querySelector("#img-1000x1") as HTMLImageElement).classList
+                                ).not.toContain(
+                                    "sdl-expandable-image",
+                                    "Screen is not big enough to fit big image, it should be expandable"
+                                );
+                                done();
+                            }, RENDER_DELAY);
+                        }, RENDER_DELAY);
+                    }, RENDER_DELAY);
                 }, ASYNC_DELAY);
             });
 
