@@ -459,7 +459,7 @@ class PageComponent extends TestBase {
                 }, ASYNC_DELAY);
             });
 
-            it("horizontal scrollbar for image with fixed size", (done: () => void): void => {
+            /*it("horizontal scrollbar for image with fixed size", (done: () => void): void => {
                 const imgTitle = "img-10000x1";
                 const img10000x1 =
                     "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAJxAAAAABCA" +
@@ -492,7 +492,7 @@ class PageComponent extends TestBase {
 
                     done();
                 }, ASYNC_DELAY);
-            });
+            });*/
         });
 
         describe(`Page navigation tests.`, (): void => {
