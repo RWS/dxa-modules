@@ -425,6 +425,39 @@ class PageComponent extends TestBase {
                 }, ASYNC_DELAY);
             });
 
+            it("Reducing size of big images should allow to open them in lightbox", (done: () => void): void => {
+                const pageProps: IPageProps = {
+                    isLoading: false,
+                    content: `<div style="width: 500px">
+                                <img id="img-10x1"
+                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAABCAQAAABN/Pf1AAAADUlEQVR42mNk+M+AAQATFwEB/YopsAAAAABJRU5ErkJggg=="
+                                />
+                                <br/>
+                                <img id="img-1000x1" style="width: 400px"
+                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA+gAAAABCAYAAABNAIQzAAAAHklEQVR42u3CQREAAAgDoNk/tLOFHzhmkwsAAAB8Kj7WAgBDnCYvAAAAAElFTkSuQmCC"
+                                />
+                            </div>`,
+                    onNavigate: (): void => {}
+                };
+
+                const page = this._renderComponent(pageProps, target);
+                const domNode = ReactDOM.findDOMNode(page) as HTMLElement;
+                expect(domNode).not.toBeNull();
+
+                setTimeout((): void => {
+                    expect((domNode.querySelector("#img-10x1") as HTMLImageElement).classList).not.toContain(
+                        "sdl-expandable-image",
+                        "Small images should not be expandable"
+                    );
+                    // Opens image in lightbox on click
+                    const imageInLightbox = domNode.querySelector("#img-1000x1") as HTMLImageElement;
+                    expect(imageInLightbox.classList).toContain(
+                        "sdl-expandable-image",
+                        "Big images should be expandable"
+                    );
+                }, ASYNC_DELAY);
+            });
+
             it("opens image in new tab if it can be opened in lightbox", (done: () => void): void => {
                 const imgTitle = "img-10000x1";
                 const img10000x1 =
