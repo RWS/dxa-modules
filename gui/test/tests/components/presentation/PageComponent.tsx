@@ -468,8 +468,8 @@ class PageComponent extends TestBase {
 
                 const pageProps: IPageProps = {
                     isLoading: false,
-                    content: `<div>
-                            <img id="img-10000x1" title="${imgTitle}" src="${img10000x1}" width="400" height="200"/>
+                    content: `<div style="display: block; width: 10px">
+                            <img id="img-10000x1" title="${imgTitle}" src="${img10000x1}" width="400px" height="200px"/>
                         </div>`,
                     onNavigate: (): void => {}
                 };
@@ -481,9 +481,13 @@ class PageComponent extends TestBase {
                 setTimeout((): void => {
                     // Opens image in new window
                     const fixedImage = domNode.querySelector("img") as HTMLImageElement;
+
                     expect(fixedImage.parentElement).not.toBeNull("Expected that image has parent div");
                     if (fixedImage.parentElement) {
-                        expect(fixedImage.parentElement.classList).toContain("div-with-fixed-size-image");
+                        var parentDiv = fixedImage.parentElement;
+                        expect(parentDiv.scrollWidth).toBeGreaterThan(parentDiv.clientWidth,
+                                "Expected that image is bigger than parent div");
+                        expect(parentDiv.classList).toContain("sdl-div-with-fixed-size-image");
                     }
 
                     done();

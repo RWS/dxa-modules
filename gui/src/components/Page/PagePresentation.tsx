@@ -376,7 +376,7 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
             const alreadyProcessedImg = processedImages.find(x => x.element === img);
             if (!alreadyProcessedImg && img.getAttribute("width")) {
                 if (img.parentElement) {
-                    img.parentElement.classList.add("div-with-fixed-size-image");
+                    img.parentElement.classList.add("sdl-div-with-fixed-size-image");
                 }
             }
 
@@ -388,31 +388,31 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
                         resolve(img);
                     };
                 }
-            }).then((imageToResolve: HTMLImageElement) => {
-                const dialogImageSrc = imageToResolve.src;
-                const { clientWidth, naturalWidth, clientHeight, naturalHeight } = imageToResolve;
+            }).then((resolvedImage: HTMLImageElement) => {
+                const dialogImageSrc = resolvedImage.src;
+                const { clientWidth, naturalWidth, clientHeight, naturalHeight } = resolvedImage;
                 const isImageToProcess = clientWidth < naturalWidth || clientHeight < naturalHeight;
-                if (isImageToProcess && !alreadyProcessedImg && !imageToResolve.getAttribute("width")) {
+                if (isImageToProcess && !alreadyProcessedImg && !resolvedImage.getAttribute("width")) {
                     const clickHandler = (e: Event): void => {
                         if (dialogImageSrc) {
                             // If there is at least 30% of space to expand an imag, then expand it in lightbox
-                            if (document.documentElement.clientWidth > imageToResolve.clientWidth * 1.3) {
+                            if (document.documentElement.clientWidth > resolvedImage.clientWidth * 1.3) {
                                 this.setState({
                                     dialogImageSrc
                                 });
                             } else {
-                                window.open(dialogImageSrc, imageToResolve.title);
+                                window.open(dialogImageSrc, resolvedImage.title);
                             }
                         }
                         e.preventDefault();
                     };
                     processedImages.push({
-                        element: imageToResolve,
+                        element: resolvedImage,
                         clickHandler
                     });
-                    imageToResolve.addEventListener("click", clickHandler);
-                    if (!imageToResolve.classList.contains("sdl-expandable-image")) {
-                        imageToResolve.classList.add("sdl-expandable-image");
+                    resolvedImage.addEventListener("click", clickHandler);
+                    if (!resolvedImage.classList.contains("sdl-expandable-image")) {
+                        resolvedImage.classList.add("sdl-expandable-image");
                     }
                 } else if (!isImageToProcess && alreadyProcessedImg) {
                     const el = alreadyProcessedImg.element;
