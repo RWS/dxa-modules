@@ -449,7 +449,7 @@ class PageComponent extends TestBase {
                         "Big images should not be expandable if there is enough place"
                     );
                     const imagesInDiv = domNode.querySelector("#images_container") as HTMLDivElement;
-                    imagesInDiv.setAttribute("style","width:500px");
+                    imagesInDiv.setAttribute("style", "width:500px");
 
                     var evt = window.document.createEvent("UIEvents");
                     evt.initUIEvent("resize", true, false, window, 0);
@@ -463,7 +463,7 @@ class PageComponent extends TestBase {
                             "sdl-expandable-image",
                             "Screen is not big enough to fit that big image, it should be expandable"
                         );
-                        imagesInDiv.setAttribute("style","width:2000px");
+                        imagesInDiv.setAttribute("style", "width:2000px");
                         window.dispatchEvent(evt);
                         setTimeout((): void => {
                             expect(
