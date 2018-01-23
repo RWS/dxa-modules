@@ -23,60 +23,59 @@ export default class Version {
      * @memberOf Version
      */
     public static sortProductFamilyVersions(publications: IPublication[]): (string | null)[] {
-        const sortFamilies = (productFamilyA: string | null, productFamilyB: string | null): number => {
-            if (!productFamilyA && !productFamilyB) {
-                return 0;
-            }
-            if (productFamilyA && productFamilyB) {
-                const versionInFamilyA = productFamilyA.match(VERSION_REGEX);
-                const versionInFamilyB = productFamilyB.match(VERSION_REGEX);
-                if (!versionInFamilyA && !versionInFamilyB) {
-                    return productFamilyA.toLowerCase().localeCompare(productFamilyB.toLowerCase());
-                }
-                if (versionInFamilyA && versionInFamilyB) {
-                    return this.compareVersion(versionInFamilyA[2], versionInFamilyB[2]);
-                }
-                if (versionInFamilyA) {
-                    return -1;
-                }
-            } else if (productFamilyA) {
-                return -1;
-            }
-            return 1;
-        };
-
-        const getFamilyOccurenceCount = ((pubs: IPublication[]) => {
+        const byMostPublicationsComparer = ((pubs: IPublication[]) => {
             const familyOccurenceCount: { [family: string]: number } = {};
-            return (productFamily: string): number => {
-                if (!familyOccurenceCount[productFamily]) {
-                    familyOccurenceCount[productFamily] = pubs.reduce((pubsCount: number, item: IPublication) => {
-                        return pubsCount + ((item.productFamily || []).includes(productFamily) ? 1 : 0);
-                    }, 0);
+            const getVersionsCount = (family: string): number => {
+                if (!familyOccurenceCount[family]) {
+                    familyOccurenceCount[family] = pubs.reduce(
+                        (count: number, item: IPublication) =>
+                            count + ((item.productFamily || []).includes(family) ? 1 : 0),
+                        0
+                    );
                 }
-                return familyOccurenceCount[productFamily];
+                return familyOccurenceCount[family];
             };
+            return (family1: string, family2: string): ValuesComparerResult =>
+                this.byValueComparer(getVersionsCount(family1), getVersionsCount(family2));
         })(publications);
+
+        const sortFamilies = (productFamilyA: string | null, productFamilyB: string | null): number => {
+            if (productFamilyA && productFamilyB) {
+                return (
+                    // 1. Sort by Versions
+                    Version.byVersionComparer(productFamilyA, productFamilyB) ||
+                    // 2. If there are no versions then sort by publications occurances
+                    byMostPublicationsComparer(productFamilyA, productFamilyB) ||
+                    // 3. Otherwise sort by titles
+                    Version.byTitleComparer(productFamilyA, productFamilyB)
+                );
+            }
+            // -. By default, sort by values
+            // If value is not defined it should go to the end
+            return Version.byValueComparer(productFamilyB, productFamilyA);
+        };
 
         // Convert to a product family version (remove version from end if it's in the correct format)
         // And take distinct product families
 
-        return this._distinct(
-            [].concat
-                .apply([], publications.map(pub => pub.productFamily || null))
-                // At first we do sort by the count of family occurence in publications
-                .sort((productFamilyA: string, productFamilyB: string) => {
-                    return getFamilyOccurenceCount(productFamilyA) > getFamilyOccurenceCount(productFamilyB);
-                })
-                // Then we do sort by product versions
+        const families = this._distinct([].concat.apply([], publications.map(pub => pub.productFamily || null)));
+
+        // return this._distinct(
+        //     [].concat
+        //         .apply([], publications.map(pub => pub.productFamily || null))
+        return (
+            families
                 .sort(sortFamilies)
                 // Then we take versionless names
-                .map((familyVersion: string | null) => {
-                    const familyVersionMatch = familyVersion && familyVersion.match(VERSION_REGEX);
-                    if (familyVersionMatch) {
-                        familyVersion = familyVersionMatch[1];
-                    }
-                    return familyVersion && familyVersion.trim();
-                })
+                .map(
+                    (familyVersion: string | null) => {
+                        const familyVersionMatch = familyVersion && familyVersion.match(VERSION_REGEX);
+                        if (familyVersionMatch) {
+                            familyVersion = familyVersionMatch[1];
+                        }
+                        return familyVersion && familyVersion.trim();
+                    } //)
+                )
         );
     }
 
@@ -97,18 +96,6 @@ export default class Version {
      * @memberOf Version
      */
     public static sortProductReleaseVersions(publications: IPublication[]): (string | null)[] {
-        const byTitleComparer = (version1: string, version2: string) => {
-            const titleA = version1 && version1.toUpperCase();
-            const titleB = version2 && version2.toUpperCase();
-            if (titleA < titleB) {
-                return -1;
-            }
-            if (titleA > titleB) {
-                return 1;
-            }
-            return 0;
-        };
-
         const byLatestCreatedOnDateComparer = ((pubs: IPublication[]) => {
             const latestDates: { [releaseVersion: string]: number } = {};
             const getLatestDate = (releaseVersion: string): number => {
@@ -161,27 +148,12 @@ export default class Version {
                 this.byValueComparer(getHighestVersion(version1), getHighestVersion(version2));
         })(publications);
 
-        const byReleaseVersionComparer = (version1: string, version2: string): ValuesComparerResult => {
-            const versionInTitleA = version1 && version1.match(VERSION_REGEX);
-            const versionInTitleB = version2 && version2.match(VERSION_REGEX);
-
-            // First compare by version in title
-            if (versionInTitleA && versionInTitleB) {
-                return this.compareVersion(versionInTitleA[2], versionInTitleB[2]);
-            } else if (versionInTitleA) {
-                return -1;
-            } else if (versionInTitleB) {
-                return 1;
-            }
-            return 0;
-        };
-
         const byVersionComparer = (version1: string, version2: string): ValuesComparerResult => {
             if (version1 && version2) {
                 return (
                     // 1. If the release version contains a version number between brackets at the end use
                     // this eg SDL Knowledge Center 2013 (11.0.4) => use 11.0.4 as version
-                    byReleaseVersionComparer(version1, version2) ||
+                    Version.byVersionComparer(version1, version2) ||
                     // 2. If there is no version info in the product release version sort based on publication
                     // version (eg if SDL Web 8 is used on version 3 and SDL Tridion 2013 on version 2
                     // we know that SDL Web 8 is newer)
@@ -192,7 +164,7 @@ export default class Version {
                     // 4. If a latest created on dates are equal, then compare by most publications occurances
                     byMostPublicationsComparer(version1, version2) ||
                     // 5. Eventually, compare by Title
-                    byTitleComparer(version1, version2)
+                    Version.byTitleComparer(version1, version2)
                 );
             } else if (!version1) {
                 return 1;
@@ -218,46 +190,6 @@ export default class Version {
                     return releaseVersion && releaseVersion.trim();
                 })
         );
-    }
-
-    /**
-     * Sort product release versions by product family. Most recent first, oldest last.
-     *
-     * @static
-     * @param {string | null} productFamily Product family
-     * @param {IPublication[]} publications The list of publications
-     * @returns {string | null} A sorted list of product release version titles
-     *
-     * @memberOf Version
-     */
-    public static sortProductReleaseVersionsByProductFamily(
-        productFamily: string | null,
-        publications: IPublication[]
-    ): (string | null)[] {
-        const pubsForFamily = publications.filter(p => p.productFamily === productFamily);
-        return this.sortProductReleaseVersions(pubsForFamily);
-    }
-
-    /**
-     * Compare two primitive values
-     * @param v1 First version
-     * @param v2 Second version
-     *
-     * @returns {ValuesComparerResult} 1 = Version 1 is greater, -1 = Version 2 is greater, 0 Versions are equal
-     */
-    public static byValueComparer(v1: string | number | null, v2: string | number | null): ValuesComparerResult {
-        if (v1 && v2) {
-            if (v1 < v2) {
-                return 1;
-            } else if (v1 > v2) {
-                return -1;
-            }
-        } else if (v1) {
-            return 1;
-        } else if (v2) {
-            return -1;
-        }
-        return 0;
     }
 
     /**
@@ -319,6 +251,63 @@ export default class Version {
      */
     public static normalizeReleaseVersion(productReleaseVersion: string | null | undefined): string {
         return Version.normalize(productReleaseVersion) || String.normalize(DEFAULT_UNKNOWN_PRODUCT_RELEASE_VERSION);
+    }
+
+    /* Private methods */
+
+    /**
+     * Compare two titles values
+     * @param title1 First Title
+     * @param title2 Second Title
+     *
+     * @returns {ValuesComparerResult} 1 = Version 1 is greater, -1 = Version 2 is greater, 0 Versions are equal
+     */
+    private static byTitleComparer(title1: string = "", title2: string = ""): ValuesComparerResult {
+        return title1.toLowerCase().localeCompare(title2.toLowerCase()) as ValuesComparerResult;
+    }
+
+    /**
+     * Compare two versions
+     * @param version1 First Version
+     * @param version2 Second Version
+     *
+     * @returns {ValuesComparerResult} 1 = Version 1 is greater, -1 = Version 2 is greater, 0 Versions are equal
+     */
+    private static byVersionComparer(version1: string, version2: string): ValuesComparerResult {
+        const versionInTitleA = version1 && version1.match(VERSION_REGEX);
+        const versionInTitleB = version2 && version2.match(VERSION_REGEX);
+
+        // First compare by version in title
+        if (versionInTitleA && versionInTitleB) {
+            return Version.compareVersion(versionInTitleA[2], versionInTitleB[2]);
+        } else if (versionInTitleA) {
+            return -1;
+        } else if (versionInTitleB) {
+            return 1;
+        }
+        return 0;
+    }
+
+    /**
+     * Compare two primitive values
+     * @param v1 First version
+     * @param v2 Second version
+     *
+     * @returns {ValuesComparerResult} 1 = Version 1 is greater, -1 = Version 2 is greater, 0 Versions are equal
+     */
+    private static byValueComparer(v1: string | number | null, v2: string | number | null): ValuesComparerResult {
+        if (v1 && v2) {
+            if (v1 < v2) {
+                return 1;
+            } else if (v1 > v2) {
+                return -1;
+            }
+        } else if (v1) {
+            return 1;
+        } else if (v2) {
+            return -1;
+        }
+        return 0;
     }
 
     /**

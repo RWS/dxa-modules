@@ -138,6 +138,10 @@ describe(`Version tests.`, (): void => {
                 // End of two similar publications
                 {
                     ...createPublication((++id).toString()),
+                    productReleaseVersion: null
+                },
+                {
+                    ...createPublication((++id).toString()),
                     version: "4",
                     createdOn: new Date(today.setFullYear(2011)),
                     productReleaseVersion: ["A PRV v4 2011"]
@@ -157,7 +161,8 @@ describe(`Version tests.`, (): void => {
                 "PRV v4 2011", // Has the most occurances
                 "A PRV v4 2011", // Product family title sorting
                 "Z PRV v4 2011",
-                "PRV v1" // Has the lowes publication version
+                "PRV v1", // Has the lowes publication version
+                null
             ]);
         });
     });
@@ -208,26 +213,37 @@ describe(`Version tests.`, (): void => {
             const families = Version.sortProductFamilyVersions([
                 getPub("A Family"),
                 getPub("Family AZ "),
+                createPublication("42"),
                 getPub("Family Z"),
                 getPub("Family A")
             ]);
-            expect(families).toEqual(["A Family", "Family A", "Family AZ", "Family Z"]);
+            expect(families).toEqual(["A Family", "Family A", "Family AZ", "Family Z", null]);
         });
 
         it("Keeps sorting priorities", (): void => {
             let id = 0;
-            const getPub = (version: string) => ({
+            const getPub = (version: string | null) => ({
                 ...createPublication((++id).toString()),
                 productFamily: [`${version}`]
             });
 
             const families = Version.sortProductFamilyVersions([
+                createPublication("42"),
                 getPub("A Family"),
-                getPub("Family AZ "),
-                getPub("Family Z"),
-                getPub("Family A")
+                getPub("Family P123 (1.2.3)"),
+                getPub("Family A321 (3.2.1)"),
+                getPub("Family Q"),
+                getPub("Family Y"),
+                getPub("Family Y")
             ]);
-            expect(families).toEqual(["A Family", "Family A", "Family AZ", "Family Z"]);
+            expect(families).toEqual([
+                "Family P123",
+                "Family A321",
+                "Family Y",
+                "A Family",
+                "Family Q",
+                null
+            ]);
         });
     });
 

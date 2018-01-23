@@ -91,9 +91,11 @@ class PublicationsModel extends TestBase {
                 expect(families).toBeDefined();
                 if (families) {
                     expect(families.length).toBe(3);
-                    expect(families[0].title).toBe("Family 1");
-                    expect(families[1].title).toBe("Family 2");
-                    expect(families[2].title).toBe(DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE);
+                    expect(families.map(family => family.title)).toEqual([
+                        "Family 2", // Occurs twice
+                        "Family 1",
+                        DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE
+                    ]);
                 }
             });
 
@@ -109,14 +111,17 @@ class PublicationsModel extends TestBase {
                 ];
 
                 spyOn(publicationModel, "getPublications").and.callFake((): IPublicationInterface[] =>
-                    berries.map((family, i) => ({
-                        id: `${i}`,
-                        title: `Title - ${i}`,
-                        productFamily: [family],
-                        createdOn: new Date(),
-                        version: "1",
-                        logicalId: `GUID-${i}`
-                    } as IPublicationInterface))
+                    berries.map(
+                        (family, i) =>
+                            ({
+                                id: `${i}`,
+                                title: `Title - ${i}`,
+                                productFamily: [family],
+                                createdOn: new Date(),
+                                version: "1",
+                                logicalId: `GUID-${i}`
+                            } as IPublicationInterface)
+                    )
                 );
 
                 const families = publicationModel.getProductFamilies();
@@ -125,7 +130,9 @@ class PublicationsModel extends TestBase {
                     const sortedBerries = berries.sort();
                     expect(families.length).toBe(7);
                     families.forEach((family, index) => {
-                        expect(families[index].title).toBe(index === 6 ? DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE : "" + sortedBerries[index]);
+                        expect(families[index].title).toBe(
+                            index === 6 ? DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE : "" + sortedBerries[index]
+                        );
                     });
                 }
             });
