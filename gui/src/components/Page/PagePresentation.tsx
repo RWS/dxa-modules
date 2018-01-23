@@ -326,7 +326,6 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
     private _postProcessImages(): void {
         const domNode = ReactDOM.findDOMNode(this);
         const pageContentNode = domNode.querySelector(".page-content") as HTMLElement;
-        this._collectHeadersLinks(pageContentNode);
         if (pageContentNode) {
             // Make images expandable when clicked
             this._processContentImages(pageContentNode);
