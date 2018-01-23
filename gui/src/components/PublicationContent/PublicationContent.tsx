@@ -30,7 +30,7 @@ const mapStateToProps = (state: IState) => {
         isPageLoading,
         errorMessage,
         productReleaseVersions,
-        productReleaseVersion: publication.productReleaseVersion || "",
+        productReleaseVersion: publication.productReleaseVersion ? publication.productReleaseVersion[0] : "",
         isPublicationFound,
         conditions,
         splitterPosition: state.splitterPosition

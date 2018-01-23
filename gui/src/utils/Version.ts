@@ -58,13 +58,9 @@ export default class Version {
         // Convert to a product family version (remove version from end if it's in the correct format)
         // And take distinct product families
 
-        const families = this._distinct([].concat.apply([], publications.map(pub => pub.productFamily || null)));
-
-        // return this._distinct(
-        //     [].concat
-        //         .apply([], publications.map(pub => pub.productFamily || null))
-        return (
-            families
+        return this._distinct(
+            [].concat
+                .apply([], publications.map(pub => pub.productFamily || null))
                 .sort(sortFamilies)
                 // Then we take versionless names
                 .map(
