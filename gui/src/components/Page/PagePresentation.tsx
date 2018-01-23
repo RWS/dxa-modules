@@ -378,53 +378,66 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
                 if (img.parentElement) {
                     img.parentElement.classList.add("sdl-div-with-fixed-size-image");
                 }
+            } else {
+                this._resovleImage(img);
             }
-
-            new Promise((resolve: (img: HTMLImageElement) => void) => {
-                if (img.complete) {
-                    resolve(img);
-                } else {
-                    img.onload = () => {
-                        resolve(img);
-                    };
-                }
-            }).then((resolvedImage: HTMLImageElement) => {
-                const dialogImageSrc = resolvedImage.src;
-                const { clientWidth, naturalWidth, clientHeight, naturalHeight } = resolvedImage;
-                const isImageToProcess = clientWidth < naturalWidth || clientHeight < naturalHeight;
-                if (isImageToProcess && !alreadyProcessedImg && !resolvedImage.getAttribute("width")) {
-                    const clickHandler = (e: Event): void => {
-                        if (dialogImageSrc) {
-                            // If there is at least 30% of space to expand an imag, then expand it in lightbox
-                            if (document.documentElement.clientWidth > resolvedImage.clientWidth * 1.3) {
-                                this.setState({
-                                    dialogImageSrc
-                                });
-                            } else {
-                                window.open(dialogImageSrc, resolvedImage.title);
-                            }
-                        }
-                        e.preventDefault();
-                    };
-                    processedImages.push({
-                        element: resolvedImage,
-                        clickHandler
-                    });
-                    resolvedImage.addEventListener("click", clickHandler);
-                    if (!resolvedImage.classList.contains("sdl-expandable-image")) {
-                        resolvedImage.classList.add("sdl-expandable-image");
-                    }
-                } else if (!isImageToProcess && alreadyProcessedImg) {
-                    const el = alreadyProcessedImg.element;
-                    if (el.classList.contains("sdl-expandable-image")) {
-                        el.classList.remove("sdl-expandable-image");
-                    }
-                    el.removeEventListener("click", alreadyProcessedImg.clickHandler);
-                    processedImages.splice(processedImages.indexOf(alreadyProcessedImg), 1);
-                }
-            });
         }
     }
+
+    /**
+     * Resolved image when it is loaded
+     */
+    private _resovleImage(img: HTMLImageElement): void {
+        const processedImages = this._contentImages;
+
+        const resolvedImageProcessor = (resolvedImage: HTMLImageElement) => {
+            const dialogImageSrc = resolvedImage.src;
+            const alreadyProcessedImg = processedImages.find(x => x.element === img);
+            const { clientWidth, naturalWidth, clientHeight, naturalHeight } = resolvedImage;
+            const isImageToProcess = clientWidth < naturalWidth || clientHeight < naturalHeight;
+            if (isImageToProcess && !alreadyProcessedImg && !resolvedImage.getAttribute("width")) {
+                const clickHandler = (e: Event): void => {
+                    if (dialogImageSrc) {
+                        // If there is at least 30% of space to expand an imag, then expand it in lightbox
+                        if (document.documentElement.clientWidth > resolvedImage.clientWidth * 1.3) {
+                            this.setState({
+                                dialogImageSrc
+                            });
+                        } else {
+                            window.open(dialogImageSrc, resolvedImage.title);
+                        }
+                    }
+                    e.preventDefault();
+                };
+                processedImages.push({
+                    element: resolvedImage,
+                    clickHandler
+                });
+                resolvedImage.addEventListener("click", clickHandler);
+                if (!resolvedImage.classList.contains("sdl-expandable-image")) {
+                    resolvedImage.classList.add("sdl-expandable-image");
+                }
+            } else if (!isImageToProcess && alreadyProcessedImg) {
+                const el = alreadyProcessedImg.element;
+                if (el.classList.contains("sdl-expandable-image")) {
+                    el.classList.remove("sdl-expandable-image");
+                }
+                el.removeEventListener("click", alreadyProcessedImg.clickHandler);
+                processedImages.splice(processedImages.indexOf(alreadyProcessedImg), 1);
+            }
+        };
+
+        new Promise((resolve: (resolvedImage: HTMLImageElement) => void) => {
+            if (img.complete) {
+                resolve(img);
+            } else {
+                img.onload = () => {
+                    resolve(img);
+                };
+            }
+        }).then(resolvedImageProcessor);
+    }
+
     /**
      * Evaluate code inside page content if there are any.
      */
