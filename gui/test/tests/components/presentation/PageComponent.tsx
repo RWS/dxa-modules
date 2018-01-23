@@ -428,11 +428,7 @@ class PageComponent extends TestBase {
             it("Reducing size of big images should allow to open them in lightbox", (done: () => void): void => {
                 const pageProps: IPageProps = {
                     isLoading: false,
-                    content: `<div id="images_container" style="width: 2000px">
-                                <img id="img-10x1"
-                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAABCAQAAABN/Pf1AAAADUlEQVR42mNk+M+AAQATFwEB/YopsAAAAABJRU5ErkJggg=="
-                                />
-                                <br/>
+                    content: `<div id="images_container" style="width: 2000px">                                
                                 <img id="img-1000x1" style="width: 2000px"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA+gAAAABCAYAAABNAIQzAAAAHklEQVR42u3CQREAAAgDoNk/tLOFHzhmkwsAAAB8Kj7WAgBDnCYvAAAAAElFTkSuQmCC"
                                 />
@@ -447,11 +443,6 @@ class PageComponent extends TestBase {
                 expect(pageContentNode).not.toBeNull();
 
                 setTimeout((): void => {
-                    let smallImageNotExpandable = domNode.querySelector("#img-10x1") as HTMLImageElement;
-                    expect((smallImageNotExpandable).classList).not.toContain(
-                        "sdl-expandable-image",
-                        "Small images should not be expandable"
-                    );
                     const imageInLightbox = domNode.querySelector("#img-1000x1") as HTMLImageElement;
                     expect(imageInLightbox.classList).not.toContain(
                         "sdl-expandable-image",
@@ -464,29 +455,27 @@ class PageComponent extends TestBase {
                     evt.initUIEvent("resize", true, false, window, 0);
                     window.dispatchEvent(evt);
 
+                    expect(domNode.querySelector(".sdl-image-lightbox-preview-wrapper")).toBeNull();
                     setTimeout((): void => {
-                        expect(domNode.querySelector(".sdl-image-lightbox-preview-wrapper")).toBeNull();
-
+                        expect(
+                            (domNode.querySelector("#img-1000x1") as HTMLImageElement).classList
+                        ).toContain(
+                            "sdl-expandable-image",
+                            "Screen is not big enough to fit that big image, it should be expandable"
+                        );
+                        imagesInDiv.setAttribute("style","width:2000px");
+                        window.dispatchEvent(evt);
                         setTimeout((): void => {
                             expect(
                                 (domNode.querySelector("#img-1000x1") as HTMLImageElement).classList
-                            ).toContain(
+                            ).not.toContain(
                                 "sdl-expandable-image",
-                                "Screen is not big enough to fit that big image, it should be expandable"
+                                "Screen is not big enough to fit big image, it should be expandable"
                             );
-                            imagesInDiv.setAttribute("style","width:2000px");
-                            window.dispatchEvent(evt);
-                            setTimeout((): void => {
-                                expect(
-                                    (domNode.querySelector("#img-1000x1") as HTMLImageElement).classList
-                                ).not.toContain(
-                                    "sdl-expandable-image",
-                                    "Screen is not big enough to fit big image, it should be expandable"
-                                );
-                                done();
-                            }, RENDER_DELAY);
+                            done();
                         }, RENDER_DELAY);
                     }, RENDER_DELAY);
+
                 }, ASYNC_DELAY);
             });
 

@@ -175,7 +175,7 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
         };
 
         this.fetchPage = this.fetchPage.bind(this);
-        this._postProcessHtml = this._postProcessHtml.bind(this);
+        this._postProcessImages = this._postProcessImages.bind(this);
     }
 
     /**
@@ -258,7 +258,7 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
      */
     public componentDidMount(): void {
         this._postProcessHtml();
-        window.addEventListener("resize", this._postProcessHtml);
+        window.addEventListener("resize", this._postProcessImages);
     }
 
     /**
@@ -278,7 +278,7 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
         if (this._historyUnlisten) {
             this._historyUnlisten();
         }
-        window.removeEventListener("resize", this._postProcessHtml);
+        window.removeEventListener("resize", this._postProcessImages);
     }
 
     private fetchPage(): void {
@@ -313,6 +313,23 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
             if ((window as IWindow).SdlDitaDeliveryContentIsEvaluable) {
                 this._evaluateContentScripts(pageContentNode);
             }
+        }
+    }
+
+    /**
+     * Post process HTML
+     *
+     * @private
+     *
+     * @memberOf Page
+     */
+    private _postProcessImages(): void {
+        const domNode = ReactDOM.findDOMNode(this);
+        const pageContentNode = domNode.querySelector(".page-content") as HTMLElement;
+        this._collectHeadersLinks(pageContentNode);
+        if (pageContentNode) {
+            // Make images expandable when clicked
+            this._processContentImages(pageContentNode);
         }
     }
 
