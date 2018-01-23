@@ -296,6 +296,7 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
      * @memberOf Page
      */
     private _postProcessHtml(): void {
+        console.log("Resize event appeared!");
         const domNode = ReactDOM.findDOMNode(this);
         const pageContentNode = domNode.querySelector(".page-content") as HTMLElement;
         this._collectHeadersLinks(pageContentNode);
@@ -313,6 +314,8 @@ export class PagePresentation extends React.Component<IPageProps, IPageState> {
             if ((window as IWindow).SdlDitaDeliveryContentIsEvaluable) {
                 this._evaluateContentScripts(pageContentNode);
             }
+        } else {
+            console.log(".page-content is not found");
         }
     }
 
