@@ -73,9 +73,7 @@
             .ordered-list();
         }
         img {
-            &:not([width]) {
-                max-width: 100%;
-            }
+            max-width: 100%;
             &.sdl-expandable-image {
                 transition: box-shadow 0.3s ease-out;
                 &:hover {
@@ -88,7 +86,7 @@
         .sdl-div-with-fixed-size-image {
             overflow-x: auto;
             img {
-                max-width: unset;
+                max-width: initial;
             }
         }
     }
