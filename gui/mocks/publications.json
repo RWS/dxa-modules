@@ -2,9 +2,13 @@
   {
     "Id": "1420746",
     "Title": "User Guide",
-    "ProductFamily": "Mobile Phones",
-    "ProductReleaseVersion": "MP 330 2014",
-    "CreatedOn": "2016-02-10T15:29:49Z",
+    "ProductFamily": [
+      "Mobile Phones"
+    ],
+    "ProductReleaseVersion": [
+      "MP 330 2014"
+    ],
+    "CreatedOn": null,
     "Version": "3",
     "VersionRef": "647369",
     "Language": "en",
@@ -14,9 +18,13 @@
   {
     "Id": "1601084",
     "Title": "Penguin guide",
-    "ProductFamily": "Animals",
-    "ProductReleaseVersion": "Penguins (8.0.0)",
-    "CreatedOn": "2016-01-07T03:53:57Z",
+    "ProductFamily": [
+      "Animals"
+    ],
+    "ProductReleaseVersion": [
+      "Penguins (8.0.0)"
+    ],
+    "CreatedOn": null,
     "Version": "8",
     "VersionRef": "517681",
     "Language": "en",
@@ -26,9 +34,13 @@
   {
     "Id": "1611362",
     "Title": "LS40-el",
-    "ProductFamily": "Komori",
-    "ProductReleaseVersion": "Komori CMS 2010",
-    "CreatedOn": "2016-01-14T05:47:16Z",
+    "ProductFamily": [
+      "Komori"
+    ],
+    "ProductReleaseVersion": [
+      "Komori CMS 2010"
+    ],
+    "CreatedOn": null,
     "Version": "1",
     "VersionRef": "566444",
     "Language": "ja",
@@ -38,9 +50,13 @@
   {
     "Id": "1849903",
     "Title": "בירה",
-    "ProductFamily": "SDL Knowledge Center",
-    "ProductReleaseVersion": "Beer 2017",
-    "CreatedOn": "2017-01-26T08:31:35Z",
+    "ProductFamily": [
+      "SDL Knowledge Center"
+    ],
+    "ProductReleaseVersion": [
+      "Beer 2017"
+    ],
+    "CreatedOn": null,
     "Version": "1",
     "VersionRef": "1849901",
     "Language": "iw",
@@ -50,9 +66,13 @@
   {
     "Id": "1881665",
     "Title": "User Guide",
-    "ProductFamily": "Mobile Phones",
-    "ProductReleaseVersion": "MP 330 (2.0.0)",
-    "CreatedOn": "2015-12-23T03:22:09Z",
+    "ProductFamily": [
+      "Mobile Phones"
+    ],
+    "ProductReleaseVersion": [
+      "MP 330 (2.0.0)"
+    ],
+    "CreatedOn": null,
     "Version": "1",
     "VersionRef": "346490",
     "Language": "nl",
@@ -62,9 +82,13 @@
   {
     "Id": "1961681",
     "Title": "McAfee Virtual Technician 4.2",
-    "ProductFamily": "McAfee",
-    "ProductReleaseVersion": "McAfee Anti Virus 2008",
-    "CreatedOn": "2015-12-23T03:22:08Z",
+    "ProductFamily": [
+      "McAfee"
+    ],
+    "ProductReleaseVersion": [
+      "McAfee Anti Virus 2008"
+    ],
+    "CreatedOn": null,
     "Version": "1",
     "VersionRef": "346487",
     "Language": "en",
@@ -74,9 +98,13 @@
   {
     "Id": "1961700",
     "Title": "User Guide",
-    "ProductFamily": "Mobile Phones",
-    "ProductReleaseVersion": "MP 330 (2.0.0)",
-    "CreatedOn": "2015-12-23T03:22:09Z",
+    "ProductFamily": [
+      "Mobile Phones"
+    ],
+    "ProductReleaseVersion": [
+      "MP 330 (2.0.0)"
+    ],
+    "CreatedOn": null,
     "Version": "1",
     "VersionRef": "346490",
     "Language": "de",
@@ -86,11 +114,35 @@
   {
     "Id": "1961702",
     "Title": "User Guide",
-    "ProductFamily": "Mobile Phones",
-    "ProductReleaseVersion": "MP 330 (2.0.0)",
-    "CreatedOn": "2015-12-23T03:22:09Z",
+    "ProductFamily": [
+      "Mobile Phones"
+    ],
+    "ProductReleaseVersion": [
+      "MP 330 (2.0.0)"
+    ],
+    "CreatedOn": null,
     "Version": "1",
     "VersionRef": "346490",
+    "Language": "en",
+    "LogicalId": "GUID-789BBB3D-8A09-4916-8857-09A246CB6F59",
+    "LogicalRef": "346489"
+  },
+  {
+    "Id": "2261715",
+    "Title": "User Guide",
+    "ProductFamily": [
+      "Mobile Phones (20.0)",
+      "Customer Examples",
+      "P (8.0.5)"
+    ],
+    "ProductReleaseVersion": [
+      "MP 330 2014",
+      "Test version (11.12.0)",
+      "Test version (11.1.15)"
+    ],
+    "CreatedOn": null,
+    "Version": "4",
+    "VersionRef": "1891939",
     "Language": "en",
     "LogicalId": "GUID-789BBB3D-8A09-4916-8857-09A246CB6F59",
     "LogicalRef": "346489"

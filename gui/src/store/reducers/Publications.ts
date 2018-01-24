@@ -47,14 +47,18 @@ export const publications = combineReducers({
 });
 
 // Selectors
-const normalizeVersionHack = (prop: string, obj: {}) => {
+const normalizeVersionHack = (prop: string, obj: {}): string | string[] => {
     // tslint:disable-next-line:no-any
     let value = (obj as any)[prop];
     switch (prop) {
         case "productReleaseVersion":
-            return Version.normalizeReleaseVersion(value);
+            return Array.isArray(value)
+                ? value.map(Version.normalizeReleaseVersion)
+                : Version.normalizeReleaseVersion(value);
         case "productFamily":
-            return Version.normalizeProductFamily(value);
+            return Array.isArray(value)
+                ? value.map(Version.normalizeProductFamily)
+                : Version.normalizeProductFamily(value);
         default:
             return value;
     }
@@ -69,7 +73,7 @@ const normalizeValue = (value: string, defaultLabel: string): string | null => {
  * You can filter list of publications that  you need for different usecases
  * Example: getPubList(state, {
  *  language: "en",
- *  productFamily: "Kupchino"
+ *  productFamily: ["Kupchino"]
  *  "!id": "myId"
  * });
  * @param state
@@ -78,15 +82,36 @@ const normalizeValue = (value: string, defaultLabel: string): string | null => {
 export const getPubList = (state: IPublicationsState, filter: {} = {}): IPublication[] => {
     const keys = Object.keys(filter);
     return Object.values(state.byId).filter(publication => {
-        return keys.every(prop => {
-            const propName = /^\!(.+)/.test(prop) ? RegExp.$1 : prop;
-            if (propName in publication === false) {
-                console.warn(`There is no property ${prop} in`, publication);
+        return keys.every(propName => {
+            let isExcludeCondition = false;
+            if (propName[0] == "!") {
+                isExcludeCondition = true;
+                propName = propName.substr(1);
             }
 
-            const valueFilter = normalizeVersionHack(propName, filter);
-            const valueObj = normalizeVersionHack(propName, publication);
-            return propName === prop ? valueFilter === valueObj : valueFilter !== valueObj;
+            if (propName in publication === false) {
+                console.warn(`There is no property ${propName} in`, publication);
+            }
+
+            const filterValue = normalizeVersionHack(propName, filter);
+            const publicationValue = normalizeVersionHack(propName, publication);
+            if (Array.isArray(publicationValue)) {
+                if (Array.isArray(filterValue)) {
+                    return filterValue.every(fv => {
+                        const includesValue = publicationValue.includes(fv);
+                        return isExcludeCondition ? !includesValue : includesValue;
+                    });
+                } else {
+                    const includesValue = publicationValue.includes(filterValue);
+                    return isExcludeCondition ? !includesValue : includesValue;
+                }
+            } else if (Array.isArray(filterValue)) {
+                return filterValue.every(fv => {
+                    const includesValue = fv === publicationValue;
+                    return isExcludeCondition ? !includesValue : includesValue;
+                });
+            }
+            return isExcludeCondition ? filterValue !== publicationValue : filterValue === publicationValue;
         });
     });
 };

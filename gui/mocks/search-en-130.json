@@ -1,5 +1,5 @@
 {
-  "Hits": 148,
+  "Hits": 186,
   "Count": 10,
   "StartIndex": 130,
   "QueryResults": [
@@ -15,8 +15,8 @@
       "ModifiedDate": "23.12.2015 3:21:31",
       "PublicationId": 1961702,
       "PublicationTitle": "User Guide",
-      "ProductFamilyName": "Mobile Phones",
-      "ProductReleaseName": "MP 330 (2.0.0)"
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
     },
     {
       "Id": "ish_1961702-164406-16",
@@ -30,8 +30,8 @@
       "ModifiedDate": "23.12.2015 3:21:40",
       "PublicationId": 1961702,
       "PublicationTitle": "User Guide",
-      "ProductFamilyName": "Mobile Phones",
-      "ProductReleaseName": "MP 330 (2.0.0)"
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
     },
     {
       "Id": "ish_1961702-164163-16",
@@ -45,8 +45,8 @@
       "ModifiedDate": "23.12.2015 3:20:57",
       "PublicationId": 1961702,
       "PublicationTitle": "User Guide",
-      "ProductFamilyName": "Mobile Phones",
-      "ProductReleaseName": "MP 330 (2.0.0)"
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
     },
     {
       "Id": "ish_1961702-164460-16",
@@ -60,8 +60,8 @@
       "ModifiedDate": "23.12.2015 3:21:50",
       "PublicationId": 1961702,
       "PublicationTitle": "User Guide",
-      "ProductFamilyName": "Mobile Phones",
-      "ProductReleaseName": "MP 330 (2.0.0)"
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
     },
     {
       "Id": "ish_1961702-164187-16",
@@ -75,8 +75,8 @@
       "ModifiedDate": "23.12.2015 3:21:01",
       "PublicationId": 1961702,
       "PublicationTitle": "User Guide",
-      "ProductFamilyName": "Mobile Phones",
-      "ProductReleaseName": "MP 330 (2.0.0)"
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
     },
     {
       "Id": "ish_1961702-164171-16",
@@ -90,8 +90,8 @@
       "ModifiedDate": "23.12.2015 3:20:58",
       "PublicationId": 1961702,
       "PublicationTitle": "User Guide",
-      "ProductFamilyName": "Mobile Phones",
-      "ProductReleaseName": "MP 330 (2.0.0)"
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
     },
     {
       "Id": "ish_1961702-164323-16",
@@ -105,8 +105,8 @@
       "ModifiedDate": "23.12.2015 3:21:25",
       "PublicationId": 1961702,
       "PublicationTitle": "User Guide",
-      "ProductFamilyName": "Mobile Phones",
-      "ProductReleaseName": "MP 330 (2.0.0)"
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
     },
     {
       "Id": "ish_1961702-164331-16",
@@ -120,8 +120,8 @@
       "ModifiedDate": "23.12.2015 3:21:26",
       "PublicationId": 1961702,
       "PublicationTitle": "User Guide",
-      "ProductFamilyName": "Mobile Phones",
-      "ProductReleaseName": "MP 330 (2.0.0)"
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
     },
     {
       "Id": "ish_1961702-164301-16",
@@ -135,8 +135,8 @@
       "ModifiedDate": "23.12.2015 3:21:21",
       "PublicationId": 1961702,
       "PublicationTitle": "User Guide",
-      "ProductFamilyName": "Mobile Phones",
-      "ProductReleaseName": "MP 330 (2.0.0)"
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
     },
     {
       "Id": "ish_1961702-164239-16",
@@ -150,8 +150,8 @@
       "ModifiedDate": "23.12.2015 3:21:10",
       "PublicationId": 1961702,
       "PublicationTitle": "User Guide",
-      "ProductFamilyName": "Mobile Phones",
-      "ProductReleaseName": "MP 330 (2.0.0)"
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
     }
   ]
 }

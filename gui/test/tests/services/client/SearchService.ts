@@ -37,7 +37,7 @@ class PageServiceTests extends TestBase {
                     .then(searchResults => {
                         expect(searchResults).toBeDefined();
                         if (searchResults) {
-                            expect(searchResults.hits).toBe(148);
+                            expect(searchResults.hits).toBe(186);
                             expect(searchResults.queryResults.length).toBe(10);
                         }
                         done();
@@ -55,7 +55,7 @@ class PageServiceTests extends TestBase {
                     .then(searchResults => {
                         expect(searchResults).toBeDefined();
                         if (searchResults) {
-                            expect(searchResults.hits).toBe(148);
+                            expect(searchResults.hits).toBe(186);
                             expect(searchResults.queryResults.length).toBe(10);
                             expect(spy).toHaveBeenCalled();
                         }

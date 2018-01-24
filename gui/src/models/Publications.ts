@@ -47,7 +47,10 @@ export class Publications extends LoadableObject {
                 if (!familyTitle) {
                     return !publication.productFamily;
                 }
-                return (publication.productFamily && Version.normalizeProductFamily(publication.productFamily)) === familyTitle;
+                return (
+                    Array.isArray(publication.productFamily) &&
+                    publication.productFamily.map(Version.normalizeProductFamily).includes(familyTitle)
+                );
             });
         }
 
@@ -61,7 +64,12 @@ export class Publications extends LoadableObject {
                 if (!productReleaseVersionTitle) {
                     return !publication.productReleaseVersion;
                 }
-                return Version.normalizeReleaseVersion(publication.productReleaseVersion) === productReleaseVersionTitle;
+                return (
+                    Array.isArray(publication.productReleaseVersion) &&
+                    publication.productReleaseVersion
+                        .map(Version.normalizeReleaseVersion)
+                        .includes(productReleaseVersionTitle)
+                );
             });
         }
 

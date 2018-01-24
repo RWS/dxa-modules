@@ -9,9 +9,10 @@ const MOCK_DATA: IPublication[] = [
     {
         Id: "Pub1",
         Title: "Pub1",
-        ProductFamily: "Family 1",
+        ProductFamily: ["Family 1"],
         CreatedOn: "",
         Version: "1",
+        LogicalRef: "123",
         LogicalId: "GUID-123",
         VersionRef: "123",
         Language: "en"
@@ -19,10 +20,11 @@ const MOCK_DATA: IPublication[] = [
     {
         Id: "Pub2",
         Title: "Pub2",
-        ProductFamily: "Family 2",
+        ProductFamily: ["Family 2"],
+        ProductReleaseVersion: ["V1"],
         CreatedOn: "",
-        ProductReleaseVersion: "V1",
         Version: "1",
+        LogicalRef: "123",
         LogicalId: "GUID-123",
         VersionRef: "123",
         Language: "en"
@@ -30,10 +32,11 @@ const MOCK_DATA: IPublication[] = [
     {
         Id: "Pub3",
         Title: "Pub3",
-        ProductFamily: "Family 2",
+        ProductFamily: ["Family 2"],
         ProductReleaseVersion: null,
         CreatedOn: "",
         Version: "1",
+        LogicalRef: "123",
         LogicalId: "GUID-123",
         VersionRef: "123",
         Language: "en"
@@ -43,6 +46,7 @@ const MOCK_DATA: IPublication[] = [
         Title: "Pub",
         CreatedOn: "",
         Version: "1",
+        LogicalRef: "123",
         LogicalId: "GUID-123",
         VersionRef: "123",
         Language: "en"
@@ -53,6 +57,7 @@ const MOCK_DATA: IPublication[] = [
         ProductFamily: null,
         CreatedOn: "",
         Version: "1",
+        LogicalRef: "123",
         LogicalId: "GUID-123",
         VersionRef: "123",
         Language: "en"
@@ -86,9 +91,11 @@ class PublicationsModel extends TestBase {
                 expect(families).toBeDefined();
                 if (families) {
                     expect(families.length).toBe(3);
-                    expect(families[0].title).toBe("Family 1");
-                    expect(families[1].title).toBe("Family 2");
-                    expect(families[2].title).toBe(DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE);
+                    expect(families.map(family => family.title)).toEqual([
+                        "Family 2", // Occurs twice
+                        "Family 1",
+                        DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE
+                    ]);
                 }
             });
 
@@ -104,14 +111,17 @@ class PublicationsModel extends TestBase {
                 ];
 
                 spyOn(publicationModel, "getPublications").and.callFake((): IPublicationInterface[] =>
-                    berries.map((family, i) => ({
-                        id: `${i}`,
-                        title: `Title - ${i}`,
-                        productFamily: family,
-                        createdOn: new Date(),
-                        version: "1",
-                        logicalId: `GUID-${i}`
-                    }))
+                    berries.map(
+                        (family, i) =>
+                            ({
+                                id: `${i}`,
+                                title: `Title - ${i}`,
+                                productFamily: [family],
+                                createdOn: new Date(),
+                                version: "1",
+                                logicalId: `GUID-${i}`
+                            } as IPublicationInterface)
+                    )
                 );
 
                 const families = publicationModel.getProductFamilies();
@@ -120,7 +130,9 @@ class PublicationsModel extends TestBase {
                     const sortedBerries = berries.sort();
                     expect(families.length).toBe(7);
                     families.forEach((family, index) => {
-                        expect(families[index].title).toBe(index === 6 ? DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE : "" + sortedBerries[index]);
+                        expect(families[index].title).toBe(
+                            index === 6 ? DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE : "" + sortedBerries[index]
+                        );
                     });
                 }
             });

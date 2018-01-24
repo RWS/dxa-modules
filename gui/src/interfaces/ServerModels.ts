@@ -45,8 +45,9 @@
         Id: string;
         Language: string;
         LogicalId: string;
-        ProductFamily?: string | null;
-        ProductReleaseVersion?: string | null;
+        LogicalRef: string;
+        ProductFamily?: string[] | null;
+        ProductReleaseVersion?: string[] | null;
         Title: string;
         Version: string;
         VersionRef: string;

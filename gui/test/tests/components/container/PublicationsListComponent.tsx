@@ -100,9 +100,9 @@ class PublicationsListComponent extends TestBase {
                     version: "1",
                     logicalId: `GUID-${pubId}`,
                     versionRef: `${pubId}`,
-                    productFamily: productFamily
+                    productFamily: [productFamily]
                     //, productReleaseVersion: prodReleaseVersion
-                });
+                } as IPublication);
                 const publications: IPublication[] = Array(3)
                     .fill(prodFamily)
                     .map((pf, i) => createPublication(pf, i))
@@ -147,7 +147,7 @@ class PublicationsListComponent extends TestBase {
                         language: "en",
                         version: "1",
                         logicalId: "GUID-123",
-                        productFamily: "prod-family"
+                        productFamily: ["prod-family"]
                     }
                 ];
 
@@ -186,7 +186,7 @@ class PublicationsListComponent extends TestBase {
                             language: "en",
                             version: "1",
                             logicalId: "GUID-123",
-                            productFamily: "prod-family"
+                            productFamily: ["prod-family"]
                         }
                     ],
                     [{ title: "prod-family" }]
@@ -231,7 +231,7 @@ class PublicationsListComponent extends TestBase {
                             language: "en",
                             version: "1",
                             logicalId: "GUID-123",
-                            productFamily: "prod-family"
+                            productFamily: ["prod-family"]
                         }
                     ],
                     [{ title: "prod-family" }],
@@ -260,7 +260,7 @@ class PublicationsListComponent extends TestBase {
             it("can filter on publication release version", (done: () => void): void => {
                 const productFamily = "prod-family-test";
                 const productFamilies = [{ title: productFamily }];
-                const productReleaseVersins = [
+                const productReleaseVersions = [
                     { title: "Release version 1", value: "prod-release-version-1" },
                     { title: "Release version 2", value: "prod-release-version-2" }
                 ];
@@ -273,8 +273,8 @@ class PublicationsListComponent extends TestBase {
                             createdOn: new Date(),
                             version: "1",
                             logicalId: "GUID-1",
-                            productFamily,
-                            productReleaseVersion: productReleaseVersins[0].value,
+                            productFamily: [productFamily],
+                            productReleaseVersion: [productReleaseVersions[0].value],
                             language: "en"
                         },
                         {
@@ -283,13 +283,13 @@ class PublicationsListComponent extends TestBase {
                             createdOn: new Date(),
                             version: "1",
                             logicalId: "GUID-1",
-                            productFamily,
-                            productReleaseVersion: productReleaseVersins[1].value,
+                            productFamily: [productFamily],
+                            productReleaseVersion: [productReleaseVersions[1].value],
                             language: "en"
                         }
                     ],
                     productFamilies,
-                    productReleaseVersins
+                    productReleaseVersions
                 );
 
                 const publicationsList = this._renderComponent(target, {
@@ -309,7 +309,7 @@ class PublicationsListComponent extends TestBase {
                     spyOn(browserHistory, "push").and.callFake((path: string): void => {
                         // Check if routing was called with correct params
                         expect(path).toBe(
-                            `/publications/${productFamily}/${productReleaseVersins[releaseVersion].value}`
+                            `/publications/${productFamily}/${productReleaseVersions[releaseVersion].value}`
                         );
                         done();
                     });
