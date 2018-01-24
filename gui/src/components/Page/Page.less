@@ -73,7 +73,9 @@
             .ordered-list();
         }
         img {
-            max-width: 100%;
+            &:not([width]) {
+                max-width: 100%;
+            }
             &.sdl-expandable-image {
                 transition: box-shadow 0.3s ease-out;
                 &:hover {
