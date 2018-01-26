@@ -42,7 +42,9 @@
     @if (Model.Link.IsLinkWithText())
     {
         <div class="carousel-caption">
-            <p><a href="@Model.Link.Url" title="@Model.Link.AlternateText" class="btn btn-primary" @Html.DxaPropertyMarkup(() => Model.Link)>@Model.Link.LinkText</a></p>
+            <p @Html.DxaPropertyMarkup(() => Model.Link.LinkText)>
+                <a href="@Model.Link.Url" title="@Model.Link.AlternateText" class="btn btn-primary">@Model.Link.LinkText</a>
+            </p>
         </div>
     }
 </div>
