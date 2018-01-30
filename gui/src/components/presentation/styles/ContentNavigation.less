@@ -62,7 +62,11 @@
             a {
                 text-decoration: none;
                 color: @neutralColor1;
-                word-break: break-all;
+                // https://caniuse.com/#search=word-break
+                // Chrome, Safari and other WebKit/Blink browsers also support the
+                //  unofficial break-word value which is treated like word-wrap: break-word.
+                word-break: break-word;
+                word-wrap: break-word;
                 &:hover {
                     color: @accentColor2;
                 }
