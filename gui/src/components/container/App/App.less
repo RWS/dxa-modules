@@ -38,7 +38,6 @@ body,
     direction: ltr;
 }
 
-
 @media print {
     @page {
         margin: 2cm;
@@ -82,18 +81,21 @@ body,
                     top: 0;
                     min-height: 100%;
                     min-width: 100%;
+                    display: block; // overwrite display:flex
                     .sdl-dita-delivery-navigation-menu,
                     .sdl-dita-delivery-splitter {
                         .no-print();
                     }
 
                     .sdl-dita-delivery-page {
+                        display: block; // overwrite display:flex
                         .sdl-dita-delivery-comments-section,
                         .sdl-dita-delivery-content-navigation-wrapper {
                             .no-print();
                         }
 
                         .sdl-dita-delivery-page-content {
+                            width: 100%; // overwrite spacing for navigation
                             /* Content */
                             .sdl-dita-delivery-comments-section,
                             .sdl-dita-delivery-version-selector {
@@ -109,6 +111,7 @@ body,
                                 h2,
                                 h3,
                                 h4 {
+                                    page-break-before: avoid;
                                     page-break-after: avoid;
                                 }
 
