@@ -96,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Areas\Test\Views\Entity\TSI3010Test.cshtml" />
     <None Include="Areas\Test\Views\Entity\CacheEntity.cshtml" />
     <None Include="Areas\Test\Views\Entity\NoCacheEntity.cshtml" />
     <None Include="Areas\Test\Views\Entity\CompLinkTest.cshtml" />

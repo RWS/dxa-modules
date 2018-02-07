@@ -1,0 +1,53 @@
+﻿@model ArticleModel
+
+<td class="entity" @Html.DxaEntityMarkup()>
+    <h3>Rendered @Model with Entity View "Test:TS3010Test"</h3>
+    @{
+        if (Model.ExtensionData != null && Model.ExtensionData.ContainsKey("TargetGroupConditions"))
+        {
+            var conditions = Model.ExtensionData["TargetGroupConditions"] as Sdl.Web.DataModel.Extension.Condition[];
+            if (conditions == null)
+            {
+                <p>conditions == null</p>
+            }
+            else
+            {
+                foreach (Sdl.Web.DataModel.Extension.Condition condition in conditions)
+                {
+                    Sdl.Web.DataModel.Extension.TrackingKeyCondition trackingKeyCondition = condition as Sdl.Web.DataModel.Extension.TrackingKeyCondition;
+                    if (trackingKeyCondition != null)
+                    {
+                        <div>Condition Type: @trackingKeyCondition.GetType().Name</div>
+                        <div>Tracking Key Title: @trackingKeyCondition.TrackingKeyTitle</div>
+                        <div>Operator: @trackingKeyCondition.Operator</div>
+                        <div>Value: @trackingKeyCondition.Value</div>
+                        <div>Negate: @trackingKeyCondition.Negate</div>
+                        <div>------------------------------------</div>
+                    }
+                    Sdl.Web.DataModel.Extension.CustomerCharacteristicCondition characteristic = condition as Sdl.Web.DataModel.Extension.CustomerCharacteristicCondition;
+                    if (characteristic != null)
+                    {
+                        <div>Condition Type: @characteristic.GetType().Name</div>
+                        <div>Charactersitics Name: @characteristic.Name</div>
+                        <div>Operator: @characteristic.Operator</div>
+                        <div>Value: @characteristic.Value</div>
+                        <div>Negate: @characteristic.Negate</div>
+                        <div>------------------------------------</div>
+                    }
+                    Sdl.Web.DataModel.Extension.TargetGroupCondition targetGroup = condition as Sdl.Web.DataModel.Extension.TargetGroupCondition;
+                    if (targetGroup != null)
+                    {
+                        <div>Condition Type: @targetGroup.GetType().Name</div>
+                        <div>Target Group Description: @targetGroup.TargetGroup.Description</div>
+                        <div>Negate: @targetGroup.Negate</div>
+                        <div>------------------------------------</div>
+                    }
+                }
+            }
+        }
+    }
+
+</div>
+
+
+
