@@ -29,6 +29,8 @@
                 <c:when test="${cond.getClass().simpleName == 'TargetGroupCondition'}">
                     <div>Condition Type: ${cond.getClass().simpleName}</div>
                     <div>Target Group Description: ${cond.targetGroup.description}</div>
+                    <div>Id: ${cond.targetGroup.id}</div>
+                    <div>Title: ${cond.targetGroup.title}</div>
                     <div>Negate: ${cond.negate}</div>
                     <div>------------------------------------</div>
                 </c:when>
