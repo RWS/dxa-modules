@@ -15,7 +15,7 @@
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <DxaFrameworkVersion>2.0.0-beta-201711161259</DxaFrameworkVersion>
+    <DxaFrameworkVersion>2.0.0</DxaFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -96,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Areas\Test\Views\Entity\TSI3010Test.cshtml" />
     <None Include="Areas\Test\Views\Entity\CacheEntity.cshtml" />
     <None Include="Areas\Test\Views\Entity\NoCacheEntity.cshtml" />
     <None Include="Areas\Test\Views\Entity\CompLinkTest.cshtml" />

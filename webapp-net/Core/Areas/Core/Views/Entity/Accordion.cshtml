@@ -32,7 +32,7 @@
                                 }
                                 @if (element.Link.IsValidLink())
                                 {
-                                    <p @Html.DxaPropertyMarkup(() => element.Link)>
+                                    <p @Html.DxaPropertyMarkup(() => element.Link.LinkText)>
                                         <a href="@element.Link.Url" title="@element.Link.AlternateText" class="btn btn-primary">@(element.Link.LinkText ?? Html.Resource("core.readMoreLinkText"))</a>
                                     </p>
                                 }

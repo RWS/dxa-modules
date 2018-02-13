@@ -1,5 +1,6 @@
 package com.sdl.dxa.modules;
 
+import com.sdl.dxa.modules.core.model.entity.Article;
 import com.sdl.dxa.modules.model.TSI1757.Tsi1757TestEntity1;
 import com.sdl.dxa.modules.model.TSI1757.Tsi1757TestEntity2;
 import com.sdl.dxa.modules.model.TSI1757.Tsi1757TestEntity3;
@@ -77,6 +78,9 @@ import org.springframework.stereotype.Component;
 
         // https://jira.sdl.com/browse/TSI-2844
         @RegisteredViewModel(viewName = "TSI2844Test", modelClass = Tsi2844TestEntity.class),
+
+        // https://jira.sdl.com/browse/TSI-3010
+        @RegisteredViewModel(viewName = "TSI3010Test", modelClass = Article.class),
 
         // DD4T / R2 Data Converter
         @RegisteredViewModel(viewName = "DataConverter", modelClass = DataConverterModel.class)

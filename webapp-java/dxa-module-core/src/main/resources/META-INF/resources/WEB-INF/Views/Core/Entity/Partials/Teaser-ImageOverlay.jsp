@@ -50,11 +50,8 @@
     </c:if>
     <c:if test="${not empty item.link.linkText}">
         <div class="carousel-caption">
-            <p>
-                <a href="${item.link.url}" title="${item.link.alternateText}"
-                   class="btn btn-primary" ${markup.property(item, "link")}>
-                        ${item.link.linkText}
-                </a>
+            <p ${markup.property(item.link, "linkText")}>
+                <dxa:link link="${item.link}" cssClass="btn btn-primary"/>
             </p>
         </div>
     </c:if>

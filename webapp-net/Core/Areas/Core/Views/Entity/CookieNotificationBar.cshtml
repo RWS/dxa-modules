@@ -12,7 +12,7 @@
                 </li>
                 @if (Model.Link.IsLinkWithText())
                 {
-                    <li @Html.DxaPropertyMarkup(() => Model.Link)>
+                    <li @Html.DxaPropertyMarkup(() => Model.Link.LinkText)>
                         <a href="@Model.Link.Url"><i class="fa fa-question-circle"></i> @Model.Link.LinkText</a>
                     </li>
                 }

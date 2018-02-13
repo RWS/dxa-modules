@@ -15,8 +15,8 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <SdlDeliveryVersion>10.1.0</SdlDeliveryVersion>
-    <SdlDxaDataModelPackageVersion>2.0.0-beta-201711211302</SdlDxaDataModelPackageVersion>
-    <DxaFrameworkVersion>2.0.0-beta-201711161259</DxaFrameworkVersion>
+    <SdlDxaDataModelPackageVersion>2.0.0</SdlDxaDataModelPackageVersion>
+    <DxaFrameworkVersion>2.0.0</DxaFrameworkVersion>
     <ExperienceManagerVersion>8.5.0</ExperienceManagerVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -37,6 +37,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DD4T.ContentModel.Contracts">
+      <HintPath>..\packages\DD4T.Model.2.2.2\lib\net45\DD4T.ContentModel.Contracts.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.10.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
@@ -49,9 +52,6 @@
     <Reference Include="Sdl.Web.Common">
       <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net452\Sdl.Web.Common.dll</HintPath>
       <Private>False</Private>
-    </Reference>
-    <Reference Include="Sdl.Web.Legacy.Model">
-      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net452\Sdl.Web.Legacy.Model.dll</HintPath>
     </Reference>
     <Reference Include="Sdl.Web.Mvc">
       <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net452\Sdl.Web.Mvc.dll</HintPath>

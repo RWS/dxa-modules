@@ -13,8 +13,8 @@
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <SdlDxaDataModelPackageVersion>2.0.0-beta-201711211302</SdlDxaDataModelPackageVersion>
-    <DxaFrameworkVersion>2.0.0-beta-201711161259</DxaFrameworkVersion>
+    <SdlDxaDataModelPackageVersion>2.0.0</SdlDxaDataModelPackageVersion>
+    <DxaFrameworkVersion>2.0.0</DxaFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DD4T.ContentModel.Contracts">
+      <HintPath>..\packages\DD4T.Model.2.2.2\lib\net45\DD4T.ContentModel.Contracts.dll</HintPath>
+    </Reference>
     <Reference Include="Sdl.Web.DataModel">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Sdl.Dxa.DataModel.$(SdlDxaDataModelPackageVersion)\lib\net452\Sdl.Web.DataModel.dll</HintPath>
@@ -42,9 +45,6 @@
     <Reference Include="Sdl.Web.Common">
       <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net452\Sdl.Web.Common.dll</HintPath>
       <Private>False</Private>
-    </Reference>
-    <Reference Include="Sdl.Web.Legacy.Model">
-      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net452\Sdl.Web.Legacy.Model.dll</HintPath>
     </Reference>
     <Reference Include="Sdl.Web.Tridion">
       <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net452\Sdl.Web.Tridion.dll</HintPath>

@@ -53,8 +53,8 @@ public class Image extends MediaItem {
     @Override
     public HtmlElement toHtmlElement(String widthFactor, double aspect, String cssClass, int containerSize, String contextPath) throws DxaException {
         if (isEmpty(getUrl())) {
-            log.warn("Skipping image with empty URL: {}", this);
-            throw new DxaException("URL is null for image component: " + this);
+            log.warn("Skipping image with empty URL: {}", this.getUrl());
+            throw new DxaException("URL is null for image component: " + this.getId());
         }
 
         String url = this.isResizable() ? getMediaHelper().getResponsiveImageUrl(getUrl(), widthFactor, aspect, containerSize) : getUrl();
