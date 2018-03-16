@@ -1,6 +1,6 @@
 ﻿using System.Collections.Specialized;
 using System.Linq;
-using Sdl.Web.Common.Configuration;
+using Sdl.Web.Common.Interfaces;
 using Sdl.Web.Common.Logging;
 using Sdl.Web.Modules.Search.Models;
 using SI4T.Query.Models;
@@ -9,7 +9,7 @@ namespace Sdl.Web.Modules.Search.Providers
 {
     public class AwsCloudSearchProvider : SI4TSearchProvider
     {
-        protected override NameValueCollection SetupParameters(SearchQuery searchQuery, Localization localization)
+        protected override NameValueCollection SetupParameters(SearchQuery searchQuery, ILocalization localization)
         {
             NameValueCollection result = base.SetupParameters(searchQuery, localization);
             if (!result.AllKeys.Contains("q.options"))

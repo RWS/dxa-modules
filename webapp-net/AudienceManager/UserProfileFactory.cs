@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web;
 using Sdl.Web.Common.Configuration;
+using Sdl.Web.Common.Interfaces;
 using Sdl.Web.Common.Logging;
 using Sdl.Web.Mvc.Configuration;
 using Tridion.ContentDelivery.AmbientData;
@@ -57,7 +58,7 @@ namespace Sdl.Web.Modules.AudienceManager
                     return null;
                 }
 
-                Localization localization = WebRequestContext.Localization;
+                ILocalization localization = WebRequestContext.Localization;
 
                 // Audience Manager reads the context Publication ID from ADF:
                 AmbientDataContext.CurrentClaimStore.Put(new Uri("taf:claim:publication:id"), localization.Id);

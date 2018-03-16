@@ -20,7 +20,7 @@ namespace Sdl.Web.Modules.ContextExpressions
         /// <param name="entity">The Entity Model to be evaluated.</param>
         /// <param name="localization">The context Localization</param>
         /// <returns><c>true</c> if the Entity should be included.</returns>
-        public bool IncludeEntity(EntityModel entity, Localization localization)
+        public bool IncludeEntity(EntityModel entity, ILocalization localization)
         {
             using (new Tracer(entity))
             {
@@ -51,7 +51,7 @@ namespace Sdl.Web.Modules.ContextExpressions
         }
         #endregion
 
-        private static IDictionary<string, object> GetCachedContextClaims(Localization localization)
+        private static IDictionary<string, object> GetCachedContextClaims(ILocalization localization)
         {
             // TODO TSI-110: This is a temporary measure to cache the Context Claims per request
             IDictionary<string, object> result = null;

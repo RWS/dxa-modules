@@ -1,7 +1,9 @@
-﻿@model Configuration
+﻿@using System.Collections.Generic
+@using Sdl.Web.Common.Interfaces
+@model Configuration
 @{
     var siteLocalizations = WebRequestContext.Localization.SiteLocalizations;
-    var filteredLocalizations = new List<Localization>();
+    var filteredLocalizations = new List<ILocalization>();
     if (siteLocalizations.Count > 1)
     {
         var excludedLocalizations = new List<string>();
