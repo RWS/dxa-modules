@@ -11,7 +11,7 @@
     <AssemblyName>Sdl.Web.Modules.DDWebApp</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <DxaFrameworkVersion>2.1.0-beta-201803191811</DxaFrameworkVersion>
+    <DxaFrameworkVersion>2.1.0-beta-201803231551</DxaFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,17 +39,17 @@
       <HintPath>..\packages\Newtonsoft.Json.10.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Sdl.Web.Common, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Sdl.Web.Common, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\web-application\Sdl.Web.Common\bin\Debug\Sdl.Web.Common.dll</HintPath>
+      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net452\Sdl.Web.Common.dll</HintPath>
     </Reference>
-    <Reference Include="Sdl.Web.Mvc, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Sdl.Web.Mvc, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\web-application\Sdl.Web.Mvc\bin\Debug\Sdl.Web.Mvc.dll</HintPath>
+      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net452\Sdl.Web.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="Sdl.Web.Tridion, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Sdl.Web.Tridion, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\web-application\Sdl.Web.Tridion\bin\Debug\Sdl.Web.Tridion.dll</HintPath>
+      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net452\Sdl.Web.Tridion.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
