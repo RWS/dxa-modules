@@ -1,6 +1,8 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using Sdl.Web.Common;
 using Sdl.Web.Common.Models;
+using Sdl.Web.Delivery.ServicesCore.ClaimStore;
 using Sdl.Web.Modules.DDWebApp.Providers;
 using Sdl.Web.Mvc.Formats;
 
@@ -11,12 +13,18 @@ namespace Sdl.Web.Modules.DDWebApp.Controllers
     /// </summary>
     public class IshApiController : BaseController
     {
+        private static readonly Uri UserConditionsUri = new Uri("taf:ish:userconditions");
+
         [Route("~/api/page/{publicationId:int}/{pageId:int}")]
         [Route("~/api/page/{publicationId:int}/{pageId:int}/{*path}")]
         [HttpGet]
         [FormatData]
         public virtual ActionResult Page(int publicationId, int pageId, string path, string conditions = "")
         {
+            if (!string.IsNullOrEmpty(conditions))
+            {
+                AmbientDataContext.CurrentClaimStore.Put(UserConditionsUri, conditions);
+            }
             PageModel pageModel = IshContentProvider.GetPageModel(pageId, SetupLocalization(publicationId));
             return Json(pageModel);
             //return Content(JsonConvert.SerializeObject(pageModel), "application/json");
@@ -59,7 +67,7 @@ namespace Sdl.Web.Modules.DDWebApp.Controllers
             SetupLocalization(publicationId);
             if (!string.IsNullOrEmpty(conditions))
             {
-                // todo: add claim URI.create("taf:ish:userconditions") with value 'conditions'
+                AmbientDataContext.CurrentClaimStore.Put(UserConditionsUri, conditions);
             }
             TocProvider tocProvider = new TocProvider();
             return Json(tocProvider.GetToc(publicationId));
@@ -71,7 +79,7 @@ namespace Sdl.Web.Modules.DDWebApp.Controllers
             SetupLocalization(publicationId);
             if (!string.IsNullOrEmpty(conditions))
             {
-                // todo: add claim URI.create("taf:ish:userconditions") with value 'conditions'
+                AmbientDataContext.CurrentClaimStore.Put(UserConditionsUri, conditions);
             }
             TocProvider tocProvider = new TocProvider();
             var sitemapItems = tocProvider.GetToc(publicationId, sitemapItemId, includeAncestors);

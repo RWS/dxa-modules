@@ -1,4 +1,5 @@
-﻿using Sdl.Web.Common;
+﻿using Newtonsoft.Json.Linq;
+using Sdl.Web.Common;
 using Tridion.ContentDelivery.Meta;
 
 namespace Sdl.Web.Modules.DDWebApp.Providers
@@ -14,11 +15,19 @@ namespace Sdl.Web.Modules.DDWebApp.Providers
 
         public string GetConditions(int publicationId)
         {
-            // TODO
             var conditionUsed = GetMetadata(publicationId, CONDITION_USED);
             var conditionMetadata = GetMetadata(publicationId, CONDITION_METADATA);
 
-            return "";
+            JObject o1 = JObject.Parse(conditionUsed);
+            JObject o2 = JObject.Parse(conditionMetadata);
+
+            o1.Merge(o2, new JsonMergeSettings
+            {
+                // union array values together to avoid duplicates
+                MergeArrayHandling = MergeArrayHandling.Union
+            });
+
+            return o1.ToString();
         }
 
         private string GetMetadata(int publicationId, string metadataName)
