@@ -7,13 +7,12 @@ import org.springframework.web.WebApplicationInitializer;
 import javax.servlet.Filter;
 import javax.servlet.Servlet;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import java.util.Properties;
 
 @Slf4j
 public class CidWebInitializer implements WebApplicationInitializer {
     @Override
-    public void onStartup(ServletContext servletContext) throws ServletException {
+    public void onStartup(ServletContext servletContext) {
         log.debug("Trying to initialize servlet for CID module");
 
         Properties properties = InitializationUtils.loadDxaProperties();
@@ -34,8 +33,6 @@ public class CidWebInitializer implements WebApplicationInitializer {
             log.warn("Class {} for CID module is expected to be either Filter of Servlet but is", className);
         }
 
-        String sessionIdName = InitializationUtils.loadDxaProperties().getProperty("dxa.modules.cid.sessionid.name");
-        servletContext.getSessionCookieConfig().setName(sessionIdName);
-        log.info("Set default SESSIONID to {}", sessionIdName);
+        // session id rename has moved to DXA Web Initialization
     }
 }
