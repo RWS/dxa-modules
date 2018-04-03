@@ -13,6 +13,7 @@
     <MvcBuildViews>true</MvcBuildViews>
     <FileAlignment>512</FileAlignment>
     <DxaFrameworkVersion>2.1.0-beta-201803281441</DxaFrameworkVersion>
+    <SdlDeliveryVersion>10.1.0</SdlDeliveryVersion>
     <CopyLocal>true</CopyLocal>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -38,17 +39,17 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.10.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Sdl.Web.Common, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Sdl.Web.Common">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.2.1.0-beta-201803281441\lib\net452\Sdl.Web.Common.dll</HintPath>
+      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net452\Sdl.Web.Common.dll</HintPath>
     </Reference>
-    <Reference Include="Sdl.Web.DataModel, Version=2.0.0.124, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Sdl.Web.DataModel">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.2.1.0-beta-201803281441\lib\net452\Sdl.Web.DataModel.dll</HintPath>
+      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net452\Sdl.Web.DataModel.dll</HintPath>
     </Reference>
-    <Reference Include="Sdl.Web.Delivery.UGC, Version=10.1.0.1003, Culture=neutral, PublicKeyToken=ddfc895746e5ee6b, processorArchitecture=MSIL">
+    <Reference Include="Sdl.Web.Delivery.UGC">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Sdl.Web.Delivery.10.1.0\lib\net452\Sdl.Web.Delivery.UGC.dll</HintPath>
+      <HintPath>..\packages\Sdl.Web.Delivery.$(SdlDeliveryVersion)\lib\net452\Sdl.Web.Delivery.UGC.dll</HintPath>
     </Reference>
     <Reference Include="Sdl.Web.Mvc">
       <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net452\Sdl.Web.Mvc.dll</HintPath>
@@ -71,7 +72,10 @@
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
       <Private>$(CopyLocal)</Private>
     </Reference>
-     <Reference Include="WebMatrix.Data">
+    <Reference Include="Tridion.ContentDelivery.AmbientData">
+      <HintPath>..\packages\Sdl.Web.Delivery.$(SdlDeliveryVersion)\lib\net452\Tridion.ContentDelivery.AmbientData.dll</HintPath>
+    </Reference>
+    <Reference Include="WebMatrix.Data">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.Data.3.2.3\lib\net45\WebMatrix.Data.dll</HintPath>
     </Reference>
@@ -93,6 +97,7 @@
     <Compile Include="Controllers\UgcController.cs" />
     <Compile Include="Controllers\UgcApiController.cs" />
     <Compile Include="Data\Comment.cs" />
+    <Compile Include="Data\PubIdTitleLang.cs" />
     <Compile Include="Models\UgcPostCommentForm.cs" />
     <Compile Include="Data\User.cs" />
     <Compile Include="Data\PostedComment.cs" />

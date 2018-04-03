@@ -1,4 +1,5 @@
-﻿using Sdl.Web.Tridion.ContentManager;
+﻿using System;
+using Sdl.Web.Tridion.ContentManager;
 using System.Collections.Generic;
 using System.Linq;
 using Sdl.Web.Common.Interfaces;
@@ -6,6 +7,7 @@ using Sdl.Web.Delivery.UGC;
 using Sdl.Web.Delivery.UGC.Model;
 using Sdl.Web.Modules.Ugc.Data;
 using Sdl.Web.Mvc.Configuration;
+using Tridion.ContentDelivery.AmbientData;
 
 namespace Sdl.Web.Modules.Ugc
 {
@@ -33,10 +35,19 @@ namespace Sdl.Web.Modules.Ugc
             };         
             return Convert(_api.RetrieveFlatComments(CreateUri(publicationId, pageId), filter, descending, false));
         }
-      
+
         public Comment PostComment(int publicationId, int pageId, string username, string email, string content,
-                              int parentId, Dictionary<string, string> metadata) 
-            => Convert(_api.PostComment(CreateUri(publicationId, pageId), username, email, content, parentId, metadata).Result);
+            int parentId, Dictionary<string, string> metadata)
+        {
+            var claimStore = AmbientDataContext.CurrentClaimStore;
+            if (claimStore != null)
+            {
+                claimStore.Put(new Uri("taf:claim:contentdelivery:webservice:user"), username);
+                claimStore.Put(new Uri("taf:claim:contentdelivery:webservice:post:allowed"), true);
+            }
+            return Convert(
+                _api.PostComment(CreateUri(publicationId, pageId), username, email, content, parentId, metadata).Result);
+        }
 
         private static CmUri CreateUri(int publicationId, int pageId)
         {
@@ -49,6 +60,7 @@ namespace Sdl.Web.Modules.Ugc
 
         private static Comment Convert(IComment comment)
         {
+            if (comment == null) return null;
             Comment c = new Comment
             {
                 Id = comment.Id,

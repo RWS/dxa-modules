@@ -1,8 +1,6 @@
 ﻿@model UgcPostCommentForm
 
 <div @Html.DxaEntityMarkup()>
-    <h1 @Html.DxaPropertyMarkup(() => Model.Heading)>@Model.Heading</h1>
-
     @using (Html.BeginForm())
     {
         if (!WebRequestContext.IsPreview)
@@ -17,17 +15,16 @@
             </div>
         }
         <div class="form-group">
-            @Html.TextBoxFor(m => m.UserName, new {@class = "form-control", placeholder = @Model.UserNameLabel})
+            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = @Model.UserNameLabel })
         </div>
         <div class="form-group">
-            @Html.PasswordFor(m => m.EmailAddress, new {@class = "form-control", placeholder = @Model.EmailAddressLabel})
+            @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control", placeholder = @Model.EmailAddressLabel })
         </div>
         <div class="form-group">
-            @Html.TextBoxFor(m => m.Content, new {@class = "form-control", placeholder = @Model.ContentLabel})
+            @Html.TextAreaFor(m => m.Content, new { @class = "form-control", placeholder = @Model.ContentLabel })
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary">@Model.SubmitButtonLabel</button>
         </div>
     }
 </div>
-

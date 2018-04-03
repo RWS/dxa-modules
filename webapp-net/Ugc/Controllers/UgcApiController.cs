@@ -36,7 +36,6 @@ namespace Sdl.Web.Modules.Ugc.Controllers
             string json = new StreamReader(req).ReadToEnd();
 
             PostedComment posted = JsonConvert.DeserializeObject<PostedComment>(json);
-
             
             Dictionary<string, string> metadata = new Dictionary<string, string>();
             metadata.Add("publicationTitle", posted.PublicationTitle);
@@ -46,7 +45,7 @@ namespace Sdl.Web.Modules.Ugc.Controllers
             metadata.Add("language", posted.Language);
             metadata.Add("status", "0");
 
-           // addPubIdTitleLangToCommentMetadata(input, metadata);
+            AddPubIdTitleLangToCommentMetadata(posted, metadata);
 
             Comment result = ugc.PostComment(posted.PublicationId,
                     posted.PageId,
@@ -61,16 +60,12 @@ namespace Sdl.Web.Modules.Ugc.Controllers
 
         private void AddPubIdTitleLangToCommentMetadata(PostedComment comment, Dictionary<string, string> metadata)
         {
-            /*
             PubIdTitleLang pubIdTitleLang = new PubIdTitleLang();
-            pubIdTitleLang.setId(input.getPublicationId());
-            pubIdTitleLang.setLang(input.getLanguage());
-            pubIdTitleLang.setTitle(input.getPublicationTitle());
-
-            Gson gSon = new GsonBuilder().create();
-            String pubIdTitleLangJson = gSon.toJson(pubIdTitleLang);
-
-            metadata.Add("pubIdTitleLang", pubIdTitleLangJson);*/
+            pubIdTitleLang.Id = comment.PublicationId;
+            pubIdTitleLang.Lang = comment.Language;
+            pubIdTitleLang.Title = comment.PublicationTitle;
+            string pubIdTitleLangJson = JsonConvert.SerializeObject(pubIdTitleLang);
+            metadata.Add("pubIdTitleLang", pubIdTitleLangJson);
         }
     }
 }
