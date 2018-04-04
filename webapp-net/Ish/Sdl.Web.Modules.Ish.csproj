@@ -88,7 +88,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\IshApiController.cs" />
     <Compile Include="Controllers\IshPageController.cs" />
-    <Compile Include="DDWebAppModuleAreaRegistration.cs" />
+    <Compile Include="IshModuleAreaRegistration.cs" />
     <Compile Include="Exceptions\IshApiException.cs" />
     <Compile Include="Localization\IshLocalization.cs" />
     <Compile Include="Localization\IshLocalizationResolver.cs" />

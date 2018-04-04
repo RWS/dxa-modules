@@ -7,7 +7,7 @@ namespace Sdl.Web.Modules.Ish
     /// <summary>
     /// DDWebApp module area registration
     /// </summary>
-    public class DDWebAppModuleAreaRegistration : BaseAreaRegistration
+    public class IshModuleAreaRegistration : BaseAreaRegistration
     {
         public override string AreaName => "Ish";
 
@@ -17,7 +17,6 @@ namespace Sdl.Web.Modules.Ish
             RegisterViewModel("Topic", typeof(Topic));
 
             // Page Views         
-            //RegisterViewModel("Home", typeof(PageModel));
             RegisterViewModel("GeneralPage", typeof(PageModel));
         }
     }
