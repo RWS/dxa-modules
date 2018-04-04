@@ -6,7 +6,7 @@
         @foreach(var comment in Model.Comments)
         {
             <p>@comment.User.Name</p>
-            <time class="meta small">@Html.DateDiff(comment.LastModifiedDate)</time>
+            <time class="meta small">@Html.DateDiff(comment.LastModifiedDate.DateTime)</time>
             <p>@comment.Content</p>
         }
     </div>
