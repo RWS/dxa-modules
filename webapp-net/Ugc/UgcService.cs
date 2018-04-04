@@ -1,6 +1,7 @@
 ﻿using System;
 using Sdl.Web.Tridion.ContentManager;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Sdl.Web.Common.Interfaces;
 using Sdl.Web.Delivery.UGC;
@@ -77,12 +78,12 @@ namespace Sdl.Web.Modules.Ugc
 
             if (comment.CreationDate.HasValue)
             {
-                c.CreationDate = comment.CreationDate.Value;
+                c.CreationDate = Convert(comment.CreationDate.Value);
             }
 
             if (comment.LastModifiedDate.HasValue)
             {
-                c.LastModifiedDate = comment.LastModifiedDate.Value;
+                c.LastModifiedDate = Convert(comment.LastModifiedDate.Value);
             }
 
             c.Children = Convert(comment.Children);
@@ -95,6 +96,21 @@ namespace Sdl.Web.Modules.Ugc
             ExternalId = user.ExternalId,
             Name = user.Name,
             EmailAddress = user.EmailAddress,
+        };
+
+        private static CommentDate Convert(DateTime dt) => new CommentDate
+        {
+            DateTime = dt,
+            DayOfMonth =  dt.Month,
+            DayOfWeek = dt.DayOfWeek.ToString(),
+            DayOfYear = dt.DayOfYear,
+            Month = new DateTimeFormatInfo().GetMonthName(dt.Month),
+            MonthValue = dt.Month,
+            Year = dt.Year,
+            Hour = dt.Hour,
+            Minute = dt.Minute,
+            Second = dt.Second,
+            Nano = dt.Millisecond
         };
     }
 }
