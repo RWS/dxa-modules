@@ -2,18 +2,24 @@
 using Sdl.Web.Common.Interfaces;
 using Sdl.Web.Tridion;
 
-namespace Sdl.Web.Modules.DDWebApp.Localization
+namespace Sdl.Web.Modules.Ish.Localization
 {
     /// <summary>
     /// Ish Localization Resolver
     /// </summary>
     public class IshLocalizationResolver : LocalizationResolver
     {
-        public override ILocalization ResolveLocalization(Uri url)
+        private readonly ILocalization _localization;
+
+        public IshLocalizationResolver()
         {
-            ILocalization localization = new IshLocalization();
-            localization.EnsureInitialized();
-            return localization;
+            _localization = new IshLocalization();
+            _localization.EnsureInitialized();
+        }
+
+        public override ILocalization ResolveLocalization(Uri url)
+        {                    
+            return _localization;
         } 
     }
 }

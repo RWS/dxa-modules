@@ -5,12 +5,12 @@ using Newtonsoft.Json;
 using Sdl.Web.Common.Interfaces;
 using Sdl.Web.Common.Models;
 using Sdl.Web.Common.Models.Navigation;
-using Sdl.Web.Modules.DDWebApp.Models;
+using Sdl.Web.Modules.Ish.Models;
 using Sdl.Web.Tridion.ContentManager;
 using Tridion.ContentDelivery.Meta;
 using Tridion.ContentDelivery.Taxonomies;
 
-namespace Sdl.Web.Modules.DDWebApp.Navigation
+namespace Sdl.Web.Modules.Ish.Navigation
 {
     public class IshNavigationProvider : Tridion.Navigation.CILImpl.DynamicNavigationProvider
     {

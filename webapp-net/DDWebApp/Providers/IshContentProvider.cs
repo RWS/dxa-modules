@@ -1,12 +1,12 @@
 ﻿using System;
 using Sdl.Web.Common;
-using Sdl.Web.Modules.DDWebApp.Exceptions;
+using Sdl.Web.Modules.Ish.Exceptions;
 using Sdl.Web.Tridion.Mapping;
 using Tridion.ContentDelivery.DynamicContent.Query;
 using Tridion.ContentDelivery.Meta;
 using Sdl.Web.Tridion.ContentManager;
 
-namespace Sdl.Web.Modules.DDWebApp.Providers
+namespace Sdl.Web.Modules.Ish.Providers
 {
     /// <summary>
     /// Ish Content Provider
@@ -48,9 +48,9 @@ namespace Sdl.Web.Modules.DDWebApp.Providers
                 Criteria refCriteria = new CustomMetaValueCriteria(metaKeyCriteria, ishLogicalRefValue);
                 Criteria pubCriteria = new PublicationCriteria(publicationId);
                 Criteria itemType = new ItemTypeCriteria((int)ItemType.Page);
-                Criteria composite = new AndCriteria(new Criteria[] { dateCriteria, refCriteria, itemType, pubCriteria});
+                Criteria composite = new AndCriteria(new[] { dateCriteria, refCriteria, itemType, pubCriteria});
 
-                global::Tridion.ContentDelivery.DynamicContent.Query.Query query = new global::Tridion.ContentDelivery.DynamicContent.Query.Query(composite);
+                Query query = new Query(composite);
                 IItem[] items = query.ExecuteEntityQuery();
                 if (items == null || items.Length == 0)
                 {

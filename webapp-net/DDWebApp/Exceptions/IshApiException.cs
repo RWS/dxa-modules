@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sdl.Web.Modules.DDWebApp.Exceptions
+namespace Sdl.Web.Modules.Ish.Exceptions
 {
     /// <summary>
     /// Ish Api Exception

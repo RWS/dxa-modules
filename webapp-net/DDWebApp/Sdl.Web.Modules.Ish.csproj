@@ -7,8 +7,8 @@
     <ProjectGuid>{EE523D3E-4A5D-4E01-9FB2-7BF4352F6CE5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sdl.Web.Modules.DDWebApp</RootNamespace>
-    <AssemblyName>Sdl.Web.Modules.DDWebApp</AssemblyName>
+    <RootNamespace>Sdl.Web.Modules.Ish</RootNamespace>
+    <AssemblyName>Sdl.Web.Modules.Ish</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <DxaFrameworkVersion>2.1.0-beta-201803231551</DxaFrameworkVersion>
@@ -104,8 +104,8 @@
     <Compile Include="Providers\TocProvider.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Areas\DDWebApp\Views\IshPage\Home.cshtml" />
-    <None Include="Areas\DDWebApp\Views\web.config" />
+    <None Include="Areas\Ish\Views\IshPage\GeneralPage.cshtml" />
+    <None Include="Areas\Ish\Views\web.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

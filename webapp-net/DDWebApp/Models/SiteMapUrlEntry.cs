@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sdl.Web.Modules.DDWebApp.Models
+namespace Sdl.Web.Modules.Ish.Models
 {
     public class SiteMapUrlEntry
     {

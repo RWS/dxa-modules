@@ -7,7 +7,7 @@ using Sdl.Web.Common.Models;
 using Sdl.Web.Mvc;
 using Sdl.Web.Mvc.Configuration;
 
-namespace Sdl.Web.Modules.DDWebApp.Controllers
+namespace Sdl.Web.Modules.Ish.Controllers
 {
     /// <summary>
     /// Ish Page Controller
@@ -19,7 +19,8 @@ namespace Sdl.Web.Modules.DDWebApp.Controllers
         [Route("~/publications/{*content}")]
         public ActionResult Home()
         {
-            return View("Home");
+            System.Web.HttpContext.Current.Items["ActiveFeatures"] = "commenting";
+            return View("GeneralPage");
         }
 
         [Route("~/{publicationId:int}")]
@@ -37,8 +38,9 @@ namespace Sdl.Web.Modules.DDWebApp.Controllers
 
         protected ActionResult GetPage(int publicationId)
         {
+            System.Web.HttpContext.Current.Items["ActiveFeatures"] = "commenting";
             SetupLocalization(publicationId);
-            return View("Home");
+            return View("GeneralPage");
         }
 
         protected ActionResult GetPage(int publicationId, int pageId)
@@ -71,6 +73,7 @@ namespace Sdl.Web.Modules.DDWebApp.Controllers
                     SetupViewData(pageModel);
                     PageModel model = (EnrichModel(pageModel) as PageModel) ?? pageModel;
                     WebRequestContext.PageModel = model;
+                    System.Web.HttpContext.Current.Items["ActiveFeatures"] = "commenting";
                     return View(model.MvcData.ViewName, model);
                 }
                 catch (Exception ex)

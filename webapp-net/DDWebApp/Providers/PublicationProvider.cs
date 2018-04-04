@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Sdl.Web.Common;
 using Sdl.Web.Common.Logging;
-using Sdl.Web.Modules.DDWebApp.Models;
+using Sdl.Web.Modules.Ish.Models;
 using Tridion.ContentDelivery.Meta;
-using Sdl.Web.Modules.DDWebApp.Exceptions;
+using Sdl.Web.Modules.Ish.Exceptions;
 
-namespace Sdl.Web.Modules.DDWebApp.Providers
+namespace Sdl.Web.Modules.Ish.Providers
 {
     /// <summary>
     /// Publication Provider

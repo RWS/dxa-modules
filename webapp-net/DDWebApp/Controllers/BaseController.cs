@@ -3,15 +3,15 @@ using System.Web.Mvc;
 using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Interfaces;
 using Sdl.Web.Common.Models;
-using Sdl.Web.Modules.DDWebApp.Exceptions;
-using Sdl.Web.Modules.DDWebApp.Navigation;
-using Sdl.Web.Modules.DDWebApp.Providers;
+using Sdl.Web.Modules.Ish.Exceptions;
+using Sdl.Web.Modules.Ish.Navigation;
+using Sdl.Web.Modules.Ish.Providers;
 using Sdl.Web.Mvc.Configuration;
 using Tridion.ContentDelivery.Meta;
 
-namespace Sdl.Web.Modules.DDWebApp.Controllers
+namespace Sdl.Web.Modules.Ish.Controllers
 {
-    [RouteArea("DDWebApp")]
+    [RouteArea("Ish")]
     public class BaseController : Mvc.Controllers.PageController
     {
         private static readonly string TocNaventriesMeta = "tocnaventries.generated.value";

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Sdl.Web.Modules.DDWebApp.Models
+namespace Sdl.Web.Modules.Ish.Models
 {
     /// <summary>
     /// Publication
