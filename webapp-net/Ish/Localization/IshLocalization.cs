@@ -15,7 +15,7 @@ namespace Sdl.Web.Modules.Ish.Localization
     /// </summary>
     public class IshLocalization : Common.Configuration.Localization
     {     
-        public override string Path { get; set; } = "/"; // content path
+        public override string Path { get; set; } = ""; // content path
 
         public override string CmUriScheme { get; } = "ish";
 
