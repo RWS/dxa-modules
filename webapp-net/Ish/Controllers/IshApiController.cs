@@ -5,9 +5,6 @@ using Sdl.Web.Common.Models;
 using Sdl.Web.Delivery.ServicesCore.ClaimStore;
 using Sdl.Web.Modules.Ish.Providers;
 using Sdl.Web.Mvc.Formats;
-using System.Web;
-using System.Web.Configuration;
-using Sdl.Web.Mvc.Configuration;
 
 namespace Sdl.Web.Modules.Ish.Controllers
 {
@@ -17,12 +14,6 @@ namespace Sdl.Web.Modules.Ish.Controllers
     public class IshApiController : BaseController
     {
         private static readonly Uri UserConditionsUri = new Uri("taf:ish:userconditions");
-
-        private void HandleResponseAttribs()
-        {
-            System.Web.HttpContext.Current.Items["ActiveFeatures"] = "commenting";
-            System.Web.HttpContext.Current.Items["ContentIsEvaluable"] = false;
-        }
 
         [Route("~/api/page/{publicationId:int}/{pageId:int}")]
         [Route("~/api/page/{publicationId:int}/{pageId:int}/{*path}")]
@@ -34,10 +25,7 @@ namespace Sdl.Web.Modules.Ish.Controllers
             {
                 AmbientDataContext.CurrentClaimStore.Put(UserConditionsUri, conditions);
             }
-            PageModel pageModel = IshContentProvider.GetPageModel(pageId, SetupLocalization(publicationId));
-            HandleResponseAttribs();
-            return Json(pageModel);
-            //return Content(JsonConvert.SerializeObject(pageModel), "application/json");
+            return Json(IshContentProvider.GetPageModel(pageId, SetupLocalization(publicationId)));
         }
 
         [Route("~/binary/{publicationId:int}/{binaryId:int}/{*content}")]

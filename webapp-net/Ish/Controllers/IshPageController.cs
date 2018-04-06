@@ -4,7 +4,6 @@ using Sdl.Web.Common;
 using Sdl.Web.Common.Interfaces;
 using Sdl.Web.Common.Logging;
 using Sdl.Web.Common.Models;
-using Sdl.Web.Mvc;
 using Sdl.Web.Mvc.Configuration;
 
 namespace Sdl.Web.Modules.Ish.Controllers
@@ -49,14 +48,8 @@ namespace Sdl.Web.Modules.Ish.Controllers
             using (new Tracer(publicationId, pageId))
             {
                 try
-                {                 
-                    bool addIncludes = true;
-                    object addIncludesViewData;
-                    if (ViewData.TryGetValue(DxaViewDataItems.AddIncludes, out addIncludesViewData))
-                    {
-                        addIncludes = (bool)addIncludesViewData;
-                    }
-                    PageModel pageModel = null;
+                {                                   
+                    PageModel pageModel;
                     try
                     {
                         pageModel = IshContentProvider.GetPageModel(pageId, localization);
@@ -73,7 +66,6 @@ namespace Sdl.Web.Modules.Ish.Controllers
                     SetupViewData(pageModel);
                     PageModel model = (EnrichModel(pageModel) as PageModel) ?? pageModel;
                     WebRequestContext.PageModel = model;
-                    System.Web.HttpContext.Current.Items["ActiveFeatures"] = "commenting";
                     return View(model.MvcData.ViewName, model);
                 }
                 catch (Exception ex)

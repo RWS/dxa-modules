@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
-using Newtonsoft.Json;
-using Sdl.Web.Common;
 using Sdl.Web.Common.Configuration;
-using Sdl.Web.Common.Interfaces;
 using Sdl.Web.Common.Logging;
 
 namespace Sdl.Web.Modules.Ish.Localization
