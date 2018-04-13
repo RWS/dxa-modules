@@ -122,7 +122,7 @@ class SearchResultsComponent extends TestBase {
                 };
 
                 const publicationWithoutPublicationId = {
-                    ...getSearcheResultItem("", "1000"),
+                    ...getSearcheResultItem("", "1011"),
                     productFamilyTitle: "Product Family",
                     productReleaseVersionTitle: "Product Release"
                 };
@@ -152,11 +152,11 @@ class SearchResultsComponent extends TestBase {
                     expect(activityIndicators.length).toBe(0, "Activity indicator should not be rendered.");
 
                     const items = TestUtils.scryRenderedDOMComponentsWithTag(searchResults, "h3");
-                    expect(items.length).toBe(11);
+                    expect(items.length).toBe(12);
                     items.forEach((x: HTMLElement, i: number) => {
-                        if (i < items.length - 1) {
+                        if (i < items.length - 2) {
                             expect(x.textContent).toBe(`Page Title-${i}`);
-                        } else {
+                        } else if (i == items.length - 2) {
                             expect(x.textContent).toBe(publicationWithProductFamily.pageTitle);
                             const links = (x.parentElement as HTMLElement).querySelectorAll("nav a") as NodeListOf<
                                 HTMLAnchorElement
