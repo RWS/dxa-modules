@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Sdl.Web.Common.Interfaces;
 using Sdl.Web.Mvc.Controllers;
 using Sdl.Web.Common.Models;
 using Sdl.Web.Modules.Ugc.Models;
@@ -14,26 +13,22 @@ namespace Sdl.Web.Modules.Ugc.Controllers
     {     
         protected override ViewModel EnrichModel(ViewModel sourceModel)
         {
-            UgcService ugc = new UgcService();
-            ILocalization localization = WebRequestContext.Localization;
-            int pubId = int.Parse(localization.Id);
-            UgcCommentList model = base.EnrichModel(sourceModel) as UgcCommentList;
+            UgcComments model = base.EnrichModel(sourceModel) as UgcComments;
             if (model != null)
             {
-                int pageId = int.Parse(model.Id);
-                model.Comments = ugc.GetComments(pubId, pageId, false, new int[] {},
-                    0, 0);
+                UgcService ugc = new UgcService();
+                model.Comments = ugc.GetComments(model.Target.PublicationId, model.Target.ItemId, false, new int[] { }, 0, 0);
                 return model;
             }
-
+            
             UgcPostCommentForm postForm = base.EnrichModel(sourceModel) as UgcPostCommentForm;
-            if(postForm != null && MapRequestFormData(postForm) && ModelState.IsValid)
+            if (postForm != null && MapRequestFormData(postForm) && ModelState.IsValid)
             {
-                int pageId = int.Parse(postForm.Id);
-                ugc.PostComment(pubId, pageId, postForm.UserName,
-                    postForm.EmailAddress, postForm.Content, 0, new Dictionary<string, string>());
+                UgcService ugc = new UgcService();
+                ugc.PostComment(postForm.Target.PublicationId, postForm.Target.ItemId, postForm.UserName, postForm.EmailAddress, postForm.Content, 0, new Dictionary<string, string>());
                 return new RedirectModel(WebRequestContext.RequestUrl);
             }
+
             return sourceModel;
         }
     }
