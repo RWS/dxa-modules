@@ -121,6 +121,12 @@ class SearchResultsComponent extends TestBase {
                     productReleaseVersionTitle: "Product Release"
                 };
 
+                const publicationWithoutPublicationId = {
+                    ...getSearcheResultItem("", "1000"),
+                    productFamilyTitle: "Product Family",
+                    productReleaseVersionTitle: "Product Release"
+                };
+
                 services.searchService.setMockDataSearch(null, {
                     hits: 100,
                     startIndex: 0,
@@ -130,7 +136,8 @@ class SearchResultsComponent extends TestBase {
                             .map((publicationId: number, pageId: number) =>
                                 getSearcheResultItem(publicationId.toString(), pageId.toString())
                             ),
-                        publicationWithProductFamily
+                        publicationWithProductFamily,
+                        publicationWithoutPublicationId
                     ]
                 } as ISearchQueryResults);
 
