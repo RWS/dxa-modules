@@ -1,6 +1,7 @@
 ﻿@model UgcComments
 <div>
-    <span>Showing @Model.Comments.Count comments</span>
+    <h2>Comments (@Model.Comments.Count)</h2>
+	<hr/>
     <div class="list-group">
         @foreach(var comment in Model.Comments)
         {

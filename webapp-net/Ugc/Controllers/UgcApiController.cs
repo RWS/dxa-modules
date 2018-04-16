@@ -81,6 +81,8 @@ namespace Sdl.Web.Modules.Ugc.Controllers
         [Route("{localization}/api/comments/upvote")]
         public ActionResult UpVoteComment(int commentId)
         {
+            UgcService ugc = new UgcService();
+            ugc.UpVoteComment(commentId);
             return Redirect(Request.UrlReferrer?.AbsolutePath);
         }
 

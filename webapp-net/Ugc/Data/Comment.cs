@@ -16,6 +16,7 @@ namespace Sdl.Web.Modules.Ugc.Data
         public User User { get; set; }
         public List<Comment> Children { get; set; }
 
+        [JsonIgnore]
         public int Rating { get; set; } = 0;
     }
 
