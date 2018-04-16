@@ -146,7 +146,8 @@ class CommentsListComponent extends TestBase {
                     const expandDialogStep = (onDoneCallBack: () => void): void => {
                         TestUtils.Simulate.click(commentOpenReplyButton);
                         setTimeout((): void => {
-                            expect(comment.querySelector(".sdl-textarea")).toBeDefined();
+                            var element = (comment.querySelector(".sdl-textarea") as HTMLTextAreaElement);
+                            expect(element).toBeDefined();
                             onDoneCallBack();
                         }, RENDER_DELAY);
                     };

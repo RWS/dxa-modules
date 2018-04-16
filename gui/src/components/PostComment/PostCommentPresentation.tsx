@@ -438,13 +438,18 @@ export class PostCommentReplyPresentation extends PostCommentPresentation {
                 >
                     <div>
                         <textarea
+                            ref={(input) => {
+                                let htmlTextAreaElement = (input as HTMLTextAreaElement);
+                                if (htmlTextAreaElement) {
+                                    htmlTextAreaElement.focus();
+                                }
+                            }}
                             className={getTextareaClassNames("comment")}
                             id="comment"
                             placeholder={formatMessage(
                                 "component.post.reply.placeholder"
                             )}
                             onChange={this.handleChange}
-                            onBlur={this.handleBlur}
                         />
                         <span>
                             {formatMessage("component.post.comment.no.content")}
