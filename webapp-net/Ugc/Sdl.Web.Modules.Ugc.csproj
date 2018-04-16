@@ -108,6 +108,8 @@
     <Compile Include="UgcService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Areas\Ugc\Views\Page\GeneralPage.cshtml" />
+    <None Include="Areas\Ugc\Views\Page\_ViewStart.cshtml" />
     <None Include="Areas\Ugc\Views\Region\Comments.cshtml" />
     <None Include="Areas\Ugc\Views\Ugc\UgcComments.cshtml" />
     <None Include="Areas\Ugc\Views\Ugc\UgcPostCommentForm.cshtml" />
