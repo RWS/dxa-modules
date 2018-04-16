@@ -19,10 +19,12 @@ namespace Sdl.Web.Modules.Ugc
     {
         private static readonly int MaximumThreadsDepth = -1;
         private readonly IUgcCommentsApi _api;
+        private readonly IUgcVoteCommentApi _votingApi;
 
         public UgcService()
         {
             _api = UgcInstanceProvider.Instance.UgcCommunityClient();
+            _votingApi = (IUgcVoteCommentApi) _api;
         }     
 
         public List<Comment> GetComments(int publicationId, int pageId, bool descending, int[] status, int top, int skip)
@@ -50,6 +52,16 @@ namespace Sdl.Web.Modules.Ugc
                 _api.PostComment(CreateUri(publicationId, pageId), username, email, content, parentId, metadata).Result);
         }
 
+        public void UpVoteComment(long commentId)
+        {
+            _votingApi.VoteCommentUp(commentId);
+        }
+
+        public void DownVoteComment(long commentId)
+        {
+            _votingApi.VoteCommentDown(commentId);
+        }
+
         private static CmUri CreateUri(int publicationId, int pageId)
         {
             ILocalization localization = WebRequestContext.Localization;
@@ -68,7 +80,8 @@ namespace Sdl.Web.Modules.Ugc
                 ItemId = comment.ItemId,
                 ItemType = comment.ItemType,
                 ItemPublicationId = comment.ItemPublicationId,
-                Content = comment.Content
+                Content = comment.Content,
+                Rating = comment.Score
             };
 
             if (comment.User != null)

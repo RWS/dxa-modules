@@ -1,7 +1,8 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using Sdl.Web.Common;
 using Sdl.Web.Common.Models;
-using System.ComponentModel.DataAnnotations;
+using Sdl.Web.Tridion.ContentManager;
 
 namespace Sdl.Web.Modules.Ugc.Models
 {
@@ -64,5 +65,11 @@ namespace Sdl.Web.Modules.Ugc.Models
         /// Content not specified message
         /// </summary>
         public string NoContentMessage { get; set; }
+
+        /// <summary>
+        /// Target CmUri for comments
+        /// </summary>
+        [SemanticProperty(IgnoreMapping = true)]
+        public CmUri Target { get; set; }
     }
 }
