@@ -76,6 +76,14 @@ namespace Sdl.Web.Modules.Ugc.Controllers
             };
         }
 
+
+        [Route("~/api/comments/upvote")]
+        [Route("{localization}/api/comments/upvote")]
+        public ActionResult UpVoteComment(int commentId)
+        {
+            return Redirect(Request.UrlReferrer?.AbsolutePath);
+        }
+
         private void AddPubIdTitleLangToCommentMetadata(PostedComment comment, Dictionary<string, string> metadata)
         {
             PubIdTitleLang pubIdTitleLang = new PubIdTitleLang();

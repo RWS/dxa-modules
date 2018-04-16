@@ -15,6 +15,8 @@ namespace Sdl.Web.Modules.Ugc.Data
         public string Content { get; set; }
         public User User { get; set; }
         public List<Comment> Children { get; set; }
+
+        public int Rating { get; set; } = 0;
     }
 
     public class CommentDate
