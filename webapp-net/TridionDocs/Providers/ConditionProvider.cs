@@ -2,7 +2,7 @@
 using Sdl.Web.Common;
 using Tridion.ContentDelivery.Meta;
 
-namespace Sdl.Web.Modules.Ish.Providers
+namespace Sdl.Web.Modules.TridionDocs.Providers
 {
     /// <summary>
     /// Condition Provider

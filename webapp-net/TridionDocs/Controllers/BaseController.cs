@@ -3,22 +3,22 @@ using System.Web.Mvc;
 using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Interfaces;
 using Sdl.Web.Common.Models;
-using Sdl.Web.Modules.Ish.Exceptions;
-using Sdl.Web.Modules.Ish.Navigation;
-using Sdl.Web.Modules.Ish.Providers;
+using Sdl.Web.Modules.TridionDocs.Exceptions;
+using Sdl.Web.Modules.TridionDocs.Navigation;
+using Sdl.Web.Modules.TridionDocs.Providers;
 using Sdl.Web.Mvc.Configuration;
 using Tridion.ContentDelivery.Meta;
 
-namespace Sdl.Web.Modules.Ish.Controllers
+namespace Sdl.Web.Modules.TridionDocs.Controllers
 {
-    [RouteArea("Ish")]
+    [RouteArea("TridionDocs")]
     public class BaseController : Mvc.Controllers.PageController
     {
         private static readonly string TocNaventriesMeta = "tocnaventries.generated.value";
         private static readonly string PageConditionsUsedMeta = "conditionsused.generated.value";
         private static readonly string PageLogicalRefObjectId = "ishlogicalref.object.id";
 
-        private IshContentProvider _contentProvider;
+        private TridionDocsContentProvider _contentProvider;
 
         protected ILocalization SetupLocalization(int publicationId)
         {
@@ -69,31 +69,31 @@ namespace Sdl.Web.Modules.Ish.Controllers
             return model;
         }
 
-        protected IshContentProvider IshContentProvider
+        protected TridionDocsContentProvider TridionDocsContentProvider
         {
             get
             {
-                if (!(ContentProvider is IshContentProvider))
+                if (!(ContentProvider is TridionDocsContentProvider))
                 {
-                    throw new IshApiException(
-                        "IshContentProvider not configured. Please make sure you have the IshContentProvider specified in your Unity.config");
+                    throw new TridionDocsApiException(
+                        "TridionDocsContentProvider not configured. Please make sure you have the TridionDocsContentProvider specified in your Unity.config");
                 }
-                return ContentProvider as IshContentProvider;
+                return ContentProvider as TridionDocsContentProvider;
             }
         }
 
-        protected IshNavigationProvider IshNavigationProvider
+        protected TridionDocsNavigationProvider TridionDocsNavigationProvider
         {
             get
             {
                 INavigationProvider navProvider = SiteConfiguration.NavigationProvider;
-                if (!(navProvider is IshNavigationProvider))
+                if (!(navProvider is TridionDocsNavigationProvider))
                 {
-                    throw new IshApiException(
-                        "IshNavigationProvider not configured. Please make sure you have the IshNavigationProvider specified in your Unity.config");
+                    throw new TridionDocsApiException(
+                        "TridionDocsNavigationProvider not configured. Please make sure you have the TridionDocsNavigationProvider specified in your Unity.config");
 
                 }
-                return navProvider as IshNavigationProvider;
+                return navProvider as TridionDocsNavigationProvider;
             }
         }
     }

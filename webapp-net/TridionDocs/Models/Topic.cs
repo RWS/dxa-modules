@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using Sdl.Web.Common.Models;
 
-namespace Sdl.Web.Modules.Ish.Models
+namespace Sdl.Web.Modules.TridionDocs.Models
 {
     /// <summary>
     /// Topic Entity

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Sdl.Web.Common;
 using Sdl.Web.Common.Logging;
-using Sdl.Web.Modules.Ish.Models;
+using Sdl.Web.Modules.TridionDocs.Models;
 using Tridion.ContentDelivery.Meta;
-using Sdl.Web.Modules.Ish.Exceptions;
+using Sdl.Web.Modules.TridionDocs.Exceptions;
 
-namespace Sdl.Web.Modules.Ish.Providers
+namespace Sdl.Web.Modules.TridionDocs.Providers
 {
     /// <summary>
     /// Publication Provider
@@ -51,7 +51,7 @@ namespace Sdl.Web.Modules.Ish.Providers
                 }
                 catch (Exception e)
                 {
-                    throw new IshApiException("Unable to fetch list of publications.", e);
+                    throw new TridionDocsApiException("Unable to fetch list of publications.", e);
                 }              
             }
         }

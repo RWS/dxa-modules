@@ -5,7 +5,7 @@ using Sdl.Web.Common.Models;
 using Sdl.Web.Common.Models.Navigation;
 using Sdl.Web.Mvc.Configuration;
 
-namespace Sdl.Web.Modules.Ish.Providers
+namespace Sdl.Web.Modules.TridionDocs.Providers
 {
     /// <summary>
     /// Table of Contents (TOC) Provider

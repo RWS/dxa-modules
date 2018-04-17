@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sdl.Web.Modules.Ish.Models
+namespace Sdl.Web.Modules.TridionDocs.Models
 {
     public class SiteMapUrlEntry
     {

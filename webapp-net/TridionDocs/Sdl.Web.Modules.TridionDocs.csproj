@@ -1,17 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-
-  <Import Project="..\DxaModulesCommon.Props" /> 
-
+  <Import Project="..\DxaModulesCommon.Props" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{EE523D3E-4A5D-4E01-9FB2-7BF4352F6CE5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sdl.Web.Modules.Ish</RootNamespace>
-    <AssemblyName>Sdl.Web.Modules.Ish</AssemblyName>
+    <RootNamespace>Sdl.Web.Modules.TridionDocs</RootNamespace>
+    <AssemblyName>Sdl.Web.Modules.TridionDocs</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -44,6 +42,10 @@
     <Reference Include="Sdl.Web.Common">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net452\Sdl.Web.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Sdl.Web.DataModel, Version=2.0.0.124, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\\lib\net452\Sdl.Web.DataModel.dll</HintPath>
     </Reference>
     <Reference Include="Sdl.Web.Delivery.ServicesCore">
       <SpecificVersion>False</SpecificVersion>
@@ -88,26 +90,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Controllers\IshApiController.cs" />
-    <Compile Include="Controllers\IshPageController.cs" />
-    <Compile Include="IshModuleAreaRegistration.cs" />
-    <Compile Include="Exceptions\IshApiException.cs" />
-    <Compile Include="Localization\IshLocalization.cs" />
-    <Compile Include="Localization\IshLocalizationResolver.cs" />
+    <Compile Include="Controllers\TridionDocsApiController.cs" />
+    <Compile Include="Controllers\TridionDocsPageController.cs" />
+    <Compile Include="Mapping\TridionDocsModelBuilder.cs" />
+    <Compile Include="TridionDocsModuleAreaRegistration.cs" />
+    <Compile Include="Exceptions\TridionDocsApiException.cs" />
+    <Compile Include="Localization\TridionDocsLocalization.cs" />
+    <Compile Include="Localization\TridionDocsLocalizationResolver.cs" />
     <Compile Include="Models\Publication.cs" />
     <Compile Include="Models\PublicationSiteMap.cs" />
     <Compile Include="Models\SiteMapUrlEntry.cs" />
     <Compile Include="Models\Topic.cs" />
-    <Compile Include="Navigation\IshNavigationProvider.cs" />
+    <Compile Include="Navigation\TridionDocsNavigationProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ConditionProvider.cs" />
-    <Compile Include="Providers\IshContentProvider.cs" />
+    <Compile Include="Providers\TridionDocsContentProvider.cs" />
     <Compile Include="Providers\PublicationProvider.cs" />
     <Compile Include="Providers\TocProvider.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Areas\Ish\Views\IshPage\GeneralPage.cshtml" />
-    <None Include="Areas\Ish\Views\web.config" />
+    <None Include="Areas\TridionDocs\Views\TridionDocsPage\GeneralPage.cshtml" />
+    <None Include="Areas\TridionDocs\Views\web.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
