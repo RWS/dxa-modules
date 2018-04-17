@@ -1,17 +1,17 @@
 ﻿using System;
 using Sdl.Web.Common;
-using Sdl.Web.Modules.Ish.Exceptions;
+using Sdl.Web.Modules.TridionDocs.Exceptions;
 using Sdl.Web.Tridion.Mapping;
 using Tridion.ContentDelivery.DynamicContent.Query;
 using Tridion.ContentDelivery.Meta;
 using Sdl.Web.Tridion.ContentManager;
 
-namespace Sdl.Web.Modules.Ish.Providers
+namespace Sdl.Web.Modules.TridionDocs.Providers
 {
     /// <summary>
-    /// Ish Content Provider
+    /// TridionDocs Content Provider
     /// </summary>
-    public class IshContentProvider : DefaultContentProvider
+    public class TridionDocsContentProvider : DefaultContentProvider
     {
         private static readonly string RefFieldName = "ishlogicalref.object.id";
         private static readonly string DefaultPublishData = "1900-01-01 00:00:00.000";
@@ -59,7 +59,7 @@ namespace Sdl.Web.Modules.Ish.Providers
 
                 if (items.Length > 1)
                 {
-                    throw new IshApiException($"Too many page Ids found in publication with logical ref value {ishLogicalRefValue}");
+                    throw new TridionDocsApiException($"Too many page Ids found in publication with logical ref value {ishLogicalRefValue}");
                 }
 
                 return items[0];

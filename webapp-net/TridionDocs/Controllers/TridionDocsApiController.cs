@@ -3,15 +3,15 @@ using System.Web.Mvc;
 using Sdl.Web.Common;
 using Sdl.Web.Common.Models;
 using Sdl.Web.Delivery.ServicesCore.ClaimStore;
-using Sdl.Web.Modules.Ish.Providers;
+using Sdl.Web.Modules.TridionDocs.Providers;
 using Sdl.Web.Mvc.Formats;
 
-namespace Sdl.Web.Modules.Ish.Controllers
+namespace Sdl.Web.Modules.TridionDocs.Controllers
 {
     /// <summary>
-    /// Ish Api Controller
+    /// TridionDocs Api Controller
     /// </summary>
-    public class IshApiController : BaseController
+    public class TridionDocsApiController : BaseController
     {
         private static readonly Uri UserConditionsUri = new Uri("taf:ish:userconditions");
 
@@ -25,7 +25,7 @@ namespace Sdl.Web.Modules.Ish.Controllers
             {
                 AmbientDataContext.CurrentClaimStore.Put(UserConditionsUri, conditions);
             }
-            return Json(IshContentProvider.GetPageModel(pageId, SetupLocalization(publicationId)));
+            return Json(TridionDocsContentProvider.GetPageModel(pageId, SetupLocalization(publicationId)));
         }
 
         [Route("~/binary/{publicationId:int}/{binaryId:int}/{*content}")]
@@ -34,7 +34,7 @@ namespace Sdl.Web.Modules.Ish.Controllers
         [FormatData]
         public virtual ActionResult Binary(int publicationId, int binaryId)
         {
-            StaticContentItem content = IshContentProvider.GetStaticContentItem(binaryId, SetupLocalization(publicationId));
+            StaticContentItem content = TridionDocsContentProvider.GetStaticContentItem(binaryId, SetupLocalization(publicationId));
             return new FileStreamResult(content.GetContentStream(), content.ContentType);
         }
 
@@ -56,7 +56,7 @@ namespace Sdl.Web.Modules.Ish.Controllers
         public virtual ActionResult SitemapXml()
         {
             // Use the common SiteMapXml view for rendering out the xml of all the sitemap items.
-            return View("SiteMapXml", IshNavigationProvider.SiteMap);
+            return View("SiteMapXml", TridionDocsNavigationProvider.SiteMap);
         }
 
         [Route("~/api/toc/{publicationId:int}")]
@@ -92,7 +92,7 @@ namespace Sdl.Web.Modules.Ish.Controllers
             {
                 throw new DxaItemNotFoundException("Unable to use empty 'ishlogicalref.object.id' value as a search criteria.");
             }          
-            return Json(IshContentProvider.GetPageIdByIshLogicalReference(publicationId, ishFieldValue));
+            return Json(TridionDocsContentProvider.GetPageIdByIshLogicalReference(publicationId, ishFieldValue));
         }
     }
 }

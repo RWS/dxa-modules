@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Sdl.Web.Modules.Ish.Models
+namespace Sdl.Web.Modules.TridionDocs.Models
 {
     /// <summary>
     /// Publication

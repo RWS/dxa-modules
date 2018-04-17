@@ -6,12 +6,12 @@ using Sdl.Web.Common.Logging;
 using Sdl.Web.Common.Models;
 using Sdl.Web.Mvc.Configuration;
 
-namespace Sdl.Web.Modules.Ish.Controllers
+namespace Sdl.Web.Modules.TridionDocs.Controllers
 {
     /// <summary>
-    /// Ish Page Controller
+    /// TridionDocs Page Controller
     /// </summary>
-    public class IshPageController : BaseController
+    public class TridionDocsPageController : BaseController
     {
         [Route("~/")]
         [Route("~/home")]
@@ -52,7 +52,7 @@ namespace Sdl.Web.Modules.Ish.Controllers
                     PageModel pageModel;
                     try
                     {
-                        pageModel = IshContentProvider.GetPageModel(pageId, localization);
+                        pageModel = TridionDocsContentProvider.GetPageModel(pageId, localization);
                     }
                     catch (DxaItemNotFoundException ex)
                     {

@@ -34,7 +34,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdl.Web.Modules.AudienceMan
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdl.Web.Modules.Ugc", "Ugc\Sdl.Web.Modules.Ugc.csproj", "{54DDEEE6-1F97-4E53-8018-5918F7D90A8B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdl.Web.Modules.Ish", "Ish\Sdl.Web.Modules.Ish.csproj", "{EE523D3E-4A5D-4E01-9FB2-7BF4352F6CE5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdl.Web.Modules.TridionDocs", "TridionDocs\Sdl.Web.Modules.TridionDocs.csproj", "{EE523D3E-4A5D-4E01-9FB2-7BF4352F6CE5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

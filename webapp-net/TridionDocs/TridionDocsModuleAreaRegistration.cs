@@ -1,16 +1,16 @@
 ﻿using Sdl.Web.Common.Models;
-using Sdl.Web.Modules.Ish.Models;
+using Sdl.Web.Modules.TridionDocs.Models;
 using Sdl.Web.Mvc.Configuration;
 
-namespace Sdl.Web.Modules.Ish
+namespace Sdl.Web.Modules.TridionDocs
 {
     /// <summary>
-    /// DDWebApp module area registration
+    /// Tridion Docs module area registration
     /// </summary>
-    public class IshModuleAreaRegistration : BaseAreaRegistration
+    public class TridionDocsModuleAreaRegistration : BaseAreaRegistration
     {
-        public override string AreaName => "Ish";
-
+        public static string AREA_NAME = "TridionDocs";
+        public override string AreaName => AREA_NAME;
         protected override void RegisterAllViewModels()
         {
             // Entity Views
