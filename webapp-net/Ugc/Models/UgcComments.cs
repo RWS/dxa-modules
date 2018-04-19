@@ -11,6 +11,6 @@ namespace Sdl.Web.Modules.Ugc.Models
         public CmUri Target { get; set; }
 
         [SemanticProperty(IgnoreMapping = true)]
-        public List<Comment> Comments { get; set; }
+        public List<UgcComment> Comments { get; set; }
     }
 }

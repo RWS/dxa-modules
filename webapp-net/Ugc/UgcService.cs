@@ -3,6 +3,7 @@ using Sdl.Web.Tridion.ContentManager;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using Sdl.Web.Common.Interfaces;
 using Sdl.Web.Delivery.UGC;
 using Sdl.Web.Delivery.UGC.Model;
@@ -36,7 +37,7 @@ namespace Sdl.Web.Modules.Ugc
                 Depth = MaximumThreadsDepth,
                 Statuses = new List<Status>(new List<int>(status).Select(x => (Status)x))
             };         
-            return Convert(_api.RetrieveFlatComments(CreateUri(publicationId, pageId), filter, descending, false));
+            return Convert(_api.RetrieveThreadedComments(CreateUri(publicationId, pageId), filter, descending, true));
         }
 
         public Comment PostComment(int publicationId, int pageId, string username, string email, string content,
@@ -52,14 +53,19 @@ namespace Sdl.Web.Modules.Ugc
                 _api.PostComment(CreateUri(publicationId, pageId), username, email, content, parentId, metadata).Result);
         }
 
-        public void UpVoteComment(long commentId)
+        public async Task UpVoteComment(long commentId)
         {
-            _votingApi.VoteCommentUp(commentId);
+            await _votingApi.VoteCommentUp(commentId);
         }
 
-        public void DownVoteComment(long commentId)
+        public async Task DownVoteComment(long commentId)
         {
-            _votingApi.VoteCommentDown(commentId);
+            await _votingApi.VoteCommentDown(commentId);
+        }
+
+        public async Task<bool> RemoveComment(long commentId)
+        {
+            return await _api.RemoveComment(commentId);
         }
 
         private static CmUri CreateUri(int publicationId, int pageId)
@@ -77,11 +83,13 @@ namespace Sdl.Web.Modules.Ugc
             Comment c = new Comment
             {
                 Id = comment.Id,
+                ParentId = comment.ParentId,
                 ItemId = comment.ItemId,
                 ItemType = comment.ItemType,
                 ItemPublicationId = comment.ItemPublicationId,
                 Content = comment.Content,
-                Rating = comment.Score
+                Rating = comment.Score,
+                Metadata = Convert(comment.Metadata)
             };
 
             if (comment.User != null)
@@ -101,6 +109,17 @@ namespace Sdl.Web.Modules.Ugc
 
             c.Children = Convert(comment.Children);
             return c;
+        }
+
+        private static Dictionary<string, string> Convert(List<ICommentMeta> meta)
+        {
+            var metadata = new Dictionary<string, string>();
+            if(meta == null) return metadata;
+            foreach (var m in meta.Where(m => !metadata.ContainsKey(m.KeyName)))
+            {
+                metadata.Add(m.KeyName, m.KeyValue);
+            }
+            return metadata;
         }
 
         private static User Convert(IUser user) => new User

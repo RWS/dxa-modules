@@ -1,0 +1,39 @@
+﻿@model UgcComment
+<div>
+    <div class="list-group">
+
+        <div class="row">
+            <div style="margin-top: 4px; margin-left: 16px; margin-right: 10px; float: left;">
+                <i class="fa fa-user fa-lg" style="display: block"></i>
+            </div>
+            <div style="margin-left: 48px">
+                <header>
+                    <span><strong>@Model.CommentData.User.Name</strong></span>
+                    <span>-</span>
+                    <span><time class="meta small">@Html.DateDiff(@Model.CommentData.LastModifiedDate.DateTime)</time></span>
+                </header>
+                <div>
+                    <p>@Model.CommentData.Content</p>
+                </div>
+                <footer>
+                    <span><i class="fa fa-heart"></i></span>
+                    <span>@Model.CommentData.Rating</span>
+                    <span><a href="/api/comments/upvote?commentId=@Model.CommentData.Id"><i class="fa fa-thumbs-up"></i></a></span>
+                    <span><a href="/api/comments/downvote?commentId=@Model.CommentData.Id"><i class="fa fa-thumbs-down"></i></a></span>
+                </footer>
+            </div>
+        </div>
+
+
+        @foreach (var comment in Model.Comments)
+        {
+            <ul>
+                <li style="list-style-type: none;">
+                    @Html.Partial("Partials/UgcComment", comment)
+                </li>
+            </ul>
+        }
+    </div>
+</div>
+
+

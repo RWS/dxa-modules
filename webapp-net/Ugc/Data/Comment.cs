@@ -7,6 +7,10 @@ namespace Sdl.Web.Modules.Ugc.Data
     public class Comment
     {
         public long Id { get; set; }
+
+        [JsonIgnore]
+        public long ParentId { get; set; }
+
         public int ItemPublicationId { get; set; }
         public int ItemId { get; set; }
         public int ItemType { get; set; }
@@ -18,6 +22,9 @@ namespace Sdl.Web.Modules.Ugc.Data
 
         [JsonIgnore]
         public int Rating { get; set; } = 0;
+
+        [JsonIgnore]
+        public Dictionary<string, string> Metadata { get; set; } = new Dictionary<string, string>();
     }
 
     public class CommentDate

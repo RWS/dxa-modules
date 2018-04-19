@@ -2,6 +2,7 @@
 using Sdl.Web.Mvc.Controllers;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -42,15 +43,13 @@ namespace Sdl.Web.Modules.Ugc.Controllers
             UgcService ugc = new UgcService();
 
             Stream req = Request.InputStream;
-            req.Seek(0, System.IO.SeekOrigin.Begin);
+            req.Seek(0, SeekOrigin.Begin);
             string json = new StreamReader(req).ReadToEnd();
 
             PostedComment posted = JsonConvert.DeserializeObject<PostedComment>(json);
             
             Dictionary<string, string> metadata = new Dictionary<string, string>();
-            /*
-             * TODO: Issue in CIL at the moment when posting metadata so commenting this out until
-             *       CIL is upgraded.
+           
             metadata.Add("publicationTitle", posted.PublicationTitle);
             metadata.Add("publicationUrl", posted.PublicationUrl);
             metadata.Add("itemTitle", posted.PageTitle);
@@ -59,7 +58,7 @@ namespace Sdl.Web.Modules.Ugc.Controllers
             metadata.Add("status", "0");
 
             AddPubIdTitleLangToCommentMetadata(posted, metadata);
-            */
+            
             Comment result = ugc.PostComment(posted.PublicationId,
                     posted.PageId,
                     posted.Username,
@@ -76,13 +75,30 @@ namespace Sdl.Web.Modules.Ugc.Controllers
             };
         }
 
-
         [Route("~/api/comments/upvote")]
         [Route("{localization}/api/comments/upvote")]
-        public ActionResult UpVoteComment(int commentId)
+        public async Task<ActionResult> UpVoteComment(int commentId)
         {
             UgcService ugc = new UgcService();
-            ugc.UpVoteComment(commentId);
+            await ugc.UpVoteComment(commentId);
+            return Redirect(Request.UrlReferrer?.AbsolutePath);
+        }
+
+        [Route("~/api/comments/downvote")]
+        [Route("{localization}/api/comments/downvote")]
+        public async Task<ActionResult> DownVoteComment(int commentId)
+        {
+            UgcService ugc = new UgcService();
+            await ugc.DownVoteComment(commentId);
+            return Redirect(Request.UrlReferrer?.AbsolutePath);
+        }
+
+        [Route("~/api/comments/remove")]
+        [Route("{localization}/api/comments/remove")]
+        public async Task<ActionResult> RemoveComment(int commentId)
+        {
+            UgcService ugc = new UgcService();
+            await ugc.RemoveComment(commentId);
             return Redirect(Request.UrlReferrer?.AbsolutePath);
         }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Sdl.Web.Common;
 using Sdl.Web.Common.Models;
@@ -30,6 +31,18 @@ namespace Sdl.Web.Modules.Ugc.Models
         [Required(ErrorMessage = "@Model.NoContentMessage")]
         [SemanticProperty(IgnoreMapping = true)]
         public string Content { get; set; }
+
+        /// <summary>
+        /// Metadata of comment to post
+        /// </summary>
+        [SemanticProperty(IgnoreMapping = true)]
+        public Dictionary<string,string> Metadata { get; set; }
+
+        /// <summary>
+        /// Parent id of comment to post
+        /// </summary>
+        [SemanticProperty(IgnoreMapping = true)]
+        public int ParentId { get; set; } = 0;
 
         /// <summary>
         /// Label text for username input control on view

@@ -1,32 +1,13 @@
 ﻿@model UgcComments
 <div>
     <h2>Comments (@Model.Comments.Count)</h2>
-	<hr/>
+    <hr />
     <div class="list-group">
-        @foreach(var comment in Model.Comments)
+        @foreach (var comment in Model.Comments)
         {
-			<div class="row">
-				<div style="margin-top: 4px; margin-left: 16px; margin-right: 10px; float: left;">
-					<i class="fa fa-user fa-lg" style="display:block"></i>
-				</div>
-				<div style="margin-left: 48px">
-					<header>
-						<span><strong>@comment.User.Name</strong></span>
-						<span>-</span>
-						<span><time class="meta small">@Html.DateDiff(comment.LastModifiedDate.DateTime)</time></span>
-					</header>			
-					<div>
-						<p>@comment.Content</p>	
-					</div>	
-					<footer>
-						<span><i class="fa fa-heart"></i></span>
-						<span>@comment.Rating</span>
-						<span><a href="/api/comments/upvote?commentId=@comment.Id"><i class="fa fa-thumbs-up"></i></a></span>
-						<span>-</span>
-						<span><a href="#">Reply</a></span>
-					</footer>
-				</div>
-			</div>                      
+            <div class="row">
+                @Html.Partial("Partials/UgcComment", comment)
+            </div>
         }
     </div>
 </div>
