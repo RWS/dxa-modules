@@ -11,7 +11,7 @@
 	<PropertyGroup>		
 	    <DxaDataModelVersion>2.0.0</DxaDataModelVersion>
 		<DxaFrameworkVersion>2.1.0-beta-201804171440</DxaFrameworkVersion>
-		<SdlDeliveryVersion>11.0.0-beta-201804161522</SdlDeliveryVersion>
+		<SdlDeliveryVersion>11.0.0-beta-201804191206</SdlDeliveryVersion>
 		<AudienceManagerVersion>8.5.0</AudienceManagerVersion>
         <ExperienceManagerVersion>8.5.0</ExperienceManagerVersion>
 		<ContextClientVersion>10.1.0</ContextClientVersion>
