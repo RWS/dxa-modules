@@ -96,7 +96,8 @@ namespace Sdl.Web.Modules.Ugc.Mapping
                 Target =
                     CmUri.FromString(
                         $"{localization.CmUriScheme}:{localization.Id}-{modelId}-{(int)itemType}"),
-                MvcData = mvcData
+                MvcData = mvcData,
+                IsVolatile = true
             };
         }
 
@@ -117,6 +118,7 @@ namespace Sdl.Web.Modules.Ugc.Mapping
                 NoContentMessage = GetValue<string>(postFormConfig, "noContentMessage"),
                 NoEmailAddressMessage = GetValue<string>(postFormConfig, "noEmailAddressMessage"),
                 NoUserNameMessage = GetValue<string>(postFormConfig, "noUserNameMessage"),
+                IsVolatile = true
             };
         }
 
