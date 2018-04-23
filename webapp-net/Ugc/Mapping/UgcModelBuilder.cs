@@ -25,7 +25,7 @@ namespace Sdl.Web.Modules.Ugc.Mapping
         {
             using (new Tracer(pageModel, pageModelData, localization))
             {
-                var ugcMetadata = UgcMetadata(pageModelData.PageTemplate.Metadata);
+                var ugcMetadata = UgcMetadata(pageModelData.PageTemplate?.Metadata);
 
                 string regionName = GetValue<string>(ugcMetadata, "commentsRegion");
                 string areaName = pageModel.MvcData.AreaName;
@@ -118,7 +118,7 @@ namespace Sdl.Web.Modules.Ugc.Mapping
         public void BuildEntityModel(ref EntityModel entityModel, EntityModelData entityModelData, Type baseModelType,
             ILocalization localization)
         {
-            var ugcMetadata = UgcMetadata(entityModelData.ComponentTemplate.Metadata);
+            var ugcMetadata = UgcMetadata(entityModelData.ComponentTemplate?.Metadata);
             entityModel.SetExtensionData(ShowCommentsExtData, ShowComments(ugcMetadata));
             entityModel.SetExtensionData(PostCommentsExtData, PostComments(ugcMetadata) ? UgcPostFormMetadata(ugcMetadata) : null);
             entityModel.SetExtensionData(CommentsEntityRegionExt, GetCommentsRegion(ugcMetadata));
