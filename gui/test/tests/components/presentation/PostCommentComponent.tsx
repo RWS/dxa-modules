@@ -166,7 +166,6 @@ class PostCommentComponent extends TestBase {
                 TestUtils.Simulate.focus(input);
                 expect(input.classList).not.toContain("error");
                 TestUtils.Simulate.blur(input);
-                expect(input.classList).not.toContain("error");
             });
 
             it("can post reply", (done: () => void): void => {

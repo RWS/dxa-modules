@@ -113,7 +113,7 @@ export interface IPC {
 export class PostCommentPresentation extends React.Component<
     IPostCommentPresentationProps & IPostCommentPresentationDispatchProps,
     IPostCommentPresentationState
-> {
+    > {
     /**
      * Context types
      *
@@ -393,6 +393,8 @@ export class PostCommentReplyPresentation extends PostCommentPresentation {
      */
     public context: IAppContext;
 
+    public textareaInput: HTMLTextAreaElement;
+
     /**
      *
      * @param {string} comment
@@ -404,6 +406,16 @@ export class PostCommentReplyPresentation extends PostCommentPresentation {
         return {
             comment: comment.length === 0
         };
+    }
+
+    /**
+     * Invoked once, only on the client (not on the server), immediately after the initial rendering occurs.
+     */
+    public componentDidMount(): void {
+        // autofocus the input on mount
+        if (this.textareaInput) {
+            this.textareaInput.focus();
+        }
     }
 
     /**
@@ -438,11 +450,8 @@ export class PostCommentReplyPresentation extends PostCommentPresentation {
                 >
                     <div>
                         <textarea
-                            ref={(input) => {
-                                let htmlTextAreaElement = (input as HTMLTextAreaElement);
-                                if (htmlTextAreaElement) {
-                                    htmlTextAreaElement.focus();
-                                }
+                            ref={(textareaInput: HTMLTextAreaElement) => {
+                                this.textareaInput = textareaInput;
                             }}
                             className={getTextareaClassNames("comment")}
                             id="comment"
@@ -450,6 +459,7 @@ export class PostCommentReplyPresentation extends PostCommentPresentation {
                                 "component.post.reply.placeholder"
                             )}
                             onChange={this.handleChange}
+                            onBlur={this.handleBlur}
                         />
                         <span>
                             {formatMessage("component.post.comment.no.content")}
