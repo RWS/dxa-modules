@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web.Mvc;
 using Sdl.Web.Mvc.Controllers;
 using Sdl.Web.Common.Models;
 using Sdl.Web.Modules.Ugc.Data;
@@ -19,12 +18,23 @@ namespace Sdl.Web.Modules.Ugc.Controllers
             UgcComments model = base.EnrichModel(sourceModel) as UgcComments;
             if (model != null)
             {
-                var ugcService = new UgcService();
-                var comments = ugcService.GetComments(model.Target.PublicationId, model.Target.ItemId, false, new int[] { }, 0, 0);
-                model.Comments = CreateEntities(comments);
+                if (Request.HttpMethod == "POST")
+                {
+                    // don't retrieve comments on a POST and to keep rendering happy give it an
+                    // empty list
+                    model.Comments = new List<UgcComment>();
+                }
+                else
+                {
+                    var ugcService = new UgcService();
+                    var comments = ugcService.GetComments(model.Target.PublicationId, model.Target.ItemId, false,
+                        new int[] {}, 0, 0);
+                    model.Comments = CreateEntities(comments);
+                }
+
                 return model;
             }
-            
+
             UgcPostCommentForm postForm = base.EnrichModel(sourceModel) as UgcPostCommentForm;
             if (postForm != null && MapRequestFormData(postForm) && ModelState.IsValid)
             {
