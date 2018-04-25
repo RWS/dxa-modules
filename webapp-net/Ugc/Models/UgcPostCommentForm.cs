@@ -15,6 +15,7 @@ namespace Sdl.Web.Modules.Ugc.Models
         /// Holds the form control value for username
         /// </summary>
         [Required(ErrorMessage = "@Model.NoUserNameMessage")]
+        [StringLength(80)]
         [SemanticProperty(IgnoreMapping = true)]
         public string UserName { get; set; }
 
@@ -22,6 +23,7 @@ namespace Sdl.Web.Modules.Ugc.Models
         /// Holds the form control value for email address
         /// </summary>
         [Required(ErrorMessage = "@Model.NoEmailAddressMessage")]
+        [StringLength(255)]
         [SemanticProperty(IgnoreMapping = true)]
         public string EmailAddress { get; set; }
 

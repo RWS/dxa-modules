@@ -10,7 +10,7 @@
 
 	<PropertyGroup>		
 	    <DxaDataModelVersion>2.1.0-beta-201804241437</DxaDataModelVersion>
-		<DxaFrameworkVersion>2.1.0-beta-201804241702</DxaFrameworkVersion>
+		<DxaFrameworkVersion>2.1.0-beta-201804251327</DxaFrameworkVersion>
 		<SdlDeliveryVersion>11.0.0-beta-201804191206</SdlDeliveryVersion>
 		<AudienceManagerVersion>9.0.0-beta-201804031026</AudienceManagerVersion>
         <ExperienceManagerVersion>8.5.0</ExperienceManagerVersion>
