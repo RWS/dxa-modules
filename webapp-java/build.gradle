@@ -35,7 +35,8 @@ task buildModules(type: MavenBuildTask) {
                     "dxa-module-googleanalytics",
                     "dxa-module-mediamanager",
                     "dxa-module-search",
-                    "dxa-module-51degrees"
+                    "dxa-module-51degrees",
+                    "dxa-module-ugc"
             ],
             ["dxa-module-test"]
     ]
