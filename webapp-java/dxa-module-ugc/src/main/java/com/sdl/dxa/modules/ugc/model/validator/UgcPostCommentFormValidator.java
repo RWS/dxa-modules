@@ -16,7 +16,7 @@ public class UgcPostCommentFormValidator implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
-        UgcPostCommentForm form = (UgcPostCommentForm) target;
+        final UgcPostCommentForm form = (UgcPostCommentForm) target;
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userName", "userName.empty", form.getNoUserNameMessage());
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "emailAddress", "emailAddress.empty", form.getNoEmailAddressMessage());

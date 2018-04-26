@@ -54,11 +54,11 @@ public class UgcService {
      * @return List of Comments
      */
     public List<Comment> getComments(int publicationId, int pageId, boolean descending, List<Integer> statuses, int top, int skip) {
-        List<Status> statusStatuses = new ArrayList<>();
+        final List<Status> statusStatuses = new ArrayList<>();
         statuses.stream().forEach(status -> {
             statusStatuses.add(Status.getStatusForId(status));
         });
-        SimpleCommentsFilter filter = new SimpleCommentsFilter()
+        final SimpleCommentsFilter filter = new SimpleCommentsFilter()
                 .withTop(top)
                 .withSkip(skip)
                 .withDepth(maximumThreadsDepth)
@@ -81,7 +81,7 @@ public class UgcService {
                                int parentId, Map<String, String> metadata) {
 
         try {
-            ClaimStore claimStore = AmbientDataContext.getCurrentClaimStore();
+            final ClaimStore claimStore = AmbientDataContext.getCurrentClaimStore();
             if (claimStore != null) {
                 claimStore.put(new URI("taf:claim:contentdelivery:webservice:user"), username);
                 claimStore.put(new URI("taf:claim:contentdelivery:webservice:post:allowed"), true);
@@ -109,7 +109,7 @@ public class UgcService {
 
 
     private List<Comment> convert(List<com.sdl.delivery.ugc.client.odata.edm.Comment> comments) {
-        List<Comment> convertedComments = new ArrayList<>();
+        final List<Comment> convertedComments = new ArrayList<>();
         comments.stream().forEach(comment -> {
             convertedComments.add(convert(comment));
         });
@@ -121,7 +121,7 @@ public class UgcService {
         if (comment == null) {
             return null;
         }
-        Comment c = new Comment();
+        final Comment c = new Comment();
         c.setId(comment.getIdLong());
         c.setParentId(comment.getParent().getIdLong());
         c.setItemId(comment.getItemId());
@@ -140,8 +140,8 @@ public class UgcService {
     }
 
     private Comment.CommentDate convert(ZonedDateTime creationDate) {
-        Comment.CommentDate commentDate = new Comment.CommentDate();
-        DateTime dt = new DateTime(
+        final Comment.CommentDate commentDate = new Comment.CommentDate();
+        final DateTime dt = new DateTime(
                 creationDate.toInstant().toEpochMilli(),
                 DateTimeZone.forTimeZone(TimeZone.getTimeZone(creationDate.getZone())));
         commentDate.setDateTime(dt);
@@ -161,7 +161,7 @@ public class UgcService {
     }
 
     private User convert(com.sdl.delivery.ugc.client.odata.edm.User user) {
-        User u = new User();
+        final User u = new User();
         u.setId(user.getId());
         u.setExternalId(user.getExternalId());
         u.setName(user.getName());

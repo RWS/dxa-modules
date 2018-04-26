@@ -96,7 +96,7 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
     }
 
     private static void addCommentsViews(PageModel pageModel, RegionModel region, Localization localization, RegionModel ugcRegion) {
-        List<EntityModel> regionEntities = new ArrayList<>();
+        final List<EntityModel> regionEntities = new ArrayList<>();
         for (EntityModel entity : region.getEntities()) {
             if (entity.getExtensionData() == null) {
                 continue;
@@ -130,11 +130,11 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
     }
 
     private static UgcComments createUgcCommentsEntity(Localization localization, String id, int componentItemType) {
-        MvcData mvcData = MvcDataCreator.creator()
+        final MvcData mvcData = MvcDataCreator.creator()
                 .fromQualifiedName(COMMENTS_QUALIFIED_NAME)
                 .defaults(DefaultsMvcData.ENTITY)
                 .create();
-        UgcComments model = new UgcComments();
+        final UgcComments model = new UgcComments();
         try {
             model.setTarget(new TCMURI(TcmUtils.buildTcmUri(localization.getId(), id, componentItemType)));
         } catch (ParseException e) {
@@ -145,11 +145,11 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
     }
 
     private static UgcPostCommentForm createUgcPostCommentEntity(Localization localization, String id, int componentItemType, ContentModelData postFormConfig) {
-        MvcData mvcData = MvcDataCreator.creator()
+        final MvcData mvcData = MvcDataCreator.creator()
                 .fromQualifiedName(POST_FORM_QUALIFIED_NAME)
                 .defaults(DefaultsMvcData.ENTITY)
                 .create();
-        UgcPostCommentForm model = new UgcPostCommentForm();
+        final UgcPostCommentForm model = new UgcPostCommentForm();
         try {
             model.setTarget(new TCMURI(TcmUtils.buildTcmUri(localization.getId(), id, componentItemType)));
         } catch (ParseException e) {
@@ -202,9 +202,9 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
     @Nullable
     @Override
     public PageModel buildPageModel(@Nullable PageModel pageModel, @NotNull PageModelData modelData) {
-        ContentModelData metadata = modelData.getPageTemplate() == null ? null : modelData.getPageTemplate().getMetadata();
-        ContentModelData ugcMetadata = ugcMetadata(metadata);
-        Localization localization = webRequestContext.getLocalization();
+        final ContentModelData metadata = modelData.getPageTemplate() == null ? null : modelData.getPageTemplate().getMetadata();
+        final ContentModelData ugcMetadata = ugcMetadata(metadata);
+        final Localization localization = webRequestContext.getLocalization();
 
         String regionName = getValue(ugcMetadata, COMMENTS_REGION_KEY, String.class);
         String areaName = pageModel.getMvcData().getAreaName();
@@ -245,7 +245,7 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
     @Override
     public <T extends EntityModel> T buildEntityModel(@Nullable T entityModel, EntityModelData entityModelData, @Nullable Class<T> expectedClass) throws DxaException {
 
-        ContentModelData ugcMetadata = ugcMetadata(entityModelData.getComponentTemplate().getMetadata());
+        final ContentModelData ugcMetadata = ugcMetadata(entityModelData.getComponentTemplate().getMetadata());
         entityModel.addExtensionData(SHOW_COMMENTS_EXT_DATA, showComments(ugcMetadata));
         entityModel.addExtensionData(POST_COMMENTS_EXT_DATA, (postComments(ugcMetadata) ? ugcPostFormMetadata(ugcMetadata) : null));
         entityModel.addExtensionData(COMMENTS_ENTITY_REGION_EXT_DATA, getValue(ugcMetadata, COMMENTS_REGION_KEY, String.class));

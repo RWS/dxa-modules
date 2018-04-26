@@ -28,13 +28,13 @@ public class UgcController extends EntityController {
 
     private static List<UgcComment> createEntities(List<Comment> comments) {
 
-        List<UgcComment> ugcComments = new ArrayList<>();
+        final List<UgcComment> ugcComments = new ArrayList<>();
         comments.forEach((Comment comment) -> ugcComments.add(createEntity(comment)));
         return ugcComments;
     }
 
     private static UgcComment createEntity(Comment comment) {
-        UgcComment ugcComment = new UgcComment();
+        final UgcComment ugcComment = new UgcComment();
         ugcComment.setComments(createEntities(comment.getChildren()));
         ugcComment.setCommentData(comment);
         return ugcComment;
@@ -45,9 +45,9 @@ public class UgcController extends EntityController {
 
         if (model instanceof UgcComments) {
             final ViewModel enrichedModel = super.enrichModel(model, request);
-            UgcService ugcService = new UgcService(context);
-            UgcComments ugcComments = (UgcComments) (enrichedModel instanceof EntityModel ? enrichedModel : model);
-            List<Comment> comments = ugcService.getComments(ugcComments.getTarget().getPublicationId(),
+            final UgcService ugcService = new UgcService(context);
+            final UgcComments ugcComments = (UgcComments) (enrichedModel instanceof EntityModel ? enrichedModel : model);
+            final List<Comment> comments = ugcService.getComments(ugcComments.getTarget().getPublicationId(),
                     ugcComments.getTarget().getItemId(), false, new ArrayList<>(), 0, 0);
             ugcComments.setComments(createEntities(comments));
             return ugcComments;
@@ -55,7 +55,7 @@ public class UgcController extends EntityController {
 
         if (model instanceof UgcPostCommentForm) {
             final ViewModel enrichedModel = super.enrichModel(model, request);
-            UgcPostCommentForm postForm = (UgcPostCommentForm) (enrichedModel instanceof EntityModel ? enrichedModel : model);
+            final UgcPostCommentForm postForm = (UgcPostCommentForm) (enrichedModel instanceof EntityModel ? enrichedModel : model);
             postForm.setFormUrl(webRequestContext.getPage().getUrl());
 
         }
