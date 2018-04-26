@@ -36,7 +36,6 @@ public class UgcService {
     @Autowired
     private UgcCommentApi ugcCommentApi;
 
-    //Todo: create client which implements UgcVoteCommentApi
     @Autowired
     private UgcVoteCommentApi ugcVoteCommentApi;
 
@@ -97,7 +96,6 @@ public class UgcService {
     /**
      * @param commentId
      */
-    // Todo: Implement ugcVoteCommentApi
     public void UpVoteComment(long commentId) {
         ugcVoteCommentApi.voteCommentUp(commentId);
     }
@@ -105,7 +103,6 @@ public class UgcService {
     /**
      * @param commentId
      */
-    // Todo: Implement ugcVoteCommentApi
     public void DownVoteComment(long commentId) {
         ugcVoteCommentApi.voteCommentDown(commentId);
     }

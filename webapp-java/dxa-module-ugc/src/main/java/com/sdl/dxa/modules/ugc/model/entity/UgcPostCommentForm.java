@@ -1,8 +1,10 @@
 package com.sdl.dxa.modules.ugc.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sdl.dxa.caching.NeverCached;
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticMappingIgnore;
 import com.sdl.webapp.common.api.model.entity.AbstractEntityModel;
+import com.sdl.webapp.common.api.model.validation.DynamicValidationMessage;
 import com.tridion.util.CMURI;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -18,6 +20,13 @@ import java.util.Map;
 public class UgcPostCommentForm extends AbstractEntityModel {
 
     /**
+     * Holds the forms url, for redirecting purposes
+     */
+    @SemanticMappingIgnore
+    @JsonIgnore
+    private String formUrl;
+
+    /**
      * Holds the form control value for username
      */
     @SemanticMappingIgnore
@@ -26,14 +35,14 @@ public class UgcPostCommentForm extends AbstractEntityModel {
     /**
     * Holds the form control value for email address
     **/
-//        [Required(ErrorMessage = "@Model.NoEmailAddressMessage")]
     @SemanticMappingIgnore
     private String emailAddress;
+
+
 
     /**
     * Holds the form control value for email address
     **/
-//        [Required(ErrorMessage = "@Model.NoContentMessage")]
         @SemanticMappingIgnore
     private String content;
 
@@ -79,6 +88,7 @@ public class UgcPostCommentForm extends AbstractEntityModel {
     **/
     private String noEmailAddressMessage;
 
+
     /**
     * Content not specified message
     **/
@@ -89,5 +99,20 @@ public class UgcPostCommentForm extends AbstractEntityModel {
     **/
     @SemanticMappingIgnore
     private CMURI target;
+
+    @DynamicValidationMessage(errorCode = "userName.empty")
+    public String getNoUserNameMessage() {
+        return noUserNameMessage;
+    }
+
+    @DynamicValidationMessage(errorCode = "emailAddress.empty")
+    public String getNoEmailAddressMessage() {
+        return noEmailAddressMessage;
+    }
+
+    @DynamicValidationMessage(errorCode = "content.empty")
+    public String getNoContentMessage() {
+        return noContentMessage;
+    }
 
 }

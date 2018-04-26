@@ -84,7 +84,7 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
                 ugcRegion.setMvcData(mvcData);
                 pageModel.getRegions().add(ugcRegion);
             } catch (DxaException e) {
-                log.error(String.format("Creation of RegionModel %s failed", regionName), e);
+                log.error("Creation of RegionModel {} failed", regionName, e);
             }
         } else {
             ugcRegion = pageModel.getRegions().stream()
@@ -138,7 +138,7 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
         try {
             model.setTarget(new TCMURI(TcmUtils.buildTcmUri(localization.getId(), id, componentItemType)));
         } catch (ParseException e) {
-            log.error(String.format("Unable to process  TCMURI '%s'.", TcmUtils.buildTcmUri(localization.getId(), id, componentItemType)));
+            log.error("Unable to process  TCMURI '{}'.", TcmUtils.buildTcmUri(localization.getId(), id, componentItemType));
         }
         model.setMvcData(mvcData);
         return model;
@@ -153,7 +153,7 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
         try {
             model.setTarget(new TCMURI(TcmUtils.buildTcmUri(localization.getId(), id, componentItemType)));
         } catch (ParseException e) {
-            log.error(String.format("Unable to process  TCMURI '%s'.", TcmUtils.buildTcmUri(localization.getId(), id, componentItemType)));
+            log.error("Unable to process  TCMURI '{}'.", TcmUtils.buildTcmUri(localization.getId(), id, componentItemType));
         }
         model.setMvcData(mvcData);
         model.setUserNameLabel(GetValue(postFormConfig, "userNameLabel", String.class));
@@ -220,7 +220,7 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
         } else {
             ugcRegion = FindRegion(pageModel.getRegions(), regionName);
             if (ugcRegion == null) {
-                log.error(String.format("Unable to locate region for comments '%s'.", regionName));
+                log.error("Unable to locate region for comments '{}'.", regionName);
             }
         }
 

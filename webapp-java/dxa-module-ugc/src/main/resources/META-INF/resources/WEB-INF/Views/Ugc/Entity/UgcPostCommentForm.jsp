@@ -8,7 +8,7 @@
 
 <div ${markup.entity(entity)}>
     
-    <form:form method="post" commandName="entity"}">
+    <form:form method="post" commandName="entity"  action="${localization.localizePath('/api/ugc/postcomment')}>
         <%--@elvariable id="errors" type="java.util.ArrayList<org.springframework.validation.ObjectError>"--%>
         <c:if test="${not empty errors}">
             <div class="alert-danger">

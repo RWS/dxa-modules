@@ -26,6 +26,7 @@ public class UgcInitializer {
     @Bean
     public UgcCommentApi ugcCommentApi() {return new DefaultUgcCommentApi();}
 
+    //Todo: create or use real UgcVoteCommentApi implementation
     @Bean
     public UgcVoteCommentApi ugcVoteCommentApi() {return  new mockUgcVoteCommentApi();}
 
