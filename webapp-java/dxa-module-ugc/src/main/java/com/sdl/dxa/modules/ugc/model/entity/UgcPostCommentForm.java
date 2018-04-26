@@ -56,7 +56,7 @@ public class UgcPostCommentForm extends AbstractEntityModel {
     * Parent id of comment to post
     **/
     @SemanticMappingIgnore
-    public int ParentId = 0;
+    public int parentId = 0;
 
     /**
     * Label text for username input control on view

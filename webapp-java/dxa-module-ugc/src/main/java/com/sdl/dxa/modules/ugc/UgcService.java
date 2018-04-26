@@ -53,7 +53,7 @@ public class UgcService {
      * @param skip
      * @return List of Comments
      */
-    public List<Comment> GetComments(int publicationId, int pageId, boolean descending, List<Integer> statuses, int top, int skip) {
+    public List<Comment> getComments(int publicationId, int pageId, boolean descending, List<Integer> statuses, int top, int skip) {
         List<Status> statusStatuses = new ArrayList<>();
         statuses.stream().forEach(status -> {
             statusStatuses.add(Status.getStatusForId(status));
@@ -64,7 +64,7 @@ public class UgcService {
                 .withDepth(maximumThreadsDepth)
                 .withStatuses(statusStatuses);
 
-        return Convert(ugcCommentApi.retrieveThreadedComments(TcmUtils.buildPageTcmUri(publicationId, pageId), filter, descending, true));
+        return convert(ugcCommentApi.retrieveThreadedComments(TcmUtils.buildPageTcmUri(publicationId, pageId), filter, descending, true));
     }
 
     /**
@@ -77,7 +77,7 @@ public class UgcService {
      * @param metadata
      * @return Comment
      */
-    public Comment PostComment(int publicationId, int pageId, String username, String email, String content,
+    public Comment postComment(int publicationId, int pageId, String username, String email, String content,
                                int parentId, Map<String, String> metadata) {
 
         try {
@@ -89,35 +89,35 @@ public class UgcService {
         } catch (URISyntaxException e) {
             log.error("Error while Storing Claims", e);
         }
-        return Convert(
+        return convert(
                 ugcCommentApi.postComment(TcmUtils.buildPageTcmUri(publicationId, pageId), username, email, content, parentId, metadata));
     }
 
     /**
      * @param commentId
      */
-    public void UpVoteComment(long commentId) {
+    public void upVoteComment(long commentId) {
         ugcVoteCommentApi.voteCommentUp(commentId);
     }
 
     /**
      * @param commentId
      */
-    public void DownVoteComment(long commentId) {
+    public void downVoteComment(long commentId) {
         ugcVoteCommentApi.voteCommentDown(commentId);
     }
 
 
-    private List<Comment> Convert(List<com.sdl.delivery.ugc.client.odata.edm.Comment> comments) {
+    private List<Comment> convert(List<com.sdl.delivery.ugc.client.odata.edm.Comment> comments) {
         List<Comment> convertedComments = new ArrayList<>();
         comments.stream().forEach(comment -> {
-            convertedComments.add(Convert(comment));
+            convertedComments.add(convert(comment));
         });
 
         return convertedComments;
     }
 
-    private Comment Convert(com.sdl.delivery.ugc.client.odata.edm.Comment comment) {
+    private Comment convert(com.sdl.delivery.ugc.client.odata.edm.Comment comment) {
         if (comment == null) {
             return null;
         }
@@ -131,15 +131,15 @@ public class UgcService {
         c.setRating(comment.getScore());
         c.setMetadata(comment.getMetadata());
         if (comment.getUser() != null) {
-            c.setUser(Convert(comment.getUser()));
+            c.setUser(convert(comment.getUser()));
         }
         if (comment.getCreationDate() != null) {
-            c.setCreationDate(Convert(comment.getCreationDate()));
+            c.setCreationDate(convert(comment.getCreationDate()));
         }
         return c;
     }
 
-    private Comment.CommentDate Convert(ZonedDateTime creationDate) {
+    private Comment.CommentDate convert(ZonedDateTime creationDate) {
         Comment.CommentDate commentDate = new Comment.CommentDate();
         DateTime dt = new DateTime(
                 creationDate.toInstant().toEpochMilli(),
@@ -160,7 +160,7 @@ public class UgcService {
 
     }
 
-    private User Convert(com.sdl.delivery.ugc.client.odata.edm.User user) {
+    private User convert(com.sdl.delivery.ugc.client.odata.edm.User user) {
         User u = new User();
         u.setId(user.getId());
         u.setExternalId(user.getExternalId());

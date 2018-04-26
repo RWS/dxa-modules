@@ -26,16 +26,16 @@ public class UgcController extends EntityController {
         this.webRequestContext = webRequestContext;
     }
 
-    private static List<UgcComment> CreateEntities(List<Comment> comments) {
+    private static List<UgcComment> createEntities(List<Comment> comments) {
 
         List<UgcComment> ugcComments = new ArrayList<>();
-        comments.forEach((Comment comment) -> ugcComments.add(CreateEntity(comment)));
+        comments.forEach((Comment comment) -> ugcComments.add(createEntity(comment)));
         return ugcComments;
     }
 
-    private static UgcComment CreateEntity(Comment comment) {
+    private static UgcComment createEntity(Comment comment) {
         UgcComment ugcComment = new UgcComment();
-        ugcComment.setComments(CreateEntities(comment.getChildren()));
+        ugcComment.setComments(createEntities(comment.getChildren()));
         ugcComment.setCommentData(comment);
         return ugcComment;
     }
@@ -47,9 +47,9 @@ public class UgcController extends EntityController {
             final ViewModel enrichedModel = super.enrichModel(model, request);
             UgcService ugcService = new UgcService(context);
             UgcComments ugcComments = (UgcComments) (enrichedModel instanceof EntityModel ? enrichedModel : model);
-            List<Comment> comments = ugcService.GetComments(ugcComments.getTarget().getPublicationId(),
+            List<Comment> comments = ugcService.getComments(ugcComments.getTarget().getPublicationId(),
                     ugcComments.getTarget().getItemId(), false, new ArrayList<>(), 0, 0);
-            ugcComments.setComments(CreateEntities(comments));
+            ugcComments.setComments(createEntities(comments));
             return ugcComments;
         }
 

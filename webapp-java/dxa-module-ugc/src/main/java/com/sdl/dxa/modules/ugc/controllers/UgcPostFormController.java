@@ -46,7 +46,7 @@ public class UgcPostFormController {
             log.trace("Comment Form complete and valid");
 
             UgcService ugcService = new UgcService(webRequestContext);
-            ugcService.PostComment(form.getTarget().getPublicationId(), form.getTarget().getItemId(), form.getUserName(),
+            ugcService.postComment(form.getTarget().getPublicationId(), form.getTarget().getItemId(), form.getUserName(),
                     form.getEmailAddress(), form.getContent(), form.getParentId(), form.getMetadata());
 
         log.trace("Comment posted succesful {}", form.getUserName());

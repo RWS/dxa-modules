@@ -59,12 +59,12 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
         this.webRequestContext = webRequestContext;
     }
 
-    private static RegionModel FindRegion(RegionModelSet regionModelSet, String regionName) {
+    private static RegionModel findRegion(RegionModelSet regionModelSet, String regionName) {
         for (RegionModel region : regionModelSet) {
             if (region.getName().equals(regionName)) {
                 return region;
             }
-            RegionModel childRegion = FindRegion(region.getRegions(), regionName);
+            RegionModel childRegion = findRegion(region.getRegions(), regionName);
             if (childRegion != null) {
                 return childRegion;
             }
@@ -72,7 +72,7 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
         return null;
     }
 
-    private static UgcRegion CreateRegion(PageModel pageModel, String areaName, String regionName) {
+    private static UgcRegion createRegion(PageModel pageModel, String areaName, String regionName) {
         UgcRegion ugcRegion = null;
         if (!pageModel.getRegions().containsClass(UgcRegion.class)) {
             try {
@@ -95,7 +95,7 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
         return ugcRegion;
     }
 
-    private static void AddCommentsViews(PageModel pageModel, RegionModel region, Localization localization, RegionModel ugcRegion) {
+    private static void addCommentsViews(PageModel pageModel, RegionModel region, Localization localization, RegionModel ugcRegion) {
         List<EntityModel> regionEntities = new ArrayList<>();
         for (EntityModel entity : region.getEntities()) {
             if (entity.getExtensionData() == null) {
@@ -104,7 +104,7 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
             List<EntityModel> entities = ugcRegion != null ? ugcRegion.getEntities() : regionEntities;
             if (entity.getExtensionData().containsKey(COMMENTS_ENTITY_REGION_EXT_DATA)) {
                 // comment region specified for this entity so lets find it and use that
-                RegionModel targetRegion = FindRegion(pageModel.getRegions(), (String) entity.getExtensionData().get(COMMENTS_ENTITY_REGION_EXT_DATA));
+                RegionModel targetRegion = findRegion(pageModel.getRegions(), (String) entity.getExtensionData().get(COMMENTS_ENTITY_REGION_EXT_DATA));
                 if (targetRegion != null && targetRegion != region) {
                     entities = targetRegion.getEntities();
                 } else if (targetRegion == null || targetRegion == region) {
@@ -113,10 +113,10 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
 
                 if (entity.getExtensionData().containsKey(SHOW_COMMENTS_EXT_DATA) &&
                         (boolean) entity.getExtensionData().get(SHOW_COMMENTS_EXT_DATA)) {
-                    entities.add(CreateUgcCommentsEntity(localization, entity.getId(), TcmUtils.COMPONENT_ITEM_TYPE));
+                    entities.add(createUgcCommentsEntity(localization, entity.getId(), TcmUtils.COMPONENT_ITEM_TYPE));
                 }
                 if (entity.getExtensionData().containsKey(POST_COMMENTS_EXT_DATA) && entity.getExtensionData().get(POST_COMMENTS_EXT_DATA) != null) {
-                    entities.add(CreateUgcPostCommentEntity(localization, entity.getId(), TcmUtils.COMPONENT_ITEM_TYPE, (ContentModelData) entity.getExtensionData().get(POST_COMMENTS_EXT_DATA)));
+                    entities.add(createUgcPostCommentEntity(localization, entity.getId(), TcmUtils.COMPONENT_ITEM_TYPE, (ContentModelData) entity.getExtensionData().get(POST_COMMENTS_EXT_DATA)));
                 }
             }
         }
@@ -125,11 +125,11 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
             region.getEntities().add(entity);
         });
         region.getRegions().stream().forEach(childRegion -> {
-            AddCommentsViews(pageModel, childRegion, localization, ugcRegion);
+            addCommentsViews(pageModel, childRegion, localization, ugcRegion);
         });
     }
 
-    private static UgcComments CreateUgcCommentsEntity(Localization localization, String id, int componentItemType) {
+    private static UgcComments createUgcCommentsEntity(Localization localization, String id, int componentItemType) {
         MvcData mvcData = MvcDataCreator.creator()
                 .fromQualifiedName(COMMENTS_QUALIFIED_NAME)
                 .defaults(DefaultsMvcData.ENTITY)
@@ -144,7 +144,7 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
         return model;
     }
 
-    private static UgcPostCommentForm CreateUgcPostCommentEntity(Localization localization, String id, int componentItemType, ContentModelData postFormConfig) {
+    private static UgcPostCommentForm createUgcPostCommentEntity(Localization localization, String id, int componentItemType, ContentModelData postFormConfig) {
         MvcData mvcData = MvcDataCreator.creator()
                 .fromQualifiedName(POST_FORM_QUALIFIED_NAME)
                 .defaults(DefaultsMvcData.ENTITY)
@@ -156,34 +156,34 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
             log.error("Unable to process  TCMURI '{}'.", TcmUtils.buildTcmUri(localization.getId(), id, componentItemType));
         }
         model.setMvcData(mvcData);
-        model.setUserNameLabel(GetValue(postFormConfig, "userNameLabel", String.class));
-        model.setEmailAddressLabel(GetValue(postFormConfig, "emailAddressLabel", String.class));
-        model.setContentLabel(GetValue(postFormConfig, "contentLabel", String.class));
-        model.setSubmitButtonLabel(GetValue(postFormConfig, "submitButtonLabel", String.class));
-        model.setNoContentMessage(GetValue(postFormConfig, "noContentMessage", String.class));
-        model.setNoEmailAddressMessage(GetValue(postFormConfig, "noEmailAddressMessage", String.class));
-        model.setNoUserNameMessage(GetValue(postFormConfig, "noUserNameMessage", String.class));
+        model.setUserNameLabel(getValue(postFormConfig, "userNameLabel", String.class));
+        model.setEmailAddressLabel(getValue(postFormConfig, "emailAddressLabel", String.class));
+        model.setContentLabel(getValue(postFormConfig, "contentLabel", String.class));
+        model.setSubmitButtonLabel(getValue(postFormConfig, "submitButtonLabel", String.class));
+        model.setNoContentMessage(getValue(postFormConfig, "noContentMessage", String.class));
+        model.setNoEmailAddressMessage(getValue(postFormConfig, "noEmailAddressMessage", String.class));
+        model.setNoUserNameMessage(getValue(postFormConfig, "noUserNameMessage", String.class));
 
         return model;
     }
 
-    private static ContentModelData UgcMetadata(ContentModelData metadata) {
+    private static ContentModelData ugcMetadata(ContentModelData metadata) {
         return metadata == null ? null : metadata.getAndCast(COMMENTS_CONFIG, ContentModelData.class);
     }
 
-    private static ContentModelData UgcPostFormMetadata(ContentModelData ugcMetadata) {
+    private static ContentModelData ugcPostFormMetadata(ContentModelData ugcMetadata) {
         return ugcMetadata == null ? null : ugcMetadata.getAndCast(POST_FORM_CONFIG, ContentModelData.class);
     }
 
-    private static boolean ShowComments(ContentModelData ugcMetadata) {
-        return GetValue(ugcMetadata, SHOW_COMMENTS_KEY, boolean.class);
+    private static boolean showComments(ContentModelData ugcMetadata) {
+        return getValue(ugcMetadata, SHOW_COMMENTS_KEY, boolean.class);
     }
 
-    private static boolean PostComments(ContentModelData ugcMetadata) {
-        return GetValue(ugcMetadata, ALLOW_POST_KEY, boolean.class);
+    private static boolean postComments(ContentModelData ugcMetadata) {
+        return getValue(ugcMetadata, ALLOW_POST_KEY, boolean.class);
     }
 
-    private static <T> T GetValue(ContentModelData metadata, String name, Class<T> type) {
+    private static <T> T getValue(ContentModelData metadata, String name, Class<T> type) {
         if (metadata == null || !metadata.containsKey(name)) {
             return null;
         }
@@ -203,22 +203,22 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
     @Override
     public PageModel buildPageModel(@Nullable PageModel pageModel, @NotNull PageModelData modelData) {
         ContentModelData metadata = modelData.getPageTemplate() == null ? null : modelData.getPageTemplate().getMetadata();
-        ContentModelData ugcMetadata = UgcMetadata(metadata);
+        ContentModelData ugcMetadata = ugcMetadata(metadata);
         Localization localization = webRequestContext.getLocalization();
 
-        String regionName = GetValue(ugcMetadata, COMMENTS_REGION_KEY, String.class);
+        String regionName = getValue(ugcMetadata, COMMENTS_REGION_KEY, String.class);
         String areaName = pageModel.getMvcData().getAreaName();
         RegionModel ugcRegion;
         if (StringUtils.isEmpty(regionName)) {
             areaName = COMMENTS_AREA;
             regionName = COMMENTS_REGION;
 
-            ugcRegion = FindRegion(pageModel.getRegions(), COMMENTS_REGION);
+            ugcRegion = findRegion(pageModel.getRegions(), COMMENTS_REGION);
             if (ugcRegion == null) {
-                CreateRegion(pageModel, areaName, regionName);
+                createRegion(pageModel, areaName, regionName);
             }
         } else {
-            ugcRegion = FindRegion(pageModel.getRegions(), regionName);
+            ugcRegion = findRegion(pageModel.getRegions(), regionName);
             if (ugcRegion == null) {
                 log.error("Unable to locate region for comments '{}'.", regionName);
             }
@@ -226,17 +226,17 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
 
         // Entity Comments
         pageModel.getRegions().stream().forEach(region -> {
-            AddCommentsViews(pageModel, region, localization, ugcRegion);
+            addCommentsViews(pageModel, region, localization, ugcRegion);
         });
 
         if (ugcRegion != null) {
             // Page Comments
-            if (ShowComments(ugcMetadata)) {
-                ugcRegion.getEntities().add(CreateUgcCommentsEntity(localization, pageModel.getId(), TcmUtils.PAGE_ITEM_TYPE));
+            if (showComments(ugcMetadata)) {
+                ugcRegion.getEntities().add(createUgcCommentsEntity(localization, pageModel.getId(), TcmUtils.PAGE_ITEM_TYPE));
             }
-            if (PostComments(ugcMetadata)) {
-                ugcRegion.getEntities().add(CreateUgcPostCommentEntity(localization, pageModel.getId(), TcmUtils.PAGE_ITEM_TYPE,
-                        UgcPostFormMetadata(ugcMetadata)));
+            if (postComments(ugcMetadata)) {
+                ugcRegion.getEntities().add(createUgcPostCommentEntity(localization, pageModel.getId(), TcmUtils.PAGE_ITEM_TYPE,
+                        ugcPostFormMetadata(ugcMetadata)));
             }
         }
         return pageModel;
@@ -245,10 +245,10 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
     @Override
     public <T extends EntityModel> T buildEntityModel(@Nullable T entityModel, EntityModelData entityModelData, @Nullable Class<T> expectedClass) throws DxaException {
 
-        ContentModelData ugcMetadata = UgcMetadata(entityModelData.getComponentTemplate().getMetadata());
-        entityModel.addExtensionData(SHOW_COMMENTS_EXT_DATA, ShowComments(ugcMetadata));
-        entityModel.addExtensionData(POST_COMMENTS_EXT_DATA, (PostComments(ugcMetadata) ? UgcPostFormMetadata(ugcMetadata) : null));
-        entityModel.addExtensionData(COMMENTS_ENTITY_REGION_EXT_DATA, GetValue(ugcMetadata, COMMENTS_REGION_KEY, String.class));
+        ContentModelData ugcMetadata = ugcMetadata(entityModelData.getComponentTemplate().getMetadata());
+        entityModel.addExtensionData(SHOW_COMMENTS_EXT_DATA, showComments(ugcMetadata));
+        entityModel.addExtensionData(POST_COMMENTS_EXT_DATA, (postComments(ugcMetadata) ? ugcPostFormMetadata(ugcMetadata) : null));
+        entityModel.addExtensionData(COMMENTS_ENTITY_REGION_EXT_DATA, getValue(ugcMetadata, COMMENTS_REGION_KEY, String.class));
 
         return entityModel;
     }
