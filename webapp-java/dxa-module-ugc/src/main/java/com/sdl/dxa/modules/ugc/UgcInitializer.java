@@ -19,8 +19,6 @@ import org.springframework.stereotype.Component;
 
 @Configuration
 @ComponentScan("com.sdl.dxa.modules.ugc")
-
-
 public class UgcInitializer {
 
     @Bean

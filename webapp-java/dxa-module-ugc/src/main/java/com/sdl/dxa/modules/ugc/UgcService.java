@@ -21,10 +21,7 @@ import java.net.URISyntaxException;
 import java.time.DayOfWeek;
 import java.time.Month;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TimeZone;
+import java.util.*;
 
 @Service
 @Slf4j
@@ -53,9 +50,9 @@ public class UgcService {
      * @param skip
      * @return List of Comments
      */
-    public List<Comment> getComments(int publicationId, int pageId, boolean descending, List<Integer> statuses, int top, int skip) {
+    public List<Comment> getComments(int publicationId, int pageId, boolean descending, Integer[] statuses, int top, int skip) {
         final List<Status> statusStatuses = new ArrayList<>();
-        statuses.stream().forEach(status -> {
+        Arrays.stream(statuses).forEach(status -> {
             statusStatuses.add(Status.getStatusForId(status));
         });
         final SimpleCommentsFilter filter = new SimpleCommentsFilter()
