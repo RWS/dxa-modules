@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Sdl.Web.Common.Configuration;
@@ -26,6 +27,9 @@ namespace Sdl.Web.Modules.TridionDocs.Localization
                 LastRefresh = DateTime.Now;
             }
         }
+
+        public override IDictionary GetResources(string sectionName = null)
+            => new Hashtable(); // no resources so return empty hash to avoid default impl
 
         public override bool IsStaticContentUrl(string urlPath)
         {
