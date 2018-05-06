@@ -18,20 +18,10 @@ namespace Sdl.Web.Modules.Ugc.Controllers
             UgcComments model = base.EnrichModel(sourceModel) as UgcComments;
             if (model != null)
             {
-                if (Request.HttpMethod == "POST")
-                {
-                    // don't retrieve comments on a POST and to keep rendering happy give it an
-                    // empty list
-                    model.Comments = new List<UgcComment>();
-                }
-                else
-                {
-                    var ugcService = new UgcService();
-                    var comments = ugcService.GetComments(model.Target.PublicationId, model.Target.ItemId, false,
-                        new int[] {}, 0, 0);
-                    model.Comments = CreateEntities(comments);
-                }
-
+                var ugcService = new UgcService();
+                var comments = ugcService.GetComments(model.Target.PublicationId, model.Target.ItemId, false,
+                    new int[] {}, 0, 0);
+                model.Comments = CreateEntities(comments);
                 return model;
             }
 
