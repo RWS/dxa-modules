@@ -112,7 +112,7 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
                 }
 
                 if (entity.getExtensionData().containsKey(SHOW_COMMENTS_EXT_DATA) &&
-                        (boolean) entity.getExtensionData().get(SHOW_COMMENTS_EXT_DATA)) {
+                        (Boolean) entity.getExtensionData().get(SHOW_COMMENTS_EXT_DATA)) {
                     entities.add(createUgcCommentsEntity(localization, entity.getId(), TcmUtils.COMPONENT_ITEM_TYPE));
                 }
                 if (entity.getExtensionData().containsKey(POST_COMMENTS_EXT_DATA) && entity.getExtensionData().get(POST_COMMENTS_EXT_DATA) != null) {
@@ -129,31 +129,31 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
         });
     }
 
-    private static UgcComments createUgcCommentsEntity(Localization localization, String id, int componentItemType) {
+    private static UgcComments createUgcCommentsEntity(Localization localization, String id, int itemType) {
         final MvcData mvcData = MvcDataCreator.creator()
                 .fromQualifiedName(COMMENTS_QUALIFIED_NAME)
                 .defaults(DefaultsMvcData.ENTITY)
                 .create();
         final UgcComments model = new UgcComments();
         try {
-            model.setTarget(new TCMURI(TcmUtils.buildTcmUri(localization.getId(), id, componentItemType)));
+            model.setTarget(new TCMURI(TcmUtils.buildTcmUri(localization.getId(), id, itemType)));
         } catch (ParseException e) {
-            log.error("Unable to process  TCMURI '{}'.", TcmUtils.buildTcmUri(localization.getId(), id, componentItemType));
+            log.error("Unable to process  TCMURI '{}'.", TcmUtils.buildTcmUri(localization.getId(), id, itemType));
         }
         model.setMvcData(mvcData);
         return model;
     }
 
-    private static UgcPostCommentForm createUgcPostCommentEntity(Localization localization, String id, int componentItemType, ContentModelData postFormConfig) {
+    private static UgcPostCommentForm createUgcPostCommentEntity(Localization localization, String id, int itemType, ContentModelData postFormConfig) {
         final MvcData mvcData = MvcDataCreator.creator()
                 .fromQualifiedName(POST_FORM_QUALIFIED_NAME)
                 .defaults(DefaultsMvcData.ENTITY)
                 .create();
         final UgcPostCommentForm model = new UgcPostCommentForm();
         try {
-            model.setTarget(new TCMURI(TcmUtils.buildTcmUri(localization.getId(), id, componentItemType)));
+            model.setTarget(new TCMURI(TcmUtils.buildTcmUri(localization.getId(), id, itemType)));
         } catch (ParseException e) {
-            log.error("Unable to process  TCMURI '{}'.", TcmUtils.buildTcmUri(localization.getId(), id, componentItemType));
+            log.error("Unable to process  TCMURI '{}'.", TcmUtils.buildTcmUri(localization.getId(), id, itemType));
         }
         model.setMvcData(mvcData);
         model.setUserNameLabel(getValue(postFormConfig, "userNameLabel", String.class));
@@ -175,25 +175,32 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
         return ugcMetadata == null ? null : ugcMetadata.getAndCast(POST_FORM_CONFIG, ContentModelData.class);
     }
 
-    private static boolean showComments(ContentModelData ugcMetadata) {
-        return getValue(ugcMetadata, SHOW_COMMENTS_KEY, boolean.class);
+    private static Boolean showComments(ContentModelData ugcMetadata) {
+        return getValue(ugcMetadata, SHOW_COMMENTS_KEY, Boolean.class);
     }
 
-    private static boolean postComments(ContentModelData ugcMetadata) {
-        return getValue(ugcMetadata, ALLOW_POST_KEY, boolean.class);
+    private static Boolean postComments(ContentModelData ugcMetadata) {
+        return getValue(ugcMetadata, ALLOW_POST_KEY, Boolean.class);
     }
 
     private static <T> T getValue(ContentModelData metadata, String name, Class<T> type) {
         if (metadata == null || !metadata.containsKey(name)) {
+            if (type == Boolean.class) {
+                //noinspection unchecked
+                return (T) (Boolean.valueOf("No"));
+            }
             return null;
         }
         Object v = metadata.get(name);
         if (v == null) {
-            return null;
+            if (type == Boolean.class) {
+                //noinspection unchecked
+                return (T) Boolean.FALSE;
+            }return null;
         }
         if (type == Boolean.class) {
             //noinspection unchecked
-            return (T) Boolean.valueOf("Yes");
+            return (T) (v.toString().equalsIgnoreCase("yes")? Boolean.TRUE:Boolean.FALSE);
         }
         //noinspection unchecked
         return (T) v;
@@ -208,23 +215,24 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
 
         String regionName = getValue(ugcMetadata, COMMENTS_REGION_KEY, String.class);
         String areaName = pageModel.getMvcData().getAreaName();
-        RegionModel ugcRegion;
+        final RegionModel ugcRegion;RegionModel ugcRegion1;
         if (StringUtils.isEmpty(regionName)) {
             areaName = COMMENTS_AREA;
             regionName = COMMENTS_REGION;
 
-            ugcRegion = findRegion(pageModel.getRegions(), COMMENTS_REGION);
-            if (ugcRegion == null) {
-                createRegion(pageModel, areaName, regionName);
+            ugcRegion1 = findRegion(pageModel.getRegions(), COMMENTS_REGION);
+            if (ugcRegion1 == null) {
+                ugcRegion1 = createRegion(pageModel, areaName, regionName);
             }
         } else {
-            ugcRegion = findRegion(pageModel.getRegions(), regionName);
-            if (ugcRegion == null) {
+            ugcRegion1 = findRegion(pageModel.getRegions(), regionName);
+            if (ugcRegion1 == null) {
                 log.error("Unable to locate region for comments '{}'.", regionName);
             }
         }
 
         // Entity Comments
+        ugcRegion = ugcRegion1;
         pageModel.getRegions().stream().forEach(region -> {
             addCommentsViews(pageModel, region, localization, ugcRegion);
         });
@@ -246,10 +254,11 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
     public <T extends EntityModel> T buildEntityModel(@Nullable T entityModel, EntityModelData entityModelData, @Nullable Class<T> expectedClass) throws DxaException {
 
         final ContentModelData ugcMetadata = ugcMetadata(entityModelData.getComponentTemplate().getMetadata());
-        entityModel.addExtensionData(SHOW_COMMENTS_EXT_DATA, showComments(ugcMetadata));
-        entityModel.addExtensionData(POST_COMMENTS_EXT_DATA, (postComments(ugcMetadata) ? ugcPostFormMetadata(ugcMetadata) : null));
-        entityModel.addExtensionData(COMMENTS_ENTITY_REGION_EXT_DATA, getValue(ugcMetadata, COMMENTS_REGION_KEY, String.class));
-
+        if (ugcMetadata != null) {
+                entityModel.addExtensionData(SHOW_COMMENTS_EXT_DATA, showComments(ugcMetadata));
+            entityModel.addExtensionData(POST_COMMENTS_EXT_DATA, (postComments(ugcMetadata) ? ugcPostFormMetadata(ugcMetadata) : null));
+            entityModel.addExtensionData(COMMENTS_ENTITY_REGION_EXT_DATA, getValue(ugcMetadata, COMMENTS_REGION_KEY, String.class));
+        }
         return entityModel;
     }
 

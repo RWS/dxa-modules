@@ -8,6 +8,7 @@ import com.sdl.dxa.modules.ugc.data.PostedComment;
 import com.sdl.dxa.modules.ugc.data.PubIdTitleLang;
 import com.sdl.webapp.common.controller.BaseController;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,14 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @RequestMapping(value = {"/api/comments", "/{path}/api/comments"})
 @Slf4j
 public class UgcApiController extends BaseController {
+
+    @Autowired
+    private UgcService ugcService;
+
+    @Autowired
+    public UgcApiController(UgcService ugcService) {
+        this.ugcService = ugcService;
+    }
 
     @RequestMapping(method = GET, value = "/{publicationId}/{pageId}",
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -42,7 +51,6 @@ public class UgcApiController extends BaseController {
                                         @RequestParam(value = "skip",
                                                 required = false,
                                                 defaultValue = "0") Integer skip) {
-        final UgcService ugcService = new UgcService(context);
         return ugcService.getComments(publicationId, pageId, descending, status, top, skip);
     }
 
@@ -51,7 +59,6 @@ public class UgcApiController extends BaseController {
             consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Comment postComment(@RequestBody PostedComment input) {
-        final UgcService ugcService = new UgcService(context);
         Map<String, String> metadata = new HashMap<>();
         metadata.put("publicationTitle", input.getPublicationTitle());
         metadata.put("publicationUrl", input.getPublicationUrl());
@@ -75,7 +82,6 @@ public class UgcApiController extends BaseController {
     public String upVoteComment(@RequestParam(value = "commentId",
             required = false,
             defaultValue = "0") Integer commentId) {
-        final UgcService ugcService = new UgcService(context);
         ugcService.upVoteComment(commentId);
         return String.format("redirect:%s",context.getFullUrl());
     }
@@ -84,7 +90,6 @@ public class UgcApiController extends BaseController {
     public String downVoteComment(@RequestParam(value = "commentId",
             required = false,
             defaultValue = "0") Integer commentId) {
-        final UgcService ugcService = new UgcService(context);
         ugcService.downVoteComment(commentId);
         return String.format("redirect:%s",context.getFullUrl());
     }

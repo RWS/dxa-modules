@@ -120,7 +120,9 @@ public class UgcService {
         }
         final Comment c = new Comment();
         c.setId(comment.getIdLong());
-        c.setParentId(comment.getParent().getIdLong());
+        if (comment.getParent() != null) {
+            c.setParentId(comment.getParent().getIdLong());
+        }
         c.setItemId(comment.getItemId());
         c.setItemType(comment.getItemType());
         c.setItemPublicationId(comment.getItemPublicationId());
@@ -133,6 +135,11 @@ public class UgcService {
         if (comment.getCreationDate() != null) {
             c.setCreationDate(convert(comment.getCreationDate()));
         }
+        if (comment.getLastModifiedDate() != null) {
+            c.setLastModifiedDate(convert(comment.getLastModifiedDate()));
+        }
+        c.setChildren(convert(comment.getChildren()));
+
         return c;
     }
 

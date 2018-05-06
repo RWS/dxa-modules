@@ -12,11 +12,13 @@ import com.sdl.webapp.common.api.mapping.views.ModuleInfo;
 import com.sdl.webapp.common.api.mapping.views.RegisteredViewModel;
 import com.sdl.webapp.common.api.mapping.views.RegisteredViewModels;
 import com.sdl.webapp.common.api.model.page.DefaultPageModel;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Configuration
 @ComponentScan("com.sdl.dxa.modules.ugc")
 public class UgcInitializer {
@@ -32,7 +34,6 @@ public class UgcInitializer {
     @RegisteredViewModels({
             @RegisteredViewModel(viewName = "Comments", modelClass = UgcRegion.class),
             @RegisteredViewModel(viewName = "UgcComments", modelClass = UgcComments.class),
-            @RegisteredViewModel(viewName = "UgcPostCommentForm", modelClass = UgcPostCommentForm.class),
             @RegisteredViewModel(viewName = "UgcPostCommentForm", modelClass = UgcPostCommentForm.class),
             @RegisteredViewModel(viewName = "GeneralPage", modelClass = DefaultPageModel.class)
     })

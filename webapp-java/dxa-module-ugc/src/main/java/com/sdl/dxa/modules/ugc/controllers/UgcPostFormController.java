@@ -27,6 +27,9 @@ public class UgcPostFormController {
     private final UgcPostCommentFormValidator ugcPostCommentFormValidator;
 
     @Autowired
+    private UgcService ugcService;
+
+    @Autowired
     public UgcPostFormController(WebRequestContext webRequestContext,
                          UgcPostCommentFormValidator ugcPostCommentFormValidator) {
         this.webRequestContext = webRequestContext;
@@ -45,7 +48,6 @@ public class UgcPostFormController {
         }
             log.trace("Comment Form complete and valid");
 
-            UgcService ugcService = new UgcService(webRequestContext);
             ugcService.postComment(form.getTarget().getPublicationId(), form.getTarget().getItemId(), form.getUserName(),
                     form.getEmailAddress(), form.getContent(), form.getParentId(), form.getMetadata());
 

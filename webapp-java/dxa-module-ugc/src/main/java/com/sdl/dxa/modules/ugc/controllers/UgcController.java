@@ -8,14 +8,21 @@ import com.sdl.dxa.modules.ugc.model.entity.UgcPostCommentForm;
 import com.sdl.webapp.common.api.model.EntityModel;
 import com.sdl.webapp.common.api.model.ViewModel;
 import com.sdl.webapp.common.controller.EntityController;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@RequestMapping({"/system/mvc/Framework/Ugc"})
 public class UgcController extends EntityController {
+
+    @Autowired
+    private UgcService ugcService;
 
     private static List<UgcComment> createEntities(List<Comment> comments) {
 
@@ -26,6 +33,7 @@ public class UgcController extends EntityController {
 
     private static UgcComment createEntity(Comment comment) {
         final UgcComment ugcComment = new UgcComment();
+
         ugcComment.setComments(createEntities(comment.getChildren()));
         ugcComment.setCommentData(comment);
         return ugcComment;
@@ -36,7 +44,6 @@ public class UgcController extends EntityController {
 
         if (model instanceof UgcComments) {
             final ViewModel enrichedModel = super.enrichModel(model, request);
-            final UgcService ugcService = new UgcService(context);
             final UgcComments ugcComments = (UgcComments) (enrichedModel instanceof EntityModel ? enrichedModel : model);
             final List<Comment> comments = ugcService.getComments(ugcComments.getTarget().getPublicationId(),
                     ugcComments.getTarget().getItemId(), false, new Integer[0], 0, 0);
@@ -52,4 +59,10 @@ public class UgcController extends EntityController {
         }
         return model;
     }
+
+    @RequestMapping({"Entity/{entityId}"})
+    public String handleGetEntity(HttpServletRequest request, @PathVariable String entityId) throws Exception {
+        return this.handleEntityRequest(request, entityId);
+    }
+
 }
