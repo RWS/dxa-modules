@@ -7,7 +7,7 @@
 <jsp:useBean id="markup" type="com.sdl.webapp.common.markup.Markup" scope="request"/>
 
 <div ${markup.entity(entity)}>
-    
+
     <form:form method="post" commandName="entity"  action="${localization.localizePath('/api/ugc/postcomment')}">
         <%--@elvariable id="errors" type="java.util.ArrayList<org.springframework.validation.ObjectError>"--%>
         <c:if test="${not empty errors}">
@@ -30,6 +30,9 @@
         <div class="form-group">
 			<form:input path="content" placeholder="${entity.contentLabel}" cssClass="form-control"/>
         </div>
+        <form:hidden path="formUrl"/>
+        <form:hidden path="target"/>
+
         <div class="form-group pull-right">
             <button type="reset" class="btn btn-primary">Cancel</button>
             <button type="submit" class="btn btn-primary">${entity.submitButtonLabel}</button>

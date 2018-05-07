@@ -25,8 +25,7 @@
 						<span><i class="fa fa-heart"></i></span>
 						<span>${comment.commentData.rating}</span>
 						<span><a href="/api/comments/upvote?commentId=${comment.commentData.id}"><i class="fa fa-thumbs-up"></i></a></span>
-						<span>-</span>
-						<span><a href="#">Reply</a></span>
+						<span><a href="/api/comments/downvote?commentId=${comment.commentData.id}"><i class="fa fa-thumbs-down"></i></a></span>
 					</footer>
 				</div>
 			</div>                      

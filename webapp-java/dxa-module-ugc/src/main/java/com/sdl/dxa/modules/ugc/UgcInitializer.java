@@ -34,7 +34,7 @@ public class UgcInitializer {
     @RegisteredViewModels({
             @RegisteredViewModel(viewName = "Comments", modelClass = UgcRegion.class),
             @RegisteredViewModel(viewName = "UgcComments", modelClass = UgcComments.class),
-            @RegisteredViewModel(viewName = "UgcPostCommentForm", modelClass = UgcPostCommentForm.class),
+            @RegisteredViewModel(viewName = "UgcPostCommentForm", modelClass = UgcPostCommentForm.class, controllerName = "Ugc"),
             @RegisteredViewModel(viewName = "GeneralPage", modelClass = DefaultPageModel.class)
     })
     @ModuleInfo(name = "UGC module", areaName = "Ugc", description = "Support for UGC views")

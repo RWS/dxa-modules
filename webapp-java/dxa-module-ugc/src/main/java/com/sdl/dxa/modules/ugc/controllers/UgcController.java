@@ -54,8 +54,8 @@ public class UgcController extends EntityController {
         if (model instanceof UgcPostCommentForm) {
             final ViewModel enrichedModel = super.enrichModel(model, request);
             final UgcPostCommentForm postForm = (UgcPostCommentForm) (enrichedModel instanceof EntityModel ? enrichedModel : model);
-            postForm.setFormUrl(context.getPage().getUrl());
 
+            postForm.setFormUrl(context.getPage().getUrl());
         }
         return model;
     }

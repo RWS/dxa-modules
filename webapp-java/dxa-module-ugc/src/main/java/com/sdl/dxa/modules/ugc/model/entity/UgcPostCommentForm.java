@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sdl.dxa.caching.NeverCached;
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticMappingIgnore;
 import com.sdl.webapp.common.api.model.entity.AbstractEntityModel;
+import com.sdl.webapp.common.api.model.validation.DynamicCodeResolver;
 import com.sdl.webapp.common.api.model.validation.DynamicValidationMessage;
 import com.tridion.util.CMURI;
 import lombok.Data;
@@ -113,6 +114,16 @@ public class UgcPostCommentForm extends AbstractEntityModel {
     @DynamicValidationMessage(errorCode = "content.empty")
     public String getNoContentMessage() {
         return noContentMessage;
+    }
+
+    /**
+     * Resolves error code using {@link DynamicCodeResolver}.
+     *
+     * @param code code to resolve
+     * @return resolved message
+     */
+    public String resolveErrorCode(String code) {
+        return DynamicCodeResolver.resolveCode(code, this);
     }
 
 }

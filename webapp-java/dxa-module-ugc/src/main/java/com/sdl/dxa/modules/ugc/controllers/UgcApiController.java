@@ -13,6 +13,8 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -81,17 +83,17 @@ public class UgcApiController extends BaseController {
     @RequestMapping("/upvote")
     public String upVoteComment(@RequestParam(value = "commentId",
             required = false,
-            defaultValue = "0") Integer commentId) {
+            defaultValue = "0") Integer commentId, HttpServletRequest request, HttpServletResponse response) {
         ugcService.upVoteComment(commentId);
-        return String.format("redirect:%s",context.getFullUrl());
+        return String.format("redirect:%s",request.getHeader("referer"));
     }
 
     @RequestMapping("/downvote")
     public String downVoteComment(@RequestParam(value = "commentId",
             required = false,
-            defaultValue = "0") Integer commentId) {
+            defaultValue = "0") Integer commentId, HttpServletRequest request, HttpServletResponse response) {
         ugcService.downVoteComment(commentId);
-        return String.format("redirect:%s",context.getFullUrl());
+        return String.format("redirect:%s",request.getHeader("referer"));
     }
 
     private void addPubIdTitleLangToCommentMetadata(@RequestBody PostedComment input, Map<String, String> metadata) {

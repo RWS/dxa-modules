@@ -7,6 +7,7 @@ import com.sdl.webapp.common.api.WebRequestContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,7 +39,7 @@ public class UgcPostFormController {
 
     @RequestMapping(value = "/postcomment", method = RequestMethod.POST)
     public String postComment(@ModelAttribute("entity") UgcPostCommentForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes,
-                        HttpServletRequest request, HttpServletResponse response) {
+                              HttpServletRequest request, HttpServletResponse response) {
         ugcPostCommentFormValidator.validate(form, bindingResult);
 
         if (bindingResult.hasErrors()) {
