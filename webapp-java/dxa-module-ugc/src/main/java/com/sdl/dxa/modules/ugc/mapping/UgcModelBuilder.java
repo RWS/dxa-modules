@@ -49,13 +49,10 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
     private static final String COMMENTS_QUALIFIED_NAME = "Ugc:Ugc:UgcComments";
     private static final String POST_FORM_QUALIFIED_NAME = "Ugc:Ugc:UgcPostCommentForm";
 
-    private final HttpServletRequest httpServletRequest;
-
     private final WebRequestContext webRequestContext;
 
     @Autowired
-    public UgcModelBuilder(HttpServletRequest httpServletRequest, WebRequestContext webRequestContext) {
-        this.httpServletRequest = httpServletRequest;
+    public UgcModelBuilder(WebRequestContext webRequestContext) {
         this.webRequestContext = webRequestContext;
     }
 
@@ -121,12 +118,8 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
             }
         }
         // Add our ugc views to either the same region as the entity we have comments enabled for or the ugc "Comments" region if available
-        regionEntities.stream().forEach(entity -> {
-            region.getEntities().add(entity);
-        });
-        region.getRegions().stream().forEach(childRegion -> {
-            addCommentsViews(pageModel, childRegion, localization, ugcRegion);
-        });
+        regionEntities.forEach(entity -> region.getEntities().add(entity));
+        region.getRegions().forEach(childRegion -> addCommentsViews(pageModel, childRegion, localization, ugcRegion));
     }
 
     private static UgcComments createUgcCommentsEntity(Localization localization, String id, int itemType) {
@@ -196,16 +189,22 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
             if (type == Boolean.class) {
                 //noinspection unchecked
                 return (T) Boolean.FALSE;
-            }return null;
+            }
+            return null;
         }
         if (type == Boolean.class) {
             //noinspection unchecked
-            return (T) (v.toString().equalsIgnoreCase("yes")? Boolean.TRUE:Boolean.FALSE);
+            return (T) (v.toString().equalsIgnoreCase("yes") ? Boolean.TRUE : Boolean.FALSE);
         }
         //noinspection unchecked
         return (T) v;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @dxa.publicApi
+     */
     @Nullable
     @Override
     public PageModel buildPageModel(@Nullable PageModel pageModel, @NotNull PageModelData modelData) {
@@ -215,27 +214,26 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
 
         String regionName = getValue(ugcMetadata, COMMENTS_REGION_KEY, String.class);
         String areaName = pageModel.getMvcData().getAreaName();
-        final RegionModel ugcRegion;RegionModel ugcRegion1;
+        final RegionModel ugcRegion;
+        RegionModel ugcRegionModel;
         if (StringUtils.isEmpty(regionName)) {
             areaName = COMMENTS_AREA;
             regionName = COMMENTS_REGION;
 
-            ugcRegion1 = findRegion(pageModel.getRegions(), COMMENTS_REGION);
-            if (ugcRegion1 == null) {
-                ugcRegion1 = createRegion(pageModel, areaName, regionName);
+            ugcRegionModel = findRegion(pageModel.getRegions(), COMMENTS_REGION);
+            if (ugcRegionModel == null) {
+                ugcRegionModel = createRegion(pageModel, areaName, regionName);
             }
         } else {
-            ugcRegion1 = findRegion(pageModel.getRegions(), regionName);
-            if (ugcRegion1 == null) {
+            ugcRegionModel = findRegion(pageModel.getRegions(), regionName);
+            if (ugcRegionModel == null) {
                 log.error("Unable to locate region for comments '{}'.", regionName);
             }
         }
 
         // Entity Comments
-        ugcRegion = ugcRegion1;
-        pageModel.getRegions().stream().forEach(region -> {
-            addCommentsViews(pageModel, region, localization, ugcRegion);
-        });
+        ugcRegion = ugcRegionModel;
+        pageModel.getRegions().forEach(region -> addCommentsViews(pageModel, region, localization, ugcRegion));
 
         if (ugcRegion != null) {
             // Page Comments
@@ -250,18 +248,28 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
         return pageModel;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @dxa.publicApi
+     */
     @Override
     public <T extends EntityModel> T buildEntityModel(@Nullable T entityModel, EntityModelData entityModelData, @Nullable Class<T> expectedClass) throws DxaException {
 
         final ContentModelData ugcMetadata = ugcMetadata(entityModelData.getComponentTemplate().getMetadata());
         if (ugcMetadata != null) {
-                entityModel.addExtensionData(SHOW_COMMENTS_EXT_DATA, showComments(ugcMetadata));
+            entityModel.addExtensionData(SHOW_COMMENTS_EXT_DATA, showComments(ugcMetadata));
             entityModel.addExtensionData(POST_COMMENTS_EXT_DATA, (postComments(ugcMetadata) ? ugcPostFormMetadata(ugcMetadata) : null));
             entityModel.addExtensionData(COMMENTS_ENTITY_REGION_EXT_DATA, getValue(ugcMetadata, COMMENTS_REGION_KEY, String.class));
         }
         return entityModel;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @dxa.publicApi
+     */
     @Override
     public int getOrder() {
         return 0;

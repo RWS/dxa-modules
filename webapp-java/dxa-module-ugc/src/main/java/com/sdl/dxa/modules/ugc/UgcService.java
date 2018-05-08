@@ -6,7 +6,6 @@ import com.sdl.delivery.ugc.client.comment.impl.SimpleCommentsFilter;
 import com.sdl.dxa.modules.ugc.data.Comment;
 import com.sdl.dxa.modules.ugc.data.User;
 import com.sdl.web.ugc.Status;
-import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.util.TcmUtils;
 import com.tridion.ambientdata.AmbientDataContext;
 import com.tridion.ambientdata.claimstore.ClaimStore;
@@ -28,7 +27,7 @@ import java.util.*;
 public class UgcService {
 
     private static final int maximumThreadsDepth = -1;
-    private final WebRequestContext webRequestContext;
+//    private final WebRequestContext webRequestContext;
 
     @Autowired
     private UgcCommentApi ugcCommentApi;
@@ -37,24 +36,21 @@ public class UgcService {
     private UgcVoteCommentApi ugcVoteCommentApi;
 
     @Autowired
-    public UgcService(WebRequestContext webRequestContext) {
-        this.webRequestContext = webRequestContext;
+    public UgcService() {
     }
 
     /**
-     * @param publicationId
-     * @param pageId
-     * @param descending
-     * @param statuses
-     * @param top
-     * @param skip
-     * @return List of Comments
+     * @param publicationId Publication Id
+     * @param pageId        Page Id
+     * @param descending    Order
+     * @param statuses      Limit to specific statuses
+     * @param top           maximum number of comments to show
+     * @param skip          number of comments to skip
+     * @return List of {@link Comment}
      */
     public List<Comment> getComments(int publicationId, int pageId, boolean descending, Integer[] statuses, int top, int skip) {
         final List<Status> statusStatuses = new ArrayList<>();
-        Arrays.stream(statuses).forEach(status -> {
-            statusStatuses.add(Status.getStatusForId(status));
-        });
+        Arrays.stream(statuses).forEach(status -> statusStatuses.add(Status.getStatusForId(status)));
         final SimpleCommentsFilter filter = new SimpleCommentsFilter()
                 .withTop(top)
                 .withSkip(skip)
@@ -65,14 +61,14 @@ public class UgcService {
     }
 
     /**
-     * @param publicationId
-     * @param pageId
-     * @param username
-     * @param email
-     * @param content
-     * @param parentId
-     * @param metadata
-     * @return Comment
+     * @param publicationId Publication Id
+     * @param pageId        Page Id
+     * @param username User name
+     * @param email Email address
+     * @param content Post content
+     * @param parentId parent
+     * @param metadata Meta data
+     * @return {@link Comment}
      */
     public Comment postComment(int publicationId, int pageId, String username, String email, String content,
                                int parentId, Map<String, String> metadata) {
@@ -91,14 +87,14 @@ public class UgcService {
     }
 
     /**
-     * @param commentId
+     * @param commentId comment id
      */
     public void upVoteComment(long commentId) {
         ugcVoteCommentApi.voteCommentUp(commentId);
     }
 
     /**
-     * @param commentId
+     * @param commentId comment id
      */
     public void downVoteComment(long commentId) {
         ugcVoteCommentApi.voteCommentDown(commentId);
@@ -107,9 +103,7 @@ public class UgcService {
 
     private List<Comment> convert(List<com.sdl.delivery.ugc.client.odata.edm.Comment> comments) {
         final List<Comment> convertedComments = new ArrayList<>();
-        comments.stream().forEach(comment -> {
-            convertedComments.add(convert(comment));
-        });
+        comments.forEach(comment -> convertedComments.add(convert(comment)));
 
         return convertedComments;
     }

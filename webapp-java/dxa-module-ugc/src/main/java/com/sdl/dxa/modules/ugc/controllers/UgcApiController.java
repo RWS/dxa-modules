@@ -32,8 +32,7 @@ public class UgcApiController extends BaseController {
     private UgcService ugcService;
 
     @Autowired
-    public UgcApiController(UgcService ugcService) {
-        this.ugcService = ugcService;
+    public UgcApiController() {
     }
 
     @RequestMapping(method = GET, value = "/{publicationId}/{pageId}",
