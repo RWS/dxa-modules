@@ -31,10 +31,10 @@
 <body>
 <dxa:region name="Header"/>
 <main class="page-row page-row-expanded ${pageModel.htmlClasses}" role="main">
-    <!-- default (desktop) view -->  
+    <!-- default (desktop) view -->
     <div class="container-fluid page-border">
-		<dxa:region name="Hero"/>
-		<dxa:region name="Content Tools"/>
+        <dxa:region name="Hero"/>
+        <dxa:region name="Content Tools"/>
         <div class="row">
             <c:set var="hasLeftBar"
                    value="${pageModel.containsRegion('Left-Navigation') || pageModel.containsRegion('Left')}"/>
@@ -49,9 +49,9 @@
                 <dxa:regions exclude="Header,Footer,Hero,Content Tools,Left Navigation,Left,Comments"
                              containerSize="${mainContainerSize}"/>
             </div>
-			<div class="col-sm-12 col-md-@(mainContainerSize)">
-				<dxa:region name="Comments" containerSize="${mainContainerSize}"/>
-            </div>      
+            <div class="col-sm-12 col-md-@(mainContainerSize)">
+                <dxa:region name="Comments" containerSize="${mainContainerSize}"/>
+            </div>
         </div>
     </div>
 </main>

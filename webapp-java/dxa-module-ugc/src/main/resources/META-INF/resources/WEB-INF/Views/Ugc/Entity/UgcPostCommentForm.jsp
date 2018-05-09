@@ -8,7 +8,7 @@
 
 <div ${markup.entity(entity)}>
 
-    <form:form method="post" commandName="entity"  action="${localization.localizePath('/api/ugc/postcomment')}">
+    <form:form method="post" commandName="entity" action="${localization.localizePath('/api/ugc/postcomment')}">
         <%--@elvariable id="errors" type="java.util.ArrayList<org.springframework.validation.ObjectError>"--%>
         <c:if test="${not empty errors}">
             <div class="alert-danger">
@@ -22,13 +22,13 @@
             </div>
         </c:if>
         <div class="form-group">
-			<form:input path="userName" placeholder="${entity.userNameLabel}" cssClass="form-control"/>
+            <form:input path="userName" placeholder="${entity.userNameLabel}" cssClass="form-control"/>
         </div>
         <div class="form-group">
-			<form:input path="emailAddress" placeholder="${entity.emailAddressLabel}" cssClass="form-control"/>
+            <form:input path="emailAddress" placeholder="${entity.emailAddressLabel}" cssClass="form-control"/>
         </div>
         <div class="form-group">
-			<form:input path="content" placeholder="${entity.contentLabel}" cssClass="form-control"/>
+            <form:input path="content" placeholder="${entity.contentLabel}" cssClass="form-control"/>
         </div>
         <form:hidden path="formUrl"/>
         <form:hidden path="target"/>

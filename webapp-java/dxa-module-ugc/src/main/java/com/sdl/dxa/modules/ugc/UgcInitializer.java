@@ -1,9 +1,7 @@
 package com.sdl.dxa.modules.ugc;
 
 import com.sdl.delivery.ugc.client.comment.UgcCommentApi;
-import com.sdl.delivery.ugc.client.comment.UgcVoteCommentApi;
 import com.sdl.delivery.ugc.client.comment.impl.DefaultUgcCommentApi;
-import com.sdl.dxa.modules.ugc.mock.MockUgcVoteCommentApi;
 import com.sdl.dxa.modules.ugc.model.entity.UgcComments;
 import com.sdl.dxa.modules.ugc.model.entity.UgcPostCommentForm;
 import com.sdl.dxa.modules.ugc.model.entity.UgcRegion;
@@ -33,11 +31,7 @@ public class UgcInitializer {
         return new DefaultUgcCommentApi();
     }
 
-    //Todo: create or use real UgcVoteCommentApi implementation
-    @Bean
-    public UgcVoteCommentApi ugcVoteCommentApi() {
-        return new MockUgcVoteCommentApi();
-    }
+    //Todo: use UgcVoteCommentApi implementation when it becomes available
 
     @Component
     @RegisteredViewModels({

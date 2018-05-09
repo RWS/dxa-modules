@@ -1,6 +1,5 @@
 package com.sdl.dxa.modules.ugc.model.entity;
 
-import com.sdl.dxa.caching.NeverCached;
 import com.sdl.webapp.common.api.model.MvcData;
 import com.sdl.webapp.common.api.model.RegionModel;
 import com.sdl.webapp.common.api.model.region.RegionModelImpl;
@@ -13,7 +12,7 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class UgcRegion  extends RegionModelImpl {
+public class UgcRegion extends RegionModelImpl {
     /**
      * @param other other Region
      */
@@ -30,7 +29,7 @@ public class UgcRegion  extends RegionModelImpl {
     }
 
     /**
-     * @param name region name
+     * @param name              region name
      * @param qualifiedViewName view name
      * @throws DxaException if name is empty or null
      */

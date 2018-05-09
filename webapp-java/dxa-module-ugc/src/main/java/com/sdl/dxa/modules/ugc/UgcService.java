@@ -1,7 +1,6 @@
 package com.sdl.dxa.modules.ugc;
 
 import com.sdl.delivery.ugc.client.comment.UgcCommentApi;
-import com.sdl.delivery.ugc.client.comment.UgcVoteCommentApi;
 import com.sdl.delivery.ugc.client.comment.impl.SimpleCommentsFilter;
 import com.sdl.dxa.modules.ugc.data.Comment;
 import com.sdl.dxa.modules.ugc.data.User;
@@ -34,8 +33,7 @@ public class UgcService {
     @Autowired
     private UgcCommentApi ugcCommentApi;
 
-    @Autowired
-    private UgcVoteCommentApi ugcVoteCommentApi;
+    //Todo: use UgcVoteCommentApi implementation when it becomes available
 
     @Autowired
     public UgcService() {
@@ -69,11 +67,11 @@ public class UgcService {
      *
      * @param publicationId Publication Id
      * @param pageId        Page Id
-     * @param username User name
-     * @param email Email address
-     * @param content Post content
-     * @param parentId parent
-     * @param metadata Meta data
+     * @param username      User name
+     * @param email         Email address
+     * @param content       Post content
+     * @param parentId      parent
+     * @param metadata      Meta data
      * @return {@link Comment}
      */
     public Comment postComment(int publicationId, int pageId, String username, String email, String content,
@@ -91,25 +89,6 @@ public class UgcService {
         return convert(
                 ugcCommentApi.postComment(TcmUtils.buildPageTcmUri(publicationId, pageId), username, email, content, parentId, metadata));
     }
-
-    /**
-     * Upvote a {@link Comment} with a specific ID on a given page
-     *
-     * @param commentId comment id
-     */
-    public void upVoteComment(long commentId) {
-        ugcVoteCommentApi.voteCommentUp(commentId);
-    }
-
-    /**
-     * Downvote a {@link Comment} with a specific ID on a given page
-     *
-     * @param commentId comment id
-     */
-    public void downVoteComment(long commentId) {
-        ugcVoteCommentApi.voteCommentDown(commentId);
-    }
-
 
     private List<Comment> convert(List<com.sdl.delivery.ugc.client.odata.edm.Comment> comments) {
         final List<Comment> convertedComments = new ArrayList<>();

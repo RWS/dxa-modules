@@ -13,7 +13,6 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -98,38 +97,6 @@ public class UgcApiController extends BaseController {
                 input.getContent(),
                 input.getParentId(),
                 metadata);
-    }
-
-    /**
-     * <p>handles upvote request</p>
-     * <p>listens to <code>basepath/upvote</code></p>
-     *
-     * @param commentId Comment Id to upvote
-     * @param request   {@link HttpServletRequest}, used to get the referer url
-     * @return redirect url
-     */
-    @RequestMapping("/upvote")
-    public String upVoteComment(@RequestParam(value = "commentId",
-            required = false,
-            defaultValue = "0") Integer commentId, HttpServletRequest request) {
-        ugcService.upVoteComment(commentId);
-        return String.format("redirect:%s", request.getHeader("referer"));
-    }
-
-    /**
-     * <p>handles downvote request</p>
-     * <p>listens to <code>basepath/downvote</code></p>
-     *
-     * @param commentId Comment Id to downvote
-     * @param request   {@link HttpServletRequest}, used to get the referer url
-     * @return redirect url
-     */
-    @RequestMapping("/downvote")
-    public String downVoteComment(@RequestParam(value = "commentId",
-            required = false,
-            defaultValue = "0") Integer commentId, HttpServletRequest request) {
-        ugcService.downVoteComment(commentId);
-        return String.format("redirect:%s", request.getHeader("referer"));
     }
 
     private void addPubIdTitleLangToCommentMetadata(@RequestBody PostedComment input, Map<String, String> metadata) {

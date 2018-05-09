@@ -46,7 +46,7 @@ public class UgcCommentsTest {
     }
 
     @Test
-    public void setTarget() throws Exception{
+    public void setTarget() throws Exception {
         //given
         target = new TCMURI(TcmUtils.buildTcmUri(1, 2, TcmUtils.COMPONENT_ITEM_TYPE));
         ugcComments.setTarget(target);

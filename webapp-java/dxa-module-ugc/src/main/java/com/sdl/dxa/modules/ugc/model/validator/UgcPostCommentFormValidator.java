@@ -13,7 +13,6 @@ import org.springframework.validation.Validator;
 public class UgcPostCommentFormValidator implements Validator {
 
     /**
-     *
      * @param clazz supported form  model class
      * @return True/False
      */

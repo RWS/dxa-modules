@@ -36,8 +36,8 @@ public class UgcPostFormController {
      * <p>handles post comment request</p>
      * <p>listens to <code>/api/ugc/postcomment</code>.</p>
      *
-     * @param form Posted Comment form
-     * @param bindingResult represents binding results
+     * @param form               Posted Comment form
+     * @param bindingResult      represents binding results
      * @param redirectAttributes Redirect attributes
      * @return redirect url
      */

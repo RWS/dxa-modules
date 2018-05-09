@@ -29,7 +29,6 @@ import java.util.List;
 
 /**
  * <p>Builds {@linkplain PageModel Page Model} ando{@linkplain EntityModel Entity Model}.</p>
- *
  */
 @Slf4j
 @Component
@@ -207,7 +206,7 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
      * <p>Extends the pagemodel with a UGC region and entities</p>
      *
      * @param originalPageModel the strongly typed Page Model to build
-     * @param modelData the DXA R2 Data Model
+     * @param modelData         the DXA R2 Data Model
      */
     @Nullable
     @Override
@@ -257,10 +256,9 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
      * @param modelData           the DXA R2 Data Model
      * @param expectedClass       required class of entity model, gets the priority if modelData contains MVC data
      * @return the strongly typed Entity Model
-     * @throws DxaException when a DXA exception occurs
      */
     @Override
-    public <T extends EntityModel> T buildEntityModel(@Nullable T originalEntityModel, EntityModelData modelData, @Nullable Class<T> expectedClass) throws DxaException {
+    public <T extends EntityModel> T buildEntityModel(@Nullable T originalEntityModel, EntityModelData modelData, @Nullable Class<T> expectedClass) {
 
         final ContentModelData ugcMetadata = ugcMetadata(modelData.getComponentTemplate().getMetadata());
         if (ugcMetadata != null) {
@@ -273,7 +271,6 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
 
     /**
      * {@inheritDoc}
-     *
      */
     @Override
     public int getOrder() {
