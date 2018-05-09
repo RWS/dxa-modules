@@ -23,11 +23,14 @@ import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <p>Builds {@linkplain PageModel Page Model} ando{@linkplain EntityModel Entity Model}.</p>
+ *
+ */
 @Slf4j
 @Component
 public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
@@ -201,74 +204,76 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
     }
 
     /**
-     * {@inheritDoc}
+     * <p>Extends the pagemodel with a UGC region and entities</p>
      *
-     * @dxa.publicApi
+     * @param originalPageModel the strongly typed Page Model to build
+     * @param modelData the DXA R2 Data Model
      */
     @Nullable
     @Override
-    public PageModel buildPageModel(@Nullable PageModel pageModel, @NotNull PageModelData modelData) {
+    public PageModel buildPageModel(@Nullable PageModel originalPageModel, @NotNull PageModelData modelData) {
         final ContentModelData metadata = modelData.getPageTemplate() == null ? null : modelData.getPageTemplate().getMetadata();
         final ContentModelData ugcMetadata = ugcMetadata(metadata);
         final Localization localization = webRequestContext.getLocalization();
 
         String regionName = getValue(ugcMetadata, COMMENTS_REGION_KEY, String.class);
-        String areaName = pageModel.getMvcData().getAreaName();
+        String areaName = originalPageModel.getMvcData().getAreaName();
         final RegionModel ugcRegion;
         RegionModel ugcRegionModel;
         if (StringUtils.isEmpty(regionName)) {
             areaName = COMMENTS_AREA;
             regionName = COMMENTS_REGION;
 
-            ugcRegionModel = findRegion(pageModel.getRegions(), COMMENTS_REGION);
+            ugcRegionModel = findRegion(originalPageModel.getRegions(), COMMENTS_REGION);
             if (ugcRegionModel == null) {
-                ugcRegionModel = createRegion(pageModel, areaName, regionName);
+                ugcRegionModel = createRegion(originalPageModel, areaName, regionName);
             }
         } else {
-            ugcRegionModel = findRegion(pageModel.getRegions(), regionName);
+            ugcRegionModel = findRegion(originalPageModel.getRegions(), regionName);
             if (ugcRegionModel == null) {
                 log.error("Unable to locate region for comments '{}'.", regionName);
             }
         }
 
-        // Entity Comments
         ugcRegion = ugcRegionModel;
-        pageModel.getRegions().forEach(region -> addCommentsViews(pageModel, region, localization, ugcRegion));
+        originalPageModel.getRegions().forEach(region -> addCommentsViews(originalPageModel, region, localization, ugcRegion));
 
         if (ugcRegion != null) {
-            // Page Comments
             if (showComments(ugcMetadata)) {
-                ugcRegion.getEntities().add(createUgcCommentsEntity(localization, pageModel.getId(), TcmUtils.PAGE_ITEM_TYPE));
+                ugcRegion.getEntities().add(createUgcCommentsEntity(localization, originalPageModel.getId(), TcmUtils.PAGE_ITEM_TYPE));
             }
             if (postComments(ugcMetadata)) {
-                ugcRegion.getEntities().add(createUgcPostCommentEntity(localization, pageModel.getId(), TcmUtils.PAGE_ITEM_TYPE,
+                ugcRegion.getEntities().add(createUgcPostCommentEntity(localization, originalPageModel.getId(), TcmUtils.PAGE_ITEM_TYPE,
                         ugcPostFormMetadata(ugcMetadata)));
             }
         }
-        return pageModel;
+        return originalPageModel;
     }
 
     /**
-     * {@inheritDoc}
+     * <p>Extends the Entity Model with Ugc extension data. Never returns null.</p>
      *
-     * @dxa.publicApi
+     * @param originalEntityModel the strongly typed Entity Model to build. Is null for the first Entity Model Builder in the ModelBuilderPipelineImpl
+     * @param modelData           the DXA R2 Data Model
+     * @param expectedClass       required class of entity model, gets the priority if modelData contains MVC data
+     * @return the strongly typed Entity Model
+     * @throws DxaException when a DXA exception occurs
      */
     @Override
-    public <T extends EntityModel> T buildEntityModel(@Nullable T entityModel, EntityModelData entityModelData, @Nullable Class<T> expectedClass) throws DxaException {
+    public <T extends EntityModel> T buildEntityModel(@Nullable T originalEntityModel, EntityModelData modelData, @Nullable Class<T> expectedClass) throws DxaException {
 
-        final ContentModelData ugcMetadata = ugcMetadata(entityModelData.getComponentTemplate().getMetadata());
+        final ContentModelData ugcMetadata = ugcMetadata(modelData.getComponentTemplate().getMetadata());
         if (ugcMetadata != null) {
-            entityModel.addExtensionData(SHOW_COMMENTS_EXT_DATA, showComments(ugcMetadata));
-            entityModel.addExtensionData(POST_COMMENTS_EXT_DATA, (postComments(ugcMetadata) ? ugcPostFormMetadata(ugcMetadata) : null));
-            entityModel.addExtensionData(COMMENTS_ENTITY_REGION_EXT_DATA, getValue(ugcMetadata, COMMENTS_REGION_KEY, String.class));
+            originalEntityModel.addExtensionData(SHOW_COMMENTS_EXT_DATA, showComments(ugcMetadata));
+            originalEntityModel.addExtensionData(POST_COMMENTS_EXT_DATA, (postComments(ugcMetadata) ? ugcPostFormMetadata(ugcMetadata) : null));
+            originalEntityModel.addExtensionData(COMMENTS_ENTITY_REGION_EXT_DATA, getValue(ugcMetadata, COMMENTS_REGION_KEY, String.class));
         }
-        return entityModel;
+        return originalEntityModel;
     }
 
     /**
      * {@inheritDoc}
      *
-     * @dxa.publicApi
      */
     @Override
     public int getOrder() {

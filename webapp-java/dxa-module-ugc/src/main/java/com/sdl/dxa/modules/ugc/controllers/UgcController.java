@@ -5,6 +5,7 @@ import com.sdl.dxa.modules.ugc.data.Comment;
 import com.sdl.dxa.modules.ugc.model.entity.UgcComment;
 import com.sdl.dxa.modules.ugc.model.entity.UgcComments;
 import com.sdl.dxa.modules.ugc.model.entity.UgcPostCommentForm;
+import com.sdl.webapp.common.api.content.ContentProviderException;
 import com.sdl.webapp.common.api.model.EntityModel;
 import com.sdl.webapp.common.api.model.ViewModel;
 import com.sdl.webapp.common.controller.EntityController;
@@ -17,6 +18,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <p>Ugc entity controller that handles include requests to <code>/system/mvc/Framework/Ugc/{entityId}</code>.</p>
+ */
 @Controller
 @RequestMapping({"/system/mvc/Framework/Ugc"})
 public class UgcController extends EntityController {
@@ -60,6 +64,15 @@ public class UgcController extends EntityController {
         return model;
     }
 
+    /**
+     * Handles a request for an entity.
+     *
+     * @param request  The request.
+     * @param entityId The entity id.
+     * @return The name of the entity view that should be rendered for this request.
+     * @throws ContentProviderException If an error occurs so that the entity cannot not be retrieved.
+     * @throws java.lang.Exception      if any.
+     */
     @RequestMapping({"Entity/{entityId}"})
     public String handleGetEntity(HttpServletRequest request, @PathVariable String entityId) throws Exception {
         return this.handleEntityRequest(request, entityId);

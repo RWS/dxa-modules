@@ -2,6 +2,9 @@ package com.sdl.dxa.modules.ugc.data;
 
 import lombok.Data;
 
+/**
+ * <p>Ugc User information</p>
+ */
 @Data
 public class User {
     private String id;

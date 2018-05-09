@@ -14,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +22,9 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 
+/**
+ * <p>Ugc API controller that handles  requests to <code>/api/comments/</code>.</p>
+ */
 @Controller
 @RequestMapping(value = {"/api/comments", "/{path}/api/comments"})
 @Slf4j
@@ -35,26 +37,45 @@ public class UgcApiController extends BaseController {
     public UgcApiController() {
     }
 
+    /**
+     * <p>handles get request</p>
+     * <p>listens to <code>basepath/{publicationId}/{pageId}</code></p>
+     *
+     * @param publicationId Publication Id
+     * @param pageId        Page Id
+     * @param descending    Sort descending
+     * @param status        limit results to comments with a specific status
+     * @param top           maximum number of comments to show
+     * @param skip          number of comments to skip
+     * @return List of {@link Comment}
+     */
     @RequestMapping(method = GET, value = "/{publicationId}/{pageId}",
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<Comment> getComments(@PathVariable("publicationId") Integer publicationId,
-                                        @PathVariable("pageId") Integer pageId,
-                                        @RequestParam(value = "descending",
-                                                required = false,
-                                                defaultValue = "false") Boolean descending,
-                                        @RequestParam(value = "status[]",
-                                                required = false,
-                                                defaultValue = "0") Integer[] status,
-                                        @RequestParam(value = "top",
-                                                required = false,
-                                                defaultValue = "0") Integer top,
-                                        @RequestParam(value = "skip",
-                                                required = false,
-                                                defaultValue = "0") Integer skip) {
+                                     @PathVariable("pageId") Integer pageId,
+                                     @RequestParam(value = "descending",
+                                             required = false,
+                                             defaultValue = "false") Boolean descending,
+                                     @RequestParam(value = "status[]",
+                                             required = false,
+                                             defaultValue = "0") Integer[] status,
+                                     @RequestParam(value = "top",
+                                             required = false,
+                                             defaultValue = "0") Integer top,
+                                     @RequestParam(value = "skip",
+                                             required = false,
+                                             defaultValue = "0") Integer skip) {
         return ugcService.getComments(publicationId, pageId, descending, status, top, skip);
     }
 
+    /**
+     * <p>handles post request</p>
+     * <p>listens to <code>basepath/add</code></p>
+     *
+     * @param input {@link PostedComment}
+     * @return {@link Comment}
+     */
     @RequestMapping(method = POST, value = "/add",
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -79,20 +100,36 @@ public class UgcApiController extends BaseController {
                 metadata);
     }
 
+    /**
+     * <p>handles upvote request</p>
+     * <p>listens to <code>basepath/upvote</code></p>
+     *
+     * @param commentId Comment Id to upvote
+     * @param request   {@link HttpServletRequest}, used to get the referer url
+     * @return redirect url
+     */
     @RequestMapping("/upvote")
     public String upVoteComment(@RequestParam(value = "commentId",
             required = false,
-            defaultValue = "0") Integer commentId, HttpServletRequest request, HttpServletResponse response) {
+            defaultValue = "0") Integer commentId, HttpServletRequest request) {
         ugcService.upVoteComment(commentId);
-        return String.format("redirect:%s",request.getHeader("referer"));
+        return String.format("redirect:%s", request.getHeader("referer"));
     }
 
+    /**
+     * <p>handles downvote request</p>
+     * <p>listens to <code>basepath/downvote</code></p>
+     *
+     * @param commentId Comment Id to downvote
+     * @param request   {@link HttpServletRequest}, used to get the referer url
+     * @return redirect url
+     */
     @RequestMapping("/downvote")
     public String downVoteComment(@RequestParam(value = "commentId",
             required = false,
-            defaultValue = "0") Integer commentId, HttpServletRequest request, HttpServletResponse response) {
+            defaultValue = "0") Integer commentId, HttpServletRequest request) {
         ugcService.downVoteComment(commentId);
-        return String.format("redirect:%s",request.getHeader("referer"));
+        return String.format("redirect:%s", request.getHeader("referer"));
     }
 
     private void addPubIdTitleLangToCommentMetadata(@RequestBody PostedComment input, Map<String, String> metadata) {

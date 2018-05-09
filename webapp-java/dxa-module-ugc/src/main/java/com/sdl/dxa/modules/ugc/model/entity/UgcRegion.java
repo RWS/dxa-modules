@@ -9,7 +9,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- *
+ * <p>RegionModel for the Ugc Comment region</p>
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -23,7 +23,7 @@ public class UgcRegion  extends RegionModelImpl {
 
     /**
      * @param name Region name
-     * @throws DxaException
+     * @throws DxaException if name is empty or null
      */
     public UgcRegion(String name) throws DxaException {
         super(name);
@@ -32,15 +32,15 @@ public class UgcRegion  extends RegionModelImpl {
     /**
      * @param name region name
      * @param qualifiedViewName view name
-     * @throws DxaException
+     * @throws DxaException if name is empty or null
      */
     public UgcRegion(String name, String qualifiedViewName) throws DxaException {
         super(name, qualifiedViewName);
     }
 
     /**
-     * @param mvcData
-     * @throws DxaException
+     * @param mvcData {@link MvcData}
+     * @throws DxaException if name is empty or null
      */
     public UgcRegion(MvcData mvcData) throws DxaException {
         super(mvcData);

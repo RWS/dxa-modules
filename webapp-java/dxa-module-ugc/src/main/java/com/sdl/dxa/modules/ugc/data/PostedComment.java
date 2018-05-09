@@ -2,6 +2,10 @@ package com.sdl.dxa.modules.ugc.data;
 
 import lombok.Data;
 
+/**
+ * <p>Ugc posted comment</p>
+ */
+
 @Data
 public class PostedComment {
     private int publicationId;

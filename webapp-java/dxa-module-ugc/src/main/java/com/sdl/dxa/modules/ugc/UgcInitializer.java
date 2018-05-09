@@ -18,17 +18,26 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
+/**
+ * <p>Ugc Module initializer which initializes
+ * views registration in modules with {@link RegisteredViewModel} and {@link RegisteredViewModels}.
+ *</p>
+ */
 @Slf4j
 @Configuration
 @ComponentScan("com.sdl.dxa.modules.ugc")
 public class UgcInitializer {
 
     @Bean
-    public UgcCommentApi ugcCommentApi() {return new DefaultUgcCommentApi();}
+    public UgcCommentApi ugcCommentApi() {
+        return new DefaultUgcCommentApi();
+    }
 
     //Todo: create or use real UgcVoteCommentApi implementation
     @Bean
-    public UgcVoteCommentApi ugcVoteCommentApi() {return  new MockUgcVoteCommentApi();}
+    public UgcVoteCommentApi ugcVoteCommentApi() {
+        return new MockUgcVoteCommentApi();
+    }
 
     @Component
     @RegisteredViewModels({

@@ -8,6 +8,9 @@ import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
+/**
+ * <p>EntityModel containing all comments related to a given page or component</p>
+ */
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class UgcComments extends AbstractEntityModel {

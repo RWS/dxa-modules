@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+/**
+ * <p>Ugc API controller that handles  requests to <code>/api/ugc/postcomment</code>.</p>
+ */
 @Controller
 @RequestMapping(value = {"/api/ugc", "/{path}/api/ugc"})
 @Slf4j
@@ -29,6 +32,15 @@ public class UgcPostFormController {
         this.ugcPostCommentFormValidator = ugcPostCommentFormValidator;
     }
 
+    /**
+     * <p>handles post comment request</p>
+     * <p>listens to <code>/api/ugc/postcomment</code>.</p>
+     *
+     * @param form Posted Comment form
+     * @param bindingResult represents binding results
+     * @param redirectAttributes Redirect attributes
+     * @return redirect url
+     */
     @RequestMapping(value = "/postcomment", method = RequestMethod.POST)
     public String postComment(@ModelAttribute("entity") UgcPostCommentForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         ugcPostCommentFormValidator.validate(form, bindingResult);

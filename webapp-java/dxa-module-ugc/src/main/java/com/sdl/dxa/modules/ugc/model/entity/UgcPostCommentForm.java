@@ -13,7 +13,7 @@ import lombok.EqualsAndHashCode;
 import java.util.Map;
 
 /**
- *
+ * <p>EntityModel for Posted Comment model</p>
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

@@ -2,6 +2,10 @@ package com.sdl.dxa.modules.ugc.data;
 
 import lombok.Data;
 
+/**
+ * <p>Publication Title and Language </p>
+ */
+
 @Data
 public class PubIdTitleLang {
 

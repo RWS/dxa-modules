@@ -8,6 +8,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * <p>Ugc comment</p>
+ */
+
 @Data
 public class Comment {
     private long id;

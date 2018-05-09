@@ -22,12 +22,14 @@ import java.time.Month;
 import java.time.ZonedDateTime;
 import java.util.*;
 
+/**
+ * <p>Service providing methods to  create and retrieve comments</p>
+ */
 @Service
 @Slf4j
 public class UgcService {
 
     private static final int maximumThreadsDepth = -1;
-//    private final WebRequestContext webRequestContext;
 
     @Autowired
     private UgcCommentApi ugcCommentApi;
@@ -40,6 +42,8 @@ public class UgcService {
     }
 
     /**
+     * retrieves a list of {@link Comment}  items for a given page
+     *
      * @param publicationId Publication Id
      * @param pageId        Page Id
      * @param descending    Order
@@ -61,6 +65,8 @@ public class UgcService {
     }
 
     /**
+     * Post {@link Comment} for a given page
+     *
      * @param publicationId Publication Id
      * @param pageId        Page Id
      * @param username User name
@@ -87,6 +93,8 @@ public class UgcService {
     }
 
     /**
+     * Upvote a {@link Comment} with a specific ID on a given page
+     *
      * @param commentId comment id
      */
     public void upVoteComment(long commentId) {
@@ -94,6 +102,8 @@ public class UgcService {
     }
 
     /**
+     * Downvote a {@link Comment} with a specific ID on a given page
+     *
      * @param commentId comment id
      */
     public void downVoteComment(long commentId) {

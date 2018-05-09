@@ -7,6 +7,9 @@ import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
+/**
+ * <p>EntityModel for a single Ugc comment</p>
+ */
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class UgcComment extends AbstractEntityModel {
