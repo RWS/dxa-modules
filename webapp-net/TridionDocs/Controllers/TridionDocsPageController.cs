@@ -44,11 +44,12 @@ namespace Sdl.Web.Modules.TridionDocs.Controllers
 
         protected ActionResult GetPage(int publicationId, int pageId)
         {
-            ILocalization localization = SetupLocalization(publicationId);
             using (new Tracer(publicationId, pageId))
             {
                 try
-                {                                   
+                {
+                    ILocalization localization = SetupLocalization(publicationId);
+
                     PageModel pageModel;
                     try
                     {
@@ -74,6 +75,17 @@ namespace Sdl.Web.Modules.TridionDocs.Controllers
                     return ServerError();
                 }
             }
-        }       
+        }
+
+        public ActionResult ServerError()
+        {
+            using (new Tracer())
+            {
+                Response.StatusCode = 404;             
+                ViewResult r = View("ErrorPage");
+                r.ViewData.Add("statusCode", Response.StatusCode);
+                return r;
+            }
+        }
     }
 }
