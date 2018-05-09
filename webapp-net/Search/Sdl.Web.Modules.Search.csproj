@@ -1,9 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-
-  <Import Project="..\DxaModulesCommon.Props" /> 
-  
+  <Import Project="..\DxaModulesCommon.Props" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -44,6 +42,9 @@
       <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net452\Sdl.Web.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Sdl.Web.Delivery.IQQuery">
+      <HintPath>..\packages\Sdl.Web.Delivery.11.0.0-beta-201804191206\lib\net452\Sdl.Web.Delivery.IQQuery.dll</HintPath>
+    </Reference>
     <Reference Include="Sdl.Web.Mvc">
       <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net452\Sdl.Web.Mvc.dll</HintPath>
       <Private>False</Private>
@@ -61,8 +62,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\TridionDocsSearchController.cs" />
+    <Compile Include="Data\SearchParameters.cs" />
+    <Compile Include="Data\SearchResult.cs" />
+    <Compile Include="Data\SearchResultSet.cs" />
     <Compile Include="DxaSearchException.cs" />
     <Compile Include="Models\SearchItem.cs" />
+    <Compile Include="Providers\IQSearchProvider.cs" />
     <Compile Include="Providers\SI4TSearchProvider.cs" />
     <Compile Include="Providers\ISearchProvider.cs" />
     <Compile Include="..\CommonAssemblyInfo.cs" />
