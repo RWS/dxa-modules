@@ -9,11 +9,17 @@ using Sdl.Web.Modules.TridionDocs.Models;
 using Sdl.Web.Tridion.ContentManager;
 using Tridion.ContentDelivery.Meta;
 using Tridion.ContentDelivery.Taxonomies;
+using System.Text.RegularExpressions;
 
 namespace Sdl.Web.Modules.TridionDocs.Navigation
 {
+    /// <summary>
+    /// Tridion Docs Navigation Provider
+    /// </summary>
     public class TridionDocsNavigationProvider : Tridion.Navigation.CILImpl.DynamicNavigationProvider
     {
+        private static readonly Regex RegEx = new Regex("^(?:\\w)(\\d+)(?:-\\w)(\\d+)", RegexOptions.Compiled);
+
         public string GetBaseUrl()
         {
             var request = HttpContext.Current.Request;
@@ -26,6 +32,11 @@ namespace Sdl.Web.Modules.TridionDocs.Navigation
 
             return baseUrl;
         }
+
+        protected override List<SitemapItem> SortTaxonomyNodes(IList<SitemapItem> taxonomyNodes) 
+            // Sort by topic id since the base impl sorts alphabetically using the title
+            => taxonomyNodes.OrderBy(x => int.Parse(RegEx.Match(x.Id).Groups[1].Value)).
+            ThenBy(x => int.Parse(RegEx.Match(x.Id).Groups[2].Value)).ToList();
 
         protected override TaxonomyNode CreateTaxonomyNode(Keyword keyword, int expandLevels, NavigationFilter filter, ILocalization localization)
         {

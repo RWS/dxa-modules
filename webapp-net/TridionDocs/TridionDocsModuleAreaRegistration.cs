@@ -18,6 +18,7 @@ namespace Sdl.Web.Modules.TridionDocs
 
             // Page Views         
             RegisterViewModel("GeneralPage", typeof(PageModel));
+            RegisterViewModel("ErrorPage", typeof(PageModel));
         }
     }
 }
