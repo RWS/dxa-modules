@@ -26,6 +26,7 @@ public class UgControllerTest {
 
     @Mock
     private List<UgcComment> ugcComments;
+
     @InjectMocks
     @Spy
     private UgcController controller;
