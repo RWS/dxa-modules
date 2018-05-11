@@ -58,7 +58,7 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
         this.webRequestContext = webRequestContext;
     }
 
-    private static RegionModel findRegion(RegionModelSet regionModelSet, String regionName) {
+    private RegionModel findRegion(RegionModelSet regionModelSet, String regionName) {
         for (RegionModel region : regionModelSet) {
             if (region.getName().equals(regionName)) {
                 return region;
@@ -71,7 +71,7 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
         return null;
     }
 
-    private static UgcRegion createRegion(PageModel pageModel, String areaName, String regionName) {
+    private UgcRegion createRegion(PageModel pageModel, String areaName, String regionName) {
         UgcRegion ugcRegion = null;
         if (!pageModel.getRegions().containsClass(UgcRegion.class)) {
             try {
@@ -94,7 +94,7 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
         return ugcRegion;
     }
 
-    private static void addCommentsViews(PageModel pageModel, RegionModel region, Localization localization, RegionModel ugcRegion) {
+    private void addCommentsViews(PageModel pageModel, RegionModel region, Localization localization, RegionModel ugcRegion) {
         final List<EntityModel> regionEntities = new ArrayList<>();
         for (EntityModel entity : region.getEntities()) {
             if (entity.getExtensionData() == null) {
@@ -124,7 +124,7 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
         region.getRegions().forEach(childRegion -> addCommentsViews(pageModel, childRegion, localization, ugcRegion));
     }
 
-    private static UgcComments createUgcCommentsEntity(Localization localization, String id, int itemType) {
+    private UgcComments createUgcCommentsEntity(Localization localization, String id, int itemType) {
         final MvcData mvcData = MvcDataCreator.creator()
                 .fromQualifiedName(COMMENTS_QUALIFIED_NAME)
                 .defaults(DefaultsMvcData.ENTITY)
@@ -139,7 +139,7 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
         return model;
     }
 
-    private static UgcPostCommentForm createUgcPostCommentEntity(Localization localization, String id, int itemType, ContentModelData postFormConfig) {
+    private UgcPostCommentForm createUgcPostCommentEntity(Localization localization, String id, int itemType, ContentModelData postFormConfig) {
         final MvcData mvcData = MvcDataCreator.creator()
                 .fromQualifiedName(POST_FORM_QUALIFIED_NAME)
                 .defaults(DefaultsMvcData.ENTITY)
@@ -162,23 +162,23 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
         return model;
     }
 
-    private static ContentModelData ugcMetadata(ContentModelData metadata) {
+    private ContentModelData ugcMetadata(ContentModelData metadata) {
         return metadata == null ? null : metadata.getAndCast(COMMENTS_CONFIG, ContentModelData.class);
     }
 
-    private static ContentModelData ugcPostFormMetadata(ContentModelData ugcMetadata) {
+    private ContentModelData ugcPostFormMetadata(ContentModelData ugcMetadata) {
         return ugcMetadata == null ? null : ugcMetadata.getAndCast(POST_FORM_CONFIG, ContentModelData.class);
     }
 
-    private static Boolean showComments(ContentModelData ugcMetadata) {
+    private Boolean showComments(ContentModelData ugcMetadata) {
         return getValue(ugcMetadata, SHOW_COMMENTS_KEY, Boolean.class);
     }
 
-    private static Boolean postComments(ContentModelData ugcMetadata) {
+    private Boolean postComments(ContentModelData ugcMetadata) {
         return getValue(ugcMetadata, ALLOW_POST_KEY, Boolean.class);
     }
 
-    private static <T> T getValue(ContentModelData metadata, String name, Class<T> type) {
+    private <T> T getValue(ContentModelData metadata, String name, Class<T> type) {
         if (metadata == null || !metadata.containsKey(name)) {
             if (type == Boolean.class) {
                 //noinspection unchecked
@@ -211,21 +211,22 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
     @Nullable
     @Override
     public PageModel buildPageModel(@Nullable PageModel originalPageModel, @NotNull PageModelData modelData) {
+        if (originalPageModel == null) {
+            log.error("Original page model  is null");
+            return null;
+        }
+
         final ContentModelData metadata = modelData.getPageTemplate() == null ? null : modelData.getPageTemplate().getMetadata();
         final ContentModelData ugcMetadata = ugcMetadata(metadata);
         final Localization localization = webRequestContext.getLocalization();
 
         String regionName = getValue(ugcMetadata, COMMENTS_REGION_KEY, String.class);
-        String areaName = originalPageModel.getMvcData().getAreaName();
         final RegionModel ugcRegion;
         RegionModel ugcRegionModel;
         if (StringUtils.isEmpty(regionName)) {
-            areaName = COMMENTS_AREA;
-            regionName = COMMENTS_REGION;
-
             ugcRegionModel = findRegion(originalPageModel.getRegions(), COMMENTS_REGION);
             if (ugcRegionModel == null) {
-                ugcRegionModel = createRegion(originalPageModel, areaName, regionName);
+                ugcRegionModel = createRegion(originalPageModel, COMMENTS_AREA, COMMENTS_REGION);
             }
         } else {
             ugcRegionModel = findRegion(originalPageModel.getRegions(), regionName);
@@ -259,7 +260,6 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
      */
     @Override
     public <T extends EntityModel> T buildEntityModel(@Nullable T originalEntityModel, EntityModelData modelData, @Nullable Class<T> expectedClass) {
-
         final ContentModelData ugcMetadata = ugcMetadata(modelData.getComponentTemplate().getMetadata());
         if (ugcMetadata != null) {
             originalEntityModel.addExtensionData(SHOW_COMMENTS_EXT_DATA, showComments(ugcMetadata));

@@ -25,9 +25,11 @@ public class Comment {
 
     private int itemType;
 
-    private CommentDate creationDate;
+//    private CommentDate creationDate;
+    private DateTime creationDate;
 
-    private CommentDate lastModifiedDate;
+//    private CommentDate lastModifiedDate;
+    private DateTime lastModifiedDate;
 
     private String content;
 
@@ -39,32 +41,6 @@ public class Comment {
     private int rating = 0;
 
     @JsonIgnore
-    private Map<String, String> metadata = new HashMap<String, String>();
-
-    @Data
-    public static class CommentDate {
-        @JsonIgnore
-        private DateTime dateTime;
-
-        private int dayOfMonth;
-
-        private String dayOfWeek;
-
-        private int dayOfYear;
-
-        private int hour;
-
-        private int minute;
-
-        private String month;
-
-        private int monthValue;
-
-        private int nano;
-
-        private int second;
-
-        private int year;
-    }
+    private Map<String, String> metadata = new HashMap<>();
 
 }

@@ -30,20 +30,18 @@ public class UgcCommentTest {
     private static Comment commentData = new Comment();
     private static List<UgcComment> comments = new ArrayList<>();
     private static UgcComment otherComment = new UgcComment();
-    private static Comment.CommentDate commentDate = new Comment.CommentDate();
     private static DateTime time = DateTime.now();
     private static User user = new User();
 
     static {
-        commentDate.setDateTime(time);
 
         user.setEmailAddress("test@test.test");
         user.setName("Tester");
         user.setExternalId("ExternalId");
         user.setId("Id");
 
-        commentData.setCreationDate(commentDate);
-        commentData.setLastModifiedDate(commentDate);
+        commentData.setCreationDate(time);
+        commentData.setLastModifiedDate(time);
         commentData.setContent("Comment");
         commentData.setId(1);
         commentData.setItemId(2);
@@ -81,7 +79,7 @@ public class UgcCommentTest {
     }
 
     @Test
-    public void shouldReturnComments() throws Exception {
+    public void shouldReturnComments() {
         //given
 
         //when
@@ -91,13 +89,13 @@ public class UgcCommentTest {
     }
 
     @Test
-    public void shouldReturnCreationDate() throws Exception {
+    public void shouldReturnCreationDate() {
         //given
 
         //when
 
         //then
-        assertEquals(commentDate, ugcComment.getCommentData().getCreationDate());
+        assertEquals(time, ugcComment.getCommentData().getCreationDate());
     }
 
 

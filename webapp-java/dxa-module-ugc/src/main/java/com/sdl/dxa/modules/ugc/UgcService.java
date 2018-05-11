@@ -16,8 +16,6 @@ import org.springframework.stereotype.Service;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.time.DayOfWeek;
-import java.time.Month;
 import java.time.ZonedDateTime;
 import java.util.*;
 
@@ -126,25 +124,10 @@ public class UgcService {
         return c;
     }
 
-    private Comment.CommentDate convert(ZonedDateTime creationDate) {
-        final Comment.CommentDate commentDate = new Comment.CommentDate();
-        final DateTime dt = new DateTime(
-                creationDate.toInstant().toEpochMilli(),
-                DateTimeZone.forTimeZone(TimeZone.getTimeZone(creationDate.getZone())));
-        commentDate.setDateTime(dt);
-        commentDate.setDayOfMonth(dt.getMonthOfYear());
-        commentDate.setDayOfWeek(DayOfWeek.of(dt.getDayOfWeek()).name());
-        commentDate.setDayOfYear(dt.getDayOfYear());
-        commentDate.setMonth(Month.of(dt.getMonthOfYear()).name());
-        commentDate.setMonthValue(dt.getMonthOfYear());
-        commentDate.setYear(dt.getYear());
-        commentDate.setHour(dt.getHourOfDay());
-        commentDate.setMinute(dt.getMinuteOfHour());
-        commentDate.setSecond(dt.getSecondOfMinute());
-        commentDate.setNano(dt.getMillisOfSecond());
-
-        return commentDate;
-
+    private DateTime convert(ZonedDateTime zonedDateTime) {
+        return  new DateTime(
+                zonedDateTime.toInstant().toEpochMilli(),
+                DateTimeZone.forTimeZone(TimeZone.getTimeZone(zonedDateTime.getZone())));
     }
 
     private User convert(com.sdl.delivery.ugc.client.odata.edm.User user) {

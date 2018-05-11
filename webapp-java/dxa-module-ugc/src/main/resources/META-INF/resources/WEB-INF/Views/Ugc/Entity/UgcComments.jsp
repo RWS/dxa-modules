@@ -17,7 +17,7 @@
                         <span><strong>${comment.commentData.user.name}</strong></span>
                         <span>-</span>
                         <span><time
-                                class="meta small">${markup.formatDateDiff(comment.commentData.lastModifiedDate.dateTime)}</time></span>
+                                class="meta small">${markup.formatDateDiff(comment.commentData.lastModifiedDate)}</time></span>
                     </header>
                     <div>
                         <p>${comment.commentData.content}</p>
