@@ -4,6 +4,7 @@ using Sdl.Web.Common;
 using Sdl.Web.Common.Models;
 using Sdl.Web.Delivery.ServicesCore.ClaimStore;
 using Sdl.Web.Modules.TridionDocs.Providers;
+using Sdl.Web.Mvc.Configuration;
 using Sdl.Web.Mvc.Formats;
 
 namespace Sdl.Web.Modules.TridionDocs.Controllers
@@ -24,7 +25,9 @@ namespace Sdl.Web.Modules.TridionDocs.Controllers
             {
                 AmbientDataContext.CurrentClaimStore.Put(UserConditionsUri, conditions);
             }
-            return Json(TridionDocsContentProvider.GetPageModel(pageId, SetupLocalization(publicationId)));
+            PageModel model = TridionDocsContentProvider.GetPageModel(pageId, SetupLocalization(publicationId));
+            WebRequestContext.PageModel = model;
+            return Json(model);
         }              
         
         [Route("~/binary/{publicationId:int}/{binaryId:int}/{*content}")]
