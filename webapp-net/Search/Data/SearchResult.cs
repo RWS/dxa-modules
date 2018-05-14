@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 using Sdl.Web.Delivery.IQQuery.API;
 
 namespace Sdl.Web.Modules.Search.Data
@@ -7,6 +8,7 @@ namespace Sdl.Web.Modules.Search.Data
     {
         public string Id { get; set; }
 
+        [JsonProperty(PropertyName = "meta")]
         public Dictionary<string, object> Fields { get; set; }
 
         public string Locale { get; set; } = "en";
