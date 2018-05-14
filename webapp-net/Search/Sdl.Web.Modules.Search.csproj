@@ -43,7 +43,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Sdl.Web.Delivery.IQQuery">
-      <HintPath>..\packages\Sdl.Web.Delivery.11.0.0-beta-201804191206\lib\net452\Sdl.Web.Delivery.IQQuery.dll</HintPath>
+      <HintPath>..\packages\Sdl.Web.Delivery.$(SdlDeliveryVersion)\lib\net452\Sdl.Web.Delivery.IQQuery.dll</HintPath>
     </Reference>
     <Reference Include="Sdl.Web.Mvc">
       <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net452\Sdl.Web.Mvc.dll</HintPath>
