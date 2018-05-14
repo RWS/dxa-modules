@@ -31,10 +31,10 @@ namespace Sdl.Web.Modules.Search.Controllers
                         new List<object>
                         {
                             new DefaultTermValue("VDITADLVRREMOTESTATUSONLINE"),
-                            new DefaultTermValue(searchParams.SearchQuery, TermTypes.Wildcard)
+                            new DefaultTermValue(searchParams.SearchQuery, TermTypes.Exact)
                         }).Compile());
-
-            return Json(results);
+           
+            return Json(new SearchResultSetWrapped(results));
         }
     }
 }
