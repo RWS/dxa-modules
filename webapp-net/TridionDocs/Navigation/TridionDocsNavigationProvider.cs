@@ -50,6 +50,10 @@ namespace Sdl.Web.Modules.TridionDocs.Navigation
             return node;
         }
 
+        protected override SitemapItem[] ExpandClassifiedPages(Keyword keyword, string taxonomyId,
+            ILocalization localization)
+            => new SitemapItem[] {};
+
         public SitemapItem SiteMap
         {
             get

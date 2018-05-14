@@ -2,6 +2,7 @@
 using Sdl.Web.Mvc.Controllers;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Newtonsoft.Json;
@@ -21,8 +22,7 @@ namespace Sdl.Web.Modules.Ugc.Controllers
         [HttpGet]
         public ActionResult GetComments(int? publicationId, int pageId, bool descending = false, int[] status = null, int top = 0, int skip = 0)
         {            
-            UgcService ugc = new UgcService();
-          
+            UgcService ugc = new UgcService();          
             var comments = ugc.GetComments(
                 publicationId ?? int.Parse(WebRequestContext.Localization.Id),
                 pageId, descending, status ?? new int[] {}, top, skip);
@@ -41,24 +41,20 @@ namespace Sdl.Web.Modules.Ugc.Controllers
         public ActionResult PostComment(int publicationId, int pageId, bool descending = false, int[] status = null, int top = 0, int skip = 0)
         {
             UgcService ugc = new UgcService();
-
             Stream req = Request.InputStream;
             req.Seek(0, SeekOrigin.Begin);
             string json = new StreamReader(req).ReadToEnd();
-
             PostedComment posted = JsonConvert.DeserializeObject<PostedComment>(json);
-            
-            Dictionary<string, string> metadata = new Dictionary<string, string>();
-           
-            metadata.Add("publicationTitle", posted.PublicationTitle);
-            metadata.Add("publicationUrl", posted.PublicationUrl);
-            metadata.Add("itemTitle", posted.PageTitle);
-            metadata.Add("itemUrl", posted.PageUrl);
-            metadata.Add("language", posted.Language);
-            metadata.Add("status", "0");
-
-            AddPubIdTitleLangToCommentMetadata(posted, metadata);
-            
+            Dictionary<string, string> metadata = new Dictionary<string, string>
+            {
+                {"publicationTitle", "\""+Regex.Escape(posted.PublicationTitle)+"\""},
+                {"publicationUrl", "\""+posted.PublicationUrl+"\""},
+                {"itemTitle", "\""+Regex.Escape(posted.PageTitle)+"\""},
+                {"itemUrl", "\""+posted.PageUrl+"\""},
+                {"language", "\""+posted.Language+"\""},
+                {"status", "0"}
+            };
+            AddPubIdTitleLangToCommentMetadata(posted, metadata);            
             Comment result = ugc.PostComment(posted.PublicationId,
                     posted.PageId,
                     posted.Username,
@@ -66,7 +62,6 @@ namespace Sdl.Web.Modules.Ugc.Controllers
                     posted.Content,
                     posted.ParentId,
                     metadata);
-
             return new ContentResult
             {
                 ContentType = "application/json",
@@ -102,14 +97,15 @@ namespace Sdl.Web.Modules.Ugc.Controllers
             return Redirect(Request.UrlReferrer?.AbsolutePath);
         }
 
-        private void AddPubIdTitleLangToCommentMetadata(PostedComment comment, Dictionary<string, string> metadata)
+        private static void AddPubIdTitleLangToCommentMetadata(PostedComment comment, Dictionary<string, string> metadata)
         {
-            PubIdTitleLang pubIdTitleLang = new PubIdTitleLang();
-            pubIdTitleLang.Id = comment.PublicationId;
-            pubIdTitleLang.Lang = comment.Language;
-            pubIdTitleLang.Title = comment.PublicationTitle;
-            string pubIdTitleLangJson = JsonConvert.SerializeObject(pubIdTitleLang);
-            metadata.Add("pubIdTitleLang", pubIdTitleLangJson);
+            PubIdTitleLang pubIdTitleLang = new PubIdTitleLang
+            {
+                Id = comment.PublicationId,
+                Lang = comment.Language,
+                Title = comment.PublicationTitle
+            };
+            metadata.Add("pubIdTitleLang", JsonConvert.SerializeObject(pubIdTitleLang));
         }
     }
 }

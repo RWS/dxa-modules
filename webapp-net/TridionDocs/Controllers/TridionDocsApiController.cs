@@ -4,6 +4,7 @@ using Sdl.Web.Common;
 using Sdl.Web.Common.Models;
 using Sdl.Web.Delivery.ServicesCore.ClaimStore;
 using Sdl.Web.Modules.TridionDocs.Providers;
+using Sdl.Web.Mvc.Configuration;
 using Sdl.Web.Mvc.Formats;
 
 namespace Sdl.Web.Modules.TridionDocs.Controllers
@@ -16,18 +17,19 @@ namespace Sdl.Web.Modules.TridionDocs.Controllers
         private static readonly Uri UserConditionsUri = new Uri("taf:ish:userconditions");
 
         [Route("~/api/page/{publicationId:int}/{pageId:int}")]
-        [Route("~/api/page/{publicationId:int}/{pageId:int}/{*path}")]
+        [Route("~/api/page/{publicationId:int}/{pageId:int}/{*conditions}")]
         [HttpGet]
-        [FormatData]
-        public virtual ActionResult Page(int publicationId, int pageId, string path, string conditions = "")
+        public virtual ActionResult Page(int publicationId, int pageId, string conditions = "")
         {
             if (!string.IsNullOrEmpty(conditions))
             {
                 AmbientDataContext.CurrentClaimStore.Put(UserConditionsUri, conditions);
             }
-            return Json(TridionDocsContentProvider.GetPageModel(pageId, SetupLocalization(publicationId)));
-        }
-
+            PageModel model = TridionDocsContentProvider.GetPageModel(pageId, SetupLocalization(publicationId));
+            WebRequestContext.PageModel = model;
+            return Json(model);
+        }              
+        
         [Route("~/binary/{publicationId:int}/{binaryId:int}/{*content}")]
         [Route("~/api/binary/{publicationId:int}/{binaryId:int}/{*content}")]
         [HttpGet]
