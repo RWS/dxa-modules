@@ -6,6 +6,7 @@ using Sdl.Web.Delivery.ServicesCore.ClaimStore;
 using Sdl.Web.Modules.TridionDocs.Providers;
 using Sdl.Web.Mvc.Configuration;
 using Sdl.Web.Mvc.Formats;
+using System.Text;
 
 namespace Sdl.Web.Modules.TridionDocs.Controllers
 {
@@ -51,7 +52,12 @@ namespace Sdl.Web.Modules.TridionDocs.Controllers
         [Route("~/api/conditions/{publicationId:int}")]
         public virtual ActionResult Conditions(int publicationId)
         {
-            return Json(new ConditionProvider().GetConditions(publicationId));
+            return new ContentResult
+            {
+                ContentType = "application/json",
+                Content = new ConditionProvider().GetConditions(publicationId),
+                ContentEncoding = Encoding.UTF8
+            };
         }
 
         [Route("~/api/sitemap.xml")]
