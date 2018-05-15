@@ -45,7 +45,7 @@ namespace Sdl.Web.Modules.TridionDocs.Navigation
             if (ishRefUri != null)
             {
                 var ish = CmUri.FromString(ishRefUri);
-                node.Url = $"{GetBaseUrl()}/{ish.PublicationId}/{ish.ItemId}";
+                node.Url = $"{GetBaseUrl().TrimEnd('/')}/{ish.PublicationId}/{ish.ItemId}";
             }
             return node;
         }
