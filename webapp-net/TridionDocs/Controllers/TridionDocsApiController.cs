@@ -18,9 +18,17 @@ namespace Sdl.Web.Modules.TridionDocs.Controllers
         private static readonly Uri UserConditionsUri = new Uri("taf:ish:userconditions");
 
         [Route("~/api/page/{publicationId:int}/{pageId:int}")]
-        [Route("~/api/page/{publicationId:int}/{pageId:int}/{*conditions}")]
         [HttpGet]
-        public virtual ActionResult Page(int publicationId, int pageId, string conditions = "")
+        public virtual ActionResult Page(int publicationId, int pageId)
+        {
+            PageModel model = TridionDocsContentProvider.GetPageModel(pageId, SetupLocalization(publicationId));
+            WebRequestContext.PageModel = model;
+            return Json(model);
+        }
+      
+        [Route("~/api/page/{publicationId:int}/{pageId:int}/{*conditions}")]
+        [HttpPost]
+        public virtual ActionResult Page(int publicationId, int pageId, string conditions)
         {
             if (!string.IsNullOrEmpty(conditions))
             {
@@ -29,8 +37,8 @@ namespace Sdl.Web.Modules.TridionDocs.Controllers
             PageModel model = TridionDocsContentProvider.GetPageModel(pageId, SetupLocalization(publicationId));
             WebRequestContext.PageModel = model;
             return Json(model);
-        }              
-        
+        }
+
         [Route("~/binary/{publicationId:int}/{binaryId:int}/{*content}")]
         [Route("~/api/binary/{publicationId:int}/{binaryId:int}/{*content}")]
         [HttpGet]

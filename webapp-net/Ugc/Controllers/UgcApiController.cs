@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Sdl.Web.Mvc.Controllers;
 using System.IO;
 using System.Text;
@@ -9,6 +10,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Sdl.Web.Modules.Ugc.Data;
 using Sdl.Web.Mvc.Configuration;
+using Tridion.ContentDelivery.AmbientData;
 
 namespace Sdl.Web.Modules.Ugc.Controllers
 {
@@ -54,10 +56,18 @@ namespace Sdl.Web.Modules.Ugc.Controllers
                 {"language", "\""+posted.Language+"\""},
                 {"status", "0"}
             };
-            AddPubIdTitleLangToCommentMetadata(posted, metadata);            
+
+            AddPubIdTitleLangToCommentMetadata(posted, metadata);
+
+            string userId = posted.Username;
+            if (string.IsNullOrEmpty(userId))
+            {
+                userId = "Anonymous";
+            }
+
             Comment result = ugc.PostComment(posted.PublicationId,
                     posted.PageId,
-                    posted.Username,
+                    userId,
                     posted.Email,
                     posted.Content,
                     posted.ParentId,
