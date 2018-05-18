@@ -18,7 +18,6 @@ namespace Sdl.Web.Modules.TridionDocs.Controllers
         [Route("~/publications/{*content}")]
         public ActionResult Home()
         {
-            System.Web.HttpContext.Current.Items["ActiveFeatures"] = "commenting";
             return View("GeneralPage");
         }
 
@@ -37,7 +36,6 @@ namespace Sdl.Web.Modules.TridionDocs.Controllers
 
         protected ActionResult GetPage(int publicationId)
         {
-            System.Web.HttpContext.Current.Items["ActiveFeatures"] = "commenting";
             SetupLocalization(publicationId);
             return View("GeneralPage");
         }
