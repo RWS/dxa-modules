@@ -47,8 +47,14 @@ namespace Sdl.Web.Modules.Search.Controllers
                 StartOfRange = searchParams.StartIndex,
                 EndOfRange = searchParams.StartIndex + searchParams.Count,
                 IsHighlightingEnabled = true
-            }).Search(new Delivery.IQQuery.Model.Search.SearchQuery().GroupedAnd(fields, values).Compile());        
-            return Json(new SearchResultSetWrapped(results));
+            }).Search(new Delivery.IQQuery.Model.Search.SearchQuery().GroupedAnd(fields, values).Compile());
+            var resultSet = new SearchResultSetWrapped(results)
+            {
+                Hits = results.Hits,
+                Count = searchParams.Count.Value,
+                StartIndex = searchParams.StartIndex.Value
+            };
+            return Json(resultSet);
         }      
     }
 }
