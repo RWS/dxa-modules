@@ -109,6 +109,7 @@
     <Compile Include="Providers\TocProvider.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Areas\TridionDocs\Views\Page\ErrorPage.cshtml" />
     <None Include="Areas\TridionDocs\Views\TridionDocsPage\ErrorPage.cshtml" />
     <None Include="Areas\TridionDocs\Views\TridionDocsPage\GeneralPage.cshtml" />
     <None Include="Areas\TridionDocs\Views\web.config" />

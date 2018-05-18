@@ -86,6 +86,14 @@ namespace Sdl.Web.Modules.TridionDocs.Providers
             return pageModel;
         }
 
+        public override PageModel GetPageModel(string urlPath, ILocalization localization, bool addIncludes = true)
+        {
+            return new PageModel
+            {
+                MvcData = new MvcData { ViewName = "ErrorPage", AreaName = "TridionDocs"}
+            };
+        }
+
         public IItem GetPageIdByIshLogicalReference(int publicationId, string ishLogicalRefValue)
         {
             try
