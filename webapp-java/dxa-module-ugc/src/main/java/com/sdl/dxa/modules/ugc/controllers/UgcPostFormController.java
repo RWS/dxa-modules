@@ -46,16 +46,16 @@ public class UgcPostFormController {
         ugcPostCommentFormValidator.validate(form, bindingResult);
 
         if (bindingResult.hasErrors()) {
-            log.trace("Comment Form has {} errors", bindingResult.getErrorCount());
+            log.trace("Comment Form for {} has {} errors", form.getTarget(), bindingResult.getErrorCount());
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
             return REDIRECT_PREFIX + form.getFormUrl();
         }
-        log.trace("Comment Form complete and valid");
+        log.trace("Comment Form for {} complete and valid",form.getTarget());
 
         ugcService.postComment(form.getTarget().getPublicationId(), form.getTarget().getItemId(), form.getUserName(),
                 form.getEmailAddress(), form.getContent(), form.getParentId(), form.getMetadata());
 
-        log.trace("Comment posted succesful {}", form.getUserName());
+        log.trace("Comment on {} by {} posted succesful", form.getTarget(),form.getUserName());
         return REDIRECT_PREFIX + form.getFormUrl();
     }
 
