@@ -19,11 +19,13 @@ export const response2page = (serverPage: ServerModels.IPage): IPage => {
             }
         }
     }
+    const logicalId = serverPage.Meta["ishlogicalref.object.id"];
     const navEntries = serverPage.Meta["tocnaventries.generated.value"];
     return {
         id: serverPage.Id,
         title: pageTitle,
         content: pageBody,
+        logicalId,
         sitemapIds: typeof navEntries === "string" ? navEntries.split(", ") : navEntries
     } as IPage;
 };
@@ -36,11 +38,10 @@ export const response2page = (serverPage: ServerModels.IPage): IPage => {
  * @extends {LoadableObject}
  */
 export class Page extends LoadableObject {
-
-    private _publicationId: string;
-    private _pageId: string;
-    private _conditions: IConditionMap;
-    private _page: IPage;
+    protected _publicationId: string;
+    protected _pageId: string;
+    protected _conditions: IConditionMap;
+    protected _page: IPage;
 
     /**
      * Creates an instance of Page.
@@ -77,11 +78,17 @@ export class Page extends LoadableObject {
         const body = `conditions=${JSON.stringify(postBody)}`;
         isEmpty(this._conditions)
             ? Net.getRequest(url, this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed))
-            : Net.postRequest(url, body, API_REQUEST_TYPE_FORM, this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
+            : Net.postRequest(
+                  url,
+                  body,
+                  API_REQUEST_TYPE_FORM,
+                  this.getDelegate(this._onLoad),
+                  this.getDelegate(this._onLoadFailed)
+              );
     }
 
     protected _processLoadResult(result: string, webRequest: IWebRequest): void {
-        this._page = response2page((JSON.parse(result) as ServerModels.IPage));
+        this._page = response2page(JSON.parse(result) as ServerModels.IPage);
         super._processLoadResult(result, webRequest);
     }
 }

@@ -3,11 +3,13 @@ import { IComment } from "interfaces/ServerModels";
 import { IPageService } from "services/interfaces/PageService";
 import { IPage } from "interfaces/Page";
 import { Page } from "models/Page";
+import { PageIdByLogicalId } from "models/PageIdByLogicalId";
 import { Promise } from "es6-promise";
 import { IConditionMap } from "store/interfaces/Conditions";
 import { MD5 } from "object-hash";
 import { Comments } from "models/Comments";
 import { Comment } from "models/Comment";
+import { localization } from "services/common/LocalizationService";
 
 /**
  * Page service, interacts with the models to fetch the required data.
@@ -72,6 +74,48 @@ export class PageService implements IPageService {
     }
 
     /**
+     * Get page information
+     *
+     * @param {string} publicationId Publication Id
+     * @param {string} logicalId The page logical Id
+     * @returns {Promise<IPage>} Promise to return the content
+     *
+     * @memberOf DataStoreClient
+     */
+    public getPageInfoByLogicalId(
+        publicationId: string,
+        logicalId: string,
+        conditions?: IConditionMap
+    ): Promise<IPage> {
+        // We don`t need to add this to the models list, as once its loaded, page would be available by Logical Id
+        const pageIdByLogicalId = new PageIdByLogicalId(publicationId, logicalId);
+        return new Promise((resolve: (info?: IPage) => void, reject: (error: string | null) => void) => {
+            let removeEventListeners: () => void;
+            const onLoad = () => {
+                removeEventListeners();
+                const pageId = pageIdByLogicalId.getPageId();
+                if (pageId) {
+                    this.getPageInfo(publicationId, pageIdByLogicalId.getPageId(), conditions).then(resolve, reject);
+                } else {
+                    reject(localization.formatMessage("error.page.not.found", [pageId]));
+                }
+            };
+            const onLoadFailed = (event: Event & { data: { error: string } }) => {
+                removeEventListeners();
+                reject(event.data.error);
+            };
+            removeEventListeners = (): void => {
+                pageIdByLogicalId.removeEventListener("load", onLoad);
+                pageIdByLogicalId.removeEventListener("loadfailed", onLoadFailed);
+            };
+
+            pageIdByLogicalId.addEventListener("load", onLoad);
+            pageIdByLogicalId.addEventListener("loadfailed", onLoadFailed);
+            pageIdByLogicalId.load();
+        });
+    }
+
+    /**
      *
      * @param {string} publicationId
      * @param {string} pageId
@@ -83,7 +127,14 @@ export class PageService implements IPageService {
      *
      * @memberof PageService
      */
-    public getComments(publicationId: string, pageId: string, descending: boolean, top: number, skip: number, status: number[]): Promise<IComment[]> {
+    public getComments(
+        publicationId: string,
+        pageId: string,
+        descending: boolean,
+        top: number,
+        skip: number,
+        status: number[]
+    ): Promise<IComment[]> {
         const comments = this.getCommentsModel(publicationId, pageId, descending, top, skip, status);
 
         return new Promise((resolve: (items?: IComment[]) => void, reject: (error: string | null) => void) => {
@@ -163,7 +214,14 @@ export class PageService implements IPageService {
         return this.PageModels[key];
     }
 
-    private getCommentsModel(publicationId: string, pageId: string, descending: boolean, top: number, skip: number, status: number[]): Comments {
+    private getCommentsModel(
+        publicationId: string,
+        pageId: string,
+        descending: boolean,
+        top: number,
+        skip: number,
+        status: number[]
+    ): Comments {
         const key = this._getKey(publicationId, pageId);
         this.ensureCommentsModel(key);
 
@@ -183,5 +241,4 @@ export class PageService implements IPageService {
             PageService.CommentsModels[key] = undefined;
         }
     }
-
 }

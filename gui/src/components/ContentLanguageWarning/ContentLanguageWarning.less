@@ -3,23 +3,13 @@
 
 .sdl-dita-delivery-content-language-warning {
     margin-bottom: 15px;
-    margin-left: @tocWidth + @defaultMargin + @defaultMargin;
-    margin-right: @contentNavWidth + @defaultMargin + @defaultMargin;
+    margin-left: 2 * @defaultMargin;
+    margin-right: 2 * @defaultMargin;
     @media screen and (max-width: @screenLg) {
         margin-right: @defaultMargin;
     }
     @media screen and (max-width: @screenMd) {
         margin-left: @defaultMargin;
-    }
-    .rtl & {
-        margin-left: @contentNavWidth + @defaultMargin + @defaultMargin;
-        margin-right: @tocWidth + @defaultMargin + @defaultMargin;
-        @media screen and (max-width: @screenLg) {
-            margin-left: @defaultMargin;
-        }
-        @media screen and (max-width: @screenMd) {
-            margin-right: @defaultMargin;
-        }
     }
     padding: 5px 15px;
     border: 1px solid @neutralColor5;

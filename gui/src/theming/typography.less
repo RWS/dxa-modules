@@ -22,6 +22,7 @@
     .header-font(300, @headerSize, @headerSize);
 }
 
+/// Page content styles
 .header-h1() {
     color: @h1Color;
     .header-font(300, @h1Size, @h1Size);
@@ -58,6 +59,21 @@
     }
 }
 
+.normal-monospace() {
+    font-family: monospace;
+    font-weight: normal;
+}
+
+.bold-monospace() {
+    font-family: monospace;
+    font-weight: bold;
+}
+
+.italic() {
+    font-style: italic;
+}
+
+//Table styles
 .table() {
     border-color: @tableBorderColor;
     border-style: none;
@@ -65,12 +81,13 @@
 }
 
 .table-header() {
-    text-transform: uppercase;
+    text-transform: capitalize;
     border-left-style: none;
     border-top-style: none;
     border-right-style: none;
     border-bottom: 1px solid @tableBorderColor;
     padding: 10px;
+    text-align: left;
 }
 
 .table-row() {
@@ -88,6 +105,7 @@
     padding: 10px;
 }
 
+// List styles
 .unordered-list() {
     li {
         padding-left: 10px;

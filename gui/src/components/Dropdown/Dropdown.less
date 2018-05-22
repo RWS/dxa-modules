@@ -68,7 +68,6 @@
                     white-space: nowrap;
                     text-decoration: none;
                     overflow: hidden;
-                    text-overflow: ellipsis;
                 }
             }
             li:last-child {
@@ -101,15 +100,17 @@
             bottom: 100%;
         }
         .dropdown-arrow:before {
-            left: 80%;
+            right: 25px;
             .rtl & {
-                left: 20%;
+                left: 33px;
+                right: auto;
             }
         }
         .dropdown-arrow:after {
-            right: 20%;
+            right: 33px;
             .rtl & {
-                right: 80%;
+                left: 25px;
+                right: auto;
             }
         }
     }

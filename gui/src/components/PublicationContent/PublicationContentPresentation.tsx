@@ -9,6 +9,7 @@ import { Toc } from "@sdl/dd/presentation/Toc";
 import { Page } from "@sdl/dd/Page/Page";
 import { Breadcrumbs, IBreadcrumbItem } from "@sdl/dd/presentation/Breadcrumbs";
 import { ContentLanguageWarning } from "@sdl/dd/ContentLanguageWarning/ContentLanguageWarning";
+import { Splitter } from "@sdl/dd/Splitter/Splitter";
 
 import { VersionSelector } from "@sdl/dd/presentation/VersionSelector";
 import { Html, IHeader } from "utils/Html";
@@ -20,8 +21,9 @@ import { ITaxonomy } from "interfaces/Taxonomy";
 import { IPage } from "interfaces/Page";
 import { TaxonomyItemId } from "interfaces/TcmId";
 import { IPublication } from "interfaces/Publication";
-import { IPublicationCurrentState } from "store/interfaces/State";
+import { ICurrentLocationState } from "store/interfaces/State";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
+import { IPageService } from "services/interfaces/PageService";
 
 import { DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE } from "models/Publications";
 
@@ -80,14 +82,13 @@ export interface IPublicationContentProps {
      * @memberOf IPublicationContentProps
      */
     productReleaseVersion: string;
-
     /**
      * Function to execute when publication is changing
      *
      * @type {Function}
      * @memberOf IPublicationContentProps
      */
-    onPublicationChange?: (publicationId: string, pageId: string) => void;
+    onPublicationChange?: (publicationId: string, pageId: string, taxomonyId?: string) => void;
     /**
      *
      * @memberOf IPublicationContentProps
@@ -95,11 +96,35 @@ export interface IPublicationContentProps {
     onReleaseVersionChanged?: (publicationId: string, releaseVersions: string) => void;
     /**
      *
+     * @memberOf IPublicationContentProps
+     */
+    onPageReleaseVersionChanged?: (
+        pageService: IPageService,
+        publicationId: string,
+        releaseVersions: string,
+        logicalId: string,
+        conditions: IConditionMap
+    ) => void;
+    /**
+     *
      * @type {boolean}
      * @memberOf IPublicationContentProps
      */
     isPublicationFound: boolean;
+
+    /**
+     *
+     * @type {IConditionMap}
+     * @memberOf IPublicationContentProps
+     */
     conditions: IConditionMap;
+
+    /**
+     *
+     * @type {number}
+     * @memberOf IPublicationContentProps
+     */
+    splitterPosition: number;
 }
 
 /**
@@ -135,6 +160,14 @@ export interface IPublicationContentState {
      * @memberOf IPublicationContentState
      */
     activePageHeader?: IHeader;
+
+    /**
+     * Relative splitter position
+     *
+     * @type {number}
+     * @memberOf IPublicationContentState
+     */
+    splitterPositionX?: number | null;
 }
 
 interface IToc {
@@ -157,13 +190,12 @@ interface IToc {
 /**
  * Publication content props
  */
-export type Pub = IPublicationContentProps & IPublicationCurrentState;
+export type Pub = IPublicationContentProps & ICurrentLocationState;
 
 /**
  * Publication + content component
  */
 export class PublicationContentPresentation extends React.Component<Pub, IPublicationContentState> {
-
     public static contextTypes: React.ValidationMap<IAppContext> = {
         services: PropTypes.object.isRequired
     };
@@ -183,6 +215,7 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         };
 
         this._fixPanels = this._fixPanels.bind(this);
+        this._navigateToOtherReleaseVersion = this._navigateToOtherReleaseVersion.bind(this);
     }
 
     /**
@@ -196,8 +229,8 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         }
     }
 
-    public refreshToc(publicationId: string, page: IPage): void {
-        this._onPageContentRetrieved(publicationId, page);
+    public refreshToc(publicationId: string, page: IPage, taxonomyId?: string): void {
+        this._onPageContentRetrieved(publicationId, page, taxonomyId);
     }
 
     public componentDidMount(): void {
@@ -223,20 +256,25 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
      */
     public componentWillReceiveProps(nextProps: Pub): void {
         const { page, publicationId } = this.props;
-        const { publicationId: nextPubId, page: nextPage, errorMessage } = nextProps;
+        const { publicationId: nextPubId, page: nextPage, taxonomyId: nextTaxonomyId, errorMessage } = nextProps;
 
-        if (!isPage(nextPage) || nextPubId !== publicationId) {
+        if (!isPage(nextPage)) {
             this.fetchPublication(nextPubId);
         }
 
-        if (isPage(nextPage) && (MD5(nextProps.conditions) !== MD5(this.props.conditions))) {
-            this.setState({
-                isTocLoading: true
-            }, () => this.refreshToc(nextPubId, nextPage));
-        } else if (isPage(nextPage) && !isDummyPage(nextPage) && nextPage.content !== page.content) {
-            this.refreshToc(nextPubId, nextPage);
-        } else if (errorMessage) {
+        if (errorMessage) {
             this._onPageContentRetrievFailed(nextPubId, errorMessage);
+        } else if (isPage(nextPage)) {
+            if (nextPubId !== publicationId || MD5(nextProps.conditions) !== MD5(this.props.conditions)) {
+                this.setState(
+                    {
+                        isTocLoading: true
+                    },
+                    () => this.refreshToc(nextPubId, nextPage)
+                );
+            } else if (!isDummyPage(nextPage) && nextPage.content !== page.content) {
+                this.refreshToc(nextPubId, nextPage, nextTaxonomyId);
+            }
         }
     }
 
@@ -248,7 +286,8 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
     public render(): JSX.Element {
         const { activeTocItemPath, selectedTocItem, activePageHeader } = this.state;
         const { services } = this.context;
-        const { publicationId,
+        const {
+            publicationId,
             pageId,
             page,
             publication,
@@ -256,13 +295,29 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
             errorMessage,
             productReleaseVersion,
             productReleaseVersions,
-            isPublicationFound } = this.props;
+            isPublicationFound
+        } = this.props;
 
         const { taxonomyService, localizationService } = services;
         const { rootItems, error: tocError } = this._toc;
-        const selectedProductReleaseVersion = productReleaseVersion ? Version.normalize(productReleaseVersion) : undefined;
+        const selectedProductReleaseVersion = Version.normalizeReleaseVersion(productReleaseVersion);
         return (
             <section className={"sdl-dita-delivery-publication-content"}>
+                <NavigationMenu isOpen={false}>
+                    {/* TODO: use global state store */}
+                    <Toc
+                        activeItemPath={activeTocItemPath}
+                        publicationId={publicationId}
+                        rootItems={rootItems}
+                        loadChildItems={(parentId: string): Promise<ITaxonomy[]> => {
+                            return taxonomyService.getSitemapItems(publicationId, parentId);
+                        }}
+                        onSelectionChanged={this._onTocSelectionChanged.bind(this)}
+                        error={tocError}
+                        onRetry={() => this._loadTocRootItems(publicationId)}
+                    />
+                </NavigationMenu>
+                <Splitter />
                 <Page
                     isLoading={isPageLoading}
                     content={page.content}
@@ -273,53 +328,59 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                             browserHistory.push(url);
                         }
                     }}
-                    url={pageId ?
-                        Url.getPageUrl(publicationId, pageId, publication.title, page.title || (selectedTocItem && selectedTocItem.title) || "") :
-                        Url.getPublicationUrl(publicationId, publication.title)}
+                    url={
+                        pageId
+                            ? Url.getPageUrl(
+                                  publicationId,
+                                  pageId,
+                                  publication.title,
+                                  page.title || (selectedTocItem && selectedTocItem.title) || ""
+                              )
+                            : Url.getPublicationUrl(publicationId, publication.title)
+                    }
                     activeHeader={activePageHeader}>
-                    <NavigationMenu isOpen={false}>{/* TODO: use global state store */}
-                        <Toc
-                            activeItemPath={activeTocItemPath}
-                            rootItems={rootItems}
-                            loadChildItems={(parentId: string): Promise<ITaxonomy[]> => {
-                                return taxonomyService.getSitemapItems(publicationId, parentId);
-                            }}
-                            onSelectionChanged={this._onTocSelectionChanged.bind(this)}
-                            error={tocError}
-                            onRetry={() => this._loadTocRootItems(publicationId)}
-                        >
-                            <span className="separator" />
-                        </Toc>
-                    </NavigationMenu>
                     <Breadcrumbs
                         loadItemPath={(breadcrumbItem: ITaxonomy): Promise<IBreadcrumbItem[]> => {
-                            const publicationTitle = isPublicationFound ?
-                                publication.title || "" :
-                                localizationService.formatMessage("error.publication.not.found", [publication.id]);
-                            const productFamilyTitle = publication.productFamily;
-                            let breadCrumbPath = [{
-                                title: productFamilyTitle || localizationService.formatMessage("productfamilies.unknown.title"),
-                                url: Url.getProductFamilyUrl(productFamilyTitle || DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE, selectedProductReleaseVersion)
-                            }, {
-                                title: publicationTitle,
-                                url: Url.getPublicationUrl(publicationId, publicationTitle)
-                            }] as IBreadcrumbItem[];
+                            const publicationTitle = isPublicationFound
+                                ? publication.title || ""
+                                : localizationService.formatMessage("error.publication.not.found", [publication.id]);
+                            // TODO: fix the way to retrieve family Title
+                            const productFamilyTitle = Array.isArray(publication.productFamily) ? publication.productFamily[0] : null;
+                            let breadCrumbPath = [
+                                {
+                                    title:
+                                        productFamilyTitle ||
+                                        localizationService.formatMessage("productfamilies.unknown.title"),
+                                    url: Url.getProductFamilyUrl(
+                                        productFamilyTitle || DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE,
+                                        selectedProductReleaseVersion
+                                    )
+                                },
+                                {
+                                    title: publicationTitle,
+                                    url: Url.getPublicationUrl(publicationId, publicationTitle)
+                                }
+                            ] as IBreadcrumbItem[];
                             const parsedUrl = breadcrumbItem.url && Url.parsePageUrl(breadcrumbItem.url);
                             if (parsedUrl && parsedUrl.pageId) {
-                                return taxonomyService.getSitemapPath(publicationId, parsedUrl.pageId, breadcrumbItem.id || "").then(
-                                    path => {
-                                        breadCrumbPath.push(...path.map(item => {
-                                            return {
-                                                title: item.title,
-                                                url: item.url
-                                            } as IBreadcrumbItem;
-                                        }));
-                                        return breadCrumbPath;
-                                    },
-                                    siteMapError => {
-                                        return Promise.reject(siteMapError);
-                                    }
-                                );
+                                return taxonomyService
+                                    .getSitemapPath(publicationId, parsedUrl.pageId, breadcrumbItem.id || "")
+                                    .then(
+                                        path => {
+                                            breadCrumbPath.push(
+                                                ...path.map(item => {
+                                                    return {
+                                                        title: item.title,
+                                                        url: item.url
+                                                    } as IBreadcrumbItem;
+                                                })
+                                            );
+                                            return breadCrumbPath;
+                                        },
+                                        siteMapError => {
+                                            return Promise.reject(siteMapError);
+                                        }
+                                    );
                             } else {
                                 return Promise.resolve(breadCrumbPath);
                             }
@@ -327,9 +388,16 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                         selectedItem={selectedTocItem}
                     />
                     <ContentLanguageWarning />
-                    <VersionSelector productReleaseVersions={productReleaseVersions}
-                        selectedProductReleaseVersion={selectedProductReleaseVersion}
-                        onChange={version => this._navigateToOtherReleaseVersion(publicationId, version)} />
+                    {Array.isArray(productReleaseVersions) &&
+                        productReleaseVersions.length > 1 && (
+                            <VersionSelector
+                                productReleaseVersions={productReleaseVersions}
+                                selectedProductReleaseVersion={selectedProductReleaseVersion}
+                                onChange={(version: string) =>
+                                    this._navigateToOtherReleaseVersion(version, page.logicalId)
+                                }
+                            />
+                        )}
                 </Page>
             </section>
         );
@@ -367,13 +435,16 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         // When the tree is expanding it is also calling the onTocSelectionChanged callback
         /* istanbul ignore else */
         const parsedUrl = sitemapItem.url && Url.parsePageUrl(sitemapItem.url);
-        const pageHasChanged = parsedUrl && (pageId !== parsedUrl.pageId && publicationId === parsedUrl.publicationId);
-        if (pageHasChanged && parsedUrl && onPublicationChange) {
-            onPublicationChange(parsedUrl.publicationId, parsedUrl.pageId);
+        if (parsedUrl) {
+            const { pageId: parsedPageId, publicationId: parsedPubId } = parsedUrl;
+            const pageHasChanged = pageId !== parsedPageId && publicationId === parsedPubId;
+            if (pageHasChanged && onPublicationChange) {
+                onPublicationChange(parsedPubId, parsedPageId, sitemapItem.id);
+            }
         }
     }
 
-    private _onPageContentRetrieved(publicationId: string, pageInfo: IPage): void {
+    private _onPageContentRetrieved(publicationId: string, pageInfo: IPage, taxonomyId?: string): void {
         const { activeTocItemPath, isTocLoading } = this.state;
 
         // Set the current active path for the tree
@@ -381,7 +452,8 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
             // Always take the first sitemap id
             // There is no proper way for having a deep link to the second/third/... occurance inside the toc
             const firstSitemapId = pageInfo.sitemapIds[0];
-            const taxonomyId = TcmId.getTaxonomyItemId(TaxonomyItemId.Toc, firstSitemapId) || firstSitemapId;
+
+            taxonomyId = taxonomyId || TcmId.getTaxonomyItemId(TaxonomyItemId.Toc, firstSitemapId) || firstSitemapId;
 
             this._getActiveSitemapPath(publicationId, pageInfo.id, taxonomyId, path => {
                 /* istanbul ignore if */
@@ -410,7 +482,12 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         }
     }
 
-    private _getActiveSitemapPath(publicationId: string, pageId: string, sitemapId: string, done: (path: string[]) => void): void {
+    private _getActiveSitemapPath(
+        publicationId: string,
+        pageId: string,
+        sitemapId: string,
+        done: (path: string[]) => void
+    ): void {
         const { services } = this.context;
 
         if (pageId) {
@@ -429,7 +506,8 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
                             isTocLoading: false
                         });
                     }
-                });
+                }
+            );
         }
     }
 
@@ -460,17 +538,34 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
     private _updatePanels(page: HTMLElement, toc: HTMLElement, contentNavigation: HTMLElement): void {
         /* istanbul ignore if */
         if (!this._isUnmounted) {
-            if (contentNavigation && page) {
+            let tmpState = {};
+            if (page) {
                 // Update active title inside content navigation panel
                 const pageContent = page.querySelector(".page-content") as HTMLElement;
                 if (pageContent) {
-                    const header = Html.getActiveHeader(document.body, pageContent, 0);
-                    if (header && header !== this.state.activePageHeader) {
-                        this.setState({
-                            activePageHeader: header
-                        });
+                    if (contentNavigation) {
+                        const activePageHeader = Html.getActiveHeader(document.body, pageContent, 0);
+                        if (activePageHeader && activePageHeader !== this.state.activePageHeader) {
+                            Object.assign(tmpState, { activePageHeader });
+                        }
                     }
                 }
+
+                const tocParent = toc.parentNode as HTMLElement;
+                if (tocParent) {
+                    const { splitterPosition } = this.props;
+                    tocParent.style.flexBasis = splitterPosition + "px";
+                    if (toc.offsetParent != toc.parentNode) {
+                        // 30px is the margins. It is easier to hardcode this values than for the browser to recalculate it all the time.
+                        toc.setAttribute("style", `width: ${tocParent.getBoundingClientRect().width - 30}px`);
+                    } else {
+                        toc.removeAttribute("style");
+                    }
+                }
+            }
+
+            if (Object.keys(tmpState).length > 0) {
+                this.setState(tmpState);
             }
         }
     }
@@ -511,9 +606,14 @@ export class PublicationContentPresentation extends React.Component<Pub, IPublic
         );
     }
 
-    private _navigateToOtherReleaseVersion(publicationId: string, releaseVersion: string): void {
-        if (this.props.onReleaseVersionChanged) {
-            this.props.onReleaseVersionChanged(publicationId, releaseVersion);
+    private _navigateToOtherReleaseVersion(releaseVersion: string, logicalId?: string): void {
+        const { onReleaseVersionChanged, onPageReleaseVersionChanged, publicationId, conditions } = this.props;
+
+        if (logicalId && onPageReleaseVersionChanged) {
+            const { services } = this.context;
+            onPageReleaseVersionChanged(services.pageService, publicationId, releaseVersion, logicalId, conditions);
+        } else if (onReleaseVersionChanged) {
+            onReleaseVersionChanged(publicationId, releaseVersion);
         }
     }
 }

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ServiceConfig ConnectionTimeout="15000" ReadTimeout="10000" WriteTimeout="10000" MaxIdleConnections="5" ServiceAvailabilityCheck="false">
+    <DefaultIndex IndexName="udp-index"/>
+    <DiscoveryService ServiceUri="${discovery_url:-http://localhost:8082/discovery.svc}"/>
+    <TokenService ClientId="${client_id}" ClientSecret="${client_secret}"/>
+    <QueryClient Class="com.sdl.delivery.iq.query.client.rest.RestQueryClient">
+        <QueryProvider Type="elasticsearch"/>
+    </QueryClient>
+</ServiceConfig>

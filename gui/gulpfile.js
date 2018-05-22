@@ -7,7 +7,6 @@ const fs = require("fs-extra");
 const async = require("async");
 const runSequence = require("run-sequence");
 const packageInfo = require("./package.json");
-const gulpTypings = require("./build/gulp-plugins/install-typings");
 const yargs = require("yargs");
 const path = require("path");
 
@@ -24,7 +23,7 @@ const buildOptions = {
     minCoverage: {
       // Minimum code coverage %
       statements: 80,
-      branches: 70,
+      branches: 80,
       functions: 80,
       lines: 80
     }
@@ -150,7 +149,6 @@ gulp.task(
   [
     "copy-dependencies",
     "copy-lib-files",
-    "install-typings",
     "wrap-dita-ot-styles"
   ],
   cb => {
@@ -166,10 +164,6 @@ gulp.task("run-tslint", runTSLint);
 // gulp.task('run-tslint', []);
 
 gulp.task("test-coverage", testCoverage);
-
-gulp.task("install-typings", function() {
-  return gulp.src("./typings.json").pipe(gulpTypings());
-});
 
 gulp.task(
   "wrap-dita-ot-styles",

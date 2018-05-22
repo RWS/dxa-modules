@@ -32,5 +32,26 @@ export interface IWindow extends Window {
      */
     SdlDitaDeliveryError: IError;
 
-    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: (storeEnchancer: GenericStoreEnhancer) => GenericStoreEnhancer;
+    /**
+     * Set to true when comenting is disabled
+     *
+     * @type {boolean}
+     * @memberOf IWindow
+     */
+    SdlDitaDeliveryCommentingIsEnabled?: boolean;
+
+    /**
+     * Set to true when content on a page should be evaluatable
+     *
+     * @type {boolean}
+     * @memberOf IWindow
+     */
+
+    SdlDitaDeliveryContentIsEvaluable?: boolean;
+
+    // TODO: Interface should be improved to be more generic, as a reference see `compose` implementation at `*\node_modules\redux\index.d.ts[368]`
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: (
+        storeEnchancer: GenericStoreEnhancer,
+        storeEnchancer2?: GenericStoreEnhancer
+    ) => GenericStoreEnhancer;
 }

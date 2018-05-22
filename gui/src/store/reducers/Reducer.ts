@@ -1,11 +1,13 @@
 import { MD5 } from "object-hash";
 import * as Language from "./Language";
 import * as Pages from "./Pages";
-import * as Publication from "./Publication";
+import * as Location from "./Location";
 import * as Publications from "./Publications";
 import * as ReleaseVersions from "./ReleaseVersions";
+import splitterPosition from "./SplitterPosition";
 import conditions, * as Conditions from "./conditions";
-import { IState, IPublicationCurrentState } from "store/interfaces/State";
+import productFamilies from "./ProductFamilies";
+import { IState, ICurrentLocationState } from "store/interfaces/State";
 import { IPublication } from "interfaces/Publication";
 import { IPage } from "interfaces/Page";
 import { combineReducers } from "store/reducers/CombineReducers";
@@ -20,9 +22,11 @@ export const mainReducer = combineReducers({
     comments: Comments.comments,
     language: Language.language,
     pages: Pages.pages,
-    publication: Publication.publication,
+    currentLocation: Location.currentLocation,
     publications: Publications.publications,
-    releaseVersions: ReleaseVersions.releaseVersions
+    releaseVersions: ReleaseVersions.releaseVersions,
+    productFamilies,
+    splitterPosition
 });
 
 // Publications selectors
@@ -61,7 +65,7 @@ export const isPageLoading = (state: IState, pubId: string, pageId: string, cond
 };
 
 // State selectors
-export const getCurrentPub = (state: IState): IPublicationCurrentState => state.publication;
+export const getCurrentLocation = (state: IState): ICurrentLocationState => state.currentLocation;
 export const getReleaseVersionsForPub = (state: IState, pubId: string): IProductReleaseVersion[] =>
     ReleaseVersions.getReleaseVersionsForPub(state.releaseVersions, pubId);
 
@@ -70,15 +74,17 @@ export const translateProductReleaseVersion = (productReleaseVersion: string): s
 export const translateProductReleaseVersions = (versions: IProductReleaseVersion[]): IProductReleaseVersion[] => ReleaseVersions.translateProductReleaseVersions(versions);
 
 // Comments selectors
-export const getCommentsKey = (pubId: string, pageId: string) => {
-    return `${pubId}|${pageId}`;
+export const getCommentsKey = (pubId: string, pageId: string, parentId?: number) => {
+    return `${pubId}|${pageId}|${(parentId || 0).toString()}`;
 };
 
 export const getComments = (state: IState, pubId: string, pageId: string): IComment[] =>
     Comments.getById(state.comments, getCommentsKey(pubId, pageId));
-export const getCommentErrorMessage = (state: IState, pubId: string, pageId: string): string =>
-    Comments.getErrorMessage(state.comments, getCommentsKey(pubId, pageId));
-export const getPostCommentErrorMessage = (state: IState, pubId: string, pageId: string): string =>
-    Comments.getPostErrorMessage(state.comments, getCommentsKey(pubId, pageId));
-export const isCommentSaving = (state: IState, pubId: string, pageId: string): boolean =>
-    Comments.isSaving(state.comments, getCommentsKey(pubId, pageId));
+export const commentsAreLoading = (state: IState, pubId: string, pageId: string, parentId?: number): boolean =>
+    Comments.areLoading(state.comments, getCommentsKey(pubId, pageId, parentId));
+export const getCommentErrorMessage = (state: IState, pubId: string, pageId: string, parentId?: number): string =>
+    Comments.getErrorMessage(state.comments, getCommentsKey(pubId, pageId, parentId));
+export const getPostCommentErrorMessage = (state: IState, pubId: string, pageId: string, parentId?: number): string =>
+    Comments.getPostErrorMessage(state.comments, getCommentsKey(pubId, pageId, parentId));
+export const commentIsSaving = (state: IState, pubId: string, pageId: string, parentId?: number): boolean =>
+    Comments.isSaving(state.comments, getCommentsKey(pubId, pageId, parentId));

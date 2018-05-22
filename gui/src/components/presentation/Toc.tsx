@@ -34,6 +34,12 @@ export interface ITocProps {
      */
     rootItems: ITaxonomy[] | undefined;
     /**
+     * Publication id
+     *
+     * @type {string}
+     */
+    publicationId: string;
+    /**
      * Load child items for a specific item
      */
     loadChildItems: (parentId: string) => Promise<ITaxonomy[]>;
@@ -164,12 +170,15 @@ export class Toc extends React.Component<ITocProps, { error: string | null | und
      * @param {ITocProps} nextProps
      */
     public componentWillReceiveProps(nextProps: ITocProps): void {
-        const props = this.props;
-        const currentRootNodes = this._convertToTreeViewNodes(props.rootItems || []);
+        const { rootItems, publicationId } = this.props;
+        const currentRootNodes = this._convertToTreeViewNodes(rootItems || []);
         const currentFirstRootNode = currentRootNodes.length > 0 ? currentRootNodes[0] : null;
+        if (publicationId !== nextProps.publicationId) {
+            this._currentActiveNode = null;
+        }
         const activeNodePath = this._currentActiveNode ? this._currentActiveNode.getPath().split("/") : undefined;
         const currentPath = this._getNodeIdPath(activeNodePath, currentFirstRootNode);
-        const nextRootNodes = this._convertToTreeViewNodes(props.rootItems || []);
+        const nextRootNodes = this._convertToTreeViewNodes(rootItems || []);
         const nextFirstRootNode = nextRootNodes.length > 0 ? nextRootNodes[0] : null;
         const nextPath = this._getNodeIdPath(nextProps.activeItemPath, nextFirstRootNode);
         this._isExpanding = currentPath !== nextPath;

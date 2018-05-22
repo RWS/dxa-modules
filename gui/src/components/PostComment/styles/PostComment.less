@@ -1,19 +1,16 @@
 @import (reference) "~theme-styles";
 
-@labelWidth: 125px;
-@inputWidth: 380px;
-
+.sdl-dita-delivery-postreply,
 .sdl-dita-delivery-postcomment {
     padding: 0 15px 10px;
 
     form {
         > div {
             margin-top: 5px;
-            max-width: calc(@labelWidth + @inputWidth);
+            max-width: 100%;
 
             > label {
                 display: inline-block;
-                min-width: @labelWidth;
                 vertical-align: top;
                 margin-top: 20px;
                 font-size: @fontSize + 2;
@@ -25,7 +22,6 @@
 
             .sdl-input-text,
             .sdl-textarea {
-                max-width: @inputWidth;
                 margin-top: 10px;
             }
 
@@ -54,19 +50,15 @@
         }
 
         > .sdl-button {
-            max-width: @inputWidth;
-            margin-left: @labelWidth;
             margin-top: 10px;
-            .sdl-dita-delivery-app.rtl & {
-                margin-left: 0px;
-                margin-right: @labelWidth;
-            }
-			
-			@media screen and (max-width: (@screenSm - 10)) {
-                margin-left: 0;
-				.sdl-dita-delivery-app.rtl & {
-					margin-right: 0;
-				}
+            vertical-align: middle;
+            margin-left: 0;
+            & + button {
+                margin-left: 20px;
+                .sdl-dita-delivery-app.rtl & {
+                    margin-right: 20px;
+                    margin-left: 0;
+                }
             }
         }
     }
@@ -83,6 +75,17 @@
             .sdl-dita-delivery-app.rtl & {
                 margin-left: 10px;
                 margin-right: 0;
+            }
+        }
+    }
+}
+
+.sdl-dita-delivery-postreply {
+    padding: 0;
+    form {
+        > div {
+            .sdl-textarea {
+                min-height: auto;
             }
         }
     }

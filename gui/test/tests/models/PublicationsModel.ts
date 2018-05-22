@@ -9,9 +9,10 @@ const MOCK_DATA: IPublication[] = [
     {
         Id: "Pub1",
         Title: "Pub1",
-        ProductFamily: "Family 1",
+        ProductFamily: ["Family 1"],
         CreatedOn: "",
         Version: "1",
+        LogicalRef: "123",
         LogicalId: "GUID-123",
         VersionRef: "123",
         Language: "en"
@@ -19,20 +20,23 @@ const MOCK_DATA: IPublication[] = [
     {
         Id: "Pub2",
         Title: "Pub2",
-        ProductFamily: "Family 2",
+        ProductFamily: ["Family 2"],
+        ProductReleaseVersion: ["V1"],
         CreatedOn: "",
-        ProductReleaseVersion: "V1",
         Version: "1",
+        LogicalRef: "123",
         LogicalId: "GUID-123",
         VersionRef: "123",
         Language: "en"
-    }, {
+    },
+    {
         Id: "Pub3",
         Title: "Pub3",
-        ProductFamily: "Family 2",
+        ProductFamily: ["Family 2"],
         ProductReleaseVersion: null,
         CreatedOn: "",
         Version: "1",
+        LogicalRef: "123",
         LogicalId: "GUID-123",
         VersionRef: "123",
         Language: "en"
@@ -42,6 +46,7 @@ const MOCK_DATA: IPublication[] = [
         Title: "Pub",
         CreatedOn: "",
         Version: "1",
+        LogicalRef: "123",
         LogicalId: "GUID-123",
         VersionRef: "123",
         Language: "en"
@@ -52,6 +57,7 @@ const MOCK_DATA: IPublication[] = [
         ProductFamily: null,
         CreatedOn: "",
         Version: "1",
+        LogicalRef: "123",
         LogicalId: "GUID-123",
         VersionRef: "123",
         Language: "en"
@@ -68,11 +74,8 @@ class Publications extends PublicationsBase {
 }
 
 class PublicationsModel extends TestBase {
-
     public runTests(): void {
-
         describe(`Publications model tests.`, (): void => {
-
             let publicationModel: Publications;
             beforeEach(() => {
                 publicationModel = new Publications();
@@ -88,83 +91,49 @@ class PublicationsModel extends TestBase {
                 expect(families).toBeDefined();
                 if (families) {
                     expect(families.length).toBe(3);
-                    expect(families[0].title).toBe("Family 1");
-                    expect(families[1].title).toBe("Family 2");
-                    expect(families[2].title).toBe(DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE);
+                    expect(families.map(family => family.title)).toEqual([
+                        "Family 2", // Occurs twice
+                        "Family 1",
+                        DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE
+                    ]);
                 }
             });
 
             it("filters product families in alphabetical order", (): void => {
-                spyOn(publicationModel, "getPublications").and.callFake((): IPublicationInterface[] => {
-                    return [{
-                        id: "1",
-                        title: "Title",
-                        productFamily: "Blackberry",
-                        createdOn: new Date(),
-                        version: "1",
-                        logicalId: "GUID-123"
-                    }, {
-                        id: "2",
-                        title: "Title",
-                        productFamily: "Strawberry",
-                        createdOn: new Date(),
-                        version: "1",
-                        logicalId: "GUID-123"
-                    }, {
-                        id: "3",
-                        title: "Title",
-                        productFamily: "blueberry",
-                        createdOn: new Date(),
-                        version: "1",
-                        logicalId: "GUID-123"
-                    }, {
-                        id: "4",
-                        title: "Title",
-                        productFamily: "Watermelonberry",
-                        createdOn: new Date(),
-                        version: "1",
-                        logicalId: "GUID-123"
-                    }, {
-                        id: "5",
-                        title: "Title",
-                        productFamily: "elderberry",
-                        createdOn: new Date(),
-                        version: "1",
-                        logicalId: "GUID-123"
-                    }, {
-                        id: "6",
-                        title: "Title",
-                        productFamily: "Mulberry",
-                        createdOn: new Date(),
-                        version: "1",
-                        logicalId: "GUID-123"
-                    }, {
-                        id: "7",
-                        title: "Salat item 7",
-                        createdOn: new Date(),
-                        version: "1",
-                        logicalId: "GUID-123"
-                    }, {
-                        id: "8",
-                        title: "Salat item 8",
-                        productFamily: null,
-                        createdOn: new Date(),
-                        version: "1",
-                        logicalId: "GUID-123"
-                    }];
-                });
+                const berries = [
+                    "Blackberry",
+                    "Strawberry",
+                    "Blueberry",
+                    "Watermelonberry",
+                    "Elderberry",
+                    "Mulberry",
+                    null
+                ];
+
+                spyOn(publicationModel, "getPublications").and.callFake((): IPublicationInterface[] =>
+                    berries.map(
+                        (family, i) =>
+                            ({
+                                id: `${i}`,
+                                title: `Title - ${i}`,
+                                productFamily: [family],
+                                createdOn: new Date(),
+                                version: "1",
+                                logicalId: `GUID-${i}`
+                            } as IPublicationInterface)
+                    )
+                );
 
                 const families = publicationModel.getProductFamilies();
                 expect(families).toBeDefined();
                 if (families) {
+                    const sortedBerries = berries.sort();
                     expect(families.length).toBe(7);
-                    expect(families[0].title).toBe("Blackberry");
-                    expect(families[1].title).toBe("blueberry");
-                    expect(families[2].title).toBe("elderberry");
-                    expect(families[3].title).toBe("Mulberry");
-                    expect(families[4].title).toBe("Strawberry");
-                    expect(families[5].title).toBe("Watermelonberry");
-                    expect(families[6].title).toBe(DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE);
+                    families.forEach((family, index) => {
+                        expect(families[index].title).toBe(
+                            index === 6 ? DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE : "" + sortedBerries[index]
+                        );
+                    });
                 }
             });
 
@@ -199,7 +168,9 @@ class PublicationsModel extends TestBase {
             });
 
             it("can resolve publications for an unknown product release version", (): void => {
-                const unknownProductReleaseVersion: string = localization.formatMessage("productreleaseversions.unknown.title");
+                const unknownProductReleaseVersion: string = localization.formatMessage(
+                    "productreleaseversions.unknown.title"
+                );
                 const publications = publicationModel.getPublications("Family 2", unknownProductReleaseVersion);
                 expect(publications).toBeDefined();
                 if (publications) {
@@ -210,7 +181,9 @@ class PublicationsModel extends TestBase {
 
             it("can resolve product release versions for an unknown product family", (): void => {
                 const unknownProductFamilyTitle: string = localization.formatMessage("productfamilies.unknown.title");
-                const unknownProductReleaseVersionTitle: string = localization.formatMessage("productreleaseversions.unknown.title");
+                const unknownProductReleaseVersionTitle: string = localization.formatMessage(
+                    "productreleaseversions.unknown.title"
+                );
                 const releaseVersions = publicationModel.getProductReleaseVersions(unknownProductFamilyTitle);
                 expect(releaseVersions).toBeDefined();
                 if (releaseVersions) {
@@ -221,7 +194,9 @@ class PublicationsModel extends TestBase {
 
             it("can resolve product release versions for a publication", (): void => {
                 const releaseVersions = publicationModel.getProductReleaseVersionsByPublicationId("Pub3");
-                const unknownProductReleaseVersionTitle: string = localization.formatMessage("productreleaseversions.unknown.title");
+                const unknownProductReleaseVersionTitle: string = localization.formatMessage(
+                    "productreleaseversions.unknown.title"
+                );
                 expect(releaseVersions).toBeDefined();
                 if (releaseVersions) {
                     expect(releaseVersions.length).toBe(2);
@@ -229,7 +204,6 @@ class PublicationsModel extends TestBase {
                     expect(releaseVersions[1].title).toBe(unknownProductReleaseVersionTitle);
                 }
             });
-
         });
     }
 }

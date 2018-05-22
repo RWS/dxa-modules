@@ -10,7 +10,31 @@ export interface IPostComment {
      * @type {number}
      * @memberof IPostComment
      */
+    publicationTitle: string | undefined;
+    /**
+     *
+     * @type {number}
+     * @memberof IPostComment
+     */
+    publicationUrl: string;
+    /**
+     *
+     * @type {number}
+     * @memberof IPostComment
+     */
+    pageTitle: string | undefined;
+    /**
+     *
+     * @type {number}
+     * @memberof IPostComment
+     */
     pageId: string;
+    /**
+     *
+     * @type {number}
+     * @memberof IPostComment
+     */
+    pageUrl: string;
     /**
      *
      * @type {string}
@@ -35,4 +59,10 @@ export interface IPostComment {
      * @memberof IPostComment
      */
     parentId: number;
+    /**
+     *
+     * @type {number}
+     * @memberof IPostComment
+     */
+    language: string;
 }

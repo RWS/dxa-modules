@@ -3,7 +3,7 @@ const webpack = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const extractCSS = new ExtractTextPlugin("stylesheets/[name].css");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const Visualizer = require("webpack-visualizer-plugin");
+//const Visualizer = require("webpack-visualizer-plugin");
 
 module.exports = (isTest, isDebug) => {
   const entries = {
@@ -12,6 +12,7 @@ module.exports = (isTest, isDebug) => {
       "es6-promise",
       "react-router",
       "ts-helpers",
+      "babel-polyfill",
       "@sdl/models",
       "@sdl/controls",
       "@sdl/controls-react-wrappers"
@@ -35,13 +36,16 @@ module.exports = (isTest, isDebug) => {
         ReactDOM: "react-dom",
         ReactDOMServer: "react-dom/server",
         // Custom theme
-        "theme-styles.less": path.resolve(__dirname, "src/theming/styles.less"),
+        "theme-styles": path.resolve(
+          __dirname,
+          "node_modules/@sdl/delivery-ish-dd-webapp-gui/src/theming/styles.less"
+        ),
         // Custom components overwrites
         // ...
         // Components aliases
         "@sdl/dd/base": path.resolve(
           __dirname,
-          "node_modules/@sdl/delivery-ish-dd-webapp-gui/dist/lib/components"
+          "./src/theming/styles.less"
         ),
         "@sdl/dd": path.resolve(
           __dirname,
@@ -62,7 +66,7 @@ module.exports = (isTest, isDebug) => {
       rules: [
         {
           test: /\.(png|jpg|otf|woff(2)?|eot|ttf|svg)$/,
-          loader: 'url-loader?limit=200000'
+          loader: "url-loader?limit=200000"
         },
         {
           test: /\.css$/,
@@ -105,9 +109,10 @@ module.exports = (isTest, isDebug) => {
         hash: true,
         excludeChunks: ["test", "server"]
       }),
+	  /* Disabled visualizer as it takes too much memory, only enable when needed
       new Visualizer({
         filename: "../bundle.stats.html"
-      })
+      })*/
     ],
     // What information should be printed to the console
     stats: {
@@ -152,6 +157,9 @@ module.exports = (isTest, isDebug) => {
   if (!isDebug) {
     // Only for production
     config.plugins.push(
+      new webpack.DefinePlugin({
+        "process.env.NODE_ENV": JSON.stringify("production")
+      }),
       new webpack.optimize.UglifyJsPlugin({
         compress: {
           warnings: false

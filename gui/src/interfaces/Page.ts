@@ -22,6 +22,14 @@ export interface IPage {
     title?: string;
 
     /**
+     * Page logicalId
+     *
+     * @type {string}
+     * @memberOf IPage
+     */
+    logicalId?: string;
+
+    /**
      * Page content
      *
      * @type {string}

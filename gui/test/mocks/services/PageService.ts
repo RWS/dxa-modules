@@ -9,7 +9,6 @@ import { ASYNC_DELAY } from "test/Constants";
 let fakeDelay = false;
 
 export class PageService implements IPageService {
-
     private _mockDataPage: {
         error: string | null;
         info: IPage | undefined;
@@ -24,10 +23,10 @@ export class PageService implements IPageService {
     };
 
     private _mockDataComments: {
-        values: IComment[];
-        error: string | null
+        comments: IComment[];
+        error: string | null;
     } = {
-        values: [],
+        comments: [],
         error: null
     };
 
@@ -38,14 +37,13 @@ export class PageService implements IPageService {
                 setTimeout((): void => {
                     if (error) {
                         reject(error);
-                    }
-                    else {
+                    } else {
                         resolve(info);
                     }
                 }, ASYNC_DELAY);
             });
         } else {
-            if (error) {
+            if (error || !info) {
                 return Promise.reject(error);
             } else {
                 return Promise.resolve(info);
@@ -53,16 +51,43 @@ export class PageService implements IPageService {
         }
     }
 
-    public getComments(publicationId: string, pageId: string, descending: boolean, top: number, skip: number, status: number[]): Promise<IComment[]> {
-        const { error, values } = this._mockDataComments;
+    public getPageInfoByLogicalId(publicationId: string, logicalId: string): Promise<IPage> {
+        const { error, info } = this._mockDataPage;
+        if (fakeDelay) {
+            return new Promise((resolve: (info?: IPage) => void, reject: (error: string | null) => void) => {
+                setTimeout((): void => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        resolve(info);
+                    }
+                }, ASYNC_DELAY);
+            });
+        } else {
+            if (error || !info) {
+                return Promise.reject(error);
+            } else {
+                return Promise.resolve(info);
+            }
+        }
+    }
+
+    public getComments(
+        publicationId: string,
+        pageId: string,
+        descending: boolean,
+        top: number,
+        skip: number,
+        status: number[]
+    ): Promise<IComment[]> {
+        const { error, comments } = this._mockDataComments;
         if (fakeDelay) {
             return new Promise((resolve: (values?: IComment[]) => void, reject: (error: string | null) => void) => {
                 setTimeout((): void => {
                     if (error) {
                         reject(error);
-                    }
-                    else {
-                        resolve(values);
+                    } else {
+                        resolve(comments);
                     }
                 }, ASYNC_DELAY);
             });
@@ -70,21 +95,20 @@ export class PageService implements IPageService {
             if (error) {
                 return Promise.reject(error);
             } else {
-                return Promise.resolve(values);
+                return Promise.resolve(comments);
             }
         }
     }
 
     public saveComment(data: IPostComment): Promise<IComment> {
-        const { error, values } = this._mockDataComments;
+        const { error, comments } = this._mockDataComments;
         if (fakeDelay) {
-            return new Promise((resolve: (value?: IComment)  => void, reject: (error: string | null) => void) => {
+            return new Promise((resolve: (value?: IComment) => void, reject: (error: string | null) => void) => {
                 setTimeout((): void => {
                     if (error) {
                         reject(error);
-                    }
-                    else {
-                        resolve(values[0]);
+                    } else {
+                        resolve(comments[0]);
                     }
                 }, ASYNC_DELAY);
             });
@@ -92,20 +116,26 @@ export class PageService implements IPageService {
             if (error) {
                 return Promise.reject(error);
             } else {
-                return Promise.resolve(values[0]);
+                return Promise.resolve(comments[0]);
             }
         }
     }
 
     public setMockDataPage(error: string | null, info?: IPage): void {
         this._mockDataPage = {
-            error: error,
-            info: info
+            error,
+            info
+        };
+    }
+
+    public setMockDataComments(error: string | null, comments?: IComment[]): void {
+        this._mockDataComments = {
+            error,
+            comments: comments || []
         };
     }
 
     public fakeDelay(value: boolean): void {
         fakeDelay = value;
     }
-
 }

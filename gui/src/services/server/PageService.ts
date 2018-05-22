@@ -53,6 +53,25 @@ export class PageService implements IPageService {
         }
     }
 
+    /**
+     * Get page information
+     *
+     * @param {string} publicationId Publication Id
+     * @param {string} logicalId The page logical id
+     * @param {IConditionMap} conditions The page conditions
+     * @returns {Promise<IPage>} Promise to return the the content
+     *
+     * @memberOf IDataStore
+     */
+    public getPageInfoByLogicalId(publicationId: string, logicalId: string, conditions: IConditionMap): Promise<IPage> {
+        const { error, info } = this._mockDataPage;
+        if (error) {
+            return Promise.reject(error);
+        } else {
+            return Promise.resolve(info);
+        }
+    }
+
     public getComments(publicationId: string, pageId: string, descending: boolean, top: number, skip: number, status: number[]): Promise<IComment[]> {
         const { error, values } = this._mockDataComments;
         if (error) {

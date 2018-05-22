@@ -1,157 +1,27 @@
-import * as React from "react";
-import * as PropTypes from "prop-types";
-import { browserHistory } from "react-router";
-import { Promise } from "es6-promise";
-import { ButtonPurpose } from "@sdl/controls";
-import { ActivityIndicator, Button } from "@sdl/controls-react-wrappers";
-import { IProductFamily } from "interfaces/ProductFamily";
-import { IAppContext } from "@sdl/dd/container/App/App";
-import { TilesList } from "@sdl/dd/container/TilesList/TilesList";
-import { ITile, INFO_TYPES } from "@sdl/dd/presentation/Tile";
-import { Error } from "@sdl/dd/presentation/Error";
-import { Url } from "utils/Url";
-import { DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE } from "models/Publications";
+import { connect } from "react-redux";
+import { IState } from "store/interfaces/State";
+import { isPubsLoading, getPubListErrorMessage } from "store/reducers/Reducer";
+import { fetchProductFamilies } from "store/actions/Api";
+import { ProductFamiliesListPresentation } from "@sdl/dd/container/ProductFamiliesList/ProductFamiliesListPresentation";
 
-import "components/controls/styles/ActivityIndicator";
-import "components/controls/styles/Button";
+const mapStateToProps = (state: IState) => {
+    const error = getPubListErrorMessage(state);
+    const productFamilies = state.productFamilies;
 
-import "./ProductFamiliesList.less";
+    return {
+        error: error,
+        productFamilies,
+        isLoading: productFamilies.length === 0 && isPubsLoading(state)
+    };
+};
+
+const dispatchToProps = {
+    fetchProductFamilies
+};
 
 /**
- * Product Families list component state
+ * Connector of Product families List component for Redux
  *
  * @export
- * @interface IProductFamiliesListState
  */
-export interface IProductFamiliesListState {
-    /**
-     * Product Families flat list
-     *
-     * @type {IProductFamily[]}
-     */
-    productFamilies?: IProductFamily[];
-    /**
-     * An error prevented the list from loading
-     *
-     * @type {string}
-     */
-    error?: string;
-}
-
-/**
- * Product families list component
- */
-export class ProductFamiliesList extends React.Component<{}, IProductFamiliesListState> {
-
-    public static contextTypes: React.ValidationMap<IAppContext> = {
-        services: PropTypes.object.isRequired
-    };
-
-    public context: IAppContext;
-
-    private _isUnmounted: boolean = false;
-
-    /**
-     * Creates an instance of Product families list component.
-     *
-     */
-    constructor() {
-        super();
-        this.state = {
-            productFamilies: undefined,
-            error: undefined
-        };
-    }
-
-    /**
-     * Invoked once, both on the client and server, immediately before the initial rendering occurs.
-     */
-    public componentWillMount(): void {
-        this._loadProductFamilies();
-    }
-
-    /**
-     * Render the component
-     *
-     * @returns {JSX.Element}
-     */
-    public render(): JSX.Element {
-        const { productFamilies, error } = this.state;
-        const { services } = this.context;
-        const { formatMessage } = services.localizationService;
-
-        const errorButtons = <div>
-            <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{ "click": () => this._loadProductFamilies() }}>{formatMessage("control.button.retry")}</Button>
-        </div>;
-
-        return (
-            <section className={"sdl-dita-delivery-product-families-list"}>
-                {
-                    error ?
-                        <Error
-                            title={formatMessage("error.default.title")}
-                            messages={[formatMessage("error.product.families.list.not.found"), formatMessage("error.product.families.default.message")]}
-                            buttons={errorButtons} />
-                        : productFamilies
-                            ? (productFamilies.length > 0)
-                                ? (<TilesList viewAllLabel={formatMessage("components.productfamilies.view.all")}
-                                    tiles={productFamilies.map((productFamily: IProductFamily) => {
-                                        const title = productFamily.hasWarning ? formatMessage("productfamilies.unknown.title") : productFamily.title;
-                                        const titleUrl = productFamily.hasWarning ? DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE : productFamily.title;
-                                        const description = productFamily.hasWarning ? formatMessage("productfamilies.unknown.description") : productFamily.description;
-                                        const info = productFamily.hasWarning
-                                            ? { message: formatMessage("productfamilies.unknown.description"), type: INFO_TYPES.WARNING }
-                                            : undefined;
-                                        return {
-                                            title: title,
-                                            loadableContent: description ? () => Promise.resolve(description) : undefined,
-                                            info,
-                                            navigateTo: () => {
-                                                /* istanbul ignore else */
-                                                if (browserHistory) {
-                                                    browserHistory.push(Url.getProductFamilyUrl(titleUrl));
-                                                }
-                                            }
-                                        } as ITile;
-                                    })} />)
-                                : <div className={"no-available-publications-label"}>{formatMessage("components.productfamilies.no.published.publications")}</div>
-                            : <ActivityIndicator skin="graphene" text={formatMessage("components.app.loading")} />
-                }
-            </section>);
-    }
-
-    /**
-     * Component will unmount
-     */
-    public componentWillUnmount(): void {
-        this._isUnmounted = true;
-    }
-
-    /**
-     * Component will unmount
-     */
-    public _loadProductFamilies(): void {
-        const { publicationService } = this.context.services;
-
-        // Get product families list
-        publicationService.getProductFamilies().then(
-            families => {
-                /* istanbul ignore else */
-                if (!this._isUnmounted) {
-                    this.setState({
-                        productFamilies: families,
-                        error: undefined
-                    });
-                }
-            },
-            error => {
-                /* istanbul ignore else */
-                if (!this._isUnmounted) {
-                    // TODO: improve error handling
-                    this.setState({
-                        error: error
-                    });
-                }
-            });
-    }
-}
+export const ProductFamiliesList = connect(mapStateToProps, dispatchToProps)(ProductFamiliesListPresentation);

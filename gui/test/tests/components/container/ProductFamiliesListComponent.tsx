@@ -1,22 +1,35 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as TestUtils from "react-addons-test-utils";
-import { ProductFamiliesList } from "@sdl/dd/container/ProductFamiliesList/ProductFamiliesList";
+import {
+    ProductFamiliesListPresentation,
+    IProductFamiliesListProps
+} from "@sdl/dd/container/ProductFamiliesList/ProductFamiliesListPresentation";
 import { ActivityIndicator, Button } from "@sdl/controls-react-wrappers";
 import { TestBase } from "@sdl/models";
 import { PublicationService } from "test/mocks/services/PublicationService";
 import { ComponentWithContext } from "test/mocks/ComponentWithContext";
 import { browserHistory } from "react-router";
+import { Provider } from "react-redux";
+import { configureStore } from "store/Store";
 
-import { RENDER_DELAY, ASYNC_DELAY } from "test/Constants";
+import { RENDER_DELAY } from "test/Constants";
 
 const services = {
     publicationService: new PublicationService()
 };
 
 class ProductFamiliesListComponent extends TestBase {
-
     public runTests(): void {
+        const defaultProps: IProductFamiliesListProps = {
+            error: "",
+            productFamilies: [
+                {
+                    title: "Product Family"
+                }
+            ],
+            isLoading: false
+        };
 
         describe(`ProductFamiliesList component tests.`, (): void => {
             const target = super.createTargetElement();
@@ -33,93 +46,97 @@ class ProductFamiliesListComponent extends TestBase {
                 }
             });
 
-            it("show loading indicator on initial render", (): void => {
-                const productFamiliesList = this._renderComponent(target);
-                // tslint:disable-next-line:no-any
-                const activityIndicators = TestUtils.scryRenderedComponentsWithType(productFamiliesList, ActivityIndicator as any);
+            it("shows loading indicator", (): void => {
+                const productFamiliesList = this._renderComponent(target, { ...defaultProps, isLoading: true });
+                const activityIndicators = TestUtils.scryRenderedComponentsWithType(
+                    productFamiliesList,
+                    // tslint:disable-next-line:no-any
+                    ActivityIndicator as any
+                );
                 expect(activityIndicators.length).toBe(1, "Could not find activity indicators.");
             });
 
-            it("shows an error message when product families list fails to load", (done: () => void): void => {
-                const errorMessage = "Families list failed to load!";
-                services.publicationService.fakeDelay(true);
-                services.publicationService.setMockDataPublications(errorMessage);
-                const productFamiliesList = this._renderComponent(target);
-
-                setTimeout((): void => {
+            it("shows no publications message when list fo publiactions is empty", (): void => {
+                const productFamiliesList = this._renderComponent(target, { ...defaultProps, productFamilies: [] });
+                const activityIndicators = TestUtils.scryRenderedComponentsWithType(
+                    productFamiliesList,
                     // tslint:disable-next-line:no-any
-                    const activityIndicators = TestUtils.scryRenderedComponentsWithType(productFamiliesList, ActivityIndicator as any);
-                    expect(activityIndicators.length).toBe(0, "Activity indicator should not be rendered.");
+                    ActivityIndicator as any
+                );
+                expect(activityIndicators.length).toBe(0, "Activity indicator should not be rendered.");
 
-                    const domNode = ReactDOM.findDOMNode(productFamiliesList) as HTMLElement;
-                    const errorElement = domNode.querySelector(".sdl-dita-delivery-error");
-                    expect(errorElement).not.toBeNull("Error dialog not found");
-                    const errorTitle = (errorElement as HTMLElement).querySelector("h1") as HTMLElement;
-                    expect(errorTitle.textContent).toEqual("mock-error.default.title");
-                    const buttons = (errorElement as HTMLElement).querySelectorAll(".sdl-dita-delivery-button-group button");
-                    expect(buttons.length).toEqual(1);
+                const domNode = ReactDOM.findDOMNode(productFamiliesList) as HTMLElement;
+                const noContentNode = domNode.querySelector(".no-available-publications-label");
+                expect(noContentNode && noContentNode.textContent).toBe(
+                    "mock-components.productfamilies.no.published.publications"
+                );
+            });
 
-                    done();
-                }, ASYNC_DELAY);
+            it("shows an error message when product families list fails to load", (): void => {
+                const error = "Families list failed to load!";
+                const productFamiliesList = this._renderComponent(target, { ...defaultProps, error });
+                const activityIndicators = TestUtils.scryRenderedComponentsWithType(
+                    productFamiliesList,
+                    // tslint:disable-next-line:no-any
+                    ActivityIndicator as any
+                );
+                expect(activityIndicators.length).toBe(0, "Activity indicator should not be rendered.");
+
+                const domNode = ReactDOM.findDOMNode(productFamiliesList) as HTMLElement;
+                const errorElement = domNode.querySelector(".sdl-dita-delivery-error");
+                expect(errorElement).not.toBeNull("Error dialog not found");
+                const errorTitle = (errorElement as HTMLElement).querySelector("h1") as HTMLElement;
+                expect(errorTitle.textContent).toEqual("mock-error.default.title");
+                const buttons = (errorElement as HTMLElement).querySelectorAll(
+                    ".sdl-dita-delivery-button-group button"
+                );
+                expect(buttons.length).toEqual(1);
             });
 
             it("Retries loading when error retry button is clicked", (done: () => void): void => {
-                services.publicationService.setMockDataPublications("ERROR");
-                const productFamiliesList = this._renderComponent(target);
-
-                setTimeout((): void => {
-                    const domNode = ReactDOM.findDOMNode(productFamiliesList) as HTMLElement;
-                    const buttons = domNode.querySelectorAll("button");
-                    expect(buttons.length).toEqual(1);
-                    const button = buttons[0] as HTMLButtonElement;
-                    expect(button).toBeDefined("Retry loading button is not defined");
-                    expect(button.textContent).toEqual("mock-control.button.retry");
-
-                    const productFamilies = [{
-                        title: "Product Family"
-                    }];
-                    services.publicationService.setMockDataPublications(null, [], productFamilies);
-                    button.click();
-
-                    setTimeout((): void => {
-                        const headers = TestUtils.scryRenderedDOMComponentsWithTag(productFamiliesList, "h3");
-                        expect(headers.length).toBe(1);
-                        expect(headers[0].textContent).toBe(productFamilies[0].title);
-
+                const error = "ERROR";
+                const productFamiliesList = this._renderComponent(target, {
+                    ...defaultProps,
+                    error,
+                    fetchProductFamilies: () => {
                         done();
-                    }, RENDER_DELAY);
-                }, RENDER_DELAY);
+                }});
+
+                const domNode = ReactDOM.findDOMNode(productFamiliesList) as HTMLElement;
+                const buttons = domNode.querySelectorAll("button");
+                expect(buttons.length).toEqual(1);
+                const button = buttons[0] as HTMLButtonElement;
+                expect(button).toBeDefined("Retry loading button is not defined");
+                expect(button.textContent).toEqual("mock-control.button.retry");
+
+                TestUtils.Simulate.click(button);
             });
 
-            it("renders product families tiles", (done: () => void): void => {
-                services.publicationService.fakeDelay(true);
-                const productFamilies = [{
-                    title: "Product Family 1"
-                }, {
-                    title: "Product Family 2"
-                }];
-                services.publicationService.setMockDataPublications(null, [], productFamilies);
+            it("renders product families tiles", (): void => {
+                const productFamilies = [
+                    {
+                        title: "Product Family 1"
+                    },
+                    {
+                        title: "Product Family 2 with Warning",
+                        hasWarning: true
+                    }
+                ];
 
-                const productFamiliesList = this._renderComponent(target);
+                const productFamiliesList = this._renderComponent(target, { ...defaultProps, productFamilies });
 
-                setTimeout((): void => {
-                    const hyperlinks = TestUtils.scryRenderedDOMComponentsWithTag(productFamiliesList, "h3");
-                    expect(hyperlinks.length).toBe(2);
+                const header = TestUtils.scryRenderedDOMComponentsWithTag(productFamiliesList, "h3");
+                expect(header.length).toBe(2);
 
-                    expect(hyperlinks[0].textContent).toBe(productFamilies[0].title);
-                    expect(hyperlinks[1].textContent).toBe(productFamilies[1].title);
-
-                    done();
-                }, ASYNC_DELAY);
+                expect(header[0].textContent).toBe(productFamilies[0].title);
+                expect(header[1].textContent).toBe("mock-productfamilies.unknown.title");
+                expect(header[1].classList).toContain("exclamation-mark");
             });
 
-            it("navigates to publications list when a product family `view more` button is clicked", (done: () => void): void => {
-                const productFamilies = [{
-                    title: "Product Family"
-                }];
-                services.publicationService.setMockDataPublications(null, [], productFamilies);
-
-                const productFamiliesList = this._renderComponent(target);
+            it("navigates to publications list when a product family `view more` button is clicked", (
+                done: () => void
+            ): void => {
+                const productFamiliesList = this._renderComponent(target, defaultProps);
                 const domNode = ReactDOM.findDOMNode(productFamiliesList) as HTMLElement;
                 expect(domNode).not.toBeNull();
 
@@ -139,20 +156,24 @@ class ProductFamiliesListComponent extends TestBase {
                     buttonEl.click();
                 }, RENDER_DELAY);
             });
-
         });
     }
 
-    private _renderComponent(target: HTMLElement, productFamily?: string): ProductFamiliesList {
+    private _renderComponent(target: HTMLElement, props: IProductFamiliesListProps): ProductFamiliesListPresentation {
+        const store = configureStore({});
         const comp = ReactDOM.render(
-            (
+            <Provider store={store}>
                 <ComponentWithContext {...services}>
-                    <ProductFamiliesList />
+                    <ProductFamiliesListPresentation {...props} />
                 </ComponentWithContext>
-            ), target) as React.Component<{}, {}>;
-        return TestUtils.findRenderedComponentWithType(comp, ProductFamiliesList) as ProductFamiliesList;
+            </Provider>,
+            target
+        ) as React.Component<{}, {}>;
+        return TestUtils.findRenderedComponentWithType(
+            comp,
+            ProductFamiliesListPresentation
+        ) as ProductFamiliesListPresentation;
     }
-
 }
 
 new ProductFamiliesListComponent().runTests();

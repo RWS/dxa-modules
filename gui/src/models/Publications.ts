@@ -19,10 +19,11 @@ export const DEFAULT_UNKNOWN_PRODUCT_RELEASE_VERSION: string = "Unknown product 
  * @extends {LoadableObject}
  */
 export class Publications extends LoadableObject {
-
     private _publications: IPublication[];
     private _productFamilies?: IProductFamily[];
-    private _unknownProductFamilyDescription: string = localization.formatMessage("productfamilies.unknown.description");
+    private _unknownProductFamilyDescription: string = localization.formatMessage(
+        "productfamilies.unknown.description"
+    );
     private _unknownProductFamilyTitle: string = DEFAULT_UNKNOWN_PRODUCT_FAMILY_TITLE;
     private _unknownProductReleaseVersion: string = DEFAULT_UNKNOWN_PRODUCT_RELEASE_VERSION;
 
@@ -38,25 +39,37 @@ export class Publications extends LoadableObject {
 
         if (productFamily) {
             const normalizedProductFamily = String.normalize(productFamily);
-            const familyTitle = (normalizedProductFamily === String.normalize(this._unknownProductFamilyTitle)) ? undefined : normalizedProductFamily;
+            const familyTitle =
+                normalizedProductFamily === String.normalize(this._unknownProductFamilyTitle)
+                    ? undefined
+                    : normalizedProductFamily;
             result = result.filter((publication: IPublication) => {
                 if (!familyTitle) {
                     return !publication.productFamily;
                 }
-                return (publication.productFamily && String.normalize(publication.productFamily)) === familyTitle;
+                return (
+                    Array.isArray(publication.productFamily) &&
+                    publication.productFamily.map(Version.normalizeProductFamily).includes(familyTitle)
+                );
             });
         }
 
         if (productReleaseVersion) {
             const normalizedProductReleaseVersion = String.normalize(productReleaseVersion);
-            const productReleaseVersionTitle = (normalizedProductReleaseVersion === String.normalize(this._unknownProductReleaseVersion))
-                ? undefined : normalizedProductReleaseVersion;
+            const productReleaseVersionTitle =
+                normalizedProductReleaseVersion === String.normalize(this._unknownProductReleaseVersion)
+                    ? undefined
+                    : normalizedProductReleaseVersion;
             result = result.filter((publication: IPublication) => {
                 if (!productReleaseVersionTitle) {
                     return !publication.productReleaseVersion;
                 }
-                const normalizedPublicationProductReleaseVersion = publication.productReleaseVersion && Version.normalize(publication.productReleaseVersion);
-                return normalizedPublicationProductReleaseVersion === productReleaseVersionTitle;
+                return (
+                    Array.isArray(publication.productReleaseVersion) &&
+                    publication.productReleaseVersion
+                        .map(Version.normalizeReleaseVersion)
+                        .includes(productReleaseVersionTitle)
+                );
             });
         }
 
@@ -71,7 +84,9 @@ export class Publications extends LoadableObject {
      */
     public getProductReleaseVersions(productFamily: string): IProductReleaseVersion[] {
         const publicationsList = this.getPublications(productFamily);
-        return Version.sortProductReleaseVersions(publicationsList).map(version => this._convertToProductReleaseVersion(version));
+        return Version.sortProductReleaseVersions(publicationsList).map(version =>
+            this._convertToProductReleaseVersion(version)
+        );
     }
 
     /**
@@ -84,8 +99,12 @@ export class Publications extends LoadableObject {
         const publicationsList = this.getPublications().filter(pub => pub.id === publicationId);
         const publication = publicationsList[0];
         if (publication) {
-            const publicationVersionsList = this.getPublications().filter(pub => pub.logicalId === publication.logicalId);
-            return Version.sortProductReleaseVersions(publicationVersionsList).map(version => this._convertToProductReleaseVersion(version));
+            const publicationVersionsList = this.getPublications().filter(
+                pub => pub.logicalId === publication.logicalId
+            );
+            return Version.sortProductReleaseVersions(publicationVersionsList).map(version =>
+                this._convertToProductReleaseVersion(version)
+            );
         }
         return undefined;
     }
@@ -99,31 +118,10 @@ export class Publications extends LoadableObject {
         if (!this._productFamilies) {
             const publications = this.getPublications();
             if (publications) {
-                let distinctFamilies: (string | undefined)[] = publications.map((publication: IPublication) => {
-                    return publication.productFamily || undefined;
-                }).filter((family: string, i: number, arr: string[]) => {
-                    return arr.indexOf(family) == i;
-                });
-
-                // Implementing case in-sensetive sort
-                distinctFamilies.sort((left: string | undefined, right: string | undefined) => {
-                    return (left || "").toLowerCase().localeCompare((right || "").toLowerCase());
-                });
-
-                this._productFamilies = distinctFamilies.map((family: string | undefined): IProductFamily => {
-                    if (family === undefined) {
-                        return {
-                            title: this._unknownProductFamilyTitle,
-                            description: this._unknownProductFamilyDescription,
-                            hasWarning: true
-                        };
-                    } else {
-                        return {
-                            // Only title now, description would go here later on
-                            title: family
-                        };
-                    }
-                });
+                // Implementing sort
+                this._productFamilies = Version.sortProductFamilyVersions(publications).map(family =>
+                    this._convertToProductFamily(family)
+                );
             }
         }
         return this._productFamilies || [];
@@ -132,24 +130,25 @@ export class Publications extends LoadableObject {
     /* Overloads */
     protected _executeLoad(reload: boolean): void {
         const url = Api.getPublicationsUrl();
-        Net.getRequest(url,
-            this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
+        Net.getRequest(url, this.getDelegate(this._onLoad), this.getDelegate(this._onLoadFailed));
     }
 
     protected _processLoadResult(result: string, webRequest: IWebRequest): void {
-        this._publications = (JSON.parse(result) as ServerModels.IPublication[]).map((item: ServerModels.IPublication) => {
-            return {
-                id: item.Id,
-                title: item.Title,
-                productFamily: item.ProductFamily,
-                productReleaseVersion: item.ProductReleaseVersion,
-                versionRef: item.VersionRef,
-                language: item.Language,
-                createdOn: new Date(item.CreatedOn),
-                version: item.Version,
-                logicalId: item.LogicalId
-            } as IPublication;
-        });
+        this._publications = (JSON.parse(result) as ServerModels.IPublication[]).map(
+            (item: ServerModels.IPublication) => {
+                return {
+                    id: item.Id,
+                    title: item.Title,
+                    productFamily: item.ProductFamily,
+                    productReleaseVersion: item.ProductReleaseVersion,
+                    versionRef: item.VersionRef,
+                    language: item.Language,
+                    createdOn: new Date(item.CreatedOn),
+                    version: item.Version,
+                    logicalId: item.LogicalId
+                } as IPublication;
+            }
+        );
 
         this._productFamilies = undefined;
 
@@ -168,5 +167,19 @@ export class Publications extends LoadableObject {
             title: version,
             value: String.normalize(version)
         };
+    }
+
+    private _convertToProductFamily(family: string | null): IProductFamily {
+        if (family === null) {
+            return {
+                title: this._unknownProductFamilyTitle,
+                description: this._unknownProductFamilyDescription,
+                hasWarning: true
+            };
+        } else {
+            return {
+                title: family
+            };
+        }
     }
 }

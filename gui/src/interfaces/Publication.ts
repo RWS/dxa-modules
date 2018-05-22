@@ -27,7 +27,7 @@ export interface IPublication {
      * @type {string | null}
      * @memberOf IPublication
      */
-    productFamily?: string | null;
+    productFamily?: string[] | null;
 
     /**
      * Publication product release version
@@ -35,7 +35,7 @@ export interface IPublication {
      * @type {string | null}
      * @memberOf IPublication
      */
-    productReleaseVersion?: string | null;
+    productReleaseVersion?: string[] | null;
 
     /**
      * Publication verison
@@ -66,5 +66,12 @@ export interface IPublication {
      * @memberOf IPublication
      */
     language?: string;
+
+    /**
+     * Logical ID
+     *
+     * @type {string}
+     * @memberOf IPublication
+     */
     logicalId: string;
 }

@@ -196,4 +196,26 @@ export class Api {
             return path.getAbsolutePath("api/search");
         }
     }
+
+    /**
+     * Get page Id by logical reference Id
+     * Use this url to get page by logicalRefId
+     *
+     * @static
+     * @param {string} publicationId
+     * @param {string} logicalId
+     * @returns {string}
+     *
+     * @memberof Api
+     */
+    public static getPageIdByReferenceUrl(publicationId: string, logicalId: string): string {
+        const encodedPubId = encodeURIComponent(publicationId);
+        const encodedLogicalId = encodeURIComponent(logicalId);
+        /* istanbul ignore else */
+        if (mocksEnabled()) {
+            return path.getAbsolutePath(`${mocksEndPoint}/pageidbyreference-${encodedPubId}-${encodedLogicalId}.json`);
+        } else {
+            return path.getAbsolutePath(`api/pageIdByReference/${encodedPubId}/${encodedLogicalId}`);
+        }
+    }
 }

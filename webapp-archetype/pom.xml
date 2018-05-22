@@ -4,7 +4,7 @@
 
     <groupId>com.sdl.delivery.ish</groupId>
     <artifactId>dd-webapp</artifactId>
-    <version>0.3.0-SNAPSHOT</version>
+    <version>1.3.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
     <name>custom-webapp</name>
@@ -48,15 +48,18 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <webapp.version>0.3.0-SNAPSHOT</webapp.version>
+        <webapp.version>1.3.0-SNAPSHOT</webapp.version>
         <java.target.version>1.8</java.target.version>
         <maven.compiler.plugin.version>3.6.0</maven.compiler.plugin.version>
-        <dxa-bom.version>1.8.0-SNAPSHOT</dxa-bom.version>
+        <dxa.version>1.8.1-SNAPSHOT</dxa.version>
+        <cd-cil.version>10.1.0-1019</cd-cil.version>
         <maven.resources.plugin.version>3.0.2</maven.resources.plugin.version>
+        <jackson2.version>2.9.4</jackson2.version>
+
         <!-- GUI properties -->
         <frontend.maven.plugin.version>1.0</frontend.maven.plugin.version>
-        <node.version>v6.3.0</node.version>
-        <npm.version>3.10.5</npm.version>
+        <node.version>v6.11.2</node.version>
+        <npm.version>4.6.1</npm.version>
     </properties>
 
     <dependencyManagement>
@@ -64,9 +67,15 @@
             <dependency>
                 <groupId>com.sdl.dxa</groupId>
                 <artifactId>dxa-bom</artifactId>
-                <version>${dxa-bom.version}</version>
+                <version>${dxa.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+                <exclusions>
+                    <exclusion>
+                        <groupId>com.sdl.web</groupId>
+                        <artifactId>cil</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -82,11 +91,33 @@
             <artifactId>ish-ugc-module</artifactId>
             <version>${webapp.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.sdl.delivery.ish</groupId>
+            <artifactId>ish-search</artifactId>
+            <version>${webapp.version}</version>
+        </dependency>
         <!-- SDL Digital Experience Accelerator -->
         <dependency>
             <groupId>com.sdl.dxa</groupId>
             <artifactId>dxa-common-api</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-annotations</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-databind</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-datatype-joda</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.sdl.dxa</groupId>
@@ -95,6 +126,68 @@
         <dependency>
             <groupId>com.sdl.dxa</groupId>
             <artifactId>dxa-web8-provider</artifactId>
+            <version>${dxa.version}</version>
+            <scope>runtime</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.sdl.web</groupId>
+                    <artifactId>cil</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.module</groupId>
+                    <artifactId>jackson-module-jaxb-annotations</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.module</groupId>
+                    <artifactId>jackson-module-jaxb-annotations</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.sdl.delivery</groupId>
+            <artifactId>cil</artifactId>
+            <version>${cd-cil.version}</version>
+            <type>pom</type>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.vs.ezlicrun</groupId>
+                    <artifactId>easylicense</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.tridion</groupId>
+                    <artifactId>cd_broker</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.sdl.web</groupId>
+                    <artifactId>web-ambient-engine</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-joda</artifactId>
+            <version>${jackson2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-xml</artifactId>
+            <version>${jackson2.version}</version>
         </dependency>
 
         <dependency>

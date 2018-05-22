@@ -47,7 +47,11 @@ export interface IErrorContentProps {
  */
 export const ErrorContentPresentation: React.StatelessComponent<IErrorContentProps> = (props: IErrorContentProps, context: IAppContext): JSX.Element => {
     const { formatMessage } = context.services.localizationService;
-    const _goHome = (): void => window.location.replace(path.getRootPath());
+    const _goHome = (): void => {
+        if (browserHistory) {
+            browserHistory.push(path.getRootPath());
+        }
+    };
 
     const errorButtons = <div>
         <Button skin="graphene" purpose={ButtonPurpose.CONFIRM} events={{ "click": _goHome }}>{formatMessage("components.breadcrumbs.home")}</Button>

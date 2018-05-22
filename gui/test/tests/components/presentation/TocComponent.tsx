@@ -73,17 +73,22 @@ class TocComponent extends TestBase {
                 }
             };
 
+            const tocDefaultProps: ITocProps = {
+                loadChildItems,
+                rootItems,
+                publicationId: "0",
+                onSelectionChanged: (sitemapItem: ITaxonomy, path: string[]): void => {},
+                onRetry: () => { }
+            };
+
             beforeEach(() => {
-                const props: ITocProps = {
-                    loadChildItems: loadChildItems,
-                    rootItems: rootItems,
+                toc = this._renderComponent({
+                    ...tocDefaultProps,
                     onRetry: () => {
                         toc.setState({
                             error: null
                         });
-                    }
-                };
-                toc = this._renderComponent(props, target);
+                    }}, target);
             });
 
             afterEach(() => {
@@ -150,17 +155,53 @@ class TocComponent extends TestBase {
                 expect(nodes.item(0).textContent).toBe(rootItems[0].title);
                 // Reload toc and use child path
                 const activeItemPath = [rootItems[0].id || "", "12345", "12345-nested"];
-                const props: ITocProps = {
-                    loadChildItems: loadChildItems,
-                    rootItems: rootItems,
-                    activeItemPath: activeItemPath,
+
+                this._renderComponent({
+                    ...tocDefaultProps,
+                    activeItemPath,
                     onSelectionChanged: (sitemapItem: ITaxonomy, path: string[]): void => {
                         expect(path).toEqual(activeItemPath);
                         done();
-                    },
-                    onRetry: () => { }
+                    }
+                }, target);
+            });
+
+            // Test coverage for an issue [SCTCD-539 Changing version makes toc unresponcible]
+            xit("re-renders when publication is changed, but toc remains the same", (done: () => void): void => {
+                // Load root nodes
+                // tslint:disable-next-line:no-any
+                const treeView = TestUtils.findRenderedComponentWithType(toc, TreeView as any);
+                expect(treeView).not.toBeNull();
+
+                const activeItemPath = [rootItems[0].id || "", "12345", "12345-nested"];
+
+                const selectFirstRootNode = (): void => {
+                    // Reload toc and make active item path undefined
+                    // Expected is that the first root node is selected
+                    this._renderComponent({
+                        ...tocDefaultProps,
+                        activeItemPath,
+                        publicationId: "1",
+                        onSelectionChanged: (sitemapItem: ITaxonomy, path: string[]): void => {
+                            setTimeout((): void => {
+                                expect(path).toEqual(activeItemPath);
+                                done();
+                            }, ASYNC_TEST_DELAY);
+                        }
+                    }, target);
                 };
-                this._renderComponent(props, target);
+
+                // Set active item path to a child path
+                this._renderComponent({
+                    ...tocDefaultProps,
+                    activeItemPath,
+                    onSelectionChanged: (sitemapItem: ITaxonomy, path: string[]): void => {
+                        setTimeout((): void => {
+                            expect(path).toEqual(activeItemPath);
+                            selectFirstRootNode();
+                        }, ASYNC_TEST_DELAY);
+                    }
+                } as ITocProps, target);
             });
 
             it("selects first root node when setting active item path to undefined", (done: () => void): void => {
@@ -171,32 +212,26 @@ class TocComponent extends TestBase {
                 const selectFirstRootNode = (): void => {
                     // Reload toc and make active item path undefined
                     // Expected is that the first root node is selected
-                    const propsReset: ITocProps = {
-                        loadChildItems: loadChildItems,
-                        rootItems: rootItems,
+                    this._renderComponent({
+                        ...tocDefaultProps,
                         activeItemPath: undefined,
                         onSelectionChanged: (sitemapItem: ITaxonomy, path: string[]): void => {
                             expect(path).toEqual([rootItems[0].id || ""]);
                             done();
-                        },
-                        onRetry: () => { }
-                    };
-                    this._renderComponent(propsReset, target);
+                        }
+                    }, target);
                 };
 
                 // Set active item path to a child path
                 const activeItemPath = [rootItems[0].id || "", "12345", "12345-nested"];
-                const props: ITocProps = {
-                    loadChildItems: loadChildItems,
-                    rootItems: rootItems,
-                    activeItemPath: activeItemPath,
+                this._renderComponent({
+                    ...tocDefaultProps,
+                    activeItemPath,
                     onSelectionChanged: (sitemapItem: ITaxonomy, path: string[]): void => {
                         expect(path).toEqual(activeItemPath);
                         selectFirstRootNode();
-                    },
-                    onRetry: () => { }
-                };
-                this._renderComponent(props, target);
+                    }
+                }, target);
             });
 
             it("can not navigate between regular and abstract pages", (done: () => void): void => {
@@ -225,14 +260,12 @@ class TocComponent extends TestBase {
                 // Set active item path to a child path
                 const activeItemPath = [rootItems[0].id || "", "12345", "12345-nested"];
                 const props: ITocProps = {
-                    loadChildItems: loadChildItems,
-                    rootItems: rootItems,
-                    activeItemPath: activeItemPath,
+                    ...tocDefaultProps,
+                    activeItemPath,
                     onSelectionChanged: (sitemapItem: ITaxonomy, path: string[]): void => {
                         expect(path).toEqual(activeItemPath);
                         switchBetweenChildNodes(props);
-                    },
-                    onRetry: () => { }
+                    }
                 };
                 this._renderComponent(props, target);
             });
@@ -256,7 +289,6 @@ class TocComponent extends TestBase {
                 done();
             });
         });
-
     }
 
     private _renderComponent(props: ITocProps, target: HTMLElement): Toc {

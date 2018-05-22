@@ -1,6 +1,7 @@
 {
   "Id": "164255",
   "Meta": {
+    "ishlogicalref.object.id": 164251,
     "conditionsused.generated.value": "{\"GPRS\":[\"Y\"],\"LOUDSPEAKER\":[\"Y\"],\"BLUETOOTH\":[\"Y\"]}",
     "tocnaventries.generated.value": "ish:1420746-8-1024"
   },

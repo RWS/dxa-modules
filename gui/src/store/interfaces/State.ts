@@ -1,5 +1,6 @@
 import { IPublication } from "interfaces/Publication";
 import { IPage } from "interfaces/Page";
+import { IProductFamily } from "interfaces/ProductFamily";
 import { IProductReleaseVersion } from "interfaces/ProductReleaseVersion";
 import { IConditionsState } from "store/interfaces/Conditions";
 import { IComments } from "store/interfaces/Comments";
@@ -89,37 +90,44 @@ export interface IPublicationsState {
     isLoading: boolean;
 
     /**
-     * It's called lastError, because it might happen that some  publications were loaded soem not
+     * It's called lastError, because it might happen that some publications were loaded some not
      */
     lastError: string;
 }
 
 /**
- * State's current publication interface
+ * State's current location interface
  *
  * @export
- * @interface IPublicationCurrentState
+ * @interface ICurrentLocationState
  */
-export interface IPublicationCurrentState {
+export interface ICurrentLocationState {
     /**
      * Current publication id
      *
      * @type {string}
-     * @memberOf IPublicationCurrentState
+     * @memberOf ICurrentLocationState
      */
     publicationId: string;
     /**
      * Current page id
      *
      * @type {string}
-     * @memberOf IPublicationCurrentState
+     * @memberOf ICurrentLocationState
      */
     pageId: string;
+    /**
+     * Current page id
+     *
+     * @type {string}
+     * @memberOf ICurrentLocationState
+     */
+    taxonomyId: string;
     /**
      * Current anchor pointer
      *
      * @type {string}
-     * @memberOf IPublicationCurrentState
+     * @memberOf ICurrentLocationState
      */
     anchor: string;
 }
@@ -155,12 +163,12 @@ export interface IState {
      */
     comments: IComments;
     /**
-     * Current selected publication
+     * Current selected location
      *
      * @type {IPublicationState}
      * @memberOf IState
      */
-    publication: IPublicationCurrentState;
+    currentLocation: ICurrentLocationState;
 
     /**
      * Publications and state
@@ -185,4 +193,20 @@ export interface IState {
      * @memberof IState
      */
     releaseVersions: IProductReleaseVersionState;
+
+    /**
+     * Product families
+     *
+     * @type {IProductFamilies[]}
+     * @memberof IState
+     */
+    productFamilies: IProductFamily[];
+
+    /**
+     * Splitter position
+     *
+     * @type {number}
+     * @memberOf IState
+     */
+    splitterPosition: number;
 }

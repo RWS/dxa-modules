@@ -20,6 +20,8 @@
   "component.post.comment.no.content": "コメントは空欄にできません",
   "component.post.comment.submit": "フィードバックを送信",
   "component.post.comment.post.error": "コメントの投稿中にエラーが発生しました。再度お試しいただき、エラーが改善されない場合は、管理者にお問い合わせください。",
+  "component.post.comment.reply": "Reply",
+  "component.post.comment.showreplies": "Show {0} replies", 
   "component.comments.list.more": "さらにコメントを読み込む",
   "component.comments.list.amount": "{1}個のコメントのうち{0}個を表示中",
   "component.comments.list.error": "サーバーエラーによりコメントを読み込めませんでした。エラーが続く場合は管理者にお問い合わせください。",

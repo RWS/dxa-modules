@@ -31,8 +31,7 @@
     "strictNullChecks": true,
     "noImplicitThis": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": false,
-    "noEmitHelpers": false
+    "noUnusedParameters": false
   },
   "compileOnSave": false, // Gulp does this for us
   "exclude": [

@@ -125,7 +125,7 @@ export class PublicationService implements IPublicationService {
         if (error) {
             return Promise.reject(error);
         } else {
-            return Promise.resolve({ title });
+            return Promise.resolve({ title } as IPublication);
         }
     }
 

@@ -67,7 +67,7 @@ export class Search extends LoadableObject {
                     content: item.Content,
                     language: item.Locale,
                     lastModifiedDate: isNaN(modifiedDate) ? null : new Date(modifiedDate),
-                    publicationId: item.PublicationId.toString(),
+                    publicationId: item.PublicationId ? item.PublicationId.toString() : "",
                     publicationTitle: item.PublicationTitle,
                     pageId: parsedId && parsedId.itemId,
                     pageTitle: item.Meta["FTITLE.logical.value"],

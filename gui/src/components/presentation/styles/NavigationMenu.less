@@ -5,22 +5,17 @@
     @defaultWidth: 500px;
 
     display: block;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    width: @defaultWidth;
-    left: @defaultWidth * -1;
+    width: auto;
     min-height: 100%;
     background-color: #fff;
+    z-index: 12;
+
     transition: left .3s ease-out;
     .sdl-dita-delivery-app.rtl & {
         transition: right .3s ease-out;
     }
-    z-index: 12;
 
     &.open {
-        display: block;
         max-width: ~"calc(100% - @{rightMargin})";
-        left: 0;
     }
 }

@@ -14,14 +14,9 @@ const TestPub = {
     createdOn: new Date(),
     version: "1",
     logicalId: "GUID-1",
-    productFamily: "PF",
-    productReleaseVersion: "PR1"
+    productFamily: ["PF"],
+    productReleaseVersion: ["PR1"]
 };
-
-// const TestPage = {
-//     id: "00002",
-//     title: "TestPage"
-// };
 
 /* Fake test, but good coverage :) */
 class PageLinkComponent extends TestBase {

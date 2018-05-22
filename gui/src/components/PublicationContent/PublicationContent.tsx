@@ -1,9 +1,9 @@
 import { connect } from "react-redux";
 import { PublicationContentPresentation } from "@sdl/dd/PublicationContent/PublicationContentPresentation";
-import { updateCurrentPublication } from "store/actions/Actions";
-import { setCurrentPublicationByReleaseVersion } from "store/actions/Api";
+import { updateCurrentLocation } from "store/actions/Actions";
+import { setCurrentPublicationByReleaseVersion, setCurrentPageByReleaseVersion } from "store/actions/Api";
 import {
-    getCurrentPub, getPubById, getPageById, getErrorMessage,
+    getCurrentLocation, getPubById, getPageById, getErrorMessage,
     isPageLoading as isPageLoadingGetter, isPublicationFound as isPublicationFoundGetter, getReleaseVersionsForPub
 } from "store/reducers/Reducer";
 import { IState } from "store/interfaces/State";
@@ -11,7 +11,7 @@ import { isPage, isDummyPage } from "utils/Page";
 import { getLastConditions } from "store/reducers/Reducer";
 
 const mapStateToProps = (state: IState) => {
-    const { publicationId, pageId, anchor } = getCurrentPub(state);
+    const { publicationId, pageId, taxonomyId, anchor } = getCurrentLocation(state);
     const publication = getPubById(state, publicationId);
     const page = getPageById(state, publicationId, pageId);
     const errorMessage = getErrorMessage(state, publicationId, pageId);
@@ -25,19 +25,22 @@ const mapStateToProps = (state: IState) => {
         page,
         publicationId,
         pageId,
+        taxonomyId,
         anchor,
         isPageLoading,
         errorMessage,
         productReleaseVersions,
-        productReleaseVersion: publication.productReleaseVersion || "",
+        productReleaseVersion: publication.productReleaseVersion ? publication.productReleaseVersion[0] : "",
         isPublicationFound,
-        conditions
+        conditions,
+        splitterPosition: state.splitterPosition
     };
 };
 
 const mapDispatchToProps = {
-    onPublicationChange: updateCurrentPublication,
-    onReleaseVersionChanged: setCurrentPublicationByReleaseVersion
+    onPublicationChange: updateCurrentLocation,
+    onReleaseVersionChanged: setCurrentPublicationByReleaseVersion,
+    onPageReleaseVersionChanged: setCurrentPageByReleaseVersion
 };
 
 /**

@@ -11,7 +11,7 @@ class PublicationServiceTests extends TestBase {
             it("can get a publication by id", (done: () => void): void => {
                 const publicationId = "ish:39137-1-1";
                 publicationService.getPublicationById(publicationId).then(pub => {
-                    expect(pub.title).toBe("MP330");
+                    expect(pub && pub.title).toBe("MP330");
                     done();
                 }).catch(error => {
                     fail(`Unexpected error: ${error}`);
