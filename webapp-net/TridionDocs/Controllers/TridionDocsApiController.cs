@@ -7,6 +7,7 @@ using Sdl.Web.Modules.TridionDocs.Providers;
 using Sdl.Web.Mvc.Configuration;
 using Sdl.Web.Mvc.Formats;
 using System.Text;
+using Sdl.Web.Common.Logging;
 
 namespace Sdl.Web.Modules.TridionDocs.Controllers
 {
@@ -21,22 +22,38 @@ namespace Sdl.Web.Modules.TridionDocs.Controllers
         [HttpGet]
         public virtual ActionResult Page(int publicationId, int pageId)
         {
-            PageModel model = TridionDocsContentProvider.GetPageModel(pageId, SetupLocalization(publicationId));
-            WebRequestContext.PageModel = model;
-            return Json(model);
+            try
+            {
+                PageModel model = TridionDocsContentProvider.GetPageModel(pageId, SetupLocalization(publicationId));
+                WebRequestContext.PageModel = model;
+                return Json(model);
+            }
+            catch(Exception ex)
+            {
+                Log.Error(ex);
+                return ServerError();
+            }
         }
-      
+
         [Route("~/api/page/{publicationId:int}/{pageId:int}/{*conditions}")]
         [HttpPost]
         public virtual ActionResult Page(int publicationId, int pageId, string conditions)
         {
-            if (!string.IsNullOrEmpty(conditions))
+            try
             {
-                AmbientDataContext.CurrentClaimStore.Put(UserConditionsUri, conditions);
+                if (!string.IsNullOrEmpty(conditions))
+                {
+                    AmbientDataContext.CurrentClaimStore.Put(UserConditionsUri, conditions);
+                }
+                PageModel model = TridionDocsContentProvider.GetPageModel(pageId, SetupLocalization(publicationId));
+                WebRequestContext.PageModel = model;
+                return Json(model);
             }
-            PageModel model = TridionDocsContentProvider.GetPageModel(pageId, SetupLocalization(publicationId));
-            WebRequestContext.PageModel = model;
-            return Json(model);
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+                return ServerError();
+            }
         }
 
         [Route("~/binary/{publicationId:int}/{binaryId:int}/{*content}")]
@@ -109,6 +126,17 @@ namespace Sdl.Web.Modules.TridionDocs.Controllers
                 throw new DxaItemNotFoundException("Unable to use empty 'ishlogicalref.object.id' value as a search criteria.");
             }          
             return Json(TridionDocsContentProvider.GetPageIdByIshLogicalReference(publicationId, ishFieldValue));
+        }
+
+        public new ActionResult ServerError()
+        {
+            using (new Tracer())
+            {
+                Response.StatusCode = 404;
+                ViewResult r = View("ErrorPage");
+                r.ViewData.Add("statusCode", Response.StatusCode);
+                return r;
+            }
         }
     }
 }
