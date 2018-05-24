@@ -260,11 +260,13 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
      */
     @Override
     public <T extends EntityModel> T buildEntityModel(@Nullable T originalEntityModel, EntityModelData modelData, @Nullable Class<T> expectedClass) {
-        final ContentModelData ugcMetadata = ugcMetadata(modelData.getComponentTemplate().getMetadata());
-        if (ugcMetadata != null) {
-            originalEntityModel.addExtensionData(SHOW_COMMENTS_EXT_DATA, showComments(ugcMetadata));
-            originalEntityModel.addExtensionData(POST_COMMENTS_EXT_DATA, (postComments(ugcMetadata) ? ugcPostFormMetadata(ugcMetadata) : null));
-            originalEntityModel.addExtensionData(COMMENTS_ENTITY_REGION_EXT_DATA, getValue(ugcMetadata, COMMENTS_REGION_KEY, String.class));
+        if (modelData != null && modelData.getComponentTemplate() != null ) {
+            final ContentModelData ugcMetadata = ugcMetadata(modelData.getComponentTemplate().getMetadata());
+            if (ugcMetadata != null) {
+                originalEntityModel.addExtensionData(SHOW_COMMENTS_EXT_DATA, showComments(ugcMetadata));
+                originalEntityModel.addExtensionData(POST_COMMENTS_EXT_DATA, (postComments(ugcMetadata) ? ugcPostFormMetadata(ugcMetadata) : null));
+                originalEntityModel.addExtensionData(COMMENTS_ENTITY_REGION_EXT_DATA, getValue(ugcMetadata, COMMENTS_REGION_KEY, String.class));
+            }
         }
         return originalEntityModel;
     }
