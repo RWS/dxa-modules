@@ -9,11 +9,14 @@ using Sdl.Web.Delivery.IQQuery.Model.Field;
 using Sdl.Web.Delivery.IQQuery.Model.Result;
 using Sdl.Web.Modules.Search.Data;
 using Sdl.Web.Mvc.Controllers;
+using System.Text.RegularExpressions;
 
 namespace Sdl.Web.Modules.Search.Controllers
 {
     public class TridionDocsSearchController : BaseController
     {
+        private static readonly Regex RegexpDoubleQuotes = new Regex("^\"(.*)\"$", RegexOptions.Compiled);
+  
         [Route("~/api/search")]
         [HttpPost]
         public virtual ActionResult Search()
@@ -41,7 +44,15 @@ namespace Sdl.Web.Modules.Search.Controllers
             fields.Add("dynamic.FISHDITADLVRREMOTESTATUS.lng.element");
             fields.Add($"content.{CultureInfo.GetCultureInfo(searchParams.Language).EnglishName.ToLower()}");
             values.Add(new DefaultTermValue("VDITADLVRREMOTESTATUSONLINE"));
-            values.Add(new DefaultTermValue(searchParams.SearchQuery, TermTypes.Exact));
+
+            string searchQuery = searchParams.SearchQuery;
+            Match match = RegexpDoubleQuotes.Match(searchQuery);
+            if (match.Success)
+            {
+                searchQuery = match.Groups[1].Value;
+            }
+
+            values.Add(new DefaultTermValue(searchQuery, TermTypes.Exact));
             var results = search.WithResultFilter(new SearchResultFilter
             {
                 StartOfRange = searchParams.StartIndex,
