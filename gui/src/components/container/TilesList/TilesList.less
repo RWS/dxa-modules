@@ -1,7 +1,8 @@
 @import (reference) "~theme-styles";
+
 .sdl-dita-delivery-tiles-list {
     @tileHeight: 256px;
-    @tilewidth: 275px;
+    @tileWidth: 275px;
     margin: 0 auto;
     button.sdl-button {
         text-transform: uppercase;
@@ -14,17 +15,14 @@
         justify-content: flex-start;
         align-content: flex-start;
         > * {
-            flex: 1 1 @tilewidth;
-            width: @tilewidth;
+            flex-grow: 0;
+            flex-shrink: 1;
+            flex-basis: @tileWidth;
+            width: @tileWidth;
             max-width: 100%;
-            min-width: @tilewidth;
+            min-width: @tileWidth;
             height: @tileHeight;
             margin: 10px;
-            &:empty {
-                /* Empry tile placeholder for making other tiles align propertly*/
-                height: 0;
-                border: none;
-            }
         }
     }
 }

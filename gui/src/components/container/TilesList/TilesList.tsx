@@ -87,8 +87,6 @@ export class TilesList extends React.Component<ITilesListProps, ITilesListState>
                     {tilesToDisplay.map((tile: ITile, i: number) => {
                         return <Tile key={i} tile={tile} />;
                     })}
-                    {/* The following items are tiles placeholders, its intention to properly distribute tile width depending from screen resolution*/}
-                    <div /><div /><div />
                 </nav>
                 {(!showAllItems && (tiles.length > tilesToDisplay.length)) && <Button
                     skin="graphene"
