@@ -46,7 +46,7 @@
     "redux-actions": "^1.2.2",
     "redux-devtools-extension": "^2.13.0",
     "redux-localstorage": "^1.0.0-rc5",
-    "redux-thunk": "^2.2.0",
+    "redux-thunk": "2.2.0",
     "ts-helpers": "~1.1.2"
   },
   "devDependencies": {
