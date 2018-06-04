@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Web;
 using Sdl.Web.Common;
 using Sdl.Web.Common.Interfaces;
 using Sdl.Web.Common.Models;
@@ -88,6 +89,7 @@ namespace Sdl.Web.Modules.TridionDocs.Providers
 
         public override PageModel GetPageModel(string urlPath, ILocalization localization, bool addIncludes = true)
         {
+            HttpContext.Current.Response.StatusCode = 404;
             return new PageModel
             {
                 MvcData = new MvcData { ViewName = "ErrorPage", AreaName = "TridionDocs"}
