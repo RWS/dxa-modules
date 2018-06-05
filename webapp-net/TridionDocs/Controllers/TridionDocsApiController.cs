@@ -31,7 +31,7 @@ namespace Sdl.Web.Modules.TridionDocs.Controllers
             catch(Exception ex)
             {
                 Log.Error(ex);
-                return ServerError();
+                return ServerError(ex);
             }
         }
 
@@ -52,7 +52,7 @@ namespace Sdl.Web.Modules.TridionDocs.Controllers
             catch (Exception ex)
             {
                 Log.Error(ex);
-                return ServerError();
+                return ServerError(ex);
             }
         }
 
@@ -128,15 +128,11 @@ namespace Sdl.Web.Modules.TridionDocs.Controllers
             return Json(TridionDocsContentProvider.GetPageIdByIshLogicalReference(publicationId, ishFieldValue));
         }
 
-        public new ActionResult ServerError()
+        public ActionResult ServerError(Exception ex)
         {
-            using (new Tracer())
-            {
-                Response.StatusCode = 404;
-                ViewResult r = View("ErrorPage");
-                r.ViewData.Add("statusCode", Response.StatusCode);
-                return r;
-            }
+            Response.StatusCode = 404;
+            if (ex.InnerException != null) ex = ex.InnerException;
+            return Content("{ \"Message\": \"" + ex.Message + "\" }", "application/json");
         }
     }
 }
