@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Sdl.Web.Common;
 using Sdl.Web.Common.Logging;
 using Sdl.Web.Modules.TridionDocs.Models;
 using Tridion.ContentDelivery.Meta;
@@ -70,7 +69,7 @@ namespace Sdl.Web.Modules.TridionDocs.Providers
             }
             if (meta == null || !IsPublicationOnline(meta))
             {
-                throw new DxaException($"Unable to find publication {publicationId}");
+                throw new TridionDocsApiException($"Unable to find publication {publicationId}");
             }
         }
 

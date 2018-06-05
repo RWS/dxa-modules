@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
-using Sdl.Web.Common;
+using Sdl.Web.Modules.TridionDocs.Exceptions;
 using Tridion.ContentDelivery.Meta;
 
 namespace Sdl.Web.Modules.TridionDocs.Providers
@@ -28,8 +29,10 @@ namespace Sdl.Web.Modules.TridionDocs.Providers
         {
             var conditionUsed = GetMetadata(publicationId, ConditionUsed);
             var conditionMetadata = GetMetadata(publicationId, ConditionMetadata);
-            Dictionary<string, string[]> d1 = JsonConvert.DeserializeObject<Dictionary<string, string[]>>(conditionUsed);
-            Dictionary<string, Condition> d2 = JsonConvert.DeserializeObject<Dictionary<string, Condition>>(conditionMetadata);
+            Dictionary<string, string[]> d1 =
+                JsonConvert.DeserializeObject<Dictionary<string, string[]>>(conditionUsed);
+            Dictionary<string, Condition> d2 =
+                JsonConvert.DeserializeObject<Dictionary<string, Condition>>(conditionMetadata);
             foreach (var v in d1)
             {
                 d2[v.Key].Values = v.Value;
@@ -39,17 +42,25 @@ namespace Sdl.Web.Modules.TridionDocs.Providers
 
         private string GetMetadata(int publicationId, string metadataName)
         {
-            PublicationMetaFactory factory = new PublicationMetaFactory();
-            PublicationMeta meta = factory.GetMeta(publicationId);
-            if (meta?.CustomMeta == null)
+            try
             {
-                throw new DxaItemNotFoundException(
+                PublicationMetaFactory factory = new PublicationMetaFactory();
+                PublicationMeta meta = factory.GetMeta(publicationId);
+                if (meta?.CustomMeta == null)
+                {
+                    throw new TridionDocsApiException(
+                        $"Metadata '{metadataName}' is not found for publication {publicationId}.");
+                }
+
+                object metadata = meta.CustomMeta.GetFirstValue(metadataName);
+                string metadataString = metadata != null ? (string) metadata : "{}";
+                return metadataString;
+            }
+            catch (Exception)
+            {
+                throw new TridionDocsApiException(
                     $"Metadata '{metadataName}' is not found for publication {publicationId}.");
             }
-
-            object metadata = meta.CustomMeta.GetFirstValue(metadataName);
-            string metadataString = metadata != null ? (string)metadata : "{}";
-            return metadataString;
         }
     }
 }
