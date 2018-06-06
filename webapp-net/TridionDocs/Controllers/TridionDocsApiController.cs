@@ -74,6 +74,15 @@ namespace Sdl.Web.Modules.TridionDocs.Controllers
             }
         }
 
+        [Route("~/binary/{publicationId}/{binaryId}")]
+        [Route("~/api/binary/{publicationId}/{binaryId}")]
+        [HttpGet]
+        [FormatData]
+        public virtual ActionResult Binary(string publicationId, string binaryId)
+        {
+            return ServerError(null);
+        }
+
         [Route("~/api/publications")]
         [HttpGet]
         public virtual ActionResult Publications()
@@ -176,6 +185,7 @@ namespace Sdl.Web.Modules.TridionDocs.Controllers
         public ActionResult ServerError(Exception ex)
         {
             Response.StatusCode = 404;
+            if(ex == null) return new EmptyResult();
             if (ex.InnerException != null) ex = ex.InnerException;
             return Content("{ \"Message\": \"" + ex.Message + "\" }", "application/json");
         }

@@ -26,17 +26,17 @@ namespace Sdl.Web.Modules.Ugc
         {
             _api = UgcInstanceProvider.Instance.UgcCommunityClient();
             _votingApi = (IUgcVoteCommentApi) _api;
-        }     
+        }
 
         public List<Comment> GetComments(int publicationId, int pageId, bool descending, int[] status, int top, int skip)
-        {          
+        {
             SimpleCommentsFilter filter = new SimpleCommentsFilter
             {
                 Top = top,
                 Skip = skip,
                 Depth = MaximumThreadsDepth,
-                Statuses = new List<Status>(new List<int>(status).Select(x => (Status)x))
-            };         
+                Statuses = new List<Status>(new List<int>(status).Select(x => (Status) x))
+            };
             return Convert(_api.RetrieveThreadedComments(CreateUri(publicationId, pageId), filter, descending, true));
         }
 
@@ -74,7 +74,7 @@ namespace Sdl.Web.Modules.Ugc
             return CmUri.Create(localization.CmUriScheme, publicationId, pageId, ItemType.Page);
         }
 
-        private static List<Comment> Convert(IEnumerable<IComment> comments) 
+        private static List<Comment> Convert(IEnumerable<IComment> comments)
             => comments?.Select(Convert).ToList();
 
         private static Comment Convert(IComment comment)
@@ -114,7 +114,7 @@ namespace Sdl.Web.Modules.Ugc
         private static Dictionary<string, string> Convert(List<ICommentMeta> meta)
         {
             var metadata = new Dictionary<string, string>();
-            if(meta == null) return metadata;
+            if (meta == null) return metadata;
             foreach (var m in meta.Where(m => !metadata.ContainsKey(m.KeyName)))
             {
                 metadata.Add(m.KeyName, m.KeyValue);
@@ -133,7 +133,7 @@ namespace Sdl.Web.Modules.Ugc
         private static CommentDate Convert(DateTime dt) => new CommentDate
         {
             DateTime = dt,
-            DayOfMonth =  dt.Month,
+            DayOfMonth = dt.Month,
             DayOfWeek = dt.DayOfWeek.ToString(),
             DayOfYear = dt.DayOfYear,
             Month = new DateTimeFormatInfo().GetMonthName(dt.Month),
