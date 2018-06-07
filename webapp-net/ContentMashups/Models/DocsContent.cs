@@ -12,11 +12,11 @@ namespace Sdl.Web.Modules.ContentMashups.Models
         [SemanticProperty("FamilyName")]
         public string FamilyName { get; set; }
 
-        [SemanticProperty("ContnetType")]
-        public string ContnetType { get; set; }
+        [SemanticProperty("ContentType")]
+        public string ContentType { get; set; }
 
-        [SemanticProperty("EmbeddedContnet")]
-        public string EmbeddedContnet { get; set; }
+        [SemanticProperty("EmbeddedContent")]
+        public string EmbeddedContent { get; set; }
 
         [SemanticProperty("Link")]
         public string Link { get; set; }

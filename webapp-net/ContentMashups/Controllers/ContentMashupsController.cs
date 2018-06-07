@@ -14,7 +14,7 @@ namespace Sdl.Web.Modules.ContentMashups.Controllers
             {
                 //to do : Use release name , family name and content type to query from Public Content Api and get respective data from tridion docs :)
 
-                model.EmbeddedContnet = "Contnet from Tridion Docs";
+                model.EmbeddedContent = "Content from Tridion Docs";
 
                 model.Link = "Content link from Tridion Docs";
 
