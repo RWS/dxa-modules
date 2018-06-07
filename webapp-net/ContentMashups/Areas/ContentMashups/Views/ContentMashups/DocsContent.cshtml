@@ -1,0 +1,17 @@
+﻿@model DocsContent
+
+<div class="rich-text @Model.HtmlClasses" @Html.DxaEntityMarkup()>
+
+    <h1>Content Mashups</h1>
+
+    <div class="content">
+        <div @Html.DxaPropertyMarkup(() => Model.EmbeddedContnet)>
+            @Model.EmbeddedContnet
+        </div>
+    </div>
+
+    <div @Html.DxaPropertyMarkup(() => Model.Link)>
+        <a href="#">@Model.Link</a>
+    </div>
+
+</div>
