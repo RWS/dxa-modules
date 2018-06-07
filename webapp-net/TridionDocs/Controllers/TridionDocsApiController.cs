@@ -45,16 +45,16 @@ namespace Sdl.Web.Modules.TridionDocs.Controllers
             return ServerError(new TridionDocsApiException($"Page not found: [{publicationId}] {pageId}/index.html"), 400);
         }
 
-        [Route("~/api/page/{publicationId:int}/{pageId:int}/{*conditions}")]
+        [Route("~/api/page/{publicationId:int}/{pageId:int}/{*content}")]
         [HttpPost]
-        public virtual ActionResult Page(int publicationId, int pageId, string conditions)
+        public virtual ActionResult Page(int publicationId, int pageId, string content)
         {
             try
             {
-                string c = Request.QueryString["conditions"];
-                if (!string.IsNullOrEmpty(c))
+                string conditions = Request.QueryString["conditions"];
+                if (!string.IsNullOrEmpty(conditions))
                 {
-                    AmbientDataContext.CurrentClaimStore.Put(UserConditionsUri, c);
+                    AmbientDataContext.CurrentClaimStore.Put(UserConditionsUri, conditions);
                 }
                 PageModel model = TridionDocsContentProvider.GetPageModel(pageId, SetupLocalization(publicationId));
                 WebRequestContext.PageModel = model;
@@ -114,7 +114,12 @@ namespace Sdl.Web.Modules.TridionDocs.Controllers
         {
             try
             {
-                return JsonResult(new ConditionProvider().GetConditions(publicationId));
+                return new ContentResult
+                {
+                    ContentType = "application/json",
+                    Content = new ConditionProvider().GetConditions(publicationId),
+                    ContentEncoding = Encoding.UTF8
+                };
             }
             catch (Exception ex)
             {
