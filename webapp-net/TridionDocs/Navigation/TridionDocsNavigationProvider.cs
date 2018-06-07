@@ -10,6 +10,7 @@ using Sdl.Web.Tridion.ContentManager;
 using Tridion.ContentDelivery.Meta;
 using Tridion.ContentDelivery.Taxonomies;
 using System.Text.RegularExpressions;
+using Sdl.Web.Modules.TridionDocs.Exceptions;
 
 namespace Sdl.Web.Modules.TridionDocs.Navigation
 {
@@ -45,10 +46,27 @@ namespace Sdl.Web.Modules.TridionDocs.Navigation
             if (ishRefUri != null)
             {
                 var ish = CmUri.FromString(ishRefUri);
-                node.Url = $"{GetBaseUrl().TrimEnd('/')}/{ish.PublicationId}/{ish.ItemId}";
+                node.Url = $"/{ish.PublicationId}/{ish.ItemId}";
             }
+            node.Visible = true;
             return node;
         }
+
+        protected override IEnumerable<SitemapItem> ExpandDescendants(string keywordUri, string taxonomyUri,
+            NavigationFilter filter, ILocalization localization)
+        {
+            TaxonomyFactory taxonomyFactory = new TaxonomyFactory();
+            TaxonomyFilter taxonomyFilter = new DepthFilter(filter.DescendantLevels, DepthFilter.FilterDown);
+            Keyword contextKeyword = taxonomyFactory.GetTaxonomyKeywords(taxonomyUri, taxonomyFilter, keywordUri);
+            if (contextKeyword == null)
+            {
+                throw new TridionDocsApiException();
+            }
+
+            TaxonomyNode contextTaxonomyNode = CreateTaxonomyNode(contextKeyword, filter.DescendantLevels, filter,
+                localization);
+            return contextTaxonomyNode.Items;
+        }      
 
         protected override SitemapItem[] ExpandClassifiedPages(Keyword keyword, string taxonomyId,
             ILocalization localization)
@@ -68,6 +86,6 @@ namespace Sdl.Web.Modules.TridionDocs.Navigation
                 }
                 return root;
             }
-        }
+        }        
     }
 }

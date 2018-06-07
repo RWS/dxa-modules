@@ -10,7 +10,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Sdl.Web.Modules.Ugc.Data;
 using Sdl.Web.Mvc.Configuration;
-using Tridion.ContentDelivery.AmbientData;
 
 namespace Sdl.Web.Modules.Ugc.Controllers
 {
@@ -18,21 +17,26 @@ namespace Sdl.Web.Modules.Ugc.Controllers
     /// Ugc Api Controller
     /// </summary>
     public class UgcApiController : BaseController
-    {      
+    {
         [Route("{localization}/api/comments/{pageId:int}")]
         [Route("~/api/comments/{publicationId:int}/{pageId:int}")]
         [HttpGet]
-        public ActionResult GetComments(int? publicationId, int pageId, bool descending = false, int[] status = null, int top = 0, int skip = 0)
-        {            
-            UgcService ugc = new UgcService();          
+        public ActionResult GetComments(int? publicationId, int pageId, bool descending = false, int[] status = null,
+            int top = 0, int skip = 0)
+        {
+            UgcService ugc = new UgcService();
             var comments = ugc.GetComments(
                 publicationId ?? int.Parse(WebRequestContext.Localization.Id),
                 pageId, descending, status ?? new int[] {}, top, skip);
 
+            if(comments == null)
+                return ServerError(null);
             return new ContentResult
             {
                 ContentType = "application/json",
-                Content = JsonConvert.SerializeObject(comments, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() }),
+                Content =
+                    JsonConvert.SerializeObject(comments,
+                        new JsonSerializerSettings {ContractResolver = new CamelCasePropertyNamesContractResolver()}),
                 ContentEncoding = Encoding.UTF8
             };
         }
@@ -40,44 +44,53 @@ namespace Sdl.Web.Modules.Ugc.Controllers
         [Route("~/api/comments/add")]
         [Route("{localization}/api/comments/add")]
         [HttpPost]
-        public ActionResult PostComment(int publicationId, int pageId, bool descending = false, int[] status = null, int top = 0, int skip = 0)
+        public ActionResult PostComment(int? publicationId, int? pageId, bool descending = false, int[] status = null,
+            int top = 0, int skip = 0)
         {
-            UgcService ugc = new UgcService();
-            Stream req = Request.InputStream;
-            req.Seek(0, SeekOrigin.Begin);
-            string json = new StreamReader(req).ReadToEnd();
-            PostedComment posted = JsonConvert.DeserializeObject<PostedComment>(json);
-            Dictionary<string, string> metadata = new Dictionary<string, string>
+            try
             {
-                {"publicationTitle", "\""+Regex.Escape(posted.PublicationTitle)+"\""},
-                {"publicationUrl", "\""+posted.PublicationUrl+"\""},
-                {"itemTitle", "\""+Regex.Escape(posted.PageTitle)+"\""},
-                {"itemUrl", "\""+posted.PageUrl+"\""},
-                {"language", "\""+posted.Language+"\""},
-                {"status", "0"}
-            };
+                if (pageId == null || publicationId == null)
+                {
+                    Response.StatusCode = 200;
+                    return new EmptyResult();
+                }
+                UgcService ugc = new UgcService();
+                Stream req = Request.InputStream;
+                req.Seek(0, SeekOrigin.Begin);
+                string json = new StreamReader(req).ReadToEnd();                
+                PostedComment posted = JsonConvert.DeserializeObject<PostedComment>(json);
+                Dictionary<string, string> metadata = CreateMetadata(posted, true);
 
-            AddPubIdTitleLangToCommentMetadata(posted, metadata);
+                string userId = posted.Username;
+                if (string.IsNullOrEmpty(userId))
+                {
+                    userId = "Anonymous";
+                }
 
-            string userId = posted.Username;
-            if (string.IsNullOrEmpty(userId))
-            {
-                userId = "Anonymous";
-            }
-
-            Comment result = ugc.PostComment(posted.PublicationId,
-                    posted.PageId,
+                Comment result = ugc.PostComment(posted.PublicationId,
+                    posted.PageId.Value,
                     userId,
                     posted.Email,
                     posted.Content,
-                    posted.ParentId,
+                    posted.ParentId ?? 0,
                     metadata);
-            return new ContentResult
+
+                if(result == null)
+                    return ServerError(null);
+                result.Metadata = CreateMetadata(posted, false);
+                return new ContentResult
+                {
+                    ContentType = "application/json",
+                    Content =
+                        JsonConvert.SerializeObject(result,
+                            new JsonSerializerSettings {ContractResolver = new CamelCasePropertyNamesContractResolver()}),
+                    ContentEncoding = Encoding.UTF8
+                };
+            }
+            catch (Exception ex)
             {
-                ContentType = "application/json",
-                Content = JsonConvert.SerializeObject(result, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() }),
-                ContentEncoding = Encoding.UTF8
-            };
+                return ServerError(ex);
+            }
         }
 
         [Route("~/api/comments/upvote")]
@@ -106,16 +119,46 @@ namespace Sdl.Web.Modules.Ugc.Controllers
             await ugc.RemoveComment(commentId);
             return Redirect(Request.UrlReferrer?.AbsolutePath);
         }
-
-        private static void AddPubIdTitleLangToCommentMetadata(PostedComment comment, Dictionary<string, string> metadata)
+     
+        private static Dictionary<string, string> CreateMetadata(PostedComment posted, bool escape)
         {
-            PubIdTitleLang pubIdTitleLang = new PubIdTitleLang
+            string pubTitle = posted.PublicationTitle;
+            string pubUrl = posted.PublicationUrl;
+            string itemTitle = posted.PageTitle;
+            string pageUrl = posted.PageUrl;
+            string lang = posted.Language;
+
+            if (escape)
             {
-                Id = comment.PublicationId,
-                Lang = comment.Language,
-                Title = comment.PublicationTitle
+                pubTitle = $"\"{Regex.Escape(pubTitle)}\"";
+                pubUrl = $"\"{pubUrl}\"";
+                pageUrl = $"\"{pageUrl}\"";
+                itemTitle = $"\"{itemTitle}\"";
+                lang = $"\"{lang}\"";
+            }
+
+            var metadata = new Dictionary<string, string>
+            {
+                {"publicationTitle", pubTitle},
+                {"publicationUrl", pubUrl},
+                {"itemTitle", itemTitle},
+                {"itemUrl", pageUrl},
+                {"language", lang},
+                {"status", "0"}
             };
-            metadata.Add("pubIdTitleLang", JsonConvert.SerializeObject(pubIdTitleLang));
+            metadata.Add("pubIdTitleLang", $"{{\"id\":{posted.PublicationId},\"title\":\"{posted.PublicationTitle}\",\"lang\":\"{posted.Language}\"}}");
+            return metadata;
+        }
+
+        public ActionResult ServerError(Exception ex)
+        {
+            Response.StatusCode = 405;
+            if (ex == null)
+            {
+                return new EmptyResult();
+            }
+            if (ex.InnerException != null) ex = ex.InnerException;
+            return Content("{ \"Message\": \"" + ex.Message + "\" }", "application/json");
         }
     }
 }

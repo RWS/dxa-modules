@@ -7,7 +7,10 @@ using Sdl.Web.Modules.TridionDocs.Providers;
 using Sdl.Web.Mvc.Configuration;
 using Sdl.Web.Mvc.Formats;
 using System.Text;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Sdl.Web.Common.Logging;
+using Sdl.Web.Modules.TridionDocs.Exceptions;
 
 namespace Sdl.Web.Modules.TridionDocs.Controllers
 {
@@ -17,7 +20,7 @@ namespace Sdl.Web.Modules.TridionDocs.Controllers
     public class TridionDocsApiController : BaseController
     {
         private static readonly Uri UserConditionsUri = new Uri("taf:ish:userconditions");
-
+     
         [Route("~/api/page/{publicationId:int}/{pageId:int}")]
         [HttpGet]
         public virtual ActionResult Page(int publicationId, int pageId)
@@ -31,16 +34,24 @@ namespace Sdl.Web.Modules.TridionDocs.Controllers
             catch(Exception ex)
             {
                 Log.Error(ex);
-                return ServerError(ex);
+                return ServerError(new TridionDocsApiException($"Page not found: [{publicationId}] {pageId}/index.html"));
             }
         }
 
-        [Route("~/api/page/{publicationId:int}/{pageId:int}/{*conditions}")]
+        [Route("~/api/page/{publicationId}/{pageId}")]
+        [HttpGet]
+        public virtual ActionResult Page(string publicationId, string pageId)
+        {
+            return ServerError(new TridionDocsApiException($"Page not found: [{publicationId}] {pageId}/index.html"), 400);
+        }
+
+        [Route("~/api/page/{publicationId:int}/{pageId:int}/{*content}")]
         [HttpPost]
-        public virtual ActionResult Page(int publicationId, int pageId, string conditions)
+        public virtual ActionResult Page(int publicationId, int pageId, string content)
         {
             try
             {
+                string conditions = Request.QueryString["conditions"];
                 if (!string.IsNullOrEmpty(conditions))
                 {
                     AmbientDataContext.CurrentClaimStore.Put(UserConditionsUri, conditions);
@@ -74,6 +85,15 @@ namespace Sdl.Web.Modules.TridionDocs.Controllers
             }
         }
 
+        [Route("~/binary/{publicationId}/{binaryId}")]
+        [Route("~/api/binary/{publicationId}/{binaryId}")]
+        [HttpGet]
+        [FormatData]
+        public virtual ActionResult Binary(string publicationId, string binaryId)
+        {
+            return ServerError(null, 400);
+        }
+
         [Route("~/api/publications")]
         [HttpGet]
         public virtual ActionResult Publications()
@@ -81,7 +101,7 @@ namespace Sdl.Web.Modules.TridionDocs.Controllers
             try
             {
                 PublicationProvider provider = new PublicationProvider();
-                return Json(provider.PublicationList);
+                return JsonResult(provider.PublicationList);
             }
             catch (Exception ex)
             {
@@ -154,6 +174,12 @@ namespace Sdl.Web.Modules.TridionDocs.Controllers
             }
         }
 
+        [Route("~/api/toc/{publicationId}/{sitemapItemId}")]
+        public virtual ActionResult Toc(string publicationId, string sitemapItemId)
+        {
+            return ServerError(null, 400);
+        }
+
         [Route("~/api/pageIdByReference/{publicationId:int}/{ishFieldValue}")]
         public virtual ActionResult TopicIdInTargetPublication(int publicationId, string ishFieldValue)
         {
@@ -173,11 +199,22 @@ namespace Sdl.Web.Modules.TridionDocs.Controllers
             }
         }
 
-        public ActionResult ServerError(Exception ex)
+        public ActionResult ServerError(Exception ex, int statusCode = 404)
         {
-            Response.StatusCode = 404;
+            Response.StatusCode = statusCode;
+            if(ex == null) return new EmptyResult();
             if (ex.InnerException != null) ex = ex.InnerException;
             return Content("{ \"Message\": \"" + ex.Message + "\" }", "application/json");
+        }
+
+        private ContentResult JsonResult(object result)
+        {
+            return new ContentResult
+            {
+                ContentType = "application/json",
+                Content = JsonConvert.SerializeObject(result, new IsoDateTimeConverter() { DateTimeFormat = "yyyy-MM-ddThh:mm:ssZ" }),
+                ContentEncoding = Encoding.UTF8
+            };
         }
     }
 }

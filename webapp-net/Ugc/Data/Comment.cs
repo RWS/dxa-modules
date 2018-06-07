@@ -23,7 +23,6 @@ namespace Sdl.Web.Modules.Ugc.Data
         [JsonIgnore]
         public int Rating { get; set; } = 0;
 
-        [JsonIgnore]
         public Dictionary<string, string> Metadata { get; set; } = new Dictionary<string, string>();
     }
 

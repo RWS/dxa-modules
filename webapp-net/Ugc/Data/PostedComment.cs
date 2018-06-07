@@ -7,7 +7,7 @@
     {
         public int PublicationId { get; set; }
 
-        public int PageId { get; set; }
+        public int? PageId { get; set; }
 
         public string Username { get; set; }
 
@@ -15,7 +15,7 @@
 
         public string Content { get; set; }
 
-        public int ParentId { get; set; } = 0;
+        public int? ParentId { get; set; } = 0;
 
         public string PublicationTitle { get; set; }
 
