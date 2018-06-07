@@ -7,6 +7,10 @@ namespace Sdl.Web.Modules.TridionDocs.Exceptions
     /// </summary>
     public class TridionDocsApiException : Exception
     {
+        public TridionDocsApiException()
+        {
+        }
+
         public TridionDocsApiException(string msg) : base(msg)
         {
         }
