@@ -3,6 +3,7 @@ using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Interfaces;
 using Sdl.Web.Common.Models;
 using Sdl.Web.Common.Models.Navigation;
+using Sdl.Web.Delivery.Service;
 using Sdl.Web.Mvc.Configuration;
 
 namespace Sdl.Web.Modules.TridionDocs.Providers
@@ -24,6 +25,8 @@ namespace Sdl.Web.Modules.TridionDocs.Providers
         public IEnumerable<SitemapItem> GetToc(int publicationId, string sitemapItemId, bool includeAncestors,
             int descendantLevels)
         {
+            bool caching = ServiceCacheProvider.Instance.DisableCaching;
+            ServiceCacheProvider.Instance.DisableCaching = true;
             IOnDemandNavigationProvider onDemandNavigationProvider = SiteConfiguration.NavigationProvider as IOnDemandNavigationProvider;
             NavigationFilter navigationFilter = new NavigationFilter
             {
@@ -34,7 +37,9 @@ namespace Sdl.Web.Modules.TridionDocs.Providers
             ILocalization localization = WebRequestContext.Localization;
             localization.Id = publicationId.ToString();
 
-            return onDemandNavigationProvider.GetNavigationSubtree(sitemapItemId, navigationFilter, localization);         
+            var result = onDemandNavigationProvider.GetNavigationSubtree(sitemapItemId, navigationFilter, localization);
+            ServiceCacheProvider.Instance.DisableCaching = caching;
+            return result;
         }
     }
 }
