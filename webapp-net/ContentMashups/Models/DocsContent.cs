@@ -6,19 +6,21 @@ namespace Sdl.Web.Modules.ContentMashups.Models
     [SemanticEntity(EntityName = "Content")]
     public class DocsContent : EntityModel
     {
-        [SemanticProperty("ReleaseName")]
-        public string ReleaseName { get; set; }
+        [SemanticProperty("ProductReleaseName")]
+        public KeywordModel ProductRelease { get; set; }
 
-        [SemanticProperty("FamilyName")]
-        public string FamilyName { get; set; }
+        [SemanticProperty("ProductFamilyName")]
+        public KeywordModel ProductFamily { get; set; }
 
         [SemanticProperty("ContentType")]
-        public string ContentType { get; set; }
+        public KeywordModel ContentType { get; set; }
 
         [SemanticProperty("EmbeddedContent")]
         public string EmbeddedContent { get; set; }
 
         [SemanticProperty("Link")]
         public string Link { get; set; }
+
+        public string Query { get; set; }
     }
 }

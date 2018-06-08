@@ -9,7 +9,8 @@ namespace Sdl.Web.Modules.ContentMashups
 
         protected override void RegisterAllViewModels()
         {
-            RegisterViewModel("DocsContent", typeof(DocsContent) , "ContentMashups");
+            //RegisterViewModel("DocsContent", typeof(DocsContent) , "ContentMashups");
+            RegisterViewModel("DocsContent", typeof(DocsContent), "ContentMashups");
         }
     }
 }

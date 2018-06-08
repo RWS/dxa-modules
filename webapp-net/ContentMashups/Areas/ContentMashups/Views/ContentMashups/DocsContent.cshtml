@@ -5,6 +5,29 @@
     <h1>Content Mashups</h1>
 
     <div class="content">
+        <div @Html.DxaPropertyMarkup(() => Model.ProductRelease)>
+            ProductReleaseName: @Model.ProductRelease.Title
+        </div>
+    </div>
+
+    <div class="content">
+
+        <div @Html.DxaPropertyMarkup(() => Model.ProductFamily)>
+            ProductFamilyName: @Model.ProductFamily.Title
+        </div>
+    </div>
+
+    <div class="content">
+        <div @Html.DxaPropertyMarkup(() => Model.ContentType)>
+            ContentType: @Model.ContentType.Title
+        </div>
+    </div>
+
+    <div class="content">
+        Query: @Model.Query
+    </div>
+
+    @*<div class="content">
         <div @Html.DxaPropertyMarkup(() => Model.EmbeddedContent)>
             @Model.EmbeddedContent
         </div>
@@ -12,6 +35,6 @@
 
     <div @Html.DxaPropertyMarkup(() => Model.Link)>
         <a href="#">@Model.Link</a>
-    </div>
+    </div>*@
 
 </div>
