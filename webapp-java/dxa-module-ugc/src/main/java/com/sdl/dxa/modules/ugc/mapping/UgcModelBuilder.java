@@ -155,6 +155,7 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
         model.setEmailAddressLabel(getValue(postFormConfig, "emailAddressLabel", String.class));
         model.setContentLabel(getValue(postFormConfig, "contentLabel", String.class));
         model.setSubmitButtonLabel(getValue(postFormConfig, "submitButtonLabel", String.class));
+        model.setCancelButtonLabel(getValue(postFormConfig, "cancelButtonLabel", String.class));
         model.setNoContentMessage(getValue(postFormConfig, "noContentMessage", String.class));
         model.setNoEmailAddressMessage(getValue(postFormConfig, "noEmailAddressMessage", String.class));
         model.setNoUserNameMessage(getValue(postFormConfig, "noUserNameMessage", String.class));

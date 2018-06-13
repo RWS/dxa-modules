@@ -180,6 +180,7 @@ namespace Sdl.Web.Modules.Ugc.Mapping
                 EmailAddressLabel = GetValue<string>(postFormConfig, "emailAddressLabel"),
                 ContentLabel = GetValue<string>(postFormConfig, "contentLabel"),                
                 SubmitButtonLabel = GetValue<string>(postFormConfig, "submitButtonLabel"),
+                CancelButtonLabel = GetValue<string>(postFormConfig, "cancelButtonLabel"),
                 NoContentMessage = GetValue<string>(postFormConfig, "noContentMessage"),
                 NoEmailAddressMessage = GetValue<string>(postFormConfig, "noEmailAddressMessage"),
                 NoUserNameMessage = GetValue<string>(postFormConfig, "noUserNameMessage"),

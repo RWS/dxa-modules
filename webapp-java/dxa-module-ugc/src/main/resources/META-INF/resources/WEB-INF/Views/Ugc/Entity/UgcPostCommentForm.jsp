@@ -8,7 +8,9 @@
 
 <div ${markup.entity(entity)}>
 
-    <form:form method="post" commandName="entity" action="${localization.localizePath('/api/ugc/postcomment')}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <form:hidden id="CommentForm" commandName="entity">
         <%--@elvariable id="errors" type="java.util.ArrayList<org.springframework.validation.ObjectError>"--%>
         <c:if test="${not empty errors}">
             <div class="alert-danger">
@@ -30,12 +32,40 @@
         <div class="form-group">
             <form:input path="content" placeholder="${entity.contentLabel}" cssClass="form-control"/>
         </div>
+
         <form:hidden path="formUrl"/>
         <form:hidden path="target"/>
 
+        <form:hidden path="publicationTitle"/>
+        <form:hidden path="publicationUrl"/>
+        <form:hidden path="itemTitle"/>
+        <form:hidden path="itemUrl"/>
+        <form:hidden path="language"/>
+
+        <input type="hidden" name="status" value="0"/>
+
         <div class="form-group pull-right">
-            <button type="reset" class="btn btn-primary">Cancel</button>
-            <button type="submit" class="btn btn-primary">${entity.submitButtonLabel}</button>
+            <button id="resetButton" type="reset" class="btn btn-primary">${entity.cancelButtonLabel}</button>
+            <button id="submitButton" type="submit" class="btn btn-primary">${entity.submitButtonLabel}</button>
         </div>
     </form:form>
+
+    <script type="text/javascript">
+        $('button#submitButton').click( function() {
+            $.ajax({
+                url: ${localization.localizePath('/api/comments/add')},
+                type: 'post',
+                dataType: 'json',
+                data: $('form#CommentForm').serialize(),
+                success: function(data) {
+                    alert('success:' + data);
+                    alert('probably read comments again?');
+                },
+                error: function (data) {
+                    alert('error:' + data);
+                }
+            });
+            return false;
+        });
+    </script>
 </div>

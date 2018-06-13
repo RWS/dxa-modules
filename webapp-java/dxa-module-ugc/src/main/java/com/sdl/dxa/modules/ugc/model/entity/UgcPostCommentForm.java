@@ -80,6 +80,11 @@ public class UgcPostCommentForm extends AbstractEntityModel {
     private String submitButtonLabel;
 
     /**
+     * Label text for cancel button on view
+     **/
+    private String cancelButtonLabel;
+
+    /**
     * User name not specified message
     **/
     private String noUserNameMessage;
