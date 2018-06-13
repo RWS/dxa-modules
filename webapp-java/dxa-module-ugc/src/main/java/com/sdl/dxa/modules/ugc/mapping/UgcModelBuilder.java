@@ -159,6 +159,12 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
         model.setNoContentMessage(getValue(postFormConfig, "noContentMessage", String.class));
         model.setNoEmailAddressMessage(getValue(postFormConfig, "noEmailAddressMessage", String.class));
         model.setNoUserNameMessage(getValue(postFormConfig, "noUserNameMessage", String.class));
+        model.setPublicationTitle("Not specified yet#1");
+        model.setPublicationUrl("Not specified yet#2");
+        model.setItemTitle("Not specified yet#3");
+        model.setItemUrl("Not specified yet#4");
+        model.setLanguage(localization.getLocale().toLanguageTag());
+        model.setStatus("0");
 
         return model;
     }

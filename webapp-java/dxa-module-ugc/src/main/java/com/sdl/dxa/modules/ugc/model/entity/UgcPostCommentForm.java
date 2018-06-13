@@ -100,6 +100,13 @@ public class UgcPostCommentForm extends AbstractEntityModel {
     **/
     private String noContentMessage;
 
+    private String publicationTitle;
+    private String publicationUrl;
+    private String itemTitle;
+    private String itemUrl;
+    private String language;
+    private String status = "0";
+
     /**
     * Target CmUri for comments
     **/
