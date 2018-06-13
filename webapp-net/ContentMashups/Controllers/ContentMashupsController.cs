@@ -1,6 +1,9 @@
 ﻿using Sdl.Web.Common.Models;
 using Sdl.Web.Modules.ContentMashups.Models;
+using Sdl.Web.Mvc.Configuration;
 using Sdl.Web.Mvc.Controllers;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Sdl.Web.Modules.ContentMashups.Controllers
 {
@@ -18,23 +21,35 @@ namespace Sdl.Web.Modules.ContentMashups.Controllers
 
                 model.Link = "Content link from Tridion Docs";
 
-                model.Query = string.Format(@"
-items(  
-  filter:
-    {{
-      customMetas: [
-        {{ scope: Publication, key: ""FMBPRODUCTFAMILYNAME.version.element"", value: ""{0}""}},
-        {{ scope: Publication, key: ""FMBPRODUCTRELEASENAME.version.element"", value: ""{1}""}},
-        {{ scope: Page, key: ""FMBCONTENTREFTYPE.logical.element"", value: ""{2}""}},
-        {{ scope: Page, key: ""DOC-LANGUAGE.lng.value"", value: ""{3}""}}
-      ]
-    }}
-)", model.ProductFamily.Id, model.ProductRelease.Id, model.ContentType.Id, "en-en");
+                model.Query = GetQuery(model.Keywords);
 
-                return model;
             }
 
             return sourceModel;
+        }
+
+        private string GetQuery(Dictionary<string, KeywordModel> keywords)
+        {
+            var scopes = new StringBuilder();
+
+            foreach (var Keyword in keywords)
+            {
+                scopes.AppendLine(string.Format(@"{{ scope: {0}, key: ""{1}.version.element"", value: ""{2}""}},", "Publication", Keyword.Key, Keyword.Value.Id));
+            }
+
+            string query = string.Format(@"
+                items(  
+                  filter:
+                    {{
+                      customMetas: 
+                        [ 
+                            {0}
+                            {{ scope: Page, key: ""DOC-LANGUAGE.lng.value"", value: ""{1}""}}
+                        ]
+                    }}
+                )", scopes.ToString(), WebRequestContext.Localization.CultureInfo.Name);
+
+            return query;
         }
     }
 }
