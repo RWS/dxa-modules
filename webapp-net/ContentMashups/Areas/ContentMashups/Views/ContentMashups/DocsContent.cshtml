@@ -4,37 +4,28 @@
 
     <h1>Content Mashups</h1>
 
-    @*<div class="content">
-            <div @Html.DxaPropertyMarkup(() => Model.ProductRelease)>
-                ProductReleaseName: @Model.ProductRelease.Title
+    @foreach (var keyword in Model.Keywords)
+    {
+        <div class="content">
+            <div>
+                <!-- Not able to add DxaPropertyMarkup to each item in the dictionary, because the items are not valid properties in the Model -->
+                <b>@keyword.Key:</b> @keyword.Value.Id - @keyword.Value.Title
             </div>
         </div>
-
-        <div class="content">
-
-            <div @Html.DxaPropertyMarkup(() => Model.ProductFamily)>
-                ProductFamilyName: @Model.ProductFamily.Title
-            </div>
-        </div>
-
-        <div class="content">
-            <div @Html.DxaPropertyMarkup(() => Model.ContentType)>
-                ContentType: @Model.ContentType.Title
-            </div>
-        </div>*@
+    }
 
     <div class="content">
-        Query: @Model.Query
+        <b>Query:</b> @Model.Query
     </div>
 
     <div class="content">
         <div @Html.DxaPropertyMarkup(() => Model.EmbeddedContent)>
-            EmbeddedContent : @Model.EmbeddedContent
+            <b>EmbeddedContent:</b> @Model.EmbeddedContent
         </div>
     </div>
 
     <div @Html.DxaPropertyMarkup(() => Model.Link)>
-        Link : <a href="#">@Model.Link</a>
+        <b>Link:</b> <a href="#">@Model.Link</a>
     </div>
 
 </div>
