@@ -9,20 +9,48 @@
 <div ${markup.entity(entity)}>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        function validateForm() {
+            $('#errorsInForm').hide();
+            var errorsPresented = false;
+            if (!$('#userName').val() || $('#userName').val() == '') {
+                $('#userNameEmpty').show();
+                errorsPresented = true;
+            } else $('#userNameEmpty').hide();
+            if (!$('#emailAddress').val() || $('#emailAddress').val() == '') {
+                $('#emailEmpty').show();
+                errorsPresented = true;
+            } else $('#emailEmpty').hide();
+            if (!$('#content').val() || $('#content').val() == '') {
+                $('#commentEmpty').show();
+                errorsPresented = true;
+            } else $('#commentEmpty').hide();
+            if (errorsPresented) {
+                $('#errorsInForm').show();
+                return false;
+            }
+            return true;
+        }
+    </script>
 
     <form:hidden id="CommentForm" commandName="entity">
-        <%--@elvariable id="errors" type="java.util.ArrayList<org.springframework.validation.ObjectError>"--%>
-        <c:if test="${not empty errors}">
-            <div class="alert-danger">
-                <div class="validation-summary-errors">
-                    <ul>
-                        <c:forEach items="${errors}" var="error">
-                            <li>${entity.resolveErrorCode(error.code)}</li>
-                        </c:forEach>
-                    </ul>
-                </div>
+
+        <div class="alert-danger" id="errorsInForm" style="display: none">
+            <div class="validation-summary-errors">
+                <ul>
+                    <li id="userNameEmpty" style="display: none">
+                        ${entity.resolveErrorCode("userName.empty")}
+                    </li>
+                    <li id="emailEmpty" style="display: none">
+                        ${entity.resolveErrorCode("emailAddress.empty")}
+                    </li>
+                    <li id="commentEmpty" style="display: none">
+                        ${entity.resolveErrorCode("content.empty")}
+                    </li>
+                </ul>
             </div>
-        </c:if>
+        </div>
+
         <div class="form-group">
             <form:input path="userName" placeholder="${entity.userNameLabel}" cssClass="form-control"/>
         </div>
@@ -52,6 +80,7 @@
 
     <script type="text/javascript">
         $('button#submitButton').click( function() {
+            if (!validateForm()) return false;
             $.ajax({
                 url: ${localization.localizePath('/api/comments/add')},
                 type: 'post',
