@@ -44,7 +44,7 @@
 
         function submitTheForm() {
             if (!validateTheForm()) return false;
-            alert('Post comment ...\n' + $("input[name=_csrf]").val())));
+            alert('Post comment ...\n' + $("input[name=_csrf]").val());
             $.ajax({
                 url: '${localization.localizePath('/api/comments/add')}',
                 type: 'POST',
