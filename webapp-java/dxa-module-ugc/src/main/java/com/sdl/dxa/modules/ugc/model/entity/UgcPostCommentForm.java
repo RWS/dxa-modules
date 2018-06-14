@@ -28,13 +28,13 @@ public class UgcPostCommentForm extends AbstractEntityModel {
     private String formUrl;
 
     /**
-     * Holds the form control value for username
+     * Holds the form control value for userName
      */
     @SemanticMappingIgnore
     private String userName;
 
     /**
-    * Holds the form control value for email address
+    * Holds the form control value for emailAddress address
     **/
     @SemanticMappingIgnore
     private String emailAddress;
@@ -42,7 +42,7 @@ public class UgcPostCommentForm extends AbstractEntityModel {
 
 
     /**
-    * Holds the form control value for email address
+    * Holds the form control value for emailAddress address
     **/
         @SemanticMappingIgnore
     private String content;
@@ -60,12 +60,12 @@ public class UgcPostCommentForm extends AbstractEntityModel {
     public int parentId = 0;
 
     /**
-    * Label text for username input control on view
+    * Label text for userName input control on view
     **/
     private String userNameLabel;
 
     /**
-    * Label text for email address input control on view
+    * Label text for emailAddress address input control on view
     **/
     private String emailAddressLabel;
 

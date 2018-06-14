@@ -31,7 +31,7 @@ public class UgcApiControllerTest {
     private static final int PAGE_ID = 12451;
     private static final int PUBLICATION_ID = 4574;
     private static final String COMMENT_TEXT = "comment";
-    private static final String USER_EMAIL = "email";
+    private static final String USER_EMAIL = "emailAddress";
     private static final String USER_NAME = "name";
 
     @Mock
@@ -82,8 +82,8 @@ public class UgcApiControllerTest {
         PostedComment postedComment = mock(PostedComment.class);
         User user= mock(User.class);
 
-        when(postedComment.getUsername()).thenReturn(USER_NAME);
-        when(postedComment.getEmail()).thenReturn(USER_EMAIL);
+        when(postedComment.getUserName()).thenReturn(USER_NAME);
+        when(postedComment.getEmailAddress()).thenReturn(USER_EMAIL);
         when(postedComment.getContent()).thenReturn(COMMENT_TEXT);
         when(comment.getUser()).thenReturn(user);
         when(user.getName()).thenReturn(USER_NAME);
