@@ -2,8 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<jsp:useBean id="entity" type="com.sdl.dxa.modules.ugc.model.entity.UgcPostCommentForm"
-             scope="request"/>
+<jsp:useBean id="entity" type="com.sdl.dxa.modules.ugc.model.entity.UgcPostCommentForm" scope="request"/>
 <jsp:useBean id="markup" type="com.sdl.webapp.common.markup.Markup" scope="request"/>
 
 <div ${markup.entity(entity)}>
@@ -32,15 +31,29 @@
             return true;
         }
 
+        function getFormData($form){
+            var unindexed_array = $form.serializeArray();
+            var indexed_array = {};
+
+            $.map(unindexed_array, function(n, i){
+                indexed_array[n['name']] = n['value'];
+            });
+
+            return indexed_array;
+        }
+
         function submitTheForm() {
-            alert('Click event fired');
             if (!validateTheForm()) return false;
-            alert('Post comment...');
+            alert('Post comment ...\n' + $("input[name=_csrf]").val())));
             $.ajax({
                 url: '${localization.localizePath('/api/comments/add')}',
-                type: 'post',
+                type: 'POST',
+                beforeSend: function(request) {
+                    request.setRequestHeader("X-CSRF-TOKEN", $("input[name=_csrf]").val());
+                },
+                contentType:"application/json; charset=utf-8",
                 dataType: 'json',
-                data: $('#CommentForm').serialize(),
+                data: JSON.stringify(getFormData($('#CommentForm'))),
                 success: function(data) {
                     alert('success:' + data);
                     alert('probably read comments again?');
@@ -57,8 +70,8 @@
     <form:form id="CommentForm" action="" onsubmit="return false;" commandName="entity">
 
         <div class="alert-danger" id="errorsInForm" style="display: none">
-            <div class="validation-summary-errors">
-                <ul>
+                <div class="validation-summary-errors">
+                    <ul>
                     <li id="userNameEmpty" style="display: none">
                         ${entity.resolveErrorCode("userName.empty")}
                     </li>
@@ -68,9 +81,9 @@
                     <li id="commentEmpty" style="display: none">
                         ${entity.resolveErrorCode("content.empty")}
                     </li>
-                </ul>
+                    </ul>
+                </div>
             </div>
-        </div>
 
         <div class="form-group">
             <form:input path="userName" placeholder="${entity.userNameLabel}" cssClass="form-control"/>
