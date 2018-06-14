@@ -9,8 +9,8 @@
 <div ${markup.entity(entity)}>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script>
-        function validateForm() {
+    <script type="text/javascript">
+        function validateTheForm() {
             $('#errorsInForm').hide();
             var errorsPresented = false;
             if (!$('#userName').val() || $('#userName').val() == '') {
@@ -31,9 +31,30 @@
             }
             return true;
         }
+
+        function submitTheForm() {
+            alert('Click event fired');
+            if (!validateTheForm()) return false;
+            alert('Post comment...');
+            $.ajax({
+                url: '${localization.localizePath('/api/comments/add')}',
+                type: 'post',
+                dataType: 'json',
+                data: $('#CommentForm').serialize(),
+                success: function(data) {
+                    alert('success:' + data);
+                    alert('probably read comments again?');
+                    window.location.reload();
+                },
+                error: function (data) {
+                    alert('error:' + data);
+                }
+            });
+        }
+
     </script>
 
-    <form:hidden id="CommentForm" commandName="entity">
+    <form:form id="CommentForm" action="" onsubmit="return false;" commandName="entity">
 
         <div class="alert-danger" id="errorsInForm" style="display: none">
             <div class="validation-summary-errors">
@@ -69,32 +90,12 @@
         <form:hidden path="itemTitle"/>
         <form:hidden path="itemUrl"/>
         <form:hidden path="language"/>
-
-        <input type="hidden" name="status" value="0"/>
+        <form:hidden path="status"/>
 
         <div class="form-group pull-right">
-            <button id="resetButton" type="reset" class="btn btn-primary">${entity.cancelButtonLabel}</button>
-            <button id="submitButton" type="submit" class="btn btn-primary">${entity.submitButtonLabel}</button>
+            <button id="resetButton" type="reset" class="btn btn-primary">Cancel</button>
+            <button id="submitButton" type="button" class="btn btn-primary" onclick="javascript:submitTheForm(); return false;">${entity.submitButtonLabel}</button>
         </div>
     </form:form>
 
-    <script type="text/javascript">
-        $('button#submitButton').click( function() {
-            if (!validateForm()) return false;
-            $.ajax({
-                url: ${localization.localizePath('/api/comments/add')},
-                type: 'post',
-                dataType: 'json',
-                data: $('form#CommentForm').serialize(),
-                success: function(data) {
-                    alert('success:' + data);
-                    alert('probably read comments again?');
-                },
-                error: function (data) {
-                    alert('error:' + data);
-                }
-            });
-            return false;
-        });
-    </script>
 </div>
