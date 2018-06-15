@@ -2,6 +2,7 @@
 using System.Xml;
 using Newtonsoft.Json;
 using Sdl.Web.Common.Configuration;
+using Sdl.Web.Common.Interfaces;
 using Sdl.Web.Common.Models;
 
 namespace Sdl.Web.Modules.Core.Models
@@ -72,7 +73,7 @@ namespace Sdl.Web.Modules.Core.Models
         /// <remarks>
         /// This makes it possible possible to render "embedded" YouTubeVideo Models using the Html.DxaEntity method.
         /// </remarks>
-        public override MvcData GetDefaultView(Localization localization)
+        public override MvcData GetDefaultView(ILocalization localization)
         {
             return new MvcData("Core:YouTubeVideo");
         }

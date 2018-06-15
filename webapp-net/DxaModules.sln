@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdl.Web.Modules.Search", "Search\Sdl.Web.Modules.Search.csproj", "{8FEFFF4C-0AE2-452F-89B1-36F7D2944032}"
 EndProject
@@ -31,6 +31,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdl.Web.Modules.Core", "Core\Sdl.Web.Modules.Core.csproj", "{32943BD1-4891-4B03-AFCD-296658F61581}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdl.Web.Modules.AudienceManager", "AudienceManager\Sdl.Web.Modules.AudienceManager.csproj", "{83EC18A4-831F-4939-9912-D8A93FA3998D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdl.Web.Modules.Ugc", "Ugc\Sdl.Web.Modules.Ugc.csproj", "{54DDEEE6-1F97-4E53-8018-5918F7D90A8B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdl.Web.Modules.TridionDocs", "TridionDocs\Sdl.Web.Modules.TridionDocs.csproj", "{EE523D3E-4A5D-4E01-9FB2-7BF4352F6CE5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -86,6 +90,14 @@ Global
 		{83EC18A4-831F-4939-9912-D8A93FA3998D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83EC18A4-831F-4939-9912-D8A93FA3998D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83EC18A4-831F-4939-9912-D8A93FA3998D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54DDEEE6-1F97-4E53-8018-5918F7D90A8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54DDEEE6-1F97-4E53-8018-5918F7D90A8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54DDEEE6-1F97-4E53-8018-5918F7D90A8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54DDEEE6-1F97-4E53-8018-5918F7D90A8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE523D3E-4A5D-4E01-9FB2-7BF4352F6CE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE523D3E-4A5D-4E01-9FB2-7BF4352F6CE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE523D3E-4A5D-4E01-9FB2-7BF4352F6CE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE523D3E-4A5D-4E01-9FB2-7BF4352F6CE5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

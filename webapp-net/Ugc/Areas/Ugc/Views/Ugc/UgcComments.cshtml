@@ -1,0 +1,15 @@
+﻿@model UgcComments
+<div>
+    <h2>Comments (@Model.Comments.Count)</h2>
+    <hr />
+    <div class="list-group">
+        @foreach (var comment in Model.Comments)
+        {
+            <div class="row">
+                @Html.Partial("Partials/UgcComment", comment)
+            </div>
+        }
+    </div>
+</div>
+
+

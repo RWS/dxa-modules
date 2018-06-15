@@ -1,0 +1,20 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+	<!-- 
+
+	Common for all DXA Modules
+		* Add to start of your csproj files te following:
+				<Import Project="..\DxaModulesCommon.Props" /> 
+		
+	-->
+
+	<PropertyGroup>		
+	    <DxaDataModelVersion>2.1.0-beta-201804241437</DxaDataModelVersion>
+		<DxaFrameworkVersion>2.1.0-beta-201805111302</DxaFrameworkVersion>
+		<SdlDeliveryVersion>11.0.0-beta-201805161005</SdlDeliveryVersion>
+		<AudienceManagerVersion>9.0.0-beta-201804031026</AudienceManagerVersion>
+        <ExperienceManagerVersion>8.5.0</ExperienceManagerVersion>
+		<ContextClientVersion>10.1.0</ContextClientVersion>
+  	</PropertyGroup>
+
+</Project>
