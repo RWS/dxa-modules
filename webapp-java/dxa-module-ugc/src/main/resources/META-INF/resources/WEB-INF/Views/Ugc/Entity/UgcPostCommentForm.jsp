@@ -12,15 +12,15 @@
         function validateTheForm() {
             $('#errorsInForm').hide();
             var errorsPresented = false;
-            if (!$('#userName').val() || $('#userName').val() == '') {
+            if (!$('#UserName').val() || $('#UserName').val() == '') {
                 $('#userNameEmpty').show();
                 errorsPresented = true;
             } else $('#userNameEmpty').hide();
-            if (!$('#emailAddress').val() || $('#emailAddress').val() == '') {
+            if (!$('#EmailAddress').val() || $('#EmailAddress').val() == '') {
                 $('#emailEmpty').show();
                 errorsPresented = true;
             } else $('#emailEmpty').hide();
-            if (!$('#content').val() || $('#content').val() == '') {
+            if (!$('#Content').val() || $('#Content').val() == '') {
                 $('#commentEmpty').show();
                 errorsPresented = true;
             } else $('#commentEmpty').hide();

@@ -35,4 +35,8 @@ public class PostedComment {
     private String language;
 
     private String status;
+
+    private  String itemTitle;
+
+    private String itemUrl;
 }
