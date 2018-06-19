@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdl.Web.Modules.Search", "Search\Sdl.Web.Modules.Search.csproj", "{8FEFFF4C-0AE2-452F-89B1-36F7D2944032}"
 EndProject
@@ -36,7 +36,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdl.Web.Modules.Ugc", "Ugc\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdl.Web.Modules.TridionDocs", "TridionDocs\Sdl.Web.Modules.TridionDocs.csproj", "{EE523D3E-4A5D-4E01-9FB2-7BF4352F6CE5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdl.Web.Modules.ContentMashups", "ContentMashups\Sdl.Web.Modules.ContentMashups.csproj", "{87029FAF-C593-4C5C-ABB2-3C83E84257CF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdl.Web.Modules.TridionDocsMashup", "TridionDocsMashup\Sdl.Web.Modules.TridionDocsMashup.csproj", "{87029FAF-C593-4C5C-ABB2-3C83E84257CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -107,5 +107,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F5089555-1E8B-4315-8067-37C2C14C2F38}
 	EndGlobalSection
 EndGlobal
