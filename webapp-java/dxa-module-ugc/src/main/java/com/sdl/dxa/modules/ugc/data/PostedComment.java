@@ -8,9 +8,9 @@ import lombok.Data;
 
 @Data
 public class PostedComment {
-    private int PublicationId;
+    private int publicationId;
 
-    private int PageId;
+    private int pageId;
 
     private String userName;
 

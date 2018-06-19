@@ -95,8 +95,8 @@
         <form:hidden path="FormUrl"/>
         <form:hidden path="Target"/>
 
-        <form:hidden path="publicationId"/>
-        <form:hidden path="pageId"/>
+        <form:hidden path="PublicationId"/>
+        <form:hidden path="PageId"/>
         <form:hidden path="PublicationTitle"/>
         <form:hidden path="PublicationUrl"/>
         <form:hidden path="ItemTitle"/>
