@@ -44,7 +44,6 @@
 
         function submitTheForm() {
             if (!validateTheForm()) return false;
-            alert('Post comment ...\n' + $("input[name=_csrf]").val());
             $.ajax({
                 url: '${localization.localizePath('/api/comments/add')}',
                 type: 'POST',
@@ -55,11 +54,10 @@
                 dataType: 'json',
                 data: JSON.stringify(getFormData($('#CommentForm'))),
                 success: function(data) {
-                    alert('success:' + data);
                     window.location.reload();
                 },
                 error: function (data) {
-                    alert('error:' + data);
+                    alert('Comment saving fails');
                 }
             });
         }
@@ -97,6 +95,8 @@
         <form:hidden path="FormUrl"/>
         <form:hidden path="Target"/>
 
+        <form:hidden path="publicationId"/>
+        <form:hidden path="pageId"/>
         <form:hidden path="PublicationTitle"/>
         <form:hidden path="PublicationUrl"/>
         <form:hidden path="ItemTitle"/>

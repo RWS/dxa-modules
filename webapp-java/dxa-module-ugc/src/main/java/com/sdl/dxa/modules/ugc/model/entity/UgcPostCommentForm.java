@@ -100,6 +100,8 @@ public class UgcPostCommentForm extends AbstractEntityModel {
     **/
     private String noContentMessage;
 
+    private String publicationId;
+    private String pageId;
     private String publicationTitle;
     private String publicationUrl;
     private String itemTitle;

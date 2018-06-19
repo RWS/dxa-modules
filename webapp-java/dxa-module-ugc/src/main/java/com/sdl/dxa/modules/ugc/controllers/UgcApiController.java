@@ -90,13 +90,14 @@ public class UgcApiController extends BaseController {
 
         addPubIdTitleLangToCommentMetadata(input, metadata);
 
-        return ugcService.postComment(input.getPublicationId(),
+        Comment comment = ugcService.postComment(input.getPublicationId(),
                 input.getPageId(),
                 input.getUserName(),
                 input.getEmailAddress(),
                 input.getContent(),
                 input.getParentId(),
                 metadata);
+        return comment;
     }
 
     private void addPubIdTitleLangToCommentMetadata(@RequestBody PostedComment input, Map<String, String> metadata) {

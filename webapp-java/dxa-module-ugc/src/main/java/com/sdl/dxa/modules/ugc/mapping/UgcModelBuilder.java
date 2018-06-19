@@ -164,6 +164,8 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
         model.setNoContentMessage(getValue(postFormConfig, "noContentMessage", String.class));
         model.setNoEmailAddressMessage(getValue(postFormConfig, "noEmailAddressMessage", String.class));
         model.setNoUserNameMessage(getValue(postFormConfig, "noUserNameMessage", String.class));
+        model.setPublicationId(localization.getId());
+        model.setPageId(pageIdAndTitle.getId());
         model.setPublicationTitle("Not available in Tridion Sites");
         model.setPublicationUrl("Not available in Tridion Sites");
         model.setItemTitle(pageIdAndTitle.getTitle());
