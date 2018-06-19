@@ -37,6 +37,8 @@ namespace Sdl.Web.Modules.ContentMashups.Controllers
                 scopes.AppendLine(string.Format(@"{{ scope: {0}, key: ""{1}.version.element"", value: ""{2}""}},", "Publication", Keyword.Key, Keyword.Value.Id));
             }
 
+            scopes.AppendLine(string.Format(@"{{ scope: Page, key: ""DOC-LANGUAGE.lng.value"", value: ""{1}""}}", "Publication", WebRequestContext.Localization.CultureInfo.Name));
+
             string query = string.Format(@"
                 items(  
                   filter:
@@ -44,10 +46,9 @@ namespace Sdl.Web.Modules.ContentMashups.Controllers
                       customMetas: 
                         [ 
                             {0}
-                            {{ scope: Page, key: ""DOC-LANGUAGE.lng.value"", value: ""{1}""}}
                         ]
                     }}
-                )", scopes.ToString(), WebRequestContext.Localization.CultureInfo.Name);
+                )", scopes.ToString());
 
             return query;
         }
