@@ -9,6 +9,8 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
+        var $commentForm = $('#CommentForm');
+
         function validateTheForm() {
             $('#errorsInForm').hide();
             var errorsPresented = false;
@@ -42,7 +44,10 @@
             return indexed_array;
         }
 
-        function submitTheForm() {
+        function submitTheForm(event) {
+            // Stops form submission
+            event.preventDefault();
+
             if (!validateTheForm()) return false;
             $.ajax({
                 url: '${localization.localizePath('/api/comments/add')}',
@@ -52,7 +57,7 @@
                 },
                 contentType:"application/json; charset=utf-8",
                 dataType: 'json',
-                data: JSON.stringify(getFormData($('#CommentForm'))),
+                data: JSON.stringify(getFormData($commentForm)),
                 success: function(data) {
                     window.location.reload();
                 },
@@ -62,9 +67,11 @@
             });
         }
 
+        $commentForm.submit(submitTheForm);
+
     </script>
 
-    <form:form id="CommentForm" action="" onsubmit="return false;" commandName="entity">
+    <form:form id="CommentForm" commandName="entity">
 
         <div class="alert-danger" id="errorsInForm" style="display: none">
                 <div class="validation-summary-errors">
@@ -106,7 +113,7 @@
 
         <div class="form-group pull-right">
             <button id="resetButton" type="reset" class="btn btn-primary">Cancel</button>
-            <button id="submitButton" type="button" class="btn btn-primary" onclick="javascript:submitTheForm(); return false;">${entity.submitButtonLabel}</button>
+            <button id="submitButton" type="submit" class="btn btn-primary">${entity.submitButtonLabel}</button>
         </div>
     </form:form>
 
