@@ -4,6 +4,26 @@
              scope="request"/>
 <jsp:useBean id="markup" type="com.sdl.webapp.common.markup.Markup" scope="request"/>
 <div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        //load comments
+
+        <%--$.ajax({--%>
+            <%--url: ${localization.localizePath('/api/comments/pubid/pageid')},--%>
+            <%--type: 'get',--%>
+            <%--dataType: 'json',--%>
+            <%--data: $('form#CommentForm').serialize(),--%>
+            <%--success: function(data) {--%>
+                <%--alert('success:' + data);--%>
+                <%--alert('probably read comments again?');--%>
+                <%--window.location.reload();--%>
+            <%--},--%>
+            <%--error: function (data) {--%>
+                <%--alert('error:' + data);--%>
+            <%--}--%>
+        <%--});--%>
+    </script>
+
     <h2>Comments (${entity.comments.size()})</h2>
     <hr/>
     <div class="list-group">
