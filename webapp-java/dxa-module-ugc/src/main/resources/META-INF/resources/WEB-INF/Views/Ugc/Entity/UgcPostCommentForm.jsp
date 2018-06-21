@@ -67,7 +67,10 @@
             });
         }
 
-        $commentForm.submit(submitTheForm);
+        // The DOM is ready
+        $(function () {
+            $commentForm.submit(submitTheForm);
+        });
 
     </script>
 
