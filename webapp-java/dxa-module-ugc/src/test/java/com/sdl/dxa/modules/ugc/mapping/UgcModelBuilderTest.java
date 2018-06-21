@@ -19,6 +19,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import static org.mockito.Mockito.when;
 import static org.powermock.api.mockito.PowerMockito.mock;
@@ -120,7 +121,7 @@ public class UgcModelBuilderTest {
         when(regionmodel.getEntities()).thenReturn(regionEntities);
         when(regionmodel.getRegions()).thenReturn(new RegionModelSetImpl());
         when(regionmodel.getName()).thenReturn("comment");
-
+        when(localization.getLocale()).thenReturn(Locale.US);
 
         //when
         PageModel pageR2 = builder.buildPageModel(testPage, pageModelData);
@@ -128,8 +129,6 @@ public class UgcModelBuilderTest {
         //then
         Assert.assertSame(testPage, pageR2);
         Assert.assertEquals(((RegionModel)testPage.getRegions().get(regionmodel.getClass()).toArray()[0]).getEntities().size(),3);
-
-
     }
 
     private EntityModelData getUgcEntityModelData() {

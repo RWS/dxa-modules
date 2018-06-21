@@ -12,15 +12,19 @@ public class PostedComment {
 
     private int pageId;
 
-    private String username;
+    private String userName;
 
-    private String email;
+    private String emailAddress;
 
     private String content;
 
     private int parentId = 0;
 
     private String publicationTitle;
+
+    private String formUrl;
+
+    private String target;
 
     private String publicationUrl;
 
@@ -29,4 +33,12 @@ public class PostedComment {
     private String pageUrl;
 
     private String language;
+
+    private String status;
+
+    private  String itemTitle;
+
+    private String itemUrl;
+
+    private String _csrf;
 }
