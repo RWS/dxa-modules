@@ -4,6 +4,7 @@ using System.Web;
 using Sdl.Web.Common;
 using Sdl.Web.Common.Interfaces;
 using Sdl.Web.Common.Models;
+using Sdl.Web.Delivery.Service;
 using Sdl.Web.Modules.TridionDocs.Exceptions;
 using Sdl.Web.Tridion.Mapping;
 using Tridion.ContentDelivery.DynamicContent.Query;
@@ -48,6 +49,9 @@ namespace Sdl.Web.Modules.TridionDocs.Providers
 
         public override PageModel GetPageModel(int pageId, ILocalization localization, bool addIncludes = true)
         {
+            bool caching = ServiceCacheProvider.Instance.DisableCaching;
+            ServiceCacheProvider.Instance.DisableCaching = true;
+
             PageModel pageModel = base.GetPageModel(pageId, localization, addIncludes);
             if (pageModel != null)
             {
@@ -84,6 +88,8 @@ namespace Sdl.Web.Modules.TridionDocs.Providers
                     }
                 }
             }
+
+            ServiceCacheProvider.Instance.DisableCaching = caching;
             return pageModel;
         }
 
