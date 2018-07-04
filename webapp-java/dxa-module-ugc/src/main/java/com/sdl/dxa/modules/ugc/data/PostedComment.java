@@ -39,6 +39,4 @@ public class PostedComment {
     private  String itemTitle;
 
     private String itemUrl;
-
-    private String _csrf;
 }

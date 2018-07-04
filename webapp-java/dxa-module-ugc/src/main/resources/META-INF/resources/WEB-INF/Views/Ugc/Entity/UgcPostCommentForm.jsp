@@ -9,8 +9,6 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
-        var $commentForm = $('#CommentForm');
-
         function validateTheForm() {
             $('#errorsInForm').hide();
             var errorsPresented = false;
@@ -54,10 +52,11 @@
                 type: 'POST',
                 beforeSend: function(request) {
                     request.setRequestHeader("X-CSRF-TOKEN", $("input[name=_csrf]").val());
+                    $("input[name=_csrf]").remove();
                 },
                 contentType:"application/json; charset=utf-8",
                 dataType: 'json',
-                data: JSON.stringify(getFormData($commentForm)),
+                data: JSON.stringify(getFormData($('#CommentForm'))),
                 success: function(data) {
                     window.location.reload();
                 },
@@ -69,7 +68,7 @@
 
         // The DOM is ready
         $(function () {
-            $commentForm.submit(submitTheForm);
+            $('#CommentForm').submit(submitTheForm);
         });
 
     </script>
