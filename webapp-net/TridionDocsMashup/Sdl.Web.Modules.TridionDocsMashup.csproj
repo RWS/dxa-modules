@@ -54,6 +54,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\DocsContentViewModel.cs" />
     <Compile Include="TridionDocsMashupAreaRegistration.cs" />
     <Compile Include="Controllers\TridionDocsMashupController.cs" />
     <Compile Include="Models\DocsContent.cs" />
@@ -61,8 +62,8 @@
     <Compile Include="..\CommonAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Areas\TridionDocsMashup\Views\TridionDocsMashup\DocsContentViewModel.cshtml" />
-    <None Include="Areas\TridionDocsMashup\Views\TridionDocsMashup\DocsContent.cshtml" />
+    <None Include="Areas\TridionDocsMashup\Views\Entity\DocsContentViewModel.cshtml" />
+    <None Include="Areas\TridionDocsMashup\Views\Entity\DocsContent.cshtml" />
     <None Include="Areas\TridionDocsMashup\Views\web.config" />
     <None Include="packages.config" />
   </ItemGroup>
