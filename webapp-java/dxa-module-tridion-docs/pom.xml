@@ -11,7 +11,7 @@
     </parent>
 
     <groupId>com.sdl.dxa.modules</groupId>
-    <artifactId>dxa-module-ish</artifactId>
+    <artifactId>dxa-module-tridion-docs</artifactId>
 
     <name>DXA Modules - Tridion Docs</name>
     <description>Implementation of ish module</description>
