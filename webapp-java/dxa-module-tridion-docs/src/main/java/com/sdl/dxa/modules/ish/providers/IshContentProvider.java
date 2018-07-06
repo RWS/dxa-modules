@@ -1,12 +1,13 @@
 package com.sdl.dxa.modules.ish.providers;
 
 import com.google.common.io.Files;
+import com.google.common.primitives.Ints;
 import com.sdl.dxa.api.datamodel.model.PageModelData;
+import com.sdl.dxa.common.util.PathUtils;
 import com.sdl.dxa.modules.ish.exception.IshServiceException;
 import com.sdl.dxa.modules.ish.localization.IshLocalization;
 import com.sdl.dxa.tridion.content.StaticContentResolver;
 import com.sdl.dxa.tridion.mapping.ModelBuilderPipeline;
-import com.sdl.dxa.tridion.mapping.PageModelBuilder;
 import com.sdl.dxa.tridion.mapping.impl.DefaultContentProvider;
 import com.sdl.dxa.tridion.modelservice.DefaultModelService;
 import com.sdl.dxa.tridion.modelservice.ModelServiceClient;
@@ -18,12 +19,10 @@ import com.sdl.web.api.meta.WebComponentMetaFactoryImpl;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.content.ContentProviderException;
 import com.sdl.webapp.common.api.content.LinkResolver;
-import com.sdl.webapp.common.api.content.PageNotFoundException;
 import com.sdl.webapp.common.api.content.StaticContentItem;
 import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.api.model.PageModel;
 import com.sdl.webapp.common.controller.exception.NotFoundException;
-import com.sdl.webapp.common.util.LocalizationUtils;
 import com.sdl.webapp.common.util.MimeUtils;
 import com.sdl.webapp.common.util.TcmUtils;
 import com.tridion.ItemTypes;
@@ -47,7 +46,6 @@ import java.io.InputStream;
 import java.util.List;
 
 import static com.sdl.webapp.common.util.FileUtils.isToBeRefreshed;
-import static com.sdl.webapp.common.util.LocalizationUtils.findPageByPath;
 
 /**
  * Ish content provider.
@@ -99,78 +97,49 @@ public class IshContentProvider extends DefaultContentProvider {
      */
     @Override
     public PageModel getPageModel(final String pageId, final Localization localization) {
+        int publicationId = Ints.tryParse(localization.getId());
+        String prefix = IshLocalization.class.isInstance(localization.getClass()) ? "ish" : "tcm";
+        String cmId = TcmUtils.buildTcmUri(prefix, String.valueOf(publicationId), pageId, ItemTypes.COMPONENT);
         try {
-            return findPageByPath(pageId, localization, new LocalizationUtils.TryFindPage<PageModel>() {
-                public PageModel tryFindPage(String path, int publicationId) throws ContentProviderException {
-                    String prefix = localization instanceof IshLocalization ? "ish" : "tcm";
-                    String cmId = TcmUtils.buildTcmUri(prefix, publicationId, pageId, ItemTypes.COMPONENT);
-//                    final org.dd4t.contentmodel.Page genericPage;
-//                    try {
-//                        String source = dd4tPageFactory.findSourcePageByTcmId(cmId);
-//                        if (source != null) {
-//                            genericPage = dd4tPageFactory.deserialize(source, PageImpl.class);
-//                        } else {
-//                            return null;
-//                        }
-//                    } catch (ItemNotFoundException e) {
-//                        log.debug("Page not found: [{}] {}", publicationId, path, e);
-//                        return null;
-//                    } catch (FactoryException e) {
-//                        throw new ContentProviderException("Exception while getting page model for: [" + publicationId +
-//                                "] " + path, e);
-//                    }
-                    PageModelData pageModelData = null;
-                    try {
-                        pageModelData = modelServiceClient.getForType(cmId, PageModelData.class, publicationId, pageId);
-                    } catch (ItemNotFoundInModelServiceException e) {
-                        log.debug("Page not found: [{}] {}", publicationId, path, e);
-                        return null;
-                    }
+            PageModelData pageModelData = modelServiceClient.getForType(cmId, PageModelData.class, String.valueOf(publicationId), pageId);
+            PageModel pageModel = modelBuilderPipeline.createPageModel(pageModelData);
+            pageModel.setUrl(PathUtils.stripDefaultExtension(pageId));
 
-                    PageModel pageModel = modelBuilderPipeline.createPageModel(pageModelData);
-                    if (pageModel != null) {
-                        pageModel.setUrl(LocalizationUtils.stripDefaultExtension(path));
+            // Enhance the page model with custom metadata
+            processPageMetaIfAny(publicationId, cmId, pageModel);
+            webRequestContext.setPage(pageModel);
+            return pageModel;
+        } catch (ItemNotFoundInModelServiceException e) {
+            log.warn("Page not found: [{}] for id {}", publicationId, pageId, e);
+            return null;
+        }
+    }
 
-                        // Enhance the page model with custom metadata
-                        PageMetaFactory pageMetaFactory = new PageMetaFactory(Integer.parseInt(localization.getId()));
-                        PageMeta pageMeta = pageMetaFactory.getMeta(cmId);
-                        if (pageMeta != null) {
+    private void processPageMetaIfAny(int publicationId, String cmId, PageModel pageModel) {
+        PageMetaFactory pageMetaFactory = new PageMetaFactory(publicationId);
+        PageMeta pageMeta = pageMetaFactory.getMeta(cmId);
+        if (pageMeta == null) {
+            return;
+        }
+        // Put the information about the toc entries on the metadata
+        // This is required by the UI so it knows the location of the page in the Toc
+        NameValuePair tocNavEntries = pageMeta.getCustomMeta().getNameValues().get(TOC_NAVENTRIES_META);
+        if (tocNavEntries != null) {
+            List<String> values = (List<String>) (Object) tocNavEntries.getMultipleValues();
+            if (values != null) {
+                pageModel.getMeta().put(TOC_NAVENTRIES_META, String.join(", ", values));
+            }
+        }
+        // Put the information about used conditions form page metadata
+        if (pageMeta.getCustomMeta().getFirstValue(PAGE_CONDITIONS_USED_META) != null) {
+            String value = String.valueOf(pageMeta.getCustomMeta().getFirstValue(PAGE_CONDITIONS_USED_META));
+            pageModel.getMeta().put(PAGE_CONDITIONS_USED_META, value);
+        }
 
-                            // Put the information about the toc entries on the metadata
-                            // This is required by the UI so it knows the location of the page in the Toc
-                            NameValuePair tocNavEntries = pageMeta.getCustomMeta().getNameValues()
-                                    .get(TOC_NAVENTRIES_META);
-                            if (tocNavEntries != null) {
-                                List<String> values = (List<String>) (Object) tocNavEntries.getMultipleValues();
-                                if (values != null) {
-                                    pageModel.getMeta().put(TOC_NAVENTRIES_META, String.join(", ", values));
-                                }
-                            }
-
-                            // Put the information about used conditions form page metadata
-                            if (pageMeta.getCustomMeta().getFirstValue(PAGE_CONDITIONS_USED_META) != null) {
-                                pageModel.getMeta().put(PAGE_CONDITIONS_USED_META,
-                                        String.valueOf(pageMeta.getCustomMeta()
-                                                .getFirstValue(PAGE_CONDITIONS_USED_META)));
-                            }
-
-                            // Add logical Ref ID information
-                            if (pageMeta.getCustomMeta().getFirstValue(PAGE_LOGICAL_REF_OBJECT_ID) != null) {
-                                pageModel.getMeta().put(PAGE_LOGICAL_REF_OBJECT_ID,
-                                        String.valueOf(pageMeta.getCustomMeta()
-                                                .getFirstValue(PAGE_LOGICAL_REF_OBJECT_ID)));
-                            }
-                        }
-
-                        webRequestContext.setPage(pageModel);
-                    }
-                    return pageModel;
-                }
-            });
-        } catch (PageNotFoundException e) {
-            throw new NotFoundException(e.getMessage());
-        } catch (ContentProviderException e) {
-            throw new IshServiceException(e);
+        // Add logical Ref ID information
+        if (pageMeta.getCustomMeta().getFirstValue(PAGE_LOGICAL_REF_OBJECT_ID) != null) {
+            String value = String.valueOf(pageMeta.getCustomMeta().getFirstValue(PAGE_LOGICAL_REF_OBJECT_ID));
+            pageModel.getMeta().put(PAGE_LOGICAL_REF_OBJECT_ID, value);
         }
     }
 
