@@ -64,6 +64,7 @@ public class CoreInitializer {
             @RegisteredViewModel(viewName = "2-Column", modelClass = RegionModelImpl.class),
             @RegisteredViewModel(viewName = "3-Column", modelClass = RegionModelImpl.class),
             @RegisteredViewModel(viewName = "4-Column", modelClass = RegionModelImpl.class),
+			@RegisteredViewModel(viewName = "Article", modelClass = RegionModelImpl.class),
             @RegisteredViewModel(viewName = "Hero", modelClass = RegionModelImpl.class),
             @RegisteredViewModel(viewName = "Info", modelClass = RegionModelImpl.class),
             @RegisteredViewModel(viewName = "Left", modelClass = RegionModelImpl.class),
