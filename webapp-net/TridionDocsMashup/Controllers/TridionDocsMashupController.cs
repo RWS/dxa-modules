@@ -4,6 +4,8 @@ using Sdl.Web.Mvc.Configuration;
 using Sdl.Web.Mvc.Controllers;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
+using System;
 
 namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
 {
@@ -11,6 +13,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
     {
         protected override ViewModel EnrichModel(ViewModel sourceModel)
         {
+            System.Diagnostics.Debugger.Launch();
             if (sourceModel is DocsContent)
             {
                 DocsContent model = base.EnrichModel(sourceModel) as DocsContent;
@@ -38,7 +41,9 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
 
                     model.Link = "Content link from Tridion Docs";
 
-                    model.Query = GetQuery(model.Keywords);
+                    string propertyName = (model.GetType().GetProperty("Properties").GetCustomAttributes(typeof(SemanticPropertyAttribute), false)[0] as SemanticPropertyAttribute).PropertyName;
+
+                    model.Query = GetQuery(model.Properties.Select(value => (propertyName, value)).ToArray());
                 }
             }
 
@@ -47,11 +52,16 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
 
         private string GetQuery(Dictionary<string, KeywordModel> keywords)
         {
+            return GetQuery(keywords.Select(s => (s.Key, s.Value.Id)).ToArray());
+        }
+
+        private string GetQuery((string Key, string Value)[] properties)
+        {
             var customMetas = new StringBuilder();
 
-            foreach (var Keyword in keywords)
+            foreach (var property in properties)
             {
-                customMetas.AppendLine(string.Format(@"{{ customMeta: {{ scope: {0}, key: ""{1}.version.element"", value: ""{2}""}} }},", "ItemInPublication", Keyword.Key, Keyword.Value.Id));
+                customMetas.AppendLine(string.Format(@"{{ customMeta: {{ scope: {0}, key: ""{1}.version.element"", value: ""{2}""}} }},", "ItemInPublication", property.Key, property.Value));
             }
 
             customMetas.AppendLine(string.Format(@"{{ customMeta: {{ scope: {0}, key: ""DOC-LANGUAGE.lng.value"", value: ""{1}""}} }}", "ItemInPublication", WebRequestContext.Localization.CultureInfo.Name));

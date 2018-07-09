@@ -8,8 +8,11 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Models
     [SemanticEntity(EntityName = "Content")]
     public class DocsContentViewModel : EntityModel
     {
-        [SemanticProperty("_all")]
-        public Dictionary<string, KeywordModel> Keywords { get; set; }
+        [SemanticProperty("FMBPRODUCTVIEWMODEL")]
+        public string ProductViewModel { get; set; }
+
+        [SemanticProperty("FMBPROPERTIES")]
+        public List<string> Properties { get; set; }
 
         [SemanticProperty("DisplayContentAs")]
         public string DisplayContentAs { get; set; }
