@@ -54,12 +54,15 @@ namespace Sdl.Web.Modules.Core
             RegisterViewModel("2-Column", typeof(RegionModel));
             RegisterViewModel("3-Column", typeof(RegionModel));
             RegisterViewModel("4-Column", typeof(RegionModel));
+            RegisterViewModel("Additional", typeof(RegionModel));
             RegisterViewModel("Article", typeof(RegionModel));
+            RegisterViewModel("Content", typeof(RegionModel));
             RegisterViewModel("Hero", typeof(RegionModel));
             RegisterViewModel("Info", typeof(RegionModel));
             RegisterViewModel("Left", typeof(RegionModel));
             RegisterViewModel("Links", typeof(RegionModel));
             RegisterViewModel("Logo", typeof(RegionModel));
+            RegisterViewModel("Main Section", typeof(RegionModel));
             RegisterViewModel("Main", typeof(RegionModel));
             RegisterViewModel("Nav", typeof(RegionModel));
             RegisterViewModel("Tools", typeof(RegionModel));
