@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
  * Overwrites DXA page controller to allow custom routing.
  */
 @Controller
-public class PageController {
+public class TridionDocsPageController {
     /**
      * Main entry point of the application.
      *
@@ -22,7 +22,7 @@ public class PageController {
      * @return Redirects to the home page.
      * @throws Exception
      */
-    @RequestMapping(method = RequestMethod.GET, value = "/",
+    @RequestMapping(method = RequestMethod.GET, value = "/ish/",
             produces = {MediaType.TEXT_HTML_VALUE, MediaType.ALL_VALUE})
     public String handleGetPage(HttpServletRequest request, HttpServletResponse response) {
         return "redirect:home";

@@ -36,6 +36,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -52,6 +53,7 @@ import static com.sdl.webapp.common.util.FileUtils.isToBeRefreshed;
  */
 @Component
 @Slf4j
+@Profile("ish.content.provider")
 @Primary
 public class IshContentProvider extends DefaultContentProvider {
 
