@@ -15,7 +15,7 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
  * Test class for ContentService.
  */
 @RunWith(MockitoJUnitRunner.class)
-public class ContentServiceTest {
+public class TridionDocsContentServiceTest {
     private static final Integer PUB_ID = 10992;
     private static final String LOGICAL_REF_VALUE = "ishlogicalref.object.id.value";
 
@@ -23,7 +23,7 @@ public class ContentServiceTest {
     private IshReferenceProvider provider;
     @Spy
     @InjectMocks
-    private ContentService contentService;
+    private TridionDocsContentService contentService;
 
     @Test
     public void getPageIdByIshLogicalReference() throws ContentProviderException {

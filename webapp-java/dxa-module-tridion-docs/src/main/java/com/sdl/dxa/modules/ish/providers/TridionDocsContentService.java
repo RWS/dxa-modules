@@ -3,25 +3,29 @@ package com.sdl.dxa.modules.ish.providers;
 import com.sdl.dxa.modules.ish.localization.IshLocalization;
 import com.sdl.dxa.modules.ish.utils.HtmlUtil;
 import com.sdl.dxa.modules.ish.model.Topic;
+import com.sdl.webapp.common.api.content.ContentProvider;
 import com.sdl.webapp.common.api.content.ContentProviderException;
 import com.sdl.webapp.common.api.content.StaticContentItem;
 import com.sdl.webapp.common.api.model.PageModel;
 import com.sdl.webapp.common.api.model.RichText;
 import com.tridion.meta.Item;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 /**
  * Services related to retrieval of content using IshContentProvider.
  */
 @Service
-public class ContentService {
+public class TridionDocsContentService {
 
     @Autowired
-    private com.sdl.dxa.modules.ish.providers.IshContentProvider contentProvider;
+    @Qualifier("ishContentProvider")
+    private IshContentProvider contentProvider;
 
     @Autowired
-    private com.sdl.dxa.modules.ish.providers.IshReferenceProvider ishReferenceProvider;
+    private IshReferenceProvider ishReferenceProvider;
 
     /**
      * Get binary content.

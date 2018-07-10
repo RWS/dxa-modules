@@ -9,7 +9,7 @@ import com.sdl.dxa.modules.ish.providers.PublicationService;
 import com.sdl.dxa.modules.ish.providers.TocService;
 import com.sdl.dxa.modules.ish.localization.IshLocalization;
 import com.sdl.dxa.modules.ish.providers.ConditionService;
-import com.sdl.dxa.modules.ish.providers.ContentService;
+import com.sdl.dxa.modules.ish.providers.TridionDocsContentService;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.content.ContentProviderException;
 import com.sdl.webapp.common.api.content.StaticContentItem;
@@ -68,7 +68,7 @@ public class IshController {
     private TocService tocService;
 
     @Autowired
-    private ContentService contentService;
+    private TridionDocsContentService tridionDocsContentService;
 
     @Autowired
     private ConditionService conditionService;
@@ -94,7 +94,7 @@ public class IshController {
         if (!conditions.isEmpty()) {
             WebContext.getCurrentClaimStore().put(USER_CONDITIONS_URI, conditions);
         }
-        PageModel page = contentService.getPageModel(pageId, localization, request.getContextPath());
+        PageModel page = tridionDocsContentService.getPageModel(pageId, localization, request.getContextPath());
         return dataFormatters.view(page);
     }
 
@@ -114,7 +114,7 @@ public class IshController {
                                                                  @PathVariable Integer binaryId)
             throws ContentProviderException, IOException {
         publicationService.checkPublicationOnline(publicationId);
-        StaticContentItem binaryItem = contentService.getBinaryContent(publicationId, binaryId);
+        StaticContentItem binaryItem = tridionDocsContentService.getBinaryContent(publicationId, binaryId);
         InputStreamResource result = new InputStreamResource(binaryItem.getContent());
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.parseMediaType(binaryItem.getContentType()));
@@ -199,6 +199,6 @@ public class IshController {
         if (Strings.isNullOrEmpty(ishFieldValue)) {
             throw new NotFoundException("Unable to use empty 'ishlogicalref.object.id' value as a search criteria");
         }
-        return contentService.getPageIdByIshLogicalReference(publicationId, ishFieldValue);
+        return tridionDocsContentService.getPageIdByIshLogicalReference(publicationId, ishFieldValue);
     }
 }

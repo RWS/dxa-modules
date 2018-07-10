@@ -1,7 +1,7 @@
 package com.sdl.dxa.modules.ish.controller;
 
 import com.sdl.dxa.modules.ish.providers.PublicationService;
-import com.sdl.dxa.modules.ish.providers.ContentService;
+import com.sdl.dxa.modules.ish.providers.TridionDocsContentService;
 import com.sdl.webapp.common.api.content.ContentProviderException;
 import com.sdl.webapp.common.controller.exception.NotFoundException;
 import com.tridion.meta.Item;
@@ -31,7 +31,7 @@ public class IshControllerTest {
     @Mock
     private PublicationService publicationService;
     @Mock
-    private ContentService contentService;
+    private TridionDocsContentService contentService;
     @Spy
     @InjectMocks
     private IshController controller;
