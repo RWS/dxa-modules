@@ -41,7 +41,7 @@ public class PublicationService {
 
 
     public List<Publication> getPublicationList() {
-        List<Publication> result = new ArrayList<Publication>();
+        List<Publication> result = new ArrayList<>();
         try {
             PublicationMeta[] publicationMetas = webPublicationMetaFactory
                     .getAllMeta(Arrays.asList(PUBLICATION_TITLE_META, PUBLICATION_PRODUCTFAMILYNAME_META,
