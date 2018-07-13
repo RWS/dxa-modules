@@ -13,7 +13,6 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
     {
         protected override ViewModel EnrichModel(ViewModel sourceModel)
         {
-            System.Diagnostics.Debugger.Launch();
             DocsContent docsContent = base.EnrichModel(sourceModel) as DocsContent;
 
             if (docsContent != null)
