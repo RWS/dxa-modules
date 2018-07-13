@@ -1,23 +1,18 @@
-﻿@model DocsContentViewModel
+﻿﻿@model DocsContentViewModel
 
 <div class="rich-text @Model.HtmlClasses" @Html.DxaEntityMarkup()>
 
     <h1>Content Mashups</h1>
 
-    @foreach (var properties in Model.Properties)
-        {
-            <div class="content">
-                <div>
-                    @properties
-                </div>
+    @foreach (var property in Model.Properties)
+    {
+        <div class="content">
+            <div>
+                <!-- Not able to add DxaPropertyMarkup to each item in the dictionary, because the items are not valid properties in the Model -->
+                <b>property:</b> @property
             </div>
-        }
-
-    @*<div class="content">
-        <div>
-            <b>Properties:</b> @Model.Properties
         </div>
-    </div>*@
+    }
 
     <div class="content">
         <b>Query:</b> @Model.Query
