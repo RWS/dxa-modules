@@ -1,5 +1,6 @@
 package com.sdl.dxa.modules.ish.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticEntity;
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticProperty;
 import com.sdl.webapp.common.api.model.RichText;
@@ -18,9 +19,11 @@ import static com.sdl.webapp.common.api.mapping.semantic.config.SemanticVocabula
 public class Topic extends AbstractEntityModel {
 
     @SemanticProperty("topicBody")
+    @JsonProperty("topicBody")
     private RichText topicBody;
 
     @SemanticProperty("topicTitle")
+    @JsonProperty("topicTitle")
     private String topicTitle;
 
     public RichText getTopicBody() {

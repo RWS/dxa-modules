@@ -11,6 +11,7 @@ import com.sdl.dxa.tridion.mapping.ModelBuilderPipeline;
 import com.sdl.dxa.tridion.mapping.impl.DefaultContentProvider;
 import com.sdl.dxa.tridion.modelservice.DefaultModelService;
 import com.sdl.dxa.tridion.modelservice.ModelServiceClient;
+import com.sdl.dxa.tridion.modelservice.ModelServiceConfiguration;
 import com.sdl.dxa.tridion.modelservice.exceptions.ItemNotFoundInModelServiceException;
 import com.sdl.web.api.content.BinaryContentRetriever;
 import com.sdl.web.api.meta.WebBinaryMetaFactory;
@@ -66,6 +67,9 @@ public class IshContentProvider extends DefaultContentProvider {
     private ModelServiceClient modelServiceClient;
 
     @Autowired
+    private ModelServiceConfiguration modelServiceConfiguration;
+
+    @Autowired
     private BinaryContentRetriever binaryContentRetriever;
 
     @Autowired
@@ -100,10 +104,12 @@ public class IshContentProvider extends DefaultContentProvider {
     @Override
     public PageModel getPageModel(final String pageId, final Localization localization) {
         int publicationId = Ints.tryParse(localization.getId());
-        String prefix = IshLocalization.class.isInstance(localization.getClass()) ? "ish" : "tcm";
+        String prefix = localization instanceof IshLocalization ? "ish" : "tcm";
         String cmId = TcmUtils.buildTcmUri(prefix, String.valueOf(publicationId), pageId, ItemTypes.COMPONENT);
         try {
-            PageModelData pageModelData = modelServiceClient.getForType(cmId, PageModelData.class, String.valueOf(publicationId), pageId);
+            String serviceUrl = modelServiceConfiguration.getPageModelUrl(); //we need to convert URL to form like http://<CM.client.ip>:<port>/PageModel/ish/pubId-pageId
+            serviceUrl = serviceUrl.replaceAll("(.*)/(\\{localizationId\\})/(\\{pageUrl\\})\\?.*", "$1/$2-$3");
+            PageModelData pageModelData = modelServiceClient.getForType(serviceUrl, PageModelData.class, prefix, String.valueOf(publicationId), pageId, "INCLUDE");
             PageModel pageModel = modelBuilderPipeline.createPageModel(pageModelData);
             pageModel.setUrl(PathUtils.stripDefaultExtension(pageId));
 
