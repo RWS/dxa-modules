@@ -32,14 +32,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Collection;
 import java.util.List;
 
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -87,7 +90,8 @@ public class IshController {
     public ModelAndView getPage(@PathVariable Integer publicationId,
                                 @PathVariable Integer pageId,
                                 @RequestParam(value = "conditions", defaultValue = "") String conditions,
-                                final HttpServletRequest request) throws ContentProviderException {
+                                final HttpServletRequest request,
+                                final HttpServletResponse response) throws ContentProviderException {
         publicationService.checkPublicationOnline(publicationId);
         final IshLocalization localization = (IshLocalization) webRequestContext.getLocalization();
         localization.setPublicationId(Integer.toString(publicationId));
@@ -95,7 +99,18 @@ public class IshController {
             WebContext.getCurrentClaimStore().put(USER_CONDITIONS_URI, conditions);
         }
         PageModel page = tridionDocsContentService.getPageModel(pageId, localization, request.getContextPath());
+        if (page == null) {
+            response.setStatus(NOT_FOUND.value());
+            throw new ResourceNotFoundException("Page not found: [" + localization.getId() + "] " + pageId + "/index.html");
+        }
         return dataFormatters.view(page);
+    }
+
+    @ResponseStatus(value = NOT_FOUND)
+    public static class ResourceNotFoundException extends RuntimeException {
+        public ResourceNotFoundException(String message) {
+            super(message);
+        }
     }
 
     /**

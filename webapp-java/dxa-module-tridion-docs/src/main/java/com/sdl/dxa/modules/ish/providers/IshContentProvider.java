@@ -13,6 +13,7 @@ import com.sdl.dxa.tridion.modelservice.DefaultModelService;
 import com.sdl.dxa.tridion.modelservice.ModelServiceClient;
 import com.sdl.dxa.tridion.modelservice.ModelServiceConfiguration;
 import com.sdl.dxa.tridion.modelservice.exceptions.ItemNotFoundInModelServiceException;
+import com.sdl.dxa.tridion.modelservice.exceptions.ModelServiceInternalServerErrorException;
 import com.sdl.web.api.content.BinaryContentRetriever;
 import com.sdl.web.api.meta.WebBinaryMetaFactory;
 import com.sdl.web.api.meta.WebComponentMetaFactory;
@@ -117,7 +118,7 @@ public class IshContentProvider extends DefaultContentProvider {
             processPageMetaIfAny(publicationId, cmId, pageModel);
             webRequestContext.setPage(pageModel);
             return pageModel;
-        } catch (ItemNotFoundInModelServiceException e) {
+        } catch (ItemNotFoundInModelServiceException | ModelServiceInternalServerErrorException e) {
             log.warn("Page not found: [{}] for id {}", publicationId, pageId, e);
             return null;
         }
