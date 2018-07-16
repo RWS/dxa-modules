@@ -38,14 +38,12 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
     }
 
     @Override
-    public void configureMessageConverters(
-            List<HttpMessageConverter<?>> converters) {
-        StringHttpMessageConverter stringConverter = new StringHttpMessageConverter(
-                Charset.forName("UTF-8"));
+    public void extendMessageConverters (List<HttpMessageConverter<?>> converters) {
+        StringHttpMessageConverter stringConverter = new StringHttpMessageConverter(Charset.forName("UTF-8"));
         stringConverter.setSupportedMediaTypes(Arrays.asList(
                 MediaType.TEXT_PLAIN,
                 MediaType.TEXT_HTML,
                 MediaType.APPLICATION_JSON));
-        converters.add(stringConverter);
+        converters.add(0, stringConverter);
     }
 }

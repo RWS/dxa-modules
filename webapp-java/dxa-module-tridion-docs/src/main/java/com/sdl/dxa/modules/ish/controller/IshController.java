@@ -1,5 +1,6 @@
 package com.sdl.dxa.modules.ish.controller;
 
+import com.fasterxml.jackson.annotation.JsonRawValue;
 import com.google.common.base.Strings;
 import com.sdl.dxa.modules.ish.exception.IshExceptionHandler;
 import com.sdl.dxa.modules.ish.exception.IshServiceException;
@@ -182,7 +183,7 @@ public class IshController {
     @RequestMapping(method = GET, value = "/api/conditions/{publicationId:[\\d]+}", produces = {APPLICATION_JSON_VALUE})
     @ResponseBody
     public String getPublicationConditions(@PathVariable("publicationId") Integer publicationId) {
-        return conditionService.getConditions(publicationId);
+        return conditionService.getConditions(publicationId).toString();
     }
 
     @ExceptionHandler(value = Exception.class)

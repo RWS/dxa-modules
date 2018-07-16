@@ -1,5 +1,9 @@
 package com.sdl.dxa.modules.ish;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationConfig;
+import com.fasterxml.jackson.databind.ser.DefaultSerializerProvider;
+import com.fasterxml.jackson.databind.ser.std.NullSerializer;
 import com.sdl.dxa.tridion.R2SpringConfiguration;
 import com.sdl.web.api.meta.WebBinaryMetaFactory;
 import com.sdl.web.api.meta.WebBinaryMetaFactoryImpl;
