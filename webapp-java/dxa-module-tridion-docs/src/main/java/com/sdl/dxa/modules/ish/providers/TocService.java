@@ -1,5 +1,6 @@
 package com.sdl.dxa.modules.ish.providers;
 
+import com.google.common.base.Strings;
 import com.sdl.dxa.modules.ish.localization.IshLocalization;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.model.entity.SitemapItem;
@@ -11,7 +12,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
 
 import static com.sdl.webapp.common.api.serialization.json.filter.IgnoreByNameInRequestFilter.ignoreByName;
 
@@ -47,7 +51,14 @@ public class TocService {
         NavigationFilter navigationFilter = new NavigationFilter();
         navigationFilter.setWithAncestors(includeAncestors);
         navigationFilter.setDescendantLevels(descendantLevels);
-        return onDemandNavigationProvider.getNavigationSubtree(sitemapItemId, navigationFilter, localization);
+        List<SitemapItem> navigationSubtree = new ArrayList(onDemandNavigationProvider.getNavigationSubtree(sitemapItemId, navigationFilter, localization));
+        navigationSubtree.sort((o1, o2) -> {
+            if (o1 == o2) return 0;
+            if (o1 == null) return -1;
+            if (o2 == null) return 1;
+            return Strings.nullToEmpty(o1.getId()).compareTo(Strings.nullToEmpty(o2.getId()));
+        });
+        return navigationSubtree;
     }
 
 }
