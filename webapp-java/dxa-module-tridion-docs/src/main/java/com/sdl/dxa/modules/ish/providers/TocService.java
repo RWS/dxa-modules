@@ -1,11 +1,13 @@
 package com.sdl.dxa.modules.ish.providers;
 
 import com.google.common.base.Strings;
+import com.google.common.primitives.Ints;
 import com.sdl.dxa.modules.ish.localization.IshLocalization;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.model.entity.SitemapItem;
 import com.sdl.webapp.common.api.navigation.NavigationFilter;
 import com.sdl.webapp.common.api.navigation.OnDemandNavigationProvider;
+import com.tridion.smarttarget.entitymodel.client.YesNo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -56,9 +58,15 @@ public class TocService {
             if (o1 == o2) return 0;
             if (o1 == null) return -1;
             if (o2 == null) return 1;
-            return Strings.nullToEmpty(o1.getId()).compareTo(Strings.nullToEmpty(o2.getId()));
+            //order should be t1-k2 t1-k3 t1-k10 then t2-k5 (so numbers after 'k')
+            int firstPartCompareResult = getPart(YesNo.YES, o1).compareTo(getPart(YesNo.YES, o2));
+            if (firstPartCompareResult != 0) return firstPartCompareResult;
+            return getPart(YesNo.NO, o1).compareTo(getPart(YesNo.NO, o2));
         });
         return navigationSubtree;
     }
 
+    private Integer getPart(YesNo firstPart, SitemapItem item) {
+        return Ints.tryParse(item.getId().replaceAll("^t(\\d++)-k(\\d++)$", firstPart == YesNo.YES ? "$1" : "$2"));
+    }
 }
