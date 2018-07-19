@@ -105,12 +105,11 @@ public class IshContentProvider extends DefaultContentProvider {
     @Override
     public PageModel getPageModel(final String pageId, final Localization localization) {
         int publicationId = Ints.tryParse(localization.getId());
-        String prefix = localization instanceof IshLocalization ? "ish" : "tcm";
-        String cmId = TcmUtils.buildTcmUri(prefix, String.valueOf(publicationId), pageId, ItemTypes.COMPONENT);
+        String cmId = TcmUtils.buildTcmUri("ish", String.valueOf(publicationId), pageId, ItemTypes.COMPONENT);
         try {
             String serviceUrl = modelServiceConfiguration.getPageModelUrl(); //we need to convert URL to form like http://<CM.client.ip>:<port>/PageModel/ish/pubId-pageId
             serviceUrl = serviceUrl.replaceAll("(.*)/(\\{localizationId\\})/(\\{pageUrl\\})\\?.*", "$1/$2-$3");
-            PageModelData pageModelData = modelServiceClient.getForType(serviceUrl, PageModelData.class, prefix, String.valueOf(publicationId), pageId, "INCLUDE");
+            PageModelData pageModelData = modelServiceClient.getForType(serviceUrl, PageModelData.class, "ish", String.valueOf(publicationId), pageId, "INCLUDE");
             PageModel pageModel = modelBuilderPipeline.createPageModel(pageModelData);
             pageModel.setUrl(PathUtils.stripDefaultExtension(pageId));
 
