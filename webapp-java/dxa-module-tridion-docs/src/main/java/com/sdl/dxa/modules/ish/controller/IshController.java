@@ -1,6 +1,5 @@
 package com.sdl.dxa.modules.ish.controller;
 
-import com.fasterxml.jackson.annotation.JsonRawValue;
 import com.google.common.base.Strings;
 import com.sdl.dxa.modules.ish.exception.IshExceptionHandler;
 import com.sdl.dxa.modules.ish.exception.IshServiceException;
