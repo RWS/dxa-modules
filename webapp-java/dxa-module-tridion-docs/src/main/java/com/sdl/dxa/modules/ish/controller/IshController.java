@@ -182,7 +182,7 @@ public class IshController {
     @RequestMapping(method = GET, value = "/api/conditions/{publicationId:[\\d]+}", produces = {APPLICATION_JSON_VALUE})
     @ResponseBody
     public String getPublicationConditions(@PathVariable("publicationId") Integer publicationId) {
-        return conditionService.getConditions(publicationId).toString();
+        return conditionService.getConditions(publicationId);
     }
 
     @ExceptionHandler(value = Exception.class)

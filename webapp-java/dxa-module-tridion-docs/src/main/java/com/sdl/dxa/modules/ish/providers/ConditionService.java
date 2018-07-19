@@ -28,7 +28,7 @@ public class ConditionService {
     @Autowired
     private WebPublicationMetaFactory webPublicationMetaFactory;
 
-    public JsonObject getConditions(Integer publicationId) {
+    public String getConditions(Integer publicationId) {
         JsonObject conditionUsed = getMetadataJson(publicationId, CONDITION_USED);
         JsonObject conditionMetadata = getMetadataJson(publicationId, CONDITION_METADATA);
 
@@ -42,7 +42,7 @@ public class ConditionService {
             }
             conditionUsed.add(entry.getKey(), newValue);
         }
-        return conditionUsed;
+        return conditionUsed.toString();
     }
 
     private JsonObject getMetadataJson(Integer publicationId, String metadataName) {
