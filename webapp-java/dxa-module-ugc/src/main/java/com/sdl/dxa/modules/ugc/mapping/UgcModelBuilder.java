@@ -3,7 +3,7 @@ package com.sdl.dxa.modules.ugc.mapping;
 import com.sdl.dxa.api.datamodel.model.ContentModelData;
 import com.sdl.dxa.api.datamodel.model.EntityModelData;
 import com.sdl.dxa.api.datamodel.model.PageModelData;
-import com.sdl.dxa.modules.ugc.data.PubIdTitleLang;
+import com.sdl.dxa.modules.ugc.data.PageIdTitleUrl;
 import com.sdl.dxa.modules.ugc.model.entity.UgcComments;
 import com.sdl.dxa.modules.ugc.model.entity.UgcPostCommentForm;
 import com.sdl.dxa.modules.ugc.model.entity.UgcRegion;
@@ -116,7 +116,7 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
                     entities.add(createUgcCommentsEntity(localization, entity.getId(), TcmUtils.COMPONENT_ITEM_TYPE));
                 }
                 if (entity.getExtensionData().get(POST_COMMENTS_EXT_DATA) != null) {
-                    PubIdTitleLang.PageIdAndTitle pageIdAndTitle = new PubIdTitleLang.PageIdAndTitle();
+                    PageIdTitleUrl pageIdAndTitle = new PageIdTitleUrl();
                     pageIdAndTitle.setId(entity.getId());
                     pageIdAndTitle.setUrl(pageModel.getUrl());
                     pageIdAndTitle.setTitle(pageModel.getName());
@@ -145,16 +145,16 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
         return model;
     }
 
-    private UgcPostCommentForm createUgcPostCommentEntity(Localization localization, PubIdTitleLang.PageIdAndTitle pageIdAndTitle, int itemType, ContentModelData postFormConfig) {
+    private UgcPostCommentForm createUgcPostCommentEntity(Localization localization, PageIdTitleUrl pageIdTitleUrl, int itemType, ContentModelData postFormConfig) {
         final MvcData mvcData = MvcDataCreator.creator()
                 .fromQualifiedName(POST_FORM_QUALIFIED_NAME)
                 .defaults(DefaultsMvcData.ENTITY)
                 .create();
         final UgcPostCommentForm model = new UgcPostCommentForm();
         try {
-            model.setTarget(new TCMURI(TcmUtils.buildTcmUri(localization.getId(), pageIdAndTitle.getId(), itemType)));
+            model.setTarget(new TCMURI(TcmUtils.buildTcmUri(localization.getId(), pageIdTitleUrl.getId(), itemType)));
         } catch (ParseException e) {
-            log.error("Unable to process TCMURI '{}'.", TcmUtils.buildTcmUri(localization.getId(), pageIdAndTitle.getId(), itemType));
+            log.error("Unable to process TCMURI '{}'.", TcmUtils.buildTcmUri(localization.getId(), pageIdTitleUrl.getId(), itemType));
         }
         model.setMvcData(mvcData);
         model.setUserNameLabel(getValue(postFormConfig, "userNameLabel", String.class));
@@ -166,11 +166,11 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
         model.setNoEmailAddressMessage(getValue(postFormConfig, "noEmailAddressMessage", String.class));
         model.setNoUserNameMessage(getValue(postFormConfig, "noUserNameMessage", String.class));
         model.setPublicationId(localization.getId());
-        model.setPageId(pageIdAndTitle.getId());
+        model.setPageId(pageIdTitleUrl.getId());
         model.setPublicationTitle("Not available in Tridion Sites");
         model.setPublicationUrl("Not available in Tridion Sites");
-        model.setItemTitle(pageIdAndTitle.getTitle());
-        model.setItemUrl(pageIdAndTitle.getUrl());
+        model.setItemTitle(pageIdTitleUrl.getTitle());
+        model.setItemUrl(pageIdTitleUrl.getUrl());
         model.setLanguage(localization.getLocale().toLanguageTag());
         model.setStatus("0");
 
@@ -258,7 +258,7 @@ public class UgcModelBuilder implements PageModelBuilder, EntityModelBuilder {
                 ugcRegion.getEntities().add(createUgcCommentsEntity(localization, originalPageModel.getId(), TcmUtils.PAGE_ITEM_TYPE));
             }
             if (postComments(ugcMetadata)) {
-                PubIdTitleLang.PageIdAndTitle pageIdAndTitle = new PubIdTitleLang.PageIdAndTitle();
+                PageIdTitleUrl pageIdAndTitle = new PageIdTitleUrl();
                 pageIdAndTitle.setId(originalPageModel.getId());
                 pageIdAndTitle.setTitle(originalPageModel.getName());
                 ugcRegion.getEntities().add(createUgcPostCommentEntity(localization, pageIdAndTitle, TcmUtils.PAGE_ITEM_TYPE,
