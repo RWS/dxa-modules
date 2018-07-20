@@ -16,7 +16,6 @@ import java.util.Map;
 public class Comment {
     private long id;
 
-    @JsonIgnore
     private long parentId;
 
     private int itemPublicationId;
@@ -38,7 +37,6 @@ public class Comment {
     @JsonIgnore
     private int rating = 0;
 
-    @JsonIgnore
     private Map<String, String> metadata = new HashMap<>();
 
 }
