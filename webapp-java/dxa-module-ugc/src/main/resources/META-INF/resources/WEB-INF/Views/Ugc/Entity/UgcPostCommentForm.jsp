@@ -12,15 +12,15 @@
         function validateTheForm() {
             $('#errorsInForm').hide();
             var errorsPresented = false;
-            if (!$('#UserName').val() || $('#UserName').val() == '') {
+            if (!$('#userName').val() || $('#userName').val() == '') {
                 $('#userNameEmpty').show();
                 errorsPresented = true;
             } else $('#userNameEmpty').hide();
-            if (!$('#EmailAddress').val() || $('#EmailAddress').val() == '') {
+            if (!$('#email').val() || $('#email').val() == '') {
                 $('#emailEmpty').show();
                 errorsPresented = true;
             } else $('#emailEmpty').hide();
-            if (!$('#Content').val() || $('#Content').val() == '') {
+            if (!$('#content').val() || $('#content').val() == '') {
                 $('#commentEmpty').show();
                 errorsPresented = true;
             } else $('#commentEmpty').hide();
@@ -92,26 +92,26 @@
             </div>
 
         <div class="form-group">
-            <form:input path="UserName" placeholder="${entity.userNameLabel}" cssClass="form-control"/>
+            <form:input path="userName" placeholder="${entity.userNameLabel}" cssClass="form-control"/>
         </div>
         <div class="form-group">
-            <form:input path="EmailAddress" placeholder="${entity.emailAddressLabel}" cssClass="form-control"/>
+            <form:input path="email" placeholder="${entity.emailAddressLabel}" cssClass="form-control"/>
         </div>
         <div class="form-group">
-            <form:input path="Content" placeholder="${entity.contentLabel}" cssClass="form-control"/>
+            <form:input path="content" placeholder="${entity.contentLabel}" cssClass="form-control"/>
         </div>
 
-        <form:hidden path="FormUrl"/>
-        <form:hidden path="Target"/>
+        <form:hidden path="formUrl"/>
+        <form:hidden path="target"/>
 
-        <form:hidden path="PublicationId"/>
-        <form:hidden path="PageId"/>
-        <form:hidden path="PublicationTitle"/>
-        <form:hidden path="PublicationUrl"/>
-        <form:hidden path="ItemTitle"/>
-        <form:hidden path="ItemUrl"/>
-        <form:hidden path="Language"/>
-        <form:hidden path="Status"/>
+        <form:hidden path="publicationId"/>
+        <form:hidden path="pageId"/>
+        <form:hidden path="publicationTitle"/>
+        <form:hidden path="publicationUrl"/>
+        <form:hidden path="itemTitle"/>
+        <form:hidden path="itemUrl"/>
+        <form:hidden path="language"/>
+        <form:hidden path="status"/>
 
         <div class="form-group pull-right">
             <button id="resetButton" type="reset" class="btn btn-primary">Cancel</button>

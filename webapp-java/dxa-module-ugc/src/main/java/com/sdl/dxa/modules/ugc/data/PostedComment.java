@@ -14,7 +14,7 @@ public class PostedComment {
 
     private String userName;
 
-    private String emailAddress;
+    private String email;
 
     private String content;
 

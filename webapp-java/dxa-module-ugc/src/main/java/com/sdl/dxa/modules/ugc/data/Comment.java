@@ -25,10 +25,8 @@ public class Comment {
 
     private int itemType;
 
-//    private CommentDate creationDate;
     private DateTime creationDate;
 
-//    private CommentDate lastModifiedDate;
     private DateTime lastModifiedDate;
 
     private String content;

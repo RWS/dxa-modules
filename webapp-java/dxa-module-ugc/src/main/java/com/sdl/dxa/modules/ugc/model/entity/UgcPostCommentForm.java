@@ -37,14 +37,12 @@ public class UgcPostCommentForm extends AbstractEntityModel {
     * Holds the form control value for emailAddress address
     **/
     @SemanticMappingIgnore
-    private String emailAddress;
-
-
+    private String email;
 
     /**
     * Holds the form control value for emailAddress address
     **/
-        @SemanticMappingIgnore
+    @SemanticMappingIgnore
     private String content;
 
     /**
