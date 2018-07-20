@@ -114,10 +114,10 @@ public class UgcService {
             c.setUser(convert(comment.getUser()));
         }
         if (comment.getCreationDate() != null) {
-            c.setCreationDate(convert(comment.getCreationDate()));
+            c.setCreationDate(comment.getCreationDate());
         }
         if (comment.getLastModifiedDate() != null) {
-            c.setLastModifiedDate(convert(comment.getLastModifiedDate()));
+            c.setLastModifiedDate(comment.getLastModifiedDate());
         }
         c.setChildren(convert(comment.getChildren()));
 
@@ -125,7 +125,7 @@ public class UgcService {
     }
 
     private DateTime convert(ZonedDateTime zonedDateTime) {
-        return  new DateTime(
+        return new DateTime(
                 zonedDateTime.toInstant().toEpochMilli(),
                 DateTimeZone.forTimeZone(TimeZone.getTimeZone(zonedDateTime.getZone())));
     }

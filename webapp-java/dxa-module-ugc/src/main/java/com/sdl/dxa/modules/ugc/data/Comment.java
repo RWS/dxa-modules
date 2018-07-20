@@ -1,9 +1,10 @@
 package com.sdl.dxa.modules.ugc.data;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import org.joda.time.DateTime;
 
+import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,9 +26,11 @@ public class Comment {
 
     private int itemType;
 
-    private DateTime creationDate;
+    @JsonFormat(shape = JsonFormat.Shape.OBJECT)
+    private ZonedDateTime creationDate;
 
-    private DateTime lastModifiedDate;
+    @JsonFormat(shape = JsonFormat.Shape.OBJECT)
+    private ZonedDateTime lastModifiedDate;
 
     private String content;
 
