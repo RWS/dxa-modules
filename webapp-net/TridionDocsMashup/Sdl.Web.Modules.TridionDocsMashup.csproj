@@ -55,18 +55,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Product.cs" />
-    <Compile Include="Models\DocsContentViewModel.cs" />
+    <Compile Include="Models\DynamicWidget.cs" />
     <Compile Include="TridionDocsMashupAreaRegistration.cs" />
     <Compile Include="Controllers\TridionDocsMashupController.cs" />
-    <Compile Include="Models\DocsContent.cs" />
+    <Compile Include="Models\StaticWidget.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="..\CommonAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Areas\TridionDocsMashup\Views\Entity\Product.cshtml" />
-    <None Include="Areas\TridionDocsMashup\Views\Region\DocsContentViewModel.cshtml" />
-    <None Include="Areas\TridionDocsMashup\Views\TridionDocsMashup\DocsContentViewModel.cshtml" />
-    <None Include="Areas\TridionDocsMashup\Views\TridionDocsMashup\DocsContent.cshtml" />
+    <None Include="Areas\TridionDocsMashup\Views\Region\DynamicWidget.cshtml" />
+    <None Include="Areas\TridionDocsMashup\Views\TridionDocsMashup\DynamicWidget.cshtml" />
+    <None Include="Areas\TridionDocsMashup\Views\TridionDocsMashup\StaticWidget.cshtml" />
     <None Include="Areas\TridionDocsMashup\Views\web.config" />
     <None Include="packages.config" />
   </ItemGroup>

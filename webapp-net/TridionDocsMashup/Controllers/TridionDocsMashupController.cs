@@ -13,7 +13,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
     {
         protected override ViewModel EnrichModel(ViewModel sourceModel)
         {
-            DocsContent docsContent = base.EnrichModel(sourceModel) as DocsContent;
+            StaticWidget docsContent = base.EnrichModel(sourceModel) as StaticWidget;
 
             if (docsContent != null)
             {
@@ -26,7 +26,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
                 docsContent.Query = GetQuery(docsContent.Keywords);
             }
 
-            DocsContentViewModel docsContentViewModel = base.EnrichModel(sourceModel) as DocsContentViewModel;
+            DynamicWidget docsContentViewModel = base.EnrichModel(sourceModel) as DynamicWidget;
 
             if (docsContentViewModel != null)
             {

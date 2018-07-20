@@ -8,9 +8,6 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Models
     [SemanticEntity(EntityName = "Content")]
     public class Product : EntityModel
     {
-        [SemanticProperty("_all")]
-        public Dictionary<string, string> All { get; set; }
-
         [SemanticProperty("Title")]
         public string Title { get; set; }
 

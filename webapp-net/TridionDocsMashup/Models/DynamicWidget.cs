@@ -6,10 +6,13 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Models
 {
     [Serializable]
     [SemanticEntity(EntityName = "Content")]
-    public class DocsContent : EntityModel
+    public class DynamicWidget : EntityModel
     {
-        [SemanticProperty("_all")]
-        public Dictionary<string, KeywordModel> Keywords { get; set; }
+        [SemanticProperty("ProductViewModel")]
+        public string ProductViewModel { get; set; }
+
+        [SemanticProperty("Properties")]
+        public List<string> Properties { get; set; }
 
         [SemanticProperty("DisplayContentAs")]
         public string DisplayContentAs { get; set; }
