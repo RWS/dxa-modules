@@ -32,7 +32,7 @@ public class UgcPostCommentFormValidator implements Validator {
         final UgcPostCommentForm form = (UgcPostCommentForm) target;
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userName", "userName.empty", form.getNoUserNameMessage());
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "emailAddress", "emailAddress.empty", form.getNoEmailAddressMessage());
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "emailAddress.empty", form.getNoEmailAddressMessage());
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "content", "content.empty", form.getNoContentMessage());
     }
 }

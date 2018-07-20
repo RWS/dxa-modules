@@ -93,7 +93,7 @@ public class UgcApiController extends BaseController {
         Comment comment = ugcService.postComment(input.getPublicationId(),
                 input.getPageId(),
                 input.getUserName(),
-                input.getEmailAddress(),
+                input.getEmail(),
                 input.getContent(),
                 input.getParentId(),
                 metadata);

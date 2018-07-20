@@ -17,6 +17,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class UgcCommentTest {
     private static Comment commentData = new Comment();
     private static List<UgcComment> comments = new ArrayList<>();
     private static UgcComment otherComment = new UgcComment();
-    private static DateTime time = DateTime.now();
+    private static ZonedDateTime time = ZonedDateTime.now();
     private static User user = new User();
 
     static {
