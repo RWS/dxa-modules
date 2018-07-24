@@ -6,7 +6,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Models
 {
     [Serializable]
     [SemanticEntity(EntityName = "Content")]
-    public class DocsContentViewModel : EntityModel
+    public class StaticWidget : EntityModel
     {
         [SemanticProperty("_all")]
         public Dictionary<string, KeywordModel> Keywords { get; set; }

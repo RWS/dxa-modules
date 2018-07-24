@@ -4,6 +4,8 @@ using Sdl.Web.Mvc.Configuration;
 using Sdl.Web.Mvc.Controllers;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
+using System;
 
 namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
 {
@@ -11,34 +13,53 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
     {
         protected override ViewModel EnrichModel(ViewModel sourceModel)
         {
-            if (sourceModel is DocsContent)
+            StaticWidget docsContent = base.EnrichModel(sourceModel) as StaticWidget;
+
+            if (docsContent != null)
             {
-                DocsContent model = base.EnrichModel(sourceModel) as DocsContent;
+                //to do : Use release name , family name and content type to query from Public Content Api and get respective data from tridion docs :)
 
-                if (model != null)
-                {
-                    //to do : Use release name , family name and content type to query from Public Content Api and get respective data from tridion docs :)
+                docsContent.EmbeddedContent = "Content from Tridion Docs";
 
-                    model.EmbeddedContent = "Content from Tridion Docs";
+                docsContent.Link = "Content link from Tridion Docs";
 
-                    model.Link = "Content link from Tridion Docs";
-
-                    model.Query = GetQuery(model.Keywords);
-                }
+                docsContent.Query = GetQuery(docsContent.Keywords);
             }
-            else if (sourceModel is DocsContentViewModel)
+
+            DynamicWidget docsContentViewModel = base.EnrichModel(sourceModel) as DynamicWidget;
+
+            if (docsContentViewModel != null)
             {
-                DocsContentViewModel model = base.EnrichModel(sourceModel) as DocsContentViewModel;
+                docsContentViewModel.EmbeddedContent = $"Content from Tridion Docs based on view model { docsContentViewModel.ProductViewModel }";
+                docsContentViewModel.Link = "Content link from Tridion Docs";
+                docsContentViewModel.Query = "my query";
 
-                if (model != null)
+                foreach (RegionModel regionModel in WebRequestContext.PageModel.Regions)
                 {
-                    //to do : Use release name , family name and content type to query from Public Content Api and get respective data from tridion docs :)
+                    EntityModel product = regionModel.Entities.FirstOrDefault(e => e.MvcData.ViewName == docsContentViewModel.ProductViewModel);
 
-                    model.EmbeddedContent = "Content from Tridion Docs";
+                    if (product != null)
+                    {
+                        string query = "query = ";
 
-                    model.Link = "Content link from Tridion Docs";
+                        Dictionary<string, KeywordModel> keywords = new Dictionary<string, KeywordModel>();
 
-                    model.Query = GetQuery(model.Keywords);
+                        // Should use reflection
+                        foreach (var property in docsContentViewModel.Properties)
+                        {
+                            KeywordModel keyword = product.GetType().GetProperty(property)?.GetValue(product) as KeywordModel;
+                            if (keyword != null)
+                            {
+                                query += $" {property} { keyword.Id } '{ keyword.Title }'";
+                                keywords.Add(property, keyword);
+                            }
+                        }
+
+                        if (keywords.Any())
+                        {
+                            docsContentViewModel.Query = GetQuery(keywords);
+                        }
+                    }
                 }
             }
 
@@ -49,9 +70,9 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
         {
             var customMetas = new StringBuilder();
 
-            foreach (var Keyword in keywords)
+            foreach (var keyword in keywords)
             {
-                customMetas.AppendLine(string.Format(@"{{ customMeta: {{ scope: {0}, key: ""{1}.version.element"", value: ""{2}""}} }},", "ItemInPublication", Keyword.Key, Keyword.Value.Id));
+                customMetas.AppendLine(string.Format(@"{{ customMeta: {{ scope: {0}, key: ""{1}.version.element"", value: ""{2}""}} }},", "ItemInPublication", keyword.Key, keyword.Value.Id));
             }
 
             customMetas.AppendLine(string.Format(@"{{ customMeta: {{ scope: {0}, key: ""DOC-LANGUAGE.lng.value"", value: ""{1}""}} }}", "ItemInPublication", WebRequestContext.Localization.CultureInfo.Name));

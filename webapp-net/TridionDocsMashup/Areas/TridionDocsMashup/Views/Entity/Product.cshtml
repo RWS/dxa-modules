@@ -1,0 +1,14 @@
+﻿﻿@model Product
+
+<div class="rich-text @Model.HtmlClasses" @Html.DxaEntityMarkup()>
+
+    <h1>@Model.Title </h1>
+
+    <div class="content">
+
+        <div @Html.DxaPropertyMarkup(() => Model.Body)>
+            @Html.DxaRichText(Model.Body)
+        </div>
+    </div>
+
+</div>

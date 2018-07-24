@@ -1,15 +1,15 @@
-﻿@model DocsContent
+﻿﻿@model DynamicWidget
 
 <div class="rich-text @Model.HtmlClasses" @Html.DxaEntityMarkup()>
 
     <h1>Content Mashups</h1>
 
-    @foreach (var keyword in Model.Keywords)
+    @foreach (var property in Model.Properties)
     {
         <div class="content">
             <div>
                 <!-- Not able to add DxaPropertyMarkup to each item in the dictionary, because the items are not valid properties in the Model -->
-                <b>@keyword.Key:</b> @keyword.Value.Id - @keyword.Value.Title
+                <b>property:</b> @property
             </div>
         </div>
     }
