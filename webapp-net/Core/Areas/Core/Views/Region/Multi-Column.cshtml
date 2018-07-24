@@ -1,0 +1,32 @@
+﻿@model Sdl.Web.Modules.Core.Models.MultiColumn
+
+@{
+    //Small screens show 2 columns, so we need to make sure we break the row divs accordinly
+    int cols = WebRequestContext.ScreenWidth == ScreenWidth.Small ? 2 : Model.NumberOfColumns;
+    string entityClass = "col-sm-6";
+    if (Model.NumberOfColumns == 3)
+    {
+        entityClass += " col-md-4";
+    }
+    else if (Model.NumberOfColumns == 4)
+    {
+        entityClass += " col-md-3";
+    }
+    else if (Model.NumberOfColumns > 4)
+    {
+        entityClass += " col-md-2";
+    }
+}
+<div @Html.DxaRegionMarkup()>
+    @for (int i = 0; i < Math.Ceiling(Model.Entities.Count / Convert.ToDouble(cols)); i++)
+    {
+        <div class="row">
+            @for (int j = 0; j < cols && (cols * i + j < Model.Entities.Count); j++)
+            {
+                <div class="@entityClass">
+                    @Html.DxaEntity(Model.Entities[cols * i + j], containerSize: 12 / cols)
+                </div>
+            }
+        </div>
+    }
+</div>
