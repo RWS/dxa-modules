@@ -13,6 +13,7 @@
         <headers>
             <frame-options disabled="true"/>
         </headers>
+        <csrf disabled="true"/>
     </http>
 
     <beans:bean id="authenticationEntryPoint"
