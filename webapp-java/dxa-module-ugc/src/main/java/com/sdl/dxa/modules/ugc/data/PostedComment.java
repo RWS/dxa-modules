@@ -13,7 +13,7 @@ public class PostedComment {
     private int publicationId;
     @JsonProperty("pageId")
     private int pageId;
-    @JsonProperty("userName")
+    @JsonProperty("username")
     private String userName;
     @JsonProperty("email")
     private String email;
