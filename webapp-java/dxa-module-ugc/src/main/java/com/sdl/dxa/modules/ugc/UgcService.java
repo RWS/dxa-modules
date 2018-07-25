@@ -59,11 +59,11 @@ public class UgcService {
                 .withDepth(maximumThreadsDepth)
                 .withStatuses(statusStatuses);
 
+        String pageTcmUri = TcmUtils.buildPageTcmUri(publicationId, pageId);
         try {
-            String pageTcmUri = TcmUtils.buildPageTcmUri(publicationId, pageId);
             return convert(ugcCommentApi.retrieveThreadedComments(pageTcmUri, filter, descending, true));
         } catch (Exception ex) {
-            throw new CannotFetchCommentsException(ex);
+            throw new CannotFetchCommentsException("Cannot fetch comments for " + pageTcmUri, ex);
         }
     }
 

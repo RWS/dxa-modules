@@ -8,4 +8,8 @@ public class CannotFetchCommentsException extends RuntimeException {
     public CannotFetchCommentsException(Exception cause) {
         super(cause);
     }
+
+    public CannotFetchCommentsException(String message, Exception cause) {
+        super(message, cause);
+    }
 }
