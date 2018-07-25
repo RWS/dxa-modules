@@ -57,7 +57,7 @@ public class UgcPostCommentFormValidatorTest {
         ugcPostCommentFormValidator = new UgcPostCommentFormValidator();
         UgcPostCommentForm ugcPostCommentForm = mock(UgcPostCommentForm.class);
         BindingResult bindingResult = new BeanPropertyBindingResult(ugcPostCommentForm, "Test");
-        when(ugcPostCommentForm.getUserName()).thenReturn("userName");
+        when(ugcPostCommentForm.getUsername()).thenReturn("userName");
         when(ugcPostCommentForm.getEmail()).thenReturn("test@test.com");
         when(ugcPostCommentForm.getContent()).thenReturn("message");
 

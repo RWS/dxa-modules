@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import org.joda.time.DateTime;
 
 import java.time.ZonedDateTime;
 import java.util.HashMap;
@@ -38,6 +39,12 @@ public class Comment {
     @JsonFormat(shape = JsonFormat.Shape.OBJECT)
     @JsonProperty("lastModifiedDate")
     private ZonedDateTime lastModifiedDate;
+
+    @JsonIgnore
+    private DateTime creationDateTime;
+
+    @JsonIgnore
+    private DateTime lastModifiedDateTime;
 
     @JsonProperty("content")
     private String content;
