@@ -14,7 +14,7 @@
     "@types/jasmine": "^2.5.51",
     "@types/lodash": "^4.14.65",
     "@types/node": "^6.0.88",
-    "@types/prop-types": "^15.5.1",
+    "@types/prop-types": "15.5.1",
     "@types/react": "^15.0.27",
     "@types/react-addons-test-utils": "^0.14.18",
     "@types/react-datepicker": "^0.46.0",
@@ -98,11 +98,11 @@
     "yargs": "~8.0.2"
   },
   "scripts": {
-    "start": "gulp serve -- --max_old_space_size=2048",
-    "build": "gulp -- --max_old_space_size=2048",
+    "start": "gulp serve",
+    "build": "gulp",
     "build-server": "gulp build:dist",
-    "test": "gulp test -- --max_old_space_size=2048",
-    "test-debug": "gulp serve:test -- --max_old_space_size=2048",
+    "test": "gulp test",
+    "test-debug": "gulp serve:test",
     "install": "napa"
   },
   "author": "jbevers@sdl.com, oorlov@sdl.com",
