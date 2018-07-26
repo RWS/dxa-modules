@@ -34,8 +34,7 @@ public class UgcCommentTest {
     private static UgcComment otherComment = new UgcComment();
     private static ZonedDateTime time = ZonedDateTime.now();
     private static User user = new User();
-    @Spy
-    private static UgcService ugcService;
+    private static UgcService ugcService=new UgcService();
 
     static {
 
