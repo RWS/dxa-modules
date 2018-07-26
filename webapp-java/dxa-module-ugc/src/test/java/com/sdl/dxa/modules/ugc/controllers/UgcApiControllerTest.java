@@ -89,7 +89,7 @@ public class UgcApiControllerTest {
         when(user.getName()).thenReturn(USER_NAME);
         when(user.getEmailAddress()).thenReturn(USER_EMAIL);
         when(comment.getContent()).thenReturn(COMMENT_TEXT);
-
+        when(postedComment.getParentId()).thenReturn("0");
 
         //when
         Comment result = ugcApiController.postComment(postedComment);
