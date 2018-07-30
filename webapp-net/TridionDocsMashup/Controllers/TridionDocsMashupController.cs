@@ -6,6 +6,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using System;
+using Sdl.Web.GraphQLClient;
+using Sdl.Web.PublicContentApi;
+using Sdl.Web.PublicContentApi.ContentModel;
 
 namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
 {
@@ -17,23 +20,23 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
 
             if (docsContent != null)
             {
-                //to do : Use release name , family name and content type to query from Public Content Api and get respective data from tridion docs :)
-
-                docsContent.EmbeddedContent = "Content from Tridion Docs";
-
-                docsContent.Link = "Content link from Tridion Docs";
-
+                //todo: should be removed !
                 docsContent.Query = GetQuery(docsContent.Keywords);
+
+                if (docsContent.DisplayContentAs.ToLower() == "embeddedcontent")
+                {
+                    docsContent.EmbeddedContent = GetDocsContent(docsContent.Keywords);
+                }
+                else
+                {
+                    docsContent.Link = GetDocsLink(docsContent.Keywords);
+                }
             }
 
             DynamicWidget docsContentViewModel = base.EnrichModel(sourceModel) as DynamicWidget;
 
             if (docsContentViewModel != null)
             {
-                docsContentViewModel.EmbeddedContent = $"Content from Tridion Docs based on view model { docsContentViewModel.ProductViewModel }";
-                docsContentViewModel.Link = "Content link from Tridion Docs";
-                docsContentViewModel.Query = "my query";
-
                 foreach (RegionModel regionModel in WebRequestContext.PageModel.Regions)
                 {
                     EntityModel product = regionModel.Entities.FirstOrDefault(e => e.MvcData.ViewName == docsContentViewModel.ProductViewModel);
@@ -57,7 +60,17 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
 
                         if (keywords.Any())
                         {
+                            //todo: should be removed!
                             docsContentViewModel.Query = GetQuery(keywords);
+
+                            if (docsContentViewModel.DisplayContentAs.ToLower() == "embeddedcontent")
+                            {
+                                docsContentViewModel.EmbeddedContent = GetDocsContent(keywords);
+                            }
+                            else
+                            {
+                                docsContentViewModel.Link = GetDocsLink(keywords);
+                            }
                         }
                     }
                 }
@@ -66,6 +79,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
             return sourceModel;
         }
 
+        //todo: should be removed !
         private string GetQuery(Dictionary<string, KeywordModel> keywords)
         {
             var customMetas = new StringBuilder();
@@ -89,5 +103,75 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
 
             return query;
         }
+
+        private ItemConnection GetDocsItemConnection(Dictionary<string, KeywordModel> keywords)
+        {
+            //todo : this should come from config 
+            var url = "http://localhost:8081/udp/content";
+
+            IGraphQLClient graphQL = new GraphQLClient.GraphQLClient(url);
+
+            IPublicContentApi pca = new PublicContentApi.PublicContentApi(graphQL);
+
+            var customMetaFilters = new List<InputItemFilter>();
+
+            foreach (var keyword in keywords)
+            {
+                var keywordFilter = new InputItemFilter
+                {
+                    CustomMeta = new InputCustomMetaCriteria
+                    {
+                        Key = $"{keyword.Key}.version.element",
+                        Value = keyword.Value.Id,
+                        Scope = CriteriaScope.ItemInPublication
+                    }
+                };
+
+                customMetaFilters.Add(keywordFilter);
+            }
+
+            var languageFilter = new InputItemFilter
+            {
+                CustomMeta = new InputCustomMetaCriteria
+                {
+                    Key = "DOC-LANGUAGE.lng.value",
+                    Value = WebRequestContext.Localization.CultureInfo.Name,
+                    Scope = CriteriaScope.ItemInPublication
+                }
+            };
+
+            customMetaFilters.Add(languageFilter);
+
+            InputItemFilter itemFilter = new InputItemFilter
+            {
+                NamespaceIds = new List<ContentNamespace> { ContentNamespace.Docs },
+                ItemTypes = new List<PublicContentApi.ContentModel.ItemType> { PublicContentApi.ContentModel.ItemType.PUBLICATION },
+                And = customMetaFilters
+            };
+
+            //todo : decide about Pagination value
+            //todo : Exception handling
+            ItemConnection itemConnection = pca.ExecuteItemQuery(itemFilter, new Pagination { First = 10 }, null, null);
+
+            return itemConnection;
+        }
+
+        private string GetDocsContent(Dictionary<string, KeywordModel> keywords)
+        {
+            ItemConnection item = GetDocsItemConnection(keywords);
+
+            //to do :  extract the content from ItemConnection
+            return item.Edges.FirstOrDefault().Node.Title;
+        }
+
+        private string GetDocsLink(Dictionary<string, KeywordModel> keywords)
+        {
+            ItemConnection item = GetDocsItemConnection(keywords);
+
+            //to do : extract the link from ItemConnection
+            return item.Edges.FirstOrDefault().Node.Title;
+        }
+
     }
 }
+
