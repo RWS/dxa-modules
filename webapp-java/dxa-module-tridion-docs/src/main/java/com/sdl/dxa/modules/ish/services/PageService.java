@@ -24,7 +24,7 @@ public class PageService {
      *
      * @param path         Path
      * @param localization Localization
-     * @return
+     * @return Page model for given path
      */
     public PageModel getPageModel(String path, Localization localization) {
         try {

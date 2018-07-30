@@ -20,7 +20,7 @@ public class TridionDocsPageController {
      * @param request
      * @param response
      * @return Redirects to the home page.
-     * @throws Exception
+     * @throws Exception if client response is broken
      */
     @RequestMapping(method = RequestMethod.GET, value = "/ish/",
             produces = {MediaType.TEXT_HTML_VALUE, MediaType.ALL_VALUE})
