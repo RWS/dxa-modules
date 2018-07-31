@@ -82,6 +82,7 @@ public class IshController {
      * @param publicationId Publication id
      * @param pageId        Page id
      * @param request       Http request
+     * @param response      Http response
      * @return Page model using the json format.
      * @throws ContentProviderException if page model cannot be fetched
      */
