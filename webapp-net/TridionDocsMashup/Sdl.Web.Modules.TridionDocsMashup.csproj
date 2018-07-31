@@ -47,7 +47,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Sdl.Web.PublicContentApi">
-      <HintPath>..\packages\Sdl.Web.PublicContentApi.2.1.0-beta-201807300953\lib\net452\Sdl.Web.PublicContentApi.dll</HintPath>
+      <HintPath>..\packages\Sdl.Web.PublicContentApi.2.1.0-beta-201807311529\lib\net452\Sdl.Web.PublicContentApi.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />

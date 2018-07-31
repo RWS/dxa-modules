@@ -14,6 +14,8 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Models
         [SemanticProperty("DisplayContentAs")]
         public string DisplayContentAs { get; set; }
 
+        public string Title { get; set; }
+
         public string EmbeddedContent { get; set; }
 
         public string Link { get; set; }

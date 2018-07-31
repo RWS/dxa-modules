@@ -9,37 +9,45 @@ using System;
 using Sdl.Web.GraphQLClient;
 using Sdl.Web.PublicContentApi;
 using Sdl.Web.PublicContentApi.ContentModel;
+using Newtonsoft.Json.Linq;
 
 namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
 {
     public class TridionDocsMashupController : EntityController
     {
+        //todo : this should come from config 
+        private string _udpContentUrl = "http://localhost:8081/udp/content";
+
         protected override ViewModel EnrichModel(ViewModel sourceModel)
         {
-            StaticWidget docsContent = base.EnrichModel(sourceModel) as StaticWidget;
+            StaticWidget staticWidget = base.EnrichModel(sourceModel) as StaticWidget;
 
-            if (docsContent != null)
+            if (staticWidget != null)
             {
                 //todo: should be removed !
-                docsContent.Query = GetQuery(docsContent.Keywords);
+                staticWidget.Query = GetQuery(staticWidget.Keywords);
 
-                if (docsContent.DisplayContentAs.ToLower() == "embeddedcontent")
+                List<DocsContent> docsContent = GetDocsContent(staticWidget.Keywords);
+
+                staticWidget.Title = docsContent?.FirstOrDefault().Title;
+
+                if (staticWidget.DisplayContentAs.ToLower() == "embeddedcontent")
                 {
-                    docsContent.EmbeddedContent = GetDocsContent(docsContent.Keywords);
+                    staticWidget.EmbeddedContent = docsContent?.FirstOrDefault().Content;
                 }
                 else
                 {
-                    docsContent.Link = GetDocsLink(docsContent.Keywords);
+                    staticWidget.Link = docsContent?.FirstOrDefault().Link;
                 }
             }
 
-            DynamicWidget docsContentViewModel = base.EnrichModel(sourceModel) as DynamicWidget;
+            DynamicWidget dynamicWidget = base.EnrichModel(sourceModel) as DynamicWidget;
 
-            if (docsContentViewModel != null)
+            if (dynamicWidget != null)
             {
                 foreach (RegionModel regionModel in WebRequestContext.PageModel.Regions)
                 {
-                    EntityModel product = regionModel.Entities.FirstOrDefault(e => e.MvcData.ViewName == docsContentViewModel.ProductViewModel);
+                    EntityModel product = regionModel.Entities.FirstOrDefault(e => e.MvcData.ViewName == dynamicWidget.ProductViewModel);
 
                     if (product != null)
                     {
@@ -48,7 +56,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
                         Dictionary<string, KeywordModel> keywords = new Dictionary<string, KeywordModel>();
 
                         // Should use reflection
-                        foreach (var property in docsContentViewModel.Properties)
+                        foreach (var property in dynamicWidget.Properties)
                         {
                             KeywordModel keyword = product.GetType().GetProperty(property)?.GetValue(product) as KeywordModel;
                             if (keyword != null)
@@ -61,15 +69,19 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
                         if (keywords.Any())
                         {
                             //todo: should be removed!
-                            docsContentViewModel.Query = GetQuery(keywords);
+                            dynamicWidget.Query = GetQuery(keywords);
 
-                            if (docsContentViewModel.DisplayContentAs.ToLower() == "embeddedcontent")
+                            List<DocsContent> docsContent = GetDocsContent(keywords);
+
+                            dynamicWidget.Title = docsContent?.FirstOrDefault().Title;
+
+                            if (dynamicWidget.DisplayContentAs.ToLower() == "embeddedcontent")
                             {
-                                docsContentViewModel.EmbeddedContent = GetDocsContent(keywords);
+                                dynamicWidget.EmbeddedContent = docsContent?.FirstOrDefault().Content;
                             }
                             else
                             {
-                                docsContentViewModel.Link = GetDocsLink(keywords);
+                                dynamicWidget.Link = docsContent?.FirstOrDefault().Link;
                             }
                         }
                     }
@@ -104,12 +116,16 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
             return query;
         }
 
+        private List<DocsContent> GetDocsContent(Dictionary<string, KeywordModel> keywords)
+        {
+            ItemConnection item = GetDocsItemConnection(keywords);
+            List<DocsContent> docsContent = ExtractDocsContent(item);
+            return docsContent;
+        }
+
         private ItemConnection GetDocsItemConnection(Dictionary<string, KeywordModel> keywords)
         {
-            //todo : this should come from config 
-            var url = "http://localhost:8081/udp/content";
-
-            IGraphQLClient graphQL = new GraphQLClient.GraphQLClient(url);
+            IGraphQLClient graphQL = new GraphQLClient.GraphQLClient(_udpContentUrl);
 
             IPublicContentApi pca = new PublicContentApi.PublicContentApi(graphQL);
 
@@ -122,7 +138,8 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
                     CustomMeta = new InputCustomMetaCriteria
                     {
                         Key = $"{keyword.Key}.version.element",
-                        Value = keyword.Value.Id
+                        Value = keyword.Value.Id,
+                        Scope = CriteriaScope.Publication
                     }
                 };
 
@@ -144,33 +161,70 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
             InputItemFilter itemFilter = new InputItemFilter
             {
                 NamespaceIds = new List<ContentNamespace> { ContentNamespace.Docs },
-                ItemTypes = new List<PublicContentApi.ContentModel.ItemType> { PublicContentApi.ContentModel.ItemType.PUBLICATION },
+                ItemTypes = new List<PublicContentApi.ContentModel.ItemType> { PublicContentApi.ContentModel.ItemType.PAGE },
                 And = customMetaFilters
             };
 
             //todo : decide about Pagination value
             //todo : Exception handling
-            ItemConnection itemConnection = pca.ExecuteItemQuery(itemFilter, new Pagination { First = 10 }, null, null);
+            ItemConnection itemConnection = pca.ExecuteItemQuery(itemFilter, new Pagination { First = 10 }, null, null, true);
 
             return itemConnection;
         }
 
-        private string GetDocsContent(Dictionary<string, KeywordModel> keywords)
+        private List<DocsContent> ExtractDocsContent(ItemConnection itemConnection)
         {
-            ItemConnection item = GetDocsItemConnection(keywords);
+            if (itemConnection?.Edges == null)
+            {
+                return null;
+            }
 
-            //to do :  extract the content from ItemConnection
-            return item.Edges.FirstOrDefault().Node.Title;
+            var docContents = new List<DocsContent>();
+
+            foreach (var item in itemConnection.Edges)
+            {
+                Page page = item.Node as Page;
+
+                if (page != null)
+                {
+                    var docsContent = new DocsContent() { Link = page.Url, Title = page.Title };
+
+                    if (page.ContainerItems != null)
+                    {
+                        foreach (ComponentPresentation componentPresentation in page.ContainerItems)
+                        {
+                            var component = componentPresentation?.RawContent?.Data["Component"] as JObject;
+                            if (component != null)
+                            {
+                                var fields = component["Fields"];
+                                if (fields != null)
+                                {
+                                    var sb = new StringBuilder();
+
+                                    foreach (var body in fields["topicBody"]["Values"])
+                                    {
+                                        sb.AppendLine(body.ToString());
+                                    }
+
+                                    docsContent.Content = sb.ToString();
+                                }
+                            }
+                        }
+                    }
+
+                    docContents.Add(docsContent);
+                }
+            }
+
+            return docContents;
         }
 
-        private string GetDocsLink(Dictionary<string, KeywordModel> keywords)
+        class DocsContent
         {
-            ItemConnection item = GetDocsItemConnection(keywords);
-
-            //to do : extract the link from ItemConnection
-            return item.Edges.FirstOrDefault().Node.Title;
+            public string Title { get; set; }
+            public string Link { get; set; }
+            public string Content { get; set; }
         }
-
     }
 }
 
