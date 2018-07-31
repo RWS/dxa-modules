@@ -122,8 +122,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
                     CustomMeta = new InputCustomMetaCriteria
                     {
                         Key = $"{keyword.Key}.version.element",
-                        Value = keyword.Value.Id,
-                        Scope = CriteriaScope.ItemInPublication
+                        Value = keyword.Value.Id
                     }
                 };
 
