@@ -61,7 +61,12 @@ public class TocService {
             //order should be t1-k2 t1-k3 t1-k10 then t2-k5 (so numbers after 'k')
             int firstPartCompareResult = getPart(YesNo.YES, o1).compareTo(getPart(YesNo.YES, o2));
             if (firstPartCompareResult != 0) return firstPartCompareResult;
-            return getPart(YesNo.NO, o1).compareTo(getPart(YesNo.NO, o2));
+            Integer second_part1 = getPart(YesNo.NO, o1);
+            Integer second_part2 = getPart(YesNo.NO, o2);
+            if (second_part1 == null && second_part2 == null) return 0;
+            if (second_part1 == null) return -1;
+            if (second_part2 == null) return 1;
+            return second_part1.compareTo(second_part2);
         });
         return navigationSubtree;
     }
