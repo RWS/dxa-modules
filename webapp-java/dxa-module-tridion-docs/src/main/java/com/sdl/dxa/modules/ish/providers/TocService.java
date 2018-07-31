@@ -67,6 +67,6 @@ public class TocService {
     }
 
     private Integer getPart(YesNo firstPart, SitemapItem item) {
-        return Ints.tryParse(item.getId().replaceAll("^t(\\d++)-k(\\d++)$", firstPart == YesNo.YES ? "$1" : "$2"));
+        return Ints.tryParse(item.getId().replaceAll("^t(\\d++)(-k(\\d++))?$", firstPart == YesNo.YES ? "$1" : "$3"));
     }
 }
