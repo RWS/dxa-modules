@@ -46,7 +46,7 @@ public class TridionDocsContentService {
      * @param localization Localization
      * @param contextPath  Context path, used for updating urls inside topic html
      * @return The page model
-     * @throws ContentProviderException
+     * @throws ContentProviderException if page model cannot be fetched
      */
     public PageModel getPageModel(Integer pageId, IshLocalization localization, String contextPath)
             throws ContentProviderException {
