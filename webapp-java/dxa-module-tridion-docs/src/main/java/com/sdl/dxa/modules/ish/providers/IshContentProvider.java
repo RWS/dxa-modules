@@ -99,8 +99,7 @@ public class IshContentProvider extends DefaultContentProvider {
      *
      * @param pageId       The page id
      * @param localization Localization
-     * @return
-     * @throws ContentProviderException
+     * @return page model
      */
     @Override
     public PageModel getPageModel(final String pageId, final Localization localization) {
@@ -151,6 +150,12 @@ public class IshContentProvider extends DefaultContentProvider {
         }
     }
 
+    /**
+     * Gets content of binary element (image, document, etc.).
+     * @param publicationId Publication id
+     * @param binaryId      Binary element id
+     * @return              StaticContentItem with binary content
+     */
     public StaticContentItem getBinaryContent(final Integer publicationId, final Integer binaryId) {
         WebComponentMetaFactory factory = new WebComponentMetaFactoryImpl(publicationId);
         ComponentMeta componentMeta = factory.getMeta(binaryId);

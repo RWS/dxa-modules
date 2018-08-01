@@ -20,7 +20,7 @@ public class UnknownLocalizationHandlerImpl implements UnknownLocalizationHandle
      * Handle unknown localization. Happens when there is no publication mapped to the domain.
      * @param exception exception occurred during <i>normal</i> attempt to resolve localization
      * @param request   the current request
-     * @return
+     * @return  defaul localization for module
      */
     public Localization handleUnknown(Exception exception, ServletRequest request) {
         // Create a new localization object on every request
@@ -32,7 +32,7 @@ public class UnknownLocalizationHandlerImpl implements UnknownLocalizationHandle
      * Fallback exception in case the dita localization also failed.
      * @param exception initial exception when failed to resolve a {@link Localization}
      * @param request   the current request
-     * @return
+     * @return Exception to fire spring to show error page
      */
     public LocalizationNotResolvedException getFallbackException(Exception exception, ServletRequest request) {
         return new LocalizationNotResolvedException.WithCustomResponse("Exception with JSON", HttpStatus.OK.value(),
