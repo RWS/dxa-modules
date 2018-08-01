@@ -18,14 +18,20 @@
         <b>Query:</b> @Model.Query
     </div>
 
-    <div class="content">
-        <div @Html.DxaPropertyMarkup(() => Model.EmbeddedContent)>
-            <b>EmbeddedContent:</b> @Model.EmbeddedContent
+    @if (!string.IsNullOrEmpty(Model.EmbeddedContent))
+    {
+        <div class="content">
+            <div @Html.DxaPropertyMarkup(() => Model.EmbeddedContent)>
+                <b>Content:</b> <br /> @Model.EmbeddedContent
+            </div>
         </div>
-    </div>
+    }
 
-    <div @Html.DxaPropertyMarkup(() => Model.Link)>
-        <b>Link:</b> <a href="#">@Model.Link</a>
-    </div>
+    @if (!string.IsNullOrEmpty(Model.Link))
+    {
+        <div @Html.DxaPropertyMarkup(() => Model.Link)>
+            <b>Link:</b> <br /> <a href="@Model.Link">@Model.Title</a>
+        </div>
+    }
 
 </div>
