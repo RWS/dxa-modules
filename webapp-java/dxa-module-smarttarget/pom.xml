@@ -35,6 +35,7 @@
         <dependency>
             <groupId>com.sdl.web</groupId>
             <artifactId>cil</artifactId>
+            <version>10.1.0-1012</version>
             <type>pom</type>
         </dependency>
 
