@@ -23,7 +23,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
         public PublicContentApiClient()
         {
             //todo : should be removed , as PCA client itself will read it from the DiscoveryService
-            string graphQLEndpoint = "http://localhost:8081/udp/content";
+            string graphQLEndpoint = "http://stgecl2016:8081/udp/content";// "http://localhost:8081/udp/content";
 
             //todo : should be removed , as  PCA client will be provided and initialized by DXA , like SiteConfiguration.PublicContentApi;
             IGraphQLClient graphQLClient = new GraphQLClient.GraphQLClient(graphQLEndpoint, new OAuth());
@@ -48,7 +48,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
                 {
                     CustomMeta = new InputCustomMetaCriteria
                     {
-                        Key = $"{keyword.Key}.version.element",
+                        Key = keyword.Key,
                         Value = keyword.Value.Id,
                         Scope = CriteriaScope.Publication
                     }
@@ -57,12 +57,14 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
                 customMetaFilters.Add(keywordFilter);
             }
 
+            var language = WebRequestContext.Localization.CultureInfo.Name;
+
             var languageFilter = new InputItemFilter
             {
                 CustomMeta = new InputCustomMetaCriteria
                 {
                     Key = "DOC-LANGUAGE.lng.value",
-                    Value = WebRequestContext.Localization.CultureInfo.Name,
+                    Value = language.StartsWith("en-") ? "en" : language,
                     Scope = CriteriaScope.ItemInPublication
                 }
             };
