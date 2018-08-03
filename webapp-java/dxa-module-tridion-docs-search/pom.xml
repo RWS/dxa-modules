@@ -32,17 +32,7 @@
     <dependencies>
         <dependency>
             <groupId>com.sdl.delivery</groupId>
-            <artifactId>iq-query-api</artifactId>
-            <version>${cd-cil.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sdl.delivery</groupId>
-            <artifactId>iq-query-model</artifactId>
-            <version>${cd-cil.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sdl.delivery</groupId>
-            <artifactId>iq-query-client</artifactId>
+            <artifactId>udp-iq-query-client</artifactId>
             <version>${cd-cil.version}</version>
         </dependency>
 
