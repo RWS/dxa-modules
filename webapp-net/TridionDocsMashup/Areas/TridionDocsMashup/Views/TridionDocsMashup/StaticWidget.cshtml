@@ -2,27 +2,11 @@
 
 <div class="rich-text @Model.HtmlClasses" @Html.DxaEntityMarkup()>
 
-    <h1>Content Mashups</h1>
-
-    @foreach (var keyword in Model.Keywords)
-    {
-        <div class="content">
-            <div>
-                <!-- Not able to add DxaPropertyMarkup to each item in the dictionary, because the items are not valid properties in the Model -->
-                <b>@keyword.Key:</b> @keyword.Value.Id - @keyword.Value.Title
-            </div>
-        </div>
-    }
-
-    <div class="content">
-        <b>Query:</b> @Model.Query
-    </div>
-
     @if (!string.IsNullOrEmpty(Model.EmbeddedContent))
     {
         <div class="content">
             <div @Html.DxaPropertyMarkup(() => Model.EmbeddedContent)>
-                <b>Content:</b> <br /> @Model.EmbeddedContent
+                @Html.Raw(Model.EmbeddedContent)
             </div>
         </div>
     }
@@ -30,7 +14,7 @@
     @if (!string.IsNullOrEmpty(Model.Link))
     {
         <div @Html.DxaPropertyMarkup(() => Model.Link)>
-            <b>Link:</b> <br /> <a href="@Model.Link">@Model.Title</a>
+            <a href="@Model.Link">@Model.Title</a>
         </div>
     }
 

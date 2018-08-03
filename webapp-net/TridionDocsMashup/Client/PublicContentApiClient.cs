@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Text;
+using System.Linq;
 
 namespace Sdl.Web.Modules.TridionDocsMashup.Client
 {
@@ -31,74 +32,55 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
             _publicContentApi = new PublicContentApi.PublicContentApi(graphQLClient);
         }
 
-        public List<DocsContent> GetDocsContentByKeywords(Dictionary<string, KeywordModel> keywords)
+        public List<ItemContent> GetDocsContentByKeywords(Dictionary<string, KeywordModel> keywords)
         {
-            ItemConnection item = GetDocsItem(keywords);
-            List<DocsContent> docsContent = ExtractDocsContent(item);
-            return docsContent;
+            List<ItemEdge> items = GetDocsItems(keywords);
+            List<ItemContent> itemsContent = ExtractItemsContent(items);
+            return itemsContent;
         }
 
-        private ItemConnection GetDocsItem(Dictionary<string, KeywordModel> keywords)
+        private List<ItemEdge> GetDocsItems(Dictionary<string, KeywordModel> keywords)
         {
-            var customMetaFilters = new List<InputItemFilter>();
+            List<InputItemFilter> keywordFilters = GetKeyWordFilters(keywords);
 
-            foreach (var keyword in keywords)
-            {
-                var keywordFilter = new InputItemFilter
-                {
-                    CustomMeta = new InputCustomMetaCriteria
-                    {
-                        Key = keyword.Key,
-                        Value = keyword.Value.Id,
-                        Scope = CriteriaScope.Publication
-                    }
-                };
+            List<InputItemFilter> languageFilters = GetLanguageFilters();
 
-                customMetaFilters.Add(keywordFilter);
-            }
-
-            var language = WebRequestContext.Localization.CultureInfo.Name;
-
-            var languageFilter = new InputItemFilter
-            {
-                CustomMeta = new InputCustomMetaCriteria
-                {
-                    Key = "DOC-LANGUAGE.lng.value",
-                    Value = language.StartsWith("en-") ? "en" : language,
-                    Scope = CriteriaScope.ItemInPublication
-                }
-            };
-
-            customMetaFilters.Add(languageFilter);
-
-            InputItemFilter itemFilter = new InputItemFilter
+            InputItemFilter filter = new InputItemFilter
             {
                 NamespaceIds = new List<ContentNamespace> { ContentNamespace.Docs },
                 ItemTypes = new List<PublicContentApi.ContentModel.ItemType> { PublicContentApi.ContentModel.ItemType.PAGE },
-                And = customMetaFilters
+                And = keywordFilters,
+                Or = languageFilters
             };
 
-            ItemConnection item = _publicContentApi.ExecuteItemQuery(itemFilter, new Pagination { First = 5 }, null, null, true);
+            ItemConnection item = _publicContentApi.ExecuteItemQuery(filter, new Pagination { First = 5 }, null, null, true);
 
-            return item;
-        }
-
-        private List<DocsContent> ExtractDocsContent(ItemConnection item)
-        {
             if (item?.Edges == null)
             {
                 return null;
             }
 
-            var docContents = new List<DocsContent>();
+            var items = FilterItemsByLanguage(item);
 
-            foreach (var edge in item.Edges)
+            return items;
+        }
+
+        private List<ItemContent> ExtractItemsContent(List<ItemEdge> items)
+        {
+            if (items == null)
+            {
+                return null;
+            }
+
+            var docContents = new List<ItemContent>();
+
+            foreach (var edge in items)
             {
                 Page page = edge.Node as Page;
 
                 if (page != null)
                 {
-                    var docsContent = new DocsContent() { Link = page.Url, Title = page.Title };
+                    var docsContent = new ItemContent() { Link = page.Url, Title = page.Title };
 
                     if (page.ContainerItems != null)
                     {
@@ -109,7 +91,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
                             if (!string.IsNullOrEmpty(componentDD4TJson))
                             {
                                 DD4T.ContentModel.Component component = _dd4tSerializer.Deserialize<DD4T.ContentModel.Component>(componentDD4TJson);
-                                docsContent.Content = component?.Fields["topicBody"]?.Value;
+                                docsContent.Body = component?.Fields["topicBody"]?.Value;
                             }
                         }
                     }
@@ -120,13 +102,113 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
 
             return docContents;
         }
+
+        private List<ItemEdge> FilterItemsByLanguage(ItemConnection item)
+        {
+            List<ItemEdge> pagesInLocalLanguage = new List<ItemEdge>();
+
+            var localLanguage = WebRequestContext.Localization.CultureInfo.Name.ToLower();
+
+            foreach (var edge in item.Edges)
+            {
+                if (edge.Node.CustomMetas.Edges.Where(e => e.Node.Key == "DOC-LANGUAGE.lng.value").Any(l => l.Node?.Value?.ToLower() == localLanguage))
+                {
+                    pagesInLocalLanguage.Add(edge);
+                }
+            }
+
+            return pagesInLocalLanguage.Any() ? pagesInLocalLanguage : item.Edges;
+        }
+
+        private static List<InputItemFilter> GetKeyWordFilters(Dictionary<string, KeywordModel> keywords)
+        {
+            var keyWordFilters = new List<InputItemFilter>();
+
+            foreach (var keyword in keywords)
+            {
+                var keywordFilter = new InputItemFilter
+                {
+                    CustomMeta = new InputCustomMetaCriteria
+                    {
+                        Key = GetKeywordKey(keyword.Key),
+                        Value = keyword.Value.Id,
+                        Scope = GetKeywordScope(keyword.Key)
+                    }
+                };
+
+                keyWordFilters.Add(keywordFilter);
+            }
+
+            return keyWordFilters;
+        }
+
+        private static List<InputItemFilter> GetLanguageFilters()
+        {
+            var languages = GetLanguages();
+
+            var languageFilters = new List<InputItemFilter>();
+
+            foreach (var lang in languages)
+            {
+                var langFilter = new InputItemFilter
+                {
+                    CustomMeta = new InputCustomMetaCriteria
+                    {
+                        Key = "DOC-LANGUAGE.lng.value",
+                        Value = lang,
+                        Scope = CriteriaScope.Publication
+                    }
+                };
+
+                languageFilters.Add(langFilter);
+            }
+
+            return languageFilters;
+        }
+
+        private static string GetKeywordKey(string keywordKey)
+        {
+            string scop = keywordKey.Split('.')?[0];
+            string key = keywordKey.Replace(scop + ".", string.Empty);
+            return key + ".element";
+        }
+
+        private static CriteriaScope GetKeywordScope(string keywordKey)
+        {
+            string scope = keywordKey.Split('.')?[0];
+
+            switch (scope?.ToLower())
+            {
+                case "item":
+                    return CriteriaScope.Item;
+                case "iteminpublication":
+                    return CriteriaScope.ItemInPublication;
+            }
+
+            return CriteriaScope.Publication;
+        }
+
+        private static List<string> GetLanguages()
+        {
+            var localLanguage = WebRequestContext.Localization.CultureInfo;
+
+            var languages = new List<string>() { localLanguage.Name };
+
+            if (localLanguage.Parent?.Name != null)
+            {
+                languages.Add(localLanguage.Parent.Name);
+            }
+
+            return languages;
+        }
+
     }
 
-    public class DocsContent
+    public class ItemContent
     {
         public string Title { get; set; }
         public string Link { get; set; }
-        public string Content { get; set; }
+        public string Body { get; set; }
     }
 
     //todo : should be removed , as DXA will provide a fully authenticated initialized PCA client 

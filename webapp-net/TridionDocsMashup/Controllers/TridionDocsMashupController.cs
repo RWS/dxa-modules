@@ -17,18 +17,15 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
 
             if (staticWidget != null)
             {
-                //todo: should be removed !
-                staticWidget.Query = GetQuery(staticWidget.Keywords);
-
                 var pcaClient = new PublicContentApiClient();
 
-                DocsContent docsContent = pcaClient.GetDocsContentByKeywords(staticWidget.Keywords)?.FirstOrDefault();
+                ItemContent docsContent = pcaClient.GetDocsContentByKeywords(staticWidget.Keywords)?.FirstOrDefault();
 
                 staticWidget.Title = docsContent?.Title;
 
-                if (staticWidget.DisplayContentAs.ToLower() == "embeddedcontent")
+                if (staticWidget.DisplayContentAs.ToLower() == "embedded content")
                 {
-                    staticWidget.EmbeddedContent = docsContent?.Content;
+                    staticWidget.EmbeddedContent = docsContent?.Body;
                 }
                 else
                 {
@@ -46,8 +43,6 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
 
                     if (product != null)
                     {
-                        string query = "query = ";
-
                         Dictionary<string, KeywordModel> keywords = new Dictionary<string, KeywordModel>();
 
                         // Should use reflection
@@ -56,25 +51,21 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
                             KeywordModel keyword = product.GetType().GetProperty(property)?.GetValue(product) as KeywordModel;
                             if (keyword != null)
                             {
-                                query += $" {property} { keyword.Id } '{ keyword.Title }'";
                                 keywords.Add(property, keyword);
                             }
                         }
 
                         if (keywords.Any())
                         {
-                            //todo: should be removed!
-                            dynamicWidget.Query = GetQuery(keywords);
-
                             var pcaClient = new PublicContentApiClient();
 
-                            DocsContent docsContent = pcaClient.GetDocsContentByKeywords(keywords)?.FirstOrDefault();
+                            ItemContent docsContent = pcaClient.GetDocsContentByKeywords(keywords)?.FirstOrDefault();
 
                             dynamicWidget.Title = docsContent?.Title;
 
-                            if (dynamicWidget.DisplayContentAs.ToLower() == "embeddedcontent")
+                            if (dynamicWidget.DisplayContentAs.ToLower() == "embedded content")
                             {
-                                dynamicWidget.EmbeddedContent = docsContent?.Content;
+                                dynamicWidget.EmbeddedContent = docsContent?.Body;
                             }
                             else
                             {
@@ -86,31 +77,6 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
             }
 
             return sourceModel;
-        }
-
-        //todo: should be removed !
-        private string GetQuery(Dictionary<string, KeywordModel> keywords)
-        {
-            var customMetas = new StringBuilder();
-
-            foreach (var keyword in keywords)
-            {
-                customMetas.AppendLine(string.Format(@"{{ customMeta: {{ scope: {0}, key: ""{1}.version.element"", value: ""{2}""}} }},", "ItemInPublication", keyword.Key, keyword.Value.Id));
-            }
-
-            customMetas.AppendLine(string.Format(@"{{ customMeta: {{ scope: {0}, key: ""DOC-LANGUAGE.lng.value"", value: ""{1}""}} }}", "ItemInPublication", WebRequestContext.Localization.CultureInfo.Name));
-
-            string query = string.Format(@"
-                items(
-                  filter: {{
-                    itemTypes: [{0}]
-                    and: [
-                        {1}
-                    ]
-                  }}
-                )", "Publication", customMetas.ToString());
-
-            return query;
         }
     }
 }
