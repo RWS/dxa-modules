@@ -9,11 +9,11 @@ namespace Sdl.Web.Modules.Core.Models
 {
     [SemanticEntity(Vocab = SchemaOrgVocabulary, EntityName = "[Multi-Column] Region", Prefix = "s", Public = true)]
     [Serializable]
-    public class MultiColumn : RegionModel
+    public class MultiColumnRegion : RegionModel
     {
         public int NumberOfColumns { get; set; }
 
-        public MultiColumn(string name) :base(name)
+        public MultiColumnRegion(string name) :base(name)
         {
         }
     }

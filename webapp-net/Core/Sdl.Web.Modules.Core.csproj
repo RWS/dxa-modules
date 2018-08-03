@@ -129,7 +129,7 @@
     <Compile Include="Models\Entity\TagLink.cs" />
     <Compile Include="Models\Entity\Teaser.cs" />
     <Compile Include="Models\Entity\YouTubeVideo.cs" />
-    <Compile Include="Models\Region\MultiColumn.cs" />
+    <Compile Include="Models\Region\MultiColumnRegion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

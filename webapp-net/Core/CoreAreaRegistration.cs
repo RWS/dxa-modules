@@ -54,7 +54,7 @@ namespace Sdl.Web.Modules.Core
             RegisterViewModel("2-Column", typeof(RegionModel));
             RegisterViewModel("3-Column", typeof(RegionModel));
             RegisterViewModel("4-Column", typeof(RegionModel));
-            RegisterViewModel("Multi-Column", typeof(MultiColumn));
+            RegisterViewModel("Multi-Column", typeof(MultiColumnRegion));
             RegisterViewModel("Additional", typeof(RegionModel));
             RegisterViewModel("Article", typeof(RegionModel));
             RegisterViewModel("Content", typeof(RegionModel));
