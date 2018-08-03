@@ -22,6 +22,11 @@
         <tag>HEAD</tag>
     </scm>
 
+    <properties>
+        <!--<cd-cil.version>10.1.0-1012</cd-cil.version>-->
+        <cd-cil.version>11.0.0-SNAPSHOT</cd-cil.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.sdl.dxa</groupId>
