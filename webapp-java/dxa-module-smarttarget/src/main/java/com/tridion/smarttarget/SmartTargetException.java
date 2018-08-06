@@ -1,8 +1,8 @@
 package com.tridion.smarttarget;
 
 /**
- * This class is holder only. It's used instead of smartarget_core one
- * in order to compile. It's deprecated because we have to remove it after
+ * This class is replaced original one. It's used instead of smartarget_core one
+ * in order to run. It's deprecated because we have to remove it after
  * moving to cil version 11.
  */
 @Deprecated
