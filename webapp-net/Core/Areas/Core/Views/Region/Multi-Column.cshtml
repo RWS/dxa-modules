@@ -1,18 +1,26 @@
-﻿@model Sdl.Web.Modules.Core.Models.MultiColumn
+﻿@model Sdl.Web.Modules.Core.Models.MultiColumnRegion
 
 @{
     //Small screens show 2 columns, so we need to make sure we break the row divs accordinly
-    int cols = WebRequestContext.ScreenWidth == ScreenWidth.Small ? 2 : Model.NumberOfColumns;
+    int cols = Model.NumberOfColumns;
+    if (cols > 6)
+    {
+        cols = 6;
+    }
+    if (cols < 1)
+    {
+        cols = 1;
+    }
+    if (WebRequestContext.ScreenWidth == ScreenWidth.Small)
+    {
+        cols = 2;
+    }
     string entityClass = "col-sm-6";
-    if (Model.NumberOfColumns == 3)
+    if (cols > 2 && cols < 5)
     {
-        entityClass += " col-md-4";
+        entityClass += " col-md-" + (7 - cols);
     }
-    else if (Model.NumberOfColumns == 4)
-    {
-        entityClass += " col-md-3";
-    }
-    else if (Model.NumberOfColumns > 4)
+    else if (cols >= 5)
     {
         entityClass += " col-md-2";
     }
