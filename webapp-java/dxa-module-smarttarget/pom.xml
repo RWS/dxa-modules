@@ -22,6 +22,10 @@
         <tag>HEAD</tag>
     </scm>
 
+    <properties>
+        <smarttarget_core.version>8.6.0</smarttarget_core.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.sdl.dxa</groupId>
@@ -37,6 +41,12 @@
             <artifactId>cil</artifactId>
             <version>10.1.0-1012</version>
             <type>pom</type>
+        </dependency>
+
+        <dependency>
+            <groupId>com.tridion.smarttarget</groupId>
+            <artifactId>smarttarget_core</artifactId>
+            <version>${smarttarget_core.version}</version>
         </dependency>
 
         <dependency>
