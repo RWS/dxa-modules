@@ -75,6 +75,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client\DocsItemContent.cs" />
+    <Compile Include="Client\OAuth.cs" />
     <Compile Include="Client\PublicContentApiClient.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\DynamicWidget.cs" />

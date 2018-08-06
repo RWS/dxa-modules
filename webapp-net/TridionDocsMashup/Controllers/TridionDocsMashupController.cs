@@ -19,7 +19,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
             {
                 var pcaClient = new PublicContentApiClient();
 
-                ItemContent docsContent = pcaClient.GetDocsContentByKeywords(staticWidget.Keywords)?.FirstOrDefault();
+                DocsItemContent docsContent = pcaClient.GetDocsContentByKeywords(staticWidget.Keywords)?.FirstOrDefault();
 
                 staticWidget.Title = docsContent?.Title;
 
@@ -59,7 +59,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
                         {
                             var pcaClient = new PublicContentApiClient();
 
-                            ItemContent docsContent = pcaClient.GetDocsContentByKeywords(keywords)?.FirstOrDefault();
+                            DocsItemContent docsContent = pcaClient.GetDocsContentByKeywords(keywords)?.FirstOrDefault();
 
                             dynamicWidget.Title = docsContent?.Title;
 

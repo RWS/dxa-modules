@@ -1,16 +1,11 @@
 ﻿using DD4T.Serialization;
 using Newtonsoft.Json.Linq;
 using Sdl.Web.Common.Models;
-using Sdl.Web.Delivery.DiscoveryService;
 using Sdl.Web.GraphQLClient;
-using Sdl.Web.HttpClient.Auth;
-using Sdl.Web.HttpClient.Request;
 using Sdl.Web.Mvc.Configuration;
 using Sdl.Web.PublicContentApi;
 using Sdl.Web.PublicContentApi.ContentModel;
-using System;
 using System.Collections.Generic;
-using System.Net;
 using System.Text;
 using System.Linq;
 
@@ -32,10 +27,10 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
             _publicContentApi = new PublicContentApi.PublicContentApi(graphQLClient);
         }
 
-        public List<ItemContent> GetDocsContentByKeywords(Dictionary<string, KeywordModel> keywords)
+        public List<DocsItemContent> GetDocsContentByKeywords(Dictionary<string, KeywordModel> keywords)
         {
             List<ItemEdge> items = GetDocsItems(keywords);
-            List<ItemContent> itemsContent = ExtractItemsContent(items);
+            List<DocsItemContent> itemsContent = GetDocsItemsContent(items);
             return itemsContent;
         }
 
@@ -65,14 +60,14 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
             return items;
         }
 
-        private List<ItemContent> ExtractItemsContent(List<ItemEdge> items)
+        private List<DocsItemContent> GetDocsItemsContent(List<ItemEdge> items)
         {
             if (items == null)
             {
                 return null;
             }
 
-            var docContents = new List<ItemContent>();
+            var docContents = new List<DocsItemContent>();
 
             foreach (var edge in items)
             {
@@ -80,7 +75,11 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
 
                 if (page != null)
                 {
-                    var docsContent = new ItemContent() { Link = page.Url, Title = page.Title };
+                    var docsContent = new DocsItemContent() {
+                        //todo : the page.Url doesn't have the host name, we need to get it from somewhere (maybe discovery service)
+                        Link = page.Url, //
+                        Title = page.Title
+                    };
 
                     if (page.ContainerItems != null)
                     {
@@ -203,26 +202,4 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
         }
 
     }
-
-    public class ItemContent
-    {
-        public string Title { get; set; }
-        public string Link { get; set; }
-        public string Body { get; set; }
-    }
-
-    //todo : should be removed , as DXA will provide a fully authenticated initialized PCA client 
-    public class OAuth : IAuthentication
-    {
-        public NetworkCredential GetCredential(Uri uri, string authType)
-        {
-            return null;
-        }
-
-        public void ApplyManualAuthentication(IHttpClientRequest request)
-        {
-            request.Headers.Add(DiscoveryServiceProvider.DefaultTokenProvider.AuthRequestHeaderName, DiscoveryServiceProvider.DefaultTokenProvider.AuthRequestHeaderValue);
-        }
-    }
-
 }
