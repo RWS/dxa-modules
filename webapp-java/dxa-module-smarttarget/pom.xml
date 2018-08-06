@@ -24,7 +24,7 @@
 
     <properties>
         <cd-cil.version>10.1.0-1012</cd-cil.version>
-
+        <smarttarget_core.version>8.6.0</smarttarget_core.version>
     </properties>
 
     <dependencies>
@@ -42,6 +42,58 @@
             <artifactId>cil</artifactId>
             <version>10.1.0-1012</version>
             <type>pom</type>
+        </dependency>
+
+        <dependency>
+            <groupId>com.tridion.smarttarget</groupId>
+            <artifactId>smarttarget_core</artifactId>
+            <version>${smarttarget_core.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>oro</artifactId>
+                    <groupId>oro</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jersey-client</artifactId>
+                    <groupId>com.sun.jersey</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jersey-core</artifactId>
+                    <groupId>com.sun.jersey</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jdom</artifactId>
+                    <groupId>jdom</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>commons-discovery</artifactId>
+                    <groupId>commons-discovery</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>commons-httpclient</artifactId>
+                    <groupId>commons-httpclient</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>cd_broker</artifactId>
+                    <groupId>com.tridion</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sdl.web</groupId>
+            <artifactId>xo-client</artifactId>
+            <version>${smarttarget_core.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.sdl.web</groupId>
+                    <artifactId>content-client-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.sdl.web</groupId>
+                    <artifactId>discovery-client-lightweight</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
