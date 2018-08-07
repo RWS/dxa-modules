@@ -2,7 +2,7 @@
 
 <div class="rich-text @Model.HtmlClasses" @Html.DxaEntityMarkup()>
 
-    @if (Model.TridionDocsItems != null)
+    @if (Model.TridionDocsItems != null && Model.TridionDocsItems.Any())
     {
         foreach (TridionDocsItem item in Model.TridionDocsItems)
         {
@@ -23,6 +23,10 @@
                 <br />
             }
         }
+    }
+    else
+    {
+        <span>&nbsp;</span>
     }
 
 </div>
