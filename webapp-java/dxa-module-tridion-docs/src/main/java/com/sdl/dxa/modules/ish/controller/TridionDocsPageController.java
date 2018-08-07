@@ -17,10 +17,9 @@ public class TridionDocsPageController {
     /**
      * Main entry point of the application.
      *
-     * @param request
-     * @param response
+     * @param request   Http request
+     * @param response  Http response
      * @return Redirects to the home page.
-     * @throws Exception
      */
     @RequestMapping(method = RequestMethod.GET, value = "/ish/",
             produces = {MediaType.TEXT_HTML_VALUE, MediaType.ALL_VALUE})

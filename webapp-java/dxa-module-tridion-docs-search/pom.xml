@@ -10,10 +10,10 @@
     </parent>
 
     <groupId>com.sdl.dxa.modules</groupId>
-    <artifactId>dxa-module-smarttarget</artifactId>
+    <artifactId>dxa-module-tridion-docs-search</artifactId>
 
-    <name>DXA Modules - XO support</name>
-    <description>Implementation of DXA XO support</description>
+    <name>DXA Modules - Tridion Docs Search</name>
+    <description>DXA Tridion Docs Search Module</description>
 
     <scm>
         <url>https://github.com/sdl/dxa-modules</url>
@@ -23,54 +23,29 @@
     </scm>
 
     <properties>
-        <cd-cil.version>10.1.0-1012</cd-cil.version>
-        <smarttarget_core.version>8.6.0</smarttarget_core.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <iq-query-api.version>11.0.0-SNAPSHOT</iq-query-api.version>
+        <iq-query-model.version>11.0.0-SNAPSHOT</iq-query-model.version>
+        <iq-query-client.version>11.0.0-SNAPSHOT</iq-query-client.version>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>com.sdl.dxa</groupId>
-            <artifactId>dxa-common-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.sdl.dxa</groupId>
-            <artifactId>dxa-tridion-provider</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.sdl.web</groupId>
-            <artifactId>cil</artifactId>
-            <version>10.1.0-1012</version>
-            <type>pom</type>
-        </dependency>
-
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
+            <groupId>com.sdl.delivery</groupId>
+            <artifactId>udp-iq-query-client</artifactId>
+            <version>${cd-cil.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
+            <artifactId>spring-web</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+        <!-- Tests -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -80,8 +55,8 @@
             <artifactId>mockito-all</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-library</artifactId>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
         </dependency>
     </dependencies>
 
