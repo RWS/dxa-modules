@@ -2,20 +2,27 @@
 
 <div class="rich-text @Model.HtmlClasses" @Html.DxaEntityMarkup()>
 
-    @if (!string.IsNullOrEmpty(Model.EmbeddedContent))
+    @if (Model.TridionDocsItems != null)
     {
-        <div class="content">
-            <div @Html.DxaPropertyMarkup(() => Model.EmbeddedContent)>
-                @Html.Raw(Model.EmbeddedContent)
-            </div>
-        </div>
-    }
-
-    @if (!string.IsNullOrEmpty(Model.Link))
-    {
-        <div @Html.DxaPropertyMarkup(() => Model.Link)>
-            <a href="@Model.Link">@Model.Title</a>
-        </div>
+        foreach (TridionDocsItem item in Model.TridionDocsItems)
+        {
+            if (Model.DisplayContentAs.ToLower() == "embedded content")
+            {
+                <div class="content">
+                    <div @Html.DxaPropertyMarkup(() => Model.TridionDocsItems)>
+                        @Html.Raw(@item.Body)
+                    </div>
+                </div>
+                <br />
+            }
+            else
+            {
+                <div @Html.DxaPropertyMarkup(() => Model.TridionDocsItems)>
+                    <a href="@item.Link">@item.Title</a>
+                </div>
+                <br />
+            }
+        }
     }
 
 </div>

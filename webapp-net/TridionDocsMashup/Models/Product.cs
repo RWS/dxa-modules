@@ -8,16 +8,13 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Models
     [SemanticEntity(EntityName = "Content")]
     public class Product : EntityModel
     {
+        [SemanticProperty("_all")]
+        public Dictionary<string, KeywordModel> Keywords { get; set; }
+
         [SemanticProperty("Title")]
         public string Title { get; set; }
 
         [SemanticProperty("Body")]
         public RichText Body { get; set; }
-
-        [SemanticProperty("ProductFamily")]
-        public KeywordModel ProductFamily { get; set; }
-
-        [SemanticProperty("ProductRelease")]
-        public KeywordModel ProductRelease { get; set; }
     }
 }

@@ -6,8 +6,8 @@ using Sdl.Web.Mvc.Configuration;
 using Sdl.Web.PublicContentApi;
 using Sdl.Web.PublicContentApi.ContentModel;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
+using Sdl.Web.Modules.TridionDocsMashup.Models;
 
 namespace Sdl.Web.Modules.TridionDocsMashup.Client
 {
@@ -27,14 +27,14 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
             _publicContentApi = new PublicContentApi.PublicContentApi(graphQLClient);
         }
 
-        public List<DocsItemContent> GetDocsContentByKeywords(Dictionary<string, KeywordModel> keywords)
+        public List<TridionDocsItem> GetTridionDocsItemsByKeywords(Dictionary<string, KeywordModel> keywords, int maxItems)
         {
-            List<ItemEdge> items = GetDocsItems(keywords);
-            List<DocsItemContent> itemsContent = GetDocsItemsContent(items);
-            return itemsContent;
+            List<ItemEdge> result = ExecuteQuery(keywords, maxItems);
+            List<TridionDocsItem> items = GetDocsItems(result);
+            return items;
         }
 
-        private List<ItemEdge> GetDocsItems(Dictionary<string, KeywordModel> keywords)
+        private List<ItemEdge> ExecuteQuery(Dictionary<string, KeywordModel> keywords, int maxItems)
         {
             List<InputItemFilter> keywordFilters = GetKeyWordFilters(keywords);
 
@@ -48,7 +48,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
                 Or = languageFilters
             };
 
-            ItemConnection item = _publicContentApi.ExecuteItemQuery(filter, new Pagination { First = 5 }, null, null, true);
+            ItemConnection item = _publicContentApi.ExecuteItemQuery(filter, new Pagination { First = maxItems }, null, null, true);
 
             if (item?.Edges == null)
             {
@@ -60,46 +60,45 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
             return items;
         }
 
-        private List<DocsItemContent> GetDocsItemsContent(List<ItemEdge> items)
+        private List<TridionDocsItem> GetDocsItems(List<ItemEdge> result)
         {
-            if (items == null)
+            var docsItems = new List<TridionDocsItem>();
+
+            if (result != null)
             {
-                return null;
-            }
-
-            var docContents = new List<DocsItemContent>();
-
-            foreach (var edge in items)
-            {
-                Page page = edge.Node as Page;
-
-                if (page != null)
+                foreach (var edge in result)
                 {
-                    var docsContent = new DocsItemContent() {
-                        //todo : the page.Url doesn't have the host name, we need to get it from somewhere (maybe discovery service)
-                        Link = page.Url, //
-                        Title = page.Title
-                    };
+                    Page page = edge.Node as Page;
 
-                    if (page.ContainerItems != null)
+                    if (page != null)
                     {
-                        foreach (ComponentPresentation componentPresentation in page.ContainerItems)
+                        var docsItem = new TridionDocsItem()
                         {
-                            string componentDD4TJson = (componentPresentation?.RawContent?.Data["Component"] as JObject)?.ToString();
+                            //todo : the page.Url doesn't have the host name, we need to get it from somewhere (maybe discovery service)
+                            Link = page.Url, //
+                            Title = page.Title
+                        };
 
-                            if (!string.IsNullOrEmpty(componentDD4TJson))
+                        if (page.ContainerItems != null)
+                        {
+                            foreach (ComponentPresentation componentPresentation in page.ContainerItems)
                             {
-                                DD4T.ContentModel.Component component = _dd4tSerializer.Deserialize<DD4T.ContentModel.Component>(componentDD4TJson);
-                                docsContent.Body = component?.Fields["topicBody"]?.Value;
+                                string componentDD4TJson = (componentPresentation?.RawContent?.Data["Component"] as JObject)?.ToString();
+
+                                if (!string.IsNullOrEmpty(componentDD4TJson))
+                                {
+                                    DD4T.ContentModel.Component component = _dd4tSerializer.Deserialize<DD4T.ContentModel.Component>(componentDD4TJson);
+                                    docsItem.Body = component?.Fields["topicBody"]?.Value;
+                                }
                             }
                         }
-                    }
 
-                    docContents.Add(docsContent);
+                        docsItems.Add(docsItem);
+                    }
                 }
             }
 
-            return docContents;
+            return docsItems;
         }
 
         private List<ItemEdge> FilterItemsByLanguage(ItemConnection item)
