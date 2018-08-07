@@ -36,7 +36,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
 
         private List<ItemEdge> ExecuteQuery(Dictionary<string, KeywordModel> keywords, int maxItems)
         {
-            if (maxItems == 0)
+            if (maxItems < 1)
             {
                 return null;
             }
