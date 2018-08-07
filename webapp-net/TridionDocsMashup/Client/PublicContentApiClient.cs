@@ -36,6 +36,11 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
 
         private List<ItemEdge> ExecuteQuery(Dictionary<string, KeywordModel> keywords, int maxItems)
         {
+            if (maxItems == 0)
+            {
+                return null;
+            }
+
             List<InputItemFilter> keywordFilters = GetKeyWordFilters(keywords);
 
             List<InputItemFilter> languageFilters = GetLanguageFilters();
