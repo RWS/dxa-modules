@@ -93,6 +93,14 @@
                     <groupId>com.sdl.web</groupId>
                     <artifactId>discovery-client-lightweight</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>com.sdl.web</groupId>
+                    <artifactId>xo-client</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.sdl</groupId>
+                    <artifactId>odata_client</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
 

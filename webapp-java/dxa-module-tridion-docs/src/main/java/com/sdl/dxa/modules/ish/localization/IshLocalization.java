@@ -2,6 +2,7 @@ package com.sdl.dxa.modules.ish.localization;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.base.MoreObjects;
 import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.api.localization.LocalizationFactoryException;
 import com.sdl.webapp.common.api.localization.SiteLocalization;
@@ -133,7 +134,7 @@ public class IshLocalization implements Localization {
             }
             return schemasMap;
         } catch (IOException e) {
-            log.error("Unable to read resource.", e);
+            log.error("Unable to read semantic-schemas/schemas.json or semantic-schemas/vocabularies.json.", e);
         } catch (LocalizationFactoryException e) {
             log.error("Unable to convert semantics.", e);
         }
@@ -172,5 +173,12 @@ public class IshLocalization implements Localization {
      */
     public String getCmUriScheme() {
         return ISH.getValue();
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this).omitNullValues()
+                .add("publicationId", publicationId)
+                .toString() + ", " + super.toString();
     }
 }
