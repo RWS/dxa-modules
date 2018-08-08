@@ -1,6 +1,7 @@
 ﻿using Sdl.Web.Common.Models;
 using System;
 using System.Collections.Generic;
+using Sdl.Web.Mvc.Configuration;
 
 namespace Sdl.Web.Modules.TridionDocsMashup.Models
 {
@@ -14,9 +15,11 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Models
         [SemanticProperty("DisplayContentAs")]
         public string DisplayContentAs { get; set; }
 
-        [SemanticProperty("MaxNumberOfItemsToReturn")]
+        [SemanticProperty("MaxNumberOfItemsToShow")]
         public int MaxItems { get; set; }
 
         public List<TridionDocsItem> TridionDocsItems { get; set; }
+
+        public bool IsXpmEnabled { get { return WebRequestContext.Localization.IsXpmEnabled; } }
     }
 }

@@ -65,7 +65,7 @@
       <HintPath>..\packages\Sdl.Web.Delivery.$(SdlDeliveryVersion)\lib\net452\Sdl.Web.Delivery.Service.dll</HintPath>
     </Reference>
     <Reference Include="Sdl.Web.PublicContentApi">
-      <HintPath>..\packages\Sdl.Web.PublicContentApi.2.1.0-beta-201808021348\lib\net452\Sdl.Web.PublicContentApi.dll</HintPath>
+      <HintPath>..\packages\Sdl.Web.PublicContentApi.2.1.0-beta-201808081049\lib\net452\Sdl.Web.PublicContentApi.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Web" />

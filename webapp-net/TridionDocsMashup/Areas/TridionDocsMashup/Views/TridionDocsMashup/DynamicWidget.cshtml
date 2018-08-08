@@ -4,6 +4,8 @@
 
     @if (Model.TridionDocsItems != null && Model.TridionDocsItems.Any())
     {
+        var lastId = Model.TridionDocsItems.Last().Id;
+
         foreach (TridionDocsItem item in Model.TridionDocsItems)
         {
             if (Model.DisplayContentAs.ToLower() == "embedded content")
@@ -13,20 +15,26 @@
                         @Html.Raw(@item.Body)
                     </div>
                 </div>
-                <br />
             }
             else
             {
                 <div @Html.DxaPropertyMarkup(() => Model.TridionDocsItems)>
                     <a href="@item.Link">@item.Title</a>
                 </div>
+
+            }
+            if (@item.Id != lastId)
+            {
                 <br />
             }
         }
     }
     else
     {
-        <span>&nbsp;</span>
+        if (Model.IsXpmEnabled)
+        {
+            <span>&nbsp;</span>
+        }
     }
 
 </div>
