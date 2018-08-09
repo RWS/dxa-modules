@@ -14,7 +14,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
         {
             StaticWidget staticWidget = base.EnrichModel(sourceModel) as StaticWidget;
 
-            if (staticWidget != null)
+            if (staticWidget != null && staticWidget.Keywords != null)
             {
                 var pcaClient = new PublicContentApiClient();
 
@@ -23,7 +23,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
 
             DynamicWidget dynamicWidget = base.EnrichModel(sourceModel) as DynamicWidget;
 
-            if (dynamicWidget != null)
+            if (dynamicWidget != null && dynamicWidget.Keywords != null)
             {
                 var pcaClient = new PublicContentApiClient();
 
