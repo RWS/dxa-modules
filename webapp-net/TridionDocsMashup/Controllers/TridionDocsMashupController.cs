@@ -27,10 +27,10 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
                 {
                     Product product = regionModel.Entities?.FirstOrDefault(e => e.MvcData.ViewName == dynamicWidget.ProductViewModel) as Product;
 
-                    var keywords = new Dictionary<string, KeywordModel>();
-
                     if (product != null && product.Keywords != null)
                     {
+                        var keywords = new Dictionary<string, KeywordModel>();
+
                         foreach (var keywordName in dynamicWidget.Keywords)
                         {
                             KeyValuePair<string, KeywordModel> keyword = product.Keywords.FirstOrDefault(k => k.Key.Contains("." + keywordName + "."));
@@ -40,11 +40,13 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
                                 keywords.Add(keyword.Key, keyword.Value);
                             }
                         }
-                    }
 
-                    if (keywords.Any())
-                    {
-                        dynamicWidget.TridionDocsItems = pcaClient.GetTridionDocsItemsByKeywords(keywords, dynamicWidget.MaxItems);
+                        if (keywords.Any())
+                        {
+                            dynamicWidget.TridionDocsItems = pcaClient.GetTridionDocsItemsByKeywords(keywords, dynamicWidget.MaxItems);
+                        }
+
+                        break;
                     }
                 }
             }
