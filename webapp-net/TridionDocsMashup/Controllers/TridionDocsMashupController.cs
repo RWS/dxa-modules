@@ -12,14 +12,18 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
     {
         protected override ViewModel EnrichModel(ViewModel sourceModel)
         {
-            if (base.EnrichModel(sourceModel) is StaticWidget staticWidget && staticWidget.Keywords != null)
+            StaticWidget staticWidget = base.EnrichModel(sourceModel) as StaticWidget;
+
+            if (staticWidget != null && staticWidget.Keywords != null)
             {
                 var pcaClient = new PublicContentApiClient();
 
                 staticWidget.TridionDocsItems = pcaClient.GetTridionDocsItemsByKeywords(staticWidget.Keywords, staticWidget.MaxItems);
             }
 
-            if (base.EnrichModel(sourceModel) is DynamicWidget dynamicWidget && dynamicWidget.Keywords != null)
+            DynamicWidget dynamicWidget = base.EnrichModel(sourceModel) as DynamicWidget;
+
+            if (dynamicWidget != null && dynamicWidget.Keywords != null)
             {
                 var pcaClient = new PublicContentApiClient();
 
