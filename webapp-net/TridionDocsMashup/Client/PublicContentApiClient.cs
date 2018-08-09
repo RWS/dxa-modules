@@ -1,7 +1,7 @@
 ﻿using DD4T.Serialization;
 using Newtonsoft.Json.Linq;
 using Sdl.Web.Common.Models;
-using Sdl.Web.GraphQLClient;
+using Sdl.Web.Tridion.PCAClient;
 using Sdl.Web.Mvc.Configuration;
 using Sdl.Web.PublicContentApi;
 using Sdl.Web.PublicContentApi.ContentModel;
@@ -18,13 +18,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
 
         public PublicContentApiClient()
         {
-            //todo : should be removed , as PCA client itself will read it from the DiscoveryService
-            string graphQLEndpoint = "http://stgecl2016:8091/udp/content";// "http://localhost:8081/udp/content";
-
-            //todo : should be removed , as  PCA client will be provided and initialized by DXA , like SiteConfiguration.PublicContentApi;
-            IGraphQLClient graphQLClient = new GraphQLClient.GraphQLClient(graphQLEndpoint, new OAuth());
-
-            _publicContentApi = new PublicContentApi.PublicContentApi(graphQLClient);
+            _publicContentApi = PCAClientFactory.Instance.CreateClient();
         }
 
         public List<TridionDocsItem> GetTridionDocsItemsByKeywords(Dictionary<string, KeywordModel> keywords, int maxItems)
@@ -98,7 +92,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
 
                     if (page != null)
                     {
-                        //todo : the page.Url doesn't have the host name, we need to get it from somewhere!
+                        //todo : the page.Url doesn't have the host name, UDP team is working on it :  https://jira.sdl.com/browse/UDP-4772
                         var docsItem = new TridionDocsItem() { Link = page.Url };
 
                         if (page.ContainerItems != null)

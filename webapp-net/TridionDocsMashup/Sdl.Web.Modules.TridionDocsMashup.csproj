@@ -58,14 +58,19 @@
       <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net452\Sdl.Web.Mvc.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Sdl.Web.Tridion">
+      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net452\Sdl.Web.Tridion.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Sdl.Web.PublicContentApi">
+      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net452\Sdl.Web.PublicContentApi.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Sdl.Web.Delivery.DiscoveryService">
       <HintPath>..\packages\Sdl.Web.Delivery.$(SdlDeliveryVersion)\lib\net452\Sdl.Web.Delivery.DiscoveryService.dll</HintPath>
     </Reference>
     <Reference Include="Sdl.Web.Delivery.DiscoveryService">
       <HintPath>..\packages\Sdl.Web.Delivery.$(SdlDeliveryVersion)\lib\net452\Sdl.Web.Delivery.Service.dll</HintPath>
-    </Reference>
-    <Reference Include="Sdl.Web.PublicContentApi">
-      <HintPath>..\packages\Sdl.Web.PublicContentApi.2.1.0-beta-201808081622\lib\net452\Sdl.Web.PublicContentApi.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Web" />
@@ -76,7 +81,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\TridionDocsItem.cs" />
-    <Compile Include="Client\OAuth.cs" />
     <Compile Include="Client\PublicContentApiClient.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\DynamicWidget.cs" />
@@ -106,9 +110,7 @@
     <PostBuildEvent>REM Deploy build artifacts to DXA Site (on development machines with DXA_SITE_DIR environment variable set)
 if defined DXA_SITE_DIR (
 xcopy "$(TargetPath)" "%25DXA_SITE_DIR%25\bin" /Y
-xcopy "$(TargetDir)Sdl.Web.PublicContentApi.dll" "%25DXA_SITE_DIR%25\bin" /Y
 xcopy "$(TargetDir)DD4T.Serialization.dll" "%25DXA_SITE_DIR%25\bin" /Y
-xcopy "$(TargetDir)DD4T.ContentModel.XmlSerializers.dll" "%25DXA_SITE_DIR%25\bin" /Y
 xcopy "$(ProjectDir)Areas" "%25DXA_SITE_DIR%25\Areas" /S /I /Y
 )</PostBuildEvent>
   </PropertyGroup>
