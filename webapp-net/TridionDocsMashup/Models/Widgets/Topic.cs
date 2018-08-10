@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Sdl.Web.Modules.TridionDocsMashup.Models
+namespace Sdl.Web.Modules.TridionDocsMashup.Models.Widgets
 {
-    public class TridionDocsItem
+    public class Topic
     {
         public string Id { get; set; }
         public string Title { get; set; }

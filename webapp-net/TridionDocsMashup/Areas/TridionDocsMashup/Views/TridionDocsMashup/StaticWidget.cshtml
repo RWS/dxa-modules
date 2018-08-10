@@ -2,28 +2,28 @@
 
 <div class="rich-text @Model.HtmlClasses" @Html.DxaEntityMarkup()>
 
-    @if (Model.TridionDocsItems != null && Model.TridionDocsItems.Any())
+    @if (Model.Topics != null && Model.Topics.Any())
     {
-        var lastId = Model.TridionDocsItems.Last().Id;
+        var lastId = Model.Topics.Last().Id;
 
-        foreach (TridionDocsItem item in Model.TridionDocsItems)
+        foreach (Topic topic in Model.Topics)
         {
             if (Model.DisplayContentAs.ToLower() == "embedded content")
             {
                 <div class="content">
-                    <div @Html.DxaPropertyMarkup(() => Model.TridionDocsItems)>
-                        @Html.Raw(@item.Body)
+                    <div @Html.DxaPropertyMarkup(() => Model.Topics)>
+                        @Html.Raw(@topic.Body)
                     </div>
                 </div>
             }
             else
             {
-                <div @Html.DxaPropertyMarkup(() => Model.TridionDocsItems)>
-                    <a href="@item.Link">@item.Title</a>
+                <div @Html.DxaPropertyMarkup(() => Model.Topics)>
+                    <a href="@topic.Link">@topic.Title</a>
                 </div>
             }
 
-            if (@item.Id != lastId)
+            if (@topic.Id != lastId)
             {
                 <br />
             }

@@ -2,11 +2,11 @@
 using System;
 using System.Collections.Generic;
 
-namespace Sdl.Web.Modules.TridionDocsMashup.Models
+namespace Sdl.Web.Modules.TridionDocsMashup.Models.Products
 {
     [Serializable]
     [SemanticEntity(EntityName = "Content")]
-    public class Product : EntityModel
+    public abstract class Product : EntityModel
     {
         [SemanticProperty("_all")]
         public Dictionary<string, KeywordModel> Keywords { get; set; }

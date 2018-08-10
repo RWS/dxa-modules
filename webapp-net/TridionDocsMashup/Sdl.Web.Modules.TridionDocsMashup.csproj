@@ -74,18 +74,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\TridionDocsItem.cs" />
+    <Compile Include="Models\Products\Bicycle.cs" />
+    <Compile Include="Models\Widgets\Topic.cs" />
     <Compile Include="Client\PublicContentApiClient.cs" />
-    <Compile Include="Models\Product.cs" />
-    <Compile Include="Models\DynamicWidget.cs" />
+    <Compile Include="Models\Products\Product.cs" />
+    <Compile Include="Models\Widgets\DynamicWidget.cs" />
     <Compile Include="TridionDocsMashupAreaRegistration.cs" />
     <Compile Include="Controllers\TridionDocsMashupController.cs" />
-    <Compile Include="Models\StaticWidget.cs" />
+    <Compile Include="Models\Widgets\StaticWidget.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="..\CommonAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Areas\TridionDocsMashup\Views\Entity\Product.cshtml" />
+    <None Include="Areas\TridionDocsMashup\Views\Entity\Bicycle.cshtml" />
     <None Include="Areas\TridionDocsMashup\Views\Region\DynamicWidget.cshtml" />
     <None Include="Areas\TridionDocsMashup\Views\TridionDocsMashup\DynamicWidget.cshtml" />
     <None Include="Areas\TridionDocsMashup\Views\TridionDocsMashup\StaticWidget.cshtml" />

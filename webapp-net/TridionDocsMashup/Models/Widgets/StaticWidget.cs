@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Sdl.Web.Modules.TridionDocsMashup.Models
+namespace Sdl.Web.Modules.TridionDocsMashup.Models.Widgets
 {
     [Serializable]
     [SemanticEntity(EntityName = "Content")]
@@ -17,6 +17,6 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Models
         [SemanticProperty("MaxNumberOfItemsToShow")]
         public int MaxItems { get; set; }
 
-        public List<TridionDocsItem> TridionDocsItems { get; set; }
+        public List<Topic> Topics { get; set; }
     }
 }

@@ -1,10 +1,11 @@
 ﻿using Sdl.Web.Common.Models;
-using Sdl.Web.Modules.TridionDocsMashup.Models;
 using Sdl.Web.Mvc.Configuration;
 using Sdl.Web.Mvc.Controllers;
 using System.Collections.Generic;
 using System.Linq;
 using Sdl.Web.Modules.TridionDocsMashup.Client;
+using Sdl.Web.Modules.TridionDocsMashup.Models.Widgets;
+using Sdl.Web.Modules.TridionDocsMashup.Models.Products;
 
 namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
 {
@@ -18,7 +19,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
             {
                 var pcaClient = new PublicContentApiClient();
 
-                staticWidget.TridionDocsItems = pcaClient.GetTridionDocsItemsByKeywords(staticWidget.Keywords, staticWidget.MaxItems);
+                staticWidget.Topics = pcaClient.GetTridionDocsTopicsByKeywords(staticWidget.Keywords, staticWidget.MaxItems);
             }
 
             DynamicWidget dynamicWidget = base.EnrichModel(sourceModel) as DynamicWidget;
@@ -47,7 +48,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
 
                         if (keywords.Any())
                         {
-                            dynamicWidget.TridionDocsItems = pcaClient.GetTridionDocsItemsByKeywords(keywords, dynamicWidget.MaxItems);
+                            dynamicWidget.Topics = pcaClient.GetTridionDocsTopicsByKeywords(keywords, dynamicWidget.MaxItems);
                         }
 
                         break;

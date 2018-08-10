@@ -7,10 +7,15 @@ using Sdl.Web.PublicContentApi;
 using Sdl.Web.PublicContentApi.ContentModel;
 using System.Collections.Generic;
 using System.Linq;
-using Sdl.Web.Modules.TridionDocsMashup.Models;
+using Sdl.Web.Modules.TridionDocsMashup.Models.Widgets;
 
 namespace Sdl.Web.Modules.TridionDocsMashup.Client
 {
+    /// <summary>
+    /// This class is a wrapper around the actual PublicContentApi client 
+    /// and tries to isolate the related logic and codes for creating the filters and performing the query 
+    /// and processing the results
+    /// </summary>
     public class PublicContentApiClient
     {
         private IPublicContentApi _publicContentApi;
@@ -21,13 +26,19 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
             _publicContentApi = PCAClientFactory.Instance.CreateClient();
         }
 
-        public List<TridionDocsItem> GetTridionDocsItemsByKeywords(Dictionary<string, KeywordModel> keywords, int maxItems)
+        /// <summary>
+        /// Returns a collection of Tridion docs topics based on the provided keywords 
+        /// </summary>
+        public List<Topic> GetTridionDocsTopicsByKeywords(Dictionary<string, KeywordModel> keywords, int maxItems)
         {
-            List<ItemEdge> result = ExecuteQuery(keywords, maxItems);
-            List<TridionDocsItem> items = GetDocsItems(result);
-            return items;
+            List<ItemEdge> results = ExecuteQuery(keywords, maxItems);
+            List<Topic> topics = GetDocsTopics(results);
+            return topics;
         }
 
+        /// <summary>
+        /// Creates the required filters and peforms the GraphQl query and returns the results  
+        /// </summary>
         private List<ItemEdge> ExecuteQuery(Dictionary<string, KeywordModel> keywords, int maxItems)
         {
             if (maxItems < 1)
@@ -40,10 +51,10 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
             // first , we filter the query based on the specified language in the current culture
             InputItemFilter languageFilter = GetLanguageFilter(WebRequestContext.Localization.CultureInfo.Name);
 
-            ItemConnection result = ExecuteItemQuery(keywordFilters, languageFilter, maxItems);
+            ItemConnection results = ExecuteItemQuery(keywordFilters, languageFilter, maxItems);
 
-            //if no result, then we query again based on the parent language (if exists)
-            if (result?.Edges == null || !result.Edges.Any())
+            //if no result, then we do another query based on the parent language (if exists)
+            if (results?.Edges == null || !results.Edges.Any())
             {
                 var parentLanguage = WebRequestContext.Localization.CultureInfo.Parent?.Name;
 
@@ -51,13 +62,16 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
                 {
                     languageFilter = GetLanguageFilter(parentLanguage);
 
-                    result = ExecuteItemQuery(keywordFilters, languageFilter, maxItems);
+                    results = ExecuteItemQuery(keywordFilters, languageFilter, maxItems);
                 }
             }
 
-            return result?.Edges;
+            return results?.Edges;
         }
 
+        /// <summary>
+        /// Performs the query by PublicContentApi client based on the given filters 
+        /// </summary>
         private ItemConnection ExecuteItemQuery(IEnumerable<InputItemFilter> keywordfilters, InputItemFilter languageFilter, int maxItems)
         {
             var customMetaFilters = keywordfilters.ToList();
@@ -71,29 +85,35 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
                 And = customMetaFilters
             };
 
-            var result = _publicContentApi.ExecuteItemQuery(
+            var results = _publicContentApi.ExecuteItemQuery(
                 filter,
                 new InputSortParam { Order = SortOrderType.Descending, SortBy = SortFieldType.LAST_PUBLISH_DATE },
                 new Pagination { First = maxItems },
                 null, null, false);
 
-            return result;
+            return results;
         }
 
-        private List<TridionDocsItem> GetDocsItems(List<ItemEdge> result)
+        /// <summary>
+        /// Extracts and returns a collection of topics from the query's results 
+        /// </summary>
+        private List<Topic> GetDocsTopics(List<ItemEdge> results)
         {
-            var docsItems = new List<TridionDocsItem>();
+            var topics = new List<Topic>();
 
-            if (result != null)
+            if (results != null)
             {
-                foreach (var edge in result)
+                foreach (var edge in results)
                 {
                     Page page = edge.Node as Page;
+
+                    // based on the GraphQl's results , we need to look into the below path to get the topic's title and body  
+                    // page >  containerItems > componentPresentation > component > fields >  topicTitle and topicBody
 
                     if (page != null)
                     {
                         //todo : the page.Url doesn't have the host name, UDP team is working on it :  https://jira.sdl.com/browse/UDP-4772
-                        var docsItem = new TridionDocsItem() { Link = page.Url };
+                        var topic = new Topic() { Link = page.Url };
 
                         if (page.ContainerItems != null)
                         {
@@ -107,22 +127,25 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
 
                                     if (component != null)
                                     {
-                                        docsItem.Id = component.Id;
-                                        docsItem.Title = component.Fields["topicTitle"]?.Value;
-                                        docsItem.Body = component.Fields["topicBody"]?.Value;
+                                        topic.Id = component.Id;
+                                        topic.Title = component.Fields["topicTitle"]?.Value;
+                                        topic.Body = component.Fields["topicBody"]?.Value;
                                     }
                                 }
                             }
                         }
 
-                        docsItems.Add(docsItem);
+                        topics.Add(topic);
                     }
                 }
             }
 
-            return docsItems;
+            return topics;
         }
 
+        /// <summary>
+        /// Creates and returns a collection of <see cref="InputItemFilter"/> based on the given keyword models
+        /// </summary>
         private static List<InputItemFilter> GetKeyWordFilters(Dictionary<string, KeywordModel> keywords)
         {
             var keyWordFilters = new List<InputItemFilter>();
@@ -145,6 +168,9 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
             return keyWordFilters;
         }
 
+        /// <summary>
+        /// Creates and returns an <see cref="InputItemFilter"/> based on the given language
+        /// </summary>
         private static InputItemFilter GetLanguageFilter(string language)
         {
             var languageFilter = new InputItemFilter
@@ -160,16 +186,30 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
             return languageFilter;
         }
 
-        private static string GetKeywordKey(string keywordKey)
+        /// <summary>
+        /// Extracts and returns the actual keyword's key from the provided field's XML Name 
+        /// </summary>
+        private static string GetKeywordKey(string keywordFiledXmlName)
         {
-            string scop = keywordKey.Split('.')?[0];
-            string key = keywordKey.Replace(scop + ".", string.Empty);
+            // In schema , a category field is named as this format : SCOPE.KEYWORDNAME.FIELDTYPE 
+            // Example : Publication.FMBPRODUCTRELEASENAME.Version  or Item.FMBCONTENTREFTYPE.Logical
+            // We need to remove the scope and append ".element" to it (e.g. FMBPRODUCTRELEASENAME.Version.element)
+
+            string scop = keywordFiledXmlName.Split('.')?[0];
+            string key = keywordFiledXmlName.Replace(scop + ".", string.Empty);
             return key + ".element";
         }
 
-        private static CriteriaScope GetKeywordScope(string keywordKey)
+        /// <summary>
+        /// Extracts and returns the keyword filter's scope from the provided field's XML Name 
+        /// </summary>
+        private static CriteriaScope GetKeywordScope(string keywordFiledXmlName)
         {
-            string scope = keywordKey.Split('.')?[0];
+            // In schema , a category field is named as this format : SCOPE.KEYWORDNAME.FIELDTYPE 
+            // Example : Publication.FMBPRODUCTRELEASENAME.Version  or Item.FMBCONTENTREFTYPE.Logical
+            // We need to get the first part (e.g. Item) and returns associated enum value
+
+            string scope = keywordFiledXmlName.Split('.')?[0];
 
             switch (scope?.ToLower())
             {
