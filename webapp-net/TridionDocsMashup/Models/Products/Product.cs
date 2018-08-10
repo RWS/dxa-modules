@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace Sdl.Web.Modules.TridionDocsMashup.Models.Products
 {
+    /// <summary>
+    /// This is the base class for every product type
+    /// </summary>
     [Serializable]
     [SemanticEntity(EntityName = "Content")]
     public abstract class Product : EntityModel

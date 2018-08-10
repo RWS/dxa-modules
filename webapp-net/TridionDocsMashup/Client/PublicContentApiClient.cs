@@ -37,7 +37,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
         }
 
         /// <summary>
-        /// Creates the required filters and peforms the GraphQl query and returns the results  
+        /// Creates the required filters and peforms the query to fetch and return the results  
         /// </summary>
         private List<ItemEdge> ExecuteQuery(Dictionary<string, KeywordModel> keywords, int maxItems)
         {
@@ -48,12 +48,12 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
 
             List<InputItemFilter> keywordFilters = GetKeyWordFilters(keywords);
 
-            // first , we filter the query based on the specified language in the current culture
+            // First , we filter the query based on the specified language in the current culture.
             InputItemFilter languageFilter = GetLanguageFilter(WebRequestContext.Localization.CultureInfo.Name);
 
             ItemConnection results = ExecuteItemQuery(keywordFilters, languageFilter, maxItems);
 
-            //if no result, then we do another query based on the parent language (if exists)
+            // If no result, then we do another query based on the parent language (if exists).
             if (results?.Edges == null || !results.Edges.Any())
             {
                 var parentLanguage = WebRequestContext.Localization.CultureInfo.Parent?.Name;
@@ -107,12 +107,12 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
                 {
                     Page page = edge.Node as Page;
 
-                    // based on the GraphQl's results , we need to look into the below path to get the topic's title and body  
+                    // Based on the GraphQl's results , we need to look into the below path to get the topic's title and body . 
                     // page >  containerItems > componentPresentation > component > fields >  topicTitle and topicBody
 
                     if (page != null)
                     {
-                        //todo : the page.Url doesn't have the host name, UDP team is working on it :  https://jira.sdl.com/browse/UDP-4772
+                        // Todo : the page.Url doesn't have the host name, UDP team is working on it :  https://jira.sdl.com/browse/UDP-4772
                         var topic = new Topic() { Link = page.Url };
 
                         if (page.ContainerItems != null)
@@ -193,7 +193,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
         {
             // In schema , a category field is named as this format : SCOPE.KEYWORDNAME.FIELDTYPE 
             // Example : Publication.FMBPRODUCTRELEASENAME.Version  or Item.FMBCONTENTREFTYPE.Logical
-            // We need to remove the scope and append ".element" to it (e.g. FMBPRODUCTRELEASENAME.Version.element)
+            // We need to remove the scope and append ".element" to it (e.g. FMBPRODUCTRELEASENAME.Version.element).
 
             string scop = keywordFiledXmlName.Split('.')?[0];
             string key = keywordFiledXmlName.Replace(scop + ".", string.Empty);
@@ -205,9 +205,9 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
         /// </summary>
         private static CriteriaScope GetKeywordScope(string keywordFiledXmlName)
         {
-            // In schema , a category field is named as this format : SCOPE.KEYWORDNAME.FIELDTYPE 
+            // In schema , a category field is named as this format : SCOPE.KEYWORDNAME.FIELDTYPE  
             // Example : Publication.FMBPRODUCTRELEASENAME.Version  or Item.FMBCONTENTREFTYPE.Logical
-            // We need to get the first part (e.g. Item) and returns associated enum value
+            // We need to get the first part (e.g. Item) and returns associated enum value.
 
             string scope = keywordFiledXmlName.Split('.')?[0];
 
