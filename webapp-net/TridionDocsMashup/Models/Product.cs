@@ -16,5 +16,9 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Models
 
         [SemanticProperty("Body")]
         public RichText Body { get; set; }
+
+        [SemanticProperty("Image")]
+        public MediaItem Image { get; set; }
+
     }
 }
