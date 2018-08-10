@@ -17,7 +17,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
 
             if (staticWidget != null && staticWidget.Keywords != null)
             {
-                var pcaClient = new PublicContentApiClient();
+                PublicContentApiClient pcaClient = new PublicContentApiClient();
 
                 staticWidget.Topics = pcaClient.GetTridionDocsTopicsByKeywords(staticWidget.Keywords, staticWidget.MaxItems);
             }
@@ -26,7 +26,11 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
 
             if (dynamicWidget != null && dynamicWidget.Keywords != null)
             {
-                var pcaClient = new PublicContentApiClient();
+                PublicContentApiClient pcaClient = new PublicContentApiClient();
+
+                // there are multiple regions in a page 
+                // each region contains entities and every entity has a view
+                // we are looking for a product entity by its view name which is specified in the dynamicWidget.ProductViewModel
 
                 foreach (RegionModel regionModel in WebRequestContext.PageModel.Regions)
                 {
@@ -34,6 +38,10 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
 
                     if (product != null && product.Keywords != null)
                     {
+                        // when the product entity is found, we get its keywords
+                        // but we only collect those keywords specified in the dynamicWidget.Keywords
+                        // then we are ready to get TridionDocs topics by the keywords values
+
                         var keywords = new Dictionary<string, KeywordModel>();
 
                         foreach (var keywordName in dynamicWidget.Keywords)
