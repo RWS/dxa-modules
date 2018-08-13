@@ -22,6 +22,6 @@ public class IshDynamicNavigationModelProvider extends DynamicNavigationModelPro
     protected String getKeywordMetaUri(String taxonomyId, SitemapRequestDto requestDto, List<SitemapItemModelData> children, Keyword keyword, boolean needsToAddChildren) {
         if (keyword ==null || keyword.getKeywordMeta() == null) return "";
         Object firstValue = keyword.getKeywordMeta().getFirstValue("ish.ref.uri");
-        return firstValue == null ? "" : firstValue.toString();
+        return firstValue == null ? "" : firstValue.toString().replaceAll("\\D+:(\\d++)-(\\d++)-\\d++", "$1/$2");
     }
 }
