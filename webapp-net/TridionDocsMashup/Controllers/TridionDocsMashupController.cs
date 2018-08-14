@@ -1,11 +1,11 @@
 ﻿using Sdl.Web.Common.Models;
-using Sdl.Web.Modules.TridionDocsMashup.Models;
 using Sdl.Web.Mvc.Configuration;
 using Sdl.Web.Mvc.Controllers;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
-using System;
+using Sdl.Web.Modules.TridionDocsMashup.Client;
+using Sdl.Web.Modules.TridionDocsMashup.Models.Widgets;
+using Sdl.Web.Modules.TridionDocsMashup.Models.Products;
 
 namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
 {
@@ -13,81 +13,59 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
     {
         protected override ViewModel EnrichModel(ViewModel sourceModel)
         {
-            StaticWidget docsContent = base.EnrichModel(sourceModel) as StaticWidget;
+            StaticWidget staticWidget = base.EnrichModel(sourceModel) as StaticWidget;
 
-            if (docsContent != null)
+            if (staticWidget != null && staticWidget.Keywords != null)
             {
-                //to do : Use release name , family name and content type to query from Public Content Api and get respective data from tridion docs :)
+                PublicContentApiClient pcaClient = new PublicContentApiClient();
 
-                docsContent.EmbeddedContent = "Content from Tridion Docs";
-
-                docsContent.Link = "Content link from Tridion Docs";
-
-                docsContent.Query = GetQuery(docsContent.Keywords);
+                staticWidget.Topics = pcaClient.GetTridionDocsTopicsByKeywords(staticWidget.Keywords, staticWidget.MaxItems);
             }
 
-            DynamicWidget docsContentViewModel = base.EnrichModel(sourceModel) as DynamicWidget;
+            DynamicWidget dynamicWidget = base.EnrichModel(sourceModel) as DynamicWidget;
 
-            if (docsContentViewModel != null)
+            if (dynamicWidget != null && dynamicWidget.Keywords != null)
             {
-                docsContentViewModel.EmbeddedContent = $"Content from Tridion Docs based on view model { docsContentViewModel.ProductViewModel }";
-                docsContentViewModel.Link = "Content link from Tridion Docs";
-                docsContentViewModel.Query = "my query";
+                PublicContentApiClient pcaClient = new PublicContentApiClient();
+
+                // There are multiple regions in a page. 
+                // Each region contains entities and every entity has a view.
+                // We are looking for a product entity by its view name which is specified in the dynamicWidget.ProductViewModel .
 
                 foreach (RegionModel regionModel in WebRequestContext.PageModel.Regions)
                 {
-                    EntityModel product = regionModel.Entities.FirstOrDefault(e => e.MvcData.ViewName == docsContentViewModel.ProductViewModel);
+                    Product product = regionModel.Entities?.FirstOrDefault(e => e.MvcData.ViewName == dynamicWidget.ProductViewModel) as Product;
 
-                    if (product != null)
+                    if (product != null && product.Keywords != null)
                     {
-                        string query = "query = ";
+                        // When the product entity is found, we get its keywords.
+                        // But we only collect those keywords specified in the dynamicWidget.Keywords .
+                        // Then we are ready to get TridionDocs topics by the keywords values .
 
-                        Dictionary<string, KeywordModel> keywords = new Dictionary<string, KeywordModel>();
+                        var keywords = new Dictionary<string, KeywordModel>();
 
-                        // Should use reflection
-                        foreach (var property in docsContentViewModel.Properties)
+                        foreach (var keywordName in dynamicWidget.Keywords)
                         {
-                            KeywordModel keyword = product.GetType().GetProperty(property)?.GetValue(product) as KeywordModel;
-                            if (keyword != null)
+                            KeyValuePair<string, KeywordModel> keyword = product.Keywords.FirstOrDefault(k => k.Key.Contains("." + keywordName + "."));
+
+                            if (keyword.Value != null && !keywords.ContainsKey(keyword.Key))
                             {
-                                query += $" {property} { keyword.Id } '{ keyword.Title }'";
-                                keywords.Add(property, keyword);
+                                keywords.Add(keyword.Key, keyword.Value);
                             }
                         }
 
                         if (keywords.Any())
                         {
-                            docsContentViewModel.Query = GetQuery(keywords);
+                            dynamicWidget.Topics = pcaClient.GetTridionDocsTopicsByKeywords(keywords, dynamicWidget.MaxItems);
                         }
+
+                        break;
                     }
                 }
             }
 
             return sourceModel;
         }
-
-        private string GetQuery(Dictionary<string, KeywordModel> keywords)
-        {
-            var customMetas = new StringBuilder();
-
-            foreach (var keyword in keywords)
-            {
-                customMetas.AppendLine(string.Format(@"{{ customMeta: {{ scope: {0}, key: ""{1}.version.element"", value: ""{2}""}} }},", "ItemInPublication", keyword.Key, keyword.Value.Id));
-            }
-
-            customMetas.AppendLine(string.Format(@"{{ customMeta: {{ scope: {0}, key: ""DOC-LANGUAGE.lng.value"", value: ""{1}""}} }}", "ItemInPublication", WebRequestContext.Localization.CultureInfo.Name));
-
-            string query = string.Format(@"
-                items(
-                  filter: {{
-                    itemTypes: [{0}]
-                    and: [
-                        {1}
-                    ]
-                  }}
-                )", "Publication", customMetas.ToString());
-
-            return query;
-        }
     }
 }
+

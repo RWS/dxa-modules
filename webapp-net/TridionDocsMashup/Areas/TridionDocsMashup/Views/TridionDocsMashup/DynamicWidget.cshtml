@@ -2,30 +2,39 @@
 
 <div class="rich-text @Model.HtmlClasses" @Html.DxaEntityMarkup()>
 
-    <h1>Content Mashups</h1>
-
-    @foreach (var property in Model.Properties)
+    @if (Model.Topics != null && Model.Topics.Any())
     {
-        <div class="content">
-            <div>
-                <!-- Not able to add DxaPropertyMarkup to each item in the dictionary, because the items are not valid properties in the Model -->
-                <b>property:</b> @property
-            </div>
-        </div>
+        var lastId = Model.Topics.Last().Id;
+
+        foreach (Topic topic in Model.Topics)
+        {
+            if (Model.DisplayContentAs.ToLower() == "embedded content")
+            {
+                <div class="content">
+                    <div @Html.DxaPropertyMarkup(() => Model.Topics)>
+                        @Html.Raw(@topic.Body)
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div @Html.DxaPropertyMarkup(() => Model.Topics)>
+                    <a href="@topic.Link">@topic.Title</a>
+                </div>
+
+            }
+            if (@topic.Id != lastId)
+            {
+                <br />
+            }
+        }
     }
-
-    <div class="content">
-        <b>Query:</b> @Model.Query
-    </div>
-
-    <div class="content">
-        <div @Html.DxaPropertyMarkup(() => Model.EmbeddedContent)>
-            <b>EmbeddedContent:</b> @Model.EmbeddedContent
-        </div>
-    </div>
-
-    <div @Html.DxaPropertyMarkup(() => Model.Link)>
-        <b>Link:</b> <a href="#">@Model.Link</a>
-    </div>
+    else
+    {
+        if (WebRequestContext.Localization.IsXpmEnabled)
+        {
+            <span>&nbsp;</span>
+        }
+    }
 
 </div>
