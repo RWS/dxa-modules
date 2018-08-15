@@ -3,9 +3,9 @@
 @{
     //Small screens show 2 columns, so we need to make sure we break the row divs accordinly
     int cols = Model.NumberOfColumns;
-    if (cols > 6)
+    if (cols > 4)
     {
-        cols = 6;
+        cols = 4;
     }
     if (cols < 1)
     {
@@ -16,13 +16,9 @@
         cols = 2;
     }
     string entityClass = "col-sm-6";
-    if (cols > 2 && cols < 5)
+    if (cols > 2)
     {
         entityClass += " col-md-" + (7 - cols);
-    }
-    else if (cols >= 5)
-    {
-        entityClass += " col-md-2";
     }
 }
 <div @Html.DxaRegionMarkup()>
