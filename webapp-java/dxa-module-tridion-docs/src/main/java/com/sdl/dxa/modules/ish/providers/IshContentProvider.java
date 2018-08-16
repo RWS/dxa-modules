@@ -65,6 +65,7 @@ public class IshContentProvider extends DefaultContentProvider {
     private static final String PAGE_LOGICAL_REF_OBJECT_ID = "ishlogicalref.object.id";
 
     @Autowired
+    @Qualifier("ishModuleServiceClient")
     private ModelServiceClient modelServiceClient;
 
     @Autowired
