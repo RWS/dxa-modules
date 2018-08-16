@@ -23,6 +23,9 @@ public class IshModuleServiceClient extends ModelServiceClient  {
         super(configuration);
     }
 
+    /** This merthod provides special claim to ModelService to support user conditions.
+      * @param headers Http Headers to be extended in particular module
+     */
     @Override
     protected void processModuleSpecificCookies(HttpHeaders headers) {
         ClaimStore claimStore = WebContext.getCurrentClaimStore();
