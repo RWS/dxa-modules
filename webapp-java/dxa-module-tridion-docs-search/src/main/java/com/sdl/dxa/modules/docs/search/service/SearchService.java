@@ -60,11 +60,10 @@ public class SearchService {
         try {
             searcher = DefaultSearcher.newSearcher();
         } catch (QueryException e) {
-            log.error("Could not create searcher.");
-            throw new SearchException("Could not create searcher.", e);
+            String message = "Could not create searcher for parameters: " + parameters;
+            throw new SearchException(message, e);
         }
-        searcher.withResultFilter(
-                SearchResultFilter.create()
+        searcher.withResultFilter(SearchResultFilter.create()
                         .withResultSetRange(parameters.getStartIndex(),
                                 parameters.getStartIndex() + parameters.getCount()
                         )

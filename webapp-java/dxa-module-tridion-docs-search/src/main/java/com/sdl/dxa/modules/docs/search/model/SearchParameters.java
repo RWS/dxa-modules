@@ -2,11 +2,13 @@ package com.sdl.dxa.modules.docs.search.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import lombok.ToString;
 
 /**
  * Search Parameters represents data structure used in requests to search.
  */
 @Data
+@ToString
 public class SearchParameters {
     private static final String DEFAULT_LANGUAGE = "en";
     private static final Integer DEFAULT_START_INDEX = 0;
