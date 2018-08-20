@@ -38,7 +38,7 @@ public class IshDynamicNavigationProvider extends DynamicNavigationProvider {
     public IshDynamicNavigationProvider(StaticNavigationProvider staticNavigationProvider,
                                         LinkResolver linkResolver,
                                         NavigationModelProvider navigationModelProvider,
-                                        @Qualifier("dynamicNavigationModelProviderImpl")
+                                        @Qualifier("ishDynamicNavigationModelProvider")
                                         OnDemandNavigationModelProvider onDemandNavigationModelProvider) {
         super(staticNavigationProvider, linkResolver, navigationModelProvider, onDemandNavigationModelProvider);
     }

@@ -53,8 +53,8 @@ public class MainController {
     /**
      * Home page.
      *
-     * @param request
-     * @return
+     * @param request   Http request
+     * @return          Home page for Docs (all the publications)
      */
     @RequestMapping(
             value = {"/home", "/publications/**"},
@@ -69,8 +69,8 @@ public class MainController {
      * Home page.
      *
      * @param publicationId Publication id
-     * @param request
-     * @return
+     * @param request       Http request
+     * @return  Publication home page content
      */
     @RequestMapping(
             value = "/{publicationId:[\\d]+}",
@@ -86,8 +86,8 @@ public class MainController {
      *
      * @param publicationId Publication id
      * @param pageId        Page id
-     * @param request
-     * @return
+     * @param request       Http request
+     * @return content of the page
      */
     @RequestMapping(
             value = "/{publicationId:[\\d]+}/{pageId}/**",

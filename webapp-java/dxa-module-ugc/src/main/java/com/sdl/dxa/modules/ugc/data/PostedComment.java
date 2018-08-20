@@ -13,14 +13,14 @@ public class PostedComment {
     private int publicationId;
     @JsonProperty("pageId")
     private int pageId;
-    @JsonProperty("userName")
+    @JsonProperty("username")
     private String userName;
     @JsonProperty("email")
     private String email;
     @JsonProperty("content")
     private String content;
     @JsonProperty("parentId")
-    private int parentId = 0;
+    private String parentId = "0";
     @JsonProperty("publicationTitle")
     private String publicationTitle;
     @JsonProperty("formUrl")

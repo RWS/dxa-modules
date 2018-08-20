@@ -1,0 +1,40 @@
+﻿﻿@model DynamicWidget
+
+<div class="rich-text @Model.HtmlClasses" @Html.DxaEntityMarkup()>
+
+    @if (Model.Topics != null && Model.Topics.Any())
+    {
+        var lastId = Model.Topics.Last().Id;
+
+        foreach (Topic topic in Model.Topics)
+        {
+            if (Model.DisplayContentAs.ToLower() == "embedded content")
+            {
+                <div class="content">
+                    <div @Html.DxaPropertyMarkup(() => Model.Topics)>
+                        @Html.Raw(@topic.Body)
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div @Html.DxaPropertyMarkup(() => Model.Topics)>
+                    <a href="@topic.Link">@topic.Title</a>
+                </div>
+
+            }
+            if (@topic.Id != lastId)
+            {
+                <br />
+            }
+        }
+    }
+    else
+    {
+        if (WebRequestContext.Localization.IsXpmEnabled)
+        {
+            <span>&nbsp;</span>
+        }
+    }
+
+</div>

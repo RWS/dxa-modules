@@ -82,8 +82,9 @@ public class IshController {
      * @param publicationId Publication id
      * @param pageId        Page id
      * @param request       Http request
+     * @param response      Http response
      * @return Page model using the json format.
-     * @throws ContentProviderException
+     * @throws ContentProviderException if page model cannot be fetched
      */
     @RequestMapping(method = {GET, POST}, value = "/api/page/{publicationId}/{pageId}/**",
             produces = {APPLICATION_JSON_VALUE})
@@ -119,8 +120,8 @@ public class IshController {
      * @param publicationId Publication id
      * @param binaryId      Binary id
      * @return Binary data using a stream.
-     * @throws ContentProviderException
-     * @throws IOException
+     * @throws ContentProviderException if page model cannot be fetched
+     * @throws IOException if something wrong with tomcat response channel
      */
     @RequestMapping(method = GET, value = "/binary/{publicationId}/{binaryId}/**",
             produces = MediaType.ALL_VALUE)
@@ -142,7 +143,7 @@ public class IshController {
      * Get list of publications using the json format.
      *
      * @return Publications list using the json format.
-     * @throws IshServiceException
+     * @throws IshServiceException if publications cannot be fetched
      */
     @RequestMapping(method = GET, value = "/api/publications", produces = {APPLICATION_JSON_VALUE})
     @ResponseBody
@@ -202,7 +203,7 @@ public class IshController {
      *                      which is reference number of topic. This reference is common for a topic,
      *                      which is used in different publications
      * @return Integer pageId of a topic in target publication
-     * @throws ContentProviderException
+     * @throws ContentProviderException if topic cannot be fetched
      */
     @RequestMapping(method = {GET, POST}, value = "/api/pageIdByReference/{publicationId}/{ishFieldValue}",
             produces = {APPLICATION_JSON_VALUE})

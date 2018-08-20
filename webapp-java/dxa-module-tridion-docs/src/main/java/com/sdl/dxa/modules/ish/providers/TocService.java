@@ -1,13 +1,12 @@
 package com.sdl.dxa.modules.ish.providers;
 
-import com.google.common.base.Strings;
 import com.google.common.primitives.Ints;
 import com.sdl.dxa.modules.ish.localization.IshLocalization;
+import com.sdl.dxa.modules.ish.model.YesNo;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.model.entity.SitemapItem;
 import com.sdl.webapp.common.api.navigation.NavigationFilter;
 import com.sdl.webapp.common.api.navigation.OnDemandNavigationProvider;
-import com.tridion.smarttarget.entitymodel.client.YesNo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.List;
 
 import static com.sdl.webapp.common.api.serialization.json.filter.IgnoreByNameInRequestFilter.ignoreByName;
@@ -61,12 +59,17 @@ public class TocService {
             //order should be t1-k2 t1-k3 t1-k10 then t2-k5 (so numbers after 'k')
             int firstPartCompareResult = getPart(YesNo.YES, o1).compareTo(getPart(YesNo.YES, o2));
             if (firstPartCompareResult != 0) return firstPartCompareResult;
-            return getPart(YesNo.NO, o1).compareTo(getPart(YesNo.NO, o2));
+            Integer second_part1 = getPart(YesNo.NO, o1);
+            Integer second_part2 = getPart(YesNo.NO, o2);
+            if (second_part1 == null && second_part2 == null) return 0;
+            if (second_part1 == null) return -1;
+            if (second_part2 == null) return 1;
+            return second_part1.compareTo(second_part2);
         });
         return navigationSubtree;
     }
 
     private Integer getPart(YesNo firstPart, SitemapItem item) {
-        return Ints.tryParse(item.getId().replaceAll("^t(\\d++)-k(\\d++)$", firstPart == YesNo.YES ? "$1" : "$2"));
+        return Ints.tryParse(item.getId().replaceAll("^t(\\d++)(-k(\\d++))?$", firstPart == YesNo.YES ? "$1" : "$3"));
     }
 }

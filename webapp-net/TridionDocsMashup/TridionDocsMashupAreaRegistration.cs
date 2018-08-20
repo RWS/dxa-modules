@@ -1,4 +1,6 @@
-﻿using Sdl.Web.Modules.TridionDocsMashup.Models;
+﻿using Sdl.Web.Common.Models;
+using Sdl.Web.Modules.TridionDocsMashup.Models.Widgets;
+using Sdl.Web.Modules.TridionDocsMashup.Models.Products;
 using Sdl.Web.Mvc.Configuration;
 
 namespace Sdl.Web.Modules.TridionDocsMashup
@@ -9,8 +11,14 @@ namespace Sdl.Web.Modules.TridionDocsMashup
 
         protected override void RegisterAllViewModels()
         {
-            RegisterViewModel("DocsContent", typeof(DocsContent), "TridionDocsMashup");
-            RegisterViewModel("DocsContentViewModel", typeof(DocsContentViewModel), "TridionDocsMashup");
+            RegisterViewModel("StaticWidget", typeof(StaticWidget), "TridionDocsMashup");
+            RegisterViewModel("DynamicWidget", typeof(DynamicWidget), "TridionDocsMashup");
+
+            // Product Views
+            RegisterViewModel("Bicycle", typeof(Bicycle));
+
+            // Region Views
+            RegisterViewModel("DynamicWidget", typeof(RegionModel));
         }
     }
 }

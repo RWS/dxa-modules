@@ -12,7 +12,7 @@
         function validateTheForm() {
             $('#errorsInForm').hide();
             var errorsPresented = false;
-            if (!$('#userName').val() || $('#userName').val() == '') {
+            if (!$('#username').val() || $('#username').val() == '') {
                 $('#userNameEmpty').show();
                 errorsPresented = true;
             } else $('#userNameEmpty').hide();
@@ -92,7 +92,7 @@
             </div>
 
         <div class="form-group">
-            <form:input path="userName" placeholder="${entity.userNameLabel}" cssClass="form-control"/>
+            <form:input path="username" placeholder="${entity.userNameLabel}" cssClass="form-control"/>
         </div>
         <div class="form-group">
             <form:input path="email" placeholder="${entity.emailAddressLabel}" cssClass="form-control"/>
