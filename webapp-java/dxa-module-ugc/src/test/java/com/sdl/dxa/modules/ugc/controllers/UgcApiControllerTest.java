@@ -83,13 +83,13 @@ public class UgcApiControllerTest {
         User user= mock(User.class);
 
         when(postedComment.getUserName()).thenReturn(USER_NAME);
-        when(postedComment.getEmailAddress()).thenReturn(USER_EMAIL);
+        when(postedComment.getEmail()).thenReturn(USER_EMAIL);
         when(postedComment.getContent()).thenReturn(COMMENT_TEXT);
         when(comment.getUser()).thenReturn(user);
         when(user.getName()).thenReturn(USER_NAME);
         when(user.getEmailAddress()).thenReturn(USER_EMAIL);
         when(comment.getContent()).thenReturn(COMMENT_TEXT);
-
+        when(postedComment.getParentId()).thenReturn("0");
 
         //when
         Comment result = ugcApiController.postComment(postedComment);

@@ -4,6 +4,8 @@ import com.sdl.delivery.ugc.client.comment.UgcCommentApi;
 import com.sdl.delivery.ugc.client.comment.impl.SimpleCommentsFilter;
 import com.sdl.dxa.modules.ugc.data.Comment;
 import com.sdl.dxa.modules.ugc.data.User;
+import com.sdl.dxa.modules.ugc.exceptions.CannotFetchCommentsException;
+import com.sdl.dxa.modules.ugc.exceptions.CannotProcessCommentException;
 import com.sdl.web.ugc.Status;
 import com.sdl.webapp.common.util.TcmUtils;
 import com.tridion.ambientdata.AmbientDataContext;
@@ -57,7 +59,12 @@ public class UgcService {
                 .withDepth(maximumThreadsDepth)
                 .withStatuses(statusStatuses);
 
-        return convert(ugcCommentApi.retrieveThreadedComments(TcmUtils.buildPageTcmUri(publicationId, pageId), filter, descending, true));
+        String pageTcmUri = TcmUtils.buildPageTcmUri(publicationId, pageId);
+        try {
+            return convert(ugcCommentApi.retrieveThreadedComments(pageTcmUri, filter, descending, true));
+        } catch (Exception ex) {
+            throw new CannotFetchCommentsException("Cannot fetch comments for " + pageTcmUri, ex);
+        }
     }
 
     /**
@@ -74,7 +81,14 @@ public class UgcService {
      */
     public Comment postComment(int publicationId, int pageId, String username, String email, String content,
                                int parentId, Map<String, String> metadata) {
-
+        if (publicationId == 0 || pageId == 0) {
+            log.warn("Cannot post comment for empty/NaN publicationId/pageId");
+            return null;
+        }
+        if (publicationId < 0 || pageId < 0) {
+            log.warn("Cannot post comment for negative publicationId/pageId");
+            throw new CannotProcessCommentException("Cannot post comment for negative publicationId/pageId");
+        }
         try {
             final ClaimStore claimStore = AmbientDataContext.getCurrentClaimStore();
             if (claimStore != null) {
@@ -84,8 +98,12 @@ public class UgcService {
         } catch (URISyntaxException e) {
             log.error("Error while Storing Claims", e);
         }
-        return convert(
-                ugcCommentApi.postComment(TcmUtils.buildPageTcmUri(publicationId, pageId), username, email, content, parentId, metadata));
+        String pageTcmUri = TcmUtils.buildPageTcmUri(publicationId, pageId);
+        try {
+            return convert(ugcCommentApi.postComment(pageTcmUri, username, email, content, parentId, metadata));
+        } catch (Exception ex) {
+            throw new CannotProcessCommentException("Cannot post comment for " + pageTcmUri, ex);
+        }
     }
 
     private List<Comment> convert(List<com.sdl.delivery.ugc.client.odata.edm.Comment> comments) {
@@ -97,7 +115,7 @@ public class UgcService {
 
     private Comment convert(com.sdl.delivery.ugc.client.odata.edm.Comment comment) {
         if (comment == null) {
-            return null;
+            throw new CannotProcessCommentException("Comment cannot be converted: " + comment);
         }
         final Comment c = new Comment();
         c.setId(comment.getIdLong());
@@ -114,19 +132,25 @@ public class UgcService {
             c.setUser(convert(comment.getUser()));
         }
         if (comment.getCreationDate() != null) {
-            c.setCreationDate(convert(comment.getCreationDate()));
+            c.setCreationDate(comment.getCreationDate());
+            c.setCreationDateTime(convert(comment.getCreationDate()));
         }
         if (comment.getLastModifiedDate() != null) {
-            c.setLastModifiedDate(convert(comment.getLastModifiedDate()));
+            c.setLastModifiedDate(comment.getLastModifiedDate());
+            c.setLastModifiedDateTime(convert(comment.getLastModifiedDate()));
         }
         c.setChildren(convert(comment.getChildren()));
 
         return c;
     }
 
-    private DateTime convert(ZonedDateTime zonedDateTime) {
-        return  new DateTime(
-                zonedDateTime.toInstant().toEpochMilli(),
+    /**
+     * Converts joda ZonedDateTime to util DateTime.
+     * @param zonedDateTime
+     * @return
+     */
+    public DateTime convert(ZonedDateTime zonedDateTime) {
+        return new DateTime(zonedDateTime.toInstant().toEpochMilli(),
                 DateTimeZone.forTimeZone(TimeZone.getTimeZone(zonedDateTime.getZone())));
     }
 

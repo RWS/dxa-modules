@@ -36,7 +36,9 @@ task buildModules(type: MavenBuildTask) {
                     "dxa-module-mediamanager",
                     "dxa-module-search",
                     "dxa-module-51degrees",
-                    "dxa-module-ugc"
+                    "dxa-module-ugc",
+                    "dxa-module-tridion-docs",
+                    "dxa-module-tridion-docs-search"
             ],
             ["dxa-module-test"]
     ]

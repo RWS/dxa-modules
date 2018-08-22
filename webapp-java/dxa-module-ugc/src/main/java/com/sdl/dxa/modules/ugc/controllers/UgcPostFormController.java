@@ -52,10 +52,10 @@ public class UgcPostFormController {
         }
         log.trace("Comment Form for {} complete and valid",form.getTarget());
 
-        ugcService.postComment(form.getTarget().getPublicationId(), form.getTarget().getItemId(), form.getUserName(),
-                form.getEmailAddress(), form.getContent(), form.getParentId(), form.getMetadata());
+        ugcService.postComment(form.getTarget().getPublicationId(), form.getTarget().getItemId(), form.getUsername(),
+                form.getEmail(), form.getContent(), form.getParentId(), form.getMetadata());
 
-        log.trace("Comment on {} by {} posted succesful", form.getTarget(),form.getUserName());
+        log.trace("Comment on {} by {} posted succesful", form.getTarget(),form.getUsername());
         return REDIRECT_PREFIX + form.getFormUrl();
     }
 

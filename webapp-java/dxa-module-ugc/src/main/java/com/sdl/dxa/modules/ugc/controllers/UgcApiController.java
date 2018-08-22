@@ -1,18 +1,24 @@
 package com.sdl.dxa.modules.ugc.controllers;
 
+import com.google.common.primitives.Ints;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.sdl.dxa.modules.ugc.UgcService;
 import com.sdl.dxa.modules.ugc.data.Comment;
 import com.sdl.dxa.modules.ugc.data.PostedComment;
 import com.sdl.dxa.modules.ugc.data.PubIdTitleLang;
-import com.sdl.webapp.common.controller.BaseController;
+import com.sdl.dxa.modules.ugc.exceptions.CannotFetchCommentsException;
+import com.sdl.dxa.modules.ugc.exceptions.CannotProcessCommentException;
+import com.sdl.webapp.common.controller.ControllerUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +33,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @Controller
 @RequestMapping(value = {"/api/comments", "/{path}/api/comments"})
 @Slf4j
-public class UgcApiController extends BaseController {
+public class UgcApiController {
 
     @Autowired
     private UgcService ugcService;
@@ -80,6 +86,9 @@ public class UgcApiController extends BaseController {
             consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Comment postComment(@RequestBody PostedComment input) {
+        if (input.getParentId() == null) {
+            throw new CannotProcessCommentException("Please provide parentId or 0");
+        }
         Map<String, String> metadata = new HashMap<>();
         metadata.put("publicationTitle", input.getPublicationTitle());
         metadata.put("publicationUrl", input.getPublicationUrl());
@@ -93,11 +102,23 @@ public class UgcApiController extends BaseController {
         Comment comment = ugcService.postComment(input.getPublicationId(),
                 input.getPageId(),
                 input.getUserName(),
-                input.getEmailAddress(),
+                input.getEmail(),
                 input.getContent(),
-                input.getParentId(),
+                Ints.tryParse(input.getParentId()),
                 metadata);
         return comment;
+    }
+
+    @ExceptionHandler({CannotProcessCommentException.class, CannotFetchCommentsException.class})
+    public String handleException(HttpServletRequest request, HttpServletResponse response, Exception exception) throws IOException {
+        ResponseStatus annotation = exception.getClass().getAnnotation(ResponseStatus.class);
+        if (annotation != null) {
+            int code = annotation.value().value();
+            response.sendError(code, annotation.reason() + " (" + exception.getMessage() + ")");
+            return null;
+        }
+        log.error("Exception while processing request for: {}", request.getRequestURL(), exception);
+        return ControllerUtils.SECTION_ERROR_VIEW;
     }
 
     private void addPubIdTitleLangToCommentMetadata(@RequestBody PostedComment input, Map<String, String> metadata) {

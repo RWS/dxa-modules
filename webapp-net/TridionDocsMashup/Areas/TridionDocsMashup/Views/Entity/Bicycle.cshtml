@@ -1,0 +1,19 @@
+﻿﻿@model Bicycle
+
+<div class="rich-text @Model.HtmlClasses" @Html.DxaEntityMarkup()>
+
+    <h1>@Model.Title </h1>
+
+    <div class="content">
+
+        <div @Html.DxaPropertyMarkup(() => Model.Body)>
+            @Html.DxaRichText(Model.Body)
+        </div>
+        <br />
+        <div @Html.DxaPropertyMarkup(() => Model.Image)>
+            @Html.Media(Model.Image, "100%", 0)
+        </div>
+
+    </div>
+
+</div>
