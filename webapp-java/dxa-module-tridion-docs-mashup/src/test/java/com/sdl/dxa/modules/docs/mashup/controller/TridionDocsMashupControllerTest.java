@@ -3,7 +3,7 @@ package com.sdl.dxa.modules.docs.mashup.controller;
 import com.sdl.dxa.modules.docs.mashup.client.ITridionDocsClient;
 import com.sdl.dxa.modules.docs.mashup.models.widgets.StaticWidget;
 import com.sdl.dxa.modules.docs.mashup.models.widgets.Topic;
-import com.sdl.web.pca.client.exceptions.GraphQLClientException;
+import com.sdl.web.pca.client.exception.GraphQLClientException;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.api.model.KeywordModel;
