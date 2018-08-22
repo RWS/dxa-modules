@@ -48,7 +48,6 @@ public class TridionDocsMashupController extends EntityController {
 
             if (validateStaticWidget(staticWidget)) {
                 if (tridionDocsClient == null) {
-                    //tridionDocsClient = new TridionDocsClient(this.webRequestContext);
                     tridionDocsClient = new TridionDocsGraphQLClient(this.webRequestContext);
                 }
 

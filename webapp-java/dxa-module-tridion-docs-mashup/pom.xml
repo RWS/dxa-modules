@@ -11,8 +11,8 @@
     <groupId>com.sdl.dxa.modules</groupId>
     <artifactId>dxa-module-tridion-docs-mashup</artifactId>
 
-    <name>DXA Modules - Tridion Docs Content Mashup</name>
-    <description>Implementation of DXA Tridion Docs Content Mashup module</description>
+    <name>DXA Modules - Tridion Docs Mashup</name>
+    <description>Implementation of DXA Tridion Docs Mashup module</description>
 	
     <properties>
         <dxa.version>${project.version}</dxa.version>
