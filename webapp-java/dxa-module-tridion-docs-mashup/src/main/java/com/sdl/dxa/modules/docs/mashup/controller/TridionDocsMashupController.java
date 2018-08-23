@@ -49,7 +49,7 @@ public class TridionDocsMashupController extends EntityController {
         if (enrichedModel instanceof StaticWidget) {
             StaticWidget staticWidget = (StaticWidget) enrichedModel;
 
-            if (validateWidget(staticWidget.getKeywords(), staticWidget.getMaxItems())) {
+            if (validate(staticWidget.getKeywords(), staticWidget.getMaxItems())) {
                 if (tridionDocsClient == null) {
                     tridionDocsClient = new TridionDocsGraphQLClient(this.webRequestContext);
                 }
@@ -84,7 +84,7 @@ public class TridionDocsMashupController extends EntityController {
                             // But we only collect those keywords specified in the dynamicWidget.Keywords .
                             // Then we are ready to get TridionDocs topics by the keywords values .
 
-                            if (validateWidget(product.getKeywords(), dynamicWidget.getMaxItems())) {
+                            if (validate(product.getKeywords(), dynamicWidget.getMaxItems())) {
                                 Map<String, KeywordModel> keywords = new HashMap<>();
 
                                 for (Map.Entry<String, KeywordModel> entry : dynamicWidget.getKeywords().entrySet()) {
@@ -115,7 +115,7 @@ public class TridionDocsMashupController extends EntityController {
         return model;
     }
 
-    private Boolean validateWidget(Map<String, KeywordModel> keywords, Integer maxItems) throws ValidationException {
+    private Boolean validate(Map<String, KeywordModel> keywords, Integer maxItems) throws ValidationException {
         if (maxItems == null || maxItems < 1) {
             return false;
         }
