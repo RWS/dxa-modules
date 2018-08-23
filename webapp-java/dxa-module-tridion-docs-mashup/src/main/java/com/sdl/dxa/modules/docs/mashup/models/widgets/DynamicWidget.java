@@ -16,11 +16,11 @@ import java.util.Map;
 @SemanticEntity(entityName = "Content")
 public class DynamicWidget extends AbstractEntityModel {
 
+    @SemanticProperty("Keywords")
+    private List<String> keywords;
+
     @SemanticProperty("ProductViewModel")
     private String productViewModel;
-
-    @SemanticProperty("_all")
-    private Map<String, KeywordModel> keywords;
 
     @SemanticProperty("DisplayContentAs")
     private String displayContentAs;
@@ -39,11 +39,11 @@ public class DynamicWidget extends AbstractEntityModel {
         this.productViewModel = productViewModel;
     }
 
-    public Map<String, KeywordModel> getKeywords() {
+    public List<String> getKeywords() {
         return keywords;
     }
 
-    public void setKeywords(Map<String, KeywordModel> keywords) {
+    public void setKeywords(List<String> keywords) {
         this.keywords = keywords;
     }
 
