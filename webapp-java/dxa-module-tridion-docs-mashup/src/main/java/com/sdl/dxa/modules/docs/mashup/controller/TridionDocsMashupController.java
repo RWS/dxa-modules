@@ -87,8 +87,8 @@ public class TridionDocsMashupController extends EntityController {
                             if (validate(product.getKeywords(), dynamicWidget.getMaxItems())) {
                                 Map<String, KeywordModel> keywords = new HashMap<>();
 
-                                for (Map.Entry<String, KeywordModel> entry : dynamicWidget.getKeywords().entrySet()) {
-                                    Optional<Map.Entry<String, KeywordModel>> result = product.getKeywords().entrySet().stream().filter((s) -> s.getKey().contains("." + entry.getKey() + ".")).findFirst();
+                                for (String entry : dynamicWidget.getKeywords()) {
+                                    Optional<Map.Entry<String, KeywordModel>> result = product.getKeywords().entrySet().stream().filter((s) -> s.getKey().contains("." + entry + ".")).findFirst();
 
                                     if (result.isPresent()) {
                                         Map.Entry<String, KeywordModel> keyword = result.get();
@@ -103,6 +103,7 @@ public class TridionDocsMashupController extends EntityController {
                                     topics = tridionDocsClient.getTopics(keywords, dynamicWidget.getMaxItems());
                                 }
                             }
+
                             break;
                         }
                     }
