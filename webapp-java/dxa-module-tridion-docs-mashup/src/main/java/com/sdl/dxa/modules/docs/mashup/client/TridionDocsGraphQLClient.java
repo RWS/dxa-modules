@@ -51,8 +51,6 @@ public class TridionDocsGraphQLClient implements ITridionDocsClient {
 
     @Override
     public List<Topic> getTopics(Map<String, KeywordModel> keywords, int maxItems) throws GraphQLClientException, IOException {
-        List<Topic> topics = new ArrayList<>();
-
         String language = getCurrentLanguage();
         String query = getQuery(keywords, language, maxItems);
 
@@ -70,7 +68,7 @@ public class TridionDocsGraphQLClient implements ITridionDocsClient {
             throw new UnexpectedException(error.getMessage());
         }
 
-        topics = mapper.readValue(jsonResponse, List.class);
+        List<Topic> topics = mapper.readValue(jsonResponse, List.class);
 
         if (topics == null || topics.isEmpty()) {
 
