@@ -22,7 +22,7 @@ public interface ITridionDocsClient  {
      * 
      * @param keywords a collection of keywords to filter the topics
      * @param maxItems maximum number of topics to be displayed
-     * @throws com.sdl.web.pca.client.exceptions.GraphQLClientException
+     * @throws com.sdl.web.pca.client.exception.GraphQLClientException
      * @throws java.io.IOException
      */
     
