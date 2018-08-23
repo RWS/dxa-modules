@@ -18,7 +18,6 @@ import com.sdl.webapp.common.util.InitializationUtils;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.rmi.UnexpectedException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +29,7 @@ import java.util.regex.Pattern;
  * the related logic and codes for creating and performing the query and and
  * processing the results
  */
+@SuppressWarnings("unchecked")
 public class TridionDocsGraphQLClient implements ITridionDocsClient {
 
     private TridionDocsClientConfig _clientConfig;
