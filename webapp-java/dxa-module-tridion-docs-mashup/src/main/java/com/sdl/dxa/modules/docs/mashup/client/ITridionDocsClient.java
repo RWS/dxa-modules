@@ -1,7 +1,7 @@
 package com.sdl.dxa.modules.docs.mashup.client;
 
 import com.sdl.dxa.modules.docs.mashup.models.widgets.Topic;
-import com.sdl.web.pca.client.exception.GraphQLClientException;
+import com.sdl.web.pca.client.exceptions.GraphQLClientException;
 import com.sdl.webapp.common.api.model.KeywordModel;
 import java.io.IOException;
 import java.util.List;

@@ -11,7 +11,7 @@ import com.sdl.dxa.modules.docs.mashup.models.widgets.Topic;
 import com.sdl.web.client.configuration.api.ConfigurationException;
 import com.sdl.web.pca.client.DefaultGraphQLClient;
 import com.sdl.web.pca.client.GraphQLClient;
-import com.sdl.web.pca.client.exception.GraphQLClientException;
+import com.sdl.web.pca.client.exceptions.GraphQLClientException;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.model.KeywordModel;
 import com.sdl.webapp.common.util.InitializationUtils;
