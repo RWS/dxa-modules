@@ -5,7 +5,7 @@ import com.sdl.dxa.modules.docs.mashup.models.products.Product;
 import com.sdl.dxa.modules.docs.mashup.models.widgets.DynamicWidget;
 import com.sdl.dxa.modules.docs.mashup.models.widgets.StaticWidget;
 import com.sdl.dxa.modules.docs.mashup.models.widgets.Topic;
-import com.sdl.web.pca.client.exceptions.GraphQLClientException;
+import com.sdl.web.pca.client.exception.GraphQLClientException;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.api.model.*;
