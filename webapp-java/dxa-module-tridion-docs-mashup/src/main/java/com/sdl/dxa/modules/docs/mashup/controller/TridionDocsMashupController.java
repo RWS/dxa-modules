@@ -11,10 +11,7 @@ import com.sdl.webapp.common.api.model.ViewModel;
 import com.sdl.webapp.common.controller.ControllerUtils;
 import com.sdl.webapp.common.controller.EntityController;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.regex.Pattern;
 
 import lombok.extern.slf4j.Slf4j;
@@ -52,42 +49,42 @@ public class TridionDocsMashupController extends EntityController {
         if (enrichedModel instanceof StaticWidget) {
             StaticWidget staticWidget = (StaticWidget) enrichedModel;
 
-            if (validateStaticWidget(staticWidget)) {
+            if (validateWidget(staticWidget.getKeywords(), staticWidget.getMaxItems())) {
                 if (tridionDocsClient == null) {
                     tridionDocsClient = new TridionDocsGraphQLClient(this.webRequestContext);
                 }
-                
+
                 List<Topic> topics = tridionDocsClient.getTopics(staticWidget.getKeywords(), staticWidget.getMaxItems());
 
                 staticWidget.setTopics(topics);
             }
-        }
-        else if(enrichedModel instanceof DynamicWidget) {
+        } else if (enrichedModel instanceof DynamicWidget) {
             DynamicWidget dynamicWidget = (DynamicWidget) enrichedModel;
 
-            if (validateDynamicWidget(dynamicWidget)) {
-                if (tridionDocsClient == null) {
-                    tridionDocsClient = new TridionDocsGraphQLClient(this.webRequestContext);
-                }
+            List<Topic> topics = new ArrayList<>();
 
-                // There are multiple regions in a page.
-                // Each region contains entities and every entity has a view.
-                // We are looking for a product entity by its view name which is specified in the dynamicWidget.ProductViewModel .
+            if (tridionDocsClient == null) {
+                tridionDocsClient = new TridionDocsGraphQLClient(this.webRequestContext);
+            }
 
-                for (RegionModel regionModel : this.webRequestContext.getPage().getRegions()) {
-                    List<EntityModel> entities = regionModel.getEntities();
+            // There are multiple regions in a page.
+            // Each region contains entities and every entity has a view.
+            // We are looking for a product entity by its view name which is specified in the dynamicWidget.ProductViewModel .
+            for (RegionModel regionModel : this.webRequestContext.getPage().getRegions()) {
+                List<EntityModel> entities = regionModel.getEntities();
 
-                    if (entities != null) {
-                        Optional<EntityModel> entity = entities.stream().filter((s) -> s.getMvcData().getViewName().equals(dynamicWidget.getProductViewModel())).findFirst();
+                if (entities != null) {
+                    Optional<EntityModel> entity = entities.stream().filter((s) -> s.getMvcData().getViewName().equals(dynamicWidget.getProductViewModel())).findFirst();
 
-                        if (entity.isPresent()) {
-                            Product product = (Product) entity.get();
+                    if (entity.isPresent()) {
+                        Product product = (Product) entity.get();
 
-                            if (product != null && product.getKeywords() != null) {
-                                // When the product entity is found, we get its keywords.
-                                // But we only collect those keywords specified in the dynamicWidget.Keywords .
-                                // Then we are ready to get TridionDocs topics by the keywords values .
+                        if (product != null && product.getKeywords() != null) {
+                            // When the product entity is found, we get its keywords.
+                            // But we only collect those keywords specified in the dynamicWidget.Keywords .
+                            // Then we are ready to get TridionDocs topics by the keywords values .
 
+                            if (validateWidget(product.getKeywords(), dynamicWidget.getMaxItems())) {
                                 Map<String, KeywordModel> keywords = new HashMap<>();
 
                                 for (Map.Entry<String, KeywordModel> entry : dynamicWidget.getKeywords().entrySet()) {
@@ -101,26 +98,21 @@ public class TridionDocsMashupController extends EntityController {
                                         }
                                     }
                                 }
+
+                                if (!keywords.isEmpty()) {
+                                    topics = tridionDocsClient.getTopics(keywords, dynamicWidget.getMaxItems());
+                                }
                             }
+                            break;
                         }
                     }
                 }
-
-                List<Topic> topics = tridionDocsClient.getTopics(dynamicWidget.getKeywords(), dynamicWidget.getMaxItems());
-
-                dynamicWidget.setTopics(topics);
             }
+
+            dynamicWidget.setTopics(topics);
         }
 
         return model;
-    }
-
-    private Boolean validateStaticWidget(StaticWidget staticWidget) throws ValidationException {
-        return validateWidget(staticWidget.getKeywords(), staticWidget.getMaxItems());
-    }
-
-    private Boolean validateDynamicWidget(DynamicWidget dynamicWidget) throws ValidationException {
-        return validateWidget(dynamicWidget.getKeywords(), dynamicWidget.getMaxItems());
     }
 
     private Boolean validateWidget(Map<String, KeywordModel> keywords, Integer maxItems) throws ValidationException {

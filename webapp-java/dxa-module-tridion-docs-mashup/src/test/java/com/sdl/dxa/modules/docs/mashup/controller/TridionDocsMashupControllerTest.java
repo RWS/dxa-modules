@@ -114,9 +114,15 @@ public class TridionDocsMashupControllerTest {
         when(page.getRegions()).thenReturn(regionModelSet);
         when(webRequestContext.getPage()).thenReturn(page);
 
+        Map<String, KeywordModel> keywords = new HashMap<>();
+
+        KeywordModel CONTENTREFTYPE = new KeywordModel();
+        CONTENTREFTYPE.setId("1");
+        keywords.put("FMBCONTENTREFTYPE", CONTENTREFTYPE);
+
         DynamicWidget dynamicWidget = new DynamicWidget();
         dynamicWidget.setProductViewModel(PRODUCT_VIEW_MODEL);
-        dynamicWidget.setKeywords(getTestKeywords());
+        dynamicWidget.setKeywords(keywords);
         dynamicWidget.setMaxItems(10);
 
         //when
