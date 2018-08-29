@@ -11,6 +11,7 @@ import com.sdl.dxa.modules.core.model.entity.Place;
 import com.sdl.dxa.modules.core.model.entity.TagLinkList;
 import com.sdl.dxa.modules.core.model.entity.Teaser;
 import com.sdl.dxa.modules.core.model.entity.YouTubeVideo;
+import com.sdl.dxa.modules.core.model.region.MultiColumnRegion;
 import com.sdl.webapp.common.api.mapping.views.AbstractModuleInitializer;
 import com.sdl.webapp.common.api.mapping.views.ModuleInfo;
 import com.sdl.webapp.common.api.mapping.views.RegisteredViewModel;
@@ -64,6 +65,11 @@ public class CoreInitializer {
             @RegisteredViewModel(viewName = "2-Column", modelClass = RegionModelImpl.class),
             @RegisteredViewModel(viewName = "3-Column", modelClass = RegionModelImpl.class),
             @RegisteredViewModel(viewName = "4-Column", modelClass = RegionModelImpl.class),
+            @RegisteredViewModel(viewName = "Multi-Column", modelClass = MultiColumnRegion.class),
+            @RegisteredViewModel(viewName = "Additional", modelClass = RegionModelImpl.class),
+            @RegisteredViewModel(viewName = "Article", modelClass = RegionModelImpl.class),
+            @RegisteredViewModel(viewName = "Content", modelClass = RegionModelImpl.class),
+            @RegisteredViewModel(viewName = "Main Section", modelClass = RegionModelImpl.class),
             @RegisteredViewModel(viewName = "Hero", modelClass = RegionModelImpl.class),
             @RegisteredViewModel(viewName = "Info", modelClass = RegionModelImpl.class),
             @RegisteredViewModel(viewName = "Left", modelClass = RegionModelImpl.class),
