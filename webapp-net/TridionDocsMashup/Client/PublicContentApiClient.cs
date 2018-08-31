@@ -8,6 +8,7 @@ using Sdl.Web.PublicContentApi.ContentModel;
 using System.Collections.Generic;
 using System.Linq;
 using Sdl.Web.Modules.TridionDocsMashup.Models.Widgets;
+using System;
 
 namespace Sdl.Web.Modules.TridionDocsMashup.Client
 {
