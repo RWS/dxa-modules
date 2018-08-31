@@ -32,7 +32,7 @@
                  {
     %>
                     <div ${markup.property(entity, "Topics")}>
-                      <a href="<%= topic.getLink() %>"><%= topic.getTitle()%></a>
+                        <a href="<%= topic.getLink() %>" target="_blank"><%= topic.getTitle()%></a>
                     </div>
     <%
                  }
