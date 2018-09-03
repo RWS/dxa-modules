@@ -31,6 +31,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.sdl.dxa.modules</groupId>
+            <artifactId>dxa-module-tridion-docs-common</artifactId>
+            <version>${dxa.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.sdl.delivery</groupId>
             <artifactId>udp-iq-query-client</artifactId>
             <version>${cd-cil.version}</version>
