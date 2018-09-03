@@ -41,15 +41,7 @@ public class TopicDeserializer extends StdDeserializer<List<Topic>> {
                 Topic topic = new Topic();
                 String id = edge.findValue("containerItems").findValue("Component").get("Id").asText();
                 String title = edge.findValue("containerItems").findValue("topicTitle").get("Values").path(0).asText();
-                String link = edge.findValue("url").asText();
-
-                if (link != null) {
-                    URI uri = URI.create(link);
-
-                    if ((uri.getHost() == null || uri.getHost().isEmpty()) && !link.startsWith("/")) {
-                        link = "/" + link;
-                    }
-                }
+                String link = getLink(edge.findValue("url").asText());
 
                 String body = edge.findValue("containerItems").findValue("topicBody").get("Values").path(0).asText();
 
@@ -64,5 +56,17 @@ public class TopicDeserializer extends StdDeserializer<List<Topic>> {
         }
 
         return topics;
+    }
+
+    public String getLink(String link){
+        if (link != null && !link.isEmpty()) {
+            URI uri = URI.create(link);
+
+            if ((uri.getHost() == null || uri.getHost().isEmpty()) && !link.startsWith("/")) {
+                link = "/" + link;
+            }
+        }
+
+        return link;
     }
 }
