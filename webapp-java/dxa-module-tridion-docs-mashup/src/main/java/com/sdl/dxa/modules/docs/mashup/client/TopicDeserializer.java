@@ -9,6 +9,7 @@ import com.sdl.dxa.modules.docs.mashup.models.widgets.Topic;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.net.URI;
 
 /**
  *
@@ -40,7 +41,8 @@ public class TopicDeserializer extends StdDeserializer<List<Topic>> {
                 Topic topic = new Topic();
                 String id = edge.findValue("containerItems").findValue("Component").get("Id").asText();
                 String title = edge.findValue("containerItems").findValue("topicTitle").get("Values").path(0).asText();
-                String link = edge.findValue("url").asText();
+                String link = getLink(edge.findValue("url").asText());
+
                 String body = edge.findValue("containerItems").findValue("topicBody").get("Values").path(0).asText();
 
                 topic.setId(id);
@@ -54,5 +56,17 @@ public class TopicDeserializer extends StdDeserializer<List<Topic>> {
         }
 
         return topics;
+    }
+
+    public String getLink(String link){
+        if (link != null && !link.isEmpty()) {
+            URI uri = URI.create(link);
+
+            if ((uri.getHost() == null || uri.getHost().isEmpty()) && !link.startsWith("/")) {
+                link = "/" + link;
+            }
+        }
+
+        return link;
     }
 }

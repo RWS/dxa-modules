@@ -8,6 +8,7 @@ using Sdl.Web.PublicContentApi.ContentModel;
 using System.Collections.Generic;
 using System.Linq;
 using Sdl.Web.Modules.TridionDocsMashup.Models.Widgets;
+using System;
 
 namespace Sdl.Web.Modules.TridionDocsMashup.Client
 {
@@ -113,7 +114,18 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
                     if (page != null)
                     {
                         // Todo : the page.Url doesn't have the host name, UDP team is working on it :  https://jira.sdl.com/browse/UDP-4772
-                        var topic = new Topic() { Link = page.Url };
+
+                        var topic = new Topic();
+
+                        if (!string.IsNullOrEmpty(page.Url))
+                        {
+                            topic.Link = page.Url;
+
+                            if (Uri.CheckHostName(page.Url) == UriHostNameType.Unknown && !page.Url.StartsWith("/"))
+                            {
+                                topic.Link = "/" + page.Url;
+                            }
+                        }                                   
 
                         if (page.ContainerItems != null)
                         {
