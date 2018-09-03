@@ -5,7 +5,6 @@ import com.google.common.primitives.Ints;
 import com.sdl.dxa.api.datamodel.model.PageModelData;
 import com.sdl.dxa.common.util.PathUtils;
 import com.sdl.dxa.modules.ish.exception.IshServiceException;
-import com.sdl.dxa.modules.ish.localization.IshLocalization;
 import com.sdl.dxa.tridion.content.StaticContentResolver;
 import com.sdl.dxa.tridion.mapping.ModelBuilderPipeline;
 import com.sdl.dxa.tridion.mapping.impl.DefaultContentProvider;

@@ -1,7 +1,7 @@
 package com.sdl.dxa.modules.ish.providers;
 
 import com.google.common.primitives.Ints;
-import com.sdl.dxa.modules.ish.localization.IshLocalization;
+import com.sdl.dxa.modules.docs.localization.DocsLocalization;
 import com.sdl.dxa.modules.ish.model.YesNo;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.model.entity.SitemapItem;
@@ -43,7 +43,7 @@ public class TocService {
             throw new UnsupportedOperationException(message);
         }
 
-        IshLocalization localization = (IshLocalization) webRequestContext.getLocalization();
+        DocsLocalization localization = (DocsLocalization) webRequestContext.getLocalization();
         localization.setPublicationId(Integer.toString(publicationId));
 
         ignoreByName(request, "XpmMetadata", "XpmPropertyMetadata");

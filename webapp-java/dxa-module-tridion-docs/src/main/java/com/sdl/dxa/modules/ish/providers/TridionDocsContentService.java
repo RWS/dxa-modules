@@ -1,9 +1,8 @@
 package com.sdl.dxa.modules.ish.providers;
 
-import com.sdl.dxa.modules.ish.localization.IshLocalization;
+import com.sdl.dxa.modules.docs.localization.DocsLocalization;
 import com.sdl.dxa.modules.ish.utils.HtmlUtil;
 import com.sdl.dxa.modules.ish.model.Topic;
-import com.sdl.webapp.common.api.content.ContentProvider;
 import com.sdl.webapp.common.api.content.ContentProviderException;
 import com.sdl.webapp.common.api.content.StaticContentItem;
 import com.sdl.webapp.common.api.model.PageModel;
@@ -11,7 +10,6 @@ import com.sdl.webapp.common.api.model.RichText;
 import com.tridion.meta.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 /**
@@ -48,7 +46,7 @@ public class TridionDocsContentService {
      * @return The page model
      * @throws ContentProviderException if page model cannot be fetched
      */
-    public PageModel getPageModel(Integer pageId, IshLocalization localization, String contextPath)
+    public PageModel getPageModel(Integer pageId, DocsLocalization localization, String contextPath)
             throws ContentProviderException {
         PageModel model = contentProvider.getPageModel(Integer.toString(pageId), localization);
         // Update base path inside links in case the application is not hosted under the root

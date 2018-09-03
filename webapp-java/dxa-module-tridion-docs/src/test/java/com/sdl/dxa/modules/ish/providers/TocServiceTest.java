@@ -1,6 +1,6 @@
 package com.sdl.dxa.modules.ish.providers;
 
-import com.sdl.dxa.modules.ish.localization.IshLocalization;
+import com.sdl.dxa.modules.docs.localization.DocsLocalization;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.api.model.entity.SitemapItem;
@@ -57,7 +57,7 @@ public class TocServiceTest {
         final WebRequestContext webRequestContext = mock(WebRequestContext.class);
         when(onDemandNavigationProvider.getNavigationSubtree(anyString(), any(NavigationFilter.class),
                 any(Localization.class))).thenReturn(tocItems);
-        when(webRequestContext.getLocalization()).thenReturn(new IshLocalization());
+        when(webRequestContext.getLocalization()).thenReturn(new DocsLocalization());
 
         Collection<SitemapItem> result = tocService.getToc(publicationId, sitemapId, false, 1, request,
                 webRequestContext);

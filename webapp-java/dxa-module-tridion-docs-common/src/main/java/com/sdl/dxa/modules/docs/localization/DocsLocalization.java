@@ -1,4 +1,4 @@
-package com.sdl.dxa.modules.ish.localization;
+package com.sdl.dxa.modules.docs.localization;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -26,10 +26,10 @@ import static com.sdl.webapp.common.impl.localization.semantics.SemanticsConvert
 import static org.dd4t.core.util.TCMURI.Namespace.ISH;
 
 /**
- * Ish localization.
+ * Docs (Ish) localization.
  */
 @Slf4j
-public class IshLocalization implements Localization {
+public class DocsLocalization implements Localization {
 
     /**
      * The Id for the current publication.
@@ -128,7 +128,7 @@ public class IshLocalization implements Localization {
                     });
 
             Iterable<SemanticSchema> semanticSchemas = convertSemantics(schemas, vocabularies);
-            Map<Long, SemanticSchema> schemasMap = new HashMap();
+            Map<Long, SemanticSchema> schemasMap = new HashMap<>();
             for (SemanticSchema semanticSchema : semanticSchemas) {
                 schemasMap.put(semanticSchema.getId(), semanticSchema);
             }
@@ -151,7 +151,7 @@ public class IshLocalization implements Localization {
      * {@inheritDoc}
      */
     public List<String> getIncludes(String pageTypeId) {
-        return new ArrayList();
+        return new ArrayList<>();
     }
 
     /**
@@ -165,7 +165,7 @@ public class IshLocalization implements Localization {
      * {@inheritDoc}
      */
     public List<String> getDataFormats() {
-        return new ArrayList<String>(Arrays.asList("json"));
+        return new ArrayList<>(Arrays.asList("json"));
     }
 
     /**

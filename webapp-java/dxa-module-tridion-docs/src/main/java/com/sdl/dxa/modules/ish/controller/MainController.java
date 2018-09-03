@@ -4,7 +4,7 @@ import com.sdl.dxa.modules.ish.exception.IshExceptionHandler;
 import com.sdl.dxa.modules.ish.model.ErrorMessage;
 import com.sdl.dxa.modules.ish.providers.PublicationService;
 import com.sdl.dxa.modules.ish.services.PageService;
-import com.sdl.dxa.modules.ish.localization.IshLocalization;
+import com.sdl.dxa.modules.docs.localization.DocsLocalization;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.model.PageModel;
 import com.sdl.webapp.common.api.model.page.DefaultPageModel;
@@ -106,7 +106,7 @@ public class MainController {
     }
 
     private void setPageModelOnRequest(String publicationId, String pageId, HttpServletRequest request) {
-        final IshLocalization localization = (IshLocalization) webRequestContext.getLocalization();
+        final DocsLocalization localization = (DocsLocalization) webRequestContext.getLocalization();
 
         if (isNotEmpty(publicationId) && isNumeric(publicationId)) {
             localization.setPublicationId(publicationId);
