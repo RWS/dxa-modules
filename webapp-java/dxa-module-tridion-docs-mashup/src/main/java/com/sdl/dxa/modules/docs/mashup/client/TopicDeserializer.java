@@ -42,13 +42,15 @@ public class TopicDeserializer extends StdDeserializer<List<Topic>> {
                 String id = edge.findValue("containerItems").findValue("Component").get("Id").asText();
                 String title = edge.findValue("containerItems").findValue("topicTitle").get("Values").path(0).asText();
                 String link = edge.findValue("url").asText();
-                
-                URI uri = URI.create(link);
-        
-                if (uri.getHost()== null || uri.getHost().isEmpty()) {
-                    link ="/"+link;
+
+                if (link != null) {
+                    URI uri = URI.create(link);
+
+                    if ((uri.getHost() == null || uri.getHost().isEmpty()) && !link.startsWith("/")) {
+                        link = "/" + link;
+                    }
                 }
-                
+
                 String body = edge.findValue("containerItems").findValue("topicBody").get("Values").path(0).asText();
 
                 topic.setId(id);
