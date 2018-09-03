@@ -42,6 +42,6 @@ public class TopicDeserializerTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void getLinkThrownWhenInvalidLink() {
-        Assert.assertNull(topicDeserializer.getLink("invalid_link_()*&@%#!?"));
+        topicDeserializer.getLink("invalid_link%");
     }
 }
