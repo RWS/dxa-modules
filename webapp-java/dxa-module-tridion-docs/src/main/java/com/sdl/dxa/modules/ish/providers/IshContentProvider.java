@@ -52,9 +52,8 @@ import static com.sdl.webapp.common.util.FileUtils.isToBeRefreshed;
 /**
  * Ish content provider.
  */
-@Component
+@Component(value = "ishContentProvider")
 @Slf4j
-@Primary
 @Qualifier("ishContentProvider")
 public class IshContentProvider extends DefaultContentProvider {
 
