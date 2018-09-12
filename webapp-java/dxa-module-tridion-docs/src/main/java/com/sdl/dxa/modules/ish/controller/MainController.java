@@ -1,7 +1,7 @@
 package com.sdl.dxa.modules.ish.controller;
 
-import com.sdl.dxa.modules.ish.exception.IshExceptionHandler;
-import com.sdl.dxa.modules.ish.model.ErrorMessage;
+import com.sdl.dxa.modules.docs.exception.DocsExceptionHandler;
+import com.sdl.dxa.modules.docs.model.ErrorMessage;
 import com.sdl.dxa.modules.ish.providers.PublicationService;
 import com.sdl.dxa.modules.ish.services.PageService;
 import com.sdl.dxa.modules.docs.localization.DocsLocalization;
@@ -42,7 +42,7 @@ public class MainController {
     private PublicationService publicationService;
 
     @Autowired
-    private IshExceptionHandler exceptionHandler;
+    private DocsExceptionHandler exceptionHandler;
 
     @Value("${active.features}")
     private String activeFeatures;

@@ -1,4 +1,4 @@
-package com.sdl.dxa.modules.ish.model;
+package com.sdl.dxa.modules.docs.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

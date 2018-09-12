@@ -1,6 +1,6 @@
-package com.sdl.dxa.modules.ish.exception;
+package com.sdl.dxa.modules.docs.exception;
 
-import com.sdl.dxa.modules.ish.model.ErrorMessage;
+import com.sdl.dxa.modules.docs.model.ErrorMessage;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.http.HttpStatus;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * IshExceptionHandler class.
  */
 @Component
-public class IshExceptionHandler {
+public class DocsExceptionHandler {
 
     public ErrorMessage handleException(Exception ex) {
         ResponseStatus annotation = AnnotationUtils.findAnnotation(ex.getClass(), ResponseStatus.class);
@@ -26,7 +26,7 @@ public class IshExceptionHandler {
         } else {
             HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
             // Happens when input params are of an invalid data type
-            if (ex instanceof TypeMismatchException) {
+            if (ex instanceof TypeMismatchException || ex instanceof IllegalArgumentException) {
                 status = HttpStatus.BAD_REQUEST;
             }
             return new ErrorMessage(message, status);
