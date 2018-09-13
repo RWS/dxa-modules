@@ -1,8 +1,8 @@
 package com.sdl.dxa.modules.ish.controller;
 
-import com.sdl.dxa.modules.ish.exception.IshExceptionHandler;
+import com.sdl.dxa.modules.docs.exception.DocsExceptionHandler;
 import com.sdl.dxa.modules.ish.exception.IshServiceException;
-import com.sdl.dxa.modules.ish.model.ErrorMessage;
+import com.sdl.dxa.modules.docs.model.ErrorMessage;
 import com.sdl.dxa.modules.ish.services.SitemapService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ import static org.springframework.http.MediaType.APPLICATION_XML_VALUE;
 @Controller
 public class SitemapController {
     @Autowired
-    private IshExceptionHandler exceptionHandler;
+    private DocsExceptionHandler exceptionHandler;
 
     @Autowired
     private SitemapService sitemapService;

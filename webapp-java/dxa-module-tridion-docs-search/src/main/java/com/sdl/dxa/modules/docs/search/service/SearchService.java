@@ -8,6 +8,7 @@ import com.sdl.delivery.iq.query.client.DefaultSearcher;
 import com.sdl.delivery.iq.query.result.SearchQueryResult;
 import com.sdl.delivery.iq.query.result.SearchQueryResultSet;
 import com.sdl.delivery.iq.query.result.SearchResultFilter;
+import com.sdl.dxa.modules.docs.exception.SearchParametersProcessingException;
 import com.sdl.dxa.modules.docs.search.exception.SearchException;
 import com.sdl.dxa.modules.docs.search.model.SearchParameters;
 import com.sdl.dxa.modules.docs.search.model.SearchResult;
@@ -77,7 +78,7 @@ public class SearchService {
             return READER.readValue(parametersJson);
         } catch (IOException e) {
             log.error("Could not parse search parameters: " + parametersJson);
-            throw new IllegalArgumentException("Could not parse search parameters from String.", e);
+            throw new SearchParametersProcessingException("Could not parse search parameters from String.", e);
         }
     }
 
