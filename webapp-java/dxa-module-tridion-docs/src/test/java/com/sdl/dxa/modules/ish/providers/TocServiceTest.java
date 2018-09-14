@@ -6,6 +6,7 @@ import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.api.model.entity.SitemapItem;
 import com.sdl.webapp.common.api.navigation.NavigationFilter;
 import com.sdl.webapp.common.api.navigation.OnDemandNavigationProvider;
+import com.sdl.webapp.common.exceptions.DxaItemNotFoundException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -50,13 +51,15 @@ public class TocServiceTest {
     }
 
     @Test
-    public void testGetToc() {
+    public void testGetToc() throws DxaItemNotFoundException {
         final Integer publicationId = 1123123;
         final String sitemapId = "3333";
         final HttpServletRequest request = mock(HttpServletRequest.class);
         final WebRequestContext webRequestContext = mock(WebRequestContext.class);
+
         when(onDemandNavigationProvider.getNavigationSubtree(anyString(), any(NavigationFilter.class),
-                any(Localization.class))).thenReturn(tocItems);
+                    any(Localization.class))).thenReturn(tocItems);
+
         when(webRequestContext.getLocalization()).thenReturn(new DocsLocalization());
 
         Collection<SitemapItem> result = tocService.getToc(publicationId, sitemapId, false, 1, request,

@@ -7,6 +7,7 @@ import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.model.entity.SitemapItem;
 import com.sdl.webapp.common.api.navigation.NavigationFilter;
 import com.sdl.webapp.common.api.navigation.OnDemandNavigationProvider;
+import com.sdl.webapp.common.exceptions.DxaItemNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import static com.sdl.webapp.common.api.serialization.json.filter.IgnoreByNameInRequestFilter.ignoreByName;
@@ -51,7 +53,13 @@ public class TocService {
         NavigationFilter navigationFilter = new NavigationFilter();
         navigationFilter.setWithAncestors(includeAncestors);
         navigationFilter.setDescendantLevels(descendantLevels);
-        List<SitemapItem> navigationSubtree = new ArrayList(onDemandNavigationProvider.getNavigationSubtree(sitemapItemId, navigationFilter, localization));
+        List<SitemapItem> navigationSubtree = null;
+        try {
+            navigationSubtree = new ArrayList(onDemandNavigationProvider.getNavigationSubtree(sitemapItemId, navigationFilter, localization));
+        } catch (DxaItemNotFoundException e) {
+            log.warn("Such item (" + sitemapItemId + ") for publication " + publicationId + " is not found", e);
+            return Collections.emptyList();
+        }
         navigationSubtree.sort((o1, o2) -> {
             if (o1 == o2) return 0;
             if (o1 == null) return -1;
