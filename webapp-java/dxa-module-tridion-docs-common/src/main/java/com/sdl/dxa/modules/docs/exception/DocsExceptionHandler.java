@@ -8,7 +8,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
- * IshExceptionHandler class.
+ * DocsExceptionHandler class. It handles exceptions which annotated with @ResponseStatus anno,
+ * and returns its status code, otherwise it returns BAD_REQUEST or INTERNAL_SERVER_ERROR
  */
 @Component
 public class DocsExceptionHandler {
@@ -23,13 +24,12 @@ public class DocsExceptionHandler {
 
         if (annotation != null) {
             return new ErrorMessage(message, annotation.value());
-        } else {
-            HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-            // Happens when input params are of an invalid data type
-            if (ex instanceof TypeMismatchException || ex instanceof SearchParametersProcessingException) {
-                status = HttpStatus.BAD_REQUEST;
-            }
-            return new ErrorMessage(message, status);
         }
+        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+        // Happens when input params are of an invalid data type
+        if (ex instanceof TypeMismatchException) {
+            status = HttpStatus.BAD_REQUEST;
+        }
+        return new ErrorMessage(message, status);
     }
 }
