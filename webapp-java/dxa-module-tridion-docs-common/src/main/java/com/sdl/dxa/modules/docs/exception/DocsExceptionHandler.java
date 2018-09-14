@@ -27,7 +27,7 @@ public class DocsExceptionHandler {
         }
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
         // Happens when input params are of an invalid data type
-        if (ex instanceof TypeMismatchException || ex instanceof SearchParametersProcessingException) {
+        if (ex instanceof TypeMismatchException) {
             status = HttpStatus.BAD_REQUEST;
         }
         return new ErrorMessage(message, status);
