@@ -4,6 +4,7 @@ import com.google.common.primitives.Ints;
 import com.sdl.dxa.modules.docs.localization.DocsLocalization;
 import com.sdl.dxa.modules.ish.model.YesNo;
 import com.sdl.webapp.common.api.WebRequestContext;
+import com.sdl.webapp.common.api.content.ContentProviderException;
 import com.sdl.webapp.common.api.model.entity.SitemapItem;
 import com.sdl.webapp.common.api.navigation.NavigationFilter;
 import com.sdl.webapp.common.api.navigation.OnDemandNavigationProvider;
@@ -35,7 +36,7 @@ public class TocService {
 
     public Collection<SitemapItem> getToc(Integer publicationId, String sitemapItemId, boolean includeAncestors,
                                           int descendantLevels, HttpServletRequest request,
-                                          WebRequestContext webRequestContext) {
+                                          WebRequestContext webRequestContext) throws ContentProviderException {
         if (onDemandNavigationProvider == null) {
             String message = "On-Demand Navigation is not enabled because current navigation provider doesn't " +
                     "support it. If you are using your own navigation provider, you should Implement " +
@@ -58,7 +59,7 @@ public class TocService {
             navigationSubtree = new ArrayList(onDemandNavigationProvider.getNavigationSubtree(sitemapItemId, navigationFilter, localization));
         } catch (DxaItemNotFoundException e) {
             log.warn("Such item (" + sitemapItemId + ") for publication " + publicationId + " is not found", e);
-            return Collections.emptyList();
+            throw e;
         }
         navigationSubtree.sort((o1, o2) -> {
             if (o1 == o2) return 0;
