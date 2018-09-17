@@ -4,21 +4,21 @@ using Sdl.Web.Common.Models;
 using Sdl.Web.DataModel;
 using Sdl.Web.Tridion.Mapping;
 
-namespace Sdl.Web.Modules.TridionDocs.Mapping
+namespace Sdl.Web.Modules.DynamicDocumentation.Mapping
 {
     /// <summary>
-    /// Tridion Docs Model Builder
+    /// Model Builder
     /// 
-    /// Remaps 'Ish' mvc area to TridionDocs
+    /// Remaps 'Ish' mvc area to DynamicDocumentation
     /// 
     /// Add to Web.Config:
     ///  <modelBuilderPipeline>
     ///     <add type = "Sdl.Web.Tridion.Mapping.DefaultModelBuilder, Sdl.Web.Tridion" />
-    ///     <add type = "Sdl.Web.Modules.TridionDocs.Mapping.TridionDocsModelBuilder, Sdl.Web.Modules.TridionDocs" />
+    ///     <add type = "Sdl.Web.Modules.DDWebAppReact.Mapping.DDWebAppModelBuilder, Sdl.Web.Modules.DDWebAppReact" />
     ///     ...
     ///  </modelBuilderPipeline>
     /// </summary>
-    public class TridionDocsModelBuilder : IPageModelBuilder, IEntityModelBuilder
+    public class ModelBuilder : IPageModelBuilder, IEntityModelBuilder
     {
         public void BuildPageModel(ref PageModel pageModel, PageModelData pageModelData, bool includePageRegions,
             ILocalization localization)
@@ -39,7 +39,7 @@ namespace Sdl.Web.Modules.TridionDocs.Mapping
             if (mvcData != null && mvcData.AreaName != null &&
                mvcData.AreaName.Equals("Ish"))
             {
-                mvcData.AreaName = TridionDocsModuleAreaRegistration.AREA_NAME;
+                mvcData.AreaName = DynamicDocumentationModuleAreaRegistration.AREA_NAME;
             }
         }
     }

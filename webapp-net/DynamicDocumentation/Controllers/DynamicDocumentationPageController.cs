@@ -6,12 +6,12 @@ using Sdl.Web.Common.Logging;
 using Sdl.Web.Common.Models;
 using Sdl.Web.Mvc.Configuration;
 
-namespace Sdl.Web.Modules.TridionDocs.Controllers
+namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
 {
     /// <summary>
-    /// TridionDocs Page Controller
+    /// Page Controller
     /// </summary>
-    public class TridionDocsPageController : BaseController
+    public class DynamicDocumentationPageController : BaseController
     {
         [Route("~/")]
         [Route("~/home")]
@@ -51,7 +51,7 @@ namespace Sdl.Web.Modules.TridionDocs.Controllers
                     PageModel pageModel;
                     try
                     {
-                        pageModel = TridionDocsContentProvider.GetPageModel(pageId, localization);
+                        pageModel = ContentProvider.GetPageModel(pageId, localization);
                     }
                     catch (DxaItemNotFoundException ex)
                     {

@@ -50,6 +50,9 @@
       <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net452\Sdl.Web.Mvc.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Sdl.Web.PublicContentApi">
+      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.2.1.0-beta-201808241550\lib\net452\Sdl.Web.PublicContentApi.dll</HintPath>
+    </Reference>
     <Reference Include="SI4T.Query">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\SI4T.Query.1.0.2\lib\net40\SI4T.Query.dll</HintPath>

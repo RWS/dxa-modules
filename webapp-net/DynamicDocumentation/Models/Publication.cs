@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Sdl.Web.Modules.TridionDocs.Models
+namespace Sdl.Web.Modules.DynamicDocumentation.Models
 {
     /// <summary>
     /// Publication

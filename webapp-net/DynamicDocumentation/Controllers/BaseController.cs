@@ -1,25 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Interfaces;
 using Sdl.Web.Common.Models;
-using Sdl.Web.Modules.TridionDocs.Exceptions;
-using Sdl.Web.Modules.TridionDocs.Navigation;
-using Sdl.Web.Modules.TridionDocs.Providers;
+using Sdl.Web.Modules.DynamicDocumentation.Providers;
 using Sdl.Web.Mvc.Configuration;
 using Tridion.ContentDelivery.Meta;
 
-namespace Sdl.Web.Modules.TridionDocs.Controllers
+namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
 {
-    [RouteArea("TridionDocs")]
+    [RouteArea("DynamicDocumentation")]
     public class BaseController : Mvc.Controllers.PageController
     {
         private static readonly string TocNaventriesMeta = "tocnaventries.generated.value";
         private static readonly string PageConditionsUsedMeta = "conditionsused.generated.value";
         private static readonly string PageLogicalRefObjectId = "ishlogicalref.object.id";
-
-        private TridionDocsContentProvider _contentProvider;
-
+     
         protected ILocalization SetupLocalization(int publicationId)
         {
             PublicationProvider provider = new PublicationProvider();
@@ -67,34 +62,6 @@ namespace Sdl.Web.Modules.TridionDocs.Controllers
                 }
             }
             return model;
-        }
-
-        protected TridionDocsContentProvider TridionDocsContentProvider
-        {
-            get
-            {
-                if (!(ContentProvider is TridionDocsContentProvider))
-                {
-                    throw new TridionDocsApiException(
-                        "TridionDocsContentProvider not configured. Please make sure you have the TridionDocsContentProvider specified in your Unity.config");
-                }
-                return ContentProvider as TridionDocsContentProvider;
-            }
-        }
-
-        protected TridionDocsNavigationProvider TridionDocsNavigationProvider
-        {
-            get
-            {
-                INavigationProvider navProvider = SiteConfiguration.NavigationProvider;
-                if (!(navProvider is TridionDocsNavigationProvider))
-                {
-                    throw new TridionDocsApiException(
-                        "TridionDocsNavigationProvider not configured. Please make sure you have the TridionDocsNavigationProvider specified in your Unity.config");
-
-                }
-                return navProvider as TridionDocsNavigationProvider;
-            }
-        }
+        }      
     }
 }

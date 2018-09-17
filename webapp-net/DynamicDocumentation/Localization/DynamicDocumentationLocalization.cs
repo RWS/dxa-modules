@@ -5,12 +5,12 @@ using System.Text.RegularExpressions;
 using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Logging;
 
-namespace Sdl.Web.Modules.TridionDocs.Localization
+namespace Sdl.Web.Modules.DynamicDocumentation.Localization
 {
     /// <summary>
-    /// TridionDocs Localization Implementation
+    /// DDWebAppReact Localization Implementation
     /// </summary>
-    public class TridionDocsLocalization : Common.Configuration.Localization
+    public class DDWebAppReactLocalization : Common.Configuration.Localization
     {     
         public override string Path { get; set; } = ""; // content path
 
@@ -18,7 +18,7 @@ namespace Sdl.Web.Modules.TridionDocs.Localization
 
         public override bool IsXpmEnabled { get; set; } = false; // no xpm on dd-webapp
 
-        public override string BinaryCacheFolder => $"{SiteConfiguration.StaticsFolder}\\TridionDocs";
+        public override string BinaryCacheFolder => $"{SiteConfiguration.StaticsFolder}\\DynamicDocumentation";
 
         protected override void Load()
         {

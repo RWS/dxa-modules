@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Sdl.Web.Modules.TridionDocs.Exceptions;
+using Sdl.Web.Modules.DynamicDocumentation.Exceptions;
 using Tridion.ContentDelivery.Meta;
 
-namespace Sdl.Web.Modules.TridionDocs.Providers
+namespace Sdl.Web.Modules.DynamicDocumentation.Providers
 {
     /// <summary>
     /// Condition Provider
@@ -48,7 +48,7 @@ namespace Sdl.Web.Modules.TridionDocs.Providers
                 PublicationMeta meta = factory.GetMeta(publicationId);
                 if (meta?.CustomMeta == null)
                 {
-                    throw new TridionDocsApiException(
+                    throw new ApiException(
                         $"Metadata '{metadataName}' is not found for publication {publicationId}.");
                 }
 
@@ -58,7 +58,7 @@ namespace Sdl.Web.Modules.TridionDocs.Providers
             }
             catch (Exception)
             {
-                throw new TridionDocsApiException(
+                throw new ApiException(
                     $"Metadata '{metadataName}' is not found for publication {publicationId}.");
             }
         }
