@@ -22,7 +22,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
  */
 @Slf4j
 @Controller
-public class SearchController {
+public class DocsSearchController {
 
     @Autowired
     private DocsExceptionHandler exceptionHandler;
