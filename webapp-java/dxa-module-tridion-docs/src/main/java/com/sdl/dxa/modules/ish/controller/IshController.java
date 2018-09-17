@@ -155,7 +155,7 @@ public class IshController {
     @ResponseBody
     public Collection<SitemapItem> getRootToc(@PathVariable("publicationId") Integer publicationId,
                                               @RequestParam(value = "conditions", defaultValue = "") String conditions,
-                                              HttpServletRequest request) {
+                                              HttpServletRequest request) throws ContentProviderException {
         publicationService.checkPublicationOnline(publicationId);
         if (!conditions.isEmpty()) {
             WebContext.getCurrentClaimStore().put(USER_CONDITIONS_URI, conditions);
@@ -171,7 +171,7 @@ public class IshController {
                                           @RequestParam(value = "includeAncestors", required = false,
                                                   defaultValue = "false") boolean includeAncestors,
                                           @RequestParam(value = "conditions", defaultValue = "") String conditions,
-                                          HttpServletRequest request) {
+                                          HttpServletRequest request) throws ContentProviderException {
         publicationService.checkPublicationOnline(publicationId);
         if (!conditions.isEmpty()) {
             WebContext.getCurrentClaimStore().put(USER_CONDITIONS_URI, conditions);

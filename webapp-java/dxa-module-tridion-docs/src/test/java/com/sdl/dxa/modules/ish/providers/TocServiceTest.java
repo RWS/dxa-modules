@@ -2,6 +2,7 @@ package com.sdl.dxa.modules.ish.providers;
 
 import com.sdl.dxa.modules.docs.localization.DocsLocalization;
 import com.sdl.webapp.common.api.WebRequestContext;
+import com.sdl.webapp.common.api.content.ContentProviderException;
 import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.api.model.entity.SitemapItem;
 import com.sdl.webapp.common.api.navigation.NavigationFilter;
@@ -51,7 +52,7 @@ public class TocServiceTest {
     }
 
     @Test
-    public void testGetToc() throws DxaItemNotFoundException {
+    public void testGetToc() throws ContentProviderException {
         final Integer publicationId = 1123123;
         final String sitemapId = "3333";
         final HttpServletRequest request = mock(HttpServletRequest.class);
