@@ -11,6 +11,7 @@ using Sdl.Web.IQQuery.API;
 using Sdl.Web.IQQuery.Client;
 using Sdl.Web.IQQuery.Model.Field;
 using Sdl.Web.IQQuery.Model.Result;
+using Sdl.Web.Tridion.PCAClient;
 
 namespace Sdl.Web.Modules.Search.Controllers
 {
@@ -31,7 +32,8 @@ namespace Sdl.Web.Modules.Search.Controllers
                 SearchParameters searchParams = JsonConvert.DeserializeObject<SearchParameters>(json);
 
                 IQSearchClient<SearchResultSet, SearchResult> search =
-                    new IQSearchClient<SearchResultSet, SearchResult>(null, null);
+                    PCAClientFactory.Instance.CreateSearchClient<SearchResultSet, SearchResult>();
+
                 search.WithResultFilter(new SearchResultFilter
                 {
                     StartOfRange = searchParams.StartIndex,

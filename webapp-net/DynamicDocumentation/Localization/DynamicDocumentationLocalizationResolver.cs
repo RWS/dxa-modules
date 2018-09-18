@@ -5,15 +5,15 @@ using Sdl.Web.Tridion;
 namespace Sdl.Web.Modules.DynamicDocumentation.Localization
 {
     /// <summary>
-    /// TridionDocs Localization Resolver
+    /// Localization Resolver
     /// </summary>
-    public class DDWebAppLocalizationResolver : LocalizationResolver
+    public class DynamicDocumentationLocalizationResolver : LocalizationResolver
     {
         private readonly ILocalization _localization;
 
-        public DDWebAppLocalizationResolver()
+        public DynamicDocumentationLocalizationResolver()
         {
-            _localization = new DDWebAppReactLocalization();
+            _localization = new DynamicDocumentationLocalization();
             _localization.EnsureInitialized();
         }
 

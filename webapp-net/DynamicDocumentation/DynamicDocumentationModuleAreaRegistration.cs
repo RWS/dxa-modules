@@ -5,7 +5,7 @@ using Sdl.Web.Mvc.Configuration;
 namespace Sdl.Web.Modules.DynamicDocumentation
 {
     /// <summary>
-    /// DDWebAppReact module area registration
+    /// Module area registration
     /// </summary>
     public class DynamicDocumentationModuleAreaRegistration : BaseAreaRegistration
     {

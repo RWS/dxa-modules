@@ -102,21 +102,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Controllers\DynamicDocumentationApiController.cs" />
     <Compile Include="Controllers\DynamicDocumentationPageController.cs" />
     <Compile Include="DynamicDocumentationModuleAreaRegistration.cs" />
-    <Compile Include="Exceptions\DynamicDocumentationApiException.cs" />
     <Compile Include="Localization\DynamicDocumentationLocalization.cs" />
     <Compile Include="Localization\DynamicDocumentationLocalizationResolver.cs" />
     <Compile Include="Mapping\ModelBuilder.cs" />
-    <Compile Include="Models\ItemImpl.cs" />
-    <Compile Include="Models\Publication.cs" />
     <Compile Include="Models\PublicationSiteMap.cs" />
     <Compile Include="Models\SiteMapUrlEntry.cs" />
     <Compile Include="Models\Topic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Providers\ConditionProvider.cs" />
-    <Compile Include="Providers\PublicationProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Areas\DynamicDocumentation\Views\DynamicDocumentationApi\ErrorPage.cshtml" />
