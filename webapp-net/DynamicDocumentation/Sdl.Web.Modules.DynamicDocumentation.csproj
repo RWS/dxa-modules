@@ -46,7 +46,7 @@
     </Reference>
     <Reference Include="Sdl.Web.DataModel, Version=2.0.0.124, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\\lib\net452\Sdl.Web.DataModel.dll</HintPath>
+      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net452\Sdl.Web.DataModel.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sdl.Web.Delivery.Service, Version=11.0.0.0, Culture=neutral, PublicKeyToken=ddfc895746e5ee6b, processorArchitecture=MSIL">
@@ -65,10 +65,10 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Sdl.Web.PublicContentApi">
-      <HintPath>..\..\..\dxa-pca-client\net\src\Sdl.Web.PublicContentApi.SingleAssembly\bin\Debug\Sdl.Web.PublicContentApi.dll</HintPath>
+      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net452\Sdl.Web.PublicContentApi.dll</HintPath>
     </Reference>
     <Reference Include="Sdl.Web.Tridion">
-      <HintPath>..\..\..\web-application\Sdl.Web.Tridion\bin\Debug\Sdl.Web.Tridion.dll</HintPath>
+      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net452\Sdl.Web.Tridion.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -101,7 +101,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\DynamicDocumentationPageController.cs" />
     <Compile Include="DynamicDocumentationModuleAreaRegistration.cs" />
     <Compile Include="Localization\DynamicDocumentationLocalization.cs" />

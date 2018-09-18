@@ -5,23 +5,27 @@ using Sdl.Web.Common.Interfaces;
 using Sdl.Web.Common.Logging;
 using Sdl.Web.Common.Models;
 using Sdl.Web.Mvc.Configuration;
+using Sdl.Web.Tridion.TridionDocs.Providers;
 
 namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
 {
     /// <summary>
     /// Page Controller
     /// </summary>
-    public class DynamicDocumentationPageController : BaseController
+    [RouteArea("DynamicDocumentation")]
+    public class DynamicDocumentationPageController : Mvc.Controllers.PageController
     {
         [Route("~/")]
         [Route("~/home")]
         [Route("~/publications/{*content}")]
+        [HttpGet]
         public ActionResult Home()
         {
             return View("GeneralPage");
         }
 
         [Route("~/{publicationId:int}")]
+        [HttpGet]
         public virtual ActionResult Page(int publicationId)
         {
             return GetPage(publicationId);
@@ -29,6 +33,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
 
         [Route("~/{publicationId:int}/{pageId:int}")]
         [Route("~/{publicationId:int}/{pageId:int}/{*path}")]
+        [HttpGet]
         public virtual ActionResult Page(int publicationId, int pageId, string path = "")
         {
             return GetPage(publicationId, pageId);
@@ -84,6 +89,15 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
                 r.ViewData.Add("statusCode", Response.StatusCode);
                 return r;
             }
+        }
+
+        protected ILocalization SetupLocalization(int publicationId)
+        {
+            PublicationProvider provider = new PublicationProvider();
+            provider.CheckPublicationOnline(publicationId);
+            ILocalization localization = WebRequestContext.Localization;
+            localization.Id = publicationId.ToString();
+            return localization;
         }
     }
 }
