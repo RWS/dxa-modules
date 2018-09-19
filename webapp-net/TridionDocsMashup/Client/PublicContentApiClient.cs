@@ -82,15 +82,14 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
             InputItemFilter filter = new InputItemFilter
             {
                 NamespaceIds = new List<ContentNamespace> { ContentNamespace.Docs },
-                ItemTypes = new List<PublicContentApi.ContentModel.ItemType> { PublicContentApi.ContentModel.ItemType.PAGE },
+                ItemTypes = new List<PublicContentApi.ContentModel.FilterItemType> { PublicContentApi.ContentModel.FilterItemType.PAGE },
                 And = customMetaFilters
             };
 
             var results = _publicContentApi.ExecuteItemQuery(
                 filter,
-                new InputSortParam { Order = SortOrderType.Descending, SortBy = SortFieldType.LAST_PUBLISH_DATE },
-                new Pagination { First = maxItems },
-                null, null, false);
+                new InputSortParam {Order = SortOrderType.Descending, SortBy = SortFieldType.LAST_PUBLISH_DATE},
+                new Pagination {First = maxItems}, null, true, true, null);
 
             return results;
         }
