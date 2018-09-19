@@ -52,13 +52,17 @@ public class TridionDocsGraphQLClient implements ITridionDocsClient {
     @Override
     public List<Topic> getTopics(Map<String, KeywordModel> keywords, int maxItems) throws GraphQLClientException, IOException {
         String language = getCurrentLanguage();
-        String query = getQuery(keywords, language, maxItems);
+
+        String prefixForTopicsUrl = getPrefixForTopicsUrl();
+        String prefixForBinariesUrl = getPrefixForBinariesUrl();
+
+        String query = getQuery(keywords, language, maxItems, prefixForTopicsUrl, prefixForBinariesUrl);
 
         String jsonResponse = execute(query);
 
         ObjectMapper mapper = new ObjectMapper();
         SimpleModule module = new SimpleModule();
-        module.addDeserializer(List.class, new TopicDeserializer());
+        module.addDeserializer(List.class, new TopicDeserializer(prefixForTopicsUrl, prefixForBinariesUrl));
         module.addDeserializer(Error.class, new ErrorDeserializer());
         mapper.registerModule(module);
 
@@ -74,7 +78,7 @@ public class TridionDocsGraphQLClient implements ITridionDocsClient {
 
             language = getParentLanguage();
             if (language != null && !language.isEmpty()) {
-                query = getQuery(keywords, language, maxItems);
+                query = getQuery(keywords, language, maxItems, prefixForTopicsUrl, prefixForBinariesUrl);
                 jsonResponse = execute(query);
                 topics = mapper.readValue(jsonResponse, List.class);
             }
@@ -83,7 +87,7 @@ public class TridionDocsGraphQLClient implements ITridionDocsClient {
         return topics;
     }
 
-    private String getQuery(Map<String, KeywordModel> keywords, String language, int maxItems) {
+    private String getQuery(Map<String, KeywordModel> keywords, String language, int maxItems, String prefixForTopicsUrl, String prefixForBinariesUrl) {
         StringBuilder customMetas = new StringBuilder();
 
         for (Map.Entry<String, KeywordModel> entry : keywords.entrySet()) {
@@ -98,6 +102,16 @@ public class TridionDocsGraphQLClient implements ITridionDocsClient {
 
         customMetas.append(languageFilter);
 
+        StringBuilder contextData = new StringBuilder();
+
+        if (prefixForBinariesUrl != null && !prefixForBinariesUrl.isEmpty()) {
+            contextData.append(String.format("{\"uri\":\"%s\",\"value\":\"%s\",\"type\":\"STRING\"},", "binaryUrlPrefix", prefixForBinariesUrl));
+        }
+
+        if (prefixForTopicsUrl != null && !prefixForTopicsUrl.isEmpty()) {
+            contextData.append(String.format("{\"uri\":\"%s\",\"value\":\"%s\",\"type\":\"STRING\"},", "urlPrefix", prefixForTopicsUrl));
+        }
+
         String filters = String.format("{ \"first\" : %d ,\"after\":null,"
                 + "\"filter\":{"
                 + "\"itemTypes\":[\"%s\"] ,"
@@ -108,11 +122,11 @@ public class TridionDocsGraphQLClient implements ITridionDocsClient {
                 + " }",
                 maxItems, "PAGE", customMetas.toString());
 
-        return getQuery(filters);
+        return getQuery(filters, contextData.toString());
     }
 
-    private String getQuery(String filters) {
-        return "{\"query\":\"query items($first: Int, $after: String, $filter: InputItemFilter!, $sort: InputSortParam, $contextData: [InputClaimValue!]) {\\r\\n\\titems(first: $first, after: $after, filter: $filter, sort: $sort, contextData: $contextData) {\\r\\n\\t\\tedges {\\r\\n\\t\\t\\tcursor\\r\\n\\t\\t\\tnode {\\r\\n\\t\\t\\t\\t...ItemFields\\t\\t\\t\\t\\r\\n\\t\\t\\t\\t...PageFields\\n\\r\\n\\t\\t\\t}\\t\\t\\r\\n\\t\\t}\\r\\n\\t}\\r\\n}fragment ItemFields on Item {\\r\\n    id\\r\\n    itemId\\r\\n    itemType\\r\\n    namespaceId\\r\\n    owningPublicationId\\r\\n    publicationId\\r\\n    title\\r\\n    lastPublishDate\\r\\n    creationDate\\r\\n    initialPublishDate\\r\\n    updatedDate   \\r\\n    ...CustomMetaFields\\r\\n}\\r\\nfragment PageFields on Page {\\r\\n\\turl\\r\\n\\trawContent(renderContent: false) {\\r\\n\\t\\tdata \\r\\n\\t}\\r\\n\\tcontainerItems(types: [COMPONENT_PRESENTATION]) {\\r\\n\\t\\t...on ComponentPresentation {\\r\\n\\t\\t\\t...ComponentPresentationFields\\r\\n\\t\\t}\\t\\t\\r\\n\\t}\\r\\n}\\r\\nfragment CustomMetaFields on Item {\\r\\n  customMetas {\\r\\n    edges {\\r\\n      node {\\r\\n          id\\r\\n          itemId\\r\\n          key\\r\\n          namespaceId\\r\\n          publicationId\\r\\n          value\\r\\n          valueType    \\r\\n      }\\r\\n    }\\r\\n  }\\r\\n}fragment ComponentPresentationFields on ComponentPresentation {\\r\\n    itemType\\r\\n\\trawContent(renderContent: false) {\\r\\n\\t\\tdata \\r\\n\\t}\\r\\n}\\r\\n\",\"variables\":" + filters + ",\"sort\":{\"order\":\"Descending\",\"sortBy\":\"LAST_PUBLISH_DATE\"},\"contextData\":[]}}";
+    private String getQuery(String filters, String contextData) {
+        return "{\"query\":\"query items($first: Int, $after: String, $filter: InputItemFilter!, $sort: InputSortParam, $contextData: [InputClaimValue!]) {\\r\\n\\titems(first: $first, after: $after, filter: $filter, sort: $sort, contextData: $contextData) {\\r\\n\\t\\tedges {\\r\\n\\t\\t\\tcursor\\r\\n\\t\\t\\tnode {\\r\\n\\t\\t\\t\\t...ItemFields\\t\\t\\t\\t\\r\\n\\t\\t\\t\\t...PageFields\\n\\r\\n\\t\\t\\t}\\t\\t\\r\\n\\t\\t}\\r\\n\\t}\\r\\n}fragment ItemFields on Item {\\r\\n    id\\r\\n    itemId\\r\\n    itemType\\r\\n    namespaceId\\r\\n    owningPublicationId\\r\\n    publicationId\\r\\n    title\\r\\n    lastPublishDate\\r\\n    creationDate\\r\\n    initialPublishDate\\r\\n    updatedDate   \\r\\n    ...CustomMetaFields\\r\\n}\\r\\nfragment PageFields on Page {\\r\\n\\turl\\r\\n\\trawContent(renderContent: false) {\\r\\n\\t\\tdata \\r\\n\\t}\\r\\n\\tcontainerItems(types: [COMPONENT_PRESENTATION]) {\\r\\n\\t\\t...on ComponentPresentation {\\r\\n\\t\\t\\t...ComponentPresentationFields\\r\\n\\t\\t}\\t\\t\\r\\n\\t}\\r\\n}\\r\\nfragment CustomMetaFields on Item {\\r\\n  customMetas {\\r\\n    edges {\\r\\n      node {\\r\\n          id\\r\\n          itemId\\r\\n          key\\r\\n          namespaceId\\r\\n          publicationId\\r\\n          value\\r\\n          valueType    \\r\\n      }\\r\\n    }\\r\\n  }\\r\\n}fragment ComponentPresentationFields on ComponentPresentation {\\r\\n    itemType\\r\\n\\trawContent(renderContent: false) {\\r\\n\\t\\tdata \\r\\n\\t}\\r\\n}\\r\\n\",\"variables\":" + filters + ",\"sort\":{\"order\":\"Descending\",\"sortBy\":\"LAST_PUBLISH_DATE\"},\"contextData\":[" + contextData + "]}}";
     }
 
     private String execute(String query) throws GraphQLClientException, UnsupportedEncodingException {
@@ -138,6 +152,20 @@ public class TridionDocsGraphQLClient implements ITridionDocsClient {
         }
 
         return null;
+    }
+
+    /**
+     * Get the Uri prefix for the Topic binary links
+     */
+    private String getPrefixForTopicsUrl() {
+        return _webRequestContext.getLocalization().getConfiguration("tridiondocsmashup.PrefixForBinariesUrl");
+    }
+
+    /**
+     * Get the Uri prefix for the Topic links
+     */
+    private String getPrefixForBinariesUrl() {
+        return _webRequestContext.getLocalization().getConfiguration("tridiondocsmashup.PrefixForTopicsUrl");
     }
 
     /**

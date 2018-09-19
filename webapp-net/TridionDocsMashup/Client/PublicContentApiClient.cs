@@ -242,31 +242,34 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
         /// <summary>
         /// Create and return the topic's url having fully quialified doman name
         /// </summary>
-        private static string GetFullyQualifiedUrlForTopic(string pageUrl)
+        private static string GetFullyQualifiedUrlForTopic(string url)
         {
-            string topicUrl = pageUrl;
-
-            if (!string.IsNullOrEmpty(pageUrl))
+            if (!string.IsNullOrEmpty(url))
             {
-                if (Uri.TryCreate(pageUrl, UriKind.Absolute, out Uri uri))
+                if (Uri.TryCreate(url, UriKind.Absolute, out Uri uri))
                 {
-                    topicUrl = uri.ToString();
+                    url = uri.ToString();
                 }
                 else
                 {
+                    if (!url.StartsWith("/"))
+                    {
+                        url = "/" + url;
+                    }
+
                     var prefixForTopicsUrl = WebRequestContext.Localization.GetConfigValue("tridiondocsmashup.PrefixForTopicsUrl");
 
                     if (Uri.TryCreate(prefixForTopicsUrl, UriKind.Absolute, out Uri baseUri))
                     {
-                        if (Uri.TryCreate(baseUri, pageUrl, out uri))
+                        if (Uri.TryCreate(baseUri, url, out uri))
                         {
-                            topicUrl = uri.ToString();
+                            url = uri.ToString();
                         }
                     }
                 }
             }
 
-            return topicUrl;
+            return url;
         }
 
     }
