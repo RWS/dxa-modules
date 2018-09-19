@@ -118,7 +118,9 @@
     <None Include="Areas\DynamicDocumentation\Views\DynamicDocumentationPage\GeneralPage.cshtml" />
     <None Include="Areas\DynamicDocumentation\Views\Page\ErrorPage.cshtml" />
     <None Include="Areas\DynamicDocumentation\Views\web.config" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
