@@ -86,11 +86,25 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
                 And = customMetaFilters
             };
 
+            var prefixForBinariesUrl = WebRequestContext.Localization.GetConfigValue("tridiondocsmashup.PrefixForBinariesUrl");
+
+            var prefixForTopicsUrl = WebRequestContext.Localization.GetConfigValue("tridiondocsmashup.PrefixForTopicsUrl");
+
+            var contextData = new ContextData()
+            {
+                ClaimValues = new List<ClaimValue>() {
+                        new ClaimValue(){ Uri="urlPrefix",Value=prefixForTopicsUrl,Type = ClaimValueType.STRING},
+                        new ClaimValue(){ Uri="binaryUrlPrefix",Value=prefixForBinariesUrl,Type = ClaimValueType.STRING}
+                    }
+            };
+
             var results = _publicContentApi.ExecuteItemQuery(
                 filter,
                 new InputSortParam { Order = SortOrderType.Descending, SortBy = SortFieldType.LAST_PUBLISH_DATE },
                 new Pagination { First = maxItems },
-                null, null, false);
+                contextData,
+                null,
+                renderContent: true);
 
             return results;
         }
@@ -113,19 +127,10 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
 
                     if (page != null)
                     {
-                        // Todo : the page.Url doesn't have the host name, UDP team is working on it :  https://jira.sdl.com/browse/UDP-4772
-
-                        var topic = new Topic();
-
-                        if (!string.IsNullOrEmpty(page.Url))
+                        var topic = new Topic
                         {
-                            topic.Link = page.Url;
-
-                            if (Uri.CheckHostName(page.Url) == UriHostNameType.Unknown && !page.Url.StartsWith("/"))
-                            {
-                                topic.Link = "/" + page.Url;
-                            }
-                        }                                   
+                            Link = GetFullyQualifiedUrlForTopic(page.Url)
+                        };
 
                         if (page.ContainerItems != null)
                         {
@@ -232,6 +237,36 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
             }
 
             return CriteriaScope.Publication;
+        }
+
+        /// <summary>
+        /// Create and return the topic's url having fully quialified doman name
+        /// </summary>
+        private static string GetFullyQualifiedUrlForTopic(string pageUrl)
+        {
+            string topicUrl = pageUrl;
+
+            if (!string.IsNullOrEmpty(pageUrl))
+            {
+                if (Uri.TryCreate(pageUrl, UriKind.Absolute, out Uri uri))
+                {
+                    topicUrl = uri.ToString();
+                }
+                else
+                {
+                    var prefixForTopicsUrl = WebRequestContext.Localization.GetConfigValue("tridiondocsmashup.PrefixForTopicsUrl");
+
+                    if (Uri.TryCreate(prefixForTopicsUrl, UriKind.Absolute, out Uri baseUri))
+                    {
+                        if (Uri.TryCreate(baseUri, pageUrl, out uri))
+                        {
+                            topicUrl = uri.ToString();
+                        }
+                    }
+                }
+            }
+
+            return topicUrl;
         }
 
     }
