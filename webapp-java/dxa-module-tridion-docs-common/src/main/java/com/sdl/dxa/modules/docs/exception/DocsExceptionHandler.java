@@ -1,6 +1,6 @@
-package com.sdl.dxa.modules.ish.exception;
+package com.sdl.dxa.modules.docs.exception;
 
-import com.sdl.dxa.modules.ish.model.ErrorMessage;
+import com.sdl.dxa.modules.docs.model.ErrorMessage;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.http.HttpStatus;
@@ -8,10 +8,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
- * IshExceptionHandler class.
+ * DocsExceptionHandler class. It handles exceptions which annotated with @ResponseStatus anno,
+ * and returns its status code, otherwise it returns BAD_REQUEST or INTERNAL_SERVER_ERROR
  */
 @Component
-public class IshExceptionHandler {
+public class DocsExceptionHandler {
 
     public ErrorMessage handleException(Exception ex) {
         ResponseStatus annotation = AnnotationUtils.findAnnotation(ex.getClass(), ResponseStatus.class);
@@ -23,13 +24,12 @@ public class IshExceptionHandler {
 
         if (annotation != null) {
             return new ErrorMessage(message, annotation.value());
-        } else {
-            HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-            // Happens when input params are of an invalid data type
-            if (ex instanceof TypeMismatchException) {
-                status = HttpStatus.BAD_REQUEST;
-            }
-            return new ErrorMessage(message, status);
         }
+        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+        // Happens when input params are of an invalid data type
+        if (ex instanceof TypeMismatchException) {
+            status = HttpStatus.BAD_REQUEST;
+        }
+        return new ErrorMessage(message, status);
     }
 }

@@ -1,12 +1,14 @@
 package com.sdl.dxa.modules.ish.providers;
 
 import com.google.common.primitives.Ints;
-import com.sdl.dxa.modules.ish.localization.IshLocalization;
+import com.sdl.dxa.modules.docs.localization.DocsLocalization;
 import com.sdl.dxa.modules.ish.model.YesNo;
 import com.sdl.webapp.common.api.WebRequestContext;
+import com.sdl.webapp.common.api.content.ContentProviderException;
 import com.sdl.webapp.common.api.model.entity.SitemapItem;
 import com.sdl.webapp.common.api.navigation.NavigationFilter;
 import com.sdl.webapp.common.api.navigation.OnDemandNavigationProvider;
+import com.sdl.webapp.common.exceptions.DxaItemNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import static com.sdl.webapp.common.api.serialization.json.filter.IgnoreByNameInRequestFilter.ignoreByName;
@@ -33,7 +36,7 @@ public class TocService {
 
     public Collection<SitemapItem> getToc(Integer publicationId, String sitemapItemId, boolean includeAncestors,
                                           int descendantLevels, HttpServletRequest request,
-                                          WebRequestContext webRequestContext) {
+                                          WebRequestContext webRequestContext) throws ContentProviderException {
         if (onDemandNavigationProvider == null) {
             String message = "On-Demand Navigation is not enabled because current navigation provider doesn't " +
                     "support it. If you are using your own navigation provider, you should Implement " +
@@ -43,7 +46,7 @@ public class TocService {
             throw new UnsupportedOperationException(message);
         }
 
-        IshLocalization localization = (IshLocalization) webRequestContext.getLocalization();
+        DocsLocalization localization = (DocsLocalization) webRequestContext.getLocalization();
         localization.setPublicationId(Integer.toString(publicationId));
 
         ignoreByName(request, "XpmMetadata", "XpmPropertyMetadata");
@@ -51,7 +54,13 @@ public class TocService {
         NavigationFilter navigationFilter = new NavigationFilter();
         navigationFilter.setWithAncestors(includeAncestors);
         navigationFilter.setDescendantLevels(descendantLevels);
-        List<SitemapItem> navigationSubtree = new ArrayList(onDemandNavigationProvider.getNavigationSubtree(sitemapItemId, navigationFilter, localization));
+        List<SitemapItem> navigationSubtree = null;
+        try {
+            navigationSubtree = new ArrayList(onDemandNavigationProvider.getNavigationSubtree(sitemapItemId, navigationFilter, localization));
+        } catch (DxaItemNotFoundException e) {
+            log.warn("Such item (" + sitemapItemId + ") for publication " + publicationId + " is not found", e);
+            throw e;
+        }
         navigationSubtree.sort((o1, o2) -> {
             if (o1 == o2) return 0;
             if (o1 == null) return -1;

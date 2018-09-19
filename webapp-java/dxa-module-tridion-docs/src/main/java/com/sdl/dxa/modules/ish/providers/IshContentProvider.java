@@ -5,7 +5,6 @@ import com.google.common.primitives.Ints;
 import com.sdl.dxa.api.datamodel.model.PageModelData;
 import com.sdl.dxa.common.util.PathUtils;
 import com.sdl.dxa.modules.ish.exception.IshServiceException;
-import com.sdl.dxa.modules.ish.localization.IshLocalization;
 import com.sdl.dxa.tridion.content.StaticContentResolver;
 import com.sdl.dxa.tridion.mapping.ModelBuilderPipeline;
 import com.sdl.dxa.tridion.mapping.impl.DefaultContentProvider;
@@ -53,9 +52,8 @@ import static com.sdl.webapp.common.util.FileUtils.isToBeRefreshed;
 /**
  * Ish content provider.
  */
-@Component
+@Component(value = "ishContentProvider")
 @Slf4j
-@Primary
 @Qualifier("ishContentProvider")
 public class IshContentProvider extends DefaultContentProvider {
 

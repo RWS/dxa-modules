@@ -1,4 +1,4 @@
-package com.sdl.dxa.modules.ish.localization;
+package com.sdl.dxa.modules.docs.localization;
 
 import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.api.localization.LocalizationNotResolvedException;
@@ -25,7 +25,7 @@ public class UnknownLocalizationHandlerImpl implements UnknownLocalizationHandle
     public Localization handleUnknown(Exception exception, ServletRequest request) {
         // Create a new localization object on every request
         // This cannot be static as the publication id can be different on any request
-        return new IshLocalization();
+        return new DocsLocalization();
     }
 
     /**

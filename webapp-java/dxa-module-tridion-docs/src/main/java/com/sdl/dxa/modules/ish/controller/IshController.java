@@ -1,13 +1,13 @@
 package com.sdl.dxa.modules.ish.controller;
 
 import com.google.common.base.Strings;
-import com.sdl.dxa.modules.ish.exception.IshExceptionHandler;
+import com.sdl.dxa.modules.docs.exception.DocsExceptionHandler;
+import com.sdl.dxa.modules.docs.localization.DocsLocalization;
 import com.sdl.dxa.modules.ish.exception.IshServiceException;
-import com.sdl.dxa.modules.ish.model.ErrorMessage;
+import com.sdl.dxa.modules.docs.model.ErrorMessage;
 import com.sdl.dxa.modules.ish.model.Publication;
 import com.sdl.dxa.modules.ish.providers.PublicationService;
 import com.sdl.dxa.modules.ish.providers.TocService;
-import com.sdl.dxa.modules.ish.localization.IshLocalization;
 import com.sdl.dxa.modules.ish.providers.ConditionService;
 import com.sdl.dxa.modules.ish.providers.TridionDocsContentService;
 import com.sdl.webapp.common.api.WebRequestContext;
@@ -65,7 +65,7 @@ public class IshController {
     private PublicationService publicationService;
 
     @Autowired
-    private IshExceptionHandler exceptionHandler;
+    private DocsExceptionHandler exceptionHandler;
 
     @Autowired
     private TocService tocService;
@@ -94,7 +94,7 @@ public class IshController {
                                 final HttpServletRequest request,
                                 final HttpServletResponse response) throws ContentProviderException {
         publicationService.checkPublicationOnline(publicationId);
-        final IshLocalization localization = (IshLocalization) webRequestContext.getLocalization();
+        final DocsLocalization localization = (DocsLocalization) webRequestContext.getLocalization();
         localization.setPublicationId(Integer.toString(publicationId));
         if (!conditions.isEmpty()) {
             WebContext.getCurrentClaimStore().put(USER_CONDITIONS_URI, conditions);
@@ -155,7 +155,7 @@ public class IshController {
     @ResponseBody
     public Collection<SitemapItem> getRootToc(@PathVariable("publicationId") Integer publicationId,
                                               @RequestParam(value = "conditions", defaultValue = "") String conditions,
-                                              HttpServletRequest request) {
+                                              HttpServletRequest request) throws ContentProviderException {
         publicationService.checkPublicationOnline(publicationId);
         if (!conditions.isEmpty()) {
             WebContext.getCurrentClaimStore().put(USER_CONDITIONS_URI, conditions);
@@ -171,7 +171,7 @@ public class IshController {
                                           @RequestParam(value = "includeAncestors", required = false,
                                                   defaultValue = "false") boolean includeAncestors,
                                           @RequestParam(value = "conditions", defaultValue = "") String conditions,
-                                          HttpServletRequest request) {
+                                          HttpServletRequest request) throws ContentProviderException {
         publicationService.checkPublicationOnline(publicationId);
         if (!conditions.isEmpty()) {
             WebContext.getCurrentClaimStore().put(USER_CONDITIONS_URI, conditions);

@@ -1,0 +1,108 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.sdl.dxa</groupId>
+        <artifactId>dxa-oss-parent</artifactId>
+        <version>2.1.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>com.sdl.dxa.modules</groupId>
+    <artifactId>dxa-module-tridion-docs-mashup</artifactId>
+
+    <name>DXA Modules - Tridion Docs Mashup</name>
+    <description>Implementation of DXA Tridion Docs Mashup module</description>
+	
+    <properties>
+        <dxa.version>${project.version}</dxa.version>
+    </properties>
+
+    <scm>
+        <url>https://github.com/sdl/dxa-modules</url>
+        <connection>scm:git:git@github.com:sdl/dxa-modules.git</connection>
+        <developerConnection>scm:git:git@github.com:sdl/dxa-modules.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.sdl.dxa</groupId>
+            <artifactId>dxa-common-api</artifactId>
+            <version>${dxa.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+        </dependency>
+		
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.sdl.web.pca</groupId>
+            <artifactId>graphql-client</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+        
+        <!--
+        <dependency>
+            <groupId>com.sdl.web.pca</groupId>
+            <artifactId>pca-client</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.sdl.web.pca</groupId>
+            <artifactId>pca-model</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+        -->
+
+        <dependency>
+            <groupId>com.sdl.delivery</groupId>
+            <artifactId>udp-discovery-common</artifactId>
+            <version>11.0.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.sdl.web</groupId>
+            <artifactId>content-client-api</artifactId>
+            <version>10.1.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+        
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+        </dependency>
+        
+    </dependencies>
+</project>

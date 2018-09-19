@@ -8,6 +8,7 @@ import com.sdl.webapp.common.api.model.entity.SitemapItem;
 import com.sdl.webapp.common.api.navigation.NavigationFilter;
 import com.sdl.webapp.common.api.navigation.TaxonomyUrisHolder;
 import com.sdl.webapp.common.controller.exception.BadRequestException;
+import com.sdl.webapp.common.exceptions.DxaItemNotFoundException;
 import com.sdl.webapp.tridion.navigation.DynamicNavigationProvider;
 import com.sdl.webapp.tridion.navigation.StaticNavigationProvider;
 import lombok.NonNull;
@@ -46,7 +47,7 @@ public class IshDynamicNavigationProvider extends DynamicNavigationProvider {
     @Override
     public Collection<SitemapItem> getNavigationSubtree(@Nullable String sitemapItemId,
                                                         @NonNull NavigationFilter navigationFilter,
-                                                        @NonNull Localization localization) {
+                                                        @NonNull Localization localization) throws DxaItemNotFoundException {
         Collection<SitemapItem> items = super.getNavigationSubtree(sitemapItemId, navigationFilter, localization);
         if (items.isEmpty()) {
             TaxonomyUrisHolder info = parse(sitemapItemId, localization.getId());
