@@ -93,8 +93,8 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
             var contextData = new ContextData()
             {
                 ClaimValues = new List<ClaimValue>() {
-                        new ClaimValue(){ Uri="urlPrefix",Value=prefixForTopicsUrl,Type = ClaimValueType.STRING},
-                        new ClaimValue(){ Uri="binaryUrlPrefix",Value=prefixForBinariesUrl,Type = ClaimValueType.STRING}
+                        new ClaimValue(){ Uri="taf:tcdl:render:link:urlprefix",Value=prefixForTopicsUrl,Type = ClaimValueType.STRING},
+                        new ClaimValue(){ Uri="taf:tcdl:render:link:binaryUrlPrefix",Value=prefixForBinariesUrl,Type = ClaimValueType.STRING}
                     }
             };
 

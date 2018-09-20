@@ -105,11 +105,11 @@ public class TridionDocsGraphQLClient implements ITridionDocsClient {
         StringBuilder contextData = new StringBuilder();
 
         if (prefixForBinariesUrl != null && !prefixForBinariesUrl.isEmpty()) {
-            contextData.append(String.format("{\"uri\":\"%s\",\"value\":\"%s\",\"type\":\"STRING\"},", "binaryUrlPrefix", prefixForBinariesUrl));
+            contextData.append(String.format("{\"uri\":\"%s\",\"value\":\"%s\",\"type\":\"STRING\"},", "taf:tcdl:render:link:binaryUrlPrefix", prefixForBinariesUrl));
         }
 
         if (prefixForTopicsUrl != null && !prefixForTopicsUrl.isEmpty()) {
-            contextData.append(String.format("{\"uri\":\"%s\",\"value\":\"%s\",\"type\":\"STRING\"},", "urlPrefix", prefixForTopicsUrl));
+            contextData.append(String.format("{\"uri\":\"%s\",\"value\":\"%s\",\"type\":\"STRING\"},", "taf:tcdl:render:link:urlprefix", prefixForTopicsUrl));
         }
 
         String filters = String.format("{ \"first\" : %d ,\"after\":null,"
