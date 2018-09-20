@@ -4,8 +4,8 @@ using Sdl.Web.Common;
 using Sdl.Web.Common.Interfaces;
 using Sdl.Web.Common.Logging;
 using Sdl.Web.Common.Models;
+using Sdl.Web.Modules.DynamicDocumentation.Providers;
 using Sdl.Web.Mvc.Configuration;
-using Sdl.Web.Tridion.TridionDocs.Providers;
 
 namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
 {
