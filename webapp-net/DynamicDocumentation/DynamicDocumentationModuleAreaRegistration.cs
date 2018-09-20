@@ -1,15 +1,15 @@
 ﻿using Sdl.Web.Common.Models;
-using Sdl.Web.Modules.TridionDocs.Models;
+using Sdl.Web.Modules.DynamicDocumentation.Models;
 using Sdl.Web.Mvc.Configuration;
 
-namespace Sdl.Web.Modules.TridionDocs
+namespace Sdl.Web.Modules.DynamicDocumentation
 {
     /// <summary>
-    /// Tridion Docs module area registration
+    /// Module area registration
     /// </summary>
-    public class TridionDocsModuleAreaRegistration : BaseAreaRegistration
+    public class DynamicDocumentationModuleAreaRegistration : BaseAreaRegistration
     {
-        public static string AREA_NAME = "TridionDocs";
+        public static string AREA_NAME = "DynamicDocumentation";
         public override string AreaName => AREA_NAME;
         protected override void RegisterAllViewModels()
         {

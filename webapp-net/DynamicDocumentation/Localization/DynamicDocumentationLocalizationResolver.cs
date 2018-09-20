@@ -2,18 +2,18 @@
 using Sdl.Web.Common.Interfaces;
 using Sdl.Web.Tridion;
 
-namespace Sdl.Web.Modules.TridionDocs.Localization
+namespace Sdl.Web.Modules.DynamicDocumentation.Localization
 {
     /// <summary>
-    /// TridionDocs Localization Resolver
+    /// Localization Resolver
     /// </summary>
-    public class TridionDocsLocalizationResolver : LocalizationResolver
+    public class DynamicDocumentationLocalizationResolver : LocalizationResolver
     {
         private readonly ILocalization _localization;
 
-        public TridionDocsLocalizationResolver()
+        public DynamicDocumentationLocalizationResolver()
         {
-            _localization = new TridionDocsLocalization();
+            _localization = new DynamicDocumentationLocalization();
             _localization.EnsureInitialized();
         }
 

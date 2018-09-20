@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sdl.Web.Modules.TridionDocs.Models
+namespace Sdl.Web.Modules.DynamicDocumentation.Models
 {
     public class SiteMapUrlEntry
     {

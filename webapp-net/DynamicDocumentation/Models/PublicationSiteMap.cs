@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Sdl.Web.Common.Models;
 
-namespace Sdl.Web.Modules.TridionDocs.Models
+namespace Sdl.Web.Modules.DynamicDocumentation.Models
 {
     public class PublicationSiteMap : EntityModel
     {
