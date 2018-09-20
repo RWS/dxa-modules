@@ -246,7 +246,9 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
         {
             if (!string.IsNullOrEmpty(url))
             {
-                if (Uri.TryCreate(url, UriKind.Absolute, out Uri uri))
+                Uri uri;
+
+                if (Uri.TryCreate(url, UriKind.Absolute, out uri))
                 {
                     url = uri.ToString();
                 }
@@ -259,7 +261,9 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
 
                     var prefixForTopicsUrl = WebRequestContext.Localization.GetConfigValue("tridiondocsmashup.PrefixForTopicsUrl");
 
-                    if (Uri.TryCreate(prefixForTopicsUrl, UriKind.Absolute, out Uri baseUri))
+                    Uri baseUri;
+
+                    if (Uri.TryCreate(prefixForTopicsUrl, UriKind.Absolute, out baseUri))
                     {
                         if (Uri.TryCreate(baseUri, url, out uri))
                         {
