@@ -2,12 +2,16 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
+using Newtonsoft.Json;
 using Sdl.Web.Common;
 using Sdl.Web.Common.Interfaces;
 using Sdl.Web.Common.Models;
 using Sdl.Web.Common.Models.Navigation;
+using Sdl.Web.Modules.DynamicDocumentation.Models;
 using Tridion.ContentDelivery.Taxonomies;
 using Sdl.Web.PublicContentApi.Utils;
+using Tridion.ContentDelivery.Meta;
+using Keyword = Tridion.ContentDelivery.Taxonomies.Keyword;
 
 namespace Sdl.Web.Modules.DynamicDocumentation.Providers
 {
@@ -70,5 +74,21 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Providers
         protected override SitemapItem[] ExpandClassifiedPages(Keyword keyword, string taxonomyId,
             ILocalization localization)
             => new SitemapItem[] { };
+
+        public static SitemapItem SiteMap
+        {
+            get
+            {
+                SitemapItem root = new SitemapItem();
+                PublicationMetaFactory factory = new PublicationMetaFactory();
+                string json = factory.GetSiteMapForPublication(-1);
+                List<PublicationSiteMap> siteMap = JsonConvert.DeserializeObject<List<PublicationSiteMap>>(json);
+                foreach (var url in siteMap.SelectMany(x => x.Urls))
+                {
+                    root.Items.Add(new SitemapItem { Type = "Page", Url = $"/{url.Url.TrimStart('/')}", PublishedDate = url.LastModifiedDate });
+                }
+                return root;
+            }
+        }
     }
 }
