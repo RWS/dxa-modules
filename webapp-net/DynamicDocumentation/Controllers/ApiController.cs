@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using Sdl.Web.Common;
 using Sdl.Web.Common.Logging;
 using Sdl.Web.Common.Models;
 using Sdl.Web.Delivery.ServicesCore.ClaimStore;
+using Sdl.Web.Modules.DynamicDocumentation.Models;
 using Sdl.Web.Modules.DynamicDocumentation.Providers;
 using Sdl.Web.Mvc.Controllers;
 using Sdl.Web.Mvc.Formats;
@@ -24,6 +26,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         private static readonly string TocNaventriesMeta = "tocnaventries.generated.value";
         private static readonly string PageConditionsUsedMeta = "conditionsused.generated.value";
         private static readonly string PageLogicalRefObjectId = "ishlogicalref.object.id";
+        private static readonly string RefFieldName = "ishlogicalref.object.id";
 
         [Route("~/api/publications")]
         public virtual ActionResult Publications()
@@ -174,8 +177,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         public virtual ActionResult SitemapXml()
         {
             // Use the common SiteMapXml view for rendering out the xml of all the sitemap items.
-            ///return View("SiteMapXml", DDWebAppReactNavigationProvider.SiteMap);
-            return new EmptyResult();
+            return View("SiteMapXml", DocsNavigationProvider.SiteMap);
         }
 
         [Route("~/api/toc/{publicationId}/{sitemapItemId}")]
@@ -191,47 +193,50 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
                     throw new DxaItemNotFoundException(
                         "Unable to use empty 'ishlogicalref.object.id' value as a search criteria.");
                 }
-                //return Json(GetPageIdByIshLogicalReference(publicationId, ishFieldValue));
-                return new EmptyResult();
-
+                return Json(GetPageIdByIshLogicalReference(publicationId, ishFieldValue));                
             }
             catch (Exception ex)
             {
                 return ServerError(ex);
             }
         }
-        /* TODO: convert to PCA ItemQuery
-        public IItem GetPageIdByIshLogicalReference(int publicationId, string ishLogicalRefValue)
+       
+        public Item GetPageIdByIshLogicalReference(int publicationId, string ishLogicalRefValue)
         {
             try
             {
-                Criteria dateCriteria = new ItemLastPublishedDateCriteria(DefaultPublishData, Criteria.GreaterThanOrEqual);
-                CustomMetaKeyCriteria metaKeyCriteria = new CustomMetaKeyCriteria(RefFieldName);
-                Criteria refCriteria = new CustomMetaValueCriteria(metaKeyCriteria, ishLogicalRefValue);
-                Criteria pubCriteria = new PublicationCriteria(publicationId);
-                Criteria itemType = new ItemTypeCriteria((int)ItemType.Page);
-                Criteria composite = new AndCriteria(new[] { dateCriteria, refCriteria, itemType, pubCriteria });
-
-                global::Tridion.ContentDelivery.DynamicContent.Query.Query query = new global::Tridion.ContentDelivery.DynamicContent.Query.Query(composite);
-                IItem[] items = query.ExecuteEntityQuery();
-                if (items == null || items.Length == 0)
+                Item item = new Item();
+                var client = PCAClientFactory.Instance.CreateClient();
+                InputItemFilter filter = new InputItemFilter
                 {
-                    return new ItemImpl();
-                }
-
-                if (items.Length > 1)
+                    NamespaceIds = new List<ContentNamespace> { ContentNamespace.Docs},
+                    PublicationIds = new List<int?> {publicationId},
+                    ItemTypes = new List<FilterItemType> {FilterItemType.PAGE},
+                    CustomMeta = new InputCustomMetaCriteria
+                    {
+                        Key = RefFieldName,
+                        Value = ishLogicalRefValue,
+                        ValueType = CustomMetaValueType.STRING,
+                        Scope = CriteriaScope.ItemInPublication
+                    }
+                };
+                var items = client.ExecuteItemQuery(filter,
+                    new InputSortParam {Order = SortOrderType.Ascending, SortBy = SortFieldType.CREATION_DATE},
+                    new Pagination {First = 1}, null, false, false, null);
+                if (items?.Edges != null && items.Edges.Count == 1)
                 {
-                    throw new ApiException($"Too many page Ids found in publication with logical ref value {ishLogicalRefValue}");
+                    item.Id = items.Edges[0].Node.ItemId;
+                    item.PublicationId = items.Edges[0].Node.PublicationId;
+                    item.Title = items.Edges[0].Node.Title;
                 }
-
-                return items[0];
+                return item;
             }
             catch (Exception)
             {
                 throw new DxaItemNotFoundException($"Page reference by ishlogicalref.object.id = {ishLogicalRefValue} not found in publication {publicationId}.");
             }
         }
-        */
+        
         public ActionResult ServerError(Exception ex, int statusCode = 404)
         {
             Response.StatusCode = statusCode;

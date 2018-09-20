@@ -107,6 +107,7 @@
     <Compile Include="Localization\DynamicDocumentationLocalization.cs" />
     <Compile Include="Localization\DynamicDocumentationLocalizationResolver.cs" />
     <Compile Include="Mapping\ModelBuilder.cs" />
+    <Compile Include="Models\Item.cs" />
     <Compile Include="Models\Publication.cs" />
     <Compile Include="Models\PublicationSiteMap.cs" />
     <Compile Include="Models\SiteMapUrlEntry.cs" />
