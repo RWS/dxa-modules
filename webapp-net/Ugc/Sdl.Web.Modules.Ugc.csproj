@@ -14,6 +14,7 @@
     <MvcBuildViews>true</MvcBuildViews>
     <FileAlignment>512</FileAlignment>
     <CopyLocal>true</CopyLocal>
+    <SdlDeliveryVersion>11.0.0</SdlDeliveryVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
