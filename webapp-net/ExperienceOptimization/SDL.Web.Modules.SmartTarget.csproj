@@ -151,9 +151,8 @@
       <HintPath>..\packages\Sdl.Web.Delivery.$(SdlDeliveryVersion)\lib\net452\Tridion.ContentDelivery.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Tridion.SmartTarget">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Sdl.Web.Experience.$(ExperienceManagerVersion)\lib\net452\Tridion.SmartTarget.dll</HintPath>
+    <Reference Include="Tridion.SmartTarget, Version=9.0.0.0, Culture=neutral, PublicKeyToken=ddfc895746e5ee6b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sdl.Web.Experience.9.0.0\lib\net452\Tridion.SmartTarget.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -165,6 +164,7 @@
     <Content Include="Areas\SmartTarget\Views\Entity\2-Column-Promotion.cshtml" />
     <Content Include="Areas\SmartTarget\Views\Entity\3-Column-Promotion.cshtml" />
     <Content Include="Areas\SmartTarget\Views\Entity\4-Column-Promotion.cshtml" />
+    <None Include="app.config" />
     <None Include="Areas\SmartTarget\Views\Entity\Promotion.cshtml" />
     <Content Include="Areas\SmartTarget\Views\Region\2-Column.cshtml" />
     <Content Include="Areas\SmartTarget\Views\Region\3-Column.cshtml" />
