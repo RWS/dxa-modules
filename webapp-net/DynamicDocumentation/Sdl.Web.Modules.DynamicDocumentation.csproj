@@ -101,15 +101,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\ApiController.cs" />
     <Compile Include="Controllers\DynamicDocumentationPageController.cs" />
     <Compile Include="DynamicDocumentationModuleAreaRegistration.cs" />
     <Compile Include="Localization\DynamicDocumentationLocalization.cs" />
     <Compile Include="Localization\DynamicDocumentationLocalizationResolver.cs" />
     <Compile Include="Mapping\ModelBuilder.cs" />
+    <Compile Include="Models\Item.cs" />
+    <Compile Include="Models\Publication.cs" />
     <Compile Include="Models\PublicationSiteMap.cs" />
     <Compile Include="Models\SiteMapUrlEntry.cs" />
     <Compile Include="Models\Topic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\ConditionProvider.cs" />
+    <Compile Include="Providers\DocsNavigationProvider.cs" />
+    <Compile Include="Providers\PublicationProvider.cs" />
+    <Compile Include="Providers\TocProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Areas\DynamicDocumentation\Views\DynamicDocumentationApi\ErrorPage.cshtml" />
@@ -118,7 +125,9 @@
     <None Include="Areas\DynamicDocumentation\Views\DynamicDocumentationPage\GeneralPage.cshtml" />
     <None Include="Areas\DynamicDocumentation\Views\Page\ErrorPage.cshtml" />
     <None Include="Areas\DynamicDocumentation\Views\web.config" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

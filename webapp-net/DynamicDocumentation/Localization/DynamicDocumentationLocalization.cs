@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
-using Sdl.Web.Common.Configuration;
-using Sdl.Web.Common.Logging;
+﻿using Sdl.Web.Common.Configuration;
 using Sdl.Web.Tridion.TridionDocs.Localization;
 
 namespace Sdl.Web.Modules.DynamicDocumentation.Localization
