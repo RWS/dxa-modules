@@ -82,29 +82,33 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
             InputItemFilter filter = new InputItemFilter
             {
                 NamespaceIds = new List<ContentNamespace> { ContentNamespace.Docs },
-                ItemTypes = new List<PublicContentApi.ContentModel.ItemType> { PublicContentApi.ContentModel.ItemType.PAGE },
+                ItemTypes = new List<PublicContentApi.ContentModel.FilterItemType> { PublicContentApi.ContentModel.FilterItemType.PAGE },
                 And = customMetaFilters
             };
 
-            var prefixForBinariesUrl = WebRequestContext.Localization.GetConfigValue("tridiondocsmashup.PrefixForBinariesUrl");
+            var contextData = new ContextData() { ClaimValues = new List<ClaimValue>() };
 
-            var prefixForTopicsUrl = WebRequestContext.Localization.GetConfigValue("tridiondocsmashup.PrefixForTopicsUrl");
-
-            var contextData = new ContextData()
+            var prefixForTopicsUrl = WebRequestContext.Localization?.GetConfigValue("tridiondocsmashup.PrefixForTopicsUrl");
+            if (!string.IsNullOrWhiteSpace(prefixForTopicsUrl))
             {
-                ClaimValues = new List<ClaimValue>() {
-                        new ClaimValue(){ Uri="taf:tcdl:render:link:urlprefix",Value=prefixForTopicsUrl,Type = ClaimValueType.STRING},
-                        new ClaimValue(){ Uri="taf:tcdl:render:link:binaryUrlPrefix",Value=prefixForBinariesUrl,Type = ClaimValueType.STRING}
-                    }
-            };
+                contextData.ClaimValues.Add(new ClaimValue() { Uri = "taf:tcdl:render:link:binaryUrlPrefix", Value = prefixForTopicsUrl, Type = ClaimValueType.STRING });
+            }
+
+            var prefixForBinariesUrl = WebRequestContext.Localization?.GetConfigValue("tridiondocsmashup.PrefixForBinariesUrl");
+            if (!string.IsNullOrWhiteSpace(prefixForBinariesUrl))
+            {
+                contextData.ClaimValues.Add(new ClaimValue() { Uri = "taf:tcdl:render:link:binaryUrlPrefix", Value = prefixForBinariesUrl, Type = ClaimValueType.STRING });
+            }
 
             var results = _publicContentApi.ExecuteItemQuery(
                 filter,
                 new InputSortParam { Order = SortOrderType.Descending, SortBy = SortFieldType.LAST_PUBLISH_DATE },
                 new Pagination { First = maxItems },
-                contextData,
                 null,
-                renderContent: true);
+                renderContent: true,
+                includeContainerItems: true,
+                contextData: contextData
+                );
 
             return results;
         }
