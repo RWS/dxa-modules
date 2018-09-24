@@ -27,7 +27,6 @@ import static com.sdl.webapp.common.api.navigation.TaxonomyUrisHolder.parse;
 /**
  * IshDynamicNavigationProvider class.
  */
-@Primary
 @Service("ishNavigationProvider")
 @Slf4j
 public class IshDynamicNavigationProvider extends DynamicNavigationProvider {
