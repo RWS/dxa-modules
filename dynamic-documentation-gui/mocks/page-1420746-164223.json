@@ -1,0 +1,25 @@
+{
+  "Id": "164223",
+  "Meta": {
+    "ishlogicalref.object.id": 164219,
+    "conditionsused.generated.value": "{\"MODEL\":[\"330\"],\"BLUETOOTH\":[\"Y\"]}",
+    "tocnaventries.generated.value": "ish:1420746-2-1024"
+  },
+  "Regions": [
+    {
+      "Entities": [
+        {
+          "Id": "164223",
+          "topicTitle": "Dear Customer",
+          "topicBody": {
+            "Fragments": [
+              {
+                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-30956BCB-576E-4180-9CE4-044B7E9474A3__GUID-15091D82-F7F8-4E36-8CB7-95D6753AECE3\" xmlns=\"http://www.w3.org/1999/xhtml\">Dear Customer</h1>\n      \n      \n      <div class=\"body\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"section\" id=\"GUID-30956BCB-576E-4180-9CE4-044B7E9474A3__GUID-E8464A34-9748-407E-A763-7DBB59A95920\">\n            \n            <div class=\"p\">In purchasing this mobile phone, you have decided on a quality product. The features of your machine meet the many needs that\n               arise in modern mobile communication.<br /><tcdl:If type=\"ish:Condition\" condition=\"(MODEL=330)\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\"><img class=\"image\" src=\"/app/gui/mocks/bin/1420746-345963-16.jpg\" /></tcdl:If><br /></div>\n            \n            \n         </div>\n         \n         \n         <div class=\"section\" id=\"GUID-30956BCB-576E-4180-9CE4-044B7E9474A3__GUID-E332A7A0-D799-4362-B5D3-6B4237556906\">\n            \n            <p class=\"p\">Please read the user manual carefully and follow the safety instructions to ensure proper operation of your phone. Your phone\n               is identified by its IMEI number. Write this number down, and do not keep it with your phone, because you may be asked for\n               it in the event of your phone being stolen, in order to prevent it from being used, even with a different SIM card. In order\n               to display the IMEI on your phone’screen, type: *#06#. \n            </p>\n            \n            \n         </div>\n         \n         \n         <div class=\"section\" id=\"GUID-30956BCB-576E-4180-9CE4-044B7E9474A3__GUID-D485B709-626C-4C6C-AF2D-3450487B3AD9\">\n            \n            <tcdl:If type=\"ish:Condition\" condition=\"(BLUETOOTH=Y)\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\"><p class=\"p\">Bluetooth technology enables cost-free wireless connections between electronic devices within a maximum range of 10 metres.\n               A Bluetooth connection can be used to send images, videos, texts, business cards, calendar notes, or to connect wirelessly\n               to devices using Bluetooth technology, such as computers.\n            </p></tcdl:If>\n            \n            \n         </div>\n         \n         \n         <div class=\"section\" id=\"GUID-30956BCB-576E-4180-9CE4-044B7E9474A3__GUID-2E2D5963-7966-45AB-8E08-6D6DFEAB4533\">\n            \n            <p class=\"p\">You should only use original consumables — your guarantee does not cover damage to your product caused by the use of any other\n               consumables. \n            </p>\n            \n            \n            <p class=\"p\">As part of our continuing quest for total customer satisfaction, all of our products are made with ease-of-use and reliability\n               in mind.\n            </p>\n            \n            \n         </div>\n         \n         \n      </div>\n      \n      \n   "
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

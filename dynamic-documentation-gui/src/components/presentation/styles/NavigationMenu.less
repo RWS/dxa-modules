@@ -1,0 +1,21 @@
+@import (reference) "~theme-styles";
+
+.sdl-dita-delivery-navigation-menu {
+    @rightMargin: 30px;
+    @defaultWidth: 500px;
+
+    display: block;
+    width: auto;
+    min-height: 100%;
+    background-color: #fff;
+    z-index: 12;
+
+    transition: left .3s ease-out;
+    .sdl-dita-delivery-app.rtl & {
+        transition: right .3s ease-out;
+    }
+
+    &.open {
+        max-width: ~"calc(100% - @{rightMargin})";
+    }
+}

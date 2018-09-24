@@ -1,0 +1,157 @@
+{
+  "Hits": 38,
+  "Count": 10,
+  "StartIndex": 0,
+  "QueryResults": [
+    {
+      "Id": "ish_1961700-164361-16",
+      "Meta": {
+        "FTITLE.logical.value": "speed dialling"
+      },
+      "Locale": "de",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      Kurzwahl\n      \n      \n      \n      \n         Bevor Sie die Kurzwahl verwenden können, weisen Sie einer der Kurzwahltasten von bis  eine Telefonnummer zu.\n         \n         \n         \n         Anschließend haben Sie folgende Möglichkeiten, die Nummer anzurufen:\n         \n         \n         \n            \n            Drücken Sie die gewünschte Kurzwahltaste und anschließend \n            \n            \n            Wenn die Option Kurzwahl aktiviert ist, halten Sie die Kurzwahltaste so lange gedrückt, bis der Anruf erfolgt.\n            \n            \n         \n         \n         \n      \n      \n      \n      \n         \n         \n            \n            Übergeordnetes Thema: Anrufen\n            \n         \n         \n         \n         Zugehörige Tasks\n            \n            \n            Anrufen\n            \n            Sprachanwahl\n            \n            Beantworten oder Abweisen eines ankommenden Anrufs\n         \n         \n         \n         Zugehörige Informationen\n            \n            \n            Anruffunktionen\n            \n            Tasten\n         \n         \n      \n   ",
+      "CreatedDate": "22.12.2015 18:27:10",
+      "ModifiedDate": "23.12.2015 3:21:32",
+      "PublicationId": 1961700,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
+    },
+    {
+      "Id": "ish_1961700-164466-16",
+      "Meta": {
+        "FTITLE.logical.value": "call functions"
+      },
+      "Locale": "de",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      Anruffunktionen\n      \n      \n      \n      \n         \n         \n         \n         \n         \n         \n      \n      \n      \n      \n         \n         \n            \n            Anrufen\n               \n            \n            \n            Beantworten oder Abweisen eines ankommenden Anrufs\n               \n            \n            \n         \n         \n         \n         Zugehörige Tasks\n            \n            \n            Anrufen\n            \n            Sprachanwahl\n            \n            Beantworten oder Abweisen eines ankommenden Anrufs\n         \n         \n         \n         Zugehörige Informationen\n            \n            \n            Kurzwahl\n            \n            Tasten\n         \n         \n      \n   ",
+      "CreatedDate": "22.12.2015 18:27:26",
+      "ModifiedDate": "23.12.2015 3:21:51",
+      "PublicationId": 1961700,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
+    },
+    {
+      "Id": "ish_1961700-164253-16",
+      "Meta": {
+        "FTITLE.logical.value": "essential indicators in standby mode"
+      },
+      "Locale": "de",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      Wichtige Symbole in der Ausgangsanzeige\n      \n      \n      \n      \n         \n         \n         \n          Sie haben eine oder mehrere Kurz- oder Bildmitteilungen erhalten.\n         \n         \n         \n          Sie haben eine oder mehrere Multimedia-Mitteilungen erhalten.\n         \n         \n         \n          Sie haben eine oder mehrere Sprachmitteilungen erhalten.\n         \n         \n         \n         Das Tastenfeld des Telefons ist gesperrt.\n         \n         \n         \n          Eine GPRS-Verbindung wurde hergestellt. Dieses Symbol ist immer links oben auf dem Display platziert. \n         \n         \n         \n          Die GPRS-Verbindung wird gehalten, z. B. bei einem ein- oder ausgehenden Anruf während einer bestehenden GPRS-Verbindung.\n         \n         \n         \n          Die Stoppuhr läuft im Hintergrund.\n         \n         \n         \n         Der Lautsprecher wurde aktiviert.\n         \n         \n         \n         Zeigt an, daß Bluetooth aktiv ist.\n         \n         \n         \n         Zeigt an, daß Daten über Bluetooth übertragen werden.\n         \n         \n         \n      \n      \n      \n      \n         \n         \n            \n            Übergeordnetes Thema: Ihr Telefon\n            \n         \n         \n         \n         Zugehörige Konzepte\n            \n            \n            Ausgangsanzeige\n         \n         \n         \n         Zugehörige Tasks\n            \n            \n            Installieren der SIM-Karte und des Akkus\n            \n            Laden des Akkus\n         \n         \n         \n         Zugehörige Informationen\n            \n            \n            Anschlüsse\n         \n         \n      \n   ",
+      "CreatedDate": "22.12.2015 18:26:54",
+      "ModifiedDate": "23.12.2015 3:21:12",
+      "PublicationId": 1961700,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
+    },
+    {
+      "Id": "ish_1961700-164210-16",
+      "Meta": {
+        "FTITLE.logical.value": "making a call"
+      },
+      "Locale": "de",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      Anrufen\n      \n      \n      \n      \n         \n         \n         \n         Das Telefon soll betriebsbereit sein (Ausgangsanzeige).\n         \n         \n         \n            \n               Geben Sie die Telefonnummer einschließlich der Vorwahl ein.\n               \n               Drücken Sie Löschen um die Zahl wieder zu löschen.\n               \n               \n               Bei internationalen Anrufen drücken Sie  zweimal für die internationale Vorwahl (das +-Zeichen ersetzt den internationalen Zugangscode) und geben anschließend die\n                  Landesvorwahl, die Ortsvorwahl (unter Umständen ohne die erste 0) und die Telefonnummer ein.\n               \n               \n            \n            \n            \n               Drücken Sie  um die Nummer anzurufen.\n               \n            \n            \n            \n               Drücken Sie  um den Anruf zu beenden (oder den Anrufversuch abzubrechen).\n               \n            \n            \n         \n         \n         \n      \n      \n      \n      \n         \n         \n            \n            Kurzwahl\n               Bevor Sie die Kurzwahl verwenden können, weisen Sie einer der Kurzwahltasten von bis  eine Telefonnummer zu.\n            \n            \n            Sprachanwahl\n               Eine Nummer kann gewählt werden, indem Sie ein oder mehrere Wörter sprechen, die damit verknüpft wurden. Bei dem Anrufnamen\n               kann es sich beispielsweise um einen Namen handeln.\n            \n            \n         \n         \n         \n         \n            \n            Übergeordnetes Thema: Anruffunktionen\n            \n         \n         \n         \n         Zugehörige Tasks\n            \n            \n            Sprachanwahl\n            \n            Beantworten oder Abweisen eines ankommenden Anrufs\n         \n         \n         \n         Zugehörige Informationen\n            \n            \n            Kurzwahl\n            \n            Anruffunktionen\n            \n            Tasten\n         \n         \n      \n   ",
+      "CreatedDate": "22.12.2015 18:26:48",
+      "ModifiedDate": "23.12.2015 3:21:05",
+      "PublicationId": 1961700,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
+    },
+    {
+      "Id": "ish_1961700-164345-16",
+      "Meta": {
+        "FTITLE.logical.value": "water rapids"
+      },
+      "Locale": "de",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      Water Rapids\n      \n      \n      \n      \n         Mit dem Kanu sind sechs Flüsse zu bewältigen.\n         \n         \n         \n         Am ende jedes Flusses geht es zum nächsten.\n         \n         \n         Punkte gibt es für die Überwindung von Stromschnellen und Wasserfällen und das Beruhren der Bonusflaggen.\n         \n         \n         Vorwärts gepaddelt wird mit oder .\n         \n         \n         \n         Drehen des Kanus macht man mit oder .\n         \n         \n         \n         Zu beginn stehen vier Kanus zur Verfügung die unterwegs durch Kentern oder Strande verloren gehen können.\n         \n         \n      \n      \n      \n      \n         \n         \n            \n            Übergeordnetes Thema: Spiele\n            \n         \n         \n      \n   ",
+      "CreatedDate": "22.12.2015 18:27:08",
+      "ModifiedDate": "23.12.2015 3:21:29",
+      "PublicationId": 1961700,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
+    },
+    {
+      "Id": "ish_1961700-164229-16",
+      "Meta": {
+        "FTITLE.logical.value": "your phone"
+      },
+      "Locale": "de",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      Ihr Telefon\n      \n      \n      \n      \n         \n         \n         \n         \n         \n         \n      \n      \n      \n      \n         \n         \n            \n            Tasten\n               \n            \n            \n            Anschlüsse\n               \n            \n            \n            Ausgangsanzeige\n               Wenn das Telefon betriebsbereit ist und Sie keine Zeichen eingegeben haben, befindet sich das Telefon in der Ausgangsanzeige.\n               Der Name/Logo des Netzbetreiber erscheint im Display.\n            \n            \n            Wichtige Symbole in der Ausgangsanzeige\n               \n            \n            \n            Bildschirmschoner\n               Das Telefon aktiviert in der Ausgangsanzeige automatisch den Bildschirmschoner in Form einer Digitaluhr, um den Akkuverbrauch\n               zu reduzieren.\n            \n            \n            General Packet Radio Service (GPRS)\n               GPRS ist eine Technik, die es Mobiltelefonen ermöglicht, Daten über das Mobilfunknetz (Netzdienst) zu senden und zu empfangen.\n               \n            \n            \n            Bluetooth-Verbindung\n               Sie konnen Daten per Bluetooth oder Infrarot von Ihrem Telefon zu einem anderen kompatiblen Gerat, beispielsweise einem Telefon,\n               einem Headset mit Bluetooth-Technik.\n            \n            \n         \n         \n      \n   ",
+      "CreatedDate": "22.12.2015 18:26:51",
+      "ModifiedDate": "23.12.2015 3:21:08",
+      "PublicationId": 1961700,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
+    },
+    {
+      "Id": "ish_1961700-164388-16",
+      "Meta": {
+        "FTITLE.logical.value": "multimedia messages"
+      },
+      "Locale": "de",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      Multimedia-Mitteilungen\n      \n      \n      \n      \n         Multimedia-Mitteilungen können Text, Bilder und Klänge enthalten.\n         \n         \n         Ihr Telefon kann Multimedia-Mitteilungen mit Ton empfangen, aber nicht senden. Das Telefon unterstützt Multimedia-Mitteilungen\n            mit einer Größe von bis zu 45 KB. Wenn die maximale Größe überschritten wird, kann das Telefon die Mitteilung nicht empfangen.\n            Je nach Netz empfangen Sie ggf. eine Kurzmitteilung mit einer Internet-Adresse, unter der Sie die Multimedia-Mitteilung anzeigen\n            können.\n         \n         \n         \n         Wenn die Mitteilung ein Bild enthält, wird dies so weit verkleinert, dass es in den Displaybereich passt.\n         \n         \n         Für Multimedia-Mitteilungen werden folgende Formate unterstützt:\n         \n         \n         \n            \n            Bilder: JPEG, GIF, PNG und BMP.\n            \n            \n            Klänge: MIDI, SP-MIDI (Scalable Polyphonic MIDI), einstimmige Ruftontypen (RGN) und WB-AMR.\n            \n            \n         \n         \n         \n      \n      \n      \n      \n         \n         \n            \n            Übergeordnetes Thema: Mitteilungen\n            \n         \n         \n      \n   ",
+      "CreatedDate": "22.12.2015 18:27:14",
+      "ModifiedDate": "23.12.2015 3:21:36",
+      "PublicationId": 1961700,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
+    },
+    {
+      "Id": "ish_1961700-164221-16",
+      "Meta": {
+        "FTITLE.logical.value": "introduction"
+      },
+      "Locale": "de",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      Sehr geehrter Kunde!\n      \n      \n      \n         \n         \n            \n            Mit dem Kauf dieses Mobiltelefons haben Sie sich für ein Qualitätsprodukt entschieden. Ihr Gerät erfüllt die unterschiedlichen\n               Anforderungen, die der moderne Mobilkommunikation mit sich bringt.\n            \n            \n         \n         \n         \n         \n            \n            Lesen Sie bitte die Bedienungsanleitung aufmerksam durch, und beachten Sie die Sicherheitshinweise, um den einwandfreien Betrieb\n               Ihres Multifunktionsgerätes zu gewährleisten. Ihr Handy wird über die IMEI-Nummer identifiziert. Notieren Sie diese Nummer,\n               und bewahren Sie sie getrennt von Ihrem Handy auf. Wenn Ihr Handy gestohlen wird, werden Sie möglicherweise aufgefordert,\n               diese Nummer anzugeben. Dadurch wird verhindert, dass jemand das Handy verwenden kann, selbst wenn eine andere SIM-Karte eingesetzt\n               wird. Tippen Sie folgende Zeichenfolge ein, um die IMEI-Nummer auf dem Display des Handys anzuzeigen: *#06#. \n            \n            \n            \n         \n         \n         \n         \n            \n            Die Bluetooth-Technik ermöglicht kostenlose Funkverbindungen zwischen elektronischen Geräten in einem Umkreis von bis zu zehn\n               Metern. Eine Bluetooth-Verbindung kann zum Übermitteln von Bildern, Videos, Text, Visitenkarten oder Kalendernotizen sowie\n               zur Funkverbindung mit Geräten, die die Bluetooth-Technik verwenden (z. B. Computern) eingesetzt werden.\n            \n            \n            \n         \n         \n         \n         \n            \n            Verwenden Sie ausschließlich originales Zubehör. Die Garantie deckt keine Schäden am Gerät ab, die durch die Verwendung anderer\n               Verbrauchsmaterialien entstanden sind. \n            \n            \n            \n            Es ist Teil unserer ständigen Bestrebungen, unsere Produkte nach höchsten Qualitätsstandards sowie größtmöglicher Benutzerfreundlichkeit\n               zu entwickeln.\n            \n            \n            \n         \n         \n         \n      \n      \n      \n   ",
+      "CreatedDate": "22.12.2015 18:26:50",
+      "ModifiedDate": "23.12.2015 3:21:07",
+      "PublicationId": 1961700,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
+    },
+    {
+      "Id": "ish_1961700-164442-16",
+      "Meta": {
+        "FTITLE.logical.value": "editing a contact"
+      },
+      "Locale": "de",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      Bearbeiten einer Adresse\n      \n      \n      \n         \n         \n            \n               Suchen Sie nach der Adresse, die bearbeitet werden soll, und drücken Sie Details. \n               \n            \n            \n            \n               Blättern Sie zu dem Namen, der Nummer oder der Textnotiz, der bzw. die bearbeitet werden soll, und drücken Sie Optionen. \n               \n            \n            \n            \n               Wählen Sie Namen ändern, Nummer ändern oder Details ändern, und bearbeiten Sie den Namen, die Nummer, oder die Textnotiz. Drücken Sie anschließend OK.\n               \n            \n            \n         \n         \n         \n      \n      \n      \n      \n         \n         \n            \n            Übergeordnetes Thema: Adressbuch\n            \n         \n         \n      \n   ",
+      "CreatedDate": "22.12.2015 18:27:22",
+      "ModifiedDate": "23.12.2015 3:21:46",
+      "PublicationId": 1961700,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
+    },
+    {
+      "Id": "ish_1961700-164337-16",
+      "Meta": {
+        "FTITLE.logical.value": "listening to music"
+      },
+      "Locale": "de",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      Anhören von Musik\n      \n      \n      \n         \n         \n         \n            \n               Drücken Sie die Musiktaste, und wählen Sie Player.\n               \n            \n            \n            \n               Die 4-Wege-Pfeiltaste ermöglicht Ihnen die Verwendung der Musikfunktionen\n               \n               \n                  \n                  \n                     \n                     Zum Vor- oder Zurückspulen des aktuellen Titels drücken Sie  oder , beziehungsweise.\n                     \n                     \n                     \n                     Um zum nächsten oder vorherigen Titel der Musiktitelliste zu springen, drücken Sie kurz  oder , beziehungsweise.\n                     \n                     \n                     \n                     Wenn Sie die Wiedergabe stoppen möchten, drücken Sie .\n                     \n                     \n                     \n                     Wenn Sie die Wiedergabe fortsetzen möchten, drücken Sie .\n                     \n                     \n                     \n                  \n                  \n                  \n               \n               \n            \n            \n            \n               Zum Abschalten der Player-Funktion, drücken Sie die Musiktaste und wählenMusik ausschalten\n               \n            \n            \n         \n         \n         \n      \n      \n      \n      \n         \n         \n            \n            Übergeordnetes Thema: Musikfunktionen\n            \n         \n         \n      \n   ",
+      "CreatedDate": "22.12.2015 18:27:07",
+      "ModifiedDate": "23.12.2015 3:21:27",
+      "PublicationId": 1961700,
+      "PublicationTitle": "User Guide",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
+    }
+  ]
+}

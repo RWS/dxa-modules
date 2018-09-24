@@ -1,0 +1,25 @@
+{
+  "Id": "164185",
+  "Meta": {
+    "ishlogicalref.object.id": 164183,
+    "conditionsused.generated.value": "{\"MODEL\":[\"330\"]}",
+    "tocnaventries.generated.value": "ish:1961700-7-1024"
+  },
+  "Regions": [
+    {
+      "Entities": [
+        {
+          "Id": "164185",
+          "topicTitle": "Ausgangsanzeige",
+          "topicBody": {
+            "Fragments": [
+              {
+                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-11DF4D0E-11C3-4C1E-946D-0950B6DFDC4F__GUID-163B3BB0-8F07-47E7-91C9-99982AFB4ADA\" xmlns=\"http://www.w3.org/1999/xhtml\">Ausgangsanzeige</h1>\n      \n      \n      \n      <div class=\"body conbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">Wenn das Telefon betriebsbereit ist und Sie keine Zeichen eingegeben haben, befindet sich das Telefon in der Ausgangsanzeige.\n            Der Name/Logo des Netzbetreiber erscheint im Display.\n         </p>\n         \n         <tcdl:If type=\"ish:Condition\" condition=\"(MODEL=330)\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\"><img class=\"image\" src=\"/app/gui/mocks/bin/1961700-345875-16.gif\" /></tcdl:If>\n         \n         \n         <ol class=\"ol\" id=\"GUID-11DF4D0E-11C3-4C1E-946D-0950B6DFDC4F__GUID-91A65A58-EB16-4404-AA87-C2C468AE6F5C\">\n            \n            <li class=\"li\">Gibt den Namen des aktuell verwendeten Mobilfunknetzes an.</li>\n            \n            \n            <li class=\"li\">Die Signalstärke des Funknetzes am gegenwärtigen Standort. Je länger der Balken ist, desto stärker ist das Signal.</li>\n            \n            \n            <li class=\"li\">Der Ladezustand des Akkus . Je länger der Balken ist, desto stärker ist der Akku geladen.</li>\n            \n            \n            <li class=\"li\">Die linke Auswahltaste der Ausgangsanzeige öffnet das Menü.</li>\n            \n            \n            <li class=\"li\">In der Ausgangsanzeige öffnet die rechte Auswahltaste die Funktion Adressen, wenn dieser Taste keine andere Funktionen zugewiesen\n               wurden. Andernfalls öffnet die Taste die Funktion Nach.\n            </li>\n            \n            \n            <tcdl:If type=\"ish:Condition\" condition=\"(MODEL=330)\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\"><li class=\"li\">Zeigt den Musiktitel an, wenn der Player aktiv ist oder den Radiosender wenn das Radio eingeschaltet ist.</li></tcdl:If>\n            \n            \n            \n            \n         </ol>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Übergeordnetes Thema:</strong> <a class=\"link\" href=\"/app/1961700/164229/user-guide/ihr-telefon\">Ihr Telefon</a></div>\n            \n         </div>\n         \n         \n         <div class=\"linklist linklist relinfo reltasks\"><strong>Zugehörige Tasks</strong><br />\n            \n            \n            <div><a class=\"link\" href=\"/app/1961700/164269/user-guide/installieren-der-sim-karte-und-des-akkus\">Installieren der SIM-Karte und des Akkus</a></div>\n            \n            <div><a class=\"link\" href=\"/app/1961700/164288/user-guide/laden-des-akkus\">Laden des Akkus</a></div>\n         </div>\n         \n         \n         <div class=\"linklist linklist relinfo\"><strong>Zugehörige Informationen</strong><br />\n            \n            \n            <div><a class=\"link\" href=\"/app/1961700/164253/user-guide/wichtige-symbole-in-der-ausgangsanzeige\">Wichtige Symbole in der Ausgangsanzeige</a></div>\n            \n            <div><a class=\"link\" href=\"/app/1961700/164153/user-guide/anschlusse\">Anschlüsse</a></div>\n         </div>\n         \n      </div>\n   "
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
