@@ -18,7 +18,7 @@ pipeline {
                         branch 'development'
                     }
                     steps {
-                        //TODO: Implement publishing to Nexus
+                        //TODO: Implement publishing to Nexus(Ticket in Jira https://jira.sdl.com/browse/TSI-3512)
                     }
                 } */
             }
