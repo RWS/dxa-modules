@@ -1,0 +1,52 @@
+@import (reference) "~theme-styles";
+
+.sdl-dita-delivery-comment {
+    .import-regular-font();
+    font-size: @fontSize;
+    border-top: 1px solid @neutralColor9;
+    padding: 20px 0;
+
+    .sdl-dita-delivery-comment-username {
+        font-weight: bold;
+        color: @neutralColor8;
+        font-size: calc(@fontSize + 4);
+        height: 28px;
+    }
+    .sdl-dita-delivery-comment-date {
+        color: @neutralColor10;
+        height: 24px;
+    }
+    .sdl-dita-delivery-comment-content {
+        color: @neutralColor11;
+        line-height: 30px;
+    }
+    .sdl-dita-delivery-comment-replies {
+        .sdl-button.graphene.sdl-button-purpose-ghost {
+            border: none;
+            padding: 0;
+            color: @neutralColor10;
+            font-size: 14px;
+            &:before{
+                width: 30px;
+            }
+            margin-right: 25px;
+            .rtl & {
+                margin-right: 0;
+                margin-left: 25px;
+            }
+            &.reply-comment {
+                .icon-reply(20px, @accentColor1);
+            }
+            &.show-replies {
+                .icon-replies(20px, @accentColor1);
+            }
+        }
+        .replies {
+            margin-left: 30px;
+            .rtl & {
+                margin-left: 0;
+                margin-right: 30px;
+            }
+        }
+    }
+}

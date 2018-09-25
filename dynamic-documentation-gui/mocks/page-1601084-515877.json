@@ -1,0 +1,25 @@
+{
+  "Id": "515877",
+  "Meta": {
+    "ishlogicalref.object.id": 515871,
+    "conditionsused.generated.value": null,
+    "tocnaventries.generated.value": "ish:1601084-77-1024"
+  },
+  "Regions": [
+    {
+      "Entities": [
+        {
+          "Id": "515877",
+          "topicTitle": "Snowy sheathbill (Chionis albus)",
+          "topicBody": {
+            "Fragments": [
+              {
+                "Html": "\n       \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-E22B483D-5A87-4ADE-9933-9061EC68BF77__GUID-E8C3ECC6-8533-4D69-87B9-02E12B4A6D81\" xmlns=\"http://www.w3.org/1999/xhtml\">Snowy sheathbill (Chionis albus)</h1>\n      \n      \n      <div class=\"body refbody\" xmlns=\"http://www.w3.org/1999/xhtml\"> \n         \t \n         <div class=\"section\" id=\"GUID-E22B483D-5A87-4ADE-9933-9061EC68BF77__GUID-1AAB8162-E1A0-4A6B-8C38-8D106BC0441B\"> \n            \t\t\n            <p class=\"p\">The \n               \t\t  <strong class=\"ph b\">snowy sheathbill</strong> (Chionis albus), also known as the greater sheathbill, pale-faced sheathbill , and paddy, is one of two species of sheathbill.\n               It is usually found on the ground. It the only land bird (excluding penguins) native to Antarctica. \n               \t\t\n            </p>\n            \n            \t\t\n            <div class=\"p\"> \n               \t\t  \n               <div class=\"fig fignone\" id=\"GUID-E22B483D-5A87-4ADE-9933-9061EC68BF77__FIG_3EC945D8B4524094A50B072FF5FD708C\"><img class=\"image\" id=\"GUID-E22B483D-5A87-4ADE-9933-9061EC68BF77__IMAGE_156CF3F52B954C88B3DAE823DE57033D\" src=\"/app/gui/mocks/bin/1601084-515530-16.jpg\" /> \n                  \t\t  \n               </div>\n               \n               \t\t\n            </div>\n            \n            \t\t\n            <p class=\"p\">A snowy sheathbill is about 380-410 mm (15-16 in) long, with a wingspan of 760-800 mm (30-31 in). It is pure white except\n               for its pink, warty face; its Latin name translates to \"snow white\". The snowy sheathbill lives in Antarctica, the Scotia\n               Arc, the South Orkneys, and South Georgia. Snowy sheathbills living very far south migrate north in winter. \n               \t\t\n            </p>\n            \n            \t\t\n            <p class=\"p\">The snowy sheathbill does not have webbed feet. It finds its food on the land. It is an omnivore, a scavenger, and a kleptoparasite.\n               It steals krill and fish from penguins and sometimes eats their eggs and down-covered chicks. It also eats carrion, animal\n               feces, and, where available, human waste. \n               \t\t\n            </p>\n            \n            \t \n         </div>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Parent topic:</strong> <a class=\"link\" title=\"This topic groups birds of other orders which are predators of penguins or have another relation with the penguins\" href=\"/app/1601084/515736/penguin-guide/other-birds\">Other birds</a></div>\n            \n         </div>\n         \n      </div>\n   "
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

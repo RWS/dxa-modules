@@ -1,0 +1,157 @@
+{
+  "Hits": 119,
+  "Count": 10,
+  "StartIndex": 100,
+  "QueryResults": [
+    {
+      "Id": "ish_1611362-368480-16",
+      "Meta": {
+        "FTITLE.logical.value": "Status/Error List"
+      },
+      "Locale": "ja",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      コンセプト・タイトルを入力してください\n      \n      \n      \n      \n         簡単な説明を入力してください (任意)\n         \n         \n         ここから始めてください\n         \n         \n      \n      \n      \n      \n         \n         \n            \n            親トピック: トピック・タイトルを入力して下さい\n            \n         \n         \n      \n   ",
+      "CreatedDate": "06.01.2016 10:55:00",
+      "ModifiedDate": "14.01.2016 5:25:10",
+      "PublicationId": 1611362,
+      "PublicationTitle": "LS40-el",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
+    },
+    {
+      "Id": "ish_1611362-368533-16",
+      "Meta": {
+        "FTITLE.logical.value": "[Phenomenon 53] Solvent is not supplied"
+      },
+      "Locale": "ja",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      リファレンス・タイトルを入力してください\n      \n      \n      \n      \n         簡単な説明を入力してください (任意)\n         \n         \n         実際の情報をこのセクションに入力してください (任意)\n         \n         \n         実例を入力してください (任意)\n         \n         \n      \n      \n      \n      \n         \n         \n            \n            親トピック: トピック・タイトルを入力して下さい\n            \n         \n         \n      \n   ",
+      "CreatedDate": "06.01.2016 10:55:08",
+      "ModifiedDate": "14.01.2016 5:25:15",
+      "PublicationId": 1611362,
+      "PublicationTitle": "LS40-el",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
+    },
+    {
+      "Id": "ish_1611362-368476-16",
+      "Meta": {
+        "FTITLE.logical.value": "Safety monitor (In touch panel)"
+      },
+      "Locale": "ja",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      トピック・タイトルを入力して下さい\n      \n      \n      \n      \n         簡単な説明を入力して下さい(任意)\n         \n         \n         トピックを入力して下さい\n         \n         \n      \n      \n      \n      \n         \n         \n            \n            リファレンス・タイトルを入力してください\n               簡単な説明を入力してください (任意)\n            \n            \n            リファレンス・タイトルを入力してください\n               簡単な説明を入力してください (任意)\n            \n            \n            リファレンス・タイトルを入力してください\n               簡単な説明を入力してください (任意)\n            \n            \n            リファレンス・タイトルを入力してください\n               簡単な説明を入力してください (任意)\n            \n            \n         \n         \n         \n         \n            \n            親トピック: トピック・タイトルを入力して下さい\n            \n         \n         \n      \n   ",
+      "CreatedDate": "06.01.2016 10:54:59",
+      "ModifiedDate": "14.01.2016 5:25:10",
+      "PublicationId": 1611362,
+      "PublicationTitle": "LS40-el",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
+    },
+    {
+      "Id": "ish_1611362-368472-16",
+      "Meta": {
+        "FTITLE.logical.value": "Paper size monitor"
+      },
+      "Locale": "ja",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      リファレンス・タイトルを入力してください\n      \n      \n      \n      \n         簡単な説明を入力してください (任意)\n         \n         \n         実際の情報をこのセクションに入力してください (任意)\n         \n         \n         実例を入力してください (任意)\n         \n         \n      \n      \n      \n      \n         \n         \n            \n            親トピック: トピック・タイトルを入力して下さい\n            \n         \n         \n      \n   ",
+      "CreatedDate": "06.01.2016 10:54:59",
+      "ModifiedDate": "14.01.2016 5:25:09",
+      "PublicationId": 1611362,
+      "PublicationTitle": "LS40-el",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
+    },
+    {
+      "Id": "ish_1611362-368569-16",
+      "Meta": {
+        "FTITLE.logical.value": "[Phenomenon 26] Ink duct rollers do not operate"
+      },
+      "Locale": "ja",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      リファレンス・タイトルを入力してください\n      \n      \n      \n      \n         簡単な説明を入力してください (任意)\n         \n         \n         実際の情報をこのセクションに入力してください (任意)\n         \n         \n         実例を入力してください (任意)\n         \n         \n      \n      \n      \n      \n         \n         \n            \n            親トピック: トピック・タイトルを入力して下さい\n            \n         \n         \n      \n   ",
+      "CreatedDate": "06.01.2016 10:55:13",
+      "ModifiedDate": "14.01.2016 5:25:19",
+      "PublicationId": 1611362,
+      "PublicationTitle": "LS40-el",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
+    },
+    {
+      "Id": "ish_1611362-368929-16",
+      "Meta": {
+        "FTITLE.logical.value": "Delivery unit alarms"
+      },
+      "Locale": "ja",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      リファレンス・タイトルを入力してください\n      \n      \n      \n      \n         簡単な説明を入力してください (任意)\n         \n         \n         実際の情報をこのセクションに入力してください (任意)\n         \n         \n         実例を入力してください (任意)\n         \n         \n      \n      \n      \n      \n         \n         \n            \n            親トピック: トピック・タイトルを入力して下さい\n            \n         \n         \n      \n   ",
+      "CreatedDate": "06.01.2016 10:56:07",
+      "ModifiedDate": "14.01.2016 5:25:57",
+      "PublicationId": 1611362,
+      "PublicationTitle": "LS40-el",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
+    },
+    {
+      "Id": "ish_1611362-368895-16",
+      "Meta": {
+        "FTITLE.logical.value": "Adjustment method"
+      },
+      "Locale": "ja",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      コンセプト・タイトルを入力してください\n      \n      \n      \n      \n         簡単な説明を入力してください (任意)\n         \n         \n         ここから始めてください\n         \n         \n      \n      \n      \n      \n         \n         \n            \n            コンセプト・タイトルを入力してください\n               簡単な説明を入力してください (任意)\n            \n            \n            コンセプト・タイトルを入力してください\n               簡単な説明を入力してください (任意)\n            \n            \n            コンセプト・タイトルを入力してください\n               簡単な説明を入力してください (任意)\n            \n            \n         \n         \n         \n         \n            \n            親トピック: トピック・タイトルを入力して下さい\n            \n         \n         \n      \n   ",
+      "CreatedDate": "06.01.2016 10:56:02",
+      "ModifiedDate": "14.01.2016 5:25:53",
+      "PublicationId": 1611362,
+      "PublicationTitle": "LS40-el",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
+    },
+    {
+      "Id": "ish_1611362-368565-16",
+      "Meta": {
+        "FTITLE.logical.value": "[Phenomenon 4] Reverse inch operation is not possible"
+      },
+      "Locale": "ja",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      リファレンス・タイトルを入力してください\n      \n      \n      \n      \n         簡単な説明を入力してください (任意)\n         \n         \n         実際の情報をこのセクションに入力してください (任意)\n         \n         \n         実例を入力してください (任意)\n         \n         \n      \n      \n      \n      \n         \n         \n            \n            親トピック: トピック・タイトルを入力して下さい\n            \n         \n         \n      \n   ",
+      "CreatedDate": "06.01.2016 10:55:12",
+      "ModifiedDate": "14.01.2016 5:25:19",
+      "PublicationId": 1611362,
+      "PublicationTitle": "LS40-el",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
+    },
+    {
+      "Id": "ish_1611362-368717-16",
+      "Meta": {
+        "FTITLE.logical.value": "[Phenomenon 8] Reverse operation is not possible"
+      },
+      "Locale": "ja",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      リファレンス・タイトルを入力してください\n      \n      \n      \n      \n         簡単な説明を入力してください (任意)\n         \n         \n         実際の情報をこのセクションに入力してください (任意)\n         \n         \n         実例を入力してください (任意)\n         \n         \n      \n      \n      \n      \n         \n         \n            \n            親トピック: トピック・タイトルを入力して下さい\n            \n         \n         \n      \n   ",
+      "CreatedDate": "06.01.2016 10:55:35",
+      "ModifiedDate": "14.01.2016 5:25:34",
+      "PublicationId": 1611362,
+      "PublicationTitle": "LS40-el",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
+    },
+    {
+      "Id": "ish_1611362-368617-16",
+      "Meta": {
+        "FTITLE.logical.value": "[Phenomenon 5] Slow speed operation is not possible"
+      },
+      "Locale": "ja",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      リファレンス・タイトルを入力してください\n      \n      \n      \n      \n         簡単な説明を入力してください (任意)\n         \n         \n         実際の情報をこのセクションに入力してください (任意)\n         \n         \n         実例を入力してください (任意)\n         \n         \n      \n      \n      \n      \n         \n         \n            \n            親トピック: トピック・タイトルを入力して下さい\n            \n         \n         \n      \n   ",
+      "CreatedDate": "06.01.2016 10:55:20",
+      "ModifiedDate": "14.01.2016 5:25:24",
+      "PublicationId": 1611362,
+      "PublicationTitle": "LS40-el",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
+    }
+  ]
+}
