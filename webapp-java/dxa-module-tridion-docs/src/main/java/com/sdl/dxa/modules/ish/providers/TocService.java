@@ -7,7 +7,6 @@ import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.content.ContentProviderException;
 import com.sdl.webapp.common.api.model.entity.SitemapItem;
 import com.sdl.webapp.common.api.navigation.NavigationFilter;
-import com.sdl.webapp.common.api.navigation.OnDemandNavigationProvider;
 import com.sdl.webapp.common.exceptions.DxaItemNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,6 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import static com.sdl.webapp.common.api.serialization.json.filter.IgnoreByNameInRequestFilter.ignoreByName;
@@ -29,15 +27,14 @@ import static com.sdl.webapp.common.api.serialization.json.filter.IgnoreByNameIn
 @Slf4j
 public class TocService {
 
-
     @Autowired
     @Qualifier("ishNavigationProvider")
-    private OnDemandNavigationProvider onDemandNavigationProvider;
+    private IshDynamicNavigationProvider ishNavigationProvider;
 
     public Collection<SitemapItem> getToc(Integer publicationId, String sitemapItemId, boolean includeAncestors,
                                           int descendantLevels, HttpServletRequest request,
                                           WebRequestContext webRequestContext) throws ContentProviderException {
-        if (onDemandNavigationProvider == null) {
+        if (ishNavigationProvider == null) {
             String message = "On-Demand Navigation is not enabled because current navigation provider doesn't " +
                     "support it. If you are using your own navigation provider, you should Implement " +
                     "OnDemandNavigationProvider interface, otherwise check document on how you should enable " +
@@ -56,7 +53,7 @@ public class TocService {
         navigationFilter.setDescendantLevels(descendantLevels);
         List<SitemapItem> navigationSubtree = null;
         try {
-            navigationSubtree = new ArrayList(onDemandNavigationProvider.getNavigationSubtree(sitemapItemId, navigationFilter, localization));
+            navigationSubtree = new ArrayList(ishNavigationProvider.getNavigationSubtree(sitemapItemId, navigationFilter, localization));
         } catch (DxaItemNotFoundException e) {
             log.warn("Such item (" + sitemapItemId + ") for publication " + publicationId + " is not found", e);
             throw e;
