@@ -1,0 +1,24 @@
+{
+  "Id": "703928",
+  "Meta": {
+    "ishlogicalref.object.id": 699862,
+    "conditionsused.generated.value": null
+  },
+  "Regions": [
+    {
+      "Entities": [
+        {
+          "Id": "703928",
+          "topicTitle": "TopicB",
+          "topicBody": {
+            "Fragments": [
+              {
+                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-A8426896-F69A-4B1F-80DE-799A4717B6C9__GUID-304C73EB-DA76-4877-9757-AC71805EBE59\" xmlns=\"http://www.w3.org/1999/xhtml\">TopicB</h1>\n      \n      \n      \n      <div class=\"body taskbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">Enter a short description of your task here (optional).</p>\n         \n         \n         <div class=\"section prereq p\" id=\"GUID-A8426896-F69A-4B1F-80DE-799A4717B6C9__GUID-521B70E0-0EA9-4C7C-B30B-CBFD87221311\">Enter the prerequisites here (optional).</div>\n         \n         \n         <div class=\"section context\" id=\"GUID-A8426896-F69A-4B1F-80DE-799A4717B6C9__GUID-D1582C9E-0A72-4316-8117-4FB860FE7A9C\">Enter the context of your task here (optional).</div>\n         \n         \n         <div class=\"li step p\"><span class=\"ph cmd\">Enter your first step here.</span><div class=\"itemgroup stepresult\">Enter the result of your step here (optional).</div>\n         </div>\n         \n         \n         <div class=\"example\" id=\"GUID-A8426896-F69A-4B1F-80DE-799A4717B6C9__GUID-C23E4FBD-E0A0-464D-B042-01E64795DEF6\">Enter an example that illustrates the current task (optional).</div>\n         \n         \n         <div class=\"section postreq\" id=\"GUID-A8426896-F69A-4B1F-80DE-799A4717B6C9__GUID-4168BE59-85D5-486F-8E2B-AD73F3F6CD41\">Enter the tasks the user should do after finishing this task (optional).</div>\n         \n         \n      </div>\n      \n      \n   "
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

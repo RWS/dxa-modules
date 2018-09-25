@@ -1,0 +1,30 @@
+@import (reference) "~theme-styles";
+
+.sdl-dita-delivery-comments-list {
+    padding: 0 15px;
+    margin-top: 25px;
+
+    > span {
+        font-family: @fontHeaderFamily;
+        font-size: 24px;
+        color: @neutralColor8;
+        display: block;
+    }
+
+    .sdl-dita-delivery-comment:first-of-type {
+        border-top: none;
+    }
+
+    .sdl-dita-delivery-comments-list-more {
+        text-align: center;
+        margin-top: 15px;
+
+        div {
+            margin: 10px 0;
+            font-size: @fontSize + 2;
+            font-family: @fontFamily;
+            color: @neutralColor10;
+            line-height: 30px;
+        }
+    }
+}

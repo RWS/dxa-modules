@@ -1,0 +1,142 @@
+{
+  "Hits": 119,
+  "Count": 10,
+  "StartIndex": 110,
+  "QueryResults": [
+    {
+      "Id": "ish_1611362-368925-16",
+      "Meta": {
+        "FTITLE.logical.value": "Appendix"
+      },
+      "Locale": "ja",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      トピック・タイトルを入力して下さい\n      \n      \n      \n      \n         簡単な説明を入力して下さい(任意)\n         \n         \n         トピックを入力して下さい\n         \n         \n      \n      \n      \n      \n         \n         \n            \n            リファレンス・タイトルを入力してください\n               簡単な説明を入力してください (任意)\n            \n            \n            トピック・タイトルを入力して下さい\n               簡単な説明を入力して下さい(任意)\n            \n            \n         \n         \n      \n   ",
+      "CreatedDate": "06.01.2016 10:56:07",
+      "ModifiedDate": "14.01.2016 5:25:56",
+      "PublicationId": 1611362,
+      "PublicationTitle": "LS40-el",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
+    },
+    {
+      "Id": "ish_1611362-368891-16",
+      "Meta": {
+        "FTITLE.logical.value": "Configuration"
+      },
+      "Locale": "ja",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      コンセプト・タイトルを入力してください\n      \n      \n      \n      \n         簡単な説明を入力してください (任意)\n         \n         \n         ここから始めてください\n         \n         \n      \n      \n      \n      \n         \n         \n            \n            親トピック: トピック・タイトルを入力して下さい\n            \n         \n         \n      \n   ",
+      "CreatedDate": "06.01.2016 10:56:01",
+      "ModifiedDate": "14.01.2016 5:25:52",
+      "PublicationId": 1611362,
+      "PublicationTitle": "LS40-el",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
+    },
+    {
+      "Id": "ish_1611362-368561-16",
+      "Meta": {
+        "FTITLE.logical.value": "[Phenomenon 58] Sheet pile of the pile board guide hoist does not rise"
+      },
+      "Locale": "ja",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      リファレンス・タイトルを入力してください\n      \n      \n      \n      \n         簡単な説明を入力してください (任意)\n         \n         \n         実際の情報をこのセクションに入力してください (任意)\n         \n         \n         実例を入力してください (任意)\n         \n         \n      \n      \n      \n      \n         \n         \n            \n            親トピック: トピック・タイトルを入力して下さい\n            \n         \n         \n      \n   ",
+      "CreatedDate": "06.01.2016 10:55:12",
+      "ModifiedDate": "14.01.2016 5:25:18",
+      "PublicationId": 1611362,
+      "PublicationTitle": "LS40-el",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
+    },
+    {
+      "Id": "ish_1611362-368713-16",
+      "Meta": {
+        "FTITLE.logical.value": "[Phenomenon 2] Ready alarm does not sound"
+      },
+      "Locale": "ja",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      リファレンス・タイトルを入力してください\n      \n      \n      \n      \n         簡単な説明を入力してください (任意)\n         \n         \n         実際の情報をこのセクションに入力してください (任意)\n         \n         \n         実例を入力してください (任意)\n         \n         \n      \n      \n      \n      \n         \n         \n            \n            親トピック: トピック・タイトルを入力して下さい\n            \n         \n         \n      \n   ",
+      "CreatedDate": "06.01.2016 10:55:35",
+      "ModifiedDate": "14.01.2016 5:25:34",
+      "PublicationId": 1611362,
+      "PublicationTitle": "LS40-el",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
+    },
+    {
+      "Id": "ish_1611362-368459-16",
+      "Meta": {
+        "FTITLE.logical.value": "Electrical Specifications"
+      },
+      "Locale": "ja",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      リファレンス・タイトルを入力してください\n      \n      \n      \n      \n         簡単な説明を入力してください (任意)\n         \n         \n         実際の情報をこのセクションに入力してください (任意)\n         \n         \n         実例を入力してください (任意)\n         \n         \n      \n      \n      \n      \n         \n         \n            \n            親トピック: トピック・タイトルを入力して下さい\n            \n         \n         \n      \n   ",
+      "CreatedDate": "06.01.2016 10:54:56",
+      "ModifiedDate": "14.01.2016 5:25:08",
+      "PublicationId": 1611362,
+      "PublicationTitle": "LS40-el",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
+    },
+    {
+      "Id": "ish_1611362-368613-16",
+      "Meta": {
+        "FTITLE.logical.value": "[Phenomenon 1] Alarm continues to sound"
+      },
+      "Locale": "ja",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      リファレンス・タイトルを入力してください\n      \n      \n      \n      \n         簡単な説明を入力してください (任意)\n         \n         \n         実際の情報をこのセクションに入力してください (任意)\n         \n         \n         実例を入力してください (任意)\n         \n         \n      \n      \n      \n      \n         \n         \n            \n            親トピック: トピック・タイトルを入力して下さい\n            \n         \n         \n      \n   ",
+      "CreatedDate": "06.01.2016 10:55:20",
+      "ModifiedDate": "14.01.2016 5:25:23",
+      "PublicationId": 1611362,
+      "PublicationTitle": "LS40-el",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
+    },
+    {
+      "Id": "ish_1611362-368749-16",
+      "Meta": {
+        "FTITLE.logical.value": "[Phenomenon 56] Ready lamp does not light"
+      },
+      "Locale": "ja",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      リファレンス・タイトルを入力してください\n      \n      \n      \n      \n         簡単な説明を入力してください (任意)\n         \n         \n         実際の情報をこのセクションに入力してください (任意)\n         \n         \n         実例を入力してください (任意)\n         \n         \n      \n      \n      \n      \n         \n         \n            \n            親トピック: トピック・タイトルを入力して下さい\n            \n         \n         \n      \n   ",
+      "CreatedDate": "06.01.2016 10:55:40",
+      "ModifiedDate": "14.01.2016 5:25:37",
+      "PublicationId": 1611362,
+      "PublicationTitle": "LS40-el",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
+    },
+    {
+      "Id": "ish_1611362-368649-16",
+      "Meta": {
+        "FTITLE.logical.value": "[Phenomenon 34] Spray does not operate"
+      },
+      "Locale": "ja",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      リファレンス・タイトルを入力してください\n      \n      \n      \n      \n         簡単な説明を入力してください (任意)\n         \n         \n         実際の情報をこのセクションに入力してください (任意)\n         \n         \n         実例を入力してください (任意)\n         \n         \n      \n      \n      \n      \n         \n         \n            \n            親トピック: トピック・タイトルを入力して下さい\n            \n         \n         \n      \n   ",
+      "CreatedDate": "06.01.2016 10:55:25",
+      "ModifiedDate": "14.01.2016 5:25:27",
+      "PublicationId": 1611362,
+      "PublicationTitle": "LS40-el",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
+    },
+    {
+      "Id": "ish_1611362-368516-16",
+      "Meta": {
+        "FTITLE.logical.value": "How to Read the Status/Error List"
+      },
+      "Locale": "ja",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      トピック・タイトルを入力して下さい\n      \n      \n      \n      \n         簡単な説明を入力して下さい(任意)\n         \n         \n         トピックを入力して下さい\n         \n         \n      \n      \n      \n      \n         \n         \n            \n            コンセプト・タイトルを入力してください\n               簡単な説明を入力してください (任意)\n            \n            \n            コンセプト・タイトルを入力してください\n               簡単な説明を入力してください (任意)\n            \n            \n         \n         \n         \n         \n            \n            親トピック: トピック・タイトルを入力して下さい\n            \n         \n         \n      \n   ",
+      "CreatedDate": "06.01.2016 10:55:05",
+      "ModifiedDate": "14.01.2016 5:25:14",
+      "PublicationId": 1611362,
+      "PublicationTitle": "LS40-el",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
+    }
+  ]
+}
