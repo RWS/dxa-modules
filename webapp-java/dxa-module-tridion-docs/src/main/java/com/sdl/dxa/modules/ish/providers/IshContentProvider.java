@@ -37,7 +37,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -52,9 +51,8 @@ import static com.sdl.webapp.common.util.FileUtils.isToBeRefreshed;
 /**
  * Ish content provider.
  */
-@Component(value = "ishContentProvider")
+@Component("ishContentProvider")
 @Slf4j
-@Qualifier("ishContentProvider")
 public class IshContentProvider extends DefaultContentProvider {
 
     private static final String STATIC_FILES_DIR = "BinaryData";
@@ -151,9 +149,10 @@ public class IshContentProvider extends DefaultContentProvider {
 
     /**
      * Gets content of binary element (image, document, etc.).
+     *
      * @param publicationId Publication id
      * @param binaryId      Binary element id
-     * @return              StaticContentItem with binary content
+     * @return StaticContentItem with binary content
      */
     public StaticContentItem getBinaryContent(final Integer publicationId, final Integer binaryId) {
         WebComponentMetaFactory factory = new WebComponentMetaFactoryImpl(publicationId);

@@ -9,7 +9,6 @@ import com.sdl.webapp.common.util.TcmUtils;
 import com.tridion.taxonomies.Keyword;
 import com.tridion.taxonomies.TaxonomyRelationManager;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,8 +19,7 @@ import static com.sdl.dxa.common.util.PathUtils.stripDefaultExtension;
 import static com.sdl.webapp.common.util.TcmUtils.Taxonomies.SitemapItemType.KEYWORD;
 import static com.sdl.webapp.common.util.TcmUtils.Taxonomies.getTaxonomySitemapIdentifier;
 
-@Service
-@Qualifier("ishDynamicNavigationModelProvider")
+@Service("ishDynamicNavigationModelProvider")
 public class IshDynamicNavigationModelProvider extends DynamicNavigationModelProviderImpl {
     public IshDynamicNavigationModelProvider(WebTaxonomyFactory taxonomyFactory, TaxonomyRelationManager relationManager) {
         super(taxonomyFactory, relationManager);
@@ -29,7 +27,7 @@ public class IshDynamicNavigationModelProvider extends DynamicNavigationModelPro
 
     @Override
     protected String getKeywordMetaUri(String taxonomyId, SitemapRequestDto requestDto, List<SitemapItemModelData> children, Keyword keyword, boolean needsToAddChildren) {
-        if (keyword ==null || keyword.getKeywordMeta() == null) return "";
+        if (keyword == null || keyword.getKeywordMeta() == null) return "";
         Object firstValue = keyword.getKeywordMeta().getFirstValue("ish.ref.uri");
         return firstValue == null ? "" : firstValue.toString().replaceAll("\\D+:(\\d++)-(\\d++)-\\d++", "$1/$2");
     }
