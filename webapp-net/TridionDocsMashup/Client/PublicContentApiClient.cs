@@ -86,12 +86,18 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
                 And = customMetaFilters
             };
 
-            var contextData = new ContextData() { ClaimValues = new List<ClaimValue>() };
+            var contextData = new ContextData()
+            {
+                ClaimValues = new List<ClaimValue> {
+                new ClaimValue(){ Uri="dxa:modelservice:model:entity:relativelinks",Value="false",Type = ClaimValueType.BOOLEAN},
+                new ClaimValue(){ Uri="taf:tcdl:render:link:relative",Value="false",Type = ClaimValueType.BOOLEAN}
+                }
+            };
 
             var prefixForTopicsUrl = WebRequestContext.Localization?.GetConfigValue("tridiondocsmashup.PrefixForTopicsUrl");
             if (!string.IsNullOrWhiteSpace(prefixForTopicsUrl))
             {
-                contextData.ClaimValues.Add(new ClaimValue() { Uri = "taf:tcdl:render:link:binaryUrlPrefix", Value = prefixForTopicsUrl, Type = ClaimValueType.STRING });
+                contextData.ClaimValues.Add(new ClaimValue() { Uri = "taf:tcdl:render:link:urlprefix", Value = prefixForTopicsUrl, Type = ClaimValueType.STRING });
             }
 
             var prefixForBinariesUrl = WebRequestContext.Localization?.GetConfigValue("tridiondocsmashup.PrefixForBinariesUrl");
