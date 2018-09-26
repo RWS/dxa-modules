@@ -6,8 +6,6 @@ import com.sdl.webapp.common.api.content.ContentProviderException;
 import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.api.model.entity.SitemapItem;
 import com.sdl.webapp.common.api.navigation.NavigationFilter;
-import com.sdl.webapp.common.api.navigation.OnDemandNavigationProvider;
-import com.sdl.webapp.common.exceptions.DxaItemNotFoundException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,7 +34,7 @@ public class TocServiceTest {
     private Set<SitemapItem> tocItems;
 
     @Mock
-    private OnDemandNavigationProvider onDemandNavigationProvider;
+    private IshDynamicNavigationProvider ishNavigationProvider;
 
     @InjectMocks
     private TocService tocService;
@@ -58,8 +56,8 @@ public class TocServiceTest {
         final HttpServletRequest request = mock(HttpServletRequest.class);
         final WebRequestContext webRequestContext = mock(WebRequestContext.class);
 
-        when(onDemandNavigationProvider.getNavigationSubtree(anyString(), any(NavigationFilter.class),
-                    any(Localization.class))).thenReturn(tocItems);
+        when(ishNavigationProvider.getNavigationSubtree(anyString(), any(NavigationFilter.class),
+                any(Localization.class))).thenReturn(tocItems);
 
         when(webRequestContext.getLocalization()).thenReturn(new DocsLocalization());
 
