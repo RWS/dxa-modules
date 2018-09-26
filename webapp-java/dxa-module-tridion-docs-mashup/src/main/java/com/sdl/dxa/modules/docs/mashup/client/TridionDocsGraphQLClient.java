@@ -103,6 +103,9 @@ public class TridionDocsGraphQLClient implements ITridionDocsClient {
         customMetas.append(languageFilter);
 
         StringBuilder contextData = new StringBuilder();
+		
+		contextData.append(String.format("{\"uri\":\"%s\",\"value\":\"%s\",\"type\":\"BOOLEAN\"},", "dxa:modelservice:model:entity:relativelinks", "false"));
+		contextData.append(String.format("{\"uri\":\"%s\",\"value\":\"%s\",\"type\":\"BOOLEAN\"},", "taf:tcdl:render:link:relative", "false"));
 
         if (prefixForBinariesUrl != null && !prefixForBinariesUrl.isEmpty()) {
             contextData.append(String.format("{\"uri\":\"%s\",\"value\":\"%s\",\"type\":\"STRING\"},", "taf:tcdl:render:link:binaryUrlPrefix", prefixForBinariesUrl));
@@ -158,14 +161,14 @@ public class TridionDocsGraphQLClient implements ITridionDocsClient {
      * Get the Uri prefix for the Topic binary links
      */
     private String getPrefixForTopicsUrl() {
-        return _webRequestContext.getLocalization().getConfiguration("tridiondocsmashup.PrefixForBinariesUrl");
+        return _webRequestContext.getLocalization().getConfiguration("tridiondocsmashup.PrefixForTopicsUrl");
     }
 
     /**
      * Get the Uri prefix for the Topic links
      */
     private String getPrefixForBinariesUrl() {
-        return _webRequestContext.getLocalization().getConfiguration("tridiondocsmashup.PrefixForTopicsUrl");
+        return _webRequestContext.getLocalization().getConfiguration("tridiondocsmashup.PrefixForBinariesUrl");
     }
 
     /**
