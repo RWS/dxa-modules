@@ -67,14 +67,15 @@ public class TopicDeserializer extends StdDeserializer<List<Topic>> {
         return topics;
     }
 
-    public String getLink(String uri, String prefixForTopicsUrl) {
-
+    public String getLink(String topicOriginalUrl, String prefixForTopicsUrl) {
+		String uri = topicOriginalUrl;
+		
         if (uri != null && !uri.isEmpty()) {
             URI topicUri = URI.create(uri);
 
-            if (topicUri.isAbsolute()) {
-                uri = topicUri.toString();
-            } else {
+			 uri = topicUri.toString();
+			 
+            if (!topicUri.isAbsolute()) {
 
                 if ((topicUri.getHost() == null || topicUri.getHost().isEmpty()) && !uri.startsWith("/")) {
                     uri = "/" + uri;
