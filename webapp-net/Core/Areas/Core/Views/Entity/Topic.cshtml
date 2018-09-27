@@ -1,0 +1,13 @@
+﻿@model Topic
+
+<div class="rich-text @Model.HtmlClasses" @Html.DxaEntityMarkup()>
+
+    <div class="content">
+
+        <div @Html.DxaPropertyMarkup(() => Model.TopicBody)>
+            @Html.DxaRichText(Model.TopicBody)
+        </div>        
+
+    </div>
+
+</div>

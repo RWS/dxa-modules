@@ -1,0 +1,122 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// This file contains global LESS variables that can be used across the application for specifying typography
+// ---------------------------------------------------------------------------------------------------------------------
+
+@import (reference) "colors.less";
+@import (reference) "fonts.less";
+
+@headerSize: 36px;
+@h1Size: 24px;
+@h2Size: 20px;
+@h3Size: 18px;
+@h1Color: @accentColor1;
+@h2Color: @accentColor1;
+@h3Color: @neutralColor3;
+@anchorColor: @accentColor2;
+@paragraphColor: @neutralColor4;
+@tableBorderColor: @neutralColor5;
+
+.page-header() {
+    margin: 0 0 14px 0;
+    color: @h1Color;
+    .header-font(300, @headerSize, @headerSize);
+}
+
+/// Page content styles
+.header-h1() {
+    color: @h1Color;
+    .header-font(300, @h1Size, @h1Size);
+    margin: 40px 0 20px 0;
+    &:first-child {
+        margin-top: 0;
+    }
+}
+
+.header-h2() {
+    color: @h2Color;
+    .header-font(300, @h2Size, @h2Size);
+    margin: 40px 0 20px 0;
+}
+
+.header-h3() {
+    color: @h3Color;
+    font-weight: 400;
+    line-height: 24px;
+    font-size: @h3Size;
+    margin: 32px 0 16px 0;
+}
+
+.paragraph() {
+    color: @paragraphColor;
+    font-size: 14px;
+}
+
+.anchor() {
+    color: @anchorColor;
+    text-decoration: none;
+    &:hover {
+        color: @accentColor1;
+    }
+}
+
+.normal-monospace() {
+    font-family: monospace;
+    font-weight: normal;
+}
+
+.bold-monospace() {
+    font-family: monospace;
+    font-weight: bold;
+}
+
+.italic() {
+    font-style: italic;
+}
+
+//Table styles
+.table() {
+    border-color: @tableBorderColor;
+    border-style: none;
+    padding: 10px 0;
+}
+
+.table-header() {
+    text-transform: capitalize;
+    border-left-style: none;
+    border-top-style: none;
+    border-right-style: none;
+    border-bottom: 1px solid @tableBorderColor;
+    padding: 10px;
+    text-align: left;
+}
+
+.table-row() {
+    padding: 0;
+    border-style: none;
+}
+
+.table-cell() {
+    padding: 10px;
+    border-color: @tableBorderColor;
+    border-left-style: none;
+    border-top-style: none;
+    border-right-style: none;
+    border-bottom: 1px solid @tableBorderColor;
+    padding: 10px;
+}
+
+// List styles
+.unordered-list() {
+    li {
+        padding-left: 10px;
+        padding-bottom: 5px;
+    }
+}
+
+.ordered-list() {
+    li {
+        padding-left: 10px;
+        margin: 0;
+        padding-bottom: 5px;
+    }
+}

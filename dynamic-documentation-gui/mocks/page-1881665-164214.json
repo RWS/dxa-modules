@@ -1,0 +1,25 @@
+{
+  "Id": "164214",
+  "Meta": {
+    "ishlogicalref.object.id": 164208,
+    "conditionsused.generated.value": null,
+    "tocnaventries.generated.value": "ish:1881665-17-1024"
+  },
+  "Regions": [
+    {
+      "Entities": [
+        {
+          "Id": "164214",
+          "topicTitle": "Opbellen",
+          "topicBody": {
+            "Fragments": [
+              {
+                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-3036BFB5-0E35-4198-974C-2BB866EE7F51__GUID-C6127FE8-A3F8-4FC2-808D-13AF80F3EDE4\" xmlns=\"http://www.w3.org/1999/xhtml\">Opbellen</h1>\n      \n      \n      \n      <div class=\"body taskbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\" />\n         \n         \n         <div class=\"section prereq p\" id=\"GUID-3036BFB5-0E35-4198-974C-2BB866EE7F51__GUID-4457CE72-4487-46A3-9D15-647B24426507\">De telefoon moet aan staan (standby mode).</div>\n         \n         \n         <ol class=\"ol steps\" id=\"GUID-3036BFB5-0E35-4198-974C-2BB866EE7F51__GUID-6CA6E706-FFB3-4A50-A4E7-1A958D97202F\">\n            <li class=\"li step stepexpand\">\n               <span class=\"ph cmd\">Toets het netnummer en telefoonnummer in.</span>\n               \n               <div class=\"itemgroup info\">Druk <samp class=\"ph msgph\">Wis</samp> om een teken te verwijderen.\n               </div>\n               \n               <div class=\"itemgroup info\">Voor internationale gesprekken drukt u <img class=\"image\" src=\"/app/gui/mocks/bin/1881665-345843-16.gif\" />tweemaal voor het internationale prefix (het + teken vervangt de internationale toegangscode) en toets de landcode, het netnummer\n                  (laat zo nodig de eerste 0 weg) en het telefoonnummer in.\n               </div>\n               \n            </li>\n            \n            <li class=\"li step stepexpand\">\n               <span class=\"ph cmd\">Druk op <img class=\"image\" src=\"/app/gui/mocks/bin/1881665-345915-16.gif\" /> om het nummer te bellen.</span>\n               \n            </li>\n            \n            <li class=\"li step stepexpand\">\n               <span class=\"ph cmd\">Druk op <img class=\"image\" src=\"/app/gui/mocks/bin/1881665-345803-16.gif\" /> om het gesprek te beëindigen (of het kiezen te onderbreken).</span>\n               \n            </li>\n            \n         </ol>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <ul class=\"ullinks\">\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/app/1881665/164365/user-guide/snelkeuzetoetsen\">Snelkeuzetoetsen</a></strong><br />\n               Voordat u snelkeuze kunt gebruiken, moet u een telefoonnummer programmeren onder een van de snelkeuzetoetsen (van <img class=\"image\" src=\"/app/gui/mocks/bin/1881665-345767-16.gif\" /> tot <img class=\"image\" src=\"/app/gui/mocks/bin/1881665-345867-16.gif\" /> .\n            </li>\n            \n            <li class=\"link ulchildlink\"><strong><a href=\"/app/1881665/164333/user-guide/voicedialling\">Voicedialling</a></strong><br />\n               U kunt een telefoonnummer bellen door een of meer bijbehorende woorden ('spraaknummer') uit te spreken . Het spraaknummer\n               kan bijvoorbeeld een naam zijn.\n            </li>\n            \n         </ul>\n         \n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Hoofdonderwerp:</strong> <a class=\"link\" href=\"/app/1881665/164470/user-guide/algemene-functies\">Algemene functies</a></div>\n            \n         </div>\n         \n         \n         <div class=\"linklist linklist relinfo reltasks\"><strong>Verwante taken</strong><br />\n            \n            \n            <div><a class=\"link\" title=\"U kunt een telefoonnummer bellen door een of meer bijbehorende woorden ('spraaknummer') uit te spreken . Het spraaknummer kan bijvoorbeeld een naam zijn.\" href=\"/app/1881665/164333/user-guide/voicedialling\">Voicedialling</a></div>\n            \n            <div><a class=\"link\" href=\"/app/1881665/164197/user-guide/inkomende-oproepen-beantwoorden-of-weigeren\">Inkomende oproepen beantwoorden of weigeren</a></div>\n         </div>\n         \n         \n         <div class=\"linklist linklist relinfo\"><strong>Verwante informatie</strong><br />\n            \n            \n            <div><a class=\"link\" title=\"Voordat u snelkeuze kunt gebruiken, moet u een telefoonnummer programmeren onder een van de snelkeuzetoetsen (van tot .\" href=\"/app/1881665/164365/user-guide/snelkeuzetoetsen\">Snelkeuzetoetsen</a></div>\n            \n            <div><a class=\"link\" href=\"/app/1881665/164470/user-guide/algemene-functies\">Algemene functies</a></div>\n            \n            <div><a class=\"link\" href=\"/app/1881665/164284/user-guide/toetsen\">Toetsen</a></div>\n         </div>\n         \n      </div>\n   "
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
