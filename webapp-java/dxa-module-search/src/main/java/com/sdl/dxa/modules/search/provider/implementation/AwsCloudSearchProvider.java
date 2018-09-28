@@ -29,10 +29,24 @@ public class AwsCloudSearchProvider extends AbstractSearchProvider {
     private static final Logger LOG = LoggerFactory.getLogger(AwsCloudSearchProvider.class);
 
     private static final String HIGHLIGHT_SETTINGS = "{\n" +
-            "  \"format\": \"text\",\n" +
-            "  \"max_phrases\": 5,\n" +
-            "  \"pre_tag\": \"*\",\n" +
-            "  \"post_tag\": \"*\"\n" +
+            "\t\"title\": {\n" +
+            "\t\t\"format\": \"text\",\n" +
+            "\t\t\"max_phrases\": 5,\n" +
+            "\t\t\"pre_tag\": \"*\",\n" +
+            "\t\t\"post_tag\": \"*\"\n" +
+            "\t},\n" +
+            "\t\"body\": {\n" +
+            "\t\t\"format\": \"text\",\n" +
+            "\t\t\"max_phrases\": 5,\n" +
+            "\t\t\"pre_tag\": \"*\",\n" +
+            "\t\t\"post_tag\": \"*\"\n" +
+            "\t},\n" +
+            "\t\"summary\": {\n" +
+            "\t\t\"format\": \"text\",\n" +
+            "\t\t\"max_phrases\": 5,\n" +
+            "\t\t\"pre_tag\": \"*\",\n" +
+            "\t\t\"post_tag\": \"*\"\n" +
+            "\t}\n" +
             "}";
     private static final String QUERY_OPTIONS = "{\n" +
             "  \"fields\": [\n" +
@@ -63,10 +77,8 @@ public class AwsCloudSearchProvider extends AbstractSearchProvider {
         request.setStart((long) (searchQuery.getStart() - 1));
         request.setSize((long) searchQuery.getPageSize());
         request.setFilterQuery("publicationid:'" + localization.getId() + "'");
-        request.putCustomQueryParameter("q.options", QUERY_OPTIONS);
-        request.putCustomQueryParameter("highlight.body", HIGHLIGHT_SETTINGS);
-        request.putCustomQueryParameter("highlight.summary", HIGHLIGHT_SETTINGS);
-        request.putCustomQueryParameter("highlight.title", HIGHLIGHT_SETTINGS);
+        request.setQueryOptions(QUERY_OPTIONS);
+        request.setHighlight(HIGHLIGHT_SETTINGS);
         return request;
     }
 
