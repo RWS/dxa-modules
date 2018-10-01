@@ -1,5 +1,4 @@
-﻿using DD4T.Serialization;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using Sdl.Web.Common.Models;
 using Sdl.Web.Tridion.PCAClient;
 using Sdl.Web.Mvc.Configuration;
@@ -9,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Sdl.Web.Modules.TridionDocsMashup.Models.Widgets;
 using System;
+using System.Collections;
 
 namespace Sdl.Web.Modules.TridionDocsMashup.Client
 {
@@ -20,7 +20,6 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
     public class PublicContentApiClient
     {
         private IPublicContentApi _publicContentApi;
-        private JSONSerializerService _dd4tSerializer = new JSONSerializerService();
 
         public PublicContentApiClient()
         {
@@ -90,7 +89,9 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
             {
                 ClaimValues = new List<ClaimValue> {
                 new ClaimValue(){ Uri="dxa:modelservice:model:entity:relativelinks",Value="false",Type = ClaimValueType.BOOLEAN},
-                new ClaimValue(){ Uri="taf:tcdl:render:link:relative",Value="false",Type = ClaimValueType.BOOLEAN}
+                new ClaimValue(){ Uri="taf:tcdl:render:link:relative",Value="false",Type = ClaimValueType.BOOLEAN},
+                new ClaimValue(){ Uri="dxa:modelservice:content:type",Value="model",Type = ClaimValueType.STRING},
+                new ClaimValue(){ Uri="dxa:modelservice:model:type",Value="r2",Type = ClaimValueType.STRING}
                 }
             };
 
@@ -132,33 +133,34 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
                 {
                     Page page = edge.Node as Page;
 
-                    // Based on the GraphQl's results , we need to look into the below path to get the topic's title and body . 
-                    // page >  containerItems > componentPresentation > component > fields >  topicTitle and topicBody
+                    // Based on the GraphQl's results and considering R2 model , we need to look into the below path to get the topic's title and body . 
+                    // page >  containerItems > componentPresentation > rawContent > data > Content  topicTitle and topicBody
 
                     if (page != null)
                     {
-                        var topic = new Topic
-                        {
-                            Link = GetFullyQualifiedUrlForTopic(page.Url)
-                        };
+                        var topic = new Topic();
 
                         if (page.ContainerItems != null)
                         {
                             foreach (ComponentPresentation componentPresentation in page.ContainerItems)
                             {
-                                string componentDD4TJson = (componentPresentation?.RawContent?.Data["Component"] as JObject)?.ToString();
+                                IDictionary data = componentPresentation?.RawContent?.Data;
 
-                                if (!string.IsNullOrEmpty(componentDD4TJson))
+                                if (data != null)
                                 {
-                                    DD4T.ContentModel.Component component = _dd4tSerializer.Deserialize<DD4T.ContentModel.Component>(componentDD4TJson);
+                                    topic.Id = (data["XpmMetadata"] as JObject)?.GetValue("ComponentID")?.ToString();
 
-                                    if (component != null)
+                                    topic.Link = data["LinkUrl"]?.ToString();
+
+                                    var content = data["Content"] as JObject;
+
+                                    if (content != null)
                                     {
-                                        topic.Id = component.Id;
-                                        topic.Title = component.Fields["topicTitle"]?.Value;
-                                        topic.Body = component.Fields["topicBody"]?.Value;
+                                        topic.Title = content.GetValue("topicTitle")?.ToString();
+                                        topic.Body = content.GetValue("topicBody")?.ToString();
                                     }
                                 }
+                             
                             }
                         }
 
