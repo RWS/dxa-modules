@@ -150,7 +150,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
                                 {
                                     topic.Id = (data["XpmMetadata"] as JObject)?.GetValue("ComponentID")?.ToString();
 
-                                    topic.Link = data["LinkUrl"]?.ToString();
+                                    topic.Link = GetFullyQualifiedUrlForTopic(data["LinkUrl"]?.ToString());
 
                                     var content = data["Content"] as JObject;
 
