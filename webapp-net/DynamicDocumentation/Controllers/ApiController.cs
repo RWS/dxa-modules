@@ -11,6 +11,7 @@ using Sdl.Web.Modules.DynamicDocumentation.Providers;
 using Sdl.Web.Mvc.Configuration;
 using Sdl.Web.Mvc.Controllers;
 using Sdl.Web.Mvc.Formats;
+using Sdl.Web.PublicContentApi;
 using Sdl.Web.PublicContentApi.ContentModel;
 using Sdl.Web.Tridion.PCAClient;
 using ConditionProvider = Sdl.Web.Modules.DynamicDocumentation.Providers.ConditionProvider;
@@ -223,7 +224,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
                 };
                 var items = client.ExecuteItemQuery(filter,
                     new InputSortParam {Order = SortOrderType.Ascending, SortBy = SortFieldType.CREATION_DATE},
-                    new Pagination {First = 1}, null, false, false, null);
+                    new Pagination {First = 1}, null, ContentIncludeMode.Exclude, false, null);
                 if (items?.Edges != null && items.Edges.Count == 1)
                 {
                     item.Id = items.Edges[0].Node.ItemId;
@@ -252,7 +253,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
             if (pageModel == null) return model;
             var client = PCAClientFactory.Instance.CreateClient();
             var page = client.GetPage(ContentNamespace.Docs, publicationId, int.Parse(pageModel.Id),
-                $"requiredMeta:{TocNaventriesMeta},{PageConditionsUsedMeta},{PageLogicalRefObjectId}", null);
+                $"requiredMeta:{TocNaventriesMeta},{PageConditionsUsedMeta},{PageLogicalRefObjectId}", ContentIncludeMode.Exclude,  null);
             if (page?.CustomMetas == null) return model;
             foreach (var x in page.CustomMetas.Edges)
             {
