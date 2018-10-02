@@ -89,7 +89,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
             var results = _publicContentApi.ExecuteItemQuery(
                 filter,
                 new InputSortParam {Order = SortOrderType.Descending, SortBy = SortFieldType.LAST_PUBLISH_DATE},
-                new Pagination {First = maxItems}, null, true, true, null);
+                new Pagination {First = maxItems}, null, ContentIncludeMode.IncludeAndRender, true, null);
 
             return results;
         }
