@@ -9,8 +9,8 @@ using Sdl.Web.Modules.TridionDocsMashup.Models.Products;
 using System.Web.Mvc;
 using Sdl.Web.Mvc.Formats;
 using System;
-using Sdl.Web.Tridion.TridionDocs.Providers;
 using Sdl.Web.Common.Logging;
+using Sdl.Web.Tridion.TridionDocs.Localization;
 
 namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
 {
@@ -78,7 +78,8 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
         {
             try
             {
-                StaticContentItem content = DocsContentProvider.GetStaticContentItem(publicationId, binaryId);
+                var docsLocalization = new DocsLocalization { Id = publicationId.ToString() };
+                StaticContentItem content = ContentProvider.GetStaticContentItem(binaryId, docsLocalization);
                 return new FileStreamResult(content.GetContentStream(), content.ContentType);
             }
             catch (Exception ex)
