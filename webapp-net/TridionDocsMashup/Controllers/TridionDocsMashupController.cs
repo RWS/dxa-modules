@@ -6,6 +6,11 @@ using System.Linq;
 using Sdl.Web.Modules.TridionDocsMashup.Client;
 using Sdl.Web.Modules.TridionDocsMashup.Models.Widgets;
 using Sdl.Web.Modules.TridionDocsMashup.Models.Products;
+using System.Web.Mvc;
+using Sdl.Web.Mvc.Formats;
+using System;
+using Sdl.Web.Tridion.TridionDocs.Providers;
+using Sdl.Web.Common.Logging;
 
 namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
 {
@@ -66,6 +71,34 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
 
             return sourceModel;
         }
+
+        [Route("~/docsmashup/binary/{publicationId:int}/{binaryId:int}/{*content}")]
+        [FormatData]
+        public virtual ActionResult Binary(int publicationId, int binaryId, params string[] rest)
+        {
+            try
+            {
+                StaticContentItem content = DocsContentProvider.GetStaticContentItem(publicationId, binaryId);
+                return new FileStreamResult(content.GetContentStream(), content.ContentType);
+            }
+            catch (Exception ex)
+            {
+                return ServerError(ex);
+            }
+        }
+
+        [Route("~/docsmashup/binary/{publicationId:int}/{binaryId}/{*content}")]
+        [FormatData]
+        public virtual ActionResult Binary(string publicationId, string binaryId) => ServerError(null, 400);
+
+        public ActionResult ServerError(Exception ex, int statusCode = 404)
+        {
+            Response.StatusCode = statusCode;
+            if (ex == null) return new EmptyResult();
+            if (ex.InnerException != null) ex = ex.InnerException;
+            return Content("{ \"Message\": \"" + ex.Message + "\" }", "application/json");
+        }
+
     }
 }
 

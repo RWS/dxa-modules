@@ -19,12 +19,21 @@ import java.net.URI;
  */
 public class TopicDeserializer extends StdDeserializer<List<Topic>> {
 
+    private String _prefixForTopicsUrl;
+    private String _prefixForBinariesUrl;
+
     public TopicDeserializer() {
         this(null);
     }
 
     public TopicDeserializer(Class<?> vc) {
         super(vc);
+    }
+
+    TopicDeserializer(String prefixForTopicsUrl, String prefixForBinariesUrl) {
+        this(null);
+        this._prefixForTopicsUrl = prefixForTopicsUrl;
+        this._prefixForBinariesUrl = prefixForBinariesUrl;
     }
 
     @Override
@@ -41,7 +50,7 @@ public class TopicDeserializer extends StdDeserializer<List<Topic>> {
                 Topic topic = new Topic();
                 String id = edge.findValue("containerItems").findValue("Component").get("Id").asText();
                 String title = edge.findValue("containerItems").findValue("topicTitle").get("Values").path(0).asText();
-                String link = getLink(edge.findValue("url").asText());
+                String link = getLink(edge.findValue("url").asText(), _prefixForTopicsUrl);
 
                 String body = edge.findValue("containerItems").findValue("topicBody").get("Values").path(0).asText();
 
@@ -58,15 +67,28 @@ public class TopicDeserializer extends StdDeserializer<List<Topic>> {
         return topics;
     }
 
-    public String getLink(String link){
-        if (link != null && !link.isEmpty()) {
-            URI uri = URI.create(link);
+    public String getLink(String topicOriginalUrl, String prefixForTopicsUrl) {
+		String uri = topicOriginalUrl;
+		
+        if (uri != null && !uri.isEmpty()) {
+            URI topicUri = URI.create(uri);
 
-            if ((uri.getHost() == null || uri.getHost().isEmpty()) && !link.startsWith("/")) {
-                link = "/" + link;
+			 uri = topicUri.toString();
+			 
+            if (!topicUri.isAbsolute()) {
+
+                if ((topicUri.getHost() == null || topicUri.getHost().isEmpty()) && !uri.startsWith("/")) {
+                    uri = "/" + uri;
+                }
+
+                topicUri = URI.create(prefixForTopicsUrl + uri);
+                
+                if (topicUri.isAbsolute()) {
+                    uri = topicUri.toString();
+                }
             }
         }
 
-        return link;
+        return uri;
     }
 }
