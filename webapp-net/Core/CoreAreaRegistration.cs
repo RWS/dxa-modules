@@ -32,8 +32,7 @@ namespace Sdl.Web.Modules.Core
             RegisterViewModel("TeaserColored", typeof(Teaser));
             RegisterViewModel("TeaserHero-ImageOverlay", typeof(Teaser));
             RegisterViewModel("TeaserMap", typeof(Teaser));
-            RegisterViewModel("YouTubeVideo", typeof(YouTubeVideo));
-            RegisterViewModel("Topic", typeof(Topic));
+            RegisterViewModel("YouTubeVideo", typeof(YouTubeVideo));         
 
             RegisterViewModel("List", typeof(ContentList<Teaser>), "List");
             RegisterViewModel("ArticleList", typeof(ContentList<Article>), "List");

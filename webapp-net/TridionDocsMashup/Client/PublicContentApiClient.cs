@@ -112,7 +112,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
                 new InputSortParam { Order = SortOrderType.Descending, SortBy = SortFieldType.LAST_PUBLISH_DATE },
                 new Pagination { First = maxItems },
                 null,
-                renderContent: true,
+                ContentIncludeMode.IncludeAndRender,
                 includeContainerItems: true,
                 contextData: contextData
                 );
