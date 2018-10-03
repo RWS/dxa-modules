@@ -273,11 +273,11 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
 
                     var prefixForTopicsUrl = WebRequestContext.Localization.GetConfigValue("tridiondocsmashup.PrefixForTopicsUrl");
 
-                    Uri baseUri;
+                    Uri prefixUri;
 
-                    if (Uri.TryCreate(prefixForTopicsUrl, UriKind.Absolute, out baseUri))
+                    if (Uri.TryCreate(prefixForTopicsUrl, UriKind.RelativeOrAbsolute, out prefixUri))
                     {
-                        if (Uri.TryCreate(baseUri, url, out uri))
+                        if (Uri.TryCreate(prefixUri.ToString() + "/" + url, UriKind.Absolute, out uri))
                         {
                             url = uri.ToString();
                         }
