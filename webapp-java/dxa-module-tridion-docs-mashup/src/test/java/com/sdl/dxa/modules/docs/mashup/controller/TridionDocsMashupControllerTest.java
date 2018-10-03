@@ -65,7 +65,7 @@ public class TridionDocsMashupControllerTest {
 
         when(webRequestContext.getLocalization()).thenReturn(localization);
         when(localization.getCulture()).thenReturn("de");
-        when(tridionDocsClient.getTopics(anyMapOf(String.class, KeywordModel.class), anyInt())).thenReturn(topics);
+        when(tridionDocsClient.getTridionDocsTopicsByKeywords(anyMapOf(String.class, KeywordModel.class), anyInt())).thenReturn(topics);
     }
 
     private Map<String, KeywordModel> getTestKeywords() {

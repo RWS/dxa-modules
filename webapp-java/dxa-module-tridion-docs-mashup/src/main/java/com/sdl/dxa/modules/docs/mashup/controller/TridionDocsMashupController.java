@@ -4,12 +4,15 @@ import com.sdl.dxa.modules.docs.mashup.client.*;
 import com.sdl.dxa.modules.docs.mashup.models.products.Product;
 import com.sdl.dxa.modules.docs.mashup.models.widgets.*;
 import com.sdl.webapp.common.api.WebRequestContext;
+import com.sdl.webapp.common.api.content.ContentProviderException;
+import com.sdl.webapp.common.api.content.StaticContentItem;
 import com.sdl.webapp.common.api.model.EntityModel;
 import com.sdl.webapp.common.api.model.KeywordModel;
 import com.sdl.webapp.common.api.model.RegionModel;
 import com.sdl.webapp.common.api.model.ViewModel;
 import com.sdl.webapp.common.controller.ControllerUtils;
 import com.sdl.webapp.common.controller.EntityController;
+import java.io.IOException;
 
 import java.util.*;
 import java.util.regex.Pattern;
@@ -21,9 +24,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.bind.ValidationException;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping(ControllerUtils.INCLUDE_PATH_PREFIX + "TridionDocsMashup/TridionDocsMashup")
+@RequestMapping(value={ControllerUtils.INCLUDE_PATH_PREFIX + "TridionDocsMashup/TridionDocsMashup" , "/docsmashup"})
 @Slf4j
 public class TridionDocsMashupController extends EntityController {
 
@@ -51,10 +62,10 @@ public class TridionDocsMashupController extends EntityController {
 
             if (validate(staticWidget.getKeywords(), staticWidget.getMaxItems())) {
                 if (tridionDocsClient == null) {
-                    tridionDocsClient = new TridionDocsGraphQLClient(this.webRequestContext);
+                    tridionDocsClient = new TridionDocsPublicContentApiClient(this.webRequestContext);
                 }
 
-                List<Topic> topics = tridionDocsClient.getTopics(staticWidget.getKeywords(), staticWidget.getMaxItems());
+                List<Topic> topics = tridionDocsClient.getTridionDocsTopicsByKeywords(staticWidget.getKeywords(), staticWidget.getMaxItems());
 
                 staticWidget.setTopics(topics);
             }
@@ -64,7 +75,7 @@ public class TridionDocsMashupController extends EntityController {
             List<Topic> topics = new ArrayList<>();
 
             if (tridionDocsClient == null) {
-                tridionDocsClient = new TridionDocsGraphQLClient(this.webRequestContext);
+                tridionDocsClient = new TridionDocsPublicContentApiClient(this.webRequestContext);
             }
 
             // There are multiple regions in a page.
@@ -100,7 +111,7 @@ public class TridionDocsMashupController extends EntityController {
                                 }
 
                                 if (!keywords.isEmpty()) {
-                                    topics = tridionDocsClient.getTopics(keywords, dynamicWidget.getMaxItems());
+                                    topics = tridionDocsClient.getTridionDocsTopicsByKeywords(keywords, dynamicWidget.getMaxItems());
                                 }
                             }
 
@@ -115,6 +126,40 @@ public class TridionDocsMashupController extends EntityController {
 
         return model;
     }
+    
+     /**
+     * Get binary data.
+     *
+     * @param publicationId Publication id
+     * @param binaryId      Binary id
+     * @return Binary data using a stream.
+     * @throws ContentProviderException if page model cannot be fetched
+     * @throws IOException if something wrong with tomcat response channel
+     */
+     @RequestMapping(method = GET, value ="/binary/{publicationId}/{binaryId}/**" ,produces = MediaType.ALL_VALUE)
+    @ResponseBody
+    public ResponseEntity<InputStreamResource> getBinaryResource(@PathVariable Integer publicationId,
+                                                                 @PathVariable Integer binaryId)
+            throws ContentProviderException, IOException {
+
+        InputStreamResource result = null;
+        HttpHeaders responseHeaders = new HttpHeaders();
+   
+        //Todo : here we need to call Docs ContentProvider from DxaFramework 
+        //Like : StaticContentItem binaryItem = DocsContentProvider.GetStaticContentItem(publicationId, binaryId) 
+        StaticContentItem binaryItem = null;
+        
+        if (binaryItem == null) {
+             return new ResponseEntity<>(result, responseHeaders, HttpStatus.NOT_FOUND);
+        }
+         result = new InputStreamResource(binaryItem.getContent());
+     
+        responseHeaders.setContentType(MediaType.parseMediaType(binaryItem.getContentType()));
+        responseHeaders.setContentLength(binaryItem.getContent().available());
+         
+        return new ResponseEntity<>(result, responseHeaders, HttpStatus.OK);
+    }
+    
 
     private Boolean validate(Map<String, KeywordModel> keywords, Integer maxItems) throws ValidationException {
         if (maxItems == null || maxItems < 1) {

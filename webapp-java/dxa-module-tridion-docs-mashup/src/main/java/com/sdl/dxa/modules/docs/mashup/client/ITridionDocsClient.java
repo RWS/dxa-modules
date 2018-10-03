@@ -26,6 +26,6 @@ public interface ITridionDocsClient  {
      * @throws java.io.IOException
      */
     
-    List<Topic> getTopics(Map<String, KeywordModel> keywords, int maxItems) throws GraphQLClientException, IOException;
+    List<Topic> getTridionDocsTopicsByKeywords(Map<String, KeywordModel> keywords, int maxItems) throws GraphQLClientException, IOException;
     
 }

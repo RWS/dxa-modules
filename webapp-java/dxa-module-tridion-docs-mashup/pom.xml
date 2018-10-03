@@ -58,8 +58,7 @@
             <version>1.0.0-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
-        
-        <!--
+            
         <dependency>
             <groupId>com.sdl.web.pca</groupId>
             <artifactId>pca-client</artifactId>
@@ -73,8 +72,7 @@
             <version>1.0.0-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
-        -->
-
+        
         <dependency>
             <groupId>com.sdl.delivery</groupId>
             <artifactId>udp-discovery-common</artifactId>
