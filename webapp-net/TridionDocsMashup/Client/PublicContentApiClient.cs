@@ -277,7 +277,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
 
                     if (Uri.TryCreate(prefixForTopicsUrl, UriKind.RelativeOrAbsolute, out prefixUri))
                     {
-                        if (Uri.TryCreate(prefixUri.ToString() + "/" + url, UriKind.Absolute, out uri))
+                        if (Uri.TryCreate(prefixUri.ToString().TrimEnd('/') + url, UriKind.Absolute, out uri))
                         {
                             url = uri.ToString();
                         }
