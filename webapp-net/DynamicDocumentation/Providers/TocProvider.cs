@@ -1,15 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Sdl.Web.Common.Interfaces;
 using Sdl.Web.Common.Models;
 using Sdl.Web.Common.Models.Navigation;
-using Sdl.Web.Delivery.Service;
+using Sdl.Web.Common.Configuration;
 
 namespace Sdl.Web.Modules.DynamicDocumentation.Providers
 {
     public class TocProvider
-    {
-        protected IOnDemandNavigationProvider NavigationProvider => new DocsNavigationProvider();
-
+    {       
         public IEnumerable<SitemapItem> GetToc(ILocalization localization)
            => GetToc(localization, null, false, 1);
 
@@ -22,9 +21,8 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Providers
         public IEnumerable<SitemapItem> GetToc(ILocalization localization, string sitemapItemId, bool includeAncestors,
             int descendantLevels)
         {
-            bool caching = ServiceCacheProvider.Instance.DisableCaching;
-            ServiceCacheProvider.Instance.DisableCaching = true;
-            IOnDemandNavigationProvider onDemandNavigationProvider = NavigationProvider;
+            IOnDemandNavigationProvider onDemandNavigationProvider = SiteConfiguration.NavigationProvider as IOnDemandNavigationProvider;
+
             NavigationFilter navigationFilter = new NavigationFilter
             {
                 DescendantLevels = descendantLevels,
@@ -32,8 +30,29 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Providers
             };
 
             var result = onDemandNavigationProvider.GetNavigationSubtree(sitemapItemId, navigationFilter, localization);
-            ServiceCacheProvider.Instance.DisableCaching = caching;
-            return result;
+            var sitemapItems = result as SitemapItem[] ?? result.ToArray();
+            FixupUrls(sitemapItems);
+            return sitemapItems;
+        }
+
+        public SitemapItem SiteMap(ILocalization localization)
+        {
+            SitemapItem model = SiteConfiguration.NavigationProvider.GetNavigationModel(localization);
+            FixupUrls(new[] {model});
+            return model;
+        }
+
+        private static void FixupUrls(IEnumerable<SitemapItem> toc)
+        {
+            if (toc == null) return;
+            foreach (var x in toc)
+            {
+                if (x.Url != null)
+                {
+                    x.Url = $"/{x.Url.TrimStart('/')}";
+                }               
+                FixupUrls(x.Items);
+            }
         }
     }
 }

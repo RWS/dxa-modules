@@ -44,7 +44,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Providers
         private string GetMetadata(int publicationId, string metadataName)
         {
             try
-            {
+            {                
                 var client = PCAClientFactory.Instance.CreateClient();
                 var publication = client.GetPublication(ContentNamespace.Docs, publicationId, $"requiredMeta:{metadataName}", null);
                 if (publication.CustomMetas == null || publication.CustomMetas.Edges.Count == 0)

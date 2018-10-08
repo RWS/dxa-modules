@@ -145,9 +145,8 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
                 if (!string.IsNullOrEmpty(conditions))
                 {
                     AmbientDataContext.CurrentClaimStore.Put(UserConditionsUri, conditions);
-                }
-                TocProvider tocProvider = new TocProvider();
-                return Json(tocProvider.GetToc(Localization));
+                }                
+                return Json(new TocProvider().GetToc(Localization));
             }
             catch (Exception ex)
             {
@@ -165,8 +164,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
                 {
                     AmbientDataContext.CurrentClaimStore.Put(UserConditionsUri, conditions);
                 }
-                TocProvider tocProvider = new TocProvider();
-                var sitemapItems = tocProvider.GetToc(Localization, sitemapItemId, includeAncestors);
+                var sitemapItems = new TocProvider().GetToc(Localization, sitemapItemId, includeAncestors);
                 return Json(sitemapItems);
             }
             catch (Exception ex)
@@ -179,7 +177,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         public virtual ActionResult SitemapXml()
         {
             // Use the common SiteMapXml view for rendering out the xml of all the sitemap items.
-            return View("SiteMapXml", DocsNavigationProvider.SiteMap);
+            return View("SiteMapXml", new TocProvider().SiteMap(Localization));
         }
 
         [Route("~/api/toc/{publicationId}/{sitemapItemId}")]
@@ -225,12 +223,10 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
                 var items = client.ExecuteItemQuery(filter,
                     new InputSortParam {Order = SortOrderType.Ascending, SortBy = SortFieldType.CREATION_DATE},
                     new Pagination {First = 1}, null, ContentIncludeMode.Exclude, false, null);
-                if (items?.Edges != null && items.Edges.Count == 1)
-                {
-                    item.Id = items.Edges[0].Node.ItemId;
-                    item.PublicationId = items.Edges[0].Node.PublicationId;
-                    item.Title = items.Edges[0].Node.Title;
-                }
+                if (items?.Edges == null || items.Edges.Count != 1) return item;
+                item.Id = items.Edges[0].Node.ItemId;
+                item.PublicationId = items.Edges[0].Node.PublicationId;
+                item.Title = items.Edges[0].Node.Title;
                 return item;
             }
             catch (Exception)
