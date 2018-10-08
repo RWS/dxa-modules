@@ -1,5 +1,4 @@
-﻿using DD4T.Serialization;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using Sdl.Web.Common.Models;
 using Sdl.Web.Tridion.PCAClient;
 using Sdl.Web.Mvc.Configuration;
@@ -9,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Sdl.Web.Modules.TridionDocsMashup.Models.Widgets;
 using System;
+using System.Collections;
 
 namespace Sdl.Web.Modules.TridionDocsMashup.Client
 {
@@ -20,7 +20,6 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
     public class PublicContentApiClient
     {
         private IPublicContentApi _publicContentApi;
-        private JSONSerializerService _dd4tSerializer = new JSONSerializerService();
 
         public PublicContentApiClient()
         {
@@ -86,10 +85,37 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
                 And = customMetaFilters
             };
 
+            var contextData = new ContextData()
+            {
+                ClaimValues = new List<ClaimValue> {
+                new ClaimValue(){ Uri="dxa:modelservice:model:entity:relativelinks",Value="false",Type = ClaimValueType.BOOLEAN},
+                new ClaimValue(){ Uri="taf:tcdl:render:link:relative",Value="false",Type = ClaimValueType.BOOLEAN},
+                new ClaimValue(){ Uri="dxa:modelservice:content:type",Value="model",Type = ClaimValueType.STRING},
+                new ClaimValue(){ Uri="dxa:modelservice:model:type",Value="r2",Type = ClaimValueType.STRING}
+                }
+            };
+
+            var prefixForTopicsUrl = WebRequestContext.Localization?.GetConfigValue("tridiondocsmashup.PrefixForTopicsUrl");
+            if (!string.IsNullOrWhiteSpace(prefixForTopicsUrl))
+            {
+                contextData.ClaimValues.Add(new ClaimValue() { Uri = "taf:tcdl:render:link:urlprefix", Value = prefixForTopicsUrl, Type = ClaimValueType.STRING });
+            }
+
+            var prefixForBinariesUrl = WebRequestContext.Localization?.GetConfigValue("tridiondocsmashup.PrefixForBinariesUrl");
+            if (!string.IsNullOrWhiteSpace(prefixForBinariesUrl))
+            {
+                contextData.ClaimValues.Add(new ClaimValue() { Uri = "taf:tcdl:render:link:binaryUrlPrefix", Value = prefixForBinariesUrl, Type = ClaimValueType.STRING });
+            }
+
             var results = _publicContentApi.ExecuteItemQuery(
                 filter,
-                new InputSortParam {Order = SortOrderType.Descending, SortBy = SortFieldType.LAST_PUBLISH_DATE},
-                new Pagination {First = maxItems}, null, true, true, null);
+                new InputSortParam { Order = SortOrderType.Descending, SortBy = SortFieldType.LAST_PUBLISH_DATE },
+                new Pagination { First = maxItems },
+                null,
+                ContentIncludeMode.IncludeAndRender,
+                includeContainerItems: true,
+                contextData: contextData
+                );
 
             return results;
         }
@@ -107,42 +133,34 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
                 {
                     Page page = edge.Node as Page;
 
-                    // Based on the GraphQl's results , we need to look into the below path to get the topic's title and body . 
-                    // page >  containerItems > componentPresentation > component > fields >  topicTitle and topicBody
+                    // Based on the GraphQl's results and considering R2 model , we need to look into the below path to get the topic's title and body . 
+                    // page >  containerItems > componentPresentation > rawContent > data > Content  topicTitle and topicBody
 
                     if (page != null)
                     {
-                        // Todo : the page.Url doesn't have the host name, UDP team is working on it :  https://jira.sdl.com/browse/UDP-4772
-
                         var topic = new Topic();
-
-                        if (!string.IsNullOrEmpty(page.Url))
-                        {
-                            topic.Link = page.Url;
-
-                            if (Uri.CheckHostName(page.Url) == UriHostNameType.Unknown && !page.Url.StartsWith("/"))
-                            {
-                                topic.Link = "/" + page.Url;
-                            }
-                        }                                   
 
                         if (page.ContainerItems != null)
                         {
                             foreach (ComponentPresentation componentPresentation in page.ContainerItems)
                             {
-                                string componentDD4TJson = (componentPresentation?.RawContent?.Data["Component"] as JObject)?.ToString();
+                                IDictionary data = componentPresentation?.RawContent?.Data;
 
-                                if (!string.IsNullOrEmpty(componentDD4TJson))
+                                if (data != null)
                                 {
-                                    DD4T.ContentModel.Component component = _dd4tSerializer.Deserialize<DD4T.ContentModel.Component>(componentDD4TJson);
+                                    topic.Id = (data["XpmMetadata"] as JObject)?.GetValue("ComponentID")?.ToString();
 
-                                    if (component != null)
+                                    topic.Link = GetFullyQualifiedUrlForTopic(data["LinkUrl"]?.ToString());
+
+                                    var content = data["Content"] as JObject;
+
+                                    if (content != null)
                                     {
-                                        topic.Id = component.Id;
-                                        topic.Title = component.Fields["topicTitle"]?.Value;
-                                        topic.Body = component.Fields["topicBody"]?.Value;
+                                        topic.Title = content.GetValue("topicTitle")?.ToString();
+                                        topic.Body = content.GetValue("topicBody")?.ToString();
                                     }
                                 }
+                             
                             }
                         }
 
@@ -231,6 +249,43 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
             }
 
             return CriteriaScope.Publication;
+        }
+
+        /// <summary>
+        /// Create and return the topic's url having fully quialified doman name
+        /// </summary>
+        private static string GetFullyQualifiedUrlForTopic(string url)
+        {
+            if (!string.IsNullOrEmpty(url))
+            {
+                Uri uri;
+
+                if (Uri.TryCreate(url, UriKind.Absolute, out uri))
+                {
+                    url = uri.ToString();
+                }
+                else
+                {
+                    if (!url.StartsWith("/"))
+                    {
+                        url = "/" + url;
+                    }
+
+                    var prefixForTopicsUrl = WebRequestContext.Localization.GetConfigValue("tridiondocsmashup.PrefixForTopicsUrl");
+
+                    Uri prefixUri;
+
+                    if (Uri.TryCreate(prefixForTopicsUrl, UriKind.RelativeOrAbsolute, out prefixUri))
+                    {
+                        if (Uri.TryCreate(prefixUri.ToString().TrimEnd('/') + url, UriKind.Absolute, out uri))
+                        {
+                            url = uri.ToString();
+                        }
+                    }
+                }
+            }
+
+            return url;
         }
 
     }

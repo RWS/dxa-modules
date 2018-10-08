@@ -33,7 +33,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -50,10 +50,6 @@
     <CopyLocal>false</CopyLocal>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Web.Infrastructure">
-      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.10.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
@@ -67,36 +63,16 @@
       <Private>$(CopyLocal)</Private>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Data.DataSetExtensions">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Data.Linq">
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.Abstractions">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Web.ApplicationServices" />
-    <Reference Include="System.Web.DynamicData" />
-    <Reference Include="System.Web.Entity">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Web.Extensions">
       <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp">
       <Private>False</Private>
     </Reference>
-    <Reference Include="System.Data" />
     <Reference Include="System.Web.Mvc">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Web.Razor">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Web.WebPages">
@@ -105,9 +81,6 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Xml">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Xml.Linq">
       <Private>False</Private>
     </Reference>
   </ItemGroup>
@@ -128,7 +101,6 @@
     <Compile Include="Models\Entity\Place.cs" />
     <Compile Include="Models\Entity\TagLink.cs" />
     <Compile Include="Models\Entity\Teaser.cs" />
-    <Compile Include="Models\Entity\Topic.cs" />
     <Compile Include="Models\Entity\YouTubeVideo.cs" />
     <Compile Include="Models\Region\MultiColumnRegion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

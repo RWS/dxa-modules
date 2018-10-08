@@ -1,34 +1,27 @@
 // Dynamic Documentation GUI build pipeline
 // Allocation of node for execution of build steps
 pipeline {
-    node("dxadocker") {
-        dir("build\\dxa-modules\\dynamic-documentation-gui") {
 
-            stages {
-                stage("Building DD GUI") {
-                    steps {
-                        sh "mvn clean install"
-                    }
+    agent {
+        label 'dxadocker'
+    }
+
+    stages {
+        stage('Building DD GUI') {
+            steps {
+                dir("dynamic-documentation-gui") {
+                    powershell 'mvn clean install'
                 }
             }
+        }
+    }
 
-                // NOTE: Publish to Nexus only from 'develop' branch
-                /* stage("Publishing DD GUI to Nexus") {
-                    when {
-                        branch 'development'
-                    }
-                    steps {
-                        //TODO: Implement publishing to Nexus(Ticket in Jira https://jira.sdl.com/browse/TSI-3512)
-                    }
-                } */
+    post {
+        always {
+            dir("dynamic-documentation-gui") {
+                archiveArtifacts artifacts: 'target/gui/**', fingerprint: true
             }
-
-            post {
-                always {
-                    archiveArtifacts artifacts: 'target/gui/**', fingerprint: true
-                }
-            }
-
         }
     }
 }
+

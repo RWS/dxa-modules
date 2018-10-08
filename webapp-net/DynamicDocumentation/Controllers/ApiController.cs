@@ -2,16 +2,18 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using Sdl.Web.Common;
+using Sdl.Web.Common.Interfaces;
 using Sdl.Web.Common.Logging;
 using Sdl.Web.Common.Models;
 using Sdl.Web.Delivery.ServicesCore.ClaimStore;
 using Sdl.Web.Modules.DynamicDocumentation.Models;
 using Sdl.Web.Modules.DynamicDocumentation.Providers;
+using Sdl.Web.Mvc.Configuration;
 using Sdl.Web.Mvc.Controllers;
 using Sdl.Web.Mvc.Formats;
+using Sdl.Web.PublicContentApi;
 using Sdl.Web.PublicContentApi.ContentModel;
 using Sdl.Web.Tridion.PCAClient;
-using Sdl.Web.Tridion.TridionDocs.Providers;
 using ConditionProvider = Sdl.Web.Modules.DynamicDocumentation.Providers.ConditionProvider;
 using PublicationProvider = Sdl.Web.Modules.DynamicDocumentation.Providers.PublicationProvider;
 
@@ -27,6 +29,8 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         private static readonly string PageConditionsUsedMeta = "conditionsused.generated.value";
         private static readonly string PageLogicalRefObjectId = "ishlogicalref.object.id";
         private static readonly string RefFieldName = "ishlogicalref.object.id";
+
+        private static ILocalization Localization => WebRequestContext.Localization;
 
         [Route("~/api/publications")]
         public virtual ActionResult Publications()
@@ -59,7 +63,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         {
             try
             {
-                var model = EnrichModel(DocsContentProvider.GetPageModel(publicationId, pageId), publicationId);
+                var model = EnrichModel(ContentProvider.GetPageModel(pageId, Localization), publicationId);
                 return Json(model);
             }
             catch (Exception ex)
@@ -74,7 +78,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         {
             try
             {
-                var model = EnrichModel(DocsContentProvider.GetEntityModel(publicationId, $"{componentId}-{templateId}"), publicationId);
+                var model = EnrichModel(ContentProvider.GetEntityModel($"{componentId}-{templateId}", Localization));
                 return Json(model);
             }
             catch (Exception ex)
@@ -102,7 +106,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
                 {
                     AmbientDataContext.CurrentClaimStore.Put(UserConditionsUri, conditions);
                 }
-                ViewModel model = EnrichModel(DocsContentProvider.GetPageModel(publicationId, pageId), publicationId);
+                ViewModel model = EnrichModel(ContentProvider.GetPageModel(pageId, Localization), publicationId);
                 return Json(model);
             }
             catch (Exception ex)
@@ -119,7 +123,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         {
             try
             {
-                StaticContentItem content = DocsContentProvider.GetStaticContentItem(publicationId, binaryId);
+                StaticContentItem content = ContentProvider.GetStaticContentItem(binaryId, Localization);
                 return new FileStreamResult(content.GetContentStream(), content.ContentType);
             }
             catch (Exception ex)
@@ -138,13 +142,12 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         {
             try
             {
-                var localization = DocsContentProvider.CreateDocsLocalization(publicationId);
                 if (!string.IsNullOrEmpty(conditions))
                 {
                     AmbientDataContext.CurrentClaimStore.Put(UserConditionsUri, conditions);
                 }
                 TocProvider tocProvider = new TocProvider();
-                return Json(tocProvider.GetToc(localization));
+                return Json(tocProvider.GetToc(Localization));
             }
             catch (Exception ex)
             {
@@ -158,13 +161,12 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         {
             try
             {
-                var localization = DocsContentProvider.CreateDocsLocalization(publicationId);
                 if (!string.IsNullOrEmpty(conditions))
                 {
                     AmbientDataContext.CurrentClaimStore.Put(UserConditionsUri, conditions);
                 }
                 TocProvider tocProvider = new TocProvider();
-                var sitemapItems = tocProvider.GetToc(localization, sitemapItemId, includeAncestors);
+                var sitemapItems = tocProvider.GetToc(Localization, sitemapItemId, includeAncestors);
                 return Json(sitemapItems);
             }
             catch (Exception ex)
@@ -222,7 +224,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
                 };
                 var items = client.ExecuteItemQuery(filter,
                     new InputSortParam {Order = SortOrderType.Ascending, SortBy = SortFieldType.CREATION_DATE},
-                    new Pagination {First = 1}, null, false, false, null);
+                    new Pagination {First = 1}, null, ContentIncludeMode.Exclude, false, null);
                 if (items?.Edges != null && items.Edges.Count == 1)
                 {
                     item.Id = items.Edges[0].Node.ItemId;
@@ -251,7 +253,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
             if (pageModel == null) return model;
             var client = PCAClientFactory.Instance.CreateClient();
             var page = client.GetPage(ContentNamespace.Docs, publicationId, int.Parse(pageModel.Id),
-                $"requiredMeta:{TocNaventriesMeta},{PageConditionsUsedMeta},{PageLogicalRefObjectId}", null);
+                $"requiredMeta:{TocNaventriesMeta},{PageConditionsUsedMeta},{PageLogicalRefObjectId}", ContentIncludeMode.Exclude,  null);
             if (page?.CustomMetas == null) return model;
             foreach (var x in page.CustomMetas.Edges)
             {
