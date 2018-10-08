@@ -10,11 +10,11 @@
 
 	<PropertyGroup>		
 	    <DxaDataModelVersion>2.1.0-beta-201804241437</DxaDataModelVersion>
-		<DxaFrameworkVersion>2.1.0-beta-201808241550</DxaFrameworkVersion>
-		<SdlDeliveryVersion>11.0.0-beta-201805161005</SdlDeliveryVersion>
+		<DxaFrameworkVersion>2.1.0-beta-201810031729</DxaFrameworkVersion>
+        <SdlDeliveryVersion>11.0.0</SdlDeliveryVersion>
 		<AudienceManagerVersion>9.0.0-beta-201804031026</AudienceManagerVersion>
-        <ExperienceManagerVersion>8.5.0</ExperienceManagerVersion>
-		<ContextClientVersion>10.1.0</ContextClientVersion>
+        <ExperienceManagerVersion>9.0.0</ExperienceManagerVersion>
+		<ContextClientVersion>11.0.0</ContextClientVersion>
   	</PropertyGroup>
 
 </Project>

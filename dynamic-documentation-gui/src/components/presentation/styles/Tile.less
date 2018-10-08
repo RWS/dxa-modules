@@ -1,0 +1,87 @@
+@import (reference) "~theme-styles";
+.sdl-dita-delivery-tile {
+    background-color: #fff;
+    border: 1px solid @neutralColor5;
+    box-shadow: 0 2px 0 0 @neutralColor5;
+    border-radius: 4px;
+    display: flex;
+    flex-flow: column nowrap;
+    .tile-header-wrapper {
+        margin: 0px 19px;
+        h3 {
+            .header-font(300, 20px, 24px);
+            color: @neutralColor1;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            height: 50px;
+            margin: 5px auto;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding-top: 15px;
+            &.exclamation-mark {
+                padding-left: 24px;
+                .sdl-dita-delivery-app.rtl & {
+                    padding-right: 24px;
+                    padding-left: 0;
+                }
+                &::before {
+                    .icon-exclamation-mark();
+                    content: "";
+                    margin-right: 10px;
+                    display: inline-block;
+                    vertical-align: bottom;
+                    margin-left: -24px;
+                    .sdl-dita-delivery-app.rtl & {
+                        margin-right: -24px;
+                        margin-left: 10px
+                    }
+                }
+            }
+            &.info-mark {
+                padding-left: 16px;
+                .sdl-dita-delivery-app.rtl & {
+                    padding-right: 16px;
+                    padding-left: 0;
+                }
+                &::before {
+                    .icon-info-mark();
+                    content: "";
+                    margin-right: 10px;
+                    display: inline-block;
+                    margin-left: -16px;
+                    .sdl-dita-delivery-app.rtl & {
+                        margin-right: -16px;
+                        margin-left: 10px
+                    }
+                }
+            }
+        }
+    }
+    hr {
+        margin: 10px 20px;
+        background: @neutralColor5;
+        height: 1px;
+        border: none;
+    }
+    .tile-content {
+        flex: 1 1 auto;
+        margin: 0 15px;
+        line-height: 14px;
+        overflow: hidden;
+        position: relative;
+        .paragraph();
+        a {
+            .anchor();
+            display: block;
+            text-align: center;
+            line-height: 30px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+        .error-message {
+            text-align: center;
+        }
+    }
+}

@@ -1,11 +1,11 @@
 package com.sdl.dxa.modules.ish.providers;
 
-import com.sdl.dxa.modules.ish.localization.IshLocalization;
+import com.sdl.dxa.modules.docs.localization.DocsLocalization;
 import com.sdl.webapp.common.api.WebRequestContext;
+import com.sdl.webapp.common.api.content.ContentProviderException;
 import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.api.model.entity.SitemapItem;
 import com.sdl.webapp.common.api.navigation.NavigationFilter;
-import com.sdl.webapp.common.api.navigation.OnDemandNavigationProvider;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,7 +34,7 @@ public class TocServiceTest {
     private Set<SitemapItem> tocItems;
 
     @Mock
-    private OnDemandNavigationProvider onDemandNavigationProvider;
+    private IshDynamicNavigationProvider ishNavigationProvider;
 
     @InjectMocks
     private TocService tocService;
@@ -50,14 +50,16 @@ public class TocServiceTest {
     }
 
     @Test
-    public void testGetToc() {
+    public void testGetToc() throws ContentProviderException {
         final Integer publicationId = 1123123;
         final String sitemapId = "3333";
         final HttpServletRequest request = mock(HttpServletRequest.class);
         final WebRequestContext webRequestContext = mock(WebRequestContext.class);
-        when(onDemandNavigationProvider.getNavigationSubtree(anyString(), any(NavigationFilter.class),
+
+        when(ishNavigationProvider.getNavigationSubtree(anyString(), any(NavigationFilter.class),
                 any(Localization.class))).thenReturn(tocItems);
-        when(webRequestContext.getLocalization()).thenReturn(new IshLocalization());
+
+        when(webRequestContext.getLocalization()).thenReturn(new DocsLocalization());
 
         Collection<SitemapItem> result = tocService.getToc(publicationId, sitemapId, false, 1, request,
                 webRequestContext);

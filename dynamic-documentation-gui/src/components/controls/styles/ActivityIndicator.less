@@ -1,0 +1,32 @@
+/* Graphene overwrites for the ActivityIndicator Control */
+
+@import (reference) "~theme-styles";
+div.sdl-activityindicator {
+    &.graphene {
+        .sdl-activityindicator-child {
+            &.sdl-activityindicator-child-screen-bright {
+                &:before {
+                    background-color: #FFF;
+                }
+            }
+            &.sdl-activityindicator-child-screen-dark {
+                &:before {
+                    background-color: #AAA;
+                }
+            }
+            &.sdl-activityindicator-child-large {
+                >:first-child {
+                    color: @accentColor1;
+                }
+            }
+            >:last-child > svg {
+                > circle {
+                    stroke: fade(@accentColor1, 40%);
+                }
+                > path:last-child {
+                    stroke: @accentColor1;
+                }
+            }
+        }
+    }
+}

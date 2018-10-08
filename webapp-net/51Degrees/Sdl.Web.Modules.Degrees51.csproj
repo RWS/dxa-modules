@@ -1,9 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-  
-  <Import Project="..\DxaModulesCommon.Props" /> 
-
+  <Import Project="..\DxaModulesCommon.Props" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -39,19 +37,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\51Degrees.mobi.3.2.7.3\lib\NET40\FiftyOne.Foundation.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Web.Infrastructure">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Sdl.Web.Common">
       <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net452\Sdl.Web.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Sdl.Web.Context.Api">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Sdl.Web.Context.Client.$(ContextClientVersion)\lib\net45\Sdl.Web.Context.Api.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Sdl.Web.Context.Api, Version=11.0.0.0, Culture=neutral, PublicKeyToken=ddfc895746e5ee6b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sdl.Web.Context.Client.11.0.0\lib\net45\Sdl.Web.Context.Api.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Sdl.Web.Mvc">
       <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net452\Sdl.Web.Mvc.dll</HintPath>
@@ -59,14 +51,13 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\CommonAssemblyInfo.cs">

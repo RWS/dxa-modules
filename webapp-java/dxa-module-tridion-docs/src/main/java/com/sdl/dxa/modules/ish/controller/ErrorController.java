@@ -1,6 +1,6 @@
 package com.sdl.dxa.modules.ish.controller;
 
-import com.sdl.dxa.modules.ish.model.ErrorMessage;
+import com.sdl.dxa.modules.docs.model.ErrorMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

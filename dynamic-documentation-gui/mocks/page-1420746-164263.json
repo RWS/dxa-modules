@@ -1,0 +1,25 @@
+{
+  "Id": "164263",
+  "Meta": {
+    "ishlogicalref.object.id": 164259,
+    "conditionsused.generated.value": null,
+    "tocnaventries.generated.value": "ish:1420746-36-1024"
+  },
+  "Regions": [
+    {
+      "Entities": [
+        {
+          "Id": "164263",
+          "topicTitle": "Saving names and numbers",
+          "topicBody": {
+            "Fragments": [
+              {
+                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-67F1627E-FFBA-4E03-A62D-F70030C52596__GUID-91208EF2-9DF8-4968-95C3-7B281273B8A0\" xmlns=\"http://www.w3.org/1999/xhtml\">Saving names and numbers</h1>\n      \n      \n      \n      <div class=\"body taskbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\" />\n         \n         \n         <ol class=\"ol steps\" id=\"GUID-67F1627E-FFBA-4E03-A62D-F70030C52596__GUID-39CCD92E-A42F-4E2C-AE5D-9BAA72560320\">\n            <li class=\"li step stepexpand\">\n               <span class=\"ph cmd\">Press <samp class=\"ph msgph\">Contacts</samp> (or press Go to and select <samp class=\"ph msgph\">Contacts</samp>) and select <samp class=\"ph msgph\">Add contact</samp>.</span>\n               \n            </li>\n            \n            <li class=\"li step stepexpand\">\n               <span class=\"ph cmd\">Key in the name and press <samp class=\"ph msgph\">OK</samp>.</span>\n               \n            </li>\n            \n            <li class=\"li step stepexpand\">\n               <span class=\"ph cmd\">Key in the phone number, and press <samp class=\"ph msgph\">OK</samp>.</span>\n               \n            </li>\n            \n            <li class=\"li step stepexpand\">\n               <span class=\"ph cmd\">When the name and number are saved, press <samp class=\"ph msgph\">Done</samp>.</span>\n               \n               <div class=\"itemgroup info\"> Quick save In standby mode, key in the phone number. Press <samp class=\"ph msgph\">Options</samp>, and select <samp class=\"ph msgph\">Save</samp>. Key in the name, press <samp class=\"ph msgph\">OK</samp> and <samp class=\"ph msgph\">Done</samp>.\n               </div>\n               \n            </li>\n            \n         </ol>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Parent topic:</strong> <a class=\"link\" title=\"You can save your contacts in the phone’s memory (internal phone book) and in the SIM card’s memory (SIM phone book).\" href=\"/app/1420746/164301/user-guide/phone-book\">Phone book</a></div>\n            \n         </div>\n         \n      </div>\n   "
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,157 @@
+{
+  "Hits": 119,
+  "Count": 10,
+  "StartIndex": 80,
+  "QueryResults": [
+    {
+      "Id": "ish_1611362-368843-16",
+      "Meta": {
+        "FTITLE.logical.value": "Adjustment Manual"
+      },
+      "Locale": "ja",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      トピック・タイトルを入力して下さい\n      \n      \n      \n      \n         簡単な説明を入力して下さい(任意)\n         \n         \n         トピックを入力して下さい\n         \n         \n      \n      \n      \n      \n         \n         \n            \n            トピック・タイトルを入力して下さい\n               簡単な説明を入力して下さい(任意)\n            \n            \n            トピック・タイトルを入力して下さい\n               簡単な説明を入力して下さい(任意)\n            \n            \n         \n         \n      \n   ",
+      "CreatedDate": "06.01.2016 10:55:54",
+      "ModifiedDate": "14.01.2016 5:25:48",
+      "PublicationId": 1611362,
+      "PublicationTitle": "LS40-el",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
+    },
+    {
+      "Id": "ish_1611362-368553-16",
+      "Meta": {
+        "FTITLE.logical.value": "[Phenomenon 25] Ink form rollers do not operate"
+      },
+      "Locale": "ja",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      リファレンス・タイトルを入力してください\n      \n      \n      \n      \n         簡単な説明を入力してください (任意)\n         \n         \n         実際の情報をこのセクションに入力してください (任意)\n         \n         \n         実例を入力してください (任意)\n         \n         \n      \n      \n      \n      \n         \n         \n            \n            親トピック: トピック・タイトルを入力して下さい\n            \n         \n         \n      \n   ",
+      "CreatedDate": "06.01.2016 10:55:11",
+      "ModifiedDate": "14.01.2016 5:25:17",
+      "PublicationId": 1611362,
+      "PublicationTitle": "LS40-el",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
+    },
+    {
+      "Id": "ish_1611362-368492-16",
+      "Meta": {
+        "FTITLE.logical.value": "Press"
+      },
+      "Locale": "ja",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      コンセプト・タイトルを入力してください\n      \n      \n      \n      \n         簡単な説明を入力してください (任意)\n         \n         \n         ここから始めてください\n         \n         \n      \n      \n      \n      \n         \n         \n            \n            親トピック: トピック・タイトルを入力して下さい\n            \n         \n         \n      \n   ",
+      "CreatedDate": "06.01.2016 10:55:02",
+      "ModifiedDate": "14.01.2016 5:25:11",
+      "PublicationId": 1611362,
+      "PublicationTitle": "LS40-el",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
+    },
+    {
+      "Id": "ish_1611362-368589-16",
+      "Meta": {
+        "FTITLE.logical.value": "[Phenomenon 3] Inch operation is not possible"
+      },
+      "Locale": "ja",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      リファレンス・タイトルを入力してください\n      \n      \n      \n      \n         簡単な説明を入力してください (任意)\n         \n         \n         実際の情報をこのセクションに入力してください (任意)\n         \n         \n         実例を入力してください (任意)\n         \n         \n      \n      \n      \n      \n         \n         \n            \n            親トピック: トピック・タイトルを入力して下さい\n            \n         \n         \n      \n   ",
+      "CreatedDate": "06.01.2016 10:55:16",
+      "ModifiedDate": "14.01.2016 5:25:21",
+      "PublicationId": 1611362,
+      "PublicationTitle": "LS40-el",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
+    },
+    {
+      "Id": "ish_1611362-368585-16",
+      "Meta": {
+        "FTITLE.logical.value": "[Phenomenon 50] Dampening bridge roller does not operate automatically"
+      },
+      "Locale": "ja",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      リファレンス・タイトルを入力してください\n      \n      \n      \n      \n         簡単な説明を入力してください (任意)\n         \n         \n         実際の情報をこのセクションに入力してください (任意)\n         \n         \n         実例を入力してください (任意)\n         \n         \n      \n      \n      \n      \n         \n         \n            \n            親トピック: トピック・タイトルを入力して下さい\n            \n         \n         \n      \n   ",
+      "CreatedDate": "06.01.2016 10:55:15",
+      "ModifiedDate": "14.01.2016 5:25:21",
+      "PublicationId": 1611362,
+      "PublicationTitle": "LS40-el",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
+    },
+    {
+      "Id": "ish_1611362-368581-16",
+      "Meta": {
+        "FTITLE.logical.value": "[Phenomenon 31] Delivery pile does not lower automatically during printing"
+      },
+      "Locale": "ja",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      リファレンス・タイトルを入力してください\n      \n      \n      \n      \n         簡単な説明を入力してください (任意)\n         \n         \n         実際の情報をこのセクションに入力してください (任意)\n         \n         \n         実例を入力してください (任意)\n         \n         \n      \n      \n      \n      \n         \n         \n            \n            親トピック: トピック・タイトルを入力して下さい\n            \n         \n         \n      \n   ",
+      "CreatedDate": "06.01.2016 10:55:15",
+      "ModifiedDate": "14.01.2016 5:25:20",
+      "PublicationId": 1611362,
+      "PublicationTitle": "LS40-el",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
+    },
+    {
+      "Id": "ish_1611362-368941-16",
+      "Meta": {
+        "FTITLE.logical.value": "Feeder unit alarms"
+      },
+      "Locale": "ja",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      リファレンス・タイトルを入力してください\n      \n      \n      \n      \n         簡単な説明を入力してください (任意)\n         \n         \n         実際の情報をこのセクションに入力してください (任意)\n         \n         \n         実例を入力してください (任意)\n         \n         \n      \n      \n      \n      \n         \n         \n            \n            親トピック: トピック・タイトルを入力して下さい\n            \n         \n         \n      \n   ",
+      "CreatedDate": "06.01.2016 10:56:09",
+      "ModifiedDate": "14.01.2016 5:25:58",
+      "PublicationId": 1611362,
+      "PublicationTitle": "LS40-el",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
+    },
+    {
+      "Id": "ish_1611362-368577-16",
+      "Meta": {
+        "FTITLE.logical.value": "[Phenomenon 59] Sheet pile of the pile board guide hoist does not lower"
+      },
+      "Locale": "ja",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      リファレンス・タイトルを入力してください\n      \n      \n      \n      \n         簡単な説明を入力してください (任意)\n         \n         \n         実際の情報をこのセクションに入力してください (任意)\n         \n         \n         実例を入力してください (任意)\n         \n         \n      \n      \n      \n      \n         \n         \n            \n            親トピック: トピック・タイトルを入力して下さい\n            \n         \n         \n      \n   ",
+      "CreatedDate": "06.01.2016 10:55:14",
+      "ModifiedDate": "14.01.2016 5:25:20",
+      "PublicationId": 1611362,
+      "PublicationTitle": "LS40-el",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
+    },
+    {
+      "Id": "ish_1611362-368937-16",
+      "Meta": {
+        "FTITLE.logical.value": "Alarm Item List"
+      },
+      "Locale": "ja",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      トピック・タイトルを入力して下さい\n      \n      \n      \n      \n         簡単な説明を入力して下さい(任意)\n         \n         \n         トピックを入力して下さい\n         \n         \n      \n      \n      \n      \n         \n         \n            \n            リファレンス・タイトルを入力してください\n               簡単な説明を入力してください (任意)\n            \n            \n            リファレンス・タイトルを入力してください\n               簡単な説明を入力してください (任意)\n            \n            \n         \n         \n         \n         \n            \n            親トピック: トピック・タイトルを入力して下さい\n            \n         \n         \n      \n   ",
+      "CreatedDate": "06.01.2016 10:56:09",
+      "ModifiedDate": "14.01.2016 5:25:58",
+      "PublicationId": 1611362,
+      "PublicationTitle": "LS40-el",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
+    },
+    {
+      "Id": "ish_1611362-368818-16",
+      "Meta": {
+        "FTITLE.logical.value": "Message Display and Corresponding Actions"
+      },
+      "Locale": "ja",
+      "Highlighted": null,
+      "Content": "\n      \n      \n      トピック・タイトルを入力して下さい\n      \n      \n      \n      \n         簡単な説明を入力して下さい(任意)\n         \n         \n         トピックを入力して下さい\n         \n         \n      \n      \n      \n      \n         \n         \n            \n            コンセプト・タイトルを入力してください\n               簡単な説明を入力してください (任意)\n            \n            \n            リファレンス・タイトルを入力してください\n               簡単な説明を入力してください (任意)\n            \n            \n            リファレンス・タイトルを入力してください\n               簡単な説明を入力してください (任意)\n            \n            \n            コンセプト・タイトルを入力してください\n               簡単な説明を入力してください (任意)\n            \n            \n            リファレンス・タイトルを入力してください\n               簡単な説明を入力してください (任意)\n            \n            \n         \n         \n      \n   ",
+      "CreatedDate": "06.01.2016 10:55:50",
+      "ModifiedDate": "14.01.2016 5:25:45",
+      "PublicationId": 1611362,
+      "PublicationTitle": "LS40-el",
+      "ProductFamilyName": null,
+      "ProductReleaseName": null
+    }
+  ]
+}

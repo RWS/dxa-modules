@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "t1-k13",
+    "Title": "Installing the SIM card and the battery",
+    "Url": "/app/2261715/164271/user-guide/installing-the-sim-card-and-the-battery",
+    "IsAbstract": false,
+    "HasChildNodes": false,
+    "Items": []
+  },
+  {
+    "Id": "t1-k14",
+    "Title": "Charging the battery",
+    "Url": "/app/2261715/164290/user-guide/charging-the-battery",
+    "IsAbstract": false,
+    "HasChildNodes": false,
+    "Items": []
+  },
+  {
+    "Id": "t1-k15",
+    "Title": "Locking the keypad",
+    "Url": "/app/2261715/164355/user-guide/locking-the-keypad",
+    "IsAbstract": false,
+    "HasChildNodes": false,
+    "Items": []
+  }
+]
