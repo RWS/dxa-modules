@@ -16,8 +16,8 @@ using Keyword = Tridion.ContentDelivery.Taxonomies.Keyword;
 namespace Sdl.Web.Modules.DynamicDocumentation.Providers
 {
     /// <summary>
-    /// Navigation Provider for Docs
-    /// TODO: This should be using the PCA client version and not the CIL
+    /// Navigation Provider for Docs using CIL implementation. This is kept for legacy reasons
+    /// but you would need to configure your CIS to be running with Docs namespace content.
     /// </summary>
     public class DocsNavigationProvider : Tridion.Navigation.CILImpl.DynamicNavigationProvider
     {
@@ -35,7 +35,6 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Providers
 
             return baseUrl;
         }
-
 
         protected override List<SitemapItem> SortTaxonomyNodes(IList<SitemapItem> taxonomyNodes)
             // Sort by topic id since the base impl sorts alphabetically using the title
