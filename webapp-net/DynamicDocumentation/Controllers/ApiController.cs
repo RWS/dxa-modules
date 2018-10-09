@@ -69,7 +69,8 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
             catch (Exception ex)
             {
                 Log.Error(ex);
-                return ServerError(new DxaItemNotFoundException($"Page not found: [{publicationId}] {pageId}/index.html"));
+                return
+                    ServerError(new DxaItemNotFoundException($"Page not found: [{publicationId}] {pageId}/index.html"));
             }
         }
 
@@ -84,17 +85,21 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
             catch (Exception ex)
             {
                 Log.Error(ex);
-                return ServerError(new DxaItemNotFoundException($"Entity not found: [{publicationId}] {componentId}-{templateId}"));
+                return
+                    ServerError(
+                        new DxaItemNotFoundException($"Entity not found: [{publicationId}] {componentId}-{templateId}"));
             }
         }
 
         [Route("~/api/topic/{publicationId}/{componentId}/{templateId}")]
         public virtual ActionResult Topic(string publicationId, string componentId, string templateId)
-            => ServerError(new DxaItemNotFoundException($"Entity not found: [{publicationId}] {componentId}-{templateId}"), 400);
+            =>
+                ServerError(
+                    new DxaItemNotFoundException($"Entity not found: [{publicationId}] {componentId}-{templateId}"), 400);
 
         [Route("~/api/page/{publicationId}/{pageId}")]
         public virtual ActionResult Page(string publicationId, string pageId)
-           => ServerError(new DxaItemNotFoundException($"Page not found: [{publicationId}] {pageId}/index.html"), 400);
+            => ServerError(new DxaItemNotFoundException($"Page not found: [{publicationId}] {pageId}/index.html"), 400);
 
         [Route("~/api/page/{publicationId:int}/{pageId:int}/{*content}")]
         public virtual ActionResult Page(int publicationId, int pageId, string content)
@@ -102,10 +107,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
             try
             {
                 string conditions = Request.QueryString["conditions"];
-                if (!string.IsNullOrEmpty(conditions))
-                {
-                    AmbientDataContext.CurrentClaimStore.Put(UserConditionsUri, conditions);
-                }
+                AddConditionClaims(conditions);
                 ViewModel model = EnrichModel(ContentProvider.GetPageModel(pageId, Localization), publicationId);
                 return Json(model);
             }
@@ -142,10 +144,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         {
             try
             {
-                if (!string.IsNullOrEmpty(conditions))
-                {
-                    AmbientDataContext.CurrentClaimStore.Put(UserConditionsUri, conditions);
-                }                
+                AddConditionClaims(conditions);
                 return Json(new TocProvider().GetToc(Localization));
             }
             catch (Exception ex)
@@ -160,10 +159,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         {
             try
             {
-                if (!string.IsNullOrEmpty(conditions))
-                {
-                    AmbientDataContext.CurrentClaimStore.Put(UserConditionsUri, conditions);
-                }
+                AddConditionClaims(conditions);
                 var sitemapItems = new TocProvider().GetToc(Localization, sitemapItemId, includeAncestors);
                 return Json(sitemapItems);
             }
@@ -193,14 +189,14 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
                     throw new DxaItemNotFoundException(
                         "Unable to use empty 'ishlogicalref.object.id' value as a search criteria.");
                 }
-                return Json(GetPageIdByIshLogicalReference(publicationId, ishFieldValue));                
+                return Json(GetPageIdByIshLogicalReference(publicationId, ishFieldValue));
             }
             catch (Exception ex)
             {
                 return ServerError(ex);
             }
         }
-       
+
         public Item GetPageIdByIshLogicalReference(int publicationId, string ishLogicalRefValue)
         {
             try
@@ -209,7 +205,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
                 var client = PCAClientFactory.Instance.CreateClient();
                 InputItemFilter filter = new InputItemFilter
                 {
-                    NamespaceIds = new List<ContentNamespace> { ContentNamespace.Docs},
+                    NamespaceIds = new List<ContentNamespace> {ContentNamespace.Docs},
                     PublicationIds = new List<int?> {publicationId},
                     ItemTypes = new List<FilterItemType> {FilterItemType.PAGE},
                     CustomMeta = new InputCustomMetaCriteria
@@ -231,10 +227,11 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
             }
             catch (Exception)
             {
-                throw new DxaItemNotFoundException($"Page reference by ishlogicalref.object.id = {ishLogicalRefValue} not found in publication {publicationId}.");
+                throw new DxaItemNotFoundException(
+                    $"Page reference by ishlogicalref.object.id = {ishLogicalRefValue} not found in publication {publicationId}.");
             }
         }
-        
+
         public ActionResult ServerError(Exception ex, int statusCode = 404)
         {
             Response.StatusCode = statusCode;
@@ -249,7 +246,8 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
             if (pageModel == null) return model;
             var client = PCAClientFactory.Instance.CreateClient();
             var page = client.GetPage(ContentNamespace.Docs, publicationId, int.Parse(pageModel.Id),
-                $"requiredMeta:{TocNaventriesMeta},{PageConditionsUsedMeta},{PageLogicalRefObjectId}", ContentIncludeMode.Exclude,  null);
+                $"requiredMeta:{TocNaventriesMeta},{PageConditionsUsedMeta},{PageLogicalRefObjectId}",
+                ContentIncludeMode.Exclude, null);
             if (page?.CustomMetas == null) return model;
             foreach (var x in page.CustomMetas.Edges)
             {
@@ -267,6 +265,17 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
                 }
             }
             return model;
+        }
+
+        private static void AddConditionClaims(string conditions)
+        {
+            if (string.IsNullOrEmpty(conditions)) return;
+            AmbientDataContext.CurrentClaimStore.Put(UserConditionsUri, conditions);
+            // Make sure claims get forwarded
+            if (!AmbientDataContext.ForwardedClaims.Contains(UserConditionsUri.ToString()))
+            {
+                AmbientDataContext.ForwardedClaims.Add(UserConditionsUri.ToString());
+            }
         }
     }
 }
