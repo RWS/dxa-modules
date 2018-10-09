@@ -1,0 +1,35 @@
+@import (reference) "colors.less";
+
+// ---------------------------------------------------------------------------------------------------------------------
+// This file contains global LESS variables that can be used across the application when using fonts
+// ---------------------------------------------------------------------------------------------------------------------
+
+@fontFamily: "Calibri W01 Regular";
+@fontHeaderFamily: "PT Sans";
+@fontFamilyPath: "./fonts/Calibri W01 Regular";
+@fontHeaderPath: "./fonts/PT Sans";
+@fontFamilyFallback: "Arial";
+@fontSize: 14px;
+@fontColor: @neutralColor1;
+
+.import-header-font() {
+    font-family: @fontHeaderFamily;
+    src: url('@{fontHeaderPath}/PTS55F_W.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.import-regular-font() {
+    font-family: @fontFamily;
+    src: url('@{fontFamilyPath}/Calibri W01 Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.header-font(@weight: 400, @size:20px, @height: 24px) {
+    font-family: @fontHeaderFamily, @fontFamilyFallback;
+    font-style: normal;
+    font-weight: @weight;
+    font-size: @size;
+    line-height: @height;
+}

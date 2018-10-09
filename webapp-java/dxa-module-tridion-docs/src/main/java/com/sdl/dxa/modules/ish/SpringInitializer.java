@@ -1,6 +1,7 @@
 package com.sdl.dxa.modules.ish;
 
 import com.sdl.dxa.DxaSpringInitialization;
+import com.sdl.dxa.modules.docs.MvcConfig;
 import com.sdl.webapp.common.controller.PageController;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

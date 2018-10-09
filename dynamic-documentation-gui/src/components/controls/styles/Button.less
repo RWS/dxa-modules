@@ -1,0 +1,57 @@
+/* Graphene overwrites for the Button Control */
+
+@import (reference) "~theme-styles";
+button.sdl-button {
+    &.graphene {
+        .create-button-definition(@color, @backgroundColor) {
+            color: @color;
+            background-color: @backgroundColor;
+            &:hover {
+                background-color: darken(@backgroundColor, 7%);
+            }
+            &[disabled] {
+                background-color: @backgroundColor;
+            }
+        }
+        &.sdl-button-purpose-confirm {
+            .create-button-definition(#FFF, @accentColor1);
+        }
+        &.sdl-button-purpose-general {
+            .create-button-definition(@neutralColor1, @neutralColor5);
+        }
+        &.sdl-button-purpose-critical {
+            .create-button-definition(#FFF, @accentColor5);
+        }
+        &.sdl-button-purpose-ghost {
+            color: @accentColor1;
+            background-color: inherit;
+            border-color: @accentColor1;
+            box-shadow: none;
+            &:hover {
+                border-color: darken(@accentColor1, 5%);
+                color: darken(@accentColor1, 5%);
+            }
+            &[disabled] {
+                border-color: @accentColor1;
+                color: @accentColor1;
+            }
+        }
+    }
+}
+
+.sdl-button-text {
+    padding: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: inherit;
+
+    &:hover {
+        cursor: pointer;
+    }
+    &:focus span {
+        position: relative;
+        top: 0;
+        left: 0;
+    }
+}

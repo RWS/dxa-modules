@@ -1,0 +1,25 @@
+{
+  "Id": "164355",
+  "Meta": {
+    "ishlogicalref.object.id": "164351",
+    "conditionsused.generated.value": null,
+    "tocnaventries.generated.value": "ish:2261715-15-1024"
+  },
+  "Regions": [
+    {
+      "Entities": [
+        {
+          "Id": "164355",
+          "topicTitle": "Locking the keypad",
+          "topicBody": {
+            "Fragments": [
+              {
+                "Html": "\n      \n      \n      <h1 class=\"title topictitle1\" id=\"GUID-A08D6FD8-63C7-4CAA-A2EA-AF08AF4C49B7__GUID-A0F6594E-0C93-4597-9794-4A86C7FDD5B9\" xmlns=\"http://www.w3.org/1999/xhtml\">Locking the keypad</h1>\n      \n      \n      \n      <div class=\"body conbody\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         <p class=\"shortdesc\">You can lock the keypad to prevent the keys being accidentally pressed, for example, when your phone is in your bag.</p>\n         \n         \n         <ul class=\"ul\" id=\"GUID-A08D6FD8-63C7-4CAA-A2EA-AF08AF4C49B7__GUID-7F562804-7138-4496-AF84-7DBF65F1BFCA\">\n            \n            <li class=\"li\">Locking the keypad \n               <p class=\"p\">In standby mode, press <samp class=\"ph msgph\">Menu</samp> and <img class=\"image\" src=\"/app/gui/mocks/bin/2261715-345843-16.gif\" />then within 1.5 seconds. \n               </p>\n               \n            </li>\n            \n            \n            <li class=\"li\">Unlocking the keypad \n               <p class=\"p\"> Press <samp class=\"ph msgph\">Unlock</samp> and then <img class=\"image\" src=\"/app/gui/mocks/bin/2261715-345843-16.gif\" />within 1.5 seconds.\n               </p>\n               \n            </li>\n            \n            \n         </ul>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\" xmlns=\"http://www.w3.org/1999/xhtml\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Parent topic:</strong> <a class=\"link\" href=\"/app/2261715/164398/user-guide/getting-started\">Getting started</a></div>\n            \n         </div>\n         \n      </div>\n   "
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
