@@ -102,6 +102,7 @@
     <Compile Include="Models\Entity\TagLink.cs" />
     <Compile Include="Models\Entity\Teaser.cs" />
     <Compile Include="Models\Entity\YouTubeVideo.cs" />
+    <Compile Include="Models\Region\MultiColumnRegion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -188,6 +189,21 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Core\Views\Shared\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Core\Views\Region\Article.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Core\Views\Region\Content.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Core\Views\Region\Main Section.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Core\Views\Region\Additional.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Core\Views\Region\Multi-Column.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Core\Views\Entity\Topic.cshtml" />

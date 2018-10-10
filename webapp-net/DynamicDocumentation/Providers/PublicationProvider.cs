@@ -38,7 +38,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Providers
                     var publications = client.GetPublications(ContentNamespace.Docs, new Pagination(), null, CustomMetaFilter, null);
                     return (from x in publications.Edges where IsPublicationOnline(x.Node) select BuildPublicationFrom(x.Node)).ToList();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     throw new DxaItemNotFoundException("Unable to fetch list of publications.");
                 }
