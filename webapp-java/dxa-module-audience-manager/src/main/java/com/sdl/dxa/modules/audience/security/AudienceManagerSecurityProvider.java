@@ -44,23 +44,28 @@ public class AudienceManagerSecurityProvider {
      */
     public boolean validate(@Nullable LoginForm form, HttpServletRequest request, HttpServletResponse response) {
         if (form == null) {
-            log.debug("Passed null form, can't authenticate");
+            log.error("Passed null form, can't authenticate");
             return false;
         }
-
         Authentication requested = new UsernamePasswordAuthenticationToken(form.getUserName(), form.getPassword());
-
         try {
+            log.info("'remember-me' parameter value is " + request.getParameter("remember-me") +
+                    "\nprincipal: " + requested.getPrincipal() +
+                    "\nauthenticated: " + requested.isAuthenticated() +
+                    "\ndetails: " + requested.getDetails() +
+                    "\ncredentials: " + requested.getCredentials());
             Authentication result = authenticationManager.authenticate(requested);
 
             SecurityContextHolder.getContext().setAuthentication(result);
             audienceManagerService.login(result.getName());
             rememberMeServices.loginSuccess(request, response, result);
 
-            log.trace("Successfully authenticated. Security context contains: {}", SecurityContextHolder.getContext().getAuthentication());
+            log.trace("Successfully authenticated. Security context contains: {}" +
+                    SecurityContextHolder.getContext().getAuthentication());
             return true;
-        } catch (AuthenticationException e) {
-            log.debug("Authentication failed with {}", requested, e);
+        } catch (Exception e) {
+            log.error("Authentication failed with {} for user: " + form.getUserName() +
+                    ", authentication result: " + requested, e);
             rememberMeServices.loginFail(request, response);
             return false;
         }

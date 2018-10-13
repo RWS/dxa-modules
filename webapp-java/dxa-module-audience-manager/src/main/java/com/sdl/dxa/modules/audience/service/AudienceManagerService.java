@@ -57,10 +57,10 @@ public class AudienceManagerService {
             return new UserProfile(new Contact(contactIdentifiers.getIdentifiers()),
                     contactIdentifiers.getIdentificationKey(), usernameKey, passwordKey, contactIdentifiers);
         } catch (SQLException | IOException | ContactDoesNotExistException e) {
-            log.debug("No user found for {}", contactIdentifiers, e);
+            log.warn("No user found for {}" + contactIdentifiers, e);
             return null;
         } catch (Exception e) {
-            log.warn("Unknown exception in Audience Manager, cannot get user for {}", contactIdentifiers, e);
+            log.error("Unknown exception in Audience Manager, cannot get user for {}" + contactIdentifiers, e);
             return null;
         }
     }
