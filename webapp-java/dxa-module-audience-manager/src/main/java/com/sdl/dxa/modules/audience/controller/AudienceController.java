@@ -45,20 +45,25 @@ public class AudienceController {
                         HttpServletResponse response) {
         loginFormValidator.validate(form, bindingResult);
 
+        if (!bindingResult.hasErrors()) {
+            if (!securityProvider.validate(form, request, response)) {
+                log.warn("Logging attempt failed because username/password combination is not valid for user {}", form.getUserName());
+                bindingResult.reject("login.failed", form.getAuthenticationErrorMessage());
+            } else {
+                log.debug("Login form is valid, user " + form.getUserName() + " logging in into Audience Manager");
+            }
+        }
+
         if (bindingResult.hasErrors()) {
             log.warn("Login form data is invalid, " + bindingResult.getGlobalErrorCount() +
                     " global errors found: " +
                     bindingResult.hasGlobalErrors() + "\n " + bindingResult.getErrorCount() +
-                    " all errors:\n" + bindingResult.getAllErrors());
+                    " all errors:\n" + bindingResult.getAllErrors() + "\n" +
+                    "Logging attempt failed because of errors for user {}", form.getUserName());
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
             return REDIRECT_PREFIX + form.getLoginFormUrl();
         }
-        if (securityProvider.validate(form, request, response)) {
-            log.trace("Logged into Audience manager with user name {}", form.getUserName());
-            return REDIRECT_PREFIX + webRequestContext.getLocalization().getPath();
-        }
-        log.warn("Logging attempt failed because username/password combination is not valid for user {}" + form.getUserName());
-        bindingResult.reject("login.failed", form.getAuthenticationErrorMessage());
+        log.debug("Logged into Audience manager with user name {}", form.getUserName());
         return REDIRECT_PREFIX + webRequestContext.getLocalization().getPath();
     }
 
