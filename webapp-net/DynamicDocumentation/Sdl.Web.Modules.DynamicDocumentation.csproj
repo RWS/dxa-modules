@@ -10,8 +10,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Sdl.Web.Modules.DynamicDocumentation</RootNamespace>
     <AssemblyName>Sdl.Web.Modules.DynamicDocumentation</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,40 +33,40 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sdl.Web.Common">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net452\Sdl.Web.Common.dll</HintPath>
+      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net462\Sdl.Web.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Sdl.Web.DataModel, Version=2.0.0.124, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Sdl.Web.DataModel">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net452\Sdl.Web.DataModel.dll</HintPath>
+      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net462\Sdl.Web.DataModel.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Sdl.Web.Delivery.Service, Version=11.0.0.0, Culture=neutral, PublicKeyToken=ddfc895746e5ee6b, processorArchitecture=MSIL">
+    <Reference Include="Sdl.Web.Delivery.Service">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Sdl.Web.Delivery.$(SdlDeliveryVersion)\lib\net452\Sdl.Web.Delivery.Service.dll</HintPath>
+      <HintPath>..\packages\Sdl.Web.Delivery.$(SdlDeliveryVersion)\lib\net462\Sdl.Web.Delivery.Service.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sdl.Web.Delivery.ServicesCore">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Sdl.Web.Delivery.$(SdlDeliveryVersion)\lib\net452\Sdl.Web.Delivery.ServicesCore.dll</HintPath>
+      <HintPath>..\packages\Sdl.Web.Delivery.$(SdlDeliveryVersion)\lib\net462\Sdl.Web.Delivery.ServicesCore.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sdl.Web.Mvc">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net452\Sdl.Web.Mvc.dll</HintPath>
+      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net462\Sdl.Web.Mvc.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sdl.Web.PublicContentApi">
-      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net452\Sdl.Web.PublicContentApi.dll</HintPath>
+      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net462\Sdl.Web.PublicContentApi.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sdl.Web.Tridion">
-      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net452\Sdl.Web.Tridion.dll</HintPath>
+      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net462\Sdl.Web.Tridion.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -76,7 +77,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Tridion.ContentDelivery">
-      <HintPath>..\packages\Sdl.Web.Delivery.$(SdlDeliveryVersion)\lib\net452\Tridion.ContentDelivery.dll</HintPath>
+      <HintPath>..\packages\Sdl.Web.Delivery.$(SdlDeliveryVersion)\lib\net462\Tridion.ContentDelivery.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
