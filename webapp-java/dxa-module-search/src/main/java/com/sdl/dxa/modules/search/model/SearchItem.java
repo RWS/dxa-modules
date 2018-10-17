@@ -9,6 +9,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.apache.solr.client.solrj.beans.Field;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,14 +22,14 @@ public class SearchItem extends AbstractEntityModel {
 
     @Field
     @JsonProperty("Title")
-    private String title;
+    private List<String> title = new ArrayList<>();
 
     @Field
     @JsonProperty("Url")
     private String url;
 
     @JsonProperty("Summary")
-    private String summary;
+    private List<String> summary = new ArrayList<>();
 
     @JsonProperty("CustomFields")
     private Map<String, Object> customFields;
@@ -43,5 +45,23 @@ public class SearchItem extends AbstractEntityModel {
         return MvcDataCreator.creator()
                 .fromQualifiedName("Search:SearchItem")
                 .defaults(DefaultsMvcData.ENTITY).create();
+    }
+
+    public void setTitle(String title) {
+        this.title.clear();
+        this.title.add(title);
+    }
+
+    public void setSummary(String summary) {
+        this.summary.clear();
+        this.summary.add(summary);
+    }
+
+    public String getTitle() {
+        return title == null || title.isEmpty() ? "" : title.get(0);
+    }
+
+    public String getSummary() {
+        return summary == null || summary.isEmpty() ? "" : summary.get(0);
     }
 }
