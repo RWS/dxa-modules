@@ -28,13 +28,11 @@ public class AudienceManagerAuthenticationProvider implements AuthenticationProv
         UserProfile user = audienceManagerUserService.loadUserByUsername(username);
 
         if (!user.getIdentifiers().getIdentificationKey().equals(username)) {
-            log.debug("User '{}' is not found in AM", username);
-            throw new BadCredentialsException("No user found in Audience manager with username " + username);
+            throw new BadCredentialsException("User '" + username + "' is found in AM, but with non-expecting IdentificationKey");
         }
 
         if (!user.verifyPassword(password)) {
-            log.trace("User '{}' found in AM but password is wrong", username);
-            throw new BadCredentialsException("Wrong password for username " + username);
+            throw new BadCredentialsException("Wrong username/password for " + username);
         }
 
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities());
@@ -47,5 +45,4 @@ public class AudienceManagerAuthenticationProvider implements AuthenticationProv
     public boolean supports(Class<?> authentication) {
         return authentication.equals(UsernamePasswordAuthenticationToken.class);
     }
-
 }
