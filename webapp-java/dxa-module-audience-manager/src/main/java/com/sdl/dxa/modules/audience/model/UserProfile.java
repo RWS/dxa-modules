@@ -5,6 +5,7 @@ import com.tridion.marketingsolution.profile.Contact;
 import com.tridion.marketingsolution.utilities.Digests;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.security.core.CredentialsContainer;
@@ -19,6 +20,7 @@ import static java.util.Collections.unmodifiableSet;
 
 @Data
 @RequiredArgsConstructor
+@Slf4j
 public class UserProfile implements UserDetails, CredentialsContainer {
 
     public static final Collection<? extends GrantedAuthority> DEFAULT_AUTHORITIES = unmodifiableSet(
@@ -50,14 +52,19 @@ public class UserProfile implements UserDetails, CredentialsContainer {
     }
 
     public boolean verifyPassword(@Nullable String password) {
-        if (password == null) {
+        if (password == null || password.isEmpty()) {
+            log.warn("User '{}' found in AM but did not provide a password", username);
             return false;
         }
 
         String storedPassword = getPassword();
-        return storedPassword.startsWith(ENCRYPTED_TOKEN) ?
-                getPasswordEncoder().matches(password, storedPassword.substring(ENCRYPTED_TOKEN.length())) :
-                password.equals(storedPassword);
+        boolean passwordCorrect = storedPassword.startsWith(ENCRYPTED_TOKEN)
+                ? getPasswordEncoder().matches(password, storedPassword.substring(ENCRYPTED_TOKEN.length()))
+                : password.equals(storedPassword);
+        if (!passwordCorrect) {
+            log.warn("User '{}' found in AM but provided password is incorrect", username);
+        }
+        return passwordCorrect;
     }
 
     @NotNull

@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.rememberme.AbstractRememberMeServices;
 import org.springframework.stereotype.Service;
@@ -49,11 +48,6 @@ public class AudienceManagerSecurityProvider {
         }
         Authentication requested = new UsernamePasswordAuthenticationToken(form.getUserName(), form.getPassword());
         try {
-            log.info("'remember-me' parameter value is " + request.getParameter("remember-me") +
-                    "\nprincipal: " + requested.getPrincipal() +
-                    "\nauthenticated: " + requested.isAuthenticated() +
-                    "\ndetails: " + requested.getDetails() +
-                    "\ncredentials: " + requested.getCredentials());
             Authentication result = authenticationManager.authenticate(requested);
 
             SecurityContextHolder.getContext().setAuthentication(result);
