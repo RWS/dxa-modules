@@ -29,17 +29,20 @@
         <dependency>
             <groupId>com.sdl.dxa</groupId>
             <artifactId>dxa-common-api</artifactId>
-            <version>${dxa.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sdl.dxa</groupId>
+            <artifactId>dxa-common</artifactId>
         </dependency>
 
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
         </dependency>
-		
+
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
+            <artifactId>spring-webmvc</artifactId>
         </dependency>
         
         <dependency>
@@ -55,8 +58,6 @@
         <dependency>
             <groupId>com.sdl.web.pca</groupId>
             <artifactId>graphql-client</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-            <type>jar</type>
         </dependency>
         
         <!--
@@ -74,20 +75,6 @@
             <type>jar</type>
         </dependency>
         -->
-
-        <dependency>
-            <groupId>com.sdl.delivery</groupId>
-            <artifactId>udp-discovery-common</artifactId>
-            <version>11.0.0-SNAPSHOT</version>
-            <type>jar</type>
-        </dependency>
-        
-        <dependency>
-            <groupId>com.sdl.web</groupId>
-            <artifactId>content-client-api</artifactId>
-            <version>10.1.0-SNAPSHOT</version>
-            <type>jar</type>
-        </dependency>
         
         <dependency>
             <groupId>junit</groupId>
@@ -103,6 +90,31 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
         </dependency>
-        
+
+        <!--<dependency>
+            <groupId>com.sdl.web</groupId>
+            <artifactId>cil</artifactId>
+            <type>pom</type>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sdl.delivery</groupId>
+            <artifactId>cil</artifactId>
+            <type>pom</type>
+        </dependency>-->
+        <dependency>
+            <groupId>com.sdl.delivery</groupId>
+            <artifactId>udp-discovery-client-lightweight</artifactId>
+            <version>${cd-cil.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sdl.delivery</groupId>
+            <artifactId>udp-cil-api</artifactId>
+            <version>${cd-cil.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
     </dependencies>
 </project>
