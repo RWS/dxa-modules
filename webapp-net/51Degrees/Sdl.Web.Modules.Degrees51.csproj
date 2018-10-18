@@ -42,8 +42,8 @@
       <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net462\Sdl.Web.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Sdl.Web.Context.Api, Version=11.0.0.0, Culture=neutral, PublicKeyToken=ddfc895746e5ee6b, processorArchitecture=MSIL">
-      <HintPath>..\packages\Sdl.Web.Context.Client.11.0.0\lib\net45\Sdl.Web.Context.Api.dll</HintPath>
+    <Reference Include="Sdl.Web.Context.Api">
+      <HintPath>..\packages\Sdl.Web.Context.Client.11.0.0\lib\net462\Sdl.Web.Context.Api.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sdl.Web.Mvc">
