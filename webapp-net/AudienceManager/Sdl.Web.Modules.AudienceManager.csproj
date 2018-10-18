@@ -125,7 +125,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Tridion.OutboundEmail.ContentDelivery">
-      <HintPath>..\packages\Sdl.AudienceManager.ContentDelivery.9.0.0\lib\net452\Tridion.OutboundEmail.ContentDelivery.dll</HintPath>
+      <HintPath>..\packages\Sdl.AudienceManager.ContentDelivery.9.0.0\lib\net462\Tridion.OutboundEmail.ContentDelivery.dll</HintPath>
     </Reference>
     <Reference Include="WebMatrix.Data">
       <SpecificVersion>False</SpecificVersion>

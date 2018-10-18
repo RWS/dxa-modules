@@ -67,8 +67,8 @@
       <HintPath>..\packages\Sdl.Web.Delivery.$(SdlDeliveryVersion)\lib\net462\Tridion.ContentDelivery.AmbientData.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Tridion.SmartTarget, Version=9.0.0.0, Culture=neutral, PublicKeyToken=ddfc895746e5ee6b, processorArchitecture=MSIL">
-      <HintPath>..\packages\Sdl.Web.Experience.9.0.0\lib\net452\Tridion.SmartTarget.dll</HintPath>
+    <Reference Include="Tridion.SmartTarget">
+      <HintPath>..\packages\Sdl.Web.Experience.9.0.0\lib\net462\Tridion.SmartTarget.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
