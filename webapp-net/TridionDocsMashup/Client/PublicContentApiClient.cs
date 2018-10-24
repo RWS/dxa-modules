@@ -1,14 +1,18 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Newtonsoft.Json;
 using Sdl.Web.Common.Models;
-using Sdl.Web.Tridion.PCAClient;
+using Sdl.Web.Common.Interfaces;
+using Sdl.Web.Common.Configuration;
+using Sdl.Web.Common.Logging;
+using Sdl.Web.DataModel;
 using Sdl.Web.Mvc.Configuration;
 using Sdl.Web.PublicContentApi;
 using Sdl.Web.PublicContentApi.ContentModel;
-using System.Collections.Generic;
-using System.Linq;
+using Sdl.Web.Tridion.Mapping;
+using Sdl.Web.Tridion.PCAClient;
 using Sdl.Web.Modules.TridionDocsMashup.Models.Widgets;
-using System;
-using System.Collections;
 
 namespace Sdl.Web.Modules.TridionDocsMashup.Client
 {
@@ -117,43 +121,39 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
 
             if (results != null)
             {
-                foreach (var edge in results)
+                foreach (ItemEdge edge in results)
                 {
                     Page page = edge.Node as Page;
-
-                    // Based on the GraphQl's results and considering R2 model , we need to look into the below path to get the topic's title and body . 
-                    // page >  containerItems > componentPresentation > rawContent > data > Content  topicTitle and topicBody
-
-                    if (page != null)
+                    if (page == null)
                     {
-                        var topic = new Topic();
-
-                        if (page.ContainerItems != null)
-                        {
-                            foreach (ComponentPresentation componentPresentation in page.ContainerItems)
-                            {
-                                IDictionary data = componentPresentation?.RawContent?.Data;
-
-                                if (data != null)
-                                {
-                                    topic.Id = (data["XpmMetadata"] as JObject)?.GetValue("ComponentID")?.ToString();
-
-                                    topic.Link = GetFullyQualifiedUrlForTopic(data["LinkUrl"]?.ToString());
-
-                                    var content = data["Content"] as JObject;
-
-                                    if (content != null)
-                                    {
-                                        topic.Title = content.GetValue("topicTitle")?.ToString();
-                                        topic.Body = content.GetValue("topicBody")?.ToString();
-                                    }
-                                }
-                             
-                            }
-                        }
-
-                        topics.Add(topic);
+                        Log.Debug("Node not is not a Page, skipping.");
+                        continue;
                     }
+
+                    int docsPublicationId = (int)edge.Node.PublicationId;
+                    ILocalization docsLocalization = new DocsLocalization(docsPublicationId);
+                    docsLocalization.EnsureInitialized();
+
+                    // Deserialize Page Content as R2 Data Model
+                    string pageModelJson = JsonConvert.SerializeObject(page.RawContent.Data); // TODO: should be able to get string from PCA client
+                    PageModelData pageModelData = JsonConvert.DeserializeObject<PageModelData>(pageModelJson, DataModelBinder.SerializerSettings); // TODO: use Binder from GraphQLModelServiceProvider
+
+                    // Extract the R2 Data Model of the Topic and convert it to a Strongly Typed View Model
+                    EntityModelData topicModelData = pageModelData.Regions[0].Entities[0];
+                    EntityModel topicModel = ModelBuilderPipeline.CreateEntityModel(topicModelData, null, docsLocalization);
+
+                    Topic topic = topicModel as Topic;
+                    if (topic == null)
+                    {
+                        Log.Warn($"Unexpected View Model type for {topicModel}: '{topicModel.GetType().FullName}'");
+                        continue;
+                    }
+
+                    // Post-process the Strongly Typed Topic
+                    topic.Id = topicModelData.XpmMetadata["ComponentID"] as string;
+                    topic.Link = topicModelData.LinkUrl; // TODO: Should ModelBuilderPipeline be able to do this?
+
+                    topics.Add(topic);
                 }
             }
 

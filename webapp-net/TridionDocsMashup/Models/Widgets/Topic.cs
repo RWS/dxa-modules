@@ -1,13 +1,19 @@
-﻿using System;
+﻿using Sdl.Web.Common.Models;
 
 namespace Sdl.Web.Modules.TridionDocsMashup.Models.Widgets
 {
-    public class Topic
+
+    [SemanticEntity(Vocab = DitaVocabulary, EntityName = "body")]
+    public class Topic : EntityModel
     {
-        public string Id { get; set; }
+        [SemanticProperty("title")]
         public string Title { get; set; }
+
+        [SemanticProperty("body")]
+        public RichText Body { get; set; }
+
+        [SemanticProperty(IgnoreMapping = true)]
         public string Link { get; set; }
-        public string Body { get; set; }
     }
 
 }

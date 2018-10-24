@@ -42,6 +42,9 @@
       <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net462\Sdl.Web.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Sdl.Web.DataModel">
+      <HintPath>..\packages\Sdl.Dxa.DataModel.$(DxaDataModelVersion)\lib\net462\Sdl.Web.DataModel.dll</HintPath>
+    </Reference>
     <Reference Include="Sdl.Web.Mvc">
       <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net462\Sdl.Web.Mvc.dll</HintPath>
       <Private>False</Private>
