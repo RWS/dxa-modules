@@ -1,7 +1,7 @@
 ﻿using System;
+using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Interfaces;
 using Sdl.Web.Tridion;
-using Sdl.Web.Tridion.TridionDocs.Localization;
 
 namespace Sdl.Web.Modules.DynamicDocumentation.Localization
 {

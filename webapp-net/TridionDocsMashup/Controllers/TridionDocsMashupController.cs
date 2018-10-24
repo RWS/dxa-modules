@@ -1,16 +1,15 @@
-﻿using Sdl.Web.Common.Models;
-using Sdl.Web.Mvc.Configuration;
-using Sdl.Web.Mvc.Controllers;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Sdl.Web.Modules.TridionDocsMashup.Client;
-using Sdl.Web.Modules.TridionDocsMashup.Models.Widgets;
-using Sdl.Web.Modules.TridionDocsMashup.Models.Products;
 using System.Web.Mvc;
 using Sdl.Web.Mvc.Formats;
 using System;
-using Sdl.Web.Common.Logging;
-using Sdl.Web.Tridion.TridionDocs.Localization;
+using Sdl.Web.Common.Configuration;
+using Sdl.Web.Common.Models;
+using Sdl.Web.Mvc.Configuration;
+using Sdl.Web.Mvc.Controllers;
+using Sdl.Web.Modules.TridionDocsMashup.Client;
+using Sdl.Web.Modules.TridionDocsMashup.Models.Widgets;
+using Sdl.Web.Modules.TridionDocsMashup.Models.Products;
 
 namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
 {
@@ -78,7 +77,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
         {
             try
             {
-                var docsLocalization = new DocsLocalization { Id = publicationId.ToString() };
+                var docsLocalization = new DocsLocalization(publicationId);
                 StaticContentItem content = ContentProvider.GetStaticContentItem(binaryId, docsLocalization);
                 return new FileStreamResult(content.GetContentStream(), content.ContentType);
             }
