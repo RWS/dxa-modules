@@ -32,6 +32,10 @@
             <groupId>com.sdl.dxa</groupId>
             <artifactId>dxa-common-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.sdl.dxa</groupId>
+            <artifactId>dxa-common</artifactId>
+        </dependency>
 
         <!-- Spring Framework -->
         <dependency>
@@ -41,6 +45,10 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
         </dependency>
 
         <!-- Tests -->
@@ -55,11 +63,6 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
         </dependency>
     </dependencies>
 
