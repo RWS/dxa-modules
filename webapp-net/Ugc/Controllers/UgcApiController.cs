@@ -95,28 +95,28 @@ namespace Sdl.Web.Modules.Ugc.Controllers
 
         [Route("~/api/comments/upvote")]
         [Route("{localization}/api/comments/upvote")]
-        public async Task<ActionResult> UpVoteComment(int commentId)
+        public ActionResult UpVoteComment(int commentId)
         {
             UgcService ugc = new UgcService();
-            await ugc.UpVoteComment(commentId);
+            ugc.UpVoteComment(commentId);
             return Redirect(Request.UrlReferrer?.AbsolutePath);
         }
 
         [Route("~/api/comments/downvote")]
         [Route("{localization}/api/comments/downvote")]
-        public async Task<ActionResult> DownVoteComment(int commentId)
+        public ActionResult DownVoteComment(int commentId)
         {
             UgcService ugc = new UgcService();
-            await ugc.DownVoteComment(commentId);
+            ugc.DownVoteComment(commentId);
             return Redirect(Request.UrlReferrer?.AbsolutePath);
         }
 
         [Route("~/api/comments/remove")]
         [Route("{localization}/api/comments/remove")]
-        public async Task<ActionResult> RemoveComment(int commentId)
+        public ActionResult RemoveComment(int commentId)
         {
             UgcService ugc = new UgcService();
-            await ugc.RemoveComment(commentId);
+            ugc.RemoveComment(commentId);
             return Redirect(Request.UrlReferrer?.AbsolutePath);
         }
      
