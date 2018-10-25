@@ -4,20 +4,18 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <artifactId>web-app</artifactId>
-        <groupId>com.sdl.delivery.ish</groupId>
-        <version>1.3.0-SNAPSHOT</version>
-    </parent>
-
-    <artifactId>webapp-gui</artifactId>
-    <name>DITA Delivery Web Application GUI components</name>
-    <description>DITA Delivery Web Application GUI components</description>
-
+    <groupId>com.sdl.dxa.modules</groupId>
+    <artifactId>dynamic-documentation-gui</artifactId>
+    <name>DXA Dynamic Documentation Module GUI component</name>
+    <description>DXA Dynamic Documentation Module GUI component</description>
+    <version>2.1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <properties>
         <npm.repo>https://nexus.sdl.com/content/groups/npm/</npm.repo>
+        <frontend.maven.plugin.version>1.0</frontend.maven.plugin.version>
+        <node.version>v6.11.2</node.version>
+        <npm.version>4.6.1</npm.version>
     </properties>
 
     <build>

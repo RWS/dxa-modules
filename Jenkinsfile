@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Building DD GUI') {
             steps {
-                dir("dynamic-documentation-gui") {
+                dir("gui") {
                     powershell 'mvn clean install'
                 }
             }
@@ -18,7 +18,7 @@ pipeline {
 
     post {
         always {
-            dir("dynamic-documentation-gui") {
+            dir("gui") {
                 archiveArtifacts artifacts: 'target/gui/**', fingerprint: true
             }
         }
