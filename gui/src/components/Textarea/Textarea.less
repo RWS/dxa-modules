@@ -1,0 +1,37 @@
+@import (reference) "~theme-styles";
+
+.sdl-textarea {
+    font-size: calc(@fontSize + 2);
+    font-family: @fontFamily;
+    border-radius: 4px;
+    padding: 10px;
+    border: 1px solid @neutralColor4;
+    width: 100%;
+    box-sizing: border-box;
+    color: #9BA9B6;
+    outline: none;
+    resize: none;
+    overflow: hidden;
+    min-height: 90px;
+    &:hover {
+        border-color: #2A3B4C
+    }
+    &:focus {
+        border-color: @accentColor1;
+        color: @neutralColor4;
+    }
+    &:disabled {
+        background-color: @neutralColor6;
+        border-color: @neutralColor5;
+        color: #BFCDD4;
+
+    }
+    &::placeholder {
+        color: #9BA9B6;
+        opacity: 1;
+    }
+    &.error::placeholder {
+        color: @accentColor7;
+        opacity: 1;
+    }
+}
