@@ -136,7 +136,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
 
                     // Deserialize Page Content as R2 Data Model
                     string pageModelJson = JsonConvert.SerializeObject(page.RawContent.Data); // TODO: should be able to get string from PCA client
-                    PageModelData pageModelData = JsonConvert.DeserializeObject<PageModelData>(pageModelJson, DataModelBinder.SerializerSettings); // TODO: use Binder from GraphQLModelServiceProvider
+                    PageModelData pageModelData = JsonConvert.DeserializeObject<PageModelData>(pageModelJson, DataModelBinder.SerializerSettings);
 
                     // Extract the R2 Data Model of the Topic and convert it to a Strongly Typed View Model
                     EntityModelData topicModelData = pageModelData.Regions[0].Entities[0];
@@ -151,7 +151,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
 
                     // Post-process the Strongly Typed Topic
                     topic.Id = topicModelData.XpmMetadata["ComponentID"] as string;
-                    topic.Link = topicModelData.LinkUrl; // TODO: Should ModelBuilderPipeline be able to do this?
+                    topic.Link = GetFullyQualifiedUrlForTopic(topicModelData.LinkUrl); 
 
                     topics.Add(topic);
                 }
