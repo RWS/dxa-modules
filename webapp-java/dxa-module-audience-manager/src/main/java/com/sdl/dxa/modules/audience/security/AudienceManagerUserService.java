@@ -10,6 +10,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -62,8 +63,6 @@ public class AudienceManagerUserService implements UserDetailsService {
                 return user;
             }
         }
-
-        log.debug("No Audience Manager Contact found for identification key '{}' and Import Sources '{}'", username, importSources);
-        throw new UsernameNotFoundException("Nothing found for id key " + username + " and import sources " + importSources);
+        throw new UsernameNotFoundException("No any Audience Manager Contacts found for id key " + username + " and import sources " + importSources);
     }
 }

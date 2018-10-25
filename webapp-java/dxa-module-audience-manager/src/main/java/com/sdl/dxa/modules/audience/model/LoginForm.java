@@ -8,9 +8,11 @@ import com.sdl.webapp.common.api.model.validation.DynamicCodeResolver;
 import com.sdl.webapp.common.api.model.validation.DynamicValidationMessage;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
+@ToString(exclude = "password")
 @NeverCached(qualifier = "LoginForm")
 public class LoginForm extends AbstractEntityModel {
 

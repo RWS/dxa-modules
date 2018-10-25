@@ -4,11 +4,11 @@ import com.google.common.io.Files;
 import com.google.common.primitives.Ints;
 import com.sdl.dxa.api.datamodel.model.PageModelData;
 import com.sdl.dxa.common.util.PathUtils;
+import com.sdl.dxa.modelservice.service.ModelServiceProvider;
 import com.sdl.dxa.modules.ish.exception.IshServiceException;
 import com.sdl.dxa.tridion.content.StaticContentResolver;
 import com.sdl.dxa.tridion.mapping.ModelBuilderPipeline;
 import com.sdl.dxa.tridion.mapping.impl.DefaultContentProvider;
-import com.sdl.dxa.tridion.modelservice.DefaultModelService;
 import com.sdl.dxa.tridion.modelservice.ModelServiceClient;
 import com.sdl.dxa.tridion.modelservice.ModelServiceConfiguration;
 import com.sdl.dxa.tridion.modelservice.exceptions.ItemNotFoundInModelServiceException;
@@ -87,7 +87,7 @@ public class IshContentProvider extends DefaultContentProvider {
                               StaticContentResolver staticContentResolver,
                               LinkResolver linkResolver,
                               ModelBuilderPipeline builderPipeline,
-                              DefaultModelService modelService) {
+                              ModelServiceProvider modelService) {
         super(webRequestContext, staticContentResolver, linkResolver, builderPipeline, modelService);
     }
 

@@ -30,7 +30,6 @@
         <dependency>
             <groupId>com.sdl.dxa</groupId>
             <artifactId>dxa-tridion-provider</artifactId>
-            <version>${project.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.sdl.web</groupId>
@@ -39,11 +38,6 @@
             </exclusions>
         </dependency>
 
-        <dependency>
-            <groupId>com.sdl.delivery</groupId>
-            <artifactId>udp-cil-api</artifactId>
-            <version>${cd-cil.version}</version>
-        </dependency>
         <dependency>
             <groupId>com.sdl.delivery</groupId>
             <artifactId>udp-ugc-cil-api</artifactId>
@@ -73,6 +67,10 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
         </dependency>
     </dependencies>
 

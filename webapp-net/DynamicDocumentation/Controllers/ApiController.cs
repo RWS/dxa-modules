@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using Newtonsoft.Json;
 using Sdl.Web.Common;
 using Sdl.Web.Common.Interfaces;
 using Sdl.Web.Common.Logging;
@@ -37,7 +38,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         {
             try
             {
-                return Json(new PublicationProvider().PublicationList);
+                return JsonResult(new PublicationProvider().PublicationList);
             }
             catch (Exception ex)
             {
@@ -50,7 +51,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         {
             try
             {
-                return Json(new ConditionProvider().GetConditions(publicationId));
+                return JsonResult(new ConditionProvider().GetConditions(publicationId));
             }
             catch (Exception ex)
             {
@@ -64,7 +65,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
             try
             {
                 var model = EnrichModel(ContentProvider.GetPageModel(pageId, Localization), publicationId);
-                return Json(model);
+                return JsonResult(model);
             }
             catch (Exception ex)
             {
@@ -80,7 +81,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
             try
             {
                 var model = EnrichModel(ContentProvider.GetEntityModel($"{componentId}-{templateId}", Localization));
-                return Json(model);
+                return JsonResult(model);
             }
             catch (Exception ex)
             {
@@ -109,7 +110,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
                 string conditions = Request.QueryString["conditions"];
                 AddConditionClaims(conditions);
                 ViewModel model = EnrichModel(ContentProvider.GetPageModel(pageId, Localization), publicationId);
-                return Json(model);
+                return JsonResult(model);
             }
             catch (Exception ex)
             {
@@ -145,7 +146,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
             try
             {
                 AddConditionClaims(conditions);
-                return Json(new TocProvider().GetToc(Localization));
+                return JsonResult(new TocProvider().GetToc(Localization));
             }
             catch (Exception ex)
             {
@@ -161,7 +162,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
             {
                 AddConditionClaims(conditions);
                 var sitemapItems = new TocProvider().GetToc(Localization, sitemapItemId, includeAncestors);
-                return Json(sitemapItems);
+                return JsonResult(sitemapItems);
             }
             catch (Exception ex)
             {
@@ -189,7 +190,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
                     throw new DxaItemNotFoundException(
                         "Unable to use empty 'ishlogicalref.object.id' value as a search criteria.");
                 }
-                return Json(GetPageIdByIshLogicalReference(publicationId, ishFieldValue));
+                return JsonResult(GetPageIdByIshLogicalReference(publicationId, ishFieldValue));
             }
             catch (Exception ex)
             {
@@ -253,7 +254,14 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
             {
                 if (TocNaventriesMeta.Equals(x.Node.Key))
                 {
-                    pageModel.Meta.Add(TocNaventriesMeta, x.Node.Value);
+                    if (pageModel.Meta.ContainsKey(TocNaventriesMeta))
+                    {
+                        pageModel.Meta[TocNaventriesMeta] = $"{pageModel.Meta[TocNaventriesMeta]}, {x.Node.Value}";
+                    }
+                    else
+                    {
+                        pageModel.Meta.Add(TocNaventriesMeta, x.Node.Value);
+                    }                    
                 }
                 if (PageConditionsUsedMeta.Equals(x.Node.Key))
                 {
@@ -277,5 +285,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
                 AmbientDataContext.ForwardedClaims.Add(UserConditionsUri.ToString());
             }
         }
+
+        private ActionResult JsonResult(object obj) => Content(JsonConvert.SerializeObject(obj), "application/json");
     }
 }

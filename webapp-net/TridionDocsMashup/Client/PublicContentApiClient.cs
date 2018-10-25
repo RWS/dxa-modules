@@ -19,11 +19,21 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
     /// </summary>
     public class PublicContentApiClient
     {
-        private IPublicContentApi _publicContentApi;
+        private readonly IPublicContentApi _publicContentApi;
 
         public PublicContentApiClient()
         {
             _publicContentApi = PCAClientFactory.Instance.CreateClient();
+
+            // Explicitly tell PCA client to only return R2 models
+            _publicContentApi.DefaultModelType = DataModelType.R2;
+            _publicContentApi.DefaultContentType = ContentType.MODEL;
+            // Specify rendered links are absolute and not relative
+            _publicContentApi.TcdlLinkRenderingType = TcdlLinkRendering.Absolute;
+            _publicContentApi.ModelSericeLinkRenderingType = ModelServiceLinkRendering.Absolute;
+            // Specify prefix urls if applicable
+            _publicContentApi.TcdlLinkUrlPrefix = WebRequestContext.Localization?.GetConfigValue("tridiondocsmashup.PrefixForTopicsUrl");           
+            _publicContentApi.TcdlBinaryLinkUrlPrefix = WebRequestContext.Localization?.GetConfigValue("tridiondocsmashup.PrefixForBinariesUrl");
         }
 
         /// <summary>
@@ -84,29 +94,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
                 ItemTypes = new List<PublicContentApi.ContentModel.FilterItemType> { PublicContentApi.ContentModel.FilterItemType.PAGE },
                 And = customMetaFilters
             };
-
-            var contextData = new ContextData()
-            {
-                ClaimValues = new List<ClaimValue> {
-                new ClaimValue(){ Uri="dxa:modelservice:model:entity:relativelinks",Value="false",Type = ClaimValueType.BOOLEAN},
-                new ClaimValue(){ Uri="taf:tcdl:render:link:relative",Value="false",Type = ClaimValueType.BOOLEAN},
-                new ClaimValue(){ Uri="dxa:modelservice:content:type",Value="model",Type = ClaimValueType.STRING},
-                new ClaimValue(){ Uri="dxa:modelservice:model:type",Value="r2",Type = ClaimValueType.STRING}
-                }
-            };
-
-            var prefixForTopicsUrl = WebRequestContext.Localization?.GetConfigValue("tridiondocsmashup.PrefixForTopicsUrl");
-            if (!string.IsNullOrWhiteSpace(prefixForTopicsUrl))
-            {
-                contextData.ClaimValues.Add(new ClaimValue() { Uri = "taf:tcdl:render:link:urlprefix", Value = prefixForTopicsUrl, Type = ClaimValueType.STRING });
-            }
-
-            var prefixForBinariesUrl = WebRequestContext.Localization?.GetConfigValue("tridiondocsmashup.PrefixForBinariesUrl");
-            if (!string.IsNullOrWhiteSpace(prefixForBinariesUrl))
-            {
-                contextData.ClaimValues.Add(new ClaimValue() { Uri = "taf:tcdl:render:link:binaryUrlPrefix", Value = prefixForBinariesUrl, Type = ClaimValueType.STRING });
-            }
-
+                                
             var results = _publicContentApi.ExecuteItemQuery(
                 filter,
                 new InputSortParam { Order = SortOrderType.Descending, SortBy = SortFieldType.LAST_PUBLISH_DATE },
@@ -114,7 +102,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
                 null,
                 ContentIncludeMode.IncludeAndRender,
                 includeContainerItems: true,
-                contextData: contextData
+                contextData: null
                 );
 
             return results;
@@ -277,7 +265,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
 
                     if (Uri.TryCreate(prefixForTopicsUrl, UriKind.RelativeOrAbsolute, out prefixUri))
                     {
-                        if (Uri.TryCreate(prefixUri.ToString().TrimEnd('/') + url, UriKind.Absolute, out uri))
+                        if (Uri.TryCreate(prefixUri.ToString().TrimEnd('/') + url, UriKind.RelativeOrAbsolute, out uri))
                         {
                             url = uri.ToString();
                         }
@@ -287,6 +275,5 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
 
             return url;
         }
-
     }
 }

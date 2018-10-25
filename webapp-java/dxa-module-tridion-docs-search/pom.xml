@@ -22,23 +22,10 @@
         <tag>HEAD</tag>
     </scm>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <iq-query-api.version>11.0.0-SNAPSHOT</iq-query-api.version>
-        <iq-query-model.version>11.0.0-SNAPSHOT</iq-query-model.version>
-        <iq-query-client.version>11.0.0-SNAPSHOT</iq-query-client.version>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>com.sdl.dxa.modules</groupId>
             <artifactId>dxa-module-tridion-docs-common</artifactId>
-            <version>${dxa.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sdl.delivery</groupId>
-            <artifactId>udp-iq-query-client</artifactId>
-            <version>${cd-cil.version}</version>
         </dependency>
 
         <dependency>

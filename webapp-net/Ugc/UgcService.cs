@@ -3,7 +3,6 @@ using Sdl.Web.Tridion.ContentManager;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Threading.Tasks;
 using Sdl.Web.Common.Interfaces;
 using Sdl.Web.Delivery.UGC;
 using Sdl.Web.Delivery.UGC.Model;
@@ -50,23 +49,14 @@ namespace Sdl.Web.Modules.Ugc
                 claimStore.Put(new Uri("taf:claim:contentdelivery:webservice:post:allowed"), true);
             }
             return Convert(
-                _api.PostComment(CreateUri(publicationId, pageId), username, email, content, parentId, metadata).Result);
+                _api.PostComment(CreateUri(publicationId, pageId), username, email, content, parentId, metadata));
         }
 
-        public async Task UpVoteComment(long commentId)
-        {
-            await _votingApi.VoteCommentUp(commentId);
-        }
+        public void UpVoteComment(long commentId) => _votingApi.VoteCommentUp(commentId);
 
-        public async Task DownVoteComment(long commentId)
-        {
-            await _votingApi.VoteCommentDown(commentId);
-        }
+        public void DownVoteComment(long commentId) => _votingApi.VoteCommentDown(commentId);
 
-        public async Task<bool> RemoveComment(long commentId)
-        {
-            return await _api.RemoveComment(commentId);
-        }
+        public bool RemoveComment(long commentId) => _api.RemoveComment(commentId);
 
         private static CmUri CreateUri(int publicationId, int pageId)
         {

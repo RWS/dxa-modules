@@ -11,12 +11,11 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.sql.SQLException;
 
 import static com.sdl.dxa.modules.audience.service.support.ContextClaimKey.AUDIENCE_MANAGER_CONTACT_CLAIM;
 import static com.sdl.dxa.modules.audience.service.support.ContextClaimKey.PUBLICATION_ID_CLAIM;
@@ -33,7 +32,7 @@ public class AudienceManagerService {
     }
 
     /**
-     * Tries to resolve contact in Audience Manager using the given {@link ContactIdentifiers}
+     * Tries to resolve contact in Audience Manager DB using the given {@link ContactIdentifiers}
      * and returns a version-independent wrapper.
      *
      * @param contactIdentifiers contact identifiers to find in AM
@@ -46,23 +45,24 @@ public class AudienceManagerService {
         try {
             ClaimStore claimStore = AmbientDataContext.getCurrentClaimStore();
             if (claimStore == null) {
-                log.warn("There is no current ClaimStore set, cannot set {} needed for resolving a contact", PUBLICATION_ID_CLAIM.getKey());
-                return null;
+                throw new IllegalStateException("There is no current ClaimStore set, cannot set " +
+                        PUBLICATION_ID_CLAIM.getKey() + " needed for resolving a contact.\n" +
+                        "You have to enable ADF 'dxa.web.adf.enabled=true' and include it " +
+                        "'spring.profiles.include=adf.context.provider' in dxa.properties");
             }
-
             // Audience Manager reads the context Publication ID from ADF
-            log.trace("Set {} to {}", PUBLICATION_ID_CLAIM.getKey(), webRequestContext.getLocalization().getId());
             claimStore.put(new URI(PUBLICATION_ID_CLAIM.getKey()), webRequestContext.getLocalization().getId());
 
-            return new UserProfile(new Contact(contactIdentifiers.getIdentifiers()),
-                    contactIdentifiers.getIdentificationKey(), usernameKey, passwordKey, contactIdentifiers);
-        } catch (SQLException | IOException | ContactDoesNotExistException e) {
-            log.debug("No user found for {}", contactIdentifiers, e);
-            return null;
+            String[] identifiers = contactIdentifiers.getIdentifiers();
+            Contact contact = new Contact(identifiers);
+            log.trace("Contact for user " + usernameKey + " successfully found.");
+            return new UserProfile(contact, contactIdentifiers.getIdentificationKey(), usernameKey, passwordKey, contactIdentifiers);
+        } catch (ContactDoesNotExistException e) {
+            log.warn("Could not find contact for user " + usernameKey, e);
         } catch (Exception e) {
-            log.warn("Unknown exception in Audience Manager, cannot get user for {}", contactIdentifiers, e);
-            return null;
+            log.error("Unknown exception in Audience Manager, cannot get contact for user " + usernameKey, e);
         }
+        return null;
     }
 
     /**
