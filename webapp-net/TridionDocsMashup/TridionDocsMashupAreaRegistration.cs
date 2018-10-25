@@ -11,6 +11,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup
 
         protected override void RegisterAllViewModels()
         {
+            // Widget Views
             RegisterViewModel("StaticWidget", typeof(StaticWidget), "TridionDocsMashup");
             RegisterViewModel("DynamicWidget", typeof(DynamicWidget), "TridionDocsMashup");
 
@@ -19,6 +20,9 @@ namespace Sdl.Web.Modules.TridionDocsMashup
 
             // Region Views
             RegisterViewModel("DynamicWidget", typeof(RegionModel));
+
+            // Strongly Typed Topic Models
+            RegisterViewModel(typeof(Topic));
         }
     }
 }
