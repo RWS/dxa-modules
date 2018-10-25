@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
-using Sdl.Web.Common.Models;
-using Sdl.Web.Common.Interfaces;
+using Sdl.Tridion.Api.Client;
+using Sdl.Tridion.Api.Client.ContentModel;
 using Sdl.Web.Common.Configuration;
+using Sdl.Web.Common.Interfaces;
 using Sdl.Web.Common.Logging;
+using Sdl.Web.Common.Models;
 using Sdl.Web.DataModel;
-using Sdl.Web.Mvc.Configuration;
-using Sdl.Web.PublicContentApi;
-using Sdl.Web.PublicContentApi.ContentModel;
-using Sdl.Web.Tridion.Mapping;
-using Sdl.Web.Tridion.PCAClient;
 using Sdl.Web.Modules.TridionDocsMashup.Models.Widgets;
+using Sdl.Web.Mvc.Configuration;
+using Sdl.Web.Tridion.ApiClient;
+using Sdl.Web.Tridion.Mapping;
 
 namespace Sdl.Web.Modules.TridionDocsMashup.Client
 {
@@ -23,11 +23,11 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
     /// </summary>
     public class PublicContentApiClient
     {
-        private readonly IPublicContentApi _publicContentApi;
+        private readonly IApiClient _publicContentApi;
 
         public PublicContentApiClient()
         {
-            _publicContentApi = PCAClientFactory.Instance.CreateClient();
+            _publicContentApi = ApiClientFactory.Instance.CreateClient();
 
             // Explicitly tell PCA client to only return R2 models
             _publicContentApi.DefaultModelType = DataModelType.R2;
@@ -95,7 +95,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
             InputItemFilter filter = new InputItemFilter
             {
                 NamespaceIds = new List<ContentNamespace> { ContentNamespace.Docs },
-                ItemTypes = new List<PublicContentApi.ContentModel.FilterItemType> { PublicContentApi.ContentModel.FilterItemType.PAGE },
+                ItemTypes = new List<FilterItemType> { FilterItemType.PAGE },
                 And = customMetaFilters
             };
                                 
@@ -104,7 +104,8 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
                 new InputSortParam { Order = SortOrderType.Descending, SortBy = SortFieldType.LAST_PUBLISH_DATE },
                 new Pagination { First = maxItems },
                 null,
-                ContentIncludeMode.IncludeAndRender,
+                // TODO : Change to IncludeJsonAndRender if you want to easily deserialize R2 datamodel
+                ContentIncludeMode.IncludeDataAndRender,
                 includeContainerItems: true,
                 contextData: null
                 );

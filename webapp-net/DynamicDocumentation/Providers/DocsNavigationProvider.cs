@@ -3,13 +3,13 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 using Newtonsoft.Json;
+using Sdl.Tridion.Api.Client.Utils;
 using Sdl.Web.Common;
 using Sdl.Web.Common.Interfaces;
 using Sdl.Web.Common.Models;
 using Sdl.Web.Common.Models.Navigation;
 using Sdl.Web.Modules.DynamicDocumentation.Models;
 using Tridion.ContentDelivery.Taxonomies;
-using Sdl.Web.PublicContentApi.Utils;
 using Tridion.ContentDelivery.Meta;
 using Keyword = Tridion.ContentDelivery.Taxonomies.Keyword;
 

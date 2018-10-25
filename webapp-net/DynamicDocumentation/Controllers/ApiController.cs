@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using Newtonsoft.Json;
+using Sdl.Tridion.Api.Client;
+using Sdl.Tridion.Api.Client.ContentModel;
 using Sdl.Web.Common;
 using Sdl.Web.Common.Interfaces;
 using Sdl.Web.Common.Logging;
@@ -12,9 +14,7 @@ using Sdl.Web.Modules.DynamicDocumentation.Providers;
 using Sdl.Web.Mvc.Configuration;
 using Sdl.Web.Mvc.Controllers;
 using Sdl.Web.Mvc.Formats;
-using Sdl.Web.PublicContentApi;
-using Sdl.Web.PublicContentApi.ContentModel;
-using Sdl.Web.Tridion.PCAClient;
+using Sdl.Web.Tridion.ApiClient;
 using ConditionProvider = Sdl.Web.Modules.DynamicDocumentation.Providers.ConditionProvider;
 using PublicationProvider = Sdl.Web.Modules.DynamicDocumentation.Providers.PublicationProvider;
 
@@ -203,7 +203,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
             try
             {
                 Item item = new Item();
-                var client = PCAClientFactory.Instance.CreateClient();
+                var client = ApiClientFactory.Instance.CreateClient();
                 InputItemFilter filter = new InputItemFilter
                 {
                     NamespaceIds = new List<ContentNamespace> {ContentNamespace.Docs},
@@ -245,7 +245,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         {
             PageModel pageModel = model as PageModel;
             if (pageModel == null) return model;
-            var client = PCAClientFactory.Instance.CreateClient();
+            var client = ApiClientFactory.Instance.CreateClient();
             var page = client.GetPage(ContentNamespace.Docs, publicationId, int.Parse(pageModel.Id),
                 $"requiredMeta:{TocNaventriesMeta},{PageConditionsUsedMeta},{PageLogicalRefObjectId}",
                 ContentIncludeMode.Exclude, null);
