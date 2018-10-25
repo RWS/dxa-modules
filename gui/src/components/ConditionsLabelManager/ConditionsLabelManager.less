@@ -1,0 +1,78 @@
+@import (reference) "~theme-styles";
+
+.sdl-labelmanager.sdl-labelmanager-tree.sdl-positionedcontrol {
+    max-width: 400px;
+    max-height: 300px;
+}
+
+.sdl-labelmanager.sdl-labelmanager-control {
+    div.sdl-labelmanager-container {
+        padding-left: 5px;
+        background: #FFFFFF;
+        border: 1px solid @neutralColor4;
+        border-radius: 4px;
+        .sdl-typeahead-input {
+            height: 26px;
+        }
+        span.sdl-labelmanager-icon {
+            display: none;
+        }
+        .sdl-labelmanager-item {
+            .tag.with-icon {
+                background-color: @neutralColor5;
+                &.selected {
+                    background-color: @neutralColor4;
+                }
+                border: 1px solid @neutralColor5;
+                font-family: "Calibri";
+                border-radius: 4px;
+                padding: 6px 21px 6px 4px;
+                min-width: 96px;
+                box-sizing: border-box;
+
+                .remove {
+                    top: 4px;
+                    background-color: transparent;
+                    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' x='0' y='0' width='10' height='10' viewBox='0 0 7 7' enable-background='new 0 0 7 7'%3E%3Crect x='-1.2' y='3.3' transform='matrix(0.7071 0.7071 -0.7071 0.7071 3.5138 -1.4655)' fill='%235D6E7F' width='9.4' height='0.5'/%3E%3Crect x='3.3' y='-1.2' transform='matrix(0.7071 0.7071 -0.7071 0.7071 3.5138 -1.4655)' fill='%235D6E7F' width='0.5' height='9.4'/%3E%3C/svg%3E");
+                }
+            }
+        }
+    }
+}
+
+.sdl-conditions-dialog-presentation {
+    padding: 0px 16px 2px 16px;
+
+    @media screen and (max-width: @screenMd) {
+        margin-bottom: -10px;
+        padding-top: 16px;
+    }
+
+    .sdl-personalize-content {
+        position: relative;
+        min-height: 40px;
+        padding: 0 8px 0 42px;
+
+        .rtl & {
+            padding: 0 35px 0 8px;
+        }
+    }
+
+    .sdl-conditions-dialog-actions {
+        text-align: right;
+
+        .rtl & {
+            text-align: left;
+        }
+    }
+
+    .sdl-button-separator {
+        /* Let me know if know how to do it better */
+        margin: 0 8px 0 9px;
+        background: @neutralColor5;
+        display: inline-block;
+        vertical-align: bottom;
+        height: 37px;
+        width: 1px;
+    }
+}

@@ -1,0 +1,18 @@
+# IDE
+.vscode
+.vs
+.idea
+*.iml
+*.log
+
+# gui
+gui/node
+gui/node_modules
+gui/dist
+gui/typings
+
+# DXA logs
+logs/
+
+# Build output
+target/
