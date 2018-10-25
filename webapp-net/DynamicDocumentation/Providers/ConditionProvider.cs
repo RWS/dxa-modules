@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Sdl.Tridion.Api.Client.ContentModel;
 using Sdl.Web.Common;
-using Sdl.Web.PublicContentApi.ContentModel;
-using Sdl.Web.Tridion.PCAClient;
+using Sdl.Web.Tridion.ApiClient;
 
 namespace Sdl.Web.Modules.DynamicDocumentation.Providers
 {
@@ -45,7 +45,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Providers
         {
             try
             {                
-                var client = PCAClientFactory.Instance.CreateClient();
+                var client = ApiClientFactory.Instance.CreateClient();
                 var publication = client.GetPublication(ContentNamespace.Docs, publicationId, $"requiredMeta:{metadataName}", null);
                 if (publication.CustomMetas == null || publication.CustomMetas.Edges.Count == 0)
                 {

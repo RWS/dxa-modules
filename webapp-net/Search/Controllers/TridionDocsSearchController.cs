@@ -7,11 +7,10 @@ using Newtonsoft.Json;
 using Sdl.Web.Modules.Search.Data;
 using Sdl.Web.Mvc.Controllers;
 using System.Text.RegularExpressions;
-using Sdl.Web.IQQuery.API;
-using Sdl.Web.IQQuery.Client;
-using Sdl.Web.IQQuery.Model.Field;
-using Sdl.Web.IQQuery.Model.Result;
-using Sdl.Web.Tridion.PCAClient;
+using Sdl.Tridion.Api.IQQuery.API;
+using Sdl.Tridion.Api.IQQuery.Model.Field;
+using Sdl.Tridion.Api.IQQuery.Model.Result;
+using Sdl.Web.Tridion.ApiClient;
 
 namespace Sdl.Web.Modules.Search.Controllers
 {
@@ -31,8 +30,7 @@ namespace Sdl.Web.Modules.Search.Controllers
 
                 SearchParameters searchParams = JsonConvert.DeserializeObject<SearchParameters>(json);
 
-                IQSearchClient<SearchResultSet, SearchResult> search =
-                    PCAClientFactory.Instance.CreateSearchClient<SearchResultSet, SearchResult>();
+                var search = ApiClientFactory.Instance.CreateSearchClient<SearchResultSet, SearchResult>();
 
                 search.WithResultFilter(new SearchResultFilter
                 {
@@ -64,7 +62,7 @@ namespace Sdl.Web.Modules.Search.Controllers
                     StartOfRange = searchParams.StartIndex,
                     EndOfRange = searchParams.StartIndex + searchParams.Count,
                     IsHighlightingEnabled = true
-                }).Search(new IQQuery.Model.Search.SearchQuery().GroupedAnd(fields, values).Compile());
+                }).Search(new Sdl.Tridion.Api.IQQuery.Model.Search.SearchQuery().GroupedAnd(fields, values).Compile());
                 var resultSet = new SearchResultSetWrapped(results)
                 {
                     Hits = results.Hits,
