@@ -57,6 +57,11 @@
         
         <dependency>
             <groupId>com.sdl.web.pca</groupId>
+            <artifactId>pca-client</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.sdl.web.pca</groupId>
             <artifactId>graphql-client</artifactId>
         </dependency>
         

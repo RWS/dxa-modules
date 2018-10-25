@@ -8,6 +8,7 @@ import com.sdl.web.pca.client.GraphQLClient;
 import com.sdl.web.pca.client.PublicContentApi;
 import com.sdl.web.pca.client.contentmodel.ContextData;
 import com.sdl.web.pca.client.contentmodel.Pagination;
+import com.sdl.web.pca.client.contentmodel.enums.ContentIncludeMode;
 import com.sdl.web.pca.client.contentmodel.generated.ClaimValue;
 import com.sdl.web.pca.client.contentmodel.generated.ClaimValueType;
 import com.sdl.web.pca.client.contentmodel.generated.ComponentPresentation;
@@ -106,8 +107,8 @@ public class TridionDocsPublicContentApiClient implements ITridionDocsClient {
 
         InputItemFilter filter = new InputItemFilter();
         filter.setNamespaceIds(Collections.singletonList(2));
-        filter.setItemTypes(Collections.singletonList(ItemType.PAGE));
         filter.setAnd(customMetaFilters);
+        filter.setItemTypes(Collections.singletonList(com.sdl.web.pca.client.contentmodel.generated.FilterItemType.PAGE));
 
         InputSortParam inputSortParam = new InputSortParam();
         inputSortParam.setOrder(SortOrderType.Descending);
@@ -121,7 +122,7 @@ public class TridionDocsPublicContentApiClient implements ITridionDocsClient {
         // Todo : below line together with getPublicContentApi() function  should be removed as _publicContentApi is assigned in the constructor from Dxa framework
         _publicContentApi = getPublicContentApi();
 
-        ItemConnection results = _publicContentApi.executeItemQuery(filter, inputSortParam, pagination, contextData, null, true);
+        ItemConnection results = _publicContentApi.executeItemQuery(filter, inputSortParam, pagination, null, ContentIncludeMode.INCLUDE_AND_RENDER , true , contextData);
 
         return results;
     }
