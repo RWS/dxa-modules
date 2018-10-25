@@ -1,10 +1,6 @@
 package com.sdl.dxa.modules.docs.mashup.client;
 
 import com.sdl.dxa.modules.docs.mashup.models.widgets.Topic;
-import com.sdl.web.client.configuration.api.ConfigurationException;
-import com.sdl.web.pca.client.DefaultGraphQLClient;
-import com.sdl.web.pca.client.DefaultPublicContentApi;
-import com.sdl.web.pca.client.GraphQLClient;
 import com.sdl.web.pca.client.PublicContentApi;
 import com.sdl.web.pca.client.contentmodel.ContextData;
 import com.sdl.web.pca.client.contentmodel.Pagination;
@@ -20,7 +16,7 @@ import com.sdl.web.pca.client.contentmodel.generated.InputSortParam;
 import com.sdl.web.pca.client.contentmodel.generated.Item;
 import com.sdl.web.pca.client.contentmodel.generated.ItemConnection;
 import com.sdl.web.pca.client.contentmodel.generated.ItemEdge;
-import com.sdl.web.pca.client.contentmodel.generated.ItemType;
+import com.sdl.dxa.tridion.pcaclient.PCAClientProvider;
 import com.sdl.web.pca.client.contentmodel.generated.Page;
 import com.sdl.web.pca.client.contentmodel.generated.RawContent;
 import com.sdl.web.pca.client.contentmodel.generated.SortFieldType;
@@ -29,11 +25,9 @@ import com.sdl.web.pca.client.exception.GraphQLClientException;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.model.KeywordModel;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -51,12 +45,11 @@ public class TridionDocsPublicContentApiClient implements ITridionDocsClient {
     private PublicContentApi _publicContentApi;
     private WebRequestContext _webRequestContext;
 
-    public TridionDocsPublicContentApiClient(WebRequestContext webRequestContext) {
+    public TridionDocsPublicContentApiClient(WebRequestContext webRequestContext, PCAClientProvider pcaClientProvider) {
 
         _webRequestContext = webRequestContext;
-
-        // Todo : _publicContentApi should be assigned here from DXA framework like :
-        //_publicContentApi = PCAClientFactory.Instance.CreateClient();
+        
+        _publicContentApi = pcaClientProvider.getClient();
     }
 
     @Override
@@ -118,9 +111,6 @@ public class TridionDocsPublicContentApiClient implements ITridionDocsClient {
         pagination.setFirst(maxItems);
 
         ContextData contextData = getContextData();
-
-        // Todo : below line together with getPublicContentApi() function  should be removed as _publicContentApi is assigned in the constructor from Dxa framework
-        _publicContentApi = getPublicContentApi();
 
         ItemConnection results = _publicContentApi.executeItemQuery(filter, inputSortParam, pagination, null, ContentIncludeMode.INCLUDE_AND_RENDER , true , contextData);
 
@@ -387,21 +377,4 @@ public class TridionDocsPublicContentApiClient implements ITridionDocsClient {
 
         return null;
     }
-
-    private static PublicContentApi getPublicContentApi() {
-        TridionDocsClientConfig clientConfig = null;
-        Map<String, String> headers = new HashMap<>();
-        try {
-            clientConfig = new TridionDocsClientConfig();
-            headers.put(clientConfig.getAuthRequestHeaderName(), clientConfig.getAuthRequestHeaderValue());
-        } catch (ConfigurationException ex) {
-
-        } catch (UnsupportedEncodingException ex) {
-
-        }
-        GraphQLClient graphQLClient = new DefaultGraphQLClient(clientConfig.getGraphQLEndpoint(), headers);
-
-        return new DefaultPublicContentApi(graphQLClient);
-    }
-
 }

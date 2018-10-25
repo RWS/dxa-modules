@@ -3,6 +3,7 @@ package com.sdl.dxa.modules.docs.mashup.controller;
 import com.sdl.dxa.modules.docs.mashup.client.*;
 import com.sdl.dxa.modules.docs.mashup.models.products.Product;
 import com.sdl.dxa.modules.docs.mashup.models.widgets.*;
+import com.sdl.dxa.tridion.pcaclient.PCAClientProvider;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.content.ContentProviderException;
 import com.sdl.webapp.common.api.content.StaticContentItem;
@@ -39,16 +40,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class TridionDocsMashupController extends EntityController {
 
     private final WebRequestContext webRequestContext;
+    private final PCAClientProvider pcaClientProvider;
     private ITridionDocsClient tridionDocsClient;
 
     @Autowired
-    public TridionDocsMashupController(WebRequestContext webRequestContext) {
+    public TridionDocsMashupController(WebRequestContext webRequestContext, PCAClientProvider pcaClientProvider) {
         this.webRequestContext = webRequestContext;
+        this.pcaClientProvider = pcaClientProvider;
     }
 
     // Used only by Unit Tests to pass a mocked WebRequestContext and a mocked ITridionDocsClient
-    public TridionDocsMashupController(WebRequestContext webRequestContext, ITridionDocsClient tridionDocsClient) {
+    public TridionDocsMashupController(WebRequestContext webRequestContext, PCAClientProvider pcaClientProvider, ITridionDocsClient tridionDocsClient) {
         this.webRequestContext = webRequestContext;
+        this.pcaClientProvider = pcaClientProvider;
         this.tridionDocsClient = tridionDocsClient;
     }
 
@@ -62,7 +66,7 @@ public class TridionDocsMashupController extends EntityController {
 
             if (validate(staticWidget.getKeywords(), staticWidget.getMaxItems())) {
                 if (tridionDocsClient == null) {
-                    tridionDocsClient = new TridionDocsPublicContentApiClient(this.webRequestContext);
+                    tridionDocsClient = new TridionDocsPublicContentApiClient(this.webRequestContext, this.pcaClientProvider);
                 }
 
                 List<Topic> topics = tridionDocsClient.getTridionDocsTopicsByKeywords(staticWidget.getKeywords(), staticWidget.getMaxItems());
@@ -75,7 +79,7 @@ public class TridionDocsMashupController extends EntityController {
             List<Topic> topics = new ArrayList<>();
 
             if (tridionDocsClient == null) {
-                tridionDocsClient = new TridionDocsPublicContentApiClient(this.webRequestContext);
+                tridionDocsClient = new TridionDocsPublicContentApiClient(this.webRequestContext, this.pcaClientProvider);
             }
 
             // There are multiple regions in a page.

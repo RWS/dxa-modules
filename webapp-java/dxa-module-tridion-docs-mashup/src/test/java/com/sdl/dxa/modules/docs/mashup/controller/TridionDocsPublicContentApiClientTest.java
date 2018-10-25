@@ -1,6 +1,7 @@
 package com.sdl.dxa.modules.docs.mashup.controller;
 
 import com.sdl.dxa.modules.docs.mashup.client.TridionDocsPublicContentApiClient;
+import com.sdl.dxa.tridion.pcaclient.PCAClientProvider;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,6 +19,9 @@ public class TridionDocsPublicContentApiClientTest {
 
     @Mock
     private WebRequestContext webRequestContext;
+    
+    @Mock
+    private PCAClientProvider pcaClientProvider;
 
     @InjectMocks
     @Spy
