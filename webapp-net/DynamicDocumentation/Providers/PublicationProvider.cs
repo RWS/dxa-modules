@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Sdl.Tridion.Api.Client.ContentModel;
 using Sdl.Web.Common;
+using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Logging;
 using Sdl.Web.Tridion.ApiClient;
 
@@ -34,9 +35,16 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Providers
             {
                 try
                 {
-                    var client = ApiClientFactory.Instance.CreateClient();
-                    var publications = client.GetPublications(ContentNamespace.Docs, new Pagination(), null, CustomMetaFilter, null);
-                    return (from x in publications.Edges where IsPublicationOnline(x.Node) select BuildPublicationFrom(x.Node)).ToList();
+                    return SiteConfiguration.CacheProvider.GetOrAdd($"publications", CacheRegion.Publications, () =>
+                    {
+                        var client = ApiClientFactory.Instance.CreateClient();
+                        var publications = client.GetPublications(ContentNamespace.Docs, new Pagination(), null,
+                            CustomMetaFilter, null);
+                        return
+                            (from x in publications.Edges
+                                where IsPublicationOnline(x.Node)
+                                select BuildPublicationFrom(x.Node)).ToList();
+                    });
                 }
                 catch (Exception)
                 {

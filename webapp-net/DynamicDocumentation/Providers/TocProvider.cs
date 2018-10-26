@@ -46,9 +46,14 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Providers
                 {
                     var siblings = provider.GetNavigationSubtree(node.Parent.Id, new NavigationFilter {DescendantLevels = 1, IncludeAncestors = false}, localization);
 
-                    // filter out duplicates and Page types since we don't wish to include them in TOC
-                    foreach (var sibling in siblings.Where(sibling => sibling.Id != node.Id && sibling.Type != "Page"))
+                    HashSet<string> children = new HashSet<string>();
+                    foreach (var item in node.Parent.Items)
                     {
+                        children.Add(item.Id);
+                    }
+                    // filter out duplicates and Page types since we don't wish to include them in TOC
+                    foreach (var sibling in siblings.Where(sibling => sibling.Id != node.Id && sibling.Type != "Page" && !children.Contains(sibling.Id)))
+                    {                        
                         node.Parent.Items.Add(sibling);
                     }
 

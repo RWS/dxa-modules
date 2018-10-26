@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Sdl.Tridion.Api.Client.ContentModel;
 using Sdl.Web.Common;
+using Sdl.Web.Common.Configuration;
 using Sdl.Web.Tridion.ApiClient;
 
 namespace Sdl.Web.Modules.DynamicDocumentation.Providers
@@ -44,18 +45,24 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Providers
         private string GetMetadata(int publicationId, string metadataName)
         {
             try
-            {                
-                var client = ApiClientFactory.Instance.CreateClient();
-                var publication = client.GetPublication(ContentNamespace.Docs, publicationId, $"requiredMeta:{metadataName}", null);
-                if (publication.CustomMetas == null || publication.CustomMetas.Edges.Count == 0)
-                {
-                    throw new DxaItemNotFoundException(
-                        $"Metadata '{metadataName}' is not found for publication {publicationId}.");
-                }
+            {
+                return SiteConfiguration.CacheProvider.GetOrAdd($"{publicationId}-{metadataName}",
+                    CacheRegion.Conditions,
+                    () =>
+                    {
+                        var client = ApiClientFactory.Instance.CreateClient();
+                        var publication = client.GetPublication(ContentNamespace.Docs, publicationId,
+                            $"requiredMeta:{metadataName}", null);
+                        if (publication.CustomMetas == null || publication.CustomMetas.Edges.Count == 0)
+                        {
+                            throw new DxaItemNotFoundException(
+                                $"Metadata '{metadataName}' is not found for publication {publicationId}.");
+                        }
 
-                object metadata = publication.CustomMetas.Edges[0].Node.Value;
-                string metadataString = metadata != null ? (string)metadata : "{}";
-                return metadataString;
+                        object metadata = publication.CustomMetas.Edges[0].Node.Value;
+                        string metadataString = metadata != null ? (string) metadata : "{}";
+                        return metadataString;
+                    });
             }
             catch (Exception)
             {
