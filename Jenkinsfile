@@ -14,12 +14,20 @@ pipeline {
                 }
             }
         }
+        stage('Building DD GUI Boilerplate') {
+            steps {
+                dir("boilerplate") {
+                    powershell 'mvn clean package'
+                }
+            }
+        }
     }
 
     post {
         always {
             dir("gui") {
                 archiveArtifacts artifacts: 'target/gui/**', fingerprint: true
+                archiveArtifacts artifacts: 'target/boilerplate/target/*.zip', fingerprint: true
             }
         }
     }
