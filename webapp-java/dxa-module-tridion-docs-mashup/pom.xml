@@ -99,5 +99,10 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
+        
+        <dependency>
+            <groupId>com.sdl.dxa.modules</groupId>
+            <artifactId>dxa-module-tridion-docs-common</artifactId>
+        </dependency>
     </dependencies>
 </project>

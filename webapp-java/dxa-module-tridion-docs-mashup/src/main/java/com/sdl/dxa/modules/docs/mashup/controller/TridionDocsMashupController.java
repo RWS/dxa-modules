@@ -1,10 +1,12 @@
 package com.sdl.dxa.modules.docs.mashup.controller;
 
+import com.sdl.dxa.modules.docs.localization.DocsLocalization;
 import com.sdl.dxa.modules.docs.mashup.client.*;
 import com.sdl.dxa.modules.docs.mashup.models.products.Product;
 import com.sdl.dxa.modules.docs.mashup.models.widgets.*;
 import com.sdl.dxa.tridion.pcaclient.PCAClientProvider;
 import com.sdl.webapp.common.api.WebRequestContext;
+import com.sdl.webapp.common.api.content.ContentProvider;
 import com.sdl.webapp.common.api.content.ContentProviderException;
 import com.sdl.webapp.common.api.content.StaticContentItem;
 import com.sdl.webapp.common.api.model.EntityModel;
@@ -41,18 +43,21 @@ public class TridionDocsMashupController extends EntityController {
 
     private final WebRequestContext webRequestContext;
     private final PCAClientProvider pcaClientProvider;
+    private final ContentProvider contentProvider;
     private ITridionDocsClient tridionDocsClient;
 
     @Autowired
-    public TridionDocsMashupController(WebRequestContext webRequestContext, PCAClientProvider pcaClientProvider) {
+    public TridionDocsMashupController(WebRequestContext webRequestContext, PCAClientProvider pcaClientProvider, ContentProvider contentProvider) {
         this.webRequestContext = webRequestContext;
         this.pcaClientProvider = pcaClientProvider;
+        this.contentProvider = contentProvider;
     }
 
     // Used only by Unit Tests to pass a mocked WebRequestContext and a mocked ITridionDocsClient
-    public TridionDocsMashupController(WebRequestContext webRequestContext, PCAClientProvider pcaClientProvider, ITridionDocsClient tridionDocsClient) {
+    public TridionDocsMashupController(WebRequestContext webRequestContext, PCAClientProvider pcaClientProvider, ContentProvider contentProvider, ITridionDocsClient tridionDocsClient) {
         this.webRequestContext = webRequestContext;
         this.pcaClientProvider = pcaClientProvider;
+        this.contentProvider = contentProvider;
         this.tridionDocsClient = tridionDocsClient;
     }
 
@@ -148,11 +153,13 @@ public class TridionDocsMashupController extends EntityController {
 
         InputStreamResource result = null;
         HttpHeaders responseHeaders = new HttpHeaders();
-   
-        //Todo : here we need to call Docs ContentProvider from DxaFramework 
-        //Like : StaticContentItem binaryItem = DocsContentProvider.GetStaticContentItem(publicationId, binaryId) 
-        StaticContentItem binaryItem = null;
-        
+
+        DocsLocalization docsLocalization = new DocsLocalization();
+
+        docsLocalization.setPublicationId(String.valueOf(publicationId));
+
+        StaticContentItem binaryItem = contentProvider.getStaticContent(String.valueOf(binaryId), docsLocalization.getId(), docsLocalization.getPath());
+
         if (binaryItem == null) {
              return new ResponseEntity<>(result, responseHeaders, HttpStatus.NOT_FOUND);
         }
