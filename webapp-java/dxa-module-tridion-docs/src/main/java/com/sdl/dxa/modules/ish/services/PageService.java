@@ -8,6 +8,7 @@ import com.sdl.webapp.common.api.model.PageModel;
 import com.sdl.webapp.common.controller.exception.InternalServerErrorException;
 import com.sdl.webapp.common.controller.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 public class PageService {
 
     @Autowired
+    @Qualifier("DefaultContentProvider")
     private ContentProvider contentProvider;
 
     /**
