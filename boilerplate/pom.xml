@@ -7,7 +7,7 @@
     <groupId>com.sdl.dxa.modules</groupId>
     <artifactId>dynamic-documentation-boilerplate</artifactId>
     <name>DXA Dynamic Documentation GUI Boilerplate</name>
-    <description>DXA Dynamic Documentation GUI project with customizations</description>
+    <description>NPM project where customizations for DXA Dynamic Documentation GUI project should be developed</description>
     <version>2.1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
