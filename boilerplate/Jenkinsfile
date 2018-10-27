@@ -1,0 +1,22 @@
+// Dynamic Documentation GUI build pipeline
+pipeline {
+
+    agent {
+        label 'dxadocker'
+    }
+
+    stages {
+        stage('Building DD GUI Boilerplate') {
+            steps {
+                powershell 'mvn clean package'
+            }
+        }
+    }
+
+    post {
+        always {
+            archiveArtifacts artifacts: 'target/**', fingerprint: true
+        }
+    }
+}
+
