@@ -7,9 +7,9 @@ using Newtonsoft.Json;
 using Sdl.Web.Modules.Search.Data;
 using Sdl.Web.Mvc.Controllers;
 using System.Text.RegularExpressions;
-using Sdl.Tridion.Api.IQQuery.API;
-using Sdl.Tridion.Api.IQQuery.Model.Field;
-using Sdl.Tridion.Api.IQQuery.Model.Result;
+using Sdl.Tridion.Api.IqQuery;
+using Sdl.Tridion.Api.IqQuery.Model.Field;
+using Sdl.Tridion.Api.IqQuery.Model.Result;
 using Sdl.Web.Tridion.ApiClient;
 
 namespace Sdl.Web.Modules.Search.Controllers
@@ -62,7 +62,7 @@ namespace Sdl.Web.Modules.Search.Controllers
                     StartOfRange = searchParams.StartIndex,
                     EndOfRange = searchParams.StartIndex + searchParams.Count,
                     IsHighlightingEnabled = true
-                }).Search(new Sdl.Tridion.Api.IQQuery.Model.Search.SearchQuery().GroupedAnd(fields, values).Compile());
+                }).Search(new Sdl.Tridion.Api.IqQuery.Model.Search.SearchQuery().GroupedAnd(fields, values).Compile());
                 var resultSet = new SearchResultSetWrapped(results)
                 {
                     Hits = results.Hits,
