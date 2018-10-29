@@ -1,10 +1,11 @@
-﻿using Sdl.Web.PublicContentApi.ContentModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Sdl.Tridion.Api.Client.ContentModel;
 using Sdl.Web.Common;
+using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Logging;
-using Sdl.Web.Tridion.PCAClient;
+using Sdl.Web.Tridion.ApiClient;
 
 namespace Sdl.Web.Modules.DynamicDocumentation.Providers
 {
@@ -34,18 +35,25 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Providers
             {
                 try
                 {
-                    var client = PCAClientFactory.Instance.CreateClient();
-                    var publications = client.GetPublications(ContentNamespace.Docs, new Pagination(), null, CustomMetaFilter, null);
-                    return (from x in publications.Edges where IsPublicationOnline(x.Node) select BuildPublicationFrom(x.Node)).ToList();
+                    return SiteConfiguration.CacheProvider.GetOrAdd($"publications", CacheRegion.Publications, () =>
+                    {
+                        var client = ApiClientFactory.Instance.CreateClient();
+                        var publications = client.GetPublications(ContentNamespace.Docs, new Pagination(), null,
+                            CustomMetaFilter, null);
+                        return
+                            (from x in publications.Edges
+                                where IsPublicationOnline(x.Node)
+                                select BuildPublicationFrom(x.Node)).ToList();
+                    });
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     throw new DxaItemNotFoundException("Unable to fetch list of publications.");
                 }
             }
         }
 
-        public bool IsPublicationOnline(Publication publication)
+        public bool IsPublicationOnline(Sdl.Tridion.Api.Client.ContentModel.Publication publication)
         {
             var customMeta = publication.CustomMetas;
             if (customMeta == null) return false;
@@ -61,7 +69,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Providers
 
         public void CheckPublicationOnline(int publicationId)
         {
-            var client = PCAClientFactory.Instance.CreateClient();
+            var client = ApiClientFactory.Instance.CreateClient();
             bool isOffline = false;
             try
             {
@@ -79,7 +87,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Providers
             }
         }
 
-        private Models.Publication BuildPublicationFrom(Publication publication)
+        private Models.Publication BuildPublicationFrom(Sdl.Tridion.Api.Client.ContentModel.Publication publication)
         {
             Models.Publication result = new Models.Publication
             {

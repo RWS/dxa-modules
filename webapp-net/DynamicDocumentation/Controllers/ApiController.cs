@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using Newtonsoft.Json;
+using Sdl.Tridion.Api.Client;
+using Sdl.Tridion.Api.Client.ContentModel;
 using Sdl.Web.Common;
+using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Interfaces;
 using Sdl.Web.Common.Logging;
 using Sdl.Web.Common.Models;
@@ -11,9 +15,7 @@ using Sdl.Web.Modules.DynamicDocumentation.Providers;
 using Sdl.Web.Mvc.Configuration;
 using Sdl.Web.Mvc.Controllers;
 using Sdl.Web.Mvc.Formats;
-using Sdl.Web.PublicContentApi;
-using Sdl.Web.PublicContentApi.ContentModel;
-using Sdl.Web.Tridion.PCAClient;
+using Sdl.Web.Tridion.ApiClient;
 using ConditionProvider = Sdl.Web.Modules.DynamicDocumentation.Providers.ConditionProvider;
 using PublicationProvider = Sdl.Web.Modules.DynamicDocumentation.Providers.PublicationProvider;
 
@@ -37,7 +39,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         {
             try
             {
-                return Json(new PublicationProvider().PublicationList);
+                return JsonResult(new PublicationProvider().PublicationList);
             }
             catch (Exception ex)
             {
@@ -50,7 +52,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         {
             try
             {
-                return Json(new ConditionProvider().GetConditions(publicationId));
+                return JsonResult(new ConditionProvider().GetConditions(publicationId));
             }
             catch (Exception ex)
             {
@@ -63,13 +65,15 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         {
             try
             {
-                var model = EnrichModel(ContentProvider.GetPageModel(pageId, Localization), publicationId);
-                return Json(model);
+                var model = SiteConfiguration.CacheProvider.GetOrAdd<ViewModel>($"{publicationId}-{pageId}", Providers.CacheRegion.PageModel, 
+                    () => EnrichModel(ContentProvider.GetPageModel(pageId, Localization), publicationId));
+                return JsonResult(model);
             }
             catch (Exception ex)
             {
                 Log.Error(ex);
-                return ServerError(new DxaItemNotFoundException($"Page not found: [{publicationId}] {pageId}/index.html"));
+                return
+                    ServerError(new DxaItemNotFoundException($"Page not found: [{publicationId}] {pageId}/index.html"));
             }
         }
 
@@ -79,22 +83,26 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
             try
             {
                 var model = EnrichModel(ContentProvider.GetEntityModel($"{componentId}-{templateId}", Localization));
-                return Json(model);
+                return JsonResult(model);
             }
             catch (Exception ex)
             {
                 Log.Error(ex);
-                return ServerError(new DxaItemNotFoundException($"Entity not found: [{publicationId}] {componentId}-{templateId}"));
+                return
+                    ServerError(
+                        new DxaItemNotFoundException($"Entity not found: [{publicationId}] {componentId}-{templateId}"));
             }
         }
 
         [Route("~/api/topic/{publicationId}/{componentId}/{templateId}")]
         public virtual ActionResult Topic(string publicationId, string componentId, string templateId)
-            => ServerError(new DxaItemNotFoundException($"Entity not found: [{publicationId}] {componentId}-{templateId}"), 400);
+            =>
+                ServerError(
+                    new DxaItemNotFoundException($"Entity not found: [{publicationId}] {componentId}-{templateId}"), 400);
 
         [Route("~/api/page/{publicationId}/{pageId}")]
         public virtual ActionResult Page(string publicationId, string pageId)
-           => ServerError(new DxaItemNotFoundException($"Page not found: [{publicationId}] {pageId}/index.html"), 400);
+            => ServerError(new DxaItemNotFoundException($"Page not found: [{publicationId}] {pageId}/index.html"), 400);
 
         [Route("~/api/page/{publicationId:int}/{pageId:int}/{*content}")]
         public virtual ActionResult Page(int publicationId, int pageId, string content)
@@ -102,12 +110,9 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
             try
             {
                 string conditions = Request.QueryString["conditions"];
-                if (!string.IsNullOrEmpty(conditions))
-                {
-                    AmbientDataContext.CurrentClaimStore.Put(UserConditionsUri, conditions);
-                }
+                AddConditionClaims(conditions);
                 ViewModel model = EnrichModel(ContentProvider.GetPageModel(pageId, Localization), publicationId);
-                return Json(model);
+                return JsonResult(model);
             }
             catch (Exception ex)
             {
@@ -142,12 +147,8 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         {
             try
             {
-                if (!string.IsNullOrEmpty(conditions))
-                {
-                    AmbientDataContext.CurrentClaimStore.Put(UserConditionsUri, conditions);
-                }
-                TocProvider tocProvider = new TocProvider();
-                return Json(tocProvider.GetToc(Localization));
+                AddConditionClaims(conditions);
+                return JsonResult(new TocProvider().GetToc(Localization));
             }
             catch (Exception ex)
             {
@@ -161,13 +162,9 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         {
             try
             {
-                if (!string.IsNullOrEmpty(conditions))
-                {
-                    AmbientDataContext.CurrentClaimStore.Put(UserConditionsUri, conditions);
-                }
-                TocProvider tocProvider = new TocProvider();
-                var sitemapItems = tocProvider.GetToc(Localization, sitemapItemId, includeAncestors);
-                return Json(sitemapItems);
+                AddConditionClaims(conditions);
+                var sitemapItems = new TocProvider().GetToc(Localization, sitemapItemId, includeAncestors);
+                return JsonResult(sitemapItems);
             }
             catch (Exception ex)
             {
@@ -179,7 +176,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         public virtual ActionResult SitemapXml()
         {
             // Use the common SiteMapXml view for rendering out the xml of all the sitemap items.
-            return View("SiteMapXml", DocsNavigationProvider.SiteMap);
+            return View("SiteMapXml", new TocProvider().SiteMap(Localization));
         }
 
         [Route("~/api/toc/{publicationId}/{sitemapItemId}")]
@@ -195,23 +192,23 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
                     throw new DxaItemNotFoundException(
                         "Unable to use empty 'ishlogicalref.object.id' value as a search criteria.");
                 }
-                return Json(GetPageIdByIshLogicalReference(publicationId, ishFieldValue));                
+                return JsonResult(GetPageIdByIshLogicalReference(publicationId, ishFieldValue));
             }
             catch (Exception ex)
             {
                 return ServerError(ex);
             }
         }
-       
+
         public Item GetPageIdByIshLogicalReference(int publicationId, string ishLogicalRefValue)
         {
             try
             {
                 Item item = new Item();
-                var client = PCAClientFactory.Instance.CreateClient();
+                var client = ApiClientFactory.Instance.CreateClient();
                 InputItemFilter filter = new InputItemFilter
                 {
-                    NamespaceIds = new List<ContentNamespace> { ContentNamespace.Docs},
+                    NamespaceIds = new List<ContentNamespace> {ContentNamespace.Docs},
                     PublicationIds = new List<int?> {publicationId},
                     ItemTypes = new List<FilterItemType> {FilterItemType.PAGE},
                     CustomMeta = new InputCustomMetaCriteria
@@ -225,20 +222,19 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
                 var items = client.ExecuteItemQuery(filter,
                     new InputSortParam {Order = SortOrderType.Ascending, SortBy = SortFieldType.CREATION_DATE},
                     new Pagination {First = 1}, null, ContentIncludeMode.Exclude, false, null);
-                if (items?.Edges != null && items.Edges.Count == 1)
-                {
-                    item.Id = items.Edges[0].Node.ItemId;
-                    item.PublicationId = items.Edges[0].Node.PublicationId;
-                    item.Title = items.Edges[0].Node.Title;
-                }
+                if (items?.Edges == null || items.Edges.Count != 1) return item;
+                item.Id = items.Edges[0].Node.ItemId;
+                item.PublicationId = items.Edges[0].Node.PublicationId;
+                item.Title = items.Edges[0].Node.Title;
                 return item;
             }
             catch (Exception)
             {
-                throw new DxaItemNotFoundException($"Page reference by ishlogicalref.object.id = {ishLogicalRefValue} not found in publication {publicationId}.");
+                throw new DxaItemNotFoundException(
+                    $"Page reference by ishlogicalref.object.id = {ishLogicalRefValue} not found in publication {publicationId}.");
             }
         }
-        
+
         public ActionResult ServerError(Exception ex, int statusCode = 404)
         {
             Response.StatusCode = statusCode;
@@ -250,16 +246,24 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         protected virtual ViewModel EnrichModel(ViewModel model, int publicationId)
         {
             PageModel pageModel = model as PageModel;
-            if (pageModel == null) return model;
-            var client = PCAClientFactory.Instance.CreateClient();
+            if (pageModel == null) return model;          
+            var client = ApiClientFactory.Instance.CreateClient();
             var page = client.GetPage(ContentNamespace.Docs, publicationId, int.Parse(pageModel.Id),
-                $"requiredMeta:{TocNaventriesMeta},{PageConditionsUsedMeta},{PageLogicalRefObjectId}", ContentIncludeMode.Exclude,  null);
+                $"requiredMeta:{TocNaventriesMeta},{PageConditionsUsedMeta},{PageLogicalRefObjectId}",
+                ContentIncludeMode.Exclude, null);
             if (page?.CustomMetas == null) return model;
             foreach (var x in page.CustomMetas.Edges)
             {
                 if (TocNaventriesMeta.Equals(x.Node.Key))
                 {
-                    pageModel.Meta.Add(TocNaventriesMeta, x.Node.Value);
+                    if (pageModel.Meta.ContainsKey(TocNaventriesMeta))
+                    {
+                        pageModel.Meta[TocNaventriesMeta] = $"{pageModel.Meta[TocNaventriesMeta]}, {x.Node.Value}";
+                    }
+                    else
+                    {
+                        pageModel.Meta.Add(TocNaventriesMeta, x.Node.Value);
+                    }                    
                 }
                 if (PageConditionsUsedMeta.Equals(x.Node.Key))
                 {
@@ -272,5 +276,18 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
             }
             return model;
         }
+
+        private static void AddConditionClaims(string conditions)
+        {
+            if (string.IsNullOrEmpty(conditions)) return;
+            AmbientDataContext.CurrentClaimStore.Put(UserConditionsUri, conditions);
+            // Make sure claims get forwarded
+            if (!AmbientDataContext.ForwardedClaims.Contains(UserConditionsUri.ToString()))
+            {
+                AmbientDataContext.ForwardedClaims.Add(UserConditionsUri.ToString());
+            }
+        }
+
+        private ActionResult JsonResult(object obj) => Content(JsonConvert.SerializeObject(obj), "application/json");
     }
 }

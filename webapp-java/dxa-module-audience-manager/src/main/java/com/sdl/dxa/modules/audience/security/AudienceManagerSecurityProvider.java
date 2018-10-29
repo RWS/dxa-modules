@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.rememberme.AbstractRememberMeServices;
 import org.springframework.stereotype.Service;
@@ -44,12 +43,10 @@ public class AudienceManagerSecurityProvider {
      */
     public boolean validate(@Nullable LoginForm form, HttpServletRequest request, HttpServletResponse response) {
         if (form == null) {
-            log.debug("Passed null form, can't authenticate");
+            log.error("Passed null form, can't authenticate");
             return false;
         }
-
         Authentication requested = new UsernamePasswordAuthenticationToken(form.getUserName(), form.getPassword());
-
         try {
             Authentication result = authenticationManager.authenticate(requested);
 
@@ -57,10 +54,12 @@ public class AudienceManagerSecurityProvider {
             audienceManagerService.login(result.getName());
             rememberMeServices.loginSuccess(request, response, result);
 
-            log.trace("Successfully authenticated. Security context contains: {}", SecurityContextHolder.getContext().getAuthentication());
+            log.trace("Successfully authenticated. Security context contains: {}" +
+                    SecurityContextHolder.getContext().getAuthentication());
             return true;
-        } catch (AuthenticationException e) {
-            log.debug("Authentication failed with {}", requested, e);
+        } catch (Exception e) {
+            log.error("Authentication failed with {} for user: " + form.getUserName() +
+                    ", authentication result: " + requested, e);
             rememberMeServices.loginFail(request, response);
             return false;
         }

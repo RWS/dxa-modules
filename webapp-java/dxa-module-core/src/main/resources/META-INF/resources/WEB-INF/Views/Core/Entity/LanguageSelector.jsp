@@ -23,7 +23,7 @@
             }
         }
         for (SiteLocalization loc : siteLocalizations) {
-            if (!excludedLocalizations.contains(loc.getPath())) {
+            if (excludedLocalizations.add(loc.getPath())) {
                 filteredLocalizations.add(loc);
             }
         }
@@ -38,7 +38,7 @@
                 <c:set var="params"
                        value="?localizationId=${loc.id}&defaultPath=${loc.path}${not empty defaultItem ? ('&defaultItem='.concat(defaultItem)) : ''}"/>
                 <c:set var="link" value="${localization.localizePath('/resolve/'.concat(pageId).concat(params))}"/>
-                <option value="${loc.id}" data-href="${link}" ${loc.id.equals(localization.id) ? "selected" : ""}>
+                <option value="${loc.id}" data-href="${link}" ${loc.id.equals(localization.id) ? "selected" : ""} >
                         ${loc.language}
                 </option>
             </c:forEach>

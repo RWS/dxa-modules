@@ -38,6 +38,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.util.Collection;
 import java.util.List;
@@ -131,12 +132,14 @@ public class IshController {
             throws ContentProviderException, IOException {
         publicationService.checkPublicationOnline(publicationId);
         StaticContentItem binaryItem = tridionDocsContentService.getBinaryContent(publicationId, binaryId);
-        InputStreamResource result = new InputStreamResource(binaryItem.getContent());
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.parseMediaType(binaryItem.getContentType()));
-        headers.setContentLength(binaryItem.getContent().available());
+        try (InputStream content = binaryItem.getContent();) {
+            InputStreamResource result = new InputStreamResource(content);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.parseMediaType(binaryItem.getContentType()));
+            headers.setContentLength(content.available());
 
-        return new ResponseEntity<>(result, headers, HttpStatus.OK);
+            return new ResponseEntity<>(result, headers, HttpStatus.OK);
+        }
     }
 
     /**

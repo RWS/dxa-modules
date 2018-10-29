@@ -22,11 +22,6 @@
         <tag>HEAD</tag>
     </scm>
 
-    <properties>
-        <xo.version>${cd-cil.version}</xo.version>
-
-    </properties>
-
     <dependencies>
 
         <dependency>
@@ -47,7 +42,6 @@
         <dependency>
             <groupId>com.sdl.tridion.xo</groupId>
             <artifactId>xo-compatible-client</artifactId>
-            <version>${xo.version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -87,6 +81,10 @@
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-library</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
         </dependency>
     </dependencies>
 

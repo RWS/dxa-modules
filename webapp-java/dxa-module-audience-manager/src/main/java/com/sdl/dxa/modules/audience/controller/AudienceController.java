@@ -38,25 +38,31 @@ public class AudienceController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(@ModelAttribute("entity") LoginForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes,
-                        HttpServletRequest request, HttpServletResponse response) {
+    public String login(@ModelAttribute("entity") LoginForm form,
+                        BindingResult bindingResult,
+                        RedirectAttributes redirectAttributes,
+                        HttpServletRequest request,
+                        HttpServletResponse response) {
         loginFormValidator.validate(form, bindingResult);
 
         if (!bindingResult.hasErrors()) {
-            log.trace("Login form is valid, logging in into Audience Manager");
-
             if (!securityProvider.validate(form, request, response)) {
-                log.debug("Logging attempt failed because username {} /password combination is not valid", form.getUserName());
+                log.warn("Logging attempt failed because username/password combination is not valid for user {}", form.getUserName());
                 bindingResult.reject("login.failed", form.getAuthenticationErrorMessage());
+            } else {
+                log.trace("Login form is valid, user " + form.getUserName() + " logged in as it's found in Audience Manager");
             }
         }
 
         if (bindingResult.hasErrors()) {
+            log.warn("Login form data is invalid, " + bindingResult.getGlobalErrorCount() +
+                    " global errors found: " + bindingResult.hasGlobalErrors() + "\n " +
+                    bindingResult.getErrorCount() + " all errors:\n" + bindingResult.getAllErrors() + "\n" +
+                    "Logging attempt failed because of errors for user " + form.getUserName());
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
             return REDIRECT_PREFIX + form.getLoginFormUrl();
         }
-
-        log.trace("Logged into Audience manager with user name {}", form.getUserName());
+        log.debug("Logged into Audience manager with user name {}", form.getUserName());
         return REDIRECT_PREFIX + webRequestContext.getLocalization().getPath();
     }
 

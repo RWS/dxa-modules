@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Sdl.Web.IQQuery.API;
+using Sdl.Tridion.Api.IqQuery;
 
 namespace Sdl.Web.Modules.Search.Data
 {
