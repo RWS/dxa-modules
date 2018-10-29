@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using Sdl.Tridion.Api.Client;
 using Sdl.Tridion.Api.Client.ContentModel;
 using Sdl.Web.Common;
+using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Interfaces;
 using Sdl.Web.Common.Logging;
 using Sdl.Web.Common.Models;
@@ -64,7 +65,8 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         {
             try
             {
-                var model = EnrichModel(ContentProvider.GetPageModel(pageId, Localization), publicationId);
+                var model = SiteConfiguration.CacheProvider.GetOrAdd<ViewModel>($"{publicationId}-{pageId}", Providers.CacheRegion.PageModel, 
+                    () => EnrichModel(ContentProvider.GetPageModel(pageId, Localization), publicationId));
                 return JsonResult(model);
             }
             catch (Exception ex)
@@ -244,7 +246,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         protected virtual ViewModel EnrichModel(ViewModel model, int publicationId)
         {
             PageModel pageModel = model as PageModel;
-            if (pageModel == null) return model;
+            if (pageModel == null) return model;          
             var client = ApiClientFactory.Instance.CreateClient();
             var page = client.GetPage(ContentNamespace.Docs, publicationId, int.Parse(pageModel.Id),
                 $"requiredMeta:{TocNaventriesMeta},{PageConditionsUsedMeta},{PageLogicalRefObjectId}",
