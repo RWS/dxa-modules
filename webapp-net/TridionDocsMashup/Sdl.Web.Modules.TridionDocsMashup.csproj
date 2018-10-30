@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Areas\TridionDocsMashup\Views\Entity\Bicycle.cshtml" />
+    <None Include="Areas\TridionDocsMashup\Views\Entity\Topic.cshtml" />
     <None Include="Areas\TridionDocsMashup\Views\Region\DynamicWidget.cshtml" />
     <None Include="Areas\TridionDocsMashup\Views\TridionDocsMashup\DynamicWidget.cshtml" />
     <None Include="Areas\TridionDocsMashup\Views\TridionDocsMashup\StaticWidget.cshtml" />
