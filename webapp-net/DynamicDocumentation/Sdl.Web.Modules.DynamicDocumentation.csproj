@@ -85,6 +85,7 @@
     <Compile Include="Controllers\ApiController.cs" />
     <Compile Include="Controllers\DynamicDocumentationPageController.cs" />
     <Compile Include="DynamicDocumentationModuleAreaRegistration.cs" />
+    <Compile Include="Exceptions\DynamicDocumentationException.cs" />
     <Compile Include="Localization\DynamicDocumentationLocalizationResolver.cs" />
     <Compile Include="Mapping\ModelBuilder.cs" />
     <Compile Include="Models\Item.cs" />
