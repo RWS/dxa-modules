@@ -67,8 +67,8 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         {
             try
             {                
-                AddConditionClaims(Request);
-                var model = SiteConfiguration.CacheProvider.GetOrAdd($"{publicationId}-{pageId}", CacheRegion.PageModel, 
+                int hash = AddConditionClaims(Request);
+                var model = SiteConfiguration.CacheProvider.GetOrAdd($"{publicationId}-{pageId}-{hash}", CacheRegion.PageModel, 
                     () => EnrichModel(ContentProvider.GetPageModel(pageId, Localization), publicationId));
                 return JsonResult(model);
             }
@@ -85,8 +85,8 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         {
             try
             {
-                AddConditionClaims(Request);
-                var model = SiteConfiguration.CacheProvider.GetOrAdd($"{publicationId}-{pageId}", CacheRegion.PageModel,
+                int hash = AddConditionClaims(Request);
+                var model = SiteConfiguration.CacheProvider.GetOrAdd($"{publicationId}-{pageId}-{hash}", CacheRegion.PageModel,
                     () => EnrichModel(ContentProvider.GetPageModel(pageId, Localization), publicationId));
                 return JsonResult(model);
             }
@@ -102,8 +102,8 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         {
             try
             {
-                AddConditionClaims(Request);
-                var model = SiteConfiguration.CacheProvider.GetOrAdd($"{publicationId}-{componentId}-{templateId}", CacheRegion.PageModel,
+                int hash = AddConditionClaims(Request);
+                var model = SiteConfiguration.CacheProvider.GetOrAdd($"{publicationId}-{componentId}-{templateId}-{hash}", CacheRegion.PageModel,
                     () => EnrichModel(ContentProvider.GetEntityModel($"{componentId}-{templateId}", Localization)));
                 return JsonResult(model);
             }
@@ -268,7 +268,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
                 }
                 if (PageConditionsUsedMeta.Equals(x.Node.Key))
                 {
-                    pageModel.Meta.Add(PageLogicalRefObjectId, x.Node.Value);
+                    pageModel.Meta.Add(PageConditionsUsedMeta, x.Node.Value);
                 }
                 if (PageLogicalRefObjectId.Equals(x.Node.Key) && !pageModel.Meta.ContainsKey(PageLogicalRefObjectId))
                 {
@@ -278,16 +278,17 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
             return model;
         }
 
-        private static void AddConditionClaims(HttpRequestBase request)
+        private static int AddConditionClaims(HttpRequestBase request)
         {
             var conditions = request.QueryString["conditions"];
-            if (string.IsNullOrEmpty(conditions)) return;
+            if (string.IsNullOrEmpty(conditions)) return 0;
             AmbientDataContext.CurrentClaimStore.Put(UserConditionsUri, conditions);
             // Make sure claims get forwarded
             if (!AmbientDataContext.ForwardedClaims.Contains(UserConditionsUri.ToString()))
             {
                 AmbientDataContext.ForwardedClaims.Add(UserConditionsUri.ToString());
             }
+            return conditions.GetHashCode();
         }
 
         private ActionResult JsonResult(object obj) => Content(JsonConvert.SerializeObject(obj), "application/json");
