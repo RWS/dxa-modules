@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>Sdl.Dxa.Modules.DynamicDocumentation.Boilerplate</id>
+        <version>2.1.0-beta</version>
+        <title>Sdl.Dxa.Modules.DynamicDocumentation.Boilerplate</title>
+        <authors>SDL Group</authors>
+        <owners>SDL Group</owners>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
+        <projectUrl>https://github.com/sdl/dxa-modules</projectUrl>
+        <iconUrl>http://dr0muzwhcp26z.cloudfront.net/static/corporate/SDL-logo-2014.png</iconUrl>
+        <description>NPM project where customizations for DXA Dynamic Documentation GUI project should be developed</description>
+        <copyright>Copyright 2015-2018 SDL Group</copyright>
+        <tags>SDL DXA Dynamic Documentation GUI Boilerplate</tags>
+    </metadata>
+</package>
