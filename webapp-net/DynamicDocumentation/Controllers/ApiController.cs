@@ -22,13 +22,13 @@ using ConditionProvider = Sdl.Web.Modules.DynamicDocumentation.Providers.Conditi
 using PublicationProvider = Sdl.Web.Modules.DynamicDocumentation.Providers.PublicationProvider;
 
 namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
-{
+{  
     /// <summary>
     /// Api Controller for Docs content
     /// </summary>
     public class ApiController : BaseController
     {
-        private static readonly Uri UserConditionsUri = new Uri("taf:ish:userconditions");
+        private static readonly Uri UserConditionsUri = new Uri("taf:ish:userconditions:merged");
         private static readonly string TocNaventriesMeta = "tocnaventries.generated.value";
         private static readonly string PageConditionsUsedMeta = "conditionsused.generated.value";
         private static readonly string PageLogicalRefObjectId = "ishlogicalref.object.id";
@@ -282,7 +282,8 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         {
             var conditions = request.QueryString["conditions"];
             if (string.IsNullOrEmpty(conditions)) return 0;
-            AmbientDataContext.CurrentClaimStore.Put(UserConditionsUri, conditions);
+            var c = JsonConvert.DeserializeObject<Conditions>(conditions);            
+            AmbientDataContext.CurrentClaimStore.Put(UserConditionsUri, c.UserConditions ?? new Dictionary<string, object>());
             // Make sure claims get forwarded
             if (!AmbientDataContext.ForwardedClaims.Contains(UserConditionsUri.ToString()))
             {
