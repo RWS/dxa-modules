@@ -3,7 +3,7 @@ using System.Linq;
 using Sdl.Web.Common.Utils;
 
 namespace Sdl.Web.Modules.DynamicDocumentation.Models
-{
+{   
     public class Conditions
     {
         public int PublicationId { get; set; }
