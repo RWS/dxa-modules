@@ -1,25 +1,19 @@
 package com.sdl.dxa.modules.docs.mashup.models.products;
 
-import com.sdl.dxa.caching.NeverCached;
-import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticEntity;
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticProperty;
 import com.sdl.webapp.common.api.model.KeywordModel;
 import com.sdl.webapp.common.api.model.RichText;
 import com.sdl.webapp.common.api.model.entity.AbstractEntityModel;
 import com.sdl.webapp.common.api.model.entity.MediaItem;
-import lombok.EqualsAndHashCode;
 import java.util.Map;
 
-@NeverCached(qualifier = "Product")
-@EqualsAndHashCode(callSuper = true)
-@SemanticEntity(entityName = "Content")
 public class Product extends AbstractEntityModel {
 
     @SemanticProperty("_all")
     private Map<String, KeywordModel> keywords;
 
     @SemanticProperty("Title")
-    private String title;
+    private RichText title;
 
     @SemanticProperty("Body")
     private RichText body;
@@ -35,11 +29,11 @@ public class Product extends AbstractEntityModel {
         this.keywords = keywords;
     }
 
-    public String getTitle() {
+    public RichText getTitle() {
         return title;
     }
 
-    public void setTitle(String title) { this.title = title; }
+    public void setTitle(RichText title) { this.title = title; }
 
     public RichText getBody() {
         return body;

@@ -10,7 +10,7 @@ import java.util.List;
 
 @NeverCached(qualifier = "StaticWidget")
 @EqualsAndHashCode(callSuper = true)
-@SemanticEntity(entityName = "Content")
+@SemanticEntity(entityName = "StaticWidget")
 public class StaticWidget extends AbstractEntityModel {
 
     @SemanticProperty("_all")

@@ -13,7 +13,7 @@ import java.util.Map;
 
 @NeverCached(qualifier = "DynamicWidget")
 @EqualsAndHashCode(callSuper = true)
-@SemanticEntity(entityName = "Content")
+@SemanticEntity(entityName = "DynamicWidget")
 public class DynamicWidget extends AbstractEntityModel {
 
     @SemanticProperty("Keywords")

@@ -24,6 +24,7 @@ import com.sdl.web.pca.client.contentmodel.generated.SortOrderType;
 import com.sdl.web.pca.client.exception.GraphQLClientException;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.model.KeywordModel;
+import com.sdl.webapp.common.api.model.RichText;
 import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
@@ -171,12 +172,12 @@ public class TridionDocsPublicContentApiClient implements ITridionDocsClient {
 
                                             Object topicTitle = content.get("topicTitle");
                                             if (topicTitle != null) {
-                                                topic.setTitle(topicTitle.toString());
+                                                topic.setTitle(new RichText(topicTitle.toString()));
                                             }
 
                                             Object topicBody = content.get("topicBody");
                                             if (topicBody != null) {
-                                                topic.setBody(topicBody.toString());
+                                                topic.setBody(new RichText(topicBody.toString()));
                                             }
                                         }
                                     }

@@ -38,7 +38,7 @@ import static org.mockito.Mockito.when;
  */
 @RunWith(MockitoJUnitRunner.class)
 public class TridionDocsMashupControllerTest {
-    private final String TOPIC_TITLE = "Test Topic";
+    private final RichText TOPIC_TITLE = new RichText("Test Topic");
     private final String PRODUCT_VIEW_MODEL = "Test View";
 	
     @Mock
@@ -104,7 +104,7 @@ public class TridionDocsMashupControllerTest {
         MvcData mvcData = mock(MvcData.class);
         List<EntityModel> entities = new ArrayList<>();
         Product product = new Product();
-        product.setTitle("Product 1");
+        product.setTitle( new RichText("Product 1"));
         product.setKeywords(getTestKeywords());
         product.setMvcData(mvcData);
         entities.add(product);

@@ -24,7 +24,7 @@
                 {
     %>
                     <div class="content" ${markup.property(entity, "topics")}>
-                        <%= topic.getBody()%>
+                        <dxa:richtext content="<%=topic.getBody()%>" />
                     </div>
     <%
                  }
