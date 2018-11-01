@@ -105,11 +105,32 @@
     <None Include="Areas\DynamicDocumentation\Views\DynamicDocumentationPage\GeneralPage.cshtml" />
     <None Include="Areas\DynamicDocumentation\Views\Page\ErrorPage.cshtml" />
     <None Include="Areas\DynamicDocumentation\Views\web.config" />
+    <None Include="gui\.editorconfig" />
+    <None Include="gui\Jenkinsfile" />
+    <None Include="gui\nuget%40tmp\durable-0329cc35\powershellHelper.ps1" />
+    <None Include="gui\nuget%40tmp\durable-0329cc35\powershellScript.ps1" />
+    <None Include="gui\nuget%40tmp\durable-0329cc35\powershellWrapper.ps1" />
+    <None Include="gui\package.json" />
+    <None Include="gui\tsconfig.json" />
+    <None Include="gui\tslint.json" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="gui\build\gulp-tasks\package-project.js" />
+    <Content Include="gui\build\gulp-tasks\run-tslint.js" />
+    <Content Include="gui\build\gulp-tasks\serve.js" />
+    <Content Include="gui\gulpfile.js" />
+    <Content Include="gui\nuget%40tmp\durable-0329cc35\jenkins-log.txt" />
+    <Content Include="gui\pom.xml" />
+    <Content Include="gui\postcss.config.js" />
+    <Content Include="gui\src\index.html" />
+    <Content Include="gui\webpack.config.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="gui\src\Main.tsx" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
