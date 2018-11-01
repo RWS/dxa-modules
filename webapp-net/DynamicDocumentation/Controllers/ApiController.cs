@@ -280,9 +280,9 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
 
         private static int AddConditionClaims(HttpRequestBase request)
         {
-            var conditions = request.QueryString["conditions"];
+            var conditions = request.QueryString["conditions"] ?? request.Params["conditions"];
             if (string.IsNullOrEmpty(conditions)) return 0;
-            var c = JsonConvert.DeserializeObject<Conditions>(conditions);            
+            var c = JsonConvert.DeserializeObject<Conditions>(conditions);
             AmbientDataContext.CurrentClaimStore.Put(UserConditionsUri, c.UserConditions ?? new Dictionary<string, object>());
             // Make sure claims get forwarded
             if (!AmbientDataContext.ForwardedClaims.Contains(UserConditionsUri.ToString()))
