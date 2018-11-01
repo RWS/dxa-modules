@@ -10,11 +10,7 @@
         {
             if (Model.DisplayContentAs.ToLower() == "embedded content")
             {
-                <div class="content">
-                    <div @Html.DxaPropertyMarkup(() => Model.Topics)>
-                        @Html.Raw(@topic.Body)
-                    </div>
-                </div>
+                @Html.DxaEntity(topic)
             }
             else
             {

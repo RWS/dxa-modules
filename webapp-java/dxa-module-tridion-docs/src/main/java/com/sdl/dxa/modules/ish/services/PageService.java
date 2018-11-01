@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 public class PageService {
 
     @Autowired
-    @Qualifier("DefaultContentProvider")
+    @Qualifier("ishContentProvider")
     private ContentProvider contentProvider;
 
     /**

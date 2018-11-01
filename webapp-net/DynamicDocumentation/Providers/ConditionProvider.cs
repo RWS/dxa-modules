@@ -15,7 +15,6 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Providers
     {
         private static readonly string ConditionUsed = "conditionsused.generated.value";
         private static readonly string ConditionMetadata = "conditionmetadata.generated.value";
-        private static readonly string ConditionValues = "values";
 
         private class Condition
         {

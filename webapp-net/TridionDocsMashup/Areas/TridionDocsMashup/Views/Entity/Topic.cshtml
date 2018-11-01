@@ -1,0 +1,28 @@
+﻿@model Topic
+
+<div id="@Model.Id" class="@Model.HtmlClasses">
+
+    @if (Model.HtmlClasses == null)
+    {
+        <h1 class="title topicTitle1" @Html.DxaPropertyMarkup(() => Model.Title)>@Html.DxaRichText(Model.Title)</h1>
+    }
+    else
+    {
+        <!-- Nested Topic -->
+        <h2 class="title topicTitle2" @Html.DxaPropertyMarkup(() => Model.Title)>@Html.DxaRichText(Model.Title)</h2>
+    }
+
+    <div class="body" @Html.DxaPropertyMarkup(() => Model.Body)>
+        @Html.DxaRichText(Model.Body)
+    </div>
+
+    @if (Model.NestedTopics != null)
+    {
+        <div class="nestedTopics">
+            @foreach (Topic nestedTopic in Model.NestedTopics)
+            {
+                @Html.DxaEntity(nestedTopic)
+            }
+        </div>
+    }
+</div>
