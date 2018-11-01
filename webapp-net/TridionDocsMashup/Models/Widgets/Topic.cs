@@ -5,12 +5,12 @@ using Sdl.Web.Common.Interfaces;
 namespace Sdl.Web.Modules.TridionDocsMashup.Models.Widgets
 {
 
-    [SemanticEntity(Vocab = DitaVocabulary, EntityName = "body")]
+    [SemanticEntity(Vocab = DitaVocabulary, EntityName = "title")]
     public class Topic : EntityModel
     {
         [SemanticProperty("title")]
-        public string Title { get; set; }
-
+        public RichText Title { get; set; }
+        
         [SemanticProperty("body")]
         public RichText Body { get; set; }
 
