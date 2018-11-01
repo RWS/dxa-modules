@@ -104,7 +104,7 @@ public class TridionDocsMashupControllerTest {
         MvcData mvcData = mock(MvcData.class);
         List<EntityModel> entities = new ArrayList<>();
         Product product = new Product();
-        product.setTitle( new RichText("Product 1"));
+        product.setTitle("Product 1");
         product.setKeywords(getTestKeywords());
         product.setMvcData(mvcData);
         entities.add(product);

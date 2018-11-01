@@ -13,7 +13,7 @@ public class Product extends AbstractEntityModel {
     private Map<String, KeywordModel> keywords;
 
     @SemanticProperty("Title")
-    private RichText title;
+    private String title;
 
     @SemanticProperty("Body")
     private RichText body;
@@ -29,11 +29,11 @@ public class Product extends AbstractEntityModel {
         this.keywords = keywords;
     }
 
-    public RichText getTitle() {
+    public String getTitle() {
         return title;
     }
 
-    public void setTitle(RichText title) { this.title = title; }
+    public void setTitle(String title) { this.title = title; }
 
     public RichText getBody() {
         return body;
