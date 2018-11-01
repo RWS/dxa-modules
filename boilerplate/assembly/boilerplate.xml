@@ -14,6 +14,7 @@
             <excludes>
                 <exclude>assembly/</exclude>
                 <exclude>target/</exclude>
+                <exclude>nuget/</exclude>
             </excludes>
             <includes>
                 <include>**</include>
