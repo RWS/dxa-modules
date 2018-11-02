@@ -20,6 +20,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup
 
             // Region Views
             RegisterViewModel("DynamicWidget", typeof(RegionModel));
+            RegisterViewModel("Bicycle", typeof(RegionModel));
 
             // Strongly Typed Topic Models
             RegisterViewModel(typeof(Topic));
