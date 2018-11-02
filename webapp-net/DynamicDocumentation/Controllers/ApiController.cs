@@ -11,7 +11,6 @@ using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Interfaces;
 using Sdl.Web.Common.Logging;
 using Sdl.Web.Common.Models;
-using Sdl.Web.Delivery.ServicesCore.ClaimStore;
 using Sdl.Web.Modules.DynamicDocumentation.Models;
 using Sdl.Web.Modules.DynamicDocumentation.Providers;
 using Sdl.Web.Mvc.Configuration;
@@ -66,11 +65,16 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         public virtual ActionResult Page(int publicationId, int pageId)
         {
             try
-            {                
-                int hash = AddConditionClaims(Request);
-                var model = SiteConfiguration.CacheProvider.GetOrAdd($"{publicationId}-{pageId}-{hash}", CacheRegion.PageModel, 
-                    () => EnrichModel(ContentProvider.GetPageModel(pageId, Localization), publicationId));
-                return JsonResult(model);
+            {
+                using (var mgr = GlobalClaimManager.Create)
+                {
+                    AddConditions(mgr, Request);
+                    int hash = mgr.GetHashCode();
+                    var model = SiteConfiguration.CacheProvider.GetOrAdd($"{publicationId}-{pageId}-{hash}",
+                        CacheRegion.PageModel,
+                        () => EnrichModel(ContentProvider.GetPageModel(pageId, Localization), publicationId));
+                    return JsonResult(model);
+                }
             }
             catch (Exception ex)
             {
@@ -85,10 +89,15 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         {
             try
             {
-                int hash = AddConditionClaims(Request);
-                var model = SiteConfiguration.CacheProvider.GetOrAdd($"{publicationId}-{pageId}-{hash}", CacheRegion.PageModel,
-                    () => EnrichModel(ContentProvider.GetPageModel(pageId, Localization), publicationId));
-                return JsonResult(model);
+                using (var mgr = GlobalClaimManager.Create)
+                {
+                    AddConditions(mgr, Request);
+                    int hash = mgr.GetHashCode();
+                    var model = SiteConfiguration.CacheProvider.GetOrAdd($"{publicationId}-{pageId}-{hash}",
+                        CacheRegion.PageModel,
+                        () => EnrichModel(ContentProvider.GetPageModel(pageId, Localization), publicationId));
+                    return JsonResult(model);
+                }
             }
             catch (Exception ex)
             {
@@ -102,10 +111,17 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         {
             try
             {
-                int hash = AddConditionClaims(Request);
-                var model = SiteConfiguration.CacheProvider.GetOrAdd($"{publicationId}-{componentId}-{templateId}-{hash}", CacheRegion.PageModel,
-                    () => EnrichModel(ContentProvider.GetEntityModel($"{componentId}-{templateId}", Localization)));
-                return JsonResult(model);
+                using (var mgr = GlobalClaimManager.Create)
+                {
+                    AddConditions(mgr, Request);
+                    int hash = mgr.GetHashCode();
+                    var model =
+                        SiteConfiguration.CacheProvider.GetOrAdd($"{publicationId}-{componentId}-{templateId}-{hash}",
+                            CacheRegion.PageModel,
+                            () =>
+                                EnrichModel(ContentProvider.GetEntityModel($"{componentId}-{templateId}", Localization)));
+                    return JsonResult(model);
+                }
             }
             catch (Exception ex)
             {
@@ -137,8 +153,11 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         {
             try
             {
-                AddConditionClaims(Request);
-                return JsonResult(new TocProvider().GetToc(Localization));
+                using (var mgr = GlobalClaimManager.Create)
+                {
+                    AddConditions(mgr, Request);
+                    return JsonResult(new TocProvider().GetToc(Localization));
+                }
             }
             catch (Exception ex)
             {
@@ -152,9 +171,12 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         {
             try
             {
-                AddConditionClaims(Request);
-                var sitemapItems = new TocProvider().GetToc(Localization, sitemapItemId, includeAncestors).ToList();
-                return JsonResult(sitemapItems);
+                using (var mgr = GlobalClaimManager.Create)
+                {
+                    AddConditions(mgr, Request);
+                    var sitemapItems = new TocProvider().GetToc(Localization, sitemapItemId, includeAncestors).ToList();
+                    return JsonResult(sitemapItems);
+                }
             }
             catch (Exception ex)
             {
@@ -278,19 +300,20 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
             return model;
         }
 
-        private static int AddConditionClaims(HttpRequestBase request)
+        private static void AddConditions(GlobalClaimManager mgr, HttpRequestBase request)
         {
-            var conditions = request.QueryString["conditions"] ?? request.Params["conditions"];
-            if (string.IsNullOrEmpty(conditions)) return 0;
-            var userConditions = JsonConvert.DeserializeObject<Conditions>(conditions);
-            AmbientDataContext.CurrentClaimStore.Put(UserConditionsUri, 
-                new ConditionProvider().GetMergedConditions(userConditions));
-            // Make sure claims get forwarded
-            if (!AmbientDataContext.ForwardedClaims.Contains(UserConditionsUri.ToString()))
+            try
             {
-                AmbientDataContext.ForwardedClaims.Add(UserConditionsUri.ToString());
+                var conditions = request.QueryString["conditions"] ?? request.Params["conditions"];
+                if (string.IsNullOrEmpty(conditions)) return;
+                var userConditions = JsonConvert.DeserializeObject<Conditions>(conditions);
+                mgr.AddClaim(UserConditionsUri, new ConditionProvider().GetMergedConditions(userConditions));
             }
-            return conditions.GetHashCode();
+            catch (Exception ex)
+            {
+                Log.Error("Failed to add condition claim");
+                Log.Error(ex);
+            }            
         }
 
         private ActionResult JsonResult(object obj) => Content(JsonConvert.SerializeObject(obj), "application/json");
