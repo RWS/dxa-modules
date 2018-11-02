@@ -105,7 +105,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
                 new Pagination { First = maxItems },
                 null,
                 ContentIncludeMode.IncludeJsonAndRender,
-                includeContainerItems: true,
+                includeContainerItems: false,
                 contextData: null
                 );
 
