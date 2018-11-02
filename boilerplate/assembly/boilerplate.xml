@@ -15,6 +15,7 @@
                 <exclude>assembly/</exclude>
                 <exclude>target/</exclude>
                 <exclude>nuget/</exclude>
+                <exclude>pom.xml</exclude>
             </excludes>
             <includes>
                 <include>**</include>
