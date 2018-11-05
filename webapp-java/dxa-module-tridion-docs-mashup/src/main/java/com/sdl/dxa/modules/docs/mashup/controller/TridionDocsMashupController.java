@@ -4,7 +4,7 @@ import com.sdl.dxa.modules.docs.localization.DocsLocalization;
 import com.sdl.dxa.modules.docs.mashup.client.*;
 import com.sdl.dxa.modules.docs.mashup.models.products.Product;
 import com.sdl.dxa.modules.docs.mashup.models.widgets.*;
-import com.sdl.dxa.tridion.pcaclient.PCAClientProvider;
+import com.sdl.dxa.tridion.pcaclient.ApiClientProvider;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.content.ContentProvider;
 import com.sdl.webapp.common.api.content.ContentProviderException;
@@ -42,19 +42,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class TridionDocsMashupController extends EntityController {
 
     private final WebRequestContext webRequestContext;
-    private final PCAClientProvider pcaClientProvider;
+    private final ApiClientProvider pcaClientProvider;
     private final ContentProvider contentProvider;
     private ITridionDocsClient tridionDocsClient;
 
     @Autowired
-    public TridionDocsMashupController(WebRequestContext webRequestContext, PCAClientProvider pcaClientProvider, ContentProvider contentProvider) {
+    public TridionDocsMashupController(WebRequestContext webRequestContext, ApiClientProvider pcaClientProvider, ContentProvider contentProvider) {
         this.webRequestContext = webRequestContext;
         this.pcaClientProvider = pcaClientProvider;
         this.contentProvider = contentProvider;
     }
 
     // Used only by Unit Tests to pass a mocked WebRequestContext and a mocked ITridionDocsClient
-    public TridionDocsMashupController(WebRequestContext webRequestContext, PCAClientProvider pcaClientProvider, ContentProvider contentProvider, ITridionDocsClient tridionDocsClient) {
+    public TridionDocsMashupController(WebRequestContext webRequestContext, ApiClientProvider pcaClientProvider, ContentProvider contentProvider, ITridionDocsClient tridionDocsClient) {
         this.webRequestContext = webRequestContext;
         this.pcaClientProvider = pcaClientProvider;
         this.contentProvider = contentProvider;

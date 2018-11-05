@@ -1,7 +1,7 @@
 package com.sdl.dxa.modules.docs.mashup.client;
 
 import com.sdl.dxa.modules.docs.mashup.models.widgets.Topic;
-import com.sdl.web.pca.client.PublicContentApi;
+import com.sdl.web.pca.client.ApiClient;
 import com.sdl.web.pca.client.contentmodel.ContextData;
 import com.sdl.web.pca.client.contentmodel.Pagination;
 import com.sdl.web.pca.client.contentmodel.enums.ContentIncludeMode;
@@ -16,7 +16,7 @@ import com.sdl.web.pca.client.contentmodel.generated.InputSortParam;
 import com.sdl.web.pca.client.contentmodel.generated.Item;
 import com.sdl.web.pca.client.contentmodel.generated.ItemConnection;
 import com.sdl.web.pca.client.contentmodel.generated.ItemEdge;
-import com.sdl.dxa.tridion.pcaclient.PCAClientProvider;
+import com.sdl.dxa.tridion.pcaclient.ApiClientProvider;
 import com.sdl.web.pca.client.contentmodel.generated.Page;
 import com.sdl.web.pca.client.contentmodel.generated.RawContent;
 import com.sdl.web.pca.client.contentmodel.generated.SortFieldType;
@@ -43,10 +43,10 @@ import java.util.regex.Pattern;
 @SuppressWarnings("unchecked")
 public class TridionDocsPublicContentApiClient implements ITridionDocsClient {
 
-    private PublicContentApi _publicContentApi;
+    private ApiClient _publicContentApi;
     private WebRequestContext _webRequestContext;
 
-    public TridionDocsPublicContentApiClient(WebRequestContext webRequestContext, PCAClientProvider pcaClientProvider) {
+    public TridionDocsPublicContentApiClient(WebRequestContext webRequestContext, ApiClientProvider pcaClientProvider) {
 
         _webRequestContext = webRequestContext;
         
