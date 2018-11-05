@@ -82,6 +82,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\CommonAssemblyInfo.cs">
+      <Link>CommonAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Controllers\ApiController.cs" />
     <Compile Include="Controllers\DynamicDocumentationPageController.cs" />
     <Compile Include="DynamicDocumentationModuleAreaRegistration.cs" />
