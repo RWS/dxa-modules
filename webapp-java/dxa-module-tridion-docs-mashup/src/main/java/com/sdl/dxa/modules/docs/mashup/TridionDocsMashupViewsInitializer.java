@@ -16,7 +16,8 @@ import org.springframework.stereotype.Component;
         @RegisteredViewModel(viewName = "StaticWidget", modelClass = StaticWidget.class, controllerName = "TridionDocsMashup" ),
         @RegisteredViewModel(viewName = "DynamicWidget", modelClass = DynamicWidget.class, controllerName = "TridionDocsMashup" ),
         @RegisteredViewModel(viewName = "Bicycle", modelClass = Bicycle.class ),
-        @RegisteredViewModel(viewName = "DynamicWidget", modelClass = RegionModelImpl.class )
+        @RegisteredViewModel(viewName = "DynamicWidget", modelClass = RegionModelImpl.class ),
+        @RegisteredViewModel(viewName = "Bicycle", modelClass = RegionModelImpl.class )
 })
 @ModuleInfo(name = "DXA Modules - Tridion Docs Mashup", areaName = "TridionDocsMashup", description = "Implementation of DXA Tridion Docs Mashup module")
 @Component
