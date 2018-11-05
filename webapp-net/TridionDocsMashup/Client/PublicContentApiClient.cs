@@ -104,9 +104,8 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
                 new InputSortParam { Order = SortOrderType.Descending, SortBy = SortFieldType.LAST_PUBLISH_DATE },
                 new Pagination { First = maxItems },
                 null,
-                // TODO : Change to IncludeJsonAndRender if you want to easily deserialize R2 datamodel
-                ContentIncludeMode.IncludeDataAndRender,
-                includeContainerItems: true,
+                ContentIncludeMode.IncludeJsonAndRender,
+                includeContainerItems: false,
                 contextData: null
                 );
 
@@ -136,7 +135,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
                     docsLocalization.EnsureInitialized();
 
                     // Deserialize Page Content as R2 Data Model
-                    string pageModelJson = JsonConvert.SerializeObject(page.RawContent.Data); // TODO: should be able to get string from PCA client
+                    string pageModelJson = page.RawContent.Content;
                     PageModelData pageModelData = JsonConvert.DeserializeObject<PageModelData>(pageModelJson, DataModelBinder.SerializerSettings);
 
                     // Extract the R2 Data Model of the Topic and convert it to a Strongly Typed View Model

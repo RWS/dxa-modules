@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 using Sdl.Tridion.Api.Client.ContentModel;
 using Sdl.Web.Common;
 using Sdl.Web.Common.Configuration;
+using Sdl.Web.Modules.DynamicDocumentation.Models;
 using Sdl.Web.Tridion.ApiClient;
 
 namespace Sdl.Web.Modules.DynamicDocumentation.Providers
@@ -15,7 +17,6 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Providers
     {
         private static readonly string ConditionUsed = "conditionsused.generated.value";
         private static readonly string ConditionMetadata = "conditionmetadata.generated.value";
-        private static readonly string ConditionValues = "values";
 
         private class Condition
         {
@@ -27,7 +28,20 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Providers
             public string[] Values { get; set; }
         }
 
-        public string GetConditions(int publicationId)
+        public string GetConditionsJson(int publicationId) 
+            => JsonConvert.SerializeObject(GetConditions(publicationId));
+
+        public Dictionary<string, object> GetMergedConditions(Conditions conditions)
+        {
+            if (conditions.UserConditions == null)
+                return new Dictionary<string, object>();
+            return GetConditions(conditions.PublicationId)
+                .ToDictionary(x => x.Key,
+                    x =>
+                        conditions.UserConditions.ContainsKey(x.Key) ? conditions.UserConditions[x.Key] : x.Value.Values);
+        }
+
+        private Dictionary<string, Condition> GetConditions(int publicationId)
         {
             var conditionUsed = GetMetadata(publicationId, ConditionUsed);
             var conditionMetadata = GetMetadata(publicationId, ConditionMetadata);
@@ -39,7 +53,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Providers
             {
                 d2[v.Key].Values = v.Value;
             }
-            return JsonConvert.SerializeObject(d2);
+            return d2;
         }
 
         private string GetMetadata(int publicationId, string metadataName)

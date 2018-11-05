@@ -5,6 +5,7 @@ using Sdl.Tridion.Api.Client.ContentModel;
 using Sdl.Web.Common;
 using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Logging;
+using Sdl.Web.Modules.DynamicDocumentation.Exceptions;
 using Sdl.Web.Tridion.ApiClient;
 
 namespace Sdl.Web.Modules.DynamicDocumentation.Providers
@@ -53,7 +54,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Providers
             }
         }
 
-        public bool IsPublicationOnline(Sdl.Tridion.Api.Client.ContentModel.Publication publication)
+        public bool IsPublicationOnline(Publication publication)
         {
             var customMeta = publication.CustomMetas;
             if (customMeta == null) return false;
@@ -83,11 +84,11 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Providers
             }
             if (isOffline)
             {
-                throw new DxaItemNotFoundException($"Unable to find publication {publicationId}");
+                throw new DynamicDocumentationException($"Unable to find publication {publicationId}");
             }
         }
 
-        private Models.Publication BuildPublicationFrom(Sdl.Tridion.Api.Client.ContentModel.Publication publication)
+        private Models.Publication BuildPublicationFrom(Publication publication)
         {
             Models.Publication result = new Models.Publication
             {
