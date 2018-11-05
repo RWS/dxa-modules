@@ -1,6 +1,6 @@
-# Dita Delivery Web Application GUI
+# Dynamic Documentation GUI
 
-GUI of the SDL Dita Delivery Web Application.
+GUI of the SDL Dynamic Documentation.
 
 ## Building
 
