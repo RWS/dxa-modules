@@ -73,7 +73,7 @@ namespace Sdl.Web.Modules.Ugc.Controllers
                     userId = "Anonymous";
                 }
 
-                Comment result = ugc.PostComment(posted.PublicationId.Value,
+                Comment result = ugc.PostComment(posted.PublicationId,
                     posted.PageId.Value,
                     userId,
                     posted.Email,
