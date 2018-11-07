@@ -5,7 +5,7 @@
     /// </summary>
     public class PostedComment
     {
-        public int PublicationId { get; set; }
+        public int? PublicationId { get; set; }
 
         public int? PageId { get; set; }
 
