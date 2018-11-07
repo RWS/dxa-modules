@@ -4,7 +4,6 @@ using Sdl.Web.Mvc.Controllers;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -49,16 +48,23 @@ namespace Sdl.Web.Modules.Ugc.Controllers
         {
             try
             {
+                Stream req = Request.InputStream;
+                req.Seek(0, SeekOrigin.Begin);
+                string json = new StreamReader(req).ReadToEnd();
+                PostedComment posted = JsonConvert.DeserializeObject<PostedComment>(json);
+
+                if (!posted.ParentId.HasValue)
+                {
+                    Response.StatusCode = 405;
+                    return new EmptyResult();
+                }
+
                 if (pageId == null || publicationId == null)
                 {
                     Response.StatusCode = 200;
                     return new EmptyResult();
                 }
                 UgcService ugc = new UgcService();
-                Stream req = Request.InputStream;
-                req.Seek(0, SeekOrigin.Begin);
-                string json = new StreamReader(req).ReadToEnd();                
-                PostedComment posted = JsonConvert.DeserializeObject<PostedComment>(json);
                 Dictionary<string, string> metadata = CreateMetadata(posted, true);
 
                 string userId = posted.Username;
