@@ -30,6 +30,7 @@ namespace Sdl.Web.Modules.Test
             RegisterViewModel("SimpleTestPage", typeof(PageModel));
             RegisterViewModel("TSI811TestPage", typeof(Tsi811PageModel));
             RegisterViewModel("TSI2285TestPage", typeof(Tsi2285PageModel));
+            RegisterViewModel("TSI2844Page", typeof(Tsi2844PageModel));
             RegisterViewModel("NoCachePage", typeof(NoCachePageModel));
 
             // Region Views

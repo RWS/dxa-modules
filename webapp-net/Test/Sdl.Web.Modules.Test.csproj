@@ -59,6 +59,7 @@
     <Compile Include="Models\NoCacheEntityModel.cs" />
     <Compile Include="Models\CompLinkTest.cs" />
     <Compile Include="Models\NoCachePageModel.cs" />
+    <Compile Include="Models\Tsi2844PageModel.cs" />
     <Compile Include="Models\Tsi2844TestEntity.cs" />
     <Compile Include="Models\TestEntity.cs" />
     <Compile Include="Models\Tsi1856TestEntity.cs" />
@@ -114,6 +115,7 @@
     <None Include="Areas\Test\Views\Entity\TestEntity1.cshtml" />
     <None Include="Areas\Test\Views\Page\CustomPageModelInheritedController.cshtml" />
     <None Include="Areas\Test\Views\Page\NoCachePage.cshtml" />
+    <None Include="Areas\Test\Views\Page\TSI2844Page.cshtml" />
     <None Include="Areas\Test\Views\Page\TSI2285TestPage.cshtml" />
     <None Include="Areas\Test\Views\Page\TSI811TestPage.cshtml" />
     <None Include="Areas\Test\Views\Page\TestDxaEntityViewOverride.cshtml" />
