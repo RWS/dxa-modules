@@ -100,7 +100,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\CacheRegion.cs" />
     <Compile Include="Providers\ConditionProvider.cs" />
-    <Compile Include="Providers\DocsNavigationProvider.cs" />
     <Compile Include="Providers\PublicationProvider.cs" />
     <Compile Include="Providers\TocProvider.cs" />
   </ItemGroup>
