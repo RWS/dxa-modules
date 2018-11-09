@@ -98,11 +98,11 @@
     "yargs": "8.0.2"
   },
   "scripts": {
-    "start": "gulp serve",
-    "build": "gulp",
+    "start": "set NODE_OPTIONS='--max-old-space-size=2048' && gulp serve",
+    "build": "set NODE_OPTIONS='--max-old-space-size=2048' && gulp",
     "build-server": "gulp build:dist",
-    "test": "gulp test",
-    "test-debug": "gulp serve:test",
+    "test": "set NODE_OPTIONS='--max-old-space-size=2048' && gulp test",
+    "test-debug": "set NODE_OPTIONS='--max-old-space-size=2048' && gulp serve:test",
     "install": "napa"
   },
   "author": "okondratiuk@sdl.com, mborysenko@sdl.com, padams@sdl.com, mbilenko@sdl.com, inikonov@sdl.com",
