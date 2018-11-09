@@ -43,8 +43,8 @@
     "yargs": "~8.0.2"
   },
   "scripts": {
-    "start": "gulp serve -- --max_old_space_size=2048",
-    "build": "gulp -- --max_old_space_size=2048",
+    "start": "set NODE_OPTIONS='--max-old-space-size=2048' && gulp serve",
+    "build": "set NODE_OPTIONS='--max-old-space-size=2048' && gulp",
     "build-server": "gulp build:dist"
   },
   "author": "okondratiuk@sdl.com, mborysenko@sdl.com, padams@sdl.com, mbilenko@sdl.com, inikonov@sdl.com",
