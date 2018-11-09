@@ -8,6 +8,10 @@
 
     <h1><%= entity.getTitle() %></h1>
 
+    <div ${markup.property(entity, "title")}>
+        %= entity.getTitle()
+    </div>
+
     <div class="content">
         <div ${markup.property(entity, "body")}>
             <dxa:richtext content="${entity.getBody()}" />
