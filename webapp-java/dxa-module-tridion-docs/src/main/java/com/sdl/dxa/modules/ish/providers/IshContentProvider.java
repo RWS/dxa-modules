@@ -81,12 +81,13 @@ public class IshContentProvider extends DefaultContentProvider {
     private WebBinaryMetaFactory webBinaryMetaFactory;
 
     @Autowired
-    public IshContentProvider(WebRequestContext webRequestContext,
+    public IshContentProvider(WebApplicationContext webApplicationContext,
+                              WebRequestContext webRequestContext,
                               StaticContentResolver staticContentResolver,
                               LinkResolver linkResolver,
                               ModelBuilderPipeline builderPipeline,
                               ModelServiceProvider modelService) {
-        super(webRequestContext, staticContentResolver, linkResolver, builderPipeline, modelService);
+        super(webApplicationContext, webRequestContext, staticContentResolver, linkResolver, builderPipeline, modelService);
     }
 
     /**
@@ -203,7 +204,7 @@ public class IshContentProvider extends DefaultContentProvider {
         try {
             return data.getBytes();
         } catch (IOException e) {
-            throw new IshServiceException("Unable to extract data from BinaryData object" + "["
+            throw new IshServiceException("Unable to extract data from BinaryData object ["
                     + publicationId + "-" + binaryId + "]", e);
         }
     }
