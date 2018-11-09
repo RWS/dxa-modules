@@ -158,7 +158,7 @@ public class TridionDocsMashupController extends EntityController {
 
         docsLocalization.setPublicationId(String.valueOf(publicationId));
 
-        StaticContentItem binaryItem = contentProvider.getStaticContent(String.valueOf(binaryId), docsLocalization.getId(), docsLocalization.getPath());
+        StaticContentItem binaryItem = contentProvider.getStaticContent(binaryId, docsLocalization.getId(), docsLocalization.getPath());
 
         if (binaryItem == null) {
              return new ResponseEntity<>(result, responseHeaders, HttpStatus.NOT_FOUND);
