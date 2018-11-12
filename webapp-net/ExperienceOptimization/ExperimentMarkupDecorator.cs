@@ -38,7 +38,6 @@ namespace Sdl.Web.Modules.SmartTarget
                 }
                 AnalyticsMetaData analyticsMetaData = new AnalyticsMetaData();
                 _analyticsManager.TrackView(experiment.ExperimentDimensions, analyticsMetaData);
-                _analyticsManager.TrackConversion(experiment.ExperimentDimensions, analyticsMetaData);
                 return _analyticsManager.AddTrackingToLinks(htmlToDecorate, experiment.ExperimentDimensions, analyticsMetaData);
             }
         }
