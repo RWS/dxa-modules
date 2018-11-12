@@ -55,7 +55,7 @@ public class ContextExpressionEntityEvaluatorTest {
     }
 
     @Test
-    public void shouldIncludeIfNoExtensionData() {
+    public void shouldIncludeIfNoExtensionData() throws Exception {
         //given
         ContextExpressionEntityEvaluator evaluator = new ContextExpressionEntityEvaluator();
 
@@ -67,7 +67,7 @@ public class ContextExpressionEntityEvaluatorTest {
     }
 
     @Test
-    public void shouldIncludeIfNoContextExpressions() {
+    public void shouldIncludeIfNoContextExpressions() throws Exception {
         //given
         ContextExpressionEntityEvaluator evaluator = new ContextExpressionEntityEvaluator();
         ReflectionTestUtils.setField(evaluator, "contextExpressionsKey", CONTEXT_EXPRESSIONS_KEY);
@@ -83,7 +83,7 @@ public class ContextExpressionEntityEvaluatorTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void shouldNPEIfEntityIsNull() {
+    public void shouldNPEIfEntityIsNull() throws Exception {
         //given
         ContextExpressionEntityEvaluator evaluator = new ContextExpressionEntityEvaluator();
 
@@ -96,7 +96,7 @@ public class ContextExpressionEntityEvaluatorTest {
 
     @SuppressWarnings("ConstantConditions")
     @Test
-    public void shouldIncludeIfConditionsNull() {
+    public void shouldIncludeIfConditionsNull() throws Exception {
         //given
         ContextExpressionEntityEvaluator evaluator = new ContextExpressionEntityEvaluator();
         ReflectionTestUtils.setField(evaluator, "contextExpressionsKey", CONTEXT_EXPRESSIONS_KEY);
@@ -114,7 +114,7 @@ public class ContextExpressionEntityEvaluatorTest {
     }
 
     @Test
-    public void shouldIncludeIfConditionsEmpty() {
+    public void shouldIncludeIfConditionsEmpty() throws Exception {
         //given
         ContextExpressionEntityEvaluator evaluator = new ContextExpressionEntityEvaluator();
         ReflectionTestUtils.setField(evaluator, "contextExpressionsKey", CONTEXT_EXPRESSIONS_KEY);
@@ -158,14 +158,13 @@ public class ContextExpressionEntityEvaluatorTest {
 
         private ContextExpressionEntityEvaluator evaluator;
 
-        boolean with(Set<String> includes, Set<String> excludes) {
+        boolean with(Set<String> includes, Set<String> excludes) throws Exception {
             return evaluator.includeEntity(entityWithCx(includes, excludes));
         }
 
         private EntityModel entityWithCx(Set<String> includes, Set<String> excludes) {
             TestEntity entity = new TestEntity();
-            entity.setExtensionData(ImmutableMap.of(
-                    CONTEXT_EXPRESSIONS_KEY, new Conditions(includes, excludes)));
+            entity.setExtensionData(ImmutableMap.of(CONTEXT_EXPRESSIONS_KEY, new Conditions(includes, excludes)));
             return entity;
         }
     }
