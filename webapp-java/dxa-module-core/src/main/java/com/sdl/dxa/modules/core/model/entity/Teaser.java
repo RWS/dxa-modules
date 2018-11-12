@@ -1,6 +1,7 @@
 package com.sdl.dxa.modules.core.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.MoreObjects;
 import com.google.common.collect.Lists;
 import com.sdl.webapp.common.api.formatters.support.FeedItem;
 import com.sdl.webapp.common.api.formatters.support.FeedItemsProvider;
@@ -113,5 +114,13 @@ public class Teaser extends AbstractEntityModel implements FeedItemsProvider {
             return result;
         }
         return null;
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("link", link)
+                .add("headline", headline)
+                .toString();
     }
 }
