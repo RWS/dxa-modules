@@ -70,7 +70,8 @@ public class ContextExpressionEntityEvaluator implements ConditionalEntityEvalua
                 return false;
             }
         } catch (DxaException e) {
-            throw new ContentProviderException("Exception while requesting context claims, including entity " + entity, e);
+            log.warn("Exception while requesting context claims, including entity", e);
+            return true;
         }
 
         if (log.isDebugEnabled()) {
