@@ -45,7 +45,7 @@ namespace Sdl.Web.Modules.SmartTarget.Mapping
         /// This implementation relies on the <see cref="DefaultModelBuilder"/> already having constructed Region Models of type <see cref="SmartTargetRegion"/>.
         /// We "upgrade" the Page Model to type <see cref="SmartTargetPageModel"/> and populate the ST Regions <see cref="SmartTargetPromotion"/> Entities.
         /// </remarks>
-        public void BuildPageModel(ref PageModel pageModel, IPage page, IEnumerable<IPage> includes, ILocalization localization)
+        public void BuildPageModel(ref PageModel pageModel, IPage page, IEnumerable<IPage> includes, Localization localization)
         {
             using (new Tracer(pageModel, page, includes, localization))
             {
@@ -100,12 +100,12 @@ namespace Sdl.Web.Modules.SmartTarget.Mapping
             }
         }
 
-        public void BuildEntityModel(ref EntityModel entityModel, IComponentPresentation cp, ILocalization localization)
+        public void BuildEntityModel(ref EntityModel entityModel, IComponentPresentation cp, Localization localization)
         {
             // No post-processing of Entity Models needed
         }
 
-        public void BuildEntityModel(ref EntityModel entityModel, IComponent component, Type baseModelType, ILocalization localization)
+        public void BuildEntityModel(ref EntityModel entityModel, IComponent component, Type baseModelType, Localization localization)
         {
             // No post-processing of Entity Models needed
         }
@@ -119,7 +119,7 @@ namespace Sdl.Web.Modules.SmartTarget.Mapping
         /// <param name="pageModelData">The DXA R2 Data Model.</param>
         /// <param name="includePageRegions">Indicates whether Include Page Regions should be included.</param>
         /// <param name="localization">The context <see cref="Localization"/>.</param>
-        public void BuildPageModel(ref PageModel pageModel, PageModelData pageModelData, bool includePageRegions, ILocalization localization)
+        public void BuildPageModel(ref PageModel pageModel, PageModelData pageModelData, bool includePageRegions, Localization localization)
         {
             using (new Tracer(pageModel, pageModelData, includePageRegions, localization))
             {
@@ -156,7 +156,7 @@ namespace Sdl.Web.Modules.SmartTarget.Mapping
         }
         #endregion
 
-        private void PopulateSmartTargetRegions(SmartTargetPageModel smartTargetPageModel, ILocalization localization)
+        private void PopulateSmartTargetRegions(SmartTargetPageModel smartTargetPageModel, Localization localization)
         {
             // Execute a ST Query for all SmartTargetRegions on the Page.
             ResultSet resultSet = ExecuteSmartTargetQuery(smartTargetPageModel, localization);
@@ -233,7 +233,7 @@ namespace Sdl.Web.Modules.SmartTarget.Mapping
             }
         }
 
-        protected virtual SmartTargetPromotion CreatePromotionEntity(Promotion promotion, string viewName, string regionName, ILocalization localization, ExperimentDimensions experimentDimensions)
+        protected virtual SmartTargetPromotion CreatePromotionEntity(Promotion promotion, string viewName, string regionName, Localization localization, ExperimentDimensions experimentDimensions)
         {
             // In ST 2014 SP1 the ResultSet.FilterPromotions API represents Experiments as type Promotion, so we're not testing on type Experiment here.
             SmartTargetPromotion result = (experimentDimensions != null) ? new SmartTargetExperiment(experimentDimensions) : new SmartTargetPromotion();
@@ -252,13 +252,13 @@ namespace Sdl.Web.Modules.SmartTarget.Mapping
             return result;
         }
 
-        protected virtual SmartTargetItem CreateSmartTargetItem(Item item, ILocalization localization)
+        protected virtual SmartTargetItem CreateSmartTargetItem(Item item, Localization localization)
         {
             string entityId = $"{item.ComponentUri.ItemId}-{item.TemplateUri.ItemId}";
             return new SmartTargetItem(entityId, localization);
         }
 
-        private static ResultSet ExecuteSmartTargetQuery(SmartTargetPageModel smartTargetPageModel, ILocalization localization)
+        private static ResultSet ExecuteSmartTargetQuery(SmartTargetPageModel smartTargetPageModel, Localization localization)
         {
             using (new Tracer(smartTargetPageModel, localization))
             {
@@ -283,7 +283,7 @@ namespace Sdl.Web.Modules.SmartTarget.Mapping
             }
         }
 
-        private static bool GetAllowDuplicatesFromConfig(ILocalization localization)
+        private static bool GetAllowDuplicatesFromConfig(Localization localization)
         {
             string configValue = localization.GetConfigValue("smarttarget.allowDuplicationOnSamePageConfig");
             return Convert.ToBoolean(configValue);
@@ -295,7 +295,7 @@ namespace Sdl.Web.Modules.SmartTarget.Mapping
         /// <remarks>
         /// Used in R2 Model Builder Pipeline.
         /// </remarks>
-        private static bool GetAllowDuplicatesOnSamePage(PageModelData pageModelData, ILocalization localization)
+        private static bool GetAllowDuplicatesOnSamePage(PageModelData pageModelData, Localization localization)
         {
             object allowDups;
             if ((pageModelData.Metadata == null) || !pageModelData.Metadata.TryGetValue(AllowDuplicatesFieldName, out allowDups))
@@ -319,7 +319,7 @@ namespace Sdl.Web.Modules.SmartTarget.Mapping
         /// <remarks>
         /// Used in Legacy Model Builder Pipeline (DD4T-based)
         /// </remarks>
-        private static bool GetAllowDuplicatesOnSamePage(IPageTemplate pageTemplate, ILocalization localization)
+        private static bool GetAllowDuplicatesOnSamePage(IPageTemplate pageTemplate, Localization localization)
         {
             string allowDuplicates = null;
             if ((pageTemplate?.MetadataFields != null) && pageTemplate.MetadataFields.ContainsKey(AllowDuplicatesFieldName))

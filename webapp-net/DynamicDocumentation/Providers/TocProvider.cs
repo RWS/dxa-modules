@@ -13,16 +13,16 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Providers
     {
         private static readonly Regex RegEx = new Regex("^(?:\\w)(\\d+)(?:-\\w)(\\d+)", RegexOptions.Compiled);
 
-        public IEnumerable<SitemapItem> GetToc(ILocalization localization)
+        public IEnumerable<SitemapItem> GetToc(Common.Configuration.Localization localization)
            => GetToc(localization, null, false, 1);
 
-        public IEnumerable<SitemapItem> GetToc(ILocalization localization, string sitemapItemId)
+        public IEnumerable<SitemapItem> GetToc(Common.Configuration.Localization localization, string sitemapItemId)
           => GetToc(localization, sitemapItemId, false, 1);
 
-        public IEnumerable<SitemapItem> GetToc(ILocalization localization, string sitemapItemId, bool includeAncestors)
+        public IEnumerable<SitemapItem> GetToc(Common.Configuration.Localization localization, string sitemapItemId, bool includeAncestors)
             => GetToc(localization, sitemapItemId, includeAncestors, 1);
 
-        public IEnumerable<SitemapItem> GetToc(ILocalization localization, string sitemapItemId, bool includeAncestors,
+        public IEnumerable<SitemapItem> GetToc(Common.Configuration.Localization localization, string sitemapItemId, bool includeAncestors,
             int descendantLevels)
         {
             return SiteConfiguration.CacheProvider.GetOrAdd(
@@ -84,7 +84,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Providers
                 });
         }
 
-        public SitemapItem SiteMap(ILocalization localization)
+        public SitemapItem SiteMap(Common.Configuration.Localization localization)
         {
             return SiteConfiguration.CacheProvider.GetOrAdd(
                 $"sitemap-{localization.Id ?? "full"}", CacheRegion.Sitemap,

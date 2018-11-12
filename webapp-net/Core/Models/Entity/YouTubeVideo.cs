@@ -73,7 +73,7 @@ namespace Sdl.Web.Modules.Core.Models
         /// <remarks>
         /// This makes it possible possible to render "embedded" YouTubeVideo Models using the Html.DxaEntity method.
         /// </remarks>
-        public override MvcData GetDefaultView(ILocalization localization)
+        public override MvcData GetDefaultView(Localization localization)
         {
             return new MvcData("Core:YouTubeVideo");
         }

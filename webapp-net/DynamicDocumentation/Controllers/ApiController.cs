@@ -33,7 +33,8 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         private static readonly string PageLogicalRefObjectId = "ishlogicalref.object.id";
         private static readonly string RefFieldName = "ishlogicalref.object.id";
 
-        private static ILocalization Localization => WebRequestContext.Localization;
+        private static Common.Configuration.Localization Localization => WebRequestContext.Localization;
+        private IContentProviderExt ContentProviderExt => (IContentProviderExt) ContentProvider;
 
         [Route("~/api/publications")]
         public virtual ActionResult Publications()
@@ -72,7 +73,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
                     int hash = mgr.GetHashCode();
                     var model = SiteConfiguration.CacheProvider.GetOrAdd($"{publicationId}-{pageId}-{hash}",
                         CacheRegion.PageModel,
-                        () => EnrichModel(ContentProvider.GetPageModel(pageId, Localization), publicationId));
+                        () => EnrichModel(ContentProviderExt.GetPageModel(pageId, Localization), publicationId));
                     return JsonResult(model);
                 }
             }
@@ -95,7 +96,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
                     int hash = mgr.GetHashCode();
                     var model = SiteConfiguration.CacheProvider.GetOrAdd($"{publicationId}-{pageId}-{hash}",
                         CacheRegion.PageModel,
-                        () => EnrichModel(ContentProvider.GetPageModel(pageId, Localization), publicationId));
+                        () => EnrichModel(ContentProviderExt.GetPageModel(pageId, Localization), publicationId));
                     return JsonResult(model);
                 }
             }
@@ -119,7 +120,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
                         SiteConfiguration.CacheProvider.GetOrAdd($"{publicationId}-{componentId}-{templateId}-{hash}",
                             CacheRegion.PageModel,
                             () =>
-                                EnrichModel(ContentProvider.GetEntityModel($"{componentId}-{templateId}", Localization)));
+                                EnrichModel(ContentProviderExt.GetEntityModel($"{componentId}-{templateId}", Localization)));
                     return JsonResult(model);
                 }
             }
@@ -139,7 +140,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         {
             try
             {
-                StaticContentItem content = ContentProvider.GetStaticContentItem(binaryId, Localization);
+                StaticContentItem content = ContentProviderExt.GetStaticContentItem(binaryId, Localization);
                 return new FileStreamResult(content.GetContentStream(), content.ContentType);
             }
             catch (Exception ex)

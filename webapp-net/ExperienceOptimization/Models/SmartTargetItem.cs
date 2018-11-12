@@ -8,7 +8,7 @@ namespace Sdl.Web.Modules.SmartTarget.Models
     [Serializable]
     public class SmartTargetItem
     {
-        private readonly ILocalization _localization;
+        private readonly Localization _localization;
         private EntityModel _entity;
 
         public string EntityId { get; private set; }
@@ -21,7 +21,7 @@ namespace Sdl.Web.Modules.SmartTarget.Models
         /// </remarks>
         public EntityModel Entity => _entity ?? (_entity = SiteConfiguration.ContentProvider.GetEntityModel(EntityId, _localization));
 
-        public SmartTargetItem(string entityId, ILocalization localization)
+        public SmartTargetItem(string entityId, Localization localization)
         {
             EntityId = entityId;
             _localization = localization;
