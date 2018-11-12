@@ -1,7 +1,7 @@
 ﻿using System;
 using Sdl.Web.Common.Models;
 using System.Globalization;
-using Sdl.Web.Common.Interfaces;
+using Sdl.Web.Common.Configuration;
 
 namespace Sdl.Web.Modules.Test.Models
 {
@@ -36,7 +36,7 @@ namespace Sdl.Web.Modules.Test.Models
             set;
         }
 
-        public override MvcData GetDefaultView(ILocalization localization)
+        public override MvcData GetDefaultView(Localization localization)
         {
             return new MvcData("Test:TestFlickrImage");
         }

@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
+using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Models;
-using Sdl.Web.Common.Interfaces;
 
 namespace Sdl.Web.Modules.TridionDocsMashup.Models.Widgets
 {
-
     [SemanticEntity(Vocab = DitaVocabulary, EntityName = "title")]
     public class Topic : EntityModel
     {
@@ -21,7 +20,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Models.Widgets
         [SemanticProperty(IgnoreMapping = true)]
         public string Link { get; set; }
 
-        public override MvcData GetDefaultView(ILocalization localization)
+        public override MvcData GetDefaultView(Localization localization)
         {
             return new MvcData("TridionDocsMashup:Entity:Topic");
         }

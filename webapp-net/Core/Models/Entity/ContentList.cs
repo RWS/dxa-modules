@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
-using Sdl.Web.Common.Interfaces;
 using Sdl.Web.Common.Logging;
 
 namespace Sdl.Web.Modules.Core.Models
@@ -41,7 +40,7 @@ namespace Sdl.Web.Modules.Core.Models
             }
         }
 
-        public override Query GetQuery(ILocalization localization)
+        public override Query GetQuery(Localization localization)
         {
             return new SimpleBrokerQuery
             {
@@ -54,7 +53,7 @@ namespace Sdl.Web.Modules.Core.Models
             };
         }
 
-        protected int MapSchema(ILocalization localization)
+        protected int MapSchema(Localization localization)
         {
             if (ContentType == null)
             {

@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Xml;
 using Newtonsoft.Json;
-using Sdl.Web.Common.Interfaces;
+using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Models;
 
 namespace Sdl.Web.Modules.MediaManager.Models
@@ -134,7 +134,7 @@ namespace Sdl.Web.Modules.MediaManager.Models
         /// <remarks>
         /// This makes it possible possible to render "embedded" MediaManagerDistribution Models using the Html.DxaEntity method.
         /// </remarks>
-        public override MvcData GetDefaultView(ILocalization localization)
+        public override MvcData GetDefaultView(Localization localization)
         {
             return new MvcData("MediaManager:" + EclDisplayTypeId);
         }
