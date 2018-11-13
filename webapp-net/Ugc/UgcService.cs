@@ -3,7 +3,7 @@ using Sdl.Web.Tridion.ContentManager;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Sdl.Web.Common.Interfaces;
+using Sdl.Web.Common.Configuration;
 using Sdl.Web.Delivery.UGC;
 using Sdl.Web.Delivery.UGC.Model;
 using Sdl.Web.Modules.Ugc.Data;
@@ -60,7 +60,7 @@ namespace Sdl.Web.Modules.Ugc
 
         private static CmUri CreateUri(int publicationId, int pageId)
         {
-            ILocalization localization = WebRequestContext.Localization;
+            Localization localization = WebRequestContext.Localization;
             return CmUri.Create(localization.CmUriScheme, publicationId, pageId, ItemType.Page);
         }
 

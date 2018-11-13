@@ -58,7 +58,7 @@ namespace Sdl.Web.Modules.AudienceManager
                     return null;
                 }
 
-                ILocalization localization = WebRequestContext.Localization;
+                Localization localization = WebRequestContext.Localization;
 
                 // Audience Manager reads the context Publication ID from ADF:
                 AmbientDataContext.CurrentClaimStore.Put(new Uri("taf:claim:publication:id"), localization.Id);

@@ -81,13 +81,12 @@ public class IshContentProvider extends DefaultContentProvider {
     private WebBinaryMetaFactory webBinaryMetaFactory;
 
     @Autowired
-    public IshContentProvider(WebApplicationContext webApplicationContext,
-                              WebRequestContext webRequestContext,
+    public IshContentProvider(WebRequestContext webRequestContext,
                               StaticContentResolver staticContentResolver,
                               LinkResolver linkResolver,
                               ModelBuilderPipeline builderPipeline,
                               ModelServiceProvider modelService) {
-        super(webApplicationContext, webRequestContext, staticContentResolver, linkResolver, builderPipeline, modelService);
+        super(webRequestContext, staticContentResolver, linkResolver, builderPipeline, modelService);
     }
 
     /**

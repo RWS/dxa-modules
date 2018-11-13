@@ -1,6 +1,7 @@
 package com.sdl.dxa.modules.core.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.MoreObjects;
 import com.sdl.webapp.common.api.formatters.support.FeedItem;
 import com.sdl.webapp.common.api.formatters.support.FeedItemsProvider;
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticEntity;
@@ -32,5 +33,13 @@ public class ItemList extends AbstractEntityModel implements FeedItemsProvider {
     @Override
     public List<FeedItem> extractFeedItems() {
         return collectFeedItems(itemListElements);
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("headline", headline)
+                .add("teasers", itemListElements)
+                .toString();
     }
 }

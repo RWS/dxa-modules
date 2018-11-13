@@ -2,7 +2,7 @@
 using Sdl.Web.Common.Models;
 using System.Collections.Generic;
 using Sdl.Web.Common;
-using Sdl.Web.Common.Interfaces;
+using Sdl.Web.Common.Configuration;
 
 namespace Sdl.Web.Modules.SmartTarget.Models
 {
@@ -19,7 +19,7 @@ namespace Sdl.Web.Modules.SmartTarget.Models
 
         public List<SmartTargetItem> Items { get; set; }
 
-        public override string GetXpmMarkup(ILocalization localization)
+        public override string GetXpmMarkup(Localization localization)
         {
             return (XpmMetadata == null) ? string.Empty : string.Format(XpmMarkupFormat, XpmMetadata["PromotionID"], XpmMetadata["RegionID"]);
         }

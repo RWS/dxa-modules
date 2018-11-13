@@ -131,7 +131,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
                     }
 
                     int docsPublicationId = (int)edge.Node.PublicationId;
-                    ILocalization docsLocalization = new DocsLocalization(docsPublicationId);
+                    Localization docsLocalization = new DocsLocalization(docsPublicationId);
                     docsLocalization.EnsureInitialized();
 
                     // Deserialize Page Content as R2 Data Model

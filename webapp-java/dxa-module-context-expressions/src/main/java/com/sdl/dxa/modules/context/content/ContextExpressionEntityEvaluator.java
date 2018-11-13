@@ -2,6 +2,7 @@ package com.sdl.dxa.modules.context.content;
 
 import com.sdl.dxa.modules.context.model.Conditions;
 import com.sdl.webapp.common.api.content.ConditionalEntityEvaluator;
+import com.sdl.webapp.common.api.content.ContentProviderException;
 import com.sdl.webapp.common.api.contextengine.ContextClaims;
 import com.sdl.webapp.common.api.contextengine.ContextClaimsProvider;
 import com.sdl.webapp.common.api.model.EntityModel;
@@ -39,15 +40,15 @@ public class ContextExpressionEntityEvaluator implements ConditionalEntityEvalua
      * based on the conditions specified on the Entity Model and the context.</p>
      */
     @Override
-    public boolean includeEntity(@NonNull EntityModel entity) {
-        if (entity.getExtensionData() == null || !entity.getExtensionData().containsKey(contextExpressionsKey)) {
+    public boolean includeEntity(@NonNull EntityModel entity) throws ContentProviderException {
+        if (log.isDebugEnabled() && (entity.getExtensionData() == null || !entity.getExtensionData().containsKey(contextExpressionsKey))) {
             log.debug("Entity {} is included because there is no extension data with a key {}", entity, contextExpressionsKey);
             return true;
         }
 
         Conditions conditions = (Conditions) entity.getExtensionData().get(contextExpressionsKey);
         if (conditions == null || conditions.isEmpty()) {
-            log.warn("Found conditions, but they are null or empty, that looks like an error!");
+            log.warn("Found no conditionsin entity, that looks like an error with entity " + entity);
             return true;
         }
 
@@ -63,7 +64,7 @@ public class ContextExpressionEntityEvaluator implements ConditionalEntityEvalua
                 isExcludedAnyExclude = true;
             }
 
-            if (isExcludedNoIncludes || isExcludedAnyExclude) {
+            if (log.isDebugEnabled() && (isExcludedNoIncludes || isExcludedAnyExclude)) {
                 log.debug("suppressing entity because of {} Context Expression conditions; entity {}",
                         isExcludedNoIncludes ? "Include" : "Exclude", entity);
                 return false;
@@ -73,7 +74,9 @@ public class ContextExpressionEntityEvaluator implements ConditionalEntityEvalua
             return true;
         }
 
-        log.debug("All include/exclude context conditions are satisfied, including Entity");
+        if (log.isDebugEnabled()) {
+            log.debug("All include/exclude context conditions are satisfied, including entity " + entity);
+        }
         return true;
     }
 

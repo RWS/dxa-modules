@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ServiceModel.Syndication;
 using System;
-using Sdl.Web.Common.Interfaces;
+using Sdl.Web.Common.Configuration;
 
 namespace Sdl.Web.Modules.Core.Models
 {
@@ -21,7 +21,7 @@ namespace Sdl.Web.Modules.Core.Models
         /// </summary>
         /// <param name="localization">The context <see cref="Localization"/>.</param>
         /// <returns>The extracted syndication feed items; a concatentation of syndication feed items provided by <see cref="QueryResults"/> (if any).</returns>
-        public virtual IEnumerable<SyndicationItem> ExtractSyndicationFeedItems(ILocalization localization)
+        public virtual IEnumerable<SyndicationItem> ExtractSyndicationFeedItems(Localization localization)
         {
             return ConcatenateSyndicationFeedItems(ItemListElements, localization);
         }
