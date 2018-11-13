@@ -63,13 +63,13 @@
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Tridion.ContentDelivery.AmbientData">
+    <Reference Include="Tridion.ContentDelivery">
       <HintPath>..\packages\Sdl.Web.Delivery.$(SdlDeliveryVersion)\lib\net462\Tridion.ContentDelivery.AmbientData.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Tridion.SmartTarget">
       <HintPath>..\packages\Sdl.Web.Experience.9.0.0\lib\net462\Tridion.SmartTarget.dll</HintPath>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -101,11 +101,14 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>REM Deploy build artifacts to DXA Site (on development machines with DXA_SITE_DIR environment variable set)
+    <PostBuildEvent>copy $(SolutionDir)packages\Sdl.Web.Experience.9.0.0\lib\net462\*.* $(TargetDir)
+
+REM Deploy build artifacts to DXA Site (on development machines with DXA_SITE_DIR environment variable set)
 if defined DXA_SITE_DIR (
 xcopy "$(TargetDir)*.*" "%25DXA_SITE_DIR%25\bin" /S /Y
 xcopy "$(ProjectDir)Areas" "%25DXA_SITE_DIR%25\Areas" /S /I /Y
-)</PostBuildEvent>
+)
+</PostBuildEvent>
   </PropertyGroup>
   <Import Project="..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\build\net462\Sdl.Dxa.Framework.Web8.targets" Condition="Exists('..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\build\net462\Sdl.Dxa.Framework.Web8.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
