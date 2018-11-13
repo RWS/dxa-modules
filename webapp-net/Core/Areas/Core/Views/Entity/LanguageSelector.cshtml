@@ -3,7 +3,7 @@
 @model Configuration
 @{
     var siteLocalizations = WebRequestContext.Localization.SiteLocalizations;
-    var filteredLocalizations = new List<ILocalization>();
+    var filteredLocalizations = new List<Localization>();
     if (siteLocalizations.Count > 1)
     {
         var excludedLocalizations = new List<string>();
