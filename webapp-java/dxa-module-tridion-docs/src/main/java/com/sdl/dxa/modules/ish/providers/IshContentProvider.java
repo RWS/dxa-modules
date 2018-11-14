@@ -40,10 +40,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 import static com.sdl.webapp.common.util.FileUtils.isToBeRefreshed;
@@ -191,15 +189,9 @@ public class IshContentProvider extends DefaultContentProvider {
             } catch (IOException e) {
                 log.error("Unable to write local file: " + file.getAbsolutePath(), e);
             }
-        } else {
-            try {
-                data = Files.toByteArray(file);
-            } catch (IOException e) {
-                throw new NotFoundException("Unable to read locally stored file: " + file.getAbsolutePath(), e);
-            }
         }
 
-        return createStaticContentItem(data, binaryMeta);
+        return new StaticContentItem(MimeUtils.getMimeType(binaryMeta.getType()), file, false);
     }
 
     private byte[] getBinaryFromContentService(Integer publicationId, Integer binaryId) {
@@ -211,28 +203,8 @@ public class IshContentProvider extends DefaultContentProvider {
         try {
             return data.getBytes();
         } catch (IOException e) {
-            throw new IshServiceException("Unable to extract data from BinaryData object" + "["
+            throw new IshServiceException("Unable to extract data from BinaryData object ["
                     + publicationId + "-" + binaryId + "]", e);
         }
-    }
-
-    private StaticContentItem createStaticContentItem(final byte[] binaryData, final BinaryMeta binaryMeta) {
-        return new StaticContentItem() {
-            public long getLastModified() {
-                return 0;
-            }
-
-            public String getContentType() {
-                return MimeUtils.getMimeType(binaryMeta.getType());
-            }
-
-            public InputStream getContent() throws IOException {
-                return new ByteArrayInputStream(binaryData);
-            }
-
-            public boolean isVersioned() {
-                return false;
-            }
-        };
     }
 }

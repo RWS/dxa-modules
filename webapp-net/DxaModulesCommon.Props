@@ -9,10 +9,10 @@
 	-->
 
 	<PropertyGroup>		
-	    <DxaDataModelVersion>2.1.0-beta-201810171524</DxaDataModelVersion>
-		<DxaFrameworkVersion>2.1.0-beta-201810241403</DxaFrameworkVersion>
+	    <DxaDataModelVersion>2.1.0</DxaDataModelVersion>
+		<DxaFrameworkVersion>2.1.0</DxaFrameworkVersion>
         <SdlDeliveryVersion>11.0.0</SdlDeliveryVersion>
-		<AudienceManagerVersion>9.0.0-beta-201804031026</AudienceManagerVersion>
+		<AudienceManagerVersion>9.0.0</AudienceManagerVersion>
         <ExperienceManagerVersion>9.0.0</ExperienceManagerVersion>
 		<ContextClientVersion>11.0.0</ContextClientVersion>
   	</PropertyGroup>

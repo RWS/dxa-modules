@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <Import Project="..\DxaModulesCommon.Props" />
@@ -61,8 +61,8 @@
       <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net462\Sdl.Web.Mvc.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Sdl.Web.PublicContentApi">
-      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net462\Sdl.Web.PublicContentApi.dll</HintPath>
+    <Reference Include="Sdl.Tridion.Api.Client">
+      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net462\Sdl.Tridion.Api.Client.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sdl.Web.Tridion">
@@ -82,19 +82,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\CommonAssemblyInfo.cs">
+      <Link>CommonAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Controllers\ApiController.cs" />
     <Compile Include="Controllers\DynamicDocumentationPageController.cs" />
     <Compile Include="DynamicDocumentationModuleAreaRegistration.cs" />
+    <Compile Include="Exceptions\DynamicDocumentationException.cs" />
     <Compile Include="Localization\DynamicDocumentationLocalizationResolver.cs" />
     <Compile Include="Mapping\ModelBuilder.cs" />
+    <Compile Include="Models\Conditions.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\Publication.cs" />
     <Compile Include="Models\PublicationSiteMap.cs" />
     <Compile Include="Models\SiteMapUrlEntry.cs" />
     <Compile Include="Models\Topic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\CacheRegion.cs" />
     <Compile Include="Providers\ConditionProvider.cs" />
-    <Compile Include="Providers\DocsNavigationProvider.cs" />
     <Compile Include="Providers\PublicationProvider.cs" />
     <Compile Include="Providers\TocProvider.cs" />
   </ItemGroup>
@@ -105,32 +110,11 @@
     <None Include="Areas\DynamicDocumentation\Views\DynamicDocumentationPage\GeneralPage.cshtml" />
     <None Include="Areas\DynamicDocumentation\Views\Page\ErrorPage.cshtml" />
     <None Include="Areas\DynamicDocumentation\Views\web.config" />
-    <None Include="gui\.editorconfig" />
-    <None Include="gui\Jenkinsfile" />
-    <None Include="gui\nuget%40tmp\durable-0329cc35\powershellHelper.ps1" />
-    <None Include="gui\nuget%40tmp\durable-0329cc35\powershellScript.ps1" />
-    <None Include="gui\nuget%40tmp\durable-0329cc35\powershellWrapper.ps1" />
-    <None Include="gui\package.json" />
-    <None Include="gui\tsconfig.json" />
-    <None Include="gui\tslint.json" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="gui\build\gulp-tasks\package-project.js" />
-    <Content Include="gui\build\gulp-tasks\run-tslint.js" />
-    <Content Include="gui\build\gulp-tasks\serve.js" />
-    <Content Include="gui\gulpfile.js" />
-    <Content Include="gui\nuget%40tmp\durable-0329cc35\jenkins-log.txt" />
-    <Content Include="gui\pom.xml" />
-    <Content Include="gui\postcss.config.js" />
-    <Content Include="gui\src\index.html" />
-    <Content Include="gui\webpack.config.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="gui\src\Main.tsx" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

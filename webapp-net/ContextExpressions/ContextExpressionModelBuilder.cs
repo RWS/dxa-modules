@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using DD4T.ContentModel;
-using Sdl.Web.Common.Interfaces;
+using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Logging;
 using Sdl.Web.Common.Models;
 using Sdl.Web.DataModel;
@@ -21,12 +21,12 @@ namespace Sdl.Web.Modules.ContextExpressions
     public class ContextExpressionModelBuilder : IModelBuilder, IEntityModelBuilder
     {
         #region IModelBuilder members
-        public void BuildPageModel(ref PageModel pageModel, IPage page, IEnumerable<IPage> includes, ILocalization localization)
+        public void BuildPageModel(ref PageModel pageModel, IPage page, IEnumerable<IPage> includes, Localization localization)
         {
             // Nothing to do here
         }
 
-        public void BuildEntityModel(ref EntityModel entityModel, IComponentPresentation cp, ILocalization localization)
+        public void BuildEntityModel(ref EntityModel entityModel, IComponentPresentation cp, Localization localization)
         {
             using (new Tracer(entityModel, cp, localization))
             {
@@ -53,7 +53,7 @@ namespace Sdl.Web.Modules.ContextExpressions
             }
         }
 
-        public void BuildEntityModel(ref EntityModel entityModel, IComponent component, Type baseModelType, ILocalization localization)
+        public void BuildEntityModel(ref EntityModel entityModel, IComponent component, Type baseModelType, Localization localization)
         {
             // Nothing to do here
         }
@@ -67,7 +67,7 @@ namespace Sdl.Web.Modules.ContextExpressions
         /// <param name="entityModelData">The DXA R2 Data Model.</param>
         /// <param name="baseModelType">The base type for the Entity Model to build.</param>
         /// <param name="localization">The context <see cref="ILocalization"/>.</param>
-        public void BuildEntityModel(ref EntityModel entityModel, EntityModelData entityModelData, Type baseModelType, ILocalization localization)
+        public void BuildEntityModel(ref EntityModel entityModel, EntityModelData entityModelData, Type baseModelType, Localization localization)
         {
             using (new Tracer(entityModel, entityModelData, baseModelType, localization))
             {

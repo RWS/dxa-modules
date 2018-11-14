@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Sdl.Web.Common.Interfaces;
+using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Logging;
 using Sdl.Web.Common.Models;
 using Sdl.Web.DataModel;
@@ -21,7 +21,7 @@ namespace Sdl.Web.Modules.Ugc.Mapping
         private static readonly string CommentsEntityRegionExt = "CommentsEntityRegion";
 
         public void BuildPageModel(ref PageModel pageModel, PageModelData pageModelData, bool includePageRegions,
-            ILocalization localization)
+            Localization localization)
         {
             using (new Tracer(pageModel, pageModelData, localization))
             {
@@ -68,7 +68,7 @@ namespace Sdl.Web.Modules.Ugc.Mapping
             }
         }        
 
-        private static void AddCommentsViews(PageModel pageModel, RegionModel region, ILocalization localization, RegionModel ugcRegion)
+        private static void AddCommentsViews(PageModel pageModel, RegionModel region, Localization localization, RegionModel ugcRegion)
         {
             List<EntityModel> regionEntities = new List<EntityModel>();
             
@@ -116,7 +116,7 @@ namespace Sdl.Web.Modules.Ugc.Mapping
         }
 
         public void BuildEntityModel(ref EntityModel entityModel, EntityModelData entityModelData, Type baseModelType,
-            ILocalization localization)
+            Localization localization)
         {
             var ugcMetadata = UgcMetadata(entityModelData.ComponentTemplate?.Metadata);
             entityModel.SetExtensionData(ShowCommentsExtData, ShowComments(ugcMetadata));
@@ -152,7 +152,7 @@ namespace Sdl.Web.Modules.Ugc.Mapping
             return ugcRegion;
         }
 
-        private static UgcComments CreateUgcCommentsEntity(ILocalization localization, string modelId, ItemType itemType)
+        private static UgcComments CreateUgcCommentsEntity(Localization localization, string modelId, ItemType itemType)
         {
             var mvcData = new Common.Models.MvcData("Ugc:Ugc:UgcComments");
             mvcData.ControllerAreaName = "Ugc";
@@ -166,7 +166,7 @@ namespace Sdl.Web.Modules.Ugc.Mapping
             };
         }
 
-        private static UgcPostCommentForm CreateUgcPostCommentEntity(ILocalization localization, string modelId, ItemType itemType, ContentModelData postFormConfig)
+        private static UgcPostCommentForm CreateUgcPostCommentEntity(Localization localization, string modelId, ItemType itemType, ContentModelData postFormConfig)
         {
             var mvcData = new Common.Models.MvcData("Ugc:Ugc:UgcPostCommentForm");
             mvcData.ControllerAreaName = "Ugc";

@@ -1,14 +1,18 @@
-﻿using Newtonsoft.Json.Linq;
-using Sdl.Web.Common.Models;
-using Sdl.Web.Tridion.PCAClient;
-using Sdl.Web.Mvc.Configuration;
-using Sdl.Web.PublicContentApi;
-using Sdl.Web.PublicContentApi.ContentModel;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
+using Sdl.Tridion.Api.Client;
+using Sdl.Tridion.Api.Client.ContentModel;
+using Sdl.Web.Common.Configuration;
+using Sdl.Web.Common.Interfaces;
+using Sdl.Web.Common.Logging;
+using Sdl.Web.Common.Models;
+using Sdl.Web.DataModel;
 using Sdl.Web.Modules.TridionDocsMashup.Models.Widgets;
-using System;
-using System.Collections;
+using Sdl.Web.Mvc.Configuration;
+using Sdl.Web.Tridion.ApiClient;
+using Sdl.Web.Tridion.Mapping;
 
 namespace Sdl.Web.Modules.TridionDocsMashup.Client
 {
@@ -19,11 +23,11 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
     /// </summary>
     public class PublicContentApiClient
     {
-        private readonly IPublicContentApi _publicContentApi;
+        private readonly IApiClient _publicContentApi;
 
         public PublicContentApiClient()
         {
-            _publicContentApi = PCAClientFactory.Instance.CreateClient();
+            _publicContentApi = ApiClientFactory.Instance.CreateClient();
 
             // Explicitly tell PCA client to only return R2 models
             _publicContentApi.DefaultModelType = DataModelType.R2;
@@ -91,17 +95,17 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
             InputItemFilter filter = new InputItemFilter
             {
                 NamespaceIds = new List<ContentNamespace> { ContentNamespace.Docs },
-                ItemTypes = new List<PublicContentApi.ContentModel.FilterItemType> { PublicContentApi.ContentModel.FilterItemType.PAGE },
+                ItemTypes = new List<FilterItemType> { FilterItemType.PAGE },
                 And = customMetaFilters
             };
                                 
             var results = _publicContentApi.ExecuteItemQuery(
                 filter,
-                new InputSortParam { Order = SortOrderType.Descending, SortBy = SortFieldType.LAST_PUBLISH_DATE },
+                new InputSortParam { Order = SortOrderType.Ascending, SortBy = SortFieldType.TITLE },
                 new Pagination { First = maxItems },
                 null,
-                ContentIncludeMode.IncludeAndRender,
-                includeContainerItems: true,
+                ContentIncludeMode.IncludeJsonAndRender,
+                includeContainerItems: false,
                 contextData: null
                 );
 
@@ -117,43 +121,39 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
 
             if (results != null)
             {
-                foreach (var edge in results)
+                foreach (ItemEdge edge in results)
                 {
                     Page page = edge.Node as Page;
-
-                    // Based on the GraphQl's results and considering R2 model , we need to look into the below path to get the topic's title and body . 
-                    // page >  containerItems > componentPresentation > rawContent > data > Content  topicTitle and topicBody
-
-                    if (page != null)
+                    if (page == null)
                     {
-                        var topic = new Topic();
-
-                        if (page.ContainerItems != null)
-                        {
-                            foreach (ComponentPresentation componentPresentation in page.ContainerItems)
-                            {
-                                IDictionary data = componentPresentation?.RawContent?.Data;
-
-                                if (data != null)
-                                {
-                                    topic.Id = (data["XpmMetadata"] as JObject)?.GetValue("ComponentID")?.ToString();
-
-                                    topic.Link = GetFullyQualifiedUrlForTopic(data["LinkUrl"]?.ToString());
-
-                                    var content = data["Content"] as JObject;
-
-                                    if (content != null)
-                                    {
-                                        topic.Title = content.GetValue("topicTitle")?.ToString();
-                                        topic.Body = content.GetValue("topicBody")?.ToString();
-                                    }
-                                }
-                             
-                            }
-                        }
-
-                        topics.Add(topic);
+                        Log.Debug("Node not is not a Page, skipping.");
+                        continue;
                     }
+
+                    int docsPublicationId = (int)edge.Node.PublicationId;
+                    Localization docsLocalization = new DocsLocalization(docsPublicationId);
+                    docsLocalization.EnsureInitialized();
+
+                    // Deserialize Page Content as R2 Data Model
+                    string pageModelJson = page.RawContent.Content;
+                    PageModelData pageModelData = JsonConvert.DeserializeObject<PageModelData>(pageModelJson, DataModelBinder.SerializerSettings);
+
+                    // Extract the R2 Data Model of the Topic and convert it to a Strongly Typed View Model
+                    EntityModelData topicModelData = pageModelData.Regions[0].Entities[0];
+                    EntityModel topicModel = ModelBuilderPipeline.CreateEntityModel(topicModelData, null, docsLocalization);
+
+                    Topic topic = topicModel as Topic;
+                    if (topic == null)
+                    {
+                        Log.Warn($"Unexpected View Model type for {topicModel}: '{topicModel.GetType().FullName}'");
+                        continue;
+                    }
+
+                    // Post-process the Strongly Typed Topic
+                    topic.Id = topicModelData.XpmMetadata["ComponentID"] as string;
+                    topic.Link = GetFullyQualifiedUrlForTopic(topicModelData.LinkUrl); 
+
+                    topics.Add(topic);
                 }
             }
 

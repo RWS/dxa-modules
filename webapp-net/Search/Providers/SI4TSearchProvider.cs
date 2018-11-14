@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Specialized;
 using System.Globalization;
-using Sdl.Web.Common.Interfaces;
+using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Logging;
 using Sdl.Web.Common.Models;
 using Sdl.Web.Modules.Search.Models;
@@ -15,7 +15,7 @@ namespace Sdl.Web.Modules.Search.Providers
     public abstract class SI4TSearchProvider : ISearchProvider
     {
         #region ISearchProvider members
-        public void ExecuteQuery(SearchQuery searchQuery, Type resultType, ILocalization localization)
+        public void ExecuteQuery(SearchQuery searchQuery, Type resultType, Localization localization)
         {
             using (new Tracer(searchQuery, resultType, localization))
             {
@@ -40,7 +40,7 @@ namespace Sdl.Web.Modules.Search.Providers
         }
         #endregion
 
-        protected virtual string GetSearchIndexUrl(ILocalization localization)
+        protected virtual string GetSearchIndexUrl(Localization localization)
         {
             // First try the new search.queryURL setting provided by DXA 1.3 TBBs if the Search Query URL can be obtained from Topology Manager.
             string result = localization.GetConfigValue("search.queryURL");
@@ -66,7 +66,7 @@ namespace Sdl.Web.Modules.Search.Providers
             return searchItem;
         }
 
-        protected virtual NameValueCollection SetupParameters(SearchQuery searchQuery, ILocalization localization)
+        protected virtual NameValueCollection SetupParameters(SearchQuery searchQuery, Localization localization)
         {
             NameValueCollection result = new NameValueCollection(searchQuery.QueryStringParameters);
             result["fq"] = "publicationid:" + localization.Id; // TODO: What about CM URI scheme?

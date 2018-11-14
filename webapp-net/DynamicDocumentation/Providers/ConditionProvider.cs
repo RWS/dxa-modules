@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
+using Sdl.Tridion.Api.Client.ContentModel;
 using Sdl.Web.Common;
-using Sdl.Web.PublicContentApi.ContentModel;
-using Sdl.Web.Tridion.PCAClient;
+using Sdl.Web.Common.Configuration;
+using Sdl.Web.Modules.DynamicDocumentation.Models;
+using Sdl.Web.Tridion.ApiClient;
 
 namespace Sdl.Web.Modules.DynamicDocumentation.Providers
 {
@@ -14,7 +17,6 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Providers
     {
         private static readonly string ConditionUsed = "conditionsused.generated.value";
         private static readonly string ConditionMetadata = "conditionmetadata.generated.value";
-        private static readonly string ConditionValues = "values";
 
         private class Condition
         {
@@ -26,7 +28,20 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Providers
             public string[] Values { get; set; }
         }
 
-        public string GetConditions(int publicationId)
+        public string GetConditionsJson(int publicationId) 
+            => JsonConvert.SerializeObject(GetConditions(publicationId));
+
+        public Dictionary<string, object> GetMergedConditions(Conditions conditions)
+        {
+            if (conditions.UserConditions == null)
+                return new Dictionary<string, object>();
+            return GetConditions(conditions.PublicationId)
+                .ToDictionary(x => x.Key,
+                    x =>
+                        conditions.UserConditions.ContainsKey(x.Key) ? conditions.UserConditions[x.Key] : x.Value.Values);
+        }
+
+        private Dictionary<string, Condition> GetConditions(int publicationId)
         {
             var conditionUsed = GetMetadata(publicationId, ConditionUsed);
             var conditionMetadata = GetMetadata(publicationId, ConditionMetadata);
@@ -38,24 +53,30 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Providers
             {
                 d2[v.Key].Values = v.Value;
             }
-            return JsonConvert.SerializeObject(d2);
+            return d2;
         }
 
         private string GetMetadata(int publicationId, string metadataName)
         {
             try
-            {                
-                var client = PCAClientFactory.Instance.CreateClient();
-                var publication = client.GetPublication(ContentNamespace.Docs, publicationId, $"requiredMeta:{metadataName}", null);
-                if (publication.CustomMetas == null || publication.CustomMetas.Edges.Count == 0)
-                {
-                    throw new DxaItemNotFoundException(
-                        $"Metadata '{metadataName}' is not found for publication {publicationId}.");
-                }
+            {
+                return SiteConfiguration.CacheProvider.GetOrAdd($"{publicationId}-{metadataName}",
+                    CacheRegion.Conditions,
+                    () =>
+                    {
+                        var client = ApiClientFactory.Instance.CreateClient();
+                        var publication = client.GetPublication(ContentNamespace.Docs, publicationId,
+                            $"requiredMeta:{metadataName}", null);
+                        if (publication.CustomMetas == null || publication.CustomMetas.Edges.Count == 0)
+                        {
+                            throw new DxaItemNotFoundException(
+                                $"Metadata '{metadataName}' is not found for publication {publicationId}.");
+                        }
 
-                object metadata = publication.CustomMetas.Edges[0].Node.Value;
-                string metadataString = metadata != null ? (string)metadata : "{}";
-                return metadataString;
+                        object metadata = publication.CustomMetas.Edges[0].Node.Value;
+                        string metadataString = metadata != null ? (string) metadata : "{}";
+                        return metadataString;
+                    });
             }
             catch (Exception)
             {

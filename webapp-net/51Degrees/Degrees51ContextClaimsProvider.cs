@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Threading;
 using System.Web;
 using FiftyOne.Foundation.Mobile.Detection;
+using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Interfaces;
 using Sdl.Web.Common.Logging;
 using Sdl.Web.Context.Api.Types;
@@ -130,7 +131,7 @@ namespace Sdl.Web.Modules.Degrees51
             return false;
         }
      
-        public IDictionary<string, object> GetContextClaims(string aspectName, ILocalization localization)
+        public IDictionary<string, object> GetContextClaims(string aspectName, Localization localization)
         {
             try
             {

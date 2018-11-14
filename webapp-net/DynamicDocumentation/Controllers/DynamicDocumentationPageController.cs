@@ -14,7 +14,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
     /// </summary>
     [RouteArea("DynamicDocumentation")]
     public class DynamicDocumentationPageController : Mvc.Controllers.PageController
-    {
+    {       
         [Route("~/")]
         [Route("~/home")]
         [Route("~/publications/{*content}")]
@@ -51,12 +51,12 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
             {
                 try
                 {
-                    ILocalization localization = SetupLocalization(publicationId);
+                    Common.Configuration.Localization localization = SetupLocalization(publicationId);
 
                     PageModel pageModel;
                     try
                     {
-                        pageModel = ContentProvider.GetPageModel(pageId, localization);
+                        pageModel = ContentProviderExt.GetPageModel(pageId, localization);
                     }
                     catch (DxaItemNotFoundException ex)
                     {
@@ -91,13 +91,15 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
             }
         }
 
-        protected ILocalization SetupLocalization(int publicationId)
+        protected Common.Configuration.Localization SetupLocalization(int publicationId)
         {
             PublicationProvider provider = new PublicationProvider();
             provider.CheckPublicationOnline(publicationId);
-            ILocalization localization = WebRequestContext.Localization;
+            Common.Configuration.Localization localization = WebRequestContext.Localization;
             localization.Id = publicationId.ToString();
             return localization;
         }
+
+        private IContentProviderExt ContentProviderExt => (IContentProviderExt)ContentProvider;
     }
 }

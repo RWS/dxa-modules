@@ -10,16 +10,12 @@
         {
             if (Model.DisplayContentAs.ToLower() == "embedded content")
             {
-                <div class="content">
-                    <div @Html.DxaPropertyMarkup(() => Model.Topics)>
-                        @Html.Raw(@topic.Body)
-                    </div>
-                </div>
+                @Html.DxaEntity(topic)
             }
             else
             {
                 <div @Html.DxaPropertyMarkup(() => Model.Topics)>
-                    <a href="@topic.Link">@topic.Title</a>
+                    <a href="@topic.Link" target="_blank">@topic.Title</a>
                 </div>
 
             }

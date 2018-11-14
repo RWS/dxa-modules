@@ -42,6 +42,10 @@
       <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net462\Sdl.Web.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Sdl.Web.DataModel">
+      <HintPath>..\packages\Sdl.Dxa.DataModel.$(DxaDataModelVersion)\lib\net462\Sdl.Web.DataModel.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Sdl.Web.Mvc">
       <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net462\Sdl.Web.Mvc.dll</HintPath>
       <Private>False</Private>
@@ -50,8 +54,8 @@
       <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net462\Sdl.Web.Tridion.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Sdl.Web.PublicContentApi">
-      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net462\Sdl.Web.PublicContentApi.dll</HintPath>
+    <Reference Include="Sdl.Tridion.Api.Client">
+      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net462\Sdl.Tridion.Api.Client.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -75,7 +79,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Areas\TridionDocsMashup\Views\Entity\Bicycle.cshtml" />
-    <None Include="Areas\TridionDocsMashup\Views\Region\DynamicWidget.cshtml" />
+    <None Include="Areas\TridionDocsMashup\Views\Entity\Topic.cshtml" />
+    <None Include="Areas\TridionDocsMashup\Views\Region\Bicycle.cshtml" />
+    <None Include="Areas\TridionDocsMashup\Views\Region\Topics.cshtml" />
     <None Include="Areas\TridionDocsMashup\Views\TridionDocsMashup\DynamicWidget.cshtml" />
     <None Include="Areas\TridionDocsMashup\Views\TridionDocsMashup\StaticWidget.cshtml" />
     <None Include="Areas\TridionDocsMashup\Views\web.config" />

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace Sdl.Web.Modules.TridionDocsMashup.Models.Widgets
 {
     [Serializable]
-    [SemanticEntity(EntityName = "Content")]
+    [SemanticEntity(EntityName = "DynamicWidget")]
     public class DynamicWidget : EntityModel
     {
         [SemanticProperty("ProductViewModel")]
