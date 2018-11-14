@@ -1,0 +1,71 @@
+/**
+ *
+ *  Copyright (c) 2014 All Rights Reserved by the SDL Group.
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ *
+ */
+
+/* Graphene overwrites for the DropdownList Control */
+
+@import (reference) "~theme-styles";
+div.sdl-dropdownlist {
+    @bgColor: #fff;
+    @itemHeight: 36px;
+    font-family: @fontFamily, @fontFamilyFallback;
+    font-size: @fontSize;
+    color: @neutralColor1;
+    border-color: @neutralColor4;
+    height: @itemHeight;
+    line-height: @itemHeight;
+    border-radius: 4px;
+    box-shadow: none;
+    padding: 0 10px;
+    cursor: pointer;
+    .icon-select(16px);
+    &.open {
+        border-color: @neutralColor4;
+    }
+    > span {
+        margin-right: 12px;
+    }
+    >ul {
+        border-color: @neutralColor4;
+        li {
+            height: @itemHeight;
+            line-height: @itemHeight;
+            margin: 0;
+            padding: 0 10px;
+            &.selected {
+                border-style: none;
+                background-color: @bgColor;
+            }
+            &:hover {
+                border-style: none;
+                color: @neutralColor6;
+                background-color: @accentColor1;
+            }
+            &:last-child {
+                margin: 0;
+            }
+        }
+    }
+    &:after {
+        background-image: none;
+        top: 0;
+        .sdl-dita-delivery-app.rtl & {
+            left: 5px;
+            right: auto;
+        }
+    }
+}

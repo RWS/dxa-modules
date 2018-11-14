@@ -1,0 +1,75 @@
+/**
+ *
+ *  Copyright (c) 2014 All Rights Reserved by the SDL Group.
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ *
+ */
+
+/* Graphene overwrites for the Button Control */
+
+@import (reference) "~theme-styles";
+button.sdl-button {
+    &.graphene {
+        .create-button-definition(@color, @backgroundColor) {
+            color: @color;
+            background-color: @backgroundColor;
+            &:hover {
+                background-color: darken(@backgroundColor, 7%);
+            }
+            &[disabled] {
+                background-color: @backgroundColor;
+            }
+        }
+        &.sdl-button-purpose-confirm {
+            .create-button-definition(#FFF, @accentColor1);
+        }
+        &.sdl-button-purpose-general {
+            .create-button-definition(@neutralColor1, @neutralColor5);
+        }
+        &.sdl-button-purpose-critical {
+            .create-button-definition(#FFF, @accentColor5);
+        }
+        &.sdl-button-purpose-ghost {
+            color: @accentColor1;
+            background-color: inherit;
+            border-color: @accentColor1;
+            box-shadow: none;
+            &:hover {
+                border-color: darken(@accentColor1, 5%);
+                color: darken(@accentColor1, 5%);
+            }
+            &[disabled] {
+                border-color: @accentColor1;
+                color: @accentColor1;
+            }
+        }
+    }
+}
+
+.sdl-button-text {
+    padding: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: inherit;
+
+    &:hover {
+        cursor: pointer;
+    }
+    &:focus span {
+        position: relative;
+        top: 0;
+        left: 0;
+    }
+}
