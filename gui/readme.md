@@ -47,6 +47,28 @@ gulp test-coverage --browsers Chrome
 gulp test-coverage --browsers "Chrome,IE,Firefox,PhantomJS"
 ```
 
+## Setting Up GUI Development
+
+### Development over existing data
+There is ability to develop over existing data.
+To do this you need to have DXA Web Application with Dynamic Documentation Module installed and connected to appropriate Content Delivery.
+Dynamic Documentation exposes particular REST API that GUI can consume. To setup that you need:
+
+1. Open gulpfile.js. In CD Layout it lies in ```/[path to cd layout]/cd-layout-net/modules/DynamicDocumentation/web/gui/``` or next to this readme.md file. 
+2. Find ```proxies``` section in ```buildOptions``` object definition. ```proxies``` section is a list of proxy definitions
+3. Add proxy definition:
+
+```
+var buildOptions = {
+    ...
+    proxies: [{
+        from: "/api",
+        to: "http://url.to.your.api/api"
+    }]
+}
+```
+4. Where ```from``` is a route(e.g. ), and ```to``` is the REST API root url where all requests will be rerouted to.
+
 ## Setting up Visual Studio Code
 
 Preffered IDE for GUI development is [Visual Studio Code](https://code.visualstudio.com/).

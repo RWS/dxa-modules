@@ -50,10 +50,12 @@ const buildOptions = {
     httpServer: 9005
   },
   proxies: [
+    /**
+     * Proxy configuration example. See readme.md
     {
       from: "/api",
       to: "http://ditadelivery01.ams.dev/test/api"
-    }
+    }*/
   ]
 };
 let webpackInstance = {
