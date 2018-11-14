@@ -105,15 +105,15 @@ public class TridionDocsPublicContentApiClient implements ITridionDocsClient {
         filter.setItemTypes(Collections.singletonList(com.sdl.web.pca.client.contentmodel.generated.FilterItemType.PAGE));
 
         InputSortParam inputSortParam = new InputSortParam();
-        inputSortParam.setOrder(SortOrderType.Descending);
-        inputSortParam.setSortBy(SortFieldType.LAST_PUBLISH_DATE);
+        inputSortParam.setOrder(SortOrderType.Ascending);
+        inputSortParam.setSortBy(SortFieldType.TITLE);
 
         Pagination pagination = new Pagination();
         pagination.setFirst(maxItems);
 
         ContextData contextData = getContextData();
 
-        ItemConnection results = _publicContentApi.executeItemQuery(filter, inputSortParam, pagination, null, ContentIncludeMode.INCLUDE_AND_RENDER , true , contextData);
+        ItemConnection results = _publicContentApi.executeItemQuery(filter, inputSortParam, pagination, null, ContentIncludeMode.INCLUDE_DATA_AND_RENDER , false , contextData);
 
         return results;
     }
