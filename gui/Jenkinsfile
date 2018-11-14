@@ -31,6 +31,14 @@ pipeline {
                 }
             }
         }
+
+        stage('Publish to Nexus') {
+            steps {
+                dir("gui") {
+                    powershell 'npm publish --registry https://nexus.sdl.com/content/repositories/npm-internal/ --access=public'
+                }
+            }
+        }
     }
 
     post {
