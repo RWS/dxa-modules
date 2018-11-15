@@ -24,15 +24,7 @@ pipeline {
     }
 
     stages {
-        stage('Building DD GUI') {
-            steps {
-                dir("gui") {
-                    powershell 'mvn clean package'
-                }
-            }
-        }
-
-        stage('Publish to Nexus') {
+        stage('Building GUI and publishing to Nexus') {
             steps {
                 dir("gui") {
                     powershell 'mvn deploy'
