@@ -27,7 +27,10 @@ pipeline {
         stage('Building GUI and publishing to Nexus') {
             steps {
                 dir("gui") {
-                    powershell 'mvn clean deploy'
+                    withCredentials([file(credentialsId: 'npm-deployer-secret', variable: 'NPM_DEPLOYER_SECRET')]) {
+                        powershell '$content = Get-Content -Raw -Path $env:NPM_DEPLOYER_SECRET; Set-Content -Path .\.npmrc -Value $content'
+                        powershell 'mvn clean deploy'
+                    }
                 }
             }
         }
