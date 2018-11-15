@@ -17,6 +17,7 @@ import com.sdl.dxa.modules.model.TSI2525.CacheEntityModel;
 import com.sdl.dxa.modules.model.TSI2525.NoCacheEntityModel;
 import com.sdl.dxa.modules.model.TSI2525.NoCachePageModel;
 import com.sdl.dxa.modules.model.TSI2844.Tsi2844TestEntity;
+import com.sdl.dxa.modules.model.TSI2844ext.Tsi2844extPageModel;
 import com.sdl.dxa.modules.model.TSI811.Tsi811PageModel;
 import com.sdl.dxa.modules.model.TSI811.Tsi811TestEntity;
 import com.sdl.dxa.modules.model.TSI811.Tsi811TestKeyword;
@@ -78,6 +79,7 @@ import org.springframework.stereotype.Component;
 
         // https://jira.sdl.com/browse/TSI-2844
         @RegisteredViewModel(viewName = "TSI2844Test", modelClass = Tsi2844TestEntity.class),
+        @RegisteredViewModel(viewName = "TSI2844extTestPage", modelClass = Tsi2844extPageModel.class),
 
         // https://jira.sdl.com/browse/TSI-3010
         @RegisteredViewModel(viewName = "TSI3010Test", modelClass = Article.class),
