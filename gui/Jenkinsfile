@@ -27,7 +27,8 @@ pipeline {
         stage('Building GUI and publishing to Nexus') {
             steps {
                 dir("gui") {
-                    powershell 'mvn deploy'
+                    powershell 'mvn clean package'
+                    powershell 'npm publish --registry https://nexus.sdl.com/content/repositories/npm-internal/ --access=public'
                 }
             }
         }
