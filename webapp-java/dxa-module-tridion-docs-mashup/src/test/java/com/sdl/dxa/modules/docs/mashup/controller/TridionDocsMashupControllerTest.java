@@ -7,6 +7,7 @@ import com.sdl.dxa.modules.docs.mashup.models.widgets.StaticWidget;
 import com.sdl.dxa.modules.docs.mashup.models.widgets.Topic;
 import com.sdl.web.pca.client.exception.GraphQLClientException;
 import com.sdl.webapp.common.api.WebRequestContext;
+import com.sdl.webapp.common.api.content.ContentProvider;
 import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.api.model.*;
 import com.sdl.webapp.common.api.model.region.RegionModelImpl;
@@ -16,9 +17,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.mock.web.MockHttpServletRequest;
 
@@ -43,6 +42,9 @@ public class TridionDocsMashupControllerTest {
 	
     @Mock
     private WebRequestContext webRequestContext;
+    
+    @Mock
+    private ContentProvider contentProvider;
 
     @Mock
     private Localization localization;
@@ -50,14 +52,14 @@ public class TridionDocsMashupControllerTest {
     @Mock
     private ITridionDocsClient tridionDocsClient;
 
-    @InjectMocks
-    @Spy
     TridionDocsMashupController controller;
 
     private ExpectedException thrown = ExpectedException.none();
 
     @Before
     public void init() throws IOException, GraphQLClientException {
+        controller  = new TridionDocsMashupController(webRequestContext, null ,contentProvider, null, tridionDocsClient);
+        
         Topic topic = new Topic();
         topic.setTitle(TOPIC_TITLE);
         List<Topic> topics = new ArrayList<>();
@@ -65,7 +67,7 @@ public class TridionDocsMashupControllerTest {
 
         when(webRequestContext.getLocalization()).thenReturn(localization);
         when(localization.getCulture()).thenReturn("de");
-        when(tridionDocsClient.getTridionDocsTopicsByKeywords(anyMapOf(String.class, KeywordModel.class), anyInt())).thenReturn(topics);
+        when(tridionDocsClient.getTopicsByKeywords(anyMapOf(String.class, KeywordModel.class), anyInt())).thenReturn(topics);
     }
 
     private Map<String, KeywordModel> getTestKeywords() {

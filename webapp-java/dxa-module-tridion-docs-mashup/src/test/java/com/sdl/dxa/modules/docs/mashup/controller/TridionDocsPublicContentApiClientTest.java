@@ -1,15 +1,18 @@
 package com.sdl.dxa.modules.docs.mashup.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sdl.dxa.modules.docs.mashup.client.TridionDocsPublicContentApiClient;
-import com.sdl.dxa.tridion.pcaclient.ApiClientProvider;
+import com.sdl.web.pca.client.exception.GraphQLClientException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 import com.sdl.webapp.common.api.WebRequestContext;
+import com.sdl.webapp.common.api.localization.Localization;
+import java.io.IOException;
+import org.junit.Before;
+import static org.mockito.Mockito.when;
 
 /**
  * Test for TridionDocsPublicContentApiClient class.
@@ -19,13 +22,26 @@ public class TridionDocsPublicContentApiClientTest {
 
     @Mock
     private WebRequestContext webRequestContext;
+
+    @Mock
+    private com.sdl.web.pca.client.ApiClient apiClient;
+
+    @Mock
+    private ObjectMapper objectMapper;
     
     @Mock
-    private ApiClientProvider pcaClientProvider;
+    private Localization localization;
 
-    @InjectMocks
-    @Spy
     TridionDocsPublicContentApiClient tridionDocsPublicContentApiClient;
+
+    @Before
+    public void init() throws IOException, GraphQLClientException {           
+        when(webRequestContext.getLocalization()).thenReturn(localization);
+        when(localization.getConfiguration(TridionDocsPublicContentApiClient.TOPICS_URL_PREFIX_CONFIGNAME)).thenReturn("http://test.com");
+        when(localization.getConfiguration(TridionDocsPublicContentApiClient.TOPICS_BINARYURL_PREFIX_CONFIGNAME)).thenReturn("http://test.com/binary");
+        
+        tridionDocsPublicContentApiClient = new TridionDocsPublicContentApiClient(webRequestContext, apiClient, objectMapper);
+    }
 
     @Test
     public void getFullyQualifiedUrlForTopicTests() {

@@ -1,5 +1,6 @@
 package com.sdl.dxa.modules.docs.mashup.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sdl.dxa.modules.docs.localization.DocsLocalization;
 import com.sdl.dxa.modules.docs.mashup.client.*;
 import com.sdl.dxa.modules.docs.mashup.models.products.Product;
@@ -42,21 +43,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class TridionDocsMashupController extends EntityController {
 
     private final WebRequestContext webRequestContext;
-    private final ApiClientProvider pcaClientProvider;
     private final ContentProvider contentProvider;
     private ITridionDocsClient tridionDocsClient;
 
     @Autowired
-    public TridionDocsMashupController(WebRequestContext webRequestContext, ApiClientProvider pcaClientProvider, ContentProvider contentProvider) {
+    public TridionDocsMashupController(WebRequestContext webRequestContext, ApiClientProvider pcaClientProvider, ContentProvider contentProvider, ObjectMapper objectMapper) {
         this.webRequestContext = webRequestContext;
-        this.pcaClientProvider = pcaClientProvider;
         this.contentProvider = contentProvider;
+        
+        this.tridionDocsClient = new TridionDocsPublicContentApiClient(this.webRequestContext, pcaClientProvider.getClient(), objectMapper);
     }
 
     // Used only by Unit Tests to pass a mocked WebRequestContext and a mocked ITridionDocsClient
-    public TridionDocsMashupController(WebRequestContext webRequestContext, ApiClientProvider pcaClientProvider, ContentProvider contentProvider, ITridionDocsClient tridionDocsClient) {
+    public TridionDocsMashupController(WebRequestContext webRequestContext, ApiClientProvider pcaClientProvider, ContentProvider contentProvider, ObjectMapper objectMapper, ITridionDocsClient tridionDocsClient) {
         this.webRequestContext = webRequestContext;
-        this.pcaClientProvider = pcaClientProvider;
         this.contentProvider = contentProvider;
         this.tridionDocsClient = tridionDocsClient;
     }
@@ -70,11 +70,8 @@ public class TridionDocsMashupController extends EntityController {
             StaticWidget staticWidget = (StaticWidget) enrichedModel;
 
             if (validate(staticWidget.getKeywords(), staticWidget.getMaxItems())) {
-                if (tridionDocsClient == null) {
-                    tridionDocsClient = new TridionDocsPublicContentApiClient(this.webRequestContext, this.pcaClientProvider);
-                }
 
-                List<Topic> topics = tridionDocsClient.getTridionDocsTopicsByKeywords(staticWidget.getKeywords(), staticWidget.getMaxItems());
+                List<Topic> topics = tridionDocsClient.getTopicsByKeywords(staticWidget.getKeywords(), staticWidget.getMaxItems());
 
                 staticWidget.setTopics(topics);
             }
@@ -82,10 +79,6 @@ public class TridionDocsMashupController extends EntityController {
             DynamicWidget dynamicWidget = (DynamicWidget) enrichedModel;
 
             List<Topic> topics = new ArrayList<>();
-
-            if (tridionDocsClient == null) {
-                tridionDocsClient = new TridionDocsPublicContentApiClient(this.webRequestContext, this.pcaClientProvider);
-            }
 
             // There are multiple regions in a page.
             // Each region contains entities and every entity has a view.
@@ -120,7 +113,7 @@ public class TridionDocsMashupController extends EntityController {
                                 }
 
                                 if (!keywords.isEmpty()) {
-                                    topics = tridionDocsClient.getTridionDocsTopicsByKeywords(keywords, dynamicWidget.getMaxItems());
+                                    topics = tridionDocsClient.getTopicsByKeywords(keywords, dynamicWidget.getMaxItems());
                                 }
                             }
 

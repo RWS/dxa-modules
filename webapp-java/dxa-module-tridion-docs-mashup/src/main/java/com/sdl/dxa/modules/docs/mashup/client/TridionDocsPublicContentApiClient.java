@@ -1,24 +1,26 @@
 package com.sdl.dxa.modules.docs.mashup.client;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sdl.dxa.api.datamodel.model.EntityModelData;
+import com.sdl.dxa.api.datamodel.model.PageModelData;
 import com.sdl.dxa.modules.docs.mashup.models.widgets.Topic;
 import com.sdl.web.pca.client.ApiClient;
-import com.sdl.web.pca.client.contentmodel.ContextData;
 import com.sdl.web.pca.client.contentmodel.Pagination;
 import com.sdl.web.pca.client.contentmodel.enums.ContentIncludeMode;
 import com.sdl.web.pca.client.contentmodel.generated.ClaimValue;
 import com.sdl.web.pca.client.contentmodel.generated.ClaimValueType;
-import com.sdl.web.pca.client.contentmodel.generated.ComponentPresentation;
 import com.sdl.web.pca.client.contentmodel.generated.CriteriaScope;
 import com.sdl.web.pca.client.contentmodel.generated.CustomMetaValueType;
 import com.sdl.web.pca.client.contentmodel.generated.InputCustomMetaCriteria;
 import com.sdl.web.pca.client.contentmodel.generated.InputItemFilter;
 import com.sdl.web.pca.client.contentmodel.generated.InputSortParam;
-import com.sdl.web.pca.client.contentmodel.generated.Item;
 import com.sdl.web.pca.client.contentmodel.generated.ItemConnection;
 import com.sdl.web.pca.client.contentmodel.generated.ItemEdge;
-import com.sdl.dxa.tridion.pcaclient.ApiClientProvider;
+import com.sdl.web.pca.client.contentmodel.enums.ContentType;
+import com.sdl.web.pca.client.contentmodel.enums.DataModelType;
+import com.sdl.web.pca.client.contentmodel.enums.ModelServiceLinkRendering;
+import com.sdl.web.pca.client.contentmodel.enums.TcdlLinkRendering;
 import com.sdl.web.pca.client.contentmodel.generated.Page;
-import com.sdl.web.pca.client.contentmodel.generated.RawContent;
 import com.sdl.web.pca.client.contentmodel.generated.SortFieldType;
 import com.sdl.web.pca.client.contentmodel.generated.SortOrderType;
 import com.sdl.web.pca.client.exception.GraphQLClientException;
@@ -33,6 +35,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -43,18 +47,30 @@ import java.util.regex.Pattern;
 @SuppressWarnings("unchecked")
 public class TridionDocsPublicContentApiClient implements ITridionDocsClient {
 
-    private ApiClient _publicContentApi;
-    private WebRequestContext _webRequestContext;
+    private final ApiClient _apiClient;
+    private final WebRequestContext _webRequestContext;
+    private final ObjectMapper _objectMapper;
+    private static final Logger LOG = LoggerFactory.getLogger(TridionDocsPublicContentApiClient.class);
 
-    public TridionDocsPublicContentApiClient(WebRequestContext webRequestContext, ApiClientProvider pcaClientProvider) {
+    public static final String TOPICS_URL_PREFIX_CONFIGNAME = "tridiondocsmashup.PrefixForTopicsUrl";
+    public static final String TOPICS_BINARYURL_PREFIX_CONFIGNAME = "tridiondocsmashup.PrefixForBinariesUrl";
+
+    public TridionDocsPublicContentApiClient(WebRequestContext webRequestContext, ApiClient apiClient, ObjectMapper objectMapper) {
 
         _webRequestContext = webRequestContext;
-        
-        _publicContentApi = pcaClientProvider.getClient();
+        _objectMapper = objectMapper;
+        _apiClient = apiClient;
+
+        _apiClient.setDefaultContentType(ContentType.MODEL);
+        _apiClient.setDefaultModelType(DataModelType.R2);
+        _apiClient.setTcdlLinkRenderingType(TcdlLinkRendering.ABSOLUTE);
+        _apiClient.setModelSericeLinkRenderingType(ModelServiceLinkRendering.ABSOLUTE);
+        _apiClient.setTcdlLinkUrlPrefix(getPrefixForTopicsUrl());
+        _apiClient.setTcdlBinaryLinkUrlPrefix(getPrefixForBinariesUrl());
     }
 
     @Override
-    public List<Topic> getTridionDocsTopicsByKeywords(Map<String, KeywordModel> keywords, int maxItems) throws GraphQLClientException, IOException {
+    public List<Topic> getTopicsByKeywords(Map<String, KeywordModel> keywords, int maxItems) throws GraphQLClientException, IOException {
 
         List<ItemEdge> results = executeQuery(keywords, maxItems);
         List<Topic> topics = getDocsTopics(results);
@@ -111,9 +127,7 @@ public class TridionDocsPublicContentApiClient implements ITridionDocsClient {
         Pagination pagination = new Pagination();
         pagination.setFirst(maxItems);
 
-        ContextData contextData = getContextData();
-
-        ItemConnection results = _publicContentApi.executeItemQuery(filter, inputSortParam, pagination, null, ContentIncludeMode.INCLUDE_DATA_AND_RENDER , false , contextData);
+        ItemConnection results = _apiClient.executeItemQuery(filter, inputSortParam, pagination, null, ContentIncludeMode.INCLUDE_JSON_AND_RENDER, false, null);
 
         return results;
     }
@@ -121,7 +135,7 @@ public class TridionDocsPublicContentApiClient implements ITridionDocsClient {
     /**
      * Extracts and returns a collection of topics from the query's results
      */
-    private List<Topic> getDocsTopics(List<ItemEdge> results) {
+    private List<Topic> getDocsTopics(List<ItemEdge> results) throws IOException {
 
         List<Topic> topics = new LinkedList<Topic>();
 
@@ -129,115 +143,38 @@ public class TridionDocsPublicContentApiClient implements ITridionDocsClient {
 
             for (ItemEdge edge : results) {
 
-                if (edge.getNode() instanceof Page) {
-
-                    Page page = (Page) edge.getNode();
-
-                    // Based on the GraphQl's results and considering R2 model , we need to look into the below path to get the topic's title and body .
-                    // page >  containerItems > componentPresentation > rawContent > data > Content  topicTitle and topicBody
-                    Topic topic = new Topic();
-
-                    List<Item> containerItems = page.getContainerItems();
-
-                    if (containerItems != null) {
-
-                        for (Item iItem : containerItems) {
-
-                            if (iItem instanceof ComponentPresentation) {
-
-                                ComponentPresentation componentPresentation = (ComponentPresentation) iItem;
-                                RawContent rawContent = componentPresentation.getRawContent();
-                                if (rawContent != null) {
-                                    Map<String, Object> data = rawContent.getData();
-                                    if (data != null) {
-
-                                        if (data.get("XpmMetadata") != null && data.get("XpmMetadata") instanceof Map) {
-                                            Map xpmMetadata = (Map) data.get("XpmMetadata");
-                                            Object componentID = xpmMetadata.get("ComponentID");
-                                            if (componentID != null) {
-                                                topic.setId(componentID.toString());
-                                            }
-                                        }
-
-                                        if (data.get("LinkUrl") != null) {
-                                            Object linkUrl = data.get("LinkUrl");
-                                            if (linkUrl != null) {
-                                                String prefixForTopicsUrl = getPrefixForTopicsUrl();
-                                                topic.setLink(getFullyQualifiedUrlForTopic(linkUrl.toString(), prefixForTopicsUrl));
-                                            }
-                                        }
-
-                                        if (data.get("Content") != null && data.get("Content") instanceof Map) {
-                                            Map content = (Map) data.get("Content");
-
-                                            Object topicTitle = content.get("topicTitle");
-                                            if (topicTitle != null) {
-                                                topic.setTitle(new RichText(topicTitle.toString()));
-                                            }
-
-                                            Object topicBody = content.get("topicBody");
-                                            if (topicBody != null) {
-                                                topic.setBody(new RichText(topicBody.toString()));
-                                            }
-                                        }
-                                    }
-                                }
-
-                            }
-                        }
-                    }
-
-                    topics.add(topic);
+                if (!(edge.getNode() instanceof Page)) {
+                    LOG.debug("Node is not a Page, skipping.");
+                    continue;
                 }
+
+                Page page = (Page) edge.getNode();
+
+                // Deserialize Page Content as R2 Data Model
+                String pageModelJson = page.getRawContent().getContent();
+                PageModelData pageModelData = this._objectMapper.readValue(pageModelJson, PageModelData.class);
+
+                // Extract the R2 Data Model of the Topic and convert it to a Strongly Typed View Model
+                EntityModelData topicModelData = pageModelData.getRegions().get(0).getEntities().get(0);
+
+                //Todo : We need to use StronglyTypedTopicBuilder to create Topic entity model same as .Net
+                //like EntityModel topicModel = ModelBuilderPipeline.CreateEntityModel(topicModelData, null, docsLocalization);
+                String topicId = topicModelData.getXpmMetadata().get("ComponentID").toString();
+                String topicTitle = topicModelData.getContent().getAndCast("topicTitle", String.class);
+                String topicBody = topicModelData.getContent().getAndCast("topicBody", String.class);
+                String topicUrl = topicModelData.getLinkUrl();
+
+                Topic topic = new Topic();
+                topic.setId(topicId);
+                topic.setLink(getFullyQualifiedUrlForTopic(topicUrl, getPrefixForTopicsUrl()));
+                topic.setTitle(new RichText(topicTitle));
+                topic.setBody(new RichText(topicBody));
+
+                topics.add(topic);
             }
         }
 
         return topics;
-    }
-
-    /**
-     * Create and returns a ContextData instance containing the required
-     * ClaimValues
-     */
-    private ContextData getContextData() {
-        ContextData contextData = new ContextData();
-
-        ClaimValue contentType = createClaimValue("dxa:modelservice:content:type", "model", ClaimValueType.STRING);
-        contextData.addClaimValule(contentType);
-
-        ClaimValue modelType = createClaimValue("dxa:modelservice:model:type", "r2", ClaimValueType.STRING);
-        contextData.addClaimValule(modelType);
-
-        ClaimValue linkRelative = createClaimValue("taf:tcdl:render:link:relative", "false", ClaimValueType.BOOLEAN);
-        contextData.addClaimValule(linkRelative);
-
-        ClaimValue entityRelativeLinks = createClaimValue("dxa:modelservice:model:entity:relativelinks", "false", ClaimValueType.BOOLEAN);
-        contextData.addClaimValule(entityRelativeLinks);
-
-        String prefixForTopicsUrl = getPrefixForTopicsUrl();
-        if (prefixForTopicsUrl != null && !prefixForTopicsUrl.isEmpty()) {
-            ClaimValue linkUrlprefix = createClaimValue("taf:tcdl:render:link:urlprefix", prefixForTopicsUrl, ClaimValueType.STRING);
-            contextData.addClaimValule(linkUrlprefix);
-        }
-
-        String prefixForBinariesUrl = getPrefixForBinariesUrl();
-        if (prefixForBinariesUrl != null && !prefixForBinariesUrl.isEmpty()) {
-            ClaimValue linkBinaryUrlPrefix = createClaimValue("taf:tcdl:render:link:binaryUrlPrefix", prefixForBinariesUrl, ClaimValueType.STRING);
-            contextData.addClaimValule(linkBinaryUrlPrefix);
-        }
-
-        return contextData;
-    }
-
-    /**
-     * Create and returns a ClaimValue instance based on the provided parameters
-     */
-    private ClaimValue createClaimValue(String uri, String value, ClaimValueType Type) {
-        ClaimValue claimValue = new ClaimValue();
-        claimValue.setUri(uri);
-        claimValue.setValue(value);
-        claimValue.setType(Type);
-        return claimValue;
     }
 
     /**
@@ -348,14 +285,14 @@ public class TridionDocsPublicContentApiClient implements ITridionDocsClient {
      * Get the Uri prefix for the Topic binary links
      */
     private String getPrefixForTopicsUrl() {
-        return _webRequestContext.getLocalization().getConfiguration("tridiondocsmashup.PrefixForTopicsUrl");
+        return _webRequestContext.getLocalization().getConfiguration(TOPICS_URL_PREFIX_CONFIGNAME);
     }
 
     /**
      * Get the Uri prefix for the Topic links
      */
     private String getPrefixForBinariesUrl() {
-        return _webRequestContext.getLocalization().getConfiguration("tridiondocsmashup.PrefixForBinariesUrl");
+        return _webRequestContext.getLocalization().getConfiguration(TOPICS_BINARYURL_PREFIX_CONFIGNAME);
     }
 
     /**
