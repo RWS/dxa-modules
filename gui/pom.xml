@@ -13,6 +13,7 @@
 
     <properties>
         <npm.repo>https://nexus.sdl.com/content/groups/npm/</npm.repo>
+        <npm.publish.repo>https://nexus.sdl.com/repository/npm-internal/</npm.publish.repo>
         <frontend.maven.plugin.version>1.0</frontend.maven.plugin.version>
         <node.version>v6.11.2</node.version>
         <npm.version>4.6.1</npm.version>
@@ -86,6 +87,19 @@
                             <arguments>run-script build-server -- --targetPath target/gui/</arguments>
                         </configuration>
                     </execution>
+
+                    <execution>
+                        <id>npm publish</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+
+                        <phase>deploy</phase>
+
+                        <configuration>
+                            <arguments>publish -registry=${npm.publish.repo} --access=public --tag=latest</arguments>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
 
@@ -103,6 +117,14 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>3.0.0-M1</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
             </plugin>
         </plugins>
     </build>
