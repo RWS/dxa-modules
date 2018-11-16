@@ -101,7 +101,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
                                 
             var results = _publicContentApi.ExecuteItemQuery(
                 filter,
-                new InputSortParam { Order = SortOrderType.Descending, SortBy = SortFieldType.LAST_PUBLISH_DATE },
+                new InputSortParam { Order = SortOrderType.Ascending, SortBy = SortFieldType.TITLE },
                 new Pagination { First = maxItems },
                 null,
                 ContentIncludeMode.IncludeJsonAndRender,

@@ -46,7 +46,13 @@ public class ContextExpressionEntityEvaluator implements ConditionalEntityEvalua
             return true;
         }
 
-        Conditions conditions = (Conditions) entity.getExtensionData().get(contextExpressionsKey);
+        Map<String, Object> extensionData = entity.getExtensionData();
+        if (extensionData == null) {
+            log.warn("Extension Data is empty for Entity Model with id='{}'", entity.getId());
+            return true;
+        }
+        Conditions conditions = (Conditions) extensionData.get(contextExpressionsKey);
+
         if (conditions == null || conditions.isEmpty()) {
             log.warn("Found no conditionsin entity, that looks like an error with entity " + entity);
             return true;

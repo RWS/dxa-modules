@@ -1,0 +1,46 @@
+// Dynamic Documentation GUI build pipeline
+pipeline {
+
+    agent {
+        label 'dxadocker'
+    }
+
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '5'))
+        disableConcurrentBuilds()
+    }
+
+    parameters {
+        string name: "tempFolder", defaultValue: "C:\\Temp\\DXA\\DDGUIBoilerplate", description: 'Temporary folder'
+        string name: "packageName", defaultValue: 'Sdl.Dxa.Modules.DynamicDocumentation.Boilerplate', description: 'Name of the package we are going to publish'
+        string name: "version", defaultValue: '2.1.0', description: 'Version of the package we are going to publish'
+        booleanParam name: "isPreRelease", defaultValue: true, description: "If we add 'beta' prefix to the version"
+    }
+
+    stages {
+        stage('Building DD GUI Boilerplate') {
+            steps {
+                dir("boilerplate") {
+                    powershell 'mvn clean package'
+                }
+            }
+        }
+
+        stage('Publishing Dynamic Documentation Module GUI Boilerplate NuGet Package') {
+            steps {
+                dir("boilerplate/nuget") {
+                    powershell ".\\publish.ps1 -guiSourcePath '..\\' -tempFolder '${tempFolder}' -Actions @('Prepare', 'Push') -packageName '${packageName}' -version '${version}' -isPreRelease ('${isPreRelease}' -eq 'true')"
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            dir("boilerplate") {
+                archiveArtifacts artifacts: 'target/**', fingerprint: true
+            }
+        }
+    }
+}
+
