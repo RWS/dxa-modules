@@ -47,11 +47,11 @@ public class TridionDocsMashupController extends EntityController {
     private ITridionDocsClient tridionDocsClient;
 
     @Autowired
-    public TridionDocsMashupController(WebRequestContext webRequestContext, ApiClientProvider pcaClientProvider, ContentProvider contentProvider, ObjectMapper objectMapper) {
+    public TridionDocsMashupController(WebRequestContext webRequestContext, ApiClientProvider apiClientProvider, ContentProvider contentProvider, ObjectMapper objectMapper) {
         this.webRequestContext = webRequestContext;
         this.contentProvider = contentProvider;
         
-        this.tridionDocsClient = new TridionDocsPublicContentApiClient(this.webRequestContext, pcaClientProvider.getClient(), objectMapper);
+        this.tridionDocsClient = new TridionDocsPublicContentApiClient(this.webRequestContext, apiClientProvider.getClient(), objectMapper);
     }
 
     // Used only by Unit Tests to pass a mocked WebRequestContext and a mocked ITridionDocsClient
