@@ -128,4 +128,15 @@
             </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>release</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <npm.publish.repo>https://registry.npmjs.org</npm.publish.repo>
+            </properties>
+        </profile>
+    </profiles>
 </project>
