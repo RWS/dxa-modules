@@ -33,6 +33,7 @@
                 <exclude>assembly/</exclude>
                 <exclude>target/</exclude>
                 <exclude>nuget/</exclude>
+                <exclude>node/</exclude>
                 <exclude>node_modules/</exclude>
                 <exclude>pom.xml</exclude>
             </excludes>
