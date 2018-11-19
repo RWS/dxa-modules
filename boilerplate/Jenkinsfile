@@ -25,14 +25,6 @@ pipeline {
                 }
             }
         }
-
-        stage('Publishing Dynamic Documentation Module GUI Boilerplate NuGet Package') {
-            steps {
-                dir("boilerplate/nuget") {
-                    powershell ".\\publish.ps1 -guiSourcePath '..\\' -tempFolder '${tempFolder}' -Actions @('Prepare', 'Push') -packageName '${packageName}' -version '${version}' -isPreRelease ('${isPreRelease}' -eq 'true')"
-                }
-            }
-        }
     }
 
     post {
