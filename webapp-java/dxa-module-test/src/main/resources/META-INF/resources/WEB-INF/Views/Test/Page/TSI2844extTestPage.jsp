@@ -5,7 +5,7 @@
 <jsp:useBean id="entity" type="com.sdl.dxa.modules.model.TSI2844ext.Tsi2844extPageModel" scope="request"/>
 
 <div class="entity" ${markup.entity(entity)}>
-    <h3>Rendered ${entity} with Entity View "Test:TSI2844extTest"</h3>
+    <h3>Rendered ${entity} with Page View "Test:TSI2844extTest"</h3>
 
     FolderMetadataTextField:
     <div ${markup.property(entity, "folderMetadataTextField")}>'${entity.folderMetadataTextField}'</div>
