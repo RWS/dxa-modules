@@ -1,6 +1,7 @@
 package com.sdl.dxa.modules.model.TSI2844ext;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sdl.dxa.caching.NeverCached;
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticEntities;
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticEntity;
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticProperty;
@@ -14,6 +15,7 @@ import static com.sdl.webapp.common.api.mapping.semantic.config.SemanticVocabula
 
 @Data
 @EqualsAndHashCode(callSuper = true)
+@NeverCached(qualifier = "NoCacheEntityModel")
 @SemanticEntity(entityName = "FolderSchema", vocabulary = SDL_CORE, prefix = "f")
 @NoArgsConstructor
 public class Tsi2844extPageModel extends DefaultPageModel {

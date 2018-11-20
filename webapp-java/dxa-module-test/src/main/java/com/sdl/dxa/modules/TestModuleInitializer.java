@@ -33,10 +33,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RegisteredViewModels({
-        // https://jira.sdl.com/browse/TSI-2844
+        // https://jira.sdl.com/browse/CRQ-12346
         @RegisteredViewModel(viewName = "TSI2844extTest", modelClass = Tsi2844extPageModel.class),
-        @RegisteredViewModel(viewName = "TSI2844Test", modelClass = Tsi2844TestEntity.class),
-
 
         // https://jira.sdl.com/browse/TSI-1675
         @RegisteredViewModel(viewName = "EmbedParent", modelClass = EmbedParent.class),
@@ -81,6 +79,9 @@ import org.springframework.stereotype.Component;
         @RegisteredViewModel(viewName = "NoCacheEntity", modelClass = NoCacheEntityModel.class),
         @RegisteredViewModel(viewName = "CacheEntity", modelClass = CacheEntityModel.class),
         @RegisteredViewModel(viewName = "NoCachePage", modelClass = NoCachePageModel.class),
+
+        // https://jira.sdl.com/browse/TSI-2844
+        @RegisteredViewModel(viewName = "TSI2844Test", modelClass = Tsi2844TestEntity.class),
 
         // https://jira.sdl.com/browse/TSI-3010
         @RegisteredViewModel(viewName = "TSI3010Test", modelClass = Article.class),
