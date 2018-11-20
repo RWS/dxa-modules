@@ -8,18 +8,19 @@ import com.sdl.webapp.common.api.model.PageModel;
 import com.sdl.webapp.common.api.model.page.DefaultPageModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import static com.sdl.webapp.common.api.mapping.semantic.config.SemanticVocabulary.SDL_CORE;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
 @SemanticEntity(entityName = "FolderSchema", vocabulary = SDL_CORE, prefix = "f")
+@NoArgsConstructor
 public class Tsi2844extPageModel extends DefaultPageModel {
 
     @SemanticProperty("f:folderMetadataTextField")
     @JsonProperty("FolderMetadataTextField")
     private String folderMetadataTextField;
-
 
     public Tsi2844extPageModel(PageModel other) {
         super(other);
