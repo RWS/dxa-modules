@@ -19,4 +19,17 @@ public class Tsi2844extPageModel extends DefaultPageModel {
     @SemanticProperty("f:folderMetadataTextField")
     @JsonProperty("FolderMetadataTextField")
     private String folderMetadataTextField;
+
+
+    public Tsi2844extPageModel(PageModel other) {
+        super(other);
+        if (other instanceof Tsi2844extPageModel) {
+            this.folderMetadataTextField = ((Tsi2844extPageModel)other).folderMetadataTextField;
+        }
+    }
+
+    @Override
+    public PageModel deepCopy() {
+        return new Tsi2844extPageModel(this);
+    }
 }
