@@ -15,7 +15,6 @@ import static com.sdl.webapp.common.api.mapping.semantic.config.SemanticVocabula
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-@NeverCached(qualifier = "NoCacheEntityModel")
 @SemanticEntity(entityName = "FolderSchema", vocabulary = SDL_CORE, prefix = "f")
 @NoArgsConstructor
 public class Tsi2844extPageModel extends DefaultPageModel {
