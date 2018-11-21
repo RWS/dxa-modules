@@ -4,9 +4,9 @@ import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.exceptions.DxaException;
 import fiftyone.mobile.detection.AutoUpdate;
 import fiftyone.mobile.detection.AutoUpdateStatus;
+import fiftyone.mobile.detection.IndirectDataset;
 import fiftyone.mobile.detection.Match;
 import fiftyone.mobile.detection.Provider;
-import fiftyone.mobile.detection.entities.stream.Dataset;
 import fiftyone.mobile.detection.factories.StreamFactory;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -286,7 +286,7 @@ public class Degrees51DataProvider {
     }
 
     private DateTime getAndSetNextUpdate(String fileName) throws IOException {
-        try (Dataset dataset = StreamFactory.create(readFileToByteArray(new File(fileName)))) {
+        try (IndirectDataset dataset = StreamFactory.create(readFileToByteArray(new File(fileName)))) {
             Date nextUpdate = dataset.nextUpdate;
             log.trace("Next expected updated for {} is {}", fileName, nextUpdate);
             return memorize(fileNextUpdatesByNames, fileName, new DateTime(nextUpdate));
