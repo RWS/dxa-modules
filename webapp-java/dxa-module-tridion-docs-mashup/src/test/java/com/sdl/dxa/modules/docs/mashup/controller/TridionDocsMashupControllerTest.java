@@ -58,8 +58,8 @@ public class TridionDocsMashupControllerTest {
 
     @Before
     public void init() throws IOException, GraphQLClientException {
-        controller  = new TridionDocsMashupController(webRequestContext, null ,contentProvider, null, tridionDocsClient);
-        
+        controller = new TridionDocsMashupController(webRequestContext, contentProvider, tridionDocsClient);
+
         Topic topic = new Topic();
         topic.setTitle(TOPIC_TITLE);
         List<Topic> topics = new ArrayList<>();

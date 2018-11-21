@@ -65,8 +65,6 @@ public class TridionDocsPublicContentApiClient implements ITridionDocsClient {
         _apiClient.setDefaultModelType(DataModelType.R2);
         _apiClient.setTcdlLinkRenderingType(TcdlLinkRendering.ABSOLUTE);
         _apiClient.setModelSericeLinkRenderingType(ModelServiceLinkRendering.ABSOLUTE);
-        _apiClient.setTcdlLinkUrlPrefix(getPrefixForTopicsUrl());
-        _apiClient.setTcdlBinaryLinkUrlPrefix(getPrefixForBinariesUrl());
     }
 
     @Override
@@ -126,6 +124,9 @@ public class TridionDocsPublicContentApiClient implements ITridionDocsClient {
 
         Pagination pagination = new Pagination();
         pagination.setFirst(maxItems);
+        
+        _apiClient.setTcdlLinkUrlPrefix(getPrefixForTopicsUrl());
+        _apiClient.setTcdlBinaryLinkUrlPrefix(getPrefixForBinariesUrl());
 
         ItemConnection results = _apiClient.executeItemQuery(filter, inputSortParam, pagination, null, ContentIncludeMode.INCLUDE_JSON_AND_RENDER, false, null);
 
