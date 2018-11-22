@@ -1,15 +1,27 @@
 package com.sdl.dxa.modules.docs.mashup.models.widgets;
 
+import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticEntity;
+import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticMappingIgnore;
+import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticProperty;
 import com.sdl.webapp.common.api.model.RichText;
+import com.sdl.webapp.common.api.model.entity.AbstractEntityModel;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
-public class Topic {
+@SemanticEntity(entityName = "title")
+public class Topic extends AbstractEntityModel {
 
     private String id;
+    @SemanticProperty("title")
     private RichText title;
+    @SemanticMappingIgnore
     private String link;
+    @SemanticProperty("body")
     private RichText body;
+    @SemanticProperty("nested1")
+    private List<Topic> nestedTopics;
 
     public String getId() {
         return id;
@@ -43,4 +55,11 @@ public class Topic {
         this.body = body;
     }
 
+    public List<Topic> getNestedTopics() {
+        return nestedTopics;
+    }
+
+    public void setNestedTopics(List<Topic> nestedTopics) {
+        this.nestedTopics = nestedTopics;
+    }
 }

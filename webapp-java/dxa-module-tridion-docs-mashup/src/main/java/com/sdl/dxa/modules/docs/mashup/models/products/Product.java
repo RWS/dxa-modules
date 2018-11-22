@@ -50,5 +50,4 @@ public class Product extends AbstractEntityModel {
     public void setImage(MediaItem image) {
         this.image = image;
     }
-
 }

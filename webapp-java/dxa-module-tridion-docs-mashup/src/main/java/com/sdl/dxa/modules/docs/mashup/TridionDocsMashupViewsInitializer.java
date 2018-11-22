@@ -4,6 +4,7 @@ package com.sdl.dxa.modules.docs.mashup;
 import com.sdl.dxa.modules.docs.mashup.models.products.Bicycle;
 import com.sdl.dxa.modules.docs.mashup.models.widgets.DynamicWidget;
 import com.sdl.dxa.modules.docs.mashup.models.widgets.StaticWidget;
+import com.sdl.dxa.modules.docs.mashup.models.widgets.Topic;
 import com.sdl.webapp.common.api.mapping.views.AbstractModuleInitializer;
 import com.sdl.webapp.common.api.mapping.views.ModuleInfo;
 import com.sdl.webapp.common.api.mapping.views.RegisteredViewModel;
@@ -16,8 +17,9 @@ import org.springframework.stereotype.Component;
         @RegisteredViewModel(viewName = "StaticWidget", modelClass = StaticWidget.class, controllerName = "TridionDocsMashup" ),
         @RegisteredViewModel(viewName = "DynamicWidget", modelClass = DynamicWidget.class, controllerName = "TridionDocsMashup" ),
         @RegisteredViewModel(viewName = "Bicycle", modelClass = Bicycle.class ),
-        @RegisteredViewModel(viewName = "DynamicWidget", modelClass = RegionModelImpl.class ),
-        @RegisteredViewModel(viewName = "Bicycle", modelClass = RegionModelImpl.class )
+        @RegisteredViewModel(viewName = "Topic", modelClass = Topic.class ),
+        @RegisteredViewModel(viewName = "Bicycle", modelClass = RegionModelImpl.class ),
+        @RegisteredViewModel(viewName = "Topics", modelClass = RegionModelImpl.class )
 })
 @ModuleInfo(name = "DXA Modules - Tridion Docs Mashup", areaName = "TridionDocsMashup", description = "Implementation of DXA Tridion Docs Mashup module")
 @Component
