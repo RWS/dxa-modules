@@ -7,7 +7,7 @@
 <div class="rich-text ${entity.htmlClasses}" ${markup.entity(entity)}>
 
     <div ${markup.property(entity, "title")}>
-        <%= entity.getTitle() %>
+        <h1><%= entity.getTitle() %></h1>
     </div>
 
     <div class="content">
