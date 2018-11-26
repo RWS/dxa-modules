@@ -1,0 +1,58 @@
+/**
+ *
+ *  Copyright (c) 2014 All Rights Reserved by the SDL Group.
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ *
+ */
+
+pipeline {
+
+    agent {
+        label 'dxadocker'
+    }
+
+    stages {
+        stage('Building GUI and publishing to Nexus') {
+            steps {
+                dir("gui") {
+                    withCredentials([file(credentialsId: 'npm-deployer-secret', variable: 'NPM_DEPLOYER_SECRET')]) {
+                        powershell '$content = Get-Content -Raw -Path $env:NPM_DEPLOYER_SECRET; Set-Content -Path ".\\.npmrc" -Value $content'
+                        powershell 'mvn clean deploy'
+
+                        when {
+                            expression {
+                                GIT_BRANCH = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
+                                return GIT_BRANCH ==~ $/release\/\d+\.\d+\.\d+/$
+                            }
+                        }
+                        steps {
+                            echo 'Deploying to NPM'
+                            // Publish to Nexus
+                            powershell 'mvn clean deploy -Dprofile=release'
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            dir("gui") {
+                archiveArtifacts artifacts: 'target/gui/**', fingerprint: true
+            }
+        }
+    }
+}
+

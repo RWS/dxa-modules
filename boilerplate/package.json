@@ -1,0 +1,53 @@
+{
+  "name": "sdl-dita-delivery-custom-web-app-gui",
+  "version": "2.1.0-SNAPSHOT",
+  "description": "Custom GUI of the SDL Dita Delivery Web Application.",
+  "dependencies": {
+    "@sdl/delivery-ish-dd-webapp-gui": "2.1.0-SNAPSHOT",
+    "react": "~15.5.1",
+    "react-dom": "~15.5.1"
+  },
+  "devDependencies": {
+    "@sdl/icons": "~1.1.0-16",
+    "@types/react": "15.0.39",
+    "@types/react-dom": "15.5.4",
+    "@types/react-redux": "4.4.40",
+    "es6-promise": "~4.1.1",
+    "async": "~2.5.0",
+    "autoprefixer": "~7.1.4",
+    "babel-polyfill": "^6.23.0",
+    "browser-sync": "~2.18.6",
+    "css-loader": "~0.28.7",
+    "extract-text-webpack-plugin": "~2.1.2",
+    "file-loader": "~0.11.2",
+    "fs-extra": "^4.0.1",
+    "gulp": "~3.9.1",
+    "gulp-debug": "~3.1.0",
+    "gulp-tslint": "~7.1.0",
+    "html-webpack-plugin": "~2.26.0",
+    "json-loader": "~0.5.4",
+    "less": "~2.7.1",
+    "less-loader": "~4.0.5",
+    "lodash": "^4.17.4",
+    "postcss-loader": "~2.0.6",
+    "run-sequence": "~2.1.0",
+    "through2": "~2.0.1",
+    "ts-loader": "~v2.3.7",
+    "tslint": "~4.5.1",
+    "typescript": "~2.3.2",
+    "url-loader": "~0.5.7",
+    "webpack": "~2.2.1",
+    "webpack-dev-middleware": "~1.10.1",
+    "webpack-hot-middleware": "~2.17.1",
+    "webpack-visualizer-plugin": "~0.1.10",
+    "yargs": "~8.0.2"
+  },
+  "scripts": {
+    "start": "set NODE_OPTIONS='--max-old-space-size=2048' && gulp serve",
+    "build": "set NODE_OPTIONS='--max-old-space-size=2048' && gulp",
+    "build-server": "gulp build:dist"
+  },
+  "author": "okondratiuk@sdl.com, mborysenko@sdl.com, padams@sdl.com, mbilenko@sdl.com, inikonov@sdl.com",
+  "license": "Apache-2.0",
+  "private": true
+}

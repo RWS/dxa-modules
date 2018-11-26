@@ -1,0 +1,168 @@
+/**
+ *
+ *  Copyright (c) 2014 All Rights Reserved by the SDL Group.
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ *
+ */
+
+@import (reference) "~theme-styles";
+
+/* Import fonts */
+@font-face {
+    .import-regular-font();
+}
+@font-face {
+    .import-header-font();
+}
+@font-face {
+    .import-icon-font();
+}
+
+html,
+body,
+#main-view-target {
+    height: 100%;
+    margin: 0 auto;
+    font-family: @fontFamily, @fontFamilyFallback;
+    font-size: @fontSize;
+    color: @fontColor;
+}
+
+.sdl-dita-delivery-app {
+    height: 100%;
+
+    .sdl-dita-delivery-publication-content-wrapper {
+        // need this because of our spinner dependent on it;
+        height: 100%;
+    }
+}
+
+.rtl {
+    direction: rtl;
+}
+
+.ltr {
+    direction: ltr;
+}
+
+@media print {
+    @page {
+        margin: 2cm;
+    }
+
+    #main-view-target {
+        height: auto;
+
+        .no-print() {
+            display: none !important;
+            position: initial;
+        }
+
+        .sdl-dita-delivery-app {
+            .sdl-dita-delivery-nav-mask,
+            .sdl-dita-delivery-searchbar {
+                .no-print();
+                * {
+                    .no-print();
+                }
+            }
+
+            .sdl-dita-delivery-topbar {
+                position: inherit;
+                background: transparent;
+                z-index: auto;
+
+                header > *:not(.sdl-dita-delivery-topbar-logo) {
+                    .no-print();
+                }
+                .sdl-dita-delivery-topbar-logo {
+                    .icon-sdl-logo();
+                    background-repeat: no-repeat;
+                    margin: 0 auto;
+                }
+            }
+
+            .sdl-dita-delivery-publication-content-wrapper {
+                height: auto;
+                .sdl-dita-delivery-publication-content {
+                    top: 0;
+                    min-height: 100%;
+                    min-width: 100%;
+                    display: block; // overwrite display:flex
+                    .sdl-dita-delivery-navigation-menu,
+                    .sdl-dita-delivery-splitter {
+                        .no-print();
+                    }
+
+                    .sdl-dita-delivery-page {
+                        display: block; // overwrite display:flex
+                        .sdl-dita-delivery-comments-section,
+                        .sdl-dita-delivery-content-navigation-wrapper {
+                            .no-print();
+                        }
+
+                        .sdl-dita-delivery-page-content {
+                            width: 100%; // overwrite spacing for navigation
+                            /* Content */
+                            .sdl-dita-delivery-comments-section,
+                            .sdl-dita-delivery-version-selector {
+                                .no-print();
+                            }
+
+                            .sdl-dita-delivery-breadcrumbs {
+                                padding: 30px 0;
+                                .sdl-dita-delivery-dropdown {
+                                    display: none;
+                                }
+                            }
+
+                            .page-content {
+                                h1,
+                                h2,
+                                h3,
+                                h4 {
+                                    page-break-before: avoid;
+                                    page-break-after: avoid;
+                                }
+
+                                div.section p.p {
+                                    widows: 3;
+                                    orphans: 3;
+                                }
+
+                                img {
+                                    max-width: 100% !important;
+                                    height: auto;
+                                    object-fit: contain;
+                                    page-break-inside: avoid;
+                                }
+
+                                a[href]:after {
+                                    content: " (" attr(href) ")";
+                                    word-wrap: break-word;
+                                    font-style: italic;
+                                }
+
+                                a[href^="#"]:after,
+                                a[href^="javascript"]:after {
+                                    content: "" !important;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

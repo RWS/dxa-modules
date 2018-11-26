@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using Sdl.Web.Mvc.Formats;
 using System;
 using Sdl.Web.Common.Configuration;
+using Sdl.Web.Common.Interfaces;
 using Sdl.Web.Common.Models;
 using Sdl.Web.Mvc.Configuration;
 using Sdl.Web.Mvc.Controllers;
@@ -19,7 +20,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
         {
             StaticWidget staticWidget = base.EnrichModel(sourceModel) as StaticWidget;
 
-            if (staticWidget != null && staticWidget.Keywords != null)
+            if (staticWidget?.Keywords != null)
             {
                 PublicContentApiClient pcaClient = new PublicContentApiClient();
 
@@ -28,7 +29,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
 
             DynamicWidget dynamicWidget = base.EnrichModel(sourceModel) as DynamicWidget;
 
-            if (dynamicWidget != null && dynamicWidget.Keywords != null)
+            if (dynamicWidget?.Keywords != null)
             {
                 PublicContentApiClient pcaClient = new PublicContentApiClient();
 
@@ -40,31 +41,29 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
                 {
                     Product product = regionModel.Entities?.FirstOrDefault(e => e.MvcData.ViewName == dynamicWidget.ProductViewModel) as Product;
 
-                    if (product != null && product.Keywords != null)
+                    if (product?.Keywords == null) continue;
+                    // When the product entity is found, we get its keywords.
+                    // But we only collect those keywords specified in the dynamicWidget.Keywords .
+                    // Then we are ready to get TridionDocs topics by the keywords values .
+
+                    var keywords = new Dictionary<string, KeywordModel>();
+
+                    foreach (var keywordName in dynamicWidget.Keywords)
                     {
-                        // When the product entity is found, we get its keywords.
-                        // But we only collect those keywords specified in the dynamicWidget.Keywords .
-                        // Then we are ready to get TridionDocs topics by the keywords values .
+                        KeyValuePair<string, KeywordModel> keyword = product.Keywords.FirstOrDefault(k => k.Key.Contains("." + keywordName + "."));
 
-                        var keywords = new Dictionary<string, KeywordModel>();
-
-                        foreach (var keywordName in dynamicWidget.Keywords)
+                        if (keyword.Value != null && !keywords.ContainsKey(keyword.Key))
                         {
-                            KeyValuePair<string, KeywordModel> keyword = product.Keywords.FirstOrDefault(k => k.Key.Contains("." + keywordName + "."));
-
-                            if (keyword.Value != null && !keywords.ContainsKey(keyword.Key))
-                            {
-                                keywords.Add(keyword.Key, keyword.Value);
-                            }
+                            keywords.Add(keyword.Key, keyword.Value);
                         }
-
-                        if (keywords.Any())
-                        {
-                            dynamicWidget.Topics = pcaClient.GetTridionDocsTopicsByKeywords(keywords, dynamicWidget.MaxItems);
-                        }
-
-                        break;
                     }
+
+                    if (keywords.Any())
+                    {
+                        dynamicWidget.Topics = pcaClient.GetTridionDocsTopicsByKeywords(keywords, dynamicWidget.MaxItems);
+                    }
+
+                    break;
                 }
             }
 
@@ -78,7 +77,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
             try
             {
                 var docsLocalization = new DocsLocalization(publicationId);
-                StaticContentItem content = ContentProvider.GetStaticContentItem(binaryId, docsLocalization);
+                StaticContentItem content = ContentProviderExt.GetStaticContentItem(binaryId, docsLocalization);
                 return new FileStreamResult(content.GetContentStream(), content.ContentType);
             }
             catch (Exception ex)
@@ -99,6 +98,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Controllers
             return Content("{ \"Message\": \"" + ex.Message + "\" }", "application/json");
         }
 
+        private IContentProviderExt ContentProviderExt => (IContentProviderExt)ContentProvider;
     }
 }
 

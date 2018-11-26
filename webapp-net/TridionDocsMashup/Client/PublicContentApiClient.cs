@@ -101,7 +101,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
                                 
             var results = _publicContentApi.ExecuteItemQuery(
                 filter,
-                new InputSortParam { Order = SortOrderType.Descending, SortBy = SortFieldType.LAST_PUBLISH_DATE },
+                new InputSortParam { Order = SortOrderType.Ascending, SortBy = SortFieldType.TITLE },
                 new Pagination { First = maxItems },
                 null,
                 ContentIncludeMode.IncludeJsonAndRender,
@@ -131,7 +131,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
                     }
 
                     int docsPublicationId = (int)edge.Node.PublicationId;
-                    ILocalization docsLocalization = new DocsLocalization(docsPublicationId);
+                    Localization docsLocalization = new DocsLocalization(docsPublicationId);
                     docsLocalization.EnsureInitialized();
 
                     // Deserialize Page Content as R2 Data Model

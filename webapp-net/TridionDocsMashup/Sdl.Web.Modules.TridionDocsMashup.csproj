@@ -44,6 +44,7 @@
     </Reference>
     <Reference Include="Sdl.Web.DataModel">
       <HintPath>..\packages\Sdl.Dxa.DataModel.$(DxaDataModelVersion)\lib\net462\Sdl.Web.DataModel.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Sdl.Web.Mvc">
       <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net462\Sdl.Web.Mvc.dll</HintPath>
@@ -80,7 +81,7 @@
     <None Include="Areas\TridionDocsMashup\Views\Entity\Bicycle.cshtml" />
     <None Include="Areas\TridionDocsMashup\Views\Entity\Topic.cshtml" />
     <None Include="Areas\TridionDocsMashup\Views\Region\Bicycle.cshtml" />
-    <None Include="Areas\TridionDocsMashup\Views\Region\DynamicWidget.cshtml" />
+    <None Include="Areas\TridionDocsMashup\Views\Region\Topics.cshtml" />
     <None Include="Areas\TridionDocsMashup\Views\TridionDocsMashup\DynamicWidget.cshtml" />
     <None Include="Areas\TridionDocsMashup\Views\TridionDocsMashup\StaticWidget.cshtml" />
     <None Include="Areas\TridionDocsMashup\Views\web.config" />
