@@ -1,6 +1,6 @@
 package com.sdl.dxa.modules.docs.mashup.controller;
 
-import com.sdl.dxa.modules.docs.mashup.client.ITridionDocsClient;
+import com.sdl.dxa.modules.docs.mashup.client.TridionDocsClient;
 import com.sdl.dxa.modules.docs.mashup.models.products.Product;
 import com.sdl.dxa.modules.docs.mashup.models.widgets.DynamicWidget;
 import com.sdl.dxa.modules.docs.mashup.models.widgets.StaticWidget;
@@ -50,7 +50,7 @@ public class TridionDocsMashupControllerTest {
     private Localization localization;
 
     @Mock
-    private ITridionDocsClient tridionDocsClient;
+    private TridionDocsClient tridionDocsClient;
 
     TridionDocsMashupController controller;
 

@@ -15,7 +15,7 @@ import java.util.Map;
  * performing the query , 
  * processing and converting the returned results
  */
-public interface ITridionDocsClient  {
+public interface TridionDocsClient {
     
       /**
      * Returns a collection of Tridion docs topics based on the provided keywords using GraphQLClient

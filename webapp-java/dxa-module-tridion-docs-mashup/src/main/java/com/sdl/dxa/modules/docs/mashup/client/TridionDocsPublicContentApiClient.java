@@ -7,8 +7,6 @@ import com.sdl.dxa.modules.docs.mashup.models.widgets.Topic;
 import com.sdl.web.pca.client.ApiClient;
 import com.sdl.web.pca.client.contentmodel.Pagination;
 import com.sdl.web.pca.client.contentmodel.enums.ContentIncludeMode;
-import com.sdl.web.pca.client.contentmodel.generated.ClaimValue;
-import com.sdl.web.pca.client.contentmodel.generated.ClaimValueType;
 import com.sdl.web.pca.client.contentmodel.generated.CriteriaScope;
 import com.sdl.web.pca.client.contentmodel.generated.CustomMetaValueType;
 import com.sdl.web.pca.client.contentmodel.generated.InputCustomMetaCriteria;
@@ -45,11 +43,11 @@ import org.slf4j.LoggerFactory;
  * processing the results
  */
 @SuppressWarnings("unchecked")
-public class TridionDocsPublicContentApiClient implements ITridionDocsClient {
+public class TridionDocsPublicContentApiClient implements TridionDocsClient {
 
-    private final ApiClient _apiClient;
-    private final WebRequestContext _webRequestContext;
-    private final ObjectMapper _objectMapper;
+    private final ApiClient apiClient;
+    private final WebRequestContext webRequestContext;
+    private final ObjectMapper objectMapper;
     private static final Logger LOG = LoggerFactory.getLogger(TridionDocsPublicContentApiClient.class);
 
     public static final String TOPICS_URL_PREFIX_CONFIGNAME = "tridiondocsmashup.PrefixForTopicsUrl";
@@ -57,14 +55,14 @@ public class TridionDocsPublicContentApiClient implements ITridionDocsClient {
 
     public TridionDocsPublicContentApiClient(WebRequestContext webRequestContext, ApiClient apiClient, ObjectMapper objectMapper) {
 
-        _webRequestContext = webRequestContext;
-        _objectMapper = objectMapper;
-        _apiClient = apiClient;
+        this.webRequestContext = webRequestContext;
+        this.objectMapper = objectMapper;
+        this.apiClient = apiClient;
 
-        _apiClient.setDefaultContentType(ContentType.MODEL);
-        _apiClient.setDefaultModelType(DataModelType.R2);
-        _apiClient.setTcdlLinkRenderingType(TcdlLinkRendering.ABSOLUTE);
-        _apiClient.setModelSericeLinkRenderingType(ModelServiceLinkRendering.ABSOLUTE);
+        this.apiClient.setDefaultContentType(ContentType.MODEL);
+        this.apiClient.setDefaultModelType(DataModelType.R2);
+        this.apiClient.setTcdlLinkRenderingType(TcdlLinkRendering.ABSOLUTE);
+        this.apiClient.setModelSericeLinkRenderingType(ModelServiceLinkRendering.ABSOLUTE);
     }
 
     @Override
@@ -125,10 +123,10 @@ public class TridionDocsPublicContentApiClient implements ITridionDocsClient {
         Pagination pagination = new Pagination();
         pagination.setFirst(maxItems);
         
-        _apiClient.setTcdlLinkUrlPrefix(getPrefixForTopicsUrl());
-        _apiClient.setTcdlBinaryLinkUrlPrefix(getPrefixForBinariesUrl());
+        apiClient.setTcdlLinkUrlPrefix(getPrefixForTopicsUrl());
+        apiClient.setTcdlBinaryLinkUrlPrefix(getPrefixForBinariesUrl());
 
-        ItemConnection results = _apiClient.executeItemQuery(filter, inputSortParam, pagination, null, ContentIncludeMode.INCLUDE_JSON_AND_RENDER, false, null);
+        ItemConnection results = apiClient.executeItemQuery(filter, inputSortParam, pagination, null, ContentIncludeMode.INCLUDE_JSON_AND_RENDER, false, null);
 
         return results;
     }
@@ -153,7 +151,7 @@ public class TridionDocsPublicContentApiClient implements ITridionDocsClient {
 
                 // Deserialize Page Content as R2 Data Model
                 String pageModelJson = page.getRawContent().getContent();
-                PageModelData pageModelData = this._objectMapper.readValue(pageModelJson, PageModelData.class);
+                PageModelData pageModelData = this.objectMapper.readValue(pageModelJson, PageModelData.class);
 
                 // Extract the R2 Data Model of the Topic and convert it to a Strongly Typed View Model
                 EntityModelData topicModelData = pageModelData.getRegions().get(0).getEntities().get(0);
@@ -286,21 +284,21 @@ public class TridionDocsPublicContentApiClient implements ITridionDocsClient {
      * Get the Uri prefix for the Topic binary links
      */
     private String getPrefixForTopicsUrl() {
-        return _webRequestContext.getLocalization().getConfiguration(TOPICS_URL_PREFIX_CONFIGNAME);
+        return webRequestContext.getLocalization().getConfiguration(TOPICS_URL_PREFIX_CONFIGNAME);
     }
 
     /**
      * Get the Uri prefix for the Topic links
      */
     private String getPrefixForBinariesUrl() {
-        return _webRequestContext.getLocalization().getConfiguration(TOPICS_BINARYURL_PREFIX_CONFIGNAME);
+        return webRequestContext.getLocalization().getConfiguration(TOPICS_BINARYURL_PREFIX_CONFIGNAME);
     }
 
     /**
      * Get the language name of the current localization
      */
     private String getCurrentLanguage() {
-        return _webRequestContext.getLocalization().getCulture();
+        return webRequestContext.getLocalization().getCulture();
     }
 
     /**
@@ -308,7 +306,7 @@ public class TridionDocsPublicContentApiClient implements ITridionDocsClient {
      */
     private String getParentLanguage() {
 
-        String[] parts = _webRequestContext.getLocalization().getCulture().split("-");
+        String[] parts = webRequestContext.getLocalization().getCulture().split("-");
 
         if (parts != null && parts.length > 1) {
             return parts[0];
