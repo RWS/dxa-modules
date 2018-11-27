@@ -1,11 +1,9 @@
 package com.sdl.dxa.modules.docs.mashup.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sdl.dxa.modules.docs.localization.DocsLocalization;
 import com.sdl.dxa.modules.docs.mashup.client.*;
 import com.sdl.dxa.modules.docs.mashup.models.products.Product;
 import com.sdl.dxa.modules.docs.mashup.models.widgets.*;
-import com.sdl.dxa.tridion.pcaclient.ApiClientProvider;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.content.ContentProvider;
 import com.sdl.webapp.common.api.content.ContentProviderException;
@@ -47,18 +45,10 @@ public class TridionDocsMashupController extends EntityController {
     private final TridionDocsClient tridionDocsClient;
 
     @Autowired
-    public TridionDocsMashupController(WebRequestContext webRequestContext, ContentProvider contentProvider, ApiClientProvider apiClientProvider, ObjectMapper objectMapper) {
-        this.webRequestContext = webRequestContext;
-        this.contentProvider = contentProvider;
-        
-        this.tridionDocsClient = new TridionDocsPublicContentApiClient(this.webRequestContext, apiClientProvider.getClient(), objectMapper);
-    }
-    
-    // Used only by Unit Tests to pass a mocked WebRequestContext and a mocked TridionDocsClient
     public TridionDocsMashupController(WebRequestContext webRequestContext, ContentProvider contentProvider, TridionDocsClient tridionDocsClient) {
         this.webRequestContext = webRequestContext;
         this.contentProvider = contentProvider;
-        this.tridionDocsClient = tridionDocsClient;
+         this.tridionDocsClient = tridionDocsClient;
     }
 
     @Override
