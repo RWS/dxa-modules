@@ -1,5 +1,6 @@
 package com.sdl.dxa.modules.docs.mashup.controller;
 
+import com.sdl.dxa.modules.docs.mashup.Exception.DocsMashupException;
 import com.sdl.dxa.modules.docs.mashup.client.TridionDocsClient;
 import com.sdl.dxa.modules.docs.mashup.models.products.Product;
 import com.sdl.dxa.modules.docs.mashup.models.widgets.DynamicWidget;
@@ -57,7 +58,7 @@ public class TridionDocsMashupControllerTest {
     private ExpectedException thrown = ExpectedException.none();
 
     @Before
-    public void init() throws IOException, GraphQLClientException {
+    public void init() throws DocsMashupException {
         controller = new TridionDocsMashupController(webRequestContext, contentProvider, tridionDocsClient);
 
         Topic topic = new Topic();

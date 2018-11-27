@@ -3,6 +3,7 @@ package com.sdl.dxa.modules.docs.mashup.client;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sdl.dxa.api.datamodel.model.EntityModelData;
 import com.sdl.dxa.api.datamodel.model.PageModelData;
+import com.sdl.dxa.modules.docs.mashup.Exception.DocsMashupException;
 import com.sdl.dxa.modules.docs.mashup.models.widgets.Topic;
 import com.sdl.web.pca.client.ApiClient;
 import com.sdl.web.pca.client.contentmodel.Pagination;
@@ -66,11 +67,16 @@ public class TridionDocsPublicContentApiClient implements TridionDocsClient {
     }
 
     @Override
-    public List<Topic> getTopicsByKeywords(Map<String, KeywordModel> keywords, int maxItems) throws GraphQLClientException, IOException {
+    public List<Topic> getTopicsByKeywords(Map<String, KeywordModel> keywords, int maxItems) throws DocsMashupException {
 
-        List<ItemEdge> results = executeQuery(keywords, maxItems);
-        List<Topic> topics = getDocsTopics(results);
-        return topics;
+        try {
+            List<ItemEdge> results = executeQuery(keywords, maxItems);
+            List<Topic> topics = getDocsTopics(results);
+            return topics;
+        } catch (Exception e) {
+
+            throw new DocsMashupException("Could not retrieved topics!", e);
+        }
     }
 
     private List<ItemEdge> executeQuery(Map<String, KeywordModel> keywords, int maxItems) throws GraphQLClientException, IOException {
