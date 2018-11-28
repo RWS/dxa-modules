@@ -26,36 +26,19 @@ import org.springframework.stereotype.Component;
 public class TridionDocsMashupViewsInitializer {
 
     @RegisteredViewModels({
-        @RegisteredViewModel(viewName = "StaticWidget", modelClass = StaticWidget.class, controllerName = "TridionDocsMashup")
-        ,
-        @RegisteredViewModel(viewName = "DynamicWidget", modelClass = DynamicWidget.class, controllerName = "TridionDocsMashup")
-        ,
-        @RegisteredViewModel(viewName = "Bicycle", modelClass = Bicycle.class)
-        ,
-        @RegisteredViewModel(viewName = "Topic", modelClass = Topic.class)
-        ,
-        @RegisteredViewModel(viewName = "Bicycle", modelClass = RegionModelImpl.class)
-        ,
-        @RegisteredViewModel(viewName = "Topics", modelClass = RegionModelImpl.class)
-    })
+        @RegisteredViewModel(viewName = "StaticWidget", modelClass = StaticWidget.class, controllerName = "TridionDocsMashup"),
+        @RegisteredViewModel(viewName = "DynamicWidget", modelClass = DynamicWidget.class, controllerName = "TridionDocsMashup"),
+        @RegisteredViewModel(viewName = "Bicycle", modelClass = Bicycle.class),
+        @RegisteredViewModel(viewName = "Topic", modelClass = Topic.class),
+        @RegisteredViewModel(viewName = "Bicycle", modelClass = RegionModelImpl.class),
+        @RegisteredViewModel(viewName = "Topics", modelClass = RegionModelImpl.class)})
     @ModuleInfo(name = "DXA Modules - Tridion Docs Mashup", areaName = "TridionDocsMashup", description = "Implementation of DXA Tridion Docs Mashup module")
     @Component
     public class TridionDocsMashupModuleInitializer extends AbstractModuleInitializer {
 
         @Override
         protected String getAreaName() {
-            return "TridionDocsMashup";
-        }
-    }
-    @Autowired
-    private WebRequestContext webRequestContext;
-    @Autowired
-    private ApiClientProvider apiClientProvider;
-    @Autowired
-    private ObjectMapper objectMapper;
-
-    @Bean
-    public com.sdl.dxa.modules.docs.mashup.client.TridionDocsClient getTridionDocsClient() {
-        return new TridionDocsPublicContentApiClient(webRequestContext, apiClientProvider.getClient(), objectMapper);
+                return "TridionDocsMashup";
+            }
     }
 }

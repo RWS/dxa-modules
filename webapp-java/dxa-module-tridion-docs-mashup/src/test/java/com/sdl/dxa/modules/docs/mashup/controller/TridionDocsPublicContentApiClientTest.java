@@ -2,6 +2,8 @@ package com.sdl.dxa.modules.docs.mashup.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sdl.dxa.modules.docs.mashup.client.TridionDocsPublicContentApiClient;
+import com.sdl.dxa.tridion.pcaclient.ApiClientProvider;
+import com.sdl.web.pca.client.ApiClient;
 import com.sdl.web.pca.client.exception.GraphQLClientException;
 import org.junit.Assert;
 import org.junit.Test;
@@ -24,7 +26,10 @@ public class TridionDocsPublicContentApiClientTest {
     private WebRequestContext webRequestContext;
 
     @Mock
-    private com.sdl.web.pca.client.ApiClient apiClient;
+    private ApiClientProvider apiClientProvider;
+
+    @Mock
+    private ApiClient apiClient;
 
     @Mock
     private ObjectMapper objectMapper;
@@ -39,8 +44,9 @@ public class TridionDocsPublicContentApiClientTest {
         when(webRequestContext.getLocalization()).thenReturn(localization);
         when(localization.getConfiguration(TridionDocsPublicContentApiClient.TOPICS_URL_PREFIX_CONFIGNAME)).thenReturn("http://test.com");
         when(localization.getConfiguration(TridionDocsPublicContentApiClient.TOPICS_BINARYURL_PREFIX_CONFIGNAME)).thenReturn("http://test.com/binary");
+        when(apiClientProvider.getClient()).thenReturn(apiClient);
         
-        tridionDocsPublicContentApiClient = new TridionDocsPublicContentApiClient(webRequestContext, apiClient, objectMapper);
+        tridionDocsPublicContentApiClient = new TridionDocsPublicContentApiClient(webRequestContext, apiClientProvider, objectMapper);
     }
 
     @Test

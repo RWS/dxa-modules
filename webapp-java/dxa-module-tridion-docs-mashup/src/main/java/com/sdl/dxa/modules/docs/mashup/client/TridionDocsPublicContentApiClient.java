@@ -5,6 +5,7 @@ import com.sdl.dxa.api.datamodel.model.EntityModelData;
 import com.sdl.dxa.api.datamodel.model.PageModelData;
 import com.sdl.dxa.modules.docs.mashup.exception.DocsMashupException;
 import com.sdl.dxa.modules.docs.mashup.models.widgets.Topic;
+import com.sdl.dxa.tridion.pcaclient.ApiClientProvider;
 import com.sdl.web.pca.client.ApiClient;
 import com.sdl.web.pca.client.contentmodel.Pagination;
 import com.sdl.web.pca.client.contentmodel.enums.ContentIncludeMode;
@@ -36,29 +37,34 @@ import java.util.Map;
 import java.util.regex.Pattern;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * This class is a wrapper around the PCA client and tries to isolate the
- * related logic and codes for creating and performing the query and and
+ * related logic and codes for creating and performing the query and
  * processing the results
  */
 @SuppressWarnings("unchecked")
+@Component
 public class TridionDocsPublicContentApiClient implements TridionDocsClient {
 
     private final ApiClient apiClient;
     private final WebRequestContext webRequestContext;
     private final ObjectMapper objectMapper;
+
     private static final Logger LOG = LoggerFactory.getLogger(TridionDocsPublicContentApiClient.class);
 
     public static final String TOPICS_URL_PREFIX_CONFIGNAME = "tridiondocsmashup.PrefixForTopicsUrl";
     public static final String TOPICS_BINARYURL_PREFIX_CONFIGNAME = "tridiondocsmashup.PrefixForBinariesUrl";
 
-    public TridionDocsPublicContentApiClient(WebRequestContext webRequestContext, ApiClient apiClient, ObjectMapper objectMapper) {
+    @Autowired
+    public TridionDocsPublicContentApiClient(WebRequestContext webRequestContext, ApiClientProvider apiClientProvider, ObjectMapper objectMapper) {
 
         this.webRequestContext = webRequestContext;
         this.objectMapper = objectMapper;
-        this.apiClient = apiClient;
+        this.apiClient = apiClientProvider.getClient();
 
         this.apiClient.setDefaultContentType(ContentType.MODEL);
         this.apiClient.setDefaultModelType(DataModelType.R2);
