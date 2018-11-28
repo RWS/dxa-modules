@@ -1,9 +1,8 @@
 package com.sdl.dxa.modules.docs.mashup.client;
 
+import com.sdl.dxa.modules.docs.mashup.exception.DocsMashupException;
 import com.sdl.dxa.modules.docs.mashup.models.widgets.Topic;
-import com.sdl.web.pca.client.exception.GraphQLClientException;
 import com.sdl.webapp.common.api.model.KeywordModel;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -15,17 +14,16 @@ import java.util.Map;
  * performing the query , 
  * processing and converting the returned results
  */
-public interface ITridionDocsClient  {
+public interface TridionDocsClient {
     
       /**
      * Returns a collection of Tridion docs topics based on the provided keywords using GraphQLClient
      * 
      * @param keywords a collection of keywords to filter the topics
      * @param maxItems maximum number of topics to be displayed
-     * @throws com.sdl.web.pca.client.exception.GraphQLClientException
-     * @throws java.io.IOException
+     * @throws com.sdl.dxa.modules.docs.mashup.exception.DocsMashupException
      */
     
-    List<Topic> getTopics(Map<String, KeywordModel> keywords, int maxItems) throws GraphQLClientException, IOException;
+    List<Topic> getTopicsByKeywords(Map<String, KeywordModel> keywords, int maxItems) throws DocsMashupException;
     
 }

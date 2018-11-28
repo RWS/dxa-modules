@@ -12,11 +12,11 @@
 <div class="rich-text ${entity.htmlClasses}" ${markup.entity(entity)}>
 
     <%
-	List<Topic> topics =  entity.getTopics();
+	    List<Topic> topics =  entity.getTopics();
 
         if(topics!= null && topics.size() > 0)
         {
-	    String lastId = topics.get(topics.size() - 1).getId();
+	        String lastId = topics.get(topics.size() - 1).getId();
 
             for (Topic topic : topics)
             {
@@ -24,7 +24,7 @@
                 {
     %>
                     <div class="content" ${markup.property(entity, "topics")}>
-                        <%= topic.getBody()%>
+                        <dxa:richtext content="<%=topic.getBody()%>" />
                     </div>
     <%
                  }
@@ -32,7 +32,7 @@
                  {
     %>
                     <div ${markup.property(entity, "topics")}>
-                      <a href="<%= topic.getLink() %>"><%= topic.getTitle()%></a>
+                      <a href="<%= topic.getLink() %>" target="_blank"><%= topic.getTitle()%></a>
                     </div>
     <%
                  }
