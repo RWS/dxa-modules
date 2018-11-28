@@ -3,7 +3,7 @@ package com.sdl.dxa.modules.docs.mashup.client;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sdl.dxa.api.datamodel.model.EntityModelData;
 import com.sdl.dxa.api.datamodel.model.PageModelData;
-import com.sdl.dxa.modules.docs.mashup.Exception.DocsMashupException;
+import com.sdl.dxa.modules.docs.mashup.exception.DocsMashupException;
 import com.sdl.dxa.modules.docs.mashup.models.widgets.Topic;
 import com.sdl.web.pca.client.ApiClient;
 import com.sdl.web.pca.client.contentmodel.Pagination;

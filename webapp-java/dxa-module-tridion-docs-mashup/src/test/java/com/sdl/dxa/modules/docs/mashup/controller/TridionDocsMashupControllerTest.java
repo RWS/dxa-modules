@@ -1,12 +1,11 @@
 package com.sdl.dxa.modules.docs.mashup.controller;
 
-import com.sdl.dxa.modules.docs.mashup.Exception.DocsMashupException;
+import com.sdl.dxa.modules.docs.mashup.exception.DocsMashupException;
 import com.sdl.dxa.modules.docs.mashup.client.TridionDocsClient;
 import com.sdl.dxa.modules.docs.mashup.models.products.Product;
 import com.sdl.dxa.modules.docs.mashup.models.widgets.DynamicWidget;
 import com.sdl.dxa.modules.docs.mashup.models.widgets.StaticWidget;
 import com.sdl.dxa.modules.docs.mashup.models.widgets.Topic;
-import com.sdl.web.pca.client.exception.GraphQLClientException;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.content.ContentProvider;
 import com.sdl.webapp.common.api.localization.Localization;
@@ -23,7 +22,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.mock.web.MockHttpServletRequest;
 
 import javax.xml.bind.ValidationException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

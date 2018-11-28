@@ -1,4 +1,4 @@
-package com.sdl.dxa.modules.docs.mashup.Exception;
+package com.sdl.dxa.modules.docs.mashup.exception;
 
 /**
  * Exception happened in docs mashup functionality.
