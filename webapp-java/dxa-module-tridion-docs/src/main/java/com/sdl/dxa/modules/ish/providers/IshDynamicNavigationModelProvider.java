@@ -4,7 +4,6 @@ import com.sdl.dxa.api.datamodel.model.SitemapItemModelData;
 import com.sdl.dxa.api.datamodel.model.TaxonomyNodeModelData;
 import com.sdl.dxa.common.dto.SitemapRequestDto;
 import com.sdl.dxa.tridion.navigation.dynamic.DynamicNavigationModelProviderImpl;
-import com.sdl.web.api.dynamic.taxonomies.WebTaxonomyFactory;
 import com.tridion.taxonomies.TaxonomyFactory;
 import com.sdl.webapp.common.util.TcmUtils;
 import com.tridion.taxonomies.Keyword;
