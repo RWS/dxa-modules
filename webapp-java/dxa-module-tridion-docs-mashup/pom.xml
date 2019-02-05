@@ -55,6 +55,16 @@
             <artifactId>spring-context</artifactId>
         </dependency>
         
+         <dependency>
+            <groupId>com.sdl.dxa</groupId>
+            <artifactId>dxa-tridion-common</artifactId>
+        </dependency>
+           
+        <dependency>
+            <groupId>com.sdl.web.pca</groupId>
+            <artifactId>pca-client</artifactId>
+        </dependency>
+        
         <dependency>
             <groupId>com.sdl.web.pca</groupId>
             <artifactId>graphql-client</artifactId>
@@ -88,6 +98,11 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.sdl.dxa.modules</groupId>
+            <artifactId>dxa-module-tridion-docs-common</artifactId>
         </dependency>
     </dependencies>
 </project>

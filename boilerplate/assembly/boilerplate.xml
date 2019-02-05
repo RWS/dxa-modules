@@ -33,12 +33,22 @@
                 <exclude>assembly/</exclude>
                 <exclude>target/</exclude>
                 <exclude>nuget/</exclude>
+                <exclude>node/</exclude>
+                <exclude>node_modules/</exclude>
                 <exclude>pom.xml</exclude>
             </excludes>
             <includes>
                 <include>**</include>
             </includes>
             <outputDirectory>.</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/../gui/src</directory>
+            <useDefaultExcludes>true</useDefaultExcludes>
+            <includes>
+                <include>theming/</include>
+            </includes>
+            <outputDirectory>./src/</outputDirectory>
         </fileSet>
     </fileSets>
 </assembly>

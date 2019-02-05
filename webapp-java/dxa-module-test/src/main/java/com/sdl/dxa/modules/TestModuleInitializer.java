@@ -33,6 +33,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RegisteredViewModels({
+        // https://jira.sdl.com/browse/CRQ-12346
+        @RegisteredViewModel(viewName = "TSI2844extTest", modelClass = Tsi2844extPageModel.class),
+
         // https://jira.sdl.com/browse/TSI-1675
         @RegisteredViewModel(viewName = "EmbedParent", modelClass = EmbedParent.class),
         @RegisteredViewModel(modelClass = EmbedChild.class),

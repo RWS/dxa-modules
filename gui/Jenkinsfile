@@ -16,7 +16,6 @@
  *
  */
 
-// Dynamic Documentation GUI build pipeline
 pipeline {
 
     agent {
@@ -24,10 +23,25 @@ pipeline {
     }
 
     stages {
-        stage('Building DD GUI') {
+        stage('Building GUI and publishing to Nexus') {
             steps {
                 dir("gui") {
-                    powershell 'mvn clean package'
+                    withCredentials([file(credentialsId: 'npm-deployer-secret', variable: 'NPM_DEPLOYER_SECRET')]) {
+                        powershell '$content = Get-Content -Raw -Path $env:NPM_DEPLOYER_SECRET; Set-Content -Path ".\\.npmrc" -Value $content'
+                        powershell 'mvn clean deploy'
+
+                        when {
+                            expression {
+                                GIT_BRANCH = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
+                                return GIT_BRANCH ==~ $/release\/\d+\.\d+\.\d+/$
+                            }
+                        }
+                        steps {
+                            echo 'Deploying to NPM'
+                            // Publish to Nexus
+                            powershell 'mvn clean deploy -Dprofile=release'
+                        }
+                    }
                 }
             }
         }

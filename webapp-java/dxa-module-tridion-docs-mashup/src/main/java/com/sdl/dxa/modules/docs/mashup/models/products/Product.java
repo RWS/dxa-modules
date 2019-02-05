@@ -1,18 +1,12 @@
 package com.sdl.dxa.modules.docs.mashup.models.products;
 
-import com.sdl.dxa.caching.NeverCached;
-import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticEntity;
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticProperty;
 import com.sdl.webapp.common.api.model.KeywordModel;
 import com.sdl.webapp.common.api.model.RichText;
 import com.sdl.webapp.common.api.model.entity.AbstractEntityModel;
 import com.sdl.webapp.common.api.model.entity.MediaItem;
-import lombok.EqualsAndHashCode;
 import java.util.Map;
 
-@NeverCached(qualifier = "Product")
-@EqualsAndHashCode(callSuper = true)
-@SemanticEntity(entityName = "Content")
 public class Product extends AbstractEntityModel {
 
     @SemanticProperty("_all")
@@ -56,5 +50,4 @@ public class Product extends AbstractEntityModel {
     public void setImage(MediaItem image) {
         this.image = image;
     }
-
 }
