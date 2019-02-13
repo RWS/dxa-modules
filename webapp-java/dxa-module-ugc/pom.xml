@@ -41,7 +41,7 @@
         <dependency>
             <groupId>com.sdl.delivery</groupId>
             <artifactId>udp-ugc-cil-api</artifactId>
-            <version>${cd-cil.version}</version>
+            <version>${udp-ugc-cil-api.version}</version>
         </dependency>
 
         <!-- Servlet API -->
