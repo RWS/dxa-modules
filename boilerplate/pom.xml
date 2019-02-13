@@ -26,7 +26,7 @@
     <artifactId>dynamic-documentation-boilerplate</artifactId>
     <name>DXA Dynamic Documentation GUI Boilerplate</name>
     <description>NPM project where customizations for DXA Dynamic Documentation GUI project should be developed</description>
-    <version>2.1.1</version>
+    <version>2.2.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <properties>
