@@ -127,8 +127,8 @@ public class ArticleTest {
         //when
 
         //then
-        assertEquals("<!-- Start Component Presentation: { "+
-                " \"key\" : \"value\"} -->",
+        assertEquals("<!-- Start Component Presentation: "+
+                "{\"key\":\"value\"} -->",
                 article.getXpmMarkup(localization).replace("\n", "").replace("\r", ""));
     }
 
