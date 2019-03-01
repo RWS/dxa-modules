@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.sdl.dxa</groupId>
+        <artifactId>dxa-oss-parent</artifactId>
+        <version>2.2.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>com.sdl.dxa.modules</groupId>
+    <artifactId>dxa-modules</artifactId>
+    <packaging>pom</packaging>
+
+    <name>DXA Modules</name>
+    <description>Top level project of DXA module</description>
+
+    <scm>
+        <url>https://github.com/sdl/dxa-modules</url>
+        <connection>scm:git:git@github.com:sdl/dxa-modules.git</connection>
+        <developerConnection>scm:git:git@github.com:sdl/dxa-modules.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+   <modules>
+     <module>dxa-module-51degrees</module>
+     <module>dxa-module-audience-manager</module>
+     <module>dxa-module-cid</module>
+     <module>dxa-module-context-expressions</module>
+     <module>dxa-module-core</module>
+     <module>dxa-module-googleanalytics</module>
+     <module>dxa-module-mediamanager</module>
+     <module>dxa-module-search</module>
+     <module>dxa-module-smarttarget</module>
+     <module>dxa-module-test</module>
+     <module>dxa-module-tridion-docs</module>
+     <module>dxa-module-tridion-docs-common</module>
+     <module>dxa-module-tridion-docs-mashup</module>
+     <module>dxa-module-tridion-docs-search</module>
+     <module>dxa-module-ugc</module>
+   </modules>
+
+</project>
