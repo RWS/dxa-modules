@@ -79,21 +79,21 @@ public class ContextExpressionEntityEvaluator implements ConditionalEntityEvalua
     }
 
     /**
-     * If there is any claim in cxs that matches then this function should return true.
-     * if cxs is empty or null this function should also return <strong>true</strong>.
-     * @param cxs
+     * If there is any claim in contextExpressions that matches then this function should return true.
+     * if contextExpressions is empty or null this function should also return <strong>true</strong>.
+     * @param contextExpressions
      * @param contextClaims
      * @return
      */
-    private boolean shouldBeIncluded(@Nullable Set<String> cxs, @NonNull Map<String, Object> contextClaims) {
+    private boolean shouldBeIncluded(@Nullable Set<String> contextExpressions, @NonNull Map<String, Object> contextClaims) {
         //if set is null, then we don't process, and return TRUE for "included"
-        if (cxs == null || cxs.isEmpty()) {
+        if (contextExpressions == null || contextExpressions.isEmpty()) {
             log.debug("Context expression set is empty or null, ignoring");
             return true;
         }
 
         //ignore any unknown claims
-        Set<String> filtered = filterCxsByClaims(cxs, contextClaims);
+        Set<String> filtered = filterCxsByClaims(contextExpressions, contextClaims);
         if (filtered.isEmpty()) {
             log.debug("Filtered context expressions set is empty, meaning expressions are not in context claims");
             //if set is empty, then we don't process, and return TRUE for "included"
@@ -104,21 +104,21 @@ public class ContextExpressionEntityEvaluator implements ConditionalEntityEvalua
     }
 
     /**
-     * If any claims in cxs match, this function should return true.
-     * if cxs is empty or null this function should return <strong>false</strong>.
-     * @param cxs
+     * If any claims in contentExpressions match, this function should return true.
+     * if contentExpressions is empty or null this function should return <strong>false</strong>.
+     * @param contentExpressions
      * @param contextClaims
      * @return
      */
-    private boolean shouldBeExcluded(@Nullable Set<String> cxs, @NonNull Map<String, Object> contextClaims) {
+    private boolean shouldBeExcluded(@Nullable Set<String> contentExpressions, @NonNull Map<String, Object> contextClaims) {
         //if set is null, then we don't process, and return FALSE for "not excluded"
-        if (cxs == null || cxs.isEmpty()) {
+        if (contentExpressions == null || contentExpressions.isEmpty()) {
             log.debug("Context expression set is empty or null, ignoring");
             return false;
         }
 
         //ignore any unknown claims
-        Set<String> filtered = filterCxsByClaims(cxs, contextClaims);
+        Set<String> filtered = filterCxsByClaims(contentExpressions, contextClaims);
         if (filtered.isEmpty()) {
             log.debug("Filtered context expressions set is empty, meaning expressions are not in context claims");
             //if set is empty, then we don't process, and return FALSE for "not excluded"
