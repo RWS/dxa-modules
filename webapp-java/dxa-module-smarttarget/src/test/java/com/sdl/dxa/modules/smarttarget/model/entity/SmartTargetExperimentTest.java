@@ -59,7 +59,6 @@ public class SmartTargetExperimentTest {
         return objectMapper.readValue("{\n" +
                 "    \"ExperimentDimensions\": {\n" +
                 "        \"ExperimentId\": \"232fc389-88be-4a3c-bad0-ef1313120b5e\",\n" +
-                "        \"PublicationTargetId\": \"CdEnvironment1\",\n" +
                 "        \"InstanceId\": \"CdEnvironment1\",\n" +
                 "        \"PublicationId\": \"tcm:0-1065-1\",\n" +
                 "        \"PageId\": \"tcm:1065-9824-64\",\n" +
