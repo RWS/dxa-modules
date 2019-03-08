@@ -23,16 +23,15 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Matchers;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.Spy;
+import org.mockito.*;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Collections;
 
 import static org.junit.Assert.assertNull;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SmartTargetPageBuilderTest {
@@ -42,6 +41,9 @@ public class SmartTargetPageBuilderTest {
 
     @Mock
     private Localization localization;
+
+    @Mock
+    private HttpServletRequest httpServletRequest;
 
     @Spy
     @InjectMocks
@@ -59,8 +61,8 @@ public class SmartTargetPageBuilderTest {
 
     @Before
     public void init() {
-        Mockito.when(webRequestContext.getLocalization()).thenReturn(localization);
-        Mockito.when(localization.getId()).thenReturn("1");
+        when(webRequestContext.getLocalization()).thenReturn(localization);
+        when(localization.getId()).thenReturn("1");
     }
 
     @Test
@@ -82,6 +84,7 @@ public class SmartTargetPageBuilderTest {
         };
 
         Mockito.doReturn(null).when(pageBuilder).executeSmartTargetQuery(Matchers.any(SmartTargetPageModel.class), Matchers.any(TcmUri.class));
+        when(httpServletRequest.getCookies()).thenReturn(new Cookie[]{});
 
         //when
         pageBuilder.processQueryAndPromotions(localization, model, null);
@@ -151,9 +154,9 @@ public class SmartTargetPageBuilderTest {
         PageModelData pageModelData = new PageModelData("id", "tcm", null, Collections.emptyMap(), null, "title", Lists.newArrayList(regionModelData), "");
 
         SmartTargetPageModel stPageModel = Mockito.mock(SmartTargetPageModel.class);
-        Mockito.when(stPageModel.setAllowDuplicates(Matchers.anyBoolean())).thenReturn(stPageModel);
-        Mockito.when(stPageModel.containsRegion(Matchers.eq("test"))).thenReturn(true);
-        Mockito.when(stPageModel.getRegions()).thenReturn(pageModel.getRegions());
+        when(stPageModel.setAllowDuplicates(Matchers.anyBoolean())).thenReturn(stPageModel);
+        when(stPageModel.containsRegion(Matchers.eq("test"))).thenReturn(true);
+        when(stPageModel.getRegions()).thenReturn(pageModel.getRegions());
 
         Mockito.doNothing().when(pageBuilder).processQueryAndPromotions(Matchers.any(Localization.class), Matchers.any(SmartTargetPageModel.class), Matchers.anyString());
 
