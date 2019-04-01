@@ -46,11 +46,7 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Slf4j
 @Component
@@ -242,11 +238,11 @@ public class SmartTargetPageBuilder implements Ordered, PageModelBuilder {
         try {
             TcmUri pageUri = new TcmUri(TcmUtils.buildPageTcmUri(localization.getId(), stPageModel.getId()));
 
-            final ResultSet resultSet = executeSmartTargetQuery(stPageModel, pageUri);
+            ResultSet resultSet = executeSmartTargetQuery(stPageModel, pageUri);
 
             if (resultSet == null) {
-                log.warn("SmartTarget API returned null as a result for query. This can be because of timeout. Skipping processing promotions.");
-                return;
+                log.warn("SmartTarget API returned null as a result for query. This can be because of timeout.");
+                resultSet = new ResultSetImpl();
             }
 
             @NonNull final List<Promotion> promotions;
@@ -295,32 +291,35 @@ public class SmartTargetPageBuilder implements Ordered, PageModelBuilder {
 
         List<String> itemsAlreadyOnPage = new ArrayList<>();
 
-        for (final SmartTargetRegion smartTargetRegion : stPageModel.getRegions().get(SmartTargetRegion.class)) {
-            final String currentRegionName = smartTargetRegion.getName();
-            ExperimentDimensions experimentDimensions = getExperimentDimensions(localization, stPageModel, currentRegionName);
+        Set<SmartTargetRegion> smartTargetRegions = stPageModel.getRegions().get(SmartTargetRegion.class);
+        if (smartTargetRegions != null) {
+            for (final SmartTargetRegion smartTargetRegion : smartTargetRegions) {
+                final String currentRegionName = smartTargetRegion.getName();
+                ExperimentDimensions experimentDimensions = getExperimentDimensions(localization, stPageModel, currentRegionName);
 
-            if (!filterResultSet(stPageModel, promotions, smartTargetRegion, itemsAlreadyOnPage, experimentDimensions,
-                    ExperimentCookies.builder().newCookies(newExperimentCookies)
-                            .existingCookies(existingExperimentCookies).build())) {
-                return;
-            }
-
-            setXpmMetadataForStaging(localization,
-                    ResultSetImpl.getExperienceManagerMarkup(currentRegionName, smartTargetRegion.getMaxItems(), promotions), smartTargetRegion);
-
-            // Create SmartTargetPromotion Entity Models for visible Promotions in the current SmartTargetRegion.
-            // It seems that ResultSet.FilterPromotions doesn't really filter on Region name, so we do post-filtering here.
-            for (Promotion promotion : promotions) {
-                if (isPromotionToSkip(smartTargetRegion, promotion)) {
-                    continue;
+                if (!filterResultSet(stPageModel, promotions, smartTargetRegion, itemsAlreadyOnPage, experimentDimensions,
+                        ExperimentCookies.builder().newCookies(newExperimentCookies)
+                                .existingCookies(existingExperimentCookies).build())) {
+                    return;
                 }
 
-                // if we found promotions in ST then we should filter fallback content out first
-                clearFallbackContentIfNeeded(smartTargetRegion);
+                setXpmMetadataForStaging(localization,
+                        ResultSetImpl.getExperienceManagerMarkup(currentRegionName, smartTargetRegion.getMaxItems(), promotions), smartTargetRegion);
 
-                SmartTargetPromotion promotionEntity = createPromotionEntity(promotion, promotionViewName,
-                        currentRegionName, experimentDimensions, localization);
-                smartTargetRegion.addEntity(promotionEntity);
+                // Create SmartTargetPromotion Entity Models for visible Promotions in the current SmartTargetRegion.
+                // It seems that ResultSet.FilterPromotions doesn't really filter on Region name, so we do post-filtering here.
+                for (Promotion promotion : promotions) {
+                    if (isPromotionToSkip(smartTargetRegion, promotion)) {
+                        continue;
+                    }
+
+                    // if we found promotions in ST then we should filter fallback content out first
+                    clearFallbackContentIfNeeded(smartTargetRegion);
+
+                    SmartTargetPromotion promotionEntity = createPromotionEntity(promotion, promotionViewName,
+                            currentRegionName, experimentDimensions, localization);
+                    smartTargetRegion.addEntity(promotionEntity);
+                }
             }
         }
 

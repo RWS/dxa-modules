@@ -61,49 +61,71 @@ public class ContextExpressionEntityEvaluator implements ConditionalEntityEvalua
         try {
             Map<String, Object> contextClaims = contextClaimsProvider.getContextClaims(null);
 
-            boolean isExcludedNoIncludes = false, isExcludedAnyExclude = false;
-            if (shouldBeExcluded(conditions.getIncludes(), contextClaims, Mode.INCLUDE)) {
-                isExcludedNoIncludes = true;
+            if (shouldBeIncluded(conditions.getIncludes(), contextClaims)) {
+                if (shouldBeExcluded(conditions.getExcludes(), contextClaims)) {
+                    log.debug("suppressing entity because of Exclude Context Expression conditions; entity {}", entity);
+                    return false;
+                }
+                log.debug("All include/exclude context conditions are satisfied, including entity {}", entity);
+                return true;
             }
+            log.debug("suppressing entity because of Include Context Expression conditions; entity {}", entity);
+            return false;
 
-            if (!isExcludedNoIncludes && shouldBeExcluded(conditions.getExcludes(), contextClaims, Mode.EXCLUDE)) {
-                isExcludedAnyExclude = true;
-            }
-
-            if (log.isDebugEnabled() && (isExcludedNoIncludes || isExcludedAnyExclude)) {
-                log.debug("suppressing entity because of {} Context Expression conditions; entity {}",
-                        isExcludedNoIncludes ? "Include" : "Exclude", entity);
-                return false;
-            }
         } catch (DxaException e) {
             log.warn("Exception while requesting context claims, including entity", e);
             return true;
         }
-
-        if (log.isDebugEnabled()) {
-            log.debug("All include/exclude context conditions are satisfied, including entity " + entity);
-        }
-        return true;
     }
 
-    private boolean shouldBeExcluded(@Nullable Set<String> cxs, @NonNull Map<String, Object> contextClaims, @NonNull Mode mode) {
-        //if set is null, then we don't process, and return FALSE for "excluded"
-        if (cxs == null || cxs.isEmpty()) {
+    /**
+     * If there is any claim in contextExpressions that matches then this function should return true.
+     * if contextExpressions is empty or null this function should also return <strong>true</strong>.
+     * @param contextExpressions
+     * @param contextClaims
+     * @return
+     */
+    private boolean shouldBeIncluded(@Nullable Set<String> contextExpressions, @NonNull Map<String, Object> contextClaims) {
+        //if set is null, then we don't process, and return TRUE for "included"
+        if (contextExpressions == null || contextExpressions.isEmpty()) {
+            log.debug("Context expression set is empty or null, ignoring");
+            return true;
+        }
+
+        //ignore any unknown claims
+        Set<String> filtered = filterCxsByClaims(contextExpressions, contextClaims);
+        if (filtered.isEmpty()) {
+            log.debug("Filtered context expressions set is empty, meaning expressions are not in context claims");
+            //if set is empty, then we don't process, and return TRUE for "included"
+            return true;
+        }
+
+        return anyCxIsTrue(filtered, contextClaims);
+    }
+
+    /**
+     * If any claims in contentExpressions match, this function should return true.
+     * if contentExpressions is empty or null this function should return <strong>false</strong>.
+     * @param contentExpressions
+     * @param contextClaims
+     * @return
+     */
+    private boolean shouldBeExcluded(@Nullable Set<String> contentExpressions, @NonNull Map<String, Object> contextClaims) {
+        //if set is null, then we don't process, and return FALSE for "not excluded"
+        if (contentExpressions == null || contentExpressions.isEmpty()) {
             log.debug("Context expression set is empty or null, ignoring");
             return false;
         }
 
         //ignore any unknown claims
-        Set<String> filtered = filterCxsByClaims(cxs, contextClaims);
+        Set<String> filtered = filterCxsByClaims(contentExpressions, contextClaims);
         if (filtered.isEmpty()) {
             log.debug("Filtered context expressions set is empty, meaning expressions are not in context claims");
-            //if set is empty, then we don't process, and return FALSE for "excluded"
+            //if set is empty, then we don't process, and return FALSE for "not excluded"
             return false;
         }
 
-        //if this is INCLUDE, then any include means FALSE for "excluded"
-        //if this is EXCLUDE, then any exclude means TRUE for "excluded"
-        return (mode == Mode.INCLUDE) != anyCxIsTrue(filtered, contextClaims);
+        return anyCxIsTrue(filtered, contextClaims);
     }
 
     @NotNull
@@ -118,14 +140,17 @@ public class ContextExpressionEntityEvaluator implements ConditionalEntityEvalua
     }
 
     private boolean anyCxIsTrue(@NonNull Set<String> contextExpressions, @NonNull Map<String, Object> contextClaims) {
-        //also covers if set is empty, then we don't iterate
+        if (contextExpressions == null || contextExpressions.isEmpty()) {
+            //No expressions
+            return true;
+        }
         for (String claimName : contextExpressions) {
             Boolean claimValue = ContextClaims.castClaim(contextClaims.get(claimName), Boolean.class);
-            if (claimValue != null && claimValue) {
+            if (Boolean.TRUE.equals(claimValue)) {
                 return true;
             }
         }
-        //set is empty or all conditions are not satisfied
+        //No satisfied claims
         return false;
     }
 

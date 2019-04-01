@@ -1,8 +1,7 @@
 package com.sdl.dxa.modules.model.TSI2844ext;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.sdl.dxa.caching.NeverCached;
-import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticEntities;
+import com.google.common.base.MoreObjects;
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticEntity;
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticProperty;
 import com.sdl.webapp.common.api.model.PageModel;
@@ -33,5 +32,13 @@ public class Tsi2844extPageModel extends DefaultPageModel {
     @Override
     public PageModel deepCopy() {
         return new Tsi2844extPageModel(this);
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .omitNullValues()
+                .add("", folderMetadataTextField)
+                .toString();
     }
 }

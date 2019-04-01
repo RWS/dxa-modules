@@ -82,6 +82,7 @@ import org.springframework.stereotype.Component;
 
         // https://jira.sdl.com/browse/TSI-2844
         @RegisteredViewModel(viewName = "TSI2844Test", modelClass = Tsi2844TestEntity.class),
+        @RegisteredViewModel(viewName = "TSI2844extTestPage", modelClass = Tsi2844extPageModel.class),
 
         // https://jira.sdl.com/browse/TSI-3010
         @RegisteredViewModel(viewName = "TSI3010Test", modelClass = Article.class),
