@@ -37,11 +37,11 @@
         <dxa:region name="Content Tools"/>
         <div class="row">
             <c:set var="hasLeftBar"
-                   value="${pageModel.containsRegion('Left-Navigation') || pageModel.containsRegion('Left')}"/>
+                   value="${pageModel.containsRegion('Left Navigation') || pageModel.containsRegion('Left')}"/>
             <c:set var="mainContainerSize" value="${hasLeftBar ? 9 : 12}"/>
             <c:if test="${hasLeftBar}">
                 <div class="col-sm-12 col-md-3">
-                    <dxa:region name="Left-Navigation" containerSize="3"/>
+                    <dxa:region name="Left Navigation" containerSize="3"/>
                     <dxa:region name="Left" containerSize="3"/>
                 </div>
             </c:if>
