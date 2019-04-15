@@ -18,7 +18,7 @@
     if (siteLocalizations.size() > 1) {
         final Set<String> excludedLocalizations = new HashSet<>();
         if (entity.getSettings().containsKey("suppressLocalizations")) {
-            for (String s : entity.getSettings().get("suppressLocalizations").split("[, ]")) {
+            for (String s : entity.getSettings().get("suppressLocalizations").split(",")) {
                 excludedLocalizations.add("/" + s.trim());
             }
         }
