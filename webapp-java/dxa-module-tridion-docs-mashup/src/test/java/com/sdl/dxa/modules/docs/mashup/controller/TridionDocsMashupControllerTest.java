@@ -1,7 +1,7 @@
 package com.sdl.dxa.modules.docs.mashup.controller;
 
-import com.sdl.dxa.modules.docs.mashup.exception.DocsMashupException;
 import com.sdl.dxa.modules.docs.mashup.client.TridionDocsClient;
+import com.sdl.dxa.modules.docs.mashup.exception.DocsMashupException;
 import com.sdl.dxa.modules.docs.mashup.models.products.Product;
 import com.sdl.dxa.modules.docs.mashup.models.widgets.DynamicWidget;
 import com.sdl.dxa.modules.docs.mashup.models.widgets.StaticWidget;
@@ -9,7 +9,13 @@ import com.sdl.dxa.modules.docs.mashup.models.widgets.Topic;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.content.ContentProvider;
 import com.sdl.webapp.common.api.localization.Localization;
-import com.sdl.webapp.common.api.model.*;
+import com.sdl.webapp.common.api.model.EntityModel;
+import com.sdl.webapp.common.api.model.KeywordModel;
+import com.sdl.webapp.common.api.model.MvcData;
+import com.sdl.webapp.common.api.model.PageModel;
+import com.sdl.webapp.common.api.model.RegionModel;
+import com.sdl.webapp.common.api.model.RegionModelSet;
+import com.sdl.webapp.common.api.model.RichText;
 import com.sdl.webapp.common.api.model.region.RegionModelImpl;
 import com.sdl.webapp.common.api.model.region.RegionModelSetImpl;
 import org.junit.Assert;
@@ -27,7 +33,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.mockito.Matchers.*;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyMapOf;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -161,7 +168,7 @@ public class TridionDocsMashupControllerTest {
     }
 
     @Test(expected = ValidationException.class)
-    public void shoulThrownWhenKeywordsNotInRightFormat() throws Exception {
+    public void shouldThrowWhenKeywordsNotInRightFormat() throws Exception {
         //given
         Map<String, KeywordModel> keywords = new HashMap<>();
 

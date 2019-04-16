@@ -1,9 +1,11 @@
 package com.sdl.dxa.modules.docs.mashup.controller;
 
 import com.sdl.dxa.modules.docs.localization.DocsLocalization;
-import com.sdl.dxa.modules.docs.mashup.client.*;
+import com.sdl.dxa.modules.docs.mashup.client.TridionDocsClient;
 import com.sdl.dxa.modules.docs.mashup.models.products.Product;
-import com.sdl.dxa.modules.docs.mashup.models.widgets.*;
+import com.sdl.dxa.modules.docs.mashup.models.widgets.DynamicWidget;
+import com.sdl.dxa.modules.docs.mashup.models.widgets.StaticWidget;
+import com.sdl.dxa.modules.docs.mashup.models.widgets.Topic;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.content.ContentProvider;
 import com.sdl.webapp.common.api.content.ContentProviderException;
@@ -14,26 +16,29 @@ import com.sdl.webapp.common.api.model.RegionModel;
 import com.sdl.webapp.common.api.model.ViewModel;
 import com.sdl.webapp.common.controller.ControllerUtils;
 import com.sdl.webapp.common.controller.EntityController;
-import java.io.IOException;
-
-import java.util.*;
-import java.util.regex.Pattern;
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.xml.bind.ValidationException;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.xml.bind.ValidationException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.regex.Pattern;
+
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @Controller
 @RequestMapping(value={ControllerUtils.INCLUDE_PATH_PREFIX + "TridionDocsMashup/TridionDocsMashup" , "/docsmashup"})
@@ -48,7 +53,7 @@ public class TridionDocsMashupController extends EntityController {
     public TridionDocsMashupController(WebRequestContext webRequestContext, ContentProvider contentProvider, TridionDocsClient tridionDocsClient) {
         this.webRequestContext = webRequestContext;
         this.contentProvider = contentProvider;
-         this.tridionDocsClient = tridionDocsClient;
+        this.tridionDocsClient = tridionDocsClient;
     }
 
     @Override
