@@ -1,21 +1,14 @@
 package com.sdl.dxa.modules.docs.mashup;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sdl.dxa.modules.docs.mashup.client.TridionDocsPublicContentApiClient;
 import com.sdl.dxa.modules.docs.mashup.models.products.Bicycle;
 import com.sdl.dxa.modules.docs.mashup.models.widgets.DynamicWidget;
 import com.sdl.dxa.modules.docs.mashup.models.widgets.StaticWidget;
 import com.sdl.dxa.modules.docs.mashup.models.widgets.Topic;
-import com.sdl.dxa.tridion.pcaclient.ApiClientProvider;
-import com.sdl.webapp.common.api.WebRequestContext;
-import com.sdl.webapp.common.api.content.ContentProvider;
 import com.sdl.webapp.common.api.mapping.views.AbstractModuleInitializer;
 import com.sdl.webapp.common.api.mapping.views.ModuleInfo;
 import com.sdl.webapp.common.api.mapping.views.RegisteredViewModel;
 import com.sdl.webapp.common.api.mapping.views.RegisteredViewModels;
 import com.sdl.webapp.common.api.model.region.RegionModelImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
