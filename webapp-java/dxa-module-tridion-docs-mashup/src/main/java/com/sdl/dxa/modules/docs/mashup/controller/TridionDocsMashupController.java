@@ -18,6 +18,7 @@ import com.sdl.webapp.common.controller.ControllerUtils;
 import com.sdl.webapp.common.controller.EntityController;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -43,6 +44,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @Controller
 @RequestMapping(value={ControllerUtils.INCLUDE_PATH_PREFIX + "TridionDocsMashup/TridionDocsMashup" , "/docsmashup"})
 @Slf4j
+@Profile("!cil.providers.active")
 public class TridionDocsMashupController extends EntityController {
 
     private final WebRequestContext webRequestContext;
