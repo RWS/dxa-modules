@@ -40,5 +40,10 @@
             <groupId>com.sdl.dxa.modules</groupId>
             <artifactId>dxa-module-tridion-docs-common</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+        </dependency>
     </dependencies>
 </project>
