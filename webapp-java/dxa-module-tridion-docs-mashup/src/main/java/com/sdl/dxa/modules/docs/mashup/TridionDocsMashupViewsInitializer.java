@@ -11,11 +11,13 @@ import com.sdl.webapp.common.api.mapping.views.RegisteredViewModels;
 import com.sdl.webapp.common.api.model.region.RegionModelImpl;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 @SuppressWarnings("unused")
 @Configuration
 @ComponentScan("com.sdl.dxa.modules.docs.mashup")
+@Profile("!cil.providers.active")
 public class TridionDocsMashupViewsInitializer {
 
     @RegisteredViewModels({
