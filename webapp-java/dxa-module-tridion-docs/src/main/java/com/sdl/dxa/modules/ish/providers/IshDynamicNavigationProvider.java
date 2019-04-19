@@ -50,8 +50,7 @@ public class IshDynamicNavigationProvider {
     public IshDynamicNavigationProvider(StaticNavigationProvider staticNavigationProvider,
                                         LinkResolver linkResolver,
                                         NavigationModelProvider navigationModelProvider,
-                                        @Qualifier("ishDynamicNavigationModelProvider")
-                                                OnDemandNavigationModelProvider onDemandNavigationModelProvider) {
+                                        OnDemandNavigationModelProvider onDemandNavigationModelProvider) {
         this.staticNavigationProvider = staticNavigationProvider;
         this.linkResolver = linkResolver;
         this.navigationModelProvider = navigationModelProvider;
