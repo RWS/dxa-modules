@@ -1,7 +1,7 @@
 package com.sdl.dxa.modules.ish.services;
 
 import com.sdl.dxa.tridion.modelservice.ModelServiceClient;
-import com.sdl.dxa.tridion.modelservice.ModelServiceConfiguration;
+import com.sdl.dxa.tridion.modelservice.ModelServiceClientConfiguration;
 import com.tridion.ambientdata.claimstore.ClaimStore;
 import com.tridion.ambientdata.web.WebContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import java.util.Map;
 public class IshModuleServiceClient extends ModelServiceClient  {
 
     @Autowired
-    public IshModuleServiceClient(ModelServiceConfiguration configuration) {
+    public IshModuleServiceClient(ModelServiceClientConfiguration configuration) {
         super(configuration);
     }
 
