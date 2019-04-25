@@ -2,7 +2,6 @@ package com.sdl.dxa.modules.docs.mashup.controller;
 
 import com.sdl.dxa.modules.docs.localization.DocsLocalization;
 import com.sdl.dxa.modules.docs.mashup.client.TridionDocsClient;
-import com.sdl.dxa.modules.docs.mashup.exception.DocsMashupException;
 import com.sdl.dxa.modules.docs.mashup.models.products.Product;
 import com.sdl.dxa.modules.docs.mashup.models.widgets.DynamicWidget;
 import com.sdl.dxa.modules.docs.mashup.models.widgets.StaticWidget;
@@ -83,58 +82,51 @@ public class TridionDocsMashupController extends EntityController {
             // We are looking for a product entity by its view name which is specified in the dynamicWidget.ProductViewModel .
             for (RegionModel regionModel : this.webRequestContext.getPage().getRegions()) {
                 List<EntityModel> entities = regionModel.getEntities();
-                if (entities == null) {
-                    continue;
-                }
-                Optional<EntityModel> entity = entities
-                        .stream()
-                        .filter(s -> s.getMvcData().getViewName().equals(dynamicWidget.getProductViewModel()))
-                        .findFirst();
-                if (!entity.isPresent()) {
-                    continue;
-                }
-                Product product = (Product) entity.get();
-                if (product.getKeywords() != null) {
-                    // When the product entity is found, we get its keywords.
-                    // But we only collect those keywords specified in the dynamicWidget.Keywords .
-                    // Then we are ready to get TridionDocs topics by the keywords values .
 
-                    topics = getTopics(dynamicWidget, topics, product);
+                if (entities != null) {
+                    Optional<EntityModel> entity = entities.stream().filter((s) -> s.getMvcData().getViewName().equals(dynamicWidget.getProductViewModel())).findFirst();
 
-                    break;
+                    if (entity.isPresent()) {
+                        Product product = (Product) entity.get();
+
+                        if (product != null && product.getKeywords() != null) {
+                            // When the product entity is found, we get its keywords.
+                            // But we only collect those keywords specified in the dynamicWidget.Keywords .
+                            // Then we are ready to get TridionDocs topics by the keywords values .
+
+                            if (validate(product.getKeywords(), dynamicWidget.getMaxItems())) {
+                                Map<String, KeywordModel> keywords = new HashMap<>();
+
+                                for (String entry : dynamicWidget.getKeywords()) {
+                                    Optional<Map.Entry<String, KeywordModel>> result = product.getKeywords().entrySet().stream().filter((s) -> s.getKey().contains("." + entry + ".")).findFirst();
+
+                                    if (result.isPresent()) {
+                                        Map.Entry<String, KeywordModel> keyword = result.get();
+
+                                        if (keyword.getValue() != null && !keywords.containsKey(keyword.getKey())) {
+                                            keywords.put(keyword.getKey(), keyword.getValue());
+                                        }
+                                    }
+                                }
+
+                                if (!keywords.isEmpty()) {
+                                    topics = tridionDocsClient.getTopicsByKeywords(keywords, dynamicWidget.getMaxItems());
+                                }
+                            }
+
+                            break;
+                        }
+                    }
                 }
             }
+
             dynamicWidget.setTopics(topics);
         }
 
         return model;
     }
-
-    private List<Topic> getTopics(DynamicWidget dynamicWidget, List<Topic> topics, Product product) throws ValidationException, DocsMashupException {
-        if (!validate(product.getKeywords(), dynamicWidget.getMaxItems())) {
-            return topics;
-        }
-        Map<String, KeywordModel> keywords = new HashMap<>();
-
-        for (String entry : dynamicWidget.getKeywords()) {
-            Optional<Map.Entry<String, KeywordModel>> result = product.getKeywords().entrySet().stream().filter((s) -> s.getKey().contains("." + entry + ".")).findFirst();
-
-            if (result.isPresent()) {
-                Map.Entry<String, KeywordModel> keyword = result.get();
-
-                if (keyword.getValue() != null && !keywords.containsKey(keyword.getKey())) {
-                    keywords.put(keyword.getKey(), keyword.getValue());
-                }
-            }
-        }
-
-        if (!keywords.isEmpty()) {
-            topics = tridionDocsClient.getTopicsByKeywords(keywords, dynamicWidget.getMaxItems());
-        }
-        return topics;
-    }
-
-    /**
+    
+     /**
      * Get binary data.
      *
      * @param publicationId Publication id
@@ -143,41 +135,49 @@ public class TridionDocsMashupController extends EntityController {
      * @throws ContentProviderException if page model cannot be fetched
      * @throws IOException if something wrong with tomcat response channel
      */
-    @RequestMapping(method = GET, value ="/binary/{publicationId}/{binaryId}/**" ,produces = MediaType.ALL_VALUE)
+     @RequestMapping(method = GET, value ="/binary/{publicationId}/{binaryId}/**" ,produces = MediaType.ALL_VALUE)
     @ResponseBody
     public ResponseEntity<InputStreamResource> getBinaryResource(@PathVariable Integer publicationId,
                                                                  @PathVariable Integer binaryId)
             throws ContentProviderException, IOException {
 
+        InputStreamResource result = null;
         HttpHeaders responseHeaders = new HttpHeaders();
+
         DocsLocalization docsLocalization = new DocsLocalization();
+
         docsLocalization.setPublicationId(String.valueOf(publicationId));
+
         StaticContentItem binaryItem = contentProvider.getStaticContent(binaryId, docsLocalization.getId(), docsLocalization.getPath());
+
         if (binaryItem == null) {
-             return new ResponseEntity<>(null, responseHeaders, HttpStatus.NOT_FOUND);
+             return new ResponseEntity<>(result, responseHeaders, HttpStatus.NOT_FOUND);
         }
-        InputStreamResource result = new InputStreamResource(binaryItem.getContent());
+         result = new InputStreamResource(binaryItem.getContent());
      
         responseHeaders.setContentType(MediaType.parseMediaType(binaryItem.getContentType()));
         responseHeaders.setContentLength(binaryItem.getContent().available());
          
         return new ResponseEntity<>(result, responseHeaders, HttpStatus.OK);
     }
+    
 
     private Boolean validate(Map<String, KeywordModel> keywords, Integer maxItems) throws ValidationException {
         if (maxItems == null || maxItems < 1) {
             return false;
         }
-        if (keywords == null || keywords.isEmpty()) {
-            return true;
-        }
-        for (Map.Entry<String, KeywordModel> entry : keywords.entrySet()) {
-            String[] keywordFiledXmlName = entry.getKey().split(Pattern.quote("."));
 
-            if (keywordFiledXmlName.length != 3) {
-                throw new ValidationException("Keyword key must be in the format SCOPE.KEYWORDNAME.FIELDTYPE (e.g. Item.FMBCONTENTREFTYPE.logical).");
+        if (keywords != null && !keywords.isEmpty()) {
+
+            for (Map.Entry<String, KeywordModel> entry : keywords.entrySet()) {
+                String[] keywordFiledXmlName = entry.getKey().split(Pattern.quote("."));
+
+                if (keywordFiledXmlName.length != 3) {
+                    throw new ValidationException("Keyword key must be in the format SCOPE.KEYWORDNAME.FIELDTYPE (e.g. Item.FMBCONTENTREFTYPE.logical).");
+                }
             }
         }
+
         return true;
     }
 }
