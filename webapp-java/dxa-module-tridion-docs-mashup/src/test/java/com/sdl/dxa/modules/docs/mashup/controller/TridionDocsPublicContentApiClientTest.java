@@ -2,6 +2,7 @@ package com.sdl.dxa.modules.docs.mashup.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sdl.dxa.modules.docs.mashup.client.TridionDocsPublicContentApiClient;
+import com.sdl.dxa.tridion.mapping.ModelBuilderPipeline;
 import com.sdl.dxa.tridion.pcaclient.ApiClientProvider;
 import com.sdl.web.pca.client.ApiClient;
 import com.sdl.web.pca.client.exception.GraphQLClientException;
@@ -37,6 +38,9 @@ public class TridionDocsPublicContentApiClientTest {
     @Mock
     private Localization localization;
 
+    @Mock
+    private ModelBuilderPipeline modelBuilderPipeline;
+
     TridionDocsPublicContentApiClient tridionDocsPublicContentApiClient;
 
     @Before
@@ -46,7 +50,7 @@ public class TridionDocsPublicContentApiClientTest {
         when(localization.getConfiguration(TridionDocsPublicContentApiClient.TOPICS_BINARYURL_PREFIX_CONFIGNAME)).thenReturn("http://test.com/binary");
         when(apiClientProvider.getClient()).thenReturn(apiClient);
         
-        tridionDocsPublicContentApiClient = new TridionDocsPublicContentApiClient(webRequestContext, apiClientProvider, objectMapper);
+        tridionDocsPublicContentApiClient = new TridionDocsPublicContentApiClient(webRequestContext, apiClientProvider, objectMapper, modelBuilderPipeline);
     }
 
     @Test
