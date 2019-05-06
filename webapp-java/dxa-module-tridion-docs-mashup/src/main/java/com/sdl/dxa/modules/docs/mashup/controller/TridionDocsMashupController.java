@@ -170,9 +170,9 @@ public class TridionDocsMashupController extends EntityController {
             return true;
         }
         for (Map.Entry<String, KeywordModel> entry : keywords.entrySet()) {
-            String[] keywordFiledXmlName = entry.getKey().split(Pattern.quote("."));
+            String[] keywordFilledXmlName = entry.getKey().split(Pattern.quote("."));
 
-            if (keywordFiledXmlName.length != 3) {
+            if (keywordFilledXmlName.length != 3) {
                 throw new ValidationException("Keyword key must be in the format SCOPE.KEYWORDNAME.FIELDTYPE (e.g. Item.FMBCONTENTREFTYPE.logical).");
             }
         }
