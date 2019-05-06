@@ -63,7 +63,7 @@ public class IshContentProvider extends DefaultContentProvider {
     private ModelServiceClient modelServiceClient;
 
     @Autowired
-    private ModelServiceClientConfiguration ModelServiceClientConfiguration;
+    private ModelServiceClientConfiguration modelServiceClientConfiguration;
 
     @Autowired
     private BinaryContentRetriever binaryContentRetriever;
@@ -101,7 +101,7 @@ public class IshContentProvider extends DefaultContentProvider {
         int publicationId = Ints.tryParse(localization.getId());
         String cmId = TcmUtils.buildTcmUri("ish", String.valueOf(publicationId), pageId, ItemTypes.COMPONENT);
         try {
-            String serviceUrl = ModelServiceClientConfiguration.getPageModelUrl(); //we need to convert URL to form like http://<CM.client.ip>:<port>/PageModel/ish/pubId-pageId
+            String serviceUrl = modelServiceClientConfiguration.getPageModelUrl(); //we need to convert URL to form like http://<CM.client.ip>:<port>/PageModel/ish/pubId-pageId
             serviceUrl = serviceUrl.replaceAll("(.*)/(\\{localizationId\\})/(\\{pageUrl\\})\\?.*", "$1/$2-$3");
             PageModelData pageModelData = modelServiceClient.getForType(serviceUrl, PageModelData.class, "ish", String.valueOf(publicationId), pageId, "INCLUDE");
             PageModel pageModel = modelBuilderPipeline.createPageModel(pageModelData);
