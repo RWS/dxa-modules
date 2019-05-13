@@ -10,8 +10,10 @@ import lombok.Data;
 
 import java.util.List;
 
+import static com.sdl.webapp.common.api.mapping.semantic.config.SemanticVocabulary.SDL_DITA;
+
 @Data
-@SemanticEntity(entityName = "title")
+@SemanticEntity(entityName = "title", vocabulary = SDL_DITA)
 public class Topic extends AbstractEntityModel {
 
     private String id;
