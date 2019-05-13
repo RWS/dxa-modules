@@ -23,9 +23,7 @@
                 if(entity.getDisplayContentAs().toLowerCase().equals("embedded content"))
                 {
     %>
-                    <div class="content" ${markup.property(entity, "topics")}>
-                        <dxa:richtext content="<%=topic.getBody()%>" />
-                    </div>
+                    <dxa:entity entity="<%=topic%>"/>
     <%
                  }
                  else

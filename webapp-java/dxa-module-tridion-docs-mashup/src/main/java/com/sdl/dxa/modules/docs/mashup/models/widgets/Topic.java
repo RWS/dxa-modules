@@ -4,8 +4,11 @@ import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticEntity;
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticMappingIgnore;
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticProperties;
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticProperty;
+import com.sdl.webapp.common.api.model.MvcData;
 import com.sdl.webapp.common.api.model.RichText;
 import com.sdl.webapp.common.api.model.entity.AbstractEntityModel;
+import com.sdl.webapp.common.api.model.mvcdata.DefaultsMvcData;
+import com.sdl.webapp.common.api.model.mvcdata.MvcDataCreator;
 import lombok.Data;
 
 import java.util.List;
@@ -64,5 +67,13 @@ public class Topic extends AbstractEntityModel {
 
     public void setNestedTopics(List<Topic> nestedTopics) {
         this.nestedTopics = nestedTopics;
+    }
+
+    @Override
+    public MvcData getDefaultMvcData() {
+        return MvcDataCreator.creator()
+                .fromQualifiedName("TridionDocsMashup:Entity:Topic")
+                .defaults(DefaultsMvcData.ENTITY)
+                .create();
     }
 }
