@@ -23,7 +23,7 @@ pipeline {
                             //DXA has to be able to be build without SDL proprietary dependencies:
                             //sh "cd webapp-java && mvn -B dependency:purge-local-repository -DreResolve=false"
     
-                            sh "cd webapp-java && mvn -s $MAVEN_SETTINGS_PATH -B clean verify"
+                            sh "cd webapp-java && mvn -s $MAVEN_SETTINGS_PATH -B -U clean verify"
                         }
                     }
                 }
@@ -38,7 +38,7 @@ pipeline {
                     script {
                         //Build on JDK8
                         jdk8BuilderImage.inside {
-                            sh "cd webapp-java && mvn -s $MAVEN_SETTINGS_PATH -B clean verify"
+                            sh "cd webapp-java && mvn -s $MAVEN_SETTINGS_PATH -B -U clean verify"
                         }
                     }
                 }
@@ -54,7 +54,7 @@ pipeline {
                         //Build on JDK8 and deploy it to local repository:
                         jdk8BuilderImage.inside {
                             //Main build:
-                            sh "cd webapp-java && mvn -s $MAVEN_SETTINGS_PATH -B -Dmaven.repo.local=local-project-repo clean source:jar deploy"
+                            sh "cd webapp-java && mvn -s $MAVEN_SETTINGS_PATH -B -U -Dmaven.repo.local=local-project-repo clean source:jar deploy"
                         }
                     }
                 }
