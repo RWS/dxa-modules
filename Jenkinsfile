@@ -17,12 +17,14 @@ pipeline {
         stage ('Build with JDK11') {
             steps {
                 withCredentials([file(credentialsId: 'dxa-maven-settings', variable: 'MAVEN_SETTINGS_PATH')]) {
-                    //DXA has to be able to be built on JDK11:
-                    jdk11BuilderImage.inside {
-                        //DXA has to be able to be build without SDL proprietary dependencies:
-                        //sh "cd webapp-java && mvn -B dependency:purge-local-repository -DreResolve=false"
+                    script {
+                        //DXA has to be able to be built on JDK11:
+                        jdk11BuilderImage.inside {
+                            //DXA has to be able to be build without SDL proprietary dependencies:
+                            //sh "cd webapp-java && mvn -B dependency:purge-local-repository -DreResolve=false"
     
-                        sh "cd webapp-java && mvn -s $MAVEN_SETTINGS_PATH -B clean verify"
+                            sh "cd webapp-java && mvn -s $MAVEN_SETTINGS_PATH -B clean verify"
+                        }
                     }
                 }
             }
