@@ -4,25 +4,28 @@ pipeline {
     }
 
     stages {
-/*
-	//Sometime in the future we should be able to build on JDK11:
-        stage ('Build with JDK11') {
-            steps {
-                //DXA has to be able to be built on JDK11:
-                withDockerContainer("maven:3.6-jdk-11-slim") { 
-                    //DXA has to be able to be build without SDL proprietary dependencies:
-                    sh "cd webapp-java && mvn -B dependency:purge-local-repository -DreResolve=false"
-
-                    sh "cd webapp-java && mvn -B clean verify"
-                }
-            }
-        }
-*/
 
         stage('Create the docker builder image(s)') {
             steps {
                 script {
                     jdk8BuilderImage = docker.image("maven:3.6-jdk-8-alpine")
+                    jdk11BuilderImage = docker.image("maven:3.6-jdk-11-slim")
+                }
+            }
+        }
+
+        stage ('Build with JDK11') {
+            steps {
+                withCredentials([file(credentialsId: 'dxa-maven-settings', variable: 'MAVEN_SETTINGS_PATH')]) {
+                    script {
+                        //DXA has to be able to be built on JDK11:
+                        jdk11BuilderImage.inside {
+                            //DXA has to be able to be build without SDL proprietary dependencies:
+                            //sh "cd webapp-java && mvn -B dependency:purge-local-repository -DreResolve=false"
+    
+                            sh "cd webapp-java && mvn -s $MAVEN_SETTINGS_PATH -B -U clean verify"
+                        }
+                    }
                 }
             }
         }
@@ -35,7 +38,7 @@ pipeline {
                     script {
                         //Build on JDK8
                         jdk8BuilderImage.inside {
-                            sh "cd webapp-java && mvn -s $MAVEN_SETTINGS_PATH -B clean verify"
+                            sh "cd webapp-java && mvn -s $MAVEN_SETTINGS_PATH -B -U clean verify"
                         }
                     }
                 }
@@ -51,7 +54,7 @@ pipeline {
                         //Build on JDK8 and deploy it to local repository:
                         jdk8BuilderImage.inside {
                             //Main build:
-                            sh "cd webapp-java && mvn -s $MAVEN_SETTINGS_PATH -B -Dmaven.repo.local=local-project-repo clean source:jar deploy"
+                            sh "cd webapp-java && mvn -s $MAVEN_SETTINGS_PATH -B -U -Dmaven.repo.local=local-project-repo clean source:jar deploy"
                         }
                     }
                 }
