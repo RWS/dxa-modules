@@ -63,6 +63,7 @@ namespace Sdl.Web.Modules.Test
             RegisterViewModel("TSI1856Test", typeof(Tsi1856TestEntity));
             RegisterViewModel("TSI2316Test", typeof(Tsi2316TestEntity));
             RegisterViewModel("CompLinkTest", typeof(CompLinkTest));
+            RegisterViewModel("CompLinkTest2", typeof(CompLinkTest2));
             RegisterViewModel("NoCacheEntity", typeof(NoCacheEntityModel));
             RegisterViewModel("CacheEntity", typeof(CacheEntityModel));
             RegisterViewModel("SimpleTestEntity", typeof(SimpleTestEntityModel));
