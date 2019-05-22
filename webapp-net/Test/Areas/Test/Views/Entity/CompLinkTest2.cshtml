@@ -1,0 +1,11 @@
+﻿@model CompLinkTest2
+<div class="entity" @Html.DxaEntityMarkup()>
+    <h3>Rendered @Model with Entity View "Test:CompLinkTest2"</h3>
+
+    <h4>CompLinkAsString (@Model.CompLink.Count values)</h4>
+    @foreach (var str in Model.CompLink)
+    {
+        <div>"@str.Url"</div>
+    }
+
+</div>
