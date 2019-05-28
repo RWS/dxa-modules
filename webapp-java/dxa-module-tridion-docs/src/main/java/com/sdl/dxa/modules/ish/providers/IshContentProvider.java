@@ -10,7 +10,7 @@ import com.sdl.dxa.tridion.content.StaticContentResolver;
 import com.sdl.dxa.tridion.mapping.ModelBuilderPipeline;
 import com.sdl.dxa.tridion.mapping.impl.DefaultContentProvider;
 import com.sdl.dxa.tridion.modelservice.ModelServiceClient;
-import com.sdl.dxa.tridion.modelservice.ModelServiceConfiguration;
+import com.sdl.dxa.tridion.modelservice.ModelServiceClientConfiguration;
 import com.sdl.dxa.tridion.modelservice.exceptions.ItemNotFoundInModelServiceException;
 import com.sdl.dxa.tridion.modelservice.exceptions.ModelServiceInternalServerErrorException;
 import com.sdl.web.api.content.BinaryContentRetriever;
@@ -63,7 +63,7 @@ public class IshContentProvider extends DefaultContentProvider {
     private ModelServiceClient modelServiceClient;
 
     @Autowired
-    private ModelServiceConfiguration modelServiceConfiguration;
+    private ModelServiceClientConfiguration modelServiceClientConfiguration;
 
     @Autowired
     private BinaryContentRetriever binaryContentRetriever;
@@ -101,7 +101,7 @@ public class IshContentProvider extends DefaultContentProvider {
         int publicationId = Ints.tryParse(localization.getId());
         String cmId = TcmUtils.buildTcmUri("ish", String.valueOf(publicationId), pageId, ItemTypes.COMPONENT);
         try {
-            String serviceUrl = modelServiceConfiguration.getPageModelUrl(); //we need to convert URL to form like http://<CM.client.ip>:<port>/PageModel/ish/pubId-pageId
+            String serviceUrl = modelServiceClientConfiguration.getPageModelUrl(); //we need to convert URL to form like http://<CM.client.ip>:<port>/PageModel/ish/pubId-pageId
             serviceUrl = serviceUrl.replaceAll("(.*)/(\\{localizationId\\})/(\\{pageUrl\\})\\?.*", "$1/$2-$3");
             PageModelData pageModelData = modelServiceClient.getForType(serviceUrl, PageModelData.class, "ish", String.valueOf(publicationId), pageId, "INCLUDE");
             PageModel pageModel = modelBuilderPipeline.createPageModel(pageModelData);

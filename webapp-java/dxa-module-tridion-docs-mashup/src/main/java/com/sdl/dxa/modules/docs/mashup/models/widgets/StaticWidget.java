@@ -1,12 +1,15 @@
 package com.sdl.dxa.modules.docs.mashup.models.widgets;
 
 import com.sdl.dxa.caching.NeverCached;
-import com.sdl.webapp.common.api.mapping.semantic.annotations.*;
+import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticEntity;
+import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticMappingIgnore;
+import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticProperty;
+import com.sdl.webapp.common.api.model.KeywordModel;
 import com.sdl.webapp.common.api.model.entity.AbstractEntityModel;
 import lombok.EqualsAndHashCode;
-import java.util.Map;
-import com.sdl.webapp.common.api.model.KeywordModel;
+
 import java.util.List;
+import java.util.Map;
 
 @NeverCached(qualifier = "StaticWidget")
 @EqualsAndHashCode(callSuper = true)

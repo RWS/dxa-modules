@@ -4,12 +4,10 @@ import com.sdl.dxa.caching.NeverCached;
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticEntity;
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticMappingIgnore;
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticProperty;
-import com.sdl.webapp.common.api.model.KeywordModel;
 import com.sdl.webapp.common.api.model.entity.AbstractEntityModel;
 import lombok.EqualsAndHashCode;
 
 import java.util.List;
-import java.util.Map;
 
 @NeverCached(qualifier = "DynamicWidget")
 @EqualsAndHashCode(callSuper = true)
@@ -70,5 +68,4 @@ public class DynamicWidget extends AbstractEntityModel {
     public void setTopics(List<Topic> topics) {
         this.topics = topics;
     }
-
 }

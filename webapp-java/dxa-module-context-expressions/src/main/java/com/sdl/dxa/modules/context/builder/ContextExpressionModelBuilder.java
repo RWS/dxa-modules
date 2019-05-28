@@ -57,7 +57,7 @@ public class ContextExpressionModelBuilder implements EntityModelBuilder, Ordere
             return originalEntityModel;
         }
 
-        LocalizationAwareCacheKey cacheKey = entitiesCache.getSpecificKey(modelData);
+        Object cacheKey = entitiesCache.getSpecificKey(modelData);
         if (entitiesCache.containsKey(cacheKey)) {
             //noinspection unchecked
             T modelInCache = (T) entitiesCache.get(cacheKey);

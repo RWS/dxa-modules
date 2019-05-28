@@ -56,9 +56,6 @@ public class UgcApiControllerTest {
     @Before
     public void init() {
         comments = new ArrayList<>();
-        when(webRequestContext.getLocalization()).thenReturn(localization);
-        when(localization.getPath()).thenReturn("path");
-        when(ugcService.getComments(any(int.class), any(int.class), any(boolean.class), any(Integer[].class), any(int.class), any(int.class))).thenReturn(comments);
         when(ugcService.postComment(any(int.class), any(int.class), any(String.class), any(String.class),
                 any(String.class), any(int.class), anyMapOf(String.class,String.class))).thenReturn(comment);
     }
@@ -88,7 +85,6 @@ public class UgcApiControllerTest {
         when(comment.getUser()).thenReturn(user);
         when(user.getName()).thenReturn(USER_NAME);
         when(user.getEmailAddress()).thenReturn(USER_EMAIL);
-        when(comment.getContent()).thenReturn(COMMENT_TEXT);
         when(postedComment.getParentId()).thenReturn("0");
 
         //when

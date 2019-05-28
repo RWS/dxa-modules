@@ -1,6 +1,7 @@
 package com.sdl.dxa.modules;
 
 import com.sdl.dxa.modules.core.model.entity.Article;
+import com.sdl.dxa.modules.model.CRQ14183.CompLinkTest2;
 import com.sdl.dxa.modules.model.TSI1757.Tsi1757TestEntity1;
 import com.sdl.dxa.modules.model.TSI1757.Tsi1757TestEntity2;
 import com.sdl.dxa.modules.model.TSI1757.Tsi1757TestEntity3;
@@ -74,6 +75,9 @@ import org.springframework.stereotype.Component;
         // https://jira.sdl.com/browse/TSI-2315
         @RegisteredViewModel(viewName = "CompLinkTest", modelClass = CompLinkTest.class),
         @RegisteredViewModel(modelClass = TestEntity.class),
+
+        // https://jira.sdl.com/browse/CRQ-14183
+        @RegisteredViewModel(viewName = "CompLinkTest2", modelClass = CompLinkTest2.class),
 
         // https://jira.sdl.com/browse/TSI-2525
         @RegisteredViewModel(viewName = "NoCacheEntity", modelClass = NoCacheEntityModel.class),

@@ -16,7 +16,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UgControllerTest {
@@ -49,7 +52,6 @@ public class UgControllerTest {
         UgcComments model = mock(UgcComments.class);
         ugcComments = new ArrayList<>();
         when(model.getTarget()).thenReturn(new TCMURI("tcm:1-2-16"));
-        when(model.getComments()).thenReturn(ugcComments);
         when(ugcService.getComments(any(int.class), any(int.class), any(boolean.class), any(Integer[].class), any(int.class), any(int.class))).thenReturn(new ArrayList<>());
 
         //when

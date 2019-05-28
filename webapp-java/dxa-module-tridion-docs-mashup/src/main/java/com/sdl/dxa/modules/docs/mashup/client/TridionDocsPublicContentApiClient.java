@@ -5,10 +5,15 @@ import com.sdl.dxa.api.datamodel.model.EntityModelData;
 import com.sdl.dxa.api.datamodel.model.PageModelData;
 import com.sdl.dxa.modules.docs.mashup.exception.DocsMashupException;
 import com.sdl.dxa.modules.docs.mashup.models.widgets.Topic;
+import com.sdl.dxa.tridion.mapping.ModelBuilderPipeline;
 import com.sdl.dxa.tridion.pcaclient.ApiClientProvider;
 import com.sdl.web.pca.client.ApiClient;
 import com.sdl.web.pca.client.contentmodel.Pagination;
 import com.sdl.web.pca.client.contentmodel.enums.ContentIncludeMode;
+import com.sdl.web.pca.client.contentmodel.enums.ContentType;
+import com.sdl.web.pca.client.contentmodel.enums.DataModelType;
+import com.sdl.web.pca.client.contentmodel.enums.ModelServiceLinkRendering;
+import com.sdl.web.pca.client.contentmodel.enums.TcdlLinkRendering;
 import com.sdl.web.pca.client.contentmodel.generated.CriteriaScope;
 import com.sdl.web.pca.client.contentmodel.generated.CustomMetaValueType;
 import com.sdl.web.pca.client.contentmodel.generated.InputCustomMetaCriteria;
@@ -16,17 +21,20 @@ import com.sdl.web.pca.client.contentmodel.generated.InputItemFilter;
 import com.sdl.web.pca.client.contentmodel.generated.InputSortParam;
 import com.sdl.web.pca.client.contentmodel.generated.ItemConnection;
 import com.sdl.web.pca.client.contentmodel.generated.ItemEdge;
-import com.sdl.web.pca.client.contentmodel.enums.ContentType;
-import com.sdl.web.pca.client.contentmodel.enums.DataModelType;
-import com.sdl.web.pca.client.contentmodel.enums.ModelServiceLinkRendering;
-import com.sdl.web.pca.client.contentmodel.enums.TcdlLinkRendering;
 import com.sdl.web.pca.client.contentmodel.generated.Page;
 import com.sdl.web.pca.client.contentmodel.generated.SortFieldType;
 import com.sdl.web.pca.client.contentmodel.generated.SortOrderType;
 import com.sdl.web.pca.client.exception.GraphQLClientException;
 import com.sdl.webapp.common.api.WebRequestContext;
+import com.sdl.webapp.common.api.model.EntityModel;
 import com.sdl.webapp.common.api.model.KeywordModel;
-import com.sdl.webapp.common.api.model.RichText;
+import com.sdl.webapp.common.exceptions.DxaException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
+
 import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
@@ -35,10 +43,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 /**
  *
@@ -48,11 +52,13 @@ import org.springframework.stereotype.Component;
  */
 @SuppressWarnings("unchecked")
 @Component
+@Profile("!cil.providers.active")
 public class TridionDocsPublicContentApiClient implements TridionDocsClient {
 
     private final ApiClient apiClient;
     private final WebRequestContext webRequestContext;
     private final ObjectMapper objectMapper;
+    private final ModelBuilderPipeline modelBuilderPipeline;
 
     private static final Logger LOG = LoggerFactory.getLogger(TridionDocsPublicContentApiClient.class);
 
@@ -60,11 +66,12 @@ public class TridionDocsPublicContentApiClient implements TridionDocsClient {
     public static final String TOPICS_BINARYURL_PREFIX_CONFIGNAME = "tridiondocsmashup.PrefixForBinariesUrl";
 
     @Autowired
-    public TridionDocsPublicContentApiClient(WebRequestContext webRequestContext, ApiClientProvider apiClientProvider, ObjectMapper objectMapper) {
+    public TridionDocsPublicContentApiClient(WebRequestContext webRequestContext, ApiClientProvider apiClientProvider, ObjectMapper objectMapper, ModelBuilderPipeline modelBuilderPipeline) {
 
         this.webRequestContext = webRequestContext;
         this.objectMapper = objectMapper;
         this.apiClient = apiClientProvider.getClient();
+        this.modelBuilderPipeline = modelBuilderPipeline;
 
         this.apiClient.setDefaultContentType(ContentType.MODEL);
         this.apiClient.setDefaultModelType(DataModelType.R2);
@@ -146,7 +153,7 @@ public class TridionDocsPublicContentApiClient implements TridionDocsClient {
     /**
      * Extracts and returns a collection of topics from the query's results
      */
-    private List<Topic> getDocsTopics(List<ItemEdge> results) throws IOException {
+    private List<Topic> getDocsTopics(List<ItemEdge> results) throws IOException, DxaException {
 
         List<Topic> topics = new LinkedList<Topic>();
 
@@ -168,20 +175,17 @@ public class TridionDocsPublicContentApiClient implements TridionDocsClient {
                 // Extract the R2 Data Model of the Topic and convert it to a Strongly Typed View Model
                 EntityModelData topicModelData = pageModelData.getRegions().get(0).getEntities().get(0);
 
-                //Todo : We need to use StronglyTypedTopicBuilder to create Topic entity model same as .Net
-                //like EntityModel topicModel = ModelBuilderPipeline.CreateEntityModel(topicModelData, null, docsLocalization);
-                String topicId = topicModelData.getXpmMetadata().get("ComponentID").toString();
-                String topicTitle = topicModelData.getContent().getAndCast("topicTitle", String.class);
-                String topicBody = topicModelData.getContent().getAndCast("topicBody", String.class);
-                String topicUrl = topicModelData.getLinkUrl();
-
-                Topic topic = new Topic();
-                topic.setId(topicId);
-                topic.setLink(getFullyQualifiedUrlForTopic(topicUrl, getPrefixForTopicsUrl()));
-                topic.setTitle(new RichText(topicTitle));
-                topic.setBody(new RichText(topicBody));
-
-                topics.add(topic);
+                //Use the StronglyTypedTopicBuilder to create Topic an entity model:
+                EntityModel topicModel = modelBuilderPipeline.createEntityModel(topicModelData, null);
+                if (topicModel instanceof Topic) {
+                    Topic topic = (Topic) topicModel;
+                    String topicUrl = topicModelData.getLinkUrl();
+                    topic.setLink(getFullyQualifiedUrlForTopic(topicUrl, getPrefixForTopicsUrl()));
+                    topics.add(topic);
+                } else {
+                    LOG.warn("Unexpected View Model type for {}: '{}'", topicModel, topicModel.getClass().getSimpleName());
+                    continue;
+                }
             }
         }
 

@@ -115,7 +115,6 @@ public class UgcModelBuilderTest {
         pageModelData.setPageTemplate(pageTemplate);
 
         when(webRequestContext.getLocalization()).thenReturn(localization);
-        when(localization.getPath()).thenReturn("path");
         when(localization.getId()).thenReturn("1");
         when(testPage.getRegions()).thenReturn(regionModelSet);
         when(regionmodel.getEntities()).thenReturn(regionEntities);

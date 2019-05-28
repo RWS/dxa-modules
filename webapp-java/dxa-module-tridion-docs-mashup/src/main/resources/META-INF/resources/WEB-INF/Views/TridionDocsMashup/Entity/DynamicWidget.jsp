@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="com.sdl.dxa.modules.docs.mashup.models.widgets.*" %>
+<%@ page import="com.sdl.dxa.modules.docs.mashup.models.widgets.Topic" %>
 <%@ page import="java.util.List" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -23,9 +23,7 @@
                 if(entity.getDisplayContentAs().toLowerCase().equals("embedded content"))
                 {
     %>
-                    <div class="content" ${markup.property(entity, "topics")}>
-                        <dxa:richtext content="<%=topic.getBody()%>" />
-                    </div>
+                    <dxa:entity entity="<%=topic%>"/>
     <%
                  }
                  else

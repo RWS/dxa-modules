@@ -4,7 +4,7 @@
 
     <parent>
         <groupId>com.sdl.dxa</groupId>
-        <artifactId>dxa-oss-parent</artifactId>
+        <artifactId>dxa-parent</artifactId>
         <version>2.2.0-SNAPSHOT</version>
     </parent>
 
@@ -15,7 +15,7 @@
     <description>Implementation of DXA Tridion Docs Mashup module</description>
 	
     <properties>
-        <dxa.version>${project.version}</dxa.version>
+        <dxa.version>${project.parent.version}</dxa.version>
     </properties>
 
     <scm>
@@ -28,81 +28,29 @@
     <dependencies>
         <dependency>
             <groupId>com.sdl.dxa</groupId>
-            <artifactId>dxa-common-api</artifactId>
+            <artifactId>dxa-tridion-provider</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.sdl.dxa</groupId>
-            <artifactId>dxa-common</artifactId>
+            <groupId>com.sdl.dxa.modules</groupId>
+            <artifactId>dxa-module-tridion-docs-common</artifactId>
         </dependency>
-
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-        </dependency>
-        
-         <dependency>
-            <groupId>com.sdl.dxa</groupId>
-            <artifactId>dxa-tridion-common</artifactId>
-        </dependency>
-           
-        <dependency>
-            <groupId>com.sdl.web.pca</groupId>
-            <artifactId>pca-client</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>com.sdl.web.pca</groupId>
-            <artifactId>graphql-client</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
-        </dependency>
-        
+	
+	<!-- Test dependencies -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
         </dependency>
-
         <dependency>
-            <groupId>com.sdl.delivery</groupId>
-            <artifactId>udp-discovery-client-lightweight</artifactId>
-            <version>${cd-cil.version}</version>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.sdl.delivery</groupId>
-            <artifactId>udp-cil-api</artifactId>
-            <version>${cd-cil.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>com.sdl.dxa.modules</groupId>
-            <artifactId>dxa-module-tridion-docs-common</artifactId>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
         </dependency>
     </dependencies>
 </project>
