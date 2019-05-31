@@ -156,7 +156,7 @@ public class TridionDocsMashupController extends EntityController {
         }
         InputStreamResource result = new InputStreamResource(binaryItem.getContent());
      
-        responseHeaders.setContentType(MediaType.parseMediaType(binaryItem.getContentType()));
+//        responseHeaders.setContentType(MediaType.parseMediaType(binaryItem.getContentType()));
         responseHeaders.setContentLength(binaryItem.getContent().available());
          
         return new ResponseEntity<>(result, responseHeaders, HttpStatus.OK);
