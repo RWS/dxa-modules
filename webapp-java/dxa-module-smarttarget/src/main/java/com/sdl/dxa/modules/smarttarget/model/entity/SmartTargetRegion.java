@@ -2,7 +2,6 @@ package com.sdl.dxa.modules.smarttarget.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.sdl.dxa.caching.NeverCached;
 import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.api.model.MvcData;
 import com.sdl.webapp.common.api.model.RegionModel;
@@ -18,7 +17,6 @@ import java.util.Map;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@NeverCached(qualifier = "SmartTargetRegion")
 public class SmartTargetRegion extends RegionModelImpl {
     /**
      * Indicates whether the Region has SmartTarget content (Promotions) or fallback content.

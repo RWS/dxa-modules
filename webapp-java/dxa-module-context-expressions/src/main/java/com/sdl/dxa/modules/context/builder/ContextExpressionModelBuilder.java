@@ -3,8 +3,6 @@ package com.sdl.dxa.modules.context.builder;
 import com.sdl.dxa.api.datamodel.model.ContentModelData;
 import com.sdl.dxa.api.datamodel.model.EntityModelData;
 import com.sdl.dxa.api.datamodel.model.util.ListWrapper;
-import com.sdl.dxa.caching.LocalizationAwareCacheKey;
-import com.sdl.dxa.caching.wrapper.EntitiesCache;
 import com.sdl.dxa.modules.context.model.Conditions;
 import com.sdl.dxa.tridion.mapping.EntityModelBuilder;
 import com.sdl.webapp.common.api.model.EntityModel;
@@ -12,7 +10,6 @@ import com.sdl.webapp.common.exceptions.DxaException;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
@@ -27,15 +24,8 @@ import static com.google.common.collect.Sets.newHashSet;
 @Slf4j
 public class ContextExpressionModelBuilder implements EntityModelBuilder, Ordered {
 
-    private final EntitiesCache entitiesCache;
-
     @Value("${dxa.modules.contextexpr.extension_data_map_key}")
     private String contextExpressionsKey = "ContextExpressions";
-
-    @Autowired
-    public ContextExpressionModelBuilder(EntitiesCache entitiesCache) {
-        this.entitiesCache = entitiesCache;
-    }
 
     @Override
     public <T extends EntityModel> T buildEntityModel(@Nullable T originalEntityModel, EntityModelData modelData, @Nullable Class<T> expectedClass) throws DxaException {
@@ -45,7 +35,6 @@ public class ContextExpressionModelBuilder implements EntityModelBuilder, Ordere
         if (modelExtensionData == null || !modelExtensionData.containsKey(contextExpressionsKey)) {
             log.debug("ContextExpressions not found in {}", modelData);
             return originalEntityModel;
-
         }
 
         ContentModelData cxExtensionData = (ContentModelData) modelExtensionData.get(contextExpressionsKey);
@@ -57,20 +46,9 @@ public class ContextExpressionModelBuilder implements EntityModelBuilder, Ordere
             return originalEntityModel;
         }
 
-        Object cacheKey = entitiesCache.getSpecificKey(modelData);
-        if (entitiesCache.containsKey(cacheKey)) {
-            //noinspection unchecked
-            T modelInCache = (T) entitiesCache.get(cacheKey);
-            if (hasAlreadyPassed(modelInCache)) {
-                return modelInCache;
-            }
-        }
-
-        //noinspection unchecked
-        return (T) entitiesCache.addAndGet(cacheKey,
-                applyConditions(originalEntityModel,
-                        getConditions(cxExtensionData, includeKey),
-                        getConditions(cxExtensionData, excludeKey)));
+        return applyConditions(originalEntityModel,
+                getConditions(cxExtensionData, includeKey),
+                getConditions(cxExtensionData, excludeKey));
     }
 
     @Override
@@ -87,12 +65,6 @@ public class ContextExpressionModelBuilder implements EntityModelBuilder, Ordere
         originalEntityModel.addExtensionData(contextExpressionsKey, conditions);
 
         return originalEntityModel;
-    }
-
-    private <T extends EntityModel> boolean hasAlreadyPassed(T originalEntityModel) {
-        Map<String, Object> extensionData = originalEntityModel.getExtensionData();
-
-        return extensionData != null && !extensionData.isEmpty() && extensionData.get(contextExpressionsKey) instanceof Conditions;
     }
 
     //cast is not type safe but we only expect there a ListWrapper of Strings, so let's pretend

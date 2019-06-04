@@ -1,5 +1,6 @@
 package com.sdl.dxa.modules.audience.controller;
 
+import com.sdl.dxa.caching.NoOutputCache;
 import com.sdl.dxa.modules.audience.model.LoginForm;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.model.EntityModel;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping(ControllerUtils.INCLUDE_PATH_PREFIX + "AudienceManager/Profile")
 @Slf4j
+@NoOutputCache
 public class ProfileController extends EntityController {
 
     private final WebRequestContext webRequestContext;

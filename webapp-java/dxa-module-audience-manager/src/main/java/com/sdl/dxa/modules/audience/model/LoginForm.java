@@ -1,7 +1,7 @@
 package com.sdl.dxa.modules.audience.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sdl.dxa.caching.NeverCached;
+import com.sdl.dxa.caching.NoOutputCache;
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticMappingIgnore;
 import com.sdl.webapp.common.api.model.entity.AbstractEntityModel;
 import com.sdl.webapp.common.api.model.validation.DynamicCodeResolver;
@@ -13,7 +13,7 @@ import lombok.ToString;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(exclude = "password")
-@NeverCached(qualifier = "LoginForm")
+@NoOutputCache
 public class LoginForm extends AbstractEntityModel {
 
     @SemanticMappingIgnore

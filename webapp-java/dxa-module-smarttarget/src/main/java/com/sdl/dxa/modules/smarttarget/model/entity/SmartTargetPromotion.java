@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Collections2;
 import com.sdl.dxa.caching.NeverCached;
+import com.sdl.dxa.caching.NoOutputCache;
 import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.api.model.EntityModel;
 import com.sdl.webapp.common.api.model.entity.AbstractEntityModel;
@@ -21,7 +22,8 @@ import static org.springframework.util.CollectionUtils.isEmpty;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@NeverCached(qualifier = "SmartTargetPromotion")
+@NoOutputCache
+@NeverCached
 public class SmartTargetPromotion extends AbstractEntityModel {
 
     @JsonProperty("Title")
