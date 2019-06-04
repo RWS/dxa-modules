@@ -19,6 +19,9 @@ namespace Sdl.Web.Modules.DynamicDocumentation
             // Page Views         
             RegisterViewModel("GeneralPage", typeof(PageModel));
             RegisterViewModel("ErrorPage", typeof(PageModel));
+
+            // Regions
+            RegisterViewModel("Main", typeof(RegionModel));
         }
     }
 }
