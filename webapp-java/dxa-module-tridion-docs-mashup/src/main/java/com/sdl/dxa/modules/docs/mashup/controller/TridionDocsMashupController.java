@@ -18,15 +18,14 @@ import com.sdl.webapp.common.api.model.ViewModel;
 import com.sdl.webapp.common.controller.ControllerUtils;
 import com.sdl.webapp.common.controller.EntityController;
 import com.sdl.webapp.common.impl.model.ContentNamespace;
+import com.sdl.webapp.common.util.MimeUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.InputStreamResource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -139,7 +138,7 @@ public class TridionDocsMashupController extends EntityController {
      * @param binaryId      Binary id
      * @return Binary data using a stream.
      * @throws ContentProviderException if page model cannot be fetched
-     * @throws IOException if something wrong with tomcat response channel
+     * @throws IOException              if something wrong with tomcat response channel
      */
      @RequestMapping(method = GET, value ="/binary/{publicationId}/{binaryId}/**" ,produces = MediaType.ALL_VALUE)
     @ResponseBody
@@ -152,13 +151,23 @@ public class TridionDocsMashupController extends EntityController {
         docsLocalization.setPublicationId(String.valueOf(publicationId));
         StaticContentItem binaryItem = contentProvider.getStaticContent(ContentNamespace.Docs, binaryId, docsLocalization.getId(), docsLocalization.getPath());
         if (binaryItem == null) {
-             return new ResponseEntity<>(null, responseHeaders, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(null, responseHeaders, HttpStatus.NOT_FOUND);
         }
         InputStreamResource result = new InputStreamResource(binaryItem.getContent());
-     
-        responseHeaders.setContentType(MediaType.parseMediaType(binaryItem.getContentType()));
+
+        String type = binaryItem.getContentType();
+        String mimeType = null;
+
+        if(!type.startsWith(".")) {
+            mimeType = type;
+        } else {
+            type = type.substring(1); // remove dot symbol on the start
+            mimeType = MimeUtils.getMimeType(type);
+        }
+
+        responseHeaders.setContentType(MediaType.parseMediaType(mimeType));
         responseHeaders.setContentLength(binaryItem.getContent().available());
-         
+
         return new ResponseEntity<>(result, responseHeaders, HttpStatus.OK);
     }
 
