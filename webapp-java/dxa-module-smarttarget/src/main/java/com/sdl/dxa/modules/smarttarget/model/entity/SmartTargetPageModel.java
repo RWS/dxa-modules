@@ -37,7 +37,7 @@ public class SmartTargetPageModel extends DefaultPageModel implements PageModel.
     private Map<String, ExperimentCookie> newExperimentCookies;
 
     public SmartTargetPageModel(PageModel other) {
-        super(other);
+        super((DefaultPageModel) other);
         if (other instanceof SmartTargetPageModel) {
             SmartTargetPageModel smartTargetPageModel = (SmartTargetPageModel) other;
             this.allowDuplicates = smartTargetPageModel.allowDuplicates;

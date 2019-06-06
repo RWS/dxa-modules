@@ -115,6 +115,11 @@ public class ContentList extends DynamicList<Teaser, SimpleBrokerQuery> {
     }
 
     @Override
+    public void setQueryResults(List<Teaser> queryResults) {
+        setItemListElements(queryResults);
+    }
+
+    @Override
     public Class<Teaser> getEntityType() {
         return Teaser.class;
     }
