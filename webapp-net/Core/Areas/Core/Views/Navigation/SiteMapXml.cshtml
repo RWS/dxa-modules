@@ -15,7 +15,7 @@
         {
             <url>
                 <loc>@HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority).ToLowerInvariant()@item.Url</loc>
-                <lastmod>@item.PublishedDate</lastmod>
+                <lastmod>@item.PublishedDate.Value.ToString("yyyy-MM-ddTHH:mm:ss.fffZ")</lastmod>
             </url>
         }
         else
