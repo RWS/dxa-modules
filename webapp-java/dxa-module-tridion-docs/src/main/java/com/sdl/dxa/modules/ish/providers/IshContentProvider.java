@@ -37,6 +37,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -85,8 +86,8 @@ public class IshContentProvider extends DefaultContentProvider {
                               StaticContentResolver staticContentResolver,
                               LinkResolver linkResolver,
                               ModelBuilderPipeline builderPipeline,
-                              ModelServiceProvider modelService) {
-        super(webRequestContext, staticContentResolver, linkResolver, builderPipeline, modelService);
+                              ModelServiceProvider modelService, CacheManager cacheManager) {
+        super(webRequestContext, staticContentResolver, linkResolver, builderPipeline, modelService, cacheManager);
     }
 
     /**
