@@ -18,7 +18,6 @@
 
     <properties>
         <dxa.version>${project.version}</dxa.version>
-        <hibernate-validator.version>5.2.4.Final</hibernate-validator.version>
         <sitemapgen4j.version>1.0.6</sitemapgen4j.version>
         <xmlunit.version>2.3.0</xmlunit.version>
     </properties>

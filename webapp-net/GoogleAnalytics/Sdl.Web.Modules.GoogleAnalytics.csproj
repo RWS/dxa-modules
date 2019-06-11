@@ -44,7 +44,7 @@
     </Reference>
     <Reference Include="System.Web.Mvc">
       <Private>False</Private>
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System" />
   </ItemGroup>
