@@ -1,6 +1,6 @@
 package com.sdl.dxa.modules.model.TSI2525;
 
-import com.sdl.dxa.caching.NeverCached;
+import com.sdl.dxa.caching.NoOutputCache;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.ClassPathResource;
 
@@ -17,17 +17,17 @@ public class NeverCacheListener<K, V> implements CacheEntryCreatedListener<K, V>
     @Override
     public void onCreated(Iterable<CacheEntryEvent<? extends K, ? extends V>> cacheEntryEvents) throws CacheEntryListenerException {
         cacheEntryEvents.forEach(cacheEntryEvent -> {
-                    if (cacheEntryEvent.getValue().getClass().isAnnotationPresent(NeverCached.class)) {
-                        log.error("Cached a @NeverCached annotated model: '{}'", cacheEntryEvent.getValue().getClass());
+                    if (cacheEntryEvent.getValue().getClass().isAnnotationPresent(NoOutputCache.class)) {
+                        log.error("Cached a @NoOutputCache annotated model: '{}'", cacheEntryEvent.getValue().getClass());
                         try {
                             String webAppRoot = new ClassPathResource(".").getFile().getAbsolutePath();
-                            PrintWriter writer = new PrintWriter(webAppRoot + "../../../NeverCachedException.jsp", "UTF-8");
-                            writer.println("This file is generated because a @NeverCached annotated model was found in cache. Check site logs for more information.");
+                            PrintWriter writer = new PrintWriter(webAppRoot + "../../../NoOutputCacheException.jsp", "UTF-8");
+                            writer.println("This file is generated because a @NoOutputCache annotated model was found in cache. Check site logs for more information.");
                             writer.close();
                         } catch (IOException e) {
-                            throw new RuntimeException("Unable to create a NeverCachedException.jsp file.");
+                            throw new RuntimeException("Unable to create a NoOutputCacheException.jsp file.");
                         }
-                        throw new CacheEntryListenerException("Cached a @NeverCached annotated model!");
+                        throw new CacheEntryListenerException("Cached a @NoOutputCache annotated model!");
                     } else {
                         log.debug("Cached view model is: '{}'", cacheEntryEvent.getValue().getClass());
                     }

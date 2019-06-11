@@ -1,6 +1,6 @@
 package com.sdl.dxa.modules.audience.model;
 
-import com.sdl.dxa.caching.NeverCached;
+import com.sdl.dxa.caching.NoOutputCache;
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticMappingIgnore;
 import com.sdl.webapp.common.api.model.entity.AbstractEntityModel;
 import com.sdl.webapp.common.api.model.entity.Link;
@@ -12,7 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-@NeverCached(qualifier = "CurrentUserWidget")
+@NoOutputCache
 public class CurrentUserWidget extends AbstractEntityModel {
 
     @SemanticMappingIgnore

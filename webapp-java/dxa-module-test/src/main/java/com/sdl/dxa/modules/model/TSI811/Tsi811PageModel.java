@@ -19,7 +19,7 @@ public class Tsi811PageModel extends DefaultPageModel {
     @JsonProperty("PageKeyword")
     private Tsi811TestKeyword pageKeyword;
 
-    public Tsi811PageModel(PageModel other) {
+    public Tsi811PageModel(DefaultPageModel other) {
         super(other);
         if (other instanceof Tsi811PageModel) {
             this.pageKeyword = ((Tsi811PageModel) other).pageKeyword;

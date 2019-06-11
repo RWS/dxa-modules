@@ -22,7 +22,7 @@ public class Tsi2844extPageModel extends DefaultPageModel {
     @JsonProperty("FolderMetadataTextField")
     private String folderMetadataTextField;
 
-    public Tsi2844extPageModel(PageModel other) {
+    public Tsi2844extPageModel(DefaultPageModel other) {
         super(other);
         if (other instanceof Tsi2844extPageModel) {
             this.folderMetadataTextField = ((Tsi2844extPageModel)other).folderMetadataTextField;

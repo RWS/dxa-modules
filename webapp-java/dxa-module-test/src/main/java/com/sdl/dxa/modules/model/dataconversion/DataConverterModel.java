@@ -1,7 +1,7 @@
 package com.sdl.dxa.modules.model.dataconversion;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.sdl.dxa.caching.NeverCached;
+import com.sdl.dxa.caching.NoOutputCache;
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticEntity;
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticProperty;
 import com.sdl.webapp.common.api.model.entity.AbstractEntityModel;
@@ -31,7 +31,7 @@ import static org.skyscreamer.jsonassert.JSONCompare.compareJSON;
 @Data
 @RequestMapping
 @Slf4j
-@NeverCached(qualifier = "DataConverterModel")
+@NoOutputCache
 public class DataConverterModel extends AbstractEntityModel {
 
     private static final String MODEL_TYPE_PARAM_NAME = "modelType";

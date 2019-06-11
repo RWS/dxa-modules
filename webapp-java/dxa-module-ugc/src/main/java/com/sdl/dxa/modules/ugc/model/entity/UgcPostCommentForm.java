@@ -1,7 +1,7 @@
 package com.sdl.dxa.modules.ugc.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sdl.dxa.caching.NeverCached;
+import com.sdl.dxa.caching.NoOutputCache;
 import com.sdl.webapp.common.api.mapping.semantic.annotations.SemanticMappingIgnore;
 import com.sdl.webapp.common.api.model.entity.AbstractEntityModel;
 import com.sdl.webapp.common.api.model.validation.DynamicCodeResolver;
@@ -17,7 +17,7 @@ import java.util.Map;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@NeverCached(qualifier = "UgcPostCommentForm")
+@NoOutputCache
 public class UgcPostCommentForm extends AbstractEntityModel {
 
     /**
