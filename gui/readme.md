@@ -69,6 +69,8 @@ var buildOptions = {
 ```
 4. Where ```from``` is a route(e.g. ), and ```to``` is the REST API root url where all requests will be rerouted to.
 
+5. Open file ```src/index.html``` and check if window.SdlDitaDeliveryMocksEnabled setting is set to ```false``` so that the data gets retrieved from real api end point configured by buildOption.proxies configuration section.
+
 ## Setting up Visual Studio Code
 
 Preffered IDE for GUI development is [Visual Studio Code](https://code.visualstudio.com/).
