@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using Sdl.Tridion.Api.Client;
@@ -109,8 +108,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
                 Log.Error(ex);
                 return
                     ServerError(
-                        new DxaItemNotFoundException(
-                            $"Entity not found: [{publicationId}] {componentId}-{templateId}"));
+                        new DxaItemNotFoundException($"{componentId}-{templateId}", publicationId.ToString()));
             }
         }          
 
@@ -227,11 +225,11 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         public virtual ActionResult Topic(string publicationId, string componentId, string templateId)
           =>
               ServerError(
-                  new DxaItemNotFoundException($"Entity not found: [{publicationId}] {componentId}-{templateId}"), 400);
+                  new DxaItemNotFoundException($"{componentId}-{templateId}", publicationId), 400);
 
         [Route("~/api/page/{publicationId}/{pageId}")]
         public virtual ActionResult Page(string publicationId, string pageId)
-            => ServerError(new DxaItemNotFoundException($"Page not found: [{publicationId}] {pageId}/index.html"), 400);
+            => ServerError(new DxaItemNotFoundException(pageId, publicationId), 400);
 
         [Route("~/binary/{publicationId}/{binaryId}")]
         [Route("~/api/binary/{publicationId}/{binaryId}")]
