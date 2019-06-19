@@ -6,6 +6,7 @@ using Sdl.Web.Common.Interfaces;
 using Sdl.Web.Common.Models;
 using Sdl.Web.Common.Models.Navigation;
 using Sdl.Web.Common.Configuration;
+using Sdl.Web.Mvc.Configuration;
 
 namespace Sdl.Web.Modules.DynamicDocumentation.Providers
 {
@@ -26,7 +27,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Providers
             int descendantLevels)
         {
             return SiteConfiguration.CacheProvider.GetOrAdd(
-                $"toc-{localization.Id}-{sitemapItemId}-{includeAncestors}", CacheRegion.Toc,
+                $"toc-{localization.Id}-{sitemapItemId}-{includeAncestors}-{WebRequestContext.CacheKeySalt}", CacheRegion.Toc,
                 () =>
                 {
                     new PublicationProvider().CheckPublicationOnline(int.Parse(localization.Id));
