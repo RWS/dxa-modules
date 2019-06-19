@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using Sdl.Tridion.Api.Client;
 using Sdl.Tridion.Api.Client.ContentModel;
 using Sdl.Web.Common;
-using Sdl.Web.Common.Configuration;
 using Sdl.Web.Common.Interfaces;
 using Sdl.Web.Common.Logging;
 using Sdl.Web.Common.Models;
+using Sdl.Web.Delivery.ServicesCore.ClaimStore;
 using Sdl.Web.Modules.DynamicDocumentation.Models;
 using Sdl.Web.Modules.DynamicDocumentation.Providers;
 using Sdl.Web.Mvc.Configuration;
@@ -67,21 +66,15 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         {
             try
             {
-                using (var mgr = GlobalClaimManager.Create)
-                {
-                    AddConditions(mgr, Request);
-                    int hash = mgr.GetHashCode();
-                    var model = SiteConfiguration.CacheProvider.GetOrAdd($"{publicationId}-{pageId}-{hash}",
-                        CacheRegion.PageModel,
-                        () => EnrichModel(ContentProviderExt.GetPageModel(pageId, Localization), publicationId));
-                    return JsonResult(model);
-                }
+                AddUserConditions();
+                var model = EnrichModel(ContentProviderExt.GetPageModel(pageId, Localization), publicationId);
+                return JsonResult(model);
             }
             catch (Exception ex)
             {
                 Log.Error(ex);
                 return
-                    ServerError(new DxaItemNotFoundException($"Page not found: [{publicationId}] {pageId}/index.html"));
+                    ServerError(new DxaItemNotFoundException(pageId.ToString(), publicationId.ToString()));
             }
         }
 
@@ -90,15 +83,9 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         {
             try
             {
-                using (var mgr = GlobalClaimManager.Create)
-                {
-                    AddConditions(mgr, Request);
-                    int hash = mgr.GetHashCode();
-                    var model = SiteConfiguration.CacheProvider.GetOrAdd($"{publicationId}-{pageId}-{hash}",
-                        CacheRegion.PageModel,
-                        () => EnrichModel(ContentProviderExt.GetPageModel(pageId, Localization), publicationId));
-                    return JsonResult(model);
-                }
+                AddUserConditions();
+                var model = EnrichModel(ContentProviderExt.GetPageModel(pageId, Localization), publicationId);
+                return JsonResult(model);
             }
             catch (Exception ex)
             {
@@ -112,24 +99,16 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         {
             try
             {
-                using (var mgr = GlobalClaimManager.Create)
-                {
-                    AddConditions(mgr, Request);
-                    int hash = mgr.GetHashCode();
-                    var model =
-                        SiteConfiguration.CacheProvider.GetOrAdd($"{publicationId}-{componentId}-{templateId}-{hash}",
-                            CacheRegion.PageModel,
-                            () =>
-                                EnrichModel(ContentProviderExt.GetEntityModel($"{componentId}-{templateId}", Localization)));
-                    return JsonResult(model);
-                }
+                AddUserConditions();
+                var model = EnrichModel(ContentProviderExt.GetEntityModel($"{componentId}-{templateId}", Localization));
+                return JsonResult(model);
             }
             catch (Exception ex)
             {
                 Log.Error(ex);
                 return
                     ServerError(
-                        new DxaItemNotFoundException($"Entity not found: [{publicationId}] {componentId}-{templateId}"));
+                        new DxaItemNotFoundException($"{componentId}-{templateId}", publicationId.ToString()));
             }
         }          
 
@@ -154,11 +133,8 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         {
             try
             {
-                using (var mgr = GlobalClaimManager.Create)
-                {
-                    AddConditions(mgr, Request);
-                    return JsonResult(new TocProvider().GetToc(Localization));
-                }
+                AddUserConditions();
+                return JsonResult(new TocProvider().GetToc(Localization));
             }
             catch (Exception ex)
             {
@@ -172,12 +148,9 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         {
             try
             {
-                using (var mgr = GlobalClaimManager.Create)
-                {
-                    AddConditions(mgr, Request);
-                    var sitemapItems = new TocProvider().GetToc(Localization, sitemapItemId, includeAncestors).ToList();
-                    return JsonResult(sitemapItems);
-                }
+                AddUserConditions();
+                var sitemapItems = new TocProvider().GetToc(Localization, sitemapItemId, includeAncestors).ToList();
+                return JsonResult(sitemapItems);
             }
             catch (Exception ex)
             {
@@ -252,11 +225,11 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         public virtual ActionResult Topic(string publicationId, string componentId, string templateId)
           =>
               ServerError(
-                  new DxaItemNotFoundException($"Entity not found: [{publicationId}] {componentId}-{templateId}"), 400);
+                  new DxaItemNotFoundException($"{componentId}-{templateId}", publicationId), 400);
 
         [Route("~/api/page/{publicationId}/{pageId}")]
         public virtual ActionResult Page(string publicationId, string pageId)
-            => ServerError(new DxaItemNotFoundException($"Page not found: [{publicationId}] {pageId}/index.html"), 400);
+            => ServerError(new DxaItemNotFoundException(pageId, publicationId), 400);
 
         [Route("~/binary/{publicationId}/{binaryId}")]
         [Route("~/api/binary/{publicationId}/{binaryId}")]
@@ -301,14 +274,24 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
             return model;
         }
 
-        private static void AddConditions(GlobalClaimManager mgr, HttpRequestBase request)
+        protected void AddUserConditions()
         {
             try
             {
-                var conditions = request.QueryString["conditions"] ?? request.Params["conditions"];
+                var conditions = Request.QueryString["conditions"] ?? Request.Params["conditions"];
                 if (string.IsNullOrEmpty(conditions)) return;
+                // This will alter the caching key(s) used for retreival of content based on user conditions
+                WebRequestContext.CacheKeySalt = conditions.GetHashCode(); 
                 var userConditions = JsonConvert.DeserializeObject<Conditions>(conditions);
-                mgr.AddClaim(UserConditionsUri, new ConditionProvider().GetMergedConditions(userConditions));
+                var claimStore = AmbientDataContext.CurrentClaimStore;
+                if (claimStore == null)
+                {
+                    // If the claimstore is null we must not be running the ADF module so we create our own claimstore
+                    claimStore = new Sdl.Web.Delivery.ADF.ClaimStore.ClaimStore();
+                    AmbientDataContext.CurrentClaimStore = claimStore;
+                    AmbientDataContext.ForwardedClaims = new List<string> {UserConditionsUri.ToString()};
+                }
+                claimStore.Put(UserConditionsUri, new ConditionProvider().GetMergedConditions(userConditions));               
             }
             catch (Exception ex)
             {

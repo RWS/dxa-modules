@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <Import Project="..\DxaModulesCommon.Props" />
@@ -46,6 +46,10 @@
       <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net462\Sdl.Web.DataModel.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Sdl.Web.Delivery.ADF">
+      <HintPath>..\packages\Sdl.Web.Delivery.$(SdlDeliveryVersion)\lib\net462\Sdl.Web.Delivery.ADF.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Sdl.Web.Delivery.Service">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Sdl.Web.Delivery.$(SdlDeliveryVersion)\lib\net462\Sdl.Web.Delivery.Service.dll</HintPath>
@@ -56,13 +60,13 @@
       <HintPath>..\packages\Sdl.Web.Delivery.$(SdlDeliveryVersion)\lib\net462\Sdl.Web.Delivery.ServicesCore.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Sdl.Web.Mvc">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net462\Sdl.Web.Mvc.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Sdl.Tridion.Api.Client">
       <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net462\Sdl.Tridion.Api.Client.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Sdl.Web.Mvc">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.2.2.0-beta-201906191258\lib\net462\Sdl.Web.Mvc.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sdl.Web.Tridion">
