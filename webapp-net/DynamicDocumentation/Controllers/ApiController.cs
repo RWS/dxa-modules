@@ -67,7 +67,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         {
             try
             {
-                AddConditions();
+                AddUserConditions();
                 var model = EnrichModel(ContentProviderExt.GetPageModel(pageId, Localization), publicationId);
                 return JsonResult(model);
             }
@@ -75,7 +75,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
             {
                 Log.Error(ex);
                 return
-                    ServerError(new DxaItemNotFoundException($"Page not found: [{publicationId}] {pageId}/index.html"));
+                    ServerError(new DxaItemNotFoundException(pageId.ToString(), publicationId.ToString()));
             }
         }
 
@@ -84,7 +84,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         {
             try
             {
-                AddConditions();
+                AddUserConditions();
                 var model = EnrichModel(ContentProviderExt.GetPageModel(pageId, Localization), publicationId);
                 return JsonResult(model);
             }
@@ -100,7 +100,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         {
             try
             {
-                AddConditions();
+                AddUserConditions();
                 var model = EnrichModel(ContentProviderExt.GetEntityModel($"{componentId}-{templateId}", Localization));
                 return JsonResult(model);
             }
@@ -135,7 +135,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         {
             try
             {
-                AddConditions();
+                AddUserConditions();
                 return JsonResult(new TocProvider().GetToc(Localization));
             }
             catch (Exception ex)
@@ -150,7 +150,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         {
             try
             {
-                AddConditions();
+                AddUserConditions();
                 var sitemapItems = new TocProvider().GetToc(Localization, sitemapItemId, includeAncestors).ToList();
                 return JsonResult(sitemapItems);
             }
@@ -276,7 +276,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
             return model;
         }
 
-        protected void AddConditions()
+        protected void AddUserConditions()
         {
             try
             {

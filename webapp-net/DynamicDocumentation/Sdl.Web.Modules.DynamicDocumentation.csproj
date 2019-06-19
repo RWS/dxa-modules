@@ -65,6 +65,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Sdl.Web.Mvc">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net462\Sdl.Web.Mvc.dll</HintPath>
       <Private>False</Private>
     </Reference>
