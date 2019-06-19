@@ -291,8 +291,6 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
                     AmbientDataContext.CurrentClaimStore = claimStore;
                     AmbientDataContext.ForwardedClaims = new List<string> {UserConditionsUri.ToString()};
                 }
-                // Add our user conditions claim. This claim should be added in the cd_ambient_conf.xml configuration
-                // so it is correctly forwarded to the PCA service.
                 claimStore.Put(UserConditionsUri, new ConditionProvider().GetMergedConditions(userConditions));               
             }
             catch (Exception ex)
