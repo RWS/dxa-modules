@@ -9,8 +9,8 @@
 	-->
 
 	<PropertyGroup>		
-	    <DxaDataModelVersion>2.1.0</DxaDataModelVersion>
-		<DxaFrameworkVersion>2.1.0</DxaFrameworkVersion>
+	    <DxaDataModelVersion>2.2.0</DxaDataModelVersion>
+		<DxaFrameworkVersion>2.2.0</DxaFrameworkVersion>
         <SdlDeliveryVersion>11.0.0</SdlDeliveryVersion>
 		<AudienceManagerVersion>9.0.0</AudienceManagerVersion>
         <ExperienceManagerVersion>9.0.0</ExperienceManagerVersion>
