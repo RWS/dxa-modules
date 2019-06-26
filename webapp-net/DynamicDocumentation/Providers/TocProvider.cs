@@ -12,7 +12,8 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Providers
 {
     public class TocProvider
     {
-        private static readonly Regex RegEx = new Regex("^(?:\\w)(\\d+)(?:-\\w)(\\d+)", RegexOptions.Compiled);
+        private static readonly Regex RegEx1 = new Regex("^(?:\\w)(\\d+)", RegexOptions.Compiled);
+        private static readonly Regex RegEx2 = new Regex("^(?:\\w)(\\d+)(?:-\\w)(\\d+)", RegexOptions.Compiled);
 
         public IEnumerable<SitemapItem> GetToc(Common.Configuration.Localization localization)
            => GetToc(localization, null, false, 1);
@@ -78,10 +79,8 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Providers
 
                             node = node.Parent;
                         }
-                    }
-
-                    FixupSitemap(sitemapItems, true, true);
-                    return sitemapItems;
+                    }                                       
+                    return FixupSitemap(sitemapItems, true, true);
                 });
         }
 
@@ -123,8 +122,8 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Providers
                             }
                         }
                     }
-                    FixupSitemap(sitemapItems, false, false);
-                    return new SitemapItem {Items = sitemapItems};
+                   
+                    return new SitemapItem {Items = FixupSitemap(sitemapItems, false, false)};
                 });
         }
 
@@ -139,11 +138,32 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Providers
                 if (found != null) return found;
             }
             return null;
-        }       
+        }
 
-        private static void FixupSitemap(List<SitemapItem> toc, bool removePageNodes, bool orderNodes)
+        private static List<SitemapItem> SortSitemapItems(List<SitemapItem> items)
         {
-            if (toc == null) return;            
+            return items.OrderBy(
+                x =>
+                {
+                    var m = RegEx1.Match(x.Id);
+                    return m.Success ? int.Parse(m.Groups[1].Value) : 0;
+                }).ThenBy(
+                x =>
+                {
+                    var m = RegEx2.Match(x.Id);
+                    return m.Success ? int.Parse(m.Groups[2].Value) : 0;
+                }).ToList();
+        }
+
+        private static List<SitemapItem> FixupSitemap(List<SitemapItem> toc, bool removePageNodes, bool orderNodes)
+        {
+            FixupSitemapRecursive(toc, removePageNodes, orderNodes);
+            return SortSitemapItems(toc);
+        }
+
+        private static void FixupSitemapRecursive(List<SitemapItem> toc, bool removePageNodes, bool orderNodes)
+        {
+            if (toc == null) return;
             for (int i=0; i<toc.Count; i++)
             {
                 SitemapItem entry = toc[i];
@@ -161,9 +181,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Providers
                 if (entry.Items == null) continue;
                 if (orderNodes)
                 {
-                    entry.Items = entry.Items.OrderBy(
-                        x => int.Parse(RegEx.Match(x.Id).Groups[1].Value)).ThenBy(
-                            x => int.Parse(RegEx.Match(x.Id).Groups[2].Value)).ToList();
+                    entry.Items = SortSitemapItems(entry.Items);
                 }
                 FixupSitemap(entry.Items, removePageNodes, orderNodes);
             }
