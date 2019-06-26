@@ -12,8 +12,8 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Providers
 {
     public class TocProvider
     {
-        private static readonly Regex RegEx1 = new Regex("^(?:\\w)(\\d+)", RegexOptions.Compiled);
-        private static readonly Regex RegEx2 = new Regex("^(?:\\w)(\\d+)(?:-\\w)(\\d+)", RegexOptions.Compiled);
+        private static readonly Regex MatchTaxonomyId = new Regex("^(?:\\w)(\\d+)", RegexOptions.Compiled);
+        private static readonly Regex MatchTaxonomyKeywordIds = new Regex("^(?:\\w)(\\d+)(?:-\\w)(\\d+)", RegexOptions.Compiled);
 
         public IEnumerable<SitemapItem> GetToc(Common.Configuration.Localization localization)
            => GetToc(localization, null, false, 1);
@@ -145,12 +145,12 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Providers
             return items.OrderBy(
                 x =>
                 {
-                    var m = RegEx1.Match(x.Id);
+                    var m = MatchTaxonomyId.Match(x.Id);
                     return m.Success ? int.Parse(m.Groups[1].Value) : 0;
                 }).ThenBy(
                 x =>
                 {
-                    var m = RegEx2.Match(x.Id);
+                    var m = MatchTaxonomyKeywordIds.Match(x.Id);
                     return m.Success ? int.Parse(m.Groups[2].Value) : 0;
                 }).ToList();
         }
