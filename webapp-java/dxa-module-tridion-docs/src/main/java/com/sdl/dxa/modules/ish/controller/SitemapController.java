@@ -7,6 +7,7 @@ import com.sdl.dxa.modules.ish.services.SitemapService;
 import com.sdl.webapp.common.api.WebRequestContext;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -35,6 +36,7 @@ public class SitemapController {
 
     @RequestMapping(value = "/api/sitemap.xml", produces = APPLICATION_XML_VALUE)
     @ResponseBody
+    @Cacheable("ish")
     public String create(HttpServletRequest request, HttpServletResponse response) {
         response.setContentType(MediaType.APPLICATION_XML_VALUE);
 

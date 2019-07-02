@@ -27,6 +27,7 @@ import com.tridion.meta.Item;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.server.ServletServerHttpResponse;
@@ -107,17 +108,15 @@ public class IshController {
      */
     @RequestMapping(method = {GET, POST}, value = "/api/page/{publicationId}/{pageId}/**",
             produces = {APPLICATION_JSON_VALUE})
+    @Cacheable("ish")
     public ModelAndView getPage(@PathVariable Integer publicationId,
                                 @PathVariable Integer pageId,
                                 @RequestParam(value = "conditions", defaultValue = "") String conditions,
                                 final HttpServletRequest request,
                                 final HttpServletResponse response) throws ContentProviderException, IOException {
+        setConditions(publicationId, conditions);
         final Localization localization = webRequestContext.getLocalization();
         publicationService.checkPublicationOnline(publicationId, localization);
-        if (!conditions.isEmpty()) {
-            String mergedConditions = getMergedConditions(conditions, publicationId);
-            ConditionUtil.addConditions(USER_CONDITIONS_URI, mergedConditions);
-        }
         PageModel page = contentProvider.getPageModel(pageId, localization);
         if (page == null) {
             response.setStatus(NOT_FOUND.value());
@@ -169,43 +168,41 @@ public class IshController {
      */
     @RequestMapping(method = GET, value = "/api/publications", produces = {APPLICATION_JSON_VALUE})
     @ResponseBody
+    @Cacheable("ish")
     public List<Publication> getPublicationList() throws IshServiceException {
         return publicationService.getPublicationList(webRequestContext.getLocalization());
     }
 
     @RequestMapping(method = {GET, POST}, value = "/api/toc/{publicationId}", produces = {APPLICATION_JSON_VALUE})
     @ResponseBody
+    @Cacheable("ish")
     public Collection<SitemapItem> getRootToc(@PathVariable("publicationId") Integer publicationId,
                                               @RequestParam(value = "conditions", defaultValue = "") String conditions,
                                               HttpServletRequest request) throws ContentProviderException, IOException {
+        setConditions(publicationId, conditions);
         publicationService.checkPublicationOnline(publicationId, webRequestContext.getLocalization());
-        if (!conditions.isEmpty()) {
-            String mergedConditions = getMergedConditions(conditions, publicationId);
-            ConditionUtil.addConditions(USER_CONDITIONS_URI, mergedConditions);
-        }
         return tocService.getToc(publicationId, null, false, 1, request, webRequestContext);
     }
 
     @RequestMapping(method = {GET, POST}, value = "/api/toc/{publicationId}/{sitemapItemId}",
             produces = {APPLICATION_JSON_VALUE})
     @ResponseBody
+    @Cacheable("ish")
     public Collection<SitemapItem> getToc(@PathVariable("publicationId") Integer publicationId,
                                           @PathVariable("sitemapItemId") String sitemapItemId,
                                           @RequestParam(value = "includeAncestors", required = false,
                                                   defaultValue = "false") boolean includeAncestors,
                                           @RequestParam(value = "conditions", defaultValue = "") String conditions,
                                           HttpServletRequest request) throws ContentProviderException, IOException {
+        setConditions(publicationId, conditions);
         publicationService.checkPublicationOnline(publicationId, webRequestContext.getLocalization());
-        if (!conditions.isEmpty()) {
-            String mergedConditions = getMergedConditions(conditions, publicationId);
-            ConditionUtil.addConditions(USER_CONDITIONS_URI, mergedConditions);
-        }
         return tocService.getToc(publicationId, sitemapItemId, includeAncestors, 1, request,
                 webRequestContext);
     }
 
     @RequestMapping(method = GET, value = "/api/conditions/{publicationId:[\\d]+}", produces = {APPLICATION_JSON_VALUE})
     @ResponseBody
+    @Cacheable("ish")
     public String getPublicationConditions(@PathVariable("publicationId") Integer publicationId) {
         return conditionService.getConditions(publicationId, webRequestContext.getLocalization());
     }
@@ -224,6 +221,7 @@ public class IshController {
     @RequestMapping(method = {GET, POST}, value = "/api/pageIdByReference/{publicationId}/{ishFieldValue}",
             produces = {APPLICATION_JSON_VALUE})
     @ResponseBody
+    @Cacheable("ish")
     public Item getTopicIdInTargetPublication(@PathVariable("publicationId") Integer publicationId,
                                               @PathVariable("ishFieldValue") String ishFieldValue)
             throws ContentProviderException {
@@ -246,6 +244,14 @@ public class IshController {
         public ResourceNotFoundException(String message) {
             super(message);
         }
+    }
+
+    private void setConditions(Integer publicationId, String conditions) throws IOException, DxaItemNotFoundException {
+        String mergedConditions = null;
+        if (!conditions.isEmpty()) {
+            mergedConditions = getMergedConditions(conditions, publicationId);
+        }
+        ConditionUtil.addConditions(USER_CONDITIONS_URI, mergedConditions);
     }
 
     private String getMergedConditions(String conditions, int publicationId) throws IOException, DxaItemNotFoundException {

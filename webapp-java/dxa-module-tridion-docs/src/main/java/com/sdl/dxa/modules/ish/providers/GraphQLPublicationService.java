@@ -17,7 +17,6 @@ import org.dd4t.providers.PublicationProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
@@ -50,7 +49,6 @@ public class GraphQLPublicationService implements PublicationService {
     private ApiClientProvider apiClientProvider;
 
     @Override
-    @Cacheable
     public List<com.sdl.dxa.modules.ish.model.Publication> getPublicationList(Localization localization) {
         ApiClient client = apiClientProvider.getClient();
         ContentNamespace contentNamespace = GraphQLUtils.convertUriToGraphQLContentNamespace(localization.getCmUriScheme());
@@ -79,7 +77,6 @@ public class GraphQLPublicationService implements PublicationService {
         return false;
     }
 
-    @Cacheable
     public void checkPublicationOnline(int publicationId, Localization localization) {
         ApiClient client = apiClientProvider.getClient();
         boolean isOffline = false;

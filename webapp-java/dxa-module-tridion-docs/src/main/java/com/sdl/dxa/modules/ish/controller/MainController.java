@@ -11,6 +11,7 @@ import com.sdl.webapp.common.api.model.PageModel;
 import com.sdl.webapp.common.api.model.page.DefaultPageModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -78,6 +79,7 @@ public class MainController {
             value = "/{publicationId:[\\d]+}",
             method = GET
     )
+    @Cacheable("ish")
     public String home(@PathVariable("publicationId") String publicationId,
                        HttpServletRequest request) throws ContentProviderException {
         return getHomeView(publicationId, null, request);
@@ -95,6 +97,7 @@ public class MainController {
             value = "/{publicationId:[\\d]+}/{pageId}/**",
             method = GET
     )
+    @Cacheable("ish")
     public String home(@PathVariable("publicationId") String publicationId,
                        @PathVariable("pageId") String pageId,
                        HttpServletRequest request) throws ContentProviderException {
