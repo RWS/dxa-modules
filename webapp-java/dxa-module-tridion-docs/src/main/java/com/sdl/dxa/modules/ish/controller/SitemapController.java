@@ -1,9 +1,10 @@
 package com.sdl.dxa.modules.ish.controller;
 
 import com.sdl.dxa.modules.docs.exception.DocsExceptionHandler;
-import com.sdl.dxa.modules.ish.exception.IshServiceException;
 import com.sdl.dxa.modules.docs.model.ErrorMessage;
+import com.sdl.dxa.modules.ish.exception.IshServiceException;
 import com.sdl.dxa.modules.ish.services.SitemapService;
+import com.sdl.webapp.common.api.WebRequestContext;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -29,6 +30,9 @@ public class SitemapController {
     @Autowired
     private SitemapService sitemapService;
 
+    @Autowired
+    private WebRequestContext webRequestContext;
+
     @RequestMapping(value = "/api/sitemap.xml", produces = APPLICATION_XML_VALUE)
     @ResponseBody
     public String create(HttpServletRequest request, HttpServletResponse response) {
@@ -37,7 +41,7 @@ public class SitemapController {
         String contextPath = StringUtils.substringBefore(request.getRequestURL().toString(),
                 request.getServletPath()) + "/";
 
-        return sitemapService.createSitemap(contextPath);
+        return sitemapService.createSitemap(contextPath, webRequestContext.getLocalization());
     }
 
     @ExceptionHandler(value = {Exception.class, IshServiceException.class})

@@ -1,11 +1,12 @@
 package com.sdl.dxa.modules.ish.controller;
 
 import com.sdl.dxa.modules.docs.exception.DocsExceptionHandler;
+import com.sdl.dxa.modules.docs.localization.DocsLocalization;
 import com.sdl.dxa.modules.docs.model.ErrorMessage;
 import com.sdl.dxa.modules.ish.providers.PublicationService;
-import com.sdl.dxa.modules.ish.services.PageService;
-import com.sdl.dxa.modules.docs.localization.DocsLocalization;
 import com.sdl.webapp.common.api.WebRequestContext;
+import com.sdl.webapp.common.api.content.ContentProviderException;
+import com.sdl.webapp.common.api.content.ContentProvider_22;
 import com.sdl.webapp.common.api.model.PageModel;
 import com.sdl.webapp.common.api.model.page.DefaultPageModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,11 +33,12 @@ public class MainController {
 
     private static final String ACTIVE_FEATURES = "activeFeatures";
     private static final String CONTENT_IS_EVALUABLE = "contentIsEvaluable";
+
     @Autowired
     private WebRequestContext webRequestContext;
 
     @Autowired
-    private PageService pageService;
+    private ContentProvider_22 contentProvider;
 
     @Autowired
     private PublicationService publicationService;
@@ -60,7 +62,7 @@ public class MainController {
             value = {"/home", "/publications/**"},
             method = GET
     )
-    public String home(HttpServletRequest request) {
+    public String home(HttpServletRequest request) throws ContentProviderException {
         return getHomeView(null, null, request);
     }
 
@@ -77,7 +79,7 @@ public class MainController {
             method = GET
     )
     public String home(@PathVariable("publicationId") String publicationId,
-                       HttpServletRequest request) {
+                       HttpServletRequest request) throws ContentProviderException {
         return getHomeView(publicationId, null, request);
     }
 
@@ -95,25 +97,25 @@ public class MainController {
     )
     public String home(@PathVariable("publicationId") String publicationId,
                        @PathVariable("pageId") String pageId,
-                       HttpServletRequest request) {
+                       HttpServletRequest request) throws ContentProviderException {
         return getHomeView(publicationId, pageId, request);
     }
 
-    private String getHomeView(String publicationId, String pageId, HttpServletRequest request) {
+    private String getHomeView(String publicationId, String pageId, HttpServletRequest request) throws ContentProviderException {
         this.setPageModelOnRequest(publicationId, pageId, request);
 
         return "home";
     }
 
-    private void setPageModelOnRequest(String publicationId, String pageId, HttpServletRequest request) {
+    private void setPageModelOnRequest(String publicationId, String pageId, HttpServletRequest request) throws ContentProviderException {
         final DocsLocalization localization = (DocsLocalization) webRequestContext.getLocalization();
 
         if (isNotEmpty(publicationId) && isNumeric(publicationId)) {
             localization.setPublicationId(publicationId);
-            publicationService.checkPublicationOnline(Integer.parseInt(publicationId));
+            publicationService.checkPublicationOnline(Integer.parseInt(publicationId), webRequestContext.getLocalization());
         }
         if (isNotEmpty(pageId) && isNumeric(pageId)) {
-            final PageModel page = pageService.getPageModel(pageId, localization);
+            final PageModel page = contentProvider.getPageModel(pageId, localization);
             request.setAttribute(PAGE_MODEL, page);
         } else {
             request.setAttribute(PAGE_MODEL, new DefaultPageModel());

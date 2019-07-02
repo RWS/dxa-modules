@@ -8,8 +8,8 @@ import com.sdl.dxa.modules.docs.mashup.models.widgets.DynamicWidget;
 import com.sdl.dxa.modules.docs.mashup.models.widgets.StaticWidget;
 import com.sdl.dxa.modules.docs.mashup.models.widgets.Topic;
 import com.sdl.webapp.common.api.WebRequestContext;
-import com.sdl.webapp.common.api.content.ContentProvider;
 import com.sdl.webapp.common.api.content.ContentProviderException;
+import com.sdl.webapp.common.api.content.ContentProvider_22;
 import com.sdl.webapp.common.api.content.StaticContentItem;
 import com.sdl.webapp.common.api.model.EntityModel;
 import com.sdl.webapp.common.api.model.KeywordModel;
@@ -17,15 +17,16 @@ import com.sdl.webapp.common.api.model.RegionModel;
 import com.sdl.webapp.common.api.model.ViewModel;
 import com.sdl.webapp.common.controller.ControllerUtils;
 import com.sdl.webapp.common.controller.EntityController;
-import com.sdl.webapp.common.impl.model.ContentNamespace;
 import com.sdl.webapp.common.util.MimeUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.InputStreamResource;
-import org.springframework.http.*;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -49,11 +50,11 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 public class TridionDocsMashupController extends EntityController {
 
     private final WebRequestContext webRequestContext;
-    private final ContentProvider contentProvider;
+    private final ContentProvider_22 contentProvider;
     private final TridionDocsClient tridionDocsClient;
 
     @Autowired
-    public TridionDocsMashupController(WebRequestContext webRequestContext, ContentProvider contentProvider, TridionDocsClient tridionDocsClient) {
+    public TridionDocsMashupController(WebRequestContext webRequestContext, ContentProvider_22 contentProvider, TridionDocsClient tridionDocsClient) {
         this.webRequestContext = webRequestContext;
         this.contentProvider = contentProvider;
         this.tridionDocsClient = tridionDocsClient;
@@ -149,7 +150,7 @@ public class TridionDocsMashupController extends EntityController {
         HttpHeaders responseHeaders = new HttpHeaders();
         DocsLocalization docsLocalization = new DocsLocalization();
         docsLocalization.setPublicationId(String.valueOf(publicationId));
-        StaticContentItem binaryItem = contentProvider.getStaticContent(ContentNamespace.Docs, binaryId, docsLocalization.getId(), docsLocalization.getPath());
+        StaticContentItem binaryItem = contentProvider.getStaticContent(binaryId, docsLocalization);
         if (binaryItem == null) {
             return new ResponseEntity<>(null, responseHeaders, HttpStatus.NOT_FOUND);
         }

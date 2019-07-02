@@ -1,5 +1,6 @@
 package com.sdl.dxa.modules.ish.providers;
 
+import com.sdl.dxa.modules.docs.localization.DocsLocalization;
 import com.sdl.dxa.modules.ish.exception.IshServiceException;
 import com.sdl.dxa.modules.ish.model.Publication;
 import com.sdl.web.api.meta.WebPublicationMetaFactory;
@@ -26,13 +27,13 @@ import static org.mockito.Mockito.when;
  * PublicationService test.
  */
 @RunWith(MockitoJUnitRunner.class)
-public class PublicationServiceTest {
+public class CilPublicationServiceTest {
 
     @Mock
     private WebPublicationMetaFactory webPublicationMetaFactory;
 
     @InjectMocks
-    private PublicationService publicationService;
+    private CilPublicationService cilPublicationService;
 
     @SuppressWarnings("magicnumber")
     @Test
@@ -61,7 +62,7 @@ public class PublicationServiceTest {
             "CREATED-ON.version.value", "VERSION.version.value", "ishref.object.value"
         ))).thenReturn(metas);
 
-        List<Publication> result = publicationService.getPublicationList();
+        List<Publication> result = cilPublicationService.getPublicationList(new DocsLocalization());
 
         assertEquals(1, result.size());
         assertEquals("123", result.get(0).getId());
@@ -88,7 +89,7 @@ public class PublicationServiceTest {
                 "CREATED-ON.version.value", "VERSION.version.value", "ishref.object.value"
             ));
 
-        publicationService.getPublicationList();
+        cilPublicationService.getPublicationList(new DocsLocalization());
     }
 
     @Test
@@ -97,7 +98,7 @@ public class PublicationServiceTest {
         when(pubMeta.getCustomMeta().getFirstValue("FISHDITADLVRREMOTESTATUS.lng.element"))
                 .thenReturn("VDITADLVRREMOTESTATUSONLINE");
 
-        assertTrue(publicationService.isPublicationOnline(pubMeta));
+        assertTrue(cilPublicationService.isPublicationOnline(pubMeta));
     }
 
     @Test
@@ -106,7 +107,7 @@ public class PublicationServiceTest {
         when(pubMeta.getCustomMeta().getFirstValue("FISHDITADLVRREMOTESTATUS.lng.element"))
                 .thenReturn("some value");
 
-        assertFalse(publicationService.isPublicationOnline(pubMeta));
+        assertFalse(cilPublicationService.isPublicationOnline(pubMeta));
     }
 
 }

@@ -33,6 +33,9 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
                 .addResourceLocations("/WEB-INF/classes/gui/")
                 .setCachePeriod(BROWSER_CACHE_CONTROL);
         registry
+                .addResourceHandler("/favicon.ico")
+                .addResourceLocations("/robots.txt");
+        registry
                 .addResourceHandler("/robots.txt")
                 .addResourceLocations("/robots.txt");
     }

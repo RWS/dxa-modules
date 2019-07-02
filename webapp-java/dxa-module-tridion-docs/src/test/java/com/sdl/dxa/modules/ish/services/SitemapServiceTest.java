@@ -1,5 +1,6 @@
 package com.sdl.dxa.modules.ish.services;
 
+import com.sdl.dxa.modules.docs.localization.DocsLocalization;
 import com.sdl.dxa.modules.ish.exception.IshServiceException;
 import com.sdl.odata.client.api.exception.ODataClientRuntimeException;
 import com.sdl.web.api.meta.WebPublicationMetaFactory;
@@ -27,7 +28,7 @@ public class SitemapServiceTest {
             "[{\"url\":\"2171939/2229816/load-map-/load-topic\",\"lastModifiedDate\":\"2017-06-12 13:30:02\"}]}]";
 
     @InjectMocks
-    private SitemapService sitemapService;
+    private CilSitemapService sitemapService;
 
     @Mock
     private WebPublicationMetaFactory webPublicationMetaFactory;
@@ -35,7 +36,7 @@ public class SitemapServiceTest {
     @Test
     public void testCreateSitemap() throws IshServiceException {
         when(webPublicationMetaFactory.getSiteMapForPublication(-1)).thenReturn(EXPECTED_JSON);
-        String actualResult = sitemapService.createSitemap(CONTEXT_PATH);
+        String actualResult = sitemapService.createSitemap(CONTEXT_PATH, new DocsLocalization());
         HashMap<String, String> prefix2Uri = new HashMap<>();
         prefix2Uri.put("sitemap", "http://www.sitemaps.org/schemas/sitemap/0.9");
         assertThat(actualResult, EvaluateXPathMatcher.hasXPath("//sitemap:urlset/sitemap:url/sitemap:changefreq",
@@ -51,6 +52,6 @@ public class SitemapServiceTest {
     @Test(expected = IshServiceException.class)
     public void testExceptionWhileSitemapCreation() {
         when(webPublicationMetaFactory.getSiteMapForPublication(-1)).thenThrow(ODataClientRuntimeException.class);
-        sitemapService.createSitemap(CONTEXT_PATH);
+        sitemapService.createSitemap(CONTEXT_PATH, new DocsLocalization());
     }
 }

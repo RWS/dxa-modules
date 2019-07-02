@@ -2,6 +2,7 @@ package com.sdl.dxa.modules.ish.providers;
 
 import com.sdl.web.api.meta.WebPublicationMetaFactory;
 import com.sdl.web.model.PublicationMetaImpl;
+import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.controller.exception.NotFoundException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
 /**
@@ -28,7 +30,7 @@ public class ConditionServiceTest {
     private WebPublicationMetaFactory webPublicationMetaFactory;
 
     @InjectMocks
-    private ConditionService conditionService = new ConditionService();
+    private CilConditionService conditionService = new CilConditionService();
 
     @Test
     public void testGetConditionsSuccess() throws Exception {
@@ -40,13 +42,13 @@ public class ConditionServiceTest {
         when(webPublicationMetaFactory.getMeta(PUBLICATION_ID).getCustomMeta()
                 .getFirstValue("conditionmetadata.generated.value")).thenReturn(CONDITION_DATATYPE);
 
-        assertEquals(expectedJson, conditionService.getConditions(PUBLICATION_ID));
+        assertEquals(expectedJson, conditionService.getConditions(PUBLICATION_ID, any(Localization.class)));
     }
 
     @Test(expected = NotFoundException.class)
     public void testGetConditionsMetaNotFound() throws Exception {
         when(webPublicationMetaFactory.getMeta(PUBLICATION_ID)).thenReturn(new PublicationMetaImpl());
 
-        conditionService.getConditions(PUBLICATION_ID);
+        conditionService.getConditions(PUBLICATION_ID, any(Localization.class));
     }
 }

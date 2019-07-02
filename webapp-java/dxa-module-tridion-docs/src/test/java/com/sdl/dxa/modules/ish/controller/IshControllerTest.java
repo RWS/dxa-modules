@@ -1,8 +1,11 @@
 package com.sdl.dxa.modules.ish.controller;
 
+import com.sdl.dxa.modules.docs.localization.DocsLocalization;
 import com.sdl.dxa.modules.ish.providers.PublicationService;
 import com.sdl.dxa.modules.ish.providers.TridionDocsContentService;
+import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.content.ContentProviderException;
+import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.controller.exception.NotFoundException;
 import com.tridion.meta.Item;
 import org.junit.Test;
@@ -15,6 +18,8 @@ import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static junit.framework.TestCase.assertEquals;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
@@ -32,31 +37,37 @@ public class IshControllerTest {
     private PublicationService publicationService;
     @Mock
     private TridionDocsContentService contentService;
+    @Mock
+    private WebRequestContext webRequestContext;
+
     @Spy
     @InjectMocks
     private IshController controller;
 
     @Test
     public void getTopicIdInTargetPublication() throws ContentProviderException {
+        when(webRequestContext.getLocalization()).thenReturn(new DocsLocalization());
         when(contentService.getPageIdByIshLogicalReference(PUB_ID, LOGICAL_REF_VALUE)).thenReturn(pageId);
 
         assertEquals(pageId, controller.getTopicIdInTargetPublication(PUB_ID, LOGICAL_REF_VALUE));
 
         InOrder inOrder = Mockito.inOrder(controller, publicationService, contentService);
         inOrder.verify(controller).getTopicIdInTargetPublication(PUB_ID, LOGICAL_REF_VALUE);
-        inOrder.verify(publicationService).checkPublicationOnline(PUB_ID);
+        inOrder.verify(publicationService).checkPublicationOnline(eq(PUB_ID), any(Localization.class));
         inOrder.verify(contentService).getPageIdByIshLogicalReference(PUB_ID, LOGICAL_REF_VALUE);
         verifyNoMoreInteractions(controller, publicationService, contentService);
     }
 
     @Test(expected = NotFoundException.class)
     public void getTopicIdInTargetPublicationInvalidRefArg() throws ContentProviderException {
+        when(webRequestContext.getLocalization()).thenReturn(new DocsLocalization());
         controller.getTopicIdInTargetPublication(PUB_ID, "");
     }
 
     @Test(expected = NotFoundException.class)
     public void getTopicIdInTargetPublicationInvalidPubArg() throws ContentProviderException {
-        doThrow(NotFoundException.class).when(publicationService).checkPublicationOnline(PUB_ID);
+        when(webRequestContext.getLocalization()).thenReturn(new DocsLocalization());
+        doThrow(NotFoundException.class).when(publicationService).checkPublicationOnline(eq(PUB_ID), any(Localization.class));
 
         controller.getTopicIdInTargetPublication(PUB_ID, LOGICAL_REF_VALUE);
     }

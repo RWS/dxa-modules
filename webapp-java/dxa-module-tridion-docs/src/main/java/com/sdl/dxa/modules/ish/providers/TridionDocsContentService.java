@@ -1,15 +1,8 @@
 package com.sdl.dxa.modules.ish.providers;
 
-import com.sdl.dxa.modules.docs.localization.DocsLocalization;
-import com.sdl.dxa.modules.ish.utils.HtmlUtil;
-import com.sdl.dxa.modules.ish.model.Topic;
 import com.sdl.webapp.common.api.content.ContentProviderException;
-import com.sdl.webapp.common.api.content.StaticContentItem;
-import com.sdl.webapp.common.api.model.PageModel;
-import com.sdl.webapp.common.api.model.RichText;
 import com.tridion.meta.Item;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 /**
@@ -19,44 +12,7 @@ import org.springframework.stereotype.Service;
 public class TridionDocsContentService {
 
     @Autowired
-    @Qualifier("ishContentProvider")
-    private IshContentProvider contentProvider;
-
-    @Autowired
     private IshReferenceProvider ishReferenceProvider;
-
-    /**
-     * Get binary content.
-     *
-     * @param publicationId Publication id
-     * @param binaryId      Binary id
-     * @return The binary
-     * @throws ContentProviderException
-     */
-    public StaticContentItem getBinaryContent(Integer publicationId, Integer binaryId) throws ContentProviderException {
-        return contentProvider.getBinaryContent(publicationId, binaryId);
-    }
-
-    /**
-     * Get page model.
-     *
-     * @param pageId       Page id
-     * @param localization Localization
-     * @param contextPath  Context path, used for updating urls inside topic html
-     * @return The page model
-     * @throws ContentProviderException if page model cannot be fetched
-     */
-    public PageModel getPageModel(Integer pageId, DocsLocalization localization, String contextPath)
-            throws ContentProviderException {
-        PageModel model = contentProvider.getPageModel(Integer.toString(pageId), localization);
-        // Update base path inside links in case the application is not hosted under the root
-        if (!contextPath.equals("")) {
-            Topic topicEntity = (Topic) model.getRegions().get("Main").getEntities().get(0);
-            String topicBody = topicEntity.getTopicBody().toString();
-            topicEntity.setTopicBody(new RichText(HtmlUtil.updateBasePath(topicBody, contextPath)));
-        }
-        return model;
-    }
 
     /**
      * Returns page Id in given publication, which ishLogicalRef equals to given reference value.

@@ -9,8 +9,6 @@ import com.sdl.webapp.common.api.localization.SiteLocalization;
 import com.sdl.webapp.common.api.mapping.semantic.config.SemanticSchema;
 import com.sdl.webapp.common.impl.localization.semantics.JsonSchema;
 import com.sdl.webapp.common.impl.localization.semantics.JsonVocabulary;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -34,8 +32,6 @@ public class DocsLocalization implements Localization {
     /**
      * The Id for the current publication.
      */
-    @Getter
-    @Setter
     private String publicationId;
 
     /**
@@ -180,5 +176,13 @@ public class DocsLocalization implements Localization {
         return MoreObjects.toStringHelper(this).omitNullValues()
                 .add("publicationId", publicationId)
                 .toString() + ", " + super.toString();
+    }
+
+    public String getPublicationId() {
+        return publicationId;
+    }
+
+    public void setPublicationId(String publicationId) {
+        this.publicationId = publicationId;
     }
 }

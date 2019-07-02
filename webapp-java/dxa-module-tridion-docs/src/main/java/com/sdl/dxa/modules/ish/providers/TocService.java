@@ -1,14 +1,15 @@
 package com.sdl.dxa.modules.ish.providers;
 
 import com.google.common.primitives.Ints;
-import com.sdl.dxa.modules.docs.localization.DocsLocalization;
 import com.sdl.dxa.modules.ish.model.YesNo;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.content.ContentProviderException;
+import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.api.model.entity.SitemapItem;
 import com.sdl.webapp.common.api.navigation.NavigationFilter;
 import com.sdl.webapp.common.exceptions.DxaItemNotFoundException;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,11 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import static com.sdl.webapp.common.api.serialization.json.filter.IgnoreByNameInRequestFilter.ignoreByName;
 
@@ -26,6 +31,7 @@ import static com.sdl.webapp.common.api.serialization.json.filter.IgnoreByNameIn
 @Service
 @Slf4j
 public class TocService {
+    private static final Pattern RegEx = Pattern.compile("^\\w?(\\d+)(-\\w)?(\\d+)?");
 
     @Autowired
     @Qualifier("ishNavigationProvider")
@@ -43,8 +49,7 @@ public class TocService {
             throw new UnsupportedOperationException(message);
         }
 
-        DocsLocalization localization = (DocsLocalization) webRequestContext.getLocalization();
-        localization.setPublicationId(Integer.toString(publicationId));
+        Localization localization = webRequestContext.getLocalization();
 
         ignoreByName(request, "XpmMetadata", "XpmPropertyMetadata");
 
@@ -58,24 +63,51 @@ public class TocService {
             log.warn("Such item (" + sitemapItemId + ") for publication " + publicationId + " is not found", e);
             throw e;
         }
-        navigationSubtree.sort((o1, o2) -> {
-            if (o1 == o2) return 0;
-            if (o1 == null) return -1;
-            if (o2 == null) return 1;
-            //order should be t1-k2 t1-k3 t1-k10 then t2-k5 (so numbers after 'k')
-            int firstPartCompareResult = getPart(YesNo.YES, o1).compareTo(getPart(YesNo.YES, o2));
-            if (firstPartCompareResult != 0) return firstPartCompareResult;
-            Integer second_part1 = getPart(YesNo.NO, o1);
-            Integer second_part2 = getPart(YesNo.NO, o2);
-            if (second_part1 == null && second_part2 == null) return 0;
-            if (second_part1 == null) return -1;
-            if (second_part2 == null) return 1;
-            return second_part1.compareTo(second_part2);
-        });
+        navigationSubtree = navigationSubtree.stream().map(sitemapItem -> new SortableSiteMap(sitemapItem))
+                .sorted(
+                        Comparator.comparing(SortableSiteMap::getOne)
+                                .thenComparing(SortableSiteMap::getTwo))
+                .map(SortableSiteMap::getSitemapItem).collect(Collectors.toList());
         return navigationSubtree;
     }
 
     private Integer getPart(YesNo firstPart, SitemapItem item) {
         return Ints.tryParse(item.getId().replaceAll("^t(\\d++)(-k(\\d++))?$", firstPart == YesNo.YES ? "$1" : "$3"));
+    }
+
+    /**
+     * A private class that contains the results of the regex so they only have to be done once for a whole sorting.
+     */
+    private static class SortableSiteMap {
+        private Integer one;
+        private Integer two;
+        private SitemapItem sitemapItem;
+
+        public SortableSiteMap(SitemapItem sitemapItem) {
+            this.sitemapItem = sitemapItem;
+            Matcher matcher = RegEx.matcher(sitemapItem.getId());
+            if (matcher.matches()) {
+                String group1 = matcher.group(1);
+                String group3 = matcher.group(3);
+                if (StringUtils.isNotEmpty(group1)) {
+                    this.one = Integer.parseInt(group1);
+                }
+                if (StringUtils.isNotEmpty(group3)) {
+                    this.two = Integer.parseInt(group3);
+                }
+            }
+        }
+
+        public Integer getOne() {
+            return one;
+        }
+
+        public Integer getTwo() {
+            return two;
+        }
+
+        public SitemapItem getSitemapItem() {
+            return sitemapItem;
+        }
     }
 }
