@@ -2,6 +2,7 @@ package com.sdl.dxa.modules.ish.providers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sdl.dxa.modules.ish.exception.IshServiceException;
 import com.sdl.dxa.tridion.pcaclient.ApiClientProvider;
 import com.sdl.dxa.tridion.pcaclient.GraphQLUtils;
 import com.sdl.web.pca.client.ApiClient;
@@ -30,23 +31,19 @@ public class GraphQLConditionService implements ConditionService {
     @Autowired
     private ApiClientProvider pcaClientProvider;
 
-    //TODO caching & make this return a clone (userconditions can overwrite values)
     @Override
     public String getConditions(Integer publicationId, Localization localization) {
         Map<String, Map> objectConditions = null;
         try {
             objectConditions = getObjectConditions(publicationId, localization);
-        } catch (DxaItemNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException | DxaItemNotFoundException e) {
+            throw new IshServiceException("Error getting conditions for publication", e);
         }
         try {
             return objectMapper.writeValueAsString(objectConditions);
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            throw new IshServiceException("Error writing conditions for publication", e);
         }
-        return null;
     }
 
     @Override

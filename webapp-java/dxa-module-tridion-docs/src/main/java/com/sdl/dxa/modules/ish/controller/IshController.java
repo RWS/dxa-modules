@@ -14,7 +14,7 @@ import com.sdl.dxa.modules.ish.providers.TridionDocsContentService;
 import com.sdl.dxa.modules.ish.utils.ConditionUtil;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.content.ContentProviderException;
-import com.sdl.webapp.common.api.content.ContentProvider_22;
+import com.sdl.webapp.common.api.content.Dxa22ContentProvider;
 import com.sdl.webapp.common.api.content.StaticContentItem;
 import com.sdl.webapp.common.api.formats.DataFormatter;
 import com.sdl.webapp.common.api.localization.Localization;
@@ -87,7 +87,7 @@ public class IshController {
     private ConditionService conditionService;
 
     @Autowired
-    private ContentProvider_22 contentProvider;
+    private Dxa22ContentProvider contentProvider;
 
     //Don't use an @Autowired objectmapper here, we need to change some configuration.
     private ObjectMapper objectMapper = new ObjectMapper();

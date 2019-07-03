@@ -6,7 +6,7 @@ import com.sdl.dxa.modules.docs.model.ErrorMessage;
 import com.sdl.dxa.modules.ish.providers.PublicationService;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.content.ContentProviderException;
-import com.sdl.webapp.common.api.content.ContentProvider_22;
+import com.sdl.webapp.common.api.content.Dxa22ContentProvider;
 import com.sdl.webapp.common.api.model.PageModel;
 import com.sdl.webapp.common.api.model.page.DefaultPageModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +39,7 @@ public class MainController {
     private WebRequestContext webRequestContext;
 
     @Autowired
-    private ContentProvider_22 contentProvider;
+    private Dxa22ContentProvider contentProvider;
 
     @Autowired
     private PublicationService publicationService;

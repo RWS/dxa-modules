@@ -9,7 +9,7 @@ import com.sdl.dxa.modules.docs.mashup.models.widgets.StaticWidget;
 import com.sdl.dxa.modules.docs.mashup.models.widgets.Topic;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.content.ContentProviderException;
-import com.sdl.webapp.common.api.content.ContentProvider_22;
+import com.sdl.webapp.common.api.content.Dxa22ContentProvider;
 import com.sdl.webapp.common.api.content.StaticContentItem;
 import com.sdl.webapp.common.api.model.EntityModel;
 import com.sdl.webapp.common.api.model.KeywordModel;
@@ -50,11 +50,11 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 public class TridionDocsMashupController extends EntityController {
 
     private final WebRequestContext webRequestContext;
-    private final ContentProvider_22 contentProvider;
+    private final Dxa22ContentProvider contentProvider;
     private final TridionDocsClient tridionDocsClient;
 
     @Autowired
-    public TridionDocsMashupController(WebRequestContext webRequestContext, ContentProvider_22 contentProvider, TridionDocsClient tridionDocsClient) {
+    public TridionDocsMashupController(WebRequestContext webRequestContext, Dxa22ContentProvider contentProvider, TridionDocsClient tridionDocsClient) {
         this.webRequestContext = webRequestContext;
         this.contentProvider = contentProvider;
         this.tridionDocsClient = tridionDocsClient;

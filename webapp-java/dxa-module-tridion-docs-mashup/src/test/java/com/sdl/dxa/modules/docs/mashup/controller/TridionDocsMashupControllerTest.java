@@ -7,7 +7,7 @@ import com.sdl.dxa.modules.docs.mashup.models.widgets.DynamicWidget;
 import com.sdl.dxa.modules.docs.mashup.models.widgets.StaticWidget;
 import com.sdl.dxa.modules.docs.mashup.models.widgets.Topic;
 import com.sdl.webapp.common.api.WebRequestContext;
-import com.sdl.webapp.common.api.content.ContentProvider_22;
+import com.sdl.webapp.common.api.content.Dxa22ContentProvider;
 import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.api.model.EntityModel;
 import com.sdl.webapp.common.api.model.KeywordModel;
@@ -50,7 +50,7 @@ public class TridionDocsMashupControllerTest {
     private WebRequestContext webRequestContext;
     
     @Mock
-    private ContentProvider_22 contentProvider;
+    private Dxa22ContentProvider contentProvider;
 
     @Mock
     private Localization localization;
