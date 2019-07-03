@@ -63,6 +63,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @Slf4j
 @Controller
 public class IshController {
+    //Note: This URI has to be included in the file cd_ambient_conf.xml as a forwarded claim for conditions to work.
     private static final URI USER_CONDITIONS_URI = URI.create("taf:ish:userconditions:merged");
 
     @Autowired
@@ -247,14 +248,14 @@ public class IshController {
     }
 
     private void setConditions(Integer publicationId, String conditions) throws IOException, DxaItemNotFoundException {
-        String mergedConditions = null;
+        Map<String, List> mergedConditions = null;
         if (!conditions.isEmpty()) {
             mergedConditions = getMergedConditions(conditions, publicationId);
         }
         ConditionUtil.addConditions(USER_CONDITIONS_URI, mergedConditions);
     }
 
-    private String getMergedConditions(String conditions, int publicationId) throws IOException, DxaItemNotFoundException {
+    private Map<String, List> getMergedConditions(String conditions, int publicationId) throws IOException, DxaItemNotFoundException {
         if (conditions == null) {
             return null;
         }
@@ -280,7 +281,7 @@ public class IshController {
             }
         }
 
-        return objectMapper.writeValueAsString(result);
+        return result;
     }
 
 }
