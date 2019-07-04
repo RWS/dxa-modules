@@ -19,9 +19,23 @@ pipeline {
 
     stages {
         stage('Building DD GUI Boilerplate') {
+            when not {
+                branch 'develop'
+            }
             steps {
                 dir("boilerplate") {
-                    powershell 'mvn clean package'
+                    powershell 'mvn -B clean package'
+                }
+            }
+        }
+
+        stage('Building and publishing DD GUI Boilerplate') {
+            when {
+                branch 'develop'
+            }
+            steps {
+                dir("boilerplate") {
+                    powershell 'mvn -B -Psonatype-nexus-snapshots clean deploy'
                 }
             }
         }
