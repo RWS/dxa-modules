@@ -13,7 +13,6 @@ import com.sdl.odata.client.api.exception.ODataClientRuntimeException;
 import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.api.navigation.NavigationFilter;
 import com.sdl.webapp.common.api.navigation.OnDemandNavigationProvider;
-import com.sdl.webapp.common.exceptions.DxaItemNotFoundException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -65,22 +64,21 @@ public class GraphQLSitemapService implements SitemapService {
             navigationFilter.setWithAncestors(false);
             navigationFilter.setDescendantLevels(-1);
 
-            List<SitemapItemModelData> sitemapItems = new ArrayList<>();
             List<Publication> pubs = publicationService.getPublicationList(localization);
             for (Publication pub : pubs) {
                 Collection<SitemapItemModelData> items = getSitemapItemModelData(Integer.parseInt(pub.getId()), localization, null, null, navigationFilter);
-                for (SitemapItemModelData item : items) {
-                    sitemapItems.addAll(item.getItems());
-                    for (SitemapItemModelData sitemapItemModelData : item.getItems()) {
+                List<SitemapItemModelData> fixed = fixupSitemap(items, true);
+                List<SitemapItemModelData> ordered = orderSitemapItems(fixed);
+                for (SitemapItemModelData item : ordered) {
+                    List<SitemapItemModelData> fixedChilds = fixupSitemap(item.getItems(), true);
+                    List<SitemapItemModelData> orderedChilds = orderSitemapItems(fixedChilds);
+                    for (SitemapItemModelData sitemapItemModelData : orderedChilds) {
                         if (sitemapItemModelData.getUrl() != null) {
                             sitemapGenerator.addUrl(contextPath + sitemapItemModelData.getUrl());
                         }
                     }
                 }
             }
-            fixupSitemap(sitemapItems, false, false);
-            SitemapItemModelData result = new SitemapItemModelData();
-            result.setItems(sitemapItems);
         } catch (MalformedURLException | ODataClientRuntimeException e) {
             throw new IshServiceException("Could not generate sitemap.", e);
         }
@@ -105,35 +103,32 @@ public class GraphQLSitemapService implements SitemapService {
         return subtree.get();
     }
 
-    private static void fixupSitemap(Collection<SitemapItemModelData> toc, boolean removePageNodes, boolean orderNodes) {
-        if (toc == null) return;
-        List<SitemapItemModelData> newToc = new ArrayList<>();
+    private static List<SitemapItemModelData> fixupSitemap(Collection<SitemapItemModelData> toc, boolean removePageNodes) {
+        List<SitemapItemModelData> result = null;
+        if (toc == null) return result;
+        result = new ArrayList<>();
         for (SitemapItemModelData entry : toc) {
-            if (removePageNodes && entry.getType().equals("Page")) {
-                //toc.remove(toc);
+            if (removePageNodes && entry.getType() != null && entry.getType().equals("Page")) {
                 continue;
             }
-            newToc.add(entry);
             String url = entry.getUrl();
             if (url != null) {
                 // Remove all occurences of '/' at the beginning of the url and replace it with a single one:
                 String fixedUrl = "/" + url.replaceFirst("/*", "");
                 entry.setUrl(fixedUrl);
             }
-            if (entry.getItems() == null) continue;
-            fixupSitemap(entry.getItems(), removePageNodes, orderNodes);
+            result.add(entry);
         }
+        return result;
+    }
 
-        if (orderNodes) {
-            List<SitemapItemModelData> ordered = newToc.stream().map(sitemapItem -> new SortableSiteMap(sitemapItem))
-                    .sorted(
-                            Comparator.comparing(SortableSiteMap::getOne)
-                                    .thenComparing(SortableSiteMap::getTwo))
-                    .map(SortableSiteMap::getSitemapItem).collect(Collectors.toList());
-            newToc = ordered;
-        }
-        toc.clear();
-        toc.addAll(newToc);
+    private static List<SitemapItemModelData> orderSitemapItems(Collection<SitemapItemModelData> toc) {
+        List<SitemapItemModelData> ordered = toc.stream().map(sitemapItem -> new SortableSiteMap(sitemapItem))
+                .sorted(
+                        Comparator.comparing(SortableSiteMap::getOne)
+                                .thenComparing(SortableSiteMap::getTwo))
+                .map(SortableSiteMap::getSitemapItem).collect(Collectors.toList());
+        return ordered;
     }
 
     /**

@@ -1,7 +1,5 @@
 package com.sdl.dxa.modules.ish.providers;
 
-import com.google.common.primitives.Ints;
-import com.sdl.dxa.modules.ish.model.YesNo;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.content.ContentProviderException;
 import com.sdl.webapp.common.api.localization.Localization;
@@ -68,11 +66,26 @@ public class TocService {
                         Comparator.comparing(SortableSiteMap::getOne)
                                 .thenComparing(SortableSiteMap::getTwo))
                 .map(SortableSiteMap::getSitemapItem).collect(Collectors.toList());
-        return navigationSubtree;
+        return fixupSitemap(navigationSubtree, true);
     }
 
-    private Integer getPart(YesNo firstPart, SitemapItem item) {
-        return Ints.tryParse(item.getId().replaceAll("^t(\\d++)(-k(\\d++))?$", firstPart == YesNo.YES ? "$1" : "$3"));
+    private static List<SitemapItem> fixupSitemap(Collection<SitemapItem> toc, boolean removePageNodes) {
+        List<SitemapItem> result = null;
+        if (toc == null) return result;
+        result = new ArrayList<>();
+        for (SitemapItem entry : toc) {
+            if (removePageNodes && entry.getType() != null && entry.getType().equals("Page")) {
+                continue;
+            }
+            String url = entry.getUrl();
+            if (url != null) {
+                // Remove all occurences of '/' at the beginning of the url and replace it with a single one:
+                String fixedUrl = "/" + url.replaceFirst("/*", "");
+                entry.setUrl(fixedUrl);
+            }
+            result.add(entry);
+        }
+        return result;
     }
 
     /**
