@@ -19,9 +19,9 @@ pipeline {
 
     stages {
         stage('Building DD GUI Boilerplate') {
-            when not {
+            when { not {
                 branch 'develop'
-            }
+            } }
             steps {
                 dir("boilerplate") {
                     powershell 'mvn -B clean package'
