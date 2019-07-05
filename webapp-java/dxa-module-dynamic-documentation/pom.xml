@@ -28,10 +28,6 @@
             <groupId>com.sdl.dxa</groupId>
             <artifactId>dxa-common-api</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.sdl.dxa.modules</groupId>
-            <artifactId>dxa-module-tridion-docs</artifactId>
-        </dependency>
 
         <!-- Third party dependencies -->
         <dependency>

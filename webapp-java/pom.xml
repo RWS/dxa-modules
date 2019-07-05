@@ -34,8 +34,6 @@
      <module>dxa-module-search</module>
      <module>dxa-module-smarttarget</module>
      <module>dxa-module-test</module>
-     <module>dxa-module-tridion-docs</module>
-     <module>dxa-module-tridion-docs-common</module>
      <module>dxa-module-tridion-docs-mashup</module>
      <module>dxa-module-tridion-docs-search</module>
      <module>dxa-module-ugc</module>

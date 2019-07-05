@@ -1,6 +1,6 @@
 package com.sdl.dxa.modules.docs.mashup.controller;
 
-import com.sdl.dxa.modules.docs.localization.DocsLocalization;
+import com.sdl.webapp.common.impl.localization.DocsLocalization;;
 import com.sdl.dxa.modules.docs.mashup.client.TridionDocsClient;
 import com.sdl.dxa.modules.docs.mashup.exception.DocsMashupException;
 import com.sdl.dxa.modules.docs.mashup.models.products.Product;
