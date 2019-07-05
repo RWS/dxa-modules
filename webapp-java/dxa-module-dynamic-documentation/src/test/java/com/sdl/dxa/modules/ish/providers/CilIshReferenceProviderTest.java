@@ -34,7 +34,7 @@ import static org.mockito.Mockito.when;
  * Provider which returns meta information for given publication.
  */
 @RunWith(MockitoJUnitRunner.class)
-public class IshReferenceProviderTest {
+public class CilIshReferenceProviderTest {
     private static final Integer PUB_ID = 10992;
     private static final String LOGICAL_REF_VALUE = "ishlogicalref.object.id.value";
     private static final long DATE_1990 = -2208996000000L;
@@ -51,7 +51,7 @@ public class IshReferenceProviderTest {
     @Mock
     private QueryImpl query = mock(QueryImpl.class);
     @Spy
-    private IshReferenceProvider provider;
+    private CilIshReferenceProvider provider;
 
     @Before
     public void setUp() throws Exception {
