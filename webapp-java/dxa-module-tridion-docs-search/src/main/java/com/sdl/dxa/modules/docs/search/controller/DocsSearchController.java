@@ -1,10 +1,10 @@
 package com.sdl.dxa.modules.docs.search.controller;
 
-import com.sdl.dxa.modules.docs.exception.DocsExceptionHandler;
-import com.sdl.dxa.modules.docs.model.ErrorMessage;
 import com.sdl.dxa.modules.docs.search.exception.SearchException;
 import com.sdl.dxa.modules.docs.search.model.SearchResultSet;
 import com.sdl.dxa.modules.docs.search.service.SearchService;
+import com.sdl.webapp.common.controller.exception.DocsExceptionHandler;
+import com.sdl.webapp.common.impl.model.ErrorMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

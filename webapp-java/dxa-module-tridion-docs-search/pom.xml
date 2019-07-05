@@ -24,10 +24,15 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.sdl.dxa.modules</groupId>
-            <artifactId>dxa-module-tridion-docs-common</artifactId>
+            <groupId>com.sdl.dxa</groupId>
+            <artifactId>dxa-common-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sdl.dxa</groupId>
+            <artifactId>dxa-dd4t-ms-provider</artifactId>
         </dependency>
 
+        <!-- Third party libraries -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
@@ -35,6 +40,10 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
         </dependency>
 
         <!-- Tests -->
@@ -45,10 +54,6 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
         </dependency>
     </dependencies>
 

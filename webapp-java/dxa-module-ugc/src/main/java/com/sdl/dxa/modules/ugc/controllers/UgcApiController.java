@@ -11,6 +11,7 @@ import com.sdl.dxa.modules.ugc.exceptions.CannotFetchCommentsException;
 import com.sdl.dxa.modules.ugc.exceptions.CannotProcessCommentException;
 import com.sdl.webapp.common.controller.ControllerUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -99,9 +100,14 @@ public class UgcApiController {
 
         addPubIdTitleLangToCommentMetadata(input, metadata);
 
+        String userId = input.getUserName();
+        if (StringUtils.isEmpty(userId)) {
+            userId = "Anonymous";
+        }
+
         Comment comment = ugcService.postComment(input.getPublicationId(),
                 input.getPageId(),
-                input.getUserName(),
+                userId,
                 input.getEmail(),
                 input.getContent(),
                 Ints.tryParse(input.getParentId()),
