@@ -19,9 +19,34 @@ pipeline {
 
     stages {
         stage('Building DD GUI Boilerplate') {
+            when { not {
+                branch 'develop'
+            } }
             steps {
                 dir("boilerplate") {
-                    powershell 'mvn clean package'
+                    powershell 'mvn -B clean package'
+                }
+            }
+        }
+
+        stage('Building and publishing DD GUI Boilerplate') {
+            when {
+                branch 'develop'
+            }
+            steps {
+                dir("boilerplate") {
+                    powershell 'mvn -B -Psonatype-nexus-snapshots clean deploy'
+                }
+            }
+        }
+
+        stage('Publishing Dynamic Documentation Module GUI Boilerplate NuGet Package') {
+            when {
+                branch 'develop'
+            }
+            steps {
+                dir("boilerplate/nuget") {
+                    powershell ".\\publish.ps1 -guiSourcePath '..\\' -tempFolder '${tempFolder}' -Actions @('Prepare', 'Push') -packageName '${packageName}' -version '${version}' -isPreRelease ('${isPreRelease}' -eq 'true')"
                 }
             }
         }

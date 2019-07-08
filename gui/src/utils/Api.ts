@@ -161,7 +161,7 @@ export class Api {
             // Get all comments for a page without any filtering
             return path.getAbsolutePath(`${mocksEndPoint}/comments-${encodedPubId}-${encodedPageId}.json`);
         } else {
-            return path.getAbsolutePath(`api/comments/${encodedPubId}/${encodedPageId}?descending=${descending}&top=${top}&skip=${skip}&status[]=${status}`);
+            return path.getAbsolutePath(`api/comments/${encodedPubId}/${encodedPageId}?descending=${descending}&top=${top}&skip=${skip}&status%5B%5D=${status}`);
         }
     }
 

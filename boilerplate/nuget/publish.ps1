@@ -88,7 +88,7 @@ if ($Actions -contains "Prepare")
 
     Write-Host "Copying GUI artifacts to $packageContentFolder...";
 
-    Copy-Item -Path "$guiSourcePath\*" -Destination "$packageContentFolder" -Exclude @("nuget","target","assembly","dynamic-documentation-boilerplate.iml") -Recurse
+    Copy-Item -Path "$guiSourcePath\*" -Destination "$packageContentFolder" -Exclude @("nuget","target","assembly","node_modules","dynamic-documentation-boilerplate.iml") -Recurse
     Copy-Item -Path ".\$packageName.nuspec" -Destination "$packageTempPath"
 
     Pack-Package -nuspecFilePath "$packageTempPath\$packageName.nuspec" -packageVersion $packageVersion -outputPath "$packageRoot";
