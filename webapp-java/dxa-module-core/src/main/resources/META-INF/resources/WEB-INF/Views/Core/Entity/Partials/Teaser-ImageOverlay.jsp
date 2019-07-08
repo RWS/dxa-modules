@@ -27,9 +27,18 @@
 <div ${markup.entity(item)}>
     <c:choose>
         <c:when test="${not empty item.media}">
-            <span ${markup.property(item, "media")}>
-                <dxa:media media="${item.media}" widthFactor="100%" aspect="${imageAspect}"/>
-            </span>
+            <c:choose>
+                <c:when test="${imageAspect == 0.0}">
+                    <span ${markup.property(item, "media")}>
+                        <dxa:media media="${item.media}" widthFactor="100%"/>
+                    </span>
+                </c:when>
+                <c:otherwise>
+                    <span ${markup.property(item, "media")}>
+                        <dxa:media media="${item.media}" widthFactor="100%" aspect="${imageAspect}"/>
+                    </span>
+                </c:otherwise>
+            </c:choose>
         </c:when>
         <c:otherwise>
             <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""
