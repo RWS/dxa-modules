@@ -21,24 +21,15 @@
         </c:choose>
     </c:when>
     <c:otherwise>
-        <c:set var="imageAspect" value="0.0"/>
+        <c:set var="imageAspect" value="1.62"/>
     </c:otherwise>
 </c:choose>
 <div ${markup.entity(item)}>
     <c:choose>
         <c:when test="${not empty item.media}">
-            <c:choose>
-                <c:when test="${imageAspect == 0.0}">
-                    <span ${markup.property(item, "media")}>
-                        <dxa:media media="${item.media}" widthFactor="100%"/>
-                    </span>
-                </c:when>
-                <c:otherwise>
-                    <span ${markup.property(item, "media")}>
+            <span ${markup.property(item, "media")}>
                         <dxa:media media="${item.media}" widthFactor="100%" aspect="${imageAspect}"/>
-                    </span>
-                </c:otherwise>
-            </c:choose>
+            </span>
         </c:when>
         <c:otherwise>
             <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""
