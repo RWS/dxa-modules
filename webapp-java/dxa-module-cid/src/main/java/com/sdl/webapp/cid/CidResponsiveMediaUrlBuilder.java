@@ -60,7 +60,7 @@ public class CidResponsiveMediaUrlBuilder implements MediaHelper.ResponsiveMedia
 
         @Override
         public String buildInternal() {
-            String localName = servletRequest.getLocalName();
+            String localName = servletRequest.getServerName();
 
             if (isIPv6Localhost(localName)) {
                 localName = "localhost";
