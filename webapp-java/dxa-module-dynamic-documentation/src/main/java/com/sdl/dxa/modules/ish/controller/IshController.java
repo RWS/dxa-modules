@@ -102,6 +102,7 @@ public class IshController {
      *
      * @param publicationId Publication id
      * @param pageId        Page id
+     * @param conditions    String representing conditions
      * @param request       Http request
      * @param response      Http response
      * @return Page model using the json format.
@@ -129,9 +130,9 @@ public class IshController {
     /**
      * Get binary data.
      *
+     * @param response HTTP Response object
      * @param publicationId Publication id
      * @param binaryId      Binary id
-     * @return Binary data using a stream.
      * @throws ContentProviderException if page model cannot be fetched
      * @throws IOException if something wrong with tomcat response channel
      */

@@ -60,6 +60,7 @@ public class MainController {
      *
      * @param request   Http request
      * @return          Home page for Docs (all the publications)
+     * @throws          ContentProviderException in case if data retrieving fails
      */
     @RequestMapping(
             value = {"/home", "/publications/**"},
@@ -75,7 +76,8 @@ public class MainController {
      *
      * @param publicationId Publication id
      * @param request       Http request
-     * @return  Publication home page content
+     * @return Publication home page content
+     * @throws ContentProviderException in case if data retrieving fails
      */
     @RequestMapping(
             value = "/{publicationId:[\\d]+}",
@@ -94,6 +96,7 @@ public class MainController {
      * @param pageId        Page id
      * @param request       Http request
      * @return content of the page
+     * @throws ContentProviderException in case if data retrieving fails
      */
     @RequestMapping(
             value = "/{publicationId:[\\d]+}/{pageId}/**",
