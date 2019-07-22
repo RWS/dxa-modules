@@ -42,9 +42,6 @@ public class GraphQLSitemapService implements SitemapService {
     private String cilSitemapDateFormat = CIL_SITEMAP_DATEFORMAT;
 
     @Autowired
-    private OnDemandNavigationProvider provider;
-
-    @Autowired
     private OnDemandNavigationModelProvider onDemandNavigationModelProvider;
 
     @Autowired
@@ -56,7 +53,6 @@ public class GraphQLSitemapService implements SitemapService {
         // This will cause several requests to be issued and results in quite a slow performance.
 
         WebSitemapGenerator sitemapGenerator;
-        if (provider == null) return null;
         try {
             sitemapGenerator = new WebSitemapGenerator(contextPath);
 
