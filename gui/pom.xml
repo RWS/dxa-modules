@@ -17,6 +17,7 @@
         <frontend.maven.plugin.version>1.0</frontend.maven.plugin.version>
         <node.version>v6.11.2</node.version>
         <npm.version>4.6.1</npm.version>
+        <tag>latest</tag>
     </properties>
 
     <build>
@@ -97,7 +98,7 @@
                         <phase>deploy</phase>
 
                         <configuration>
-                            <arguments>publish -registry=${npm.publish.repo} --access=public --tag=latest</arguments>
+                            <arguments>publish -registry=${npm.publish.repo} --access=public --tag=${tag}</arguments>
                         </configuration>
                     </execution>
                 </executions>
@@ -137,7 +138,7 @@
             <properties>
                 <npm.repo>https://registry.npmjs.org</npm.repo>
                 <npm.publish.repo>https://registry.npmjs.org</npm.publish.repo>
-                <tag>stable</tag>
+                <tag>latest</tag>
             </properties>
         </profile>
     </profiles>
