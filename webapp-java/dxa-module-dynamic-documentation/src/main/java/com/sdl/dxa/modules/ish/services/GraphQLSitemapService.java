@@ -84,7 +84,6 @@ public class GraphQLSitemapService implements SitemapService {
 
     private Collection<SitemapItemModelData> getSitemapItemModelData(Integer publicationId, Localization localization, String sitemapItemId, ClaimHolder claimHolder, NavigationFilter navigationFilter) {
         Optional<Collection<SitemapItemModelData>> subtree;
-
         SitemapRequestDto requestDto = SitemapRequestDto
                 .builder(publicationId)
                 .navigationFilter(navigationFilter)
