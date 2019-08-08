@@ -122,7 +122,7 @@ public class IshController {
         PageModel page = contentProvider.getPageModel(pageId, localization);
         if (page == null) {
             response.setStatus(NOT_FOUND.value());
-            throw new ResourceNotFoundException("Page not found: [" + localization.getId() + "] " + pageId + "/index.html");
+            throw new ResourceNotFoundException(String.format("Item '%s' not found for Localization '%s'", pageId, localization.getId()));
         }
         return dataFormatters.view(page);
     }
