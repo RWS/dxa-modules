@@ -62,10 +62,9 @@ public class GraphQLSitemapService implements SitemapService {
 
             List<Publication> pubs = publicationService.getPublicationList(localization);
             for (Publication pub : pubs) {
-                Optional<Collection<SitemapItemModelData>> items =
+                Collection<SitemapItemModelData> items =
                         getSitemapItemModelData(Integer.parseInt(pub.getId()), localization, null, null, navigationFilter);
-                if(!items.isPresent()) { continue; }
-                List<SitemapItemModelData> fixed = fixupSitemap(items.get(), true);
+                List<SitemapItemModelData> fixed = fixupSitemap(items, true);
                 List<SitemapItemModelData> ordered = orderSitemapItems(fixed);
                 for (SitemapItemModelData item : ordered) {
                     List<SitemapItemModelData> fixedChilds = fixupSitemap(item.getItems(), true);
@@ -84,8 +83,9 @@ public class GraphQLSitemapService implements SitemapService {
         return String.join("", sitemapGenerator.writeAsStrings());
     }
 
-    private Optional<Collection<SitemapItemModelData>> getSitemapItemModelData(Integer publicationId,
+    private Collection<SitemapItemModelData> getSitemapItemModelData(Integer publicationId,
                                                                               Localization localization, String sitemapItemId, ClaimHolder claimHolder, NavigationFilter navigationFilter) {
+        Optional<Collection<SitemapItemModelData>> subtree;
         SitemapRequestDto requestDto = SitemapRequestDto
                 .builder(publicationId)
                 .navigationFilter(navigationFilter)
@@ -95,7 +95,9 @@ public class GraphQLSitemapService implements SitemapService {
                 .build();
         requestDto.addClaim(claimHolder);
 
-        return onDemandNavigationModelProvider.getNavigationSubtree(requestDto);
+        subtree = onDemandNavigationModelProvider.getNavigationSubtree(requestDto);
+
+        return subtree.get();
     }
 
     private static List<SitemapItemModelData> fixupSitemap(Collection<SitemapItemModelData> toc, boolean removePageNodes) {

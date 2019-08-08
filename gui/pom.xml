@@ -137,6 +137,7 @@
             <properties>
                 <npm.repo>https://registry.npmjs.org</npm.repo>
                 <npm.publish.repo>https://registry.npmjs.org</npm.publish.repo>
+                <tag>stable</tag>
             </properties>
         </profile>
     </profiles>
