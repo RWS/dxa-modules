@@ -62,8 +62,7 @@ public class GraphQLSitemapService implements SitemapService {
 
             List<Publication> pubs = publicationService.getPublicationList(localization);
             for (Publication pub : pubs) {
-                Collection<SitemapItemModelData> items =
-                        getSitemapItemModelData(Integer.parseInt(pub.getId()), localization, null, null, navigationFilter);
+                Collection<SitemapItemModelData> items = getSitemapItemModelData(Integer.parseInt(pub.getId()), localization, null, null, navigationFilter);
                 List<SitemapItemModelData> fixed = fixupSitemap(items, true);
                 List<SitemapItemModelData> ordered = orderSitemapItems(fixed);
                 for (SitemapItemModelData item : ordered) {
@@ -83,8 +82,7 @@ public class GraphQLSitemapService implements SitemapService {
         return String.join("", sitemapGenerator.writeAsStrings());
     }
 
-    private Collection<SitemapItemModelData> getSitemapItemModelData(Integer publicationId,
-                                                                              Localization localization, String sitemapItemId, ClaimHolder claimHolder, NavigationFilter navigationFilter) {
+    private Collection<SitemapItemModelData> getSitemapItemModelData(Integer publicationId, Localization localization, String sitemapItemId, ClaimHolder claimHolder, NavigationFilter navigationFilter) {
         Optional<Collection<SitemapItemModelData>> subtree;
         SitemapRequestDto requestDto = SitemapRequestDto
                 .builder(publicationId)
