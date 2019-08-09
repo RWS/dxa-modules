@@ -21,13 +21,17 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.sdl.dxa</groupId>
+        <artifactId>dxa-parent</artifactId>
+        <version>2.2.1-SNAPSHOT</version>
+    </parent>
 
     <groupId>com.sdl.dxa.modules</groupId>
     <artifactId>dynamic-documentation-boilerplate</artifactId>
+
     <name>DXA Dynamic Documentation GUI Boilerplate</name>
     <description>NPM project where customizations for DXA Dynamic Documentation GUI project should be developed</description>
-    <version>2.2.1-SNAPSHOT</version>
-    <packaging>pom</packaging>
 
     <properties>
         <npm.repo>https://nexus.sdl.com/content/groups/npm/</npm.repo>
@@ -127,9 +131,8 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
-                <version>2.8.2</version>
+                <version>3.0.0-M1</version>
             </plugin>
-
         </plugins>
     </build>
 </project>
