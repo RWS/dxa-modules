@@ -45,11 +45,10 @@ $ErrorActionPreference = "Stop"
 # Import utils
 . ".\nuget-utils.ps1"
 
-$timestamp = (Get-Date).ToUniversalTime().ToString("yyyyMMddHHmmss")
-
-$packageVersion = "$version-$timestamp"
+$packageVersion = "$version"
 
 if($isPreRelease) {
+    $timestamp = (Get-Date).ToUniversalTime().ToString("yyyyMMddHHmmss")
     $packageVersion = "$version-beta-$timestamp"
 }
 
