@@ -45,8 +45,9 @@ namespace Sdl.Web.Modules.Search.Controllers
                     fields.Add("publicationId");
                     values.Add(new DefaultTermValue(searchParams.PublicationId.Value.ToString()));
                 }
-                fields.Add("dynamic.FISHDITADLVRREMOTESTATUS.lng.element");
-                fields.Add($"content.{CultureInfo.GetCultureInfo(searchParams.Language).EnglishName.ToLower()}");
+                fields.Add("dynamic.FISHDITADLVRREMOTESTATUS.lng.element");                
+                string langCode = searchParams.Language.Split('-')[0];
+                fields.Add($"content.{CultureInfo.GetCultureInfo(langCode).EnglishName.ToLower()}");
                 values.Add(new DefaultTermValue("VDITADLVRREMOTESTATUSONLINE"));
 
                 string searchQuery = searchParams.SearchQuery;
