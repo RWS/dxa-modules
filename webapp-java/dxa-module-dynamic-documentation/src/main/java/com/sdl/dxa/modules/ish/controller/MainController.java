@@ -123,7 +123,7 @@ public class MainController {
             publicationService.checkPublicationOnline(Integer.parseInt(publicationId), webRequestContext.getLocalization());
         }
         if (isNotEmpty(pageId) && isNumeric(pageId)) {
-            final PageModel page = contentProvider.getPageModel(pageId, localization);
+            final PageModel page = contentProvider.getPageModel(Integer.parseInt(pageId), localization);
             request.setAttribute(PAGE_MODEL, page);
         } else {
             request.setAttribute(PAGE_MODEL, new DefaultPageModel());

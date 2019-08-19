@@ -6,6 +6,7 @@ import com.tridion.ambientdata.claimstore.ClaimStore;
 import com.tridion.ambientdata.web.WebContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ import java.util.Map;
 
 @Service
 @Qualifier("ishModuleServiceClient")
+@Profile("cil.providers.active")
 public class IshModuleServiceClient extends ModelServiceClient  {
 
     @Autowired
