@@ -1,6 +1,9 @@
 package com.sdl.dxa.modules.ish.services;
 
+import com.google.common.base.Strings;
+import com.redfin.sitemapgenerator.ChangeFreq;
 import com.redfin.sitemapgenerator.WebSitemapGenerator;
+import com.redfin.sitemapgenerator.WebSitemapUrl;
 import com.sdl.dxa.api.datamodel.model.SitemapItemModelData;
 import com.sdl.dxa.common.dto.ClaimHolder;
 import com.sdl.dxa.common.dto.DepthCounter;
@@ -9,10 +12,8 @@ import com.sdl.dxa.modules.ish.exception.IshServiceException;
 import com.sdl.dxa.modules.ish.model.Publication;
 import com.sdl.dxa.modules.ish.providers.PublicationService;
 import com.sdl.dxa.tridion.navigation.dynamic.OnDemandNavigationModelProvider;
-import com.sdl.odata.client.api.exception.ODataClientRuntimeException;
 import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.api.navigation.NavigationFilter;
-import com.sdl.webapp.common.api.navigation.OnDemandNavigationProvider;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,6 +24,7 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Matcher;
@@ -52,34 +54,52 @@ public class GraphQLSitemapService implements SitemapService {
         // so the workaround is for each publication get the entire subtree and merge the results.
         // This will cause several requests to be issued and results in quite a slow performance.
 
-        WebSitemapGenerator sitemapGenerator;
         try {
-            sitemapGenerator = new WebSitemapGenerator(contextPath);
-
+            WebSitemapGenerator sitemapGenerator = new WebSitemapGenerator(contextPath);
             NavigationFilter navigationFilter = new NavigationFilter();
             navigationFilter.setWithAncestors(false);
             navigationFilter.setDescendantLevels(-1);
 
             List<Publication> pubs = publicationService.getPublicationList(localization);
             for (Publication pub : pubs) {
-                Collection<SitemapItemModelData> items = getSitemapItemModelData(Integer.parseInt(pub.getId()), localization, null, null, navigationFilter);
-                List<SitemapItemModelData> fixed = fixupSitemap(items, true);
-                List<SitemapItemModelData> ordered = orderSitemapItems(fixed);
-                for (SitemapItemModelData item : ordered) {
-                    List<SitemapItemModelData> fixedChilds = fixupSitemap(item.getItems(), true);
-                    List<SitemapItemModelData> orderedChilds = orderSitemapItems(fixedChilds);
-                    for (SitemapItemModelData sitemapItemModelData : orderedChilds) {
-                        if (sitemapItemModelData.getUrl() != null) {
-                            sitemapGenerator.addUrl(contextPath + sitemapItemModelData.getUrl());
-                        }
-                    }
+                try {
+                    Collection<SitemapItemModelData> items = getSitemapItemModelData(Integer.parseInt(pub.getId()), localization, null, null, navigationFilter);
+                    generateSitemapsForCurrentLevel(pub, contextPath, sitemapGenerator, items);
+                } catch (Exception e) {
+                    throw new IshServiceException("Could not generate sitemap for publication " + pub.getId(), e);
                 }
             }
-        } catch (MalformedURLException | ODataClientRuntimeException e) {
-            throw new IshServiceException("Could not generate sitemap.", e);
+            return String.join("", sitemapGenerator.writeAsStrings());
+        } catch (Exception ex) {
+            throw new IshServiceException("Could not generate sitemap for " + contextPath, ex);
         }
+    }
 
-        return String.join("", sitemapGenerator.writeAsStrings());
+    private void generateSitemapsForCurrentLevel(Publication pub,
+                                                 String contextPath,
+                                                 WebSitemapGenerator sitemapGenerator,
+                                                 Collection<SitemapItemModelData> items) throws MalformedURLException {
+        if (items == null || items.isEmpty()) return;
+        Date currentDate = new Date();
+        List<SitemapItemModelData> fixed = fixupSitemap(items, true);
+        List<SitemapItemModelData> ordered = orderSitemapItems(fixed);
+        for (SitemapItemModelData item : ordered) {
+            if (!item.getItems().isEmpty()) {
+                generateSitemapsForCurrentLevel(pub, contextPath, sitemapGenerator, item.getItems());
+            }
+            if (Strings.isNullOrEmpty(item.getUrl())) continue;
+            String link = contextPath.replaceAll("(.*)/+$", "$1");
+            String fixedUrl = String.join("/", link, item.getUrl());
+            String fixedUrlWithouDubbedSlash = fixedUrl.replaceAll("(?<!https?:)//++", "/");
+
+            WebSitemapUrl url = new WebSitemapUrl
+                    .Options(fixedUrlWithouDubbedSlash)
+                    .lastMod(item.getPublishedDate() == null ? currentDate : item.getPublishedDate().toDate())
+                    .priority(1.0)
+                    .changeFreq(ChangeFreq.HOURLY)
+                    .build();
+            sitemapGenerator.addUrl(url);
+        }
     }
 
     private Collection<SitemapItemModelData> getSitemapItemModelData(Integer publicationId, Localization localization, String sitemapItemId, ClaimHolder claimHolder, NavigationFilter navigationFilter) {
@@ -95,7 +115,7 @@ public class GraphQLSitemapService implements SitemapService {
 
         subtree = onDemandNavigationModelProvider.getNavigationSubtree(requestDto);
 
-        return subtree.get();
+        return subtree.orElseGet(null);
     }
 
     private static List<SitemapItemModelData> fixupSitemap(Collection<SitemapItemModelData> toc, boolean removePageNodes) {
