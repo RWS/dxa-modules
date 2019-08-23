@@ -1,18 +1,17 @@
 package com.sdl.dxa.modules.ish.services;
 
 import com.redfin.sitemapgenerator.WebSitemapGenerator;
+import com.redfin.sitemapgenerator.WebSitemapUrl;
 import com.sdl.dxa.api.datamodel.model.SitemapItemModelData;
 import com.sdl.dxa.common.dto.ClaimHolder;
 import com.sdl.dxa.common.dto.DepthCounter;
 import com.sdl.dxa.common.dto.SitemapRequestDto;
 import com.sdl.dxa.modules.ish.exception.IshServiceException;
 import com.sdl.dxa.modules.ish.model.Publication;
-import com.sdl.dxa.modules.ish.providers.PublicationService;
 import com.sdl.dxa.tridion.navigation.dynamic.OnDemandNavigationModelProvider;
 import com.sdl.odata.client.api.exception.ODataClientRuntimeException;
 import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.api.navigation.NavigationFilter;
-import com.sdl.webapp.common.api.navigation.OnDemandNavigationProvider;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,11 +19,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.net.MalformedURLException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -63,6 +58,18 @@ public class GraphQLSitemapService implements SitemapService {
             List<Publication> pubs = publicationService.getPublicationList(localization);
             for (Publication pub : pubs) {
                 Collection<SitemapItemModelData> items = getSitemapItemModelData(Integer.parseInt(pub.getId()), localization, null, null, navigationFilter);
+
+                List<SitemapItemModelData> fixedItems = orderSitemapItems(fixup(items, true));
+
+                for (SitemapItemModelData sitemapItemModelData : fixedItems) {
+                    if (sitemapItemModelData.getUrl() != null) {
+                        String uri = contextPath.endsWith("/") ? contextPath.substring(0, contextPath.length() - 1) : contextPath;
+                        WebSitemapUrl url = new WebSitemapUrl.Options(uri).lastMod(sitemapItemModelData.getPublishedDate().toDate()).build();
+
+                        sitemapGenerator.addUrl(url);
+                    }
+                }
+/*
                 List<SitemapItemModelData> fixed = fixupSitemap(items, true);
                 List<SitemapItemModelData> ordered = orderSitemapItems(fixed);
                 for (SitemapItemModelData item : ordered) {
@@ -74,6 +81,7 @@ public class GraphQLSitemapService implements SitemapService {
                         }
                     }
                 }
+*/
             }
         } catch (MalformedURLException | ODataClientRuntimeException e) {
             throw new IshServiceException("Could not generate sitemap.", e);
@@ -98,6 +106,34 @@ public class GraphQLSitemapService implements SitemapService {
         return subtree.get();
     }
 
+    private static List<SitemapItemModelData> fixup(Collection<SitemapItemModelData> toc, boolean removePageNodes) {
+        List<SitemapItemModelData> result = new ArrayList<>();
+
+        if(toc == null) {
+            return result;
+        }
+
+        for (SitemapItemModelData entry : toc) {
+            if (removePageNodes && entry.getType() != null && entry.getType().equals("Page")) {
+                continue;
+            }
+
+            if(entry.getItems() != null && entry.getItems().size() > 0) {
+                result = fixup(entry.getItems(), true);
+            }
+
+            String url = entry.getUrl();
+            if (url != null) {
+                String fixedUrl = url.startsWith("/") ? url : "/" + url;
+                entry.setUrl(fixedUrl);
+            }
+            result.add(entry);
+
+        }
+
+        return result;
+    }
+
     private static List<SitemapItemModelData> fixupSitemap(Collection<SitemapItemModelData> toc, boolean removePageNodes) {
         List<SitemapItemModelData> result = null;
         if (toc == null) return result;
@@ -114,7 +150,7 @@ public class GraphQLSitemapService implements SitemapService {
             }
             result.add(entry);
         }
-        return result;
+        return orderSitemapItems(result);
     }
 
     private static List<SitemapItemModelData> orderSitemapItems(Collection<SitemapItemModelData> toc) {

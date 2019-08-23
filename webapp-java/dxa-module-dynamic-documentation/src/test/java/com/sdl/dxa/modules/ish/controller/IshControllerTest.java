@@ -1,8 +1,8 @@
 package com.sdl.dxa.modules.ish.controller;
 
 import com.sdl.webapp.common.impl.localization.DocsLocalization;;
-import com.sdl.dxa.modules.ish.providers.PublicationService;
-import com.sdl.dxa.modules.ish.providers.TridionDocsContentService;
+import com.sdl.dxa.modules.ish.services.PublicationService;
+import com.sdl.dxa.modules.ish.services.TridionDocsContentService;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.content.ContentProviderException;
 import com.sdl.webapp.common.api.localization.Localization;

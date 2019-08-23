@@ -1,6 +1,6 @@
 package com.sdl.dxa.modules.ish.controller;
 
-import com.sdl.dxa.modules.ish.providers.PublicationService;
+import com.sdl.dxa.modules.ish.services.PublicationService;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.content.ContentProviderException;
 import com.sdl.webapp.common.api.content.Dxa22ContentProvider;

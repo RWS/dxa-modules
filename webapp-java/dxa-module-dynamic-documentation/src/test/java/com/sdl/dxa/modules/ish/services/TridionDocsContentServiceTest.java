@@ -1,5 +1,6 @@
-package com.sdl.dxa.modules.ish.providers;
+package com.sdl.dxa.modules.ish.services;
 
+import com.sdl.dxa.modules.ish.providers.IshReferenceProvider;
 import com.sdl.webapp.common.api.content.ContentProviderException;
 import org.junit.Test;
 import org.junit.runner.RunWith;

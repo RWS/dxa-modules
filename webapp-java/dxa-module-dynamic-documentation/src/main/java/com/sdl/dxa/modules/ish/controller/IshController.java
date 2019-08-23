@@ -5,11 +5,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Strings;
 import com.sdl.dxa.modules.ish.exception.IshServiceException;
 import com.sdl.dxa.modules.ish.model.Publication;
-import com.sdl.dxa.modules.ish.providers.ConditionService;
-import com.sdl.dxa.modules.ish.providers.PublicationService;
-import com.sdl.dxa.modules.ish.providers.TocService;
-import com.sdl.dxa.modules.ish.providers.TridionDocsContentService;
+import com.sdl.dxa.modules.ish.services.*;
 import com.sdl.dxa.modules.ish.utils.ConditionUtil;
+import com.sdl.dxa.tridion.pcaclient.ApiClientProvider;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.content.ContentProviderException;
 import com.sdl.webapp.common.api.content.Dxa22ContentProvider;
@@ -88,6 +86,9 @@ public class IshController {
     private ConditionService conditionService;
 
     @Autowired
+    private PageService pageService;
+
+    @Autowired
     private Dxa22ContentProvider contentProvider;
 
     //Don't use an @Autowired objectmapper here, we need to change some configuration.
@@ -119,7 +120,7 @@ public class IshController {
         setConditions(publicationId, conditions);
         final Localization localization = webRequestContext.getLocalization();
         publicationService.checkPublicationOnline(publicationId, localization);
-        PageModel page = contentProvider.getPageModel(pageId, localization);
+        PageModel page = pageService.getPage(pageId, localization);
         if (page == null) {
             response.setStatus(NOT_FOUND.value());
             throw new ResourceNotFoundException(String.format("Item '%s' not found for Localization '%s'", pageId, localization.getId()));

@@ -1,4 +1,4 @@
-package com.sdl.dxa.modules.ish.providers;
+package com.sdl.dxa.modules.ish.services;
 
 import com.sdl.dxa.tridion.pcaclient.ApiClientProvider;
 import com.sdl.dxa.tridion.pcaclient.GraphQLUtils;

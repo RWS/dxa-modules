@@ -1,8 +1,9 @@
-package com.sdl.dxa.modules.ish.providers;
+package com.sdl.dxa.modules.ish.services;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.sdl.dxa.modules.ish.services.ConditionService;
 import com.sdl.web.api.meta.WebPublicationMetaFactory;
 import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.controller.exception.InternalServerErrorException;

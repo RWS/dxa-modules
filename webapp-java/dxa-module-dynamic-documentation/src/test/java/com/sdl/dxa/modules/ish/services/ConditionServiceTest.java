@@ -1,5 +1,6 @@
-package com.sdl.dxa.modules.ish.providers;
+package com.sdl.dxa.modules.ish.services;
 
+import com.sdl.dxa.modules.ish.services.CilConditionService;
 import com.sdl.web.api.meta.WebPublicationMetaFactory;
 import com.sdl.web.model.PublicationMetaImpl;
 import com.sdl.webapp.common.api.localization.Localization;
