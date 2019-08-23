@@ -40,7 +40,7 @@ public class SitemapServiceTest {
         HashMap<String, String> prefix2Uri = new HashMap<>();
         prefix2Uri.put("sitemap", "http://www.sitemaps.org/schemas/sitemap/0.9");
         assertThat(actualResult, EvaluateXPathMatcher.hasXPath("//sitemap:urlset/sitemap:url/sitemap:changefreq",
-                equalTo("always")).withNamespaceContext(prefix2Uri));
+                equalTo("hourly")).withNamespaceContext(prefix2Uri));
         assertThat(actualResult, EvaluateXPathMatcher.hasXPath("//sitemap:urlset/sitemap:url/sitemap:loc",
                 equalTo("http://docs.sdl.com/2171939/2229816/load-map-/load-topic")).withNamespaceContext(prefix2Uri));
         assertThat(actualResult, EvaluateXPathMatcher.hasXPath("//sitemap:urlset/sitemap:url/sitemap:priority",
