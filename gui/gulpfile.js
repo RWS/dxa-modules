@@ -52,10 +52,11 @@ const buildOptions = {
   proxies: [
     /**
      * Proxy configuration example. See readme.md
+     */
     {
       from: "/api",
-      to: "http://ditadelivery01.ams.dev/test/api"
-    }*/
+      to: "http://dxatest.ams.sdldev.net:8882/api"
+    }
   ]
 };
 let webpackInstance = {
