@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,8 +37,12 @@ public class TocService {
     @Qualifier("ishNavigationProvider")
     private IshDynamicNavigationProvider ishNavigationProvider;
 
-    public Collection<SitemapItem> getToc(Integer publicationId, String sitemapItemId, boolean includeAncestors,
-                                          int descendantLevels, HttpServletRequest request,
+    @Cacheable(value = "ish", key = "{ #publicationId, #sitemapItemId, #includeAncestors, #descendantLevels }")
+    public Collection<SitemapItem> getToc(Integer publicationId,
+                                          String sitemapItemId,
+                                          boolean includeAncestors,
+                                          int descendantLevels,
+                                          HttpServletRequest request,
                                           WebRequestContext webRequestContext) throws ContentProviderException {
         if (ishNavigationProvider == null) {
             String message = "On-Demand Navigation is not enabled because current navigation provider doesn't " +

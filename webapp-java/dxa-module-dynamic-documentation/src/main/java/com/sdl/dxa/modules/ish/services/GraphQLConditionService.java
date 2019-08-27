@@ -12,6 +12,7 @@ import com.sdl.web.pca.client.contentmodel.generated.Publication;
 import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.exceptions.DxaItemNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
@@ -32,17 +33,14 @@ public class GraphQLConditionService implements ConditionService {
     private ApiClientProvider pcaClientProvider;
 
     @Override
+    @Cacheable(value = "ish", key = "{ #publicationId, #localization.id }", condition = "#localization != null && #localization.id != null")
     public String getConditions(Integer publicationId, Localization localization) {
         Map<String, Map> objectConditions = null;
         try {
             objectConditions = getObjectConditions(publicationId, localization);
-        } catch (IOException | DxaItemNotFoundException e) {
-            throw new IshServiceException("Error getting conditions for publication", e);
-        }
-        try {
             return objectMapper.writeValueAsString(objectConditions);
-        } catch (JsonProcessingException e) {
-            throw new IshServiceException("Error writing conditions for publication", e);
+        } catch (Exception e) {
+            throw new IshServiceException("Error processing conditions for publication " + publicationId, e);
         }
     }
 

@@ -12,6 +12,7 @@ import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.api.model.PageModel;
 import com.sdl.webapp.common.api.model.ViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -25,12 +26,14 @@ public class GraphQLPageService implements PageService {
     private static final String PAGE_CONDITIONS_USED_META = "conditionsused.generated.value";
     private static final String PAGE_LOGICAL_REF_OBJECT_ID = "ishlogicalref.object.id";
 
+    @Autowired
     private ApiClientProvider clientProvider;
 
     @Autowired
     private Dxa22ContentProvider contentProvider;
 
     @Override
+    @Cacheable(value = "ish", key = "{ #localization.id, #pageId }", condition = "#localization != null && #localization.id != null")
     public ViewModel getPage(int pageId, Localization localization) throws ContentProviderException {
         PageModel model = contentProvider.getPageModel(pageId, localization);
 
@@ -38,7 +41,7 @@ public class GraphQLPageService implements PageService {
     }
 
     private ViewModel enrichPage(ViewModel pageModel, Localization localization) {
-        ApiClient client = this.clientProvider.getClient();
+        ApiClient client = clientProvider.getClient();
         PageModel model = (PageModel) pageModel;
 
         String metaFilter = String.format(

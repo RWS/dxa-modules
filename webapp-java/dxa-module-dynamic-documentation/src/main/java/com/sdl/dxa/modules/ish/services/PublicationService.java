@@ -7,9 +7,7 @@ import org.springframework.cache.annotation.Cacheable;
 import java.util.List;
 
 public interface PublicationService {
-    @Cacheable("ish")
     List<Publication> getPublicationList(Localization localization);
 
-    @Cacheable("ish")
     void checkPublicationOnline(int publicationId, Localization localization);
 }

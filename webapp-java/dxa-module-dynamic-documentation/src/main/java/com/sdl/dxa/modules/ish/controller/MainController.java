@@ -83,7 +83,7 @@ public class MainController {
             value = "/{publicationId:[\\d]+}",
             method = GET
     )
-    @Cacheable("ish")
+    @Cacheable(value = "ish", key = "{ #publicationId }")
     public String home(@PathVariable("publicationId") String publicationId,
                        HttpServletRequest request) throws ContentProviderException {
         return getHomeView(publicationId, null, request);
@@ -102,7 +102,7 @@ public class MainController {
             value = "/{publicationId:[\\d]+}/{pageId}/**",
             method = GET
     )
-    @Cacheable("ish")
+    @Cacheable(value = "ish", key = "{ #publicationId, #pageId }")
     public String home(@PathVariable("publicationId") String publicationId,
                        @PathVariable("pageId") String pageId,
                        HttpServletRequest request) throws ContentProviderException {
@@ -110,7 +110,7 @@ public class MainController {
     }
 
     private String getHomeView(String publicationId, String pageId, HttpServletRequest request) throws ContentProviderException {
-        this.setPageModelOnRequest(publicationId, pageId, request);
+        setPageModelOnRequest(publicationId, pageId, request);
 
         return "home";
     }
