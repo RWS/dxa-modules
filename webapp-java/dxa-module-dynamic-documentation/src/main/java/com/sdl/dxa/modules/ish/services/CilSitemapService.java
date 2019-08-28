@@ -39,26 +39,34 @@ public class CilSitemapService implements SitemapService {
 
     public String createSitemap(String contextPath, Localization localization) throws IshServiceException {
         WebSitemapGenerator sitemapGenerator;
+        PublicationSiteMap currentPub = null;
         try {
             sitemapGenerator = new WebSitemapGenerator(contextPath);
 
             String siteMapForPublication = webPublicationMetaFactory.getSiteMapForPublication(-1);
 
-            Type publicationSiteMapType = new TypeToken<List<PublicationSiteMap>>() {
-            }.getType();
+            Type publicationSiteMapType = new TypeToken<List<PublicationSiteMap>>() {}.getType();
 
             Gson gSon = new GsonBuilder().setDateFormat(cilSitemapDateFormat).create();
             List<PublicationSiteMap> siteMaps = gSon.fromJson(siteMapForPublication, publicationSiteMapType);
-
+            Date currentDate = new Date();
             for (PublicationSiteMap sitemap : siteMaps) {
-                for (SiteMapURLEntry sitemapUrl : sitemap.getUrlEntryList()) {
-                    WebSitemapUrl url = new WebSitemapUrl.Options(contextPath + sitemapUrl.getUrl())
-                            .lastMod(new Date()).priority(1.0).changeFreq(ChangeFreq.ALWAYS).build();
+                currentPub = sitemap;
+                for (SiteMapURLEntry item : sitemap.getUrlEntryList()) {
+
+                    WebSitemapUrl url = new WebSitemapUrl
+                            .Options(contextPath + item.getUrl())
+                            .lastMod(item.getLastModifiedDate() == null
+                                    ? currentDate
+                                    : item.getLastModifiedDate())
+                            .priority(1.0)
+                            .changeFreq(ChangeFreq.HOURLY)
+                            .build();
                     sitemapGenerator.addUrl(url);
                 }
             }
-        } catch (MalformedURLException | ODataClientRuntimeException e) {
-            throw new IshServiceException("Could not generate sitemap.", e);
+        } catch (Exception e) {
+            throw new IshServiceException("Could not generate sitemap." + (currentPub == null ? "" : currentPub.getPublicationId()), e);
         }
 
         return String.join("", sitemapGenerator.writeAsStrings());
