@@ -53,10 +53,10 @@ const buildOptions = {
     /**
      * Proxy configuration example. See readme.md
      */
-    {
+    /*{
       from: "/api",
       to: "http://dxatest.ams.sdldev.net:8882/api"
-    }
+    }*/
   ]
 };
 let webpackInstance = {
