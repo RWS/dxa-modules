@@ -1,4 +1,4 @@
-package com.sdl.dxa.modules.ish.providers;
+package com.sdl.dxa.modules.ish.services;
 
 import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.exceptions.DxaItemNotFoundException;

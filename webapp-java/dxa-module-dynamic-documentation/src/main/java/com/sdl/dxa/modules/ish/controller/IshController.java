@@ -5,10 +5,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Strings;
 import com.sdl.dxa.modules.ish.exception.IshServiceException;
 import com.sdl.dxa.modules.ish.model.Publication;
-import com.sdl.dxa.modules.ish.providers.ConditionService;
-import com.sdl.dxa.modules.ish.providers.PublicationService;
-import com.sdl.dxa.modules.ish.providers.TocService;
-import com.sdl.dxa.modules.ish.providers.TridionDocsContentService;
+import com.sdl.dxa.modules.ish.services.PageService;
+import com.sdl.dxa.modules.ish.services.TocService;
+import com.sdl.dxa.modules.ish.services.PublicationService;
+import com.sdl.dxa.modules.ish.services.ConditionService;
+import com.sdl.dxa.modules.ish.services.TridionDocsContentService;
 import com.sdl.dxa.modules.ish.utils.ConditionUtil;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.content.ContentProviderException;
@@ -88,6 +89,9 @@ public class IshController {
     private ConditionService conditionService;
 
     @Autowired
+    private PageService pageService;
+
+    @Autowired
     private Dxa22ContentProvider contentProvider;
 
     //Don't use an @Autowired objectmapper here, we need to change some configuration.
@@ -110,7 +114,6 @@ public class IshController {
      */
     @RequestMapping(method = {GET, POST}, value = "/api/page/{publicationId}/{pageId}/**",
             produces = {APPLICATION_JSON_VALUE})
-    @Cacheable("ish")
     public ModelAndView getPage(@PathVariable Integer publicationId,
                                 @PathVariable Integer pageId,
                                 @RequestParam(value = "conditions", defaultValue = "") String conditions,
@@ -119,7 +122,7 @@ public class IshController {
         setConditions(publicationId, conditions);
         final Localization localization = webRequestContext.getLocalization();
         publicationService.checkPublicationOnline(publicationId, localization);
-        PageModel page = contentProvider.getPageModel(pageId, localization);
+        PageModel page = (PageModel) pageService.getPage(pageId, localization);
         if (page == null) {
             response.setStatus(NOT_FOUND.value());
             throw new ResourceNotFoundException(String.format("Item '%s' not found for Localization '%s'", pageId, localization.getId()));
@@ -170,14 +173,13 @@ public class IshController {
      */
     @RequestMapping(method = GET, value = "/api/publications", produces = {APPLICATION_JSON_VALUE})
     @ResponseBody
-    @Cacheable("ish")
     public List<Publication> getPublicationList() throws IshServiceException {
         return publicationService.getPublicationList(webRequestContext.getLocalization());
     }
 
     @RequestMapping(method = {GET, POST}, value = "/api/toc/{publicationId}", produces = {APPLICATION_JSON_VALUE})
     @ResponseBody
-    @Cacheable("ish")
+    @Cacheable(value = "ish", key = "{ #publicationId, #conditions }")
     public Collection<SitemapItem> getRootToc(@PathVariable("publicationId") Integer publicationId,
                                               @RequestParam(value = "conditions", defaultValue = "") String conditions,
                                               HttpServletRequest request) throws ContentProviderException, IOException {
@@ -189,7 +191,6 @@ public class IshController {
     @RequestMapping(method = {GET, POST}, value = "/api/toc/{publicationId}/{sitemapItemId}",
             produces = {APPLICATION_JSON_VALUE})
     @ResponseBody
-    @Cacheable("ish")
     public Collection<SitemapItem> getToc(@PathVariable("publicationId") Integer publicationId,
                                           @PathVariable("sitemapItemId") String sitemapItemId,
                                           @RequestParam(value = "includeAncestors", required = false,
@@ -204,7 +205,6 @@ public class IshController {
 
     @RequestMapping(method = GET, value = "/api/conditions/{publicationId:[\\d]+}", produces = {APPLICATION_JSON_VALUE})
     @ResponseBody
-    @Cacheable("ish")
     public String getPublicationConditions(@PathVariable("publicationId") Integer publicationId) {
         return conditionService.getConditions(publicationId, webRequestContext.getLocalization());
     }
@@ -223,7 +223,7 @@ public class IshController {
     @RequestMapping(method = {GET, POST}, value = "/api/pageIdByReference/{publicationId}/{ishFieldValue}",
             produces = {APPLICATION_JSON_VALUE})
     @ResponseBody
-    @Cacheable("ish")
+    @Cacheable(value = "ish", key = "{ #publicationId, #ishFieldValue }")
     public Item getTopicIdInTargetPublication(@PathVariable("publicationId") Integer publicationId,
                                               @PathVariable("ishFieldValue") String ishFieldValue)
             throws ContentProviderException {

@@ -1,5 +1,6 @@
-package com.sdl.dxa.modules.ish.providers;
+package com.sdl.dxa.modules.ish.services;
 
+import com.sdl.dxa.modules.ish.providers.IshDynamicNavigationProvider;
 import com.sdl.webapp.common.impl.localization.DocsLocalization;;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.content.ContentProviderException;

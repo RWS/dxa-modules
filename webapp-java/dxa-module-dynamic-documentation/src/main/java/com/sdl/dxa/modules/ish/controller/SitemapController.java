@@ -36,7 +36,6 @@ public class SitemapController {
 
     @RequestMapping(value = "/api/sitemap.xml", produces = APPLICATION_XML_VALUE)
     @ResponseBody
-    @Cacheable("ish")
     public String create(HttpServletRequest request, HttpServletResponse response) {
         response.setContentType(MediaType.APPLICATION_XML_VALUE);
 

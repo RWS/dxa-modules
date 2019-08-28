@@ -1,8 +1,9 @@
-package com.sdl.dxa.modules.ish.providers;
+package com.sdl.dxa.modules.ish.services;
 
 
 import com.sdl.dxa.modules.ish.model.Publication;
 import com.sdl.dxa.modules.ish.exception.IshServiceException;
+import com.sdl.dxa.modules.ish.services.PublicationService;
 import com.sdl.web.api.meta.WebPublicationMetaFactory;
 import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.controller.exception.NotFoundException;
@@ -12,6 +13,7 @@ import com.tridion.meta.NameValuePair;
 import com.tridion.meta.PublicationMeta;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -43,8 +45,8 @@ public class CilPublicationService implements PublicationService {
     @Autowired
     private WebPublicationMetaFactory webPublicationMetaFactory;
 
-
     @Override
+    @Cacheable(value = "ish", key = "{ #localization.id }", condition = "#localization != null && #localization.id != null")
     public List<Publication> getPublicationList(Localization localization) {
         List<Publication> result = new ArrayList<>();
         try {
@@ -65,6 +67,7 @@ public class CilPublicationService implements PublicationService {
         }
     }
 
+    @Cacheable(value = "ish", key = "{ #localization.id }", condition = "#localization != null && #localization.id != null")
     public void checkPublicationOnline(int publicationId, Localization localization) {
         PublicationMeta publicationMeta = null;
         try {
