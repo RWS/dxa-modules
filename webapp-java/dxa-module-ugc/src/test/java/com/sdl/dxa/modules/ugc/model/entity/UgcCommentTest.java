@@ -1,15 +1,16 @@
 package com.sdl.dxa.modules.ugc.model.entity;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sdl.dxa.DxaSpringInitialization;
-import com.sdl.dxa.modules.ugc.UgcService;
 import com.sdl.dxa.modules.ugc.data.Comment;
 import com.sdl.dxa.modules.ugc.data.User;
+import com.sdl.dxa.modules.ugc.model.JsonZonedDateTime;
 import com.sdl.webapp.common.util.ApplicationContextHolder;
 import com.sdl.webapp.common.util.TcmUtils;
+import org.joda.time.DateTime;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Spy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -18,8 +19,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -32,9 +33,8 @@ public class UgcCommentTest {
     private static Comment commentData = new Comment();
     private static List<UgcComment> comments = new ArrayList<>();
     private static UgcComment otherComment = new UgcComment();
-    private static ZonedDateTime time = ZonedDateTime.now();
+    private static DateTime time = new DateTime(new Date(1567075965376L));
     private static User user = new User();
-    private static UgcService ugcService=new UgcService();
 
     static {
 
@@ -43,10 +43,18 @@ public class UgcCommentTest {
         user.setExternalId("ExternalId");
         user.setId("Id");
 
-        commentData.setCreationDate(time);
-        commentData.setCreationDateTime(ugcService.convert(time));
-        commentData.setLastModifiedDate(time);
-        commentData.setLastModifiedDateTime(ugcService.convert(time));
+        try {
+            commentData.setCreationDate(new JsonZonedDateTime(time).getJson());
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        commentData.setCreationDateTime(time);
+        try {
+            commentData.setLastModifiedDate(new JsonZonedDateTime(time).getJson());
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        commentData.setLastModifiedDateTime(time);
         commentData.setContent("Comment");
         commentData.setId(1);
         commentData.setItemId(2);
@@ -94,15 +102,15 @@ public class UgcCommentTest {
     }
 
     @Test
-    public void shouldReturnCreationDate() {
+    public void shouldReturnCreationDate() throws Exception {
         //given
 
         //when
 
         //then
-        assertEquals(time, ugcComment.getCommentData().getCreationDate());
+        String result = ugcComment.getCommentData().getCreationDate();
+        assertEquals("{\"dayOfMonth\":29,\"hour\":13,\"minute\":52,\"month\":\"\",\"monthValue\":8,\"nano\":0,\"second\":45,\"year\":2019,\"dayOfWeek\":\"\",\"dayOfYear\":241}", result);
     }
-
 
     @Configuration
     @Profile("test")

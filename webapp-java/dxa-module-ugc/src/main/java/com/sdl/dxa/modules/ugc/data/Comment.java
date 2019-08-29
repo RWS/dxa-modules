@@ -1,12 +1,12 @@
 package com.sdl.dxa.modules.ugc.data;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRawValue;
+
 import lombok.Data;
 import org.joda.time.DateTime;
 
-import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,13 +32,13 @@ public class Comment {
     @JsonProperty("itemType")
     private int itemType;
 
-    @JsonFormat(shape = JsonFormat.Shape.OBJECT)
     @JsonProperty(value = "creationDate")
-    private ZonedDateTime creationDate;
+    @JsonRawValue
+    private String creationDate;
 
-    @JsonFormat(shape = JsonFormat.Shape.OBJECT)
     @JsonProperty("lastModifiedDate")
-    private ZonedDateTime lastModifiedDate;
+    @JsonRawValue
+    private String lastModifiedDate;
 
     @JsonIgnore
     private DateTime creationDateTime;

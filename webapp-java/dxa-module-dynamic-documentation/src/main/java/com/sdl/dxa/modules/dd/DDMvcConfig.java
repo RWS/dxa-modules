@@ -2,7 +2,6 @@ package com.sdl.dxa.modules.dd;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
-import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -12,6 +11,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.List;
+
+import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.http.MediaType.TEXT_HTML;
+import static org.springframework.http.MediaType.TEXT_PLAIN;
 
 /**
  * The MVC Spring configuration.
@@ -51,9 +54,7 @@ public class DDMvcConfig extends WebMvcConfigurerAdapter {
     public void extendMessageConverters (List<HttpMessageConverter<?>> converters) {
         StringHttpMessageConverter stringConverter = new StringHttpMessageConverter(Charset.forName("UTF-8"));
         stringConverter.setSupportedMediaTypes(Arrays.asList(
-                MediaType.TEXT_PLAIN,
-                MediaType.TEXT_HTML,
-                MediaType.APPLICATION_JSON));
+                TEXT_PLAIN, TEXT_HTML, APPLICATION_JSON));
         converters.add(0, stringConverter);
     }
 }
