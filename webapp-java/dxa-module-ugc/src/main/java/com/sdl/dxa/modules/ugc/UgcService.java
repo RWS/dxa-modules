@@ -1,11 +1,13 @@
 package com.sdl.dxa.modules.ugc;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.sdl.delivery.ugc.client.comment.UgcCommentApi;
 import com.sdl.delivery.ugc.client.comment.impl.SimpleCommentsFilter;
 import com.sdl.dxa.modules.ugc.data.Comment;
 import com.sdl.dxa.modules.ugc.data.User;
 import com.sdl.dxa.modules.ugc.exceptions.CannotFetchCommentsException;
 import com.sdl.dxa.modules.ugc.exceptions.CannotProcessCommentException;
+import com.sdl.dxa.modules.ugc.model.JsonZonedDateTime;
 import com.sdl.web.ugc.Status;
 import com.sdl.webapp.common.util.TcmUtils;
 import com.tridion.ambientdata.AmbientDataContext;
@@ -132,12 +134,20 @@ public class UgcService {
             c.setUser(convert(comment.getUser()));
         }
         if (comment.getCreationDate() != null) {
-            c.setCreationDate(comment.getCreationDate());
             c.setCreationDateTime(convert(comment.getCreationDate()));
+            try {
+                c.setCreationDate(new JsonZonedDateTime(c.getCreationDateTime()).getJson());
+            } catch (JsonProcessingException e) {
+               log.error("Cannot serialize to Json " + c.getCreationDateTime(), e);
+            }
         }
         if (comment.getLastModifiedDate() != null) {
-            c.setLastModifiedDate(comment.getLastModifiedDate());
             c.setLastModifiedDateTime(convert(comment.getLastModifiedDate()));
+            try {
+                c.setLastModifiedDate(new JsonZonedDateTime(c.getLastModifiedDateTime()).getJson());
+            } catch (JsonProcessingException e) {
+                log.error("Cannot serialize to Json " + c.getLastModifiedDateTime(), e);
+            }
         }
         c.setChildren(convert(comment.getChildren()));
 
