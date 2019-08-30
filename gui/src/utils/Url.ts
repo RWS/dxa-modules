@@ -80,7 +80,7 @@ export class Url {
         const rootPath = path.getRootPath();
         let url = `${rootPath}${encodeURIComponent(publicationId)}`;
         if (publicationTitle) {
-            url += `/${Url._processTitle(publicationTitle)}`;
+            url += `/${Url._processLink(publicationTitle)}`;
         }
         return url;
     }
@@ -121,9 +121,9 @@ export class Url {
         const rootPath = path.getRootPath();
         let url = `${rootPath}${encodeURIComponent(publicationId)}/${encodeURIComponent(pageId)}`;
         if (publicationTitle) {
-            url += `/${Url._processTitle(publicationTitle)}`;
+            url += `/${Url._processLink(publicationTitle)}`;
             if (pageTitle) {
-                url += `/${Url._processTitle(pageTitle)}`;
+                url += `/${Url._processLink(pageTitle)}`;
             }
         }
 
@@ -191,16 +191,21 @@ export class Url {
     }
 
     private static _processTitle(title: string): string {
-        // trim
-        title = title.trim();
-        // slugify
-        title = slugify(title);
-        // Encode
-        title = encodeURIComponent(title);
+        title = Url._processLink(title);
         // Truncate
         if (title.length > TITLE_MAX_CHARS) {
             title = title.substring(0, 250);
         }
         return title;
+    }
+
+    private static _processLink(link: string): string {
+        // trim
+        link = link.trim();
+        // slugify
+        link = slugify(link);
+        // Encode
+        link = encodeURIComponent(link);
+        return link;
     }
 }
