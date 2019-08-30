@@ -107,10 +107,13 @@ public class CilPublicationService implements PublicationService {
                 NameValuePair pair = customMeta.getNameValues().get(PUBLICATION_PRODUCTFAMILYNAME_META);
                 List<Object> values = pair.getMultipleValues();
                 List<String> productFamilies = new ArrayList<>();
+                List<String> productFamiliesEncoded = new ArrayList<>();
                 for (Object value: values) {
                     productFamilies.add(Objects.toString(value, null));
+                    productFamiliesEncoded.add(getEncodedProductFamily(Objects.toString(value, null)));
                 }
                 publication.setProductFamily(productFamilies);
+                publication.setProductFamilyEncoded(productFamiliesEncoded);
             }
 
             if (customMeta.getFirstValue(PUBLICATION_PRODUCTRELEASENAME_META) != null) {

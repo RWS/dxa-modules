@@ -62,14 +62,10 @@ public class MainController {
      * @return          Home page for Docs (all the publications)
      * @throws          ContentProviderException in case if data retrieving fails
      */
-    @RequestMapping(
-            value = {"/home", "/publications/**"},
-            method = GET
-    )
+    @RequestMapping(value = {"/home", "/publications*", "/publications/{value:.+$}"}, method = GET)
     public String home(HttpServletRequest request) throws ContentProviderException {
         return getHomeView(null, null, request);
     }
-
 
     /**
      * Home page.
@@ -79,10 +75,7 @@ public class MainController {
      * @return Publication home page content
      * @throws ContentProviderException in case if data retrieving fails
      */
-    @RequestMapping(
-            value = "/{publicationId:[\\d]+}",
-            method = GET
-    )
+    @RequestMapping(value = "/{publicationId:[0-9]+}", method = GET)
     @Cacheable(value = "ish", key = "{ #publicationId }")
     public String home(@PathVariable("publicationId") String publicationId,
                        HttpServletRequest request) throws ContentProviderException {
@@ -98,10 +91,7 @@ public class MainController {
      * @return content of the page
      * @throws ContentProviderException in case if data retrieving fails
      */
-    @RequestMapping(
-            value = "/{publicationId:[\\d]+}/{pageId}/**",
-            method = GET
-    )
+    @RequestMapping(value = "/{publicationId:[0-9]+}/{pageId}/**", method = GET)
     @Cacheable(value = "ish", key = "{ #publicationId, #pageId }")
     public String home(@PathVariable("publicationId") String publicationId,
                        @PathVariable("pageId") String pageId,

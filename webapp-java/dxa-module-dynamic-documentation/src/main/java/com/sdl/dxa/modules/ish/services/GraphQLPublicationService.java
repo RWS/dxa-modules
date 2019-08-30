@@ -14,8 +14,6 @@ import com.sdl.web.pca.client.contentmodel.generated.PublicationEdge;
 import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.controller.exception.NotFoundException;
 import org.dd4t.providers.PublicationProvider;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Profile;
@@ -28,7 +26,6 @@ import java.util.stream.Collectors;
 @Component
 @Profile("!cil.providers.active")
 public class GraphQLPublicationService implements PublicationService {
-    private static final Logger LOG = LoggerFactory.getLogger(PublicationProvider.class);
 
     private static final String PublicationTitleMeta = "publicationtitle.generated.value";
     private static final String PublicationProductfamilynameMeta = "FISHPRODUCTFAMILYNAME.logical.value";
@@ -122,6 +119,7 @@ public class GraphQLPublicationService implements PublicationService {
                         result.setProductFamily(new ArrayList<>());
                     }
                     result.getProductFamily().add(value);
+                    result.getProductFamilyEncoded().add(getEncodedProductFamily(value));
                     break;
                 case PublicationProductreleasenameMeta:
                     if (result.getProductReleaseVersion() == null) {
