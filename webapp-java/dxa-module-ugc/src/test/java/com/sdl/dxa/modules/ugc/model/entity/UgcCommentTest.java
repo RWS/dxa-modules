@@ -9,6 +9,7 @@ import com.sdl.dxa.modules.ugc.model.JsonZonedDateTime;
 import com.sdl.webapp.common.util.ApplicationContextHolder;
 import com.sdl.webapp.common.util.TcmUtils;
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.context.annotation.Bean;
@@ -33,7 +34,7 @@ public class UgcCommentTest {
     private static Comment commentData = new Comment();
     private static List<UgcComment> comments = new ArrayList<>();
     private static UgcComment otherComment = new UgcComment();
-    private static DateTime time = new DateTime(new Date(1567075965376L));
+    private static DateTime time = new DateTime(new Date(1577781774000L), DateTimeZone.forID("GMT"));
     private static User user = new User();
 
     static {
@@ -42,18 +43,7 @@ public class UgcCommentTest {
         user.setName("Tester");
         user.setExternalId("ExternalId");
         user.setId("Id");
-
-        try {
-            commentData.setCreationDate(new JsonZonedDateTime(time).getJson());
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
         commentData.setCreationDateTime(time);
-        try {
-            commentData.setLastModifiedDate(new JsonZonedDateTime(time).getJson());
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
         commentData.setLastModifiedDateTime(time);
         commentData.setContent("Comment");
         commentData.setId(1);
@@ -106,10 +96,24 @@ public class UgcCommentTest {
         //given
 
         //when
+        commentData.setCreationDate(new JsonZonedDateTime(time).getJson());
+        commentData.setLastModifiedDate(new JsonZonedDateTime(time).getJson());
 
         //then
-        String result = ugcComment.getCommentData().getCreationDate();
-        assertEquals("{\"dayOfMonth\":29,\"hour\":13,\"minute\":52,\"month\":\"\",\"monthValue\":8,\"nano\":0,\"second\":45,\"year\":2019,\"dayOfWeek\":\"\",\"dayOfYear\":241}", result);
+        Comment commentData = ugcComment.getCommentData();
+        String result = commentData.getCreationDate();
+        assertEquals("{\"dayOfMonth\":31," +
+                        "\"hour\":8," +
+                        "\"minute\":42," +
+                        "\"month\":\"\"," +
+                        "\"monthValue\":12," +
+                        "\"nano\":0," +
+                        "\"second\":54," +
+                        "\"year\":2019," +
+                        "\"dayOfWeek\":\"\"," +
+                        "\"dayOfYear\":365}",
+                result);
+        assertEquals(result, commentData.getLastModifiedDate());
     }
 
     @Configuration
