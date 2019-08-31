@@ -118,6 +118,9 @@ public class GraphQLPublicationService implements PublicationService {
                     if (result.getProductFamily() == null) {
                         result.setProductFamily(new ArrayList<>());
                     }
+                    if (result.getProductFamilyEncoded() == null) {
+                        result.setProductFamilyEncoded(new ArrayList<>());
+                    }
                     result.getProductFamily().add(value);
                     result.getProductFamilyEncoded().add(getEncodedProductFamily(value));
                     break;
