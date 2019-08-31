@@ -109,7 +109,7 @@ public class UgcCommentTest {
 
         //then
         String result = ugcComment.getCommentData().getCreationDate();
-        assertEquals("{\"dayOfMonth\":29,\"hour\":13,\"minute\":52,\"month\":\"\",\"monthValue\":8,\"nano\":0,\"second\":45,\"year\":2019,\"dayOfWeek\":\"\",\"dayOfYear\":241}", result);
+        assertEquals("{\"dayOfMonth\":29,\"hour\":12,\"minute\":52,\"month\":\"\",\"monthValue\":8,\"nano\":0,\"second\":45,\"year\":2019,\"dayOfWeek\":\"\",\"dayOfYear\":241}", result);
     }
 
     @Configuration
