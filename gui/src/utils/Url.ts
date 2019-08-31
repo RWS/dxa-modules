@@ -190,15 +190,6 @@ export class Url {
         } || void 0;
     }
 
-    private static _processTitle(title: string): string {
-        title = Url._processLink(title);
-        // Truncate
-        if (title.length > TITLE_MAX_CHARS) {
-            title = title.substring(0, 250);
-        }
-        return title;
-    }
-
     private static _processLink(link: string): string {
         // trim
         link = link.trim();
