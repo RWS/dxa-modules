@@ -109,7 +109,7 @@ public class UgcCommentTest {
 
         //then
         String result = ugcComment.getCommentData().getCreationDate();
-        assertEquals(time, result);
+        assertEquals(new JsonZonedDateTime(time).getJson(), result);
     }
 
     @Configuration
