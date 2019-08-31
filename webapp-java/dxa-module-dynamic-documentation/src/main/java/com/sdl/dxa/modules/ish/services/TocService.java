@@ -15,10 +15,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -67,12 +64,63 @@ public class TocService {
             log.warn("Such item (" + sitemapItemId + ") for publication " + publicationId + " is not found", e);
             throw e;
         }
+
+        if (includeAncestors)
+        {
+            // if we are including ancestors we also need to get all the direct siblings for each
+            // level in the hierarchy.
+
+            SitemapItem node = findNode(navigationSubtree, sitemapItemId);
+
+            // for each parent node get sibling nodes
+            while (node != null && node.getParent() != null)
+            {
+                NavigationFilter explicitFilter = new NavigationFilter();
+                explicitFilter.setWithAncestors(false);
+                explicitFilter.setDescendantLevels(1);
+
+                Collection<SitemapItem> siblings = ishNavigationProvider.getNavigationSubtree(
+                        node.getParent().getId(),
+                        explicitFilter,
+                        localization
+                );
+
+                HashSet<String> children = new HashSet<String>();
+                for(SitemapItem item : node.getParent().getItems())
+                {
+                    children.add(item.getId());
+                }
+                // filter out duplicates and Page types since we don't wish to include them in TOC
+                String nodeId = node.getId();
+                siblings = siblings
+                        .stream()
+                        .filter(sibling -> !sibling.getId().equals(nodeId) && !sibling.getType().equals("Page") && !children.contains(sibling.getId())).collect(Collectors.toList());
+                for (SitemapItem sibling : siblings) {
+                    node.getParent().getItems().add(sibling);
+                }
+
+                node = node.getParent();
+            }
+        }
+
         navigationSubtree = navigationSubtree.stream().map(sitemapItem -> new SortableSiteMap(sitemapItem))
-                .sorted(
-                        Comparator.comparing(SortableSiteMap::getOne)
+                .sorted(Comparator.comparing(SortableSiteMap::getOne)
                                 .thenComparing(SortableSiteMap::getTwo))
                 .map(SortableSiteMap::getSitemapItem).collect(Collectors.toList());
         return fixupSitemap(navigationSubtree, true);
+    }
+
+    private static SitemapItem findNode(List<SitemapItem> nodes, String nodeId)
+    {
+        if (nodes == null) return null;
+        for (SitemapItem node : nodes)
+        {
+            if (node.getId().equals(nodeId)) return node;
+            if (node.getItems() == null || node.getItems().size() <= 0) continue;
+            SitemapItem found = findNode(new ArrayList(node.getItems()), nodeId);
+            if (found != null) return found;
+        }
+        return null;
     }
 
     private static List<SitemapItem> fixupSitemap(Collection<SitemapItem> toc, boolean removePageNodes) {
