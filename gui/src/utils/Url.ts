@@ -29,7 +29,6 @@ const ITEM_URL_REGEX = /^\/\d+\/\d+($|\/).*$/i;
 /**
  * Maximum characters for a title
  */
-const TITLE_MAX_CHARS = 250;
 
 export interface IPageParams {
     publicationId: string;
