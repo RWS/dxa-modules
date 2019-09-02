@@ -9,6 +9,7 @@ import com.sdl.webapp.common.api.model.ViewModel;
 import com.tridion.meta.CustomMeta;
 import com.tridion.meta.PageMeta;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,7 @@ public class CilPageService implements PageService {
     private Dxa22ContentProvider contentProvider;
 
     @Override
+    @Cacheable(value = "ish", key = "{ #localization.id, #pageId }", condition = "#localization != null && #localization.id != null")
     public ViewModel getPage(int pageId, Localization localization) throws ContentProviderException {
         PageModel model = contentProvider.getPageModel(pageId, localization);
 
