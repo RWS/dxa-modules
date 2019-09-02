@@ -139,17 +139,17 @@ public class IshController {
      * @throws ContentProviderException if page model cannot be fetched
      * @throws IOException if something wrong with tomcat response channel
      */
-    @RequestMapping(method = GET, value = "/binary/{publicationId}/{binaryId}/**",
-            produces = MediaType.ALL_VALUE)
+    @RequestMapping(method = GET, value = "/binary/{publicationId}/{binaryId}/**", produces = MediaType.ALL_VALUE)
     @ResponseBody
-    public void getBinaryResource(HttpServletResponse response, @PathVariable Integer publicationId,
+    public void getBinaryResource(HttpServletResponse response,
+                                  @PathVariable Integer publicationId,
                                   @PathVariable String binaryId) throws ContentProviderException, IOException {
         publicationService.checkPublicationOnline(publicationId, webRequestContext.getLocalization());
         int binaryIdInt = -1;
         try {
             binaryIdInt = Integer.parseInt(binaryId);
         } catch (NumberFormatException e) {
-            throw new ContentProviderException("Invalid request");
+            throw new ContentProviderException("Invalid request, no required binaryId: "+binaryId);
         }
 
         try (final ServletServerHttpResponse res = new ServletServerHttpResponse(response)) {

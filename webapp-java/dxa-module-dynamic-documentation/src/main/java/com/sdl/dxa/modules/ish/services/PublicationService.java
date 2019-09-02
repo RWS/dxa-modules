@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
 
 public interface PublicationService {
     static final Logger LOG = LoggerFactory.getLogger(PublicationService.class);
+    static final Pattern PRODUCT_FAMILY_PATTERN = Pattern.compile("(.*)\\s(\\(.+\\))");
 
     List<Publication> getPublicationList(Localization localization);
 
@@ -22,7 +23,7 @@ public interface PublicationService {
     default String getEncodedProductFamily(String value) {
         if (value == null) return null;
         try {
-            Matcher matcher = Pattern.compile("(.*)\\s(\\(.+\\))").matcher(value);
+            Matcher matcher = PRODUCT_FAMILY_PATTERN.matcher(value);
             if (matcher.find()) {
                 value = URLEncoder.encode(matcher.group(1).trim(), "UTF-8") + " " + matcher.group(2);
             } else {
