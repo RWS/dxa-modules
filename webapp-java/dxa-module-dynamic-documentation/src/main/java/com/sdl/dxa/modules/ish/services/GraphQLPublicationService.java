@@ -76,7 +76,7 @@ public class GraphQLPublicationService implements PublicationService {
         return false;
     }
 
-    @Cacheable(value = "ish", key = "{ #publicationId, #localization.id }", condition = "#localization != null && #localization.id != null")
+
     public void checkPublicationOnline(int publicationId, Localization localization) {
         ApiClient client = apiClientProvider.getClient();
         boolean isOffline = false;

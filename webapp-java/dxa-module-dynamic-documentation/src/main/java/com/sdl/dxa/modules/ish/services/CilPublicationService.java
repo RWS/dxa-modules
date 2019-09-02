@@ -67,7 +67,6 @@ public class CilPublicationService implements PublicationService {
         }
     }
 
-    @Cacheable(value = "ish", key = "{ #localization.id }", condition = "#localization != null && #localization.id != null")
     public void checkPublicationOnline(int publicationId, Localization localization) {
         PublicationMeta publicationMeta = null;
         try {

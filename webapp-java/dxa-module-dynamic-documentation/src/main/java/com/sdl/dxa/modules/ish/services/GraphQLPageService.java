@@ -33,7 +33,6 @@ public class GraphQLPageService implements PageService {
     private Dxa22ContentProvider contentProvider;
 
     @Override
-    @Cacheable(value = "ish", key = "{ #localization.id, #pageId }", condition = "#localization != null && #localization.id != null")
     public ViewModel getPage(int pageId, Localization localization) throws ContentProviderException {
         PageModel model = contentProvider.getPageModel(pageId, localization);
 
