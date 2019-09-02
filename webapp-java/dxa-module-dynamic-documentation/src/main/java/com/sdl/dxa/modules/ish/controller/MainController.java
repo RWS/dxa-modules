@@ -76,7 +76,6 @@ public class MainController {
      * @throws ContentProviderException in case if data retrieving fails
      */
     @RequestMapping(value = "/{publicationId:[0-9]+}", method = GET)
-    @Cacheable(value = "ish", key = "{ #publicationId }")
     public String home(@PathVariable("publicationId") String publicationId,
                        HttpServletRequest request) throws ContentProviderException {
         return getHomeView(publicationId, null, request);
@@ -92,7 +91,6 @@ public class MainController {
      * @throws ContentProviderException in case if data retrieving fails
      */
     @RequestMapping(value = "/{publicationId:[0-9]+}/{pageId}/**", method = GET)
-    @Cacheable(value = "ish", key = "{ #publicationId, #pageId }")
     public String home(@PathVariable("publicationId") String publicationId,
                        @PathVariable("pageId") String pageId,
                        HttpServletRequest request) throws ContentProviderException {
@@ -101,7 +99,6 @@ public class MainController {
 
     private String getHomeView(String publicationId, String pageId, HttpServletRequest request) throws ContentProviderException {
         setPageModelOnRequest(publicationId, pageId, request);
-
         return "home";
     }
 
