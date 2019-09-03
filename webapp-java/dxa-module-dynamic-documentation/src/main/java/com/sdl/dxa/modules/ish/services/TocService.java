@@ -5,6 +5,7 @@ import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.content.ContentProviderException;
 import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.api.model.entity.SitemapItem;
+import com.sdl.webapp.common.api.model.sorting.SortableSiteMap;
 import com.sdl.webapp.common.api.navigation.NavigationFilter;
 import com.sdl.webapp.common.exceptions.DxaItemNotFoundException;
 import lombok.extern.slf4j.Slf4j;
@@ -89,7 +90,7 @@ public class TocService {
                 String nodeId = node.getId();
                 siblings = siblings
                         .stream()
-                        .filter(sibling -> !sibling.getId().equals(nodeId) && !sibling.getType().equals("Page") && !children.contains(sibling.getId())).collect(Collectors.toList());
+                        .filter(sibling -> !sibling.getId().equals(nodeId) && !"Page".equals(sibling.getType()) && !children.contains(sibling.getId())).collect(Collectors.toList());
                 for (SitemapItem sibling : siblings) {
                     node.getParent().getItems().add(sibling);
                 }
@@ -99,12 +100,6 @@ public class TocService {
         }
 
         return fixupSiteMap(navigationSubtree, true);
-    }
-
-    private static Collection<SitemapItem> sort(Collection<SitemapItem> entries, Comparator<SitemapItem.SortableSiteMap> comparator) {
-        return entries.stream().map(siteMapItem -> new SitemapItem.SortableSiteMap(siteMapItem))
-                .sorted(comparator)
-                .map(SitemapItem.SortableSiteMap::getSitemapItem).collect(Collectors.toList());
     }
 
     private static SitemapItem findNode(Collection<SitemapItem> nodes, String nodeId) {
@@ -120,7 +115,7 @@ public class TocService {
 
     private static Collection<SitemapItem> fixupSiteMap(Collection<SitemapItem> toc, boolean removePageNodes) {
         fixupSiteMapRecursive(toc, removePageNodes);
-        return sort(toc, SitemapItem.SITE_MAP_SORT_BY_TAXONOMY_AND_KEYWORD);
+        return SortableSiteMap.sort(toc, SortableSiteMap.SORT_BY_TAXONOMY_AND_KEYWORD);
     }
 
     private static void fixupSiteMapRecursive(Collection<SitemapItem> toc, boolean removePageNodes) {
