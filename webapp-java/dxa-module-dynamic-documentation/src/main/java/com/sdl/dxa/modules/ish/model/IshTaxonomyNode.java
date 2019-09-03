@@ -5,9 +5,7 @@ import com.sdl.webapp.common.api.model.entity.TaxonomyNode;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.util.comparator.NullSafeComparator;
 
-import java.util.Comparator;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -36,11 +34,11 @@ public class IshTaxonomyNode extends TaxonomyNode {
             }, true);
 
     @Override
-    protected Set<SitemapItem> wrapItems(@Nullable Set<SitemapItem> items) {
+    protected LinkedHashSet<SitemapItem> wrapItems(@Nullable LinkedHashSet<SitemapItem> items) {
         TreeSet<SitemapItem> treeSet = new TreeSet<>(SITEMAP_SORT_BY_ID);
         if (items != null) {
             treeSet.addAll(items);
         }
-        return treeSet;
+        return new LinkedHashSet<>(treeSet);
     }
 }
