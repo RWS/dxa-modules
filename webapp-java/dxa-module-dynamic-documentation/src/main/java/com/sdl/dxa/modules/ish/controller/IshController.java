@@ -5,10 +5,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Strings;
 import com.sdl.dxa.modules.ish.exception.IshServiceException;
 import com.sdl.dxa.modules.ish.model.Publication;
-import com.sdl.dxa.modules.ish.services.PageService;
-import com.sdl.dxa.modules.ish.services.TocService;
-import com.sdl.dxa.modules.ish.services.PublicationService;
 import com.sdl.dxa.modules.ish.services.ConditionService;
+import com.sdl.dxa.modules.ish.services.PageService;
+import com.sdl.dxa.modules.ish.services.PublicationService;
+import com.sdl.dxa.modules.ish.services.TocService;
 import com.sdl.dxa.modules.ish.services.TridionDocsContentService;
 import com.sdl.dxa.modules.ish.utils.ConditionUtil;
 import com.sdl.webapp.common.api.WebRequestContext;
@@ -18,7 +18,6 @@ import com.sdl.webapp.common.api.content.StaticContentItem;
 import com.sdl.webapp.common.api.formats.DataFormatter;
 import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.api.model.PageModel;
-import com.sdl.webapp.common.api.model.entity.SitemapItem;
 import com.sdl.webapp.common.controller.exception.DocsExceptionHandler;
 import com.sdl.webapp.common.controller.exception.NotFoundException;
 import com.sdl.webapp.common.exceptions.DxaItemNotFoundException;
@@ -48,7 +47,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -180,9 +178,9 @@ public class IshController {
     @RequestMapping(method = {GET, POST}, value = "/api/toc/{publicationId}", produces = {APPLICATION_JSON_VALUE})
     @ResponseBody
     @Cacheable(value = "ish", key = "{ #publicationId, #conditions }")
-    public Collection<SitemapItem> getRootToc(@PathVariable("publicationId") Integer publicationId,
-                                              @RequestParam(value = "conditions", defaultValue = "") String conditions,
-                                              HttpServletRequest request) throws ContentProviderException, IOException {
+    public java.util.Collection<com.sdl.webapp.common.api.model.entity.SitemapItem> getRootToc(@PathVariable("publicationId") Integer publicationId,
+                                                                                               @RequestParam(value = "conditions", defaultValue = "") String conditions,
+                                                                                               HttpServletRequest request) throws ContentProviderException, IOException {
         setConditions(publicationId, conditions);
         publicationService.checkPublicationOnline(publicationId, webRequestContext.getLocalization());
         return tocService.getToc(publicationId, null, false, 1, request, webRequestContext);
@@ -191,12 +189,12 @@ public class IshController {
     @RequestMapping(method = {GET, POST}, value = "/api/toc/{publicationId}/{sitemapItemId}",
             produces = {APPLICATION_JSON_VALUE})
     @ResponseBody
-    public Collection<SitemapItem> getToc(@PathVariable("publicationId") Integer publicationId,
-                                          @PathVariable("sitemapItemId") String sitemapItemId,
-                                          @RequestParam(value = "includeAncestors", required = false,
+    public java.util.Collection<com.sdl.webapp.common.api.model.entity.SitemapItem> getToc(@PathVariable("publicationId") Integer publicationId,
+                                                                                           @PathVariable("sitemapItemId") String sitemapItemId,
+                                                                                           @RequestParam(value = "includeAncestors", required = false,
                                                   defaultValue = "false") boolean includeAncestors,
-                                          @RequestParam(value = "conditions", defaultValue = "") String conditions,
-                                          HttpServletRequest request) throws ContentProviderException, IOException {
+                                                                                           @RequestParam(value = "conditions", defaultValue = "") String conditions,
+                                                                                           HttpServletRequest request) throws ContentProviderException, IOException {
         setConditions(publicationId, conditions);
         publicationService.checkPublicationOnline(publicationId, webRequestContext.getLocalization());
         return tocService.getToc(publicationId, sitemapItemId, includeAncestors, 1, request,
@@ -261,28 +259,30 @@ public class IshController {
             return null;
         }
         Map conditionsMap = objectMapper.readValue(conditions, Map.class);
-        Map<String, List> userConditions = (Map<String, List>) conditionsMap.get("userConditions");
+        Map userConditions = (Map)conditionsMap.get("userConditions");
         Map<String, List> result = new HashMap<>();
 
-        if (userConditions != null && !userConditions.isEmpty()) {
-            Localization localization = webRequestContext.getLocalization();
-            Map<String, Map> systemConditions = conditionService.getObjectConditions(publicationId, localization);
-            for (Map.Entry<String, Map> entry : systemConditions.entrySet()) {
-                Object[] values = (Object[]) entry.getValue().get("values");
-                if (values == null) {
-                    result.put(entry.getKey(), null);
-                } else {
-                    result.put(entry.getKey(), Arrays.asList(values));
-                }
+        if (userConditions == null || userConditions.isEmpty()) {
+            return result;
+        }
+        Localization localization = webRequestContext.getLocalization();
+        Map<String, Map> systemConditions = conditionService.getObjectConditions(publicationId, localization);
+        for (Map.Entry<String, Map> entry : systemConditions.entrySet()) {
+            Object[] values = (Object[]) entry.getValue().get("values");
+            if (values == null) {
+                result.put(entry.getKey(), null);
+            } else {
+                result.put(entry.getKey(), Arrays.asList(values));
             }
-
-            //Overwrite system conditions with the userconditions:
-            for (Map.Entry<String, List> entry : userConditions.entrySet()) {
+        }
+        //Overwrite system conditions with the userconditions:
+        for (Map.Entry entry : userConditions.entrySet()) {
+            if (entry.getValue() == null) {
+                result.put(entry.getKey(), null);
+            } else {
                 result.put(entry.getKey(), entry.getValue());
             }
         }
-
         return result;
     }
-
 }

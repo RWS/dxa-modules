@@ -1,9 +1,8 @@
 package com.sdl.dxa.modules.ish.services;
 
 
-import com.sdl.dxa.modules.ish.model.Publication;
 import com.sdl.dxa.modules.ish.exception.IshServiceException;
-import com.sdl.dxa.modules.ish.services.PublicationService;
+import com.sdl.dxa.modules.ish.model.Publication;
 import com.sdl.web.api.meta.WebPublicationMetaFactory;
 import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.controller.exception.NotFoundException;
@@ -47,7 +46,7 @@ public class CilPublicationService implements PublicationService {
 
     @Override
     @Cacheable(value = "ish", key = "{ #localization.id }", condition = "#localization != null && #localization.id != null")
-    public List<Publication> getPublicationList(Localization localization) {
+    public List<com.sdl.dxa.modules.ish.model.Publication> getPublicationList(Localization localization) {
         List<Publication> result = new ArrayList<>();
         try {
             PublicationMeta[] publicationMetas = webPublicationMetaFactory

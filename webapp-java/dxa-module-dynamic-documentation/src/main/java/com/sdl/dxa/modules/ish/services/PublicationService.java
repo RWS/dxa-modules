@@ -1,11 +1,8 @@
 package com.sdl.dxa.modules.ish.services;
 
-import com.sdl.dxa.modules.ish.model.Publication;
 import com.sdl.webapp.common.api.localization.Localization;
-import org.dd4t.providers.PublicationProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.cache.annotation.Cacheable;
 
 import java.net.URLEncoder;
 import java.util.List;
@@ -16,7 +13,7 @@ public interface PublicationService {
     static final Logger LOG = LoggerFactory.getLogger(PublicationService.class);
     static final Pattern PRODUCT_FAMILY_PATTERN = Pattern.compile("(.*)\\s(\\(.+\\))");
 
-    List<Publication> getPublicationList(Localization localization);
+    List<com.sdl.dxa.modules.ish.model.Publication> getPublicationList(Localization localization);
 
     void checkPublicationOnline(int publicationId, Localization localization);
 
