@@ -3,6 +3,7 @@ package com.sdl.dxa.modules.ish.controller;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
 import com.sdl.dxa.modules.ish.exception.IshServiceException;
 import com.sdl.dxa.modules.ish.model.Publication;
 import com.sdl.dxa.modules.ish.services.ConditionService;
@@ -47,6 +48,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -259,29 +261,39 @@ public class IshController {
             return null;
         }
         Map conditionsMap = objectMapper.readValue(conditions, Map.class);
-        Map userConditions = (Map)conditionsMap.get("userConditions");
+        Map<Object, Object> userConditions = (Map)conditionsMap.get("userConditions");
         Map<String, List> result = new HashMap<>();
 
         if (userConditions == null || userConditions.isEmpty()) {
             return result;
         }
-        Localization localization = webRequestContext.getLocalization();
-        Map<String, Map> systemConditions = conditionService.getObjectConditions(publicationId, localization);
-        for (Map.Entry<String, Map> entry : systemConditions.entrySet()) {
-            Object[] values = (Object[]) entry.getValue().get("values");
-            if (values == null) {
-                result.put(entry.getKey(), null);
-            } else {
-                result.put(entry.getKey(), Arrays.asList(values));
+        try {
+            Localization localization = webRequestContext.getLocalization();
+            Map<String, Map> systemConditions = conditionService.getObjectConditions(publicationId, localization);
+            for (Map.Entry<String, Map> entry : systemConditions.entrySet()) {
+                Object[] values = (Object[]) entry.getValue().get("values");
+                if (values == null) {
+                    result.put(entry.getKey(), null);
+                } else {
+                    result.put(entry.getKey(), Arrays.asList(values));
+                }
             }
-        }
-        //Overwrite system conditions with the userconditions:
-        for (Map.Entry entry : userConditions.entrySet()) {
-            if (entry.getValue() == null) {
-                result.put(entry.getKey(), null);
-            } else {
-                result.put(entry.getKey(), entry.getValue());
+            //Overwrite system conditions with the userconditions:
+            for (Map.Entry entry : userConditions.entrySet()) {
+                String key = String.valueOf(entry.getKey());
+                Object value = entry.getValue();
+                if (value == null) {
+                    result.put(key, null);
+                } else {
+                    if (List.class.isAssignableFrom(value.getClass())) {
+                        result.put(key, Lists.newArrayList((List) value));
+                    } else {
+                        result.put(key, Collections.singletonList(value));
+                    }
+                }
             }
+        } catch (Exception ex) {
+            log.error("Could not merge conditions " + conditions + " for pub " + publicationId, ex);
         }
         return result;
     }
