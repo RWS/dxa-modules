@@ -1,5 +1,6 @@
 package com.sdl.dxa.modules.ish.services;
 
+import com.sdl.dxa.modules.ish.model.Publication;
 import com.sdl.webapp.common.api.localization.Localization;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +14,7 @@ public interface PublicationService {
     static final Logger LOG = LoggerFactory.getLogger(PublicationService.class);
     static final Pattern PRODUCT_FAMILY_PATTERN = Pattern.compile("(.*)\\s(\\(.+\\))");
 
-    List<com.sdl.dxa.modules.ish.model.Publication> getPublicationList(Localization localization);
+    List<Publication> getPublicationList(Localization localization);
 
     void checkPublicationOnline(int publicationId, Localization localization);
 
@@ -27,7 +28,7 @@ public interface PublicationService {
                 value = URLEncoder.encode(value.trim(), "UTF-8");
             }
         } catch (Exception ex) {
-            LOG.error("Could not encode " + value + " to UTF-8. Not a standart JVM?", ex);
+            LOG.error("Could not encode [" + value + "] to UTF-8. Not a standard JVM?", ex);
         }
         return value;
     }

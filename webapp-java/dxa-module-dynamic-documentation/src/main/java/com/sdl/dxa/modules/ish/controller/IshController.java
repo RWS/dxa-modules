@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
+import com.sdl.dxa.common.ClaimValues;
 import com.sdl.dxa.modules.ish.exception.IshServiceException;
 import com.sdl.dxa.modules.ish.model.Publication;
 import com.sdl.dxa.modules.ish.services.ConditionService;
@@ -19,6 +20,7 @@ import com.sdl.webapp.common.api.content.StaticContentItem;
 import com.sdl.webapp.common.api.formats.DataFormatter;
 import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.api.model.PageModel;
+import com.sdl.webapp.common.api.model.entity.SitemapItem;
 import com.sdl.webapp.common.controller.exception.DocsExceptionHandler;
 import com.sdl.webapp.common.controller.exception.NotFoundException;
 import com.sdl.webapp.common.exceptions.DxaItemNotFoundException;
@@ -46,8 +48,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.URI;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -64,9 +66,6 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @Slf4j
 @Controller
 public class IshController {
-    //Note: This URI has to be included in the file cd_ambient_conf.xml as a forwarded claim for conditions to work.
-    private static final URI USER_CONDITIONS_URI = URI.create("taf:ish:userconditions:merged");
-
     @Autowired
     private WebRequestContext webRequestContext;
 
@@ -148,8 +147,8 @@ public class IshController {
         int binaryIdInt = -1;
         try {
             binaryIdInt = Integer.parseInt(binaryId);
-        } catch (NumberFormatException e) {
-            throw new ContentProviderException("Invalid request, no required binaryId: "+binaryId);
+        } catch (NumberFormatException ex) {
+            throw new ContentProviderException("Invalid request, no required binaryId: " + binaryId, ex);
         }
 
         try (final ServletServerHttpResponse res = new ServletServerHttpResponse(response)) {
@@ -180,27 +179,24 @@ public class IshController {
     @RequestMapping(method = {GET, POST}, value = "/api/toc/{publicationId}", produces = {APPLICATION_JSON_VALUE})
     @ResponseBody
     @Cacheable(value = "ish", key = "{ #publicationId, #conditions }")
-    public java.util.Collection<com.sdl.webapp.common.api.model.entity.SitemapItem> getRootToc(@PathVariable("publicationId") Integer publicationId,
-                                                                                               @RequestParam(value = "conditions", defaultValue = "") String conditions,
-                                                                                               HttpServletRequest request) throws ContentProviderException, IOException {
+    public Collection<SitemapItem> getRootToc(@PathVariable("publicationId") Integer publicationId,
+                                              @RequestParam(value = "conditions", defaultValue = "") String conditions,
+                                              HttpServletRequest request) throws ContentProviderException, IOException {
         setConditions(publicationId, conditions);
         publicationService.checkPublicationOnline(publicationId, webRequestContext.getLocalization());
         return tocService.getToc(publicationId, null, false, 1, request, webRequestContext);
     }
 
-    @RequestMapping(method = {GET, POST}, value = "/api/toc/{publicationId}/{sitemapItemId}",
-            produces = {APPLICATION_JSON_VALUE})
+    @RequestMapping(method = {GET, POST}, value = "/api/toc/{publicationId}/{sitemapItemId}", produces = {APPLICATION_JSON_VALUE})
     @ResponseBody
-    public java.util.Collection<com.sdl.webapp.common.api.model.entity.SitemapItem> getToc(@PathVariable("publicationId") Integer publicationId,
-                                                                                           @PathVariable("sitemapItemId") String sitemapItemId,
-                                                                                           @RequestParam(value = "includeAncestors", required = false,
-                                                  defaultValue = "false") boolean includeAncestors,
-                                                                                           @RequestParam(value = "conditions", defaultValue = "") String conditions,
-                                                                                           HttpServletRequest request) throws ContentProviderException, IOException {
+    public Collection<SitemapItem> getToc(@PathVariable("publicationId") Integer publicationId,
+                                          @PathVariable("sitemapItemId") String sitemapItemId,
+                                          @RequestParam(value = "includeAncestors", required = false,  defaultValue = "false") boolean includeAncestors,
+                                          @RequestParam(value = "conditions", defaultValue = "") String conditions,
+                                          HttpServletRequest request) throws ContentProviderException, IOException {
         setConditions(publicationId, conditions);
         publicationService.checkPublicationOnline(publicationId, webRequestContext.getLocalization());
-        return tocService.getToc(publicationId, sitemapItemId, includeAncestors, 1, request,
-                webRequestContext);
+        return tocService.getToc(publicationId, sitemapItemId, includeAncestors, 1, request,  webRequestContext);
     }
 
     @RequestMapping(method = GET, value = "/api/conditions/{publicationId:[\\d]+}", produces = {APPLICATION_JSON_VALUE})
@@ -220,7 +216,8 @@ public class IshController {
      * @return Integer pageId of a topic in target publication
      * @throws ContentProviderException if topic cannot be fetched
      */
-    @RequestMapping(method = {GET, POST}, value = "/api/pageIdByReference/{publicationId}/{ishFieldValue}",
+    @RequestMapping(method = {GET, POST},
+            value = "/api/pageIdByReference/{publicationId}/{ishFieldValue}",
             produces = {APPLICATION_JSON_VALUE})
     @ResponseBody
     @Cacheable(value = "ish", key = "{ #publicationId, #ishFieldValue }")
@@ -253,10 +250,10 @@ public class IshController {
         if (!conditions.isEmpty()) {
             mergedConditions = getMergedConditions(conditions, publicationId);
         }
-        ConditionUtil.addConditions(USER_CONDITIONS_URI, mergedConditions);
+        ConditionUtil.addConditions(ClaimValues.ISH_CONDITIONS_MERGED, mergedConditions);
     }
 
-    private Map<String, List> getMergedConditions(String conditions, int publicationId) throws IOException, DxaItemNotFoundException {
+    private Map<String, List> getMergedConditions(String conditions, int publicationId) throws IOException {
         if (conditions == null) {
             return null;
         }

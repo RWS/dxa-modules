@@ -46,7 +46,7 @@ public class CilPublicationService implements PublicationService {
 
     @Override
     @Cacheable(value = "ish", key = "{ #localization.id }", condition = "#localization != null && #localization.id != null")
-    public List<com.sdl.dxa.modules.ish.model.Publication> getPublicationList(Localization localization) {
+    public List<Publication> getPublicationList(Localization localization) {
         List<Publication> result = new ArrayList<>();
         try {
             PublicationMeta[] publicationMetas = webPublicationMetaFactory
