@@ -12,8 +12,8 @@ import com.sdl.dxa.modules.ish.exception.IshServiceException;
 import com.sdl.dxa.modules.ish.model.Publication;
 import com.sdl.dxa.tridion.navigation.dynamic.OnDemandNavigationModelProvider;
 import com.sdl.webapp.common.api.localization.Localization;
+import com.sdl.webapp.common.api.model.sorting.SortableSiteMap;
 import com.sdl.webapp.common.api.navigation.NavigationFilter;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
@@ -22,13 +22,10 @@ import org.springframework.stereotype.Service;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 /**
  * Sitemap service.
@@ -81,7 +78,7 @@ public class GraphQLSitemapService implements SitemapService {
         if (items == null || items.isEmpty()) return;
         Date currentDate = new Date();
         List<SitemapItemModelData> fixed = fixupSitemap(items, true);
-        List<SitemapItemModelData> ordered = orderSitemapItems(fixed);
+        Collection<SitemapItemModelData> ordered = orderSitemapItems(fixed);
         for (SitemapItemModelData item : ordered) {
             if (!item.getItems().isEmpty()) {
                 generateSitemapsForCurrentLevel(pub, contextPath, sitemapGenerator, item.getItems());
@@ -101,7 +98,11 @@ public class GraphQLSitemapService implements SitemapService {
         }
     }
 
-    private Collection<SitemapItemModelData> getSitemapItemModelData(Integer publicationId, Localization localization, String sitemapItemId, ClaimHolder claimHolder, NavigationFilter navigationFilter) {
+    private Collection<SitemapItemModelData> getSitemapItemModelData(Integer publicationId,
+                                                                     Localization localization,
+                                                                     String sitemapItemId,
+                                                                     ClaimHolder claimHolder,
+                                                                     NavigationFilter navigationFilter) {
         Optional<Collection<SitemapItemModelData>> subtree;
         SitemapRequestDto requestDto = SitemapRequestDto
                 .builder(publicationId)
@@ -136,48 +137,7 @@ public class GraphQLSitemapService implements SitemapService {
         return result;
     }
 
-    private static List<SitemapItemModelData> orderSitemapItems(Collection<SitemapItemModelData> toc) {
-        List<SitemapItemModelData> ordered = toc.stream().map(sitemapItem -> new SortableSiteMap(sitemapItem))
-                .sorted(
-                        Comparator.comparing(SortableSiteMap::getOne)
-                                .thenComparing(SortableSiteMap::getTwo))
-                .map(SortableSiteMap::getSitemapItem).collect(Collectors.toList());
-        return ordered;
-    }
-
-    /**
-     * A private class that contains the results of the regex so they only have to be done once for a whole sorting.
-     */
-    private static class SortableSiteMap {
-        private Integer one;
-        private Integer two;
-        private SitemapItemModelData sitemapItem;
-
-        public SortableSiteMap(SitemapItemModelData sitemapItem) {
-            this.sitemapItem = sitemapItem;
-            Matcher matcher = RegEx.matcher(sitemapItem.getId());
-            if (matcher.matches()) {
-                String group1 = matcher.group(1);
-                String group3 = matcher.group(3);
-                if (StringUtils.isNotEmpty(group1)) {
-                    this.one = Integer.parseInt(group1);
-                }
-                if (StringUtils.isNotEmpty(group3)) {
-                    this.two = Integer.parseInt(group3);
-                }
-            }
-        }
-
-        public Integer getOne() {
-            return one;
-        }
-
-        public Integer getTwo() {
-            return two;
-        }
-
-        public SitemapItemModelData getSitemapItem() {
-            return sitemapItem;
-        }
+    private static Collection<SitemapItemModelData> orderSitemapItems(Collection<SitemapItemModelData> toc) {
+        return SortableSiteMap.sortModelData(toc, SortableSiteMap.SORT_BY_TAXONOMY_AND_KEYWORD);
     }
 }
