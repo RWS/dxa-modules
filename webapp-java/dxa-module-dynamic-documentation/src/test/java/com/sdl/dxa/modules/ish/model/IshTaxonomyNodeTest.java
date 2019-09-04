@@ -47,7 +47,7 @@ public class IshTaxonomyNodeTest {
     @SuppressWarnings("magicnumber")
     @Test
     public void testSortById() {
-        List<SitemapItem> sorted = new ArrayList<>(SortableSiteMap.sort(tocItems, SortableSiteMap.SORT_BY_TAXONOMY_AND_KEYWORD));
+        List<SitemapItem> sorted = new ArrayList<>(SortableSiteMap.sortItem(tocItems, SortableSiteMap.SORT_BY_TAXONOMY_AND_KEYWORD));
 
         assertEquals(item5, sorted.get(0));
         assertEquals(item1, sorted.get(1));
