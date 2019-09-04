@@ -2,10 +2,8 @@ package com.sdl.dxa.modules.ish.services;
 
 import com.sdl.dxa.modules.ish.model.Publication;
 import com.sdl.webapp.common.api.localization.Localization;
-import org.dd4t.providers.PublicationProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.cache.annotation.Cacheable;
 
 import java.net.URLEncoder;
 import java.util.List;
@@ -30,7 +28,7 @@ public interface PublicationService {
                 value = URLEncoder.encode(value.trim(), "UTF-8");
             }
         } catch (Exception ex) {
-            LOG.error("Could not encode " + value + " to UTF-8. Not a standart JVM?", ex);
+            LOG.error("Could not encode [" + value + "] to UTF-8. Not a standard JVM?", ex);
         }
         return value;
     }

@@ -1,9 +1,8 @@
 package com.sdl.dxa.modules.ish.services;
 
 
-import com.sdl.dxa.modules.ish.model.Publication;
 import com.sdl.dxa.modules.ish.exception.IshServiceException;
-import com.sdl.dxa.modules.ish.services.PublicationService;
+import com.sdl.dxa.modules.ish.model.Publication;
 import com.sdl.web.api.meta.WebPublicationMetaFactory;
 import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.controller.exception.NotFoundException;

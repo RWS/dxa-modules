@@ -1,6 +1,5 @@
 package com.sdl.dxa.modules.ish.services;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sdl.dxa.modules.ish.exception.IshServiceException;
 import com.sdl.dxa.tridion.pcaclient.ApiClientProvider;
@@ -46,10 +45,9 @@ public class GraphQLConditionService implements ConditionService {
 
     @Override
     public Map<String, Map> getObjectConditions(int publicationId, Localization localization) throws DxaItemNotFoundException, IOException {
-        String conditionUsed = getMetadata(publicationId, localization, ConditionUsed);
-        String conditionMetadata = getMetadata(publicationId, localization, ConditionMetadata);
-        Map<String, List> d1 = objectMapper.readValue(conditionUsed, Map.class);
-        Map<String, Map> d2 = objectMapper.readValue(conditionMetadata, Map.class);
+        List<String> metadatas = getMetadata(publicationId, localization, ConditionUsed, ConditionMetadata);
+        Map<String, List> d1 = objectMapper.readValue(metadatas.get(0), Map.class);
+        Map<String, Map> d2 = objectMapper.readValue(metadatas.get(1), Map.class);
         for (Map.Entry<String, List> v : d1.entrySet()) {
             Map map = d2.get(v.getKey());
             map.put("values", v.getValue().toArray());
@@ -57,22 +55,26 @@ public class GraphQLConditionService implements ConditionService {
         return d2;
     }
 
-    private String getMetadata(int publicationId, Localization localization, String metadataName) throws DxaItemNotFoundException {
+    private List<String> getMetadata(int publicationId, Localization localization, String... metadataNames) throws DxaItemNotFoundException {
         ApiClient client = pcaClientProvider.getClient();
-        ContentNamespace docs = GraphQLUtils.convertUriToGraphQLContentNamespace(localization.getCmUriScheme());
-        Publication publication = client.getPublication(docs, publicationId,
-                "requiredMeta:" + metadataName, null);
-        List<CustomMetaEdge> edges = publication.getCustomMetas().getEdges();
-        if (publication == null || publication.getCustomMetas() == null) {
-            throw new DxaItemNotFoundException(
-                    "Metadata '" + metadataName + "' is not found for publication " + publicationId + ".");
+        ContentNamespace namespace = GraphQLUtils.convertUriToGraphQLContentNamespace(localization.getCmUriScheme());
+        List<String> result = new java.util.ArrayList<>();
+        for (String metadataName : metadataNames) {
+            Publication pub = client.getPublication(namespace, publicationId, "requiredMeta:" + metadataName, null);
+            if (pub == null || pub.getCustomMetas() == null) {
+                throw new DxaItemNotFoundException(
+                        "Metadata '" + metadataName + "' is not found for publication " + publicationId + ".");
+            }
+            List<CustomMetaEdge> edges = pub.getCustomMetas().getEdges();
+
+            if (edges.isEmpty()) {
+                result.add("{}");
+            }
+            Object metadata = edges.get(0).getNode().getValue();
+            String metadataString = metadata != null ? (String) metadata : "{}";
+            result.add(metadataString);
         }
-        if (edges.size() == 0) {
-            return "{}";
-        }
-        Object metadata = edges.get(0).getNode().getValue();
-        String metadataString = metadata != null ? (String) metadata : "{}";
-        return metadataString;
+        return result;
     }
 
 }

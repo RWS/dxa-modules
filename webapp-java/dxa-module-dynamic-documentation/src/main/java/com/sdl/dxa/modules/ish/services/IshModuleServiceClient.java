@@ -1,5 +1,6 @@
 package com.sdl.dxa.modules.ish.services;
 
+import com.sdl.dxa.common.ClaimValues;
 import com.sdl.dxa.tridion.modelservice.ModelServiceClient;
 import com.sdl.dxa.tridion.modelservice.ModelServiceClientConfiguration;
 import com.tridion.ambientdata.claimstore.ClaimStore;
@@ -34,7 +35,7 @@ public class IshModuleServiceClient extends ModelServiceClient  {
         if (claimStore == null) return;
         for (Map.Entry<URI, Object> entry : claimStore.getAll().entrySet()) {
             String key = entry.getKey().toString();
-            if (!key.startsWith("taf:ish:")) continue;
+            if (!key.startsWith(ClaimValues.ISH_MODULE_PREFIX)) continue;
             try {
                 byte[] bytes = entry.getValue().toString().getBytes("UTF-8");
                 String value = Base64.getEncoder().encodeToString(bytes);
