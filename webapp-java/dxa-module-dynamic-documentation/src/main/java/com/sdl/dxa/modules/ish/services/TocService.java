@@ -115,7 +115,7 @@ public class TocService {
 
     private static Collection<SitemapItem> fixupSiteMap(Collection<SitemapItem> toc, boolean removePageNodes) {
         fixupSiteMapRecursive(toc, removePageNodes);
-        return SortableSiteMap.sort(toc, SortableSiteMap.SORT_BY_TAXONOMY_AND_KEYWORD);
+        return SortableSiteMap.sortItem(toc, SortableSiteMap.SORT_BY_TAXONOMY_AND_KEYWORD);
     }
 
     private static void fixupSiteMapRecursive(Collection<SitemapItem> toc, boolean removePageNodes) {
