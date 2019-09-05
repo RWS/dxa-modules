@@ -62,7 +62,7 @@ public class TocServiceTest {
 
         when(webRequestContext.getLocalization()).thenReturn(new DocsLocalization());
 
-        Collection<SitemapItem> result = tocService.getToc(publicationId, sitemapId, false, 1, request,
+        Collection<SitemapItem> result = tocService.getToc(publicationId, sitemapId, false, 1, "", request,
                 webRequestContext);
         assertEquals(2, result.size());
     }
