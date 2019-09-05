@@ -30,11 +30,12 @@ public class TocService {
     @Qualifier("ishNavigationProvider")
     private IshDynamicNavigationProvider ishNavigationProvider;
 
-    @Cacheable(value = "ish", key = "{ #publicationId, #sitemapItemId, #includeAncestors, #descendantLevels }")
+    @Cacheable(value = "ish", key = "{ #publicationId, #sitemapItemId, #includeAncestors, #descendantLevels, #conditions }")
     public Collection<SitemapItem> getToc(Integer publicationId,
                                           String sitemapItemId,
                                           boolean includeAncestors,
                                           int descendantLevels,
+                                          String conditions,
                                           HttpServletRequest request,
                                           WebRequestContext webRequestContext) throws ContentProviderException {
         if (ishNavigationProvider == null) {
