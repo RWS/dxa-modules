@@ -13,6 +13,7 @@ import com.sdl.webapp.common.util.TcmUtils;
 import com.tridion.ambientdata.AmbientDataContext;
 import com.tridion.ambientdata.claimstore.ClaimStore;
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,11 @@ import org.springframework.stereotype.Service;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.ZonedDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.TimeZone;
 
 /**
  * <p>Service providing methods to  create and retrieve comments</p>
@@ -81,14 +86,10 @@ public class UgcService {
      * @param metadata      Meta data
      * @return {@link Comment}
      */
-    public Comment postComment(int publicationId, int pageId, String username, String email, String content,
+    public Comment postComment(int publicationId, int pageId, @NotNull String username, String email, String content,
                                int parentId, Map<String, String> metadata) {
-        if (publicationId == 0 || pageId == 0) {
-            log.warn("Cannot post comment for empty/NaN publicationId/pageId");
-            return null;
-        }
-        if (publicationId < 0 || pageId < 0) {
-            log.warn("Cannot post comment for negative publicationId/pageId");
+        if (publicationId <= 0 || pageId <= 0) {
+            log.warn("Cannot post comment for negative or zero publicationId {} or pageId {}", publicationId, pageId);
             throw new CannotProcessCommentException("Cannot post comment for negative publicationId/pageId");
         }
         try {
@@ -98,7 +99,7 @@ public class UgcService {
                 claimStore.put(new URI("taf:claim:contentdelivery:webservice:post:allowed"), true);
             }
         } catch (URISyntaxException e) {
-            log.error("Error while Storing Claims", e);
+            log.error("Error while adding Claims for user " + username, e);
         }
         String pageTcmUri = TcmUtils.buildPageTcmUri(publicationId, pageId);
         try {

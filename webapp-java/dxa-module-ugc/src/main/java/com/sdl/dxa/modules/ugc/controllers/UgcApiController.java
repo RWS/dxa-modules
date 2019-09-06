@@ -100,19 +100,23 @@ public class UgcApiController {
 
         addPubIdTitleLangToCommentMetadata(input, metadata);
 
-        String userId = input.getUserName();
-        if (StringUtils.isEmpty(userId)) {
-            userId = "Anonymous";
+        String userName = input.getUserName();
+        if (StringUtils.isEmpty(userName)) {
+            userName = "Anonymous";
         }
-
-        Comment comment = ugcService.postComment(input.getPublicationId(),
-                input.getPageId(),
-                userId,
-                input.getEmail(),
-                input.getContent(),
-                Ints.tryParse(input.getParentId()),
-                metadata);
-        return comment;
+        try {
+            Comment comment = ugcService.postComment(input.getPublicationId(),
+                    input.getPageId(),
+                    userName,
+                    input.getEmail(),
+                    input.getContent(),
+                    Ints.tryParse(input.getParentId()),
+                    metadata);
+            return comment;
+        } catch (Exception ex) {
+            log.error("Cannot add a comment for page/" + input.getPublicationId() + "/" + input.getPageId(), ex);
+            return null;
+        }
     }
 
     @ExceptionHandler({CannotProcessCommentException.class, CannotFetchCommentsException.class})
