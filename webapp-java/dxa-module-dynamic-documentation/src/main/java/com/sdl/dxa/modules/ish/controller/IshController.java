@@ -178,13 +178,12 @@ public class IshController {
 
     @RequestMapping(method = {GET, POST}, value = "/api/toc/{publicationId}", produces = {APPLICATION_JSON_VALUE})
     @ResponseBody
-    @Cacheable(value = "ish", key = "{ #publicationId, #conditions }")
     public Collection<SitemapItem> getRootToc(@PathVariable("publicationId") Integer publicationId,
                                               @RequestParam(value = "conditions", defaultValue = "") String conditions,
                                               HttpServletRequest request) throws ContentProviderException, IOException {
         setConditions(publicationId, conditions);
         publicationService.checkPublicationOnline(publicationId, webRequestContext.getLocalization());
-        return tocService.getToc(publicationId, null, false, 1, request, webRequestContext);
+        return tocService.getToc(publicationId, null, false, 1, conditions, request, webRequestContext);
     }
 
     @RequestMapping(method = {GET, POST}, value = "/api/toc/{publicationId}/{sitemapItemId}", produces = {APPLICATION_JSON_VALUE})
@@ -196,7 +195,7 @@ public class IshController {
                                           HttpServletRequest request) throws ContentProviderException, IOException {
         setConditions(publicationId, conditions);
         publicationService.checkPublicationOnline(publicationId, webRequestContext.getLocalization());
-        return tocService.getToc(publicationId, sitemapItemId, includeAncestors, 1, request,  webRequestContext);
+        return tocService.getToc(publicationId, sitemapItemId, includeAncestors, 1, conditions, request,  webRequestContext);
     }
 
     @RequestMapping(method = GET, value = "/api/conditions/{publicationId:[\\d]+}", produces = {APPLICATION_JSON_VALUE})
