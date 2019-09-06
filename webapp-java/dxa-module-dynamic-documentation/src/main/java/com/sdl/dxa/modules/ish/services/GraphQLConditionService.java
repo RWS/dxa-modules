@@ -32,11 +32,13 @@ public class GraphQLConditionService implements ConditionService {
     private ApiClientProvider pcaClientProvider;
 
     @Override
-    @Cacheable(value = "ish", key = "{ #publicationId, #localization.id }", condition = "#localization != null && #localization.id != null")
+    @Cacheable(value = "ish",
+            key = "{ #publicationId, #localization.id }",
+            condition = "#localization != null && #localization.id != null",
+            sync = true)
     public String getConditions(Integer publicationId, Localization localization) {
-        Map<String, Map> objectConditions = null;
         try {
-            objectConditions = getObjectConditions(publicationId, localization);
+            Map<String, Map> objectConditions = getObjectConditions(publicationId, localization);
             return objectMapper.writeValueAsString(objectConditions);
         } catch (Exception e) {
             throw new IshServiceException("Error processing conditions for publication " + publicationId, e);
@@ -62,8 +64,7 @@ public class GraphQLConditionService implements ConditionService {
         for (String metadataName : metadataNames) {
             Publication pub = client.getPublication(namespace, publicationId, "requiredMeta:" + metadataName, null);
             if (pub == null || pub.getCustomMetas() == null) {
-                throw new DxaItemNotFoundException(
-                        "Metadata '" + metadataName + "' is not found for publication " + publicationId + ".");
+                throw new DxaItemNotFoundException("Metadata '" + metadataName + "' is not found for publication " + publicationId);
             }
             List<CustomMetaEdge> edges = pub.getCustomMetas().getEdges();
 
