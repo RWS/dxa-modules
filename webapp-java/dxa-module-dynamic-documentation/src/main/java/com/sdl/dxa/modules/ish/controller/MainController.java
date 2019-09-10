@@ -11,6 +11,7 @@ import com.sdl.webapp.common.impl.localization.DocsLocalization;
 import com.sdl.webapp.common.impl.model.ErrorMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,14 +26,12 @@ import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isNumeric;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
-;
-
 /**
  * Main controller.
  */
 @Controller
+@Profile("dxa.docs.enabled")
 public class MainController {
-
     private static final String ACTIVE_FEATURES = "activeFeatures";
     private static final String CONTENT_IS_EVALUABLE = "contentIsEvaluable";
 

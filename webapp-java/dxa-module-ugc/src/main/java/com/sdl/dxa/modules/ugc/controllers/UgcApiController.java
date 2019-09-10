@@ -87,7 +87,7 @@ public class UgcApiController {
             consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Comment postComment(@RequestBody PostedComment input) {
-        if (input.getParentId() == null) {
+        if (input.getParentId() == null || Ints.tryParse(input.getParentId()) == null) {
             throw new CannotProcessCommentException("Please provide parentId or 0");
         }
         Map<String, String> metadata = new HashMap<>();

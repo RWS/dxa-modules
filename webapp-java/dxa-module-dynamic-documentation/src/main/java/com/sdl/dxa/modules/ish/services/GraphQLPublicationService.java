@@ -13,7 +13,6 @@ import com.sdl.web.pca.client.contentmodel.generated.PublicationConnection;
 import com.sdl.web.pca.client.contentmodel.generated.PublicationEdge;
 import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.controller.exception.NotFoundException;
-import org.dd4t.providers.PublicationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Profile;
@@ -76,26 +75,43 @@ public class GraphQLPublicationService implements PublicationService {
         return false;
     }
 
-
-    public void checkPublicationOnline(int publicationId, Localization localization) {
-        ApiClient client = apiClientProvider.getClient();
+    private void checkPublicationOnlineInternal(int publicationId, Localization localization, int attempt) {
+        attempt--;
+        if (attempt < 0) {
+            throw new NotFoundException("Unable to find publication " + publicationId);
+        }
+        ContentNamespace contentNamespace = GraphQLUtils.convertUriToGraphQLContentNamespace(localization.getCmUriScheme());
         boolean isOffline = false;
         try {
-            ContentNamespace contentNamespace = GraphQLUtils.convertUriToGraphQLContentNamespace(localization.getCmUriScheme());
-            Publication publication = client.getPublication(contentNamespace, publicationId,
-                    "requiredMeta:" + PublicationOnlineStatusMeta, null);
-            isOffline = publication == null
-                    || publication.getCustomMetas() == null
-                    || !publication.getCustomMetas().getEdges().stream()
-                        .anyMatch(customMetaEdge -> PublicationOnlineValue.equals(customMetaEdge.getNode().getValue()));
+            Publication publication = apiClientProvider.getClient().getPublication(
+                    contentNamespace,
+                    publicationId,
+                    "requiredMeta:" + PublicationOnlineStatusMeta,
+                    null);
+            isOffline = publication == null ||
+                        publication.getCustomMetas() == null ||
+                        !publication.getCustomMetas()
+                                .getEdges()
+                                .stream()
+                                .anyMatch(meta -> PublicationOnlineValue.equals(meta.getNode().getValue()));
         } catch (Exception e) {
-            LOG.error("Couldn't find publication metadata for id: " + publicationId, e);
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException ex) {
+                Thread.currentThread().interrupt();
+                LOG.error("Interrupted");
+            }
+            checkPublicationOnlineInternal(publicationId, localization, attempt);
+            LOG.error("Couldn't find publication metadata for id: " + publicationId + ", attempt: " + attempt, e);
         }
         if (isOffline) {
             throw new NotFoundException("Unable to find publication " + publicationId);
         }
     }
 
+    public void checkPublicationOnline(int publicationId, Localization localization) {
+        checkPublicationOnlineInternal(publicationId, localization, 5);
+    }
 
     private com.sdl.dxa.modules.ish.model.Publication buildPublicationFrom(Publication publication) {
         com.sdl.dxa.modules.ish.model.Publication result = new com.sdl.dxa.modules.ish.model.Publication();
