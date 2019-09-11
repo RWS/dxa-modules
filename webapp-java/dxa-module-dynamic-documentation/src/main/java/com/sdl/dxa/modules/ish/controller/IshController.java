@@ -55,6 +55,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.sdl.webapp.common.api.serialization.json.filter.IgnoreByNameInRequestFilter.ignoreByName;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -183,7 +184,8 @@ public class IshController {
                                               HttpServletRequest request) throws ContentProviderException, IOException {
         setConditions(publicationId, conditions);
         publicationService.checkPublicationOnline(publicationId, webRequestContext.getLocalization());
-        return tocService.getToc(publicationId, null, false, 1, conditions, request, webRequestContext);
+        ignoreByName(request, "XpmMetadata", "XpmPropertyMetadata");
+        return tocService.getToc(publicationId, null, false, 1, conditions, webRequestContext);
     }
 
     @RequestMapping(method = {GET, POST}, value = "/api/toc/{publicationId}/{sitemapItemId}", produces = {APPLICATION_JSON_VALUE})
@@ -195,7 +197,8 @@ public class IshController {
                                           HttpServletRequest request) throws ContentProviderException, IOException {
         setConditions(publicationId, conditions);
         publicationService.checkPublicationOnline(publicationId, webRequestContext.getLocalization());
-        return tocService.getToc(publicationId, sitemapItemId, includeAncestors, 1, conditions, request,  webRequestContext);
+        ignoreByName(request, "XpmMetadata", "XpmPropertyMetadata");
+        return tocService.getToc(publicationId, sitemapItemId, includeAncestors, 1, conditions, webRequestContext);
     }
 
     @RequestMapping(method = GET, value = "/api/conditions/{publicationId:[\\d]+}", produces = {APPLICATION_JSON_VALUE})

@@ -25,14 +25,11 @@ import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isNumeric;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
-;
-
 /**
  * Main controller.
  */
 @Controller
 public class MainController {
-
     private static final String ACTIVE_FEATURES = "activeFeatures";
     private static final String CONTENT_IS_EVALUABLE = "contentIsEvaluable";
 

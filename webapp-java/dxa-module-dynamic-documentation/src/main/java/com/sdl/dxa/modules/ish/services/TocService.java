@@ -14,11 +14,12 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.stream.Collectors;
-
-import static com.sdl.webapp.common.api.serialization.json.filter.IgnoreByNameInRequestFilter.ignoreByName;
 
 /**
  * TocService class.
@@ -30,13 +31,12 @@ public class TocService {
     @Qualifier("ishNavigationProvider")
     private IshDynamicNavigationProvider ishNavigationProvider;
 
-    @Cacheable(value = "ish", key = "{ #publicationId, #sitemapItemId, #includeAncestors, #descendantLevels, #conditions }")
+    @Cacheable(value = "ish", key = "{ #publicationId, #sitemapItemId, #includeAncestors, #descendantLevels, #conditions }", sync = true)
     public Collection<SitemapItem> getToc(Integer publicationId,
                                           String sitemapItemId,
                                           boolean includeAncestors,
                                           int descendantLevels,
                                           String conditions,
-                                          HttpServletRequest request,
                                           WebRequestContext webRequestContext) throws ContentProviderException {
         if (ishNavigationProvider == null) {
             String message = "On-Demand Navigation is not enabled because current navigation provider doesn't " +
@@ -49,8 +49,6 @@ public class TocService {
 
         Localization localization = webRequestContext.getLocalization();
 
-        ignoreByName(request, "XpmMetadata", "XpmPropertyMetadata");
-
         NavigationFilter navigationFilter = new NavigationFilter();
         navigationFilter.setWithAncestors(includeAncestors);
         navigationFilter.setDescendantLevels(descendantLevels);
@@ -58,46 +56,43 @@ public class TocService {
         try {
             navigationSubtree = new ArrayList(ishNavigationProvider.getNavigationSubtree(sitemapItemId, navigationFilter, localization));
         } catch (DxaItemNotFoundException e) {
-            log.warn("Such item (" + sitemapItemId + ") for publication " + publicationId + " is not found", e);
-            throw e;
+            String message = "Such item (" + sitemapItemId + ") for publication " + publicationId + " is not found";
+            throw new DxaItemNotFoundException(message, e);
         }
 
-        if (includeAncestors)
-        {
-            // if we are including ancestors we also need to get all the direct siblings for each
-            // level in the hierarchy.
+        if (!includeAncestors) {
+            return fixupSiteMap(navigationSubtree, true);
+        }
+        // if we are including ancestors we also need to get all the direct siblings for each
+        // level in the hierarchy.
 
-            SitemapItem node = findNode(navigationSubtree, sitemapItemId);
+        SitemapItem node = findNode(navigationSubtree, sitemapItemId);
 
-            // for each parent node get sibling nodes
-            while (node != null && node.getParent() != null)
-            {
-                NavigationFilter explicitFilter = new NavigationFilter();
-                explicitFilter.setWithAncestors(false);
-                explicitFilter.setDescendantLevels(1);
+        // for each parent node get sibling nodes
+        while (node != null && node.getParent() != null) {
+            NavigationFilter explicitFilter = new NavigationFilter();
+            explicitFilter.setWithAncestors(false);
+            explicitFilter.setDescendantLevels(1);
 
-                Collection<SitemapItem> siblings = ishNavigationProvider.getNavigationSubtree(
-                        node.getParent().getId(),
-                        explicitFilter,
-                        localization
-                );
+            Collection<SitemapItem> siblings = ishNavigationProvider.getNavigationSubtree(node.getParent().getId(),
+                    explicitFilter,
+                    localization);
 
-                HashSet<String> children = new HashSet<String>();
-                for(SitemapItem item : node.getParent().getItems())
-                {
-                    children.add(item.getId());
-                }
-                // filter out duplicates and Page types since we don't wish to include them in TOC
-                String nodeId = node.getId();
-                siblings = siblings
-                        .stream()
-                        .filter(sibling -> !sibling.getId().equals(nodeId) && !"Page".equals(sibling.getType()) && !children.contains(sibling.getId())).collect(Collectors.toList());
-                for (SitemapItem sibling : siblings) {
-                    node.getParent().getItems().add(sibling);
-                }
-
-                node = node.getParent();
+            HashSet<String> children = new HashSet<>();
+            for(SitemapItem item : node.getParent().getItems()) {
+                children.add(item.getId());
             }
+            // filter out duplicates and Page types since we don't wish to include them in TOC
+            String nodeId = node.getId();
+            siblings = siblings
+                    .stream()
+                    .filter(sibling -> !sibling.getId().equals(nodeId) && !"Page".equals(sibling.getType()) && !children.contains(sibling.getId()))
+                    .collect(Collectors.toList());
+            for (SitemapItem sibling : siblings) {
+                node.getParent().getItems().add(sibling);
+            }
+
+            node = node.getParent();
         }
 
         return fixupSiteMap(navigationSubtree, true);

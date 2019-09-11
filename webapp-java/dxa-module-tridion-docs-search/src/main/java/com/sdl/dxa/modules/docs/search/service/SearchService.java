@@ -42,16 +42,14 @@ public class SearchService {
      */
     public SearchResultSet search(String parametersJson) throws SearchException {
         SearchParameters searchParameters = parseParameters(parametersJson);
-
         DefaultSearcher searcher = createSearcher(searchParameters);
-
         Criteria searchCriteria = searcherConfigurer.buildCriteria(searchParameters);
         SearchQueryResultSet result = null;
         try {
             result = searcher.search(searchCriteria);
         } catch (QueryException e) {
-            log.error("Could not perform search for criteria {}", searchCriteria);
-            throw new SearchException("Could not perform search for criteria " + searchCriteria, e);
+            log.error("Could not perform search for parameters {}", parametersJson, e);
+            throw new SearchException("Could not perform search for parameters " + parametersJson, e);
         }
         return buildSearchResultSet(result, searchParameters);
     }

@@ -13,7 +13,6 @@ import com.sdl.web.pca.client.contentmodel.generated.PublicationConnection;
 import com.sdl.web.pca.client.contentmodel.generated.PublicationEdge;
 import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.controller.exception.NotFoundException;
-import org.dd4t.providers.PublicationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Profile;
@@ -76,26 +75,48 @@ public class GraphQLPublicationService implements PublicationService {
         return false;
     }
 
-
-    public void checkPublicationOnline(int publicationId, Localization localization) {
-        ApiClient client = apiClientProvider.getClient();
+    private void checkPublicationOnlineInternal(int publicationId, Localization localization, int attempt, Exception[] exceptionHolder) {
+        attempt--;
+        if (attempt < 0) {
+            String message = "Unable to find publication or its metadata for publication " + publicationId + " after 3 attempts";
+            if (exceptionHolder[0] != null) throw new NotFoundException(message, exceptionHolder[0]);
+            else throw new NotFoundException(message);
+        }
+        ContentNamespace contentNamespace = GraphQLUtils.convertUriToGraphQLContentNamespace(localization.getCmUriScheme());
         boolean isOffline = false;
         try {
-            ContentNamespace contentNamespace = GraphQLUtils.convertUriToGraphQLContentNamespace(localization.getCmUriScheme());
-            Publication publication = client.getPublication(contentNamespace, publicationId,
-                    "requiredMeta:" + PublicationOnlineStatusMeta, null);
-            isOffline = publication == null
-                    || publication.getCustomMetas() == null
-                    || !publication.getCustomMetas().getEdges().stream()
-                        .anyMatch(customMetaEdge -> PublicationOnlineValue.equals(customMetaEdge.getNode().getValue()));
+            Publication publication = apiClientProvider.getClient().getPublication(
+                    contentNamespace,
+                    publicationId,
+                    "requiredMeta:" + PublicationOnlineStatusMeta,
+                    null);
+            isOffline = publication == null ||
+                        publication.getCustomMetas() == null ||
+                        !publication.getCustomMetas()
+                                .getEdges()
+                                .stream()
+                                .anyMatch(meta -> PublicationOnlineValue.equals(meta.getNode().getValue()));
         } catch (Exception e) {
-            LOG.error("Couldn't find publication metadata for id: " + publicationId, e);
+            if (exceptionHolder[0] == null) exceptionHolder[0] = e;
+            try {
+                Thread.sleep(200);
+                checkPublicationOnlineInternal(publicationId, localization, attempt, exceptionHolder);
+                LOG.error("Couldn't find publication metadata for id: " + publicationId + ", attempt: " + attempt);
+            } catch (InterruptedException ex) {
+                Thread.currentThread().interrupt();
+                LOG.error("Interrupted");
+                throw e;
+            }
         }
         if (isOffline) {
             throw new NotFoundException("Unable to find publication " + publicationId);
         }
     }
 
+    public void checkPublicationOnline(int publicationId, Localization localization) {
+        Exception[] exceptionHolder = new Exception[1];
+        checkPublicationOnlineInternal(publicationId, localization, 3, exceptionHolder);
+    }
 
     private com.sdl.dxa.modules.ish.model.Publication buildPublicationFrom(Publication publication) {
         com.sdl.dxa.modules.ish.model.Publication result = new com.sdl.dxa.modules.ish.model.Publication();
