@@ -31,7 +31,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.context.annotation.Profile;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.server.ServletServerHttpResponse;
@@ -67,7 +66,6 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
  */
 @Slf4j
 @Controller
-@Profile("dxa.docs.enabled")
 public class IshController {
     @Autowired
     private WebRequestContext webRequestContext;
