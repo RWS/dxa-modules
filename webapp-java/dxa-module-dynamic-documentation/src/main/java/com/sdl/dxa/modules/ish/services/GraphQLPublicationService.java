@@ -75,10 +75,12 @@ public class GraphQLPublicationService implements PublicationService {
         return false;
     }
 
-    private void checkPublicationOnlineInternal(int publicationId, Localization localization, int attempt) {
+    private void checkPublicationOnlineInternal(int publicationId, Localization localization, int attempt, Exception[] exceptionHolder) {
         attempt--;
         if (attempt < 0) {
-            throw new NotFoundException("Unable to find publication " + publicationId);
+            String message = "Unable to find publication or its metadata for publication " + publicationId + " after 3 attempts";
+            if (exceptionHolder[0] != null) throw new NotFoundException(message, exceptionHolder[0]);
+            else throw new NotFoundException(message);
         }
         ContentNamespace contentNamespace = GraphQLUtils.convertUriToGraphQLContentNamespace(localization.getCmUriScheme());
         boolean isOffline = false;
@@ -95,14 +97,16 @@ public class GraphQLPublicationService implements PublicationService {
                                 .stream()
                                 .anyMatch(meta -> PublicationOnlineValue.equals(meta.getNode().getValue()));
         } catch (Exception e) {
+            if (exceptionHolder[0] == null) exceptionHolder[0] = e;
             try {
                 Thread.sleep(200);
+                checkPublicationOnlineInternal(publicationId, localization, attempt, exceptionHolder);
+                LOG.error("Couldn't find publication metadata for id: " + publicationId + ", attempt: " + attempt);
             } catch (InterruptedException ex) {
                 Thread.currentThread().interrupt();
                 LOG.error("Interrupted");
+                throw e;
             }
-            checkPublicationOnlineInternal(publicationId, localization, attempt);
-            LOG.error("Couldn't find publication metadata for id: " + publicationId + ", attempt: " + attempt, e);
         }
         if (isOffline) {
             throw new NotFoundException("Unable to find publication " + publicationId);
@@ -110,7 +114,8 @@ public class GraphQLPublicationService implements PublicationService {
     }
 
     public void checkPublicationOnline(int publicationId, Localization localization) {
-        checkPublicationOnlineInternal(publicationId, localization, 5);
+        Exception[] exceptionHolder = new Exception[1];
+        checkPublicationOnlineInternal(publicationId, localization, 3, exceptionHolder);
     }
 
     private com.sdl.dxa.modules.ish.model.Publication buildPublicationFrom(Publication publication) {
