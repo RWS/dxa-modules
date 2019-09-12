@@ -9,8 +9,6 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpServletRequest;
-
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 /**
@@ -25,7 +23,7 @@ public class DynamicDocumentationPageController extends BaseController {
     private MainController mainController;
 
     @RequestMapping(value = {"/"}, method = GET)
-    public String home(HttpServletRequest request) throws ContentProviderException {
+    public String home() {
         return mainController.home();
     }
 }
