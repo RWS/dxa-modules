@@ -115,7 +115,7 @@ public class GraphQLSitemapService implements SitemapService {
 
         subtree = onDemandNavigationModelProvider.getNavigationSubtree(requestDto);
 
-        return subtree.orElseGet(null);
+        return subtree.get();
     }
 
     private static List<SitemapItemModelData> fixupSitemap(Collection<SitemapItemModelData> toc, boolean removePageNodes) {
