@@ -9,6 +9,7 @@ import com.sdl.dxa.modules.ugc.data.PostedComment;
 import com.sdl.dxa.modules.ugc.data.PubIdTitleLang;
 import com.sdl.dxa.modules.ugc.exceptions.CannotFetchCommentsException;
 import com.sdl.dxa.modules.ugc.exceptions.CannotProcessCommentException;
+import com.sdl.dxa.performance.Performance;
 import com.sdl.webapp.common.controller.ControllerUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -104,7 +105,7 @@ public class UgcApiController {
         if (StringUtils.isEmpty(userName)) {
             userName = "Anonymous";
         }
-        try {
+        try (Performance perf = new Performance(1_000L, "Post comment")) {
             Comment comment = ugcService.postComment(input.getPublicationId(),
                     input.getPageId(),
                     userName,
