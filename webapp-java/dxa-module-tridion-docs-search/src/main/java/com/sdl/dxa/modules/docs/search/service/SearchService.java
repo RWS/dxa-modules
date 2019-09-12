@@ -45,8 +45,9 @@ public class SearchService {
         DefaultSearcher searcher = createSearcher(searchParameters);
         Criteria searchCriteria = searcherConfigurer.buildCriteria(searchParameters);
         SearchQueryResultSet result = null;
+        QueryException[] exception = new QueryException[1];
         try {
-            result = searcher.search(searchCriteria);
+            result = getSearchResultsWithRetry(searcher, searchCriteria, 3, exception);
         } catch (QueryException e) {
             log.error("Could not perform search for parameters {}", parametersJson, e);
             throw new SearchException("Could not perform search for parameters " + parametersJson, e);
@@ -54,21 +55,37 @@ public class SearchService {
         return buildSearchResultSet(result, searchParameters);
     }
 
+    private SearchQueryResultSet getSearchResultsWithRetry(DefaultSearcher searcher, Criteria searchCriteria, int attempt, QueryException[] exception) throws QueryException {
+        while (attempt > 0) {
+            attempt--;
+            try {
+                return searcher.search(searchCriteria);
+            } catch (QueryException ex) {
+                if (exception[0] == null) exception[0] = ex;
+            }
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                log.error("Interrupted");
+                Thread.currentThread().interrupt();
+                break;
+            }
+        }
+        throw new QueryException("Could not perform search " + searchCriteria + " after 3 attempts", exception[0]);
+    }
+
     DefaultSearcher createSearcher(SearchParameters parameters) throws SearchException {
-        DefaultSearcher searcher = null;
         try {
-            searcher = DefaultSearcher.newSearcher();
+            DefaultSearcher searcher = DefaultSearcher.newSearcher();
+            searcher.withResultFilter(SearchResultFilter
+                    .create()
+                    .withResultSetRange(parameters.getStartIndex(), parameters.getStartIndex() + parameters.getCount())
+                    .enableHighlighting());
+            return searcher;
         } catch (QueryException e) {
             String message = "Could not create searcher for parameters: " + parameters;
             throw new SearchException(message, e);
         }
-        searcher.withResultFilter(SearchResultFilter.create()
-                        .withResultSetRange(parameters.getStartIndex(),
-                                parameters.getStartIndex() + parameters.getCount()
-                        )
-                        .enableHighlighting()
-        );
-        return searcher;
     }
 
     SearchParameters parseParameters(String parametersJson) {

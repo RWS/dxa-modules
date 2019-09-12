@@ -13,6 +13,7 @@ import com.sdl.dxa.modules.ish.services.PublicationService;
 import com.sdl.dxa.modules.ish.services.TocService;
 import com.sdl.dxa.modules.ish.services.TridionDocsContentService;
 import com.sdl.dxa.modules.ish.utils.ConditionUtil;
+import com.sdl.dxa.performance.Performance;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.content.ContentProviderException;
 import com.sdl.webapp.common.api.content.Dxa22ContentProvider;
@@ -121,15 +122,17 @@ public class IshController {
                                 @RequestParam(value = "conditions", defaultValue = "") String conditions,
                                 final HttpServletRequest request,
                                 final HttpServletResponse response) throws ContentProviderException, IOException {
-        setConditions(publicationId, conditions);
-        final Localization localization = webRequestContext.getLocalization();
-        publicationService.checkPublicationOnline(publicationId, localization);
-        PageModel page = (PageModel) pageService.getPage(pageId, localization);
-        if (page == null) {
-            response.setStatus(NOT_FOUND.value());
-            throw new ResourceNotFoundException(String.format("Item '%s' not found for Localization '%s'", pageId, localization.getId()));
+        try (Performance perf = new Performance(1_000L, "getPage")) {
+            setConditions(publicationId, conditions);
+            final Localization localization = webRequestContext.getLocalization();
+            publicationService.checkPublicationOnline(publicationId, localization);
+            PageModel page = (PageModel) pageService.getPage(pageId, localization);
+            if (page == null) {
+                response.setStatus(NOT_FOUND.value());
+                throw new ResourceNotFoundException(String.format("Item '%s' not found for Localization '%s'", pageId, localization.getId()));
+            }
+            return dataFormatters.view(page);
         }
-        return dataFormatters.view(page);
     }
 
     /**
@@ -154,7 +157,8 @@ public class IshController {
             throw new ContentProviderException("Invalid request, no required binaryId: " + binaryId, ex);
         }
 
-        try (final ServletServerHttpResponse res = new ServletServerHttpResponse(response)) {
+        try (Performance perf = new Performance(1_000L, "getBinaryResource");
+             ServletServerHttpResponse res = new ServletServerHttpResponse(response)) {
             Localization localization = webRequestContext.getLocalization();
             StaticContentItem content = contentProvider.getStaticContent(binaryIdInt, localization);
             String mimeType = MimeUtils.getMimeType("file" + content.getContentType());
@@ -176,7 +180,9 @@ public class IshController {
     @RequestMapping(method = GET, value = "/api/publications", produces = {APPLICATION_JSON_VALUE})
     @ResponseBody
     public List<Publication> getPublicationList() throws IshServiceException {
-        return publicationService.getPublicationList(webRequestContext.getLocalization());
+        try(Performance perf = new Performance(1_000L, "getPublicationList")) {
+            return publicationService.getPublicationList(webRequestContext.getLocalization());
+        }
     }
 
     @RequestMapping(method = {GET, POST}, value = "/api/toc/{publicationId}", produces = {APPLICATION_JSON_VALUE})
@@ -184,10 +190,12 @@ public class IshController {
     public Collection<SitemapItem> getRootToc(@PathVariable("publicationId") Integer publicationId,
                                               @RequestParam(value = "conditions", defaultValue = "") String conditions,
                                               HttpServletRequest request) throws ContentProviderException, IOException {
-        setConditions(publicationId, conditions);
-        publicationService.checkPublicationOnline(publicationId, webRequestContext.getLocalization());
-        ignoreByName(request, "XpmMetadata", "XpmPropertyMetadata");
-        return tocService.getToc(publicationId, null, false, 1, conditions, webRequestContext);
+        try(Performance perf = new Performance(1_000L, "getRootToc")) {
+            setConditions(publicationId, conditions);
+            publicationService.checkPublicationOnline(publicationId, webRequestContext.getLocalization());
+            ignoreByName(request, "XpmMetadata", "XpmPropertyMetadata");
+            return tocService.getToc(publicationId, null, false, 1, conditions, webRequestContext);
+        }
     }
 
     @RequestMapping(method = {GET, POST}, value = "/api/toc/{publicationId}/{sitemapItemId}", produces = {APPLICATION_JSON_VALUE})
@@ -197,16 +205,20 @@ public class IshController {
                                           @RequestParam(value = "includeAncestors", required = false,  defaultValue = "false") boolean includeAncestors,
                                           @RequestParam(value = "conditions", defaultValue = "") String conditions,
                                           HttpServletRequest request) throws ContentProviderException, IOException {
-        setConditions(publicationId, conditions);
-        publicationService.checkPublicationOnline(publicationId, webRequestContext.getLocalization());
-        ignoreByName(request, "XpmMetadata", "XpmPropertyMetadata");
-        return tocService.getToc(publicationId, sitemapItemId, includeAncestors, 1, conditions, webRequestContext);
+        try(Performance perf = new Performance(1_000L, "getToc")) {
+            setConditions(publicationId, conditions);
+            publicationService.checkPublicationOnline(publicationId, webRequestContext.getLocalization());
+            ignoreByName(request, "XpmMetadata", "XpmPropertyMetadata");
+            return tocService.getToc(publicationId, sitemapItemId, includeAncestors, 1, conditions, webRequestContext);
+        }
     }
 
     @RequestMapping(method = GET, value = "/api/conditions/{publicationId:[\\d]+}", produces = {APPLICATION_JSON_VALUE})
     @ResponseBody
     public String getPublicationConditions(@PathVariable("publicationId") Integer publicationId) {
-        return conditionService.getConditions(publicationId, webRequestContext.getLocalization());
+        try(Performance perf = new Performance(1_000L, "getPublicationConditions")) {
+            return conditionService.getConditions(publicationId, webRequestContext.getLocalization());
+        }
     }
 
     /** * Get page model using the json format by given criteria.
@@ -228,11 +240,13 @@ public class IshController {
     public Item getTopicIdInTargetPublication(@PathVariable("publicationId") Integer publicationId,
                                               @PathVariable("ishFieldValue") String ishFieldValue)
             throws ContentProviderException {
-        publicationService.checkPublicationOnline(publicationId, webRequestContext.getLocalization());
-        if (Strings.isNullOrEmpty(ishFieldValue)) {
-            throw new NotFoundException("Unable to use empty 'ishlogicalref.object.id' value as a search criteria");
+        try(Performance perf = new Performance(1_000L, "getTopicIdInTargetPublication")) {
+            publicationService.checkPublicationOnline(publicationId, webRequestContext.getLocalization());
+            if (Strings.isNullOrEmpty(ishFieldValue)) {
+                throw new NotFoundException("Unable to use empty 'ishlogicalref.object.id' value as a search criteria");
+            }
+            return tridionDocsContentService.getPageIdByIshLogicalReference(publicationId, ishFieldValue);
         }
-        return tridionDocsContentService.getPageIdByIshLogicalReference(publicationId, ishFieldValue);
     }
 
     @ExceptionHandler(value = Exception.class)

@@ -8,6 +8,7 @@ import com.sdl.dxa.modules.ugc.data.User;
 import com.sdl.dxa.modules.ugc.exceptions.CannotFetchCommentsException;
 import com.sdl.dxa.modules.ugc.exceptions.CannotProcessCommentException;
 import com.sdl.dxa.modules.ugc.model.JsonZonedDateTime;
+import com.sdl.dxa.performance.Performance;
 import com.sdl.web.ugc.Status;
 import com.sdl.webapp.common.util.TcmUtils;
 import com.tridion.ambientdata.AmbientDataContext;
@@ -67,7 +68,7 @@ public class UgcService {
                 .withStatuses(statusStatuses);
 
         String pageTcmUri = TcmUtils.buildPageTcmUri(publicationId, pageId);
-        try {
+        try (Performance perf = new Performance(1_000L, "getComments stream")) {
             return convert(ugcCommentApi.retrieveThreadedComments(pageTcmUri, filter, descending, true));
         } catch (Exception ex) {
             throw new CannotFetchCommentsException("Cannot fetch comments for " + pageTcmUri, ex);
