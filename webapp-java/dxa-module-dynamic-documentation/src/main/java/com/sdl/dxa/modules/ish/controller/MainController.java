@@ -11,6 +11,7 @@ import com.sdl.webapp.common.impl.localization.DocsLocalization;
 import com.sdl.webapp.common.impl.model.ErrorMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,6 +30,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
  * Main controller.
  */
 @Controller
+@Profile("dxa.docs.enabled")
 public class MainController {
     private static final String ACTIVE_FEATURES = "activeFeatures";
     private static final String CONTENT_IS_EVALUABLE = "contentIsEvaluable";
@@ -58,9 +60,9 @@ public class MainController {
      * @return          Home page for Docs (all the publications)
      * @throws          ContentProviderException in case if data retrieving fails
      */
-    @RequestMapping(value = {"/home", "/publications*", "/publications/{value:.+$}"}, method = GET)
-    public String home(HttpServletRequest request) throws ContentProviderException {
-        return getHomeView(null, null, request);
+    @RequestMapping(value = {"/home", "/publications/**", "/publications/{value:.+$}"}, method = GET)
+    public String home(){
+        return getHomeView();
     }
 
     /**
@@ -74,7 +76,8 @@ public class MainController {
     @RequestMapping(value = "/{publicationId:[0-9]+}", method = GET)
     public String home(@PathVariable("publicationId") String publicationId,
                        HttpServletRequest request) throws ContentProviderException {
-        return getHomeView(publicationId, null, request);
+        setPageModelOnRequest(publicationId, null, request);
+        return getHomeView();
     }
 
     /**
@@ -90,11 +93,11 @@ public class MainController {
     public String home(@PathVariable("publicationId") String publicationId,
                        @PathVariable("pageId") String pageId,
                        HttpServletRequest request) throws ContentProviderException {
-        return getHomeView(publicationId, pageId, request);
+        setPageModelOnRequest(publicationId, pageId, request);
+        return getHomeView();
     }
 
-    private String getHomeView(String publicationId, String pageId, HttpServletRequest request) throws ContentProviderException {
-        setPageModelOnRequest(publicationId, pageId, request);
+    private String getHomeView() {
         return "home";
     }
 

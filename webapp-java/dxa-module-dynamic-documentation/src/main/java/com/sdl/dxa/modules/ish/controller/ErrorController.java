@@ -1,6 +1,7 @@
 package com.sdl.dxa.modules.ish.controller;
 
 import com.sdl.webapp.common.impl.model.ErrorMessage;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,7 @@ import static org.apache.http.HttpStatus.SC_UNAUTHORIZED;
  * Handles errors that can occur in application.
  */
 @Controller
+@Profile("dxa.docs.enabled")
 public class ErrorController {
 
     @RequestMapping(value = "error", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
