@@ -105,15 +105,17 @@ public class UgcApiController {
         if (StringUtils.isEmpty(userName)) {
             userName = "Anonymous";
         }
-        Comment comment = ugcService.postComment(input.getPublicationId(),
-                input.getPageId(),
-                userName,
-                input.getEmail(),
-                input.getContent(),
-                Ints.tryParse(input.getParentId()),
-                metadata);
 
-        return comment;
+        try (Performance perf = new Performance(1_000L, "Post comment")) {
+            Comment comment = ugcService.postComment(input.getPublicationId(),
+                    input.getPageId(),
+                    userName,
+                    input.getEmail(),
+                    input.getContent(),
+                    Ints.tryParse(input.getParentId()),
+                    metadata);
+            return comment;
+        }
     }
 
     @ExceptionHandler({CannotProcessCommentException.class, CannotFetchCommentsException.class})
