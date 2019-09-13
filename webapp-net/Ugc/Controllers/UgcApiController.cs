@@ -53,17 +53,11 @@ namespace Sdl.Web.Modules.Ugc.Controllers
                 string json = new StreamReader(req).ReadToEnd();
                 PostedComment posted = JsonConvert.DeserializeObject<PostedComment>(json);
 
-                if (!posted.ParentId.HasValue)
+                if (!posted.ParentId.HasValue || pageId == null || publicationId == null)
                 {
-                    Response.StatusCode = 405;
-                    return new EmptyResult();
+                    return ServerError(null);
                 }
 
-                if (pageId == null || publicationId == null)
-                {
-                    Response.StatusCode = 200;
-                    return new EmptyResult();
-                }
                 UgcService ugc = new UgcService();
                 Dictionary<string, string> metadata = CreateMetadata(posted, true);
 
