@@ -88,7 +88,7 @@ public class UgcService {
      * @return {@link Comment}
      */
     public Comment postComment(int publicationId, int pageId, @NotNull String username, String email, String content,
-                               int parentId, Map<String, String> metadata) throws CannotProcessCommentException {
+                               int parentId, Map<String, String> metadata) {
         if (publicationId <= 0 || pageId <= 0) {
             log.warn("Cannot post comment for negative or zero publicationId {} or pageId {}", publicationId, pageId);
             throw new CannotProcessCommentException("Cannot post comment for negative publicationId/pageId");
