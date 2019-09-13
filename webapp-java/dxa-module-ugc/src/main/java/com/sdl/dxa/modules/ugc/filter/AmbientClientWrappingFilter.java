@@ -11,7 +11,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 
-@WebFilter("/api/comments")
+@WebFilter("/api/comments/*")
 public class AmbientClientWrappingFilter implements Filter {
     private AmbientClientFilter delegate = new AmbientClientFilter();
     @Override
