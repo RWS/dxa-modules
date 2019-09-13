@@ -105,6 +105,7 @@ public class UgcApiController {
         if (StringUtils.isEmpty(userName)) {
             userName = "Anonymous";
         }
+
         try (Performance perf = new Performance(1_000L, "Post comment")) {
             Comment comment = ugcService.postComment(input.getPublicationId(),
                     input.getPageId(),
@@ -114,9 +115,6 @@ public class UgcApiController {
                     Ints.tryParse(input.getParentId()),
                     metadata);
             return comment;
-        } catch (Exception ex) {
-            log.error("Cannot add a comment for page/" + input.getPublicationId() + "/" + input.getPageId(), ex);
-            return null;
         }
     }
 
