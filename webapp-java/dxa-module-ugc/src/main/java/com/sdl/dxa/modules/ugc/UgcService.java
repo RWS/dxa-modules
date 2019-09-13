@@ -13,6 +13,7 @@ import com.sdl.web.ugc.Status;
 import com.sdl.webapp.common.util.TcmUtils;
 import com.tridion.ambientdata.AmbientDataContext;
 import com.tridion.ambientdata.claimstore.ClaimStore;
+import com.tridion.ambientdata.web.WebContext;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.joda.time.DateTime;
@@ -98,7 +99,10 @@ public class UgcService {
             if (claimStore != null) {
                 claimStore.put(new URI("taf:claim:contentdelivery:webservice:user"), username);
                 claimStore.put(new URI("taf:claim:contentdelivery:webservice:post:allowed"), true);
+            } else {
+                throw new IllegalStateException("No claimstore");
             }
+            WebContext.setCurrentClaimStore(claimStore);
         } catch (URISyntaxException e) {
             log.error("Error while adding Claims for user " + username, e);
         }

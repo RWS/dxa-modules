@@ -30,7 +30,6 @@ public class UgcInitializer {
     public UgcCommentApi ugcCommentApi() {
         return new DefaultUgcCommentApi();
     }
-
     //Todo: use UgcVoteCommentApi implementation when it becomes available
 
     @Component
