@@ -105,19 +105,15 @@ public class UgcApiController {
         if (StringUtils.isEmpty(userName)) {
             userName = "Anonymous";
         }
-        try (Performance perf = new Performance(1_000L, "Post comment")) {
-            Comment comment = ugcService.postComment(input.getPublicationId(),
-                    input.getPageId(),
-                    userName,
-                    input.getEmail(),
-                    input.getContent(),
-                    Ints.tryParse(input.getParentId()),
-                    metadata);
-            return comment;
-        } catch (Exception ex) {
-            log.error("Cannot add a comment for page/" + input.getPublicationId() + "/" + input.getPageId(), ex);
-            return null;
-        }
+        Comment comment = ugcService.postComment(input.getPublicationId(),
+                input.getPageId(),
+                userName,
+                input.getEmail(),
+                input.getContent(),
+                Ints.tryParse(input.getParentId()),
+                metadata);
+
+        return comment;
     }
 
     @ExceptionHandler({CannotProcessCommentException.class, CannotFetchCommentsException.class})
