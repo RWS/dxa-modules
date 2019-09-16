@@ -123,7 +123,8 @@ public class UgcApiController {
         ResponseStatus annotation = exception.getClass().getAnnotation(ResponseStatus.class);
         if (annotation != null) {
             int code = annotation.value().value();
-            response.sendError(code, annotation.reason() + " (" + exception.getMessage() + "), cause: " + exception.getCause().getMessage());
+            String causeMsg = exception.getCause() != null ? exception.getCause().getMessage() : "";
+            response.sendError(code, annotation.reason() + " (" + exception.getMessage() + "), cause: " + causeMsg);
             return null;
         }
         log.error("Exception while processing request for: {}", request.getRequestURL(), exception);
