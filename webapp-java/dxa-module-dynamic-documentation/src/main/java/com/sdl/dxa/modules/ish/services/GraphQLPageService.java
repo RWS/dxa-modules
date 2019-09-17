@@ -14,6 +14,7 @@ import com.sdl.webapp.common.api.model.PageModel;
 import com.sdl.webapp.common.api.model.RegionModel;
 import com.sdl.webapp.common.api.model.RichText;
 import com.sdl.webapp.common.api.model.ViewModel;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
@@ -82,18 +83,7 @@ public class GraphQLPageService implements PageService {
             ViewModel topic = topics.get(0);
 
             RichText topicBody = ((Topic)topic).getTopicBody();
-            Matcher matcher = MatchAnchors.matcher(topicBody.toString());
-            StringBuffer sb = new StringBuffer();
-            while (matcher.find()) {
-                if (matcher.groupCount() != 2) continue;
-                //if matcher.group(2) is 'https://host:port/anything' -> '/anything'
-                String path = matcher.group(2).replaceAll("^https?://[^/](/.*)$", "$1").trim();
-                String[] parts = path.split("/");
-                if (parts.length == 5) {
-                    matcher.appendReplacement(sb, Matcher.quoteReplacement(parts[4]));
-                }
-            }
-            matcher.appendTail(sb);
+            StringBuffer sb = replaceAnchorInLinks(topicBody);
             ((Topic) topic).setTopicBody(new RichText(sb.toString()));
         }
 
@@ -132,5 +122,22 @@ public class GraphQLPageService implements PageService {
 
         }
         return model;
+    }
+
+    @NotNull
+    private StringBuffer replaceAnchorInLinks(RichText topicBody) {
+        Matcher matcher = MatchAnchors.matcher(topicBody.toString());
+        StringBuffer sb = new StringBuffer();
+        while (matcher.find()) {
+            if (matcher.groupCount() != 2) continue;
+            //if matcher.group(2) is 'https://host:port/anything' -> '/anything'
+            String path = matcher.group(2).replaceAll("^https?://[^/](/.*)$", "$1").trim();
+            String[] parts = path.split("/");
+            if (parts.length == 5) {
+                matcher.appendReplacement(sb, Matcher.quoteReplacement(parts[4]));
+            }
+        }
+        matcher.appendTail(sb);
+        return sb;
     }
 }
