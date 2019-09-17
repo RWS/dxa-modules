@@ -66,7 +66,7 @@ public class CilPublicationService implements PublicationService {
         }
     }
 
-    public void checkPublicationOnline(int publicationId, Localization localization) {
+    public void checkPublicationOnline(int publicationId, Localization localization) throws NotFoundException {
         PublicationMeta publicationMeta = null;
         try {
             publicationMeta = webPublicationMetaFactory.getMeta(publicationId);
