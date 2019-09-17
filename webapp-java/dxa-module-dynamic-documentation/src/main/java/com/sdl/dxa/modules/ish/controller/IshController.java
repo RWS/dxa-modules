@@ -22,6 +22,7 @@ import com.sdl.webapp.common.api.formats.DataFormatter;
 import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.api.model.PageModel;
 import com.sdl.webapp.common.api.model.entity.SitemapItem;
+import com.sdl.webapp.common.controller.exception.BadRequestException;
 import com.sdl.webapp.common.controller.exception.DocsExceptionHandler;
 import com.sdl.webapp.common.controller.exception.NotFoundException;
 import com.sdl.webapp.common.exceptions.DxaItemNotFoundException;
@@ -42,7 +43,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -129,7 +129,7 @@ public class IshController {
             PageModel page = (PageModel) pageService.getPage(pageId, localization);
             if (page == null) {
                 response.setStatus(NOT_FOUND.value());
-                throw new ResourceNotFoundException(String.format("Item '%s' not found for Localization '%s'", pageId, localization.getId()), null);
+                throw new BadRequestException(String.format("Item '%s' not found for Localization '%s'", pageId, localization.getId()), null);
             }
             return dataFormatters.view(page);
         }
@@ -148,18 +148,18 @@ public class IshController {
     @ResponseBody
     public void getBinaryResource(HttpServletResponse response,
                                   @PathVariable String publicationId,
-                                  @PathVariable String binaryId) throws ContentProviderException, ResourceNotFoundException, IOException {
+                                  @PathVariable String binaryId) throws ContentProviderException, BadRequestException, NotFoundException, IOException {
         int publicationIdInt = -1;
         try {
             publicationIdInt = Integer.parseInt(publicationId);
         } catch (NumberFormatException ex) {
-            throw new ResourceNotFoundException("Invalid request parameter, no required publicationId: " + publicationId, ex);
+            throw new BadRequestException("Invalid request parameter, no required publicationId: " + publicationId, ex);
         }
         int binaryIdInt = -1;
         try {
             binaryIdInt = Integer.parseInt(binaryId);
         } catch (NumberFormatException ex) {
-            throw new ResourceNotFoundException("Invalid request parameter, no required binaryId: " + binaryId, ex);
+            throw new BadRequestException("Invalid request parameter, no required binaryId: " + binaryId, ex);
         }
         publicationService.checkPublicationOnline(publicationIdInt, webRequestContext.getLocalization());
         try (Performance perf = new Performance(1_000L, "getBinaryResource");
@@ -194,7 +194,7 @@ public class IshController {
     @ResponseBody
     public Collection<SitemapItem> getRootToc(@PathVariable("publicationId") Integer publicationId,
                                               @RequestParam(value = "conditions", defaultValue = "") String conditions,
-                                              HttpServletRequest request) throws ContentProviderException, IOException {
+                                              HttpServletRequest request) throws ContentProviderException, NotFoundException, IOException {
         try(Performance perf = new Performance(1_000L, "getRootToc")) {
             setConditions(publicationId, conditions);
             publicationService.checkPublicationOnline(publicationId, webRequestContext.getLocalization());
@@ -244,11 +244,11 @@ public class IshController {
     @Cacheable(value = "ish", key = "{ #publicationId, #ishFieldValue }")
     public Item getTopicIdInTargetPublication(@PathVariable("publicationId") Integer publicationId,
                                               @PathVariable("ishFieldValue") String ishFieldValue)
-            throws ContentProviderException {
+            throws ContentProviderException, NotFoundException, BadRequestException {
         try(Performance perf = new Performance(1_000L, "getTopicIdInTargetPublication")) {
             publicationService.checkPublicationOnline(publicationId, webRequestContext.getLocalization());
             if (Strings.isNullOrEmpty(ishFieldValue)) {
-                throw new NotFoundException("Unable to use empty 'ishlogicalref.object.id' value as a search criteria");
+                throw new BadRequestException("Unable to use empty 'ishlogicalref.object.id' value as a search criteria", null);
             }
             return tridionDocsContentService.getPageIdByIshLogicalReference(publicationId, ishFieldValue);
         }
@@ -259,20 +259,6 @@ public class IshController {
     ResponseEntity<ErrorMessage> handleException(Exception ex) {
         ErrorMessage message = exceptionHandler.handleException(ex);
         return new ResponseEntity(message, message.getHttpStatus());
-    }
-
-    @ExceptionHandler(value = ResourceNotFoundException.class)
-    @ResponseBody
-    ResponseEntity<ErrorMessage> handleNotFoundException(Exception ex) {
-        ErrorMessage message = exceptionHandler.handleException(ex);
-        return new ResponseEntity(message, NOT_FOUND);
-    }
-
-    @ResponseStatus(value = NOT_FOUND)
-    public static class ResourceNotFoundException extends RuntimeException {
-        public ResourceNotFoundException(String message, Exception cause) {
-            super(message, cause);
-        }
     }
 
     private void setConditions(Integer publicationId, String conditions) throws IOException, DxaItemNotFoundException {

@@ -113,7 +113,7 @@ public class GraphQLPublicationService implements PublicationService {
         }
     }
 
-    public void checkPublicationOnline(int publicationId, Localization localization) {
+    public void checkPublicationOnline(int publicationId, Localization localization) throws NotFoundException {
         Exception[] exceptionHolder = new Exception[1];
         checkPublicationOnlineInternal(publicationId, localization, 3, exceptionHolder);
     }
