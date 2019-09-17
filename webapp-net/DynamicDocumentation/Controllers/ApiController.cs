@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using Sdl.Tridion.Api.Client;
@@ -31,6 +32,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         private static readonly string PageConditionsUsedMeta = "conditionsused.generated.value";
         private static readonly string PageLogicalRefObjectId = "ishlogicalref.object.id";
         private static readonly string RefFieldName = "ishlogicalref.object.id";
+        private static readonly Regex MatchAnchors = new Regex("<a\\s+(?:[^>]*?\\s+)?href\\s*=\\s*([\"\'])(.*?)\\1", RegexOptions.Multiline | RegexOptions.Compiled);
 
         private static Common.Configuration.Localization Localization => WebRequestContext.Localization;
         private IContentProviderExt ContentProviderExt => (IContentProviderExt) ContentProvider;
@@ -243,7 +245,30 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         protected virtual ViewModel EnrichModel(ViewModel model, int publicationId)
         {
             PageModel pageModel = model as PageModel;
-            if (pageModel == null) return model;          
+            if (pageModel == null) return model;
+            
+            // xform hrefs in topicBody to hash notation of the form:
+            // /<pubId>/<topicId>/<pubTitle>/<topicTitle>/<anchor>
+            var topic = GetTopics(pageModel).FirstOrDefault();
+            if (topic != null)
+            {
+                var topicBody = topic.TopicBody.ToString();
+                var matches = MatchAnchors.Matches(topicBody);
+                foreach (var match in matches.OfType<Match>())
+                {
+                    if (match.Groups.Count != 3) continue;
+                    Uri uri;
+                    if (!Uri.TryCreate(match.Groups[2].Value, UriKind.RelativeOrAbsolute, out uri)) continue;
+                    string path = uri.IsAbsoluteUri ? uri.PathAndQuery : uri.OriginalString;
+                    var parts = path.Trim().Split(new char[] {'/'}, StringSplitOptions.RemoveEmptyEntries);
+                    if (parts.Length == 5)
+                    {
+                        topicBody = ReplaceFirst(topicBody, match.Groups[2].Value, $"#{parts[4]}");
+                    }
+                }
+                topic.TopicBody = new RichText(topicBody);
+            }
+
             var client = ApiClientFactory.Instance.CreateClient();
             var page = client.GetPage(ContentNamespace.Docs, publicationId, int.Parse(pageModel.Id),
                 $"requiredMeta:{TocNaventriesMeta},{PageConditionsUsedMeta},{PageLogicalRefObjectId}",
@@ -270,9 +295,9 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
                 {
                     pageModel.Meta.Add(PageLogicalRefObjectId, x.Node.Value);
                 }
-            }
+            }           
             return model;
-        }
+        }     
 
         protected void AddUserConditions()
         {
@@ -310,6 +335,35 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
             if (ex == null) return new EmptyResult();
             if (ex.InnerException != null) ex = ex.InnerException;
             return Content("{ \"Message\": \"" + ex.Message + "\" }", "application/json");
+        }
+
+        private List<Topic> GetTopics(PageModel pageModel)
+        {
+            var topics = new List<Topic>();
+            foreach (var region in pageModel.Regions)
+            {
+                topics.AddRange(GetTopics(region));
+            }
+            return topics;
+        }
+
+        private List<Topic> GetTopics(RegionModel region)
+        {
+            var topics = new List<Topic>();
+            topics.AddRange(region.Entities.OfType<Topic>());
+            foreach (var childRegion in region.Regions)
+            {
+                topics.AddRange(GetTopics(childRegion));
+            }
+            return topics;
+        }
+
+        // Todo: Ideally this would be added to string extensions provided by dxa framework
+        private static string ReplaceFirst(string str, string search, string replace)
+        {
+            var index = str.IndexOf(search);
+            if (index < 0) return str;
+            return str.Substring(0, index) + replace + str.Substring(index + search.Length);
         }
     }
 }
