@@ -129,7 +129,7 @@ public class IshController {
             PageModel page = (PageModel) pageService.getPage(pageId, localization);
             if (page == null) {
                 response.setStatus(NOT_FOUND.value());
-                throw new ResourceNotFoundException(String.format("Item '%s' not found for Localization '%s'", pageId, localization.getId()));
+                throw new ResourceNotFoundException(String.format("Item '%s' not found for Localization '%s'", pageId, localization.getId()), null);
             }
             return dataFormatters.view(page);
         }
@@ -147,16 +147,21 @@ public class IshController {
     @RequestMapping(method = GET, value = "/binary/{publicationId}/{binaryId}/**", produces = MediaType.ALL_VALUE)
     @ResponseBody
     public void getBinaryResource(HttpServletResponse response,
-                                  @PathVariable Integer publicationId,
-                                  @PathVariable String binaryId) throws ContentProviderException, IOException {
-        publicationService.checkPublicationOnline(publicationId, webRequestContext.getLocalization());
+                                  @PathVariable String publicationId,
+                                  @PathVariable String binaryId) throws ContentProviderException, ResourceNotFoundException, IOException {
+        int publicationIdInt = -1;
+        try {
+            publicationIdInt = Integer.parseInt(publicationId);
+        } catch (NumberFormatException ex) {
+            throw new ResourceNotFoundException("Invalid request parameter, no required publicationId: " + publicationId, ex);
+        }
         int binaryIdInt = -1;
         try {
             binaryIdInt = Integer.parseInt(binaryId);
         } catch (NumberFormatException ex) {
-            throw new ContentProviderException("Invalid request, no required binaryId: " + binaryId, ex);
+            throw new ResourceNotFoundException("Invalid request parameter, no required binaryId: " + binaryId, ex);
         }
-
+        publicationService.checkPublicationOnline(publicationIdInt, webRequestContext.getLocalization());
         try (Performance perf = new Performance(1_000L, "getBinaryResource");
              ServletServerHttpResponse res = new ServletServerHttpResponse(response)) {
             Localization localization = webRequestContext.getLocalization();
@@ -256,10 +261,17 @@ public class IshController {
         return new ResponseEntity(message, message.getHttpStatus());
     }
 
+    @ExceptionHandler(value = ResourceNotFoundException.class)
+    @ResponseBody
+    ResponseEntity<ErrorMessage> handleNotFoundException(Exception ex) {
+        ErrorMessage message = exceptionHandler.handleException(ex);
+        return new ResponseEntity(message, NOT_FOUND);
+    }
+
     @ResponseStatus(value = NOT_FOUND)
     public static class ResourceNotFoundException extends RuntimeException {
-        public ResourceNotFoundException(String message) {
-            super(message);
+        public ResourceNotFoundException(String message, Exception cause) {
+            super(message, cause);
         }
     }
 
