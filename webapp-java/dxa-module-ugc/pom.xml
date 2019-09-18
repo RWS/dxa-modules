@@ -30,18 +30,6 @@
         <dependency>
             <groupId>com.sdl.dxa</groupId>
             <artifactId>dxa-tridion-provider</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.sdl.web</groupId>
-                    <artifactId>cil</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>com.sdl.delivery</groupId>
-            <artifactId>udp-ugc-cil-api</artifactId>
-            <version>${udp-ugc-cil-api.version}</version>
         </dependency>
 
         <!-- Servlet API -->
@@ -104,6 +92,12 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.0.2</version>
             </plugin>
         </plugins>
     </build>
