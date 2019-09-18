@@ -1,5 +1,7 @@
 package com.sdl.dxa.modules.ish.services;
 
+import com.google.common.primitives.Ints;
+import com.rometools.utils.Strings;
 import com.sdl.dxa.modules.ish.model.Topic;
 import com.sdl.dxa.tridion.pcaclient.ApiClientProvider;
 import com.sdl.web.pca.client.ApiClient;
@@ -14,12 +16,19 @@ import com.sdl.webapp.common.api.model.PageModel;
 import com.sdl.webapp.common.api.model.RegionModel;
 import com.sdl.webapp.common.api.model.RichText;
 import com.sdl.webapp.common.api.model.ViewModel;
+
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
+import scala.Int;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -130,11 +139,17 @@ public class GraphQLPageService implements PageService {
         StringBuffer sb = new StringBuffer();
         while (matcher.find()) {
             if (matcher.groupCount() != 2) continue;
-            //if matcher.group(2) is 'https://host:port/anything' -> '/anything'
-            String path = matcher.group(2).replaceAll("^https?://[^/](/.*)$", "$1").trim();
-            String[] parts = path.split("/");
-            if (parts.length == 5) {
-                matcher.appendReplacement(sb, Matcher.quoteReplacement(parts[4]));
+            URI uri;
+            try {
+                uri = new URI(matcher.group(2));
+            } catch (URISyntaxException exception) {
+                continue;
+            }
+
+            String path = uri.getPath();
+            List<String> parts = Arrays.asList(path.split("/")).stream().filter(part -> !part.isEmpty()).collect(Collectors.toList());
+            if (parts.size() == 5 & Ints.tryParse(parts.get(0)) != null & Ints.tryParse(parts.get(1)) != null) {
+                matcher.appendReplacement(sb, Matcher.quoteReplacement(String.format("#%s", parts.get(4))));
             }
         }
         matcher.appendTail(sb);
