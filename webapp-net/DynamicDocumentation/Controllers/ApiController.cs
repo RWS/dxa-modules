@@ -246,7 +246,7 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
         {
             PageModel pageModel = model as PageModel;
             if (pageModel == null) return model;
-            
+
             // xform hrefs in topicBody to hash notation of the form:
             // /<pubId>/<topicId>/<pubTitle>/<topicTitle>/<anchor>
             var topic = GetTopics(pageModel).FirstOrDefault();
@@ -258,10 +258,12 @@ namespace Sdl.Web.Modules.DynamicDocumentation.Controllers
                 {
                     if (match.Groups.Count != 3) continue;
                     Uri uri;
+                    int tmp;
                     if (!Uri.TryCreate(match.Groups[2].Value, UriKind.RelativeOrAbsolute, out uri)) continue;
-                    string path = uri.IsAbsoluteUri ? uri.PathAndQuery : uri.OriginalString;
-                    var parts = path.Trim().Split(new char[] {'/'}, StringSplitOptions.RemoveEmptyEntries);
-                    if (parts.Length == 5)
+                    string path = uri.IsAbsoluteUri ? uri.AbsolutePath : uri.OriginalString.Split(new[] { '?' }, StringSplitOptions.RemoveEmptyEntries)[0];
+                    var parts = path.Trim().Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+                    // parts should match form meaning first 2 are ints (pubId,topicId) and length is 5
+                    if (parts.Length == 5 && int.TryParse(parts[0], out tmp) && int.TryParse(parts[1], out tmp))
                     {
                         topicBody = ReplaceFirst(topicBody, match.Groups[2].Value, $"#{parts[4]}");
                     }
