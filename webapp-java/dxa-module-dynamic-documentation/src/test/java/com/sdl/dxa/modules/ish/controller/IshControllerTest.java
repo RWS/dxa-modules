@@ -2,6 +2,7 @@ package com.sdl.dxa.modules.ish.controller;
 
 import com.sdl.webapp.common.controller.exception.BadRequestException;
 import com.sdl.webapp.common.impl.localization.DocsLocalization;;
+import com.sdl.webapp.common.controller.exception.BadRequestException;
 import com.sdl.dxa.modules.ish.services.PublicationService;
 import com.sdl.dxa.modules.ish.services.TridionDocsContentService;
 import com.sdl.webapp.common.api.WebRequestContext;
