@@ -114,6 +114,7 @@ public class IshController {
      * @param response      Http response
      * @return Page model using the json format.
      * @throws ContentProviderException if page model cannot be fetched
+     * @throws IOException if page model cannot be fetched
      */
     @RequestMapping(method = {GET, POST}, value = "/api/page/{publicationId}/{pageId}/**",
             produces = {APPLICATION_JSON_VALUE})
@@ -142,7 +143,7 @@ public class IshController {
      * @param publicationId Publication id
      * @param binaryId      Binary id
      * @throws ContentProviderException if page model cannot be fetched
-     * @throws IOException if something wrong with tomcat response channel
+     * @throws IOException if there is wrong input output
      */
     @RequestMapping(method = GET, value = "/binary/{publicationId}/{binaryId}/**", produces = MediaType.ALL_VALUE)
     @ResponseBody
