@@ -1,5 +1,6 @@
 package com.sdl.dxa.modules.ish.controller;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
  * Overwrites DXA page controller to allow custom routing.
  */
 @Controller
+@Profile("dxa.docs.enabled")
 public class TridionDocsPageController {
     /**
      * Main entry point of the application.

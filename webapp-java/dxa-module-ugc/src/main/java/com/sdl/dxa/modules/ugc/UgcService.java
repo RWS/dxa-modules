@@ -1,16 +1,21 @@
 package com.sdl.dxa.modules.ugc;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.sdl.delivery.ugc.client.comment.UgcCommentApi;
 import com.sdl.delivery.ugc.client.comment.impl.SimpleCommentsFilter;
 import com.sdl.dxa.modules.ugc.data.Comment;
 import com.sdl.dxa.modules.ugc.data.User;
 import com.sdl.dxa.modules.ugc.exceptions.CannotFetchCommentsException;
 import com.sdl.dxa.modules.ugc.exceptions.CannotProcessCommentException;
+import com.sdl.dxa.modules.ugc.model.JsonZonedDateTime;
+import com.sdl.dxa.performance.Performance;
 import com.sdl.web.ugc.Status;
 import com.sdl.webapp.common.util.TcmUtils;
 import com.tridion.ambientdata.AmbientDataContext;
 import com.tridion.ambientdata.claimstore.ClaimStore;
+import com.tridion.ambientdata.web.WebContext;
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +24,11 @@ import org.springframework.stereotype.Service;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.ZonedDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.TimeZone;
 
 /**
  * <p>Service providing methods to  create and retrieve comments</p>
@@ -60,7 +69,7 @@ public class UgcService {
                 .withStatuses(statusStatuses);
 
         String pageTcmUri = TcmUtils.buildPageTcmUri(publicationId, pageId);
-        try {
+        try (Performance perf = new Performance(1_000L, "getComments stream")) {
             return convert(ugcCommentApi.retrieveThreadedComments(pageTcmUri, filter, descending, true));
         } catch (Exception ex) {
             throw new CannotFetchCommentsException("Cannot fetch comments for " + pageTcmUri, ex);
@@ -79,14 +88,10 @@ public class UgcService {
      * @param metadata      Meta data
      * @return {@link Comment}
      */
-    public Comment postComment(int publicationId, int pageId, String username, String email, String content,
+    public Comment postComment(int publicationId, int pageId, @NotNull String username, String email, String content,
                                int parentId, Map<String, String> metadata) {
-        if (publicationId == 0 || pageId == 0) {
-            log.warn("Cannot post comment for empty/NaN publicationId/pageId");
-            return null;
-        }
-        if (publicationId < 0 || pageId < 0) {
-            log.warn("Cannot post comment for negative publicationId/pageId");
+        if (publicationId <= 0 || pageId <= 0) {
+            log.warn("Cannot post comment for negative or zero publicationId {} or pageId {}", publicationId, pageId);
             throw new CannotProcessCommentException("Cannot post comment for negative publicationId/pageId");
         }
         try {
@@ -94,9 +99,12 @@ public class UgcService {
             if (claimStore != null) {
                 claimStore.put(new URI("taf:claim:contentdelivery:webservice:user"), username);
                 claimStore.put(new URI("taf:claim:contentdelivery:webservice:post:allowed"), true);
+            } else {
+                throw new IllegalStateException("No claimstore");
             }
+            WebContext.setCurrentClaimStore(claimStore);
         } catch (URISyntaxException e) {
-            log.error("Error while Storing Claims", e);
+            log.error("Error while adding Claims for user " + username, e);
         }
         String pageTcmUri = TcmUtils.buildPageTcmUri(publicationId, pageId);
         try {
@@ -132,12 +140,20 @@ public class UgcService {
             c.setUser(convert(comment.getUser()));
         }
         if (comment.getCreationDate() != null) {
-            c.setCreationDate(comment.getCreationDate());
             c.setCreationDateTime(convert(comment.getCreationDate()));
+            try {
+                c.setCreationDate(new JsonZonedDateTime(c.getCreationDateTime()).getJson());
+            } catch (JsonProcessingException e) {
+               log.error("Cannot serialize to Json " + c.getCreationDateTime(), e);
+            }
         }
         if (comment.getLastModifiedDate() != null) {
-            c.setLastModifiedDate(comment.getLastModifiedDate());
             c.setLastModifiedDateTime(convert(comment.getLastModifiedDate()));
+            try {
+                c.setLastModifiedDate(new JsonZonedDateTime(c.getLastModifiedDateTime()).getJson());
+            } catch (JsonProcessingException e) {
+                log.error("Cannot serialize to Json " + c.getLastModifiedDateTime(), e);
+            }
         }
         c.setChildren(convert(comment.getChildren()));
 

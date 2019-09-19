@@ -29,7 +29,6 @@ const ITEM_URL_REGEX = /^\/\d+\/\d+($|\/).*$/i;
 /**
  * Maximum characters for a title
  */
-const TITLE_MAX_CHARS = 250;
 
 export interface IPageParams {
     publicationId: string;
@@ -80,7 +79,7 @@ export class Url {
         const rootPath = path.getRootPath();
         let url = `${rootPath}${encodeURIComponent(publicationId)}`;
         if (publicationTitle) {
-            url += `/${Url._processTitle(publicationTitle)}`;
+            url += `/${Url._processLink(publicationTitle)}`;
         }
         return url;
     }
@@ -121,9 +120,9 @@ export class Url {
         const rootPath = path.getRootPath();
         let url = `${rootPath}${encodeURIComponent(publicationId)}/${encodeURIComponent(pageId)}`;
         if (publicationTitle) {
-            url += `/${Url._processTitle(publicationTitle)}`;
+            url += `/${Url._processLink(publicationTitle)}`;
             if (pageTitle) {
-                url += `/${Url._processTitle(pageTitle)}`;
+                url += `/${Url._processLink(pageTitle)}`;
             }
         }
 
@@ -190,17 +189,13 @@ export class Url {
         } || void 0;
     }
 
-    private static _processTitle(title: string): string {
+    private static _processLink(link: string): string {
         // trim
-        title = title.trim();
+        link = link.trim();
         // slugify
-        title = slugify(title);
+        link = slugify(link);
         // Encode
-        title = encodeURIComponent(title);
-        // Truncate
-        if (title.length > TITLE_MAX_CHARS) {
-            title = title.substring(0, 250);
-        }
-        return title;
+        link = encodeURIComponent(link);
+        return link;
     }
 }

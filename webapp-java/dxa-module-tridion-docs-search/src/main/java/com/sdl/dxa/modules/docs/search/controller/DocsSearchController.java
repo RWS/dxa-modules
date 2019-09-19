@@ -3,6 +3,7 @@ package com.sdl.dxa.modules.docs.search.controller;
 import com.sdl.dxa.modules.docs.search.exception.SearchException;
 import com.sdl.dxa.modules.docs.search.model.SearchResultSet;
 import com.sdl.dxa.modules.docs.search.service.SearchService;
+import com.sdl.dxa.performance.Performance;
 import com.sdl.webapp.common.controller.exception.DocsExceptionHandler;
 import com.sdl.webapp.common.impl.model.ErrorMessage;
 import lombok.extern.slf4j.Slf4j;
@@ -33,7 +34,10 @@ public class DocsSearchController {
     @RequestMapping(method = POST, value = "/api/search")
     @ResponseBody
     public SearchResultSet search(@RequestBody String parametersJson) throws SearchException {
-        return searchProvider.search(parametersJson);
+        if (parametersJson == null) throw new IllegalArgumentException("Search parameters cannot be empty");
+        try (Performance perf = new Performance(1_000L, "search " + parametersJson.replaceAll("(?ixm)\\s", ""))) {
+            return searchProvider.search(parametersJson);
+        }
     }
 
     @ExceptionHandler(value = Exception.class)

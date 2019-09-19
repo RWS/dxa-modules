@@ -1,8 +1,8 @@
-package com.sdl.dxa.modules.ish.providers;
+package com.sdl.dxa.modules.ish.services;
 
 
-import com.sdl.dxa.modules.ish.model.Publication;
 import com.sdl.dxa.modules.ish.exception.IshServiceException;
+import com.sdl.dxa.modules.ish.model.Publication;
 import com.sdl.web.api.meta.WebPublicationMetaFactory;
 import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.controller.exception.NotFoundException;
@@ -12,6 +12,7 @@ import com.tridion.meta.NameValuePair;
 import com.tridion.meta.PublicationMeta;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -43,8 +44,8 @@ public class CilPublicationService implements PublicationService {
     @Autowired
     private WebPublicationMetaFactory webPublicationMetaFactory;
 
-
     @Override
+    @Cacheable(value = "ish", key = "{ #localization.id }", condition = "#localization != null && #localization.id != null", sync = true)
     public List<Publication> getPublicationList(Localization localization) {
         List<Publication> result = new ArrayList<>();
         try {
@@ -65,7 +66,7 @@ public class CilPublicationService implements PublicationService {
         }
     }
 
-    public void checkPublicationOnline(int publicationId, Localization localization) {
+    public void checkPublicationOnline(int publicationId, Localization localization) throws NotFoundException {
         PublicationMeta publicationMeta = null;
         try {
             publicationMeta = webPublicationMetaFactory.getMeta(publicationId);
@@ -104,10 +105,13 @@ public class CilPublicationService implements PublicationService {
                 NameValuePair pair = customMeta.getNameValues().get(PUBLICATION_PRODUCTFAMILYNAME_META);
                 List<Object> values = pair.getMultipleValues();
                 List<String> productFamilies = new ArrayList<>();
+                List<String> productFamiliesEncoded = new ArrayList<>();
                 for (Object value: values) {
                     productFamilies.add(Objects.toString(value, null));
+                    productFamiliesEncoded.add(getEncodedProductFamily(Objects.toString(value, null)));
                 }
                 publication.setProductFamily(productFamilies);
+                publication.setProductFamilyEncoded(productFamiliesEncoded);
             }
 
             if (customMeta.getFirstValue(PUBLICATION_PRODUCTRELEASENAME_META) != null) {

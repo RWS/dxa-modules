@@ -1,5 +1,6 @@
-package com.sdl.dxa.modules.ish.providers;
+package com.sdl.dxa.modules.ish.services;
 
+import com.sdl.dxa.modules.ish.providers.IshDynamicNavigationProvider;
 import com.sdl.webapp.common.impl.localization.DocsLocalization;;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.content.ContentProviderException;
@@ -61,7 +62,7 @@ public class TocServiceTest {
 
         when(webRequestContext.getLocalization()).thenReturn(new DocsLocalization());
 
-        Collection<SitemapItem> result = tocService.getToc(publicationId, sitemapId, false, 1, request,
+        Collection<SitemapItem> result = tocService.getToc(publicationId, sitemapId, false, 1, "",
                 webRequestContext);
         assertEquals(2, result.size());
     }

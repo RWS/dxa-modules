@@ -47,7 +47,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Sdl.Tridion.Api.Client">
-      <HintPath>..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\lib\net462\Sdl.Tridion.Api.Client.dll</HintPath>
+      <HintPath>..\packages\Sdl.Tridion.Api.Client.$(SdlPCAPackageVersion)\lib\net462\Sdl.Tridion.Api.Client.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sdl.Web.Tridion">

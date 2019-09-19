@@ -1,8 +1,10 @@
 package com.sdl.dxa.modules.ish.controller;
 
+import com.sdl.webapp.common.controller.exception.BadRequestException;
 import com.sdl.webapp.common.impl.localization.DocsLocalization;;
-import com.sdl.dxa.modules.ish.providers.PublicationService;
-import com.sdl.dxa.modules.ish.providers.TridionDocsContentService;
+import com.sdl.webapp.common.controller.exception.BadRequestException;
+import com.sdl.dxa.modules.ish.services.PublicationService;
+import com.sdl.dxa.modules.ish.services.TridionDocsContentService;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.content.ContentProviderException;
 import com.sdl.webapp.common.api.localization.Localization;
@@ -58,7 +60,7 @@ public class IshControllerTest {
         verifyNoMoreInteractions(controller, publicationService, contentService);
     }
 
-    @Test(expected = NotFoundException.class)
+    @Test(expected = BadRequestException.class)
     public void getTopicIdInTargetPublicationInvalidRefArg() throws ContentProviderException {
         when(webRequestContext.getLocalization()).thenReturn(new DocsLocalization());
         controller.getTopicIdInTargetPublication(PUB_ID, "");

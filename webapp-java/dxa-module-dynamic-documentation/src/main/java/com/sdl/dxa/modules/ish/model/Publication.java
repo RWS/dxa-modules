@@ -20,6 +20,9 @@ public class Publication {
     @JsonProperty("ProductFamily")
     private List<String> productFamily;
 
+    @JsonProperty("ProductFamilyEncoded")
+    private List<String> productFamilyEncoded;
+
     @JsonProperty("ProductReleaseVersion")
     private List<String> productReleaseVersion;
 

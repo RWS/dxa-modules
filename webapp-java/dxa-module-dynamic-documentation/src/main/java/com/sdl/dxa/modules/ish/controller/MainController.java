@@ -1,6 +1,6 @@
 package com.sdl.dxa.modules.ish.controller;
 
-import com.sdl.dxa.modules.ish.providers.PublicationService;
+import com.sdl.dxa.modules.ish.services.PublicationService;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.content.ContentProviderException;
 import com.sdl.webapp.common.api.content.Dxa22ContentProvider;
@@ -11,7 +11,7 @@ import com.sdl.webapp.common.impl.localization.DocsLocalization;
 import com.sdl.webapp.common.impl.model.ErrorMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cache.annotation.Cacheable;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,14 +26,12 @@ import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isNumeric;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
-;
-
 /**
  * Main controller.
  */
 @Controller
+@Profile("dxa.docs.enabled")
 public class MainController {
-
     private static final String ACTIVE_FEATURES = "activeFeatures";
     private static final String CONTENT_IS_EVALUABLE = "contentIsEvaluable";
 
@@ -62,14 +60,10 @@ public class MainController {
      * @return          Home page for Docs (all the publications)
      * @throws          ContentProviderException in case if data retrieving fails
      */
-    @RequestMapping(
-            value = {"/home", "/publications/**"},
-            method = GET
-    )
-    public String home(HttpServletRequest request) throws ContentProviderException {
-        return getHomeView(null, null, request);
+    @RequestMapping(value = {"/home", "/publications/**", "/publications/{value:.+$}"}, method = GET)
+    public String home(){
+        return getHomeView();
     }
-
 
     /**
      * Home page.
@@ -79,14 +73,11 @@ public class MainController {
      * @return Publication home page content
      * @throws ContentProviderException in case if data retrieving fails
      */
-    @RequestMapping(
-            value = "/{publicationId:[\\d]+}",
-            method = GET
-    )
-    @Cacheable("ish")
+    @RequestMapping(value = "/{publicationId:[0-9]+}", method = GET)
     public String home(@PathVariable("publicationId") String publicationId,
                        HttpServletRequest request) throws ContentProviderException {
-        return getHomeView(publicationId, null, request);
+        setPageModelOnRequest(publicationId, null, request);
+        return getHomeView();
     }
 
     /**
@@ -98,20 +89,15 @@ public class MainController {
      * @return content of the page
      * @throws ContentProviderException in case if data retrieving fails
      */
-    @RequestMapping(
-            value = "/{publicationId:[\\d]+}/{pageId}/**",
-            method = GET
-    )
-    @Cacheable("ish")
+    @RequestMapping(value = "/{publicationId:[0-9]+}/{pageId}/**", method = GET)
     public String home(@PathVariable("publicationId") String publicationId,
                        @PathVariable("pageId") String pageId,
                        HttpServletRequest request) throws ContentProviderException {
-        return getHomeView(publicationId, pageId, request);
+        setPageModelOnRequest(publicationId, pageId, request);
+        return getHomeView();
     }
 
-    private String getHomeView(String publicationId, String pageId, HttpServletRequest request) throws ContentProviderException {
-        this.setPageModelOnRequest(publicationId, pageId, request);
-
+    private String getHomeView() {
         return "home";
     }
 

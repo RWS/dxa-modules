@@ -1,6 +1,7 @@
 package com.sdl.dxa.modules.ish.model;
 
 import com.sdl.webapp.common.api.model.entity.SitemapItem;
+import com.sdl.webapp.common.api.model.sorting.SortableSiteMap;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,14 +47,12 @@ public class IshTaxonomyNodeTest {
     @SuppressWarnings("magicnumber")
     @Test
     public void testSortById() {
-        IshTaxonomyNode ishTaxonomyNode = new IshTaxonomyNode();
-        ishTaxonomyNode.setItems(tocItems);
-        List<SitemapItem> sortedItems = new ArrayList<>(ishTaxonomyNode.getItems());
+        List<SitemapItem> sorted = new ArrayList<>(SortableSiteMap.sortItem(tocItems, SortableSiteMap.SORT_BY_TAXONOMY_AND_KEYWORD));
 
-        assertEquals(item5, sortedItems.get(0));
-        assertEquals(item1, sortedItems.get(1));
-        assertEquals(item2, sortedItems.get(2));
-        assertEquals(item3, sortedItems.get(3));
-        assertEquals(item4, sortedItems.get(4));
+        assertEquals(item5, sorted.get(0));
+        assertEquals(item1, sorted.get(1));
+        assertEquals(item2, sorted.get(2));
+        assertEquals(item3, sorted.get(3));
+        assertEquals(item4, sorted.get(4));
     }
 }

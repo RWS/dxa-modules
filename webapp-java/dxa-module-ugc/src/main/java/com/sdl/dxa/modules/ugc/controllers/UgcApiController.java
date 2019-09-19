@@ -9,6 +9,7 @@ import com.sdl.dxa.modules.ugc.data.PostedComment;
 import com.sdl.dxa.modules.ugc.data.PubIdTitleLang;
 import com.sdl.dxa.modules.ugc.exceptions.CannotFetchCommentsException;
 import com.sdl.dxa.modules.ugc.exceptions.CannotProcessCommentException;
+import com.sdl.dxa.performance.Performance;
 import com.sdl.webapp.common.controller.ControllerUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -87,7 +88,7 @@ public class UgcApiController {
             consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Comment postComment(@RequestBody PostedComment input) {
-        if (input.getParentId() == null) {
+        if (input.getParentId() == null || Ints.tryParse(input.getParentId()) == null) {
             throw new CannotProcessCommentException("Please provide parentId or 0");
         }
         Map<String, String> metadata = new HashMap<>();
@@ -100,19 +101,21 @@ public class UgcApiController {
 
         addPubIdTitleLangToCommentMetadata(input, metadata);
 
-        String userId = input.getUserName();
-        if (StringUtils.isEmpty(userId)) {
-            userId = "Anonymous";
+        String userName = input.getUserName();
+        if (StringUtils.isEmpty(userName)) {
+            userName = "Anonymous";
         }
 
-        Comment comment = ugcService.postComment(input.getPublicationId(),
-                input.getPageId(),
-                userId,
-                input.getEmail(),
-                input.getContent(),
-                Ints.tryParse(input.getParentId()),
-                metadata);
-        return comment;
+        try (Performance perf = new Performance(1_000L, "Post comment")) {
+            Comment comment = ugcService.postComment(input.getPublicationId(),
+                    input.getPageId(),
+                    userName,
+                    input.getEmail(),
+                    input.getContent(),
+                    Ints.tryParse(input.getParentId()),
+                    metadata);
+            return comment;
+        }
     }
 
     @ExceptionHandler({CannotProcessCommentException.class, CannotFetchCommentsException.class})
@@ -120,7 +123,8 @@ public class UgcApiController {
         ResponseStatus annotation = exception.getClass().getAnnotation(ResponseStatus.class);
         if (annotation != null) {
             int code = annotation.value().value();
-            response.sendError(code, annotation.reason() + " (" + exception.getMessage() + ")");
+            String causeMsg = exception.getCause() != null ? exception.getCause().getMessage() : "";
+            response.sendError(code, annotation.reason() + " (" + exception.getMessage() + "), cause: " + causeMsg);
             return null;
         }
         log.error("Exception while processing request for: {}", request.getRequestURL(), exception);
