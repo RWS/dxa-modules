@@ -11,12 +11,16 @@ using Sdl.Tridion.Api.IqQuery;
 using Sdl.Tridion.Api.IqQuery.Model.Field;
 using Sdl.Tridion.Api.IqQuery.Model.Result;
 using Sdl.Web.Tridion.ApiClient;
+using Sdl.Tridion.Api.IqQuery.Model.Search;
 
 namespace Sdl.Web.Modules.Search.Controllers
 {
     public class TridionDocsSearchController : BaseController
     {
+        private static readonly string PUBLICATION_ONLINE_STATUS_FIELD = "dynamic.FISHDITADLVRREMOTESTATUS.lng.element";
+        private static readonly string PUBLICATION_ONLINE_STATUS_VALUE = "VDITADLVRREMOTESTATUSONLINE";
         private static readonly Regex RegexpDoubleQuotes = new Regex("^\"(.*)\"$", RegexOptions.Compiled);
+        private static readonly HashSet<string> cjk = new HashSet<string> { "chinese", "japanese", "korean" };
 
         [Route("~/api/search")]
         [HttpPost]
@@ -24,46 +28,45 @@ namespace Sdl.Web.Modules.Search.Controllers
         {
             try
             {
-                Stream req = Request.InputStream;
+                var req = Request.InputStream;
                 req.Seek(0, System.IO.SeekOrigin.Begin);
-                string json = new StreamReader(req).ReadToEnd();
+                string json;
+                using (var reader = new StreamReader(Request.InputStream))
+                    json = reader.ReadToEnd();
 
                 SearchParameters searchParams = JsonConvert.DeserializeObject<SearchParameters>(json);
-
-                var search = ApiClientFactory.Instance.CreateSearchClient<SearchResultSet, SearchResult>();
-
-                search.WithResultFilter(new SearchResultFilter
-                {
-                    StartOfRange = searchParams.StartIndex,
-                    EndOfRange = searchParams.StartIndex + searchParams.Count,
-                    IsHighlightingEnabled = true
-                });
-                var fields = new List<string>();
-                var values = new List<object>();
-                if (searchParams.PublicationId != null)
-                {
-                    fields.Add("publicationId");
-                    values.Add(new DefaultTermValue(searchParams.PublicationId.Value.ToString()));
+                string lang = GetLanguage(searchParams);
+                ICriteria criteria;
+                if (cjk.Contains(lang))
+                {                    
+                    string queryString = GetSearchQueryString(searchParams);
+                    string pubId = GetPublicationId(searchParams);
+                    var q = new SearchQuery().GroupStart()
+                        .Field(PUBLICATION_ONLINE_STATUS_FIELD, PUBLICATION_ONLINE_STATUS_VALUE);
+                    if (pubId != null)
+                    {
+                        q.And().Field("publicationId", new DefaultTermValue(pubId));
+                    }
+                    q.GroupEnd()
+                        .And()
+                    .GroupStart()
+                        .Field("content.cjk", queryString)
+                            .Or()
+                        .Field($"content.{lang}", queryString)
+                    .GroupEnd();
+                    criteria = q.Compile();
                 }
-                fields.Add("dynamic.FISHDITADLVRREMOTESTATUS.lng.element");                
-                string langCode = searchParams.Language.Split('-')[0];
-                fields.Add($"content.{CultureInfo.GetCultureInfo(langCode).EnglishName.ToLower()}");
-                values.Add(new DefaultTermValue("VDITADLVRREMOTESTATUSONLINE"));
+                else
+                    criteria = SingleLanguageSearchQuery(searchParams);
 
-                string searchQuery = searchParams.SearchQuery;
-                Match match = RegexpDoubleQuotes.Match(searchQuery);
-                if (match.Success)
-                {
-                    searchQuery = match.Groups[1].Value;
-                }
-
-                values.Add(new DefaultTermValue(searchQuery, TermTypes.Exact));
+                var search = ApiClientFactory.Instance.CreateSearchClient<SearchResultSet, SearchResult>();            
                 var results = search.WithResultFilter(new SearchResultFilter
                 {
                     StartOfRange = searchParams.StartIndex,
                     EndOfRange = searchParams.StartIndex + searchParams.Count,
                     IsHighlightingEnabled = true
-                }).Search(new Sdl.Tridion.Api.IqQuery.Model.Search.SearchQuery().GroupedAnd(fields, values).Compile());
+                }).Search(criteria);
+
                 var resultSet = new SearchResultSetWrapped(results)
                 {
                     Hits = results.Hits,
@@ -78,5 +81,59 @@ namespace Sdl.Web.Modules.Search.Controllers
                 return new EmptyResult();
             }
         }
+
+        private ICriteria SingleLanguageSearchQuery(SearchParameters searchParameters)
+        {
+            var queryFieldsPair = CreateQueryFieldsPair();
+            SetPublicationIdField(queryFieldsPair, searchParameters);
+            AddQueryField(queryFieldsPair, PUBLICATION_ONLINE_STATUS_FIELD, PUBLICATION_ONLINE_STATUS_VALUE);
+            SetSearchQuery(queryFieldsPair, searchParameters);
+            return new SearchQuery().GroupedAnd(queryFieldsPair.Item1, queryFieldsPair.Item2).Compile();
+        }
+     
+        private void SetPublicationIdField(Tuple<List<string>, List<object>> queryFieldsPair, SearchParameters searchParameters)
+        {
+            string pubId = GetPublicationId(searchParameters);
+            if (pubId != null)
+            {
+                AddQueryField(queryFieldsPair, "publicationId", searchParameters.PublicationId.Value.ToString());
+            }
+        }
+
+        private void SetSearchQuery(Tuple<List<string>, List<object>> queryFieldsPair, SearchParameters searchParameters)
+        {
+            AddQueryField(queryFieldsPair, $"content.{GetLanguage(searchParameters)}", 
+                GetSearchQueryString(searchParameters));
+        }
+
+        private void AddQueryField(Tuple<List<string>, List<object>> queryFieldsPair, string fieldName, object fieldValue)
+        {
+            queryFieldsPair.Item1.Add(fieldName);
+            queryFieldsPair.Item2.Add(new DefaultTermValue(fieldValue));
+        }
+
+        private string GetPublicationId(SearchParameters searchParameters) 
+            => searchParameters.PublicationId?.ToString();
+
+        private string GetLanguage(SearchParameters searchParameters)
+        {
+            string langCode = searchParameters.Language.Split('-')[0];
+            return CultureInfo.GetCultureInfo(langCode).EnglishName.ToLower();
+        }
+
+        private string GetSearchQueryString(SearchParameters searchParameters)
+        {
+            // perform escaping if required
+            string searchQuery = searchParameters.SearchQuery;
+            Match match = RegexpDoubleQuotes.Match(searchQuery);
+            if (match.Success)
+            {
+                searchQuery = match.Groups[1].Value;
+            }
+            return searchQuery;
+        }
+
+        private Tuple<List<string>, List<object>> CreateQueryFieldsPair()
+         => new Tuple<List<string>, List<object>>(new List<string>(), new List<object>());
     }
 }
