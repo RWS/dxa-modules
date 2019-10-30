@@ -41,20 +41,33 @@ namespace Sdl.Web.Modules.Search.Controllers
                 {                    
                     string queryString = GetSearchQueryString(searchParams);
                     string pubId = GetPublicationId(searchParams);
-                    var q = new SearchQuery().GroupStart()
-                        .Field(PUBLICATION_ONLINE_STATUS_FIELD, PUBLICATION_ONLINE_STATUS_VALUE);
                     if (pubId != null)
                     {
-                        q.And().Field("publicationId", new DefaultTermValue(pubId));
-                    }
-                    q.GroupEnd()
-                        .And()
-                    .GroupStart()
-                        .Field("content.cjk", queryString)
+                        var q = new SearchQuery().GroupStart()
+                            .Field(PUBLICATION_ONLINE_STATUS_FIELD, PUBLICATION_ONLINE_STATUS_VALUE)
+                            .And().Field("publicationId", new DefaultTermValue(pubId))
+                            .GroupEnd()
+                            .And()
+                            .GroupStart()
+                            .Field("content.cjk", queryString)
                             .Or()
-                        .Field($"content.{lang}", queryString)
-                    .GroupEnd();
-                    criteria = q.Compile();
+                            .Field($"content.{lang}", queryString)
+                            .GroupEnd();
+                        criteria = q.Compile();
+                    }
+                    else
+                    {
+                        var q = new SearchQuery().GroupStart()
+                            .Field(PUBLICATION_ONLINE_STATUS_FIELD, PUBLICATION_ONLINE_STATUS_VALUE)
+                            .GroupEnd()
+                            .And()
+                            .GroupStart()
+                            .Field("content.cjk", queryString)
+                            .Or()
+                            .Field($"content.{lang}", queryString)
+                            .GroupEnd();
+                        criteria = q.Compile();
+                    }
                 }
                 else
                     criteria = SingleLanguageSearchQuery(searchParams);
