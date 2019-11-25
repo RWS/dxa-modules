@@ -23,8 +23,8 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.sdl.dxa</groupId>
-        <artifactId>dxa-parent</artifactId>
-        <version>2.2.2-SNAPSHOT</version>
+        <artifactId>dxa-oss-parent</artifactId>
+        <version>2.2.3-SNAPSHOT</version>
     </parent>
 
     <groupId>com.sdl.dxa.modules</groupId>
