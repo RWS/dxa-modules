@@ -56,9 +56,7 @@ public class MainController {
     /**
      * Home page.
      *
-     * @param request   Http request
      * @return          Home page for Docs (all the publications)
-     * @throws          ContentProviderException in case if data retrieving fails
      */
     @RequestMapping(value = {"/home", "/publications/**", "/publications/{value:.+$}"}, method = GET)
     public String home(){
