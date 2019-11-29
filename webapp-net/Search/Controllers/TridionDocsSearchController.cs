@@ -22,6 +22,13 @@ namespace Sdl.Web.Modules.Search.Controllers
         private static readonly Regex RegexpDoubleQuotes = new Regex("^\"(.*)\"$", RegexOptions.Compiled);
         private static readonly HashSet<string> cjk = new HashSet<string> { "chinese", "japanese", "korean" };
 
+        [Route("~/search/{searchQuery}")]
+        [HttpGet]
+        // We reply here with 204 indicating that the server has already fulfilled the request and there
+        // is no additional content. We can't rerun the query at this point because of how the react UI
+        // request is made and we lose all context of the search such as language, etc.
+        public ActionResult Search(string searchQuery) => new HttpStatusCodeResult(204);
+
         [Route("~/api/search")]
         [HttpPost]
         public virtual ActionResult Search()
