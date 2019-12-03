@@ -22,15 +22,28 @@
     </scm>
 
     <dependencies>
+
         <dependency>
-            <groupId>com.sdl.dxa</groupId>
-            <artifactId>dxa-common-api</artifactId>
+            <groupId>com.sdl.delivery</groupId>
+            <artifactId>cil</artifactId>
+            <version>10.1.1-1011</version>
+            <type>pom</type>
         </dependency>
 
         <dependency>
+            <groupId>com.sdl.audiencemanager</groupId>
+            <artifactId>audiencemanager_profile_compatibility</artifactId>
+            <version>8.6.0</version>
+        </dependency>
+        <dependency>
             <groupId>com.sdl.web</groupId>
-            <artifactId>cil</artifactId>
-            <type>pom</type>
+            <artifactId>web-ambient-engine</artifactId>
+            <version>8.5.0-1073</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sdl.dxa</groupId>
+            <artifactId>dxa-common-api</artifactId>
         </dependency>
 
         <dependency>
