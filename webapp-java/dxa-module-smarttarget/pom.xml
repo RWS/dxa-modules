@@ -12,7 +12,7 @@
     <groupId>com.sdl.dxa.modules</groupId>
     <artifactId>dxa-module-smarttarget</artifactId>
 
-    <name>DXA Modules - SmartTarget - XO support</name>
+    <name>DXA Modules - XO support</name>
     <description>Implementation of DXA XO support</description>
 
     <scm>
