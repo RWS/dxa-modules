@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.sdl.dxa</groupId>
         <artifactId>dxa-oss-parent</artifactId>
-        <version>2.0.4</version>
+        <version>2.0.5</version>
     </parent>
 
     <groupId>com.sdl.dxa.modules</groupId>
@@ -22,15 +22,27 @@
     </scm>
 
     <dependencies>
-        <dependency>
-            <groupId>com.sdl.dxa</groupId>
-            <artifactId>dxa-common-api</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>com.sdl.web</groupId>
             <artifactId>cil</artifactId>
             <type>pom</type>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sdl.audiencemanager</groupId>
+            <artifactId>audiencemanager_profile_compatibility</artifactId>
+            <version>8.6.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sdl.web</groupId>
+            <artifactId>web-ambient-engine</artifactId>
+            <version>8.5.0-1073</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sdl.dxa</groupId>
+            <artifactId>dxa-common-api</artifactId>
         </dependency>
 
         <dependency>
