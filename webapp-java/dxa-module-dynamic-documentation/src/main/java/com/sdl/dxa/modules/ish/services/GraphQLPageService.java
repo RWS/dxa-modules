@@ -103,7 +103,8 @@ public class GraphQLPageService implements PageService {
         Page page = client.getPage(
                 ContentNamespace.Docs,
                 Integer.parseInt(localization.getId()),
-                model.getId(), metaFilter,
+                Integer.parseInt(model.getId()),
+                metaFilter,
                 ContentIncludeMode.EXCLUDE,
                 null);
         if(page.getCustomMetas() != null) {
