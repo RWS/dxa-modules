@@ -13,7 +13,7 @@ pipeline {
     parameters {
         string name: "tempFolder", defaultValue: "C:\\Temp\\DXA\\DDGUIBoilerplate", description: 'Temporary folder'
         string name: "packageName", defaultValue: 'Sdl.Dxa.Modules.DynamicDocumentation.Boilerplate', description: 'Name of the package we are going to publish'
-        string name: "version", defaultValue: '2.2.2-SNAPSHOT', description: 'Version of the package we are going to publish'
+        string name: "version", defaultValue: '2.2.4', description: 'Version of the package we are going to publish'
         booleanParam name: "isPreRelease", defaultValue: true, description: "If we add 'beta' prefix to the version"
         string name: "nuGetApiKey", defaultValue: '4e428671-39c7-3bcf-a955-a0a1af81fed8', description: "API Key is needed for authentication"
         string name: "nexusSource", defaultValue: 'https://nexus.sdl.com/service/local/nuget/releases_dotnet/', description: "Nuget source where you are going to publish"
