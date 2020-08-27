@@ -26,8 +26,9 @@ import java.util.regex.Pattern;
 @Slf4j
 @Component
 public class SearcherConfigurer {
+    private static final String SEPARATOR = "+";
     private static final Pattern REGEXP_DOUBLE_QUOTES = Pattern.compile("^\"(.*)\"$");
-    private static final String PUBLICATION_ONLINE_STATUS_FIELD = "dynamic.FISHDITADLVRREMOTESTATUS.lng.element";
+    private static final String PUBLICATION_ONLINE_STATUS_FIELD = "dynamic" + SEPARATOR + "FISHDITADLVRREMOTESTATUS.lng.element";
     private static final String PUBLICATION_ONLINE_STATUS_VALUE = "VDITADLVRREMOTESTATUSONLINE";
     private static final Set<String> cjk = Collections.unmodifiableSet(Sets.newHashSet("chinese", "japanese", "korean"));
 
@@ -61,9 +62,9 @@ public class SearcherConfigurer {
                         .field(PUBLICATION_ONLINE_STATUS_FIELD, PUBLICATION_ONLINE_STATUS_VALUE)
                             .and()
                         .groupStart()
-                            .field("content.cjk", searchQueryParam)
+                            .field("content" + SEPARATOR + "cjk", searchQueryParam)
                                 .or()
-                            .field("content." + language, searchQueryParam)
+                            .field("content" + SEPARATOR + language, searchQueryParam)
                         .groupEnd().compile();
             }
             return SearchQuery.newQuery()
@@ -74,9 +75,9 @@ public class SearcherConfigurer {
                     .groupEnd()
                         .and()
                     .groupStart()
-                        .field("content.cjk", searchQueryParam)
+                        .field("content" + SEPARATOR + "cjk", searchQueryParam)
                             .or()
-                        .field("content."+language, searchQueryParam)
+                        .field("content" + SEPARATOR + language, searchQueryParam)
                     .groupEnd().compile();
         } catch (QueryException e) {
             String message = "Could not build search criteria parameters " + searchParameters;
@@ -117,7 +118,7 @@ public class SearcherConfigurer {
         String contentLanguage = Locale.forLanguageTag(searchParameters.getLanguage())
                 .getDisplayLanguage().toLowerCase();
         String searchQuery = searchParameters.getSearchQuery();
-        String contentLang = "content." + contentLanguage;
+        String contentLang = "content" + SEPARATOR + contentLanguage;
 
         Matcher m = REGEXP_DOUBLE_QUOTES.matcher(searchQuery);
         if (m.find()) {
