@@ -7,21 +7,38 @@ using Newtonsoft.Json;
 using Sdl.Web.Modules.Search.Data;
 using Sdl.Web.Mvc.Controllers;
 using System.Text.RegularExpressions;
+using System.Web.Configuration;
 using Sdl.Tridion.Api.IqQuery;
 using Sdl.Tridion.Api.IqQuery.Model.Field;
 using Sdl.Tridion.Api.IqQuery.Model.Result;
 using Sdl.Web.Tridion.ApiClient;
 using Sdl.Tridion.Api.IqQuery.Model.Search;
+using Sdl.Web.Common.Logging;
 
 namespace Sdl.Web.Modules.Search.Controllers
 {
     public class TridionDocsSearchController : BaseController
     {
-        private static readonly string SEPARATOR = "+";
-        private static readonly string PUBLICATION_ONLINE_STATUS_FIELD = $"dynamic{SEPARATOR}FISHDITADLVRREMOTESTATUS.lng.element";
+        private static readonly string DEFAULT_SEPARATOR = "+"; // used to be .
         private static readonly string PUBLICATION_ONLINE_STATUS_VALUE = "VDITADLVRREMOTESTATUSONLINE";
         private static readonly Regex RegexpDoubleQuotes = new Regex("^\"(.*)\"$", RegexOptions.Compiled);
-        private static readonly HashSet<string> cjk = new HashSet<string> { "chinese", "japanese", "korean" };
+        private static readonly HashSet<string> Cjk = new HashSet<string> { "chinese", "japanese", "korean" };
+        private readonly string _separator;
+        private string PublicationOnlineStatusField => $"dynamic{_separator}FISHDITADLVRREMOTESTATUS.lng.element";
+        private string ContentField(string language) => $"content{_separator}{language}";
+
+        public TridionDocsSearchController()
+        {
+            try
+            {
+                _separator = WebConfigurationManager.AppSettings["iq-field-separator"] ?? DEFAULT_SEPARATOR;
+            }
+            catch (Exception e)
+            {
+                Log.Error(e);
+                _separator = DEFAULT_SEPARATOR;
+            }
+        }
 
         [Route("~/search/{searchQuery}")]
         [HttpGet]
@@ -42,37 +59,37 @@ namespace Sdl.Web.Modules.Search.Controllers
                 using (var reader = new StreamReader(Request.InputStream))
                     json = reader.ReadToEnd();
 
-                SearchParameters searchParams = JsonConvert.DeserializeObject<SearchParameters>(json);
-                string lang = GetLanguage(searchParams);
+                var searchParams = JsonConvert.DeserializeObject<SearchParameters>(json);
+                var lang = GetLanguage(searchParams);
                 ICriteria criteria;
-                if (cjk.Contains(lang))
+                if (Cjk.Contains(lang))
                 {                    
-                    string queryString = GetSearchQueryString(searchParams);
-                    string pubId = GetPublicationId(searchParams);
+                    var queryString = GetSearchQueryString(searchParams);
+                    var pubId = GetPublicationId(searchParams);
                     if (pubId != null)
                     {
                         var q = new SearchQuery().GroupStart()
-                            .Field(PUBLICATION_ONLINE_STATUS_FIELD, PUBLICATION_ONLINE_STATUS_VALUE)
+                            .Field(PublicationOnlineStatusField, PUBLICATION_ONLINE_STATUS_VALUE)
                             .And().Field("publicationId", new DefaultTermValue(pubId))
                             .GroupEnd()
                             .And()
                             .GroupStart()
-                            .Field($"content{SEPARATOR}cjk", queryString)
+                            .Field(ContentField("cjk"), queryString)
                             .Or()
-                            .Field($"content{SEPARATOR}{lang}", queryString)
+                            .Field(ContentField(lang), queryString)
                             .GroupEnd();
                         criteria = q.Compile();
                     }
                     else
                     {
                         var q = new SearchQuery().GroupStart()
-                            .Field(PUBLICATION_ONLINE_STATUS_FIELD, PUBLICATION_ONLINE_STATUS_VALUE)
+                            .Field(PublicationOnlineStatusField, PUBLICATION_ONLINE_STATUS_VALUE)
                             .GroupEnd()
                             .And()
                             .GroupStart()
-                            .Field($"content{SEPARATOR}cjk", queryString)
+                            .Field(ContentField("cjk"), queryString)
                             .Or()
-                            .Field($"content{SEPARATOR}{lang}", queryString)
+                            .Field(ContentField(lang), queryString)
                             .GroupEnd();
                         criteria = q.Compile();
                     }
@@ -107,7 +124,7 @@ namespace Sdl.Web.Modules.Search.Controllers
         {
             var queryFieldsPair = CreateQueryFieldsPair();
             SetPublicationIdField(queryFieldsPair, searchParameters);
-            AddQueryField(queryFieldsPair, PUBLICATION_ONLINE_STATUS_FIELD, PUBLICATION_ONLINE_STATUS_VALUE);
+            AddQueryField(queryFieldsPair, PublicationOnlineStatusField, PUBLICATION_ONLINE_STATUS_VALUE);
             SetSearchQuery(queryFieldsPair, searchParameters);
             return new SearchQuery().GroupedAnd(queryFieldsPair.Item1, queryFieldsPair.Item2).Compile();
         }
@@ -115,17 +132,15 @@ namespace Sdl.Web.Modules.Search.Controllers
         private void SetPublicationIdField(Tuple<List<string>, List<object>> queryFieldsPair, SearchParameters searchParameters)
         {
             var pubId = GetPublicationId(searchParameters);
-            if (pubId != null)
-            {
-                AddQueryField(queryFieldsPair, "publicationId", searchParameters.PublicationId.Value.ToString());
-            }
+            if (pubId == null) return;
+            AddQueryField(queryFieldsPair, "publicationId", searchParameters.PublicationId.Value.ToString());
         }
 
         private void SetSearchQuery(Tuple<List<string>, List<object>> queryFieldsPair, SearchParameters searchParameters) =>
-            AddQueryField(queryFieldsPair, $"content{SEPARATOR}{GetLanguage(searchParameters)}", 
+            AddQueryField(queryFieldsPair, ContentField(GetLanguage(searchParameters)), 
                 GetSearchQueryString(searchParameters));
 
-        private void AddQueryField(Tuple<List<string>, List<object>> queryFieldsPair, string fieldName, object fieldValue)
+        private static void AddQueryField(Tuple<List<string>, List<object>> queryFieldsPair, string fieldName, object fieldValue)
         {
             queryFieldsPair.Item1.Add(fieldName);
             queryFieldsPair.Item2.Add(new DefaultTermValue(fieldValue));
@@ -134,13 +149,10 @@ namespace Sdl.Web.Modules.Search.Controllers
         private string GetPublicationId(SearchParameters searchParameters) 
             => searchParameters.PublicationId?.ToString();
 
-        private string GetLanguage(SearchParameters searchParameters)
-        {
-            var langCode = searchParameters.Language.Split('-')[0];
-            return CultureInfo.GetCultureInfo(langCode).EnglishName.ToLower();
-        }
+        private string GetLanguage(SearchParameters searchParameters) 
+            => CultureInfo.GetCultureInfo(searchParameters.Language.Split('-')[0]).EnglishName.ToLower();
 
-        private string GetSearchQueryString(SearchParameters searchParameters)
+        private static string GetSearchQueryString(SearchParameters searchParameters)
         {
             // perform escaping if required
             string searchQuery = searchParameters.SearchQuery;
@@ -152,7 +164,7 @@ namespace Sdl.Web.Modules.Search.Controllers
             return searchQuery;
         }
 
-        private Tuple<List<string>, List<object>> CreateQueryFieldsPair()
-         => new Tuple<List<string>, List<object>>(new List<string>(), new List<object>());
+        private static Tuple<List<string>, List<object>> CreateQueryFieldsPair()
+            => new Tuple<List<string>, List<object>>(new List<string>(), new List<object>());
     }
 }
