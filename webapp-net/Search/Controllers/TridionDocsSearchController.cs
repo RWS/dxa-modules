@@ -24,6 +24,7 @@ namespace Sdl.Web.Modules.Search.Controllers
         private static readonly Regex RegexpDoubleQuotes = new Regex("^\"(.*)\"$", RegexOptions.Compiled);
         private static readonly HashSet<string> Cjk = new HashSet<string> { "chinese", "japanese", "korean" };
         private readonly string _separator;
+        private readonly string _namespace;
         private string PublicationOnlineStatusField => $"dynamic{_separator}FISHDITADLVRREMOTESTATUS.lng.element";
         private string ContentField(string language) => $"content{_separator}{language}";
 
@@ -32,6 +33,7 @@ namespace Sdl.Web.Modules.Search.Controllers
             try
             {
                 _separator = WebConfigurationManager.AppSettings["iq-field-separator"] ?? DEFAULT_SEPARATOR;
+                _namespace = WebConfigurationManager.AppSettings["iq-namespace"];
             }
             catch (Exception e)
             {
@@ -61,41 +63,53 @@ namespace Sdl.Web.Modules.Search.Controllers
 
                 var searchParams = JsonConvert.DeserializeObject<SearchParameters>(json);
                 var lang = GetLanguage(searchParams);
-                ICriteria criteria;
+                ICriteria criteria = null;
+              
+                var queryString = GetSearchQueryString(searchParams);
+                var pubId = GetPublicationId(searchParams);
+               
                 if (Cjk.Contains(lang))
-                {                    
-                    var queryString = GetSearchQueryString(searchParams);
-                    var pubId = GetPublicationId(searchParams);
-                    if (pubId != null)
+                {
+                    if (pubId == null && string.IsNullOrEmpty(_namespace))
                     {
-                        var q = new SearchQuery().GroupStart()
-                            .Field(PublicationOnlineStatusField, PUBLICATION_ONLINE_STATUS_VALUE)
-                            .And().Field("publicationId", new DefaultTermValue(pubId))
-                            .GroupEnd()
-                            .And()
-                            .GroupStart()
-                            .Field(ContentField("cjk"), queryString)
-                            .Or()
-                            .Field(ContentField(lang), queryString)
-                            .GroupEnd();
-                        criteria = q.Compile();
+                        criteria = CompileMultiLangQuery(lang, queryString);
                     }
                     else
                     {
-                        var q = new SearchQuery().GroupStart()
-                            .Field(PublicationOnlineStatusField, PUBLICATION_ONLINE_STATUS_VALUE)
-                            .GroupEnd()
-                            .And()
-                            .GroupStart()
-                            .Field(ContentField("cjk"), queryString)
-                            .Or()
-                            .Field(ContentField(lang), queryString)
-                            .GroupEnd();
-                        criteria = q.Compile();
+                        if (pubId != null && !string.IsNullOrEmpty(_namespace))
+                        {
+                            criteria = CompileMultiLangQuery("publicationId", pubId, "namespace", _namespace, lang, queryString);
+                        }
+                        else
+                        {
+                            if (pubId != null)
+                                criteria = CompileMultiLangQuery("publicationId", pubId, lang,
+                                    queryString);
+                            else if (!string.IsNullOrEmpty(_namespace))
+                                criteria = CompileMultiLangQuery("namespace", _namespace, lang,
+                                    queryString);
+                        }
                     }
                 }
                 else
-                    criteria = SingleLanguageSearchQuery(searchParams);
+                {
+                    var fields = new List<string> { PublicationOnlineStatusField };
+                    var values = new List<object> { new DefaultTermValue(PUBLICATION_ONLINE_STATUS_VALUE) };
+                    if (pubId != null)
+                    {
+                        fields.Add("publicationId");
+                        values.Add(new DefaultTermValue(pubId));
+                    }
+                    if (_namespace != null)
+                    {
+                        fields.Add("namespace");
+                        values.Add(new DefaultTermValue(_namespace));
+                    }
+                    
+                    fields.Add(ContentField(GetLanguage(searchParams)));
+                    values.Add(new DefaultTermValue(GetSearchQueryString(searchParams)));
+                    criteria = new SearchQuery().GroupedAnd(fields, values).Compile();
+                }
 
                 var search = ApiClientFactory.Instance.CreateSearchClient<SearchResultSet, SearchResult>();            
                 var results = search.WithResultFilter(new SearchResultFilter
@@ -120,31 +134,50 @@ namespace Sdl.Web.Modules.Search.Controllers
             }
         }
 
-        private ICriteria SingleLanguageSearchQuery(SearchParameters searchParameters)
-        {
-            var queryFieldsPair = CreateQueryFieldsPair();
-            SetPublicationIdField(queryFieldsPair, searchParameters);
-            AddQueryField(queryFieldsPair, PublicationOnlineStatusField, PUBLICATION_ONLINE_STATUS_VALUE);
-            SetSearchQuery(queryFieldsPair, searchParameters);
-            return new SearchQuery().GroupedAnd(queryFieldsPair.Item1, queryFieldsPair.Item2).Compile();
-        }
-     
-        private void SetPublicationIdField(Tuple<List<string>, List<object>> queryFieldsPair, SearchParameters searchParameters)
-        {
-            var pubId = GetPublicationId(searchParameters);
-            if (pubId == null) return;
-            AddQueryField(queryFieldsPair, "publicationId", searchParameters.PublicationId.Value.ToString());
-        }
+        private ICriteria CompileMultiLangQuery(string language, string queryString) =>
+            new SearchQuery()
+                .Field(PublicationOnlineStatusField, PUBLICATION_ONLINE_STATUS_VALUE)
+                .And()
+                .GroupStart()
+                .Field(ContentField("cjk"), queryString)
+                .Or()
+                .Field(ContentField(language), queryString)
+                .GroupEnd()
+                .Compile();
 
-        private void SetSearchQuery(Tuple<List<string>, List<object>> queryFieldsPair, SearchParameters searchParameters) =>
-            AddQueryField(queryFieldsPair, ContentField(GetLanguage(searchParameters)), 
-                GetSearchQueryString(searchParameters));
+        private ICriteria CompileMultiLangQuery(string fieldName, object fieldValue, string language, string queryString) =>
+            new SearchQuery()
+                .GroupStart()
+                .Field(PublicationOnlineStatusField, PUBLICATION_ONLINE_STATUS_VALUE)
+                .And()
+                .Field(fieldName, new DefaultTermValue(fieldValue))
+                .GroupEnd()
+                .And()
+                .GroupStart()
+                .Field(ContentField("cjk"), queryString)
+                .Or()
+                .Field(ContentField(language), queryString)
+                .GroupEnd()
+                .Compile();
 
-        private static void AddQueryField(Tuple<List<string>, List<object>> queryFieldsPair, string fieldName, object fieldValue)
-        {
-            queryFieldsPair.Item1.Add(fieldName);
-            queryFieldsPair.Item2.Add(new DefaultTermValue(fieldValue));
-        }
+        private ICriteria CompileMultiLangQuery(string fieldName1, object fieldValue1, string fieldName2, object fieldValue2, string language, string queryString) =>
+            new SearchQuery()
+                .GroupStart()
+                .Field(PublicationOnlineStatusField, PUBLICATION_ONLINE_STATUS_VALUE)
+                .And()
+                .Field(fieldName1, new DefaultTermValue(fieldValue1))
+                .GroupEnd()
+                .And()
+                .GroupStart()
+                .Field(fieldName2, new DefaultTermValue(fieldValue2))
+                .And()
+                .GroupStart()
+                .Field(ContentField("cjk"), queryString)
+                .Or()
+                .Field(ContentField(language), queryString)
+                .GroupEnd()
+                .GroupEnd()
+                .Compile();
 
         private string GetPublicationId(SearchParameters searchParameters) 
             => searchParameters.PublicationId?.ToString();
@@ -163,8 +196,5 @@ namespace Sdl.Web.Modules.Search.Controllers
             }
             return searchQuery;
         }
-
-        private static Tuple<List<string>, List<object>> CreateQueryFieldsPair()
-            => new Tuple<List<string>, List<object>>(new List<string>(), new List<object>());
     }
 }
