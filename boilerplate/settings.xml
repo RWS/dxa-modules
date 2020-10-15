@@ -35,19 +35,29 @@
     </proxies>
 
     <servers>
-        
+
         <server>
             <id>sonatype-nexus-snapshots</id>
             <username>xesFgzv4</username>
             <password>UQpBQzKdngg1ybOC71ugcCk0UVkDvE4CWPwyGOOSLUQo</password>
         </server>
-		
+
 		<server>
             <id>sonatype-nexus-staging</id>
             <username>xesFgzv4</username>
             <password>UQpBQzKdngg1ybOC71ugcCk0UVkDvE4CWPwyGOOSLUQo</password>
         </server>
-	
+        <server>
+            <id>releases-nexus</id>
+            <username>deployment</username>
+            <password>Tr1d10n</password>
+        </server>
+        <server>
+            <id>snapshots-nexus</id>
+            <username>deployment</username>
+            <password>Tr1d10n</password>
+        </server>
+
     </servers>
 
     <mirrors>
@@ -75,7 +85,7 @@
                 <gpg.passphrase>Tr1d10nDxaIS</gpg.passphrase>
             </properties>
         </profile>
-		
+
         <profile>
             <id>nexus-sdl</id>
             <repositories>
@@ -92,7 +102,7 @@
                 </repository>
             </repositories>
         </profile>
-		
+
 		<profile>
             <id>sonatype-nexus-snapshots</id>
             <repositories>
@@ -109,7 +119,7 @@
                 </repository>
             </repositories>
         </profile>
-		
+
 		<profile>
             <id>local-m2-remote</id>
             <repositories>
@@ -126,7 +136,7 @@
                 </repository>
             </repositories>
         </profile>
-		
+
 		<profile>
             <id>sonar</id>
             <properties>
