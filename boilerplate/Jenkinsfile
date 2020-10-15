@@ -48,7 +48,7 @@ pipeline {
             }
             steps {
                 dir("boilerplate/nuget") {
-                    powershell ".\\publish.ps1 -guiSourcePath '..\\' -tempFolder '${tempFolder}' -Actions @('Prepare', 'Push') -nuGetApiKey '${nuGetApiKey}' -nexusSource '${nexusSource}' -packageName '${packageName}' -version ${version}' -isPreRelease ('${isPreRelease}' -eq 'true')"
+                    powershell ".\\publish.ps1 -guiSourcePath '..\\' -tempFolder ${tempFolder} -Actions @('Prepare', 'Push') -nuGetApiKey ${nuGetApiKey} -nexusSource ${nexusSource} -packageName ${packageName} -version ${version} -isPreRelease (${isPreRelease} -eq 'true')"
                 }
             }
         }
