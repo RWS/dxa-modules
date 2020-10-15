@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+    <!--
+    <localRepository>/path/to/local/repo</localRepository>
+    -->
+
+    <!--
+    <interactiveMode>true</interactiveMode>
+    -->
+
+    <!--
+    <offline>false</offline>
+    -->
+
+    <pluginGroups>
+        <pluginGroup>org.sonarsource.scanner.maven</pluginGroup>
+        <pluginGroup>org.jacoco</pluginGroup>
+    </pluginGroups>
+
+    <proxies>
+        <!--
+        <proxy>
+          <id>optional</id>
+          <active>true</active>
+          <protocol>http</protocol>
+          <username>proxyuser</username>
+          <password>proxypass</password>
+          <host>proxy.host.net</host>
+          <port>80</port>
+          <nonProxyHosts>local.net|some.host.com</nonProxyHosts>
+        </proxy>
+        -->
+    </proxies>
+
+    <servers>
+        
+        <server>
+            <id>sonatype-nexus-snapshots</id>
+            <username>xesFgzv4</username>
+            <password>UQpBQzKdngg1ybOC71ugcCk0UVkDvE4CWPwyGOOSLUQo</password>
+        </server>
+		
+		<server>
+            <id>sonatype-nexus-staging</id>
+            <username>xesFgzv4</username>
+            <password>UQpBQzKdngg1ybOC71ugcCk0UVkDvE4CWPwyGOOSLUQo</password>
+        </server>
+	
+    </servers>
+
+    <mirrors>
+        <!--
+        <mirror>
+          <id>mirrorId</id>
+          <mirrorOf>repositoryId</mirrorOf>
+          <name>Human Readable Name for this Mirror.</name>
+          <url>http://my.repository.com/repo/path</url>
+        </mirror>
+        -->
+    </mirrors>
+
+    <profiles>
+		<profile>
+		  <id>gpg</id>
+		  <properties>
+			<gpg.executable>gpg2</gpg.executable>
+			<gpg.passphrase>Tr1d10n</gpg.passphrase>
+		  </properties>
+		</profile>
+		<profile>
+            <id>gpg-passphrase</id>
+            <properties>
+                <gpg.passphrase>Tr1d10nDxaIS</gpg.passphrase>
+            </properties>
+        </profile>
+		
+        <profile>
+            <id>nexus-sdl</id>
+            <repositories>
+                <repository>
+                    <id>sdl</id>
+                    <name>SDL public repository</name>
+                    <url>https://nexus.sdl.com/repository/public</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+            </repositories>
+        </profile>
+		
+		<profile>
+            <id>sonatype-nexus-snapshots</id>
+            <repositories>
+                <repository>
+                    <id>sonatype-nexus-snapshots</id>
+                    <name>sonatype-nexus-snapshots</name>
+                    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+					<releases>
+						<enabled>false</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+                </repository>
+            </repositories>
+        </profile>
+		
+		<profile>
+            <id>local-m2-remote</id>
+            <repositories>
+                <repository>
+                    <id>lm2r</id>
+                    <name>Local .m2 Repo as remote</name>
+                    <url>file://C:\Users\Administrator\.m2\repository</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+            </repositories>
+        </profile>
+		
+		<profile>
+            <id>sonar</id>
+            <properties>
+                <!-- Optional URL to server. Default value is http://localhost:9000 -->
+                <!--
+				<sonar.host.url>
+                  http://myserver:9000
+                </sonar.host.url>
+				-->
+            </properties>
+        </profile>
+    </profiles>
+
+    <activeProfiles>
+        <activeProfile>nexus-sdl</activeProfile>
+        <activeProfile>sonatype-nexus-snapshots</activeProfile>
+        <activeProfile>sonar</activeProfile>
+		<activeProfile>gpg</activeProfile>
+		<activeProfile>gpg-passphrase</activeProfile>
+    </activeProfiles>
+</settings>
