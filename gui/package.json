@@ -1,6 +1,6 @@
 {
   "name": "@sdl/delivery-ish-dd-webapp-gui",
-  "version": "2.2.4-SNAPSHOT",
+  "version": "2.2.5-SNAPSHOT",
   "description": "GUI of the SDL Dita Delivery Web Application.",
   "main": "dist/lib/Lib.js",
   "typings": "dist/typings/src/Lib.d.ts",
@@ -13,7 +13,7 @@
     "@types/history": "3.2.1",
     "@types/jasmine": "2.5.51",
     "@types/lodash": "4.14.118",
-    "@types/node": "^6.0.88",
+    "@types/node": "6.0.88",
     "@types/prop-types": "15.5.1",
     "@types/react": "15.0.39",
     "@types/react-addons-test-utils": "0.14.22",
