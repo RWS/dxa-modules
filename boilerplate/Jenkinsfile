@@ -37,7 +37,7 @@ pipeline {
             }
             steps {
                 dir("boilerplate") {
-                    powershell 'mvn -B -Psonatype-nexus-snapshots clean deploy'
+                    powershell 'mvn -B -s settings.xml clean deploy'
                 }
             }
         }
