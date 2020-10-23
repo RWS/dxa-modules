@@ -17,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
+import javax.servlet.ServletContext;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -41,21 +41,32 @@ public class SearchService {
      * @return Search Result Set of found items.
      */
     public SearchResultSet search(String parametersJson) throws SearchException {
+        return search(parametersJson, null);
+    }
+
+    public SearchResultSet search(String parametersJson, ServletContext context) throws SearchException {
         SearchParameters searchParameters = parseParameters(parametersJson);
         DefaultSearcher searcher = createSearcher(searchParameters);
+        if (context != null) {
+            searcherConfigurer.setNamespace(context.getAttribute("iq-namespace"));
+            searcherConfigurer.setSeparator(context.getAttribute("iq-field-separator"));
+        }
         Criteria searchCriteria = searcherConfigurer.buildCriteria(searchParameters);
         SearchQueryResultSet result = null;
         QueryException[] exception = new QueryException[1];
         try {
             result = getSearchResultsWithRetry(searcher, searchCriteria, 3, exception);
-        } catch (QueryException e) {
+        } catch (Exception e) {
             log.error("Could not perform search for parameters {}", parametersJson, e);
             throw new SearchException("Could not perform search for parameters " + parametersJson, e);
         }
         return buildSearchResultSet(result, searchParameters);
     }
 
-    private SearchQueryResultSet getSearchResultsWithRetry(DefaultSearcher searcher, Criteria searchCriteria, int attempt, QueryException[] exception) throws QueryException {
+    private SearchQueryResultSet getSearchResultsWithRetry(DefaultSearcher searcher,
+                                                           Criteria searchCriteria,
+                                                           int attempt,
+                                                           QueryException[] exception) throws QueryException {
         while (attempt > 0) {
             attempt--;
             try {
@@ -82,7 +93,7 @@ public class SearchService {
                     .withResultSetRange(parameters.getStartIndex(), parameters.getStartIndex() + parameters.getCount())
                     .enableHighlighting());
             return searcher;
-        } catch (QueryException e) {
+        } catch (Exception e) {
             String message = "Could not create searcher for parameters: " + parameters;
             throw new SearchException(message, e);
         }
@@ -91,7 +102,7 @@ public class SearchService {
     SearchParameters parseParameters(String parametersJson) {
         try {
             return READER.readValue(parametersJson);
-        } catch (IOException e) {
+        } catch (Exception e) {
             log.error("Could not parse search parameters: " + parametersJson);
             throw new SearchParametersProcessingException("Could not parse search parameters from String.", e);
         }

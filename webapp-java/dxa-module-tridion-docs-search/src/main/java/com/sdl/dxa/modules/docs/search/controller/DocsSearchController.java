@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.ServletContext;
+
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 /**
@@ -33,10 +35,11 @@ public class DocsSearchController {
 
     @RequestMapping(method = POST, value = "/api/search")
     @ResponseBody
-    public SearchResultSet search(@RequestBody String parametersJson) throws SearchException {
+    public SearchResultSet search(@RequestBody String parametersJson,
+                                  ServletContext context) throws SearchException {
         if (parametersJson == null) throw new IllegalArgumentException("Search parameters cannot be empty");
         try (Performance perf = new Performance(1_000L, "search " + parametersJson.replaceAll("(?ixm)\\s", ""))) {
-            return searchProvider.search(parametersJson);
+            return searchProvider.search(parametersJson, context);
         }
     }
 

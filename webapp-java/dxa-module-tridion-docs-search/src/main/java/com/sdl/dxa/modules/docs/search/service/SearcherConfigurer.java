@@ -32,37 +32,34 @@ import java.util.regex.Pattern;
 public class SearcherConfigurer {
     private static final String DEFAULT_SEPARATOR = "+"; // it used to be '.'
     private static final Pattern REGEXP_DOUBLE_QUOTES = Pattern.compile("^\"(.*)\"$");
-    private static final String SEPARATOR = initSeparator(DEFAULT_SEPARATOR);
-    private static final String NAMESPACE = initNamespace();
 
-    private static final String PUBLICATION_ONLINE_STATUS_FIELD = "dynamic" + SEPARATOR + "FISHDITADLVRREMOTESTATUS.lng.element";
     private static final String PUBLICATION_ONLINE_STATUS_VALUE = "VDITADLVRREMOTESTATUSONLINE";
     private static final Set<String> cjk = Collections.unmodifiableSet(
             Sets.newHashSet("chinese", "japanese", "korean"));
+
+    private static volatile String SEPARATOR = DEFAULT_SEPARATOR;
+    private static volatile String NAMESPACE;
+    private static volatile String PUBLICATION_ONLINE_STATUS_FIELD = "dynamic" + SEPARATOR + "FISHDITADLVRREMOTESTATUS.lng.element";
 
     private String getContentField(String language) {
         return "content" + SEPARATOR + language;
     }
 
-    private static String initSeparator(String defaultSeparator) {
-        //@ToDo read the property from variables
-        String property = System.getProperty("iq-field-separator");
+    private static String initSeparator(String property) {
         if (property == null || property.isEmpty()) {
             log.info("Default separator is not set up, '+' will be used as a separator.");
-            return defaultSeparator;
+            return DEFAULT_SEPARATOR;
         }
         if (property.length() > 1) {
             log.info("Default separator is set up as '" + property + "', " +
                     "but only single character is allowed. '+' will be used as a separator.");
-            return defaultSeparator;
+            return DEFAULT_SEPARATOR;
         }
         log.info("Default separator is set up, '" + property + "' will be used as a separator.");
         return property;
     }
 
-    private static String initNamespace() {
-        //@ToDo read the property from variables
-        String property = System.getProperty("iq-namespace");
+    private static String initNamespace(String property) {
         if (property == null || property.isEmpty()) {
             log.info("Default namespace is not set up.");
             return null;
@@ -230,5 +227,14 @@ public class SearcherConfigurer {
             return;
         }
         addQueryField(queryFieldsPair, contentLang, searchQuery);
+    }
+
+    public void setNamespace(Object attribute) {
+        NAMESPACE = initNamespace("" + attribute);
+    }
+
+    public void setSeparator(Object attribute) {
+        SEPARATOR = initSeparator("" + attribute);
+        PUBLICATION_ONLINE_STATUS_FIELD = "dynamic" + SEPARATOR + "FISHDITADLVRREMOTESTATUS.lng.element";
     }
 }
