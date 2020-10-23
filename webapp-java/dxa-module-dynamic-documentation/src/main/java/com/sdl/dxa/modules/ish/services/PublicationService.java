@@ -19,10 +19,11 @@ public interface PublicationService {
 
     void checkPublicationOnline(int publicationId, Localization localization) throws NotFoundException;
 
-    default String getEncodedProductFamily(String value) {
-        if (value == null) return null;
+    default String getEncodedProductFamily(String valueArg) {
+        if (valueArg == null) return null;
+        String value = "";
         try {
-            Matcher matcher = PRODUCT_FAMILY_PATTERN.matcher(value);
+            Matcher matcher = PRODUCT_FAMILY_PATTERN.matcher(valueArg);
             if (matcher.find()) {
                 value = URLEncoder.encode(matcher.group(1).trim(), "UTF-8") + " " + matcher.group(2);
             } else {
@@ -31,6 +32,7 @@ public interface PublicationService {
         } catch (Exception ex) {
             LOG.error("Could not encode [" + value + "] to UTF-8. Not a standard JVM?", ex);
         }
+        LOG.debug("{} -> {}", value, value);
         return value;
     }
 }
