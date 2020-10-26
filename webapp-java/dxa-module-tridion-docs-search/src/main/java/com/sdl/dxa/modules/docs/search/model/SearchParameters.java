@@ -1,5 +1,6 @@
 package com.sdl.dxa.modules.docs.search.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
@@ -31,5 +32,11 @@ public class SearchParameters {
 
     @JsonProperty("Count")
     private Integer count = DEFAULT_RESULT_COUNT;
+
+    @JsonIgnore
+    private String iqNamespace;
+
+    @JsonIgnore
+    private String iqSeparator;
 
 }

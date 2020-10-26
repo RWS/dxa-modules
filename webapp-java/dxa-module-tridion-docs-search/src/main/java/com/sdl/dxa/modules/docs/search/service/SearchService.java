@@ -48,8 +48,8 @@ public class SearchService {
         SearchParameters searchParameters = parseParameters(parametersJson);
         DefaultSearcher searcher = createSearcher(searchParameters);
         if (context != null) {
-            searcherConfigurer.setNamespace(context.getAttribute("iq-namespace"));
-            searcherConfigurer.setSeparator(context.getAttribute("iq-field-separator"));
+            searchParameters.setIqNamespace((String) context.getAttribute("iq-namespace"));
+            searchParameters.setIqSeparator((String) context.getAttribute("iq-field-separator"));
         }
         Criteria searchCriteria = searcherConfigurer.buildCriteria(searchParameters);
         SearchQueryResultSet result = null;
@@ -66,12 +66,12 @@ public class SearchService {
     private SearchQueryResultSet getSearchResultsWithRetry(DefaultSearcher searcher,
                                                            Criteria searchCriteria,
                                                            int attempt,
-                                                           QueryException[] exception) throws QueryException {
+                                                           Exception[] exception) throws QueryException {
         while (attempt > 0) {
             attempt--;
             try {
                 return searcher.search(searchCriteria);
-            } catch (QueryException ex) {
+            } catch (Exception ex) {
                 if (exception[0] == null) exception[0] = ex;
             }
             try {
@@ -94,8 +94,7 @@ public class SearchService {
                     .enableHighlighting());
             return searcher;
         } catch (Exception e) {
-            String message = "Could not create searcher for parameters: " + parameters;
-            throw new SearchException(message, e);
+            throw new SearchException("Could not create searcher for parameters: " + parameters, e);
         }
     }
 
@@ -103,7 +102,7 @@ public class SearchService {
         try {
             return READER.readValue(parametersJson);
         } catch (Exception e) {
-            log.error("Could not parse search parameters: " + parametersJson);
+            log.error("Could not parse search parameters: " + parametersJson, e);
             throw new SearchParametersProcessingException("Could not parse search parameters from String.", e);
         }
     }

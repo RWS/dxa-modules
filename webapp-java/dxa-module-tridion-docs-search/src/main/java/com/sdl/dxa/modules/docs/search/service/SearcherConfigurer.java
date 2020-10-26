@@ -37,34 +37,30 @@ public class SearcherConfigurer {
     private static final Set<String> cjk = Collections.unmodifiableSet(
             Sets.newHashSet("chinese", "japanese", "korean"));
 
-    private static volatile String SEPARATOR = DEFAULT_SEPARATOR;
-    private static volatile String NAMESPACE;
-    private static volatile String PUBLICATION_ONLINE_STATUS_FIELD = "dynamic" + SEPARATOR + "FISHDITADLVRREMOTESTATUS.lng.element";
-
-    private String getContentField(String language) {
-        return "content" + SEPARATOR + language;
+    private String getContentField(String separator, String language) {
+        return "content" + separator + language;
     }
 
-    private static String initSeparator(String property) {
+    private static String getDeclaredSeparator(String property) {
         if (property == null || property.isEmpty()) {
-            log.info("Default separator is not set up, '+' will be used as a separator.");
+            log.debug("Default separator is not set up, '+' will be used as a separator.");
             return DEFAULT_SEPARATOR;
         }
         if (property.length() > 1) {
-            log.info("Default separator is set up as '" + property + "', " +
+            log.debug("Default separator is set up as '" + property + "', " +
                     "but only single character is allowed. '+' will be used as a separator.");
             return DEFAULT_SEPARATOR;
         }
-        log.info("Default separator is set up, '" + property + "' will be used as a separator.");
+        log.debug("Default separator is set up, '" + property + "' will be used as a separator.");
         return property;
     }
 
-    private static String initNamespace(String property) {
+    private static String getDeclaredNamespace(String property) {
         if (property == null || property.isEmpty()) {
-            log.info("Default namespace is not set up.");
+            log.debug("Default namespace is not set up.");
             return null;
         }
-        log.info("Default namespace is set up, '" + property + "' will be used as a namespace.");
+        log.debug("Default namespace is set up, '" + property + "' will be used as a namespace.");
         return property;
     }
 
@@ -76,18 +72,19 @@ public class SearcherConfigurer {
      * @return the Criteria class with search parameters.
      */
     public Criteria buildCriteria(SearchParameters searchParameters) throws SearchException {
+        String namespace = getDeclaredNamespace(searchParameters.getIqNamespace());
+        String separator = getDeclaredSeparator(searchParameters.getIqSeparator());
         Objects.requireNonNull(searchParameters, "Please provide search parameters.");
         if (searchParameters.getSearchQuery().isEmpty()) {
             log.error("Search query is empty. Not able to perform search.");
             throw new IllegalArgumentException("Empty search query is not allowed.");
         }
         try {
-            String namespace = NAMESPACE;
             String language = Locale.forLanguageTag(searchParameters.getLanguage())
                     .getDisplayLanguage()
                     .toLowerCase();
             if (!cjk.contains(language)) {
-                return singleLanguageSearchQuery(searchParameters, namespace);
+                return singleLanguageSearchQuery(searchParameters, namespace, separator);
             }
             log.debug("Added cjk language {} to search query", language);
 
@@ -111,7 +108,8 @@ public class SearcherConfigurer {
                 extraParameters.add(namespacePair);
                 log.debug("Added namespace {} to search query", namespace);
             }
-            return createSearchQuery(language,
+            return createSearchQuery(separator,
+                    language,
                     searchQueryParam,
                     extraParameters.toArray(new Pair[0])).compile();
         } catch (Exception e) {
@@ -121,64 +119,67 @@ public class SearcherConfigurer {
         }
     }
 
-    private Operation createSearchQuery(String language,
+    private Operation createSearchQuery(String separator,
+                                        String language,
                                         String searchQueryParam,
                                         Pair<String, String>[] parameters) throws QueryException {
+        String publicationOnlineStatusField = "dynamic" + separator + "FISHDITADLVRREMOTESTATUS.lng.element";
         if (parameters == null || parameters.length == 0) {
             return SearchQuery.newQuery()
                     .groupStart()
-                        .field(PUBLICATION_ONLINE_STATUS_FIELD, PUBLICATION_ONLINE_STATUS_VALUE)
+                    .field(publicationOnlineStatusField, PUBLICATION_ONLINE_STATUS_VALUE)
                     .groupEnd()
-                        .and()
+                    .and()
                     .groupStart()
-                        .field(getContentField("cjk"), searchQueryParam)
-                            .or()
-                        .field(getContentField(language), searchQueryParam)
+                    .field(getContentField(separator, "cjk"), searchQueryParam)
+                    .or()
+                    .field(getContentField(separator, language), searchQueryParam)
                     .groupEnd();
         }
         Pair<String, String> parameter1 = parameters[0];
         if (parameters.length == 1) {
             return SearchQuery.newQuery()
                     .groupStart()
-                        .field(parameter1.getLeft(), new DefaultTermValue(parameter1.getRight()))
-                            .and()
-                        .field(PUBLICATION_ONLINE_STATUS_FIELD, PUBLICATION_ONLINE_STATUS_VALUE)
+                    .field(parameter1.getLeft(), new DefaultTermValue(parameter1.getRight()))
+                    .and()
+                    .field(publicationOnlineStatusField, PUBLICATION_ONLINE_STATUS_VALUE)
                     .groupEnd()
-                        .and()
+                    .and()
                     .groupStart()
-                        .field(getContentField("cjk"), searchQueryParam)
-                            .or()
-                        .field(getContentField(language), searchQueryParam)
+                    .field(getContentField(separator, "cjk"), searchQueryParam)
+                    .or()
+                    .field(getContentField(separator, language), searchQueryParam)
                     .groupEnd();
         }
         if (parameters.length == 2) {
             Pair<String, String> parameter2 = parameters[1];
             return SearchQuery.newQuery()
                     .groupStart()
-                        .field(parameter1.getLeft(), new DefaultTermValue(parameter1.getRight()))
-                            .and()
-                        .field(parameter2.getLeft(), new DefaultTermValue(parameter2.getRight()))
+                    .field(parameter1.getLeft(), new DefaultTermValue(parameter1.getRight()))
+                    .and()
+                    .field(parameter2.getLeft(), new DefaultTermValue(parameter2.getRight()))
                     .groupEnd()
-                        .and()
+                    .and()
                     .groupStart()
-                        .field(PUBLICATION_ONLINE_STATUS_FIELD, PUBLICATION_ONLINE_STATUS_VALUE)
-                            .and()
-                        .groupStart()
-                            .field(getContentField("cjk"), searchQueryParam)
-                                .or()
-                            .field(getContentField(language), searchQueryParam)
-                        .groupEnd()
+                    .field(publicationOnlineStatusField, PUBLICATION_ONLINE_STATUS_VALUE)
+                    .and()
+                    .groupStart()
+                    .field(getContentField(separator, "cjk"), searchQueryParam)
+                    .or()
+                    .field(getContentField(separator, language), searchQueryParam)
+                    .groupEnd()
                     .groupEnd();
         }
         throw new UnsupportedOperationException("Only 0, 1, or 2 elements are supported");
     }
 
-    private Criteria singleLanguageSearchQuery(SearchParameters searchParameters, String namespace) throws QueryException {
+    private Criteria singleLanguageSearchQuery(SearchParameters searchParameters, String namespace, String separator) throws QueryException {
         Pair<List<String>, List<TermValue>> queryFieldsPair = createQueryFieldsPair();
         setNamespaceField(queryFieldsPair, namespace);
         setPublicationIdField(queryFieldsPair, searchParameters);
-        addQueryField(queryFieldsPair, PUBLICATION_ONLINE_STATUS_FIELD, PUBLICATION_ONLINE_STATUS_VALUE);
-        setSearchQuery(queryFieldsPair, searchParameters);
+        String publicationOnlineStatusField = "dynamic" + separator + "FISHDITADLVRREMOTESTATUS.lng.element";
+        addQueryField(queryFieldsPair, publicationOnlineStatusField, PUBLICATION_ONLINE_STATUS_VALUE);
+        setSearchQuery(queryFieldsPair, searchParameters, separator);
         return SearchQuery
                 .newQuery()
                 .groupedAnd(queryFieldsPair.getLeft(), queryFieldsPair.getRight())
@@ -213,13 +214,14 @@ public class SearcherConfigurer {
     }
 
     private void setSearchQuery(Pair<List<String>, List<TermValue>> queryFieldsPair,
-                                SearchParameters searchParameters) {
+                                SearchParameters searchParameters,
+                                String separator) {
         String contentLanguage = Locale
                 .forLanguageTag(searchParameters.getLanguage())
                 .getDisplayLanguage()
                 .toLowerCase();
         String searchQuery = searchParameters.getSearchQuery();
-        String contentLang = "content" + SEPARATOR + contentLanguage;
+        String contentLang = "content" + separator + contentLanguage;
 
         Matcher matcher = REGEXP_DOUBLE_QUOTES.matcher(searchQuery);
         if (matcher.find()) {
@@ -227,14 +229,5 @@ public class SearcherConfigurer {
             return;
         }
         addQueryField(queryFieldsPair, contentLang, searchQuery);
-    }
-
-    public void setNamespace(Object attribute) {
-        NAMESPACE = initNamespace("" + attribute);
-    }
-
-    public void setSeparator(Object attribute) {
-        SEPARATOR = initSeparator("" + attribute);
-        PUBLICATION_ONLINE_STATUS_FIELD = "dynamic" + SEPARATOR + "FISHDITADLVRREMOTESTATUS.lng.element";
     }
 }
