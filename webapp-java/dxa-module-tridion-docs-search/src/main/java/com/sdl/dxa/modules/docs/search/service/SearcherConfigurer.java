@@ -94,16 +94,16 @@ public class SearcherConfigurer {
                 searchQueryParam = matcher.group(1);
             }
             log.debug("Added {} to search query", searchQueryParam);
-            List<Pair<String, String>> extraParameters = new ArrayList<>();
+            List<Pair<String, Object>> extraParameters = new ArrayList<>();
             if (searchParameters.getPublicationId() != null) {
-                String publicationId = Integer.toString(searchParameters.getPublicationId());
-                Pair<String, String> publicationIdPair =
+                Integer publicationId = searchParameters.getPublicationId();
+                Pair<String, Object> publicationIdPair =
                         new ImmutablePair<>("publicationId", publicationId);
                 extraParameters.add(publicationIdPair);
                 log.debug("Added publicationId {} to search query", publicationId);
             }
             if (namespace != null && !namespace.isEmpty()) {
-                Pair<String, String> namespacePair =
+                Pair<String, Object> namespacePair =
                         new ImmutablePair<>("namespace", namespace);
                 extraParameters.add(namespacePair);
                 log.debug("Added namespace {} to search query", namespace);
@@ -126,9 +126,7 @@ public class SearcherConfigurer {
         String publicationOnlineStatusField = "dynamic" + separator + "FISHDITADLVRREMOTESTATUS.lng.element";
         if (parameters == null || parameters.length == 0) {
             return SearchQuery.newQuery()
-                    .groupStart()
                     .field(publicationOnlineStatusField, PUBLICATION_ONLINE_STATUS_VALUE)
-                    .groupEnd()
                     .and()
                     .groupStart()
                     .field(getContentField(separator, "cjk"), searchQueryParam)
