@@ -21,7 +21,7 @@ public interface PublicationService {
 
     default String getEncodedProductFamily(String valueArg) {
         if (valueArg == null) return null;
-        String value = "";
+        String value = valueArg;
         try {
             Matcher matcher = PRODUCT_FAMILY_PATTERN.matcher(valueArg);
             if (matcher.find()) {
@@ -30,9 +30,9 @@ public interface PublicationService {
                 value = URLEncoder.encode(value.trim(), "UTF-8");
             }
         } catch (Exception ex) {
-            LOG.error("Could not encode [" + value + "] to UTF-8. Not a standard JVM?", ex);
+            LOG.error("Could not encode [" + valueArg + "] to UTF-8. Not a standard JVM?", ex);
         }
-        LOG.debug("{} -> {}", value, value);
+        LOG.debug("{} -> {}", valueArg, value);
         return value;
     }
 }
