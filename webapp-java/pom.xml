@@ -17,6 +17,10 @@
     <name>DXA Modules</name>
     <description>Top level project of DXA module</description>
 
+    <properties>
+        <javax.servlet-api.version>3.0.1</javax.servlet-api.version>
+    </properties>
+
     <scm>
         <url>https://github.com/sdl/dxa-modules</url>
         <connection>scm:git:git@github.com:sdl/dxa-modules.git</connection>

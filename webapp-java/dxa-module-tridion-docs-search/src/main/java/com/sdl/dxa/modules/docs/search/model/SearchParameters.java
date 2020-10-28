@@ -38,5 +38,4 @@ public class SearchParameters {
 
     @JsonIgnore
     private String iqSeparator;
-
 }

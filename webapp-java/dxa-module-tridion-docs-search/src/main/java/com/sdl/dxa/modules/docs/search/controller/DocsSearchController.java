@@ -38,8 +38,11 @@ public class DocsSearchController {
     public SearchResultSet search(@RequestBody String parametersJson,
                                   ServletContext context) throws SearchException {
         if (parametersJson == null) throw new IllegalArgumentException("Search parameters cannot be empty");
-        try (Performance perf = new Performance(1_000L, "search " + parametersJson.replaceAll("(?ixm)\\s", ""))) {
-            return searchProvider.search(parametersJson, context);
+        try (Performance perf = new Performance(1_000L,
+                "search " + parametersJson.replaceAll("(?ixm)\\s", ""))) {
+            String namespace = (String) context.getAttribute("iq-namespace");
+            String separator = (String) context.getAttribute("iq-field-separator");
+            return searchProvider.search(parametersJson, namespace, separator);
         }
     }
 

@@ -41,15 +41,27 @@ public class SearchService {
      * @return Search Result Set of found items.
      */
     public SearchResultSet search(String parametersJson) throws SearchException {
-        return search(parametersJson, null);
+        return search(parametersJson, null, null);
     }
 
-    public SearchResultSet search(String parametersJson, ServletContext context) throws SearchException {
+    /**
+     * Performs search by using UDP search service with given search parameters in string json.
+     *
+     * @param parametersJson String json representation of search parameters.
+     * @param namespace optional namespace to provide extra filtering. Allowed to be null or empty.
+     * @param separator optional separator for search (some fields have complex names,
+     *                  which should be distinguished from parts of queries). Default separator used to be '.',
+     *                  then it became a '+' character. Allowed to be a single char or missing.
+     * @return Search Result Set of found items.
+     */
+    public SearchResultSet search(String parametersJson, String namespace, String separator) throws SearchException {
         SearchParameters searchParameters = parseParameters(parametersJson);
         DefaultSearcher searcher = createSearcher(searchParameters);
-        if (context != null) {
-            searchParameters.setIqNamespace((String) context.getAttribute("iq-namespace"));
-            searchParameters.setIqSeparator((String) context.getAttribute("iq-field-separator"));
+        if (namespace != null && !namespace.isEmpty()) {
+            searchParameters.setIqNamespace(namespace);
+        }
+        if (separator != null && !separator.isEmpty()) {
+            searchParameters.setIqSeparator(separator);
         }
         Criteria searchCriteria = searcherConfigurer.buildCriteria(searchParameters);
         SearchQueryResultSet result = null;
@@ -102,7 +114,7 @@ public class SearchService {
         try {
             return READER.readValue(parametersJson);
         } catch (Exception e) {
-            log.error("Could not parse search parameters: " + parametersJson, e);
+            log.error("Could not parse search parameters: {}", parametersJson, e);
             throw new SearchParametersProcessingException("Could not parse search parameters from String.", e);
         }
     }
