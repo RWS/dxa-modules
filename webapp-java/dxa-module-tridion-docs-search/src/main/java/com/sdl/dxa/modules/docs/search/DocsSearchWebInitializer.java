@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.WebApplicationInitializer;
 
 import javax.servlet.ServletContext;
+import java.util.Properties;
 
 @Slf4j
 public class DocsSearchWebInitializer implements WebApplicationInitializer {
@@ -13,16 +14,18 @@ public class DocsSearchWebInitializer implements WebApplicationInitializer {
     private String iqNamespace;
 
     private void init() {
-        iqFieldsSeparator = InitializationUtils.loadDxaProperties().getProperty("dxa.modules.docs.search.iq-field-separator");
-        iqNamespace = InitializationUtils.loadDxaProperties().getProperty("dxa.modules.docs.search.iq-namespace");
+        Properties properties = InitializationUtils.loadDxaProperties();
+        log.trace("All read properties:\n{}", properties);
+        iqFieldsSeparator = properties.getProperty("iq-field-separator");
+        iqNamespace = properties.getProperty("iq-namespace");
     }
 
     @Override
     public void onStartup(ServletContext servletContext) {
         init();
-        log.info("Docs search global parameters: iq-field-separator '{}' and iq-namespace '{}'. Defined in " +
-                        "'dxa.modules.docs.search.properties'", iqFieldsSeparator, iqNamespace);
-        servletContext.setAttribute("iq-field-separator", iqFieldsSeparator);
-        servletContext.setAttribute("iq-namespace", iqNamespace);
+        log.info("Docs search global parameters: \niq-field-separator '{}' and \niq-namespace '{}'.\nDefined in " +
+                "'dxa.modules.docs.search.properties'", iqFieldsSeparator, iqNamespace);
+        servletContext.setInitParameter("iq-field-separator", iqFieldsSeparator);
+        servletContext.setInitParameter("iq-namespace", iqNamespace);
     }
 }

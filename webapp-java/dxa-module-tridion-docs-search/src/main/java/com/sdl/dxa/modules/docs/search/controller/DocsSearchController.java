@@ -26,6 +26,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @Slf4j
 @Controller
 public class DocsSearchController {
+    @Autowired
+    private ServletContext context;
 
     @Autowired
     private DocsExceptionHandler exceptionHandler;
@@ -40,8 +42,8 @@ public class DocsSearchController {
         if (parametersJson == null) throw new IllegalArgumentException("Search parameters cannot be empty");
         try (Performance perf = new Performance(1_000L,
                 "search " + parametersJson.replaceAll("(?ixm)\\s", ""))) {
-            String namespace = (String) context.getAttribute("iq-namespace");
-            String separator = (String) context.getAttribute("iq-field-separator");
+            String namespace = context.getInitParameter("iq-namespace");
+            String separator = context.getInitParameter("iq-field-separator");
             return searchProvider.search(parametersJson, namespace, separator);
         }
     }

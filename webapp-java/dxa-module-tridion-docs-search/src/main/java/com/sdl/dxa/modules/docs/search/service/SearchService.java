@@ -67,6 +67,7 @@ public class SearchService {
         SearchQueryResultSet result = null;
         QueryException[] exception = new QueryException[1];
         try {
+            log.trace("Search criteria is: {}", searchCriteria.getRawQuery());
             result = getSearchResultsWithRetry(searcher, searchCriteria, 3, exception);
         } catch (Exception e) {
             log.error("Could not perform search for parameters {}", parametersJson, e);

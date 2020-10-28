@@ -52,13 +52,13 @@ public class SearcherConfigurer {
                     "is allowed. '+' will be used as a separator.", property);
             return DEFAULT_SEPARATOR;
         }
-        log.debug("Default separator is set up, '{}}' will be used as a separator.", property);
+        log.debug("Default separator is set up, '{}' will be used as a separator.", property);
         return property;
     }
 
     private static String getDeclaredNamespace(String property) {
         if (property == null || property.isEmpty()) {
-            log.debug("Default namespace is not set up.");
+            log.debug("Default namespace is not set up. Allowed: 'tcm', 'ish' or empty.");
             return null;
         }
         log.debug("Default namespace is set up, '{}' will be used as a namespace.", property);
@@ -87,21 +87,21 @@ public class SearcherConfigurer {
             if (!cjk.contains(language)) {
                 return singleLanguageSearchQuery(searchParameters, namespace, separator);
             }
-            log.debug("Added cjk language {} to search query", language);
+            log.trace("Added cjk language {} to search query", language);
 
             String searchQueryParam = searchParameters.getSearchQuery();
             Matcher matcher = REGEXP_DOUBLE_QUOTES.matcher(searchQueryParam);
             if (matcher.find()) {
                 searchQueryParam = matcher.group(1);
             }
-            log.debug("Added {} to search query", searchQueryParam);
+            log.trace("Added {} to search query", searchQueryParam);
             List<Pair<String, Object>> extraParameters = new ArrayList<>();
             if (searchParameters.getPublicationId() != null) {
                 Integer publicationId = searchParameters.getPublicationId();
                 Pair<String, Object> publicationIdPair =
                         new ImmutablePair<>("publicationId", publicationId);
                 extraParameters.add(publicationIdPair);
-                log.debug("Added publicationId {} to search query", publicationId);
+                log.trace("Added publicationId {} to search query", publicationId);
             }
             if (namespace != null && !namespace.isEmpty()) {
                 Pair<String, Object> namespacePair =
