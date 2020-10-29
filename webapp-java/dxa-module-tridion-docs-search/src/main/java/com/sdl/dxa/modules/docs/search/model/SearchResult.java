@@ -1,5 +1,6 @@
 package com.sdl.dxa.modules.docs.search.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
@@ -11,6 +12,7 @@ import java.util.Map;
  * Search Result represents data structure for single search result.
  */
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class SearchResult {
     @JsonProperty("Id")
     private String id;
