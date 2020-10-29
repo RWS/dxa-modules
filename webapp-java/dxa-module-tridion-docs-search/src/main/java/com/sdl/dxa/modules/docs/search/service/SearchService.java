@@ -41,7 +41,7 @@ public class SearchService {
      * @return Search Result Set of found items.
      */
     public SearchResultSet search(String parametersJson) throws SearchException {
-        return search(parametersJson, null, null);
+        return search(parametersJson, null, null, null);
     }
 
     /**
@@ -54,7 +54,10 @@ public class SearchService {
      *                  then it became a '+' character. Allowed to be a single char or missing.
      * @return Search Result Set of found items.
      */
-    public SearchResultSet search(String parametersJson, String namespace, String separator) throws SearchException {
+    public SearchResultSet search(String parametersJson,
+                                  String namespace,
+                                  String separator,
+                                  String language) throws SearchException {
         SearchParameters searchParameters = parseParameters(parametersJson);
         DefaultSearcher searcher = createSearcher(searchParameters);
         if (namespace != null && !namespace.isEmpty()) {
@@ -62,6 +65,9 @@ public class SearchService {
         }
         if (separator != null && !separator.isEmpty()) {
             searchParameters.setIqSeparator(separator);
+        }
+        if (language != null && !language.isEmpty()) {
+            searchParameters.setIqDefaultLanguage(language);
         }
         Criteria searchCriteria = searcherConfigurer.buildCriteria(searchParameters);
         SearchQueryResultSet result = null;

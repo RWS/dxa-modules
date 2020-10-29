@@ -32,6 +32,7 @@ import java.util.regex.Pattern;
 @Component
 public class SearcherConfigurer {
     private static final String DEFAULT_SEPARATOR = "+"; // it used to be '.'
+    private static final String DEFAULT_LANGUAGE = "english";
     private static final Pattern REGEXP_DOUBLE_QUOTES = Pattern.compile("^\"(.*)\"$");
 
     private static final String PUBLICATION_ONLINE_STATUS_VALUE = "VDITADLVRREMOTESTATUSONLINE";
@@ -65,6 +66,15 @@ public class SearcherConfigurer {
         return property;
     }
 
+    private static String getDeclaredLanguage(String property) {
+        if (property == null || property.isEmpty()) {
+            log.debug("Default language is not set up. 'english' will be used as a default.");
+            return DEFAULT_LANGUAGE;
+        }
+        log.debug("Default namespace is set up, '{}' will be used as a namespace.", property);
+        return property;
+    }
+
     /**
      * Builds Criteria object with given search parameters.
      * Which in turn is consumed by UDP Searcher.
@@ -84,6 +94,9 @@ public class SearcherConfigurer {
             String language = Locale.forLanguageTag(searchParameters.getLanguage())
                     .getDisplayLanguage()
                     .toLowerCase();
+            if (language.isEmpty()) {
+                language = getDeclaredLanguage(searchParameters.getIqDefaultLanguage());
+            }
             if (!cjk.contains(language)) {
                 return singleLanguageSearchQuery(searchParameters, namespace, separator);
             }
