@@ -20,7 +20,8 @@ namespace Sdl.Web.Modules.Search.Controllers
     public class TridionDocsSearchController : BaseController
     {
         private static readonly string DEFAULT_SEPARATOR = "+"; // used to be .
-        private static readonly string DEFAULT_NAMESPACE = "ish"; 
+        private static readonly string DEFAULT_NAMESPACE = "ish";
+        private static readonly string DEFAULT_LANGUAGE = "english";
         private static readonly string PUBLICATION_ONLINE_STATUS_VALUE = "VDITADLVRREMOTESTATUSONLINE";
         private static readonly Regex RegexpDoubleQuotes = new Regex("^\"(.*)\"$", RegexOptions.Compiled);
         private static readonly HashSet<string> Cjk = new HashSet<string> { "chinese", "japanese", "korean" };
@@ -36,7 +37,7 @@ namespace Sdl.Web.Modules.Search.Controllers
             {
                 _separator = WebConfigurationManager.AppSettings["iq-field-separator"] ?? DEFAULT_SEPARATOR;
                 _namespace = WebConfigurationManager.AppSettings["iq-namespace"] ?? DEFAULT_NAMESPACE;
-                _defaultLanguage = WebConfigurationManager.AppSettings["iq-default-language"] ?? DEFAULT_NAMESPACE;
+                _defaultLanguage = WebConfigurationManager.AppSettings["iq-default-language"] ?? DEFAULT_LANGUAGE;
             }
             catch (Exception e)
             {
