@@ -20,11 +20,13 @@ namespace Sdl.Web.Modules.Search.Controllers
     public class TridionDocsSearchController : BaseController
     {
         private static readonly string DEFAULT_SEPARATOR = "+"; // used to be .
+        private static readonly string DEFAULT_NAMESPACE = "ish"; 
         private static readonly string PUBLICATION_ONLINE_STATUS_VALUE = "VDITADLVRREMOTESTATUSONLINE";
         private static readonly Regex RegexpDoubleQuotes = new Regex("^\"(.*)\"$", RegexOptions.Compiled);
         private static readonly HashSet<string> Cjk = new HashSet<string> { "chinese", "japanese", "korean" };
         private readonly string _separator;
         private readonly string _namespace;
+        private readonly string _defaultLanguage;
         private string PublicationOnlineStatusField => $"dynamic{_separator}FISHDITADLVRREMOTESTATUS.lng.element";
         private string ContentField(string language) => $"content{_separator}{language}";
 
@@ -33,7 +35,8 @@ namespace Sdl.Web.Modules.Search.Controllers
             try
             {
                 _separator = WebConfigurationManager.AppSettings["iq-field-separator"] ?? DEFAULT_SEPARATOR;
-                _namespace = WebConfigurationManager.AppSettings["iq-namespace"];
+                _namespace = WebConfigurationManager.AppSettings["iq-namespace"] ?? DEFAULT_NAMESPACE;
+                _defaultLanguage = WebConfigurationManager.AppSettings["iq-default-language"] ?? DEFAULT_NAMESPACE;
             }
             catch (Exception e)
             {
@@ -182,8 +185,7 @@ namespace Sdl.Web.Modules.Search.Controllers
         private string GetPublicationId(SearchParameters searchParameters) 
             => searchParameters.PublicationId?.ToString();
 
-        private string GetLanguage(SearchParameters searchParameters) 
-            => CultureInfo.GetCultureInfo(searchParameters.Language.Split('-')[0]).EnglishName.ToLower();
+        private string GetLanguage(SearchParameters searchParameters) => string.IsNullOrEmpty(searchParameters.Language) ? _defaultLanguage : CultureInfo.GetCultureInfo(searchParameters.Language.Split('-')[0]).EnglishName.ToLower();
 
         private static string GetSearchQueryString(SearchParameters searchParameters)
         {
