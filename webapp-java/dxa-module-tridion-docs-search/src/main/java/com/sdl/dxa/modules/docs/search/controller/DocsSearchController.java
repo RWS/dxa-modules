@@ -44,7 +44,8 @@ public class DocsSearchController {
                 "search " + parametersJson.replaceAll("(?ixm)\\s", ""))) {
             String namespace = context.getInitParameter("iq-namespace");
             String separator = context.getInitParameter("iq-field-separator");
-            return searchProvider.search(parametersJson, namespace, separator);
+            String language = context.getInitParameter("iq-default-language");
+            return searchProvider.search(parametersJson, namespace, separator, language);
         }
     }
 
