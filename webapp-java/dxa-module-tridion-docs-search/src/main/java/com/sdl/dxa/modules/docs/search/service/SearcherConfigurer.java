@@ -71,7 +71,7 @@ public class SearcherConfigurer {
             log.debug("Default language is not set up. 'english' will be used as a default.");
             return DEFAULT_LANGUAGE;
         }
-        log.debug("Default namespace is set up, '{}' will be used as a namespace.", property);
+        log.debug("Default namespace is set up, '{}' will be used as a language.", property);
         return property;
     }
 
@@ -98,7 +98,7 @@ public class SearcherConfigurer {
                 language = getDeclaredLanguage(searchParameters.getIqDefaultLanguage());
             }
             if (!cjk.contains(language)) {
-                return singleLanguageSearchQuery(searchParameters, namespace, separator);
+                return singleLanguageSearchQuery(searchParameters, namespace, separator, language);
             }
             log.trace("Added cjk language {} to search query", language);
 
@@ -190,13 +190,16 @@ public class SearcherConfigurer {
         return getPublicationOnlineStatusField("dynamic", separator, "FISHDITADLVRREMOTESTATUS.lng.element");
     }
 
-    private Criteria singleLanguageSearchQuery(SearchParameters searchParameters, String namespace, String separator) throws QueryException {
+    private Criteria singleLanguageSearchQuery(SearchParameters searchParameters,
+                                               String namespace,
+                                               String separator,
+                                               String language) throws QueryException {
         Pair<List<String>, List<TermValue>> queryFieldsPair = createQueryFieldsPair();
         setNamespaceField(queryFieldsPair, namespace);
         setPublicationIdField(queryFieldsPair, searchParameters);
         String remoteStatusField = getRemoteStatusField(separator);
         addQueryField(queryFieldsPair, remoteStatusField, PUBLICATION_ONLINE_STATUS_VALUE);
-        setSearchQuery(queryFieldsPair, searchParameters, separator);
+        setSearchQuery(queryFieldsPair, searchParameters, separator, language);
         return SearchQuery
                 .newQuery()
                 .groupedAnd(queryFieldsPair.getLeft(), queryFieldsPair.getRight())
@@ -237,9 +240,10 @@ public class SearcherConfigurer {
 
     private void setSearchQuery(Pair<List<String>, List<TermValue>> queryFieldsPair,
                                 SearchParameters searchParameters,
-                                String separator) {
+                                String separator,
+                                String language) {
         String contentLanguage = Locale
-                .forLanguageTag(searchParameters.getLanguage())
+                .forLanguageTag(language)
                 .getDisplayLanguage()
                 .toLowerCase();
         String searchQuery = searchParameters.getSearchQuery();
