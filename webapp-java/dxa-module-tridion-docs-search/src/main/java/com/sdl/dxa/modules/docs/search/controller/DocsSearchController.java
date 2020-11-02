@@ -31,7 +31,7 @@ public class DocsSearchController {
      * It is used to replace html/xml name into single line with only single valuable space.
      */
     private static final String MORE_THAN_ONE_SPACES = "(?ixm)\\s++";
-    
+
     @Autowired
     private DocsExceptionHandler exceptionHandler;
 
