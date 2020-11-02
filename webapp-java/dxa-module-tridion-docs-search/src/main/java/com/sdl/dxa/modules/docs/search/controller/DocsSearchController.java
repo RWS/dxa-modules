@@ -26,8 +26,11 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @Slf4j
 @Controller
 public class DocsSearchController {
-    @Autowired
-    private ServletContext context;
+    /**
+     * Regular expression to replace all markup spaces (including CR and NLF).
+     * It is used to replace html/xml name into single line with only single valuable space.
+     */
+    private static final String MORE_THAN_ONE_SPACES = "(?ixm)\\s++";
 
     @Autowired
     private DocsExceptionHandler exceptionHandler;
@@ -41,10 +44,11 @@ public class DocsSearchController {
                                   ServletContext context) throws SearchException {
         if (parametersJson == null) throw new IllegalArgumentException("Search parameters cannot be empty");
         try (Performance perf = new Performance(1_000L,
-                "search " + parametersJson.replaceAll("(?ixm)\\s", ""))) {
+                "search " + parametersJson.replaceAll(MORE_THAN_ONE_SPACES, ""))) {
             String namespace = context.getInitParameter("iq-namespace");
             String separator = context.getInitParameter("iq-field-separator");
             String language = context.getInitParameter("iq-default-language");
+
             return searchProvider.search(parametersJson, namespace, separator, language);
         }
     }
