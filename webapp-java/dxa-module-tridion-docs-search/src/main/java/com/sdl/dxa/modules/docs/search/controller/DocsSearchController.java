@@ -26,11 +26,12 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @Slf4j
 @Controller
 public class DocsSearchController {
+    /**
+     * Regular expression to replace all markup spaces (including CR and NLF).
+     * It is used to replace html/xml name into single line with only single valuable space.
+     */
     private static final String MORE_THAN_ONE_SPACES = "(?ixm)\\s++";
-
-    @Autowired
-    private ServletContext context;
-
+    
     @Autowired
     private DocsExceptionHandler exceptionHandler;
 
