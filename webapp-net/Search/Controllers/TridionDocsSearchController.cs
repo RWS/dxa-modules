@@ -20,14 +20,13 @@ namespace Sdl.Web.Modules.Search.Controllers
     public class TridionDocsSearchController : BaseController
     {
         private static readonly string DEFAULT_SEPARATOR = "+"; // used to be .
-        private static readonly string DEFAULT_NAMESPACE = "ish";
         private static readonly string DEFAULT_LANGUAGE = "english";
         private static readonly string PUBLICATION_ONLINE_STATUS_VALUE = "VDITADLVRREMOTESTATUSONLINE";
         private static readonly Regex RegexpDoubleQuotes = new Regex("^\"(.*)\"$", RegexOptions.Compiled);
         private static readonly HashSet<string> Cjk = new HashSet<string> { "chinese", "japanese", "korean" };
-        private readonly string _separator;
+        private readonly string _separator = DEFAULT_SEPARATOR;
         private readonly string _namespace;
-        private readonly string _defaultLanguage;
+        private readonly string _defaultLanguage = DEFAULT_LANGUAGE;
         private string PublicationOnlineStatusField => $"dynamic{_separator}FISHDITADLVRREMOTESTATUS.lng.element";
         private string ContentField(string language) => $"content{_separator}{language}";
 
@@ -36,13 +35,13 @@ namespace Sdl.Web.Modules.Search.Controllers
             try
             {
                 _separator = WebConfigurationManager.AppSettings["iq-field-separator"] ?? DEFAULT_SEPARATOR;
-                _namespace = WebConfigurationManager.AppSettings["iq-namespace"] ?? DEFAULT_NAMESPACE;
                 _defaultLanguage = WebConfigurationManager.AppSettings["iq-default-language"] ?? DEFAULT_LANGUAGE;
+                // if iq-namespace not specified in configuration it will be null and namespace will not be included in iq query (old behavior)
+                _namespace = WebConfigurationManager.AppSettings["iq-namespace"];
             }
             catch (Exception e)
             {
                 Log.Error(e);
-                _separator = DEFAULT_SEPARATOR;
             }
         }
 
