@@ -174,7 +174,7 @@ namespace Sdl.Web.Modules.TridionDocsMashup.Client
                     CustomMeta = new InputCustomMetaCriteria
                     {
                         Key = GetKeywordKey(keyword.Key),
-                        Value = keyword.Value.Id,
+                        Value = keyword.Value.Key,
                         Scope = GetKeywordScope(keyword.Key)
                     }
                 };
