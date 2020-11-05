@@ -41,8 +41,6 @@ const services = {
     searchService: new SearchService()
 };
 
-localization.setStore(store);
-
 const store: Store<IState> = configureStore({ language: DEFAULT_LANGUAGE });
 
 localization.setStore(store);
