@@ -125,8 +125,43 @@ export class Url {
                 url += `/${Url._processLink(pageTitle)}`;
             }
         }
-
         return url;
+    }
+
+    /**
+     * Creates a binary url
+     *
+     * @static
+     * @param {string} publicationId Publication id
+     * @param {string} binaryId binary id
+     * @returns {string}
+     *
+     * @memberOf Url
+     */
+    public static getBinaryUrl(publicationId: string, binaryId: string): string {
+        const rootPath = path.getRootPath();
+        let url = `${rootPath}binary/${encodeURIComponent(publicationId)}/${encodeURIComponent(binaryId)}`;
+        return url;
+    }
+
+    /**
+     * Creates a page/binary url depending on binary parameter
+     *
+     * @static
+     * @param {string} publicationId Publication id
+     * @param {string} objectId page id or binary id
+     * @returns {string}
+     * @param {string} publicationTitle Publication title
+     * @param {string} pageTitle Page title
+     * @param {string} binary flag
+     * @memberOf Url
+     */
+    public static getPageOrBinaryUrl(publicationId: string, objectId: string, publicationTitle?: string,
+                                     pageTitle?: string, binary?: string | undefined | null): string {
+        if (binary) {
+            return Url.getBinaryUrl(publicationId, objectId);
+        }
+        return Url.getPageUrl(publicationId, objectId, publicationTitle, pageTitle);
     }
 
     /**
@@ -160,7 +195,6 @@ export class Url {
         if (publicationId) {
             defaultUrl = `${defaultUrl}/${encodeURIComponent(publicationId)}`;
         }
-
         return `${defaultUrl}/${encodeURIComponent(searchQuery)}`;
     }
 

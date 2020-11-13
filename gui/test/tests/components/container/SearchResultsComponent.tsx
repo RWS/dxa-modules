@@ -122,7 +122,7 @@ class SearchResultsComponent extends TestBase {
             });
 
             it("shows load more when more than 10 results found", (done: () => void): void => {
-                const getSearcheResultItem = (publicationId: string, pageId: string): ISearchQueryResult => ({
+                const getSearchResultItem = (publicationId: string, pageId: string): ISearchQueryResult => ({
                     id: `ish:${publicationId}-${pageId}-1`,
                     content: TEST_CONTENT,
                     language: "en",
@@ -130,17 +130,18 @@ class SearchResultsComponent extends TestBase {
                     publicationId,
                     publicationTitle: `Publication Title-${pageId}`,
                     pageId,
-                    pageTitle: `Page Title-${pageId}`
+                    pageTitle: `Page Title-${pageId}`,
+                    binaryContentType: "binary"
                 });
 
                 const publicationWithProductFamily = {
-                    ...getSearcheResultItem("47", "1000"),
+                    ...getSearchResultItem("47", "1000"),
                     productFamilyTitle: "Product Family",
                     productReleaseVersionTitle: "Product Release"
                 };
 
                 const publicationWithoutPublicationId = {
-                    ...getSearcheResultItem("", "1011"),
+                    ...getSearchResultItem("", "1011"),
                     productFamilyTitle: "Product Family",
                     productReleaseVersionTitle: "Product Release"
                 };
@@ -152,7 +153,7 @@ class SearchResultsComponent extends TestBase {
                         ...Array(10)
                             .fill(42)
                             .map((publicationId: number, pageId: number) =>
-                                getSearcheResultItem(publicationId.toString(), pageId.toString())
+                                getSearchResultItem(publicationId.toString(), pageId.toString())
                             ),
                         publicationWithProductFamily,
                         publicationWithoutPublicationId
