@@ -1,6 +1,6 @@
 {
   "name": "@sdl/delivery-ish-dd-webapp-gui",
-  "version": "2.2.5-SNAPSHOT",
+  "version": "2.2.6",
   "description": "GUI of the SDL Dita Delivery Web Application.",
   "main": "dist/lib/Lib.js",
   "typings": "dist/typings/src/Lib.d.ts",
@@ -11,7 +11,7 @@
     "@types/classnames": "2.2.6",
     "@types/deep-assign": "0.1.1",
     "@types/history": "3.2.1",
-    "@types/jasmine": "2.5.51",
+    "@types/jasmine": "2.5.54",
     "@types/lodash": "4.14.118",
     "@types/node": "6.0.88",
     "@types/prop-types": "15.5.1",
@@ -61,7 +61,7 @@
     "extract-text-webpack-plugin": "2.1.2",
     "file-loader": "0.11.2",
     "fs-extra": "4.0.3",
-    "glob": "7.1.3",
+    "glob": "7.1.6",
     "gulp": "3.9.1",
     "gulp-chmod": "2.0.0",
     "gulp-csso": "3.0.1",
@@ -105,7 +105,7 @@
     "test-debug": "set NODE_OPTIONS='--max-old-space-size=2048' && gulp serve:test",
     "install": "napa"
   },
-  "author": "okondratiuk@sdl.com, mborysenko@sdl.com, padams@sdl.com, mbilenko@sdl.com, inikonov@sdl.com",
+  "author": "mborysenko@sdl.com, padams@sdl.com, inikonov@sdl.com",
   "license": "Apache-2.0",
   "napa": {
     "dita-ot": "dita-ot/dita-ot#2.5.4"
