@@ -90,7 +90,8 @@ export class Search extends LoadableObject {
                     pageId: parsedId && parsedId.itemId,
                     pageTitle: item.Meta["FTITLE.logical.value"],
                     productFamilyTitle: item.ProductFamilyName,
-                    productReleaseVersionTitle: item.ProductReleaseName
+                    productReleaseVersionTitle: item.ProductReleaseName,
+                    binaryContentType: item.Meta.binary ? "binary" : null
                 } as ISearchQueryResult;
             })
         } as ISearchQueryResults;

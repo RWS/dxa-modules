@@ -65,7 +65,7 @@ export interface ISearchQuery {
 }
 
 /**
- * Search resuls interface
+ * Search results interface
  *
  * @export
  * @interface ISearchQueryResults
@@ -95,7 +95,7 @@ export interface ISearchQueryResults {
 }
 
 /**
- * Search resul interface
+ * Search result interface
  *
  * @export
  * @interface ISearchQueryResult
@@ -180,4 +180,12 @@ export interface ISearchQueryResult {
      * @memberof ISearchResult
      */
     lastModifiedDate?: Date;
+
+    /**
+     * content type if binary
+     *
+     * @type {string | null}
+     * @memberof ISearchResult
+     */
+    binaryContentType?: string | undefined | null;
 }

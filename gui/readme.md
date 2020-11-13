@@ -13,6 +13,11 @@ npm install gulp-cli -g
 npm install
 ```
 
+You may need to install 'dita-ot' manually. 
+For this download [dita-ot] (https://github.com/dita-ot/dita-ot/releases/download/2.5.4/dita-ot-2.5.4.zip), 
+then unpack / copy to /gui/node-modules/dita-ot and run gradlew.bat manually.
+After that you may set file's attributes to read-only to prevent from being removed. 
+
 ### Gulp tasks
 
 ```bash
