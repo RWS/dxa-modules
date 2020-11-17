@@ -17,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
+import javax.servlet.ServletContext;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -41,26 +41,56 @@ public class SearchService {
      * @return Search Result Set of found items.
      */
     public SearchResultSet search(String parametersJson) throws SearchException {
+        return search(parametersJson, null, null, null);
+    }
+
+    /**
+     * Performs search by using UDP search service with given search parameters in string json.
+     *
+     * @param parametersJson String json representation of search parameters.
+     * @param namespace optional namespace to provide extra filtering. Allowed to be null or empty.
+     * @param separator optional separator for search (some fields have complex names,
+     *                  which should be distinguished from parts of queries). Default separator used to be '.',
+     *                  then it became a '+' character. Allowed to be a single char or missing.
+     * @return Search Result Set of found items.
+     */
+    public SearchResultSet search(String parametersJson,
+                                  String namespace,
+                                  String separator,
+                                  String language) throws SearchException {
         SearchParameters searchParameters = parseParameters(parametersJson);
         DefaultSearcher searcher = createSearcher(searchParameters);
+        if (namespace != null && !namespace.isEmpty()) {
+            searchParameters.setIqNamespace(namespace);
+        }
+        if (separator != null && !separator.isEmpty()) {
+            searchParameters.setIqSeparator(separator);
+        }
+        if (language != null && !language.isEmpty()) {
+            searchParameters.setIqDefaultLanguage(language);
+        }
         Criteria searchCriteria = searcherConfigurer.buildCriteria(searchParameters);
         SearchQueryResultSet result = null;
         QueryException[] exception = new QueryException[1];
         try {
+            log.trace("Search criteria is: {}", searchCriteria.getRawQuery());
             result = getSearchResultsWithRetry(searcher, searchCriteria, 3, exception);
-        } catch (QueryException e) {
+        } catch (Exception e) {
             log.error("Could not perform search for parameters {}", parametersJson, e);
             throw new SearchException("Could not perform search for parameters " + parametersJson, e);
         }
         return buildSearchResultSet(result, searchParameters);
     }
 
-    private SearchQueryResultSet getSearchResultsWithRetry(DefaultSearcher searcher, Criteria searchCriteria, int attempt, QueryException[] exception) throws QueryException {
+    private SearchQueryResultSet getSearchResultsWithRetry(DefaultSearcher searcher,
+                                                           Criteria searchCriteria,
+                                                           int attempt,
+                                                           Exception[] exception) throws QueryException {
         while (attempt > 0) {
             attempt--;
             try {
                 return searcher.search(searchCriteria);
-            } catch (QueryException ex) {
+            } catch (Exception ex) {
                 if (exception[0] == null) exception[0] = ex;
             }
             try {
@@ -82,17 +112,16 @@ public class SearchService {
                     .withResultSetRange(parameters.getStartIndex(), parameters.getStartIndex() + parameters.getCount())
                     .enableHighlighting());
             return searcher;
-        } catch (QueryException e) {
-            String message = "Could not create searcher for parameters: " + parameters;
-            throw new SearchException(message, e);
+        } catch (Exception e) {
+            throw new SearchException("Could not create searcher for parameters: " + parameters, e);
         }
     }
 
     SearchParameters parseParameters(String parametersJson) {
         try {
             return READER.readValue(parametersJson);
-        } catch (IOException e) {
-            log.error("Could not parse search parameters: " + parametersJson);
+        } catch (Exception e) {
+            log.error("Could not parse search parameters: {}", parametersJson, e);
             throw new SearchParametersProcessingException("Could not parse search parameters from String.", e);
         }
     }

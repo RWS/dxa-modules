@@ -26,6 +26,8 @@ const { App } = Components.AppComp;
 const { PageService, PublicationService, TaxonomyService, SearchService } = Services.Client;
 const { localization} = Services.Common;
 
+import { DEFAULT_LANGUAGE } from "services/common/LocalizationService";
+
 const mainElement = document.getElementById("main-view-target");
 
 /**
@@ -39,7 +41,7 @@ const services = {
     searchService: new SearchService()
 };
 
-const store: Store<IState> = configureStore({});
+const store: Store<IState> = configureStore({ language: DEFAULT_LANGUAGE });
 
 localization.setStore(store);
 

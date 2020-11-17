@@ -30,7 +30,7 @@ public class SearchController extends EntityController {
     protected ViewModel enrichModel(ViewModel model, HttpServletRequest request) throws Exception {
         model = super.enrichModel(model, request);
 
-        if (model == null || !(model instanceof SearchQuery)) {
+        if (!(model instanceof SearchQuery)) {
             throw new DxaSearchException("Unexpected View Model. Expecting type SearchQuery but was " + model);
         }
 
