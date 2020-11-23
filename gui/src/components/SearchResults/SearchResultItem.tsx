@@ -65,19 +65,19 @@ export const SearchResultItem: React.StatelessComponent<ISearchResultItemProps> 
         if (language && language.name) {
             bottomInfo.push(`${formatMessage("search.result.language", [language.name])}`);
         }
-        if (searchResult.binaryContentType) {
+        if (searchResult.itemType == "binary") {
             return (
                 <div className="sdl-dita-delivery-search-result-item" tabIndex={props.index}>
                     <h3>
                         <a target="_blank"
                            title={searchResult.pageTitle}
                            href={Url.getPageOrBinaryUrl(searchResult.publicationId, searchResult.pageId,
-                               searchResult.publicationTitle, searchResult.pageTitle, searchResult.binaryContentType)}>
+                               searchResult.publicationTitle, searchResult.pageTitle, searchResult.itemType)}>
                             {searchResult.pageTitle}
                         </a>
                         <button title={formatMessage("search.results.bookmark")} onClick={() => _addToBookmarks(
                             Url.getPageOrBinaryUrl(searchResult.publicationId, searchResult.pageId,
-                                searchResult.publicationTitle, searchResult.pageTitle, searchResult.binaryContentType),
+                                searchResult.publicationTitle, searchResult.pageTitle, searchResult.itemType),
                             searchResult.pageTitle)} />
                     </h3>
                     <p>{searchResult.content}</p>
