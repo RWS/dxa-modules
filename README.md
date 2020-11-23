@@ -1,33 +1,29 @@
-dxa-modules
-===
 SDL Digital Experience Accelerator Modules
-
+===
 
 About
 -----
-The SDL Digital Experience Accelerator (DXA) is a reference implementation of SDL Web (version 8, 8.5, or Cloud) that we provide to help you more quickly create, design, and publish a website based on SDL Web.
+The SDL Digital Experience Accelerator (DXA) is a reference implementation of SDL Tridion Sites 9 and SDL Web 8 intended to help you create, design and publish an SDL Tridion/Web-based website quickly.
 
-DXA is available for both .NET and Java web applications. Its modular architecture consists of a framework and example web application, which includes all core SDL Web functionality as well as separate Modules for additional, optional functionality.
+DXA is available for both .NET and Java web applications. Its modular architecture consists of a framework and example web application, which includes all core SDL Tridion/Web functionality as well as separate Modules for additional, optional functionality.
 
 This repository contains the source code of all the DXA Modules maintained by SDL. 
 
-The Module distributions (including Content Manager-side items and installation support) are downloadable from the [SDL Community site](https://community.sdl.com/developers/tridion_developer/m/mediagallery/) 
-(latest version) or the [Releases in GitHub](https://github.com/sdl/dxa-modules/releases) (all versions).
+The Module distributions (including Content Manager-side items and installation support) are downloadable from the [SDL AppStore](https://appstore.sdl.com/list/?search=dxa) or the [Releases in GitHub](https://github.com/sdl/dxa-modules/releases).
 
 
 Support
 ---------------
-At SDL we take your investment in Digital Experience very seriously, and will do our best to support you throughout this journey. 
-If you encounter any issues with the Digital Experience Accelerator, please reach out to us via one of the following channels:
+At SDL we take your investment in Digital Experience very seriously, if you encounter any issues with the Digital Experience Accelerator, please use one of the following channels:
 
 - Report issues directly in [this repository](https://github.com/sdl/dxa-modules/issues)
-- Ask questions 24/7 on the SDL Web Community at https://tridion.stackexchange.com
-- Contact Technical Support through the SDL Support web portal at https://www.sdl.com/support
+- Ask questions 24/7 on the SDL Tridion Community at https://tridion.stackexchange.com
+- Contact SDL Professional Services for DXA release management support packages to accelerate your support requirements
 
 
 Documentation
 -------------
-Documentation for most of the SDL DXA Modules can be found online in the SDL documentation portal: https://docs.sdl.com/sdldxa20 
+Documentation for most of the SDL DXA Modules can be found online in the SDL documentation portal: https://docs.sdl.com/sdldxa
 
 
 Repositories
@@ -76,7 +72,7 @@ DXA publishes SNAPSHOT versions to Sonatype. To use them, configure `https://oss
 
 License
 -------
-Copyright (c) 2014-2018 SDL Group.
+Copyright (c) 2014-2020 SDL Group.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
