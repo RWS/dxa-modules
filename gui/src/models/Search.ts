@@ -82,6 +82,7 @@ export class Search extends LoadableObject {
                 const parsedId = TcmId.parseId(item.Id.replace("_", ":"));
                 return {
                     id: item.Id,
+                    itemType: item.ItemType,
                     content: item.Content,
                     language: item.Locale,
                     lastModifiedDate: isNaN(modifiedDate) ? null : new Date(modifiedDate),
@@ -90,8 +91,7 @@ export class Search extends LoadableObject {
                     pageId: parsedId && parsedId.itemId,
                     pageTitle: item.Meta["FTITLE.logical.value"],
                     productFamilyTitle: item.ProductFamilyName,
-                    productReleaseVersionTitle: item.ProductReleaseName,
-                    binaryContentType: item.Meta.binary ? "binary" : null
+                    productReleaseVersionTitle: item.ProductReleaseName
                 } as ISearchQueryResult;
             })
         } as ISearchQueryResults;
