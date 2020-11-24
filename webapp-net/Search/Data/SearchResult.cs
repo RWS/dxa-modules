@@ -7,6 +7,8 @@ namespace Sdl.Web.Modules.Search.Data
     {
         public string Id { get; set; }
 
+        public string ItemType { get; set; }
+
         public Dictionary<string, object> Fields { get; set; }
 
         public string Locale { get; set; } = "en";
@@ -36,6 +38,8 @@ namespace Sdl.Web.Modules.Search.Data
         {
             _wrapped = searchResult;
         }
+
+        public string ItemType => _wrapped.ItemType;
 
         public string Id => _wrapped.Id;
 
