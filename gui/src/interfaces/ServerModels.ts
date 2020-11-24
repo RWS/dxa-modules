@@ -81,6 +81,7 @@
         CreatedDate: string;
         Highlighted?: string;
         Id: string;
+        ItemType: string | undefined | null;
         Locale: string;
         Meta: { [key: string ]: string | string[] | number | number[] | undefined | null };
         ModifiedDate?: string;

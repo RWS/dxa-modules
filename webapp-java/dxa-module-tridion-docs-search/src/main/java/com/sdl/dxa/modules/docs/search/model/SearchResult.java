@@ -17,6 +17,9 @@ public class SearchResult {
     @JsonProperty("Id")
     private String id;
 
+    @JsonProperty("ItemType")
+    private String itemType;
+
     @JsonProperty("Meta")
     private Map<String, Object> fields;
 

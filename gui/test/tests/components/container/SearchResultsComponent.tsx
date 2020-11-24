@@ -124,14 +124,14 @@ class SearchResultsComponent extends TestBase {
             it("shows load more when more than 10 results found", (done: () => void): void => {
                 const getSearchResultItem = (publicationId: string, pageId: string): ISearchQueryResult => ({
                     id: `ish:${publicationId}-${pageId}-1`,
+                    itemType: "binary",
                     content: TEST_CONTENT,
                     language: "en",
                     lastModifiedDate: new Date(),
                     publicationId,
                     publicationTitle: `Publication Title-${pageId}`,
                     pageId,
-                    pageTitle: `Page Title-${pageId}`,
-                    binaryContentType: "binary"
+                    pageTitle: `Page Title-${pageId}`
                 });
 
                 const publicationWithProductFamily = {
