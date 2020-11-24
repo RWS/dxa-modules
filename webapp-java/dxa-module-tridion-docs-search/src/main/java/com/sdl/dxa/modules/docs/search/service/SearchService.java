@@ -143,6 +143,7 @@ public class SearchService {
     SearchResult convertQueryResult(SearchQueryResult queryResult) {
         SearchResult result = new SearchResult();
         result.setId(queryResult.getId());
+        result.setItemType(queryResult.getItemType());
         result.setFields(queryResult.getFields().orElse(Collections.EMPTY_MAP));
         result.setLocale(queryResult.getLocale().orElse(Locale.ROOT));
         result.setContent(queryResult.getContent().orElse(""));

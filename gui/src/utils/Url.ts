@@ -153,12 +153,12 @@ export class Url {
      * @returns {string}
      * @param {string} publicationTitle Publication title
      * @param {string} pageTitle Page title
-     * @param {string} binary flag
+     * @param {string} itemType
      * @memberOf Url
      */
     public static getPageOrBinaryUrl(publicationId: string, objectId: string, publicationTitle?: string,
-                                     pageTitle?: string, binary?: string | undefined | null): string {
-        if (binary) {
+                                     pageTitle?: string, itemType?: string | undefined | null): string {
+        if (itemType == "binary") {
             return Url.getBinaryUrl(publicationId, objectId);
         }
         return Url.getPageUrl(publicationId, objectId, publicationTitle, pageTitle);

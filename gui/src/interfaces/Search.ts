@@ -110,6 +110,14 @@ export interface ISearchQueryResult {
     id: string;
 
     /**
+     * item type
+     *
+     * @type {string}
+     * @memberOf ISearchResult
+     */
+    itemType: string | undefined | null;
+
+    /**
      * Taxonomy title
      *
      * @type {string}
@@ -180,12 +188,4 @@ export interface ISearchQueryResult {
      * @memberof ISearchResult
      */
     lastModifiedDate?: Date;
-
-    /**
-     * content type if binary
-     *
-     * @type {string | null}
-     * @memberof ISearchResult
-     */
-    binaryContentType?: string | undefined | null;
 }
