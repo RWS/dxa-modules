@@ -14,25 +14,26 @@ public class DocsSearchWebInitializer implements WebApplicationInitializer {
     private String iqNamespace;
     private String iqDefaultLanguage;
 
+    public DocsSearchWebInitializer() {
+    }
+
     private void init() {
         Properties properties = InitializationUtils.loadDxaProperties();
         log.trace("All read properties:\n{}", properties);
-        iqFieldsSeparator = properties.getProperty("iq-field-separator");
-        iqNamespace = properties.getProperty("iq-namespace");
-        iqDefaultLanguage = properties.getProperty("iq-default-language");
+        this.iqFieldsSeparator = this.makeStringNotNull(properties.getProperty("iq-field-separator"));
+        this.iqNamespace = this.makeStringNotNull(properties.getProperty("iq-namespace"));
+        this.iqDefaultLanguage = this.makeStringNotNull(properties.getProperty("iq-default-language"));
     }
 
-    @Override
+    private String makeStringNotNull(String source) {
+        return source == null ? "" : source;
+    }
+
     public void onStartup(ServletContext servletContext) {
-        init();
-        log.info("Docs search global parameters: " +
-                        "\niq-field-separator '{}', " +
-                        "\niq-namespace '{}', " +
-                        "\niq-default-language '{}'." +
-                        "\nDefined in 'dxa.properties'",
-                iqFieldsSeparator, iqNamespace, iqDefaultLanguage);
-        servletContext.setInitParameter("iq-field-separator", iqFieldsSeparator);
-        servletContext.setInitParameter("iq-namespace", iqNamespace);
-        servletContext.setInitParameter("iq-default-language", iqDefaultLanguage);
+        this.init();
+        log.info("Docs search global parameters defined in 'dxa.properties':\niq-field-separator '{}',\niq-namespace '{}',\niq-default-language '{}'.", new Object[]{this.iqFieldsSeparator, this.iqNamespace, this.iqDefaultLanguage});
+        servletContext.setInitParameter("iq-field-separator", this.iqFieldsSeparator);
+        servletContext.setInitParameter("iq-namespace", this.iqNamespace);
+        servletContext.setInitParameter("iq-default-language", this.iqDefaultLanguage);
     }
 }
