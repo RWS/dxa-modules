@@ -70,6 +70,7 @@ public class GraphQLConditionService implements ConditionService {
 
             if (edges.isEmpty()) {
                 result.add("{}");
+                continue;
             }
             Object metadata = edges.get(0).getNode().getValue();
             String metadataString = metadata != null ? (String) metadata : "{}";
