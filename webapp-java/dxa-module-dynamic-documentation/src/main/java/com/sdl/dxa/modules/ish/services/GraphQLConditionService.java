@@ -68,7 +68,7 @@ public class GraphQLConditionService implements ConditionService {
             }
             List<CustomMetaEdge> edges = pub.getCustomMetas().getEdges();
 
-            if (edges.isEmpty()) {
+            if (edges == null || edges.isEmpty()) {
                 result.add("{}");
                 continue;
             }
