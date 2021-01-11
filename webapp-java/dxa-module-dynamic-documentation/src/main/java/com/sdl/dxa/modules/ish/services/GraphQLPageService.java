@@ -107,28 +107,34 @@ public class GraphQLPageService implements PageService {
                 metaFilter,
                 ContentIncludeMode.EXCLUDE,
                 null);
-        if(page.getCustomMetas() != null) {
+        if (page == null) {
+            log.debug("Page not found by pageId " + model.getId() + " in pub " + localization.getId());
+            return model;
+        }
+        if (page.getCustomMetas() == null) {
+            log.debug("Custom meta not found by pageId " + model.getId());
+            return model;
+        }
 
-            for (CustomMetaEdge metaEdge : page.getCustomMetas().getEdges()) {
-                if (TOC_NAV_ENTRIES_META.equals(metaEdge.getNode().getKey())) {
-                    if (model.getMeta().containsKey(TOC_NAV_ENTRIES_META)) {
-                        String v = String.format("%s, %s", model.getMeta().get(TOC_NAV_ENTRIES_META), metaEdge.getNode().getValue());
-                        model.getMeta().put(metaEdge.getNode().getKey(), v);
-                    } else {
-                        model.getMeta().put(TOC_NAV_ENTRIES_META, metaEdge.getNode().getValue());
-                    }
-                }
-
-                if (PAGE_CONDITIONS_USED_META.equals(metaEdge.getNode().getKey())) {
-                    model.getMeta().put(PAGE_CONDITIONS_USED_META, metaEdge.getNode().getValue());
-                }
-
-                if (PAGE_LOGICAL_REF_OBJECT_ID.equals(metaEdge.getNode().getKey()) && !model.getMeta().containsKey(PAGE_LOGICAL_REF_OBJECT_ID)) {
-                    model.getMeta().put(PAGE_LOGICAL_REF_OBJECT_ID, metaEdge.getNode().getValue());
+        for (CustomMetaEdge metaEdge : page.getCustomMetas().getEdges()) {
+            if (TOC_NAV_ENTRIES_META.equals(metaEdge.getNode().getKey())) {
+                if (model.getMeta().containsKey(TOC_NAV_ENTRIES_META)) {
+                    String v = String.format("%s, %s", model.getMeta().get(TOC_NAV_ENTRIES_META), metaEdge.getNode().getValue());
+                    model.getMeta().put(metaEdge.getNode().getKey(), v);
+                } else {
+                    model.getMeta().put(TOC_NAV_ENTRIES_META, metaEdge.getNode().getValue());
                 }
             }
 
+            if (PAGE_CONDITIONS_USED_META.equals(metaEdge.getNode().getKey())) {
+                model.getMeta().put(PAGE_CONDITIONS_USED_META, metaEdge.getNode().getValue());
+            }
+
+            if (PAGE_LOGICAL_REF_OBJECT_ID.equals(metaEdge.getNode().getKey()) && !model.getMeta().containsKey(PAGE_LOGICAL_REF_OBJECT_ID)) {
+                model.getMeta().put(PAGE_LOGICAL_REF_OBJECT_ID, metaEdge.getNode().getValue());
+            }
         }
+
         return model;
     }
 
