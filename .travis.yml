@@ -1,8 +1,7 @@
 language: java
+sudo: false
 jdk:
   - openjdk8
-before_install:
-  - cd java
 install:
   export CUSTOM_MVN_VERSION=3.5.4;
   echo "Updating Maven to ${CUSTOM_MVN_VERSION}...";
@@ -13,9 +12,13 @@ install:
   mvn -version;
 script:
   echo "Going to build GUI ...";
-  sh -c 'cd gui'
-  mvn clean install
-  sh -c 'cd ..'
+  cd gui;
+  mvn clean install -DstagingProgressTimeoutMinutes=15;
+
   echo "Going to build Web Application ...";
-  sh -c 'cd webapp-java'
-  mvn clean install
+  cd ../webapp-java;
+  mvn clean install -DstagingProgressTimeoutMinutes=15;
+
+  echo "Going to build Boilerplate ...";
+  cd ../boilerplate;
+  mvn -B clean install -DstagingProgressTimeoutMinutes=15;
