@@ -50,8 +50,11 @@ public class GraphQLPublicationService implements PublicationService {
     public List<com.sdl.dxa.modules.ish.model.Publication> getPublicationList(Localization localization) {
         ApiClient client = apiClientProvider.getClient();
         ContentNamespace contentNamespace = GraphQLUtils.convertUriToGraphQLContentNamespace(localization.getCmUriScheme());
-        PublicationConnection publications = client.getPublications(contentNamespace, new Pagination(), null,
-        CustomMetaFilter, null);
+        PublicationConnection publications = client.getPublications(contentNamespace,
+                new Pagination(),
+                null,
+                CustomMetaFilter,
+                null);
         if (publications.getEdges().isEmpty()) {
             return Collections.emptyList();
         }
