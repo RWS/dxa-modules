@@ -10,7 +10,6 @@ import com.sdl.web.pca.client.contentmodel.generated.CustomMetaConnection;
 import com.sdl.web.pca.client.contentmodel.generated.CustomMetaEdge;
 import com.sdl.web.pca.client.contentmodel.generated.Publication;
 import com.sdl.web.pca.client.contentmodel.generated.PublicationConnection;
-import com.sdl.web.pca.client.contentmodel.generated.PublicationEdge;
 import com.sdl.webapp.common.api.localization.Localization;
 import com.sdl.webapp.common.controller.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +18,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -51,16 +51,22 @@ public class GraphQLPublicationService implements PublicationService {
         ApiClient client = apiClientProvider.getClient();
         ContentNamespace contentNamespace = GraphQLUtils.convertUriToGraphQLContentNamespace(localization.getCmUriScheme());
         PublicationConnection publications = client.getPublications(contentNamespace, new Pagination(), null,
-                CustomMetaFilter, null);
-        for (PublicationEdge edge : publications.getEdges()) {
-            if (isPublicationOnline(edge.getNode())) {
-                return publications.getEdges().stream()
-                        .filter(publicationEdge -> isPublicationOnline(publicationEdge.getNode()))
-                        .map(publicationEdge -> buildPublicationFrom(publicationEdge.getNode()))
-                        .collect(Collectors.toList());
-            }
+        CustomMetaFilter, null);
+        if (publications.getEdges().isEmpty()) {
+            return Collections.emptyList();
         }
-        return null;
+        List<com.sdl.dxa.modules.ish.model.Publication> result = publications.getEdges()
+                .stream()
+                .filter(publicationEdge -> isPublicationOnline(publicationEdge.getNode()))
+                .map(publicationEdge -> buildPublicationFrom(publicationEdge.getNode()))
+                .collect(Collectors.toList());
+        if (result.isEmpty()) {
+            LOG.warn("There are no online publications found (no {}={})",
+                    PublicationOnlineStatusMeta, PublicationOnlineValue);
+            return Collections.emptyList();
+        }
+        LOG.debug("There are {} online publications found", result.size());
+        return result;
     }
 
     public boolean isPublicationOnline(Publication publication) {
@@ -128,7 +134,8 @@ public class GraphQLPublicationService implements PublicationService {
 
         for (CustomMetaEdge customMetaEdge : customMeta.getEdges()) {
             String value = customMetaEdge.getNode().getValue();
-            switch (customMetaEdge.getNode().getKey()) {
+            String key = customMetaEdge.getNode().getKey();
+            switch (key) {
                 case PublicationTitleMeta:
                     result.setTitle(value);
                     break;
@@ -163,6 +170,9 @@ public class GraphQLPublicationService implements PublicationService {
                     break;
                 case PublicationLogicalId:
                     result.setLogicalId(value);
+                    break;
+                default:
+                    LOG.trace("Ignoring {}={}", key, value);
                     break;
             }
         }
