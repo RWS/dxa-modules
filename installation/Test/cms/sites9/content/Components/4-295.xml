@@ -1,0 +1,49 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Contact Tab Content</tcm:Title>
+      <tcm:Type>Normal</tcm:Type>
+      <tcm:Schema xlink:type="simple" xlink:title="Item List" xlink:href="/webdav/200%20Example%20Content/Building%20Blocks/Modules/Core/Editor/Schemas/Item%20List.xsd" IsMandatory="false" />
+      <tcm:Content>
+        <ItemList xmlns="http://www.sdl.com/web/schemas/core">
+          <headline>Contact Information</headline>
+          <itemListElement>
+            <subheading>PR &amp; Media</subheading>
+            <content>
+              <p xmlns="http://www.w3.org/1999/xhtml">Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Ut porttitor nisi nunc. Aenean commodo arcu vehicula enim tincidunt sodales. Proin tristique mi id nisi dignissim, eget congue purus blandit</p>
+<ul xmlns="http://www.w3.org/1999/xhtml">
+<li>Integer scelerisque ipsum quis sodales congue.</li>
+<li>Nunc sollicitudin orci sit amet risus dapibus, a vehicula ipsum ultrices.</li>
+<li>Sed ut felis at sem blandit auctor.</li>
+</ul></content>
+          </itemListElement>
+          <itemListElement>
+            <subheading>Jobs</subheading>
+            <content>Vivamus nisi justo, vulputate id elementum sit amet, varius at arcu. Aliquam eu tortor justo. Sed egestas, dolor id adipiscing dapibus, turpis quam feugiat massa, vel fringilla orci lorem in velit. Nam adipiscing malesuada porttitor. Etiam ut fringilla metus, ac mattis risus. Vestibulum sagittis rhoncus diam quis adipiscing. Fusce ultrices, orci a viverra ullamcorper, enim mauris scelerisque diam, vitae pulvinar urna enim in nisi. Vivamus et diam accumsan, hendrerit purus sit amet, aliquet diam. Donec sagittis ligula ac rhoncus posuere. In hac habitasse platea dictumst.</content>
+          </itemListElement>
+          <itemListElement>
+            <subheading>Support</subheading>
+            <content>
+              <span xmlns="http://www.w3.org/1999/xhtml">Maecenas quis mi ipsum. Morbi dapibus diam fermentum urna porta, a rutrum quam blandit. Phasellus fermentum vitae nisl non lacinia. Nulla in nulla sit amet eros suscipit consectetur a quis orci. Mauris id turpis vitae magna ultricies accumsan. Nunc velit quam, congue vel magna at, mattis dapibus orci. Maecenas quis sem sit amet risus pellentesque laoreet eget at quam</span>
+            </content>
+          </itemListElement>
+        </ItemList>
+      </tcm:Content>
+      <tcm:Metadata>
+        <Metadata xmlns="http://www.sdl.com/web/schemas/core">
+          <standardMeta>
+            <description>In sodales elementum lorem, at sollicitudin quam placerat in. Suspendisse vitae purus eu dolor mattis mollis. Nulla sit amet orci ac arcu suscipit commodo ut in tellus</description>
+            <name>Contact information</name>
+          </standardMeta>
+        </Metadata>
+      </tcm:Metadata>
+      <tcm:IsBasedOnTridionWebSchema>true</tcm:IsBasedOnTridionWebSchema>
+      <tcm:MultimediaType xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/200%20Example%20Content" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/200%20Example%20Content/Building%20Blocks/Content/About" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="Schema" itemUrl="/webdav/200%20Example%20Content/Building%20Blocks/Modules/Core/Editor/Schemas/Item%20List.xsd" linkName="Schema" />
+  </Dependencies>
+</PackageItem>

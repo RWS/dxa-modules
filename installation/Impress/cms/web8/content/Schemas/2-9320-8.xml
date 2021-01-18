@@ -1,0 +1,45 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+      <tcm:Title>Resources - Impress</tcm:Title>
+      <tcm:Description>Resources - Impress</tcm:Description>
+      <tcm:Purpose>Component</tcm:Purpose>
+      <tcm:NamespaceURI>uuid:a77f5588-6b23-40c0-8ecf-8e93750eb1d0</tcm:NamespaceURI>
+      <tcm:RootElementName>ResourcesImpress</tcm:RootElementName>
+      <tcm:IsTridionWebSchema>true</tcm:IsTridionWebSchema>
+      <tcm:XSD>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="uuid:a77f5588-6b23-40c0-8ecf-8e93750eb1d0" xmlns:tcmi="http://www.tridion.com/ContentManager/5.0/Instance" elementFormDefault="qualified" targetNamespace="uuid:a77f5588-6b23-40c0-8ecf-8e93750eb1d0">
+  <xsd:import namespace="http://www.tridion.com/ContentManager/5.0/Instance" schemaLocation="/webdav/cm_xml_inst.xsd" />
+  <xsd:annotation>
+    <xsd:appinfo>
+      <tcm:Labels xmlns:tcm="http://www.tridion.com/ContentManager/5.0">
+        <tcm:Label ElementName="hint" Metadata="false">ontouchstart hint</tcm:Label>
+      </tcm:Labels>
+    </xsd:appinfo>
+  </xsd:annotation>
+  <xsd:element name="ResourcesImpress">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="hint" minOccurs="1" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <tcm:ExtensionXml xmlns:tcm="http://www.tridion.com/ContentManager/5.0" />
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>
+      </tcm:XSD>
+      <tcm:AllowedMultimediaTypes />
+      <tcm:ComponentProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:BundleProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:DeleteBundleOnProcessFinished>false</tcm:DeleteBundleOnProcessFinished>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/100%20Master" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/Impress/Site%20Manager/Schemas" linkName="LocationInfo/OrganizationalItem" />
+  </Dependencies>
+</PackageItem>

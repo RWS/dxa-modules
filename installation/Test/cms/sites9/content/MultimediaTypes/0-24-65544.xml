@@ -1,0 +1,11 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Favicon</tcm:Title>
+      <tcm:MIMEType>image/x-icon</tcm:MIMEType>
+      <tcm:FileExtensions>
+        <tcm:FileExtension>ico</tcm:FileExtension>
+      </tcm:FileExtensions>
+    </tcm:Data>
+  </Data>
+</PackageItem>

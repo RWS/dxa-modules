@@ -1,0 +1,62 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Media Manager (Custom Players) Smoke Test</tcm:Title>
+      <tcm:FileName>media-manager-custom-smoke-test</tcm:FileName>
+      <tcm:PageTemplate IsInherited="false" xlink:type="simple" xlink:title="Content Page without Header" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/Content%20Page%20without%20Header.tptcmp" />
+      <tcm:ComponentPresentations>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="Media Manager Custom Players Smoke Test - Description" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Smoke/MediaManager/Media%20Manager%20Custom%20Players%20Smoke%20Test%20-%20Description.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Article" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Article.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="ecl:0-mm-412-dist-file" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Schemas/SDL%20Media%20Manager/C2C/2B5/ecl%3A0-mm-412-dist-file.ecl" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Media Manager Video" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Templates/Media%20Manager%20Video.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="ecl:0-mm-411-dist-file" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Schemas/SDL%20Media%20Manager/D2D/7C9/ecl%3A0-mm-411-dist-file.ecl" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Media Manager Image" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Templates/Media%20Manager%20Image.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="ecl:0-mm-381-dist-file" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Schemas/SDL%20Media%20Manager/E05/D88/ecl%3A0-mm-381-dist-file.ecl" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Media Manager Audio" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Templates/Media%20Manager%20Audio.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="ecl:0-mm-382-dist-file" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Schemas/SDL%20Media%20Manager/B1E/9FA/ecl%3A0-mm-382-dist-file.ecl" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Media Manager Download" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Templates/Media%20Manager%20Download.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="Media Manager RTF + Media Smoke test (Custom Players)" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Smoke/MediaManager/Media%20Manager%20RTF%20%2B%20Media%20Smoke%20test%20%28Custom%20Players%29.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Article" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Article.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+      </tcm:ComponentPresentations>
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:Metadata />
+      <tcm:RegionSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:Regions />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemStructureGroup" itemUrl="/webdav/401%20Automated%20Test%20Parent/Home/Smoke" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Smoke/MediaManager/Media%20Manager%20Custom%20Players%20Smoke%20Test%20-%20Description.xml" linkName="ComponentPresentations[0]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Schemas/SDL%20Media%20Manager/C2C/2B5/ecl%3A0-mm-412-dist-file.ecl" linkName="ComponentPresentations[1]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Schemas/SDL%20Media%20Manager/D2D/7C9/ecl%3A0-mm-411-dist-file.ecl" linkName="ComponentPresentations[2]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Schemas/SDL%20Media%20Manager/E05/D88/ecl%3A0-mm-381-dist-file.ecl" linkName="ComponentPresentations[3]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Schemas/SDL%20Media%20Manager/B1E/9FA/ecl%3A0-mm-382-dist-file.ecl" linkName="ComponentPresentations[4]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Smoke/MediaManager/Media%20Manager%20RTF%20%2B%20Media%20Smoke%20test%20%28Custom%20Players%29.xml" linkName="ComponentPresentations[5]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Article.tctcmp" linkName="ComponentPresentations[0]/ComponentTemplate" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Templates/Media%20Manager%20Video.tctcmp" linkName="ComponentPresentations[1]/ComponentTemplate" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Templates/Media%20Manager%20Image.tctcmp" linkName="ComponentPresentations[2]/ComponentTemplate" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Templates/Media%20Manager%20Audio.tctcmp" linkName="ComponentPresentations[3]/ComponentTemplate" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Templates/Media%20Manager%20Download.tctcmp" linkName="ComponentPresentations[4]/ComponentTemplate" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Article.tctcmp" linkName="ComponentPresentations[5]/ComponentTemplate" />
+    <Dependency dependencyType="PageTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/Content%20Page%20without%20Header.tptcmp" linkName="PageTemplate" />
+  </Dependencies>
+</PackageItem>

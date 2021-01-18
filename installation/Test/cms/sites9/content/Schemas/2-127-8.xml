@@ -1,0 +1,92 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+      <tcm:Title>Download</tcm:Title>
+      <tcm:Description>Download</tcm:Description>
+      <tcm:Purpose>Multimedia</tcm:Purpose>
+      <tcm:NamespaceURI>http://www.sdl.com/web/schemas/core</tcm:NamespaceURI>
+      <tcm:RootElementName />
+      <tcm:IsTridionWebSchema>true</tcm:IsTridionWebSchema>
+      <tcm:XSD>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sdl.com/web/schemas/core" xmlns:tcmi="http://www.tridion.com/ContentManager/5.0/Instance" elementFormDefault="qualified" targetNamespace="http://www.sdl.com/web/schemas/core">
+  <xsd:import namespace="http://www.tridion.com/ContentManager/5.0/Instance" schemaLocation="/webdav/cm_xml_inst.xsd" />
+  <xsd:annotation>
+    <xsd:appinfo>
+      <tcm:Labels xmlns:tcm="http://www.tridion.com/ContentManager/5.0">
+        <tcm:Label ElementName="description" Metadata="true">Description</tcm:Label>
+      </tcm:Labels>
+    </xsd:appinfo>
+  </xsd:annotation>
+  <xsd:element name="Metadata">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="description" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>
+      </tcm:XSD>
+      <tcm:AllowedMultimediaTypes>
+        <tcm:AllowedMultimediaType xlink:type="simple" xlink:title="Gif image" xlink:href="tcm:0-1-65544" />
+        <tcm:AllowedMultimediaType xlink:type="simple" xlink:title="Jpeg image" xlink:href="tcm:0-2-65544" />
+        <tcm:AllowedMultimediaType xlink:type="simple" xlink:title="Png image" xlink:href="tcm:0-3-65544" />
+        <tcm:AllowedMultimediaType xlink:type="simple" xlink:title="Word document" xlink:href="tcm:0-4-65544" />
+        <tcm:AllowedMultimediaType xlink:type="simple" xlink:title="Excel sheet" xlink:href="tcm:0-5-65544" />
+        <tcm:AllowedMultimediaType xlink:type="simple" xlink:title="Powerpoint presentation" xlink:href="tcm:0-6-65544" />
+        <tcm:AllowedMultimediaType xlink:type="simple" xlink:title="Pdf document" xlink:href="tcm:0-7-65544" />
+        <tcm:AllowedMultimediaType xlink:type="simple" xlink:title="Sound file" xlink:href="tcm:0-8-65544" />
+        <tcm:AllowedMultimediaType xlink:type="simple" xlink:title="Plain text" xlink:href="tcm:0-9-65544" />
+        <tcm:AllowedMultimediaType xlink:type="simple" xlink:title="Rich text" xlink:href="tcm:0-10-65544" />
+        <tcm:AllowedMultimediaType xlink:type="simple" xlink:title="Executable" xlink:href="tcm:0-11-65544" />
+        <tcm:AllowedMultimediaType xlink:type="simple" xlink:title="MSAccess database" xlink:href="tcm:0-12-65544" />
+        <tcm:AllowedMultimediaType xlink:type="simple" xlink:title="Bitmap image" xlink:href="tcm:0-13-65544" />
+        <tcm:AllowedMultimediaType xlink:type="simple" xlink:title="Real player" xlink:href="tcm:0-14-65544" />
+        <tcm:AllowedMultimediaType xlink:type="simple" xlink:title="QuickTime movie" xlink:href="tcm:0-15-65544" />
+        <tcm:AllowedMultimediaType xlink:type="simple" xlink:title="Mp3 music" xlink:href="tcm:0-16-65544" />
+        <tcm:AllowedMultimediaType xlink:type="simple" xlink:title="Mpeg video" xlink:href="tcm:0-17-65544" />
+        <tcm:AllowedMultimediaType xlink:type="simple" xlink:title="Flash file" xlink:href="tcm:0-18-65544" />
+        <tcm:AllowedMultimediaType xlink:type="simple" xlink:title="Cascading style sheets" xlink:href="tcm:0-19-65544" />
+        <tcm:AllowedMultimediaType xlink:type="simple" xlink:title="Java script" xlink:href="tcm:0-20-65544" />
+        <tcm:AllowedMultimediaType xlink:type="simple" xlink:title="Configuration settings" xlink:href="tcm:0-21-65544" />
+        <tcm:AllowedMultimediaType xlink:type="simple" xlink:title="Zip file" xlink:href="tcm:0-23-65544" />
+        <tcm:AllowedMultimediaType xlink:type="simple" xlink:title="Favicon" xlink:href="tcm:0-24-65544" />
+      </tcm:AllowedMultimediaTypes>
+      <tcm:ComponentProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:BundleProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:DeleteBundleOnProcessFinished>false</tcm:DeleteBundleOnProcessFinished>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/100%20Master" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/Core/Editor/Schemas" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="AllowedMultimediaType" itemUrl="/webdav//Gif%20image.tmt" linkName="AllowedMultimediaTypes[0]" />
+    <Dependency dependencyType="AllowedMultimediaType" itemUrl="/webdav//Jpeg%20image.tmt" linkName="AllowedMultimediaTypes[1]" />
+    <Dependency dependencyType="AllowedMultimediaType" itemUrl="/webdav//Png%20image.tmt" linkName="AllowedMultimediaTypes[2]" />
+    <Dependency dependencyType="AllowedMultimediaType" itemUrl="/webdav//Word%20document.tmt" linkName="AllowedMultimediaTypes[3]" />
+    <Dependency dependencyType="AllowedMultimediaType" itemUrl="/webdav//Excel%20sheet.tmt" linkName="AllowedMultimediaTypes[4]" />
+    <Dependency dependencyType="AllowedMultimediaType" itemUrl="/webdav//Powerpoint%20presentation.tmt" linkName="AllowedMultimediaTypes[5]" />
+    <Dependency dependencyType="AllowedMultimediaType" itemUrl="/webdav//Pdf%20document.tmt" linkName="AllowedMultimediaTypes[6]" />
+    <Dependency dependencyType="AllowedMultimediaType" itemUrl="/webdav//Sound%20file.tmt" linkName="AllowedMultimediaTypes[7]" />
+    <Dependency dependencyType="AllowedMultimediaType" itemUrl="/webdav//Plain%20text.tmt" linkName="AllowedMultimediaTypes[8]" />
+    <Dependency dependencyType="AllowedMultimediaType" itemUrl="/webdav//Rich%20text.tmt" linkName="AllowedMultimediaTypes[9]" />
+    <Dependency dependencyType="AllowedMultimediaType" itemUrl="/webdav//Executable.tmt" linkName="AllowedMultimediaTypes[10]" />
+    <Dependency dependencyType="AllowedMultimediaType" itemUrl="/webdav//MSAccess%20database.tmt" linkName="AllowedMultimediaTypes[11]" />
+    <Dependency dependencyType="AllowedMultimediaType" itemUrl="/webdav//Bitmap%20image.tmt" linkName="AllowedMultimediaTypes[12]" />
+    <Dependency dependencyType="AllowedMultimediaType" itemUrl="/webdav//Real%20player.tmt" linkName="AllowedMultimediaTypes[13]" />
+    <Dependency dependencyType="AllowedMultimediaType" itemUrl="/webdav//QuickTime%20movie.tmt" linkName="AllowedMultimediaTypes[14]" />
+    <Dependency dependencyType="AllowedMultimediaType" itemUrl="/webdav//Mp3%20music.tmt" linkName="AllowedMultimediaTypes[15]" />
+    <Dependency dependencyType="AllowedMultimediaType" itemUrl="/webdav//Mpeg%20video.tmt" linkName="AllowedMultimediaTypes[16]" />
+    <Dependency dependencyType="AllowedMultimediaType" itemUrl="/webdav//Flash%20file.tmt" linkName="AllowedMultimediaTypes[17]" />
+    <Dependency dependencyType="AllowedMultimediaType" itemUrl="/webdav//Cascading%20style%20sheets.tmt" linkName="AllowedMultimediaTypes[18]" />
+    <Dependency dependencyType="AllowedMultimediaType" itemUrl="/webdav//Java%20script.tmt" linkName="AllowedMultimediaTypes[19]" />
+    <Dependency dependencyType="AllowedMultimediaType" itemUrl="/webdav//Configuration%20settings.tmt" linkName="AllowedMultimediaTypes[20]" />
+    <Dependency dependencyType="AllowedMultimediaType" itemUrl="/webdav//Zip%20file.tmt" linkName="AllowedMultimediaTypes[21]" />
+    <Dependency dependencyType="AllowedMultimediaType" itemUrl="/webdav//Favicon.tmt" linkName="AllowedMultimediaTypes[22]" />
+  </Dependencies>
+</PackageItem>

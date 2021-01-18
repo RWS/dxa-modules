@@ -1,0 +1,27 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Page With Spaces</tcm:Title>
+      <tcm:FileName>page with spaces</tcm:FileName>
+      <tcm:PageTemplate IsInherited="false" xlink:type="simple" xlink:title="Content Page without Header" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/Content%20Page%20without%20Header.tptcmp" />
+      <tcm:ComponentPresentations>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="Article with Media Component with spaces" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Regression/Article%20with%20Media%20Component%20with%20spaces.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Article" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Article.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+      </tcm:ComponentPresentations>
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:Metadata />
+      <tcm:RegionSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:Regions />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemStructureGroup" itemUrl="/webdav/401%20Automated%20Test%20Parent/Home/Regression" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Regression/Article%20with%20Media%20Component%20with%20spaces.xml" linkName="ComponentPresentations[0]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Article.tctcmp" linkName="ComponentPresentations[0]/ComponentTemplate" />
+    <Dependency dependencyType="PageTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/Content%20Page%20without%20Header.tptcmp" linkName="PageTemplate" />
+  </Dependencies>
+</PackageItem>

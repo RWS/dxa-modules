@@ -1,0 +1,40 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Example News 2</tcm:Title>
+      <tcm:Type>Normal</tcm:Type>
+      <tcm:Schema xlink:type="simple" xlink:title="News Article" xlink:href="/webdav/200%20Example%20Content/Building%20Blocks/Modules/Core/Editor/Schemas/News%20Article.xsd" IsMandatory="false" />
+      <tcm:Content>
+        <NewsArticle xmlns="http://www.sdl.com/web/schemas/core">
+          <headline>Sed dapibus tempus nunc, id sollicitudin ligula mattis in</headline>
+          <articleBody>
+            <subheading>Lorem ipsum dolor sit amet, consectetur adipiscing elit</subheading>
+            <content>
+              <span xmlns="http://www.w3.org/1999/xhtml">Cras vel justo semper, bibendum odio in, fringilla elit. Cras at nunc fringilla, porttitor mauris eget, pharetra purus. Sed elementum consectetur massa id auctor. Mauris sed orci nec diam condimentum fermentum id eget erat. Nulla facilisi. In venenatis mauris dolor, iaculis lobortis libero porttitor sit amet. Aliquam quis egestas turpis. Morbi dolor nulla, volutpat ut nisi sed, mollis lacinia sapien.</span>
+            </content>
+            <media xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/200%20Example%20Content/Building%20Blocks/Content/Images/Large/bridge.jpg" xlink:title="bridge" />
+            <caption>Praesent facilisis consectetur neque</caption>
+          </articleBody>
+        </NewsArticle>
+      </tcm:Content>
+      <tcm:Metadata>
+        <Metadata xmlns="http://www.sdl.com/web/schemas/core">
+          <standardMeta>
+            <dateCreated>2014-08-17T09:34:00</dateCreated>
+            <description>Praesent facilisis consectetur neque, quis varius justo dapibus at. Fusce ullamcorper tellus in neque dictum commodo. Duis pretium rhoncus est non scelerisque. Nam placerat lectus augue, a lacinia lectus aliquam id.</description>
+            <name>Praesent facilisis consectet.</name>
+            <introText>Cras vel justo semper. Quis varius justo dapibus at. Fusce ullamcorper tellus in neque dictum commodo. Duis pretium rhoncus est non-scelerisque.</introText>
+          </standardMeta>
+        </Metadata>
+      </tcm:Metadata>
+      <tcm:IsBasedOnTridionWebSchema>true</tcm:IsBasedOnTridionWebSchema>
+      <tcm:MultimediaType xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/200%20Example%20Content" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/200%20Example%20Content/Building%20Blocks/Content/Articles/News" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/200%20Example%20Content/Building%20Blocks/Content/Images/Large/bridge.jpg" linkName="Content" xpath="*[local-name() = 'NewsArticle'][1]/*[local-name() = 'articleBody'][1]/*[local-name() = 'media'][1]/@xlink:href" />
+    <Dependency dependencyType="Schema" itemUrl="/webdav/200%20Example%20Content/Building%20Blocks/Modules/Core/Editor/Schemas/News%20Article.xsd" linkName="Schema" />
+  </Dependencies>
+</PackageItem>

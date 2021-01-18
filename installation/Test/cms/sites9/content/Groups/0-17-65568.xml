@@ -1,0 +1,17 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Name>Developer</tcm:Name>
+      <tcm:Description>Developer</tcm:Description>
+      <tcm:UsageConstraints />
+      <tcm:GroupMemberships>
+        <tcm:Group xlink:type="simple" xlink:title="Site Manager" xlink:href="tcm:0-16-65568" description="Site Manager" />
+      </tcm:GroupMemberships>
+      <tcm:DirectoryGroupMappings Enabled="false" />
+      <tcm:IdentityProviderGroupMappings Enabled="false" />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="GroupMembership" itemUrl="/webdav//Site%20Manager.tgp" linkName="GroupMemberships[0]/Group" />
+  </Dependencies>
+</PackageItem>

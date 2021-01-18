@@ -1,0 +1,474 @@
+<Index dataContractVersion="201701" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Item id="tcm:0-0-0" selected="false" exported="true">
+    <ApplicationIds>
+      <ApplicationId>CustomPages</ApplicationId>
+      <ApplicationId>http://www.sdl.com/tridion/SemanticMapping/vocabularies</ApplicationId>
+    </ApplicationIds>
+    <Item id="d89e9b3dfc5e4f9a8869fbbd4b648221" title="100%20Master" itemType="Publication" selected="false" exported="false">
+      <Item id="66df0dd00c304f7ab90c79c04d80ef89" title="Building%20Blocks" itemType="Folder" selected="false" exported="false">
+        <Item id="23400cf99a56403d907e2e8aa650938c" title="Framework" itemType="Folder" selected="false" exported="false">
+          <Item id="3af91391c2704e069e60cf5d8b7312b9" title="Developer" itemType="Folder" selected="false" exported="false">
+            <Item id="9a24239bda274ccc8f629f5438fdd418" title="Schemas" itemType="Folder" selected="false" exported="false">
+              <Item id="tcm:2-91-8" title="Component%20Template%20Metadata" extension="xsd" itemType="Schema" subtype="3" blueprintStatus="LocalItem" selected="false" exported="true" />
+              <Item id="53407ffd3b894a019db29fc2df1f75a3" title="Module%20Configuration" extension="xsd" itemType="Schema" selected="false" exported="false" />
+              <Item id="tcm:2-68-8" title="Page%20Template%20Metadata" extension="xsd" itemType="Schema" subtype="3" blueprintStatus="LocalItem" selected="false" exported="true" />
+              <Item id="540c473c884244f7a17ee3a9a37f7318" title="Region%20Metadata" extension="xsd" itemType="Schema" selected="false" exported="false" />
+              <Item id="dcb086b29f514ce48bdaa9e8d5db0537" title="ZIP%20file" extension="xsd" itemType="Schema" selected="false" exported="false" />
+            </Item>
+            <Item id="5f5915ed36394ee181d5998a45d83161" title="Templates" itemType="Folder" selected="false" exported="false">
+              <Item id="ff9f4104a4a34b3f8285e8cf5d83a59b" title="DXA%2ER2" itemType="Folder" selected="false" exported="false">
+                <Item id="3155a4e553e84559b333b5f3673c10ee" title="Default%20Component%20Template%20Finish%20Actions" extension="tbbcmp" itemType="TemplateBuildingBlock" selected="false" exported="false" />
+                <Item id="872fce00fb234031a9a25d03278b72a3" title="Default%20Page%20Template%20Finish%20Actions" extension="tbbcmp" itemType="TemplateBuildingBlock" selected="false" exported="false" />
+                <Item id="9dd538f356f340f594defc1a42e7b0f2" title="Render%20Component%20Content" extension="tbbcmp" itemType="TemplateBuildingBlock" selected="false" exported="false" />
+                <Item id="179385c05753469cafb5b8fccc5470c4" title="Render%20Page%20Content" extension="tbbcmp" itemType="TemplateBuildingBlock" selected="false" exported="false" />
+              </Item>
+            </Item>
+          </Item>
+          <Item id="8677a5f16edb45cba4f282d39044d71b" title="Site%20Manager" itemType="Folder" selected="false" exported="false">
+            <Item id="fd5438f1f28e44338333649e73f87434" title="Schemas" itemType="Folder" selected="false" exported="false">
+              <Item id="bb7fbc8456a549f595b499a6da561097" title="HTML%20Design%20Configuration" extension="xsd" itemType="Schema" selected="false" exported="false" />
+            </Item>
+          </Item>
+        </Item>
+        <Item id="143b20422ff2445588e6cf4eef304876" title="Modules" itemType="Folder" selected="false" exported="false">
+          <Item id="91fb5b81bcfc4b929d498fcfa0ce8348" title="Core" itemType="Folder" selected="false" exported="false">
+            <Item id="5dd104cfb81b4c88ab14dcb3ee80387c" title="Editor" itemType="Folder" selected="false" exported="false">
+              <Item id="beabae14aa114eb5a5f35a01eef139a2" title="Schemas" itemType="Folder" selected="false" exported="false">
+                <Item id="aec10de2ee914575a0571936c98c70fa" title="Page%20Schemas" itemType="Folder" selected="false" exported="false">
+                  <Item id="tcm:2-75-8" title="Content%20Page" extension="xsd" itemType="Schema" subtype="8" blueprintStatus="LocalItem" selected="false" exported="true" />
+                </Item>
+                <Item id="85ff89360e3e4633aefa880e3debc30d" title="Region%20Schemas" itemType="Folder" selected="false" exported="false">
+                  <Item id="3e07c4d1b74f44f5b59c8b0b5ef41ae8" title="%5BMain%5D%20Region" extension="xsd" itemType="Schema" selected="false" exported="false" />
+                </Item>
+                <Item id="75d8ac767c35463888c383bbf69c4296" title="Image" extension="xsd" itemType="Schema" selected="false" exported="false" />
+              </Item>
+            </Item>
+          </Item>
+          <Item id="tcm:2-148-2" title="TridionDocsMashup" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+            <Item id="tcm:2-149-2" title="Admin" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+              <Item id="tcm:2-161-2" title="Schemas" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+                <Item id="tcm:2-466-8" title="TridionDocsMashup%20URL%20Configuration" extension="xsd" itemType="Schema" blueprintStatus="LocalItem" selected="true" exported="true">
+                  <ApplicationIds>
+                    <ApplicationId>tm:TranslationSchema</ApplicationId>
+                  </ApplicationIds>
+                </Item>
+              </Item>
+              <Item id="tcm:2-454" title="TridionDocsMashup%20HTML%20Design" extension="zip" itemType="Component" subtype="1" blueprintStatus="LocalItem" selected="true" exported="true" />
+              <Item id="tcm:2-467" title="TridionDocsMashup%20URL%20Configuration" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true">
+                <ApplicationIds>
+                  <ApplicationId>ugc:ComponentAndPage</ApplicationId>
+                </ApplicationIds>
+              </Item>
+              <Item id="tcm:2-468" title="TridionDocsMashup" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+            </Item>
+            <Item id="tcm:2-150-2" title="Editor" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+              <Item id="tcm:2-151-2" title="Schemas" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+                <Item id="tcm:2-157-2" title="Page%20Schemas" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+                  <Item id="tcm:2-464-8" title="Bicycle%20Page%20With%20Static%20Widget" extension="xsd" itemType="Schema" subtype="8" blueprintStatus="LocalItem" selected="true" exported="true" />
+                  <Item id="tcm:2-478-8" title="Bicycle%20Page" extension="xsd" itemType="Schema" subtype="8" blueprintStatus="LocalItem" selected="true" exported="true" />
+                </Item>
+                <Item id="tcm:2-152-2" title="Region%20Schemas" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+                  <Item id="tcm:2-460-8" title="%5BTridionDocsMashup%3ABicycle%5D%20Region" extension="xsd" itemType="Schema" subtype="8" blueprintStatus="LocalItem" selected="true" exported="true" />
+                  <Item id="tcm:2-463-8" title="%5BTridionDocsMashup%3ATopics%5D%20Static%20Topics%20Region" extension="xsd" itemType="Schema" subtype="8" blueprintStatus="LocalItem" selected="true" exported="true" />
+                </Item>
+                <Item id="tcm:2-458-8" title="Bicycle" extension="xsd" itemType="Schema" blueprintStatus="LocalItem" selected="true" exported="true" />
+                <Item id="tcm:2-461-8" title="Tridion%20Docs%20Static%20Widget" extension="xsd" itemType="Schema" blueprintStatus="LocalItem" selected="true" exported="true" />
+              </Item>
+              <Item id="tcm:2-159-2" title="Templates" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+                <Item id="tcm:2-479-128" title="Bicycle%20Page%20With%20Static%20Region" extension="tptcmp" itemType="PageTemplate" blueprintStatus="LocalItem" selected="true" exported="true" />
+                <Item id="tcm:2-459-32" title="Bicycle" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="LocalItem" selected="true" exported="true" />
+                <Item id="tcm:2-462-32" title="Tridion%20Docs%20Static%20Widget" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="LocalItem" selected="true" exported="true" />
+              </Item>
+            </Item>
+            <Item id="tcm:2-153-2" title="Site%20Manager" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+              <Item id="tcm:2-154-2" title="Schemas" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+                <Item id="tcm:2-162-2" title="Page%20Schemas" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+                  <Item id="tcm:2-472-8" title="Bicycle%20Include%20Page" extension="xsd" itemType="Schema" subtype="8" blueprintStatus="LocalItem" selected="true" exported="true" />
+                </Item>
+                <Item id="tcm:2-156-2" title="Region%20Schemas" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+                  <Item id="tcm:2-471-8" title="%5BTridionDocsMashup%3ATopics%5D%20Dynamic%20Topics%20Region" extension="xsd" itemType="Schema" subtype="8" blueprintStatus="LocalItem" selected="true" exported="true" />
+                </Item>
+                <Item id="tcm:2-456-8" title="Tridion%20Docs%20Dynamic%20Widget" extension="xsd" itemType="Schema" blueprintStatus="LocalItem" selected="true" exported="true" />
+              </Item>
+              <Item id="tcm:2-163-2" title="Templates" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+                <Item id="tcm:2-470-32" title="Tridion%20Docs%20Dynamic%20Widget" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="LocalItem" selected="true" exported="true" />
+              </Item>
+            </Item>
+          </Item>
+        </Item>
+        <Item id="b655cd23adb24759ab9e198f302d09ca" title="Settings" itemType="Folder" selected="false" exported="false">
+          <Item id="tcm:2-146-2" title="TridionDocsMashup" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+            <Item id="tcm:2-147-2" title="Site%20Manager" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+              <Item id="tcm:2-455" title="TridionDocsMashup%20HTML%20Design%20Configuration" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+            </Item>
+          </Item>
+        </Item>
+      </Item>
+      <Item id="tcm:2-160-512" title="Content%20Reference%20Type" itemType="Category" blueprintStatus="LocalItem" selected="true" exported="true">
+        <Item id="tcm:2-474-1024" title="Acknowledgements" extension="tkw" itemType="Keyword" blueprintStatus="LocalItem" selected="true" exported="true" />
+        <Item id="tcm:2-477-1024" title="Deprecation%20List" extension="tkw" itemType="Keyword" blueprintStatus="LocalItem" selected="true" exported="true" />
+        <Item id="tcm:2-465-1024" title="Getting%20Started" extension="tkw" itemType="Keyword" blueprintStatus="LocalItem" selected="true" exported="true" />
+        <Item id="tcm:2-473-1024" title="Known%20Issues" extension="tkw" itemType="Keyword" blueprintStatus="LocalItem" selected="true" exported="true" />
+        <Item id="tcm:2-481-1024" title="Legal%20Notice" extension="tkw" itemType="Keyword" blueprintStatus="LocalItem" selected="true" exported="true" />
+        <Item id="tcm:2-475-1024" title="Release%20Notes" extension="tkw" itemType="Keyword" blueprintStatus="LocalItem" selected="true" exported="true" />
+        <Item id="tcm:2-476-1024" title="Technical%20Specifications" extension="tkw" itemType="Keyword" blueprintStatus="LocalItem" selected="true" exported="true" />
+        <Item id="tcm:2-480-1024" title="What%27s%20New" extension="tkw" itemType="Keyword" blueprintStatus="LocalItem" selected="true" exported="true" />
+      </Item>
+      <Item id="tcm:2-158-512" title="Product%20Family%20Name" itemType="Category" blueprintStatus="LocalItem" selected="true" exported="true">
+        <Item id="tcm:2-483-1024" title="City%20Bicycle" extension="tkw" itemType="Keyword" blueprintStatus="LocalItem" selected="true" exported="true" />
+        <Item id="tcm:2-482-1024" title="Red%20Bicycle" extension="tkw" itemType="Keyword" blueprintStatus="LocalItem" selected="true" exported="true" />
+        <Item id="tcm:2-469-1024" title="White%20Bicycle" extension="tkw" itemType="Keyword" blueprintStatus="LocalItem" selected="true" exported="true" />
+      </Item>
+      <Item id="tcm:2-155-512" title="Product%20Release%20Name" itemType="Category" blueprintStatus="LocalItem" selected="true" exported="true">
+        <Item id="tcm:2-457-1024" title="Model%202018" extension="tkw" itemType="Keyword" blueprintStatus="LocalItem" selected="true" exported="true" />
+      </Item>
+      <Item id="tcm:2-13-512" title="Sitemap%20%5BNavigation%5D" itemType="Category" blueprintStatus="LocalItem" selected="false" exported="true" />
+    </Item>
+    <Item id="d1f616a4ea4b47d1bdfcbbd2eef95e9a" title="110%20DXA%20Site%20Type" itemType="Publication" selected="false" exported="false">
+      <Item id="57897201ab5a4b989a6050789c5004f2" title="Building%20Blocks" itemType="Folder" selected="false" exported="false">
+        <Item id="eec996047ca643a7865abbfd87f9d0d2" title="Framework" itemType="Folder" selected="false" exported="false">
+          <Item id="27ada0b0a9554b13bb5dc0e295c8f0a7" title="Developer" itemType="Folder" selected="false" exported="false">
+            <Item id="bbacac1f62984c27ae3ec8b4303f2b65" title="Schemas" itemType="Folder" selected="false" exported="false">
+              <Item id="tcm:3-68-8" title="Page%20Template%20Metadata" extension="xsd" itemType="Schema" subtype="3" blueprintStatus="SharedItem" selected="false" exported="true" />
+            </Item>
+            <Item id="e8e16d1398d24fae94552ed42e217357" title="Templates" itemType="Folder" selected="false" exported="false">
+              <Item id="4dbe25f3f9b94fa7866c9dde268ad282" title="DXA%2ER2" itemType="Folder" selected="false" exported="false">
+                <Item id="9890b40c1eb5498b9ef9044755340550" title="Default%20Page%20Template%20Finish%20Actions" extension="tbbcmp" itemType="TemplateBuildingBlock" selected="false" exported="false" />
+                <Item id="7cab3255867d4d10a25c01256fe1fd0f" title="Render%20Page%20Content" extension="tbbcmp" itemType="TemplateBuildingBlock" selected="false" exported="false" />
+              </Item>
+            </Item>
+          </Item>
+          <Item id="d40dcea225b14502b5bc34b87ea564dc" title="Site%20Manager" itemType="Folder" selected="false" exported="false">
+            <Item id="b45938d46dac447c960b642d2b14b664" title="Schemas" itemType="Folder" selected="false" exported="false">
+              <Item id="tcm:3-255-8" title="Page%20Navigation%20Metadata" extension="xsd" itemType="Schema" subtype="3" blueprintStatus="LocalItem" selected="false" exported="true" />
+            </Item>
+          </Item>
+        </Item>
+        <Item id="105e1250cece46ab9ac57bf5138065d1" title="Modules" itemType="Folder" selected="false" exported="false">
+          <Item id="10ac229930a0492eafa0a83e62d8f0fb" title="Core" itemType="Folder" selected="false" exported="false">
+            <Item id="80647aaa186b4631aea4931297673508" title="Editor" itemType="Folder" selected="false" exported="false">
+              <Item id="9d4a63f5416b44ada46018cc28989a78" title="Schemas" itemType="Folder" selected="false" exported="false">
+                <Item id="a7bf4238a322440bb00ea60fd50e96f6" title="Image" extension="xsd" itemType="Schema" selected="false" exported="false" />
+              </Item>
+            </Item>
+          </Item>
+          <Item id="tcm:3-148-2" title="TridionDocsMashup" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+            <Item id="tcm:3-149-2" title="Admin" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+              <Item id="tcm:3-161-2" title="Schemas" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:3-466-8" title="TridionDocsMashup%20URL%20Configuration" extension="xsd" itemType="Schema" blueprintStatus="SharedItem" selected="true" exported="true">
+                  <ApplicationIds>
+                    <ApplicationId>tm:TranslationSchema</ApplicationId>
+                  </ApplicationIds>
+                </Item>
+              </Item>
+              <Item id="tcm:3-454" title="TridionDocsMashup%20HTML%20Design" extension="zip" itemType="Component" subtype="1" blueprintStatus="SharedItem" selected="true" exported="true" />
+              <Item id="tcm:3-467" title="TridionDocsMashup%20URL%20Configuration" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true">
+                <ApplicationIds>
+                  <ApplicationId>ugc:ComponentAndPage</ApplicationId>
+                </ApplicationIds>
+              </Item>
+              <Item id="tcm:3-468" title="TridionDocsMashup" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+            </Item>
+            <Item id="tcm:3-150-2" title="Editor" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+              <Item id="tcm:3-151-2" title="Schemas" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:3-157-2" title="Page%20Schemas" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                  <Item id="tcm:3-464-8" title="Bicycle%20Page%20With%20Static%20Widget" extension="xsd" itemType="Schema" subtype="8" blueprintStatus="SharedItem" selected="true" exported="true" />
+                  <Item id="tcm:3-478-8" title="Bicycle%20Page" extension="xsd" itemType="Schema" subtype="8" blueprintStatus="SharedItem" selected="true" exported="true" />
+                </Item>
+                <Item id="tcm:3-152-2" title="Region%20Schemas" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                  <Item id="tcm:3-460-8" title="%5BTridionDocsMashup%3ABicycle%5D%20Region" extension="xsd" itemType="Schema" subtype="8" blueprintStatus="SharedItem" selected="true" exported="true" />
+                  <Item id="tcm:3-463-8" title="%5BTridionDocsMashup%3ATopics%5D%20Static%20Topics%20Region" extension="xsd" itemType="Schema" subtype="8" blueprintStatus="SharedItem" selected="true" exported="true" />
+                </Item>
+                <Item id="tcm:3-458-8" title="Bicycle" extension="xsd" itemType="Schema" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:3-461-8" title="Tridion%20Docs%20Static%20Widget" extension="xsd" itemType="Schema" blueprintStatus="SharedItem" selected="true" exported="true" />
+              </Item>
+              <Item id="tcm:3-159-2" title="Templates" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:3-479-128" title="Bicycle%20Page%20With%20Static%20Region" extension="tptcmp" itemType="PageTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:3-459-32" title="Bicycle" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:3-490-128" title="Bicycle" extension="tptcmp" itemType="PageTemplate" blueprintStatus="LocalItem" selected="true" exported="true" />
+                <Item id="tcm:3-462-32" title="Tridion%20Docs%20Static%20Widget" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+              </Item>
+            </Item>
+            <Item id="tcm:3-153-2" title="Site%20Manager" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+              <Item id="tcm:3-154-2" title="Schemas" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:3-162-2" title="Page%20Schemas" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                  <Item id="tcm:3-472-8" title="Bicycle%20Include%20Page" extension="xsd" itemType="Schema" subtype="8" blueprintStatus="SharedItem" selected="true" exported="true" />
+                </Item>
+                <Item id="tcm:3-156-2" title="Region%20Schemas" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                  <Item id="tcm:3-471-8" title="%5BTridionDocsMashup%3ATopics%5D%20Dynamic%20Topics%20Region" extension="xsd" itemType="Schema" subtype="8" blueprintStatus="SharedItem" selected="true" exported="true" />
+                </Item>
+                <Item id="tcm:3-456-8" title="Tridion%20Docs%20Dynamic%20Widget" extension="xsd" itemType="Schema" blueprintStatus="SharedItem" selected="true" exported="true" />
+              </Item>
+              <Item id="tcm:3-163-2" title="Templates" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:3-486-128" title="Include%20Page%20%28Tridion%20Docs%20Dynamic%20Widget%29" extension="tptcmp" itemType="PageTemplate" blueprintStatus="LocalItem" selected="true" exported="true" />
+                <Item id="tcm:3-470-32" title="Tridion%20Docs%20Dynamic%20Widget" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+              </Item>
+            </Item>
+          </Item>
+        </Item>
+        <Item id="ef1fcbc21e7b4f259e71d9c6513eadcd" title="Modules%20Content" itemType="Folder" selected="false" exported="false">
+          <Item id="tcm:3-164-2" title="TridionDocsMashup" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+            <Item id="tcm:3-165-2" title="Content" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+              <Item id="tcm:3-167-2" title="Products" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+                <Item id="tcm:3-168-2" title="Bicycles" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+                  <Item id="tcm:3-485" title="Bicycle%20Widget%20Configuration" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+                </Item>
+              </Item>
+              <Item id="tcm:3-169-2" title="Tridion%20Docs" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true" />
+              <Item id="tcm:3-166-2" title="_Cloneable%20Content" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+                <Item id="tcm:3-488" title="Bicycle%20Image" extension="jpg" itemType="Component" subtype="1" blueprintStatus="LocalItem" selected="true" exported="true" />
+                <Item id="tcm:3-489" title="Bicycle" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+                <Item id="tcm:3-484" title="Tridion%20Docs%20Static%20Widget" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+              </Item>
+            </Item>
+          </Item>
+        </Item>
+      </Item>
+      <Item id="5bba0086722e49cfa9fe298700762156" title="Content%20Reference%20Type" itemType="Category" selected="false" exported="false">
+        <Item id="tcm:3-474-1024" title="Acknowledgements" extension="tkw" itemType="Keyword" blueprintStatus="SharedItem" selected="false" exported="true" />
+      </Item>
+      <Item id="33af24ed59a44107a16b62b8bc816965" title="Home" itemType="StructureGroup" selected="false" exported="false">
+        <Item id="491527e57e024b1a9a2e6449aa017c30" title="_System" itemType="StructureGroup" selected="false" exported="false">
+          <Item id="e11eaa1570bd41adb8235d937a66e622" title="include" itemType="StructureGroup" selected="false" exported="false">
+            <Item id="tcm:3-487-64" title="TridionDocsMashup%3ATopics" extension="tpg" itemType="Page" blueprintStatus="LocalItem" selected="true" exported="true" />
+          </Item>
+        </Item>
+      </Item>
+      <Item id="9d4fa85a18114553bbf6ca780ee7e88c" title="Product%20Family%20Name" itemType="Category" selected="false" exported="false">
+        <Item id="tcm:3-483-1024" title="City%20Bicycle" extension="tkw" itemType="Keyword" blueprintStatus="SharedItem" selected="false" exported="true" />
+        <Item id="tcm:3-482-1024" title="Red%20Bicycle" extension="tkw" itemType="Keyword" blueprintStatus="SharedItem" selected="false" exported="true" />
+      </Item>
+      <Item id="e45c47d5925f4910bc0c24eec4652201" title="Product%20Release%20Name" itemType="Category" selected="false" exported="false">
+        <Item id="tcm:3-457-1024" title="Model%202018" extension="tkw" itemType="Keyword" blueprintStatus="SharedItem" selected="false" exported="true" />
+      </Item>
+      <Item id="tcm:3-13-512" title="Sitemap%20%5BNavigation%5D" itemType="Category" blueprintStatus="SharedItem" selected="false" exported="true" />
+    </Item>
+    <Item id="a5044cfa12ec495fbf1918c27f04b293" title="200%20Example%20Content" itemType="Publication" selected="false" exported="false">
+      <Item id="fcb9accbbe404b3995ea8226223fb6c8" title="Building%20Blocks" itemType="Folder" selected="false" exported="false">
+        <Item id="2c8f1092d65549f59c699263839336c6" title="Modules" itemType="Folder" selected="false" exported="false">
+          <Item id="7352c553dc4d45498fce17057d07020b" title="Core" itemType="Folder" selected="false" exported="false">
+            <Item id="f8219afc648346e2976657789449e896" title="Editor" itemType="Folder" selected="false" exported="false">
+              <Item id="b092efa5baf949b6907e2f83fee861ff" title="Schemas" itemType="Folder" selected="false" exported="false">
+                <Item id="4811ed2f98d64c679f6ae45a3d2eda75" title="Article" extension="xsd" itemType="Schema" selected="false" exported="false" />
+                <Item id="20afa64f5b94476c86a531dfc6106c56" title="Image" extension="xsd" itemType="Schema" selected="false" exported="false" />
+              </Item>
+            </Item>
+          </Item>
+          <Item id="tcm:4-148-2" title="TridionDocsMashup" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+            <Item id="tcm:4-149-2" title="Admin" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+              <Item id="tcm:4-161-2" title="Schemas" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:4-466-8" title="TridionDocsMashup%20URL%20Configuration" extension="xsd" itemType="Schema" blueprintStatus="SharedItem" selected="true" exported="true">
+                  <ApplicationIds>
+                    <ApplicationId>tm:TranslationSchema</ApplicationId>
+                  </ApplicationIds>
+                </Item>
+              </Item>
+              <Item id="tcm:4-454" title="TridionDocsMashup%20HTML%20Design" extension="zip" itemType="Component" subtype="1" blueprintStatus="SharedItem" selected="true" exported="true" />
+              <Item id="tcm:4-467" title="TridionDocsMashup%20URL%20Configuration" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true">
+                <ApplicationIds>
+                  <ApplicationId>ugc:ComponentAndPage</ApplicationId>
+                </ApplicationIds>
+              </Item>
+              <Item id="tcm:4-468" title="TridionDocsMashup" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+            </Item>
+            <Item id="tcm:4-150-2" title="Editor" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+              <Item id="tcm:4-151-2" title="Schemas" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:4-157-2" title="Page%20Schemas" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                  <Item id="tcm:4-464-8" title="Bicycle%20Page%20With%20Static%20Widget" extension="xsd" itemType="Schema" subtype="8" blueprintStatus="SharedItem" selected="true" exported="true" />
+                  <Item id="tcm:4-478-8" title="Bicycle%20Page" extension="xsd" itemType="Schema" subtype="8" blueprintStatus="SharedItem" selected="true" exported="true" />
+                </Item>
+                <Item id="tcm:4-152-2" title="Region%20Schemas" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                  <Item id="tcm:4-460-8" title="%5BTridionDocsMashup%3ABicycle%5D%20Region" extension="xsd" itemType="Schema" subtype="8" blueprintStatus="SharedItem" selected="true" exported="true" />
+                  <Item id="tcm:4-463-8" title="%5BTridionDocsMashup%3ATopics%5D%20Static%20Topics%20Region" extension="xsd" itemType="Schema" subtype="8" blueprintStatus="SharedItem" selected="true" exported="true" />
+                </Item>
+                <Item id="tcm:4-458-8" title="Bicycle" extension="xsd" itemType="Schema" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:4-461-8" title="Tridion%20Docs%20Static%20Widget" extension="xsd" itemType="Schema" blueprintStatus="SharedItem" selected="true" exported="true" />
+              </Item>
+              <Item id="tcm:4-159-2" title="Templates" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:4-479-128" title="Bicycle%20Page%20With%20Static%20Region" extension="tptcmp" itemType="PageTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:4-459-32" title="Bicycle" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:4-490-128" title="Bicycle" extension="tptcmp" itemType="PageTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:4-462-32" title="Tridion%20Docs%20Static%20Widget" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+              </Item>
+            </Item>
+            <Item id="tcm:4-153-2" title="Site%20Manager" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+              <Item id="tcm:4-154-2" title="Schemas" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:4-162-2" title="Page%20Schemas" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                  <Item id="tcm:4-472-8" title="Bicycle%20Include%20Page" extension="xsd" itemType="Schema" subtype="8" blueprintStatus="SharedItem" selected="true" exported="true" />
+                </Item>
+                <Item id="tcm:4-156-2" title="Region%20Schemas" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                  <Item id="tcm:4-471-8" title="%5BTridionDocsMashup%3ATopics%5D%20Dynamic%20Topics%20Region" extension="xsd" itemType="Schema" subtype="8" blueprintStatus="SharedItem" selected="true" exported="true" />
+                </Item>
+                <Item id="tcm:4-456-8" title="Tridion%20Docs%20Dynamic%20Widget" extension="xsd" itemType="Schema" blueprintStatus="SharedItem" selected="true" exported="true" />
+              </Item>
+              <Item id="tcm:4-163-2" title="Templates" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:4-486-128" title="Include%20Page%20%28Tridion%20Docs%20Dynamic%20Widget%29" extension="tptcmp" itemType="PageTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:4-470-32" title="Tridion%20Docs%20Dynamic%20Widget" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+              </Item>
+            </Item>
+          </Item>
+        </Item>
+        <Item id="02122a83be80442284ec55264d3b3a3e" title="Modules%20Content" itemType="Folder" selected="false" exported="false">
+          <Item id="tcm:4-164-2" title="TridionDocsMashup" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+            <Item id="tcm:4-165-2" title="Content" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+              <Item id="tcm:4-167-2" title="Products" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:4-168-2" title="Bicycles" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                  <Item id="tcm:4-485" title="Bicycle%20Widget%20Configuration" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+                  <Item id="tcm:4-492" title="Bicycles" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+                  <Item id="tcm:4-495" title="Red%20Bicycle%20Image" extension="jpg" itemType="Component" subtype="1" blueprintStatus="LocalItem" selected="true" exported="true" />
+                  <Item id="tcm:4-496" title="Red%20Bicycle" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+                  <Item id="tcm:4-491" title="White%20Bicycle%20Image" extension="jpg" itemType="Component" subtype="1" blueprintStatus="LocalItem" selected="true" exported="true" />
+                  <Item id="tcm:4-494" title="White%20Bicycle" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+                </Item>
+              </Item>
+              <Item id="tcm:4-169-2" title="Tridion%20Docs" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:4-493" title="Tridion%20Docs%20Static%20Widget" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+              </Item>
+              <Item id="tcm:4-166-2" title="_Cloneable%20Content" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:4-488" title="Bicycle%20Image" extension="jpg" itemType="Component" subtype="1" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:4-489" title="Bicycle" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:4-484" title="Tridion%20Docs%20Static%20Widget" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+              </Item>
+            </Item>
+          </Item>
+        </Item>
+      </Item>
+      <Item id="31700bacf4bf43538b8323c9603e3fd9" title="Content%20Reference%20Type" itemType="Category" selected="false" exported="false">
+        <Item id="tcm:4-474-1024" title="Acknowledgements" extension="tkw" itemType="Keyword" blueprintStatus="SharedItem" selected="false" exported="true" />
+      </Item>
+      <Item id="528cff9afe4d4b83802ec3b087431332" title="Product%20Family%20Name" itemType="Category" selected="false" exported="false">
+        <Item id="tcm:4-482-1024" title="Red%20Bicycle" extension="tkw" itemType="Keyword" blueprintStatus="SharedItem" selected="false" exported="true" />
+        <Item id="tcm:4-469-1024" title="White%20Bicycle" extension="tkw" itemType="Keyword" blueprintStatus="SharedItem" selected="false" exported="true" />
+      </Item>
+      <Item id="01c06c8ade964445882a45f2e10bec1b" title="Product%20Release%20Name" itemType="Category" selected="false" exported="false">
+        <Item id="tcm:4-457-1024" title="Model%202018" extension="tkw" itemType="Keyword" blueprintStatus="SharedItem" selected="false" exported="true" />
+      </Item>
+    </Item>
+    <Item id="18acb1d023b14bfa95dbd69459711374" title="400%20Example%20Site" itemType="Publication" selected="false" exported="false">
+      <Item id="709a01b5f4344dfa93d35d40678a45b8" title="Building%20Blocks" itemType="Folder" selected="false" exported="false">
+        <Item id="41c699abd1144e2db0a56e0795e098c6" title="Framework" itemType="Folder" selected="false" exported="false">
+          <Item id="ab44b735773f4c24893d53d490be6bf1" title="Site%20Manager" itemType="Folder" selected="false" exported="false">
+            <Item id="afd33ab08b944dada0fd0a62e998b400" title="Schemas" itemType="Folder" selected="false" exported="false">
+              <Item id="tcm:5-255-8" title="Page%20Navigation%20Metadata" extension="xsd" itemType="Schema" subtype="3" blueprintStatus="SharedItem" selected="false" exported="true" />
+            </Item>
+          </Item>
+        </Item>
+        <Item id="a02835d080ca45f1b54d00c6ac12bf13" title="Modules" itemType="Folder" selected="false" exported="false">
+          <Item id="f8b65e2a5d4c4ee99e5d83c300425ff3" title="Core" itemType="Folder" selected="false" exported="false">
+            <Item id="e75b41043dfe4a92b803f77668088410" title="Editor" itemType="Folder" selected="false" exported="false">
+              <Item id="be2d50cae6a547ed9531885a05fb2538" title="Schemas" itemType="Folder" selected="false" exported="false">
+                <Item id="e4da67ac16ba465d994a10834eb232bc" title="Page%20Schemas" itemType="Folder" selected="false" exported="false">
+                  <Item id="tcm:5-75-8" title="Content%20Page" extension="xsd" itemType="Schema" subtype="8" blueprintStatus="SharedItem" selected="false" exported="true" />
+                </Item>
+                <Item id="42698df4d7f04d34886cfcbcc8425e98" title="Region%20Schemas" itemType="Folder" selected="false" exported="false">
+                  <Item id="798471e2a1ed4fd3abdd7b4a228d7fae" title="%5BMain%5D%20Region" extension="xsd" itemType="Schema" selected="false" exported="false" />
+                </Item>
+              </Item>
+              <Item id="8bace2e71c0944ed96cfa90305308f3b" title="Templates" itemType="Folder" selected="false" exported="false">
+                <Item id="c5fa6128af4a420c87503fe4c55a0289" title="Article" extension="tctcmp" itemType="ComponentTemplate" selected="false" exported="false" />
+                <Item id="efe4f9c81ca742f0a1eb9d8218f47c82" title="Content%20Page" extension="tptcmp" itemType="PageTemplate" selected="false" exported="false" />
+              </Item>
+            </Item>
+          </Item>
+          <Item id="tcm:5-148-2" title="TridionDocsMashup" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+            <Item id="tcm:5-149-2" title="Admin" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+              <Item id="tcm:5-161-2" title="Schemas" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:5-466-8" title="TridionDocsMashup%20URL%20Configuration" extension="xsd" itemType="Schema" blueprintStatus="SharedItem" selected="true" exported="true">
+                  <ApplicationIds>
+                    <ApplicationId>tm:TranslationSchema</ApplicationId>
+                  </ApplicationIds>
+                </Item>
+              </Item>
+              <Item id="tcm:5-454" title="TridionDocsMashup%20HTML%20Design" extension="zip" itemType="Component" subtype="1" blueprintStatus="SharedItem" selected="true" exported="true" />
+              <Item id="tcm:5-467" title="TridionDocsMashup%20URL%20Configuration" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true">
+                <ApplicationIds>
+                  <ApplicationId>ugc:ComponentAndPage</ApplicationId>
+                </ApplicationIds>
+              </Item>
+              <Item id="tcm:5-468" title="TridionDocsMashup" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+            </Item>
+            <Item id="tcm:5-150-2" title="Editor" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+              <Item id="tcm:5-151-2" title="Schemas" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:5-157-2" title="Page%20Schemas" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                  <Item id="tcm:5-464-8" title="Bicycle%20Page%20With%20Static%20Widget" extension="xsd" itemType="Schema" subtype="8" blueprintStatus="SharedItem" selected="true" exported="true" />
+                  <Item id="tcm:5-478-8" title="Bicycle%20Page" extension="xsd" itemType="Schema" subtype="8" blueprintStatus="SharedItem" selected="true" exported="true" />
+                </Item>
+                <Item id="tcm:5-152-2" title="Region%20Schemas" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                  <Item id="tcm:5-460-8" title="%5BTridionDocsMashup%3ABicycle%5D%20Region" extension="xsd" itemType="Schema" subtype="8" blueprintStatus="SharedItem" selected="true" exported="true" />
+                  <Item id="tcm:5-463-8" title="%5BTridionDocsMashup%3ATopics%5D%20Static%20Topics%20Region" extension="xsd" itemType="Schema" subtype="8" blueprintStatus="SharedItem" selected="true" exported="true" />
+                </Item>
+                <Item id="tcm:5-458-8" title="Bicycle" extension="xsd" itemType="Schema" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:5-461-8" title="Tridion%20Docs%20Static%20Widget" extension="xsd" itemType="Schema" blueprintStatus="SharedItem" selected="true" exported="true" />
+              </Item>
+              <Item id="tcm:5-159-2" title="Templates" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:5-479-128" title="Bicycle%20Page%20With%20Static%20Region" extension="tptcmp" itemType="PageTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:5-459-32" title="Bicycle" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:5-490-128" title="Bicycle" extension="tptcmp" itemType="PageTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:5-462-32" title="Tridion%20Docs%20Static%20Widget" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+              </Item>
+            </Item>
+            <Item id="tcm:5-153-2" title="Site%20Manager" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+              <Item id="tcm:5-154-2" title="Schemas" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:5-162-2" title="Page%20Schemas" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                  <Item id="tcm:5-472-8" title="Bicycle%20Include%20Page" extension="xsd" itemType="Schema" subtype="8" blueprintStatus="SharedItem" selected="true" exported="true" />
+                </Item>
+                <Item id="tcm:5-156-2" title="Region%20Schemas" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                  <Item id="tcm:5-471-8" title="%5BTridionDocsMashup%3ATopics%5D%20Dynamic%20Topics%20Region" extension="xsd" itemType="Schema" subtype="8" blueprintStatus="SharedItem" selected="true" exported="true" />
+                </Item>
+                <Item id="tcm:5-456-8" title="Tridion%20Docs%20Dynamic%20Widget" extension="xsd" itemType="Schema" blueprintStatus="SharedItem" selected="true" exported="true" />
+              </Item>
+              <Item id="tcm:5-163-2" title="Templates" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:5-486-128" title="Include%20Page%20%28Tridion%20Docs%20Dynamic%20Widget%29" extension="tptcmp" itemType="PageTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:5-470-32" title="Tridion%20Docs%20Dynamic%20Widget" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+              </Item>
+            </Item>
+          </Item>
+        </Item>
+        <Item id="c74c4d2fcf6d41a89d948d14bb18008c" title="Modules%20Content" itemType="Folder" selected="false" exported="false">
+          <Item id="tcm:5-164-2" title="TridionDocsMashup" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+            <Item id="tcm:5-165-2" title="Content" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+              <Item id="tcm:5-167-2" title="Products" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:5-168-2" title="Bicycles" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                  <Item id="tcm:5-485" title="Bicycle%20Widget%20Configuration" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+                  <Item id="tcm:5-492" title="Bicycles" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+                  <Item id="tcm:5-495" title="Red%20Bicycle%20Image" extension="jpg" itemType="Component" subtype="1" blueprintStatus="SharedItem" selected="true" exported="true" />
+                  <Item id="tcm:5-496" title="Red%20Bicycle" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+                  <Item id="tcm:5-491" title="White%20Bicycle%20Image" extension="jpg" itemType="Component" subtype="1" blueprintStatus="SharedItem" selected="true" exported="true" />
+                  <Item id="tcm:5-494" title="White%20Bicycle" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+                </Item>
+              </Item>
+              <Item id="tcm:5-169-2" title="Tridion%20Docs" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:5-493" title="Tridion%20Docs%20Static%20Widget" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+              </Item>
+              <Item id="tcm:5-166-2" title="_Cloneable%20Content" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:5-488" title="Bicycle%20Image" extension="jpg" itemType="Component" subtype="1" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:5-489" title="Bicycle" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:5-484" title="Tridion%20Docs%20Static%20Widget" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+              </Item>
+            </Item>
+          </Item>
+        </Item>
+      </Item>
+      <Item id="3daf22b6c6284c7190e41a11292d0f3c" title="Home" itemType="StructureGroup" selected="false" exported="false">
+        <Item id="tcm:5-170-4" title="030%20Products" itemType="StructureGroup" blueprintStatus="LocalItem" selected="true" exported="true">
+          <Item id="tcm:5-500-64" title="000%20Product%20Catalogue" extension="tpg" itemType="Page" blueprintStatus="LocalItem" selected="true" exported="true" />
+          <Item id="tcm:5-499-64" title="001%20Red%20Bicycle" extension="tpg" itemType="Page" blueprintStatus="LocalItem" selected="true" exported="true" />
+          <Item id="tcm:5-498-64" title="002%20White%20Bicyclee" extension="tpg" itemType="Page" blueprintStatus="LocalItem" selected="true" exported="true" />
+        </Item>
+        <Item id="79542ab55f4748468c5eed54f329aca9" title="_Page%20Types" itemType="StructureGroup" selected="false" exported="false">
+          <Item id="tcm:5-501-64" title="Bicycle%20Page" extension="tpg" itemType="Page" blueprintStatus="LocalItem" selected="true" exported="true">
+            <ApplicationIds>
+              <ApplicationId>SiteEdit</ApplicationId>
+              <ApplicationId>ugc:ComponentAndPage</ApplicationId>
+            </ApplicationIds>
+          </Item>
+        </Item>
+      </Item>
+      <Item id="cd96b64f6cf74a63801fc82b975d0833" title="Sitemap%20%5BNavigation%5D" itemType="Category" selected="false" exported="false">
+        <Item id="tcm:5-497-1024" title="030%20Products" extension="tkw" itemType="Keyword" blueprintStatus="LocalItem" selected="true" exported="true" />
+      </Item>
+    </Item>
+    <Item id="66cb975c82fc4111b8dc6b1ee6e0c098" title="Jpeg%20image" extension="tmt" itemType="MultimediaType" selected="false" exported="false" />
+    <Item id="31cbdc3ba6a24a26a204abf75b15e193" title="Zip%20file" extension="tmt" itemType="MultimediaType" selected="false" exported="false" />
+  </Item>
+</Index>

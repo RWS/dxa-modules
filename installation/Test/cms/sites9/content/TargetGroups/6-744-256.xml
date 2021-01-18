@@ -1,0 +1,19 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Paul</tcm:Title>
+      <tcm:Description>Pauls test</tcm:Description>
+      <tcm:Conditions>
+        <tcm:KeywordCondition Type="Include" Operator="=">
+          <tcm:Keyword xlink:type="simple" xlink:title="Test Keyword 2" xlink:href="/webdav/401%20Automated%20Test%20Parent/TSI-811%20Test%20Category/Test%20Keyword%202.tkw" />
+          <tcm:Value>1234</tcm:Value>
+        </tcm:KeywordCondition>
+      </tcm:Conditions>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="Keyword" itemUrl="/webdav/401%20Automated%20Test%20Parent/TSI-811%20Test%20Category/Test%20Keyword%202.tkw" linkName="Conditions[0]/Keyword" />
+  </Dependencies>
+</PackageItem>

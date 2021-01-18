@@ -1,0 +1,33 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>TSI-811 Test Page</tcm:Title>
+      <tcm:FileName>tsi-811</tcm:FileName>
+      <tcm:PageTemplate IsInherited="false" xlink:type="simple" xlink:title="TSI-811 Test PT [Test:TSI811TestPage]" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/TSI-811%20Test%20PT%20%5BTest%3ATSI811TestPage%5D.tptcmp" />
+      <tcm:ComponentPresentations>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="TSI-811 Test Component" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Regression/TSI-811%20Test%20Component.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="TSI-811 Test CT" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/TSI-811%20Test%20CT.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+      </tcm:ComponentPresentations>
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="TSI-811 Page Metadata Schema" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/TSI-811%20Page%20Metadata%20Schema.xsd" />
+      <tcm:Metadata>
+        <Metadata xmlns="uuid:8f96ecf8-0331-4efa-97c2-5792dba95d27">
+          <pageKeyword xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/401%20Automated%20Test%20Parent/TSI-811%20Test%20Category/Test%20Keyword%202.tkw" xlink:title="Test Keyword 2">Test Keyword 2</pageKeyword>
+        </Metadata>
+      </tcm:Metadata>
+      <tcm:RegionSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:Regions />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemStructureGroup" itemUrl="/webdav/401%20Automated%20Test%20Parent/Home/Regression" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Regression/TSI-811%20Test%20Component.xml" linkName="ComponentPresentations[0]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/TSI-811%20Test%20CT.tctcmp" linkName="ComponentPresentations[0]/ComponentTemplate" />
+    <Dependency dependencyType="LinkedKeyword" itemUrl="/webdav/401%20Automated%20Test%20Parent/TSI-811%20Test%20Category/Test%20Keyword%202.tkw" linkName="Metadata" xpath="*[local-name() = 'Metadata'][1]/*[local-name() = 'pageKeyword'][1]/@xlink:href" />
+    <Dependency dependencyType="MetadataSchema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/TSI-811%20Page%20Metadata%20Schema.xsd" linkName="MetadataSchema" />
+    <Dependency dependencyType="PageTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/TSI-811%20Test%20PT%20%5BTest%3ATSI811TestPage%5D.tptcmp" linkName="PageTemplate" />
+  </Dependencies>
+</PackageItem>

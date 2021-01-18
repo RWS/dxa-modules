@@ -1,0 +1,44 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>MediaManager</tcm:Title>
+      <tcm:FileName>mediamanager</tcm:FileName>
+      <tcm:PageTemplate IsInherited="false" xlink:type="simple" xlink:title="Content Page Without Navigation" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Content%20Page%20Without%20Navigation.tptcmp" />
+      <tcm:ComponentPresentations>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="ecl:0-mm-415-dist-file" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Schemas/SDL%20Media%20Manager/566/BDB/ecl%3A0-mm-415-dist-file.ecl" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Media Manager Video" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Templates/Media%20Manager%20Video.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="ecl:0-mm-411-dist-file" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Schemas/SDL%20Media%20Manager/D2D/7C9/ecl%3A0-mm-411-dist-file.ecl" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Media Manager Image" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Templates/Media%20Manager%20Image.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+      </tcm:ComponentPresentations>
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:Metadata />
+      <tcm:RegionSchema xlink:type="simple" xlink:title="Content Page" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Schemas/Page%20Schemas/Content%20Page.xsd" />
+      <tcm:Regions>
+        <tcm:Region Type="EmbeddedRegionData">
+          <tcm:RegionName>Main</tcm:RegionName>
+          <tcm:RegionSchema xlink:type="simple" xlink:title="[Main] Region" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Schemas/Region%20Schemas/%5BMain%5D%20Region.xsd" />
+          <tcm:Metadata />
+          <tcm:ComponentPresentations />
+          <tcm:Regions />
+        </tcm:Region>
+      </tcm:Regions>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemStructureGroup" itemUrl="/webdav/401%20Automated%20Test%20Parent/Home/Regression" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Schemas/SDL%20Media%20Manager/566/BDB/ecl%3A0-mm-415-dist-file.ecl" linkName="ComponentPresentations[0]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Schemas/SDL%20Media%20Manager/D2D/7C9/ecl%3A0-mm-411-dist-file.ecl" linkName="ComponentPresentations[1]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Templates/Media%20Manager%20Video.tctcmp" linkName="ComponentPresentations[0]/ComponentTemplate" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Templates/Media%20Manager%20Image.tctcmp" linkName="ComponentPresentations[1]/ComponentTemplate" />
+    <Dependency dependencyType="PageTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Content%20Page%20Without%20Navigation.tptcmp" linkName="PageTemplate" />
+    <Dependency dependencyType="PageRegionSchema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Schemas/Page%20Schemas/Content%20Page.xsd" linkName="RegionSchema" />
+    <Dependency dependencyType="PageRegionSchema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Schemas/Region%20Schemas/%5BMain%5D%20Region.xsd" linkName="Regions[0]/RegionSchema" />
+  </Dependencies>
+</PackageItem>

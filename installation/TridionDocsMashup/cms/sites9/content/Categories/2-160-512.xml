@@ -1,0 +1,21 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Content Reference Type</tcm:Title>
+      <tcm:XMLName>DXCONTENTREFTYPE</tcm:XMLName>
+      <tcm:Description>Category is used in the Tridion Docs Mashup and contains the content reference type</tcm:Description>
+      <tcm:KeywordMetadataSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:UseForNavigation>true</tcm:UseForNavigation>
+      <tcm:AllowedParentCategories>
+        <tcm:Category xlink:type="simple" xlink:title="Content Reference Type" xlink:href="/webdav/100%20Master/Content%20Reference%20Type" />
+      </tcm:AllowedParentCategories>
+      <tcm:IsRoot>true</tcm:IsRoot>
+      <tcm:UseForIdentification>false</tcm:UseForIdentification>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/100%20Master" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemPublication" itemUrl="/webdav/100%20Master" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="AllowedParentCategory" itemUrl="/webdav/100%20Master/Content%20Reference%20Type" linkName="AllowedParentCategories[0]" />
+  </Dependencies>
+</PackageItem>

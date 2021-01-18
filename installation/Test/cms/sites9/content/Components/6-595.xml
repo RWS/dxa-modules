@@ -1,0 +1,35 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>test-promo-item3</tcm:Title>
+      <tcm:Type>Normal</tcm:Type>
+      <tcm:Schema xlink:type="simple" xlink:title="News Article" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Schemas/News%20Article.xsd" IsMandatory="false" />
+      <tcm:Content>
+        <NewsArticle xmlns="http://www.sdl.com/web/schemas/core">
+          <headline>test-promo-item3-headline</headline>
+          <articleBody>
+            <subheading>test-promo-item3-subheading</subheading>
+            <content>test-promo-item3-content</content>
+          </articleBody>
+        </NewsArticle>
+      </tcm:Content>
+      <tcm:Metadata>
+        <Metadata xmlns="http://www.sdl.com/web/schemas/core">
+          <standardMeta>
+            <dateCreated>2014-08-18T12:20:02</dateCreated>
+            <description>test-promo-item3-meta-description</description>
+            <name>test-promo-item3-short-title</name>
+            <introText>test-promo-item3-intro-text</introText>
+          </standardMeta>
+        </Metadata>
+      </tcm:Metadata>
+      <tcm:IsBasedOnTridionWebSchema>true</tcm:IsBasedOnTridionWebSchema>
+      <tcm:MultimediaType xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Smoke/SmartTarget" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="Schema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Schemas/News%20Article.xsd" linkName="Schema" />
+  </Dependencies>
+</PackageItem>

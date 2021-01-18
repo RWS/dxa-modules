@@ -1,0 +1,36 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Image Library Intro</tcm:Title>
+      <tcm:Type>Normal</tcm:Type>
+      <tcm:Schema xlink:type="simple" xlink:title="Article" xlink:href="/webdav/200%20Example%20Content/Building%20Blocks/Modules/Core/Editor/Schemas/Article.xsd" IsMandatory="false" />
+      <tcm:Content>
+        <Article xmlns="http://www.sdl.com/web/schemas/core">
+          <headline>Image Library</headline>
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/200%20Example%20Content/Building%20Blocks/Content/Images/Large/balloons.jpg" xlink:title="balloons" />
+          <articleBody>
+            <content>
+            <span xmlns="http://www.w3.org/1999/xhtml" style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; line-height: 14px; text-align: justify;">In sodales elementum lorem, at sollicitudin quam placerat in. Suspendisse vitae purus eu dolor mattis mollis. Nulla sit amet orci ac arcu suscipit commodo ut in tellus. Praesent ultrices lacus massa, at consequat augue consectetur a. Proin nec velit enim. Maecenas sed vulputate orci, ac pretium lorem. Quisque eget velit ac justo vulputate posuere eu vel metus. Vivamus sit amet dolor id leo dictum pretium. In et ultrices lectus, quis sagittis purus. Aliquam varius porttitor nibh at malesuada.</span>
+          </content>
+          </articleBody>
+        </Article>
+      </tcm:Content>
+      <tcm:Metadata>
+        <Metadata xmlns="http://www.sdl.com/web/schemas/core">
+          <standardMeta>
+            <description>Aenean suscipit rutrum justo in molestie. Suspendisse mollis sapien ac neque pellentesque iaculis. Quisque blandit varius volutpat. Nunc ullamcorper, sapien in tincidunt varius, lectus lectus tincidunt nisl, ac vestibulum turpis leo a massa. </description>
+            <introText>Visually explore our company... </introText>
+          </standardMeta>
+        </Metadata>
+      </tcm:Metadata>
+      <tcm:IsBasedOnTridionWebSchema>true</tcm:IsBasedOnTridionWebSchema>
+      <tcm:MultimediaType xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/200%20Example%20Content" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/200%20Example%20Content/Building%20Blocks/Content/Further%20Information" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/200%20Example%20Content/Building%20Blocks/Content/Images/Large/balloons.jpg" linkName="Content" xpath="*[local-name() = 'Article'][1]/*[local-name() = 'image'][1]/@xlink:href" />
+    <Dependency dependencyType="Schema" itemUrl="/webdav/200%20Example%20Content/Building%20Blocks/Modules/Core/Editor/Schemas/Article.xsd" linkName="Schema" />
+  </Dependencies>
+</PackageItem>

@@ -1,0 +1,30 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>TSI-2316 Test Keyword</tcm:Title>
+      <tcm:Description>Published Keyword with metadata</tcm:Description>
+      <tcm:Key>TSI-2316</tcm:Key>
+      <tcm:IsAbstract>false</tcm:IsAbstract>
+      <tcm:ParentKeywords />
+      <tcm:RelatedKeywords />
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="Navigation Taxonomy Keyword Metadata" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/Navigation%20Taxonomy%20Keyword%20Metadata.xsd" />
+      <tcm:Metadata>
+        <Metadata xmlns="uuid:4d09b87d-3f5b-4b76-8cf6-5e1241d6ea92">
+          <TextField>This is a text field</TextField>
+          <NumberField>666.666</NumberField>
+          <DateField>1970-12-16T12:34:56</DateField>
+          <CompLinkField xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Test%20Article.xml" xlink:title="Test Article" />
+          <KeywordField xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/401%20Automated%20Test%20Parent/Test%20Taxonomy%20%5BNavigation%5D/Keyword%201%2E1.tkw" xlink:title="Keyword 1.1">Keyword 1.1</KeywordField>
+        </Metadata>
+      </tcm:Metadata>
+      <tcm:IsRoot>true</tcm:IsRoot>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemCategory" itemUrl="/webdav/401%20Automated%20Test%20Parent/Test%20Taxonomy%202%20%28not%20Navigation%29" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Test%20Article.xml" linkName="Metadata" xpath="*[local-name() = 'Metadata'][1]/*[local-name() = 'CompLinkField'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedKeyword" itemUrl="/webdav/401%20Automated%20Test%20Parent/Test%20Taxonomy%20%5BNavigation%5D/Keyword%201%2E1.tkw" linkName="Metadata" xpath="*[local-name() = 'Metadata'][1]/*[local-name() = 'KeywordField'][1]/@xlink:href" />
+    <Dependency dependencyType="MetadataSchema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/Navigation%20Taxonomy%20Keyword%20Metadata.xsd" linkName="MetadataSchema" />
+  </Dependencies>
+</PackageItem>

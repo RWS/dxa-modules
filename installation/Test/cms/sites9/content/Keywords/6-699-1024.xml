@@ -1,0 +1,25 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Pole Fishing</tcm:Title>
+      <tcm:Description>Related to fishing with long pole rod</tcm:Description>
+      <tcm:Key>pole</tcm:Key>
+      <tcm:IsAbstract>false</tcm:IsAbstract>
+      <tcm:ParentKeywords />
+      <tcm:RelatedKeywords />
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="Fishing Keyword Metadata" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/SRQ9128/schemas/Fishing%20Keyword%20Metadata.xsd" />
+      <tcm:Metadata>
+        <Metadata xmlns="uuid:e88dbbac-931d-4cde-92d4-a1a22dd7775c">
+          <Author>John Doe</Author>
+          <CreatedDate>2018-07-03T13:55:36.572</CreatedDate>
+        </Metadata>
+      </tcm:Metadata>
+      <tcm:IsRoot>true</tcm:IsRoot>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemCategory" itemUrl="/webdav/401%20Automated%20Test%20Parent/Fishing%20Type" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="MetadataSchema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/SRQ9128/schemas/Fishing%20Keyword%20Metadata.xsd" linkName="MetadataSchema" />
+  </Dependencies>
+</PackageItem>

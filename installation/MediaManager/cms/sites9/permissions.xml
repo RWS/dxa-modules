@@ -1,0 +1,14 @@
+<export>
+  <organizationalItem path="/webdav/100%20Master/Building%20Blocks/Modules/MediaManager/Admin">
+    <permissions group="Everyone">Read</permissions>
+    <permissions group="Editor">None</permissions>
+    <permissions group="Site Manager">None</permissions>
+    <permissions group="Developer">All</permissions>
+  </organizationalItem>
+  <organizationalItem path="/webdav/100%20Master/Building%20Blocks/Modules/MediaManager/Editor">
+    <permissions group="Everyone">Read</permissions>
+    <permissions group="Editor">All</permissions>
+    <permissions group="Site Manager">All</permissions>
+    <permissions group="Developer">All</permissions>
+  </organizationalItem>
+</export>

@@ -1,0 +1,38 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>001 Top-level Keyword 1</tcm:Title>
+      <tcm:Description>Top-level Keyword 1 (abstract)</tcm:Description>
+      <tcm:Key>top1</tcm:Key>
+      <tcm:IsAbstract>true</tcm:IsAbstract>
+      <tcm:ParentKeywords />
+      <tcm:RelatedKeywords>
+        <tcm:RelatedKeyword xlink:type="simple" xlink:title="002 Top-level Keyword 2" xlink:href="/webdav/401%20Automated%20Test%20Parent/Test%20Taxonomy%20%5BNavigation%5D/002%20Top-level%20Keyword%202.tkw" />
+      </tcm:RelatedKeywords>
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="Navigation Taxonomy Keyword Metadata" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/Navigation%20Taxonomy%20Keyword%20Metadata.xsd" />
+      <tcm:Metadata>
+        <Metadata xmlns="uuid:4d09b87d-3f5b-4b76-8cf6-5e1241d6ea92">
+          <TextField>This is the first value of TextField in Keyword metadata</TextField>
+          <TextField>This is the second value of TextField in Keyword metadata</TextField>
+          <NumberField>666</NumberField>
+          <NumberField>666666</NumberField>
+          <DateField>16-12-1970</DateField>
+          <DateField>28-8-2016</DateField>
+          <CompLinkField xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Regression/TSI-1614%20Rich%20Text%20embedded%20Image%20With%20HTML%20class.xml" xlink:title="TSI-1614 Rich Text embedded Image With HTML class" />
+          <KeywordField xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/401%20Automated%20Test%20Parent/Test%20Taxonomy%20%5BNavigation%5D/Keyword%201%2E1%2E1.tkw" xlink:title="Keyword 1.1.1">Keyword 1.1.1</KeywordField>
+          <KeywordField xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/401%20Automated%20Test%20Parent/Test%20Taxonomy%20%5BNavigation%5D/Keyword%201%2E2.tkw" xlink:title="Keyword 1.2">Keyword 1.2</KeywordField>
+        </Metadata>
+      </tcm:Metadata>
+      <tcm:IsRoot>true</tcm:IsRoot>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemCategory" itemUrl="/webdav/401%20Automated%20Test%20Parent/Test%20Taxonomy%20%5BNavigation%5D" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Regression/TSI-1614%20Rich%20Text%20embedded%20Image%20With%20HTML%20class.xml" linkName="Metadata" xpath="*[local-name() = 'Metadata'][1]/*[local-name() = 'CompLinkField'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedKeyword" itemUrl="/webdav/401%20Automated%20Test%20Parent/Test%20Taxonomy%20%5BNavigation%5D/Keyword%201%2E1%2E1.tkw" linkName="Metadata" xpath="*[local-name() = 'Metadata'][1]/*[local-name() = 'KeywordField'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedKeyword" itemUrl="/webdav/401%20Automated%20Test%20Parent/Test%20Taxonomy%20%5BNavigation%5D/Keyword%201%2E2.tkw" linkName="Metadata" xpath="*[local-name() = 'Metadata'][1]/*[local-name() = 'KeywordField'][2]/@xlink:href" />
+    <Dependency dependencyType="MetadataSchema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/Navigation%20Taxonomy%20Keyword%20Metadata.xsd" linkName="MetadataSchema" />
+    <Dependency dependencyType="RelatedKeyword" itemUrl="/webdav/401%20Automated%20Test%20Parent/Test%20Taxonomy%20%5BNavigation%5D/002%20Top-level%20Keyword%202.tkw" linkName="RelatedKeywords[0]" />
+  </Dependencies>
+</PackageItem>

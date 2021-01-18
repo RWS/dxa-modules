@@ -1,0 +1,234 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>401 Automated Test Parent</tcm:Title>
+      <tcm:PublicationPath>\</tcm:PublicationPath>
+      <tcm:PublicationURL>/autotest-parent</tcm:PublicationURL>
+      <tcm:MultimediaPath>\Images</tcm:MultimediaPath>
+      <tcm:MultimediaURL>Images</tcm:MultimediaURL>
+      <tcm:DefaultPageTemplate xlink:type="simple" xlink:title="Content Page Without Navigation" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Content%20Page%20Without%20Navigation.tptcmp" />
+      <tcm:DefaultComponentTemplate xlink:type="simple" xlink:title="Default Component Template" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Default%20Templates/Default%20Component%20Template.tctcmp" />
+      <tcm:DefaultTemplateBuildingBlock xlink:type="simple" xlink:title="Default Dreamweaver Page Design" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Default%20Templates/Default%20Dreamweaver%20Page%20Design.dwt" />
+      <tcm:DefaultMultimediaSchema xlink:type="simple" xlink:title="Default Multimedia Schema" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Default%20Multimedia%20Schema.xsd" />
+      <tcm:ParentPublications>
+        <tcm:ParentPublication xlink:type="simple" xlink:title="200 Example Content" xlink:href="/webdav/200%20Example%20Content" />
+        <tcm:ParentPublication xlink:type="simple" xlink:title="110 DXA Site Type" xlink:href="/webdav/110%20DXA%20Site%20Type" />
+      </tcm:ParentPublications>
+      <tcm:PageTemplateProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:ComponentTemplateProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:TaskProcess xlink:type="simple" xlink:title="Task Process" xlink:href="tcm:6-1-131074" />
+      <tcm:TemplateBundleProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:ComponentSnapshotTemplate xlink:type="simple" xlink:title="Default Component Template" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Default%20Templates/Default%20Component%20Template.tctcmp" />
+      <tcm:PageSnapshotTemplate xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:ShareProcessAssociations>true</tcm:ShareProcessAssociations>
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="Publication Metadata" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Framework/Site%20Manager/Schemas/Publication%20Metadata.xsd" />
+      <tcm:Metadata>
+        <Metadata xmlns="uuid:6f4e35f8-3149-43f6-b90a-99d960939865">
+          <siteId>MultiLangTestSite</siteId>
+        </Metadata>
+      </tcm:Metadata>
+      <tcm:CategoriesXSD>
+        <xsd:schema xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:category="tcm:0-6-1/Categories.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="tcm:0-6-1/Categories.xsd">
+          <xsd:import namespace="http://www.w3.org/1999/xlink" schemaLocation="/webdav/cm_lnk.xsd" />
+          <xsd:attribute name="CategoryURI" type="xsd:anyURI" />
+          <xsd:complexType name="DXCONTENTREFTYPE">
+            <xsd:annotation>
+              <xsd:documentation>Content Reference Type</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleContent>
+              <xsd:extension base="xsd:normalizedString">
+                <xsd:attribute ref="category:CategoryURI" use="optional" fixed="tcm:6-161-512" />
+                <xsd:attribute ref="xlink:type" use="optional" fixed="simple" />
+                <xsd:attribute ref="xlink:href" use="optional" />
+                <xsd:attribute ref="xlink:title" use="optional" />
+              </xsd:extension>
+            </xsd:simpleContent>
+          </xsd:complexType>
+          <xsd:complexType name="ContentType">
+            <xsd:annotation>
+              <xsd:documentation>Content Type</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleContent>
+              <xsd:extension base="xsd:normalizedString">
+                <xsd:attribute ref="category:CategoryURI" use="optional" fixed="tcm:6-24-512" />
+                <xsd:attribute ref="xlink:type" use="optional" fixed="simple" />
+                <xsd:attribute ref="xlink:href" use="optional" />
+                <xsd:attribute ref="xlink:title" use="optional" />
+              </xsd:extension>
+            </xsd:simpleContent>
+          </xsd:complexType>
+          <xsd:complexType name="FishingType">
+            <xsd:annotation>
+              <xsd:documentation>Fishing Type</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleContent>
+              <xsd:extension base="xsd:normalizedString">
+                <xsd:attribute ref="category:CategoryURI" use="optional" fixed="tcm:6-231-512" />
+                <xsd:attribute ref="xlink:type" use="optional" fixed="simple" />
+                <xsd:attribute ref="xlink:href" use="optional" />
+                <xsd:attribute ref="xlink:title" use="optional" />
+              </xsd:extension>
+            </xsd:simpleContent>
+          </xsd:complexType>
+          <xsd:complexType name="ListSortType">
+            <xsd:annotation>
+              <xsd:documentation>List Sort Type</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleContent>
+              <xsd:extension base="xsd:normalizedString">
+                <xsd:attribute ref="category:CategoryURI" use="optional" fixed="tcm:6-25-512" />
+                <xsd:attribute ref="xlink:type" use="optional" fixed="simple" />
+                <xsd:attribute ref="xlink:href" use="optional" />
+                <xsd:attribute ref="xlink:title" use="optional" />
+              </xsd:extension>
+            </xsd:simpleContent>
+          </xsd:complexType>
+          <xsd:complexType name="NavigationType">
+            <xsd:annotation>
+              <xsd:documentation>Navigation Type</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleContent>
+              <xsd:extension base="xsd:normalizedString">
+                <xsd:attribute ref="category:CategoryURI" use="optional" fixed="tcm:6-42-512" />
+                <xsd:attribute ref="xlink:type" use="optional" fixed="simple" />
+                <xsd:attribute ref="xlink:href" use="optional" />
+                <xsd:attribute ref="xlink:title" use="optional" />
+              </xsd:extension>
+            </xsd:simpleContent>
+          </xsd:complexType>
+          <xsd:complexType name="DXPRODUCTFAMILYNAME">
+            <xsd:annotation>
+              <xsd:documentation>Product Family Name</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleContent>
+              <xsd:extension base="xsd:normalizedString">
+                <xsd:attribute ref="category:CategoryURI" use="optional" fixed="tcm:6-159-512" />
+                <xsd:attribute ref="xlink:type" use="optional" fixed="simple" />
+                <xsd:attribute ref="xlink:href" use="optional" />
+                <xsd:attribute ref="xlink:title" use="optional" />
+              </xsd:extension>
+            </xsd:simpleContent>
+          </xsd:complexType>
+          <xsd:complexType name="DXPRODUCTRELEASENAME">
+            <xsd:annotation>
+              <xsd:documentation>Product Release Name</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleContent>
+              <xsd:extension base="xsd:normalizedString">
+                <xsd:attribute ref="category:CategoryURI" use="optional" fixed="tcm:6-156-512" />
+                <xsd:attribute ref="xlink:type" use="optional" fixed="simple" />
+                <xsd:attribute ref="xlink:href" use="optional" />
+                <xsd:attribute ref="xlink:title" use="optional" />
+              </xsd:extension>
+            </xsd:simpleContent>
+          </xsd:complexType>
+          <xsd:simpleType name="_sitemap">
+            <xsd:restriction base="xsd:string" />
+          </xsd:simpleType>
+          <xsd:complexType name="sitemap">
+            <xsd:annotation>
+              <xsd:documentation>Sitemap [Navigation]</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleContent>
+              <xsd:extension base="category:_sitemap">
+                <xsd:attribute ref="category:CategoryURI" use="optional" fixed="tcm:6-13-512" />
+                <xsd:attribute ref="xlink:type" use="optional" fixed="simple" />
+                <xsd:attribute ref="xlink:href" use="optional" />
+                <xsd:attribute ref="xlink:title" use="optional" />
+              </xsd:extension>
+            </xsd:simpleContent>
+          </xsd:complexType>
+          <xsd:complexType name="SocialNetworks">
+            <xsd:annotation>
+              <xsd:documentation>Social Networks</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleContent>
+              <xsd:extension base="xsd:normalizedString">
+                <xsd:attribute ref="category:CategoryURI" use="optional" fixed="tcm:6-30-512" />
+                <xsd:attribute ref="xlink:type" use="optional" fixed="simple" />
+                <xsd:attribute ref="xlink:href" use="optional" />
+                <xsd:attribute ref="xlink:title" use="optional" />
+              </xsd:extension>
+            </xsd:simpleContent>
+          </xsd:complexType>
+          <xsd:complexType name="test-taxonomy">
+            <xsd:annotation>
+              <xsd:documentation>Test Taxonomy [Navigation]</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleContent>
+              <xsd:extension base="xsd:normalizedString">
+                <xsd:attribute ref="category:CategoryURI" use="optional" fixed="tcm:6-189-512" />
+                <xsd:attribute ref="xlink:type" use="optional" fixed="simple" />
+                <xsd:attribute ref="xlink:href" use="optional" />
+                <xsd:attribute ref="xlink:title" use="optional" />
+              </xsd:extension>
+            </xsd:simpleContent>
+          </xsd:complexType>
+          <xsd:complexType name="testTaxonomy2">
+            <xsd:annotation>
+              <xsd:documentation>Test Taxonomy 2 (not Navigation)</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleContent>
+              <xsd:extension base="xsd:normalizedString">
+                <xsd:attribute ref="category:CategoryURI" use="optional" fixed="tcm:6-206-512" />
+                <xsd:attribute ref="xlink:type" use="optional" fixed="simple" />
+                <xsd:attribute ref="xlink:href" use="optional" />
+                <xsd:attribute ref="xlink:title" use="optional" />
+              </xsd:extension>
+            </xsd:simpleContent>
+          </xsd:complexType>
+          <xsd:complexType name="TSI811Boolean">
+            <xsd:annotation>
+              <xsd:documentation>TSI-811 Boolean Category</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleContent>
+              <xsd:extension base="xsd:normalizedString">
+                <xsd:attribute ref="category:CategoryURI" use="optional" fixed="tcm:6-225-512" />
+                <xsd:attribute ref="xlink:type" use="optional" fixed="simple" />
+                <xsd:attribute ref="xlink:href" use="optional" />
+                <xsd:attribute ref="xlink:title" use="optional" />
+              </xsd:extension>
+            </xsd:simpleContent>
+          </xsd:complexType>
+          <xsd:complexType name="TSI811TestCategory">
+            <xsd:annotation>
+              <xsd:documentation>TSI-811 Test Category</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleContent>
+              <xsd:extension base="xsd:normalizedString">
+                <xsd:attribute ref="category:CategoryURI" use="optional" fixed="tcm:6-184-512" />
+                <xsd:attribute ref="xlink:type" use="optional" fixed="simple" />
+                <xsd:attribute ref="xlink:href" use="optional" />
+                <xsd:attribute ref="xlink:title" use="optional" />
+              </xsd:extension>
+            </xsd:simpleContent>
+          </xsd:complexType>
+        </xsd:schema>
+      </tcm:CategoriesXSD>
+      <tcm:PublicationType>Web</tcm:PublicationType>
+      <tcm:Key>401 Automated Test Parent</tcm:Key>
+      <tcm:BusinessProcessType xlink:type="simple" xlink:title="DXA Staging/Live" xlink:href="/webdav/401%20Automated%20Test%20Parent/DXA%20Staging%2FLive" />
+      <tcm:MinimalLocalizeApprovalStatus xlink:type="simple" xlink:title="Undefined" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <ApplicationDataCollection>
+    <ApplicationData>
+      <ApplicationId>SiteEdit</ApplicationId>
+      <TypeId>XmlElement:configuration, http://www.sdltridion.com/2011/SiteEdit</TypeId>
+      <BinaryData>PGNvbmZpZ3VyYXRpb24geG1sbnM9Imh0dHA6Ly93d3cuc2RsdHJpZGlvbi5jb20vMjAxMS9TaXRlRWRpdCI+PFB1YmxpY2F0aW9uIGNsb25lUGFnZXNJbk93bmluZ1B1YmxpY2F0aW9uPSJmYWxzZSIgY2xvbmVDb21wb25lbnRzSW5Pd25pbmdQdWJsaWNhdGlvbj0iZmFsc2UiIHhtbG5zPSJodHRwOi8vd3d3LnNkbHRyaWRpb24uY29tLzIwMTEvU2l0ZUVkaXQiPjxQYWdlQ29udGV4dFB1YmxpY2F0aW9uSWQgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIC8+PENvbXBvbmVudENvbnRleHRQdWJsaWNhdGlvbklkIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiAvPjwvUHVibGljYXRpb24+PC9jb25maWd1cmF0aW9uPg==</BinaryData>
+      <IsInherited>false</IsInherited>
+    </ApplicationData>
+  </ApplicationDataCollection>
+  <Dependencies>
+    <Dependency dependencyType="ComponentSnapshotTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Default%20Templates/Default%20Component%20Template.tctcmp" linkName="ComponentSnapshotTemplate" />
+    <Dependency dependencyType="DefaultComponentTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Default%20Templates/Default%20Component%20Template.tctcmp" linkName="DefaultComponentTemplate" />
+    <Dependency dependencyType="DefaultMultimediaSchema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Default%20Multimedia%20Schema.xsd" linkName="DefaultMultimediaSchema" />
+    <Dependency dependencyType="DefaultPageTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Content%20Page%20Without%20Navigation.tptcmp" linkName="DefaultPageTemplate" />
+    <Dependency dependencyType="DefaultTemplateBuildingBlock" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Default%20Templates/Default%20Dreamweaver%20Page%20Design.dwt" linkName="DefaultTemplateBuildingBlock" />
+    <Dependency dependencyType="MetadataSchema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Framework/Site%20Manager/Schemas/Publication%20Metadata.xsd" linkName="MetadataSchema" />
+    <Dependency dependencyType="ParentPublication" itemUrl="/webdav/200%20Example%20Content" linkName="Parents[0]" />
+    <Dependency dependencyType="ParentPublication" itemUrl="/webdav/110%20DXA%20Site%20Type" linkName="Parents[1]" />
+    <Dependency dependencyType="TaskProcess" itemUrl="/webdav/401%20Automated%20Test%20Parent//Task%20Process.tpd" linkName="TaskProcess" />
+    <Dependency dependencyType="RepositoryBusinessProcessType" itemUrl="/webdav/401%20Automated%20Test%20Parent/DXA%20Staging%2FLive" linkName="BusinessProcessType" />
+  </Dependencies>
+</PackageItem>

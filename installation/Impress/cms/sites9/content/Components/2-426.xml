@@ -1,0 +1,22 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Impress Resources</tcm:Title>
+      <tcm:Type>Normal</tcm:Type>
+      <tcm:Schema xlink:type="simple" xlink:title="Resources - Impress" xlink:href="/webdav/100%20Master/Building%20Blocks/Modules/Impress/Site%20Manager/Schemas/Resources%20-%20Impress.xsd" IsMandatory="false" />
+      <tcm:Content>
+        <ResourcesImpress xmlns="uuid:a77f5588-6b23-40c0-8ecf-8e93750eb1d0">
+          <hint>Tap on the left or right to navigate</hint>
+        </ResourcesImpress>
+      </tcm:Content>
+      <tcm:Metadata />
+      <tcm:IsBasedOnTridionWebSchema>true</tcm:IsBasedOnTridionWebSchema>
+      <tcm:MultimediaType xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/100%20Master" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/100%20Master/Building%20Blocks/Settings/Impress/Site%20Manager" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="Schema" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/Impress/Site%20Manager/Schemas/Resources%20-%20Impress.xsd" linkName="Schema" />
+  </Dependencies>
+</PackageItem>

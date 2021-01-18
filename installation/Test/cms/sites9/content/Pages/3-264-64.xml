@@ -1,0 +1,49 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Footer</tcm:Title>
+      <tcm:FileName>footer</tcm:FileName>
+      <tcm:PageTemplate IsInherited="false" xlink:type="simple" xlink:title="Include Page (Footer)" xlink:href="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Modules/Core/Editor/Templates/Include%20Page%20%28Footer%29.tptcmp" />
+      <tcm:ComponentPresentations />
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:Metadata />
+      <tcm:RegionSchema xlink:type="simple" xlink:title="Include Page (Footer)" xlink:href="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Modules/Core/Editor/Schemas/Page%20Schemas/Include%20Page%20%28Footer%29.xsd" />
+      <tcm:Regions>
+        <tcm:Region Type="EmbeddedRegionData">
+          <tcm:RegionName>Links</tcm:RegionName>
+          <tcm:RegionSchema xlink:type="simple" xlink:title="[Links] Region" xlink:href="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Modules/Core/Editor/Schemas/Region%20Schemas/%5BLinks%5D%20Region.xsd" />
+          <tcm:Metadata />
+          <tcm:ComponentPresentations />
+          <tcm:Regions />
+        </tcm:Region>
+        <tcm:Region Type="EmbeddedRegionData">
+          <tcm:RegionName>Footer Links</tcm:RegionName>
+          <tcm:RegionSchema xlink:type="simple" xlink:title="[Multi-Column] Region" xlink:href="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Modules/Core/Editor/Schemas/Region%20Schemas/%5BMulti-Column%5D%20Region.xsd" />
+          <tcm:Metadata>
+            <Metadata xmlns="uuid:a975ac89-7964-4e7e-951d-d4b05d03b638">
+              <numberOfColumns>4</numberOfColumns>
+            </Metadata>
+          </tcm:Metadata>
+          <tcm:ComponentPresentations>
+            <tcm:ComponentPresentation>
+              <tcm:Component xlink:type="simple" xlink:title="Social Network Pages" xlink:href="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Content/_Structure/Footer/Social%20Network%20Pages.xml" />
+              <tcm:ComponentTemplate xlink:type="simple" xlink:title="Social Links" xlink:href="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Modules/Core/Site%20Manager/Templates/Social%20Links.tctcmp" />
+              <tcm:Conditions />
+            </tcm:ComponentPresentation>
+          </tcm:ComponentPresentations>
+          <tcm:Regions />
+        </tcm:Region>
+      </tcm:Regions>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/110%20DXA%20Site%20Type" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemStructureGroup" itemUrl="/webdav/110%20DXA%20Site%20Type/Home/_System/include" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Content/_Structure/Footer/Social%20Network%20Pages.xml" linkName="Regions[1]/ComponentPresentations[0]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Modules/Core/Site%20Manager/Templates/Social%20Links.tctcmp" linkName="Regions[1]/ComponentPresentations[0]/ComponentTemplate" />
+    <Dependency dependencyType="PageTemplate" itemUrl="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Modules/Core/Editor/Templates/Include%20Page%20%28Footer%29.tptcmp" linkName="PageTemplate" />
+    <Dependency dependencyType="PageRegionSchema" itemUrl="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Modules/Core/Editor/Schemas/Page%20Schemas/Include%20Page%20%28Footer%29.xsd" linkName="RegionSchema" />
+    <Dependency dependencyType="PageRegionSchema" itemUrl="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Modules/Core/Editor/Schemas/Region%20Schemas/%5BLinks%5D%20Region.xsd" linkName="Regions[0]/RegionSchema" />
+    <Dependency dependencyType="PageRegionSchema" itemUrl="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Modules/Core/Editor/Schemas/Region%20Schemas/%5BMulti-Column%5D%20Region.xsd" linkName="Regions[1]/RegionSchema" />
+  </Dependencies>
+</PackageItem>

@@ -1,0 +1,97 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+      <tcm:Title>Experience Optimization Page Template Metadata</tcm:Title>
+      <tcm:Description>Experience Optimization Page Template Metadata</tcm:Description>
+      <tcm:Purpose>Metadata</tcm:Purpose>
+      <tcm:NamespaceURI>uuid:42224c8a-53e8-434f-bcd4-67949d75c471</tcm:NamespaceURI>
+      <tcm:RootElementName />
+      <tcm:IsTridionWebSchema>true</tcm:IsTridionWebSchema>
+      <tcm:XSD>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="uuid:42224c8a-53e8-434f-bcd4-67949d75c471" xmlns:tcmi="http://www.tridion.com/ContentManager/5.0/Instance" elementFormDefault="qualified" targetNamespace="uuid:42224c8a-53e8-434f-bcd4-67949d75c471">
+  <xsd:import namespace="http://www.tridion.com/ContentManager/5.0/Instance" schemaLocation="/webdav/cm_xml_inst.xsd" />
+  <xsd:include schemaLocation="/webdav/100%20Master/Building%20Blocks/Modules/ExperienceOptimization/Editor/Schemas/Embedded/Experience%20Optimization%20Region%20Metadata.xsd" />
+  <xsd:annotation>
+    <xsd:appinfo>
+      <tcm:Labels xmlns:tcm="http://www.tridion.com/ContentManager/5.0">
+        <tcm:Label ElementName="includes" Metadata="true">Include Page URLs (include Pages are automatically included as Regions on each Page based on this Page Template)</tcm:Label>
+        <tcm:Label ElementName="view" Metadata="true">Page View Name (in the format ModuleName:ViewName - for Core views the prefix can be ommitted)</tcm:Label>
+        <tcm:Label ElementName="regions" Metadata="true">Regions Metadata (used to predefine Regions so that Regions can be generated even if they are empty)</tcm:Label>
+        <tcm:Label ElementName="allowDuplicationOnSamePage" Metadata="true">Allow duplicate Experience Optimization Promotion items on this Page Type?</tcm:Label>
+        <tcm:Label ElementName="htmlClasses" Metadata="true">HTML class(es) (for specifically styling the HTML of the specified view, if multiple, separate by a space)</tcm:Label>
+      </tcm:Labels>
+    </xsd:appinfo>
+  </xsd:annotation>
+  <xsd:element name="Metadata">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="includes" minOccurs="0" maxOccurs="unbounded" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="view" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="regions" minOccurs="0" maxOccurs="unbounded" type="SmartTargetRegionMetadata">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0">
+          <configuration xmlns="http://www.sdltridion.com/2011/SiteEdit">
+            <field>
+              <editable>false</editable>
+            </field>
+          </configuration>
+        </ExtensionXml>
+              <tcm:EmbeddedSchema xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/100%20Master/Building%20Blocks/Modules/ExperienceOptimization/Editor/Schemas/Embedded/Experience%20Optimization%20Region%20Metadata.xsd" xlink:title="Experience Optimization Region Metadata" />
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="allowDuplicationOnSamePage" minOccurs="0" maxOccurs="1">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+              <tcm:DefaultTextValue xmlns:tcm="http://www.tridion.com/ContentManager/5.0">Use core configuration</tcm:DefaultTextValue>
+              <tcm:Size xmlns:tcm="http://www.tridion.com/ContentManager/5.0">1</tcm:Size>
+              <tcm:listtype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">select</tcm:listtype>
+            </xsd:appinfo>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:normalizedString">
+              <xsd:enumeration value="True" />
+              <xsd:enumeration value="False" />
+              <xsd:enumeration value="Use core configuration" />
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="htmlClasses" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>
+      </tcm:XSD>
+      <tcm:AllowedMultimediaTypes />
+      <tcm:ComponentProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:BundleProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:DeleteBundleOnProcessFinished>false</tcm:DeleteBundleOnProcessFinished>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/100%20Master" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/ExperienceOptimization/Editor/Schemas/Metadata" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="EmbeddedSchema" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/ExperienceOptimization/Editor/Schemas/Embedded/Experience%20Optimization%20Region%20Metadata.xsd" linkName="Xsd" xpath="xsd:schema[1]/xsd:include[1]/@schemaLocation" />
+    <Dependency dependencyType="EmbeddedSchema" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/ExperienceOptimization/Editor/Schemas/Embedded/Experience%20Optimization%20Region%20Metadata.xsd" linkName="Xsd" xpath="xsd:schema[1]/xsd:element[1]/xsd:complexType[1]/xsd:sequence[1]/xsd:element[3]/xsd:annotation[1]/xsd:appinfo[1]/tcm:EmbeddedSchema[1]/@xlink:href" />
+  </Dependencies>
+</PackageItem>

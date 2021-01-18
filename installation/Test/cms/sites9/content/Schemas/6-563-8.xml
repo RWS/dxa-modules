@@ -1,0 +1,53 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+      <tcm:Title>Component Link Test Schema</tcm:Title>
+      <tcm:Description>Component Link Test Schema</tcm:Description>
+      <tcm:Purpose>Component</tcm:Purpose>
+      <tcm:NamespaceURI>uuid:50a30699-fe4b-43b2-b64e-fa0bf3e3e1ae</tcm:NamespaceURI>
+      <tcm:RootElementName>CompLinkTest</tcm:RootElementName>
+      <tcm:IsTridionWebSchema>true</tcm:IsTridionWebSchema>
+      <tcm:XSD>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="uuid:50a30699-fe4b-43b2-b64e-fa0bf3e3e1ae" xmlns:tcmi="http://www.tridion.com/ContentManager/5.0/Instance" elementFormDefault="qualified" targetNamespace="uuid:50a30699-fe4b-43b2-b64e-fa0bf3e3e1ae">
+  <xsd:import namespace="http://www.tridion.com/ContentManager/5.0/Instance" schemaLocation="/webdav/cm_xml_inst.xsd" />
+  <xsd:annotation>
+    <xsd:appinfo>
+      <tcm:Labels xmlns:tcm="http://www.tridion.com/ContentManager/5.0">
+        <tcm:Label ElementName="compLink" Metadata="false">compLink</tcm:Label>
+      </tcm:Labels>
+    </xsd:appinfo>
+  </xsd:annotation>
+  <xsd:element name="CompLinkTest">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="compLink" minOccurs="0" maxOccurs="unbounded" type="tcmi:SimpleLink">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0">
+          <configuration xmlns="http://www.sdltridion.com/2011/SiteEdit">
+            <field>
+              <editable>false</editable>
+            </field>
+          </configuration>
+        </ExtensionXml>
+              <tcm:linktype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">ComponentLink</tcm:linktype>
+              <tcm:AllowMultimediaLinks xmlns:tcm="http://www.tridion.com/ContentManager/5.0">true</tcm:AllowMultimediaLinks>
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>
+      </tcm:XSD>
+      <tcm:AllowedMultimediaTypes />
+      <tcm:ComponentProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:BundleProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:DeleteBundleOnProcessFinished>false</tcm:DeleteBundleOnProcessFinished>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test" linkName="LocationInfo/OrganizationalItem" />
+  </Dependencies>
+</PackageItem>

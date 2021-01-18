@@ -1,0 +1,14 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <ApplicationDataCollection>
+    <ApplicationData>
+      <ApplicationId>http://www.sdl.com/tridion/SemanticMapping/typeof</ApplicationId>
+      <TypeId></TypeId>
+      <BinaryData>PAB0AHkAcABlAG8AZgA+AHMAOgBBAHIAdABpAGMAbABlADwALwB0AHkAcABlAG8AZgA+AA==</BinaryData>
+      <IsInherited>true</IsInherited>
+    </ApplicationData>
+  </ApplicationDataCollection>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="BluePrintParent" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/Core/Editor/Schemas/Article.xsd" linkName="" />
+  </Dependencies>
+</PackageItem>

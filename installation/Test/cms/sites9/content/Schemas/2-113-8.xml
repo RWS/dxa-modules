@@ -1,0 +1,228 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+      <tcm:Title>Generate dynamic page</tcm:Title>
+      <tcm:Description>Generate dynamic page</tcm:Description>
+      <tcm:Purpose>TemplateParameters</tcm:Purpose>
+      <tcm:NamespaceURI>DD4T.Templates.Schemas.DynamicDeliveryParameters</tcm:NamespaceURI>
+      <tcm:RootElementName>Parameters</tcm:RootElementName>
+      <tcm:IsTridionWebSchema>true</tcm:IsTridionWebSchema>
+      <tcm:XSD>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tcmi="http://www.tridion.com/ContentManager/5.0/Instance" xmlns="DD4T.Templates.Schemas.DynamicDeliveryParameters" targetNamespace="DD4T.Templates.Schemas.DynamicDeliveryParameters" elementFormDefault="qualified">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <tcm:Labels xmlns:tcm="http://www.tridion.com/ContentManager/5.0">
+                <!-- QS: disabling all XML functionality -->
+                <!--<tcm:Label ElementName="SerializationFormat" Metadata="false">Serialization format</tcm:Label>-->
+                <tcm:Label ElementName="CompressionEnabled" Metadata="false">Compress output</tcm:Label>
+                <tcm:Label ElementName="MergeAction" Metadata="false">Action to take if field with the same name is inherited</tcm:Label>
+                <tcm:Label ElementName="FollowLinksPerField" Metadata="false">Use field setting to determine whether or not to follow links</tcm:Label>
+                <tcm:Label ElementName="LinkLevels" Metadata="false">Maximum number of levels to follow links</tcm:Label>
+                <tcm:Label ElementName="ECLEnabled" Metadata="false">ECL enabled (Media Manager, etc)</tcm:Label>
+                <tcm:Label ElementName="ResolveWidthAndHeight" Metadata="false">Resolve width and height of images</tcm:Label>
+                <tcm:Label ElementName="sg_PublishBinariesTargetStructureGroup" Metadata="false">StructureGroup to which binaries must be published</tcm:Label>
+                <tcm:Label ElementName="PublishEmptyFields" Metadata="false">Publish empty fields of an item</tcm:Label>
+                <tcm:Label ElementName="OmitContextPublications" Metadata="false">Omit context publications in output</tcm:Label>
+                <tcm:Label ElementName="OmitOwningPublications" Metadata="false">Omit owning publications in output</tcm:Label>
+                <tcm:Label ElementName="OmitFolders" Metadata="false">Omit folders in output</tcm:Label>
+                <tcm:Label ElementName="OmitCategories" Metadata="false">Omit separate list of categories</tcm:Label>
+                <tcm:Label ElementName="OmitValueLists" Metadata="false">Do not generate string values for non-string data types</tcm:Label>
+              </tcm:Labels>
+            </xsd:appinfo>
+          </xsd:annotation>
+          <xsd:import namespace="http://www.tridion.com/ContentManager/5.0/Instance" schemaLocation="/webdav/cm_xml_inst.xsd" />
+          <xsd:element name="Parameters">
+            <xsd:complexType>
+              <xsd:sequence>
+                <!-- QS: disabling all XML functionality -->
+                <!--<xsd:element name="SerializationFormat" minOccurs="0" maxOccurs="1">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <tcm:Size xmlns:tcm="http://www.tridion.com/ContentManager/5.0">1</tcm:Size>
+              <tcm:listtype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">select</tcm:listtype>
+            </xsd:appinfo>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:normalizedString">
+              <xsd:enumeration value="JSON"></xsd:enumeration>
+              <xsd:enumeration value="XML"></xsd:enumeration>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>-->
+                <xsd:element name="CompressionEnabled" minOccurs="0" maxOccurs="1">
+                  <xsd:annotation>
+                    <xsd:appinfo>
+                      <tcm:listtype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">checkbox</tcm:listtype>
+                      <tcm:Size xmlns:tcm="http://www.tridion.com/ContentManager/5.0">1</tcm:Size>
+                    </xsd:appinfo>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                    <xsd:restriction base="xsd:normalizedString">
+                      <xsd:enumeration value="yes" />
+                    </xsd:restriction>
+                  </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="MergeAction" minOccurs="0" maxOccurs="1">
+                  <xsd:annotation>
+                    <xsd:appinfo>
+                      <tcm:Size xmlns:tcm="http://www.tridion.com/ContentManager/5.0">1</tcm:Size>
+                      <tcm:listtype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">select</tcm:listtype>
+                    </xsd:appinfo>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                    <xsd:restriction base="xsd:normalizedString">
+                      <xsd:enumeration value="Replace" />
+                      <xsd:enumeration value="Skip" />
+                      <xsd:enumeration value="Merge" />
+                      <xsd:enumeration value="MergeMultiValueReplaceSingleValue" />
+                      <xsd:enumeration value="MergeMultiValueSkipSingleValue" />
+                    </xsd:restriction>
+                  </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="FollowLinksPerField" minOccurs="0" maxOccurs="unbounded">
+                  <xsd:annotation>
+                    <xsd:appinfo>
+                      <tcm:listtype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">checkbox</tcm:listtype>
+                      <tcm:Size xmlns:tcm="http://www.tridion.com/ContentManager/5.0">1</tcm:Size>
+                    </xsd:appinfo>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                    <xsd:restriction base="xsd:normalizedString">
+                      <xsd:enumeration value="yes" />
+                    </xsd:restriction>
+                  </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="LinkLevels" minOccurs="0" maxOccurs="1" type="xsd:decimal">
+                  <xsd:annotation>
+                    <xsd:appinfo>
+                      <tcm:Size xmlns:tcm="http://www.tridion.com/ContentManager/5.0">1</tcm:Size>
+                    </xsd:appinfo>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="ECLEnabled" minOccurs="0" maxOccurs="1">
+                  <xsd:annotation>
+                    <xsd:appinfo>
+                      <tcm:listtype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">checkbox</tcm:listtype>
+                      <tcm:Size xmlns:tcm="http://www.tridion.com/ContentManager/5.0">1</tcm:Size>
+                    </xsd:appinfo>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                    <xsd:restriction base="xsd:normalizedString">
+                      <xsd:enumeration value="yes" />
+                    </xsd:restriction>
+                  </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="ResolveWidthAndHeight" minOccurs="0" maxOccurs="unbounded">
+                  <xsd:annotation>
+                    <xsd:appinfo>
+                      <tcm:listtype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">checkbox</tcm:listtype>
+                      <tcm:Size xmlns:tcm="http://www.tridion.com/ContentManager/5.0">1</tcm:Size>
+                    </xsd:appinfo>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                    <xsd:restriction base="xsd:normalizedString">
+                      <xsd:enumeration value="yes" />
+                    </xsd:restriction>
+                  </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="sg_PublishBinariesTargetStructureGroup" minOccurs="0" maxOccurs="1" type="tcmi:SimpleLink">
+                  <xsd:annotation>
+                    <xsd:appinfo>
+                      <tcm:linktype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">ExternalLink</tcm:linktype>
+                    </xsd:appinfo>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="PublishEmptyFields" minOccurs="0" maxOccurs="unbounded">
+                  <xsd:annotation>
+                    <xsd:appinfo>
+                      <tcm:listtype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">checkbox</tcm:listtype>
+                      <tcm:Size xmlns:tcm="http://www.tridion.com/ContentManager/5.0">1</tcm:Size>
+                    </xsd:appinfo>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                    <xsd:restriction base="xsd:normalizedString">
+                      <xsd:enumeration value="yes" />
+                    </xsd:restriction>
+                  </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="OmitValueLists" minOccurs="0" maxOccurs="1">
+                  <xsd:annotation>
+                    <xsd:appinfo>
+                      <tcm:listtype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">checkbox</tcm:listtype>
+                      <tcm:Size xmlns:tcm="http://www.tridion.com/ContentManager/5.0">1</tcm:Size>
+                    </xsd:appinfo>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                    <xsd:restriction base="xsd:normalizedString">
+                      <xsd:enumeration value="yes" />
+                    </xsd:restriction>
+                  </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="OmitCategories" minOccurs="0" maxOccurs="1">
+                  <xsd:annotation>
+                    <xsd:appinfo>
+                      <tcm:listtype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">checkbox</tcm:listtype>
+                      <tcm:Size xmlns:tcm="http://www.tridion.com/ContentManager/5.0">1</tcm:Size>
+                    </xsd:appinfo>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                    <xsd:restriction base="xsd:normalizedString">
+                      <xsd:enumeration value="yes" />
+                    </xsd:restriction>
+                  </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="OmitContextPublications" minOccurs="0" maxOccurs="1">
+                  <xsd:annotation>
+                    <xsd:appinfo>
+                      <tcm:listtype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">checkbox</tcm:listtype>
+                      <tcm:Size xmlns:tcm="http://www.tridion.com/ContentManager/5.0">1</tcm:Size>
+                    </xsd:appinfo>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                    <xsd:restriction base="xsd:normalizedString">
+                      <xsd:enumeration value="yes" />
+                    </xsd:restriction>
+                  </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="OmitOwningPublications" minOccurs="0" maxOccurs="1">
+                  <xsd:annotation>
+                    <xsd:appinfo>
+                      <tcm:listtype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">checkbox</tcm:listtype>
+                      <tcm:Size xmlns:tcm="http://www.tridion.com/ContentManager/5.0">1</tcm:Size>
+                    </xsd:appinfo>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                    <xsd:restriction base="xsd:normalizedString">
+                      <xsd:enumeration value="yes" />
+                    </xsd:restriction>
+                  </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="OmitFolders" minOccurs="0" maxOccurs="1">
+                  <xsd:annotation>
+                    <xsd:appinfo>
+                      <tcm:listtype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">checkbox</tcm:listtype>
+                      <tcm:Size xmlns:tcm="http://www.tridion.com/ContentManager/5.0">1</tcm:Size>
+                    </xsd:appinfo>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                    <xsd:restriction base="xsd:normalizedString">
+                      <xsd:enumeration value="yes" />
+                    </xsd:restriction>
+                  </xsd:simpleType>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:schema>
+      </tcm:XSD>
+      <tcm:AllowedMultimediaTypes />
+      <tcm:ComponentProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:BundleProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:DeleteBundleOnProcessFinished>false</tcm:DeleteBundleOnProcessFinished>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/100%20Master" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/100%20Master/Building%20Blocks/Framework/Developer/Templates/DXA%2ELegacy" linkName="LocationInfo/OrganizationalItem" />
+  </Dependencies>
+</PackageItem>

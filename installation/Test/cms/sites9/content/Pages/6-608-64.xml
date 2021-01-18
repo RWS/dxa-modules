@@ -1,0 +1,33 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>TSI-1946 Test Page</tcm:Title>
+      <tcm:FileName>tsi-1946</tcm:FileName>
+      <tcm:PageTemplate IsInherited="true" xlink:type="simple" xlink:title="Simple Test Page View [Test:SimpleTestPage]" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/Simple%20Test%20Page%20View%20%5BTest%3ASimpleTestPage%5D.tptcmp" />
+      <tcm:ComponentPresentations>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="TSI-1946 Test Component" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Regression/TSI-1946%20Test%20Component.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Article" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Article.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="TSI-1946 Test Component 2" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Regression/TSI-1946%20Test%20Component%202.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="TSI-1946 Test CT" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/TSI-1946%20Test%20CT.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+      </tcm:ComponentPresentations>
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:Metadata />
+      <tcm:RegionSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:Regions />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemStructureGroup" itemUrl="/webdav/401%20Automated%20Test%20Parent/Home/Regression" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Regression/TSI-1946%20Test%20Component.xml" linkName="ComponentPresentations[0]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Regression/TSI-1946%20Test%20Component%202.xml" linkName="ComponentPresentations[1]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Article.tctcmp" linkName="ComponentPresentations[0]/ComponentTemplate" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/TSI-1946%20Test%20CT.tctcmp" linkName="ComponentPresentations[1]/ComponentTemplate" />
+  </Dependencies>
+</PackageItem>

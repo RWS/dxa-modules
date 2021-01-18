@@ -1,0 +1,59 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Article with Comments</tcm:Title>
+      <tcm:Type>CompoundTemplate</tcm:Type>
+      <tcm:Priority>300</tcm:Priority>
+      <tcm:OutputFormat>HTML Fragment</tcm:OutputFormat>
+      <tcm:Content>
+        <tcm:PublisherScript>&lt;CompoundTemplate xmlns="http://www.tridion.com/ContentManager/5.3/CompoundTemplate"&gt;
+  &lt;TemplateInvocation&gt;
+    &lt;Template xlink:href="/webdav/100%20Master/Building%20Blocks/Framework/Developer/Templates/DXA%2ER2/Render%20Component%20Content.tbbcmp" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:title="Render Component Content" /&gt;
+    &lt;TemplateParameters /&gt;
+  &lt;/TemplateInvocation&gt;
+  &lt;TemplateInvocation&gt;
+    &lt;Template xlink:href="/webdav/100%20Master/Building%20Blocks/Framework/Developer/Templates/DXA%2ER2/Default%20Component%20Template%20Finish%20Actions.tbbcmp" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:title="Default Component Template Finish Actions" /&gt;
+    &lt;TemplateParameters /&gt;
+  &lt;/TemplateInvocation&gt;
+&lt;/CompoundTemplate&gt;</tcm:PublisherScript>
+        <tcm:DynamicTemplate />
+      </tcm:Content>
+      <tcm:AllowOnPage>true</tcm:AllowOnPage>
+      <tcm:IsRepositoryPublishable>false</tcm:IsRepositoryPublishable>
+      <tcm:RelatedSchemas>
+        <tcm:RelatedSchema xlink:type="simple" xlink:title="Article" xlink:href="/webdav/100%20Master/Building%20Blocks/Modules/Core/Editor/Schemas/Article.xsd" />
+        <tcm:RelatedSchema xlink:type="simple" xlink:title="News Article" xlink:href="/webdav/100%20Master/Building%20Blocks/Modules/Core/Editor/Schemas/News%20Article.xsd" />
+      </tcm:RelatedSchemas>
+      <tcm:TrackingCategories />
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="UGC Component Template Metadata" xlink:href="/webdav/100%20Master/Building%20Blocks/Modules/Ugc/Site%20Manager/Schemas/UGC%20Component%20Template%20Metadata.xsd" />
+      <tcm:ParameterSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:Metadata>
+        <Metadata xmlns="uuid:81c52358-aeda-46fb-b44c-ac9e64f05c4d">
+          <view>Article</view>
+          <ugcConfig>
+            <showComments>Yes</showComments>
+            <allowPost>Yes</allowPost>
+            <postFormConfig>
+              <userNameLabel>User</userNameLabel>
+              <emailAddressLabel>Email</emailAddressLabel>
+              <contentLabel>Message</contentLabel>
+              <submitButtonLabel>Post</submitButtonLabel>
+              <noUserNameMessage>You need to provide a user name.</noUserNameMessage>
+              <noEmailAddressMessage>You need to provide an email address.</noEmailAddressMessage>
+              <noContentMessage>You need to provide a message.</noContentMessage>
+            </postFormConfig>
+          </ugcConfig>
+        </Metadata>
+      </tcm:Metadata>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/100%20Master" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/Ugc/Editor/Templates" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="ComponentTemplateAllowedSchema" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/Core/Editor/Schemas/Article.xsd" linkName="RelatedSchemas[0]" />
+    <Dependency dependencyType="ComponentTemplateAllowedSchema" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/Core/Editor/Schemas/News%20Article.xsd" linkName="RelatedSchemas[1]" />
+    <Dependency dependencyType="MetadataSchema" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/Ugc/Site%20Manager/Schemas/UGC%20Component%20Template%20Metadata.xsd" linkName="MetadataSchema" />
+    <Dependency dependencyType="TemplateLinkedItem" itemUrl="/webdav/100%20Master/Building%20Blocks/Framework/Developer/Templates/DXA%2ER2/Render%20Component%20Content.tbbcmp" linkName="ExtractedReferences[0]" />
+    <Dependency dependencyType="TemplateLinkedItem" itemUrl="/webdav/100%20Master/Building%20Blocks/Framework/Developer/Templates/DXA%2ER2/Default%20Component%20Template%20Finish%20Actions.tbbcmp" linkName="ExtractedReferences[1]" />
+  </Dependencies>
+</PackageItem>

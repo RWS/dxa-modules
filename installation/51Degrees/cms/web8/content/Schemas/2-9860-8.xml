@@ -1,0 +1,51 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+      <tcm:Title>51 Degrees Configuration</tcm:Title>
+      <tcm:Description>51 Degrees Configuration</tcm:Description>
+      <tcm:Purpose>Component</tcm:Purpose>
+      <tcm:NamespaceURI>http://www.sdl.com/web/schemas/51degrees</tcm:NamespaceURI>
+      <tcm:RootElementName>Degrees51Configuration</tcm:RootElementName>
+      <tcm:IsTridionWebSchema>true</tcm:IsTridionWebSchema>
+      <tcm:XSD>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sdl.com/web/schemas/51degrees" xmlns:tcmi="http://www.tridion.com/ContentManager/5.0/Instance" elementFormDefault="qualified" targetNamespace="http://www.sdl.com/web/schemas/51degrees">
+        <xsd:import namespace="http://www.tridion.com/ContentManager/5.0/Instance" schemaLocation="/webdav/cm_xml_inst.xsd" />
+        <xsd:annotation>
+          <xsd:appinfo>
+            <tcm:Labels xmlns:tcm="http://www.tridion.com/ContentManager/5.0">
+              <tcm:Label ElementName="licenseKey" Metadata="false">License Key (required to use 51 Degrees Premium or Enterprise features)</tcm:Label>
+            </tcm:Labels>
+          </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:element name="Degrees51Configuration">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="licenseKey" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+                <xsd:annotation>
+                  <xsd:appinfo>
+                    <tcm:ExtensionXml xmlns:tcm="http://www.tridion.com/ContentManager/5.0">
+                      <configuration xmlns="http://www.sdltridion.com/2011/SiteEdit">
+                        <field>
+                          <editable>true</editable>
+                        </field>
+                      </configuration>
+                    </tcm:ExtensionXml>
+                  </xsd:appinfo>
+                </xsd:annotation>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:schema>
+      </tcm:XSD>
+      <tcm:AllowedMultimediaTypes />
+      <tcm:ComponentProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:BundleProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:DeleteBundleOnProcessFinished>false</tcm:DeleteBundleOnProcessFinished>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/100%20Master" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/51Degrees/Site%20Manager/Schemas" linkName="LocationInfo/OrganizationalItem" />
+  </Dependencies>
+</PackageItem>

@@ -1,0 +1,87 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+      <tcm:Title>Embedded Metadata Schema (Native Regions)</tcm:Title>
+      <tcm:Description>Embedded Metadata Schema (Native Regions)</tcm:Description>
+      <tcm:Purpose>Embedded</tcm:Purpose>
+      <tcm:NamespaceURI />
+      <tcm:RootElementName>Content</tcm:RootElementName>
+      <tcm:IsTridionWebSchema>true</tcm:IsTridionWebSchema>
+      <tcm:XSD>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tcmi="http://www.tridion.com/ContentManager/5.0/Instance" xmlns="" elementFormDefault="qualified">
+  <xsd:import namespace="http://www.tridion.com/ContentManager/5.0/Instance" schemaLocation="/webdav/cm_xml_inst.xsd" />
+  <xsd:annotation>
+    <xsd:appinfo>
+      <tcm:Labels xmlns:tcm="http://www.tridion.com/ContentManager/5.0">
+        <tcm:Label ElementName="view" Metadata="false">Region View Name (in the format ModuleName:ViewName - for Core views the prefix name can be omitted)</tcm:Label>
+        <tcm:Label ElementName="name" Metadata="false">Region Name (if not specified, the Region View name excluding module name is used)</tcm:Label>
+        <tcm:Label ElementName="MergedMetadataField" Metadata="false">MergedMetadataField</tcm:Label>
+        <tcm:Label ElementName="DxaMetadataField" Metadata="false">DxaMetadataField</tcm:Label>
+      </tcm:Labels>
+    </xsd:appinfo>
+  </xsd:annotation>
+  <xsd:complexType name="Content">
+    <xsd:sequence>
+      <xsd:element name="view" minOccurs="1" maxOccurs="1" type="xsd:normalizedString">
+        <xsd:annotation>
+          <xsd:appinfo>
+            <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0">
+          <configuration xmlns="http://www.sdltridion.com/2011/SiteEdit">
+            <field>
+              <editable>false</editable>
+            </field>
+          </configuration>
+        </ExtensionXml>
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="name" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+        <xsd:annotation>
+          <xsd:appinfo>
+            <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="MergedMetadataField" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+        <xsd:annotation>
+          <xsd:appinfo>
+            <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0">
+          <configuration xmlns="http://www.sdltridion.com/2011/SiteEdit">
+            <field>
+              <editable>false</editable>
+            </field>
+          </configuration>
+        </ExtensionXml>
+            <tcm:DefaultTextValue xmlns:tcm="http://www.tridion.com/ContentManager/5.0">DXA Metadata value 1</tcm:DefaultTextValue>
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="DxaMetadataField" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+        <xsd:annotation>
+          <xsd:appinfo>
+            <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0">
+          <configuration xmlns="http://www.sdltridion.com/2011/SiteEdit">
+            <field>
+              <editable>false</editable>
+            </field>
+          </configuration>
+        </ExtensionXml>
+            <tcm:DefaultTextValue xmlns:tcm="http://www.tridion.com/ContentManager/5.0">DXA Metadata value 2</tcm:DefaultTextValue>
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
+      </tcm:XSD>
+      <tcm:AllowedMultimediaTypes />
+      <tcm:ComponentProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:BundleProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:DeleteBundleOnProcessFinished>false</tcm:DeleteBundleOnProcessFinished>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/Native%20Regions" linkName="LocationInfo/OrganizationalItem" />
+  </Dependencies>
+</PackageItem>

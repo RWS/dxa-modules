@@ -1,0 +1,43 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>source Page with Rich Text Field</tcm:Title>
+      <tcm:FileName>source_page_with_Rich_Text_Field</tcm:FileName>
+      <tcm:PageTemplate IsInherited="true" xlink:type="simple" xlink:title="Simple Test Page View [Test:SimpleTestPage]" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/Simple%20Test%20Page%20View%20%5BTest%3ASimpleTestPage%5D.tptcmp" />
+      <tcm:ComponentPresentations />
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:Metadata />
+      <tcm:RegionSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:Regions>
+        <tcm:Region Type="EmbeddedRegionData">
+          <tcm:RegionName>Main</tcm:RegionName>
+          <tcm:RegionSchema xlink:type="simple" xlink:title="[Main] Region" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Schemas/Region%20Schemas/%5BMain%5D%20Region.xsd" />
+          <tcm:Metadata />
+          <tcm:ComponentPresentations>
+            <tcm:ComponentPresentation>
+              <tcm:Component xlink:type="simple" xlink:title="component with rtf" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Regression/ProximityTest/component%20with%20rtf.xml" />
+              <tcm:ComponentTemplate xlink:type="simple" xlink:title="Article" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Article.tctcmp" />
+              <tcm:Conditions />
+            </tcm:ComponentPresentation>
+          </tcm:ComponentPresentations>
+          <tcm:Regions />
+        </tcm:Region>
+      </tcm:Regions>
+    </tcm:Data>
+  </Data>
+  <ApplicationDataCollection>
+    <ApplicationData>
+      <ApplicationId>ugc:ComponentAndPage</ApplicationId>
+      <TypeId></TypeId>
+      <BinaryData></BinaryData>
+      <IsInherited>false</IsInherited>
+    </ApplicationData>
+  </ApplicationDataCollection>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemStructureGroup" itemUrl="/webdav/401%20Automated%20Test%20Parent/Home/Regression/Proximity%20logic/Deep%20SG" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Regression/ProximityTest/component%20with%20rtf.xml" linkName="Regions[0]/ComponentPresentations[0]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Article.tctcmp" linkName="Regions[0]/ComponentPresentations[0]/ComponentTemplate" />
+    <Dependency dependencyType="PageRegionSchema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Schemas/Region%20Schemas/%5BMain%5D%20Region.xsd" linkName="Regions[0]/RegionSchema" />
+  </Dependencies>
+</PackageItem>

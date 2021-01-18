@@ -1,0 +1,47 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+      <tcm:Title>Convert Xml to Html</tcm:Title>
+      <tcm:Description>Convert Xml to Html</tcm:Description>
+      <tcm:Purpose>TemplateParameters</tcm:Purpose>
+      <tcm:NamespaceURI>uuid:8C2EA37D-6EEA-46BF-B94B-ED8361163FAE</tcm:NamespaceURI>
+      <tcm:RootElementName>Parameters</tcm:RootElementName>
+      <tcm:IsTridionWebSchema>true</tcm:IsTridionWebSchema>
+      <tcm:XSD>
+        <xsd:schema xmlns="uuid:8C2EA37D-6EEA-46BF-B94B-ED8361163FAE" xmlns:tcmi="http://www.tridion.com/ContentManager/5.0/Instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="uuid:8C2EA37D-6EEA-46BF-B94B-ED8361163FAE">
+          <xsd:import namespace="http://www.tridion.com/ContentManager/5.0/Instance" schemaLocation="/webdav/cm_xml_inst.xsd" />
+          <xsd:annotation>
+            <xsd:appinfo>
+              <tcm:Labels xmlns:tcm="http://www.tridion.com/ContentManager/5.0">
+                <tcm:Label ElementName="ItemName" Metadata="false">Item name</tcm:Label>
+              </tcm:Labels>
+            </xsd:appinfo>
+          </xsd:annotation>
+          <xsd:element name="Parameters">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="ItemName" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+                  <xsd:annotation>
+                    <xsd:appinfo>
+                      <tcm:CustomURL xmlns:tcm="http://www.tridion.com/ContentManager/5.0">/TemplateBuilder/TemplateParameterDescriptions/ConvertXmlToHtml.html#ItemName</tcm:CustomURL>
+                      <tcm:ExtensionXml xmlns:tcm="http://www.tridion.com/ContentManager/5.0" />
+                      <tcm:DefaultTextValue xmlns:tcm="http://www.tridion.com/ContentManager/5.0">Output</tcm:DefaultTextValue>
+                    </xsd:appinfo>
+                  </xsd:annotation>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:schema>
+      </tcm:XSD>
+      <tcm:AllowedMultimediaTypes />
+      <tcm:ComponentProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:BundleProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:DeleteBundleOnProcessFinished>false</tcm:DeleteBundleOnProcessFinished>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/000%20Empty" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/000%20Empty/Building%20Blocks/Default%20Templates" linkName="LocationInfo/OrganizationalItem" />
+  </Dependencies>
+</PackageItem>

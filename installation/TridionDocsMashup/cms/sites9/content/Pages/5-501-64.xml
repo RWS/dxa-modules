@@ -1,0 +1,60 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Bicycle Page</tcm:Title>
+      <tcm:FileName>_bicycle</tcm:FileName>
+      <tcm:PageTemplate IsInherited="false" xlink:type="simple" xlink:title="Bicycle" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Editor/Templates/Bicycle.tptcmp" />
+      <tcm:ComponentPresentations />
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="Page Navigation Metadata" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Framework/Site%20Manager/Schemas/Page%20Navigation%20Metadata.xsd" />
+      <tcm:Metadata>
+        <Metadata xmlns="http://www.sdl.com/web/schemas/navigation">
+          <sitemapKeyword xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/400%20Example%20Site/Sitemap%20%5BNavigation%5D/030%20Products.tkw" xlink:title="030 Products">030 Products</sitemapKeyword>
+        </Metadata>
+      </tcm:Metadata>
+      <tcm:RegionSchema xlink:type="simple" xlink:title="Bicycle Page" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas/Page%20Schemas/Bicycle%20Page.xsd" />
+      <tcm:Regions>
+        <tcm:Region Type="EmbeddedRegionData">
+          <tcm:RegionName>Bicycle</tcm:RegionName>
+          <tcm:RegionSchema xlink:type="simple" xlink:title="[TridionDocsMashup:Bicycle] Region" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas/Region%20Schemas/%5BTridionDocsMashup%3ABicycle%5D%20Region.xsd" />
+          <tcm:Metadata />
+          <tcm:ComponentPresentations>
+            <tcm:ComponentPresentation>
+              <tcm:Component xlink:type="simple" xlink:title="Bicycle" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content/_Cloneable%20Content/Bicycle.xml" />
+              <tcm:ComponentTemplate xlink:type="simple" xlink:title="Bicycle" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Editor/Templates/Bicycle.tctcmp" />
+              <tcm:Conditions />
+            </tcm:ComponentPresentation>
+          </tcm:ComponentPresentations>
+          <tcm:Regions />
+        </tcm:Region>
+      </tcm:Regions>
+    </tcm:Data>
+  </Data>
+  <ApplicationDataCollection>
+    <ApplicationData>
+      <ApplicationId>SiteEdit</ApplicationId>
+      <TypeId>XmlElement:configuration, http://www.sdltridion.com/2011/SiteEdit</TypeId>
+      <BinaryData>PGNvbmZpZ3VyYXRpb24geG1sbnM9Imh0dHA6Ly93d3cuc2RsdHJpZGlvbi5jb20vMjAxMS9TaXRlRWRpdCI+PFBhZ2UgeG1sbnM9Imh0dHA6Ly93d3cuc2RsdHJpZGlvbi5jb20vMjAxMS9TaXRlRWRpdCI+PFBhZ2VUeXBlPjxFbmFibGVkPnRydWU8L0VuYWJsZWQ+PERlc2NyaXB0aW9uPkRYQSBUcmlkaW9uIERvY3MgTWFzaHVwIFBhZ2U8L0Rlc2NyaXB0aW9uPjxDb21wb25lbnRzPjxDb21wb25lbnQgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhsaW5rOmhyZWY9InRjbTo1LTQ4OSI+PENsb25lPnRydWU8L0Nsb25lPjxUYXJnZXRMb2NhdGlvbiB4bGluazpocmVmPSJ0Y206NS0xNjgtMiIgLz48Q29tcG9uZW50VGl0bGU+QmljeWNsZV8lRCU8L0NvbXBvbmVudFRpdGxlPjwvQ29tcG9uZW50PjwvQ29tcG9uZW50cz48L1BhZ2VUeXBlPjwvUGFnZT48L2NvbmZpZ3VyYXRpb24+</BinaryData>
+      <IsInherited>false</IsInherited>
+    </ApplicationData>
+    <ApplicationData>
+      <ApplicationId>ugc:ComponentAndPage</ApplicationId>
+      <TypeId>c:XmlDocument-CommunityBuilder</TypeId>
+      <BinaryData>PAA/AHgAbQBsACAAdgBlAHIAcwBpAG8AbgA9ACIAMQAuADAAIgAgAGUAbgBjAG8AZABpAG4AZwA9ACIAdQB0AGYALQAxADYAIgA/AD4APAB1AGcAYwA+ADwAaQB0AGUAbQAgAGkAZAA9ACIAdABjAG0AOgA1AC0ANQAwADEALQA2ADQAIgA+ADwAYQBsAGwAbwB3AHQAbwByAGEAdABlAD4AZgBhAGwAcwBlADwALwBhAGwAbABvAHcAdABvAHIAYQB0AGUAPgA8AGEAbABsAG8AdwB0AG8AYwBvAG0AbQBlAG4AdAA+AGYAYQBsAHMAZQA8AC8AYQBsAGwAbwB3AHQAbwBjAG8AbQBtAGUAbgB0AD4APABzAGgAbwB3AGMAbwBtAG0AZQBuAHQAcwA+AGYAYQBsAHMAZQA8AC8AcwBoAG8AdwBjAG8AbQBtAGUAbgB0AHMAPgA8AHMAbwByAHQAYwBvAG0AbQBlAG4AdABzAD4APABmAGkAZQBsAGQAPgBkAGEAdABlADwALwBmAGkAZQBsAGQAPgA8AGQAaQByAGUAYwB0AGkAbwBuAD4AZABlAHMAYwBlAG4AZABpAG4AZwA8AC8AZABpAHIAZQBjAHQAaQBvAG4APgA8AC8AcwBvAHIAdABjAG8AbQBtAGUAbgB0AHMAPgA8AHMAaABvAHcAdQBuAG0AbwBkAGUAcgBhAHQAZQBkAGMAbwBtAG0AZQBuAHQAcwA+AGYAYQBsAHMAZQA8AC8AcwBoAG8AdwB1AG4AbQBvAGQAZQByAGEAdABlAGQAYwBvAG0AbQBlAG4AdABzAD4APAAvAGkAdABlAG0APgA8AC8AdQBnAGMAPgA=</BinaryData>
+      <IsInherited>false</IsInherited>
+    </ApplicationData>
+  </ApplicationDataCollection>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/400%20Example%20Site" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemStructureGroup" itemUrl="/webdav/400%20Example%20Site/Home/_Page%20Types" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content/_Cloneable%20Content/Bicycle.xml" linkName="Regions[0]/ComponentPresentations[0]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Editor/Templates/Bicycle.tctcmp" linkName="Regions[0]/ComponentPresentations[0]/ComponentTemplate" />
+    <Dependency dependencyType="LinkedKeyword" itemUrl="/webdav/400%20Example%20Site/Sitemap%20%5BNavigation%5D/030%20Products.tkw" linkName="Metadata" xpath="*[local-name() = 'Metadata'][1]/*[local-name() = 'sitemapKeyword'][1]/@xlink:href" />
+    <Dependency dependencyType="MetadataSchema" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Framework/Site%20Manager/Schemas/Page%20Navigation%20Metadata.xsd" linkName="MetadataSchema" />
+    <Dependency dependencyType="PageTemplate" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Editor/Templates/Bicycle.tptcmp" linkName="PageTemplate" />
+    <Dependency dependencyType="PageRegionSchema" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas/Page%20Schemas/Bicycle%20Page.xsd" linkName="RegionSchema" />
+    <Dependency dependencyType="PageRegionSchema" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas/Region%20Schemas/%5BTridionDocsMashup%3ABicycle%5D%20Region.xsd" linkName="Regions[0]/RegionSchema" />
+    <Dependency dependencyType="ApplicationData" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content/_Cloneable%20Content/Bicycle.xml" linkName="SiteEdit" xpath="/*[local-name() = 'configuration'][1]/*[local-name() = 'Page'][1]/*[local-name() = 'PageType'][1]/*[local-name() = 'Components'][1]/*[local-name() = 'Component'][1]/@xlink:href" />
+    <Dependency dependencyType="ApplicationData" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content/Products/Bicycles" linkName="SiteEdit" xpath="/*[local-name() = 'configuration'][1]/*[local-name() = 'Page'][1]/*[local-name() = 'PageType'][1]/*[local-name() = 'Components'][1]/*[local-name() = 'Component'][1]/*[local-name() = 'TargetLocation'][1]/@xlink:href" />
+    <Dependency dependencyType="ApplicationData" itemUrl="/webdav/400%20Example%20Site/Home/_Page%20Types/Bicycle%20Page.tpg" linkName="ugc:ComponentAndPage" xpath="/*[local-name() = 'ugc'][1]/*[local-name() = 'item'][1]/@id" />
+  </Dependencies>
+</PackageItem>

@@ -1,0 +1,49 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <PrimaryBlueprintParentUrl>/webdav/100%20Master/Building%20Blocks/Framework/Developer/Templates/Publish%20Settings.tctcmp</PrimaryBlueprintParentUrl>
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Publish Settings</tcm:Title>
+      <tcm:Type>CompoundTemplate</tcm:Type>
+      <tcm:Priority>200</tcm:Priority>
+      <tcm:OutputFormat>HTML Fragment</tcm:OutputFormat>
+      <tcm:Content>
+        <tcm:PublisherScript>&lt;CompoundTemplate xmlns="http://www.tridion.com/ContentManager/5.3/CompoundTemplate"&gt;
+  &lt;TemplateInvocation&gt;
+    &lt;Template xlink:href="/webdav/500%20Automated%20Test%20Child/Building%20Blocks/Framework/Developer/Templates/DXA%2ER2/Publish%20Mappings.tbbcs" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:title="Publish Mappings" /&gt;
+    &lt;TemplateParameters&gt;
+      &lt;Parameters xmlns="http://www.sdl.com/web/schemas/publishmappings"&gt;
+        &lt;retrofitMode xmlns="http://www.sdl.com/web/schemas/publishmappings"&gt;true&lt;/retrofitMode&gt;
+      &lt;/Parameters&gt;
+    &lt;/TemplateParameters&gt;
+  &lt;/TemplateInvocation&gt;
+  &lt;TemplateInvocation&gt;
+    &lt;Template xlink:href="/webdav/500%20Automated%20Test%20Child/Building%20Blocks/Framework/Developer/Templates/DXA%2ER2/Publish%20Configuration.tbbcs" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:title="Publish Configuration" /&gt;
+    &lt;TemplateParameters /&gt;
+  &lt;/TemplateInvocation&gt;
+  &lt;TemplateInvocation&gt;
+    &lt;Template xlink:href="/webdav/500%20Automated%20Test%20Child/Building%20Blocks/Framework/Developer/Templates/DXA%2ER2/Publish%20Resources.tbbcs" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:title="Publish Resources" /&gt;
+    &lt;TemplateParameters /&gt;
+  &lt;/TemplateInvocation&gt;
+&lt;/CompoundTemplate&gt;</tcm:PublisherScript>
+        <tcm:DynamicTemplate />
+      </tcm:Content>
+      <tcm:AllowOnPage>true</tcm:AllowOnPage>
+      <tcm:IsRepositoryPublishable>false</tcm:IsRepositoryPublishable>
+      <tcm:RelatedSchemas>
+        <tcm:RelatedSchema xlink:type="simple" xlink:title="Module Configuration" xlink:href="/webdav/500%20Automated%20Test%20Child/Building%20Blocks/Framework/Developer/Schemas/Module%20Configuration.xsd" />
+      </tcm:RelatedSchemas>
+      <tcm:TrackingCategories />
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:ParameterSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:Metadata />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/500%20Automated%20Test%20Child" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/500%20Automated%20Test%20Child/Building%20Blocks/Framework/Developer/Templates" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="ComponentTemplateAllowedSchema" itemUrl="/webdav/500%20Automated%20Test%20Child/Building%20Blocks/Framework/Developer/Schemas/Module%20Configuration.xsd" linkName="RelatedSchemas[0]" />
+    <Dependency dependencyType="TemplateLinkedItem" itemUrl="/webdav/500%20Automated%20Test%20Child/Building%20Blocks/Framework/Developer/Templates/DXA%2ER2/Publish%20Configuration.tbbcs" linkName="ExtractedReferences[0]" />
+    <Dependency dependencyType="TemplateLinkedItem" itemUrl="/webdav/500%20Automated%20Test%20Child/Building%20Blocks/Framework/Developer/Templates/DXA%2ER2/Publish%20Resources.tbbcs" linkName="ExtractedReferences[1]" />
+    <Dependency dependencyType="TemplateLinkedItem" itemUrl="/webdav/500%20Automated%20Test%20Child/Building%20Blocks/Framework/Developer/Templates/DXA%2ER2/Publish%20Mappings.tbbcs" linkName="ExtractedReferences[2]" />
+  </Dependencies>
+</PackageItem>

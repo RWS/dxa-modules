@@ -1,0 +1,37 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Test Article</tcm:Title>
+      <tcm:Type>Normal</tcm:Type>
+      <tcm:Schema xlink:type="simple" xlink:title="Article" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Schemas/Article.xsd" IsMandatory="false" />
+      <tcm:Content>
+        <Article xmlns="http://www.sdl.com/web/schemas/core">
+          <headline>Test Article used for Automated Testing (Sdl.Web.Tridion.Tests)</headline>
+          <articleBody>
+            <subheading>Subheading 1</subheading>
+            <content>
+              <p xmlns="http://www.w3.org/1999/xhtml">Test <strong>rich</strong> <em>text</em> content.</p>
+<p xmlns="http://www.w3.org/1999/xhtml">Component link (not published): <a xmlns:xlink="http://www.w3.org/1999/xlink" title="Test Component" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Test%20Component.xml" xlink:title="Test Component">Test Component</a></p>
+<p xmlns="http://www.w3.org/1999/xhtml">Component link (published): <a xmlns:xlink="http://www.w3.org/1999/xlink" title="TSI-1758 Test Component" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Regression/TSI-1758%20Test%20Component.xml" xlink:title="TSI-1758 Test Component">TSI-1758 Test Component</a></p>
+<p xmlns="http://www.w3.org/1999/xhtml">MMC link: <a xmlns:xlink="http://www.w3.org/1999/xlink" title="bulls-eye" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Images/Large/bulls-eye.JPG" xlink:title="bulls-eye">bulls-eye</a></p>
+<p xmlns="http://www.w3.org/1999/xhtml">Embedded Image: <img xmlns:xlink="http://www.w3.org/1999/xlink" title="calculator" alt="calculator" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Images/Large/calculator.jpg" xlink:title="calculator" /></p></content>
+          </articleBody>
+        </Article>
+      </tcm:Content>
+      <tcm:Metadata>
+        <Metadata xmlns="http://www.sdl.com/web/schemas/core" />
+      </tcm:Metadata>
+      <tcm:IsBasedOnTridionWebSchema>true</tcm:IsBasedOnTridionWebSchema>
+      <tcm:MultimediaType xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Test%20Component.xml" linkName="Content" xpath="*[local-name() = 'Article'][1]/*[local-name() = 'articleBody'][1]/*[local-name() = 'content'][1]/*[local-name() = 'p'][2]/*[local-name() = 'a'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Regression/TSI-1758%20Test%20Component.xml" linkName="Content" xpath="*[local-name() = 'Article'][1]/*[local-name() = 'articleBody'][1]/*[local-name() = 'content'][1]/*[local-name() = 'p'][3]/*[local-name() = 'a'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Images/Large/bulls-eye.JPG" linkName="Content" xpath="*[local-name() = 'Article'][1]/*[local-name() = 'articleBody'][1]/*[local-name() = 'content'][1]/*[local-name() = 'p'][4]/*[local-name() = 'a'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Images/Large/calculator.jpg" linkName="Content" xpath="*[local-name() = 'Article'][1]/*[local-name() = 'articleBody'][1]/*[local-name() = 'content'][1]/*[local-name() = 'p'][5]/*[local-name() = 'img'][1]/@xlink:href" />
+    <Dependency dependencyType="Schema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Schemas/Article.xsd" linkName="Schema" />
+  </Dependencies>
+</PackageItem>
