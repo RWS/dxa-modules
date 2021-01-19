@@ -92,12 +92,17 @@
   
 
   <!-- ========================================================================================================================== -->
-   <ItemGroup>
-        <ModulePath
-          Include="$([System.IO.Directory]::GetDirectories(&quot;$(ProjectDirectory)&quot;))"
-          Exclude="$(ProjectDirectory)\_references;$(ProjectDirectory)\_tools;$(ProjectDirectory)\packages"
-          />
-      </ItemGroup>
+  <PropertyGroup>
+     <DstFolder>$(ProjectDirectory)\dist</DstFolder>     
+     <InstallationFolder>$(ProjectDirectory)\..\installation</InstallationFolder>      
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ModulePath
+      Include="$([System.IO.Directory]::GetDirectories(&quot;$(ProjectDirectory)&quot;))"
+      Exclude="$(ProjectDirectory)\_references;$(ProjectDirectory)\_tools;$(ProjectDirectory)\packages;$(ProjectDirectory)\dist"
+    />
+  </ItemGroup>
 
   <Target Name="Artifacts">
       <Message Text="Generating artifacts ..." Importance="high" />
@@ -105,15 +110,17 @@
       <RemoveDir Directories="$(DstFolder)" />
       
       <CallTarget Targets="DeployModules"/>
+
+      <RemoveDir Directories="$(DstFolder)\tmp" />
   </Target>
 
   <!--Note: this target gets executed for each Module -->
   <Target Name="DeployModules" Inputs="@ModulePath" Outputs="%(ModulePath.Identity)">
-    <PropertyGroup>
-      <DstFolder>$(ProjectDirectory)\dist\modules</DstFolder>     
+    <PropertyGroup>   
       <ModuleName>$([System.IO.Path]::GetFilename(&quot;%(ModulePath.Identity)&quot;))</ModuleName>      
-      <DstModuleFolder>$(DstFolder)\$(ModuleName)</DstModuleFolder>
-
+      <DstModuleFolder>$(DstFolder)\tmp\SDL.DXA.$(ModuleName).Module.$(PackageVersion)\modules\$(ModuleName)</DstModuleFolder>
+      <ContentFolder>$(InstallationFolder)\$(ModuleName)\cms</ContentFolder>
+      <ScriptsFolder>$(InstallationFolder)\$(ModuleName)\scripts</ScriptsFolder>          
     </PropertyGroup>
 
     <Message Text="Deploying module '$(ModuleName)' to '$(DstModuleFolder)'..." />
@@ -121,11 +128,38 @@
     <ItemGroup>
       <AreaFiles Include="%(ModulePath.Identity)\Areas\**\*" />
       <BinFiles Include="%(ModulePath.Identity)\bin\$(BuildConfiguration)\**\*" />
+      <CmContentWeb8 Include="$(ContentFolder)\web8\content\**\*" />
+      <CmContentSites9 Include="$(ContentFolder)\sites9\content\**\*" />
+      <Scripts Include="$(ScriptsFolder)\**\*.*" />
+      <ImportExport Include="$(InstallationFolder)\cms\ImportExport\**\*" />
     </ItemGroup>
 
+    <!-- Copy actual areas and binaries for web application -->
+    <Message Text="Copying web application artifacts ..." Importance="high" />        
     <Copy SourceFiles="@(AreaFiles)" DestinationFolder="$(DstModuleFolder)\web\Areas\%(RecursiveDir)" />
-    <Copy SourceFiles="@(BinFiles)" DestinationFolder="$(DstModuleFolder)\web\bin\%(RecursiveDir)" />
+    <Copy SourceFiles="@(BinFiles)" DestinationFolder="$(DstModuleFolder)\web\bin\%(RecursiveDir)" />    
 
+    <!-- Package CM content for module if it exists (web8) -->
+    <Message Text="Creating CM Content artifacts ..." Importance="high" />
+    <MakeDir Directories="$(DstModuleFolder)\web8" Condition="Exists('$(ContentFolder)\web8\content') And !Exists('$(DstModuleFolder)\web8')" />
+    <MSBuild.ExtensionPack.Compression.DNZip Condition="Exists('$(DstModuleFolder)\web8')" TaskAction="Create" CompressPath="$(ContentFolder)\web8\content" ZipFileName="$(DstModuleFolder)\web8\module-$(ModuleName).zip" RemoveRoot="$(ContentFolder)\web8\content"/>
+    <Copy Condition="Exists('$(ContentFolder)\web8\permissions.xml')" SourceFiles="$(ContentFolder)\web8\permissions.xml" DestinationFolder="$(DstModuleFolder)\web8" />
+
+    <!-- Package CM content for module if it exists (sites9) -->
+    <Message Text="Creating CM Content artifacts ..." Importance="high" />
+    <MakeDir Directories="$(DstModuleFolder)\sites9" Condition="Exists('$(ContentFolder)\sites9\content') And !Exists('$(DstModuleFolder)\sites9')" />
+    <MSBuild.ExtensionPack.Compression.DNZip Condition="Exists('$(DstModuleFolder)\sites9')" TaskAction="Create" CompressPath="$(ContentFolder)\sites9\content" ZipFileName="$(DstModuleFolder)\sites9\module-$(ModuleName).zip" RemoveRoot="$(ContentFolder)\sites9\content"/>
+    <Copy Condition="Exists('$(ContentFolder)\sites9\permissions.xml')" SourceFiles="$(ContentFolder)\sites9\permissions.xml" DestinationFolder="$(DstModuleFolder)\sites9" />
+
+    <!-- Copy scripts for module -->
+    <Copy SourceFiles="@(Scripts)" DestinationFolder="$(DstModuleFolder)\%(RecursiveDir)"/>
+
+    <!-- Copy Import/Export scripts -->
+    <Copy SourceFiles="@(ImportExport)" DestinationFolder="$(DstModuleFolder)\..\..\ImportExport\%(RecursiveDir)"/>
+
+    <!-- Produce final module artifact -->
+    <MSBuild.ExtensionPack.Compression.DNZip TaskAction="Create" CompressPath="$(DstFolder)\tmp\SDL.DXA.$(ModuleName).Module.$(PackageVersion)" ZipFileName="$(DstFolder)\SDL.DXA.$(ModuleName).Module.$(PackageVersion).zip" RemoveRoot="$(DstFolder)\tmp\SDL.DXA.$(ModuleName).Module.$(PackageVersion)"/>
+    
   </Target>
-
+  
 </Project>
