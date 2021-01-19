@@ -156,6 +156,8 @@
 
     <!-- Copy Import/Export scripts -->
     <Copy SourceFiles="@(ImportExport)" DestinationFolder="$(DstModuleFolder)\..\..\ImportExport\%(RecursiveDir)"/>
+    <Copy SourceFiles="$(InstallationFolder)\cms\DxaDeployUtils.ps1" DestinationFolder="$(DstFolder)\tmp\SDL.DXA.$(ModuleName).Module.$(PackageVersion)\modules"/>
+      
 
     <!-- Produce final module artifact -->
     <MSBuild.ExtensionPack.Compression.DNZip TaskAction="Create" CompressPath="$(DstFolder)\tmp\SDL.DXA.$(ModuleName).Module.$(PackageVersion)" ZipFileName="$(DstFolder)\SDL.DXA.$(ModuleName).Module.$(PackageVersion).zip" RemoveRoot="$(DstFolder)\tmp\SDL.DXA.$(ModuleName).Module.$(PackageVersion)"/>
