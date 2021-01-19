@@ -1,0 +1,42 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+      <tcm:Title>Region Schema with Nested Regions [Main]</tcm:Title>
+      <tcm:Description>Region Schema with Nested Regions [Main]</tcm:Description>
+      <tcm:Purpose>Region</tcm:Purpose>
+      <tcm:NamespaceURI>uuid:f854a9e9-c1fe-4881-a966-4646534ffa14</tcm:NamespaceURI>
+      <tcm:RootElementName />
+      <tcm:IsTridionWebSchema>true</tcm:IsTridionWebSchema>
+      <tcm:XSD>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="uuid:f854a9e9-c1fe-4881-a966-4646534ffa14" xmlns:tcmi="http://www.tridion.com/ContentManager/5.0/Instance" elementFormDefault="qualified" targetNamespace="uuid:f854a9e9-c1fe-4881-a966-4646534ffa14">
+  <xsd:import namespace="http://www.tridion.com/ContentManager/5.0/Instance" schemaLocation="/webdav/cm_xml_inst.xsd" />
+  <xsd:annotation>
+    <xsd:appinfo>
+      <tcm:Labels xmlns:tcm="http://www.tridion.com/ContentManager/5.0" />
+    </xsd:appinfo>
+  </xsd:annotation>
+</xsd:schema>
+      </tcm:XSD>
+      <tcm:AllowedMultimediaTypes />
+      <tcm:ComponentProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:BundleProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:DeleteBundleOnProcessFinished>false</tcm:DeleteBundleOnProcessFinished>
+      <tcm:RegionDefinition>
+        <tcm:ComponentPresentationConstraints />
+        <tcm:DefaultComponentPresentations />
+        <tcm:NestedRegions>
+          <tcm:NestedRegion>
+            <tcm:RegionName>Nested Region</tcm:RegionName>
+            <tcm:RegionSchema xlink:type="simple" xlink:title="[Article] Region" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Schemas/Region%20Schemas/%5BArticle%5D%20Region.xsd" />
+            <tcm:IsMandatory>true</tcm:IsMandatory>
+          </tcm:NestedRegion>
+        </tcm:NestedRegions>
+      </tcm:RegionDefinition>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/Native%20Regions" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="RegionDefinitionNestedRegionSchema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Schemas/Region%20Schemas/%5BArticle%5D%20Region.xsd" linkName="RegionDefinition/NestedRegions[0]/RegionSchema" />
+  </Dependencies>
+</PackageItem>

@@ -1,0 +1,30 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Avid Carp ACR 12000 REEL</tcm:Title>
+      <tcm:Type>Normal</tcm:Type>
+      <tcm:Schema xlink:type="simple" xlink:title="Fishing Reel" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/SRQ9128/schemas/Fishing%20Reel.xsd" IsMandatory="false" />
+      <tcm:Content>
+        <Content xmlns="uuid:44ad0262-ac47-49f1-b93c-93942cf735ae">
+          <name>ACR 12000 REEL</name>
+          <brand>Avid Carp</brand>
+          <size>4000</size>
+          <keyword xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/401%20Automated%20Test%20Parent/Fishing%20Type/Carp%20Fishing.tkw" xlink:title="Carp Fishing">Carp Fishing</keyword>
+          <keyword xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/401%20Automated%20Test%20Parent/Fishing%20Type/Float%20Fishing.tkw" xlink:title="Float Fishing">Float Fishing</keyword>
+          <keyword xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/401%20Automated%20Test%20Parent/Fishing%20Type/Pole%20Fishing.tkw" xlink:title="Pole Fishing">Pole Fishing</keyword>
+        </Content>
+      </tcm:Content>
+      <tcm:Metadata />
+      <tcm:IsBasedOnTridionWebSchema>true</tcm:IsBasedOnTridionWebSchema>
+      <tcm:MultimediaType xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/SRQ9128/components" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="LinkedKeyword" itemUrl="/webdav/401%20Automated%20Test%20Parent/Fishing%20Type/Carp%20Fishing.tkw" linkName="Content" xpath="*[local-name() = 'Content'][1]/*[local-name() = 'keyword'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedKeyword" itemUrl="/webdav/401%20Automated%20Test%20Parent/Fishing%20Type/Float%20Fishing.tkw" linkName="Content" xpath="*[local-name() = 'Content'][1]/*[local-name() = 'keyword'][2]/@xlink:href" />
+    <Dependency dependencyType="LinkedKeyword" itemUrl="/webdav/401%20Automated%20Test%20Parent/Fishing%20Type/Pole%20Fishing.tkw" linkName="Content" xpath="*[local-name() = 'Content'][1]/*[local-name() = 'keyword'][3]/@xlink:href" />
+    <Dependency dependencyType="Schema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/SRQ9128/schemas/Fishing%20Reel.xsd" linkName="Schema" />
+  </Dependencies>
+</PackageItem>

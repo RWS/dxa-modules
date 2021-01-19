@@ -1,0 +1,37 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Left Navigation</tcm:Title>
+      <tcm:FileName>left-navigation</tcm:FileName>
+      <tcm:PageTemplate IsInherited="false" xlink:type="simple" xlink:title="Include Page (Left)" xlink:href="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Modules/Core/Editor/Templates/Include%20Page%20%28Left%29.tptcmp" />
+      <tcm:ComponentPresentations />
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:Metadata />
+      <tcm:RegionSchema xlink:type="simple" xlink:title="Include Page (Left)" xlink:href="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Modules/Core/Editor/Schemas/Page%20Schemas/Include%20Page%20%28Left%29.xsd" />
+      <tcm:Regions>
+        <tcm:Region Type="EmbeddedRegionData">
+          <tcm:RegionName>Left</tcm:RegionName>
+          <tcm:RegionSchema xlink:type="simple" xlink:title="[Left] Region" xlink:href="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Modules/Core/Editor/Schemas/Region%20Schemas/%5BLeft%5D%20Region.xsd" />
+          <tcm:Metadata />
+          <tcm:ComponentPresentations>
+            <tcm:ComponentPresentation>
+              <tcm:Component xlink:type="simple" xlink:title="Navigation Configuration" xlink:href="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Settings/Core/Site%20Manager/Navigation%20Configuration.xml" />
+              <tcm:ComponentTemplate xlink:type="simple" xlink:title="Left Navigation" xlink:href="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Modules/Core/Site%20Manager/Templates/Left%20Navigation.tctcmp" />
+              <tcm:Conditions />
+            </tcm:ComponentPresentation>
+          </tcm:ComponentPresentations>
+          <tcm:Regions />
+        </tcm:Region>
+      </tcm:Regions>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/110%20DXA%20Site%20Type" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemStructureGroup" itemUrl="/webdav/110%20DXA%20Site%20Type/Home/_System/include" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Settings/Core/Site%20Manager/Navigation%20Configuration.xml" linkName="Regions[0]/ComponentPresentations[0]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Modules/Core/Site%20Manager/Templates/Left%20Navigation.tctcmp" linkName="Regions[0]/ComponentPresentations[0]/ComponentTemplate" />
+    <Dependency dependencyType="PageTemplate" itemUrl="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Modules/Core/Editor/Templates/Include%20Page%20%28Left%29.tptcmp" linkName="PageTemplate" />
+    <Dependency dependencyType="PageRegionSchema" itemUrl="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Modules/Core/Editor/Schemas/Page%20Schemas/Include%20Page%20%28Left%29.xsd" linkName="RegionSchema" />
+    <Dependency dependencyType="PageRegionSchema" itemUrl="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Modules/Core/Editor/Schemas/Region%20Schemas/%5BLeft%5D%20Region.xsd" linkName="Regions[0]/RegionSchema" />
+  </Dependencies>
+</PackageItem>

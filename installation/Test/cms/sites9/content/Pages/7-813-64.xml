@@ -1,0 +1,27 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Multi-language Site Child Only Smoke Test</tcm:Title>
+      <tcm:FileName>multi-lang-child-smoke-test</tcm:FileName>
+      <tcm:PageTemplate IsInherited="false" xlink:type="simple" xlink:title="Content Page without Header" xlink:href="/webdav/500%20Automated%20Test%20Child/Building%20Blocks/Modules/Test/Content%20Page%20without%20Header.tptcmp" />
+      <tcm:ComponentPresentations>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="Language Selector Configuration" xlink:href="/webdav/500%20Automated%20Test%20Child/Building%20Blocks/Settings/Core/Site%20Manager/Language%20Selector%20Configuration.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Language Selector" xlink:href="/webdav/500%20Automated%20Test%20Child/Building%20Blocks/Modules/Core/Site%20Manager/Templates/Language%20Selector.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+      </tcm:ComponentPresentations>
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:Metadata />
+      <tcm:RegionSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:Regions />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/500%20Automated%20Test%20Child" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemStructureGroup" itemUrl="/webdav/500%20Automated%20Test%20Child/Home/Smoke" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/500%20Automated%20Test%20Child/Building%20Blocks/Settings/Core/Site%20Manager/Language%20Selector%20Configuration.xml" linkName="ComponentPresentations[0]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/500%20Automated%20Test%20Child/Building%20Blocks/Modules/Core/Site%20Manager/Templates/Language%20Selector.tctcmp" linkName="ComponentPresentations[0]/ComponentTemplate" />
+    <Dependency dependencyType="PageTemplate" itemUrl="/webdav/500%20Automated%20Test%20Child/Building%20Blocks/Modules/Test/Content%20Page%20without%20Header.tptcmp" linkName="PageTemplate" />
+  </Dependencies>
+</PackageItem>

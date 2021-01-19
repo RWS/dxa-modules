@@ -1,0 +1,32 @@
+<export>
+  <organizationalItem path="/webdav/100%20Master/Building%20Blocks/Modules/TridionDocsMashup/Admin">
+    <permissions group="Everyone">Read</permissions>
+    <permissions group="Editor">None</permissions>
+    <permissions group="Site Manager">None</permissions>
+    <permissions group="Developer">All</permissions>
+  </organizationalItem>
+  <organizationalItem path="/webdav/100%20Master/Building%20Blocks/Modules/TridionDocsMashup/Editor">
+    <permissions group="Everyone">Read</permissions>
+    <permissions group="Editor">All</permissions>
+    <permissions group="Site Manager">All</permissions>
+    <permissions group="Developer">All</permissions>
+  </organizationalItem>
+  <organizationalItem path="/webdav/100%20Master/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager">
+    <permissions group="Everyone">Read</permissions>
+    <permissions group="Editor">None</permissions>
+    <permissions group="Site Manager">All</permissions>
+    <permissions group="Developer">All</permissions>
+  </organizationalItem>
+  <organizationalItem path="/webdav/100%20Master/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager/Schemas">
+    <permissions group="Everyone">None</permissions>
+    <permissions group="Editor">None</permissions>
+    <permissions group="Site Manager">All</permissions>
+    <permissions group="Developer">All</permissions>
+  </organizationalItem>
+  <organizationalItem path="/webdav/100%20Master/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager/Templates">
+    <permissions group="Everyone">None</permissions>
+    <permissions group="Editor">None</permissions>
+    <permissions group="Site Manager">All</permissions>
+    <permissions group="Developer">All</permissions>
+  </organizationalItem>
+</export>

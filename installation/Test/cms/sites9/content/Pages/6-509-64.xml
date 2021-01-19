@@ -1,0 +1,71 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Smart Target Experiments Test</tcm:Title>
+      <tcm:FileName>smart-target-experiments-test</tcm:FileName>
+      <tcm:PageTemplate IsInherited="false" xlink:type="simple" xlink:title="Example Experience Optimization enabled Page" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/ExperienceOptimization/Editor/Templates/Example%20Experience%20Optimization%20enabled%20Page.tptcmp" />
+      <tcm:ComponentPresentations>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="test-fallback-item" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Smoke/SmartTarget/test-fallback-item.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Article [SmartTarget:Example1]" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/ExperienceOptimization/Editor/Templates/Article%20%5BSmartTarget%3AExample1%5D.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="test-fallback-item" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Smoke/SmartTarget/test-fallback-item.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Article [SmartTarget:Example2]" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/ExperienceOptimization/Editor/Templates/Article%20%5BSmartTarget%3AExample2%5D.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="SmartTarget (eXperience Optimization) Experiments Test - Description" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Smoke/SmartTarget/SmartTarget%20%28eXperience%20Optimization%29%20Experiments%20Test%20-%20Description.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Article" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Article.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+      </tcm:ComponentPresentations>
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:Metadata />
+      <tcm:RegionSchema xlink:type="simple" xlink:title="SmartTarget Page Schema" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/ExperienceOptimization/Editor/Schemas/Region/SmartTarget%20Page%20Schema.xsd" />
+      <tcm:Regions>
+        <tcm:Region Type="EmbeddedRegionData">
+          <tcm:RegionName>Hero</tcm:RegionName>
+          <tcm:RegionSchema xlink:type="simple" xlink:title="[Hero] Region" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Schemas/Region%20Schemas/%5BHero%5D%20Region.xsd" />
+          <tcm:Metadata />
+          <tcm:ComponentPresentations />
+          <tcm:Regions />
+        </tcm:Region>
+        <tcm:Region Type="EmbeddedRegionData">
+          <tcm:RegionName>Example1</tcm:RegionName>
+          <tcm:RegionSchema xlink:type="simple" xlink:title="[SmartTarget:SmartTargetRegion] Region" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/ExperienceOptimization/Editor/Schemas/Region/%5BSmartTarget%3ASmartTargetRegion%5D%20Region.xsd" />
+          <tcm:Metadata>
+            <Metadata xmlns="uuid:68a2a277-cf1d-47b8-bed9-b0b3c5ef78a9" />
+          </tcm:Metadata>
+          <tcm:ComponentPresentations />
+          <tcm:Regions />
+        </tcm:Region>
+        <tcm:Region Type="EmbeddedRegionData">
+          <tcm:RegionName>Example2</tcm:RegionName>
+          <tcm:RegionSchema xlink:type="simple" xlink:title="[SmartTarget:2-Column] Region" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/ExperienceOptimization/Editor/Schemas/Region/%5BSmartTarget%3A2-Column%5D%20Region.xsd" />
+          <tcm:Metadata>
+            <Metadata xmlns="uuid:e7c9924a-8fd5-4599-a947-13bf0b037c90" />
+          </tcm:Metadata>
+          <tcm:ComponentPresentations />
+          <tcm:Regions />
+        </tcm:Region>
+      </tcm:Regions>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemStructureGroup" itemUrl="/webdav/401%20Automated%20Test%20Parent/Home/Smoke" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Smoke/SmartTarget/test-fallback-item.xml" linkName="ComponentPresentations[0]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Smoke/SmartTarget/test-fallback-item.xml" linkName="ComponentPresentations[1]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Smoke/SmartTarget/SmartTarget%20%28eXperience%20Optimization%29%20Experiments%20Test%20-%20Description.xml" linkName="ComponentPresentations[2]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/ExperienceOptimization/Editor/Templates/Article%20%5BSmartTarget%3AExample1%5D.tctcmp" linkName="ComponentPresentations[0]/ComponentTemplate" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/ExperienceOptimization/Editor/Templates/Article%20%5BSmartTarget%3AExample2%5D.tctcmp" linkName="ComponentPresentations[1]/ComponentTemplate" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Article.tctcmp" linkName="ComponentPresentations[2]/ComponentTemplate" />
+    <Dependency dependencyType="PageTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/ExperienceOptimization/Editor/Templates/Example%20Experience%20Optimization%20enabled%20Page.tptcmp" linkName="PageTemplate" />
+    <Dependency dependencyType="PageRegionSchema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/ExperienceOptimization/Editor/Schemas/Region/SmartTarget%20Page%20Schema.xsd" linkName="RegionSchema" />
+    <Dependency dependencyType="PageRegionSchema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Schemas/Region%20Schemas/%5BHero%5D%20Region.xsd" linkName="Regions[0]/RegionSchema" />
+    <Dependency dependencyType="PageRegionSchema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/ExperienceOptimization/Editor/Schemas/Region/%5BSmartTarget%3ASmartTargetRegion%5D%20Region.xsd" linkName="Regions[1]/RegionSchema" />
+    <Dependency dependencyType="PageRegionSchema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/ExperienceOptimization/Editor/Schemas/Region/%5BSmartTarget%3A2-Column%5D%20Region.xsd" linkName="Regions[2]/RegionSchema" />
+  </Dependencies>
+</PackageItem>

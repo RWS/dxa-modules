@@ -1,0 +1,130 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Search Module Test - Description</tcm:Title>
+      <tcm:Type>Normal</tcm:Type>
+      <tcm:Schema xlink:type="simple" xlink:title="Article" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Schemas/Article.xsd" IsMandatory="false" />
+      <tcm:Content>
+        <Article xmlns="http://www.sdl.com/web/schemas/core">
+          <headline>Search Module Smoke Test</headline>
+          <articleBody>
+            <subheading>Description</subheading>
+            <content>
+              <p xmlns="http://www.w3.org/1999/xhtml">Automated test related to this page covers the following set of test cases for Search Module (Solr provider):
+<br /></p>
+<div xmlns="http://www.w3.org/1999/xhtml" id="qpane-header" class="qpane-header content-header content-header-default">
+<div class="content-header-inner">
+<div class="content-header-title">
+<div id="qpane-header" class="qpane-header content-header content-header-default">
+<div class="content-header-inner">
+<div class="content-header-title">
+<div class="content-header-id">
+<div id="qpane-header" class="qpane-header content-header content-header-default">
+<div class="content-header-inner">
+<div class="content-header-title"><a class="nolink" href="http://nl1tr01.global.sdl.corp/testrail/index.php?/cases/view/2916276">C2916276</a> - Search installation Web App - Solr
+<br />
+<div id="qpane-header" class="qpane-header content-header content-header-default">
+<div class="content-header-inner">
+<div class="content-header-inner"><a class="nolink" href="http://nl1tr01.global.sdl.corp/testrail/index.php?/cases/view/2916302">C2916302</a> - Search for published content
+<br />
+<div id="qpane-header" class="qpane-header content-header content-header-default">
+<div class="content-header-inner">
+<div class="content-header-title"><a class="nolink" href="http://nl1tr01.global.sdl.corp/testrail/index.php?/cases/view/2916304">C2916304</a> - Search for suppressed content</div>
+</div>
+</div>
+<a class="nolink" href="http://nl1tr01.global.sdl.corp/testrail/index.php?/cases/view/2916305">C2916305</a> - Search for unexisting content
+<br />
+<div class="content-header-title">
+<div id="qpane-header" class="qpane-header content-header content-header-default">
+<div class="content-header-inner">
+<div class="content-header-title"><a class="nolink" href="http://nl1tr01.global.sdl.corp/testrail/index.php?/cases/view/2916306">C2916306</a> - Check lower-/uppercase compatibility</div>
+</div>
+<div id="qpane-header" class="qpane-header content-header content-header-default">
+<div class="content-header-inner">
+<div class="content-header-title"><a class="nolink" href="http://nl1tr01.global.sdl.corp/testrail/index.php?/cases/view/2916307">C2916307</a> - Search for different languages</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="qpane-header" class="qpane-header content-header content-header-default" />
+</div>
+</div>
+</div>
+<div id="qpane-header" class="qpane-header content-header content-header-default">
+<div class="content-header-inner" />
+</div>
+<div id="qpane-header" class="qpane-header content-header content-header-default">
+<div class="content-header-inner">
+<div id="qpane-header" class="qpane-header content-header content-header-default">
+<div class="content-header-inner">
+<div class="content-header-title"><a class="nolink" href="http://nl1tr01.global.sdl.corp/testrail/index.php?/cases/view/2916309">C2916309</a> - Search for multiple words - within single page
+<br />
+<div id="qpane-header" class="qpane-header content-header content-header-default">
+<div class="content-header-inner">
+<div class="content-header-title"><a class="nolink" href="http://nl1tr01.global.sdl.corp/testrail/index.php?/cases/view/2916312">C2916312</a> - Search by a prefix
+<br />
+<div id="qpane-header" class="qpane-header content-header content-header-default">
+<div class="content-header-inner">
+<div class="content-header-title"><a class="nolink" href="http://nl1tr01.global.sdl.corp/testrail/index.php?/cases/view/2916313">C2916313</a> - Search by a postfix</div>
+</div>
+<div id="qpane-header" class="qpane-header content-header content-header-default">
+<div class="content-header-inner">
+<div class="content-header-id"><a class="nolink" href="http://nl1tr01.global.sdl.corp/testrail/index.php?/cases/view/2916314">C2916314</a> - Search by prefix and postfix</div>
+</div>
+<div id="qpane-header" class="qpane-header content-header content-header-default">
+<div class="content-header-inner">
+<div class="content-header-id"><a class="nolink" href="http://nl1tr01.global.sdl.corp/testrail/index.php?/cases/view/2916317">C2916317</a> - Search in a PDF file</div>
+</div>
+</div>
+</div>
+</div>
+<div id="qpane-header" class="qpane-header content-header content-header-default">
+<div class="content-header-inner">
+<div class="content-header-title"><a class="nolink" href="http://nl1tr01.global.sdl.corp/testrail/index.php?/cases/view/2916318">C2916318</a> - Search in a DOC file</div>
+</div>
+<div id="qpane-header" class="qpane-header content-header content-header-default">
+<div class="content-header-inner">
+<div class="content-header-id"><a class="nolink" href="http://nl1tr01.global.sdl.corp/testrail/index.php?/cases/view/2916332">C2916332</a> - Obtaining search.QueryURL from TopologyManager</div>
+</div>
+</div>
+</div>
+<div id="qpane-header" class="qpane-header content-header content-header-default">
+<div class="content-header-inner">
+<div class="content-header-title"><a class="nolink" href="http://nl1tr01.global.sdl.corp/testrail/index.php?/cases/view/892749">C892749</a> - JSON presentation on Search results page</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="content-header-id" />
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></content>
+          </articleBody>
+        </Article>
+      </tcm:Content>
+      <tcm:Metadata>
+        <Metadata xmlns="http://www.sdl.com/web/schemas/core" />
+      </tcm:Metadata>
+      <tcm:IsBasedOnTridionWebSchema>true</tcm:IsBasedOnTridionWebSchema>
+      <tcm:MultimediaType xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Smoke/Search" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="Schema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Schemas/Article.xsd" linkName="Schema" />
+  </Dependencies>
+</PackageItem>

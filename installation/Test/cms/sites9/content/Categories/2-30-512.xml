@@ -1,0 +1,21 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Social Networks</tcm:Title>
+      <tcm:XMLName>SocialNetworks</tcm:XMLName>
+      <tcm:Description>Social Networks</tcm:Description>
+      <tcm:KeywordMetadataSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:UseForNavigation>false</tcm:UseForNavigation>
+      <tcm:AllowedParentCategories>
+        <tcm:Category xlink:type="simple" xlink:title="Social Networks" xlink:href="/webdav/100%20Master/Social%20Networks" />
+      </tcm:AllowedParentCategories>
+      <tcm:IsRoot>true</tcm:IsRoot>
+      <tcm:UseForIdentification>false</tcm:UseForIdentification>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/100%20Master" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemPublication" itemUrl="/webdav/100%20Master" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="AllowedParentCategory" itemUrl="/webdav/100%20Master/Social%20Networks" linkName="AllowedParentCategories[0]" />
+  </Dependencies>
+</PackageItem>

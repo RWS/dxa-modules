@@ -1,0 +1,24 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>TSI-2844</tcm:Title>
+      <tcm:DefaultPageTemplate IsInherited="false" xlink:type="simple" xlink:title="TSI-2844-Page-Template" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/TSI-2844-Page-Template.tptcmp" />
+      <tcm:Directory IsMandatory="true">tsi-2844</tcm:Directory>
+      <tcm:IsActive ResolvedValue="true">true</tcm:IsActive>
+      <tcm:PageProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:PageBundleProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="FolderSchema" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/FolderSchema.xsd" />
+      <tcm:Metadata>
+        <Metadata xmlns="uuid:67c1d420-75fe-4c55-b534-a103dc679b6c">
+          <folderMetadataTextField>TSI-2844 Structure Group Metadata</folderMetadataTextField>
+        </Metadata>
+      </tcm:Metadata>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemStructureGroup" itemUrl="/webdav/401%20Automated%20Test%20Parent/Home/Regression" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="DefaultPageTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/TSI-2844-Page-Template.tptcmp" linkName="DefaultPageTemplate" />
+    <Dependency dependencyType="MetadataSchema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/FolderSchema.xsd" linkName="MetadataSchema" />
+  </Dependencies>
+</PackageItem>

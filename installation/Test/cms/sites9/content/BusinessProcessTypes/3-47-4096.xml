@@ -1,0 +1,36 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>DXA Development</tcm:Title>
+      <tcm:Metadata />
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:BundleSchemas />
+      <tcm:CdTopologyTypeId>StagingOnly</tcm:CdTopologyTypeId>
+      <tcm:Description>Development Publishing Process with only one Target Type</tcm:Description>
+      <tcm:TargetTypes>
+        <tcm:TargetType IsEditable="true">
+          <tcm:Data>
+            <tcm:Description>Development publishing environment</tcm:Description>
+            <tcm:Title>DXA Development</tcm:Title>
+            <tcm:Purpose>Staging</tcm:Purpose>
+            <tcm:Priority>Normal</tcm:Priority>
+            <tcm:MinimalApprovalStatus xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+          </tcm:Data>
+          <tcm:Permissions>
+            <tcm:PermissionInfo>
+              <tcm:PermissionType ID="1" Title="" />
+            </tcm:PermissionInfo>
+            <tcm:Trustee xlink:type="simple" xlink:title="Everyone" xlink:href="tcm:0-1-65568" description="All SDL Web Content Manager Users" ItemType="65568">
+              <tcm:Permission Type="1" Setting="Allow" />
+            </tcm:Trustee>
+          </tcm:Permissions>
+        </tcm:TargetType>
+      </tcm:TargetTypes>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/110%20DXA%20Site%20Type" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemPublication" itemUrl="/webdav/110%20DXA%20Site%20Type" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="TargetTypeAccessControlEntry" itemUrl="/webdav//Everyone.tgp" linkName="TargetTypes[0]/AccessControlList/AccessControlEntries[0]/Trustee" />
+  </Dependencies>
+</PackageItem>

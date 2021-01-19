@@ -1,0 +1,37 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>MSAccess database</tcm:Title>
+      <tcm:MIMEType>application/x-msaccess</tcm:MIMEType>
+      <tcm:FileExtensions>
+        <tcm:FileExtension>mdb</tcm:FileExtension>
+      </tcm:FileExtensions>
+    </tcm:Data>
+  </Data>
+  <ApplicationDataCollection>
+    <ApplicationData>
+      <ApplicationId>cme:MMType:16</ApplicationId>
+      <TypeId>image/png</TypeId>
+      <BinaryData>iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAR5JREFUeNpi/P//PwMlgImBQsCCzPEITcliY2Mre/vurTw2xWJiYldevXrVe3T7ygUwMUaYF6w9w0GC8UaGxgyKikoMggKCcI3ff3xnuH//HsO169cYPnx4DxJaCDQkAd2A/96ePgxWVjZ4nbx33x6Gffv3MAANYMTwwtHjRxneA23Q0tRmEBAUhLsCJPbh/XugC64ynDt/FncYWFtag515DGgQNqCooMTg7eXLsHbdauwGgJxPyAsggGwAdaOxu7cT6H8t2oQBBwcHg6SEFO3D4CMR3v6I0ws1dZVMWlra101NzIVERETEYWHwA5gSHz958vLy5Ysvzl84JwIU4sdIytDUCEqeIGyArAgJHATiDUC8AJgSP2AYQA4ACDAAjXuF5vzFsT4AAAAASUVORK5CYII=</BinaryData>
+      <IsInherited>false</IsInherited>
+    </ApplicationData>
+    <ApplicationData>
+      <ApplicationId>cme:MMType:16:LastModified</ApplicationId>
+      <TypeId>DateTime</TypeId>
+      <BinaryData>MjAxOS0wNy0xNVQwMDo1Mzo1Mw==</BinaryData>
+      <IsInherited>false</IsInherited>
+    </ApplicationData>
+    <ApplicationData>
+      <ApplicationId>cme:MMType:48</ApplicationId>
+      <TypeId>image/png</TypeId>
+      <BinaryData>iVBORw0KGgoAAAANSUhEUgAAACYAAAAvCAYAAACPMrhmAAAACXBIWXMAAAsSAAALEgHS3X78AAAFWklEQVRYw+2Z72sbdRzHX7kFckJH79nds7vhMHkwlzxqAxtt7aQWKVtQREW31j0TFfcfOP8DnwiKMBv3ZDqQ6MbWVlfSqpAElaRs0I5t3sEK34M9uOAKV2hzPkjudumPJF3TZQ/8QAkp7X1ffD+fe78/n+834nkencZoZjIFGID/abT5F7PxUwbM+Vy23OlakVZgo5lJA8gAI5GIdMrzan3sIyIR6bHn1W4BeSA3n8uaewIbzUxmgAvAsP+7/n4FTdXQNA1dN5BlGU3VWoIIW+C6LpZlIoRA2IJq1Qn/yQLwxXwum2sJNpqZTEmSdLlWqx3zYdKDaXTdaAvRaQhbYFkmhWIhgJQk6XatVjsbTnUANpqZnAK+BdB1g+GhEQzd4CDDtEwWFvNYVpDRD+Zz2ekAzIeKxWTGx8ZJJlM8yyiWCuQX8qyvuwFc5JUz5wzgn1hMZvLcVNdS9jQpzn437cMdOXQkkfwSeHni9QmOvniUXkVfXx+H+/pYubsM8IIEjPl11esIMbwpAVWAhcV8z8FCDFUJEACVpTKzczM9g5qdm6GyFKiFiAIbALGYTLFUwLRMXhsbP3CpCEvG7NwMti2IxWS/+DcOHUkkpwDjow8/RtiC1dWHVJbKmJZJBFAUhWg02lUY13W5c+c2s7/MsLiYZ23tMbpu8N6771MsFQCsYEVFUZg8O0WlUqZQKmBZZl34rtWL0tANVFVDUzUURdkTiOM4CFtg2wLTf24jVFUjPZDepp3btiKZTJFMphC2oFIpBw8KP8y3qzCgr3/CFk1AW7wxgDF0g2Qytatu7pojTdXQxsaDrTctE9sWCCFw112EEE2wW8H9utV1Azkmo2laACTLcttd7qh4ZFkmEU+QiCdapssviW5E16q6W0B+SIDG8xdHJUDx9aTXEWKIBso/OzeD67o9g3JdN+w8jyTAAbBtQfbydFDEzzIcxyF7eRr7idQ8CpRf1w1WVx/6yovSr3T0Wu8XqFgq8MPVK4H6N3TPCsA+/eRCXSCF4P6DexRLBYQQbG5sdNWWfDtaWMxz4+Z1LMskFpM5eeIkZ05n/A7DalpteGiEwYE0xVKBcqXMyt3leuN2jSY78vumdkbvF7NlmU22FHaPVDLF4EB6W3aiO4np8NAIw0MjgS35k034oftpBjVVa2lHbQU2bEu+DzqOg92YF0UbUE3VkGUZtbHTe5knokDHjb7WSGcra+qmwEb/F9jOBVZsE1jRhQJ/qpmyWWCdQMeSx1Pcf3CPv/7+E8dxgsI9aIGdnZvhxs3rrK09Jnk85cM90bEzpzMYusFMY1qpLJVRVY1UMnUghyrlSjnYofDRhD8pRbe21fF4gpWVZQqlArYtgrzHGl2ooRso/Qr9jf5rN5H1C7nqODhVB7NxFNWYgpr6/Xg80ZnA+n2/4zis3F3GNM1de/+9RCwmE38pgWEYxF9KtGwuo+260sGBNIMD6eDN8W3Ff4N3kxl/J32B3WvN7smZZVnGaIxygb8e0Ish8ZzGcw1mbh1UexUhBlOifrTNTz/neg4WYshHPM/j1TfO/16rbZ5QVY2333qn6zNiJw7w/dUr2LZAkg798euPl05GAWq1zQlJkn6zbXHs62++Ij2Y3rGrPAjjLpYKFIoF1tfdxrH65gRsP+e/CHwWOMHxuhN0et7QKYxpmaysLIcP6gA+n89lL/pftt2MNK5pLkQikfOe5x3e2hJrqka/oqBsOe3ZLUVO1aHa6Pd9nwwWj0T+9TzvEvXbkSalbneXlAFGJEk65d+W7FsG6rcgt4D8Tlc1HYHtADpC/eZNCX223DTqN28OUJ7PZfOdrvUf/jvPn/g8FfsAAAAASUVORK5CYII=</BinaryData>
+      <IsInherited>false</IsInherited>
+    </ApplicationData>
+    <ApplicationData>
+      <ApplicationId>cme:MMType:48:LastModified</ApplicationId>
+      <TypeId>DateTime</TypeId>
+      <BinaryData>MjAxOS0wNy0xNVQwMDo1Mzo1Mw==</BinaryData>
+      <IsInherited>false</IsInherited>
+    </ApplicationData>
+  </ApplicationDataCollection>
+</PackageItem>

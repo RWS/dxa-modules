@@ -1,0 +1,91 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+      <tcm:Title>UGC Post Comment Form Config</tcm:Title>
+      <tcm:Description>UGC Post Comment Form Configuration</tcm:Description>
+      <tcm:Purpose>Embedded</tcm:Purpose>
+      <tcm:NamespaceURI />
+      <tcm:RootElementName>UgcPostFormConfigEmbedded</tcm:RootElementName>
+      <tcm:IsTridionWebSchema>true</tcm:IsTridionWebSchema>
+      <tcm:XSD>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tcmi="http://www.tridion.com/ContentManager/5.0/Instance" xmlns="" elementFormDefault="qualified">
+  <xsd:import namespace="http://www.tridion.com/ContentManager/5.0/Instance" schemaLocation="/webdav/cm_xml_inst.xsd" />
+  <xsd:annotation>
+    <xsd:appinfo>
+      <tcm:Labels xmlns:tcm="http://www.tridion.com/ContentManager/5.0">
+        <tcm:Label ElementName="userNameLabel" Metadata="false">Label for User Name field</tcm:Label>
+        <tcm:Label ElementName="emailAddressLabel" Metadata="false">Label for Email Address field</tcm:Label>
+        <tcm:Label ElementName="contentLabel" Metadata="false">Label for Content field</tcm:Label>
+        <tcm:Label ElementName="submitButtonLabel" Metadata="false">Label for Submit button</tcm:Label>
+        <tcm:Label ElementName="noUserNameMessage" Metadata="false">User Name not specified message</tcm:Label>
+        <tcm:Label ElementName="noEmailAddressMessage" Metadata="false">Email Address not specified message</tcm:Label>
+        <tcm:Label ElementName="noContentMessage" Metadata="false">Content not specified message</tcm:Label>
+      </tcm:Labels>
+    </xsd:appinfo>
+  </xsd:annotation>
+  <xsd:complexType name="UgcPostFormConfigEmbedded">
+    <xsd:sequence>
+      <xsd:element name="userNameLabel" minOccurs="1" maxOccurs="1" type="xsd:normalizedString">
+        <xsd:annotation>
+          <xsd:appinfo>
+            <tcm:ExtensionXml xmlns:tcm="http://www.tridion.com/ContentManager/5.0" />
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="emailAddressLabel" minOccurs="1" maxOccurs="1" type="xsd:normalizedString">
+        <xsd:annotation>
+          <xsd:appinfo>
+            <tcm:ExtensionXml xmlns:tcm="http://www.tridion.com/ContentManager/5.0" />
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="contentLabel" minOccurs="1" maxOccurs="1" type="xsd:normalizedString">
+        <xsd:annotation>
+          <xsd:appinfo>
+            <tcm:ExtensionXml xmlns:tcm="http://www.tridion.com/ContentManager/5.0" />
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="submitButtonLabel" minOccurs="1" maxOccurs="1" type="xsd:normalizedString">
+        <xsd:annotation>
+          <xsd:appinfo>
+            <tcm:ExtensionXml xmlns:tcm="http://www.tridion.com/ContentManager/5.0" />
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="noUserNameMessage" minOccurs="1" maxOccurs="1" type="xsd:normalizedString">
+        <xsd:annotation>
+          <xsd:appinfo>
+            <tcm:ExtensionXml xmlns:tcm="http://www.tridion.com/ContentManager/5.0" />
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="noEmailAddressMessage" minOccurs="1" maxOccurs="1" type="xsd:normalizedString">
+        <xsd:annotation>
+          <xsd:appinfo>
+            <tcm:ExtensionXml xmlns:tcm="http://www.tridion.com/ContentManager/5.0" />
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="noContentMessage" minOccurs="1" maxOccurs="1" type="xsd:normalizedString">
+        <xsd:annotation>
+          <xsd:appinfo>
+            <tcm:ExtensionXml xmlns:tcm="http://www.tridion.com/ContentManager/5.0" />
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
+      </tcm:XSD>
+      <tcm:AllowedMultimediaTypes />
+      <tcm:ComponentProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:BundleProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:DeleteBundleOnProcessFinished>false</tcm:DeleteBundleOnProcessFinished>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/100%20Master" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/Ugc/Site%20Manager/Schemas/Embedded" linkName="LocationInfo/OrganizationalItem" />
+  </Dependencies>
+</PackageItem>

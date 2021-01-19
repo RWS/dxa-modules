@@ -1,0 +1,25 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <BinaryFileLocation>Binaries\3-488.jpg</BinaryFileLocation>
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Bicycle Image</tcm:Title>
+      <tcm:Type>Multimedia</tcm:Type>
+      <tcm:Schema xlink:type="simple" xlink:title="Image" xlink:href="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Modules/Core/Editor/Schemas/Image.xsd" IsMandatory="false" />
+      <tcm:Content />
+      <tcm:Metadata>
+        <Metadata xmlns="http://www.sdl.com/web/schemas/core" />
+      </tcm:Metadata>
+      <tcm:IsBasedOnTridionWebSchema>true</tcm:IsBasedOnTridionWebSchema>
+      <tcm:MultimediaType xlink:type="simple" xlink:title="Jpeg image" xlink:href="tcm:0-2-65544" />
+      <tcm:MultimediaFilename>photo-1505705694340-019e1e335916.jpg</tcm:MultimediaFilename>
+      <tcm:MultimediaFileSize>173590</tcm:MultimediaFileSize>
+      <tcm:IsExternalMultimediaFile>false</tcm:IsExternalMultimediaFile>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/110%20DXA%20Site%20Type" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content/_Cloneable%20Content" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="MultimediaType" itemUrl="/webdav//Jpeg%20image.tmt" linkName="BinaryContent/MultimediaType" />
+    <Dependency dependencyType="Schema" itemUrl="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Modules/Core/Editor/Schemas/Image.xsd" linkName="Schema" />
+  </Dependencies>
+</PackageItem>

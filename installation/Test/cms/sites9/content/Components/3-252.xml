@@ -1,0 +1,28 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Old Browser bar</tcm:Title>
+      <tcm:Type>Normal</tcm:Type>
+      <tcm:Schema xlink:type="simple" xlink:title="Notification Bar" xlink:href="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Modules/Core/Site%20Manager/Schemas/Notification%20Bar.xsd" IsMandatory="false" />
+      <tcm:Content>
+        <NotificationBar xmlns="http://www.sdl.com/web/schemas/core">
+          <headline>Old browser</headline>
+          <text>Our site works best with browsers newer than the one you’re using. You can continue using this browser, but be aware that some features might not be available. We apologize for this inconvenience.</text>
+          <continue>Continue</continue>
+          <link>
+            <linkText>Help me</linkText>
+            <externalLink xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://updatemybrowser.org/browser" />
+          </link>
+        </NotificationBar>
+      </tcm:Content>
+      <tcm:Metadata />
+      <tcm:IsBasedOnTridionWebSchema>true</tcm:IsBasedOnTridionWebSchema>
+      <tcm:MultimediaType xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/110%20DXA%20Site%20Type" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Content/_Structure/Header" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="Schema" itemUrl="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Modules/Core/Site%20Manager/Schemas/Notification%20Bar.xsd" linkName="Schema" />
+  </Dependencies>
+</PackageItem>

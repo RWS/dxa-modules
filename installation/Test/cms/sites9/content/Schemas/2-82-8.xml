@@ -1,0 +1,79 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+      <tcm:Title>Standard Metadata</tcm:Title>
+      <tcm:Description>Standard Metadata</tcm:Description>
+      <tcm:Purpose>Embedded</tcm:Purpose>
+      <tcm:NamespaceURI />
+      <tcm:RootElementName>StandardMetadata</tcm:RootElementName>
+      <tcm:IsTridionWebSchema>true</tcm:IsTridionWebSchema>
+      <tcm:XSD>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tcmi="http://www.tridion.com/ContentManager/5.0/Instance" xmlns="" xmlns:xlink="http://www.w3.org/1999/xlink" elementFormDefault="qualified">
+        <xsd:import namespace="http://www.tridion.com/ContentManager/5.0/Instance" schemaLocation="/webdav/cm_xml_inst.xsd" />
+        <xsd:annotation>
+          <xsd:appinfo>
+            <tcm:Labels xmlns:tcm="http://www.tridion.com/ContentManager/5.0">
+              <tcm:Label ElementName="dateCreated" Metadata="false">Date Created</tcm:Label>
+              <tcm:Label ElementName="description" Metadata="false">Meta Description (for search engines)</tcm:Label>
+              <tcm:Label ElementName="name" Metadata="false">Short Title (used in navigation, teasers etc.)</tcm:Label>
+              <tcm:Label ElementName="introText" Metadata="false">Intro Text (not shown in the full article, used in summaries, teasers etc.)</tcm:Label>
+              <tcm:Label ElementName="author" Metadata="false">Author name</tcm:Label>
+            </tcm:Labels>
+          </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexType name="StandardMetadata">
+          <xsd:sequence>
+            <xsd:element name="dateCreated" minOccurs="0" maxOccurs="1" type="xsd:dateTime">
+              <xsd:annotation>
+                <xsd:appinfo>
+                  <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0">
+                    <typeof xmlns="http://www.sdl.com/tridion/SemanticMapping">s:Article</typeof>
+                    <property xmlns="http://www.sdl.com/tridion/SemanticMapping">s:dateCreated</property>
+                  </ExtensionXml>
+                </xsd:appinfo>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="description" minOccurs="0" maxOccurs="1" type="tcmi:MultiLineText">
+              <xsd:annotation>
+                <xsd:appinfo>
+                  <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+                  <tcm:Size xmlns:tcm="http://www.tridion.com/ContentManager/5.0">2</tcm:Size>
+                </xsd:appinfo>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="name" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+              <xsd:annotation>
+                <xsd:appinfo>
+                  <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+                </xsd:appinfo>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="introText" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+              <xsd:annotation>
+                <xsd:appinfo>
+                  <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+                </xsd:appinfo>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="author" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+              <xsd:annotation>
+                <xsd:appinfo>
+                  <tcm:ExtensionXml xmlns:tcm="http://www.tridion.com/ContentManager/5.0" />
+                </xsd:appinfo>
+              </xsd:annotation>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:schema>
+      </tcm:XSD>
+      <tcm:AllowedMultimediaTypes />
+      <tcm:ComponentProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:BundleProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:DeleteBundleOnProcessFinished>false</tcm:DeleteBundleOnProcessFinished>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/100%20Master" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/Core/Editor/Schemas/Embedded" linkName="LocationInfo/OrganizationalItem" />
+  </Dependencies>
+</PackageItem>

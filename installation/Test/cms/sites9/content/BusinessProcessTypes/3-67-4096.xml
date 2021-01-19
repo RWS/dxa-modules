@@ -1,0 +1,66 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>DXA Staging/Live</tcm:Title>
+      <tcm:Metadata />
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:BundleSchemas />
+      <tcm:CdTopologyTypeId>StagingLive</tcm:CdTopologyTypeId>
+      <tcm:Description>Publishing Process with a "Staging" and a "Live" CD Environment</tcm:Description>
+      <tcm:TargetTypes>
+        <tcm:TargetType IsEditable="true">
+          <tcm:Data>
+            <tcm:Description>Staging</tcm:Description>
+            <tcm:Title>DXA Staging</tcm:Title>
+            <tcm:Purpose>Staging</tcm:Purpose>
+            <tcm:Priority>Normal</tcm:Priority>
+            <tcm:MinimalApprovalStatus xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+          </tcm:Data>
+          <tcm:Permissions>
+            <tcm:PermissionInfo>
+              <tcm:PermissionType ID="1" Title="" />
+            </tcm:PermissionInfo>
+            <tcm:Trustee xlink:type="simple" xlink:title="Everyone" xlink:href="tcm:0-1-65568" description="All SDL Web Content Manager Users" ItemType="65568">
+              <tcm:Permission Type="1" Setting="Allow" />
+            </tcm:Trustee>
+            <tcm:Trustee xlink:type="simple" xlink:title="Editor" xlink:href="tcm:0-7-65568" description="Editor" ItemType="65568">
+              <tcm:Permission Type="1" Setting="Implicit Deny" />
+            </tcm:Trustee>
+            <tcm:Trustee xlink:type="simple" xlink:title="Site Manager" xlink:href="tcm:0-16-65568" description="Site Manager" ItemType="65568">
+              <tcm:Permission Type="1" Setting="Implicit Deny" />
+            </tcm:Trustee>
+            <tcm:Trustee xlink:type="simple" xlink:title="Developer" xlink:href="tcm:0-17-65568" description="Developer" ItemType="65568">
+              <tcm:Permission Type="1" Setting="Implicit Deny" />
+            </tcm:Trustee>
+          </tcm:Permissions>
+        </tcm:TargetType>
+        <tcm:TargetType IsEditable="true">
+          <tcm:Data>
+            <tcm:Description>DXA Live</tcm:Description>
+            <tcm:Title>DXA Live</tcm:Title>
+            <tcm:Purpose>Live</tcm:Purpose>
+            <tcm:Priority>Normal</tcm:Priority>
+            <tcm:MinimalApprovalStatus xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+          </tcm:Data>
+          <tcm:Permissions>
+            <tcm:PermissionInfo>
+              <tcm:PermissionType ID="1" Title="" />
+            </tcm:PermissionInfo>
+            <tcm:Trustee xlink:type="simple" xlink:title="Site Manager" xlink:href="tcm:0-16-65568" description="Site Manager" ItemType="65568">
+              <tcm:Permission Type="1" Setting="Allow" />
+            </tcm:Trustee>
+          </tcm:Permissions>
+        </tcm:TargetType>
+      </tcm:TargetTypes>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/110%20DXA%20Site%20Type" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemPublication" itemUrl="/webdav/110%20DXA%20Site%20Type" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="TargetTypeAccessControlEntry" itemUrl="/webdav//Everyone.tgp" linkName="TargetTypes[0]/AccessControlList/AccessControlEntries[0]/Trustee" />
+    <Dependency dependencyType="TargetTypeAccessControlEntry" itemUrl="/webdav//Editor.tgp" linkName="TargetTypes[0]/AccessControlList/AccessControlEntries[1]/Trustee" />
+    <Dependency dependencyType="TargetTypeAccessControlEntry" itemUrl="/webdav//Site%20Manager.tgp" linkName="TargetTypes[0]/AccessControlList/AccessControlEntries[2]/Trustee" />
+    <Dependency dependencyType="TargetTypeAccessControlEntry" itemUrl="/webdav//Developer.tgp" linkName="TargetTypes[0]/AccessControlList/AccessControlEntries[3]/Trustee" />
+    <Dependency dependencyType="TargetTypeAccessControlEntry" itemUrl="/webdav//Site%20Manager.tgp" linkName="TargetTypes[1]/AccessControlList/AccessControlEntries[0]/Trustee" />
+  </Dependencies>
+</PackageItem>

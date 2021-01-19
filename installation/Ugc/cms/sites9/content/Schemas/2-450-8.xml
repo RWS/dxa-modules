@@ -1,0 +1,105 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+      <tcm:Title>UGC Component Template Metadata</tcm:Title>
+      <tcm:Description>DXA MVC Metadata for Component Templates with Comments</tcm:Description>
+      <tcm:Purpose>Metadata</tcm:Purpose>
+      <tcm:NamespaceURI>uuid:81c52358-aeda-46fb-b44c-ac9e64f05c4d</tcm:NamespaceURI>
+      <tcm:RootElementName />
+      <tcm:IsTridionWebSchema>true</tcm:IsTridionWebSchema>
+      <tcm:XSD>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="uuid:81c52358-aeda-46fb-b44c-ac9e64f05c4d" xmlns:tcmi="http://www.tridion.com/ContentManager/5.0/Instance" elementFormDefault="qualified" targetNamespace="uuid:81c52358-aeda-46fb-b44c-ac9e64f05c4d">
+  <xsd:import namespace="http://www.tridion.com/ContentManager/5.0/Instance" schemaLocation="/webdav/cm_xml_inst.xsd" />
+  <xsd:include schemaLocation="/webdav/100%20Master/Building%20Blocks/Modules/Ugc/Site%20Manager/Schemas/Embedded/UGC%20Config.xsd" />
+  <xsd:annotation>
+    <xsd:appinfo>
+      <tcm:Labels xmlns:tcm="http://www.tridion.com/ContentManager/5.0">
+        <tcm:Label ElementName="controller" Metadata="true">Controller Name (If different to default: Entity) - in the format ModuleName:ControllerName - for Core controllers the prefix can be ommitted</tcm:Label>
+        <tcm:Label ElementName="action" Metadata="true">Controller Action Name (If different to default: Entity)</tcm:Label>
+        <tcm:Label ElementName="routeValues" Metadata="true">Route Values (comma separated list of name:value pairs)</tcm:Label>
+        <tcm:Label ElementName="view" Metadata="true">Entity View Name - in the format ModuleName:ViewName - for Core views the prefix can be ommitted</tcm:Label>
+        <tcm:Label ElementName="regionView" Metadata="true">Region View Name (in the format ModuleName:RegionViewName) - for Core regions the prefix can be ommitted</tcm:Label>
+        <tcm:Label ElementName="regionName" Metadata="true">Region Name (if not specified, the Region name is the same as the Region View name, excluding module name)</tcm:Label>
+        <tcm:Label ElementName="htmlClasses" Metadata="true">HTML class(es) (if multiple, separate by a space)</tcm:Label>
+        <tcm:Label ElementName="ugcConfig" Metadata="true">UGC Configuration</tcm:Label>
+      </tcm:Labels>
+    </xsd:appinfo>
+  </xsd:annotation>
+  <xsd:element name="Metadata">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="controller" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="action" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="routeValues" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="view" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="regionView" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="regionName" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="htmlClasses" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ugcConfig" minOccurs="1" maxOccurs="1" type="UgcConfigEmbedded">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+              <tcm:EmbeddedSchema xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/100%20Master/Building%20Blocks/Modules/Ugc/Site%20Manager/Schemas/Embedded/UGC%20Config.xsd" xlink:title="UGC Config" />
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>
+      </tcm:XSD>
+      <tcm:AllowedMultimediaTypes />
+      <tcm:ComponentProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:BundleProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:DeleteBundleOnProcessFinished>false</tcm:DeleteBundleOnProcessFinished>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/100%20Master" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/Ugc/Site%20Manager/Schemas" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="EmbeddedSchema" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/Ugc/Site%20Manager/Schemas/Embedded/UGC%20Config.xsd" linkName="Xsd" xpath="xsd:schema[1]/xsd:include[1]/@schemaLocation" />
+    <Dependency dependencyType="EmbeddedSchema" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/Ugc/Site%20Manager/Schemas/Embedded/UGC%20Config.xsd" linkName="Xsd" xpath="xsd:schema[1]/xsd:element[1]/xsd:complexType[1]/xsd:sequence[1]/xsd:element[8]/xsd:annotation[1]/xsd:appinfo[1]/tcm:EmbeddedSchema[1]/@xlink:href" />
+  </Dependencies>
+</PackageItem>

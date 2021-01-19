@@ -1,0 +1,27 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Navigation Configuration</tcm:Title>
+      <tcm:Type>Normal</tcm:Type>
+      <tcm:Schema xlink:type="simple" xlink:title="Navigation Configuration" xlink:href="/webdav/100%20Master/Building%20Blocks/Modules/Core/Site%20Manager/Schemas/Navigation%20Configuration.xsd" IsMandatory="false" />
+      <tcm:Content>
+        <NavigationConfiguration xmlns="http://www.sdl.com/web/schemas/core" />
+      </tcm:Content>
+      <tcm:Metadata>
+        <Metadata xmlns="http://www.sdl.com/web/schemas/core">
+          <navigationType xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/100%20Master/Navigation%20Type/Localizable%20-%20Based%20on%20Component%20content%2Fmetadata%20field%20values.tkw" xlink:title="Localizable - Based on Component content/metadata field values">Localizable - Based on Component content/metadata field values</navigationType>
+          <externalLinkTemplate>Redirect Page</externalLinkTemplate>
+          <navigationTextFieldPaths>standardMeta/name, headline</navigationTextFieldPaths>
+        </Metadata>
+      </tcm:Metadata>
+      <tcm:IsBasedOnTridionWebSchema>true</tcm:IsBasedOnTridionWebSchema>
+      <tcm:MultimediaType xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/100%20Master" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/100%20Master/Building%20Blocks/Settings/Core/Site%20Manager" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="LinkedKeyword" itemUrl="/webdav/100%20Master/Navigation%20Type/Localizable%20-%20Based%20on%20Component%20content%2Fmetadata%20field%20values.tkw" linkName="Metadata" xpath="*[local-name() = 'Metadata'][1]/*[local-name() = 'navigationType'][1]/@xlink:href" />
+    <Dependency dependencyType="Schema" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/Core/Site%20Manager/Schemas/Navigation%20Configuration.xsd" linkName="Schema" />
+  </Dependencies>
+</PackageItem>

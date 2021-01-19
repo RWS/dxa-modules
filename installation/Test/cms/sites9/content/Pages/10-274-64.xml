@@ -1,0 +1,92 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <PrimaryBlueprintParentUrl>/webdav/110%20DXA%20Site%20Type/Home/000%20Home.tpg</PrimaryBlueprintParentUrl>
+  <Data>
+    <tcm:Data>
+      <tcm:Title>000 Home</tcm:Title>
+      <tcm:FileName>index</tcm:FileName>
+      <tcm:PageTemplate IsInherited="false" xlink:type="simple" xlink:title="Home Page" xlink:href="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Modules/Core/Editor/Templates/Home%20Page.tptcmp" />
+      <tcm:ComponentPresentations>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="Homepage List" xlink:href="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Content/Homepage/Homepage%20List.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Carousel [Hero]" xlink:href="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Modules/Core%20%28Legacy%29/Carousel%20%5BHero%5D.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="Homepage Welcome" xlink:href="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Content/Homepage/Homepage%20Welcome.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Article" xlink:href="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Modules/Core/Editor/Templates/Article.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="Head Office Location" xlink:href="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Content/About/Head%20Office%20Location.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Teaser Map [3-Column]" xlink:href="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Modules/Core%20%28Legacy%29/Teaser%20Map%20%5B3-Column%5D.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="Latest News" xlink:href="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Content/Articles/Latest%20News.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="List [3-Column]" xlink:href="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Modules/Core%20%28Legacy%29/List%20%5B3-Column%5D.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="Company News Media Manager Video" xlink:href="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Content/Video/Company%20News%20Media%20Manager%20Video.png" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="YouTube Video [3-Column]" xlink:href="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Modules/Core%20%28Legacy%29/YouTube%20Video%20%5B3-Column%5D.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+      </tcm:ComponentPresentations>
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="Home Page" xlink:href="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Modules/Core/Editor/Schemas/Page%20Schemas/Home%20Page.xsd" />
+      <tcm:Metadata>
+        <Metadata xmlns="uuid:122e776e-b53b-47ef-b51e-8c4242716a7f">
+          <sitemapKeyword xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/500%20Example%20Site%20%28Legacy%29/Sitemap%20%5BNavigation%5D/000%20Home.tkw" xlink:title="000 Home">000 Home</sitemapKeyword>
+        </Metadata>
+      </tcm:Metadata>
+      <tcm:RegionSchema xlink:type="simple" xlink:title="Home Page" xlink:href="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Modules/Core/Editor/Schemas/Page%20Schemas/Home%20Page.xsd" />
+      <tcm:Regions>
+        <tcm:Region Type="EmbeddedRegionData">
+          <tcm:RegionName>Hero</tcm:RegionName>
+          <tcm:RegionSchema xlink:type="simple" xlink:title="[Hero] Region" xlink:href="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Modules/Core/Editor/Schemas/Region%20Schemas/%5BHero%5D%20Region.xsd" />
+          <tcm:Metadata />
+          <tcm:ComponentPresentations />
+          <tcm:Regions />
+        </tcm:Region>
+        <tcm:Region Type="EmbeddedRegionData">
+          <tcm:RegionName>Article</tcm:RegionName>
+          <tcm:RegionSchema xlink:type="simple" xlink:title="[Article] Region" xlink:href="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Modules/Core/Editor/Schemas/Region%20Schemas/%5BArticle%5D%20Region.xsd" />
+          <tcm:Metadata />
+          <tcm:ComponentPresentations />
+          <tcm:Regions />
+        </tcm:Region>
+        <tcm:Region Type="EmbeddedRegionData">
+          <tcm:RegionName>Further Info</tcm:RegionName>
+          <tcm:RegionSchema xlink:type="simple" xlink:title="[Multi-Column] Region" xlink:href="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Modules/Core/Editor/Schemas/Region%20Schemas/%5BMulti-Column%5D%20Region.xsd" />
+          <tcm:Metadata>
+            <Metadata xmlns="uuid:a975ac89-7964-4e7e-951d-d4b05d03b638">
+              <numberOfColumns>3</numberOfColumns>
+            </Metadata>
+          </tcm:Metadata>
+          <tcm:ComponentPresentations />
+          <tcm:Regions />
+        </tcm:Region>
+      </tcm:Regions>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/500%20Example%20Site%20%28Legacy%29" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemStructureGroup" itemUrl="/webdav/500%20Example%20Site%20%28Legacy%29/Home" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Content/Homepage/Homepage%20List.xml" linkName="ComponentPresentations[0]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Content/Homepage/Homepage%20Welcome.xml" linkName="ComponentPresentations[1]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Content/About/Head%20Office%20Location.xml" linkName="ComponentPresentations[2]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Content/Articles/Latest%20News.xml" linkName="ComponentPresentations[3]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Content/Video/Company%20News%20Media%20Manager%20Video.png" linkName="ComponentPresentations[4]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Modules/Core%20%28Legacy%29/Carousel%20%5BHero%5D.tctcmp" linkName="ComponentPresentations[0]/ComponentTemplate" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Modules/Core/Editor/Templates/Article.tctcmp" linkName="ComponentPresentations[1]/ComponentTemplate" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Modules/Core%20%28Legacy%29/Teaser%20Map%20%5B3-Column%5D.tctcmp" linkName="ComponentPresentations[2]/ComponentTemplate" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Modules/Core%20%28Legacy%29/List%20%5B3-Column%5D.tctcmp" linkName="ComponentPresentations[3]/ComponentTemplate" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Modules/Core%20%28Legacy%29/YouTube%20Video%20%5B3-Column%5D.tctcmp" linkName="ComponentPresentations[4]/ComponentTemplate" />
+    <Dependency dependencyType="LinkedKeyword" itemUrl="/webdav/500%20Example%20Site%20%28Legacy%29/Sitemap%20%5BNavigation%5D/000%20Home.tkw" linkName="Metadata" xpath="*[local-name() = 'Metadata'][1]/*[local-name() = 'sitemapKeyword'][1]/@xlink:href" />
+    <Dependency dependencyType="MetadataSchema" itemUrl="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Modules/Core/Editor/Schemas/Page%20Schemas/Home%20Page.xsd" linkName="MetadataSchema" />
+    <Dependency dependencyType="PageTemplate" itemUrl="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Modules/Core/Editor/Templates/Home%20Page.tptcmp" linkName="PageTemplate" />
+    <Dependency dependencyType="PageRegionSchema" itemUrl="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Modules/Core/Editor/Schemas/Page%20Schemas/Home%20Page.xsd" linkName="RegionSchema" />
+    <Dependency dependencyType="PageRegionSchema" itemUrl="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Modules/Core/Editor/Schemas/Region%20Schemas/%5BHero%5D%20Region.xsd" linkName="Regions[0]/RegionSchema" />
+    <Dependency dependencyType="PageRegionSchema" itemUrl="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Modules/Core/Editor/Schemas/Region%20Schemas/%5BArticle%5D%20Region.xsd" linkName="Regions[1]/RegionSchema" />
+    <Dependency dependencyType="PageRegionSchema" itemUrl="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Modules/Core/Editor/Schemas/Region%20Schemas/%5BMulti-Column%5D%20Region.xsd" linkName="Regions[2]/RegionSchema" />
+  </Dependencies>
+</PackageItem>

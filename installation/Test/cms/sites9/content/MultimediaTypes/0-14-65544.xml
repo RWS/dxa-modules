@@ -1,0 +1,40 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Real player</tcm:Title>
+      <tcm:MIMEType>video/vnd.rn-realmedia</tcm:MIMEType>
+      <tcm:FileExtensions>
+        <tcm:FileExtension>rm</tcm:FileExtension>
+        <tcm:FileExtension>ra</tcm:FileExtension>
+        <tcm:FileExtension>rv</tcm:FileExtension>
+        <tcm:FileExtension>ram</tcm:FileExtension>
+      </tcm:FileExtensions>
+    </tcm:Data>
+  </Data>
+  <ApplicationDataCollection>
+    <ApplicationData>
+      <ApplicationId>cme:MMType:16</ApplicationId>
+      <TypeId>image/png</TypeId>
+      <BinaryData>iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAKZJREFUeNpitPIIV2BgYLjPQBxYcGzHykQMUaAh/5FpbAAkB8XzkcUZ0TUCbWA8c/o0hkF5tT1YXcKErJGBeJAAcwkTujdIMYQkF0xqLoGrIdG1+AGLZ2bff0oMgHth27RCOEYWw8ZG4YNcAAIgGpmNjcbGZkAWwKYIn4EgGu4Fr6x+FBqdjUuMBV0S5jeYwooJqzH8j5KUKY0FigEjmckYnnoBAgwABIiu/RrpkE4AAAAASUVORK5CYII=</BinaryData>
+      <IsInherited>false</IsInherited>
+    </ApplicationData>
+    <ApplicationData>
+      <ApplicationId>cme:MMType:16:LastModified</ApplicationId>
+      <TypeId>DateTime</TypeId>
+      <BinaryData>MjAxOS0wNy0xNVQwMDo1Mzo1Mw==</BinaryData>
+      <IsInherited>false</IsInherited>
+    </ApplicationData>
+    <ApplicationData>
+      <ApplicationId>cme:MMType:48</ApplicationId>
+      <TypeId>image/png</TypeId>
+      <BinaryData>iVBORw0KGgoAAAANSUhEUgAAACQAAAAvCAYAAACLx2hbAAAACXBIWXMAAAsSAAALEgHS3X78AAAESElEQVRYw82Zb0gbdxjHv5FAGm7LgpL4oudck8Y3IQmYF7uzHVMRmiYw+8LV0tC1L4qCMFDftAx8JXRlL4xvJrRv2jUcFPHFfHHWMq0to+T2YrIY4otlxpadjBlarDXN8sq9sHfLxbvc78xi8kDgl8uTy+eeP9/ndxdTV2jwNwABHI/98PzRw2uVHExdocH9j2wfJoMB706tKH5Npu1vdt8GSKDMABAMeHcmvxn9vFZAE7emnz35WZDeXj1z/hK0oJpQH7t65vyl+40EpAlVTyBVKLPRM2TFHJaENLLiNlIZUdXH56Hhop3oY7xw0Q4SKLmmiIFSmT/B8QlNCKWviFRGxPzKKvjvx0kjheePHl7TBcoXiph6sAhhbUP1c2ezDa0tNgDA3692sf16t5r0VY5QvlDEjdgsNrdy8jHKakEf4wUbcMPnadOMZiK5gSUhbRiqItDknXkFzOUwiwu9naCsFoXfQWTegLKegIt2ICvmQFktuDd5HQBwrvczO4BnJOKpCbQkpOV6oawWTAx/oRmRWHwRqYwIn4fG3rsiNrdyOHXSgWiEBQCcZYKBs0yQSDw1gX58siqvoxFWE6a8mCWT6kqy+ZVV3J17CgBg/G5MDPfDkDBKqXI229Df06krBaVFPnblHIYGehQ+jP+0qr/qLKtk5VeqVvj5QvG/0A/3q2pPa4sNPg+NVEas2Im6Sr33rqgTne2SKLhJhLCiaQI5m21y6iqFuPQzf0cb0cVJ5zYE1Md45fXUg0VFWspbXjK96Ax/2X3o3MRApXqzuZXDjdisaqRKU6bXiT+9F8oLvZ3GgSirBbdHLyqgvv42jqn4ogJMavVKaZBSuyysg/G7DwkrcZe5aAduj17EzelZOWXLwjqWhXVQVgtctAOXw6zsz/EJOWIu2ikLY1bM4eb0rG50iNreRTtwb/I67sytYFlYV7S7NNXVTFjbQDTCyjD5QhH9PZ26aSXaflBWC8avhBANd2F+ZRWJ5B9EU31JSOPu3FPkC0UwfjeGBrp1v2Nog9baYsPQQDeGBrrlgZoVc3I7u2gHYvHHcnpj8ccAgFMnHRj/KkT0G+ajClhri+29+ipTwAZOVyWMZgDYKcDO8Ym6bq53CrDLQG+L+3aOF+oK5PzgAKjedx3GasjfQR+qkfLUSj7VHiea9j5PG6IRRvHS8qn2uC7QwswYACA8EkN4JAa1Giv1WZgZk5W53Ec6frBmjrb9+L+M4wXkC/8gGmHB8YLufd0xACVAWU8gGmHA8Qms/S4evai16uYoUKQ6ZyYNu1b3+TtoAKxiXY3ImkmvUKtTfB4aPg+tWNcMiOMFcHwCCzNj8rrUwiOxshSzVae4yWin1NqajHZKrc3UFRrc9/g+fbm9h/Y6D9eXmdQv7Q03XBtz2rfZTS/ufzda15RN3Jp+kQHaj+VJPolJD6xMx/xfh54lTa6PPwk2Wg391UhA/wL+Cd6XLD3eHAAAAABJRU5ErkJggg==</BinaryData>
+      <IsInherited>false</IsInherited>
+    </ApplicationData>
+    <ApplicationData>
+      <ApplicationId>cme:MMType:48:LastModified</ApplicationId>
+      <TypeId>DateTime</TypeId>
+      <BinaryData>MjAxOS0wNy0xNVQwMDo1Mzo1Mw==</BinaryData>
+      <IsInherited>false</IsInherited>
+    </ApplicationData>
+  </ApplicationDataCollection>
+</PackageItem>

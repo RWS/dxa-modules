@@ -1,0 +1,33 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Test Component</tcm:Title>
+      <tcm:Type>Normal</tcm:Type>
+      <tcm:Schema xlink:type="simple" xlink:title="Test Schema" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/Test%20Schema.xsd" IsMandatory="false" />
+      <tcm:Content>
+        <Content xmlns="uuid:f0f3b622-a181-4881-b832-65c9517f7630">
+          <SingleLineText>This is a single line text field</SingleLineText>
+          <SingleLineText>Second value</SingleLineText>
+          <MultiLineText>This is a multi line text field.
+Second line.</MultiLineText>
+          <RichText>This is a <strong xmlns="http://www.w3.org/1999/xhtml">rich</strong> <em xmlns="http://www.w3.org/1999/xhtml">text</em> field.</RichText>
+          <Number>666</Number>
+          <Number>666.666</Number>
+          <Date>1970-12-16T11:22:33</Date>
+          <Date>2016-01-05T21:40:10</Date>
+          <ExternalLink xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.sdl.com" />
+          <ExternalLink xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/401%20Automated%20Test%20Parent/TSI-811%20Test%20Category" xlink:title="TSI-811 Test Category" />
+        </Content>
+      </tcm:Content>
+      <tcm:Metadata />
+      <tcm:IsBasedOnTridionWebSchema>true</tcm:IsBasedOnTridionWebSchema>
+      <tcm:MultimediaType xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="LinkedCategory" itemUrl="/webdav/401%20Automated%20Test%20Parent/TSI-811%20Test%20Category" linkName="Content" xpath="*[local-name() = 'Content'][1]/*[local-name() = 'ExternalLink'][2]/@xlink:href" />
+    <Dependency dependencyType="Schema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/Test%20Schema.xsd" linkName="Schema" />
+  </Dependencies>
+</PackageItem>

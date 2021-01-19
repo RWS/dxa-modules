@@ -1,0 +1,125 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+      <tcm:Title>TSI-1946 Schema</tcm:Title>
+      <tcm:Description>TSI-1946 Schema</tcm:Description>
+      <tcm:Purpose>Component</tcm:Purpose>
+      <tcm:NamespaceURI>uuid:af7a3c0a-8968-4db7-b760-a133671373ca</tcm:NamespaceURI>
+      <tcm:RootElementName>TSI1946</tcm:RootElementName>
+      <tcm:IsTridionWebSchema>true</tcm:IsTridionWebSchema>
+      <tcm:XSD>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="uuid:af7a3c0a-8968-4db7-b760-a133671373ca" xmlns:tcmi="http://www.tridion.com/ContentManager/5.0/Instance" xmlns:category="tcm:0-6-1/Categories.xsd" elementFormDefault="qualified" targetNamespace="uuid:af7a3c0a-8968-4db7-b760-a133671373ca">
+  <xsd:import namespace="http://www.tridion.com/ContentManager/5.0/Instance" schemaLocation="/webdav/cm_xml_inst.xsd" />
+  <xsd:import namespace="tcm:0-6-1/Categories.xsd" schemaLocation="/webdav/401%20Automated%20Test%20Parent/Categories.xsd" />
+  <xsd:annotation>
+    <xsd:appinfo>
+      <tcm:Labels xmlns:tcm="http://www.tridion.com/ContentManager/5.0">
+        <tcm:Label ElementName="singleLineText" Metadata="false">singleLineText</tcm:Label>
+        <tcm:Label ElementName="multiLineText" Metadata="false">multiLineText</tcm:Label>
+        <tcm:Label ElementName="richText" Metadata="false">richText</tcm:Label>
+        <tcm:Label ElementName="number" Metadata="false">number</tcm:Label>
+        <tcm:Label ElementName="date" Metadata="false">date</tcm:Label>
+        <tcm:Label ElementName="keyword" Metadata="false">keyword</tcm:Label>
+        <tcm:Label ElementName="compLink" Metadata="false">compLink</tcm:Label>
+      </tcm:Labels>
+    </xsd:appinfo>
+  </xsd:annotation>
+  <xsd:element name="TSI1946">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="singleLineText" minOccurs="0" maxOccurs="unbounded" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <tcm:ExtensionXml xmlns:tcm="http://www.tridion.com/ContentManager/5.0" />
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="multiLineText" minOccurs="0" maxOccurs="unbounded" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <tcm:ExtensionXml xmlns:tcm="http://www.tridion.com/ContentManager/5.0" />
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="richText" minOccurs="0" maxOccurs="unbounded" type="tcmi:XHTML">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <tcm:ExtensionXml xmlns:tcm="http://www.tridion.com/ContentManager/5.0" />
+              <tcm:Size xmlns:tcm="http://www.tridion.com/ContentManager/5.0">3</tcm:Size>
+              <tcm:FilterXSLT xmlns:tcm="http://www.tridion.com/ContentManager/5.0">
+                <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="" version="1.0">
+            <xsl:output omit-xml-declaration="yes" method="xml" cdata-section-elements="script" />
+            <xsl:template name="FormattingFeatures">
+              <FormattingFeatures xmlns="http://www.tridion.com/ContentManager/5.2/FormatArea">
+                <Doctype>Transitional</Doctype>
+                <AccessibilityLevel>0</AccessibilityLevel>
+                <DisallowedActions />
+                <DisallowedStyles />
+              </FormattingFeatures>
+            </xsl:template>
+            <xsl:template match="/ | node() | @*">
+              <xsl:copy>
+                <xsl:apply-templates select="node() | @*" />
+              </xsl:copy>
+            </xsl:template>
+            <xsl:template match="*[      (self::br or self::p or self::div)     and      normalize-space(translate(., ' ', '')) = ''     and      not(@*)     and      not(processing-instruction())     and      not(comment())     and      not(*[not(self::br) or @* or * or node()])     and      not(following::node()[not(         (self::text() or self::br or self::p or self::div)        and         normalize-space(translate(., ' ', '')) = ''        and         not(@*)        and         not(processing-instruction())        and         not(comment())        and         not(*[not(self::br) or @* or * or node()])       )])     ]">
+              <!-- ignore all paragraphs and line-breaks at the end that have nothing but (non-breaking) spaces and line breaks -->
+            </xsl:template>
+            <xsl:template match="br[parent::div and not(preceding-sibling::node()) and not(following-sibling::node())]">
+              <!-- Chrome generates <div><br/></div>. Renders differently in different browsers. Replace it with a non-breaking space -->
+              <xsl:text> </xsl:text>
+            </xsl:template>
+          </xsl:stylesheet>
+              </tcm:FilterXSLT>
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="number" minOccurs="0" maxOccurs="unbounded" type="xsd:decimal">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <tcm:ExtensionXml xmlns:tcm="http://www.tridion.com/ContentManager/5.0" />
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="date" minOccurs="0" maxOccurs="unbounded" type="xsd:dateTime">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <tcm:ExtensionXml xmlns:tcm="http://www.tridion.com/ContentManager/5.0" />
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="keyword" minOccurs="0" maxOccurs="1" type="category:testTaxonomy2">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <tcm:ExtensionXml xmlns:tcm="http://www.tridion.com/ContentManager/5.0" />
+              <tcm:Size xmlns:tcm="http://www.tridion.com/ContentManager/5.0">1</tcm:Size>
+              <tcm:listtype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">select</tcm:listtype>
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="compLink" minOccurs="0" maxOccurs="unbounded" type="tcmi:SimpleLink">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <tcm:ExtensionXml xmlns:tcm="http://www.tridion.com/ContentManager/5.0" />
+              <tcm:linktype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">ComponentLink</tcm:linktype>
+              <tcm:AllowMultimediaLinks xmlns:tcm="http://www.tridion.com/ContentManager/5.0">false</tcm:AllowMultimediaLinks>
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>
+      </tcm:XSD>
+      <tcm:AllowedMultimediaTypes />
+      <tcm:ComponentProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:BundleProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:DeleteBundleOnProcessFinished>false</tcm:DeleteBundleOnProcessFinished>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="Category" itemUrl="/webdav/401%20Automated%20Test%20Parent/Test%20Taxonomy%202%20%28not%20Navigation%29" linkName="Xsd" />
+  </Dependencies>
+</PackageItem>

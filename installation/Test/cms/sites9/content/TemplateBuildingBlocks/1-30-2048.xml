@@ -1,0 +1,341 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Default Dreamweaver Component Design</tcm:Title>
+      <tcm:Type>DreamweaverTemplate</tcm:Type>
+      <tcm:Content>
+        <tcm:PublisherScript>
+&lt;table cellpadding="0" cellspacing="0" style="font-size:small; font-family: Verdana; color:#212326; border-spacing:0;margin-left:5%; width:90%;" xmlns:tridion="http://www.tridion.com/ContentManager/5.0"&gt;
+  &lt;colgroup width="30%" /&gt;
+  &lt;colgroup width="70%" /&gt;
+
+  &lt;tr&gt;
+    &lt;td colspan="2"&gt;
+      &lt;h2 style="text-align: left; background-color:#C3CCD9; margin:0; padding:0; border:0; font-size:medium" &gt;
+        Component &lt;strong&gt;'@@Component.Title@@'&lt;/strong&gt;
+      &lt;/h2&gt;
+      &lt;p style="text-align: left; background-color:#C3CCD9; margin:0; padding:0; border:0; font-size:small" &gt;
+        Using Schema &lt;strong&gt;'@@Component.Schema.Title@@'&lt;/strong&gt;, @@Component.Description@@
+      &lt;/p&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+
+  &lt;!-- TemplateBeginIf cond="ComponentType = 'Normal'" --&gt;
+  &lt;!-- TemplateParam name="Field" type="boolean" value="true" --&gt;
+  &lt;tr&gt;
+    &lt;td colspan="2"&gt;
+      &lt;h3 style="text-align: left; background-color:#FFFFFF; margin:0; padding:0; border:0; font-size:small; color:#2972CC"&gt;
+        &lt;strong&gt;Component Fields&lt;/strong&gt;
+      &lt;/h3&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;!-- TemplateBeginRepeat name="Component.Fields" --&gt;
+  &lt;tr style="background-color:&lt;!-- TemplateBeginIf cond="(TemplateRepeatIndex % 2) = 0" --&gt;#E1E3E5&lt;!-- TemplateEndIf --&gt;&lt;!-- TemplateBeginIf cond="(TemplateRepeatIndex % 2) = 1" --&gt;#F5F7FA&lt;!-- TemplateEndIf --&gt;"&gt;
+    &lt;td valign="top" title="@@GetFieldMetadata(Name)@@"&gt;@@Field.Name@@&lt;/td&gt;
+    &lt;td&gt;
+      @@FieldStartMarker(FieldPath)@@
+      &lt;!-- TemplateBeginRepeat name="Field.Values" --&gt;
+      @@FieldValueStartMarker(TemplateRepeatIndex)@@
+      &lt;!-- Display field value based on type --&gt;
+      &lt;!-- TemplateBeginIf cond="Field.ContentType = 'text/html'" --&gt;
+      @@Field@@
+      &lt;!-- TemplateEndIf --&gt;
+      &lt;!-- TemplateBeginIf cond="Field.ContentType = 'tridion/itemlink'" --&gt;
+      &lt;!-- TemplateBeginIf cond="('@@GetComponentMimeType("${Field}")@@' = 'Jpeg image') || (MimeType  = 'Png image') || (MimeType  = 'Gif image') || (MimeType = 'Bitmap image')" --&gt;
+      &lt;img src="${Field}" tridion:type="Multimedia" alt="${Field.Properties.LinkTitle}"/&gt;
+      &lt;!-- TemplateEndIf --&gt;
+      &lt;!-- TemplateBeginIf cond="('@@GetComponentMimeType("${Field}")@@' != 'Jpeg image') &amp;&amp; (MimeType  != 'Png image') &amp;&amp; (MimeType  != 'Gif image') &amp;&amp; (MimeType  != 'Bitmap image')  &amp;&amp; (MimeType  != 'Component')" --&gt;
+      &lt;a href="${Field}" tridion:type="Multimedia"&gt;${Field.Properties.LinkTitle}&lt;/a&gt;
+      &lt;!-- TemplateEndIf --&gt;
+      &lt;!-- TemplateBeginIf cond="('@@GetComponentMimeType("${Field}")@@' != 'Jpeg image') &amp;&amp; (MimeType  != 'Png image') &amp;&amp; (MimeType  != 'Gif image') &amp;&amp; (MimeType  != 'Bitmap image')  &amp;&amp; (MimeType  = 'Component')" --&gt;
+      &lt;a tridion:href="${Field}"&gt;${Field}&lt;/a&gt;
+      &lt;!-- TemplateEndIf --&gt;
+      &lt;!-- TemplateEndIf --&gt;
+      &lt;!-- TemplateBeginIf cond="Field.ContentType = 'tridion/externallink'" --&gt;
+      &lt;a href="${Field}"&gt;${Field}&lt;/a&gt;
+      &lt;!-- TemplateEndIf --&gt;
+      &lt;!-- TemplateBeginIf cond="(Field.ContentType != 'text/html') &amp;&amp; (Field.ContentType != 'tridion/itemlink') &amp;&amp; (Field.ContentType != 'tridion/externallink') &amp;&amp; (Field.ContentType != 'tridion/field')" --&gt;
+      @@Field@@&lt;!-- Display something that is not handled above and not a special 'field' as is --&gt;
+      &lt;!-- TemplateEndIf --&gt;
+      &lt;!-- TemplateBeginIf cond="CollectionLength('Field.Fields') &gt; 0" --&gt;
+      &lt;table border="0" cellspacing="0" cellpadding="3"&gt;
+        &lt;!-- TemplateBeginRepeat name="Field.Fields" --&gt;
+        &lt;tr style="background-color:&lt;!-- TemplateBeginIf cond="(TemplateRepeatIndex % 2) = 0" --&gt;#E1E3E5&lt;!-- TemplateEndIf --&gt;&lt;!-- TemplateBeginIf cond="(TemplateRepeatIndex % 2) = 1" --&gt;#F5F7FA&lt;!-- TemplateEndIf --&gt;"&gt;
+          &lt;td valign="top" title="@@GetFieldMetadata(Name)@@"&gt;@@Field.Name@@&lt;/td&gt;
+          &lt;td&gt;
+            &lt;!-- recurse --&gt;
+            @@FieldStartMarker(FieldPath)@@
+            &lt;!-- TemplateBeginRepeat name="Field.Values" --&gt;
+            @@FieldValueStartMarker(TemplateRepeatIndex)@@
+            &lt;!-- Display field value based on type --&gt;
+            &lt;!-- TemplateBeginIf cond="Field.ContentType = 'text/html'" --&gt;
+            @@Field@@
+            &lt;!-- TemplateEndIf --&gt;
+            &lt;!-- TemplateBeginIf cond="Field.ContentType = 'tridion/itemlink'" --&gt;
+            &lt;!-- TemplateBeginIf cond="('@@GetComponentMimeType("${Field}")@@' = 'Jpeg image') || (MimeType  = 'Png image') || (MimeType  = 'Gif image') || (MimeType = 'Bitmap image')" --&gt;
+            &lt;img src="${Field}" tridion:type="Multimedia" alt="${Field.Properties.LinkTitle}"/&gt;
+            &lt;!-- TemplateEndIf --&gt;
+            &lt;!-- TemplateBeginIf cond="('@@GetComponentMimeType("${Field}")@@' != 'Jpeg image') &amp;&amp; (MimeType  != 'Png image') &amp;&amp; (MimeType  != 'Gif image') &amp;&amp; (MimeType  != 'Bitmap image')  &amp;&amp; (MimeType  != 'Component') " --&gt;
+            &lt;a href="${Field}" tridion:type="Multimedia"&gt;${Field.Properties.LinkTitle}&lt;/a&gt;
+            &lt;!-- TemplateEndIf --&gt;
+            &lt;!-- TemplateBeginIf cond="('@@GetComponentMimeType("${Field}")@@' != 'Jpeg image') &amp;&amp; (MimeType  != 'Png image') &amp;&amp; (MimeType  != 'Gif image') &amp;&amp; (MimeType  != 'Bitmap image')  &amp;&amp; (MimeType  = 'Component') " --&gt;
+            &lt;a tridion:href="${Field}"&gt;${Field}&lt;/a&gt;
+            &lt;!-- TemplateEndIf --&gt;
+            &lt;!-- TemplateEndIf --&gt;
+            &lt;!-- TemplateBeginIf cond="Field.ContentType = 'tridion/externallink'" --&gt;
+            &lt;a href="${Field}"&gt;${Field}&lt;/a&gt;
+            &lt;!-- TemplateEndIf --&gt;
+            &lt;!-- TemplateBeginIf cond="(Field.ContentType != 'text/html') &amp;&amp; (Field.ContentType != 'tridion/itemlink') &amp;&amp; (Field.ContentType != 'tridion/externallink') &amp;&amp; (Field.ContentType != 'tridion/field')" --&gt;
+            @@Field@@&lt;!-- Display something that is not handled above and not a special 'field' as is --&gt;
+            &lt;!-- TemplateEndIf --&gt;
+            
+            &lt;!-- TemplateBeginIf cond="CollectionLength('Field.Fields') &gt; 0" --&gt;
+            &lt;table border="0" cellspacing="0" cellpadding="3"&gt;
+              &lt;!-- TemplateBeginRepeat name="Field.Fields" --&gt;
+              &lt;tr style="background-color:&lt;!-- TemplateBeginIf cond="(TemplateRepeatIndex % 2) = 0" --&gt;#E1E3E5&lt;!-- TemplateEndIf --&gt;&lt;!-- TemplateBeginIf cond="(TemplateRepeatIndex % 2) = 1" --&gt;#F5F7FA&lt;!-- TemplateEndIf --&gt;"&gt;
+                &lt;td valign="top" title="@@GetFieldMetadata(Name)@@"&gt;@@Field.Name@@&lt;/td&gt;
+                &lt;td&gt;
+                  &lt;!-- recurse --&gt;
+                  @@FieldStartMarker(FieldPath)@@
+                  &lt;!-- TemplateBeginRepeat name="Field.Values" --&gt;
+                  @@FieldValueStartMarker(TemplateRepeatIndex)@@
+                  &lt;!-- Display field value based on type --&gt;
+                  &lt;!-- TemplateBeginIf cond="Field.ContentType = 'text/html'" --&gt;
+                  @@Field@@
+                  &lt;!-- TemplateEndIf --&gt;
+                  &lt;!-- TemplateBeginIf cond="Field.ContentType = 'tridion/itemlink'" --&gt;
+                  &lt;!-- TemplateBeginIf cond="('@@GetComponentMimeType("${Field}")@@' = 'Jpeg image') || (MimeType  = 'Png image') || (MimeType  = 'Gif image') || (MimeType = 'Bitmap image')" --&gt;
+                  &lt;img src="${Field}" tridion:type="Multimedia" alt="${Field.Properties.LinkTitle}"/&gt;
+                  &lt;!-- TemplateEndIf --&gt;
+                  &lt;!-- TemplateBeginIf cond="('@@GetComponentMimeType("${Field}")@@' != 'Jpeg image') &amp;&amp; (MimeType  != 'Png image') &amp;&amp; (MimeType  != 'Gif image') &amp;&amp; (MimeType  != 'Bitmap image')  &amp;&amp; (MimeType  != 'Component') " --&gt;
+                  &lt;a href="${Field}" tridion:type="Multimedia"&gt;${Field.Properties.LinkTitle}&lt;/a&gt;
+                  &lt;!-- TemplateEndIf --&gt;
+                  &lt;!-- TemplateBeginIf cond="('@@GetComponentMimeType("${Field}")@@' != 'Jpeg image') &amp;&amp; (MimeType  != 'Png image') &amp;&amp; (MimeType  != 'Gif image') &amp;&amp; (MimeType  != 'Bitmap image')  &amp;&amp; (MimeType  = 'Component') " --&gt;
+                  &lt;a tridion:href="${Field}"&gt;${Field}&lt;/a&gt;
+                  &lt;!-- TemplateEndIf --&gt;
+                  &lt;!-- TemplateEndIf --&gt;
+                  &lt;!-- TemplateBeginIf cond="Field.ContentType = 'tridion/externallink'" --&gt;
+                  &lt;a href="${Field}"&gt;${Field}&lt;/a&gt;
+                  &lt;!-- TemplateEndIf --&gt;
+                  &lt;!-- TemplateBeginIf cond="(Field.ContentType != 'text/html') &amp;&amp; (Field.ContentType != 'tridion/itemlink') &amp;&amp; (Field.ContentType != 'tridion/externallink') &amp;&amp; (Field.ContentType != 'tridion/field')" --&gt;
+                  @@Field@@&lt;!-- Display something that is not handled above and not a special 'field' as is --&gt;
+                  &lt;!-- TemplateEndIf --&gt;
+                  &lt;!-- TemplateBeginIf cond="CollectionLength('Field.Fields') &gt; 0" --&gt;
+                  &lt;table border="0" cellspacing="0" cellpadding="3"&gt;
+                    &lt;!-- TemplateBeginRepeat name="Field.Fields" --&gt;
+                    &lt;tr style="background-color:&lt;!-- TemplateBeginIf cond="(TemplateRepeatIndex % 2) = 0" --&gt;#E1E3E5&lt;!-- TemplateEndIf --&gt;&lt;!-- TemplateBeginIf cond="(TemplateRepeatIndex % 2) = 1" --&gt;#F5F7FA&lt;!-- TemplateEndIf --&gt;"&gt;
+                      &lt;td valign="top" title="@@GetFieldMetadata(Name)@@"&gt;@@Field.Name@@&lt;/td&gt;
+                      &lt;td&gt;
+                        @@FieldStartMarker(FieldPath)@@
+                        &lt;!-- Could recurse here, instead print value --&gt;
+                        @@FieldValueStartMarker(TemplateRepeatIndex)@@
+                        @@Field.Value@@
+                        @@FieldValueEndMarker()@@
+                        @@FieldEndMarker()@@
+                      &lt;/td&gt;
+                    &lt;/tr&gt;
+                    &lt;!-- TemplateEndRepeat --&gt;
+                  &lt;/table&gt;
+                  &lt;!-- TemplateEndIf --&gt;
+                  @@FieldValueEndMarker()@@
+                  &lt;!-- TemplateEndRepeat --&gt;
+                  @@FieldEndMarker()@@
+                &lt;/td&gt;
+              &lt;/tr&gt;
+              &lt;!-- TemplateEndRepeat --&gt;
+            &lt;/table&gt;
+            &lt;!-- TemplateEndIf --&gt;
+            @@FieldValueEndMarker()@@
+            &lt;!-- TemplateEndRepeat --&gt;
+            @@FieldEndMarker()@@
+          &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;!-- TemplateEndRepeat --&gt;
+      &lt;/table&gt;
+      &lt;!-- TemplateEndIf --&gt;
+      @@FieldValueEndMarker()@@
+      &lt;!-- TemplateEndRepeat --&gt;
+      @@FieldEndMarker()@@
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;!-- TemplateEndRepeat --&gt;
+  &lt;!-- TemplateEndIf --&gt;
+
+  &lt;!-- TemplateBeginRepeat name="Component.Metadata" --&gt;
+  &lt;!-- TemplateBeginIf cond="TemplateRepeatIndex == 0" --&gt;
+  &lt;tr&gt;
+    &lt;td colspan="2"&gt;
+      &lt;h3 style="text-align: left; background-color:#FFFFFF; margin:0; padding:0; border:0; font-size:small; color:#2972CC"&gt;
+        &lt;strong&gt;Metadata Fields&lt;/strong&gt;
+      &lt;/h3&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;!-- TemplateEndIf --&gt;
+  &lt;tr style="background-color:&lt;!-- TemplateBeginIf cond="(TemplateRepeatIndex % 2) = 0" --&gt;#E1E3E5&lt;!-- TemplateEndIf --&gt;&lt;!-- TemplateBeginIf cond="(TemplateRepeatIndex % 2) = 1" --&gt;#F5F7FA&lt;!-- TemplateEndIf --&gt;"&gt;
+    &lt;td valign="top" title="@@GetFieldMetadata(Name, true)@@"&gt;@@Field.Name@@&lt;/td&gt;
+    &lt;td&gt;
+      @@FieldStartMarker(FieldPath)@@
+      &lt;!-- TemplateBeginRepeat name="Field.Values" --&gt;
+      @@FieldValueStartMarker(TemplateRepeatIndex)@@
+      &lt;!-- Display field value based on type --&gt;
+      &lt;!-- TemplateBeginIf cond="Field.ContentType = 'text/html'" --&gt;
+      @@Field@@
+      &lt;!-- TemplateEndIf --&gt;
+      &lt;!-- TemplateBeginIf cond="Field.ContentType = 'tridion/itemlink'" --&gt;
+      &lt;!-- TemplateBeginIf cond="('@@GetComponentMimeType("${Field}")@@' = 'Jpeg image') || (MimeType  = 'Png image') || (MimeType  = 'Gif image') || (MimeType = 'Bitmap image')" --&gt;
+      &lt;img src="${Field}" tridion:type="Multimedia" alt="${Field.Properties.LinkTitle}"/&gt;
+      &lt;!-- TemplateEndIf --&gt;
+      &lt;!-- TemplateBeginIf cond="('@@GetComponentMimeType("${Field}")@@' != 'Jpeg image') &amp;&amp; (MimeType  != 'Png image') &amp;&amp; (MimeType  != 'Gif image') &amp;&amp; (MimeType  != 'Bitmap image')  &amp;&amp; (MimeType  != 'Component') " --&gt;
+      &lt;a href="${Field}" tridion:type="Multimedia"&gt;${Field.Properties.LinkTitle}&lt;/a&gt;
+      &lt;!-- TemplateEndIf --&gt;
+      &lt;!-- TemplateBeginIf cond="('@@GetComponentMimeType("${Field}")@@' != 'Jpeg image') &amp;&amp; (MimeType  != 'Png image') &amp;&amp; (MimeType  != 'Gif image') &amp;&amp; (MimeType  != 'Bitmap image')  &amp;&amp; (MimeType  = 'Component') " --&gt;
+      &lt;a tridion:href="${Field}"&gt;${Field}&lt;/a&gt;
+      &lt;!-- TemplateEndIf --&gt;
+      &lt;!-- TemplateEndIf --&gt;
+      &lt;!-- TemplateBeginIf cond="Field.ContentType = 'tridion/externallink'" --&gt;
+      &lt;a href="${Field}"&gt;${Field}&lt;/a&gt;
+      &lt;!-- TemplateEndIf --&gt;
+      &lt;!-- TemplateBeginIf cond="(Field.ContentType != 'text/html') &amp;&amp; (Field.ContentType != 'tridion/itemlink') &amp;&amp; (Field.ContentType != 'tridion/externallink') &amp;&amp; (Field.ContentType != 'tridion/field')" --&gt;
+      @@Field@@&lt;!-- Display something that is not handled above and not a special 'field' as is --&gt;
+      &lt;!-- TemplateEndIf --&gt;
+      &lt;!-- TemplateBeginIf cond="CollectionLength('Field.Fields') &gt; 0" --&gt;
+      &lt;table border="0" cellspacing="0" cellpadding="3"&gt;
+        &lt;!-- TemplateBeginRepeat name="Field.Fields" --&gt;
+        &lt;tr style="background-color:"
+          &lt;!-- TemplateBeginIf cond="(TemplateRepeatIndex % 2) = 0" --&gt;#E1E3E5&lt;!-- TemplateEndIf --&gt;&lt;!-- TemplateBeginIf cond="(TemplateRepeatIndex % 2) = 1" --&gt;#F5F7FA&lt;!-- TemplateEndIf --&gt;"&gt;
+          &lt;td valign="top" title="@@GetFieldMetadata(Name)@@"&gt;@@Field.Name@@&lt;/td&gt;
+          &lt;td&gt;
+            &lt;!-- recurse --&gt;
+            @@FieldStartMarker(FieldPath)@@
+            &lt;!-- TemplateBeginRepeat name="Field.Values" --&gt;
+            @@FieldValueStartMarker(TemplateRepeatIndex)@@
+            &lt;!-- Display field value based on type --&gt;
+            &lt;!-- TemplateBeginIf cond="Field.ContentType = 'text/html'" --&gt;
+            @@Field@@
+            &lt;!-- TemplateEndIf --&gt;
+            &lt;!-- TemplateBeginIf cond="Field.ContentType = 'tridion/itemlink'" --&gt;
+            &lt;!-- TemplateBeginIf cond="('@@GetComponentMimeType("${Field}")@@' = 'Jpeg image') || (MimeType  = 'Png image') || (MimeType  = 'Gif image') || (MimeType = 'Bitmap image')" --&gt;
+            &lt;img src="${Field}" tridion:type="Multimedia" alt="${Field.Properties.LinkTitle}"/&gt;
+            &lt;!-- TemplateEndIf --&gt;
+            &lt;!-- TemplateBeginIf cond="('@@GetComponentMimeType("${Field}")@@' != 'Jpeg image') &amp;&amp; (MimeType  != 'Png image') &amp;&amp; (MimeType  != 'Gif image') &amp;&amp; (MimeType  != 'Bitmap image')  &amp;&amp; (MimeType  != 'Component') " --&gt;
+            &lt;a href="${Field}" tridion:type="Multimedia"&gt;${Field.Properties.LinkTitle}&lt;/a&gt;
+            &lt;!-- TemplateEndIf --&gt;
+            &lt;!-- TemplateBeginIf cond="('@@GetComponentMimeType("${Field}")@@' != 'Jpeg image') &amp;&amp; (MimeType  != 'Png image') &amp;&amp; (MimeType  != 'Gif image') &amp;&amp; (MimeType  != 'Bitmap image')  &amp;&amp; (MimeType  = 'Component') " --&gt;
+            &lt;a tridion:href="${Field}"&gt;${Field}&lt;/a&gt;
+            &lt;!-- TemplateEndIf --&gt;
+            &lt;!-- TemplateEndIf --&gt;
+            &lt;!-- TemplateBeginIf cond="Field.ContentType = 'tridion/externallink'" --&gt;
+            &lt;a href="${Field}"&gt;${Field}&lt;/a&gt;
+            &lt;!-- TemplateEndIf --&gt;
+            &lt;!-- TemplateBeginIf cond="(Field.ContentType != 'text/html') &amp;&amp; (Field.ContentType != 'tridion/itemlink') &amp;&amp; (Field.ContentType != 'tridion/externallink') &amp;&amp; (Field.ContentType != 'tridion/field')" --&gt;
+            @@Field@@&lt;!-- Display something that is not handled above and not a special 'field' as is --&gt;
+            &lt;!-- TemplateEndIf --&gt;
+            &lt;!-- TemplateBeginIf cond="CollectionLength('Field.Fields') &gt; 0" --&gt;
+            &lt;table border="0" cellspacing="0" cellpadding="3"&gt;
+              &lt;!-- TemplateBeginRepeat name="Field.Fields" --&gt;
+              &lt;tr style="background-color:"
+                &lt;!-- TemplateBeginIf cond="(TemplateRepeatIndex % 2) = 0" --&gt;#E1E3E5&lt;!-- TemplateEndIf --&gt;&lt;!-- TemplateBeginIf cond="(TemplateRepeatIndex % 2) = 1" --&gt;#F5F7FA&lt;!-- TemplateEndIf --&gt;"&gt;
+                &lt;td valign="top" title="@@GetFieldMetadata(Name)@@"&gt;@@Field.Name@@&lt;/td&gt;
+                &lt;td&gt;
+                  &lt;!-- recurse --&gt;
+                  @@FieldStartMarker(FieldPath)@@
+                  &lt;!-- TemplateBeginRepeat name="Field.Values" --&gt;
+                  @@FieldValueStartMarker(TemplateRepeatIndex)@@
+                  &lt;!-- Display field value based on type --&gt;
+                  &lt;!-- TemplateBeginIf cond="Field.ContentType = 'text/html'" --&gt;
+                  @@Field@@
+                  &lt;!-- TemplateEndIf --&gt;
+                  &lt;!-- TemplateBeginIf cond="Field.ContentType = 'tridion/itemlink'" --&gt;
+                  &lt;!-- TemplateBeginIf cond="('@@GetComponentMimeType("${Field}")@@' = 'Jpeg image') || (MimeType  = 'Png image') || (MimeType  = 'Gif image') || (MimeType = 'Bitmap image')" --&gt;
+                  &lt;img src="${Field}" tridion:type="Multimedia" alt="${Field.Properties.LinkTitle}"/&gt;
+                  &lt;!-- TemplateEndIf --&gt;
+                  &lt;!-- TemplateBeginIf cond="('@@GetComponentMimeType("${Field}")@@' != 'Jpeg image') &amp;&amp; (MimeType  != 'Png image') &amp;&amp; (MimeType  != 'Gif image') &amp;&amp; (MimeType  != 'Bitmap image')  &amp;&amp; (MimeType  != 'Component') " --&gt;
+                  &lt;a href="${Field}" tridion:type="Multimedia"&gt;${Field.Properties.LinkTitle}&lt;/a&gt;
+                  &lt;!-- TemplateEndIf --&gt;
+                  &lt;!-- TemplateBeginIf cond="('@@GetComponentMimeType("${Field}")@@' != 'Jpeg image') &amp;&amp; (MimeType  != 'Png image') &amp;&amp; (MimeType  != 'Gif image') &amp;&amp; (MimeType  != 'Bitmap image')  &amp;&amp; (MimeType  = 'Component') " --&gt;
+                  &lt;a tridion:href="${Field}"&gt;${Field}&lt;/a&gt;
+                  &lt;!-- TemplateEndIf --&gt;
+                  &lt;!-- TemplateEndIf --&gt;
+                  &lt;!-- TemplateBeginIf cond="Field.ContentType = 'tridion/externallink'" --&gt;
+                  &lt;a href="${Field}"&gt;${Field}&lt;/a&gt;
+                  &lt;!-- TemplateEndIf --&gt;
+                  &lt;!-- TemplateBeginIf cond="(Field.ContentType != 'text/html') &amp;&amp; (Field.ContentType != 'tridion/itemlink') &amp;&amp; (Field.ContentType != 'tridion/externallink') &amp;&amp; (Field.ContentType != 'tridion/field')" --&gt;
+                  @@Field@@&lt;!-- Display something that is not handled above and not a special 'field' as is --&gt;
+                  &lt;!-- TemplateEndIf --&gt;
+                  &lt;!-- TemplateBeginIf cond="CollectionLength('Field.Fields') &gt; 0" --&gt;
+                  &lt;table border="0" cellspacing="0" cellpadding="3"&gt;
+                    &lt;!-- TemplateBeginRepeat name="Field.Fields" --&gt;
+                    &lt;tr style="background-color:"
+                      &lt;!-- TemplateBeginIf cond="(TemplateRepeatIndex % 2) = 0" --&gt;#E1E3E5&lt;!-- TemplateEndIf --&gt;&lt;!-- TemplateBeginIf cond="(TemplateRepeatIndex % 2) = 1" --&gt;#F5F7FA&lt;!-- TemplateEndIf --&gt;"&gt;
+                      &lt;td valign="top" title="@@GetFieldMetadata(Name)@@"&gt;@@Field.Name@@&lt;/td&gt;
+                      &lt;td&gt;
+                        @@FieldStartMarker(FieldPath)@@
+                        &lt;!-- Could recurse here, instead print value --&gt;
+                        @@FieldValueStartMarker(TemplateRepeatIndex)@@
+                        @@Field.Value@@
+                        @@FieldValueEndMarker()@@
+                        @@FieldEndMarker()@@
+                      &lt;/td&gt;
+                    &lt;/tr&gt;
+                    &lt;!-- TemplateEndRepeat --&gt;
+                  &lt;/table&gt;
+                  &lt;!-- TemplateEndIf --&gt;
+                  @@FieldValueEndMarker()@@
+                  &lt;!-- TemplateEndRepeat --&gt;
+                  @@FieldEndMarker()@@
+                &lt;/td&gt;
+              &lt;/tr&gt;
+              &lt;!-- TemplateEndRepeat --&gt;
+            &lt;/table&gt;
+            &lt;!-- TemplateEndIf --&gt;
+            @@FieldValueEndMarker()@@
+            &lt;!-- TemplateEndRepeat --&gt;
+            @@FieldEndMarker()@@
+          &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;!-- TemplateEndRepeat --&gt;
+      &lt;/table&gt;
+      &lt;!-- TemplateEndIf --&gt;
+      @@FieldValueEndMarker()@@
+      &lt;!-- TemplateEndRepeat --&gt;
+      @@FieldEndMarker()@@
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;!-- TemplateEndRepeat --&gt;
+
+  &lt;!-- TemplateBeginIf cond="ComponentType = 'Multimedia'" --&gt;
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;h3 style="text-align: left; background-color:#FFFFFF; margin:0; padding:0; border:0; font-size:small; color:#2972CC"&gt;
+        Binary Content
+      &lt;/h3&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr title="@@GetBinaryInfo()@@"&gt;
+    &lt;!-- TemplateBeginIf cond="(MultimediaTitle = 'Jpeg image') || (MultimediaTitle = 'Gif image') || (MultimediaTitle = 'Png image') || (MultimediaTitle = 'Bitmap image')" --&gt;
+    &lt;td&gt;
+      &lt;img src="@@Component.ID@@" tridion:type="Multimedia" alt="@@Component.Title@@"/&gt;
+    &lt;/td&gt;
+    &lt;!-- TemplateEndIf --&gt;
+    &lt;!-- TemplateBeginIf cond="(MultimediaTitle != 'Jpeg image') &amp;&amp; (MultimediaTitle != 'Gif image') &amp;&amp; (MultimediaTitle != 'Png image') &amp;&amp; (MultimediaTitle!= 'Bitmap image')" --&gt;
+    &lt;td&gt;
+      &lt;a href="@@Component.ID@@" tridion:type="Multimedia" &gt;Click here&lt;/a&gt;
+    &lt;/td&gt;
+    &lt;!-- TemplateEndIf --&gt;
+  &lt;/tr&gt;
+  &lt;!-- TemplateEndIf --&gt;
+&lt;/table&gt;
+</tcm:PublisherScript>
+      </tcm:Content>
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:ParameterSchema xlink:type="simple" xlink:title="Dreamweaver Region Selection" xlink:href="/webdav/000%20Empty/Building%20Blocks/Default%20Templates/Dreamweaver%20Region%20Selection.xsd" />
+      <tcm:Metadata />
+      <tcm:TemplatePurpose>Rendering</tcm:TemplatePurpose>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/000%20Empty" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/000%20Empty/Building%20Blocks/Default%20Templates" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="ParameterSchema" itemUrl="/webdav/000%20Empty/Building%20Blocks/Default%20Templates/Dreamweaver%20Region%20Selection.xsd" linkName="ParameterSchema" />
+  </Dependencies>
+</PackageItem>

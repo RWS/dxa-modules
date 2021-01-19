@@ -1,0 +1,22 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <PrimaryBlueprintParentUrl>/webdav/100%20Master/Sitemap%20%5BNavigation%5D</PrimaryBlueprintParentUrl>
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Sitemap [Navigation]</tcm:Title>
+      <tcm:XMLName>sitemap</tcm:XMLName>
+      <tcm:Description>Used for Taxonomy-based Navigation purposes</tcm:Description>
+      <tcm:KeywordMetadataSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:UseForNavigation>false</tcm:UseForNavigation>
+      <tcm:AllowedParentCategories>
+        <tcm:Category xlink:type="simple" xlink:title="Sitemap [Navigation]" xlink:href="/webdav/401%20Automated%20Test%20Parent/Sitemap%20%5BNavigation%5D" />
+      </tcm:AllowedParentCategories>
+      <tcm:IsRoot>true</tcm:IsRoot>
+      <tcm:UseForIdentification>false</tcm:UseForIdentification>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemPublication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="AllowedParentCategory" itemUrl="/webdav/401%20Automated%20Test%20Parent/Sitemap%20%5BNavigation%5D" linkName="AllowedParentCategories[0]" />
+  </Dependencies>
+</PackageItem>

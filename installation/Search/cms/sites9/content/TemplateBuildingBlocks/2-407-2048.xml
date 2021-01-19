@@ -1,0 +1,24 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <BinaryFileLocation>Binaries\2-407-2048.tbbasm</BinaryFileLocation>
+  <Data>
+    <tcm:Data>
+      <tcm:Title>SI4T.Templating</tcm:Title>
+      <tcm:Type>AssemblyTemplate</tcm:Type>
+      <tcm:Content>
+        <tcm:PublisherScript />
+      </tcm:Content>
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:ParameterSchema xlink:type="simple" xlink:title="Generate Index Data" xlink:href="/webdav/100%20Master/Building%20Blocks/Modules/Search/Developer/Search%20Template%20Building%20Blocks/Generate%20Index%20Data.xsd" />
+      <tcm:Metadata />
+      <tcm:MultimediaFilename>SI4T.Templating.dll</tcm:MultimediaFilename>
+      <tcm:MultimediaFileSize>29696</tcm:MultimediaFileSize>
+      <tcm:IsExternalMultimediaFile>false</tcm:IsExternalMultimediaFile>
+      <tcm:TemplatePurpose>Rendering</tcm:TemplatePurpose>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/100%20Master" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/Search/Developer/Search%20Template%20Building%20Blocks" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="ParameterSchema" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/Search/Developer/Search%20Template%20Building%20Blocks/Generate%20Index%20Data.xsd" linkName="ParameterSchema" />
+  </Dependencies>
+</PackageItem>

@@ -1,0 +1,45 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+      <tcm:Title>Generate Dynamic Component (DXA)</tcm:Title>
+      <tcm:Description>Generate Dynamic Component (DXA)</tcm:Description>
+      <tcm:Purpose>TemplateParameters</tcm:Purpose>
+      <tcm:NamespaceURI>http://www.sdl.com/web/schemas/dynamiccomponent</tcm:NamespaceURI>
+      <tcm:RootElementName>Parameters</tcm:RootElementName>
+      <tcm:IsTridionWebSchema>true</tcm:IsTridionWebSchema>
+      <tcm:XSD>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sdl.com/web/schemas/dynamiccomponent" xmlns:tcmi="http://www.tridion.com/ContentManager/5.0/Instance" xmlns:xlink="http://www.w3.org/1999/xlink" targetNamespace="http://www.sdl.com/web/schemas/dynamiccomponent" elementFormDefault="qualified">
+          <xsd:import namespace="http://www.tridion.com/ContentManager/5.0/Instance" schemaLocation="/webdav/cm_xml_inst.xsd" />
+          <xsd:annotation>
+            <xsd:appinfo>
+              <tcm:Labels xmlns:tcm="http://www.tridion.com/ContentManager/5.0">
+                <tcm:Label ElementName="expandLinkDepth" Metadata="false">Depth to expand Component/Keyword links</tcm:Label>
+              </tcm:Labels>
+            </xsd:appinfo>
+          </xsd:annotation>
+          <xsd:element name="Parameters">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="expandLinkDepth" minOccurs="0" maxOccurs="1" type="xsd:integer">
+                  <xsd:annotation>
+                    <xsd:appinfo>
+                      <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+                    </xsd:appinfo>
+                  </xsd:annotation>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:schema>
+      </tcm:XSD>
+      <tcm:AllowedMultimediaTypes />
+      <tcm:ComponentProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:BundleProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:DeleteBundleOnProcessFinished>false</tcm:DeleteBundleOnProcessFinished>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/100%20Master" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/100%20Master/Building%20Blocks/Framework/Developer/Templates/DXA%2ELegacy" linkName="LocationInfo/OrganizationalItem" />
+  </Dependencies>
+</PackageItem>

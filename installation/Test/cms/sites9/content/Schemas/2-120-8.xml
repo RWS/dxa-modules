@@ -1,0 +1,114 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+      <tcm:Title>Paragraph</tcm:Title>
+      <tcm:Description>Paragraph</tcm:Description>
+      <tcm:Purpose>Embedded</tcm:Purpose>
+      <tcm:NamespaceURI />
+      <tcm:RootElementName>Paragraph</tcm:RootElementName>
+      <tcm:IsTridionWebSchema>true</tcm:IsTridionWebSchema>
+      <tcm:XSD>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tcmi="http://www.tridion.com/ContentManager/5.0/Instance" xmlns="" elementFormDefault="qualified">
+  <xsd:import namespace="http://www.tridion.com/ContentManager/5.0/Instance" schemaLocation="/webdav/cm_xml_inst.xsd" />
+  <xsd:annotation>
+    <xsd:appinfo>
+      <tcm:Labels xmlns:tcm="http://www.tridion.com/ContentManager/5.0">
+        <tcm:Label ElementName="subheading" Metadata="false">Subheading</tcm:Label>
+        <tcm:Label ElementName="content" Metadata="false">Content</tcm:Label>
+        <tcm:Label ElementName="media" Metadata="false">Media</tcm:Label>
+        <tcm:Label ElementName="caption" Metadata="false">Media Caption</tcm:Label>
+      </tcm:Labels>
+    </xsd:appinfo>
+  </xsd:annotation>
+  <xsd:complexType name="Paragraph">
+    <xsd:sequence>
+      <xsd:element name="subheading" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+        <xsd:annotation>
+          <xsd:appinfo>
+            <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="content" minOccurs="0" maxOccurs="1" type="tcmi:XHTML">
+        <xsd:annotation>
+          <xsd:appinfo>
+            <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+            <tcm:Size xmlns:tcm="http://www.tridion.com/ContentManager/5.0">4</tcm:Size>
+            <tcm:FilterXSLT xmlns:tcm="http://www.tridion.com/ContentManager/5.0">
+              <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="" version="1.0">
+            <xsl:output omit-xml-declaration="yes" method="xml" cdata-section-elements="script" />
+            <xsl:template match="/ | node() | @*">
+              <xsl:copy>
+                <xsl:apply-templates select="node() | @*" />
+              </xsl:copy>
+            </xsl:template>
+            <xsl:template match="*[      (self::br or self::p or self::div)     and      normalize-space(translate(., ' ', '')) = ''     and      not(@*)     and      not(processing-instruction())     and      not(comment())     and      not(*[not(self::br) or @* or * or node()])     and      not(following::node()[not(         (self::text() or self::br or self::p or self::div)        and         normalize-space(translate(., ' ', '')) = ''        and         not(@*)        and         not(processing-instruction())        and         not(comment())        and         not(*[not(self::br) or @* or * or node()])       )])     ]">
+              <!-- ignore all paragraphs and line-breaks at the end that have nothing but (non-breaking) spaces and line breaks -->
+            </xsl:template>
+            <xsl:template match="br[parent::div and not(preceding-sibling::node()) and not(following-sibling::node())]">
+              <!-- Chrome generates <div><br/></div>. Renders differently in different browsers. Replace it with a non-breaking space -->
+              <xsl:text> </xsl:text>
+            </xsl:template>
+            <!-- remove disallowed elements but keep its children -->
+            <xsl:template match="font">
+              <xsl:apply-templates />
+            </xsl:template>
+            <!-- remove all style attributes except those for a table and its cells and to allow underline -->
+            <xsl:template match="*[not(local-name() = 'table' or local-name() = 'tr' or local-name() = 'th' or local-name() = 'td' or local-name() = 'col')]/@style" />
+            <xsl:template match="span/@style">
+              <xsl:if test="contains(.,'text-decoration')">
+                <xsl:copy />
+              </xsl:if>
+            </xsl:template>
+            <!-- remove rowspan and collspan when set to 1 -->
+            <xsl:template match="@colspan[.='1'] | @rowspan[.='1']" />
+            <!-- remove well known Microsoft Word classes -->
+            <xsl:template match="@class[starts-with(., 'Mso')] | @class[starts-with(., 'mso')]" />
+            <!-- remove conditional comments that Microsoft Word uses -->
+            <xsl:template match="comment()[contains(., 'if')] | comment()[contains(., 'endif')]" />
+            <xsl:template name="FormattingFeatures">
+              <FormattingFeatures xmlns="http://www.tridion.com/ContentManager/5.2/FormatArea">
+                <Doctype>Transitional</Doctype>
+                <AccessibilityLevel>0</AccessibilityLevel>
+                <DisallowedActions>
+                  <Font />
+                  <Background />
+                </DisallowedActions>
+                <DisallowedStyles />
+              </FormattingFeatures>
+            </xsl:template>
+          </xsl:stylesheet>
+            </tcm:FilterXSLT>
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="media" minOccurs="0" maxOccurs="1" type="tcmi:SimpleLink">
+        <xsd:annotation>
+          <xsd:appinfo>
+            <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+            <tcm:linktype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">MultimediaLink</tcm:linktype>
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="caption" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+        <xsd:annotation>
+          <xsd:appinfo>
+            <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
+      </tcm:XSD>
+      <tcm:AllowedMultimediaTypes />
+      <tcm:ComponentProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:BundleProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:DeleteBundleOnProcessFinished>false</tcm:DeleteBundleOnProcessFinished>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/100%20Master" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/Core/Editor/Schemas/Embedded" linkName="LocationInfo/OrganizationalItem" />
+  </Dependencies>
+</PackageItem>

@@ -1,0 +1,318 @@
+<Mappings xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <ItemSet role="Publication">
+    <Mapping exportTitle="100%20Master" importTitle="" />
+    <Mapping exportTitle="110%20DXA%20Site%20Type" importTitle="" />
+    <Mapping exportTitle="200%20Example%20Content" importTitle="" />
+    <Mapping exportTitle="400%20Example%20Site" importTitle="" />
+  </ItemSet>
+  <ItemSet role="Folder">
+    <Mapping exportContext="/100%20Master" exportTitle="Building%20Blocks" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks" exportTitle="Framework" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework" exportTitle="Developer" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Developer" exportTitle="Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Developer" exportTitle="Templates" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Developer/Templates" exportTitle="DXA%2ER2" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework" exportTitle="Site%20Manager" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Site%20Manager" exportTitle="Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks" exportTitle="Modules" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules" exportTitle="Core" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/Core" exportTitle="Editor" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/Core/Editor" exportTitle="Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/Core/Editor/Schemas" exportTitle="Page%20Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/Core/Editor/Schemas" exportTitle="Region%20Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules" exportTitle="TridionDocsMashup" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/TridionDocsMashup" exportTitle="Admin" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/TridionDocsMashup/Admin" exportTitle="Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/TridionDocsMashup" exportTitle="Editor" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/TridionDocsMashup/Editor" exportTitle="Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas" exportTitle="Page%20Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas" exportTitle="Region%20Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/TridionDocsMashup/Editor" exportTitle="Templates" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/TridionDocsMashup" exportTitle="Site%20Manager" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager" exportTitle="Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager/Schemas" exportTitle="Page%20Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager/Schemas" exportTitle="Region%20Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager" exportTitle="Templates" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks" exportTitle="Settings" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Settings" exportTitle="TridionDocsMashup" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Settings/TridionDocsMashup" exportTitle="Site%20Manager" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type" exportTitle="Building%20Blocks" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks" exportTitle="Framework" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Framework" exportTitle="Developer" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Framework/Developer" exportTitle="Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Framework/Developer" exportTitle="Templates" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Framework/Developer/Templates" exportTitle="DXA%2ER2" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Framework" exportTitle="Site%20Manager" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Framework/Site%20Manager" exportTitle="Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks" exportTitle="Modules" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks" exportTitle="Modules%20Content" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules%20Content" exportTitle="TridionDocsMashup" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules%20Content/TridionDocsMashup" exportTitle="Content" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content" exportTitle="_Cloneable%20Content" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content" exportTitle="Products" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content/Products" exportTitle="Bicycles" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content" exportTitle="Tridion%20Docs" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules" exportTitle="Core" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules/Core" exportTitle="Editor" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules/Core/Editor" exportTitle="Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules" exportTitle="TridionDocsMashup" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules/TridionDocsMashup" exportTitle="Admin" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules/TridionDocsMashup/Admin" exportTitle="Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules/TridionDocsMashup" exportTitle="Editor" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules/TridionDocsMashup/Editor" exportTitle="Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas" exportTitle="Page%20Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas" exportTitle="Region%20Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules/TridionDocsMashup/Editor" exportTitle="Templates" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules/TridionDocsMashup" exportTitle="Site%20Manager" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager" exportTitle="Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager/Schemas" exportTitle="Page%20Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager/Schemas" exportTitle="Region%20Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager" exportTitle="Templates" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content" exportTitle="Building%20Blocks" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks" exportTitle="Modules" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks" exportTitle="Modules%20Content" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules%20Content" exportTitle="TridionDocsMashup" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules%20Content/TridionDocsMashup" exportTitle="Content" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content" exportTitle="_Cloneable%20Content" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content" exportTitle="Products" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content/Products" exportTitle="Bicycles" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content" exportTitle="Tridion%20Docs" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules" exportTitle="Core" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/Core" exportTitle="Editor" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/Core/Editor" exportTitle="Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules" exportTitle="TridionDocsMashup" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/TridionDocsMashup" exportTitle="Admin" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/TridionDocsMashup/Admin" exportTitle="Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/TridionDocsMashup" exportTitle="Editor" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/TridionDocsMashup/Editor" exportTitle="Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas" exportTitle="Page%20Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas" exportTitle="Region%20Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/TridionDocsMashup/Editor" exportTitle="Templates" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/TridionDocsMashup" exportTitle="Site%20Manager" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager" exportTitle="Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager/Schemas" exportTitle="Page%20Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager/Schemas" exportTitle="Region%20Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager" exportTitle="Templates" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site" exportTitle="Building%20Blocks" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks" exportTitle="Framework" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Framework" exportTitle="Site%20Manager" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Framework/Site%20Manager" exportTitle="Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks" exportTitle="Modules" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks" exportTitle="Modules%20Content" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules%20Content" exportTitle="TridionDocsMashup" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules%20Content/TridionDocsMashup" exportTitle="Content" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content" exportTitle="_Cloneable%20Content" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content" exportTitle="Products" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content/Products" exportTitle="Bicycles" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content" exportTitle="Tridion%20Docs" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules" exportTitle="Core" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/Core" exportTitle="Editor" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/Core/Editor" exportTitle="Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/Core/Editor/Schemas" exportTitle="Page%20Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/Core/Editor/Schemas" exportTitle="Region%20Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/Core/Editor" exportTitle="Templates" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules" exportTitle="TridionDocsMashup" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup" exportTitle="Admin" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Admin" exportTitle="Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup" exportTitle="Editor" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Editor" exportTitle="Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas" exportTitle="Page%20Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas" exportTitle="Region%20Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Editor" exportTitle="Templates" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup" exportTitle="Site%20Manager" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager" exportTitle="Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager/Schemas" exportTitle="Page%20Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager/Schemas" exportTitle="Region%20Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager" exportTitle="Templates" importContext="" importTitle="" />
+  </ItemSet>
+  <ItemSet role="StructureGroup">
+    <Mapping exportContext="/110%20DXA%20Site%20Type" exportTitle="Home" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Home" exportTitle="_System" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Home/_System" exportTitle="include" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site" exportTitle="Home" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Home" exportTitle="_Page%20Types" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Home" exportTitle="030%20Products" importContext="" importTitle="" />
+  </ItemSet>
+  <ItemSet role="Schema">
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Developer/Schemas" exportTitle="Component%20Template%20Metadata.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Developer/Schemas" exportTitle="Module%20Configuration.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Developer/Schemas" exportTitle="Page%20Template%20Metadata.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Developer/Schemas" exportTitle="Region%20Metadata.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Developer/Schemas" exportTitle="ZIP%20file.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Site%20Manager/Schemas" exportTitle="HTML%20Design%20Configuration.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/Core/Editor/Schemas" exportTitle="Image.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/Core/Editor/Schemas/Page%20Schemas" exportTitle="Content%20Page.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/Core/Editor/Schemas/Region%20Schemas" exportTitle="%5BMain%5D%20Region.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/TridionDocsMashup/Admin/Schemas" exportTitle="TridionDocsMashup%20URL%20Configuration.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas" exportTitle="Bicycle.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas/Page%20Schemas" exportTitle="Bicycle%20Page%20With%20Static%20Widget.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas/Page%20Schemas" exportTitle="Bicycle%20Page.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas/Region%20Schemas" exportTitle="%5BTridionDocsMashup%3ABicycle%5D%20Region.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas/Region%20Schemas" exportTitle="%5BTridionDocsMashup%3ATopics%5D%20Static%20Topics%20Region.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas" exportTitle="Tridion%20Docs%20Static%20Widget.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager/Schemas/Page%20Schemas" exportTitle="Bicycle%20Include%20Page.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager/Schemas/Region%20Schemas" exportTitle="%5BTridionDocsMashup%3ATopics%5D%20Dynamic%20Topics%20Region.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager/Schemas" exportTitle="Tridion%20Docs%20Dynamic%20Widget.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Framework/Developer/Schemas" exportTitle="Page%20Template%20Metadata.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Framework/Site%20Manager/Schemas" exportTitle="Page%20Navigation%20Metadata.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules/Core/Editor/Schemas" exportTitle="Image.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules/TridionDocsMashup/Admin/Schemas" exportTitle="TridionDocsMashup%20URL%20Configuration.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas" exportTitle="Bicycle.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas/Page%20Schemas" exportTitle="Bicycle%20Page%20With%20Static%20Widget.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas/Page%20Schemas" exportTitle="Bicycle%20Page.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas/Region%20Schemas" exportTitle="%5BTridionDocsMashup%3ABicycle%5D%20Region.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas/Region%20Schemas" exportTitle="%5BTridionDocsMashup%3ATopics%5D%20Static%20Topics%20Region.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas" exportTitle="Tridion%20Docs%20Static%20Widget.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager/Schemas/Page%20Schemas" exportTitle="Bicycle%20Include%20Page.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager/Schemas/Region%20Schemas" exportTitle="%5BTridionDocsMashup%3ATopics%5D%20Dynamic%20Topics%20Region.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager/Schemas" exportTitle="Tridion%20Docs%20Dynamic%20Widget.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/Core/Editor/Schemas" exportTitle="Article.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/Core/Editor/Schemas" exportTitle="Image.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/TridionDocsMashup/Admin/Schemas" exportTitle="TridionDocsMashup%20URL%20Configuration.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas" exportTitle="Bicycle.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas/Page%20Schemas" exportTitle="Bicycle%20Page%20With%20Static%20Widget.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas/Page%20Schemas" exportTitle="Bicycle%20Page.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas/Region%20Schemas" exportTitle="%5BTridionDocsMashup%3ABicycle%5D%20Region.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas/Region%20Schemas" exportTitle="%5BTridionDocsMashup%3ATopics%5D%20Static%20Topics%20Region.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas" exportTitle="Tridion%20Docs%20Static%20Widget.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager/Schemas/Page%20Schemas" exportTitle="Bicycle%20Include%20Page.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager/Schemas/Region%20Schemas" exportTitle="%5BTridionDocsMashup%3ATopics%5D%20Dynamic%20Topics%20Region.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager/Schemas" exportTitle="Tridion%20Docs%20Dynamic%20Widget.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Framework/Site%20Manager/Schemas" exportTitle="Page%20Navigation%20Metadata.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/Core/Editor/Schemas/Page%20Schemas" exportTitle="Content%20Page.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/Core/Editor/Schemas/Region%20Schemas" exportTitle="%5BMain%5D%20Region.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Admin/Schemas" exportTitle="TridionDocsMashup%20URL%20Configuration.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas" exportTitle="Bicycle.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas/Page%20Schemas" exportTitle="Bicycle%20Page%20With%20Static%20Widget.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas/Page%20Schemas" exportTitle="Bicycle%20Page.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas/Region%20Schemas" exportTitle="%5BTridionDocsMashup%3ABicycle%5D%20Region.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas/Region%20Schemas" exportTitle="%5BTridionDocsMashup%3ATopics%5D%20Static%20Topics%20Region.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas" exportTitle="Tridion%20Docs%20Static%20Widget.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager/Schemas/Page%20Schemas" exportTitle="Bicycle%20Include%20Page.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager/Schemas/Region%20Schemas" exportTitle="%5BTridionDocsMashup%3ATopics%5D%20Dynamic%20Topics%20Region.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager/Schemas" exportTitle="Tridion%20Docs%20Dynamic%20Widget.xsd" importContext="" importTitle="" />
+  </ItemSet>
+  <ItemSet role="Component">
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/TridionDocsMashup/Admin" exportTitle="TridionDocsMashup%20HTML%20Design.zip" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/TridionDocsMashup/Admin" exportTitle="TridionDocsMashup%20URL%20Configuration.xml" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/TridionDocsMashup/Admin" exportTitle="TridionDocsMashup.xml" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Settings/TridionDocsMashup/Site%20Manager" exportTitle="TridionDocsMashup%20HTML%20Design%20Configuration.xml" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content/_Cloneable%20Content" exportTitle="Bicycle%20Image.jpg" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content/_Cloneable%20Content" exportTitle="Bicycle.xml" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content/_Cloneable%20Content" exportTitle="Tridion%20Docs%20Static%20Widget.xml" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content/Products/Bicycles" exportTitle="Bicycle%20Widget%20Configuration.xml" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules/TridionDocsMashup/Admin" exportTitle="TridionDocsMashup%20HTML%20Design.zip" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules/TridionDocsMashup/Admin" exportTitle="TridionDocsMashup%20URL%20Configuration.xml" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules/TridionDocsMashup/Admin" exportTitle="TridionDocsMashup.xml" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content/_Cloneable%20Content" exportTitle="Bicycle%20Image.jpg" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content/_Cloneable%20Content" exportTitle="Bicycle.xml" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content/_Cloneable%20Content" exportTitle="Tridion%20Docs%20Static%20Widget.xml" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content/Products/Bicycles" exportTitle="Bicycle%20Widget%20Configuration.xml" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content/Products/Bicycles" exportTitle="Bicycles.xml" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content/Products/Bicycles" exportTitle="Red%20Bicycle%20Image.jpg" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content/Products/Bicycles" exportTitle="Red%20Bicycle.xml" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content/Products/Bicycles" exportTitle="White%20Bicycle%20Image.jpg" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content/Products/Bicycles" exportTitle="White%20Bicycle.xml" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content/Tridion%20Docs" exportTitle="Tridion%20Docs%20Static%20Widget.xml" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/TridionDocsMashup/Admin" exportTitle="TridionDocsMashup%20HTML%20Design.zip" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/TridionDocsMashup/Admin" exportTitle="TridionDocsMashup%20URL%20Configuration.xml" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/TridionDocsMashup/Admin" exportTitle="TridionDocsMashup.xml" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content/_Cloneable%20Content" exportTitle="Bicycle%20Image.jpg" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content/_Cloneable%20Content" exportTitle="Bicycle.xml" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content/_Cloneable%20Content" exportTitle="Tridion%20Docs%20Static%20Widget.xml" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content/Products/Bicycles" exportTitle="Bicycle%20Widget%20Configuration.xml" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content/Products/Bicycles" exportTitle="Bicycles.xml" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content/Products/Bicycles" exportTitle="Red%20Bicycle%20Image.jpg" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content/Products/Bicycles" exportTitle="Red%20Bicycle.xml" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content/Products/Bicycles" exportTitle="White%20Bicycle%20Image.jpg" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content/Products/Bicycles" exportTitle="White%20Bicycle.xml" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content/Tridion%20Docs" exportTitle="Tridion%20Docs%20Static%20Widget.xml" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Admin" exportTitle="TridionDocsMashup%20HTML%20Design.zip" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Admin" exportTitle="TridionDocsMashup%20URL%20Configuration.xml" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Admin" exportTitle="TridionDocsMashup.xml" importContext="" importTitle="" />
+  </ItemSet>
+  <ItemSet role="ComponentTemplate">
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/TridionDocsMashup/Editor/Templates" exportTitle="Bicycle.tctcmp" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/TridionDocsMashup/Editor/Templates" exportTitle="Tridion%20Docs%20Static%20Widget.tctcmp" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager/Templates" exportTitle="Tridion%20Docs%20Dynamic%20Widget.tctcmp" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules/TridionDocsMashup/Editor/Templates" exportTitle="Bicycle.tctcmp" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules/TridionDocsMashup/Editor/Templates" exportTitle="Tridion%20Docs%20Static%20Widget.tctcmp" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager/Templates" exportTitle="Tridion%20Docs%20Dynamic%20Widget.tctcmp" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/TridionDocsMashup/Editor/Templates" exportTitle="Bicycle.tctcmp" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/TridionDocsMashup/Editor/Templates" exportTitle="Tridion%20Docs%20Static%20Widget.tctcmp" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager/Templates" exportTitle="Tridion%20Docs%20Dynamic%20Widget.tctcmp" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/Core/Editor/Templates" exportTitle="Article.tctcmp" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Editor/Templates" exportTitle="Bicycle.tctcmp" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Editor/Templates" exportTitle="Tridion%20Docs%20Static%20Widget.tctcmp" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager/Templates" exportTitle="Tridion%20Docs%20Dynamic%20Widget.tctcmp" importContext="" importTitle="" />
+  </ItemSet>
+  <ItemSet role="Page">
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Home/_System/include" exportTitle="TridionDocsMashup%3ATopics.tpg" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Home/_Page%20Types" exportTitle="Bicycle%20Page.tpg" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Home/030%20Products" exportTitle="000%20Product%20Catalogue.tpg" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Home/030%20Products" exportTitle="001%20Red%20Bicycle.tpg" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Home/030%20Products" exportTitle="002%20White%20Bicyclee.tpg" importContext="" importTitle="" />
+  </ItemSet>
+  <ItemSet role="PageTemplate">
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/TridionDocsMashup/Editor/Templates" exportTitle="Bicycle%20Page%20With%20Static%20Region.tptcmp" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules/TridionDocsMashup/Editor/Templates" exportTitle="Bicycle%20Page%20With%20Static%20Region.tptcmp" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules/TridionDocsMashup/Editor/Templates" exportTitle="Bicycle.tptcmp" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager/Templates" exportTitle="Include%20Page%20%28Tridion%20Docs%20Dynamic%20Widget%29.tptcmp" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/TridionDocsMashup/Editor/Templates" exportTitle="Bicycle%20Page%20With%20Static%20Region.tptcmp" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/TridionDocsMashup/Editor/Templates" exportTitle="Bicycle.tptcmp" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager/Templates" exportTitle="Include%20Page%20%28Tridion%20Docs%20Dynamic%20Widget%29.tptcmp" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/Core/Editor/Templates" exportTitle="Content%20Page.tptcmp" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Editor/Templates" exportTitle="Bicycle%20Page%20With%20Static%20Region.tptcmp" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Editor/Templates" exportTitle="Bicycle.tptcmp" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager/Templates" exportTitle="Include%20Page%20%28Tridion%20Docs%20Dynamic%20Widget%29.tptcmp" importContext="" importTitle="" />
+  </ItemSet>
+  <ItemSet role="Category">
+    <Mapping exportContext="/100%20Master" exportTitle="Content%20Reference%20Type" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master" exportTitle="Product%20Family%20Name" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master" exportTitle="Product%20Release%20Name" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master" exportTitle="Sitemap%20%5BNavigation%5D" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type" exportTitle="Content%20Reference%20Type" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type" exportTitle="Product%20Family%20Name" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type" exportTitle="Product%20Release%20Name" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type" exportTitle="Sitemap%20%5BNavigation%5D" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content" exportTitle="Content%20Reference%20Type" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content" exportTitle="Product%20Family%20Name" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content" exportTitle="Product%20Release%20Name" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site" exportTitle="Sitemap%20%5BNavigation%5D" importContext="" importTitle="" />
+  </ItemSet>
+  <ItemSet role="Keyword">
+    <Mapping exportContext="/100%20Master/Content%20Reference%20Type" exportTitle="Acknowledgements.tkw" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Content%20Reference%20Type" exportTitle="Deprecation%20List.tkw" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Content%20Reference%20Type" exportTitle="Getting%20Started.tkw" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Content%20Reference%20Type" exportTitle="Known%20Issues.tkw" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Content%20Reference%20Type" exportTitle="Legal%20Notice.tkw" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Content%20Reference%20Type" exportTitle="Release%20Notes.tkw" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Content%20Reference%20Type" exportTitle="Technical%20Specifications.tkw" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Content%20Reference%20Type" exportTitle="What%27s%20New.tkw" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Product%20Family%20Name" exportTitle="City%20Bicycle.tkw" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Product%20Family%20Name" exportTitle="Red%20Bicycle.tkw" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Product%20Family%20Name" exportTitle="White%20Bicycle.tkw" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Product%20Release%20Name" exportTitle="Model%202018.tkw" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Content%20Reference%20Type" exportTitle="Acknowledgements.tkw" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Product%20Family%20Name" exportTitle="City%20Bicycle.tkw" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Product%20Family%20Name" exportTitle="Red%20Bicycle.tkw" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Product%20Release%20Name" exportTitle="Model%202018.tkw" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Content%20Reference%20Type" exportTitle="Acknowledgements.tkw" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Product%20Family%20Name" exportTitle="Red%20Bicycle.tkw" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Product%20Family%20Name" exportTitle="White%20Bicycle.tkw" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Product%20Release%20Name" exportTitle="Model%202018.tkw" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Sitemap%20%5BNavigation%5D" exportTitle="030%20Products.tkw" importContext="" importTitle="" />
+  </ItemSet>
+  <ItemSet role="TemplateBuildingBlock">
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Developer/Templates/DXA%2ER2" exportTitle="Default%20Component%20Template%20Finish%20Actions.tbbcmp" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Developer/Templates/DXA%2ER2" exportTitle="Default%20Page%20Template%20Finish%20Actions.tbbcmp" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Developer/Templates/DXA%2ER2" exportTitle="Render%20Component%20Content.tbbcmp" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Developer/Templates/DXA%2ER2" exportTitle="Render%20Page%20Content.tbbcmp" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Framework/Developer/Templates/DXA%2ER2" exportTitle="Default%20Page%20Template%20Finish%20Actions.tbbcmp" importContext="" importTitle="" />
+    <Mapping exportContext="/110%20DXA%20Site%20Type/Building%20Blocks/Framework/Developer/Templates/DXA%2ER2" exportTitle="Render%20Page%20Content.tbbcmp" importContext="" importTitle="" />
+  </ItemSet>
+  <ItemSet role="MultimediaType">
+    <Mapping exportTitle="Jpeg%20image.tmt" importTitle="" />
+    <Mapping exportTitle="Zip%20file.tmt" importTitle="" />
+  </ItemSet>
+</Mappings>

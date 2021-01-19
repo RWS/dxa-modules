@@ -1,0 +1,24 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>_System</tcm:Title>
+      <tcm:DefaultPageTemplate IsInherited="false" xlink:type="simple" xlink:title="JSON" xlink:href="/webdav/100%20Master/Building%20Blocks/Framework/Developer/Templates/JSON.tptcmp" />
+      <tcm:Directory IsMandatory="true">system</tcm:Directory>
+      <tcm:IsActive ResolvedValue="true">true</tcm:IsActive>
+      <tcm:PageProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:PageBundleProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="Search Indexing Metadata" xlink:href="/webdav/100%20Master/Building%20Blocks/Modules/Search/Editor/Schemas/Search%20Indexing%20Metadata.xsd" />
+      <tcm:Metadata>
+        <Metadata xmlns="http://www.sdl.com/web/schemas/search">
+          <NoIndex>Yes</NoIndex>
+        </Metadata>
+      </tcm:Metadata>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/100%20Master" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemStructureGroup" itemUrl="/webdav/100%20Master/Home" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="DefaultPageTemplate" itemUrl="/webdav/100%20Master/Building%20Blocks/Framework/Developer/Templates/JSON.tptcmp" linkName="DefaultPageTemplate" />
+    <Dependency dependencyType="MetadataSchema" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/Search/Editor/Schemas/Search%20Indexing%20Metadata.xsd" linkName="MetadataSchema" />
+  </Dependencies>
+</PackageItem>

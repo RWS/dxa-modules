@@ -1,0 +1,135 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Media Manager RTF + Media Smoke test</tcm:Title>
+      <tcm:Type>Normal</tcm:Type>
+      <tcm:Schema xlink:type="simple" xlink:title="Article" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Schemas/Article.xsd" IsMandatory="false" />
+      <tcm:Content>
+        <Article xmlns="http://www.sdl.com/web/schemas/core">
+          <headline>Media Manager RTF + Media Smoke test</headline>
+          <articleBody>
+            <subheading>MM Video - Files/test - </subheading>
+            <content>
+              <p xmlns="http://www.w3.org/1999/xhtml">RTF Embed:</p>
+<p xmlns="http://www.w3.org/1999/xhtml"><img xmlns:xlink="http://www.w3.org/1999/xlink" alt="test" title="test" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Schemas/SDL%20Media%20Manager/BEF/AF8/ecl%3A0-mm-204-dist-file.ecl" xlink:title="ecl:0-mm-204-dist-file" />
+<br /></p>
+<p xmlns="http://www.w3.org/1999/xhtml">Direct MM item URL:</p>
+<p xmlns="http://www.w3.org/1999/xhtml"><a xmlns:xlink="http://www.w3.org/1999/xlink" title="test" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Schemas/SDL%20Media%20Manager/BEF/AF8/ecl%3A0-mm-204-dist-file.ecl" xlink:title="ecl:0-mm-204-dist-file">test</a>
+<br /></p>
+<p xmlns="http://www.w3.org/1999/xhtml">Media property:</p></content>
+            <media xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Schemas/SDL%20Media%20Manager/BEF/AF8/ecl%3A0-mm-204-dist-file.ecl" xlink:title="ecl:0-mm-204-dist-file" />
+          </articleBody>
+          <articleBody>
+            <subheading>MM Image - FIles/test-image</subheading>
+            <content>
+			<p xmlns="http://www.w3.org/1999/xhtml">RTF Embed:</p>
+			
+
+			<p xmlns="http://www.w3.org/1999/xhtml">
+				<img xmlns:xlink="http://www.w3.org/1999/xlink" alt="test-image" title="test-image" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Schemas/SDL%20Media%20Manager/99A/24F/ecl%3A0-mm-377-dist-file.ecl" xlink:title="ecl:0-mm-377-dist-file" />
+				
+
+				<br />
+			</p>
+			
+
+			<p xmlns="http://www.w3.org/1999/xhtml">Direct MM item URL:</p>
+			
+
+			<p xmlns="http://www.w3.org/1999/xhtml">
+				<a xmlns:xlink="http://www.w3.org/1999/xlink" title="test-image" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Schemas/SDL%20Media%20Manager/99A/24F/ecl%3A0-mm-377-dist-file.ecl" xlink:title="ecl:0-mm-377-dist-file">test-image</a>
+				
+
+				<br />
+			</p>
+			
+
+			<p xmlns="http://www.w3.org/1999/xhtml">Media property:</p>
+		</content>
+            <media xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Schemas/SDL%20Media%20Manager/99A/24F/ecl%3A0-mm-377-dist-file.ecl" xlink:title="ecl:0-mm-377-dist-file" />
+          </articleBody>
+          <articleBody>
+            <subheading>MM Audio - Files/Ring05.wav</subheading>
+            <content>
+			<p xmlns="http://www.w3.org/1999/xhtml">RTF Embed:</p>
+			
+
+			<p xmlns="http://www.w3.org/1999/xhtml">
+				<img xmlns:xlink="http://www.w3.org/1999/xlink" alt="Ring05.wav" title="Ring05.wav" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Schemas/SDL%20Media%20Manager/C94/286/ecl%3A0-mm-383-dist-file.ecl" xlink:title="ecl:0-mm-383-dist-file" />
+				
+
+				<br />
+			</p>
+			
+
+			<p xmlns="http://www.w3.org/1999/xhtml">Direct MM item URL:</p>
+			
+
+			<p xmlns="http://www.w3.org/1999/xhtml">
+				<a xmlns:xlink="http://www.w3.org/1999/xlink" title="Ring05.wav" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Schemas/SDL%20Media%20Manager/C94/286/ecl%3A0-mm-383-dist-file.ecl" xlink:title="ecl:0-mm-383-dist-file">Ring05.wav</a>
+				
+
+				<br />
+			</p>
+			
+
+			<p xmlns="http://www.w3.org/1999/xhtml">Media property:</p>
+		</content>
+            <media xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Schemas/SDL%20Media%20Manager/C94/286/ecl%3A0-mm-383-dist-file.ecl" xlink:title="ecl:0-mm-383-dist-file" />
+          </articleBody>
+          <articleBody>
+            <subheading>MM Download - Files/DXA_vNext_Architecture.pdf</subheading>
+            <content>
+			<p xmlns="http://www.w3.org/1999/xhtml">RTF Embed:</p>
+			
+
+			<p xmlns="http://www.w3.org/1999/xhtml">
+				<img xmlns:xlink="http://www.w3.org/1999/xlink" alt="DXA_vNext_Architecture.pdf" title="DXA_vNext_Architecture.pdf" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Schemas/SDL%20Media%20Manager/D6F/B0F/ecl%3A0-mm-380-dist-file.ecl" xlink:title="ecl:0-mm-380-dist-file" />
+				
+
+				<br />
+			</p>
+			
+
+			<p xmlns="http://www.w3.org/1999/xhtml">Direct MM item URL:</p>
+			
+
+			<p xmlns="http://www.w3.org/1999/xhtml">
+				<a xmlns:xlink="http://www.w3.org/1999/xlink" title="DXA_vNext_Architecture.pdf" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Schemas/SDL%20Media%20Manager/D6F/B0F/ecl%3A0-mm-380-dist-file.ecl" xlink:title="ecl:0-mm-380-dist-file">DXA_vNext_Architecture.pdf</a>
+				
+
+				<br />
+			</p>
+			
+
+			<p xmlns="http://www.w3.org/1999/xhtml">Media property:</p>
+		</content>
+            <media xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Schemas/SDL%20Media%20Manager/D6F/B0F/ecl%3A0-mm-380-dist-file.ecl" xlink:title="ecl:0-mm-380-dist-file" />
+          </articleBody>
+        </Article>
+      </tcm:Content>
+      <tcm:Metadata>
+        <Metadata xmlns="http://www.sdl.com/web/schemas/core" />
+      </tcm:Metadata>
+      <tcm:IsBasedOnTridionWebSchema>true</tcm:IsBasedOnTridionWebSchema>
+      <tcm:MultimediaType xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Smoke/MediaManager" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Schemas/SDL%20Media%20Manager/BEF/AF8/ecl%3A0-mm-204-dist-file.ecl" linkName="Content" xpath="*[local-name() = 'Article'][1]/*[local-name() = 'articleBody'][1]/*[local-name() = 'content'][1]/*[local-name() = 'p'][2]/*[local-name() = 'img'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Schemas/SDL%20Media%20Manager/BEF/AF8/ecl%3A0-mm-204-dist-file.ecl" linkName="Content" xpath="*[local-name() = 'Article'][1]/*[local-name() = 'articleBody'][1]/*[local-name() = 'content'][1]/*[local-name() = 'p'][4]/*[local-name() = 'a'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Schemas/SDL%20Media%20Manager/BEF/AF8/ecl%3A0-mm-204-dist-file.ecl" linkName="Content" xpath="*[local-name() = 'Article'][1]/*[local-name() = 'articleBody'][1]/*[local-name() = 'media'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Schemas/SDL%20Media%20Manager/99A/24F/ecl%3A0-mm-377-dist-file.ecl" linkName="Content" xpath="*[local-name() = 'Article'][1]/*[local-name() = 'articleBody'][2]/*[local-name() = 'content'][1]/*[local-name() = 'p'][2]/*[local-name() = 'img'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Schemas/SDL%20Media%20Manager/99A/24F/ecl%3A0-mm-377-dist-file.ecl" linkName="Content" xpath="*[local-name() = 'Article'][1]/*[local-name() = 'articleBody'][2]/*[local-name() = 'content'][1]/*[local-name() = 'p'][4]/*[local-name() = 'a'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Schemas/SDL%20Media%20Manager/99A/24F/ecl%3A0-mm-377-dist-file.ecl" linkName="Content" xpath="*[local-name() = 'Article'][1]/*[local-name() = 'articleBody'][2]/*[local-name() = 'media'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Schemas/SDL%20Media%20Manager/C94/286/ecl%3A0-mm-383-dist-file.ecl" linkName="Content" xpath="*[local-name() = 'Article'][1]/*[local-name() = 'articleBody'][3]/*[local-name() = 'content'][1]/*[local-name() = 'p'][2]/*[local-name() = 'img'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Schemas/SDL%20Media%20Manager/C94/286/ecl%3A0-mm-383-dist-file.ecl" linkName="Content" xpath="*[local-name() = 'Article'][1]/*[local-name() = 'articleBody'][3]/*[local-name() = 'content'][1]/*[local-name() = 'p'][4]/*[local-name() = 'a'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Schemas/SDL%20Media%20Manager/C94/286/ecl%3A0-mm-383-dist-file.ecl" linkName="Content" xpath="*[local-name() = 'Article'][1]/*[local-name() = 'articleBody'][3]/*[local-name() = 'media'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Schemas/SDL%20Media%20Manager/D6F/B0F/ecl%3A0-mm-380-dist-file.ecl" linkName="Content" xpath="*[local-name() = 'Article'][1]/*[local-name() = 'articleBody'][4]/*[local-name() = 'content'][1]/*[local-name() = 'p'][2]/*[local-name() = 'img'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Schemas/SDL%20Media%20Manager/D6F/B0F/ecl%3A0-mm-380-dist-file.ecl" linkName="Content" xpath="*[local-name() = 'Article'][1]/*[local-name() = 'articleBody'][4]/*[local-name() = 'content'][1]/*[local-name() = 'p'][4]/*[local-name() = 'a'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/MediaManager/Editor/Schemas/SDL%20Media%20Manager/D6F/B0F/ecl%3A0-mm-380-dist-file.ecl" linkName="Content" xpath="*[local-name() = 'Article'][1]/*[local-name() = 'articleBody'][4]/*[local-name() = 'media'][1]/@xlink:href" />
+    <Dependency dependencyType="Schema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Schemas/Article.xsd" linkName="Schema" />
+  </Dependencies>
+</PackageItem>

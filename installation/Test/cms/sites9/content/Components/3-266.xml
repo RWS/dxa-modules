@@ -1,0 +1,46 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Social Sharing Links</tcm:Title>
+      <tcm:Type>Normal</tcm:Type>
+      <tcm:Schema xlink:type="simple" xlink:title="Social Links" xlink:href="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Modules/Core/Site%20Manager/Schemas/Social%20Links.xsd" IsMandatory="false" />
+      <tcm:Content>
+        <SocialLinks xmlns="uuid:1561f027-0c88-4bea-a938-0f915932d059">
+          <link>
+            <tag xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/110%20DXA%20Site%20Type/Social%20Networks/Facebook.tkw" xlink:title="Facebook">Facebook</tag>
+            <externalLink>https://www.facebook.com/sharer/sharer.php?u={0}</externalLink>
+          </link>
+          <link>
+            <tag xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/110%20DXA%20Site%20Type/Social%20Networks/Twitter.tkw" xlink:title="Twitter">Twitter</tag>
+            <externalLink>https://twitter.com/intent/tweet?url={0}</externalLink>
+          </link>
+          <link>
+            <tag xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/110%20DXA%20Site%20Type/Social%20Networks/Google%2B.tkw" xlink:title="Google+">Google+</tag>
+            <externalLink>https://plus.google.com/share?url={0}</externalLink>
+          </link>
+          <link>
+            <tag xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/110%20DXA%20Site%20Type/Social%20Networks/LinkedIn.tkw" xlink:title="LinkedIn">LinkedIn</tag>
+            <externalLink>https://www.linkedin.com/shareArticle?mini=true&amp;url={0}</externalLink>
+          </link>
+          <link>
+            <tag xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/110%20DXA%20Site%20Type/Social%20Networks/Pinterest.tkw" xlink:title="Pinterest">Pinterest</tag>
+            <externalLink>https://pinterest.com/pin/create/link/?url={0}</externalLink>
+          </link>
+        </SocialLinks>
+      </tcm:Content>
+      <tcm:Metadata />
+      <tcm:IsBasedOnTridionWebSchema>true</tcm:IsBasedOnTridionWebSchema>
+      <tcm:MultimediaType xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/110%20DXA%20Site%20Type" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Content/_Structure" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="LinkedKeyword" itemUrl="/webdav/110%20DXA%20Site%20Type/Social%20Networks/Facebook.tkw" linkName="Content" xpath="*[local-name() = 'SocialLinks'][1]/*[local-name() = 'link'][1]/*[local-name() = 'tag'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedKeyword" itemUrl="/webdav/110%20DXA%20Site%20Type/Social%20Networks/Twitter.tkw" linkName="Content" xpath="*[local-name() = 'SocialLinks'][1]/*[local-name() = 'link'][2]/*[local-name() = 'tag'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedKeyword" itemUrl="/webdav/110%20DXA%20Site%20Type/Social%20Networks/Google%2B.tkw" linkName="Content" xpath="*[local-name() = 'SocialLinks'][1]/*[local-name() = 'link'][3]/*[local-name() = 'tag'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedKeyword" itemUrl="/webdav/110%20DXA%20Site%20Type/Social%20Networks/LinkedIn.tkw" linkName="Content" xpath="*[local-name() = 'SocialLinks'][1]/*[local-name() = 'link'][4]/*[local-name() = 'tag'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedKeyword" itemUrl="/webdav/110%20DXA%20Site%20Type/Social%20Networks/Pinterest.tkw" linkName="Content" xpath="*[local-name() = 'SocialLinks'][1]/*[local-name() = 'link'][5]/*[local-name() = 'tag'][1]/@xlink:href" />
+    <Dependency dependencyType="Schema" itemUrl="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Modules/Core/Site%20Manager/Schemas/Social%20Links.xsd" linkName="Schema" />
+  </Dependencies>
+</PackageItem>

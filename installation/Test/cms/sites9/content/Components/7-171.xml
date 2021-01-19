@@ -1,0 +1,31 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <PrimaryBlueprintParentUrl>/webdav/100%20Master/Building%20Blocks/Settings/Core/Site%20Manager/Localization%20Configuration.xml</PrimaryBlueprintParentUrl>
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Localization Configuration</tcm:Title>
+      <tcm:Type>Normal</tcm:Type>
+      <tcm:Schema xlink:type="simple" xlink:title="General Configuration" xlink:href="/webdav/500%20Automated%20Test%20Child/Building%20Blocks/Framework/Site%20Manager/Schemas/General%20Configuration.xsd" IsMandatory="false" />
+      <tcm:Content>
+        <GeneralConfiguration xmlns="http://www.sdl.com/web/schemas/core">
+          <name>Localization Configuration</name>
+          <settings>
+            <name>culture</name>
+            <value>en-US</value>
+          </settings>
+          <settings>
+            <name>language</name>
+            <value>AutoChildLang</value>
+          </settings>
+        </GeneralConfiguration>
+      </tcm:Content>
+      <tcm:Metadata />
+      <tcm:IsBasedOnTridionWebSchema>true</tcm:IsBasedOnTridionWebSchema>
+      <tcm:MultimediaType xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/500%20Automated%20Test%20Child" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/500%20Automated%20Test%20Child/Building%20Blocks/Settings/Core/Site%20Manager" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="Schema" itemUrl="/webdav/500%20Automated%20Test%20Child/Building%20Blocks/Framework/Site%20Manager/Schemas/General%20Configuration.xsd" linkName="Schema" />
+  </Dependencies>
+</PackageItem>

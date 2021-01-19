@@ -1,0 +1,183 @@
+<Index dataContractVersion="201701" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Item id="tcm:0-0-0" selected="false" exported="true">
+    <ApplicationIds>
+      <ApplicationId>CustomPages</ApplicationId>
+      <ApplicationId>http://www.sdl.com/tridion/SemanticMapping/vocabularies</ApplicationId>
+    </ApplicationIds>
+    <Item id="7413620d86904c0ebc30f61aab6b7db2" title="100%20Master" itemType="Publication" selected="false" exported="false">
+      <Item id="b0495feb63f841d7bffe81b95f25c700" title="Building%20Blocks" itemType="Folder" selected="false" exported="false">
+        <Item id="e43df6792c6642b0878b189068129486" title="Framework" itemType="Folder" selected="false" exported="false">
+          <Item id="fbf20f4821514dd2b594576ba785b2ca" title="Developer" itemType="Folder" selected="false" exported="false">
+            <Item id="dc45143da6d54d1aa31ca39813e51296" title="Schemas" itemType="Folder" selected="false" exported="false">
+              <Item id="tcm:2-91-8" title="Component%20Template%20Metadata" extension="xsd" itemType="Schema" subtype="3" blueprintStatus="LocalItem" selected="false" exported="true" />
+              <Item id="428db8f07c8947718ebc39565b88a60d" title="Module%20Configuration" extension="xsd" itemType="Schema" selected="false" exported="false" />
+            </Item>
+            <Item id="9c1bc66f66b94d2b95f906bd7eb4810d" title="Templates" itemType="Folder" selected="false" exported="false">
+              <Item id="b1557973c98d44afb540d77d146e5f3c" title="DXA%2ER2" itemType="Folder" selected="false" exported="false">
+                <Item id="3e89855bccb5427a8626feca503e3a4f" title="Default%20Component%20Template%20Finish%20Actions" extension="tbbcmp" itemType="TemplateBuildingBlock" selected="false" exported="false" />
+                <Item id="f4a1c0b41b8a41d991e3d8fc9dd7180c" title="Render%20Component%20Content" extension="tbbcmp" itemType="TemplateBuildingBlock" selected="false" exported="false" />
+              </Item>
+            </Item>
+          </Item>
+        </Item>
+        <Item id="65a7b2377ad948c1a1df74eb24146604" title="Modules" itemType="Folder" selected="false" exported="false">
+          <Item id="tcm:2-114-2" title="Search" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+            <Item id="tcm:2-115-2" title="Admin" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+              <Item id="tcm:2-403" title="Search" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+            </Item>
+            <Item id="tcm:2-122-2" title="Developer" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+              <Item id="tcm:2-123-2" title="Search%20Template%20Building%20Blocks" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+                <Item id="tcm:2-408-2048" title="Add%20Index%20Data%20To%20Output" extension="tbbcs" itemType="TemplateBuildingBlock" blueprintStatus="LocalItem" selected="true" exported="true" />
+                <Item id="tcm:2-410-2048" title="Enable%20Search%20Indexing" extension="tbbcmp" itemType="TemplateBuildingBlock" blueprintStatus="LocalItem" selected="true" exported="true" />
+                <Item id="tcm:2-409-2048" title="Generate%20Index%20Data" extension="tbbcs" itemType="TemplateBuildingBlock" blueprintStatus="LocalItem" selected="true" exported="true" />
+                <Item id="tcm:2-406-8" title="Generate%20Index%20Data" extension="xsd" itemType="Schema" subtype="6" blueprintStatus="LocalItem" selected="true" exported="true" />
+                <Item id="tcm:2-407-2048" title="SI4T%2ETemplating" extension="tbbasm" itemType="TemplateBuildingBlock" blueprintStatus="LocalItem" selected="true" exported="true" />
+              </Item>
+            </Item>
+            <Item id="tcm:2-120-2" title="Editor" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+              <Item id="tcm:2-124-2" title="Schemas" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+                <Item id="tcm:2-413-8" title="Search%20Indexing%20Metadata" extension="xsd" itemType="Schema" subtype="3" blueprintStatus="LocalItem" selected="true" exported="true" />
+                <Item id="tcm:2-412-8" title="Search%20Query" extension="xsd" itemType="Schema" blueprintStatus="LocalItem" selected="true" exported="true" />
+              </Item>
+              <Item id="tcm:2-125-2" title="Templates" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+                <Item id="tcm:2-414-32" title="Search%20Results" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="LocalItem" selected="true" exported="true" />
+              </Item>
+            </Item>
+            <Item id="tcm:2-118-2" title="Site%20Manager" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+              <Item id="tcm:2-119-2" title="Schemas" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+                <Item id="tcm:2-404-8" title="Search%20Box" extension="xsd" itemType="Schema" blueprintStatus="LocalItem" selected="true" exported="true" />
+                <Item id="tcm:2-401-8" title="Search%20Configuration" extension="xsd" itemType="Schema" blueprintStatus="LocalItem" selected="true" exported="true" />
+              </Item>
+              <Item id="tcm:2-121-2" title="Templates" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+                <Item id="tcm:2-411-32" title="Search%20Box%20%5BNav%5D" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="LocalItem" selected="true" exported="true" />
+                <Item id="tcm:2-405-32" title="Search%20Box" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="LocalItem" selected="true" exported="true" />
+              </Item>
+            </Item>
+          </Item>
+        </Item>
+        <Item id="cb60cb078375496e95ea35ee5c95c92b" title="Settings" itemType="Folder" selected="false" exported="false">
+          <Item id="tcm:2-116-2" title="Search" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+            <Item id="tcm:2-117-2" title="Site%20Manager" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+              <Item id="tcm:2-402" title="Search%20Configuration" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+            </Item>
+          </Item>
+        </Item>
+      </Item>
+    </Item>
+    <Item id="90706f2290b04c71a2994d8da4d1229a" title="200%20Example%20Content" itemType="Publication" selected="false" exported="false">
+      <Item id="509eba1fb79546e0800315a53db744fe" title="Building%20Blocks" itemType="Folder" selected="false" exported="false">
+        <Item id="f1dfb53166244a3facda7daf8daac651" title="Modules" itemType="Folder" selected="false" exported="false">
+          <Item id="tcm:4-114-2" title="Search" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+            <Item id="tcm:4-115-2" title="Admin" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+              <Item id="tcm:4-403" title="Search" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+            </Item>
+            <Item id="tcm:4-122-2" title="Developer" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+              <Item id="tcm:4-123-2" title="Search%20Template%20Building%20Blocks" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:4-408-2048" title="Add%20Index%20Data%20To%20Output" extension="tbbcs" itemType="TemplateBuildingBlock" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:4-410-2048" title="Enable%20Search%20Indexing" extension="tbbcmp" itemType="TemplateBuildingBlock" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:4-409-2048" title="Generate%20Index%20Data" extension="tbbcs" itemType="TemplateBuildingBlock" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:4-406-8" title="Generate%20Index%20Data" extension="xsd" itemType="Schema" subtype="6" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:4-407-2048" title="SI4T%2ETemplating" extension="tbbasm" itemType="TemplateBuildingBlock" blueprintStatus="SharedItem" selected="true" exported="true" />
+              </Item>
+            </Item>
+            <Item id="tcm:4-120-2" title="Editor" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+              <Item id="tcm:4-124-2" title="Schemas" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:4-413-8" title="Search%20Indexing%20Metadata" extension="xsd" itemType="Schema" subtype="3" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:4-412-8" title="Search%20Query" extension="xsd" itemType="Schema" blueprintStatus="SharedItem" selected="true" exported="true" />
+              </Item>
+              <Item id="tcm:4-125-2" title="Templates" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:4-414-32" title="Search%20Results" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+              </Item>
+            </Item>
+            <Item id="tcm:4-118-2" title="Site%20Manager" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+              <Item id="tcm:4-119-2" title="Schemas" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:4-404-8" title="Search%20Box" extension="xsd" itemType="Schema" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:4-401-8" title="Search%20Configuration" extension="xsd" itemType="Schema" blueprintStatus="SharedItem" selected="true" exported="true" />
+              </Item>
+              <Item id="tcm:4-121-2" title="Templates" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:4-411-32" title="Search%20Box%20%5BNav%5D" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:4-405-32" title="Search%20Box" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+              </Item>
+            </Item>
+          </Item>
+        </Item>
+        <Item id="aa10c469f86d4cefba4bd2d3badd33a3" title="Modules%20Content" itemType="Folder" selected="false" exported="false">
+          <Item id="tcm:4-126-2" title="Search" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+            <Item id="tcm:4-416" title="Search%20Box%20Configuration" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+            <Item id="tcm:4-415" title="Search%20Results" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+          </Item>
+        </Item>
+      </Item>
+    </Item>
+    <Item id="1ebcc5c196ef4d36ac36fca00a51d123" title="400%20Example%20Site" itemType="Publication" selected="false" exported="false">
+      <Item id="e1d6d51ccb1d458fbd3def89539923e3" title="Building%20Blocks" itemType="Folder" selected="false" exported="false">
+        <Item id="3d95db5d63ac42ff9f9b2f7adbfa9651" title="Modules" itemType="Folder" selected="false" exported="false">
+          <Item id="88b443aec69e4f56926375086b770b77" title="Core" itemType="Folder" selected="false" exported="false">
+            <Item id="c157f852d31349f9a0007c27a70e9b93" title="Editor" itemType="Folder" selected="false" exported="false">
+              <Item id="b8275ecf2095493893acb54ce76efaec" title="Schemas" itemType="Folder" selected="false" exported="false">
+                <Item id="f0666d2a8ab543e59ff26e1d1ae875d9" title="Page%20Schemas" itemType="Folder" selected="false" exported="false">
+                  <Item id="2de87cdcf2454bee9b9cf3fcc3aaa3e2" title="Content%20Page" extension="xsd" itemType="Schema" selected="false" exported="false" />
+                </Item>
+                <Item id="ffe00f49465b426fb983c39c9228d884" title="Region%20Schemas" itemType="Folder" selected="false" exported="false">
+                  <Item id="0fa3ae69463349e5a321374e47a3b206" title="%5BMain%5D%20Region" extension="xsd" itemType="Schema" selected="false" exported="false" />
+                </Item>
+              </Item>
+              <Item id="bf298c1479a944fea479d39895a58673" title="Templates" itemType="Folder" selected="false" exported="false">
+                <Item id="0184b112d7ef4c948f48a59bf39d2edb" title="Content%20Page%20Without%20Navigation" extension="tptcmp" itemType="PageTemplate" selected="false" exported="false" />
+              </Item>
+            </Item>
+          </Item>
+          <Item id="tcm:5-114-2" title="Search" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+            <Item id="tcm:5-115-2" title="Admin" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+              <Item id="tcm:5-403" title="Search" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+            </Item>
+            <Item id="tcm:5-122-2" title="Developer" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+              <Item id="tcm:5-123-2" title="Search%20Template%20Building%20Blocks" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:5-408-2048" title="Add%20Index%20Data%20To%20Output" extension="tbbcs" itemType="TemplateBuildingBlock" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:5-410-2048" title="Enable%20Search%20Indexing" extension="tbbcmp" itemType="TemplateBuildingBlock" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:5-409-2048" title="Generate%20Index%20Data" extension="tbbcs" itemType="TemplateBuildingBlock" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:5-406-8" title="Generate%20Index%20Data" extension="xsd" itemType="Schema" subtype="6" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:5-407-2048" title="SI4T%2ETemplating" extension="tbbasm" itemType="TemplateBuildingBlock" blueprintStatus="SharedItem" selected="true" exported="true" />
+              </Item>
+            </Item>
+            <Item id="tcm:5-120-2" title="Editor" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+              <Item id="tcm:5-124-2" title="Schemas" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:5-413-8" title="Search%20Indexing%20Metadata" extension="xsd" itemType="Schema" subtype="3" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:5-412-8" title="Search%20Query" extension="xsd" itemType="Schema" blueprintStatus="SharedItem" selected="true" exported="true" />
+              </Item>
+              <Item id="tcm:5-125-2" title="Templates" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:5-414-32" title="Search%20Results" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+              </Item>
+            </Item>
+            <Item id="tcm:5-118-2" title="Site%20Manager" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+              <Item id="tcm:5-119-2" title="Schemas" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:5-404-8" title="Search%20Box" extension="xsd" itemType="Schema" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:5-401-8" title="Search%20Configuration" extension="xsd" itemType="Schema" blueprintStatus="SharedItem" selected="true" exported="true" />
+              </Item>
+              <Item id="tcm:5-121-2" title="Templates" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:5-411-32" title="Search%20Box%20%5BNav%5D" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:5-405-32" title="Search%20Box" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+              </Item>
+            </Item>
+          </Item>
+        </Item>
+        <Item id="7507c8aa44874001a43af7bfee0613a4" title="Modules%20Content" itemType="Folder" selected="false" exported="false">
+          <Item id="tcm:5-126-2" title="Search" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+            <Item id="tcm:5-416" title="Search%20Box%20Configuration" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+            <Item id="tcm:5-415" title="Search%20Results" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+          </Item>
+        </Item>
+        <Item id="a5d73c2a0f1d4abdb8f9979b89c1f965" title="Settings" itemType="Folder" selected="false" exported="false">
+          <Item id="tcm:5-116-2" title="Search" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+            <Item id="tcm:5-117-2" title="Site%20Manager" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+              <Item id="tcm:5-402" title="Search%20Configuration" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+            </Item>
+          </Item>
+        </Item>
+      </Item>
+      <Item id="ab658b46cd7545ecbb2cf554855460d9" title="Home" itemType="StructureGroup" selected="false" exported="false">
+        <Item id="tcm:5-417-64" title="Search%20Results" extension="tpg" itemType="Page" blueprintStatus="LocalItem" selected="true" exported="true" />
+      </Item>
+    </Item>
+  </Item>
+</Index>

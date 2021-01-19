@@ -1,0 +1,37 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Word document</tcm:Title>
+      <tcm:MIMEType>application/msword</tcm:MIMEType>
+      <tcm:FileExtensions>
+        <tcm:FileExtension>doc</tcm:FileExtension>
+      </tcm:FileExtensions>
+    </tcm:Data>
+  </Data>
+  <ApplicationDataCollection>
+    <ApplicationData>
+      <ApplicationId>cme:MMType:16</ApplicationId>
+      <TypeId>image/png</TypeId>
+      <BinaryData>iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAIVJREFUeNpiZAACK49wBSB1n4EwWHBsx8pErDJAQ/7jAyB5KJ6PrI+JgXSQgGwIOQaADYExWIjVcXT7Cjjb2jOCgVIXUA8wemb2/afEALgXtk0rBGNkQIwYShh4ZfXDJUE0iI9LjGqByES1QIQ5E9l5xIhRHAuUpwPk3EiKRmC2BusFCDAA9eJYoubCrVsAAAAASUVORK5CYII=</BinaryData>
+      <IsInherited>false</IsInherited>
+    </ApplicationData>
+    <ApplicationData>
+      <ApplicationId>cme:MMType:16:LastModified</ApplicationId>
+      <TypeId>DateTime</TypeId>
+      <BinaryData>MjAxOS0wNy0xNVQwMDo1Mzo1Mw==</BinaryData>
+      <IsInherited>false</IsInherited>
+    </ApplicationData>
+    <ApplicationData>
+      <ApplicationId>cme:MMType:48</ApplicationId>
+      <TypeId>image/png</TypeId>
+      <BinaryData>iVBORw0KGgoAAAANSUhEUgAAACQAAAAvCAYAAACLx2hbAAAACXBIWXMAAAsSAAALEgHS3X78AAADF0lEQVRYw+2ZQUjbYBTH/x0FERdXBhUMyRzd2ou0ZauwtjoEL1N78TBQ6MGddvCk14GngYdd9ORhJzcI7LCDO8TBJg4ZWzNQXBP0kKgoCZVZBp2u1J7cQfPR2DRGl9pu9EEhed8L36/v/773fU1d8f7h7wDCuBp79eX9mydWAa54//DxjVYqHQl35qpFsZpe9/w6OAzbgXIDQCTcmXv+bLy3WkCTUzPLS58F/Xa0e2AElaCuoTY22j0wMmcLSJQ1fBTWyX2+UATHp5BKbxHfj58H4PhUVaDKgLa1fUy//mAA5HjBALAorGN+aa0qmXKfjQgF2FOwLHyMF6Ksou1mK7a1LPKFIlqam7ClZhH0MwCATCaDvUymbKZ2mgZN03ahSE2VZcjHeE8m1fYBAJKiYajvHlqam/A1vUl8ocAJEEVRaKfpsg9FUZfKlNtsNOhnIMka4uG72NayCAVYiLIGSdYQ8rPIF4okkxRFXXRyy0yZAoUCDBaFDYiyhpbmJvgYL0IBBvNLa4iFs8TnkGQGqApALF6+XYYoq6RWdF8qvUl8eoZgMnFp1h71PfQAWLbTPE2B9G//7tManj7uNdTWorBBfHYl64lGwj3RiK3m6a4UEPQzp8XLGnyCuGXwVZLsPIt0dVXeOswsmYhBUlSSLQAY6ruPO6zX4Ksk2WWtIlAowJClbeVzcJVZA62urFR1M7uwZO0OyuBIhuh6A2pI1pCsIZlDVqtDvnWGcgV4HDi0/5XlCvAQoMPisYfjhZoCtV0/AapPyax2/KCfNfjOSlsaIykqRFkrO8aUmlmMbaCgn0UyEbUEKo3heJgAnX0elwfSbXBsmlwvzE6QH476tT6eTMSwMDuBwbFpJBMxJBNRw7P/5LJvADWA/s+97DwrbW4cL0BSVHKdLxyR8XzhCPoWJCkqON7hxmjW3Er7CsenSL/RAfXGKcoaRFnDwuzEhRqjK94/fOwPPtjd/42OGm+uu4r0raNR1LaKmvW4duZejNdUssmpmR0F6LiSN/l2TH9h5bri/zrOs7TLd+t2pN5qaK+egP4AgXhV5wXRECAAAAAASUVORK5CYII=</BinaryData>
+      <IsInherited>false</IsInherited>
+    </ApplicationData>
+    <ApplicationData>
+      <ApplicationId>cme:MMType:48:LastModified</ApplicationId>
+      <TypeId>DateTime</TypeId>
+      <BinaryData>MjAxOS0wNy0xNVQwMDo1Mzo1Mw==</BinaryData>
+      <IsInherited>false</IsInherited>
+    </ApplicationData>
+  </ApplicationDataCollection>
+</PackageItem>
