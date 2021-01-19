@@ -1,0 +1,31 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Fishing Product</tcm:Title>
+      <tcm:Type>CompoundTemplate</tcm:Type>
+      <tcm:Content>
+        <tcm:PublisherScript>&lt;CompoundTemplate xmlns="http://www.tridion.com/ContentManager/5.3/CompoundTemplate"&gt;
+  &lt;TemplateInvocation&gt;
+    &lt;Template xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Framework/Developer/Templates/DXA%2ER2/Render%20Page%20Content.tbbcmp" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:title="Render Page Content" /&gt;
+    &lt;TemplateParameters /&gt;
+  &lt;/TemplateInvocation&gt;
+  &lt;TemplateInvocation&gt;
+    &lt;Template xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Framework/Developer/Templates/DXA%2ER2/Default%20Page%20Template%20Finish%20Actions.tbbcmp" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:title="Default Page Template Finish Actions" /&gt;
+    &lt;TemplateParameters /&gt;
+  &lt;/TemplateInvocation&gt;
+&lt;/CompoundTemplate&gt;</tcm:PublisherScript>
+      </tcm:Content>
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:ParameterSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:Metadata />
+      <tcm:FileExtension>html</tcm:FileExtension>
+      <tcm:PageSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/SRQ9128/templates" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="TemplateLinkedItem" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Framework/Developer/Templates/DXA%2ER2/Render%20Page%20Content.tbbcmp" linkName="ExtractedReferences[0]" />
+    <Dependency dependencyType="TemplateLinkedItem" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Framework/Developer/Templates/DXA%2ER2/Default%20Page%20Template%20Finish%20Actions.tbbcmp" linkName="ExtractedReferences[1]" />
+  </Dependencies>
+</PackageItem>

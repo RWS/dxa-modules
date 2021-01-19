@@ -1,0 +1,96 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+      <tcm:Title>Tridion Docs Static Widget</tcm:Title>
+      <tcm:Description>Tridion Docs Static Widget Schema</tcm:Description>
+      <tcm:Purpose>Component</tcm:Purpose>
+      <tcm:NamespaceURI>uuid:3f27d9a5-594d-4d2a-9b8f-179aa29561cd</tcm:NamespaceURI>
+      <tcm:RootElementName>StaticWidget</tcm:RootElementName>
+      <tcm:IsTridionWebSchema>true</tcm:IsTridionWebSchema>
+      <tcm:XSD>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="uuid:3f27d9a5-594d-4d2a-9b8f-179aa29561cd" xmlns:tcmi="http://www.tridion.com/ContentManager/5.0/Instance" xmlns:category="tcm:0-2-1/Categories.xsd" elementFormDefault="qualified" targetNamespace="uuid:3f27d9a5-594d-4d2a-9b8f-179aa29561cd">
+  <xsd:import namespace="http://www.tridion.com/ContentManager/5.0/Instance" schemaLocation="/webdav/cm_xml_inst.xsd" />
+  <xsd:import namespace="tcm:0-2-1/Categories.xsd" schemaLocation="/webdav/100%20Master/Categories.xsd" />
+  <xsd:annotation>
+    <xsd:appinfo>
+      <tcm:Labels xmlns:tcm="http://www.tridion.com/ContentManager/5.0">
+        <tcm:Label ElementName="Publication.FMBPRODUCTRELEASENAME.Version" Metadata="false">Product Release Name</tcm:Label>
+        <tcm:Label ElementName="Publication.FMBPRODUCTFAMILYNAME.Logical" Metadata="false">Product Family Name</tcm:Label>
+        <tcm:Label ElementName="Item.FMBCONTENTREFTYPE.Logical" Metadata="false">Content Reference Type</tcm:Label>
+        <tcm:Label ElementName="DisplayContentAs" Metadata="false">Display Content As</tcm:Label>
+        <tcm:Label ElementName="MaxNumberOfItemsToShow" Metadata="false">Max Number Of Items To Show</tcm:Label>
+      </tcm:Labels>
+    </xsd:appinfo>
+  </xsd:annotation>
+  <xsd:element name="StaticWidget">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Publication.FMBPRODUCTRELEASENAME.Version" minOccurs="1" maxOccurs="1" type="category:DXPRODUCTRELEASENAME">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <tcm:ExtensionXml xmlns:tcm="http://www.tridion.com/ContentManager/5.0" />
+              <tcm:Size xmlns:tcm="http://www.tridion.com/ContentManager/5.0">1</tcm:Size>
+              <tcm:listtype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">select</tcm:listtype>
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Publication.FMBPRODUCTFAMILYNAME.Logical" minOccurs="1" maxOccurs="1" type="category:DXPRODUCTFAMILYNAME">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <tcm:ExtensionXml xmlns:tcm="http://www.tridion.com/ContentManager/5.0" />
+              <tcm:Size xmlns:tcm="http://www.tridion.com/ContentManager/5.0">1</tcm:Size>
+              <tcm:listtype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">select</tcm:listtype>
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Item.FMBCONTENTREFTYPE.Logical" minOccurs="1" maxOccurs="1" type="category:DXCONTENTREFTYPE">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <tcm:ExtensionXml xmlns:tcm="http://www.tridion.com/ContentManager/5.0" />
+              <tcm:Size xmlns:tcm="http://www.tridion.com/ContentManager/5.0">1</tcm:Size>
+              <tcm:listtype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">select</tcm:listtype>
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="DisplayContentAs" minOccurs="1" maxOccurs="1">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <tcm:ExtensionXml xmlns:tcm="http://www.tridion.com/ContentManager/5.0" />
+              <tcm:Size xmlns:tcm="http://www.tridion.com/ContentManager/5.0">1</tcm:Size>
+              <tcm:listtype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">radio</tcm:listtype>
+            </xsd:appinfo>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:normalizedString">
+              <xsd:enumeration value="Embedded Content" />
+              <xsd:enumeration value="Link" />
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="MaxNumberOfItemsToShow" minOccurs="1" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <tcm:ExtensionXml xmlns:tcm="http://www.tridion.com/ContentManager/5.0" />
+              <tcm:DefaultTextValue xmlns:tcm="http://www.tridion.com/ContentManager/5.0">1</tcm:DefaultTextValue>
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>
+      </tcm:XSD>
+      <tcm:AllowedMultimediaTypes />
+      <tcm:ComponentProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:BundleProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:DeleteBundleOnProcessFinished>false</tcm:DeleteBundleOnProcessFinished>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/100%20Master" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="Category" itemUrl="/webdav/100%20Master/Product%20Release%20Name" linkName="Xsd" />
+    <Dependency dependencyType="Category" itemUrl="/webdav/100%20Master/Product%20Family%20Name" linkName="Xsd" />
+    <Dependency dependencyType="Category" itemUrl="/webdav/100%20Master/Content%20Reference%20Type" linkName="Xsd" />
+  </Dependencies>
+</PackageItem>

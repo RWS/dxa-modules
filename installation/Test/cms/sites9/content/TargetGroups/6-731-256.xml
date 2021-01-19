@@ -1,0 +1,18 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>TSI-3010 Existing Target Groups Condition</tcm:Title>
+      <tcm:Description>TSI-3010 Existing Target Groups Condition</tcm:Description>
+      <tcm:Conditions>
+        <tcm:TargetGroupCondition Type="Exclude">
+          <tcm:TargetGroup xlink:type="simple" xlink:title="TSI-3010 Characteristic Condition" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Regression/TSI-3010%20Characteristic%20Condition.ttg" />
+        </tcm:TargetGroupCondition>
+      </tcm:Conditions>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Regression" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="TargetGroup" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Regression/TSI-3010%20Characteristic%20Condition.ttg" linkName="Conditions[0]/TargetGroup" />
+  </Dependencies>
+</PackageItem>

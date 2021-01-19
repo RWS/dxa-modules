@@ -1,0 +1,51 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>test component embedded RTF</tcm:Title>
+      <tcm:Type>Normal</tcm:Type>
+      <tcm:Schema xlink:type="simple" xlink:title="Article" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Schemas/Article.xsd" IsMandatory="false" />
+      <tcm:Content>
+        <Article xmlns="http://www.sdl.com/web/schemas/core">
+          <headline>Test embedded RTF heading</headline>
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Images/Large/balloons.jpg" xlink:title="balloons" />
+          <articleBody>
+            <subheading>Test embedded RTF subheading</subheading>
+            <content>
+              <p xmlns="http://www.w3.org/1999/xhtml">Test <strong>rich</strong> <em>text</em> content.</p>
+<p xmlns="http://www.w3.org/1999/xhtml">Component link (not published): <a xmlns:xlink="http://www.w3.org/1999/xlink" title="Test Component" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Test%20Component.xml" xlink:title="Test Component">Test Component</a></p>
+<p xmlns="http://www.w3.org/1999/xhtml">Component link (published): <a xmlns:xlink="http://www.w3.org/1999/xlink" title="TSI-1758 Test Component" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Regression/TSI-1758%20Test%20Component.xml" xlink:title="TSI-1758 Test Component">TSI-1758 Test Component</a></p>
+<p xmlns="http://www.w3.org/1999/xhtml">MMC link: <a xmlns:xlink="http://www.w3.org/1999/xlink" title="bulls-eye" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Images/Large/bulls-eye.JPG" xlink:title="bulls-eye">bulls-eye</a></p>
+<p xmlns="http://www.w3.org/1999/xhtml">Embedded Image: <img xmlns:xlink="http://www.w3.org/1999/xlink" title="calculator" alt="calculator" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Images/Large/calculator.jpg" xlink:title="calculator" /></p>
+<p xmlns="http://www.w3.org/1999/xhtml">Embedded Entity (article):</p>
+<article xmlns="http://www.w3.org/1999/xhtml" xmlns:xlink="http://www.w3.org/1999/xlink" title="test embedded article" id="embeddedEntity" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Regression/TSI-2277%20Article%20with%20name%2C%20description%20and%20headline.xml" name="embeddedEntity" xlink:title="TSI-2277 Article with name, description and headline">This is an embedded article</article></content>
+          </articleBody>
+        </Article>
+      </tcm:Content>
+      <tcm:Metadata>
+        <Metadata xmlns="http://www.sdl.com/web/schemas/core" />
+      </tcm:Metadata>
+      <tcm:IsBasedOnTridionWebSchema>true</tcm:IsBasedOnTridionWebSchema>
+      <tcm:MultimediaType xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <ApplicationDataCollection>
+    <ApplicationData>
+      <ApplicationId>ugc:ComponentAndPage</ApplicationId>
+      <TypeId>c:XmlDocument-CommunityBuilder</TypeId>
+      <BinaryData>PAA/AHgAbQBsACAAdgBlAHIAcwBpAG8AbgA9ACIAMQAuADAAIgAgAGUAbgBjAG8AZABpAG4AZwA9ACIAdQB0AGYALQAxADYAIgA/AD4APAB1AGcAYwA+ADwAaQB0AGUAbQAgAGkAZAA9ACIAdABjAG0AOgA2AC0ANgA2ADMAIgA+ADwAYQBsAGwAbwB3AHQAbwByAGEAdABlAD4AZgBhAGwAcwBlADwALwBhAGwAbABvAHcAdABvAHIAYQB0AGUAPgA8AGEAbABsAG8AdwB0AG8AYwBvAG0AbQBlAG4AdAA+AGYAYQBsAHMAZQA8AC8AYQBsAGwAbwB3AHQAbwBjAG8AbQBtAGUAbgB0AD4APABzAGgAbwB3AGMAbwBtAG0AZQBuAHQAcwA+AGYAYQBsAHMAZQA8AC8AcwBoAG8AdwBjAG8AbQBtAGUAbgB0AHMAPgA8AHMAbwByAHQAYwBvAG0AbQBlAG4AdABzAD4APABmAGkAZQBsAGQAPgBkAGEAdABlADwALwBmAGkAZQBsAGQAPgA8AGQAaQByAGUAYwB0AGkAbwBuAD4AZABlAHMAYwBlAG4AZABpAG4AZwA8AC8AZABpAHIAZQBjAHQAaQBvAG4APgA8AC8AcwBvAHIAdABjAG8AbQBtAGUAbgB0AHMAPgA8AHMAaABvAHcAdQBuAG0AbwBkAGUAcgBhAHQAZQBkAGMAbwBtAG0AZQBuAHQAcwA+AGYAYQBsAHMAZQA8AC8AcwBoAG8AdwB1AG4AbQBvAGQAZQByAGEAdABlAGQAYwBvAG0AbQBlAG4AdABzAD4APAAvAGkAdABlAG0APgA8AC8AdQBnAGMAPgA=</BinaryData>
+      <IsInherited>false</IsInherited>
+    </ApplicationData>
+  </ApplicationDataCollection>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/Nick_test" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Images/Large/balloons.jpg" linkName="Content" xpath="*[local-name() = 'Article'][1]/*[local-name() = 'image'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Test%20Component.xml" linkName="Content" xpath="*[local-name() = 'Article'][1]/*[local-name() = 'articleBody'][1]/*[local-name() = 'content'][1]/*[local-name() = 'p'][2]/*[local-name() = 'a'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Regression/TSI-1758%20Test%20Component.xml" linkName="Content" xpath="*[local-name() = 'Article'][1]/*[local-name() = 'articleBody'][1]/*[local-name() = 'content'][1]/*[local-name() = 'p'][3]/*[local-name() = 'a'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Images/Large/bulls-eye.JPG" linkName="Content" xpath="*[local-name() = 'Article'][1]/*[local-name() = 'articleBody'][1]/*[local-name() = 'content'][1]/*[local-name() = 'p'][4]/*[local-name() = 'a'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Images/Large/calculator.jpg" linkName="Content" xpath="*[local-name() = 'Article'][1]/*[local-name() = 'articleBody'][1]/*[local-name() = 'content'][1]/*[local-name() = 'p'][5]/*[local-name() = 'img'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Regression/TSI-2277%20Article%20with%20name%2C%20description%20and%20headline.xml" linkName="Content" xpath="*[local-name() = 'Article'][1]/*[local-name() = 'articleBody'][1]/*[local-name() = 'content'][1]/*[local-name() = 'article'][1]/@xlink:href" />
+    <Dependency dependencyType="Schema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Schemas/Article.xsd" linkName="Schema" />
+    <Dependency dependencyType="ApplicationData" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/Nick_test/test%20component%20embedded%20RTF.xml" linkName="ugc:ComponentAndPage" xpath="/*[local-name() = 'ugc'][1]/*[local-name() = 'item'][1]/@id" />
+  </Dependencies>
+</PackageItem>

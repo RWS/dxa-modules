@@ -1,0 +1,39 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>component with rtf</tcm:Title>
+      <tcm:Type>Normal</tcm:Type>
+      <tcm:Schema xlink:type="simple" xlink:title="Article" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Schemas/Article.xsd" IsMandatory="false" />
+      <tcm:Content>
+        <Article xmlns="http://www.sdl.com/web/schemas/core">
+          <headline>component_with_rtf</headline>
+          <articleBody>
+            <content>
+              <p xmlns="http://www.w3.org/1999/xhtml">Here are should be a component link to <em>Test Article</em>: <a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Test%20Article.xml" title="Test Article" xlink:title="Test Article">bazzzzinga</a></p>
+            </content>
+          </articleBody>
+        </Article>
+      </tcm:Content>
+      <tcm:Metadata>
+        <Metadata xmlns="http://www.sdl.com/web/schemas/core" />
+      </tcm:Metadata>
+      <tcm:IsBasedOnTridionWebSchema>true</tcm:IsBasedOnTridionWebSchema>
+      <tcm:MultimediaType xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <ApplicationDataCollection>
+    <ApplicationData>
+      <ApplicationId>ugc:ComponentAndPage</ApplicationId>
+      <TypeId>c:XmlDocument-CommunityBuilder</TypeId>
+      <BinaryData>PAA/AHgAbQBsACAAdgBlAHIAcwBpAG8AbgA9ACIAMQAuADAAIgAgAGUAbgBjAG8AZABpAG4AZwA9ACIAdQB0AGYALQAxADYAIgA/AD4APAB1AGcAYwA+ADwAaQB0AGUAbQAgAGkAZAA9ACIAdABjAG0AOgA2AC0ANgA2ADgAIgA+ADwAYQBsAGwAbwB3AHQAbwByAGEAdABlAD4AZgBhAGwAcwBlADwALwBhAGwAbABvAHcAdABvAHIAYQB0AGUAPgA8AGEAbABsAG8AdwB0AG8AYwBvAG0AbQBlAG4AdAA+AGYAYQBsAHMAZQA8AC8AYQBsAGwAbwB3AHQAbwBjAG8AbQBtAGUAbgB0AD4APABzAGgAbwB3AGMAbwBtAG0AZQBuAHQAcwA+AGYAYQBsAHMAZQA8AC8AcwBoAG8AdwBjAG8AbQBtAGUAbgB0AHMAPgA8AHMAbwByAHQAYwBvAG0AbQBlAG4AdABzAD4APABmAGkAZQBsAGQAPgBkAGEAdABlADwALwBmAGkAZQBsAGQAPgA8AGQAaQByAGUAYwB0AGkAbwBuAD4AZABlAHMAYwBlAG4AZABpAG4AZwA8AC8AZABpAHIAZQBjAHQAaQBvAG4APgA8AC8AcwBvAHIAdABjAG8AbQBtAGUAbgB0AHMAPgA8AHMAaABvAHcAdQBuAG0AbwBkAGUAcgBhAHQAZQBkAGMAbwBtAG0AZQBuAHQAcwA+AGYAYQBsAHMAZQA8AC8AcwBoAG8AdwB1AG4AbQBvAGQAZQByAGEAdABlAGQAYwBvAG0AbQBlAG4AdABzAD4APAAvAGkAdABlAG0APgA8AC8AdQBnAGMAPgA=</BinaryData>
+      <IsInherited>false</IsInherited>
+    </ApplicationData>
+  </ApplicationDataCollection>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Regression/ProximityTest" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Test%20Article.xml" linkName="Content" xpath="*[local-name() = 'Article'][1]/*[local-name() = 'articleBody'][1]/*[local-name() = 'content'][1]/*[local-name() = 'p'][1]/*[local-name() = 'a'][1]/@xlink:href" />
+    <Dependency dependencyType="Schema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Schemas/Article.xsd" linkName="Schema" />
+    <Dependency dependencyType="ApplicationData" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Regression/ProximityTest/component%20with%20rtf.xml" linkName="ugc:ComponentAndPage" xpath="/*[local-name() = 'ugc'][1]/*[local-name() = 'item'][1]/@id" />
+  </Dependencies>
+</PackageItem>

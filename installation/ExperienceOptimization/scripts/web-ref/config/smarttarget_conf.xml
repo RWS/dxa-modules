@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration Version="11.0">
+    <SmartTarget>
+		<!-- Timeout values in milliseconds -->
+		<Timeouts>
+			<Query>2000</Query>
+		</Timeouts>
+	
+        <!-- Analytics -->
+        <Analytics implementationClass="com.tridion.smarttarget.analytics.google.GoogleAnalyticsManager"
+                   timeoutMilliseconds="5000" trackingRedirectUrl="/redirect/"/>
+
+        <DefaultValues>
+            <!-- Site-wide default for the "Allow duplicates across regions" option -->
+            <AllowDuplicates>true</AllowDuplicates>
+        </DefaultValues>
+
+        <!-- The path to referrers definition file -->
+        <Referrers>smarttarget.referrers.xml</Referrers>
+
+        <!-- Ambient Data Framework prefixes (changes the long claim URIs of the framework into the shorter prefixes used in trigger-types.xml)-->
+        <AmbientData>
+            <Prefixes>
+                <taf_claim_audiencemanager_contact>am</taf_claim_audiencemanager_contact>
+                <taf_claim_audiencemanager_contact_extendeddetail>am_ex</taf_claim_audiencemanager_contact_extendeddetail>
+                <taf_claim_ambientdata_sessioncartridge>sc</taf_claim_ambientdata_sessioncartridge>
+                <taf_claim_ambientdata_sessioncartridge_session>sc_session</taf_claim_ambientdata_sessioncartridge_session>
+                <taf_claim_ambientdata_sessioncartridge_useragent>sc_ua</taf_claim_ambientdata_sessioncartridge_useragent>
+                <taf_claim_ambientdata_sessioncartridge_useragent_browser>sc_ua_browser</taf_claim_ambientdata_sessioncartridge_useragent_browser>
+                <taf_claim_ambientdata_sessioncartridge_useragent_os>sc_ua_os</taf_claim_ambientdata_sessioncartridge_useragent_os>
+                <taf_claim_ambientdata_sessioncartridge_authorization>sc_auth</taf_claim_ambientdata_sessioncartridge_authorization>
+            </Prefixes>
+            <!-- Add data to the Ambient Data ClaimStore so that other systems can use this information -->
+            <AddSmartTargetDataToClaimStore>true</AddSmartTargetDataToClaimStore>
+        </AmbientData>
+    </SmartTarget>
+</Configuration>

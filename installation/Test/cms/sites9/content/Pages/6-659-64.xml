@@ -1,0 +1,48 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>TSI-2480 Page with SVG image</tcm:Title>
+      <tcm:FileName>tsi-2480</tcm:FileName>
+      <tcm:PageTemplate IsInherited="false" xlink:type="simple" xlink:title="Content Page without Header" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/Content%20Page%20without%20Header.tptcmp" />
+      <tcm:ComponentPresentations>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="TSI-2480 - SVG Image" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Regression/TSI-2480%20-%20SVG%20Image.svg" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Download" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Download.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="TSI-2480 - Article with SVG Image Field" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Regression/TSI-2480%20-%20Article%20with%20SVG%20Image%20Field.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Article" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Article.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="TSI-2480 - Article with SVG Media Field" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Regression/TSI-2480%20-%20Article%20with%20SVG%20Media%20Field.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Article" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Article.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="TSI-2480 - Article with SVG RTF Field" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Regression/TSI-2480%20-%20Article%20with%20SVG%20RTF%20Field.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Article" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Article.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+      </tcm:ComponentPresentations>
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:Metadata />
+      <tcm:RegionSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:Regions />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemStructureGroup" itemUrl="/webdav/401%20Automated%20Test%20Parent/Home/Regression" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Regression/TSI-2480%20-%20SVG%20Image.svg" linkName="ComponentPresentations[0]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Regression/TSI-2480%20-%20Article%20with%20SVG%20Image%20Field.xml" linkName="ComponentPresentations[1]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Regression/TSI-2480%20-%20Article%20with%20SVG%20Media%20Field.xml" linkName="ComponentPresentations[2]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Regression/TSI-2480%20-%20Article%20with%20SVG%20RTF%20Field.xml" linkName="ComponentPresentations[3]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Download.tctcmp" linkName="ComponentPresentations[0]/ComponentTemplate" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Article.tctcmp" linkName="ComponentPresentations[1]/ComponentTemplate" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Article.tctcmp" linkName="ComponentPresentations[2]/ComponentTemplate" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Article.tctcmp" linkName="ComponentPresentations[3]/ComponentTemplate" />
+    <Dependency dependencyType="PageTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/Content%20Page%20without%20Header.tptcmp" linkName="PageTemplate" />
+  </Dependencies>
+</PackageItem>

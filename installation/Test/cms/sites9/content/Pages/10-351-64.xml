@@ -1,0 +1,44 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <PrimaryBlueprintParentUrl>/webdav/400%20Example%20Site/Home/010%20Articles/010%20News/Example%20News%201.tpg</PrimaryBlueprintParentUrl>
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Example News 1</tcm:Title>
+      <tcm:FileName>news1</tcm:FileName>
+      <tcm:PageTemplate IsInherited="false" xlink:type="simple" xlink:title="News Page" xlink:href="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Modules/Core/Editor/Templates/News%20Page.tptcmp" />
+      <tcm:ComponentPresentations>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="Example News 1" xlink:href="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Content/Articles/News/Example%20News%201.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Article" xlink:href="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Modules/Core/Editor/Templates/Article.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+      </tcm:ComponentPresentations>
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="News Page" xlink:href="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Modules/Core/Editor/Schemas/Page%20Schemas/News%20Page.xsd" />
+      <tcm:Metadata>
+        <Metadata xmlns="uuid:aa77534b-565b-4deb-91f1-c9d1cab05365">
+          <sitemapKeyword xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/500%20Example%20Site%20%28Legacy%29/Sitemap%20%5BNavigation%5D/010%20News.tkw" xlink:title="010 News">010 News</sitemapKeyword>
+        </Metadata>
+      </tcm:Metadata>
+      <tcm:RegionSchema xlink:type="simple" xlink:title="News Page" xlink:href="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Modules/Core/Editor/Schemas/Page%20Schemas/News%20Page.xsd" />
+      <tcm:Regions>
+        <tcm:Region Type="EmbeddedRegionData">
+          <tcm:RegionName>Article</tcm:RegionName>
+          <tcm:RegionSchema xlink:type="simple" xlink:title="[Article] Region" xlink:href="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Modules/Core/Editor/Schemas/Region%20Schemas/%5BArticle%5D%20Region.xsd" />
+          <tcm:Metadata />
+          <tcm:ComponentPresentations />
+          <tcm:Regions />
+        </tcm:Region>
+      </tcm:Regions>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/500%20Example%20Site%20%28Legacy%29" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemStructureGroup" itemUrl="/webdav/500%20Example%20Site%20%28Legacy%29/Home/010%20Articles/010%20News" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Content/Articles/News/Example%20News%201.xml" linkName="ComponentPresentations[0]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Modules/Core/Editor/Templates/Article.tctcmp" linkName="ComponentPresentations[0]/ComponentTemplate" />
+    <Dependency dependencyType="LinkedKeyword" itemUrl="/webdav/500%20Example%20Site%20%28Legacy%29/Sitemap%20%5BNavigation%5D/010%20News.tkw" linkName="Metadata" xpath="*[local-name() = 'Metadata'][1]/*[local-name() = 'sitemapKeyword'][1]/@xlink:href" />
+    <Dependency dependencyType="MetadataSchema" itemUrl="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Modules/Core/Editor/Schemas/Page%20Schemas/News%20Page.xsd" linkName="MetadataSchema" />
+    <Dependency dependencyType="PageTemplate" itemUrl="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Modules/Core/Editor/Templates/News%20Page.tptcmp" linkName="PageTemplate" />
+    <Dependency dependencyType="PageRegionSchema" itemUrl="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Modules/Core/Editor/Schemas/Page%20Schemas/News%20Page.xsd" linkName="RegionSchema" />
+    <Dependency dependencyType="PageRegionSchema" itemUrl="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Modules/Core/Editor/Schemas/Region%20Schemas/%5BArticle%5D%20Region.xsd" linkName="Regions[0]/RegionSchema" />
+  </Dependencies>
+</PackageItem>

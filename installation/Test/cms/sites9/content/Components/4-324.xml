@@ -1,0 +1,54 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>FAQ Content</tcm:Title>
+      <tcm:Type>Normal</tcm:Type>
+      <tcm:Schema xlink:type="simple" xlink:title="Item List" xlink:href="/webdav/200%20Example%20Content/Building%20Blocks/Modules/Core/Editor/Schemas/Item%20List.xsd" IsMandatory="false" />
+      <tcm:Content>
+        <ItemList xmlns="http://www.sdl.com/web/schemas/core">
+          <itemListElement>
+            <subheading>Etiam risus justo mattis sit amet cursus eget?</subheading>
+            <content>
+              <span xmlns="http://www.w3.org/1999/xhtml">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vitae elementum mi, quis lacinia dui. Vivamus id tristique risus. Ut vitae lectus aliquet, mattis eros at, malesuada nunc. Pellentesque malesuada vehicula nibh, a lobortis tortor elementum at. Fusce varius fringilla lectus ac scelerisque. Vivamus molestie, mi vel gravida rhoncus, felis elit lacinia ante, eu auctor massa nulla eget est. Vestibulum sit amet sapien eu dolor sodales congue. Aenean luctus ligula vel luctus vulputate.</span>
+            </content>
+          </itemListElement>
+          <itemListElement>
+            <subheading>Morbi posuere, eros vel facilisis blandit?</subheading>
+            <content>
+              <span xmlns="http://www.w3.org/1999/xhtml">Etiam risus justo, mattis sit amet cursus eget, sagittis nec ipsum. Duis mi tortor, congue in hendrerit eget, sollicitudin ut mi. In ut orci sollicitudin, viverra erat sed, mollis sem. Sed porttitor augue vitae facilisis molestie. Etiam vitae euismod diam, id tincidunt dolor. Maecenas vitae enim a purus facilisis semper. Phasellus mollis venenatis sapien, sit amet aliquam ante tristique id. Praesent accumsan dui sed arcu porttitor, eget eleifend elit vulputate. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vivamus varius nulla ipsum, at scelerisque odio sagittis in. Nullam sed ante est. Aenean tristique auctor felis non cursus. Sed feugiat fringilla mi in commodo. Vestibulum sem urna, semper vitae purus non, suscipit pulvinar ipsum. Curabitur mauris orci, imperdiet vitae tellus vel, vestibulum tincidunt lectus. Aenean ac risus ultricies, porttitor lacus vel, congue risus.</span>
+            </content>
+            <link>
+              <linkText>Privacy Policy</linkText>
+              <internalLink xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/200%20Example%20Content/Building%20Blocks/Content/About/Privacy%20Policy.xml" xlink:title="Privacy Policy" />
+            </link>
+          </itemListElement>
+          <itemListElement>
+            <subheading>Nam rhoncus sollicitudin ante eu adipiscing. Nullam id tellus odio?</subheading>
+            <content>
+              <span xmlns="http://www.w3.org/1999/xhtml">Morbi posuere, eros vel facilisis blandit, enim ante viverra libero, nec pharetra nisl ante quis nibh. Vivamus placerat purus vitae pellentesque sagittis. Nam eget risus consequat, posuere ipsum ac, imperdiet nisi. Sed tincidunt euismod mi, ut pulvinar velit. Sed sed arcu odio. Aliquam laoreet, massa in iaculis fringilla, nulla lacus volutpat purus, at laoreet velit risus sed dolor. Vestibulum mollis elementum odio, at eleifend magna vestibulum ut. Curabitur posuere erat nec lectus vehicula tristique. Proin rhoncus fermentum sagittis. Ut neque nulla, sodales eu ligula sed, mollis mollis urna. Nulla vel lacus in tellus accumsan ultricies. Morbi ac enim nec mi luctus aliquam sed vitae erat. Maecenas et eleifend enim. Donec sed purus tortor. Aenean nec posuere ipsum, a dapibus diam.</span>
+            </content>
+            <media xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/200%20Example%20Content/Building%20Blocks/Content/Images/Large/ballon-burner.jpg" xlink:title="ballon-burner" />
+          </itemListElement>
+          <itemListElement>
+            <subheading>Maecenas mattis, velit eu ullamcorper porta, urna orci scelerisque magna?</subheading>
+            <content>
+              <span xmlns="http://www.w3.org/1999/xhtml">Nam rhoncus sollicitudin ante eu adipiscing. Nullam id tellus odio. Duis elit tellus, luctus vel elit in, ultrices tempor eros. Duis eu fermentum tortor. Pellentesque viverra lacus pulvinar velit ultrices, at convallis lorem varius. Vestibulum dictum, nunc quis mattis blandit, odio elit porttitor sapien, eu rutrum eros odio sed nibh. Sed bibendum felis a diam porttitor, non interdum neque dictum.</span>
+            </content>
+          </itemListElement>
+        </ItemList>
+      </tcm:Content>
+      <tcm:Metadata>
+        <Metadata xmlns="http://www.sdl.com/web/schemas/core" />
+      </tcm:Metadata>
+      <tcm:IsBasedOnTridionWebSchema>true</tcm:IsBasedOnTridionWebSchema>
+      <tcm:MultimediaType xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/200%20Example%20Content" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/200%20Example%20Content/Building%20Blocks/Content/Further%20Information" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/200%20Example%20Content/Building%20Blocks/Content/About/Privacy%20Policy.xml" linkName="Content" xpath="*[local-name() = 'ItemList'][1]/*[local-name() = 'itemListElement'][2]/*[local-name() = 'link'][1]/*[local-name() = 'internalLink'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/200%20Example%20Content/Building%20Blocks/Content/Images/Large/ballon-burner.jpg" linkName="Content" xpath="*[local-name() = 'ItemList'][1]/*[local-name() = 'itemListElement'][3]/*[local-name() = 'media'][1]/@xlink:href" />
+    <Dependency dependencyType="Schema" itemUrl="/webdav/200%20Example%20Content/Building%20Blocks/Modules/Core/Editor/Schemas/Item%20List.xsd" linkName="Schema" />
+  </Dependencies>
+</PackageItem>

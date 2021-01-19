@@ -1,0 +1,67 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Company Information</tcm:Title>
+      <tcm:Type>Normal</tcm:Type>
+      <tcm:Schema xlink:type="simple" xlink:title="Article" xlink:href="/webdav/200%20Example%20Content/Building%20Blocks/Modules/Core/Editor/Schemas/Article.xsd" IsMandatory="false" />
+      <tcm:Content>
+        <Article xmlns="http://www.sdl.com/web/schemas/core">
+          <headline>Company Information</headline>
+          <articleBody>
+            <subheading>Vision and Mission</subheading>
+            <content>
+              <p xmlns="http://www.w3.org/1999/xhtml">Lorem ipsum dolor sit amet, <a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/200%20Example%20Content/Building%20Blocks/Content/About/Contact%20Tab%20Content.xml" title="Contact Tab Content" xlink:title="Contact Tab Content">consectetur adipiscing</a> elit. Sed diam purus, tincidunt volutpat mauris a, lacinia luctus velit. Nam dui purus, pretium sit amet sagittis vel, lobortis eu est. Morbi sagittis pellentesque facilisis. Phasellus accumsan, ante non aliquet dignissim, turpis diam placerat odio, sit amet rutrum tortor magna nec diam. Nulla adipiscing in quam sit amet faucibus. Nunc congue velit ac leo sodales, quis mattis massa tincidunt.</p>
+<p xmlns="http://www.w3.org/1999/xhtml">Nullam fringilla volutpat arcu, vitae ultricies ante lobortis ac. Quisque elementum nunc congue, luctus mi quis, vestibulum lacus. Vestibulum nec dui nibh. Mauris consectetur risus dui, eget ultricies sapien imperdiet vitae. Praesent metus tortor, adipiscing sed feugiat vitae, accumsan vitae ipsum. Morbi sodales, sapien nec vehicula blandit, turpis nisl mattis metus, vel ultrices eros magna sit amet odio.</p></content>
+            <media xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/200%20Example%20Content/Building%20Blocks/Content/Video/Company%20News%20Media%20Manager%20Video.png" xlink:title="Company News Media Manager Video" />
+            <caption>Phasellus accumsan, ante non aliquet dignissim</caption>
+          </articleBody>
+          <articleBody>
+            <subheading>History</subheading>
+            <content>
+            <p xmlns="http://www.w3.org/1999/xhtml">Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Ut porttitor nisi nunc. Aenean commodo arcu vehicula enim tincidunt sodales. Proin tristique mi id nisi dignissim, eget congue purus blandit. Vestibulum dignissim sollicitudin sapien, eget pellentesque dui pellentesque sodales. In hac habitasse platea dictumst. Cras placerat at libero at porta. Vivamus eget magna eros:</p>
+            <ul xmlns="http://www.w3.org/1999/xhtml">
+              <li>Integer scelerisque ipsum quis sodales congue.</li>
+              <li>Nunc sollicitudin orci sit amet risus dapibus, a vehicula ipsum ultrices.</li>
+              <li>Sed ut felis at sem blandit auctor.</li>
+            </ul>
+          </content>
+          </articleBody>
+          <articleBody>
+            <subheading>Leadership</subheading>
+            <content>
+            <p xmlns="http://www.w3.org/1999/xhtml">Maecenas quis mi ipsum. Morbi dapibus diam fermentum urna porta, a rutrum quam blandit. Phasellus fermentum vitae nisl non lacinia. Nulla in nulla sit amet eros suscipit consectetur a quis orci. Mauris id turpis vitae magna ultricies accumsan. Nunc velit quam, congue vel magna at, mattis dapibus orci.</p>
+            <ul xmlns="http://www.w3.org/1999/xhtml">
+              <li>Nulla varius nibh ut massa ornare, rhoncus dictum quam mollis.</li>
+              <li>Suspendisse placerat nulla sed feugiat eleifend.</li>
+              <li>Vestibulum molestie mi sit amet porttitor lacinia.</li>
+              <li>Integer scelerisque ipsum quis sodales congue.</li>
+              <li>Nunc sollicitudin orci sit amet risus dapibus, a vehicula ipsum ultrices.</li>
+              <li>Sed ut felis at sem blandit auctor.</li>
+            </ul>
+          </content>
+            <media xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/200%20Example%20Content/Building%20Blocks/Content/Images/Large/planes.jpg" xlink:title="planes" />
+            <caption>Maecenas quis sem sit amet risus pellentesque laoreet eget at quam</caption>
+          </articleBody>
+        </Article>
+      </tcm:Content>
+      <tcm:Metadata>
+        <Metadata xmlns="http://www.sdl.com/web/schemas/core">
+          <standardMeta>
+            <description>In sodales elementum lorem, at sollicitudin quam placerat in. Suspendisse vitae purus eu dolor mattis mollis. Nulla sit amet orci ac arcu suscipit commodo ut in tellus. Praesent ultrices lacus massa, at consequat augue consectetur a. </description>
+            <introText>In sodales elementum lorem, at sollicitudin quam placerat in. Suspendisse vitae purus eu dolor mattis mollis. </introText>
+          </standardMeta>
+        </Metadata>
+      </tcm:Metadata>
+      <tcm:IsBasedOnTridionWebSchema>true</tcm:IsBasedOnTridionWebSchema>
+      <tcm:MultimediaType xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/200%20Example%20Content" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/200%20Example%20Content/Building%20Blocks/Content/About" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/200%20Example%20Content/Building%20Blocks/Content/About/Contact%20Tab%20Content.xml" linkName="Content" xpath="*[local-name() = 'Article'][1]/*[local-name() = 'articleBody'][1]/*[local-name() = 'content'][1]/*[local-name() = 'p'][1]/*[local-name() = 'a'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/200%20Example%20Content/Building%20Blocks/Content/Video/Company%20News%20Media%20Manager%20Video.png" linkName="Content" xpath="*[local-name() = 'Article'][1]/*[local-name() = 'articleBody'][1]/*[local-name() = 'media'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/200%20Example%20Content/Building%20Blocks/Content/Images/Large/planes.jpg" linkName="Content" xpath="*[local-name() = 'Article'][1]/*[local-name() = 'articleBody'][3]/*[local-name() = 'media'][1]/@xlink:href" />
+    <Dependency dependencyType="Schema" itemUrl="/webdav/200%20Example%20Content/Building%20Blocks/Modules/Core/Editor/Schemas/Article.xsd" linkName="Schema" />
+  </Dependencies>
+</PackageItem>

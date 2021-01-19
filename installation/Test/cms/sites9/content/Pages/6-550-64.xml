@@ -1,0 +1,48 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Search Smoke Test Suppressed</tcm:Title>
+      <tcm:FileName>search-smoke-test-suppressed</tcm:FileName>
+      <tcm:PageTemplate IsInherited="true" xlink:type="simple" xlink:title="Content Page Without Navigation" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Content%20Page%20Without%20Navigation.tptcmp" />
+      <tcm:ComponentPresentations>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="Search Box Configuration" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules%20Content/Search/Search%20Box%20Configuration.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Search Box [Nav]" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Search/Site%20Manager/Templates/Search%20Box%20%5BNav%5D.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="search-test-item-suppressed" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Smoke/Search/search-test-item-suppressed.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Article" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Article.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+      </tcm:ComponentPresentations>
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="Search Indexing Metadata" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Search/Editor/Schemas/Search%20Indexing%20Metadata.xsd" />
+      <tcm:Metadata>
+        <Metadata xmlns="http://www.sdl.com/web/schemas/search">
+          <NoIndex>Yes</NoIndex>
+        </Metadata>
+      </tcm:Metadata>
+      <tcm:RegionSchema xlink:type="simple" xlink:title="Content Page" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Schemas/Page%20Schemas/Content%20Page.xsd" />
+      <tcm:Regions>
+        <tcm:Region Type="EmbeddedRegionData">
+          <tcm:RegionName>Main</tcm:RegionName>
+          <tcm:RegionSchema xlink:type="simple" xlink:title="[Main] Region" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Schemas/Region%20Schemas/%5BMain%5D%20Region.xsd" />
+          <tcm:Metadata />
+          <tcm:ComponentPresentations />
+          <tcm:Regions />
+        </tcm:Region>
+      </tcm:Regions>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemStructureGroup" itemUrl="/webdav/401%20Automated%20Test%20Parent/Home/Smoke" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules%20Content/Search/Search%20Box%20Configuration.xml" linkName="ComponentPresentations[0]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Smoke/Search/search-test-item-suppressed.xml" linkName="ComponentPresentations[1]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Search/Site%20Manager/Templates/Search%20Box%20%5BNav%5D.tctcmp" linkName="ComponentPresentations[0]/ComponentTemplate" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Article.tctcmp" linkName="ComponentPresentations[1]/ComponentTemplate" />
+    <Dependency dependencyType="MetadataSchema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Search/Editor/Schemas/Search%20Indexing%20Metadata.xsd" linkName="MetadataSchema" />
+    <Dependency dependencyType="PageRegionSchema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Schemas/Page%20Schemas/Content%20Page.xsd" linkName="RegionSchema" />
+    <Dependency dependencyType="PageRegionSchema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Schemas/Region%20Schemas/%5BMain%5D%20Region.xsd" linkName="Regions[0]/RegionSchema" />
+  </Dependencies>
+</PackageItem>

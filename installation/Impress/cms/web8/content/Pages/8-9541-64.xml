@@ -1,0 +1,125 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Impress.js Presentation</tcm:Title>
+      <tcm:FileName>index</tcm:FileName>
+      <tcm:PageTemplate IsInherited="false" xlink:type="simple" xlink:title="Impress Page" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules/Impress/Editor/Templates/Impress%20Page.tptcmp" />
+      <tcm:ComponentPresentations>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="Hint" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules%20Content/Impress/Hint.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Impress:Message [Impress:Hint]" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules/Impress/Editor/Templates/Impress%3AMessage%20%5BImpress%3AHint%5D.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="Fallback" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules%20Content/Impress/Fallback.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Impress:Message [Impress:Fallback]" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules/Impress/Editor/Templates/Impress%3AMessage%20%5BImpress%3AFallback%5D.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="Step 01 - bored" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules%20Content/Impress/Step%2001%20-%20bored.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Impress:Slide [Impress:Presentation]" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules/Impress/Editor/Templates/Impress%3ASlide%20%5BImpress%3APresentation%5D.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="Step 02" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules%20Content/Impress/Step%2002.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Impress:Slide [Impress:Presentation]" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules/Impress/Editor/Templates/Impress%3ASlide%20%5BImpress%3APresentation%5D.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="Step 03" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules%20Content/Impress/Step%2003.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Impress:Slide [Impress:Presentation]" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules/Impress/Editor/Templates/Impress%3ASlide%20%5BImpress%3APresentation%5D.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="Step 04 - title" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules%20Content/Impress/Step%2004%20-%20title.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Impress:FreeText [Impress:Presentation]" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules/Impress/Editor/Templates/Impress%3AFreeText%20%5BImpress%3APresentation%5D.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="Step 05 - its" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules%20Content/Impress/Step%2005%20-%20its.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Impress:FreeText [Impress:Presentation]" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules/Impress/Editor/Templates/Impress%3AFreeText%20%5BImpress%3APresentation%5D.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="Step 06 - big" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules%20Content/Impress/Step%2006%20-%20big.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Impress:FreeText [Impress:Presentation]" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules/Impress/Editor/Templates/Impress%3AFreeText%20%5BImpress%3APresentation%5D.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="Step 07 - tiny" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules%20Content/Impress/Step%2007%20-%20tiny.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Impress:FreeText [Impress:Presentation]" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules/Impress/Editor/Templates/Impress%3AFreeText%20%5BImpress%3APresentation%5D.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="Step 08 - ing" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules%20Content/Impress/Step%2008%20-%20ing.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Impress:FreeText [Impress:Presentation]" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules/Impress/Editor/Templates/Impress%3AFreeText%20%5BImpress%3APresentation%5D.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="Step 09 - imagination" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules%20Content/Impress/Step%2009%20-%20imagination.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Impress:FreeText [Impress:Presentation]" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules/Impress/Editor/Templates/Impress%3AFreeText%20%5BImpress%3APresentation%5D.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="Step 10 - source" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules%20Content/Impress/Step%2010%20-%20source.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Impress:FreeText [Impress:Presentation]" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules/Impress/Editor/Templates/Impress%3AFreeText%20%5BImpress%3APresentation%5D.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="Step 11 - one-more-thing" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules%20Content/Impress/Step%2011%20-%20one-more-thing.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Impress:FreeText [Impress:Presentation]" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules/Impress/Editor/Templates/Impress%3AFreeText%20%5BImpress%3APresentation%5D.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="Step 12 - its-in-3d" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules%20Content/Impress/Step%2012%20-%20its-in-3d.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Impress:FreeText [Impress:Presentation]" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules/Impress/Editor/Templates/Impress%3AFreeText%20%5BImpress%3APresentation%5D.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="Step 13 - overview" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules%20Content/Impress/Step%2013%20-%20overview.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Impress:Overview [Impress:Presentation]" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules/Impress/Editor/Templates/Impress%3AOverview%20%5BImpress%3APresentation%5D.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+      </tcm:ComponentPresentations>
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:Metadata />
+      <tcm:RegionSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:Regions />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/400%20Example%20Site" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemStructureGroup" itemUrl="/webdav/400%20Example%20Site/Home/Impress" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules%20Content/Impress/Hint.xml" linkName="ComponentPresentations[0]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules%20Content/Impress/Fallback.xml" linkName="ComponentPresentations[1]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules%20Content/Impress/Step%2001%20-%20bored.xml" linkName="ComponentPresentations[2]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules%20Content/Impress/Step%2002.xml" linkName="ComponentPresentations[3]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules%20Content/Impress/Step%2003.xml" linkName="ComponentPresentations[4]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules%20Content/Impress/Step%2004%20-%20title.xml" linkName="ComponentPresentations[5]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules%20Content/Impress/Step%2005%20-%20its.xml" linkName="ComponentPresentations[6]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules%20Content/Impress/Step%2006%20-%20big.xml" linkName="ComponentPresentations[7]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules%20Content/Impress/Step%2007%20-%20tiny.xml" linkName="ComponentPresentations[8]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules%20Content/Impress/Step%2008%20-%20ing.xml" linkName="ComponentPresentations[9]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules%20Content/Impress/Step%2009%20-%20imagination.xml" linkName="ComponentPresentations[10]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules%20Content/Impress/Step%2010%20-%20source.xml" linkName="ComponentPresentations[11]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules%20Content/Impress/Step%2011%20-%20one-more-thing.xml" linkName="ComponentPresentations[12]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules%20Content/Impress/Step%2012%20-%20its-in-3d.xml" linkName="ComponentPresentations[13]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules%20Content/Impress/Step%2013%20-%20overview.xml" linkName="ComponentPresentations[14]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules/Impress/Editor/Templates/Impress%3AMessage%20%5BImpress%3AHint%5D.tctcmp" linkName="ComponentPresentations[0]/ComponentTemplate" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules/Impress/Editor/Templates/Impress%3AMessage%20%5BImpress%3AFallback%5D.tctcmp" linkName="ComponentPresentations[1]/ComponentTemplate" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules/Impress/Editor/Templates/Impress%3ASlide%20%5BImpress%3APresentation%5D.tctcmp" linkName="ComponentPresentations[2]/ComponentTemplate" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules/Impress/Editor/Templates/Impress%3ASlide%20%5BImpress%3APresentation%5D.tctcmp" linkName="ComponentPresentations[3]/ComponentTemplate" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules/Impress/Editor/Templates/Impress%3ASlide%20%5BImpress%3APresentation%5D.tctcmp" linkName="ComponentPresentations[4]/ComponentTemplate" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules/Impress/Editor/Templates/Impress%3AFreeText%20%5BImpress%3APresentation%5D.tctcmp" linkName="ComponentPresentations[5]/ComponentTemplate" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules/Impress/Editor/Templates/Impress%3AFreeText%20%5BImpress%3APresentation%5D.tctcmp" linkName="ComponentPresentations[6]/ComponentTemplate" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules/Impress/Editor/Templates/Impress%3AFreeText%20%5BImpress%3APresentation%5D.tctcmp" linkName="ComponentPresentations[7]/ComponentTemplate" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules/Impress/Editor/Templates/Impress%3AFreeText%20%5BImpress%3APresentation%5D.tctcmp" linkName="ComponentPresentations[8]/ComponentTemplate" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules/Impress/Editor/Templates/Impress%3AFreeText%20%5BImpress%3APresentation%5D.tctcmp" linkName="ComponentPresentations[9]/ComponentTemplate" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules/Impress/Editor/Templates/Impress%3AFreeText%20%5BImpress%3APresentation%5D.tctcmp" linkName="ComponentPresentations[10]/ComponentTemplate" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules/Impress/Editor/Templates/Impress%3AFreeText%20%5BImpress%3APresentation%5D.tctcmp" linkName="ComponentPresentations[11]/ComponentTemplate" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules/Impress/Editor/Templates/Impress%3AFreeText%20%5BImpress%3APresentation%5D.tctcmp" linkName="ComponentPresentations[12]/ComponentTemplate" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules/Impress/Editor/Templates/Impress%3AFreeText%20%5BImpress%3APresentation%5D.tctcmp" linkName="ComponentPresentations[13]/ComponentTemplate" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules/Impress/Editor/Templates/Impress%3AOverview%20%5BImpress%3APresentation%5D.tctcmp" linkName="ComponentPresentations[14]/ComponentTemplate" />
+    <Dependency dependencyType="PageTemplate" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules/Impress/Editor/Templates/Impress%20Page.tptcmp" linkName="PageTemplate" />
+  </Dependencies>
+</PackageItem>

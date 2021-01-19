@@ -1,0 +1,40 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Generate Data Presentation (Disabled)</tcm:Title>
+      <tcm:Type>CompoundTemplate</tcm:Type>
+      <tcm:Priority>200</tcm:Priority>
+      <tcm:OutputFormat>Other</tcm:OutputFormat>
+      <tcm:Content>
+        <tcm:PublisherScript>&lt;CompoundTemplate xmlns="http://www.tridion.com/ContentManager/5.3/CompoundTemplate"&gt;
+  &lt;TemplateInvocation&gt;
+    &lt;Template xlink:href="/webdav/500%20Automated%20Test%20Child/Building%20Blocks/Framework/Developer/Templates/DXA%2ER2/Generate%20DXA%20R2%20Entity%20Model.tbbcs" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:title="Generate DXA R2 Entity Model" /&gt;
+    &lt;TemplateParameters&gt;
+      &lt;Parameters xmlns="http://www.sdl.com/web/schemas/dynamiccomponent"&gt;
+        &lt;includeComponentTemplateData&gt;false&lt;/includeComponentTemplateData&gt;
+        &lt;expandLinkDepth xmlns="http://www.sdl.com/web/schemas/dynamiccomponent"&gt;0&lt;/expandLinkDepth&gt;
+        &lt;modelBuilderTypeNames xmlns="http://www.sdl.com/web/schemas/dynamiccomponent"&gt;DefaultModelBuilder;EclModelBuilder&lt;/modelBuilderTypeNames&gt;
+      &lt;/Parameters&gt;
+    &lt;/TemplateParameters&gt;
+  &lt;/TemplateInvocation&gt;
+&lt;/CompoundTemplate&gt;</tcm:PublisherScript>
+        <tcm:DynamicTemplate />
+      </tcm:Content>
+      <tcm:AllowOnPage>false</tcm:AllowOnPage>
+      <tcm:IsRepositoryPublishable>true</tcm:IsRepositoryPublishable>
+      <tcm:RelatedSchemas>
+        <tcm:RelatedSchema xlink:type="simple" xlink:title="Article" xlink:href="/webdav/500%20Automated%20Test%20Child/Building%20Blocks/Modules/Core/Editor/Schemas/Article.xsd" />
+      </tcm:RelatedSchemas>
+      <tcm:TrackingCategories />
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:ParameterSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:Metadata />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/500%20Automated%20Test%20Child" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/500%20Automated%20Test%20Child/Building%20Blocks/Framework/Developer/Templates" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="ComponentTemplateAllowedSchema" itemUrl="/webdav/500%20Automated%20Test%20Child/Building%20Blocks/Modules/Core/Editor/Schemas/Article.xsd" linkName="RelatedSchemas[0]" />
+    <Dependency dependencyType="TemplateLinkedItem" itemUrl="/webdav/500%20Automated%20Test%20Child/Building%20Blocks/Framework/Developer/Templates/DXA%2ER2/Generate%20DXA%20R2%20Entity%20Model.tbbcs" linkName="ExtractedReferences[0]" />
+  </Dependencies>
+</PackageItem>

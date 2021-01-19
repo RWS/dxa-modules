@@ -1,0 +1,19 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>000 Home</tcm:Title>
+      <tcm:Description />
+      <tcm:Key />
+      <tcm:IsAbstract>false</tcm:IsAbstract>
+      <tcm:ParentKeywords />
+      <tcm:RelatedKeywords />
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:Metadata />
+      <tcm:IsRoot>true</tcm:IsRoot>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/400%20Example%20Site" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemCategory" itemUrl="/webdav/400%20Example%20Site/Sitemap%20%5BNavigation%5D" linkName="LocationInfo/OrganizationalItem" />
+  </Dependencies>
+</PackageItem>

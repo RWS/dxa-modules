@@ -1,0 +1,40 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <PrimaryBlueprintParentUrl>/webdav/100%20Master/Building%20Blocks/Framework/Developer/Templates/DXA%2ER2/Default%20Component%20Template%20Finish%20Actions.tbbcmp</PrimaryBlueprintParentUrl>
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Default Component Template Finish Actions</tcm:Title>
+      <tcm:Type>CompoundTemplate</tcm:Type>
+      <tcm:Content>
+        <tcm:PublisherScript>&lt;CompoundTemplate xmlns="http://www.tridion.com/ContentManager/5.3/CompoundTemplate"&gt;
+  &lt;TemplateInvocation&gt;
+    &lt;Template xlink:href="/webdav/500%20Automated%20Test%20Parent%20%28Legacy%29/Building%20Blocks/Framework/Developer/Templates/DXA%2ELegacy/Publish%20binaries%20for%20component.tbbcs" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:title="Publish binaries for component" /&gt;
+    &lt;TemplateParameters&gt;
+      &lt;Parameters xmlns="DD4T.Templates.Schemas.DynamicDeliveryParameters"&gt;
+        &lt;SerializationFormat&gt;JSON&lt;/SerializationFormat&gt;
+        &lt;ECLEnabled&gt;yes&lt;/ECLEnabled&gt;
+      &lt;/Parameters&gt;
+    &lt;/TemplateParameters&gt;
+  &lt;/TemplateInvocation&gt;
+  &lt;TemplateInvocation&gt;
+    &lt;Template xlink:href="/webdav/500%20Automated%20Test%20Parent%20%28Legacy%29/Building%20Blocks/Framework/Developer/Templates/DXA%2ELegacy/Resolve%20Rich%20Text.tbbcs" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:title="Resolve Rich Text" /&gt;
+    &lt;TemplateParameters&gt;
+      &lt;Parameters xmlns="http://www.sdl.com/web/schemas/resolverichtext"&gt;
+        &lt;multimediaLinkAttributes xmlns="http://www.sdl.com/web/schemas/resolverichtext"&gt;youTubeId, headline, playerType, customVideoAutoplay, customVideoSubtitles, customVideoControls&lt;/multimediaLinkAttributes&gt;
+      &lt;/Parameters&gt;
+    &lt;/TemplateParameters&gt;
+  &lt;/TemplateInvocation&gt;
+&lt;/CompoundTemplate&gt;</tcm:PublisherScript>
+      </tcm:Content>
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:ParameterSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:Metadata />
+      <tcm:TemplatePurpose>Rendering</tcm:TemplatePurpose>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/500%20Automated%20Test%20Parent%20%28Legacy%29" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/500%20Automated%20Test%20Parent%20%28Legacy%29/Building%20Blocks/Framework/Developer/Templates/DXA%2ER2" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="TemplateLinkedItem" itemUrl="/webdav/500%20Automated%20Test%20Parent%20%28Legacy%29/Building%20Blocks/Framework/Developer/Templates/DXA%2ELegacy/Resolve%20Rich%20Text.tbbcs" linkName="ExtractedReferences[0]" />
+    <Dependency dependencyType="TemplateLinkedItem" itemUrl="/webdav/500%20Automated%20Test%20Parent%20%28Legacy%29/Building%20Blocks/Framework/Developer/Templates/DXA%2ELegacy/Publish%20binaries%20for%20component.tbbcs" linkName="ExtractedReferences[1]" />
+  </Dependencies>
+</PackageItem>

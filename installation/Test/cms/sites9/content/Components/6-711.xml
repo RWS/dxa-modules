@@ -1,0 +1,74 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Contextual View Switch Smoke Test - Description</tcm:Title>
+      <tcm:Type>Normal</tcm:Type>
+      <tcm:Schema xlink:type="simple" xlink:title="Article" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Schemas/Article.xsd" IsMandatory="false" />
+      <tcm:Content>
+        <Article xmlns="http://www.sdl.com/web/schemas/core">
+          <headline>Contextual View Switch Smoke Test</headline>
+          <articleBody>
+            <subheading>Description</subheading>
+            <content>
+              <p xmlns="http://www.w3.org/1999/xhtml">Automated test related to this page covers the following set of test cases for Contextual View Switching:
+<br /></p>
+<div xmlns="http://www.w3.org/1999/xhtml" id="qpane-header" class="qpane-header content-header content-header-default">
+<div class="content-header-inner">
+<div class="content-header-title">
+<div id="qpane-header" class="qpane-header content-header content-header-default">
+<div class="content-header-inner">
+<div class="content-header-title">
+<div class="content-header-id">
+<div id="qpane-header" class="qpane-header content-header content-header-default">
+<div class="content-header-inner">
+<div class="content-header-title"><a class="nolink" href="http://nl1tr01.global.sdl.corp/testrail/index.php?/cases/view/5326490">C5326490</a> - Browse the site from "feature-phone" device</div>
+</div>
+</div>
+<div id="qpane-header" class="qpane-header content-header content-header-default">
+<div class="content-header-inner" />
+<div id="qpane-header" class="qpane-header content-header content-header-default">
+<div class="content-header-inner">
+<div id="qpane-header" class="qpane-header content-header content-header-default">
+<div class="content-header-inner">
+<div class="content-header-title"><a class="nolink" href="http://nl1tr01.global.sdl.corp/testrail/index.php?/cases/view/5326491">C5326491</a> - Browse the site from iPhone device</div>
+</div>
+</div>
+<div id="qpane-header" class="qpane-header content-header content-header-default">
+<div class="content-header-inner">
+<div class="content-header-title"><a class="nolink" href="http://nl1tr01.global.sdl.corp/testrail/index.php?/cases/view/5326492">C5326492</a> - Browse the site from iPad device
+<br />
+<div class="content-header-id"><a class="nolink" href="http://nl1tr01.global.sdl.corp/testrail/index.php?/cases/view/6642055">C6642055</a> - Browse the site from a device, that does not has a dedicated view in web app
+<br /></div>
+</div>
+</div>
+</div>
+
+<br />
+<strong>note</strong>: this test is executed with the user agents corresponding to emulated feature-phone device (240px Display Width) and Apple iPhone 5 and iPad devices
+<br /></div>
+<div class="content-header-id" />
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></content>
+          </articleBody>
+        </Article>
+      </tcm:Content>
+      <tcm:Metadata>
+        <Metadata xmlns="http://www.sdl.com/web/schemas/core" />
+      </tcm:Metadata>
+      <tcm:IsBasedOnTridionWebSchema>true</tcm:IsBasedOnTridionWebSchema>
+      <tcm:MultimediaType xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Smoke/ContextualViewSwitch" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="Schema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Schemas/Article.xsd" linkName="Schema" />
+  </Dependencies>
+</PackageItem>

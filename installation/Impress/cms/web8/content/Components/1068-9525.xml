@@ -1,0 +1,36 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Step 12 - its-in-3d</tcm:Title>
+      <tcm:Type>Normal</tcm:Type>
+      <tcm:Schema xlink:type="simple" xlink:title="Slide" xlink:href="/webdav/200%20Example%20Content/Building%20Blocks/Modules/Impress/Editor/Schemas/Slide.xsd" IsMandatory="false" />
+      <tcm:Content>
+        <Slide xmlns="http://www.sdl.com/web/schemas/impress">
+          <content>
+          <p xmlns="http://www.w3.org/1999/xhtml">
+            <span class="have">have</span> <span class="you">you</span> <span class="noticed">noticed</span> <span class="its">it's</span> <span class="in">in</span> <strong>3D<sup>*</sup></strong>?</p>
+          <span xmlns="http://www.w3.org/1999/xhtml" class="footnote">* beat that, prezi ;)</span>
+        </content>
+        </Slide>
+      </tcm:Content>
+      <tcm:Metadata>
+        <Metadata xmlns="http://www.sdl.com/web/schemas/impress">
+          <stepTitle>its-in-3d</stepTitle>
+          <xCoordinate>6200</xCoordinate>
+          <yCoordinate>4300</yCoordinate>
+          <zCoordinate>-100</zCoordinate>
+          <scale>2</scale>
+          <xRotate>-40</xRotate>
+          <yRotate>10</yRotate>
+        </Metadata>
+      </tcm:Metadata>
+      <tcm:IsBasedOnTridionWebSchema>true</tcm:IsBasedOnTridionWebSchema>
+      <tcm:MultimediaType xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/200%20Example%20Content" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/200%20Example%20Content/Building%20Blocks/Modules%20Content/Impress" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="Schema" itemUrl="/webdav/200%20Example%20Content/Building%20Blocks/Modules/Impress/Editor/Schemas/Slide.xsd" linkName="Schema" />
+  </Dependencies>
+</PackageItem>

@@ -1,0 +1,153 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>100 Master</tcm:Title>
+      <tcm:PublicationPath>\</tcm:PublicationPath>
+      <tcm:PublicationURL>/</tcm:PublicationURL>
+      <tcm:MultimediaPath>\media</tcm:MultimediaPath>
+      <tcm:MultimediaURL>/media</tcm:MultimediaURL>
+      <tcm:DefaultPageTemplate xlink:type="simple" xlink:title="Content Page" xlink:href="/webdav/100%20Master/Building%20Blocks/Modules/Core/Editor/Templates/Content%20Page.tptcmp" />
+      <tcm:DefaultComponentTemplate xlink:type="simple" xlink:title="Default Component Template" xlink:href="/webdav/100%20Master/Building%20Blocks/Default%20Templates/Default%20Component%20Template.tctcmp" />
+      <tcm:DefaultTemplateBuildingBlock xlink:type="simple" xlink:title="Default Dreamweaver Page Design" xlink:href="/webdav/100%20Master/Building%20Blocks/Default%20Templates/Default%20Dreamweaver%20Page%20Design.dwt" />
+      <tcm:DefaultMultimediaSchema xlink:type="simple" xlink:title="Default Multimedia Schema" xlink:href="/webdav/100%20Master/Building%20Blocks/Default%20Multimedia%20Schema.xsd" />
+      <tcm:ParentPublications>
+        <tcm:ParentPublication xlink:type="simple" xlink:title="000 Empty" xlink:href="/webdav/000%20Empty" />
+      </tcm:ParentPublications>
+      <tcm:PageTemplateProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:ComponentTemplateProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:TaskProcess xlink:type="simple" xlink:title="Task Process" xlink:href="tcm:2-1-131074" />
+      <tcm:TemplateBundleProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:ComponentSnapshotTemplate xlink:type="simple" xlink:title="Default Component Template" xlink:href="/webdav/100%20Master/Building%20Blocks/Default%20Templates/Default%20Component%20Template.tctcmp" />
+      <tcm:PageSnapshotTemplate xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:ShareProcessAssociations>true</tcm:ShareProcessAssociations>
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:Metadata />
+      <tcm:CategoriesXSD>
+        <xsd:schema xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:category="tcm:0-2-1/Categories.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="tcm:0-2-1/Categories.xsd">
+          <xsd:import namespace="http://www.w3.org/1999/xlink" schemaLocation="/webdav/cm_lnk.xsd" />
+          <xsd:attribute name="CategoryURI" type="xsd:anyURI" />
+          <xsd:complexType name="DXCONTENTREFTYPE">
+            <xsd:annotation>
+              <xsd:documentation>Content Reference Type</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleContent>
+              <xsd:extension base="xsd:normalizedString">
+                <xsd:attribute ref="category:CategoryURI" use="optional" fixed="tcm:2-161-512" />
+                <xsd:attribute ref="xlink:type" use="optional" fixed="simple" />
+                <xsd:attribute ref="xlink:href" use="optional" />
+                <xsd:attribute ref="xlink:title" use="optional" />
+              </xsd:extension>
+            </xsd:simpleContent>
+          </xsd:complexType>
+          <xsd:complexType name="ContentType">
+            <xsd:annotation>
+              <xsd:documentation>Content Type</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleContent>
+              <xsd:extension base="xsd:normalizedString">
+                <xsd:attribute ref="category:CategoryURI" use="optional" fixed="tcm:2-24-512" />
+                <xsd:attribute ref="xlink:type" use="optional" fixed="simple" />
+                <xsd:attribute ref="xlink:href" use="optional" />
+                <xsd:attribute ref="xlink:title" use="optional" />
+              </xsd:extension>
+            </xsd:simpleContent>
+          </xsd:complexType>
+          <xsd:complexType name="ListSortType">
+            <xsd:annotation>
+              <xsd:documentation>List Sort Type</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleContent>
+              <xsd:extension base="xsd:normalizedString">
+                <xsd:attribute ref="category:CategoryURI" use="optional" fixed="tcm:2-25-512" />
+                <xsd:attribute ref="xlink:type" use="optional" fixed="simple" />
+                <xsd:attribute ref="xlink:href" use="optional" />
+                <xsd:attribute ref="xlink:title" use="optional" />
+              </xsd:extension>
+            </xsd:simpleContent>
+          </xsd:complexType>
+          <xsd:complexType name="NavigationType">
+            <xsd:annotation>
+              <xsd:documentation>Navigation Type</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleContent>
+              <xsd:extension base="xsd:normalizedString">
+                <xsd:attribute ref="category:CategoryURI" use="optional" fixed="tcm:2-42-512" />
+                <xsd:attribute ref="xlink:type" use="optional" fixed="simple" />
+                <xsd:attribute ref="xlink:href" use="optional" />
+                <xsd:attribute ref="xlink:title" use="optional" />
+              </xsd:extension>
+            </xsd:simpleContent>
+          </xsd:complexType>
+          <xsd:complexType name="DXPRODUCTFAMILYNAME">
+            <xsd:annotation>
+              <xsd:documentation>Product Family Name</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleContent>
+              <xsd:extension base="xsd:normalizedString">
+                <xsd:attribute ref="category:CategoryURI" use="optional" fixed="tcm:2-159-512" />
+                <xsd:attribute ref="xlink:type" use="optional" fixed="simple" />
+                <xsd:attribute ref="xlink:href" use="optional" />
+                <xsd:attribute ref="xlink:title" use="optional" />
+              </xsd:extension>
+            </xsd:simpleContent>
+          </xsd:complexType>
+          <xsd:complexType name="DXPRODUCTRELEASENAME">
+            <xsd:annotation>
+              <xsd:documentation>Product Release Name</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleContent>
+              <xsd:extension base="xsd:normalizedString">
+                <xsd:attribute ref="category:CategoryURI" use="optional" fixed="tcm:2-156-512" />
+                <xsd:attribute ref="xlink:type" use="optional" fixed="simple" />
+                <xsd:attribute ref="xlink:href" use="optional" />
+                <xsd:attribute ref="xlink:title" use="optional" />
+              </xsd:extension>
+            </xsd:simpleContent>
+          </xsd:complexType>
+          <xsd:simpleType name="_sitemap">
+            <xsd:restriction base="xsd:string" />
+          </xsd:simpleType>
+          <xsd:complexType name="sitemap">
+            <xsd:annotation>
+              <xsd:documentation>Sitemap [Navigation]</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleContent>
+              <xsd:extension base="category:_sitemap">
+                <xsd:attribute ref="category:CategoryURI" use="optional" fixed="tcm:2-13-512" />
+                <xsd:attribute ref="xlink:type" use="optional" fixed="simple" />
+                <xsd:attribute ref="xlink:href" use="optional" />
+                <xsd:attribute ref="xlink:title" use="optional" />
+              </xsd:extension>
+            </xsd:simpleContent>
+          </xsd:complexType>
+          <xsd:complexType name="SocialNetworks">
+            <xsd:annotation>
+              <xsd:documentation>Social Networks</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleContent>
+              <xsd:extension base="xsd:normalizedString">
+                <xsd:attribute ref="category:CategoryURI" use="optional" fixed="tcm:2-30-512" />
+                <xsd:attribute ref="xlink:type" use="optional" fixed="simple" />
+                <xsd:attribute ref="xlink:href" use="optional" />
+                <xsd:attribute ref="xlink:title" use="optional" />
+              </xsd:extension>
+            </xsd:simpleContent>
+          </xsd:complexType>
+        </xsd:schema>
+      </tcm:CategoriesXSD>
+      <tcm:PublicationType>Unspecified</tcm:PublicationType>
+      <tcm:Key>DxaMaster</tcm:Key>
+      <tcm:BusinessProcessType xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:MinimalLocalizeApprovalStatus xlink:type="simple" xlink:title="Undefined" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="ComponentSnapshotTemplate" itemUrl="/webdav/100%20Master/Building%20Blocks/Default%20Templates/Default%20Component%20Template.tctcmp" linkName="ComponentSnapshotTemplate" />
+    <Dependency dependencyType="DefaultComponentTemplate" itemUrl="/webdav/100%20Master/Building%20Blocks/Default%20Templates/Default%20Component%20Template.tctcmp" linkName="DefaultComponentTemplate" />
+    <Dependency dependencyType="DefaultMultimediaSchema" itemUrl="/webdav/100%20Master/Building%20Blocks/Default%20Multimedia%20Schema.xsd" linkName="DefaultMultimediaSchema" />
+    <Dependency dependencyType="DefaultPageTemplate" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/Core/Editor/Templates/Content%20Page.tptcmp" linkName="DefaultPageTemplate" />
+    <Dependency dependencyType="DefaultTemplateBuildingBlock" itemUrl="/webdav/100%20Master/Building%20Blocks/Default%20Templates/Default%20Dreamweaver%20Page%20Design.dwt" linkName="DefaultTemplateBuildingBlock" />
+    <Dependency dependencyType="ParentPublication" itemUrl="/webdav/000%20Empty" linkName="Parents[0]" />
+    <Dependency dependencyType="TaskProcess" itemUrl="/webdav/100%20Master//Task%20Process.tpd" linkName="TaskProcess" />
+  </Dependencies>
+</PackageItem>

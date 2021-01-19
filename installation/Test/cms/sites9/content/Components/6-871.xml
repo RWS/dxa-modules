@@ -1,0 +1,46 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>CRQ-12801 Test Component</tcm:Title>
+      <tcm:Type>Normal</tcm:Type>
+      <tcm:Schema xlink:type="simple" xlink:title="CRQ-12801 Test Schema" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/CRQ-12801/CRQ-12801%20Test%20Schema.xsd" IsMandatory="false" />
+      <tcm:Content>
+        <CRQ12801 xmlns="uuid:eabf7656-da8b-45a9-ab45-9cab22d99cb3">
+          <embeddedFields />
+          <multiValueEmbeddedFields>
+            <optionalField1>test1</optionalField1>
+          </multiValueEmbeddedFields>
+          <multiValueEmbeddedFields />
+          <multiValueEmbeddedFields>
+            <optionalField2>test2</optionalField2>
+          </multiValueEmbeddedFields>
+          <richText>
+            <strong xmlns="http://www.w3.org/1999/xhtml">First value</strong>
+          </richText>
+          <richText>
+            <strong xmlns="http://www.w3.org/1999/xhtml">Second value</strong>
+          </richText>
+          <compLink xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Test%20Article.xml" xlink:title="Test Article" />
+        </CRQ12801>
+      </tcm:Content>
+      <tcm:Metadata />
+      <tcm:IsBasedOnTridionWebSchema>true</tcm:IsBasedOnTridionWebSchema>
+      <tcm:MultimediaType xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <ApplicationDataCollection>
+    <ApplicationData>
+      <ApplicationId>ugc:ComponentAndPage</ApplicationId>
+      <TypeId>c:XmlDocument-CommunityBuilder</TypeId>
+      <BinaryData>PAB1AGcAYwA+AA0ACgAgACAAPABpAHQAZQBtACAAaQBkAD0AIgB0AGMAbQA6ADYALQA4ADcAMQAiAD4ADQAKACAAIAAgACAAPABhAGwAbABvAHcAdABvAHIAYQB0AGUAPgBmAGEAbABzAGUAPAAvAGEAbABsAG8AdwB0AG8AcgBhAHQAZQA+AA0ACgAgACAAIAAgADwAYQBsAGwAbwB3AHQAbwBjAG8AbQBtAGUAbgB0AD4AZgBhAGwAcwBlADwALwBhAGwAbABvAHcAdABvAGMAbwBtAG0AZQBuAHQAPgANAAoAIAAgACAAIAA8AHMAaABvAHcAYwBvAG0AbQBlAG4AdABzAD4AZgBhAGwAcwBlADwALwBzAGgAbwB3AGMAbwBtAG0AZQBuAHQAcwA+AA0ACgAgACAAIAAgADwAcwBvAHIAdABjAG8AbQBtAGUAbgB0AHMAPgANAAoAIAAgACAAIAAgACAAPABmAGkAZQBsAGQAPgBkAGEAdABlADwALwBmAGkAZQBsAGQAPgANAAoAIAAgACAAIAAgACAAPABkAGkAcgBlAGMAdABpAG8AbgA+AGQAZQBzAGMAZQBuAGQAaQBuAGcAPAAvAGQAaQByAGUAYwB0AGkAbwBuAD4ADQAKACAAIAAgACAAPAAvAHMAbwByAHQAYwBvAG0AbQBlAG4AdABzAD4ADQAKACAAIAAgACAAPABzAGgAbwB3AHUAbgBtAG8AZABlAHIAYQB0AGUAZABjAG8AbQBtAGUAbgB0AHMAPgBmAGEAbABzAGUAPAAvAHMAaABvAHcAdQBuAG0AbwBkAGUAcgBhAHQAZQBkAGMAbwBtAG0AZQBuAHQAcwA+AA0ACgAgACAAPAAvAGkAdABlAG0APgANAAoAPAAvAHUAZwBjAD4A</BinaryData>
+      <IsInherited>false</IsInherited>
+    </ApplicationData>
+  </ApplicationDataCollection>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/CRQ-12801" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Test%20Article.xml" linkName="Content" xpath="*[local-name() = 'CRQ12801'][1]/*[local-name() = 'compLink'][1]/@xlink:href" />
+    <Dependency dependencyType="Schema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/CRQ-12801/CRQ-12801%20Test%20Schema.xsd" linkName="Schema" />
+    <Dependency dependencyType="ApplicationData" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/CRQ-12801/CRQ-12801%20Test%20Component.xml" linkName="ugc:ComponentAndPage" xpath="/*[local-name() = 'ugc'][1]/*[local-name() = 'item'][1]/@id" />
+  </Dependencies>
+</PackageItem>

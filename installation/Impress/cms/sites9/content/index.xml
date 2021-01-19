@@ -1,0 +1,202 @@
+<Index dataContractVersion="201701" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Item id="tcm:0-0-0" selected="false" exported="true">
+    <ApplicationIds>
+      <ApplicationId>CustomPages</ApplicationId>
+      <ApplicationId>http://www.sdl.com/tridion/SemanticMapping/vocabularies</ApplicationId>
+    </ApplicationIds>
+    <Item id="46991606249f49d7bf066c4786f2614a" title="100%20Master" itemType="Publication" selected="false" exported="false">
+      <Item id="36db419a199a40b5a8858cb7fedc8322" title="Building%20Blocks" itemType="Folder" selected="false" exported="false">
+        <Item id="b2f8a9ac607e40b6ab7fae4b5dc11f0a" title="Framework" itemType="Folder" selected="false" exported="false">
+          <Item id="95d7e8654b0f4709b18eef64e8c7ff95" title="Developer" itemType="Folder" selected="false" exported="false">
+            <Item id="69413fd009d64699945b81f8c7a3be3f" title="Schemas" itemType="Folder" selected="false" exported="false">
+              <Item id="tcm:2-91-8" title="Component%20Template%20Metadata" extension="xsd" itemType="Schema" subtype="3" blueprintStatus="LocalItem" selected="false" exported="true" />
+              <Item id="8289d27126864ce68705230d3e991353" title="Module%20Configuration" extension="xsd" itemType="Schema" selected="false" exported="false" />
+              <Item id="tcm:2-68-8" title="Page%20Template%20Metadata" extension="xsd" itemType="Schema" subtype="3" blueprintStatus="LocalItem" selected="false" exported="true" />
+              <Item id="ad45b9dc5ab843ae8e5741c673683c56" title="Region%20Metadata" extension="xsd" itemType="Schema" selected="false" exported="false" />
+              <Item id="c1c607445a8f4372923b6dd85a4724de" title="ZIP%20file" extension="xsd" itemType="Schema" selected="false" exported="false" />
+            </Item>
+            <Item id="4aa1b5c431c94584879282889a1334e0" title="Templates" itemType="Folder" selected="false" exported="false">
+              <Item id="14607d7c1a5640f48ed18f0c984715b5" title="DXA%2ER2" itemType="Folder" selected="false" exported="false">
+                <Item id="db741efca92b436582b5af998474f3a9" title="Default%20Component%20Template%20Finish%20Actions" extension="tbbcmp" itemType="TemplateBuildingBlock" selected="false" exported="false" />
+                <Item id="b420698d24af4923a04996c76637b556" title="Default%20Page%20Template%20Finish%20Actions" extension="tbbcmp" itemType="TemplateBuildingBlock" selected="false" exported="false" />
+                <Item id="b9941f15a94247cdaec28a50edbface3" title="Render%20Component%20Content" extension="tbbcmp" itemType="TemplateBuildingBlock" selected="false" exported="false" />
+                <Item id="144df775945b4768995cbda4285c44f7" title="Render%20Page%20Content" extension="tbbcmp" itemType="TemplateBuildingBlock" selected="false" exported="false" />
+              </Item>
+            </Item>
+          </Item>
+          <Item id="e7d34b7e61724772a31228ce291d6060" title="Site%20Manager" itemType="Folder" selected="false" exported="false">
+            <Item id="150de26e94a345e9b7ab7b8390d60730" title="Schemas" itemType="Folder" selected="false" exported="false">
+              <Item id="876f9a7324234b929789fcd919d3cfa6" title="HTML%20Design%20Configuration" extension="xsd" itemType="Schema" selected="false" exported="false" />
+            </Item>
+          </Item>
+        </Item>
+        <Item id="2b9d906c91e144b0a7c531ea3490d1ab" title="Modules" itemType="Folder" selected="false" exported="false">
+          <Item id="459a13a2dedf4ffdb478ac014a4c3646" title="Core" itemType="Folder" selected="false" exported="false">
+            <Item id="5b7d685afaaf46eab8a9bd1a053a57d4" title="Editor" itemType="Folder" selected="false" exported="false">
+              <Item id="57579cb406d64fe59d9504d786600512" title="Schemas" itemType="Folder" selected="false" exported="false">
+                <Item id="1a9ecb94d55a40e797cf9156542b1095" title="Image" extension="xsd" itemType="Schema" selected="false" exported="false" />
+              </Item>
+            </Item>
+          </Item>
+          <Item id="tcm:2-127-2" title="Impress" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+            <Item id="tcm:2-133-2" title="Admin" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+              <Item id="tcm:2-427" title="Impress" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+              <Item id="tcm:2-420" title="impress-html-design%2Ezip" extension="zip" itemType="Component" subtype="1" blueprintStatus="LocalItem" selected="true" exported="true" />
+            </Item>
+            <Item id="tcm:2-128-2" title="Editor" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+              <Item id="tcm:2-130-2" title="Schemas" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+                <Item id="tcm:2-422-8" title="Message" extension="xsd" itemType="Schema" blueprintStatus="LocalItem" selected="true" exported="true" />
+                <Item id="tcm:2-418-8" title="Slide" extension="xsd" itemType="Schema" blueprintStatus="LocalItem" selected="true" exported="true" />
+              </Item>
+              <Item id="tcm:2-129-2" title="Templates" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+                <Item id="tcm:2-423-128" title="Impress%20Page" extension="tptcmp" itemType="PageTemplate" blueprintStatus="LocalItem" selected="true" exported="true" />
+                <Item id="tcm:2-430-32" title="Impress%3AFreeText%20%5BImpress%3APresentation%5D" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="LocalItem" selected="true" exported="true" />
+                <Item id="tcm:2-429-32" title="Impress%3AMessage%20%5BImpress%3AFallback%5D" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="LocalItem" selected="true" exported="true" />
+                <Item id="tcm:2-424-32" title="Impress%3AMessage%20%5BImpress%3AHint%5D" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="LocalItem" selected="true" exported="true" />
+                <Item id="tcm:2-428-32" title="Impress%3AOverview%20%5BImpress%3APresentation%5D" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="LocalItem" selected="true" exported="true" />
+                <Item id="tcm:2-419-32" title="Impress%3ASlide%20%5BImpress%3APresentation%5D" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="LocalItem" selected="true" exported="true" />
+              </Item>
+            </Item>
+            <Item id="tcm:2-134-2" title="Site%20Manager" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+              <Item id="tcm:2-135-2" title="Schemas" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+                <Item id="tcm:2-425-8" title="Resources%20-%20Impress" extension="xsd" itemType="Schema" blueprintStatus="LocalItem" selected="true" exported="true" />
+              </Item>
+            </Item>
+          </Item>
+        </Item>
+        <Item id="57c8ab00afb448bf88fcfba9fabc1bbb" title="Settings" itemType="Folder" selected="false" exported="false">
+          <Item id="tcm:2-131-2" title="Impress" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+            <Item id="tcm:2-132-2" title="Site%20Manager" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+              <Item id="tcm:2-421" title="Impress%20HTML%20Design%20Configuration" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+              <Item id="tcm:2-426" title="Impress%20Resources" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+            </Item>
+          </Item>
+        </Item>
+      </Item>
+    </Item>
+    <Item id="10e220ce502c405883cc142f9724e31d" title="200%20Example%20Content" itemType="Publication" selected="false" exported="false">
+      <Item id="6c75f9e45c8548609df2887fd55ac455" title="Building%20Blocks" itemType="Folder" selected="false" exported="false">
+        <Item id="b3f4140c69e54a65b4b87c077064c736" title="Modules" itemType="Folder" selected="false" exported="false">
+          <Item id="a12582ac6308433d91af69fbc1570a3f" title="Core" itemType="Folder" selected="false" exported="false">
+            <Item id="a0fe683d538c4fb5b15e95dcb391c985" title="Editor" itemType="Folder" selected="false" exported="false">
+              <Item id="056e24ae06a747699c0f1a215adfe03f" title="Schemas" itemType="Folder" selected="false" exported="false">
+                <Item id="d44de684c54042a3a3b757b396c7a517" title="Image" extension="xsd" itemType="Schema" selected="false" exported="false" />
+              </Item>
+            </Item>
+          </Item>
+          <Item id="tcm:4-127-2" title="Impress" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+            <Item id="tcm:4-133-2" title="Admin" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+              <Item id="tcm:4-427" title="Impress" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+              <Item id="tcm:4-420" title="impress-html-design%2Ezip" extension="zip" itemType="Component" subtype="1" blueprintStatus="SharedItem" selected="true" exported="true" />
+            </Item>
+            <Item id="tcm:4-128-2" title="Editor" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+              <Item id="tcm:4-130-2" title="Schemas" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:4-422-8" title="Message" extension="xsd" itemType="Schema" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:4-418-8" title="Slide" extension="xsd" itemType="Schema" blueprintStatus="SharedItem" selected="true" exported="true" />
+              </Item>
+              <Item id="tcm:4-129-2" title="Templates" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:4-423-128" title="Impress%20Page" extension="tptcmp" itemType="PageTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:4-430-32" title="Impress%3AFreeText%20%5BImpress%3APresentation%5D" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:4-429-32" title="Impress%3AMessage%20%5BImpress%3AFallback%5D" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:4-424-32" title="Impress%3AMessage%20%5BImpress%3AHint%5D" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:4-428-32" title="Impress%3AOverview%20%5BImpress%3APresentation%5D" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:4-419-32" title="Impress%3ASlide%20%5BImpress%3APresentation%5D" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+              </Item>
+            </Item>
+            <Item id="tcm:4-134-2" title="Site%20Manager" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+              <Item id="tcm:4-135-2" title="Schemas" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:4-425-8" title="Resources%20-%20Impress" extension="xsd" itemType="Schema" blueprintStatus="SharedItem" selected="true" exported="true" />
+              </Item>
+            </Item>
+          </Item>
+        </Item>
+        <Item id="45f9b9f5baf347fdb053423f1093fa52" title="Modules%20Content" itemType="Folder" selected="false" exported="false">
+          <Item id="tcm:4-136-2" title="Impress" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+            <Item id="tcm:4-446" title="Fallback" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+            <Item id="tcm:4-435" title="Hint" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+            <Item id="tcm:4-442" title="Modular" extension="png" itemType="Component" subtype="1" blueprintStatus="LocalItem" selected="true" exported="true" />
+            <Item id="tcm:4-437" title="Step%2001%20-%20bored" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+            <Item id="tcm:4-443" title="Step%2002" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+            <Item id="tcm:4-439" title="Step%2003" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+            <Item id="tcm:4-433" title="Step%2004%20-%20title" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+            <Item id="tcm:4-444" title="Step%2005%20-%20its" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+            <Item id="tcm:4-434" title="Step%2006%20-%20big" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+            <Item id="tcm:4-432" title="Step%2007%20-%20tiny" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+            <Item id="tcm:4-438" title="Step%2008%20-%20ing" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+            <Item id="tcm:4-431" title="Step%2009%20-%20imagination" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+            <Item id="tcm:4-445" title="Step%2010%20-%20source" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+            <Item id="tcm:4-440" title="Step%2011%20-%20one-more-thing" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+            <Item id="tcm:4-441" title="Step%2012%20-%20its-in-3d" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+            <Item id="tcm:4-436" title="Step%2013%20-%20overview" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+          </Item>
+        </Item>
+      </Item>
+    </Item>
+    <Item id="3ab92e11e1c444ffbdc8e8d84be780d6" title="400%20Example%20Site" itemType="Publication" selected="false" exported="false">
+      <Item id="c4483dbd54f34c029918054dcc29ebf3" title="Building%20Blocks" itemType="Folder" selected="false" exported="false">
+        <Item id="cd4f41d7dbc9499f869eb5e34fdb20ab" title="Modules" itemType="Folder" selected="false" exported="false">
+          <Item id="tcm:5-127-2" title="Impress" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+            <Item id="tcm:5-133-2" title="Admin" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+              <Item id="tcm:5-427" title="Impress" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+              <Item id="tcm:5-420" title="impress-html-design%2Ezip" extension="zip" itemType="Component" subtype="1" blueprintStatus="SharedItem" selected="true" exported="true" />
+            </Item>
+            <Item id="tcm:5-128-2" title="Editor" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+              <Item id="tcm:5-130-2" title="Schemas" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:5-422-8" title="Message" extension="xsd" itemType="Schema" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:5-418-8" title="Slide" extension="xsd" itemType="Schema" blueprintStatus="SharedItem" selected="true" exported="true" />
+              </Item>
+              <Item id="tcm:5-129-2" title="Templates" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:5-423-128" title="Impress%20Page" extension="tptcmp" itemType="PageTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:5-430-32" title="Impress%3AFreeText%20%5BImpress%3APresentation%5D" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:5-429-32" title="Impress%3AMessage%20%5BImpress%3AFallback%5D" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:5-424-32" title="Impress%3AMessage%20%5BImpress%3AHint%5D" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:5-428-32" title="Impress%3AOverview%20%5BImpress%3APresentation%5D" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:5-419-32" title="Impress%3ASlide%20%5BImpress%3APresentation%5D" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+              </Item>
+            </Item>
+            <Item id="tcm:5-134-2" title="Site%20Manager" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+              <Item id="tcm:5-135-2" title="Schemas" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:5-425-8" title="Resources%20-%20Impress" extension="xsd" itemType="Schema" blueprintStatus="SharedItem" selected="true" exported="true" />
+              </Item>
+            </Item>
+          </Item>
+        </Item>
+        <Item id="26d0231063954b9a8eff96c865826a7a" title="Modules%20Content" itemType="Folder" selected="false" exported="false">
+          <Item id="tcm:5-136-2" title="Impress" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+            <Item id="tcm:5-446" title="Fallback" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+            <Item id="tcm:5-435" title="Hint" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+            <Item id="tcm:5-442" title="Modular" extension="png" itemType="Component" subtype="1" blueprintStatus="SharedItem" selected="true" exported="true" />
+            <Item id="tcm:5-437" title="Step%2001%20-%20bored" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+            <Item id="tcm:5-443" title="Step%2002" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+            <Item id="tcm:5-439" title="Step%2003" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+            <Item id="tcm:5-433" title="Step%2004%20-%20title" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+            <Item id="tcm:5-444" title="Step%2005%20-%20its" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+            <Item id="tcm:5-434" title="Step%2006%20-%20big" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+            <Item id="tcm:5-432" title="Step%2007%20-%20tiny" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+            <Item id="tcm:5-438" title="Step%2008%20-%20ing" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+            <Item id="tcm:5-431" title="Step%2009%20-%20imagination" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+            <Item id="tcm:5-445" title="Step%2010%20-%20source" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+            <Item id="tcm:5-440" title="Step%2011%20-%20one-more-thing" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+            <Item id="tcm:5-441" title="Step%2012%20-%20its-in-3d" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+            <Item id="tcm:5-436" title="Step%2013%20-%20overview" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+          </Item>
+        </Item>
+        <Item id="176f956df8164fb08e33187881afecda" title="Settings" itemType="Folder" selected="false" exported="false">
+          <Item id="tcm:5-131-2" title="Impress" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+            <Item id="tcm:5-132-2" title="Site%20Manager" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+              <Item id="tcm:5-421" title="Impress%20HTML%20Design%20Configuration" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+              <Item id="tcm:5-426" title="Impress%20Resources" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+            </Item>
+          </Item>
+        </Item>
+      </Item>
+      <Item id="5e5a2766f0d54591aa665eaa8d176cd1" title="Home" itemType="StructureGroup" selected="false" exported="false">
+        <Item id="tcm:5-137-4" title="Impress" itemType="StructureGroup" blueprintStatus="LocalItem" selected="true" exported="true">
+          <Item id="tcm:5-447-64" title="Impress%2Ejs%20Presentation" extension="tpg" itemType="Page" blueprintStatus="LocalItem" selected="true" exported="true" />
+        </Item>
+      </Item>
+    </Item>
+    <Item id="7ab058df8c454e22841c9c4a48dfe4c4" title="Png%20image" extension="tmt" itemType="MultimediaType" selected="false" exported="false" />
+    <Item id="5b1f875e59b3439aa370579075c56894" title="Zip%20file" extension="tmt" itemType="MultimediaType" selected="false" exported="false" />
+  </Item>
+</Index>

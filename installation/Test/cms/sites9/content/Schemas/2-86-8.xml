@@ -1,0 +1,86 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+      <tcm:Title>Link</tcm:Title>
+      <tcm:Description>Link</tcm:Description>
+      <tcm:Purpose>Embedded</tcm:Purpose>
+      <tcm:NamespaceURI />
+      <tcm:RootElementName>EmbeddedLink</tcm:RootElementName>
+      <tcm:IsTridionWebSchema>true</tcm:IsTridionWebSchema>
+      <tcm:XSD>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tcmi="http://www.tridion.com/ContentManager/5.0/Instance" xmlns="" elementFormDefault="qualified">
+        <xsd:import namespace="http://www.tridion.com/ContentManager/5.0/Instance" schemaLocation="/webdav/cm_xml_inst.xsd" />
+        <xsd:annotation>
+          <xsd:appinfo>
+            <tcm:Labels xmlns:tcm="http://www.tridion.com/ContentManager/5.0">
+              <tcm:Label ElementName="linkText" Metadata="false">Link Text</tcm:Label>
+              <tcm:Label ElementName="externalLink" Metadata="false">External Link</tcm:Label>
+              <tcm:Label ElementName="internalLink" Metadata="false">-- OR -- Internal Link</tcm:Label>
+              <tcm:Label ElementName="alternateText" Metadata="false">Alternate Text</tcm:Label>
+            </tcm:Labels>
+          </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexType name="EmbeddedLink">
+          <xsd:sequence>
+            <xsd:element name="linkText" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+              <xsd:annotation>
+                <xsd:appinfo>
+                  <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0">
+                    <property xmlns="http://www.sdl.com/tridion/SemanticMapping">s:name</property>
+                  </ExtensionXml>
+                </xsd:appinfo>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="externalLink" minOccurs="0" maxOccurs="1" type="tcmi:SimpleLink">
+              <xsd:annotation>
+                <xsd:appinfo>
+                  <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0">
+                    <property xmlns="http://www.sdl.com/tridion/SemanticMapping">s:url</property>
+                  </ExtensionXml>
+                  <tcm:linktype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">ExternalLink</tcm:linktype>
+                </xsd:appinfo>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="internalLink" minOccurs="0" maxOccurs="1" type="tcmi:SimpleLink">
+              <xsd:annotation>
+                <xsd:appinfo>
+                  <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0">
+                    <property xmlns="http://www.sdl.com/tridion/SemanticMapping">s:url</property>
+                  </ExtensionXml>
+                  <tcm:linktype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">ComponentLink</tcm:linktype>
+                  <tcm:AllowMultimediaLinks xmlns:tcm="http://www.tridion.com/ContentManager/5.0">false</tcm:AllowMultimediaLinks>
+                </xsd:appinfo>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="alternateText" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+              <xsd:annotation>
+                <xsd:appinfo>
+                  <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0">
+                    <property xmlns="http://www.sdl.com/tridion/SemanticMapping">s:description</property>
+                  </ExtensionXml>
+                </xsd:appinfo>
+              </xsd:annotation>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:schema>
+      </tcm:XSD>
+      <tcm:AllowedMultimediaTypes />
+      <tcm:ComponentProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:BundleProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:DeleteBundleOnProcessFinished>false</tcm:DeleteBundleOnProcessFinished>
+    </tcm:Data>
+  </Data>
+  <ApplicationDataCollection>
+    <ApplicationData>
+      <ApplicationId>http://www.sdl.com/tridion/SemanticMapping/typeof</ApplicationId>
+      <TypeId></TypeId>
+      <BinaryData>PAB0AHkAcABlAG8AZgA+AHMAOgBUAGgAaQBuAGcAPAAvAHQAeQBwAGUAbwBmAD4A</BinaryData>
+      <IsInherited>false</IsInherited>
+    </ApplicationData>
+  </ApplicationDataCollection>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/100%20Master" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/Core/Editor/Schemas/Embedded" linkName="LocationInfo/OrganizationalItem" />
+  </Dependencies>
+</PackageItem>

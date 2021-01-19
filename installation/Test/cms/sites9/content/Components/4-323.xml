@@ -1,0 +1,37 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>All Articles Intro</tcm:Title>
+      <tcm:Type>Normal</tcm:Type>
+      <tcm:Schema xlink:type="simple" xlink:title="Article" xlink:href="/webdav/200%20Example%20Content/Building%20Blocks/Modules/Core/Editor/Schemas/Article.xsd" IsMandatory="false" />
+      <tcm:Content>
+        <Article xmlns="http://www.sdl.com/web/schemas/core">
+          <headline>All Articles</headline>
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/200%20Example%20Content/Building%20Blocks/Content/Images/Large/blueprint.jpg" xlink:title="blueprint" />
+          <articleBody>
+            <content>
+              <span xmlns="http://www.w3.org/1999/xhtml">Sed dapibus tempus nunc, id sollicitudin ligula mattis in. Pellentesque quis purus lobortis, porttitor felis a, auctor felis. Phasellus posuere aliquet libero et vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In at felis vel risus facilisis ultrices tincidunt nec mauris. Praesent porttitor mi vitae lacus tristique, et hendrerit ante scelerisque. Phasellus sit amet venenatis lacus. Nunc vehicula ullamcorper pharetra. Proin hendrerit enim sed condimentum scelerisque. Maecenas accumsan orci id nisl congue consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tristique quam tempus ligula iaculis malesuada. Quisque non lectus dui. Nunc luctus faucibus nulla quis pellentesque. Sed leo quam, auctor sit amet diam et, ultricies dignissim metus. Cras dignissim porttitor nisi sodales facilisis.</span>
+            </content>
+          </articleBody>
+        </Article>
+      </tcm:Content>
+      <tcm:Metadata>
+        <Metadata xmlns="http://www.sdl.com/web/schemas/core">
+          <standardMeta>
+            <description>Cras vel justo semper, bibendum odio in, fringilla elit. Cras at nunc fringilla, porttitor mauris eget, pharetra purus. Sed elementum consectetur massa id auctor. </description>
+            <name>View all articles </name>
+            <introText>See the latest content published </introText>
+          </standardMeta>
+        </Metadata>
+      </tcm:Metadata>
+      <tcm:IsBasedOnTridionWebSchema>true</tcm:IsBasedOnTridionWebSchema>
+      <tcm:MultimediaType xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/200%20Example%20Content" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/200%20Example%20Content/Building%20Blocks/Content/Articles" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/200%20Example%20Content/Building%20Blocks/Content/Images/Large/blueprint.jpg" linkName="Content" xpath="*[local-name() = 'Article'][1]/*[local-name() = 'image'][1]/@xlink:href" />
+    <Dependency dependencyType="Schema" itemUrl="/webdav/200%20Example%20Content/Building%20Blocks/Modules/Core/Editor/Schemas/Article.xsd" linkName="Schema" />
+  </Dependencies>
+</PackageItem>

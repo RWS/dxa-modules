@@ -1,0 +1,38 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>TridionDocsMashup:Topics</tcm:Title>
+      <tcm:FileName>tridion-docs-dynamic-topics</tcm:FileName>
+      <tcm:PageTemplate IsInherited="false" xlink:type="simple" xlink:title="Include Page (Tridion Docs Dynamic Widget)" xlink:href="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager/Templates/Include%20Page%20%28Tridion%20Docs%20Dynamic%20Widget%29.tptcmp" />
+      <tcm:ComponentPresentations />
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="Bicycle Include Page" xlink:href="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager/Schemas/Page%20Schemas/Bicycle%20Include%20Page.xsd" />
+      <tcm:Metadata />
+      <tcm:RegionSchema xlink:type="simple" xlink:title="Bicycle Include Page" xlink:href="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager/Schemas/Page%20Schemas/Bicycle%20Include%20Page.xsd" />
+      <tcm:Regions>
+        <tcm:Region Type="EmbeddedRegionData">
+          <tcm:RegionName>Tridion Docs Related Topics</tcm:RegionName>
+          <tcm:RegionSchema xlink:type="simple" xlink:title="[TridionDocsMashup:Topics] Dynamic Topics Region" xlink:href="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager/Schemas/Region%20Schemas/%5BTridionDocsMashup%3ATopics%5D%20Dynamic%20Topics%20Region.xsd" />
+          <tcm:Metadata />
+          <tcm:ComponentPresentations>
+            <tcm:ComponentPresentation>
+              <tcm:Component xlink:type="simple" xlink:title="Bicycle Widget Configuration" xlink:href="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content/Products/Bicycles/Bicycle%20Widget%20Configuration.xml" />
+              <tcm:ComponentTemplate xlink:type="simple" xlink:title="Tridion Docs Dynamic Widget" xlink:href="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager/Templates/Tridion%20Docs%20Dynamic%20Widget.tctcmp" />
+              <tcm:Conditions />
+            </tcm:ComponentPresentation>
+          </tcm:ComponentPresentations>
+          <tcm:Regions />
+        </tcm:Region>
+      </tcm:Regions>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/110%20DXA%20Site%20Type" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemStructureGroup" itemUrl="/webdav/110%20DXA%20Site%20Type/Home/_System/include" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content/Products/Bicycles/Bicycle%20Widget%20Configuration.xml" linkName="Regions[0]/ComponentPresentations[0]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager/Templates/Tridion%20Docs%20Dynamic%20Widget.tctcmp" linkName="Regions[0]/ComponentPresentations[0]/ComponentTemplate" />
+    <Dependency dependencyType="MetadataSchema" itemUrl="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager/Schemas/Page%20Schemas/Bicycle%20Include%20Page.xsd" linkName="MetadataSchema" />
+    <Dependency dependencyType="PageTemplate" itemUrl="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager/Templates/Include%20Page%20%28Tridion%20Docs%20Dynamic%20Widget%29.tptcmp" linkName="PageTemplate" />
+    <Dependency dependencyType="PageRegionSchema" itemUrl="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager/Schemas/Page%20Schemas/Bicycle%20Include%20Page.xsd" linkName="RegionSchema" />
+    <Dependency dependencyType="PageRegionSchema" itemUrl="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Modules/TridionDocsMashup/Site%20Manager/Schemas/Region%20Schemas/%5BTridionDocsMashup%3ATopics%5D%20Dynamic%20Topics%20Region.xsd" linkName="Regions[0]/RegionSchema" />
+  </Dependencies>
+</PackageItem>

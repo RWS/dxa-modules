@@ -1,0 +1,29 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Tridion Docs Static Widget</tcm:Title>
+      <tcm:Type>Normal</tcm:Type>
+      <tcm:Schema xlink:type="simple" xlink:title="Tridion Docs Static Widget" xlink:href="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas/Tridion%20Docs%20Static%20Widget.xsd" IsMandatory="false" />
+      <tcm:Content>
+        <StaticWidget xmlns="uuid:3f27d9a5-594d-4d2a-9b8f-179aa29561cd">
+          <Publication.FMBPRODUCTRELEASENAME.Version xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/110%20DXA%20Site%20Type/Product%20Release%20Name/Model%202018.tkw" xlink:title="Model 2018">Model 2018</Publication.FMBPRODUCTRELEASENAME.Version>
+          <Publication.FMBPRODUCTFAMILYNAME.Logical xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/110%20DXA%20Site%20Type/Product%20Family%20Name/Red%20Bicycle.tkw" xlink:title="Red Bicycle">Red Bicycle</Publication.FMBPRODUCTFAMILYNAME.Logical>
+          <Item.FMBCONTENTREFTYPE.Logical xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/110%20DXA%20Site%20Type/Content%20Reference%20Type/Acknowledgements.tkw" xlink:title="Acknowledgements">Acknowledgements</Item.FMBCONTENTREFTYPE.Logical>
+          <DisplayContentAs>Embedded Content</DisplayContentAs>
+          <MaxNumberOfItemsToShow>1</MaxNumberOfItemsToShow>
+        </StaticWidget>
+      </tcm:Content>
+      <tcm:Metadata />
+      <tcm:IsBasedOnTridionWebSchema>true</tcm:IsBasedOnTridionWebSchema>
+      <tcm:MultimediaType xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/110%20DXA%20Site%20Type" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content/_Cloneable%20Content" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="LinkedKeyword" itemUrl="/webdav/110%20DXA%20Site%20Type/Product%20Release%20Name/Model%202018.tkw" linkName="Content" xpath="*[local-name() = 'StaticWidget'][1]/*[local-name() = 'Publication.FMBPRODUCTRELEASENAME.Version'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedKeyword" itemUrl="/webdav/110%20DXA%20Site%20Type/Product%20Family%20Name/Red%20Bicycle.tkw" linkName="Content" xpath="*[local-name() = 'StaticWidget'][1]/*[local-name() = 'Publication.FMBPRODUCTFAMILYNAME.Logical'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedKeyword" itemUrl="/webdav/110%20DXA%20Site%20Type/Content%20Reference%20Type/Acknowledgements.tkw" linkName="Content" xpath="*[local-name() = 'StaticWidget'][1]/*[local-name() = 'Item.FMBCONTENTREFTYPE.Logical'][1]/@xlink:href" />
+    <Dependency dependencyType="Schema" itemUrl="/webdav/110%20DXA%20Site%20Type/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas/Tridion%20Docs%20Static%20Widget.xsd" linkName="Schema" />
+  </Dependencies>
+</PackageItem>

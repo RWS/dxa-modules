@@ -1,0 +1,22 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>TSI-811 Test Category</tcm:Title>
+      <tcm:XMLName>TSI811TestCategory</tcm:XMLName>
+      <tcm:Description />
+      <tcm:KeywordMetadataSchema xlink:type="simple" xlink:title="TSI-811 Keyword Metadata Schema" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/TSI-811%20Keyword%20Metadata%20Schema.xsd" />
+      <tcm:UseForNavigation>false</tcm:UseForNavigation>
+      <tcm:AllowedParentCategories>
+        <tcm:Category xlink:type="simple" xlink:title="TSI-811 Test Category" xlink:href="/webdav/401%20Automated%20Test%20Parent/TSI-811%20Test%20Category" />
+      </tcm:AllowedParentCategories>
+      <tcm:IsRoot>true</tcm:IsRoot>
+      <tcm:UseForIdentification>false</tcm:UseForIdentification>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemPublication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="AllowedParentCategory" itemUrl="/webdav/401%20Automated%20Test%20Parent/TSI-811%20Test%20Category" linkName="AllowedParentCategories[0]" />
+    <Dependency dependencyType="MetadataSchema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/TSI-811%20Keyword%20Metadata%20Schema.xsd" linkName="KeywordMetadataSchema" />
+  </Dependencies>
+</PackageItem>

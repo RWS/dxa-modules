@@ -1,0 +1,42 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+      <tcm:Title>Include Page (Tools)</tcm:Title>
+      <tcm:Description>Include Page (Tools)</tcm:Description>
+      <tcm:Purpose>Region</tcm:Purpose>
+      <tcm:NamespaceURI>uuid:5370bf68-0d06-49e5-ac5d-8d93699847d9</tcm:NamespaceURI>
+      <tcm:RootElementName />
+      <tcm:IsTridionWebSchema>true</tcm:IsTridionWebSchema>
+      <tcm:XSD>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="uuid:5370bf68-0d06-49e5-ac5d-8d93699847d9" xmlns:tcmi="http://www.tridion.com/ContentManager/5.0/Instance" elementFormDefault="qualified" targetNamespace="uuid:5370bf68-0d06-49e5-ac5d-8d93699847d9">
+  <xsd:import namespace="http://www.tridion.com/ContentManager/5.0/Instance" schemaLocation="/webdav/cm_xml_inst.xsd" />
+  <xsd:annotation>
+    <xsd:appinfo>
+      <tcm:Labels xmlns:tcm="http://www.tridion.com/ContentManager/5.0" />
+    </xsd:appinfo>
+  </xsd:annotation>
+</xsd:schema>
+      </tcm:XSD>
+      <tcm:AllowedMultimediaTypes />
+      <tcm:ComponentProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:BundleProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:DeleteBundleOnProcessFinished>false</tcm:DeleteBundleOnProcessFinished>
+      <tcm:RegionDefinition>
+        <tcm:ComponentPresentationConstraints />
+        <tcm:DefaultComponentPresentations />
+        <tcm:NestedRegions>
+          <tcm:NestedRegion>
+            <tcm:RegionName>Tools</tcm:RegionName>
+            <tcm:RegionSchema xlink:type="simple" xlink:title="[Tools] Region" xlink:href="/webdav/100%20Master/Building%20Blocks/Modules/Core/Editor/Schemas/Region%20Schemas/%5BTools%5D%20Region.xsd" />
+            <tcm:IsMandatory>true</tcm:IsMandatory>
+          </tcm:NestedRegion>
+        </tcm:NestedRegions>
+      </tcm:RegionDefinition>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/100%20Master" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/Core/Editor/Schemas/Page%20Schemas" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="RegionDefinitionNestedRegionSchema" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/Core/Editor/Schemas/Region%20Schemas/%5BTools%5D%20Region.xsd" linkName="RegionDefinition/NestedRegions[0]/RegionSchema" />
+  </Dependencies>
+</PackageItem>

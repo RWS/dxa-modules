@@ -1,0 +1,25 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>TSI-1757 Test Component 1</tcm:Title>
+      <tcm:Type>Normal</tcm:Type>
+      <tcm:Schema xlink:type="simple" xlink:title="TSI-1757 Test Schema 1" xlink:href="/webdav/500%20Automated%20Test%20Child/Building%20Blocks/Modules/Test/TSI-1757%20Test%20Schema%201.xsd" IsMandatory="false" />
+      <tcm:Content>
+        <Content xmlns="uuid:a3cbac3c-375a-43d3-937e-788110d6b9ee">
+          <textField>This is the textField of TSI-1757 Test Component 1</textField>
+          <embeddedField>
+            <embeddedTextField>This is the embeddedTextField of TSI-1757 Test Component 1</embeddedTextField>
+          </embeddedField>
+        </Content>
+      </tcm:Content>
+      <tcm:Metadata />
+      <tcm:IsBasedOnTridionWebSchema>true</tcm:IsBasedOnTridionWebSchema>
+      <tcm:MultimediaType xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/500%20Automated%20Test%20Child" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/500%20Automated%20Test%20Child/Building%20Blocks/Content/Test/Regression" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="Schema" itemUrl="/webdav/500%20Automated%20Test%20Child/Building%20Blocks/Modules/Test/TSI-1757%20Test%20Schema%201.xsd" linkName="Schema" />
+  </Dependencies>
+</PackageItem>

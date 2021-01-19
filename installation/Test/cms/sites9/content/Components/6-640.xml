@@ -1,0 +1,29 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>TSI-811 Test Component</tcm:Title>
+      <tcm:Type>Normal</tcm:Type>
+      <tcm:Schema xlink:type="simple" xlink:title="TSI-811 Schema" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/TSI-811%20Schema.xsd" IsMandatory="false" />
+      <tcm:Content>
+        <TSI811 xmlns="uuid:28cdef44-bcf0-479f-9d53-3071d80576e4">
+          <keyword1 xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/401%20Automated%20Test%20Parent/TSI-811%20Test%20Category/Test%20Keyword%201.tkw" xlink:title="Test Keyword 1">Test Keyword 1</keyword1>
+          <keyword1 xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/401%20Automated%20Test%20Parent/TSI-811%20Test%20Category/Test%20Keyword%202.tkw" xlink:title="Test Keyword 2">Test Keyword 2</keyword1>
+          <keyword2 xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/401%20Automated%20Test%20Parent/Content%20Type/News%20Article.tkw" xlink:title="News Article">News Article</keyword2>
+          <booleanKeyword xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/401%20Automated%20Test%20Parent/TSI-811%20Boolean%20Category/Yes.tkw" xlink:title="Yes">Yes</booleanKeyword>
+        </TSI811>
+      </tcm:Content>
+      <tcm:Metadata />
+      <tcm:IsBasedOnTridionWebSchema>true</tcm:IsBasedOnTridionWebSchema>
+      <tcm:MultimediaType xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Regression" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="LinkedKeyword" itemUrl="/webdav/401%20Automated%20Test%20Parent/TSI-811%20Test%20Category/Test%20Keyword%201.tkw" linkName="Content" xpath="*[local-name() = 'TSI811'][1]/*[local-name() = 'keyword1'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedKeyword" itemUrl="/webdav/401%20Automated%20Test%20Parent/TSI-811%20Test%20Category/Test%20Keyword%202.tkw" linkName="Content" xpath="*[local-name() = 'TSI811'][1]/*[local-name() = 'keyword1'][2]/@xlink:href" />
+    <Dependency dependencyType="LinkedKeyword" itemUrl="/webdav/401%20Automated%20Test%20Parent/Content%20Type/News%20Article.tkw" linkName="Content" xpath="*[local-name() = 'TSI811'][1]/*[local-name() = 'keyword2'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedKeyword" itemUrl="/webdav/401%20Automated%20Test%20Parent/TSI-811%20Boolean%20Category/Yes.tkw" linkName="Content" xpath="*[local-name() = 'TSI811'][1]/*[local-name() = 'booleanKeyword'][1]/@xlink:href" />
+    <Dependency dependencyType="Schema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/TSI-811%20Schema.xsd" linkName="Schema" />
+  </Dependencies>
+</PackageItem>

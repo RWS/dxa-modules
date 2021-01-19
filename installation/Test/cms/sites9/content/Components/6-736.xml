@@ -1,0 +1,33 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>FAQ Question 1</tcm:Title>
+      <tcm:Type>Normal</tcm:Type>
+      <tcm:Schema xlink:type="simple" xlink:title="paFAQ" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Paul/paFAQ.xsd" IsMandatory="false" />
+      <tcm:Content>
+        <paFAQ xmlns="uuid:1c66b454-4e1f-4a79-b1bd-a7a578e8eb3b">
+          <question>What is a cow?</question>
+          <answer>
+            <subheading>Answer 1</subheading>
+            <content>
+              <p xmlns="http://www.w3.org/1999/xhtml">A cow is a big animal that goes mooo.</p>
+<p xmlns="http://www.w3.org/1999/xhtml">It's <em><strong>amazing balls !</strong></em></p>
+<p xmlns="http://www.w3.org/1999/xhtml">It makes milk that can be used for tea</p></content>
+          </answer>
+          <answer>
+            <subheading>Answer 2</subheading>
+            <content>A cow is a little animal that goes bahhhh</content>
+          </answer>
+        </paFAQ>
+      </tcm:Content>
+      <tcm:Metadata />
+      <tcm:IsBasedOnTridionWebSchema>true</tcm:IsBasedOnTridionWebSchema>
+      <tcm:MultimediaType xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Paul" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="Schema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Paul/paFAQ.xsd" linkName="Schema" />
+  </Dependencies>
+</PackageItem>

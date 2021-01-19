@@ -1,0 +1,49 @@
+<Index dataContractVersion="201701" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Item id="tcm:0-0-0" selected="false" exported="true">
+    <ApplicationIds>
+      <ApplicationId>CustomPages</ApplicationId>
+      <ApplicationId>http://www.sdl.com/tridion/SemanticMapping/vocabularies</ApplicationId>
+    </ApplicationIds>
+    <Item id="deee2db9a97747ba858e34ff58c5e913" title="100%20Master" itemType="Publication" selected="false" exported="false">
+      <Item id="3d8fe3953af14296ac3ba46beeeb9025" title="Building%20Blocks" itemType="Folder" selected="false" exported="false">
+        <Item id="3dc79542f50e41399ccc05bdd66d2e91" title="Framework" itemType="Folder" selected="false" exported="false">
+          <Item id="281eafe8a2814e7b8943ea6849c453ea" title="Developer" itemType="Folder" selected="false" exported="false">
+            <Item id="fa143b41e4244737a31d4161f17d51d2" title="Schemas" itemType="Folder" selected="false" exported="false">
+              <Item id="tcm:2-91-8" title="Component%20Template%20Metadata" extension="xsd" itemType="Schema" subtype="3" blueprintStatus="LocalItem" selected="false" exported="true" />
+              <Item id="cc6cf11c6317415b848dbb462224a608" title="Module%20Configuration" extension="xsd" itemType="Schema" selected="false" exported="false" />
+            </Item>
+            <Item id="72305444b1b043e4b4ee175b3e702401" title="Templates" itemType="Folder" selected="false" exported="false">
+              <Item id="66ec0859cee444638b4f6d5c98cabef3" title="DXA%2ER2" itemType="Folder" selected="false" exported="false">
+                <Item id="b33971bba3b148f1a80280f4e3621622" title="Default%20Component%20Template%20Finish%20Actions" extension="tbbcmp" itemType="TemplateBuildingBlock" selected="false" exported="false" />
+                <Item id="6c3793f7ebf945e99922818670a8aea1" title="Render%20Component%20Content" extension="tbbcmp" itemType="TemplateBuildingBlock" selected="false" exported="false" />
+              </Item>
+            </Item>
+          </Item>
+        </Item>
+        <Item id="d3c228127d1f4130b57e4ab698a110c3" title="Modules" itemType="Folder" selected="false" exported="false">
+          <Item id="tcm:2-99-2" title="GoogleAnalytics" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+            <Item id="tcm:2-103-2" title="Admin" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+              <Item id="tcm:2-388" title="Google%20Analytics" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+            </Item>
+            <Item id="tcm:2-100-2" title="Site%20Manager" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+              <Item id="tcm:2-101-2" title="Schemas" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+                <Item id="tcm:2-385-8" title="Google%20Analytics%20Configuration" extension="xsd" itemType="Schema" blueprintStatus="LocalItem" selected="true" exported="true" />
+              </Item>
+              <Item id="tcm:2-102-2" title="Templates" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+                <Item id="tcm:2-389-32" title="Google%20Analytics%20%5BLinks%5D" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="LocalItem" selected="true" exported="true" />
+                <Item id="tcm:2-386-32" title="Google%20Analytics" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="LocalItem" selected="true" exported="true" />
+              </Item>
+            </Item>
+          </Item>
+        </Item>
+        <Item id="ea828d8c9c2f428182e370f2c86f8e74" title="Settings" itemType="Folder" selected="false" exported="false">
+          <Item id="tcm:2-104-2" title="GoogleAnalytics" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+            <Item id="tcm:2-105-2" title="Site%20Manager" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+              <Item id="tcm:2-387" title="Google%20Analytics%20Configuration" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+            </Item>
+          </Item>
+        </Item>
+      </Item>
+    </Item>
+  </Item>
+</Index>

@@ -1,0 +1,49 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Head Office Location</tcm:Title>
+      <tcm:Type>Normal</tcm:Type>
+      <tcm:Schema xlink:type="simple" xlink:title="Place" xlink:href="/webdav/200%20Example%20Content/Building%20Blocks/Modules/Core/Editor/Schemas/Place.xsd" IsMandatory="false" />
+      <tcm:Content>
+        <Place xmlns="uuid:b20afe06-9041-4648-8a9f-678d8e34c6a5">
+          <name>Head Office - London</name>
+          <image xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/200%20Example%20Content/Building%20Blocks/Content/Images/Large/skyscrapers.jpg" xlink:title="skyscrapers" />
+          <address>
+		<p xmlns="http://www.w3.org/1999/xhtml">221B Baker Street,</p>
+		
+
+		<p xmlns="http://www.w3.org/1999/xhtml">London,</p>
+		
+
+		<p xmlns="http://www.w3.org/1999/xhtml">United Kingdom</p>
+	</address>
+          <telephone>+44 1234 56789</telephone>
+          <faxNumber>+44 9876 65432</faxNumber>
+          <email>contact@abcde.fg</email>
+        </Place>
+      </tcm:Content>
+      <tcm:Metadata>
+        <Metadata xmlns="uuid:b20afe06-9041-4648-8a9f-678d8e34c6a5">
+          <location>
+            <latitude>51.52381</latitude>
+            <longitude>-0.158441</longitude>
+            <query>221B Baker Street, London, United Kingdom</query>
+          </location>
+          <standardMeta>
+            <description>Head office location</description>
+            <name>Head Office</name>
+            <introText>Head Office Location</introText>
+          </standardMeta>
+        </Metadata>
+      </tcm:Metadata>
+      <tcm:IsBasedOnTridionWebSchema>true</tcm:IsBasedOnTridionWebSchema>
+      <tcm:MultimediaType xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/200%20Example%20Content" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/200%20Example%20Content/Building%20Blocks/Content/About" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/200%20Example%20Content/Building%20Blocks/Content/Images/Large/skyscrapers.jpg" linkName="Content" xpath="*[local-name() = 'Place'][1]/*[local-name() = 'image'][1]/@xlink:href" />
+    <Dependency dependencyType="Schema" itemUrl="/webdav/200%20Example%20Content/Building%20Blocks/Modules/Core/Editor/Schemas/Place.xsd" linkName="Schema" />
+  </Dependencies>
+</PackageItem>

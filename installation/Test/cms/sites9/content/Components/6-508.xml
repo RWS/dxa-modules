@@ -1,0 +1,64 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>SmartTarget (eXperience Optimization) Experiments Test - Description</tcm:Title>
+      <tcm:Type>Normal</tcm:Type>
+      <tcm:Schema xlink:type="simple" xlink:title="Article" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Schemas/Article.xsd" IsMandatory="false" />
+      <tcm:Content>
+        <Article xmlns="http://www.sdl.com/web/schemas/core">
+          <headline>SmartTarget (eXperience Optimization) Experiments Test</headline>
+          <articleBody>
+            <subheading>Description</subheading>
+            <content>
+              <p xmlns="http://www.w3.org/1999/xhtml">Automated test related to this page covers the following set of test cases for Experiments support in SmartTarget (eXperience Optimization): </p>
+<div xmlns="http://www.w3.org/1999/xhtml" id="qpane-header" class="qpane-header content-header content-header-default">
+<div class="content-header-inner">
+<div class="content-header-title"><a class="nolink" href="http://nl1tr01.global.sdl.corp/testrail/index.php?/cases/view/4143941">C4143941</a> - Render experiment in a promotion region
+<br />
+<div id="qpane-header" class="qpane-header content-header content-header-default">
+<div class="content-header-inner">
+<div class="content-header-title"><a class="nolink" href="http://nl1tr01.global.sdl.corp/testrail/index.php?/cases/view/4143942">C4143942</a> - Render 2 experiments in different regions on the same page</div>
+</div>
+</div>
+<div id="qpane-header" class="qpane-header content-header content-header-default">
+<div class="content-header-inner">
+<div class="content-header-title"><a class="nolink" href="http://nl1tr01.global.sdl.corp/testrail/index.php?/cases/view/4143944">C4143944</a> - Enable Experiment and regular Promotion in the same region
+<br />
+<div id="qpane-header" class="qpane-header content-header content-header-default">
+<div class="content-header-inner">
+<div class="content-header-title"><a class="nolink" href="http://nl1tr01.global.sdl.corp/testrail/index.php?/cases/view/4147276">C4147276</a> - Transforming a URL in an Experiment</div>
+</div>
+<div id="qpane-header" class="qpane-header content-header content-header-default">
+<div class="content-header-inner">
+<div class="content-header-title"><a class="nolink" href="http://nl1tr01.global.sdl.corp/testrail/index.php?/cases/view/4143945">C4143945</a> - Transforming non-latin URL in an Experiment</div>
+</div>
+<div id="qpane-header" class="qpane-header content-header content-header-default">
+<div class="content-header-inner">
+<div class="content-header-title"><a class="nolink" href="http://nl1tr01.global.sdl.corp/testrail/index.php?/cases/view/4143946">C4143946</a> - Transforming binary download URL in an Experiment</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></content>
+          </articleBody>
+        </Article>
+      </tcm:Content>
+      <tcm:Metadata>
+        <Metadata xmlns="http://www.sdl.com/web/schemas/core" />
+      </tcm:Metadata>
+      <tcm:IsBasedOnTridionWebSchema>true</tcm:IsBasedOnTridionWebSchema>
+      <tcm:MultimediaType xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Smoke/SmartTarget" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="Schema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Schemas/Article.xsd" linkName="Schema" />
+  </Dependencies>
+</PackageItem>

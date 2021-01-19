@@ -1,0 +1,109 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+      <tcm:Title>Bootstrap Configuration</tcm:Title>
+      <tcm:Description>Bootstrap Configuration</tcm:Description>
+      <tcm:Purpose>Component</tcm:Purpose>
+      <tcm:NamespaceURI>http://www.sdl.com/web/schemas/html-design/less</tcm:NamespaceURI>
+      <tcm:RootElementName>LessVariables</tcm:RootElementName>
+      <tcm:IsTridionWebSchema>true</tcm:IsTridionWebSchema>
+      <tcm:XSD>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sdl.com/web/schemas/html-design/less" xmlns:tcmi="http://www.tridion.com/ContentManager/5.0/Instance" elementFormDefault="qualified" targetNamespace="http://www.sdl.com/web/schemas/html-design/less">
+  <xsd:import namespace="http://www.tridion.com/ContentManager/5.0/Instance" schemaLocation="/webdav/cm_xml_inst.xsd" />
+  <xsd:annotation>
+    <xsd:appinfo>
+      <tcm:Labels xmlns:tcm="http://www.tridion.com/ContentManager/5.0">
+        <tcm:Label ElementName="brand-primary" Metadata="false">Main colour used in the site (e.g. #428bca)</tcm:Label>
+        <tcm:Label ElementName="navbar-default-bg" Metadata="false">Background color of header (e.g. @brand-primary or #fff)</tcm:Label>
+        <tcm:Label ElementName="body-bg" Metadata="false">Body background color (eg #fff)</tcm:Label>
+        <tcm:Label ElementName="page-footer-bg-color" Metadata="false">Background colour for the footer (e.g. @brand-primary or #428bca)</tcm:Label>
+        <tcm:Label ElementName="font-family-sans-serif" Metadata="false">Default sans-serif font</tcm:Label>
+        <tcm:Label ElementName="text-color" Metadata="false">Text color (e.g. @gray-dark or #333)</tcm:Label>
+        <tcm:Label ElementName="headings-font-family" Metadata="false">Font used for headings</tcm:Label>
+        <tcm:Label ElementName="headings-color" Metadata="false">Color used for headings (e.g. inherit, #333 or @gray-dark)</tcm:Label>
+      </tcm:Labels>
+    </xsd:appinfo>
+  </xsd:annotation>
+  <xsd:element name="LessVariables">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="brand-primary" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <tcm:CustomURL xmlns:tcm="http://www.tridion.com/ContentManager/5.0">http://getbootstrap.com/customize/#colors</tcm:CustomURL>
+              <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="navbar-default-bg" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <tcm:CustomURL xmlns:tcm="http://www.tridion.com/ContentManager/5.0">http://getbootstrap.com/customize/#navbar</tcm:CustomURL>
+              <tcm:ExtensionXml xmlns:tcm="http://www.tridion.com/ContentManager/5.0" />
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="body-bg" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <tcm:CustomURL xmlns:tcm="http://www.tridion.com/ContentManager/5.0">http://getbootstrap.com/customize/#scaffolding</tcm:CustomURL>
+              <tcm:ExtensionXml xmlns:tcm="http://www.tridion.com/ContentManager/5.0" />
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="page-footer-bg-color" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <tcm:CustomURL xmlns:tcm="http://www.tridion.com/ContentManager/5.0">http://getbootstrap.com/customize/#colors</tcm:CustomURL>
+              <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="font-family-sans-serif" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <tcm:CustomURL xmlns:tcm="http://www.tridion.com/ContentManager/5.0">http://getbootstrap.com/customize/#typography</tcm:CustomURL>
+              <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="text-color" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <tcm:CustomURL xmlns:tcm="http://www.tridion.com/ContentManager/5.0">http://getbootstrap.com/customize/#scaffolding</tcm:CustomURL>
+              <tcm:ExtensionXml xmlns:tcm="http://www.tridion.com/ContentManager/5.0" />
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="headings-font-family" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <tcm:CustomURL xmlns:tcm="http://www.tridion.com/ContentManager/5.0">http://getbootstrap.com/customize/#typography</tcm:CustomURL>
+              <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="headings-color" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <tcm:CustomURL xmlns:tcm="http://www.tridion.com/ContentManager/5.0">http://getbootstrap.com/customize/#typography</tcm:CustomURL>
+              <tcm:ExtensionXml xmlns:tcm="http://www.tridion.com/ContentManager/5.0" />
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>
+      </tcm:XSD>
+      <tcm:AllowedMultimediaTypes />
+      <tcm:ComponentProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:BundleProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:DeleteBundleOnProcessFinished>false</tcm:DeleteBundleOnProcessFinished>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/100%20Master" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/100%20Master/Building%20Blocks/Framework/Site%20Manager/Schemas" linkName="LocationInfo/OrganizationalItem" />
+  </Dependencies>
+</PackageItem>

@@ -1,0 +1,117 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Task Process</tcm:Title>
+      <tcm:FirstActivityDefinition xlink:type="simple" xlink:href="tcm:0-0-0" xlink:title="Perform Task" />
+      <tcm:StoreSnapshot>false</tcm:StoreSnapshot>
+      <tcm:ActivityDefinitions>
+        <tcm:ActivityDefinition xlink:type="simple" xlink:href="tcm:0-0-0" xlink:title="Perform Task">
+          <tcm:ActivityType Type="0" Title="" />
+          <tcm:Description>Perform the specified task.</tcm:Description>
+          <tcm:Assignee xlink:type="simple" xlink:title="Everyone" xlink:href="tcm:0-1-65568" description="All SDL Web Content Manager Users" />
+          <tcm:Script />
+          <tcm:ScriptType>CSharp</tcm:ScriptType>
+          <tcm:ActivityConstraints>None</tcm:ActivityConstraints>
+          <tcm:AllowOverrideDueDate>true</tcm:AllowOverrideDueDate>
+          <tcm:PerformingTimeout>0</tcm:PerformingTimeout>
+          <tcm:ApprovalStatus xlink:type="simple" xlink:title="Undefined" xlink:href="tcm:0-0-0" />
+          <tcm:NextActivityDefinitions>
+            <tcm:ActivityDefinition xlink:type="simple" xlink:title="Assign to Process Creator" xlink:href="tcm:0-0-0" />
+          </tcm:NextActivityDefinitions>
+          <tcm:ExpirationScript />
+          <tcm:ExpirationScriptType>CSharp</tcm:ExpirationScriptType>
+        </tcm:ActivityDefinition>
+        <tcm:ActivityDefinition xlink:type="simple" xlink:href="tcm:0-0-0" xlink:title="Assign to Process Creator">
+          <tcm:ActivityType Type="0" Title="" />
+          <tcm:Description>Task was finished and it will be sent to the process creator.</tcm:Description>
+          <tcm:Assignee xlink:type="simple" xlink:title="NT AUTHORITY\SYSTEM" xlink:href="tcm:0-3-65552" description="SDL Web Content Manager System NT Authority User" />
+          <tcm:Script>ActivityFinishData finishData = new ActivityFinishData()
+{
+    Message = ProcessInstance.Activities.Last().FinishMessage,
+    NextAssignee = new LinkToTrusteeData
+    {
+        IdRef = ProcessInstance.Creator.IdRef
+    }
+};
+SessionAwareCoreServiceClient.FinishActivity(CurrentActivityInstance.Id, finishData, null);</tcm:Script>
+          <tcm:ScriptType>CSharp</tcm:ScriptType>
+          <tcm:ActivityConstraints>None</tcm:ActivityConstraints>
+          <tcm:AllowOverrideDueDate>false</tcm:AllowOverrideDueDate>
+          <tcm:PerformingTimeout>0</tcm:PerformingTimeout>
+          <tcm:ApprovalStatus xlink:type="simple" xlink:title="Undefined" xlink:href="tcm:0-0-0" />
+          <tcm:NextActivityDefinitions>
+            <tcm:ActivityDefinition xlink:type="simple" xlink:title="Review Task" xlink:href="tcm:0-0-0" />
+          </tcm:NextActivityDefinitions>
+          <tcm:ExpirationScript />
+          <tcm:ExpirationScriptType>CSharp</tcm:ExpirationScriptType>
+        </tcm:ActivityDefinition>
+        <tcm:ActivityDefinition xlink:type="simple" xlink:href="tcm:0-0-0" xlink:title="Review Task">
+          <tcm:ActivityType Type="1" Title="" />
+          <tcm:Description>Review and approve the task. Finish process or send it back.</tcm:Description>
+          <tcm:Assignee xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+          <tcm:Script />
+          <tcm:ScriptType>CSharp</tcm:ScriptType>
+          <tcm:ActivityConstraints>None</tcm:ActivityConstraints>
+          <tcm:AllowOverrideDueDate>false</tcm:AllowOverrideDueDate>
+          <tcm:PerformingTimeout>0</tcm:PerformingTimeout>
+          <tcm:ApprovalStatus xlink:type="simple" xlink:title="Undefined" xlink:href="tcm:0-0-0" />
+          <tcm:NextActivityDefinitions>
+            <tcm:ActivityDefinition xlink:type="simple" xlink:title="Decline" xlink:href="tcm:0-0-0" />
+            <tcm:ActivityDefinition xlink:type="simple" xlink:title="Accept" xlink:href="tcm:0-0-0" />
+          </tcm:NextActivityDefinitions>
+          <tcm:ExpirationScript />
+          <tcm:ExpirationScriptType>CSharp</tcm:ExpirationScriptType>
+        </tcm:ActivityDefinition>
+        <tcm:ActivityDefinition xlink:type="simple" xlink:href="tcm:0-0-0" xlink:title="Decline">
+          <tcm:ActivityType Type="0" Title="" />
+          <tcm:Description>The task was reviewed by the process creator and will be sent back to the performer of the task.</tcm:Description>
+          <tcm:Assignee xlink:type="simple" xlink:title="NT AUTHORITY\SYSTEM" xlink:href="tcm:0-3-65552" description="SDL Web Content Manager System NT Authority User" />
+          <tcm:Script>string performedTaskActivityDefinitionId = ProcessInstance.Activities.Cast&lt;ActivityInstanceData&gt;().First().ActivityDefinition.IdRef;
+ActivityFinishData finishData = new ActivityFinishData()
+{
+    Message = ProcessInstance.Activities.Last().FinishMessage,
+    NextAssignee = new LinkToTrusteeData
+    {
+        IdRef = ProcessInstance.Activities.Cast&lt;ActivityInstanceData&gt;().Last(activity =&gt; activity.ActivityDefinition.IdRef == performedTaskActivityDefinitionId).Owner.IdRef
+    }
+};
+SessionAwareCoreServiceClient.FinishActivity(CurrentActivityInstance.Id, finishData, null);</tcm:Script>
+          <tcm:ScriptType>CSharp</tcm:ScriptType>
+          <tcm:ActivityConstraints>None</tcm:ActivityConstraints>
+          <tcm:AllowOverrideDueDate>false</tcm:AllowOverrideDueDate>
+          <tcm:PerformingTimeout>0</tcm:PerformingTimeout>
+          <tcm:ApprovalStatus xlink:type="simple" xlink:title="Undefined" xlink:href="tcm:0-0-0" />
+          <tcm:NextActivityDefinitions>
+            <tcm:ActivityDefinition xlink:type="simple" xlink:title="Perform Task" xlink:href="tcm:0-0-0" />
+          </tcm:NextActivityDefinitions>
+          <tcm:ExpirationScript />
+          <tcm:ExpirationScriptType>CSharp</tcm:ExpirationScriptType>
+        </tcm:ActivityDefinition>
+        <tcm:ActivityDefinition xlink:type="simple" xlink:href="tcm:0-0-0" xlink:title="Accept">
+          <tcm:ActivityType Type="0" Title="" />
+          <tcm:Description>The task process is complete.</tcm:Description>
+          <tcm:Assignee xlink:type="simple" xlink:title="NT AUTHORITY\SYSTEM" xlink:href="tcm:0-3-65552" description="SDL Web Content Manager System NT Authority User" />
+          <tcm:Script>ActivityFinishData finishData = new ActivityFinishData()
+{
+    Message = "Automatic Activity 'Accept' Finished"
+};
+SessionAwareCoreServiceClient.FinishActivity(CurrentActivityInstance.Id, finishData, null);</tcm:Script>
+          <tcm:ScriptType>CSharp</tcm:ScriptType>
+          <tcm:ActivityConstraints>None</tcm:ActivityConstraints>
+          <tcm:AllowOverrideDueDate>false</tcm:AllowOverrideDueDate>
+          <tcm:PerformingTimeout>0</tcm:PerformingTimeout>
+          <tcm:ApprovalStatus xlink:type="simple" xlink:title="Undefined" xlink:href="tcm:0-0-0" />
+          <tcm:NextActivityDefinitions />
+          <tcm:ExpirationScript />
+          <tcm:ExpirationScriptType>CSharp</tcm:ExpirationScriptType>
+        </tcm:ActivityDefinition>
+      </tcm:ActivityDefinitions>
+      <tcm:Diagram />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/000%20Empty" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemPublication" itemUrl="/webdav/000%20Empty" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="Group" itemUrl="/webdav//Everyone.tgp" linkName="ActivityDefinitions[0]/Assignee" />
+  </Dependencies>
+</PackageItem>

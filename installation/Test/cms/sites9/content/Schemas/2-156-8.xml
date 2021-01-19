@@ -1,0 +1,60 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+      <tcm:Title>YouTube Video</tcm:Title>
+      <tcm:Description>YouTube Video</tcm:Description>
+      <tcm:Purpose>Multimedia</tcm:Purpose>
+      <tcm:NamespaceURI>http://www.sdl.com/web/schemas/core</tcm:NamespaceURI>
+      <tcm:RootElementName />
+      <tcm:IsTridionWebSchema>true</tcm:IsTridionWebSchema>
+      <tcm:XSD>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sdl.com/web/schemas/core" xmlns:tcmi="http://www.tridion.com/ContentManager/5.0/Instance" elementFormDefault="qualified" targetNamespace="http://www.sdl.com/web/schemas/core">
+  <xsd:import namespace="http://www.tridion.com/ContentManager/5.0/Instance" schemaLocation="/webdav/cm_xml_inst.xsd" />
+  <xsd:annotation>
+    <xsd:appinfo>
+      <tcm:Labels xmlns:tcm="http://www.tridion.com/ContentManager/5.0">
+        <tcm:Label ElementName="youTubeId" Metadata="true">You Tube video ID (the part behind www.youtube.com/watch?v=)</tcm:Label>
+        <tcm:Label ElementName="headline" Metadata="true">Heading</tcm:Label>
+      </tcm:Labels>
+    </xsd:appinfo>
+  </xsd:annotation>
+  <xsd:element name="Metadata">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="youTubeId" minOccurs="1" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="headline" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <tcm:ExtensionXml xmlns:tcm="http://www.tridion.com/ContentManager/5.0" />
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>
+      </tcm:XSD>
+      <tcm:AllowedMultimediaTypes>
+        <tcm:AllowedMultimediaType xlink:type="simple" xlink:title="Gif image" xlink:href="tcm:0-1-65544" />
+        <tcm:AllowedMultimediaType xlink:type="simple" xlink:title="Jpeg image" xlink:href="tcm:0-2-65544" />
+        <tcm:AllowedMultimediaType xlink:type="simple" xlink:title="Png image" xlink:href="tcm:0-3-65544" />
+      </tcm:AllowedMultimediaTypes>
+      <tcm:ComponentProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:BundleProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:DeleteBundleOnProcessFinished>false</tcm:DeleteBundleOnProcessFinished>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/100%20Master" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/Core/Editor/Schemas" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="AllowedMultimediaType" itemUrl="/webdav//Gif%20image.tmt" linkName="AllowedMultimediaTypes[0]" />
+    <Dependency dependencyType="AllowedMultimediaType" itemUrl="/webdav//Jpeg%20image.tmt" linkName="AllowedMultimediaTypes[1]" />
+    <Dependency dependencyType="AllowedMultimediaType" itemUrl="/webdav//Png%20image.tmt" linkName="AllowedMultimediaTypes[2]" />
+  </Dependencies>
+</PackageItem>

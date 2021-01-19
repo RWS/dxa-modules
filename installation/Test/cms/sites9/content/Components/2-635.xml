@@ -1,0 +1,29 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>ecl:0-mm-415-dist-file</tcm:Title>
+      <tcm:Type>Multimedia</tcm:Type>
+      <tcm:Schema xlink:type="simple" xlink:title="ExternalContentLibraryStubSchema-mm" xlink:href="/webdav/100%20Master/Building%20Blocks/Modules/MediaManager/Editor/Schemas/SDL%20Media%20Manager/ExternalContentLibraryStubSchema-mm.xsd" IsMandatory="false" />
+      <tcm:Content />
+      <tcm:Metadata>
+        <Metadata xmlns="uuid:9389a8ce-0f19-44ee-9eb6-2d04d0c02c25">
+          <playerType>Custom</playerType>
+          <customVideoAutoplay>Disabled</customVideoAutoplay>
+          <customVideoSubtitles>Disabled</customVideoSubtitles>
+          <customVideoControls>Enabled</customVideoControls>
+        </Metadata>
+      </tcm:Metadata>
+      <tcm:IsBasedOnTridionWebSchema>true</tcm:IsBasedOnTridionWebSchema>
+      <tcm:MultimediaType xlink:type="simple" xlink:title="External Content Library" xlink:href="tcm:0-22-65544" />
+      <tcm:MultimediaFilename>ecl:2-mm-415-dist-file.ecl</tcm:MultimediaFilename>
+      <tcm:MultimediaFileSize>0</tcm:MultimediaFileSize>
+      <tcm:IsExternalMultimediaFile>true</tcm:IsExternalMultimediaFile>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/100%20Master" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/MediaManager/Editor/Schemas/SDL%20Media%20Manager/566/BDB" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="MultimediaType" itemUrl="/webdav//External%20Content%20Library.tmt" linkName="BinaryContent/MultimediaType" />
+    <Dependency dependencyType="Schema" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/MediaManager/Editor/Schemas/SDL%20Media%20Manager/ExternalContentLibraryStubSchema-mm.xsd" linkName="Schema" />
+  </Dependencies>
+</PackageItem>

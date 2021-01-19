@@ -1,0 +1,44 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Page with Regions Metadata</tcm:Title>
+      <tcm:FileName>pagewithregionsmetadata</tcm:FileName>
+      <tcm:PageTemplate IsInherited="false" xlink:type="simple" xlink:title="Page Template with DXA and native Regions metadata" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/Native%20Regions/Page%20Template%20with%20DXA%20and%20native%20Regions%20metadata.tptcmp" />
+      <tcm:ComponentPresentations />
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="Page Schema Test (for metadata)" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/Native%20Regions/Page%20Schema%20Test%20%28for%20metadata%29.xsd" />
+      <tcm:Metadata />
+      <tcm:RegionSchema xlink:type="simple" xlink:title="Page Schema Test (for metadata)" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/Native%20Regions/Page%20Schema%20Test%20%28for%20metadata%29.xsd" />
+      <tcm:Regions>
+        <tcm:Region Type="EmbeddedRegionData">
+          <tcm:RegionName>Main</tcm:RegionName>
+          <tcm:RegionSchema xlink:type="simple" xlink:title="Region Schema Test [Main]" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/Native%20Regions/Region%20Schema%20Test%20%5BMain%5D.xsd" />
+          <tcm:Metadata>
+            <Metadata xmlns="uuid:b7d30f9b-1a13-406f-a050-cca64190e784">
+              <MergedMetadataField>Native Region Metadata Value 1</MergedMetadataField>
+              <CmRegionMetadataField>Native Region Metadata Value 1</CmRegionMetadataField>
+            </Metadata>
+          </tcm:Metadata>
+          <tcm:ComponentPresentations />
+          <tcm:Regions />
+        </tcm:Region>
+      </tcm:Regions>
+    </tcm:Data>
+  </Data>
+  <ApplicationDataCollection>
+    <ApplicationData>
+      <ApplicationId>ugc:ComponentAndPage</ApplicationId>
+      <TypeId>c:XmlDocument-CommunityBuilder</TypeId>
+      <BinaryData>PAA/AHgAbQBsACAAdgBlAHIAcwBpAG8AbgA9ACIAMQAuADAAIgAgAGUAbgBjAG8AZABpAG4AZwA9ACIAdQB0AGYALQAxADYAIgA/AD4APAB1AGcAYwA+ADwAaQB0AGUAbQAgAGkAZAA9ACIAdABjAG0AOgA2AC0ANQA5ADMALQA2ADQAIgA+ADwAYQBsAGwAbwB3AHQAbwByAGEAdABlAD4AZgBhAGwAcwBlADwALwBhAGwAbABvAHcAdABvAHIAYQB0AGUAPgA8AGEAbABsAG8AdwB0AG8AYwBvAG0AbQBlAG4AdAA+AGYAYQBsAHMAZQA8AC8AYQBsAGwAbwB3AHQAbwBjAG8AbQBtAGUAbgB0AD4APABzAGgAbwB3AGMAbwBtAG0AZQBuAHQAcwA+AGYAYQBsAHMAZQA8AC8AcwBoAG8AdwBjAG8AbQBtAGUAbgB0AHMAPgA8AHMAbwByAHQAYwBvAG0AbQBlAG4AdABzAD4APABmAGkAZQBsAGQAPgBkAGEAdABlADwALwBmAGkAZQBsAGQAPgA8AGQAaQByAGUAYwB0AGkAbwBuAD4AZABlAHMAYwBlAG4AZABpAG4AZwA8AC8AZABpAHIAZQBjAHQAaQBvAG4APgA8AC8AcwBvAHIAdABjAG8AbQBtAGUAbgB0AHMAPgA8AHMAaABvAHcAdQBuAG0AbwBkAGUAcgBhAHQAZQBkAGMAbwBtAG0AZQBuAHQAcwA+AGYAYQBsAHMAZQA8AC8AcwBoAG8AdwB1AG4AbQBvAGQAZQByAGEAdABlAGQAYwBvAG0AbQBlAG4AdABzAD4APAAvAGkAdABlAG0APgA8AC8AdQBnAGMAPgA=</BinaryData>
+      <IsInherited>false</IsInherited>
+    </ApplicationData>
+  </ApplicationDataCollection>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemStructureGroup" itemUrl="/webdav/401%20Automated%20Test%20Parent/Home/Acceptance/NativeRegionsTests" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="MetadataSchema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/Native%20Regions/Page%20Schema%20Test%20%28for%20metadata%29.xsd" linkName="MetadataSchema" />
+    <Dependency dependencyType="PageTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/Native%20Regions/Page%20Template%20with%20DXA%20and%20native%20Regions%20metadata.tptcmp" linkName="PageTemplate" />
+    <Dependency dependencyType="PageRegionSchema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/Native%20Regions/Page%20Schema%20Test%20%28for%20metadata%29.xsd" linkName="RegionSchema" />
+    <Dependency dependencyType="PageRegionSchema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/Native%20Regions/Region%20Schema%20Test%20%5BMain%5D.xsd" linkName="Regions[0]/RegionSchema" />
+    <Dependency dependencyType="ApplicationData" itemUrl="/webdav/401%20Automated%20Test%20Parent/Home/Acceptance/NativeRegionsTests/Page%20with%20Regions%20Metadata.tpg" linkName="ugc:ComponentAndPage" xpath="/*[local-name() = 'ugc'][1]/*[local-name() = 'item'][1]/@id" />
+  </Dependencies>
+</PackageItem>

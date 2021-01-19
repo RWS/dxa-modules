@@ -1,0 +1,26 @@
+<export>
+  <organizationalItem path="/webdav/100%20Master/Building%20Blocks/Modules/51Degrees">
+    <permissions group="Everyone">Read</permissions>
+    <permissions group="Developer">All</permissions>
+    <permissions group="Editor">All</permissions>
+    <permissions group="Site Manager">All</permissions>
+  </organizationalItem>
+  <organizationalItem path="/webdav/100%20Master/Building%20Blocks/Modules/51Degrees/Admin">
+    <permissions group="Everyone">None</permissions>
+    <permissions group="Developer">None</permissions>
+    <permissions group="Editor">None</permissions>
+    <permissions group="Site Manager">None</permissions>
+  </organizationalItem>
+  <organizationalItem path="/webdav/100%20Master/Building%20Blocks/Modules/51Degrees/Site%20Manager">
+    <permissions group="Everyone">None</permissions>
+    <permissions group="Developer">All</permissions>
+    <permissions group="Editor">None</permissions>
+    <permissions group="Site Manager">Read</permissions>
+  </organizationalItem>
+  <organizationalItem path="/webdav/100%20Master/Building%20Blocks/Settings/51Degrees/Site%20Manager">
+    <permissions group="Everyone">Read</permissions>
+    <permissions group="Developer">All</permissions>
+    <permissions group="Editor">None</permissions>
+    <permissions group="Site Manager">Read,Write,Localize</permissions>
+  </organizationalItem>
+</export>

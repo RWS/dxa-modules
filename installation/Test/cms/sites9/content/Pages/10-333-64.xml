@@ -1,0 +1,43 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <PrimaryBlueprintParentUrl>/webdav/400%20Example%20Site/Home/About/030%20Contact.tpg</PrimaryBlueprintParentUrl>
+  <Data>
+    <tcm:Data>
+      <tcm:Title>030 Contact</tcm:Title>
+      <tcm:FileName>contact</tcm:FileName>
+      <tcm:PageTemplate IsInherited="true" xlink:type="simple" xlink:title="Content Page" xlink:href="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Modules/Core/Editor/Templates/Content%20Page.tptcmp" />
+      <tcm:ComponentPresentations>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="Contact Tab Content" xlink:href="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Content/About/Contact%20Tab%20Content.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Tab" xlink:href="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Modules/Core/Editor/Templates/Tab.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+      </tcm:ComponentPresentations>
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="Content Page" xlink:href="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Modules/Core/Editor/Schemas/Page%20Schemas/Content%20Page.xsd" />
+      <tcm:Metadata>
+        <Metadata xmlns="uuid:3feadbb7-8212-405d-9ac5-d212711e5a2f">
+          <sitemapKeyword xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/500%20Example%20Site%20%28Legacy%29/Sitemap%20%5BNavigation%5D/About.tkw" xlink:title="About">About</sitemapKeyword>
+        </Metadata>
+      </tcm:Metadata>
+      <tcm:RegionSchema xlink:type="simple" xlink:title="Content Page" xlink:href="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Modules/Core/Editor/Schemas/Page%20Schemas/Content%20Page.xsd" />
+      <tcm:Regions>
+        <tcm:Region Type="EmbeddedRegionData">
+          <tcm:RegionName>Main</tcm:RegionName>
+          <tcm:RegionSchema xlink:type="simple" xlink:title="[Main] Region" xlink:href="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Modules/Core/Editor/Schemas/Region%20Schemas/%5BMain%5D%20Region.xsd" />
+          <tcm:Metadata />
+          <tcm:ComponentPresentations />
+          <tcm:Regions />
+        </tcm:Region>
+      </tcm:Regions>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/500%20Example%20Site%20%28Legacy%29" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemStructureGroup" itemUrl="/webdav/500%20Example%20Site%20%28Legacy%29/Home/About" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Content/About/Contact%20Tab%20Content.xml" linkName="ComponentPresentations[0]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Modules/Core/Editor/Templates/Tab.tctcmp" linkName="ComponentPresentations[0]/ComponentTemplate" />
+    <Dependency dependencyType="LinkedKeyword" itemUrl="/webdav/500%20Example%20Site%20%28Legacy%29/Sitemap%20%5BNavigation%5D/About.tkw" linkName="Metadata" xpath="*[local-name() = 'Metadata'][1]/*[local-name() = 'sitemapKeyword'][1]/@xlink:href" />
+    <Dependency dependencyType="MetadataSchema" itemUrl="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Modules/Core/Editor/Schemas/Page%20Schemas/Content%20Page.xsd" linkName="MetadataSchema" />
+    <Dependency dependencyType="PageRegionSchema" itemUrl="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Modules/Core/Editor/Schemas/Page%20Schemas/Content%20Page.xsd" linkName="RegionSchema" />
+    <Dependency dependencyType="PageRegionSchema" itemUrl="/webdav/500%20Example%20Site%20%28Legacy%29/Building%20Blocks/Modules/Core/Editor/Schemas/Region%20Schemas/%5BMain%5D%20Region.xsd" linkName="Regions[0]/RegionSchema" />
+  </Dependencies>
+</PackageItem>

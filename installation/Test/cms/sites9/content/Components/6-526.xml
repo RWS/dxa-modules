@@ -1,0 +1,77 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>TSI-1758 Test Component</tcm:Title>
+      <tcm:Type>Normal</tcm:Type>
+      <tcm:Schema xlink:type="simple" xlink:title="TSI-1758 Schema" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/TSI-1758%20Schema.xsd" IsMandatory="false" />
+      <tcm:Content>
+        <TSI1758 xmlns="uuid:91903360-f20c-49cb-a67e-ff9ee3e01a38">
+          <embedField1>
+            <textField>This is the textField of the first embedField1</textField>
+            <embedField2>
+              <textField>This is the textField of embedField2 within the first embedField1</textField>
+              <embedField2>
+                <linkText>This is the link text of embedField2 within embedField2 within the first embedField1</linkText>
+                <externalLink xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://sdl1.co.uk" />
+              </embedField2>
+            </embedField2>
+            <embedField1>
+              <linkText>This is the link text of embedField1 within the first embedField1</linkText>
+              <externalLink xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.test.org" />
+            </embedField1>
+          </embedField1>
+          <embedField1>
+            <textField>This is the textField of the second embedField1</textField>
+            <embedField2>
+              <textField>This is the textField of embedField2 within the second embedField1</textField>
+              <embedField2>
+                <linkText>This is the link text of embedField2 within embedField2 within the second embedField1</linkText>
+                <externalLink xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://sdl2.co.uk" />
+              </embedField2>
+            </embedField2>
+            <embedField1>
+              <linkText>This is the link text of embedField1 within the second embedField1</linkText>
+              <externalLink xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://sdl.co.uk" />
+            </embedField1>
+          </embedField1>
+          <embedField2>
+            <textField>This is the textField of the first embedField2</textField>
+            <embedField2>
+              <textField>This is the textField of embedField2 within the first embedField2</textField>
+              <embedField2>
+                <linkText>This is the link text of embedField2 within embedField2 within the first embedField2</linkText>
+                <externalLink xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://sdl3.co.uk" />
+              </embedField2>
+            </embedField2>
+            <embedField1>
+              <linkText>This is the link text of embedField1 within the first embedField2</linkText>
+              <externalLink xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.sdl.com" />
+            </embedField1>
+          </embedField2>
+          <embedField2>
+            <textField>This is the textField of the second embedField2</textField>
+            <embedField2>
+              <textField>This is the textField of embedField2 within the second embedField2</textField>
+              <embedField2>
+                <linkText>This is the link text of embedField2 within embedField2 within the second embedField2</linkText>
+                <externalLink xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://sdl4.co.uk" />
+              </embedField2>
+            </embedField2>
+            <embedField1>
+              <linkText>This is the link text of embedField1 within the second embedField2</linkText>
+              <externalLink xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://docs.sdl.com/SDLDXA" />
+            </embedField1>
+          </embedField2>
+        </TSI1758>
+      </tcm:Content>
+      <tcm:Metadata />
+      <tcm:IsBasedOnTridionWebSchema>true</tcm:IsBasedOnTridionWebSchema>
+      <tcm:MultimediaType xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Regression" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="Schema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/TSI-1758%20Schema.xsd" linkName="Schema" />
+  </Dependencies>
+</PackageItem>

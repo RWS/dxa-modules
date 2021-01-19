@@ -1,0 +1,138 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+      <tcm:Title>HTML Design Configuration</tcm:Title>
+      <tcm:Description>HTML Design Configuration</tcm:Description>
+      <tcm:Purpose>Component</tcm:Purpose>
+      <tcm:NamespaceURI>http://www.sdl.com/web/schemas/html-design</tcm:NamespaceURI>
+      <tcm:RootElementName>HtmlDesignConfig</tcm:RootElementName>
+      <tcm:IsTridionWebSchema>true</tcm:IsTridionWebSchema>
+      <tcm:XSD>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sdl.com/web/schemas/html-design" xmlns:tcmi="http://www.tridion.com/ContentManager/5.0/Instance" elementFormDefault="qualified" targetNamespace="http://www.sdl.com/web/schemas/html-design">
+  <xsd:import namespace="http://www.tridion.com/ContentManager/5.0/Instance" schemaLocation="/webdav/cm_xml_inst.xsd" />
+  <xsd:annotation>
+    <xsd:appinfo>
+      <tcm:Labels xmlns:tcm="http://www.tridion.com/ContentManager/5.0">
+        <tcm:Label ElementName="design" Metadata="false">HTML design (packaged in zip file)</tcm:Label>
+        <tcm:Label ElementName="build" Metadata="false">HTML design build files (packaged in zip file)</tcm:Label>
+        <tcm:Label ElementName="version" Metadata="false">Version Number</tcm:Label>
+        <tcm:Label ElementName="favicon" Metadata="false">Favicon</tcm:Label>
+        <tcm:Label ElementName="variables" Metadata="false">Bootstrap configuration</tcm:Label>
+        <tcm:Label ElementName="code" Metadata="false">LESS Code Block</tcm:Label>
+      </tcm:Labels>
+    </xsd:appinfo>
+  </xsd:annotation>
+  <xsd:element name="HtmlDesignConfig">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="design" minOccurs="1" maxOccurs="1" type="tcmi:SimpleLink">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0">
+          <configuration xmlns="http://www.sdltridion.com/2011/SiteEdit">
+            <field>
+              <editable>false</editable>
+            </field>
+          </configuration>
+        </ExtensionXml>
+              <tcm:linktype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">MultimediaLink</tcm:linktype>
+              <tcm:AllowedTargetSchemas xmlns:tcm="http://www.tridion.com/ContentManager/5.0">
+                <tcm:TargetSchema xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/100%20Master/Building%20Blocks/Framework/Developer/Schemas/ZIP%20file.xsd" xlink:title="ZIP file" />
+              </tcm:AllowedTargetSchemas>
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="build" minOccurs="0" maxOccurs="1" type="tcmi:SimpleLink">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+              <tcm:linktype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">MultimediaLink</tcm:linktype>
+              <tcm:AllowedTargetSchemas xmlns:tcm="http://www.tridion.com/ContentManager/5.0">
+                <tcm:TargetSchema xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/100%20Master/Building%20Blocks/Framework/Developer/Schemas/ZIP%20file.xsd" xlink:title="ZIP file" />
+              </tcm:AllowedTargetSchemas>
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="version" minOccurs="1" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0">
+          <configuration xmlns="http://www.sdltridion.com/2011/SiteEdit">
+            <field>
+              <editable>false</editable>
+            </field>
+          </configuration>
+        </ExtensionXml>
+              <tcm:DefaultTextValue xmlns:tcm="http://www.tridion.com/ContentManager/5.0">v1.00</tcm:DefaultTextValue>
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="favicon" minOccurs="0" maxOccurs="1" type="tcmi:SimpleLink">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0">
+          <configuration xmlns="http://www.sdltridion.com/2011/SiteEdit">
+            <field>
+              <editable>false</editable>
+            </field>
+          </configuration>
+        </ExtensionXml>
+              <tcm:linktype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">MultimediaLink</tcm:linktype>
+              <tcm:AllowedTargetSchemas xmlns:tcm="http://www.tridion.com/ContentManager/5.0">
+                <tcm:TargetSchema xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/100%20Master/Building%20Blocks/Framework/Site%20Manager/Schemas/Favicon.xsd" xlink:title="Favicon" />
+              </tcm:AllowedTargetSchemas>
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="variables" minOccurs="0" maxOccurs="1" type="tcmi:SimpleLink">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0">
+          <configuration xmlns="http://www.sdltridion.com/2011/SiteEdit">
+            <field>
+              <editable>false</editable>
+            </field>
+          </configuration>
+        </ExtensionXml>
+              <tcm:linktype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">ComponentLink</tcm:linktype>
+              <tcm:AllowMultimediaLinks xmlns:tcm="http://www.tridion.com/ContentManager/5.0">false</tcm:AllowMultimediaLinks>
+              <tcm:AllowedTargetSchemas xmlns:tcm="http://www.tridion.com/ContentManager/5.0">
+                <tcm:TargetSchema xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/100%20Master/Building%20Blocks/Framework/Site%20Manager/Schemas/Bootstrap%20Configuration.xsd" xlink:title="Bootstrap Configuration" />
+              </tcm:AllowedTargetSchemas>
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="code" minOccurs="0" maxOccurs="1" type="tcmi:MultiLineText">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0">
+          <configuration xmlns="http://www.sdltridion.com/2011/SiteEdit">
+            <field>
+              <editable>false</editable>
+            </field>
+          </configuration>
+        </ExtensionXml>
+              <tcm:Size xmlns:tcm="http://www.tridion.com/ContentManager/5.0">10</tcm:Size>
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>
+      </tcm:XSD>
+      <tcm:AllowedMultimediaTypes />
+      <tcm:ComponentProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:BundleProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:DeleteBundleOnProcessFinished>false</tcm:DeleteBundleOnProcessFinished>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/100%20Master" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/100%20Master/Building%20Blocks/Framework/Site%20Manager/Schemas" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="SchemaAllowedSchema" itemUrl="/webdav/100%20Master/Building%20Blocks/Framework/Developer/Schemas/ZIP%20file.xsd" linkName="Xsd" xpath="xsd:schema[1]/xsd:element[1]/xsd:complexType[1]/xsd:sequence[1]/xsd:element[1]/xsd:annotation[1]/xsd:appinfo[1]/tcm:AllowedTargetSchemas[1]/tcm:TargetSchema[1]/@xlink:href" />
+    <Dependency dependencyType="SchemaAllowedSchema" itemUrl="/webdav/100%20Master/Building%20Blocks/Framework/Developer/Schemas/ZIP%20file.xsd" linkName="Xsd" xpath="xsd:schema[1]/xsd:element[1]/xsd:complexType[1]/xsd:sequence[1]/xsd:element[2]/xsd:annotation[1]/xsd:appinfo[1]/tcm:AllowedTargetSchemas[1]/tcm:TargetSchema[1]/@xlink:href" />
+    <Dependency dependencyType="SchemaAllowedSchema" itemUrl="/webdav/100%20Master/Building%20Blocks/Framework/Site%20Manager/Schemas/Favicon.xsd" linkName="Xsd" xpath="xsd:schema[1]/xsd:element[1]/xsd:complexType[1]/xsd:sequence[1]/xsd:element[4]/xsd:annotation[1]/xsd:appinfo[1]/tcm:AllowedTargetSchemas[1]/tcm:TargetSchema[1]/@xlink:href" />
+    <Dependency dependencyType="SchemaAllowedSchema" itemUrl="/webdav/100%20Master/Building%20Blocks/Framework/Site%20Manager/Schemas/Bootstrap%20Configuration.xsd" linkName="Xsd" xpath="xsd:schema[1]/xsd:element[1]/xsd:complexType[1]/xsd:sequence[1]/xsd:element[5]/xsd:annotation[1]/xsd:appinfo[1]/tcm:AllowedTargetSchemas[1]/tcm:TargetSchema[1]/@xlink:href" />
+  </Dependencies>
+</PackageItem>
