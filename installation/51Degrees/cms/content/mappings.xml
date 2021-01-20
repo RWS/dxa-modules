@@ -1,0 +1,28 @@
+<Mappings xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <ItemSet role="Publication">
+    <Mapping exportTitle="100%20Master" importTitle="" />
+  </ItemSet>
+  <ItemSet role="Folder">
+    <Mapping exportContext="/100%20Master" exportTitle="Building%20Blocks" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks" exportTitle="Framework" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework" exportTitle="Developer" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Developer" exportTitle="Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks" exportTitle="Modules" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules" exportTitle="51Degrees" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/51Degrees" exportTitle="Admin" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/51Degrees" exportTitle="Site%20Manager" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/51Degrees/Site%20Manager" exportTitle="Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/51Degrees/Site%20Manager" exportTitle="Templates" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks" exportTitle="Settings" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Settings" exportTitle="51Degrees" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Settings/51Degrees" exportTitle="Site%20Manager" importContext="" importTitle="" />
+  </ItemSet>
+  <ItemSet role="Schema">
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Developer/Schemas" exportTitle="Module%20Configuration.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/51Degrees/Site%20Manager/Schemas" exportTitle="51%20Degrees%20Configuration.xsd" importContext="" importTitle="" />
+  </ItemSet>
+  <ItemSet role="Component">
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/51Degrees/Admin" exportTitle="51%20Degrees.xml" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Settings/51Degrees/Site%20Manager" exportTitle="51%20Degrees%20Configuration.xml" importContext="" importTitle="" />
+  </ItemSet>
+</Mappings>

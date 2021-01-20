@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration Version="8.1">
+    <Fredhopper>
+        <!-- Default settings -->
+        <DefaultUniverse>catalog01</DefaultUniverse>
+        <DefaultLocale>en_US</DefaultLocale>
+
+        <IndexServer>
+            <Timeouts>
+                <Triggers>5000</Triggers>
+            </Timeouts>
+        </IndexServer>
+        
+        <QueryServer>
+            <Timeouts>
+                <Query>1000</Query>
+            </Timeouts>
+        </QueryServer>
+    </Fredhopper>
+    <SmartTarget>
+        <!--
+            Defines the offset in hours and minutes from this CD system to the CM system's local server time
+            Used for begin and end dates of Experiments as well as date triggers
+            Examples:
+            -7 means the CM system is in a TimeZone 7 hours earlier than this CD system
+            -7:45 means the CM system is in a TimeZone 7 hours and 45 minutes earlier than this CD system
+            +5 means the CM system is in a TimeZone 5 hours later than this CD system
+            +5:30 means the CM system is in a TimeZone 5 hours and 30 minutes later than this CD system
+        -->
+        <TimeZoneOffset>0</TimeZoneOffset>
+
+        <!-- Analytics -->
+        <Analytics trackingRedirectUrl="/redirect/" />
+        
+        <DefaultValues>
+            <!-- Site-wide default for the "Allow duplicates across regions" option -->
+            <AllowDuplicates>true</AllowDuplicates>
+        </DefaultValues>
+
+        <!-- The path to referrers definition file -->
+        <Referrers>smarttarget.referrers.xml</Referrers>
+        
+        <!-- Ambient Data Framework prefixes (changes the long claim URIs of the framework into the shorter prefixes used in trigger-types.xml)-->
+        <AmbientData>
+            <Prefixes>
+                <taf_claim_audiencemanager_contact>am</taf_claim_audiencemanager_contact>
+                <taf_claim_audiencemanager_contact_extendeddetail>am_ex</taf_claim_audiencemanager_contact_extendeddetail>
+                <taf_claim_ambientdata_sessioncartridge>sc</taf_claim_ambientdata_sessioncartridge>
+                <taf_claim_ambientdata_sessioncartridge_session>sc_session</taf_claim_ambientdata_sessioncartridge_session>
+                <taf_claim_ambientdata_sessioncartridge_useragent>sc_ua</taf_claim_ambientdata_sessioncartridge_useragent>
+                <taf_claim_ambientdata_sessioncartridge_useragent_browser>sc_ua_browser</taf_claim_ambientdata_sessioncartridge_useragent_browser>
+                <taf_claim_ambientdata_sessioncartridge_useragent_os>sc_ua_os</taf_claim_ambientdata_sessioncartridge_useragent_os>
+                <taf_claim_ambientdata_sessioncartridge_authorization>sc_auth</taf_claim_ambientdata_sessioncartridge_authorization>
+            </Prefixes>
+            <!-- Add data to the Ambient Data ClaimStore so that other systems can use this information -->
+            <AddSmartTargetDataToClaimStore>true</AddSmartTargetDataToClaimStore>
+        </AmbientData>
+
+    </SmartTarget>
+</Configuration>

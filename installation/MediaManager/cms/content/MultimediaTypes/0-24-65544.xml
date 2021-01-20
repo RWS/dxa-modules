@@ -1,0 +1,11 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>External Content Library</tcm:Title>
+      <tcm:MIMEType>application/externalcontentlibrary</tcm:MIMEType>
+      <tcm:FileExtensions>
+        <tcm:FileExtension>ecl</tcm:FileExtension>
+      </tcm:FileExtensions>
+    </tcm:Data>
+  </Data>
+</PackageItem>

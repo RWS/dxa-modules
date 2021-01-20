@@ -1,0 +1,123 @@
+<Index dataContractVersion="201501" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Item id="tcm:0-0-0" selected="false" exported="true">
+    <ApplicationIds>
+      <ApplicationId>http://www.sdl.com/tridion/SemanticMapping/vocabularies</ApplicationId>
+    </ApplicationIds>
+    <Item id="e41990255fc84006948cf3b261d2e298" title="100%20Master" itemType="Publication" selected="false" exported="false">
+      <Item id="a536c7888f3745ccb05bc7b4bb74910a" title="Building%20Blocks" itemType="Folder" selected="false" exported="false">
+        <Item id="386b29585f2d42c4b05c7b6688f69909" title="Framework" itemType="Folder" selected="false" exported="false">
+          <Item id="abf67438b35c4547b6d68479cceac18a" title="Developer" itemType="Folder" selected="false" exported="false">
+            <Item id="8a188820c0d441fc9b2bc8a896fd872c" title="Schemas" itemType="Folder" selected="false" exported="false">
+              <Item id="tcm:2-205-8" title="Component%20Template%20Metadata" extension="xsd" itemType="Schema" subtype="3" blueprintStatus="LocalItem" selected="false" exported="true" />
+              <Item id="fa4fb9e0e6034a09afc6284903828a07" title="Module%20Configuration" extension="xsd" itemType="Schema" selected="false" exported="false" />
+            </Item>
+            <Item id="239d4aeec1a84a2ebb84367e993a0df1" title="Templates" itemType="Folder" selected="false" exported="false">
+              <Item id="e260a24a36114bf8bd6fbc450405604a" title="Sdl%2EWeb%2ETridion%2ETemplates" itemType="Folder" selected="false" exported="false">
+                <Item id="d5993d918d3047629f1b5cbd342d41ca" title="Default%20Component%20Template%20Finish%20Actions" extension="tbbcmp" itemType="TemplateBuildingBlock" selected="false" exported="false" />
+                <Item id="8e533702b16f47839f08bde06d61f3a4" title="Render%20Component%20Content" extension="tbbcmp" itemType="TemplateBuildingBlock" selected="false" exported="false" />
+              </Item>
+            </Item>
+          </Item>
+        </Item>
+        <Item id="efa0dcb873f2439f8af779f41b7efefe" title="Modules" itemType="Folder" selected="false" exported="false">
+          <Item id="tcm:2-2683-2" title="AudienceManager" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+            <Item id="tcm:2-2684-2" title="Admin" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+              <Item id="tcm:2-10024" title="AudienceManager" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+            </Item>
+            <Item id="tcm:2-2685-2" title="Site%20Manager" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+              <Item id="tcm:2-2686-2" title="Schemas" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+                <Item id="tcm:2-10037-8" title="Audience%20Manager%20Configuration" extension="xsd" itemType="Schema" blueprintStatus="LocalItem" selected="true" exported="true" />
+                <Item id="tcm:2-10033-8" title="Current%20User%20Widget" extension="xsd" itemType="Schema" blueprintStatus="LocalItem" selected="true" exported="true" />
+                <Item id="tcm:2-10029-8" title="Login%20Form" extension="xsd" itemType="Schema" blueprintStatus="LocalItem" selected="true" exported="true" />
+              </Item>
+              <Item id="tcm:2-2687-2" title="Templates" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+                <Item id="tcm:2-10034-32" title="Current%20User%20Widget%20%5BNav%5D" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="LocalItem" selected="true" exported="true" />
+                <Item id="tcm:2-10030-32" title="Login%20Form" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="LocalItem" selected="true" exported="true" />
+              </Item>
+            </Item>
+          </Item>
+        </Item>
+        <Item id="bb349f9e6db14ec88064de0affc0368b" title="Settings" itemType="Folder" selected="false" exported="false">
+          <Item id="tcm:2-2688-2" title="AudienceManager" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+            <Item id="tcm:2-2689-2" title="Site%20Manager" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+              <Item id="tcm:2-10038" title="Audience%20Manager%20Configuration" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+            </Item>
+          </Item>
+        </Item>
+      </Item>
+    </Item>
+    <Item id="030503b271a14462b508f1976a308d35" title="200%20Example%20Content" itemType="Publication" selected="false" exported="false">
+      <Item id="376079297d9b45d9be60d44a809f3122" title="Building%20Blocks" itemType="Folder" selected="false" exported="false">
+        <Item id="10d92c2ae44a47f0922599c2024cdd81" title="Modules" itemType="Folder" selected="false" exported="false">
+          <Item id="tcm:1068-2683-2" title="AudienceManager" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+            <Item id="tcm:1068-2684-2" title="Admin" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+              <Item id="tcm:1068-10024" title="AudienceManager" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+            </Item>
+            <Item id="tcm:1068-2685-2" title="Site%20Manager" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+              <Item id="tcm:1068-2686-2" title="Schemas" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:1068-10037-8" title="Audience%20Manager%20Configuration" extension="xsd" itemType="Schema" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:1068-10033-8" title="Current%20User%20Widget" extension="xsd" itemType="Schema" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:1068-10029-8" title="Login%20Form" extension="xsd" itemType="Schema" blueprintStatus="SharedItem" selected="true" exported="true" />
+              </Item>
+              <Item id="tcm:1068-2687-2" title="Templates" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:1068-10034-32" title="Current%20User%20Widget%20%5BNav%5D" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:1068-10030-32" title="Login%20Form" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+              </Item>
+            </Item>
+          </Item>
+        </Item>
+        <Item id="ed23975a6f1f4266972bc565f7a74d6c" title="Modules%20Content" itemType="Folder" selected="false" exported="false">
+          <Item id="tcm:1068-2691-2" title="AudienceManager" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+            <Item id="tcm:1068-10035" title="Current%20User%20Widget" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+            <Item id="tcm:1068-10031" title="Login%20Form" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+          </Item>
+        </Item>
+      </Item>
+    </Item>
+    <Item id="496b191fb20f4147880cbeda29ff532e" title="400%20Example%20Site" itemType="Publication" selected="false" exported="false">
+      <Item id="10fc2d59271042abafd0b475d81ab38a" title="Building%20Blocks" itemType="Folder" selected="false" exported="false">
+        <Item id="671660ff6298401badcb00aaa2e64753" title="Modules" itemType="Folder" selected="false" exported="false">
+          <Item id="tcm:8-2683-2" title="AudienceManager" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+            <Item id="tcm:8-2684-2" title="Admin" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+              <Item id="tcm:8-10024" title="AudienceManager" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+            </Item>
+            <Item id="tcm:8-2685-2" title="Site%20Manager" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+              <Item id="tcm:8-2686-2" title="Schemas" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:8-10037-8" title="Audience%20Manager%20Configuration" extension="xsd" itemType="Schema" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:8-10033-8" title="Current%20User%20Widget" extension="xsd" itemType="Schema" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:8-10029-8" title="Login%20Form" extension="xsd" itemType="Schema" blueprintStatus="SharedItem" selected="true" exported="true" />
+              </Item>
+              <Item id="tcm:8-2687-2" title="Templates" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:8-10034-32" title="Current%20User%20Widget%20%5BNav%5D" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:8-10030-32" title="Login%20Form" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+              </Item>
+            </Item>
+          </Item>
+          <Item id="c2cfd4025f4442039b349a368abd24b5" title="Core" itemType="Folder" selected="false" exported="false">
+            <Item id="e94c7a22d6594dca9c3d38ac4496a42a" title="Editor" itemType="Folder" selected="false" exported="false">
+              <Item id="e5a3148319cb44dea9b27107ce631deb" title="Templates" itemType="Folder" selected="false" exported="false">
+                <Item id="887a6ab7f3b844b3ad8c335a05415116" title="Content%20Page%20Without%20Navigation" extension="tptcmp" itemType="PageTemplate" selected="false" exported="false" />
+              </Item>
+            </Item>
+          </Item>
+        </Item>
+        <Item id="c31c61bf5cc443d1b26885f1366bd115" title="Modules%20Content" itemType="Folder" selected="false" exported="false">
+          <Item id="tcm:8-2691-2" title="AudienceManager" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+            <Item id="tcm:8-10035" title="Current%20User%20Widget" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+            <Item id="tcm:8-10031" title="Login%20Form" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+          </Item>
+        </Item>
+        <Item id="b5b1b3e08695430882f06e6d8e139b07" title="Settings" itemType="Folder" selected="false" exported="false">
+          <Item id="tcm:8-2688-2" title="AudienceManager" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+            <Item id="tcm:8-2689-2" title="Site%20Manager" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+              <Item id="tcm:8-10038" title="Audience%20Manager%20Configuration" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+            </Item>
+          </Item>
+        </Item>
+      </Item>
+      <Item id="ad52f6ce4bc2462bbf0a8a8d9d8ce138" title="Home" itemType="StructureGroup" selected="false" exported="false">
+        <Item id="tcm:8-10032-64" title="Login" extension="tpg" itemType="Page" blueprintStatus="LocalItem" selected="true" exported="true" />
+      </Item>
+    </Item>
+  </Item>
+</Index>

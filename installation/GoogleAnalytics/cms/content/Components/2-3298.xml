@@ -1,0 +1,22 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Google Analytics Configuration</tcm:Title>
+      <tcm:Type>Normal</tcm:Type>
+      <tcm:Schema xlink:type="simple" xlink:title="Google Analytics Configuration" xlink:href="/webdav/100%20Master/Building%20Blocks/Modules/GoogleAnalytics/Site%20Manager/Schemas/Google%20Analytics%20Configuration.xsd" IsMandatory="false" />
+      <tcm:Content>
+        <GoogleAnalyticsConfiguration xmlns="http://www.sdl.com/web/schemas/googleanalytics">
+          <siteKey>UA-XXXXX-Y</siteKey>
+        </GoogleAnalyticsConfiguration>
+      </tcm:Content>
+      <tcm:Metadata />
+      <tcm:IsBasedOnTridionWebSchema>true</tcm:IsBasedOnTridionWebSchema>
+      <tcm:MultimediaType xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/100%20Master" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/100%20Master/Building%20Blocks/Settings/GoogleAnalytics/Site%20Manager" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="Schema" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/GoogleAnalytics/Site%20Manager/Schemas/Google%20Analytics%20Configuration.xsd" linkName="Schema" />
+  </Dependencies>
+</PackageItem>

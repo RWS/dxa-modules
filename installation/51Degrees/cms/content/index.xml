@@ -1,0 +1,38 @@
+<Index dataContractVersion="201501" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Item id="tcm:0-0-0" selected="false" exported="true">
+    <ApplicationIds>
+      <ApplicationId>http://www.sdl.com/tridion/SemanticMapping/vocabularies</ApplicationId>
+    </ApplicationIds>
+    <Item id="c1381c98598e47e18f66f17f3b989c9d" title="100%20Master" itemType="Publication" selected="false" exported="false">
+      <Item id="cc69a890df5f469f93672c878cef2d1b" title="Building%20Blocks" itemType="Folder" selected="false" exported="false">
+        <Item id="68c9c52aaf714e7098321cd8674e5321" title="Framework" itemType="Folder" selected="false" exported="false">
+          <Item id="4e147b2298b44968931ba46c5ad83d97" title="Developer" itemType="Folder" selected="false" exported="false">
+            <Item id="41cbdac317674118a77f4fcb86845cf2" title="Schemas" itemType="Folder" selected="false" exported="false">
+              <Item id="e98ef6f3da2646099b4b0e3c90967820" title="Module%20Configuration" extension="xsd" itemType="Schema" selected="false" exported="false" />
+            </Item>
+          </Item>
+        </Item>
+        <Item id="d616a9630546477e9f08d36825092e1d" title="Modules" itemType="Folder" selected="false" exported="false">
+          <Item id="tcm:2-2599-2" title="51Degrees" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+            <Item id="tcm:2-2600-2" title="Admin" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+              <Item id="tcm:2-9859" title="51%20Degrees" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+            </Item>
+            <Item id="tcm:2-2601-2" title="Site%20Manager" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+              <Item id="tcm:2-2602-2" title="Schemas" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+                <Item id="tcm:2-9860-8" title="51%20Degrees%20Configuration" extension="xsd" itemType="Schema" blueprintStatus="LocalItem" selected="true" exported="true" />
+              </Item>
+              <Item id="tcm:2-2603-2" title="Templates" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true" />
+            </Item>
+          </Item>
+        </Item>
+        <Item id="4abae5dece3c45d18b93dfec9d576985" title="Settings" itemType="Folder" selected="false" exported="false">
+          <Item id="tcm:2-2604-2" title="51Degrees" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+            <Item id="tcm:2-2605-2" title="Site%20Manager" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+              <Item id="tcm:2-9863" title="51%20Degrees%20Configuration" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+            </Item>
+          </Item>
+        </Item>
+      </Item>
+    </Item>
+  </Item>
+</Index>

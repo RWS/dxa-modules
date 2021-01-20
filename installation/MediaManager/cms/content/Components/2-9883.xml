@@ -1,0 +1,24 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>MediaManager HTML Design Configuration</tcm:Title>
+      <tcm:Type>Normal</tcm:Type>
+      <tcm:Schema xlink:type="simple" xlink:title="HTML Design Configuration" xlink:href="/webdav/100%20Master/Building%20Blocks/Framework/Site%20Manager/Schemas/HTML%20Design%20Configuration.xsd" IsMandatory="false" />
+      <tcm:Content>
+        <HtmlDesignConfig xmlns="http://www.sdl.com/web/schemas/html-design">
+          <design xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="/webdav/100%20Master/Building%20Blocks/Modules/MediaManager/Admin/mediamanager-html-design.zip" xlink:title="mediamanager-html-design" />
+          <version>v1.7</version>
+        </HtmlDesignConfig>
+      </tcm:Content>
+      <tcm:Metadata />
+      <tcm:IsBasedOnTridionWebSchema>true</tcm:IsBasedOnTridionWebSchema>
+      <tcm:MultimediaType xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/100%20Master" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/100%20Master/Building%20Blocks/Settings/MediaManager/Site%20Manager" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/MediaManager/Admin/mediamanager-html-design.zip" linkName="Content" xpath="*[local-name() = 'HtmlDesignConfig'][1]/*[local-name() = 'design'][1]/@xlink:href" />
+    <Dependency dependencyType="Schema" itemUrl="/webdav/100%20Master/Building%20Blocks/Framework/Site%20Manager/Schemas/HTML%20Design%20Configuration.xsd" linkName="Schema" />
+  </Dependencies>
+</PackageItem>

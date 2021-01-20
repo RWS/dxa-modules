@@ -1,0 +1,85 @@
+<Mappings xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <ItemSet role="Publication">
+    <Mapping exportTitle="100%20Master" importTitle="" />
+    <Mapping exportTitle="400%20Example%20Site" importTitle="" />
+  </ItemSet>
+  <ItemSet role="Folder">
+    <Mapping exportContext="/100%20Master" exportTitle="Building%20Blocks" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks" exportTitle="Default%20Templates" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Default%20Templates" exportTitle="SmartTarget" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks" exportTitle="Framework" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework" exportTitle="Developer" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Developer" exportTitle="Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Developer" exportTitle="Templates" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Developer/Templates" exportTitle="Sdl%2EWeb%2ETridion%2ETemplates" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework" exportTitle="Site%20Manager" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Site%20Manager" exportTitle="Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks" exportTitle="Modules" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules" exportTitle="Core" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/Core" exportTitle="Editor" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/Core/Editor" exportTitle="Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules" exportTitle="ExperienceOptimization" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/ExperienceOptimization" exportTitle="Admin" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/ExperienceOptimization" exportTitle="Editor" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/ExperienceOptimization/Editor" exportTitle="Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/ExperienceOptimization/Editor/Schemas" exportTitle="Embedded" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/ExperienceOptimization/Editor/Schemas" exportTitle="Metadata" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/ExperienceOptimization/Editor" exportTitle="Templates" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/ExperienceOptimization" exportTitle="Site%20Manager" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/ExperienceOptimization/Site%20Manager" exportTitle="Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks" exportTitle="Settings" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Settings" exportTitle="ExperienceOptimization" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Settings/ExperienceOptimization" exportTitle="Site%20Manager" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site" exportTitle="Building%20Blocks" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks" exportTitle="Modules" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules" exportTitle="ExperienceOptimization" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/ExperienceOptimization" exportTitle="Admin" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/ExperienceOptimization" exportTitle="Editor" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/ExperienceOptimization/Editor" exportTitle="Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/ExperienceOptimization/Editor/Schemas" exportTitle="Embedded" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/ExperienceOptimization/Editor/Schemas" exportTitle="Metadata" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/ExperienceOptimization/Editor" exportTitle="Templates" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/ExperienceOptimization" exportTitle="Site%20Manager" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/ExperienceOptimization/Site%20Manager" exportTitle="Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks" exportTitle="Settings" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Settings" exportTitle="ExperienceOptimization" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Settings/ExperienceOptimization" exportTitle="Site%20Manager" importContext="" importTitle="" />
+  </ItemSet>
+  <ItemSet role="Schema">
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Developer/Schemas" exportTitle="Component%20Template%20Metadata.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Developer/Schemas" exportTitle="Module%20Configuration.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Site%20Manager/Schemas" exportTitle="General%20Configuration.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Site%20Manager/Schemas" exportTitle="Name%20Value%20Pair.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/Core/Editor/Schemas" exportTitle="Article.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/Core/Editor/Schemas" exportTitle="News%20Article.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/ExperienceOptimization/Editor/Schemas/Embedded" exportTitle="Experience%20Optimization%20Region%20Metadata.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/ExperienceOptimization/Editor/Schemas/Metadata" exportTitle="Experience%20Optimization%20Page%20Template%20Metadata.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/ExperienceOptimization/Site%20Manager/Schemas" exportTitle="Experience%20Optimization%20Configuration.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/ExperienceOptimization/Editor/Schemas/Embedded" exportTitle="Experience%20Optimization%20Region%20Metadata.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/ExperienceOptimization/Editor/Schemas/Metadata" exportTitle="Experience%20Optimization%20Page%20Template%20Metadata.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/ExperienceOptimization/Site%20Manager/Schemas" exportTitle="Experience%20Optimization%20Configuration.xsd" importContext="" importTitle="" />
+  </ItemSet>
+  <ItemSet role="Component">
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/ExperienceOptimization/Admin" exportTitle="SmartTarget.xml" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Settings/ExperienceOptimization/Site%20Manager" exportTitle="Experience%20Optimization%20Configuration.xml" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/ExperienceOptimization/Admin" exportTitle="SmartTarget.xml" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Settings/ExperienceOptimization/Site%20Manager" exportTitle="Experience%20Optimization%20Configuration.xml" importContext="" importTitle="" />
+  </ItemSet>
+  <ItemSet role="ComponentTemplate">
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/ExperienceOptimization/Editor/Templates" exportTitle="Article%20%5BSmartTarget%3AExample1%5D.tctcmp" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/ExperienceOptimization/Editor/Templates" exportTitle="Article%20%5BSmartTarget%3AExample2%5D.tctcmp" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/ExperienceOptimization/Editor/Templates" exportTitle="Article%20%5BSmartTarget%3AExample1%5D.tctcmp" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/ExperienceOptimization/Editor/Templates" exportTitle="Article%20%5BSmartTarget%3AExample2%5D.tctcmp" importContext="" importTitle="" />
+  </ItemSet>
+  <ItemSet role="PageTemplate">
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/ExperienceOptimization/Editor/Templates" exportTitle="Example%20Experience%20Optimization%20enabled%20Page.tptcmp" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/ExperienceOptimization/Editor/Templates" exportTitle="Example%20Experience%20Optimization%20enabled%20Page.tptcmp" importContext="" importTitle="" />
+  </ItemSet>
+  <ItemSet role="TemplateBuildingBlock">
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Default%20Templates/SmartTarget" exportTitle="Add%20to%20SmartTarget.tbbcs" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Developer/Templates/Sdl%2EWeb%2ETridion%2ETemplates" exportTitle="Default%20Component%20Template%20Finish%20Actions.tbbcmp" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Developer/Templates/Sdl%2EWeb%2ETridion%2ETemplates" exportTitle="Default%20Page%20Template%20Finish%20Actions.tbbcmp" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Developer/Templates/Sdl%2EWeb%2ETridion%2ETemplates" exportTitle="Render%20Component%20Content.tbbcmp" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Developer/Templates/Sdl%2EWeb%2ETridion%2ETemplates" exportTitle="Render%20Page%20Content.tbbcmp" importContext="" importTitle="" />
+  </ItemSet>
+</Mappings>
