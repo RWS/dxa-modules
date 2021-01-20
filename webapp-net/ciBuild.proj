@@ -1,110 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.5">
 
-  <UsingTask TaskName="MSBuild.ExtensionPack.Web.WebClient" AssemblyFile="_tools\MSBuild.ExtensionPack.dll" />
-  <UsingTask TaskName="MSBuild.ExtensionPack.FileSystem.File" AssemblyFile="_tools\MSBuild.ExtensionPack.dll"/>
-
+    <!-- Remember to run msbuild ciBuild.csproj /t:Restore first so the MSBuild extension package is installed from nuget -->
+    <Import Project="packages\MSBuild.Extension.Pack.1.9.1\build\net40\MSBuild.Extension.Pack.targets" Condition="Exists('packages\MSBuild.Extension.Pack.1.9.1\build\net40\MSBuild.Extension.Pack.targets')"/>
+  
   <PropertyGroup>
-    <!-- Input parameters -->
+    <BuildConfiguration>Release</BuildConfiguration>
+    <ProjectDirectory>$(MSBuildProjectDirectory)</ProjectDirectory>    
+
+    <!-- Version -->
     <Version Condition="'$(VERSION)' == ''">0.0.0.0</Version>
     <Version Condition="'$(VERSION)' != ''">$(VERSION)</Version>
-    <BuildConfiguration>Release</BuildConfiguration>
-    <IsPreRelease>true</IsPreRelease>
-    <DxaBuildType>Dev</DxaBuildType>
-    <CdTestDeployFolder>\\saintjohn03.ams.dev\c$\inetpub\wwwroot\8.1_staging</CdTestDeployFolder>
-
-    <ProjectDirectory>$(MSBuildProjectDirectory)</ProjectDirectory>
-
     <VersionMajor>$(Version.Split('.')[0])</VersionMajor>
     <VersionMinor>$(Version.Split('.')[1])</VersionMinor>
     <VersionPatch>$(Version.Split('.')[2])</VersionPatch>
     <VersionBuild>$(Version.Split('.')[3])</VersionBuild>
-    <PreReleaseLabel Condition="'$(IsPreRelease)' == 'true'">-alpha-$([System.DateTime]::Now.ToString("yyyyMMddHHmm"))</PreReleaseLabel>
-    <PackageVersion>$(VersionMajor).$(VersionMinor).$(VersionPatch)$(PreReleaseLabel)</PackageVersion>
-
-      <!-- Jenkins URLs -->
-    <JenkinsUrl>http://masterbuild01.ams.dev:8080/hudson</JenkinsUrl>
-    <DxaFrameworkArtifactsUrl>$(JenkinsUrl)/job/DXA%20$(DxaBuildType)%20CI%20Web%20App%20.NET/lastSuccessfulBuild/artifact/Site/bin</DxaFrameworkArtifactsUrl>
+    <PackageVersion>$(VersionMajor).$(VersionMinor).$(VersionPatch)</PackageVersion>
 
     <!--Tools-->
     <NuGet>&quot;$(ProjectDirectory)\_tools\NuGet.exe&quot;</NuGet>
+
     <MsBuildExe>C:\Program Files (x86)\MSBuild\12.0\Bin\MSBuild.exe</MsBuildExe>
     <PowerShellx64 Condition="'$(PROCESSOR_ARCHITECTURE)' == 'x86' AND '$(PROCESSOR_ARCHITEW6432)' != ''">C:\Windows\Sysnative\WindowsPowerShell\v1.0\powershell.exe</PowerShellx64>
     <PowerShellx64 Condition="'$(PROCESSOR_ARCHITECTURE)' == 'x86' AND '$(PROCESSOR_ARCHITEW6432)' == ''">C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</PowerShellx64>
     <PowerShellx64 Condition="'$(PROCESSOR_ARCHITECTURE)' != 'x86'">C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</PowerShellx64>
   </PropertyGroup>
 
+  <!-- ======================================================================================================================= -->
+  <!-- You should run msbuild with this target first to make sure all packages are installed before building everything else   -->
+  <!-- ======================================================================================================================= -->
+  <Target Name="Restore">
+      <Message Text="Clearing NuGet cache..."/>
+      <Exec Command="$(NuGet) locals all -Clear" />
+      <Message Text="Restoring NuGet packages..."/>
+      <Exec Command="_tools\RestorePackages DxaModules.sln" WorkingDirectory="$(ProjectDirectory)" />
+  </Target>
 
   <!-- =============================================================================================================================================  -->
   <Target Name="Build">
     <Message Text="Start build..." Importance="high" />
         
     <CallTarget Targets="PrepareBuild"/>
-    <CallTarget Targets="RunBuild"/>
-    <!--NOTE: not calling target DeployModules here; should be called separately by Jenkins build if needed. -->
+    <CallTarget Targets="RunBuild"/>    
   </Target>
 
-    <!-- =============================================================================================================================================  -->
-    <Target Name="PrepareBuild">
-        <Message Text="Preparing build..." Importance="high" />
+  <!-- =============================================================================================================================================  -->
+  <Target Name="PrepareBuild">
+      <Message Text="Preparing build..." Importance="high" />
+      <Message Text="Setting Assembly Info"/>
 
-        <Message Text="Clearing NuGet cache..."/>
-        <Exec Command="$(NuGet) locals all -Clear" />
+      <ItemGroup>
+      <AssemblyInfoFile Include="$(ProjectDirectory)\CommonAssemblyInfo.cs">
+        <Attributes>Normal</Attributes>
+      </AssemblyInfoFile>
+    </ItemGroup>
 
-        <Message Text="Restoring NuGet packages..."/>
-        <Exec Command="$(NuGet) restore DxaModules.sln" WorkingDirectory="$(ProjectDirectory)" />
+    <Message Text="Setting Assembly Info @(AssemblyInfoFile)"/>
 
-        <ItemGroup>
-            <AssemblyInfo Include="[assembly: AssemblyVersion(&quot;$(VersionMajor).$(VersionMinor).$(VersionPatch).0&quot;)]" />
-            <AssemblyInfo Include="[assembly: AssemblyFileVersion(&quot;$(Version)&quot;)]" />
-            <AssemblyInfo Include="[assembly: AssemblyInformationalVersion(&quot;$(PackageVersion)&quot;)]" />
-            <AssemblyInfo Include="[assembly: AssemblyCopyright(&quot;Copyright © 2014-$([System.DateTime]::Now.ToString(&quot;yyyy&quot;)) SDL Group&quot;)]" />
-        </ItemGroup>
+    <MSBuild.ExtensionPack.Framework.DateAndTime TaskAction="Get" Format="yyyy">
+      <Output TaskParameter="Result" PropertyName="Year"/>
+    </MSBuild.ExtensionPack.Framework.DateAndTime>
 
-        <Message Text="Updating CommonAssemblyInfo..."/>
-        <WriteLinesToFile File="$(ProjectDirectory)\CommonAssemblyInfo.cs" Overwrite="False" Lines="@(AssemblyInfo)" />
-    </Target>
+    <MSBuild.ExtensionPack.FileSystem.File TaskAction="SetAttributes" Files="@(AssemblyInfoFile)"/>
 
-    <!-- =============================================================================================================================================  -->
-    <Target Name="RunBuild">
-        <Message Text="Running build commands..." Importance="high" />
+    <MSBuild.ExtensionPack.Framework.AssemblyInfo
+      AssemblyInfoFiles="@(AssemblyInfoFile)"
+      AssemblyVersion="$(Version)"
+      AssemblyFileVersion="$(VersionMajor).$(VersionMinor).$(VersionPatch).$(VersionBuild)"
+      AssemblyCopyright="Copyright &#169; 2014-$(Year) SDL Group"
+      SkipVersioning="false"
+    />
 
-        <Message Text="Building all modules in '$(BuildConfiguration)' configuration..."/>
-        <MSBuild 
-            Projects="$(ProjectDirectory)\DxaModules.sln" 
-            Properties="Configuration=$(BuildConfiguration);Platform=Any CPU;AsmVersion=$(Version);FileVersion=$(Version)" 
-            Targets="Build" 
-            StopOnFirstFailure="true" 
-            />
-    </Target>
+      <Message Text="Restoring NuGet packages for extensions..."/>
+      <Exec Command="_tools\RestorePackages DxaModules.sln" WorkingDirectory="$(ProjectDirectory)" />
+  </Target>
 
   <!-- =============================================================================================================================================  -->
+  <Target Name="RunBuild">
+      <Message Text="Running build commands..." Importance="high" />
+
+      <Message Text="Building all modules in '$(BuildConfiguration)' configuration..."/>
+      <MSBuild 
+          Projects="$(ProjectDirectory)\DxaModules.sln" 
+          Properties="Configuration=$(BuildConfiguration);Platform=Any CPU;AsmVersion=$(Version);FileVersion=$(Version)" 
+          Targets="Build" 
+          StopOnFirstFailure="true" 
+          />
+  </Target>
+
+  <!-- =============================================================================================================================================  -->
+  
+
+  <!-- ========================================================================================================================== -->
+  <PropertyGroup>
+     <DstFolder>$(ProjectDirectory)\dist</DstFolder>     
+     <InstallationFolder>$(ProjectDirectory)\..\installation</InstallationFolder>      
+  </PropertyGroup>
+
   <ItemGroup>
     <ModulePath
       Include="$([System.IO.Directory]::GetDirectories(&quot;$(ProjectDirectory)&quot;))"
-      Exclude="$(ProjectDirectory)\_references;$(ProjectDirectory)\_tools;$(ProjectDirectory)\packages"
-      />
+      Exclude="$(ProjectDirectory)\_references;$(ProjectDirectory)\_tools;$(ProjectDirectory)\packages;$(ProjectDirectory)\dist"
+    />
   </ItemGroup>
+
+  <Target Name="Artifacts">
+      <Message Text="Generating artifacts ..." Importance="high" />
+
+      <RemoveDir Directories="$(DstFolder)" />
+      
+      <CallTarget Targets="DeployModules"/>
+
+      <RemoveDir Directories="$(DstFolder)\tmp" />
+  </Target>
 
   <!--Note: this target gets executed for each Module -->
   <Target Name="DeployModules" Inputs="@ModulePath" Outputs="%(ModulePath.Identity)">
-    <PropertyGroup>
-      <ModuleName>$([System.IO.Path]::GetFilename(&quot;%(ModulePath.Identity)&quot;))</ModuleName>
-      <CiDeployScript>$(ProjectDirectory)\..\installation\$(ModuleName)\ci-deploy.ps1</CiDeployScript>
+    <PropertyGroup>   
+      <ModuleName>$([System.IO.Path]::GetFilename(&quot;%(ModulePath.Identity)&quot;))</ModuleName>      
+      <DstModuleFolder>$(DstFolder)\tmp\SDL.DXA.$(ModuleName).Module.$(PackageVersion)\modules\$(ModuleName)</DstModuleFolder>
+      <ContentFolder>$(InstallationFolder)\$(ModuleName)\cms</ContentFolder>
+      <ScriptsFolder>$(InstallationFolder)\$(ModuleName)\scripts</ScriptsFolder>          
     </PropertyGroup>
 
-    <Message Text="Deploying module '$(ModuleName)' to '$(CdTestDeployFolder)'..." />
+    <Message Text="Deploying module '$(ModuleName)' to '$(DstModuleFolder)'..." />
 
     <ItemGroup>
       <AreaFiles Include="%(ModulePath.Identity)\Areas\**\*" />
       <BinFiles Include="%(ModulePath.Identity)\bin\$(BuildConfiguration)\**\*" />
+      <CmContent Include="$(ContentFolder)\content\**\*" />      
+      <Scripts Include="$(ScriptsFolder)\**\*.*" />
+      <ImportExport Include="$(InstallationFolder)\cms\ImportExport\**\*" />
     </ItemGroup>
 
-    <Copy SourceFiles="@(AreaFiles)" DestinationFolder="$(CdTestDeployFolder)\Areas\%(RecursiveDir)" />
-    <Copy SourceFiles="@(BinFiles)" DestinationFolder="$(CdTestDeployFolder)\bin\%(RecursiveDir)" />
-  
-    <!-- If there is a ci-deploy.ps1 PowerShell script for the module, run it: -->
-    <Exec Command="&quot;$(PowerShellx64)&quot; -file &quot;$(CiDeployScript)&quot; -distDestination &quot;$(CdTestDeployFolder)&quot;" Condition="Exists('$(CiDeployScript)')" />
-  </Target>
+    <!-- Copy actual areas and binaries for web application -->
+    <Message Text="Copying web application artifacts ..." Importance="high" />        
+    <Copy SourceFiles="@(AreaFiles)" DestinationFolder="$(DstModuleFolder)\web\Areas\%(RecursiveDir)" />
+    <Copy SourceFiles="@(BinFiles)" DestinationFolder="$(DstModuleFolder)\web\bin\%(RecursiveDir)" />    
 
+    <!-- Package CM content for module if it exists -->
+    <Message Text="Creating CM Content artifacts ..." Importance="high" />
+    <MakeDir Directories="$(DstModuleFolder)" Condition="Exists('$(ContentFolder)\content') And !Exists('$(DstModuleFolder)')" />
+    <MSBuild.ExtensionPack.Compression.DNZip Condition="Exists('$(ContentFolder)\content') And Exists('$(DstModuleFolder)')" TaskAction="Create" CompressPath="$(ContentFolder)\content" ZipFileName="$(DstModuleFolder)\module-$(ModuleName).zip" RemoveRoot="$(ContentFolder)\content"/>
+    <Copy Condition="Exists('$(ContentFolder)\permissions.xml')" SourceFiles="$(ContentFolder)\permissions.xml" DestinationFolder="$(DstModuleFolder)" />
+
+    <!-- Copy scripts for module -->
+    <Copy SourceFiles="@(Scripts)" DestinationFolder="$(DstModuleFolder)\%(RecursiveDir)"/>
+
+    <!-- Copy Import/Export scripts -->
+    <Copy SourceFiles="@(ImportExport)" DestinationFolder="$(DstModuleFolder)\..\..\ImportExport\%(RecursiveDir)"/>
+    <Copy SourceFiles="$(InstallationFolder)\cms\DxaDeployUtils.ps1" DestinationFolder="$(DstFolder)\tmp\SDL.DXA.$(ModuleName).Module.$(PackageVersion)\modules"/>
+      
+
+    <!-- Produce final module artifact -->
+    <MSBuild.ExtensionPack.Compression.DNZip TaskAction="Create" CompressPath="$(DstFolder)\tmp\SDL.DXA.$(ModuleName).Module.$(PackageVersion)" ZipFileName="$(DstFolder)\SDL.DXA.$(ModuleName).Module.$(PackageVersion).zip" RemoveRoot="$(DstFolder)\tmp\SDL.DXA.$(ModuleName).Module.$(PackageVersion)"/>
+    
+  </Target>
+  
 </Project>
