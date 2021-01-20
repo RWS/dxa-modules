@@ -1,0 +1,27 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Search</tcm:Title>
+      <tcm:Type>Normal</tcm:Type>
+      <tcm:Schema xlink:type="simple" xlink:title="Module Configuration" xlink:href="/webdav/100%20Master/Building%20Blocks/Framework/Developer/Schemas/Module%20Configuration.xsd" IsMandatory="false" />
+      <tcm:Content>
+        <ModuleConfiguration xmlns="http://www.sdl.com/web/schemas/core">
+          <name>Search</name>
+          <softwareVersion>1.7</softwareVersion>
+          <url xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://docs.sdl.com/LiveContent/content/en-US/SDL%20Tridion%20Reference%20Implementation-v1/GUID-C01E23A0-80B6-40A8-AC8C-BF558EEE01A7" />
+          <isActive>Yes</isActive>
+          <furtherConfiguration xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="/webdav/100%20Master/Building%20Blocks/Settings/Search/Site%20Manager/Search%20Configuration.xml" xlink:title="Search Configuration" />
+        </ModuleConfiguration>
+      </tcm:Content>
+      <tcm:Metadata />
+      <tcm:IsBasedOnTridionWebSchema>true</tcm:IsBasedOnTridionWebSchema>
+      <tcm:MultimediaType xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/100%20Master" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/Search/Admin" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/100%20Master/Building%20Blocks/Settings/Search/Site%20Manager/Search%20Configuration.xml" linkName="Content" xpath="*[local-name() = 'ModuleConfiguration'][1]/*[local-name() = 'furtherConfiguration'][1]/@xlink:href" />
+    <Dependency dependencyType="Schema" itemUrl="/webdav/100%20Master/Building%20Blocks/Framework/Developer/Schemas/Module%20Configuration.xsd" linkName="Schema" />
+  </Dependencies>
+</PackageItem>

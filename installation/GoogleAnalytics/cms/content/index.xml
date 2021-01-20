@@ -1,0 +1,47 @@
+<Index dataContractVersion="201501" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Item id="tcm:0-0-0" selected="false" exported="true">
+    <ApplicationIds>
+      <ApplicationId>http://www.sdl.com/tridion/SemanticMapping/vocabularies</ApplicationId>
+    </ApplicationIds>
+    <Item id="e426776bf2cb448eb1f8be89d1c4fcb3" title="100%20Master" itemType="Publication" selected="false" exported="false">
+      <Item id="ed1532cdc8b640d3a3e9e0a517f6e210" title="Building%20Blocks" itemType="Folder" selected="false" exported="false">
+        <Item id="db6e44a85bff4072823498aed7ddfae9" title="Framework" itemType="Folder" selected="false" exported="false">
+          <Item id="576769e8fd9244f98c84945e25648e5f" title="Developer" itemType="Folder" selected="false" exported="false">
+            <Item id="a54d0e68b11b416b9fbd4e86ef5efe1c" title="Schemas" itemType="Folder" selected="false" exported="false">
+              <Item id="tcm:2-205-8" title="Component%20Template%20Metadata" extension="xsd" itemType="Schema" subtype="3" blueprintStatus="LocalItem" selected="false" exported="true" />
+              <Item id="6f8f59448fdd49898d48e2c92a7d50d5" title="Module%20Configuration" extension="xsd" itemType="Schema" selected="false" exported="false" />
+            </Item>
+            <Item id="d113465330134ee29a9ea028f36c03dd" title="Templates" itemType="Folder" selected="false" exported="false">
+              <Item id="2b66106f01a04b25aec6ce1d338a5041" title="Sdl%2EWeb%2ETridion%2ETemplates" itemType="Folder" selected="false" exported="false">
+                <Item id="04d21796fa96435b8a0dac174426280e" title="Default%20Component%20Template%20Finish%20Actions" extension="tbbcmp" itemType="TemplateBuildingBlock" selected="false" exported="false" />
+                <Item id="8739205e7c3a41c2bff902cf54345fc9" title="Render%20Component%20Content" extension="tbbcmp" itemType="TemplateBuildingBlock" selected="false" exported="false" />
+              </Item>
+            </Item>
+          </Item>
+        </Item>
+        <Item id="7562f1653d5f4cf38bc916d86a53cc30" title="Modules" itemType="Folder" selected="false" exported="false">
+          <Item id="tcm:2-1245-2" title="GoogleAnalytics" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+            <Item id="tcm:2-1251-2" title="Admin" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+              <Item id="tcm:2-3299" title="Google%20Analytics" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+            </Item>
+            <Item id="tcm:2-1246-2" title="Site%20Manager" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+              <Item id="tcm:2-1248-2" title="Schemas" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+                <Item id="tcm:2-3296-8" title="Google%20Analytics%20Configuration" extension="xsd" itemType="Schema" blueprintStatus="LocalItem" selected="true" exported="true" />
+              </Item>
+              <Item id="tcm:2-1247-2" title="Templates" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+                <Item id="tcm:2-3297-32" title="Google%20Analytics%20%5BLinks%5D" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="LocalItem" selected="true" exported="true" />
+              </Item>
+            </Item>
+          </Item>
+        </Item>
+        <Item id="af3fce61c9334444ad2eadf750edc3f1" title="Settings" itemType="Folder" selected="false" exported="false">
+          <Item id="tcm:2-1249-2" title="GoogleAnalytics" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+            <Item id="tcm:2-1250-2" title="Site%20Manager" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+              <Item id="tcm:2-3298" title="Google%20Analytics%20Configuration" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+            </Item>
+          </Item>
+        </Item>
+      </Item>
+    </Item>
+  </Item>
+</Index>

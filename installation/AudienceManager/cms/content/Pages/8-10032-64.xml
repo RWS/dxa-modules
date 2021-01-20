@@ -1,0 +1,27 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Login</tcm:Title>
+      <tcm:FileName>login</tcm:FileName>
+      <tcm:PageTemplate IsInherited="false" xlink:type="simple" xlink:title="Content Page Without Navigation" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules/Core/Editor/Templates/Content%20Page%20Without%20Navigation.tptcmp" />
+      <tcm:ComponentPresentations>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="Login Form" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules%20Content/AudienceManager/Login%20Form.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Login Form" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules/AudienceManager/Site%20Manager/Templates/Login%20Form.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+      </tcm:ComponentPresentations>
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:Metadata />
+      <tcm:RegionSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:Regions />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/400%20Example%20Site" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemStructureGroup" itemUrl="/webdav/400%20Example%20Site/Home" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules%20Content/AudienceManager/Login%20Form.xml" linkName="ComponentPresentations[0]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules/AudienceManager/Site%20Manager/Templates/Login%20Form.tctcmp" linkName="ComponentPresentations[0]/ComponentTemplate" />
+    <Dependency dependencyType="PageTemplate" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules/Core/Editor/Templates/Content%20Page%20Without%20Navigation.tptcmp" linkName="PageTemplate" />
+  </Dependencies>
+</PackageItem>
