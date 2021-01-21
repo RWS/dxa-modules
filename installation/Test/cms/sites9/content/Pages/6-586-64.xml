@@ -1,0 +1,148 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Context Expression Smoke Test</tcm:Title>
+      <tcm:FileName>context-expression-smoke-test</tcm:FileName>
+      <tcm:PageTemplate IsInherited="true" xlink:type="simple" xlink:title="Content Page Without Navigation" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Content%20Page%20Without%20Navigation.tptcmp" />
+      <tcm:ComponentPresentations>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="Context Expression Smoke Test - Description" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Smoke/ContextExpression/Context%20Expression%20Smoke%20Test%20-%20Description.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Article" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Article.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="test-include-for-mobile" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Smoke/ContextExpression/test-include-for-mobile.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Article" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Article.tctcmp" />
+          <tcm:Conditions>
+            <tcm:Condition Negate="false">
+              <tcm:TargetGroup xlink:type="simple" xlink:title="cx.isMobile" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/cx%2EisMobile.ttg" />
+            </tcm:Condition>
+          </tcm:Conditions>
+        </tcm:ComponentPresentation>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="test-include-for-android" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Smoke/ContextExpression/test-include-for-android.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Article" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Article.tctcmp" />
+          <tcm:Conditions>
+            <tcm:Condition Negate="false">
+              <tcm:TargetGroup xlink:type="simple" xlink:title="cx.isAndroid" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/cx%2EisAndroid.ttg" />
+            </tcm:Condition>
+          </tcm:Conditions>
+        </tcm:ComponentPresentation>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="test-exclude-for-mobile" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Smoke/ContextExpression/test-exclude-for-mobile.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Article" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Article.tctcmp" />
+          <tcm:Conditions>
+            <tcm:Condition Negate="true">
+              <tcm:TargetGroup xlink:type="simple" xlink:title="cx.isMobile" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/cx%2EisMobile.ttg" />
+            </tcm:Condition>
+          </tcm:Conditions>
+        </tcm:ComponentPresentation>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="test-exclude-for-android" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Smoke/ContextExpression/test-exclude-for-android.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Article" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Article.tctcmp" />
+          <tcm:Conditions>
+            <tcm:Condition Negate="true">
+              <tcm:TargetGroup xlink:type="simple" xlink:title="cx.isAndroid" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/cx%2EisAndroid.ttg" />
+            </tcm:Condition>
+          </tcm:Conditions>
+        </tcm:ComponentPresentation>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="test-include-for-mobile-and-apple" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Smoke/ContextExpression/test-include-for-mobile-and-apple.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Article" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Article.tctcmp" />
+          <tcm:Conditions>
+            <tcm:Condition Negate="false">
+              <tcm:TargetGroup xlink:type="simple" xlink:title="cx.isMobile" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/cx%2EisMobile.ttg" />
+            </tcm:Condition>
+            <tcm:Condition Negate="false">
+              <tcm:TargetGroup xlink:type="simple" xlink:title="cx.isApple" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/cx%2EisApple.ttg" />
+            </tcm:Condition>
+          </tcm:Conditions>
+        </tcm:ComponentPresentation>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="test-include-for-mobile-and-android" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Smoke/ContextExpression/test-include-for-mobile-and-android.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Article" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Article.tctcmp" />
+          <tcm:Conditions>
+            <tcm:Condition Negate="false">
+              <tcm:TargetGroup xlink:type="simple" xlink:title="cx.isMobile" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/cx%2EisMobile.ttg" />
+            </tcm:Condition>
+            <tcm:Condition Negate="false">
+              <tcm:TargetGroup xlink:type="simple" xlink:title="cx.isAndroid" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/cx%2EisAndroid.ttg" />
+            </tcm:Condition>
+          </tcm:Conditions>
+        </tcm:ComponentPresentation>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="test-include-for-mobile-not-apple" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Smoke/ContextExpression/test-include-for-mobile-not-apple.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Article" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Article.tctcmp" />
+          <tcm:Conditions>
+            <tcm:Condition Negate="false">
+              <tcm:TargetGroup xlink:type="simple" xlink:title="cx.isMobile" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/cx%2EisMobile.ttg" />
+            </tcm:Condition>
+            <tcm:Condition Negate="true">
+              <tcm:TargetGroup xlink:type="simple" xlink:title="cx.isApple" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/cx%2EisApple.ttg" />
+            </tcm:Condition>
+          </tcm:Conditions>
+        </tcm:ComponentPresentation>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="test-include-for-mobile-not-android" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Smoke/ContextExpression/test-include-for-mobile-not-android.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Article" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Article.tctcmp" />
+          <tcm:Conditions>
+            <tcm:Condition Negate="false">
+              <tcm:TargetGroup xlink:type="simple" xlink:title="cx.isMobile" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/cx%2EisMobile.ttg" />
+            </tcm:Condition>
+            <tcm:Condition Negate="true">
+              <tcm:TargetGroup xlink:type="simple" xlink:title="cx.isAndroid" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/cx%2EisAndroid.ttg" />
+            </tcm:Condition>
+          </tcm:Conditions>
+        </tcm:ComponentPresentation>
+      </tcm:ComponentPresentations>
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:Metadata />
+      <tcm:RegionSchema xlink:type="simple" xlink:title="Content Page" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Schemas/Page%20Schemas/Content%20Page.xsd" />
+      <tcm:Regions>
+        <tcm:Region Type="EmbeddedRegionData">
+          <tcm:RegionName>Main</tcm:RegionName>
+          <tcm:RegionSchema xlink:type="simple" xlink:title="[Main] Region" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Schemas/Region%20Schemas/%5BMain%5D%20Region.xsd" />
+          <tcm:Metadata />
+          <tcm:ComponentPresentations />
+          <tcm:Regions />
+        </tcm:Region>
+      </tcm:Regions>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemStructureGroup" itemUrl="/webdav/401%20Automated%20Test%20Parent/Home/Smoke" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Smoke/ContextExpression/Context%20Expression%20Smoke%20Test%20-%20Description.xml" linkName="ComponentPresentations[0]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Smoke/ContextExpression/test-include-for-mobile.xml" linkName="ComponentPresentations[1]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Smoke/ContextExpression/test-include-for-android.xml" linkName="ComponentPresentations[2]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Smoke/ContextExpression/test-exclude-for-mobile.xml" linkName="ComponentPresentations[3]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Smoke/ContextExpression/test-exclude-for-android.xml" linkName="ComponentPresentations[4]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Smoke/ContextExpression/test-include-for-mobile-and-apple.xml" linkName="ComponentPresentations[5]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Smoke/ContextExpression/test-include-for-mobile-and-android.xml" linkName="ComponentPresentations[6]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Smoke/ContextExpression/test-include-for-mobile-not-apple.xml" linkName="ComponentPresentations[7]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Smoke/ContextExpression/test-include-for-mobile-not-android.xml" linkName="ComponentPresentations[8]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Article.tctcmp" linkName="ComponentPresentations[0]/ComponentTemplate" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Article.tctcmp" linkName="ComponentPresentations[1]/ComponentTemplate" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Article.tctcmp" linkName="ComponentPresentations[2]/ComponentTemplate" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Article.tctcmp" linkName="ComponentPresentations[3]/ComponentTemplate" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Article.tctcmp" linkName="ComponentPresentations[4]/ComponentTemplate" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Article.tctcmp" linkName="ComponentPresentations[5]/ComponentTemplate" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Article.tctcmp" linkName="ComponentPresentations[6]/ComponentTemplate" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Article.tctcmp" linkName="ComponentPresentations[7]/ComponentTemplate" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Article.tctcmp" linkName="ComponentPresentations[8]/ComponentTemplate" />
+    <Dependency dependencyType="ComponentPresentationTargetGroup" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/cx%2EisMobile.ttg" linkName="ComponentPresentations[1]/Conditions[0]/TargetGroup" />
+    <Dependency dependencyType="ComponentPresentationTargetGroup" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/cx%2EisAndroid.ttg" linkName="ComponentPresentations[2]/Conditions[0]/TargetGroup" />
+    <Dependency dependencyType="ComponentPresentationTargetGroup" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/cx%2EisMobile.ttg" linkName="ComponentPresentations[3]/Conditions[0]/TargetGroup" />
+    <Dependency dependencyType="ComponentPresentationTargetGroup" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/cx%2EisAndroid.ttg" linkName="ComponentPresentations[4]/Conditions[0]/TargetGroup" />
+    <Dependency dependencyType="ComponentPresentationTargetGroup" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/cx%2EisMobile.ttg" linkName="ComponentPresentations[5]/Conditions[0]/TargetGroup" />
+    <Dependency dependencyType="ComponentPresentationTargetGroup" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/cx%2EisApple.ttg" linkName="ComponentPresentations[5]/Conditions[1]/TargetGroup" />
+    <Dependency dependencyType="ComponentPresentationTargetGroup" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/cx%2EisMobile.ttg" linkName="ComponentPresentations[6]/Conditions[0]/TargetGroup" />
+    <Dependency dependencyType="ComponentPresentationTargetGroup" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/cx%2EisAndroid.ttg" linkName="ComponentPresentations[6]/Conditions[1]/TargetGroup" />
+    <Dependency dependencyType="ComponentPresentationTargetGroup" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/cx%2EisMobile.ttg" linkName="ComponentPresentations[7]/Conditions[0]/TargetGroup" />
+    <Dependency dependencyType="ComponentPresentationTargetGroup" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/cx%2EisApple.ttg" linkName="ComponentPresentations[7]/Conditions[1]/TargetGroup" />
+    <Dependency dependencyType="ComponentPresentationTargetGroup" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/cx%2EisMobile.ttg" linkName="ComponentPresentations[8]/Conditions[0]/TargetGroup" />
+    <Dependency dependencyType="ComponentPresentationTargetGroup" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/cx%2EisAndroid.ttg" linkName="ComponentPresentations[8]/Conditions[1]/TargetGroup" />
+    <Dependency dependencyType="PageRegionSchema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Schemas/Page%20Schemas/Content%20Page.xsd" linkName="RegionSchema" />
+    <Dependency dependencyType="PageRegionSchema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Schemas/Region%20Schemas/%5BMain%5D%20Region.xsd" linkName="Regions[0]/RegionSchema" />
+  </Dependencies>
+</PackageItem>

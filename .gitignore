@@ -6,3 +6,4 @@ packages/
 .idea/
 *.iml
 .vs/
+dist/

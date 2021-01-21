@@ -1,0 +1,28 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>External Redirect</tcm:Title>
+      <tcm:FileName>external</tcm:FileName>
+      <tcm:PageTemplate IsInherited="true" xlink:type="simple" xlink:title="Redirect Page" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Templates/Redirect%20Page.tptcmp" />
+      <tcm:ComponentPresentations />
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="Redirect Page Metadata" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Schemas/Metadata/Redirect%20Page%20Metadata.xsd" />
+      <tcm:Metadata>
+        <Metadata xmlns="uuid:320362bd-6ca2-4561-bc46-f1458d6894ae">
+          <redirect>
+            <linkText>This is external redirect link</linkText>
+            <externalLink xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://github.com/sdl/dxa-modules" />
+            <alternateText>This is external redirect link</alternateText>
+          </redirect>
+        </Metadata>
+      </tcm:Metadata>
+      <tcm:RegionSchema xlink:type="simple" xlink:title="Redirect Page" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Schemas/Page%20Schemas/Redirect%20Page.xsd" />
+      <tcm:Regions />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemStructureGroup" itemUrl="/webdav/401%20Automated%20Test%20Parent/Home/Regression/Redirects" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="MetadataSchema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Schemas/Metadata/Redirect%20Page%20Metadata.xsd" linkName="MetadataSchema" />
+    <Dependency dependencyType="PageRegionSchema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Schemas/Page%20Schemas/Redirect%20Page.xsd" linkName="RegionSchema" />
+  </Dependencies>
+</PackageItem>

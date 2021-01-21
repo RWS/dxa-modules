@@ -1,0 +1,34 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>keyword_model_data_test</tcm:Title>
+      <tcm:FileName>keyword_model_data_test</tcm:FileName>
+      <tcm:PageTemplate IsInherited="false" xlink:type="simple" xlink:title="Fishing Product" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/SRQ9128/templates/Fishing%20Product.tptcmp" />
+      <tcm:ComponentPresentations>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="Avid Carp ACR 12000 REEL" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/SRQ9128/components/Avid%20Carp%20ACR%2012000%20REEL.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Fishing Reel Template" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/SRQ9128/templates/Fishing%20Reel%20Template.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="Traction Carp Rod 12' 3.0lb" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/SRQ9128/components/Traction%20Carp%20Rod%2012%27%203%2E0lb.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="Fishing Rod Template" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/SRQ9128/templates/Fishing%20Rod%20Template.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+      </tcm:ComponentPresentations>
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:Metadata />
+      <tcm:RegionSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:Regions />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemStructureGroup" itemUrl="/webdav/401%20Automated%20Test%20Parent/Home" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/SRQ9128/components/Avid%20Carp%20ACR%2012000%20REEL.xml" linkName="ComponentPresentations[0]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/SRQ9128/components/Traction%20Carp%20Rod%2012%27%203%2E0lb.xml" linkName="ComponentPresentations[1]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/SRQ9128/templates/Fishing%20Reel%20Template.tctcmp" linkName="ComponentPresentations[0]/ComponentTemplate" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/SRQ9128/templates/Fishing%20Rod%20Template.tctcmp" linkName="ComponentPresentations[1]/ComponentTemplate" />
+    <Dependency dependencyType="PageTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/SRQ9128/templates/Fishing%20Product.tptcmp" linkName="PageTemplate" />
+  </Dependencies>
+</PackageItem>

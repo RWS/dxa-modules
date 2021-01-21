@@ -1,0 +1,26 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>JSON</tcm:Title>
+      <tcm:Type>CompoundTemplate</tcm:Type>
+      <tcm:Content>
+        <tcm:PublisherScript>&lt;CompoundTemplate xmlns="http://www.tridion.com/ContentManager/5.3/CompoundTemplate"&gt;
+  &lt;TemplateInvocation&gt;
+    &lt;Template xlink:href="/webdav/100%20Master/Building%20Blocks/Framework/Developer/Templates/DXA%2ER2/Render%20Component%20Presentations.tbbcs" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:title="Render Component Presentations" /&gt;
+    &lt;TemplateParameters /&gt;
+  &lt;/TemplateInvocation&gt;
+&lt;/CompoundTemplate&gt;</tcm:PublisherScript>
+      </tcm:Content>
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:ParameterSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:Metadata />
+      <tcm:FileExtension>json</tcm:FileExtension>
+      <tcm:PageSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/100%20Master" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/100%20Master/Building%20Blocks/Framework/Developer/Templates" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="TemplateLinkedItem" itemUrl="/webdav/100%20Master/Building%20Blocks/Framework/Developer/Templates/DXA%2ER2/Render%20Component%20Presentations.tbbcs" linkName="ExtractedReferences[0]" />
+  </Dependencies>
+</PackageItem>

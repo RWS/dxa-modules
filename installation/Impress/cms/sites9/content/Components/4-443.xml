@@ -1,0 +1,29 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Step 02</tcm:Title>
+      <tcm:Type>Normal</tcm:Type>
+      <tcm:Schema xlink:type="simple" xlink:title="Slide" xlink:href="/webdav/200%20Example%20Content/Building%20Blocks/Modules/Impress/Editor/Schemas/Slide.xsd" IsMandatory="false" />
+      <tcm:Content>
+        <Slide xmlns="http://www.sdl.com/web/schemas/impress">
+          <content>Don't you think that presentations given <strong xmlns="http://www.w3.org/1999/xhtml">in modern browsers</strong> shouldn't <strong xmlns="http://www.w3.org/1999/xhtml">copy the limits</strong> of 'classic' slide decks?</content>
+        </Slide>
+      </tcm:Content>
+      <tcm:Metadata>
+        <Metadata xmlns="http://www.sdl.com/web/schemas/impress">
+          <xCoordinate>0</xCoordinate>
+          <yCoordinate>-1500</yCoordinate>
+          <bgImage xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/200%20Example%20Content/Building%20Blocks/Modules%20Content/Impress/Modular.png" xlink:title="Modular" />
+        </Metadata>
+      </tcm:Metadata>
+      <tcm:IsBasedOnTridionWebSchema>true</tcm:IsBasedOnTridionWebSchema>
+      <tcm:MultimediaType xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/200%20Example%20Content" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/200%20Example%20Content/Building%20Blocks/Modules%20Content/Impress" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/200%20Example%20Content/Building%20Blocks/Modules%20Content/Impress/Modular.png" linkName="Metadata" xpath="*[local-name() = 'Metadata'][1]/*[local-name() = 'bgImage'][1]/@xlink:href" />
+    <Dependency dependencyType="Schema" itemUrl="/webdav/200%20Example%20Content/Building%20Blocks/Modules/Impress/Editor/Schemas/Slide.xsd" linkName="Schema" />
+  </Dependencies>
+</PackageItem>

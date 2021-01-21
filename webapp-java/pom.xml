@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.sdl.dxa</groupId>
         <artifactId>dxa-oss-parent</artifactId>
-        <version>2.2.6</version>
+        <version>2.2.11</version>
         <relativePath></relativePath>
     </parent>
 
@@ -50,7 +50,7 @@
             <dependency>
                 <groupId>com.sdl.tridion.xo</groupId>
                 <artifactId>xo-compatible-client</artifactId>
-                <version>${cd-cil.version}</version>
+                <version>11.0.0-1072</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -1,0 +1,24 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <BinaryFileLocation>Binaries\2-114-2048.tbbasm</BinaryFileLocation>
+  <Data>
+    <tcm:Data>
+      <tcm:Title>DD4T.Templates.Merged</tcm:Title>
+      <tcm:Type>AssemblyTemplate</tcm:Type>
+      <tcm:Content>
+        <tcm:PublisherScript />
+      </tcm:Content>
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:ParameterSchema xlink:type="simple" xlink:title="Generate dynamic page" xlink:href="/webdav/100%20Master/Building%20Blocks/Framework/Developer/Templates/DXA%2ELegacy/Generate%20dynamic%20page.xsd" />
+      <tcm:Metadata />
+      <tcm:MultimediaFilename>DD4T.Templates.merged.dll</tcm:MultimediaFilename>
+      <tcm:MultimediaFileSize>791040</tcm:MultimediaFileSize>
+      <tcm:IsExternalMultimediaFile>false</tcm:IsExternalMultimediaFile>
+      <tcm:TemplatePurpose>Rendering</tcm:TemplatePurpose>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/100%20Master" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/100%20Master/Building%20Blocks/Framework/Developer/Templates/DXA%2ELegacy" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="ParameterSchema" itemUrl="/webdav/100%20Master/Building%20Blocks/Framework/Developer/Templates/DXA%2ELegacy/Generate%20dynamic%20page.xsd" linkName="ParameterSchema" />
+  </Dependencies>
+</PackageItem>

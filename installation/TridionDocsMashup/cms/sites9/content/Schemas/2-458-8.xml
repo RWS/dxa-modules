@@ -1,0 +1,115 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+      <tcm:Title>Bicycle</tcm:Title>
+      <tcm:Description>Bicycle Schema</tcm:Description>
+      <tcm:Purpose>Component</tcm:Purpose>
+      <tcm:NamespaceURI>http://www.sdl.com/web/schemas/tridiondocsmashup</tcm:NamespaceURI>
+      <tcm:RootElementName>Bicycle</tcm:RootElementName>
+      <tcm:IsTridionWebSchema>true</tcm:IsTridionWebSchema>
+      <tcm:XSD>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sdl.com/web/schemas/tridiondocsmashup" xmlns:tcmi="http://www.tridion.com/ContentManager/5.0/Instance" xmlns:category="tcm:0-2-1/Categories.xsd" elementFormDefault="qualified" targetNamespace="http://www.sdl.com/web/schemas/tridiondocsmashup">
+  <xsd:import namespace="http://www.tridion.com/ContentManager/5.0/Instance" schemaLocation="/webdav/cm_xml_inst.xsd" />
+  <xsd:import namespace="tcm:0-2-1/Categories.xsd" schemaLocation="/webdav/100%20Master/Categories.xsd" />
+  <xsd:annotation>
+    <xsd:appinfo>
+      <tcm:Labels xmlns:tcm="http://www.tridion.com/ContentManager/5.0">
+        <tcm:Label ElementName="Title" Metadata="false">Title</tcm:Label>
+        <tcm:Label ElementName="Body" Metadata="false">Body</tcm:Label>
+        <tcm:Label ElementName="Image" Metadata="false">Image</tcm:Label>
+        <tcm:Label ElementName="Publication.FMBPRODUCTFAMILYNAME.Logical" Metadata="false">Product Family Name</tcm:Label>
+        <tcm:Label ElementName="Publication.FMBPRODUCTRELEASENAME.Version" Metadata="false">Product Release Name</tcm:Label>
+      </tcm:Labels>
+    </xsd:appinfo>
+  </xsd:annotation>
+  <xsd:element name="Bicycle">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Title" minOccurs="1" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <tcm:ExtensionXml xmlns:tcm="http://www.tridion.com/ContentManager/5.0" />
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Body" minOccurs="1" maxOccurs="1" type="tcmi:XHTML">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <tcm:ExtensionXml xmlns:tcm="http://www.tridion.com/ContentManager/5.0" />
+              <tcm:Size xmlns:tcm="http://www.tridion.com/ContentManager/5.0">10</tcm:Size>
+              <tcm:FilterXSLT xmlns:tcm="http://www.tridion.com/ContentManager/5.0">
+                <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="" version="1.0">
+                  <xsl:output omit-xml-declaration="yes" method="xml" cdata-section-elements="script" />
+                  <xsl:template name="FormattingFeatures">
+                    <FormattingFeatures xmlns="http://www.tridion.com/ContentManager/5.2/FormatArea">
+                      <Doctype>Transitional</Doctype>
+                      <AccessibilityLevel>0</AccessibilityLevel>
+                      <DisallowedActions />
+                      <DisallowedStyles />
+                    </FormattingFeatures>
+                  </xsl:template>
+                  <xsl:template match="/ | node() | @*">
+                    <xsl:copy>
+                      <xsl:apply-templates select="node() | @*" />
+                    </xsl:copy>
+                  </xsl:template>
+                  <xsl:template match="*[      (self::br or self::p or self::div)     and      normalize-space(translate(., ' ', '')) = ''     and      not(@*)     and      not(processing-instruction())     and      not(comment())     and      not(*[not(self::br) or @* or * or node()])     and      not(following::node()[not(         (self::text() or self::br or self::p or self::div)        and         normalize-space(translate(., ' ', '')) = ''        and         not(@*)        and         not(processing-instruction())        and         not(comment())        and         not(*[not(self::br) or @* or * or node()])       )])     ]">
+                    <!-- ignore all paragraphs and line-breaks at the end that have nothing but (non-breaking) spaces and line breaks -->
+                  </xsl:template>
+                  <xsl:template match="br[parent::div and not(preceding-sibling::node()) and not(following-sibling::node())]">
+                    <!-- Chrome generates <div><br/></div>. Renders differently in different browsers. Replace it with a non-breaking space -->
+                    <xsl:text> </xsl:text>
+                  </xsl:template>
+                </xsl:stylesheet>
+              </tcm:FilterXSLT>
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Image" minOccurs="1" maxOccurs="1" type="tcmi:SimpleLink">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <tcm:ExtensionXml xmlns:tcm="http://www.tridion.com/ContentManager/5.0" />
+              <tcm:linktype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">MultimediaLink</tcm:linktype>
+              <tcm:AllowedTargetSchemas xmlns:tcm="http://www.tridion.com/ContentManager/5.0">
+                <tcm:TargetSchema xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/100%20Master/Building%20Blocks/Modules/Core/Editor/Schemas/Image.xsd" xlink:title="Image" />
+              </tcm:AllowedTargetSchemas>
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Publication.FMBPRODUCTFAMILYNAME.Logical" minOccurs="1" maxOccurs="1" type="category:DXPRODUCTFAMILYNAME">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <tcm:ExtensionXml xmlns:tcm="http://www.tridion.com/ContentManager/5.0" />
+              <tcm:Size xmlns:tcm="http://www.tridion.com/ContentManager/5.0">1</tcm:Size>
+              <tcm:listtype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">select</tcm:listtype>
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Publication.FMBPRODUCTRELEASENAME.Version" minOccurs="1" maxOccurs="1" type="category:DXPRODUCTRELEASENAME">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <tcm:ExtensionXml xmlns:tcm="http://www.tridion.com/ContentManager/5.0" />
+              <tcm:Size xmlns:tcm="http://www.tridion.com/ContentManager/5.0">1</tcm:Size>
+              <tcm:listtype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">select</tcm:listtype>
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>
+      </tcm:XSD>
+      <tcm:AllowedMultimediaTypes />
+      <tcm:ComponentProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:BundleProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:DeleteBundleOnProcessFinished>false</tcm:DeleteBundleOnProcessFinished>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/100%20Master" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="Category" itemUrl="/webdav/100%20Master/Product%20Family%20Name" linkName="Xsd" />
+    <Dependency dependencyType="Category" itemUrl="/webdav/100%20Master/Product%20Release%20Name" linkName="Xsd" />
+    <Dependency dependencyType="SchemaAllowedSchema" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/Core/Editor/Schemas/Image.xsd" linkName="Xsd" xpath="xsd:schema[1]/xsd:element[1]/xsd:complexType[1]/xsd:sequence[1]/xsd:element[3]/xsd:annotation[1]/xsd:appinfo[1]/tcm:AllowedTargetSchemas[1]/tcm:TargetSchema[1]/@xlink:href" />
+  </Dependencies>
+</PackageItem>

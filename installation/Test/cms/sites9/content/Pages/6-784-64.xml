@@ -1,0 +1,40 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>TSI-1308 Test Page</tcm:Title>
+      <tcm:FileName>tsi-1308</tcm:FileName>
+      <tcm:PageTemplate IsInherited="true" xlink:type="simple" xlink:title="Simple Test Page View [Test:SimpleTestPage]" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/Simple%20Test%20Page%20View%20%5BTest%3ASimpleTestPage%5D.tptcmp" />
+      <tcm:ComponentPresentations />
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="TSI-1308 Page Metadata Schema" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/TSI-1308%20Page%20Metadata%20Schema.xsd" />
+      <tcm:Metadata>
+        <Metadata xmlns="uuid:68824974-48ba-48ec-809b-412cc85ee092">
+          <singleLineText>This is single line text</singleLineText>
+          <multiLineText>This is multi line text line 1
+And line 2
+</multiLineText>
+          <richText>This is <strong xmlns="http://www.w3.org/1999/xhtml">rich</strong> text with a <a xmlns="http://www.w3.org/1999/xhtml" xmlns:xlink="http://www.w3.org/1999/xlink" title="Test Article" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Test%20Article.xml" xlink:title="Test Article">Component Link</a></richText>
+          <keyword xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/401%20Automated%20Test%20Parent/Content%20Type/News%20Article.tkw" xlink:title="News Article">News Article</keyword>
+          <componentLink xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Test%20Article.xml" xlink:title="Test Article" />
+          <mmComponentLink xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Video/Company%20News%20Media%20Manager%20Video.png" xlink:title="Company News Media Manager Video" />
+          <date>1970-12-16T12:34:56</date>
+          <number>666.666</number>
+          <embedded>
+            <dateCreated>2016-11-23T13:11:40</dateCreated>
+            <author>Rick Pannekoek</author>
+          </embedded>
+        </Metadata>
+      </tcm:Metadata>
+      <tcm:RegionSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:Regions />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemStructureGroup" itemUrl="/webdav/401%20Automated%20Test%20Parent/Home/Regression" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Test%20Article.xml" linkName="Metadata" xpath="*[local-name() = 'Metadata'][1]/*[local-name() = 'richText'][1]/*[local-name() = 'a'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Test%20Article.xml" linkName="Metadata" xpath="*[local-name() = 'Metadata'][1]/*[local-name() = 'componentLink'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Video/Company%20News%20Media%20Manager%20Video.png" linkName="Metadata" xpath="*[local-name() = 'Metadata'][1]/*[local-name() = 'mmComponentLink'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedKeyword" itemUrl="/webdav/401%20Automated%20Test%20Parent/Content%20Type/News%20Article.tkw" linkName="Metadata" xpath="*[local-name() = 'Metadata'][1]/*[local-name() = 'keyword'][1]/@xlink:href" />
+    <Dependency dependencyType="MetadataSchema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/TSI-1308%20Page%20Metadata%20Schema.xsd" linkName="MetadataSchema" />
+  </Dependencies>
+</PackageItem>

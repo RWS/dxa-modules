@@ -1,0 +1,38 @@
+<Mappings xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <ItemSet role="Publication">
+    <Mapping exportTitle="100%20Master" importTitle="" />
+  </ItemSet>
+  <ItemSet role="Folder">
+    <Mapping exportContext="/100%20Master" exportTitle="Building%20Blocks" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks" exportTitle="Framework" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework" exportTitle="Developer" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Developer" exportTitle="Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Developer" exportTitle="Templates" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Developer/Templates" exportTitle="DXA%2ER2" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks" exportTitle="Modules" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules" exportTitle="GoogleAnalytics" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/GoogleAnalytics" exportTitle="Admin" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/GoogleAnalytics" exportTitle="Site%20Manager" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/GoogleAnalytics/Site%20Manager" exportTitle="Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/GoogleAnalytics/Site%20Manager" exportTitle="Templates" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks" exportTitle="Settings" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Settings" exportTitle="GoogleAnalytics" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Settings/GoogleAnalytics" exportTitle="Site%20Manager" importContext="" importTitle="" />
+  </ItemSet>
+  <ItemSet role="Schema">
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Developer/Schemas" exportTitle="Component%20Template%20Metadata.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Developer/Schemas" exportTitle="Module%20Configuration.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/GoogleAnalytics/Site%20Manager/Schemas" exportTitle="Google%20Analytics%20Configuration.xsd" importContext="" importTitle="" />
+  </ItemSet>
+  <ItemSet role="Component">
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/GoogleAnalytics/Admin" exportTitle="Google%20Analytics.xml" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Settings/GoogleAnalytics/Site%20Manager" exportTitle="Google%20Analytics%20Configuration.xml" importContext="" importTitle="" />
+  </ItemSet>
+  <ItemSet role="ComponentTemplate">
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/GoogleAnalytics/Site%20Manager/Templates" exportTitle="Google%20Analytics%20%5BLinks%5D.tctcmp" importContext="" importTitle="" />
+  </ItemSet>
+  <ItemSet role="TemplateBuildingBlock">
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Developer/Templates/DXA%2ER2" exportTitle="Default%20Component%20Template%20Finish%20Actions.tbbcmp" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Developer/Templates/DXA%2ER2" exportTitle="Render%20Component%20Content.tbbcmp" importContext="" importTitle="" />
+  </ItemSet>
+</Mappings>

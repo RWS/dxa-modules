@@ -1,0 +1,59 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>001 Red Bicycle</tcm:Title>
+      <tcm:FileName>red-bicycle-page</tcm:FileName>
+      <tcm:PageTemplate IsInherited="false" xlink:type="simple" xlink:title="Bicycle Page With Static Region" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Editor/Templates/Bicycle%20Page%20With%20Static%20Region.tptcmp" />
+      <tcm:ComponentPresentations />
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="Page Navigation Metadata" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Framework/Site%20Manager/Schemas/Page%20Navigation%20Metadata.xsd" />
+      <tcm:Metadata>
+        <Metadata xmlns="http://www.sdl.com/web/schemas/navigation">
+          <sitemapKeyword xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/400%20Example%20Site/Sitemap%20%5BNavigation%5D/030%20Products.tkw" xlink:title="030 Products">030 Products</sitemapKeyword>
+        </Metadata>
+      </tcm:Metadata>
+      <tcm:RegionSchema xlink:type="simple" xlink:title="Bicycle Page With Static Widget" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas/Page%20Schemas/Bicycle%20Page%20With%20Static%20Widget.xsd" />
+      <tcm:Regions>
+        <tcm:Region Type="EmbeddedRegionData">
+          <tcm:RegionName>Bicycle</tcm:RegionName>
+          <tcm:RegionSchema xlink:type="simple" xlink:title="[TridionDocsMashup:Bicycle] Region" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas/Region%20Schemas/%5BTridionDocsMashup%3ABicycle%5D%20Region.xsd" />
+          <tcm:Metadata />
+          <tcm:ComponentPresentations>
+            <tcm:ComponentPresentation>
+              <tcm:Component xlink:type="simple" xlink:title="Red Bicycle" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content/Products/Bicycles/Red%20Bicycle.xml" />
+              <tcm:ComponentTemplate xlink:type="simple" xlink:title="Bicycle" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Editor/Templates/Bicycle.tctcmp" />
+              <tcm:Conditions />
+            </tcm:ComponentPresentation>
+          </tcm:ComponentPresentations>
+          <tcm:Regions />
+        </tcm:Region>
+        <tcm:Region Type="EmbeddedRegionData">
+          <tcm:RegionName>Tridion Docs Related Topics</tcm:RegionName>
+          <tcm:RegionSchema xlink:type="simple" xlink:title="[TridionDocsMashup:Topics] Static Topics Region" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas/Region%20Schemas/%5BTridionDocsMashup%3ATopics%5D%20Static%20Topics%20Region.xsd" />
+          <tcm:Metadata />
+          <tcm:ComponentPresentations>
+            <tcm:ComponentPresentation>
+              <tcm:Component xlink:type="simple" xlink:title="Tridion Docs Static Widget" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content/Tridion%20Docs/Tridion%20Docs%20Static%20Widget.xml" />
+              <tcm:ComponentTemplate xlink:type="simple" xlink:title="Tridion Docs Static Widget" xlink:href="/webdav/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Editor/Templates/Tridion%20Docs%20Static%20Widget.tctcmp" />
+              <tcm:Conditions />
+            </tcm:ComponentPresentation>
+          </tcm:ComponentPresentations>
+          <tcm:Regions />
+        </tcm:Region>
+      </tcm:Regions>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/400%20Example%20Site" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemStructureGroup" itemUrl="/webdav/400%20Example%20Site/Home/030%20Products" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content/Products/Bicycles/Red%20Bicycle.xml" linkName="Regions[0]/ComponentPresentations[0]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content/Tridion%20Docs/Tridion%20Docs%20Static%20Widget.xml" linkName="Regions[1]/ComponentPresentations[0]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Editor/Templates/Bicycle.tctcmp" linkName="Regions[0]/ComponentPresentations[0]/ComponentTemplate" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Editor/Templates/Tridion%20Docs%20Static%20Widget.tctcmp" linkName="Regions[1]/ComponentPresentations[0]/ComponentTemplate" />
+    <Dependency dependencyType="LinkedKeyword" itemUrl="/webdav/400%20Example%20Site/Sitemap%20%5BNavigation%5D/030%20Products.tkw" linkName="Metadata" xpath="*[local-name() = 'Metadata'][1]/*[local-name() = 'sitemapKeyword'][1]/@xlink:href" />
+    <Dependency dependencyType="MetadataSchema" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Framework/Site%20Manager/Schemas/Page%20Navigation%20Metadata.xsd" linkName="MetadataSchema" />
+    <Dependency dependencyType="PageTemplate" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Editor/Templates/Bicycle%20Page%20With%20Static%20Region.tptcmp" linkName="PageTemplate" />
+    <Dependency dependencyType="PageRegionSchema" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas/Page%20Schemas/Bicycle%20Page%20With%20Static%20Widget.xsd" linkName="RegionSchema" />
+    <Dependency dependencyType="PageRegionSchema" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas/Region%20Schemas/%5BTridionDocsMashup%3ABicycle%5D%20Region.xsd" linkName="Regions[0]/RegionSchema" />
+    <Dependency dependencyType="PageRegionSchema" itemUrl="/webdav/400%20Example%20Site/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas/Region%20Schemas/%5BTridionDocsMashup%3ATopics%5D%20Static%20Topics%20Region.xsd" linkName="Regions[1]/RegionSchema" />
+  </Dependencies>
+</PackageItem>

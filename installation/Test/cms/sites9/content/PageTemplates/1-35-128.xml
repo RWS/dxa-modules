@@ -1,0 +1,37 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Default Page Template</tcm:Title>
+      <tcm:Type>CompoundTemplate</tcm:Type>
+      <tcm:Content>
+        <tcm:PublisherScript>&lt;CompoundTemplate xmlns="http://www.tridion.com/ContentManager/5.3/CompoundTemplate"&gt;
+  &lt;TemplateInvocation&gt;
+    &lt;Template xlink:href="/webdav/000%20Empty/Building%20Blocks/Default%20Templates/Extract%20Components%20from%20Page.tbbcs" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:title="Extract Components from Page" /&gt;
+  &lt;/TemplateInvocation&gt;
+  &lt;TemplateInvocation&gt;
+    &lt;Template xlink:href="/webdav/000%20Empty/Building%20Blocks/Default%20Templates/Extract%20Components%20from%20Regions.tbbcs" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:title="Extract Components from Regions" /&gt;
+  &lt;/TemplateInvocation&gt;
+  &lt;TemplateInvocation&gt;
+    &lt;Template xlink:href="/webdav/000%20Empty/Building%20Blocks/Default%20Templates/Default%20Dreamweaver%20Page%20Design.dwt" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:title="Default Dreamweaver Page Design" /&gt;
+  &lt;/TemplateInvocation&gt;
+  &lt;TemplateInvocation&gt;
+    &lt;Template xlink:href="/webdav/000%20Empty/Building%20Blocks/Default%20Templates/Default%20Finish%20Actions.tbbcmp" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:title="Default Finish Actions" /&gt;
+  &lt;/TemplateInvocation&gt;
+&lt;/CompoundTemplate&gt;</tcm:PublisherScript>
+      </tcm:Content>
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:ParameterSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:Metadata />
+      <tcm:FileExtension>html</tcm:FileExtension>
+      <tcm:PageSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/000%20Empty" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/000%20Empty/Building%20Blocks/Default%20Templates" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="TemplateLinkedItem" itemUrl="/webdav/000%20Empty/Building%20Blocks/Default%20Templates/Extract%20Components%20from%20Page.tbbcs" linkName="ExtractedReferences[0]" />
+    <Dependency dependencyType="TemplateLinkedItem" itemUrl="/webdav/000%20Empty/Building%20Blocks/Default%20Templates/Extract%20Components%20from%20Regions.tbbcs" linkName="ExtractedReferences[1]" />
+    <Dependency dependencyType="TemplateLinkedItem" itemUrl="/webdav/000%20Empty/Building%20Blocks/Default%20Templates/Default%20Dreamweaver%20Page%20Design.dwt" linkName="ExtractedReferences[2]" />
+    <Dependency dependencyType="TemplateLinkedItem" itemUrl="/webdav/000%20Empty/Building%20Blocks/Default%20Templates/Default%20Finish%20Actions.tbbcmp" linkName="ExtractedReferences[3]" />
+  </Dependencies>
+</PackageItem>

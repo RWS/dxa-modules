@@ -1,0 +1,12 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Name>Editor</tcm:Name>
+      <tcm:Description>Editor</tcm:Description>
+      <tcm:UsageConstraints />
+      <tcm:GroupMemberships />
+      <tcm:DirectoryGroupMappings Enabled="false" />
+      <tcm:IdentityProviderGroupMappings Enabled="false" />
+    </tcm:Data>
+  </Data>
+</PackageItem>

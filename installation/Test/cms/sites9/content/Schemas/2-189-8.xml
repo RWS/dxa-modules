@@ -1,0 +1,74 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+      <tcm:Title>Navigation Configuration</tcm:Title>
+      <tcm:Description>Navigation Configuration</tcm:Description>
+      <tcm:Purpose>Component</tcm:Purpose>
+      <tcm:NamespaceURI>http://www.sdl.com/web/schemas/core</tcm:NamespaceURI>
+      <tcm:RootElementName>NavigationConfiguration</tcm:RootElementName>
+      <tcm:IsTridionWebSchema>true</tcm:IsTridionWebSchema>
+      <tcm:XSD>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sdl.com/web/schemas/core" xmlns:tcmi="http://www.tridion.com/ContentManager/5.0/Instance" xmlns:category="tcm:0-2-1/Categories.xsd" elementFormDefault="qualified" targetNamespace="http://www.sdl.com/web/schemas/core">
+  <xsd:import namespace="http://www.tridion.com/ContentManager/5.0/Instance" schemaLocation="/webdav/cm_xml_inst.xsd" />
+  <xsd:import namespace="tcm:0-2-1/Categories.xsd" schemaLocation="/webdav/100%20Master/Categories.xsd" />
+  <xsd:annotation>
+    <xsd:appinfo>
+      <tcm:Labels xmlns:tcm="http://www.tridion.com/ContentManager/5.0">
+        <tcm:Label ElementName="navigationType" Metadata="true">Type of Navigation</tcm:Label>
+        <tcm:Label ElementName="externalLinkTemplate" Metadata="true">Page Template used for external links (leave blank if external links not required in navigation)</tcm:Label>
+        <tcm:Label ElementName="navigationTextFieldPaths" Metadata="true">Navigation Text Field Paths (comma separated list of field names to examine components for navigation text when using LOCALIZABLE nav type)</tcm:Label>
+      </tcm:Labels>
+    </xsd:appinfo>
+  </xsd:annotation>
+  <xsd:element name="NavigationConfiguration">
+    <xsd:complexType>
+      <xsd:sequence />
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Metadata">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="navigationType" minOccurs="1" maxOccurs="1" type="category:NavigationType">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+              <tcm:DefaultSimpleLinkValue xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/100%20Master/Navigation%20Type/Simple%20-%20Based%20on%20Page%20and%20Structure%20Group%20titles.tkw" xlink:title="Simple - Based on Page and Structure Group titles" />
+              <tcm:Size xmlns:tcm="http://www.tridion.com/ContentManager/5.0">1</tcm:Size>
+              <tcm:listtype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">radio</tcm:listtype>
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="externalLinkTemplate" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+              <tcm:DefaultTextValue xmlns:tcm="http://www.tridion.com/ContentManager/5.0">Redirect Page</tcm:DefaultTextValue>
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="navigationTextFieldPaths" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+              <tcm:DefaultTextValue xmlns:tcm="http://www.tridion.com/ContentManager/5.0">standardMeta/name, headline</tcm:DefaultTextValue>
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>
+      </tcm:XSD>
+      <tcm:AllowedMultimediaTypes />
+      <tcm:ComponentProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:BundleProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:DeleteBundleOnProcessFinished>false</tcm:DeleteBundleOnProcessFinished>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/100%20Master" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/Core/Site%20Manager/Schemas" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="Category" itemUrl="/webdav/100%20Master/Navigation%20Type" linkName="Xsd" />
+    <Dependency dependencyType="DefaultKeyword" itemUrl="/webdav/100%20Master/Navigation%20Type/Simple%20-%20Based%20on%20Page%20and%20Structure%20Group%20titles.tkw" linkName="Xsd" xpath="xsd:schema[1]/xsd:element[2]/xsd:complexType[1]/xsd:sequence[1]/xsd:element[1]/xsd:annotation[1]/xsd:appinfo[1]/tcm:DefaultSimpleLinkValue[1]/@xlink:href" />
+  </Dependencies>
+</PackageItem>

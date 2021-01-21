@@ -1,0 +1,37 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Flash file</tcm:Title>
+      <tcm:MIMEType>application/x-shockwave-flash</tcm:MIMEType>
+      <tcm:FileExtensions>
+        <tcm:FileExtension>swf</tcm:FileExtension>
+      </tcm:FileExtensions>
+    </tcm:Data>
+  </Data>
+  <ApplicationDataCollection>
+    <ApplicationData>
+      <ApplicationId>cme:MMType:16</ApplicationId>
+      <TypeId>image/png</TypeId>
+      <BinaryData>iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAIZJREFUeNpiZAACK49wBSB1n4EwWHBsx8pErDJAQ/7jAyB5KJ6PrI+JgXSQgGwIOQaADSHZC+jeodQF1AOMyM4hB6B44ej2FWAMY6PLoasBARZkBdaeEUTZiqwOpwvQbcYlxoRsKjkuYEE3FSYJomHewuc9imOB8nSAnJRJ0QjM1mC9AAEGAESbgyHaF/6uAAAAAElFTkSuQmCC</BinaryData>
+      <IsInherited>false</IsInherited>
+    </ApplicationData>
+    <ApplicationData>
+      <ApplicationId>cme:MMType:16:LastModified</ApplicationId>
+      <TypeId>DateTime</TypeId>
+      <BinaryData>MjAxOS0wNy0xNVQwMDo1Mzo1Mw==</BinaryData>
+      <IsInherited>false</IsInherited>
+    </ApplicationData>
+    <ApplicationData>
+      <ApplicationId>cme:MMType:48</ApplicationId>
+      <TypeId>image/png</TypeId>
+      <BinaryData>iVBORw0KGgoAAAANSUhEUgAAACQAAAAvCAYAAACLx2hbAAAACXBIWXMAAAsSAAALEgHS3X78AAACp0lEQVRYw2O08gi/wMDAoM9AH7Dw6PYVCfgUMFp5hP/n5+O9aKyv/YFWrjh78arAx0+f9YlxFAsDAwODsb72h+aqAntaOai2bcLBfYdPwLjx1p4RDLgcxcQwMCDe2jNiwWByEE5HDaSDsDpqoB2E4SiqO+jl208Ml249Zrh06zHDy7efSHYUC7UcsnTrcYbdx68yvHqHcERhnDuDq7A2KY6ijoP6Fu1g2HPiGoa4nqosydFHsYPuPXmN4RgxIT4GcWEIZmBgYHB3shVgYGA4SEzhSbGDdh+/Cmdzc7IzFMW5M1jqq6CosbEw1rexMCaq8KQ4UV++/RjOttRXxnAMqYCJGlEGA7pqshSnR4ocdOnWY0oTMfbKlVTgldWHVTyxdg48US9oSaFPCBFT2MFyF50c9JGgGj0K0hLJUaanJsuwbVoRRtTVpvtRnMMoStTIuYuBgYFBSUaMKlUQEzVyGKxkHlAH3XvyCil0RKnWWqBKlOlRoUCkyEFfv/9EcdCAh9Ddx6+ols2pUlIzMDAwRHtbwmt4agKyHKSnJkvVUMFw0K27DxSsPSMGtKUvIyWhMFh6HYOqX0ZaGkqOCWFIig5BEbP2jICLo0czsjg2vQwMDAzzlq5hmLtkDekOSo4JYfj85RvDvKVrKPIxuv5zl66RF0JJ0SEEfUMMIFU/3jSUFB3CcHT7CgZC0UpIDVXSEHJQJ8eEkO1jUvWyEBPUyCFAqoOQEzZFDsKVs0gFpBa4LMQENQMDA0qOg+SUNSg5kVq5koWYoEYvP85fusZw/tI1hqPbV8DFkdmUAEYrj/D/MlISD588eyE/wHXZwyfPXsiP1mVEpSE1ZYUHK+dOGNAoq22b8ODJsxfydBnJJwbABqwY6TzXQQhcZFSSUzAebGno+WByEADjthMDCWyx0gAAAABJRU5ErkJggg==</BinaryData>
+      <IsInherited>false</IsInherited>
+    </ApplicationData>
+    <ApplicationData>
+      <ApplicationId>cme:MMType:48:LastModified</ApplicationId>
+      <TypeId>DateTime</TypeId>
+      <BinaryData>MjAxOS0wNy0xNVQwMDo1Mzo1Mw==</BinaryData>
+      <IsInherited>false</IsInherited>
+    </ApplicationData>
+  </ApplicationDataCollection>
+</PackageItem>

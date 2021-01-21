@@ -1,0 +1,14 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <ApplicationDataCollection>
+    <ApplicationData>
+      <ApplicationId>tm:TranslationSchema</ApplicationId>
+      <TypeId></TypeId>
+      <BinaryData>77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48VHJhbnNsYXRpb25JbmZvIFRyYW5zbGF0ZVRpdGxlPSJubyIgQWdncmVnYXRlPSJubyIgeG1sbnM9Imh0dHA6Ly93d3cudHJpZGlvbi5jb20vVHJhbnNsYXRpb25NYW5hZ2VyIiAvPg==</BinaryData>
+      <IsInherited>true</IsInherited>
+    </ApplicationData>
+  </ApplicationDataCollection>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/400%20Example%20Site" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="BluePrintParent" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/TridionDocsMashup/Admin/Schemas/TridionDocsMashup%20URL%20Configuration.xsd" linkName="" />
+  </Dependencies>
+</PackageItem>

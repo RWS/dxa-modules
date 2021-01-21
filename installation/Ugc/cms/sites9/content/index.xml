@@ -1,0 +1,98 @@
+<Index dataContractVersion="201701" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Item id="tcm:0-0-0" selected="false" exported="true">
+    <ApplicationIds>
+      <ApplicationId>CustomPages</ApplicationId>
+      <ApplicationId>http://www.sdl.com/tridion/SemanticMapping/vocabularies</ApplicationId>
+    </ApplicationIds>
+    <Item id="73edc51655a647ec9338c5bf571b11d0" title="100%20Master" itemType="Publication" selected="false" exported="false">
+      <Item id="c6854ea4cc744f019425dd67921a1ea9" title="Building%20Blocks" itemType="Folder" selected="false" exported="false">
+        <Item id="16de29ba5378498b80b4fb25507f4cb3" title="Framework" itemType="Folder" selected="false" exported="false">
+          <Item id="51946bb3b45345a79bca512c2b74807e" title="Developer" itemType="Folder" selected="false" exported="false">
+            <Item id="e20f08bfccfd40638a906fa54a8ffcc0" title="Schemas" itemType="Folder" selected="false" exported="false">
+              <Item id="79ecc5c15c3641bba388b28ae7ed9114" title="Module%20Configuration" extension="xsd" itemType="Schema" selected="false" exported="false" />
+              <Item id="b4b8be0d909448d3944b5105c36a3edd" title="Region%20Metadata" extension="xsd" itemType="Schema" selected="false" exported="false" />
+            </Item>
+            <Item id="03deeca565754065ab0894347c48dc07" title="Templates" itemType="Folder" selected="false" exported="false">
+              <Item id="d3cc365851aa493c99e46681281faaf6" title="DXA%2ER2" itemType="Folder" selected="false" exported="false">
+                <Item id="06c1f49edf1b4abebc9073401e728959" title="Default%20Component%20Template%20Finish%20Actions" extension="tbbcmp" itemType="TemplateBuildingBlock" selected="false" exported="false" />
+                <Item id="b0c2f8b6a48748c499505acc4727cb45" title="Default%20Page%20Template%20Finish%20Actions" extension="tbbcmp" itemType="TemplateBuildingBlock" selected="false" exported="false" />
+                <Item id="6f3440796bab4c60822ea3c3ea34cc94" title="Render%20Component%20Content" extension="tbbcmp" itemType="TemplateBuildingBlock" selected="false" exported="false" />
+                <Item id="c78e74e44169482297b5861655e49f30" title="Render%20Page%20Content" extension="tbbcmp" itemType="TemplateBuildingBlock" selected="false" exported="false" />
+              </Item>
+            </Item>
+          </Item>
+        </Item>
+        <Item id="fe9fb11345e2400b9bb4ba552dc6a2be" title="Modules" itemType="Folder" selected="false" exported="false">
+          <Item id="d5f854f7175342fd9ae2f561b2bf3dfb" title="Core" itemType="Folder" selected="false" exported="false">
+            <Item id="a3ce9a1626434f26a64a18f078a3e402" title="Editor" itemType="Folder" selected="false" exported="false">
+              <Item id="26b0b94cf68d4af38d0ff6f856fd9a5f" title="Schemas" itemType="Folder" selected="false" exported="false">
+                <Item id="bbc98ad537d04881adc515d04222508a" title="Article" extension="xsd" itemType="Schema" selected="false" exported="false" />
+                <Item id="c10200886aab489e85edf9771fb8bc0d" title="News%20Article" extension="xsd" itemType="Schema" selected="false" exported="false" />
+              </Item>
+            </Item>
+          </Item>
+          <Item id="tcm:2-138-2" title="Ugc" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+            <Item id="tcm:2-237-2" title="Admin" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+              <Item id="tcm:2-852" title="UGC" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+            </Item>
+            <Item id="tcm:2-139-2" title="Editor" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+              <Item id="tcm:2-140-2" title="Templates" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+                <Item id="tcm:2-451-32" title="Article%20with%20Comments" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="LocalItem" selected="true" exported="true" />
+                <Item id="tcm:2-453-128" title="Content%20Page%20with%20Comments" extension="tptcmp" itemType="PageTemplate" blueprintStatus="LocalItem" selected="true" exported="true" />
+              </Item>
+            </Item>
+            <Item id="tcm:2-141-2" title="Site%20Manager" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+              <Item id="tcm:2-142-2" title="Schemas" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+                <Item id="tcm:2-143-2" title="Embedded" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+                  <Item id="tcm:2-449-8" title="UGC%20Config" extension="xsd" itemType="Schema" subtype="2" blueprintStatus="LocalItem" selected="true" exported="true" />
+                  <Item id="tcm:2-448-8" title="UGC%20Post%20Comment%20Form%20Config" extension="xsd" itemType="Schema" subtype="2" blueprintStatus="LocalItem" selected="true" exported="true" />
+                </Item>
+                <Item id="tcm:2-450-8" title="UGC%20Component%20Template%20Metadata" extension="xsd" itemType="Schema" subtype="3" blueprintStatus="LocalItem" selected="true" exported="true" />
+                <Item id="tcm:2-452-8" title="UGC%20Page%20Template%20Metadata" extension="xsd" itemType="Schema" subtype="3" blueprintStatus="LocalItem" selected="true" exported="true" />
+              </Item>
+              <Item id="tcm:2-144-2" title="Templates" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true" />
+            </Item>
+          </Item>
+        </Item>
+      </Item>
+    </Item>
+    <Item id="e1433a3afc544b838ff68ced223a23ed" title="200%20Example%20Content" itemType="Publication" selected="false" exported="false">
+      <Item id="f670fc24fb784afbb43607eb415db5b4" title="Building%20Blocks" itemType="Folder" selected="false" exported="false">
+        <Item id="3e29f838e26a48cd90d80f99b54e1f24" title="Modules%20Content" itemType="Folder" selected="false" exported="false">
+          <Item id="tcm:4-145-2" title="Ugc" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true" />
+        </Item>
+      </Item>
+    </Item>
+    <Item id="3997fd96efad4ed2bb051e7aa1c2c62d" title="400%20Example%20Site" itemType="Publication" selected="false" exported="false">
+      <Item id="3c199a15832b4f40afd5f22102a5571e" title="Building%20Blocks" itemType="Folder" selected="false" exported="false">
+        <Item id="14617b2447674c738c537a8ce3bb6489" title="Modules" itemType="Folder" selected="false" exported="false">
+          <Item id="tcm:5-138-2" title="Ugc" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+            <Item id="tcm:5-237-2" title="Admin" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+              <Item id="tcm:5-852" title="UGC" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+            </Item>
+            <Item id="tcm:5-139-2" title="Editor" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+              <Item id="tcm:5-140-2" title="Templates" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:5-451-32" title="Article%20with%20Comments" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:5-453-128" title="Content%20Page%20with%20Comments" extension="tptcmp" itemType="PageTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+              </Item>
+            </Item>
+            <Item id="tcm:5-141-2" title="Site%20Manager" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+              <Item id="tcm:5-142-2" title="Schemas" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:5-143-2" title="Embedded" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                  <Item id="tcm:5-449-8" title="UGC%20Config" extension="xsd" itemType="Schema" subtype="2" blueprintStatus="SharedItem" selected="true" exported="true" />
+                  <Item id="tcm:5-448-8" title="UGC%20Post%20Comment%20Form%20Config" extension="xsd" itemType="Schema" subtype="2" blueprintStatus="SharedItem" selected="true" exported="true" />
+                </Item>
+                <Item id="tcm:5-450-8" title="UGC%20Component%20Template%20Metadata" extension="xsd" itemType="Schema" subtype="3" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:5-452-8" title="UGC%20Page%20Template%20Metadata" extension="xsd" itemType="Schema" subtype="3" blueprintStatus="SharedItem" selected="true" exported="true" />
+              </Item>
+              <Item id="tcm:5-144-2" title="Templates" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true" />
+            </Item>
+          </Item>
+        </Item>
+        <Item id="4e91ded65d79468c9e29fc326178970c" title="Modules%20Content" itemType="Folder" selected="false" exported="false">
+          <Item id="tcm:5-145-2" title="Ugc" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true" />
+        </Item>
+      </Item>
+    </Item>
+  </Item>
+</Index>

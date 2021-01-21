@@ -1,9 +1,9 @@
 {
   "name": "sdl-dita-delivery-custom-web-app-gui",
-  "version": "2.2.6",
+  "version": "2.2.11",
   "description": "Custom GUI of the SDL Dita Delivery Web Application.",
   "dependencies": {
-    "@sdl/delivery-ish-dd-webapp-gui": "2.2.6",
+    "@sdl/delivery-ish-dd-webapp-gui": "2.2.11",
     "react": "15.5.1",
     "react-dom": "15.5.1"
   },
@@ -47,7 +47,7 @@
     "build": "set NODE_OPTIONS='--max-old-space-size=2048' && gulp",
     "build-server": "gulp build:dist"
   },
-  "author": "okondratiuk@sdl.com, mborysenko@sdl.com, padams@sdl.com, mbilenko@sdl.com, inikonov@sdl.com",
+  "author": "mborysenko@sdl.com, padams@sdl.com, mbilenko@sdl.com, inikonov@sdl.com",
   "license": "Apache-2.0",
   "private": true
 }

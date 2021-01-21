@@ -1,0 +1,102 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+      <tcm:Title>Article</tcm:Title>
+      <tcm:Description>Article</tcm:Description>
+      <tcm:Purpose>Component</tcm:Purpose>
+      <tcm:NamespaceURI>http://www.sdl.com/web/schemas/core</tcm:NamespaceURI>
+      <tcm:RootElementName>Article</tcm:RootElementName>
+      <tcm:IsTridionWebSchema>true</tcm:IsTridionWebSchema>
+      <tcm:XSD>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sdl.com/web/schemas/core" xmlns:tcmi="http://www.tridion.com/ContentManager/5.0/Instance" elementFormDefault="qualified" targetNamespace="http://www.sdl.com/web/schemas/core">
+  <xsd:import namespace="http://www.tridion.com/ContentManager/5.0/Instance" schemaLocation="/webdav/cm_xml_inst.xsd" />
+  <xsd:include schemaLocation="/webdav/100%20Master/Building%20Blocks/Modules/Core/Editor/Schemas/Embedded/Standard%20Metadata.xsd" />
+  <xsd:include schemaLocation="/webdav/100%20Master/Building%20Blocks/Modules/Core/Editor/Schemas/Embedded/Paragraph.xsd" />
+  <xsd:annotation>
+    <xsd:appinfo>
+      <tcm:Labels xmlns:tcm="http://www.tridion.com/ContentManager/5.0">
+        <tcm:Label ElementName="headline" Metadata="false">Heading</tcm:Label>
+        <tcm:Label ElementName="image" Metadata="false">Image</tcm:Label>
+        <tcm:Label ElementName="articleBody" Metadata="false">Article Body</tcm:Label>
+        <tcm:Label ElementName="standardMeta" Metadata="true">Standard Metadata</tcm:Label>
+      </tcm:Labels>
+    </xsd:appinfo>
+  </xsd:annotation>
+  <xsd:element name="Article">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="headline" minOccurs="1" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0">
+          <property xmlns="http://www.sdl.com/tridion/SemanticMapping">s:headline</property>
+        </ExtensionXml>
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="image" minOccurs="0" maxOccurs="1" type="tcmi:SimpleLink">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0">
+          <property xmlns="http://www.sdl.com/tridion/SemanticMapping">s:image</property>
+        </ExtensionXml>
+              <tcm:linktype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">MultimediaLink</tcm:linktype>
+              <tcm:AllowedTargetSchemas xmlns:tcm="http://www.tridion.com/ContentManager/5.0">
+                <tcm:TargetSchema xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/100%20Master/Building%20Blocks/Modules/Core/Editor/Schemas/Image.xsd" xlink:title="Image" />
+              </tcm:AllowedTargetSchemas>
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="articleBody" minOccurs="1" maxOccurs="unbounded" type="Paragraph">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0">
+          <property xmlns="http://www.sdl.com/tridion/SemanticMapping">s:articleBody</property>
+        </ExtensionXml>
+              <tcm:EmbeddedSchema xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/100%20Master/Building%20Blocks/Modules/Core/Editor/Schemas/Embedded/Paragraph.xsd" xlink:title="Paragraph" />
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Metadata">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="standardMeta" minOccurs="0" maxOccurs="1" type="StandardMetadata">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <tcm:ExtensionXml xmlns:tcm="http://www.tridion.com/ContentManager/5.0" />
+              <tcm:EmbeddedSchema xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/100%20Master/Building%20Blocks/Modules/Core/Editor/Schemas/Embedded/Standard%20Metadata.xsd" xlink:title="Standard Metadata" />
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>
+      </tcm:XSD>
+      <tcm:AllowedMultimediaTypes />
+      <tcm:ComponentProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:BundleProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:DeleteBundleOnProcessFinished>false</tcm:DeleteBundleOnProcessFinished>
+    </tcm:Data>
+  </Data>
+  <ApplicationDataCollection>
+    <ApplicationData>
+      <ApplicationId>http://www.sdl.com/tridion/SemanticMapping/typeof</ApplicationId>
+      <TypeId></TypeId>
+      <BinaryData>PAB0AHkAcABlAG8AZgA+AHMAOgBBAHIAdABpAGMAbABlADwALwB0AHkAcABlAG8AZgA+AA==</BinaryData>
+      <IsInherited>false</IsInherited>
+    </ApplicationData>
+  </ApplicationDataCollection>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/100%20Master" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/Core/Editor/Schemas" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="EmbeddedSchema" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/Core/Editor/Schemas/Embedded/Standard%20Metadata.xsd" linkName="Xsd" xpath="xsd:schema[1]/xsd:include[1]/@schemaLocation" />
+    <Dependency dependencyType="EmbeddedSchema" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/Core/Editor/Schemas/Embedded/Paragraph.xsd" linkName="Xsd" xpath="xsd:schema[1]/xsd:include[2]/@schemaLocation" />
+    <Dependency dependencyType="EmbeddedSchema" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/Core/Editor/Schemas/Embedded/Paragraph.xsd" linkName="Xsd" xpath="xsd:schema[1]/xsd:element[1]/xsd:complexType[1]/xsd:sequence[1]/xsd:element[3]/xsd:annotation[1]/xsd:appinfo[1]/tcm:EmbeddedSchema[1]/@xlink:href" />
+    <Dependency dependencyType="EmbeddedSchema" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/Core/Editor/Schemas/Embedded/Standard%20Metadata.xsd" linkName="Xsd" xpath="xsd:schema[1]/xsd:element[2]/xsd:complexType[1]/xsd:sequence[1]/xsd:element[1]/xsd:annotation[1]/xsd:appinfo[1]/tcm:EmbeddedSchema[1]/@xlink:href" />
+    <Dependency dependencyType="SchemaAllowedSchema" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/Core/Editor/Schemas/Image.xsd" linkName="Xsd" xpath="xsd:schema[1]/xsd:element[1]/xsd:complexType[1]/xsd:sequence[1]/xsd:element[2]/xsd:annotation[1]/xsd:appinfo[1]/tcm:AllowedTargetSchemas[1]/tcm:TargetSchema[1]/@xlink:href" />
+  </Dependencies>
+</PackageItem>

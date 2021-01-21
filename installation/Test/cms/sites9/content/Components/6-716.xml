@@ -1,0 +1,33 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>SRQ-9014</tcm:Title>
+      <tcm:Type>Normal</tcm:Type>
+      <tcm:Schema xlink:type="simple" xlink:title="News Article" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Schemas/News%20Article.xsd" IsMandatory="false" />
+      <tcm:Content>
+        <NewsArticle xmlns="http://www.sdl.com/web/schemas/core">
+          <headline>Sed dapibus tempus nunc, id sollicitudin ligula mattis in</headline>
+          <articleBody>
+            <subheading>Subheading 1</subheading>
+            <content>Ease of applying for car loan though recognized Gulf bank locations. Loan amount up to 
+			<strong xmlns="http://www.w3.org/1999/xhtml">KD 15,000</strong>
+			with flexible repayment terms</content>
+            <media xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/PaulA/roland.jpg" xlink:title="roland" />
+            <caption>Praesent facilisis consectetur neque</caption>
+          </articleBody>
+        </NewsArticle>
+      </tcm:Content>
+      <tcm:Metadata>
+        <Metadata xmlns="http://www.sdl.com/web/schemas/core" />
+      </tcm:Metadata>
+      <tcm:IsBasedOnTridionWebSchema>true</tcm:IsBasedOnTridionWebSchema>
+      <tcm:MultimediaType xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/PaulA" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/PaulA/roland.jpg" linkName="Content" xpath="*[local-name() = 'NewsArticle'][1]/*[local-name() = 'articleBody'][1]/*[local-name() = 'media'][1]/@xlink:href" />
+    <Dependency dependencyType="Schema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Schemas/News%20Article.xsd" linkName="Schema" />
+  </Dependencies>
+</PackageItem>

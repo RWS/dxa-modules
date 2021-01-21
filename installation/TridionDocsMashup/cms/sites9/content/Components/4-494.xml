@@ -1,0 +1,29 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>White Bicycle</tcm:Title>
+      <tcm:Type>Normal</tcm:Type>
+      <tcm:Schema xlink:type="simple" xlink:title="Bicycle" xlink:href="/webdav/200%20Example%20Content/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas/Bicycle.xsd" IsMandatory="false" />
+      <tcm:Content>
+        <Bicycle xmlns="http://www.sdl.com/web/schemas/tridiondocsmashup">
+          <Title>White Bicycle</Title>
+          <Body>Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting. Het is in de jaren '60 populair geworden met de introductie van Letraset vellen met Lorem Ipsum passages en meer recentelijk door desktop publishing software zoals Aldus PageMaker die versies van Lorem Ipsum bevatten.</Body>
+          <Image xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/200%20Example%20Content/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content/Products/Bicycles/White%20Bicycle%20Image.jpg" xlink:title="White Bicycle Image" />
+          <Publication.FMBPRODUCTFAMILYNAME.Logical xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/200%20Example%20Content/Product%20Family%20Name/White%20Bicycle.tkw" xlink:title="White Bicycle">White Bicycle</Publication.FMBPRODUCTFAMILYNAME.Logical>
+          <Publication.FMBPRODUCTRELEASENAME.Version xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/200%20Example%20Content/Product%20Release%20Name/Model%202018.tkw" xlink:title="Model 2018">Model 2018</Publication.FMBPRODUCTRELEASENAME.Version>
+        </Bicycle>
+      </tcm:Content>
+      <tcm:Metadata />
+      <tcm:IsBasedOnTridionWebSchema>true</tcm:IsBasedOnTridionWebSchema>
+      <tcm:MultimediaType xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/200%20Example%20Content" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/200%20Example%20Content/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content/Products/Bicycles" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/200%20Example%20Content/Building%20Blocks/Modules%20Content/TridionDocsMashup/Content/Products/Bicycles/White%20Bicycle%20Image.jpg" linkName="Content" xpath="*[local-name() = 'Bicycle'][1]/*[local-name() = 'Image'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedKeyword" itemUrl="/webdav/200%20Example%20Content/Product%20Family%20Name/White%20Bicycle.tkw" linkName="Content" xpath="*[local-name() = 'Bicycle'][1]/*[local-name() = 'Publication.FMBPRODUCTFAMILYNAME.Logical'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedKeyword" itemUrl="/webdav/200%20Example%20Content/Product%20Release%20Name/Model%202018.tkw" linkName="Content" xpath="*[local-name() = 'Bicycle'][1]/*[local-name() = 'Publication.FMBPRODUCTRELEASENAME.Version'][1]/@xlink:href" />
+    <Dependency dependencyType="Schema" itemUrl="/webdav/200%20Example%20Content/Building%20Blocks/Modules/TridionDocsMashup/Editor/Schemas/Bicycle.xsd" linkName="Schema" />
+  </Dependencies>
+</PackageItem>

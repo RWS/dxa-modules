@@ -1,0 +1,138 @@
+<Index dataContractVersion="201701" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Item id="tcm:0-0-0" selected="false" exported="true">
+    <ApplicationIds>
+      <ApplicationId>CustomPages</ApplicationId>
+      <ApplicationId>http://www.sdl.com/tridion/SemanticMapping/vocabularies</ApplicationId>
+    </ApplicationIds>
+    <Item id="06216c6a8a5d43f281d4c9ed16c49491" title="100%20Master" itemType="Publication" selected="false" exported="false">
+      <Item id="714c7295443e4c9093fa17387319e2bf" title="Building%20Blocks" itemType="Folder" selected="false" exported="false">
+        <Item id="cc7e8da3eb5841cfbbb5847106757652" title="Default%20Templates" itemType="Folder" selected="false" exported="false">
+          <Item id="eaba2a6d49e0444ab237f82777687e60" title="Experience%20Optimization" itemType="Folder" selected="false" exported="false">
+            <Item id="d814466c80c9477fa7702d9b4b9e20de" title="Add%20to%20Experience%20Optimization" extension="tbbcs" itemType="TemplateBuildingBlock" selected="false" exported="false" />
+          </Item>
+          <Item id="04c40bec2f444de987794dd058c755b9" title="Default%20Dreamweaver%20Component%20Design" extension="dwt" itemType="TemplateBuildingBlock" selected="false" exported="false" />
+          <Item id="60fc4b386ace4da09ab4a6dce29911db" title="Default%20Finish%20Actions" extension="tbbcmp" itemType="TemplateBuildingBlock" selected="false" exported="false" />
+        </Item>
+        <Item id="eb4500e9ef174a1eae934f13446e0d25" title="Framework" itemType="Folder" selected="false" exported="false">
+          <Item id="e84242ffd3bd4cfe9967b1621bdafad8" title="Developer" itemType="Folder" selected="false" exported="false">
+            <Item id="bb637727ff2542a09682609b4b1786c3" title="Schemas" itemType="Folder" selected="false" exported="false">
+              <Item id="tcm:2-91-8" title="Component%20Template%20Metadata" extension="xsd" itemType="Schema" subtype="3" blueprintStatus="LocalItem" selected="false" exported="true" />
+              <Item id="270978c1d3c34dbcbf75ce530faa2551" title="Module%20Configuration" extension="xsd" itemType="Schema" selected="false" exported="false" />
+            </Item>
+            <Item id="3fa75bac7c524e71987edea18c7fb8a1" title="Templates" itemType="Folder" selected="false" exported="false">
+              <Item id="d03ed7624b364f468fe2fa7029f39af5" title="DXA%2ER2" itemType="Folder" selected="false" exported="false">
+                <Item id="d2dc8cfb75564f1c925c55f8c1b10a2a" title="Default%20Component%20Template%20Finish%20Actions" extension="tbbcmp" itemType="TemplateBuildingBlock" selected="false" exported="false" />
+                <Item id="dfe6afc8dea34bcda55d59125102b3b9" title="Default%20Page%20Template%20Finish%20Actions" extension="tbbcmp" itemType="TemplateBuildingBlock" selected="false" exported="false" />
+                <Item id="a0b591b412a84587be7e74046932e4ca" title="Render%20Component%20Content" extension="tbbcmp" itemType="TemplateBuildingBlock" selected="false" exported="false" />
+                <Item id="ad11b374e9894f898f1a61df7b72fbda" title="Render%20Page%20Content" extension="tbbcmp" itemType="TemplateBuildingBlock" selected="false" exported="false" />
+              </Item>
+            </Item>
+          </Item>
+          <Item id="eb20ac6f50ae4d9c81de45c154a62008" title="Site%20Manager" itemType="Folder" selected="false" exported="false">
+            <Item id="a555575c419d4e99b52be774114e9a5b" title="Schemas" itemType="Folder" selected="false" exported="false">
+              <Item id="tcm:2-108-8" title="General%20Configuration" extension="xsd" itemType="Schema" blueprintStatus="LocalItem" selected="false" exported="true" />
+              <Item id="fab62789897c46f79637766002b930d3" title="Name%20Value%20Pair" extension="xsd" itemType="Schema" selected="false" exported="false" />
+            </Item>
+          </Item>
+        </Item>
+        <Item id="e4b5674dc2334dcd9b23995dafa1b975" title="Modules" itemType="Folder" selected="false" exported="false">
+          <Item id="3635eaa6dca44eacacb2ece6d64f3a89" title="Core" itemType="Folder" selected="false" exported="false">
+            <Item id="c9f73e6830b94f4f945f6098513c91d8" title="Editor" itemType="Folder" selected="false" exported="false">
+              <Item id="0766f3303a4942d2b9d368617706d17d" title="Schemas" itemType="Folder" selected="false" exported="false">
+                <Item id="0dbe54e4fb4243859c64a47b950b4ec1" title="Region%20Schemas" itemType="Folder" selected="false" exported="false">
+                  <Item id="61d347634d1342a0bd892daf3382d9f7" title="%5BHero%5D%20Region" extension="xsd" itemType="Schema" selected="false" exported="false" />
+                </Item>
+                <Item id="2908d72c3836412aa5d8100877ae0d18" title="Article" extension="xsd" itemType="Schema" selected="false" exported="false" />
+                <Item id="b2347956963b456da5a49c619ba75653" title="News%20Article" extension="xsd" itemType="Schema" selected="false" exported="false" />
+              </Item>
+            </Item>
+          </Item>
+          <Item id="tcm:2-87-2" title="ExperienceOptimization" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+            <Item id="tcm:2-88-2" title="Admin" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+              <Item id="tcm:2-374" title="SmartTarget" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+            </Item>
+            <Item id="tcm:2-93-2" title="Editor" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+              <Item id="tcm:2-94-2" title="Schemas" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+                <Item id="tcm:2-98-2" title="Embedded" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+                  <Item id="tcm:2-376-8" title="Experience%20Optimization%20Region%20Metadata" extension="xsd" itemType="Schema" subtype="2" blueprintStatus="LocalItem" selected="true" exported="true" />
+                </Item>
+                <Item id="tcm:2-95-2" title="Metadata" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+                  <Item id="tcm:2-377-8" title="Experience%20Optimization%20Page%20Template%20Metadata" extension="xsd" itemType="Schema" subtype="3" blueprintStatus="LocalItem" selected="true" exported="true" />
+                </Item>
+                <Item id="tcm:2-96-2" title="Region" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+                  <Item id="tcm:2-380-8" title="%5BSmartTarget%3A2-Column%5D%20Region" extension="xsd" itemType="Schema" subtype="8" blueprintStatus="LocalItem" selected="true" exported="true" />
+                  <Item id="tcm:2-375-8" title="%5BSmartTarget%3ASmartTargetRegion%5D%20Region" extension="xsd" itemType="Schema" subtype="8" blueprintStatus="LocalItem" selected="true" exported="true" />
+                  <Item id="tcm:2-381-8" title="SmartTarget%20Page%20Schema" extension="xsd" itemType="Schema" subtype="8" blueprintStatus="LocalItem" selected="true" exported="true" />
+                </Item>
+              </Item>
+              <Item id="tcm:2-97-2" title="Templates" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+                <Item id="tcm:2-384-32" title="Article%20%5BSmartTarget%3AExample1%5D" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="LocalItem" selected="true" exported="true" />
+                <Item id="tcm:2-378-32" title="Article%20%5BSmartTarget%3AExample2%5D" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="LocalItem" selected="true" exported="true" />
+                <Item id="tcm:2-383-128" title="Example%20Experience%20Optimization%20enabled%20Page%20%28Legacy%29" extension="tptcmp" itemType="PageTemplate" blueprintStatus="LocalItem" selected="true" exported="true" />
+                <Item id="tcm:2-382-128" title="Example%20Experience%20Optimization%20enabled%20Page" extension="tptcmp" itemType="PageTemplate" blueprintStatus="LocalItem" selected="true" exported="true" />
+                <Item id="tcm:2-379-32" title="SmartTarget%20Article" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="LocalItem" selected="true" exported="true" />
+              </Item>
+            </Item>
+            <Item id="tcm:2-91-2" title="Site%20Manager" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+              <Item id="tcm:2-92-2" title="Schemas" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+                <Item id="tcm:2-372-8" title="Experience%20Optimization%20Configuration" extension="xsd" itemType="Schema" blueprintStatus="LocalItem" selected="true" exported="true" />
+              </Item>
+            </Item>
+          </Item>
+        </Item>
+        <Item id="c1104eeb820e480292684c2c655368d3" title="Settings" itemType="Folder" selected="false" exported="false">
+          <Item id="tcm:2-89-2" title="ExperienceOptimization" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+            <Item id="tcm:2-90-2" title="Site%20Manager" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+              <Item id="tcm:2-373" title="Experience%20Optimization%20Configuration" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+            </Item>
+          </Item>
+        </Item>
+      </Item>
+    </Item>
+    <Item id="63fda9ab90ea45929d09f8c38aa12e3d" title="400%20Example%20Site" itemType="Publication" selected="false" exported="false">
+      <Item id="433d709d4ba34b3990cc083a8855e384" title="Building%20Blocks" itemType="Folder" selected="false" exported="false">
+        <Item id="e45acfa195ba4a969165bf5f213df9c8" title="Modules" itemType="Folder" selected="false" exported="false">
+          <Item id="tcm:5-87-2" title="ExperienceOptimization" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+            <Item id="tcm:5-88-2" title="Admin" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+              <Item id="tcm:5-374" title="SmartTarget" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+            </Item>
+            <Item id="tcm:5-93-2" title="Editor" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+              <Item id="tcm:5-94-2" title="Schemas" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:5-98-2" title="Embedded" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                  <Item id="tcm:5-376-8" title="Experience%20Optimization%20Region%20Metadata" extension="xsd" itemType="Schema" subtype="2" blueprintStatus="SharedItem" selected="true" exported="true" />
+                </Item>
+                <Item id="tcm:5-95-2" title="Metadata" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                  <Item id="tcm:5-377-8" title="Experience%20Optimization%20Page%20Template%20Metadata" extension="xsd" itemType="Schema" subtype="3" blueprintStatus="SharedItem" selected="true" exported="true" />
+                </Item>
+                <Item id="tcm:5-96-2" title="Region" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                  <Item id="tcm:5-380-8" title="%5BSmartTarget%3A2-Column%5D%20Region" extension="xsd" itemType="Schema" subtype="8" blueprintStatus="SharedItem" selected="true" exported="true" />
+                  <Item id="tcm:5-375-8" title="%5BSmartTarget%3ASmartTargetRegion%5D%20Region" extension="xsd" itemType="Schema" subtype="8" blueprintStatus="SharedItem" selected="true" exported="true" />
+                  <Item id="tcm:5-381-8" title="SmartTarget%20Page%20Schema" extension="xsd" itemType="Schema" subtype="8" blueprintStatus="SharedItem" selected="true" exported="true" />
+                </Item>
+              </Item>
+              <Item id="tcm:5-97-2" title="Templates" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:5-384-32" title="Article%20%5BSmartTarget%3AExample1%5D" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:5-378-32" title="Article%20%5BSmartTarget%3AExample2%5D" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:5-383-128" title="Example%20Experience%20Optimization%20enabled%20Page%20%28Legacy%29" extension="tptcmp" itemType="PageTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:5-382-128" title="Example%20Experience%20Optimization%20enabled%20Page" extension="tptcmp" itemType="PageTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+                <Item id="tcm:5-379-32" title="SmartTarget%20Article" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="SharedItem" selected="true" exported="true" />
+              </Item>
+            </Item>
+            <Item id="tcm:5-91-2" title="Site%20Manager" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+              <Item id="tcm:5-92-2" title="Schemas" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:5-372-8" title="Experience%20Optimization%20Configuration" extension="xsd" itemType="Schema" blueprintStatus="SharedItem" selected="true" exported="true" />
+              </Item>
+            </Item>
+          </Item>
+        </Item>
+        <Item id="400a92515fec49dcb74bee344a32eeef" title="Settings" itemType="Folder" selected="false" exported="false">
+          <Item id="tcm:5-89-2" title="ExperienceOptimization" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+            <Item id="tcm:5-90-2" title="Site%20Manager" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+              <Item id="tcm:5-373" title="Experience%20Optimization%20Configuration" extension="xml" itemType="Component" blueprintStatus="SharedItem" selected="true" exported="true" />
+            </Item>
+          </Item>
+        </Item>
+      </Item>
+    </Item>
+  </Item>
+</Index>

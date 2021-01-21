@@ -1,0 +1,127 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+      <tcm:Title>Module Configuration</tcm:Title>
+      <tcm:Description>Module Configuration</tcm:Description>
+      <tcm:Purpose>Component</tcm:Purpose>
+      <tcm:NamespaceURI>http://www.sdl.com/web/schemas/core</tcm:NamespaceURI>
+      <tcm:RootElementName>ModuleConfiguration</tcm:RootElementName>
+      <tcm:IsTridionWebSchema>true</tcm:IsTridionWebSchema>
+      <tcm:XSD>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sdl.com/web/schemas/core" xmlns:tcmi="http://www.tridion.com/ContentManager/5.0/Instance" elementFormDefault="qualified" targetNamespace="http://www.sdl.com/web/schemas/core">
+        <xsd:import namespace="http://www.tridion.com/ContentManager/5.0/Instance" schemaLocation="/webdav/cm_xml_inst.xsd" />
+        <xsd:include schemaLocation="/webdav/100%20Master/Building%20Blocks/Framework/Developer/Schemas/Module%20Dependency.xsd" />
+        <xsd:annotation>
+          <xsd:appinfo>
+            <tcm:Labels xmlns:tcm="http://www.tridion.com/ContentManager/5.0">
+              <tcm:Label ElementName="name" Metadata="false">Module Name</tcm:Label>
+              <tcm:Label ElementName="softwareVersion" Metadata="false">Version (a number)</tcm:Label>
+              <tcm:Label ElementName="url" Metadata="false">A URL where further information about this module can be found</tcm:Label>
+              <tcm:Label ElementName="isActive" Metadata="false">Active?</tcm:Label>
+              <tcm:Label ElementName="dependencies" Metadata="false">Modules that this module depends on</tcm:Label>
+              <tcm:Label ElementName="furtherConfiguration" Metadata="false">Further Configuration (optional links to any other component)</tcm:Label>
+              <tcm:Label ElementName="resource" Metadata="false">Resources (links to any components containing labels/error messages etc.)</tcm:Label>
+              <tcm:Label ElementName="designConfiguration" Metadata="false">HTML Design Configuration</tcm:Label>
+            </tcm:Labels>
+          </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:element name="ModuleConfiguration">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="name" minOccurs="1" maxOccurs="1" type="xsd:normalizedString">
+                <xsd:annotation>
+                  <xsd:appinfo>
+                    <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+                  </xsd:appinfo>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="softwareVersion" minOccurs="1" maxOccurs="1" type="xsd:decimal">
+                <xsd:annotation>
+                  <xsd:appinfo>
+                    <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+                  </xsd:appinfo>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="url" minOccurs="0" maxOccurs="1" type="tcmi:SimpleLink">
+                <xsd:annotation>
+                  <xsd:appinfo>
+                    <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+                    <tcm:linktype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">ExternalLink</tcm:linktype>
+                  </xsd:appinfo>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="isActive" minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                  <xsd:appinfo>
+                    <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+                    <tcm:DefaultTextValue xmlns:tcm="http://www.tridion.com/ContentManager/5.0">Yes</tcm:DefaultTextValue>
+                    <tcm:Size xmlns:tcm="http://www.tridion.com/ContentManager/5.0">1</tcm:Size>
+                    <tcm:listtype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">radio</tcm:listtype>
+                  </xsd:appinfo>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:normalizedString">
+                    <xsd:enumeration value="Yes" />
+                    <xsd:enumeration value="No" />
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="dependencies" minOccurs="0" maxOccurs="unbounded" type="ModuleDependency">
+                <xsd:annotation>
+                  <xsd:appinfo>
+                    <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+                    <tcm:EmbeddedSchema xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/100%20Master/Building%20Blocks/Framework/Developer/Schemas/Module%20Dependency.xsd" xlink:title="Module Dependency" />
+                  </xsd:appinfo>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="furtherConfiguration" minOccurs="0" maxOccurs="unbounded" type="tcmi:SimpleLink">
+                <xsd:annotation>
+                  <xsd:appinfo>
+                    <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+                    <tcm:linktype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">ComponentLink</tcm:linktype>
+                    <tcm:AllowMultimediaLinks xmlns:tcm="http://www.tridion.com/ContentManager/5.0">false</tcm:AllowMultimediaLinks>
+                  </xsd:appinfo>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="resource" minOccurs="0" maxOccurs="unbounded" type="tcmi:SimpleLink">
+                <xsd:annotation>
+                  <xsd:appinfo>
+                    <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+                    <tcm:linktype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">ComponentLink</tcm:linktype>
+                    <tcm:AllowMultimediaLinks xmlns:tcm="http://www.tridion.com/ContentManager/5.0">false</tcm:AllowMultimediaLinks>
+                  </xsd:appinfo>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="designConfiguration" minOccurs="0" maxOccurs="1" type="tcmi:SimpleLink">
+                <xsd:annotation>
+                  <xsd:appinfo>
+                    <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+                    <tcm:linktype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">ComponentLink</tcm:linktype>
+                    <tcm:AllowMultimediaLinks xmlns:tcm="http://www.tridion.com/ContentManager/5.0">false</tcm:AllowMultimediaLinks>
+                    <tcm:AllowedTargetSchemas xmlns:tcm="http://www.tridion.com/ContentManager/5.0">
+                      <tcm:TargetSchema xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/100%20Master/Building%20Blocks/Framework/Site%20Manager/Schemas/Module%20Design%20Configuration.xsd" xlink:title="Module Design Configuration" />
+                      <tcm:TargetSchema xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/100%20Master/Building%20Blocks/Framework/Site%20Manager/Schemas/HTML%20Design%20Configuration.xsd" xlink:title="HTML Design Configuration" />
+                    </tcm:AllowedTargetSchemas>
+                  </xsd:appinfo>
+                </xsd:annotation>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:schema>
+      </tcm:XSD>
+      <tcm:AllowedMultimediaTypes />
+      <tcm:ComponentProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:BundleProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:DeleteBundleOnProcessFinished>false</tcm:DeleteBundleOnProcessFinished>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/100%20Master" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/100%20Master/Building%20Blocks/Framework/Developer/Schemas" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="EmbeddedSchema" itemUrl="/webdav/100%20Master/Building%20Blocks/Framework/Developer/Schemas/Module%20Dependency.xsd" linkName="Xsd" xpath="xsd:schema[1]/xsd:include[1]/@schemaLocation" />
+    <Dependency dependencyType="EmbeddedSchema" itemUrl="/webdav/100%20Master/Building%20Blocks/Framework/Developer/Schemas/Module%20Dependency.xsd" linkName="Xsd" xpath="xsd:schema[1]/xsd:element[1]/xsd:complexType[1]/xsd:sequence[1]/xsd:element[5]/xsd:annotation[1]/xsd:appinfo[1]/tcm:EmbeddedSchema[1]/@xlink:href" />
+    <Dependency dependencyType="SchemaAllowedSchema" itemUrl="/webdav/100%20Master/Building%20Blocks/Framework/Site%20Manager/Schemas/Module%20Design%20Configuration.xsd" linkName="Xsd" xpath="xsd:schema[1]/xsd:element[1]/xsd:complexType[1]/xsd:sequence[1]/xsd:element[8]/xsd:annotation[1]/xsd:appinfo[1]/tcm:AllowedTargetSchemas[1]/tcm:TargetSchema[1]/@xlink:href" />
+    <Dependency dependencyType="SchemaAllowedSchema" itemUrl="/webdav/100%20Master/Building%20Blocks/Framework/Site%20Manager/Schemas/HTML%20Design%20Configuration.xsd" linkName="Xsd" xpath="xsd:schema[1]/xsd:element[1]/xsd:complexType[1]/xsd:sequence[1]/xsd:element[8]/xsd:annotation[1]/xsd:appinfo[1]/tcm:AllowedTargetSchemas[1]/tcm:TargetSchema[2]/@xlink:href" />
+  </Dependencies>
+</PackageItem>

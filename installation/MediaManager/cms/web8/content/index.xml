@@ -1,0 +1,68 @@
+<Index dataContractVersion="201501" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Item id="tcm:0-0-0" selected="false" exported="true">
+    <ApplicationIds>
+      <ApplicationId>http://www.sdl.com/tridion/SemanticMapping/vocabularies</ApplicationId>
+    </ApplicationIds>
+    <Item id="e79936ea3f9f418c82aba05d73638d5b" title="100%20Master" itemType="Publication" selected="false" exported="false">
+      <Item id="07f03ad04a9944e8ad858511d5e1c06d" title="Building%20Blocks" itemType="Folder" selected="false" exported="false">
+        <Item id="4b8aaa6367044193b6affc7bfee4220f" title="Framework" itemType="Folder" selected="false" exported="false">
+          <Item id="eea1920540ef4d8b85d1442b3255ae4a" title="Developer" itemType="Folder" selected="false" exported="false">
+            <Item id="f030769ca3ed4f57af67562488b281ba" title="Schemas" itemType="Folder" selected="false" exported="false">
+              <Item id="tcm:2-205-8" title="Component%20Template%20Metadata" extension="xsd" itemType="Schema" subtype="3" blueprintStatus="LocalItem" selected="false" exported="true" />
+              <Item id="625983eb91074b64b17882bd41b405bb" title="Module%20Configuration" extension="xsd" itemType="Schema" selected="false" exported="false" />
+              <Item id="7959ab7e639546b0872e23645c4d8f7e" title="ZIP%20file" extension="xsd" itemType="Schema" selected="false" exported="false" />
+            </Item>
+            <Item id="84ecaa238b8347128c63011c47e78d17" title="Templates" itemType="Folder" selected="false" exported="false">
+              <Item id="0661a6d160694de0bed745251c80016e" title="DXA%2ER2" itemType="Folder" selected="false" exported="false">
+                <Item id="3bb3c090690b4e9b8340bfdee82ece3f" title="Default%20Component%20Template%20Finish%20Actions" extension="tbbcmp" itemType="TemplateBuildingBlock" selected="false" exported="false" />
+                <Item id="ddb7dc1874814a4b9db0f0f22df3fb61" title="Render%20Component%20Content" extension="tbbcmp" itemType="TemplateBuildingBlock" selected="false" exported="false" />
+              </Item>
+            </Item>
+          </Item>
+          <Item id="57fe633cb94a48ae95442a33799bb920" title="Site%20Manager" itemType="Folder" selected="false" exported="false">
+            <Item id="b526b65b5bca474baf1beffa584dbadd" title="Schemas" itemType="Folder" selected="false" exported="false">
+              <Item id="9f995b3fe1cc4a12afa0b84168d1929d" title="HTML%20Design%20Configuration" extension="xsd" itemType="Schema" selected="false" exported="false" />
+            </Item>
+          </Item>
+        </Item>
+        <Item id="415d119b24e14f0c845fd75394cda8e4" title="Modules" itemType="Folder" selected="false" exported="false">
+          <Item id="tcm:2-2466-2" title="MediaManager" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+            <Item id="tcm:2-2467-2" title="Admin" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+              <Item id="tcm:2-9200" title="MediaManager" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+              <Item id="tcm:2-9882" title="mediamanager-html-design" extension="zip" itemType="Component" subtype="1" blueprintStatus="LocalItem" selected="true" exported="true" />
+            </Item>
+            <Item id="tcm:2-2446-2" title="Editor" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+              <Item id="tcm:2-2447-2" title="Schemas" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+                <Item id="tcm:2-2448-2" title="SDL%20Media%20Manager" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+                  <Item id="tcm:2-9106-8" title="ExternalContentLibraryStubSchema-mm" extension="xsd" itemType="Schema" subtype="1" blueprintStatus="LocalItem" selected="true" exported="true">
+                    <ApplicationIds>
+                      <ApplicationId>ecl:stubschema-mm</ApplicationId>
+                    </ApplicationIds>
+                  </Item>
+                </Item>
+              </Item>
+              <Item id="tcm:2-2456-2" title="Templates" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+                <Item id="tcm:2-9614-32" title="Media%20Manager%20Audio" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="LocalItem" selected="true" exported="true" />
+                <Item id="tcm:2-9611-32" title="Media%20Manager%20Download" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="LocalItem" selected="true" exported="true" />
+                <Item id="tcm:2-9609-32" title="Media%20Manager%20Image%20%5B2-Column%5D" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="LocalItem" selected="true" exported="true" />
+                <Item id="tcm:2-9606-32" title="Media%20Manager%20Image" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="LocalItem" selected="true" exported="true" />
+                <Item id="tcm:2-9131-32" title="Media%20Manager%20Video%20%5B2-Column%5D" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="LocalItem" selected="true" exported="true" />
+                <Item id="tcm:2-9132-32" title="Media%20Manager%20Video%20%5B3-Column%5D" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="LocalItem" selected="true" exported="true" />
+                <Item id="tcm:2-9130-32" title="Media%20Manager%20Video" extension="tctcmp" itemType="ComponentTemplate" blueprintStatus="LocalItem" selected="true" exported="true" />
+              </Item>
+            </Item>
+          </Item>
+        </Item>
+        <Item id="7177a36135184cf8b3c2b741f8181233" title="Settings" itemType="Folder" selected="false" exported="false">
+          <Item id="tcm:2-2618-2" title="MediaManager" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+            <Item id="tcm:2-2619-2" title="Site%20Manager" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+              <Item id="tcm:2-9883" title="MediaManager%20HTML%20Design%20Configuration" extension="xml" itemType="Component" blueprintStatus="LocalItem" selected="true" exported="true" />
+            </Item>
+          </Item>
+        </Item>
+      </Item>
+    </Item>
+    <Item id="tcm:0-24-65544" title="External%20Content%20Library" extension="tmt" itemType="MultimediaType" selected="false" exported="true" />
+    <Item id="794c7a06867b4c5199415fc8af0afb69" title="Zip%20file" extension="tmt" itemType="MultimediaType" selected="false" exported="false" />
+  </Item>
+</Index>

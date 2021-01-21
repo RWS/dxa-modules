@@ -1,0 +1,54 @@
+<Mappings xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <ItemSet role="Publication">
+    <Mapping exportTitle="100%20Master" importTitle="" />
+  </ItemSet>
+  <ItemSet role="Folder">
+    <Mapping exportContext="/100%20Master" exportTitle="Building%20Blocks" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks" exportTitle="Framework" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework" exportTitle="Developer" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Developer" exportTitle="Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Developer" exportTitle="Templates" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Developer/Templates" exportTitle="DXA%2ER2" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework" exportTitle="Site%20Manager" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Site%20Manager" exportTitle="Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks" exportTitle="Modules" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules" exportTitle="MediaManager" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/MediaManager" exportTitle="Admin" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/MediaManager" exportTitle="Editor" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/MediaManager/Editor" exportTitle="Schemas" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/MediaManager/Editor/Schemas" exportTitle="SDL%20Media%20Manager" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/MediaManager/Editor" exportTitle="Templates" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks" exportTitle="Settings" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Settings" exportTitle="MediaManager" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Settings/MediaManager" exportTitle="Site%20Manager" importContext="" importTitle="" />
+  </ItemSet>
+  <ItemSet role="Schema">
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Developer/Schemas" exportTitle="Component%20Template%20Metadata.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Developer/Schemas" exportTitle="Module%20Configuration.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Developer/Schemas" exportTitle="ZIP%20file.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Site%20Manager/Schemas" exportTitle="HTML%20Design%20Configuration.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/MediaManager/Editor/Schemas/SDL%20Media%20Manager" exportTitle="ExternalContentLibraryStubSchema-mm.xsd" importContext="" importTitle="" />
+  </ItemSet>
+  <ItemSet role="Component">
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/MediaManager/Admin" exportTitle="MediaManager.xml" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/MediaManager/Admin" exportTitle="mediamanager-html-design.zip" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Settings/MediaManager/Site%20Manager" exportTitle="MediaManager%20HTML%20Design%20Configuration.xml" importContext="" importTitle="" />
+  </ItemSet>
+  <ItemSet role="ComponentTemplate">
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/MediaManager/Editor/Templates" exportTitle="Media%20Manager%20Audio.tctcmp" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/MediaManager/Editor/Templates" exportTitle="Media%20Manager%20Download.tctcmp" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/MediaManager/Editor/Templates" exportTitle="Media%20Manager%20Image%20%5B2-Column%5D.tctcmp" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/MediaManager/Editor/Templates" exportTitle="Media%20Manager%20Image.tctcmp" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/MediaManager/Editor/Templates" exportTitle="Media%20Manager%20Video%20%5B2-Column%5D.tctcmp" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/MediaManager/Editor/Templates" exportTitle="Media%20Manager%20Video%20%5B3-Column%5D.tctcmp" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/MediaManager/Editor/Templates" exportTitle="Media%20Manager%20Video.tctcmp" importContext="" importTitle="" />
+  </ItemSet>
+  <ItemSet role="TemplateBuildingBlock">
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Developer/Templates/DXA%2ER2" exportTitle="Default%20Component%20Template%20Finish%20Actions.tbbcmp" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Developer/Templates/DXA%2ER2" exportTitle="Render%20Component%20Content.tbbcmp" importContext="" importTitle="" />
+  </ItemSet>
+  <ItemSet role="MultimediaType">
+    <Mapping exportTitle="External%20Content%20Library.tmt" importTitle="" />
+    <Mapping exportTitle="Zip%20file.tmt" importTitle="" />
+  </ItemSet>
+</Mappings>

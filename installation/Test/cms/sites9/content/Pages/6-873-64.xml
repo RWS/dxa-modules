@@ -1,0 +1,35 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>CRQ-12801 Test Page</tcm:Title>
+      <tcm:FileName>crq-12801</tcm:FileName>
+      <tcm:PageTemplate IsInherited="true" xlink:type="simple" xlink:title="Simple Test Page View [Test:SimpleTestPage]" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/Simple%20Test%20Page%20View%20%5BTest%3ASimpleTestPage%5D.tptcmp" />
+      <tcm:ComponentPresentations>
+        <tcm:ComponentPresentation>
+          <tcm:Component xlink:type="simple" xlink:title="CRQ-12801 Test Component" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/CRQ-12801/CRQ-12801%20Test%20Component.xml" />
+          <tcm:ComponentTemplate xlink:type="simple" xlink:title="CRQ-12801 Test CT" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/CRQ-12801/CRQ-12801%20Test%20CT.tctcmp" />
+          <tcm:Conditions />
+        </tcm:ComponentPresentation>
+      </tcm:ComponentPresentations>
+      <tcm:MetadataSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:Metadata />
+      <tcm:RegionSchema xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:Regions />
+    </tcm:Data>
+  </Data>
+  <ApplicationDataCollection>
+    <ApplicationData>
+      <ApplicationId>ugc:ComponentAndPage</ApplicationId>
+      <TypeId>c:XmlDocument-CommunityBuilder</TypeId>
+      <BinaryData>PAB1AGcAYwA+AA0ACgAgACAAPABpAHQAZQBtACAAaQBkAD0AIgB0AGMAbQA6ADYALQA4ADcAMwAtADYANAAiAD4ADQAKACAAIAAgACAAPABhAGwAbABvAHcAdABvAHIAYQB0AGUAPgBmAGEAbABzAGUAPAAvAGEAbABsAG8AdwB0AG8AcgBhAHQAZQA+AA0ACgAgACAAIAAgADwAYQBsAGwAbwB3AHQAbwBjAG8AbQBtAGUAbgB0AD4AZgBhAGwAcwBlADwALwBhAGwAbABvAHcAdABvAGMAbwBtAG0AZQBuAHQAPgANAAoAIAAgACAAIAA8AHMAaABvAHcAYwBvAG0AbQBlAG4AdABzAD4AZgBhAGwAcwBlADwALwBzAGgAbwB3AGMAbwBtAG0AZQBuAHQAcwA+AA0ACgAgACAAIAAgADwAcwBvAHIAdABjAG8AbQBtAGUAbgB0AHMAPgANAAoAIAAgACAAIAAgACAAPABmAGkAZQBsAGQAPgBkAGEAdABlADwALwBmAGkAZQBsAGQAPgANAAoAIAAgACAAIAAgACAAPABkAGkAcgBlAGMAdABpAG8AbgA+AGQAZQBzAGMAZQBuAGQAaQBuAGcAPAAvAGQAaQByAGUAYwB0AGkAbwBuAD4ADQAKACAAIAAgACAAPAAvAHMAbwByAHQAYwBvAG0AbQBlAG4AdABzAD4ADQAKACAAIAAgACAAPABzAGgAbwB3AHUAbgBtAG8AZABlAHIAYQB0AGUAZABjAG8AbQBtAGUAbgB0AHMAPgBmAGEAbABzAGUAPAAvAHMAaABvAHcAdQBuAG0AbwBkAGUAcgBhAHQAZQBkAGMAbwBtAG0AZQBuAHQAcwA+AA0ACgAgACAAPAAvAGkAdABlAG0APgANAAoAPAAvAHUAZwBjAD4A</BinaryData>
+      <IsInherited>false</IsInherited>
+    </ApplicationData>
+  </ApplicationDataCollection>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemStructureGroup" itemUrl="/webdav/401%20Automated%20Test%20Parent/Home/Regression" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="ComponentPresentationComponent" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/CRQ-12801/CRQ-12801%20Test%20Component.xml" linkName="ComponentPresentations[0]/Component" />
+    <Dependency dependencyType="ComponentPresentationComponentTemplate" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Test/CRQ-12801/CRQ-12801%20Test%20CT.tctcmp" linkName="ComponentPresentations[0]/ComponentTemplate" />
+    <Dependency dependencyType="ApplicationData" itemUrl="/webdav/401%20Automated%20Test%20Parent/Home/Regression/CRQ-12801%20Test%20Page.tpg" linkName="ugc:ComponentAndPage" xpath="/*[local-name() = 'ugc'][1]/*[local-name() = 'item'][1]/@id" />
+  </Dependencies>
+</PackageItem>

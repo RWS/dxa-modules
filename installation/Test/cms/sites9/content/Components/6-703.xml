@@ -1,0 +1,32 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Traction Carp Rod 12' 3.0lb</tcm:Title>
+      <tcm:Type>Normal</tcm:Type>
+      <tcm:Schema xlink:type="simple" xlink:title="Fishing Rod" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/SRQ9128/schemas/Fishing%20Rod.xsd" IsMandatory="false" />
+      <tcm:Content>
+        <Content xmlns="uuid:86cb059a-0605-4b28-9b53-450162f9f58e">
+          <title>Traction Carp Rod 12' 3.0lb</title>
+          <brand>Avid Carp</brand>
+          <description>
+            <div xmlns="http://www.w3.org/1999/xhtml">Boasting our unique Reactive carbon and 3k weave, the <em>12ft 3lb</em> rod boasts the same beautiful action as the rest of the <strong>Traction</strong> range. This rod provides a perfect blend of progressive power with a responsive action for maximum control when it matters. It has plenty in reserve for longer casts, aided by the <em>50mm</em> butt ring, but its primary purpose is for playing big fish with the perfect curve.</div>
+          </description>
+          <keyword xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/401%20Automated%20Test%20Parent/Fishing%20Type/Carp%20Fishing.tkw" xlink:title="Carp Fishing">Carp Fishing</keyword>
+          <keyword xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/401%20Automated%20Test%20Parent/Fishing%20Type/Float%20Fishing.tkw" xlink:title="Float Fishing">Float Fishing</keyword>
+          <keyword xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/401%20Automated%20Test%20Parent/Fishing%20Type/Pole%20Fishing.tkw" xlink:title="Pole Fishing">Pole Fishing</keyword>
+        </Content>
+      </tcm:Content>
+      <tcm:Metadata />
+      <tcm:IsBasedOnTridionWebSchema>true</tcm:IsBasedOnTridionWebSchema>
+      <tcm:MultimediaType xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/SRQ9128/components" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="LinkedKeyword" itemUrl="/webdav/401%20Automated%20Test%20Parent/Fishing%20Type/Carp%20Fishing.tkw" linkName="Content" xpath="*[local-name() = 'Content'][1]/*[local-name() = 'keyword'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedKeyword" itemUrl="/webdav/401%20Automated%20Test%20Parent/Fishing%20Type/Float%20Fishing.tkw" linkName="Content" xpath="*[local-name() = 'Content'][1]/*[local-name() = 'keyword'][2]/@xlink:href" />
+    <Dependency dependencyType="LinkedKeyword" itemUrl="/webdav/401%20Automated%20Test%20Parent/Fishing%20Type/Pole%20Fishing.tkw" linkName="Content" xpath="*[local-name() = 'Content'][1]/*[local-name() = 'keyword'][3]/@xlink:href" />
+    <Dependency dependencyType="Schema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/SRQ9128/schemas/Fishing%20Rod.xsd" linkName="Schema" />
+  </Dependencies>
+</PackageItem>

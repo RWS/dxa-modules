@@ -1,0 +1,6 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/400%20Example%20Site" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="BluePrintParent" itemUrl="/webdav/100%20Master/Building%20Blocks/Settings/Impress" linkName="" />
+  </Dependencies>
+</PackageItem>

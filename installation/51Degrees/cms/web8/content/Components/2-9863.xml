@@ -1,0 +1,20 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>51 Degrees Configuration</tcm:Title>
+      <tcm:Type>Normal</tcm:Type>
+      <tcm:Schema xlink:type="simple" xlink:title="51 Degrees Configuration" xlink:href="/webdav/100%20Master/Building%20Blocks/Modules/51Degrees/Site%20Manager/Schemas/51%20Degrees%20Configuration.xsd" IsMandatory="false" />
+      <tcm:Content>
+        <Degrees51Configuration xmlns="http://www.sdl.com/web/schemas/51degrees" />
+      </tcm:Content>
+      <tcm:Metadata />
+      <tcm:IsBasedOnTridionWebSchema>true</tcm:IsBasedOnTridionWebSchema>
+      <tcm:MultimediaType xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/100%20Master" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/100%20Master/Building%20Blocks/Settings/51Degrees/Site%20Manager" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="Schema" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/51Degrees/Site%20Manager/Schemas/51%20Degrees%20Configuration.xsd" linkName="Schema" />
+  </Dependencies>
+</PackageItem>

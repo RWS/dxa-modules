@@ -1,0 +1,22 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>TSI-1757 Test Component 2</tcm:Title>
+      <tcm:Type>Normal</tcm:Type>
+      <tcm:Schema xlink:type="simple" xlink:title="TSI-1757 Test Schema 2" xlink:href="/webdav/500%20Automated%20Test%20Child/Building%20Blocks/Modules/Test/TSI-1757%20Test%20Schema%202.xsd" IsMandatory="false" />
+      <tcm:Content>
+        <Content xmlns="uuid:3a50c82e-f113-4e7d-94f5-23359b3b0a4e">
+          <textField>This is the textField of TSI-1757 Test Component 2</textField>
+        </Content>
+      </tcm:Content>
+      <tcm:Metadata />
+      <tcm:IsBasedOnTridionWebSchema>true</tcm:IsBasedOnTridionWebSchema>
+      <tcm:MultimediaType xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/500%20Automated%20Test%20Child" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/500%20Automated%20Test%20Child/Building%20Blocks/Content/Test/Regression" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="Schema" itemUrl="/webdav/500%20Automated%20Test%20Child/Building%20Blocks/Modules/Test/TSI-1757%20Test%20Schema%202.xsd" linkName="Schema" />
+  </Dependencies>
+</PackageItem>

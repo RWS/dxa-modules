@@ -1,0 +1,56 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Homepage List</tcm:Title>
+      <tcm:Type>Normal</tcm:Type>
+      <tcm:Schema xlink:type="simple" xlink:title="Item List" xlink:href="/webdav/200%20Example%20Content/Building%20Blocks/Modules/Core/Editor/Schemas/Item%20List.xsd" IsMandatory="false" />
+      <tcm:Content>
+        <ItemList xmlns="http://www.sdl.com/web/schemas/core">
+          <itemListElement>
+            <subheading>Discover More</subheading>
+            <content>Explore a wealth of information on this site</content>
+            <media xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/200%20Example%20Content/Building%20Blocks/Content/Images/Large/ballon-burner.jpg" xlink:title="ballon-burner" />
+            <link>
+              <linkText>Discover More</linkText>
+              <internalLink xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/200%20Example%20Content/Building%20Blocks/Content/Further%20Information/Further%20Information%20Intro.xml" xlink:title="Further Information Intro" />
+            </link>
+          </itemListElement>
+          <itemListElement>
+            <subheading>Stay Informed</subheading>
+            <content>Keep up to date with our latest news...</content>
+            <media xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/200%20Example%20Content/Building%20Blocks/Content/Images/Large/bulls-eye.JPG" xlink:title="bulls-eye" />
+            <link>
+              <linkText>View News</linkText>
+              <internalLink xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/200%20Example%20Content/Building%20Blocks/Content/Articles/News%20Intro.xml" xlink:title="News Intro" />
+            </link>
+          </itemListElement>
+          <itemListElement>
+            <subheading>Come Visit!</subheading>
+            <content>Come by our office...</content>
+            <media xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/200%20Example%20Content/Building%20Blocks/Content/Images/Large/map.jpg" xlink:title="map" />
+            <link>
+              <linkText>Office Location</linkText>
+              <internalLink xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/webdav/200%20Example%20Content/Building%20Blocks/Content/About/Head%20Office%20Location.xml" xlink:title="Head Office Location" />
+            </link>
+          </itemListElement>
+        </ItemList>
+      </tcm:Content>
+      <tcm:Metadata>
+        <Metadata xmlns="http://www.sdl.com/web/schemas/core" />
+      </tcm:Metadata>
+      <tcm:IsBasedOnTridionWebSchema>true</tcm:IsBasedOnTridionWebSchema>
+      <tcm:MultimediaType xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/200%20Example%20Content" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/200%20Example%20Content/Building%20Blocks/Content/Homepage" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/200%20Example%20Content/Building%20Blocks/Content/Images/Large/ballon-burner.jpg" linkName="Content" xpath="*[local-name() = 'ItemList'][1]/*[local-name() = 'itemListElement'][1]/*[local-name() = 'media'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/200%20Example%20Content/Building%20Blocks/Content/Further%20Information/Further%20Information%20Intro.xml" linkName="Content" xpath="*[local-name() = 'ItemList'][1]/*[local-name() = 'itemListElement'][1]/*[local-name() = 'link'][1]/*[local-name() = 'internalLink'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/200%20Example%20Content/Building%20Blocks/Content/Images/Large/bulls-eye.JPG" linkName="Content" xpath="*[local-name() = 'ItemList'][1]/*[local-name() = 'itemListElement'][2]/*[local-name() = 'media'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/200%20Example%20Content/Building%20Blocks/Content/Articles/News%20Intro.xml" linkName="Content" xpath="*[local-name() = 'ItemList'][1]/*[local-name() = 'itemListElement'][2]/*[local-name() = 'link'][1]/*[local-name() = 'internalLink'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/200%20Example%20Content/Building%20Blocks/Content/Images/Large/map.jpg" linkName="Content" xpath="*[local-name() = 'ItemList'][1]/*[local-name() = 'itemListElement'][3]/*[local-name() = 'media'][1]/@xlink:href" />
+    <Dependency dependencyType="LinkedComponent" itemUrl="/webdav/200%20Example%20Content/Building%20Blocks/Content/About/Head%20Office%20Location.xml" linkName="Content" xpath="*[local-name() = 'ItemList'][1]/*[local-name() = 'itemListElement'][3]/*[local-name() = 'link'][1]/*[local-name() = 'internalLink'][1]/@xlink:href" />
+    <Dependency dependencyType="Schema" itemUrl="/webdav/200%20Example%20Content/Building%20Blocks/Modules/Core/Editor/Schemas/Item%20List.xsd" linkName="Schema" />
+  </Dependencies>
+</PackageItem>

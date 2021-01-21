@@ -1,0 +1,25 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <BinaryFileLocation>Binaries\6-603.jpg</BinaryFileLocation>
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Test Image With Spaces</tcm:Title>
+      <tcm:Type>Multimedia</tcm:Type>
+      <tcm:Schema xlink:type="simple" xlink:title="Image" xlink:href="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Schemas/Image.xsd" IsMandatory="false" />
+      <tcm:Content />
+      <tcm:Metadata>
+        <Metadata xmlns="http://www.sdl.com/web/schemas/core" />
+      </tcm:Metadata>
+      <tcm:IsBasedOnTridionWebSchema>true</tcm:IsBasedOnTridionWebSchema>
+      <tcm:MultimediaType xlink:type="simple" xlink:title="Jpeg image" xlink:href="tcm:0-2-65544" />
+      <tcm:MultimediaFilename>Test Image With Spaces.jpg</tcm:MultimediaFilename>
+      <tcm:MultimediaFileSize>257059</tcm:MultimediaFileSize>
+      <tcm:IsExternalMultimediaFile>false</tcm:IsExternalMultimediaFile>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/401%20Automated%20Test%20Parent" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Content/Test/Regression" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="MultimediaType" itemUrl="/webdav//Jpeg%20image.tmt" linkName="BinaryContent/MultimediaType" />
+    <Dependency dependencyType="Schema" itemUrl="/webdav/401%20Automated%20Test%20Parent/Building%20Blocks/Modules/Core/Editor/Schemas/Image.xsd" linkName="Schema" />
+  </Dependencies>
+</PackageItem>

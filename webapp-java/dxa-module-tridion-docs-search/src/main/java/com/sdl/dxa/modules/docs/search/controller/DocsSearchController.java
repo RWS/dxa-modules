@@ -36,13 +36,17 @@ public class DocsSearchController {
     private DocsExceptionHandler exceptionHandler;
 
     @Autowired
+    private ServletContext context;
+
+    @Autowired
     private SearchService searchProvider;
 
     @RequestMapping(method = POST, value = "/api/search")
     @ResponseBody
-    public SearchResultSet search(@RequestBody String parametersJson,
-                                  ServletContext context) throws SearchException {
-        if (parametersJson == null) throw new IllegalArgumentException("Search parameters cannot be empty");
+    public SearchResultSet search(@RequestBody String parametersJson) throws SearchException {
+        if (parametersJson == null) {
+            throw new IllegalArgumentException("Search parameters cannot be empty");
+        }
         try (Performance perf = new Performance(1_000L,
                 "search " + parametersJson.replaceAll(MORE_THAN_ONE_SPACES, ""))) {
             String namespace = context.getInitParameter("iq-namespace");
