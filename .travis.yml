@@ -4,7 +4,7 @@ jdk:
 script:
   echo "Going to build GUI ...";
   cd gui;
-  travis_wait 15 mvn clean install --batch-mode  -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn;
+  travis_wait 20 mvn clean install --batch-mode  -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn;
   cd ..;
   echo "Going to build Web Application ...";
   cd webapp-java;
