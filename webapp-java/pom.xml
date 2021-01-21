@@ -50,7 +50,7 @@
             <dependency>
                 <groupId>com.sdl.tridion.xo</groupId>
                 <artifactId>xo-compatible-client</artifactId>
-                <version>${cd-cil.version}</version>
+                <version>11.0.0-1072</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
