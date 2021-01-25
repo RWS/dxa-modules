@@ -6,7 +6,7 @@ This script is intended to be included ("dot-sourced") in another PowerShell scr
 #>
 
 
-function Add-ModelBuilder([string] $modelBuilderType, [xml] $configDoc) 
+function Add-ModelBuilder([string] $modelBuilderType, [xml] $configDoc, [Boolean]$onTop)
 {
     $modelBuilderPipelineElement = $configDoc.configuration.modelBuilderPipeline
     $modelBuilderElement = $modelBuilderPipelineElement.SelectSingleNode("add[@type='$modelBuilderType']")
@@ -19,7 +19,13 @@ function Add-ModelBuilder([string] $modelBuilderType, [xml] $configDoc)
 	{ 
         $modelBuilderElement = $configDoc.CreateElement("add")
 		$modelBuilderElement.SetAttribute("type", $modelBuilderType)
-		$modelBuilderPipelineElement.AppendChild($modelBuilderElement) | Out-Null
+        if($onTop) {
+            $modelBuilderPipelineElement.InsertBefore($modelBuilderElement, $modelBuilderPipelineElement.FirstChild
+            ) | Out-Null
+        } else {
+            $modelBuilderPipelineElement.AppendChild($modelBuilderElement) | Out-Null
+        }
+
 		Write-Host "Added Model Builder '$modelBuilderType'"
     }
 }
@@ -52,7 +58,7 @@ function Set-UnityTypeMapping([string] $type, [string] $mapTo, [xml] $configDoc)
 	$typeElement = $mainContainer.types.type | ? {$_.type -eq $type}
 	if ($typeElement)
     {
-        Write-Host "Found existing type mapping: '$type' -> '$mapTo'"
+        Write-Host "Found existing type mapping: '$type' -> '$($typeElement.mapTo)'"
     }
     else
 	{
@@ -181,4 +187,19 @@ function Add-CdStorageBundle([string] $src, [xml] $configDoc)
         $bundleElement.SetAttribute("src", $src)
         Write-Host "Added Bundle '$src'."
     }
+}
+
+function Set-AppSetting([string]$key, [string]$value, [xml] $configDoc)
+{
+    $appSettingsNode = Get-XmlElement "/configuration/appSettings" $configDoc
+
+    $appSettingNode = $appSettingsNode.SelectSingleNode("add[@key='$key']")
+    if (!$appSettingNode) 
+    {
+        $appSettingNode = $configDoc.CreateElement("add")
+        $appSettingNode.SetAttribute("key", "$key")
+        $dummy = $appSettingsNode.AppendChild($appSettingNode)
+    }
+    $appSettingNode.SetAttribute("value", $value)
+    Write-Host "Set app setting '$key' to '$value'"
 }
