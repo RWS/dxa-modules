@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-   Deploys the DXA Audience Manager Module in a DXA Web Application
+   Deploys the DXA Context Expressions Module in a DXA Web Application
 .EXAMPLE
    .\web-install.ps1 -distDestination "c:\inetpub\wwwroot\mysite" 
 #>
@@ -11,14 +11,10 @@ Param(
     [Parameter(Mandatory=$true, HelpMessage="The file system path of the root folder of your DXA Web Application")]
     [string]$distDestination,
 
-    # Path of the Audience Manager (client) log file
-    [Parameter(Mandatory=$false)]
-    [string]$logPath = "C:\Temp\logs\am_client.log",
-
-    # The log level for the Audience Manager (client) log file
-    [Parameter(Mandatory=$false)]
-    [ValidateSet("Error", "Warning", "Information", "Verbose")]
-    [string]$logLevel = "Warning"
+    #The version of CIS you a using. Can be '8.1.1' or '8.5'.
+    [Parameter(Mandatory=$true, HelpMessage="The version of CIS you a using. Can be '8.1.1' or '8.5'.")]
+    [ValidateSet("8.1.1", "8.5")]
+    [string]$cisVersion
 )
 
 #Terminate script on first occurred exception
@@ -29,102 +25,11 @@ $PSScriptDir = Split-Path $MyInvocation.MyCommand.Path
 . (Join-Path $PSScriptDir "..\DxaDeployUtils.ps1")
 
 #Process 'WhatIf' and 'Confirm' options
-if (!($pscmdlet.ShouldProcess($distDestination, "Deploy the DXA Audience Manager Module"))) { return }
+if (!($pscmdlet.ShouldProcess($distDestination, "Deploy the DXA Context Expressions Module"))) { return }
 
 $distSource = $PSScriptDir
 $distSource = $distSource.TrimEnd("\")
 $distDestination = $distDestination.TrimEnd("\")
-
-
-function Set-MembershipProvider([string] $providerName, [string] $providerType, [bool] $isDefaultProvider, [xml] $configDoc)
-{
-    $membershipProvidersElement = Get-XmlElement "/configuration/system.web/membership/providers" $configDoc
-    if (!$membershipProvidersElement.HasChildNodes)
-    {
-        $clearElement = $configDoc.CreateElement("clear")
-        $membershipProvidersElement.AppendChild($clearElement) | Out-Null
-    }
-    $membershipProviderElement = $membershipProvidersElement.SelectSingleNode("add[@name='$providerName']")
-    if ($membershipProviderElement)
-    {
-        Write-Host "Membership Provider '$providerName' is already configured"
-    }
-    else
-    {
-        $membershipProviderElement = $configDoc.CreateElement("add")
-        $membershipProviderElement.SetAttribute("name", $providerName)
-        $membershipProviderElement.SetAttribute("type", $providerType)
-        $membershipProvidersElement.AppendChild($membershipProviderElement) | Out-Null
-
-        Write-Host "Added '$providerName' Membership Provider."
-    }
-
-    if ($isDefaultProvider)
-    {
-        $membershipProvidersElement.ParentNode.SetAttribute("defaultProvider", $providerName)
-        Write-Host "Set '$providerName' as default Membership Provider."
-    }
-}
-
-function Add-SystemDiagnosticsLogger([string] $logSourceName, [string] $listenerName, [string] $listenerType, [string] $logPath, [string] $logLevel, [xml] $configDoc)
-{
-    $systemDiagnosticsElement = Get-XmlElement "/configuration/system.diagnostics" $configDoc
-
-    $sourcesElement = $systemDiagnosticsElement.SelectSingleNode("sources")
-    if (!$sourcesElement)
-    {
-        $sourcesElement = $configDoc.CreateElement("sources")
-        $systemDiagnosticsElement.AppendChild($sourcesElement) | Out-Null
-    }
-
-    $sourceElement = $sourcesElement.SelectSingleNode("source[@name='$logSourceName']")
-    if ($sourceElement)
-    {
-        Write-Host "Log source '$logSourceName' is already configured."
-    }
-    else
-    {
-        $sourceXml = [xml] "<source name='$logSourceName' switchName='sourceSwitch'><listeners><add name='$listenerName'/></listeners></source>"
-        $sourceElement = $configDoc.ImportNode($sourceXml.DocumentElement, $true)
-        $sourcesElement.AppendChild($sourceElement) | Out-Null
-        Write-Host "Added log source '$logSourceName'."
-    }
-
-    $sharedListenersElement = $systemDiagnosticsElement.SelectSingleNode("sharedListeners")
-    if (!$sharedListenersElement)
-    {
-        $sharedListenersElement = $configDoc.CreateElement("sharedListeners")
-        $systemDiagnosticsElement.AppendChild($sharedListenersElement) | Out-Null
-    }
-
-    $listenerElement = $sharedListenersElement.SelectSingleNode("add[@name='$listenerName']")
-    if (!$listenerElement)
-    {
-        $listenerXml = [xml] "<add name='$listenerName' initializeData='$logPath' rollSizeKb='102400' timestampPattern='yyyy-MM-dd' rollFileExistsBehavior='Increment' rollInterval='Midnight' maxArchivedFiles='0' type='$listenerType' />"
-        $listenerElement = $configDoc.ImportNode($listenerXml.DocumentElement, $true)
-        $sharedListenersElement.AppendChild($listenerElement) | Out-Null
-        Write-Host "Added trace listener '$listenerName'"
-
-    }
-
-    $switchesElement = $systemDiagnosticsElement.switches
-    if (!$switchesElement)
-    {
-        $switchesElement = $configDoc.CreateElement("switches")
-        $systemDiagnosticsElement.AppendChild($switchesElement) | Out-Null
-    }
-
-    $switchElement = $switchesElement.SelectSingleNode("add[@name='sourceSwitch']")
-    if (!$switchElement)
-    {
-        $switchElement = $configDoc.CreateElement("add")
-        $switchElement.SetAttribute("name", "sourceSwitch")
-        $switchesElement.AppendChild($switchElement) | Out-Null
-    }
-    $switchElement.SetAttribute("value", $logLevel)
-    Write-Host "Set log level to '$logLevel'."
-}
-
 
 Write-Host "Copying files to '$distDestination' ..."
 Copy-Item $distSource\web\* $distDestination -Recurse -Force
@@ -132,7 +37,31 @@ Copy-Item $distSource\web\* $distDestination -Recurse -Force
 $webConfigFile = "$distDestination\Web.config"
 Write-Host "Updating '$webConfigFile' ..."
 [xml] $webConfigDoc = Get-Content $webConfigFile
-Enable-AmbientFrameworkModule $webConfigDoc
-Set-MembershipProvider "AudienceManagerMembership" "Sdl.Web.Modules.AudienceManager.Security.AudienceManagerMembershipProvider, Sdl.Web.Modules.AudienceManager" $true $webConfigDoc
-Add-SystemDiagnosticsLogger "AudienceManagerLogger" "AudienceManagerTraceListener" "Sdl.AudienceManager.ContentDelivery.Logging.TraceListeners.RollingFlatFileTraceListener, Sdl.AudienceManager.ContentDelivery" $logPath $logLevel $webConfigDoc
+if ($cisVersion.StartsWith("8.1"))
+{
+    $claimsProviderType = "AdfContextClaimsProvider"
+    Enable-AmbientFrameworkModule $webConfigDoc
+}
+else
+{
+    $claimsProviderType = "ContextServiceClaimsProvider"
+    Set-AppSetting "context-service-publication-evidence" "true" $webConfigDoc
+}
+Add-ModelBuilder "Sdl.Web.Modules.ContextExpressions.ContextExpressionModelBuilder, Sdl.Web.Modules.ContextExpressions" $webConfigDoc
 $webConfigDoc.Save($webConfigFile)
+
+$unityConfigFile = "$distDestination\Unity.config"
+Write-Host "Updating '$unityConfigFile' ..."
+[xml] $unityConfigDoc = Get-Content $unityConfigFile
+Add-UnityDeclaration "assembly" "Sdl.Web.Modules.ContextExpressions" $unityConfigDoc
+Add-UnityDeclaration "namespace" "Sdl.Web.Modules.ContextExpressions" $unityConfigDoc
+Set-UnityTypeMapping "IConditionalEntityEvaluator" "ContextExpressionEvaluator" $unityConfigDoc
+Set-UnityTypeMapping "IContextClaimsProvider" $claimsProviderType $unityConfigDoc
+$unityConfigDoc.Save($unityConfigFile)
+
+$cdAmbientConfigFile = "$distDestination\bin\config\cd_ambient_conf.xml"
+Write-Host "Updating '$cdAmbientConfigFile' ..."
+[xml] $cdAmbientConfigDoc = Get-Content $cdAmbientConfigFile
+Add-CdAmbientClaim "taf:request:headers" "/Configuration/ForwardedClaims" $cdAmbientConfigDoc
+Add-CdAmbientClaim "taf:request:full_url" "/Configuration/ForwardedClaims" $cdAmbientConfigDoc
+$cdAmbientConfigDoc.Save($cdAmbientConfigFile)
