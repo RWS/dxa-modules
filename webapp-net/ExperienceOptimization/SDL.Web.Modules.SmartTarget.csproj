@@ -101,7 +101,7 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy $(SolutionDir)packages\Sdl.Web.Experience.9.0.0\lib\net462\*.* $(TargetDir)
+    <PostBuildEvent Condition="'$(TRAVIS)' == ''">copy $(SolutionDir)packages\Sdl.Web.Experience.9.0.0\lib\net462\*.* $(TargetDir)
 
 REM Deploy build artifacts to DXA Site (on development machines with DXA_SITE_DIR environment variable set)
 if defined DXA_SITE_DIR (
