@@ -4,7 +4,7 @@ Build status
 ------------
 - Develop: [![Build Status](https://travis-ci.com/sdl/dxa-modules.svg?branch=develop)](https://travis-ci.com/sdl/dxa-modules)
 - 2.2: [![Build Status](https://travis-ci.com/sdl/dxa-modules.svg?branch=release%2F2.2)](https://travis-ci.com/sdl/dxa-modules)
-
+- 1.8: [![Build Status](https://travis-ci.com/sdl/dxa-modules.svg?branch=release%2F1.8)](https://travis-ci.com/sdl/dxa-modules)
 
 About
 -----
