@@ -113,7 +113,7 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>REM Deploy build artifacts to DXA Site (on development machines with DXA_SITE_DIR environment variable set)
+    <PostBuildEvent Condition="'$(TRAVIS)' == ''">REM Deploy build artifacts to DXA Site (on development machines with DXA_SITE_DIR environment variable set)
 if defined DXA_SITE_DIR (
 xcopy "$(TargetDir)*.*" "%25DXA_SITE_DIR%25\bin" /S /Y
 xcopy "$(ProjectDir)Areas" "%25DXA_SITE_DIR%25\Areas" /S /I /Y
