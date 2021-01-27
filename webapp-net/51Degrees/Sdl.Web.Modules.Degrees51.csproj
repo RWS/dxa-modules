@@ -91,7 +91,7 @@
     <Error Condition="!Exists('..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\build\net452\Sdl.Dxa.Framework.Web8.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Sdl.Dxa.Framework.Web8.$(DxaFrameworkVersion)\build\net452\Sdl.Dxa.Framework.Web8.targets')))" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>REM Deploy build artifacts to DXA Site (on development machines with DXA_SITE_DIR environment variable set)
+    <PostBuildEvent Condition="'$(TRAVIS)' == ''">REM Deploy build artifacts to DXA Site (on development machines with DXA_SITE_DIR environment variable set)
 if defined DXA_SITE_DIR (
 xcopy "$(TargetDir)*.*" "%25DXA_SITE_DIR%25\bin" /Y
 )</PostBuildEvent>

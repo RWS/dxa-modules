@@ -1,0 +1,4 @@
+matrix:
+  include:
+    - language: csharp
+      solution: webapp-net/DxaModules.sln      
