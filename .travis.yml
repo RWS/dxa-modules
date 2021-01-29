@@ -19,6 +19,6 @@ matrix:
         - chmod +x gradlew
         - git ls-tree HEAD
         - echo 'Building'
-        - travis_wait 25 ./gradlew build  
+        - travis_wait 35 ./gradlew build  
     - language: csharp
       solution: webapp-net/DxaModules.sln            
