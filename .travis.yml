@@ -12,10 +12,13 @@ matrix:
       dist: 
         - trusty
       script:
+        - echo 'Going into java folder'
         - cd webapp-java
+        - echo 'Setting up permissions'
         - git update-index --chmod=+x gradlew
         - chmod +x gradlew
         - git ls-tree HEAD
+        - echo 'Building'
         - ./gradlew build  
     - language: csharp
       solution: webapp-net/DxaModules.sln            
