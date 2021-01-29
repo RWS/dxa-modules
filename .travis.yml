@@ -1,4 +1,20 @@
 matrix:
   include:
+    - language: java
+      sudo: false
+      jdk:
+        - openjdk8
+      script:
+      install: 
+        - skip
+      os: 
+        - linux
+      dist: 
+        - trusty
+      script:
+        - git update-index --chmod=+x gradlew
+        - chmod +x gradlew
+        - git ls-tree HEAD
+        - ./gradlew build  
     - language: csharp
-      solution: webapp-net/DxaModules.sln      
+      solution: webapp-net/DxaModules.sln            
