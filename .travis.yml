@@ -15,6 +15,7 @@ matrix:
         - git update-index --chmod=+x gradlew
         - chmod +x gradlew
         - git ls-tree HEAD
+        - cd webapp-java
         - ./gradlew build  
     - language: csharp
       solution: webapp-net/DxaModules.sln            
