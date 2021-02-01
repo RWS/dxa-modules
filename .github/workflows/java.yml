@@ -14,12 +14,14 @@ jobs:
     steps:
     - name: Checkout...
       uses: actions/checkout@v2
-    - name: Building GUI...      
+    - name: Installing NPM...
       run: 
         cd gui;
+        chmod a+w /usr/local/lib/node_modules;
         npm install;
         npm install -g;
-        chmod a+w /usr/local/lib/node_modules;
+    - name: Building GUI...
+      run:         
         mvn -B clean install --batch-mode -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn;
     - name: Building Web application...
       run: 
