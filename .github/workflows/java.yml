@@ -21,6 +21,7 @@ jobs:
     - name: 3. Building GUI...
       run:
         cd gui;
+        npm install -g;
         mvn -B clean install --batch-mode -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn;
     - name: 4. Building Web application...
       run:
