@@ -18,13 +18,11 @@ jobs:
       run: 
         sudo chown -R runner:docker /usr/local/lib/node_modules;
         chmod a+w /usr/local/lib/node_modules;
-    - name: 3. Going to GUI...
-      run: 
-        cd gui;   
-    - name: 4. Building GUI...
+    - name: 3. Building GUI...
       run:
+        cd ../gui;
         mvn -B clean install --batch-mode -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn;
-    - name: 5. Building Web application...
+    - name: 4. Building Web application...
       run:
         cd ../webapp-java;
         mvn -B clean install --batch-mode -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn;
