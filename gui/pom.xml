@@ -45,37 +45,6 @@
                         <phase>generate-resources</phase>
                     </execution>
 
-<!--
-                    <execution>
-                        <id>npm prune</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                        <configuration>
-                            <arguments>prune -registry=${npm.repo}</arguments>
-                        </configuration>
-                    </execution>
-
-                    <execution>
-                        <id>npm update</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                        <configuration>
-                            <arguments>update -registry=${npm.repo}</arguments>
-                        </configuration>
-                    </execution>
-
-                    <execution>
-                        <id>npm install</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                        <configuration>
-                            <arguments>install -registry=${npm.repo} --unsafe-perm</arguments>
-                        </configuration>
-                    </execution>
--->
                     <execution>
                         <id>build script</id>
                         <goals>
