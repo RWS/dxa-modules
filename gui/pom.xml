@@ -45,6 +45,7 @@
                         <phase>generate-resources</phase>
                     </execution>
 
+<!--
                     <execution>
                         <id>npm prune</id>
                         <goals>
@@ -74,7 +75,7 @@
                             <arguments>install -registry=${npm.repo} --unsafe-perm</arguments>
                         </configuration>
                     </execution>
-
+-->
                     <execution>
                         <id>build script</id>
                         <goals>
