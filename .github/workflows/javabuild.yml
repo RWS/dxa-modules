@@ -1,0 +1,25 @@
+ name: javabuild
+
+on:
+  push:
+    branches: [ develop, release/2.2, release/1.8 ]
+  pull_request:
+    branches: [ develop, release/2.2, release/1.8 ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Building GUI...
+      run: 
+        - cd gui
+        - mvn clean install --batch-mode -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn;
+    - name: Building Web application...
+      run: 
+        - cd ../webapp-java
+        - mvn clean install --batch-mode -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn;
+    - name: Build and Publish Web App
+      run: msbuild webapp-net/DxaModules.sln /p:Configuration=Release
