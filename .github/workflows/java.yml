@@ -17,6 +17,7 @@ jobs:
     - name: Installing NPM...
       run: 
         cd gui;
+        ls -la /usr/local/lib/node_modules;
         chmod a+w /usr/local/lib/node_modules;
         npm install;
         npm install -g;
