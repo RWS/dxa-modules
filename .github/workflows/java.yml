@@ -14,21 +14,21 @@ jobs:
     steps:
     - name: 1. Checkout...
       uses: actions/checkout@v2
-    - name: 2. Going to GUI...
-      run: 
-        cd gui;        
-    - name: 3. Setting permissions...
+    - name: 2. Setting permissions...
       run: 
         sudo chown -R runner:runner /usr/local/lib/node_modules;
         chmod a+w /usr/local/lib/node_modules;
+    - name: 3. Going to GUI...
+      run: 
+        cd gui;
+        ls -la;
     - name: 4. Installing NPM...
       run:        
-        npm install;
         npm install -g;
     - name: 5. Building GUI...
-      run:         
+      run:
         mvn -B clean install --batch-mode -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn;
     - name: 6. Building Web application...
-      run: 
+      run:
         cd ../webapp-java;
         mvn -B clean install --batch-mode -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn;
