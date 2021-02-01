@@ -15,8 +15,10 @@ jobs:
     - name: Checkout...
       uses: actions/checkout@v2
     - name: Building GUI...      
-    - run: cd gui
-    - run: mvn clean install --batch-mode -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
+      run: 
+        cd gui
+        mvn clean install --batch-mode -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
     - name: Building Web application...
-    - run: cd ../webapp-java
-    - run: mvn clean install --batch-mode -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
+      run: 
+        cd ../webapp-java
+        mvn clean install --batch-mode -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
