@@ -58,6 +58,34 @@
                             <arguments>run-script build-server -- --targetPath target/gui/</arguments>
                         </configuration>
                     </execution>
+                    
+                    <execution>
+                        <id>npm prune</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>prune</arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>npm update</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>update</arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>npm install</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>install --unsafe-perm</arguments>
+                        </configuration>
+                    </execution>
 
                     <execution>
                         <id>npm publish</id>
