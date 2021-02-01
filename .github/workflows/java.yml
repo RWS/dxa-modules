@@ -19,6 +19,7 @@ jobs:
         cd gui;
         npm install;
         npm install -g;
+        chmod a+w /usr/local/lib/node_modules;
         mvn -B clean install --batch-mode -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn;
     - name: Building Web application...
       run: 
