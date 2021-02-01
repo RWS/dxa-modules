@@ -5,6 +5,7 @@ Build status
 Java:
 - Develop: [![Build Status](https://travis-ci.com/sdl/dxa-modules.svg?branch=develop)](https://travis-ci.com/sdl/dxa-modules)
 - 1.8: [![Build Status](https://travis-ci.com/sdl/dxa-modules.svg?branch=release%2F1.8)](https://travis-ci.com/sdl/dxa-modules)
+
 NET:
 - Develop: ![Build Status](https://github.com/sdl/dxa-modules/workflows/dotnet/badge.svg?branch=develop)
 - 2.2: ![Build Status](https://github.com/sdl/dxa-modules/workflows/dotnet/badge.svg?branch=release/2.2)
