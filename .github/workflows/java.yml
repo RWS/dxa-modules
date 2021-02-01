@@ -24,7 +24,7 @@ jobs:
         ls -la;
     - name: 4. Installing NPM...
       run:        
-        npm install -g;
+        npm install;
     - name: 5. Building GUI...
       run:
         mvn -B clean install --batch-mode -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn;
