@@ -6,17 +6,19 @@ on:
     branches: [ develop, release/2.2, release/1.8 ]
   pull_request:
     branches: [ develop, release/2.2, release/1.8 ]
-
+    
 jobs:
   build:
-
-    runs-on: windows-latest
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Add msbuild to PATH
-      uses: microsoft/setup-msbuild@v1.0.2
-    - name: Restore NuGet Packages
-      run: nuget restore webapp-net/DxaModules.sln
-    - name: Build and Publish Web App
-      run: msbuild webapp-net/DxaModules.sln /p:Configuration=Release
+    strategy:
+      matrix:
+        os: windows-latest
+        runs-on: windows-latest
+        steps:
+          - uses: actions/checkout@v2
+          - name: Add msbuild to PATH
+            uses: microsoft/setup-msbuild@v1.0.2
+          - name: Restore NuGet Packages
+            run: nuget restore webapp-net/DxaModules.sln
+          - name: Build and Publish Web App
+            run: msbuild webapp-net/DxaModules.sln /p:Configuration=Release: [value1, ...valueN]
+    
