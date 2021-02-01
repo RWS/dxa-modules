@@ -20,5 +20,5 @@ jobs:
           - name: Restore NuGet Packages
             run: nuget restore webapp-net/DxaModules.sln
           - name: Build and Publish Web App
-            run: msbuild webapp-net/DxaModules.sln /p:Configuration=Release: [value1, ...valueN]
+            run: msbuild webapp-net/DxaModules.sln /p:Configuration=Release
     
