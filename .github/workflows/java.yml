@@ -17,7 +17,7 @@ jobs:
     - name: Installing NPM...
       run: 
         cd gui;        
-        sudo chown -R runner: /usr/local/lib/node_modules;
+        sudo chown -R runner:runner /usr/local/lib/node_modules;
     - name: Who am I?
       run: 
         whoami;
