@@ -16,19 +16,15 @@ jobs:
       uses: actions/checkout@v2
     - name: 2. Setting permissions...
       run: 
-        sudo chown -R runner:runner /usr/local/lib/node_modules;
+        sudo chown -R runner:docker /usr/local/lib/node_modules;
         chmod a+w /usr/local/lib/node_modules;
     - name: 3. Going to GUI...
       run: 
-        cd gui;
-        ls -la;
-    - name: 4. Installing NPM...
-      run:        
-        npm install;
-    - name: 5. Building GUI...
+        cd gui;   
+    - name: 4. Building GUI...
       run:
         mvn -B clean install --batch-mode -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn;
-    - name: 6. Building Web application...
+    - name: 5. Building Web application...
       run:
         cd ../webapp-java;
         mvn -B clean install --batch-mode -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn;
