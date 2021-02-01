@@ -16,8 +16,8 @@ jobs:
       uses: actions/checkout@v2
     - name: Installing NPM...
       run: 
-        cd gui;
-        whoami;
+        cd gui;        
+        sudo chown -R runner: /usr/local/lib/node_modules
         ls -la /usr/local/lib/node_modules;
         chmod a+w /usr/local/lib/node_modules;
         npm install;
