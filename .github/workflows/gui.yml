@@ -18,7 +18,6 @@ jobs:
       run:
         cd gui;
         gulp --version;
-        sudo npm install -g gulp-cli;
         sudo npm install --save-dev gulp;
     - name: Preparing NPM...
       run:
