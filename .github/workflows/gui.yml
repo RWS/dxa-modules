@@ -20,17 +20,7 @@ jobs:
         sudo npm install;
         sudo npm install -g;
         sudo chown -R $USER:$(id -gn $USER) /home/runner/.config;
-        #mkdir ~/.npm-global;
-        #npm config set prefix '~/.npm-global';
-        #export PATH=~/.npm-global/bin:$PATH;
-        #source ~/.profile;
-        #npm install -g jshint;
-        #no modules found here-~/work/dxa-modules/dxa-modules/gui
-        #sudo chown -R $USER ~/.npm-global;
-        #sudo chown -R $USER ~/.npm;
-        #sudo chown -R $USER /usr/lib/node_modules;
-        #sudo chown -R $USER /usr/local/lib/node_modules;
     - name: Building GUI...
       run:
         cd gui;
-        mvn -B clean install --batch-mode -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn;
+        sudo mvn -B clean install --batch-mode -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn;
