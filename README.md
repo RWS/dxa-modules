@@ -12,7 +12,6 @@ Build status
 
 ### GUI
 - Develop ![build Status](https://github.com/sdl/dxa-modules/workflows/build_GUI/badge.svg?branch=develop)
-- 1.8 ![build Status](https://github.com/sdl/dxa-modules/workflows/build_GUI/badge.svg?branch=release/1.8)
 
 About
 -----
