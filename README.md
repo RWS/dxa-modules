@@ -10,6 +10,10 @@ Build status
 - Develop: ![Build Status](https://github.com/sdl/dxa-modules/workflows/build_dotnet/badge.svg?branch=develop)
 - 1.8: ![Build Status](https://github.com/sdl/dxa-modules/workflows/build_dotnet/badge.svg?branch=release/1.8)
 
+### GUI
+- Develop ![build Status](https://github.com/sdl/dxa-modules/workflows/build_GUI/badge.svg?branch=develop)
+- 1.8 ![build Status](https://github.com/sdl/dxa-modules/workflows/build_GUI/badge.svg?branch=release/1.8)
+
 About
 -----
 The SDL Digital Experience Accelerator (DXA) is a reference implementation of SDL Tridion Sites 9 and SDL Web 8 intended to help you create, design and publish an SDL Tridion/Web-based website quickly.
