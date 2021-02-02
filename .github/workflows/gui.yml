@@ -17,9 +17,9 @@ jobs:
     - name: Installing GULP...
       run:
         cd gui;
+        gulp --version;
         sudo npm install -g gulp-cli;
         sudo npm install --save-dev gulp;
-        gulp --version;
     - name: Preparing NPM...
       run:
         cd gui;
