@@ -2,9 +2,9 @@ name: build_GUI
 
 on:
   push:
-    branches: [ develop, release/2.2, release/1.8 ]
+    branches: [ develop ]
   pull_request:
-    branches: [ develop, release/2.2, release/1.8 ]
+    branches: [ develop ]
 
 jobs:
   build:
