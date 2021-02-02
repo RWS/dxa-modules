@@ -1,0 +1,27 @@
+name: build_GUI
+
+on:
+  push:
+    branches: [ develop, release/2.2, release/1.8 ]
+  pull_request:
+    branches: [ develop, release/2.2, release/1.8 ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout...
+      uses: actions/checkout@v2
+    - name: Installing GULP
+      run:
+        sudo npm install gulp -g;
+    - name: Preparing NPM...
+      working-directory: gui
+      run:
+        npm install
+    - name: Building GUI...
+      working-directory: gui
+      run:
+        sudo mvn -B clean install --batch-mode -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn;
