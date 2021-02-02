@@ -17,4 +17,5 @@ jobs:
     - name: Building Web application...
       working-directory: webapp-java
       run:
-        ./gradlew
+        chmod +x gradlew;
+        ./gradlew;
