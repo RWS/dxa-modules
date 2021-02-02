@@ -14,23 +14,16 @@ jobs:
     steps:
     - name: Checkout...
       uses: actions/checkout@v2
-    - name: Installing GULP & DITA-OT...
+    - name: Installing GULP...
       working-directory: gui
       run:        
-        sudo npm install --save-dev gulp;
-        yarn;
+        npm install --save-dev gulp;      
         gulp --version;
-        cd node_modules;
-        cd dita-ot;
-        ./gradlew;
     - name: Preparing NPM...
       working-directory: gui
       run:        
-        sudo chown -R $USER /usr/local/lib/node_modules;
-        sudo npm install -g npm@latest;
-        rm -rf node_modules;
-        sudo npm install;
+        npm install -g;
     - name: Building GUI...
       working-directory: gui
       run:
-        mvn -B clean install --batch-mode -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn;
+        mvn clean install --batch-mode -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn;
