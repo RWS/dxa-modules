@@ -23,6 +23,9 @@ jobs:
         cd node_modules;
         cd dita-ot;
         ls -la;
+        ./gradlew;
+        cd ..;
+        cd ..;
     - name: Preparing NPM...
       run:
         cd gui;
