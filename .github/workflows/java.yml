@@ -1,4 +1,4 @@
-name: javabuild
+name: build_java
 
 on:
   push:
@@ -12,9 +12,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: 1. Checkout...
+    - name: Checkout...
       uses: actions/checkout@v2
-    - name: 2. Building Web application...
+    - name: Building Web application...
       run:
         cd webapp-java;
         mvn -B clean install --batch-mode -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn;
