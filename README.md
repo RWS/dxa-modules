@@ -2,7 +2,6 @@ SDL Digital Experience Accelerator Modules
 ===
 Build status
 ------------
-- 1.8: [![Build Status](https://travis-ci.com/sdl/dxa-modules.svg?branch=release%2F1.8)](https://travis-ci.com/sdl/dxa-modules)
   
 About
 -----
@@ -75,7 +74,7 @@ DXA publishes SNAPSHOT versions to Sonatype. To use them, configure `https://oss
 
 License
 -------
-Copyright (c) 2014-2020 SDL Group.
+Copyright (c) 2014-2021 SDL Group.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
