@@ -20,13 +20,9 @@ jobs:
         sudo npm install --save-dev gulp;
         yarn;
         gulp --version;
-        ls -la;
-        echo 'Extracting dita-ot';
-        tar -zxvf backup.tar.gz;
-        echo 'installing dita-ot';
         cd node_modules;
         cd dita-ot;
-        ./gradlew;
+        gradlew;
         cd styles;
         ls -la;
         cd ..;
