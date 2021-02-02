@@ -14,10 +14,9 @@ jobs:
     steps:
     - name: Checkout...
       uses: actions/checkout@v2
-    - name: Installing GULP & DITA-OT...
+    - name: Installing GULP
       run:
         sudo npm install gulp -g;
-        gulp --version;
     - name: Preparing NPM...
       working-directory: gui
       run:
@@ -25,4 +24,4 @@ jobs:
     - name: Building GUI...
       working-directory: gui
       run:
-        sudo mvn -B clean install --batch-mode -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn;
+        mvn -B clean install --batch-mode -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn;
