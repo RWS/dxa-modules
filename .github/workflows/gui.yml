@@ -17,12 +17,18 @@ jobs:
     - name: Preparing NPM...
       run:
         cd gui;
-        mkdir ~/.npm-global;
-        npm config set prefix '~/.npm-global';
-        export PATH=~/.npm-global/bin:$PATH;
-        source ~/.profile;
-        npm install -g jshint;
-        sudo chown -R $USER ~/.npm-global;
+        npm install;
+        npm install -g;
+        #mkdir ~/.npm-global;
+        #npm config set prefix '~/.npm-global';
+        #export PATH=~/.npm-global/bin:$PATH;
+        #source ~/.profile;
+        #npm install -g jshint;
+        #no modules found here-~/work/dxa-modules/dxa-modules/gui
+        #sudo chown -R $USER ~/.npm-global;
+        #sudo chown -R $USER ~/.npm;
+        #sudo chown -R $USER /usr/lib/node_modules;
+        #sudo chown -R $USER /usr/local/lib/node_modules;
     - name: Building GUI...
       run:
         cd gui;
