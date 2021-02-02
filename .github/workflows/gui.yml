@@ -16,6 +16,7 @@ jobs:
       uses: actions/checkout@v2
     - name: Preparing NPM...
       run:
+        sudo chown -R $USER /usr/local/lib/node_modules;
         npm install -g npm@latest;
         cd gui;
         rm -rf node_modules;
