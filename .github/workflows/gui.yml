@@ -1,0 +1,22 @@
+name: gui_build
+
+on:
+  push:
+    branches: [ develop, release/2.2, release/1.8 ]
+  pull_request:
+    branches: [ develop, release/2.2, release/1.8 ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 1. Checkout...
+      uses: actions/checkout@v2
+    - name: 3. Building GUI...
+      run:
+        cd gui;
+        npm install;
+        npm install -g;
+        mvn -B clean install --batch-mode -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn;
