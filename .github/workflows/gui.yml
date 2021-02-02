@@ -16,10 +16,10 @@ jobs:
       uses: actions/checkout@v2
     - name: Preparing NPM...
       run:
+        npm install -g npm@latest;
         cd gui;
-        sudo npm install;
-        sudo npm install -g;
-        sudo chown -R $USER:$(id -gn $USER) /home/runner/.config;
+        rm -rf node_modules;
+        npm install;
     - name: Building GUI...
       run:
         cd gui;
