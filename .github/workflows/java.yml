@@ -15,6 +15,6 @@ jobs:
     - name: Checkout...
       uses: actions/checkout@v2
     - name: Building Web application...
+      working-directory: webapp-java
       run:
-        cd webapp-java;
         mvn -B clean install --batch-mode -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn;
