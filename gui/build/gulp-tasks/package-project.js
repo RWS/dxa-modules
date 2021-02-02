@@ -40,7 +40,7 @@ module.exports = (buildOptions) => {
             if (firstRun) {
                 firstRun = false;
                 const jsonStats = stats.toJson();
-                const error = err || (jsonStats.errors && jsonStats.errors.length > 0 ? new Error('Failed to create bundles') : null);
+                const error = err || (jsonStats.errors && jsonStats.errors.length > 0 ? new Error('Failed to create bundles\nErr='+err+'\njsonStats='+jsonStats.errors) : null);
                 cb(error, {
                     config,
                     compiler
