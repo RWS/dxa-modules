@@ -3,7 +3,7 @@ SDL Digital Experience Accelerator Modules
 Build status
 ------------
 ### Java
-- Develop: ![](https://github.com/sdl/dxa-modules/workflows/build_java/badge.svg?branch=develop)
+- Develop: [develop](https://github.com/sdl/dxa-modules/workflows/build_java/badge.svg?branch=develop)
 - 1.8: ![Build Status](https://github.com/sdl/dxa-modules/workflows/build_java/badge.svg?branch=release/1.8)
 
 ### NET
