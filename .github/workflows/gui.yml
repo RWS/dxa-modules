@@ -22,7 +22,6 @@ jobs:
         gulp --version;
         cd node_modules;
         ls -la;
-        #extract
         tar -zxvf backup.tar.gz;
         cd dita-ot;
         ./gradlew;
