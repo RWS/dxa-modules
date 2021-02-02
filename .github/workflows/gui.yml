@@ -14,9 +14,16 @@ jobs:
     steps:
     - name: Checkout...
       uses: actions/checkout@v2
+    - name: Preparing NPM...
+      run:
+        cd gui;
+        mkdir ~/.npm-global;
+        npm config set prefix '~/.npm-global';
+        export PATH=~/.npm-global/bin:$PATH;
+        source ~/.profile;
+        npm install -g jshint;
+        sudo chown -R $USER ~/.npm-global;
     - name: Building GUI...
       run:
         cd gui;
-        npm install;
-        npm install -g;
         mvn -B clean install --batch-mode -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn;
