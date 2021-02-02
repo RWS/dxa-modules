@@ -1,4 +1,4 @@
-name: build_GUI_test
+name: build_GUI_worked
 
 on:
   push:
