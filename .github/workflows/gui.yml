@@ -17,11 +17,12 @@ jobs:
     - name: Installing GULP...
       run:
         cd gui;
-        gulp --version;
         sudo npm install --save-dev gulp;
         yarn;
         gulp --version;
-        sudo npm install dita-ot
+        cd node_modules;
+        cd dita-ot;
+        ls -la;
     - name: Preparing NPM...
       run:
         cd gui;
