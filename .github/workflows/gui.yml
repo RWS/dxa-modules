@@ -22,9 +22,8 @@ jobs:
         gulp --version;
         cd node_modules/dita-ot;        
         ./gradlew;
-        cd styles/commonltr;
+        cd styles;
         ls -la;
-        cd ..;
         cd ..;
     - name: Preparing NPM...
       run:
