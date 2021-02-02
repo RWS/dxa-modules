@@ -16,7 +16,7 @@ jobs:
       uses: actions/checkout@v2
     - name: Installing GULP & DITA-OT...
       run:
-        sudo npm install gulp-cli -g;
+        sudo npm install gulp -g;
         gulp --version;
     - name: Preparing NPM...
       working-directory: gui
