@@ -17,8 +17,8 @@ jobs:
     - name: Preparing NPM...
       run:
         cd gui;
-        npm install;
-        npm install -g;
+        sudo npm install;
+        sudo npm install -g;
         #mkdir ~/.npm-global;
         #npm config set prefix '~/.npm-global';
         #export PATH=~/.npm-global/bin:$PATH;
