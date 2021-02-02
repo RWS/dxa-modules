@@ -21,7 +21,8 @@ jobs:
         gulp --version;
     - name: Preparing NPM...
       working-directory: gui
-      run:        
+      run:
+        chown -R $USER /usr/local/lib/node_modules;
         npm install -g;
     - name: Building GUI...
       working-directory: gui
