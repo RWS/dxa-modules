@@ -14,19 +14,7 @@ jobs:
     steps:
     - name: 1. Checkout...
       uses: actions/checkout@v2
-    - name: 2. Setting permissions...
-      run: 
-        sudo chown -R runner:docker /usr/local/lib/node_modules;
-        chmod a+w /usr/local/lib/node_modules;
-        sudo chown -R runner:docker /usr/local/bin/gulp;
-        chmod a+w /usr/local/bin/gulp;
-    - name: 3. Building GUI...
+    - name: 2. Building Web application...
       run:
-        cd gui;
-        npm install -g;
-        npm install gulp -g;
-        mvn -B clean install --batch-mode -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn;
-    - name: 4. Building Web application...
-      run:
-        cd ../webapp-java;
+        cd webapp-java;
         mvn -B clean install --batch-mode -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn;
