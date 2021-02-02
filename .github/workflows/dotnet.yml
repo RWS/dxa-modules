@@ -2,9 +2,9 @@ name: build_dotnet
 
 on:
   push:
-    branches: [ develop, release/2.2, release/1.8 ]
+    branches: [ release/1.8 ]
   pull_request:
-    branches: [ develop, release/2.2, release/1.8 ]
+    branches: [ release/1.8 ]
 
 jobs:
   build:
