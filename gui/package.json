@@ -108,6 +108,6 @@
   "author": "mborysenko@sdl.com, padams@sdl.com, inikonov@sdl.com",
   "license": "Apache-2.0",
   "napa": {
-    "dita-ot": "dita-ot/dita-ot#2.5.3"
+    "dita-ot": "dita-ot/dita-ot#2.5.4"
   }
 }
