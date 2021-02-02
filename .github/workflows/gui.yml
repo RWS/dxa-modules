@@ -22,7 +22,7 @@ jobs:
         gulp --version;
         cd node_modules/dita-ot;        
         ./gradlew;
-        cd styles/commonltr/
+        cd styles/commonltr;
         ls -la;
         cd ..;
         cd ..;
