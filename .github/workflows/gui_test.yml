@@ -1,4 +1,4 @@
-name: build_GUI
+name: build_GUI_test
 
 on:
   push:
