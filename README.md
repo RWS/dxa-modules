@@ -13,6 +13,16 @@ Build status
 ### GUI
 - Develop ![build Status](https://github.com/sdl/dxa-modules/workflows/build_GUI/badge.svg?branch=develop)
 
+Prerequisites
+-------------
+For building .NET modules you must have the following installed:
+- Visual Studio 2019
+- .NET Framework 4.6.2
+
+For building Java modules you must have the following installed:
+- Maven 3.2+
+- Maven should be available in the system PATH
+
 About
 -----
 The SDL Digital Experience Accelerator (DXA) is a reference implementation of SDL Tridion Sites 9 and SDL Web 8 intended to help you create, design and publish an SDL Tridion/Web-based website quickly.
