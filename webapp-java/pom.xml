@@ -6,8 +6,8 @@
     <parent>
         <groupId>com.sdl.dxa</groupId>
         <artifactId>dxa-oss-parent</artifactId>
-        <version>2.2.11</version>
-        <relativePath></relativePath>
+        <version>2.2.12-SNAPSHOT</version>
+<!--        <relativePath></relativePath>-->
     </parent>
 
     <groupId>com.sdl.dxa.modules</groupId>
