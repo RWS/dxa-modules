@@ -12,8 +12,6 @@
     <packaging>pom</packaging>
 
     <properties>
-        <npm.repo>https://nexus.sdl.com/content/groups/npm/</npm.repo>
-        <npm.publish.repo>https://nexus.sdl.com/repository/npm-internal/</npm.publish.repo>
         <frontend.maven.plugin.version>1.0</frontend.maven.plugin.version>
         <node.version>v6.11.2</node.version>
         <npm.version>4.6.1</npm.version>
@@ -87,18 +85,6 @@
                         </configuration>
                     </execution>
 
-                    <execution>
-                        <id>npm publish</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-
-                        <phase>deploy</phase>
-
-                        <configuration>
-                            <arguments>publish -registry=${npm.publish.repo} --access=public --tag=${tag}</arguments>
-                        </configuration>
-                    </execution>
                 </executions>
             </plugin>
 

@@ -86,23 +86,6 @@
             </properties>
         </profile>
 
-        <profile>
-            <id>nexus-sdl</id>
-            <repositories>
-                <repository>
-                    <id>sdl</id>
-                    <name>SDL public repository</name>
-                    <url>https://nexus.sdl.com/repository/public</url>
-                    <releases>
-                        <enabled>true</enabled>
-                    </releases>
-                    <snapshots>
-                        <enabled>true</enabled>
-                    </snapshots>
-                </repository>
-            </repositories>
-        </profile>
-
 		<profile>
             <id>sonatype-nexus-snapshots</id>
             <repositories>

@@ -34,7 +34,6 @@
     <description>NPM project where customizations for DXA Dynamic Documentation GUI project should be developed</description>
 
     <properties>
-        <npm.repo>https://nexus.sdl.com/content/groups/npm/</npm.repo>
         <frontend.maven.plugin.version>1.0</frontend.maven.plugin.version>
         <node.version>v6.11.2</node.version>
         <npm.version>4.6.1</npm.version>
@@ -81,36 +80,6 @@
                         </goals>
                         <!-- optional: default phase is "generate-resources" -->
                         <phase>generate-resources</phase>
-                    </execution>
-
-                    <execution>
-                        <id>npm prune</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                        <configuration>
-                            <arguments>prune -registry=${npm.repo}</arguments>
-                        </configuration>
-                    </execution>
-
-                    <execution>
-                        <id>npm update</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                        <configuration>
-                            <arguments>update -registry=${npm.repo}</arguments>
-                        </configuration>
-                    </execution>
-
-                    <execution>
-                        <id>npm install</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                        <configuration>
-                            <arguments>install -registry=${npm.repo} --unsafe-perm</arguments>
-                        </configuration>
                     </execution>
 
                     <execution>
