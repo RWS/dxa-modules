@@ -21,8 +21,8 @@ Param (
     [Parameter(Mandatory = $false)]
     [string] $guiSourcePath = "..\",
 
-    [Parameter(Mandatory = $false)]
-    [string]$nexusSource = "https://nexus.sdl.com/service/local/nuget/releases_dotnet/",
+    [Parameter(Mandatory = $true)]
+    [string]$nexusSource,
 
     [Parameter(Mandatory = $false)]
     [string]$nuGetApiKey = "4e428671-39c7-3bcf-a955-a0a1af81fed8",
