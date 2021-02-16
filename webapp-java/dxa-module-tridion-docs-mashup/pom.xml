@@ -12,10 +12,6 @@
 
     <name>DXA Modules - Tridion Docs Mashup</name>
     <description>Implementation of DXA Tridion Docs Mashup module</description>
-	
-    <properties>
-        <dxa.version>${project.parent.version}</dxa.version>
-    </properties>
 
     <scm>
         <url>https://github.com/sdl/dxa-modules</url>
