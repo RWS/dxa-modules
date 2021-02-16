@@ -45,7 +45,7 @@
   "scripts": {
     "start": "set NODE_OPTIONS='--max-old-space-size=2048' && gulp serve",
     "build": "set NODE_OPTIONS='--max-old-space-size=2048' && gulp",
-    "build-server": "npm install; gulp build:dist"
+    "build-server": "npm install && gulp build:dist"
   },
   "author": "mborysenko@sdl.com, padams@sdl.com, mbilenko@sdl.com, inikonov@sdl.com",
   "license": "Apache-2.0",
