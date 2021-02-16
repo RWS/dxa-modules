@@ -23,6 +23,13 @@
         <tag>latest</tag>
     </properties>
 
+    <scm>
+        <url>https://github.com/sdl/dxa-modules</url>
+        <connection>scm:git:git@github.com:sdl/dxa-modules.git</connection>
+        <developerConnection>scm:git:git@github.com:sdl/dxa-modules.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
     <build>
         <finalName>${project.artifactId}</finalName>
         <plugins>
