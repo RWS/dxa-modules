@@ -18,6 +18,21 @@
     <description>Top level project of DXA module</description>
 
     <properties>
+        <dxa-modules.version>${project.version}</dxa-modules.version>
+        <dxa-module-core.version>${project.version}</dxa-module-core.version>
+        <dxa-module-cid.version>${project.version}</dxa-module-cid.version>
+        <dxa-module-googleanalytics.version>${project.version}</dxa-module-googleanalytics.version>
+        <dxa-module-mediamanager.version>${project.version}</dxa-module-mediamanager.version>
+        <dxa-module-search.version>${project.version}</dxa-module-search.version>
+        <dxa-module-smarttarget.version>${project.version}</dxa-module-smarttarget.version>
+        <dxa-module-context-expressions>${project.version}</dxa-module-context-expressions>
+        <dxa-module-51degrees.version>${project.version}</dxa-module-51degrees.version>
+        <dxa-module-audience-manager.version>${project.version}</dxa-module-audience-manager.version>
+        <dxa-module-ugc.version>${project.version}</dxa-module-ugc.version>
+        <dxa-module-test.version>${project.version}</dxa-module-test.version>
+        <dxa-module-tridion-docs-mashup.version>${project.version}</dxa-module-tridion-docs-mashup.version>
+        <dxa-module-tridion-docs-search.version>${project.version}</dxa-module-tridion-docs-search.version>
+        <dxa-module-dd.version>${project.version}</dxa-module-dd.version>
         <javax.servlet-api.version>3.0.1</javax.servlet-api.version>
     </properties>
 
