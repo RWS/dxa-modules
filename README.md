@@ -1,4 +1,4 @@
-SDL Digital Experience Accelerator Modules
+RWS Digital Experience Accelerator Modules
 ===
 Build status
 ------------
@@ -31,7 +31,7 @@ For building Java modules: `cd webapp-java; mvn install`
 
 About
 -----
-The SDL Digital Experience Accelerator (DXA) is a reference implementation of SDL Tridion Sites 9 and SDL Web 8 intended to help you create, design and publish an SDL Tridion/Web-based website quickly.
+The RWS Digital Experience Accelerator (DXA) is a reference implementation of SDL Tridion Sites 9 and SDL Web 8 intended to help you create, design and publish an SDL Tridion/Web-based website quickly.
 
 DXA is available for both .NET and Java web applications. Its modular architecture consists of a framework and example web application, which includes all core SDL Tridion/Web functionality as well as separate Modules for additional, optional functionality.
 
@@ -42,11 +42,11 @@ The Module distributions (including Content Manager-side items and installation 
 
 Support
 ---------------
-At SDL we take your investment in Digital Experience very seriously, if you encounter any issues with the Digital Experience Accelerator, please use one of the following channels:
+At RWS we take your investment in Digital Experience very seriously, if you encounter any issues with the Digital Experience Accelerator, please use one of the following channels:
 
 - Report issues directly in [this repository](https://github.com/sdl/dxa-modules/issues)
 - Ask questions 24/7 on the SDL Tridion Community at https://tridion.stackexchange.com
-- Contact SDL Professional Services for DXA release management support packages to accelerate your support requirements
+- Contact RWS Professional Services for DXA release management support packages to accelerate your support requirements
 
 
 Documentation
