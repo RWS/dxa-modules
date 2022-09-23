@@ -174,7 +174,7 @@ public class Degrees51ClaimsProviderTest {
 
         @Bean
         public Degrees51DataProvider degrees51DataProvider() {
-            return new Degrees51DataProvider();
+            return Mockito.mock(Degrees51DataProvider.class);
         }
 
         @Bean
