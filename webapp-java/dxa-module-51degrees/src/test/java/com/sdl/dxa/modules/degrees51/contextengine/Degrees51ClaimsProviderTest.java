@@ -4,19 +4,23 @@ import com.google.common.collect.ImmutableMap;
 import com.sdl.dxa.modules.degrees51.Degrees51SpringContext;
 import com.sdl.dxa.modules.degrees51.api.Degrees51DataProvider;
 import com.sdl.dxa.modules.degrees51.api.mapping.Extractors;
+import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.util.ApplicationContextHolder;
 import fiftyone.mobile.detection.Match;
 import fiftyone.mobile.detection.entities.Values;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
@@ -35,6 +39,7 @@ import static org.mockito.Mockito.when;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class)
 @ActiveProfiles("test")
+@TestPropertySource(value = {"classpath:dxa.modules.51degrees.properties"})
 public class Degrees51ClaimsProviderTest {
 
     @Autowired
@@ -45,6 +50,7 @@ public class Degrees51ClaimsProviderTest {
 
     @Test
     public void shouldMapKnownPropertiesFrom51DegreesToOurModel() throws IOException {
+
         //given
         ((MockHttpServletRequest) httpServletRequest).setCookies(
                 new Cookie("context", "dpr~1|dw~1025|dh~641|bcd~32|bw~1024|bh~640|version~1|"));
@@ -167,7 +173,12 @@ public class Degrees51ClaimsProviderTest {
 
         @Bean
         public Degrees51DataProvider degrees51DataProvider() {
-            return null;
+            return Mockito.mock(Degrees51DataProvider.class);
+        }
+
+        @Bean
+        public WebRequestContext webRequestContext() {
+            return Mockito.mock(WebRequestContext.class);
         }
 
         @Bean
@@ -188,6 +199,11 @@ public class Degrees51ClaimsProviderTest {
         @Bean
         public Extractors.Helper helper() {
             return new Extractors.Helper();
+        }
+
+        @Bean
+        public static PropertySourcesPlaceholderConfigurer propertiesResolver() {
+            return new PropertySourcesPlaceholderConfigurer();
         }
     }
 
