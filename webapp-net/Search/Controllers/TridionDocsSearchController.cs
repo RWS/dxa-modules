@@ -14,11 +14,15 @@ using Sdl.Tridion.Api.IqQuery.Model.Result;
 using Sdl.Web.Tridion.ApiClient;
 using Sdl.Tridion.Api.IqQuery.Model.Search;
 using Sdl.Web.Common.Logging;
+using Sdl.Tridion.Api.Client.ContentModel;
+using System.Text;
 
 namespace Sdl.Web.Modules.Search.Controllers
 {
     public class TridionDocsSearchController : BaseController
     {
+        private static readonly string DEFAULT_DYNAMIC_FIELD_NAME = "dynamic";
+        private static readonly string DEFAULT_CONTENT_FIELD_NAME = "content";
         private static readonly string DEFAULT_SEPARATOR = "+"; // used to be .
         private static readonly string DEFAULT_LANGUAGE = "english";
         private static readonly string PUBLICATION_ONLINE_STATUS_VALUE = "VDITADLVRREMOTESTATUSONLINE";
@@ -27,17 +31,24 @@ namespace Sdl.Web.Modules.Search.Controllers
         private readonly string _separator = DEFAULT_SEPARATOR;
         private readonly string _namespace;
         private readonly string _defaultLanguage = DEFAULT_LANGUAGE;
-        private string PublicationOnlineStatusField => $"dynamic{_separator}FISHDITADLVRREMOTESTATUS.lng.element";
-        private string ContentField(string language) => $"content{_separator}{language}";
+        private readonly string _defaultDynamicFieldName = DEFAULT_DYNAMIC_FIELD_NAME;
+        private readonly string _defaultContentFieldName = DEFAULT_CONTENT_FIELD_NAME;
+        private readonly bool _useIqService = false;
+        private string PublicationOnlineStatusField => $"{_defaultDynamicFieldName}{_separator}FISHDITADLVRREMOTESTATUS.lng.element";
+        private string ContentField(string language) => $"{_defaultContentFieldName}{_separator}{language}";
 
         public TridionDocsSearchController()
         {
             try
             {
+                _useIqService = WebConfigurationManager.AppSettings["iq-service-enabled"] != null && "true".Equals(WebConfigurationManager.AppSettings["iq-service-enabled"], StringComparison.OrdinalIgnoreCase);               
                 _separator = WebConfigurationManager.AppSettings["iq-field-separator"] ?? DEFAULT_SEPARATOR;
                 _defaultLanguage = WebConfigurationManager.AppSettings["iq-default-language"] ?? DEFAULT_LANGUAGE;
+                _defaultContentFieldName = WebConfigurationManager.AppSettings["iq-default-content-field"] ?? DEFAULT_CONTENT_FIELD_NAME;
+                _defaultDynamicFieldName = WebConfigurationManager.AppSettings["iq-default-dynamic-field"] ?? DEFAULT_DYNAMIC_FIELD_NAME;
                 // if iq-namespace not specified in configuration it will be null and namespace will not be included in iq query (old behavior)
                 _namespace = WebConfigurationManager.AppSettings["iq-namespace"];
+                Log.Debug($"using IQ query service = {_useIqService}, defaultLanguage = {_defaultLanguage}, separator = {_separator}, contentFieldName = {_defaultContentFieldName}, dynamicFieldName = {_defaultDynamicFieldName}");
             }
             catch (Exception e)
             {
@@ -114,29 +125,85 @@ namespace Sdl.Web.Modules.Search.Controllers
                     criteria = new SearchQuery().GroupedAnd(fields, values).Compile();
                 }
 
-                var search = ApiClientFactory.Instance.CreateSearchClient<SearchResultSet, SearchResult>();            
-                var results = search.WithResultFilter(new SearchResultFilter
+                if (_useIqService)
                 {
-                    StartOfRange = searchParams.StartIndex,
-                    EndOfRange = searchParams.StartIndex + searchParams.Count,
-                    IsHighlightingEnabled = true
-                }).Search(criteria);
+                    // Uses IQ query service
+                    var search = ApiClientFactory.Instance.CreateSearchClient<IqSearchResultSet, IqSearchResult>();
+                    var results = search.WithResultFilter(new SearchResultFilter
+                    {
+                        StartOfRange = searchParams.StartIndex,
+                        EndOfRange = searchParams.StartIndex + searchParams.Count,
+                        IsHighlightingEnabled = true
+                    }).Search(criteria);
 
-                var resultSet = new SearchResultSetWrapped(results)
+                    var resultSet = new IqSearchResultSetWrapped(results)
+                    {
+                        Hits = results.Hits,
+                        Count = searchParams.Count.Value,
+                        StartIndex = searchParams.StartIndex.Value
+                    };
+                    return Json(resultSet);
+                }
+                else
                 {
-                    Hits = results.Hits,
-                    Count = searchParams.Count.Value,
-                    StartIndex = searchParams.StartIndex.Value
-                };
-                return Json(resultSet);
+                    // Uses graphql search api
+                    var client = ApiClientFactory.Instance.CreateClient();
+                    var after = searchParams.StartIndex.HasValue ? Convert.ToBase64String(Encoding.ASCII.GetBytes($"{searchParams.StartIndex.Value}")) : null;
+                    var results = client.SearchByRawCriteria(criteria.RawQuery, new InputResultFilter { HighlightingIsEnabled = true },
+                        new Pagination
+                        {
+                            First = searchParams.Count ?? -1,
+                            After = after
+                        });
+
+                    var resultSet = BuildResultSet(results);
+                    resultSet.Count = searchParams.Count.Value;
+                    resultSet.StartIndex = searchParams.StartIndex.Value;
+                    return Json(resultSet);
+                }
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Log.Debug("Failed to execute search", e);
                 Response.StatusCode = 405;
                 return new EmptyResult();
             }
         }
 
+        private SearchResultSet BuildResultSet(FacetedSearchResults facetedSearchResults)
+        {
+            SearchResultSet searchResultSet = new SearchResultSet();
+            searchResultSet.QueryResults = new List<SearchResult>();
+            if (facetedSearchResults == null || facetedSearchResults.Results == null || facetedSearchResults.Results.Edges == null)
+            {
+                searchResultSet.Count = 0;
+                searchResultSet.Hits = 0;
+                searchResultSet.StartIndex = 0;             
+                return searchResultSet;
+            }
+
+            searchResultSet.Hits = facetedSearchResults.Results.Hits ?? 0;
+
+            foreach(var result in facetedSearchResults.Results.Edges)
+            {
+                SearchResult searchResult = new SearchResult
+                {
+                    Id = result.Node.Search.Id,
+                    Content = result.Node.Search.MainContentField,                    
+                    Language = result.Node.Search.Locale,
+                    LastModifiedDate = result.Node.Search.ModifiedDate,
+                    PublicationId = result.Node.Search.PublicationId ?? 0,
+                    PublicationTitle = result.Node.Search.PublicationTitle,
+                    Meta = result.Node.Search.Fields,
+                    Highlighted = result.Node.Search.Highlighted
+                };
+
+                searchResultSet.QueryResults.Add(searchResult);
+                
+            }
+            return searchResultSet;
+        }
+        
         private ICriteria CompileMultiLangQuery(string language, string queryString) =>
             new SearchQuery()
                 .Field(PublicationOnlineStatusField, PUBLICATION_ONLINE_STATUS_VALUE)
