@@ -68,6 +68,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\TridionDocsSearchController.cs" />
+    <Compile Include="Data\IqSearchResult.cs" />
+    <Compile Include="Data\IqSearchResultSet.cs" />
     <Compile Include="Data\SearchParameters.cs" />
     <Compile Include="Data\SearchResult.cs" />
     <Compile Include="Data\SearchResultSet.cs" />
