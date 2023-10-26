@@ -28,7 +28,7 @@
     "json-loader": "0.5.4",
     "less": "2.7.1",
     "less-loader": "4.0.5",
-    "lodash": "4.17.4",
+    "lodash": "4.17.21",
     "postcss-loader": "2.0.6",
     "run-sequence": "2.1.0",
     "through2": "2.0.1",
