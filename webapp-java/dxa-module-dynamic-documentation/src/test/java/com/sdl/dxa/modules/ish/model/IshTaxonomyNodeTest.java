@@ -2,10 +2,10 @@ package com.sdl.dxa.modules.ish.model;
 
 import com.sdl.webapp.common.api.model.entity.SitemapItem;
 import com.sdl.webapp.common.api.model.sorting.SortableSiteMap;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,12 +13,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * IshTaxonomyNode test.
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class IshTaxonomyNodeTest {
 
     private Set<SitemapItem> tocItems;
@@ -28,7 +28,7 @@ public class IshTaxonomyNodeTest {
     private SitemapItem item4;
     private SitemapItem item5;
 
-    @Before
+    @BeforeEach
     public void setup() {
         tocItems = new HashSet<>();
         item5 = new SitemapItem();

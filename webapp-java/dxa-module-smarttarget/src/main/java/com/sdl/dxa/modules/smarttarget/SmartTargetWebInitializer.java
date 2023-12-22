@@ -1,14 +1,14 @@
 package com.sdl.dxa.modules.smarttarget;
 
+import com.sdl.dxa.modules.smarttarget.wrapper.TrackingRedirectWrapperServlet;
 import com.sdl.webapp.common.util.InitializationUtils;
 import com.tridion.smarttarget.SmartTargetException;
 import com.tridion.smarttarget.analytics.AnalyticsManager;
-import com.tridion.smarttarget.analytics.tracking.TrackingRedirect;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.WebApplicationInitializer;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
 
 @Slf4j
 public class SmartTargetWebInitializer implements WebApplicationInitializer {
@@ -18,7 +18,7 @@ public class SmartTargetWebInitializer implements WebApplicationInitializer {
         String servletName = "dxaXoTracking";
         String mapping = getRedirectUrl();
 
-        servletContext.addServlet(servletName, TrackingRedirect.class).addMapping(mapping);
+        servletContext.addServlet(servletName, TrackingRedirectWrapperServlet.class).addMapping(mapping);
         log.info("XO tracking servlet is added with name {} and mapping {}", servletName, mapping);
     }
 

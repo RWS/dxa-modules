@@ -4,24 +4,25 @@ import com.sdl.webapp.common.impl.localization.DocsLocalization;;
 import com.sdl.dxa.modules.ish.exception.IshServiceException;
 import com.sdl.odata.client.api.exception.ODataClientRuntimeException;
 import com.sdl.web.api.meta.WebPublicationMetaFactory;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.xmlunit.matchers.EvaluateXPathMatcher;
 import org.xmlunit.matchers.HasXPathMatcher;
 
 import java.util.HashMap;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
 
 /**
  * Tests for SitemapService.
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class SitemapServiceTest {
     private static final String CONTEXT_PATH = "http://docs.sdl.com/";
     private static final String EXPECTED_JSON = "[{\"publicationId\":2171939,\"namespaceId\":2,\"urls\":" +
@@ -49,9 +50,11 @@ public class SitemapServiceTest {
                 .withNamespaceContext(prefix2Uri));
     }
 
-    @Test(expected = IshServiceException.class)
+    @Test
     public void testExceptionWhileSitemapCreation() {
-        when(webPublicationMetaFactory.getSiteMapForPublication(-1)).thenThrow(ODataClientRuntimeException.class);
-        sitemapService.createSitemap(CONTEXT_PATH, new DocsLocalization());
+        Assertions.assertThrows(IshServiceException.class, () -> {
+            when(webPublicationMetaFactory.getSiteMapForPublication(-1)).thenThrow(ODataClientRuntimeException.class);
+            sitemapService.createSitemap(CONTEXT_PATH, new DocsLocalization());
+        });
     }
 }

@@ -4,10 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sdl.dxa.caching.NeverCached;
 import com.sdl.dxa.caching.NoOutputCache;
+import com.sdl.dxa.modules.smarttarget.wrapper.CookieProcessorWrapper;
 import com.sdl.webapp.common.api.model.PageModel;
 import com.sdl.webapp.common.api.model.page.DefaultPageModel;
 import com.tridion.smarttarget.query.ExperimentCookie;
-import com.tridion.smarttarget.utils.CookieProcessor;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +16,6 @@ import lombok.ToString;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,7 +55,7 @@ public class SmartTargetPageModel extends DefaultPageModel implements PageModel.
     @Override
     public boolean setResponseData(HttpServletResponse servletResponse) {
         log.debug("Setting {} to servlet response", newExperimentCookies);
-        CookieProcessor.saveExperimentCookies(servletResponse, null, this.newExperimentCookies);
+        CookieProcessorWrapper.saveExperimentCookies(servletResponse, null, this.newExperimentCookies);
         return true;
     }
 }

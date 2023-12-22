@@ -8,7 +8,8 @@ import com.sdl.webapp.common.api.model.entity.AbstractEntityModel;
 import com.sdl.webapp.common.exceptions.DxaException;
 import lombok.AllArgsConstructor;
 import org.jetbrains.annotations.NotNull;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.Collections;
@@ -17,12 +18,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static com.google.common.collect.Sets.newHashSet;
-import static junit.framework.TestCase.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.AdditionalMatchers.or;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.util.AssertionErrors.assertFalse;
+import static org.springframework.test.util.AssertionErrors.assertTrue;
 
 public class ContextExpressionEntityEvaluatorTest {
 
@@ -33,12 +34,12 @@ public class ContextExpressionEntityEvaluatorTest {
         //given
         ContextExpressionEntityEvaluator entityEvaluator = new ContextExpressionEntityEvaluator();
         ContextClaimsProvider contextClaimsProvider = mock(ContextClaimsProvider.class);
-        when(contextClaimsProvider.getContextClaims(anyString())).thenReturn(
-                ImmutableMap.of(
-                        "cx.android", true,
-                        "cx.apple", false,
-                        "cx.samsung", true,
-                        "cx.ios", false));
+        doReturn(ImmutableMap.of(
+                "cx.android", true,
+                "cx.apple", false,
+                "cx.samsung", true,
+                "cx.ios", false))
+                .when(contextClaimsProvider).getContextClaims(or(isNull(String.class), anyString()));
         ReflectionTestUtils.setField(entityEvaluator, "contextClaimsProvider", contextClaimsProvider);
 
         TestEvaluatorWrapper eval = new TestEvaluatorWrapper(entityEvaluator);
@@ -223,16 +224,17 @@ public class ContextExpressionEntityEvaluatorTest {
         assertTrue("exclude isAndroid and include isMobile should include IPhone", includeEntity);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void shouldNPEIfEntityIsNull() throws Exception {
-        //given
-        ContextExpressionEntityEvaluator evaluator = new ContextExpressionEntityEvaluator();
+        Assertions.assertThrows(NullPointerException.class, () -> {
+            // Given
+            ContextExpressionEntityEvaluator evaluator = new ContextExpressionEntityEvaluator();
 
-        //when
-        evaluator.includeEntity(null);
+            // When
+            evaluator.includeEntity(null);
 
-        //then
-        //exception
+            // Then exception
+        });
     }
 
     @SuppressWarnings("ConstantConditions")

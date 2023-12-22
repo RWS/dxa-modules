@@ -3,9 +3,10 @@ package com.sdl.dxa.modules.docs.search.service;
 import com.sdl.delivery.iq.query.api.Criteria;
 import com.sdl.dxa.modules.docs.search.exception.SearchException;
 import com.sdl.dxa.modules.docs.search.model.SearchParameters;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Test for SearcherConfigurer class.
@@ -126,9 +127,11 @@ public class SearcherConfigurerTest {
         assertEquals(expected, criteria.getRawQuery());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testBuildCriteriaIncorrectParameters() throws SearchException {
-        SearchParameters parameters = new SearchParameters();
-        configurer.buildCriteria(parameters);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            SearchParameters parameters = new SearchParameters();
+            configurer.buildCriteria(parameters);
+        });
     }
 }

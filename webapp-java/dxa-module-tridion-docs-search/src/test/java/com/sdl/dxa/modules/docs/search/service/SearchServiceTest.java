@@ -10,25 +10,26 @@ import com.sdl.dxa.modules.docs.search.exception.SearchException;
 import com.sdl.dxa.modules.docs.search.model.SearchParameters;
 import com.sdl.dxa.modules.docs.search.model.SearchResult;
 import com.sdl.dxa.modules.docs.search.model.SearchResultSet;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Locale;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.any;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 
 /**
  * Test for SearchService class.
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class SearchServiceTest {
     private static final String SEARCH_CONTENT = "search result content";
     private static final Integer PUBLICATION_ID = 123123;
@@ -108,10 +109,12 @@ public class SearchServiceTest {
         assertEquals(COUNT, result.getCount());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testParseParametersIncorrectJson() {
-        final String parameters = "{asdfd...";
-        service.parseParameters(parameters);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            final String parameters = "{asdfd...";
+            service.parseParameters(parameters);
+        });
     }
 
     @Test
