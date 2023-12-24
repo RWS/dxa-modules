@@ -9,12 +9,12 @@ using System.Runtime.InteropServices;
     [assembly: AssemblyConfiguration("Release")]
 #endif
 
-[assembly: AssemblyCompany("SDL Group")]
-[assembly: AssemblyProduct("SDL Digital Experience Accelerator")]
+[assembly: AssemblyCompany("RWS Group")]
+[assembly: AssemblyProduct("RWS Digital Experience Accelerator")]
 
 [assembly: ComVisible(false)]
 
 // NOTE: Version Info and Copyright statement is automatically appended by the build process (ciBuild.proj)
 [assembly: AssemblyVersion("0.0.0.0")]
 [assembly: AssemblyFileVersion("0.0.0.0")]
-[assembly: AssemblyCopyright("Copyright © 2014-2021 SDL Group")]
+[assembly: AssemblyCopyright("Copyright © 2014-2024 RWS Group")]
