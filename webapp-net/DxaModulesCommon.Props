@@ -14,7 +14,7 @@
         <SdlDeliveryVersion>12.0.1197</SdlDeliveryVersion>
 		<SdlPCAPackageVersion>2.2.2</SdlPCAPackageVersion>		
 		<AudienceManagerVersion>9.0.0</AudienceManagerVersion>
-        <ExperienceManagerVersion>9.0.0</ExperienceManagerVersion>
+        <ExperienceManagerVersion>10.0.1197</ExperienceManagerVersion>
 		<ContextClientVersion>12.0.1197</ContextClientVersion>
   	</PropertyGroup>
 
