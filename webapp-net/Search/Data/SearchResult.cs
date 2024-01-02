@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Sdl.Tridion.Api.Client;
+using System.Collections;
 
 namespace Sdl.Web.Modules.Search.Data
 {
@@ -24,10 +25,14 @@ namespace Sdl.Web.Modules.Search.Data
 
         public string LastModifiedDate { get; set; }
 
-        public string ItemType => "Page";
+        public ItemType ItemType { get; set; }
 
         public IDictionary Meta { get; set; }
 
         public IDictionary Highlighted { get; set; }
+
+        public string SchemaId { get; set; }
+
+        public string Url { get; set; }
     }
 }

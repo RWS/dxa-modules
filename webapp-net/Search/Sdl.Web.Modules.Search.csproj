@@ -75,7 +75,9 @@
     <Compile Include="Data\SearchResultSet.cs" />
     <Compile Include="DxaSearchException.cs" />
     <Compile Include="Models\SearchItem.cs" />
+    <Compile Include="Providers\TridionSitesSearchProvider.cs" />
     <Compile Include="Providers\IQSearchProvider.cs" />
+    <Compile Include="Providers\OpenSearchProvider.cs" />
     <Compile Include="Providers\SI4TSearchProvider.cs" />
     <Compile Include="Providers\ISearchProvider.cs" />
     <Compile Include="..\CommonAssemblyInfo.cs" />

@@ -195,7 +195,8 @@ namespace Sdl.Web.Modules.Search.Controllers
                     PublicationId = result.Node.Search.PublicationId ?? 0,
                     PublicationTitle = result.Node.Search.PublicationTitle,
                     Meta = result.Node.Search.Fields,
-                    Highlighted = result.Node.Search.Highlighted
+                    Highlighted = result.Node.Search.Highlighted,
+                    ItemType = result.Node.Search.ItemType
                 };
 
                 searchResultSet.QueryResults.Add(searchResult);
