@@ -1,0 +1,16 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <ApplicationDataCollection>
+    <ApplicationData>
+      <ApplicationId>CustomPages</ApplicationId>
+      <TypeId>XmlElement:CustomPages, http://www.tridion.com/ContentManager/5.0</TypeId>
+      <BinaryData>PHRjbTpDdXN0b21QYWdlcyBuZXh0SUQ9IjIiIHhtbG5zOnRjbT0iaHR0cDovL3d3dy50cmlkaW9uLmNvbS9Db250ZW50TWFuYWdlci81LjAiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj48dGNtOkN1c3RvbVBhZ2UgeG1sbnM6dGNtPSJodHRwOi8vd3d3LnRyaWRpb24uY29tL0NvbnRlbnRNYW5hZ2VyLzUuMCIgSUQ9ImNtZTowLTEtY3VzdG9tcGciPjx0Y206Q29udGV4dD48dGNtOk9yZ2FuaXphdGlvbmFsSXRlbSB4bGluazpocmVmPSJjbWU6Y3VzdG9tcGdzIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgLz48L3RjbTpDb250ZXh0Pjx0Y206SW5mbz48dGNtOkxvY2F0aW9uSW5mbz48dGNtOlBhdGg+XDwvdGNtOlBhdGg+PC90Y206TG9jYXRpb25JbmZvPjx0Y206VmVyc2lvbkluZm8+PHRjbTpDcmVhdGlvbkRhdGU+PC90Y206Q3JlYXRpb25EYXRlPjx0Y206UmV2aXNpb25EYXRlPjwvdGNtOlJldmlzaW9uRGF0ZT48dGNtOkNyZWF0b3I+QWRtaW5pc3RyYXRvcjwvdGNtOkNyZWF0b3I+PHRjbTpSZXZpc2VyPkFkbWluaXN0cmF0b3I8L3RjbTpSZXZpc2VyPjx0Y206SXNOZXc+ZmFsc2U8L3RjbTpJc05ldz48L3RjbTpWZXJzaW9uSW5mbz48L3RjbTpJbmZvPjx0Y206RGF0YT48dGNtOlRpdGxlPlNETCBXZWI8L3RjbTpUaXRsZT48dGNtOlVybD4vV2ViVUkvRWRpdG9ycy9DTUUvVmlld3MvU3BsYXNoU2NyZWVuL1NwbGFzaFNjcmVlbi5hc3B4PC90Y206VXJsPjx0Y206RGVmYXVsdD50cnVlPC90Y206RGVmYXVsdD48dGNtOkljb24+Y21lLWN1c3RvbS1wYWdlPC90Y206SWNvbj48L3RjbTpEYXRhPjwvdGNtOkN1c3RvbVBhZ2U+PC90Y206Q3VzdG9tUGFnZXM+</BinaryData>
+      <IsInherited>false</IsInherited>
+    </ApplicationData>
+    <ApplicationData>
+      <ApplicationId>http://www.sdl.com/tridion/SemanticMapping/vocabularies</ApplicationId>
+      <TypeId></TypeId>
+      <BinaryData>PAB2AG8AYwBhAGIAdQBsAGEAcgBpAGUAcwA+AA0ACgAgACAAPAB2AG8AYwBhAGIAdQBsAGEAcgB5ACAAcAByAGUAZgBpAHgAPQAiAHQAcgBpACIAIABuAGEAbQBlAD0AIgBoAHQAdABwADoALwAvAHcAdwB3AC4AcwBkAGwALgBjAG8AbQAvAHcAZQBiAC8AcwBjAGgAZQBtAGEAcwAvAGMAbwByAGUAIgAvAD4ADQAKACAAIAA8AHYAbwBjAGEAYgB1AGwAYQByAHkAIABwAHIAZQBmAGkAeAA9ACIAcwAiACAAbgBhAG0AZQA9ACIAaAB0AHQAcAA6AC8ALwBzAGMAaABlAG0AYQAuAG8AcgBnAC8AIgAvAD4ADQAKADwALwB2AG8AYwBhAGIAdQBsAGEAcgBpAGUAcwA+AA==</BinaryData>
+      <IsInherited>false</IsInherited>
+    </ApplicationData>
+  </ApplicationDataCollection>
+</PackageItem>

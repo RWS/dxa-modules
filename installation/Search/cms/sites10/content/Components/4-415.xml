@@ -1,0 +1,30 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data>
+      <tcm:Title>Search Results</tcm:Title>
+      <tcm:Type>Normal</tcm:Type>
+      <tcm:Schema xlink:type="simple" xlink:title="Search Query" xlink:href="/webdav/200%20Example%20Content/Building%20Blocks/Modules/Search/Editor/Schemas/Search%20Query.xsd" IsMandatory="false" />
+      <tcm:Content>
+        <SearchQuery xmlns="http://www.sdl.com/web/schemas/search">
+          <headline>Search Results</headline>
+          <resultsText>
+		<p xmlns="http://www.w3.org/1999/xhtml">We found <strong>{1}</strong> items matching your search for <strong>{0}</strong>.</p>
+	</resultsText>
+          <noResultsText>
+            <p xmlns="http://www.w3.org/1999/xhtml">We could not find any content matching your search for <strong>{0}</strong>.</p>
+<p xmlns="http://www.w3.org/1999/xhtml">Check the sitemap to help find what you are looking for.</p></noResultsText>
+          <pageSize>7</pageSize>
+          <searchItemView>Search:SearchItem</searchItemView>
+        </SearchQuery>
+      </tcm:Content>
+      <tcm:Metadata />
+      <tcm:IsBasedOnTridionWebSchema>true</tcm:IsBasedOnTridionWebSchema>
+      <tcm:MultimediaType xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/200%20Example%20Content" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/200%20Example%20Content/Building%20Blocks/Modules%20Content/Search" linkName="LocationInfo/OrganizationalItem" />
+    <Dependency dependencyType="Schema" itemUrl="/webdav/200%20Example%20Content/Building%20Blocks/Modules/Search/Editor/Schemas/Search%20Query.xsd" linkName="Schema" />
+  </Dependencies>
+</PackageItem>

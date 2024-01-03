@@ -10,3 +10,9 @@ dist/
 **/node_modules/
 **/target/
 **/node/
+**/bin/
+**/obj/
+*.user
+*.suo
+webapp-net/packages/
+webapp-net/.vs/

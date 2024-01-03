@@ -1,0 +1,131 @@
+<PackageItem xmlns:tcm="http://www.tridion.com/ContentManager/5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sdltridion.com/ContentManager/ImportExport/Package/2013">
+  <Data>
+    <tcm:Data xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+      <tcm:Title>Search Query</tcm:Title>
+      <tcm:Description>Search Query</tcm:Description>
+      <tcm:Purpose>Component</tcm:Purpose>
+      <tcm:NamespaceURI>http://www.sdl.com/web/schemas/search</tcm:NamespaceURI>
+      <tcm:RootElementName>SearchQuery</tcm:RootElementName>
+      <tcm:IsTridionWebSchema>true</tcm:IsTridionWebSchema>
+      <tcm:XSD>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sdl.com/web/schemas/search" xmlns:tcmi="http://www.tridion.com/ContentManager/5.0/Instance" elementFormDefault="qualified" targetNamespace="http://www.sdl.com/web/schemas/search">
+  <xsd:import namespace="http://www.tridion.com/ContentManager/5.0/Instance" schemaLocation="/webdav/cm_xml_inst.xsd" />
+  <xsd:annotation>
+    <xsd:appinfo>
+      <tcm:Labels xmlns:tcm="http://www.tridion.com/ContentManager/5.0">
+        <tcm:Label ElementName="headline" Metadata="false">Headline</tcm:Label>
+        <tcm:Label ElementName="resultsText" Metadata="false">Results Text (use the placeholder {0} for the query term and {1} for the number of results)</tcm:Label>
+        <tcm:Label ElementName="noResultsText" Metadata="false">No Results Text (use the placeholder {0} for the query term)</tcm:Label>
+        <tcm:Label ElementName="pageSize" Metadata="false">Number of items to display per page</tcm:Label>
+        <tcm:Label ElementName="searchItemView" Metadata="false">The name of the View used to render the seach result entities (in the format ModuleName:ViewName)</tcm:Label>
+      </tcm:Labels>
+    </xsd:appinfo>
+  </xsd:annotation>
+  <xsd:element name="SearchQuery">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="headline" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="resultsText" minOccurs="0" maxOccurs="1" type="tcmi:XHTML">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+              <tcm:Size xmlns:tcm="http://www.tridion.com/ContentManager/5.0">2</tcm:Size>
+              <tcm:FilterXSLT xmlns:tcm="http://www.tridion.com/ContentManager/5.0">
+                <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="" version="1.0">
+            <xsl:output omit-xml-declaration="yes" method="xml" cdata-section-elements="script" />
+            <xsl:template name="FormattingFeatures">
+              <FormattingFeatures xmlns="http://www.tridion.com/ContentManager/5.2/FormatArea">
+                <Doctype>Transitional</Doctype>
+                <AccessibilityLevel>0</AccessibilityLevel>
+                <DisallowedActions />
+                <DisallowedStyles />
+              </FormattingFeatures>
+            </xsl:template>
+            <xsl:template match="/ | node() | @*">
+              <xsl:copy>
+                <xsl:apply-templates select="node() | @*" />
+              </xsl:copy>
+            </xsl:template>
+            <xsl:template match="*[      (self::br or self::p or self::div)     and      normalize-space(translate(., ' ', '')) = ''     and      not(@*)     and      not(processing-instruction())     and      not(comment())     and      not(*[not(self::br) or @* or * or node()])     and      not(following::node()[not(         (self::text() or self::br or self::p or self::div)        and         normalize-space(translate(., ' ', '')) = ''        and         not(@*)        and         not(processing-instruction())        and         not(comment())        and         not(*[not(self::br) or @* or * or node()])       )])     ]">
+              <!-- ignore all paragraphs and line-breaks at the end that have nothing but (non-breaking) spaces and line breaks -->
+            </xsl:template>
+            <xsl:template match="br[parent::div and not(preceding-sibling::node()) and not(following-sibling::node())]">
+              <!-- Chrome generates <div><br/></div>. Renders differently in different browsers. Replace it with a non-breaking space -->
+              <xsl:text> </xsl:text>
+            </xsl:template>
+          </xsl:stylesheet>
+              </tcm:FilterXSLT>
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="noResultsText" minOccurs="0" maxOccurs="1" type="tcmi:XHTML">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+              <tcm:Size xmlns:tcm="http://www.tridion.com/ContentManager/5.0">2</tcm:Size>
+              <tcm:FilterXSLT xmlns:tcm="http://www.tridion.com/ContentManager/5.0">
+                <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="" version="1.0">
+            <xsl:output omit-xml-declaration="yes" method="xml" cdata-section-elements="script" />
+            <xsl:template name="FormattingFeatures">
+              <FormattingFeatures xmlns="http://www.tridion.com/ContentManager/5.2/FormatArea">
+                <Doctype>Transitional</Doctype>
+                <AccessibilityLevel>0</AccessibilityLevel>
+                <DisallowedActions />
+                <DisallowedStyles />
+              </FormattingFeatures>
+            </xsl:template>
+            <xsl:template match="/ | node() | @*">
+              <xsl:copy>
+                <xsl:apply-templates select="node() | @*" />
+              </xsl:copy>
+            </xsl:template>
+            <xsl:template match="*[      (self::br or self::p or self::div)     and      normalize-space(translate(., ' ', '')) = ''     and      not(@*)     and      not(processing-instruction())     and      not(comment())     and      not(*[not(self::br) or @* or * or node()])     and      not(following::node()[not(         (self::text() or self::br or self::p or self::div)        and         normalize-space(translate(., ' ', '')) = ''        and         not(@*)        and         not(processing-instruction())        and         not(comment())        and         not(*[not(self::br) or @* or * or node()])       )])     ]">
+              <!-- ignore all paragraphs and line-breaks at the end that have nothing but (non-breaking) spaces and line breaks -->
+            </xsl:template>
+            <xsl:template match="br[parent::div and not(preceding-sibling::node()) and not(following-sibling::node())]">
+              <!-- Chrome generates <div><br/></div>. Renders differently in different browsers. Replace it with a non-breaking space -->
+              <xsl:text> </xsl:text>
+            </xsl:template>
+          </xsl:stylesheet>
+              </tcm:FilterXSLT>
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="pageSize" minOccurs="0" maxOccurs="1" type="xsd:decimal">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+              <tcm:DefaultNumericValue xmlns:tcm="http://www.tridion.com/ContentManager/5.0">10</tcm:DefaultNumericValue>
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="searchItemView" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0" />
+              <tcm:DefaultTextValue xmlns:tcm="http://www.tridion.com/ContentManager/5.0">Search:SearchItem</tcm:DefaultTextValue>
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>
+      </tcm:XSD>
+      <tcm:AllowedMultimediaTypes />
+      <tcm:ComponentProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:BundleProcess xlink:type="simple" xlink:title="" xlink:href="tcm:0-0-0" />
+      <tcm:DeleteBundleOnProcessFinished>false</tcm:DeleteBundleOnProcessFinished>
+    </tcm:Data>
+  </Data>
+  <Dependencies>
+    <Dependency dependencyType="Publication" itemUrl="/webdav/100%20Master" linkName="LocationInfo/ContextRepository" />
+    <Dependency dependencyType="OrganizationalItemFolder" itemUrl="/webdav/100%20Master/Building%20Blocks/Modules/Search/Editor/Schemas" linkName="LocationInfo/OrganizationalItem" />
+  </Dependencies>
+</PackageItem>
